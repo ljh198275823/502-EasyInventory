@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E13ADAC1-9D84-4F58-B4A1-DEFB822F087E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LJH.Inventory.BusinessModel</RootNamespace>
+    <AssemblyName>LJH.Inventory.BusinessModel</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LJH.GeneralLibrary">
+      <HintPath>..\ReferenceDll\LJH.GeneralLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Attachment.cs" />
+    <Compile Include="CollectionType.cs" />
+    <Compile Include="Contact.cs" />
+    <Compile Include="CurrencyType.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="CustomerDaiFu.cs" />
+    <Compile Include="CustomerPayment.cs" />
+    <Compile Include="CustomerPaymentAssign.cs" />
+    <Compile Include="CustomerReceivable.cs" />
+    <Compile Include="CustomerType.cs" />
+    <Compile Include="DecimalHelper.cs" />
+    <Compile Include="DocumentOperation.cs" />
+    <Compile Include="ExpenditureRecord.cs" />
+    <Compile Include="InventoryItem.cs" />
+    <Compile Include="InventoryOutType.cs" />
+    <Compile Include="MyCompanyInfo.cs" />
+    <Compile Include="OrderItemInventory.cs" />
+    <Compile Include="Port.cs" />
+    <Compile Include="PriceTerm.cs" />
+    <Compile Include="PurchaseRecord.cs" />
+    <Compile Include="PurchaseOrder.cs" />
+    <Compile Include="PurchaseItem.cs" />
+    <Compile Include="RelatedCompany.cs" />
+    <Compile Include="Resource\PaymentModeDescription.cs" />
+    <Compile Include="SearchCondition\ContactSearchCondition.cs" />
+    <Compile Include="SearchCondition\CustomerDaiFuSearchCondition.cs" />
+    <Compile Include="SearchCondition\CustomerPaymentAssignSearchCondition.cs" />
+    <Compile Include="SearchCondition\CustomerPaymentSearchCondition.cs" />
+    <Compile Include="SearchCondition\CustomerReceivableSearchCondition.cs" />
+    <Compile Include="SearchCondition\CustomerSearchCondition.cs" />
+    <Compile Include="SearchCondition\DocumentSearchCondition.cs" />
+    <Compile Include="SearchCondition\ExpenditureRecordSearchCondition.cs" />
+    <Compile Include="SearchCondition\InventorySheetSearchCondition.cs" />
+    <Compile Include="SearchCondition\OrderItemAssignSearchCondition.cs" />
+    <Compile Include="SearchCondition\OrderSearchCondition.cs" />
+    <Compile Include="SearchCondition\PurchaseOrderSearchCondition.cs" />
+    <Compile Include="SearchCondition\PurchaseRecordSearchCondition.cs" />
+    <Compile Include="SearchCondition\SupplierSearchCondition.cs" />
+    <Compile Include="SheetState.cs" />
+    <Compile Include="CommandResult.cs" />
+    <Compile Include="DateTimeRange.cs" />
+    <Compile Include="ProductInventory.cs" />
+    <Compile Include="InventorySheet.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderItem.cs" />
+    <Compile Include="PaymentMode.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductCategory.cs" />
+    <Compile Include="Resource\SheetStateDescription.cs" />
+    <Compile Include="SearchCondition\DeliveryRecordSearchCondition.cs" />
+    <Compile Include="SearchCondition\DeliverySheetPaymentSearchCondition.cs" />
+    <Compile Include="SearchCondition\DeliverySheetSearchCondition.cs" />
+    <Compile Include="SearchCondition\ProductInventorySearchCondition.cs" />
+    <Compile Include="SearchCondition\ProductSearchCondition.cs" />
+    <Compile Include="OperatorInfo.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="RoleInfo.cs" />
+    <Compile Include="DeliveryRecord.cs" />
+    <Compile Include="SearchCondition\SheetSearchCondition.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryResult.cs" />
+    <Compile Include="QueryResultList.cs" />
+    <Compile Include="ResultCode.cs" />
+    <Compile Include="SearchCondition\SearchCondition.cs" />
+    <Compile Include="DeliveryItem.cs" />
+    <Compile Include="DeliverySheet.cs" />
+    <Compile Include="Supplier.cs" />
+    <Compile Include="SupplierType.cs" />
+    <Compile Include="SysparameterInfo.cs" />
+    <Compile Include="Transport.cs" />
+    <Compile Include="Unit.cs" />
+    <Compile Include="UserSettings.cs" />
+    <Compile Include="WareHouse.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

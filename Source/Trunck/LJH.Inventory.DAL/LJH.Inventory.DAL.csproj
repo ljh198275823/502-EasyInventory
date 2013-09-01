@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B75A34A4-CE15-4957-9665-08C074CE7006}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LJH.Inventory.DAL</RootNamespace>
+    <AssemblyName>LJH.Inventory.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LJH.GeneralLibrary">
+      <HintPath>..\ReferenceDll\LJH.GeneralLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IProvider\IAutoNumberCreater.cs" />
+    <Compile Include="IProvider\ICollectionTypeProvider.cs" />
+    <Compile Include="IProvider\IContactProvider.cs" />
+    <Compile Include="IProvider\ICurrencyTypeProvider.cs" />
+    <Compile Include="IProvider\ICustomerPaymentAssignProvider.cs" />
+    <Compile Include="IProvider\ICustomerPaymentProvider.cs" />
+    <Compile Include="IProvider\ICustomerDaiFuProvider.cs" />
+    <Compile Include="IProvider\ICustomerReceivableProvider.cs" />
+    <Compile Include="IProvider\ICustomerTypeProvider.cs" />
+    <Compile Include="IProvider\IDocumentOperationProvider.cs" />
+    <Compile Include="IProvider\IItemKeyProvider.cs" />
+    <Compile Include="IProvider\IExpenditureRecordProvider.cs" />
+    <Compile Include="IProvider\IInventorySheetProvider.cs" />
+    <Compile Include="IProvider\IOrderItemAssignProvider.cs" />
+    <Compile Include="IProvider\IPortProvider.cs" />
+    <Compile Include="IProvider\IPriceTermProvider.cs" />
+    <Compile Include="IProvider\IProductInventoryProvider.cs" />
+    <Compile Include="IProvider\IOrderProvider.cs" />
+    <Compile Include="IProvider\IProductProvider.cs" />
+    <Compile Include="IProvider\ICustomerProvider.cs" />
+    <Compile Include="IProvider\IDeliveryRecordProvider.cs" />
+    <Compile Include="IProvider\IDeliverySheetProvider.cs" />
+    <Compile Include="IProvider\IOperatorProvider.cs" />
+    <Compile Include="IProvider\IProductCategoryProvider.cs" />
+    <Compile Include="IProvider\IProvider.cs" />
+    <Compile Include="IProvider\IPurchaseRecordProvider.cs" />
+    <Compile Include="IProvider\IPurchaseOrderProvider.cs" />
+    <Compile Include="IProvider\IRelatedCompanyProvider.cs" />
+    <Compile Include="IProvider\IRoleProvider.cs" />
+    <Compile Include="IProvider\IServerDatetimeProvider.cs" />
+    <Compile Include="IProvider\IStorageSheetProvider.cs" />
+    <Compile Include="IProvider\ISupplierProvider.cs" />
+    <Compile Include="IProvider\ISupplierTypeProvider.cs" />
+    <Compile Include="IProvider\ISysParameterProvider.cs" />
+    <Compile Include="IProvider\ITransportProvider.cs" />
+    <Compile Include="IProvider\IUnitProvider.cs" />
+    <Compile Include="IProvider\IUnitWork.cs" />
+    <Compile Include="IProvider\IWareHouseProvider.cs" />
+    <Compile Include="LinqProvider\CollectionTypeProvider.cs" />
+    <Compile Include="LinqProvider\ContactProvider.cs" />
+    <Compile Include="LinqProvider\CurrencyTypeProvider.cs" />
+    <Compile Include="LinqProvider\CustomerDaiFuProvider.cs" />
+    <Compile Include="LinqProvider\CustomerPaymentAssignProvider.cs" />
+    <Compile Include="LinqProvider\CustomerPaymentProvider.cs" />
+    <Compile Include="LinqProvider\CustomerProvider.cs" />
+    <Compile Include="LinqProvider\CustomerReceivableProvider.cs" />
+    <Compile Include="LinqProvider\CustomerTypeProvider.cs" />
+    <Compile Include="LinqProvider\DocumentOperationProvider.cs" />
+    <Compile Include="LinqProvider\ExpenditureRecordProvider.cs" />
+    <Compile Include="LinqProvider\OrderItemAssignProvider.cs" />
+    <Compile Include="LinqProvider\PortProvider.cs" />
+    <Compile Include="LinqProvider\PriceTermProvider.cs" />
+    <Compile Include="LinqProvider\PurchaseRecordProvider.cs" />
+    <Compile Include="LinqProvider\PurchaseOrderProvider.cs" />
+    <Compile Include="LinqProvider\RelatedCompanyProvider.cs" />
+    <Compile Include="LinqProvider\ServerDateTimeProvider.cs" />
+    <Compile Include="LinqProvider\SupplierProvider.cs" />
+    <Compile Include="LinqProvider\SupplierTypeProvider.cs" />
+    <Compile Include="LinqProvider\TransportProvider.cs" />
+    <Compile Include="LinqProvider\T_CustomerDaiFu.cs" />
+    <Compile Include="LinqProvider\T_CustomerPayment.cs" />
+    <Compile Include="LinqProvider\AutoNumberCreater.cs" />
+    <Compile Include="LinqProvider\DataContextFactory.cs" />
+    <Compile Include="LinqProvider\DeliverySheetProvider.cs" />
+    <Compile Include="LinqProvider\ProductInventoryProvider.cs" />
+    <Compile Include="LinqProvider\InventorySheetProvider.cs" />
+    <Compile Include="LinqProvider\ItemKeyProvider.cs" />
+    <Compile Include="LinqProvider\OrderProvider.cs" />
+    <Compile Include="LinqProvider\ProductProvider.cs" />
+    <Compile Include="LinqProvider\OperatorProvider.cs" />
+    <Compile Include="LinqProvider\ProductCategoryProvider.cs" />
+    <Compile Include="LinqProvider\ProviderBase.cs" />
+    <Compile Include="LinqProvider\RoleProvider.cs" />
+    <Compile Include="LinqProvider\DeliveryRecordProvider.cs" />
+    <Compile Include="LinqProvider\SysparameterProvider.cs" />
+    <Compile Include="LinqProvider\T_CustomerPaymentAssign.cs" />
+    <Compile Include="LinqProvider\T_CustomerReceivable.cs" />
+    <Compile Include="LinqProvider\T_Order.cs" />
+    <Compile Include="LinqProvider\T_OrderItem.cs" />
+    <Compile Include="LinqProvider\T_PurchaseItem.cs" />
+    <Compile Include="LinqProvider\T_PurchaseOrder.cs" />
+    <Compile Include="LinqProvider\UnitProvider.cs" />
+    <Compile Include="LinqProvider\UnitWork.cs" />
+    <Compile Include="LinqProvider\WareHouseProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LinqProvider\Inventory.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LJH.Inventory.BusinessModel\LJH.Inventory.BusinessModel.csproj">
+      <Project>{E13ADAC1-9D84-4F58-B4A1-DEFB822F087E}</Project>
+      <Name>LJH.Inventory.BusinessModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

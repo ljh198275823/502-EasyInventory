@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D250DC64-1E58-4B62-A5FD-5A4BD7BA7ABB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LJH.Inventory.BLL</RootNamespace>
+    <AssemblyName>LJH.Inventory.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LJH.GeneralLibrary">
+      <HintPath>..\ReferenceDll\LJH.GeneralLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlClientHelper">
+      <HintPath>..\ReferenceDll\SqlClientHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CollectionTypeBLL.cs" />
+    <Compile Include="ContactBLL.cs" />
+    <Compile Include="CurrencyTypeBLL.cs" />
+    <Compile Include="CustomerBLL.cs" />
+    <Compile Include="CustomerDaiFuBLL.cs" />
+    <Compile Include="CustomerPaymentBLL.cs" />
+    <Compile Include="CustomerTypeBLL.cs" />
+    <Compile Include="DatetimeSyncService.cs" />
+    <Compile Include="DeliveryRecordBLL.cs" />
+    <Compile Include="DeliverySheetBLL.cs" />
+    <Compile Include="ExpenditureRecordBLL.cs" />
+    <Compile Include="PortBLL.cs" />
+    <Compile Include="PriceTermBLL.cs" />
+    <Compile Include="ProductInventoryBLL.cs" />
+    <Compile Include="InventorySheetBLL.cs" />
+    <Compile Include="OrderBLL.cs" />
+    <Compile Include="ProductBLL.cs" />
+    <Compile Include="OperatorBLL.cs" />
+    <Compile Include="ProductCategoryBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseOrderBLL.cs" />
+    <Compile Include="RelatedCompanyBLL.cs" />
+    <Compile Include="SupplierBLL.cs" />
+    <Compile Include="ProviderFactory.cs" />
+    <Compile Include="RoleBLL.cs" />
+    <Compile Include="SupplierTypeBLL.cs" />
+    <Compile Include="SysParaSettingsBll.cs" />
+    <Compile Include="SystemParameterBLL.cs" />
+    <Compile Include="TransportBLL.cs" />
+    <Compile Include="UnitBLL.cs" />
+    <Compile Include="WareHouseBLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LJH.Inventory.BusinessModel\LJH.Inventory.BusinessModel.csproj">
+      <Project>{E13ADAC1-9D84-4F58-B4A1-DEFB822F087E}</Project>
+      <Name>LJH.Inventory.BusinessModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LJH.Inventory.DAL\LJH.Inventory.DAL.csproj">
+      <Project>{B75A34A4-CE15-4957-9665-08C074CE7006}</Project>
+      <Name>LJH.Inventory.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
