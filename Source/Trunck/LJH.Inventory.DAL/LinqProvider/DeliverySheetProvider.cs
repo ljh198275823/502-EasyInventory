@@ -27,6 +27,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             DeliverySheet sheet = dc.GetTable<DeliverySheet>().SingleOrDefault(item => item.ID == id);
             if (sheet != null)
             {
+                sheet.WareHouse = (new WareHouseProvider(ConnectStr)).GetByID(sheet.WareHouseID).QueryObject;
                 sheet.Customer = (new CustomerProvider(ConnectStr)).GetByID(sheet.CustomerID).QueryObject;
                 if (sheet.Items != null && sheet.Items.Count > 0)
                 {
@@ -72,10 +73,12 @@ namespace LJH.Inventory.DAL.LinqProvider
             List<DeliverySheet> sheets = ret.ToList();
             if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
             {
+                List<WareHouse> ws = (new WareHouseProvider(ConnectStr)).GetItems(null).QueryObjects;
                 List<Customer> cs = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
                 List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
                 foreach (DeliverySheet sheet in sheets)
                 {
+                    sheet.WareHouse = ws.SingleOrDefault(item => item.ID == sheet.WareHouseID);
                     sheet.Customer = cs.SingleOrDefault(item => item.ID == sheet.CustomerID);
                     if (sheet.Items != null && sheet.Items.Count > 0)
                     {

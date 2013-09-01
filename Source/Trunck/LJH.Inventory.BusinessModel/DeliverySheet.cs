@@ -74,10 +74,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Discount { get; set; }
         /// <summary>
-        /// 获取或设置送货单最迟付款期限
-        /// </summary>
-        public DateTime? DeadlineDate { get; set; }
-        /// <summary>
         /// 获取或设置销售人员
         /// </summary>
         public string SalesPerson { get; set; }
@@ -139,16 +135,6 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 return State != SheetState.Canceled;
-            }
-        }
-        /// <summary>
-        /// 获取送货单应收账款是否已经超过了付款期限
-        /// </summary>
-        public bool IsOnDeadline
-        {
-            get
-            {
-                return this.DeadlineDate != null && this.DeadlineDate.Value <= DateTime.Now;
             }
         }
         #endregion

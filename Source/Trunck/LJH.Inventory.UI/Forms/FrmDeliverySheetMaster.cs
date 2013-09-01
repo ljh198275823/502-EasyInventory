@@ -90,8 +90,8 @@ namespace LJH.Inventory.UI.Forms
             row.Tag = sheet;
             row.Cells["colSheetNo"].Value = sheet.ID;
             row.Cells["colCustomer"].Value = sheet.Customer.Name ;
+            row.Cells["colWareHouse"].Value = sheet.WareHouse != null ? sheet.WareHouse.Name : string.Empty;
             row.Cells["colAmount"].Value = sheet.Amount;
-            row.Cells["colDeadlineDateTime"].Value = sheet.DeadlineDate;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
             row.Cells["colLinker"].Value = sheet.Linker;
             row.Cells["colTelphone"].Value = sheet.LinkerPhoneCall;

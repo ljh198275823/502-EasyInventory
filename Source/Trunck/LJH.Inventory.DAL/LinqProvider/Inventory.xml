@@ -77,6 +77,7 @@
     <Type Name="LJH.Inventory.BusinessModel.DeliverySheet">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="WareHouseID" Member="WareHouseID" DbType="nvarchar(50) NOT NULL"/>
       <Column Name="Linker" Member="Linker"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="LinkerPhoneCall" Member="LinkerPhoneCall"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Address" Member="Address"  DbType="nvarchar(200)" UpdateCheck="Never"/>
@@ -86,7 +87,6 @@
       <Column Name="IsWithTax" Member="IsWithTax" DbType="bit not null" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Discount" Member="Discount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="DeadlineDate" Member="DeadlineDate" DbType="datetime" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>

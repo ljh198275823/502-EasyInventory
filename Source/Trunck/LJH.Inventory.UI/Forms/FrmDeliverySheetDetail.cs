@@ -158,6 +158,8 @@ namespace LJH.Inventory.UI.Forms
             }
             sheet.CustomerID = this.txtCustomer.Tag != null ? (this.txtCustomer.Tag as Customer).ID : string.Empty;
             sheet.Customer = this.txtCustomer.Tag as Customer;
+            sheet.WareHouseID = this.txtWareHouse.Tag != null ? (this.txtWareHouse.Tag as WareHouse).ID : string.Empty;
+            sheet.WareHouse = this.txtWareHouse.Tag as WareHouse;
             sheet.Memo = txtMemo.Text;
             sheet.ClearItems();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
