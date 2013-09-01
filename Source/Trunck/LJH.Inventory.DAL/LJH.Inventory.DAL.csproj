@@ -54,6 +54,7 @@
     <Compile Include="IProvider\ICustomerReceivableProvider.cs" />
     <Compile Include="IProvider\ICustomerTypeProvider.cs" />
     <Compile Include="IProvider\IDocumentOperationProvider.cs" />
+    <Compile Include="IProvider\IExpenditureTypeProvider.cs" />
     <Compile Include="IProvider\IItemKeyProvider.cs" />
     <Compile Include="IProvider\IExpenditureRecordProvider.cs" />
     <Compile Include="IProvider\IInventorySheetProvider.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="LinqProvider\CustomerReceivableProvider.cs" />
     <Compile Include="LinqProvider\CustomerTypeProvider.cs" />
     <Compile Include="LinqProvider\DocumentOperationProvider.cs" />
+    <Compile Include="LinqProvider\ExpenditureTypeProvider.cs" />
     <Compile Include="LinqProvider\ExpenditureRecordProvider.cs" />
     <Compile Include="LinqProvider\OrderItemAssignProvider.cs" />
     <Compile Include="LinqProvider\PortProvider.cs" />

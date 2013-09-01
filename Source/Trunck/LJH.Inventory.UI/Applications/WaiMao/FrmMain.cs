@@ -397,5 +397,10 @@ namespace LJH.Inventory.UI.Applications.WaiMao
         {
             ShowSingleForm(typeof(FrmOrderMaster));
         }
+
+        private void mnu_ExpanditureType_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmExpenditureTypeMaster));
+        }
     }
 }

@@ -254,6 +254,18 @@
     <Compile Include="Forms\FrmExpenditureRecordMaster.designer.cs">
       <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmExpenditureTypeDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmExpenditureTypeDetail.Designer.cs">
+      <DependentUpon>FrmExpenditureTypeDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmExpenditureTypeMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmExpenditureTypeMaster.Designer.cs">
+      <DependentUpon>FrmExpenditureTypeMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmExpressMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -660,6 +672,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmExpenditureRecordMaster.resx">
       <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmExpenditureTypeDetail.resx">
+      <DependentUpon>FrmExpenditureTypeDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmExpenditureTypeMaster.resx">
+      <DependentUpon>FrmExpenditureTypeMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmExpressMaster.resx">
       <DependentUpon>FrmExpressMaster.cs</DependentUpon>

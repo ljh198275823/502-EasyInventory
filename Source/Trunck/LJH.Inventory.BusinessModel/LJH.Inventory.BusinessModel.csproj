@@ -59,6 +59,7 @@
     <Compile Include="CustomerType.cs" />
     <Compile Include="DecimalHelper.cs" />
     <Compile Include="DocumentOperation.cs" />
+    <Compile Include="ExpenditureType.cs" />
     <Compile Include="ExpenditureRecord.cs" />
     <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryOutType.cs" />
