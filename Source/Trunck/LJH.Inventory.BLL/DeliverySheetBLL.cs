@@ -22,37 +22,78 @@ namespace LJH.Inventory.BLL
         private string _DocumentType = "DeliverySheet";
         #endregion
 
-        #region 库内部方法
-        internal void InventoryOut(ProductInventory info, long deliveryItem, decimal count, InventoryOutType inventoryOutType, IUnitWork unitWork)
+       #region 私有方法
+        private void InventoryOut(DeliverySheet sheet, InventoryOutType inventoryOutType, IUnitWork unitWork)
         {
-            //List<InventoryItem> inventoryItems = (new ProductInventoryBLL(_RepoUri)).GetInventoryDetail(info).QueryObjects;
-            //if (inventoryItems != null && inventoryItems.Count > 0)
-            //{
-            //    if (inventoryOutType == InventoryOutType.FIFO)
-            //    {
-            //        inventoryItems = (from item in inventoryItems orderby item.InventoryDate ascending select item).ToList();
-            //    }
-            //    else if (inventoryOutType == InventoryOutType.FILO)
-            //    {
-            //        inventoryItems = (from item in inventoryItems orderby item.InventoryDate descending select item).ToList();
-            //    }
-            //    foreach (InventoryItem item in inventoryItems)
-            //    {
-            //        if (count > 0)
-            //        {
-            //            decimal temp = item.Remain >= count ? count : item.Remain;
-            //            InventoryItemAssign assign = new InventoryItemAssign()
-            //            {
-            //                InventoryItem = item.ID,
-            //                DeliveryItem = deliveryItem,
-            //                Count = temp
-            //            };
-            //            ProviderFactory.Create<IInventoryItemAssignProvider>(_RepoUri).Insert(assign, unitWork);
-            //            count -= temp;
-            //        }
-            //        if (count == 0) break;
-            //    }
-            //}
+            ////减少库存
+            foreach (DeliveryItem si in sheet.Items)
+            {
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition()
+                {
+                    ProductID = si.ProductID,
+                    WareHouseID = sheet.WareHouseID, //如果送货单没有指定仓库，这里就为空
+                    IsUnShipped = true     //所有发货的库存项
+                };
+                List<ProductInventoryItem> items = ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).GetItems(con).QueryObjects;
+                //所有相关的库存项就是送货项订单分配的库存和未分配的库存
+                List<ProductInventoryItem> refs = new List<ProductInventoryItem>();
+                if (si.OrderItem != null)
+                {
+                    refs.AddRange(items.Where(item => item.OrderItem == si.OrderItem));
+                }
+                else
+                {
+                    refs.AddRange(items.Where(item => item.OrderItem == null));
+                }
+                if (refs.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("商品 {0} 库存不足，出货失败!", si.ProductID));
+
+                decimal count = si.Count;
+                foreach (ProductInventoryItem pii in refs)
+                {
+                    if (count > 0)
+                    {
+                        ProductInventoryItem pii1 = pii.Clone();
+                        if (pii.Count > count) //对于部分出货的情况，一条库存记录拆成两条，其中一条表示出货的，另一条表示未出货部分，即要保证DelvieryItem不为空的都是未出货的，为空的都是已经出货的
+                        {
+                            pii.DeliveryItem = si.ID;
+                            pii.DeliverySheet = si.SheetNo;
+                            pii.Count = count;
+                            ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Update(pii, pii1, unitWork);
+
+                            pii1.ID = Guid.NewGuid();
+                            pii1.Count -= count;
+                            ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Insert(pii1, unitWork);
+                            count = 0;
+                        }
+                        else
+                        {
+                            pii.DeliveryItem = si.ID;
+                            pii.DeliverySheet = si.SheetNo;
+                            ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Update(pii, pii1, unitWork);
+                            count -= pii.Count;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AddReceivables(DeliverySheet sheet, IUnitWork unitWork)
+        {
+            ////减少库存
+            foreach (DeliveryItem si in sheet.Items)
+            {
+            //增加应收账款项
+            CustomerReceivable cr = new CustomerReceivable()
+            {
+                ID = Guid.NewGuid(),
+                OrderItem = si.OrderItem,
+                SheetNo = si.SheetNo,
+                CreateDate = DateTime.Now,
+                CustomerID = sheet.CustomerID,
+                Amount = si.Amount,
+            };
+            ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Insert(cr, unitWork);
+            }
         }
         #endregion
 
@@ -228,57 +269,37 @@ namespace LJH.Inventory.BLL
         /// 发货
         /// </summary>
         /// <param name="info"></param>
-        /// <param name="shipper"></param>
+        /// <param name="opt"></param>
         /// <returns></returns>
-        public CommandResult Delivery(string sheetNo, string shipper)
+        public CommandResult Delivery(string sheetNo, string opt)
         {
-            //IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
-            //DeliverySheet sheet = provider.GetByID(sheetNo).QueryObject;
-            //if (sheet == null) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，系统中不存在该送货单");
-            //if (!sheet.CanShip) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，只有待发货或者已审批的送货单才能发货");
-            //if (sheet.Items == null || sheet.Items.Count == 0) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，没有送货单项");
+            IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
+            DeliverySheet sheet = provider.GetByID(sheetNo).QueryObject;
+            if (sheet == null) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，系统中不存在该送货单");
+            if (!sheet.CanShip) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，只有待发货或者已审批的送货单才能发货");
+            if (sheet.Items == null || sheet.Items.Count == 0) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，没有送货单项");
+            if (sheet.Customer == null) return new CommandResult(ResultCode.Fail, "系统中不存在送货单的客户");
 
-            //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            ////查询客户资料
-            //ICustomerProvider icp = ProviderFactory.Create<ICustomerProvider>(_RepoUri);
-            //Customer c = icp.GetByID(sheet.CustomerID).QueryObject;
-            //if (c != null)
-            //{
-            //    //增加应收账款项
-            //    CustomerReceivable cr = new CustomerReceivable()
-            //    {
-            //        ID = sheet.ID,
-            //        CreateDate = DateTime.Now,
-            //        CustomerID = sheet.CustomerID,
-            //        Amount = sheet.Amount,
-            //    };
-            //    ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Insert(cr, unitWork);
-            //    //减少库存
-            //    IProductInventoryProvider inp = ProviderFactory.Create<IProductInventoryProvider>(_RepoUri);
-            //    foreach (DeliveryItem si in sheet.Items)
-            //    {
-            //        ProductInventory ii = inp.GetByID(new InventoryItemID(si.ProductID, sheet.WareHouseID)).QueryObject;
-            //        if (ii != null && ii.Count >= si.Count)
-            //        {
-            //            InventoryOut(ii, si.ID, si.Count, UserSettings.Current.InventoryOutType, unitWork);
-            //        }
-            //        else
-            //        {
-            //            return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败,某些送货项在系统中不存在或数量不足");
-            //        }
-            //    }
-            //    DeliverySheet sheet1 = sheet.Clone();
-            //    sheet.State = SheetState.Shipped;
-            //    //sheet.DeliveryOperator = shipper;
-            //    //sheet.DeliveryDate = DateTime.Now;
-            //    provider.Update(sheet, sheet1, unitWork);
-            //    return unitWork.Commit();
-            //}
-            //else
-            //{
-            return new CommandResult(ResultCode.Fail, "系统中不存在送货单的客户");
-            //}
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            DeliverySheet sheet1 = sheet.Clone();
+            sheet.State = SheetState.Shipped;
+            provider.Update(sheet, sheet1, unitWork);
+
+            InventoryOut(sheet, UserSettings.Current.InventoryOutType, unitWork);
+            AddReceivables(sheet, unitWork);         //增加供应商的应收账款
+            DocumentOperation doc = new DocumentOperation()
+            {
+                DocumentID = sheetNo,
+                DocumentType = _DocumentType,
+                OperatDate = DateTime.Now,
+                Operation = "出库",
+                State = SheetState.Add,
+                Operator = opt,
+            };
+            ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
+            return unitWork.Commit();
         }
+
         /// <summary>
         /// 作废
         /// </summary>

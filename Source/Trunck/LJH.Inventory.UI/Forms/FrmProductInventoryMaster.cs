@@ -111,8 +111,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colModel"].Value = pi.Product.Model;
             row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
             row.Cells["colUnit"].Value = pi.Unit;
-            row.Cells["colCount"].Value = pi.Count.Trim();
-            row.Cells["colAmount"].Value = pi.Amount;
+            row.Cells["colReserved"].Value = pi.Reserved.Trim();
+            row.Cells["colValid"].Value = pi.Valid.Trim();
         }
         #endregion
 

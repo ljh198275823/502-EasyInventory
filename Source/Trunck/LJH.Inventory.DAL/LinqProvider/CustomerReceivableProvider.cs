@@ -8,7 +8,7 @@ using LJH.Inventory.DAL.IProvider;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class CustomerReceivableProvider:ProviderBase <CustomerReceivable ,string >,ICustomerReceivableProvider 
+    public class CustomerReceivableProvider : ProviderBase<CustomerReceivable, Guid>, ICustomerReceivableProvider
     {
         #region 构造函数
         public CustomerReceivableProvider(string connStr)
@@ -18,7 +18,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         #endregion
 
         #region 重写基类方法
-        protected override CustomerReceivable GetingItemByID(string id, System.Data.Linq.DataContext dc)
+        protected override CustomerReceivable GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
             return dc.GetTable<CustomerReceivable>().SingleOrDefault(item => item.ID == id);
         }
@@ -31,17 +31,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 CustomerReceivableSearchCondition con = search as CustomerReceivableSearchCondition;
                 if (con.CreateDate != null) ret = ret.Where(item => item.CreateDate >= con.CreateDate.Begin && item.CreateDate <= con.CreateDate.End);
                 if (con.CustomerID != null) ret = ret.Where(item => item.CustomerID == con.CustomerID);
-                if (con.IsSettled != null)
-                {
-                    if (con.IsSettled.Value)
-                    {
-                        ret = ret.Where(item => item.Receivable == 0);
-                    }
-                    else
-                    {
-                        ret = ret.Where(item => item.Receivable > 0);
-                    }
-                }
             }
             return ret.ToList();
         }

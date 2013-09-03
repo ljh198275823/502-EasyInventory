@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,10 +51,8 @@
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReserved = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmpty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -192,10 +189,8 @@
             this.colSpecification,
             this.colModel,
             this.colUnit,
-            this.colCount,
             this.colReserved,
             this.colValid,
-            this.colAmount,
             this.colEmpty});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 50);
@@ -263,16 +258,9 @@
             this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colUnit.Width = 40;
             // 
-            // colCount
-            // 
-            this.colCount.HeaderText = "数量";
-            this.colCount.Name = "colCount";
-            this.colCount.ReadOnly = true;
-            this.colCount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // colReserved
             // 
-            this.colReserved.HeaderText = "预订数量";
+            this.colReserved.HeaderText = "预留数量";
             this.colReserved.Name = "colReserved";
             this.colReserved.ReadOnly = true;
             this.colReserved.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -283,14 +271,6 @@
             this.colValid.HeaderText = "可用库存";
             this.colValid.Name = "colValid";
             this.colValid.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colAmount.HeaderText = "库存金额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
             // 
             // colEmpty
             // 
@@ -347,10 +327,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewLinkColumn colReserved;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmpty;
     }
 }

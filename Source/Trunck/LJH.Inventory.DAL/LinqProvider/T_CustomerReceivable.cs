@@ -16,6 +16,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         public T_CustomerReceivable(CustomerReceivable cr)
         {
             this.ID = cr.ID;
+            this.SheetNo = cr.SheetNo;
             this.CustomerID = cr.CustomerID;
             this.CreateDate = cr.CreateDate;
             this.Amount = cr.Amount;
@@ -27,7 +28,9 @@ namespace LJH.Inventory.DAL.LinqProvider
         /// <summary>
         /// 获取或设置单据号
         /// </summary>
-        public string ID { get; set; }
+        public Guid  ID { get; set; }
+
+        public string SheetNo { get; set; }
         /// <summary>
         /// 获取或设置应收账款的产生日期
         /// </summary>

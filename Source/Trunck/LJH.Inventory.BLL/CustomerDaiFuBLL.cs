@@ -36,7 +36,7 @@ namespace LJH.Inventory.BLL
         {
             if (string.IsNullOrEmpty(info.ID))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DaiFuPrefix ,
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DaiFuPrefix,
                     UserSettings.Current.DaiFuDateFormat, UserSettings.Current.DaiFuSerialCount, "customerDaiFu"); //代付款
                 if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
             }
@@ -46,7 +46,8 @@ namespace LJH.Inventory.BLL
             {
                 CustomerReceivable cr = new CustomerReceivable()
                 {
-                    ID = info.ID,
+                    ID = Guid.NewGuid(),
+                    SheetNo = info.ID,
                     CreateDate = info.DaiFuDate,
                     CustomerID = info.CustomerID,
                     Amount = info.Amount,
@@ -88,9 +89,9 @@ namespace LJH.Inventory.BLL
                         ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Delete(assign);
                     }
                 }
-                //删除对应的应收项
-                CustomerReceivable cr = ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-                if (cr != null) ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Delete(cr, unitWork);
+                ////删除对应的应收项
+                //CustomerReceivable cr = ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetByID(info.ID).QueryObject;
+                //if (cr != null) ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Delete(cr, unitWork);
 
                 //把自身状态设置成取消
                 original = info.Clone();

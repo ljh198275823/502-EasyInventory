@@ -90,16 +90,18 @@ namespace LJH.Inventory.BLL
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
                 ProviderFactory.Create<IProductProvider>(_RepoUri).Insert(info, unitWork);
-                ProductInventory ii = new ProductInventory
+                ProductInventoryItem pii = new ProductInventoryItem()
                 {
                     ID = Guid.NewGuid(),
                     ProductID = info.ID,
                     WareHouseID = wareHouseID,
                     Unit = info.Unit,
+                    Price = info.Price,
                     Count = count,
-                    Amount = info.Cost * count,
+                    AddDate = DateTime.Now,
+                    InventorySheet = "初始库存"
                 };
-                ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).Insert(ii, unitWork);
+                ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Insert(pii, unitWork);
                 return unitWork.Commit();
             }
             else

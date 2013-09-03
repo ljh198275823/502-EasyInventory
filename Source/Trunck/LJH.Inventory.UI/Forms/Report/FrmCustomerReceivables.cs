@@ -40,7 +40,7 @@ namespace LJH.Inventory.UI.Forms.Report
                 }
                 int rowTotal = GridView.Rows.Add();
                 GridView.Rows[rowTotal].Cells["colSheetNo"].Value = "合计";
-                GridView.Rows[rowTotal].Cells["colReceivable"].Value = items.Sum(item => item.Receivable);
+                //GridView.Rows[rowTotal].Cells["colReceivable"].Value = items.Sum(item => item.Receivable);
                 this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", items.Count);
                 GridView.Rows[0].Selected = false;
             }
@@ -52,8 +52,8 @@ namespace LJH.Inventory.UI.Forms.Report
             row.Cells["colSheetNo"].Value = item.ID;
             row.Cells["colCreateDate"].Value = item.CreateDate;
             row.Cells["colAmount"].Value = item.Amount;
-            row.Cells["colPaid"].Value = item.Paid;
-            row.Cells["colReceivable"].Value = item.Receivable;
+            //row.Cells["colPaid"].Value = item.Paid;
+            //row.Cells["colReceivable"].Value = item.Receivable;
             row.Cells["colMemo"].Value = item.Memo;
         }
 
@@ -114,22 +114,22 @@ namespace LJH.Inventory.UI.Forms.Report
 
         private void mnu_Pay_Click(object sender, EventArgs e)
         {
-            if (this.GridView.SelectedRows.Count == 1)
-            {
-                CustomerReceivable cr = this.GridView.SelectedRows[0].Tag as CustomerReceivable;
-                if (cr != null)
-                {
-                    FrmPaymentAssign frm = new FrmPaymentAssign();
-                    frm.CustomerID = cr.CustomerID;
-                    frm.ReceivableID = cr.ID;
-                    frm.Receivables = cr.Receivable;
-                    if (frm.ShowDialog() == DialogResult.OK)
-                    {
-                        ShowCustomer(this.Customer);
-                        if (this.CustomerUpdated != null) this.CustomerUpdated(this, EventArgs.Empty);
-                    }
-                }
-            }
+        //    if (this.GridView.SelectedRows.Count == 1)
+        //    {
+        //        CustomerReceivable cr = this.GridView.SelectedRows[0].Tag as CustomerReceivable;
+        //        if (cr != null)
+        //        {
+        //            FrmPaymentAssign frm = new FrmPaymentAssign();
+        //            frm.CustomerID = cr.CustomerID;
+        //            frm.ReceivableID = cr.ID;
+        //            frm.Receivables = cr.Receivable;
+        //            if (frm.ShowDialog() == DialogResult.OK)
+        //            {
+        //                ShowCustomer(this.Customer);
+        //                if (this.CustomerUpdated != null) this.CustomerUpdated(this, EventArgs.Empty);
+        //            }
+        //        }
+        //    }
         }
     }
 }

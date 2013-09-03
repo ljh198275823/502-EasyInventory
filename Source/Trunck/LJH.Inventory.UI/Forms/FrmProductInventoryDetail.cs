@@ -79,9 +79,9 @@ namespace LJH.Inventory.UI.Forms
             item.Product = txtProductID.Tag as Product;
             item.WareHouseID = (txtWareHouseID.Tag as WareHouse).ID;
             item.WareHouse = txtWareHouseID.Tag as WareHouse;
-            item.Count = txtCount.DecimalValue;
+            item.Valid = txtCount.DecimalValue;
             item.Unit = item.Product.Unit;
-            item.Amount = txtAmount.DecimalValue;
+            item.ValidAmount = txtAmount.DecimalValue;
             return item;
         }
 

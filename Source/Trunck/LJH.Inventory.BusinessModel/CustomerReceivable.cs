@@ -20,7 +20,15 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置单据号
         /// </summary>
-        public string ID { get; set; }
+        public Guid ID { get; set; }
+        /// <summary>
+        /// 获取或设置销售订单项,每个送货单的一项都生成一个客户应收金额,而送货单项又属于销售订单的一项
+        /// </summary>
+        public Guid? OrderItem { get; set; }
+        /// <summary>
+        /// 获取或设置产生应收款的单据编号
+        /// </summary>
+        public string SheetNo { get; set; }
         /// <summary>
         /// 获取或设置应收账款的产生日期
         /// </summary>
@@ -33,14 +41,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置应收总额
         /// </summary>
         public decimal Amount { get; set; }
-        /// <summary>
-        /// 获取或设置应收款产生时首次收款金额
-        /// </summary>
-        public decimal Paid { get; set; }
-        /// <summary>
-        /// 获取或设置应收金额
-        /// </summary>
-        public decimal Receivable { get; set; }
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>

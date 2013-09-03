@@ -222,17 +222,6 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.OrderItemInventory" Member="LJH.Inventory.BusinessModel.OrderItemInventory">
-    <Type Name="LJH.Inventory.BusinessModel.OrderItemInventory">
-      <Column Name="ID" Member="ID"  DbType="bigint" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert"/>
-      <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
-      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier NOT NULL" UpdateCheck="Never"/>
-      <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="InventoryItem" Member="InventoryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="Shipped" Member="Shipped"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-    </Type>
-  </Table>
   <Table Name="dbo.View_PurchaseOrder" Member="LJH.Inventory.BusinessModel.PurchaseOrder">
     <Type Name="LJH.Inventory.BusinessModel.PurchaseOrder">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
@@ -325,14 +314,34 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.ProductInventory" Member="LJH.Inventory.BusinessModel.ProductInventory">
+  <Table Name="dbo.View_ProductInventory" Member="LJH.Inventory.BusinessModel.ProductInventory">
     <Type Name="LJH.Inventory.BusinessModel.ProductInventory">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
       <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50) not null"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Valid" Member="Valid"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="ValidAmount" Member="ValidAmount"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="Reserved" Member="Reserved"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="ReservedAmount" Member="ReservedAmount"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductInventoryItem" Member="LJH.Inventory.BusinessModel.ProductInventoryItem">
+    <Type Name="LJH.Inventory.BusinessModel.ProductInventoryItem">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
+      <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="Amount" Member="Amount"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
+      <Column Name="FromInventory" Member="FromInventory"  DbType="bit not Null" UpdateCheck="Never"/>
+      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="InventoryItem" Member="InventoryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="InventorySheet" Member="InventorySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="DeliveryItem" Member="DeliveryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="DeliverySheet" Member="DeliverySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="dbo.AutoCreateNumber" Member="LJH.Inventory.DAL.LinqProvider.AutoCreateNumber">

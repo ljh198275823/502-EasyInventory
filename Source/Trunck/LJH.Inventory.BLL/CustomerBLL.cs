@@ -79,7 +79,8 @@ namespace LJH.Inventory.BLL
                 {
                     CustomerReceivable cr = new CustomerReceivable()
                     {
-                        ID = info.ID + "初始应收",
+                        ID = Guid.NewGuid(),
+                        SheetNo = info.ID + "初始应收",
                         CreateDate = DateTime.Now,
                         CustomerID = info.ID,
                         Amount = receivables,

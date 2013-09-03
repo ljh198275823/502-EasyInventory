@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface ICustomerReceivableProvider : IProvider<LJH.Inventory.BusinessModel.CustomerReceivable, string>
+    public interface ICustomerReceivableProvider : IProvider<LJH.Inventory.BusinessModel.CustomerReceivable, Guid>
     {
     }
 }

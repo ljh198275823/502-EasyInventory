@@ -35,46 +35,46 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         internal void SettleReceivables(string paymentID, string customerID, decimal amount, string receivableID, string exceptID, IUnitWork unitWork)
         {
-            if (amount <= 0) return;
-            if (!string.IsNullOrEmpty(receivableID))
-            {
-                CustomerReceivable cr = ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetByID(receivableID).QueryObject;
-                if (cr != null && cr.Receivable >0)
-                {
-                    decimal temp = cr.Receivable >= amount ? amount : cr.Receivable;
-                    CustomerPaymentAssign cpa = new CustomerPaymentAssign()
-                    {
-                        PaymentID = paymentID,
-                        ReceivableID = cr.ID,
-                        Amount = temp
-                    };
-                    ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(cpa, unitWork);
-                }
-            }
-            else
-            {
-                List<CustomerReceivable> items = (new CustomerBLL(_RepoUri)).GetUnSettleReceivables(customerID);
-                if (items != null && items.Count > 0)
-                {
-                    items = (from item in items orderby item.CreateDate ascending select item).ToList();
-                    foreach (CustomerReceivable cr in items)
-                    {
-                        if (cr.ID != exceptID)
-                        {
-                            decimal temp = cr.Receivable >= amount ? amount : cr.Receivable;
-                            CustomerPaymentAssign cpa = new CustomerPaymentAssign()
-                            {
-                                PaymentID = paymentID,
-                                ReceivableID = cr.ID,
-                                Amount = temp
-                            };
-                            ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(cpa, unitWork);
-                            amount -= temp;
-                            if (amount == 0) return;
-                        }
-                    }
-                }
-            }
+            //if (amount <= 0) return;
+            //if (!string.IsNullOrEmpty(receivableID))
+            //{
+            //    CustomerReceivable cr = ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetByID(receivableID).QueryObject;
+            //    if (cr != null && cr.Receivable >0)
+            //    {
+            //        decimal temp = cr.Receivable >= amount ? amount : cr.Receivable;
+            //        CustomerPaymentAssign cpa = new CustomerPaymentAssign()
+            //        {
+            //            PaymentID = paymentID,
+            //            ReceivableID = cr.ID,
+            //            Amount = temp
+            //        };
+            //        ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(cpa, unitWork);
+            //    }
+            //}
+            //else
+            //{
+            //    List<CustomerReceivable> items = (new CustomerBLL(_RepoUri)).GetUnSettleReceivables(customerID);
+            //    if (items != null && items.Count > 0)
+            //    {
+            //        items = (from item in items orderby item.CreateDate ascending select item).ToList();
+            //        foreach (CustomerReceivable cr in items)
+            //        {
+            //            if (cr.ID != exceptID)
+            //            {
+            //                decimal temp = cr.Receivable >= amount ? amount : cr.Receivable;
+            //                CustomerPaymentAssign cpa = new CustomerPaymentAssign()
+            //                {
+            //                    PaymentID = paymentID,
+            //                    ReceivableID = cr.ID,
+            //                    Amount = temp
+            //                };
+            //                ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(cpa, unitWork);
+            //                amount -= temp;
+            //                if (amount == 0) return;
+            //            }
+            //        }
+            //    }
+            //}
         }
         #endregion
 

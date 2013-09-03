@@ -24,6 +24,35 @@ namespace LJH.Inventory.BLL
         private string _DocumentType = "InventorySheet";
         #endregion
 
+        #region 私有方法
+        private void AddToProductInventory(InventorySheet sheet, IUnitWork unitWork)
+        {
+            foreach (InventoryItem si in sheet.Items)
+            {
+                ProductInventoryItem pii = new ProductInventoryItem()
+                {
+                    ID = Guid.NewGuid(),
+                    ProductID = si.ProductID,
+                    WareHouseID = sheet.WareHouseID,
+                    Unit = si.Unit,
+                    Price = si.Price,
+                    Count = si.Count,
+                    AddDate =DateTime.Now ,
+                    OrderItem = si.OrderItem,
+                    PurchaseItem = si.PurchaseItem,
+                    InventoryItem = si.ID,
+                    InventorySheet = si.SheetNo,
+                };
+                ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Insert(pii, unitWork);
+            }
+        }
+
+        private void AddReceivables(InventorySheet sheet, IUnitWork unitWork)
+        {
+
+        }
+        #endregion
+
         #region 公共方法
         /// <summary>
         /// 通过收货单编号获取收货单
@@ -182,48 +211,9 @@ namespace LJH.Inventory.BLL
             InventorySheet sheet1 = sheet.Clone();
             sheet.State = SheetState.Inventory;
             ProviderFactory.Create<IInventorySheetProvider>(_RepoUri).Update(sheet, sheet1, unitWork);
-            foreach (InventoryItem si in sheet.Items)
-            {
-                ProductInventorySearchCondition piSearch = new ProductInventorySearchCondition()
-                {
-                    ProductID = si.ProductID,
-                    WareHouseID = sheet.WareHouseID
-                };
-                List<ProductInventory> piItems = ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).GetItems(piSearch).QueryObjects;
-                ProductInventory pi = null;
-                if (piItems != null && piItems.Count > 0)
-                {
-                    pi = piItems[0];
-                    ProductInventory pi1 = pi.Clone();
-                    pi.Count += si.Count;
-                    pi.Amount += si.Amount;
-                    ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).Update(pi, pi1, unitWork);
-                }
-                else
-                {
-                    pi = new ProductInventory()
-                    {
-                        ID = Guid.NewGuid(),
-                        ProductID = si.ProductID,
-                        WareHouseID = sheet.WareHouseID,
-                        Unit = si.Unit,
-                        Count = si.Count,
-                        Amount = si.Amount
-                    };
-                    ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).Insert(pi, unitWork);
-                }
-                if (si.OrderItem != null)
-                {
-                    OrderItemInventory oia = new OrderItemInventory()
-                    {
-                        OrderItem = si.OrderItem.Value,
-                        InventoryItem = si.ID,
-                        PurchaseItem = si.PurchaseItem,
-                        Count = si.Count
-                    };
-                    ProviderFactory.Create<IOrderItemAssignProvider>(_RepoUri).Insert(oia, unitWork);
-                }
-            }
+
+            AddToProductInventory(sheet, unitWork); //更新商品库存
+            AddReceivables(sheet, unitWork);         //增加供应商的应收账款
 
             DocumentOperation doc = new DocumentOperation()
             {
@@ -237,6 +227,7 @@ namespace LJH.Inventory.BLL
             ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
             return unitWork.Commit();
         }
+
         /// <summary>
         /// 将收货单作废
         /// </summary>
@@ -259,31 +250,23 @@ namespace LJH.Inventory.BLL
             {
                 foreach (InventoryItem si in sheet.Items)
                 {
-                    ProductInventorySearchCondition piSearch = new ProductInventorySearchCondition()
+                    ProductInventoryItemSearchCondition piSearch = new ProductInventoryItemSearchCondition()
                     {
                         ProductID = si.ProductID,
-                        WareHouseID = sheet.WareHouseID
+                        InventoryItem = si.ID
                     };
-                    List<ProductInventory> piItems = ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).GetItems(piSearch).QueryObjects;
-                    ProductInventory pi = null;
-                    if (piItems != null)
+                    List<ProductInventoryItem> piItems = ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).GetItems(piSearch).QueryObjects;
+                    foreach (ProductInventoryItem pii in piItems)
                     {
-                        pi = piItems[0];
-                        ProductInventory pi1 = pi.Clone();
-                        pi.Count -= si.Count;
-                        pi.Amount -= si.Amount;
-                        ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).Update(pi, pi1, unitWork);
-                    }
-                    OrderItemAssignSearchCondition con1 = new OrderItemAssignSearchCondition();
-                    con1.InventoryItem = si.ID;
-                    List<OrderItemInventory> assigns = ProviderFactory.Create<IOrderItemAssignProvider>(_RepoUri).GetItems(con1).QueryObjects;
-                    if (assigns != null && assigns.Count > 0)
-                    {
-                        foreach (OrderItemInventory oia in assigns)
+                        if (pii.FromInventory) //如果已经被别的订单分配了，那么这些订单就要重新分配库存，包括已经出货的。
                         {
-                            ProviderFactory.Create<IOrderItemAssignProvider>(_RepoUri).Delete(oia, unitWork);
+                        }
+                        else
+                        {
+                            ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Delete(pii, unitWork);
                         }
                     }
+                    //删除供应商应付款项。
                 }
             }
 
