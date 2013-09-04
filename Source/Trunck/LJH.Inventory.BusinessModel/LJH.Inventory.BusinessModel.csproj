@@ -67,7 +67,6 @@
     <Compile Include="ProductInventoryItem.cs" />
     <Compile Include="Port.cs" />
     <Compile Include="PriceTerm.cs" />
-    <Compile Include="PurchaseRecord.cs" />
     <Compile Include="PurchaseOrder.cs" />
     <Compile Include="PurchaseItem.cs" />
     <Compile Include="RelatedCompany.cs" />

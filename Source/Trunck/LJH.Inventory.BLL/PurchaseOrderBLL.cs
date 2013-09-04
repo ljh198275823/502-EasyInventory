@@ -50,11 +50,6 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
         }
 
-        public QueryResultList<PurchaseRecord> GetRecords(SearchCondition con)
-        {
-            return ProviderFactory.Create<IPurchaseRecordProvider>(_RepoUri).GetItems(con);
-        }
-
         /// <summary>
         /// 增加一个订单
         /// </summary>

@@ -398,12 +398,6 @@
     <Compile Include="Forms\FrmPurchaseItemSelection.Designer.cs">
       <DependentUpon>FrmPurchaseItemSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmPurchaseRecordMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmPurchaseRecordMaster.Designer.cs">
-      <DependentUpon>FrmPurchaseRecordMaster.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmPurchaseOrderDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -746,9 +740,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmPurchaseItemSelection.resx">
       <DependentUpon>FrmPurchaseItemSelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmPurchaseRecordMaster.resx">
-      <DependentUpon>FrmPurchaseRecordMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmPurchaseOrderDetail.resx">
       <DependentUpon>FrmPurchaseOrderDetail.cs</DependentUpon>
