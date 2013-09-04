@@ -23,6 +23,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             DataLoadOptions opt = new DataLoadOptions();
             opt.LoadWith<Order>(order => order.Customer);
+            opt.LoadWith<Order>(order => order.FinalCustomer);
             opt.LoadWith<Order>(order => order.Items);
             opt.LoadWith<OrderItem>(oi => oi.Product);
             opt.LoadWith<Product>(p => p.Category);
@@ -35,6 +36,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             DataLoadOptions opt = new DataLoadOptions();
             opt.LoadWith<Order>(order => order.Customer);
+            opt.LoadWith<Order>(order => order.FinalCustomer);
             opt.LoadWith<Order>(order => order.Items);
             opt.LoadWith<OrderItem>(oi => oi.Product);
             opt.LoadWith<Product>(p => p.Category);

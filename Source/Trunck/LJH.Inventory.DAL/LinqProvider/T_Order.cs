@@ -17,6 +17,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             this.ID = order.ID;
             this.CustomerID = order.CustomerID;
+            this.FinalCustomerID = order.FinalCustomerID;
             this.OrderDate = order.OrderDate;
             this.DemandDate = order.DemandDate;
             this.CurrencyType = order.CurrencyType;
@@ -44,6 +45,10 @@ namespace LJH.Inventory.DAL.LinqProvider
         /// 获取或设置客户ID
         /// </summary>
         public string CustomerID { get; set; }
+        /// <summary>
+        /// 获取或设置最终客户ID
+        /// </summary>
+        public string FinalCustomerID { get; set; }
         /// <summary>
         /// 获取或设置是否含税
         /// </summary>

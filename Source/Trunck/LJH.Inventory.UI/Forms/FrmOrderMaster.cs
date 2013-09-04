@@ -95,10 +95,10 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colID"].Value = order.ID;
             row.Cells["colOrderDate"].Value = order.OrderDate;
             row.Cells["colCustomer"].Value = order.Customer.Name;
+            row.Cells["colFinalCustomer"].Value = order.FinalCustomer != null ? order.FinalCustomer.Name : string.Empty;
             row.Cells["colSales"].Value = order.SalesPerson;
             row.Cells["colDeliveryDate"].Value = order.DemandDate;
             row.Cells["colWithTax"].Value = order.WithTax;
-            //row.Cells["colDeliveryState"].Value = order.DeliveryStateDescr;
             row.Cells["colAmount"].Value = order.CalAmount().Trim();
             row.Cells["colMemo"].Value = order.Memo;
             if (order.State == SheetState.Canceled)

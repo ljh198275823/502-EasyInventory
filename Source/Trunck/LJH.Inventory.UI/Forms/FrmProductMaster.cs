@@ -103,10 +103,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colCategoryID"].Value = p.Category != null ? p.Category.Name : p.CategoryID;
             row.Cells["colSpecification"].Value = p.Specification;
             row.Cells["colModel"].Value = p.Model;
-            //row.Cells["colUnit"].Value = p.Unit;
-            //row.Cells["colPrice"].Value = p.Price;
-            //row.Cells["colCost"].Value = p.Cost;
-            row.Cells["colShortName"].Value = p.ShortName;
+            row.Cells["colHSCode"].Value = p.HSCode;
             row.Cells["colMemo"].Value = p.Memo;
         }
 

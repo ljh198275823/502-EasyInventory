@@ -57,6 +57,8 @@
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
             this.lnkUnit = new System.Windows.Forms.LinkLabel();
+            this.txtHSCode = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnClose
@@ -307,9 +309,9 @@
             // txtForeignName
             // 
             this.txtForeignName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtForeignName.Location = new System.Drawing.Point(64, 70);
+            this.txtForeignName.Location = new System.Drawing.Point(58, 70);
             this.txtForeignName.Name = "txtForeignName";
-            this.txtForeignName.Size = new System.Drawing.Size(306, 21);
+            this.txtForeignName.Size = new System.Drawing.Size(309, 21);
             this.txtForeignName.TabIndex = 25;
             // 
             // label15
@@ -317,9 +319,9 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(8, 74);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(59, 12);
+            this.label15.Size = new System.Drawing.Size(47, 12);
             this.label15.TabIndex = 26;
-            this.label15.Text = "外贸名称:";
+            this.label15.Text = "英文名:";
             // 
             // txtCategory
             // 
@@ -352,11 +354,30 @@
             this.lnkUnit.Text = "单位:";
             this.lnkUnit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUnit_LinkClicked);
             // 
+            // txtHSCode
+            // 
+            this.txtHSCode.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtHSCode.Location = new System.Drawing.Point(248, 102);
+            this.txtHSCode.Name = "txtHSCode";
+            this.txtHSCode.Size = new System.Drawing.Size(119, 21);
+            this.txtHSCode.TabIndex = 30;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(190, 106);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 12);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "海关编码:";
+            // 
             // FrmProductDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(376, 297);
+            this.Controls.Add(this.txtHSCode);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lnkUnit);
             this.Controls.Add(this.lnkCategory);
             this.Controls.Add(this.txtCategory);
@@ -417,6 +438,8 @@
             this.Controls.SetChildIndex(this.txtCategory, 0);
             this.Controls.SetChildIndex(this.lnkCategory, 0);
             this.Controls.SetChildIndex(this.lnkUnit, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.txtHSCode, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,5 +475,7 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
         private System.Windows.Forms.LinkLabel lnkCategory;
         private System.Windows.Forms.LinkLabel lnkUnit;
+        private GeneralLibrary.WinformControl.DBCTextBox txtHSCode;
+        private System.Windows.Forms.Label label2;
     }
 }

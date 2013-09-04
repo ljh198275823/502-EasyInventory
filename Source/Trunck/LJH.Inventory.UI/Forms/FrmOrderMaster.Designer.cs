@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCancel = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +56,7 @@
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinalCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -298,6 +299,7 @@
             this.colID,
             this.colOrderDate,
             this.colCustomer,
+            this.colFinalCustomer,
             this.colSales,
             this.colDeliveryDate,
             this.colShipDate,
@@ -324,9 +326,9 @@
             // 
             // colOrderDate
             // 
-            dataGridViewCellStyle4.Format = "D";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.colOrderDate.HeaderText = "签订日期";
             this.colOrderDate.Name = "colOrderDate";
             this.colOrderDate.ReadOnly = true;
@@ -338,6 +340,13 @@
             this.colCustomer.ReadOnly = true;
             this.colCustomer.Width = 150;
             // 
+            // colFinalCustomer
+            // 
+            this.colFinalCustomer.HeaderText = "最终客户";
+            this.colFinalCustomer.Name = "colFinalCustomer";
+            this.colFinalCustomer.ReadOnly = true;
+            this.colFinalCustomer.Width = 150;
+            // 
             // colSales
             // 
             this.colSales.HeaderText = "业务";
@@ -346,8 +355,8 @@
             // 
             // colDeliveryDate
             // 
-            dataGridViewCellStyle5.Format = "D";
-            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "D";
+            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDeliveryDate.HeaderText = "出货日期";
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.ReadOnly = true;
@@ -367,8 +376,8 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle6.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAmount.HeaderText = "货款总额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -444,6 +453,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinalCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSales;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colShipDate;

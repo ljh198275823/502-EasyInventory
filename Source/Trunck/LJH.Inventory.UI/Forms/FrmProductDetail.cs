@@ -66,6 +66,7 @@ namespace LJH.Inventory.UI.Forms
             txtCost.DecimalValue = p.Cost;
             txtPrice.DecimalValue = p.Price;
             txtShortName.Text = p.ShortName;
+            txtHSCode.Text = p.HSCode;
             txtMemo.Text = p.Memo;
             txtID.Enabled = p == null;
         }
@@ -93,6 +94,7 @@ namespace LJH.Inventory.UI.Forms
             p.Price = txtPrice.DecimalValue;
             p.Cost = txtCost.DecimalValue;
             p.ShortName = txtShortName.Text;
+            p.HSCode = txtHSCode.Text;
             p.Memo = txtMemo.Text;
             return p;
         }

@@ -27,6 +27,14 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Customer Customer { get; set; }
         /// <summary>
+        /// 获取或设置最终客户ID
+        /// </summary>
+        public string FinalCustomerID { get; set; }
+        /// <summary>
+        /// 获取或设置最终客户
+        /// </summary>
+        public Customer FinalCustomer { get; set; }
+        /// <summary>
         /// 获取或设置是否含税
         /// </summary>
         public bool WithTax { get; set; }

@@ -18,6 +18,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             this.ID = oi.ID;
             this.OrderID = oi.OrderID;
             this.ProductID = oi.ProductID;
+            this.ProductCode = oi.ProductCode;
             this.Unit = oi.Unit;
             this.Price = oi.Price;
             this.Count = oi.Count;
@@ -40,6 +41,10 @@ namespace LJH.Inventory.DAL.LinqProvider
         /// 获取或设置商品ID
         /// </summary>
         public string ProductID { get; set; }
+        /// <summary>
+        /// 获取或设置产品代码
+        /// </summary>
+        public string ProductCode { get; set; }
         /// <summary>
         /// 获取或设置商品单位
         /// </summary>

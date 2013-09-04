@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +45,8 @@
             this.btnPaymentAssign = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtFinalCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkFinalCustomer = new System.Windows.Forms.LinkLabel();
             this.txtDestinationPort = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtLoadPort = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtTransport = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -78,6 +80,8 @@
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colForeignName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,11 +103,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(459, 488);
+            this.btnClose.Location = new System.Drawing.Point(582, 488);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(350, 488);
+            this.btnOk.Location = new System.Drawing.Point(473, 488);
             // 
             // contextMenuStrip1
             // 
@@ -140,7 +144,7 @@
             this.btnPaymentAssign});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1012, 56);
+            this.toolStrip1.Size = new System.Drawing.Size(1135, 56);
             this.toolStrip1.TabIndex = 86;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -214,11 +218,13 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 59);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1011, 401);
+            this.tabControl1.Size = new System.Drawing.Size(1134, 401);
             this.tabControl1.TabIndex = 87;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtFinalCustomer);
+            this.tabPage1.Controls.Add(this.lnkFinalCustomer);
             this.tabPage1.Controls.Add(this.txtDestinationPort);
             this.tabPage1.Controls.Add(this.txtLoadPort);
             this.tabPage1.Controls.Add(this.txtTransport);
@@ -245,10 +251,29 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1003, 375);
+            this.tabPage1.Size = new System.Drawing.Size(1126, 375);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtFinalCustomer
+            // 
+            this.txtFinalCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtFinalCustomer.Location = new System.Drawing.Point(855, 15);
+            this.txtFinalCustomer.Name = "txtFinalCustomer";
+            this.txtFinalCustomer.Size = new System.Drawing.Size(241, 21);
+            this.txtFinalCustomer.TabIndex = 124;
+            // 
+            // lnkFinalCustomer
+            // 
+            this.lnkFinalCustomer.AutoSize = true;
+            this.lnkFinalCustomer.Location = new System.Drawing.Point(791, 19);
+            this.lnkFinalCustomer.Name = "lnkFinalCustomer";
+            this.lnkFinalCustomer.Size = new System.Drawing.Size(59, 12);
+            this.lnkFinalCustomer.TabIndex = 123;
+            this.lnkFinalCustomer.TabStop = true;
+            this.lnkFinalCustomer.Text = "最终客户:";
+            this.lnkFinalCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEndCustomer_LinkClicked);
             // 
             // txtDestinationPort
             // 
@@ -279,7 +304,7 @@
             this.txtCollectionType.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtCollectionType.Location = new System.Drawing.Point(507, 51);
             this.txtCollectionType.Name = "txtCollectionType";
-            this.txtCollectionType.Size = new System.Drawing.Size(131, 21);
+            this.txtCollectionType.Size = new System.Drawing.Size(241, 21);
             this.txtCollectionType.TabIndex = 119;
             // 
             // txtCurrencyType
@@ -301,7 +326,7 @@
             // lnkSalesPerson
             // 
             this.lnkSalesPerson.AutoSize = true;
-            this.lnkSalesPerson.Location = new System.Drawing.Point(678, 55);
+            this.lnkSalesPerson.Location = new System.Drawing.Point(804, 55);
             this.lnkSalesPerson.Name = "lnkSalesPerson";
             this.lnkSalesPerson.Size = new System.Drawing.Size(47, 12);
             this.lnkSalesPerson.TabIndex = 114;
@@ -380,7 +405,7 @@
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtCustomer.Location = new System.Drawing.Point(507, 15);
             this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(353, 21);
+            this.txtCustomer.Size = new System.Drawing.Size(241, 21);
             this.txtCustomer.TabIndex = 107;
             // 
             // dtOrderDate
@@ -413,7 +438,7 @@
             // txtSalesPerson
             // 
             this.txtSalesPerson.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSalesPerson.Location = new System.Drawing.Point(729, 51);
+            this.txtSalesPerson.Location = new System.Drawing.Point(855, 51);
             this.txtSalesPerson.Name = "txtSalesPerson";
             this.txtSalesPerson.Size = new System.Drawing.Size(131, 21);
             this.txtSalesPerson.TabIndex = 101;
@@ -431,6 +456,8 @@
             this.ItemsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProductID,
             this.colProductName,
+            this.colForeignName,
+            this.colProductCode,
             this.colSpecification,
             this.colPrice,
             this.colCount,
@@ -447,7 +474,7 @@
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(984, 253);
+            this.ItemsGrid.Size = new System.Drawing.Size(1107, 253);
             this.ItemsGrid.TabIndex = 97;
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             // 
@@ -490,7 +517,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1003, 375);
+            this.tabPage6.Size = new System.Drawing.Size(1126, 375);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "合同条款";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -499,7 +526,7 @@
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1003, 375);
+            this.tabPage5.Size = new System.Drawing.Size(1126, 375);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -509,7 +536,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1003, 375);
+            this.tabPage2.Size = new System.Drawing.Size(1126, 375);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -579,6 +606,17 @@
             this.colProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colProductName.Width = 120;
             // 
+            // colForeignName
+            // 
+            this.colForeignName.HeaderText = "英文名称";
+            this.colForeignName.Name = "colForeignName";
+            this.colForeignName.ReadOnly = true;
+            // 
+            // colProductCode
+            // 
+            this.colProductCode.HeaderText = "商品代码";
+            this.colProductCode.Name = "colProductCode";
+            // 
             // colSpecification
             // 
             this.colSpecification.HeaderText = "规格";
@@ -589,8 +627,8 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -598,8 +636,8 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -631,9 +669,9 @@
             // 
             // colPrepared
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
-            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Blue;
+            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPrepared.HeaderText = "已备货";
             this.colPrepared.Name = "colPrepared";
             this.colPrepared.ReadOnly = true;
@@ -651,9 +689,9 @@
             // 
             // colNotShipped
             // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
-            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red;
+            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle8;
             this.colNotShipped.HeaderText = "未出货";
             this.colNotShipped.Name = "colNotShipped";
             this.colNotShipped.ReadOnly = true;
@@ -672,7 +710,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 460);
+            this.ClientSize = new System.Drawing.Size(1135, 460);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "FrmOrderDetail";
@@ -740,8 +778,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
+        private GeneralLibrary.WinformControl.DBCTextBox txtFinalCustomer;
+        private System.Windows.Forms.LinkLabel lnkFinalCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colForeignName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;

@@ -599,7 +599,6 @@
       <DependentUpon>FrmSalesPersonPerformanceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RowChangeEventArgs.cs" />
-    <Compile Include="IMyMDIForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\FrmProductDropdownList.resx">
       <DependentUpon>FrmProductDropdownList.cs</DependentUpon>

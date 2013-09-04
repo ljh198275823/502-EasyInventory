@@ -40,6 +40,8 @@ namespace LJH.Inventory.UI.Forms
             row.Tag = item;
             row.Cells["colProductID"].Value = item.Product != null ? item.Product.ID : string.Empty;
             row.Cells["colProductName"].Value = item.Product != null ? item.Product.Name : string.Empty;
+            row.Cells["colForeignName"].Value = item.Product != null ? item.Product.ForeignName : string.Empty;
+            row.Cells["colProductCode"].Value = item.ProductCode;
             row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
             row.Cells["colPrice"].Value = item.Price.Trim();
             row.Cells["colCount"].Value = item.Count.Trim();
@@ -146,6 +148,8 @@ namespace LJH.Inventory.UI.Forms
                 this.txtSheetNo.Enabled = false;
                 this.txtCustomer.Text = order.Customer.Name;
                 this.txtCustomer.Tag = order.Customer;
+                this.txtFinalCustomer.Text = order.FinalCustomer != null ? order.FinalCustomer.Name : string.Empty;
+                this.txtFinalCustomer.Tag = order.FinalCustomer;
                 this.dtOrderDate.Value = order.OrderDate;
                 this.txtPriceTerm.Text = order.PriceTerm;
                 this.txtCurrencyType.Text = order.CurrencyType;
@@ -178,6 +182,8 @@ namespace LJH.Inventory.UI.Forms
             order.OrderDate = this.dtOrderDate.Value;
             order.CustomerID = (this.txtCustomer.Tag as Customer).ID;
             order.Customer = this.txtCustomer.Tag as Customer;
+            order.FinalCustomerID = this.txtFinalCustomer.Tag != null ? (this.txtFinalCustomer.Tag as Customer).ID : null;
+            order.FinalCustomer = this.txtFinalCustomer.Tag as Customer;
             order.PriceTerm = this.txtPriceTerm.Text;
             order.CurrencyType = this.txtCurrencyType.Text;
             order.CollectionType = this.txtCollectionType.Text;
@@ -338,6 +344,17 @@ namespace LJH.Inventory.UI.Forms
                         row.Cells[e.ColumnIndex].Value = count;
                     }
                 }
+                else if (col.Name == "colProductCode")
+                {
+                    if (row.Cells[e.ColumnIndex].Value != null)
+                    {
+                        item.ProductCode = row.Cells[e.ColumnIndex].Value.ToString();
+                    }
+                    else
+                    {
+                        item.ProductCode = null;
+                    }
+                }
                 else if (col.Name == "colMemo")
                 {
                     if (row.Cells[e.ColumnIndex].Value != null)
@@ -390,6 +407,18 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
+        private void lnkEndCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmCustomerMaster frm = new FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Customer item = frm.SelectedItem as Customer;
+                txtFinalCustomer.Text = item.Name;
+                txtFinalCustomer.Tag = item;
+            }
+        }
+
         private void lnkPriceTerm_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmPriceTermMaster frm = new FrmPriceTermMaster();
@@ -419,7 +448,18 @@ namespace LJH.Inventory.UI.Forms
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 CollectionType item = frm.SelectedItem as CollectionType;
-                txtCollectionType.Text = item.ID;
+                if (string.IsNullOrEmpty(txtCollectionType.Text))
+                {
+                    txtCollectionType.Text = item.ID + ";";
+                }
+                else
+                {
+                    string[] temp = txtCollectionType.Text.Split(';');
+                    if (temp.SingleOrDefault(it => it == item.ID) == null)
+                    {
+                        txtCollectionType.Text += item.ID + ";";
+                    }
+                }
             }
         }
 
@@ -467,5 +507,7 @@ namespace LJH.Inventory.UI.Forms
             }
         }
         #endregion
+
+        
     }
 }

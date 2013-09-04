@@ -51,7 +51,7 @@
             this.colBarCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHSCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -187,7 +187,7 @@
             this.colBarCode,
             this.colSpecification,
             this.colModel,
-            this.colShortName,
+            this.colHSCode,
             this.colMemo});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 50);
@@ -224,7 +224,7 @@
             // colForeignName
             // 
             this.colForeignName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colForeignName.HeaderText = "外贸名称";
+            this.colForeignName.HeaderText = "英文名称";
             this.colForeignName.MinimumWidth = 100;
             this.colForeignName.Name = "colForeignName";
             this.colForeignName.ReadOnly = true;
@@ -255,11 +255,11 @@
             this.colModel.Name = "colModel";
             this.colModel.ReadOnly = true;
             // 
-            // colShortName
+            // colHSCode
             // 
-            this.colShortName.HeaderText = "简写";
-            this.colShortName.Name = "colShortName";
-            this.colShortName.ReadOnly = true;
+            this.colHSCode.HeaderText = "海关编码";
+            this.colHSCode.Name = "colHSCode";
+            this.colHSCode.ReadOnly = true;
             // 
             // colMemo
             // 
@@ -315,7 +315,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colBarCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colShortName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHSCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

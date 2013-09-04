@@ -14,7 +14,7 @@ using LJH.Inventory.UI.Forms;
 
 namespace LJH.Inventory.UI.Applications.WaiMao
 {
-    public partial class FrmMain : Form, IMyMDIForm
+    public partial class FrmMain : Form
     {
         public FrmMain()
         {
