@@ -83,39 +83,6 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 公共方法
-        /// <summary>
-        /// 增加收货项
-        /// </summary>
-        /// <param name="product"></param>
-        /// <param name="weight"></param>
-        /// <param name="length"></param>
-        public void AddItem(Product product, string unit, decimal price, int count)
-        {
-            InventoryItem di = new InventoryItem()
-            {
-                SheetNo = this.ID,
-                ProductID = product.ID,
-                Product = product,
-                Price = price,
-                Count = count,
-            };
-            AddItem(di);
-        }
-
-        public void AddItem(InventoryItem item)
-        {
-            if (Items != null && Items.Exists(it => it.ProductID == item.ProductID)) return;
-            if (Items == null) Items = new List<InventoryItem>();
-            Items.Add(item);
-        }
-        /// <summary>
-        /// 清空所有送货单项
-        /// </summary>
-        public void ClearItems()
-        {
-            if (Items != null) Items.Clear();
-        }
-
         public InventorySheet Clone()
         {
             return MemberwiseClone() as InventorySheet;

@@ -168,14 +168,14 @@ namespace LJH.Inventory.UI.Forms
             sheet.SupplierID = (this.txtSupplier.Tag as Supplier).ID;
             sheet.Supplier = this.txtSupplier.Tag as Supplier;
             sheet.Memo = txtMemo.Text;
-            sheet.ClearItems();
+            sheet.Items = new List<InventoryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
             {
                 if (row.Tag != null)
                 {
                     InventoryItem item = row.Tag as InventoryItem;
                     item.SheetNo = sheet.ID;
-                    sheet.AddItem(item);
+                    sheet.Items.Add(item);
                 }
             }
             return sheet;
@@ -231,10 +231,10 @@ namespace LJH.Inventory.UI.Forms
             ShowSheetItemsOnGrid(sources);
         }
 
-        public void AddInventoryItem(PurchaseRecord pi)
+        public void AddInventoryItem(PurchaseItem pi)
         {
             List<InventoryItem> sources = GetDeliveryItemsFromGrid();
-            if (!sources.Exists(it => it.PurchaseItem == pi.ID))
+            if (!sources.Exists(it => it.ProductID == pi.ProductID && it.PurchaseItem == pi.ID))
             {
                 InventoryItem item = new InventoryItem()
                 {
@@ -245,7 +245,7 @@ namespace LJH.Inventory.UI.Forms
                     OrderItem = pi.OrderItem,
                     Unit = pi.Unit,
                     Price = pi.Price,
-                    Count = pi.Missing,
+                    Count = pi.OnWay,
                 };
                 sources.Add(item);
             }
@@ -396,16 +396,17 @@ namespace LJH.Inventory.UI.Forms
         {
             if (txtSupplier.Tag != null)
             {
-                PurchaseRecordSearchCondition con = new PurchaseRecordSearchCondition()
-                {
-                    SupplierID =(txtSupplier .Tag as Supplier ).ID 
-                };
+                PurchaseOrderSearchCondition con = new PurchaseOrderSearchCondition();
+                con.SupplierID = (txtSupplier.Tag as Supplier).ID;
+                con.States = new List<SheetState>();
+                con.States.Add(SheetState.Add);
+                con.States.Add(SheetState.Approved);
                 FrmPurchaseItemSelection frm = new FrmPurchaseItemSelection();
                 frm.ForSelect = true;
                 frm.SearchCondition = con;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    AddInventoryItem(frm.SelectedItem as PurchaseRecord);
+                    AddInventoryItem(frm.SelectedItem as PurchaseItem);
                 }
             }
         }

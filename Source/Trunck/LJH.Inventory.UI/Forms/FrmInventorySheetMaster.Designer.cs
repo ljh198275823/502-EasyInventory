@@ -54,7 +54,7 @@
             this.colSupplier = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colWareHouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventoryOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -328,6 +328,8 @@
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
+            this.colAmount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colState
             // 
@@ -408,7 +410,7 @@
         private System.Windows.Forms.DataGridViewLinkColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouseName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsWithTax;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryOperator;

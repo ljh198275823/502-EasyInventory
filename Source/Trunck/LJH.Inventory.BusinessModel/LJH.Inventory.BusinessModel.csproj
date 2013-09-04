@@ -84,7 +84,6 @@
     <Compile Include="SearchCondition\ProductInventoryItemSearchCondition.cs" />
     <Compile Include="SearchCondition\OrderSearchCondition.cs" />
     <Compile Include="SearchCondition\PurchaseOrderSearchCondition.cs" />
-    <Compile Include="SearchCondition\PurchaseRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierSearchCondition.cs" />
     <Compile Include="SheetState.cs" />
     <Compile Include="CommandResult.cs" />

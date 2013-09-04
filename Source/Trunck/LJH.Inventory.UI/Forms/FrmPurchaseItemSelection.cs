@@ -34,24 +34,32 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString);
-            List<PurchaseRecord> items = bll.GetRecords(SearchCondition).QueryObjects;
-            return (from item in items
-                    where item.Missing > 0
-                    orderby item.DemandDate ascending, item.SheetNo ascending
-                    select (object)item
-                    ).ToList();
+            List<PurchaseOrder> items = bll.GetItems(SearchCondition).QueryObjects;
+            List<object> ret = null;
+            foreach (PurchaseOrder item in items)
+            {
+                foreach (PurchaseItem pii in item.Items)
+                {
+                    if (pii.OnWay > 0)
+                    {
+                        if (ret == null) ret = new List<object>();
+                        ret.Add(pii);
+                    }
+                }
+            }
+            return ret;
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            PurchaseRecord c = item as PurchaseRecord;
+            PurchaseItem c = item as PurchaseItem;
             row.Tag = c;
-            row.Cells["colSheetNo"].Value = c.SheetNo;
+            row.Cells["colSheetNo"].Value = c.PurchaseID;
             row.Cells["colProductName"].Value = c.Product.Name;
             row.Cells["colDemandDate"].Value = c.DemandDate.ToLongDateString();
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colReceived"].Value = c.Received.Trim();
-            row.Cells["colOnPurchase"].Value = c.Missing.Trim();
+            row.Cells["colOnPurchase"].Value = c.OnWay.Trim();
             row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion

@@ -87,7 +87,7 @@ namespace LJH.Inventory.BusinessModel
                 if (State == SheetState.Closed || State == SheetState.Canceled) return true;
                 if (Items != null)
                 {
-                    return Items.Exists(item => item.IsComplete);
+                    return !Items.Exists(item => !item.IsComplete && item.OnWay > 0);
                 }
                 return true;
             }

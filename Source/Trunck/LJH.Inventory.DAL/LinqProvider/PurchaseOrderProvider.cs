@@ -44,7 +44,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 PurchaseOrderSearchCondition con = search as PurchaseOrderSearchCondition;
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.ID == con.OrderID);
-                if (!string.IsNullOrEmpty(con.SupplerID)) ret = ret.Where(item => item.SupplierID == con.SupplerID);
+                if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
                 if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
                 if (!string.IsNullOrEmpty(con.Buyer)) ret = ret.Where(item => item.Buyer.Contains(con.Buyer));
                 if (con.States != null) ret = ret.Where(item => con.States.Contains(item.State));

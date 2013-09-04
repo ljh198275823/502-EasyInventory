@@ -18,12 +18,14 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置采购单编号
         /// </summary>
-        public string SheetNo { get; set; }
+        public string PurchaseID { get; set; }
         /// <summary>
-        /// 获取或设置订单编号
+        /// 获取或设置采购项相关的销售订单
         /// </summary>
         public string OrderID { get; set; }
-
+        /// <summary>
+        /// 获取或设置采购项相关的销售订单项
+        /// </summary>
         public Guid? OrderItem { get; set; }
         /// <summary>
         /// 获取或设置供应商ID
@@ -33,10 +35,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置客户名称
         /// </summary>
         public Supplier  Supplier{ get; set; }
-        /// <summary>
-        /// 获取或设置订单当前状态
-        /// </summary>
-        public SheetState State { get; set; }
         /// <summary>
         /// 获取或设置商品ID
         /// </summary>
@@ -69,6 +67,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置业务员
         /// </summary>
         public string Buyer { get; set; }
+        /// <summary>
+        /// 获取或设置订单当前状态
+        /// </summary>
+        public SheetState State { get; set; }
         /// <summary>
         /// 获取或设置订单项是否已经全部出货，也可以表示人工完结未出完货的情况
         /// </summary>

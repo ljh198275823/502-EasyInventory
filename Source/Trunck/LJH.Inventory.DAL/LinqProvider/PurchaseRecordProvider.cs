@@ -37,13 +37,13 @@ namespace LJH.Inventory.DAL.LinqProvider
             opt.LoadWith<PurchaseRecord>(item => item.Product);
             dc.LoadOptions = opt;
             IQueryable<PurchaseRecord> ret = dc.GetTable<PurchaseRecord>();
-            if (search is PurchaseRecordSearchCondition)
+            if (search is PurchaseOrderSearchCondition)
             {
-                PurchaseRecordSearchCondition con = search as PurchaseRecordSearchCondition;
-                if (!string.IsNullOrEmpty(con.SheetNo)) ret = ret.Where(item => item.SheetNo == con.SheetNo);
+                PurchaseOrderSearchCondition con = search as PurchaseOrderSearchCondition;
+                if (!string.IsNullOrEmpty(con.PurchaseID)) ret = ret.Where(item => item.PurchaseID == con.PurchaseID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
                 if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
-                if (con.DemandDate != null) ret = ret.Where(item => item.DemandDate >= con.DemandDate.Begin && item.DemandDate <= con.DemandDate.End);
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
                 if (!string.IsNullOrEmpty(con.Buyer)) ret = ret.Where(item => item.Buyer.Contains(con.Buyer));
                 if (con.IsComplete != null) ret = ret.Where(item => item.IsComplete == con.IsComplete.Value);
             }
