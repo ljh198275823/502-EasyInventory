@@ -69,6 +69,7 @@
     <Compile Include="PriceTerm.cs" />
     <Compile Include="PurchaseOrder.cs" />
     <Compile Include="PurchaseItem.cs" />
+    <Compile Include="PurchaseRecord.cs" />
     <Compile Include="RelatedCompany.cs" />
     <Compile Include="Resource\PaymentModeDescription.cs" />
     <Compile Include="SearchCondition\ContactSearchCondition.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="SearchCondition\ProductInventoryItemSearchCondition.cs" />
     <Compile Include="SearchCondition\OrderSearchCondition.cs" />
     <Compile Include="SearchCondition\PurchaseOrderSearchCondition.cs" />
+    <Compile Include="SearchCondition\PurchaseRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierSearchCondition.cs" />
     <Compile Include="SheetState.cs" />
     <Compile Include="CommandResult.cs" />

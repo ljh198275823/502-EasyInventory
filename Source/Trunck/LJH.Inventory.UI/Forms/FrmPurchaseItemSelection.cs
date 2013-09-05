@@ -33,26 +33,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString);
-            List<PurchaseOrder> items = bll.GetItems(SearchCondition).QueryObjects;
-            List<object> ret = null;
-            foreach (PurchaseOrder item in items)
-            {
-                foreach (PurchaseItem pii in item.Items)
-                {
-                    if (pii.OnWay > 0)
-                    {
-                        if (ret == null) ret = new List<object>();
-                        ret.Add(pii);
-                    }
-                }
-            }
-            return ret;
+            List<PurchaseRecord> items = new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString).GetRecords(SearchCondition).QueryObjects;
+            return (from item in items
+                    orderby item.PurchaseID ascending, item.Product.Name ascending
+                    select (object)item).ToList();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            PurchaseItem c = item as PurchaseItem;
+            PurchaseRecord c = item as PurchaseRecord;
             row.Tag = c;
             row.Cells["colSheetNo"].Value = c.PurchaseID;
             row.Cells["colProductName"].Value = c.Product.Name;

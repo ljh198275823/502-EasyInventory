@@ -251,6 +251,27 @@ namespace LJH.Inventory.UI.Forms
             }
             ShowSheetItemsOnGrid(sources);
         }
+
+        public void AddInventoryItem(PurchaseRecord pi)
+        {
+            List<InventoryItem> sources = GetDeliveryItemsFromGrid();
+            if (!sources.Exists(it => it.ProductID == pi.ProductID && it.PurchaseItem == pi.ID))
+            {
+                InventoryItem item = new InventoryItem()
+                {
+                    ID = Guid.NewGuid(),
+                    ProductID = pi.ProductID,
+                    Product = pi.Product,
+                    PurchaseItem = pi.ID,
+                    OrderItem = pi.OrderItem,
+                    Unit = pi.Unit,
+                    Price = pi.Price,
+                    Count = pi.OnWay,
+                };
+                sources.Add(item);
+            }
+            ShowSheetItemsOnGrid(sources);
+        }
         #endregion
 
         #region 事件处理程序
@@ -396,17 +417,18 @@ namespace LJH.Inventory.UI.Forms
         {
             if (txtSupplier.Tag != null)
             {
-                PurchaseOrderSearchCondition con = new PurchaseOrderSearchCondition();
+                PurchaseRecordSearchCondition con = new PurchaseRecordSearchCondition();
                 con.SupplierID = (txtSupplier.Tag as Supplier).ID;
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
+                con.IsComplete = false;
                 FrmPurchaseItemSelection frm = new FrmPurchaseItemSelection();
                 frm.ForSelect = true;
                 frm.SearchCondition = con;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    AddInventoryItem(frm.SelectedItem as PurchaseItem);
+                    AddInventoryItem(frm.SelectedItem as PurchaseRecord);
                 }
             }
         }

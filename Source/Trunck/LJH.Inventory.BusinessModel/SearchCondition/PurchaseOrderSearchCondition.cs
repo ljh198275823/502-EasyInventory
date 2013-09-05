@@ -21,6 +21,6 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public List<SheetState> States { get; set; }
 
-        public bool? IsComplete { get; set; }
+       
     }
 }
