@@ -64,6 +64,7 @@
     <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryOutType.cs" />
     <Compile Include="MyCompanyInfo.cs" />
+    <Compile Include="OrderRecord.cs" />
     <Compile Include="ProductInventoryItem.cs" />
     <Compile Include="Port.cs" />
     <Compile Include="PriceTerm.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="SearchCondition\DocumentSearchCondition.cs" />
     <Compile Include="SearchCondition\ExpenditureRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\InventorySheetSearchCondition.cs" />
+    <Compile Include="SearchCondition\OrderRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\ProductInventoryItemSearchCondition.cs" />
     <Compile Include="SearchCondition\OrderSearchCondition.cs" />
     <Compile Include="SearchCondition\PurchaseOrderSearchCondition.cs" />

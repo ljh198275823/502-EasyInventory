@@ -13,9 +13,9 @@ using LJH.Inventory.UI.Forms.Report;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmPurchaseItemSelection : FrmMasterBase
+    public partial class FrmPurchaseRecordSelection : FrmMasterBase
     {
-        public FrmPurchaseItemSelection()
+        public FrmPurchaseRecordSelection()
         {
             InitializeComponent();
         }
@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms
         {
             List<PurchaseRecord> items = new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString).GetRecords(SearchCondition).QueryObjects;
             return (from item in items
-                    orderby item.PurchaseID ascending, item.Product.Name ascending
+                    orderby item.PurchaseID ascending
                     select (object)item).ToList();
         }
 

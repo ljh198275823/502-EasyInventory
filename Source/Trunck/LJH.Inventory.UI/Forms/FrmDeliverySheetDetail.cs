@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.Resource;
+using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.ExcelExporter;
 
 namespace LJH.Inventory.UI.Forms
@@ -50,6 +51,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count;
             row.Cells["colTotal"].Value = item.Amount;
+            row.Cells["colOrderID"].Value = item.OrderID;
+            row.Cells["colMemo"].Value = item.Memo;
         }
 
         private List<DeliveryItem> GetDeliveryItemsFromGrid()
@@ -161,14 +164,14 @@ namespace LJH.Inventory.UI.Forms
             sheet.WareHouseID = this.txtWareHouse.Tag != null ? (this.txtWareHouse.Tag as WareHouse).ID : string.Empty;
             sheet.WareHouse = this.txtWareHouse.Tag as WareHouse;
             sheet.Memo = txtMemo.Text;
-            sheet.ClearItems();
+            sheet.Items = new List<DeliveryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
             {
                 if (row.Tag != null)
                 {
                     DeliveryItem item = row.Tag as DeliveryItem;
                     item.SheetNo = sheet.ID;
-                    sheet.AddItem(item);
+                    sheet.Items.Add(item);
                 }
             }
             return sheet;
@@ -250,11 +253,41 @@ namespace LJH.Inventory.UI.Forms
                     DeliveryItem item = new DeliveryItem()
                     {
                         ID = Guid.NewGuid(),
+                        OrderItem = oi.ID,
+                        OrderID = oi.OrderID,
                         ProductID = oi.ProductID,
                         Product = oi.Product,
                         Unit = oi.Unit,
                         Price = oi.Price,
-                        Count = oi.Inventory - oi.Shipped
+                        Count = oi.Inventory
+                    };
+                    sources.Add(item);
+                }
+                else
+                {
+                    MessageBox.Show("一个送货单最多只能有 " + DeliverySheet.MaxItemCount + " 个送货单项");
+                }
+            }
+            ShowDeliveryItemsOnGrid(sources);
+        }
+
+        public void AddDeliveryItem(OrderRecord oi)
+        {
+            List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
+            if (!sources.Exists(it => it.OrderItem != null && it.OrderItem.Value == oi.ID))
+            {
+                if (sources.Count < DeliverySheet.MaxItemCount)
+                {
+                    DeliveryItem item = new DeliveryItem()
+                    {
+                        ID = Guid.NewGuid(),
+                        OrderItem = oi.ID,
+                        OrderID = oi.OrderID,
+                        ProductID = oi.ProductID,
+                        Product = oi.Product,
+                        Unit = oi.Unit,
+                        Price = oi.Price,
+                        Count = oi.Inventory,
                     };
                     sources.Add(item);
                 }
@@ -335,12 +368,18 @@ namespace LJH.Inventory.UI.Forms
         {
             if (txtCustomer.Tag != null)
             {
-                FrmNotPurchaseItems frm = new FrmNotPurchaseItems();
+                FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
                 frm.ForSelect = true;
-                frm.CustomerID = (txtCustomer.Tag as Customer).ID;
+                OrderRecordSearchCondition con = new OrderRecordSearchCondition();
+                con.CustomerID = (txtCustomer.Tag as Customer).ID;
+                con.States = new List<SheetState>();
+                con.States.Add(SheetState.Add);
+                con.States.Add(SheetState.Approved);
+                con.HasToDelivery = false;
+                frm.SearchCondition = con;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    OrderItem oi = frm.SelectedItem as OrderItem;
+                    OrderRecord oi = frm.SelectedItem as OrderRecord;
                     AddDeliveryItem(oi);
                 }
             }
@@ -368,23 +407,6 @@ namespace LJH.Inventory.UI.Forms
                 }
                 ShowDeliveryItemsOnGrid(items);
             }
-        }
-
-        private void txtCustomer_TextChanged(object sender, EventArgs e)
-        {
-            //Customer c = txtCustomer.SelectedCustomer;
-            //if (c != null)
-            //{
-            //    //txtLinker.Text = c.Linker;
-            //    txtTelPhone.Text = c.TelPhone;
-            //    txtAddress.Text = c.Address;
-            //}
-            //else
-            //{
-            //    this.txtLinker.Text = string.Empty;
-            //    txtTelPhone.Text = string.Empty;
-            //    txtAddress.Text = string.Empty;
-            //}
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -525,6 +547,31 @@ namespace LJH.Inventory.UI.Forms
                 WareHouse item = frm.SelectedItem as WareHouse;
                 txtWareHouse.Text = item.Name;
                 txtWareHouse.Tag = item;
+            }
+        }
+
+        private void btnShip_Click_1(object sender, EventArgs e)
+        {
+            if (UpdatingItem != null)
+            {
+                if (MessageBox.Show("是否要发货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    DeliverySheet sheet = UpdatingItem as DeliverySheet;
+                    CommandResult ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).Delivery(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(sheet.ID).QueryObject;
+                        this.UpdatingItem = sheet1;
+                        ItemShowing();
+                        ShowButtonState();
+                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
             }
         }
     }

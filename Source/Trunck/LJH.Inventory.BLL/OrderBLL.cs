@@ -23,6 +23,42 @@ namespace LJH.Inventory.BLL
         private string _DocumentType = "order";
         #endregion
 
+        #region 私有方法
+        private List<OrderRecord> GetFrom(List<Order> items)
+        {
+            List<OrderRecord> ret = new List<OrderRecord>();
+            foreach (Order item in items)
+            {
+                foreach (OrderItem pii in item.Items)
+                {
+                    OrderRecord record = new OrderRecord()
+                    {
+                        ID = pii.ID,
+                        OrderID = pii.OrderID,
+                        CustomerID = item.CustomerID,
+                        Customer = item.Customer,
+                        ProductID = pii.ProductID,
+                        Product = pii.Product,
+                        Unit = pii.Unit,
+                        Price = pii.Price,
+                        Count = pii.Count,
+                        Purchased = pii.Purchased,
+                        Received = pii.Received,
+                        TotalInventory = pii.TotalInventory,
+                        Shipped = pii.Shipped,
+                        DemandDate = item.DemandDate,
+                        SalesPerson = item.SalesPerson,
+                        State = item.State,
+                        IsComplete = pii.IsComplete,
+                        Memo = pii.Memo
+                    };
+                    ret.Add(record);
+                }
+            }
+            return ret;
+        }
+        #endregion
+
         #region 公共方法
         /// <summary>
         /// 通过订单号获取订单
@@ -49,7 +85,32 @@ namespace LJH.Inventory.BLL
             };
             return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
         }
-
+        /// <summary>
+        /// 获取订单记录
+        /// </summary>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public QueryResultList<OrderRecord> GetRecords(SearchCondition con)
+        {
+            QueryResultList<Order> result = ProviderFactory.Create<IOrderProvider>(_RepoUri).GetItems(con as OrderSearchCondition);
+            if (result.Result != ResultCode.Successful) return new QueryResultList<OrderRecord>(result.Result, result.Message, null);
+            List<OrderRecord> ret = GetFrom(result.QueryObjects);
+            if (con is OrderRecordSearchCondition)
+            {
+                OrderRecordSearchCondition con1 = con as OrderRecordSearchCondition;
+                if (con1.HasToPurchase != null)
+                {
+                    if (con1.HasToPurchase.Value) ret = ret.Where(item => !item.IsComplete && item.NotPurchased > 0).ToList();
+                    else ret = ret.Where(item => item.IsComplete || item.NotPurchased == 0).ToList();
+                }
+                if (con1.HasToDelivery != null)
+                {
+                    if (con1.HasToDelivery.Value) ret = ret.Where(item => item.IsComplete || item.NotShipped == 0).ToList();
+                    else ret = ret.Where(item => !item.IsComplete && item.NotShipped > 0).ToList();
+                }
+            }
+            return new QueryResultList<OrderRecord>(ResultCode.Successful, string.Empty, ret);
+        }
         /// <summary>
         /// 增加一个订单
         /// </summary>

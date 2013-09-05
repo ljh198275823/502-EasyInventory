@@ -47,7 +47,7 @@ namespace LJH.Inventory.BLL
                 CustomerReceivable cr = new CustomerReceivable()
                 {
                     ID = Guid.NewGuid(),
-                    SheetNo = info.ID,
+                    OrderID = info.ID,
                     CreateDate = info.DaiFuDate,
                     CustomerID = info.CustomerID,
                     Amount = info.Amount,

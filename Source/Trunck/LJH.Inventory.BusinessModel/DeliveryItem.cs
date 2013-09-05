@@ -23,9 +23,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string SheetNo { get; set; }
         /// <summary>
-        /// 获取或设置订单号（一个送货单可以包含多个订单的货物)
+        /// 获取或设置订单项ID
         /// </summary>
         public Guid? OrderItem { get; set; }
+        /// <summary>
+        /// 获取或设置订单编号
+        /// </summary>
+        public string OrderID { get; set; }
         /// <summary>
         /// 获取或设置商品ID
         /// </summary>

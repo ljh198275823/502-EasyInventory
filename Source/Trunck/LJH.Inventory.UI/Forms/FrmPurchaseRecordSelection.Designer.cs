@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms
 {
-    partial class FrmPurchaseItemSelection
+    partial class FrmPurchaseRecordSelection
     {
         /// <summary>
         /// Required designer variable.

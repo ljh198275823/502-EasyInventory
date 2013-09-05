@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 
 namespace LJH.Inventory.UI.Forms
@@ -232,7 +233,7 @@ namespace LJH.Inventory.UI.Forms
             ShowDeliveryItemsOnGrid(sources);
         }
 
-        public void AddPurchaseSheettem(OrderItem oi)
+        public void AddPurchaseSheettem(OrderRecord oi)
         {
             List<PurchaseItem> sources = GetPurchaseSheetItemsFromGrid();
             if (!sources.Exists(it => it.OrderItem == oi.ID))
@@ -354,12 +355,18 @@ namespace LJH.Inventory.UI.Forms
 
         private void btn_AddOrderRecord_Click(object sender, EventArgs e)
         {
-            FrmNotPurchaseItems frm = new FrmNotPurchaseItems();
+            FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
             frm.ForSelect = true;
+            OrderRecordSearchCondition con = new OrderRecordSearchCondition();
+            con.States = new List<SheetState>();
+            con.States.Add(SheetState.Add);
+            con.States.Add(SheetState.Approved);
+            con.HasToPurchase = true;
+            frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                OrderItem p = frm.SelectedItem as OrderItem;
-                AddPurchaseSheettem(p);
+                OrderRecord oi = frm.SelectedItem as OrderRecord;
+                AddPurchaseSheettem(oi);
             }
         }
 

@@ -320,11 +320,11 @@
     <Compile Include="Forms\FrmOrderMaster.Designer.cs">
       <DependentUpon>FrmOrderMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmNotPurchaseItems.cs">
+    <Compile Include="Forms\FrmOrderRecordSelection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmNotPurchaseItems.Designer.cs">
-      <DependentUpon>FrmNotPurchaseItems.cs</DependentUpon>
+    <Compile Include="Forms\FrmOrderRecordSelection.Designer.cs">
+      <DependentUpon>FrmOrderRecordSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmPortDetail.cs">
       <SubType>Form</SubType>
@@ -392,11 +392,11 @@
     <Compile Include="Forms\FrmProductMaster.Designer.cs">
       <DependentUpon>FrmProductMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmPurchaseItemSelection.cs">
+    <Compile Include="Forms\FrmPurchaseRecordSelection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmPurchaseItemSelection.Designer.cs">
-      <DependentUpon>FrmPurchaseItemSelection.cs</DependentUpon>
+    <Compile Include="Forms\FrmPurchaseRecordSelection.Designer.cs">
+      <DependentUpon>FrmPurchaseRecordSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmPurchaseOrderDetail.cs">
       <SubType>Form</SubType>
@@ -705,8 +705,8 @@
     <EmbeddedResource Include="Forms\FrmOrderMaster.resx">
       <DependentUpon>FrmOrderMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmNotPurchaseItems.resx">
-      <DependentUpon>FrmNotPurchaseItems.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmOrderRecordSelection.resx">
+      <DependentUpon>FrmOrderRecordSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmPortDetail.resx">
       <DependentUpon>FrmPortDetail.cs</DependentUpon>
@@ -744,8 +744,8 @@
     <EmbeddedResource Include="Forms\FrmProductMaster.resx">
       <DependentUpon>FrmProductMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmPurchaseItemSelection.resx">
-      <DependentUpon>FrmPurchaseItemSelection.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmPurchaseRecordSelection.resx">
+      <DependentUpon>FrmPurchaseRecordSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmPurchaseOrderDetail.resx">
       <DependentUpon>FrmPurchaseOrderDetail.cs</DependentUpon>

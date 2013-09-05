@@ -34,23 +34,6 @@ namespace LJH.Inventory.DAL.LinqProvider
             }
             return ret.ToList();
         }
-
-        protected override void InsertingItem(CustomerReceivable info, System.Data.Linq.DataContext dc)
-        {
-            dc.GetTable<T_CustomerReceivable>().InsertOnSubmit(new T_CustomerReceivable(info));
-        }
-
-        protected override void UpdatingItem(CustomerReceivable newVal, CustomerReceivable original, System.Data.Linq.DataContext dc)
-        {
-            dc.GetTable<T_CustomerReceivable>().Attach(new T_CustomerReceivable(newVal), new T_CustomerReceivable(original));
-        }
-
-        protected override void DeletingItem(CustomerReceivable info, System.Data.Linq.DataContext dc)
-        {
-            T_CustomerReceivable tcr = new T_CustomerReceivable(info);
-            dc.GetTable<T_CustomerReceivable>().Attach(tcr);
-            dc.GetTable<T_CustomerReceivable>().DeleteOnSubmit(tcr);
-        }
         #endregion
     }
 }

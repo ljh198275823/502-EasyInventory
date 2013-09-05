@@ -146,7 +146,7 @@ namespace LJH.Inventory.UI.Forms
             //}
             //else
             //{
-                FrmNotPurchaseItems frm = new FrmNotPurchaseItems();
+                FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
                 frm.Show();
             //}
         }

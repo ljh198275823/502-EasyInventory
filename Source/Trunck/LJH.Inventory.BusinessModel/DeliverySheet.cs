@@ -66,10 +66,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public bool IsWithTax { get; set; }
         /// <summary>
-        /// 获取或设置送货单的总货款
-        /// </summary>
-        public decimal Amount { get; set; }
-        /// <summary>
         /// 获取或设置送货单的折扣额
         /// </summary>
         public decimal Discount { get; set; }
@@ -96,6 +92,16 @@ namespace LJH.Inventory.BusinessModel
         /// 获取每个送货单最大送货项数量
         /// </summary>
         public static readonly int MaxItemCount = 8;
+        /// <summary>
+        /// 获取送货单的总货款
+        /// </summary>
+        public decimal Amount 
+        {
+            get
+            {
+                return Items.Sum(item => item.Amount);
+            }
+        }
         /// <summary>
         /// 获取送货单是否可以审批
         /// </summary>
@@ -140,45 +146,6 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 公共方法
-        /// <summary>
-        /// 增加收货项
-        /// </summary>
-        /// <param name="product"></param>
-        /// <param name="weight"></param>
-        /// <param name="length"></param>
-        public void AddItem(Product product, string unit, decimal price, decimal count)
-        {
-            DeliveryItem di = new DeliveryItem()
-            {
-                ID=Guid.NewGuid (),
-                SheetNo = this.ID,
-                ProductID = product.ID,
-                Product = product,
-                Price = price,
-                Count = count,
-            };
-            AddItem(di);
-        }
-
-        public void AddItem(DeliveryItem item)
-        {
-            if (Items != null && Items.Exists(it => it.ProductID == item.ProductID)) return;
-            if (Items == null) Items = new List<DeliveryItem>();
-            if (Items.Count < MaxItemCount)
-            {
-                Items.Add(item);
-            }
-            Amount = Items.Sum(it => it.Amount);
-        }
-        /// <summary>
-        /// 清空所有送货单项
-        /// </summary>
-        public void ClearItems()
-        {
-            if (Items != null) Items.Clear();
-            Amount = 0;
-        }
-
         public DeliverySheet Clone()
         {
             return MemberwiseClone() as DeliverySheet;

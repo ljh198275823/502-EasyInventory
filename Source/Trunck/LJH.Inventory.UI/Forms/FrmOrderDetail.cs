@@ -46,9 +46,9 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colPrice"].Value = item.Price.Trim();
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colTotal"].Value = item.Amount.Trim();
-            row.Cells["colOnPurchase"].Value = item.OnPurchase.Trim();
-            row.Cells["colInventory"].Value = item.Inventory.Trim();
-            row.Cells["colPrepared"].Value = (item.Inventory + item.OnPurchase).Trim();
+            row.Cells["colOnPurchase"].Value = item.OnWay.Trim();
+            row.Cells["colInventory"].Value = item.TotalInventory.Trim();
+            row.Cells["colPrepared"].Value = (item.TotalInventory + item.OnWay).Trim();
             row.Cells["colShipped"].Value = item.Shipped.Trim();
             row.Cells["colNotShipped"].Value = item.NotShipped.Trim();
             row.Cells["colMemo"].Value = item.Memo;

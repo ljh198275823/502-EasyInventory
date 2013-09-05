@@ -85,6 +85,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colWareHouseName"].Value = sheet.WareHouse.Name;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
             row.Cells["colSupplier"].Value = sheet.Supplier.Name;
+            row.Cells["colAmount"].Value = sheet.Amount.Trim();
             row.Cells["colMemo"].Value = sheet.Memo;
             if (sheet.State == SheetState.Canceled)
             {

@@ -55,6 +55,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colUnit"].Value = item.Product.Unit;
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count.Trim();
+            row.Cells["colOrderID"].Value = item.OrderID;
+            row.Cells["colPurchaseOrder"].Value = item.PurchaseOrder;
             row.Cells["colTotal"].Value = item.Amount;
         }
 
@@ -423,7 +425,7 @@ namespace LJH.Inventory.UI.Forms
                 con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
                 con.IsComplete = false;
-                FrmPurchaseItemSelection frm = new FrmPurchaseItemSelection();
+                FrmPurchaseRecordSelection frm = new FrmPurchaseRecordSelection();
                 frm.ForSelect = true;
                 frm.SearchCondition = con;
                 if (frm.ShowDialog() == DialogResult.OK)

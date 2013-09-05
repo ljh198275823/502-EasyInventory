@@ -53,6 +53,16 @@ namespace LJH.Inventory.BusinessModel
 
         #region 只读属性
         /// <summary>
+        /// 获取送货单的总货款
+        /// </summary>
+        public decimal Amount
+        {
+            get
+            {
+                return Items.Sum(item => item.Amount);
+            }
+        }
+        /// <summary>
         /// 获取收货单是否可以收货
         /// </summary>
         public bool CanInventory

@@ -79,20 +79,21 @@ namespace LJH.Inventory.BLL
 
         private void AddReceivables(DeliverySheet sheet, IUnitWork unitWork)
         {
-            ////减少库存
-            foreach (DeliveryItem si in sheet.Items)
+            foreach (DeliveryItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
             {
-            //增加应收账款项
-            CustomerReceivable cr = new CustomerReceivable()
-            {
-                ID = Guid.NewGuid(),
-                OrderItem = si.OrderItem,
-                SheetNo = si.SheetNo,
-                CreateDate = DateTime.Now,
-                CustomerID = sheet.CustomerID,
-                Amount = si.Amount,
-            };
-            ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Insert(cr, unitWork);
+                //增加应收账款项
+                CustomerReceivable cr = new CustomerReceivable()
+                {
+                    ID = Guid.NewGuid(),
+                    OrderItem = si.OrderItem,
+                    OrderID = si.OrderID,
+                    DeliveryItem = si.ID,
+                    DeliverySheet = sheet.ID,
+                    CreateDate = DateTime.Now,
+                    CustomerID = sheet.CustomerID,
+                    Amount = si.Amount,
+                };
+                ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Insert(cr, unitWork);
             }
         }
         #endregion
@@ -299,7 +300,6 @@ namespace LJH.Inventory.BLL
             ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
             return unitWork.Commit();
         }
-
         /// <summary>
         /// 作废
         /// </summary>

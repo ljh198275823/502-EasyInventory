@@ -21,9 +21,17 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid? PurchaseItem { get; set; }
         /// <summary>
+        /// 获取或设置采购订单编号
+        /// </summary>
+        public string PurchaseOrder { get; set; }
+        /// <summary>
         /// 获取或设置销售订单项
         /// </summary>
         public Guid? OrderItem { get; set; }
+        /// <summary>
+        /// 获取或设置销售订单编号
+        /// </summary>
+        public string OrderID { get; set; }
         /// <summary>
         /// 获取或设置商品ID
         /// </summary>
