@@ -173,7 +173,7 @@ namespace LJH.Inventory.UI.Forms
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
                 {
                     Customer c = dataGridView1.Rows[e.RowIndex].Tag as Customer;
-                    FrmCustomerReceivables frm = new FrmCustomerReceivables();
+                    FrmOrderSelection frm = new FrmOrderSelection();
                     frm.CustomerUpdated += delegate(object obj, EventArgs args)
                     {
                         Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(c.ID).QueryObject;
@@ -193,6 +193,11 @@ namespace LJH.Inventory.UI.Forms
                     frm.ShowDialog();
                 }
             }
+        }
+
+        private void mnu_Payment_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

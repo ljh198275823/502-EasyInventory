@@ -100,6 +100,9 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colDeliveryDate"].Value = order.DemandDate;
             row.Cells["colWithTax"].Value = order.WithTax;
             row.Cells["colAmount"].Value = order.CalAmount().Trim();
+            row.Cells["colReceivable"].Value = order.Receivable.Trim();
+            row.Cells["colHasPaid"].Value = order.HasPaid.Trim();
+            row.Cells["colNotPaid"].Value = (order.CalAmount() - order.HasPaid).Trim();
             row.Cells["colMemo"].Value = order.Memo;
             if (order.State == SheetState.Canceled)
             {

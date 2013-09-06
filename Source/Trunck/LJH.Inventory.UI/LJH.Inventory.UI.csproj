@@ -554,11 +554,11 @@
     <Compile Include="Forms\Report\FrmCustomerPaymentRemains.designer.cs">
       <DependentUpon>FrmCustomerPaymentRemains.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Report\FrmCustomerReceivables.cs">
+    <Compile Include="Forms\FrmOrderSelection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Report\FrmCustomerReceivables.designer.cs">
-      <DependentUpon>FrmCustomerReceivables.cs</DependentUpon>
+    <Compile Include="Forms\FrmOrderSelection.designer.cs">
+      <DependentUpon>FrmOrderSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Report\FrmReportBase.cs">
       <SubType>Form</SubType>
@@ -825,8 +825,8 @@
     <EmbeddedResource Include="Forms\Report\FrmCustomerPaymentRemains.resx">
       <DependentUpon>FrmCustomerPaymentRemains.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Report\FrmCustomerReceivables.resx">
-      <DependentUpon>FrmCustomerReceivables.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmOrderSelection.resx">
+      <DependentUpon>FrmOrderSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\FrmReportBase.resx">
       <DependentUpon>FrmReportBase.cs</DependentUpon>

@@ -62,8 +62,9 @@
             this.colShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colHasPaid = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colReceivable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
@@ -305,8 +306,9 @@
             this.colShipDate,
             this.colWithTax,
             this.colAmount,
-            this.colHasPaid,
             this.colReceivable,
+            this.colHasPaid,
+            this.colNotPaid,
             this.colMemo});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(208, 50);
@@ -378,24 +380,32 @@
             // 
             dataGridViewCellStyle3.NullValue = null;
             this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colAmount.HeaderText = "货款总额";
+            this.colAmount.HeaderText = "货款金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             this.colAmount.Width = 80;
             // 
+            // colReceivable
+            // 
+            this.colReceivable.HeaderText = "已发货金额";
+            this.colReceivable.Name = "colReceivable";
+            this.colReceivable.ReadOnly = true;
+            this.colReceivable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colReceivable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // colHasPaid
             // 
-            this.colHasPaid.HeaderText = "已收款";
+            this.colHasPaid.HeaderText = "已收金额";
             this.colHasPaid.Name = "colHasPaid";
             this.colHasPaid.ReadOnly = true;
             this.colHasPaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colHasPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // colReceivable
+            // colNotPaid
             // 
-            this.colReceivable.HeaderText = "未收款";
-            this.colReceivable.Name = "colReceivable";
-            this.colReceivable.ReadOnly = true;
+            this.colNotPaid.HeaderText = "未收款";
+            this.colNotPaid.Name = "colNotPaid";
+            this.colNotPaid.ReadOnly = true;
             // 
             // colMemo
             // 
@@ -459,8 +469,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colShipDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colHasPaid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReceivable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

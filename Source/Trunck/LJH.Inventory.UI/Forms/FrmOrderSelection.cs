@@ -10,11 +10,11 @@ using LJH.Inventory.BLL;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory.BusinessModel.Resource;
 
-namespace LJH.Inventory.UI.Forms.Report
+namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmCustomerReceivables : Form
+    public partial class FrmOrderSelection : FrmMasterBase 
     {
-        public FrmCustomerReceivables()
+        public FrmOrderSelection()
         {
             InitializeComponent();
         }
@@ -40,8 +40,6 @@ namespace LJH.Inventory.UI.Forms.Report
                 }
                 int rowTotal = GridView.Rows.Add();
                 GridView.Rows[rowTotal].Cells["colSheetNo"].Value = "合计";
-                //GridView.Rows[rowTotal].Cells["colReceivable"].Value = items.Sum(item => item.Receivable);
-                this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", items.Count);
                 GridView.Rows[0].Selected = false;
             }
         }
@@ -78,10 +76,10 @@ namespace LJH.Inventory.UI.Forms.Report
                 }
                 else if (GridView.Columns[e.ColumnIndex].Name == "colPaid")
                 {
-                    string sheetNo = GridView.Rows[e.RowIndex].Cells["colSheetNo"].Value.ToString();
-                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
-                    frm.ReceivableID = sheetNo;
-                    frm.ShowDialog();
+                //    string sheetNo = GridView.Rows[e.RowIndex].Cells["colSheetNo"].Value.ToString();
+                //    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                //    frm.ReceivableID = sheetNo;
+                //    frm.ShowDialog();
                 }
             }
         }

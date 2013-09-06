@@ -91,6 +91,14 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public SheetState State { get; set; }
         /// <summary>
+        /// 获取或设置已经应收金额(即已经发货的金额)
+        /// </summary>
+        public decimal Receivable { get; set; }
+        /// <summary>
+        /// 获取或设置已经支付的金额
+        /// </summary>
+        public decimal HasPaid { get; set; }
+        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }

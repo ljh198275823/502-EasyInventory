@@ -32,20 +32,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtCustomer = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.txtCheckNum = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.chkPayReceivables = new System.Windows.Forms.CheckBox();
             this.dtPaidDate = new System.Windows.Forms.DateTimePicker();
             this.rdTransfer = new System.Windows.Forms.RadioButton();
             this.rdCash = new System.Windows.Forms.RadioButton();
             this.rdCheck = new System.Windows.Forms.RadioButton();
             this.txtAmount = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSheetNo = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -55,6 +50,12 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
+            this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -63,16 +64,18 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(530, 258);
+            this.btnClose.Location = new System.Drawing.Point(425, 226);
+            this.btnClose.TabIndex = 10;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(425, 258);
+            this.btnOk.Location = new System.Drawing.Point(320, 226);
+            this.btnOk.TabIndex = 9;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(256, 82);
+            this.label7.Location = new System.Drawing.Point(261, 17);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 32;
@@ -81,7 +84,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(256, 47);
+            this.label2.Location = new System.Drawing.Point(261, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 31;
@@ -96,36 +99,18 @@
             this.label3.TabIndex = 29;
             this.label3.Text = "付款方式";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(37, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "客户";
-            // 
-            // txtCustomer
-            // 
-            this.txtCustomer.FormattingEnabled = true;
-            this.txtCustomer.Location = new System.Drawing.Point(69, 12);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(164, 20);
-            this.txtCustomer.TabIndex = 0;
-            this.txtCustomer.TextChanged += new System.EventHandler(this.txtCustomer_TextChanged);
-            // 
             // txtCheckNum
             // 
             this.txtCheckNum.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCheckNum.Location = new System.Drawing.Point(69, 78);
+            this.txtCheckNum.Location = new System.Drawing.Point(71, 77);
             this.txtCheckNum.Name = "txtCheckNum";
             this.txtCheckNum.Size = new System.Drawing.Size(164, 21);
-            this.txtCheckNum.TabIndex = 6;
+            this.txtCheckNum.TabIndex = 4;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 147);
+            this.label5.Location = new System.Drawing.Point(37, 144);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 36;
@@ -134,38 +119,27 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 82);
+            this.label6.Location = new System.Drawing.Point(25, 81);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 35;
             this.label6.Text = "支票号";
             // 
-            // chkPayReceivables
-            // 
-            this.chkPayReceivables.AutoSize = true;
-            this.chkPayReceivables.Location = new System.Drawing.Point(69, 116);
-            this.chkPayReceivables.Name = "chkPayReceivables";
-            this.chkPayReceivables.Size = new System.Drawing.Size(156, 16);
-            this.chkPayReceivables.TabIndex = 9;
-            this.chkPayReceivables.Text = "用于抵销客户的应收账款";
-            this.chkPayReceivables.UseVisualStyleBackColor = true;
-            this.chkPayReceivables.CheckedChanged += new System.EventHandler(this.chkPayReceivables_CheckedChanged);
-            // 
             // dtPaidDate
             // 
-            this.dtPaidDate.Location = new System.Drawing.Point(312, 78);
+            this.dtPaidDate.Location = new System.Drawing.Point(320, 13);
             this.dtPaidDate.Name = "dtPaidDate";
-            this.dtPaidDate.Size = new System.Drawing.Size(128, 21);
-            this.dtPaidDate.TabIndex = 7;
+            this.dtPaidDate.Size = new System.Drawing.Size(164, 21);
+            this.dtPaidDate.TabIndex = 0;
             // 
             // rdTransfer
             // 
             this.rdTransfer.AutoSize = true;
             this.rdTransfer.Checked = true;
-            this.rdTransfer.Location = new System.Drawing.Point(69, 45);
+            this.rdTransfer.Location = new System.Drawing.Point(71, 45);
             this.rdTransfer.Name = "rdTransfer";
             this.rdTransfer.Size = new System.Drawing.Size(47, 16);
-            this.rdTransfer.TabIndex = 2;
+            this.rdTransfer.TabIndex = 1;
             this.rdTransfer.TabStop = true;
             this.rdTransfer.Text = "转账";
             this.rdTransfer.UseVisualStyleBackColor = true;
@@ -173,10 +147,10 @@
             // rdCash
             // 
             this.rdCash.AutoSize = true;
-            this.rdCash.Location = new System.Drawing.Point(126, 45);
+            this.rdCash.Location = new System.Drawing.Point(124, 44);
             this.rdCash.Name = "rdCash";
             this.rdCash.Size = new System.Drawing.Size(47, 16);
-            this.rdCash.TabIndex = 3;
+            this.rdCash.TabIndex = 2;
             this.rdCash.Text = "现金";
             this.rdCash.UseVisualStyleBackColor = true;
             // 
@@ -186,14 +160,14 @@
             this.rdCheck.Location = new System.Drawing.Point(179, 45);
             this.rdCheck.Name = "rdCheck";
             this.rdCheck.Size = new System.Drawing.Size(47, 16);
-            this.rdCheck.TabIndex = 4;
+            this.rdCheck.TabIndex = 3;
             this.rdCheck.Text = "支票";
             this.rdCheck.UseVisualStyleBackColor = true;
             // 
             // txtAmount
             // 
             this.txtAmount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAmount.Location = new System.Drawing.Point(312, 44);
+            this.txtAmount.Location = new System.Drawing.Point(320, 77);
             this.txtAmount.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -206,35 +180,17 @@
             0});
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.PointCount = 2;
-            this.txtAmount.Size = new System.Drawing.Size(128, 21);
+            this.txtAmount.Size = new System.Drawing.Size(164, 21);
             this.txtAmount.TabIndex = 5;
             this.txtAmount.Text = "0.00";
             // 
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(69, 144);
+            this.txtMemo.Location = new System.Drawing.Point(71, 141);
             this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(371, 21);
+            this.txtMemo.Size = new System.Drawing.Size(414, 21);
             this.txtMemo.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(244, 116);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 12);
-            this.label4.TabIndex = 44;
-            this.label4.Text = "抵销应收项";
-            // 
-            // txtSheetNo
-            // 
-            this.txtSheetNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.txtSheetNo.FormattingEnabled = true;
-            this.txtSheetNo.Location = new System.Drawing.Point(312, 113);
-            this.txtSheetNo.Name = "txtSheetNo";
-            this.txtSheetNo.Size = new System.Drawing.Size(128, 20);
-            this.txtSheetNo.TabIndex = 1;
             // 
             // tabControl1
             // 
@@ -247,20 +203,22 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(610, 236);
+            this.tabControl1.Size = new System.Drawing.Size(505, 204);
             this.tabControl1.TabIndex = 90;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txtSheetNo);
+            this.tabPage1.Controls.Add(this.linkLabel1);
+            this.tabPage1.Controls.Add(this.txtCustomer);
+            this.tabPage1.Controls.Add(this.lnkCustomer);
+            this.tabPage1.Controls.Add(this.txtID);
+            this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.txtMemo);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.txtAmount);
-            this.tabPage1.Controls.Add(this.txtCustomer);
             this.tabPage1.Controls.Add(this.rdCheck);
             this.tabPage1.Controls.Add(this.txtCheckNum);
             this.tabPage1.Controls.Add(this.rdCash);
@@ -268,11 +226,10 @@
             this.tabPage1.Controls.Add(this.rdTransfer);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.dtPaidDate);
-            this.tabPage1.Controls.Add(this.chkPayReceivables);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(602, 210);
+            this.tabPage1.Size = new System.Drawing.Size(497, 178);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -281,7 +238,7 @@
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(602, 347);
+            this.tabPage5.Size = new System.Drawing.Size(602, 210);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -291,7 +248,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(602, 347);
+            this.tabPage2.Size = new System.Drawing.Size(602, 210);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -345,13 +302,68 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
+            // txtID
+            // 
+            this.txtID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtID.Location = new System.Drawing.Point(71, 13);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(164, 21);
+            this.txtID.TabIndex = 91;
+            this.txtID.Text = "自动创建";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 17);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 12);
+            this.label11.TabIndex = 92;
+            this.label11.Text = "支出单号";
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCustomer.Location = new System.Drawing.Point(71, 107);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(164, 21);
+            this.txtCustomer.TabIndex = 6;
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.AutoSize = true;
+            this.lnkCustomer.Location = new System.Drawing.Point(37, 111);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
+            this.lnkCustomer.TabIndex = 108;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
+            // txtSheetNo
+            // 
+            this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSheetNo.Location = new System.Drawing.Point(320, 107);
+            this.txtSheetNo.Name = "txtSheetNo";
+            this.txtSheetNo.Size = new System.Drawing.Size(164, 21);
+            this.txtSheetNo.TabIndex = 7;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(261, 111);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel1.TabIndex = 110;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "销售合同";
+            // 
             // FrmCustomerPaymentDetail
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(617, 293);
+            this.ClientSize = new System.Drawing.Size(512, 261);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmCustomerPaymentDetail";
             this.Text = "客户还款单";
@@ -373,20 +385,15 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
-        private Controls.CustomerCombobox txtCustomer;
         private LJH.GeneralLibrary.WinformControl.DBCTextBox txtCheckNum;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox chkPayReceivables;
         private System.Windows.Forms.DateTimePicker dtPaidDate;
         private System.Windows.Forms.RadioButton rdTransfer;
         private System.Windows.Forms.RadioButton rdCash;
         private System.Windows.Forms.RadioButton rdCheck;
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtAmount;
         private LJH.GeneralLibrary.WinformControl.DBCTextBox txtMemo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox txtSheetNo;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage5;
@@ -396,5 +403,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
+        private GeneralLibrary.WinformControl.DBCTextBox txtID;
+        private System.Windows.Forms.Label label11;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
     }
 }

@@ -22,7 +22,7 @@ namespace LJH.Inventory.UI.Forms
         #region 重写基类方法
         protected override bool CheckInput()
         {
-            if (txtCustomer.SelectedCustomer == null)
+            if (txtCustomer.Tag  == null)
             {
                 MessageBox.Show("客户不能为空");
                 txtCustomer.Focus();
@@ -35,11 +35,6 @@ namespace LJH.Inventory.UI.Forms
                 return false;
             }
             return true;
-        }
-
-        protected override void InitControls()
-        {
-            txtCustomer.Init();
         }
 
         protected override void ItemShowing()
@@ -55,7 +50,6 @@ namespace LJH.Inventory.UI.Forms
                 rdCheck.Checked = cp.PaymentMode == PaymentMode.Check;
                 txtAmount.DecimalValue = cp.Amount;
                 txtCheckNum.Text = cp.CheckNum;
-                chkPayReceivables.Checked = cp.IsPrepay;
                 txtMemo.Text = cp.Memo;
                 ShowButtonState();
             }
@@ -72,8 +66,8 @@ namespace LJH.Inventory.UI.Forms
             {
                 info = UpdatingItem as CustomerPayment;
             }
-            info.Customer = txtCustomer.SelectedCustomer;
-            info.CustomerID = txtCustomer.SelectedCustomer != null ? txtCustomer.SelectedCustomer.ID : txtCustomer.Text;
+            info.Customer = txtCustomer.Tag as Customer;
+            info.CustomerID = info.Customer.ID;
             info.SheetNo = txtSheetNo.Text;
             info.PaidDate = dtPaidDate.Value;
             if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
@@ -81,7 +75,6 @@ namespace LJH.Inventory.UI.Forms
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
             info.Amount = txtAmount.DecimalValue;
             info.CheckNum = txtCheckNum.Text;
-            info.IsPrepay = chkPayReceivables.Checked;
             info.CreateDate = DateTime.Now;
             info.CreateOperator = OperatorInfo.CurrentOperator.OperatorName;
             info.Memo = txtMemo.Text;
@@ -91,7 +84,7 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult AddItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString);
-            return bll.Add(item as CustomerPayment, chkPayReceivables.Checked);
+            return bll.Add(item as CustomerPayment, false);
         }
 
         protected override CommandResult UpdateItem(object item)
@@ -119,7 +112,7 @@ namespace LJH.Inventory.UI.Forms
         {
             get
             {
-                return txtCustomer.SelectedCustomer;
+                return txtCustomer.Tag as Customer;
             }
             set
             {
@@ -127,6 +120,7 @@ namespace LJH.Inventory.UI.Forms
                 if (value != null)
                 {
                     txtCustomer.Text = value.Name;
+                    txtCustomer.Tag = value;
                 }
                 else
                 {
@@ -136,49 +130,8 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
-        private void txtCustomer_TextChanged(object sender, EventArgs e)
-        {
-            if (txtCustomer.SelectedCustomer != null)
-            {
-                Customer c = txtCustomer.SelectedCustomer;
-                txtSheetNo.Items.Clear();
-                txtSheetNo.Text = string.Empty;
-                DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
-                con.CustomerID = c.ID;
-                con.States = new List<int>();
-                con.States.Add((int)SheetState.Add);
-                con.States.Add((int)SheetState.Approved);
-                con.States.Add((int)SheetState.Shipped);
-                con.IsSettled = false;
-                List<CustomerReceivable> items = (new CustomerBLL(AppSettings.CurrentSetting.ConnectString)).GetUnSettleReceivables(c.ID);
-                if (items != null && items.Count > 0)
-                {
-                    txtSheetNo.Items.Add(string.Empty);
-                    foreach (CustomerReceivable cr in items)
-                    {
-                        txtSheetNo.Items.Add(cr.ID);
-                    }
-                }
-            }
-            else
-            {
-                txtSheetNo.Items.Clear();
-                txtSheetNo.Text = string.Empty;
-            }
-        }
-
         private void FrmCustomerPaymentDetail_Load(object sender, EventArgs e)
         {
-            txtSheetNo.Enabled = chkPayReceivables.Checked;
-        }
-
-        private void chkPayReceivables_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chkPayReceivables.Checked)
-            {
-                txtSheetNo.SelectedIndex = -1;
-            }
-            txtSheetNo.Enabled = chkPayReceivables.Checked;
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
@@ -202,6 +155,18 @@ namespace LJH.Inventory.UI.Forms
                         MessageBox.Show(ret.Message);
                     }
                 }
+            }
+        }
+
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmCustomerMaster frm = new FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Customer item = frm.SelectedItem as Customer;
+                txtCustomer.Text = item.Name;
+                txtCustomer.Tag = item;
             }
         }
     }

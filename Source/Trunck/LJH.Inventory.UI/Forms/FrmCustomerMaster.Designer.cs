@@ -130,6 +130,7 @@
             this.mnu_Payment.Size = new System.Drawing.Size(59, 46);
             this.mnu_Payment.Text = "支付(&P)";
             this.mnu_Payment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.mnu_Payment.Click += new System.EventHandler(this.mnu_Payment_Click_1);
             // 
             // btn_SelectColumns
             // 
