@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示公司的资金支出记录
     /// </summary>
-    public  class ExpenditureRecord
+    public class ExpenditureRecord
     {
         #region 构造函数
         public ExpenditureRecord()
@@ -26,33 +26,37 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public DateTime ExpenditureDate { get; set; }
         /// <summary>
-        /// 获取或设置支付方式
+        /// 获取或设置支出类别
         /// </summary>
-        public PaymentMode PaymentMode { get; set; }
+        public string Category { get; set; }
+        /// <summary>
+        /// 获取或设置支出的销售订单号(用于统计订单的管理费用)
+        /// </summary>
+        public string OrderID { get; set; }
         /// <summary>
         /// 获取或设置支付金额
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置支出类别
+        /// 获取或设置支付方式
         /// </summary>
-        public string Category { get; set; }
+        public PaymentMode PaymentMode { get; set; }
         /// <summary>
-        /// 获取或设置录入日期
+        /// 获取或设置请款人
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public string Request { get; set; }
         /// <summary>
-        /// 获取或设置录入操作员
+        /// 获取或设置受款人或单位
         /// </summary>
-        public string CreateOperator { get; set; }
+        public string Payee { get; set; }
         /// <summary>
-        /// 获取或设置取消日期
+        /// 获取或设置支票号
         /// </summary>
-        public DateTime? CancelDate { get; set; }
+        public string CheckNum { get; set; }
         /// <summary>
-        /// 获取或设置取消操作员
+        /// 获取或设置当前状态
         /// </summary>
-        public string CancelOperator { get; set; }
+        public SheetState State { get; set; }
         /// <summary>
         /// 获取或设置支付备注
         /// </summary>

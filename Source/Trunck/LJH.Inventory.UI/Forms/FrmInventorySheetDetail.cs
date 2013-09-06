@@ -122,11 +122,19 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void InitControls()
         {
+            base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             ShowButtonState();
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             ItemsGrid.Columns["colPrice"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
+            if (IsForView)
+            {
+                toolStrip1.Enabled = false;
+                ItemsGrid.ReadOnly = true;
+                ItemsGrid.ContextMenu = null;
+                ItemsGrid.ContextMenuStrip = null;
+            }
         }
 
         protected override void ItemShowing()

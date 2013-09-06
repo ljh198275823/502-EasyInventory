@@ -21,6 +21,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             this.ProductCode = oi.ProductCode;
             this.Unit = oi.Unit;
             this.Price = oi.Price;
+            this.FinalCustomerPrice = oi.FinalCustomerPrice;
             this.Count = oi.Count;
             this.DemandDate = oi.DemandDate;
             this.IsComplete = oi.IsComplete;
@@ -53,6 +54,10 @@ namespace LJH.Inventory.DAL.LinqProvider
         /// 获取或设置商品单价
         /// </summary>
         public decimal Price { get; set; }
+        /// <summary>
+        /// 获取或设置最终客户价格
+        /// </summary>
+        public decimal FinalCustomerPrice { get; set; }
         /// <summary>
         /// 获取或设置订货数量
         /// </summary>

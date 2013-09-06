@@ -203,6 +203,7 @@
       <Column Name="ProductCode" Member="ProductCode"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+      <Column Name="FinalCustomerPrice" Member="FinalCustomerPrice"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="IsComplete" Member="IsComplete" DbType="bit not null" UpdateCheck="Never"/>
@@ -223,6 +224,7 @@
       <Column Name="ProductCode" Member="ProductCode"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+      <Column Name="FinalCustomerPrice" Member="FinalCustomerPrice"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="IsComplete" Member="IsComplete" DbType="bit not null" UpdateCheck="Never"/>
@@ -362,13 +364,14 @@
     <Type Name="LJH.Inventory.BusinessModel.ExpenditureRecord">
       <Column Name="ID" Member="ID"   DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
       <Column Name="ExpenditureDate" Member="ExpenditureDate"  DbType="datetime not null" UpdateCheck="Never" />
-      <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="Amount" Member="Amount" DbType="decimal(10,2) not null" UpdateCheck="Never"/>
       <Column Name="Category" Member="Category"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="CreateOperator" Member="CreateOperator" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="CancelDate" Member="CancelDate" DbType="datetime" UpdateCheck="Never"/>
-      <Column Name="CancelOperator" Member="CancelOperator" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount" DbType="decimal(10,2) not null" UpdateCheck="Never"/>
+      <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="Request" Member="Request"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
+      <Column Name="Payee" Member="Payee"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
+      <Column Name="CheckNum" Member="CheckNum"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
+      <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

@@ -19,6 +19,7 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 重写基类方法
+
         protected override FrmDetailBase GetDetailForm()
         {
             return new FrmExpenditureTypeDetail();

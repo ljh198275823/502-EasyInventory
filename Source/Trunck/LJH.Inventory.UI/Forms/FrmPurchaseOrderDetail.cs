@@ -132,11 +132,19 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void InitControls()
         {
+            base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.dtDeliveryDate.Value = DateTime.Today.AddDays(1);
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             ItemsGrid.Columns["colPrice"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
+            if (IsForView)
+            {
+                toolStrip1.Enabled = false;
+                ItemsGrid.ReadOnly = true;
+                ItemsGrid.ContextMenu = null;
+                ItemsGrid.ContextMenuStrip = null;
+            }
         }
 
         protected override void ItemShowing()
@@ -417,6 +425,25 @@ namespace LJH.Inventory.UI.Forms
             }
         }
         #endregion
+
+        private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (ItemsGrid.Columns[e.ColumnIndex].Name == "colOrderID")
+                {
+                    string orderID = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    Order item = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(orderID).QueryObject;
+                    if (item != null)
+                    {
+                        FrmOrderDetail frm = new FrmOrderDetail();
+                        frm.IsForView = true;
+                        frm.UpdatingItem = item;
+                        frm.ShowDialog();
+                    }
+                }
+            }
+        }
     }
 }
 

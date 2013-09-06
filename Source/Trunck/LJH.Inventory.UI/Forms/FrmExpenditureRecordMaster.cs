@@ -20,12 +20,46 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 私有变量
+        private List<Button> _Buttons = new List<Button>();
+        #endregion
+
         #region 重写基类方法和处理事件
         protected override void Init()
         {
             base.Init();
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditExpenditureRecord);
+            List<ExpenditureType> items = (new ExpenditureTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                Button b = new Button();
+                b.Name = "全部";
+                b.BackColor = SystemColors.ControlDark;
+                b.Size = new Size(200, 42);
+                b.Dock = DockStyle.Top;
+                b.FlatStyle = FlatStyle.Popup;
+                _Buttons.Add(b);
+
+                foreach (ExpenditureType pc in items)
+                {
+                    Button button = new Button();
+                    button.Name = pc.Name;
+                    button.Dock = DockStyle.Top;
+                    button.Size = new Size(200, 42);
+                    button.FlatStyle = FlatStyle.Popup;
+                    _Buttons.Add(button);
+                }
+                for (int i = _Buttons.Count - 1; i >= 0; i--)
+                {
+                    pnlLeft.Controls.Add(_Buttons[i]);
+                }
+            }
+            else
+            {
+                this.pnlLeft.Visible = false;
+                this.splitter1.Visible = false;
+            }
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -36,13 +70,29 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             List<ExpenditureRecord> items = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(null).QueryObjects;
-            if (items != null && items.Count > 0)
+            List<object> records = null;
+            if (_Buttons.Count > 1)
             {
-                return (from cp in items
-                        orderby cp.ExpenditureDate descending
-                        select (object)cp).ToList();
+                for (int i = 1; i < _Buttons.Count; i++)
+                {
+                    records = (from p in items
+                               where p.Category == _Buttons[i].Name
+                               orderby p.ID ascending
+                               select (object)p).ToList();
+                    _Buttons[i].Tag = records;
+                    _Buttons[i].Text = string.Format("{0} ({1})", _Buttons[i].Name, records == null ? 0 : records.Count);
+                }
             }
-            return null;
+
+            records = (from p in items
+                       orderby p.ID ascending
+                       select (object)p).ToList();
+            if (_Buttons.Count > 0)
+            {
+                _Buttons[0].Tag = records;
+                _Buttons[0].Text = string.Format("{0} ({1})", _Buttons[0].Name, records == null ? 0 : records.Count);
+            }
+            return records;
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -53,10 +103,12 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount;
             row.Cells["colCategory"].Value = info.Category;
+            row.Cells["colCheckNum"].Value = info.CheckNum;
+            row.Cells["colRequest"].Value = info.Request;
+            row.Cells["colPayee"].Value = info.Payee;
+            row.Cells["colOrderID"].Value = info.OrderID;
             row.Cells["colMemo"].Value = info.Memo;
-            row.Cells["colCancelDate"].Value = info.CancelDate;
-            row.Cells["colCancelOperator"].Value = info.CancelOperator;
-            if (info.CancelDate != null)
+            if (info.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

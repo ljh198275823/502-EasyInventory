@@ -44,6 +44,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colProductCode"].Value = item.ProductCode;
             row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
             row.Cells["colPrice"].Value = item.Price.Trim();
+            row.Cells["colFinalCustomerPrice"].Value = item.FinalCustomerPrice.Trim();
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colTotal"].Value = item.Amount.Trim();
             row.Cells["colOnPurchase"].Value = item.OnWay.Trim();
@@ -132,11 +133,19 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void InitControls()
         {
+            base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.dtDeliveryDate.Value = DateTime.Today.AddDays(1);
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             ItemsGrid.Columns["colPrice"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
+            if (IsForView)
+            {
+                toolStrip1.Enabled = false;
+                ItemsGrid.ReadOnly = true;
+                ItemsGrid.ContextMenu = null;
+                ItemsGrid.ContextMenuStrip = null;
+            }
         }
 
         protected override void ItemShowing()
@@ -331,6 +340,16 @@ namespace LJH.Inventory.UI.Forms
                     {
                         if (price < 0) price = 0;
                         item.Price = price;
+                        row.Cells[e.ColumnIndex].Value = price;
+                    }
+                }
+                if (col.Name == "colFinalCustomerPrice")
+                {
+                    decimal price;
+                    if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out price))
+                    {
+                        if (price < 0) price = 0;
+                        item.FinalCustomerPrice = price;
                         row.Cells[e.ColumnIndex].Value = price;
                     }
                 }

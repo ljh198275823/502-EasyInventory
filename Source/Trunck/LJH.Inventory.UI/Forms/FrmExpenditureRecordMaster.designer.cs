@@ -42,15 +42,19 @@
             this.btnSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClear = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.pnlLeft = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExpenditureDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPayee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCancelDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCancelOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +76,7 @@
             this.toolStripSeparator2});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(939, 50);
+            this.menu.Size = new System.Drawing.Size(1229, 50);
             this.menu.TabIndex = 53;
             // 
             // btn_Add
@@ -154,6 +158,23 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
             // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.splitter1.Location = new System.Drawing.Point(194, 50);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(8, 298);
+            this.splitter1.TabIndex = 110;
+            this.splitter1.TabStop = false;
+            // 
+            // pnlLeft
+            // 
+            this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlLeft.Location = new System.Drawing.Point(0, 50);
+            this.pnlLeft.Name = "pnlLeft";
+            this.pnlLeft.Size = new System.Drawing.Size(194, 298);
+            this.pnlLeft.TabIndex = 109;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -163,20 +184,22 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
             this.colExpenditureDate,
-            this.colPaymentMode,
-            this.colAmount,
             this.colCategory,
-            this.colMemo,
-            this.colCancelDate,
-            this.colCancelOperator});
+            this.colAmount,
+            this.colPaymentMode,
+            this.colCheckNum,
+            this.colRequest,
+            this.colPayee,
+            this.colOrderID,
+            this.colMemo});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 50);
+            this.dataGridView1.Location = new System.Drawing.Point(202, 50);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(939, 303);
-            this.dataGridView1.TabIndex = 54;
+            this.dataGridView1.Size = new System.Drawing.Size(1027, 298);
+            this.dataGridView1.TabIndex = 111;
             // 
             // colID
             // 
@@ -194,12 +217,11 @@
             this.colExpenditureDate.ReadOnly = true;
             this.colExpenditureDate.Width = 120;
             // 
-            // colPaymentMode
+            // colCategory
             // 
-            this.colPaymentMode.HeaderText = "支出方式";
-            this.colPaymentMode.Name = "colPaymentMode";
-            this.colPaymentMode.ReadOnly = true;
-            this.colPaymentMode.Width = 120;
+            this.colCategory.HeaderText = "费用类别";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
             // 
             // colAmount
             // 
@@ -210,11 +232,36 @@
             this.colAmount.ReadOnly = true;
             this.colAmount.Width = 120;
             // 
-            // colCategory
+            // colPaymentMode
             // 
-            this.colCategory.HeaderText = "用途";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
+            this.colPaymentMode.HeaderText = "支出方式";
+            this.colPaymentMode.Name = "colPaymentMode";
+            this.colPaymentMode.ReadOnly = true;
+            this.colPaymentMode.Width = 120;
+            // 
+            // colCheckNum
+            // 
+            this.colCheckNum.HeaderText = "票号";
+            this.colCheckNum.Name = "colCheckNum";
+            this.colCheckNum.ReadOnly = true;
+            // 
+            // colRequest
+            // 
+            this.colRequest.HeaderText = "申请人";
+            this.colRequest.Name = "colRequest";
+            this.colRequest.ReadOnly = true;
+            // 
+            // colPayee
+            // 
+            this.colPayee.HeaderText = "受款单位";
+            this.colPayee.Name = "colPayee";
+            this.colPayee.ReadOnly = true;
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "销售订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
             // 
             // colMemo
             // 
@@ -223,29 +270,21 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
-            // colCancelDate
-            // 
-            this.colCancelDate.HeaderText = "取消日期";
-            this.colCancelDate.Name = "colCancelDate";
-            this.colCancelDate.ReadOnly = true;
-            // 
-            // colCancelOperator
-            // 
-            this.colCancelOperator.HeaderText = "取消人员";
-            this.colCancelOperator.Name = "colCancelOperator";
-            this.colCancelOperator.ReadOnly = true;
-            // 
             // FrmExpenditureRecordMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(939, 375);
+            this.ClientSize = new System.Drawing.Size(1229, 370);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
             this.Name = "FrmExpenditureRecordMaster";
-            this.Text = "资金支出管理";
+            this.Text = "公司管理费用";
             this.Controls.SetChildIndex(this.menu, 0);
+            this.Controls.SetChildIndex(this.pnlLeft, 0);
+            this.Controls.SetChildIndex(this.splitter1, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
@@ -268,14 +307,18 @@
         private System.Windows.Forms.ToolStripMenuItem btnSearch;
         private System.Windows.Forms.ToolStripMenuItem btnClear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExpenditureDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPayee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCancelDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCancelOperator;
     }
 }

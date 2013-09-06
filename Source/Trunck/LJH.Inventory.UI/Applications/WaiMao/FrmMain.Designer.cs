@@ -46,6 +46,7 @@
             this.商务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Inventory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_InventorySheet = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_DeliverySheet = new System.Windows.Forms.ToolStripMenuItem();
             this.报关单资料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.出口核销单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,7 +102,6 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pMain = new System.Windows.Forms.Panel();
             this.ucFormViewMain = new LJH.GeneralLibrary.WinformControl.UCFormView();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -254,6 +254,11 @@
             this.mnu_InventorySheet.Text = "收货单资料";
             this.mnu_InventorySheet.Click += new System.EventHandler(this.mnu_InventorySheet_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
             // mnu_DeliverySheet
             // 
             this.mnu_DeliverySheet.Name = "mnu_DeliverySheet";
@@ -288,33 +293,33 @@
             // mnu_CustomerPayment
             // 
             this.mnu_CustomerPayment.Name = "mnu_CustomerPayment";
-            this.mnu_CustomerPayment.Size = new System.Drawing.Size(172, 22);
+            this.mnu_CustomerPayment.Size = new System.Drawing.Size(160, 22);
             this.mnu_CustomerPayment.Text = "客户还款管理";
             this.mnu_CustomerPayment.Click += new System.EventHandler(this.mnu_CustomerPayment_Click);
             // 
             // mnu_DaiFu
             // 
             this.mnu_DaiFu.Name = "mnu_DaiFu";
-            this.mnu_DaiFu.Size = new System.Drawing.Size(172, 22);
+            this.mnu_DaiFu.Size = new System.Drawing.Size(160, 22);
             this.mnu_DaiFu.Text = "其它应收款管理";
             this.mnu_DaiFu.Visible = false;
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
             // 
             // mnu_Expanditure
             // 
             this.mnu_Expanditure.Name = "mnu_Expanditure";
-            this.mnu_Expanditure.Size = new System.Drawing.Size(172, 22);
-            this.mnu_Expanditure.Text = "公司管理费用支出";
+            this.mnu_Expanditure.Size = new System.Drawing.Size(160, 22);
+            this.mnu_Expanditure.Text = "公司管理费用";
             this.mnu_Expanditure.Click += new System.EventHandler(this.mnu_Expanditure_Click);
             // 
             // mnu_ExpanditureType
             // 
             this.mnu_ExpanditureType.Name = "mnu_ExpanditureType";
-            this.mnu_ExpanditureType.Size = new System.Drawing.Size(172, 22);
+            this.mnu_ExpanditureType.Size = new System.Drawing.Size(160, 22);
             this.mnu_ExpanditureType.Text = "管理费用类别";
             this.mnu_ExpanditureType.Click += new System.EventHandler(this.mnu_ExpanditureType_Click);
             // 
@@ -676,11 +681,6 @@
             this.ucFormViewMain.Name = "ucFormViewMain";
             this.ucFormViewMain.Size = new System.Drawing.Size(864, 283);
             this.ucFormViewMain.TabIndex = 11;
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // FrmMain
             // 

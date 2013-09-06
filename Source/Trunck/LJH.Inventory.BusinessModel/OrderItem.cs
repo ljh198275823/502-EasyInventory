@@ -43,6 +43,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Price { get; set; }
         /// <summary>
+        /// 获取或设置最终客户价格
+        /// </summary>
+        public decimal FinalCustomerPrice { get; set; }
+        /// <summary>
         /// 获取或设置订货数量
         /// </summary>
         public decimal Count { get; set; }

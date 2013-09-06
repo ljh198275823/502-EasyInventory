@@ -50,8 +50,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected virtual void InitControls()
         {
-            
+            if (IsForView)
+            {
+                btnOk.Enabled = false;
+            }
         }
+
         protected virtual void ItemShowing()
         {
             
@@ -96,7 +100,6 @@ namespace LJH.Inventory.UI.Forms
             {
                 ItemShowing();
             }
-            btnOk.Enabled = !IsForView;
         }
 
         private void btnOk_Click(object sender, EventArgs e)

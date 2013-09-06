@@ -47,14 +47,18 @@ namespace LJH.Inventory.UI.Forms
             ExpenditureRecord cp = UpdatingItem as ExpenditureRecord;
             if (cp != null)
             {
+                txtSheetNo.Text = cp.ID;
                 dtPaidDate.Value = cp.ExpenditureDate;
                 rdTransfer.Checked = (cp.PaymentMode == PaymentMode.Transfer);
                 rdCash.Checked = cp.PaymentMode == PaymentMode.Cash;
                 rdCheck.Checked = cp.PaymentMode == PaymentMode.Check;
                 txtAmount.DecimalValue = cp.Amount;
                 txtCategory.Text = cp.Category;
+                txtCheckNum.Text = cp.CheckNum;
+                txtRequest.Text = cp.Request;
+                txtPayee.Text = cp.Payee;
+                txtOrderID.Text = cp.OrderID;
                 txtMemo.Text = cp.Memo;
-                ShowButtonState();
             }
         }
 
@@ -64,6 +68,7 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new ExpenditureRecord();
+                if (txtSheetNo.Text == _AutoCreate) txtSheetNo.Text = string.Empty;
             }
             else
             {
@@ -75,16 +80,18 @@ namespace LJH.Inventory.UI.Forms
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
             info.Amount = txtAmount.DecimalValue;
             info.Category = txtCategory.Text;
+            info.CheckNum = txtCheckNum.Text;
+            info.Request = txtRequest.Text;
+            info.Payee = txtPayee.Text;
+            info.OrderID = txtOrderID.Text;
             info.Memo = txtMemo.Text;
-            info.CreateDate = DateTime.Now;
-            info.CreateOperator = OperatorInfo.CurrentOperator.OperatorName;
             return info;
         }
 
         protected override CommandResult AddItem(object item)
         {
             ExpenditureRecordBLL bll = new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnectString);
-            return bll.Add(item as ExpenditureRecord);
+            return bll.Add(item as ExpenditureRecord, OperatorInfo.CurrentOperator.OperatorName);
         }
 
         protected override CommandResult UpdateItem(object item)
@@ -95,12 +102,6 @@ namespace LJH.Inventory.UI.Forms
         protected override void ShowButtonState()
         {
             btnOk.Enabled = IsAdding;
-            //btnNullify.Enabled = false;
-            //if (UpdatingItem != null)
-            //{
-            //    ExpenditureRecord cp = UpdatingItem as ExpenditureRecord;
-            //    btnNullify.Enabled = cp.CancelDate == null;
-            //}
         }
         #endregion
 
@@ -125,6 +126,28 @@ namespace LJH.Inventory.UI.Forms
                         MessageBox.Show(ret.Message);
                     }
                 }
+            }
+        }
+
+        private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmExpenditureTypeMaster frm = new FrmExpenditureTypeMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                ExpenditureType item = frm.SelectedItem as ExpenditureType;
+                txtCategory.Text = item.Name;
+            }
+        }
+
+        private void lnkRequest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmOperatorMaster frm = new FrmOperatorMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                OperatorInfo item = frm.SelectedItem as OperatorInfo;
+                txtRequest.Text = item.OperatorName;
             }
         }
     }
