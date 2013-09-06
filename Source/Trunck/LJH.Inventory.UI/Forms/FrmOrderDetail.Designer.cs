@@ -84,7 +84,6 @@
             this.colProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinalCustomerPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOnPurchase = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -461,7 +460,6 @@
             this.colProductCode,
             this.colSpecification,
             this.colPrice,
-            this.colFinalCustomerPrice,
             this.colCount,
             this.colTotal,
             this.colOnPurchase,
@@ -637,13 +635,6 @@
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colPrice.Width = 60;
             // 
-            // colFinalCustomerPrice
-            // 
-            this.colFinalCustomerPrice.HeaderText = "最终客户单价";
-            this.colFinalCustomerPrice.Name = "colFinalCustomerPrice";
-            this.colFinalCustomerPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colFinalCustomerPrice.Width = 60;
-            // 
             // colCount
             // 
             dataGridViewCellStyle2.NullValue = "0";
@@ -796,7 +787,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinalCustomerPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewLinkColumn colOnPurchase;

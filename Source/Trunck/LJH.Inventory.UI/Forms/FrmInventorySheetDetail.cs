@@ -70,10 +70,10 @@ namespace LJH.Inventory.UI.Forms
             return items;
         }
 
-        private void ShowOperations()
+        private void ShowOperations(string sheetNo)
         {
             dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations((UpdatingItem as InventorySheet).ID).QueryObjects;
+            List<DocumentOperation> items = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
             items = (from item in items
                      orderby item.OperatDate ascending
                      select item).ToList();
@@ -157,7 +157,7 @@ namespace LJH.Inventory.UI.Forms
                     this.ItemsGrid.ContextMenuStrip = null;
                     this.ItemsGrid.ContextMenu = null;
                 }
-                ShowOperations();
+                ShowOperations(sheet.ID);
             }
         }
 
@@ -193,12 +193,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).Add(item as InventorySheet,OperatorInfo .CurrentOperator .OperatorID );
+            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).Add(item as InventorySheet,OperatorInfo .CurrentOperator .OperatorName );
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).Update(item as InventorySheet,OperatorInfo .CurrentOperator .OperatorID );
+            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).Update(item as InventorySheet,OperatorInfo .CurrentOperator .OperatorName);
         }
 
         protected override void ShowButtonState()

@@ -16,12 +16,23 @@ namespace LJH.Inventory.UI.Forms
         public FrmExpenditureRecordDetail()
         {
             InitializeComponent();
-            Init();
         }
 
         #region 私有方法
-        private void Init()
+        private void ShowOperations(string sheetNo)
         {
+            dataGridView1.Rows.Clear();
+            List<DocumentOperation> items = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
+            items = (from item in items
+                     orderby item.OperatDate ascending
+                     select item).ToList();
+            foreach (DocumentOperation item in items)
+            {
+                int row = dataGridView1.Rows.Add();
+                dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
+                dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
+                dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
+            }
         }
         #endregion
 
@@ -59,6 +70,7 @@ namespace LJH.Inventory.UI.Forms
                 txtPayee.Text = cp.Payee;
                 txtOrderID.Text = cp.OrderID;
                 txtMemo.Text = cp.Memo;
+                ShowOperations(cp.ID);
             }
         }
 

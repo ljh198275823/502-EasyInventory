@@ -403,7 +403,7 @@
             this.ClientSize = new System.Drawing.Size(501, 286);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmExpenditureRecordDetail";
-            this.Text = "公司管理费用支出明细";
+            this.Text = "公司管理费用明细";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.tabControl1, 0);

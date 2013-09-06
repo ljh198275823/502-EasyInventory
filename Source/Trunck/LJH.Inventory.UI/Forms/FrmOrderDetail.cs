@@ -44,7 +44,6 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colProductCode"].Value = item.ProductCode;
             row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
             row.Cells["colPrice"].Value = item.Price.Trim();
-            row.Cells["colFinalCustomerPrice"].Value = item.FinalCustomerPrice.Trim();
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colTotal"].Value = item.Amount.Trim();
             row.Cells["colOnPurchase"].Value = item.OnWay.Trim();
@@ -75,10 +74,10 @@ namespace LJH.Inventory.UI.Forms
             return sum.Trim();
         }
 
-        private void ShowOperations()
+        private void ShowOperations(string sheetNo)
         {
             dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations((UpdatingItem as Order).ID).QueryObjects;
+            List<DocumentOperation> items = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
             items = (from item in items
                      orderby item.OperatDate ascending
                      select item).ToList();
@@ -169,7 +168,7 @@ namespace LJH.Inventory.UI.Forms
                 this.txtSalesPerson.Text = order.SalesPerson;
                 this.dtDeliveryDate.Value = order.DemandDate;
                 ShowDeliveryItemsOnGrid(order.Items);
-                ShowOperations();
+                ShowOperations(order.ID);
                 ShowButtonState();
             }
         }
@@ -340,16 +339,6 @@ namespace LJH.Inventory.UI.Forms
                     {
                         if (price < 0) price = 0;
                         item.Price = price;
-                        row.Cells[e.ColumnIndex].Value = price;
-                    }
-                }
-                if (col.Name == "colFinalCustomerPrice")
-                {
-                    decimal price;
-                    if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out price))
-                    {
-                        if (price < 0) price = 0;
-                        item.FinalCustomerPrice = price;
                         row.Cells[e.ColumnIndex].Value = price;
                     }
                 }

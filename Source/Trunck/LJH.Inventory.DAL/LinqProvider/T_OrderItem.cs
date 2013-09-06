@@ -21,7 +21,6 @@ namespace LJH.Inventory.DAL.LinqProvider
             this.ProductCode = oi.ProductCode;
             this.Unit = oi.Unit;
             this.Price = oi.Price;
-            this.FinalCustomerPrice = oi.FinalCustomerPrice;
             this.Count = oi.Count;
             this.DemandDate = oi.DemandDate;
             this.IsComplete = oi.IsComplete;

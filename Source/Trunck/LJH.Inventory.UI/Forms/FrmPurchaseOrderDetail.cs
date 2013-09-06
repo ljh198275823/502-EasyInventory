@@ -74,10 +74,11 @@ namespace LJH.Inventory.UI.Forms
             return sum.Trim();
         }
 
-        private void ShowOperations()
+
+        private void ShowOperations(string sheetNo)
         {
             dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations((UpdatingItem as PurchaseOrder).ID).QueryObjects;
+            List<DocumentOperation> items = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
             items = (from item in items
                      orderby item.OperatDate ascending
                      select item).ToList();
@@ -149,19 +150,19 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            PurchaseOrder PurchaseSheet = UpdatingItem as PurchaseOrder;
-            if (PurchaseSheet != null)
+            PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
+            if (sheet != null)
             {
-                this.txtSheetNo.Text = PurchaseSheet.ID;
+                this.txtSheetNo.Text = sheet.ID;
                 this.txtSheetNo.Enabled = false;
-                this.txtSupplier.Text = PurchaseSheet.Supplier.Name;
-                this.txtSupplier.Tag = PurchaseSheet.Supplier;
-                this.dtOrderDate.Value = PurchaseSheet.OrderDate;
-                this.txtCurrencyType.Text = PurchaseSheet.CurrencyType;
-                this.txtBuyer.Text = PurchaseSheet.Buyer;
-                this.dtDeliveryDate.Value = PurchaseSheet.DemandDate;
-                ShowDeliveryItemsOnGrid(PurchaseSheet.Items);
-                ShowOperations();
+                this.txtSupplier.Text = sheet.Supplier.Name;
+                this.txtSupplier.Tag = sheet.Supplier;
+                this.dtOrderDate.Value = sheet.OrderDate;
+                this.txtCurrencyType.Text = sheet.CurrencyType;
+                this.txtBuyer.Text = sheet.Buyer;
+                this.dtDeliveryDate.Value = sheet.DemandDate;
+                ShowDeliveryItemsOnGrid(sheet.Items);
+                ShowOperations(sheet.ID);
                 ShowButtonState();
             }
         }

@@ -203,7 +203,6 @@
       <Column Name="ProductCode" Member="ProductCode"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="FinalCustomerPrice" Member="FinalCustomerPrice"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="IsComplete" Member="IsComplete" DbType="bit not null" UpdateCheck="Never"/>
@@ -224,7 +223,6 @@
       <Column Name="ProductCode" Member="ProductCode"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="FinalCustomerPrice" Member="FinalCustomerPrice"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="IsComplete" Member="IsComplete" DbType="bit not null" UpdateCheck="Never"/>

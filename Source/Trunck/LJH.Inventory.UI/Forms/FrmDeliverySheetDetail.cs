@@ -88,13 +88,29 @@ namespace LJH.Inventory.UI.Forms
             this.txtWareHouse.Tag = sheet.WareHouse;
             this.txtMemo.Text = sheet.Memo;
             ShowDeliveryItemsOnGrid(sheet.Items);
-
+            ShowOperations(sheet.ID);
             ShowButtonState();
             if (sheet.State != SheetState.Add)
             {
                 this.ItemsGrid.ReadOnly = true;
                 this.ItemsGrid.ContextMenuStrip = null;
                 this.ItemsGrid.ContextMenu = null;
+            }
+        }
+
+        private void ShowOperations(string sheetNo)
+        {
+            dataGridView1.Rows.Clear();
+            List<DocumentOperation> items = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
+            items = (from item in items
+                     orderby item.OperatDate ascending
+                     select item).ToList();
+            foreach (DocumentOperation item in items)
+            {
+                int row = dataGridView1.Rows.Add();
+                dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
+                dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
+                dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
             }
         }
         #endregion

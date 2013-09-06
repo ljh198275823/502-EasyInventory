@@ -33,6 +33,16 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IExpenditureRecordProvider>(_RepoUri).GetItems(con);
         }
 
+        public QueryResultList<DocumentOperation> GetHisOperations(string sheetNo)
+        {
+            DocumentSearchCondition con = new DocumentSearchCondition()
+            {
+                DocumentID = sheetNo,
+                DocumentType = _DocumentType
+            };
+            return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
+        }
+
         public CommandResult Add(ExpenditureRecord info, string opt)
         {
             if (string.IsNullOrEmpty(info.ID))
