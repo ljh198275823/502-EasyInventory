@@ -170,22 +170,7 @@ namespace LJH.Inventory.UI.Forms
         {
             if (e.RowIndex >= 0)
             {
-                if (dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
-                {
-                    Customer c = dataGridView1.Rows[e.RowIndex].Tag as Customer;
-                    FrmOrderSelection frm = new FrmOrderSelection();
-                    frm.CustomerUpdated += delegate(object obj, EventArgs args)
-                    {
-                        Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(c.ID).QueryObject;
-                        if (c1 != null)
-                        {
-                            ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], c1);
-                        }
-                    };
-                    frm.Customer = c;
-                    frm.ShowDialog();
-                }
-                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
                     Customer c = dataGridView1.Rows[e.RowIndex].Tag as Customer;
                     FrmCustomerPaymentRemains frm = new FrmCustomerPaymentRemains();

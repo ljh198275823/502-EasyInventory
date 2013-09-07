@@ -120,6 +120,16 @@ namespace LJH.Inventory.BLL
             //return unitwork.Commit();
             return null;
         }
+
+        public QueryResultList<DocumentOperation> GetHisOperations(string sheetNo)
+        {
+            DocumentSearchCondition con = new DocumentSearchCondition()
+            {
+                DocumentID = sheetNo,
+                DocumentType = _DocumentType
+            };
+            return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
+        }
         /// <summary>
         /// 增加客户付款信息
         /// </summary>

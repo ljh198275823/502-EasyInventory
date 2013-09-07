@@ -57,7 +57,7 @@
     <Compile Include="DatetimeSyncService.cs" />
     <Compile Include="DeliveryRecordBLL.cs" />
     <Compile Include="DeliverySheetBLL.cs" />
-    <Compile Include="ExpenditureBLL.cs" />
+    <Compile Include="ExpenditureTypeBLL.cs" />
     <Compile Include="ExpenditureRecordBLL.cs" />
     <Compile Include="PortBLL.cs" />
     <Compile Include="PriceTermBLL.cs" />

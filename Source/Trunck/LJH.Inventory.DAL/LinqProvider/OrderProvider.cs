@@ -62,6 +62,15 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
             }
             List<Order> orders = ret.ToList();
+            if (search is OrderSearchCondition && orders != null && orders.Count > 0)
+            {
+                OrderSearchCondition con = search as OrderSearchCondition;
+                if (con.HasNotPaid != null)
+                {
+                    if (con.HasNotPaid.Value) orders = orders.Where(item => (item.CalAmount() - item.HasPaid) > 0).ToList();
+                    else orders = orders.Where(item => (item.CalAmount() - item.HasPaid) <= 0).ToList();
+                }
+            }
             return orders;
         }
 

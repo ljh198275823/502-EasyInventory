@@ -16,5 +16,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public bool? WithTax { get; set; }
 
         public List<SheetState> States { get; set; }
+
+        public bool? HasNotPaid { get; set; }
     }
 }
