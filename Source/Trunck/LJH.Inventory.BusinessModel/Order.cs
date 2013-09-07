@@ -195,6 +195,14 @@ namespace LJH.Inventory.BusinessModel
                 return State != SheetState.Canceled && State != SheetState.Settled;
             }
         }
+
+        public decimal NotPaid
+        {
+            get
+            {
+                return CalAmount() - HasPaid;
+            }
+        }
         #endregion
 
         #region 公共方法

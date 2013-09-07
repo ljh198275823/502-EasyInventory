@@ -21,6 +21,9 @@ namespace LJH.Inventory.DAL.LinqProvider
         #region 重写基类方法
         protected override CustomerPayment GetingItemByID(string id, System.Data.Linq.DataContext dc)
         {
+            DataLoadOptions opts = new DataLoadOptions();
+            opts.LoadWith<CustomerPayment>(item => item.Assigns);
+            dc.LoadOptions = opts;
             var ret = (from cp in dc.GetTable<CustomerPayment>()
                        join c in dc.GetTable<Customer>()
                        on cp.CustomerID equals c.ID
@@ -35,6 +38,9 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override List<CustomerPayment> GetingItems(System.Data.Linq.DataContext dc, BusinessModel.SearchCondition.SearchCondition search)
         {
+            DataLoadOptions opts = new DataLoadOptions();
+            opts.LoadWith<CustomerPayment>(item => item.Assigns);
+            dc.LoadOptions = opts;
             var ret = from cp in dc.GetTable<CustomerPayment>()
                       join c in dc.GetTable<Customer>()
                       on cp.CustomerID equals c.ID

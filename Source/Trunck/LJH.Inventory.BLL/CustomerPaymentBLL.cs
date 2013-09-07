@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
@@ -146,6 +147,7 @@ namespace LJH.Inventory.BLL
                 if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
             }
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            if (info.Assigns != null) info.Assigns.ForEach(item => item.PaymentID = info.ID);
             ICustomerPaymentProvider provider = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri);
             provider.Insert(info, unitWork);
 

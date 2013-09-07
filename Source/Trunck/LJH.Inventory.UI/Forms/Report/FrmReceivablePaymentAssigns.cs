@@ -30,7 +30,6 @@ namespace LJH.Inventory.UI.Forms.Report
                 foreach (CustomerPaymentAssign assign in assigns)
                 {
                     int row = GridView.Rows.Add();
-                    GridView.Rows[row].Cells["colPaidDate"].Value = assign.PaidDate;
                     GridView.Rows[row].Cells["colCustomerPaymentID"].Value = assign.PaymentID;
                     GridView.Rows[row].Cells["colAmount"].Value = assign.Amount;
                 }

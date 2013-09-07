@@ -427,8 +427,7 @@
   </Table>
   <Table Name="dbo.CustomerPaymentAssign" Member="LJH.Inventory.BusinessModel.CustomerPaymentAssign">
     <Type Name="LJH.Inventory.BusinessModel.CustomerPaymentAssign">
-      <Column Name="ID" Member="ID"  DbType="bigint NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert"/>
-      <Column Name="PaidDate" Member="PaidDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
       <Column Name="PaymentID" Member="PaymentID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="ReceivableID" Member="ReceivableID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>

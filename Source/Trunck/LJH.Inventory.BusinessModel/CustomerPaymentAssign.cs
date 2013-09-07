@@ -22,10 +22,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid ID { get; set; }
         /// <summary>
-        /// 获取或设置付款日期
-        /// </summary>
-        public DateTime PaidDate { get; set; }
-        /// <summary>
         /// 获取或设置客户付款ID
         /// </summary>
         public string PaymentID { get; set; }

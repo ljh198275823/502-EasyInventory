@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_Pay = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new System.Windows.Forms.MenuStrip();
@@ -45,7 +45,7 @@
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colHasPaid = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.未收款 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.menu.SuspendLayout();
@@ -77,7 +77,7 @@
             this.btn_SelectColumns});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(553, 50);
+            this.menu.Size = new System.Drawing.Size(637, 50);
             this.menu.TabIndex = 33;
             // 
             // txtKeyword
@@ -129,7 +129,7 @@
             this.colAmount,
             this.colReceivable,
             this.colHasPaid,
-            this.未收款,
+            this.colNotPaid,
             this.colFill});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
             this.GridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -138,7 +138,7 @@
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(553, 244);
+            this.GridView.Size = new System.Drawing.Size(637, 244);
             this.GridView.TabIndex = 34;
             // 
             // colOrderID
@@ -150,8 +150,8 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle4.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAmount.HeaderText = "总金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -166,24 +166,24 @@
             // 
             // colHasPaid
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            this.colHasPaid.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "C2";
+            this.colHasPaid.DefaultCellStyle = dataGridViewCellStyle2;
             this.colHasPaid.HeaderText = "已收款";
             this.colHasPaid.Name = "colHasPaid";
             this.colHasPaid.ReadOnly = true;
             this.colHasPaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colHasPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // 未收款
+            // colNotPaid
             // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.未收款.DefaultCellStyle = dataGridViewCellStyle6;
-            this.未收款.HeaderText = "应收账款";
-            this.未收款.Name = "未收款";
-            this.未收款.ReadOnly = true;
-            this.未收款.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colNotPaid.HeaderText = "未收款";
+            this.colNotPaid.Name = "colNotPaid";
+            this.colNotPaid.ReadOnly = true;
+            this.colNotPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colFill
             // 
@@ -196,7 +196,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 316);
+            this.ClientSize = new System.Drawing.Size(637, 316);
             this.Controls.Add(this.GridView);
             this.Controls.Add(this.menu);
             this.Name = "FrmOrderSelection";
@@ -227,7 +227,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colHasPaid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 未收款;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
     }
 }

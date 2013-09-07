@@ -35,15 +35,50 @@ namespace LJH.Inventory.UI.Forms
                 dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
             }
         }
+
+        private void ShowAssigns(List<CustomerPaymentAssign> assigns)
+        {
+            ItemsGrid.Rows.Clear();
+            if (assigns != null && assigns.Count > 0)
+            {
+                foreach (CustomerPaymentAssign assign in assigns)
+                {
+                    int row = ItemsGrid.Rows.Add();
+                    ItemsGrid.Rows[row].Tag = assign;
+                    ItemsGrid.Rows[row].Cells["colOrderID"].Value = assign.ReceivableID;
+                    ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount.Trim();
+                }
+                int rowTotal = ItemsGrid.Rows.Add();
+                ItemsGrid.Rows[rowTotal].Cells["colOrderID"].Value = "合计";
+                ItemsGrid.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(item => item.Amount).Trim();
+            }
+        }
+
+        private List<CustomerPaymentAssign> GetAssignsFromGrid()
+        {
+            List<CustomerPaymentAssign> items = new List<CustomerPaymentAssign>();
+            foreach (DataGridViewRow row in ItemsGrid.Rows)
+            {
+                if (row.Tag != null) items.Add(row.Tag as CustomerPaymentAssign);
+            }
+            return items;
+        }
         #endregion
 
         #region 重写基类方法
         protected override bool CheckInput()
         {
-            if (txtCustomer.Tag  == null)
+            if (txtCustomer.Tag == null)
             {
                 MessageBox.Show("客户不能为空");
                 txtCustomer.Focus();
+                return false;
+            }
+            List<CustomerPaymentAssign> items = GetAssignsFromGrid();
+            if (items.Sum(item => item.Amount) > txtAmount.DecimalValue)
+            {
+                MessageBox.Show("付款流水分配的金额大于付款流水金额");
+                txtAmount.Focus();
                 return false;
             }
             if (txtAmount.DecimalValue <= 0)
@@ -72,6 +107,7 @@ namespace LJH.Inventory.UI.Forms
                 txtCustomer.Text = cp.Customer != null ? cp.Customer.Name : string.Empty;
                 txtCustomer.Tag = cp.Customer;
                 txtMemo.Text = cp.Memo;
+                ShowAssigns(cp.Assigns);
                 ShowOperations(cp.ID);
                 ShowButtonState();
             }
@@ -99,6 +135,8 @@ namespace LJH.Inventory.UI.Forms
             info.Customer = txtCustomer.Tag as Customer;
             info.CustomerID = info.Customer.ID;
             info.Memo = txtMemo.Text;
+            info.Assigns = GetAssignsFromGrid();
+            info.Assigns.ForEach(item => item.PaymentID = info.ID);
             return info;
         }
 
@@ -116,6 +154,25 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowButtonState()
         {
+        }
+        #endregion
+
+        #region 公共方法
+        public void AddOrderToAssign(Order order)
+        {
+            List<CustomerPaymentAssign> items = GetAssignsFromGrid();
+            CustomerPaymentAssign assign = items.SingleOrDefault(item => item.ReceivableID == order.ID);
+            if (assign == null && items.Sum(item => item.Amount) < txtAmount.DecimalValue)
+            {
+                assign = new CustomerPaymentAssign();
+                assign.ID = Guid.NewGuid();
+                assign.PaymentID = UpdatingItem != null ? (UpdatingItem as CustomerPayment).ID : string.Empty;
+                assign.ReceivableID = order.ID;
+                decimal amount = txtAmount.DecimalValue - items.Sum(item => item.Amount);
+                assign.Amount = amount >= order.NotPaid ? order.NotPaid : amount;
+                items.Add(assign);
+                ShowAssigns(items);
+            }
         }
         #endregion
 
@@ -144,10 +201,6 @@ namespace LJH.Inventory.UI.Forms
             }
         }
         #endregion
-
-        private void FrmCustomerPaymentDetail_Load(object sender, EventArgs e)
-        {
-        }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
@@ -193,6 +246,52 @@ namespace LJH.Inventory.UI.Forms
             {
                 CurrencyType item = frm.SelectedItem as CurrencyType;
                 txtCurrencyType.Text = item.ID;
+            }
+        }
+
+        private void mnu_Delete_Click(object sender, EventArgs e)
+        {
+            if (ItemsGrid.SelectedRows.Count > 0)
+            {
+                List<CustomerPaymentAssign> items = GetAssignsFromGrid();
+                foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
+                {
+                    if (row.Tag != null) items.Remove(row.Tag as CustomerPaymentAssign);
+                }
+                ShowAssigns(items);
+            }
+        }
+
+        private void mnu_SelectOrder_Click(object sender, EventArgs e)
+        {
+            if (txtCustomer.Tag != null)
+            {
+                OrderSearchCondition con = new OrderSearchCondition();
+                con.CustomerID = (txtCustomer.Tag as Customer).ID;
+                con.HasNotPaid = true;
+                FrmOrderSelection frm = new FrmOrderSelection();
+                frm.SearchCondition = con;
+                frm.ForSelect = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    Order order = frm.SelectedItem as Order;
+                    AddOrderToAssign(order);
+                }
+            }
+        }
+
+        private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && ItemsGrid.Columns[e.ColumnIndex].Name == "colAssign")
+            {
+                CustomerPaymentAssign assign = ItemsGrid.Rows[e.RowIndex].Tag as CustomerPaymentAssign;
+                if (assign != null)
+                {
+                    decimal amount = 0;
+                    decimal.TryParse(ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out amount);
+                    assign.Amount = amount;
+                    ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colAssign"].Value = GetAssignsFromGrid().Sum(item => item.Amount).Trim();
+                }
             }
         }
     }
