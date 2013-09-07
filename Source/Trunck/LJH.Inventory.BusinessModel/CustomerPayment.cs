@@ -34,6 +34,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public DateTime PaidDate { get; set; }
         /// <summary>
+        /// 获取或设置币别
+        /// </summary>
+        public string CurrencyType { get; set; }
+        /// <summary>
         /// 获取或设置付款方式
         /// </summary>
         public PaymentMode PaymentMode { get; set; }
@@ -42,41 +46,35 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置客户付款还有多少余款
-        /// </summary>
-        public decimal Remain { get; set; }
-        /// <summary>
         /// 获取或设置支票号(如果是支票付款)
         /// </summary>
         public string CheckNum { get; set; }
         /// <summary>
-        /// 获取或设置送货单号
+        /// 获取或设置当前状态
         /// </summary>
-        public string SheetNo { get; set; }
-        /// <summary>
-        /// 获取或设置是否是预付款
-        /// </summary>
-        public bool IsPrepay { get; set; }
-        /// <summary>
-        /// 获取或设置录入日期
-        /// </summary>
-        public DateTime CreateDate { get; set; }
-        /// <summary>
-        /// 获取或设置录入操作员
-        /// </summary>
-        public string CreateOperator { get; set; }
-        /// <summary>
-        /// 获取或设置取消日期
-        /// </summary>
-        public DateTime? CancelDate { get; set; }
-        /// <summary>
-        /// 获取或设置取消操作员
-        /// </summary>
-        public string CancelOperator { get; set; }
+        public SheetState State { get; set; }
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
+        /// <summary>
+        /// 获取或设置客户付款分配列表
+        /// </summary>
+        public List<CustomerPaymentAssign> Assigns { get; set; }
+        #endregion
+
+        #region 只读属性
+        /// <summary>
+        /// 获取客户付款还有多少未分配金额
+        /// </summary>
+        public decimal NotAssigned
+        {
+            get
+            {
+                if (Assigns == null || Assigns.Count == 0) return Amount;
+                return Amount - Assigns.Sum(item => item.Amount);
+            }
+        }
         #endregion
 
         #region 公共方法

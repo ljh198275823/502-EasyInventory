@@ -39,7 +39,7 @@ namespace LJH.Inventory.UI.Forms.Report
                 int rowTotal = GridView.Rows.Add();
                 GridView.Rows[rowTotal].Cells["colPaidDate"].Value = "合计";
                 GridView.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => item.Amount);
-                GridView.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => item.Remain);
+                GridView.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => item.NotAssigned);
                 this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", items.Count);
                 GridView.Rows[0].Selected = false;
             }
@@ -52,7 +52,7 @@ namespace LJH.Inventory.UI.Forms.Report
             row.Cells["colPaidDate"].Value = item.PaidDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(item.PaymentMode);
             row.Cells["colAmount"].Value = item.Amount;
-            row.Cells["colRemain"].Value = item.Remain;
+            row.Cells["colRemain"].Value = item.NotAssigned;
             row.Cells["colMemo"].Value = item.Memo;
         }
         #endregion

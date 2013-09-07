@@ -32,12 +32,10 @@ namespace LJH.Inventory.UI.Forms.Report
                     int row = GridView.Rows.Add();
                     GridView.Rows[row].Cells["colPaidDate"].Value = assign.PaidDate;
                     GridView.Rows[row].Cells["colCustomerPaymentID"].Value = assign.PaymentID;
-                    GridView.Rows[row].Cells["colAssign"].Value = assign.Assign;
                     GridView.Rows[row].Cells["colAmount"].Value = assign.Amount;
                 }
                 int rowTotal = GridView.Rows.Add();
                 GridView.Rows[rowTotal].Cells["colCustomerPaymentID"].Value = "合计";
-                GridView.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(item => item.Assign);
                 GridView.Rows[rowTotal].Cells["colAmount"].Value = assigns.Sum(item => item.Amount);
 
                 this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", assigns.Count);

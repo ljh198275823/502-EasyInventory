@@ -46,29 +46,29 @@ namespace LJH.Inventory.UI.Forms
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            CustomerPayment info =  new CustomerPayment();
-            info.Customer = Customer;
-            info.CustomerID = Customer.ID;
-            info.SheetNo = txtReceivable.Text;
-            info.PaidDate = dtPaidDate.Value;
-            if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
-            if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
-            if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
-            info.Amount = txtAmount.DecimalValue;
-            info.CheckNum = txtCheckNum.Text;
-            info.IsPrepay =false;
-            info.CreateDate = DateTime.Now;
-            info.CreateOperator = OperatorInfo.CurrentOperator.OperatorName;
-            info.Memo = txtMemo.Text;
-            CommandResult ret = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString)).AddAndAssign(info);
-            if (ret.Result == ResultCode.Successful)
-            {
-                this.DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                MessageBox.Show(ret.Message);
-            }
+            //CustomerPayment info =  new CustomerPayment();
+            //info.Customer = Customer;
+            //info.CustomerID = Customer.ID;
+            //info.SheetNo = txtReceivable.Text;
+            //info.PaidDate = dtPaidDate.Value;
+            //if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
+            //if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
+            //if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
+            //info.Amount = txtAmount.DecimalValue;
+            //info.CheckNum = txtCheckNum.Text;
+            //info.IsPrepay =false;
+            //info.CreateDate = DateTime.Now;
+            //info.CreateOperator = OperatorInfo.CurrentOperator.OperatorName;
+            //info.Memo = txtMemo.Text;
+            //CommandResult ret = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString)).AddAndAssign(info);
+            //if (ret.Result == ResultCode.Successful)
+            //{
+            //    this.DialogResult = DialogResult.OK;
+            //}
+            //else
+            //{
+            //    MessageBox.Show(ret.Message);
+            //}
         }
     }
 }

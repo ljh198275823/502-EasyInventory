@@ -294,7 +294,7 @@
             // 
             this.mnu_CustomerPayment.Name = "mnu_CustomerPayment";
             this.mnu_CustomerPayment.Size = new System.Drawing.Size(160, 22);
-            this.mnu_CustomerPayment.Text = "客户还款管理";
+            this.mnu_CustomerPayment.Text = "客户付款流水";
             this.mnu_CustomerPayment.Click += new System.EventHandler(this.mnu_CustomerPayment_Click);
             // 
             // mnu_DaiFu

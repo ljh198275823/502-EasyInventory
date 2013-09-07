@@ -42,14 +42,17 @@ namespace LJH.Inventory.UI.Forms
             CustomerPayment cp = UpdatingItem as CustomerPayment;
             if (cp != null)
             {
-                txtCustomer.Text = cp.Customer != null ? cp.Customer.Name : cp.CustomerID;
-                txtSheetNo.Text = cp.SheetNo;
+                this.txtID.Text = cp.ID;
+                this.txtID.Enabled = false;
                 dtPaidDate.Value = cp.PaidDate;
+                txtCurrencyType.Text = cp.CurrencyType;
                 rdTransfer.Checked = (cp.PaymentMode == PaymentMode.Transfer);
                 rdCash.Checked = cp.PaymentMode == PaymentMode.Cash;
                 rdCheck.Checked = cp.PaymentMode == PaymentMode.Check;
                 txtAmount.DecimalValue = cp.Amount;
                 txtCheckNum.Text = cp.CheckNum;
+                txtCustomer.Text = cp.Customer != null ? cp.Customer.Name : string.Empty;
+                txtCustomer.Tag = cp.Customer;
                 txtMemo.Text = cp.Memo;
                 ShowButtonState();
             }
@@ -66,17 +69,16 @@ namespace LJH.Inventory.UI.Forms
             {
                 info = UpdatingItem as CustomerPayment;
             }
-            info.Customer = txtCustomer.Tag as Customer;
-            info.CustomerID = info.Customer.ID;
-            info.SheetNo = txtSheetNo.Text;
+            if (txtID.Text == _AutoCreate) info.ID = string.Empty;
             info.PaidDate = dtPaidDate.Value;
             if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
             if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
+            info.CurrencyType = txtCurrencyType.Text;
             info.Amount = txtAmount.DecimalValue;
             info.CheckNum = txtCheckNum.Text;
-            info.CreateDate = DateTime.Now;
-            info.CreateOperator = OperatorInfo.CurrentOperator.OperatorName;
+            info.Customer = txtCustomer.Tag as Customer;
+            info.CustomerID = info.Customer.ID;
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -84,23 +86,17 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult AddItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString);
-            return bll.Add(item as CustomerPayment, false);
+            return bll.Add(item as CustomerPayment, OperatorInfo.CurrentOperator.OperatorName);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            throw new Exception("客户付款不支持修改");
+            CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString);
+            return bll.Update(item as CustomerPayment, OperatorInfo.CurrentOperator.OperatorName);
         }
 
         protected override void ShowButtonState()
         {
-            btnOk.Enabled = IsAdding;
-            //btnNullify .Enabled =false ;
-            //if (UpdatingItem != null)
-            //{
-            //    CustomerPayment cp = UpdatingItem as CustomerPayment;
-            //    btnNullify.Enabled = cp.CancelDate == null;
-            //}
         }
         #endregion
 
@@ -167,6 +163,17 @@ namespace LJH.Inventory.UI.Forms
                 Customer item = frm.SelectedItem as Customer;
                 txtCustomer.Text = item.Name;
                 txtCustomer.Tag = item;
+            }
+        }
+
+        private void lnkCurrencyType_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmCurrencyTypeMaster frm = new FrmCurrencyTypeMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CurrencyType item = frm.SelectedItem as CurrencyType;
+                txtCurrencyType.Text = item.ID;
             }
         }
     }

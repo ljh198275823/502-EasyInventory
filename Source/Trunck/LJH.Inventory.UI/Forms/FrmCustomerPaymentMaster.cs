@@ -51,15 +51,12 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colID"].Value = info.ID;
             row.Cells["colPaidDate"].Value = info.PaidDate.ToString("yyyy-MM-dd");
             row.Cells["colCustomer"].Value = info.Customer != null ? info.Customer.Name : info.CustomerID;
+            row.Cells["colCurrencyType"].Value = info.CurrencyType;
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount;
-            row.Cells["colIsPrepay"].Value = info.IsPrepay;
             row.Cells["colCheckNum"].Value = info.CheckNum;
-            row.Cells["colDeliverySheetNo"].Value = info.SheetNo;
             row.Cells["colMemo"].Value = info.Memo;
-            row.Cells["colCancelDate"].Value = info.CancelDate;
-            row.Cells["colCancelOperator"].Value = info.CancelOperator;
-            if (info.CancelDate != null)
+            if (info.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

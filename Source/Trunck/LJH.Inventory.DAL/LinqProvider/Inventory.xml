@@ -411,54 +411,24 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.View_CustomerPayment" Member="LJH.Inventory.BusinessModel.CustomerPayment">
+  <Table Name="dbo.CustomerPayment" Member="LJH.Inventory.BusinessModel.CustomerPayment">
     <Type Name="LJH.Inventory.BusinessModel.CustomerPayment">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
       <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="PaidDate" Member="PaidDate" DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="Remain" Member="Remain" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="CheckNum" Member="CheckNum" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="SheetNo" Member="SheetNo" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="IsPrepay" Member="IsPrepay" DbType="bit not null" UpdateCheck="Never"/>
-      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="CreateOperator" Member="CreateOperator" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="CancelDate" Member="CancelDate" DbType="datetime" UpdateCheck="Never"/>
-      <Column Name="CancelOperator" Member="CancelOperator" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-    </Type>
-  </Table>
-  <Table Name="dbo.CustomerPayment" Member="LJH.Inventory.DAL.LinqProvider.T_CustomerPayment">
-    <Type Name="LJH.Inventory.DAL.LinqProvider.T_CustomerPayment">
-      <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
-      <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="PaidDate" Member="PaidDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="CurrencyType" Member="CurrencyType" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="CheckNum" Member="CheckNum" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="SheetNo" Member="SheetNo" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="IsPrepay" Member="IsPrepay" DbType="bit not null" UpdateCheck="Never"/>
-      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="CreateOperator" Member="CreateOperator" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="CancelDate" Member="CancelDate" DbType="datetime" UpdateCheck="Never"/>
-      <Column Name="CancelOperator" Member="CancelOperator" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+      <Association Name="FK_Payment_Assign" Member="Assigns"  ThisKey="ID" OtherKey="PaymentID"/>
     </Type>
   </Table>
-  <Table Name="dbo.View_CustomerPaymentAssign" Member="LJH.Inventory.BusinessModel.CustomerPaymentAssign">
+  <Table Name="dbo.CustomerPaymentAssign" Member="LJH.Inventory.BusinessModel.CustomerPaymentAssign">
     <Type Name="LJH.Inventory.BusinessModel.CustomerPaymentAssign">
       <Column Name="ID" Member="ID"  DbType="bigint NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert"/>
       <Column Name="PaidDate" Member="PaidDate" DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="PaymentID" Member="PaymentID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="ReceivableID" Member="ReceivableID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="Amount" Member="Amount"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="Assign" Member="Assign"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-    </Type>
-  </Table>
-  <Table Name="dbo.CustomerPaymentAssign" Member="LJH.Inventory.DAL.LinqProvider.T_CustomerPaymentAssign">
-    <Type Name="LJH.Inventory.DAL.LinqProvider.T_CustomerPaymentAssign">
-      <Column Name="ID" Member="ID"  DbType="bigint NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert"/>
       <Column Name="PaymentID" Member="PaymentID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="ReceivableID" Member="ReceivableID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>

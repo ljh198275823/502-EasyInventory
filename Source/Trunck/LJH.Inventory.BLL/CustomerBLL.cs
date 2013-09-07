@@ -94,11 +94,11 @@ namespace LJH.Inventory.BLL
                     {
                         ID = info.ID + "初始预付款",
                         CustomerID = info.ID,
-                        CreateDate = DateTime.Now,
-                        CreateOperator = OperatorInfo.CurrentOperator.OperatorName,
                         PaymentMode = PaymentMode.Cash,
                         PaidDate = DateTime.Now,
                         Amount = prepayment,
+                        State = SheetState.Add,
+                        Memo = "初始预付款"
                     };
                     ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Insert(cp, unitWork);
                 }

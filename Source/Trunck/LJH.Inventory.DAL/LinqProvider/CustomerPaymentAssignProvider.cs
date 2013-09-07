@@ -8,7 +8,7 @@ using LJH.Inventory .DAL .IProvider ;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class CustomerPaymentAssignProvider:ProviderBase <CustomerPaymentAssign ,long>,ICustomerPaymentAssignProvider
+    public class CustomerPaymentAssignProvider : ProviderBase<CustomerPaymentAssign, Guid>, ICustomerPaymentAssignProvider
     {
         #region 构造函数
         public CustomerPaymentAssignProvider(string connStr)
@@ -17,8 +17,8 @@ namespace LJH.Inventory.DAL.LinqProvider
         }
         #endregion
 
-        #region 重写基类方法
-        protected override CustomerPaymentAssign GetingItemByID(long id, System.Data.Linq.DataContext dc)
+        #region 构造函数
+        protected override CustomerPaymentAssign GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
             return dc.GetTable<CustomerPaymentAssign>().SingleOrDefault(item => item.ID == id);
         }
@@ -33,23 +33,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.ReceivableID)) ret = ret.Where(item => item.ReceivableID == con.ReceivableID);
             }
             return ret.ToList();
-        }
-
-        protected override void InsertingItem(CustomerPaymentAssign info, System.Data.Linq.DataContext dc)
-        {
-            dc.GetTable<T_CustomerPaymentAssign>().InsertOnSubmit(new T_CustomerPaymentAssign(info));
-        }
-
-        protected override void UpdatingItem(CustomerPaymentAssign newVal, CustomerPaymentAssign original, System.Data.Linq.DataContext dc)
-        {
-            dc.GetTable<T_CustomerPaymentAssign>().Attach(new T_CustomerPaymentAssign(newVal), new T_CustomerPaymentAssign(original));
-        }
-
-        protected override void DeletingItem(CustomerPaymentAssign info, System.Data.Linq.DataContext dc)
-        {
-            T_CustomerPaymentAssign tcpa = new T_CustomerPaymentAssign(info);
-            dc.GetTable<T_CustomerPaymentAssign>().Attach(tcpa);
-            dc.GetTable<T_CustomerPaymentAssign>().DeleteOnSubmit(tcpa);
         }
         #endregion
     }

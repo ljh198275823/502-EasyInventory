@@ -45,14 +45,11 @@
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaidDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCurrencyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsPrepay = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colDeliverySheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCancelDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCancelOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -166,14 +163,11 @@
             this.colID,
             this.colPaidDate,
             this.colCustomer,
-            this.colPaymentMode,
+            this.colCurrencyType,
             this.colAmount,
-            this.colIsPrepay,
-            this.colDeliverySheetNo,
+            this.colPaymentMode,
             this.colCheckNum,
-            this.colMemo,
-            this.colCancelDate,
-            this.colCancelOperator});
+            this.colMemo});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 50);
             this.dataGridView1.Name = "dataGridView1";
@@ -185,7 +179,7 @@
             // 
             // colID
             // 
-            this.colID.HeaderText = "付款单号";
+            this.colID.HeaderText = "付款流水号";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
             // 
@@ -202,11 +196,11 @@
             this.colCustomer.ReadOnly = true;
             this.colCustomer.Width = 150;
             // 
-            // colPaymentMode
+            // colCurrencyType
             // 
-            this.colPaymentMode.HeaderText = "付款方式";
-            this.colPaymentMode.Name = "colPaymentMode";
-            this.colPaymentMode.ReadOnly = true;
+            this.colCurrencyType.HeaderText = "币别";
+            this.colCurrencyType.Name = "colCurrencyType";
+            this.colCurrencyType.ReadOnly = true;
             // 
             // colAmount
             // 
@@ -216,21 +210,11 @@
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             // 
-            // colIsPrepay
+            // colPaymentMode
             // 
-            this.colIsPrepay.HeaderText = "预付款";
-            this.colIsPrepay.Name = "colIsPrepay";
-            this.colIsPrepay.ReadOnly = true;
-            this.colIsPrepay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colIsPrepay.Visible = false;
-            this.colIsPrepay.Width = 80;
-            // 
-            // colDeliverySheetNo
-            // 
-            this.colDeliverySheetNo.HeaderText = "支付应收项";
-            this.colDeliverySheetNo.Name = "colDeliverySheetNo";
-            this.colDeliverySheetNo.ReadOnly = true;
-            this.colDeliverySheetNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colPaymentMode.HeaderText = "付款方式";
+            this.colPaymentMode.Name = "colPaymentMode";
+            this.colPaymentMode.ReadOnly = true;
             // 
             // colCheckNum
             // 
@@ -248,18 +232,6 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // colCancelDate
-            // 
-            this.colCancelDate.HeaderText = "取消日期";
-            this.colCancelDate.Name = "colCancelDate";
-            this.colCancelDate.ReadOnly = true;
-            // 
-            // colCancelOperator
-            // 
-            this.colCancelOperator.HeaderText = "取消人员";
-            this.colCancelOperator.Name = "colCancelOperator";
-            this.colCancelOperator.ReadOnly = true;
-            // 
             // FrmCustomerPaymentMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -269,7 +241,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menu);
             this.Name = "FrmCustomerPaymentMaster";
-            this.Text = "客户还款管理";
+            this.Text = "客户付款流水";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.menu.ResumeLayout(false);
@@ -297,13 +269,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaidDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCurrencyType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsPrepay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliverySheetNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCancelDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCancelOperator;
     }
 }

@@ -17,5 +17,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public bool? HasRemain { get; set; }
 
         public bool ContainCanceled { get; set; }
+
+
     }
 }

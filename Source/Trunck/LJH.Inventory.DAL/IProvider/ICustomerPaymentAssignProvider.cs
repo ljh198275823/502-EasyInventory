@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface ICustomerPaymentAssignProvider : IProvider<LJH.Inventory.BusinessModel.CustomerPaymentAssign, long>
+    public interface ICustomerPaymentAssignProvider : IProvider<LJH.Inventory.BusinessModel.CustomerPaymentAssign, Guid>
     {
     }
 }

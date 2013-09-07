@@ -20,7 +20,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置ID号
         /// </summary>
-        public long ID { get; set; }
+        public Guid ID { get; set; }
         /// <summary>
         /// 获取或设置付款日期
         /// </summary>
@@ -37,10 +37,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置付款项的总金额
         /// </summary>
         public decimal Amount { get; set; }
-        /// <summary>
-        /// 获取或设置付款项分配给此应收项的金额
-        /// </summary>
-        public decimal Assign { get; set; }
         #endregion
     }
 }

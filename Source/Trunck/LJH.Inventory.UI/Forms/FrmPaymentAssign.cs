@@ -25,7 +25,7 @@ namespace LJH.Inventory.UI.Forms
             row.Tag = item;
             row.Cells["colID"].Value = item.ID;
             row.Cells["colPaidDate"].Value = item.PaidDate;
-            row.Cells["colRemain"].Value = item.Remain;
+            row.Cells["colRemain"].Value = item.NotAssigned;
             row.Cells["colMemo"].Value = item.Memo;
         }
 
@@ -110,7 +110,7 @@ namespace LJH.Inventory.UI.Forms
                     }
                     int rowTotal = GridView.Rows.Add();
                     GridView.Rows[rowTotal].Cells["colPaidDate"].Value = "合计";
-                    GridView.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => item.Remain);
+                    GridView.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => item.NotAssigned);
                     GridView.Rows[0].Selected = false;
                 }
             }
@@ -154,7 +154,7 @@ namespace LJH.Inventory.UI.Forms
                         if (total < Receivables)
                         {
                             assign = Receivables - total;
-                            if (assign > cp.Remain) assign = cp.Remain;
+                            if (assign > cp.NotAssigned) assign = cp.NotAssigned;
                         }
                         row.Cells["colAssign"].Value = assign;
                         GridView.Rows[GridView.Rows.Count - 1].Cells["colAssign"].Value = GetTotalAssign(null);
@@ -178,7 +178,7 @@ namespace LJH.Inventory.UI.Forms
                     if (decimal.TryParse(GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out assign) && assign > 0)
                     {
                         CustomerPayment cp = GridView.Rows[e.RowIndex].Tag as CustomerPayment;
-                        if (assign <= cp.Remain)
+                        if (assign <= cp.NotAssigned)
                         {
                             decimal total = GetTotalAssign(GridView.Rows[e.RowIndex]);
                             if (total + assign <= Receivables)

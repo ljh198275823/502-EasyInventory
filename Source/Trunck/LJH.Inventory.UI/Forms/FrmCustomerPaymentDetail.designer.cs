@@ -43,6 +43,10 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
+            this.txtID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label11 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -50,12 +54,8 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
-            this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.txtCurrencyType = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCurrencyType = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -208,8 +208,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.txtSheetNo);
-            this.tabPage1.Controls.Add(this.linkLabel1);
+            this.tabPage1.Controls.Add(this.txtCurrencyType);
+            this.tabPage1.Controls.Add(this.lnkCurrencyType);
             this.tabPage1.Controls.Add(this.txtCustomer);
             this.tabPage1.Controls.Add(this.lnkCustomer);
             this.tabPage1.Controls.Add(this.txtID);
@@ -234,11 +234,48 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // txtCustomer
+            // 
+            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCustomer.Location = new System.Drawing.Point(71, 107);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(164, 21);
+            this.txtCustomer.TabIndex = 6;
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.AutoSize = true;
+            this.lnkCustomer.Location = new System.Drawing.Point(37, 111);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
+            this.lnkCustomer.TabIndex = 108;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
+            // txtID
+            // 
+            this.txtID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtID.Location = new System.Drawing.Point(71, 13);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(164, 21);
+            this.txtID.TabIndex = 91;
+            this.txtID.Text = "自动创建";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 17);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 12);
+            this.label11.TabIndex = 92;
+            this.label11.Text = "支出单号";
+            // 
             // tabPage5
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(602, 210);
+            this.tabPage5.Size = new System.Drawing.Size(497, 178);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -248,7 +285,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(602, 210);
+            this.tabPage2.Size = new System.Drawing.Size(497, 178);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -302,60 +339,24 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // txtID
+            // txtCurrencyType
             // 
-            this.txtID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtID.Location = new System.Drawing.Point(71, 13);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(164, 21);
-            this.txtID.TabIndex = 91;
-            this.txtID.Text = "自动创建";
+            this.txtCurrencyType.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCurrencyType.Location = new System.Drawing.Point(320, 43);
+            this.txtCurrencyType.Name = "txtCurrencyType";
+            this.txtCurrencyType.Size = new System.Drawing.Size(165, 21);
+            this.txtCurrencyType.TabIndex = 120;
             // 
-            // label11
+            // lnkCurrencyType
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 17);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 12);
-            this.label11.TabIndex = 92;
-            this.label11.Text = "支出单号";
-            // 
-            // txtCustomer
-            // 
-            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(71, 107);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(164, 21);
-            this.txtCustomer.TabIndex = 6;
-            // 
-            // lnkCustomer
-            // 
-            this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(37, 111);
-            this.lnkCustomer.Name = "lnkCustomer";
-            this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
-            this.lnkCustomer.TabIndex = 108;
-            this.lnkCustomer.TabStop = true;
-            this.lnkCustomer.Text = "客户";
-            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
-            // 
-            // txtSheetNo
-            // 
-            this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSheetNo.Location = new System.Drawing.Point(320, 107);
-            this.txtSheetNo.Name = "txtSheetNo";
-            this.txtSheetNo.Size = new System.Drawing.Size(164, 21);
-            this.txtSheetNo.TabIndex = 7;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(261, 111);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(53, 12);
-            this.linkLabel1.TabIndex = 110;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "销售合同";
+            this.lnkCurrencyType.AutoSize = true;
+            this.lnkCurrencyType.Location = new System.Drawing.Point(278, 47);
+            this.lnkCurrencyType.Name = "lnkCurrencyType";
+            this.lnkCurrencyType.Size = new System.Drawing.Size(35, 12);
+            this.lnkCurrencyType.TabIndex = 119;
+            this.lnkCurrencyType.TabStop = true;
+            this.lnkCurrencyType.Text = "币别:";
+            this.lnkCurrencyType.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCurrencyType_LinkClicked);
             // 
             // FrmCustomerPaymentDetail
             // 
@@ -366,7 +367,7 @@
             this.ClientSize = new System.Drawing.Size(512, 261);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmCustomerPaymentDetail";
-            this.Text = "客户还款单";
+            this.Text = "客户付款流水明细";
             this.Load += new System.EventHandler(this.FrmCustomerPaymentDetail_Load);
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
@@ -405,9 +406,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
         private GeneralLibrary.WinformControl.DBCTextBox txtID;
         private System.Windows.Forms.Label label11;
-        private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.LinkLabel lnkCustomer;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCurrencyType;
+        private System.Windows.Forms.LinkLabel lnkCurrencyType;
     }
 }

@@ -19,6 +19,7 @@ namespace LJH.Inventory.BLL
 
         #region 私有变量
         private string _RepoUri;
+        private string _DocumentType = "CustomerPayment";
         #endregion
 
         #region 动态库内部方法
@@ -94,17 +95,6 @@ namespace LJH.Inventory.BLL
             return provider.GetItems(con);
         }
         /// <summary>
-        /// 获取某个客户付款单的金额分配
-        /// </summary>
-        /// <param name="paymentID"></param>
-        /// <returns></returns>
-        public QueryResultList<CustomerPaymentAssign> GetAssigns(string paymentID)
-        {
-            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
-            con.PaymentID = paymentID;
-            return ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).GetItems(con);
-        }
-        /// <summary>
         /// 获取某个客户的所有还有余额的付款单
         /// </summary>
         /// <returns></returns>
@@ -122,19 +112,20 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult AssignPayment(List<CustomerPaymentAssign> assigns)
         {
-            IUnitWork unitwork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            foreach (CustomerPaymentAssign assign in assigns)
-            {
-                ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(assign, unitwork);
-            }
-            return unitwork.Commit();
+            //IUnitWork unitwork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            //foreach (CustomerPaymentAssign assign in assigns)
+            //{
+            //    ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(assign, unitwork);
+            //}
+            //return unitwork.Commit();
+            return null;
         }
         /// <summary>
         /// 增加客户付款信息
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult Add(CustomerPayment info, bool PayReceivables)
+        public CommandResult Add(CustomerPayment info, string opt)
         {
             Customer customer = (new CustomerBLL(_RepoUri)).GetByID(info.CustomerID).QueryObject;
             if (customer == null) return new CommandResult(ResultCode.Fail, "系统中不存在编号为 " + info.CustomerID + " 的客户");
@@ -145,14 +136,19 @@ namespace LJH.Inventory.BLL
                 if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
             }
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-
-            if (PayReceivables)
-            {
-                SettleReceivables(info.ID, info.CustomerID, info.Amount, info.SheetNo, null, unitWork);
-            }
-
             ICustomerPaymentProvider provider = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri);
             provider.Insert(info, unitWork);
+
+            DocumentOperation doc = new DocumentOperation()
+            {
+                DocumentID = info.ID,
+                DocumentType = _DocumentType,
+                OperatDate = DateTime.Now,
+                Operation = "新增",
+                State = SheetState.Add,
+                Operator = opt,
+            };
+            ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
             return unitWork.Commit();
         }
         /// <summary>
@@ -160,27 +156,31 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult AddAndAssign(CustomerPayment info)
+        public CommandResult Update(CustomerPayment info, string opt)
         {
-            Customer customer = (new CustomerBLL(_RepoUri)).GetByID(info.CustomerID).QueryObject;
-            if (customer == null) return new CommandResult(ResultCode.Fail, "系统中不存在编号为 " + info.CustomerID + " 的客户");
-            if (string.IsNullOrEmpty(info.ID))
+            ICustomerPaymentProvider provider = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri);
+            CustomerPayment original = provider.GetByID(info.ID).QueryObject;
+            if (original != null)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
-                    UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, "customerPayment"); //付款单
-                if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
-            }
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+                provider.Update(info, original, unitWork);
 
-            CustomerPaymentAssign assign = new CustomerPaymentAssign()
+                DocumentOperation doc = new DocumentOperation()
+                {
+                    DocumentID = info.ID,
+                    DocumentType = _DocumentType,
+                    OperatDate = DateTime.Now,
+                    Operation = "修改",
+                    State = info.State,
+                    Operator = opt,
+                };
+                ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
+                return unitWork.Commit();
+            }
+            else
             {
-                PaymentID = info.ID,
-                ReceivableID = info.SheetNo,
-                Amount = info.Amount,
-            };
-            ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(assign, unitWork);
-            ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Insert(info, unitWork);
-            return unitWork.Commit();
+                return new CommandResult(ResultCode.Fail, "系统中已经不存在单号为 " + info.ID + " 的客户收款流水单");
+            }
         }
         /// <summary>
         /// 取消客户的付款记录
@@ -192,26 +192,24 @@ namespace LJH.Inventory.BLL
         {
             CustomerPayment original = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetByID(info.ID).QueryObject;
             if (original == null) return new CommandResult(ResultCode.Fail, "系统中不存在此项");
-            if (original.CancelDate != null) return new CommandResult(ResultCode.Fail, "取消的单据不能再次取消");
-
-            Customer c = (new CustomerBLL(_RepoUri)).GetByID(info.CustomerID).QueryObject;
-            if (c == null) return new CommandResult(ResultCode.Fail, "系统中不存在编号为 " + info.CustomerID + " 的客户");
-
+            if (original.State == SheetState.Canceled) return new CommandResult(ResultCode.Fail, "取消的单据不能再次取消");
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            decimal amount = info.Amount;
-            List<CustomerPaymentAssign> assigns = GetAssigns(info.ID).QueryObjects;
-            if (assigns != null && assigns.Count > 0)
-            {
-                foreach (CustomerPaymentAssign assign in assigns)
-                {
-                    ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Delete(assign, unitWork);
-                }
-            }
+            //首先删除付款流水，然后再增加回来，这样做要达到的效果是把付款流水状态变成作废，而且分配项全部删除。
             CustomerPayment cp = info.Clone();
-            info.CancelDate = DateTime.Now;
-            info.CancelOperator = opt;
-            ICustomerPaymentProvider provider = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri);
-            provider.Update(info, cp, unitWork);
+            info.State = SheetState.Canceled;
+            info.Assigns.Clear();
+            ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Update(info, cp, unitWork);
+
+            DocumentOperation doc = new DocumentOperation()
+            {
+                DocumentID = info.ID,
+                DocumentType = _DocumentType,
+                OperatDate = DateTime.Now,
+                Operation = "取消",
+                State = info.State,
+                Operator = opt,
+            };
+            ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
             return unitWork.Commit();
         }
         #endregion
