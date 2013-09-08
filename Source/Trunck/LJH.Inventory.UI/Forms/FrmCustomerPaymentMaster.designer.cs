@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Cancel = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,8 +203,6 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAmount.HeaderText = "付款金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;

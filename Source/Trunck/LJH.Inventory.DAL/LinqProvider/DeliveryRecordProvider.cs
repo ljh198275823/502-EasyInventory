@@ -57,7 +57,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 {
                     ret = ret.Where(item => item.DeliveryDate >= con.DeliveryDateTime.Begin && item.DeliveryDate <= con.DeliveryDateTime.End);
                 }
-                if (!string.IsNullOrEmpty(con.SalesPerson)) ret = ret.Where(item => item.SalesPerson.Contains(con.SalesPerson));
+                //if (!string.IsNullOrEmpty(con.SalesPerson)) ret = ret.Where(item => item.SalesPerson.Contains(con.SalesPerson));
             }
             List<DeliveryRecord> items = ret.ToList();
             if (search is DeliveryRecordSearchCondition)

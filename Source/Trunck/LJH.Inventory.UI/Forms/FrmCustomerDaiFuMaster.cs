@@ -164,26 +164,6 @@ namespace LJH.Inventory.UI.Forms
                 }
             }
         }
-
-        private void mnu_PaymentAssign_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                CustomerDaiFu daifu = dataGridView1.SelectedRows[0].Tag as CustomerDaiFu;
-                if (daifu.Payable)
-                {
-                    FrmPaymentAssign frm = new FrmPaymentAssign();
-                    frm.CustomerID = daifu.CustomerID;
-                    frm.ReceivableID = daifu.ID;
-                    frm.Receivables = daifu.Receivables;
-                    if (frm.ShowDialog() == DialogResult.OK)
-                    {
-                        CustomerDaiFu daifu1 = (new CustomerDaiFuBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(daifu.ID).QueryObject;
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], daifu1);
-                    }
-                }
-            }
-        }
         #endregion
     }
 }

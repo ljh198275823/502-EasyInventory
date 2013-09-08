@@ -20,10 +20,6 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
-        #region 公共属性
-        public string CustomerID { get; set; }
-        #endregion
-
         #region 重写基类方法
         protected override void Init()
         {

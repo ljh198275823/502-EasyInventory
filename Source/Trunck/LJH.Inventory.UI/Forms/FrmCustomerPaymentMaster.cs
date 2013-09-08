@@ -53,7 +53,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colCustomer"].Value = info.Customer != null ? info.Customer.Name : info.CustomerID;
             row.Cells["colCurrencyType"].Value = info.CurrencyType;
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
-            row.Cells["colAmount"].Value = info.Amount;
+            row.Cells["colAmount"].Value = info.Amount.Trim();
             row.Cells["colCheckNum"].Value = info.CheckNum;
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)

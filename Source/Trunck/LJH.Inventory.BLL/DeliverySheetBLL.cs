@@ -22,7 +22,7 @@ namespace LJH.Inventory.BLL
         private string _DocumentType = "DeliverySheet";
         #endregion
 
-       #region 私有方法
+        #region 私有方法
         private void InventoryOut(DeliverySheet sheet, InventoryOutType inventoryOutType, IUnitWork unitWork)
         {
             ////减少库存
@@ -134,6 +134,59 @@ namespace LJH.Inventory.BLL
             IDeliverySheetProvider dsp = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
             return dsp.GetItems(con);
         }
+
+        /// <summary>
+        /// 获取销售订单的所有出货记录
+        /// </summary>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public QueryResultList<DeliveryRecord> GetDeliveryRecords(string orderID)
+        {
+            List<DeliveryRecord> records = new List<DeliveryRecord>();
+            DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
+            con.OrderID = orderID;
+            con.States = new List<int>();
+            con.States.Add((int)SheetState.Shipped);
+            con.States.Add((int)SheetState.Closed);
+
+            QueryResultList<DeliverySheet> ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con);
+            if (ret.Result == ResultCode.Successful)
+            {
+                foreach (DeliverySheet sheet in ret.QueryObjects)
+                {
+                    if (sheet.Items != null && sheet.Items.Count > 0)
+                    {
+                        foreach (DeliveryItem item in sheet.Items)
+                        {
+                            if (item.OrderID == orderID)
+                            {
+                                DeliveryRecord record = new DeliveryRecord()
+                                {
+                                    ID = item.ID,
+                                    SheetNo = item.SheetNo,
+                                    OrderID = item.OrderID,
+                                    CustomerID = sheet.CustomerID,
+                                    Customer = sheet.Customer,
+                                    WareHouseID = sheet.WareHouseID,
+                                    WareHouse = sheet.WareHouse,
+                                    Product = item.Product,
+                                    ProductID = item.ProductID,
+                                    Price = item.Price,
+                                    Unit = item.Unit,
+                                    Count = item.Count
+                                };
+                                records.Add(record);
+                            }
+                        }
+                    }
+                }
+                return new QueryResultList<DeliveryRecord>(ret.Result, ret.Message, records);
+            }
+            else
+            {
+                return new QueryResultList<DeliveryRecord>(ret.Result, ret.Message, records);
+            }
+        }
         /// <summary>
         /// 获取某个客户付款单的金额分配
         /// </summary>
@@ -164,14 +217,14 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult Add(DeliverySheet info,string opt)
+        public CommandResult Add(DeliverySheet info, string opt)
         {
             IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             if (string.IsNullOrEmpty(info.ID))
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
-                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, _DocumentType );
+                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, _DocumentType);
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
@@ -200,7 +253,7 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult Update(DeliverySheet info,string opt)
+        public CommandResult Update(DeliverySheet info, string opt)
         {
             IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
             DeliverySheet original = provider.GetByID(info.ID).QueryObject;
@@ -215,7 +268,7 @@ namespace LJH.Inventory.BLL
                     DocumentType = _DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "修改",
-                    State = info.State ,
+                    State = info.State,
                     Operator = opt,
                 };
                 ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
@@ -294,7 +347,7 @@ namespace LJH.Inventory.BLL
                 DocumentType = _DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "出库",
-                State = SheetState.Add,
+                State = sheet.State,
                 Operator = opt,
             };
             ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.Inventory.UI.View;
 
 namespace LJH.Inventory.UI.Forms
 {
@@ -112,6 +113,15 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
-        
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridView1 .Columns[e.ColumnIndex ].Name =="colReceivable")
+            {
+                Order order = dataGridView1.Rows[e.RowIndex].Tag as Order;
+                FrmDeliveryItemView frm = new FrmDeliveryItemView();
+                frm.OrderID = order.ID;
+                frm.ShowDialog();
+            }
+        }
     }
 }

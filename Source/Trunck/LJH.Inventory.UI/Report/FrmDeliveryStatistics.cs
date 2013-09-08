@@ -99,10 +99,10 @@ namespace LJH.Inventory.UI.Forms.Report
                     {
                         group = g.GroupBy(item => item.CustomerID + " " + item.Customer.Name);
                     }
-                    else if (rdBySalesPerson.Checked)
-                    {
-                        group = g.GroupBy(item => item.SalesPerson);
-                    }
+                    //else if (rdBySalesPerson.Checked)
+                    //{
+                    //    group = g.GroupBy(item => item.SalesPerson);
+                    //}
                     else if (rdByCategory.Checked)
                     {
                         group = g.GroupBy(item => item.Product.CategoryID + " " + item.Product.Category.Name);
@@ -116,10 +116,10 @@ namespace LJH.Inventory.UI.Forms.Report
                             gridView.Rows[row].Cells["colName"].Value = gp.Key;
                             decimal d1, d2;
                             d1 = gp.Sum(item => item.Amount).Trim();
-                            d2 = gp.Sum(item => item.Cost).Trim();
+                            //d2 = gp.Sum(item => item.Cost).Trim();
                             gridView.Rows[row].Cells["colAmount"].Value = d1;
-                            gridView.Rows[row].Cells["colCost"].Value = d2;
-                            gridView.Rows[row].Cells["colProfit"].Value = ((d1 - d2) / d1).ToString("F3");
+                            //gridView.Rows[row].Cells["colCost"].Value = d2;
+                            //gridView.Rows[row].Cells["colProfit"].Value = ((d1 - d2) / d1).ToString("F3");
                         }
                     }
                 }

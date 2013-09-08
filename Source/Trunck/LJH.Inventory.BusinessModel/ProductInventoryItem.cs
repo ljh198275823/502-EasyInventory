@@ -23,7 +23,6 @@ namespace LJH.Inventory.BusinessModel
         public string Unit { get; set; }
 
         public decimal Price { get; set; }
-
         /// <summary>
         /// 获取或设置库存数量
         /// </summary>

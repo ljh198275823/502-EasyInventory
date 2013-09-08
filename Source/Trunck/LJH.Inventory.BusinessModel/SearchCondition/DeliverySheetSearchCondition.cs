@@ -21,5 +21,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public DateTimeRange DeliveryDateTime { get; set; }
 
         public bool? WithTax { get; set; }
+
+        public String OrderID { get; set; }
     }
 }

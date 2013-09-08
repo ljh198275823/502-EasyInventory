@@ -71,9 +71,9 @@ namespace LJH.Inventory.UI.Forms.Report
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count;
             row.Cells["colAmount"].Value = item.Amount.Trim();
-            row.Cells["colCost"].Value = item.Cost.Trim();
-            row.Cells["colProfitRate"].Value = item.ProfitRate;
-            row.Cells["colSalesPerson"].Value = item.SalesPerson;
+            //row.Cells["colCost"].Value = item.Cost.Trim();
+            //row.Cells["colProfitRate"].Value = item.ProfitRate;
+            //row.Cells["colSalesPerson"].Value = item.SalesPerson;
         }
 
         private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
