@@ -66,18 +66,6 @@
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.txtSalesPerson = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
-            this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.dtDeliveryDate = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colOperateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colForeignName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,6 +80,18 @@
             this.colShipped = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colNotShipped = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.dtDeliveryDate = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colOperateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -476,119 +476,8 @@
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ItemsGrid.Size = new System.Drawing.Size(1107, 253);
             this.ItemsGrid.TabIndex = 97;
+            this.ItemsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellContentClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
-            // 
-            // txtSheetNo
-            // 
-            this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSheetNo.Location = new System.Drawing.Point(88, 15);
-            this.txtSheetNo.Name = "txtSheetNo";
-            this.txtSheetNo.Size = new System.Drawing.Size(106, 21);
-            this.txtSheetNo.TabIndex = 83;
-            this.txtSheetNo.Text = "自动创建";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 19);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 12);
-            this.label11.TabIndex = 88;
-            this.label11.Text = "订单号:";
-            // 
-            // dtDeliveryDate
-            // 
-            this.dtDeliveryDate.Location = new System.Drawing.Point(729, 83);
-            this.dtDeliveryDate.Name = "dtDeliveryDate";
-            this.dtDeliveryDate.Size = new System.Drawing.Size(131, 21);
-            this.dtDeliveryDate.TabIndex = 85;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(666, 87);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 12);
-            this.label4.TabIndex = 87;
-            this.label4.Text = "出货日期:";
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1126, 375);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "合同条款";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1126, 375);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "相关文档";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1126, 375);
-            this.tabPage2.TabIndex = 6;
-            this.tabPage2.Text = "操作记录";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowDrop = true;
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colOperateDate,
-            this.colOperation,
-            this.colOperator,
-            this.colFill});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1126, 375);
-            this.dataGridView1.TabIndex = 98;
-            // 
-            // colOperateDate
-            // 
-            this.colOperateDate.HeaderText = "操作时间";
-            this.colOperateDate.Name = "colOperateDate";
-            this.colOperateDate.ReadOnly = true;
-            this.colOperateDate.Width = 130;
-            // 
-            // colOperation
-            // 
-            this.colOperation.HeaderText = "操作";
-            this.colOperation.Name = "colOperation";
-            this.colOperation.ReadOnly = true;
-            this.colOperation.Width = 200;
-            // 
-            // colOperator
-            // 
-            this.colOperator.HeaderText = "操作员";
-            this.colOperator.Name = "colOperator";
-            this.colOperator.ReadOnly = true;
-            this.colOperator.Width = 150;
-            // 
-            // colFill
-            // 
-            this.colFill.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colFill.HeaderText = "";
-            this.colFill.Name = "colFill";
-            this.colFill.ReadOnly = true;
             // 
             // colProductID
             // 
@@ -706,6 +595,118 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colMemo.Width = 200;
+            // 
+            // txtSheetNo
+            // 
+            this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSheetNo.Location = new System.Drawing.Point(88, 15);
+            this.txtSheetNo.Name = "txtSheetNo";
+            this.txtSheetNo.Size = new System.Drawing.Size(106, 21);
+            this.txtSheetNo.TabIndex = 83;
+            this.txtSheetNo.Text = "自动创建";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(35, 19);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 12);
+            this.label11.TabIndex = 88;
+            this.label11.Text = "订单号:";
+            // 
+            // dtDeliveryDate
+            // 
+            this.dtDeliveryDate.Location = new System.Drawing.Point(729, 83);
+            this.dtDeliveryDate.Name = "dtDeliveryDate";
+            this.dtDeliveryDate.Size = new System.Drawing.Size(131, 21);
+            this.dtDeliveryDate.TabIndex = 85;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(666, 87);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 12);
+            this.label4.TabIndex = 87;
+            this.label4.Text = "出货日期:";
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1126, 375);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "合同条款";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(1126, 375);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "相关文档";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(1126, 375);
+            this.tabPage2.TabIndex = 6;
+            this.tabPage2.Text = "操作记录";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowDrop = true;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colOperateDate,
+            this.colOperation,
+            this.colOperator,
+            this.colFill});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(1126, 375);
+            this.dataGridView1.TabIndex = 98;
+            // 
+            // colOperateDate
+            // 
+            this.colOperateDate.HeaderText = "操作时间";
+            this.colOperateDate.Name = "colOperateDate";
+            this.colOperateDate.ReadOnly = true;
+            this.colOperateDate.Width = 130;
+            // 
+            // colOperation
+            // 
+            this.colOperation.HeaderText = "操作";
+            this.colOperation.Name = "colOperation";
+            this.colOperation.ReadOnly = true;
+            this.colOperation.Width = 200;
+            // 
+            // colOperator
+            // 
+            this.colOperator.HeaderText = "操作员";
+            this.colOperator.Name = "colOperator";
+            this.colOperator.ReadOnly = true;
+            this.colOperator.Width = 150;
+            // 
+            // colFill
+            // 
+            this.colFill.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colFill.HeaderText = "";
+            this.colFill.Name = "colFill";
+            this.colFill.ReadOnly = true;
             // 
             // FrmOrderDetail
             // 

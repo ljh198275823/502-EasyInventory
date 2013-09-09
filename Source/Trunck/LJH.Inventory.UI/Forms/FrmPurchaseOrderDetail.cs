@@ -443,6 +443,15 @@ namespace LJH.Inventory.UI.Forms
                         frm.ShowDialog();
                     }
                 }
+                else if (ItemsGrid.Columns[e.ColumnIndex].Name == "colReceived")
+                {
+                    PurchaseItem pi = ItemsGrid.Rows[e.RowIndex].Tag as PurchaseItem;
+                    InventoryRecordSearchCondition con = new InventoryRecordSearchCondition();
+                    con.PurchaseItem = pi.ID;
+                    LJH.Inventory.UI.View.FrmInventoryRecordView frm = new View.FrmInventoryRecordView();
+                    frm.SearchCondition = con;
+                    frm.ShowDialog();
+                }
             }
         }
     }

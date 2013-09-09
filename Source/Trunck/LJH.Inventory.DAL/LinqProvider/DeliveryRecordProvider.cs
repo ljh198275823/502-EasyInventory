@@ -55,6 +55,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.Product.CategoryID == con.CategoryID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
+                if (con.OrderItem != null) ret = ret.Where(item => item.OrderItem == con.OrderItem);
                 if (con.DeliveryDateTime != null)
                 {
                     ret = ret.Where(item => item.DeliveryDate >= con.DeliveryDateTime.Begin && item.DeliveryDate <= con.DeliveryDateTime.End);

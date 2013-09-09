@@ -8,10 +8,10 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示库存品的出货记录
     /// </summary>
-    public class DeliveryRecord
+    public class InventoryRecord
     {
         #region 构造函数
-        public DeliveryRecord()
+        public InventoryRecord()
         {
         }
         #endregion
@@ -22,20 +22,26 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置销售单号
         /// </summary>
         public string SheetNo { get; set; }
-
+        /// <summary>
+        /// 获取或设置订单项ID
+        /// </summary>
         public Guid? OrderItem { get; set; }
         /// <summary>
         /// 获取或设置订单号
         /// </summary>
         public string OrderID { get; set; }
+
+        public Guid? PurchaseItem { get; set; }
+
+        public string PurchaseID { get; set; }
         /// <summary>
         /// 获取或设置客户ID
         /// </summary>
-        public string CustomerID { get; set; }
+        public string SupplierID { get; set; }
         /// <summary>
         /// 获取或设置客户名称
         /// </summary>
-        public Customer Customer { get; set; }
+        public Supplier Supplier { get; set; }
         /// <summary>
         /// 获取或设置仓库ID
         /// </summary>
@@ -67,7 +73,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置出货时间
         /// </summary>
-        public DateTime DeliveryDate { get; set; }
+        public DateTime InventoryDate { get; set; }
         /// <summary>
         /// 获取货款金额
         /// </summary>
@@ -78,3 +84,4 @@ namespace LJH.Inventory.BusinessModel
         #endregion
     }
 }
+

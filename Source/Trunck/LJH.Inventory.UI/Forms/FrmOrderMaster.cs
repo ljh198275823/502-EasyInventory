@@ -120,7 +120,7 @@ namespace LJH.Inventory.UI.Forms
                 Order order = dataGridView1.Rows[e.RowIndex].Tag as Order;
                 DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
                 con.OrderID = order.ID;
-                FrmDeliveryItemView frm = new FrmDeliveryItemView();
+                FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
                 frm.SearchCondition = con;
                 frm.ShowDialog();
             }

@@ -73,6 +73,15 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IInventorySheetProvider>(_RepoUri).GetItems(con);
         }
         /// <summary>
+        /// 通过查询条件获取相关商品销售记录
+        /// </summary>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public QueryResultList<InventoryRecord> GetInventoryRecords(SearchCondition con)
+        {
+            return ProviderFactory.Create<IInventoryRecordProvider>(_RepoUri).GetItems(con);
+        }
+        /// <summary>
         /// 获取所有操作历史记录
         /// </summary>
         /// <param name="sheetNo"></param>

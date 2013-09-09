@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.Inventory.UI.View;
 using LJH.Inventory.BLL;
 
 namespace LJH.Inventory.UI.Forms
@@ -226,12 +228,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).Add(item as Order,OperatorInfo .CurrentOperator .OperatorName );
+            return (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).Add(item as Order, OperatorInfo.CurrentOperator.OperatorName);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).Update(item as Order,OperatorInfo .CurrentOperator .OperatorName );
+            return (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).Update(item as Order, OperatorInfo.CurrentOperator.OperatorName);
         }
         #endregion
 
@@ -245,7 +247,7 @@ namespace LJH.Inventory.UI.Forms
                 {
                     OrderItem item = new OrderItem()
                      {
-                         ID=Guid.NewGuid (),
+                         ID = Guid.NewGuid(),
                          ProductID = product.ID,
                          Product = product,
                          Unit = product.Unit,
@@ -511,11 +513,25 @@ namespace LJH.Inventory.UI.Forms
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 OperatorInfo item = frm.SelectedItem as OperatorInfo;
-                txtSalesPerson .Text  = item.OperatorName;
+                txtSalesPerson.Text = item.OperatorName;
             }
         }
         #endregion
 
-        
+        private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (ItemsGrid.Columns[e.ColumnIndex].Name == "colShipped")
+                {
+                    OrderItem pi = ItemsGrid.Rows[e.RowIndex].Tag as OrderItem;
+                    DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
+                    con.OrderItem = pi.ID;
+                    FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
+                    frm.SearchCondition = con;
+                    frm.ShowDialog();
+                }
+            }
+        }
     }
 }
