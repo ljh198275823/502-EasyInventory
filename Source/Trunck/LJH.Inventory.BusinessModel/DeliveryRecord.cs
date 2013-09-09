@@ -23,17 +23,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string SheetNo { get; set; }
         /// <summary>
+        /// 获取或设置订单号
+        /// </summary>
+        public string OrderID { get; set; }
+        /// <summary>
         /// 获取或设置客户ID
         /// </summary>
         public string CustomerID { get; set; }
-        /// <summary>
-        /// 获取或设置送货项的商品ID
-        /// </summary>
-        public string ProductID { get; set; }
-        /// <summary>
-        /// 获取或设置送货项的商品名称
-        /// </summary>
-        public Product Product { get; set; }
         /// <summary>
         /// 获取或设置客户名称
         /// </summary>
@@ -47,13 +43,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public WareHouse WareHouse { get; set; }
         /// <summary>
-        /// 获取或设置订单号
+        /// 获取或设置送货项的商品ID
         /// </summary>
-        public string OrderID { get; set; }
+        public string ProductID { get; set; }
         /// <summary>
-        /// 获取或设置出货时间
+        /// 获取或设置送货项的商品名称
         /// </summary>
-        public DateTime DeliveryDate { get; set; }
+        public Product Product { get; set; }
         /// <summary>
         /// 获取或设置商品单位
         /// </summary>
@@ -66,6 +62,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置出货数量
         /// </summary>
         public decimal Count { get; set; }
+        /// <summary>
+        /// 获取或设置出货时间
+        /// </summary>
+        public DateTime DeliveryDate { get; set; }
         /// <summary>
         /// 获取货款金额
         /// </summary>

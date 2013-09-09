@@ -33,9 +33,10 @@
             this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,16 +52,17 @@
             this.colProductID,
             this.colProductName,
             this.colSpecification,
-            this.colDemandDate,
+            this.colDeliveryDate,
+            this.colPrice,
             this.colCount,
-            this.colMemo});
+            this.colAmount});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(723, 305);
+            this.dataGridView1.Size = new System.Drawing.Size(725, 305);
             this.dataGridView1.TabIndex = 99;
             // 
             // colDeliverySheet
@@ -95,11 +97,17 @@
             this.colSpecification.Visible = false;
             this.colSpecification.Width = 80;
             // 
-            // colDemandDate
+            // colDeliveryDate
             // 
-            this.colDemandDate.HeaderText = "出货日期";
-            this.colDemandDate.Name = "colDemandDate";
-            this.colDemandDate.ReadOnly = true;
+            this.colDeliveryDate.HeaderText = "出货日期";
+            this.colDeliveryDate.Name = "colDeliveryDate";
+            this.colDeliveryDate.ReadOnly = true;
+            // 
+            // colPrice
+            // 
+            this.colPrice.HeaderText = "单价";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.ReadOnly = true;
             // 
             // colCount
             // 
@@ -107,18 +115,17 @@
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
             // 
-            // colMemo
+            // colAmount
             // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colMemo.Width = 200;
+            this.colAmount.HeaderText = "出货金额";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
             // 
             // FrmDeliveryItemView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 327);
+            this.ClientSize = new System.Drawing.Size(725, 327);
             this.Controls.Add(this.dataGridView1);
             this.Name = "FrmDeliveryItemView";
             this.Text = "销售订单出货明细";
@@ -136,8 +143,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDemandDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
     }
 }

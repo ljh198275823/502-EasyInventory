@@ -107,19 +107,16 @@
   </Table>
   <Table Name="dbo.View_DeliveryRecord" Member="LJH.Inventory.BusinessModel.DeliveryRecord">
     <Type Name="LJH.Inventory.BusinessModel.DeliveryRecord">
-      <Column Name="ID" Member="ID"  DbType="bigInt NOT NULL" IsPrimaryKey="true" />
+      <Column Name="ID" Member="ID"   DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
       <Column Name="SheetNo" Member="SheetNo" DbType="nvarchar(50) NOT NULL"/>
+      <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)" />
       <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) NOT NULL" />
       <Column Name="WareHouseID" Member="WareHouseID" DbType="nvarchar(50) NOT NULL"/>
-      <Column Name="DeliveryDate" Member="DeliveryDate" DbType="datetime not null" />
-      <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" />
-      <Column Name="IsWithTax" Member="IsWithTax" DbType="bit not null" />
-      <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)" />
       <Column Name="ProductID" Member="ProductID" DbType="nvarchar(50)"/>
       <Column Name="Unit" Member="Unit" DbType="nvarchar(10)" />
       <Column Name="Price" Member="Price" DbType="decimal(18, 4) not Null" />
       <Column Name="Count" Member="Count" DbType="decimal(10,2) NOT NULL" />
-      <Column Name="Cost" Member="Cost"  DbType="decimal(18,4) NOT NULL"/>
+      <Column Name="DeliveryDate" Member="DeliveryDate" DbType="datetime not null" />
       <Association Name="FK_Sheet_Customer" Member="Customer"  ThisKey="CustomerID" OtherKey="ID" IsForeignKey="false" />
       <Association Name="FK_Sheet_WareHouse" Member="WareHouse"  ThisKey="WareHouseID" OtherKey="ID" IsForeignKey="false" />
       <Association Name="FK_Sheet_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID" IsForeignKey="false" />

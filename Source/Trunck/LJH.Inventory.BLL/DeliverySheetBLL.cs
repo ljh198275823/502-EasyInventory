@@ -134,59 +134,6 @@ namespace LJH.Inventory.BLL
             IDeliverySheetProvider dsp = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
             return dsp.GetItems(con);
         }
-
-        /// <summary>
-        /// 获取销售订单的所有出货记录
-        /// </summary>
-        /// <param name="con"></param>
-        /// <returns></returns>
-        public QueryResultList<DeliveryRecord> GetDeliveryRecords(string orderID)
-        {
-            List<DeliveryRecord> records = new List<DeliveryRecord>();
-            DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
-            con.OrderID = orderID;
-            con.States = new List<int>();
-            con.States.Add((int)SheetState.Shipped);
-            con.States.Add((int)SheetState.Closed);
-
-            QueryResultList<DeliverySheet> ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con);
-            if (ret.Result == ResultCode.Successful)
-            {
-                foreach (DeliverySheet sheet in ret.QueryObjects)
-                {
-                    if (sheet.Items != null && sheet.Items.Count > 0)
-                    {
-                        foreach (DeliveryItem item in sheet.Items)
-                        {
-                            if (item.OrderID == orderID)
-                            {
-                                DeliveryRecord record = new DeliveryRecord()
-                                {
-                                    ID = item.ID,
-                                    SheetNo = item.SheetNo,
-                                    OrderID = item.OrderID,
-                                    CustomerID = sheet.CustomerID,
-                                    Customer = sheet.Customer,
-                                    WareHouseID = sheet.WareHouseID,
-                                    WareHouse = sheet.WareHouse,
-                                    Product = item.Product,
-                                    ProductID = item.ProductID,
-                                    Price = item.Price,
-                                    Unit = item.Unit,
-                                    Count = item.Count
-                                };
-                                records.Add(record);
-                            }
-                        }
-                    }
-                }
-                return new QueryResultList<DeliveryRecord>(ret.Result, ret.Message, records);
-            }
-            else
-            {
-                return new QueryResultList<DeliveryRecord>(ret.Result, ret.Message, records);
-            }
-        }
         /// <summary>
         /// 获取某个客户付款单的金额分配
         /// </summary>
@@ -197,6 +144,15 @@ namespace LJH.Inventory.BLL
             CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
             con.ReceivableID = sheetNo;
             return ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).GetItems(con);
+        }
+        /// <summary>
+        /// 通过查询条件获取相关商品销售记录
+        /// </summary>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public QueryResultList<DeliveryRecord> GetDeliveryRecords(SearchCondition con)
+        {
+            return ProviderFactory.Create<IDeliveryRecordProvider>(_RepoUri).GetItems(con);
         }
         /// <summary>
         /// 查询某个单据的所有历史操作记录

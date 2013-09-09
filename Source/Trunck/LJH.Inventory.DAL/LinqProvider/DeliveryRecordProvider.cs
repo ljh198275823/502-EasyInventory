@@ -53,20 +53,14 @@ namespace LJH.Inventory.DAL.LinqProvider
                 DeliveryRecordSearchCondition con = search as DeliveryRecordSearchCondition;
                 if (!string.IsNullOrEmpty (con.ProductID )) ret = ret.Where(item => item.ProductID == con.ProductID);
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
+                if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.Product.CategoryID == con.CategoryID);
+                if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
                 if (con.DeliveryDateTime != null)
                 {
                     ret = ret.Where(item => item.DeliveryDate >= con.DeliveryDateTime.Begin && item.DeliveryDate <= con.DeliveryDateTime.End);
                 }
-                //if (!string.IsNullOrEmpty(con.SalesPerson)) ret = ret.Where(item => item.SalesPerson.Contains(con.SalesPerson));
             }
             List<DeliveryRecord> items = ret.ToList();
-            if (search is DeliveryRecordSearchCondition)
-            {
-                DeliveryRecordSearchCondition con = search as DeliveryRecordSearchCondition;
-                if (!string.IsNullOrEmpty(con.CategoryID)) items = items.Where(item => item.Product.CategoryID == con.CategoryID).ToList();
-                if (!string.IsNullOrEmpty(con.CustomerName)) items = items.Where(item => item.Customer.Name.Contains(con.CustomerName)).ToList();
-                if (!string.IsNullOrEmpty(con.ProductName)) items = items.Where(item => item.Product.Name.Contains(con.ProductName)).ToList();
-            }
             return items;
         }
         #endregion

@@ -38,21 +38,12 @@ namespace LJH.Inventory.UI.Forms.Report
             {
                 con.CustomerID = customerCombobox1.SelectedCustomer.ID;
             }
-            else
-            {
-                con.CustomerName = customerCombobox1.Text;
-            }
             con.CategoryID = categoryComboBox1.SelectedCategoryID;
             if (productComboBox1.SelectedProduct != null)
             {
                 con.ProductID = productComboBox1.SelectedProduct.ID;
             }
-            else
-            {
-                con.ProductName = productComboBox1.Text;
-            }
-            con.SalesPerson = txtSalesPerson.Text;
-            List<DeliveryRecord> items = (new DeliveryRecordBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con).QueryObjects;
+            List<DeliveryRecord> items = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetDeliveryRecords(con).QueryObjects;
             foreach (DeliveryRecord item in items)
             {
                 int row = gridView.Rows.Add();

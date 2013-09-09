@@ -49,25 +49,15 @@ namespace LJH.Inventory.UI.Forms.Report
             {
                 con.CustomerID = txtCustomer.SelectedCustomer.ID;
             }
-            else
-            {
-                con.CustomerName = txtCustomer.Text;
-            }
             if (txtProduct.SelectedProduct != null)
             {
                 con.ProductID = txtProduct.SelectedProduct.ID;
-            }
-            else
-            {
-                con.ProductName = txtProduct.Text;
             }
             if (txtCategory.SelectedCategory != null)
             {
                 con.CategoryID = txtCategory.SelectedCategoryID;
             }
-            con.SalesPerson = txtSalesPerson.Text;
-            return (new DeliveryRecordBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con).QueryObjects;
-
+            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetDeliveryRecords(con).QueryObjects;
         }
 
         protected override void OnItemSearching(EventArgs e)

@@ -18,8 +18,6 @@ namespace LJH.Inventory.UI.View
             InitializeComponent();
         }
 
-        public string OrderID { get; set; }
-
         #region 重写基类方法
         protected override void Init()
         {
@@ -33,7 +31,7 @@ namespace LJH.Inventory.UI.View
 
         protected override List<object> GetDataSource()
         {
-            List<DeliveryRecord> records = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetDeliveryRecords(OrderID).QueryObjects;
+            List<DeliveryRecord> records = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetDeliveryRecords(SearchCondition).QueryObjects;
             return (from item in records
                     orderby item.ProductID ascending
                     select (object)item).ToList();
@@ -43,10 +41,11 @@ namespace LJH.Inventory.UI.View
         {
             DeliveryRecord c = item as DeliveryRecord;
             row.Tag = c;
-            row.Cells["colDeliverySheet"].Value = c.OrderID;
+            row.Cells["colDeliverySheet"].Value = c.SheetNo;
             row.Cells["colProductID"].Value = c.ProductID;
             row.Cells["colProductName"].Value = c.Product.Name;
             row.Cells["colSpecification"].Value = c.Product.Specification;
+            row.Cells["colDeliveryDate"].Value = c.DeliveryDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colPrice"].Value = c.Price.Trim();
             row.Cells["colAmount"].Value = c.Amount.Trim();

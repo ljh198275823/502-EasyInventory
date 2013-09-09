@@ -55,7 +55,6 @@
     <Compile Include="CustomerPaymentBLL.cs" />
     <Compile Include="CustomerTypeBLL.cs" />
     <Compile Include="DatetimeSyncService.cs" />
-    <Compile Include="DeliveryRecordBLL.cs" />
     <Compile Include="DeliverySheetBLL.cs" />
     <Compile Include="ExpenditureTypeBLL.cs" />
     <Compile Include="ExpenditureRecordBLL.cs" />

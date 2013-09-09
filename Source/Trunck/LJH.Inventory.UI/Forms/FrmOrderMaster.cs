@@ -13,7 +13,7 @@ using LJH.Inventory.UI.View;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmOrderMaster :FrmMasterBase 
+    public partial class FrmOrderMaster : FrmMasterBase
     {
         public FrmOrderMaster()
         {
@@ -115,11 +115,13 @@ namespace LJH.Inventory.UI.Forms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dataGridView1 .Columns[e.ColumnIndex ].Name =="colReceivable")
+            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
             {
                 Order order = dataGridView1.Rows[e.RowIndex].Tag as Order;
+                DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
+                con.OrderID = order.ID;
                 FrmDeliveryItemView frm = new FrmDeliveryItemView();
-                frm.OrderID = order.ID;
+                frm.SearchCondition = con;
                 frm.ShowDialog();
             }
         }
