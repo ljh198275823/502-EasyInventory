@@ -46,12 +46,6 @@ namespace LJH.Inventory.UI.Forms
             {
                 con.CustomerID = txtCustomer.SelectedCustomer.ID;
             }
-            else
-            {
-                con.CustomerName = txtCustomer.Text;
-            }
-            if (chkOnlyUnsettled.Checked) con.IsSettled = false;
-
             List<CustomerDaiFu> items = (new CustomerDaiFuBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {

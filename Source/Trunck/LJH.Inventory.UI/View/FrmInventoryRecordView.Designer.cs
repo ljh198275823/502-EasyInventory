@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventorySheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,11 +51,11 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colInventoryDate,
             this.colInventorySheet,
             this.colProductID,
             this.colProductName,
             this.colSpecification,
-            this.colInventoryDate,
             this.colPrice,
             this.colCount,
             this.colAmount,
@@ -68,8 +68,14 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1026, 301);
+            this.dataGridView1.Size = new System.Drawing.Size(613, 181);
             this.dataGridView1.TabIndex = 100;
+            // 
+            // colInventoryDate
+            // 
+            this.colInventoryDate.HeaderText = "收货日期";
+            this.colInventoryDate.Name = "colInventoryDate";
+            this.colInventoryDate.ReadOnly = true;
             // 
             // colInventorySheet
             // 
@@ -84,6 +90,7 @@
             this.colProductID.HeaderText = "商品编码";
             this.colProductID.Name = "colProductID";
             this.colProductID.ReadOnly = true;
+            this.colProductID.Visible = false;
             // 
             // colProductName
             // 
@@ -92,6 +99,7 @@
             this.colProductName.ReadOnly = true;
             this.colProductName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colProductName.Visible = false;
             this.colProductName.Width = 120;
             // 
             // colSpecification
@@ -103,17 +111,12 @@
             this.colSpecification.Visible = false;
             this.colSpecification.Width = 80;
             // 
-            // colInventoryDate
-            // 
-            this.colInventoryDate.HeaderText = "收货日期";
-            this.colInventoryDate.Name = "colInventoryDate";
-            this.colInventoryDate.ReadOnly = true;
-            // 
             // colPrice
             // 
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
+            this.colPrice.Visible = false;
             // 
             // colCount
             // 
@@ -126,12 +129,14 @@
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
+            this.colAmount.Visible = false;
             // 
             // colPurchaseID
             // 
             this.colPurchaseID.HeaderText = "采购单";
             this.colPurchaseID.Name = "colPurchaseID";
             this.colPurchaseID.ReadOnly = true;
+            this.colPurchaseID.Visible = false;
             // 
             // colSupplier
             // 
@@ -151,10 +156,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1026, 323);
+            this.ClientSize = new System.Drawing.Size(613, 203);
             this.Controls.Add(this.dataGridView1);
             this.Name = "FrmInventoryRecordView";
-            this.Text = "采购入库明细";
+            this.Text = "采购单收货明细";
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -165,11 +170,11 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventorySheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;

@@ -43,19 +43,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 CustomerReceivableSearchCondition con = search as CustomerReceivableSearchCondition;
                 if (con.CreateDate != null) ret = ret.Where(item => item.v1.DaiFuDate >= con.CreateDate.Begin && item.v1.DaiFuDate <= con.CreateDate.End);
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.v1.CustomerID == con.CustomerID);
-                if (!string.IsNullOrEmpty(con.CustomerName)) ret = ret.Where(item => item.v2.Name.Contains(con.CustomerName));
-                if (con.IsSettled != null)
-                {
-                    if (con.IsSettled.Value)
-                    {
-                        ret = ret.Where(item => item.v1.Amount - item.v1.Paid == 0);
-                    }
-                    else
-                    {
-                        ret = ret.Where(item => item.v1.Amount - item.v1.Paid > 0);
-                    }
-                }
-                if (!string.IsNullOrEmpty(con.Memo)) ret = ret.Where(item => item.v1.Memo.Contains(con.Memo));
             }
             if (search is CustomerDaiFuSearchCondition)
             {

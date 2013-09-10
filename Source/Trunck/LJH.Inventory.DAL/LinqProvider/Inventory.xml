@@ -483,6 +483,19 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
+  <Table Name="dbo.SupplierReceivable" Member="LJH.Inventory.BusinessModel.SupplierReceivable">
+    <Type Name="LJH.Inventory.BusinessModel.SupplierReceivable">
+      <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
+      <Column Name="SupplierID" Member="SupplierID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="PurchaseID" Member="PurchseID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="InventorySheet" Member="InventorySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="InventoryItem" Member="InventoryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
   <Table Name="dbo.CollectionType" Member="LJH.Inventory.BusinessModel.CollectionType">
     <Type Name="LJH.Inventory.BusinessModel.CollectionType">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />

@@ -5,14 +5,14 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class CustomerReceivableSearchCondition:SearchCondition 
+    public class SupplierReceivableSearchCondition : SearchCondition
     {
-        public string CustomerID { get; set; }
+        public string SupplierID { get; set; }
 
         public DateTimeRange CreateDate { get; set; }
 
-        public string OrderID { get; set; }
+        public string PurchaseID { get; set; }
 
-        public string DeliverySheet { get; set; }
+        public string InventorySheet { get; set; }
     }
 }

@@ -30,7 +30,9 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 CustomerReceivableSearchCondition con = search as CustomerReceivableSearchCondition;
                 if (con.CreateDate != null) ret = ret.Where(item => item.CreateDate >= con.CreateDate.Begin && item.CreateDate <= con.CreateDate.End);
-                if (con.CustomerID != null) ret = ret.Where(item => item.CustomerID == con.CustomerID);
+                if (!string.IsNullOrEmpty (con.CustomerID )) ret = ret.Where(item => item.CustomerID == con.CustomerID);
+                if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
+                if (!string.IsNullOrEmpty(con.DeliverySheet)) ret = ret.Where(item => item.DeliverySheet == con.DeliverySheet);
             }
             return ret.ToList();
         }

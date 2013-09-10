@@ -36,19 +36,6 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(id);
         }
 
-        /// <summary>
-        /// 获取所有的应收款项
-        /// </summary>
-        /// <param name="customerID"></param>
-        /// <returns></returns>
-        public List<CustomerReceivable> GetUnSettleReceivables(string customerID)
-        {
-            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-            con.CustomerID = customerID;
-            con.IsSettled = false;
-            return ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetItems(con).QueryObjects;
-        }
-
         public CommandResult Insert(Customer info)
         {
             if (string.IsNullOrEmpty(info.ID))

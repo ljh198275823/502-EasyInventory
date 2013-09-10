@@ -45,6 +45,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colForeignName"].Value = item.Product != null ? item.Product.ForeignName : string.Empty;
             row.Cells["colProductCode"].Value = item.ProductCode;
             row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
+            row.Cells["colUnit"].Value = item.Unit;
             row.Cells["colPrice"].Value = item.Price.Trim();
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colTotal"].Value = item.Amount.Trim();

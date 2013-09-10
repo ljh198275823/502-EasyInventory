@@ -89,6 +89,7 @@
     <Compile Include="SearchCondition\OrderSearchCondition.cs" />
     <Compile Include="SearchCondition\PurchaseOrderSearchCondition.cs" />
     <Compile Include="SearchCondition\PurchaseRecordSearchCondition.cs" />
+    <Compile Include="SearchCondition\SupplierReceivableSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierSearchCondition.cs" />
     <Compile Include="SheetState.cs" />
     <Compile Include="CommandResult.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="DeliveryItem.cs" />
     <Compile Include="DeliverySheet.cs" />
     <Compile Include="Supplier.cs" />
+    <Compile Include="SupplierReceivable.cs" />
     <Compile Include="SupplierType.cs" />
     <Compile Include="SysparameterInfo.cs" />
     <Compile Include="Transport.cs" />

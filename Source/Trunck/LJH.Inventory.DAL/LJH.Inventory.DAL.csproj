@@ -77,6 +77,7 @@
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
     <Compile Include="IProvider\IStorageSheetProvider.cs" />
     <Compile Include="IProvider\ISupplierProvider.cs" />
+    <Compile Include="IProvider\ISupplierReceivableProvider.cs" />
     <Compile Include="IProvider\ISupplierTypeProvider.cs" />
     <Compile Include="IProvider\ISysParameterProvider.cs" />
     <Compile Include="IProvider\ITransportProvider.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="LinqProvider\RelatedCompanyProvider.cs" />
     <Compile Include="LinqProvider\ServerDateTimeProvider.cs" />
     <Compile Include="LinqProvider\SupplierProvider.cs" />
+    <Compile Include="LinqProvider\SupplierReceivableProvider.cs" />
     <Compile Include="LinqProvider\SupplierTypeProvider.cs" />
     <Compile Include="LinqProvider\TransportProvider.cs" />
     <Compile Include="LinqProvider\T_CustomerDaiFu.cs" />
