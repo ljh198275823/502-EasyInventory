@@ -246,7 +246,7 @@ namespace LJH.Inventory.UI.Applications.WaiMao
 
         private void mnu_DaiFu_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCustomerDaiFuMaster));
+            ShowSingleForm(typeof(FrmCustomerOtherReceivableMaster));
         }
 
         private void mnu_DogInfo_Click(object sender, EventArgs e)
@@ -402,5 +402,11 @@ namespace LJH.Inventory.UI.Applications.WaiMao
         {
             ShowSingleForm(typeof(FrmExpenditureTypeMaster));
         }
+
+        private void mnu_CustomerOtherReceivable_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmCustomerOtherReceivableMaster));
+        }
+
     }
 }

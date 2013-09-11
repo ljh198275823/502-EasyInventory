@@ -115,6 +115,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
+                if (IsComplete) return 0;
                 return Count - Shipped >= 0 ? (Count - Shipped) : 0;
             }
         }

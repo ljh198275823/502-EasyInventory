@@ -50,7 +50,7 @@
     <Compile Include="IProvider\ICurrencyTypeProvider.cs" />
     <Compile Include="IProvider\ICustomerPaymentAssignProvider.cs" />
     <Compile Include="IProvider\ICustomerPaymentProvider.cs" />
-    <Compile Include="IProvider\ICustomerDaiFuProvider.cs" />
+    <Compile Include="IProvider\ICustomerOtherReceivableProvider.cs" />
     <Compile Include="IProvider\ICustomerReceivableProvider.cs" />
     <Compile Include="IProvider\ICustomerTypeProvider.cs" />
     <Compile Include="IProvider\IDocumentOperationProvider.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="LinqProvider\CollectionTypeProvider.cs" />
     <Compile Include="LinqProvider\ContactProvider.cs" />
     <Compile Include="LinqProvider\CurrencyTypeProvider.cs" />
-    <Compile Include="LinqProvider\CustomerDaiFuProvider.cs" />
+    <Compile Include="LinqProvider\CustomerOtherReceivableProvider.cs" />
     <Compile Include="LinqProvider\CustomerPaymentAssignProvider.cs" />
     <Compile Include="LinqProvider\CustomerPaymentProvider.cs" />
     <Compile Include="LinqProvider\CustomerProvider.cs" />
@@ -107,7 +107,7 @@
     <Compile Include="LinqProvider\SupplierReceivableProvider.cs" />
     <Compile Include="LinqProvider\SupplierTypeProvider.cs" />
     <Compile Include="LinqProvider\TransportProvider.cs" />
-    <Compile Include="LinqProvider\T_CustomerDaiFu.cs" />
+    <Compile Include="LinqProvider\T_CustomerOtherReceivable.cs" />
     <Compile Include="LinqProvider\AutoNumberCreater.cs" />
     <Compile Include="LinqProvider\DataContextFactory.cs" />
     <Compile Include="LinqProvider\DeliverySheetProvider.cs" />

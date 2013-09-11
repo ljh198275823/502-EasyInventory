@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,9 +40,6 @@
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
-            this.btnShip = new System.Windows.Forms.ToolStripButton();
-            this.btnPaid = new System.Windows.Forms.ToolStripButton();
-            this.btnPaymentAssign = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtFinalCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -66,18 +63,6 @@
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.txtSalesPerson = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
-            this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.dtDeliveryDate = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colOperateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colForeignName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,6 +78,19 @@
             this.colShipped = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colNotShipped = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.dtDeliveryDate = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colOperateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnShip = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -140,9 +138,7 @@
             this.btnSave,
             this.btnApprove,
             this.btnPrint,
-            this.btnShip,
-            this.btnPaid,
-            this.btnPaymentAssign});
+            this.btnShip});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1135, 56);
@@ -178,34 +174,6 @@
             this.btnPrint.Size = new System.Drawing.Size(51, 53);
             this.btnPrint.Text = "打印(&P)";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnShip
-            // 
-            this.btnShip.Image = global::LJH.Inventory.UI.Properties.Resources.shipped;
-            this.btnShip.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnShip.Name = "btnShip";
-            this.btnShip.Size = new System.Drawing.Size(53, 53);
-            this.btnShip.Text = "出货(&D)";
-            this.btnShip.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnShip.Click += new System.EventHandler(this.btnShip_Click);
-            // 
-            // btnPaid
-            // 
-            this.btnPaid.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
-            this.btnPaid.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPaid.Name = "btnPaid";
-            this.btnPaid.Size = new System.Drawing.Size(51, 53);
-            this.btnPaid.Text = "收款(&P)";
-            this.btnPaid.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnPaymentAssign
-            // 
-            this.btnPaymentAssign.Image = global::LJH.Inventory.UI.Properties.Resources.assign;
-            this.btnPaymentAssign.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPaymentAssign.Name = "btnPaymentAssign";
-            this.btnPaymentAssign.Size = new System.Drawing.Size(53, 53);
-            this.btnPaymentAssign.Text = "核销(&G)";
-            this.btnPaymentAssign.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // tabControl1
             // 
@@ -481,6 +449,131 @@
             this.ItemsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellContentClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             // 
+            // colProductID
+            // 
+            this.colProductID.HeaderText = "商品编号";
+            this.colProductID.Name = "colProductID";
+            this.colProductID.ReadOnly = true;
+            this.colProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colProductName
+            // 
+            this.colProductName.HeaderText = "商品名称";
+            this.colProductName.Name = "colProductName";
+            this.colProductName.ReadOnly = true;
+            this.colProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colProductName.Width = 120;
+            // 
+            // colForeignName
+            // 
+            this.colForeignName.HeaderText = "英文名称";
+            this.colForeignName.Name = "colForeignName";
+            this.colForeignName.ReadOnly = true;
+            this.colForeignName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colProductCode
+            // 
+            this.colProductCode.HeaderText = "商品代码";
+            this.colProductCode.Name = "colProductCode";
+            this.colProductCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
+            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSpecification.Width = 80;
+            // 
+            // colUnit
+            // 
+            this.colUnit.HeaderText = "单位";
+            this.colUnit.Name = "colUnit";
+            this.colUnit.ReadOnly = true;
+            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUnit.Width = 60;
+            // 
+            // colPrice
+            // 
+            dataGridViewCellStyle5.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colPrice.HeaderText = "单价";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colPrice.Width = 60;
+            // 
+            // colCount
+            // 
+            dataGridViewCellStyle6.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCount.Width = 60;
+            // 
+            // colTotal
+            // 
+            this.colTotal.HeaderText = "金额";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.ReadOnly = true;
+            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTotal.Width = 60;
+            // 
+            // colOnPurchase
+            // 
+            this.colOnPurchase.HeaderText = "采购在途";
+            this.colOnPurchase.Name = "colOnPurchase";
+            this.colOnPurchase.ReadOnly = true;
+            this.colOnPurchase.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOnPurchase.Width = 60;
+            // 
+            // colInventory
+            // 
+            this.colInventory.HeaderText = "库存";
+            this.colInventory.Name = "colInventory";
+            this.colInventory.ReadOnly = true;
+            this.colInventory.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colInventory.Width = 60;
+            // 
+            // colPrepared
+            // 
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Blue;
+            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colPrepared.HeaderText = "已备货";
+            this.colPrepared.Name = "colPrepared";
+            this.colPrepared.ReadOnly = true;
+            this.colPrepared.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colPrepared.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colPrepared.Width = 60;
+            // 
+            // colShipped
+            // 
+            this.colShipped.HeaderText = "已出货";
+            this.colShipped.Name = "colShipped";
+            this.colShipped.ReadOnly = true;
+            this.colShipped.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colShipped.Width = 60;
+            // 
+            // colNotShipped
+            // 
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red;
+            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colNotShipped.HeaderText = "未出货";
+            this.colNotShipped.Name = "colNotShipped";
+            this.colNotShipped.ReadOnly = true;
+            this.colNotShipped.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colNotShipped.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colNotShipped.Width = 60;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colMemo.Width = 200;
+            // 
             // txtSheetNo
             // 
             this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -593,130 +686,15 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // colProductID
+            // btnShip
             // 
-            this.colProductID.HeaderText = "商品编号";
-            this.colProductID.Name = "colProductID";
-            this.colProductID.ReadOnly = true;
-            this.colProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colProductName
-            // 
-            this.colProductName.HeaderText = "商品名称";
-            this.colProductName.Name = "colProductName";
-            this.colProductName.ReadOnly = true;
-            this.colProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colProductName.Width = 120;
-            // 
-            // colForeignName
-            // 
-            this.colForeignName.HeaderText = "英文名称";
-            this.colForeignName.Name = "colForeignName";
-            this.colForeignName.ReadOnly = true;
-            this.colForeignName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colProductCode
-            // 
-            this.colProductCode.HeaderText = "商品代码";
-            this.colProductCode.Name = "colProductCode";
-            this.colProductCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSpecification.Width = 80;
-            // 
-            // colUnit
-            // 
-            this.colUnit.HeaderText = "单位";
-            this.colUnit.Name = "colUnit";
-            this.colUnit.ReadOnly = true;
-            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colUnit.Width = 60;
-            // 
-            // colPrice
-            // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colPrice.HeaderText = "单价";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colPrice.Width = 60;
-            // 
-            // colCount
-            // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCount.HeaderText = "数量";
-            this.colCount.Name = "colCount";
-            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCount.Width = 60;
-            // 
-            // colTotal
-            // 
-            this.colTotal.HeaderText = "金额";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.ReadOnly = true;
-            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTotal.Width = 60;
-            // 
-            // colOnPurchase
-            // 
-            this.colOnPurchase.HeaderText = "采购在途";
-            this.colOnPurchase.Name = "colOnPurchase";
-            this.colOnPurchase.ReadOnly = true;
-            this.colOnPurchase.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colOnPurchase.Width = 60;
-            // 
-            // colInventory
-            // 
-            this.colInventory.HeaderText = "库存";
-            this.colInventory.Name = "colInventory";
-            this.colInventory.ReadOnly = true;
-            this.colInventory.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colInventory.Width = 60;
-            // 
-            // colPrepared
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
-            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colPrepared.HeaderText = "已备货";
-            this.colPrepared.Name = "colPrepared";
-            this.colPrepared.ReadOnly = true;
-            this.colPrepared.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colPrepared.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colPrepared.Width = 60;
-            // 
-            // colShipped
-            // 
-            this.colShipped.HeaderText = "已出货";
-            this.colShipped.Name = "colShipped";
-            this.colShipped.ReadOnly = true;
-            this.colShipped.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colShipped.Width = 60;
-            // 
-            // colNotShipped
-            // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
-            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colNotShipped.HeaderText = "未出货";
-            this.colNotShipped.Name = "colNotShipped";
-            this.colNotShipped.ReadOnly = true;
-            this.colNotShipped.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colNotShipped.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colNotShipped.Width = 60;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colMemo.Width = 200;
+            this.btnShip.Image = global::LJH.Inventory.UI.Properties.Resources.shipped;
+            this.btnShip.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShip.Name = "btnShip";
+            this.btnShip.Size = new System.Drawing.Size(53, 53);
+            this.btnShip.Text = "出货(&D)";
+            this.btnShip.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnShip.Click += new System.EventHandler(this.btnShip_Click);
             // 
             // FrmOrderDetail
             // 
@@ -753,10 +731,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnApprove;
         private System.Windows.Forms.ToolStripButton btnPrint;
-        private System.Windows.Forms.ToolStripButton btnShip;
         private System.Windows.Forms.ToolStripButton btnSave;
-        private System.Windows.Forms.ToolStripButton btnPaid;
-        private System.Windows.Forms.ToolStripButton btnPaymentAssign;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private GeneralLibrary.WinformControl.DBCTextBox txtSalesPerson;
@@ -807,5 +782,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colShipped;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotShipped;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripButton btnShip;
     }
 }

@@ -164,6 +164,47 @@ namespace LJH.Inventory.BLL
             return unitWork.Commit();
         }
         /// <summary>
+        /// 审核
+        /// </summary>
+        /// <param name="sheetNo"></param>
+        /// <param name="opt"></param>
+        /// <returns></returns>
+        public CommandResult Approve(string sheetNo, string opt)
+        {
+            CustomerPayment info = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetByID(sheetNo).QueryObject;
+            if (info != null)
+            {
+                if (info.State == SheetState.Add)
+                {
+                    IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+                    CustomerPayment original = info.Clone();
+                    info.State = SheetState.Approved;
+                    ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Update(info, original, unitWork);
+
+                    DocumentOperation doc = new DocumentOperation()
+                    {
+                        DocumentID = info.ID,
+                        DocumentType = _DocumentType,
+                        OperatDate = DateTime.Now,
+                        Operation = "审核",
+                        State = SheetState.Approved,
+                        Operator = opt,
+                    };
+                    ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
+                    return unitWork.Commit();
+                }
+                else
+                {
+                    return new CommandResult(ResultCode.Fail, "已经审核过的单据不能再审核");
+                }
+            }
+            else
+            {
+                return new CommandResult(ResultCode.Fail, "单据在系统中已经不存在");
+            }
+        }
+
+        /// <summary>
         /// 增加并全部分配
         /// </summary>
         /// <param name="info"></param>

@@ -24,6 +24,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
+            btnAll.BackColor = SystemColors.ControlDark;
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditCustomerPayment);
         }
@@ -36,13 +37,35 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             List<CustomerPayment> items = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(null).QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                return (from cp in items
-                        orderby cp.PaidDate descending
-                        select (object)cp).ToList();
-            }
-            return null;
+            List<object> records = null;
+
+            records = (from o in items
+                       where o.State == SheetState.Add
+                       orderby o.PaidDate descending
+                       select (object)o).ToList();
+            btnAdd.Tag = records;
+            btnAdd.Text = string.Format("新建 ({0})", records == null ? 0 : records.Count);
+
+            records = (from o in items
+                       where o.State == SheetState.Approved
+                       orderby o.PaidDate descending
+                       select (object)o).ToList();
+            btnApprove.Tag = records;
+            btnApprove.Text = string.Format("审核 ({0})", records == null ? 0 : records.Count);
+
+            records = (from o in items
+                       where o.State == SheetState.Canceled
+                       orderby o.PaidDate descending
+                       select (object)o).ToList();
+            btnCanceled.Tag = records;
+            btnCanceled.Text = string.Format("作废 ({0})", records == null ? 0 : records.Count);
+
+            records = (from o in items
+                       orderby o.PaidDate descending
+                       select (object)o).ToList();
+            btnAll.Tag = records;
+            btnAll.Text = string.Format("全部 ({0})", records == null ? 0 : records.Count);
+            return records;
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)

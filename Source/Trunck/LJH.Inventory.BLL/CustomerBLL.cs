@@ -129,12 +129,12 @@ namespace LJH.Inventory.BLL
             }
 
             CustomerDaiFuSearchCondition con2 = new CustomerDaiFuSearchCondition() { CustomerID = info.ID };
-            List<CustomerDaiFu> cds = ProviderFactory.Create<ICustomerDaiFuProvider>(_RepoUri).GetItems(con2).QueryObjects;
+            List<CustomerOtherReceivable> cds = ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).GetItems(con2).QueryObjects;
             if (cds != null && cds.Count > 0)
             {
-                foreach (CustomerDaiFu cd in cds)
+                foreach (CustomerOtherReceivable cd in cds)
                 {
-                    ProviderFactory.Create<ICustomerDaiFuProvider>(_RepoUri).Delete(cd, unitWork);
+                    ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).Delete(cd, unitWork);
                 }
             }
 

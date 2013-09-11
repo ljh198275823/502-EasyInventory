@@ -113,6 +113,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colUnit"].Value = pi.Unit;
             row.Cells["colReserved"].Value = pi.Reserved.Trim();
             row.Cells["colValid"].Value = pi.Valid.Trim();
+            row.Cells["colSum"].Value = pi.Count.Trim();
         }
         #endregion
 

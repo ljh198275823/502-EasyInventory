@@ -182,17 +182,17 @@
     <Compile Include="Forms\FrmCurrencyTypeMaster.Designer.cs">
       <DependentUpon>FrmCurrencyTypeMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmCustomerDaiFuDetail.cs">
+    <Compile Include="Forms\FrmCustomerOtherReceivableDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmCustomerDaiFuDetail.designer.cs">
-      <DependentUpon>FrmCustomerDaiFuDetail.cs</DependentUpon>
+    <Compile Include="Forms\FrmCustomerOtherReceivableDetail.designer.cs">
+      <DependentUpon>FrmCustomerOtherReceivableDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmCustomerDaiFuMaster.cs">
+    <Compile Include="Forms\FrmCustomerOtherReceivableMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmCustomerDaiFuMaster.designer.cs">
-      <DependentUpon>FrmCustomerDaiFuMaster.cs</DependentUpon>
+    <Compile Include="Forms\FrmCustomerOtherReceivableMaster.designer.cs">
+      <DependentUpon>FrmCustomerOtherReceivableMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmCustomerDetail.cs">
       <SubType>Form</SubType>
@@ -642,11 +642,11 @@
     <EmbeddedResource Include="Forms\FrmCurrencyTypeMaster.resx">
       <DependentUpon>FrmCurrencyTypeMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmCustomerDaiFuDetail.resx">
-      <DependentUpon>FrmCustomerDaiFuDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmCustomerOtherReceivableDetail.resx">
+      <DependentUpon>FrmCustomerOtherReceivableDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmCustomerDaiFuMaster.resx">
-      <DependentUpon>FrmCustomerDaiFuMaster.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmCustomerOtherReceivableMaster.resx">
+      <DependentUpon>FrmCustomerOtherReceivableMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmCustomerDetail.resx">
       <DependentUpon>FrmCustomerDetail.cs</DependentUpon>

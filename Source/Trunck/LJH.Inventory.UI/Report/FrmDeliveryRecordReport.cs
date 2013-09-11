@@ -56,15 +56,13 @@ namespace LJH.Inventory.UI.Forms.Report
             row.Cells["colDeliveryDate"].Value = item.DeliveryDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = item.SheetNo;
             row.Cells["colCustomerName"].Value = item.Customer.Name;
+            row.Cells["colOrderID"].Value = item.OrderID;
             row.Cells["colProductID"].Value = item.ProductID;
             row.Cells["colProductName"].Value = item.Product.Name;
             row.Cells["colCategoryID"].Value = item.Product.Category.Name;
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count;
             row.Cells["colAmount"].Value = item.Amount.Trim();
-            //row.Cells["colCost"].Value = item.Cost.Trim();
-            //row.Cells["colProfitRate"].Value = item.ProfitRate;
-            //row.Cells["colSalesPerson"].Value = item.SalesPerson;
         }
 
         private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -80,6 +78,19 @@ namespace LJH.Inventory.UI.Forms.Report
                         FrmDeliverySheetDetail frm = new FrmDeliverySheetDetail();
                         frm.StartPosition = FormStartPosition.CenterParent;
                         frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
+                    }
+                }
+                else if (gridView.Columns[e.ColumnIndex].Name == "colOrderID")
+                {
+                    string orderID = gridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    Order order = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(orderID ).QueryObject;
+                    if (order != null)
+                    {
+                        FrmOrderDetail frm = new FrmOrderDetail();
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.UpdatingItem = order;
                         frm.IsForView = true;
                         frm.ShowDialog();
                     }

@@ -51,8 +51,9 @@
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReserved = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colReserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSum = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colEmpty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -75,7 +76,7 @@
             this.toolStripSeparator2});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(1139, 50);
+            this.menu.Size = new System.Drawing.Size(1198, 50);
             this.menu.TabIndex = 48;
             // 
             // btn_Add
@@ -161,7 +162,7 @@
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.splitter1.Location = new System.Drawing.Point(194, 50);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 270);
+            this.splitter1.Size = new System.Drawing.Size(8, 309);
             this.splitter1.TabIndex = 110;
             this.splitter1.TabStop = false;
             // 
@@ -170,7 +171,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 50);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(194, 270);
+            this.pnlLeft.Size = new System.Drawing.Size(194, 309);
             this.pnlLeft.TabIndex = 109;
             // 
             // dataGridView1
@@ -191,6 +192,7 @@
             this.colUnit,
             this.colReserved,
             this.colValid,
+            this.colSum,
             this.colEmpty});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 50);
@@ -198,7 +200,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(937, 270);
+            this.dataGridView1.Size = new System.Drawing.Size(996, 309);
             this.dataGridView1.TabIndex = 111;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -260,17 +262,22 @@
             // 
             // colReserved
             // 
-            this.colReserved.HeaderText = "预留数量";
+            this.colReserved.HeaderText = "已下单库存";
             this.colReserved.Name = "colReserved";
             this.colReserved.ReadOnly = true;
             this.colReserved.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colReserved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colValid
             // 
-            this.colValid.HeaderText = "可用库存";
+            this.colValid.HeaderText = "未下单库存";
             this.colValid.Name = "colValid";
             this.colValid.ReadOnly = true;
+            // 
+            // colSum
+            // 
+            this.colSum.HeaderText = "库存合计";
+            this.colSum.Name = "colSum";
+            this.colSum.ReadOnly = true;
             // 
             // colEmpty
             // 
@@ -284,7 +291,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1139, 342);
+            this.ClientSize = new System.Drawing.Size(1198, 381);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
@@ -327,8 +334,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
-        private System.Windows.Forms.DataGridViewLinkColumn colReserved;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReserved;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValid;
+        private System.Windows.Forms.DataGridViewLinkColumn colSum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmpty;
     }
 }

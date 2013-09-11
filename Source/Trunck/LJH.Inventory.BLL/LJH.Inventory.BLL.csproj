@@ -51,7 +51,7 @@
     <Compile Include="ContactBLL.cs" />
     <Compile Include="CurrencyTypeBLL.cs" />
     <Compile Include="CustomerBLL.cs" />
-    <Compile Include="CustomerDaiFuBLL.cs" />
+    <Compile Include="CustomerOtherReceivableBLL.cs" />
     <Compile Include="CustomerPaymentBLL.cs" />
     <Compile Include="CustomerTypeBLL.cs" />
     <Compile Include="DatetimeSyncService.cs" />

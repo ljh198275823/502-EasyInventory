@@ -52,7 +52,7 @@
     <Compile Include="Contact.cs" />
     <Compile Include="CurrencyType.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="CustomerDaiFu.cs" />
+    <Compile Include="CustomerOtherReceivable.cs" />
     <Compile Include="CustomerPayment.cs" />
     <Compile Include="CustomerPaymentAssign.cs" />
     <Compile Include="CustomerReceivable.cs" />
