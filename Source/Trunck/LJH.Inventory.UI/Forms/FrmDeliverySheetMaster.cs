@@ -11,7 +11,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.ExcelExporter;
-using LJH.Inventory.UI.Forms.Report;
+using LJH.Inventory.UI.Report;
 
 namespace LJH.Inventory.UI.Forms
 {
@@ -60,7 +60,7 @@ namespace LJH.Inventory.UI.Forms
             btnApprove.Text = string.Format("审核 ({0})", records == null ? 0 : records.Count);
 
             records = (from o in items
-                       where o.State == SheetState.Inventory
+                       where o.State == SheetState.Shipped 
                        select (object)o).ToList();
             btnDelivery.Tag = records;
             btnDelivery.Text = string.Format("发货 ({0})", records == null ? 0 : records.Count);

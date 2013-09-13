@@ -10,7 +10,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 
-namespace LJH.Inventory.UI.Forms.Report
+namespace LJH.Inventory.UI.Report
 {
     public partial class FrmDeliveryStatistics : FrmReportBase
     {

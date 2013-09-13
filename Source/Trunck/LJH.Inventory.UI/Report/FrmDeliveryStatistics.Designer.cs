@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms.Report
+﻿namespace LJH.Inventory.UI.Report
 {
     partial class FrmDeliveryStatistics
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
-using LJH.Inventory.UI.Forms.Report;
+using LJH.Inventory.UI.Report;
 using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.SoftDog;
 using LJH.Inventory.UI.Forms;

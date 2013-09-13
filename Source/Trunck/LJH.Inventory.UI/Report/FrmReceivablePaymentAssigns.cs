@@ -9,8 +9,9 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
+using LJH.Inventory.UI.Forms;
 
-namespace LJH.Inventory.UI.Forms.Report
+namespace LJH.Inventory.UI.Report
 {
     public partial class FrmReceivablePaymentAssigns : Form
     {

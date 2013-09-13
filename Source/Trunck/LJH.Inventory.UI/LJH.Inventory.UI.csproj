@@ -320,6 +320,12 @@
     <Compile Include="Forms\FrmOrderMaster.Designer.cs">
       <DependentUpon>FrmOrderMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\FrmOrderPaymentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\FrmOrderPaymentReport.Designer.cs">
+      <DependentUpon>FrmOrderPaymentReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Selection\FrmOrderRecordSelection.cs">
       <SubType>Form</SubType>
     </Compile>

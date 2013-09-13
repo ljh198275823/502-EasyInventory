@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.Inventory.UI.Forms.Report;
+using LJH.Inventory.UI.Report;
 
 namespace LJH.Inventory.UI.Forms
 {
