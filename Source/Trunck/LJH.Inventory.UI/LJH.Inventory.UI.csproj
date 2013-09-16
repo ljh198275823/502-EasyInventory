@@ -717,6 +717,9 @@
     <EmbeddedResource Include="Forms\FrmOrderMaster.resx">
       <DependentUpon>FrmOrderMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\FrmOrderPaymentReport.resx">
+      <DependentUpon>FrmOrderPaymentReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Selection\FrmOrderRecordSelection.resx">
       <DependentUpon>FrmOrderRecordSelection.cs</DependentUpon>
     </EmbeddedResource>
