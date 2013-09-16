@@ -307,6 +307,7 @@
             this.mnu_OrderPaymentReport.Name = "mnu_OrderPaymentReport";
             this.mnu_OrderPaymentReport.Size = new System.Drawing.Size(172, 22);
             this.mnu_OrderPaymentReport.Text = "销售合同收款统计";
+            this.mnu_OrderPaymentReport.Click += new System.EventHandler(this.mnu_OrderPaymentReport_Click);
             // 
             // 销售毛利统计ToolStripMenuItem
             // 
@@ -367,113 +368,113 @@
             // mnu_WareHouse
             // 
             this.mnu_WareHouse.Name = "mnu_WareHouse";
-            this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
+            this.mnu_WareHouse.Size = new System.Drawing.Size(148, 22);
             this.mnu_WareHouse.Text = "仓库资料";
             this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click);
             // 
             // mnu_ProductCategory
             // 
             this.mnu_ProductCategory.Name = "mnu_ProductCategory";
-            this.mnu_ProductCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_ProductCategory.Size = new System.Drawing.Size(148, 22);
             this.mnu_ProductCategory.Text = "商品类别资料";
             this.mnu_ProductCategory.Click += new System.EventHandler(this.mnu_ProductCategory_Click);
             // 
             // mnu_Product
             // 
             this.mnu_Product.Name = "mnu_Product";
-            this.mnu_Product.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Product.Size = new System.Drawing.Size(148, 22);
             this.mnu_Product.Text = "商品资料";
             this.mnu_Product.Click += new System.EventHandler(this.mnu_Product_Click);
             // 
             // mnu_Unit
             // 
             this.mnu_Unit.Name = "mnu_Unit";
-            this.mnu_Unit.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Unit.Size = new System.Drawing.Size(148, 22);
             this.mnu_Unit.Text = "计量单位";
             this.mnu_Unit.Click += new System.EventHandler(this.mnu_Unit_Click);
             // 
             // mnu_CurrencyType
             // 
             this.mnu_CurrencyType.Name = "mnu_CurrencyType";
-            this.mnu_CurrencyType.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CurrencyType.Size = new System.Drawing.Size(148, 22);
             this.mnu_CurrencyType.Text = "货币种类";
             this.mnu_CurrencyType.Click += new System.EventHandler(this.mnu_CurrencyType_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(145, 6);
             // 
             // mnu_PriceTerm
             // 
             this.mnu_PriceTerm.Name = "mnu_PriceTerm";
-            this.mnu_PriceTerm.Size = new System.Drawing.Size(152, 22);
+            this.mnu_PriceTerm.Size = new System.Drawing.Size(148, 22);
             this.mnu_PriceTerm.Text = "价格术语";
             this.mnu_PriceTerm.Click += new System.EventHandler(this.mnu_PriceTerm_Click);
             // 
             // mnu_CollectionType
             // 
             this.mnu_CollectionType.Name = "mnu_CollectionType";
-            this.mnu_CollectionType.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CollectionType.Size = new System.Drawing.Size(148, 22);
             this.mnu_CollectionType.Text = "收汇方式";
             this.mnu_CollectionType.Click += new System.EventHandler(this.mnu_CollectionType_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(145, 6);
             // 
             // mnu_Transport
             // 
             this.mnu_Transport.Name = "mnu_Transport";
-            this.mnu_Transport.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Transport.Size = new System.Drawing.Size(148, 22);
             this.mnu_Transport.Text = "运输方式";
             this.mnu_Transport.Click += new System.EventHandler(this.mnu_Transport_Click);
             // 
             // mnu_ForeignPort
             // 
             this.mnu_ForeignPort.Name = "mnu_ForeignPort";
-            this.mnu_ForeignPort.Size = new System.Drawing.Size(152, 22);
+            this.mnu_ForeignPort.Size = new System.Drawing.Size(148, 22);
             this.mnu_ForeignPort.Text = "国外港口";
             this.mnu_ForeignPort.Click += new System.EventHandler(this.mnu_ForeignPort_Click);
             // 
             // mnu_NativePort
             // 
             this.mnu_NativePort.Name = "mnu_NativePort";
-            this.mnu_NativePort.Size = new System.Drawing.Size(152, 22);
+            this.mnu_NativePort.Size = new System.Drawing.Size(148, 22);
             this.mnu_NativePort.Text = "国内港口";
             this.mnu_NativePort.Click += new System.EventHandler(this.mnu_NativePort_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(145, 6);
             // 
             // mnu_FreightAgent
             // 
             this.mnu_FreightAgent.Name = "mnu_FreightAgent";
-            this.mnu_FreightAgent.Size = new System.Drawing.Size(152, 22);
+            this.mnu_FreightAgent.Size = new System.Drawing.Size(148, 22);
             this.mnu_FreightAgent.Text = "货代公司资料";
             this.mnu_FreightAgent.Click += new System.EventHandler(this.mnu_FreightAgent_Click);
             // 
             // mnu_Shipper
             // 
             this.mnu_Shipper.Name = "mnu_Shipper";
-            this.mnu_Shipper.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Shipper.Size = new System.Drawing.Size(148, 22);
             this.mnu_Shipper.Text = "运输公司资料";
             this.mnu_Shipper.Click += new System.EventHandler(this.mnu_Shipper_Click);
             // 
             // mnu_Express
             // 
             this.mnu_Express.Name = "mnu_Express";
-            this.mnu_Express.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Express.Size = new System.Drawing.Size(148, 22);
             this.mnu_Express.Text = "快件公司资料";
             this.mnu_Express.Click += new System.EventHandler(this.mnu_Express_Click);
             // 
             // mnu_Insurance
             // 
             this.mnu_Insurance.Name = "mnu_Insurance";
-            this.mnu_Insurance.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Insurance.Size = new System.Drawing.Size(148, 22);
             this.mnu_Insurance.Text = "保险公司资料";
             this.mnu_Insurance.Click += new System.EventHandler(this.mnu_Insurance_Click);
             // 
@@ -490,21 +491,21 @@
             // mnu_Operator
             // 
             this.mnu_Operator.Name = "mnu_Operator";
-            this.mnu_Operator.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Operator.Size = new System.Drawing.Size(152, 22);
             this.mnu_Operator.Text = "操作员";
             this.mnu_Operator.Click += new System.EventHandler(this.mnu_Operator_Click);
             // 
             // mnu_Role
             // 
             this.mnu_Role.Name = "mnu_Role";
-            this.mnu_Role.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Role.Size = new System.Drawing.Size(152, 22);
             this.mnu_Role.Text = "角色";
             this.mnu_Role.Click += new System.EventHandler(this.mnu_Role_Click);
             // 
             // mnu_ChangePwd
             // 
             this.mnu_ChangePwd.Name = "mnu_ChangePwd";
-            this.mnu_ChangePwd.Size = new System.Drawing.Size(124, 22);
+            this.mnu_ChangePwd.Size = new System.Drawing.Size(152, 22);
             this.mnu_ChangePwd.Text = "更改密码";
             this.mnu_ChangePwd.Click += new System.EventHandler(this.mnu_ChangePwd_Click);
             // 
@@ -566,27 +567,27 @@
             // 公司信息ToolStripMenuItem
             // 
             this.公司信息ToolStripMenuItem.Name = "公司信息ToolStripMenuItem";
-            this.公司信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.公司信息ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.公司信息ToolStripMenuItem.Text = "公司信息";
             // 
             // mnu_Options
             // 
             this.mnu_Options.Name = "mnu_Options";
-            this.mnu_Options.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Options.Size = new System.Drawing.Size(136, 22);
             this.mnu_Options.Text = "系统选项";
             this.mnu_Options.Click += new System.EventHandler(this.mnu_Options_Click);
             // 
             // mnu_BackupData
             // 
             this.mnu_BackupData.Name = "mnu_BackupData";
-            this.mnu_BackupData.Size = new System.Drawing.Size(152, 22);
+            this.mnu_BackupData.Size = new System.Drawing.Size(136, 22);
             this.mnu_BackupData.Text = "备份数据";
             this.mnu_BackupData.Click += new System.EventHandler(this.mnu_BackupData_Click);
             // 
             // mnu_UpdateDB
             // 
             this.mnu_UpdateDB.Name = "mnu_UpdateDB";
-            this.mnu_UpdateDB.Size = new System.Drawing.Size(152, 22);
+            this.mnu_UpdateDB.Size = new System.Drawing.Size(136, 22);
             this.mnu_UpdateDB.Text = "升级数据库";
             this.mnu_UpdateDB.Click += new System.EventHandler(this.mnu_UpdateDB_Click);
             // 

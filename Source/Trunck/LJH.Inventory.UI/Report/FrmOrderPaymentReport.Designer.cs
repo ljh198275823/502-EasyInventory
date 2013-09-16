@@ -39,9 +39,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.gridView = new System.Windows.Forms.DataGridView();
-            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinalCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCurrencyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -166,9 +166,9 @@
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colDeliveryDate,
+            this.colOrderDate,
             this.colOrderID,
-            this.colCustomerName,
+            this.colCustomer,
             this.colFinalCustomer,
             this.colCurrencyType,
             this.colAmount,
@@ -181,15 +181,15 @@
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(881, 237);
+            this.gridView.Size = new System.Drawing.Size(1074, 237);
             this.gridView.TabIndex = 39;
             // 
-            // colDeliveryDate
+            // colOrderDate
             // 
-            this.colDeliveryDate.HeaderText = "合同日期";
-            this.colDeliveryDate.Name = "colDeliveryDate";
-            this.colDeliveryDate.ReadOnly = true;
-            this.colDeliveryDate.Width = 130;
+            this.colOrderDate.HeaderText = "合同日期";
+            this.colOrderDate.Name = "colOrderDate";
+            this.colOrderDate.ReadOnly = true;
+            this.colOrderDate.Width = 130;
             // 
             // colOrderID
             // 
@@ -197,12 +197,12 @@
             this.colOrderID.Name = "colOrderID";
             this.colOrderID.ReadOnly = true;
             // 
-            // colCustomerName
+            // colCustomer
             // 
-            this.colCustomerName.HeaderText = "客户";
-            this.colCustomerName.Name = "colCustomerName";
-            this.colCustomerName.ReadOnly = true;
-            this.colCustomerName.Width = 140;
+            this.colCustomer.HeaderText = "客户";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
+            this.colCustomer.Width = 140;
             // 
             // colFinalCustomer
             // 
@@ -250,7 +250,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(887, 371);
+            this.ClientSize = new System.Drawing.Size(1080, 371);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -277,9 +277,15 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.DataGridView gridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
+        private GeneralLibrary.WinformControl.DBCTextBox txtFinalCustomer;
+        private System.Windows.Forms.LinkLabel lnkFinalCustomer;
+        private System.Windows.Forms.LinkLabel lnkSalesPerson;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSalesPerson;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
         private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinalCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCurrencyType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
@@ -287,11 +293,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colHasPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
-        private System.Windows.Forms.LinkLabel lnkCustomer;
-        private GeneralLibrary.WinformControl.DBCTextBox txtFinalCustomer;
-        private System.Windows.Forms.LinkLabel lnkFinalCustomer;
-        private System.Windows.Forms.LinkLabel lnkSalesPerson;
-        private GeneralLibrary.WinformControl.DBCTextBox txtSalesPerson;
     }
 }

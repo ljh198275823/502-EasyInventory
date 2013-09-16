@@ -408,5 +408,10 @@ namespace LJH.Inventory.UI.Applications.WaiMao
             ShowSingleForm(typeof(FrmCustomerOtherReceivableMaster));
         }
 
+        private void mnu_OrderPaymentReport_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmOrderPaymentReport));
+        }
+
     }
 }
