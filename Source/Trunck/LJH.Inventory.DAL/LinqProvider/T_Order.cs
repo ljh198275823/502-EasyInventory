@@ -21,6 +21,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             this.OrderDate = order.OrderDate;
             this.DemandDate = order.DemandDate;
             this.CurrencyType = order.CurrencyType;
+            this.Symbol = order.Symbol;
+            this.ExchangeRate = order.ExchangeRate;
             this.CollectionType = order.CollectionType;
             this.PriceTerm = order.PriceTerm;
             this.Transport = order.Transport;
@@ -57,6 +59,14 @@ namespace LJH.Inventory.DAL.LinqProvider
         /// 获取或设置币别
         /// </summary>
         public string CurrencyType { get; set; }
+        /// <summary>
+        /// 获取或设置货币符号
+        /// </summary>
+        public string Symbol { get; set; }
+        /// <summary>
+        /// 获取或设置合同签订时的汇率
+        /// </summary>
+        public decimal ExchangeRate { get; set; }
         /// <summary>
         /// 获取或设置价格条款
         /// </summary>

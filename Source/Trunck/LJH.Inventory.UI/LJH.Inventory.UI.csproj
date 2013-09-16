@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -325,6 +326,12 @@
     </Compile>
     <Compile Include="Report\FrmOrderPaymentReport.Designer.cs">
       <DependentUpon>FrmOrderPaymentReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\FrmOrderProfitReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\FrmOrderProfitReport.Designer.cs">
+      <DependentUpon>FrmOrderProfitReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Selection\FrmOrderRecordSelection.cs">
       <SubType>Form</SubType>
@@ -719,6 +726,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\FrmOrderPaymentReport.resx">
       <DependentUpon>FrmOrderPaymentReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\FrmOrderProfitReport.resx">
+      <DependentUpon>FrmOrderProfitReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Selection\FrmOrderRecordSelection.resx">
       <DependentUpon>FrmOrderRecordSelection.cs</DependentUpon>

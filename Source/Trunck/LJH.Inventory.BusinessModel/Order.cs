@@ -43,6 +43,14 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string CurrencyType { get; set; }
         /// <summary>
+        /// 获取或设置货币符号
+        /// </summary>
+        public string Symbol { get; set; }
+        /// <summary>
+        /// 获取或设置合同签订时的汇率
+        /// </summary>
+        public decimal ExchangeRate { get; set; }
+        /// <summary>
         /// 获取或设置价格条款
         /// </summary>
         public string PriceTerm { get; set; }
@@ -98,6 +106,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置已经支付的金额
         /// </summary>
         public decimal HasPaid { get; set; }
+        /// <summary>
+        /// 获取或设置销售订单除采购成本外的费用支出
+        /// </summary>
+        public decimal Expenditure { get; set; }
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>

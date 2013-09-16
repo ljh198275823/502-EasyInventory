@@ -109,6 +109,11 @@ namespace LJH.Inventory.UI.Forms
                 txtCustomer.Focus();
                 return false;
             }
+            if (txtCurrencyType.Tag == null)
+            {
+                MessageBox.Show("没有选择币别");
+                return false;
+            }
             if (string.IsNullOrEmpty(txtSalesPerson.Text))
             {
                 MessageBox.Show("业务人员不能为空");
@@ -164,6 +169,7 @@ namespace LJH.Inventory.UI.Forms
                 this.dtOrderDate.Value = order.OrderDate;
                 this.txtPriceTerm.Text = order.PriceTerm;
                 this.txtCurrencyType.Text = order.CurrencyType;
+                this.txtExchangeRate.DecimalValue = order.ExchangeRate;
                 this.txtCollectionType.Text = order.CollectionType;
                 this.txtTransport.Text = order.Transport;
                 this.txtLoadPort.Text = order.LoadPort;
@@ -197,6 +203,8 @@ namespace LJH.Inventory.UI.Forms
             order.FinalCustomer = this.txtFinalCustomer.Tag as Customer;
             order.PriceTerm = this.txtPriceTerm.Text;
             order.CurrencyType = this.txtCurrencyType.Text;
+            order.Symbol = (this.txtCurrencyType.Tag as CurrencyType).Symbol;
+            order.ExchangeRate = this.txtExchangeRate.DecimalValue;
             order.CollectionType = this.txtCollectionType.Text;
             order.Transport = this.txtTransport.Text;
             order.LoadPort = this.txtLoadPort.Text;
@@ -449,6 +457,8 @@ namespace LJH.Inventory.UI.Forms
             {
                 CurrencyType item = frm.SelectedItem as CurrencyType;
                 txtCurrencyType.Text = item.ID;
+                txtCurrencyType.Tag = item;
+                txtExchangeRate.DecimalValue = item.ExchangeRate;
             }
         }
 

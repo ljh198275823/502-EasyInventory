@@ -177,6 +177,8 @@
       <Column Name="PriceTerm" Member="PriceTerm"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CollectionType" Member="CollectionType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CurrencyType" Member="CurrencyType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Symbol" Member="Symbol" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="ExchangeRate" Member="ExchangeRate" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Transport" Member="Transport"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="LoadPort" Member="LoadPort"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="DestinationPort" Member="DestinationPort"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -203,6 +205,8 @@
       <Column Name="PriceTerm" Member="PriceTerm"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CollectionType" Member="CollectionType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CurrencyType" Member="CurrencyType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Symbol" Member="Symbol" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="ExchangeRate" Member="ExchangeRate" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Transport" Member="Transport"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="LoadPort" Member="LoadPort"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="DestinationPort" Member="DestinationPort"  DbType="nvarchar(50)" UpdateCheck="Never"/>

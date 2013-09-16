@@ -21,6 +21,11 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
+        public QueryResult<CurrencyType> GetByID(string id)
+        {
+            return ProviderFactory.Create<ICurrencyTypeProvider>(_RepoUri).GetByID(id);
+        }
+
         public QueryResultList<CurrencyType> GetAll()
         {
             return ProviderFactory.Create<ICurrencyTypeProvider>(_RepoUri).GetItems(null);

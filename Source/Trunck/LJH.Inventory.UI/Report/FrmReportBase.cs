@@ -96,7 +96,5 @@ namespace LJH.Inventory.UI.Report
             }
         }
         #endregion
-
-        
     }
 }
