@@ -57,11 +57,13 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置订单项的库存数量(包括已经出货的数量)
         /// </summary>
-        public decimal TotalInventory { get; set; }
+        public decimal Inventory { get; set; }
         /// <summary>
         /// 获取或设置已出货数量
         /// </summary>
         public decimal Shipped { get; set; }
+
+        public decimal Cost { get; set; }
         /// <summary>
         /// 获取或设置客户要求的出货时间
         /// </summary>
@@ -94,7 +96,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                decimal ret = Count - OnWay - TotalInventory;
+                decimal ret = Count - OnWay - Inventory;
                 return ret > 0 ? ret : 0;
             }
         }
@@ -117,16 +119,6 @@ namespace LJH.Inventory.BusinessModel
             {
                 if (IsComplete) return 0;
                 return Count - Shipped >= 0 ? (Count - Shipped) : 0;
-            }
-        }
-        /// <summary>
-        /// 获取当前还剩的库存，总共库存-已发货数量
-        /// </summary>
-        public decimal Inventory
-        {
-            get
-            {
-                return TotalInventory - Shipped;
             }
         }
         #endregion

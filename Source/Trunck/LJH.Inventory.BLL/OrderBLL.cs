@@ -44,7 +44,7 @@ namespace LJH.Inventory.BLL
                         Count = pii.Count,
                         Purchased = pii.Purchased,
                         Received = pii.Received,
-                        TotalInventory = pii.TotalInventory,
+                        Inventory = pii.Inventory,
                         Shipped = pii.Shipped,
                         DemandDate = item.DemandDate,
                         SalesPerson = item.SalesPerson,

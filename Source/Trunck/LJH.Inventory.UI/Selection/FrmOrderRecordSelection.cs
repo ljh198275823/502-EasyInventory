@@ -47,7 +47,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colProductName"].Value = c.Product.Name;
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colDemandDate"].Value = c.DemandDate.ToLongDateString();
-            row.Cells["colPrepared"].Value = (c.OnWay + c.TotalInventory).Trim();
+            row.Cells["colPrepared"].Value = (c.OnWay + c.Inventory).Trim();
             row.Cells["colNotPurchased"].Value = c.NotPurchased.Trim();
             row.Cells["colMemo"].Value = c.Memo;
         }

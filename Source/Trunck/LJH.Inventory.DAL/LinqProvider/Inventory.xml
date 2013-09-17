@@ -234,7 +234,7 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Column Name="Purchased" Member="Purchased"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="Received" Member="Received"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="TotalInventory" Member="TotalInventory"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="Inventory" Member="Inventory"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="Shipped" Member="Shipped"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Association Name="FK_OrderItem_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID"/>
     </Type>
