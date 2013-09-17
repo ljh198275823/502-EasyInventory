@@ -19,7 +19,6 @@ namespace LJH.Inventory.BLL
 
         #region 私有变量
         private string _RepoUri;
-        private string _DocumentType = "ExpenditureRecord";
         #endregion
 
         #region 公共方法
@@ -38,7 +37,7 @@ namespace LJH.Inventory.BLL
             DocumentSearchCondition con = new DocumentSearchCondition()
             {
                 DocumentID = sheetNo,
-                DocumentType = _DocumentType
+                DocumentType = ExpenditureRecord.DocumentType
             };
             return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
         }
@@ -57,7 +56,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = _DocumentType,
+                DocumentType = ExpenditureRecord.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "新增",
                 State = info.State,
@@ -78,7 +77,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = _DocumentType,
+                    DocumentType = ExpenditureRecord.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "修改",
                     State = info.State,
@@ -106,7 +105,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = _DocumentType,
+                DocumentType = ExpenditureRecord.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "取消",
                 State = info.State,

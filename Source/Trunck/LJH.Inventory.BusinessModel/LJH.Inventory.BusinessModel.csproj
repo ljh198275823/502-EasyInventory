@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Attachment.cs" />
+    <Compile Include="AttachmentHeader.cs" />
     <Compile Include="CollectionType.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="CurrencyType.cs" />

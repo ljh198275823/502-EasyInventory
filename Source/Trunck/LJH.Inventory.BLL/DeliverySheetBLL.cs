@@ -19,7 +19,6 @@ namespace LJH.Inventory.BLL
 
         #region 私有变量
         private string _RepoUri;
-        private string _DocumentType = "DeliverySheet";
         #endregion
 
         #region 私有方法
@@ -164,7 +163,7 @@ namespace LJH.Inventory.BLL
             DocumentSearchCondition con = new DocumentSearchCondition()
             {
                 DocumentID = sheetNO,
-                DocumentType = _DocumentType
+                DocumentType = DeliverySheet.DocumentType
             };
             return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
         }
@@ -180,7 +179,7 @@ namespace LJH.Inventory.BLL
             if (string.IsNullOrEmpty(info.ID))
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
-                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, _DocumentType);
+                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, DeliverySheet.DocumentType);
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
@@ -190,7 +189,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = _DocumentType,
+                    DocumentType = DeliverySheet.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "新增",
                     State = SheetState.Add,
@@ -221,7 +220,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = _DocumentType,
+                    DocumentType = DeliverySheet.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "修改",
                     State = info.State,
@@ -255,7 +254,7 @@ namespace LJH.Inventory.BLL
                     DocumentOperation doc = new DocumentOperation()
                     {
                         DocumentID = info.ID,
-                        DocumentType = _DocumentType,
+                        DocumentType = DeliverySheet.DocumentType,
                         OperatDate = DateTime.Now,
                         Operation = "审核",
                         State = SheetState.Approved,
@@ -300,7 +299,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = sheetNo,
-                DocumentType = _DocumentType,
+                DocumentType = DeliverySheet.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "出库",
                 State = sheet.State,

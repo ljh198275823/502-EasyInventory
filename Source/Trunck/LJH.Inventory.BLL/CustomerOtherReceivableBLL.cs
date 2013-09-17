@@ -19,8 +19,6 @@ namespace LJH.Inventory.BLL
 
         #region 私有变量
         private string _RepoUri;
-
-        private string _DocumentType = "CustomerOtherReceivable";
         #endregion
 
         #region 公共方法
@@ -39,7 +37,7 @@ namespace LJH.Inventory.BLL
             DocumentSearchCondition con = new DocumentSearchCondition()
             {
                 DocumentID = sheetNo,
-                DocumentType = _DocumentType
+                DocumentType = CustomerOtherReceivable.DocumentType
             };
             return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
         }
@@ -49,7 +47,7 @@ namespace LJH.Inventory.BLL
             if (string.IsNullOrEmpty(info.ID))
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DaiFuPrefix,
-                    UserSettings.Current.DaiFuDateFormat, UserSettings.Current.DaiFuSerialCount, _DocumentType); //代付款
+                    UserSettings.Current.DaiFuDateFormat, UserSettings.Current.DaiFuSerialCount, CustomerOtherReceivable.DocumentType); //代付款
                 if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
             }
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
@@ -60,7 +58,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = _DocumentType,
+                    DocumentType = CustomerOtherReceivable.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "新增",
                     State = SheetState.Add,
@@ -90,7 +88,7 @@ namespace LJH.Inventory.BLL
                     DocumentOperation doc = new DocumentOperation()
                     {
                         DocumentID = info.ID,
-                        DocumentType = _DocumentType,
+                        DocumentType = CustomerOtherReceivable.DocumentType,
                         OperatDate = DateTime.Now,
                         Operation = "审核",
                         State = SheetState.Approved,
@@ -139,7 +137,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = _DocumentType,
+                DocumentType = CustomerOtherReceivable.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "作废",
                 State = SheetState.Canceled,

@@ -10,6 +10,10 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public class ExpenditureRecord
     {
+        #region 静态变量
+        public static readonly string DocumentType = "ExpenditureRecord";
+        #endregion
+
         #region 构造函数
         public ExpenditureRecord()
         {

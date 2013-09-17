@@ -20,7 +20,6 @@ namespace LJH.Inventory.BLL
 
         #region 私有变量
         private string _RepoUri;
-        private string _DocumentType = "CustomerPayment";
         #endregion
 
         #region 动态库内部方法
@@ -127,7 +126,7 @@ namespace LJH.Inventory.BLL
             DocumentSearchCondition con = new DocumentSearchCondition()
             {
                 DocumentID = sheetNo,
-                DocumentType = _DocumentType
+                DocumentType = CustomerPayment.DocumentType
             };
             return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
         }
@@ -154,7 +153,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = _DocumentType,
+                DocumentType = CustomerPayment.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "新增",
                 State = SheetState.Add,
@@ -184,7 +183,7 @@ namespace LJH.Inventory.BLL
                     DocumentOperation doc = new DocumentOperation()
                     {
                         DocumentID = info.ID,
-                        DocumentType = _DocumentType,
+                        DocumentType = CustomerPayment.DocumentType,
                         OperatDate = DateTime.Now,
                         Operation = "审核",
                         State = SheetState.Approved,
@@ -221,7 +220,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = _DocumentType,
+                    DocumentType = CustomerPayment.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "修改",
                     State = info.State,
@@ -256,7 +255,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = _DocumentType,
+                DocumentType = CustomerPayment.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "取消",
                 State = info.State,
