@@ -75,6 +75,7 @@
     <Compile Include="PurchaseRecord.cs" />
     <Compile Include="RelatedCompany.cs" />
     <Compile Include="Resource\PaymentModeDescription.cs" />
+    <Compile Include="SearchCondition\AttachmentSearchCondition.cs" />
     <Compile Include="SearchCondition\ContactSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerDaiFuSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerPaymentAssignSearchCondition.cs" />

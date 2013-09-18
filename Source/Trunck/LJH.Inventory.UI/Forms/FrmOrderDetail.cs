@@ -178,6 +178,7 @@ namespace LJH.Inventory.UI.Forms
                 this.dtDeliveryDate.Value = order.DemandDate;
                 ShowDeliveryItemsOnGrid(order.Items);
                 ShowOperations(order.ID);
+                ShowAttachmentHeaders();
                 ShowButtonState();
             }
         }
@@ -544,5 +545,61 @@ namespace LJH.Inventory.UI.Forms
                 }
             }
         }
+
+        #region 与附件操作相关的方法和事件处理程序
+        private void mnu_Upload_Click(object sender, EventArgs e)
+        {
+            Order item = UpdatingItem as Order;
+            if (item != null)
+            {
+                OpenFileDialog dig = new OpenFileDialog();
+                if (dig.ShowDialog() == DialogResult.OK)
+                {
+                    AttachmentHeader header = new AttachmentHeader();
+                    header.ID = Guid.NewGuid();
+                    header.DocumentID = item.ID;
+                    header.DocumentType = Order.DocumentType;
+                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.FileName = System.IO.Path.GetFileName(dig.FileName);
+                    header.UploadDateTime = DateTime.Now;
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Upload(header, dig.FileName);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        int row = gridAttachment.Rows.Add();
+                        ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
+        }
+
+        private void ShowAttachmentHeaderOnRow(AttachmentHeader header, DataGridViewRow row)
+        {
+            row.Cells["colUploadDateTime"].Value = header.UploadDateTime;
+            row.Cells["colOwner"].Value = header.Owner;
+            row.Cells["colFileName"].Value = header.FileName;
+        }
+
+        private void ShowAttachmentHeaders()
+        {
+            gridAttachment.Rows.Clear();
+            Order item = UpdatingItem as Order;
+            if (item != null)
+            {
+                List<AttachmentHeader> items = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).GetHeaders(item.ID, Order.DocumentType).QueryObjects;
+                if (items != null && items.Count > 0)
+                {
+                    foreach (AttachmentHeader header in items)
+                    {
+                        int row = gridAttachment.Rows.Add();
+                        ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

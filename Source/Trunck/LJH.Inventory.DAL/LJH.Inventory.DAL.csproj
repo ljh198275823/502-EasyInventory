@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IProvider\IAttachmentHeaderProvider.cs" />
+    <Compile Include="IProvider\IAttachmentProvider.cs" />
     <Compile Include="IProvider\IAutoNumberCreater.cs" />
     <Compile Include="IProvider\ICollectionTypeProvider.cs" />
     <Compile Include="IProvider\IContactProvider.cs" />
@@ -84,6 +86,8 @@
     <Compile Include="IProvider\IUnitProvider.cs" />
     <Compile Include="IProvider\IUnitWork.cs" />
     <Compile Include="IProvider\IWareHouseProvider.cs" />
+    <Compile Include="LinqProvider\AttachmentHeaderProvider.cs" />
+    <Compile Include="LinqProvider\AttachmentProvider.cs" />
     <Compile Include="LinqProvider\CollectionTypeProvider.cs" />
     <Compile Include="LinqProvider\ContactProvider.cs" />
     <Compile Include="LinqProvider\CurrencyTypeProvider.cs" />

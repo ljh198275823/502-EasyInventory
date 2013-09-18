@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="Inventory" xmlns="http://schemas.microsoft.com/linqtosql/mapping/2007">
+  <Table Name="dbo.Attachment" Member="LJH.Inventory.BusinessModel.Attachment">
+    <Type Name="LJH.Inventory.BusinessModel.Attachment">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
+      <Column Name="Value" Member="Value"  DbType="image NOT NULL" UpdateCheck="Never"/>
+    </Type>
+  </Table>
+  <Table Name="dbo.AttachmentHeader" Member="LJH.Inventory.BusinessModel.AttachmentHeader">
+    <Type Name="LJH.Inventory.BusinessModel.AttachmentHeader">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
+      <Column Name="DocumentID" Member="DocumentID"  DbType="NVARCHAR(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="DocumentType" Member="DocumentType"  DbType="NVARCHAR(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Owner" Member="Owner"  DbType="NVARCHAR(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="UploadDateTime" Member="UploadDateTime"  DbType="DateTime NOT NULL" UpdateCheck="Never"/>
+      <Column Name="FileName" Member="FileName"  DbType="NVARCHAR(50) NOT NULL" UpdateCheck="Never"/>
+    </Type>
+  </Table>
   <Table Name="dbo.ProductCategory" Member="LJH.Inventory.BusinessModel.ProductCategory">
     <Type Name="LJH.Inventory.BusinessModel.ProductCategory">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory .BusinessModel .SearchCondition ;
@@ -19,6 +20,8 @@ namespace LJH.Inventory.BLL
 
         #region 私有变量
         private string _RepoUri;
+
+        private readonly int MAXFILENAME = 5 * 1024 * 1024;  //最大上传5M的文件
         #endregion
 
         #region 公共方法
@@ -30,7 +33,10 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResultList<AttachmentHeader> GetHeaders(string documentID, string documentType)
         {
-            return null;
+            AttachmentSearchCondition con = new AttachmentSearchCondition();
+            con.DocumentID = documentID;
+            con.DocumentType = documentType;
+            return ProviderFactory.Create<IAttachmentHeaderProvider>(_RepoUri).GetItems(con);
         }
         /// <summary>
         /// 上传附件
@@ -40,7 +46,35 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Upload(AttachmentHeader header, string path)
         {
-            return null;
+            try
+            {
+                if (!File.Exists(path)) return new CommandResult(ResultCode.Fail, string.Format("文件\"{0}\"不存在", path));
+                byte[] bs = null;
+                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                {
+                    if (fs.Length <= MAXFILENAME)
+                    {
+                        bs = new byte[fs.Length];
+                        fs.Position = 0;
+                        fs.Read(bs, 0, (int)fs.Length);
+                        IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+                        ProviderFactory.Create<IAttachmentHeaderProvider>(_RepoUri).Insert(header, unitWork);
+                        Attachment a = new Attachment();
+                        a.ID = header.ID;
+                        a.Value = bs;
+                        ProviderFactory.Create<IAttachmentProvider>(_RepoUri).Insert(a, unitWork);
+                        return unitWork.Commit();
+                    }
+                    else
+                    {
+                        return new CommandResult(ResultCode.Fail, string.Format("文件\"{0}\" 太大，不能上传超过5M的文件", path));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
         }
         /// <summary>
         /// 下载附件
@@ -50,7 +84,27 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Download(AttachmentHeader header, string path)
         {
-            return null;
+            QueryResult<Attachment> ret = ProviderFactory.Create<IAttachmentProvider>(_RepoUri).GetByID(header.ID);
+            Attachment a = ret.QueryObject;
+            if (a != null && a.Value != null)
+            {
+                try
+                {
+                    using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(a.Value, 0, a.Value.Length);
+                    }
+                    return new CommandResult(ResultCode.Successful, "ok");
+                }
+                catch (Exception ex)
+                {
+                    return new CommandResult(ResultCode.Fail, ex.Message);
+                }
+            }
+            else
+            {
+                return new CommandResult(ret.Result, ret.Message);
+            }
         }
         #endregion
     }
