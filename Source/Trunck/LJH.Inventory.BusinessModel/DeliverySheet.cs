@@ -10,14 +10,14 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public class DeliverySheet
     {
-        #region 静态变量
-        public static readonly string DocumentType = "DeliverySheet";
-        #endregion
-
         #region 构造函数
         public DeliverySheet()
         {
         }
+        #endregion
+
+        #region 只读变量
+        public readonly string DocumentType = "DeliverySheet";
         #endregion
 
         #region 公共属性

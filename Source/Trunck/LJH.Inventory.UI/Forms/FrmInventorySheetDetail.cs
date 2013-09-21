@@ -69,22 +69,6 @@ namespace LJH.Inventory.UI.Forms
             }
             return items;
         }
-
-        private void ShowOperations(string sheetNo)
-        {
-            dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
-            items = (from item in items
-                     orderby item.OperatDate ascending
-                     select item).ToList();
-            foreach (DocumentOperation item in items)
-            {
-                int row = dataGridView1.Rows.Add();
-                dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
-                dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
-                dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
-            }
-        }
         #endregion
 
         #region 重写基类方法
@@ -139,25 +123,26 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            InventorySheet sheet = UpdatingItem as InventorySheet;
-            if (sheet != null)
+            InventorySheet item = UpdatingItem as InventorySheet;
+            if (item != null)
             {
-                this.txtSheetNo.Text = sheet.ID;
+                this.txtSheetNo.Text = item.ID;
                 this.txtSheetNo.Enabled = false;
-                this.txtSupplier.Text = sheet.Supplier != null ? sheet.Supplier.Name : string.Empty;
-                this.txtSupplier.Tag = sheet.Supplier;
-                this.txtWareHouse.Text = sheet.WareHouse != null ? sheet.WareHouse.Name : string.Empty;
-                this.txtWareHouse.Tag = sheet.WareHouse;
-                this.txtMemo.Text = sheet.Memo;
-                ShowSheetItemsOnGrid(sheet.Items);
+                this.txtSupplier.Text = item.Supplier != null ? item.Supplier.Name : string.Empty;
+                this.txtSupplier.Tag = item.Supplier;
+                this.txtWareHouse.Text = item.WareHouse != null ? item.WareHouse.Name : string.Empty;
+                this.txtWareHouse.Tag = item.WareHouse;
+                this.txtMemo.Text = item.Memo;
+                ShowSheetItemsOnGrid(item.Items);
                 ShowButtonState();
-                if (sheet.State != SheetState.Add)
+                if (item.State != SheetState.Add)
                 {
                     this.ItemsGrid.ReadOnly = true;
                     this.ItemsGrid.ContextMenuStrip = null;
                     this.ItemsGrid.ContextMenu = null;
                 }
-                ShowOperations(sheet.ID);
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+                ShowOperations(items, dataGridView1);
             }
         }
 

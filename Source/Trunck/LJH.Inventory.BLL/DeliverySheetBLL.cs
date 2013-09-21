@@ -154,20 +154,6 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IDeliveryRecordProvider>(_RepoUri).GetItems(con);
         }
         /// <summary>
-        /// 查询某个单据的所有历史操作记录
-        /// </summary>
-        /// <param name="sheetNO"></param>
-        /// <returns></returns>
-        public QueryResultList<DocumentOperation> GetHisOperations(string sheetNO)
-        {
-            DocumentSearchCondition con = new DocumentSearchCondition()
-            {
-                DocumentID = sheetNO,
-                DocumentType = DeliverySheet.DocumentType
-            };
-            return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
-        }
-        /// <summary>
         /// 增加送货单
         /// </summary>
         /// <param name="info"></param>
@@ -179,7 +165,7 @@ namespace LJH.Inventory.BLL
             if (string.IsNullOrEmpty(info.ID))
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
-                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, DeliverySheet.DocumentType);
+                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount,info.DocumentType);
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
@@ -189,7 +175,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = DeliverySheet.DocumentType,
+                    DocumentType =info.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "新增",
                     State = SheetState.Add,
@@ -220,7 +206,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = DeliverySheet.DocumentType,
+                    DocumentType =info.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "修改",
                     State = info.State,
@@ -254,7 +240,7 @@ namespace LJH.Inventory.BLL
                     DocumentOperation doc = new DocumentOperation()
                     {
                         DocumentID = info.ID,
-                        DocumentType = DeliverySheet.DocumentType,
+                        DocumentType =info.DocumentType,
                         OperatDate = DateTime.Now,
                         Operation = "审核",
                         State = SheetState.Approved,
@@ -299,7 +285,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = sheetNo,
-                DocumentType = DeliverySheet.DocumentType,
+                DocumentType = sheet.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "出库",
                 State = sheet.State,

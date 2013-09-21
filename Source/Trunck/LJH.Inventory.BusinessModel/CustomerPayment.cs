@@ -10,14 +10,14 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public class CustomerPayment
     {
-        #region 静态变量
-        public static readonly string DocumentType = "CustomerPayment";
-        #endregion
-
         #region 构造函数
         public CustomerPayment()
         {
         }
+        #endregion
+
+        #region 只读变量
+        public readonly string DocumentType = "CustomerPayment";
         #endregion
 
         #region 公共属性

@@ -73,16 +73,6 @@ namespace LJH.Inventory.BLL
         {
             return ProviderFactory.Create<IOrderProvider>(_RepoUri).GetItems(con);
         }
-
-        public QueryResultList<DocumentOperation> GetHisOperations(string orderID)
-        {
-            DocumentSearchCondition con = new DocumentSearchCondition()
-            {
-                DocumentID = orderID,
-                DocumentType = Order.DocumentType,
-            };
-            return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
-        }
         /// <summary>
         /// 获取订单记录
         /// </summary>
@@ -119,7 +109,7 @@ namespace LJH.Inventory.BLL
             if (string.IsNullOrEmpty(info.ID))
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.OrderPrefix,
-                    UserSettings.Current.OrderDateFormat, UserSettings.Current.OrderSerialCount, Order.DocumentType);
+                    UserSettings.Current.OrderDateFormat, UserSettings.Current.OrderSerialCount, info.DocumentType);
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
@@ -131,7 +121,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = Order.DocumentType,
+                    DocumentType = info.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "新增",
                     State = SheetState.Add,
@@ -161,7 +151,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = Order.DocumentType,
+                    DocumentType = info.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "修改",
                     State = info.State,
@@ -196,7 +186,7 @@ namespace LJH.Inventory.BLL
                     DocumentOperation doc = new DocumentOperation()
                     {
                         DocumentID = info.ID,
-                        DocumentType = Order.DocumentType,
+                        DocumentType = info.DocumentType,
                         OperatDate = DateTime.Now,
                         Operation = "审核",
                         State = SheetState.Approved,
@@ -235,7 +225,7 @@ namespace LJH.Inventory.BLL
                     DocumentOperation doc = new DocumentOperation()
                     {
                         DocumentID = info.ID,
-                        DocumentType = Order.DocumentType,
+                        DocumentType = info.DocumentType,
                         OperatDate = DateTime.Now,
                         Operation = "作废",
                         State = SheetState.Canceled,

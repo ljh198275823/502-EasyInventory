@@ -7,12 +7,14 @@ namespace LJH.Inventory.BusinessModel
 {
     public class Order
     {
-        public static readonly string DocumentType = "Order";
-
         #region 构造函数
         public Order()
         {
         }
+        #endregion
+
+        #region 只读变量
+        public readonly string DocumentType = "Order";
         #endregion
 
         #region 公共属性

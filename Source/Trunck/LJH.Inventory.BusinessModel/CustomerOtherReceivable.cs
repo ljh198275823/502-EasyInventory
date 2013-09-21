@@ -10,14 +10,14 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public class CustomerOtherReceivable
     {
-        #region 静态变量
-        public static readonly string DocumentType = "CustomerOtherReceivable";
-        #endregion
-
         #region 构造函数
         public CustomerOtherReceivable()
         {
         }
+        #endregion
+
+        #region 只读变量
+        public readonly string DocumentType = "CustomerOtherReceivable";
         #endregion
 
         #region 公共属性

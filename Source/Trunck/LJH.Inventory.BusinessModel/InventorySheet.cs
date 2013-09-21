@@ -10,14 +10,14 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public class InventorySheet
     {
-        #region 静态变量
-        public static readonly  string DocumentType = "InventorySheet";
-        #endregion
-
         #region 构造函数
         public InventorySheet()
         {
         }
+        #endregion
+
+        #region 只读变量
+        public readonly string DocumentType = "InventorySheet";
         #endregion
 
         #region 公共属性

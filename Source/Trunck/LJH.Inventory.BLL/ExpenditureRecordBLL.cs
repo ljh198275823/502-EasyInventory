@@ -32,16 +32,6 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IExpenditureRecordProvider>(_RepoUri).GetItems(con);
         }
 
-        public QueryResultList<DocumentOperation> GetHisOperations(string sheetNo)
-        {
-            DocumentSearchCondition con = new DocumentSearchCondition()
-            {
-                DocumentID = sheetNo,
-                DocumentType = ExpenditureRecord.DocumentType
-            };
-            return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
-        }
-
         public CommandResult Add(ExpenditureRecord info, string opt)
         {
             if (string.IsNullOrEmpty(info.ID))
@@ -56,7 +46,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = ExpenditureRecord.DocumentType,
+                DocumentType = info.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "新增",
                 State = info.State,
@@ -77,7 +67,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = ExpenditureRecord.DocumentType,
+                    DocumentType = info.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "修改",
                     State = info.State,
@@ -105,7 +95,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = ExpenditureRecord.DocumentType,
+                DocumentType = info.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "取消",
                 State = info.State,

@@ -74,22 +74,6 @@ namespace LJH.Inventory.UI.Forms
             return sum.Trim();
         }
 
-
-        private void ShowOperations(string sheetNo)
-        {
-            dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
-            items = (from item in items
-                     orderby item.OperatDate ascending
-                     select item).ToList();
-            foreach (DocumentOperation item in items)
-            {
-                int row = dataGridView1.Rows.Add();
-                dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
-                dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
-                dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
-            }
-        }
         #endregion
 
         #region 重写基类方法
@@ -150,19 +134,20 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
-            if (sheet != null)
+            PurchaseOrder item = UpdatingItem as PurchaseOrder;
+            if (item != null)
             {
-                this.txtSheetNo.Text = sheet.ID;
+                this.txtSheetNo.Text = item.ID;
                 this.txtSheetNo.Enabled = false;
-                this.txtSupplier.Text = sheet.Supplier.Name;
-                this.txtSupplier.Tag = sheet.Supplier;
-                this.dtOrderDate.Value = sheet.OrderDate;
-                this.txtCurrencyType.Text = sheet.CurrencyType;
-                this.txtBuyer.Text = sheet.Buyer;
-                this.dtDeliveryDate.Value = sheet.DemandDate;
-                ShowDeliveryItemsOnGrid(sheet.Items);
-                ShowOperations(sheet.ID);
+                this.txtSupplier.Text = item.Supplier.Name;
+                this.txtSupplier.Tag = item.Supplier;
+                this.dtOrderDate.Value = item.OrderDate;
+                this.txtCurrencyType.Text = item.CurrencyType;
+                this.txtBuyer.Text = item.Buyer;
+                this.dtDeliveryDate.Value = item.DemandDate;
+                ShowDeliveryItemsOnGrid(item.Items);
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+                ShowOperations(items, dataGridView1);
                 ShowButtonState();
             }
         }

@@ -76,22 +76,6 @@ namespace LJH.Inventory.UI.Forms
             }
             return sum.Trim();
         }
-
-        private void ShowOperations(string sheetNo)
-        {
-            dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
-            items = (from item in items
-                     orderby item.OperatDate ascending
-                     select item).ToList();
-            foreach (DocumentOperation item in items)
-            {
-                int row = dataGridView1.Rows.Add();
-                dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
-                dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
-                dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
-            }
-        }
         #endregion
 
         #region 重写基类方法
@@ -157,27 +141,28 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            Order order = UpdatingItem as Order;
-            if (order != null)
+            Order item = UpdatingItem as Order;
+            if (item != null)
             {
-                this.txtSheetNo.Text = order.ID;
+                this.txtSheetNo.Text = item.ID;
                 this.txtSheetNo.Enabled = false;
-                this.txtCustomer.Text = order.Customer.Name;
-                this.txtCustomer.Tag = order.Customer;
-                this.txtFinalCustomer.Text = order.FinalCustomer != null ? order.FinalCustomer.Name : string.Empty;
-                this.txtFinalCustomer.Tag = order.FinalCustomer;
-                this.dtOrderDate.Value = order.OrderDate;
-                this.txtPriceTerm.Text = order.PriceTerm;
-                this.txtCurrencyType.Text = order.CurrencyType;
-                this.txtExchangeRate.DecimalValue = order.ExchangeRate;
-                this.txtCollectionType.Text = order.CollectionType;
-                this.txtTransport.Text = order.Transport;
-                this.txtLoadPort.Text = order.LoadPort;
-                this.txtDestinationPort.Text = order.DestinationPort;
-                this.txtSalesPerson.Text = order.SalesPerson;
-                this.dtDeliveryDate.Value = order.DemandDate;
-                ShowDeliveryItemsOnGrid(order.Items);
-                ShowOperations(order.ID);
+                this.txtCustomer.Text = item.Customer.Name;
+                this.txtCustomer.Tag = item.Customer;
+                this.txtFinalCustomer.Text = item.FinalCustomer != null ? item.FinalCustomer.Name : string.Empty;
+                this.txtFinalCustomer.Tag = item.FinalCustomer;
+                this.dtOrderDate.Value = item.OrderDate;
+                this.txtPriceTerm.Text = item.PriceTerm;
+                this.txtCurrencyType.Text = item.CurrencyType;
+                this.txtExchangeRate.DecimalValue = item.ExchangeRate;
+                this.txtCollectionType.Text = item.CollectionType;
+                this.txtTransport.Text = item.Transport;
+                this.txtLoadPort.Text = item.LoadPort;
+                this.txtDestinationPort.Text = item.DestinationPort;
+                this.txtSalesPerson.Text = item.SalesPerson;
+                this.dtDeliveryDate.Value = item.DemandDate;
+                ShowDeliveryItemsOnGrid(item.Items);
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+                ShowOperations(items, dataGridView1);
                 ShowAttachmentHeaders();
                 ShowButtonState();
             }
@@ -558,7 +543,7 @@ namespace LJH.Inventory.UI.Forms
                     AttachmentHeader header = new AttachmentHeader();
                     header.ID = Guid.NewGuid();
                     header.DocumentID = item.ID;
-                    header.DocumentType = Order.DocumentType;
+                    header.DocumentType = item.DocumentType;
                     header.Owner = OperatorInfo.CurrentOperator.OperatorName;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
@@ -589,7 +574,7 @@ namespace LJH.Inventory.UI.Forms
             Order item = UpdatingItem as Order;
             if (item != null)
             {
-                List<AttachmentHeader> items = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).GetHeaders(item.ID, Order.DocumentType).QueryObjects;
+                List<AttachmentHeader> items = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
                 if (items != null && items.Count > 0)
                 {
                     foreach (AttachmentHeader header in items)

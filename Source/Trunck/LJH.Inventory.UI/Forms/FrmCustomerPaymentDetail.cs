@@ -20,22 +20,6 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有方法
-        private void ShowOperations(string sheetNo)
-        {
-            dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
-            items = (from item in items
-                     orderby item.OperatDate ascending
-                     select item).ToList();
-            foreach (DocumentOperation item in items)
-            {
-                int row = dataGridView1.Rows.Add();
-                dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
-                dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
-                dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
-            }
-        }
-
         private void ShowAssigns(List<CustomerPaymentAssign> assigns)
         {
             ItemsGrid.Rows.Clear();
@@ -92,23 +76,24 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            CustomerPayment cp = UpdatingItem as CustomerPayment;
-            if (cp != null)
+            CustomerPayment item = UpdatingItem as CustomerPayment;
+            if (item != null)
             {
-                this.txtID.Text = cp.ID;
+                this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
-                dtPaidDate.Value = cp.PaidDate;
-                txtCurrencyType.Text = cp.CurrencyType;
-                rdTransfer.Checked = (cp.PaymentMode == PaymentMode.Transfer);
-                rdCash.Checked = cp.PaymentMode == PaymentMode.Cash;
-                rdCheck.Checked = cp.PaymentMode == PaymentMode.Check;
-                txtAmount.DecimalValue = cp.Amount;
-                txtCheckNum.Text = cp.CheckNum;
-                txtCustomer.Text = cp.Customer != null ? cp.Customer.Name : string.Empty;
-                txtCustomer.Tag = cp.Customer;
-                txtMemo.Text = cp.Memo;
-                ShowAssigns(cp.Assigns);
-                ShowOperations(cp.ID);
+                dtPaidDate.Value = item.PaidDate;
+                txtCurrencyType.Text = item.CurrencyType;
+                rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
+                rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
+                rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
+                txtAmount.DecimalValue = item.Amount;
+                txtCheckNum.Text = item.CheckNum;
+                txtCustomer.Text = item.Customer != null ? item.Customer.Name : string.Empty;
+                txtCustomer.Tag = item.Customer;
+                txtMemo.Text = item.Memo;
+                ShowAssigns(item.Assigns);
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+                ShowOperations(items, dataGridView1);
                 ShowButtonState();
             }
         }

@@ -106,31 +106,6 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetItems(con);
         }
         /// <summary>
-        /// 分配客户付款金额
-        /// </summary>
-        /// <param name="assigns"></param>
-        /// <returns></returns>
-        public CommandResult AssignPayment(List<CustomerPaymentAssign> assigns)
-        {
-            //IUnitWork unitwork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            //foreach (CustomerPaymentAssign assign in assigns)
-            //{
-            //    ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(assign, unitwork);
-            //}
-            //return unitwork.Commit();
-            return null;
-        }
-
-        public QueryResultList<DocumentOperation> GetHisOperations(string sheetNo)
-        {
-            DocumentSearchCondition con = new DocumentSearchCondition()
-            {
-                DocumentID = sheetNo,
-                DocumentType = CustomerPayment.DocumentType
-            };
-            return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
-        }
-        /// <summary>
         /// 增加客户付款信息
         /// </summary>
         /// <param name="info"></param>
@@ -153,7 +128,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = CustomerPayment.DocumentType,
+                DocumentType = info.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "新增",
                 State = SheetState.Add,
@@ -183,7 +158,7 @@ namespace LJH.Inventory.BLL
                     DocumentOperation doc = new DocumentOperation()
                     {
                         DocumentID = info.ID,
-                        DocumentType = CustomerPayment.DocumentType,
+                        DocumentType = info.DocumentType,
                         OperatDate = DateTime.Now,
                         Operation = "审核",
                         State = SheetState.Approved,
@@ -220,7 +195,7 @@ namespace LJH.Inventory.BLL
                 DocumentOperation doc = new DocumentOperation()
                 {
                     DocumentID = info.ID,
-                    DocumentType = CustomerPayment.DocumentType,
+                    DocumentType = info.DocumentType,
                     OperatDate = DateTime.Now,
                     Operation = "修改",
                     State = info.State,
@@ -255,7 +230,7 @@ namespace LJH.Inventory.BLL
             DocumentOperation doc = new DocumentOperation()
             {
                 DocumentID = info.ID,
-                DocumentType = CustomerPayment.DocumentType,
+                DocumentType = info.DocumentType,
                 OperatDate = DateTime.Now,
                 Operation = "取消",
                 State = info.State,

@@ -19,24 +19,6 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
-        #region 私有方法
-        private void ShowOperations(string sheetNo)
-        {
-            dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
-            items = (from item in items
-                     orderby item.OperatDate ascending
-                     select item).ToList();
-            foreach (DocumentOperation item in items)
-            {
-                int row = dataGridView1.Rows.Add();
-                dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
-                dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
-                dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
-            }
-        }
-        #endregion
-
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -73,7 +55,8 @@ namespace LJH.Inventory.UI.Forms
                 txtCustomer.Text = cor.Customer != null ? cor.Customer.Name : string.Empty;
                 txtCustomer.Tag = cor.Customer;
                 txtMemo.Text = cor.Memo;
-                ShowOperations(cor.ID);
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(cor.ID, cor.DocumentType).QueryObjects;
+                ShowOperations(items, dataGridView1);
                 ShowButtonState();
             }
         }

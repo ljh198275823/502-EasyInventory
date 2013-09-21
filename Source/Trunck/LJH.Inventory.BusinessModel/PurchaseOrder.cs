@@ -7,14 +7,14 @@ namespace LJH.Inventory.BusinessModel
 {
     public class PurchaseOrder
     {
-        #region 静态变量
-        public static readonly  string DocumentType = "PurchaseSheet";
-        #endregion
-
         #region 构造函数
         public PurchaseOrder()
         {
         }
+        #endregion
+
+        #region 只读变量
+        public readonly string DocumentType = "PurchaseSheet";
         #endregion
 
         #region 公共属性

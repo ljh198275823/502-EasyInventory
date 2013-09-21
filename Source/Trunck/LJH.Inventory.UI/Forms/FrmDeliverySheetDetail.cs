@@ -75,42 +75,27 @@ namespace LJH.Inventory.UI.Forms
             return sum;
         }
 
-        private void ShowSheet(DeliverySheet sheet)
+        private void ShowSheet(DeliverySheet item)
         {
-            if (!string.IsNullOrEmpty(sheet.ID))
+            if (!string.IsNullOrEmpty(item.ID))
             {
-                this.txtSheetNo.Text = sheet.ID;
+                this.txtSheetNo.Text = item.ID;
                 this.txtSheetNo.Enabled = false;
             }
-            this.txtCustomer.Text = sheet.Customer != null ? sheet.Customer.Name : string.Empty;
-            this.txtCustomer.Tag = sheet.Customer;
-            this.txtWareHouse.Text = sheet.WareHouse != null ? sheet.WareHouse.Name : string.Empty;
-            this.txtWareHouse.Tag = sheet.WareHouse;
-            this.txtMemo.Text = sheet.Memo;
-            ShowDeliveryItemsOnGrid(sheet.Items);
-            ShowOperations(sheet.ID);
+            this.txtCustomer.Text = item.Customer != null ? item.Customer.Name : string.Empty;
+            this.txtCustomer.Tag = item.Customer;
+            this.txtWareHouse.Text = item.WareHouse != null ? item.WareHouse.Name : string.Empty;
+            this.txtWareHouse.Tag = item.WareHouse;
+            this.txtMemo.Text = item.Memo;
+            ShowDeliveryItemsOnGrid(item.Items);
+            List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+            ShowOperations(items, dataGridView1);
             ShowButtonState();
-            if (sheet.State != SheetState.Add)
+            if (item.State != SheetState.Add)
             {
                 this.ItemsGrid.ReadOnly = true;
                 this.ItemsGrid.ContextMenuStrip = null;
                 this.ItemsGrid.ContextMenu = null;
-            }
-        }
-
-        private void ShowOperations(string sheetNo)
-        {
-            dataGridView1.Rows.Clear();
-            List<DocumentOperation> items = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(sheetNo).QueryObjects;
-            items = (from item in items
-                     orderby item.OperatDate ascending
-                     select item).ToList();
-            foreach (DocumentOperation item in items)
-            {
-                int row = dataGridView1.Rows.Add();
-                dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
-                dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
-                dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
             }
         }
         #endregion

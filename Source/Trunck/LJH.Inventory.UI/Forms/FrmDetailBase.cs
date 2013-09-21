@@ -22,6 +22,23 @@ namespace LJH.Inventory.UI.Forms
         protected readonly string _AutoCreate = "自动创建";
         #endregion
 
+        #region 保护方法
+        protected void ShowOperations(List<DocumentOperation> items, DataGridView dataGridView1)
+        {
+            dataGridView1.Rows.Clear();
+            if (items != null && items.Count > 0)
+            {
+                foreach (DocumentOperation item in items)
+                {
+                    int row = dataGridView1.Rows.Add();
+                    dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
+                    dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
+                    dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
+                }
+            }
+        }
+        #endregion
+
         #region 公共属性
         /// <summary>
         /// 获取或设置是否是用于增加
@@ -58,7 +75,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected virtual void ItemShowing()
         {
-            
+
         }
 
         protected virtual Object GetItemFromInput()
@@ -66,7 +83,7 @@ namespace LJH.Inventory.UI.Forms
             throw new NotImplementedException("子类没有重写GetItemFromInput方法");
         }
 
-        protected virtual CommandResult  AddItem(object addingItem)
+        protected virtual CommandResult AddItem(object addingItem)
         {
             throw new NotImplementedException("子类没有重写AddItem方法");
         }
