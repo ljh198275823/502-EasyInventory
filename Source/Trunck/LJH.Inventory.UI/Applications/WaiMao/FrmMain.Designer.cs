@@ -246,39 +246,39 @@
             // mnu_Inventory
             // 
             this.mnu_Inventory.Name = "mnu_Inventory";
-            this.mnu_Inventory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Inventory.Size = new System.Drawing.Size(148, 22);
             this.mnu_Inventory.Text = "商品库存资料";
             this.mnu_Inventory.Click += new System.EventHandler(this.mnu_Inventory_Click);
             // 
             // mnu_InventorySheet
             // 
             this.mnu_InventorySheet.Name = "mnu_InventorySheet";
-            this.mnu_InventorySheet.Size = new System.Drawing.Size(152, 22);
+            this.mnu_InventorySheet.Size = new System.Drawing.Size(148, 22);
             this.mnu_InventorySheet.Text = "收货单资料";
             this.mnu_InventorySheet.Click += new System.EventHandler(this.mnu_InventorySheet_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
             // 
             // mnu_DeliverySheet
             // 
             this.mnu_DeliverySheet.Name = "mnu_DeliverySheet";
-            this.mnu_DeliverySheet.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeliverySheet.Size = new System.Drawing.Size(148, 22);
             this.mnu_DeliverySheet.Text = "发货单资料";
             this.mnu_DeliverySheet.Click += new System.EventHandler(this.mnu_DeliverySheet_Click);
             // 
             // 报关单资料ToolStripMenuItem
             // 
             this.报关单资料ToolStripMenuItem.Name = "报关单资料ToolStripMenuItem";
-            this.报关单资料ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.报关单资料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.报关单资料ToolStripMenuItem.Text = "报关单资料";
             // 
             // 出口核销单ToolStripMenuItem
             // 
             this.出口核销单ToolStripMenuItem.Name = "出口核销单ToolStripMenuItem";
-            this.出口核销单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.出口核销单ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.出口核销单ToolStripMenuItem.Text = "出口核销单";
             // 
             // 财务ToolStripMenuItem
@@ -491,21 +491,21 @@
             // mnu_Operator
             // 
             this.mnu_Operator.Name = "mnu_Operator";
-            this.mnu_Operator.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Operator.Size = new System.Drawing.Size(124, 22);
             this.mnu_Operator.Text = "操作员";
             this.mnu_Operator.Click += new System.EventHandler(this.mnu_Operator_Click);
             // 
             // mnu_Role
             // 
             this.mnu_Role.Name = "mnu_Role";
-            this.mnu_Role.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Role.Size = new System.Drawing.Size(124, 22);
             this.mnu_Role.Text = "角色";
             this.mnu_Role.Click += new System.EventHandler(this.mnu_Role_Click);
             // 
             // mnu_ChangePwd
             // 
             this.mnu_ChangePwd.Name = "mnu_ChangePwd";
-            this.mnu_ChangePwd.Size = new System.Drawing.Size(152, 22);
+            this.mnu_ChangePwd.Size = new System.Drawing.Size(124, 22);
             this.mnu_ChangePwd.Text = "更改密码";
             this.mnu_ChangePwd.Click += new System.EventHandler(this.mnu_ChangePwd_Click);
             // 
@@ -604,20 +604,21 @@
             // mnu_Manual
             // 
             this.mnu_Manual.Name = "mnu_Manual";
-            this.mnu_Manual.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Manual.Size = new System.Drawing.Size(152, 22);
             this.mnu_Manual.Text = "用户手册";
+            this.mnu_Manual.Click += new System.EventHandler(this.mnu_Manual_Click);
             // 
             // mnu_DogInfo
             // 
             this.mnu_DogInfo.Name = "mnu_DogInfo";
-            this.mnu_DogInfo.Size = new System.Drawing.Size(148, 22);
+            this.mnu_DogInfo.Size = new System.Drawing.Size(152, 22);
             this.mnu_DogInfo.Text = "软件授权信息";
             this.mnu_DogInfo.Click += new System.EventHandler(this.mnu_DogInfo_Click);
             // 
             // mnu_Aboat
             // 
             this.mnu_Aboat.Name = "mnu_Aboat";
-            this.mnu_Aboat.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Aboat.Size = new System.Drawing.Size(152, 22);
             this.mnu_Aboat.Text = "关于";
             this.mnu_Aboat.Click += new System.EventHandler(this.mnu_Aboat_Click);
             // 

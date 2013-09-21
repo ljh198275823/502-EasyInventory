@@ -413,5 +413,10 @@ namespace LJH.Inventory.UI.Applications.WaiMao
             ShowSingleForm(typeof(FrmOrderPaymentReport));
         }
 
+        private void mnu_Manual_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

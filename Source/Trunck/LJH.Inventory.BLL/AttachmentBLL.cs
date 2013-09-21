@@ -106,6 +106,18 @@ namespace LJH.Inventory.BLL
                 return new CommandResult(ret.Result, ret.Message);
             }
         }
+
+        public CommandResult Delete(AttachmentHeader header)
+        {
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            ProviderFactory.Create<IAttachmentHeaderProvider>(_RepoUri).Delete(header, unitWork);
+            Attachment att = ProviderFactory.Create<IAttachmentProvider>(_RepoUri).GetByID(header.ID).QueryObject;
+            if (att != null)
+            {
+                ProviderFactory.Create<IAttachmentProvider>(_RepoUri).Delete(att, unitWork);
+            }
+            return unitWork.Commit();
+        }
         #endregion
     }
 }
