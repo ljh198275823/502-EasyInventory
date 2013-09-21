@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,15 +94,15 @@
             this.colFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Attachment = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AttachmentAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_AttachmentDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AttachmentOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AttachmentDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colOperateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_AttachmentOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -552,8 +552,8 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -561,8 +561,8 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -602,9 +602,9 @@
             // 
             // colPrepared
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
-            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Blue;
+            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPrepared.HeaderText = "已备货";
             this.colPrepared.Name = "colPrepared";
             this.colPrepared.ReadOnly = true;
@@ -622,9 +622,9 @@
             // 
             // colNotShipped
             // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
-            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red;
+            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle8;
             this.colNotShipped.HeaderText = "未出货";
             this.colNotShipped.Name = "colNotShipped";
             this.colNotShipped.ReadOnly = true;
@@ -744,28 +744,35 @@
             this.mnu_AttachmentSaveAs,
             this.mnu_AttachmentDelete});
             this.mnu_Attachment.Name = "contextMenuStrip1";
-            this.mnu_Attachment.Size = new System.Drawing.Size(153, 114);
+            this.mnu_Attachment.Size = new System.Drawing.Size(122, 92);
             // 
             // mnu_AttachmentAdd
             // 
             this.mnu_AttachmentAdd.Name = "mnu_AttachmentAdd";
-            this.mnu_AttachmentAdd.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AttachmentAdd.Size = new System.Drawing.Size(121, 22);
             this.mnu_AttachmentAdd.Text = "新增";
             this.mnu_AttachmentAdd.Click += new System.EventHandler(this.mnu_AttachmentAdd_Click);
             // 
-            // mnu_AttachmentDelete
+            // mnu_AttachmentOpen
             // 
-            this.mnu_AttachmentDelete.Name = "mnu_AttachmentDelete";
-            this.mnu_AttachmentDelete.Size = new System.Drawing.Size(152, 22);
-            this.mnu_AttachmentDelete.Text = "删除";
-            this.mnu_AttachmentDelete.Click += new System.EventHandler(this.mnu_AttachmentDelete_Click);
+            this.mnu_AttachmentOpen.Name = "mnu_AttachmentOpen";
+            this.mnu_AttachmentOpen.Size = new System.Drawing.Size(121, 22);
+            this.mnu_AttachmentOpen.Text = "打开";
+            this.mnu_AttachmentOpen.Click += new System.EventHandler(this.mnu_AttachmentOpen_Click);
             // 
             // mnu_AttachmentSaveAs
             // 
             this.mnu_AttachmentSaveAs.Name = "mnu_AttachmentSaveAs";
-            this.mnu_AttachmentSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AttachmentSaveAs.Size = new System.Drawing.Size(121, 22);
             this.mnu_AttachmentSaveAs.Text = "另存为...";
             this.mnu_AttachmentSaveAs.Click += new System.EventHandler(this.mnu_AttachmentSaveAs_Click);
+            // 
+            // mnu_AttachmentDelete
+            // 
+            this.mnu_AttachmentDelete.Name = "mnu_AttachmentDelete";
+            this.mnu_AttachmentDelete.Size = new System.Drawing.Size(121, 22);
+            this.mnu_AttachmentDelete.Text = "删除";
+            this.mnu_AttachmentDelete.Click += new System.EventHandler(this.mnu_AttachmentDelete_Click);
             // 
             // tabPage2
             // 
@@ -825,13 +832,6 @@
             this.colFill.HeaderText = "";
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
-            // 
-            // mnu_AttachmentOpen
-            // 
-            this.mnu_AttachmentOpen.Name = "mnu_AttachmentOpen";
-            this.mnu_AttachmentOpen.Size = new System.Drawing.Size(152, 22);
-            this.mnu_AttachmentOpen.Text = "打开";
-            this.mnu_AttachmentOpen.Click += new System.EventHandler(this.mnu_AttachmentOpen_Click);
             // 
             // FrmOrderDetail
             // 

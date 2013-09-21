@@ -163,7 +163,8 @@ namespace LJH.Inventory.UI.Forms
                 ShowDeliveryItemsOnGrid(item.Items);
                 List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
-                ShowAttachmentHeaders();
+                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
+                ShowAttachmentHeaders(headers, this.gridAttachment);
                 ShowButtonState();
             }
         }
@@ -229,6 +230,113 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult UpdateItem(object item)
         {
             return (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).Update(item as Order, OperatorInfo.CurrentOperator.OperatorName);
+        }
+        #endregion
+
+        #region 与附件操作相关的方法和事件处理程序
+        private void mnu_AttachmentAdd_Click(object sender, EventArgs e)
+        {
+            Order item = UpdatingItem as Order;
+            if (item != null)
+            {
+                OpenFileDialog dig = new OpenFileDialog();
+                if (dig.ShowDialog() == DialogResult.OK)
+                {
+                    AttachmentHeader header = new AttachmentHeader();
+                    header.ID = Guid.NewGuid();
+                    header.DocumentID = item.ID;
+                    header.DocumentType = item.DocumentType;
+                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.FileName = System.IO.Path.GetFileName(dig.FileName);
+                    header.UploadDateTime = DateTime.Now;
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Upload(header, dig.FileName);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        int row = gridAttachment.Rows.Add();
+                        ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
+        }
+
+        private void mnu_AttachmentDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确实要删除所选项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                List<DataGridViewRow> deletingRows = new List<DataGridViewRow>();
+                foreach (DataGridViewRow row in this.gridAttachment.SelectedRows)
+                {
+                    AttachmentHeader header = row.Tag as AttachmentHeader;
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Delete(header);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        deletingRows.Add(row);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+                if (deletingRows != null && deletingRows.Count > 0)
+                {
+                    foreach (DataGridViewRow row in deletingRows)
+                    {
+                        this.gridAttachment.Rows.Remove(row);
+                    }
+                }
+            }
+        }
+
+        private void mnu_AttachmentSaveAs_Click(object sender, EventArgs e)
+        {
+            if (this.gridAttachment.SelectedRows.Count == 1)
+            {
+                AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
+                SaveFileDialog dig = new SaveFileDialog();
+                dig.FileName = header.FileName;
+                dig.Filter = "所有文件(*.*)|*.*";
+                if (dig.ShowDialog() == DialogResult.OK)
+                {
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Download(header, dig.FileName);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
+        }
+
+        private void mnu_AttachmentOpen_Click(object sender, EventArgs e)
+        {
+            if (this.gridAttachment.SelectedRows.Count == 1)
+            {
+                AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
+                string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
+                string path = System.IO.Path.Combine(dir, header.FileName);
+                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Download(header, path);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(path);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
         }
         #endregion
 
@@ -513,7 +621,6 @@ namespace LJH.Inventory.UI.Forms
                 txtSalesPerson.Text = item.OperatorName;
             }
         }
-        #endregion
 
         private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -527,138 +634,6 @@ namespace LJH.Inventory.UI.Forms
                     FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();
-                }
-            }
-        }
-
-        #region 与附件操作相关的方法和事件处理程序
-        private void mnu_AttachmentAdd_Click(object sender, EventArgs e)
-        {
-            Order item = UpdatingItem as Order;
-            if (item != null)
-            {
-                OpenFileDialog dig = new OpenFileDialog();
-                if (dig.ShowDialog() == DialogResult.OK)
-                {
-                    AttachmentHeader header = new AttachmentHeader();
-                    header.ID = Guid.NewGuid();
-                    header.DocumentID = item.ID;
-                    header.DocumentType = item.DocumentType;
-                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
-                    header.FileName = System.IO.Path.GetFileName(dig.FileName);
-                    header.UploadDateTime = DateTime.Now;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Upload(header, dig.FileName);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        int row = gridAttachment.Rows.Add();
-                        ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
-                    }
-                }
-            }
-        }
-
-        private void mnu_AttachmentDelete_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("确实要删除所选项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                List<DataGridViewRow> deletingRows = new List<DataGridViewRow>();
-                foreach (DataGridViewRow row in this.gridAttachment.SelectedRows)
-                {
-                    AttachmentHeader header = row.Tag as AttachmentHeader;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Delete(header);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        deletingRows.Add(row);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
-                    }
-                }
-                if (deletingRows != null && deletingRows.Count > 0)
-                {
-                    foreach (DataGridViewRow row in deletingRows)
-                    {
-                        this.gridAttachment.Rows.Remove(row);
-                    }
-                }
-            }
-        }
-
-        private void mnu_AttachmentSaveAs_Click(object sender, EventArgs e)
-        {
-            if (this.gridAttachment.SelectedRows.Count == 1)
-            {
-                AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
-                SaveFileDialog dig = new SaveFileDialog();
-                dig.FileName = header.FileName;
-                dig.Filter = "所有文件(*.*)|*.*";
-                if (dig.ShowDialog() == DialogResult.OK)
-                {
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Download(header, dig.FileName);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
-                    }
-                }
-            }
-        }
-
-        private void mnu_AttachmentOpen_Click(object sender, EventArgs e)
-        {
-            if (this.gridAttachment.SelectedRows.Count == 1)
-            {
-                AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
-                string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
-                string path = System.IO.Path.Combine(dir, header.FileName);
-                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Download(header, path);
-                if (ret.Result == ResultCode.Successful)
-                {
-                    try
-                    {
-                        System.Diagnostics.Process.Start(path);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message);
-                }
-            }
-        }
-
-        private void ShowAttachmentHeaderOnRow(AttachmentHeader header, DataGridViewRow row)
-        {
-            row.Tag = header;
-            row.Cells["colUploadDateTime"].Value = header.UploadDateTime;
-            row.Cells["colOwner"].Value = header.Owner;
-            row.Cells["colFileName"].Value = header.FileName;
-        }
-
-        private void ShowAttachmentHeaders()
-        {
-            gridAttachment.Rows.Clear();
-            Order item = UpdatingItem as Order;
-            if (item != null)
-            {
-                List<AttachmentHeader> items = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
-                if (items != null && items.Count > 0)
-                {
-                    foreach (AttachmentHeader header in items)
-                    {
-                        int row = gridAttachment.Rows.Add();
-                        ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
-                    }
                 }
             }
         }

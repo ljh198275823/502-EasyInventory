@@ -71,6 +71,14 @@ namespace LJH.Inventory.UI.Forms
             {
                 btnOk.Enabled = false;
             }
+            //ContextMenuStrip menu_Attachment = AttachmentMenu;
+            //if (menu_Attachment != null)
+            //{
+            //    if (menu_Attachment.Items["mnu_AttachmentAdd"] != null) menu_Attachment.Items["mnu_AttachmentAdd"].Click += mnu_AttachmentAdd_Click;
+            //    if (menu_Attachment.Items["mnu_AttachmentOpen"] != null) menu_Attachment.Items["mnu_AttachmentOpen"].Click += mnu_AttachmentOpen_Click;
+            //    if (menu_Attachment.Items["mnu_AttachmentSaveAs"] != null) menu_Attachment.Items["mnu_AttachmentSaveAs"].Click += mnu_AttachmentSaveAs_Click;
+            //    if (menu_Attachment.Items["mnu_AttachmentDelete"] != null) menu_Attachment.Items["mnu_AttachmentDelete"].Click += mnu_AttachmentDelete_Click;
+            //}
         }
 
         protected virtual void ItemShowing()
@@ -106,6 +114,29 @@ namespace LJH.Inventory.UI.Forms
         protected virtual void ShowButtonState()
         {
 
+        }
+        #endregion
+
+        #region 与附件操作相关的方法和事件处理程序
+        protected void ShowAttachmentHeaderOnRow(AttachmentHeader header, DataGridViewRow row)
+        {
+            row.Tag = header;
+            row.Cells["colUploadDateTime"].Value = header.UploadDateTime;
+            row.Cells["colOwner"].Value = header.Owner;
+            row.Cells["colFileName"].Value = header.FileName;
+        }
+
+        protected void ShowAttachmentHeaders(List<AttachmentHeader> items, DataGridView gridAttachment)
+        {
+            gridAttachment.Rows.Clear();
+            if (items != null && items.Count > 0)
+            {
+                foreach (AttachmentHeader header in items)
+                {
+                    int row = gridAttachment.Rows.Add();
+                    ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
+                }
+            }
         }
         #endregion
 

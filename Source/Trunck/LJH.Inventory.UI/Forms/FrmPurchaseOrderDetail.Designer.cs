@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtCurrencyType = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -77,13 +77,25 @@
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
+            this.mnu_Attachment = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_AttachmentAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AttachmentOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AttachmentSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AttachmentDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.gridAttachment = new System.Windows.Forms.DataGridView();
+            this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.mnu_Attachment.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
@@ -275,8 +287,8 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -284,8 +296,8 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle8;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -293,8 +305,8 @@
             // 
             // colTotal
             // 
-            dataGridViewCellStyle3.NullValue = null;
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.NullValue = null;
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle9;
             this.colTotal.HeaderText = "金额";
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
@@ -431,6 +443,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(1000, 375);
@@ -541,6 +554,87 @@
             this.btnPrint.Text = "打印(&P)";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // mnu_Attachment
+            // 
+            this.mnu_Attachment.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_AttachmentAdd,
+            this.mnu_AttachmentOpen,
+            this.mnu_AttachmentSaveAs,
+            this.mnu_AttachmentDelete});
+            this.mnu_Attachment.Name = "contextMenuStrip1";
+            this.mnu_Attachment.Size = new System.Drawing.Size(153, 114);
+            // 
+            // mnu_AttachmentAdd
+            // 
+            this.mnu_AttachmentAdd.Name = "mnu_AttachmentAdd";
+            this.mnu_AttachmentAdd.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AttachmentAdd.Text = "新增";
+            this.mnu_AttachmentAdd.Click += new System.EventHandler(this.mnu_AttachmentAdd_Click);
+            // 
+            // mnu_AttachmentOpen
+            // 
+            this.mnu_AttachmentOpen.Name = "mnu_AttachmentOpen";
+            this.mnu_AttachmentOpen.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AttachmentOpen.Text = "打开";
+            this.mnu_AttachmentOpen.Click += new System.EventHandler(this.mnu_AttachmentOpen_Click);
+            // 
+            // mnu_AttachmentSaveAs
+            // 
+            this.mnu_AttachmentSaveAs.Name = "mnu_AttachmentSaveAs";
+            this.mnu_AttachmentSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AttachmentSaveAs.Text = "另存为...";
+            this.mnu_AttachmentSaveAs.Click += new System.EventHandler(this.mnu_AttachmentSaveAs_Click);
+            // 
+            // mnu_AttachmentDelete
+            // 
+            this.mnu_AttachmentDelete.Name = "mnu_AttachmentDelete";
+            this.mnu_AttachmentDelete.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AttachmentDelete.Text = "删除";
+            this.mnu_AttachmentDelete.Click += new System.EventHandler(this.mnu_AttachmentDelete_Click);
+            // 
+            // gridAttachment
+            // 
+            this.gridAttachment.AllowDrop = true;
+            this.gridAttachment.AllowUserToAddRows = false;
+            this.gridAttachment.AllowUserToDeleteRows = false;
+            this.gridAttachment.AllowUserToResizeRows = false;
+            this.gridAttachment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridAttachment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colUploadDateTime,
+            this.colOwner,
+            this.colFileName});
+            this.gridAttachment.ContextMenuStrip = this.mnu_Attachment;
+            this.gridAttachment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridAttachment.Location = new System.Drawing.Point(0, 0);
+            this.gridAttachment.Name = "gridAttachment";
+            this.gridAttachment.RowHeadersVisible = false;
+            this.gridAttachment.RowTemplate.Height = 23;
+            this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridAttachment.Size = new System.Drawing.Size(1000, 375);
+            this.gridAttachment.TabIndex = 103;
+            // 
+            // colUploadDateTime
+            // 
+            this.colUploadDateTime.HeaderText = "上传时间";
+            this.colUploadDateTime.Name = "colUploadDateTime";
+            this.colUploadDateTime.ReadOnly = true;
+            this.colUploadDateTime.Width = 130;
+            // 
+            // colOwner
+            // 
+            this.colOwner.HeaderText = "操作员";
+            this.colOwner.Name = "colOwner";
+            this.colOwner.ReadOnly = true;
+            this.colOwner.Width = 150;
+            // 
+            // colFileName
+            // 
+            this.colFileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colFileName.HeaderText = "附件";
+            this.colFileName.MinimumWidth = 100;
+            this.colFileName.Name = "colFileName";
+            this.colFileName.ReadOnly = true;
+            // 
             // FrmPurchaseOrderDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -559,10 +653,13 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.mnu_Attachment.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -615,5 +712,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOnWay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIsOntime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ContextMenuStrip mnu_Attachment;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentAdd;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentOpen;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentSaveAs;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentDelete;
+        private System.Windows.Forms.DataGridView gridAttachment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUploadDateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
     }
 }

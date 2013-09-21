@@ -37,23 +37,25 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            ExpenditureRecord cp = UpdatingItem as ExpenditureRecord;
-            if (cp != null)
+            ExpenditureRecord item = UpdatingItem as ExpenditureRecord;
+            if (item != null)
             {
-                txtSheetNo.Text = cp.ID;
-                dtPaidDate.Value = cp.ExpenditureDate;
-                rdTransfer.Checked = (cp.PaymentMode == PaymentMode.Transfer);
-                rdCash.Checked = cp.PaymentMode == PaymentMode.Cash;
-                rdCheck.Checked = cp.PaymentMode == PaymentMode.Check;
-                txtAmount.DecimalValue = cp.Amount;
-                txtCategory.Text = cp.Category;
-                txtCheckNum.Text = cp.CheckNum;
-                txtRequest.Text = cp.Request;
-                txtPayee.Text = cp.Payee;
-                txtOrderID.Text = cp.OrderID;
-                txtMemo.Text = cp.Memo;
-                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(cp.ID, cp.DocumentType).QueryObjects;
+                txtSheetNo.Text = item.ID;
+                dtPaidDate.Value = item.ExpenditureDate;
+                rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
+                rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
+                rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
+                txtAmount.DecimalValue = item.Amount;
+                txtCategory.Text = item.Category;
+                txtCheckNum.Text = item.CheckNum;
+                txtRequest.Text = item.Request;
+                txtPayee.Text = item.Payee;
+                txtOrderID.Text = item.OrderID;
+                txtMemo.Text = item.Memo;
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
+                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
+                ShowAttachmentHeaders(headers, this.gridAttachment);
             }
         }
 
@@ -98,6 +100,114 @@ namespace LJH.Inventory.UI.Forms
         {
             btnOk.Enabled = IsAdding;
         }
+        #endregion
+
+        #region 与附件操作相关的方法和事件处理程序
+        private void mnu_AttachmentAdd_Click(object sender, EventArgs e)
+        {
+            ExpenditureRecord item = UpdatingItem as ExpenditureRecord;
+            if (item != null)
+            {
+                OpenFileDialog dig = new OpenFileDialog();
+                if (dig.ShowDialog() == DialogResult.OK)
+                {
+                    AttachmentHeader header = new AttachmentHeader();
+                    header.ID = Guid.NewGuid();
+                    header.DocumentID = item.ID;
+                    header.DocumentType = item.DocumentType;
+                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.FileName = System.IO.Path.GetFileName(dig.FileName);
+                    header.UploadDateTime = DateTime.Now;
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Upload(header, dig.FileName);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        int row = gridAttachment.Rows.Add();
+                        ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
+        }
+
+        private void mnu_AttachmentOpen_Click(object sender, EventArgs e)
+        {
+            if (this.gridAttachment.SelectedRows.Count == 1)
+            {
+                AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
+                string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
+                string path = System.IO.Path.Combine(dir, header.FileName);
+                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Download(header, path);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(path);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
+        }
+
+        private void mnu_AttachmentSaveAs_Click(object sender, EventArgs e)
+        {
+            if (this.gridAttachment.SelectedRows.Count == 1)
+            {
+                AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
+                SaveFileDialog dig = new SaveFileDialog();
+                dig.FileName = header.FileName;
+                dig.Filter = "所有文件(*.*)|*.*";
+                if (dig.ShowDialog() == DialogResult.OK)
+                {
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Download(header, dig.FileName);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
+        }
+
+        private void mnu_AttachmentDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确实要删除所选项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                List<DataGridViewRow> deletingRows = new List<DataGridViewRow>();
+                foreach (DataGridViewRow row in this.gridAttachment.SelectedRows)
+                {
+                    AttachmentHeader header = row.Tag as AttachmentHeader;
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Delete(header);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        deletingRows.Add(row);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+                if (deletingRows != null && deletingRows.Count > 0)
+                {
+                    foreach (DataGridViewRow row in deletingRows)
+                    {
+                        this.gridAttachment.Rows.Remove(row);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         private void btnNullify_Click(object sender, EventArgs e)
