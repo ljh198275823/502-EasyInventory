@@ -29,7 +29,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
 
-            List<CustomerType> items = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 Button b = new Button();
@@ -40,7 +40,7 @@ namespace LJH.Inventory.UI.Forms
                 b.FlatStyle = FlatStyle.Popup;
                 _Buttons.Add(b);
 
-                foreach (CustomerType pc in items)
+                foreach (RelatedCompanyType pc in items)
                 {
                     Button button = new Button();
                     button.Name = pc.ID;
@@ -68,7 +68,7 @@ namespace LJH.Inventory.UI.Forms
         protected override FrmDetailBase GetDetailForm()
         {
             FrmCustomerDetail frm = new FrmCustomerDetail();
-            frm.ClassID = 5;
+            frm.ClassID = 3;
             return frm;
         }
 
@@ -89,7 +89,7 @@ namespace LJH.Inventory.UI.Forms
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
-                con.ClassID = 5;
+                con.ClassID = 3;
                 SearchCondition = con;
             }
             List<Customer> cs = bll.GetItems(SearchCondition).QueryObjects;

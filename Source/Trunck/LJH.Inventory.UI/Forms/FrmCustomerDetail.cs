@@ -230,13 +230,39 @@ namespace LJH.Inventory.UI.Forms
 
         private void lblCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmCustomerTypeMaster frm = new FrmCustomerTypeMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
+            FrmMasterBase frm = null;
+            if (ClassID == 5)
             {
-                CustomerType ct = frm.SelectedItem as CustomerType;
-                txtCategory.Text = ct.Name;
-                txtCategory.Tag = ct;
+                frm = new FrmCustomerTypeMaster();
+                frm.ForSelect = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    CustomerType ct = frm.SelectedItem as CustomerType;
+                    txtCategory.Text = ct.Name;
+                    txtCategory.Tag = ct;
+                }
+            }
+            else if (ClassID == 6)
+            {
+                frm = new FrmSupplierTypeMaster();
+                frm.ForSelect = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    SupplierType ct = frm.SelectedItem as SupplierType;
+                    txtCategory.Text = ct.Name;
+                    txtCategory.Tag = ct;
+                }
+            }
+            else
+            {
+                frm = new FrmRelatedCompanyTypeMaster();
+                frm.ForSelect = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    RelatedCompanyType ct = frm.SelectedItem as RelatedCompanyType;
+                    txtCategory.Text = ct.Name;
+                    txtCategory.Tag = ct;
+                }
             }
         }
     }

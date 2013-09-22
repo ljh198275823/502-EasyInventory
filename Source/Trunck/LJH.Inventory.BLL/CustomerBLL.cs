@@ -74,7 +74,7 @@ namespace LJH.Inventory.BLL
         {
             if (string.IsNullOrEmpty(info.ID))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPrefix, UserSettings.Current.CustomerSerialCount, "customer");
+                info.ID = CreateCustomerID(info.ClassID);
             }
             if (!string.IsNullOrEmpty(info.ID))
             {

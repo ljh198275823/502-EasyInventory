@@ -73,10 +73,8 @@
             this.mnu_ForeignPort = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_NativePort = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_FreightAgent = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Shipper = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Express = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Insurance = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_RelatedCompanyType = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_RelatedCompany = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Security = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Operator = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Role = new System.Windows.Forms.ToolStripMenuItem();
@@ -246,39 +244,39 @@
             // mnu_Inventory
             // 
             this.mnu_Inventory.Name = "mnu_Inventory";
-            this.mnu_Inventory.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Inventory.Size = new System.Drawing.Size(152, 22);
             this.mnu_Inventory.Text = "商品库存资料";
             this.mnu_Inventory.Click += new System.EventHandler(this.mnu_Inventory_Click);
             // 
             // mnu_InventorySheet
             // 
             this.mnu_InventorySheet.Name = "mnu_InventorySheet";
-            this.mnu_InventorySheet.Size = new System.Drawing.Size(148, 22);
+            this.mnu_InventorySheet.Size = new System.Drawing.Size(152, 22);
             this.mnu_InventorySheet.Text = "收货单资料";
             this.mnu_InventorySheet.Click += new System.EventHandler(this.mnu_InventorySheet_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // mnu_DeliverySheet
             // 
             this.mnu_DeliverySheet.Name = "mnu_DeliverySheet";
-            this.mnu_DeliverySheet.Size = new System.Drawing.Size(148, 22);
+            this.mnu_DeliverySheet.Size = new System.Drawing.Size(152, 22);
             this.mnu_DeliverySheet.Text = "发货单资料";
             this.mnu_DeliverySheet.Click += new System.EventHandler(this.mnu_DeliverySheet_Click);
             // 
             // 报关单资料ToolStripMenuItem
             // 
             this.报关单资料ToolStripMenuItem.Name = "报关单资料ToolStripMenuItem";
-            this.报关单资料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.报关单资料ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.报关单资料ToolStripMenuItem.Text = "报关单资料";
             // 
             // 出口核销单ToolStripMenuItem
             // 
             this.出口核销单ToolStripMenuItem.Name = "出口核销单ToolStripMenuItem";
-            this.出口核销单ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.出口核销单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.出口核销单ToolStripMenuItem.Text = "出口核销单";
             // 
             // 财务ToolStripMenuItem
@@ -357,10 +355,8 @@
             this.mnu_ForeignPort,
             this.mnu_NativePort,
             this.toolStripSeparator5,
-            this.mnu_FreightAgent,
-            this.mnu_Shipper,
-            this.mnu_Express,
-            this.mnu_Insurance});
+            this.mnu_RelatedCompanyType,
+            this.mnu_RelatedCompany});
             this.业务资料ToolStripMenuItem.Name = "业务资料ToolStripMenuItem";
             this.业务资料ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.业务资料ToolStripMenuItem.Text = "基本资料";
@@ -450,29 +446,19 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
             // 
-            // mnu_FreightAgent
+            // mnu_RelatedCompanyType
             // 
-            this.mnu_FreightAgent.Name = "mnu_FreightAgent";
-            this.mnu_FreightAgent.Size = new System.Drawing.Size(152, 22);
-            this.mnu_FreightAgent.Text = "货代公司资料";
+            this.mnu_RelatedCompanyType.Name = "mnu_RelatedCompanyType";
+            this.mnu_RelatedCompanyType.Size = new System.Drawing.Size(152, 22);
+            this.mnu_RelatedCompanyType.Text = "相关公司类别";
+            this.mnu_RelatedCompanyType.Click += new System.EventHandler(this.mnu_RelatedCompanyType_Click);
             // 
-            // mnu_Shipper
+            // mnu_RelatedCompany
             // 
-            this.mnu_Shipper.Name = "mnu_Shipper";
-            this.mnu_Shipper.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Shipper.Text = "运输公司资料";
-            // 
-            // mnu_Express
-            // 
-            this.mnu_Express.Name = "mnu_Express";
-            this.mnu_Express.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Express.Text = "快件公司资料";
-            // 
-            // mnu_Insurance
-            // 
-            this.mnu_Insurance.Name = "mnu_Insurance";
-            this.mnu_Insurance.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Insurance.Text = "保险公司资料";
+            this.mnu_RelatedCompany.Name = "mnu_RelatedCompany";
+            this.mnu_RelatedCompany.Size = new System.Drawing.Size(152, 22);
+            this.mnu_RelatedCompany.Text = "相关公司资料";
+            this.mnu_RelatedCompany.Click += new System.EventHandler(this.mnu_RelatedCompany_Click);
             // 
             // mnu_Security
             // 
@@ -789,10 +775,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_ForeignPort;
         private System.Windows.Forms.ToolStripMenuItem mnu_NativePort;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem mnu_FreightAgent;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Shipper;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Express;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Insurance;
+        private System.Windows.Forms.ToolStripMenuItem mnu_RelatedCompanyType;
+        private System.Windows.Forms.ToolStripMenuItem mnu_RelatedCompany;
         private System.Windows.Forms.ToolStripMenuItem 供应商报价管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnu_CustomerType;
         private System.Windows.Forms.ToolStripMenuItem mnu_SupplierType;

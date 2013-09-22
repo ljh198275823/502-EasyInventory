@@ -398,5 +398,14 @@ namespace LJH.Inventory.UI.Applications.WaiMao
 
         }
 
+        private void mnu_RelatedCompanyType_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmRelatedCompanyTypeMaster));
+        }
+
+        private void mnu_RelatedCompany_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmRelatedCompanyMaster));
+        }
     }
 }
