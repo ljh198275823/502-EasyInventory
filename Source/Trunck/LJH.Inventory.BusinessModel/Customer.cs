@@ -26,6 +26,18 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Name { get; set; }
         /// <summary>
+        /// 获取或设置简称
+        /// </summary>
+        public string ForeignName { get; set; }
+        /// <summary>
+        /// 获取或设置信用限额
+        /// </summary>
+        public decimal CreditLine { get; set; }
+        /// <summary>
+        /// 获取或设置相关公司类型代码，如1表示货代公司，2表示船公司，3表示保险公司，4表示快递公司 ,5表示客户，6表示供应商...
+        /// </summary>
+        public int ClassID { get; set; }
+        /// <summary>
         /// 获取或设置所在国家
         /// </summary>
         public string Nation { get; set; }
@@ -38,10 +50,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string CategoryID { get; set; }
         /// <summary>
-        /// 获取或设置客户类型
-        /// </summary>
-        public CustomerType Category { get; set; }
-        /// <summary>
         /// 获取或设置联系电话
         /// </summary>
         public string TelPhone { get; set; }
@@ -50,13 +58,21 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Fax { get; set; }
         /// <summary>
+        /// 获取或设置邮政编码
+        /// </summary>
+        public string PostalCode { get; set; }
+        /// <summary>
         /// 获取或设置网站
         /// </summary>
         public string Website { get; set; }
         /// <summary>
-        /// 获取或设置邮政编码
+        /// 获取或设置QQ号
         /// </summary>
-        public string PostalCode { get; set; }
+        public string QQ { get; set; }
+        /// <summary>
+        /// 获取或设置电子邮件
+        /// </summary>
+        public string Email { get; set; }
         /// <summary>
         /// 获取或设置地址
         /// </summary>
@@ -73,10 +89,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置SwiftNo
         /// </summary>
         public string SwiftNO { get; set; }
-        /// <summary>
-        /// 获取或设置信用限额
-        /// </summary>
-        public decimal CreditLine { get; set; }
         /// <summary>
         /// 获取或设置备注
         /// </summary>

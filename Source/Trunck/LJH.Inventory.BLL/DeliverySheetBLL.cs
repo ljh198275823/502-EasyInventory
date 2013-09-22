@@ -31,7 +31,7 @@ namespace LJH.Inventory.BLL
                 {
                     ProductID = si.ProductID,
                     WareHouseID = sheet.WareHouseID, //如果送货单没有指定仓库，这里就为空
-                    IsUnShipped = true     //所有发货的库存项
+                    IsUnShipped = true     //所有未发货的库存项
                 };
                 List<ProductInventoryItem> items = ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).GetItems(con).QueryObjects;
                 //所有相关的库存项就是送货项订单分配的库存和未分配的库存

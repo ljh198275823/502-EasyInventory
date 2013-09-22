@@ -74,11 +74,9 @@
     <Compile Include="IProvider\IProductCategoryProvider.cs" />
     <Compile Include="IProvider\IProvider.cs" />
     <Compile Include="IProvider\IPurchaseOrderProvider.cs" />
-    <Compile Include="IProvider\IRelatedCompanyProvider.cs" />
     <Compile Include="IProvider\IRoleProvider.cs" />
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
     <Compile Include="IProvider\IStorageSheetProvider.cs" />
-    <Compile Include="IProvider\ISupplierProvider.cs" />
     <Compile Include="IProvider\ISupplierReceivableProvider.cs" />
     <Compile Include="IProvider\ISupplierTypeProvider.cs" />
     <Compile Include="IProvider\ISysParameterProvider.cs" />
@@ -105,9 +103,7 @@
     <Compile Include="LinqProvider\PortProvider.cs" />
     <Compile Include="LinqProvider\PriceTermProvider.cs" />
     <Compile Include="LinqProvider\PurchaseOrderProvider.cs" />
-    <Compile Include="LinqProvider\RelatedCompanyProvider.cs" />
     <Compile Include="LinqProvider\ServerDateTimeProvider.cs" />
-    <Compile Include="LinqProvider\SupplierProvider.cs" />
     <Compile Include="LinqProvider\SupplierReceivableProvider.cs" />
     <Compile Include="LinqProvider\SupplierTypeProvider.cs" />
     <Compile Include="LinqProvider\TransportProvider.cs" />

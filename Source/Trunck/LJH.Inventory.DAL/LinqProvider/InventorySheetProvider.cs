@@ -28,7 +28,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (sheet != null)
             {
                 sheet.WareHouse = (new WareHouseProvider(ConnectStr)).GetByID(sheet.WareHouseID).QueryObject;
-                sheet.Supplier = (new SupplierProvider(ConnectStr)).GetByID(sheet.SupplierID).QueryObject;
+                sheet.Supplier = (new CustomerProvider(ConnectStr)).GetByID(sheet.SupplierID).QueryObject;
                 if (sheet.Items != null && sheet.Items.Count > 0)
                 {
                     List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
@@ -64,7 +64,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (sheets != null && sheets.Count > 0)
             {
                 List<WareHouse> ws = (new WareHouseProvider(ConnectStr)).GetItems(null).QueryObjects;
-                List<Supplier> ss = (new SupplierProvider(ConnectStr)).GetItems(null).QueryObjects;
+                List<Customer> ss = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
                 List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
                 foreach (InventorySheet sheet in sheets)
                 {

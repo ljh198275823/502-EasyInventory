@@ -19,6 +19,10 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 公共属性
+        public int ClassID { get; set; }
+        #endregion
+
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -49,8 +53,8 @@ namespace LJH.Inventory.UI.Forms
             if (c != null)
             {
                 txtID.Text = c.ID;
-                txtCategory.Text = c.Category != null ? c.Category.Name : string.Empty;
-                txtCategory.Tag = c.Category;
+                txtCategory.Text = c.CategoryID;
+                txtCategory.Tag = c.CategoryID;
                 txtNation.Text = c.Nation;
                 txtName.Text = c.Name;
                 txtTelephone.Text = c.TelPhone;
@@ -80,15 +84,14 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new Customer();
+                info.ClassID = ClassID;
             }
             else
             {
                 info = UpdatingItem as Customer;
             }
             info.ID = txtID.Text != "自动创建" ? txtID.Text : string.Empty;
-            CustomerType ct = txtCategory.Tag as CustomerType;
-            info.CategoryID = ct != null ? ct.ID : string.Empty;
-            info.Category = ct;
+            info.CategoryID = txtCategory.Text;
             info.Nation = txtNation.Text;
             info.Name = txtName.Text;
             info.TelPhone = txtTelephone.Text;

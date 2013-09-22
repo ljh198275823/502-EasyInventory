@@ -168,8 +168,8 @@ namespace LJH.Inventory.UI.Forms
                 PurchaseSheet = UpdatingItem as PurchaseOrder;
             }
             PurchaseSheet.OrderDate = this.dtOrderDate.Value;
-            PurchaseSheet.SupplierID = (this.txtSupplier.Tag as Supplier).ID;
-            PurchaseSheet.Supplier = this.txtSupplier.Tag as Supplier;
+            PurchaseSheet.SupplierID = (this.txtSupplier.Tag as Customer).ID;
+            PurchaseSheet.Supplier = this.txtSupplier.Tag as Customer;
             PurchaseSheet.CurrencyType = this.txtCurrencyType.Text;
             PurchaseSheet.Buyer = this.txtBuyer.Text;
             PurchaseSheet.DemandDate = this.dtDeliveryDate.Value;
@@ -493,7 +493,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Supplier item = frm.SelectedItem as Supplier;
+                Customer item = frm.SelectedItem as Customer;
                 txtSupplier.Text = item.Name;
                 txtSupplier.Tag = item;
             }

@@ -19,7 +19,7 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 公共属性
-        public int CodeNum { get; set; }
+        public int ClassID { get; set; }
         #endregion
 
         #region 重写基类方法
@@ -42,14 +42,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            RelatedCompany c = UpdatingItem as RelatedCompany;
+            Customer c = UpdatingItem as Customer;
             if (c != null)
             {
                 txtName.Text = c.Name;
-                txtLinker.Text = c.Linker;
                 txtTelephone.Text = c.TelPhone;
                 txtAddress.Text = c.Address;
-                txtMobile.Text = c.Mobile;
                 txtFax.Text = c.Fax;
                 txtQQ.Text = c.QQ;
                 txtEmail.Text = c.Email;
@@ -61,20 +59,18 @@ namespace LJH.Inventory.UI.Forms
 
         protected override object GetItemFromInput()
         {
-            RelatedCompany info;
+            Customer info;
             if (UpdatingItem == null)
             {
-                info = new RelatedCompany();
-                info.CodeNum = CodeNum;
+                info = new Customer();
+                info.ClassID = ClassID;
             }
             else
             {
-                info = UpdatingItem as RelatedCompany;
+                info = UpdatingItem as Customer;
             }
             info.Name = txtName.Text;
-            info.Linker = txtLinker.Text;
             info.TelPhone = txtTelephone.Text;
-            info.Mobile = txtMobile.Text;
             info.Fax = txtFax.Text;
             info.Address = txtAddress.Text;
             info.PostalCode = txtPostalCode.Text;
@@ -87,14 +83,14 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            RelatedCompanyBLL bll = new RelatedCompanyBLL(AppSettings.CurrentSetting.ConnectString);
-            return bll.Add(item as RelatedCompany);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            return bll.Insert(item as Customer);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            RelatedCompanyBLL bll = new RelatedCompanyBLL(AppSettings.CurrentSetting.ConnectString);
-            return bll.Update(item as RelatedCompany);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            return bll.Insert(item as Customer);
         }
         #endregion
     }

@@ -13,25 +13,9 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         /// </summary>
         public string CustomerID { get; set; }
         /// <summary>
-        /// 获取或设置查询条件中的用户名
+        /// 获取或设置客户类别,参考客户类中的ClassID属性
         /// </summary>
-        public string CustomerName { get; set; }
-        /// <summary>
-        /// 获取或设置查询条件中的联系人
-        /// </summary>
-        public string Linker { get; set; }
-        /// <summary>
-        ///  获取或设置查询条件中的联系电话
-        /// </summary>
-        public string TelPhone { get; set; }
-        /// <summary>
-        ///  获取或设置查询条件中的手机
-        /// </summary>
-        public string Mobile { get; set; }
-        ///// <summary>
-        /////  获取或设置查询条件中的是否有应收账款
-        ///// </summary>
-        //public bool? Credit{get;set;}
+        public int? ClassID { get; set; }
         #endregion
     }
 }

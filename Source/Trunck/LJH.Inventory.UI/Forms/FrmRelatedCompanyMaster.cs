@@ -13,9 +13,9 @@ using LJH.Inventory.UI.Report;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmSupplierMaster : FrmMasterBase
+    public partial class FrmRelatedCompanyMaster : FrmMasterBase
     {
-        public FrmSupplierMaster()
+        public FrmRelatedCompanyMaster()
         {
             InitializeComponent();
         }
@@ -28,7 +28,8 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+
+            List<CustomerType> items = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 Button b = new Button();
@@ -39,7 +40,7 @@ namespace LJH.Inventory.UI.Forms
                 b.FlatStyle = FlatStyle.Popup;
                 _Buttons.Add(b);
 
-                foreach (SupplierType pc in items)
+                foreach (CustomerType pc in items)
                 {
                     Button button = new Button();
                     button.Name = pc.ID;
@@ -60,13 +61,15 @@ namespace LJH.Inventory.UI.Forms
                 this.splitter1.Visible = false;
             }
             OperatorInfo opt = OperatorInfo.CurrentOperator;
-            menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditSupplier);
-            menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditSupplier);
+            menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditCustomer);
+            menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditCustomer);
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmSupplierDetail();
+            FrmCustomerDetail frm = new FrmCustomerDetail();
+            frm.ClassID = 5;
+            return frm;
         }
 
         protected override bool DeletingItem(object item)
@@ -86,16 +89,16 @@ namespace LJH.Inventory.UI.Forms
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
-                con.ClassID = 6;
+                con.ClassID = 5;
                 SearchCondition = con;
             }
-            List<Customer> ss = bll.GetItems(SearchCondition).QueryObjects;
+            List<Customer> cs = bll.GetItems(SearchCondition).QueryObjects;
             List<object> items = null;
             if (_Buttons.Count > 1)
             {
                 for (int i = 1; i < _Buttons.Count; i++)
                 {
-                    items = (from c in ss
+                    items = (from c in cs
                              where c.CategoryID == _Buttons[i].Name
                              orderby c.ID ascending
                              select (object)c).ToList();
@@ -104,7 +107,7 @@ namespace LJH.Inventory.UI.Forms
                 }
             }
 
-            items = (from c in ss
+            items = (from c in cs
                      orderby c.ID ascending
                      select (object)c).ToList();
             if (_Buttons.Count > 0)
@@ -131,5 +134,41 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion
+
+        #region 事件处理程序
+        private void mnu_Payment_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                Customer c = dataGridView1.SelectedRows[0].Tag as Customer;
+                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                frm.Customer = c;
+                frm.IsAdding = true;
+                frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+                {
+                    Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(c.ID).QueryObject;
+                    if (c1 != null)
+                    {
+                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
+                    }
+                };
+                frm.ShowDialog();
+            }
+        }
+        #endregion
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
+                {
+                    Customer c = dataGridView1.Rows[e.RowIndex].Tag as Customer;
+                    FrmCustomerPaymentRemains frm = new FrmCustomerPaymentRemains();
+                    frm.Customer = c;
+                    frm.ShowDialog();
+                }
+            }
+        }
     }
 }

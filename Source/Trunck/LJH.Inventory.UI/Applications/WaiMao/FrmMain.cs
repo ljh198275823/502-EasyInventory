@@ -324,26 +324,6 @@ namespace LJH.Inventory.UI.Applications.WaiMao
             ShowSingleForm(typeof(FrmTransportMaster));
         }
 
-        private void mnu_FreightAgent_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm(typeof(FrmFreightAgencyMaster));
-        }
-
-        private void mnu_Shipper_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm(typeof(FrmShipperMaster));
-        }
-
-        private void mnu_Express_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm(typeof(FrmExpressMaster));
-        }
-
-        private void mnu_Insurance_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm(typeof(FrmInsuranceMaster));
-        }
-
         private void mnu_Supplier_Click_1(object sender, EventArgs e)
         {
             ShowSingleForm(typeof(FrmSupplierMaster));

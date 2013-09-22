@@ -47,7 +47,22 @@ namespace LJH.Inventory.BLL
 
         private void AddReceivables(InventorySheet sheet, IUnitWork unitWork)
         {
-
+            foreach (InventoryItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
+            {
+                //增加应收账款项
+                SupplierReceivable cr = new SupplierReceivable()
+                {
+                    ID = Guid.NewGuid(),
+                    CreateDate = DateTime.Now,
+                    SupplierID = sheet.SupplierID,
+                    PurchaseID = si.PurchaseOrder,
+                    PurchaseItem = si.PurchaseItem,
+                    InventorySheet = sheet.ID,
+                    InventoryItem = si.ID,
+                    Amount = si.Amount,
+                };
+                ProviderFactory.Create<ISupplierReceivableProvider>(_RepoUri).Insert(cr, unitWork);
+            }
         }
         #endregion
 
@@ -220,7 +235,6 @@ namespace LJH.Inventory.BLL
             ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
             return unitWork.Commit();
         }
-
         /// <summary>
         /// 将收货单作废
         /// </summary>

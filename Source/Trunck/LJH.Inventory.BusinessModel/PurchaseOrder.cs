@@ -29,7 +29,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置客户名称
         /// </summary>
-        public Supplier Supplier { get; set; }
+        public Customer Supplier { get; set; }
         /// <summary>
         /// 获取或设置币别
         /// </summary>

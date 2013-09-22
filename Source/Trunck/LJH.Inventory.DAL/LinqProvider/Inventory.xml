@@ -48,6 +48,8 @@
     <Type Name="LJH.Inventory.BusinessModel.Customer">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
       <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="ForeignName" Member="ShortName"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Nation" Member="Nation" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="City" Member="City" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CategoryID" Member="CategoryID" DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -55,6 +57,8 @@
       <Column Name="Fax" Member="Fax" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="PostalCode" Member="PostalCode" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Website" Member="Website" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="QQ" Member="QQ" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Email" Member="Email" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Address" Member="Address" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Bank" Member="Bank" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="BankAccount" Member="BankAccount" DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -478,25 +482,6 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.Supplier" Member="LJH.Inventory.BusinessModel.Supplier">
-    <Type Name="LJH.Inventory.BusinessModel.Supplier">
-      <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
-      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="Nation" Member="Nation" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="City" Member="City" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="CategoryID" Member="CategoryID" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="TelPhone" Member="TelPhone" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Fax" Member="Fax" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="PostalCode" Member="PostalCode" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Website" Member="Website" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Address" Member="Address" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Bank" Member="Bank" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="BankAccount" Member="BankAccount" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="SwiftNO" Member="SwiftNO" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="CreditLine" Member="CreditLine"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-    </Type>
-  </Table>
   <Table Name="dbo.SupplierReceivable" Member="LJH.Inventory.BusinessModel.SupplierReceivable">
     <Type Name="LJH.Inventory.BusinessModel.SupplierReceivable">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
@@ -540,6 +525,13 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
+  <Table Name="dbo.RelatedCompanyType" Member="LJH.Inventory.BusinessModel.RelatedCompanyType">
+    <Type Name="LJH.Inventory.BusinessModel.RelatedCompanyType">
+      <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
+      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
   <Table Name="dbo.Port" Member="LJH.Inventory.BusinessModel.Port">
     <Type Name="LJH.Inventory.BusinessModel.Port">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
@@ -572,23 +564,5 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.RelatedCompany" Member="LJH.Inventory.BusinessModel.RelatedCompany">
-    <Type Name="LJH.Inventory.BusinessModel.RelatedCompany">
-      <Column Name="ID" Member="ID"  DbType="int" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert"/>
-      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="CodeNum" Member="CodeNum" DbType="int not null" UpdateCheck="Never"/>
-      <Column Name="ForeignName" Member="ShortName"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Linker" Member="Linker" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="TelPhone" Member="TelPhone" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Mobile" Member="Mobile" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Fax" Member="Fax" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="PostalCode" Member="PostalCode" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="QQ" Member="QQ" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Email" Member="Email" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Website" Member="Website" DbType="nvarchar(200)" UpdateCheck="Never"/>
-      <Column Name="BankInfo" Member="BankInfo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-      <Column Name="Address" Member="Address" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-    </Type>
-  </Table>
+ 
 </Database>

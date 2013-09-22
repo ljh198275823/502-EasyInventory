@@ -22,10 +22,6 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override Customer GetingItemByID(string id, System.Data.Linq.DataContext dc)
         {
             Customer c = dc.GetTable<Customer>().SingleOrDefault(item => item.ID == id);
-            if (c != null && !string.IsNullOrEmpty(c.CategoryID))
-            {
-                c.Category = (new CustomerTypeProvider(ConnectStr)).GetByID(c.CategoryID).QueryObject;
-            }
             return c;
         }
 
@@ -36,18 +32,9 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 CustomerSearchCondition con = search as CustomerSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.ID.Contains(con.CustomerID));
-                if (!string.IsNullOrEmpty(con.CustomerName)) ret = ret.Where(item => item.Name.Contains(con.CustomerName));
-                if (!string.IsNullOrEmpty(con.TelPhone)) ret = ret.Where(item => item.TelPhone.Contains(con.TelPhone));
+                if (con.ClassID != null) ret = ret.Where(item => item.ClassID == con.ClassID.Value);
             }
             List<Customer> cs = ret.ToList();
-            if (cs != null && cs.Count > 0)
-            {
-                List<CustomerType> cts = (new CustomerTypeProvider(ConnectStr)).GetItems(null).QueryObjects;
-                foreach (Customer c in cs)
-                {
-                    c.Category = cts.SingleOrDefault(ct => ct.ID == c.CategoryID);
-                }
-            }
             return cs;
         }
         #endregion

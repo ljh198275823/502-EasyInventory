@@ -50,7 +50,6 @@
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCreditLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -191,7 +190,6 @@
             this.colID,
             this.colName,
             this.colNation,
-            this.colCategory,
             this.colPrepay,
             this.colReceivable,
             this.colCreditLimit,
@@ -241,12 +239,6 @@
             this.colNation.Name = "colNation";
             this.colNation.ReadOnly = true;
             this.colNation.Width = 54;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "客户类型";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
             // 
             // colPrepay
             // 
@@ -359,7 +351,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLimit;

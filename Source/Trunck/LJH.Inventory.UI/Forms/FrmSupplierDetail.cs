@@ -45,12 +45,11 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            Supplier c = UpdatingItem as Supplier;
+            Customer c = UpdatingItem as Customer;
             if (c != null)
             {
                 txtID.Text = c.ID;
-                txtCategory.Text = c.Category != null ? c.Category.Name : string.Empty;
-                txtCategory.Tag = c.Category;
+                txtCategory.Text = c.CategoryID;
                 txtNation.Text = c.Nation;
                 txtName.Text = c.Name;
                 txtTelephone.Text = c.TelPhone;
@@ -76,19 +75,18 @@ namespace LJH.Inventory.UI.Forms
 
         protected override object GetItemFromInput()
         {
-            Supplier info;
+            Customer info;
             if (UpdatingItem == null)
             {
-                info = new Supplier();
+                info = new Customer();
+                info.ClassID = 6;
             }
             else
             {
-                info = UpdatingItem as Supplier;
+                info = UpdatingItem as Customer;
             }
             info.ID = txtID.Text != "自动创建" ? txtID.Text : string.Empty;
-            SupplierType st = txtCategory.Tag as SupplierType;
-            info.CategoryID = st.ID;
-            info.Category = st;
+            info.CategoryID = txtCategory.Text;
             info.Nation = txtNation.Text;
             info.Name = txtName.Text;
             info.TelPhone = txtTelephone.Text;
@@ -101,9 +99,9 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            SupplierBLL bll = new SupplierBLL(AppSettings.CurrentSetting.ConnectString);
-            Supplier c = item as Supplier;
-            CommandResult ret = bll.Add(c);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            Customer c = item as Customer;
+            CommandResult ret = bll.Insert (c);
             if (ret.Result == ResultCode.Successful)
             {
                 foreach (DataGridViewRow row in GridView.Rows)
@@ -122,8 +120,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult UpdateItem(object item)
         {
-            SupplierBLL bll = new SupplierBLL(AppSettings.CurrentSetting.ConnectString);
-            return bll.Update(item as Supplier);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            return bll.Update(item as Customer);
         }
         #endregion
 
@@ -136,7 +134,7 @@ namespace LJH.Inventory.UI.Forms
                 Contact ct = frm.Contact;
                 if (this.UpdatingItem != null)
                 {
-                    Supplier c = UpdatingItem as Supplier;
+                    Customer c = UpdatingItem as Customer;
                     ct.Company = c.ID;
                     CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnectString)).Add(ct);
                     if (ret.Result != ResultCode.Successful)

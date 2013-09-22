@@ -43,7 +43,8 @@ namespace LJH.Inventory.UI.Forms
                 foreach (CustomerType pc in items)
                 {
                     Button button = new Button();
-                    button.Name = pc.Name;
+                    button.Name = pc.ID;
+                    button.Text  = pc.Name;
                     button.Dock = DockStyle.Top;
                     button.Size = new Size(200, 42);
                     button.FlatStyle = FlatStyle.Popup;
@@ -66,7 +67,9 @@ namespace LJH.Inventory.UI.Forms
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmCustomerDetail();
+            FrmCustomerDetail frm = new FrmCustomerDetail();
+            frm.ClassID = 5;
+            return frm;
         }
 
         protected override bool DeletingItem(object item)
@@ -83,14 +86,20 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
-            List<Customer> cs = bll.GetItems(null).QueryObjects;
+            if (SearchCondition == null)
+            {
+                CustomerSearchCondition con = new CustomerSearchCondition();
+                con.ClassID = 5;
+                SearchCondition = con;
+            }
+            List<Customer> cs = bll.GetItems(SearchCondition).QueryObjects;
             List<object> items = null;
             if (_Buttons.Count > 1)
             {
                 for (int i = 1; i < _Buttons.Count; i++)
                 {
                     items = (from c in cs
-                             where c.Category !=null && c.Category.Name == _Buttons[i].Name
+                             where c.CategoryID == _Buttons[i].Name 
                              orderby c.ID ascending
                              select (object)c).ToList();
                     _Buttons[i].Tag = items;
@@ -116,7 +125,6 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
             row.Cells["colNation"].Value = c.Nation;
-            row.Cells["colCategory"].Value = c.Category != null ? c.Category.Name : string.Empty;
             row.Cells["colName"].Value = c.Name;
             row.Cells["colWebsite"].Value = c.Website;
             row.Cells["colTelphone"].Value = c.TelPhone;

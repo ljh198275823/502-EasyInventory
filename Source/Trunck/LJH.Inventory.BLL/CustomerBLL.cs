@@ -21,6 +21,24 @@ namespace LJH.Inventory.BLL
         private string _RepoUri; 
         #endregion
 
+        private string CreateCustomerID(int classID)
+        {
+            string id = null;
+            if (classID == 5)
+            {
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPrefix, UserSettings.Current.CustomerSerialCount, "customer");
+            }
+            else if (classID == 6)
+            {
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "customer");
+            }
+            else
+            {
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("RC", 3, "customer");
+            }
+            return id;
+        }
+
         #region 公共方法
         /// <summary>
         /// 获取所有客户信息
@@ -40,7 +58,7 @@ namespace LJH.Inventory.BLL
         {
             if (string.IsNullOrEmpty(info.ID))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings .Current .CustomerPrefix , UserSettings.Current .CustomerSerialCount , "customer");
+                info.ID = CreateCustomerID(info.ClassID);
             }
             if (!string.IsNullOrEmpty(info.ID))
             {

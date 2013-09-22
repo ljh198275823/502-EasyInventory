@@ -103,12 +103,6 @@
     <Compile Include="Controls\ProductComboBox.Designer.cs">
       <DependentUpon>ProductComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SupplierCombobox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\SupplierCombobox.Designer.cs">
-      <DependentUpon>SupplierCombobox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\RoleCombobox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -267,35 +261,17 @@
     <Compile Include="Forms\FrmExpenditureTypeMaster.Designer.cs">
       <DependentUpon>FrmExpenditureTypeMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmExpressMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmExpressMaster.Designer.cs">
-      <DependentUpon>FrmExpressMaster.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmForeignPortMaster.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmForeignPortMaster.Designer.cs">
       <DependentUpon>FrmForeignPortMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmFreightAgencyMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmFreightAgencyMaster.Designer.cs">
-      <DependentUpon>FrmFreightAgencyMaster.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmHome.Designer.cs">
       <DependentUpon>FrmHome.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FrmInsuranceMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmInsuranceMaster.Designer.cs">
-      <DependentUpon>FrmInsuranceMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Applications\WaiMao\FrmMain.cs">
       <SubType>Form</SubType>
@@ -320,6 +296,18 @@
     </Compile>
     <Compile Include="Forms\FrmOrderMaster.Designer.cs">
       <DependentUpon>FrmOrderMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmSupplierDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmSupplierDetail.designer.cs">
+      <DependentUpon>FrmSupplierDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmRelatedCompanyMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmRelatedCompanyMaster.Designer.cs">
+      <DependentUpon>FrmRelatedCompanyMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\FrmOrderPaymentReport.cs">
       <SubType>Form</SubType>
@@ -435,23 +423,11 @@
     <Compile Include="Forms\FrmRelatedCompanyDetail.Designer.cs">
       <DependentUpon>FrmRelatedCompanyDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmShipperMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmShipperMaster.Designer.cs">
-      <DependentUpon>FrmShipperMaster.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmSoftDogInfo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmSoftDogInfo.Designer.cs">
       <DependentUpon>FrmSoftDogInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FrmSupplierDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmSupplierDetail.Designer.cs">
-      <DependentUpon>FrmSupplierDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmSupplierMaster.cs">
       <SubType>Form</SubType>
@@ -697,20 +673,11 @@
     <EmbeddedResource Include="Forms\FrmExpenditureTypeMaster.resx">
       <DependentUpon>FrmExpenditureTypeMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmExpressMaster.resx">
-      <DependentUpon>FrmExpressMaster.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmForeignPortMaster.resx">
       <DependentUpon>FrmForeignPortMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmFreightAgencyMaster.resx">
-      <DependentUpon>FrmFreightAgencyMaster.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmInsuranceMaster.resx">
-      <DependentUpon>FrmInsuranceMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\WaiMao\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
@@ -723,6 +690,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOrderMaster.resx">
       <DependentUpon>FrmOrderMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmSupplierDetail.resx">
+      <DependentUpon>FrmSupplierDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmRelatedCompanyMaster.resx">
+      <DependentUpon>FrmRelatedCompanyMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\FrmOrderPaymentReport.resx">
       <DependentUpon>FrmOrderPaymentReport.cs</DependentUpon>
@@ -784,14 +757,8 @@
     <EmbeddedResource Include="Forms\FrmRelatedCompanyDetail.resx">
       <DependentUpon>FrmRelatedCompanyDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmShipperMaster.resx">
-      <DependentUpon>FrmShipperMaster.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmSoftDogInfo.resx">
       <DependentUpon>FrmSoftDogInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmSupplierDetail.resx">
-      <DependentUpon>FrmSupplierDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmSupplierMaster.resx">
       <DependentUpon>FrmSupplierMaster.cs</DependentUpon>

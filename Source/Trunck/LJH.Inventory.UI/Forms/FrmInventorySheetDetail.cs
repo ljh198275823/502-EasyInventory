@@ -163,8 +163,8 @@ namespace LJH.Inventory.UI.Forms
             }
             sheet.WareHouseID = (this.txtWareHouse.Tag as WareHouse).ID;
             sheet.WareHouse = this.txtWareHouse.Tag as WareHouse;
-            sheet.SupplierID = (this.txtSupplier.Tag as Supplier).ID;
-            sheet.Supplier = this.txtSupplier.Tag as Supplier;
+            sheet.SupplierID = (this.txtSupplier.Tag as Customer).ID;
+            sheet.Supplier = this.txtSupplier.Tag as Customer;
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<InventoryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
@@ -386,7 +386,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Supplier item = frm.SelectedItem as Supplier;
+                Customer item = frm.SelectedItem as Customer;
                 txtSupplier.Text = item.Name;
                 txtSupplier.Tag = item;
             }
@@ -523,7 +523,7 @@ namespace LJH.Inventory.UI.Forms
             if (txtSupplier.Tag != null)
             {
                 PurchaseRecordSearchCondition con = new PurchaseRecordSearchCondition();
-                con.SupplierID = (txtSupplier.Tag as Supplier).ID;
+                con.SupplierID = (txtSupplier.Tag as Customer).ID;
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
