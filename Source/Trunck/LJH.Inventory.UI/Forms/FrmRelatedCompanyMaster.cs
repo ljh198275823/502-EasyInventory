@@ -67,8 +67,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmCustomerDetail frm = new FrmCustomerDetail();
-            frm.ClassID = 3;
+            FrmRelatedCompanyDetail frm = new FrmRelatedCompanyDetail();
             return frm;
         }
 

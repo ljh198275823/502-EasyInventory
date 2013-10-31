@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms
 {
-    partial class FrmCustomerDetail
+    partial class FrmSupplierDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -46,13 +46,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtNation = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_AddContact = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_DeleteContact = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblCategory = new System.Windows.Forms.LinkLabel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,23 +54,22 @@
             this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.contextMenuStrip1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_AddContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_DeleteContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblCategory = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(576, 369);
+            this.btnClose.Location = new System.Drawing.Point(576, 334);
             this.btnClose.TabIndex = 10;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(467, 369);
+            this.btnOk.Location = new System.Drawing.Point(467, 334);
             this.btnOk.TabIndex = 9;
             // 
             // txtName
@@ -235,73 +227,6 @@
             this.txtCategory.Size = new System.Drawing.Size(143, 21);
             this.txtCategory.TabIndex = 1;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_AddContact,
-            this.mnu_DeleteContact});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
-            // 
-            // mnu_AddContact
-            // 
-            this.mnu_AddContact.Name = "mnu_AddContact";
-            this.mnu_AddContact.Size = new System.Drawing.Size(136, 22);
-            this.mnu_AddContact.Text = "增加联系人";
-            this.mnu_AddContact.Click += new System.EventHandler(this.mnu_AddContact_Click);
-            // 
-            // mnu_DeleteContact
-            // 
-            this.mnu_DeleteContact.Name = "mnu_DeleteContact";
-            this.mnu_DeleteContact.Size = new System.Drawing.Size(136, 22);
-            this.mnu_DeleteContact.Text = "删除联系人";
-            this.mnu_DeleteContact.Click += new System.EventHandler(this.mnu_DeleteContact_Click);
-            // 
-            // lblCategory
-            // 
-            this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(12, 44);
-            this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(53, 12);
-            this.lblCategory.TabIndex = 50;
-            this.lblCategory.TabStop = true;
-            this.lblCategory.Text = "客户类别";
-            this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(12, 197);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(648, 157);
-            this.tabControl1.TabIndex = 51;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.GridView);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(640, 131);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "联系人";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(640, 131);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "订单";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // GridView
             // 
             this.GridView.AllowUserToAddRows = false;
@@ -321,14 +246,15 @@
             this.colQQ,
             this.colMemo});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
-            this.GridView.Location = new System.Drawing.Point(6, 11);
+            this.GridView.Location = new System.Drawing.Point(14, 182);
             this.GridView.Name = "GridView";
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(628, 114);
-            this.GridView.TabIndex = 9;
+            this.GridView.Size = new System.Drawing.Size(651, 140);
+            this.GridView.TabIndex = 8;
+            this.GridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             // 
             // colName
             // 
@@ -376,35 +302,38 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
-            // tabPage3
+            // contextMenuStrip1
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(640, 131);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "收款记录";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_AddContact,
+            this.mnu_DeleteContact});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
             // 
-            // tabPage4
+            // mnu_AddContact
             // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(640, 131);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "报价";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.mnu_AddContact.Name = "mnu_AddContact";
+            this.mnu_AddContact.Size = new System.Drawing.Size(136, 22);
+            this.mnu_AddContact.Text = "增加联系人";
+            this.mnu_AddContact.Click += new System.EventHandler(this.mnu_AddContact_Click);
             // 
-            // tabPage5
+            // mnu_DeleteContact
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(640, 131);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "往来沟通";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.mnu_DeleteContact.Name = "mnu_DeleteContact";
+            this.mnu_DeleteContact.Size = new System.Drawing.Size(136, 22);
+            this.mnu_DeleteContact.Text = "删除联系人";
+            this.mnu_DeleteContact.Click += new System.EventHandler(this.mnu_DeleteContact_Click);
+            // 
+            // lblCategory
+            // 
+            this.lblCategory.AutoSize = true;
+            this.lblCategory.Location = new System.Drawing.Point(12, 44);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(53, 12);
+            this.lblCategory.TabIndex = 50;
+            this.lblCategory.TabStop = true;
+            this.lblCategory.Text = "客户类别";
+            this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
             // 
             // FrmCustomerDetail
             // 
@@ -412,9 +341,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(672, 405);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(672, 370);
             this.Controls.Add(this.lblCategory);
+            this.Controls.Add(this.GridView);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtNation);
             this.Controls.Add(this.txtCategory);
@@ -453,12 +382,10 @@
             this.Controls.SetChildIndex(this.txtCategory, 0);
             this.Controls.SetChildIndex(this.txtNation, 0);
             this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.GridView, 0);
             this.Controls.SetChildIndex(this.lblCategory, 0);
-            this.Controls.SetChildIndex(this.tabControl1, 0);
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -483,13 +410,10 @@
         private System.Windows.Forms.Label label4;
         private GeneralLibrary.WinformControl.DBCTextBox txtNation;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
+        private System.Windows.Forms.DataGridView GridView;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddContact;
         private System.Windows.Forms.ToolStripMenuItem mnu_DeleteContact;
-        private System.Windows.Forms.LinkLabel lblCategory;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView GridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMobile;
@@ -497,9 +421,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colQQ;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.LinkLabel lblCategory;
     }
 }

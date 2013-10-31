@@ -14,6 +14,7 @@
       <Column Name="Owner" Member="Owner"  DbType="NVARCHAR(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="UploadDateTime" Member="UploadDateTime"  DbType="DateTime NOT NULL" UpdateCheck="Never"/>
       <Column Name="FileName" Member="FileName"  DbType="NVARCHAR(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo"  DbType="NVARCHAR(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="dbo.ProductCategory" Member="LJH.Inventory.BusinessModel.ProductCategory">

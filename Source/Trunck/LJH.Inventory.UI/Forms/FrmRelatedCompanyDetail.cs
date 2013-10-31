@@ -12,12 +12,16 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmCustomerDetail : FrmDetailBase
+    public partial class FrmRelatedCompanyDetail : FrmDetailBase
     {
-        public FrmCustomerDetail()
+        public FrmRelatedCompanyDetail()
         {
             InitializeComponent();
         }
+
+        #region 公共属性
+        public int ClassID { get; set; }
+        #endregion
 
         #region 重写基类方法
         protected override bool CheckInput()
@@ -80,7 +84,7 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new Customer();
-                info.ClassID =5;
+                info.ClassID = ClassID;
             }
             else
             {
@@ -227,13 +231,38 @@ namespace LJH.Inventory.UI.Forms
         private void lblCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmMasterBase frm = null;
-            frm = new FrmCustomerTypeMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
+            if (ClassID == 5)
             {
-                CustomerType ct = frm.SelectedItem as CustomerType;
-                txtCategory.Text = ct.Name;
-                txtCategory.Tag = ct;
+                frm = new FrmCustomerTypeMaster();
+                frm.ForSelect = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    CustomerType ct = frm.SelectedItem as CustomerType;
+                    txtCategory.Text = ct.Name;
+                    txtCategory.Tag = ct;
+                }
+            }
+            else if (ClassID == 6)
+            {
+                frm = new FrmSupplierTypeMaster();
+                frm.ForSelect = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    SupplierType ct = frm.SelectedItem as SupplierType;
+                    txtCategory.Text = ct.Name;
+                    txtCategory.Tag = ct;
+                }
+            }
+            else
+            {
+                frm = new FrmRelatedCompanyTypeMaster();
+                frm.ForSelect = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    RelatedCompanyType ct = frm.SelectedItem as RelatedCompanyType;
+                    txtCategory.Text = ct.Name;
+                    txtCategory.Tag = ct;
+                }
             }
         }
     }

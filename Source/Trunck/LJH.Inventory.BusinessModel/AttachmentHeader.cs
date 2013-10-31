@@ -38,6 +38,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置文件名称
         /// </summary>
         public string FileName { get; set; }
+        /// <summary>
+        /// 获取或设置备注
+        /// </summary>
+        public string Memo { get; set; }
         #endregion
     }
 }

@@ -121,6 +121,7 @@ namespace LJH.Inventory.UI.Applications.WaiMao
             {
                 instance = (Form)Activator.CreateInstance(formType);
                 instance.Tag = this;
+                instance.TopLevel = false;
                 _openedForms.Add(instance);
                 AddForm(instance, mainPanel);
                 instance.FormClosed += delegate(object sender, FormClosedEventArgs e)

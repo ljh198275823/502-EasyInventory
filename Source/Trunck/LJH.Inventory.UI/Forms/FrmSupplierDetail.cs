@@ -12,9 +12,9 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmCustomerDetail : FrmDetailBase
+    public partial class FrmSupplierDetail : FrmDetailBase
     {
-        public FrmCustomerDetail()
+        public FrmSupplierDetail()
         {
             InitializeComponent();
         }
@@ -80,7 +80,7 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new Customer();
-                info.ClassID =5;
+                info.ClassID = 6;
             }
             else
             {
@@ -227,11 +227,11 @@ namespace LJH.Inventory.UI.Forms
         private void lblCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmMasterBase frm = null;
-            frm = new FrmCustomerTypeMaster();
+            frm = new FrmSupplierTypeMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CustomerType ct = frm.SelectedItem as CustomerType;
+                SupplierType ct = frm.SelectedItem as SupplierType;
                 txtCategory.Text = ct.Name;
                 txtCategory.Tag = ct;
             }
