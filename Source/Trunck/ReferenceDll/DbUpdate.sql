@@ -8,3 +8,22 @@ begin
 	alter table AttachmentHeader add Memo nvarchar(200)
 end 
 go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Creater' AND id = OBJECT_ID(N'[dbo].[Customer]')) 
+begin
+	alter table Customer add Creater nvarchar(50)
+end 
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='BusinessMan' AND id = OBJECT_ID(N'[dbo].[Customer]')) 
+begin
+	alter table Customer add BusinessMan nvarchar(50)
+end 
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Media' AND id = OBJECT_ID(N'[dbo].[Customer]')) 
+begin
+	alter table Customer add Media nvarchar(50)
+end 
+go
+

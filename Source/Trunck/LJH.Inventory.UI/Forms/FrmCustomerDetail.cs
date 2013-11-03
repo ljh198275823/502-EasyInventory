@@ -40,6 +40,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void InitControls()
         {
             OperatorInfo opt = OperatorInfo.CurrentOperator;
+            txtCreater.Text = opt.OperatorID;
             this.btnOk.Enabled = opt.Permit(Permission.EditCustomer);
         }
 
@@ -53,11 +54,9 @@ namespace LJH.Inventory.UI.Forms
                 txtCategory.Tag = c.CategoryID;
                 txtNation.Text = c.Nation;
                 txtName.Text = c.Name;
-                txtTelephone.Text = c.TelPhone;
-                txtFax.Text = c.Fax;
-                txtPostalCode.Text = c.PostalCode;
-                txtAddress.Text = c.Address;
-                txtMemo.Text = c.Memo;
+                txtMedia.Text = c.Media;
+                txtCreater.Text = c.Creater;
+                txtBusinessMan.Text = c.BusinessMan;
             }
             txtID.Enabled = (c == null);
 
@@ -80,7 +79,7 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new Customer();
-                info.ClassID =5;
+                info.ClassID = 5;
             }
             else
             {
@@ -90,11 +89,9 @@ namespace LJH.Inventory.UI.Forms
             info.CategoryID = txtCategory.Text;
             info.Nation = txtNation.Text;
             info.Name = txtName.Text;
-            info.TelPhone = txtTelephone.Text;
-            info.Fax = txtFax.Text;
-            info.Address = txtAddress.Text;
-            info.PostalCode = txtPostalCode.Text;
-            info.Memo = txtMemo.Text;
+            info.Media  = txtMedia.Text;
+            info.BusinessMan  = txtBusinessMan.Text;
+            info.Creater = txtCreater.Text;
             return info;
         }
 
@@ -234,6 +231,16 @@ namespace LJH.Inventory.UI.Forms
                 CustomerType ct = frm.SelectedItem as CustomerType;
                 txtCategory.Text = ct.Name;
                 txtCategory.Tag = ct;
+            }
+        }
+
+        private void lnkBusinessMan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmMasterBase frm = new FrmOperatorMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txtBusinessMan.Text = (frm.SelectedItem as OperatorInfo).OperatorID;
             }
         }
     }

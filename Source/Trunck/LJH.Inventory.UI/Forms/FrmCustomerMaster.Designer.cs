@@ -53,11 +53,8 @@
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCreditLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWebsite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPostalCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMedia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBusinessMan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -186,11 +183,8 @@
             this.colReceivable,
             this.colCreditLimit,
             this.colWebsite,
-            this.colTelphone,
-            this.colFax,
-            this.colPostalCode,
-            this.colAddress,
-            this.colMemo});
+            this.colMedia,
+            this.colBusinessMan});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 50);
             this.dataGridView1.Name = "dataGridView1";
@@ -269,36 +263,17 @@
             this.colWebsite.Name = "colWebsite";
             this.colWebsite.ReadOnly = true;
             // 
-            // colTelphone
+            // colMedia
             // 
-            this.colTelphone.HeaderText = "电话";
-            this.colTelphone.Name = "colTelphone";
-            this.colTelphone.ReadOnly = true;
+            this.colMedia.HeaderText = "信息来源";
+            this.colMedia.Name = "colMedia";
+            this.colMedia.ReadOnly = true;
             // 
-            // colFax
+            // colBusinessMan
             // 
-            this.colFax.HeaderText = "传真";
-            this.colFax.Name = "colFax";
-            this.colFax.ReadOnly = true;
-            // 
-            // colPostalCode
-            // 
-            this.colPostalCode.HeaderText = "邮政编码";
-            this.colPostalCode.Name = "colPostalCode";
-            this.colPostalCode.ReadOnly = true;
-            // 
-            // colAddress
-            // 
-            this.colAddress.HeaderText = "地址";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.ReadOnly = true;
-            this.colAddress.Width = 150;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
+            this.colBusinessMan.HeaderText = "业务负责人";
+            this.colBusinessMan.Name = "colBusinessMan";
+            this.colBusinessMan.ReadOnly = true;
             // 
             // FrmCustomerMaster
             // 
@@ -347,10 +322,7 @@
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLimit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWebsite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPostalCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMedia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBusinessMan;
     }
 }

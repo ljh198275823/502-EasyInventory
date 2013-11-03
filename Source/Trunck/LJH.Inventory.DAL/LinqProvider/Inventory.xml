@@ -65,6 +65,9 @@
       <Column Name="BankAccount" Member="BankAccount" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="SwiftNO" Member="SwiftNO" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CreditLine" Member="CreditLine"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+      <Column Name="Creater" Member="Creater" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="BusinessMan" Member="BusinessMan" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Media" Member="Media" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

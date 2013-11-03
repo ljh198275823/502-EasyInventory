@@ -126,11 +126,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colNation"].Value = c.Nation;
             row.Cells["colName"].Value = c.Name;
             row.Cells["colWebsite"].Value = c.Website;
-            row.Cells["colTelphone"].Value = c.TelPhone;
-            row.Cells["colFax"].Value = c.Fax;
-            row.Cells["colAddress"].Value = c.Address;
-            row.Cells["colPostalCode"].Value = c.PostalCode;
-            row.Cells["colMemo"].Value = c.Memo;
+            row.Cells["colMedia"].Value = c.Media;
+            row.Cells["colBusinessMan"].Value = c.BusinessMan;
         }
         #endregion
 
