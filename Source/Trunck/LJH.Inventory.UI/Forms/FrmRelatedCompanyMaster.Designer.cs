@@ -57,8 +57,6 @@
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
-            this.btnSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnClear = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menu.SuspendLayout();
@@ -224,8 +222,6 @@
             this.btn_SelectColumns,
             this.toolStripSeparator1,
             this.txtKeyword,
-            this.btnSearch,
-            this.btnClear,
             this.toolStripSeparator2});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
@@ -298,22 +294,6 @@
             this.txtKeyword.Name = "txtKeyword";
             this.txtKeyword.Size = new System.Drawing.Size(200, 30);
             // 
-            // btnSearch
-            // 
-            this.btnSearch.Image = global::LJH.Inventory.UI.Properties.Resources.search;
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(59, 46);
-            this.btnSearch.Text = "查找(&S)";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnClear
-            // 
-            this.btnClear.Image = global::LJH.Inventory.UI.Properties.Resources.clear;
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(60, 46);
-            this.btnClear.Text = "清除(&C)";
-            this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -369,8 +349,6 @@
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private Controls.TooStripDBCTextBox txtKeyword;
-        private System.Windows.Forms.ToolStripMenuItem btnSearch;
-        private System.Windows.Forms.ToolStripMenuItem btnClear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
     }

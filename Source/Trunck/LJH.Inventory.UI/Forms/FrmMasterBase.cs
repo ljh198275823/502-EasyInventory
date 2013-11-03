@@ -78,6 +78,10 @@ namespace LJH.Inventory.UI.Forms
                     if (menu.Items["btn_SelectColumns"] != null) menu.Items["btn_SelectColumns"].Click += btn_SelectColumns_Click;
                     if (menu.Items["btnSearch"] != null) menu.Items["btnSearch"].Click += btnSearch_Click;
                     if (menu.Items["btnClear"] != null) menu.Items["btnClear"].Click += btnClear_Click;
+                    if (menu.Items["txtKeyword"] != null && menu.Items["txtKeyword"] is ToolStripTextBox)
+                    {
+                        (menu.Items["txtKeyword"] as ToolStripTextBox).TextChanged += txtKeyword_TextChanged;
+                    }
                     break;
                 }
             }
@@ -138,9 +142,17 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void ShowRowBackColor(DataGridViewRow row)
+        protected virtual void ShowRowBackColor()
         {
-            row.DefaultCellStyle.BackColor = (row.Index % 2 == 1) ? Color.FromArgb(230, 230, 230) : Color.White;
+            int count = 0;
+            foreach (DataGridViewRow row in this.GridView.Rows)
+            {
+                if (row.Visible)
+                {
+                    count++;
+                    row.DefaultCellStyle.BackColor = (count % 2 == 1) ? Color.FromArgb(230, 230, 230) : Color.White;
+                }
+            }
         }
 
         private DataGridViewRow Add_A_Row(object item, bool forNewItem)
@@ -287,11 +299,11 @@ namespace LJH.Inventory.UI.Forms
                 foreach (object item in items)
                 {
                     DataGridViewRow row = Add_A_Row(item, false);
-                    ShowRowBackColor(row);
                 }
             }
             if (this.GridView.Rows.Count > 0)
             {
+                ShowRowBackColor();
                 this.GridView.Rows[0].Selected = false;
                 this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", GridView.Rows.Count);
             }
@@ -320,10 +332,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void GridView_Sorted(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in GridView.Rows)
-            {
-                ShowRowBackColor(row);
-            }
+            ShowRowBackColor();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -501,6 +510,37 @@ namespace LJH.Inventory.UI.Forms
                     }
                 }
             }
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            if (GridView == null) return;
+            string keyword = string.Empty;
+            if (sender is ToolStripTextBox)
+            {
+                keyword = (sender as ToolStripTextBox).Text;
+            }
+            int count = 0;
+            DataGridView grid = this.GridView;
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                bool visible = false;
+                foreach (DataGridViewColumn col in grid.Columns)
+                {
+                    if (
+                        string.IsNullOrEmpty(keyword) ||
+                        ((row.Cells[col.Index] is DataGridViewTextBoxCell) && row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(keyword))
+                        )
+                    {
+                        visible = true;
+                        count++;
+                        break;
+                    }
+                }
+                row.Visible = visible;
+            }
+            ShowRowBackColor();
+            this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", count);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

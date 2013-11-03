@@ -37,11 +37,12 @@
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
-            this.btnSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnClear = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.btnCanceled = new System.Windows.Forms.Button();
+            this.btnApprove = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,9 +53,6 @@
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnApprove = new System.Windows.Forms.Button();
-            this.btnCanceled = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -72,8 +70,6 @@
             this.btn_SelectColumns,
             this.toolStripSeparator1,
             this.txtKeyword,
-            this.btnSearch,
-            this.btnClear,
             this.toolStripSeparator2});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
@@ -137,22 +133,6 @@
             this.txtKeyword.Name = "txtKeyword";
             this.txtKeyword.Size = new System.Drawing.Size(200, 30);
             // 
-            // btnSearch
-            // 
-            this.btnSearch.Image = global::LJH.Inventory.UI.Properties.Resources.search;
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(59, 46);
-            this.btnSearch.Text = "查找(&S)";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnClear
-            // 
-            this.btnClear.Image = global::LJH.Inventory.UI.Properties.Resources.clear;
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(60, 46);
-            this.btnClear.Text = "清除(&C)";
-            this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -178,6 +158,47 @@
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(200, 302);
             this.pnlLeft.TabIndex = 107;
+            // 
+            // btnCanceled
+            // 
+            this.btnCanceled.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCanceled.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCanceled.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCanceled.ForeColor = System.Drawing.Color.Black;
+            this.btnCanceled.Location = new System.Drawing.Point(0, 126);
+            this.btnCanceled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btnCanceled.Name = "btnCanceled";
+            this.btnCanceled.Size = new System.Drawing.Size(200, 42);
+            this.btnCanceled.TabIndex = 27;
+            this.btnCanceled.Text = "作废";
+            this.btnCanceled.UseVisualStyleBackColor = true;
+            // 
+            // btnApprove
+            // 
+            this.btnApprove.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnApprove.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnApprove.ForeColor = System.Drawing.Color.Black;
+            this.btnApprove.Location = new System.Drawing.Point(0, 84);
+            this.btnApprove.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btnApprove.Name = "btnApprove";
+            this.btnApprove.Size = new System.Drawing.Size(200, 42);
+            this.btnApprove.TabIndex = 26;
+            this.btnApprove.Text = "审核";
+            this.btnApprove.UseVisualStyleBackColor = true;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAdd.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAdd.Location = new System.Drawing.Point(0, 42);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(200, 42);
+            this.btnAdd.TabIndex = 20;
+            this.btnAdd.Text = "新建";
+            this.btnAdd.UseVisualStyleBackColor = true;
             // 
             // btnAll
             // 
@@ -270,47 +291,6 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAdd.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAdd.Location = new System.Drawing.Point(0, 42);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(200, 42);
-            this.btnAdd.TabIndex = 20;
-            this.btnAdd.Text = "新建";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            // 
-            // btnApprove
-            // 
-            this.btnApprove.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnApprove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnApprove.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnApprove.ForeColor = System.Drawing.Color.Black;
-            this.btnApprove.Location = new System.Drawing.Point(0, 84);
-            this.btnApprove.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(200, 42);
-            this.btnApprove.TabIndex = 26;
-            this.btnApprove.Text = "审核";
-            this.btnApprove.UseVisualStyleBackColor = true;
-            // 
-            // btnCanceled
-            // 
-            this.btnCanceled.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCanceled.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCanceled.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCanceled.ForeColor = System.Drawing.Color.Black;
-            this.btnCanceled.Location = new System.Drawing.Point(0, 126);
-            this.btnCanceled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnCanceled.Name = "btnCanceled";
-            this.btnCanceled.Size = new System.Drawing.Size(200, 42);
-            this.btnCanceled.TabIndex = 27;
-            this.btnCanceled.Text = "作废";
-            this.btnCanceled.UseVisualStyleBackColor = true;
-            // 
             // FrmCustomerPaymentMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -346,8 +326,6 @@
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private LJH.Inventory.UI.Controls.TooStripDBCTextBox txtKeyword;
-        private System.Windows.Forms.ToolStripMenuItem btnSearch;
-        private System.Windows.Forms.ToolStripMenuItem btnClear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnlLeft;
