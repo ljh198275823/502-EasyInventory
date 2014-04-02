@@ -11,16 +11,28 @@ using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmProductCategoryDetail :FrmDetailBase 
+    public partial class FrmProductCategoryDetail : FrmDetailBase
     {
         public FrmProductCategoryDetail()
         {
             InitializeComponent();
         }
 
+        #region 公共属性
+        /// <summary>
+        /// 获取或设置父类别
+        /// </summary>
+        public ProductCategory ParentCategory { get; set; }
+        #endregion
+
         #region 重写基类方法
         protected override void InitControls()
         {
+            if (ParentCategory != null)
+            {
+                txtParentCategory.Text = ParentCategory.Name;
+            }
+            base.InitControls();
             OperatorInfo opt = OperatorInfo.CurrentOperator;
         }
 
@@ -51,11 +63,19 @@ namespace LJH.Inventory.UI.Forms
         {
             if (UpdatingItem != null)
             {
-                ProductCategory p=UpdatingItem as ProductCategory ;
+                ProductCategory p = UpdatingItem as ProductCategory;
                 txtID.Text = p.ID;
                 txtName.Text = p.Name;
                 txtPrefix.Text = p.Prefix;
+                if (!string.IsNullOrEmpty(p.Parent))
+                {
+                    ParentCategory = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(p.Parent).QueryObject;
+                }
                 txtMemo.Text = p.Memo;
+            }
+            if (ParentCategory != null)
+            {
+                txtParentCategory.Text = ParentCategory.Name;
             }
             txtID.Enabled = (UpdatingItem == null);
         }
@@ -74,6 +94,7 @@ namespace LJH.Inventory.UI.Forms
             p.ID = txtID.Text == "自动创建" ? string.Empty : txtID.Text;
             p.Name = txtName.Text;
             p.Prefix = txtPrefix.Text;
+            p.Parent = ParentCategory != null ? ParentCategory.ID : null;
             p.Memo = txtMemo.Text;
             return p;
         }
@@ -90,5 +111,16 @@ namespace LJH.Inventory.UI.Forms
             return bll.Update(updatingItem as ProductCategory);
         }
         #endregion
+
+        private void lnkParentCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmProductCategoryMaster frm = new FrmProductCategoryMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                ParentCategory = frm.SelectedItem as ProductCategory;
+                this.txtParentCategory.Text = ParentCategory.Name;
+            }
+        }
     }
 }

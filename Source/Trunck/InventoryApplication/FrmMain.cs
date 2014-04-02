@@ -83,7 +83,6 @@ namespace InventoryApplication
             OperatorInfo cur = OperatorInfo.CurrentOperator;
             this.mnu_Product.Enabled = cur.Permit(Permission.ReadProduct) || cur.Permit(Permission.EditProduct);
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.EditWareHouse) || cur.Permit(Permission.ReadWareHouse);
-            this.mnu_ProductCategory.Enabled = cur.Permit(Permission.ReadProductCategory) || cur.Permit(Permission.EditProductCategory);
             this.mnu_Customer.Enabled = cur.Permit(Permission.ReadCustomer) || cur.Permit(Permission.EditCustomer);
             this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.ReadDeliverySheet) || cur.Permit(Permission.EditDeliverySheet);
             this.mnu_Options.Enabled = cur.Permit(Permission.ReadSystemOptions) || cur.Permit(Permission.EditSystemOptions);

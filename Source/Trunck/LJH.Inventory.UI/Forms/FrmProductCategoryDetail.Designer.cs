@@ -37,15 +37,17 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.txtPrefix = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkParentCategory = new System.Windows.Forms.LinkLabel();
+            this.txtParentCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(178, 219);
+            this.btnClose.Location = new System.Drawing.Point(178, 266);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(69, 219);
+            this.btnOk.Location = new System.Drawing.Point(69, 266);
             // 
             // label1
             // 
@@ -69,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 55);
+            this.label2.Location = new System.Drawing.Point(9, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 4;
@@ -78,7 +80,7 @@
             // txtName
             // 
             this.txtName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtName.Location = new System.Drawing.Point(9, 70);
+            this.txtName.Location = new System.Drawing.Point(9, 73);
             this.txtName.MaxLength = 100;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(248, 21);
@@ -87,7 +89,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 138);
+            this.label3.Location = new System.Drawing.Point(9, 189);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 6;
@@ -96,7 +98,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(9, 153);
+            this.txtMemo.Location = new System.Drawing.Point(9, 204);
             this.txtMemo.MaxLength = 200;
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
@@ -106,7 +108,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 98);
+            this.label4.Location = new System.Drawing.Point(9, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(215, 12);
             this.label4.TabIndex = 8;
@@ -115,11 +117,32 @@
             // txtPrefix
             // 
             this.txtPrefix.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPrefix.Location = new System.Drawing.Point(9, 113);
+            this.txtPrefix.Location = new System.Drawing.Point(9, 118);
             this.txtPrefix.MaxLength = 100;
             this.txtPrefix.Name = "txtPrefix";
             this.txtPrefix.Size = new System.Drawing.Size(248, 21);
             this.txtPrefix.TabIndex = 9;
+            // 
+            // lnkParentCategory
+            // 
+            this.lnkParentCategory.AutoSize = true;
+            this.lnkParentCategory.Location = new System.Drawing.Point(9, 146);
+            this.lnkParentCategory.Name = "lnkParentCategory";
+            this.lnkParentCategory.Size = new System.Drawing.Size(41, 12);
+            this.lnkParentCategory.TabIndex = 10;
+            this.lnkParentCategory.TabStop = true;
+            this.lnkParentCategory.Text = "父类别";
+            this.lnkParentCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkParentCategory_LinkClicked);
+            // 
+            // txtParentCategory
+            // 
+            this.txtParentCategory.Enabled = false;
+            this.txtParentCategory.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtParentCategory.Location = new System.Drawing.Point(9, 161);
+            this.txtParentCategory.MaxLength = 100;
+            this.txtParentCategory.Name = "txtParentCategory";
+            this.txtParentCategory.Size = new System.Drawing.Size(248, 21);
+            this.txtParentCategory.TabIndex = 11;
             // 
             // FrmProductCategoryDetail
             // 
@@ -127,7 +150,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(265, 254);
+            this.ClientSize = new System.Drawing.Size(265, 301);
+            this.Controls.Add(this.txtParentCategory);
+            this.Controls.Add(this.lnkParentCategory);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtPrefix);
             this.Controls.Add(this.label3);
@@ -148,6 +173,8 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.txtPrefix, 0);
             this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.lnkParentCategory, 0);
+            this.Controls.SetChildIndex(this.txtParentCategory, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,5 +190,7 @@
         private LJH.GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.Label label4;
         private LJH.GeneralLibrary.WinformControl.DBCTextBox txtPrefix;
+        private System.Windows.Forms.LinkLabel lnkParentCategory;
+        private GeneralLibrary.WinformControl.DBCTextBox txtParentCategory;
     }
 }

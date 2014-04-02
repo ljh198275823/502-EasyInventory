@@ -44,7 +44,7 @@ namespace LJH.Inventory.BLL
             }
             else
             {
-                return new CommandResult(ResultCode.Fail, "创建商品类别编号失败，请重试");
+                return new CommandResult(ResultCode.Fail, "创建类别编号失败，请重试");
             }
         }
 
@@ -56,7 +56,7 @@ namespace LJH.Inventory.BLL
             {
                 return provider.Update(info, original);
             }
-            return new CommandResult(ResultCode.Fail, string.Format("ID={0} 商品类型在系统中不存在", info.ID));
+            return new CommandResult(ResultCode.Fail, string.Format("ID={0} 的类别在系统中不存在", info.ID));
         }
 
         public CommandResult Delete(ProductCategory info)
@@ -65,7 +65,7 @@ namespace LJH.Inventory.BLL
             ProductSearchCondition con = new ProductSearchCondition() { CategoryID = info.ID };
             if (sp.GetItems(con).QueryObjects.Count > 0)
             {
-                return new CommandResult(ResultCode.Fail, "商品类别不能删除，已经有库存原料应用此类别");
+                return new CommandResult(ResultCode.Fail, "此类别不能删除，已经有物料归到此类别，如果确实要删除此类别，请先更改相关物料的所属类别");
             }
             return ProviderFactory.Create<IProductCategoryProvider>(_RepoUri).Delete(info);
         }

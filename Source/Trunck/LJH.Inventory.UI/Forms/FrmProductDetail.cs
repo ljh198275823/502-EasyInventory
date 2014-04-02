@@ -18,6 +18,13 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 公共属性
+        /// <summary>
+        /// 获取或设置产品类别
+        /// </summary>
+        public ProductCategory Category { get; set; }
+        #endregion
+
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -33,7 +40,7 @@ namespace LJH.Inventory.UI.Forms
                 txtName.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(txtCategory.Text))
+            if (Category == null)
             {
                 MessageBox.Show("商品类别不能为空");
                 return false;
@@ -49,6 +56,10 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void InitControls()
         {
+            if (Category != null)
+            {
+                txtCategory.Text = Category.Name;
+            }
         }
 
         protected override void ItemShowing()
@@ -58,7 +69,7 @@ namespace LJH.Inventory.UI.Forms
             txtName.Text = p.Name;
             txtForeignName.Text = p.ForeignName;
             txtCategory.Text = p.Category.Name;
-            txtCategory.Tag = p.Category;
+            Category = p.Category;
             txtBarCode.Text = p.BarCode;
             txtSpecification.Text = p.Specification;
             txtModel.Text = p.Model;
@@ -85,8 +96,8 @@ namespace LJH.Inventory.UI.Forms
             p.ID = txtID.Text != "自动创建" ? txtID.Text : string.Empty;
             p.Name = txtName.Text;
             p.ForeignName = txtForeignName.Text;
-            p.CategoryID = (txtCategory.Tag as ProductCategory).ID;
-            p.Category = txtCategory.Tag as ProductCategory;
+            p.CategoryID = Category != null ? Category.ID : null;
+            p.Category = Category;
             p.BarCode = txtBarCode.Text;
             p.Specification = txtSpecification.Text;
             p.Model = txtModel.Text;
@@ -128,8 +139,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                txtCategory.Tag = frm.SelectedItem;
-                txtCategory.Text = (frm.SelectedItem as ProductCategory).Name;
+                Category = frm.SelectedItem as ProductCategory;
+                txtCategory.Text = Category.Name;
             }
         }
 
