@@ -24,6 +24,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Prefix { get; set; }
         /// <summary>
+        /// 获取或设置父类别
+        /// </summary>
+        public string Parent { get; set; }
+        /// <summary>
         /// 获取或设置类型备注
         /// </summary>
         public string Memo { get; set; }

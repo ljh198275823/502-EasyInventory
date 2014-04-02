@@ -78,6 +78,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal? BackTaxes { get; set; }
         /// <summary>
+        /// 获取或设置产品用于哪些客户，比如有些产品针对不同的客户有不同的物料编号
+        /// </summary>
+        public string Company { get; set; }
+        /// <summary>
         /// 获取或设置商品描述
         /// </summary>
         public string Memo { get; set; }

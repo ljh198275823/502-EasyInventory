@@ -51,12 +51,9 @@ namespace LJH.Inventory.UI.Forms
         {
             SaveConnectString();
 
-            if (AppSettings.CurrentSetting.DatabaseNeedUpgrade)
-            {
-                if (UpGradeDataBase())
-                {//升级数据库
-                    AppSettings.CurrentSetting.DatabaseNeedUpgrade = false;
-                }
+            if (UpGradeDataBase())
+            {//升级数据库
+                AppSettings.CurrentSetting.DatabaseNeedUpgrade = false;
             }
 
             OperatorBLL authen = new OperatorBLL(AppSettings.CurrentSetting.ConnectString);

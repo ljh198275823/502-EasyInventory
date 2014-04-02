@@ -53,8 +53,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -76,6 +85,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LJH.Inventory.BLL\LJH.Inventory.BLL.csproj">
+      <Project>{D250DC64-1E58-4B62-A5FD-5A4BD7BA7ABB}</Project>
+      <Name>LJH.Inventory.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LJH.Inventory.BusinessModel\LJH.Inventory.BusinessModel.csproj">
+      <Project>{E13ADAC1-9D84-4F58-B4A1-DEFB822F087E}</Project>
+      <Name>LJH.Inventory.BusinessModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LJH.Inventory.UI\LJH.Inventory.UI.csproj">
       <Project>{273C204B-4A1F-45E1-B7F0-A3A6CC3F6209}</Project>
       <Name>LJH.Inventory.UI</Name>

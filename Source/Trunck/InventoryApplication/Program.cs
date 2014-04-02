@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using LJH.Inventory.UI.Forms;
-using LJH.Inventory.UI.Applications.WaiMao;
 
 namespace InventoryApplication
 {
