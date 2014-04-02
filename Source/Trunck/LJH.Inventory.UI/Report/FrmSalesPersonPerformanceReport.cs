@@ -51,7 +51,7 @@ namespace LJH.Inventory.UI.Report
                         int row = gridView.Rows.Add();
                         gridView.Rows[row].Cells["colDeliveryDate"].Value = g.Key;
                         gridView.Rows[row].Cells["colSalesPerson"].Value = group.Key;
-                        decimal d1, d2;
+                        decimal d1;
                         d1 = g.Sum(it => it.Amount).Trim();
                         //d2 = g.Sum(it => it.Cost).Trim();
                         gridView.Rows[row].Cells["colAmount"].Value = d1;

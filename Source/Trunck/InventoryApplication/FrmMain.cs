@@ -13,7 +13,7 @@ using LJH.GeneralLibrary.SoftDog;
 using LJH.Inventory.UI.Forms;
 using LJH.GeneralLibrary.SQLHelper;
 
-namespace LJH.Inventory.UI.Applications.WaiMao
+namespace InventoryApplication
 {
     public partial class FrmMain : Form
     {

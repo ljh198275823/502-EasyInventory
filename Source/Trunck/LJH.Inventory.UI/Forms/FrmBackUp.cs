@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using LJH.GeneralLibrary.SQLHelper;
 
 namespace LJH.Inventory.UI.Forms
 {
@@ -20,7 +21,7 @@ namespace LJH.Inventory.UI.Forms
         private string _BakPath;
         private string _Message;
 
-        private SqlClientHelper.SqlClient _DBClient = new SqlClientHelper.SqlClient(LJH.Inventory.BusinessModel.AppSettings.CurrentSetting.ConnectString);
+        private SqlClient _DBClient = new SqlClient(LJH.Inventory.BusinessModel.AppSettings.CurrentSetting.ConnectString);
 
         private bool CheckInput()
         {

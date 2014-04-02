@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
+using LJH.GeneralLibrary.SQLHelper;
 
 namespace LJH.Inventory.UI.Forms
 {
@@ -168,7 +169,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 try
                 {
-                    SqlClientHelper.SqlClient client = new SqlClientHelper.SqlClient(AppSettings.CurrentSetting.ConnectString);
+                    SqlClient client = new SqlClient(AppSettings.CurrentSetting.ConnectString);
                     client.Connect();
                     client.ExecuteSQLFile(path);
                     ret = true;

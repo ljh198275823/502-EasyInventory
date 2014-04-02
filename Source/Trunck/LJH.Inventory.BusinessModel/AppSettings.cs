@@ -20,7 +20,7 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 if (_instance == null)
-                    _instance = new AppSettings(Application.ExecutablePath + ".config");
+                    _instance = new AppSettings(Path.Combine(Application.StartupPath, "config.xml"));
                 return _instance;
             }
         }
