@@ -21,14 +21,14 @@ namespace LJH.Inventory.BLL
         private string _RepoUri; 
         #endregion
 
-        private string CreateCustomerID(int classID)
+        private string CreateCustomerID(CustomerClass classID)
         {
             string id = null;
-            if (classID == 5)
+            if (classID == CustomerClass.Customer)
             {
                 id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPrefix, UserSettings.Current.CustomerSerialCount, "customer");
             }
-            else if (classID == 6)
+            else if (classID == CustomerClass.Supplier)
             {
                 id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "customer");
             }

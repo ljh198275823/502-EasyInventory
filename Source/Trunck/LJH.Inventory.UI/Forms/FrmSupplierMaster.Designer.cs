@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSupplierMaster));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,10 @@
             this.colPostalCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.categoryTree = new System.Windows.Forms.TreeView();
             this.menu.SuspendLayout();
+            this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,6 +156,7 @@
             // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.categoryTree);
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 50);
             this.pnlLeft.Name = "pnlLeft";
@@ -222,8 +227,8 @@
             // 
             // colPrepay
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "C2";
+            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPrepay.HeaderText = "付款余额";
             this.colPrepay.Name = "colPrepay";
             this.colPrepay.ReadOnly = true;
@@ -233,8 +238,8 @@
             // 
             // colReceivable
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "C2";
+            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle5;
             this.colReceivable.HeaderText = "应收账款";
             this.colReceivable.Name = "colReceivable";
             this.colReceivable.ReadOnly = true;
@@ -244,8 +249,8 @@
             // 
             // colCreditLimit
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colCreditLimit.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "C2";
+            this.colCreditLimit.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCreditLimit.HeaderText = "信用额度";
             this.colCreditLimit.Name = "colCreditLimit";
             this.colCreditLimit.ReadOnly = true;
@@ -288,6 +293,24 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "category.png");
+            // 
+            // categoryTree
+            // 
+            this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryTree.ImageIndex = 0;
+            this.categoryTree.ImageList = this.imageList1;
+            this.categoryTree.ItemHeight = 20;
+            this.categoryTree.Location = new System.Drawing.Point(0, 0);
+            this.categoryTree.Name = "categoryTree";
+            this.categoryTree.SelectedImageIndex = 0;
+            this.categoryTree.Size = new System.Drawing.Size(194, 291);
+            this.categoryTree.TabIndex = 1;
+            // 
             // FrmSupplierMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -305,6 +328,7 @@
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
+            this.pnlLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -338,5 +362,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPostalCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TreeView categoryTree;
     }
 }

@@ -15,7 +15,11 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         /// <summary>
         /// 获取或设置客户类别,参考客户类中的ClassID属性
         /// </summary>
-        public int? ClassID { get; set; }
+        public CustomerClass? ClassID { get; set; }
+        /// <summary>
+        /// 获取或设置客户类别
+        /// </summary>
+        public string Category { get; set; }
         #endregion
     }
 }

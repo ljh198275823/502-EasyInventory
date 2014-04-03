@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerMaster));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +45,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.categoryTree = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,8 +58,15 @@
             this.colWebsite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMedia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBusinessMan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
+            this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.CategoryMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -161,11 +171,32 @@
             // 
             // pnlLeft
             // 
+            this.pnlLeft.Controls.Add(this.categoryTree);
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 50);
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(194, 294);
             this.pnlLeft.TabIndex = 109;
+            // 
+            // categoryTree
+            // 
+            this.categoryTree.ContextMenuStrip = this.CategoryMenu;
+            this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryTree.ImageIndex = 0;
+            this.categoryTree.ImageList = this.imageList1;
+            this.categoryTree.ItemHeight = 20;
+            this.categoryTree.Location = new System.Drawing.Point(0, 0);
+            this.categoryTree.Name = "categoryTree";
+            this.categoryTree.SelectedImageIndex = 0;
+            this.categoryTree.Size = new System.Drawing.Size(194, 294);
+            this.categoryTree.TabIndex = 2;
+            this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.categoryTree_NodeMouseClick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "category.png");
             // 
             // dataGridView1
             // 
@@ -228,8 +259,8 @@
             // 
             // colPrepay
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "C2";
+            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPrepay.HeaderText = "付款余额";
             this.colPrepay.Name = "colPrepay";
             this.colPrepay.ReadOnly = true;
@@ -239,8 +270,8 @@
             // 
             // colReceivable
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "C2";
+            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle5;
             this.colReceivable.HeaderText = "应收账款";
             this.colReceivable.Name = "colReceivable";
             this.colReceivable.ReadOnly = true;
@@ -250,8 +281,8 @@
             // 
             // colCreditLimit
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colCreditLimit.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "C2";
+            this.colCreditLimit.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCreditLimit.HeaderText = "信用额度";
             this.colCreditLimit.Name = "colCreditLimit";
             this.colCreditLimit.ReadOnly = true;
@@ -275,6 +306,44 @@
             this.colBusinessMan.Name = "colBusinessMan";
             this.colBusinessMan.ReadOnly = true;
             // 
+            // CategoryMenu
+            // 
+            this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_FreshTree,
+            this.mnu_AddCategory,
+            this.mnu_DeleteCategory,
+            this.mnu_CategoryProperty});
+            this.CategoryMenu.Name = "contextMenuStrip1";
+            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
+            // 
+            // mnu_FreshTree
+            // 
+            this.mnu_FreshTree.Name = "mnu_FreshTree";
+            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
+            this.mnu_FreshTree.Text = "刷新";
+            this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
+            // 
+            // mnu_AddCategory
+            // 
+            this.mnu_AddCategory.Name = "mnu_AddCategory";
+            this.mnu_AddCategory.Size = new System.Drawing.Size(124, 22);
+            this.mnu_AddCategory.Text = "增加类别";
+            this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
+            // 
+            // mnu_DeleteCategory
+            // 
+            this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
+            this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
+            this.mnu_DeleteCategory.Text = "删除";
+            this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
+            // 
+            // mnu_CategoryProperty
+            // 
+            this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
+            this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
+            this.mnu_CategoryProperty.Text = "属性";
+            this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
+            // 
             // FrmCustomerMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -293,7 +362,9 @@
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
+            this.pnlLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.CategoryMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,5 +395,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colWebsite;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMedia;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBusinessMan;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TreeView categoryTree;
+        private System.Windows.Forms.ContextMenuStrip CategoryMenu;
+        private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddCategory;
+        private System.Windows.Forms.ToolStripMenuItem mnu_DeleteCategory;
+        private System.Windows.Forms.ToolStripMenuItem mnu_CategoryProperty;
     }
 }

@@ -43,8 +43,8 @@ namespace LJH.Inventory.UI.Forms
             if (IsAdding)
             {
                 ct = new CustomerType();
+                ct.ID = txtName.Text;
             }
-            ct.ID = txtName.Text;
             ct.Name = txtName.Text;
             ct.Memo = txtMemo.Text;
             return ct;

@@ -33,6 +33,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 CustomerSearchCondition con = search as CustomerSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.ID.Contains(con.CustomerID));
                 if (con.ClassID != null) ret = ret.Where(item => item.ClassID == con.ClassID.Value);
+                if (!string.IsNullOrEmpty(con.Category)) ret = ret.Where(item => item.CategoryID == con.Category);
             }
             List<Customer> cs = ret.ToList();
             return cs;

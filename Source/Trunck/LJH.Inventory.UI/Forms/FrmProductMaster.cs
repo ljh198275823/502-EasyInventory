@@ -158,7 +158,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
-        #region 事件处理程序
+        #region 类别树右键菜单
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             SelectNode(e.Node);
@@ -169,7 +169,6 @@ namespace LJH.Inventory.UI.Forms
             InitCategoryTree();
             SelectNode(categoryTree.Nodes[0]);
         }
-        #endregion
 
         private void mnu_AddCategory_Click(object sender, EventArgs e)
         {
@@ -214,5 +213,6 @@ namespace LJH.Inventory.UI.Forms
             };
             frm.ShowDialog();
         }
+        #endregion
     }
 }

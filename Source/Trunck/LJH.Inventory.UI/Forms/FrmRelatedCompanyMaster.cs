@@ -88,7 +88,7 @@ namespace LJH.Inventory.UI.Forms
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
-                con.ClassID = 3;
+                con.ClassID = CustomerClass.Other;
                 SearchCondition = con;
             }
             List<Customer> cs = bll.GetItems(SearchCondition).QueryObjects;

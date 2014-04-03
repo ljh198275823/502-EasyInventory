@@ -84,7 +84,7 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new Customer();
-                info.ClassID = ClassID;
+                info.ClassID = (CustomerClass)ClassID;
             }
             else
             {

@@ -41,7 +41,7 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.categoryTree = new System.Windows.Forms.TreeView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +60,7 @@
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
+            this.CategoryMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,7 +158,7 @@
             // 
             // categoryTree
             // 
-            this.categoryTree.ContextMenuStrip = this.contextMenuStrip1;
+            this.categoryTree.ContextMenuStrip = this.CategoryMenu;
             this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.categoryTree.ImageIndex = 0;
             this.categoryTree.ImageList = this.imageList1;
@@ -170,41 +170,41 @@
             this.categoryTree.TabIndex = 0;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.categoryTree_NodeMouseClick);
             // 
-            // contextMenuStrip1
+            // CategoryMenu
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_FreshTree,
             this.mnu_AddCategory,
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            this.CategoryMenu.Name = "contextMenuStrip1";
+            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
             // 
             // mnu_FreshTree
             // 
             this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
+            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
             // 
             // mnu_AddCategory
             // 
             this.mnu_AddCategory.Name = "mnu_AddCategory";
-            this.mnu_AddCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddCategory.Size = new System.Drawing.Size(124, 22);
             this.mnu_AddCategory.Text = "增加类别";
             this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
             // 
             // mnu_DeleteCategory
             // 
             this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
-            this.mnu_DeleteCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
             this.mnu_DeleteCategory.Text = "删除";
             this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
             // 
             // mnu_CategoryProperty
             // 
             this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
-            this.mnu_CategoryProperty.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
             this.mnu_CategoryProperty.Text = "属性";
             this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
             // 
@@ -328,7 +328,7 @@
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.CategoryMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -360,7 +360,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.TreeView categoryTree;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip CategoryMenu;
         private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddCategory;
         private System.Windows.Forms.ToolStripMenuItem mnu_DeleteCategory;
