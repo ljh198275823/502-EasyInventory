@@ -203,7 +203,7 @@ namespace InventoryApplication
 
         private void mnu_Role_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmRoles));
+            ShowSingleForm(typeof(FrmRoleMaster));
         }
 
         private void mnu_ChangePwd_Click(object sender, EventArgs e)

@@ -125,6 +125,15 @@ namespace LJH.Inventory.UI.Forms
                 }
                 GridView.CellMouseDown += GridView_CellMouseDown;
                 GridView.Sorted += new EventHandler(GridView_Sorted);
+
+                if (GridView.ContextMenuStrip != null)
+                {
+                    ContextMenuStrip menu = GridView.ContextMenuStrip;
+                    if (menu.Items["cMnu_Add"] != null) menu.Items["cMnu_Add"].Click += btnAdd_Click;
+                    if (menu.Items["cMnu_Delete"] != null) menu.Items["cMnu_Delete"].Click += btnDelete_Click;
+                    if (menu.Items["cMnu_Export"] != null) menu.Items["cMnu_Export"].Click += btnExport_Click;
+                    if (menu.Items["cMnu_Fresh"] != null) menu.Items["cMnu_Fresh"].Click += btnFresh_Click;
+                }
             }
         }
 

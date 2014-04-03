@@ -66,10 +66,16 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.pnlLeft.SuspendLayout();
             this.CategoryMenu.SuspendLayout();
             this.menu.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -93,6 +99,7 @@
             this.colPostalCode,
             this.colAddress,
             this.colMemo});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 50);
             this.dataGridView1.Name = "dataGridView1";
@@ -368,6 +375,40 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Delete,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // cMnu_Delete
+            // 
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Text = "删除";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
             // FrmRelatedCompanyMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -388,6 +429,7 @@
             this.CategoryMenu.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,6 +470,11 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_CategoryProperty;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TreeView categoryTree;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
 
     }
 }

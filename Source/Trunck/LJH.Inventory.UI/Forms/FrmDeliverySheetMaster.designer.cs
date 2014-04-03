@@ -60,9 +60,15 @@
             this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -269,6 +275,7 @@
             this.colTelphone,
             this.colAddress,
             this.colMemo});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(208, 50);
             this.dataGridView1.Name = "dataGridView1";
@@ -357,6 +364,40 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Delete,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // cMnu_Delete
+            // 
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Text = "删除";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
             // FrmDeliverySheetMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -377,6 +418,7 @@
             this.menu.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -413,5 +455,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
     }
 }

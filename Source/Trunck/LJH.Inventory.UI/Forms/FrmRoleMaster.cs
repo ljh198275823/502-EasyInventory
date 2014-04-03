@@ -11,11 +11,11 @@ using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmRoles : FrmMasterBase
+    public partial class FrmRoleMaster : FrmMasterBase
     {
         private List<RoleInfo> roles;
 
-        public FrmRoles()
+        public FrmRoleMaster()
         {
             InitializeComponent();
         }

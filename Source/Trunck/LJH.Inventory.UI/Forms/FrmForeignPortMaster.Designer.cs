@@ -28,25 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
+            this.btnSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCountry = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRegion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox();
-            this.btnSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnClear = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -114,6 +121,39 @@
             this.btn_SelectColumns.Text = "选择列(&L)";
             this.btn_SelectColumns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
+            // 
+            // txtKeyword
+            // 
+            this.txtKeyword.AutoSize = false;
+            this.txtKeyword.Margin = new System.Windows.Forms.Padding(6, 0, 1, 0);
+            this.txtKeyword.Name = "txtKeyword";
+            this.txtKeyword.Size = new System.Drawing.Size(200, 30);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Image = global::LJH.Inventory.UI.Properties.Resources.search;
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(59, 46);
+            this.btnSearch.Text = "查找(&S)";
+            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Image = global::LJH.Inventory.UI.Properties.Resources.clear;
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(60, 46);
+            this.btnClear.Text = "清除(&C)";
+            this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -126,6 +166,7 @@
             this.colCountry,
             this.colRegion,
             this.colMemo});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 50);
             this.dataGridView1.Name = "dataGridView1";
@@ -166,38 +207,39 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
-            // toolStripSeparator1
+            // contextMenuStrip1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Delete,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
             // 
-            // txtKeyword
+            // cMnu_Fresh
             // 
-            this.txtKeyword.AutoSize = false;
-            this.txtKeyword.Margin = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(200, 30);
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Text = "刷新";
             // 
-            // btnSearch
+            // cMnu_Add
             // 
-            this.btnSearch.Image = global::LJH.Inventory.UI.Properties.Resources.search;
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(59, 46);
-            this.btnSearch.Text = "查找(&S)";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Text = "新建";
             // 
-            // btnClear
+            // cMnu_Delete
             // 
-            this.btnClear.Image = global::LJH.Inventory.UI.Properties.Resources.clear;
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(60, 46);
-            this.btnClear.Text = "清除(&C)";
-            this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Text = "删除";
             // 
-            // toolStripSeparator2
+            // cMnu_Export
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // FrmForeignPortMaster
             // 
@@ -213,6 +255,7 @@
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,5 +280,10 @@
         private System.Windows.Forms.ToolStripMenuItem btnSearch;
         private System.Windows.Forms.ToolStripMenuItem btnClear;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
     }
 }
