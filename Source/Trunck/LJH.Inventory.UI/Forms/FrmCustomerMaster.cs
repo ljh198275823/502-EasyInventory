@@ -112,6 +112,7 @@ namespace LJH.Inventory.UI.Forms
         protected override FrmDetailBase GetDetailForm()
         {
             FrmCustomerDetail frm = new FrmCustomerDetail();
+            frm.Category = categoryTree.SelectedNode != null ? (categoryTree.SelectedNode.Tag as CustomerType) : null;
             return frm;
         }
 
@@ -239,7 +240,7 @@ namespace LJH.Inventory.UI.Forms
             CustomerType pc = categoryTree.SelectedNode.Tag as CustomerType;
             FrmCustomerTypeDetail frm = new FrmCustomerTypeDetail();
             frm.IsAdding = true;
-            //frm.ParentCategory = pc;
+            frm.ParentCategory = pc;
             frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
                 CustomerType item = args.AddedItem as CustomerType;

@@ -27,6 +27,11 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).GetItems(null);
         }
 
+        public QueryResult<CustomerType> GetByID(string id)
+        {
+            return ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).GetByID(id);
+        }
+
         public CommandResult Add(CustomerType info)
         {
             return ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).Insert(info);

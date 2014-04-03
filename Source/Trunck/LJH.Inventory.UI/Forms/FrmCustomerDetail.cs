@@ -19,6 +19,13 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 公共属性
+        /// <summary>
+        /// 获取或设置客户类别
+        /// </summary>
+        public CustomerType Category { get; set; }
+        #endregion 
+
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -39,6 +46,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void InitControls()
         {
+            base.InitControls();
+            this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             txtCreater.Text = opt.OperatorID;
             this.btnOk.Enabled = opt.Permit(Permission.EditCustomer);
@@ -50,8 +59,11 @@ namespace LJH.Inventory.UI.Forms
             if (c != null)
             {
                 txtID.Text = c.ID;
-                txtCategory.Text = c.CategoryID;
-                txtCategory.Tag = c.CategoryID;
+                if (!string.IsNullOrEmpty(c.CategoryID))
+                {
+                    Category = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(c.CategoryID).QueryObject;
+                }
+                this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
                 txtNation.Text = c.Nation;
                 txtName.Text = c.Name;
                 txtMedia.Text = c.Media;
@@ -86,11 +98,11 @@ namespace LJH.Inventory.UI.Forms
                 info = UpdatingItem as Customer;
             }
             info.ID = txtID.Text != "自动创建" ? txtID.Text : string.Empty;
-            info.CategoryID = txtCategory.Text;
+            info.CategoryID = Category != null ? Category.ID : null;
             info.Nation = txtNation.Text;
             info.Name = txtName.Text;
-            info.Media  = txtMedia.Text;
-            info.BusinessMan  = txtBusinessMan.Text;
+            info.Media = txtMedia.Text;
+            info.BusinessMan = txtBusinessMan.Text;
             info.Creater = txtCreater.Text;
             return info;
         }
@@ -228,9 +240,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CustomerType ct = frm.SelectedItem as CustomerType;
-                txtCategory.Text = ct.Name;
-                txtCategory.Tag = ct;
+                Category = frm.SelectedItem as CustomerType;
+                this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
             }
         }
 
