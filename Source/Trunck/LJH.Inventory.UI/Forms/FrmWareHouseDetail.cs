@@ -18,6 +18,13 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 公共属性
+        /// <summary>
+        /// 获取或设置父仓库
+        /// </summary>
+        public WareHouse ParentWareHouse { get; set; }
+        #endregion
+
         #region 重写基类方法
         protected override bool CheckInput()
         {

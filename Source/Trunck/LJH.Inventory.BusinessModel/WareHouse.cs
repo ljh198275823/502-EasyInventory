@@ -23,6 +23,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Name { get; set; }
         /// <summary>
+        /// 获取或设置父仓库
+        /// </summary>
+        public string Parent { get; set; }
+        /// <summary>
         /// 获取或设置仓库备注
         /// </summary>
         public string Memo { get; set; }

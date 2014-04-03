@@ -55,7 +55,6 @@
             this.mnu_Expanditure = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_ExpanditureType = new System.Windows.Forms.ToolStripMenuItem();
             this.业务资料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_WareHouse = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Product = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Unit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CurrencyType = new System.Windows.Forms.ToolStripMenuItem();
@@ -299,7 +298,6 @@
             // 业务资料ToolStripMenuItem
             // 
             this.业务资料ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_WareHouse,
             this.mnu_Product,
             this.mnu_Unit,
             this.mnu_CurrencyType,
@@ -309,13 +307,6 @@
             this.业务资料ToolStripMenuItem.Name = "业务资料ToolStripMenuItem";
             this.业务资料ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.业务资料ToolStripMenuItem.Text = "基本资料";
-            // 
-            // mnu_WareHouse
-            // 
-            this.mnu_WareHouse.Name = "mnu_WareHouse";
-            this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
-            this.mnu_WareHouse.Text = "仓库资料";
-            this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click);
             // 
             // mnu_Product
             // 
@@ -661,7 +652,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_CustomerPayment;
         private System.Windows.Forms.ToolStripMenuItem mnu_Expanditure;
         private System.Windows.Forms.ToolStripMenuItem mnu_CustomerOtherReceivable;
-        private System.Windows.Forms.ToolStripMenuItem mnu_WareHouse;
         private System.Windows.Forms.ToolStripMenuItem mnu_Options;
         private System.Windows.Forms.ToolStripMenuItem 公司信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnu_Transport;

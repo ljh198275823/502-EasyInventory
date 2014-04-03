@@ -21,49 +21,100 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<Button> _Buttons = new List<Button>();
+        private List<ProductInventory> _ProductInventorys = null;
+        #endregion
+
+        #region 私有方法
+        private void InitCategoryTree()
+        {
+            this.categoryTree.Nodes.Clear();
+            this.categoryTree.Nodes.Add("所有仓库");
+
+            List<WareHouse> items = (new WareHouseBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                AddDesendNodes(items, this.categoryTree.Nodes[0]);
+            }
+        }
+
+        private void AddDesendNodes(List<WareHouse> items, TreeNode parent)
+        {
+            List<WareHouse> pcs = null;
+            if (parent.Tag == null)
+            {
+                pcs = items.Where(it => string.IsNullOrEmpty(it.Parent)).ToList();
+            }
+            else
+            {
+                pcs = items.Where(it => it.Parent == (parent.Tag as WareHouse).ID).ToList();
+            }
+            if (pcs != null && pcs.Count > 0)
+            {
+                foreach (WareHouse pc in pcs)
+                {
+                    TreeNode node = AddNode(pc, parent);
+                    AddDesendNodes(items, node);
+                }
+            }
+            parent.ImageIndex = 0;
+            parent.SelectedImageIndex = 0;
+            parent.ExpandAll();
+        }
+
+        private void SelectNode(TreeNode node)
+        {
+            if (!object.ReferenceEquals(categoryTree.SelectedNode, node))
+            {
+                if (categoryTree.SelectedNode != null)
+                {
+                    categoryTree.SelectedNode.BackColor = Color.White;
+                    categoryTree.SelectedNode.ForeColor = Color.Black;
+                }
+                categoryTree.SelectedNode = node;
+                categoryTree.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
+                categoryTree.SelectedNode.ForeColor = Color.White;
+
+                List<object> items = GetSelectedNodeItems();
+                ShowItemsOnGrid(items);
+            }
+        }
+
+        private List<object> GetSelectedNodeItems()
+        {
+            List<ProductInventory> items = _ProductInventorys;
+            WareHouse pc = null;
+            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as WareHouse;
+            if (pc != null) items = _ProductInventorys.Where(it => it.WareHouseID == pc.ID).ToList();
+
+            return (from p in items
+                    orderby p.Product.Name ascending
+                    select (object)p).ToList();
+        }
+
+        private TreeNode AddNode(WareHouse pc, TreeNode parent)
+        {
+            TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
+            node.Tag = pc;
+            return node;
+        }
         #endregion
 
         #region 重写基类方法
         protected override void Init()
         {
             base.Init();
-            List<WareHouse> items = (new WareHouseBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                Button b = new Button();
-                b.Name = "全部";
-                b.BackColor = SystemColors.ControlDark;
-                b.Size = new Size(200, 42);
-                b.Dock = DockStyle.Top;
-                b.FlatStyle = FlatStyle.Popup;
-                _Buttons.Add(b);
-
-                foreach (WareHouse pc in items)
-                {
-                    Button button = new Button();
-                    button.Name = pc.Name;
-                    button.Dock = DockStyle.Top;
-                    button.Size = new Size(200, 42);
-                    button.FlatStyle = FlatStyle.Popup;
-                    _Buttons.Add(button);
-                }
-                for (int i = _Buttons.Count - 1; i >= 0; i--)
-                {
-                    pnlLeft.Controls.Add(_Buttons[i]);
-                }
-            }
-            else
-            {
-                this.pnlLeft.Visible = false;
-                this.splitter1.Visible = false;
-            }
-            menu.Items["btn_Delete"].Visible = false;
+            InitCategoryTree();
+            OperatorInfo cur = OperatorInfo.CurrentOperator;
+            this.mnu_AddCategory.Enabled = cur.Permit(Permission.EditWareHouse);
+            this.mnu_DeleteCategory.Enabled = cur.Permit(Permission.EditWareHouse);
+            this.mnu_CategoryProperty.Enabled = cur.Permit(Permission.EditWareHouse) || cur.Permit(Permission.ReadWareHouse);
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmProductInventoryDetail();
+            FrmProductInventoryDetail  frm= new FrmProductInventoryDetail();
+            frm.WareHouse = categoryTree.SelectedNode != null ? (categoryTree.SelectedNode.Tag as WareHouse) : null;
+            return frm;
         }
 
         protected override bool DeletingItem(object item)
@@ -75,28 +126,8 @@ namespace LJH.Inventory.UI.Forms
         {
             ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.CurrentSetting.ConnectString);
             List<ProductInventory> items = bll.GetItems(null).QueryObjects;
-            List<object> records = null;
-            if (_Buttons.Count > 1)
-            {
-                for (int i = 1; i < _Buttons.Count; i++)
-                {
-                    records = (from p in items
-                               where p.WareHouse.Name == _Buttons[i].Name
-                               orderby p.ProductID ascending
-                               select (object)p).ToList();
-                    _Buttons[i].Tag = records;
-                    _Buttons[i].Text = string.Format("{0} ({1})", _Buttons[i].Name, records == null ? 0 : records.Count);
-                }
-            }
-
-            records = (from p in items
-                       orderby p.ProductID ascending
-                       select (object)p).ToList();
-            if (_Buttons.Count > 0)
-            {
-                _Buttons[0].Tag = records;
-                _Buttons[0].Text = string.Format("{0} ({1})", _Buttons[0].Name, records == null ? 0 : records.Count);
-            }
+            _ProductInventorys = bll.GetItems(SearchCondition).QueryObjects;
+            List<object> records = GetSelectedNodeItems();
             return records;
         }
 
@@ -114,6 +145,11 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colReserved"].Value = pi.Reserved.Trim();
             row.Cells["colValid"].Value = pi.Valid.Trim();
             row.Cells["colSum"].Value = pi.Count.Trim();
+            if (_ProductInventorys == null || !_ProductInventorys.Exists(it => it.ID == pi.ID))
+            {
+                if (_ProductInventorys == null) _ProductInventorys = new List<ProductInventory>();
+                _ProductInventorys.Add(pi);
+            }
         }
         #endregion
 
@@ -136,6 +172,63 @@ namespace LJH.Inventory.UI.Forms
                     }
                 }
             }
+        }
+        #endregion
+
+        #region 类别树右键菜单
+        private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            SelectNode(e.Node);
+        }
+
+        private void mnu_FreshTree_Click(object sender, EventArgs e)
+        {
+            InitCategoryTree();
+            SelectNode(categoryTree.Nodes[0]);
+        }
+
+        private void mnu_AddCategory_Click(object sender, EventArgs e)
+        {
+            WareHouse pc = categoryTree.SelectedNode.Tag as WareHouse;
+            FrmWareHouseDetail frm = new FrmWareHouseDetail();
+            frm.IsAdding = true;
+            frm.ParentWareHouse = pc;
+            frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+            {
+                WareHouse item = args.AddedItem as WareHouse;
+                AddNode(item, categoryTree.SelectedNode);
+            };
+            frm.ShowDialog();
+        }
+
+        private void mnu_DeleteCategory_Click(object sender, EventArgs e)
+        {
+            WareHouse pc = categoryTree.SelectedNode.Tag as WareHouse;
+            if (pc != null && MessageBox.Show("是否删除此仓库?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+            {
+                CommandResult ret = (new WareHouseBLL(AppSettings.CurrentSetting.ConnectString)).Delete(pc);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
+        }
+
+        private void mnu_CategoryProperty_Click(object sender, EventArgs e)
+        {
+            WareHouse pc = categoryTree.SelectedNode.Tag as WareHouse;
+            FrmWareHouseDetail frm = new FrmWareHouseDetail();
+            frm.IsAdding = false;
+            frm.UpdatingItem = pc;
+            frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+            {
+                categoryTree.SelectedNode.Text = string.Format("{0}", pc.Name);
+            };
+            frm.ShowDialog();
         }
         #endregion
     }
