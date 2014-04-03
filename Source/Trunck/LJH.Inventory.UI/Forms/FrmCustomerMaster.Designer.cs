@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerMaster));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +46,11 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.categoryTree = new System.Windows.Forms.TreeView();
+            this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
@@ -58,15 +63,10 @@
             this.colWebsite = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMedia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBusinessMan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.CategoryMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menu
@@ -192,6 +192,44 @@
             this.categoryTree.TabIndex = 2;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.categoryTree_NodeMouseClick);
             // 
+            // CategoryMenu
+            // 
+            this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_FreshTree,
+            this.mnu_AddCategory,
+            this.mnu_DeleteCategory,
+            this.mnu_CategoryProperty});
+            this.CategoryMenu.Name = "contextMenuStrip1";
+            this.CategoryMenu.Size = new System.Drawing.Size(153, 114);
+            // 
+            // mnu_FreshTree
+            // 
+            this.mnu_FreshTree.Name = "mnu_FreshTree";
+            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
+            this.mnu_FreshTree.Text = "刷新";
+            this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
+            // 
+            // mnu_AddCategory
+            // 
+            this.mnu_AddCategory.Name = "mnu_AddCategory";
+            this.mnu_AddCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddCategory.Text = "增加类别";
+            this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
+            // 
+            // mnu_DeleteCategory
+            // 
+            this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
+            this.mnu_DeleteCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeleteCategory.Text = "删除";
+            this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
+            // 
+            // mnu_CategoryProperty
+            // 
+            this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
+            this.mnu_CategoryProperty.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CategoryProperty.Text = "属性";
+            this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -259,8 +297,8 @@
             // 
             // colPrepay
             // 
-            dataGridViewCellStyle4.Format = "C2";
-            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle1;
             this.colPrepay.HeaderText = "付款余额";
             this.colPrepay.Name = "colPrepay";
             this.colPrepay.ReadOnly = true;
@@ -270,8 +308,8 @@
             // 
             // colReceivable
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "C2";
+            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle2;
             this.colReceivable.HeaderText = "应收账款";
             this.colReceivable.Name = "colReceivable";
             this.colReceivable.ReadOnly = true;
@@ -281,8 +319,8 @@
             // 
             // colCreditLimit
             // 
-            dataGridViewCellStyle6.Format = "C2";
-            this.colCreditLimit.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Format = "C2";
+            this.colCreditLimit.DefaultCellStyle = dataGridViewCellStyle3;
             this.colCreditLimit.HeaderText = "信用额度";
             this.colCreditLimit.Name = "colCreditLimit";
             this.colCreditLimit.ReadOnly = true;
@@ -306,44 +344,6 @@
             this.colBusinessMan.Name = "colBusinessMan";
             this.colBusinessMan.ReadOnly = true;
             // 
-            // CategoryMenu
-            // 
-            this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_FreshTree,
-            this.mnu_AddCategory,
-            this.mnu_DeleteCategory,
-            this.mnu_CategoryProperty});
-            this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
-            // 
-            // mnu_FreshTree
-            // 
-            this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
-            this.mnu_FreshTree.Text = "刷新";
-            this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
-            // 
-            // mnu_AddCategory
-            // 
-            this.mnu_AddCategory.Name = "mnu_AddCategory";
-            this.mnu_AddCategory.Size = new System.Drawing.Size(124, 22);
-            this.mnu_AddCategory.Text = "增加类别";
-            this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
-            // 
-            // mnu_DeleteCategory
-            // 
-            this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
-            this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
-            this.mnu_DeleteCategory.Text = "删除";
-            this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
-            // 
-            // mnu_CategoryProperty
-            // 
-            this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
-            this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
-            this.mnu_CategoryProperty.Text = "属性";
-            this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
-            // 
             // FrmCustomerMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -363,8 +363,8 @@
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.CategoryMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

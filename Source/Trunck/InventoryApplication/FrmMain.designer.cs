@@ -40,7 +40,6 @@
             this.mnu_Order = new System.Windows.Forms.ToolStripMenuItem();
             this.采购库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Supplier = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_SupplierType = new System.Windows.Forms.ToolStripMenuItem();
             this.供应商报价管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_PurchaseOrder = new System.Windows.Forms.ToolStripMenuItem();
             this.商务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +61,6 @@
             this.mnu_CurrencyType = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Transport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_RelatedCompanyType = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RelatedCompany = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Security = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Operator = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,21 +152,21 @@
             // mnu_Customer
             // 
             this.mnu_Customer.Name = "mnu_Customer";
-            this.mnu_Customer.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Customer.Size = new System.Drawing.Size(148, 22);
             this.mnu_Customer.Text = "客户资料";
             this.mnu_Customer.Click += new System.EventHandler(this.mnu_Customer_Click);
             // 
             // 客户报价资料ToolStripMenuItem
             // 
             this.客户报价资料ToolStripMenuItem.Name = "客户报价资料ToolStripMenuItem";
-            this.客户报价资料ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.客户报价资料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.客户报价资料ToolStripMenuItem.Text = "客户报价资料";
             this.客户报价资料ToolStripMenuItem.Visible = false;
             // 
             // mnu_Order
             // 
             this.mnu_Order.Name = "mnu_Order";
-            this.mnu_Order.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Order.Size = new System.Drawing.Size(148, 22);
             this.mnu_Order.Text = "销售订单管理";
             this.mnu_Order.Visible = false;
             this.mnu_Order.Click += new System.EventHandler(this.mnu_Order_Click);
@@ -177,13 +175,11 @@
             // 
             this.采购库存ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_Supplier,
-            this.mnu_SupplierType,
             this.供应商报价管理ToolStripMenuItem,
             this.mnu_PurchaseOrder});
             this.采购库存ToolStripMenuItem.Name = "采购库存ToolStripMenuItem";
             this.采购库存ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.采购库存ToolStripMenuItem.Text = "采购";
-            this.采购库存ToolStripMenuItem.Visible = false;
             // 
             // mnu_Supplier
             // 
@@ -192,24 +188,19 @@
             this.mnu_Supplier.Text = "供应商资料";
             this.mnu_Supplier.Click += new System.EventHandler(this.mnu_Supplier_Click_1);
             // 
-            // mnu_SupplierType
-            // 
-            this.mnu_SupplierType.Name = "mnu_SupplierType";
-            this.mnu_SupplierType.Size = new System.Drawing.Size(148, 22);
-            this.mnu_SupplierType.Text = "供应商类别";
-            this.mnu_SupplierType.Click += new System.EventHandler(this.mnu_SupplierType_Click);
-            // 
             // 供应商报价管理ToolStripMenuItem
             // 
             this.供应商报价管理ToolStripMenuItem.Name = "供应商报价管理ToolStripMenuItem";
             this.供应商报价管理ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.供应商报价管理ToolStripMenuItem.Text = "供应商报价";
+            this.供应商报价管理ToolStripMenuItem.Visible = false;
             // 
             // mnu_PurchaseOrder
             // 
             this.mnu_PurchaseOrder.Name = "mnu_PurchaseOrder";
             this.mnu_PurchaseOrder.Size = new System.Drawing.Size(148, 22);
             this.mnu_PurchaseOrder.Text = "采购订单管理";
+            this.mnu_PurchaseOrder.Visible = false;
             this.mnu_PurchaseOrder.Click += new System.EventHandler(this.mnu_PurchaseOrder_Click);
             // 
             // 商务ToolStripMenuItem
@@ -314,7 +305,6 @@
             this.mnu_CurrencyType,
             this.mnu_Transport,
             this.toolStripSeparator5,
-            this.mnu_RelatedCompanyType,
             this.mnu_RelatedCompany});
             this.业务资料ToolStripMenuItem.Name = "业务资料ToolStripMenuItem";
             this.业务资料ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
@@ -323,54 +313,47 @@
             // mnu_WareHouse
             // 
             this.mnu_WareHouse.Name = "mnu_WareHouse";
-            this.mnu_WareHouse.Size = new System.Drawing.Size(148, 22);
+            this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
             this.mnu_WareHouse.Text = "仓库资料";
             this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click);
             // 
             // mnu_Product
             // 
             this.mnu_Product.Name = "mnu_Product";
-            this.mnu_Product.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Product.Size = new System.Drawing.Size(152, 22);
             this.mnu_Product.Text = "商品资料";
             this.mnu_Product.Click += new System.EventHandler(this.mnu_Product_Click);
             // 
             // mnu_Unit
             // 
             this.mnu_Unit.Name = "mnu_Unit";
-            this.mnu_Unit.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Unit.Size = new System.Drawing.Size(152, 22);
             this.mnu_Unit.Text = "计量单位";
             this.mnu_Unit.Click += new System.EventHandler(this.mnu_Unit_Click);
             // 
             // mnu_CurrencyType
             // 
             this.mnu_CurrencyType.Name = "mnu_CurrencyType";
-            this.mnu_CurrencyType.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CurrencyType.Size = new System.Drawing.Size(152, 22);
             this.mnu_CurrencyType.Text = "货币种类";
             this.mnu_CurrencyType.Click += new System.EventHandler(this.mnu_CurrencyType_Click);
             // 
             // mnu_Transport
             // 
             this.mnu_Transport.Name = "mnu_Transport";
-            this.mnu_Transport.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Transport.Size = new System.Drawing.Size(152, 22);
             this.mnu_Transport.Text = "运输方式";
             this.mnu_Transport.Click += new System.EventHandler(this.mnu_Transport_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(145, 6);
-            // 
-            // mnu_RelatedCompanyType
-            // 
-            this.mnu_RelatedCompanyType.Name = "mnu_RelatedCompanyType";
-            this.mnu_RelatedCompanyType.Size = new System.Drawing.Size(148, 22);
-            this.mnu_RelatedCompanyType.Text = "相关公司类别";
-            this.mnu_RelatedCompanyType.Click += new System.EventHandler(this.mnu_RelatedCompanyType_Click);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
             // 
             // mnu_RelatedCompany
             // 
             this.mnu_RelatedCompany.Name = "mnu_RelatedCompany";
-            this.mnu_RelatedCompany.Size = new System.Drawing.Size(148, 22);
+            this.mnu_RelatedCompany.Size = new System.Drawing.Size(152, 22);
             this.mnu_RelatedCompany.Text = "相关公司资料";
             this.mnu_RelatedCompany.Click += new System.EventHandler(this.mnu_RelatedCompany_Click);
             // 
@@ -683,10 +666,8 @@
         private System.Windows.Forms.ToolStripMenuItem 公司信息ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnu_Transport;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem mnu_RelatedCompanyType;
         private System.Windows.Forms.ToolStripMenuItem mnu_RelatedCompany;
         private System.Windows.Forms.ToolStripMenuItem 供应商报价管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnu_SupplierType;
         private System.Windows.Forms.ToolStripMenuItem mnu_Order;
         private System.Windows.Forms.ToolStripMenuItem mnu_Inventory;
         private System.Windows.Forms.ToolStripMenuItem mnu_InventorySheet;

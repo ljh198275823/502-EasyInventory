@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.BLL
 {
@@ -26,6 +27,11 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IRelatedCompanyTypeProvider>(_RepoUri).GetItems(null);
         }
 
+        public QueryResult<RelatedCompanyType> GetByID(string id)
+        {
+            return ProviderFactory.Create<IRelatedCompanyTypeProvider>(_RepoUri).GetByID(id);
+        }
+
         public CommandResult Add(RelatedCompanyType info)
         {
             return ProviderFactory.Create<IRelatedCompanyTypeProvider>(_RepoUri).Insert(info);
@@ -46,6 +52,12 @@ namespace LJH.Inventory.BLL
 
         public CommandResult Delete(RelatedCompanyType info)
         {
+            ICustomerProvider sp = ProviderFactory.Create<ICustomerProvider>(_RepoUri);
+            CustomerSearchCondition con = new CustomerSearchCondition() { ClassID = CustomerClass.Other, Category = info.ID };
+            if (sp.GetItems(con).QueryObjects.Count > 0)
+            {
+                return new CommandResult(ResultCode.Fail, "此类别不能删除，已经有相关公司归到此类别，如果确实要删除此类别，请先更改相关相关公司的所属类别");
+            }
             return ProviderFactory.Create<IRelatedCompanyTypeProvider>(_RepoUri).Delete(info);
         }
         #endregion

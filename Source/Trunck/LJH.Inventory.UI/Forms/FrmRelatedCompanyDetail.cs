@@ -20,7 +20,10 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 公共属性
-        public int ClassID { get; set; }
+        /// <summary>
+        /// 获取或设置供应商类别
+        /// </summary>
+        public RelatedCompanyType Category { get; set; }
         #endregion
 
         #region 重写基类方法
@@ -43,6 +46,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void InitControls()
         {
+            base.InitControls();
+            txtCategory.Text = Category != null ? Category.Name : string.Empty;
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             this.btnOk.Enabled = opt.Permit(Permission.EditCustomer);
         }
@@ -53,8 +58,11 @@ namespace LJH.Inventory.UI.Forms
             if (c != null)
             {
                 txtID.Text = c.ID;
-                txtCategory.Text = c.CategoryID;
-                txtCategory.Tag = c.CategoryID;
+                if (!string.IsNullOrEmpty(c.CategoryID))
+                {
+                    Category = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(c.CategoryID).QueryObject;
+                    txtCategory.Text = Category != null ? Category.Name : string.Empty;
+                }
                 txtNation.Text = c.Nation;
                 txtName.Text = c.Name;
                 txtTelephone.Text = c.TelPhone;
@@ -84,14 +92,14 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new Customer();
-                info.ClassID = (CustomerClass)ClassID;
+                info.ClassID = CustomerClass.Other;
             }
             else
             {
                 info = UpdatingItem as Customer;
             }
             info.ID = txtID.Text != "自动创建" ? txtID.Text : string.Empty;
-            info.CategoryID = txtCategory.Text;
+            info.CategoryID = Category != null ? Category.ID : null;
             info.Nation = txtNation.Text;
             info.Name = txtName.Text;
             info.TelPhone = txtTelephone.Text;
@@ -231,38 +239,13 @@ namespace LJH.Inventory.UI.Forms
         private void lblCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmMasterBase frm = null;
-            if (ClassID == 5)
+            frm = new FrmRelatedCompanyTypeMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
             {
-                frm = new FrmCustomerTypeMaster();
-                frm.ForSelect = true;
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    CustomerType ct = frm.SelectedItem as CustomerType;
-                    txtCategory.Text = ct.Name;
-                    txtCategory.Tag = ct;
-                }
-            }
-            else if (ClassID == 6)
-            {
-                frm = new FrmSupplierTypeMaster();
-                frm.ForSelect = true;
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    SupplierType ct = frm.SelectedItem as SupplierType;
-                    txtCategory.Text = ct.Name;
-                    txtCategory.Tag = ct;
-                }
-            }
-            else
-            {
-                frm = new FrmRelatedCompanyTypeMaster();
-                frm.ForSelect = true;
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    RelatedCompanyType ct = frm.SelectedItem as RelatedCompanyType;
-                    txtCategory.Text = ct.Name;
-                    txtCategory.Tag = ct;
-                }
+                RelatedCompanyType ct = frm.SelectedItem as RelatedCompanyType;
+                txtCategory.Text = ct.Name;
+                txtCategory.Tag = ct;
             }
         }
     }

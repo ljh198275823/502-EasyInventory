@@ -18,6 +18,8 @@ namespace LJH.Inventory.BusinessModel
 
         public string Name { get; set; }
 
+        public string Parent { get; set; }
+
         public string Memo { get; set; }
         #endregion
     }

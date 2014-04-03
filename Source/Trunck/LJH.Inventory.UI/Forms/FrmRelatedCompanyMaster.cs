@@ -21,45 +21,89 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<Button> _Buttons = new List<Button>();
+        private List<Customer> _Customers = null;
+        #endregion
+
+        #region 私有方法
+        private void InitCategoryTree()
+        {
+            this.categoryTree.Nodes.Clear();
+            this.categoryTree.Nodes.Add("所有供应商类别");
+
+            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                AddDesendNodes(items, this.categoryTree.Nodes[0]);
+            }
+        }
+
+        private void AddDesendNodes(List<RelatedCompanyType> items, TreeNode parent)
+        {
+            List<RelatedCompanyType> pcs = null;
+            if (parent.Tag == null)
+            {
+                pcs = items.Where(it => string.IsNullOrEmpty(it.Parent)).ToList();
+            }
+            else
+            {
+                pcs = items.Where(it => it.Parent == (parent.Tag as RelatedCompanyType).ID).ToList();
+            }
+            if (pcs != null && pcs.Count > 0)
+            {
+                foreach (RelatedCompanyType pc in pcs)
+                {
+                    TreeNode node = AddNode(pc, parent);
+                    AddDesendNodes(items, node);
+                }
+            }
+            parent.ImageIndex = 0;
+            parent.SelectedImageIndex = 0;
+            parent.ExpandAll();
+        }
+
+        private void SelectNode(TreeNode node)
+        {
+            if (!object.ReferenceEquals(categoryTree.SelectedNode, node))
+            {
+                if (categoryTree.SelectedNode != null)
+                {
+                    categoryTree.SelectedNode.BackColor = Color.White;
+                    categoryTree.SelectedNode.ForeColor = Color.Black;
+                }
+                categoryTree.SelectedNode = node;
+                categoryTree.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
+                categoryTree.SelectedNode.ForeColor = Color.White;
+
+                List<object> items = GetSelectedNodeItems();
+                ShowItemsOnGrid(items);
+            }
+        }
+
+        private List<object> GetSelectedNodeItems()
+        {
+            List<Customer> items = _Customers;
+            RelatedCompanyType pc = null;
+            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as RelatedCompanyType;
+            if (pc != null) items = _Customers.Where(it => it.CategoryID == pc.ID).ToList();
+
+            return (from p in items
+                    orderby p.Name ascending
+                    select (object)p).ToList();
+        }
+
+        private TreeNode AddNode(RelatedCompanyType pc, TreeNode parent)
+        {
+            TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
+            node.Tag = pc;
+            return node;
+        }
         #endregion
 
         #region 重写基类方法
         protected override void Init()
         {
             base.Init();
-
-            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                Button b = new Button();
-                b.Name = "全部";
-                b.BackColor = SystemColors.ControlDark;
-                b.Size = new Size(200, 42);
-                b.Dock = DockStyle.Top;
-                b.FlatStyle = FlatStyle.Popup;
-                _Buttons.Add(b);
-
-                foreach (RelatedCompanyType pc in items)
-                {
-                    Button button = new Button();
-                    button.Name = pc.ID;
-                    button.Text = pc.Name;
-                    button.Dock = DockStyle.Top;
-                    button.Size = new Size(200, 42);
-                    button.FlatStyle = FlatStyle.Popup;
-                    _Buttons.Add(button);
-                }
-                for (int i = _Buttons.Count - 1; i >= 0; i--)
-                {
-                    pnlLeft.Controls.Add(_Buttons[i]);
-                }
-            }
-            else
-            {
-                this.pnlLeft.Visible = false;
-                this.splitter1.Visible = false;
-            }
+            InitCategoryTree();
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditCustomer);
             menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditCustomer);
@@ -68,16 +112,22 @@ namespace LJH.Inventory.UI.Forms
         protected override FrmDetailBase GetDetailForm()
         {
             FrmRelatedCompanyDetail frm = new FrmRelatedCompanyDetail();
+            frm.Category = categoryTree.SelectedNode != null ? (categoryTree.SelectedNode.Tag as RelatedCompanyType) : null;
             return frm;
         }
 
         protected override bool DeletingItem(object item)
         {
+            Customer c = item as Customer;
             CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
-            CommandResult ret = bll.Delete(item as Customer);
+            CommandResult ret = bll.Delete(c);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message);
+            }
+            else
+            {
+                _Customers.Remove(c);
             }
             return ret.Result == ResultCode.Successful;
         }
@@ -91,30 +141,9 @@ namespace LJH.Inventory.UI.Forms
                 con.ClassID = CustomerClass.Other;
                 SearchCondition = con;
             }
-            List<Customer> cs = bll.GetItems(SearchCondition).QueryObjects;
-            List<object> items = null;
-            if (_Buttons.Count > 1)
-            {
-                for (int i = 1; i < _Buttons.Count; i++)
-                {
-                    items = (from c in cs
-                             where c.CategoryID == _Buttons[i].Name
-                             orderby c.ID ascending
-                             select (object)c).ToList();
-                    _Buttons[i].Tag = items;
-                    _Buttons[i].Text = string.Format("{0} ({1})", _Buttons[i].Name, items == null ? 0 : items.Count);
-                }
-            }
-
-            items = (from c in cs
-                     orderby c.ID ascending
-                     select (object)c).ToList();
-            if (_Buttons.Count > 0)
-            {
-                _Buttons[0].Tag = items;
-                _Buttons[0].Text = string.Format("{0} ({1})", _Buttons[0].Name, items == null ? 0 : items.Count);
-            }
-            return items;
+            _Customers = bll.GetItems(SearchCondition).QueryObjects;
+            List<object> records = GetSelectedNodeItems();
+            return records;
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -131,6 +160,11 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colAddress"].Value = c.Address;
             row.Cells["colPostalCode"].Value = c.PostalCode;
             row.Cells["colMemo"].Value = c.Memo;
+            if (_Customers == null || !_Customers.Exists(it => it.ID == c.ID))
+            {
+                if (_Customers == null) _Customers = new List<Customer>();
+                _Customers.Add(c);
+            }
         }
         #endregion
 
@@ -169,5 +203,62 @@ namespace LJH.Inventory.UI.Forms
                 }
             }
         }
+
+        #region 类别树右键菜单
+        private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            SelectNode(e.Node);
+        }
+
+        private void mnu_FreshTree_Click(object sender, EventArgs e)
+        {
+            InitCategoryTree();
+            SelectNode(categoryTree.Nodes[0]);
+        }
+
+        private void mnu_AddCategory_Click(object sender, EventArgs e)
+        {
+            RelatedCompanyType pc = categoryTree.SelectedNode.Tag as RelatedCompanyType;
+            FrmRelatedCompanyTypeDetail frm = new FrmRelatedCompanyTypeDetail();
+            frm.IsAdding = true;
+            frm.ParentCategory = pc;
+            frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+            {
+                RelatedCompanyType item = args.AddedItem as RelatedCompanyType;
+                AddNode(item, categoryTree.SelectedNode);
+            };
+            frm.ShowDialog();
+        }
+
+        private void mnu_DeleteCategory_Click(object sender, EventArgs e)
+        {
+            RelatedCompanyType pc = categoryTree.SelectedNode.Tag as RelatedCompanyType;
+            if (pc != null && MessageBox.Show("是否删除此类别及其子项?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+            {
+                CommandResult ret = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnectString)).Delete(pc);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
+        }
+
+        private void mnu_CategoryProperty_Click(object sender, EventArgs e)
+        {
+            RelatedCompanyType pc = categoryTree.SelectedNode.Tag as RelatedCompanyType;
+            FrmRelatedCompanyTypeDetail frm = new FrmRelatedCompanyTypeDetail();
+            frm.IsAdding = false;
+            frm.UpdatingItem = pc;
+            frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+            {
+                categoryTree.SelectedNode.Text = string.Format("{0}", pc.Name);
+            };
+            frm.ShowDialog();
+        }
+        #endregion
     }
 }
