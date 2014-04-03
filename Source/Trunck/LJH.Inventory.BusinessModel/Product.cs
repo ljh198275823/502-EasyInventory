@@ -82,6 +82,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Company { get; set; }
         /// <summary>
+        /// 获取或设置产品的内部编号，主要是针对某种产品针对不同的客户有不同的编号，但在内部统计库存等时则需要用一个统一的内部编号
+        /// </summary>
+        public string InternalID { get; set; }
+        /// <summary>
         /// 获取或设置商品描述
         /// </summary>
         public string Memo { get; set; }

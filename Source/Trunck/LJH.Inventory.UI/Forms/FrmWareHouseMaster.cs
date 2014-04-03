@@ -28,7 +28,7 @@ namespace LJH.Inventory.UI.Forms
         protected override bool DeletingItem(object item)
         {
             WareHouse info = item as WareHouse;
-            CommandResult result = (new WareHouseBLL(AppSettings.CurrentSetting.ConnectString)).Delete(info);
+            CommandResult result = (new WareHouseBLL(AppSettings.CurrentSetting.ConnStr)).Delete(info);
             if (result.Result != ResultCode.Successful)
             {
                 MessageBox.Show(result.Message, "删除失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -38,7 +38,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            WareHouseBLL bll = new WareHouseBLL(AppSettings.CurrentSetting.ConnectString);
+            WareHouseBLL bll = new WareHouseBLL(AppSettings.CurrentSetting.ConnStr);
             List<WareHouse> ret = bll.GetAll().QueryObjects.ToList();
             List<object> source = new List<object>();
             foreach (object o in ret)

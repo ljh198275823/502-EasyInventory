@@ -66,8 +66,8 @@ namespace LJH.Inventory.UI.Forms
         {
             Product p = UpdatingItem as Product;
             txtID.Text = p.ID;
+            txtID.Enabled = false;
             txtName.Text = p.Name;
-            txtForeignName.Text = p.ForeignName;
             txtCategory.Text = p.Category.Name;
             Category = p.Category;
             txtBarCode.Text = p.BarCode;
@@ -77,9 +77,20 @@ namespace LJH.Inventory.UI.Forms
             txtCost.DecimalValue = p.Cost;
             txtPrice.DecimalValue = p.Price;
             txtShortName.Text = p.ShortName;
-            txtHSCode.Text = p.HSCode;
+            if (!string.IsNullOrEmpty(p.Company))
+            {
+                Customer c = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(p.Company).QueryObject;
+                txtCompany.Tag = c;
+                txtCompany.Text = c != null ? c.Name : string.Empty;
+            }
+            if (!string.IsNullOrEmpty(p.InternalID))
+            {
+                Product pi = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(p.InternalID).QueryObject;
+                txtInternalID.Tag = pi;
+                txtInternalID.Text = pi != null ? pi.ID : string.Empty;
+            }
+            txtInternalID.Text = p.InternalID;
             txtMemo.Text = p.Memo;
-            txtID.Enabled = p == null;
         }
 
         protected override Object GetItemFromInput()
@@ -95,7 +106,6 @@ namespace LJH.Inventory.UI.Forms
             }
             p.ID = txtID.Text != "自动创建" ? txtID.Text : string.Empty;
             p.Name = txtName.Text;
-            p.ForeignName = txtForeignName.Text;
             p.CategoryID = Category != null ? Category.ID : null;
             p.Category = Category;
             p.BarCode = txtBarCode.Text;
@@ -105,7 +115,10 @@ namespace LJH.Inventory.UI.Forms
             p.Price = txtPrice.DecimalValue;
             p.Cost = txtCost.DecimalValue;
             p.ShortName = txtShortName.Text;
-            p.HSCode = txtHSCode.Text;
+            Customer c = txtCompany.Tag as Customer;
+            p.Company = c != null ? c.ID : null;
+            Product pi = txtInternalID.Tag as Product;
+            p.InternalID = pi != null ? pi.ID : null;
             p.Memo = txtMemo.Text;
             return p;
         }
@@ -116,11 +129,11 @@ namespace LJH.Inventory.UI.Forms
             CommandResult ret = null;
             if (txtWarehouse.SelectedWareHouse != null && txtCount.DecimalValue > 0)
             {
-                ret = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).AddProduct(p, txtWarehouse.SelectedWareHouse.ID, txtCount.DecimalValue);
+                ret = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).AddProduct(p, txtWarehouse.SelectedWareHouse.ID, txtCount.DecimalValue);
             }
             else
             {
-                ret = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).AddProduct(p);
+                ret = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).AddProduct(p);
             }
             return ret;
         }
@@ -128,7 +141,7 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult UpdateItem(object updatingItem)
         {
             Product p = updatingItem as Product;
-            CommandResult ret = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).UpdateProduct(p);
+            CommandResult ret = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).UpdateProduct(p);
             return ret;
         }
         #endregion
@@ -151,6 +164,30 @@ namespace LJH.Inventory.UI.Forms
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 txtUnit.Text = (frm.SelectedItem as Unit).ID;
+            }
+        }
+
+        private void lnkCompany_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmCustomerMaster frm = new FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Customer c = frm.SelectedItem as Customer;
+                txtCompany.Text = c.ID;
+                txtCompany.Tag = c;
+            }
+        }
+
+        private void lnkInternalID_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmProductMaster frm = new FrmProductMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Product p = frm.SelectedItem as Product;
+                txtInternalID.Text = p.ID;
+                txtInternalID.Tag = p;
             }
         }
     }

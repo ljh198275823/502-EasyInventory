@@ -28,7 +28,7 @@ namespace LJH.Inventory.UI.Report
             CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
             con.CustomerID = c.ID;
             if (!chkShowAll.Checked) con.HasRemain = true;
-            items = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con).QueryObjects;
+            items = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(con).QueryObjects;
             GridView.Rows.Clear();
             if (items != null && items.Count > 0)
             {

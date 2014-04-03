@@ -29,7 +29,7 @@ namespace LJH.Inventory.UI.Forms
             this.categoryTree.Nodes.Clear();
             this.categoryTree.Nodes.Add("所有产品类别");
 
-            List<ProductCategory> items = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<ProductCategory> items = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.categoryTree.Nodes[0]);
@@ -117,7 +117,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            _Products = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(null).QueryObjects;
+            _Products = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
             List<object> records = GetSelectedNodeItems();
             return records;
         }
@@ -129,11 +129,16 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colImage"].Value = Properties.Resources.product;
             row.Cells["colNumber"].Value = p.ID;
             row.Cells["colName"].Value = p.Name;
-            row.Cells["colForeignName"].Value = p.ForeignName;
             row.Cells["colCategoryID"].Value = p.Category != null ? p.Category.Name : p.CategoryID;
             row.Cells["colSpecification"].Value = p.Specification;
             row.Cells["colModel"].Value = p.Model;
-            row.Cells["colHSCode"].Value = p.HSCode;
+            row.Cells["colBarCode"].Value = p.BarCode;
+            row.Cells["colShortName"].Value = p.ShortName;
+            row.Cells["colUnit"].Value = p.Unit;
+            row.Cells["colPrice"].Value = p.Price.Trim();
+            row.Cells["colCost"].Value = p.Cost.Trim();
+            row.Cells["colCompany"].Value = p.Company;
+            row.Cells["colInternalID"].Value = p.InternalID;
             row.Cells["colMemo"].Value = p.Memo;
             if (_Products == null || !_Products.Exists(it => it.ID == p.ID))
             {
@@ -145,7 +150,7 @@ namespace LJH.Inventory.UI.Forms
         protected override bool DeletingItem(object item)
         {
             Product p = item as Product;
-            CommandResult ret = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).Delete(p);
+            CommandResult ret = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).Delete(p);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message);
@@ -189,7 +194,7 @@ namespace LJH.Inventory.UI.Forms
             ProductCategory pc = categoryTree.SelectedNode.Tag as ProductCategory;
             if (pc != null && MessageBox.Show("是否删除此类别及其子项?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
             {
-                CommandResult ret = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnectString)).Delete(pc);
+                CommandResult ret = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr)).Delete(pc);
                 if (ret.Result == ResultCode.Successful)
                 {
                     categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);

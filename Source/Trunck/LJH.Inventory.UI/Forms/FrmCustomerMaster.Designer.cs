@@ -30,15 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerMaster));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
@@ -56,13 +52,15 @@
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colCreditLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWebsite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMedia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBusinessMan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,7 +82,6 @@
             this.btn_Delete,
             this.btn_Export,
             this.btn_Fresh,
-            this.mnu_Payment,
             this.btn_SelectColumns,
             this.toolStripSeparator1,
             this.txtKeyword,
@@ -129,16 +126,6 @@
             this.btn_Fresh.Size = new System.Drawing.Size(58, 46);
             this.btn_Fresh.Text = "刷新(&F)";
             this.btn_Fresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // mnu_Payment
-            // 
-            this.mnu_Payment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
-            this.mnu_Payment.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnu_Payment.Name = "mnu_Payment";
-            this.mnu_Payment.Size = new System.Drawing.Size(59, 46);
-            this.mnu_Payment.Text = "支付(&P)";
-            this.mnu_Payment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.mnu_Payment.Click += new System.EventHandler(this.mnu_Payment_Click_1);
             // 
             // btn_SelectColumns
             // 
@@ -206,33 +193,33 @@
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(153, 114);
+            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
             // 
             // mnu_FreshTree
             // 
             this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
+            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
             // 
             // mnu_AddCategory
             // 
             this.mnu_AddCategory.Name = "mnu_AddCategory";
-            this.mnu_AddCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddCategory.Size = new System.Drawing.Size(124, 22);
             this.mnu_AddCategory.Text = "增加类别";
             this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
             // 
             // mnu_DeleteCategory
             // 
             this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
-            this.mnu_DeleteCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
             this.mnu_DeleteCategory.Text = "删除";
             this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
             // 
             // mnu_CategoryProperty
             // 
             this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
-            this.mnu_CategoryProperty.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
             this.mnu_CategoryProperty.Text = "属性";
             this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
             // 
@@ -253,13 +240,15 @@
             this.colImage,
             this.colID,
             this.colName,
+            this.colCategory,
             this.colNation,
-            this.colPrepay,
-            this.colReceivable,
-            this.colCreditLimit,
-            this.colWebsite,
-            this.colMedia,
-            this.colBusinessMan});
+            this.colCity,
+            this.colTelphone,
+            this.colFax,
+            this.colPost,
+            this.colWeb,
+            this.colAddress,
+            this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 50);
@@ -290,66 +279,72 @@
             // 
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colName.HeaderText = "公司名称";
+            this.colName.MinimumWidth = 150;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
-            this.colName.Width = 78;
+            this.colName.Width = 150;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.MinimumWidth = 120;
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.Width = 120;
             // 
             // colNation
             // 
-            this.colNation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colNation.HeaderText = "国家";
             this.colNation.Name = "colNation";
             this.colNation.ReadOnly = true;
-            this.colNation.Width = 54;
+            this.colNation.Visible = false;
+            this.colNation.Width = 80;
             // 
-            // colPrepay
+            // colCity
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colPrepay.HeaderText = "付款余额";
-            this.colPrepay.Name = "colPrepay";
-            this.colPrepay.ReadOnly = true;
-            this.colPrepay.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colPrepay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colPrepay.Visible = false;
+            this.colCity.HeaderText = "地区";
+            this.colCity.Name = "colCity";
+            this.colCity.ReadOnly = true;
+            this.colCity.Visible = false;
+            this.colCity.Width = 80;
             // 
-            // colReceivable
+            // colTelphone
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colReceivable.HeaderText = "应收账款";
-            this.colReceivable.Name = "colReceivable";
-            this.colReceivable.ReadOnly = true;
-            this.colReceivable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colReceivable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colReceivable.Visible = false;
+            this.colTelphone.HeaderText = "电话";
+            this.colTelphone.Name = "colTelphone";
+            this.colTelphone.ReadOnly = true;
             // 
-            // colCreditLimit
+            // colFax
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colCreditLimit.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colCreditLimit.HeaderText = "信用额度";
-            this.colCreditLimit.Name = "colCreditLimit";
-            this.colCreditLimit.ReadOnly = true;
-            this.colCreditLimit.Visible = false;
+            this.colFax.HeaderText = "传真";
+            this.colFax.Name = "colFax";
+            this.colFax.ReadOnly = true;
             // 
-            // colWebsite
+            // colPost
             // 
-            this.colWebsite.HeaderText = "网站";
-            this.colWebsite.Name = "colWebsite";
-            this.colWebsite.ReadOnly = true;
+            this.colPost.HeaderText = "邮政";
+            this.colPost.Name = "colPost";
+            this.colPost.ReadOnly = true;
             // 
-            // colMedia
+            // colWeb
             // 
-            this.colMedia.HeaderText = "信息来源";
-            this.colMedia.Name = "colMedia";
-            this.colMedia.ReadOnly = true;
+            this.colWeb.HeaderText = "网址";
+            this.colWeb.Name = "colWeb";
+            this.colWeb.ReadOnly = true;
             // 
-            // colBusinessMan
+            // colAddress
             // 
-            this.colBusinessMan.HeaderText = "业务负责人";
-            this.colBusinessMan.Name = "colBusinessMan";
-            this.colBusinessMan.ReadOnly = true;
+            this.colAddress.HeaderText = "地址";
+            this.colAddress.MinimumWidth = 200;
+            this.colAddress.Name = "colAddress";
+            this.colAddress.ReadOnly = true;
+            this.colAddress.Width = 200;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -419,7 +414,6 @@
         private System.Windows.Forms.ToolStripMenuItem btn_Delete;
         private System.Windows.Forms.ToolStripMenuItem btn_Export;
         private System.Windows.Forms.ToolStripMenuItem btn_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Payment;
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private LJH.Inventory.UI.Controls.TooStripDBCTextBox txtKeyword;
@@ -427,16 +421,6 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewImageColumn colImage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNation;
-        private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
-        private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLimit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWebsite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMedia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBusinessMan;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TreeView categoryTree;
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
@@ -449,5 +433,17 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.DataGridViewImageColumn colImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeb;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

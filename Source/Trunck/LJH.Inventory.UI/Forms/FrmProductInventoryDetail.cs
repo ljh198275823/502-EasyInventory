@@ -96,7 +96,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.CurrentSetting.ConnectString);
+            ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.CurrentSetting.ConnStr);
             return bll.CreateInventory(item as ProductInventory);
         }
 

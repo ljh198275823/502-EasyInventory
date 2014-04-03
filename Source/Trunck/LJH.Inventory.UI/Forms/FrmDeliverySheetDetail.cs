@@ -88,9 +88,9 @@ namespace LJH.Inventory.UI.Forms
             this.txtWareHouse.Tag = item.WareHouse;
             this.txtMemo.Text = item.Memo;
             ShowDeliveryItemsOnGrid(item.Items);
-            List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnectString)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+            List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
             ShowOperations(items, dataGridView1);
-            List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
+            List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
             ShowAttachmentHeaders(headers, this.gridAttachment);
             ShowButtonState();
             if (item.State != SheetState.Add)
@@ -190,12 +190,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).Add(item as DeliverySheet, OperatorInfo.CurrentOperator.OperatorID);
+            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as DeliverySheet, OperatorInfo.CurrentOperator.OperatorID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).Update(item as DeliverySheet, OperatorInfo.CurrentOperator.OperatorID);
+            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as DeliverySheet, OperatorInfo.CurrentOperator.OperatorID);
         }
 
         protected override void ShowButtonState()
@@ -236,7 +236,7 @@ namespace LJH.Inventory.UI.Forms
                     header.Owner = OperatorInfo.CurrentOperator.OperatorName;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Upload(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                         int row = gridAttachment.Rows.Add();
@@ -257,7 +257,7 @@ namespace LJH.Inventory.UI.Forms
                 AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
                 string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
                 string path = System.IO.Path.Combine(dir, header.FileName);
-                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Download(header, path);
+                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, path);
                 if (ret.Result == ResultCode.Successful)
                 {
                     try
@@ -286,7 +286,7 @@ namespace LJH.Inventory.UI.Forms
                 dig.Filter = "所有文件(*.*)|*.*";
                 if (dig.ShowDialog() == DialogResult.OK)
                 {
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Download(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                     }
@@ -306,7 +306,7 @@ namespace LJH.Inventory.UI.Forms
                 foreach (DataGridViewRow row in this.gridAttachment.SelectedRows)
                 {
                     AttachmentHeader header = row.Tag as AttachmentHeader;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnectString)).Delete(header);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Delete(header);
                     if (ret.Result == ResultCode.Successful)
                     {
                         deletingRows.Add(row);
@@ -676,10 +676,10 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要发货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                    CommandResult ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).Delivery(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Delivery(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(sheet.ID).QueryObject;
+                        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
                         this.UpdatingItem = sheet1;
                         ItemShowing();
                         ShowButtonState();

@@ -42,6 +42,8 @@
       <Column Name="HSCode" Member="HSCode"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="HSName" Member="HSName"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="BackTaxes" Member="BackTaxes"  DbType="decimal(18,4) not null"  UpdateCheck="Never"/>
+      <Column Name="Company" Member="Company"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="InternalID" Member="InternalID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Product_Category" Member="Category"  ThisKey="CategoryID" OtherKey="ID"/>
     </Type>
@@ -59,7 +61,6 @@
       <Column Name="Fax" Member="Fax" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="PostalCode" Member="PostalCode" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Website" Member="Website" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="QQ" Member="QQ" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Email" Member="Email" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Address" Member="Address" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Bank" Member="Bank" DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -68,7 +69,8 @@
       <Column Name="CreditLine" Member="CreditLine"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Creater" Member="Creater" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="BusinessMan" Member="BusinessMan" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Media" Member="Media" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="DevelopFrom" Member="DevelopFrom" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="MyID" Member="MyID" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

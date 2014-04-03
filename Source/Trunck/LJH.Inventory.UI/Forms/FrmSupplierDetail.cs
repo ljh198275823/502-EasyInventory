@@ -60,7 +60,7 @@ namespace LJH.Inventory.UI.Forms
                 txtID.Text = c.ID;
                 if (!string.IsNullOrEmpty(c.CategoryID))
                 {
-                    Category = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(c.CategoryID).QueryObject;
+                    Category = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(c.CategoryID).QueryObject;
                     txtCategory.Text = Category != null ? Category.Name : string.Empty;
                 }
                 txtNation.Text = c.Nation;
@@ -75,7 +75,7 @@ namespace LJH.Inventory.UI.Forms
 
             GridView.Rows.Clear();
             ContactSearchCondition con = new ContactSearchCondition() { CompanyID = c.ID };
-            List<Contact> contacts = (new ContactBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con).QueryObjects;
+            List<Contact> contacts = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(con).QueryObjects;
             if (contacts != null && contacts.Count > 0)
             {
                 foreach (Contact contact in contacts)
@@ -112,7 +112,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
             Customer c = item as Customer;
             CommandResult ret = bll.Insert(item as Customer, 0, 0);
             if (ret.Result == ResultCode.Successful)
@@ -121,7 +121,7 @@ namespace LJH.Inventory.UI.Forms
                 {
                     Contact ct = row.Tag as Contact;
                     ct.Company = c.ID;
-                    CommandResult r = (new ContactBLL(AppSettings.CurrentSetting.ConnectString)).Add(ct);
+                    CommandResult r = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).Add(ct);
                     if (r.Result != ResultCode.Successful)
                     {
                         MessageBox.Show(r.Message);
@@ -133,7 +133,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult UpdateItem(object item)
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
             return bll.Update(item as Customer);
         }
         #endregion
@@ -149,7 +149,7 @@ namespace LJH.Inventory.UI.Forms
                 {
                     Customer c = UpdatingItem as Customer;
                     ct.Company = c.ID;
-                    CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnectString)).Add(ct);
+                    CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).Add(ct);
                     if (ret.Result != ResultCode.Successful)
                     {
                         MessageBox.Show(ret.Message);
@@ -171,7 +171,7 @@ namespace LJH.Inventory.UI.Forms
                     Contact ct = frm.Contact;
                     if (ct.ID > 0)
                     {
-                        CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnectString)).Update(ct);
+                        CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).Update(ct);
                         if (ret.Result != ResultCode.Successful)
                         {
                             MessageBox.Show(ret.Message);
@@ -211,7 +211,7 @@ namespace LJH.Inventory.UI.Forms
                             if (row.Selected)
                             {
                                 Contact c = row.Tag as Contact;
-                                CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnectString)).Delete(c);
+                                CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).Delete(c);
                                 if (ret.Result == ResultCode.Successful)
                                 {
                                     deletingRows.Add(row);

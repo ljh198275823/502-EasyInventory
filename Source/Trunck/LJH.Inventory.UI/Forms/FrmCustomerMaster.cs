@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms
             this.categoryTree.Nodes.Clear();
             this.categoryTree.Nodes.Add("所有客户类别");
 
-            List<CustomerType> items = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<CustomerType> items = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.categoryTree.Nodes[0]);
@@ -119,7 +119,7 @@ namespace LJH.Inventory.UI.Forms
         protected override bool DeletingItem(object item)
         {
             Customer c = item as Customer;
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
             CommandResult ret = bll.Delete(c);
             if (ret.Result != ResultCode.Successful)
             {
@@ -134,7 +134,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
@@ -152,11 +152,16 @@ namespace LJH.Inventory.UI.Forms
             row.Tag = c;
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
-            row.Cells["colNation"].Value = c.Nation;
             row.Cells["colName"].Value = c.Name;
-            row.Cells["colWebsite"].Value = c.Website;
-            row.Cells["colMedia"].Value = c.Media;
-            row.Cells["colBusinessMan"].Value = c.BusinessMan;
+            row.Cells["colCategory"].Value = c.CategoryID;
+            row.Cells["colNation"].Value = c.Nation;
+            row.Cells["colCity"].Value = c.City;
+            row.Cells["colTelphone"].Value = c.TelPhone;
+            row.Cells["colFax"].Value = c.Fax;
+            row.Cells["colPost"].Value = c.PostalCode;
+            row.Cells["colWeb"].Value = c.Website;
+            row.Cells["colAddress"].Value = c.Address;
+            row.Cells["colMemo"].Value = c.Memo;
             if (_Customers == null || !_Customers.Exists(it => it.ID == c.ID))
             {
                 if (_Customers == null) _Customers = new List<Customer>();
@@ -176,7 +181,7 @@ namespace LJH.Inventory.UI.Forms
                 frm.IsAdding = true;
                 frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
                 {
-                    Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(c.ID).QueryObject;
+                    Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(c.ID).QueryObject;
                     if (c1 != null)
                     {
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
@@ -254,7 +259,7 @@ namespace LJH.Inventory.UI.Forms
             CustomerType pc = categoryTree.SelectedNode.Tag as CustomerType;
             if (pc != null && MessageBox.Show("是否删除此类别及其子项?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
             {
-                CommandResult ret = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnectString)).Delete(pc);
+                CommandResult ret = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnStr)).Delete(pc);
                 if (ret.Result == ResultCode.Successful)
                 {
                     categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);

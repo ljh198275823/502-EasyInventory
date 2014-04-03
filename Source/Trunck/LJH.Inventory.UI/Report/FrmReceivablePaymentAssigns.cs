@@ -25,7 +25,7 @@ namespace LJH.Inventory.UI.Report
         {
             this.Text = string.Format("{0} 的付款项", receivableID);
             GridView.Rows.Clear();
-            List<CustomerPaymentAssign> assigns = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetAssigns(receivableID).QueryObjects;
+            List<CustomerPaymentAssign> assigns = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetAssigns(receivableID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 foreach (CustomerPaymentAssign assign in assigns)
@@ -65,7 +65,7 @@ namespace LJH.Inventory.UI.Report
                 if (GridView.Columns[e.ColumnIndex].Name == "colCustomerPaymentID")
                 {
                     string paymentID = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(paymentID).QueryObject;
+                    CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(paymentID).QueryObject;
                     if (cp != null)
                     {
                         FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();

@@ -25,7 +25,7 @@ namespace LJH.Inventory.UI.Controls
         #region 公共方法
         public void Init()
         {
-            _Products = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(null).QueryObjects;
+            _Products = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
             _Products = (from p in _Products
                          orderby p.ID ascending, p.Name ascending
                          select p).ToList();

@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms
             this.categoryTree.Nodes.Clear();
             this.categoryTree.Nodes.Add("所有供应商类别");
 
-            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.categoryTree.Nodes[0]);
@@ -119,7 +119,7 @@ namespace LJH.Inventory.UI.Forms
         protected override bool DeletingItem(object item)
         {
             Customer c = item as Customer;
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
             CommandResult ret = bll.Delete(c);
             if (ret.Result != ResultCode.Successful)
             {
@@ -134,7 +134,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnectString);
+            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
@@ -179,7 +179,7 @@ namespace LJH.Inventory.UI.Forms
                 frm.IsAdding = true;
                 frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
                 {
-                    Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(c.ID).QueryObject;
+                    Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(c.ID).QueryObject;
                     if (c1 != null)
                     {
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
@@ -235,7 +235,7 @@ namespace LJH.Inventory.UI.Forms
             RelatedCompanyType pc = categoryTree.SelectedNode.Tag as RelatedCompanyType;
             if (pc != null && MessageBox.Show("是否删除此类别及其子项?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
             {
-                CommandResult ret = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnectString)).Delete(pc);
+                CommandResult ret = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).Delete(pc);
                 if (ret.Result == ResultCode.Successful)
                 {
                     categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);

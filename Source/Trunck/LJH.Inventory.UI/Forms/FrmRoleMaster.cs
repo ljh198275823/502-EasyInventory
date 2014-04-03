@@ -28,7 +28,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            RoleBLL bll = new RoleBLL(AppSettings.CurrentSetting.ConnectString);
+            RoleBLL bll = new RoleBLL(AppSettings.CurrentSetting.ConnStr);
             RoleInfo info = (RoleInfo)item;
             CommandResult result = bll.Delete(info);
             if (result.Result != ResultCode.Successful)
@@ -40,7 +40,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            RoleBLL bll = new RoleBLL(AppSettings.CurrentSetting.ConnectString);
+            RoleBLL bll = new RoleBLL(AppSettings.CurrentSetting.ConnStr);
             roles = bll.GetAllRoles().QueryObjects.ToList();
             List<object> source = new List<object>();
             foreach (object o in roles)

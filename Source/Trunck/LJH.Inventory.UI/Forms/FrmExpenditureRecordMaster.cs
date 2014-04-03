@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms
             base.Init();
             OperatorInfo opt = OperatorInfo.CurrentOperator;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditExpenditureRecord);
-            List<ExpenditureType> items = (new ExpenditureTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<ExpenditureType> items = (new ExpenditureTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 Button b = new Button();
@@ -69,7 +69,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<ExpenditureRecord> items = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(null).QueryObjects;
+            List<ExpenditureRecord> items = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
             List<object> records = null;
             if (_Buttons.Count > 1)
             {
@@ -128,7 +128,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     ExpenditureRecord item = dataGridView1.SelectedRows[0].Tag as ExpenditureRecord;
-                    CommandResult ret = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnectString)).Cancel(item, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, OperatorInfo.CurrentOperator.OperatorName);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], item);

@@ -80,13 +80,13 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            WareHouseBLL bll = new WareHouseBLL(AppSettings.CurrentSetting.ConnectString);
+            WareHouseBLL bll = new WareHouseBLL(AppSettings.CurrentSetting.ConnStr);
             return bll.Add(item as WareHouse);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            WareHouseBLL bll = new WareHouseBLL(AppSettings.CurrentSetting.ConnectString);
+            WareHouseBLL bll = new WareHouseBLL(AppSettings.CurrentSetting.ConnStr);
             return bll.Update(item as WareHouse);
         }
         #endregion

@@ -31,7 +31,7 @@ namespace LJH.Inventory.UI.View
 
         protected override List<object> GetDataSource()
         {
-            List<InventoryRecord> records = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetInventoryRecords(SearchCondition).QueryObjects;
+            List<InventoryRecord> records = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetInventoryRecords(SearchCondition).QueryObjects;
             return (from item in records
                     orderby item.ProductID ascending
                     select (object)item).ToList();

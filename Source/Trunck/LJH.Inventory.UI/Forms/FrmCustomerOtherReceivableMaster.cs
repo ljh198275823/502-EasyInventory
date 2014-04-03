@@ -36,7 +36,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<CustomerOtherReceivable> items = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(SearchCondition).QueryObjects;
+            List<CustomerOtherReceivable> items = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(SearchCondition).QueryObjects;
             List<object> records = null;
 
             records = (from o in items
@@ -100,7 +100,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     CustomerOtherReceivable item = dataGridView1.SelectedRows[0].Tag as CustomerOtherReceivable;
-                    CommandResult ret = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnectString)).Cancel(item, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, OperatorInfo.CurrentOperator.OperatorName);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], item);
@@ -138,7 +138,7 @@ namespace LJH.Inventory.UI.Forms
                 if (daifu.Payable)
                 {
                     FrmReceivablesPaid frm = new FrmReceivablesPaid();
-                    Customer c = (new CustomerBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(daifu.CustomerID).QueryObject;
+                    Customer c = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(daifu.CustomerID).QueryObject;
                     if (c != null)
                     {
                         frm.Customer = c;
@@ -146,7 +146,7 @@ namespace LJH.Inventory.UI.Forms
                         frm.MaxAmount = daifu.NotPaid;
                         if (frm.ShowDialog() == DialogResult.OK)
                         {
-                            CustomerOtherReceivable sheet1 = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(daifu.ID).QueryObject;
+                            CustomerOtherReceivable sheet1 = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(daifu.ID).QueryObject;
                             ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sheet1);
                         }
                     }

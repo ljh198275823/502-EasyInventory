@@ -88,7 +88,5 @@ namespace LJH.Inventory.UI.Forms
             this.Close();
         }
         #endregion
-
-        
     }
 }

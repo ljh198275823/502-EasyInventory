@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();
@@ -43,7 +43,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            CommandResult ret = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnectString)).Delete(item as SupplierType);
+            CommandResult ret = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnStr)).Delete(item as SupplierType);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message);

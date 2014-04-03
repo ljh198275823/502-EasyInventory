@@ -34,50 +34,55 @@
             this.mnu_DeleteContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.GridView = new System.Windows.Forms.DataGridView();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSkype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHobby = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lnkBusinessMan = new System.Windows.Forms.LinkLabel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCity = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtAddress = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtWeb = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtPost = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtFax = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lblCategory = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.txtNation = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtBusinessMan = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtMedia = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.txtID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtCreater = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.GridView = new System.Windows.Forms.DataGridView();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHobby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(685, 290);
+            this.btnClose.Location = new System.Drawing.Point(526, 283);
             this.btnClose.TabIndex = 10;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(576, 290);
+            this.btnOk.Location = new System.Drawing.Point(417, 283);
             this.btnOk.TabIndex = 9;
             // 
             // contextMenuStrip1
@@ -104,41 +109,258 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(765, 255);
+            this.tabControl1.Size = new System.Drawing.Size(604, 262);
             this.tabControl1.TabIndex = 51;
             // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.label5);
-            this.tabPage6.Controls.Add(this.txtCreater);
-            this.tabPage6.Controls.Add(this.GridView);
-            this.tabPage6.Controls.Add(this.lnkBusinessMan);
+            this.tabPage6.Controls.Add(this.txtMemo);
+            this.tabPage6.Controls.Add(this.label10);
+            this.tabPage6.Controls.Add(this.txtCity);
+            this.tabPage6.Controls.Add(this.label9);
+            this.tabPage6.Controls.Add(this.txtAddress);
+            this.tabPage6.Controls.Add(this.label8);
+            this.tabPage6.Controls.Add(this.txtWeb);
+            this.tabPage6.Controls.Add(this.label7);
+            this.tabPage6.Controls.Add(this.txtPost);
+            this.tabPage6.Controls.Add(this.label6);
+            this.tabPage6.Controls.Add(this.txtFax);
+            this.tabPage6.Controls.Add(this.label2);
+            this.tabPage6.Controls.Add(this.txtTelphone);
             this.tabPage6.Controls.Add(this.lblCategory);
             this.tabPage6.Controls.Add(this.label4);
             this.tabPage6.Controls.Add(this.txtNation);
             this.tabPage6.Controls.Add(this.txtCategory);
-            this.tabPage6.Controls.Add(this.txtBusinessMan);
-            this.tabPage6.Controls.Add(this.txtMedia);
-            this.tabPage6.Controls.Add(this.label2);
             this.tabPage6.Controls.Add(this.txtName);
             this.tabPage6.Controls.Add(this.label3);
             this.tabPage6.Controls.Add(this.txtID);
             this.tabPage6.Controls.Add(this.label1);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(757, 229);
+            this.tabPage6.Size = new System.Drawing.Size(596, 236);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "基本资料";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(43, 205);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 80;
+            this.label5.Text = "备注";
+            // 
+            // txtMemo
+            // 
+            this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtMemo.Location = new System.Drawing.Point(77, 201);
+            this.txtMemo.MaxLength = 100;
+            this.txtMemo.Name = "txtMemo";
+            this.txtMemo.Size = new System.Drawing.Size(377, 21);
+            this.txtMemo.TabIndex = 79;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(276, 80);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 78;
+            this.label10.Text = "地区";
+            // 
+            // txtCity
+            // 
+            this.txtCity.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCity.Location = new System.Drawing.Point(311, 76);
+            this.txtCity.MaxLength = 100;
+            this.txtCity.Name = "txtCity";
+            this.txtCity.Size = new System.Drawing.Size(143, 21);
+            this.txtCity.TabIndex = 77;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(43, 174);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 12);
+            this.label9.TabIndex = 76;
+            this.label9.Text = "地址";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtAddress.Location = new System.Drawing.Point(77, 170);
+            this.txtAddress.MaxLength = 100;
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(377, 21);
+            this.txtAddress.TabIndex = 75;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(276, 143);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.TabIndex = 74;
+            this.label8.Text = "网址";
+            // 
+            // txtWeb
+            // 
+            this.txtWeb.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeb.Location = new System.Drawing.Point(311, 139);
+            this.txtWeb.MaxLength = 100;
+            this.txtWeb.Name = "txtWeb";
+            this.txtWeb.Size = new System.Drawing.Size(143, 21);
+            this.txtWeb.TabIndex = 73;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(43, 143);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.TabIndex = 72;
+            this.label7.Text = "邮政";
+            // 
+            // txtPost
+            // 
+            this.txtPost.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPost.Location = new System.Drawing.Point(77, 139);
+            this.txtPost.MaxLength = 100;
+            this.txtPost.Name = "txtPost";
+            this.txtPost.Size = new System.Drawing.Size(143, 21);
+            this.txtPost.TabIndex = 71;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(276, 112);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 70;
+            this.label6.Text = "传真";
+            // 
+            // txtFax
+            // 
+            this.txtFax.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtFax.Location = new System.Drawing.Point(311, 108);
+            this.txtFax.MaxLength = 100;
+            this.txtFax.Name = "txtFax";
+            this.txtFax.Size = new System.Drawing.Size(143, 21);
+            this.txtFax.TabIndex = 69;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(43, 112);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 68;
+            this.label2.Text = "电话";
+            // 
+            // txtTelphone
+            // 
+            this.txtTelphone.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtTelphone.Location = new System.Drawing.Point(77, 108);
+            this.txtTelphone.MaxLength = 100;
+            this.txtTelphone.Name = "txtTelphone";
+            this.txtTelphone.Size = new System.Drawing.Size(143, 21);
+            this.txtTelphone.TabIndex = 67;
+            // 
+            // lblCategory
+            // 
+            this.lblCategory.AutoSize = true;
+            this.lblCategory.Location = new System.Drawing.Point(252, 19);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(53, 12);
+            this.lblCategory.TabIndex = 62;
+            this.lblCategory.TabStop = true;
+            this.lblCategory.Text = "客户类别";
+            this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(43, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 61;
+            this.label4.Text = "国家";
+            // 
+            // txtNation
+            // 
+            this.txtNation.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtNation.Location = new System.Drawing.Point(77, 76);
+            this.txtNation.MaxLength = 100;
+            this.txtNation.Name = "txtNation";
+            this.txtNation.Size = new System.Drawing.Size(143, 21);
+            this.txtNation.TabIndex = 54;
+            // 
+            // txtCategory
+            // 
+            this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCategory.Location = new System.Drawing.Point(311, 15);
+            this.txtCategory.MaxLength = 100;
+            this.txtCategory.Name = "txtCategory";
+            this.txtCategory.Size = new System.Drawing.Size(143, 21);
+            this.txtCategory.TabIndex = 53;
+            // 
+            // txtName
+            // 
+            this.txtName.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtName.Location = new System.Drawing.Point(77, 47);
+            this.txtName.MaxLength = 100;
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(377, 21);
+            this.txtName.TabIndex = 52;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 58;
+            this.label3.Text = "公司名称";
+            // 
+            // txtID
+            // 
+            this.txtID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtID.Location = new System.Drawing.Point(77, 15);
+            this.txtID.MaxLength = 100;
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(143, 21);
+            this.txtID.TabIndex = 51;
+            this.txtID.Text = "自动创建";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 57;
+            this.label1.Text = "客户编号";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.GridView);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(596, 236);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "联系人";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // GridView
             // 
@@ -155,21 +377,22 @@
             this.colPosition,
             this.colMobile,
             this.colTelphone,
+            this.colQQ,
             this.colEmail,
-            this.colSkype,
             this.colHowold,
             this.colBirthday,
             this.colHobby,
             this.colMemo});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
-            this.GridView.Location = new System.Drawing.Point(6, 99);
+            this.GridView.Location = new System.Drawing.Point(3, 3);
             this.GridView.Name = "GridView";
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(745, 121);
-            this.GridView.TabIndex = 64;
+            this.GridView.Size = new System.Drawing.Size(590, 230);
+            this.GridView.TabIndex = 65;
+            this.GridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             // 
             // colName
             // 
@@ -197,6 +420,12 @@
             this.colTelphone.Name = "colTelphone";
             this.colTelphone.ReadOnly = true;
             // 
+            // colQQ
+            // 
+            this.colQQ.HeaderText = "QQ";
+            this.colQQ.Name = "colQQ";
+            this.colQQ.ReadOnly = true;
+            // 
             // colEmail
             // 
             this.colEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -205,18 +434,13 @@
             this.colEmail.ReadOnly = true;
             this.colEmail.Width = 60;
             // 
-            // colSkype
-            // 
-            this.colSkype.HeaderText = "Skype";
-            this.colSkype.Name = "colSkype";
-            this.colSkype.ReadOnly = true;
-            // 
             // colHowold
             // 
             this.colHowold.HeaderText = "年龄";
             this.colHowold.Name = "colHowold";
             this.colHowold.ReadOnly = true;
             this.colHowold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHowold.Visible = false;
             this.colHowold.Width = 40;
             // 
             // colBirthday
@@ -225,6 +449,7 @@
             this.colBirthday.Name = "colBirthday";
             this.colBirthday.ReadOnly = true;
             this.colBirthday.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colBirthday.Visible = false;
             this.colBirthday.Width = 80;
             // 
             // colHobby
@@ -233,193 +458,15 @@
             this.colHobby.Name = "colHobby";
             this.colHobby.ReadOnly = true;
             this.colHobby.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHobby.Visible = false;
             // 
             // colMemo
             // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colMemo.HeaderText = "备注";
+            this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
-            // 
-            // lnkBusinessMan
-            // 
-            this.lnkBusinessMan.AutoSize = true;
-            this.lnkBusinessMan.Location = new System.Drawing.Point(248, 76);
-            this.lnkBusinessMan.Name = "lnkBusinessMan";
-            this.lnkBusinessMan.Size = new System.Drawing.Size(65, 12);
-            this.lnkBusinessMan.TabIndex = 63;
-            this.lnkBusinessMan.TabStop = true;
-            this.lnkBusinessMan.Text = "客户负责人";
-            this.lnkBusinessMan.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkBusinessMan_LinkClicked);
-            // 
-            // lblCategory
-            // 
-            this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(13, 47);
-            this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(53, 12);
-            this.lblCategory.TabIndex = 62;
-            this.lblCategory.TabStop = true;
-            this.lblCategory.Text = "客户类别";
-            this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(283, 47);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 61;
-            this.label4.Text = "国别";
-            // 
-            // txtNation
-            // 
-            this.txtNation.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtNation.Location = new System.Drawing.Point(319, 42);
-            this.txtNation.MaxLength = 100;
-            this.txtNation.Name = "txtNation";
-            this.txtNation.Size = new System.Drawing.Size(143, 21);
-            this.txtNation.TabIndex = 54;
-            // 
-            // txtCategory
-            // 
-            this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCategory.Location = new System.Drawing.Point(71, 43);
-            this.txtCategory.MaxLength = 100;
-            this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(143, 21);
-            this.txtCategory.TabIndex = 53;
-            // 
-            // txtBusinessMan
-            // 
-            this.txtBusinessMan.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtBusinessMan.Location = new System.Drawing.Point(319, 72);
-            this.txtBusinessMan.MaxLength = 100;
-            this.txtBusinessMan.Name = "txtBusinessMan";
-            this.txtBusinessMan.Size = new System.Drawing.Size(143, 21);
-            this.txtBusinessMan.TabIndex = 56;
-            // 
-            // txtMedia
-            // 
-            this.txtMedia.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMedia.Location = new System.Drawing.Point(71, 72);
-            this.txtMedia.MaxLength = 100;
-            this.txtMedia.Name = "txtMedia";
-            this.txtMedia.Size = new System.Drawing.Size(143, 21);
-            this.txtMedia.TabIndex = 55;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 76);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 59;
-            this.label2.Text = "信息来源";
-            // 
-            // txtName
-            // 
-            this.txtName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtName.Location = new System.Drawing.Point(319, 15);
-            this.txtName.MaxLength = 100;
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(425, 21);
-            this.txtName.TabIndex = 52;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(259, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 58;
-            this.label3.Text = "公司名称";
-            // 
-            // txtID
-            // 
-            this.txtID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtID.Location = new System.Drawing.Point(71, 13);
-            this.txtID.MaxLength = 100;
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(143, 21);
-            this.txtID.TabIndex = 51;
-            this.txtID.Text = "自动创建";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 57;
-            this.label1.Text = "客户编号";
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(757, 229);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "联系人";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(757, 229);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "订单";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(757, 229);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "收款记录";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(757, 229);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "报价";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(757, 229);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "往来沟通";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(502, 77);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 66;
-            this.label5.Text = "创建";
-            // 
-            // txtCreater
-            // 
-            this.txtCreater.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCreater.Location = new System.Drawing.Point(538, 72);
-            this.txtCreater.MaxLength = 100;
-            this.txtCreater.Name = "txtCreater";
-            this.txtCreater.Size = new System.Drawing.Size(143, 21);
-            this.txtCreater.TabIndex = 65;
             // 
             // FrmCustomerDetail
             // 
@@ -427,7 +474,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(781, 326);
+            this.ClientSize = new System.Drawing.Size(622, 316);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmCustomerDetail";
             this.Text = "客户资料";
@@ -438,6 +485,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -449,36 +497,40 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_AddContact;
         private System.Windows.Forms.ToolStripMenuItem mnu_DeleteContact;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.LinkLabel lblCategory;
         private System.Windows.Forms.Label label4;
         private GeneralLibrary.WinformControl.DBCTextBox txtNation;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
-        private GeneralLibrary.WinformControl.DBCTextBox txtBusinessMan;
-        private GeneralLibrary.WinformControl.DBCTextBox txtMedia;
-        private System.Windows.Forms.Label label2;
         private GeneralLibrary.WinformControl.DBCTextBox txtName;
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DBCTextBox txtID;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel lnkBusinessMan;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView GridView;
+        private System.Windows.Forms.Label label6;
+        private GeneralLibrary.WinformControl.DBCTextBox txtFax;
+        private System.Windows.Forms.Label label2;
+        private GeneralLibrary.WinformControl.DBCTextBox txtTelphone;
+        private System.Windows.Forms.Label label9;
+        private GeneralLibrary.WinformControl.DBCTextBox txtAddress;
+        private System.Windows.Forms.Label label8;
+        private GeneralLibrary.WinformControl.DBCTextBox txtWeb;
+        private System.Windows.Forms.Label label7;
+        private GeneralLibrary.WinformControl.DBCTextBox txtPost;
+        private System.Windows.Forms.Label label10;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCity;
+        private System.Windows.Forms.Label label5;
+        private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMobile;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQQ;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSkype;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHowold;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBirthday;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHobby;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.Label label5;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCreater;
     }
 }

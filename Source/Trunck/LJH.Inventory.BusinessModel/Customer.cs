@@ -66,10 +66,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Website { get; set; }
         /// <summary>
-        /// 获取或设置QQ号
-        /// </summary>
-        public string QQ { get; set; }
-        /// <summary>
         /// 获取或设置电子邮件
         /// </summary>
         public string Email { get; set; }
@@ -100,7 +96,11 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置客户的来源，比如说是从展会认识的，还是网上认识的等。
         /// </summary>
-        public string Media { get; set; }
+        public string DevelopFrom { get; set; }
+        /// <summary>
+        /// 获取或设置客户给本公司的编号
+        /// </summary>
+        public string MyID { get; set; }
         /// <summary>
         /// 获取或设置备注
         /// </summary>

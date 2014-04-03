@@ -36,7 +36,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<PurchaseOrder> items = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(null).QueryObjects;
+            List<PurchaseOrder> items = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
             List<PurchaseOrder> temp = new List<PurchaseOrder>();
             List<object> records = null;
             temp.AddRange(items);
@@ -111,7 +111,7 @@ namespace LJH.Inventory.UI.Forms
         protected override bool DeletingItem(object item)
         {
             PurchaseOrder sheet = item as PurchaseOrder;
-            CommandResult ret = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnectString)).Delete(sheet);
+            CommandResult ret = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Delete(sheet);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message, "删除失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);

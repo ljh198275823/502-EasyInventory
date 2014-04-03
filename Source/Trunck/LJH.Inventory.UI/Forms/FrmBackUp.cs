@@ -21,7 +21,7 @@ namespace LJH.Inventory.UI.Forms
         private string _BakPath;
         private string _Message;
 
-        private SqlClient _DBClient = new SqlClient(LJH.Inventory.BusinessModel.AppSettings.CurrentSetting.ConnectString);
+        private SqlClient _DBClient = new SqlClient(LJH.Inventory.BusinessModel.AppSettings.CurrentSetting.ConnStr);
 
         private bool CheckInput()
         {

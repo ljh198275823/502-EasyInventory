@@ -25,7 +25,7 @@ namespace LJH.Inventory.UI.Forms
         }
         protected override List<object> GetDataSource()
         {
-            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.CurrentSetting.ConnectString);
+            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr);
             List<ProductCategory> items = bll.GetAll().QueryObjects;
             return items.Select(p => (object)p).ToList();
         }
@@ -42,7 +42,7 @@ namespace LJH.Inventory.UI.Forms
         }
         protected override bool DeletingItem(object item)
         {
-            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.CurrentSetting.ConnectString);
+            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr);
             CommandResult ret = bll.Delete(item as ProductCategory);
             if (ret.Result == ResultCode.Successful)
             {

@@ -13,7 +13,7 @@ namespace LJH.Inventory.UI.Forms
 {
     public partial class FrmRoleDetail :FrmDetailBase  
     {
-        private RoleBLL bll = new RoleBLL(AppSettings.CurrentSetting.ConnectString);
+        private RoleBLL bll = new RoleBLL(AppSettings.CurrentSetting.ConnStr);
 
         public FrmRoleDetail()
         {

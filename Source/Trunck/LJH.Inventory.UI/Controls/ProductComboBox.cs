@@ -95,7 +95,7 @@ namespace LJH.Inventory.UI.Controls
             this.Items.Add(string.Empty);
             if (_SourceItems == null)
             {
-                _SourceItems = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(null).QueryObjects;
+                _SourceItems = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
             }
             if (_SourceItems != null && _SourceItems.Count > 0)
             {
@@ -116,7 +116,7 @@ namespace LJH.Inventory.UI.Controls
             this.Items.Add(string.Empty);
             if (_SourceItems == null)
             {
-                _SourceItems = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(null).QueryObjects;
+                _SourceItems = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
             }
             if (_SourceItems != null && _SourceItems.Count > 0)
             {

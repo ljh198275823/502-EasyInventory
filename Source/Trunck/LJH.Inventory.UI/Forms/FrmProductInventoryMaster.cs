@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms
             this.categoryTree.Nodes.Clear();
             this.categoryTree.Nodes.Add("所有仓库");
 
-            List<WareHouse> items = (new WareHouseBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<WareHouse> items = (new WareHouseBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.categoryTree.Nodes[0]);
@@ -124,7 +124,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.CurrentSetting.ConnectString);
+            ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.CurrentSetting.ConnStr);
             List<ProductInventory> items = bll.GetItems(null).QueryObjects;
             _ProductInventorys = bll.GetItems(SearchCondition).QueryObjects;
             List<object> records = GetSelectedNodeItems();
@@ -161,7 +161,7 @@ namespace LJH.Inventory.UI.Forms
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colProductID")
                 {
                     ProductInventory pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
-                    Product p = (new ProductBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(pi.ProductID).QueryObject;
+                    Product p = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(pi.ProductID).QueryObject;
                     if (p != null)
                     {
                         FrmProductDetail frm = new FrmProductDetail();
@@ -206,7 +206,7 @@ namespace LJH.Inventory.UI.Forms
             WareHouse pc = categoryTree.SelectedNode.Tag as WareHouse;
             if (pc != null && MessageBox.Show("是否删除此仓库?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
             {
-                CommandResult ret = (new WareHouseBLL(AppSettings.CurrentSetting.ConnectString)).Delete(pc);
+                CommandResult ret = (new WareHouseBLL(AppSettings.CurrentSetting.ConnStr)).Delete(pc);
                 if (ret.Result == ResultCode.Successful)
                 {
                     categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);

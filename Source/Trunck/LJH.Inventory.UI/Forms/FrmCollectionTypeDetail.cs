@@ -52,12 +52,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new CollectionTypeBLL(AppSettings.CurrentSetting.ConnectString)).Add(addingItem as CollectionType);
+            return (new CollectionTypeBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as CollectionType);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new CollectionTypeBLL(AppSettings.CurrentSetting.ConnectString)).Update(updatingItem as CollectionType);
+            return (new CollectionTypeBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as CollectionType);
         }
         #endregion
     }

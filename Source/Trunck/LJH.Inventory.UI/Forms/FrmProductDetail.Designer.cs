@@ -52,22 +52,22 @@
             this.txtCount = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtModel = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label14 = new System.Windows.Forms.Label();
-            this.txtForeignName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label15 = new System.Windows.Forms.Label();
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
             this.lnkUnit = new System.Windows.Forms.LinkLabel();
-            this.txtHSCode = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label2 = new System.Windows.Forms.Label();
+            this.lnkCompany = new System.Windows.Forms.LinkLabel();
+            this.txtCompany = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkInternalID = new System.Windows.Forms.LinkLabel();
+            this.txtInternalID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(290, 259);
+            this.btnClose.Location = new System.Drawing.Point(309, 246);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(181, 259);
+            this.btnOk.Location = new System.Drawing.Point(200, 246);
             // 
             // label1
             // 
@@ -90,7 +90,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(195, 137);
+            this.label4.Location = new System.Drawing.Point(210, 98);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 5;
@@ -99,7 +99,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 227);
+            this.label5.Location = new System.Drawing.Point(8, 213);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 12);
             this.label5.TabIndex = 6;
@@ -119,13 +119,13 @@
             this.txtName.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtName.Location = new System.Drawing.Point(44, 38);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(325, 21);
+            this.txtName.Size = new System.Drawing.Size(341, 21);
             this.txtName.TabIndex = 1;
             // 
             // txtBarCode
             // 
             this.txtBarCode.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtBarCode.Location = new System.Drawing.Point(231, 133);
+            this.txtBarCode.Location = new System.Drawing.Point(247, 94);
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(138, 21);
             this.txtBarCode.TabIndex = 4;
@@ -133,15 +133,15 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(44, 223);
+            this.txtMemo.Location = new System.Drawing.Point(44, 209);
             this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(326, 21);
+            this.txtMemo.Size = new System.Drawing.Size(341, 21);
             this.txtMemo.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 198);
+            this.label6.Location = new System.Drawing.Point(8, 156);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 8;
@@ -150,16 +150,16 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(195, 198);
+            this.label7.Location = new System.Drawing.Point(210, 156);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 12);
             this.label7.TabIndex = 9;
-            this.label7.Text = "成本:";
+            this.label7.Text = "采购:";
             // 
             // txtPrice
             // 
             this.txtPrice.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPrice.Location = new System.Drawing.Point(44, 193);
+            this.txtPrice.Location = new System.Drawing.Point(44, 151);
             this.txtPrice.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -179,7 +179,7 @@
             // txtCost
             // 
             this.txtCost.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCost.Location = new System.Drawing.Point(231, 193);
+            this.txtCost.Location = new System.Drawing.Point(247, 151);
             this.txtCost.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -199,16 +199,15 @@
             // txtUnit
             // 
             this.txtUnit.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtUnit.Location = new System.Drawing.Point(44, 133);
+            this.txtUnit.Location = new System.Drawing.Point(44, 123);
             this.txtUnit.Name = "txtUnit";
             this.txtUnit.Size = new System.Drawing.Size(138, 21);
             this.txtUnit.TabIndex = 5;
-            this.txtUnit.Text = "个";
             // 
             // txtSpecification
             // 
             this.txtSpecification.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSpecification.Location = new System.Drawing.Point(44, 163);
+            this.txtSpecification.Location = new System.Drawing.Point(44, 65);
             this.txtSpecification.Name = "txtSpecification";
             this.txtSpecification.Size = new System.Drawing.Size(138, 21);
             this.txtSpecification.TabIndex = 6;
@@ -216,7 +215,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 167);
+            this.label10.Location = new System.Drawing.Point(8, 69);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 12);
             this.label10.TabIndex = 15;
@@ -225,7 +224,7 @@
             // txtShortName
             // 
             this.txtShortName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtShortName.Location = new System.Drawing.Point(44, 102);
+            this.txtShortName.Location = new System.Drawing.Point(44, 94);
             this.txtShortName.Name = "txtShortName";
             this.txtShortName.Size = new System.Drawing.Size(138, 21);
             this.txtShortName.TabIndex = 10;
@@ -233,7 +232,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 106);
+            this.label11.Location = new System.Drawing.Point(8, 98);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 12);
             this.label11.TabIndex = 17;
@@ -292,7 +291,7 @@
             // txtModel
             // 
             this.txtModel.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtModel.Location = new System.Drawing.Point(231, 163);
+            this.txtModel.Location = new System.Drawing.Point(247, 65);
             this.txtModel.Name = "txtModel";
             this.txtModel.Size = new System.Drawing.Size(138, 21);
             this.txtModel.TabIndex = 23;
@@ -300,34 +299,17 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(195, 167);
+            this.label14.Location = new System.Drawing.Point(210, 69);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(35, 12);
             this.label14.TabIndex = 24;
             this.label14.Text = "型号:";
             // 
-            // txtForeignName
-            // 
-            this.txtForeignName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtForeignName.Location = new System.Drawing.Point(58, 70);
-            this.txtForeignName.Name = "txtForeignName";
-            this.txtForeignName.Size = new System.Drawing.Size(309, 21);
-            this.txtForeignName.TabIndex = 25;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(8, 74);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(47, 12);
-            this.label15.TabIndex = 26;
-            this.label15.Text = "英文名:";
-            // 
             // txtCategory
             // 
             this.txtCategory.Enabled = false;
             this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCategory.Location = new System.Drawing.Point(231, 9);
+            this.txtCategory.Location = new System.Drawing.Point(247, 9);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(138, 21);
             this.txtCategory.TabIndex = 27;
@@ -335,7 +317,7 @@
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(197, 13);
+            this.lnkCategory.Location = new System.Drawing.Point(210, 13);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(35, 12);
             this.lnkCategory.TabIndex = 28;
@@ -346,7 +328,7 @@
             // lnkUnit
             // 
             this.lnkUnit.AutoSize = true;
-            this.lnkUnit.Location = new System.Drawing.Point(8, 137);
+            this.lnkUnit.Location = new System.Drawing.Point(8, 127);
             this.lnkUnit.Name = "lnkUnit";
             this.lnkUnit.Size = new System.Drawing.Size(35, 12);
             this.lnkUnit.TabIndex = 29;
@@ -354,35 +336,56 @@
             this.lnkUnit.Text = "单位:";
             this.lnkUnit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUnit_LinkClicked);
             // 
-            // txtHSCode
+            // lnkCompany
             // 
-            this.txtHSCode.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtHSCode.Location = new System.Drawing.Point(248, 102);
-            this.txtHSCode.Name = "txtHSCode";
-            this.txtHSCode.Size = new System.Drawing.Size(119, 21);
-            this.txtHSCode.TabIndex = 30;
+            this.lnkCompany.AutoSize = true;
+            this.lnkCompany.Location = new System.Drawing.Point(8, 182);
+            this.lnkCompany.Name = "lnkCompany";
+            this.lnkCompany.Size = new System.Drawing.Size(35, 12);
+            this.lnkCompany.TabIndex = 31;
+            this.lnkCompany.TabStop = true;
+            this.lnkCompany.Text = "客户:";
+            this.lnkCompany.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCompany_LinkClicked);
             // 
-            // label2
+            // txtCompany
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(190, 106);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "海关编码:";
+            this.txtCompany.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCompany.Location = new System.Drawing.Point(44, 178);
+            this.txtCompany.Name = "txtCompany";
+            this.txtCompany.Size = new System.Drawing.Size(138, 21);
+            this.txtCompany.TabIndex = 30;
+            // 
+            // lnkInternalID
+            // 
+            this.lnkInternalID.AutoSize = true;
+            this.lnkInternalID.Location = new System.Drawing.Point(186, 182);
+            this.lnkInternalID.Name = "lnkInternalID";
+            this.lnkInternalID.Size = new System.Drawing.Size(59, 12);
+            this.lnkInternalID.TabIndex = 33;
+            this.lnkInternalID.TabStop = true;
+            this.lnkInternalID.Text = "库存编号:";
+            this.lnkInternalID.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkInternalID_LinkClicked);
+            // 
+            // txtInternalID
+            // 
+            this.txtInternalID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtInternalID.Location = new System.Drawing.Point(247, 179);
+            this.txtInternalID.Name = "txtInternalID";
+            this.txtInternalID.Size = new System.Drawing.Size(138, 21);
+            this.txtInternalID.TabIndex = 32;
             // 
             // FrmProductDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 297);
-            this.Controls.Add(this.txtHSCode);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(395, 284);
+            this.Controls.Add(this.lnkInternalID);
+            this.Controls.Add(this.txtInternalID);
+            this.Controls.Add(this.lnkCompany);
+            this.Controls.Add(this.txtCompany);
             this.Controls.Add(this.lnkUnit);
             this.Controls.Add(this.lnkCategory);
             this.Controls.Add(this.txtCategory);
-            this.Controls.Add(this.txtForeignName);
-            this.Controls.Add(this.label15);
             this.Controls.Add(this.txtModel);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.txtCount);
@@ -433,13 +436,13 @@
             this.Controls.SetChildIndex(this.txtCount, 0);
             this.Controls.SetChildIndex(this.label14, 0);
             this.Controls.SetChildIndex(this.txtModel, 0);
-            this.Controls.SetChildIndex(this.label15, 0);
-            this.Controls.SetChildIndex(this.txtForeignName, 0);
             this.Controls.SetChildIndex(this.txtCategory, 0);
             this.Controls.SetChildIndex(this.lnkCategory, 0);
             this.Controls.SetChildIndex(this.lnkUnit, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.txtHSCode, 0);
+            this.Controls.SetChildIndex(this.txtCompany, 0);
+            this.Controls.SetChildIndex(this.lnkCompany, 0);
+            this.Controls.SetChildIndex(this.txtInternalID, 0);
+            this.Controls.SetChildIndex(this.lnkInternalID, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,12 +473,12 @@
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtCount;
         private LJH.GeneralLibrary.WinformControl.DBCTextBox txtModel;
         private System.Windows.Forms.Label label14;
-        private GeneralLibrary.WinformControl.DBCTextBox txtForeignName;
-        private System.Windows.Forms.Label label15;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
         private System.Windows.Forms.LinkLabel lnkCategory;
         private System.Windows.Forms.LinkLabel lnkUnit;
-        private GeneralLibrary.WinformControl.DBCTextBox txtHSCode;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel lnkCompany;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCompany;
+        private System.Windows.Forms.LinkLabel lnkInternalID;
+        private GeneralLibrary.WinformControl.DBCTextBox txtInternalID;
     }
 }

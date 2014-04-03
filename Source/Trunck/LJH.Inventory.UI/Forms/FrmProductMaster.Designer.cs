@@ -48,21 +48,25 @@
             this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colForeignName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBarCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHSCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBarCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInternalID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.CategoryMenu.SuspendLayout();
@@ -230,12 +234,16 @@
             this.colImage,
             this.colNumber,
             this.colName,
-            this.colForeignName,
             this.colCategoryID,
-            this.colBarCode,
             this.colSpecification,
             this.colModel,
-            this.colHSCode,
+            this.colBarCode,
+            this.colShortName,
+            this.colUnit,
+            this.colPrice,
+            this.colCost,
+            this.colCompany,
+            this.colInternalID,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -246,76 +254,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(950, 287);
             this.dataGridView1.TabIndex = 109;
-            // 
-            // colImage
-            // 
-            this.colImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colImage.HeaderText = "";
-            this.colImage.Name = "colImage";
-            this.colImage.ReadOnly = true;
-            this.colImage.Width = 30;
-            // 
-            // colNumber
-            // 
-            this.colNumber.HeaderText = "编号";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
-            this.colNumber.Width = 120;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.HeaderText = "名称";
-            this.colName.MinimumWidth = 100;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colForeignName
-            // 
-            this.colForeignName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colForeignName.HeaderText = "英文名称";
-            this.colForeignName.MinimumWidth = 100;
-            this.colForeignName.Name = "colForeignName";
-            this.colForeignName.ReadOnly = true;
-            // 
-            // colCategoryID
-            // 
-            this.colCategoryID.HeaderText = "类别";
-            this.colCategoryID.Name = "colCategoryID";
-            this.colCategoryID.ReadOnly = true;
-            this.colCategoryID.Width = 120;
-            // 
-            // colBarCode
-            // 
-            this.colBarCode.HeaderText = "条码";
-            this.colBarCode.Name = "colBarCode";
-            this.colBarCode.ReadOnly = true;
-            this.colBarCode.Width = 120;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            // 
-            // colModel
-            // 
-            this.colModel.HeaderText = "型号";
-            this.colModel.Name = "colModel";
-            this.colModel.ReadOnly = true;
-            // 
-            // colHSCode
-            // 
-            this.colHSCode.HeaderText = "海关编码";
-            this.colHSCode.Name = "colHSCode";
-            this.colHSCode.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemo.HeaderText = "描述";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -350,6 +288,114 @@
             this.cMnu_Export.Name = "cMnu_Export";
             this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // colImage
+            // 
+            this.colImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colImage.HeaderText = "";
+            this.colImage.Name = "colImage";
+            this.colImage.ReadOnly = true;
+            this.colImage.Width = 30;
+            // 
+            // colNumber
+            // 
+            this.colNumber.HeaderText = "编号";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.Width = 120;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.HeaderText = "名称";
+            this.colName.MinimumWidth = 100;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colCategoryID
+            // 
+            this.colCategoryID.HeaderText = "类别";
+            this.colCategoryID.Name = "colCategoryID";
+            this.colCategoryID.ReadOnly = true;
+            this.colCategoryID.Width = 120;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
+            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colModel
+            // 
+            this.colModel.HeaderText = "型号";
+            this.colModel.Name = "colModel";
+            this.colModel.ReadOnly = true;
+            this.colModel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colBarCode
+            // 
+            this.colBarCode.HeaderText = "条码";
+            this.colBarCode.Name = "colBarCode";
+            this.colBarCode.ReadOnly = true;
+            this.colBarCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colBarCode.Visible = false;
+            // 
+            // colShortName
+            // 
+            this.colShortName.HeaderText = "简称";
+            this.colShortName.Name = "colShortName";
+            this.colShortName.ReadOnly = true;
+            this.colShortName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colShortName.Visible = false;
+            // 
+            // colUnit
+            // 
+            this.colUnit.HeaderText = "单位";
+            this.colUnit.Name = "colUnit";
+            this.colUnit.ReadOnly = true;
+            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUnit.Width = 60;
+            // 
+            // colPrice
+            // 
+            this.colPrice.HeaderText = "售价";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.ReadOnly = true;
+            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colPrice.Visible = false;
+            this.colPrice.Width = 80;
+            // 
+            // colCost
+            // 
+            this.colCost.HeaderText = "采购";
+            this.colCost.Name = "colCost";
+            this.colCost.ReadOnly = true;
+            this.colCost.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCost.Visible = false;
+            this.colCost.Width = 80;
+            // 
+            // colCompany
+            // 
+            this.colCompany.HeaderText = "客户";
+            this.colCompany.Name = "colCompany";
+            this.colCompany.ReadOnly = true;
+            this.colCompany.Width = 150;
+            // 
+            // colInternalID
+            // 
+            this.colInternalID.HeaderText = "库存编号";
+            this.colInternalID.Name = "colInternalID";
+            this.colInternalID.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.MinimumWidth = 100;
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FrmProductMaster
             // 
@@ -390,16 +436,6 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewImageColumn colImage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colForeignName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBarCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHSCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.TreeView categoryTree;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
@@ -412,5 +448,19 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.DataGridViewImageColumn colImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBarCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colShortName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCompany;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInternalID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

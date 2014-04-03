@@ -68,12 +68,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new UnitBLL(AppSettings.CurrentSetting.ConnectString)).Add(addingItem as Unit);
+            return (new UnitBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as Unit);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new UnitBLL(AppSettings.CurrentSetting.ConnectString)).Update(updatingItem as Unit);
+            return (new UnitBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as Unit);
         }
         #endregion
     }

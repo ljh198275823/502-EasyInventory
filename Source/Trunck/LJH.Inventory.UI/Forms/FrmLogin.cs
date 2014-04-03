@@ -56,7 +56,7 @@ namespace LJH.Inventory.UI.Forms
                 AppSettings.CurrentSetting.DatabaseNeedUpgrade = false;
             }
 
-            OperatorBLL authen = new OperatorBLL(AppSettings.CurrentSetting.ConnectString);
+            OperatorBLL authen = new OperatorBLL(AppSettings.CurrentSetting.ConnStr);
             if (authen.Authentication(logName, pwd))
             {
                 this.DialogResult = DialogResult.OK;
@@ -80,11 +80,11 @@ namespace LJH.Inventory.UI.Forms
         {
             this.gpDB.Visible = false;
             this.Height = 150;
-            if (!string.IsNullOrEmpty(AppSettings.CurrentSetting.ConnectString))
+            if (!string.IsNullOrEmpty(AppSettings.CurrentSetting.ConnStr))
             {
                 try
                 {
-                    sb = new SqlConnectionStringBuilder(AppSettings.CurrentSetting.ConnectString);
+                    sb = new SqlConnectionStringBuilder(AppSettings.CurrentSetting.ConnStr);
                     txtServer.Text = sb.DataSource;
                     txtDataBase.Text = sb.InitialCatalog;
                     if (sb.IntegratedSecurity)
@@ -155,7 +155,7 @@ namespace LJH.Inventory.UI.Forms
             sb.Password = this.txtPasswd.Text;
 
             sb.PersistSecurityInfo = true;
-            AppSettings.CurrentSetting.ConnectString  = sb.ConnectionString;
+            AppSettings.CurrentSetting.ConnStr  = sb.ConnectionString;
         }
 
         private bool UpGradeDataBase()
@@ -166,7 +166,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 try
                 {
-                    SqlClient client = new SqlClient(AppSettings.CurrentSetting.ConnectString);
+                    SqlClient client = new SqlClient(AppSettings.CurrentSetting.ConnStr);
                     client.Connect();
                     client.ExecuteSQLFile(path);
                     ret = true;

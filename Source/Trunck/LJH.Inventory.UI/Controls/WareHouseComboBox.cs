@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Controls
         public void Init()
         {
             this.Items.Clear();
-            List<WareHouse> items = (new WareHouseBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<WareHouse> items = (new WareHouseBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
             items = (from c in items
                      orderby c.Name ascending
                      select c).ToList();

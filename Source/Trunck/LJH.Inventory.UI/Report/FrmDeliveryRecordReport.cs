@@ -44,7 +44,7 @@ namespace LJH.Inventory.UI.Report
             {
                 con.ProductID = productComboBox1.SelectedProduct.ID;
             }
-            List<DeliveryRecord> items = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetDeliveryRecords(con).QueryObjects;
+            List<DeliveryRecord> items = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             foreach (DeliveryRecord item in items)
             {
                 int row = gridView.Rows.Add();
@@ -73,7 +73,7 @@ namespace LJH.Inventory.UI.Report
                 if (gridView.Columns[e.ColumnIndex].Name == "colSheetNo")
                 {
                     string sheetNo = gridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    DeliverySheet sheet = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(sheetNo).QueryObject;
+                    DeliverySheet sheet = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheetNo).QueryObject;
                     if (sheet != null)
                     {
                         FrmDeliverySheetDetail frm = new FrmDeliverySheetDetail();
@@ -86,7 +86,7 @@ namespace LJH.Inventory.UI.Report
                 else if (gridView.Columns[e.ColumnIndex].Name == "colOrderID")
                 {
                     string orderID = gridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    Order order = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(orderID ).QueryObject;
+                    Order order = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(orderID ).QueryObject;
                     if (order != null)
                     {
                         FrmOrderDetail frm = new FrmOrderDetail();

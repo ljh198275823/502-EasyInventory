@@ -269,9 +269,9 @@ namespace LJH.Inventory.UI.Applications.WaiMao
         {
             //ReadSoftDog();
             DoLogIn();
-            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.CurrentSetting.ConnectString);
+            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.CurrentSetting.ConnStr);
             //启动同步时间服务
-            _DatetimeSyncService = new DatetimeSyncService(AppSettings.CurrentSetting.ConnectString);
+            _DatetimeSyncService = new DatetimeSyncService(AppSettings.CurrentSetting.ConnStr);
             _DatetimeSyncService.Start();
         }
 
@@ -361,7 +361,7 @@ namespace LJH.Inventory.UI.Applications.WaiMao
                 {
                     try
                     {
-                        SqlClient client = new SqlClient(AppSettings.CurrentSetting.ConnectString);
+                        SqlClient client = new SqlClient(AppSettings.CurrentSetting.ConnStr);
                         client.Connect();
                         client.ExecuteSQLFile(path);
                         MessageBox.Show("数据库升级成功!");

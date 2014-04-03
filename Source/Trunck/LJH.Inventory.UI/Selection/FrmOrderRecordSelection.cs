@@ -33,7 +33,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<OrderRecord> items = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetRecords(SearchCondition).QueryObjects;
+            List<OrderRecord> items = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).GetRecords(SearchCondition).QueryObjects;
             return (from item in items
                     orderby item.OrderID ascending
                     select (object)item).ToList();

@@ -69,7 +69,7 @@ namespace LJH.Inventory.UI.Forms
                 txtPrefix.Text = p.Prefix;
                 if (!string.IsNullOrEmpty(p.Parent))
                 {
-                    ParentCategory = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(p.Parent).QueryObject;
+                    ParentCategory = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(p.Parent).QueryObject;
                 }
                 txtMemo.Text = p.Memo;
             }
@@ -101,13 +101,13 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.CurrentSetting.ConnectString);
+            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr);
             return bll.Insert(addingItem as ProductCategory);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.CurrentSetting.ConnectString);
+            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr);
             return bll.Update(updatingItem as ProductCategory);
         }
         #endregion

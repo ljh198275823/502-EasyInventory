@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<PriceTerm> items = (new PriceTermBLL(AppSettings.CurrentSetting.ConnectString)).GetAll().QueryObjects;
+            List<PriceTerm> items = (new PriceTermBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();
@@ -43,7 +43,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            CommandResult ret = (new PriceTermBLL(AppSettings.CurrentSetting.ConnectString)).Delete(item as PriceTerm);
+            CommandResult ret = (new PriceTermBLL(AppSettings.CurrentSetting.ConnStr)).Delete(item as PriceTerm);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message);

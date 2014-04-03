@@ -14,7 +14,7 @@ namespace LJH.Inventory.UI.Forms
     public partial class FrmOperatorMaster:FrmMasterBase
     {
         private List<OperatorInfo> operators;
-        private OperatorBLL bll = new OperatorBLL(AppSettings .CurrentSetting .ConnectString );
+        private OperatorBLL bll = new OperatorBLL(AppSettings .CurrentSetting .ConnStr );
 
         public FrmOperatorMaster()
         {

@@ -68,7 +68,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 停车场连接字串
         /// </summary>
-        public string ConnectString
+        public string ConnStr
         {
             //连接字串分两段加密，首先前8个字符为加密的日期，做为实际连接字符串信息的加密密码。
             //解密连接字串：先用默认加密密码的加密类型解密出前8个字符的明文，再用一个密码为此明文的加密类解密出后续字符，得到连接字符的明文。

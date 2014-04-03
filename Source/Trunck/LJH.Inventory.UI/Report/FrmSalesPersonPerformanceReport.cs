@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Report
             con.DeliveryDateTime = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.States = new List<int>();
             con.States.Add((int)SheetState.Shipped);
-            List<DeliverySheet> sheets = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con).QueryObjects;
+            List<DeliverySheet> sheets = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(con).QueryObjects;
 
             var salesGroup = sheets.GroupBy(item => item.SalesPerson);
             foreach (var group in salesGroup)

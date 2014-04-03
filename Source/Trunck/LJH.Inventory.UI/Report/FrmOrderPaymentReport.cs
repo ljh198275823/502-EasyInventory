@@ -32,7 +32,7 @@ namespace LJH.Inventory.UI.Report
             con.States.Add(SheetState.Add);
             con.States.Add(SheetState.Approved);
             con.States.Add(SheetState.Closed);
-            List<Order> items = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetItems(con).QueryObjects;
+            List<Order> items = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(con).QueryObjects;
             foreach (Order item in items)
             {
                 int row = gridView.Rows.Add();

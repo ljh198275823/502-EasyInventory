@@ -52,12 +52,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new PriceTermBLL(AppSettings.CurrentSetting.ConnectString)).Add(addingItem as PriceTerm);
+            return (new PriceTermBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as PriceTerm);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new PriceTermBLL(AppSettings.CurrentSetting.ConnectString)).Update(updatingItem as PriceTerm);
+            return (new PriceTermBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as PriceTerm);
         }
         #endregion
     }

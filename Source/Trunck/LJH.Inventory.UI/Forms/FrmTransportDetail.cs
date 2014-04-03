@@ -52,12 +52,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new TransportBLL(AppSettings.CurrentSetting.ConnectString)).Add(addingItem as Transport);
+            return (new TransportBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as Transport);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new TransportBLL(AppSettings.CurrentSetting.ConnectString)).Update(updatingItem as Transport);
+            return (new TransportBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as Transport);
         }
         #endregion
     }

@@ -31,7 +31,7 @@ namespace LJH.Inventory.UI.View
 
         protected override List<object> GetDataSource()
         {
-            List<DeliveryRecord> records = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetDeliveryRecords(SearchCondition).QueryObjects;
+            List<DeliveryRecord> records = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetDeliveryRecords(SearchCondition).QueryObjects;
             return (from item in records
                     orderby item.ProductID ascending
                     select (object)item).ToList();
