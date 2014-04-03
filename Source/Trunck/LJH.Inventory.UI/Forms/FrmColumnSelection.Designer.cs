@@ -28,47 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.btnDown = new System.Windows.Forms.Button();
-            this.btnUp = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
-            // 
-            // listView1
-            // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.CheckBoxes = true;
-            this.listView1.Location = new System.Drawing.Point(7, 6);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(239, 360);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
-            // 
-            // btnDown
-            // 
-            this.btnDown.BackgroundImage = global::LJH.Inventory.UI.Properties.Resources.down;
-            this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDown.Location = new System.Drawing.Point(259, 108);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(33, 45);
-            this.btnDown.TabIndex = 2;
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Visible = false;
-            // 
-            // btnUp
-            // 
-            this.btnUp.BackgroundImage = global::LJH.Inventory.UI.Properties.Resources.up;
-            this.btnUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnUp.Location = new System.Drawing.Point(259, 49);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(33, 45);
-            this.btnUp.TabIndex = 1;
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Visible = false;
             // 
             // btnOk
             // 
@@ -91,6 +56,45 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnDown
+            // 
+            this.btnDown.BackgroundImage = global::LJH.Inventory.UI.Properties.Resources.down;
+            this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDown.Location = new System.Drawing.Point(259, 105);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(33, 45);
+            this.btnDown.TabIndex = 2;
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // btnUp
+            // 
+            this.btnUp.BackgroundImage = global::LJH.Inventory.UI.Properties.Resources.up;
+            this.btnUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUp.Location = new System.Drawing.Point(259, 46);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(33, 45);
+            this.btnUp.TabIndex = 1;
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            // 
+            // treeView1
+            // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Indent = 14;
+            this.treeView1.Location = new System.Drawing.Point(5, 12);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.ShowLines = false;
+            this.treeView1.ShowPlusMinus = false;
+            this.treeView1.ShowRootLines = false;
+            this.treeView1.Size = new System.Drawing.Size(232, 351);
+            this.treeView1.TabIndex = 5;
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
+            // 
             // FrmColumnSelection
             // 
             this.AcceptButton = this.btnOk;
@@ -98,11 +102,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(366, 375);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
-            this.Controls.Add(this.listView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -116,11 +120,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TreeView treeView1;
 
     }
 }

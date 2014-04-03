@@ -145,9 +145,21 @@ namespace LJH.Inventory.UI.Forms
             if (string.IsNullOrEmpty(temp)) return;
             string[] cols = temp.Split(',');
 
-            foreach (DataGridViewColumn c in grid.Columns) //剩余的列则为不需要显示的
+            for (int i = 0; i < cols.Length; i++)
             {
-                c.Visible = cols.Contains(c.Name);
+                string[] col_Temp = cols[i].Split(':');
+                if (col_Temp.Length >= 1 && grid.Columns.Contains(col_Temp[0]))
+                {
+                    grid.Columns[col_Temp[0]].DisplayIndex = i;
+                    if (col_Temp.Length >= 2 && col_Temp[1].Trim() == "0")
+                    {
+                        grid.Columns[col_Temp[0]].Visible = false;
+                    }
+                    else
+                    {
+                        grid.Columns[col_Temp[0]].Visible = true;
+                    }
+                }
             }
         }
 
@@ -466,6 +478,7 @@ namespace LJH.Inventory.UI.Forms
                 {
                     string temp = string.Join(",", cols);
                     AppSettings.CurrentSetting.SaveConfig(string.Format("{0}_Columns", this.GetType().Name), temp);
+                    InitGridViewColumns();
                 }
             }
         }
