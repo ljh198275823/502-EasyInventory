@@ -115,10 +115,24 @@ namespace LJH.Inventory.UI.Forms
             p.Price = txtPrice.DecimalValue;
             p.Cost = txtCost.DecimalValue;
             p.ShortName = txtShortName.Text;
-            Customer c = txtCompany.Tag as Customer;
-            p.Company = c != null ? c.ID : null;
-            Product pi = txtInternalID.Tag as Product;
-            p.InternalID = pi != null ? pi.ID : null;
+            if (!string.IsNullOrEmpty(txtCompany.Text))
+            {
+                Customer c = txtCompany.Tag as Customer;
+                p.Company = c != null ? c.ID : null;
+            }
+            else
+            {
+                p.Company = null;
+            }
+            if (!string.IsNullOrEmpty(txtInternalID.Text))
+            {
+                Product pi = txtInternalID.Tag as Product;
+                p.InternalID = pi != null ? pi.ID : null;
+            }
+            else
+            {
+                p.InternalID = null;
+            }
             p.Memo = txtMemo.Text;
             return p;
         }
