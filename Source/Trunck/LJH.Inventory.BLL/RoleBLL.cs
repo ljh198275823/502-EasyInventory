@@ -21,35 +21,35 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
-        public QueryResult<RoleInfo> GetRoleInfoByID(string roleID)
+        public QueryResult<Role> GetRoleInfoByID(string roleID)
         {
             return provider.GetByID(roleID);
         }
 
-        public QueryResultList<RoleInfo> GetAllRoles()
+        public QueryResultList<Role> GetAllRoles()
         {
             return provider.GetItems(null);
         }
 
-        public CommandResult Update(RoleInfo newVal)
+        public CommandResult Update(Role newVal)
         {
-            RoleInfo original = GetRoleInfoByID(newVal.RoleID).QueryObject;
+            Role original = GetRoleInfoByID(newVal.ID).QueryObject;
             if (original != null)
             {
                 return provider.Update(newVal, original);
             }
             else
             {
-                throw new InvalidOperationException(string.Format("数据库中不存在角色\"{0}\",可能被其它操作员删除!", newVal.RoleID));
+                throw new InvalidOperationException(string.Format("数据库中不存在角色\"{0}\",可能被其它操作员删除!", newVal.ID));
             }
         }
 
-        public CommandResult Insert(RoleInfo info)
+        public CommandResult Insert(Role info)
         {
             return provider.Insert(info);
         }
 
-        public CommandResult Delete(RoleInfo info)
+        public CommandResult Delete(Role info)
         {
             if (!info.CanDelete)
             {

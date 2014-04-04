@@ -30,17 +30,17 @@ namespace LJH.Inventory.UI.Forms
                 this.btnChangePwd.Visible = false;
                 this.txtPassword.Size = this.txtOperatorName.Size;
             }
-            RoleInfo role = OperatorInfo.CurrentOperator.Role;
+            Role role = Operator.Current.Role;
             this.btnOk.Enabled = role.Permit(Permission.EditOperator);
         }
 
         protected override void ItemShowing()
         {
-            OperatorInfo info = (OperatorInfo)UpdatingItem;
-            this.txtOperatorID.Text = info.OperatorID;
+            Operator info = (Operator)UpdatingItem;
+            this.txtOperatorID.Text = info.ID;
             this.txtOperatorID.Enabled = false;
             this.txtOperatorID.BackColor = Color.White;
-            this.txtOperatorName.Text = info.OperatorName;
+            this.txtOperatorName.Text = info.Name;
             this.txtPassword.Text = _subPwd;
             this.txtPassword.Enabled = false;
             this.txtPassword.BackColor = Color.White;
@@ -53,24 +53,24 @@ namespace LJH.Inventory.UI.Forms
 
         protected override object GetItemFromInput()
         {
-            OperatorInfo info = null;
+            Operator info = null;
             if (CheckInput())
             {
                 if (IsAdding)
                 {
-                    info = new OperatorInfo();
+                    info = new Operator();
                     info.Password = txtPassword.Text.Trim();
                 }
                 else
                 {
-                    info = UpdatingItem as OperatorInfo;
+                    info = UpdatingItem as Operator;
                     if (txtPassword.Text.Trim() != _subPwd)
                     {
                         info.Password = txtPassword.Text.Trim();
                     }
                 }
-                info.OperatorID = txtOperatorID.Text.Trim();
-                info.OperatorName = txtOperatorName.Text.Trim();
+                info.ID = txtOperatorID.Text.Trim();
+                info.Name = txtOperatorName.Text.Trim();
                 info.Role = comRoleList.Role;
                 info.RoleID = comRoleList.SelectedRoleID;
                 info.Department = txtDepartment.Text;
@@ -81,12 +81,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return bll.Insert((OperatorInfo)addingItem);
+            return bll.Insert((Operator)addingItem);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return bll.Update(updatingItem as OperatorInfo);
+            return bll.Update(updatingItem as Operator);
         }
 
         protected override bool CheckInput()
@@ -114,7 +114,7 @@ namespace LJH.Inventory.UI.Forms
         private void btnChangePwd_Click(object sender, EventArgs e)
         {
             FrmChangePwd frm = new FrmChangePwd();
-            frm.Operator = UpdatingItem as OperatorInfo;
+            frm.Operator = UpdatingItem as Operator;
             frm.ShowDialog();
         }
         #endregion

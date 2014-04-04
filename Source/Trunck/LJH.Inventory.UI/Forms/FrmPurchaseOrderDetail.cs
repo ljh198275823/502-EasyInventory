@@ -120,9 +120,9 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.dtDeliveryDate.Value = DateTime.Today.AddDays(1);
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
-            ItemsGrid.Columns["colPrice"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
-            ItemsGrid.Columns["colTotal"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
+            Operator opt = Operator.Current;
+            ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
+            ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
@@ -197,12 +197,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as PurchaseOrder,OperatorInfo .CurrentOperator.OperatorName );
+            return (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as PurchaseOrder,Operator .Current.Name );
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as PurchaseOrder,OperatorInfo .CurrentOperator .OperatorName );
+            return (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as PurchaseOrder,Operator .Current .Name );
         }
         #endregion
 
@@ -219,7 +219,7 @@ namespace LJH.Inventory.UI.Forms
                     header.ID = Guid.NewGuid();
                     header.DocumentID = item.ID;
                     header.DocumentType = item.DocumentType;
-                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
                     CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
@@ -371,7 +371,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要审核此采购单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
-                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Approve(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
                         PurchaseOrder sheet1 = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
@@ -394,7 +394,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否将此采购单作废?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
-                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Nullify(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Nullify(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
                         PurchaseOrder sheet1 = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
@@ -516,8 +516,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                OperatorInfo item = frm.SelectedItem as OperatorInfo;
-                txtBuyer.Text = item.OperatorName;
+                Operator item = frm.SelectedItem as Operator;
+                txtBuyer.Text = item.Name;
             }
         }
         #endregion

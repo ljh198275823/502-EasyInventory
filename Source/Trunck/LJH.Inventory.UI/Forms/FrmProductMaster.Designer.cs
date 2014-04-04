@@ -64,8 +64,8 @@
             this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInternalID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCompany = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colInternalID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
@@ -380,13 +380,16 @@
             this.colCompany.HeaderText = "客户";
             this.colCompany.Name = "colCompany";
             this.colCompany.ReadOnly = true;
-            this.colCompany.Width = 150;
+            this.colCompany.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCompany.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colInternalID
             // 
             this.colInternalID.HeaderText = "库存编号";
             this.colInternalID.Name = "colInternalID";
             this.colInternalID.ReadOnly = true;
+            this.colInternalID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colInternalID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colMemo
             // 
@@ -459,8 +462,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCompany;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInternalID;
+        private System.Windows.Forms.DataGridViewLinkColumn colCompany;
+        private System.Windows.Forms.DataGridViewLinkColumn colInternalID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

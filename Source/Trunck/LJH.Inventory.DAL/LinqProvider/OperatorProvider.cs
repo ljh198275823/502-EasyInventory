@@ -8,7 +8,7 @@ using LJH.Inventory.DAL.IProvider;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class OperatorProvider : ProviderBase<OperatorInfo, string>, IOperatorProvider
+    public class OperatorProvider : ProviderBase<Operator, string>, IOperatorProvider
     {
         public OperatorProvider(string connStr)
             : base(connStr)
@@ -16,20 +16,20 @@ namespace LJH.Inventory.DAL.LinqProvider
         }
 
         #region 重写模板方法
-        protected override OperatorInfo GetingItemByID(string id, DataContext dc)
+        protected override Operator GetingItemByID(string id, DataContext dc)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<OperatorInfo>(o => o.Role);
+            opt.LoadWith<Operator>(o => o.Role);
             dc.LoadOptions = opt;
-            return dc.GetTable<OperatorInfo>().SingleOrDefault(o => o.OperatorID == id);
+            return dc.GetTable<Operator>().SingleOrDefault(o => o.ID == id);
         }
 
-        protected override List<OperatorInfo> GetingItems(DataContext dc, BusinessModel.SearchCondition.SearchCondition search)
+        protected override List<Operator> GetingItems(DataContext dc, BusinessModel.SearchCondition.SearchCondition search)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<OperatorInfo>(o => o.Role);
+            opt.LoadWith<Operator>(o => o.Role);
             dc.LoadOptions = opt;
-            IQueryable<OperatorInfo> ret = dc.GetTable<OperatorInfo>();
+            IQueryable<Operator> ret = dc.GetTable<Operator>();
             if (search != null)
             {
             }

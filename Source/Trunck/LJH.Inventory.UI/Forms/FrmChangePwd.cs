@@ -18,7 +18,7 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
-        public  OperatorInfo Operator{get;set;}
+        public  Operator Operator{get;set;}
 
         private void FrmChangePwd_Load(object sender, EventArgs e)
         {

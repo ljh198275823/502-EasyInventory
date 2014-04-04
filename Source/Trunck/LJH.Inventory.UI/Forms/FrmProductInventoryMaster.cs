@@ -104,7 +104,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             InitCategoryTree();
-            OperatorInfo cur = OperatorInfo.CurrentOperator;
+            Operator cur = Operator.Current;
             this.mnu_AddCategory.Enabled = cur.Permit(Permission.EditWareHouse);
             this.mnu_DeleteCategory.Enabled = cur.Permit(Permission.EditWareHouse);
             this.mnu_CategoryProperty.Enabled = cur.Permit(Permission.EditWareHouse) || cur.Permit(Permission.ReadWareHouse);

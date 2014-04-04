@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
-            btnOk.Enabled = OperatorInfo.CurrentOperator.Permit(Permission.EditSupplier);
+            btnOk.Enabled = Operator.Current.Permit(Permission.EditSupplier);
         }
 
         protected override bool CheckInput()

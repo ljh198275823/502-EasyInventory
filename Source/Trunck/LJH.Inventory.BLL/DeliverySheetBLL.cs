@@ -34,20 +34,22 @@ namespace LJH.Inventory.BLL
                     IsUnShipped = true     //所有未发货的库存项
                 };
                 List<ProductInventoryItem> items = ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).GetItems(con).QueryObjects;
-                //所有相关的库存项就是送货项订单分配的库存和未分配的库存
-                List<ProductInventoryItem> refs = new List<ProductInventoryItem>();
-                if (si.OrderItem != null)
+                if (si.OrderItem != null)  //如果出货单项有相关的订单项，那么出货时只扣除与此订单项相关的库存项
                 {
-                    refs.AddRange(items.Where(item => item.OrderItem == si.OrderItem));
+                    items = items.Where(item => item.OrderItem == si.OrderItem).ToList();
+                }
+                if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("商品 {0} 库存不足，出货失败!", si.ProductID));
+
+                if (inventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式排序
+                {
+                    items = (from item in items orderby item.AddDate ascending select item).ToList();
                 }
                 else
                 {
-                    refs.AddRange(items.Where(item => item.OrderItem == null));
+                    items = (from item in items orderby item.AddDate descending select item).ToList();
                 }
-                if (refs.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("商品 {0} 库存不足，出货失败!", si.ProductID));
-
                 decimal count = si.Count;
-                foreach (ProductInventoryItem pii in refs)
+                foreach (ProductInventoryItem pii in items)
                 {
                     if (count > 0)
                     {
@@ -280,7 +282,7 @@ namespace LJH.Inventory.BLL
             sheet.State = SheetState.Shipped;
             provider.Update(sheet, sheet1, unitWork);
 
-            InventoryOut(sheet, UserSettings.Current.InventoryOutType, unitWork);
+            if (!string.IsNullOrEmpty(sheet.WareHouseID)) InventoryOut(sheet, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
             AddReceivables(sheet, unitWork);         //增加供应商的应收账款
             DocumentOperation doc = new DocumentOperation()
             {

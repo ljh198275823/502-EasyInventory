@@ -33,7 +33,7 @@ namespace LJH.Inventory.UI.Forms
                 txtParentCategory.Text = ParentCategory.Name;
             }
             base.InitControls();
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
         }
 
         protected override bool CheckInput()

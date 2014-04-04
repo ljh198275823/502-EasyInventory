@@ -140,9 +140,9 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             ShowButtonState();
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
-            ItemsGrid.Columns["colPrice"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
-            ItemsGrid.Columns["colTotal"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
+            Operator opt = Operator.Current;
+            ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
+            ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
@@ -172,8 +172,16 @@ namespace LJH.Inventory.UI.Forms
             }
             sheet.CustomerID = this.txtCustomer.Tag != null ? (this.txtCustomer.Tag as Customer).ID : string.Empty;
             sheet.Customer = this.txtCustomer.Tag as Customer;
-            sheet.WareHouseID = this.txtWareHouse.Tag != null ? (this.txtWareHouse.Tag as WareHouse).ID : string.Empty;
-            sheet.WareHouse = this.txtWareHouse.Tag as WareHouse;
+            if (!string.IsNullOrEmpty(this.txtWareHouse.Text) && this.txtWareHouse.Tag != null)
+            {
+                sheet.WareHouse = this.txtWareHouse.Tag as WareHouse;
+                sheet.WareHouseID = sheet.WareHouse.ID;
+            }
+            else
+            {
+                sheet.WareHouse = null;
+                sheet.WareHouseID = null;
+            }
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<DeliveryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
@@ -190,12 +198,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as DeliverySheet, OperatorInfo.CurrentOperator.OperatorID);
+            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as DeliverySheet, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as DeliverySheet, OperatorInfo.CurrentOperator.OperatorID);
+            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as DeliverySheet, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
@@ -206,13 +214,11 @@ namespace LJH.Inventory.UI.Forms
                 this.btnPrint.Enabled = false;
                 this.btnApprove.Enabled = false;
                 this.btnShip.Enabled = false;
-                this.btnPaid.Enabled = false;
-                this.btnPaymentAssign.Enabled = false;
             }
             else
             {
                 DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                this.btnOk.Enabled = sheet.State == SheetState.Add;
+                this.btnSave.Enabled = sheet.State == SheetState.Add;
                 this.btnPrint.Enabled = sheet.CanPrint;
                 this.btnApprove.Enabled = sheet.CanApprove;
                 this.btnShip.Enabled = sheet.CanShip;
@@ -233,7 +239,7 @@ namespace LJH.Inventory.UI.Forms
                     header.ID = Guid.NewGuid();
                     header.DocumentID = item.ID;
                     header.DocumentType = item.DocumentType;
-                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
                     CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
@@ -437,6 +443,18 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
+        private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmWareHouseMaster frm = new FrmWareHouseMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                WareHouse item = frm.SelectedItem as WareHouse;
+                txtWareHouse.Text = item.Name;
+                txtWareHouse.Tag = item;
+            }
+        }
+
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
@@ -533,30 +551,35 @@ namespace LJH.Inventory.UI.Forms
             this.btnOk.PerformClick();
         }
 
-        private void btnPay_Click(object sender, EventArgs e)
-        {
-            //if (txtCustomer.Tag != null)
-            //{
-            //    DeliverySheet sheet = UpdatingItem as DeliverySheet;
-
-            //    FrmReceivablesPaid frm = new FrmReceivablesPaid();
-            //    frm.Customer = txtCustomer.Tag as Customer;
-            //    frm.ReceivableID = sheet.ID;
-            //    frm.MaxAmount = sheet.Receivables;
-            //    if (frm.ShowDialog() == DialogResult.OK)
-            //    {
-            //        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(sheet.ID).QueryObject;
-            //        this.UpdatingItem = sheet1;
-            //        ItemShowing();
-            //        ShowButtonState();
-            //        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-            //    }
-            //}
-        }
-
         private void btnApprove_Click(object sender, EventArgs e)
         {
-
+            if (UpdatingItem != null)
+            {
+                try
+                {
+                    if (MessageBox.Show("是否要审核此送货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        DeliverySheet sheet = UpdatingItem as DeliverySheet;
+                        CommandResult ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
+                        if (ret.Result == ResultCode.Successful)
+                        {
+                            DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                            this.UpdatingItem = sheet1;
+                            ItemShowing();
+                            ShowButtonState();
+                            this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
+                        }
+                        else
+                        {
+                            MessageBox.Show(ret.Message, "失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -590,7 +613,27 @@ namespace LJH.Inventory.UI.Forms
 
         private void btnShip_Click(object sender, EventArgs e)
         {
+            if (UpdatingItem != null)
+            {
+                if (MessageBox.Show("是否要发货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    DeliverySheet sheet = UpdatingItem as DeliverySheet;
+                    CommandResult ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Delivery(sheet.ID, Operator.Current.Name);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                        this.UpdatingItem = sheet1;
+                        ItemShowing();
+                        ShowButtonState();
+                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
+                }
+            }
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
@@ -656,42 +699,5 @@ namespace LJH.Inventory.UI.Forms
             //}
         }
         #endregion
-
-        private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmWareHouseMaster frm = new FrmWareHouseMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                WareHouse item = frm.SelectedItem as WareHouse;
-                txtWareHouse.Text = item.Name;
-                txtWareHouse.Tag = item;
-            }
-        }
-
-        private void btnShip_Click_1(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要发货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                    CommandResult ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Delivery(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                }
-            }
-        }
     }
 }

@@ -24,8 +24,8 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             btnAll.BackColor = SystemColors.ControlDark;
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
-            dataGridView1.Columns["colAmount"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
+            Operator opt = Operator.Current;
+            dataGridView1.Columns["colAmount"].Visible = Operator.Current.Permit(Permission.ReadPrice);
         }
 
         protected override FrmDetailBase GetDetailForm()

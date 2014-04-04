@@ -61,7 +61,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditWareHouse);
             menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditWareHouse);
         }

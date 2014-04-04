@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Controls
         [Browsable(false)]
         [Localizable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public RoleInfo Role
+        public Role Role
         {
             get
             {
@@ -45,15 +45,15 @@ namespace LJH.Inventory.UI.Controls
                 }
                 else
                 {
-                    return ((RoleInfo)this.Items[SelectedIndex]);
+                    return ((Role)this.Items[SelectedIndex]);
                 }
             }
             set
             {
                 for (int i=0 ;i<this.Items.Count ;i++)
                 {
-                    RoleInfo info = (RoleInfo)this.Items[i];
-                    if (info.RoleID == value.RoleID)
+                    Role info = (Role)this.Items[i];
+                    if (info.ID == value.ID)
                     {
                         this.SelectedIndex = i;
                         break;
@@ -75,16 +75,16 @@ namespace LJH.Inventory.UI.Controls
                 }
                 else
                 {
-                    RoleInfo role = (RoleInfo)this.Items[SelectedIndex];
-                    return role.RoleID;
+                    Role role = (Role)this.Items[SelectedIndex];
+                    return role.ID;
                 }
             }
             set
             {
                 for (int i = 0; i < this.Items.Count; i++)
                 {
-                    RoleInfo info = (RoleInfo)this.Items[i];
-                    if (info.RoleID == value)
+                    Role info = (Role)this.Items[i];
+                    if (info.ID == value)
                     {
                         this.SelectedIndex = i;
                         break;

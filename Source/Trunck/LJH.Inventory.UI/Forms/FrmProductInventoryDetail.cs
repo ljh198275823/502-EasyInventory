@@ -54,7 +54,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtWareHouseID.Text = WareHouse != null ? WareHouse.Name : string.Empty;
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
             this.btnOk.Enabled = opt.Permit(Permission.CreateInventory);
         }
 

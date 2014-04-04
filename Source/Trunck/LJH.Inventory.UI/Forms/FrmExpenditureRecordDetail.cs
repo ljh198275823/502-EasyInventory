@@ -88,7 +88,7 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult AddItem(object item)
         {
             ExpenditureRecordBLL bll = new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnStr);
-            return bll.Add(item as ExpenditureRecord, OperatorInfo.CurrentOperator.OperatorName);
+            return bll.Add(item as ExpenditureRecord, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
@@ -115,7 +115,7 @@ namespace LJH.Inventory.UI.Forms
                     header.ID = Guid.NewGuid();
                     header.DocumentID = item.ID;
                     header.DocumentType = item.DocumentType;
-                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
                     CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
@@ -217,7 +217,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     ExpenditureRecord item = UpdatingItem as ExpenditureRecord;
-                    CommandResult ret = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ExpenditureRecord item1 = (new ExpenditureRecordBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(item.ID).QueryObject;
@@ -251,8 +251,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                OperatorInfo item = frm.SelectedItem as OperatorInfo;
-                txtRequest.Text = item.OperatorName;
+                Operator item = frm.SelectedItem as Operator;
+                txtRequest.Text = item.Name;
             }
         }
     }

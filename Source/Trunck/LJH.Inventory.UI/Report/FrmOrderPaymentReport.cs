@@ -27,7 +27,7 @@ namespace LJH.Inventory.UI.Report
             OrderSearchCondition con = new OrderSearchCondition();
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as Customer).ID;
             if (txtFinalCustomer.Tag != null) con.FinalCustomerID = (txtFinalCustomer.Tag as Customer).ID;
-            if (txtSalesPerson.Tag != null) con.Sales = (txtSalesPerson.Tag as OperatorInfo).OperatorName;
+            if (txtSalesPerson.Tag != null) con.Sales = (txtSalesPerson.Tag as Operator).Name;
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Add);
             con.States.Add(SheetState.Approved);
@@ -93,8 +93,8 @@ namespace LJH.Inventory.UI.Report
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                OperatorInfo item = frm.SelectedItem as OperatorInfo;
-                txtSalesPerson.Text = item.OperatorName;
+                Operator item = frm.SelectedItem as Operator;
+                txtSalesPerson.Text = item.Name;
                 txtSalesPerson.Tag = item;
             }
         }

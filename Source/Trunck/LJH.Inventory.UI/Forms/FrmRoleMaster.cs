@@ -13,7 +13,7 @@ namespace LJH.Inventory.UI.Forms
 {
     public partial class FrmRoleMaster : FrmMasterBase
     {
-        private List<RoleInfo> roles;
+        private List<Role> roles;
 
         public FrmRoleMaster()
         {
@@ -29,7 +29,7 @@ namespace LJH.Inventory.UI.Forms
         protected override bool DeletingItem(object item)
         {
             RoleBLL bll = new RoleBLL(AppSettings.CurrentSetting.ConnStr);
-            RoleInfo info = (RoleInfo)item;
+            Role info = (Role)item;
             CommandResult result = bll.Delete(info);
             if (result.Result != ResultCode.Successful)
             {
@@ -52,16 +52,16 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            RoleInfo info = item as RoleInfo;
+            Role info = item as Role;
             row.Tag = item;
-            row.Cells["colRoleID"].Value = info.RoleID;
+            row.Cells["colRoleID"].Value = info.ID;
             row.Cells["colRoleName"].Value = info.Description;
         }
 
         protected override void Init()
         {
             base.Init();
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
             //menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditRole);
             //menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditRole);
         }

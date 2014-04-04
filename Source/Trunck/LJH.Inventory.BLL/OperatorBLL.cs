@@ -27,12 +27,12 @@ namespace LJH.Inventory.BLL
         /// </summary>
         public bool Authentication(string logName, string pwd)
         {
-            OperatorInfo info = GetByID(logName).QueryObject;
+            Operator info = GetByID(logName).QueryObject;
             if (info != null)
             {
-                if (info.OperatorID == logName && info.Password == pwd)
+                if (info.ID == logName && info.Password == pwd)
                 {
-                    OperatorInfo.CurrentOperator = info;
+                    Operator.Current = info;
                     return true;
                 }
                 else
@@ -50,7 +50,7 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="optID"></param>
         /// <returns></returns>
-        public QueryResult<OperatorInfo> GetByID(string optID)
+        public QueryResult<Operator> GetByID(string optID)
         {
             return provider.GetByID(optID);
         }
@@ -59,7 +59,7 @@ namespace LJH.Inventory.BLL
         /// 获取所有操作员
         /// </summary>
         /// <returns></returns>
-        public QueryResultList<OperatorInfo> GetAllOperators()
+        public QueryResultList<Operator> GetAllOperators()
         {
             return provider.GetItems(null);
         }
@@ -69,9 +69,9 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult Insert(OperatorInfo info)
+        public CommandResult Insert(Operator info)
         {
-            RoleInfo role = info.Role;
+            Role role = info.Role;
             info.Role = null;
             CommandResult ret = provider.Insert(info);
             info.Role = role;
@@ -82,16 +82,16 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="newVal"></param>
         /// <returns></returns>
-        public CommandResult Update(OperatorInfo newVal)
+        public CommandResult Update(Operator newVal)
         {
-            OperatorInfo original = GetByID(newVal.OperatorID).QueryObject;
+            Operator original = GetByID(newVal.ID).QueryObject;
             if (original != null)
             {
                 return provider.Update(newVal, original);
             }
             else
             {
-                throw new InvalidOperationException(string.Format("数据库中不存在操作员\"{0}\",可能被其它人员删除!", newVal.OperatorID));
+                throw new InvalidOperationException(string.Format("数据库中不存在操作员\"{0}\",可能被其它人员删除!", newVal.ID));
             }
         }
         /// <summary>
@@ -100,11 +100,11 @@ namespace LJH.Inventory.BLL
         /// <param name="info"></param>
         /// <returns></returns>
         /// <exception cref=" "></exception>
-        public CommandResult Delete(OperatorInfo info)
+        public CommandResult Delete(Operator info)
         {
             if (!info.CanDelete)
             {
-                throw new InvalidOperationException(string.Format("操作员\"{0}\"是系统默认的操作员,不能被删除!", info.OperatorID));
+                throw new InvalidOperationException(string.Format("操作员\"{0}\"是系统默认的操作员,不能被删除!", info.ID));
             }
             return provider.Delete(info);
         }

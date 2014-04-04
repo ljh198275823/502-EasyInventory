@@ -7,12 +7,12 @@ using System.Runtime.Serialization;
 namespace LJH.Inventory.BusinessModel
 {
     [Serializable()]
-    public class RoleInfo
+    public class Role
     {
         //系统预定义的三种角色
         private readonly string Admin = "系统管理员"; //系统管理员
 
-        public string RoleID { get; set; }
+        public string ID { get; set; }
 
         public string Description { get; set; }
 
@@ -72,7 +72,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return RoleID.ToUpper() != Admin;
+                return ID.ToUpper() != Admin;
             }
         }
 
@@ -83,7 +83,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return RoleID.ToUpper() != Admin;
+                return ID.ToUpper() != Admin;
             }
         }
         /// <summary>
@@ -91,7 +91,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public bool IsAdmin
         {
-            get { return RoleID.ToUpper() == Admin; }
+            get { return ID.ToUpper() == Admin; }
         }
     }
 }

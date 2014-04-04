@@ -11,15 +11,15 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 代表系统操作员
     /// </summary>
-    public class OperatorInfo
+    public class Operator
     {
         #region 静态变量及方法
         private static LJH.GeneralLibrary.SoftDog.DSEncrypt DES = new DSEncrypt();
-        private static OperatorInfo currentOperator;
+        private static Operator currentOperator;
         /// <summary>
         /// 获取或设置当前的操作员
         /// </summary>
-        public static OperatorInfo CurrentOperator
+        public static Operator Current
         {
             get { return currentOperator; }
             set { currentOperator = value; }
@@ -27,7 +27,7 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 构造函数
-        public OperatorInfo()
+        public Operator()
         {
 
         }
@@ -41,11 +41,11 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 操作员登录名
         /// </summary>
-        public string OperatorID { get; set; }
+        public string ID { get; set; }
         /// <summary>
         /// 操作员名
         /// </summary>
-        public string OperatorName { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// 操作员登录密码
         /// </summary>
@@ -80,7 +80,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string RoleID { get; set; }
 
-        public RoleInfo Role { get; set; }
+        public Role Role { get; set; }
         #endregion
 
         #region 只读属性
@@ -91,7 +91,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return (OperatorID.ToUpper() != "ADMIN");
+                return (ID.ToUpper() != "ADMIN");
             }
         }
 
@@ -99,7 +99,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return (OperatorID.ToUpper() != "ADMIN");
+                return (ID.ToUpper() != "ADMIN");
             }
         }
         #endregion

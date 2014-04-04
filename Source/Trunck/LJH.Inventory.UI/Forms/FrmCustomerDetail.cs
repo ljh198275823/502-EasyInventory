@@ -48,7 +48,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
             this.btnOk.Enabled = opt.Permit(Permission.EditCustomer);
         }
 
@@ -96,7 +96,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 info = new Customer();
                 info.ClassID = CustomerClass.Customer;
-                info.Creater = OperatorInfo.CurrentOperator.OperatorName;
+                info.Creater = Operator.Current.Name;
             }
             else
             {

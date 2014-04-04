@@ -38,34 +38,34 @@ namespace LJH.Inventory.UI.Forms
             {
                 this.Text = "增加角色";
             }
-            RoleInfo role = OperatorInfo.CurrentOperator.Role;
+            Role role = Operator.Current.Role;
             this.btnOk.Enabled = role.Permit(Permission.EditRole);
         }
 
         protected override void ItemShowing()
         {
-            RoleInfo info = (RoleInfo)UpdatingItem;
-            this.txtRoleID.Text = info.RoleID;
+            Role info = (Role)UpdatingItem;
+            this.txtRoleID.Text = info.ID;
             this.txtRoleID.Enabled = false;
             this.txtRoleID.BackColor = Color.White;
             this.txtDescription.Text = info.Description;
             this.functionTree1.SelectedRights = info.Permission;
             if (info.IsAdmin) this.functionTree1.Enabled = false;
-            this.Text ="角色 "+ info.RoleID + " 的信息";
+            this.Text ="角色 "+ info.ID + " 的信息";
         }
 
         protected override object GetItemFromInput()
         {
-            RoleInfo info;
+            Role info;
             if (UpdatingItem == null)
             {
-                info = new RoleInfo();
+                info = new Role();
             }
             else
             {
-                info = UpdatingItem as RoleInfo;
+                info = UpdatingItem as Role;
             }
-            info.RoleID = this.txtRoleID.Text.Trim();
+            info.ID = this.txtRoleID.Text.Trim();
             info.Description = this.txtDescription.Text.Trim();
             info.Permission = this.functionTree1.SelectedRights;
             return info;
@@ -73,12 +73,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult  AddItem(object item)
         {
-            return bll.Insert((RoleInfo)item);
+            return bll.Insert((Role)item);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return bll.Update(item as RoleInfo);
+            return bll.Update(item as Role);
         }
         #endregion
     }

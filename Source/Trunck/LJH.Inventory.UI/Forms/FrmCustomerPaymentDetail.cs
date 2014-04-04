@@ -130,13 +130,13 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult AddItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr);
-            return bll.Add(item as CustomerPayment, OperatorInfo.CurrentOperator.OperatorName);
+            return bll.Add(item as CustomerPayment, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr);
-            return bll.Update(item as CustomerPayment, OperatorInfo.CurrentOperator.OperatorName);
+            return bll.Update(item as CustomerPayment, Operator.Current.Name);
         }
 
         protected override void ShowButtonState()
@@ -157,7 +157,7 @@ namespace LJH.Inventory.UI.Forms
                     header.ID = Guid.NewGuid();
                     header.DocumentID = item.ID;
                     header.DocumentType = item.DocumentType;
-                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
                     CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
@@ -304,7 +304,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     CustomerPayment item = UpdatingItem as CustomerPayment;
-                    CommandResult ret = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
                         CustomerPayment item1 = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(item.ID).QueryObject;

@@ -142,9 +142,9 @@
     <Compile Include="SearchCondition\DeliverySheetSearchCondition.cs" />
     <Compile Include="SearchCondition\ProductInventorySearchCondition.cs" />
     <Compile Include="SearchCondition\ProductSearchCondition.cs" />
-    <Compile Include="OperatorInfo.cs" />
+    <Compile Include="Operator.cs" />
     <Compile Include="Permissions.cs" />
-    <Compile Include="RoleInfo.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="DeliveryRecord.cs" />
     <Compile Include="SearchCondition\SheetSearchCondition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

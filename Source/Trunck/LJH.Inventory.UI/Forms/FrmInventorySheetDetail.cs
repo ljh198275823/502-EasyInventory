@@ -109,9 +109,9 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             ShowButtonState();
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
-            ItemsGrid.Columns["colPrice"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
-            ItemsGrid.Columns["colTotal"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
+            Operator opt = Operator.Current;
+            ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
+            ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
@@ -181,12 +181,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as InventorySheet,OperatorInfo .CurrentOperator .OperatorName );
+            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as InventorySheet,Operator .Current .Name );
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as InventorySheet,OperatorInfo .CurrentOperator .OperatorName);
+            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as InventorySheet,Operator .Current .Name);
         }
 
         protected override void ShowButtonState()
@@ -222,7 +222,7 @@ namespace LJH.Inventory.UI.Forms
                     header.ID = Guid.NewGuid();
                     header.DocumentID = item.ID;
                     header.DocumentType = item.DocumentType;
-                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
                     CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
@@ -472,7 +472,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要审核此收货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     InventorySheet sheet = UpdatingItem as InventorySheet;
-                    CommandResult ret = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Approve(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
                         InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
@@ -496,7 +496,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要将此收货单收货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     InventorySheet sheet = UpdatingItem as InventorySheet;
-                    CommandResult ret = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Inventory(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Inventory(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
                         InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;

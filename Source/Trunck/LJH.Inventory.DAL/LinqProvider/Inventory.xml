@@ -340,20 +340,20 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.Operator" Member="LJH.Inventory.BusinessModel.OperatorInfo">
-    <Type Name="LJH.Inventory.BusinessModel.OperatorInfo">
-      <Column Name="OperatorID" Member="OperatorID" DbType="nVarChar(50) NOT NULL" CanBeNull="false" IsPrimaryKey="true" />
-      <Column Name="OperatorName" Member="OperatorName"  DbType="nvarchar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
-      <Column Name="OperatorPwd" Member="_Password"  DbType="nVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
+  <Table Name="dbo.Operator" Member="LJH.Inventory.BusinessModel.Operator">
+    <Type Name="LJH.Inventory.BusinessModel.Operator">
+      <Column Name="ID" Member="ID" DbType="nVarChar(50) NOT NULL" CanBeNull="false" IsPrimaryKey="true" />
+      <Column Name="Name" Member="Name"  DbType="nvarchar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
+      <Column Name="Password" Member="_Password"  DbType="nVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
       <Column Name="RoleID" Member="RoleID" DbType="nvarchar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
       <Column Name="Department" Member="Department" DbType="nVarChar(50)" CanBeNull="false" UpdateCheck="Never"/>
       <Column Name="Post" Member="Post" DbType="nvarchar(50)" CanBeNull="false" UpdateCheck="Never"/>
-      <Association Name="FK_Operator_Role" Member="Role"  ThisKey="RoleID" OtherKey="RoleID" IsForeignKey="false"/>
+      <Association Name="FK_Operator_Role" Member="Role"  ThisKey="RoleID" OtherKey="ID" IsForeignKey="false"/>
     </Type>
   </Table>
-  <Table Name="dbo.Role" Member="LJH.Inventory.BusinessModel.RoleInfo">
-    <Type Name="LJH.Inventory.BusinessModel.RoleInfo">
-      <Column Name="RoleID" Member="RoleID"  DbType="nvarchar(50) NOT NULL" CanBeNull="false" IsPrimaryKey="true" />
+  <Table Name="dbo.Role" Member="LJH.Inventory.BusinessModel.Role">
+    <Type Name="LJH.Inventory.BusinessModel.Role">
+      <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" CanBeNull="false" IsPrimaryKey="true" />
       <Column Name="Description" Member="Description"  DbType="nVarChar(200)" UpdateCheck="Never"/>
       <Column Name="Permission" Member="Permission"  DbType="nVarChar(200)" UpdateCheck="Never"/>
     </Type>

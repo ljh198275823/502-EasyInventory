@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             this.btnAll.BackColor = SystemColors.ControlDark;
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -100,7 +100,7 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     CustomerOtherReceivable item = dataGridView1.SelectedRows[0].Tag as CustomerOtherReceivable;
-                    CommandResult ret = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, OperatorInfo.CurrentOperator.OperatorName);
+                    CommandResult ret = (new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], item);

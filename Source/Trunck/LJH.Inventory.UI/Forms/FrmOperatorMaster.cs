@@ -13,7 +13,7 @@ namespace LJH.Inventory.UI.Forms
 {
     public partial class FrmOperatorMaster:FrmMasterBase
     {
-        private List<OperatorInfo> operators;
+        private List<Operator> operators;
         private OperatorBLL bll = new OperatorBLL(AppSettings .CurrentSetting .ConnStr );
 
         public FrmOperatorMaster()
@@ -40,18 +40,18 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row,object item)
         {
-            OperatorInfo info = item as OperatorInfo;
+            Operator info = item as Operator;
             row.Tag = info;
-            row.Cells["colOperatorID"].Value  = info.OperatorID;
-            row.Cells["colOperatorName"].Value = info.OperatorName;
-            row.Cells["colRoleID"] .Value = info.Role.RoleID;
+            row.Cells["colOperatorID"].Value  = info.ID;
+            row.Cells["colOperatorName"].Value = info.Name;
+            row.Cells["colRoleID"] .Value = info.Role.ID;
             row.Cells["colDepartment"].Value = info.Department;
             row.Cells["colPost"].Value = info.Post;
         }
 
         protected override bool DeletingItem(object item)
         {
-            OperatorInfo info = (OperatorInfo)item;
+            Operator info = (Operator)item;
             CommandResult ret = bll.Delete(info);
             if (ret.Result != ResultCode.Successful)
             {
@@ -63,7 +63,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditOperator);
             menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditOperator);
         }

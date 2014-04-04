@@ -87,7 +87,7 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult AddItem(object item)
         {
             CustomerOtherReceivableBLL bll = new CustomerOtherReceivableBLL(AppSettings.CurrentSetting.ConnStr);
-            return bll.Add(item as CustomerOtherReceivable, OperatorInfo.CurrentOperator.OperatorName);
+            return bll.Add(item as CustomerOtherReceivable, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
@@ -114,7 +114,7 @@ namespace LJH.Inventory.UI.Forms
                     header.ID = Guid.NewGuid();
                     header.DocumentID = item.ID;
                     header.DocumentType = item.DocumentType;
-                    header.Owner = OperatorInfo.CurrentOperator.OperatorName;
+                    header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
                     CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);

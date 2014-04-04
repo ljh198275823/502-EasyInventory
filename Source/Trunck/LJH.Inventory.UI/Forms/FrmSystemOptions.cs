@@ -124,7 +124,7 @@ namespace LJH.Inventory.UI.Forms
         {
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.CurrentSetting.ConnStr);
             ShowSetting(UserSettings.Current);
-            btnOk.Enabled = OperatorInfo.CurrentOperator.Permit(Permission.EditSystemOptions);
+            btnOk.Enabled = Operator.Current.Permit(Permission.EditSystemOptions);
         }
 
         private void btnOk_Click(object sender, EventArgs e)

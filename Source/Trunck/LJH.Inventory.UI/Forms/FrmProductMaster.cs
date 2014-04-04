@@ -102,9 +102,9 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             InitCategoryTree();
-            this.mnu_AddCategory.Enabled = OperatorInfo.CurrentOperator.Permit(Permission.EditProductCategory);
-            this.mnu_DeleteCategory.Enabled = OperatorInfo.CurrentOperator.Permit(Permission.EditProductCategory);
-            this.mnu_CategoryProperty.Enabled = OperatorInfo.CurrentOperator.Permit(Permission.EditProductCategory) || OperatorInfo.CurrentOperator.Permit(Permission.ReadProductCategory);
+            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.EditProductCategory);
+            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.EditProductCategory);
+            this.mnu_CategoryProperty.Enabled = Operator.Current.Permit(Permission.EditProductCategory) || Operator.Current.Permit(Permission.ReadProductCategory);
             base.Init();
         }
 

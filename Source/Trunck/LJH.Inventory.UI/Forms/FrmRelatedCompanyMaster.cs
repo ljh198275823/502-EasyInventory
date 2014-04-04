@@ -104,7 +104,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             InitCategoryTree();
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditCustomer);
             menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditCustomer);
         }

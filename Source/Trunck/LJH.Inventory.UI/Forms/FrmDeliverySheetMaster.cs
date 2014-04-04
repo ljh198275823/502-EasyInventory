@@ -32,8 +32,8 @@ namespace LJH.Inventory.UI.Forms
             base.Init();
             btnAll.BackColor = SystemColors.ControlDark;
 
-            menu.Items["btn_Add"].Enabled = OperatorInfo.CurrentOperator.Permit(Permission.EditDeliverySheet);
-            dataGridView1.Columns["colAmount"].Visible = OperatorInfo.CurrentOperator.Permit(Permission.ReadPrice);
+            menu.Items["btn_Add"].Enabled = Operator.Current.Permit(Permission.EditDeliverySheet);
+            dataGridView1.Columns["colAmount"].Visible = Operator.Current.Permit(Permission.ReadPrice);
         }
 
         protected override FrmDetailBase GetDetailForm()

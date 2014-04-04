@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
             btnOk.Enabled = opt.Permit(Permission.EditCustomer);
         }
 

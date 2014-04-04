@@ -81,7 +81,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 Customer c = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(p.Company).QueryObject;
                 txtCompany.Tag = c;
-                txtCompany.Text = c != null ? c.Name : string.Empty;
+                txtCompany.Text = c != null ? c.ID : string.Empty;
             }
             if (!string.IsNullOrEmpty(p.InternalID))
             {

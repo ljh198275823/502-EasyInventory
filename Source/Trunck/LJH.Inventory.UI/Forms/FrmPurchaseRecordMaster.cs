@@ -24,7 +24,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             btnAll.BackColor = SystemColors.ControlDark;
-            OperatorInfo opt = OperatorInfo.CurrentOperator;
+            Operator opt = Operator.Current;
         }
 
         protected override FrmDetailBase GetDetailForm()

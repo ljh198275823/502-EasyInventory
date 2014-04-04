@@ -70,7 +70,7 @@ namespace InventoryApplication
             if (ret == DialogResult.OK)
             {
                 ShowOperatorRights();
-                this.lblOperator.Text = OperatorInfo.CurrentOperator.OperatorName;
+                this.lblOperator.Text = Operator.Current.Name;
             }
             else
             {
@@ -80,7 +80,7 @@ namespace InventoryApplication
 
         private void ShowOperatorRights()
         {
-            OperatorInfo cur = OperatorInfo.CurrentOperator;
+            Operator cur = Operator.Current;
             this.mnu_Product.Enabled = cur.Permit(Permission.ReadProduct) || cur.Permit(Permission.EditProduct);
             this.mnu_Customer.Enabled = cur.Permit(Permission.ReadCustomer) || cur.Permit(Permission.EditCustomer);
             this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.ReadDeliverySheet) || cur.Permit(Permission.EditDeliverySheet);
@@ -208,7 +208,7 @@ namespace InventoryApplication
         private void mnu_ChangePwd_Click(object sender, EventArgs e)
         {
             FrmChangePwd frm = new FrmChangePwd();
-            frm.Operator = LJH.Inventory.BusinessModel.OperatorInfo.CurrentOperator;
+            frm.Operator = LJH.Inventory.BusinessModel.Operator.Current;
             frm.ShowDialog();
         }
 
