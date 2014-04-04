@@ -86,7 +86,7 @@ namespace LJH.Inventory.UI.ExcelExporter
             //r.Value2 = deliverySheet.DeliveryDate != null ? deliverySheet.DeliveryDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
 
             r = sheet.get_Range("B" + 3, Type.Missing);
-            r.Value2 = deliverySheet.Customer;
+            r.Value2 = deliverySheet.Customer.Name;
             r = sheet.get_Range("D" + 3, Type.Missing);
             r.Value2 = deliverySheet.Linker;
             r = sheet.get_Range("G" + 3, Type.Missing);

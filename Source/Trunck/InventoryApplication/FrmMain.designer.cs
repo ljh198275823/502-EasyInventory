@@ -247,7 +247,6 @@
             this.财务ToolStripMenuItem.Name = "财务ToolStripMenuItem";
             this.财务ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.财务ToolStripMenuItem.Text = "财务";
-            this.财务ToolStripMenuItem.Visible = false;
             // 
             // mnu_CustomerPayment
             // 
@@ -311,40 +310,40 @@
             // mnu_Product
             // 
             this.mnu_Product.Name = "mnu_Product";
-            this.mnu_Product.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Product.Size = new System.Drawing.Size(148, 22);
             this.mnu_Product.Text = "商品资料";
             this.mnu_Product.Click += new System.EventHandler(this.mnu_Product_Click);
             // 
             // mnu_Unit
             // 
             this.mnu_Unit.Name = "mnu_Unit";
-            this.mnu_Unit.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Unit.Size = new System.Drawing.Size(148, 22);
             this.mnu_Unit.Text = "计量单位";
             this.mnu_Unit.Click += new System.EventHandler(this.mnu_Unit_Click);
             // 
             // mnu_CurrencyType
             // 
             this.mnu_CurrencyType.Name = "mnu_CurrencyType";
-            this.mnu_CurrencyType.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CurrencyType.Size = new System.Drawing.Size(148, 22);
             this.mnu_CurrencyType.Text = "货币种类";
             this.mnu_CurrencyType.Click += new System.EventHandler(this.mnu_CurrencyType_Click);
             // 
             // mnu_Transport
             // 
             this.mnu_Transport.Name = "mnu_Transport";
-            this.mnu_Transport.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Transport.Size = new System.Drawing.Size(148, 22);
             this.mnu_Transport.Text = "运输方式";
             this.mnu_Transport.Click += new System.EventHandler(this.mnu_Transport_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(145, 6);
             // 
             // mnu_RelatedCompany
             // 
             this.mnu_RelatedCompany.Name = "mnu_RelatedCompany";
-            this.mnu_RelatedCompany.Size = new System.Drawing.Size(152, 22);
+            this.mnu_RelatedCompany.Size = new System.Drawing.Size(148, 22);
             this.mnu_RelatedCompany.Text = "相关公司资料";
             this.mnu_RelatedCompany.Click += new System.EventHandler(this.mnu_RelatedCompany_Click);
             // 

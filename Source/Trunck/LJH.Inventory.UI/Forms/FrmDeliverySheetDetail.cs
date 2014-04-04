@@ -617,21 +617,27 @@ namespace LJH.Inventory.UI.Forms
             {
                 if (MessageBox.Show("是否要发货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
-                    DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                    CommandResult ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Delivery(sheet.ID, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
+                    try
                     {
-                        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
+                        DeliverySheet sheet = UpdatingItem as DeliverySheet;
+                        CommandResult ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).Delivery(sheet.ID, Operator.Current.Name);
+                        if (ret.Result == ResultCode.Successful)
+                        {
+                            DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                            this.UpdatingItem = sheet1;
+                            ItemShowing();
+                            ShowButtonState();
+                            this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
+                        }
+                        else
+                        {
+                            MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
             }
         }
