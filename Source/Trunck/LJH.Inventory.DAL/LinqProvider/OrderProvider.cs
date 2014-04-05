@@ -23,7 +23,6 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             DataLoadOptions opt = new DataLoadOptions();
             opt.LoadWith<Order>(order => order.Customer);
-            opt.LoadWith<Order>(order => order.FinalCustomer);
             opt.LoadWith<Order>(order => order.Items);
             opt.LoadWith<OrderItem>(oi => oi.Product);
             opt.LoadWith<Product>(p => p.Category);
@@ -36,7 +35,6 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             DataLoadOptions opt = new DataLoadOptions();
             opt.LoadWith<Order>(order => order.Customer);
-            opt.LoadWith<Order>(order => order.FinalCustomer);
             opt.LoadWith<Order>(order => order.Items);
             opt.LoadWith<OrderItem>(oi => oi.Product);
             opt.LoadWith<Product>(p => p.Category);
@@ -46,7 +44,6 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 OrderSearchCondition con = search as OrderSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
-                if (!string.IsNullOrEmpty(con.FinalCustomerID)) ret = ret.Where(item => item.FinalCustomerID == con.FinalCustomerID);
                 if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
                 if (!string.IsNullOrEmpty(con.Sales)) ret = ret.Where(item => item.SalesPerson.Contains(con.Sales));
@@ -63,15 +60,15 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
             }
             List<Order> orders = ret.ToList();
-            if (search is OrderSearchCondition && orders != null && orders.Count > 0)
-            {
-                OrderSearchCondition con = search as OrderSearchCondition;
-                if (con.HasNotPaid != null)
-                {
-                    if (con.HasNotPaid.Value) orders = orders.Where(item => (item.CalAmount() - item.HasPaid) > 0).ToList();
-                    else orders = orders.Where(item => (item.CalAmount() - item.HasPaid) <= 0).ToList();
-                }
-            }
+            //if (search is OrderSearchCondition && orders != null && orders.Count > 0)
+            //{
+            //    OrderSearchCondition con = search as OrderSearchCondition;
+            //    if (con.HasNotPaid != null)
+            //    {
+            //        if (con.HasNotPaid.Value) orders = orders.Where(item => (item.CalAmount() - item.HasPaid) > 0).ToList();
+            //        else orders = orders.Where(item => (item.CalAmount() - item.HasPaid) <= 0).ToList();
+            //    }
+            //}
             return orders;
         }
 

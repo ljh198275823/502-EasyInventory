@@ -20,6 +20,30 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 私有变量
+        private List<Order> _Orders = null;
+        #endregion
+
+        #region 私有方法
+        private void SelectNode(TreeNode node)
+        {
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
+        }
+
+        private List<object> GetSelectedNodeItems()
+        {
+            List<Order> items = _Orders;
+            CompanyInfo pc = null;
+            if (this.customerTree1.SelectedNode != null) pc = this.customerTree1.SelectedNode.Tag as CompanyInfo;
+            if (pc != null) items = _Orders.Where(it => it.CustomerID == pc.ID).ToList();
+
+            return (from p in items
+                    orderby p.OrderDate descending
+                    select (object)p).ToList();
+        }
+        #endregion
+
         #region 重写基类方法和处理事件
         protected override void Init()
         {
@@ -37,15 +61,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<Order> items = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
-            List<Order> temp = new List<Order>();
-            List<object> records = null;
-            temp.AddRange(items);
-
-            records = (from o in temp
-                       where o.State == SheetState.Canceled
-                       select (object)o).ToList();
-            return records;
+            _Orders = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            return GetSelectedNodeItems();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -54,14 +71,14 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colID"].Value = order.ID;
             row.Cells["colOrderDate"].Value = order.OrderDate;
             row.Cells["colCustomer"].Value = order.Customer.Name;
-            row.Cells["colFinalCustomer"].Value = order.FinalCustomer != null ? order.FinalCustomer.Name : string.Empty;
             row.Cells["colSales"].Value = order.SalesPerson;
             row.Cells["colDeliveryDate"].Value = order.DemandDate;
             row.Cells["colWithTax"].Value = order.WithTax;
             row.Cells["colAmount"].Value = order.CalAmount().Trim();
-            row.Cells["colReceivable"].Value = order.Receivable.Trim();
-            row.Cells["colHasPaid"].Value = order.HasPaid.Trim();
-            row.Cells["colNotPaid"].Value = (order.CalAmount() - order.HasPaid).Trim();
+            row.Cells["colState"].Value = order.State;
+            //row.Cells["colReceivable"].Value = order.Receivable.Trim();
+            //row.Cells["colHasPaid"].Value = order.HasPaid.Trim();
+            //row.Cells["colNotPaid"].Value = (order.CalAmount() - order.HasPaid).Trim();
             row.Cells["colMemo"].Value = order.Memo;
             if (order.State == SheetState.Canceled)
             {
@@ -71,6 +88,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 事件处理程序
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
@@ -83,5 +101,11 @@ namespace LJH.Inventory.UI.Forms
                 frm.ShowDialog();
             }
         }
+
+        private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            SelectNode(e.Node);
+        }
+        #endregion
     }
 }

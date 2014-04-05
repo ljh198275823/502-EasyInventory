@@ -195,31 +195,19 @@
       <Association Name="FK_Sheet_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID" IsForeignKey="false" />
     </Type>
   </Table>
-  <Table Name="dbo.View_Order" Member="LJH.Inventory.BusinessModel.Order">
+  <Table Name="dbo.Order" Member="LJH.Inventory.BusinessModel.Order">
     <Type Name="LJH.Inventory.BusinessModel.Order">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="FinalCustomerID" Member="FinalCustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax"  DbType="bit not null" UpdateCheck="Never"/>
-      <Column Name="PriceTerm" Member="PriceTerm"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="CollectionType" Member="CollectionType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="CurrencyType" Member="CurrencyType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Symbol" Member="Symbol" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="ExchangeRate" Member="ExchangeRate" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="Transport" Member="Transport"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="LoadPort" Member="LoadPort"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="DestinationPort" Member="DestinationPort"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="CanBatch" Member="CanBatch"  DbType="bit not null" UpdateCheck="Never"/>
-      <Column Name="CanRelay" Member="CanRelay"  DbType="bit not null" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="Receivable" Member="Receivable"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="HasPaid" Member="HasPaid"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="SalesPerson" Member="SalesPerson"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Transport" Member="Transport"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Order_Customer" Member="Customer"  ThisKey="CustomerID" OtherKey="ID"/>
-      <Association Name="FK_Order_FinalCustomer" Member="FinalCustomer"  ThisKey="FinalCustomerID" OtherKey="ID"/>
       <Association Name="FK_Order_OrderItem" Member="Items"  ThisKey="ID" OtherKey="OrderID"/>
     </Type>
   </Table>
@@ -227,21 +215,12 @@
     <Type Name="LJH.Inventory.DAL.LinqProvider.T_Order">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="FinalCustomerID" Member="FinalCustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax"  DbType="bit not null" UpdateCheck="Never"/>
-      <Column Name="PriceTerm" Member="PriceTerm"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="CollectionType" Member="CollectionType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="CurrencyType" Member="CurrencyType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Symbol" Member="Symbol" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="ExchangeRate" Member="ExchangeRate" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="Transport" Member="Transport"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="LoadPort" Member="LoadPort"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="DestinationPort" Member="DestinationPort"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="CanBatch" Member="CanBatch"  DbType="bit not null" UpdateCheck="Never"/>
-      <Column Name="CanRelay" Member="CanRelay"  DbType="bit not null" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="SalesPerson" Member="SalesPerson"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Transport" Member="Transport"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>

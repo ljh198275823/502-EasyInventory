@@ -45,12 +45,12 @@ namespace LJH.Inventory.UI.Report
             row.Cells["colOrderDate"].Value = item.OrderDate .ToLongDateString ();
             row.Cells["colOrderID"].Value = item.ID;
             row.Cells["colCustomer"].Value =item.Customer !=null ?item.Customer.Name:string.Empty ;
-            row.Cells["colFinalCustomer"].Value = item.FinalCustomer != null ? item.FinalCustomer.Name : string.Empty;
-            row.Cells["colCurrencyType"].Value = item.CurrencyType;
-            row.Cells["colAmount"].Value = item.CalAmount().Trim();
-            row.Cells["colShipped"].Value = item.Receivable.Trim();
-            row.Cells["colHasPaid"].Value = item.HasPaid.Trim();
-            row.Cells["colNotPaid"].Value = item.NotPaid.Trim();
+            //row.Cells["colFinalCustomer"].Value = item.FinalCustomer != null ? item.FinalCustomer.Name : string.Empty;
+            //row.Cells["colCurrencyType"].Value = item.CurrencyType;
+            //row.Cells["colAmount"].Value = item.CalAmount().Trim();
+            //row.Cells["colShipped"].Value = item.Receivable.Trim();
+            //row.Cells["colHasPaid"].Value = item.HasPaid.Trim();
+            //row.Cells["colNotPaid"].Value = item.NotPaid.Trim();
             row.Cells["colSalesPerson"].Value = item.SalesPerson;
         }
         #endregion

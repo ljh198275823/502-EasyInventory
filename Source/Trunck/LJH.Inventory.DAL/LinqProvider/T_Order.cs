@@ -17,22 +17,11 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             this.ID = order.ID;
             this.CustomerID = order.CustomerID;
-            this.FinalCustomerID = order.FinalCustomerID;
             this.OrderDate = order.OrderDate;
             this.DemandDate = order.DemandDate;
-            this.CurrencyType = order.CurrencyType;
-            this.Symbol = order.Symbol;
-            this.ExchangeRate = order.ExchangeRate;
-            this.CollectionType = order.CollectionType;
-            this.PriceTerm = order.PriceTerm;
             this.Transport = order.Transport;
-            this.LoadPort = order.LoadPort;
-            this.DestinationPort = order.DestinationPort;
             this.SalesPerson = order.SalesPerson;
             this.WithTax = order.WithTax;
-            this.CanBatch = order.CanBatch;
-            this.CanRelay = order.CanRelay;
-            this.Mark = order.Mark;
             this.State = order.State;
             this.Memo = order.Memo;
         }

@@ -264,7 +264,7 @@ namespace LJH.Inventory.UI.Forms
                 assign.PaymentID = UpdatingItem != null ? (UpdatingItem as CustomerPayment).ID : string.Empty;
                 assign.ReceivableID = order.ID;
                 decimal amount = txtAmount.DecimalValue - items.Sum(item => item.Amount);
-                assign.Amount = amount >= order.NotPaid ? order.NotPaid : amount;
+                //assign.Amount = amount >= order.NotPaid ? order.NotPaid : amount;
                 items.Add(assign);
                 ShowAssigns(items);
             }

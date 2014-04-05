@@ -44,17 +44,16 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinalCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colHasPaid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
@@ -167,17 +166,16 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
-            this.colOrderDate,
             this.colCustomer,
-            this.colFinalCustomer,
-            this.colSales,
+            this.colOrderDate,
             this.colDeliveryDate,
-            this.colShipDate,
+            this.colSales,
             this.colWithTax,
             this.colAmount,
             this.colReceivable,
             this.colHasPaid,
             this.colNotPaid,
+            this.colState,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -197,6 +195,13 @@
             this.colID.ReadOnly = true;
             this.colID.Width = 80;
             // 
+            // colCustomer
+            // 
+            this.colCustomer.HeaderText = "客户";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
+            this.colCustomer.Width = 150;
+            // 
             // colOrderDate
             // 
             dataGridViewCellStyle1.Format = "D";
@@ -206,26 +211,6 @@
             this.colOrderDate.Name = "colOrderDate";
             this.colOrderDate.ReadOnly = true;
             // 
-            // colCustomer
-            // 
-            this.colCustomer.HeaderText = "客户";
-            this.colCustomer.Name = "colCustomer";
-            this.colCustomer.ReadOnly = true;
-            this.colCustomer.Width = 150;
-            // 
-            // colFinalCustomer
-            // 
-            this.colFinalCustomer.HeaderText = "最终客户";
-            this.colFinalCustomer.Name = "colFinalCustomer";
-            this.colFinalCustomer.ReadOnly = true;
-            this.colFinalCustomer.Width = 150;
-            // 
-            // colSales
-            // 
-            this.colSales.HeaderText = "业务";
-            this.colSales.Name = "colSales";
-            this.colSales.ReadOnly = true;
-            // 
             // colDeliveryDate
             // 
             dataGridViewCellStyle2.Format = "D";
@@ -234,18 +219,17 @@
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.ReadOnly = true;
             // 
-            // colShipDate
+            // colSales
             // 
-            this.colShipDate.HeaderText = "船期";
-            this.colShipDate.Name = "colShipDate";
-            this.colShipDate.ReadOnly = true;
+            this.colSales.HeaderText = "业务";
+            this.colSales.Name = "colSales";
+            this.colSales.ReadOnly = true;
             // 
             // colWithTax
             // 
             this.colWithTax.HeaderText = "含税";
             this.colWithTax.Name = "colWithTax";
             this.colWithTax.ReadOnly = true;
-            this.colWithTax.Visible = false;
             // 
             // colAmount
             // 
@@ -254,6 +238,7 @@
             this.colAmount.HeaderText = "货款金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
+            this.colAmount.Visible = false;
             this.colAmount.Width = 80;
             // 
             // colReceivable
@@ -263,6 +248,7 @@
             this.colReceivable.ReadOnly = true;
             this.colReceivable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colReceivable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colReceivable.Visible = false;
             // 
             // colHasPaid
             // 
@@ -271,16 +257,26 @@
             this.colHasPaid.ReadOnly = true;
             this.colHasPaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colHasPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colHasPaid.Visible = false;
             // 
             // colNotPaid
             // 
             this.colNotPaid.HeaderText = "未收款";
             this.colNotPaid.Name = "colNotPaid";
             this.colNotPaid.ReadOnly = true;
+            this.colNotPaid.Visible = false;
+            // 
+            // colState
+            // 
+            this.colState.HeaderText = "状态";
+            this.colState.Name = "colState";
+            this.colState.ReadOnly = true;
             // 
             // colMemo
             // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colMemo.HeaderText = "备注";
+            this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
@@ -336,6 +332,7 @@
             this.customerTree1.Name = "customerTree1";
             this.customerTree1.Size = new System.Drawing.Size(200, 320);
             this.customerTree1.TabIndex = 0;
+            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
             // 
             // FrmOrderMaster
             // 
@@ -375,19 +372,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinalCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSales;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colShipDate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
-        private System.Windows.Forms.DataGridViewLinkColumn colHasPaid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
@@ -395,5 +379,17 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.Panel pnlLeft;
         private Controls.CustomerTree customerTree1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSales;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
+        private System.Windows.Forms.DataGridViewLinkColumn colHasPaid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

@@ -93,11 +93,6 @@ namespace LJH.Inventory.UI.Forms
                 txtCustomer.Focus();
                 return false;
             }
-            if (txtCurrencyType.Tag == null)
-            {
-                MessageBox.Show("没有选择币别");
-                return false;
-            }
             if (string.IsNullOrEmpty(txtSalesPerson.Text))
             {
                 MessageBox.Show("业务人员不能为空");
@@ -148,16 +143,8 @@ namespace LJH.Inventory.UI.Forms
                 this.txtSheetNo.Enabled = false;
                 this.txtCustomer.Text = item.Customer.Name;
                 this.txtCustomer.Tag = item.Customer;
-                this.txtFinalCustomer.Text = item.FinalCustomer != null ? item.FinalCustomer.Name : string.Empty;
-                this.txtFinalCustomer.Tag = item.FinalCustomer;
                 this.dtOrderDate.Value = item.OrderDate;
-                this.txtPriceTerm.Text = item.PriceTerm;
-                this.txtCurrencyType.Text = item.CurrencyType;
-                this.txtExchangeRate.DecimalValue = item.ExchangeRate;
-                this.txtCollectionType.Text = item.CollectionType;
                 this.txtTransport.Text = item.Transport;
-                this.txtLoadPort.Text = item.LoadPort;
-                this.txtDestinationPort.Text = item.DestinationPort;
                 this.txtSalesPerson.Text = item.SalesPerson;
                 this.dtDeliveryDate.Value = item.DemandDate;
                 ShowDeliveryItemsOnGrid(item.Items);
@@ -186,16 +173,7 @@ namespace LJH.Inventory.UI.Forms
             order.OrderDate = this.dtOrderDate.Value;
             order.CustomerID = (this.txtCustomer.Tag as CompanyInfo).ID;
             order.Customer = this.txtCustomer.Tag as CompanyInfo;
-            order.FinalCustomerID = this.txtFinalCustomer.Tag != null ? (this.txtFinalCustomer.Tag as CompanyInfo).ID : null;
-            order.FinalCustomer = this.txtFinalCustomer.Tag as CompanyInfo;
-            order.PriceTerm = this.txtPriceTerm.Text;
-            order.CurrencyType = this.txtCurrencyType.Text;
-            order.Symbol = (this.txtCurrencyType.Tag as CurrencyType).Symbol;
-            order.ExchangeRate = this.txtExchangeRate.DecimalValue;
-            order.CollectionType = this.txtCollectionType.Text;
             order.Transport = this.txtTransport.Text;
-            order.LoadPort = this.txtLoadPort.Text;
-            order.DestinationPort = this.txtDestinationPort.Text;
             order.SalesPerson = this.txtSalesPerson.Text;
             order.DemandDate = this.dtDeliveryDate.Value;
             order.Items = GetOrderItemsFromGrid();
@@ -520,64 +498,6 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void lnkEndCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmCustomerMaster frm = new FrmCustomerMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                CompanyInfo item = frm.SelectedItem as CompanyInfo;
-                txtFinalCustomer.Text = item.Name;
-                txtFinalCustomer.Tag = item;
-            }
-        }
-
-        private void lnkPriceTerm_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmPriceTermMaster frm = new FrmPriceTermMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                PriceTerm item = frm.SelectedItem as PriceTerm;
-                txtPriceTerm.Text = item.ID;
-            }
-        }
-
-        private void lnkCurrencyType_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmCurrencyTypeMaster frm = new FrmCurrencyTypeMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                CurrencyType item = frm.SelectedItem as CurrencyType;
-                txtCurrencyType.Text = item.ID;
-                txtCurrencyType.Tag = item;
-                txtExchangeRate.DecimalValue = item.ExchangeRate;
-            }
-        }
-
-        private void lnkCollectionType_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmCollectionTypeMaster frm = new FrmCollectionTypeMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                CollectionType item = frm.SelectedItem as CollectionType;
-                if (string.IsNullOrEmpty(txtCollectionType.Text))
-                {
-                    txtCollectionType.Text = item.ID + ";";
-                }
-                else
-                {
-                    string[] temp = txtCollectionType.Text.Split(';');
-                    if (temp.SingleOrDefault(it => it == item.ID) == null)
-                    {
-                        txtCollectionType.Text += item.ID + ";";
-                    }
-                }
-            }
-        }
-
         private void lnkTransport_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmTransportMaster frm = new FrmTransportMaster();
@@ -586,28 +506,6 @@ namespace LJH.Inventory.UI.Forms
             {
                 Transport item = frm.SelectedItem as Transport;
                 txtTransport.Text = item.Name;
-            }
-        }
-
-        private void lnkLoadPort_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmNativePortMaster frm = new FrmNativePortMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Port item = frm.SelectedItem as Port;
-                txtLoadPort.Text = item.ID;
-            }
-        }
-
-        private void lnkDestinationPort_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmForeignPortMaster frm = new FrmForeignPortMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Port item = frm.SelectedItem as Port;
-                txtDestinationPort.Text = item.ID;
             }
         }
 

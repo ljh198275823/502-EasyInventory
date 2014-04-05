@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,23 +43,9 @@
             this.btnShip = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtExchangeRate = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtFinalCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.lnkFinalCustomer = new System.Windows.Forms.LinkLabel();
-            this.txtDestinationPort = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtLoadPort = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtTransport = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtCollectionType = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtCurrencyType = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtPriceTerm = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkSalesPerson = new System.Windows.Forms.LinkLabel();
-            this.lnkDestinationPort = new System.Windows.Forms.LinkLabel();
-            this.lnkLoadPort = new System.Windows.Forms.LinkLabel();
             this.lnkTransport = new System.Windows.Forms.LinkLabel();
-            this.lnkCollectionType = new System.Windows.Forms.LinkLabel();
-            this.lnkPriceTerm = new System.Windows.Forms.LinkLabel();
-            this.lnkCurrencyType = new System.Windows.Forms.LinkLabel();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -86,7 +72,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.dtDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
             this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -117,11 +102,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(582, 488);
+            this.btnClose.Location = new System.Drawing.Point(582, 456);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(473, 488);
+            this.btnOk.Location = new System.Drawing.Point(473, 456);
             // 
             // contextMenuStrip1
             // 
@@ -206,34 +191,19 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(0, 59);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1134, 401);
+            this.tabControl1.Size = new System.Drawing.Size(1134, 369);
             this.tabControl1.TabIndex = 87;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.txtExchangeRate);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.txtFinalCustomer);
-            this.tabPage1.Controls.Add(this.lnkFinalCustomer);
-            this.tabPage1.Controls.Add(this.txtDestinationPort);
-            this.tabPage1.Controls.Add(this.txtLoadPort);
             this.tabPage1.Controls.Add(this.txtTransport);
-            this.tabPage1.Controls.Add(this.txtCollectionType);
-            this.tabPage1.Controls.Add(this.txtCurrencyType);
-            this.tabPage1.Controls.Add(this.txtPriceTerm);
             this.tabPage1.Controls.Add(this.lnkSalesPerson);
-            this.tabPage1.Controls.Add(this.lnkDestinationPort);
-            this.tabPage1.Controls.Add(this.lnkLoadPort);
             this.tabPage1.Controls.Add(this.lnkTransport);
-            this.tabPage1.Controls.Add(this.lnkCollectionType);
-            this.tabPage1.Controls.Add(this.lnkPriceTerm);
-            this.tabPage1.Controls.Add(this.lnkCurrencyType);
             this.tabPage1.Controls.Add(this.txtCustomer);
             this.tabPage1.Controls.Add(this.dtOrderDate);
             this.tabPage1.Controls.Add(this.label1);
@@ -247,111 +217,23 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1126, 375);
+            this.tabPage1.Size = new System.Drawing.Size(1126, 343);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // txtExchangeRate
-            // 
-            this.txtExchangeRate.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtExchangeRate.Location = new System.Drawing.Point(506, 51);
-            this.txtExchangeRate.MaxValue = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-            this.txtExchangeRate.MinValue = new decimal(new int[] {
-            -2147483648,
-            0,
-            0,
-            -2147483648});
-            this.txtExchangeRate.Name = "txtExchangeRate";
-            this.txtExchangeRate.PointCount = 2;
-            this.txtExchangeRate.Size = new System.Drawing.Size(69, 21);
-            this.txtExchangeRate.TabIndex = 126;
-            this.txtExchangeRate.Text = "0";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(465, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 12);
-            this.label2.TabIndex = 125;
-            this.label2.Text = "汇率:";
-            // 
-            // txtFinalCustomer
-            // 
-            this.txtFinalCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtFinalCustomer.Location = new System.Drawing.Point(855, 15);
-            this.txtFinalCustomer.Name = "txtFinalCustomer";
-            this.txtFinalCustomer.Size = new System.Drawing.Size(241, 21);
-            this.txtFinalCustomer.TabIndex = 124;
-            // 
-            // lnkFinalCustomer
-            // 
-            this.lnkFinalCustomer.AutoSize = true;
-            this.lnkFinalCustomer.Location = new System.Drawing.Point(791, 19);
-            this.lnkFinalCustomer.Name = "lnkFinalCustomer";
-            this.lnkFinalCustomer.Size = new System.Drawing.Size(59, 12);
-            this.lnkFinalCustomer.TabIndex = 123;
-            this.lnkFinalCustomer.TabStop = true;
-            this.lnkFinalCustomer.Text = "最终客户:";
-            this.lnkFinalCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEndCustomer_LinkClicked);
-            // 
-            // txtDestinationPort
-            // 
-            this.txtDestinationPort.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDestinationPort.Location = new System.Drawing.Point(507, 87);
-            this.txtDestinationPort.Name = "txtDestinationPort";
-            this.txtDestinationPort.Size = new System.Drawing.Size(131, 21);
-            this.txtDestinationPort.TabIndex = 122;
-            // 
-            // txtLoadPort
-            // 
-            this.txtLoadPort.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLoadPort.Location = new System.Drawing.Point(292, 83);
-            this.txtLoadPort.Name = "txtLoadPort";
-            this.txtLoadPort.Size = new System.Drawing.Size(109, 21);
-            this.txtLoadPort.TabIndex = 121;
-            // 
             // txtTransport
             // 
             this.txtTransport.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtTransport.Location = new System.Drawing.Point(88, 83);
+            this.txtTransport.Location = new System.Drawing.Point(100, 47);
             this.txtTransport.Name = "txtTransport";
             this.txtTransport.Size = new System.Drawing.Size(106, 21);
             this.txtTransport.TabIndex = 120;
             // 
-            // txtCollectionType
-            // 
-            this.txtCollectionType.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCollectionType.Location = new System.Drawing.Point(647, 51);
-            this.txtCollectionType.Name = "txtCollectionType";
-            this.txtCollectionType.Size = new System.Drawing.Size(101, 21);
-            this.txtCollectionType.TabIndex = 119;
-            // 
-            // txtCurrencyType
-            // 
-            this.txtCurrencyType.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCurrencyType.Location = new System.Drawing.Point(292, 51);
-            this.txtCurrencyType.Name = "txtCurrencyType";
-            this.txtCurrencyType.Size = new System.Drawing.Size(109, 21);
-            this.txtCurrencyType.TabIndex = 118;
-            // 
-            // txtPriceTerm
-            // 
-            this.txtPriceTerm.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPriceTerm.Location = new System.Drawing.Point(88, 51);
-            this.txtPriceTerm.Name = "txtPriceTerm";
-            this.txtPriceTerm.Size = new System.Drawing.Size(106, 21);
-            this.txtPriceTerm.TabIndex = 117;
-            // 
             // lnkSalesPerson
             // 
             this.lnkSalesPerson.AutoSize = true;
-            this.lnkSalesPerson.Location = new System.Drawing.Point(804, 55);
+            this.lnkSalesPerson.Location = new System.Drawing.Point(238, 51);
             this.lnkSalesPerson.Name = "lnkSalesPerson";
             this.lnkSalesPerson.Size = new System.Drawing.Size(47, 12);
             this.lnkSalesPerson.TabIndex = 114;
@@ -359,32 +241,10 @@
             this.lnkSalesPerson.Text = "业务员:";
             this.lnkSalesPerson.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSalesPerson_LinkClicked);
             // 
-            // lnkDestinationPort
-            // 
-            this.lnkDestinationPort.AutoSize = true;
-            this.lnkDestinationPort.Location = new System.Drawing.Point(453, 89);
-            this.lnkDestinationPort.Name = "lnkDestinationPort";
-            this.lnkDestinationPort.Size = new System.Drawing.Size(47, 12);
-            this.lnkDestinationPort.TabIndex = 113;
-            this.lnkDestinationPort.TabStop = true;
-            this.lnkDestinationPort.Text = "目的港:";
-            this.lnkDestinationPort.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDestinationPort_LinkClicked);
-            // 
-            // lnkLoadPort
-            // 
-            this.lnkLoadPort.AutoSize = true;
-            this.lnkLoadPort.Location = new System.Drawing.Point(238, 87);
-            this.lnkLoadPort.Name = "lnkLoadPort";
-            this.lnkLoadPort.Size = new System.Drawing.Size(47, 12);
-            this.lnkLoadPort.TabIndex = 112;
-            this.lnkLoadPort.TabStop = true;
-            this.lnkLoadPort.Text = "起运港:";
-            this.lnkLoadPort.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLoadPort_LinkClicked);
-            // 
             // lnkTransport
             // 
             this.lnkTransport.AutoSize = true;
-            this.lnkTransport.Location = new System.Drawing.Point(23, 87);
+            this.lnkTransport.Location = new System.Drawing.Point(35, 51);
             this.lnkTransport.Name = "lnkTransport";
             this.lnkTransport.Size = new System.Drawing.Size(59, 12);
             this.lnkTransport.TabIndex = 111;
@@ -392,50 +252,17 @@
             this.lnkTransport.Text = "运输方式:";
             this.lnkTransport.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkTransport_LinkClicked);
             // 
-            // lnkCollectionType
-            // 
-            this.lnkCollectionType.AutoSize = true;
-            this.lnkCollectionType.Location = new System.Drawing.Point(585, 55);
-            this.lnkCollectionType.Name = "lnkCollectionType";
-            this.lnkCollectionType.Size = new System.Drawing.Size(59, 12);
-            this.lnkCollectionType.TabIndex = 110;
-            this.lnkCollectionType.TabStop = true;
-            this.lnkCollectionType.Text = "收汇方式:";
-            this.lnkCollectionType.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCollectionType_LinkClicked);
-            // 
-            // lnkPriceTerm
-            // 
-            this.lnkPriceTerm.AutoSize = true;
-            this.lnkPriceTerm.Location = new System.Drawing.Point(23, 55);
-            this.lnkPriceTerm.Name = "lnkPriceTerm";
-            this.lnkPriceTerm.Size = new System.Drawing.Size(59, 12);
-            this.lnkPriceTerm.TabIndex = 109;
-            this.lnkPriceTerm.TabStop = true;
-            this.lnkPriceTerm.Text = "价格条款:";
-            this.lnkPriceTerm.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPriceTerm_LinkClicked);
-            // 
-            // lnkCurrencyType
-            // 
-            this.lnkCurrencyType.AutoSize = true;
-            this.lnkCurrencyType.Location = new System.Drawing.Point(250, 55);
-            this.lnkCurrencyType.Name = "lnkCurrencyType";
-            this.lnkCurrencyType.Size = new System.Drawing.Size(35, 12);
-            this.lnkCurrencyType.TabIndex = 108;
-            this.lnkCurrencyType.TabStop = true;
-            this.lnkCurrencyType.Text = "币别:";
-            this.lnkCurrencyType.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCurrencyType_LinkClicked);
-            // 
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(507, 15);
+            this.txtCustomer.Location = new System.Drawing.Point(280, 16);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.Size = new System.Drawing.Size(241, 21);
             this.txtCustomer.TabIndex = 107;
             // 
             // dtOrderDate
             // 
-            this.dtOrderDate.Location = new System.Drawing.Point(292, 15);
+            this.dtOrderDate.Location = new System.Drawing.Point(829, 16);
             this.dtOrderDate.Name = "dtOrderDate";
             this.dtOrderDate.Size = new System.Drawing.Size(109, 21);
             this.dtOrderDate.TabIndex = 105;
@@ -443,7 +270,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(226, 19);
+            this.label1.Location = new System.Drawing.Point(763, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 106;
@@ -452,7 +279,7 @@
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(465, 19);
+            this.lnkCustomer.Location = new System.Drawing.Point(238, 20);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(35, 12);
             this.lnkCustomer.TabIndex = 104;
@@ -463,7 +290,7 @@
             // txtSalesPerson
             // 
             this.txtSalesPerson.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSalesPerson.Location = new System.Drawing.Point(855, 51);
+            this.txtSalesPerson.Location = new System.Drawing.Point(289, 47);
             this.txtSalesPerson.Name = "txtSalesPerson";
             this.txtSalesPerson.Size = new System.Drawing.Size(131, 21);
             this.txtSalesPerson.TabIndex = 101;
@@ -496,12 +323,12 @@
             this.colNotShipped,
             this.colMemo});
             this.ItemsGrid.ContextMenuStrip = this.contextMenuStrip1;
-            this.ItemsGrid.Location = new System.Drawing.Point(13, 114);
+            this.ItemsGrid.Location = new System.Drawing.Point(13, 74);
             this.ItemsGrid.Name = "ItemsGrid";
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(1107, 253);
+            this.ItemsGrid.Size = new System.Drawing.Size(1107, 261);
             this.ItemsGrid.TabIndex = 97;
             this.ItemsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellContentClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
@@ -552,8 +379,8 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle5.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle9;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -561,8 +388,8 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle6.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle10;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -602,9 +429,9 @@
             // 
             // colPrepared
             // 
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Blue;
-            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Blue;
+            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle11;
             this.colPrepared.HeaderText = "已备货";
             this.colPrepared.Name = "colPrepared";
             this.colPrepared.ReadOnly = true;
@@ -622,9 +449,9 @@
             // 
             // colNotShipped
             // 
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red;
-            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Red;
+            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle12;
             this.colNotShipped.HeaderText = "未出货";
             this.colNotShipped.Name = "colNotShipped";
             this.colNotShipped.ReadOnly = true;
@@ -642,7 +469,7 @@
             // txtSheetNo
             // 
             this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSheetNo.Location = new System.Drawing.Point(88, 15);
+            this.txtSheetNo.Location = new System.Drawing.Point(88, 16);
             this.txtSheetNo.Name = "txtSheetNo";
             this.txtSheetNo.Size = new System.Drawing.Size(106, 21);
             this.txtSheetNo.TabIndex = 83;
@@ -651,7 +478,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 19);
+            this.label11.Location = new System.Drawing.Point(35, 20);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(47, 12);
             this.label11.TabIndex = 88;
@@ -659,7 +486,7 @@
             // 
             // dtDeliveryDate
             // 
-            this.dtDeliveryDate.Location = new System.Drawing.Point(729, 83);
+            this.dtDeliveryDate.Location = new System.Drawing.Point(606, 16);
             this.dtDeliveryDate.Name = "dtDeliveryDate";
             this.dtDeliveryDate.Size = new System.Drawing.Size(131, 21);
             this.dtDeliveryDate.TabIndex = 85;
@@ -667,21 +494,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(666, 87);
+            this.label4.Location = new System.Drawing.Point(543, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 87;
             this.label4.Text = "出货日期:";
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1126, 375);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "合同条款";
-            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // tabPage5
             // 
@@ -837,7 +654,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 460);
+            this.ClientSize = new System.Drawing.Size(1135, 428);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "FrmOrderDetail";
@@ -885,28 +702,15 @@
         private System.Windows.Forms.DateTimePicker dtOrderDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel lnkSalesPerson;
-        private System.Windows.Forms.LinkLabel lnkDestinationPort;
-        private System.Windows.Forms.LinkLabel lnkLoadPort;
         private System.Windows.Forms.LinkLabel lnkTransport;
-        private System.Windows.Forms.LinkLabel lnkCollectionType;
-        private System.Windows.Forms.LinkLabel lnkPriceTerm;
-        private System.Windows.Forms.LinkLabel lnkCurrencyType;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
-        private System.Windows.Forms.TabPage tabPage6;
-        private GeneralLibrary.WinformControl.DBCTextBox txtDestinationPort;
-        private GeneralLibrary.WinformControl.DBCTextBox txtLoadPort;
         private GeneralLibrary.WinformControl.DBCTextBox txtTransport;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCollectionType;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCurrencyType;
-        private GeneralLibrary.WinformControl.DBCTextBox txtPriceTerm;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
-        private GeneralLibrary.WinformControl.DBCTextBox txtFinalCustomer;
-        private System.Windows.Forms.LinkLabel lnkFinalCustomer;
         private System.Windows.Forms.ToolStripButton btnShip;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
@@ -924,8 +728,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colShipped;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotShipped;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private LJH.GeneralLibrary.WinformControl.DecimalTextBox  txtExchangeRate;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView gridAttachment;
         private System.Windows.Forms.ContextMenuStrip mnu_Attachment;
         private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentAdd;

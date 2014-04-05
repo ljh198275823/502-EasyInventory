@@ -31,61 +31,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public CompanyInfo Customer { get; set; }
         /// <summary>
-        /// 获取或设置最终客户ID
-        /// </summary>
-        public string FinalCustomerID { get; set; }
-        /// <summary>
-        /// 获取或设置最终客户
-        /// </summary>
-        public CompanyInfo FinalCustomer { get; set; }
-        /// <summary>
         /// 获取或设置是否含税
         /// </summary>
         public bool WithTax { get; set; }
         /// <summary>
-        /// 获取或设置币别
-        /// </summary>
-        public string CurrencyType { get; set; }
-        /// <summary>
-        /// 获取或设置货币符号
-        /// </summary>
-        public string Symbol { get; set; }
-        /// <summary>
-        /// 获取或设置合同签订时的汇率
-        /// </summary>
-        public decimal ExchangeRate { get; set; }
-        /// <summary>
-        /// 获取或设置价格条款
-        /// </summary>
-        public string PriceTerm { get; set; }
-        /// <summary>
-        /// 获取或设置收汇方式
-        /// </summary>
-        public string CollectionType { get; set; }
-        /// <summary>
         /// 获取或设置运输方式
         /// </summary>
         public string Transport { get; set; }
-        /// <summary>
-        /// 获取或设置装运港
-        /// </summary>
-        public string LoadPort { get; set; }
-        /// <summary>
-        /// 获取或设置目的港
-        /// </summary>
-        public string DestinationPort { get; set; }
-        /// <summary>
-        /// 获取或设置是否可分批
-        /// </summary>
-        public bool CanBatch { get; set; }
-        /// <summary>
-        /// 获取或设置是否可中转
-        /// </summary>
-        public bool CanRelay { get; set; }
-        /// <summary>
-        /// 获取或设置唛头
-        /// </summary>
-        public string Mark { get; set; }
         /// <summary>
         /// 获取或设置业务人员
         /// </summary>
@@ -102,18 +54,29 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置当前状态
         /// </summary>
         public SheetState State { get; set; }
-        /// <summary>
-        /// 获取或设置已经应收金额(即已经发货的金额)
-        /// </summary>
-        public decimal Receivable { get; set; }
-        /// <summary>
-        /// 获取或设置已经支付的金额
-        /// </summary>
-        public decimal HasPaid { get; set; }
-        /// <summary>
-        /// 获取或设置销售订单除采购成本外的费用支出
-        /// </summary>
-        public decimal Expenditure { get; set; }
+
+        #region 订单的金额情况
+        ///// <summary>
+        ///// 获取或设置已经应收金额(即已经发货的金额)
+        ///// </summary>
+        //public decimal Receivable { get; set; }
+        ///// <summary>
+        ///// 获取或设置已经支付的金额
+        ///// </summary>
+        //public decimal HasPaid { get; set; }
+        ///// <summary>
+        ///// 获取或设置销售订单除采购成本外的费用支出
+        ///// </summary>
+        //public decimal Expenditure { get; set; }
+
+        //public decimal NotPaid
+        //{
+        //    get
+        //    {
+        //        return CalAmount() - HasPaid;
+        //    }
+        //}
+        #endregion
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>
@@ -209,14 +172,6 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 return State != SheetState.Canceled && State != SheetState.Settled;
-            }
-        }
-
-        public decimal NotPaid
-        {
-            get
-            {
-                return CalAmount() - HasPaid;
             }
         }
         #endregion

@@ -44,9 +44,9 @@ namespace LJH.Inventory.UI.Forms
             Order order = item as Order;
             row.Cells["colOrderID"].Value = order.ID;
             row.Cells["colAmount"].Value = order.CalAmount().Trim();
-            row.Cells["colReceivable"].Value = order.Receivable.Trim();
-            row.Cells["colHasPaid"].Value = order.HasPaid.Trim();
-            row.Cells["colNotPaid"].Value = (order.CalAmount() - order.HasPaid).Trim();
+            //row.Cells["colReceivable"].Value = order.Receivable.Trim();
+            //row.Cells["colHasPaid"].Value = order.HasPaid.Trim();
+            //row.Cells["colNotPaid"].Value = (order.CalAmount() - order.HasPaid).Trim();
         }
         #endregion
     }
