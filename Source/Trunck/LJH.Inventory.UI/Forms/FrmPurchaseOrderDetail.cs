@@ -146,9 +146,9 @@ namespace LJH.Inventory.UI.Forms
                 this.txtBuyer.Text = item.Buyer;
                 this.dtDeliveryDate.Value = item.DemandDate;
                 ShowDeliveryItemsOnGrid(item.Items);
-                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
-                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
+                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
                 ShowAttachmentHeaders(headers, this.gridAttachment);
                 ShowButtonState();
             }
@@ -168,8 +168,8 @@ namespace LJH.Inventory.UI.Forms
                 PurchaseSheet = UpdatingItem as PurchaseOrder;
             }
             PurchaseSheet.OrderDate = this.dtOrderDate.Value;
-            PurchaseSheet.SupplierID = (this.txtSupplier.Tag as Customer).ID;
-            PurchaseSheet.Supplier = this.txtSupplier.Tag as Customer;
+            PurchaseSheet.SupplierID = (this.txtSupplier.Tag as CompanyInfo).ID;
+            PurchaseSheet.Supplier = this.txtSupplier.Tag as CompanyInfo;
             PurchaseSheet.CurrencyType = this.txtCurrencyType.Text;
             PurchaseSheet.Buyer = this.txtBuyer.Text;
             PurchaseSheet.DemandDate = this.dtDeliveryDate.Value;
@@ -197,12 +197,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as PurchaseOrder,Operator .Current.Name );
+            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).Add(item as PurchaseOrder,Operator .Current.Name );
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as PurchaseOrder,Operator .Current .Name );
+            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).Update(item as PurchaseOrder,Operator .Current .Name );
         }
         #endregion
 
@@ -222,7 +222,7 @@ namespace LJH.Inventory.UI.Forms
                     header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Upload(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                         int row = gridAttachment.Rows.Add();
@@ -243,7 +243,7 @@ namespace LJH.Inventory.UI.Forms
                 AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
                 string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
                 string path = System.IO.Path.Combine(dir, header.FileName);
-                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, path);
+                CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, path);
                 if (ret.Result == ResultCode.Successful)
                 {
                     try
@@ -272,7 +272,7 @@ namespace LJH.Inventory.UI.Forms
                 dig.Filter = "所有文件(*.*)|*.*";
                 if (dig.ShowDialog() == DialogResult.OK)
                 {
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                     }
@@ -292,7 +292,7 @@ namespace LJH.Inventory.UI.Forms
                 foreach (DataGridViewRow row in this.gridAttachment.SelectedRows)
                 {
                     AttachmentHeader header = row.Tag as AttachmentHeader;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Delete(header);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Delete(header);
                     if (ret.Result == ResultCode.Successful)
                     {
                         deletingRows.Add(row);
@@ -371,10 +371,10 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要审核此采购单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
-                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
+                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        PurchaseOrder sheet1 = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                        PurchaseOrder sheet1 = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
                         this.UpdatingItem = sheet1;
                         ItemShowing();
                         this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
@@ -394,10 +394,10 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否将此采购单作废?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
-                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).Nullify(sheet.ID, Operator.Current.Name);
+                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).Nullify(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        PurchaseOrder sheet1 = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                        PurchaseOrder sheet1 = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
                         this.UpdatingItem = sheet1;
                         ItemShowing();
                         this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
@@ -493,7 +493,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer item = frm.SelectedItem as Customer;
+                CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtSupplier.Text = item.Name;
                 txtSupplier.Tag = item;
             }
@@ -529,7 +529,7 @@ namespace LJH.Inventory.UI.Forms
                 if (ItemsGrid.Columns[e.ColumnIndex].Name == "colOrderID")
                 {
                     string orderID = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    Order item = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(orderID).QueryObject;
+                    Order item = (new OrderBLL(AppSettings.Current.ConnStr)).GetByID(orderID).QueryObject;
                     if (item != null)
                     {
                         FrmOrderDetail frm = new FrmOrderDetail();

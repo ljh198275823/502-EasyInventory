@@ -38,7 +38,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<InventorySheet> items = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
+            List<InventorySheet> items = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             List<object> records = null;
 
             records = (from o in items

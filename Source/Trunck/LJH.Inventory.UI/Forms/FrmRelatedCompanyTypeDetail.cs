@@ -50,7 +50,7 @@ namespace LJH.Inventory.UI.Forms
             txtName.Text = ct.Name;
             if (!string.IsNullOrEmpty(ct.Parent))
             {
-                ParentCategory = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(ct.Parent).QueryObject;
+                ParentCategory = (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).GetByID(ct.Parent).QueryObject;
             }
             txtMemo.Text = ct.Memo;
         }
@@ -71,12 +71,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as RelatedCompanyType);
+            return (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).Add(addingItem as RelatedCompanyType);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as RelatedCompanyType);
+            return (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).Update(updatingItem as RelatedCompanyType);
         }
         #endregion
 

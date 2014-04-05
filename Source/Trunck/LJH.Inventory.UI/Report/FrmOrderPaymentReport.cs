@@ -25,14 +25,14 @@ namespace LJH.Inventory.UI.Report
         protected override void OnItemSearching(EventArgs e)
         {
             OrderSearchCondition con = new OrderSearchCondition();
-            if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as Customer).ID;
-            if (txtFinalCustomer.Tag != null) con.FinalCustomerID = (txtFinalCustomer.Tag as Customer).ID;
+            if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
+            if (txtFinalCustomer.Tag != null) con.FinalCustomerID = (txtFinalCustomer.Tag as CompanyInfo).ID;
             if (txtSalesPerson.Tag != null) con.Sales = (txtSalesPerson.Tag as Operator).Name;
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Add);
             con.States.Add(SheetState.Approved);
             con.States.Add(SheetState.Closed);
-            List<Order> items = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(con).QueryObjects;
+            List<Order> items = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             foreach (Order item in items)
             {
                 int row = gridView.Rows.Add();
@@ -69,7 +69,7 @@ namespace LJH.Inventory.UI.Report
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer item = frm.SelectedItem as Customer;
+                CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtCustomer.Text = item.Name;
                 txtCustomer.Tag = item;
             }
@@ -81,7 +81,7 @@ namespace LJH.Inventory.UI.Report
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer item = frm.SelectedItem as Customer;
+                CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtFinalCustomer.Text = item.Name;
                 txtFinalCustomer.Tag = item;
             }

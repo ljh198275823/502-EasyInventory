@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
@@ -25,7 +20,7 @@ namespace LJH.Inventory.UI.Controls
         #region 公共方法
         public void Init()
         {
-            _Products = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
+            _Products = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             _Products = (from p in _Products
                          orderby p.ID ascending, p.Name ascending
                          select p).ToList();

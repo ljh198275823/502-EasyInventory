@@ -21,67 +21,19 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<Customer> _Customers = null;
+        private List<CompanyInfo> _Customers = null;
         #endregion
 
         #region 私有方法
-        private void InitCategoryTree()
-        {
-            this.categoryTree.Nodes.Clear();
-            this.categoryTree.Nodes.Add("所有客户类别");
-
-            List<CustomerType> items = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                AddDesendNodes(items, this.categoryTree.Nodes[0]);
-            }
-        }
-
-        private void AddDesendNodes(List<CustomerType> items, TreeNode parent)
-        {
-            List<CustomerType> pcs = null;
-            if (parent.Tag == null)
-            {
-                pcs = items.Where(it => string.IsNullOrEmpty(it.Parent)).ToList();
-            }
-            else
-            {
-                pcs = items.Where(it => it.Parent == (parent.Tag as CustomerType).ID).ToList();
-            }
-            if (pcs != null && pcs.Count > 0)
-            {
-                foreach (CustomerType pc in pcs)
-                {
-                    TreeNode node = AddNode(pc, parent);
-                    AddDesendNodes(items, node);
-                }
-            }
-            parent.ImageIndex = 0;
-            parent.SelectedImageIndex = 0;
-            parent.ExpandAll();
-        }
-
         private void SelectNode(TreeNode node)
         {
-            if (!object.ReferenceEquals(categoryTree.SelectedNode, node))
-            {
-                if (categoryTree.SelectedNode != null)
-                {
-                    categoryTree.SelectedNode.BackColor = Color.White;
-                    categoryTree.SelectedNode.ForeColor = Color.Black;
-                }
-                categoryTree.SelectedNode = node;
-                categoryTree.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
-                categoryTree.SelectedNode.ForeColor = Color.White;
-
-                List<object> items = GetSelectedNodeItems();
-                ShowItemsOnGrid(items);
-            }
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
         }
 
         private List<object> GetSelectedNodeItems()
         {
-            List<Customer> items = _Customers;
+            List<CompanyInfo> items = _Customers;
             CustomerType pc = null;
             if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as CustomerType;
             if (pc != null) items = _Customers.Where(it => it.CategoryID == pc.ID).ToList();
@@ -90,20 +42,13 @@ namespace LJH.Inventory.UI.Forms
                     orderby p.Name ascending
                     select (object)p).ToList();
         }
-
-        private TreeNode AddNode(CustomerType pc, TreeNode parent)
-        {
-            TreeNode node = parent.Nodes.Add(string.Format("{0}",pc.Name));
-            node.Tag = pc;
-            return node;
-        }
         #endregion
 
         #region 重写基类方法
         protected override void Init()
         {
             base.Init();
-            InitCategoryTree();
+            categoryTree.Init();
             Operator opt = Operator.Current;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditCustomer);
             menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditCustomer);
@@ -118,8 +63,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            Customer c = item as Customer;
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
+            CompanyInfo c = item as CompanyInfo;
+            CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             CommandResult ret = bll.Delete(c);
             if (ret.Result != ResultCode.Successful)
             {
@@ -134,7 +79,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
+            CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
@@ -148,7 +93,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            Customer c = item as Customer;
+            CompanyInfo c = item as CompanyInfo;
             row.Tag = c;
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
@@ -164,7 +109,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colMemo"].Value = c.Memo;
             if (_Customers == null || !_Customers.Exists(it => it.ID == c.ID))
             {
-                if (_Customers == null) _Customers = new List<Customer>();
+                if (_Customers == null) _Customers = new List<CompanyInfo>();
                 _Customers.Add(c);
             }
         }
@@ -175,13 +120,13 @@ namespace LJH.Inventory.UI.Forms
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                Customer c = dataGridView1.SelectedRows[0].Tag as Customer;
+                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
                 FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                 frm.Customer = c;
                 frm.IsAdding = true;
                 frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
                 {
-                    Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(c.ID).QueryObject;
+                    CompanyInfo c1 = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(c.ID).QueryObject;
                     if (c1 != null)
                     {
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
@@ -214,7 +159,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
-                    Customer c = dataGridView1.Rows[e.RowIndex].Tag as Customer;
+                    CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
                     FrmCustomerPaymentRemains frm = new FrmCustomerPaymentRemains();
                     frm.Customer = c;
                     frm.ShowDialog();
@@ -236,7 +181,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void mnu_FreshTree_Click(object sender, EventArgs e)
         {
-            InitCategoryTree();
+            categoryTree.Init();
             SelectNode(categoryTree.Nodes[0]);
         }
 
@@ -249,7 +194,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
                 CustomerType item = args.AddedItem as CustomerType;
-                AddNode(item, categoryTree.SelectedNode);
+                categoryTree.AddCustomerTypeNode(item, categoryTree.SelectedNode);
             };
             frm.ShowDialog();
         }
@@ -259,7 +204,7 @@ namespace LJH.Inventory.UI.Forms
             CustomerType pc = categoryTree.SelectedNode.Tag as CustomerType;
             if (pc != null && MessageBox.Show("是否删除此类别及其子项?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
             {
-                CommandResult ret = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnStr)).Delete(pc);
+                CommandResult ret = (new CustomerTypeBLL(AppSettings.Current.ConnStr)).Delete(pc);
                 if (ret.Result == ResultCode.Successful)
                 {
                     categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);

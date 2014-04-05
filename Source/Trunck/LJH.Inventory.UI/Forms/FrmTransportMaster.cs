@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<Transport> items = (new TransportBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
+            List<Transport> items = (new TransportBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();
@@ -43,7 +43,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            CommandResult ret = (new TransportBLL(AppSettings.CurrentSetting.ConnStr)).Delete(item as Transport);
+            CommandResult ret = (new TransportBLL(AppSettings.Current.ConnStr)).Delete(item as Transport);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message);

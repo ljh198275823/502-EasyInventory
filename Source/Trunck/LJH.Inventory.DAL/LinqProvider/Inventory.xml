@@ -48,8 +48,8 @@
       <Association Name="FK_Product_Category" Member="Category"  ThisKey="CategoryID" OtherKey="ID"/>
     </Type>
   </Table>
-  <Table Name="dbo.Customer" Member="LJH.Inventory.BusinessModel.Customer">
-    <Type Name="LJH.Inventory.BusinessModel.Customer">
+  <Table Name="dbo.Customer" Member="LJH.Inventory.BusinessModel.CompanyInfo">
+    <Type Name="LJH.Inventory.BusinessModel.CompanyInfo">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
       <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="ForeignName" Member="ShortName"  DbType="nvarchar(50)" UpdateCheck="Never"/>

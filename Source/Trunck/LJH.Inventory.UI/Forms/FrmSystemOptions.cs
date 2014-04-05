@@ -122,7 +122,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void FrmSystemOptions_Load(object sender, EventArgs e)
         {
-            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.CurrentSetting.ConnStr);
+            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
             ShowSetting(UserSettings.Current);
             btnOk.Enabled = Operator.Current.Permit(Permission.EditSystemOptions);
         }
@@ -130,7 +130,7 @@ namespace LJH.Inventory.UI.Forms
         private void btnOk_Click(object sender, EventArgs e)
         {
             UserSettings.Current = GetSettingFromInput();
-            SysParaSettingsBll.SaveSetting<UserSettings>(UserSettings.Current, AppSettings.CurrentSetting.ConnStr);
+            SysParaSettingsBll.SaveSetting<UserSettings>(UserSettings.Current, AppSettings.Current.ConnStr);
             this.Close();
         }
     }

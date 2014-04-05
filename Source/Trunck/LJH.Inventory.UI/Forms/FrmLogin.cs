@@ -53,14 +53,14 @@ namespace LJH.Inventory.UI.Forms
 
             if (UpGradeDataBase())
             {//升级数据库
-                AppSettings.CurrentSetting.DatabaseNeedUpgrade = false;
+                AppSettings.Current.DatabaseNeedUpgrade = false;
             }
 
-            OperatorBLL authen = new OperatorBLL(AppSettings.CurrentSetting.ConnStr);
+            OperatorBLL authen = new OperatorBLL(AppSettings.Current.ConnStr);
             if (authen.Authentication(logName, pwd))
             {
                 this.DialogResult = DialogResult.OK;
-                if (AppSettings.CurrentSetting.RememberLogID) SaveHistoryOperators();
+                if (AppSettings.Current.RememberLogID) SaveHistoryOperators();
                 this.Close();
                 return true;
             }
@@ -80,11 +80,11 @@ namespace LJH.Inventory.UI.Forms
         {
             this.gpDB.Visible = false;
             this.Height = 150;
-            if (!string.IsNullOrEmpty(AppSettings.CurrentSetting.ConnStr))
+            if (!string.IsNullOrEmpty(AppSettings.Current.ConnStr))
             {
                 try
                 {
-                    sb = new SqlConnectionStringBuilder(AppSettings.CurrentSetting.ConnStr);
+                    sb = new SqlConnectionStringBuilder(AppSettings.Current.ConnStr);
                     txtServer.Text = sb.DataSource;
                     txtDataBase.Text = sb.InitialCatalog;
                     if (sb.IntegratedSecurity)
@@ -103,8 +103,8 @@ namespace LJH.Inventory.UI.Forms
                 }
             }
 
-            this.chkRememberLogid.Checked = AppSettings.CurrentSetting.RememberLogID;
-            if (AppSettings.CurrentSetting.RememberLogID)
+            this.chkRememberLogid.Checked = AppSettings.Current.RememberLogID;
+            if (AppSettings.Current.RememberLogID)
             {
                 List<string> history = GetHistoryOperators();
                 if (history != null && history.Count > 0)
@@ -155,7 +155,7 @@ namespace LJH.Inventory.UI.Forms
             sb.Password = this.txtPasswd.Text;
 
             sb.PersistSecurityInfo = true;
-            AppSettings.CurrentSetting.ConnStr  = sb.ConnectionString;
+            AppSettings.Current.ConnStr  = sb.ConnectionString;
         }
 
         private bool UpGradeDataBase()
@@ -166,7 +166,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 try
                 {
-                    SqlClient client = new SqlClient(AppSettings.CurrentSetting.ConnStr);
+                    SqlClient client = new SqlClient(AppSettings.Current.ConnStr);
                     client.Connect();
                     client.ExecuteSQLFile(path);
                     ret = true;
@@ -240,7 +240,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void chkRememberLogid_CheckedChanged(object sender, EventArgs e)
         {
-            AppSettings.CurrentSetting.RememberLogID = chkRememberLogid.Checked;
+            AppSettings.Current.RememberLogID = chkRememberLogid.Checked;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override CustomerOtherReceivable GetingItemByID(string id, System.Data.Linq.DataContext dc)
         {
             var ret = (from cp in dc.GetTable<CustomerOtherReceivable>()
-                       join c in dc.GetTable<Customer>()
+                       join c in dc.GetTable<CompanyInfo>()
                        on cp.CustomerID equals c.ID
                        select new { v1 = cp, v2 = c }).SingleOrDefault(item => item.v1.ID == id);
             if (ret != null)
@@ -35,7 +35,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override List<CustomerOtherReceivable> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             var ret = from cp in dc.GetTable<CustomerOtherReceivable>()
-                      join c in dc.GetTable<Customer>()
+                      join c in dc.GetTable<CompanyInfo>()
                       on cp.CustomerID equals c.ID
                       select new { v1 = cp, v2 = c };
             if (search is CustomerReceivableSearchCondition)

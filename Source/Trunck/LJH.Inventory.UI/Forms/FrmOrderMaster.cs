@@ -24,7 +24,8 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            btnAll.BackColor = SystemColors.ControlDark;
+            this.customerTree1.LoadCustomer = true;
+            this.customerTree1.Init();
             Operator opt = Operator.Current;
             dataGridView1.Columns["colAmount"].Visible = Operator.Current.Permit(Permission.ReadPrice);
         }
@@ -36,7 +37,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<Order> items = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            List<Order> items = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             List<Order> temp = new List<Order>();
             List<object> records = null;
             temp.AddRange(items);
@@ -44,49 +45,6 @@ namespace LJH.Inventory.UI.Forms
             records = (from o in temp
                        where o.State == SheetState.Canceled
                        select (object)o).ToList();
-            btnCanceled.Tag = records;
-            btnCanceled.Text = string.Format("作废 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.State == SheetState.Canceled);
-
-            records = (from o in temp
-                       where o.State == SheetState.Closed
-                       select (object)o).ToList();
-            btnClosed.Tag = records;
-            btnClosed.Text = string.Format("关闭 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.State == SheetState.Closed);
-
-            records = (from o in temp
-                       where o.IsCompleteAll
-                       select (object)o).ToList();
-            btnCompleteAll.Tag = records;
-            btnCompleteAll.Text = string.Format("全部交货 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.IsCompleteAll);
-
-            records = (from o in temp
-                       where o.IsOverDate
-                       select (object)o).ToList();
-            btnOverDate.Tag = records;
-            btnOverDate.Text = string.Format("逾期未交 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.IsOverDate);
-
-            records = (from o in temp
-                       where o.IsEmergency
-                       select (object)o).ToList();
-            btnEmergency.Tag = records;
-            btnEmergency.Text = string.Format("即将交货 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.IsEmergency);
-
-            records = (from o in temp
-                       where !o.IsEmergency
-                       select (object)o).ToList();
-            btnNonEmergency.Tag = records;
-            btnNonEmergency.Text = string.Format("非紧急 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.IsEmergency);
-
-            records = (from o in items
-                       select (object)o).ToList();
-            btnAll.Tag = records;
-            btnAll.Text = string.Format("全部 ({0})", records == null ? 0 : records.Count);
             return records;
         }
 

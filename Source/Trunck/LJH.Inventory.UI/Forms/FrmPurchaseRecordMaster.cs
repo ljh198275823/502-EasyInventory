@@ -34,7 +34,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr);
+            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
             List<PurchaseRecord> items = bll.GetRecords(SearchCondition).QueryObjects;
             List<object> records = null;
 
@@ -114,7 +114,7 @@ namespace LJH.Inventory.UI.Forms
                 PurchaseRecord record = dataGridView1.Rows[e.RowIndex].Tag as PurchaseRecord;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colSheetNo")
                 {
-                    PurchaseOrder sheet = (new PurchaseOrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(record.PurchaseID).QueryObject;
+                    PurchaseOrder sheet = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetByID(record.PurchaseID).QueryObject;
                     if (sheet != null)
                     {
                         FrmPurchaseOrderDetail frm = new FrmPurchaseOrderDetail();

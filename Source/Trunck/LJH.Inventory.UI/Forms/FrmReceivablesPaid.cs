@@ -22,7 +22,7 @@ namespace LJH.Inventory.UI.Forms
         /// <summary>
         /// 
         /// </summary>
-        public Customer Customer { get; set; }
+        public CompanyInfo Customer { get; set; }
 
         public string ReceivableID { get; set; }
 

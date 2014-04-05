@@ -141,10 +141,10 @@ namespace LJH.Inventory.UI.Forms
                     this.ItemsGrid.ContextMenuStrip = null;
                     this.ItemsGrid.ContextMenu = null;
                 }
-                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
 
-                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
+                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
                 ShowAttachmentHeaders(headers, this.gridAttachment);
             }
         }
@@ -163,8 +163,8 @@ namespace LJH.Inventory.UI.Forms
             }
             sheet.WareHouseID = (this.txtWareHouse.Tag as WareHouse).ID;
             sheet.WareHouse = this.txtWareHouse.Tag as WareHouse;
-            sheet.SupplierID = (this.txtSupplier.Tag as Customer).ID;
-            sheet.Supplier = this.txtSupplier.Tag as Customer;
+            sheet.SupplierID = (this.txtSupplier.Tag as CompanyInfo).ID;
+            sheet.Supplier = this.txtSupplier.Tag as CompanyInfo;
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<InventoryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
@@ -181,12 +181,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as InventorySheet,Operator .Current .Name );
+            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).Add(item as InventorySheet,Operator .Current .Name );
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as InventorySheet,Operator .Current .Name);
+            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).Update(item as InventorySheet,Operator .Current .Name);
         }
 
         protected override void ShowButtonState()
@@ -225,7 +225,7 @@ namespace LJH.Inventory.UI.Forms
                     header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Upload(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                         int row = gridAttachment.Rows.Add();
@@ -247,7 +247,7 @@ namespace LJH.Inventory.UI.Forms
                 foreach (DataGridViewRow row in this.gridAttachment.SelectedRows)
                 {
                     AttachmentHeader header = row.Tag as AttachmentHeader;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Delete(header);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Delete(header);
                     if (ret.Result == ResultCode.Successful)
                     {
                         deletingRows.Add(row);
@@ -277,7 +277,7 @@ namespace LJH.Inventory.UI.Forms
                 dig.Filter = "所有文件(*.*)|*.*";
                 if (dig.ShowDialog() == DialogResult.OK)
                 {
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                     }
@@ -296,7 +296,7 @@ namespace LJH.Inventory.UI.Forms
                 AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
                 string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
                 string path = System.IO.Path.Combine(dir, header.FileName);
-                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, path);
+                CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, path);
                 if (ret.Result == ResultCode.Successful)
                 {
                     try
@@ -386,7 +386,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer item = frm.SelectedItem as Customer;
+                CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtSupplier.Text = item.Name;
                 txtSupplier.Tag = item;
             }
@@ -472,10 +472,10 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要审核此收货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     InventorySheet sheet = UpdatingItem as InventorySheet;
-                    CommandResult ret = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
+                    CommandResult ret = (new InventorySheetBLL(AppSettings.Current.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                        InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
                         this.UpdatingItem = sheet1;
                         ItemShowing();
                         ShowButtonState();
@@ -496,10 +496,10 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要将此收货单收货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     InventorySheet sheet = UpdatingItem as InventorySheet;
-                    CommandResult ret = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).Inventory(sheet.ID, Operator.Current.Name);
+                    CommandResult ret = (new InventorySheetBLL(AppSettings.Current.ConnStr)).Inventory(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                        InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
                         this.UpdatingItem = sheet1;
                         ItemShowing();
                         ShowButtonState();
@@ -523,7 +523,7 @@ namespace LJH.Inventory.UI.Forms
             if (txtSupplier.Tag != null)
             {
                 PurchaseRecordSearchCondition con = new PurchaseRecordSearchCondition();
-                con.SupplierID = (txtSupplier.Tag as Customer).ID;
+                con.SupplierID = (txtSupplier.Tag as CompanyInfo).ID;
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);

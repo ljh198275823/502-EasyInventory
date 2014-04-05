@@ -75,7 +75,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
             {
                 List<WareHouse> ws = (new WareHouseProvider(ConnectStr)).GetItems(null).QueryObjects;
-                List<Customer> cs = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
+                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
                 List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
                 foreach (DeliverySheet sheet in sheets)
                 {

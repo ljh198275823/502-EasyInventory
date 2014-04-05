@@ -112,7 +112,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Add(CustomerPayment info, string opt)
         {
-            Customer customer = (new CustomerBLL(_RepoUri)).GetByID(info.CustomerID).QueryObject;
+            CompanyInfo customer = (new CompanyBLL(_RepoUri)).GetByID(info.CustomerID).QueryObject;
             if (customer == null) return new CommandResult(ResultCode.Fail, "系统中不存在编号为 " + info.CustomerID + " 的客户");
             if (string.IsNullOrEmpty(info.ID))
             {

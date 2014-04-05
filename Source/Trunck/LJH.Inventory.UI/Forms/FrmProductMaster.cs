@@ -29,7 +29,7 @@ namespace LJH.Inventory.UI.Forms
             this.categoryTree.Nodes.Clear();
             this.categoryTree.Nodes.Add("所有产品类别");
 
-            List<ProductCategory> items = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
+            List<ProductCategory> items = (new ProductCategoryBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.categoryTree.Nodes[0]);
@@ -117,7 +117,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            _Products = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
+            _Products = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             List<object> records = GetSelectedNodeItems();
             return records;
         }
@@ -150,7 +150,7 @@ namespace LJH.Inventory.UI.Forms
         protected override bool DeletingItem(object item)
         {
             Product p = item as Product;
-            CommandResult ret = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).Delete(p);
+            CommandResult ret = (new ProductBLL(AppSettings.Current.ConnStr)).Delete(p);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message);
@@ -194,7 +194,7 @@ namespace LJH.Inventory.UI.Forms
             ProductCategory pc = categoryTree.SelectedNode.Tag as ProductCategory;
             if (pc != null && MessageBox.Show("是否删除此类别及其子项?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
             {
-                CommandResult ret = (new ProductCategoryBLL(AppSettings.CurrentSetting.ConnStr)).Delete(pc);
+                CommandResult ret = (new ProductCategoryBLL(AppSettings.Current.ConnStr)).Delete(pc);
                 if (ret.Result == ResultCode.Successful)
                 {
                     categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);

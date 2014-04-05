@@ -36,7 +36,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<CustomerPayment> items = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
+            List<CustomerPayment> items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             List<object> records = null;
 
             records = (from o in items

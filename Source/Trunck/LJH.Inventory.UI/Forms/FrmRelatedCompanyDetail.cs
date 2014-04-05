@@ -54,13 +54,13 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ItemShowing()
         {
-            Customer c = UpdatingItem as Customer;
+            CompanyInfo c = UpdatingItem as CompanyInfo;
             if (c != null)
             {
                 txtID.Text = c.ID;
                 if (!string.IsNullOrEmpty(c.CategoryID))
                 {
-                    Category = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(c.CategoryID).QueryObject;
+                    Category = (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).GetByID(c.CategoryID).QueryObject;
                     txtCategory.Text = Category != null ? Category.Name : string.Empty;
                 }
                 txtNation.Text = c.Nation;
@@ -75,7 +75,7 @@ namespace LJH.Inventory.UI.Forms
 
             GridView.Rows.Clear();
             ContactSearchCondition con = new ContactSearchCondition() { CompanyID = c.ID };
-            List<Contact> contacts = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(con).QueryObjects;
+            List<Contact> contacts = (new ContactBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             if (contacts != null && contacts.Count > 0)
             {
                 foreach (Contact contact in contacts)
@@ -88,15 +88,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override object GetItemFromInput()
         {
-            Customer info;
+            CompanyInfo info;
             if (UpdatingItem == null)
             {
-                info = new Customer();
+                info = new CompanyInfo();
                 info.ClassID = CustomerClass.Other;
             }
             else
             {
-                info = UpdatingItem as Customer;
+                info = UpdatingItem as CompanyInfo;
             }
             info.ID = txtID.Text != "自动创建" ? txtID.Text : string.Empty;
             info.CategoryID = Category != null ? Category.ID : null;
@@ -112,16 +112,16 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
-            Customer c = item as Customer;
-            CommandResult ret = bll.Insert(item as Customer, 0, 0);
+            CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
+            CompanyInfo c = item as CompanyInfo;
+            CommandResult ret = bll.Insert(item as CompanyInfo, 0, 0);
             if (ret.Result == ResultCode.Successful)
             {
                 foreach (DataGridViewRow row in GridView.Rows)
                 {
                     Contact ct = row.Tag as Contact;
                     ct.Company = c.ID;
-                    CommandResult r = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).Add(ct);
+                    CommandResult r = (new ContactBLL(AppSettings.Current.ConnStr)).Add(ct);
                     if (r.Result != ResultCode.Successful)
                     {
                         MessageBox.Show(r.Message);
@@ -133,8 +133,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult UpdateItem(object item)
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
-            return bll.Update(item as Customer);
+            CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
+            return bll.Update(item as CompanyInfo);
         }
         #endregion
 
@@ -147,9 +147,9 @@ namespace LJH.Inventory.UI.Forms
                 Contact ct = frm.Contact;
                 if (this.UpdatingItem != null)
                 {
-                    Customer c = UpdatingItem as Customer;
+                    CompanyInfo c = UpdatingItem as CompanyInfo;
                     ct.Company = c.ID;
-                    CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).Add(ct);
+                    CommandResult ret = (new ContactBLL(AppSettings.Current.ConnStr)).Add(ct);
                     if (ret.Result != ResultCode.Successful)
                     {
                         MessageBox.Show(ret.Message);
@@ -171,7 +171,7 @@ namespace LJH.Inventory.UI.Forms
                     Contact ct = frm.Contact;
                     if (ct.ID > 0)
                     {
-                        CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).Update(ct);
+                        CommandResult ret = (new ContactBLL(AppSettings.Current.ConnStr)).Update(ct);
                         if (ret.Result != ResultCode.Successful)
                         {
                             MessageBox.Show(ret.Message);
@@ -211,7 +211,7 @@ namespace LJH.Inventory.UI.Forms
                             if (row.Selected)
                             {
                                 Contact c = row.Tag as Contact;
-                                CommandResult ret = (new ContactBLL(AppSettings.CurrentSetting.ConnStr)).Delete(c);
+                                CommandResult ret = (new ContactBLL(AppSettings.Current.ConnStr)).Delete(c);
                                 if (ret.Result == ResultCode.Successful)
                                 {
                                     deletingRows.Add(row);

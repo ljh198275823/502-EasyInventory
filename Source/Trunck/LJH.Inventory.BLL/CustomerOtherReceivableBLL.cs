@@ -41,7 +41,7 @@ namespace LJH.Inventory.BLL
                 if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
             }
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            Customer c = ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(info.CustomerID).QueryObject;
+            CompanyInfo c = ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(info.CustomerID).QueryObject;
             if (c != null)
             {
                 ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).Insert(info, unitWork);

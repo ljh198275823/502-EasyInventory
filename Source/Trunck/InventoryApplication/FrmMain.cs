@@ -267,9 +267,9 @@ namespace InventoryApplication
         {
             //ReadSoftDog();
             DoLogIn();
-            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.CurrentSetting.ConnStr);
+            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
             //启动同步时间服务
-            _DatetimeSyncService = new DatetimeSyncService(AppSettings.CurrentSetting.ConnStr);
+            _DatetimeSyncService = new DatetimeSyncService(AppSettings.Current.ConnStr);
             _DatetimeSyncService.Start();
         }
 
@@ -359,7 +359,7 @@ namespace InventoryApplication
                 {
                     try
                     {
-                        SqlClient client = new SqlClient(AppSettings.CurrentSetting.ConnStr);
+                        SqlClient client = new SqlClient(AppSettings.Current.ConnStr);
                         client.Connect();
                         client.ExecuteSQLFile(path);
                         MessageBox.Show("数据库升级成功!");

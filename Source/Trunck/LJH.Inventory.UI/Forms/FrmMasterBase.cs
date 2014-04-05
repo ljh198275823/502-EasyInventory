@@ -141,7 +141,7 @@ namespace LJH.Inventory.UI.Forms
         {
             DataGridView grid = this.GridView;
             if (grid == null) return;
-            string temp = AppSettings.CurrentSetting.GetConfigContent(string.Format("{0}_Columns", this.GetType().Name));
+            string temp = AppSettings.Current.GetConfigContent(string.Format("{0}_Columns", this.GetType().Name));
             if (string.IsNullOrEmpty(temp)) return;
             string[] cols = temp.Split(',');
 
@@ -477,7 +477,7 @@ namespace LJH.Inventory.UI.Forms
                 if (cols != null && cols.Length > 0)
                 {
                     string temp = string.Join(",", cols);
-                    AppSettings.CurrentSetting.SaveConfig(string.Format("{0}_Columns", this.GetType().Name), temp);
+                    AppSettings.Current.SaveConfig(string.Format("{0}_Columns", this.GetType().Name), temp);
                     InitGridViewColumns();
                 }
             }

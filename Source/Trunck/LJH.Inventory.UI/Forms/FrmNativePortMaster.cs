@@ -28,7 +28,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<Port> items = (new PortBLL(AppSettings.CurrentSetting.ConnStr)).GetNativePorts();
+            List<Port> items = (new PortBLL(AppSettings.Current.ConnStr)).GetNativePorts();
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();
@@ -48,7 +48,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            CommandResult ret = (new PortBLL(AppSettings.CurrentSetting.ConnStr)).Delete(item as Port);
+            CommandResult ret = (new PortBLL(AppSettings.Current.ConnStr)).Delete(item as Port);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message);

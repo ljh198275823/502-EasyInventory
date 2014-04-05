@@ -151,23 +151,22 @@
             // mnu_Customer
             // 
             this.mnu_Customer.Name = "mnu_Customer";
-            this.mnu_Customer.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Customer.Size = new System.Drawing.Size(152, 22);
             this.mnu_Customer.Text = "客户资料";
             this.mnu_Customer.Click += new System.EventHandler(this.mnu_Customer_Click);
             // 
             // 客户报价资料ToolStripMenuItem
             // 
             this.客户报价资料ToolStripMenuItem.Name = "客户报价资料ToolStripMenuItem";
-            this.客户报价资料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.客户报价资料ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.客户报价资料ToolStripMenuItem.Text = "客户报价资料";
             this.客户报价资料ToolStripMenuItem.Visible = false;
             // 
             // mnu_Order
             // 
             this.mnu_Order.Name = "mnu_Order";
-            this.mnu_Order.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Order.Size = new System.Drawing.Size(152, 22);
             this.mnu_Order.Text = "销售订单管理";
-            this.mnu_Order.Visible = false;
             this.mnu_Order.Click += new System.EventHandler(this.mnu_Order_Click);
             // 
             // 采购库存ToolStripMenuItem

@@ -79,13 +79,13 @@ namespace LJH.Inventory.UI.Forms
             txtShortName.Text = p.ShortName;
             if (!string.IsNullOrEmpty(p.Company))
             {
-                Customer c = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(p.Company).QueryObject;
+                CompanyInfo c = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(p.Company).QueryObject;
                 txtCompany.Tag = c;
                 txtCompany.Text = c != null ? c.ID : string.Empty;
             }
             if (!string.IsNullOrEmpty(p.InternalID))
             {
-                Product pi = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(p.InternalID).QueryObject;
+                Product pi = (new ProductBLL(AppSettings.Current.ConnStr)).GetByID(p.InternalID).QueryObject;
                 txtInternalID.Tag = pi;
                 txtInternalID.Text = pi != null ? pi.ID : string.Empty;
             }
@@ -117,7 +117,7 @@ namespace LJH.Inventory.UI.Forms
             p.ShortName = txtShortName.Text;
             if (!string.IsNullOrEmpty(txtCompany.Text))
             {
-                Customer c = txtCompany.Tag as Customer;
+                CompanyInfo c = txtCompany.Tag as CompanyInfo;
                 p.Company = c != null ? c.ID : null;
             }
             else
@@ -143,11 +143,11 @@ namespace LJH.Inventory.UI.Forms
             CommandResult ret = null;
             if (txtWarehouse.SelectedWareHouse != null && txtCount.DecimalValue > 0)
             {
-                ret = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).AddProduct(p, txtWarehouse.SelectedWareHouse.ID, txtCount.DecimalValue);
+                ret = (new ProductBLL(AppSettings.Current.ConnStr)).AddProduct(p, txtWarehouse.SelectedWareHouse.ID, txtCount.DecimalValue);
             }
             else
             {
-                ret = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).AddProduct(p);
+                ret = (new ProductBLL(AppSettings.Current.ConnStr)).AddProduct(p);
             }
             return ret;
         }
@@ -155,7 +155,7 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult UpdateItem(object updatingItem)
         {
             Product p = updatingItem as Product;
-            CommandResult ret = (new ProductBLL(AppSettings.CurrentSetting.ConnStr)).UpdateProduct(p);
+            CommandResult ret = (new ProductBLL(AppSettings.Current.ConnStr)).UpdateProduct(p);
             return ret;
         }
         #endregion
@@ -187,7 +187,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer c = frm.SelectedItem as Customer;
+                CompanyInfo c = frm.SelectedItem as CompanyInfo;
                 txtCompany.Text = c.ID;
                 txtCompany.Tag = c;
             }

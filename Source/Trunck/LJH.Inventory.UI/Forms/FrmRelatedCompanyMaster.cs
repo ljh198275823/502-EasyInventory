@@ -21,7 +21,7 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<Customer> _Customers = null;
+        private List<CompanyInfo> _Customers = null;
         #endregion
 
         #region 私有方法
@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms
             this.categoryTree.Nodes.Clear();
             this.categoryTree.Nodes.Add("所有供应商类别");
 
-            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
+            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.categoryTree.Nodes[0]);
@@ -81,7 +81,7 @@ namespace LJH.Inventory.UI.Forms
 
         private List<object> GetSelectedNodeItems()
         {
-            List<Customer> items = _Customers;
+            List<CompanyInfo> items = _Customers;
             RelatedCompanyType pc = null;
             if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as RelatedCompanyType;
             if (pc != null) items = _Customers.Where(it => it.CategoryID == pc.ID).ToList();
@@ -118,8 +118,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            Customer c = item as Customer;
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
+            CompanyInfo c = item as CompanyInfo;
+            CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             CommandResult ret = bll.Delete(c);
             if (ret.Result != ResultCode.Successful)
             {
@@ -134,7 +134,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
+            CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
@@ -148,7 +148,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            Customer c = item as Customer;
+            CompanyInfo c = item as CompanyInfo;
             row.Tag = c;
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
@@ -162,7 +162,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colMemo"].Value = c.Memo;
             if (_Customers == null || !_Customers.Exists(it => it.ID == c.ID))
             {
-                if (_Customers == null) _Customers = new List<Customer>();
+                if (_Customers == null) _Customers = new List<CompanyInfo>();
                 _Customers.Add(c);
             }
         }
@@ -173,13 +173,13 @@ namespace LJH.Inventory.UI.Forms
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                Customer c = dataGridView1.SelectedRows[0].Tag as Customer;
+                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
                 FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                 frm.Customer = c;
                 frm.IsAdding = true;
                 frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
                 {
-                    Customer c1 = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(c.ID).QueryObject;
+                    CompanyInfo c1 = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(c.ID).QueryObject;
                     if (c1 != null)
                     {
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
@@ -196,7 +196,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
-                    Customer c = dataGridView1.Rows[e.RowIndex].Tag as Customer;
+                    CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
                     FrmCustomerPaymentRemains frm = new FrmCustomerPaymentRemains();
                     frm.Customer = c;
                     frm.ShowDialog();
@@ -235,7 +235,7 @@ namespace LJH.Inventory.UI.Forms
             RelatedCompanyType pc = categoryTree.SelectedNode.Tag as RelatedCompanyType;
             if (pc != null && MessageBox.Show("是否删除此类别及其子项?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
             {
-                CommandResult ret = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).Delete(pc);
+                CommandResult ret = (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).Delete(pc);
                 if (ret.Result == ResultCode.Successful)
                 {
                     categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);

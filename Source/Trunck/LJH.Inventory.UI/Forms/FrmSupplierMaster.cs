@@ -21,7 +21,7 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<Customer> _Customers = null;
+        private List<CompanyInfo> _Customers = null;
         #endregion
 
         #region 私有方法
@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms
             this.categoryTree.Nodes.Clear();
             this.categoryTree.Nodes.Add("所有供应商类别");
 
-            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
+            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.categoryTree.Nodes[0]);
@@ -81,7 +81,7 @@ namespace LJH.Inventory.UI.Forms
 
         private List<object> GetSelectedNodeItems()
         {
-            List<Customer> items = _Customers;
+            List<CompanyInfo> items = _Customers;
             SupplierType pc = null;
             if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as SupplierType;
             if (pc != null) items = _Customers.Where(it => it.CategoryID == pc.ID).ToList();
@@ -118,8 +118,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            Customer c = item as Customer;
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
+            CompanyInfo c = item as CompanyInfo;
+            CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             CommandResult ret = bll.Delete(c);
             if (ret.Result != ResultCode.Successful)
             {
@@ -134,7 +134,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            CustomerBLL bll = new CustomerBLL(AppSettings.CurrentSetting.ConnStr);
+            CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
@@ -148,7 +148,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            Customer c = item as Customer;
+            CompanyInfo c = item as CompanyInfo;
             row.Tag = c;
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
@@ -162,7 +162,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colMemo"].Value = c.Memo;
             if (_Customers == null || !_Customers.Exists(it => it.ID == c.ID))
             {
-                if (_Customers == null) _Customers = new List<Customer>();
+                if (_Customers == null) _Customers = new List<CompanyInfo>();
                 _Customers.Add(c);
             }
         }
@@ -199,7 +199,7 @@ namespace LJH.Inventory.UI.Forms
             SupplierType pc = categoryTree.SelectedNode.Tag as SupplierType;
             if (pc != null && MessageBox.Show("是否删除此类别及其子项?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
             {
-                CommandResult ret = (new SupplierTypeBLL(AppSettings.CurrentSetting.ConnStr)).Delete(pc);
+                CommandResult ret = (new SupplierTypeBLL(AppSettings.Current.ConnStr)).Delete(pc);
                 if (ret.Result == ResultCode.Successful)
                 {
                     categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);

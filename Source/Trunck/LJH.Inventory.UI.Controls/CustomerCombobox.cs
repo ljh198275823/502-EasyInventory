@@ -26,8 +26,8 @@ namespace LJH.Inventory.UI.Controls
         }
 
         #region 私有变量
-        private List<Customer> _RenderItems;
-        private List<Customer> _SourceItems;
+        private List<CompanyInfo> _RenderItems;
+        private List<CompanyInfo> _SourceItems;
         #endregion
 
         #region 公共属性
@@ -37,7 +37,7 @@ namespace LJH.Inventory.UI.Controls
         [Browsable(false)]
         [Localizable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Customer SelectedCustomer
+        public CompanyInfo SelectedCustomer
         {
             get
             {
@@ -73,7 +73,7 @@ namespace LJH.Inventory.UI.Controls
                     }
                     this.Items.Clear();
                     this.Items.Add(string.Empty);
-                    foreach (Customer  item in _RenderItems)
+                    foreach (CompanyInfo  item in _RenderItems)
                     {
                         this.Items.Add(item.Name);
                         if (item.Name == this.Text)
@@ -95,14 +95,14 @@ namespace LJH.Inventory.UI.Controls
             this.Items.Add(string.Empty);
             if (_SourceItems == null)
             {
-                _SourceItems = (new CustomerBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(null).QueryObjects;
+                _SourceItems = (new CompanyBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             }
             if (_SourceItems != null && _SourceItems.Count > 0)
             {
                 _RenderItems = (from item in _SourceItems
                                 orderby item.Name ascending
                                 select item).ToList();
-                foreach (Customer item in _RenderItems)
+                foreach (CompanyInfo item in _RenderItems)
                 {
                     this.Items.Add(item.Name);
                 }

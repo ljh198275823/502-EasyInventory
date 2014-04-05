@@ -15,7 +15,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 
         /// </summary>
-        public static AppSettings CurrentSetting
+        public static AppSettings Current
         {
             get
             {

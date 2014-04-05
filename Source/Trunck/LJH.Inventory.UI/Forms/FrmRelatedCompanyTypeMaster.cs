@@ -27,7 +27,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
+            List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();
@@ -44,7 +44,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override bool DeletingItem(object item)
         {
-            CommandResult ret = (new RelatedCompanyTypeBLL(AppSettings.CurrentSetting.ConnStr)).Delete(item as RelatedCompanyType);
+            CommandResult ret = (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).Delete(item as RelatedCompanyType);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message);

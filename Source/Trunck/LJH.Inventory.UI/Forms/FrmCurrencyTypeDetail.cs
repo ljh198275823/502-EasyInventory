@@ -70,12 +70,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new CurrencyTypeBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as CurrencyType);
+            return (new CurrencyTypeBLL(AppSettings.Current.ConnStr)).Add(addingItem as CurrencyType);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new CurrencyTypeBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as CurrencyType);
+            return (new CurrencyTypeBLL(AppSettings.Current.ConnStr)).Update(updatingItem as CurrencyType);
         }
         #endregion
     }

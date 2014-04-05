@@ -41,7 +41,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.categoryTree = new System.Windows.Forms.TreeView();
+            this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree();
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
@@ -422,7 +422,7 @@
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.TreeView categoryTree;
+        private LJH.Inventory.UI.Controls.CustomerTree categoryTree;
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
         private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddCategory;

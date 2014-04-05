@@ -81,7 +81,7 @@
     <Compile Include="CollectionTypeBLL.cs" />
     <Compile Include="ContactBLL.cs" />
     <Compile Include="CurrencyTypeBLL.cs" />
-    <Compile Include="CustomerBLL.cs" />
+    <Compile Include="CompanyBLL.cs" />
     <Compile Include="CustomerOtherReceivableBLL.cs" />
     <Compile Include="CustomerPaymentBLL.cs" />
     <Compile Include="CustomerTypeBLL.cs" />

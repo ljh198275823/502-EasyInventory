@@ -57,7 +57,7 @@ namespace LJH.Inventory.UI.Report
             {
                 con.CategoryID = txtCategory.SelectedCategoryID;
             }
-            return (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
         }
 
         protected override void OnItemSearching(EventArgs e)

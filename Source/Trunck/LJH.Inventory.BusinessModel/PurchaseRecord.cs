@@ -34,7 +34,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置客户名称
         /// </summary>
-        public Customer Supplier { get; set; }
+        public CompanyInfo Supplier { get; set; }
         /// <summary>
         /// 获取或设置商品ID
         /// </summary>

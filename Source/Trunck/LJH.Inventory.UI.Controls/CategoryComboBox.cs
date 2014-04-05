@@ -10,15 +10,15 @@ using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.UI.Controls
 {
-    public partial class WareHouseComboBox : ComboBox
+    public partial class CategoryComboBox : ComboBox
     {
         #region 构造函数
-        public WareHouseComboBox()
+        public CategoryComboBox()
         {
             InitializeComponent();
         }
 
-        public WareHouseComboBox(IContainer container)
+        public CategoryComboBox(IContainer container)
         {
             container.Add(this);
 
@@ -26,33 +26,38 @@ namespace LJH.Inventory.UI.Controls
         }
         #endregion
 
-        #region 公共方法与属性
+        #region 公共方法及属性
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Init()
         {
+            ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.Current.ConnStr);
+            List<ProductCategory> items = bll.GetAll().QueryObjects;
             this.Items.Clear();
-            List<WareHouse> items = (new WareHouseBLL(AppSettings.CurrentSetting.ConnStr)).GetAll().QueryObjects;
-            items = (from c in items
-                     orderby c.Name ascending
-                     select c).ToList();
-            items.Insert(0, new WareHouse());
-            this.DataSource = items;
-            this.DisplayMember = "Name";
+            if (items.Count > 0)
+            {
+                items = (from item in items
+                         orderby item.Name descending
+                         select item).ToList();
+                items.Insert(0, new ProductCategory());
+                this.DataSource = items;
+            }
             this.DropDownStyle = ComboBoxStyle.DropDownList;
-            if (this.Items.Count == 2) this.SelectedIndex = 1;
         }
         /// <summary>
-        /// 获取选择的客户,没有选择项时返回null;
+        /// 获取或设置选中的商品类别ID
         /// </summary>
         [Browsable(false)]
         [Localizable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string SelectedWareHouseID
+        public string SelectedCategoryID
         {
             get
             {
                 if (this.SelectedIndex > 0)
                 {
-                    return (this.Items[SelectedIndex] as WareHouse).ID;
+                    return (this.Items[SelectedIndex] as ProductCategory).ID;
                 }
                 return string.Empty;
             }
@@ -61,7 +66,7 @@ namespace LJH.Inventory.UI.Controls
                 this.SelectedIndex = -1;
                 for (int i = 0; i < this.Items.Count; i++)
                 {
-                    if ((this.Items[i] as WareHouse).ID == value)
+                    if ((this.Items[i] as ProductCategory).ID == value)
                     {
                         this.SelectedIndex = i;
                         break;
@@ -69,24 +74,24 @@ namespace LJH.Inventory.UI.Controls
                 }
             }
         }
-
         /// <summary>
         /// 获取选中的商品类别
         /// </summary>
         [Browsable(false)]
         [Localizable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public WareHouse SelectedWareHouse
+        public ProductCategory SelectedCategory
         {
             get
             {
                 if (this.SelectedIndex > 0)
                 {
-                    return this.Items[SelectedIndex] as WareHouse;
+                    return this.Items[SelectedIndex] as ProductCategory;
                 }
                 return null;
             }
         }
         #endregion
+
     }
 }

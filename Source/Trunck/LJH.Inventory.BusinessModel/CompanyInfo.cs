@@ -8,10 +8,10 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户
     /// </summary>
-    public class Customer
+    public class CompanyInfo
     {
         #region 构造函数
-        public Customer()
+        public CompanyInfo()
         {
         }
         #endregion
@@ -108,9 +108,9 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 公共方法
-        public Customer Clone()
+        public CompanyInfo Clone()
         {
-            return MemberwiseClone() as Customer;
+            return MemberwiseClone() as CompanyInfo;
         }
         #endregion
     }

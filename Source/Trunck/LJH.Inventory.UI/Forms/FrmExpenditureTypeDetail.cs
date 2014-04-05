@@ -52,12 +52,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new ExpenditureTypeBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as ExpenditureType);
+            return (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).Add(addingItem as ExpenditureType);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new ExpenditureTypeBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as ExpenditureType);
+            return (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).Update(updatingItem as ExpenditureType);
         }
         #endregion
     }

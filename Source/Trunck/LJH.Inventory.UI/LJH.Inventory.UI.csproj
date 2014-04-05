@@ -58,67 +58,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CategoryComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\CategoryComboBox.Designer.cs">
-      <DependentUpon>CategoryComboBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CustomerCombobox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\CustomerCombobox.designer.cs">
-      <DependentUpon>CustomerCombobox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TooStripDBCTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\TooStripDBCTextBox.designer.cs">
-      <DependentUpon>TooStripDBCTextBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FrmProductDropdownList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\FrmProductDropdownList.Designer.cs">
-      <DependentUpon>FrmProductDropdownList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FunctionTree.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\FunctionTree.designer.cs">
-      <DependentUpon>FunctionTree.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PaymentModeComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\PaymentModeComboBox.designer.cs">
-      <DependentUpon>PaymentModeComboBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ProductComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\ProductComboBox.Designer.cs">
-      <DependentUpon>ProductComboBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\RoleCombobox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\RoleCombobox.designer.cs">
-      <DependentUpon>RoleCombobox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TextValueItem.cs" />
-    <Compile Include="Controls\UCProductSelection.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\UCProductSelection.Designer.cs">
-      <DependentUpon>UCProductSelection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\WareHouseComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\WareHouseComboBox.Designer.cs">
-      <DependentUpon>WareHouseComboBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="ExcelExporter\DeliverySheetExporter.cs" />
     <Compile Include="Forms\FrmAboat.cs">
       <SubType>Form</SubType>
@@ -604,15 +543,6 @@
     <Compile Include="View\FrmInventoryRecordView.Designer.cs">
       <DependentUpon>FrmInventoryRecordView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Controls\FrmProductDropdownList.resx">
-      <DependentUpon>FrmProductDropdownList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FunctionTree.resx">
-      <DependentUpon>FunctionTree.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UCProductSelection.resx">
-      <DependentUpon>UCProductSelection.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAboat.resx">
       <DependentUpon>FrmAboat.cs</DependentUpon>
     </EmbeddedResource>
@@ -881,6 +811,10 @@
     <ProjectReference Include="..\LJH.Inventory.BusinessModel\LJH.Inventory.BusinessModel.csproj">
       <Project>{E13ADAC1-9D84-4F58-B4A1-DEFB822F087E}</Project>
       <Name>LJH.Inventory.BusinessModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LJH.Inventory.UI.Controls\LJH.Inventory.UI.Controls.csproj">
+      <Project>{3945C03C-B3B2-4511-9324-2DF73A5FB3A0}</Project>
+      <Name>LJH.Inventory.UI.Controls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

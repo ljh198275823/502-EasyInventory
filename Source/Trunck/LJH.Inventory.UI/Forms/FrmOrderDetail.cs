@@ -161,9 +161,9 @@ namespace LJH.Inventory.UI.Forms
                 this.txtSalesPerson.Text = item.SalesPerson;
                 this.dtDeliveryDate.Value = item.DemandDate;
                 ShowDeliveryItemsOnGrid(item.Items);
-                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
-                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
+                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
                 ShowAttachmentHeaders(headers, this.gridAttachment);
                 ShowButtonState();
             }
@@ -184,10 +184,10 @@ namespace LJH.Inventory.UI.Forms
                 order = UpdatingItem as Order;
             }
             order.OrderDate = this.dtOrderDate.Value;
-            order.CustomerID = (this.txtCustomer.Tag as Customer).ID;
-            order.Customer = this.txtCustomer.Tag as Customer;
-            order.FinalCustomerID = this.txtFinalCustomer.Tag != null ? (this.txtFinalCustomer.Tag as Customer).ID : null;
-            order.FinalCustomer = this.txtFinalCustomer.Tag as Customer;
+            order.CustomerID = (this.txtCustomer.Tag as CompanyInfo).ID;
+            order.Customer = this.txtCustomer.Tag as CompanyInfo;
+            order.FinalCustomerID = this.txtFinalCustomer.Tag != null ? (this.txtFinalCustomer.Tag as CompanyInfo).ID : null;
+            order.FinalCustomer = this.txtFinalCustomer.Tag as CompanyInfo;
             order.PriceTerm = this.txtPriceTerm.Text;
             order.CurrencyType = this.txtCurrencyType.Text;
             order.Symbol = (this.txtCurrencyType.Tag as CurrencyType).Symbol;
@@ -224,12 +224,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).Add(item as Order, Operator.Current.Name);
+            return (new OrderBLL(AppSettings.Current.ConnStr)).Add(item as Order, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).Update(item as Order, Operator.Current.Name);
+            return (new OrderBLL(AppSettings.Current.ConnStr)).Update(item as Order, Operator.Current.Name);
         }
         #endregion
 
@@ -249,7 +249,7 @@ namespace LJH.Inventory.UI.Forms
                     header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Upload(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                         int row = gridAttachment.Rows.Add();
@@ -271,7 +271,7 @@ namespace LJH.Inventory.UI.Forms
                 foreach (DataGridViewRow row in this.gridAttachment.SelectedRows)
                 {
                     AttachmentHeader header = row.Tag as AttachmentHeader;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Delete(header);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Delete(header);
                     if (ret.Result == ResultCode.Successful)
                     {
                         deletingRows.Add(row);
@@ -301,7 +301,7 @@ namespace LJH.Inventory.UI.Forms
                 dig.Filter = "所有文件(*.*)|*.*";
                 if (dig.ShowDialog() == DialogResult.OK)
                 {
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                     }
@@ -320,7 +320,7 @@ namespace LJH.Inventory.UI.Forms
                 AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
                 string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
                 string path = System.IO.Path.Combine(dir, header.FileName);
-                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, path);
+                CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, path);
                 if (ret.Result == ResultCode.Successful)
                 {
                     try
@@ -377,10 +377,10 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要审核此订单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     Order sheet = UpdatingItem as Order;
-                    CommandResult ret = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
+                    CommandResult ret = (new OrderBLL(AppSettings.Current.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        Order sheet1 = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                        Order sheet1 = (new OrderBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
                         this.UpdatingItem = sheet1;
                         ItemShowing();
                         ShowButtonState();
@@ -401,10 +401,10 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否将此订单作废?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     Order sheet = UpdatingItem as Order;
-                    CommandResult ret = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).Nullify(sheet.ID, Operator.Current.Name);
+                    CommandResult ret = (new OrderBLL(AppSettings.Current.ConnStr)).Nullify(sheet.ID, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        Order sheet1 = (new OrderBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(sheet.ID).QueryObject;
+                        Order sheet1 = (new OrderBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
                         this.UpdatingItem = sheet1;
                         ItemShowing();
                         ShowButtonState();
@@ -514,7 +514,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer item = frm.SelectedItem as Customer;
+                CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtCustomer.Text = item.Name;
                 txtCustomer.Tag = item;
             }
@@ -526,7 +526,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer item = frm.SelectedItem as Customer;
+                CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtFinalCustomer.Text = item.Name;
                 txtFinalCustomer.Tag = item;
             }

@@ -25,7 +25,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             opts.LoadWith<CustomerPayment>(item => item.Assigns);
             dc.LoadOptions = opts;
             var ret = (from cp in dc.GetTable<CustomerPayment>()
-                       join c in dc.GetTable<Customer>()
+                       join c in dc.GetTable<CompanyInfo>()
                        on cp.CustomerID equals c.ID
                        select new { v1 = cp, v2 = c }).SingleOrDefault(item => item.v1.ID == id);
             if (ret != null)
@@ -42,7 +42,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             opts.LoadWith<CustomerPayment>(item => item.Assigns);
             dc.LoadOptions = opts;
             var ret = from cp in dc.GetTable<CustomerPayment>()
-                      join c in dc.GetTable<Customer>()
+                      join c in dc.GetTable<CompanyInfo>()
                       on cp.CustomerID equals c.ID
                       select new { v1 = cp, v2 = c };
             if (search is CustomerPaymentSearchCondition)

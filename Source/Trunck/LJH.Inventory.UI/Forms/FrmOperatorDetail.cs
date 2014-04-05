@@ -13,7 +13,7 @@ namespace LJH.Inventory.UI.Forms
 {
     public partial class FrmOperatorDetail : FrmDetailBase
     {
-        private OperatorBLL bll = new OperatorBLL(AppSettings.CurrentSetting.ConnStr);
+        private OperatorBLL bll = new OperatorBLL(AppSettings.Current.ConnStr);
         private string _subPwd = new string('*', 10);
 
         public FrmOperatorDetail()

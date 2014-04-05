@@ -21,14 +21,14 @@ namespace LJH.Inventory.UI.Report
         }
 
         #region 私有方法
-        private void ShowCustomer(Customer c)
+        private void ShowCustomer(CompanyInfo c)
         {
             this.Text = string.Format("{0} 的付款单明细", c.Name);
             List<CustomerPayment> items = null;
             CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
             con.CustomerID = c.ID;
             if (!chkShowAll.Checked) con.HasRemain = true;
-            items = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).GetItems(con).QueryObjects;
+            items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             GridView.Rows.Clear();
             if (items != null && items.Count > 0)
             {
@@ -59,7 +59,7 @@ namespace LJH.Inventory.UI.Report
         #endregion
 
         #region 公共方法
-        public Customer Customer { get; set; }
+        public CompanyInfo Customer { get; set; }
         #endregion
 
         #region 事件处理程序

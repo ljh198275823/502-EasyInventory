@@ -51,7 +51,7 @@ namespace LJH.Inventory.UI.Forms
             txtName.Text = ct.Name;
             if (!string.IsNullOrEmpty(ct.Parent))
             {
-                ParentCategory = (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(ct.Parent).QueryObject;
+                ParentCategory = (new CustomerTypeBLL(AppSettings.Current.ConnStr)).GetByID(ct.Parent).QueryObject;
                 txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
             }
             txtMemo.Text = ct.Memo;
@@ -73,12 +73,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as CustomerType);
+            return (new CustomerTypeBLL(AppSettings.Current.ConnStr)).Add(addingItem as CustomerType);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new CustomerTypeBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as CustomerType);
+            return (new CustomerTypeBLL(AppSettings.Current.ConnStr)).Update(updatingItem as CustomerType);
         }
         #endregion
 

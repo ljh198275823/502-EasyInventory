@@ -92,9 +92,9 @@ namespace LJH.Inventory.UI.Forms
                 txtCustomer.Tag = item.Customer;
                 txtMemo.Text = item.Memo;
                 ShowAssigns(item.Assigns);
-                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.CurrentSetting.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
+                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
-                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
+                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
                 ShowAttachmentHeaders(headers, this.gridAttachment);
                 ShowButtonState();
             }
@@ -119,7 +119,7 @@ namespace LJH.Inventory.UI.Forms
             info.CurrencyType = txtCurrencyType.Text;
             info.Amount = txtAmount.DecimalValue;
             info.CheckNum = txtCheckNum.Text;
-            info.Customer = txtCustomer.Tag as Customer;
+            info.Customer = txtCustomer.Tag as CompanyInfo;
             info.CustomerID = info.Customer.ID;
             info.Memo = txtMemo.Text;
             info.Assigns = GetAssignsFromGrid();
@@ -129,13 +129,13 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr);
+            CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
             return bll.Add(item as CustomerPayment, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr);
+            CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
             return bll.Update(item as CustomerPayment, Operator.Current.Name);
         }
 
@@ -160,7 +160,7 @@ namespace LJH.Inventory.UI.Forms
                     header.Owner = Operator.Current.Name;
                     header.FileName = System.IO.Path.GetFileName(dig.FileName);
                     header.UploadDateTime = DateTime.Now;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Upload(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Upload(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                         int row = gridAttachment.Rows.Add();
@@ -181,7 +181,7 @@ namespace LJH.Inventory.UI.Forms
                 AttachmentHeader header = this.gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
                 string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
                 string path = System.IO.Path.Combine(dir, header.FileName);
-                CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, path);
+                CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, path);
                 if (ret.Result == ResultCode.Successful)
                 {
                     try
@@ -210,7 +210,7 @@ namespace LJH.Inventory.UI.Forms
                 dig.Filter = "所有文件(*.*)|*.*";
                 if (dig.ShowDialog() == DialogResult.OK)
                 {
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Download(header, dig.FileName);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, dig.FileName);
                     if (ret.Result == ResultCode.Successful)
                     {
                     }
@@ -230,7 +230,7 @@ namespace LJH.Inventory.UI.Forms
                 foreach (DataGridViewRow row in this.gridAttachment.SelectedRows)
                 {
                     AttachmentHeader header = row.Tag as AttachmentHeader;
-                    CommandResult ret = (new AttachmentBLL(AppSettings.CurrentSetting.ConnStr)).Delete(header);
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Delete(header);
                     if (ret.Result == ResultCode.Successful)
                     {
                         deletingRows.Add(row);
@@ -275,11 +275,11 @@ namespace LJH.Inventory.UI.Forms
         /// <summary>
         /// 获取或设置付款的用户
         /// </summary>
-        public Customer Customer
+        public CompanyInfo Customer
         {
             get
             {
-                return txtCustomer.Tag as Customer;
+                return txtCustomer.Tag as CompanyInfo;
             }
             set
             {
@@ -304,10 +304,10 @@ namespace LJH.Inventory.UI.Forms
                 if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     CustomerPayment item = UpdatingItem as CustomerPayment;
-                    CommandResult ret = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).Cancel(item, Operator.Current.Name);
+                    CommandResult ret = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).Cancel(item, Operator.Current.Name);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        CustomerPayment item1 = (new CustomerPaymentBLL(AppSettings.CurrentSetting.ConnStr)).GetByID(item.ID).QueryObject;
+                        CustomerPayment item1 = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(item.ID).QueryObject;
                         this.UpdatingItem = item1;
                         ItemShowing();
                         ShowButtonState();
@@ -327,7 +327,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer item = frm.SelectedItem as Customer;
+                CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtCustomer.Text = item.Name;
                 txtCustomer.Tag = item;
             }
@@ -362,7 +362,7 @@ namespace LJH.Inventory.UI.Forms
             if (txtCustomer.Tag != null)
             {
                 OrderSearchCondition con = new OrderSearchCondition();
-                con.CustomerID = (txtCustomer.Tag as Customer).ID;
+                con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
                 con.HasNotPaid = true;
                 FrmOrderSelection frm = new FrmOrderSelection();
                 frm.SearchCondition = con;

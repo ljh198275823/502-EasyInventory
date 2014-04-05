@@ -29,7 +29,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置客户名称
         /// </summary>
-        public Customer Customer { get; set; }
+        public CompanyInfo Customer { get; set; }
         /// <summary>
         /// 获取或设置最终客户ID
         /// </summary>
@@ -37,7 +37,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置最终客户
         /// </summary>
-        public Customer FinalCustomer { get; set; }
+        public CompanyInfo FinalCustomer { get; set; }
         /// <summary>
         /// 获取或设置是否含税
         /// </summary>

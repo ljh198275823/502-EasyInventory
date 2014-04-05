@@ -29,7 +29,7 @@ namespace LJH.Inventory.UI.Forms
         {
             if (CheckInput())
             {
-                OperatorBLL bll = new OperatorBLL(AppSettings.CurrentSetting.ConnStr);
+                OperatorBLL bll = new OperatorBLL(AppSettings.Current.ConnStr);
                 Operator.Password = txtNewPwd.Text;
                 CommandResult result=bll.Update (Operator );
                 if (result.Result == ResultCode.Successful)

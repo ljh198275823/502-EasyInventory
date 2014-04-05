@@ -32,7 +32,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置代付的客户
         /// </summary>
-        public Customer Customer { get; set; }
+        public CompanyInfo Customer { get; set; }
         /// <summary>
         /// 获取或设置创建日期
         /// </summary>

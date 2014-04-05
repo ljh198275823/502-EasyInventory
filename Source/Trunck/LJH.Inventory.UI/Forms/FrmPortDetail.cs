@@ -78,12 +78,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return (new PortBLL(AppSettings.CurrentSetting.ConnStr)).Add(addingItem as Port);
+            return (new PortBLL(AppSettings.Current.ConnStr)).Add(addingItem as Port);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
-            return (new PortBLL(AppSettings.CurrentSetting.ConnStr)).Update(updatingItem as Port);
+            return (new PortBLL(AppSettings.Current.ConnStr)).Update(updatingItem as Port);
         }
 
         protected override void  InitControls()

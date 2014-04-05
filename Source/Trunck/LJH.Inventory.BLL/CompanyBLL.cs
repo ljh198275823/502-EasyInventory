@@ -8,19 +8,20 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.BLL
 {
-    public class CustomerBLL
+    public class CompanyBLL
     {
         #region 构造函数
-        public CustomerBLL(string repUri)
+        public CompanyBLL(string repUri)
         {
-            _RepoUri  =repUri ;
+            _RepoUri = repUri;
         }
         #endregion
 
         #region 私有变量
-        private string _RepoUri; 
+        private string _RepoUri;
         #endregion
 
+        #region 私有方法
         private string CreateCustomerID(CustomerClass classID)
         {
             string id = null;
@@ -38,23 +39,34 @@ namespace LJH.Inventory.BLL
             }
             return id;
         }
+        #endregion
 
         #region 公共方法
         /// <summary>
         /// 获取所有客户信息
         /// </summary>
         /// <returns></returns>
-        public  QueryResultList <Customer> GetItems(SearchCondition con)
+        public QueryResultList<CompanyInfo> GetItems(SearchCondition con)
         {
             return ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetItems(con);
         }
 
-        public QueryResult<Customer> GetByID(string id)
+        public QueryResult<CompanyInfo> GetByID(string id)
         {
             return ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(id);
         }
+        /// <summary>
+        /// 获取所有客户信息
+        /// </summary>
+        /// <returns></returns>
+        public QueryResultList<CompanyInfo> GetAllCustomers()
+        {
+            CustomerSearchCondition con = new CustomerSearchCondition();
+            con.ClassID = CustomerClass.Customer;
+            return GetItems(con);
+        }
 
-        public CommandResult Insert(Customer info)
+        public CommandResult Insert(CompanyInfo info)
         {
             if (string.IsNullOrEmpty(info.ID))
             {
@@ -70,7 +82,7 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public CommandResult Insert(Customer info, decimal prepayment, decimal receivables)
+        public CommandResult Insert(CompanyInfo info, decimal prepayment, decimal receivables)
         {
             if (string.IsNullOrEmpty(info.ID))
             {
@@ -115,9 +127,9 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public CommandResult Update(Customer info)
+        public CommandResult Update(CompanyInfo info)
         {
-            Customer original = ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(info.ID).QueryObject;
+            CompanyInfo original = ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(info.ID).QueryObject;
             if (original == null)
             {
                 return new CommandResult(ResultCode.Fail, string.Format("系统中不存在 ID={0} 的用户信息", info.ID));
@@ -125,7 +137,7 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<ICustomerProvider>(_RepoUri).Update(info, original);
         }
 
-        public CommandResult Delete(Customer info)
+        public CommandResult Delete(CompanyInfo info)
         {
             DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
             con.CustomerID = info.ID;
@@ -136,7 +148,7 @@ namespace LJH.Inventory.BLL
             }
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            CustomerPaymentSearchCondition con1=new CustomerPaymentSearchCondition() { CustomerID = info.ID };
+            CustomerPaymentSearchCondition con1 = new CustomerPaymentSearchCondition() { CustomerID = info.ID };
             List<CustomerPayment> cps = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetItems(con1).QueryObjects;
             if (cps != null && cps.Count > 0)
             {

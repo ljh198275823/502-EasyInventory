@@ -42,14 +42,6 @@
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.pnlLeft = new System.Windows.Forms.Panel();
-            this.btnCanceled = new System.Windows.Forms.Button();
-            this.btnClosed = new System.Windows.Forms.Button();
-            this.btnCompleteAll = new System.Windows.Forms.Button();
-            this.btnNonEmergency = new System.Windows.Forms.Button();
-            this.btnOverDate = new System.Windows.Forms.Button();
-            this.btnEmergency = new System.Windows.Forms.Button();
-            this.btnAll = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,10 +61,12 @@
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlLeft = new System.Windows.Forms.Panel();
+            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.menu.SuspendLayout();
-            this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.pnlLeft.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -163,117 +157,6 @@
             this.splitter1.Size = new System.Drawing.Size(8, 320);
             this.splitter1.TabIndex = 106;
             this.splitter1.TabStop = false;
-            // 
-            // pnlLeft
-            // 
-            this.pnlLeft.Controls.Add(this.btnCanceled);
-            this.pnlLeft.Controls.Add(this.btnClosed);
-            this.pnlLeft.Controls.Add(this.btnCompleteAll);
-            this.pnlLeft.Controls.Add(this.btnNonEmergency);
-            this.pnlLeft.Controls.Add(this.btnOverDate);
-            this.pnlLeft.Controls.Add(this.btnEmergency);
-            this.pnlLeft.Controls.Add(this.btnAll);
-            this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlLeft.Location = new System.Drawing.Point(0, 50);
-            this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(200, 320);
-            this.pnlLeft.TabIndex = 105;
-            // 
-            // btnCanceled
-            // 
-            this.btnCanceled.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCanceled.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCanceled.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCanceled.ForeColor = System.Drawing.Color.Black;
-            this.btnCanceled.Location = new System.Drawing.Point(0, 252);
-            this.btnCanceled.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnCanceled.Name = "btnCanceled";
-            this.btnCanceled.Size = new System.Drawing.Size(200, 42);
-            this.btnCanceled.TabIndex = 25;
-            this.btnCanceled.Text = "作废";
-            this.btnCanceled.UseVisualStyleBackColor = true;
-            // 
-            // btnClosed
-            // 
-            this.btnClosed.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnClosed.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClosed.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnClosed.ForeColor = System.Drawing.Color.Black;
-            this.btnClosed.Location = new System.Drawing.Point(0, 210);
-            this.btnClosed.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnClosed.Name = "btnClosed";
-            this.btnClosed.Size = new System.Drawing.Size(200, 42);
-            this.btnClosed.TabIndex = 24;
-            this.btnClosed.Text = "关闭";
-            this.btnClosed.UseVisualStyleBackColor = true;
-            // 
-            // btnCompleteAll
-            // 
-            this.btnCompleteAll.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCompleteAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCompleteAll.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCompleteAll.ForeColor = System.Drawing.Color.Black;
-            this.btnCompleteAll.Location = new System.Drawing.Point(0, 168);
-            this.btnCompleteAll.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnCompleteAll.Name = "btnCompleteAll";
-            this.btnCompleteAll.Size = new System.Drawing.Size(200, 42);
-            this.btnCompleteAll.TabIndex = 23;
-            this.btnCompleteAll.Text = "全部交货";
-            this.btnCompleteAll.UseVisualStyleBackColor = true;
-            // 
-            // btnNonEmergency
-            // 
-            this.btnNonEmergency.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNonEmergency.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnNonEmergency.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnNonEmergency.Location = new System.Drawing.Point(0, 126);
-            this.btnNonEmergency.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnNonEmergency.Name = "btnNonEmergency";
-            this.btnNonEmergency.Size = new System.Drawing.Size(200, 42);
-            this.btnNonEmergency.TabIndex = 20;
-            this.btnNonEmergency.Text = "非紧急";
-            this.btnNonEmergency.UseVisualStyleBackColor = true;
-            // 
-            // btnOverDate
-            // 
-            this.btnOverDate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnOverDate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOverDate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOverDate.ForeColor = System.Drawing.Color.Red;
-            this.btnOverDate.Location = new System.Drawing.Point(0, 84);
-            this.btnOverDate.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnOverDate.Name = "btnOverDate";
-            this.btnOverDate.Size = new System.Drawing.Size(200, 42);
-            this.btnOverDate.TabIndex = 14;
-            this.btnOverDate.Text = "逾期未交";
-            this.btnOverDate.UseVisualStyleBackColor = true;
-            // 
-            // btnEmergency
-            // 
-            this.btnEmergency.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnEmergency.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEmergency.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnEmergency.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnEmergency.Location = new System.Drawing.Point(0, 42);
-            this.btnEmergency.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnEmergency.Name = "btnEmergency";
-            this.btnEmergency.Size = new System.Drawing.Size(200, 42);
-            this.btnEmergency.TabIndex = 13;
-            this.btnEmergency.Text = "即将交货";
-            this.btnEmergency.UseVisualStyleBackColor = true;
-            // 
-            // btnAll
-            // 
-            this.btnAll.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAll.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAll.Location = new System.Drawing.Point(0, 0);
-            this.btnAll.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.btnAll.Name = "btnAll";
-            this.btnAll.Size = new System.Drawing.Size(200, 42);
-            this.btnAll.TabIndex = 11;
-            this.btnAll.Text = "全部";
-            this.btnAll.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -435,6 +318,25 @@
             this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
             // 
+            // pnlLeft
+            // 
+            this.pnlLeft.Controls.Add(this.customerTree1);
+            this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlLeft.Location = new System.Drawing.Point(0, 50);
+            this.pnlLeft.Name = "pnlLeft";
+            this.pnlLeft.Size = new System.Drawing.Size(200, 320);
+            this.pnlLeft.TabIndex = 105;
+            // 
+            // customerTree1
+            // 
+            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.ItemHeight = 20;
+            this.customerTree1.LoadCustomer = true;
+            this.customerTree1.Location = new System.Drawing.Point(0, 0);
+            this.customerTree1.Name = "customerTree1";
+            this.customerTree1.Size = new System.Drawing.Size(200, 320);
+            this.customerTree1.TabIndex = 0;
+            // 
             // FrmOrderMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -452,9 +354,9 @@
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
-            this.pnlLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.pnlLeft.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -472,14 +374,6 @@
         private LJH.Inventory.UI.Controls.TooStripDBCTextBox txtKeyword;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.Panel pnlLeft;
-        private System.Windows.Forms.Button btnOverDate;
-        private System.Windows.Forms.Button btnEmergency;
-        private System.Windows.Forms.Button btnAll;
-        private System.Windows.Forms.Button btnNonEmergency;
-        private System.Windows.Forms.Button btnCanceled;
-        private System.Windows.Forms.Button btnClosed;
-        private System.Windows.Forms.Button btnCompleteAll;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
@@ -499,5 +393,7 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.Panel pnlLeft;
+        private Controls.CustomerTree customerTree1;
     }
 }

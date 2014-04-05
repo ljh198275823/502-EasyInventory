@@ -64,7 +64,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (sheets != null && sheets.Count > 0)
             {
                 List<WareHouse> ws = (new WareHouseProvider(ConnectStr)).GetItems(null).QueryObjects;
-                List<Customer> ss = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
+                List<CompanyInfo> ss = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
                 List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
                 foreach (InventorySheet sheet in sheets)
                 {
