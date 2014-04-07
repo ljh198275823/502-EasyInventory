@@ -48,7 +48,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置付款金额剩余未抵销的金额
         /// </summary>
-        public decimal Remain { get; set; }
+        public decimal Assigned { get; set; }
         /// <summary>
         /// 获取或设置支票号(如果是支票付款)
         /// </summary>
@@ -65,20 +65,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置客户付款分配列表
         /// </summary>
         public List<CustomerPaymentAssign> Assigns { get; set; }
-        #endregion
-
-        #region 只读属性
-        /// <summary>
-        /// 获取客户付款还有多少未分配金额
-        /// </summary>
-        public decimal NotAssigned
-        {
-            get
-            {
-                if (Assigns == null || Assigns.Count == 0) return Amount;
-                return Amount - Assigns.Sum(item => item.Amount);
-            }
-        }
         #endregion
 
         #region 公共方法

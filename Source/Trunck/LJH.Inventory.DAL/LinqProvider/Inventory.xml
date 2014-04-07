@@ -450,7 +450,7 @@
       <Column Name="CurrencyType" Member="CurrencyType" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="Remain" Member="Remain" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Assigned" Member="Assigned" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="CheckNum" Member="CheckNum" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>

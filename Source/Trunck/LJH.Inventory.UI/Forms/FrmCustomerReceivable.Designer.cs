@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -223,6 +225,9 @@
             // 
             // colReceivable
             // 
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle1;
             this.colReceivable.HeaderText = "应收金额";
             this.colReceivable.Name = "colReceivable";
             this.colReceivable.ReadOnly = true;
@@ -231,6 +236,9 @@
             // 
             // colPrepay
             // 
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle2;
             this.colPrepay.HeaderText = "预付款";
             this.colPrepay.Name = "colPrepay";
             this.colPrepay.ReadOnly = true;

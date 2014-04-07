@@ -121,7 +121,6 @@ namespace LJH.Inventory.BLL
                 if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
             }
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            if (info.Assigns != null) info.Assigns.ForEach(item => item.PaymentID = info.ID);
             ICustomerPaymentProvider provider = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri);
             provider.Insert(info, unitWork);
 
@@ -224,7 +223,6 @@ namespace LJH.Inventory.BLL
             //首先删除付款流水，然后再增加回来，这样做要达到的效果是把付款流水状态变成作废，而且分配项全部删除。
             CustomerPayment cp = info.Clone();
             info.State = SheetState.Canceled;
-            info.Assigns.Clear();
             ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Update(info, cp, unitWork);
 
             DocumentOperation doc = new DocumentOperation()
