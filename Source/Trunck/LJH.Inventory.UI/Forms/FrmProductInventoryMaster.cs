@@ -25,77 +25,22 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void InitCategoryTree()
-        {
-            this.categoryTree.Nodes.Clear();
-            this.categoryTree.Nodes.Add("所有仓库");
-
-            List<WareHouse> items = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                AddDesendNodes(items, this.categoryTree.Nodes[0]);
-            }
-        }
-
-        private void AddDesendNodes(List<WareHouse> items, TreeNode parent)
-        {
-            List<WareHouse> pcs = null;
-            if (parent.Tag == null)
-            {
-                pcs = items.Where(it => string.IsNullOrEmpty(it.Parent)).ToList();
-            }
-            else
-            {
-                pcs = items.Where(it => it.Parent == (parent.Tag as WareHouse).ID).ToList();
-            }
-            if (pcs != null && pcs.Count > 0)
-            {
-                foreach (WareHouse pc in pcs)
-                {
-                    TreeNode node = AddNode(pc, parent);
-                    AddDesendNodes(items, node);
-                }
-            }
-            parent.ImageIndex = 0;
-            parent.SelectedImageIndex = 0;
-            parent.ExpandAll();
-        }
-
         private void SelectNode(TreeNode node)
         {
-            if (!object.ReferenceEquals(categoryTree.SelectedNode, node))
-            {
-                if (categoryTree.SelectedNode != null)
-                {
-                    categoryTree.SelectedNode.BackColor = Color.White;
-                    categoryTree.SelectedNode.ForeColor = Color.Black;
-                }
-                categoryTree.SelectedNode = node;
-                categoryTree.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
-                categoryTree.SelectedNode.ForeColor = Color.White;
-
-                List<object> items = GetSelectedNodeItems();
-                ShowItemsOnGrid(items);
-            }
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
         }
 
         private List<object> GetSelectedNodeItems()
         {
             List<ProductInventory> items = _ProductInventorys;
-            WareHouse pc = null;
-            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as WareHouse;
-            if (pc != null) items = _ProductInventorys.Where(it => it.WareHouseID == pc.ID).ToList();
+            ProductCategory pc = null;
+            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as ProductCategory;
+            if (pc != null) items = _ProductInventorys.Where(it => it.Product.CategoryID == pc.ID).ToList();
 
             return (from p in items
                     orderby p.Product.Name ascending
                     select (object)p).ToList();
-        }
-
-        private TreeNode AddNode(WareHouse pc, TreeNode parent)
-        {
-            TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
-            node.Tag = pc;
-            return node;
         }
         #endregion
 
@@ -103,16 +48,13 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            InitCategoryTree();
+            this.categoryTree.Init();
             Operator cur = Operator.Current;
-            this.mnu_AddCategory.Enabled = cur.Permit(Permission.EditWareHouse);
-            this.mnu_DeleteCategory.Enabled = cur.Permit(Permission.EditWareHouse);
-            this.mnu_CategoryProperty.Enabled = cur.Permit(Permission.EditWareHouse) || cur.Permit(Permission.ReadWareHouse);
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmProductInventoryDetail  frm= new FrmProductInventoryDetail();
+            FrmProductInventoryDetail frm = new FrmProductInventoryDetail();
             frm.WareHouse = categoryTree.SelectedNode != null ? (categoryTree.SelectedNode.Tag as WareHouse) : null;
             return frm;
         }
@@ -175,61 +117,9 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
-        #region 类别树右键菜单
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             SelectNode(e.Node);
         }
-
-        private void mnu_FreshTree_Click(object sender, EventArgs e)
-        {
-            InitCategoryTree();
-            SelectNode(categoryTree.Nodes[0]);
-        }
-
-        private void mnu_AddCategory_Click(object sender, EventArgs e)
-        {
-            WareHouse pc = categoryTree.SelectedNode.Tag as WareHouse;
-            FrmWareHouseDetail frm = new FrmWareHouseDetail();
-            frm.IsAdding = true;
-            frm.ParentWareHouse = pc;
-            frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
-            {
-                WareHouse item = args.AddedItem as WareHouse;
-                AddNode(item, categoryTree.SelectedNode);
-            };
-            frm.ShowDialog();
-        }
-
-        private void mnu_DeleteCategory_Click(object sender, EventArgs e)
-        {
-            WareHouse pc = categoryTree.SelectedNode.Tag as WareHouse;
-            if (pc != null && MessageBox.Show("是否删除此仓库?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
-            {
-                CommandResult ret = (new WareHouseBLL(AppSettings.Current.ConnStr)).Delete(pc);
-                if (ret.Result == ResultCode.Successful)
-                {
-                    categoryTree.SelectedNode.Parent.Nodes.Remove(categoryTree.SelectedNode);
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message);
-                }
-            }
-        }
-
-        private void mnu_CategoryProperty_Click(object sender, EventArgs e)
-        {
-            WareHouse pc = categoryTree.SelectedNode.Tag as WareHouse;
-            FrmWareHouseDetail frm = new FrmWareHouseDetail();
-            frm.IsAdding = false;
-            frm.UpdatingItem = pc;
-            frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
-            {
-                categoryTree.SelectedNode.Text = string.Format("{0}", pc.Name);
-            };
-            frm.ShowDialog();
-        }
-        #endregion
     }
 }

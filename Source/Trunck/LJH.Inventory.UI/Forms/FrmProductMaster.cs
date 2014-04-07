@@ -24,58 +24,10 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void InitCategoryTree()
-        {
-            this.categoryTree.Nodes.Clear();
-            this.categoryTree.Nodes.Add("所有产品类别");
-
-            List<ProductCategory> items = (new ProductCategoryBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                AddDesendNodes(items, this.categoryTree.Nodes[0]);
-            }
-        }
-
-        private void AddDesendNodes(List<ProductCategory> items, TreeNode parent)
-        {
-            List<ProductCategory> pcs = null;
-            if (parent.Tag == null)
-            {
-                pcs = items.Where(it => string.IsNullOrEmpty(it.Parent)).ToList();
-            }
-            else
-            {
-                pcs = items.Where(it => it.Parent == (parent.Tag as ProductCategory).ID).ToList();
-            }
-            if (pcs != null && pcs.Count > 0)
-            {
-                foreach (ProductCategory pc in pcs)
-                {
-                    TreeNode node = AddNode(pc, parent);
-                    AddDesendNodes(items, node);
-                }
-            }
-            parent.ImageIndex = 0;
-            parent.SelectedImageIndex = 0;
-            parent.ExpandAll();
-        }
-
         private void SelectNode(TreeNode node)
         {
-            if (!object.ReferenceEquals(categoryTree.SelectedNode, node))
-            {
-                if (categoryTree.SelectedNode != null)
-                {
-                    categoryTree.SelectedNode.BackColor = Color.White;
-                    categoryTree.SelectedNode.ForeColor = Color.Black;
-                }
-                categoryTree.SelectedNode = node;
-                categoryTree.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
-                categoryTree.SelectedNode.ForeColor = Color.White;
-
-                List<object> items = GetSelectedNodeItems();
-                ShowItemsOnGrid(items);
-            }
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
         }
 
         private List<object> GetSelectedNodeItems()
@@ -89,19 +41,12 @@ namespace LJH.Inventory.UI.Forms
                     orderby p.Name ascending
                     select (object)p).ToList();
         }
-
-        private TreeNode AddNode(ProductCategory pc, TreeNode parent)
-        {
-            TreeNode node = parent.Nodes.Add(string.Format("[{0}] {1}", pc.ID, pc.Name));
-            node.Tag = pc;
-            return node;
-        }
         #endregion
 
         #region 重写基类方法
         protected override void Init()
         {
-            InitCategoryTree();
+            this.categoryTree.Init();
             this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.EditProductCategory);
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.EditProductCategory);
             this.mnu_CategoryProperty.Enabled = Operator.Current.Permit(Permission.EditProductCategory) || Operator.Current.Permit(Permission.ReadProductCategory);
@@ -171,7 +116,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void mnu_FreshTree_Click(object sender, EventArgs e)
         {
-            InitCategoryTree();
+            this.categoryTree.Init();
             SelectNode(categoryTree.Nodes[0]);
         }
 
@@ -184,7 +129,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
                 ProductCategory item = args.AddedItem as ProductCategory;
-                AddNode(item, categoryTree.SelectedNode);
+                this.categoryTree.AddCategoryNode(item, categoryTree.SelectedNode);
             };
             frm.ShowDialog();
         }

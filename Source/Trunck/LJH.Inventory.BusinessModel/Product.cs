@@ -66,18 +66,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Cost { get; set; }
         /// <summary>
-        /// 获取或设置海关编码
-        /// </summary>
-        public string HSCode { get; set; }
-        /// <summary>
-        /// 获取或设置海关编码名称
-        /// </summary>
-        public string HSName { get; set; }
-        /// <summary>
-        /// 获取或设置退税率
-        /// </summary>
-        public decimal? BackTaxes { get; set; }
-        /// <summary>
         /// 获取或设置产品用于哪些客户，比如有些产品针对不同的客户有不同的物料编号
         /// </summary>
         public string Company { get; set; }
@@ -85,6 +73,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置产品的内部编号，主要是针对某种产品针对不同的客户有不同的编号，但在内部统计库存等时则需要用一个统一的内部编号
         /// </summary>
         public string InternalID { get; set; }
+        /// <summary>
+        /// 获取或设置产品的权重,主要用于产品排序，数据越大的产品排得越靠前
+        /// </summary>
+        public long? Point { get; set; }
         /// <summary>
         /// 获取或设置商品描述
         /// </summary>

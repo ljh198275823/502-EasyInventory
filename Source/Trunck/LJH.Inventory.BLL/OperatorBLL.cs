@@ -16,6 +16,7 @@ namespace LJH.Inventory.BLL
             provider = ProviderFactory.Create<IOperatorProvider>(repUri);
         }
         #endregion
+
         #region 私有变量
         private IOperatorProvider provider;
         #endregion

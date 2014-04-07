@@ -407,5 +407,10 @@ namespace InventoryApplication
         {
             ShowSingleForm(typeof(FrmRelatedCompanyMaster));
         }
+
+        private void mnu_WareHouse_Click_1(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmWareHouseMaster));
+        }
     }
 }
