@@ -86,6 +86,7 @@
     <Compile Include="IProvider\ICustomerPaymentProvider.cs" />
     <Compile Include="IProvider\ICustomerOtherReceivableProvider.cs" />
     <Compile Include="IProvider\ICustomerReceivableProvider.cs" />
+    <Compile Include="IProvider\ICustomerStateProvider.cs" />
     <Compile Include="IProvider\ICustomerTypeProvider.cs" />
     <Compile Include="IProvider\IDocumentOperationProvider.cs" />
     <Compile Include="IProvider\IExpenditureTypeProvider.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="LinqProvider\CustomerPaymentProvider.cs" />
     <Compile Include="LinqProvider\CustomerProvider.cs" />
     <Compile Include="LinqProvider\CustomerReceivableProvider.cs" />
+    <Compile Include="LinqProvider\CustomerStateProvider.cs" />
     <Compile Include="LinqProvider\CustomerTypeProvider.cs" />
     <Compile Include="LinqProvider\DocumentOperationProvider.cs" />
     <Compile Include="LinqProvider\ExpenditureTypeProvider.cs" />

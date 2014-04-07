@@ -88,8 +88,12 @@ namespace LJH.Inventory.UI.Forms
                 rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
                 txtAmount.DecimalValue = item.Amount;
                 txtCheckNum.Text = item.CheckNum;
-                txtCustomer.Text = item.Customer != null ? item.Customer.Name : string.Empty;
-                txtCustomer.Tag = item.Customer;
+                if (!string.IsNullOrEmpty(item.CustomerID))
+                {
+                    CompanyInfo c = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
+                    txtCustomer.Text = c != null ? c.Name : string.Empty;
+                    txtCustomer.Tag = c;
+                }
                 txtMemo.Text = item.Memo;
                 ShowAssigns(item.Assigns);
                 List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
@@ -119,8 +123,8 @@ namespace LJH.Inventory.UI.Forms
             info.CurrencyType = txtCurrencyType.Text;
             info.Amount = txtAmount.DecimalValue;
             info.CheckNum = txtCheckNum.Text;
-            info.Customer = txtCustomer.Tag as CompanyInfo;
-            info.CustomerID = info.Customer.ID;
+            CompanyInfo c = txtCustomer.Tag as CompanyInfo;
+            info.CustomerID = c != null ? c.ID : null;
             info.Memo = txtMemo.Text;
             info.Assigns = GetAssignsFromGrid();
             info.Assigns.ForEach(item => item.PaymentID = info.ID);

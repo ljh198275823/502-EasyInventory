@@ -10,8 +10,6 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     {
         public string CustomerID { get; set; }
 
-        public string CustomerName { get; set; }
-
         public DateTimeRange PaidDate { get; set; }
 
         public bool? HasRemain { get; set; }

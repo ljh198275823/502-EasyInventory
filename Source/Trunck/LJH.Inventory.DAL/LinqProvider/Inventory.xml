@@ -88,6 +88,13 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
+  <Table Name="dbo.View_CustomerState" Member="LJH.Inventory.BusinessModel.CustomerState">
+    <Type Name="LJH.Inventory.BusinessModel.CustomerState">
+      <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true"/>
+      <Column Name="Prepay" Member="Prepay" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Receivable" Member="Receivable" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+    </Type>
+  </Table>  
   <Table Name="dbo.DocumentOperation" Member="LJH.Inventory.BusinessModel.DocumentOperation">
     <Type Name="LJH.Inventory.BusinessModel.DocumentOperation">
       <Column Name="ID" Member="ID"  DbType="int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert"/>
@@ -443,6 +450,7 @@
       <Column Name="CurrencyType" Member="CurrencyType" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Remain" Member="Remain" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="CheckNum" Member="CheckNum" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
@@ -467,6 +475,7 @@
       <Column Name="DeliverySheet" Member="DeliverySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="DeliveryItem" Member="DeliveryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Remain" Member="Remain" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

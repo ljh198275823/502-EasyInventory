@@ -113,6 +113,12 @@
     <Compile Include="Forms\FrmCurrencyTypeMaster.Designer.cs">
       <DependentUpon>FrmCurrencyTypeMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmCustomerReceivable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmCustomerReceivable.Designer.cs">
+      <DependentUpon>FrmCustomerReceivable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmSupplierDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -569,6 +575,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmCurrencyTypeMaster.resx">
       <DependentUpon>FrmCurrencyTypeMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmCustomerReceivable.resx">
+      <DependentUpon>FrmCustomerReceivable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmSupplierDetail.resx">
       <DependentUpon>FrmSupplierDetail.cs</DependentUpon>

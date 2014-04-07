@@ -93,6 +93,7 @@ namespace LJH.Inventory.BLL
                     CreateDate = DateTime.Now,
                     CustomerID = sheet.CustomerID,
                     Amount = si.Amount,
+                    Remain = si.Amount,
                 };
                 ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Insert(cr, unitWork);
             }

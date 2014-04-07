@@ -24,16 +24,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             DataLoadOptions opts = new DataLoadOptions();
             opts.LoadWith<CustomerPayment>(item => item.Assigns);
             dc.LoadOptions = opts;
-            var ret = (from cp in dc.GetTable<CustomerPayment>()
-                       join c in dc.GetTable<CompanyInfo>()
-                       on cp.CustomerID equals c.ID
-                       select new { v1 = cp, v2 = c }).SingleOrDefault(item => item.v1.ID == id);
-            if (ret != null)
-            {
-                ret.v1.Customer = ret.v2;
-                return ret.v1;
-            }
-            return null;
+            var ret = dc.GetTable<CustomerPayment>().SingleOrDefault(item => item.ID == id);
+            return ret;
         }
 
         protected override List<CustomerPayment> GetingItems(System.Data.Linq.DataContext dc, BusinessModel.SearchCondition.SearchCondition search)
@@ -41,35 +33,25 @@ namespace LJH.Inventory.DAL.LinqProvider
             DataLoadOptions opts = new DataLoadOptions();
             opts.LoadWith<CustomerPayment>(item => item.Assigns);
             dc.LoadOptions = opts;
-            var ret = from cp in dc.GetTable<CustomerPayment>()
-                      join c in dc.GetTable<CompanyInfo>()
-                      on cp.CustomerID equals c.ID
-                      select new { v1 = cp, v2 = c };
+            IQueryable<CustomerPayment> ret = dc.GetTable<CustomerPayment>();
             if (search is CustomerPaymentSearchCondition)
             {
                 CustomerPaymentSearchCondition con = search as CustomerPaymentSearchCondition;
-                if (con.PaidDate != null) ret = ret.Where(item => item.v1.PaidDate >= con.PaidDate.Begin && item.v1.PaidDate <= con.PaidDate.End);
-                if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.v2.ID == con.CustomerID);
-                if (!string.IsNullOrEmpty(con.CustomerName)) ret = ret.Where(item => item.v2.Name.Contains(con.CustomerName));
+                if (con.PaidDate != null) ret = ret.Where(item => item.PaidDate >= con.PaidDate.Begin && item.PaidDate <= con.PaidDate.End);
+                if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (con.HasRemain != null)
                 {
                     if (con.HasRemain.Value)
                     {
-                        ret = ret.Where(item => item.v1.NotAssigned > 0);
+                        ret = ret.Where(item => item.Remain > 0);
                     }
                     else
                     {
-                        ret = ret.Where(item => item.v1.NotAssigned == 0);
+                        ret = ret.Where(item => item.Remain == 0);
                     }
                 }
             }
-            List<CustomerPayment> items = new List<CustomerPayment>();
-            foreach (var item in ret)
-            {
-                item.v1.Customer = item.v2;
-                items.Add(item.v1);
-            }
-            return items;
+            return ret.ToList();
         }
 
         protected override void UpdatingItem(CustomerPayment newVal, CustomerPayment original, DataContext dc)

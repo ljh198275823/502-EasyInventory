@@ -50,6 +50,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
+        /// 获取或设置剩余的应收总额
+        /// </summary>
+        public decimal Remain { get; set; }
+        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }

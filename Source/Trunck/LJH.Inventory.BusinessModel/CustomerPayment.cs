@@ -30,10 +30,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string CustomerID { get; set; }
         /// <summary>
-        /// 获取或设置付款客户
-        /// </summary>
-        public CompanyInfo Customer { get; set; }
-        /// <summary>
         /// 获取或设置付款日期
         /// </summary>
         public DateTime PaidDate { get; set; }
@@ -49,6 +45,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置付款金额
         /// </summary>
         public decimal Amount { get; set; }
+        /// <summary>
+        /// 获取或设置付款金额剩余未抵销的金额
+        /// </summary>
+        public decimal Remain { get; set; }
         /// <summary>
         /// 获取或设置支票号(如果是支票付款)
         /// </summary>

@@ -412,5 +412,10 @@ namespace InventoryApplication
         {
             ShowSingleForm(typeof(FrmWareHouseMaster));
         }
+
+        private void mnu_CustomerReceivable_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmCustomerReceivable));
+        }
     }
 }
