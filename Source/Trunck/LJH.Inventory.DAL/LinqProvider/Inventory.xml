@@ -408,6 +408,7 @@
     <Type Name="LJH.Inventory.BusinessModel.ExpenditureType">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
       <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="Parent" Member="Parent" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

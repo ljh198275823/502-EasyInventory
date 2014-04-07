@@ -18,6 +18,13 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 公共属性
+        /// <summary>
+        /// 获取或设置客户类别
+        /// </summary>
+        public ExpenditureType Category { get; set; }
+        #endregion 
+
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -33,6 +40,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void InitControls()
         {
             dtPaidDate.Value = DateTime.Today;
+            this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
         }
 
         protected override void ItemShowing()
@@ -46,7 +54,11 @@ namespace LJH.Inventory.UI.Forms
                 rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
                 rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
                 txtAmount.DecimalValue = item.Amount;
-                txtCategory.Text = item.Category;
+                if (!string.IsNullOrEmpty(item.Category))
+                {
+                    Category = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetByID(item.Category).QueryObject;
+                }
+                txtCategory.Text = Category != null ? Category.Name : string.Empty;
                 txtCheckNum.Text = item.CheckNum;
                 txtRequest.Text = item.Request;
                 txtPayee.Text = item.Payee;
@@ -76,7 +88,7 @@ namespace LJH.Inventory.UI.Forms
             if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
             info.Amount = txtAmount.DecimalValue;
-            info.Category = txtCategory.Text;
+            info.Category = Category != null ? Category.ID : null;
             info.CheckNum = txtCheckNum.Text;
             info.Request = txtRequest.Text;
             info.Payee = txtPayee.Text;
@@ -240,8 +252,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                ExpenditureType item = frm.SelectedItem as ExpenditureType;
-                txtCategory.Text = item.Name;
+                Category = frm.SelectedItem as ExpenditureType;
+                txtCategory.Text = Category != null ? Category.Name : string.Empty;
             }
         }
 

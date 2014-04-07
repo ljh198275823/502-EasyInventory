@@ -151,7 +151,7 @@
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(200, 50);
+            this.splitter1.Location = new System.Drawing.Point(273, 50);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(8, 320);
             this.splitter1.TabIndex = 106;
@@ -179,12 +179,12 @@
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(208, 50);
+            this.dataGridView1.Location = new System.Drawing.Point(281, 50);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1016, 320);
+            this.dataGridView1.Size = new System.Drawing.Size(943, 320);
             this.dataGridView1.TabIndex = 108;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -320,7 +320,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 50);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(200, 320);
+            this.pnlLeft.Size = new System.Drawing.Size(273, 320);
             this.pnlLeft.TabIndex = 105;
             // 
             // customerTree1
@@ -330,7 +330,7 @@
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
             this.customerTree1.Name = "customerTree1";
-            this.customerTree1.Size = new System.Drawing.Size(200, 320);
+            this.customerTree1.Size = new System.Drawing.Size(273, 320);
             this.customerTree1.TabIndex = 0;
             this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
             // 

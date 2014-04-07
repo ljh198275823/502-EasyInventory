@@ -48,7 +48,6 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            this.customerTree1.LoadCustomer = true;
             this.customerTree1.Init();
             Operator opt = Operator.Current;
             dataGridView1.Columns["colAmount"].Visible = Operator.Current.Permit(Permission.ReadPrice);

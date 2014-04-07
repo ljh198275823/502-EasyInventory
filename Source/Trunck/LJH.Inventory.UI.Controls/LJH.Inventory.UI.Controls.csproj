@@ -101,6 +101,12 @@
     <Compile Include="RoleCombobox.designer.cs">
       <DependentUpon>RoleCombobox.cs</DependentUpon>
     </Compile>
+    <Compile Include="SupplierTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SupplierTree.Designer.cs">
+      <DependentUpon>SupplierTree.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextValueItem.cs" />
     <Compile Include="TooStripDBCTextBox.cs">
       <SubType>Component</SubType>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FunctionTree.resx">
       <DependentUpon>FunctionTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplierTree.resx">
+      <DependentUpon>SupplierTree.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCProductSelection.resx">
       <DependentUpon>UCProductSelection.cs</DependentUpon>

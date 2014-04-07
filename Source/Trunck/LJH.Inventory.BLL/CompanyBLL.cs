@@ -66,6 +66,17 @@ namespace LJH.Inventory.BLL
             return GetItems(con);
         }
 
+        /// <summary>
+        /// 获取所有供应商信息
+        /// </summary>
+        /// <returns></returns>
+        public QueryResultList<CompanyInfo> GetAllSuppliers()
+        {
+            CustomerSearchCondition con = new CustomerSearchCondition();
+            con.ClassID = CustomerClass.Supplier;
+            return GetItems(con);
+        }
+
         public CommandResult Insert(CompanyInfo info)
         {
             if (string.IsNullOrEmpty(info.ID))

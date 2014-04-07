@@ -10,15 +10,15 @@ using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.UI.Controls
 {
-    public partial class CustomerTree : MyTree 
+    public partial class SupplierTree : MyTree
     {
         #region 构造函数
-        public CustomerTree()
+        public SupplierTree()
         {
             InitializeComponent();
         }
 
-        public CustomerTree(IContainer container)
+        public SupplierTree(IContainer container)
         {
             container.Add(this);
 
@@ -35,26 +35,26 @@ namespace LJH.Inventory.UI.Controls
         /// <summary>
         /// 获取或设置是否在树中显示公司信息，否则只显示公司类别
         /// </summary>
-        public bool LoadCustomer { get; set; }
+        public bool LoadSupplier { get; set; }
         #endregion
 
         #region 私有方法
-        private void AddDesendNodes(List<CustomerType> items, TreeNode parent)
+        private void AddDesendNodes(List<SupplierType> items, TreeNode parent)
         {
-            List<CustomerType> pcs = null;
+            List<SupplierType> pcs = null;
             if (parent.Tag == null)
             {
                 pcs = items.Where(it => string.IsNullOrEmpty(it.Parent)).ToList();
             }
             else
             {
-                pcs = items.Where(it => it.Parent == (parent.Tag as CustomerType).ID).ToList();
+                pcs = items.Where(it => it.Parent == (parent.Tag as SupplierType).ID).ToList();
             }
             if (pcs != null && pcs.Count > 0)
             {
-                foreach (CustomerType pc in pcs)
+                foreach (SupplierType pc in pcs)
                 {
-                    TreeNode node = AddCustomerTypeNode(pc, parent);
+                    TreeNode node = AddSupplierTypeNode(pc, parent);
                     AddDesendNodes(items, node);
                 }
             }
@@ -64,7 +64,7 @@ namespace LJH.Inventory.UI.Controls
 
         private void AddCustomerNodes(List<CompanyInfo> customers, TreeNode parent)
         {
-            CustomerType ct = parent.Tag as CustomerType;
+            SupplierType ct = parent.Tag as SupplierType;
             List<CompanyInfo> items = null;
             if (ct == null)
             {
@@ -89,17 +89,17 @@ namespace LJH.Inventory.UI.Controls
         {
             this.ImageList = imageList1;
             this.Nodes.Clear();
-            this.Nodes.Add(LoadCustomer ? "所有客户" : "所有客户类别");
+            this.Nodes.Add(LoadSupplier ? "所有供应商" : "所有供应商类别");
 
-            List<CustomerType> items = (new CustomerTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
+            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.Nodes[0]);
             }
 
-            if (LoadCustomer)
+            if (LoadSupplier)
             {
-                List<CompanyInfo> customers = (new CompanyBLL(AppSettings.Current.ConnStr)).GetAllCustomers().QueryObjects;
+                List<CompanyInfo> customers = (new CompanyBLL(AppSettings.Current.ConnStr)).GetAllSuppliers().QueryObjects;
                 AddCustomerNodes(customers, this.Nodes[0]);
                 foreach (TreeNode cnode in _AllTypeNodes)
                 {
@@ -114,7 +114,7 @@ namespace LJH.Inventory.UI.Controls
         /// <param name="pc"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public TreeNode AddCustomerTypeNode(CustomerType pc, TreeNode parent)
+        public TreeNode AddSupplierTypeNode(SupplierType pc, TreeNode parent)
         {
             TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
             node.Tag = pc;

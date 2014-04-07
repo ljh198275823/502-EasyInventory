@@ -26,6 +26,11 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).GetItems(null);
         }
 
+        public QueryResult<ExpenditureType> GetByID(string id)
+        {
+            return ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).GetByID(id);
+        }
+
         public CommandResult Add(ExpenditureType info)
         {
             return ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).Insert(info);

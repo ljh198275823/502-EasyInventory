@@ -151,21 +151,21 @@
             // mnu_Customer
             // 
             this.mnu_Customer.Name = "mnu_Customer";
-            this.mnu_Customer.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Customer.Size = new System.Drawing.Size(148, 22);
             this.mnu_Customer.Text = "客户资料";
             this.mnu_Customer.Click += new System.EventHandler(this.mnu_Customer_Click);
             // 
             // 客户报价资料ToolStripMenuItem
             // 
             this.客户报价资料ToolStripMenuItem.Name = "客户报价资料ToolStripMenuItem";
-            this.客户报价资料ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.客户报价资料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.客户报价资料ToolStripMenuItem.Text = "客户报价资料";
             this.客户报价资料ToolStripMenuItem.Visible = false;
             // 
             // mnu_Order
             // 
             this.mnu_Order.Name = "mnu_Order";
-            this.mnu_Order.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Order.Size = new System.Drawing.Size(148, 22);
             this.mnu_Order.Text = "销售订单管理";
             this.mnu_Order.Click += new System.EventHandler(this.mnu_Order_Click);
             // 
@@ -182,23 +182,22 @@
             // mnu_Supplier
             // 
             this.mnu_Supplier.Name = "mnu_Supplier";
-            this.mnu_Supplier.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Supplier.Size = new System.Drawing.Size(152, 22);
             this.mnu_Supplier.Text = "供应商资料";
             this.mnu_Supplier.Click += new System.EventHandler(this.mnu_Supplier_Click_1);
             // 
             // 供应商报价管理ToolStripMenuItem
             // 
             this.供应商报价管理ToolStripMenuItem.Name = "供应商报价管理ToolStripMenuItem";
-            this.供应商报价管理ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.供应商报价管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.供应商报价管理ToolStripMenuItem.Text = "供应商报价";
             this.供应商报价管理ToolStripMenuItem.Visible = false;
             // 
             // mnu_PurchaseOrder
             // 
             this.mnu_PurchaseOrder.Name = "mnu_PurchaseOrder";
-            this.mnu_PurchaseOrder.Size = new System.Drawing.Size(148, 22);
+            this.mnu_PurchaseOrder.Size = new System.Drawing.Size(152, 22);
             this.mnu_PurchaseOrder.Text = "采购订单管理";
-            this.mnu_PurchaseOrder.Visible = false;
             this.mnu_PurchaseOrder.Click += new System.EventHandler(this.mnu_PurchaseOrder_Click);
             // 
             // 商务ToolStripMenuItem
@@ -214,22 +213,21 @@
             // mnu_Inventory
             // 
             this.mnu_Inventory.Name = "mnu_Inventory";
-            this.mnu_Inventory.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Inventory.Size = new System.Drawing.Size(152, 22);
             this.mnu_Inventory.Text = "商品库存资料";
             this.mnu_Inventory.Click += new System.EventHandler(this.mnu_Inventory_Click);
             // 
             // mnu_InventorySheet
             // 
             this.mnu_InventorySheet.Name = "mnu_InventorySheet";
-            this.mnu_InventorySheet.Size = new System.Drawing.Size(148, 22);
+            this.mnu_InventorySheet.Size = new System.Drawing.Size(152, 22);
             this.mnu_InventorySheet.Text = "收货单资料";
-            this.mnu_InventorySheet.Visible = false;
             this.mnu_InventorySheet.Click += new System.EventHandler(this.mnu_InventorySheet_Click);
             // 
             // mnu_DeliverySheet
             // 
             this.mnu_DeliverySheet.Name = "mnu_DeliverySheet";
-            this.mnu_DeliverySheet.Size = new System.Drawing.Size(148, 22);
+            this.mnu_DeliverySheet.Size = new System.Drawing.Size(152, 22);
             this.mnu_DeliverySheet.Text = "发货单资料";
             this.mnu_DeliverySheet.Click += new System.EventHandler(this.mnu_DeliverySheet_Click);
             // 

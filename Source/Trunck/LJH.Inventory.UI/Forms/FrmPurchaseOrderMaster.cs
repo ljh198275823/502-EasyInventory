@@ -19,11 +19,35 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 私有变量
+        private List<PurchaseOrder> _Orders = null;
+        #endregion
+
+        #region 私有方法
+        private void SelectNode(TreeNode node)
+        {
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
+        }
+
+        private List<object> GetSelectedNodeItems()
+        {
+            List<PurchaseOrder> items = _Orders;
+            CompanyInfo pc = null;
+            if (this.supplierTree1.SelectedNode != null) pc = this.supplierTree1.SelectedNode.Tag as CompanyInfo;
+            if (pc != null) items = _Orders.Where(it => it.SupplierID == pc.ID).ToList();
+
+            return (from p in items
+                    orderby p.OrderDate descending
+                    select (object)p).ToList();
+        }
+        #endregion
+
         #region 重写基类方法和处理事件
         protected override void Init()
         {
             base.Init();
-            btnAll.BackColor = SystemColors.ControlDark;
+            supplierTree1.Init();
             Operator opt = Operator.Current;
             dataGridView1.Columns["colAmount"].Visible = Operator.Current.Permit(Permission.ReadPrice);
         }
@@ -36,58 +60,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<PurchaseOrder> items = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            List<PurchaseOrder> temp = new List<PurchaseOrder>();
-            List<object> records = null;
-            temp.AddRange(items);
-
-            records = (from o in temp
-                       where o.State == SheetState.Canceled
-                       select (object)o).ToList();
-            btnCanceled.Tag = records;
-            btnCanceled.Text = string.Format("作废 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.State == SheetState.Canceled);
-
-            records = (from o in temp
-                       where o.State == SheetState.Closed
-                       select (object)o).ToList();
-            btnClosed.Tag = records;
-            btnClosed.Text = string.Format("关闭 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.State == SheetState.Closed);
-
-            records = (from o in temp
-                       where o.IsCompleteAll
-                       select (object)o).ToList();
-            btnCompleteAll.Tag = records;
-            btnCompleteAll.Text = string.Format("全部交货 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.IsCompleteAll);
-
-            records = (from o in temp
-                       where o.IsOverDate
-                       select (object)o).ToList();
-            btnOverDate.Tag = records;
-            btnOverDate.Text = string.Format("逾期未交 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.IsOverDate);
-
-            records = (from o in temp
-                       where o.IsEmergency
-                       select (object)o).ToList();
-            btnEmergency.Tag = records;
-            btnEmergency.Text = string.Format("即将交货 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.IsEmergency);
-
-            records = (from o in temp
-                       where !o.IsEmergency
-                       select (object)o).ToList();
-            btnNonEmergency.Tag = records;
-            btnNonEmergency.Text = string.Format("非紧急 ({0})", records == null ? 0 : records.Count);
-            temp.RemoveAll(o => o.IsEmergency);
-
-            records = (from o in items
-                       select (object)o).ToList();
-            btnAll.Tag = records;
-            btnAll.Text = string.Format("全部 ({0})", records == null ? 0 : records.Count);
-            return records;
+            _Orders = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            return GetSelectedNodeItems();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -119,5 +93,20 @@ namespace LJH.Inventory.UI.Forms
             return ret.Result == ResultCode.Successful;
         }
         #endregion
+
+        #region 事件处理程序
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
+            {
+            }
+        }
+
+        private void supplierTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            SelectNode(e.Node);
+        }
+        #endregion
+
     }
 }
