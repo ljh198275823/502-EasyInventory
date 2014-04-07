@@ -33,6 +33,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty (con.CustomerID )) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
                 if (!string.IsNullOrEmpty(con.DeliverySheet)) ret = ret.Where(item => item.DeliverySheet == con.DeliverySheet);
+                ret = ret.Where(item => item.Remain > 0);
             }
             return ret.ToList();
         }
