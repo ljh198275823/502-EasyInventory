@@ -104,21 +104,7 @@ namespace LJH.Inventory.BusinessModel
             return amount;
         }
 
-        /// <summary>
-        /// 获取订单是否已经全部出货
-        /// </summary>
-        public bool IsCompleteAll
-        {
-            get
-            {
-                if (State == SheetState.Closed || State == SheetState.Canceled) return true;
-                if (Items != null)
-                {
-                    return !Items.Exists(item => !item.IsComplete && item.NotShipped > 0);
-                }
-                return true;
-            }
-        }
+        
         /// <summary>
         /// 获取订单是否有已过出货日期未交货的项
         /// </summary>

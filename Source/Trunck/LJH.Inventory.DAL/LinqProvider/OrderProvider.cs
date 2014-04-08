@@ -22,31 +22,41 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override Order GetingItemByID(string id, System.Data.Linq.DataContext dc)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<Order>(order => order.Customer);
-            opt.LoadWith<Order>(order => order.Items);
-            opt.LoadWith<OrderItem>(oi => oi.Product);
-            opt.LoadWith<Product>(p => p.Category);
+            opt.LoadWith<Order>(item => item.Items);
             dc.LoadOptions = opt;
-            Order ord = dc.GetTable<Order>().SingleOrDefault(item => item.ID == id);
-            return ord;
+            Order sheet = dc.GetTable<Order>().SingleOrDefault(item => item.ID == id);
+            if (sheet != null)
+            {
+                sheet.Customer = (new CustomerProvider(ConnectStr)).GetByID(sheet.CustomerID).QueryObject;
+                if (sheet.Items != null && sheet.Items.Count > 0)
+                {
+                    List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
+                    foreach (OrderItem item in sheet.Items)
+                    {
+                        item.Product = ps.SingleOrDefault(p => p.ID == item.ProductID);
+                    }
+                }
+            }
+            return sheet;
         }
 
         protected override List<Order> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<Order>(order => order.Customer);
-            opt.LoadWith<Order>(order => order.Items);
-            opt.LoadWith<OrderItem>(oi => oi.Product);
-            opt.LoadWith<Product>(p => p.Category);
+            opt.LoadWith<Order>(item => item.Items);
             dc.LoadOptions = opt;
             IQueryable<Order> ret = dc.GetTable<Order>();
+            if (search is SheetSearchCondition)
+            {
+                SheetSearchCondition con = search as SheetSearchCondition;
+                if (!string.IsNullOrEmpty(con.SheetNo)) ret = ret.Where(item => item.ID.Contains(con.SheetNo));
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains((int)item.State));
+                if (!string.IsNullOrEmpty(con.Memo)) ret = ret.Where(item => item.Memo.Contains(con.Memo));
+            }
             if (search is OrderSearchCondition)
             {
                 OrderSearchCondition con = search as OrderSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
-                if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
-                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
-                if (!string.IsNullOrEmpty(con.Sales)) ret = ret.Where(item => item.SalesPerson.Contains(con.Sales));
                 if (con.WithTax != null)
                 {
                     if (con.WithTax.Value)
@@ -59,66 +69,49 @@ namespace LJH.Inventory.DAL.LinqProvider
                     }
                 }
             }
-            List<Order> orders = ret.ToList();
-            //if (search is OrderSearchCondition && orders != null && orders.Count > 0)
-            //{
-            //    OrderSearchCondition con = search as OrderSearchCondition;
-            //    if (con.HasNotPaid != null)
-            //    {
-            //        if (con.HasNotPaid.Value) orders = orders.Where(item => (item.CalAmount() - item.HasPaid) > 0).ToList();
-            //        else orders = orders.Where(item => (item.CalAmount() - item.HasPaid) <= 0).ToList();
-            //    }
-            //}
-            return orders;
-        }
-
-        protected override void InsertingItem(LJH.Inventory.BusinessModel.Order info, System.Data.Linq.DataContext dc)
-        {
-            dc.GetTable<T_Order>().InsertOnSubmit(new T_Order(info));
-            foreach (OrderItem item in info.Items)
+            List<Order> sheets = ret.ToList();
+            if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
             {
-                item.OrderID = info.ID;
-                dc.GetTable<T_OrderItem>().InsertOnSubmit(new T_OrderItem(item));
+                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
+                List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
+                foreach (Order sheet in sheets)
+                {
+                    sheet.Customer = cs.SingleOrDefault(item => item.ID == sheet.CustomerID);
+                    if (sheet.Items != null && sheet.Items.Count > 0)
+                    {
+                        foreach (OrderItem si in sheet.Items)
+                        {
+                            si.Product = ps.SingleOrDefault(item => item.ID == si.ProductID);
+                        }
+                    }
+                }
             }
+            return sheets;
         }
 
         protected override void UpdatingItem(Order newVal, Order original, System.Data.Linq.DataContext dc)
         {
-            dc.GetTable<T_Order>().Attach(new T_Order(newVal), new T_Order(original));
+            dc.GetTable<Order>().Attach(newVal, original);
             foreach (OrderItem item in newVal.Items)
             {
                 OrderItem old = original.Items.SingleOrDefault(it => it.ID == item.ID);
                 if (old != null)
                 {
-                    dc.GetTable<T_OrderItem>().Attach(new T_OrderItem(item), new T_OrderItem(old));
+                    dc.GetTable<OrderItem>().Attach(item, old);
                 }
                 else
                 {
                     item.OrderID = newVal.ID;
-                    dc.GetTable<T_OrderItem>().InsertOnSubmit(new T_OrderItem(item));
+                    dc.GetTable<OrderItem>().InsertOnSubmit(item);
                 }
             }
             foreach (OrderItem item in original.Items)
             {
                 if (newVal.Items.SingleOrDefault(it => it.ID == item.ID) == null)
                 {
-                    T_OrderItem to = new T_OrderItem(item);
-                    dc.GetTable<T_OrderItem>().Attach(to);
-                    dc.GetTable<T_OrderItem>().DeleteOnSubmit(to);
+                    dc.GetTable<OrderItem>().Attach(item);
+                    dc.GetTable<OrderItem>().DeleteOnSubmit(item);
                 }
-            }
-        }
-
-        protected override void DeletingItem(Order info, System.Data.Linq.DataContext dc)
-        {
-            T_Order t = new T_Order(info);
-            dc.GetTable<T_Order>().Attach(t);
-            dc.GetTable<T_Order>().DeleteOnSubmit(t);
-            foreach (OrderItem item in info.Items)
-            {
-                T_OrderItem to = new T_OrderItem(item);
-                dc.GetTable<T_OrderItem>().Attach(to);
-                dc.GetTable<T_OrderItem>().DeleteOnSubmit(to);
             }
         }
         #endregion

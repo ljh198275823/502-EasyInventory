@@ -311,7 +311,7 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 公共方法
-        public void ShowItemsOnGrid(List<object> items)
+        public virtual void ShowItemsOnGrid(List<object> items)
         {
             GridView.Rows.Clear();
 

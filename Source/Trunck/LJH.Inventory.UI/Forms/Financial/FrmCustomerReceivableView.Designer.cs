@@ -33,8 +33,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,8 +53,8 @@
             this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetID,
-            this.colCreateDate,
             this.colClassID,
+            this.colCreateDate,
             this.colAmount,
             this.colRemain,
             this.colMemo});
@@ -75,6 +75,12 @@
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSheetID.Width = 71;
             // 
+            // colClassID
+            // 
+            this.colClassID.HeaderText = "类型";
+            this.colClassID.Name = "colClassID";
+            this.colClassID.ReadOnly = true;
+            // 
             // colCreateDate
             // 
             dataGridViewCellStyle1.Format = "D";
@@ -85,26 +91,21 @@
             this.colCreateDate.ReadOnly = true;
             this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // colClassID
-            // 
-            this.colClassID.HeaderText = "类型";
-            this.colClassID.Name = "colClassID";
-            this.colClassID.ReadOnly = true;
-            // 
             // colAmount
             // 
             dataGridViewCellStyle2.Format = "C2";
             this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAmount.HeaderText = "金额";
+            this.colAmount.HeaderText = "总额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colAmount.Visible = false;
             // 
             // colRemain
             // 
             dataGridViewCellStyle3.Format = "C2";
             this.colRemain.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colRemain.HeaderText = "余额";
+            this.colRemain.HeaderText = "金额";
             this.colRemain.Name = "colRemain";
             this.colRemain.ReadOnly = true;
             this.colRemain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -137,8 +138,8 @@
 
         private System.Windows.Forms.DataGridView GridView;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;

@@ -43,18 +43,17 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colProductID"].Value = item.Product != null ? item.Product.ID : string.Empty;
             row.Cells["colProductName"].Value = item.Product != null ? item.Product.Name : string.Empty;
             row.Cells["colForeignName"].Value = item.Product != null ? item.Product.ForeignName : string.Empty;
-            row.Cells["colProductCode"].Value = item.ProductCode;
             row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
             row.Cells["colUnit"].Value = item.Unit;
             row.Cells["colPrice"].Value = item.Price.Trim();
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colTotal"].Value = item.Amount.Trim();
-            row.Cells["colOnPurchase"].Value = item.OnWay.Trim();
+            //row.Cells["colOnPurchase"].Value = item.OnWay.Trim();
             row.Cells["colPurchase"].Value = "采购明细";
-            row.Cells["colInventory"].Value = item.Inventory.Trim();
-            row.Cells["colPrepared"].Value = (item.Inventory + item.OnWay).Trim();
-            row.Cells["colShipped"].Value = item.Shipped.Trim();
-            row.Cells["colNotShipped"].Value = item.NotShipped.Trim();
+            //row.Cells["colInventory"].Value = item.Inventory.Trim();
+            //row.Cells["colPrepared"].Value = (item.Inventory + item.OnWay).Trim();
+            //row.Cells["colShipped"].Value = item.Shipped.Trim();
+            //row.Cells["colNotShipped"].Value = item.NotShipped.Trim();
         }
 
         private List<OrderItem> GetOrderItemsFromGrid()
@@ -433,17 +432,6 @@ namespace LJH.Inventory.UI.Forms
                         if (count < 0) count = 0;
                         item.Count = count;
                         row.Cells[e.ColumnIndex].Value = count;
-                    }
-                }
-                else if (col.Name == "colProductCode")
-                {
-                    if (row.Cells[e.ColumnIndex].Value != null)
-                    {
-                        item.ProductCode = row.Cells[e.ColumnIndex].Value.ToString();
-                    }
-                    else
-                    {
-                        item.ProductCode = null;
                     }
                 }
                 else if (col.Name == "colMemo")

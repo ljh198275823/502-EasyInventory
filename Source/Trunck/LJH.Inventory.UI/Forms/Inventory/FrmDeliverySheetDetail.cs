@@ -368,7 +368,7 @@ namespace LJH.Inventory.UI.Forms
             ShowDeliveryItemsOnGrid(sources);
         }
 
-        public void AddDeliveryItem(OrderItem oi)
+        public void AddDeliveryItem(OrderItem oi, decimal count)
         {
             List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.OrderItem != null && it.OrderItem.Value == oi.ID))
@@ -384,7 +384,7 @@ namespace LJH.Inventory.UI.Forms
                         Product = oi.Product,
                         Unit = oi.Unit,
                         Price = oi.Price,
-                        Count = oi.Inventory
+                        Count = count
                     };
                     sources.Add(item);
                 }

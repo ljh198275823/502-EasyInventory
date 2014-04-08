@@ -34,13 +34,13 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.GridView = new System.Windows.Forms.DataGridView();
+            this.chkShowAll = new System.Windows.Forms.CheckBox();
             this.colID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPaidDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkShowAll = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +88,17 @@
             this.GridView.TabIndex = 21;
             this.GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             // 
+            // chkShowAll
+            // 
+            this.chkShowAll.AutoSize = true;
+            this.chkShowAll.Location = new System.Drawing.Point(5, 10);
+            this.chkShowAll.Name = "chkShowAll";
+            this.chkShowAll.Size = new System.Drawing.Size(108, 16);
+            this.chkShowAll.TabIndex = 22;
+            this.chkShowAll.Text = "显示所有付款单";
+            this.chkShowAll.UseVisualStyleBackColor = true;
+            this.chkShowAll.CheckedChanged += new System.EventHandler(this.chkShowAll_CheckedChanged);
+            // 
             // colID
             // 
             this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -121,12 +132,13 @@
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colAmount.Visible = false;
             // 
             // colRemain
             // 
             dataGridViewCellStyle3.Format = "C2";
             this.colRemain.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colRemain.HeaderText = "余额";
+            this.colRemain.HeaderText = "金额";
             this.colRemain.Name = "colRemain";
             this.colRemain.ReadOnly = true;
             this.colRemain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -140,18 +152,7 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // chkShowAll
-            // 
-            this.chkShowAll.AutoSize = true;
-            this.chkShowAll.Location = new System.Drawing.Point(5, 10);
-            this.chkShowAll.Name = "chkShowAll";
-            this.chkShowAll.Size = new System.Drawing.Size(108, 16);
-            this.chkShowAll.TabIndex = 22;
-            this.chkShowAll.Text = "显示所有付款单";
-            this.chkShowAll.UseVisualStyleBackColor = true;
-            this.chkShowAll.CheckedChanged += new System.EventHandler(this.chkShowAll_CheckedChanged);
-            // 
-            // FrmCustomerPaymentRemains
+            // FrmCustomerPaymentRemainsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -159,7 +160,7 @@
             this.Controls.Add(this.chkShowAll);
             this.Controls.Add(this.GridView);
             this.Controls.Add(this.statusStrip1);
-            this.Name = "FrmCustomerPaymentRemains";
+            this.Name = "FrmCustomerPaymentRemainsView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmCustomerPaymentRemains";
             this.Load += new System.EventHandler(this.FrmCustomerPaymentRemains_Load);
@@ -176,12 +177,12 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.DataGridView GridView;
+        private System.Windows.Forms.CheckBox chkShowAll;
         private System.Windows.Forms.DataGridViewLinkColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaidDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.CheckBox chkShowAll;
     }
 }

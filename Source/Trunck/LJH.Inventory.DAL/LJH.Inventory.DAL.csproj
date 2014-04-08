@@ -158,8 +158,6 @@
     <Compile Include="LinqProvider\RoleProvider.cs" />
     <Compile Include="LinqProvider\DeliveryRecordProvider.cs" />
     <Compile Include="LinqProvider\SysparameterProvider.cs" />
-    <Compile Include="LinqProvider\T_Order.cs" />
-    <Compile Include="LinqProvider\T_OrderItem.cs" />
     <Compile Include="LinqProvider\T_PurchaseItem.cs" />
     <Compile Include="LinqProvider\T_PurchaseOrder.cs" />
     <Compile Include="LinqProvider\UnitProvider.cs" />

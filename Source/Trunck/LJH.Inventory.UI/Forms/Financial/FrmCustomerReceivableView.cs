@@ -40,7 +40,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 SearchCondition = con;
             }
             List<CustomerReceivable> items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
-            List<object> records = (from item in items select (object)item).ToList();
+            List<object> records = (from item in items orderby item.CreateDate ascending, item.SheetID ascending select (object)item).ToList();
             return records;
         }
 
@@ -54,6 +54,15 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colAmount"].Value = cr.Amount;
             row.Cells["colRemain"].Value = cr.Remain;
             row.Cells["colMemo"].Value = cr.Memo;
+        }
+
+        public override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            int rowTotal = GridView.Rows.Add();
+            GridView.Rows[rowTotal].Cells["colCreateDate"].Value = "合计";
+            GridView.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerReceivable).Amount);
+            GridView.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as CustomerReceivable).Remain);
         }
         #endregion
     }

@@ -31,10 +31,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Product Product { get; set; }
         /// <summary>
-        /// 获取或设置产品代码
-        /// </summary>
-        public string ProductCode { get; set; }
-        /// <summary>
         /// 获取或设置商品单位
         /// </summary>
         public string Unit { get; set; }
@@ -46,24 +42,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置订货数量
         /// </summary>
         public decimal Count { get; set; }
-        /// <summary>
-        /// 获取或设置已采购数量
-        /// </summary>
-        public decimal Purchased { get; set; }
-        /// <summary>
-        /// 获取或设置采购到货数量
-        /// </summary>
-        public decimal Received { get; set; }
-        /// <summary>
-        /// 获取或设置订单项的库存数量(包括已经出货的数量)
-        /// </summary>
-        public decimal Inventory { get; set; }
-        /// <summary>
-        /// 获取或设置已出货数量
-        /// </summary>
-        public decimal Shipped { get; set; }
-
-        public decimal Cost { get; set; }
         /// <summary>
         /// 获取或设置客户要求的出货时间
         /// </summary>
@@ -89,38 +67,58 @@ namespace LJH.Inventory.BusinessModel
                 return Price * Count;
             }
         }
-        /// <summary>
-        /// 获取还需采购的数量
-        /// </summary>
-        public decimal NotPurchased
-        {
-            get
-            {
-                decimal ret = Count - OnWay - Inventory;
-                return ret > 0 ? ret : 0;
-            }
-        }
-        /// <summary>
-        /// 获取采购在途数量
-        /// </summary>
-        public decimal OnWay
-        {
-            get
-            {
-                return Purchased - Received;
-            }
-        }
-        /// <summary>
-        /// 获取未发货数量
-        /// </summary>
-        public decimal NotShipped
-        {
-            get
-            {
-                if (IsComplete) return 0;
-                return Count - Shipped >= 0 ? (Count - Shipped) : 0;
-            }
-        }
+        
+        #endregion
+
+        #region 订单项的状态
+        ///// <summary>
+        ///// 获取或设置已采购数量
+        ///// </summary>
+        //public decimal Purchased { get; set; }
+        ///// <summary>
+        ///// 获取或设置采购到货数量
+        ///// </summary>
+        //public decimal Received { get; set; }
+        ///// <summary>
+        ///// 获取或设置订单项的库存数量(包括已经出货的数量)
+        ///// </summary>
+        //public decimal Inventory { get; set; }
+        ///// <summary>
+        ///// 获取或设置已出货数量
+        ///// </summary>
+        //public decimal Shipped { get; set; }
+        ///// <summary>
+        ///// 获取还需采购的数量
+        ///// </summary>
+        //public decimal NotPurchased
+        //{
+        //    get
+        //    {
+        //        decimal ret = Count - OnWay - Inventory;
+        //        return ret > 0 ? ret : 0;
+        //    }
+        //}
+        ///// <summary>
+        ///// 获取采购在途数量
+        ///// </summary>
+        //public decimal OnWay
+        //{
+        //    get
+        //    {
+        //        return Purchased - Received;
+        //    }
+        //}
+        ///// <summary>
+        ///// 获取未发货数量
+        ///// </summary>
+        //public decimal NotShipped
+        //{
+        //    get
+        //    {
+        //        if (IsComplete) return 0;
+        //        return Count - Shipped >= 0 ? (Count - Shipped) : 0;
+        //    }
+        //}
         #endregion
     }
 }
