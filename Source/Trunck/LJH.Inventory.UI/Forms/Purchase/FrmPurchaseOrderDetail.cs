@@ -39,6 +39,7 @@ namespace LJH.Inventory.UI.Forms
         private void ShowDeliveryItemOnRow(DataGridViewRow row, PurchaseItem item)
         {
             row.Tag = item;
+            row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
             row.Cells["colProductID"].Value = item.Product != null ? item.Product.ID : string.Empty;
             row.Cells["colProductName"].Value = item.Product != null ? item.Product.Name : string.Empty;
             row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;

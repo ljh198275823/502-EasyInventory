@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.UI.View;
 
 namespace LJH.Inventory.UI.Forms
@@ -21,7 +22,7 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<Order> _Orders = null;
+        private List<Order> _Sheets = null;
         #endregion
 
         #region 私有方法
@@ -33,10 +34,10 @@ namespace LJH.Inventory.UI.Forms
 
         private List<object> GetSelectedNodeItems()
         {
-            List<Order> items = _Orders;
+            List<Order> items = _Sheets;
             CompanyInfo pc = null;
             if (this.customerTree1.SelectedNode != null) pc = this.customerTree1.SelectedNode.Tag as CompanyInfo;
-            if (pc != null) items = _Orders.Where(it => it.CustomerID == pc.ID).ToList();
+            if (pc != null) items = _Sheets.Where(it => it.CustomerID == pc.ID).ToList();
 
             return (from p in items
                     orderby p.OrderDate descending
@@ -60,30 +61,31 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            _Orders = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            _Sheets = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             return GetSelectedNodeItems();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            Order order = item as Order;
-            row.Cells["colID"].Value = order.ID;
-            row.Cells["colOrderDate"].Value = order.OrderDate;
-            row.Cells["colCustomer"].Value = order.Customer.Name;
-            row.Cells["colSales"].Value = order.SalesPerson;
-            row.Cells["colDeliveryDate"].Value = order.DemandDate;
-            row.Cells["colWithTax"].Value = order.WithTax;
-            row.Cells["colAmount"].Value = order.CalAmount().Trim();
-            row.Cells["colState"].Value = order.State;
+            Order info = item as Order;
+            row.Cells["colID"].Value = info.ID;
+            row.Cells["colOrderDate"].Value = info.OrderDate;
+            row.Cells["colCustomer"].Value = info.Customer.Name;
+            row.Cells["colSales"].Value = info.SalesPerson;
+            row.Cells["colDeliveryDate"].Value = info.DemandDate;
+            row.Cells["colWithTax"].Value = info.WithTax;
+            row.Cells["colAmount"].Value = info.CalAmount().Trim();
+            row.Cells["colState"].Value = row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             //row.Cells["colReceivable"].Value = order.Receivable.Trim();
             //row.Cells["colHasPaid"].Value = order.HasPaid.Trim();
             //row.Cells["colNotPaid"].Value = (order.CalAmount() - order.HasPaid).Trim();
-            row.Cells["colMemo"].Value = order.Memo;
-            if (order.State == SheetState.Canceled)
+            row.Cells["colMemo"].Value = info.Memo;
+            if (info.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
+            if (!_Sheets.Exists(it => it.ID == info.ID)) _Sheets.Add(info);
         }
         #endregion
 

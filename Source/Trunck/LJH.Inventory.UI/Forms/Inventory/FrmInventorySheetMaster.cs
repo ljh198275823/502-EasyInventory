@@ -20,14 +20,34 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 私有变量
+        private List<InventorySheet> _Sheets = null;
+        #endregion
+
         #region 私有方法
+        private void SelectNode(TreeNode node)
+        {
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
+        }
+
+        private List<object> GetSelectedNodeItems()
+        {
+            List<InventorySheet> items = _Sheets;
+            CompanyInfo pc = null;
+            if (this.supplierTree1.SelectedNode != null) pc = this.supplierTree1.SelectedNode.Tag as CompanyInfo;
+            if (pc != null) items = _Sheets.Where(it => it.SupplierID == pc.ID).ToList();
+
+            return (from p in items
+                    select (object)p).ToList();
+        }
         #endregion
 
         #region 重写基类方法
         protected override void Init()
         {
             base.Init();
-            btnAll.BackColor = SystemColors.ControlDark;
+            supplierTree1.Init();
             Operator opt = Operator.Current;
         }
 
@@ -38,44 +58,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<InventorySheet> items = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            List<object> records = null;
-
-            records = (from o in items
-                       where o.State == SheetState.Add
-                       select (object)o).ToList();
-            btnAdd.Tag = records;
-            btnAdd.Text = string.Format("新建 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Approved
-                       select (object)o).ToList();
-            btnApprove.Tag = records;
-            btnApprove.Text = string.Format("审核 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Inventory
-                       select (object)o).ToList();
-            btnInventory.Tag = records;
-            btnInventory.Text = string.Format("收货 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Closed
-                       select (object)o).ToList();
-            btnClosed.Tag = records;
-            btnClosed.Text = string.Format("关闭 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Canceled
-                       select (object)o).ToList();
-            btnCanceled.Tag = records;
-            btnCanceled.Text = string.Format("作废 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       select (object)o).ToList();
-            btnAll.Tag = records;
-            btnAll.Text = string.Format("全部 ({0})", records == null ? 0 : records.Count);
-            return records;
+            _Sheets = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            return GetSelectedNodeItems();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -92,6 +76,7 @@ namespace LJH.Inventory.UI.Forms
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
+            if (!_Sheets.Exists(it => it.ID == sheet.ID)) _Sheets.Add(sheet);
         }
         #endregion
 
@@ -117,6 +102,11 @@ namespace LJH.Inventory.UI.Forms
             //        }
             //    }
             //}
+        }
+
+        private void supplierTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            SelectNode(e.Node);
         }
     }
 }

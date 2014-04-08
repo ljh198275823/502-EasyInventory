@@ -36,7 +36,6 @@
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCancel = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -46,6 +45,11 @@
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.supplierTree1 = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,13 +57,9 @@
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -74,7 +74,6 @@
             this.btn_Add,
             this.btnCancel,
             this.btn_Export,
-            this.toolStripMenuItem1,
             this.btn_Fresh,
             this.btn_SelectColumns,
             this.toolStripSeparator1,
@@ -82,7 +81,7 @@
             this.toolStripSeparator2});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(957, 50);
+            this.menu.Size = new System.Drawing.Size(1107, 50);
             this.menu.TabIndex = 50;
             // 
             // btn_Add
@@ -111,15 +110,6 @@
             this.btn_Export.Size = new System.Drawing.Size(59, 46);
             this.btn_Export.Text = "导出(&E)";
             this.btn_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Image = global::LJH.Inventory.UI.Properties.Resources.purchase;
-            this.toolStripMenuItem1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(71, 46);
-            this.toolStripMenuItem1.Text = "待采购(&E)";
-            this.toolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // btn_Fresh
             // 
@@ -199,6 +189,7 @@
             this.colDeliveryDate,
             this.colWithTax,
             this.colAmount,
+            this.colState,
             this.colDeliveryState,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
@@ -208,76 +199,8 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(655, 323);
+            this.dataGridView1.Size = new System.Drawing.Size(805, 323);
             this.dataGridView1.TabIndex = 109;
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "合同号";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Width = 80;
-            // 
-            // colOrderDate
-            // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colOrderDate.HeaderText = "签订日期";
-            this.colOrderDate.Name = "colOrderDate";
-            this.colOrderDate.ReadOnly = true;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.HeaderText = "供应商";
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.ReadOnly = true;
-            this.colSupplier.Width = 150;
-            // 
-            // colBuyer
-            // 
-            this.colBuyer.HeaderText = "采购员";
-            this.colBuyer.Name = "colBuyer";
-            this.colBuyer.ReadOnly = true;
-            // 
-            // colDeliveryDate
-            // 
-            dataGridViewCellStyle2.Format = "D";
-            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colDeliveryDate.HeaderText = "收货日期";
-            this.colDeliveryDate.Name = "colDeliveryDate";
-            this.colDeliveryDate.ReadOnly = true;
-            // 
-            // colWithTax
-            // 
-            this.colWithTax.HeaderText = "含税";
-            this.colWithTax.Name = "colWithTax";
-            this.colWithTax.ReadOnly = true;
-            this.colWithTax.Visible = false;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colAmount.HeaderText = "货款总额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.Width = 80;
-            // 
-            // colDeliveryState
-            // 
-            this.colDeliveryState.HeaderText = "出货情况";
-            this.colDeliveryState.Name = "colDeliveryState";
-            this.colDeliveryState.ReadOnly = true;
-            this.colDeliveryState.Visible = false;
-            // 
-            // colMemo
-            // 
-            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -313,11 +236,85 @@
             this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
             // 
+            // colID
+            // 
+            this.colID.HeaderText = "合同号";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Width = 80;
+            // 
+            // colOrderDate
+            // 
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colOrderDate.HeaderText = "签订日期";
+            this.colOrderDate.Name = "colOrderDate";
+            this.colOrderDate.ReadOnly = true;
+            // 
+            // colSupplier
+            // 
+            this.colSupplier.HeaderText = "供应商";
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.ReadOnly = true;
+            this.colSupplier.Width = 150;
+            // 
+            // colBuyer
+            // 
+            this.colBuyer.HeaderText = "采购员";
+            this.colBuyer.Name = "colBuyer";
+            this.colBuyer.ReadOnly = true;
+            // 
+            // colDeliveryDate
+            // 
+            dataGridViewCellStyle2.Format = "D";
+            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDeliveryDate.HeaderText = "发货日期";
+            this.colDeliveryDate.Name = "colDeliveryDate";
+            this.colDeliveryDate.ReadOnly = true;
+            // 
+            // colWithTax
+            // 
+            this.colWithTax.HeaderText = "含税";
+            this.colWithTax.Name = "colWithTax";
+            this.colWithTax.ReadOnly = true;
+            this.colWithTax.Visible = false;
+            // 
+            // colAmount
+            // 
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colAmount.HeaderText = "货款总额";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.Width = 80;
+            // 
+            // colState
+            // 
+            this.colState.HeaderText = "状态";
+            this.colState.Name = "colState";
+            this.colState.ReadOnly = true;
+            // 
+            // colDeliveryState
+            // 
+            this.colDeliveryState.HeaderText = "出货情况";
+            this.colDeliveryState.Name = "colDeliveryState";
+            this.colDeliveryState.ReadOnly = true;
+            this.colDeliveryState.Visible = false;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            // 
             // FrmPurchaseOrderMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(957, 395);
+            this.ClientSize = new System.Drawing.Size(1107, 395);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
@@ -349,10 +346,15 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private LJH.Inventory.UI.Controls.TooStripDBCTextBox txtKeyword;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private Controls.SupplierTree supplierTree1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
@@ -360,13 +362,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
-        private Controls.SupplierTree supplierTree1;
     }
 }

@@ -101,7 +101,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
                 else
                 {
-                    item.OrderID = newVal.ID;
+                    item.PurchaseID  = newVal.ID;
                     dc.GetTable<PurchaseItem>().InsertOnSubmit(item);
                 }
             }

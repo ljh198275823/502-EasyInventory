@@ -46,10 +46,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置已收回的金额
-        /// </summary>
-        public decimal Paid { get; set; }
-        /// <summary>
         /// 获取或设置当前状态
         /// </summary>
         public SheetState State { get; set; }
@@ -60,27 +56,6 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 只读属性
-        /// <summary>
-        /// 获取送货单是否可支付
-        /// </summary>
-        public bool Payable
-        {
-            get
-            {
-                return NotPaid > 0;
-            }
-        }
-        /// <summary>
-        /// 获取还有多少未收的金额
-        /// </summary>
-        public decimal NotPaid
-        {
-            get
-            {
-                if (State == SheetState.Canceled || State == SheetState.Settled) return 0;
-                return Amount - Paid;
-            }
-        }
         /// <summary>
         /// 获取是否可以作废
         /// </summary>

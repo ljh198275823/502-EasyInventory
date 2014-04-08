@@ -22,16 +22,34 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 私有变量
+        private List<DeliverySheet > _Sheets = null;
+        #endregion
+
         #region 私有方法
-        
+        private void SelectNode(TreeNode node)
+        {
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
+        }
+
+        private List<object> GetSelectedNodeItems()
+        {
+            List<DeliverySheet> items = _Sheets;
+            CompanyInfo pc = null;
+            if (this.customerTree1.SelectedNode != null) pc = this.customerTree1.SelectedNode.Tag as CompanyInfo;
+            if (pc != null) items = _Sheets.Where(it => it.CustomerID == pc.ID).ToList();
+
+            return (from p in items
+                    select (object)p).ToList();
+        }
         #endregion
 
         #region 重写基类方法和处理事件
         protected override void Init()
         {
             base.Init();
-            btnAll.BackColor = SystemColors.ControlDark;
-
+            customerTree1.Init();
             menu.Items["btn_Add"].Enabled = Operator.Current.Permit(Permission.EditDeliverySheet);
             dataGridView1.Columns["colAmount"].Visible = Operator.Current.Permit(Permission.ReadPrice);
         }
@@ -44,44 +62,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<DeliverySheet> items = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            List<object> records = null;
-
-            records = (from o in items
-                       where o.State == SheetState.Add
-                       select (object)o).ToList();
-            btnAdd.Tag = records;
-            btnAdd.Text = string.Format("新建 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Approved
-                       select (object)o).ToList();
-            btnApprove.Tag = records;
-            btnApprove.Text = string.Format("审核 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Shipped 
-                       select (object)o).ToList();
-            btnDelivery.Tag = records;
-            btnDelivery.Text = string.Format("发货 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Closed
-                       select (object)o).ToList();
-            btnClosed.Tag = records;
-            btnClosed.Text = string.Format("关闭 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Canceled
-                       select (object)o).ToList();
-            btnCanceled.Tag = records;
-            btnCanceled.Text = string.Format("作废 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       select (object)o).ToList();
-            btnAll.Tag = records;
-            btnAll.Text = string.Format("全部 ({0})", records == null ? 0 : records.Count);
-            return records;
+            _Sheets  = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            return GetSelectedNodeItems();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -103,6 +85,7 @@ namespace LJH.Inventory.UI.Forms
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
+            if (!_Sheets.Exists(it => it.ID == sheet.ID)) _Sheets.Add(sheet);
         }
 
         protected override bool DeletingItem(object item)
@@ -113,15 +96,6 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理程序
-        private void chkSheetState_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (!chkShipWait.Checked && !chkApproved.Checked && !chkShipped.Checked && !chkCancel.Checked)
-            //{
-            //    MessageBox.Show("请至少指定一种送货单状态");
-            //    (sender as CheckBox).Checked = true;
-            //}
-        }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -133,22 +107,12 @@ namespace LJH.Inventory.UI.Forms
                     frm.ReceivableID = sheet.ID;
                     frm.ShowDialog();
                 }
-                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colOrder")
-                {
-                    //if (!string.IsNullOrEmpty(sheet.OrderID))
-                    //{
-                    //    Order order = (new OrderBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(sheet.OrderID).QueryObject;
-                    //    if (order != null)
-                    //    {
-                    //        FrmOrderDetail frm = new FrmOrderDetail();
-                    //        frm.IsAdding = false;
-                    //        frm.IsForView = true;
-                    //        frm.UpdatingItem = order;
-                    //        frm.ShowDialog();
-                    //    }
-                    //}
-                }
             }
+        }
+
+        private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            SelectNode(e.Node);
         }
         #endregion
     }

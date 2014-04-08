@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.UI.Forms
@@ -20,7 +21,7 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<PurchaseOrder> _Orders = null;
+        private List<PurchaseOrder> _Sheets = null;
         #endregion
 
         #region 私有方法
@@ -32,10 +33,10 @@ namespace LJH.Inventory.UI.Forms
 
         private List<object> GetSelectedNodeItems()
         {
-            List<PurchaseOrder> items = _Orders;
+            List<PurchaseOrder> items = _Sheets;
             CompanyInfo pc = null;
             if (this.supplierTree1.SelectedNode != null) pc = this.supplierTree1.SelectedNode.Tag as CompanyInfo;
-            if (pc != null) items = _Orders.Where(it => it.SupplierID == pc.ID).ToList();
+            if (pc != null) items = _Sheets.Where(it => it.SupplierID == pc.ID).ToList();
 
             return (from p in items
                     orderby p.OrderDate descending
@@ -60,26 +61,28 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            _Orders = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            _Sheets = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             return GetSelectedNodeItems();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            PurchaseOrder PurchaseSheet = item as PurchaseOrder;
-            row.Cells["colID"].Value = PurchaseSheet.ID;
-            row.Cells["colOrderDate"].Value = PurchaseSheet.OrderDate;
-            row.Cells["colSupplier"].Value = PurchaseSheet.Supplier.Name;
-            row.Cells["colBuyer"].Value = PurchaseSheet.Buyer;
-            row.Cells["colDeliveryDate"].Value = PurchaseSheet.DemandDate;
-            row.Cells["colWithTax"].Value = PurchaseSheet.WithTax;
-            row.Cells["colAmount"].Value = PurchaseSheet.CalAmount().Trim();
-            row.Cells["colMemo"].Value = PurchaseSheet.Memo;
-            if (PurchaseSheet.State == SheetState.Canceled)
+            PurchaseOrder info = item as PurchaseOrder;
+            row.Cells["colID"].Value = info.ID;
+            row.Cells["colOrderDate"].Value = info.OrderDate;
+            row.Cells["colSupplier"].Value = info.Supplier.Name;
+            row.Cells["colBuyer"].Value = info.Buyer;
+            row.Cells["colDeliveryDate"].Value = info.DemandDate;
+            row.Cells["colWithTax"].Value = info.WithTax;
+            row.Cells["colAmount"].Value = info.CalAmount().Trim();
+            row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
+            row.Cells["colMemo"].Value = info.Memo;
+            if (info.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
+            if (!_Sheets.Exists(it => it.ID == info.ID)) _Sheets.Add(info);
         }
 
         protected override bool DeletingItem(object item)
@@ -95,13 +98,6 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理程序
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
-            {
-            }
-        }
-
         private void supplierTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             SelectNode(e.Node);

@@ -21,11 +21,35 @@ namespace LJH.Inventory.UI.Forms.Financial
             InitializeComponent();
         }
 
+        #region 私有变量
+        private List<CustomerOtherReceivable> _Sheets = null;
+        #endregion
+
+        #region 私有方法
+        private void SelectNode(TreeNode node)
+        {
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
+        }
+
+        private List<object> GetSelectedNodeItems()
+        {
+            List<CustomerOtherReceivable> items = _Sheets;
+            CompanyInfo pc = null;
+            if (this.customerTree1.SelectedNode != null) pc = this.customerTree1.SelectedNode.Tag as CompanyInfo;
+            if (pc != null) items = _Sheets.Where(it => it.CustomerID == pc.ID).ToList();
+
+            return (from p in items
+                    orderby p.CreateDate descending
+                    select (object)p).ToList();
+        }
+        #endregion
+
         #region 重写基类方法和处理事件
         protected override void Init()
         {
             base.Init();
-            this.btnAll.BackColor = SystemColors.ControlDark;
+            this.customerTree1.Init();
             Operator opt = Operator.Current;
         }
 
@@ -36,36 +60,8 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
-            List<CustomerOtherReceivable> items = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
-            List<object> records = null;
-
-            records = (from o in items
-                       where o.State == SheetState.Add
-                       orderby o.CreateDate descending
-                       select (object)o).ToList();
-            btnAdd.Tag = records;
-            btnAdd.Text = string.Format("新建 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Approved
-                       orderby o.CreateDate descending
-                       select (object)o).ToList();
-            btnApprove.Tag = records;
-            btnApprove.Text = string.Format("审核 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       where o.State == SheetState.Canceled
-                       orderby o.CreateDate descending
-                       select (object)o).ToList();
-            btnCanceled.Tag = records;
-            btnCanceled.Text = string.Format("作废 ({0})", records == null ? 0 : records.Count);
-
-            records = (from o in items
-                       orderby o.CreateDate descending
-                       select (object)o).ToList();
-            btnAll.Tag = records;
-            btnAll.Text = string.Format("全部 ({0})", records == null ? 0 : records.Count);
-            return records;
+            _Sheets  = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            return GetSelectedNodeItems();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -76,14 +72,14 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colCustomer"].Value = info.Customer != null ? info.Customer.Name : info.CustomerID;
             row.Cells["colCurrencyType"].Value = info.CurrencyType;
             row.Cells["colAmount"].Value = info.Amount.Trim();
-            row.Cells["colPaid"].Value = info.Paid.Trim();
-            row.Cells["colNotPaid"].Value = info.NotPaid.Trim();
+            row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
+            if (!_Sheets.Exists(it => it.ID == info.ID)) _Sheets.Add(info);
         }
 
         protected override bool DeletingItem(object item)
@@ -132,26 +128,31 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void mnu_Pay_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                CustomerOtherReceivable daifu = dataGridView1.SelectedRows[0].Tag as CustomerOtherReceivable;
-                if (daifu.Payable)
-                {
-                    FrmReceivablesPaid frm = new FrmReceivablesPaid();
-                    CompanyInfo c = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(daifu.CustomerID).QueryObject;
-                    if (c != null)
-                    {
-                        frm.Customer = c;
-                        frm.ReceivableID = daifu.ID;
-                        frm.MaxAmount = daifu.NotPaid;
-                        if (frm.ShowDialog() == DialogResult.OK)
-                        {
-                            CustomerOtherReceivable sheet1 = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetByID(daifu.ID).QueryObject;
-                            ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sheet1);
-                        }
-                    }
-                }
-            }
+            //if (dataGridView1.SelectedRows.Count == 1)
+            //{
+            //    CustomerOtherReceivable daifu = dataGridView1.SelectedRows[0].Tag as CustomerOtherReceivable;
+            //    if (daifu.Payable)
+            //    {
+            //        FrmReceivablesPaid frm = new FrmReceivablesPaid();
+            //        CompanyInfo c = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(daifu.CustomerID).QueryObject;
+            //        if (c != null)
+            //        {
+            //            frm.Customer = c;
+            //            frm.ReceivableID = daifu.ID;
+            //            frm.MaxAmount = daifu.NotPaid;
+            //            if (frm.ShowDialog() == DialogResult.OK)
+            //            {
+            //                CustomerOtherReceivable sheet1 = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetByID(daifu.ID).QueryObject;
+            //                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sheet1);
+            //            }
+            //        }
+            //    }
+            //}
+        }
+
+        private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            SelectNode(e.Node);
         }
         #endregion
     }

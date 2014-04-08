@@ -145,7 +145,6 @@
     <Compile Include="LinqProvider\SupplierReceivableProvider.cs" />
     <Compile Include="LinqProvider\SupplierTypeProvider.cs" />
     <Compile Include="LinqProvider\TransportProvider.cs" />
-    <Compile Include="LinqProvider\T_CustomerOtherReceivable.cs" />
     <Compile Include="LinqProvider\AutoNumberCreater.cs" />
     <Compile Include="LinqProvider\DataContextFactory.cs" />
     <Compile Include="LinqProvider\DeliverySheetProvider.cs" />
