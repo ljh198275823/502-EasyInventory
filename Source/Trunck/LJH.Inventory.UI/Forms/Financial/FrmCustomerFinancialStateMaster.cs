@@ -88,7 +88,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colName"].Value = c.Name;
             row.Cells["colCategory"].Value = c.CategoryID;
             CustomerFinancialState cs = null;
-            if (_CustomerStates != null && _CustomerStates.Count > 0) cs = _CustomerStates.SingleOrDefault(it => it.CustomerID == c.ID);
+            if (_CustomerStates != null && _CustomerStates.Count > 0) cs = _CustomerStates.SingleOrDefault(it => it.ID == c.ID);
             row.Cells["colPrepay"].Value = cs != null ? cs.Prepay.Trim() : 0;
             row.Cells["colReceivable"].Value = cs != null ? cs.Receivable.Trim() : 0;
         }

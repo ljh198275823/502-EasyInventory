@@ -42,7 +42,6 @@ namespace LJH.Inventory.BLL
                         Unit = pii.Unit,
                         Price = pii.Price,
                         Count = pii.Count,
-                        Received = pii.Received,
                         DemandDate = item.DemandDate,
                         Buyer = item.Buyer,
                         State = item.State,

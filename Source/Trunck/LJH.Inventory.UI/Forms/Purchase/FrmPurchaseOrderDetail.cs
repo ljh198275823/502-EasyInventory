@@ -46,8 +46,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colTotal"].Value = item.Amount.Trim();
             row.Cells["colOrderID"].Value = item.OrderID;
-            row.Cells["colReceived"].Value = item.Received.Trim();
-            row.Cells["colOnWay"].Value = item.OnWay.Trim();
+            //row.Cells["colReceived"].Value = item.Received.Trim();
+            //row.Cells["colOnWay"].Value = item.OnWay.Trim();
             row.Cells["colMemo"].Value = item.Memo;
         }
 

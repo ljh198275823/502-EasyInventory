@@ -100,12 +100,14 @@
     <Compile Include="InventoryOutType.cs" />
     <Compile Include="InventoryRecord.cs" />
     <Compile Include="MyCompanyInfo.cs" />
+    <Compile Include="OrderItemState.cs" />
     <Compile Include="OrderRecord.cs" />
     <Compile Include="ProductInventoryItem.cs" />
     <Compile Include="Port.cs" />
     <Compile Include="PriceTerm.cs" />
     <Compile Include="PurchaseOrder.cs" />
     <Compile Include="PurchaseItem.cs" />
+    <Compile Include="PurchaseItemState.cs" />
     <Compile Include="PurchaseRecord.cs" />
     <Compile Include="RelatedCompanyType.cs" />
     <Compile Include="Resource\PaymentModeDescription.cs" />

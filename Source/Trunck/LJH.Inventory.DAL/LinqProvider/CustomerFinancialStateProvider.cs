@@ -19,7 +19,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         #region 重写基类方法
         protected override CustomerFinancialState GetingItemByID(string id, System.Data.Linq.DataContext dc)
         {
-            return dc.GetTable<CustomerFinancialState>().SingleOrDefault(item => item.CustomerID == id);
+            return dc.GetTable<CustomerFinancialState>().SingleOrDefault(item => item.ID == id);
         }
         #endregion
     }

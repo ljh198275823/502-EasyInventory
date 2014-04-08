@@ -20,7 +20,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置客户ID
         /// </summary>
-        public string CustomerID { get; set; }
+        public string ID { get; set; }
         /// <summary>
         /// 获取或设置客户预付款
         /// </summary>

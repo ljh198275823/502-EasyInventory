@@ -54,10 +54,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
-        /// 获取或设置采购到货数量
-        /// </summary>
-        public decimal Received { get; set; }
-        /// <summary>
         /// 获取或设置客户要求的出货时间
         /// </summary>
         public DateTime DemandDate { get; set; }
@@ -80,16 +76,6 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 return Price * Count;
-            }
-        }
-        /// <summary>
-        /// 获取采购项的在途数量
-        /// </summary>
-        public decimal OnWay
-        {
-            get
-            {
-                return Count - Received > 0 ? (Count - Received) : 0;
             }
         }
         #endregion
