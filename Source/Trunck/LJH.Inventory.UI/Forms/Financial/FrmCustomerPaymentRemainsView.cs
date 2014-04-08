@@ -11,11 +11,11 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Forms;
 
-namespace LJH.Inventory.UI.Report
+namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmCustomerPaymentRemains : Form
+    public partial class FrmCustomerPaymentRemainsView : Form
     {
-        public FrmCustomerPaymentRemains()
+        public FrmCustomerPaymentRemainsView()
         {
             InitializeComponent();
         }

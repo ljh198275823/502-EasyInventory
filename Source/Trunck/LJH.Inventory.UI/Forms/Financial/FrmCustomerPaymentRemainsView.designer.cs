@@ -1,6 +1,6 @@
-﻿namespace LJH.Inventory.UI.Report
+﻿namespace LJH.Inventory.UI.Forms
 {
-    partial class FrmCustomerPaymentRemains
+    partial class FrmCustomerPaymentRemainsView
     {
         /// <summary>
         /// Required designer variable.

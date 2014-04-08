@@ -160,7 +160,7 @@ namespace LJH.Inventory.UI.Forms
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
                     CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
-                    FrmCustomerPaymentRemains frm = new FrmCustomerPaymentRemains();
+                    FrmCustomerPaymentRemainsView frm = new FrmCustomerPaymentRemainsView();
                     frm.Customer = c;
                     frm.ShowDialog();
                 }
