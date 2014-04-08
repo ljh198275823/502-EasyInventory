@@ -8,10 +8,10 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户的财务状况
     /// </summary>
-    public class CustomerState
+    public class CustomerFinancialState
     {
         #region 构造函数
-        public CustomerState()
+        public CustomerFinancialState()
         {
         }
         #endregion

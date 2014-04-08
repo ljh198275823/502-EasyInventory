@@ -30,21 +30,17 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string CustomerID { get; set; }
         /// <summary>
-        /// 获取或设置产生应收款的销售订单号
+        /// 获取或设置应收款的类型
+        /// </summary>
+        public CustomerReceivableClass ClassID { get; set; }
+        /// <summary>
+        /// 获取或设置产生应收账款的单据号，比如送货单号，其它应收款单号等
+        /// </summary>
+        public string SheetID { get; set; }
+        /// <summary>
+        /// 获取或设置产生应收款的销售订单号,某些项目可能需要区分不同订单产生的应收账款，这些订单可能是通过一个送货单发货的
         /// </summary>
         public string OrderID { get; set; }
-        /// <summary>
-        /// 获取或设置销售订单项,每个送货单的一项都生成一个客户应收金额,而送货单项又属于销售订单的一项
-        /// </summary>
-        public Guid? OrderItem { get; set; }
-        /// <summary>
-        /// 获取或设置送货单编号
-        /// </summary>
-        public string DeliverySheet { get; set; }
-        /// <summary>
-        /// 获取或设置送货单项ID
-        /// </summary>
-        public Guid? DeliveryItem { get; set; }
         /// <summary>
         /// 获取或设置应收总额
         /// </summary>
@@ -65,5 +61,20 @@ namespace LJH.Inventory.BusinessModel
             return this.MemberwiseClone() as CustomerReceivable;
         }
         #endregion
+    }
+
+    /// <summary>
+    /// 客户应收款的类型
+    /// </summary>
+    public enum CustomerReceivableClass
+    {
+        /// <summary>
+        /// 其它应收款
+        /// </summary>
+        Other=0,
+        /// <summary>
+        /// 送货单产生的应收款
+        /// </summary>
+        Delivery=1,
     }
 }

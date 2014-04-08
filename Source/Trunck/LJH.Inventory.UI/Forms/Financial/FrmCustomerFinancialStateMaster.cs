@@ -23,7 +23,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         #region 私有变量
         private List<CompanyInfo> _Customers = null;
-        private List<CustomerState> _CustomerStates = null;
+        private List<CustomerFinancialState> _CustomerStates = null;
         #endregion
 
         #region 私有方法
@@ -87,7 +87,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colID"].Value = c.ID;
             row.Cells["colName"].Value = c.Name;
             row.Cells["colCategory"].Value = c.CategoryID;
-            CustomerState cs = null;
+            CustomerFinancialState cs = null;
             if (_CustomerStates != null && _CustomerStates.Count > 0) cs = _CustomerStates.SingleOrDefault(it => it.CustomerID == c.ID);
             row.Cells["colPrepay"].Value = cs != null ? cs.Prepay.Trim() : 0;
             row.Cells["colReceivable"].Value = cs != null ? cs.Receivable.Trim() : 0;

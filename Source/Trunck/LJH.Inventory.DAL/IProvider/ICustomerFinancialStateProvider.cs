@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface ICustomerStateProvider : IProvider<LJH.Inventory.BusinessModel.CustomerState, string>
+    public interface ICustomerFinancialStateProvider : IProvider<LJH.Inventory.BusinessModel.CustomerFinancialState, string>
     {
     }
 }

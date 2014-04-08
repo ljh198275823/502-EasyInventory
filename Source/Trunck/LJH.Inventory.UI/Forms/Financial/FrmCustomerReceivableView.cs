@@ -46,16 +46,14 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            //CompanyInfo c = item as CompanyInfo;
-            //row.Tag = c;
-            //row.Cells["colImage"].Value = Properties.Resources.customer;
-            //row.Cells["colID"].Value = c.ID;
-            //row.Cells["colName"].Value = c.Name;
-            //row.Cells["colCategory"].Value = c.CategoryID;
-            //CustomerState cs = null;
-            //if (_CustomerStates != null && _CustomerStates.Count > 0) cs = _CustomerStates.SingleOrDefault(it => it.CustomerID == c.ID);
-            //row.Cells["colPrepay"].Value = cs != null ? cs.Prepay.Trim() : 0;
-            //row.Cells["colReceivable"].Value = cs != null ? cs.Receivable.Trim() : 0;
+            CustomerReceivable cr = item as CustomerReceivable;
+            row.Tag = cr;
+            row.Cells["colSheetID"].Value = cr.SheetID;
+            row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
+            row.Cells["colClassID"].Value = cr.ClassID;
+            row.Cells["colAmount"].Value = cr.Amount;
+            row.Cells["colRemain"].Value = cr.Remain;
+            row.Cells["colMemo"].Value = cr.Memo;
         }
         #endregion
     }

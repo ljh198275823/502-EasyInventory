@@ -82,16 +82,16 @@ namespace LJH.Inventory.BLL
         {
             foreach (DeliveryItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
             {
+                DateTime dt = DateTime.Now;
                 //增加应收账款项
                 CustomerReceivable cr = new CustomerReceivable()
                 {
                     ID = Guid.NewGuid(),
-                    OrderItem = si.OrderItem,
-                    OrderID = si.OrderID,
-                    DeliveryItem = si.ID,
-                    DeliverySheet = sheet.ID,
-                    CreateDate = DateTime.Now,
+                    CreateDate = dt,
+                    ClassID = CustomerReceivableClass.Delivery,
                     CustomerID = sheet.CustomerID,
+                    SheetID = sheet.ID,
+                    OrderID = si.OrderID,
                     Amount = si.Amount,
                     Remain = si.Amount,
                 };

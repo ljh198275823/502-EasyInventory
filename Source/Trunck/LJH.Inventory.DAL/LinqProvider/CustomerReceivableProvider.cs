@@ -32,7 +32,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.CreateDate != null) ret = ret.Where(item => item.CreateDate >= con.CreateDate.Begin && item.CreateDate <= con.CreateDate.End);
                 if (!string.IsNullOrEmpty (con.CustomerID )) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
-                if (!string.IsNullOrEmpty(con.DeliverySheet)) ret = ret.Where(item => item.DeliverySheet == con.DeliverySheet);
+                if (!string.IsNullOrEmpty(con.DeliverySheet)) ret = ret.Where(item => item.SheetID == con.DeliverySheet);
                 ret = ret.Where(item => item.Remain > 0);
             }
             return ret.ToList();

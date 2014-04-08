@@ -88,8 +88,8 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.View_CustomerState" Member="LJH.Inventory.BusinessModel.CustomerState">
-    <Type Name="LJH.Inventory.BusinessModel.CustomerState">
+  <Table Name="dbo.View_CustomerFinancialState" Member="LJH.Inventory.BusinessModel.CustomerFinancialState">
+    <Type Name="LJH.Inventory.BusinessModel.CustomerFinancialState">
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true"/>
       <Column Name="Prepay" Member="Prepay" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Receivable" Member="Receivable" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
@@ -467,13 +467,12 @@
   </Table>
   <Table Name="dbo.CustomerReceivable" Member="LJH.Inventory.BusinessModel.CustomerReceivable">
     <Type Name="LJH.Inventory.BusinessModel.CustomerReceivable">
-      <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
       <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="SheetID" Member="SheetID"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="DeliverySheet" Member="DeliverySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="DeliveryItem" Member="DeliveryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Remain" Member="Remain" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
