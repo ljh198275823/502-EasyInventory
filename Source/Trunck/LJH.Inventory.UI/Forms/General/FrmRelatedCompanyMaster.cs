@@ -171,37 +171,37 @@ namespace LJH.Inventory.UI.Forms
         #region 事件处理程序
         private void mnu_Payment_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
-                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                frm.Customer = c;
-                frm.IsAdding = true;
-                frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
-                {
-                    CompanyInfo c1 = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(c.ID).QueryObject;
-                    if (c1 != null)
-                    {
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
-                    }
-                };
-                frm.ShowDialog();
-            }
+            //if (dataGridView1.SelectedRows.Count == 1)
+            //{
+            //    CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
+            //    FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+            //    frm.Customer = c;
+            //    frm.IsAdding = true;
+            //    frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+            //    {
+            //        CompanyInfo c1 = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(c.ID).QueryObject;
+            //        if (c1 != null)
+            //        {
+            //            ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
+            //        }
+            //    };
+            //    frm.ShowDialog();
+            //}
         }
         #endregion
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
-                {
-                    CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
-                    FrmCustomerPaymentRemainsView frm = new FrmCustomerPaymentRemainsView();
-                    frm.Customer = c;
-                    frm.ShowDialog();
-                }
-            }
+            //if (e.RowIndex >= 0)
+            //{
+            //    if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
+            //    {
+            //        CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
+            //        FrmCustomerPaymentRemainsView frm = new FrmCustomerPaymentRemainsView();
+            //        frm.Customer = c;
+            //        frm.ShowDialog();
+            //    }
+            //}
         }
 
         #region 类别树右键菜单

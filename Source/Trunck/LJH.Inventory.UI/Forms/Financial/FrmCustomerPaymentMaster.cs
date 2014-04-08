@@ -11,7 +11,7 @@ using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Financial
 {
     public partial class FrmCustomerPaymentMaster : FrmMasterBase
     {

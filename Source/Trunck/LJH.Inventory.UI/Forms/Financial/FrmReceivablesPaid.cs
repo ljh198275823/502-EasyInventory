@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Financial
 {
     public partial class FrmReceivablesPaid : Form
     {

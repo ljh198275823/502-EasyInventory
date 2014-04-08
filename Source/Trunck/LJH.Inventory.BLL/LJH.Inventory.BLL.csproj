@@ -84,6 +84,7 @@
     <Compile Include="CompanyBLL.cs" />
     <Compile Include="CustomerOtherReceivableBLL.cs" />
     <Compile Include="CustomerPaymentBLL.cs" />
+    <Compile Include="CustomerReceivableBLL.cs" />
     <Compile Include="CustomerTypeBLL.cs" />
     <Compile Include="DatetimeSyncService.cs" />
     <Compile Include="DeliverySheetBLL.cs" />

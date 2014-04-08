@@ -12,6 +12,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.SoftDog;
 using LJH.Inventory.UI.Forms;
 using LJH.GeneralLibrary.SQLHelper;
+using LJH.Inventory.UI.Forms.Financial;
 
 namespace LJH.Inventory.UI.Applications.WaiMao
 {

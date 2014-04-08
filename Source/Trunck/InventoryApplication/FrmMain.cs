@@ -12,6 +12,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.SoftDog;
 using LJH.Inventory.UI.Forms;
 using LJH.GeneralLibrary.SQLHelper;
+using LJH.Inventory.UI.Forms.Financial;
 
 namespace InventoryApplication
 {
@@ -415,7 +416,7 @@ namespace InventoryApplication
 
         private void mnu_CustomerReceivable_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCustomerReceivable));
+            ShowSingleForm(typeof(FrmCustomerFinancialStateMaster));
         }
     }
 }

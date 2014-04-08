@@ -11,7 +11,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Forms;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Financial
 {
     public partial class FrmCustomerPaymentRemainsView : Form
     {

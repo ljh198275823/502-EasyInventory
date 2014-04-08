@@ -12,7 +12,7 @@ using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Report;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Financial
 {
     public partial class FrmCustomerOtherReceivableMaster : FrmMasterBase
     {

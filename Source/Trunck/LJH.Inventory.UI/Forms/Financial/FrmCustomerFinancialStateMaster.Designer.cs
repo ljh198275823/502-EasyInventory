@@ -1,6 +1,6 @@
-﻿namespace LJH.Inventory.UI.Forms
+﻿namespace LJH.Inventory.UI.Forms.Financial
 {
-    partial class FrmCustomerReceivable
+    partial class FrmCustomerFinancialStateMaster
     {
         /// <summary>
         /// Required designer variable.
@@ -32,8 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
-            this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +49,7 @@
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -61,8 +60,7 @@
             this.menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.menu.ImageScalingSize = new System.Drawing.Size(25, 25);
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btn_Add,
-            this.btn_Delete,
+            this.mnu_Payment,
             this.btn_Export,
             this.btn_Fresh,
             this.btn_SelectColumns,
@@ -73,24 +71,6 @@
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(1021, 50);
             this.menu.TabIndex = 32;
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.Image = global::LJH.Inventory.UI.Properties.Resources.add;
-            this.btn_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(62, 46);
-            this.btn_Add.Text = "新建(&N)";
-            this.btn_Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
-            this.btn_Delete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(61, 46);
-            this.btn_Delete.Text = "删除(&D)";
-            this.btn_Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // btn_Export
             // 
@@ -251,7 +231,17 @@
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             // 
-            // FrmCustomerReceivable
+            // mnu_Payment
+            // 
+            this.mnu_Payment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
+            this.mnu_Payment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnu_Payment.Name = "mnu_Payment";
+            this.mnu_Payment.Size = new System.Drawing.Size(59, 46);
+            this.mnu_Payment.Text = "支付(&P)";
+            this.mnu_Payment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.mnu_Payment.Click += new System.EventHandler(this.mnu_Payment_Click);
+            // 
+            // FrmCustomerFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -260,7 +250,7 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
-            this.Name = "FrmCustomerReceivable";
+            this.Name = "FrmCustomerFinancialStateMaster";
             this.Text = "客户应收账款";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
@@ -278,8 +268,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menu;
-        private System.Windows.Forms.ToolStripMenuItem btn_Add;
-        private System.Windows.Forms.ToolStripMenuItem btn_Delete;
         private System.Windows.Forms.ToolStripMenuItem btn_Export;
         private System.Windows.Forms.ToolStripMenuItem btn_Fresh;
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
@@ -297,5 +285,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Payment;
     }
 }

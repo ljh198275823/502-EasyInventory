@@ -115,64 +115,6 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
-        #region 事件处理程序
-        private void mnu_Payment_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
-                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                frm.Customer = c;
-                frm.IsAdding = true;
-                frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
-                {
-                    CompanyInfo c1 = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(c.ID).QueryObject;
-                    if (c1 != null)
-                    {
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
-                    }
-                };
-                frm.ShowDialog();
-            }
-        }
-
-        private void mnu_ShowDeadlineDeliverySheets_Click(object sender, EventArgs e)
-        {
-            //if (dataGridView1.SelectedRows.Count == 1)
-            //{
-            //    Customer c = dataGridView1.SelectedRows[0].Tag as Customer;
-            //    List<DeliverySheet> items = null;
-            //    if (c.UnSettleSheets != null && c.UnSettleSheets.Count > 0)
-            //    {
-            //        items = c.UnSettleSheets.Where(item => item.IsOnDeadline).ToList();
-            //    }
-            //    FrmDeliverySheetView frm = new FrmDeliverySheetView();
-            //    frm.ShowDeliverySheets(items);
-            //    frm.ShowCustomer(c);
-            //    frm.ShowDialog();
-            //}
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
-                {
-                    CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
-                    FrmCustomerPaymentRemainsView frm = new FrmCustomerPaymentRemainsView();
-                    frm.Customer = c;
-                    frm.ShowDialog();
-                }
-            }
-        }
-
-        private void mnu_Payment_Click_1(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-        
         #region 类别树右键菜单
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {

@@ -10,12 +10,13 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Report;
+using LJH.Inventory.UI.Forms.Financial;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerReceivable : FrmMasterBase
+    public partial class FrmCustomerFinancialStateMaster : FrmMasterBase
     {
-        public FrmCustomerReceivable()
+        public FrmCustomerFinancialStateMaster()
         {
             InitializeComponent();
         }
@@ -51,8 +52,6 @@ namespace LJH.Inventory.UI.Forms
             base.Init();
             categoryTree.Init();
             Operator opt = Operator.Current;
-            menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditCustomer);
-            menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditCustomer);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -105,6 +104,13 @@ namespace LJH.Inventory.UI.Forms
         {
             if (e.RowIndex >= 0)
             {
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
+                {
+                    CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
+                    FrmCustomerReceivableView frm = new FrmCustomerReceivableView();
+                    frm.Customer = c;
+                    frm.ShowDialog();
+                }
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
                     CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
@@ -112,6 +118,26 @@ namespace LJH.Inventory.UI.Forms
                     frm.Customer = c;
                     frm.ShowDialog();
                 }
+            }
+        }
+
+        private void mnu_Payment_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
+                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                frm.Customer = c;
+                frm.IsAdding = true;
+                frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+                {
+                    CompanyInfo c1 = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(c.ID).QueryObject;
+                    if (c1 != null)
+                    {
+                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
+                    }
+                };
+                frm.ShowDialog();
             }
         }
         #endregion
