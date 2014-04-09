@@ -287,6 +287,12 @@
     <Compile Include="Forms\Report\FrmOrderProfitReport.Designer.cs">
       <DependentUpon>FrmOrderProfitReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Sale\FrmOrderMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sale\FrmOrderMonitor.Designer.cs">
+      <DependentUpon>FrmOrderMonitor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Selection\FrmOrderRecordSelection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -668,6 +674,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\FrmOrderProfitReport.resx">
       <DependentUpon>FrmOrderProfitReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sale\FrmOrderMonitor.resx">
+      <DependentUpon>FrmOrderMonitor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selection\FrmOrderRecordSelection.resx">
       <DependentUpon>FrmOrderRecordSelection.cs</DependentUpon>

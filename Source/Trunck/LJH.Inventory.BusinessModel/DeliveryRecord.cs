@@ -22,7 +22,9 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置销售单号
         /// </summary>
         public string SheetNo { get; set; }
-
+        /// <summary>
+        /// 获取或设置订单项ID
+        /// </summary>
         public Guid? OrderItem { get; set; }
         /// <summary>
         /// 获取或设置订单号
