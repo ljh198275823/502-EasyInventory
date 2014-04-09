@@ -287,11 +287,11 @@
     <Compile Include="Forms\Report\FrmOrderProfitReport.Designer.cs">
       <DependentUpon>FrmOrderProfitReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Sale\FrmOrderMonitor.cs">
+    <Compile Include="Forms\Sale\FrmOrderItemRecordMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Sale\FrmOrderMonitor.Designer.cs">
-      <DependentUpon>FrmOrderMonitor.cs</DependentUpon>
+    <Compile Include="Forms\Sale\FrmOrderItemRecordMaster.Designer.cs">
+      <DependentUpon>FrmOrderItemRecordMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Selection\FrmOrderRecordSelection.cs">
       <SubType>Form</SubType>
@@ -377,11 +377,11 @@
     <Compile Include="Forms\Purchase\FrmPurchaseOrderMaster.Designer.cs">
       <DependentUpon>FrmPurchaseOrderMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Purchase\FrmPurchaseRecordMaster.cs">
+    <Compile Include="Forms\Purchase\FrmPurchaseItemRecordMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Purchase\FrmPurchaseRecordMaster.designer.cs">
-      <DependentUpon>FrmPurchaseRecordMaster.cs</DependentUpon>
+    <Compile Include="Forms\Purchase\FrmPurchaseItemRecordMaster.designer.cs">
+      <DependentUpon>FrmPurchaseItemRecordMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Financial\FrmReceivablesPaid.cs">
       <SubType>Form</SubType>
@@ -675,8 +675,8 @@
     <EmbeddedResource Include="Forms\Report\FrmOrderProfitReport.resx">
       <DependentUpon>FrmOrderProfitReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Sale\FrmOrderMonitor.resx">
-      <DependentUpon>FrmOrderMonitor.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Sale\FrmOrderItemRecordMaster.resx">
+      <DependentUpon>FrmOrderItemRecordMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selection\FrmOrderRecordSelection.resx">
       <DependentUpon>FrmOrderRecordSelection.cs</DependentUpon>
@@ -723,8 +723,8 @@
     <EmbeddedResource Include="Forms\Purchase\FrmPurchaseOrderMaster.resx">
       <DependentUpon>FrmPurchaseOrderMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Purchase\FrmPurchaseRecordMaster.resx">
-      <DependentUpon>FrmPurchaseRecordMaster.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Purchase\FrmPurchaseItemRecordMaster.resx">
+      <DependentUpon>FrmPurchaseItemRecordMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmReceivablesPaid.resx">
       <DependentUpon>FrmReceivablesPaid.cs</DependentUpon>

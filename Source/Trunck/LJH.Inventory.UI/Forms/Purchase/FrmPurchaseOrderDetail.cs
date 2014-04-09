@@ -338,7 +338,7 @@ namespace LJH.Inventory.UI.Forms
             ShowDeliveryItemsOnGrid(sources);
         }
 
-        public void AddPurchaseSheettem(OrderRecord oi)
+        public void AddPurchaseSheettem(OrderItemRecord oi)
         {
             List<PurchaseItem> sources = GetPurchaseSheetItemsFromGrid();
             if (!sources.Exists(it => it.OrderItem == oi.ID))
@@ -462,7 +462,7 @@ namespace LJH.Inventory.UI.Forms
         {
             FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
             frm.ForSelect = true;
-            OrderRecordSearchCondition con = new OrderRecordSearchCondition();
+            OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Add);
             con.States.Add(SheetState.Approved);
@@ -470,7 +470,7 @@ namespace LJH.Inventory.UI.Forms
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                OrderRecord oi = frm.SelectedItem as OrderRecord;
+                OrderItemRecord oi = frm.SelectedItem as OrderItemRecord;
                 AddPurchaseSheettem(oi);
             }
         }

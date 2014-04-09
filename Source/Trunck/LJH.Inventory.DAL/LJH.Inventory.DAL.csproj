@@ -94,7 +94,7 @@
     <Compile Include="IProvider\IItemKeyProvider.cs" />
     <Compile Include="IProvider\IExpenditureRecordProvider.cs" />
     <Compile Include="IProvider\IInventorySheetProvider.cs" />
-    <Compile Include="IProvider\IOrderItemStateProvider.cs" />
+    <Compile Include="IProvider\IOrderItemRecordProvider.cs" />
     <Compile Include="IProvider\IProductInventoryItemProvider.cs" />
     <Compile Include="IProvider\IPortProvider.cs" />
     <Compile Include="IProvider\IPriceTermProvider.cs" />
@@ -108,6 +108,7 @@
     <Compile Include="IProvider\IProductCategoryProvider.cs" />
     <Compile Include="IProvider\IProvider.cs" />
     <Compile Include="IProvider\IPurchaseOrderProvider.cs" />
+    <Compile Include="IProvider\IPurchaseItemRecordProvider.cs" />
     <Compile Include="IProvider\IRelatedCompanyTypeProvider.cs" />
     <Compile Include="IProvider\IRoleProvider.cs" />
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
@@ -135,10 +136,11 @@
     <Compile Include="LinqProvider\ExpenditureTypeProvider.cs" />
     <Compile Include="LinqProvider\ExpenditureRecordProvider.cs" />
     <Compile Include="LinqProvider\InventoryRecordProvider.cs" />
-    <Compile Include="LinqProvider\OrderItemStateProvider.cs" />
+    <Compile Include="LinqProvider\OrderItemRecordProvider.cs" />
     <Compile Include="LinqProvider\ProductInventoryItemProvider.cs" />
     <Compile Include="LinqProvider\PortProvider.cs" />
     <Compile Include="LinqProvider\PriceTermProvider.cs" />
+    <Compile Include="LinqProvider\PurchaseItemRecordProvider.cs" />
     <Compile Include="LinqProvider\PurchaseOrderProvider.cs" />
     <Compile Include="LinqProvider\RelatedCompanyTypeProvider.cs" />
     <Compile Include="LinqProvider\ServerDateTimeProvider.cs" />

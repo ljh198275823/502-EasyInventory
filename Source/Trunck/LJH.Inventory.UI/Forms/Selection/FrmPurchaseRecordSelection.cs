@@ -33,7 +33,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<PurchaseRecord> items = new PurchaseOrderBLL(AppSettings.Current.ConnStr).GetRecords(SearchCondition).QueryObjects;
+            List<PurchaseItemRecord> items = new PurchaseOrderBLL(AppSettings.Current.ConnStr).GetRecords(SearchCondition).QueryObjects;
             return (from item in items
                     orderby item.PurchaseID ascending
                     select (object)item).ToList();
@@ -41,7 +41,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            PurchaseRecord c = item as PurchaseRecord;
+            PurchaseItemRecord c = item as PurchaseItemRecord;
             row.Tag = c;
             row.Cells["colSheetNo"].Value = c.PurchaseID;
             row.Cells["colProductName"].Value = c.Product.Name;

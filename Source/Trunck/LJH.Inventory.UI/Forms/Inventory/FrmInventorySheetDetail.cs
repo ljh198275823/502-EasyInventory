@@ -336,7 +336,7 @@ namespace LJH.Inventory.UI.Forms
             ShowSheetItemsOnGrid(sources);
         }
 
-        public void AddInventoryItem(PurchaseRecord pi)
+        public void AddInventoryItem(PurchaseItemRecord pi)
         {
             List<InventoryItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.ProductID == pi.ProductID && it.PurchaseItem == pi.ID))
@@ -501,7 +501,7 @@ namespace LJH.Inventory.UI.Forms
         {
             if (txtSupplier.Tag != null)
             {
-                PurchaseRecordSearchCondition con = new PurchaseRecordSearchCondition();
+                PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
                 con.SupplierID = (txtSupplier.Tag as CompanyInfo).ID;
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Add);
@@ -512,7 +512,7 @@ namespace LJH.Inventory.UI.Forms
                 frm.SearchCondition = con;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    AddInventoryItem(frm.SelectedItem as PurchaseRecord);
+                    AddInventoryItem(frm.SelectedItem as PurchaseItemRecord);
                 }
             }
         }

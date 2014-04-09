@@ -5,10 +5,10 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class OrderRecord
+    public class PurchaseItemRecord
     {
         #region 构造函数
-        public OrderRecord()
+        public PurchaseItemRecord()
         {
         }
         #endregion
@@ -16,17 +16,29 @@ namespace LJH.Inventory.BusinessModel
         #region 公共属性
         public Guid ID { get; set; }
         /// <summary>
+        /// 获取或设置下单日期
+        /// </summary>
+        public DateTime OrderDate { get; set; }
+        /// <summary>
+        /// 获取或设置采购单编号
+        /// </summary>
+        public string PurchaseID { get; set; }
+        /// <summary>
         /// 获取或设置采购项相关的销售订单
         /// </summary>
         public string OrderID { get; set; }
         /// <summary>
+        /// 获取或设置采购项相关的销售订单项
+        /// </summary>
+        public Guid? OrderItem { get; set; }
+        /// <summary>
         /// 获取或设置供应商ID
         /// </summary>
-        public string CustomerID { get; set; }
+        public string SupplierID { get; set; }
         /// <summary>
         /// 获取或设置客户名称
         /// </summary>
-        public CompanyInfo Customer { get; set; }
+        public CompanyInfo Supplier { get; set; }
         /// <summary>
         /// 获取或设置商品ID
         /// </summary>
@@ -48,21 +60,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
-        /// 获取或设置已采购数量
-        /// </summary>
-        public decimal Purchased { get; set; }
-        /// <summary>
         /// 获取或设置采购到货数量
         /// </summary>
         public decimal Received { get; set; }
-        /// <summary>
-        /// 获取或设置订单项的库存数量
-        /// </summary>
-        public decimal Inventory { get; set; }
-        /// <summary>
-        /// 获取或设置已出货数量
-        /// </summary>
-        public decimal Shipped { get; set; }
         /// <summary>
         /// 获取或设置订单要求的发货日期
         /// </summary>
@@ -70,13 +70,13 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置业务员
         /// </summary>
-        public string SalesPerson { get; set; }
+        public string Buyer { get; set; }
         /// <summary>
         /// 获取或设置订单当前状态
         /// </summary>
         public SheetState State { get; set; }
         /// <summary>
-        /// 获取或设置订单项是否已经全部出货，也可以表示人工完结未出完货的情况
+        /// 获取或设置是否人工结束引项
         /// </summary>
         public bool IsComplete { get; set; }
         /// <summary>
@@ -97,34 +97,14 @@ namespace LJH.Inventory.BusinessModel
             }
         }
         /// <summary>
-        /// 获取还需采购的数量
-        /// </summary>
-        public decimal NotPurchased
-        {
-            get
-            {
-                decimal ret = NotShipped - OnWay - Inventory;
-                return ret > 0 ? ret : 0;
-            }
-        }
-        /// <summary>
-        /// 获取采购在途数量
+        /// 获取未到货数量
         /// </summary>
         public decimal OnWay
         {
             get
             {
-                return Purchased - Received;
-            }
-        }
-        /// <summary>
-        /// 获取未发货数量
-        /// </summary>
-        public decimal NotShipped
-        {
-            get
-            {
-                return Count - Shipped >= 0 ? (Count - Shipped) : 0;
+                decimal ret = Count - Received;
+                return ret > 0 ? ret : 0;
             }
         }
         #endregion

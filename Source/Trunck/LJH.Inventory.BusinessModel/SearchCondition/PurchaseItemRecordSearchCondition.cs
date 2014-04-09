@@ -5,8 +5,12 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class PurchaseRecordSearchCondition : PurchaseOrderSearchCondition
+    public class PurchaseItemRecordSearchCondition : PurchaseOrderSearchCondition
     {
         public bool? IsComplete { get; set; }
+
+        public string ProductID { get; set; }
+
+        public string CategoryID { get; set; }
     }
 }

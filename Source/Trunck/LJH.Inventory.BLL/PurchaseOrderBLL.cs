@@ -21,40 +21,6 @@ namespace LJH.Inventory.BLL
         private string _RepoUri;
         #endregion
 
-        #region 私有方法
-        private List<PurchaseRecord> GetFrom(List<PurchaseOrder> items)
-        {
-            List<PurchaseRecord> ret = new List<PurchaseRecord>();
-            foreach (PurchaseOrder item in items)
-            {
-                foreach (PurchaseItem pii in item.Items)
-                {
-                    PurchaseRecord record = new PurchaseRecord()
-                    {
-                        ID = pii.ID,
-                        PurchaseID = item.ID,
-                        OrderID = pii.OrderID,
-                        OrderItem = pii.OrderItem,
-                        SupplierID = item.SupplierID,
-                        Supplier = item.Supplier,
-                        ProductID = pii.ProductID,
-                        Product = pii.Product,
-                        Unit = pii.Unit,
-                        Price = pii.Price,
-                        Count = pii.Count,
-                        DemandDate = item.DemandDate,
-                        Buyer = item.Buyer,
-                        State = item.State,
-                        IsComplete = pii.IsComplete,
-                        Memo = pii.Memo
-                    };
-                    ret.Add(record);
-                }
-            }
-            return ret;
-        }
-        #endregion
-
         #region 公共方法
         /// <summary>
         /// 通过订单号获取订单
@@ -72,27 +38,9 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IPurchaseOrderProvider>(_RepoUri).GetItems(con);
         }
 
-        public QueryResultList<PurchaseRecord> GetRecords(SearchCondition con)
+        public QueryResultList<PurchaseItemRecord> GetRecords(SearchCondition con)
         {
-            QueryResultList<PurchaseOrder> result = ProviderFactory.Create<IPurchaseOrderProvider>(_RepoUri).GetItems(con as PurchaseOrderSearchCondition);
-            if (result.Result != ResultCode.Successful) return new QueryResultList<PurchaseRecord>(result.Result, result.Message, null);
-            List<PurchaseRecord> ret = GetFrom(result.QueryObjects);
-            if (con is PurchaseRecordSearchCondition)
-            {
-                PurchaseRecordSearchCondition con1 = con as PurchaseRecordSearchCondition;
-                if (con1.IsComplete != null)
-                {
-                    if (con1.IsComplete.Value)
-                    {
-                        ret = ret.Where(item => item.IsComplete || item.OnWay == 0).ToList();
-                    }
-                    else
-                    {
-                        ret = ret.Where(item => !item.IsComplete && item.OnWay > 0).ToList();
-                    }
-                }
-            }
-            return new QueryResultList<PurchaseRecord>(ResultCode.Successful, string.Empty, ret);
+            return ProviderFactory.Create<IPurchaseItemRecordProvider>(_RepoUri).GetItems(con);
         }
 
         /// <summary>

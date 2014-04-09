@@ -33,7 +33,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<OrderRecord> items = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
+            List<OrderItemRecord> items = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
             return (from item in items
                     orderby item.OrderID ascending
                     select (object)item).ToList();
@@ -41,7 +41,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            OrderRecord c = item as OrderRecord;
+            OrderItemRecord c = item as OrderItemRecord;
             row.Tag = c;
             row.Cells["colOrderID"].Value = c.OrderID;
             row.Cells["colProductName"].Value = c.Product.Name;

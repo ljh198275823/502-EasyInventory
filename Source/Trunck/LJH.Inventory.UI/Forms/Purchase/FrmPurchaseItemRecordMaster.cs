@@ -12,9 +12,9 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmPurchaseRecordMaster : FrmMasterBase
+    public partial class FrmPurchaseItemRecordMaster : FrmMasterBase
     {
-        public FrmPurchaseRecordMaster()
+        public FrmPurchaseItemRecordMaster()
         {
             InitializeComponent();
         }
@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
-            List<PurchaseRecord> items = bll.GetRecords(SearchCondition).QueryObjects;
+            List<PurchaseItemRecord> items = bll.GetRecords(SearchCondition).QueryObjects;
             List<object> records = null;
 
             records = (from item in items
@@ -77,7 +77,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            PurchaseRecord c = item as PurchaseRecord;
+            PurchaseItemRecord c = item as PurchaseItemRecord;
             row.Tag = c;
             row.Cells["colSheetNo"].Value = c.PurchaseID;
             row.Cells["colProduct"].Value = c.Product.Name;
@@ -111,7 +111,7 @@ namespace LJH.Inventory.UI.Forms
         {
             if (e.RowIndex >= 0)
             {
-                PurchaseRecord record = dataGridView1.Rows[e.RowIndex].Tag as PurchaseRecord;
+                PurchaseItemRecord record = dataGridView1.Rows[e.RowIndex].Tag as PurchaseItemRecord;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colSheetNo")
                 {
                     PurchaseOrder sheet = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetByID(record.PurchaseID).QueryObject;

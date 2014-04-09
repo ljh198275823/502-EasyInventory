@@ -230,16 +230,27 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.View_OrderItemState" Member="LJH.Inventory.BusinessModel.OrderItemState">
-    <Type Name="LJH.Inventory.BusinessModel.OrderItemState">
+  <Table Name="dbo.View_OrderItemRecord" Member="LJH.Inventory.BusinessModel.OrderItemRecord">
+    <Type Name="LJH.Inventory.BusinessModel.OrderItemRecord">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
+      <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+      <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="Inventory" Member="Inventory"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="Received" Member="Received"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="Shipped" Member="Shipped"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="Purchased" Member="Purchased"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="Received" Member="Received"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="IsComplete" Member="IsComplete" DbType="bit not null" UpdateCheck="Never"/>
+      <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="SalesPerson" Member="SalesPerson"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+      <Association Name="FK_Sheet_Customer" Member="Customer"  ThisKey="CustomerID" OtherKey="ID" IsForeignKey="false" />
+      <Association Name="FK_Sheet_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID" IsForeignKey="false" />
     </Type>
   </Table>
   <Table Name="dbo.PurchaseOrder" Member="LJH.Inventory.BusinessModel.PurchaseOrder">
@@ -272,13 +283,26 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="dbo.View_PurchaseItemState" Member="LJH.Inventory.BusinessModel.PurchaseItemState">
-    <Type Name="LJH.Inventory.BusinessModel.PurchaseItemState">
+  
+  <Table Name="dbo.View_PurchaseItemRecord" Member="LJH.Inventory.BusinessModel.PurchaseItemRecord">
+    <Type Name="LJH.Inventory.BusinessModel.PurchaseItemRecord">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
       <Column Name="PurchaseID" Member="PurchaseID"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
+      <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="Received" Member="Received"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="IsComplete" Member="IsComplete" DbType="bit not null" UpdateCheck="Never"/>
+      <Column Name="Buyer" Member="Buyer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+      <Association Name="FK_Sheet_Supplier" Member="Supplier"  ThisKey="SupplierID" OtherKey="ID" IsForeignKey="false" />
+      <Association Name="FK_Sheet_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID" IsForeignKey="false" />
     </Type>
   </Table>
   <Table Name="dbo.Operator" Member="LJH.Inventory.BusinessModel.Operator">

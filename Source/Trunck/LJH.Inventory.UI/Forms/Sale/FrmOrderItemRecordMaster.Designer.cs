@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Sale
 {
-    partial class FrmOrderMonitor
+    partial class FrmOrderItemRecordMaster
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCancel = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,16 +44,18 @@
             this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colProduct = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInventory = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colOnWay = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colShipped = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colNotPurchased = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colHasPaid = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
@@ -77,7 +78,7 @@
             this.toolStripSeparator2});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(940, 50);
+            this.menu.Size = new System.Drawing.Size(1107, 50);
             this.menu.TabIndex = 26;
             // 
             // btn_Add
@@ -160,6 +161,7 @@
             this.customerTree1.Name = "customerTree1";
             this.customerTree1.Size = new System.Drawing.Size(273, 318);
             this.customerTree1.TabIndex = 1;
+            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
             // 
             // splitter1
             // 
@@ -178,16 +180,18 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colID,
-            this.colCustomer,
+            this.colOrderID,
             this.colOrderDate,
-            this.colDeliveryDate,
+            this.colCustomer,
+            this.colProduct,
+            this.colUnit,
+            this.colCount,
+            this.colInventory,
+            this.colOnWay,
+            this.colShipped,
+            this.colNotPurchased,
+            this.colDemandDate,
             this.colSales,
-            this.colWithTax,
-            this.colAmount,
-            this.colReceivable,
-            this.colHasPaid,
-            this.colNotPaid,
             this.colState,
             this.colMemo});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -196,86 +200,106 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(659, 318);
+            this.dataGridView1.Size = new System.Drawing.Size(826, 318);
             this.dataGridView1.TabIndex = 109;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // colID
+            // colOrderID
             // 
-            this.colID.HeaderText = "合同号";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Width = 80;
+            this.colOrderID.HeaderText = "订单编号";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colOrderID.Width = 80;
+            // 
+            // colOrderDate
+            // 
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colOrderDate.HeaderText = "订货日期";
+            this.colOrderDate.Name = "colOrderDate";
+            this.colOrderDate.ReadOnly = true;
             // 
             // colCustomer
             // 
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
+            this.colCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colCustomer.Width = 150;
             // 
-            // colOrderDate
+            // colProduct
             // 
-            dataGridViewCellStyle4.Format = "D";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colOrderDate.HeaderText = "签订日期";
-            this.colOrderDate.Name = "colOrderDate";
-            this.colOrderDate.ReadOnly = true;
+            this.colProduct.HeaderText = "产品";
+            this.colProduct.Name = "colProduct";
+            this.colProduct.ReadOnly = true;
+            this.colProduct.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colProduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // colDeliveryDate
+            // colUnit
             // 
-            dataGridViewCellStyle5.Format = "D";
-            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colDeliveryDate.HeaderText = "出货日期";
-            this.colDeliveryDate.Name = "colDeliveryDate";
-            this.colDeliveryDate.ReadOnly = true;
+            this.colUnit.HeaderText = "单位";
+            this.colUnit.Name = "colUnit";
+            this.colUnit.ReadOnly = true;
+            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUnit.Width = 40;
+            // 
+            // colCount
+            // 
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
+            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCount.Width = 60;
+            // 
+            // colInventory
+            // 
+            this.colInventory.HeaderText = "已备货";
+            this.colInventory.Name = "colInventory";
+            this.colInventory.ReadOnly = true;
+            this.colInventory.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colInventory.Width = 60;
+            // 
+            // colOnWay
+            // 
+            this.colOnWay.HeaderText = "采购在途";
+            this.colOnWay.Name = "colOnWay";
+            this.colOnWay.ReadOnly = true;
+            this.colOnWay.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOnWay.Width = 60;
+            // 
+            // colShipped
+            // 
+            this.colShipped.HeaderText = "已发货";
+            this.colShipped.Name = "colShipped";
+            this.colShipped.ReadOnly = true;
+            this.colShipped.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colShipped.Width = 60;
+            // 
+            // colNotPurchased
+            // 
+            this.colNotPurchased.HeaderText = "待采购";
+            this.colNotPurchased.Name = "colNotPurchased";
+            this.colNotPurchased.ReadOnly = true;
+            this.colNotPurchased.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colNotPurchased.Width = 60;
+            // 
+            // colDemandDate
+            // 
+            dataGridViewCellStyle2.Format = "D";
+            this.colDemandDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDemandDate.HeaderText = "出货日期";
+            this.colDemandDate.Name = "colDemandDate";
+            this.colDemandDate.ReadOnly = true;
             // 
             // colSales
             // 
             this.colSales.HeaderText = "业务";
             this.colSales.Name = "colSales";
             this.colSales.ReadOnly = true;
-            // 
-            // colWithTax
-            // 
-            this.colWithTax.HeaderText = "含税";
-            this.colWithTax.Name = "colWithTax";
-            this.colWithTax.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle6.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colAmount.HeaderText = "货款金额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.Visible = false;
-            this.colAmount.Width = 80;
-            // 
-            // colReceivable
-            // 
-            this.colReceivable.HeaderText = "已发货金额";
-            this.colReceivable.Name = "colReceivable";
-            this.colReceivable.ReadOnly = true;
-            this.colReceivable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colReceivable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colReceivable.Visible = false;
-            // 
-            // colHasPaid
-            // 
-            this.colHasPaid.HeaderText = "已收金额";
-            this.colHasPaid.Name = "colHasPaid";
-            this.colHasPaid.ReadOnly = true;
-            this.colHasPaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colHasPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colHasPaid.Visible = false;
-            // 
-            // colNotPaid
-            // 
-            this.colNotPaid.HeaderText = "未收款";
-            this.colNotPaid.Name = "colNotPaid";
-            this.colNotPaid.ReadOnly = true;
-            this.colNotPaid.Visible = false;
             // 
             // colState
             // 
@@ -291,16 +315,16 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
-            // FrmOrderMonitor
+            // FrmOrderItemRecordMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(940, 390);
+            this.ClientSize = new System.Drawing.Size(1107, 390);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
-            this.Name = "FrmOrderMonitor";
+            this.Name = "FrmOrderItemRecordMaster";
             this.Text = "实时订单管理";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
@@ -330,16 +354,18 @@
         private Controls.CustomerTree customerTree1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
+        private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
+        private System.Windows.Forms.DataGridViewLinkColumn colCustomer;
+        private System.Windows.Forms.DataGridViewLinkColumn colProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
+        private System.Windows.Forms.DataGridViewLinkColumn colInventory;
+        private System.Windows.Forms.DataGridViewLinkColumn colOnWay;
+        private System.Windows.Forms.DataGridViewLinkColumn colShipped;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNotPurchased;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDemandDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSales;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
-        private System.Windows.Forms.DataGridViewLinkColumn colHasPaid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
 

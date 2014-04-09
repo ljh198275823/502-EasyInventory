@@ -396,7 +396,7 @@ namespace LJH.Inventory.UI.Forms
             ShowDeliveryItemsOnGrid(sources);
         }
 
-        public void AddDeliveryItem(OrderRecord oi)
+        public void AddDeliveryItem(OrderItemRecord oi)
         {
             List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.OrderItem != null && it.OrderItem.Value == oi.ID))
@@ -507,7 +507,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
                 frm.ForSelect = true;
-                OrderRecordSearchCondition con = new OrderRecordSearchCondition();
+                OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
                 con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Add);
@@ -516,7 +516,7 @@ namespace LJH.Inventory.UI.Forms
                 frm.SearchCondition = con;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    OrderRecord oi = frm.SelectedItem as OrderRecord;
+                    OrderItemRecord oi = frm.SelectedItem as OrderItemRecord;
                     AddDeliveryItem(oi);
                 }
             }

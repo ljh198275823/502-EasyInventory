@@ -13,6 +13,7 @@ using LJH.GeneralLibrary.SoftDog;
 using LJH.Inventory.UI.Forms;
 using LJH.GeneralLibrary.SQLHelper;
 using LJH.Inventory.UI.Forms.Financial;
+using LJH.Inventory.UI.Forms.Sale;
 
 namespace InventoryApplication
 {
@@ -338,7 +339,8 @@ namespace InventoryApplication
 
         private void mnu_PurchaseOrder_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmPurchaseOrderMaster));
+            //ShowSingleForm(typeof(FrmPurchaseOrderMaster));
+            ShowSingleForm(typeof(FrmPurchaseItemRecordMaster));
         }
 
         private void mnu_CustomerType_Click(object sender, EventArgs e)
@@ -376,7 +378,8 @@ namespace InventoryApplication
 
         private void mnu_Order_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmOrderMaster));
+            //ShowSingleForm(typeof(FrmOrderMaster));
+            ShowSingleForm(typeof(FrmOrderItemRecordMaster));
         }
 
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
