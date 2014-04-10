@@ -339,8 +339,7 @@ namespace InventoryApplication
 
         private void mnu_PurchaseOrder_Click(object sender, EventArgs e)
         {
-            //ShowSingleForm(typeof(FrmPurchaseOrderMaster));
-            ShowSingleForm(typeof(FrmPurchaseItemRecordMaster));
+            ShowSingleForm(typeof(FrmPurchaseOrderMaster));
         }
 
         private void mnu_CustomerType_Click(object sender, EventArgs e)
@@ -378,8 +377,7 @@ namespace InventoryApplication
 
         private void mnu_Order_Click(object sender, EventArgs e)
         {
-            //ShowSingleForm(typeof(FrmOrderMaster));
-            ShowSingleForm(typeof(FrmOrderItemRecordMaster));
+            ShowSingleForm(typeof(FrmOrderMaster));
         }
 
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
@@ -420,6 +418,16 @@ namespace InventoryApplication
         private void mnu_CustomerReceivable_Click(object sender, EventArgs e)
         {
             ShowSingleForm(typeof(FrmCustomerFinancialStateMaster));
+        }
+
+        private void mnu_OrderMonitor_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmOrderItemRecordMaster));
+        }
+
+        private void mnu_PurchaseMonitor_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm(typeof(FrmPurchaseItemRecordMaster));
         }
     }
 }

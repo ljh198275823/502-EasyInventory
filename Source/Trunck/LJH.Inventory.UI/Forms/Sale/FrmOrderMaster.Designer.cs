@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCancel = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,17 +204,17 @@
             // 
             // colOrderDate
             // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Format = "D";
+            dataGridViewCellStyle7.NullValue = null;
+            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle7;
             this.colOrderDate.HeaderText = "签订日期";
             this.colOrderDate.Name = "colOrderDate";
             this.colOrderDate.ReadOnly = true;
             // 
             // colDeliveryDate
             // 
-            dataGridViewCellStyle2.Format = "D";
-            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Format = "D";
+            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle8;
             this.colDeliveryDate.HeaderText = "出货日期";
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.ReadOnly = true;
@@ -233,8 +233,8 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle3.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle9;
             this.colAmount.HeaderText = "货款金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
