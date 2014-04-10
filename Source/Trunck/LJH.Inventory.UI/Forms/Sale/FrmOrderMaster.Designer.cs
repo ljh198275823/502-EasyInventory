@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCancel = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,17 +204,17 @@
             // 
             // colOrderDate
             // 
-            dataGridViewCellStyle7.Format = "D";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.colOrderDate.HeaderText = "签订日期";
             this.colOrderDate.Name = "colOrderDate";
             this.colOrderDate.ReadOnly = true;
             // 
             // colDeliveryDate
             // 
-            dataGridViewCellStyle8.Format = "D";
-            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Format = "D";
+            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDeliveryDate.HeaderText = "出货日期";
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.ReadOnly = true;
@@ -233,8 +233,8 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle9.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAmount.HeaderText = "货款金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -288,30 +288,30 @@
             this.cMnu_Delete,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // cMnu_Delete
             // 
             this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Delete.Text = "删除";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // pnlLeft

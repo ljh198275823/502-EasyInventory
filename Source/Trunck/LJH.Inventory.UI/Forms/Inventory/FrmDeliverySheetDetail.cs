@@ -510,9 +510,9 @@ namespace LJH.Inventory.UI.Forms
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
                 con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
                 con.States = new List<SheetState>();
-                con.States.Add(SheetState.Add);
+                //con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
-                con.HasToDelivery = false;
+                con.HasToDelivery = true;
                 frm.SearchCondition = con;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {

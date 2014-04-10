@@ -60,6 +60,15 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         protected override List<object> GetDataSource()
         {
+            if (SearchCondition == null)
+            {
+                OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
+                con.HasToDelivery = true;
+                con.States = new List<SheetState>();
+                // con.States.Add(SheetState.Add);
+                con.States.Add(SheetState.Approved);
+                SearchCondition = con;
+            }
             _Sheets = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
             return GetSelectedNodeItems();
         }
@@ -78,8 +87,8 @@ namespace LJH.Inventory.UI.Forms.Sale
             row.Cells["colCount"].Value = info.Count.Trim();
             row.Cells["colState"].Value = row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colOnWay"].Value = info.OnWay.Trim();
-            row.Cells["colInventory"].Value = info.Inventory .Trim();
-            row.Cells["colShipped"].Value =info.Shipped .Trim();
+            row.Cells["colInventory"].Value = info.Inventory.Trim();
+            row.Cells["colShipped"].Value = info.Shipped.Trim();
             row.Cells["colNotPurchased"].Value = info.NotPurchased.Trim();
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)
@@ -110,5 +119,29 @@ namespace LJH.Inventory.UI.Forms.Sale
             SelectNode(e.Node);
         }
         #endregion
+
+        private void cMnu_Reserve_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
+            {
+                OrderItemRecord item = dataGridView1.SelectedRows[0].Tag as OrderItemRecord;
+                LJH.Inventory.UI.Forms.Inventory.FrmProductInventoryAssign frm = new Inventory.FrmProductInventoryAssign();
+                frm.ProductID = item.ProductID;
+                frm.MaxCount = item.NotPurchased;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, frm.Count);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
+                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], item);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
+        }
     }
 }

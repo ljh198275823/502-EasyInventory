@@ -125,6 +125,12 @@
     <Compile Include="Forms\Financial\FrmCustomerFinancialStateMaster.Designer.cs">
       <DependentUpon>FrmCustomerFinancialStateMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\FrmProductInventoryAssign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\FrmProductInventoryAssign.Designer.cs">
+      <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Purchase\FrmSupplierDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -593,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmCustomerFinancialStateMaster.resx">
       <DependentUpon>FrmCustomerFinancialStateMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\FrmProductInventoryAssign.resx">
+      <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchase\FrmSupplierDetail.resx">
       <DependentUpon>FrmSupplierDetail.cs</DependentUpon>

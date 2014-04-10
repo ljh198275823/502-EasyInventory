@@ -32,20 +32,28 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override List<PurchaseItemRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<PurchaseItemRecord>(item => item.Supplier );
+            opt.LoadWith<PurchaseItemRecord>(item => item.Supplier);
             opt.LoadWith<PurchaseItemRecord>(item => item.Product);
             dc.LoadOptions = opt;
             IQueryable<PurchaseItemRecord> ret = dc.GetTable<PurchaseItemRecord>();
             if (search is PurchaseItemRecordSearchCondition)
             {
                 PurchaseItemRecordSearchCondition con = search as PurchaseItemRecordSearchCondition;
+                if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
-                if (!string.IsNullOrEmpty(con.SupplierID )) ret = ret.Where(item => item.SupplierID  == con.SupplierID );
-                if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.Product.CategoryID == con.CategoryID);
+                if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
-                if (con.OrderDate != null)
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
+                if (con.HasOnway != null)
                 {
-                    ret = ret.Where(item => item.OrderDate  >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
+                    if (con.HasOnway.Value)
+                    {
+                        ret = ret.Where(item => !item.IsComplete && item.Count - item.Received > 0);
+                    }
+                    else
+                    {
+                        ret = ret.Where(item => item.IsComplete || item.Count - item.Received == 0);
+                    }
                 }
             }
             List<PurchaseItemRecord> items = ret.ToList();

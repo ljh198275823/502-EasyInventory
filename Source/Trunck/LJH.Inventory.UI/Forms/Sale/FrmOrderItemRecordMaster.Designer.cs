@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menu = new System.Windows.Forms.MenuStrip();
-            this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCancel = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,9 +56,14 @@
             this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Reserve = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -68,8 +71,6 @@
             this.menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.menu.ImageScalingSize = new System.Drawing.Size(25, 25);
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btn_Add,
-            this.btnCancel,
             this.btn_Export,
             this.btn_Fresh,
             this.btn_SelectColumns,
@@ -80,24 +81,6 @@
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(1107, 50);
             this.menu.TabIndex = 26;
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.Image = global::LJH.Inventory.UI.Properties.Resources.add;
-            this.btn_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(62, 46);
-            this.btn_Add.Text = "新建(&N)";
-            this.btn_Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(60, 46);
-            this.btnCancel.Text = "取消(&C)";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // btn_Export
             // 
@@ -194,6 +177,7 @@
             this.colSales,
             this.colState,
             this.colMemo});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(281, 50);
             this.dataGridView1.Name = "dataGridView1";
@@ -215,9 +199,9 @@
             // 
             // colOrderDate
             // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "D";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colOrderDate.HeaderText = "订货日期";
             this.colOrderDate.Name = "colOrderDate";
             this.colOrderDate.ReadOnly = true;
@@ -289,8 +273,8 @@
             // 
             // colDemandDate
             // 
-            dataGridViewCellStyle2.Format = "D";
-            this.colDemandDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "D";
+            this.colDemandDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.colDemandDate.HeaderText = "出货日期";
             this.colDemandDate.Name = "colDemandDate";
             this.colDemandDate.ReadOnly = true;
@@ -315,6 +299,35 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Reserve});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_Add.Text = "新建";
+            this.cMnu_Add.Visible = false;
+            // 
+            // cMnu_Reserve
+            // 
+            this.cMnu_Reserve.Name = "cMnu_Reserve";
+            this.cMnu_Reserve.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Reserve.Text = "库存预订";
+            this.cMnu_Reserve.Click += new System.EventHandler(this.cMnu_Reserve_Click);
+            // 
             // FrmOrderItemRecordMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -325,7 +338,7 @@
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
             this.Name = "FrmOrderItemRecordMaster";
-            this.Text = "实时订单管理";
+            this.Text = "订单跟踪管理";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);
@@ -334,6 +347,7 @@
             this.menu.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,8 +356,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menu;
-        private System.Windows.Forms.ToolStripMenuItem btn_Add;
-        private System.Windows.Forms.ToolStripMenuItem btnCancel;
         private System.Windows.Forms.ToolStripMenuItem btn_Export;
         private System.Windows.Forms.ToolStripMenuItem btn_Fresh;
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
@@ -368,6 +380,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSales;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Reserve;
 
     }
 }

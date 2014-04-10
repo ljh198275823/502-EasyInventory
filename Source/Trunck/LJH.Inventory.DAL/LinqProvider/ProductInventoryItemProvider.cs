@@ -34,11 +34,22 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.PurchaseItem != null) ret = ret.Where(item => item.PurchaseItem == con.PurchaseItem);
                 if (con.InventoryItem != null) ret = ret.Where(item => item.InventoryItem == con.InventoryItem);
                 if (con.DeliveryItem != null) ret = ret.Where(item => item.DeliveryItem == con.DeliveryItem);
-                if (con.IsUnShipped != null)
+                if (con.UnShipped != null)
                 {
-                    if (con.IsUnShipped.Value)
+                    if (con.UnShipped.Value)
                     {
                         ret = ret.Where(item => item.DeliveryItem == null);
+                    }
+                    else
+                    {
+                        ret = ret.Where(item => item.DeliveryItem != null);
+                    }
+                }
+                if (con.UnReserved != null)
+                {
+                    if (con.UnReserved.Value)
+                    {
+                        ret = ret.Where(item => item.OrderItem == null);
                     }
                     else
                     {

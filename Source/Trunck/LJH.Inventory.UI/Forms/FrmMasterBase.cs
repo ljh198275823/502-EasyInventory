@@ -549,10 +549,7 @@ namespace LJH.Inventory.UI.Forms
                 bool visible = false;
                 foreach (DataGridViewColumn col in grid.Columns)
                 {
-                    if (
-                        string.IsNullOrEmpty(keyword) ||
-                        ((row.Cells[col.Index] is DataGridViewTextBoxCell) && row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(keyword))
-                        )
+                    if (string.IsNullOrEmpty(keyword) || (row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(keyword)))
                     {
                         visible = true;
                         count++;

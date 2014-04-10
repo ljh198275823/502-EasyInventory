@@ -31,12 +31,17 @@ namespace LJH.Inventory.BLL
                 {
                     ProductID = si.ProductID,
                     WareHouseID = sheet.WareHouseID, //如果送货单没有指定仓库，这里就为空
-                    IsUnShipped = true     //所有未发货的库存项
+                    UnShipped = true,     //所有未发货的库存项
                 };
                 List<ProductInventoryItem> items = ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).GetItems(con).QueryObjects;
-                if (si.OrderItem != null)  //如果出货单项有相关的订单项，那么出货时只扣除与此订单项相关的库存项
+                if (si.OrderItem != null)  //如果出货单项有相关的订单项，那么出货时只扣除与此订单项相关的库存项和未分配给任何订单的库存项
                 {
                     items = items.Where(item => item.OrderItem == si.OrderItem).ToList();
+                    //items = items.Where(item => item.OrderItem == si.OrderItem || item.OrderItem == null).ToList();
+                }
+                else
+                {
+                    items = items.Where(item => item.OrderItem == null).ToList();
                 }
                 if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("商品 {0} 库存不足，出货失败!", si.ProductID));
 

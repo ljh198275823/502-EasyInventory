@@ -41,7 +41,7 @@ namespace LJH.Inventory.UI.Controls
             if (this.Items.Count == 2) this.SelectedIndex = 1;
         }
         /// <summary>
-        /// 获取选择的客户,没有选择项时返回null;
+        /// 获取或设置选择的客户ID
         /// </summary>
         [Browsable(false)]
         [Localizable(false)]
@@ -71,7 +71,7 @@ namespace LJH.Inventory.UI.Controls
         }
 
         /// <summary>
-        /// 获取选中的商品类别
+        /// 获取选中的仓库
         /// </summary>
         [Browsable(false)]
         [Localizable(false)]

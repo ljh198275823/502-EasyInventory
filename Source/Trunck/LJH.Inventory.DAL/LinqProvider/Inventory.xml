@@ -294,6 +294,7 @@
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="Received" Member="Received"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="IsComplete" Member="IsComplete" DbType="bit not null" UpdateCheck="Never"/>

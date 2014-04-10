@@ -19,6 +19,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public Guid? DeliveryItem { get; set; }
 
-        public bool? IsUnShipped { get; set; }
+        public bool? UnShipped { get; set; }
+
+        public bool? UnReserved { get; set; }
     }
 }

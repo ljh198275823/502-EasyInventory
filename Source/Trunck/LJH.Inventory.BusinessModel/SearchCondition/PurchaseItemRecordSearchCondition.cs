@@ -7,10 +7,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 {
     public class PurchaseItemRecordSearchCondition : PurchaseOrderSearchCondition
     {
-        public bool? IsComplete { get; set; }
+        public bool? HasOnway { get; set; }
 
         public string ProductID { get; set; }
-
-        public string CategoryID { get; set; }
     }
 }

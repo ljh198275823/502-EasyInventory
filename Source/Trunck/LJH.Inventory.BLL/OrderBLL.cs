@@ -47,6 +47,15 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IOrderItemRecordProvider>(_RepoUri).GetItems(con);
         }
         /// <summary>
+        /// 通过id获取订单记录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public QueryResult<OrderItemRecord> GetRecordById(Guid id)
+        {
+            return ProviderFactory.Create<IOrderItemRecordProvider>(_RepoUri).GetByID(id);
+        }
+        /// <summary>
         /// 增加一个订单
         /// </summary>
         /// <param name="info"></param>

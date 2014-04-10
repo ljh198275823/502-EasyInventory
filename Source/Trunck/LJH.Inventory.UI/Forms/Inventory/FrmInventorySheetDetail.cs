@@ -347,7 +347,9 @@ namespace LJH.Inventory.UI.Forms
                     ProductID = pi.ProductID,
                     Product = pi.Product,
                     PurchaseItem = pi.ID,
+                    PurchaseOrder = pi.PurchaseID,
                     OrderItem = pi.OrderItem,
+                    OrderID = pi.OrderID,
                     Unit = pi.Unit,
                     Price = pi.Price,
                     Count = pi.OnWay,
@@ -506,7 +508,7 @@ namespace LJH.Inventory.UI.Forms
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
-                con.IsComplete = false;
+                con.HasOnway = false;
                 FrmPurchaseRecordSelection frm = new FrmPurchaseRecordSelection();
                 frm.ForSelect = true;
                 frm.SearchCondition = con;

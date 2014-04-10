@@ -35,6 +35,15 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
+            if (SearchCondition == null)
+            {
+                PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
+                con.HasOnway = true;
+                con.States = new List<SheetState>();
+                // con.States.Add(SheetState.Add);
+                con.States.Add(SheetState.Approved);
+                SearchCondition = con;
+            }
             List<PurchaseItemRecord> items = bll.GetRecords(SearchCondition).QueryObjects;
             List<object> records = null;
 
@@ -85,7 +94,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colDemandDate"].Value = c.DemandDate.ToLongDateString();
             row.Cells["colReceived"].Value = c.Received.Trim();
-            row.Cells["colMissing"].Value = c.OnWay.Trim();
+            row.Cells["colOnway"].Value = c.OnWay.Trim();
+            row.Cells["colOrderID"].Value = c.OrderID;
             row.Cells["colBuyer"].Value = c.Buyer;
             row.Cells["colMemo"].Value = c.Memo;
         }

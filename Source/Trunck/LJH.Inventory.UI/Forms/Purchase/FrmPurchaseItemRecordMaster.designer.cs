@@ -48,20 +48,21 @@
             this.btnNormal = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colSheetNo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceived = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMissing = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOnway = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -259,8 +260,9 @@
             this.colDemandDate,
             this.colCount,
             this.colReceived,
-            this.colMissing,
+            this.colOnway,
             this.colBuyer,
+            this.colOrderID,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -272,6 +274,40 @@
             this.dataGridView1.Size = new System.Drawing.Size(684, 280);
             this.dataGridView1.TabIndex = 107;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Delete,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // cMnu_Delete
+            // 
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Text = "删除";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // colSheetNo
             // 
@@ -308,6 +344,7 @@
             this.colCount.DefaultCellStyle = dataGridViewCellStyle1;
             this.colCount.HeaderText = "采购数量";
             this.colCount.Name = "colCount";
+            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colCount.Width = 80;
             // 
             // colReceived
@@ -315,12 +352,16 @@
             this.colReceived.HeaderText = "已到货数";
             this.colReceived.Name = "colReceived";
             this.colReceived.ReadOnly = true;
+            this.colReceived.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colReceived.Width = 80;
             // 
-            // colMissing
+            // colOnway
             // 
-            this.colMissing.HeaderText = "采购在途";
-            this.colMissing.Name = "colMissing";
-            this.colMissing.ReadOnly = true;
+            this.colOnway.HeaderText = "采购在途";
+            this.colOnway.Name = "colOnway";
+            this.colOnway.ReadOnly = true;
+            this.colOnway.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colOnway.Width = 80;
             // 
             // colBuyer
             // 
@@ -328,47 +369,19 @@
             this.colBuyer.Name = "colBuyer";
             this.colBuyer.ReadOnly = true;
             // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "销售订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            // 
             // colMemo
             // 
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
             this.colMemo.Width = 200;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.cMnu_Delete,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // cMnu_Delete
-            // 
-            this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Delete.Text = "删除";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
-            // FrmPurchaseRecordMaster
+            // FrmPurchaseItemRecordMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -377,7 +390,7 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
-            this.Name = "FrmPurchaseRecordMaster";
+            this.Name = "FrmPurchaseItemRecordMaster";
             this.Text = "采购订单跟踪管理";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
@@ -413,19 +426,20 @@
         private System.Windows.Forms.Button btnAll;
         private System.Windows.Forms.Button btnReceivedAll;
         private System.Windows.Forms.Button btnOverDate;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDemandDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReceived;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMissing;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOnway;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
     }
 }
