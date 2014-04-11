@@ -342,49 +342,21 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 公共方法
-        public void AddDeliveryItem(Product p)
+        public void AddDeliveryItem(ProductInventory p)
         {
             List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
-            if (!sources.Exists(it => it.ProductID == p.ID))
+            if (!sources.Exists(it => it.ProductID == p.ProductID))
             {
                 if (sources.Count < DeliverySheet.MaxItemCount)
                 {
                     DeliveryItem item = new DeliveryItem()
                     {
                         ID = Guid.NewGuid(),
-                        ProductID = p.ID,
-                        Product = p,
+                        ProductID = p.ProductID,
+                        Product = p.Product,
                         Unit = p.Unit,
-                        Price = p.Price,
-                        Count = 0
-                    };
-                    sources.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("一个送货单最多只能有 " + DeliverySheet.MaxItemCount + " 个送货单项");
-                }
-            }
-            ShowDeliveryItemsOnGrid(sources);
-        }
-
-        public void AddDeliveryItem(OrderItem oi, decimal count)
-        {
-            List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
-            if (!sources.Exists(it => it.OrderItem != null && it.OrderItem.Value == oi.ID))
-            {
-                if (sources.Count < DeliverySheet.MaxItemCount)
-                {
-                    DeliveryItem item = new DeliveryItem()
-                    {
-                        ID = Guid.NewGuid(),
-                        OrderItem = oi.ID,
-                        OrderID = oi.OrderID,
-                        ProductID = oi.ProductID,
-                        Product = oi.Product,
-                        Unit = oi.Unit,
-                        Price = oi.Price,
-                        Count = count
+                        Price = p.Product != null ? p.Product.Price : 0,
+                        Count = 1
                     };
                     sources.Add(item);
                 }
@@ -524,11 +496,14 @@ namespace LJH.Inventory.UI.Forms
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            FrmProductMaster frm = new FrmProductMaster();
+            FrmProductInventoryMaster frm = new FrmProductInventoryMaster();
             frm.ForSelect = true;
+            ProductInventorySearchCondition con = new ProductInventorySearchCondition();
+            con.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
+            frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Product p = frm.SelectedItem as Product;
+                ProductInventory p = frm.SelectedItem as ProductInventory;
                 AddDeliveryItem(p);
             }
         }

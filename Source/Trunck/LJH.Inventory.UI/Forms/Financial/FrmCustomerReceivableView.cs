@@ -37,6 +37,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
                 con.CustomerID = Customer != null ? Customer.ID : null;
+                con.Settled = false;
                 SearchCondition = con;
             }
             List<CustomerReceivable> items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
