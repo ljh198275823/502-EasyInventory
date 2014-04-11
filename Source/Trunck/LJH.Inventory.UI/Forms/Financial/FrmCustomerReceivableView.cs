@@ -57,7 +57,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colMemo"].Value = cr.Memo;
         }
 
-        public override void ShowItemsOnGrid(List<object> items)
+        protected override void ShowItemsOnGrid(List<object> items)
         {
             base.ShowItemsOnGrid(items);
             int rowTotal = GridView.Rows.Add();

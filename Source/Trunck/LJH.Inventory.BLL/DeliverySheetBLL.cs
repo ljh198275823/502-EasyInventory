@@ -85,21 +85,36 @@ namespace LJH.Inventory.BLL
 
         private void AddReceivables(DeliverySheet sheet, IUnitWork unitWork)
         {
+            List<CustomerReceivable> crs = new List<CustomerReceivable>();
             foreach (DeliveryItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
             {
-                DateTime dt = DateTime.Now;
-                //增加应收账款项
-                CustomerReceivable cr = new CustomerReceivable()
+                CustomerReceivable cr = null;
+                if (string.IsNullOrEmpty(si.OrderID)) cr = crs.SingleOrDefault(it => string.IsNullOrEmpty(it.OrderID));
+                if (!string.IsNullOrEmpty(si.OrderID)) cr = crs.SingleOrDefault(it => it.OrderID == si.OrderID);
+                if (cr == null)
                 {
-                    ID = Guid.NewGuid(),
-                    CreateDate = dt,
-                    ClassID = CustomerReceivableClass.Delivery,
-                    CustomerID = sheet.CustomerID,
-                    SheetID = sheet.ID,
-                    OrderID = si.OrderID,
-                    Amount = si.Amount,
-                    Remain = si.Amount,
-                };
+                    DateTime dt = DateTime.Now;
+                    cr = new CustomerReceivable()
+                    {
+                        ID = Guid.NewGuid(),
+                        CreateDate = dt,
+                        ClassID = CustomerReceivableClass.Delivery,
+                        CustomerID = sheet.CustomerID,
+                        SheetID = sheet.ID,
+                        OrderID = si.OrderID,
+                        Amount = si.Amount,
+                        Remain = si.Amount,
+                    };
+                    crs.Add(cr);
+                }
+                else
+                {
+                    cr.Amount += si.Amount;
+                    cr.Remain += si.Amount;
+                }
+            }
+            foreach (CustomerReceivable cr in crs)
+            {
                 ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Insert(cr, unitWork);
             }
         }

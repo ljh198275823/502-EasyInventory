@@ -111,7 +111,8 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return Purchased - Received;
+                decimal ret = Purchased - Received;
+                return ret > 0 ? ret : 0;
             }
         }
         /// <summary>
@@ -121,7 +122,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                decimal ret = Count - OnWay - Inventory;
+                decimal ret = NotShipped  - OnWay - Inventory;
                 return ret > 0 ? ret : 0;
             }
         }

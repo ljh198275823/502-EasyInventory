@@ -14,5 +14,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string OrderID { get; set; }
 
         public string DeliverySheet { get; set; }
+
+        public bool? Settled { get; set; }
     }
 }

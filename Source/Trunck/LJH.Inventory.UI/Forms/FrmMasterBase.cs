@@ -75,34 +75,10 @@ namespace LJH.Inventory.UI.Forms
                     if (menu.Items["btn_Delete"] != null) menu.Items["btn_Delete"].Click += btnDelete_Click;
                     if (menu.Items["btn_Export"] != null) menu.Items["btn_Export"].Click += btnExport_Click;
                     if (menu.Items["btn_Fresh"] != null) menu.Items["btn_Fresh"].Click += btnFresh_Click;
-                    if (menu.Items["btn_SelectColumns"] != null) menu.Items["btn_SelectColumns"].Click += btn_SelectColumns_Click;
-                    if (menu.Items["btnSearch"] != null) menu.Items["btnSearch"].Click += btnSearch_Click;
-                    if (menu.Items["btnClear"] != null) menu.Items["btnClear"].Click += btnClear_Click;
+                    if (menu.Items["btn_SelectColumns"] != null) menu.Items["btn_SelectColumns"].Click += btnSelectColumns_Click;
                     if (menu.Items["txtKeyword"] != null && menu.Items["txtKeyword"] is ToolStripTextBox)
                     {
                         (menu.Items["txtKeyword"] as ToolStripTextBox).TextChanged += txtKeyword_TextChanged;
-                    }
-                    break;
-                }
-            }
-        }
-
-        private void InitSearchPanel()
-        {
-            foreach (Control ctrl in this.Controls)
-            {
-                if (ctrl is Panel && ctrl.Name == "pnlSearch")  //初始化子窗体的查询面板，如果有的话
-                {
-                    foreach (Control child in ctrl.Controls)
-                    {
-                        if (child is Button && child.Name == "btnSearch")
-                        {
-                            (child as Button).Click += new EventHandler(btnSearch_Click);
-                        }
-                        else if (child is Button && child.Name == "btnClear")
-                        {
-                            (child as Button).Click += new EventHandler(btnClear_Click);
-                        }
                     }
                     break;
                 }
@@ -133,6 +109,7 @@ namespace LJH.Inventory.UI.Forms
                     if (menu.Items["cMnu_Delete"] != null) menu.Items["cMnu_Delete"].Click += btnDelete_Click;
                     if (menu.Items["cMnu_Export"] != null) menu.Items["cMnu_Export"].Click += btnExport_Click;
                     if (menu.Items["cMnu_Fresh"] != null) menu.Items["cMnu_Fresh"].Click += btnFresh_Click;
+                    if (menu.Items["cMnu_SelectColumns"] != null) menu.Items["cMnu_SelectColumns"].Click += btnSelectColumns_Click;
                 }
             }
         }
@@ -163,19 +140,6 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        protected virtual void ShowRowBackColor()
-        {
-            int count = 0;
-            foreach (DataGridViewRow row in this.GridView.Rows)
-            {
-                if (row.Visible)
-                {
-                    count++;
-                    row.DefaultCellStyle.BackColor = (count % 2 == 1) ? Color.FromArgb(230, 230, 230) : Color.White;
-                }
-            }
-        }
-
         private DataGridViewRow Add_A_Row(object item, bool forNewItem)
         {
             int row = GridView.Rows.Add();
@@ -198,18 +162,6 @@ namespace LJH.Inventory.UI.Forms
             }
             this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", GridView.Rows.Count);
             return GridView.Rows[row];
-        }
-
-        private void Update_A_Row(object item)
-        {
-            foreach (DataGridViewRow row in GridView.Rows)
-            {
-                object pre = row.Tag;
-                if (pre != null && pre == item)
-                {
-                    ShowItemInGridViewRow(row, item);
-                }
-            }
         }
 
         private string[] GetAllVisiableColumns()
@@ -280,41 +232,15 @@ namespace LJH.Inventory.UI.Forms
         public SearchCondition SearchCondition { get; set; }
         #endregion
 
-        #region 子类要重写的方法
-        protected virtual void Init()
-        {
-            InitToolbar();
-            InitSearchPanel();
-            InitGridView();
-            InitGridViewColumns();
-        }
-
-        protected virtual FrmDetailBase GetDetailForm()
-        {
-            return null;
-        }
-
-        protected virtual List<object> GetDataSource()
-        {
-            return null;
-        }
-
-        protected virtual void ShowItemInGridViewRow(DataGridViewRow row, object item)
-        {
-
-        }
-
-        protected virtual bool DeletingItem(object item)
-        {
-            return false;
-        }
-        #endregion
-
-        #region 公共方法
-        public virtual void ShowItemsOnGrid(List<object> items)
+        #region 保护方法
+        /// <summary>
+        /// 显示数据
+        /// </summary>
+        /// <param name="items">要显示的数据</param>
+        /// <param name="reload">是否重新加载数据，如果为真，则表示先会清空之前的数据，否则保留旧有数据</param>
+        protected virtual void ShowItemsOnGrid(List<object> items)
         {
             GridView.Rows.Clear();
-
             if (items != null && items.Count > 0)
             {
                 foreach (object item in items)
@@ -329,60 +255,116 @@ namespace LJH.Inventory.UI.Forms
                 this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", GridView.Rows.Count);
             }
         }
-        #endregion
-
-        #region 事件处理
-        private void FrmMasterBase_Load(object sender, EventArgs e)
+        /// <summary>
+        /// 显示数据行的颜色
+        /// </summary>
+        protected virtual void ShowRowBackColor()
         {
-            Init();
-            if (PnlLeft != null)
+            int count = 0;
+            foreach (DataGridViewRow row in this.GridView.Rows)
             {
-                foreach (Control ctrl in PnlLeft.Controls)
+                if (row.Visible)
                 {
-                    if (ctrl is Button)
-                    {
-                        (ctrl as Button).Click += btnLeftPanelButton_Click;
-                    }
+                    count++;
+                    row.DefaultCellStyle.BackColor = (count % 2 == 1) ? Color.FromArgb(230, 230, 230) : Color.White;
                 }
             }
-            if (GridView != null)
+        }
+        /// <summary>
+        /// 刷新数据
+        /// </summary>
+        protected virtual void FreshData()
+        {
+            List<object> datasource = GetDataSource();
+            Button b = GetActiveButtonOnLeftPanel();
+            if (b != null)
             {
-                btnFresh_Click(null, null);
+                b.PerformClick();
+            }
+            else
+            {
+                ShowItemsOnGrid(datasource);
             }
         }
-
-        private void GridView_Sorted(object sender, EventArgs e)
-        {
-            ShowRowBackColor();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 导出数据
+        /// </summary>
+        protected virtual void ExportData()
         {
             try
             {
-                FrmDetailBase detailForm = GetDetailForm();
-                if (detailForm != null)
+                DataGridView view = this.GridView;
+                if (view != null)
                 {
-                    detailForm.IsAdding = true;
-                    DataGridViewRow row = null;
-                    detailForm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+                    SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                    saveFileDialog1.Filter = "Excel文档|*.xls|所有文件(*.*)|*.*";
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                     {
-                        row = Add_A_Row(args.AddedItem, true);
-                    };
-                    detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
-                    {
-                        ShowItemInGridViewRow(row, args.UpdatedItem);
-                    };
-                    detailForm.ShowDialog();
+                        string path = saveFileDialog1.FileName;
+                        if (LJH.GeneralLibrary.WinformControl.DataGridViewExporter.Export(view, path))
+                        {
+                            MessageBox.Show("导出成功");
+                        }
+                        else
+                        {
+                            MessageBox.Show("保存到电子表格时出现错误!");
+                        }
+                    }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show("保存到电子表格时出现错误!");
             }
         }
-
-        private void btnDelete_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 选择数据网格中要显示的列
+        /// </summary>
+        protected virtual void SelectColumns()
+        {
+            FrmColumnSelection frm = new FrmColumnSelection();
+            frm.Selectee = this.GridView;
+            frm.SelectedColumns = GetAllVisiableColumns();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                string[] cols = frm.SelectedColumns;
+                if (cols != null && cols.Length > 0)
+                {
+                    string temp = string.Join(",", cols);
+                    AppSettings.Current.SaveConfig(string.Format("{0}_Columns", this.GetType().Name), temp);
+                    InitGridViewColumns();
+                }
+            }
+        }
+        /// <summary>
+        /// 根据关键词过滤数据
+        /// </summary>
+        /// <param name="keyword"></param>
+        protected virtual void Filter(string keyword)
+        {
+            int count = 0;
+            DataGridView grid = this.GridView;
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                bool visible = false;
+                foreach (DataGridViewColumn col in grid.Columns)
+                {
+                    if (string.IsNullOrEmpty(keyword) || (row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(keyword)))
+                    {
+                        visible = true;
+                        count++;
+                        break;
+                    }
+                }
+                row.Visible = visible;
+            }
+            ShowRowBackColor();
+            this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", count);
+        }
+        /// <summary>
+        /// 进行删除数据操作
+        /// </summary>
+        protected virtual void PerformDeleteData()
         {
             try
             {
@@ -422,72 +404,42 @@ namespace LJH.Inventory.UI.Forms
                 MessageBox.Show(ex.Message, "Error");
             }
         }
-
-        private void btnFresh_Click(object sender, EventArgs e)
-        {
-            List<object> datasource = GetDataSource();
-            Button b = GetActiveButtonOnLeftPanel();
-            if (b != null)
-            {
-                b.PerformClick();
-            }
-            else
-            {
-                ShowItemsOnGrid(datasource);
-            }
-        }
-
-        private void btnExport_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 进行增加数据操作
+        /// </summary>
+        protected virtual void PerformAddData()
         {
             try
             {
-                DataGridView view = this.GridView;
-                if (view != null)
+                FrmDetailBase detailForm = GetDetailForm();
+                if (detailForm != null)
                 {
-                    SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-                    saveFileDialog1.Filter = "Excel文档|*.xls|所有文件(*.*)|*.*";
-                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    detailForm.IsAdding = true;
+                    DataGridViewRow row = null;
+                    detailForm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
                     {
-                        string path = saveFileDialog1.FileName;
-                        if (LJH.GeneralLibrary.WinformControl.DataGridViewExporter.Export(view, path))
-                        {
-                            MessageBox.Show("导出成功");
-                        }
-                        else
-                        {
-                            MessageBox.Show("保存到电子表格时出现错误!");
-                        }
-                    }
+                        row = Add_A_Row(args.AddedItem, true);
+                    };
+                    detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+                    {
+                        ShowItemInGridViewRow(row, args.UpdatedItem);
+                    };
+                    detailForm.ShowDialog();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("保存到电子表格时出现错误!");
+                MessageBox.Show(ex.Message, "Error");
             }
         }
-
-        private void btn_SelectColumns_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 进行修改数据操作
+        /// </summary>
+        private void PerformUpdateData()
         {
-            FrmColumnSelection frm = new FrmColumnSelection();
-            frm.Selectee = this.GridView;
-            frm.SelectedColumns = GetAllVisiableColumns();
-            if (frm.ShowDialog() == DialogResult.OK)
+            if (this.GridView != null && this.GridView.SelectedRows != null && this.GridView.SelectedRows.Count > 0)
             {
-                string[] cols = frm.SelectedColumns;
-                if (cols != null && cols.Length > 0)
-                {
-                    string temp = string.Join(",", cols);
-                    AppSettings.Current.SaveConfig(string.Format("{0}_Columns", this.GetType().Name), temp);
-                    InitGridViewColumns();
-                }
-            }
-        }
-
-        private void GridView_DoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                object pre = this.GridView.Rows[e.RowIndex].Tag;
+                object pre = this.GridView.SelectedRows[0].Tag;
                 if (pre != null)
                 {
                     FrmDetailBase detailForm = GetDetailForm();
@@ -498,12 +450,189 @@ namespace LJH.Inventory.UI.Forms
 
                         detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
                         {
-                            ShowItemInGridViewRow(this.GridView.Rows[e.RowIndex], args.UpdatedItem);
+                            ShowItemInGridViewRow(this.GridView.SelectedRows[0], args.UpdatedItem);
                         };
                         detailForm.ShowDialog();
                     }
                 }
             }
+        }
+        /// <summary>
+        /// 移动至上一行
+        /// </summary>
+        /// <param name="e"></param>
+        protected void GotoPreviousRow(out RowChangeEventArgs e)
+        {
+            e = new RowChangeEventArgs();
+            if (GridView.SelectedRows != null && GridView.SelectedRows.Count > 0)
+            {
+                int index = GridView.SelectedRows[0].Index;
+                if (index > 0)
+                {
+                    GridView.Rows[index].Selected = false;
+                    GridView.Rows[index - 1].Selected = true;
+                }
+                e.IsFirstRow = index - 1 == 0;
+                e.IsLastRow = GridView.Rows.Count == 1;
+                e.UpdatingItem = GridView.SelectedRows[0].Tag;
+            }
+        }
+        /// <summary>
+        /// 移动到下一行
+        /// </summary>
+        /// <param name="e"></param>
+        protected void GotoNextRow(out RowChangeEventArgs e)
+        {
+            e = new RowChangeEventArgs();
+            if (GridView.SelectedRows != null && GridView.SelectedRows.Count > 0)
+            {
+                int index = GridView.SelectedRows[0].Index;
+                if (index < GridView.Rows.Count - 1)
+                {
+                    GridView.Rows[index].Selected = false;
+                    GridView.Rows[index + 1].Selected = true;
+                }
+                e.IsFirstRow = GridView.Rows.Count == 1;
+                e.IsLastRow = (GridView.Rows.Count - 1 == index + 1);
+                e.UpdatingItem = GridView.SelectedRows[0].Tag;
+            }
+        }
+        /// <summary>
+        /// 移动到最后一行
+        /// </summary>
+        /// <param name="e"></param>
+        protected void GotoLastRow(out RowChangeEventArgs e)
+        {
+            e = new RowChangeEventArgs();
+            if (GridView.SelectedRows != null && GridView.SelectedRows.Count > 0)
+            {
+                int index = GridView.SelectedRows[0].Index;
+                GridView.Rows[index].Selected = false;
+                GridView.Rows[GridView.Rows.Count - 1].Selected = true;
+
+                e.IsFirstRow = GridView.Rows.Count == 1;
+                e.IsLastRow = true;
+                e.UpdatingItem = GridView.SelectedRows[0].Tag;
+            }
+        }
+        /// <summary>
+        /// 移动到第一行
+        /// </summary>
+        /// <param name="e"></param>
+        protected void GotoFirstRow(out RowChangeEventArgs e)
+        {
+            e = new RowChangeEventArgs();
+            if (GridView.SelectedRows != null && GridView.SelectedRows.Count > 0)
+            {
+                int index = GridView.SelectedRows[0].Index;
+                GridView.Rows[index].Selected = false;
+                GridView.Rows[0].Selected = true;
+                e.IsFirstRow = true;
+                e.IsLastRow = GridView.Rows.Count == 1;
+                e.UpdatingItem = GridView.SelectedRows[0].Tag;
+            }
+        }
+        #endregion
+
+        #region 子类要重写的方法
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        protected virtual void Init()
+        {
+            InitToolbar();
+            InitGridView();
+            InitGridViewColumns();
+        }
+        /// <summary>
+        /// 获取明细窗体
+        /// </summary>
+        /// <returns></returns>
+        protected virtual FrmDetailBase GetDetailForm()
+        {
+            return null;
+        }
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <returns></returns>
+        protected virtual List<object> GetDataSource()
+        {
+            return null;
+        }
+        /// <summary>
+        /// 在网格行中显示单个数据
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="item"></param>
+        protected virtual void ShowItemInGridViewRow(DataGridViewRow row, object item)
+        {
+
+        }
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected virtual bool DeletingItem(object item)
+        {
+            return false;
+        }
+        #endregion
+
+        #region 事件处理
+        private void FrmMasterBase_Load(object sender, EventArgs e)
+        {
+            Init();
+            if (PnlLeft != null)
+            {
+                foreach (Control ctrl in PnlLeft.Controls)
+                {
+                    if (ctrl is Button)
+                    {
+                        (ctrl as Button).Click += btnLeftPanelButton_Click;
+                    }
+                }
+            }
+            if (GridView != null)
+            {
+                btnFresh_Click(null, null);
+            }
+        }
+
+        private void GridView_Sorted(object sender, EventArgs e)
+        {
+            ShowRowBackColor();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
+        }
+
+        private  void btnDelete_Click(object sender, EventArgs e)
+        {
+            PerformDeleteData();
+        }
+
+        private void btnFresh_Click(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            ExportData();
+        }
+
+        private void btnSelectColumns_Click(object sender, EventArgs e)
+        {
+            SelectColumns();
+        }
+
+        private void GridView_DoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            PerformUpdateData();
         }
 
         private void GridView_DoubleClick1(object sender, DataGridViewCellEventArgs e)
@@ -542,141 +671,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 keyword = (sender as ToolStripTextBox).Text;
             }
-            int count = 0;
-            DataGridView grid = this.GridView;
-            foreach (DataGridViewRow row in grid.Rows)
-            {
-                bool visible = false;
-                foreach (DataGridViewColumn col in grid.Columns)
-                {
-                    if (string.IsNullOrEmpty(keyword) || (row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(keyword)))
-                    {
-                        visible = true;
-                        count++;
-                        break;
-                    }
-                }
-                row.Visible = visible;
-            }
-            ShowRowBackColor();
-            this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", count);
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            if (GridView == null) return;
-            string keyword = string.Empty;
-            ToolStrip parent = null;
-            if (sender is ToolStripMenuItem)
-            {
-                parent = (sender as ToolStripMenuItem).GetCurrentParent();
-            }
-            if (parent == null) return;
-            foreach (ToolStripItem ctrl in parent.Items)
-            {
-                if (ctrl is ToolStripTextBox && ctrl.Name == "txtKeyword")
-                {
-                    keyword = (ctrl as ToolStripTextBox).Text;
-                    break;
-                }
-            }
-            int count = 0;
-            DataGridView grid = this.GridView;
-            foreach (DataGridViewRow row in grid.Rows)
-            {
-                bool visible = false;
-                foreach (DataGridViewColumn col in grid.Columns)
-                {
-                    if (
-                        string.IsNullOrEmpty(keyword) ||
-                        ((row.Cells[col.Index] is DataGridViewTextBoxCell) && row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(keyword))
-                        )
-                    {
-                        visible = true;
-                        count++;
-                        break;
-                    }
-                }
-                row.Visible = visible;
-            }
-            this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", count);
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ToolStrip parent = null;
-            if (sender is ToolStripMenuItem)
-            {
-                parent = (sender as ToolStripMenuItem).GetCurrentParent();
-            }
-            if (parent == null) return;
-            foreach (ToolStripItem ctrl in parent.Items)
-            {
-                if (ctrl is ToolStripTextBox && ctrl.Name == "txtKeyword")
-                {
-                    (ctrl as ToolStripTextBox).Text = string.Empty;
-                    break;
-                }
-            }
-        }
-
-        private void detailForm_GotoPreviousRow(object sender, RowChangeEventArgs e)
-        {
-            if (GridView.SelectedRows != null && GridView.SelectedRows.Count > 0)
-            {
-                int index = GridView.SelectedRows[0].Index;
-                if (index > 0)
-                {
-                    GridView.Rows[index].Selected = false;
-                    GridView.Rows[index - 1].Selected = true;
-                }
-                e.IsFirstRow = index - 1 == 0;
-                e.IsLastRow = GridView.Rows.Count == 1;
-                e.UpdatingItem = GridView.SelectedRows[0].Tag;
-            }
-        }
-
-        private void detailForm_GotoNextRow(object sender, RowChangeEventArgs e)
-        {
-            if (GridView.SelectedRows != null && GridView.SelectedRows.Count > 0)
-            {
-                int index = GridView.SelectedRows[0].Index;
-                if (index < GridView.Rows.Count - 1)
-                {
-                    GridView.Rows[index].Selected = false;
-                    GridView.Rows[index + 1].Selected = true;
-                }
-                e.IsFirstRow = GridView.Rows.Count == 1;
-                e.IsLastRow = (GridView.Rows.Count - 1 == index + 1);
-                e.UpdatingItem = GridView.SelectedRows[0].Tag;
-            }
-        }
-
-        private void detailForm_GotoLastRow(object sender, RowChangeEventArgs e)
-        {
-            if (GridView.SelectedRows != null && GridView.SelectedRows.Count > 0)
-            {
-                int index = GridView.SelectedRows[0].Index;
-                GridView.Rows[index].Selected = false;
-                GridView.Rows[GridView.Rows.Count - 1].Selected = true;
-
-                e.IsFirstRow = GridView.Rows.Count == 1;
-                e.IsLastRow = true;
-                e.UpdatingItem = GridView.SelectedRows[0].Tag;
-            }
-        }
-
-        private void detailForm_GotoFirstRow(object sender, RowChangeEventArgs e)
-        {
-            if (GridView.SelectedRows != null && GridView.SelectedRows.Count > 0)
-            {
-                int index = GridView.SelectedRows[0].Index;
-                GridView.Rows[index].Selected = false;
-                GridView.Rows[0].Selected = true;
-                e.IsFirstRow = true;
-                e.IsLastRow = GridView.Rows.Count == 1;
-                e.UpdatingItem = GridView.SelectedRows[0].Tag;
-            }
+            Filter(keyword);
         }
         #endregion
     }
