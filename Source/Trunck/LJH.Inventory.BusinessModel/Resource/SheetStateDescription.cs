@@ -14,13 +14,13 @@ namespace LJH.Inventory.BusinessModel.Resource
                 case SheetState.Add:
                     return "新建";
                 case SheetState.Approved:
-                    return "审核";
+                    return "已审核";
                 case SheetState.Canceled:
                     return "作废";
                 case SheetState.Inventory:
-                    return "收货";
+                    return "已收货";
                 case SheetState.Shipped:
-                    return "发货";
+                    return "已发货";
                 case SheetState.Settled:
                     return "完成";
                 default:

@@ -43,6 +43,13 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlLeft = new System.Windows.Forms.Panel();
+            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,13 +62,6 @@
             this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlLeft = new System.Windows.Forms.Panel();
-            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -188,9 +188,63 @@
             this.dataGridView1.TabIndex = 108;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Delete,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // cMnu_Delete
+            // 
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Text = "删除";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
+            // pnlLeft
+            // 
+            this.pnlLeft.Controls.Add(this.customerTree1);
+            this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlLeft.Location = new System.Drawing.Point(0, 50);
+            this.pnlLeft.Name = "pnlLeft";
+            this.pnlLeft.Size = new System.Drawing.Size(273, 320);
+            this.pnlLeft.TabIndex = 105;
+            // 
+            // customerTree1
+            // 
+            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.ItemHeight = 20;
+            this.customerTree1.LoadCustomer = true;
+            this.customerTree1.Location = new System.Drawing.Point(0, 0);
+            this.customerTree1.Name = "customerTree1";
+            this.customerTree1.Size = new System.Drawing.Size(273, 320);
+            this.customerTree1.TabIndex = 0;
+            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
+            // 
             // colID
             // 
-            this.colID.HeaderText = "合同号";
+            this.colID.HeaderText = "订单编号";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
             this.colID.Width = 80;
@@ -230,6 +284,7 @@
             this.colWithTax.HeaderText = "含税";
             this.colWithTax.Name = "colWithTax";
             this.colWithTax.ReadOnly = true;
+            this.colWithTax.Width = 40;
             // 
             // colAmount
             // 
@@ -279,60 +334,6 @@
             this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.cMnu_Delete,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // cMnu_Delete
-            // 
-            this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Delete.Text = "删除";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
-            // pnlLeft
-            // 
-            this.pnlLeft.Controls.Add(this.customerTree1);
-            this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlLeft.Location = new System.Drawing.Point(0, 50);
-            this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(273, 320);
-            this.pnlLeft.TabIndex = 105;
-            // 
-            // customerTree1
-            // 
-            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customerTree1.ItemHeight = 20;
-            this.customerTree1.LoadCustomer = true;
-            this.customerTree1.Location = new System.Drawing.Point(0, 0);
-            this.customerTree1.Name = "customerTree1";
-            this.customerTree1.Size = new System.Drawing.Size(273, 320);
-            this.customerTree1.TabIndex = 0;
-            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
             // 
             // FrmOrderMaster
             // 

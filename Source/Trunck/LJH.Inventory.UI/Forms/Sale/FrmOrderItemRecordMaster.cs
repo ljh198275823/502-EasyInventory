@@ -22,26 +22,38 @@ namespace LJH.Inventory.UI.Forms.Sale
         }
 
         #region 私有变量
-        private List<OrderItemRecord> _Sheets = null;
+        private List<OrderItemRecord> _Records = null;
         #endregion
 
         #region 私有方法
         private void SelectNode(TreeNode node)
         {
-            List<object> items = GetSelectedNodeItems();
-            ShowItemsOnGrid(items);
+            List<object> objs= FilterData();
+            ShowItemsOnGrid(objs);
+            Filter(txtKeyword.Text.Trim());
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
-            List<OrderItemRecord> items = _Sheets;
+            List<OrderItemRecord> items = _Records;
             CompanyInfo pc = null;
             if (this.customerTree1.SelectedNode != null) pc = this.customerTree1.SelectedNode.Tag as CompanyInfo;
-            if (pc != null) items = _Sheets.Where(it => it.CustomerID == pc.ID).ToList();
-
-            return (from p in items
-                    orderby p.OrderDate descending
-                    select (object)p).ToList();
+            if (pc != null && items != null && items.Count > 0) items = items.Where(it => it.CustomerID == pc.ID).ToList();
+            if (items != null && items.Count > 0)
+            {
+                items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
+                                        (item.State == SheetState.Approved && chkApproved.Checked) ||
+                                        (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+            }
+            if (items != null && items.Count > 0)
+            {
+                items = items.Where(item => ((!item.IsComplete && item.Shipped == 0 && chkNoneShipped.Checked) ||
+                                             (!item.IsComplete && item.Shipped < item.Count && chkPatialShipped.Checked) ||
+                                             ((item.IsComplete || item.Shipped == item.Count) && chkAllShipped.Checked))).ToList();
+            }
+            List<object> objs = null;
+            if (items != null && items.Count > 0) objs = (from item in items orderby item.OrderID descending select (object)item).ToList();
+            return objs;
         }
         #endregion
 
@@ -67,8 +79,8 @@ namespace LJH.Inventory.UI.Forms.Sale
                 con.OrderDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //获取最后一年产生的订单
                 SearchCondition = con;
             }
-            _Sheets = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
-            return GetSelectedNodeItems();
+            _Records = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
+            return FilterData();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -94,7 +106,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
-            if (!_Sheets.Exists(it => it.ID == info.ID)) _Sheets.Add(info);
+            if (!_Records.Exists(it => it.ID == info.ID)) _Records.Add(info);
         }
         #endregion
 
@@ -140,6 +152,18 @@ namespace LJH.Inventory.UI.Forms.Sale
                     }
                 }
             }
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            Filter(txtKeyword.Text.Trim());
+        }
+
+        private void chkState_CheckedChanged(object sender, EventArgs e)
+        {
+            List<object> objs = FilterData();
+            ShowItemsOnGrid(objs);
+            Filter(txtKeyword.Text.Trim());
         }
     }
 }

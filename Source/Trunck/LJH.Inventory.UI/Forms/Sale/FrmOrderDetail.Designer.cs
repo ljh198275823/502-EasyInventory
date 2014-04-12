@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +43,9 @@
             this.btnShip = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdWithoutTax = new System.Windows.Forms.RadioButton();
+            this.rdWithTax = new System.Windows.Forms.RadioButton();
             this.txtTransport = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkSalesPerson = new System.Windows.Forms.LinkLabel();
             this.lnkTransport = new System.Windows.Forms.LinkLabel();
@@ -69,7 +72,7 @@
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
-            this.dtDeliveryDate = new System.Windows.Forms.DateTimePicker();
+            this.dtDemandDate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
@@ -91,6 +94,7 @@
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).BeginInit();
@@ -200,6 +204,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.txtTransport);
             this.tabPage1.Controls.Add(this.lnkSalesPerson);
             this.tabPage1.Controls.Add(this.lnkTransport);
@@ -211,7 +216,7 @@
             this.tabPage1.Controls.Add(this.ItemsGrid);
             this.tabPage1.Controls.Add(this.txtSheetNo);
             this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.dtDeliveryDate);
+            this.tabPage1.Controls.Add(this.dtDemandDate);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -221,18 +226,49 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.rdWithoutTax);
+            this.panel1.Controls.Add(this.rdWithTax);
+            this.panel1.Location = new System.Drawing.Point(419, 47);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(136, 21);
+            this.panel1.TabIndex = 122;
+            // 
+            // rdWithoutTax
+            // 
+            this.rdWithoutTax.AutoSize = true;
+            this.rdWithoutTax.Location = new System.Drawing.Point(68, 2);
+            this.rdWithoutTax.Name = "rdWithoutTax";
+            this.rdWithoutTax.Size = new System.Drawing.Size(59, 16);
+            this.rdWithoutTax.TabIndex = 1;
+            this.rdWithoutTax.TabStop = true;
+            this.rdWithoutTax.Text = "不含税";
+            this.rdWithoutTax.UseVisualStyleBackColor = true;
+            // 
+            // rdWithTax
+            // 
+            this.rdWithTax.AutoSize = true;
+            this.rdWithTax.Location = new System.Drawing.Point(4, 3);
+            this.rdWithTax.Name = "rdWithTax";
+            this.rdWithTax.Size = new System.Drawing.Size(47, 16);
+            this.rdWithTax.TabIndex = 0;
+            this.rdWithTax.TabStop = true;
+            this.rdWithTax.Text = "含税";
+            this.rdWithTax.UseVisualStyleBackColor = true;
+            // 
             // txtTransport
             // 
             this.txtTransport.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtTransport.Location = new System.Drawing.Point(100, 47);
+            this.txtTransport.Location = new System.Drawing.Point(88, 47);
             this.txtTransport.Name = "txtTransport";
-            this.txtTransport.Size = new System.Drawing.Size(106, 21);
+            this.txtTransport.Size = new System.Drawing.Size(133, 21);
             this.txtTransport.TabIndex = 120;
             // 
             // lnkSalesPerson
             // 
             this.lnkSalesPerson.AutoSize = true;
-            this.lnkSalesPerson.Location = new System.Drawing.Point(238, 51);
+            this.lnkSalesPerson.Location = new System.Drawing.Point(233, 51);
             this.lnkSalesPerson.Name = "lnkSalesPerson";
             this.lnkSalesPerson.Size = new System.Drawing.Size(47, 12);
             this.lnkSalesPerson.TabIndex = 114;
@@ -243,7 +279,7 @@
             // lnkTransport
             // 
             this.lnkTransport.AutoSize = true;
-            this.lnkTransport.Location = new System.Drawing.Point(35, 51);
+            this.lnkTransport.Location = new System.Drawing.Point(23, 51);
             this.lnkTransport.Name = "lnkTransport";
             this.lnkTransport.Size = new System.Drawing.Size(59, 12);
             this.lnkTransport.TabIndex = 111;
@@ -254,7 +290,7 @@
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(280, 16);
+            this.txtCustomer.Location = new System.Drawing.Point(282, 16);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.Size = new System.Drawing.Size(241, 21);
             this.txtCustomer.TabIndex = 107;
@@ -273,12 +309,12 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 106;
-            this.label1.Text = "合同日期:";
+            this.label1.Text = "签订日期:";
             // 
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(238, 20);
+            this.lnkCustomer.Location = new System.Drawing.Point(245, 20);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(35, 12);
             this.lnkCustomer.TabIndex = 104;
@@ -289,7 +325,7 @@
             // txtSalesPerson
             // 
             this.txtSalesPerson.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSalesPerson.Location = new System.Drawing.Point(289, 47);
+            this.txtSalesPerson.Location = new System.Drawing.Point(282, 47);
             this.txtSalesPerson.Name = "txtSalesPerson";
             this.txtSalesPerson.Size = new System.Drawing.Size(131, 21);
             this.txtSalesPerson.TabIndex = 101;
@@ -371,8 +407,8 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -380,8 +416,8 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -421,9 +457,9 @@
             // 
             // colPrepared
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue;
-            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Blue;
+            this.colPrepared.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPrepared.HeaderText = "已备货";
             this.colPrepared.Name = "colPrepared";
             this.colPrepared.ReadOnly = true;
@@ -441,9 +477,9 @@
             // 
             // colNotShipped
             // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
-            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red;
+            this.colNotShipped.DefaultCellStyle = dataGridViewCellStyle8;
             this.colNotShipped.HeaderText = "未出货";
             this.colNotShipped.Name = "colNotShipped";
             this.colNotShipped.ReadOnly = true;
@@ -463,25 +499,25 @@
             this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtSheetNo.Location = new System.Drawing.Point(88, 16);
             this.txtSheetNo.Name = "txtSheetNo";
-            this.txtSheetNo.Size = new System.Drawing.Size(106, 21);
+            this.txtSheetNo.Size = new System.Drawing.Size(133, 21);
             this.txtSheetNo.TabIndex = 83;
             this.txtSheetNo.Text = "自动创建";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 20);
+            this.label11.Location = new System.Drawing.Point(23, 20);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 12);
+            this.label11.Size = new System.Drawing.Size(59, 12);
             this.label11.TabIndex = 88;
-            this.label11.Text = "订单号:";
+            this.label11.Text = "订单编号:";
             // 
-            // dtDeliveryDate
+            // dtDemandDate
             // 
-            this.dtDeliveryDate.Location = new System.Drawing.Point(606, 16);
-            this.dtDeliveryDate.Name = "dtDeliveryDate";
-            this.dtDeliveryDate.Size = new System.Drawing.Size(131, 21);
-            this.dtDeliveryDate.TabIndex = 85;
+            this.dtDemandDate.Location = new System.Drawing.Point(606, 16);
+            this.dtDemandDate.Name = "dtDemandDate";
+            this.dtDemandDate.Size = new System.Drawing.Size(131, 21);
+            this.dtDemandDate.TabIndex = 85;
             // 
             // label4
             // 
@@ -490,7 +526,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 87;
-            this.label4.Text = "到货日期:";
+            this.label4.Text = "发货日期:";
             // 
             // tabPage5
             // 
@@ -661,6 +697,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).EndInit();
@@ -687,7 +725,7 @@
         private System.Windows.Forms.DataGridView ItemsGrid;
         private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DateTimePicker dtDeliveryDate;
+        private System.Windows.Forms.DateTimePicker dtDemandDate;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.LinkLabel lnkCustomer;
@@ -728,5 +766,8 @@
         private System.Windows.Forms.DataGridViewLinkColumn colShipped;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotShipped;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rdWithoutTax;
+        private System.Windows.Forms.RadioButton rdWithTax;
     }
 }

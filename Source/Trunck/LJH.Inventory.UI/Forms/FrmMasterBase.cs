@@ -347,13 +347,28 @@ namespace LJH.Inventory.UI.Forms
             foreach (DataGridViewRow row in grid.Rows)
             {
                 bool visible = false;
-                foreach (DataGridViewColumn col in grid.Columns)
+                string[] temp = !string.IsNullOrEmpty(keyword) ? keyword.Split(';') : null;
+                if (temp != null) temp = temp.Where(str => !string.IsNullOrEmpty(str.Trim())).ToArray(); //将数组中的空字符剔除
+                if (temp == null || temp.Length == 0)
                 {
-                    if (string.IsNullOrEmpty(keyword) || (row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(keyword)))
+                    visible = true;
+                    count++;
+                    break;
+                }
+                else
+                {
+                    foreach (string kw in temp)
                     {
-                        visible = true;
-                        count++;
-                        break;
+                        foreach (DataGridViewColumn col in grid.Columns)
+                        {
+                            if (col.Visible && row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(kw))
+                            {
+                                visible = true;
+                                count++;
+                                break;
+                            }
+                        }
+                        if (visible) break; //如果为真，则跳出循环，不用再判断其它关键字,直接进入下一行
                     }
                 }
                 row.Visible = visible;

@@ -98,6 +98,12 @@ namespace LJH.Inventory.UI.Forms
                 txtSalesPerson.Focus();
                 return false;
             }
+            if (!rdWithTax.Checked && !rdWithoutTax.Checked)
+            {
+                MessageBox.Show("没有选择订单的含税情况");
+                rdWithTax.Focus();
+                return false;
+            }
             if (ItemsGrid.Rows.Count == 0)
             {
                 MessageBox.Show("订单没有填写订货项");
@@ -120,7 +126,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
-            this.dtDeliveryDate.Value = DateTime.Today.AddDays(1);
+            this.dtDemandDate.Value = DateTime.Today.AddDays(1);
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -145,7 +151,9 @@ namespace LJH.Inventory.UI.Forms
                 this.dtOrderDate.Value = item.OrderDate;
                 this.txtTransport.Text = item.Transport;
                 this.txtSalesPerson.Text = item.SalesPerson;
-                this.dtDeliveryDate.Value = item.DemandDate;
+                this.dtDemandDate.Value = item.DemandDate;
+                this.rdWithTax.Checked = item.WithTax;
+                this.rdWithoutTax.Checked = !item.WithTax;
                 ShowDeliveryItemsOnGrid(item.Items);
                 List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
@@ -174,7 +182,8 @@ namespace LJH.Inventory.UI.Forms
             order.Customer = this.txtCustomer.Tag as CompanyInfo;
             order.Transport = this.txtTransport.Text;
             order.SalesPerson = this.txtSalesPerson.Text;
-            order.DemandDate = this.dtDeliveryDate.Value;
+            order.DemandDate = this.dtDemandDate.Value;
+            order.WithTax = rdWithTax.Checked;
             order.Items = GetOrderItemsFromGrid();
             order.Items.ForEach(item => item.DemandDate = order.DemandDate);
             order.Items.ForEach(item => item.OrderID = order.ID);
