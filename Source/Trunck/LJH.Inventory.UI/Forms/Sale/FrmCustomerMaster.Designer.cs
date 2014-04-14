@@ -50,23 +50,23 @@
             this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.CategoryMenu.SuspendLayout();
@@ -253,10 +253,10 @@
             this.colCategory,
             this.colNation,
             this.colCity,
+            this.colWeb,
             this.colTelphone,
             this.colFax,
             this.colPost,
-            this.colWeb,
             this.colAddress,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
@@ -269,92 +269,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(976, 294);
             this.dataGridView1.TabIndex = 111;
-            // 
-            // colImage
-            // 
-            this.colImage.HeaderText = "";
-            this.colImage.Name = "colImage";
-            this.colImage.ReadOnly = true;
-            this.colImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colImage.Width = 30;
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "客户编号";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.HeaderText = "公司名称";
-            this.colName.MinimumWidth = 150;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 150;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "类别";
-            this.colCategory.MinimumWidth = 120;
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.Width = 120;
-            // 
-            // colNation
-            // 
-            this.colNation.HeaderText = "国家";
-            this.colNation.Name = "colNation";
-            this.colNation.ReadOnly = true;
-            this.colNation.Visible = false;
-            this.colNation.Width = 80;
-            // 
-            // colCity
-            // 
-            this.colCity.HeaderText = "地区";
-            this.colCity.Name = "colCity";
-            this.colCity.ReadOnly = true;
-            this.colCity.Visible = false;
-            this.colCity.Width = 80;
-            // 
-            // colTelphone
-            // 
-            this.colTelphone.HeaderText = "电话";
-            this.colTelphone.Name = "colTelphone";
-            this.colTelphone.ReadOnly = true;
-            // 
-            // colFax
-            // 
-            this.colFax.HeaderText = "传真";
-            this.colFax.Name = "colFax";
-            this.colFax.ReadOnly = true;
-            // 
-            // colPost
-            // 
-            this.colPost.HeaderText = "邮政";
-            this.colPost.Name = "colPost";
-            this.colPost.ReadOnly = true;
-            // 
-            // colWeb
-            // 
-            this.colWeb.HeaderText = "网址";
-            this.colWeb.Name = "colWeb";
-            this.colWeb.ReadOnly = true;
-            // 
-            // colAddress
-            // 
-            this.colAddress.HeaderText = "地址";
-            this.colAddress.MinimumWidth = 200;
-            this.colAddress.Name = "colAddress";
-            this.colAddress.ReadOnly = true;
-            this.colAddress.Width = 200;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -389,6 +303,96 @@
             this.cMnu_Export.Name = "cMnu_Export";
             this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // colImage
+            // 
+            this.colImage.HeaderText = "";
+            this.colImage.Name = "colImage";
+            this.colImage.ReadOnly = true;
+            this.colImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colImage.Width = 30;
+            // 
+            // colID
+            // 
+            this.colID.HeaderText = "客户编号";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Width = 80;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.HeaderText = "公司名称";
+            this.colName.MinimumWidth = 120;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 120;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.MinimumWidth = 120;
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.Width = 120;
+            // 
+            // colNation
+            // 
+            this.colNation.HeaderText = "国家";
+            this.colNation.Name = "colNation";
+            this.colNation.ReadOnly = true;
+            this.colNation.Width = 80;
+            // 
+            // colCity
+            // 
+            this.colCity.HeaderText = "地区";
+            this.colCity.Name = "colCity";
+            this.colCity.ReadOnly = true;
+            this.colCity.Width = 80;
+            // 
+            // colWeb
+            // 
+            this.colWeb.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colWeb.HeaderText = "网站";
+            this.colWeb.Name = "colWeb";
+            this.colWeb.ReadOnly = true;
+            this.colWeb.Width = 54;
+            // 
+            // colTelphone
+            // 
+            this.colTelphone.HeaderText = "电话";
+            this.colTelphone.Name = "colTelphone";
+            this.colTelphone.ReadOnly = true;
+            // 
+            // colFax
+            // 
+            this.colFax.HeaderText = "传真";
+            this.colFax.Name = "colFax";
+            this.colFax.ReadOnly = true;
+            // 
+            // colPost
+            // 
+            this.colPost.HeaderText = "邮政";
+            this.colPost.Name = "colPost";
+            this.colPost.ReadOnly = true;
+            // 
+            // colAddress
+            // 
+            this.colAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colAddress.HeaderText = "地址";
+            this.colAddress.MinimumWidth = 120;
+            this.colAddress.Name = "colAddress";
+            this.colAddress.ReadOnly = true;
+            this.colAddress.Width = 120;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FrmCustomerMaster
             // 
@@ -443,18 +447,18 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddCustomer;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeb;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeb;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ToolStripMenuItem mnu_AddCustomer;
     }
 }

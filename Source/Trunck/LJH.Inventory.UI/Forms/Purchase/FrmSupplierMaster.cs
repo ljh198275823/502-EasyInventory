@@ -25,77 +25,22 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void InitCategoryTree()
-        {
-            this.categoryTree.Nodes.Clear();
-            this.categoryTree.Nodes.Add("所有供应商类别");
-
-            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                AddDesendNodes(items, this.categoryTree.Nodes[0]);
-            }
-        }
-
-        private void AddDesendNodes(List<SupplierType> items, TreeNode parent)
-        {
-            List<SupplierType> pcs = null;
-            if (parent.Tag == null)
-            {
-                pcs = items.Where(it => string.IsNullOrEmpty(it.Parent)).ToList();
-            }
-            else
-            {
-                pcs = items.Where(it => it.Parent == (parent.Tag as SupplierType).ID).ToList();
-            }
-            if (pcs != null && pcs.Count > 0)
-            {
-                foreach (SupplierType pc in pcs)
-                {
-                    TreeNode node = AddNode(pc, parent);
-                    AddDesendNodes(items, node);
-                }
-            }
-            parent.ImageIndex = 0;
-            parent.SelectedImageIndex = 0;
-            parent.ExpandAll();
-        }
-
         private void SelectNode(TreeNode node)
         {
-            if (!object.ReferenceEquals(categoryTree.SelectedNode, node))
-            {
-                if (categoryTree.SelectedNode != null)
-                {
-                    categoryTree.SelectedNode.BackColor = Color.White;
-                    categoryTree.SelectedNode.ForeColor = Color.Black;
-                }
-                categoryTree.SelectedNode = node;
-                categoryTree.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
-                categoryTree.SelectedNode.ForeColor = Color.White;
-
-                List<object> items = GetSelectedNodeItems();
-                ShowItemsOnGrid(items);
-            }
+            List<object> items = GetSelectedNodeItems();
+            ShowItemsOnGrid(items);
         }
 
         private List<object> GetSelectedNodeItems()
         {
             List<CompanyInfo> items = _Customers;
-            SupplierType pc = null;
-            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as SupplierType;
-            if (pc != null) items = _Customers.Where(it => it.CategoryID == pc.ID).ToList();
+            List<SupplierType> pc = null;
+            if (this.categoryTree.SelectedNode != null) pc = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+            if (pc != null && pc.Count > 0) items = _Customers.Where(it => pc.Exists(c => c.ID == it.CategoryID)).ToList();
 
             return (from p in items
                     orderby p.Name ascending
                     select (object)p).ToList();
-        }
-
-        private TreeNode AddNode(SupplierType pc, TreeNode parent)
-        {
-            TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
-            node.Tag = pc;
-            return node;
         }
         #endregion
 
@@ -103,7 +48,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            InitCategoryTree();
+            this.categoryTree.Init();
             Operator opt = Operator.Current;
             menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditSupplier);
             menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditSupplier);
@@ -152,8 +97,10 @@ namespace LJH.Inventory.UI.Forms
             row.Tag = c;
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
-            row.Cells["colNation"].Value = c.Nation;
             row.Cells["colName"].Value = c.Name;
+            row.Cells["colCategory"].Value = c.CategoryID;
+            row.Cells["colNation"].Value = c.Nation;
+            row.Cells["colCity"].Value = c.City;
             row.Cells["colWebsite"].Value = c.Website;
             row.Cells["colTelphone"].Value = c.TelPhone;
             row.Cells["colFax"].Value = c.Fax;
@@ -166,6 +113,12 @@ namespace LJH.Inventory.UI.Forms
                 _Customers.Add(c);
             }
         }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
+        }
         #endregion
 
         #region 类别树右键菜单
@@ -176,7 +129,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void mnu_FreshTree_Click(object sender, EventArgs e)
         {
-            InitCategoryTree();
+            categoryTree.Init();
             SelectNode(categoryTree.Nodes[0]);
         }
 
@@ -189,7 +142,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
                 SupplierType item = args.AddedItem as SupplierType;
-                AddNode(item, categoryTree.SelectedNode);
+                categoryTree.AddSupplierTypeNode(item, categoryTree.SelectedNode);
             };
             frm.ShowDialog();
         }
@@ -224,5 +177,10 @@ namespace LJH.Inventory.UI.Forms
             frm.ShowDialog();
         }
         #endregion
+
+        private void mnu_AddSupplier_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
+        }
     }
 }

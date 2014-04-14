@@ -34,9 +34,9 @@ namespace LJH.Inventory.UI.Forms
         private List<object> GetSelectedNodeItems()
         {
             List<CompanyInfo> items = _Customers;
-            CustomerType pc = null;
-            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as CustomerType;
-            if (pc != null) items = _Customers.Where(it => it.CategoryID == pc.ID).ToList();
+            List<CustomerType> pc = null;
+            if (this.categoryTree.SelectedNode != null) pc = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+            if (pc != null && pc.Count > 0) items = _Customers.Where(it => pc.Exists(c => c.ID == it.CategoryID)).ToList();
 
             return (from p in items
                     orderby p.Name ascending
@@ -101,10 +101,10 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colCategory"].Value = c.CategoryID;
             row.Cells["colNation"].Value = c.Nation;
             row.Cells["colCity"].Value = c.City;
+            row.Cells["colWeb"].Value = c.Website;
             row.Cells["colTelphone"].Value = c.TelPhone;
             row.Cells["colFax"].Value = c.Fax;
             row.Cells["colPost"].Value = c.PostalCode;
-            row.Cells["colWeb"].Value = c.Website;
             row.Cells["colAddress"].Value = c.Address;
             row.Cells["colMemo"].Value = c.Memo;
             if (_Customers == null || !_Customers.Exists(it => it.ID == c.ID))
@@ -112,6 +112,12 @@ namespace LJH.Inventory.UI.Forms
                 if (_Customers == null) _Customers = new List<CompanyInfo>();
                 _Customers.Add(c);
             }
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
         }
         #endregion
 

@@ -55,23 +55,26 @@ namespace LJH.Inventory.UI.Forms
         protected override void ItemShowing()
         {
             CompanyInfo c = UpdatingItem as CompanyInfo;
+            txtID.Enabled = (c == null);
             if (c != null)
             {
                 txtID.Text = c.ID;
                 if (!string.IsNullOrEmpty(c.CategoryID))
                 {
                     Category = (new SupplierTypeBLL(AppSettings.Current.ConnStr)).GetByID(c.CategoryID).QueryObject;
-                    txtCategory.Text = Category != null ? Category.Name : string.Empty;
                 }
+                this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
                 txtNation.Text = c.Nation;
                 txtName.Text = c.Name;
-                txtTelephone.Text = c.TelPhone;
+                txtNation.Text = c.Nation;
+                txtCity.Text = c.City;
+                txtTelphone.Text = c.TelPhone;
                 txtFax.Text = c.Fax;
-                txtPostalCode.Text = c.PostalCode;
+                txtPost.Text = c.PostalCode;
+                txtWeb.Text = c.Website;
                 txtAddress.Text = c.Address;
                 txtMemo.Text = c.Memo;
             }
-            txtID.Enabled = (c == null);
 
             GridView.Rows.Clear();
             ContactSearchCondition con = new ContactSearchCondition() { CompanyID = c.ID };
@@ -92,7 +95,8 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new CompanyInfo();
-                info.ClassID = CustomerClass.Supplier;
+                info.ClassID = CustomerClass.Customer;
+                info.Creater = Operator.Current.Name;
             }
             else
             {
@@ -102,10 +106,13 @@ namespace LJH.Inventory.UI.Forms
             info.CategoryID = Category != null ? Category.ID : null;
             info.Nation = txtNation.Text;
             info.Name = txtName.Text;
-            info.TelPhone = txtTelephone.Text;
+            info.Nation = txtNation.Text;
+            info.City = txtCity.Text;
+            info.TelPhone = txtTelphone.Text;
             info.Fax = txtFax.Text;
+            info.PostalCode = txtPost.Text;
+            info.Website = txtWeb.Text;
             info.Address = txtAddress.Text;
-            info.PostalCode = txtPostalCode.Text;
             info.Memo = txtMemo.Text;
             return info;
         }

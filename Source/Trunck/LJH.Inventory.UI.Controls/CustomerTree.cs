@@ -159,6 +159,27 @@ namespace LJH.Inventory.UI.Controls
             }
             return items;
         }
+        /// <summary>
+        /// 获取所有某个节点下的所有产品类别信息，包括此节点下所有后代产品类别节点的产品类别信息
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public List<CustomerType > GetCategoryofNode(TreeNode node)
+        {
+            List<CustomerType> items = new List<CustomerType>();
+            if (node.Tag is CustomerType)
+            {
+                items.Add(node.Tag as CustomerType);
+            }
+            if (node.Nodes.Count > 0)
+            {
+                foreach (TreeNode child in node.Nodes)
+                {
+                    items.AddRange(GetCategoryofNode(child));
+                }
+            }
+            return items;
+        }
         #endregion
     }
 }
