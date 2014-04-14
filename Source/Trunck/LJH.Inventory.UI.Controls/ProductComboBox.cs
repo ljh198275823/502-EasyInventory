@@ -89,6 +89,9 @@ namespace LJH.Inventory.UI.Controls
         #endregion
 
         #region 公共方法
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void Init()
         {
             this.Items.Clear();
@@ -108,7 +111,10 @@ namespace LJH.Inventory.UI.Controls
                 }
             }
         }
-
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="categoryID"></param>
         public void Init(string categoryID)
         {
             this.Text = string.Empty;

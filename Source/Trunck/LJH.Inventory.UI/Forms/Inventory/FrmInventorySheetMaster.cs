@@ -25,21 +25,38 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData()
         {
-            List<object> items = GetSelectedNodeItems();
-            ShowItemsOnGrid(items);
+            List<object> objs = FilterData();
+            ShowItemsOnGrid(objs);
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
             List<InventorySheet> items = _Sheets;
-            CompanyInfo pc = null;
-            if (this.supplierTree1.SelectedNode != null) pc = this.supplierTree1.SelectedNode.Tag as CompanyInfo;
-            if (pc != null) items = _Sheets.Where(it => it.SupplierID == pc.ID).ToList();
-
-            return (from p in items
-                    select (object)p).ToList();
+            if (this.supplierTree1.SelectedNode != null)
+            {
+                List<CompanyInfo> pcs = null;
+                pcs = this.supplierTree1.GetCompanyofNode(this.supplierTree1.SelectedNode);
+                if (pcs != null && pcs.Count > 0)
+                {
+                    items = items.Where(it => pcs.Exists(c => c.ID == it.SupplierID)).ToList();
+                }
+                else
+                {
+                    items = null;
+                }
+            }
+            if (items != null && items.Count > 0)
+            {
+                items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
+                                        (item.State == SheetState.Approved && chkApproved.Checked) ||
+                                        (item.State == SheetState.Inventory && chkInventory.Checked) ||
+                                        (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+            }
+            List<object> objs = null;
+            if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
+            return objs;
         }
         #endregion
 
@@ -59,7 +76,7 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             _Sheets = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            return GetSelectedNodeItems();
+            return FilterData();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -77,6 +94,12 @@ namespace LJH.Inventory.UI.Forms
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
             if (!_Sheets.Exists(it => it.ID == sheet.ID)) _Sheets.Add(sheet);
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
         }
         #endregion
 
@@ -106,7 +129,17 @@ namespace LJH.Inventory.UI.Forms
 
         private void supplierTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData();
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void chkState_CheckedChanged(object sender, EventArgs e)
+        {
+            FreshData();
         }
     }
 }

@@ -170,6 +170,11 @@ namespace LJH.Inventory.UI.Forms
             };
             frm.ShowDialog();
         }
+
+        private void mnu_AddCustomer_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
+        }
         #endregion
     }
 }

@@ -26,19 +26,28 @@ namespace LJH.Inventory.UI.Forms.Sale
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData()
         {
-            List<object> objs= FilterData();
+            List<object> objs = FilterData();
             ShowItemsOnGrid(objs);
-            Filter(txtKeyword.Text.Trim());
         }
 
         private List<object> FilterData()
         {
             List<OrderItemRecord> items = _Records;
-            CompanyInfo pc = null;
-            if (this.customerTree1.SelectedNode != null) pc = this.customerTree1.SelectedNode.Tag as CompanyInfo;
-            if (pc != null && items != null && items.Count > 0) items = items.Where(it => it.CustomerID == pc.ID).ToList();
+            if (this.customerTree1.SelectedNode != null)
+            {
+                List<CompanyInfo> pcs = null;
+                pcs = this.customerTree1.GetCompanyofNode(this.customerTree1.SelectedNode);
+                if (pcs != null && pcs.Count > 0)
+                {
+                    items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
+                }
+                else
+                {
+                    items = null;
+                }
+            }
             if (items != null && items.Count > 0)
             {
                 items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
@@ -108,6 +117,12 @@ namespace LJH.Inventory.UI.Forms.Sale
             }
             if (!_Records.Exists(it => it.ID == info.ID)) _Records.Add(info);
         }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
+        }
         #endregion
 
         #region 事件处理程序
@@ -126,9 +141,8 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData();
         }
-        #endregion
 
         private void cMnu_Reserve_Click(object sender, EventArgs e)
         {
@@ -156,14 +170,13 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         private void txtKeyword_TextChanged(object sender, EventArgs e)
         {
-            Filter(txtKeyword.Text.Trim());
+            FreshData();
         }
 
         private void chkState_CheckedChanged(object sender, EventArgs e)
         {
-            List<object> objs = FilterData();
-            ShowItemsOnGrid(objs);
-            Filter(txtKeyword.Text.Trim());
+            FreshData();
         }
+        #endregion
     }
 }

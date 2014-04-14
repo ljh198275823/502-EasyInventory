@@ -41,9 +41,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree();
+            this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddCustomer = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,6 +179,7 @@
             this.categoryTree.ImageIndex = 0;
             this.categoryTree.ImageList = this.imageList1;
             this.categoryTree.ItemHeight = 20;
+            this.categoryTree.LoadCustomer = false;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
             this.categoryTree.SelectedImageIndex = 0;
@@ -189,11 +191,12 @@
             // 
             this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_FreshTree,
+            this.mnu_AddCustomer,
             this.mnu_AddCategory,
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
+            this.CategoryMenu.Size = new System.Drawing.Size(125, 114);
             // 
             // mnu_FreshTree
             // 
@@ -201,6 +204,13 @@
             this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
+            // 
+            // mnu_AddCustomer
+            // 
+            this.mnu_AddCustomer.Name = "mnu_AddCustomer";
+            this.mnu_AddCustomer.Size = new System.Drawing.Size(124, 22);
+            this.mnu_AddCustomer.Text = "新建客户";
+            this.mnu_AddCustomer.Click += new System.EventHandler(this.mnu_AddCustomer_Click);
             // 
             // mnu_AddCategory
             // 
@@ -213,7 +223,7 @@
             // 
             this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
             this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
-            this.mnu_DeleteCategory.Text = "删除";
+            this.mnu_DeleteCategory.Text = "删除类别";
             this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
             // 
             // mnu_CategoryProperty
@@ -445,5 +455,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeb;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddCustomer;
     }
 }

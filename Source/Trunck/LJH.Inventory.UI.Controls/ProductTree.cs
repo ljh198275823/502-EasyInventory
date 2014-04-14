@@ -132,6 +132,48 @@ namespace LJH.Inventory.UI.Controls
             this._AllProductNodes.Add(node);
             return node;
         }
+        /// <summary>
+        /// 获取所有某个节点下的所有产品信息，包括此节点下所有后代产品节点的产品信息
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public List<Product> GetProductsofNode(TreeNode node)
+        {
+            List<Product> items = new List<Product>();
+            if (node.Tag is Product)
+            {
+                items.Add(node.Tag as Product);
+            }
+            else if (node.Nodes.Count > 0)
+            {
+                foreach (TreeNode child in node.Nodes)
+                {
+                    items.AddRange(GetProductsofNode(child));
+                }
+            }
+            return items;
+        }
+        /// <summary>
+        /// 获取所有某个节点下的所有产品类别信息，包括此节点下所有后代产品类别节点的产品类别信息
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public List<ProductCategory> GetCategoryofNode(TreeNode node)
+        {
+            List<ProductCategory> items = new List<ProductCategory>();
+            if (node.Tag is ProductCategory)
+            {
+                items.Add(node.Tag as ProductCategory);
+            }
+            if (node.Nodes.Count > 0)
+            {
+                foreach (TreeNode child in node.Nodes)
+                {
+                    items.AddRange(GetCategoryofNode(child));
+                }
+            }
+            return items;
+        }
         #endregion
     }
 }

@@ -353,7 +353,6 @@ namespace LJH.Inventory.UI.Forms
                 {
                     visible = true;
                     count++;
-                    break;
                 }
                 else
                 {

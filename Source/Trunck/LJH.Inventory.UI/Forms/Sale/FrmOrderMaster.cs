@@ -26,22 +26,37 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData()
         {
-            List<object> items = GetSelectedNodeItems();
-            ShowItemsOnGrid(items);
+            List<object> objs = FilterData();
+            ShowItemsOnGrid(objs);
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
             List<Order> items = _Sheets;
-            CompanyInfo pc = null;
-            if (this.customerTree1.SelectedNode != null) pc = this.customerTree1.SelectedNode.Tag as CompanyInfo;
-            if (pc != null) items = _Sheets.Where(it => it.CustomerID == pc.ID).ToList();
-
-            return (from p in items
-                    orderby p.OrderDate descending
-                    select (object)p).ToList();
+            if (this.customerTree1.SelectedNode != null)
+            {
+                List<CompanyInfo> pcs = null;
+                pcs = this.customerTree1.GetCompanyofNode(this.customerTree1.SelectedNode);
+                if (pcs != null && pcs.Count > 0)
+                {
+                    items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
+                }
+                else
+                {
+                    items = null;
+                }
+            }
+            if (items != null && items.Count > 0)
+            {
+                items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
+                                        (item.State == SheetState.Approved && chkApproved.Checked) ||
+                                        (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+            }
+            List<object> objs = null;
+            if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
+            return objs;
         }
         #endregion
 
@@ -62,7 +77,7 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             _Sheets = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
-            return GetSelectedNodeItems();
+            return FilterData();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -87,6 +102,12 @@ namespace LJH.Inventory.UI.Forms
             }
             if (!_Sheets.Exists(it => it.ID == info.ID)) _Sheets.Add(info);
         }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
+        }
         #endregion
 
         #region 事件处理程序
@@ -105,7 +126,17 @@ namespace LJH.Inventory.UI.Forms
 
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData();
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void chkState_CheckedChanged(object sender, EventArgs e)
+        {
+            FreshData();
         }
         #endregion
     }

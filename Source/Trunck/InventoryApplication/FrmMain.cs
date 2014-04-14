@@ -100,49 +100,7 @@ namespace InventoryApplication
         #endregion
 
         #region 公共方法
-        /// <summary>
-        /// 显示窗口的单个实例，如果之前已经打开过，则只是激活打开过的窗体
-        /// </summary>
-        /// <param name="formType">要打开的窗体类型</param>
-        /// <param name="mainPanel">是否在主面板中打开,否则在从面板中打开</param>
-        public void ShowSingleForm(Type formType, bool mainPanel)
-        {
-            Form instance = null;
-            foreach (Form frm in _openedForms)
-            {
-                if (frm.GetType() == formType)
-                {
-                    instance = frm;
-                    ucFormViewMain.ActiveForm(frm);
-                    ucFormViewSecondary.ActiveForm(frm);
-                    break;
-                }
-            }
-            if (instance == null)
-            {
-                instance = (Form)Activator.CreateInstance(formType);
-                instance.Tag = this;
-                instance.TopLevel = false;
-                _openedForms.Add(instance);
-                AddForm(instance, mainPanel);
-                instance.FormClosed += delegate(object sender, FormClosedEventArgs e)
-                {
-                    _openedForms.Remove(instance);
-                };
-            }
-        }
-
-        /// <summary>
-        /// 显示窗口的单个实例，如果之前已经打开过，则只是激活打开过的窗体
-        /// </summary>
-        /// <param name="formType"></param>
-        /// <param name="mainPanel"></param>
-        public void ShowSingleForm(Type formType)
-        {
-            ShowSingleForm(formType, true);
-        }
-
-        public void AddForm(Form frm, bool mainPanel)
+        private void AddForm(Form frm, bool mainPanel)
         {
             if (!mainPanel && this.ucFormViewSecondary.Visible)
             {
@@ -153,7 +111,37 @@ namespace InventoryApplication
                 this.ucFormViewMain.AddAForm(frm);
             }
         }
-
+        /// <summary>
+        /// 显示窗口的单个实例，如果之前已经打开过，则只是激活打开过的窗体
+        /// </summary>
+        /// <param name="formType">要打开的窗体类型</param>
+        /// <param name="mainPanel">是否在主面板中打开,否则在从面板中打开</param>
+        public T ShowSingleForm<T>(bool mainPanel = true) where T : Form
+        {
+            T instance = null;
+            foreach (Form frm in _openedForms)
+            {
+                if (frm.GetType() == typeof(T))
+                {
+                    ucFormViewMain.ActiveForm(frm);
+                    instance = frm as T;
+                    break;
+                }
+            }
+            if (instance == null)
+            {
+                instance = Activator.CreateInstance(typeof(T)) as T;
+                instance.Tag = this;
+                instance.TopLevel = false;
+                _openedForms.Add(instance);
+                AddForm(instance, mainPanel);
+                instance.FormClosed += delegate(object sender, FormClosedEventArgs e)
+                {
+                    _openedForms.Remove(instance);
+                };
+            }
+            return instance;
+        }
         #endregion
 
         #region 菜单事件程序
@@ -164,32 +152,32 @@ namespace InventoryApplication
 
         private void mnu_Product_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmProductMaster));
+            ShowSingleForm<FrmProductMaster>();
         }
 
         private void mnu_DeliverySheet_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmDeliverySheetMaster));
+            ShowSingleForm<FrmDeliverySheetMaster>();
         }
 
         private void mnu_ProductCategory_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmProductCategoryMaster));
+            ShowSingleForm<FrmProductCategoryMaster>();
         }
 
         private void mnu_Customer_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCustomerMaster));
+            ShowSingleForm<FrmCustomerMaster>();
         }
 
         private void mnu_WareHouse_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmWareHouseMaster));
+            ShowSingleForm<FrmWareHouseMaster>();
         }
 
         private void mnu_Supplier_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmSupplierMaster));
+            ShowSingleForm<FrmSupplierMaster>();
         }
 
         private void mnu_Exit_Click(object sender, EventArgs e)
@@ -199,12 +187,12 @@ namespace InventoryApplication
 
         private void mnu_Operator_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmOperatorMaster));
+            ShowSingleForm<FrmOperatorMaster>();
         }
 
         private void mnu_Role_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmRoleMaster));
+            ShowSingleForm<FrmRoleMaster>();
         }
 
         private void mnu_ChangePwd_Click(object sender, EventArgs e)
@@ -228,27 +216,27 @@ namespace InventoryApplication
 
         private void mnu_Inventory_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmProductInventoryMaster));
+            ShowSingleForm<FrmProductInventoryMaster>();
         }
 
         private void mnu_InventorySheet_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmInventorySheetMaster));
+            ShowSingleForm<FrmInventorySheetMaster>();
         }
 
         private void mnu_CustomerPayment_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCustomerPaymentMaster));
+            ShowSingleForm<FrmCustomerPaymentMaster>();
         }
 
         private void mnu_Expanditure_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmExpenditureRecordMaster));
+            ShowSingleForm<FrmExpenditureRecordMaster>();
         }
 
         private void mnu_DaiFu_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCustomerOtherReceivableMaster));
+            ShowSingleForm<FrmCustomerOtherReceivableMaster>();
         }
 
         private void mnu_DogInfo_Click(object sender, EventArgs e)
@@ -260,7 +248,7 @@ namespace InventoryApplication
 
         private void mnu_DeliveryRecordReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmDeliveryRecordReport));
+            ShowSingleForm<FrmDeliveryRecordReport>();
         }
         #endregion
 
@@ -283,52 +271,52 @@ namespace InventoryApplication
 
         private void mnu_DeliveryStatistic_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmDeliveryStatistics));
+            ShowSingleForm<FrmDeliveryStatistics>();
         }
 
         private void mnu_Performance_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmSalesPersonPerformanceReport));
+            ShowSingleForm<FrmSalesPersonPerformanceReport>();
         }
 
         private void mnu_CollectionType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCollectionTypeMaster));
+            ShowSingleForm<FrmCollectionTypeMaster>();
         }
 
         private void mnu_CurrencyType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCurrencyTypeMaster));
+            ShowSingleForm<FrmCurrencyTypeMaster>();
         }
 
         private void mnu_PriceTerm_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmPriceTermMaster));
+            ShowSingleForm<FrmPriceTermMaster>();
         }
 
         private void mnu_Unit_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmUnitMaster));
+            ShowSingleForm<FrmUnitMaster>();
         }
 
         private void mnu_NativePort_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmNativePortMaster));
+            ShowSingleForm<FrmNativePortMaster>();
         }
 
         private void mnu_ForeignPort_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmForeignPortMaster));
+            ShowSingleForm<FrmForeignPortMaster>();
         }
 
         private void mnu_Transport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmTransportMaster));
+            ShowSingleForm<FrmTransportMaster>();
         }
 
         private void mnu_Supplier_Click_1(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmSupplierMaster));
+            ShowSingleForm<FrmSupplierMaster>();
         }
 
         private void mnu_BackupData_Click(object sender, EventArgs e)
@@ -339,17 +327,17 @@ namespace InventoryApplication
 
         private void mnu_PurchaseOrder_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmPurchaseOrderMaster));
+            ShowSingleForm<FrmPurchaseOrderMaster>();
         }
 
         private void mnu_CustomerType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCustomerTypeMaster));
+            ShowSingleForm<FrmCustomerTypeMaster>();
         }
 
         private void mnu_SupplierType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmSupplierTypeMaster));
+            ShowSingleForm<FrmSupplierTypeMaster>();
         }
 
         private void mnu_UpdateDB_Click(object sender, EventArgs e)
@@ -377,22 +365,22 @@ namespace InventoryApplication
 
         private void mnu_Order_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmOrderMaster));
+            ShowSingleForm<FrmOrderMaster>();
         }
 
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmExpenditureTypeMaster));
+            ShowSingleForm<FrmExpenditureTypeMaster>();
         }
 
         private void mnu_CustomerOtherReceivable_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCustomerOtherReceivableMaster));
+            ShowSingleForm<FrmCustomerOtherReceivableMaster>();
         }
 
         private void mnu_OrderPaymentReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmOrderPaymentReport));
+            ShowSingleForm<FrmOrderPaymentReport>();
         }
 
         private void mnu_Manual_Click(object sender, EventArgs e)
@@ -402,32 +390,32 @@ namespace InventoryApplication
 
         private void mnu_RelatedCompanyType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmRelatedCompanyTypeMaster));
+            ShowSingleForm<FrmRelatedCompanyTypeMaster>();
         }
 
         private void mnu_RelatedCompany_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmRelatedCompanyMaster));
+            ShowSingleForm<FrmRelatedCompanyMaster>();
         }
 
         private void mnu_WareHouse_Click_1(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmWareHouseMaster));
+            ShowSingleForm<FrmWareHouseMaster>();
         }
 
         private void mnu_CustomerReceivable_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmCustomerFinancialStateMaster));
+            ShowSingleForm<FrmCustomerFinancialStateMaster>();
         }
 
         private void mnu_OrderMonitor_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmOrderItemRecordMaster));
+            ShowSingleForm<FrmOrderItemRecordMaster>();
         }
 
         private void mnu_PurchaseMonitor_Click(object sender, EventArgs e)
         {
-            ShowSingleForm(typeof(FrmPurchaseItemRecordMaster));
+            ShowSingleForm<FrmPurchaseItemRecordMaster>();
         }
     }
 }

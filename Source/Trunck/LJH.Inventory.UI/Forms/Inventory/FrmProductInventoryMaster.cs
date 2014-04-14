@@ -25,19 +25,26 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData()
         {
-            List<object> items = GetSelectedNodeItems();
+            List<object> items = FilterData();
             ShowItemsOnGrid(items);
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
             List<ProductInventory> items = _ProductInventorys;
-            ProductCategory pc = null;
-            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as ProductCategory;
-            if (pc != null) items = _ProductInventorys.Where(it => it.Product.CategoryID == pc.ID).ToList();
-
+            List<ProductCategory> cs = null;
+            if (this.categoryTree.SelectedNode != null)
+            {
+                cs = this.categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+                if (cs != null && cs.Count > 0) items = _ProductInventorys.Where(it => cs.Exists(c => c.ID == it.Product.CategoryID)).ToList();
+            }
+            string warehouse = wareHouseComboBox1.SelectedWareHouseID;
+            if (items != null && items.Count > 0 && !string.IsNullOrEmpty(warehouse))
+            {
+                items = items.Where(it => it.WareHouseID == warehouse).ToList();
+            }
             return (from p in items
                     orderby p.Product.Name ascending
                     select (object)p).ToList();
@@ -49,6 +56,9 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             this.categoryTree.Init();
+            this.wareHouseComboBox1.Init();
+            this.wareHouseComboBox1.SelectedIndexChanged -= wareHouseComboBox1_SelectedIndexChanged;
+            this.wareHouseComboBox1.SelectedIndexChanged += wareHouseComboBox1_SelectedIndexChanged;
             Operator cur = Operator.Current;
         }
 
@@ -69,7 +79,7 @@ namespace LJH.Inventory.UI.Forms
             ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.Current.ConnStr);
             List<ProductInventory> items = bll.GetItems(null).QueryObjects;
             _ProductInventorys = bll.GetItems(SearchCondition).QueryObjects;
-            List<object> records = GetSelectedNodeItems();
+            List<object> records = FilterData();
             return records;
         }
 
@@ -93,6 +103,12 @@ namespace LJH.Inventory.UI.Forms
                 _ProductInventorys.Add(pi);
             }
         }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
+        }
         #endregion
 
         #region 事件处理函数
@@ -115,11 +131,21 @@ namespace LJH.Inventory.UI.Forms
                 }
             }
         }
-        #endregion
 
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData();
         }
+
+        private void wareHouseComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+        #endregion
     }
 }

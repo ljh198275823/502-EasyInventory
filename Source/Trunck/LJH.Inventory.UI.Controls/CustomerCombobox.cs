@@ -108,6 +108,27 @@ namespace LJH.Inventory.UI.Controls
                 }
             }
         }
+        /// <summary>
+        /// 获取所有某个节点下的所有公司信息，包括此节点下所有后代公司节点的公司信息
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public List<CompanyInfo> GetCompanyofNode(TreeNode node)
+        {
+            List<CompanyInfo> items = new List<CompanyInfo>();
+            if (node.Tag is CompanyInfo)
+            {
+                items.Add(node.Tag as CompanyInfo);
+            }
+            else if (node.Tag is CustomerType && node.Nodes.Count > 0)
+            {
+                foreach (TreeNode child in node.Nodes)
+                {
+                    items.AddRange(GetCompanyofNode(child));
+                }
+            }
+            return items;
+        }
         #endregion
     }
 }
