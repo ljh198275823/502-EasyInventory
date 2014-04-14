@@ -211,7 +211,6 @@
       <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Transport" Member="Transport"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Order_OrderItem" Member="Items"  ThisKey="ID" OtherKey="OrderID"/>
@@ -258,13 +257,11 @@
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
       <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax"  DbType="bit not null" UpdateCheck="Never"/>
-      <Column Name="CurrencyType" Member="CurrencyType"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Buyer" Member="Buyer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-      <Association Name="FK_PurchaseRecord_Supplier" Member="Supplier"  ThisKey="SupplierID" OtherKey="ID"/>
       <Association Name="FK_PurchaseSheet_PurchaseSheetItem" Member="Items"  ThisKey="ID" OtherKey="PurchaseID"/>
     </Type>
   </Table>

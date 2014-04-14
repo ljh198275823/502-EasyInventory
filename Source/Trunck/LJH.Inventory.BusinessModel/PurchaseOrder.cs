@@ -31,10 +31,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public CompanyInfo Supplier { get; set; }
         /// <summary>
-        /// 获取或设置币别
-        /// </summary>
-        public string CurrencyType { get; set; }
-        /// <summary>
         /// 获取或设置是否含税
         /// </summary>
         public bool WithTax { get; set; }

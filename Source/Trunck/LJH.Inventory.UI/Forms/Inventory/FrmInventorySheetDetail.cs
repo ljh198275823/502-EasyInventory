@@ -508,7 +508,7 @@ namespace LJH.Inventory.UI.Forms
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
-                con.HasOnway = false;
+                con.HasOnway = true;
                 FrmPurchaseRecordSelection frm = new FrmPurchaseRecordSelection();
                 frm.ForSelect = true;
                 frm.SearchCondition = con;

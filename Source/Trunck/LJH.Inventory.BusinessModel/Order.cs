@@ -35,10 +35,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public bool WithTax { get; set; }
         /// <summary>
-        /// 获取或设置运输方式
-        /// </summary>
-        public string Transport { get; set; }
-        /// <summary>
         /// 获取或设置业务人员
         /// </summary>
         public string SalesPerson { get; set; }

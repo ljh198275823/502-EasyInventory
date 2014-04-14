@@ -61,7 +61,6 @@
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeliveryState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
@@ -274,7 +273,6 @@
             this.colWithTax,
             this.colAmount,
             this.colState,
-            this.colDeliveryState,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -328,11 +326,11 @@
             this.colWithTax.HeaderText = "含税";
             this.colWithTax.Name = "colWithTax";
             this.colWithTax.ReadOnly = true;
-            this.colWithTax.Visible = false;
+            this.colWithTax.Width = 40;
             // 
             // colAmount
             // 
-            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.Format = "C2";
             dataGridViewCellStyle3.NullValue = null;
             this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAmount.HeaderText = "货款总额";
@@ -345,13 +343,6 @@
             this.colState.HeaderText = "状态";
             this.colState.Name = "colState";
             this.colState.ReadOnly = true;
-            // 
-            // colDeliveryState
-            // 
-            this.colDeliveryState.HeaderText = "出货情况";
-            this.colDeliveryState.Name = "colDeliveryState";
-            this.colDeliveryState.ReadOnly = true;
-            this.colDeliveryState.Visible = false;
             // 
             // colMemo
             // 
@@ -419,7 +410,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

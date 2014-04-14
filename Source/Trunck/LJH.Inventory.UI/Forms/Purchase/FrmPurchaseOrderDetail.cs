@@ -98,6 +98,12 @@ namespace LJH.Inventory.UI.Forms
                 txtBuyer.Focus();
                 return false;
             }
+            if (!rdWithTax.Checked && !rdWithoutTax.Checked)
+            {
+                MessageBox.Show("没有选择订单的含税情况");
+                rdWithTax.Focus();
+                return false;
+            }
             if (ItemsGrid.Rows.Count == 0)
             {
                 MessageBox.Show("采购没有填写订货项");
@@ -120,7 +126,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
-            this.dtDeliveryDate.Value = DateTime.Today.AddDays(1);
+            this.dtDemandDate.Value = DateTime.Today.AddDays(1);
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -143,9 +149,10 @@ namespace LJH.Inventory.UI.Forms
                 this.txtSupplier.Text = item.Supplier.Name;
                 this.txtSupplier.Tag = item.Supplier;
                 this.dtOrderDate.Value = item.OrderDate;
-                this.txtCurrencyType.Text = item.CurrencyType;
                 this.txtBuyer.Text = item.Buyer;
-                this.dtDeliveryDate.Value = item.DemandDate;
+                this.rdWithTax.Checked = item.WithTax;
+                this.rdWithoutTax.Checked = !item.WithTax;
+                this.dtDemandDate.Value = item.DemandDate;
                 ShowDeliveryItemsOnGrid(item.Items);
                 List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
@@ -171,9 +178,9 @@ namespace LJH.Inventory.UI.Forms
             PurchaseSheet.OrderDate = this.dtOrderDate.Value;
             PurchaseSheet.SupplierID = (this.txtSupplier.Tag as CompanyInfo).ID;
             PurchaseSheet.Supplier = this.txtSupplier.Tag as CompanyInfo;
-            PurchaseSheet.CurrencyType = this.txtCurrencyType.Text;
             PurchaseSheet.Buyer = this.txtBuyer.Text;
-            PurchaseSheet.DemandDate = this.dtDeliveryDate.Value;
+            PurchaseSheet.DemandDate = this.dtDemandDate.Value;
+            PurchaseSheet.WithTax = rdWithTax.Checked;
             PurchaseSheet.Items = GetPurchaseSheetItemsFromGrid();
             PurchaseSheet.Items.ForEach(item => { item.DemandDate = PurchaseSheet.DemandDate; item.PurchaseID = PurchaseSheet.ID; });
             return PurchaseSheet;
@@ -460,7 +467,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void btn_AddOrderRecord_Click(object sender, EventArgs e)
         {
-            FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
+            LJH.Inventory.UI.Forms.Sale.FrmOrderItemRecordMaster frm = new Sale.FrmOrderItemRecordMaster();
             frm.ForSelect = true;
             OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
             con.States = new List<SheetState>();
@@ -497,17 +504,6 @@ namespace LJH.Inventory.UI.Forms
                 CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtSupplier.Text = item.Name;
                 txtSupplier.Tag = item;
-            }
-        }
-
-        private void lnkCurrencyType_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmCurrencyTypeMaster frm = new FrmCurrencyTypeMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                CurrencyType item = frm.SelectedItem as CurrencyType;
-                txtCurrencyType.Text = item.ID;
             }
         }
 

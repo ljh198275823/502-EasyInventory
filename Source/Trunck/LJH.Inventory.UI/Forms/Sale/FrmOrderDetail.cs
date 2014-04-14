@@ -42,7 +42,6 @@ namespace LJH.Inventory.UI.Forms
             row.Tag = item;
             row.Cells["colProductID"].Value = item.Product != null ? item.Product.ID : string.Empty;
             row.Cells["colProductName"].Value = item.Product != null ? item.Product.Name : string.Empty;
-            row.Cells["colForeignName"].Value = item.Product != null ? item.Product.ForeignName : string.Empty;
             row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
             row.Cells["colUnit"].Value = item.Unit;
             row.Cells["colPrice"].Value = item.Price.Trim();
@@ -149,7 +148,6 @@ namespace LJH.Inventory.UI.Forms
                 this.txtCustomer.Text = item.Customer.Name;
                 this.txtCustomer.Tag = item.Customer;
                 this.dtOrderDate.Value = item.OrderDate;
-                this.txtTransport.Text = item.Transport;
                 this.txtSalesPerson.Text = item.SalesPerson;
                 this.dtDemandDate.Value = item.DemandDate;
                 this.rdWithTax.Checked = item.WithTax;
@@ -180,7 +178,6 @@ namespace LJH.Inventory.UI.Forms
             order.OrderDate = this.dtOrderDate.Value;
             order.CustomerID = (this.txtCustomer.Tag as CompanyInfo).ID;
             order.Customer = this.txtCustomer.Tag as CompanyInfo;
-            order.Transport = this.txtTransport.Text;
             order.SalesPerson = this.txtSalesPerson.Text;
             order.DemandDate = this.dtDemandDate.Value;
             order.WithTax = rdWithTax.Checked;
@@ -492,17 +489,6 @@ namespace LJH.Inventory.UI.Forms
                 CompanyInfo item = frm.SelectedItem as CompanyInfo;
                 txtCustomer.Text = item.Name;
                 txtCustomer.Tag = item;
-            }
-        }
-
-        private void lnkTransport_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmTransportMaster frm = new FrmTransportMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Transport item = frm.SelectedItem as Transport;
-                txtTransport.Text = item.Name;
             }
         }
 

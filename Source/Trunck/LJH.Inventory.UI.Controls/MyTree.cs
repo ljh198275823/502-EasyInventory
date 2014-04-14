@@ -70,14 +70,14 @@ namespace LJH.Inventory.UI.Controls
         {
             if (!object.ReferenceEquals(this.SelectedNode, e.Node))
             {
-                //if (this.SelectedNode != null)
-                //{
-                //    this.SelectedNode.BackColor = Color.White;
-                //    this.SelectedNode.ForeColor = Color.Black;
-                //}
+                if (this.SelectedNode != null)
+                {
+                    this.SelectedNode.BackColor = Color.White;
+                    this.SelectedNode.ForeColor = Color.Black;
+                }
                 this.SelectedNode = e.Node;
-                //this.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
-                //this.SelectedNode.ForeColor = Color.White;
+                this.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
+                this.SelectedNode.ForeColor = Color.White;
             }
             base.OnNodeMouseClick(e);
         }

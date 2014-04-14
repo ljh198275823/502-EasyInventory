@@ -32,6 +32,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -47,6 +50,12 @@
             this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,12 +68,6 @@
             this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -252,6 +255,46 @@
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 98);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
             // colID
             // 
             this.colID.HeaderText = "订单编号";
@@ -298,6 +341,7 @@
             // 
             // colAmount
             // 
+            dataGridViewCellStyle3.Format = "C2";
             dataGridViewCellStyle3.NullValue = null;
             this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAmount.HeaderText = "货款金额";
@@ -308,6 +352,9 @@
             // 
             // colReceivable
             // 
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle4;
             this.colReceivable.HeaderText = "已发货金额";
             this.colReceivable.Name = "colReceivable";
             this.colReceivable.ReadOnly = true;
@@ -317,6 +364,9 @@
             // 
             // colHasPaid
             // 
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colHasPaid.DefaultCellStyle = dataGridViewCellStyle5;
             this.colHasPaid.HeaderText = "已收金额";
             this.colHasPaid.Name = "colHasPaid";
             this.colHasPaid.ReadOnly = true;
@@ -326,6 +376,9 @@
             // 
             // colNotPaid
             // 
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle6;
             this.colNotPaid.HeaderText = "未收款";
             this.colNotPaid.Name = "colNotPaid";
             this.colNotPaid.ReadOnly = true;
@@ -344,46 +397,6 @@
             this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 120);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Export.Text = "导出...";
             // 
             // FrmOrderMaster
             // 
@@ -430,6 +443,12 @@
         private Controls.CustomerTree customerTree1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
@@ -442,11 +461,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
     }
 }

@@ -105,7 +105,7 @@
             this.btn_AddItem,
             this.mnu_RemoveItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 70);
             // 
             // mnu_AddOrderItem
             // 
@@ -406,7 +406,7 @@
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(873, 308);
             this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "相关文档";
+            this.tabPage6.Text = "附件";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // gridAttachment
