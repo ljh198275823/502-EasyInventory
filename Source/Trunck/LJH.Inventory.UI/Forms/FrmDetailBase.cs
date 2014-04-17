@@ -42,7 +42,7 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 与附件操作相关的方法和事件处理程序
-        protected void ShowAttachmentHeaderOnRow(AttachmentHeader header, DataGridViewRow row)
+        protected virtual void ShowAttachmentHeaderOnRow(AttachmentHeader header, DataGridViewRow row)
         {
             row.Tag = header;
             row.Cells["colUploadDateTime"].Value = header.UploadDateTime;
@@ -50,7 +50,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colFileName"].Value = header.FileName;
         }
 
-        protected void ShowAttachmentHeaders(List<AttachmentHeader> items, DataGridView gridAttachment)
+        protected virtual void ShowAttachmentHeaders(List<AttachmentHeader> items, DataGridView gridAttachment)
         {
             gridAttachment.Rows.Clear();
             if (items != null && items.Count > 0)
@@ -59,6 +59,107 @@ namespace LJH.Inventory.UI.Forms
                 {
                     int row = gridAttachment.Rows.Add();
                     ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
+                }
+            }
+        }
+
+        protected virtual void PerformAddAttach(string docID, string docType, DataGridView gridAttachment)
+        {
+            OpenFileDialog dig = new OpenFileDialog();
+            if (dig.ShowDialog() == DialogResult.OK)
+            {
+                AttachmentHeader header = new AttachmentHeader();
+                header.ID = Guid.NewGuid();
+                header.DocumentID = docID;
+                header.DocumentType = docType;
+                header.Owner = Operator.Current.Name;
+                header.FileName = System.IO.Path.GetFileName(dig.FileName);
+                header.UploadDateTime = DateTime.Now;
+                CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Upload(header, dig.FileName);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    int row = gridAttachment.Rows.Add();
+                    ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
+        }
+
+        protected virtual void PerformDelAttach(DataGridView gridAttachment)
+        {
+            if (MessageBox.Show("确实要删除所选项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                List<DataGridViewRow> deletingRows = new List<DataGridViewRow>();
+                foreach (DataGridViewRow row in gridAttachment.SelectedRows)
+                {
+                    AttachmentHeader header = row.Tag as AttachmentHeader;
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Delete(header);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        deletingRows.Add(row);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+                if (deletingRows != null && deletingRows.Count > 0)
+                {
+                    foreach (DataGridViewRow row in deletingRows)
+                    {
+                        gridAttachment.Rows.Remove(row);
+                    }
+                }
+            }
+        }
+
+        protected virtual void PerformAttachSaveAs(DataGridView gridAttachment)
+        {
+            if (gridAttachment.SelectedRows.Count >= 1)
+            {
+                AttachmentHeader header = gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
+                SaveFileDialog dig = new SaveFileDialog();
+                dig.FileName = header.FileName;
+                dig.Filter = "所有文件(*.*)|*.*";
+                if (dig.ShowDialog() == DialogResult.OK)
+                {
+                    CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, dig.FileName);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
+        }
+
+        protected virtual void PerformAttachOpen(DataGridView gridAttachment)
+        {
+            if (gridAttachment.SelectedRows.Count >= 1)
+            {
+                AttachmentHeader header = gridAttachment.SelectedRows[0].Tag as AttachmentHeader;
+                string dir = LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder();
+                string path = System.IO.Path.Combine(dir, header.FileName);
+                CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Download(header, path);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(path);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
                 }
             }
         }

@@ -429,6 +429,7 @@
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridAttachment.Size = new System.Drawing.Size(873, 308);
             this.gridAttachment.TabIndex = 103;
+            this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
             // colUploadDateTime
             // 

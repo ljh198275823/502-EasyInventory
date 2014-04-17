@@ -59,11 +59,11 @@ namespace LJH.Inventory.BLL
                         fs.Position = 0;
                         fs.Read(bs, 0, (int)fs.Length);
                         IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                        ProviderFactory.Create<IAttachmentHeaderProvider>(_RepoUri).Insert(header, unitWork);
+                        ProviderFactory.Create<IAttachmentHeaderProvider>(_RepoUri).Insert(header, unitWork); //插入附件头
                         Attachment a = new Attachment();
                         a.ID = header.ID;
                         a.Value = bs;
-                        ProviderFactory.Create<IAttachmentProvider>(_RepoUri).Insert(a, unitWork);
+                        ProviderFactory.Create<IAttachmentProvider>(_RepoUri).Insert(a, unitWork); //插入附件内容
                         return unitWork.Commit();
                     }
                     else
