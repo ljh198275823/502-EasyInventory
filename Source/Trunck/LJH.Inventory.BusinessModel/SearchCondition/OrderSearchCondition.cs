@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class OrderSearchCondition:SearchCondition 
+    public class OrderSearchCondition : LJH.GeneralLibrary.DAL.SearchCondition
     {
         public DateTimeRange OrderDate { get; set; }
 

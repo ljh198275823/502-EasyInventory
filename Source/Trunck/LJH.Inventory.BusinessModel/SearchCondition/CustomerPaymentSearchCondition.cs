@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LJH.Inventory .BusinessModel ;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class CustomerPaymentSearchCondition:SearchCondition
+    public class CustomerPaymentSearchCondition : LJH.GeneralLibrary.DAL.SearchCondition
     {
         public string CustomerID { get; set; }
 

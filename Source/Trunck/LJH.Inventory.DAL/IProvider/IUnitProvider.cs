@@ -6,7 +6,7 @@ using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface IUnitProvider : IProvider<Unit, string>
+    public interface IUnitProvider : LJH.GeneralLibrary.DAL.IProvider<Unit, string>
     {
     }
 }

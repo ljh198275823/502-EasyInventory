@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface IAttachmentHeaderProvider : IProvider<LJH.Inventory.BusinessModel.AttachmentHeader, Guid>
+    public interface IAttachmentHeaderProvider : LJH.GeneralLibrary.DAL.IProvider<LJH.Inventory.BusinessModel.AttachmentHeader, Guid>
     {
     }
 }

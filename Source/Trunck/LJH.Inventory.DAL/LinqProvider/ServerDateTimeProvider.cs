@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {

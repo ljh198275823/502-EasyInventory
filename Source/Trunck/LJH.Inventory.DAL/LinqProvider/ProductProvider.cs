@@ -6,6 +6,7 @@ using System.Data.Linq;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
@@ -28,7 +29,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             return dc.GetTable<Product>().SingleOrDefault(item => item.ID == id);
         }
 
-        protected override List<Product> GetingItems(System.Data.Linq.DataContext dc, BusinessModel.SearchCondition.SearchCondition search)
+        protected override List<Product> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             DataLoadOptions opt = new DataLoadOptions();
             opt.LoadWith<Product>(p => p.Category);

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class SupplierReceivableSearchCondition : SearchCondition
+    public class SupplierReceivableSearchCondition : LJH.GeneralLibrary.DAL.SearchCondition
     {
         public string SupplierID { get; set; }
 

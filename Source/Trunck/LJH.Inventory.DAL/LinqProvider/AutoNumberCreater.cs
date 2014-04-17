@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data.Linq;
 using System.Text;
 using LJH.Inventory .DAL .IProvider ;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
@@ -28,13 +29,13 @@ namespace LJH.Inventory.DAL.LinqProvider
         /// <param name="numberFormat">自动生成的编号中自增序列号的长度</param>
         /// <param name="type">自动编号的类型</param>
         /// <returns></returns>
-        public string CreateNumber(string prefix, string dateFormat,int serialLen, string type)
+        public string CreateNumber(string prefix, string dateFormat, int serialLen, string type)
         {
             try
             {
                 string head = string.Format("{0}{1}", prefix, DateTime.Now.ToString(dateFormat));
-                DataContext dc = DataContextFactory.CreateDataContext(ConnectStr);
-                AutoCreateNumber num = dc.GetTable<AutoCreateNumber>().SingleOrDefault(item => item.Prefix ==head && item.NumberType == type);
+                DataContext dc = DataContextFactory.CreateDataContext(ConnectStr, "LJH.Inventory.DAL.LinqProvider.Inventory.xml");
+                AutoCreateNumber num = dc.GetTable<AutoCreateNumber>().SingleOrDefault(item => item.Prefix == head && item.NumberType == type);
                 if (num == null)
                 {
                     num = new AutoCreateNumber()
@@ -70,7 +71,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             try
             {
-                DataContext dc = DataContextFactory.CreateDataContext(ConnectStr);
+                DataContext dc = DataContextFactory.CreateDataContext(ConnectStr, "LJH.Inventory.DAL.LinqProvider.Inventory.xml");
                 AutoCreateNumber num = dc.GetTable<AutoCreateNumber>().SingleOrDefault(item => item.Prefix == prefix && item.NumberType == type);
                 if (num == null)
                 {

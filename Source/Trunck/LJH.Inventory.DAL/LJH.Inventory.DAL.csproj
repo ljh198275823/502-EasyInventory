@@ -91,7 +91,6 @@
     <Compile Include="IProvider\IDocumentOperationProvider.cs" />
     <Compile Include="IProvider\IExpenditureTypeProvider.cs" />
     <Compile Include="IProvider\IInventoryRecordProvider.cs" />
-    <Compile Include="IProvider\IItemKeyProvider.cs" />
     <Compile Include="IProvider\IExpenditureRecordProvider.cs" />
     <Compile Include="IProvider\IInventorySheetProvider.cs" />
     <Compile Include="IProvider\IOrderItemRecordProvider.cs" />
@@ -106,7 +105,6 @@
     <Compile Include="IProvider\IDeliverySheetProvider.cs" />
     <Compile Include="IProvider\IOperatorProvider.cs" />
     <Compile Include="IProvider\IProductCategoryProvider.cs" />
-    <Compile Include="IProvider\IProvider.cs" />
     <Compile Include="IProvider\IPurchaseOrderProvider.cs" />
     <Compile Include="IProvider\IPurchaseItemRecordProvider.cs" />
     <Compile Include="IProvider\IRelatedCompanyTypeProvider.cs" />
@@ -118,7 +116,6 @@
     <Compile Include="IProvider\ISysParameterProvider.cs" />
     <Compile Include="IProvider\ITransportProvider.cs" />
     <Compile Include="IProvider\IUnitProvider.cs" />
-    <Compile Include="IProvider\IUnitWork.cs" />
     <Compile Include="IProvider\IWareHouseProvider.cs" />
     <Compile Include="LinqProvider\AttachmentHeaderProvider.cs" />
     <Compile Include="LinqProvider\AttachmentProvider.cs" />
@@ -148,16 +145,13 @@
     <Compile Include="LinqProvider\SupplierTypeProvider.cs" />
     <Compile Include="LinqProvider\TransportProvider.cs" />
     <Compile Include="LinqProvider\AutoNumberCreater.cs" />
-    <Compile Include="LinqProvider\DataContextFactory.cs" />
     <Compile Include="LinqProvider\DeliverySheetProvider.cs" />
     <Compile Include="LinqProvider\ProductInventoryProvider.cs" />
     <Compile Include="LinqProvider\InventorySheetProvider.cs" />
-    <Compile Include="LinqProvider\ItemKeyProvider.cs" />
     <Compile Include="LinqProvider\OrderProvider.cs" />
     <Compile Include="LinqProvider\ProductProvider.cs" />
     <Compile Include="LinqProvider\OperatorProvider.cs" />
     <Compile Include="LinqProvider\ProductCategoryProvider.cs" />
-    <Compile Include="LinqProvider\ProviderBase.cs" />
     <Compile Include="LinqProvider\RoleProvider.cs" />
     <Compile Include="LinqProvider\DeliveryRecordProvider.cs" />
     <Compile Include="LinqProvider\SysparameterProvider.cs" />

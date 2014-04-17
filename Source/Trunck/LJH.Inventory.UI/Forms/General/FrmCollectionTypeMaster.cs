@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.UI.Forms
 { 

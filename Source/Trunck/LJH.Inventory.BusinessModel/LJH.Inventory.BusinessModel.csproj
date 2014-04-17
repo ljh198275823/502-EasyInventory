@@ -129,7 +129,6 @@
     <Compile Include="SearchCondition\SupplierReceivableSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierSearchCondition.cs" />
     <Compile Include="SheetState.cs" />
-    <Compile Include="CommandResult.cs" />
     <Compile Include="DateTimeRange.cs" />
     <Compile Include="ProductInventory.cs" />
     <Compile Include="InventorySheet.cs" />
@@ -150,10 +149,6 @@
     <Compile Include="DeliveryRecord.cs" />
     <Compile Include="SearchCondition\SheetSearchCondition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryResult.cs" />
-    <Compile Include="QueryResultList.cs" />
-    <Compile Include="ResultCode.cs" />
-    <Compile Include="SearchCondition\SearchCondition.cs" />
     <Compile Include="DeliveryItem.cs" />
     <Compile Include="DeliverySheet.cs" />
     <Compile Include="SupplierReceivable.cs" />

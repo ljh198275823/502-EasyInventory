@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface ITransportProvider : IProvider<LJH.Inventory.BusinessModel.Transport, string>
+    public interface ITransportProvider : LJH.GeneralLibrary.DAL.IProvider<LJH.Inventory.BusinessModel.Transport, string>
     {
     }
 }

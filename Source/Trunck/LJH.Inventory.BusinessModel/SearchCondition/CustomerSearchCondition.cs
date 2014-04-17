@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class CustomerSearchCondition : SearchCondition
+    public class CustomerSearchCondition : LJH.GeneralLibrary.DAL.SearchCondition
     {
         #region 公共属性
         /// <summary>

@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using LJH.Inventory .DAL .IProvider ;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
@@ -25,7 +26,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             return c;
         }
 
-        protected override List<CompanyInfo> GetingItems(System.Data.Linq.DataContext dc, BusinessModel.SearchCondition.SearchCondition search)
+        protected override List<CompanyInfo> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             IQueryable<CompanyInfo> ret = dc.GetTable<CompanyInfo>();
             if (search is CustomerSearchCondition)

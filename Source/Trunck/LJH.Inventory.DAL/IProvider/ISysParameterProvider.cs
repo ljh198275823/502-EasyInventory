@@ -6,7 +6,7 @@ using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface ISysParameterProvider:IProvider <SysparameterInfo ,string>
+    public interface ISysParameterProvider:LJH.GeneralLibrary.DAL.IProvider <SysparameterInfo ,string>
     {
     }
 }

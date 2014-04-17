@@ -5,6 +5,7 @@ using System.Data.Linq;
 using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
@@ -24,7 +25,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             return dc.GetTable<Operator>().SingleOrDefault(o => o.ID == id);
         }
 
-        protected override List<Operator> GetingItems(DataContext dc, BusinessModel.SearchCondition.SearchCondition search)
+        protected override List<Operator> GetingItems(DataContext dc, SearchCondition search)
         {
             DataLoadOptions opt = new DataLoadOptions();
             opt.LoadWith<Operator>(o => o.Role);

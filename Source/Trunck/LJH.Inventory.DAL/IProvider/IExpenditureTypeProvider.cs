@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface IExpenditureTypeProvider : IProvider<LJH.Inventory.BusinessModel.ExpenditureType, string>
+    public interface IExpenditureTypeProvider : LJH.GeneralLibrary.DAL.IProvider<LJH.Inventory.BusinessModel.ExpenditureType, string>
     {
     }
 }

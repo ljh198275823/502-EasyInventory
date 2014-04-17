@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 { 
-    public interface IDocumentOperationProvider:IProvider<LJH.Inventory .BusinessModel .DocumentOperation ,int>
+    public interface IDocumentOperationProvider:LJH.GeneralLibrary.DAL.IProvider<LJH.Inventory .BusinessModel .DocumentOperation ,int>
     {
     }
 }

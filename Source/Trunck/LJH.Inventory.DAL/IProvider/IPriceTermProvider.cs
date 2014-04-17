@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface IPriceTermProvider : IProvider<LJH.Inventory.BusinessModel.PriceTerm, string>
+    public interface IPriceTermProvider : LJH.GeneralLibrary.DAL.IProvider<LJH.Inventory.BusinessModel.PriceTerm, string>
     {
     }
 }

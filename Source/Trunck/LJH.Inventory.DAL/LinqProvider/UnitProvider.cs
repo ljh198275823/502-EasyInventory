@@ -7,7 +7,7 @@ using LJH.Inventory.DAL.IProvider;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class UnitProvider : ProviderBase<Unit, string>, IUnitProvider
+    public class UnitProvider : LJH.GeneralLibrary.DAL.ProviderBase<Unit, string>, IUnitProvider
     {
         #region 构造函数
         public UnitProvider(string connStr)

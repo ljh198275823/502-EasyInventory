@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface IStorageSheetProvider : IProvider<LJH.Inventory.BusinessModel.DeliverySheet, Guid>
+    public interface IStorageSheetProvider : LJH.GeneralLibrary.DAL.IProvider<LJH.Inventory.BusinessModel.DeliverySheet, Guid>
     {
     }
 }

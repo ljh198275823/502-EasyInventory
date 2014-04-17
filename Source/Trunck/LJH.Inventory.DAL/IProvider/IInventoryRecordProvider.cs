@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface IInventoryRecordProvider : IProvider<LJH.Inventory.BusinessModel.InventoryRecord, Guid>
+    public interface IInventoryRecordProvider : LJH.GeneralLibrary.DAL.IProvider<LJH.Inventory.BusinessModel.InventoryRecord, Guid>
     {
     }
 }

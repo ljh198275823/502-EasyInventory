@@ -1121,6 +1121,21 @@
             获取或设置结束时间
             </summary>
         </member>
+        <member name="T:LJH.GeneralLibrary.DAL.CommandResult">
+            <summary>
+            表示数据操作返回值
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.CommandResult.Result">
+             <summary>
+            获取或设置执行结果
+             </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.CommandResult.Message">
+            <summary>
+            获取或设置执行结果的文字描述
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.WinformControl.MyToolStrip">
             <summary>
             这个类继承自ToolStrip,用于解决窗体中使用UCFormView显示窗体时，工具栏需要按两次才有反应的问题。
@@ -1382,6 +1397,131 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
+        <member name="T:LJH.GeneralLibrary.DAL.ProviderBase`2">
+            <summary>
+            表示所有数据提供者的基类
+            </summary>
+            <typeparam name="TInfo"></typeparam>
+            <typeparam name="TID"></typeparam>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IProvider`2.GetByID(`1)">
+            <summary>
+            通过ID获取对像
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IProvider`2.GetItems(LJH.GeneralLibrary.DAL.SearchCondition)">
+            <summary>
+            通过查询条件获取对象
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IProvider`2.Insert(`0)">
+            <summary>
+            插入对象
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IProvider`2.Update(`0,`0)">
+            <summary>
+            更新对象
+            </summary>
+            <param name="newVal"></param>
+            <param name="originalVal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IProvider`2.Delete(`0)">
+            <summary>
+            删除对象
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IProvider`2.Insert(`0,LJH.GeneralLibrary.DAL.IUnitWork)">
+            <summary>
+            插入对象,这个操作属于一个单元操作的一部分
+            </summary>
+            <param name="t"></param>
+            <param name="unitWork"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IProvider`2.Update(`0,`0,LJH.GeneralLibrary.DAL.IUnitWork)">
+            <summary>
+            更新对象,这个操作属于一个单元操作的一部分
+            </summary>
+            <param name="t"></param>
+            <param name="unitWork"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IProvider`2.Delete(`0,LJH.GeneralLibrary.DAL.IUnitWork)">
+            <summary>
+            删除对象,这个操作属于一个单元操作的一部分
+            </summary>
+            <param name="t"></param>
+            <param name="unitWork"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.ProviderBase`2.GetByID(`1)">
+            <summary>
+            通过ID获取实体对象
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.ProviderBase`2.GetItems(LJH.GeneralLibrary.DAL.SearchCondition)">
+            <summary>
+            通过查询条件获取实体对象
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.ProviderBase`2.Insert(`0)">
+            <summary>
+            插入实体对象
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.ProviderBase`2.Update(`0,`0)">
+            <summary>
+            更新实体对象
+            </summary>
+            <param name="newVal"></param>
+            <param name="original"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.ProviderBase`2.Delete(`0)">
+            <summary>
+            删除实体对象
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.ProviderBase`2.Insert(`0,LJH.GeneralLibrary.DAL.IUnitWork)">
+            <summary>
+            通过工作单元插入实体对象，实际插入发生在工作单元提交时
+            </summary>
+            <param name="info"></param>
+            <param name="unitWork"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.ProviderBase`2.Update(`0,`0,LJH.GeneralLibrary.DAL.IUnitWork)">
+            <summary>
+            通过工作单元更新实体对象，实际更新发生在工作单元提交时
+            </summary>
+            <param name="newVal"></param>
+            <param name="originalVal"></param>
+            <param name="unitWork"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.ProviderBase`2.Delete(`0,LJH.GeneralLibrary.DAL.IUnitWork)">
+            <summary>
+            通过工作单元删除实体对象，实际删除发生在工作单元提交时
+            </summary>
+            <param name="info"></param>
+            <param name="unitWork"></param>
+        </member>
         <member name="F:LJH.GeneralLibrary.CardReader.MUR200CardReader.KEY_TYPE_A">
             <summary>
             密钥A
@@ -1592,6 +1732,21 @@
             右对齐
             </summary>
         </member>
+        <member name="T:LJH.GeneralLibrary.DAL.ResultCode">
+            <summary>
+            查询或执行操作的结果枚举
+            </summary>
+        </member>
+        <member name="F:LJH.GeneralLibrary.DAL.ResultCode.Successful">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:LJH.GeneralLibrary.DAL.ResultCode.Fail">
+             <summary>
+            失败
+             </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.StringHelper">
             <summary>
             里面有一些关于字符串的帮助函数
@@ -1714,6 +1869,34 @@
             <summary>
             获取停车时长
             </summary>
+        </member>
+        <member name="T:LJH.GeneralLibrary.DAL.QueryResultList`1">
+            <summary>
+            查询数据返回结果集合
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.QueryResultList`1.Result">
+             <summary>
+            获取或设置执行结果
+             </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.QueryResultList`1.Message">
+            <summary>
+            获取或设置执行结果的文字描述
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.QueryResultList`1.QueryObjects">
+            <summary>
+            获取或设置返回的查询对象
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.DataContextFactory.CreateDataContext(System.String,System.String)">
+            <summary>
+            创建数据上下文
+            </summary>
+            <param name="connStr"></param>
+            <returns></returns>
         </member>
         <member name="T:LJH.GeneralLibrary.CommandLineArgs">
             <summary>
@@ -2388,6 +2571,22 @@
             <param name="bytes2"></param>
             <returns></returns>
         </member>
+        <member name="T:LJH.GeneralLibrary.DAL.IUnitWork">
+            <summary>
+            表示一个单元操作,用于把多个操作组成一个事务操作.
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DAL.IUnitWork.Commit">
+            <summary>
+            提交操作
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.IUnitWork.DataContext">
+            <summary>
+            获取数据上下文
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:LJH.GeneralLibrary.CommPort">
             <summary>
             串口操作
@@ -2684,6 +2883,11 @@
             操作员
             </summary>
         </member>
+        <member name="T:LJH.GeneralLibrary.DAL.SearchCondition">
+            <summary>
+            表示数据库查询条件
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.CardReader.ReadCardResult">
             <summary>
             读卡结果类
@@ -2815,6 +3019,26 @@
             </summary>
             <param name="d"></param>
             <returns></returns>
+        </member>
+        <member name="T:LJH.GeneralLibrary.DAL.QueryResult`1">
+            <summary>
+            查询数据返回单个对象时的查询结果
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.QueryResult`1.Result">
+             <summary>
+            获取或设置执行结果
+             </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.QueryResult`1.Message">
+            <summary>
+            获取或设置执行结果的文字描述
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DAL.QueryResult`1.QueryObject">
+            <summary>
+            获取或设置返回的查询对象
+            </summary>
         </member>
         <member name="M:LJH.GeneralLibrary.CardReader.ZSTReader.Init">
             <summary>
@@ -3079,6 +3303,21 @@
               重写当前线程的 CurrentUICulture 属性。
             </summary>
         </member>
+        <member name="P:LJH.GeneralLibrary.Properties.Resources.arrow_up">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Properties.Resources.down">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Properties.Resources.up">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.WinformControl.DataGridViewExporter">
             <summary>
             表示一个网格导出类，用于把网格数据导出到文件
@@ -3247,6 +3486,215 @@
             </summary>
             <param name="bytes">字节数组的长度小于或等于2,否则产生InvalidCastException异常</param>
             <returns></returns>
+        </member>
+        <member name="F:LJH.GeneralLibrary.UI.FrmDetailBase.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmDetailBase.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmDetailBase.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.FrmDetailBase.IsAdding">
+            <summary>
+            获取或设置是否是用于增加
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.FrmDetailBase.IsForView">
+            <summary>
+            获取或设置是否是用于查看项目的明细
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.FrmDetailBase.UpdatingItem">
+            <summary>
+            获取或设置要查看项的明细
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.ShowItemsOnGrid(System.Collections.Generic.List{System.Object})">
+            <summary>
+            显示数据
+            </summary>
+            <param name="items">要显示的数据</param>
+            <param name="reload">是否重新加载数据，如果为真，则表示先会清空之前的数据，否则保留旧有数据</param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.ShowRowBackColor">
+            <summary>
+            显示数据行的颜色
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.ReFreshData">
+            <summary>
+            刷新数据
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.ExportData">
+            <summary>
+            导出数据
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.SelectColumns">
+            <summary>
+            选择数据网格中要显示的列
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.Filter(System.String)">
+            <summary>
+            根据关键词过滤数据
+            </summary>
+            <param name="keyword"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.PerformDeleteData">
+            <summary>
+            进行删除数据操作
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.PerformAddData">
+            <summary>
+            进行增加数据操作
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.PerformUpdateData">
+            <summary>
+            进行修改数据操作
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.GotoPreviousRow(LJH.GeneralLibrary.UI.RowChangeEventArgs@)">
+            <summary>
+            移动至上一行
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.GotoNextRow(LJH.GeneralLibrary.UI.RowChangeEventArgs@)">
+            <summary>
+            移动到下一行
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.GotoLastRow(LJH.GeneralLibrary.UI.RowChangeEventArgs@)">
+            <summary>
+            移动到最后一行
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.GotoFirstRow(LJH.GeneralLibrary.UI.RowChangeEventArgs@)">
+            <summary>
+            移动到第一行
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.Init">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.GetDetailForm">
+            <summary>
+            获取明细窗体
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.GetDataSource">
+            <summary>
+            获取数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.ShowItemInGridViewRow(System.Windows.Forms.DataGridViewRow,System.Object)">
+            <summary>
+            在网格行中显示单个数据
+            </summary>
+            <param name="row"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.DeletingItem(System.Object)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="F:LJH.GeneralLibrary.UI.FrmMasterBase.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmMasterBase.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.FrmMasterBase.ForSelect">
+            <summary>
+            获取或设置窗体是否是用来做选择用的,(此属性需要在窗体显示之前指定)
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.FrmMasterBase.SelectedItem">
+            <summary>
+            获取或设置窗体在选择模式下的选择项
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.FrmMasterBase.SearchCondition">
+            <summary>
+            获取或设置查询条件
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.RowChangeEventArgs.IsFirstRow">
+            <summary>
+            获取或设置是否是第一项
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.RowChangeEventArgs.IsLastRow">
+            <summary>
+            获取或设置是否是最后一项
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.RowChangeEventArgs.UpdatingItem">
+            <summary>
+            获取或设置当前行所指向的对象
+            </summary>
+        </member>
+        <member name="F:LJH.GeneralLibrary.UI.FrmColumnSelection.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmColumnSelection.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.UI.FrmColumnSelection.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.FrmColumnSelection.Selectee">
+            <summary>
+            获取或设置被选择列的网格控件
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.UI.FrmColumnSelection.SelectedColumns">
+            <summary>
+            获取或设置选取的所有列
+            </summary>
         </member>
     </members>
 </doc>

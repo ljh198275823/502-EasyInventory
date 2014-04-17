@@ -5,6 +5,7 @@ using System.Text;
 using System.Reflection;
 using LJH.Inventory .DAL .IProvider ;
 using LJH.Inventory .DAL .LinqProvider ;
+using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
@@ -48,16 +49,6 @@ namespace LJH.Inventory.BLL
             {
             }
             throw new Exception(string.Format("没有找到 {0} ,请确保 {1} 已经存在!", typeof(T).FullName, typeof(T).FullName));
-        }
-
-        /// <summary>
-        /// 创建一个工作单元
-        /// </summary>
-        /// <param name="repUri"></param>
-        /// <returns></returns>
-        public static IUnitWork CreateUnitWork(string repUri)
-        {
-            return new UnitWork(repUri);
         }
     }
 }

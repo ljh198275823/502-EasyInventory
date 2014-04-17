@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.DAL.IProvider
 {
-    public interface ICurrencyTypeProvider : IProvider<LJH.Inventory.BusinessModel.CurrencyType, string>
+    public interface ICurrencyTypeProvider : LJH.GeneralLibrary.DAL.IProvider<LJH.Inventory.BusinessModel.CurrencyType, string>
     {
     }
 }
