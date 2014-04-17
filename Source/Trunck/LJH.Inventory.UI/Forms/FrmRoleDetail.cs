@@ -12,7 +12,7 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmRoleDetail :FrmDetailBase  
+    public partial class FrmRoleDetail :LJH.GeneralLibrary.UI.FrmDetailBase 
     {
         private RoleBLL bll = new RoleBLL(AppSettings.Current.ConnStr);
 

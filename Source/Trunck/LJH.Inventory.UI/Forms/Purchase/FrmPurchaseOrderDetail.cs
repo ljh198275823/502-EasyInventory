@@ -10,10 +10,11 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmPurchaseOrderDetail : FrmDetailBase
+    public partial class FrmPurchaseOrderDetail : FrmInventoryDetailBase 
     {
         public FrmPurchaseOrderDetail()
         {

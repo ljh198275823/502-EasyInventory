@@ -101,7 +101,6 @@
     <Compile Include="ProductCategoryBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseOrderBLL.cs" />
-    <Compile Include="ProviderFactory.cs" />
     <Compile Include="RelatedCompanyTypeBLL.cs" />
     <Compile Include="RoleBLL.cs" />
     <Compile Include="SupplierTypeBLL.cs" />

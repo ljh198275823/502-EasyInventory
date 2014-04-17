@@ -12,8 +12,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class ProductCategoryProvider : ProviderBase<ProductCategory, string>, IProductCategoryProvider
     {
         #region 构造函数
-        public ProductCategoryProvider(string conStr)
-            : base(conStr)
+        public ProductCategoryProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

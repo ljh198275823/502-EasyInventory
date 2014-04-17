@@ -12,8 +12,8 @@ namespace LJH.Inventory.DAL.LinqProvider
 {
     public class ProductInventoryItemProvider : ProviderBase<ProductInventoryItem, Guid >, IProductInventoryItemProvider
     {
-        public ProductInventoryItemProvider(string connStr)
-            : base(connStr)
+        public ProductInventoryItemProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
 

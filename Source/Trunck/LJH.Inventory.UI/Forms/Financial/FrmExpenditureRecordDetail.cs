@@ -9,10 +9,11 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmExpenditureRecordDetail : FrmDetailBase
+    public partial class FrmExpenditureRecordDetail : FrmInventoryDetailBase 
     {
         public FrmExpenditureRecordDetail()
         {

@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class RelatedCompanyTypeProvider : ProviderBase<RelatedCompanyType, string>, IRelatedCompanyTypeProvider
     {
         #region 构造函数
-        public RelatedCompanyTypeProvider(string connStr)
-            : base(connStr)
+        public RelatedCompanyTypeProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

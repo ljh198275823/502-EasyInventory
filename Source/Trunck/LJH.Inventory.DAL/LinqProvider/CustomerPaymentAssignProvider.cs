@@ -12,8 +12,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class CustomerPaymentAssignProvider : ProviderBase<CustomerPaymentAssign, Guid>, ICustomerPaymentAssignProvider
     {
         #region 构造函数
-        public CustomerPaymentAssignProvider(string connStr)
-            : base(connStr)
+        public CustomerPaymentAssignProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

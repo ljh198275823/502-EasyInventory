@@ -11,7 +11,7 @@ namespace LJH.Inventory.DAL.LinqProvider
 {
     public class RoleProvider:ProviderBase <Role,string> ,IRoleProvider
     {
-        public RoleProvider(string connStr):base(connStr)
+        public RoleProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms):base(connStr,ms)
         {
         }
 

@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using System.IO;
+using System.Data.Linq.Mapping;
+using System.Data.Linq;
 using LJH.Inventory .DAL .IProvider ;
 using LJH.Inventory .DAL .LinqProvider ;
 using LJH.GeneralLibrary.DAL;
 
-namespace LJH.Inventory.BLL
+namespace LJH.Inventory.DAL.IProvider
 {
     /// <summary>
     /// 表示数据库提供者的工厂类
     /// </summary>
-    internal class ProviderFactory
+    public class ProviderFactory
     {
         /// <summary>
         /// 创建一个数据提供者实例
@@ -25,8 +28,7 @@ namespace LJH.Inventory.BLL
             T instance = null;
             try
             {
-
-                Assembly asm = Assembly.Load("LJH.Inventory.DAL");
+                Assembly asm = Assembly.GetExecutingAssembly(); // Assembly.Load("LJH.Inventory.DAL");
                 if (asm != null)
                 {
                     foreach (Type t in asm.GetTypes())
@@ -37,7 +39,9 @@ namespace LJH.Inventory.BLL
                             {
                                 if (inter == typeof(T))
                                 {
-                                    instance = Activator.CreateInstance(t, connStr) as T;
+                                    Stream stream = asm.GetManifestResourceStream("LJH.Inventory.DAL.LinqProvider.Inventory.xml");
+                                    MappingSource mappingSource = XmlMappingSource.FromStream(stream);
+                                    instance = Activator.CreateInstance(t, connStr, mappingSource) as T;
                                     return instance;
                                 }
                             }

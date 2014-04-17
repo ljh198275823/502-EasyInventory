@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class SupplierTypeProvider : ProviderBase<SupplierType, string>, ISupplierTypeProvider
     {
         #region 构造函数
-        public SupplierTypeProvider(string connStr)
-            : base(connStr)
+        public SupplierTypeProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

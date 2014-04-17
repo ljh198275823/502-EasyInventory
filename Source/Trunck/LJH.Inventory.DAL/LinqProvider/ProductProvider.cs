@@ -13,8 +13,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class ProductProvider : ProviderBase<Product, string>, IProductProvider
     {
         #region 构造函数
-        public ProductProvider(string conStr)
-            : base(conStr)
+        public ProductProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
 
         }

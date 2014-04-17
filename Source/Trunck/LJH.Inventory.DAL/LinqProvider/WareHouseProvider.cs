@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class WareHouseProvider : ProviderBase<WareHouse, string>, IWareHouseProvider
     {
         #region 构造函数
-        public WareHouseProvider(string connStr)
-            : base(connStr)
+        public WareHouseProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

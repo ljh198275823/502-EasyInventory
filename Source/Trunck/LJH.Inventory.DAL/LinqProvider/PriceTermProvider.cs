@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class PriceTermProvider:ProviderBase <PriceTerm ,string >,IPriceTermProvider
     {
         #region 构造函数
-        public PriceTermProvider(string connStr)
-            : base(connStr)
+        public PriceTermProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         { }
         #endregion
 

@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
 {
     public class OperatorProvider : ProviderBase<Operator, string>, IOperatorProvider
     {
-        public OperatorProvider(string connStr)
-            : base(connStr)
+        public OperatorProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
 

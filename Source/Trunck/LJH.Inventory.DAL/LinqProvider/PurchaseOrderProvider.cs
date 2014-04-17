@@ -13,8 +13,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class PurchaseOrderProvider : ProviderBase<PurchaseOrder, string>, IPurchaseOrderProvider
     {
         #region 构造函数
-        public PurchaseOrderProvider(string connStr)
-            : base(connStr)
+        public PurchaseOrderProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr, ms)
         {
         }
         #endregion
@@ -28,10 +28,10 @@ namespace LJH.Inventory.DAL.LinqProvider
             PurchaseOrder sheet = dc.GetTable<PurchaseOrder>().SingleOrDefault(item => item.ID == id);
             if (sheet != null)
             {
-                sheet.Supplier = (new CustomerProvider(ConnectStr)).GetByID(sheet.SupplierID).QueryObject;
+                sheet.Supplier = (new CustomerProvider(ConnectStr, _MappingResource)).GetByID(sheet.SupplierID).QueryObject;
                 if (sheet.Items != null && sheet.Items.Count > 0)
                 {
-                    List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
+                    List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
                     foreach (PurchaseItem item in sheet.Items)
                     {
                         item.Product = ps.SingleOrDefault(p => p.ID == item.ProductID);
@@ -73,8 +73,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             List<PurchaseOrder> sheets = ret.ToList();
             if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
             {
-                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
-                List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
+                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
+                List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
                 foreach (PurchaseOrder sheet in sheets)
                 {
                     sheet.Supplier = cs.SingleOrDefault(item => item.ID == sheet.SupplierID);
@@ -102,7 +102,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
                 else
                 {
-                    item.PurchaseID  = newVal.ID;
+                    item.PurchaseID = newVal.ID;
                     dc.GetTable<PurchaseItem>().InsertOnSubmit(item);
                 }
             }

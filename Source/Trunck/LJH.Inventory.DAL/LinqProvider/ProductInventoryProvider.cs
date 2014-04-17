@@ -9,19 +9,19 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class ProductInventoryProvider : ProviderBase<ProductInventory, Guid >, IProductInventoryProvider
+    public class ProductInventoryProvider : ProviderBase<ProductInventory, Guid>, IProductInventoryProvider
     {
         #region 构造函数
-        public ProductInventoryProvider(string connStr)
-            : base(connStr)
+        public ProductInventoryProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr, ms)
         {
         }
         #endregion
 
         #region 重写基类方法
-        protected override ProductInventory GetingItemByID(Guid  id, System.Data.Linq.DataContext dc)
+        protected override ProductInventory GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
-            ProductInventory pi = dc.GetTable<ProductInventory>().SingleOrDefault(item => item.ID ==id);
+            ProductInventory pi = dc.GetTable<ProductInventory>().SingleOrDefault(item => item.ID == id);
             if (pi != null)
             {
                 pi.Product = dc.GetTable<Product>().SingleOrDefault(p => p.ID == pi.ProductID);
@@ -42,8 +42,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             List<ProductInventory> items = ret.ToList();
             if (items != null && items.Count > 0)
             {
-                List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
-                List<WareHouse> ws = (new WareHouseProvider(ConnectStr)).GetItems(null).QueryObjects;
+                List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
+                List<WareHouse> ws = (new WareHouseProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
                 foreach (ProductInventory pi in items)
                 {
                     pi.Product = ps.SingleOrDefault(p => p.ID == pi.ProductID);

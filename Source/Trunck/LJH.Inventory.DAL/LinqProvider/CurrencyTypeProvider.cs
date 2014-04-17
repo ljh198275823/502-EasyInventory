@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class CurrencyTypeProvider : ProviderBase<CurrencyType, string>, ICurrencyTypeProvider
     {
         #region 构造函数
-        public CurrencyTypeProvider(string connStr)
-            : base(connStr)
+        public CurrencyTypeProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

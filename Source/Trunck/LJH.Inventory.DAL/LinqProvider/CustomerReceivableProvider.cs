@@ -12,8 +12,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class CustomerReceivableProvider : ProviderBase<CustomerReceivable, Guid>, ICustomerReceivableProvider
     {
         #region 构造函数
-        public CustomerReceivableProvider(string connStr)
-            : base(connStr)
+        public CustomerReceivableProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

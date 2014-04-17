@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class CustomerFinancialStateProvider : ProviderBase<CustomerFinancialState, string>, ICustomerFinancialStateProvider
     {
         #region 构造函数
-        public CustomerFinancialStateProvider(string connStr)
-            : base(connStr)
+        public CustomerFinancialStateProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

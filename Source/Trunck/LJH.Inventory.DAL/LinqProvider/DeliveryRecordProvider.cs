@@ -13,8 +13,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class DeliveryRecordProvider : ProviderBase<DeliveryRecord, Guid>, IDeliveryRecordProvider
     {
         #region 构造函数
-        public DeliveryRecordProvider(string conStr)
-            : base(conStr)
+        public DeliveryRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

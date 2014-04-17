@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class PortProvider:ProviderBase <Port,string >,IPortProvider 
     {
         #region 构造函数
-        public PortProvider(string connStr)
-            : base(connStr)
+        public PortProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

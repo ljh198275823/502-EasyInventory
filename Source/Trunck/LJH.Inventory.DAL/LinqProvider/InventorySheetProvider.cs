@@ -13,8 +13,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class InventorySheetProvider : ProviderBase<InventorySheet, string>, IInventorySheetProvider
     {
         #region 构造函数
-        public InventorySheetProvider(string connStr)
-            : base(connStr)
+        public InventorySheetProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr, ms)
         {
         }
         #endregion
@@ -28,11 +28,11 @@ namespace LJH.Inventory.DAL.LinqProvider
             InventorySheet sheet = dc.GetTable<InventorySheet>().SingleOrDefault(item => item.ID == id);
             if (sheet != null)
             {
-                sheet.WareHouse = (new WareHouseProvider(ConnectStr)).GetByID(sheet.WareHouseID).QueryObject;
-                sheet.Supplier = (new CustomerProvider(ConnectStr)).GetByID(sheet.SupplierID).QueryObject;
+                sheet.WareHouse = (new WareHouseProvider(ConnectStr, _MappingResource)).GetByID(sheet.WareHouseID).QueryObject;
+                sheet.Supplier = (new CustomerProvider(ConnectStr, _MappingResource)).GetByID(sheet.SupplierID).QueryObject;
                 if (sheet.Items != null && sheet.Items.Count > 0)
                 {
-                    List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
+                    List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
                     foreach (InventoryItem item in sheet.Items)
                     {
                         item.Product = ps.SingleOrDefault(p => p.ID == item.ProductID);
@@ -64,9 +64,9 @@ namespace LJH.Inventory.DAL.LinqProvider
             List<InventorySheet> sheets = ret.ToList();
             if (sheets != null && sheets.Count > 0)
             {
-                List<WareHouse> ws = (new WareHouseProvider(ConnectStr)).GetItems(null).QueryObjects;
-                List<CompanyInfo> ss = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
-                List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
+                List<WareHouse> ws = (new WareHouseProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
+                List<CompanyInfo> ss = (new CustomerProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
+                List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
                 foreach (InventorySheet sheet in sheets)
                 {
                     sheet.Supplier = ss.SingleOrDefault(item => item.ID == sheet.SupplierID);

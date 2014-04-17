@@ -12,8 +12,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class DocumentOperationProvider : ProviderBase<DocumentOperation, int>, IDocumentOperationProvider
     {
         #region 构造函数
-        public DocumentOperationProvider(string connStr)
-            : base(connStr)
+        public DocumentOperationProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

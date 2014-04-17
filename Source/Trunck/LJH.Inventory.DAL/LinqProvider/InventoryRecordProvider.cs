@@ -13,8 +13,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class InventoryRecordProvider : ProviderBase<InventoryRecord, Guid>, IInventoryRecordProvider
     {
         #region 构造函数
-        public InventoryRecordProvider(string conStr)
-            : base(conStr)
+        public InventoryRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

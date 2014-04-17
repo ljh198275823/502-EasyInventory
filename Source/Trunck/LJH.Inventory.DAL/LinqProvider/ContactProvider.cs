@@ -13,8 +13,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class ContactProvider : ProviderBase<Contact, int>, IContactProvider
     {
         #region 构造函数
-        public ContactProvider(string conStr)
-            : base(conStr)
+        public ContactProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

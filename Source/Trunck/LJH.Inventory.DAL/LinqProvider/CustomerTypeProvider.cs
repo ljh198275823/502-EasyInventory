@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class CustomerTypeProvider : ProviderBase<CustomerType, string>, ICustomerTypeProvider
     {
         #region 构造函数
-        public CustomerTypeProvider(string connStr)
-            : base(connStr)
+        public CustomerTypeProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

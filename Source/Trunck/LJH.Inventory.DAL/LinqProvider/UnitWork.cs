@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Linq;
+using System.Data.Linq.Mapping;
 using LJH.GeneralLibrary.ExceptionHandling;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
@@ -16,9 +17,9 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class UnitWork : LJH.GeneralLibrary.DAL.IUnitWork
     {
         #region 构造函数
-        public UnitWork(string connStr)
+        public UnitWork(string connStr, MappingSource ms)
         {
-            _Inventory = DataContextFactory.CreateDataContext(connStr, "LJH.Inventory.DAL.LinqProvider.Inventory.xml");
+            _Inventory = DataContextFactory.CreateDataContext(connStr, ms);
         }
         #endregion
 

@@ -12,8 +12,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class ExpenditureRecordProvider:ProviderBase <ExpenditureRecord ,string > ,IExpenditureRecordProvider
     {
         #region 构造函数
-        public ExpenditureRecordProvider(string connStr)
-            : base(connStr)
+        public ExpenditureRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

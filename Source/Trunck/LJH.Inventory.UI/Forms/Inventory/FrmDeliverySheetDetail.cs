@@ -12,10 +12,11 @@ using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.ExcelExporter;
 using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmDeliverySheetDetail : FrmDetailBase
+    public partial class FrmDeliverySheetDetail :FrmInventoryDetailBase 
     {
         #region 构造函数
         public FrmDeliverySheetDetail()

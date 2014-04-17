@@ -12,8 +12,8 @@ namespace LJH.Inventory.DAL.LinqProvider
 {
     public class SysparameterProvider : ProviderBase<SysparameterInfo,string>, ISysParameterProvider
     {
-        public SysparameterProvider(string connStr)
-            : base(connStr)
+        public SysparameterProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
 

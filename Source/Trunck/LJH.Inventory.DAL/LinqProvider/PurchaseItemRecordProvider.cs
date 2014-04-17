@@ -13,8 +13,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class PurchaseItemRecordProvider : ProviderBase<PurchaseItemRecord, Guid>, IPurchaseItemRecordProvider
     {
         #region 构造函数
-        public PurchaseItemRecordProvider(string conStr)
-            : base(conStr)
+        public PurchaseItemRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

@@ -8,10 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
+using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.View
 {
-    public partial class FrmDeliveryRecordView : LJH.Inventory.UI.Forms.FrmMasterBase
+    public partial class FrmDeliveryRecordView : FrmMasterBase
     {
         public FrmDeliveryRecordView()
         {
@@ -24,7 +26,7 @@ namespace LJH.Inventory.UI.View
             base.Init();
         }
 
-        protected override LJH.Inventory.UI.Forms.FrmDetailBase GetDetailForm()
+        protected override FrmDetailBase GetDetailForm()
         {
             return null;
         }

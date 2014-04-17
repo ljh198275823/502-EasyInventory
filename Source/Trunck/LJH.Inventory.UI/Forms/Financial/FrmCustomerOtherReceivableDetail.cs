@@ -13,7 +13,7 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerOtherReceivableDetail : FrmDetailBase
+    public partial class FrmCustomerOtherReceivableDetail : FrmInventoryDetailBase 
     {
         public FrmCustomerOtherReceivableDetail()
         {

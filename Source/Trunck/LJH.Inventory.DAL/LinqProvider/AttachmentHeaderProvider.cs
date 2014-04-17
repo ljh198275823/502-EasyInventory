@@ -12,8 +12,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class AttachmentHeaderProvider : ProviderBase<AttachmentHeader, Guid>, IAttachmentHeaderProvider
     {
         #region 构造函数
-        public AttachmentHeaderProvider(string connStr)
-            : base(connStr)
+        public AttachmentHeaderProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

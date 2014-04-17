@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class  CollectionTypeProvider:ProviderBase <CollectionType ,string >,ICollectionTypeProvider
     {
         #region 构造函数
-        public CollectionTypeProvider(string connStr)
-            : base(connStr)
+        public CollectionTypeProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

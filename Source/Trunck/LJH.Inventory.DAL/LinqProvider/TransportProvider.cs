@@ -11,8 +11,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class TransportProvider : ProviderBase<Transport, string>, ITransportProvider
     {
         #region 构造函数
-        public TransportProvider(string connStr)
-            : base(connStr)
+        public TransportProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion

@@ -13,8 +13,8 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class OrderProvider : ProviderBase<Order, string>, IOrderProvider
     {
         #region 构造函数
-        public OrderProvider(string connStr)
-            : base(connStr)
+        public OrderProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion
@@ -28,10 +28,10 @@ namespace LJH.Inventory.DAL.LinqProvider
             Order sheet = dc.GetTable<Order>().SingleOrDefault(item => item.ID == id);
             if (sheet != null)
             {
-                sheet.Customer = (new CustomerProvider(ConnectStr)).GetByID(sheet.CustomerID).QueryObject;
+                sheet.Customer = (new CustomerProvider(ConnectStr,_MappingResource)).GetByID(sheet.CustomerID).QueryObject;
                 if (sheet.Items != null && sheet.Items.Count > 0)
                 {
-                    List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
+                    List<Product> ps = (new ProductProvider(ConnectStr,_MappingResource)).GetItems(null).QueryObjects;
                     foreach (OrderItem item in sheet.Items)
                     {
                         item.Product = ps.SingleOrDefault(p => p.ID == item.ProductID);
@@ -73,8 +73,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             List<Order> sheets = ret.ToList();
             if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
             {
-                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr)).GetItems(null).QueryObjects;
-                List<Product> ps = (new ProductProvider(ConnectStr)).GetItems(null).QueryObjects;
+                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr,_MappingResource )).GetItems(null).QueryObjects;
+                List<Product> ps = (new ProductProvider(ConnectStr,_MappingResource )).GetItems(null).QueryObjects;
                 foreach (Order sheet in sheets)
                 {
                     sheet.Customer = cs.SingleOrDefault(item => item.ID == sheet.CustomerID);

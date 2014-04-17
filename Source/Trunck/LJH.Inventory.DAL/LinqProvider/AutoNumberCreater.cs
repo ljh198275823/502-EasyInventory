@@ -11,14 +11,16 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class AutoNumberCreater : IAutoNumberCreater
     {
         #region 构造函数
-        public AutoNumberCreater(string connStr)
+        public AutoNumberCreater(string connStr, System.Data.Linq.Mapping.MappingSource ms)
         {
             ConnectStr = connStr;
+            _MappingSource = ms;
         }
         #endregion
 
         #region 私有变量
         private string ConnectStr;
+        private System.Data.Linq.Mapping.MappingSource _MappingSource = null;
         #endregion
 
         #region 实现 IAutoNumberCreater 接口
@@ -34,7 +36,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             try
             {
                 string head = string.Format("{0}{1}", prefix, DateTime.Now.ToString(dateFormat));
-                DataContext dc = DataContextFactory.CreateDataContext(ConnectStr, "LJH.Inventory.DAL.LinqProvider.Inventory.xml");
+                DataContext dc = DataContextFactory.CreateDataContext(ConnectStr, _MappingSource);
                 AutoCreateNumber num = dc.GetTable<AutoCreateNumber>().SingleOrDefault(item => item.Prefix == head && item.NumberType == type);
                 if (num == null)
                 {
@@ -71,7 +73,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             try
             {
-                DataContext dc = DataContextFactory.CreateDataContext(ConnectStr, "LJH.Inventory.DAL.LinqProvider.Inventory.xml");
+                DataContext dc = DataContextFactory.CreateDataContext(ConnectStr, _MappingSource);
                 AutoCreateNumber num = dc.GetTable<AutoCreateNumber>().SingleOrDefault(item => item.Prefix == prefix && item.NumberType == type);
                 if (num == null)
                 {

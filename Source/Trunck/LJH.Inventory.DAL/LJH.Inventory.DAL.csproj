@@ -117,6 +117,7 @@
     <Compile Include="IProvider\ITransportProvider.cs" />
     <Compile Include="IProvider\IUnitProvider.cs" />
     <Compile Include="IProvider\IWareHouseProvider.cs" />
+    <Compile Include="IProvider\ProviderFactory.cs" />
     <Compile Include="LinqProvider\AttachmentHeaderProvider.cs" />
     <Compile Include="LinqProvider\AttachmentProvider.cs" />
     <Compile Include="LinqProvider\CollectionTypeProvider.cs" />

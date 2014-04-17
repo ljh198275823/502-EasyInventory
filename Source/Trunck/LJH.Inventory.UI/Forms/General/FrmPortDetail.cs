@@ -12,7 +12,7 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmPortDetail : FrmDetailBase 
+    public partial class FrmPortDetail :LJH.GeneralLibrary.UI.FrmDetailBase
     {
         public FrmPortDetail()
         {
