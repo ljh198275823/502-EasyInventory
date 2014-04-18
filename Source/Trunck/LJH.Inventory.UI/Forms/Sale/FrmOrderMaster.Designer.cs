@@ -322,7 +322,7 @@
             // 
             dataGridViewCellStyle2.Format = "D";
             this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colDeliveryDate.HeaderText = "出货日期";
+            this.colDeliveryDate.HeaderText = "交货日期";
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.ReadOnly = true;
             // 

@@ -13,7 +13,7 @@ using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmExpenditureRecordDetail : FrmInventoryDetailBase 
+    public partial class FrmExpenditureRecordDetail : FrmSheetDetailBase 
     {
         public FrmExpenditureRecordDetail()
         {

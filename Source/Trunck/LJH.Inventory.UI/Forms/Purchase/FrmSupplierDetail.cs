@@ -14,7 +14,7 @@ using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmSupplierDetail : FrmDetailBase
+    public partial class FrmSupplierDetail : FrmSheetDetailBase
     {
         public FrmSupplierDetail()
         {
@@ -89,6 +89,8 @@ namespace LJH.Inventory.UI.Forms
                     ShowItemOnRow(GridView.Rows[row], contact);
                 }
             }
+            List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(c.ID, c.DocumentType).QueryObjects;
+            ShowAttachmentHeaders(headers, this.gridAttachment);
         }
 
         protected override object GetItemFromInput()
@@ -242,6 +244,34 @@ namespace LJH.Inventory.UI.Forms
             {
                 MessageBox.Show(ex.Message, "Error");
             }
+        }
+        #endregion
+
+        #region 与附件操作相关的方法和事件处理程序
+        private void mnu_AttachmentAdd_Click(object sender, EventArgs e)
+        {
+            CompanyInfo item = UpdatingItem as CompanyInfo;
+            if (item != null) PerformAddAttach(item.ID, item.DocumentType, gridAttachment);
+        }
+
+        private void mnu_AttachmentDelete_Click(object sender, EventArgs e)
+        {
+            PerformDelAttach(gridAttachment);
+        }
+
+        private void mnu_AttachmentSaveAs_Click(object sender, EventArgs e)
+        {
+            PerformAttachSaveAs(gridAttachment);
+        }
+
+        private void mnu_AttachmentOpen_Click(object sender, EventArgs e)
+        {
+            PerformAttachOpen(gridAttachment);
+        }
+
+        private void gridAttachment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            PerformAttachOpen(gridAttachment);
         }
         #endregion
 

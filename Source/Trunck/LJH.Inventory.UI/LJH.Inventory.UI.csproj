@@ -425,11 +425,11 @@
     <Compile Include="Forms\FrmSystemOptions.Designer.cs">
       <DependentUpon>FrmSystemOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmDetailBase.cs">
+    <Compile Include="Forms\FrmSheetDetailBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmDetailBase.designer.cs">
-      <DependentUpon>FrmDetailBase.cs</DependentUpon>
+    <Compile Include="Forms\FrmSheetDetailBase.designer.cs">
+      <DependentUpon>FrmSheetDetailBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmOperatorDetail.cs">
       <SubType>Form</SubType>
@@ -744,8 +744,8 @@
     <EmbeddedResource Include="Forms\FrmSystemOptions.resx">
       <DependentUpon>FrmSystemOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmDetailBase.resx">
-      <DependentUpon>FrmDetailBase.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmSheetDetailBase.resx">
+      <DependentUpon>FrmSheetDetailBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOperatorDetail.resx">
       <DependentUpon>FrmOperatorDetail.cs</DependentUpon>

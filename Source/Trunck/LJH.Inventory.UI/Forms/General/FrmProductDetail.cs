@@ -13,7 +13,7 @@ using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmProductDetail : FrmDetailBase
+    public partial class FrmProductDetail : FrmSheetDetailBase 
     {
         public FrmProductDetail()
         {
@@ -93,6 +93,8 @@ namespace LJH.Inventory.UI.Forms
             }
             txtInternalID.Text = p.InternalID;
             txtMemo.Text = p.Memo;
+            List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(p.ID, p.DocumentType).QueryObjects;
+            ShowAttachmentHeaders(headers, this.gridAttachment);
         }
 
         protected override Object GetItemFromInput()
@@ -143,14 +145,14 @@ namespace LJH.Inventory.UI.Forms
         {
             Product p = addingItem as Product;
             CommandResult ret = null;
-            if (txtWarehouse.SelectedWareHouse != null && txtCount.DecimalValue > 0)
-            {
-                ret = (new ProductBLL(AppSettings.Current.ConnStr)).AddProduct(p, txtWarehouse.SelectedWareHouse.ID, txtCount.DecimalValue);
-            }
-            else
-            {
-                ret = (new ProductBLL(AppSettings.Current.ConnStr)).AddProduct(p);
-            }
+            //if (txtWarehouse.SelectedWareHouse != null && txtCount.DecimalValue > 0)
+            //{
+            //    ret = (new ProductBLL(AppSettings.Current.ConnStr)).AddProduct(p, txtWarehouse.SelectedWareHouse.ID, txtCount.DecimalValue);
+            //}
+            //else
+            //{
+            ret = (new ProductBLL(AppSettings.Current.ConnStr)).AddProduct(p);
+            //}
             return ret;
         }
 
@@ -159,6 +161,34 @@ namespace LJH.Inventory.UI.Forms
             Product p = updatingItem as Product;
             CommandResult ret = (new ProductBLL(AppSettings.Current.ConnStr)).UpdateProduct(p);
             return ret;
+        }
+        #endregion
+
+        #region 与附件操作相关的方法和事件处理程序
+        private void mnu_AttachmentAdd_Click(object sender, EventArgs e)
+        {
+            Product item = UpdatingItem as Product;
+            if (item != null) PerformAddAttach(item.ID, item.DocumentType, gridAttachment);
+        }
+
+        private void mnu_AttachmentDelete_Click(object sender, EventArgs e)
+        {
+            PerformDelAttach(gridAttachment);
+        }
+
+        private void mnu_AttachmentSaveAs_Click(object sender, EventArgs e)
+        {
+            PerformAttachSaveAs(gridAttachment);
+        }
+
+        private void mnu_AttachmentOpen_Click(object sender, EventArgs e)
+        {
+            PerformAttachOpen(gridAttachment);
+        }
+
+        private void gridAttachment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            PerformAttachOpen(gridAttachment);
         }
         #endregion
 

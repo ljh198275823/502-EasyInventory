@@ -16,6 +16,10 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
+        #region 只读变量
+        public readonly string DocumentType = "Product";
+        #endregion
+
         #region 公共属性
         /// <summary>
         /// 获取或设置商品编号

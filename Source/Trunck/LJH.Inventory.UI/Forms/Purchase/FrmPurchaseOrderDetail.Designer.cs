@@ -413,7 +413,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 87;
-            this.label4.Text = "发货日期:";
+            this.label4.Text = "交货日期:";
             // 
             // tabPage5
             // 

@@ -14,7 +14,7 @@ using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmPurchaseOrderDetail : FrmInventoryDetailBase 
+    public partial class FrmPurchaseOrderDetail : FrmSheetDetailBase 
     {
         public FrmPurchaseOrderDetail()
         {

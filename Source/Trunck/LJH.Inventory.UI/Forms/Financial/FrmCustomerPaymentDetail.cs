@@ -14,7 +14,7 @@ using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerPaymentDetail : FrmInventoryDetailBase 
+    public partial class FrmCustomerPaymentDetail : FrmSheetDetailBase 
     {
         public FrmCustomerPaymentDetail()
         {

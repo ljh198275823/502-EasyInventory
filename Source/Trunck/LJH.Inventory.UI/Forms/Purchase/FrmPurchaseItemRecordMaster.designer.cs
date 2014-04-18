@@ -334,7 +334,7 @@
             // 
             // colDemandDate
             // 
-            this.colDemandDate.HeaderText = "到货日期";
+            this.colDemandDate.HeaderText = "交货日期";
             this.colDemandDate.Name = "colDemandDate";
             this.colDemandDate.ReadOnly = true;
             // 

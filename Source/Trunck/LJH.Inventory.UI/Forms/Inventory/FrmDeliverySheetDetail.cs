@@ -16,7 +16,7 @@ using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmDeliverySheetDetail :FrmInventoryDetailBase 
+    public partial class FrmDeliverySheetDetail :FrmSheetDetailBase 
     {
         #region 构造函数
         public FrmDeliverySheetDetail()

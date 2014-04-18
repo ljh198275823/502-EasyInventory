@@ -12,9 +12,9 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmInventoryDetailBase : LJH.GeneralLibrary.UI.FrmDetailBase
+    public partial class FrmSheetDetailBase : LJH.GeneralLibrary.UI.FrmDetailBase
     {
-        public FrmInventoryDetailBase()
+        public FrmSheetDetailBase()
             : base()
         {
             InitializeComponent();
