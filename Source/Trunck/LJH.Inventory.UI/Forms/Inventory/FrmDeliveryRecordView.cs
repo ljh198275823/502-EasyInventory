@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.UI;
-using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.View
 {

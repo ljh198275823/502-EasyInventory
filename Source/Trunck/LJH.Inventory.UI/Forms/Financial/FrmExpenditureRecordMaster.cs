@@ -24,69 +24,41 @@ namespace LJH.Inventory.UI.Forms.Financial
 
 
         #region 私有变量
-        private List<ExpenditureRecord> _Customers = null;
+        private List<ExpenditureRecord> _Sheets = null;
         #endregion
 
         #region 私有方法
-        private void InitCategoryTree()
+        private void FreshData()
         {
-            this.categoryTree.Nodes.Clear();
-            this.categoryTree.Nodes.Add("所有支出类别");
-
-            List<ExpenditureType> items = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                AddDesendNodes(items, this.categoryTree.Nodes[0]);
-            }
+            List<object> objs = FilterData();
+            ShowItemsOnGrid(objs);
         }
 
-        private void AddDesendNodes(List<ExpenditureType> items, TreeNode parent)
+        private List<object> FilterData()
         {
-            List<ExpenditureType> pcs = null;
-            if (parent.Tag == null)
+            List<ExpenditureRecord> items = _Sheets;
+            if (this.categoryTree.SelectedNode != null)
             {
-                pcs = items.Where(it => string.IsNullOrEmpty(it.Parent)).ToList();
-            }
-            else
-            {
-                pcs = items.Where(it => it.Parent == (parent.Tag as ExpenditureType).ID).ToList();
-            }
-            if (pcs != null && pcs.Count > 0)
-            {
-                foreach (ExpenditureType pc in pcs)
+                List<ExpenditureType> pcs = null;
+                pcs = this.categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+                if (pcs != null && pcs.Count > 0)
                 {
-                    TreeNode node = AddNode(pc, parent);
-                    AddDesendNodes(items, node);
+                    items = items.Where(it => pcs.Exists(c => c.ID == it.Category)).ToList();
+                }
+                else
+                {
+                    items = null;
                 }
             }
-            parent.ImageIndex = 0;
-            parent.SelectedImageIndex = 0;
-            parent.ExpandAll();
-        }
-
-        private void SelectNode(TreeNode node)
-        {
-            List<object> items = GetSelectedNodeItems();
-            ShowItemsOnGrid(items);
-        }
-
-        private List<object> GetSelectedNodeItems()
-        {
-            List<ExpenditureRecord> items = _Customers;
-            ExpenditureType pc = null;
-            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as ExpenditureType;
-            if (pc != null) items = _Customers.Where(it => it.Category == pc.ID).ToList();
-
-            return (from p in items
-                    orderby p.ExpenditureDate descending
-                    select (object)p).ToList();
-        }
-
-        private TreeNode AddNode(ExpenditureType pc, TreeNode parent)
-        {
-            TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
-            node.Tag = pc;
-            return node;
+            if (items != null && items.Count > 0)
+            {
+                items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
+                                        (item.State == SheetState.Approved && chkApproved.Checked) ||
+                                        (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+            }
+            List<object> objs = null;
+            if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
+            return objs;
         }
         #endregion
 
@@ -94,9 +66,9 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override void Init()
         {
             base.Init();
-            InitCategoryTree();
+            this.categoryTree.Init();
             Operator opt = Operator.Current;
-            menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditExpenditureRecord);
+            //menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditExpenditureRecord);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -108,8 +80,8 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
-            _Customers = (new ExpenditureRecordBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            return GetSelectedNodeItems();
+            _Sheets = (new ExpenditureRecordBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            return FilterData();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -124,22 +96,24 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colRequest"].Value = info.Request;
             row.Cells["colPayee"].Value = info.Payee;
             row.Cells["colOrderID"].Value = info.OrderID;
+            row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
-            if (_Customers == null || !_Customers.Exists(it => it.ID == info.ID))
+            if (_Sheets == null || !_Sheets.Exists(it => it.ID == info.ID))
             {
-                if (_Customers == null) _Customers = new List<ExpenditureRecord>();
-                _Customers.Add(info);
+                if (_Sheets == null) _Sheets = new List<ExpenditureRecord>();
+                _Sheets.Add(info);
             }
         }
 
-        protected override bool DeletingItem(object item)
+        protected override void ShowItemsOnGrid(List<object> items)
         {
-            return false;
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
         }
         #endregion
 
@@ -163,18 +137,28 @@ namespace LJH.Inventory.UI.Forms.Financial
                 }
             }
         }
+
+        private void category_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            FreshData();
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void chkState_CheckedChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
         #endregion
 
         #region 类别树右键菜单
-        private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            SelectNode(e.Node);
-        }
-
         private void mnu_FreshTree_Click(object sender, EventArgs e)
         {
-            InitCategoryTree();
-            SelectNode(categoryTree.Nodes[0]);
+            categoryTree.Init();
+            FreshData();
         }
 
         private void mnu_AddCategory_Click(object sender, EventArgs e)
@@ -186,7 +170,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
                 ExpenditureType item = args.AddedItem as ExpenditureType;
-                AddNode(item, categoryTree.SelectedNode);
+                categoryTree.AddExpenditureTypeNode(item, categoryTree.SelectedNode);
             };
             frm.ShowDialog();
         }

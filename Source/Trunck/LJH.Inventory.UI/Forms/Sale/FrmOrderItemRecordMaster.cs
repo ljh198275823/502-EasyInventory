@@ -86,7 +86,6 @@ namespace LJH.Inventory.UI.Forms.Sale
             if (SearchCondition == null)
             {
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
-                con.States = new List<SheetState>();
                 con.OrderDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //获取最后一年产生的订单
                 SearchCondition = con;
             }

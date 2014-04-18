@@ -84,7 +84,7 @@ namespace LJH.Inventory.UI.Controls
         #region 公共方法
         /// <summary>
         /// 初始化
-        /// </summary>
+        /// </summary
         public void Init()
         {
             this.ImageList = imageList1;

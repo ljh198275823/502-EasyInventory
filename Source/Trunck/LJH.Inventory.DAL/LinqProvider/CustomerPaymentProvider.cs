@@ -25,8 +25,12 @@ namespace LJH.Inventory.DAL.LinqProvider
             DataLoadOptions opts = new DataLoadOptions();
             opts.LoadWith<CustomerPayment>(item => item.Assigns);
             dc.LoadOptions = opts;
-            var ret = dc.GetTable<CustomerPayment>().SingleOrDefault(item => item.ID == id);
-            return ret;
+            CustomerPayment sheet = dc.GetTable<CustomerPayment>().SingleOrDefault(item => item.ID == id);
+            if (sheet != null)
+            {
+                sheet.Customer = (new CustomerProvider(ConnectStr, _MappingResource)).GetByID(sheet.CustomerID).QueryObject;
+            }
+            return sheet;
         }
 
         protected override List<CustomerPayment> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
@@ -52,7 +56,16 @@ namespace LJH.Inventory.DAL.LinqProvider
                     }
                 }
             }
-            return ret.ToList();
+            List<CustomerPayment> sheets = ret.ToList();
+            if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
+            {
+                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
+                foreach (CustomerPayment sheet in sheets)
+                {
+                    sheet.Customer = cs.SingleOrDefault(item => item.ID == sheet.CustomerID);
+                }
+            }
+            return sheets;
         }
 
         //protected override void UpdatingItem(CustomerPayment newVal, CustomerPayment original, DataContext dc)
