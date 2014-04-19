@@ -73,6 +73,7 @@ namespace LJH.Inventory.UI.Forms
         protected override FrmDetailBase GetDetailForm()
         {
             FrmPurchaseOrderDetail frm = new FrmPurchaseOrderDetail();
+            if (supplierTree1.SelectedNode != null) frm.Supplier = supplierTree1.SelectedNode.Tag as CompanyInfo;
             return frm;
         }
 
@@ -87,7 +88,8 @@ namespace LJH.Inventory.UI.Forms
             PurchaseOrder info = item as PurchaseOrder;
             row.Cells["colID"].Value = info.ID;
             row.Cells["colOrderDate"].Value = info.OrderDate;
-            row.Cells["colSupplier"].Value = info.Supplier.Name;
+            CompanyInfo supplier = supplierTree1.GetSupplier(info.SupplierID);
+            row.Cells["colSupplier"].Value = supplier != null ? supplier.Name : string.Empty;
             row.Cells["colBuyer"].Value = info.Buyer;
             row.Cells["colDeliveryDate"].Value = info.DemandDate;
             row.Cells["colWithTax"].Value = info.WithTax;

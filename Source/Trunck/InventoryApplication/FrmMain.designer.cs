@@ -156,28 +156,28 @@
             // mnu_Product
             // 
             this.mnu_Product.Name = "mnu_Product";
-            this.mnu_Product.Size = new System.Drawing.Size(124, 22);
-            this.mnu_Product.Text = "商品资料";
+            this.mnu_Product.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Product.Text = "产品资料";
             this.mnu_Product.Click += new System.EventHandler(this.mnu_Product_Click);
             // 
             // mnu_WareHouse
             // 
             this.mnu_WareHouse.Name = "mnu_WareHouse";
-            this.mnu_WareHouse.Size = new System.Drawing.Size(124, 22);
+            this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
             this.mnu_WareHouse.Text = "仓库资料";
             this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click);
             // 
             // mnu_Unit
             // 
             this.mnu_Unit.Name = "mnu_Unit";
-            this.mnu_Unit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Unit.Size = new System.Drawing.Size(152, 22);
             this.mnu_Unit.Text = "计量单位";
             this.mnu_Unit.Click += new System.EventHandler(this.mnu_Unit_Click);
             // 
             // mnu_CurrencyType
             // 
             this.mnu_CurrencyType.Name = "mnu_CurrencyType";
-            this.mnu_CurrencyType.Size = new System.Drawing.Size(124, 22);
+            this.mnu_CurrencyType.Size = new System.Drawing.Size(152, 22);
             this.mnu_CurrencyType.Text = "货币种类";
             this.mnu_CurrencyType.Visible = false;
             this.mnu_CurrencyType.Click += new System.EventHandler(this.mnu_CurrencyType_Click);
@@ -185,7 +185,7 @@
             // mnu_Transport
             // 
             this.mnu_Transport.Name = "mnu_Transport";
-            this.mnu_Transport.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Transport.Size = new System.Drawing.Size(152, 22);
             this.mnu_Transport.Text = "运输方式";
             this.mnu_Transport.Click += new System.EventHandler(this.mnu_Transport_Click);
             // 
@@ -204,33 +204,33 @@
             // mnu_Customer
             // 
             this.mnu_Customer.Name = "mnu_Customer";
-            this.mnu_Customer.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Customer.Size = new System.Drawing.Size(148, 22);
             this.mnu_Customer.Text = "客户资料";
             this.mnu_Customer.Click += new System.EventHandler(this.mnu_Customer_Click);
             // 
             // 客户报价资料ToolStripMenuItem
             // 
             this.客户报价资料ToolStripMenuItem.Name = "客户报价资料ToolStripMenuItem";
-            this.客户报价资料ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.客户报价资料ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.客户报价资料ToolStripMenuItem.Text = "客户报价资料";
             this.客户报价资料ToolStripMenuItem.Visible = false;
             // 
             // mnu_Order
             // 
             this.mnu_Order.Name = "mnu_Order";
-            this.mnu_Order.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Order.Size = new System.Drawing.Size(148, 22);
             this.mnu_Order.Text = "销售订单管理";
             this.mnu_Order.Click += new System.EventHandler(this.mnu_Order_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
             // 
             // mnu_OrderMonitor
             // 
             this.mnu_OrderMonitor.Name = "mnu_OrderMonitor";
-            this.mnu_OrderMonitor.Size = new System.Drawing.Size(152, 22);
+            this.mnu_OrderMonitor.Size = new System.Drawing.Size(148, 22);
             this.mnu_OrderMonitor.Text = "订单跟踪处理";
             this.mnu_OrderMonitor.Click += new System.EventHandler(this.mnu_OrderMonitor_Click);
             // 
@@ -292,21 +292,21 @@
             // mnu_Inventory
             // 
             this.mnu_Inventory.Name = "mnu_Inventory";
-            this.mnu_Inventory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Inventory.Size = new System.Drawing.Size(148, 22);
             this.mnu_Inventory.Text = "产品库存管理";
             this.mnu_Inventory.Click += new System.EventHandler(this.mnu_Inventory_Click);
             // 
             // mnu_InventorySheet
             // 
             this.mnu_InventorySheet.Name = "mnu_InventorySheet";
-            this.mnu_InventorySheet.Size = new System.Drawing.Size(152, 22);
+            this.mnu_InventorySheet.Size = new System.Drawing.Size(148, 22);
             this.mnu_InventorySheet.Text = "收货单资料";
             this.mnu_InventorySheet.Click += new System.EventHandler(this.mnu_InventorySheet_Click);
             // 
             // mnu_DeliverySheet
             // 
             this.mnu_DeliverySheet.Name = "mnu_DeliverySheet";
-            this.mnu_DeliverySheet.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeliverySheet.Size = new System.Drawing.Size(148, 22);
             this.mnu_DeliverySheet.Text = "发货单资料";
             this.mnu_DeliverySheet.Click += new System.EventHandler(this.mnu_DeliverySheet_Click);
             // 
@@ -556,6 +556,7 @@
             this.pSecondary.Name = "pSecondary";
             this.pSecondary.Size = new System.Drawing.Size(27, 283);
             this.pSecondary.TabIndex = 11;
+            this.pSecondary.Visible = false;
             // 
             // ucFormViewSecondary
             // 
@@ -565,6 +566,7 @@
             this.ucFormViewSecondary.Name = "ucFormViewSecondary";
             this.ucFormViewSecondary.Size = new System.Drawing.Size(27, 283);
             this.ucFormViewSecondary.TabIndex = 7;
+            this.ucFormViewSecondary.Visible = false;
             // 
             // pMain
             // 
@@ -594,6 +596,7 @@
             this.splitter1.Size = new System.Drawing.Size(8, 283);
             this.splitter1.TabIndex = 12;
             this.splitter1.TabStop = false;
+            this.splitter1.Visible = false;
             // 
             // FrmMain
             // 

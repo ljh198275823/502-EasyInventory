@@ -5,16 +5,12 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class Order
+    public class Order:ISheet 
     {
         #region 构造函数
         public Order()
         {
         }
-        #endregion
-
-        #region 只读变量
-        public readonly string DocumentType = "Order";
         #endregion
 
         #region 公共属性
@@ -26,10 +22,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置客户ID
         /// </summary>
         public string CustomerID { get; set; }
-        /// <summary>
-        /// 获取或设置客户名称
-        /// </summary>
-        public CompanyInfo Customer { get; set; }
         /// <summary>
         /// 获取或设置是否含税
         /// </summary>
@@ -50,29 +42,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置当前状态
         /// </summary>
         public SheetState State { get; set; }
-
-        #region 订单的金额情况
-        ///// <summary>
-        ///// 获取或设置已经应收金额(即已经发货的金额)
-        ///// </summary>
-        //public decimal Receivable { get; set; }
-        ///// <summary>
-        ///// 获取或设置已经支付的金额
-        ///// </summary>
-        //public decimal HasPaid { get; set; }
-        ///// <summary>
-        ///// 获取或设置销售订单除采购成本外的费用支出
-        ///// </summary>
-        //public decimal Expenditure { get; set; }
-
-        //public decimal NotPaid
-        //{
-        //    get
-        //    {
-        //        return CalAmount() - HasPaid;
-        //    }
-        //}
-        #endregion
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>
@@ -83,56 +52,7 @@ namespace LJH.Inventory.BusinessModel
         public List<OrderItem> Items { get; set; }
         #endregion
 
-        #region 只读属性
-        /// <summary>
-        /// 计算订单的总金额
-        /// </summary>
-        public decimal CalAmount()
-        {
-            decimal amount = 0;
-            if (Items != null)
-            {
-                foreach (OrderItem item in Items)
-                {
-                    amount += item.Price * item.Count;
-                }
-            }
-            return amount;
-        }
-
-        
-        /// <summary>
-        /// 获取订单是否有已过出货日期未交货的项
-        /// </summary>
-        public bool IsOverDate
-        {
-            get
-            {
-                if (State == SheetState.Closed || State == SheetState.Canceled) return false;
-                if (Items != null)
-                {
-                    return Items.Exists(item => !item.IsComplete && item.DemandDate < DateTime.Today);
-                }
-                return false;
-            }
-        }
-        /// <summary>
-        /// 获取订单是否有紧急出货的项,如果系统有提前多少天提醒出货的选项，则超过提醒日期的订单都是紧急订单
-        /// 否则当天订单为紧急订单
-        /// </summary>
-        public bool IsEmergency
-        {
-            get
-            {
-                if (State == SheetState.Closed || State == SheetState.Canceled) return false;
-                if (Items != null)
-                {
-                    return Items.Exists(item => !item.IsComplete && item.DemandDate.Date == DateTime.Today);
-                }
-                return false;
-            }
-        }
-
+        #region ISheet 接口
         public bool CanEdit
         {
             get
@@ -156,6 +76,14 @@ namespace LJH.Inventory.BusinessModel
                 return State != SheetState.Canceled && State != SheetState.Settled;
             }
         }
+
+        public string DocumentType
+        {
+            get
+            {
+                return "Order"; 
+            }
+        }
         #endregion
 
         #region 公共方法
@@ -163,6 +91,45 @@ namespace LJH.Inventory.BusinessModel
         {
             return this.MemberwiseClone() as Order;
         }
+
+        /// <summary>
+        /// 计算订单的总金额
+        /// </summary>
+        public decimal CalAmount()
+        {
+            decimal amount = 0;
+            if (Items != null)
+            {
+                foreach (OrderItem item in Items)
+                {
+                    amount += item.Price * item.Count;
+                }
+            }
+            return amount;
+        }
+        #endregion
+
+        #region 订单的金额情况
+        ///// <summary>
+        ///// 获取或设置已经应收金额(即已经发货的金额)
+        ///// </summary>
+        //public decimal Receivable { get; set; }
+        ///// <summary>
+        ///// 获取或设置已经支付的金额
+        ///// </summary>
+        //public decimal HasPaid { get; set; }
+        ///// <summary>
+        ///// 获取或设置销售订单除采购成本外的费用支出
+        ///// </summary>
+        //public decimal Expenditure { get; set; }
+
+        //public decimal NotPaid
+        //{
+        //    get
+        //    {
+        //        return CalAmount() - HasPaid;
+        //    }
+        //}
         #endregion
     }
 }

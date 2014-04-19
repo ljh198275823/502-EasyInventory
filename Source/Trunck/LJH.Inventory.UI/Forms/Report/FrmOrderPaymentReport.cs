@@ -44,7 +44,7 @@ namespace LJH.Inventory.UI.Report
         {
             row.Cells["colOrderDate"].Value = item.OrderDate .ToLongDateString ();
             row.Cells["colOrderID"].Value = item.ID;
-            row.Cells["colCustomer"].Value =item.Customer !=null ?item.Customer.Name:string.Empty ;
+            //row.Cells["colCustomer"].Value =item.Customer !=null ?item.Customer.Name:string.Empty ;
             //row.Cells["colFinalCustomer"].Value = item.FinalCustomer != null ? item.FinalCustomer.Name : string.Empty;
             //row.Cells["colCurrencyType"].Value = item.CurrencyType;
             //row.Cells["colAmount"].Value = item.CalAmount().Trim();

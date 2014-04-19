@@ -38,10 +38,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ProductID { get; set; }
         /// <summary>
-        /// 获取或设置商品信息
-        /// </summary>
-        public Product Product { get; set; }
-        /// <summary>
         /// 获取或设置单位
         /// </summary>
         public string Unit { get; set; }

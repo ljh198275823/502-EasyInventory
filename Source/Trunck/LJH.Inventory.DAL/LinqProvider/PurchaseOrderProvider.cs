@@ -26,18 +26,6 @@ namespace LJH.Inventory.DAL.LinqProvider
             opt.LoadWith<PurchaseOrder>(item => item.Items);
             dc.LoadOptions = opt;
             PurchaseOrder sheet = dc.GetTable<PurchaseOrder>().SingleOrDefault(item => item.ID == id);
-            if (sheet != null)
-            {
-                sheet.Supplier = (new CustomerProvider(ConnectStr, _MappingResource)).GetByID(sheet.SupplierID).QueryObject;
-                if (sheet.Items != null && sheet.Items.Count > 0)
-                {
-                    List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                    foreach (PurchaseItem item in sheet.Items)
-                    {
-                        item.Product = ps.SingleOrDefault(p => p.ID == item.ProductID);
-                    }
-                }
-            }
             return sheet;
         }
 
@@ -50,9 +38,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
-                if (!string.IsNullOrEmpty(con.SheetNo)) ret = ret.Where(item => item.ID.Contains(con.SheetNo));
+                if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains((int)item.State));
-                if (!string.IsNullOrEmpty(con.Memo)) ret = ret.Where(item => item.Memo.Contains(con.Memo));
             }
             if (search is PurchaseOrderSearchCondition)
             {
@@ -71,22 +58,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
             }
             List<PurchaseOrder> sheets = ret.ToList();
-            if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
-            {
-                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                foreach (PurchaseOrder sheet in sheets)
-                {
-                    sheet.Supplier = cs.SingleOrDefault(item => item.ID == sheet.SupplierID);
-                    if (sheet.Items != null && sheet.Items.Count > 0)
-                    {
-                        foreach (PurchaseItem si in sheet.Items)
-                        {
-                            si.Product = ps.SingleOrDefault(item => item.ID == si.ProductID);
-                        }
-                    }
-                }
-            }
             return sheets;
         }
 

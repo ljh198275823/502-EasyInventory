@@ -52,9 +52,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
-                if (!string.IsNullOrEmpty(con.SheetNo)) ret = ret.Where(item => item.ID.Contains(con.SheetNo));
+                if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains((int)item.State));
-                if (!string.IsNullOrEmpty(con.Memo)) ret = ret.Where(item => item.Memo.Contains(con.Memo));
             }
             if (search is InventorySheetSearchCondition)
             {

@@ -122,7 +122,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                decimal ret = NotShipped  - OnWay - Inventory;
+                decimal ret = NotShipped - OnWay - Inventory;
                 return ret > 0 ? ret : 0;
             }
         }
@@ -135,6 +135,30 @@ namespace LJH.Inventory.BusinessModel
             {
                 if (IsComplete) return 0;
                 return Count - Shipped >= 0 ? (Count - Shipped) : 0;
+            }
+        }
+
+        /// <summary>
+        /// 获取订单是否有已过出货日期未交货的项
+        /// </summary>
+        public bool IsOverDate
+        {
+            get
+            {
+                if (State == SheetState.Closed || State == SheetState.Canceled) return false;
+                return !IsComplete && DemandDate < DateTime.Today;
+            }
+        }
+        /// <summary>
+        /// 获取订单是否有紧急出货的项,如果系统有提前多少天提醒出货的选项，则超过提醒日期的订单都是紧急订单
+        /// 否则当天订单为紧急订单
+        /// </summary>
+        public bool IsEmergency
+        {
+            get
+            {
+                if (State == SheetState.Closed || State == SheetState.Canceled) return false;
+                return !IsComplete && DemandDate.Date == DateTime.Today;
             }
         }
         #endregion

@@ -72,7 +72,9 @@ namespace LJH.Inventory.UI.Forms
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmOrderDetail();
+            FrmOrderDetail frm = new FrmOrderDetail();
+            if (this.customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
+            return frm;
         }
 
         protected override List<object> GetDataSource()
@@ -86,7 +88,8 @@ namespace LJH.Inventory.UI.Forms
             Order info = item as Order;
             row.Cells["colID"].Value = info.ID;
             row.Cells["colOrderDate"].Value = info.OrderDate;
-            row.Cells["colCustomer"].Value = info.Customer.Name;
+            CompanyInfo customer = customerTree1.GetCustomer(info.CustomerID);
+            row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colSales"].Value = info.SalesPerson;
             row.Cells["colDeliveryDate"].Value = info.DemandDate;
             row.Cells["colWithTax"].Value = info.WithTax;

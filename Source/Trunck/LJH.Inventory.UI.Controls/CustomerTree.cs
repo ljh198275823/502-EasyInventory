@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections ;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.UI.Controls
 {
-    public partial class CustomerTree : MyTree 
+    public partial class CustomerTree : MyTree
     {
         #region 构造函数
         public CustomerTree()
@@ -29,6 +30,7 @@ namespace LJH.Inventory.UI.Controls
         #region 私有变量
         private List<TreeNode> _AllTypeNodes = new List<TreeNode>();
         private List<TreeNode> _AllCustomerNodes = new List<TreeNode>();
+        private Hashtable _Companys = null;
         #endregion
 
         #region 公共属性
@@ -100,6 +102,11 @@ namespace LJH.Inventory.UI.Controls
             if (LoadCustomer)
             {
                 List<CompanyInfo> customers = (new CompanyBLL(AppSettings.Current.ConnStr)).GetAllCustomers().QueryObjects;
+                if (customers != null && customers.Count > 0)
+                {
+                    _Companys = new Hashtable();
+                    customers.ForEach(it => _Companys.Add(it.ID, it));
+                }
                 AddCustomerNodes(customers, this.Nodes[0]);
                 foreach (TreeNode cnode in _AllTypeNodes)
                 {
@@ -164,7 +171,7 @@ namespace LJH.Inventory.UI.Controls
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public List<CustomerType > GetCategoryofNode(TreeNode node)
+        public List<CustomerType> GetCategoryofNode(TreeNode node)
         {
             List<CustomerType> items = new List<CustomerType>();
             if (node.Tag is CustomerType)
@@ -179,6 +186,19 @@ namespace LJH.Inventory.UI.Controls
                 }
             }
             return items;
+        }
+        /// <summary>
+        /// 通过id获取客户树中的客户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CompanyInfo GetCustomer(string id)
+        {
+            if (_Companys != null && _Companys.Count > 0)
+            {
+                return _Companys[id] as CompanyInfo;
+            }
+            return null;
         }
         #endregion
     }

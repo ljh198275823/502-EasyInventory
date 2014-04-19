@@ -27,10 +27,13 @@ namespace LJH.Inventory.UI.Forms
             ItemsGrid.Rows.Clear();
             if (items != null)
             {
+                List<string> pids = items.Select(it => it.ProductID).ToList();
+                List<Product> ps = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(new ProductSearchCondition() { ProductIDS = pids }).QueryObjects;
                 foreach (PurchaseItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
-                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
+                    Product p = ps.SingleOrDefault(it => it.ID == item.ProductID);
+                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item, p);
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
@@ -38,19 +41,19 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, PurchaseItem item)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, PurchaseItem item,Product p)
         {
             row.Tag = item;
             row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
-            row.Cells["colProductID"].Value = item.Product != null ? item.Product.ID : string.Empty;
-            row.Cells["colProductName"].Value = item.Product != null ? item.Product.Name : string.Empty;
-            row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
+            row.Cells["colProductID"].Value = item.ProductID;
+            row.Cells["colProductName"].Value = p != null ? p.Name : string.Empty;
+            row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
+            row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
+            row.Cells["colUnit"].Value = item.Unit;
             row.Cells["colPrice"].Value = item.Price.Trim();
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colTotal"].Value = item.Amount.Trim();
             row.Cells["colOrderID"].Value = item.OrderID;
-            //row.Cells["colReceived"].Value = item.Received.Trim();
-            //row.Cells["colOnWay"].Value = item.OnWay.Trim();
             row.Cells["colMemo"].Value = item.Memo;
         }
 
@@ -79,6 +82,13 @@ namespace LJH.Inventory.UI.Forms
 
         #endregion
 
+        #region 公共方法
+        /// <summary>
+        /// 获取或设置采购单的供应商信息
+        /// </summary>
+        public CompanyInfo Supplier { get; set; }
+        #endregion
+
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -88,7 +98,7 @@ namespace LJH.Inventory.UI.Forms
                 txtSheetNo.Focus();
                 return false;
             }
-            if (txtSupplier.Tag == null)
+            if (Supplier == null)
             {
                 MessageBox.Show("没有选择供应商");
                 txtSupplier.Focus();
@@ -148,8 +158,8 @@ namespace LJH.Inventory.UI.Forms
             {
                 this.txtSheetNo.Text = item.ID;
                 this.txtSheetNo.Enabled = false;
-                this.txtSupplier.Text = item.Supplier.Name;
-                this.txtSupplier.Tag = item.Supplier;
+                Supplier = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.SupplierID).QueryObject;
+                this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
                 this.dtOrderDate.Value = item.OrderDate;
                 this.txtBuyer.Text = item.Buyer;
                 this.rdWithTax.Checked = item.WithTax;
@@ -178,8 +188,7 @@ namespace LJH.Inventory.UI.Forms
                 PurchaseSheet = UpdatingItem as PurchaseOrder;
             }
             PurchaseSheet.OrderDate = this.dtOrderDate.Value;
-            PurchaseSheet.SupplierID = (this.txtSupplier.Tag as CompanyInfo).ID;
-            PurchaseSheet.Supplier = this.txtSupplier.Tag as CompanyInfo;
+            PurchaseSheet.SupplierID =Supplier.ID;
             PurchaseSheet.Buyer = this.txtBuyer.Text;
             PurchaseSheet.DemandDate = this.dtDemandDate.Value;
             PurchaseSheet.WithTax = rdWithTax.Checked;
@@ -256,7 +265,6 @@ namespace LJH.Inventory.UI.Forms
                     {
                         ID=Guid.NewGuid (),
                         ProductID = product.ID,
-                        Product = product,
                         Unit = product.Unit,
                         Price = product.Price,
                         Count = 0
@@ -276,7 +284,6 @@ namespace LJH.Inventory.UI.Forms
                 {
                     ID = Guid.NewGuid(),
                     ProductID = oi.ProductID,
-                    Product = oi.Product,
                     OrderID = oi.OrderID,
                     OrderItem = oi.ID,
                     Unit = oi.Unit,
@@ -423,9 +430,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CompanyInfo item = frm.SelectedItem as CompanyInfo;
-                txtSupplier.Text = item.Name;
-                txtSupplier.Tag = item;
+                Supplier  = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
             }
         }
 

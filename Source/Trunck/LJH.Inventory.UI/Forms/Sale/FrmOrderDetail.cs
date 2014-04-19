@@ -15,7 +15,7 @@ using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmOrderDetail : FrmSheetDetailBase 
+    public partial class FrmOrderDetail : FrmSheetDetailBase
     {
         public FrmOrderDetail()
         {
@@ -28,10 +28,13 @@ namespace LJH.Inventory.UI.Forms
             ItemsGrid.Rows.Clear();
             if (items != null)
             {
+                List<string> pids = items.Select(it => it.ProductID).ToList();
+                List<Product> ps = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(new ProductSearchCondition() { ProductIDS = pids }).QueryObjects;
                 foreach (OrderItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
-                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
+                    Product p = ps.SingleOrDefault(it => it.ID == item.ProductID);
+                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item, p);
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
@@ -39,22 +42,19 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, OrderItem item)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, OrderItem item, Product p)
         {
             row.Tag = item;
-            row.Cells["colProductID"].Value = item.Product != null ? item.Product.ID : string.Empty;
-            row.Cells["colProductName"].Value = item.Product != null ? item.Product.Name : string.Empty;
-            row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
+            row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
+            row.Cells["colProductID"].Value = item.ProductID;
+            row.Cells["colProductName"].Value = p != null ? p.Name : string.Empty;
+            row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
+            row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
             row.Cells["colUnit"].Value = item.Unit;
             row.Cells["colPrice"].Value = item.Price.Trim();
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colTotal"].Value = item.Amount.Trim();
-            //row.Cells["colOnPurchase"].Value = item.OnWay.Trim();
-            row.Cells["colPurchase"].Value = "采购明细";
-            //row.Cells["colInventory"].Value = item.Inventory.Trim();
-            //row.Cells["colPrepared"].Value = (item.Inventory + item.OnWay).Trim();
-            //row.Cells["colShipped"].Value = item.Shipped.Trim();
-            //row.Cells["colNotShipped"].Value = item.NotShipped.Trim();
+            row.Cells["colMemo"].Value = item.Memo;
         }
 
         private List<OrderItem> GetOrderItemsFromGrid()
@@ -78,6 +78,13 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 公共属性
+        /// <summary>
+        /// 获取或设置订单所属的客户
+        /// </summary>
+        public CompanyInfo Customer { get; set; }
+        #endregion
+
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -87,7 +94,7 @@ namespace LJH.Inventory.UI.Forms
                 txtSheetNo.Focus();
                 return false;
             }
-            if (txtCustomer.Tag == null)
+            if (Customer == null)
             {
                 MessageBox.Show("没有选择客户");
                 txtCustomer.Focus();
@@ -127,6 +134,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
+            this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             this.dtDemandDate.Value = DateTime.Today.AddDays(1);
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -147,8 +155,8 @@ namespace LJH.Inventory.UI.Forms
             {
                 this.txtSheetNo.Text = item.ID;
                 this.txtSheetNo.Enabled = false;
-                this.txtCustomer.Text = item.Customer.Name;
-                this.txtCustomer.Tag = item.Customer;
+                Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
+                this.txtCustomer.Text = Customer != null ? Customer.Name : item.CustomerID;
                 this.dtOrderDate.Value = item.OrderDate;
                 this.txtSalesPerson.Text = item.SalesPerson;
                 this.dtDemandDate.Value = item.DemandDate;
@@ -178,8 +186,7 @@ namespace LJH.Inventory.UI.Forms
                 order = UpdatingItem as Order;
             }
             order.OrderDate = this.dtOrderDate.Value;
-            order.CustomerID = (this.txtCustomer.Tag as CompanyInfo).ID;
-            order.Customer = this.txtCustomer.Tag as CompanyInfo;
+            order.CustomerID = Customer.ID;
             order.SalesPerson = this.txtSalesPerson.Text;
             order.DemandDate = this.dtDemandDate.Value;
             order.WithTax = rdWithTax.Checked;
@@ -258,7 +265,6 @@ namespace LJH.Inventory.UI.Forms
                      {
                          ID = Guid.NewGuid(),
                          ProductID = product.ID,
-                         Product = product,
                          Unit = product.Unit,
                          Price = product.Price,
                          Count = 0
@@ -409,9 +415,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CompanyInfo item = frm.SelectedItem as CompanyInfo;
-                txtCustomer.Text = item.Name;
-                txtCustomer.Tag = item;
+                Customer = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             }
         }
 

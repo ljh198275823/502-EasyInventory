@@ -26,18 +26,6 @@ namespace LJH.Inventory.DAL.LinqProvider
             opt.LoadWith<Order>(item => item.Items);
             dc.LoadOptions = opt;
             Order sheet = dc.GetTable<Order>().SingleOrDefault(item => item.ID == id);
-            if (sheet != null)
-            {
-                sheet.Customer = (new CustomerProvider(ConnectStr,_MappingResource)).GetByID(sheet.CustomerID).QueryObject;
-                if (sheet.Items != null && sheet.Items.Count > 0)
-                {
-                    List<Product> ps = (new ProductProvider(ConnectStr,_MappingResource)).GetItems(null).QueryObjects;
-                    foreach (OrderItem item in sheet.Items)
-                    {
-                        item.Product = ps.SingleOrDefault(p => p.ID == item.ProductID);
-                    }
-                }
-            }
             return sheet;
         }
 
@@ -50,9 +38,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
-                if (!string.IsNullOrEmpty(con.SheetNo)) ret = ret.Where(item => item.ID.Contains(con.SheetNo));
+                if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains((int)item.State));
-                if (!string.IsNullOrEmpty(con.Memo)) ret = ret.Where(item => item.Memo.Contains(con.Memo));
             }
             if (search is OrderSearchCondition)
             {
@@ -71,22 +58,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
             }
             List<Order> sheets = ret.ToList();
-            if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
-            {
-                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr,_MappingResource )).GetItems(null).QueryObjects;
-                List<Product> ps = (new ProductProvider(ConnectStr,_MappingResource )).GetItems(null).QueryObjects;
-                foreach (Order sheet in sheets)
-                {
-                    sheet.Customer = cs.SingleOrDefault(item => item.ID == sheet.CustomerID);
-                    if (sheet.Items != null && sheet.Items.Count > 0)
-                    {
-                        foreach (OrderItem si in sheet.Items)
-                        {
-                            si.Product = ps.SingleOrDefault(item => item.ID == si.ProductID);
-                        }
-                    }
-                }
-            }
             return sheets;
         }
 

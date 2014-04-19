@@ -143,21 +143,6 @@ namespace LJH.Inventory.BLL
             return provider.GetItems(con);
         }
         /// <summary>
-        /// 获取某个客户的所有已发货但未结算的送货单
-        /// </summary>
-        /// <param name="customerID"></param>
-        /// <returns></returns>
-        public QueryResultList<DeliverySheet> GetUnSettleSheets(string customerID)
-        {
-            DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
-            con.CustomerID = customerID;
-            con.States = new List<int>();
-            con.States.Add((int)SheetState.Shipped);
-            con.IsSettled = false;
-            IDeliverySheetProvider dsp = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
-            return dsp.GetItems(con);
-        }
-        /// <summary>
         /// 获取某个客户付款单的金额分配
         /// </summary>
         /// <param name="paymentID"></param>

@@ -99,6 +99,7 @@
     <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryOutType.cs" />
     <Compile Include="InventoryRecord.cs" />
+    <Compile Include="ISheet.cs" />
     <Compile Include="MyCompanyInfo.cs" />
     <Compile Include="OrderItemRecord.cs" />
     <Compile Include="ProductInventoryItem.cs" />
