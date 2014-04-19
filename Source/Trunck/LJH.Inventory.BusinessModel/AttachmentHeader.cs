@@ -39,6 +39,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string FileName { get; set; }
         /// <summary>
+        /// 获取或设置附件的大小
+        /// </summary>
+        public string FileSize { get; set; }
+        /// <summary>
         /// 获取或设置备注
         /// </summary>
         public string Memo { get; set; }

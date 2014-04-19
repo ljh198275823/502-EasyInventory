@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
@@ -22,6 +23,40 @@ namespace LJH.Inventory.UI.Forms
 
         #region 保护属性
         protected readonly string _AutoCreate = "自动创建";
+        #endregion
+
+        #region 私有方法
+        //将文件大小转换成易于读取的字符串
+        private string FileSizeFormat(long filesize)
+        {
+            Decimal OneKiloByte = 1024M;
+            Decimal OneMegaByte = OneKiloByte * 1024M;
+            Decimal OneGigaByte = OneMegaByte * 1024M;
+            string suffix;
+            decimal temp = 0;
+            if (filesize > OneGigaByte)
+            {
+                temp = (decimal)filesize / OneGigaByte;
+                suffix = "GB";
+            }
+            else if (filesize > OneMegaByte)
+            {
+                temp = (decimal)filesize / OneMegaByte;
+                suffix = "MB";
+            }
+            else if (filesize > OneKiloByte)
+            {
+                temp = (decimal)filesize / OneKiloByte;
+                suffix = "kB";
+            }
+            else
+            {
+                temp=(decimal )filesize ;
+                suffix = " B";
+            }
+            temp = Math.Round(temp, 2).Trim();
+            return String.Format("{0:F}{1}", temp, suffix);
+        }
         #endregion
 
         #region 保护方法
@@ -48,6 +83,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colUploadDateTime"].Value = header.UploadDateTime;
             row.Cells["colOwner"].Value = header.Owner;
             row.Cells["colFileName"].Value = header.FileName;
+            row.Cells["colSize"].Value = header.FileSize;
         }
 
         protected virtual void ShowAttachmentHeaders(List<AttachmentHeader> items, DataGridView gridAttachment)
@@ -75,6 +111,8 @@ namespace LJH.Inventory.UI.Forms
                 header.Owner = Operator.Current.Name;
                 header.FileName = System.IO.Path.GetFileName(dig.FileName);
                 header.UploadDateTime = DateTime.Now;
+                FileInfo fi = new FileInfo(dig.FileName);
+                header.FileSize = FileSizeFormat(fi.Length);
                 CommandResult ret = (new AttachmentBLL(AppSettings.Current.ConnStr)).Upload(header, dig.FileName);
                 if (ret.Result == ResultCode.Successful)
                 {

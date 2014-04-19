@@ -68,7 +68,7 @@ namespace LJH.Inventory.BLL
                     }
                     else
                     {
-                        return new CommandResult(ResultCode.Fail, string.Format("文件\"{0}\" 太大，不能上传超过5M的文件", path));
+                        return new CommandResult(ResultCode.Fail, string.Format("文件\"{0}\" 太大，不能上传,如果要上传此文件，请先更改系统最大上传文件大小", path));
                     }
                 }
             }
