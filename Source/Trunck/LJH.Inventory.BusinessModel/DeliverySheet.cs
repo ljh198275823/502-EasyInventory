@@ -8,16 +8,12 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示送货单
     /// </summary>
-    public class DeliverySheet
+    public class DeliverySheet : ISheet
     {
         #region 构造函数
         public DeliverySheet()
         {
         }
-        #endregion
-
-        #region 只读变量
-        public readonly string DocumentType = "DeliverySheet";
         #endregion
 
         #region 公共属性
@@ -30,17 +26,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string CustomerID { get; set; }
         /// <summary>
-        /// 获取或设置客户
-        /// </summary>
-        public CompanyInfo Customer { get; set; }
-        /// <summary>
         /// 获取或设置出库仓库ID
         /// </summary>
         public string WareHouseID { get; set; }
-        /// <summary>
-        /// 获取或设置出库仓库
-        /// </summary>
-        public WareHouse WareHouse { get; set; }
         /// <summary>
         /// 获取或设置联系人
         /// </summary>
@@ -93,18 +81,24 @@ namespace LJH.Inventory.BusinessModel
 
         #region 只读属性
         /// <summary>
-        /// 获取每个送货单最大送货项数量
-        /// </summary>
-        public static readonly int MaxItemCount = 8;
-        /// <summary>
         /// 获取送货单的总货款
         /// </summary>
-        public decimal Amount 
+        public decimal Amount
         {
             get
             {
                 return Items.Sum(item => item.Amount);
             }
+        }
+        #endregion
+
+        #region ISheet接口
+        /// <summary>
+        /// 获取送货单是否可编辑
+        /// </summary>
+        public bool CanEdit
+        {
+            get { return (State == SheetState.Add); }
         }
         /// <summary>
         /// 获取送货单是否可以审批
@@ -146,6 +140,13 @@ namespace LJH.Inventory.BusinessModel
             {
                 return State != SheetState.Canceled;
             }
+        }
+        /// <summary>
+        /// 获取单据类型
+        /// </summary>
+        public string DocumentType
+        {
+            get { return "DeliverySheet"; }
         }
         #endregion
 

@@ -259,18 +259,15 @@ namespace LJH.Inventory.UI.Forms
             List<OrderItem> sources = GetOrderItemsFromGrid();
             if (!sources.Exists(it => it.ProductID == product.ID))
             {
-                if (sources.Count < DeliverySheet.MaxItemCount)
-                {
-                    OrderItem item = new OrderItem()
-                     {
-                         ID = Guid.NewGuid(),
-                         ProductID = product.ID,
-                         Unit = product.Unit,
-                         Price = product.Price,
-                         Count = 0
-                     };
-                    sources.Add(item);
-                }
+                OrderItem item = new OrderItem()
+                 {
+                     ID = Guid.NewGuid(),
+                     ProductID = product.ID,
+                     Unit = product.Unit,
+                     Price = product.Price,
+                     Count = 0
+                 };
+                sources.Add(item);
             }
             ShowDeliveryItemsOnGrid(sources);
         }

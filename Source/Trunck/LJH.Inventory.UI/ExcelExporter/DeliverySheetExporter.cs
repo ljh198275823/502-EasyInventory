@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Office.Interop.Excel;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory.BusinessModel.Resource;
+using LJH.Inventory.BLL;
+using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.UI.ExcelExporter
 {
@@ -84,9 +86,9 @@ namespace LJH.Inventory.UI.ExcelExporter
             r.Value2 = "'" + deliverySheet.ID;
             r = sheet.get_Range("D" + 2, Type.Missing);
             //r.Value2 = deliverySheet.DeliveryDate != null ? deliverySheet.DeliveryDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
-
+            CompanyInfo customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(deliverySheet.CustomerID).QueryObject;
             r = sheet.get_Range("B" + 3, Type.Missing);
-            r.Value2 = deliverySheet.Customer.Name;
+            r.Value2 = customer != null ? customer.Name : string.Empty;
             r = sheet.get_Range("D" + 3, Type.Missing);
             r.Value2 = deliverySheet.Linker;
             r = sheet.get_Range("G" + 3, Type.Missing);
@@ -99,18 +101,21 @@ namespace LJH.Inventory.UI.ExcelExporter
             r.Value2 = deliverySheet.Memo;
 
             int count = 7;
+            List<string> pids = deliverySheet.Items .Select(it => it.ProductID).ToList();
+            List<Product> ps = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(new ProductSearchCondition() { ProductIDS = pids }).QueryObjects;
             foreach (DeliveryItem item in deliverySheet.Items)
             {
                 if (count < 17)
                 {
+                    Product p = ps.SingleOrDefault(it => it.ID == item.ProductID);
                     r = sheet.get_Range("A" + count, Type.Missing);
-                    r.Value2 = "'" + item.Product.ID;
+                    r.Value2 = "'" + item.ProductID;
                     r = sheet.get_Range("B" + count, Type.Missing);
-                    r.Value2 = item.Product.Name;
+                    r.Value2 = p != null ? p.Name : string.Empty;
                     r = sheet.get_Range("C" + count, Type.Missing);
-                    r.Value2 = item.Product.Specification;
+                    r.Value2 = p != null ? p.Specification : string.Empty;
                     r = sheet.get_Range("D" + count, Type.Missing);
-                    r.Value = item.Product.Unit;
+                    r.Value = item.Unit;
                     r = sheet.get_Range("E" + count, Type.Missing);
                     r.Value2 = item.Price;
                     r = sheet.get_Range("F" + count, Type.Missing);

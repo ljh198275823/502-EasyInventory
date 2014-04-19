@@ -26,19 +26,6 @@ namespace LJH.Inventory.DAL.LinqProvider
             opt.LoadWith<InventorySheet>(s => s.Items);
             dc.LoadOptions = opt;
             InventorySheet sheet = dc.GetTable<InventorySheet>().SingleOrDefault(item => item.ID == id);
-            if (sheet != null)
-            {
-                sheet.WareHouse = (new WareHouseProvider(ConnectStr, _MappingResource)).GetByID(sheet.WareHouseID).QueryObject;
-                sheet.Supplier = (new CustomerProvider(ConnectStr, _MappingResource)).GetByID(sheet.SupplierID).QueryObject;
-                if (sheet.Items != null && sheet.Items.Count > 0)
-                {
-                    List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                    foreach (InventoryItem item in sheet.Items)
-                    {
-                        item.Product = ps.SingleOrDefault(p => p.ID == item.ProductID);
-                    }
-                }
-            }
             return sheet;
         }
 
@@ -61,24 +48,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.SupplierName)) ret = ret.Where(item => item.SupplierID.Contains(con.SupplierName));
             }
             List<InventorySheet> sheets = ret.ToList();
-            if (sheets != null && sheets.Count > 0)
-            {
-                List<WareHouse> ws = (new WareHouseProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                List<CompanyInfo> ss = (new CustomerProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                foreach (InventorySheet sheet in sheets)
-                {
-                    sheet.Supplier = ss.SingleOrDefault(item => item.ID == sheet.SupplierID);
-                    sheet.WareHouse = ws.SingleOrDefault(item => item.ID == sheet.WareHouseID);
-                    if (sheet.Items != null && sheet.Items.Count > 0)
-                    {
-                        foreach (InventoryItem item in sheet.Items)
-                        {
-                            item.Product = ps.SingleOrDefault(p => p.ID == item.ProductID);
-                        }
-                    }
-                }
-            }
             return sheets;
         }
 

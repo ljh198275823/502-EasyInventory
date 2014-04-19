@@ -25,6 +25,7 @@ namespace LJH.Inventory.UI.Forms
 
         #region 私有变量
         private List<DeliverySheet > _Sheets = null;
+        private List<WareHouse> _Warehouses = null;
         #endregion
 
         #region 私有方法
@@ -74,13 +75,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmDetailBase frm= new FrmDeliverySheetDetail();
+            FrmDeliverySheetDetail frm= new FrmDeliverySheetDetail();
+            if (customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
             return frm;
         }
 
         protected override List<object> GetDataSource()
         {
             _Sheets  = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
             return FilterData();
         }
 
@@ -89,8 +92,10 @@ namespace LJH.Inventory.UI.Forms
             DeliverySheet sheet = item as DeliverySheet;
             row.Tag = sheet;
             row.Cells["colSheetNo"].Value = sheet.ID;
-            row.Cells["colCustomer"].Value = sheet.Customer.Name ;
-            row.Cells["colWareHouse"].Value = sheet.WareHouse != null ? sheet.WareHouse.Name : string.Empty;
+            CompanyInfo customer = customerTree1.GetCustomer(sheet.CustomerID);
+            row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
+            WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;
+            row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
             row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
             row.Cells["colLinker"].Value = sheet.Linker;

@@ -282,7 +282,6 @@ namespace LJH.Inventory.BLL
             if (sheet == null) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，系统中不存在该送货单");
             if (!sheet.CanShip) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，只有待发货或者已审批的送货单才能发货");
             if (sheet.Items == null || sheet.Items.Count == 0) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，没有送货单项");
-            if (sheet.Customer == null) return new CommandResult(ResultCode.Fail, "系统中不存在送货单的客户");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             DeliverySheet sheet1 = sheet.Clone();

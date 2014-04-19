@@ -23,6 +23,7 @@ namespace LJH.Inventory.UI.Forms
 
         #region 私有变量
         private List<InventorySheet> _Sheets = null;
+        private List<WareHouse> _Warehouses = null;
         #endregion
 
         #region 私有方法
@@ -71,12 +72,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmInventorySheetDetail();
+            FrmInventorySheetDetail frm= new FrmInventorySheetDetail();
+            if (supplierTree1.SelectedNode != null) frm.Supplier = supplierTree1.SelectedNode.Tag as CompanyInfo;
+            return frm;
         }
 
         protected override List<object> GetDataSource()
         {
             _Sheets = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
             return FilterData();
         }
 
@@ -84,9 +88,11 @@ namespace LJH.Inventory.UI.Forms
         {
             InventorySheet sheet = item as InventorySheet;
             row.Cells["colSheetNo"].Value = sheet.ID;
-            row.Cells["colWareHouseName"].Value = sheet.WareHouse.Name;
+            WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;
+            row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
-            row.Cells["colSupplier"].Value = sheet.Supplier.Name;
+            CompanyInfo supplier = supplierTree1.GetSupplier(sheet.SupplierID);
+            row.Cells["colSupplier"].Value = supplier != null ? supplier.Name : string.Empty;
             row.Cells["colAmount"].Value = sheet.Amount.Trim();
             row.Cells["colMemo"].Value = sheet.Memo;
             if (sheet.State == SheetState.Canceled)

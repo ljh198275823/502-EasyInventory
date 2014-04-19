@@ -138,6 +138,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
+            this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
             this.dtDemandDate.Value = DateTime.Today.AddDays(1);
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -259,18 +260,15 @@ namespace LJH.Inventory.UI.Forms
             List<PurchaseItem> sources = GetPurchaseSheetItemsFromGrid();
             if (!sources.Exists(it => it.ProductID == product.ID))
             {
-                if (sources.Count < DeliverySheet.MaxItemCount)
+                PurchaseItem item = new PurchaseItem()
                 {
-                    PurchaseItem item = new PurchaseItem()
-                    {
-                        ID=Guid.NewGuid (),
-                        ProductID = product.ID,
-                        Unit = product.Unit,
-                        Price = product.Price,
-                        Count = 0
-                    };
-                    sources.Add(item);
-                }
+                    ID = Guid.NewGuid(),
+                    ProductID = product.ID,
+                    Unit = product.Unit,
+                    Price = product.Price,
+                    Count = 0
+                };
+                sources.Add(item);
             }
             ShowDeliveryItemsOnGrid(sources);
         }

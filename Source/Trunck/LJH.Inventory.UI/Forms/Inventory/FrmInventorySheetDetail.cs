@@ -21,16 +21,23 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        #region 公共属性
+        public CompanyInfo Supplier { get; set; }
+        #endregion
+
         #region 私有方法
         private void ShowSheetItemsOnGrid(IEnumerable<InventoryItem> items)
         {
             ItemsGrid.Rows.Clear();
             if (items != null)
             {
+                List<string> pids = items.Select(it => it.ProductID).ToList();
+                List<Product> ps = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(new ProductSearchCondition() { ProductIDS = pids }).QueryObjects;
                 foreach (InventoryItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
-                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
+                    Product p = ps.SingleOrDefault(it => it.ID == item.ProductID);
+                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item, p);
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
@@ -48,13 +55,15 @@ namespace LJH.Inventory.UI.Forms
             return sum;
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, InventoryItem item)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, InventoryItem item,Product p)
         {
             row.Tag = item;
-            row.Cells["colProductID"].Value = item.Product.ID;
-            row.Cells["colProductName"].Value = item.Product.Name;
-            row.Cells["colSpecification"].Value = item.Product.Specification;
-            row.Cells["colUnit"].Value = item.Product.Unit;
+            row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
+            row.Cells["colProductID"].Value = item.ProductID;
+            row.Cells["colProductName"].Value = p != null ? p.Name : string.Empty;
+            row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
+            row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
+            row.Cells["colUnit"].Value = item.Unit;
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count.Trim();
             row.Cells["colOrderID"].Value = item.OrderID;
@@ -110,6 +119,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
+            this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
             ShowButtonState();
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -130,10 +140,11 @@ namespace LJH.Inventory.UI.Forms
             {
                 this.txtSheetNo.Text = item.ID;
                 this.txtSheetNo.Enabled = false;
-                this.txtSupplier.Text = item.Supplier != null ? item.Supplier.Name : string.Empty;
-                this.txtSupplier.Tag = item.Supplier;
-                this.txtWareHouse.Text = item.WareHouse != null ? item.WareHouse.Name : string.Empty;
-                this.txtWareHouse.Tag = item.WareHouse;
+                Supplier = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.SupplierID).QueryObject;
+                this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
+                WareHouse ws = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
+                this.txtWareHouse.Text = ws != null ? ws.Name : string.Empty;
+                this.txtWareHouse.Tag = ws;
                 this.txtMemo.Text = item.Memo;
                 ShowSheetItemsOnGrid(item.Items);
                 ShowButtonState();
@@ -163,10 +174,15 @@ namespace LJH.Inventory.UI.Forms
             {
                 sheet.ID = this.txtSheetNo.Text;
             }
-            sheet.WareHouseID = (this.txtWareHouse.Tag as WareHouse).ID;
-            sheet.WareHouse = this.txtWareHouse.Tag as WareHouse;
-            sheet.SupplierID = (this.txtSupplier.Tag as CompanyInfo).ID;
-            sheet.Supplier = this.txtSupplier.Tag as CompanyInfo;
+            if (!string.IsNullOrEmpty(this.txtWareHouse.Text) && this.txtWareHouse.Tag != null)
+            {
+                sheet.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
+            }
+            else
+            {
+                sheet.WareHouseID = null;
+            }
+            sheet.SupplierID = Supplier != null ? Supplier.ID : null;
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<InventoryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
@@ -249,7 +265,6 @@ namespace LJH.Inventory.UI.Forms
                 {
                     ID = Guid.NewGuid(),
                     ProductID = product.ID,
-                    Product = product,
                     Unit = product.Unit,
                     Price = product.Cost,
                     Count = 0
@@ -268,7 +283,6 @@ namespace LJH.Inventory.UI.Forms
                 {
                     ID = Guid.NewGuid(),
                     ProductID = pi.ProductID,
-                    Product = pi.Product,
                     PurchaseItem = pi.ID,
                     PurchaseOrder = pi.PurchaseID,
                     OrderItem = pi.OrderItem,
@@ -290,9 +304,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CompanyInfo item = frm.SelectedItem as CompanyInfo;
-                txtSupplier.Text = item.Name;
-                txtSupplier.Tag = item;
+                Supplier = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
             }
         }
 

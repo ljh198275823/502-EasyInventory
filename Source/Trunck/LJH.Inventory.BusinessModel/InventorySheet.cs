@@ -30,17 +30,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string WareHouseID { get; set; }
         /// <summary>
-        /// 获取或设置收货仓库
-        /// </summary>
-        public WareHouse WareHouse { get; set; }
-        /// <summary>
         /// 获取或设置供应商ID
         /// </summary>
         public string SupplierID { get; set; }
-        /// <summary>
-        /// 获取或设置供应商
-        /// </summary>
-        public CompanyInfo Supplier { get; set; }
         /// <summary>
         /// 获取或设置送货单状态
         /// </summary>

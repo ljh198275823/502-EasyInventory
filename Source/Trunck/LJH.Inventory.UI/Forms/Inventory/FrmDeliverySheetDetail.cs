@@ -26,16 +26,23 @@ namespace LJH.Inventory.UI.Forms
 
         #endregion
 
+        #region 公共属性
+        public CompanyInfo Customer { get; set; }
+        #endregion
+
         #region 私有方法
         private void ShowDeliveryItemsOnGrid(IEnumerable<DeliveryItem> items)
         {
             ItemsGrid.Rows.Clear();
             if (items != null)
             {
+                List<string> pids = items.Select(it => it.ProductID).ToList();
+                List<Product> ps = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(new ProductSearchCondition() { ProductIDS = pids }).QueryObjects;
                 foreach (DeliveryItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
-                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
+                    Product p = ps.SingleOrDefault(it => it.ID == item.ProductID);
+                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item, p);
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
@@ -43,13 +50,15 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, DeliveryItem item)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, DeliveryItem item,Product p)
         {
             row.Tag = item;
-            row.Cells["colProductID"].Value = item.Product != null ? item.Product.ID : string.Empty;
-            row.Cells["colProductName"].Value = item.Product != null ? item.Product.Name : string.Empty;
-            row.Cells["colSpecification"].Value = item.Product != null ? item.Product.Specification : string.Empty;
-            row.Cells["colUnit"].Value = item.Product != null ? item.Product.Unit : string.Empty;
+            row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
+            row.Cells["colProductID"].Value = item.ProductID;
+            row.Cells["colProductName"].Value = p != null ? p.Name : string.Empty;
+            row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
+            row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
+            row.Cells["colUnit"].Value = item.Unit;
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count;
             row.Cells["colTotal"].Value = item.Amount;
@@ -84,10 +93,11 @@ namespace LJH.Inventory.UI.Forms
                 this.txtSheetNo.Text = item.ID;
                 this.txtSheetNo.Enabled = false;
             }
-            this.txtCustomer.Text = item.Customer != null ? item.Customer.Name : string.Empty;
-            this.txtCustomer.Tag = item.Customer;
-            this.txtWareHouse.Text = item.WareHouse != null ? item.WareHouse.Name : string.Empty;
-            this.txtWareHouse.Tag = item.WareHouse;
+            Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
+            this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            WareHouse ws = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
+            this.txtWareHouse.Text = ws != null ? ws.Name : string.Empty;
+            this.txtWareHouse.Tag = ws;
             this.txtMemo.Text = item.Memo;
             ShowDeliveryItemsOnGrid(item.Items);
             List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
@@ -113,7 +123,7 @@ namespace LJH.Inventory.UI.Forms
                 txtSheetNo.Focus();
                 return false;
             }
-            if (txtCustomer.Tag == null)
+            if (Customer == null)
             {
                 MessageBox.Show("没有选择客户");
                 txtCustomer.Focus();
@@ -141,6 +151,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
+            txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             ShowButtonState();
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -172,16 +183,13 @@ namespace LJH.Inventory.UI.Forms
             {
                 sheet = UpdatingItem as DeliverySheet;
             }
-            sheet.CustomerID = this.txtCustomer.Tag != null ? (this.txtCustomer.Tag as CompanyInfo).ID : string.Empty;
-            sheet.Customer = this.txtCustomer.Tag as CompanyInfo;
+            sheet.CustomerID = this.txtCustomer.Tag != null ? (this.txtCustomer.Tag as CompanyInfo).ID : null;
             if (!string.IsNullOrEmpty(this.txtWareHouse.Text) && this.txtWareHouse.Tag != null)
             {
-                sheet.WareHouse = this.txtWareHouse.Tag as WareHouse;
-                sheet.WareHouseID = sheet.WareHouse.ID;
+                sheet.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
             }
             else
             {
-                sheet.WareHouse = null;
                 sheet.WareHouseID = null;
             }
             sheet.Memo = txtMemo.Text;
@@ -269,23 +277,15 @@ namespace LJH.Inventory.UI.Forms
             List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.ProductID == p.ProductID))
             {
-                if (sources.Count < DeliverySheet.MaxItemCount)
+                DeliveryItem item = new DeliveryItem()
                 {
-                    DeliveryItem item = new DeliveryItem()
-                    {
-                        ID = Guid.NewGuid(),
-                        ProductID = p.ProductID,
-                        Product = p.Product,
-                        Unit = p.Unit,
-                        Price = p.Product != null ? p.Product.Price : 0,
-                        Count = 1
-                    };
-                    sources.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("一个送货单最多只能有 " + DeliverySheet.MaxItemCount + " 个送货单项");
-                }
+                    ID = Guid.NewGuid(),
+                    ProductID = p.ProductID,
+                    Unit = p.Unit,
+                    Price = p.Product != null ? p.Product.Price : 0,
+                    Count = 1
+                };
+                sources.Add(item);
             }
             ShowDeliveryItemsOnGrid(sources);
         }
@@ -295,25 +295,17 @@ namespace LJH.Inventory.UI.Forms
             List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.OrderItem != null && it.OrderItem.Value == oi.ID))
             {
-                if (sources.Count < DeliverySheet.MaxItemCount)
+                DeliveryItem item = new DeliveryItem()
                 {
-                    DeliveryItem item = new DeliveryItem()
-                    {
-                        ID = Guid.NewGuid(),
-                        OrderItem = oi.ID,
-                        OrderID = oi.OrderID,
-                        ProductID = oi.ProductID,
-                        Product = oi.Product,
-                        Unit = oi.Unit,
-                        Price = oi.Price,
-                        Count = oi.Inventory,
-                    };
-                    sources.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("一个送货单最多只能有 " + DeliverySheet.MaxItemCount + " 个送货单项");
-                }
+                    ID = Guid.NewGuid(),
+                    OrderItem = oi.ID,
+                    OrderID = oi.OrderID,
+                    ProductID = oi.ProductID,
+                    Unit = oi.Unit,
+                    Price = oi.Price,
+                    Count = oi.Inventory,
+                };
+                sources.Add(item);
             }
             ShowDeliveryItemsOnGrid(sources);
         }
@@ -326,14 +318,12 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CompanyInfo item = frm.SelectedItem as CompanyInfo;
-                txtCustomer.Text = item.Name;
-                txtCustomer.Tag = item;
+                Customer = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             }
             else
             {
                 txtCustomer.Text = string.Empty;
-                txtCustomer.Tag = null;
             }
         }
 
