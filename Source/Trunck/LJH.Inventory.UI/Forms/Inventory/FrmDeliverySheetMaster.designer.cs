@@ -51,10 +51,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
+            this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddSheet = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +72,7 @@
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlLeft.SuspendLayout();
+            this.CategoryMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,35 +85,35 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 98);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // pnlFilter
@@ -256,6 +260,7 @@
             // 
             // customerTree1
             // 
+            this.customerTree1.ContextMenuStrip = this.CategoryMenu;
             this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
@@ -263,6 +268,28 @@
             this.customerTree1.Size = new System.Drawing.Size(286, 364);
             this.customerTree1.TabIndex = 0;
             this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
+            // 
+            // CategoryMenu
+            // 
+            this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_FreshTree,
+            this.mnu_AddSheet});
+            this.CategoryMenu.Name = "contextMenuStrip1";
+            this.CategoryMenu.Size = new System.Drawing.Size(137, 48);
+            // 
+            // mnu_FreshTree
+            // 
+            this.mnu_FreshTree.Name = "mnu_FreshTree";
+            this.mnu_FreshTree.Size = new System.Drawing.Size(136, 22);
+            this.mnu_FreshTree.Text = "刷新";
+            this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
+            // 
+            // mnu_AddSheet
+            // 
+            this.mnu_AddSheet.Name = "mnu_AddSheet";
+            this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
+            this.mnu_AddSheet.Text = "新建送货单";
+            this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
             // 
             // splitter1
             // 
@@ -316,7 +343,6 @@
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
             this.colCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colCustomer.Width = 150;
             // 
             // colWareHouse
@@ -405,6 +431,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
+            this.CategoryMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -434,8 +461,12 @@
         private Controls.CustomerTree customerTree1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.CheckBox chkShipped;
+        private System.Windows.Forms.ContextMenuStrip CategoryMenu;
+        private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddSheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
-        private System.Windows.Forms.DataGridViewLinkColumn colCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
@@ -445,6 +476,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.CheckBox chkShipped;
     }
 }

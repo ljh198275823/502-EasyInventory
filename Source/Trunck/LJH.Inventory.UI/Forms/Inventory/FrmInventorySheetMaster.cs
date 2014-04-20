@@ -88,11 +88,12 @@ namespace LJH.Inventory.UI.Forms
         {
             InventorySheet sheet = item as InventorySheet;
             row.Cells["colSheetNo"].Value = sheet.ID;
+            CompanyInfo supplier = supplierTree1.GetSupplier(sheet.SupplierID);
+            row.Cells["colSupplier"].Value = supplier != null ? supplier.Name : string.Empty;
             WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;
             row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
-            CompanyInfo supplier = supplierTree1.GetSupplier(sheet.SupplierID);
-            row.Cells["colSupplier"].Value = supplier != null ? supplier.Name : string.Empty;
+            row.Cells["colInventoryDate"].Value = sheet.InventoryDate != null ? sheet.InventoryDate.Value.ToString("yyyy-MM-dd") : null;
             row.Cells["colAmount"].Value = sheet.Amount.Trim();
             row.Cells["colMemo"].Value = sheet.Memo;
             if (sheet.State == SheetState.Canceled)

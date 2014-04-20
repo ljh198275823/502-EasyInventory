@@ -26,6 +26,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ID { get; set; }
         /// <summary>
+        /// 获取或设置单据创建日期
+        /// </summary>
+        public DateTime CreateDate { get; set; }
+        /// <summary>
         /// 获取或设置仓库ID
         /// </summary>
         public string WareHouseID { get; set; }
@@ -38,11 +42,15 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public SheetState State { get; set; }
         /// <summary>
+        /// 获取或设置入库日期
+        /// </summary>
+        public DateTime? InventoryDate { get; set; }
+        /// <summary>
         /// 获取或设置收货单的备注
         /// </summary>
         public string Memo { get; set; }
         /// <summary>
-        /// 获取或设置所有送货单项
+        /// 获取或设置所有收货单项
         /// </summary>
         public List<InventoryItem> Items { get; set; }
         #endregion

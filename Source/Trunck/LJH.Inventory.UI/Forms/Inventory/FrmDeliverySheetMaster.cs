@@ -98,6 +98,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
             row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
+            row.Cells["colShipDate"].Value = sheet.ShipDate != null ? sheet.ShipDate.Value.ToString("yyyy-MM-dd") : null;
             row.Cells["colLinker"].Value = sheet.Linker;
             row.Cells["colTelphone"].Value = sheet.LinkerPhoneCall;
             row.Cells["colAddress"].Value = sheet.Address;
@@ -154,5 +155,18 @@ namespace LJH.Inventory.UI.Forms
             FreshData();
         }
         #endregion
+
+        private void mnu_FreshTree_Click(object sender, EventArgs e)
+        {
+            customerTree1.Init();
+            FreshData();
+        }
+
+        private void mnu_AddSheet_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
+        }
+
+
     }
 }

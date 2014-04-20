@@ -27,7 +27,14 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 公共属性
+        /// <summary>
+        /// 获取或设置要发货的客户
+        /// </summary>
         public CompanyInfo Customer { get; set; }
+        /// <summary>
+        /// 获取或设置发货的订单,用于增加送货单时指定要发货的订单
+        /// </summary>
+        public Order Order { get; set; }
         #endregion
 
         #region 私有方法
@@ -178,12 +185,13 @@ namespace LJH.Inventory.UI.Forms
             {
                 sheet = new DeliverySheet();
                 sheet.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
+                sheet.CreateDate = DateTime.Now;
             }
             else
             {
                 sheet = UpdatingItem as DeliverySheet;
             }
-            sheet.CustomerID = this.txtCustomer.Tag != null ? (this.txtCustomer.Tag as CompanyInfo).ID : null;
+            sheet.CustomerID = Customer != null ? Customer.ID : null;
             if (!string.IsNullOrEmpty(this.txtWareHouse.Text) && this.txtWareHouse.Tag != null)
             {
                 sheet.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
@@ -224,14 +232,16 @@ namespace LJH.Inventory.UI.Forms
                 this.btnPrint.Enabled = false;
                 this.btnApprove.Enabled = false;
                 this.btnShip.Enabled = false;
+                this.btnNullify.Enabled = false;
             }
             else
             {
                 DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                this.btnSave.Enabled = sheet.State == SheetState.Add;
+                this.btnSave.Enabled = sheet.CanEdit;
                 this.btnPrint.Enabled = sheet.CanPrint;
                 this.btnApprove.Enabled = sheet.CanApprove;
                 this.btnShip.Enabled = sheet.CanShip;
+                this.btnNullify.Enabled = sheet.CanCancel;
             }
         }
         #endregion
@@ -262,13 +272,6 @@ namespace LJH.Inventory.UI.Forms
         {
             PerformAttachOpen(gridAttachment);
         }
-        #endregion
-
-        #region 公共属性
-        /// <summary>
-        /// 获取或设置发货的订单,用于增加送货单时指定要发货的订单
-        /// </summary>
-        public Order Order { get; set; }
         #endregion
 
         #region 公共方法
@@ -387,12 +390,12 @@ namespace LJH.Inventory.UI.Forms
 
         private void mnu_AddOrderItem_Click(object sender, EventArgs e)
         {
-            if (txtCustomer.Tag != null)
+            if (Customer != null)
             {
                 FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
                 frm.ForSelect = true;
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
-                con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
+                con.CustomerID = Customer.ID;
                 con.States = new List<SheetState>();
                 //con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
@@ -435,7 +438,27 @@ namespace LJH.Inventory.UI.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.btnOk.PerformClick();
+            //this.btnOk.PerformClick();
+            DeliverySheet sheet = GetItemFromInput() as DeliverySheet;
+            CommandResult ret = null;
+            if (IsAdding)
+            {
+                ret = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Add(sheet, Operator.Current.Name);
+                if (ret.Result == ResultCode.Successful) OnItemAdded(new ItemAddedEventArgs(sheet));
+            }
+            else
+            {
+                ret = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Update(sheet, Operator.Current.Name);
+                if (ret.Result == ResultCode.Successful) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
+            }
+            if (ret.Result == ResultCode.Successful)
+            {
+                DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
+                this.UpdatingItem = sheet1;
+                ItemShowing();
+                ShowButtonState();
+                MessageBox.Show("保存成功");
+            }
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
@@ -455,6 +478,7 @@ namespace LJH.Inventory.UI.Forms
                             ItemShowing();
                             ShowButtonState();
                             this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
+                            MessageBox.Show("审核成功");
                         }
                         else
                         {
@@ -533,39 +557,23 @@ namespace LJH.Inventory.UI.Forms
         {
             if (UpdatingItem != null)
             {
-                //if (MessageBox.Show("是否要作废此送货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                //{
-                //    DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                //    CommandResult ret = null;
-                //    if (sheet.Paid > 0)
-                //    {
-                //        DialogResult qr = MessageBox.Show("取消送货单时，对于此送货单已经支付的金额，你是否想把它用于抵销其它应收项？", "询问", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-                //        if (qr != DialogResult.Cancel)
-                //        {
-                //            ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).Cancel(sheet, OperatorInfo.CurrentOperator.OperatorName, qr == DialogResult.Yes);
-                //        }
-                //        else
-                //        {
-                //            return;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        ret = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).Cancel(sheet, OperatorInfo.CurrentOperator.OperatorName, false);
-                //    }
-                //    if (ret.Result == ResultCode.Successful)
-                //    {
-                //        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(sheet.ID).QueryObject;
-                //        this.UpdatingItem = sheet1;
-                //        ItemShowing();
-                //        ShowButtonState();
-                //        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    }
-                //}
+                if (MessageBox.Show("是否要作废此送货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    DeliverySheet sheet = UpdatingItem as DeliverySheet;
+                    CommandResult ret = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Cancel(sheet, Operator.Current.Name, false);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
+                        this.UpdatingItem = sheet1;
+                        ItemShowing();
+                        ShowButtonState();
+                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 

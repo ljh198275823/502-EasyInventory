@@ -178,7 +178,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 order = new Order();
                 order.Items = new List<OrderItem>();
-                order.OrderDate = DateTime.Now;
+                order.CreateDate = DateTime.Now;
                 order.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
             }
             else

@@ -219,6 +219,7 @@ namespace LJH.Inventory.BLL
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             InventorySheet sheet1 = sheet.Clone();
             sheet.State = SheetState.Inventory;
+            sheet.InventoryDate = DateTime.Now;
             ProviderFactory.Create<IInventorySheetProvider>(_RepoUri).Update(sheet, sheet1, unitWork);
 
             AddToProductInventory(sheet, unitWork); //更新商品库存

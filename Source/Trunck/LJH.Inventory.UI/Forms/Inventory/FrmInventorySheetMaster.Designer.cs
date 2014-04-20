@@ -59,7 +59,6 @@
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInventoryOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -245,7 +244,6 @@
             this.colAmount,
             this.colState,
             this.colInventoryDate,
-            this.colInventoryOperator,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -350,12 +348,6 @@
             this.colInventoryDate.Name = "colInventoryDate";
             this.colInventoryDate.ReadOnly = true;
             // 
-            // colInventoryOperator
-            // 
-            this.colInventoryOperator.HeaderText = "收货人员";
-            this.colInventoryOperator.Name = "colInventoryOperator";
-            this.colInventoryOperator.ReadOnly = true;
-            // 
             // colMemo
             // 
             this.colMemo.HeaderText = "备注";
@@ -422,7 +414,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

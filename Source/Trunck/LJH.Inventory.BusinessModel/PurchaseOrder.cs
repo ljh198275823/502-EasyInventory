@@ -19,6 +19,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ID { get; set; }
         /// <summary>
+        /// 获取或设置创建日期
+        /// </summary>
+        public DateTime CreateDate { get; set; }
+        /// <summary>
         /// 获取或设置客户ID
         /// </summary>
         public string SupplierID { get; set; }

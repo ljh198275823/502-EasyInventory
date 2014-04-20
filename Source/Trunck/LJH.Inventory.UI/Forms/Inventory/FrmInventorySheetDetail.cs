@@ -165,10 +165,11 @@ namespace LJH.Inventory.UI.Forms
         protected override object GetItemFromInput()
         {
             InventorySheet sheet = UpdatingItem as InventorySheet;
-            if (sheet == null) sheet = new InventorySheet();
-            if (txtSheetNo.Text == "自动创建")
+            if (sheet == null)
             {
-                sheet.ID = string.Empty;
+                sheet = new InventorySheet();
+                if (txtSheetNo.Text == "自动创建") sheet.ID = string.Empty;
+                sheet.CreateDate = DateTime.Now;
             }
             else
             {

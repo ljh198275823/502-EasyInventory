@@ -285,6 +285,7 @@ namespace LJH.Inventory.BLL
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             DeliverySheet sheet1 = sheet.Clone();
+            sheet.ShipDate = DateTime.Now;
             sheet.State = SheetState.Shipped;
             provider.Update(sheet, sheet1, unitWork);
 

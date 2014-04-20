@@ -111,6 +111,7 @@
   <Table Name="dbo.DeliverySheet" Member="LJH.Inventory.BusinessModel.DeliverySheet">
     <Type Name="LJH.Inventory.BusinessModel.DeliverySheet">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
+      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WareHouseID" Member="WareHouseID" DbType="nvarchar(50) NOT NULL"/>
       <Column Name="Linker" Member="Linker"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -123,6 +124,7 @@
       <Column Name="Discount" Member="Discount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="ShipDate" Member="ShipDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Sheet_Item" Member="Items" ThisKey="ID" OtherKey="SheetNo"/>
     </Type>
@@ -161,9 +163,11 @@
   <Table Name="dbo.InventorySheet" Member="LJH.Inventory.BusinessModel.InventorySheet">
     <Type Name="LJH.Inventory.BusinessModel.InventorySheet">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
-      <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="InventoryDate" Member="InventoryDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Sheet_Item" Member="Items"  ThisKey="ID" OtherKey="SheetNo"/>
     </Type>
@@ -206,6 +210,7 @@
   <Table Name="dbo.Order" Member="LJH.Inventory.BusinessModel.Order">
     <Type Name="LJH.Inventory.BusinessModel.Order">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
+      <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax"  DbType="bit not null" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -256,6 +261,7 @@
   <Table Name="dbo.PurchaseOrder" Member="LJH.Inventory.BusinessModel.PurchaseOrder">
     <Type Name="LJH.Inventory.BusinessModel.PurchaseOrder">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
+      <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax"  DbType="bit not null" UpdateCheck="Never"/>
       <Column Name="Buyer" Member="Buyer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
