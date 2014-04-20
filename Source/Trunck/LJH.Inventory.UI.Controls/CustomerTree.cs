@@ -93,7 +93,7 @@ namespace LJH.Inventory.UI.Controls
             this.Nodes.Clear();
             this.Nodes.Add(LoadCustomer ? "所有客户" : "所有客户类别");
 
-            List<CustomerType> items = (new CustomerTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
+            List<CustomerType> items = (new CustomerTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.Nodes[0]);

@@ -8,17 +8,13 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class PortBLL
+    public class PortBLL:BLLBase <string,Port>
     {
         #region 构造函数
         public PortBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
@@ -47,29 +43,6 @@ namespace LJH.Inventory.BLL
                 return ports.Where(item => item.IsForeign).ToList();
             }
             return null;
-        }
-
-        public CommandResult Add(Port info)
-        {
-            return ProviderFactory.Create<IPortProvider>(_RepoUri).Insert(info);
-        }
-
-        public CommandResult Update(Port info)
-        {
-            Port original = ProviderFactory.Create<IPortProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original != null)
-            {
-                return ProviderFactory.Create<IPortProvider>(_RepoUri).Update(info, original);
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "记录不存在");
-            }
-        }
-
-        public CommandResult Delete(Port info)
-        {
-            return ProviderFactory.Create<IPortProvider>(_RepoUri).Delete(info);
         }
         #endregion
     }

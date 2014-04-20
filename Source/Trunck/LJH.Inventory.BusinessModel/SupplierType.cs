@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示供应商类别
     /// </summary>
-    public class SupplierType
+    public class SupplierType : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public SupplierType()

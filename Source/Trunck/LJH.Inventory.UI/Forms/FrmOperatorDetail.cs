@@ -83,7 +83,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object addingItem)
         {
-            return bll.Insert((Operator)addingItem);
+            return bll.Add((Operator)addingItem);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)

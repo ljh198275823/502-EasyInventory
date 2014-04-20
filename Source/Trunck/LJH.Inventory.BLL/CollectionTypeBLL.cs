@@ -8,47 +8,12 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CollectionTypeBLL
+    public class CollectionTypeBLL : BLLBase<string, CollectionType>
     {
         #region 构造函数
         public CollectionTypeBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
-        }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
-        #endregion
-
-        #region 公共方法
-        public QueryResultList<CollectionType> GetAll()
-        {
-            ICollectionTypeProvider provider = ProviderFactory.Create<ICollectionTypeProvider>(_RepoUri);
-            return provider.GetItems(null);
-        }
-
-        public CommandResult Add(CollectionType info)
-        {
-            return ProviderFactory.Create<ICollectionTypeProvider>(_RepoUri).Insert(info);
-        }
-
-        public CommandResult Update(CollectionType info)
-        {
-            CollectionType original = ProviderFactory.Create<ICollectionTypeProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original != null)
-            {
-                return ProviderFactory.Create<ICollectionTypeProvider>(_RepoUri).Update(info, original);
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "记录不存在");
-            }
-        }
-
-        public CommandResult Delete(CollectionType info)
-        {
-            return ProviderFactory.Create<ICollectionTypeProvider>(_RepoUri).Delete(info);
         }
         #endregion
     }

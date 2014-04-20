@@ -11,7 +11,7 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     [DataContract]
     [Serializable]
-    public class CurrencyType
+    public class CurrencyType : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public CurrencyType()

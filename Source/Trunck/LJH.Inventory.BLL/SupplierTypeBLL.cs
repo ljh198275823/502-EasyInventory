@@ -9,50 +9,23 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class SupplierTypeBLL
+    public class SupplierTypeBLL:BLLBase <string,SupplierType >
     {
         #region 构造函数
         public SupplierTypeBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
-        public QueryResultList<SupplierType> GetAll()
+        public override CommandResult Delete(SupplierType info)
         {
-            return ProviderFactory.Create<ISupplierTypeProvider>(_RepoUri).GetItems(null);
-        }
-
-        public QueryResult<SupplierType> GetByID(string id)
-        {
-            return ProviderFactory.Create<ISupplierTypeProvider>(_RepoUri).GetByID(id);
-        }
-
-        public CommandResult Add(SupplierType info)
-        {
-            return ProviderFactory.Create<ISupplierTypeProvider>(_RepoUri).Insert(info);
-        }
-
-        public CommandResult Update(SupplierType info)
-        {
-            SupplierType original = ProviderFactory.Create<ISupplierTypeProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original != null)
+            List<SupplierType> tps = ProviderFactory.Create<ISupplierTypeProvider>(_RepoUri).GetItems(null).QueryObjects;
+            if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
-                return ProviderFactory.Create<ISupplierTypeProvider>(_RepoUri).Update(info, original);
+                return new CommandResult(ResultCode.Fail, "类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "记录不存在");
-            }
-        }
-
-        public CommandResult Delete(SupplierType info)
-        {
             ICustomerProvider sp = ProviderFactory.Create<ICustomerProvider>(_RepoUri);
             CustomerSearchCondition con = new CustomerSearchCondition() { ClassID = CustomerClass.Supplier, Category = info.ID };
             if (sp.GetItems(con).QueryObjects.Count > 0)

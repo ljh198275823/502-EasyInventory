@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachmentBLL.cs" />
+    <Compile Include="BLLBase.cs" />
     <Compile Include="CollectionTypeBLL.cs" />
     <Compile Include="ContactBLL.cs" />
     <Compile Include="CurrencyTypeBLL.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="DocumentOperationBLL.cs" />
     <Compile Include="ExpenditureTypeBLL.cs" />
     <Compile Include="ExpenditureRecordBLL.cs" />
+    <Compile Include="ISheetProcessor.cs" />
     <Compile Include="PortBLL.cs" />
     <Compile Include="PriceTermBLL.cs" />
     <Compile Include="ProductInventoryBLL.cs" />

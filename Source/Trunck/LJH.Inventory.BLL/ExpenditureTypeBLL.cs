@@ -8,50 +8,23 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ExpenditureTypeBLL
+    public class ExpenditureTypeBLL : BLLBase<string, ExpenditureType>
     {
         #region 构造函数
         public ExpenditureTypeBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
-        public QueryResultList<ExpenditureType> GetAll()
+        public override CommandResult Delete(ExpenditureType info)
         {
-            return ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).GetItems(null);
-        }
-
-        public QueryResult<ExpenditureType> GetByID(string id)
-        {
-            return ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).GetByID(id);
-        }
-
-        public CommandResult Add(ExpenditureType info)
-        {
-            return ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).Insert(info);
-        }
-
-        public CommandResult Update(ExpenditureType info)
-        {
-            ExpenditureType original = ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original != null)
+            List<ExpenditureType> tps = ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).GetItems(null).QueryObjects;
+            if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
-                return ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).Update(info, original);
+                return new CommandResult(ResultCode.Fail, "类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "记录不存在");
-            }
-        }
-
-        public CommandResult Delete(ExpenditureType info)
-        {
             return ProviderFactory.Create<IExpenditureTypeProvider>(_RepoUri).Delete(info);
         }
         #endregion

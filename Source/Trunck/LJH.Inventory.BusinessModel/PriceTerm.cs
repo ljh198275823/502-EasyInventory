@@ -10,8 +10,8 @@ namespace LJH.Inventory.BusinessModel
     /// 表示价格条款
     /// </summary>
     [DataContract]
-    [Serializable ]
-    public class PriceTerm
+    [Serializable]
+    public class PriceTerm : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public PriceTerm()
@@ -28,12 +28,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置名称
         /// </summary>
-        [DataMember ]
+        [DataMember]
         public string Name { get; set; }
         /// <summary>
         /// 获取或设置备注
         /// </summary>
-        [DataMember ]
+        [DataMember]
         public string Memo { get; set; }
         #endregion
     }

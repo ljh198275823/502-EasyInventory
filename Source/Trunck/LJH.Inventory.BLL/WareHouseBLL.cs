@@ -9,31 +9,18 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class WareHouseBLL
+    public class WareHouseBLL:BLLBase <string,WareHouse >
     {
         #region 构造函数
         public WareHouseBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
-        public QueryResult<WareHouse> GetByID(string id)
-        {
-            return ProviderFactory.Create<IWareHouseProvider>(_RepoUri).GetByID(id);
-        }
-
-        public QueryResultList<WareHouse> GetAll()
-        {
-            return ProviderFactory.Create<IWareHouseProvider>(_RepoUri).GetItems(null);
-        }
-
-        public CommandResult Add(WareHouse info)
+        
+        public override CommandResult Add(WareHouse info)
         {
             if (string.IsNullOrEmpty(info.ID))
             {
@@ -41,27 +28,12 @@ namespace LJH.Inventory.BLL
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
-                return ProviderFactory.Create<IWareHouseProvider>(_RepoUri).Insert(info);
+                return base.Add(info);
             }
             else
             {
                 return new CommandResult(ResultCode.Fail, "创建仓库编号失败，请重试");
             }
-        }
-
-        public CommandResult Update(WareHouse info)
-        {
-            WareHouse original = ProviderFactory.Create<IWareHouseProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original == null)
-            {
-                return new CommandResult(ResultCode.Fail, "系统中不存在ID为 " + info.ID + " 的仓库信息");
-            }
-            return ProviderFactory.Create<IWareHouseProvider>(_RepoUri).Update(info, original);
-        }
-
-        public CommandResult Delete(WareHouse info)
-        {
-            return ProviderFactory.Create<IWareHouseProvider>(_RepoUri).Delete(info);
         }
         #endregion
     }

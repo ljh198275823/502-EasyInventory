@@ -8,8 +8,10 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
@@ -51,7 +53,7 @@ namespace LJH.Inventory.UI.Forms
             }
             else
             {
-                temp=(decimal )filesize ;
+                temp = (decimal)filesize;
                 suffix = " B";
             }
             temp = Math.Round(temp, 2).Trim();
@@ -59,7 +61,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
-        #region 保护方法
+        #region 与操作记录有关的方法
         protected void ShowOperations(List<DocumentOperation> items, DataGridView dataGridView1)
         {
             dataGridView1.Rows.Clear();
@@ -198,6 +200,62 @@ namespace LJH.Inventory.UI.Forms
                 else
                 {
                     MessageBox.Show(ret.Message);
+                }
+            }
+        }
+        #endregion
+
+        #region 与工具栏有关的方法
+        protected virtual void PerformCreateOrModify<T>(ISheetProcessor<T> processor, SheetOperation operation) where T : class
+        {
+            T sheet = GetItemFromInput() as T;
+            CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
+            if (ret.Result == ResultCode.Successful)
+            {
+                UpdatingItem = sheet;
+                IsAdding = false;
+                ItemShowing();
+                ShowButtonState();
+                if (operation == SheetOperation.Create) this.OnItemAdded(new ItemAddedEventArgs(sheet));
+                if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
+                MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
+            }
+            else
+            {
+                MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        protected virtual void PerformOperation<T>(ISheetProcessor<T> processor, SheetOperation operation) where T : class
+        {
+            if (UpdatingItem != null)
+            {
+                T sheet = null;
+                if (operation == SheetOperation.Create || operation == SheetOperation.Modify)
+                {
+                    MessageBox.Show("保存请调用 " + "PerformCreateOrModify()");
+                    return;
+                }
+                else
+                {
+                    sheet = UpdatingItem as T;
+                    if (MessageBox.Show(string.Format("是否要进行 {0}?", SheetOperationDescription.GetDescription(operation)),
+                               "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+                CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    ItemShowing();
+                    ShowButtonState();
+                    if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
+                    MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -9,55 +9,28 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CustomerTypeBLL
+    public class CustomerTypeBLL : BLLBase<string, CustomerType>
     {
         #region 构造函数
         public CustomerTypeBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
-        public QueryResultList<CustomerType> GetAll()
+        public override CommandResult Delete(CustomerType info)
         {
-            return ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).GetItems(null);
-        }
-
-        public QueryResult<CustomerType> GetByID(string id)
-        {
-            return ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).GetByID(id);
-        }
-
-        public CommandResult Add(CustomerType info)
-        {
-            return ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).Insert(info);
-        }
-
-        public CommandResult Update(CustomerType info)
-        {
-            CustomerType original = ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original != null)
+            List<CustomerType> tps = ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).GetItems(null).QueryObjects;
+            if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
-                return ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).Update(info, original);
+                return new CommandResult(ResultCode.Fail, "客户类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "记录不存在");
-            }
-        }
-
-        public CommandResult Delete(CustomerType info)
-        {
             ICustomerProvider sp = ProviderFactory.Create<ICustomerProvider>(_RepoUri);
             CustomerSearchCondition con = new CustomerSearchCondition() { ClassID = CustomerClass.Customer, Category = info.ID };
             if (sp.GetItems(con).QueryObjects.Count > 0)
             {
-                return new CommandResult(ResultCode.Fail, "此类别不能删除，已经有客户归到此类别，如果确实要删除此类别，请先更改相关客户的所属类别");
+                return new CommandResult(ResultCode.Fail, "已经有客户归到此类别，如果确实要删除此类别，请先更改相关客户的所属类别");
             }
             return ProviderFactory.Create<ICustomerTypeProvider>(_RepoUri).Delete(info);
         }

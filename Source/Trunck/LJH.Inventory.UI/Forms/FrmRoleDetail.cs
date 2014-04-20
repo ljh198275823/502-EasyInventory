@@ -74,7 +74,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult  AddItem(object item)
         {
-            return bll.Insert((Role)item);
+            return bll.Add ((Role)item);
         }
 
         protected override CommandResult UpdateItem(object item)

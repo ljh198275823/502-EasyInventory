@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace LJH.Inventory.BusinessModel
 {
     [Serializable()]
-    public class Role
+    public class Role : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         //系统预定义的三种角色
         private readonly string Admin = "系统管理员"; //系统管理员

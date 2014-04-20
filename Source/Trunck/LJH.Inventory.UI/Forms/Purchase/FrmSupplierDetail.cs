@@ -125,7 +125,7 @@ namespace LJH.Inventory.UI.Forms
         {
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             CompanyInfo c = item as CompanyInfo;
-            CommandResult ret = bll.Insert(item as CompanyInfo, 0, 0);
+            CommandResult ret = bll.Add(item as CompanyInfo, 0, 0);
             if (ret.Result == ResultCode.Successful)
             {
                 foreach (DataGridViewRow row in GridView.Rows)

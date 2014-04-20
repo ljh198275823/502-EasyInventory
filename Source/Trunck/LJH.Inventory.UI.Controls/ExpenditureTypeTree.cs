@@ -63,7 +63,7 @@ namespace LJH.Inventory.UI.Controls
             root.ImageIndex = 0;
             root.SelectedImageIndex = 0;
 
-            List<ExpenditureType> items = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
+            List<ExpenditureType> items = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, root);

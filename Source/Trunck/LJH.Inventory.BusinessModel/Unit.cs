@@ -7,8 +7,8 @@ using System.Runtime.Serialization;
 namespace LJH.Inventory.BusinessModel
 {
     [DataContract]
-    [Serializable ]
-    public class Unit
+    [Serializable]
+    public class Unit : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public Unit()
@@ -30,12 +30,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置复数形式
         /// </summary>
-        [DataMember ]
+        [DataMember]
         public string Plural { get; set; }
         /// <summary>
         /// 获取或设置备注
         /// </summary>
-        [DataMember ]
+        [DataMember]
         public string Memo { get; set; }
         #endregion
     }

@@ -21,7 +21,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置创建日期
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public DateTime LastActiveDate { get; set; }
         /// <summary>
         /// 获取或设置客户ID
         /// </summary>

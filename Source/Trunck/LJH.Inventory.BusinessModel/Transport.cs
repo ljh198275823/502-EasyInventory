@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
 {
     [DataContract]
     [Serializable]
-    public class Transport
+    public class Transport : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public Transport()

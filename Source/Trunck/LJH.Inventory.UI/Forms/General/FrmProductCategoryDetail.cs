@@ -104,7 +104,7 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult AddItem(object addingItem)
         {
             ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.Current.ConnStr);
-            return bll.Insert(addingItem as ProductCategory);
+            return bll.Add(addingItem as ProductCategory);
         }
 
         protected override CommandResult UpdateItem(object updatingItem)

@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示一种商品
     /// </summary>
-    public class Product
+    public class Product : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public Product()

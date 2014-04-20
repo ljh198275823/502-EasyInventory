@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class WareHouse
+    public class WareHouse : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public WareHouse()

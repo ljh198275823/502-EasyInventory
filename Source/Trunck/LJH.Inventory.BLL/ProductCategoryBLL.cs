@@ -9,31 +9,17 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ProductCategoryBLL
+    public class ProductCategoryBLL : BLLBase<string, ProductCategory>
     {
         #region 构造函数
         public ProductCategoryBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
-        public QueryResult<ProductCategory> GetByID(string id)
-        {
-            return ProviderFactory.Create<IProductCategoryProvider>(_RepoUri).GetByID(id);
-        }
-
-        public QueryResultList<ProductCategory> GetAll()
-        {
-            return ProviderFactory.Create<IProductCategoryProvider>(_RepoUri).GetItems(null);
-        }
-
-        public CommandResult Insert(ProductCategory info)
+        public override CommandResult Add(ProductCategory info)
         {
             if (string.IsNullOrEmpty(info.ID))
             {
@@ -41,7 +27,7 @@ namespace LJH.Inventory.BLL
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
-                return ProviderFactory.Create<IProductCategoryProvider>(_RepoUri).Insert(info);
+                return base.Add(info);
             }
             else
             {
@@ -49,19 +35,13 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public CommandResult Update(ProductCategory info)
+        public override CommandResult Delete(ProductCategory info)
         {
-            IProductCategoryProvider provider = ProviderFactory.Create<IProductCategoryProvider>(_RepoUri);
-            ProductCategory original = provider.GetByID(info.ID).QueryObject;
-            if (original != null)
+            List<ProductCategory> tps = ProviderFactory.Create<IProductCategoryProvider>(_RepoUri).GetItems(null).QueryObjects;
+            if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
-                return provider.Update(info, original);
+                return new CommandResult(ResultCode.Fail, "类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
-            return new CommandResult(ResultCode.Fail, string.Format("ID={0} 的类别在系统中不存在", info.ID));
-        }
-
-        public CommandResult Delete(ProductCategory info)
-        {
             IProductProvider sp = ProviderFactory.Create<IProductProvider>(_RepoUri);
             ProductSearchCondition con = new ProductSearchCondition() { CategoryID = info.ID };
             if (sp.GetItems(con).QueryObjects.Count > 0)

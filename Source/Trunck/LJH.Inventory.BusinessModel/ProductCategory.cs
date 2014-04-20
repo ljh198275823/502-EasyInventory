@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示商品类型
     /// </summary>
-    public class ProductCategory
+    public class ProductCategory : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 公共属性
         /// <summary>

@@ -31,7 +31,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            operators = bll.GetAllOperators().QueryObjects.ToList();
+            operators = bll.GetItems(null).QueryObjects.ToList();
             List<object> source = new List<object>();
             foreach (object o in operators)
             {
@@ -40,13 +40,13 @@ namespace LJH.Inventory.UI.Forms
             return source;
         }
 
-        protected override void ShowItemInGridViewRow(DataGridViewRow row,object item)
+        protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             Operator info = item as Operator;
             row.Tag = info;
-            row.Cells["colOperatorID"].Value  = info.ID;
+            row.Cells["colOperatorID"].Value = info.ID;
             row.Cells["colOperatorName"].Value = info.Name;
-            row.Cells["colRoleID"] .Value = info.Role.ID;
+            row.Cells["colRoleID"].Value = info.Role != null ? info.Role.ID : string.Empty;
             row.Cells["colDepartment"].Value = info.Department;
             row.Cells["colPost"].Value = info.Post;
         }

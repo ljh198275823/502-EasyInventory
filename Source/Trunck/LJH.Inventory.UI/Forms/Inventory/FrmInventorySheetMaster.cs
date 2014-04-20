@@ -80,7 +80,7 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             _Sheets = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
+            _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             return FilterData();
         }
 

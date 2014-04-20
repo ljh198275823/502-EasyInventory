@@ -210,7 +210,7 @@
   <Table Name="dbo.Order" Member="LJH.Inventory.BusinessModel.Order">
     <Type Name="LJH.Inventory.BusinessModel.Order">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
-      <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax"  DbType="bit not null" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson"  DbType="nvarchar(50)" UpdateCheck="Never"/>

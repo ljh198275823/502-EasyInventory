@@ -11,7 +11,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 代表系统操作员
     /// </summary>
-    public class Operator
+    public class Operator : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 静态变量及方法
         private static LJH.GeneralLibrary.SoftDog.DSEncrypt DES = new DSEncrypt();

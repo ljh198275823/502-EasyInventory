@@ -9,17 +9,13 @@ using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CompanyBLL
+    public class CompanyBLL : BLLBase<string, CompanyInfo>
     {
         #region 构造函数
         public CompanyBLL(string repUri)
+            : base(repUri)
         {
-            _RepoUri = repUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 私有方法
@@ -42,20 +38,7 @@ namespace LJH.Inventory.BLL
         }
         #endregion
 
-        #region 公共方法
-        /// <summary>
-        /// 获取所有客户信息
-        /// </summary>
-        /// <returns></returns>
-        public QueryResultList<CompanyInfo> GetItems(SearchCondition con)
-        {
-            return ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetItems(con);
-        }
-
-        public QueryResult<CompanyInfo> GetByID(string id)
-        {
-            return ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(id);
-        }
+        #region 公共方法}
         /// <summary>
         /// 获取所有客户信息
         /// </summary>
@@ -85,7 +68,7 @@ namespace LJH.Inventory.BLL
             return GetItems(con);
         }
 
-        public CommandResult Insert(CompanyInfo info)
+        public override CommandResult Add(CompanyInfo info)
         {
             if (string.IsNullOrEmpty(info.ID))
             {
@@ -93,15 +76,15 @@ namespace LJH.Inventory.BLL
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
-                return ProviderFactory.Create<ICustomerProvider>(_RepoUri).Insert(info);
+                return base.Add(info);
             }
             else
             {
-                return new CommandResult(ResultCode.Fail, "创建客户编号失败，请重试");
+                return new CommandResult(ResultCode.Fail, "创建编号失败，请重试");
             }
         }
 
-        public CommandResult Insert(CompanyInfo info, decimal prepayment, decimal receivables)
+        public CommandResult Add(CompanyInfo info, decimal prepayment, decimal receivables)
         {
             if (string.IsNullOrEmpty(info.ID))
             {
@@ -146,17 +129,7 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public CommandResult Update(CompanyInfo info)
-        {
-            CompanyInfo original = ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original == null)
-            {
-                return new CommandResult(ResultCode.Fail, string.Format("系统中不存在 ID={0} 的用户信息", info.ID));
-            }
-            return ProviderFactory.Create<ICustomerProvider>(_RepoUri).Update(info, original);
-        }
-
-        public CommandResult Delete(CompanyInfo info)
+        public override  CommandResult Delete(CompanyInfo info)
         {
             DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
             con.CustomerID = info.ID;

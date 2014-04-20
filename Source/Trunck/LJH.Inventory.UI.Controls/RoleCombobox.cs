@@ -27,8 +27,8 @@ namespace LJH.Inventory.UI.Controls
         public void Init()
         {
             RoleBLL bll = new RoleBLL(AppSettings.Current.ConnStr);
-            this.DataSource = bll.GetAllRoles().QueryObjects;
-            this.DisplayMember = "RoleID";
+            this.DataSource = bll.GetItems(null).QueryObjects;
+            this.DisplayMember = "ID";
             this.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 

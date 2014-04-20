@@ -86,7 +86,7 @@ namespace LJH.Inventory.UI.Controls
             this.Nodes.Clear();
             this.Nodes.Add(LoadProduct ? "所有产品" : "所有产品类别");
 
-            List<ProductCategory> items = (new ProductCategoryBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
+            List<ProductCategory> items = (new ProductCategoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddCategoryNodes(items, this.Nodes[0]);

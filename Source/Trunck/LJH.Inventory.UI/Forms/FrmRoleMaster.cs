@@ -43,7 +43,7 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             RoleBLL bll = new RoleBLL(AppSettings.Current.ConnStr);
-            roles = bll.GetAllRoles().QueryObjects.ToList();
+            roles = bll.GetItems(null).QueryObjects.ToList();
             List<object> source = new List<object>();
             foreach (object o in roles)
             {

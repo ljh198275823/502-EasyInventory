@@ -33,7 +33,7 @@ namespace LJH.Inventory.UI.Controls
         public void Init()
         {
             ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.Current.ConnStr);
-            List<ProductCategory> items = bll.GetAll().QueryObjects;
+            List<ProductCategory> items = bll.GetItems(null).QueryObjects;
             this.Items.Clear();
             if (items.Count > 0)
             {

@@ -178,7 +178,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 order = new Order();
                 order.Items = new List<OrderItem>();
-                order.CreateDate = DateTime.Now;
+                order.LastActiveDate = DateTime.Now;
                 order.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
             }
             else
@@ -216,12 +216,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new OrderBLL(AppSettings.Current.ConnStr)).Add(item as Order, Operator.Current.Name);
+            return (new OrderBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as Order, SheetOperation.Create, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new OrderBLL(AppSettings.Current.ConnStr)).Update(item as Order, Operator.Current.Name);
+            return (new OrderBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as Order, SheetOperation.Modify, Operator.Current.Name);
         }
         #endregion
 
@@ -253,6 +253,44 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 工具栏处理程序
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            ISheetProcessor<Order> processor = new OrderBLL(AppSettings.Current.ConnStr);
+            PerformCreateOrModify<Order>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            ISheetProcessor<Order> processor = new OrderBLL(AppSettings.Current.ConnStr);
+            PerformCreateOrModify<Order>(processor, SheetOperation.Approve);
+        }
+
+        private void btnUndoApprove_Click(object sender, EventArgs e)
+        {
+            ISheetProcessor<Order> processor = new OrderBLL(AppSettings.Current.ConnStr);
+            PerformOperation<Order>(processor, SheetOperation.UndoApprove);
+        }
+
+        private void btnNullify_Click(object sender, EventArgs e)
+        {
+            ISheetProcessor<Order> processor = new OrderBLL(AppSettings.Current.ConnStr);
+            PerformOperation<Order>(processor, SheetOperation.Nullify);
+        }
+
+        private void btnShip_Click(object sender, EventArgs e)
+        {
+            if (UpdatingItem != null)
+            {
+                Order order = UpdatingItem as Order;
+                FrmDeliverySheetDetail frm = new FrmDeliverySheetDetail();
+                frm.Order = order;
+                frm.IsAdding = true;
+                frm.ShowDialog();
+            }
+        }
+        #endregion
+
         #region 公共方法
         public void AddOrdertem(Product product)
         {
@@ -274,71 +312,6 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理程序
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            this.btnOk.PerformClick();
-        }
-
-        private void btnApprove_Click(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要审核此订单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    Order sheet = UpdatingItem as Order;
-                    CommandResult ret = (new OrderBLL(AppSettings.Current.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        Order sheet1 = (new OrderBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-
-        private void btnNullify_Click(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否将此订单作废?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    Order sheet = UpdatingItem as Order;
-                    CommandResult ret = (new OrderBLL(AppSettings.Current.ConnStr)).Nullify(sheet.ID, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        Order sheet1 = (new OrderBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-
-        private void btnShip_Click(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                Order order = UpdatingItem as Order;
-                FrmDeliverySheetDetail frm = new FrmDeliverySheetDetail();
-                frm.Order = order;
-                frm.IsAdding = true;
-                frm.ShowDialog();
-            }
-        }
-
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];

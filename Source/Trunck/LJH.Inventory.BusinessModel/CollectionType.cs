@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
 {
     [DataContract]
     [Serializable]
-    public class CollectionType
+    public class CollectionType : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public CollectionType()

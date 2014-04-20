@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户类别
     /// </summary>
-    public class CustomerType
+    public class CustomerType : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public CustomerType()

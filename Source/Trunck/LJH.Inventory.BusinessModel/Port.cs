@@ -9,9 +9,9 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示港口
     /// </summary>
-    [DataContract ]
-    [Serializable ]
-    public  class Port
+    [DataContract]
+    [Serializable]
+    public class Port : LJH.GeneralLibrary.DAL.IEntity<string>
     {
         #region 构造函数
         public Port()
@@ -33,12 +33,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置是否是国外港口
         /// </summary>
-        [DataMember ]
+        [DataMember]
         public bool IsForeign { get; set; }
         /// <summary>
         /// 获取或设置所在国家
         /// </summary>
-        [DataMember ]
+        [DataMember]
         public string Country { get; set; }
         /// <summary>
         /// 获取或设置所在地区（省份)
@@ -48,7 +48,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置备注
         /// </summary>
-        [DataMember ]
+        [DataMember]
         public string Memo { get; set; }
         #endregion
     }

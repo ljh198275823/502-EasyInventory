@@ -93,7 +93,7 @@ namespace LJH.Inventory.UI.Controls
             this.Nodes.Clear();
             this.Nodes.Add(LoadSupplier ? "所有供应商" : "所有供应商类别");
 
-            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.Current.ConnStr)).GetAll().QueryObjects;
+            List<SupplierType> items = (new SupplierTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 AddDesendNodes(items, this.Nodes[0]);
