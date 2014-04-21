@@ -181,7 +181,7 @@ namespace LJH.Inventory.UI.Forms
             if (PurchaseSheet == null)
             {
                 PurchaseSheet = new PurchaseOrder();
-                PurchaseSheet.CreateDate  = DateTime.Now;
+                PurchaseSheet.LastActiveDate  = DateTime.Now;
                 PurchaseSheet.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
             }
             else

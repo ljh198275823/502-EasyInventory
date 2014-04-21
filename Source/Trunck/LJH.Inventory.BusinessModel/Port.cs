@@ -11,7 +11,7 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     [DataContract]
     [Serializable]
-    public class Port : LJH.GeneralLibrary.DAL.IEntity<string>
+    public class Port : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public Port()

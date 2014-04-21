@@ -11,7 +11,7 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     [DataContract]
     [Serializable]
-    public class PriceTerm : LJH.GeneralLibrary.DAL.IEntity<string>
+    public class PriceTerm : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public PriceTerm()

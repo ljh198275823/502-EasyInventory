@@ -92,7 +92,6 @@
     <Compile Include="DocumentOperationBLL.cs" />
     <Compile Include="ExpenditureTypeBLL.cs" />
     <Compile Include="ExpenditureRecordBLL.cs" />
-    <Compile Include="ISheetProcessor.cs" />
     <Compile Include="PortBLL.cs" />
     <Compile Include="PriceTermBLL.cs" />
     <Compile Include="ProductInventoryBLL.cs" />
@@ -105,6 +104,7 @@
     <Compile Include="PurchaseOrderBLL.cs" />
     <Compile Include="RelatedCompanyTypeBLL.cs" />
     <Compile Include="RoleBLL.cs" />
+    <Compile Include="SheetProcessorBase.cs" />
     <Compile Include="SupplierTypeBLL.cs" />
     <Compile Include="SysParaSettingsBll.cs" />
     <Compile Include="SystemParameterBLL.cs" />

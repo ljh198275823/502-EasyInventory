@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class UnitProvider : LJH.GeneralLibrary.DAL.ProviderBase<Unit, string>, IUnitProvider
+    public class UnitProvider : ProviderBase<Unit, string>
     {
         #region 构造函数
         public UnitProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

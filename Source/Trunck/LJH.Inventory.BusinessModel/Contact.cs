@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示公司联系人
     /// </summary>
-    public class Contact : LJH.GeneralLibrary.DAL.IEntity<int>
+    public class Contact : LJH.GeneralLibrary.Core.DAL.IEntity<int>
     {
         #region 构造函数
         public Contact()

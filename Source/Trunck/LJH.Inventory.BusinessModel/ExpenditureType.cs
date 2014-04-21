@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class ExpenditureType : LJH.GeneralLibrary.DAL.IEntity<string>
+    public class ExpenditureType : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public ExpenditureType()

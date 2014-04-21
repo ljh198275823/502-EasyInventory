@@ -6,7 +6,7 @@ using System.Text;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory .BusinessModel .SearchCondition ;
 using LJH.Inventory .DAL .IProvider ;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
@@ -37,7 +37,7 @@ namespace LJH.Inventory.BLL
             AttachmentSearchCondition con = new AttachmentSearchCondition();
             con.DocumentID = documentID;
             con.DocumentType = documentType;
-            return ProviderFactory.Create<IAttachmentHeaderProvider>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<AttachmentHeader, Guid>>(_RepoUri).GetItems(con);
         }
         /// <summary>
         /// 上传附件
@@ -59,11 +59,11 @@ namespace LJH.Inventory.BLL
                         fs.Position = 0;
                         fs.Read(bs, 0, (int)fs.Length);
                         IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                        ProviderFactory.Create<IAttachmentHeaderProvider>(_RepoUri).Insert(header, unitWork); //插入附件头
+                        ProviderFactory.Create<IProvider<AttachmentHeader, Guid>>(_RepoUri).Insert(header, unitWork); //插入附件头
                         Attachment a = new Attachment();
                         a.ID = header.ID;
                         a.Value = bs;
-                        ProviderFactory.Create<IAttachmentProvider>(_RepoUri).Insert(a, unitWork); //插入附件内容
+                        ProviderFactory.Create<IProvider<Attachment, Guid>>(_RepoUri).Insert(a, unitWork); //插入附件内容
                         return unitWork.Commit();
                     }
                     else
@@ -85,7 +85,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Download(AttachmentHeader header, string path)
         {
-            QueryResult<Attachment> ret = ProviderFactory.Create<IAttachmentProvider>(_RepoUri).GetByID(header.ID);
+            QueryResult<Attachment> ret = ProviderFactory.Create<IProvider<Attachment, Guid>>(_RepoUri).GetByID(header.ID);
             Attachment a = ret.QueryObject;
             if (a != null && a.Value != null)
             {
@@ -111,11 +111,11 @@ namespace LJH.Inventory.BLL
         public CommandResult Delete(AttachmentHeader header)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            ProviderFactory.Create<IAttachmentHeaderProvider>(_RepoUri).Delete(header, unitWork);
-            Attachment att = ProviderFactory.Create<IAttachmentProvider>(_RepoUri).GetByID(header.ID).QueryObject;
+            ProviderFactory.Create<IProvider<AttachmentHeader, Guid>>(_RepoUri).Delete(header, unitWork);
+            Attachment att = ProviderFactory.Create<IProvider<Attachment, Guid>>(_RepoUri).GetByID(header.ID).QueryObject;
             if (att != null)
             {
-                ProviderFactory.Create<IAttachmentProvider>(_RepoUri).Delete(att, unitWork);
+                ProviderFactory.Create<IProvider<Attachment, Guid>>(_RepoUri).Delete(att, unitWork);
             }
             return unitWork.Commit();
         }

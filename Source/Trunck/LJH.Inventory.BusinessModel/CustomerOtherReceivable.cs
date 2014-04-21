@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户其它应收款,包括出口退税等都在这里
     /// </summary>
-    public class CustomerOtherReceivable
+    public class CustomerOtherReceivable : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public CustomerOtherReceivable()

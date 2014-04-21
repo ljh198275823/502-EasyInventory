@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     /// <summary>
     /// 表示原料，加工品等物品的查询条件
     /// </summary>
-    public class ProductSearchCondition : LJH.GeneralLibrary.DAL.SearchCondition
+    public class ProductSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
         #region 公共属性
         /// <summary>

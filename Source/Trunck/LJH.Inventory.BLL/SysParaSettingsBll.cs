@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 using LJH.GeneralLibrary.ExceptionHandling;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {

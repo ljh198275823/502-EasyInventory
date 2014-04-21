@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class PortBLL:BLLBase <string,Port>
+    public class PortBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, Port>
     {
         #region 构造函数
         public PortBLL(string repoUri)
@@ -24,7 +24,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public List<Port> GetNativePorts()
         {
-            List<Port> ports = ProviderFactory.Create<IPortProvider>(_RepoUri).GetItems(null).QueryObjects;
+            List<Port> ports = GetItems(null).QueryObjects;
             if (ports != null && ports.Count > 0)
             {
                 return ports.Where(item => item.IsForeign == false).ToList();
@@ -37,7 +37,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public List<Port> GetForeignPorts()
         {
-            List<Port> ports = ProviderFactory.Create<IPortProvider>(_RepoUri).GetItems(null).QueryObjects;
+            List<Port> ports = GetItems(null).QueryObjects;
             if (ports != null && ports.Count > 0)
             {
                 return ports.Where(item => item.IsForeign).ToList();

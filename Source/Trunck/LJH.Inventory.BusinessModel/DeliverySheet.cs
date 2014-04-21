@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示送货单
     /// </summary>
-    public class DeliverySheet : ISheet
+    public class DeliverySheet : ISheet<string>
     {
         #region 构造函数
         public DeliverySheet()
@@ -24,7 +24,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置单据创建日期
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public DateTime LastActiveDate { get; set; }
         /// <summary>
         /// 获取或设置客户ID
         /// </summary>
@@ -159,7 +159,7 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 公共方法
-        public DeliverySheet Clone()
+        public ISheet<string> Clone()
         {
             return MemberwiseClone() as DeliverySheet;
         }

@@ -5,99 +5,29 @@ using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CustomerOtherReceivableBLL
+    public class CustomerOtherReceivableBLL : SheetProcessorBase<CustomerOtherReceivable>
     {
         #region 构造函数
         public CustomerOtherReceivableBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
         #endregion
 
-        #region 私有变量
-        private string _RepoUri;
+        #region 重写基类方法
+        protected override string CreateSheetID(CustomerOtherReceivable info)
+        {
+            info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DaiFuPrefix,
+                    UserSettings.Current.DaiFuDateFormat, UserSettings.Current.DaiFuSerialCount, info.DocumentType); //代付款
+            return info.ID;
+        }
         #endregion
 
         #region 公共方法
-        public QueryResult<CustomerOtherReceivable> GetByID(string id)
-        {
-            return ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).GetByID(id);
-        }
-
-        public QueryResultList<CustomerOtherReceivable> GetItems(SearchCondition con)
-        {
-            return ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).GetItems(con);
-        }
-
-        public CommandResult Add(CustomerOtherReceivable info, string opt)
-        {
-            if (string.IsNullOrEmpty(info.ID))
-            {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DaiFuPrefix,
-                    UserSettings.Current.DaiFuDateFormat, UserSettings.Current.DaiFuSerialCount, info.DocumentType); //代付款
-                if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
-            }
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            CompanyInfo c = ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(info.CustomerID).QueryObject;
-            if (c != null)
-            {
-                ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).Insert(info, unitWork);
-                DocumentOperation doc = new DocumentOperation()
-                {
-                    DocumentID = info.ID,
-                    DocumentType = info.DocumentType,
-                    OperatDate = DateTime.Now,
-                    Operation = "新增",
-                    State = SheetState.Add,
-                    Operator = opt,
-                };
-                ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-                return unitWork.Commit();
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "系统中不存在此代付的客户");
-            }
-        }
-
-        public CommandResult Approve(string sheetNo, string opt)
-        {
-            CustomerOtherReceivable info = ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).GetByID(sheetNo).QueryObject;
-            if (info != null)
-            {
-                if (info.State == SheetState.Add)
-                {
-                    IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                    CustomerOtherReceivable original = info.Clone();
-                    info.State = SheetState.Approved;
-                    ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).Update(info, original, unitWork);
-
-                    DocumentOperation doc = new DocumentOperation()
-                    {
-                        DocumentID = info.ID,
-                        DocumentType = info.DocumentType,
-                        OperatDate = DateTime.Now,
-                        Operation = "审核",
-                        State = SheetState.Approved,
-                        Operator = opt,
-                    };
-                    ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-                    return unitWork.Commit();
-                }
-                else
-                {
-                    return new CommandResult(ResultCode.Fail, "已经审核过的单据不能再审核");
-                }
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "单据在系统中已经不存在");
-            }
-        }
         /// <summary>
         /// 取消客户代付款项
         /// </summary>

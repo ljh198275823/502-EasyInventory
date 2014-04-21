@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 
@@ -73,7 +73,7 @@ namespace LJH.Inventory.BLL
                 Operation = SheetOperationDescription.GetDescription(operation),
                 Operator = opt,
             };
-            ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
+            ProviderFactory.Create<IProvider<DocumentOperation, int>>(_RepoUri).Insert(doc, unitWork);
         }
         #endregion
     }

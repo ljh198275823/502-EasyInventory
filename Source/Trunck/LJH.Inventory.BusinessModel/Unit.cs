@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
 {
     [DataContract]
     [Serializable]
-    public class Unit : LJH.GeneralLibrary.DAL.IEntity<string>
+    public class Unit : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public Unit()

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LJH.GeneralLibrary.Core.DAL;
 using LJH.Inventory.DAL.IProvider;
 
-namespace LJH.GeneralLibrary.DAL
+namespace LJH.GeneralLibrary.Core.BLL
 {
-    public abstract class BLLBase<TID, TEntity> where TEntity : IEntity<TID>
+    public abstract class BLLBase<TID, TEntity> where TEntity : class , IEntity<TID>
     {
         #region 构造函数
         public BLLBase(string repoUri)
@@ -16,7 +17,7 @@ namespace LJH.GeneralLibrary.DAL
         #endregion
 
         #region  私有变量
-        protected string _RepoUri;
+        protected string _RepoUri = null;
         #endregion
 
         #region 公共方法

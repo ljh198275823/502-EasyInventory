@@ -6,7 +6,7 @@ using System.IO;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class Attachment
+    public class Attachment : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
 

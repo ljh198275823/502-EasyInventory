@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户应收账款项,每个能产生应收的单据都会有对应的一个应收款项,ID号为对应的单据号
     /// </summary>
-    public class CustomerReceivable
+    public class CustomerReceivable : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
         public CustomerReceivable()
@@ -71,10 +71,10 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 其它应收款
         /// </summary>
-        Other=0,
+        Other = 0,
         /// <summary>
         /// 送货单产生的应收款
         /// </summary>
-        Delivery=1,
+        Delivery = 1,
     }
 }

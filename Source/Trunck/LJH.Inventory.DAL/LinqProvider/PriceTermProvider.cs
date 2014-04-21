@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class PriceTermProvider:ProviderBase <PriceTerm ,string >,IPriceTermProvider
+    public class PriceTermProvider:ProviderBase <PriceTerm ,string >
     {
         #region 构造函数
         public PriceTermProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

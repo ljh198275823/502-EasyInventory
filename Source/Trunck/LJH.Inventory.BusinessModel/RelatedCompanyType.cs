@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class RelatedCompanyType
+    public class RelatedCompanyType : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public RelatedCompanyType()

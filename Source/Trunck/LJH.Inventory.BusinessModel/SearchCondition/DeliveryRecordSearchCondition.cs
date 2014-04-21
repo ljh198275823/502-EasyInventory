@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class DeliveryRecordSearchCondition : LJH.GeneralLibrary.DAL.SearchCondition
+    public class DeliveryRecordSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
         /// <summary>
         /// 获取或设置出货记录查询条件中的货品ID

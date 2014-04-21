@@ -5,11 +5,11 @@ using System.Text;
 using LJH.Inventory .DAL .IProvider ;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ProductCategoryBLL : BLLBase<string, ProductCategory>
+    public class ProductCategoryBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, ProductCategory>
     {
         #region 构造函数
         public ProductCategoryBLL(string repoUri)

@@ -6,11 +6,11 @@ using System.Data.SqlClient;
 using LJH.Inventory .DAL .IProvider ;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class CustomerProvider : ProviderBase<CompanyInfo, string>, ICustomerProvider
+    public class CustomerProvider : ProviderBase<CompanyInfo, string>
     {
         #region 构造函数
         public CustomerProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

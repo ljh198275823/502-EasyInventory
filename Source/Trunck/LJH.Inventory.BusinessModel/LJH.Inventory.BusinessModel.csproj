@@ -96,7 +96,6 @@
     <Compile Include="DocumentOperation.cs" />
     <Compile Include="ExpenditureType.cs" />
     <Compile Include="ExpenditureRecord.cs" />
-    <Compile Include="IEntity.cs" />
     <Compile Include="InventoryItem.cs" />
     <Compile Include="InventoryOutType.cs" />
     <Compile Include="InventoryRecord.cs" />
@@ -113,6 +112,7 @@
     <Compile Include="RelatedCompanyType.cs" />
     <Compile Include="Resource\PaymentModeDescription.cs" />
     <Compile Include="Resource\SheetOperationDescription.cs" />
+    <Compile Include="Resource\SheetStateDescription.cs" />
     <Compile Include="SearchCondition\AttachmentSearchCondition.cs" />
     <Compile Include="SearchCondition\ContactSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerDaiFuSearchCondition.cs" />
@@ -131,8 +131,6 @@
     <Compile Include="SearchCondition\PurchaseOrderSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierReceivableSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierSearchCondition.cs" />
-    <Compile Include="SheetOperation.cs" />
-    <Compile Include="SheetState.cs" />
     <Compile Include="DateTimeRange.cs" />
     <Compile Include="ProductInventory.cs" />
     <Compile Include="InventorySheet.cs" />
@@ -141,7 +139,6 @@
     <Compile Include="PaymentMode.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductCategory.cs" />
-    <Compile Include="Resource\SheetStateDescription.cs" />
     <Compile Include="SearchCondition\DeliveryRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\DeliverySheetPaymentSearchCondition.cs" />
     <Compile Include="SearchCondition\DeliverySheetSearchCondition.cs" />
@@ -155,6 +152,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DeliveryItem.cs" />
     <Compile Include="DeliverySheet.cs" />
+    <Compile Include="SheetOperation.cs" />
+    <Compile Include="SheetState.cs" />
     <Compile Include="SupplierReceivable.cs" />
     <Compile Include="SupplierType.cs" />
     <Compile Include="SysparameterInfo.cs" />

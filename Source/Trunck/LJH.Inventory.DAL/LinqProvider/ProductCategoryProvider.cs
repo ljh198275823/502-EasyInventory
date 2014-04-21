@@ -5,11 +5,11 @@ using System.Text;
 using System.Data.SqlClient;
 using LJH.Inventory .BusinessModel;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class ProductCategoryProvider : ProviderBase<ProductCategory, string>, IProductCategoryProvider
+    public class ProductCategoryProvider : ProviderBase<ProductCategory, string>
     {
         #region 构造函数
         public ProductCategoryProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

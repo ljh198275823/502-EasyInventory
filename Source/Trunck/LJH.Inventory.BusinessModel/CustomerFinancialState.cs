@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户的财务状况
     /// </summary>
-    public class CustomerFinancialState
+    public class CustomerFinancialState : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public CustomerFinancialState()

@@ -5,11 +5,11 @@ using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class AttachmentHeaderProvider : ProviderBase<AttachmentHeader, Guid>, IAttachmentHeaderProvider
+    public class AttachmentHeaderProvider : ProviderBase<AttachmentHeader, Guid>
     {
         #region 构造函数
         public AttachmentHeaderProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

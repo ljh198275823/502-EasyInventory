@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class PriceTermBLL:BLLBase <string,PriceTerm >
+    public class PriceTermBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, PriceTerm>
     {
         #region 构造函数
         public PriceTermBLL(string repoUri)

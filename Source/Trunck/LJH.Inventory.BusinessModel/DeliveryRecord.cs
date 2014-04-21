@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示库存品的出货记录
     /// </summary>
-    public class DeliveryRecord
+    public class DeliveryRecord : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
         public DeliveryRecord()

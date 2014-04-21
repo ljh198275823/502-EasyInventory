@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public  class ProductInventory
+    public class ProductInventory : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
         public ProductInventory()
@@ -30,7 +30,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置商品信息
         /// </summary>
-        public Product Product{ get; set; }
+        public Product Product { get; set; }
         /// <summary>
         /// 获取或设置库存数量
         /// </summary>
@@ -58,7 +58,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return Reserved +Valid ;
+                return Reserved + Valid;
             }
         }
         /// <summary>

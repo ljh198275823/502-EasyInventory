@@ -4,32 +4,16 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class SystemParameterBLL
+    public class SystemParameterBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, SysparameterInfo>
     {
         #region 构造函数
         public SystemParameterBLL(string repUri)
+            : base(repUri)
         {
-            provider = ProviderFactory.Create<ISysParameterProvider>(repUri);
-        }
-        #endregion
-
-        #region 私有变量
-        private ISysParameterProvider provider;
-        #endregion
-
-        #region 公共方法
-        public QueryResult<SysparameterInfo> GetSysParameterByID(string id)
-        {
-            return provider.GetByID(id);
-        }
-
-        public CommandResult Insert(SysparameterInfo info)
-        {
-            return provider.Insert(info);
         }
         #endregion
     }

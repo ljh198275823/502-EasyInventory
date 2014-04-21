@@ -8,8 +8,20 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示各种单据的一个接口
     /// </summary>
-    public interface ISheet
+    public interface ISheet<TID> : LJH.GeneralLibrary.Core.DAL.IEntity<TID>
     {
+        /// <summary>
+        /// 获取单据类别
+        /// </summary>
+        string DocumentType { get; }
+        /// <summary>
+        /// 获取或设置上次活动时间
+        /// </summary>
+        DateTime LastActiveDate { get; set; }
+        /// <summary>
+        /// 获取或设置当前状态
+        /// </summary>
+        SheetState State { get; set; }
         /// <summary>
         /// 获取单据是否可以修改
         /// </summary>
@@ -23,8 +35,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         bool CanCancel { get; }
         /// <summary>
-        /// 获取单据类别
+        /// 克隆一个自身复本
         /// </summary>
-        string DocumentType { get; }
+        /// <returns></returns>
+        ISheet<TID> Clone();
     }
 }

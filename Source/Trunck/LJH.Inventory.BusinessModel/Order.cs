@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class Order:ISheet 
+    public class Order : ISheet<string>
     {
         #region 构造函数
         public Order()
@@ -85,13 +85,13 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return "Order"; 
+                return "Order";
             }
         }
         #endregion
 
         #region 公共方法
-        public Order Clone()
+        public ISheet<string> Clone()
         {
             return this.MemberwiseClone() as Order;
         }

@@ -5,11 +5,11 @@ using System.Text;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory .DAL .IProvider ;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class DocumentOperationProvider : ProviderBase<DocumentOperation, int>, IDocumentOperationProvider
+    public class DocumentOperationProvider : ProviderBase<DocumentOperation, int>
     {
         #region 构造函数
         public DocumentOperationProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
@@ -19,11 +19,6 @@ namespace LJH.Inventory.DAL.LinqProvider
         #endregion
 
         #region 重写基类方法
-        protected override DocumentOperation GetingItemByID(int id, System.Data.Linq.DataContext dc)
-        {
-            return dc.GetTable<DocumentOperation>().SingleOrDefault(item => item.ID == id);
-        }
-
         protected override List<DocumentOperation> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             IQueryable<DocumentOperation> ret = dc.GetTable<DocumentOperation>();

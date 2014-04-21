@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class TransportProvider : ProviderBase<Transport, string>, ITransportProvider
+    public class TransportProvider : ProviderBase<Transport, string>
     {
         #region 构造函数
         public TransportProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

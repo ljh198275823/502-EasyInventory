@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class PurchaseOrder : ISheet
+    public class PurchaseOrder : ISheet<string>
     {
         #region 构造函数
         public PurchaseOrder()
@@ -21,7 +21,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置创建日期
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public DateTime LastActiveDate { get; set; }
         /// <summary>
         /// 获取或设置客户ID
         /// </summary>
@@ -79,7 +79,7 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 公共方法
-        public PurchaseOrder Clone()
+        public ISheet<string> Clone()
         {
             return this.MemberwiseClone() as PurchaseOrder;
         }

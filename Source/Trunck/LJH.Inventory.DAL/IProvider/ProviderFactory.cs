@@ -8,7 +8,7 @@ using System.Data.Linq.Mapping;
 using System.Data.Linq;
 using LJH.Inventory .DAL .IProvider ;
 using LJH.Inventory .DAL .LinqProvider ;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.IProvider
 {

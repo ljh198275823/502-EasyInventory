@@ -330,7 +330,7 @@
   </Table>
   <Table Name="dbo.Sysparameter" Member="LJH.Inventory.BusinessModel.SysparameterInfo">
     <Type Name="LJH.Inventory.BusinessModel.SysparameterInfo">
-      <Column Name="Parameter" Member="Parameter"  DbType="nvarchar(30)" IsPrimaryKey="true" />
+      <Column Name="Parameter" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
       <Column Name="ParameterValue" Member="ParameterValue" DbType="nvarchar(4000)" UpdateCheck="Never"/>
       <Column Name="Description" Member="Description" DbType="nvarchar(100)" UpdateCheck="Never"/>
     </Type>

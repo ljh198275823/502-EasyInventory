@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class ProductInventoryItem
+    public class ProductInventoryItem : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
         public ProductInventoryItem()
@@ -14,7 +14,7 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 公共属性
-        public Guid  ID { get; set; }
+        public Guid ID { get; set; }
 
         public string ProductID { get; set; }
 

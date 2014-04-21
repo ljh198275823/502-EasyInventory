@@ -5,11 +5,11 @@ using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class CustomerReceivableProvider : ProviderBase<CustomerReceivable, Guid>, ICustomerReceivableProvider
+    public class CustomerReceivableProvider : ProviderBase<CustomerReceivable, Guid>
     {
         #region 构造函数
         public CustomerReceivableProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

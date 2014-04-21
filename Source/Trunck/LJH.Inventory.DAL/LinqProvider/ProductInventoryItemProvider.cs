@@ -6,11 +6,11 @@ using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class ProductInventoryItemProvider : ProviderBase<ProductInventoryItem, Guid >, IProductInventoryItemProvider
+    public class ProductInventoryItemProvider : ProviderBase<ProductInventoryItem, Guid >
     {
         public ProductInventoryItemProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
             : base(connStr,ms)

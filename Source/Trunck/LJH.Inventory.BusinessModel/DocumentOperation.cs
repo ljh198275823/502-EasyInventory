@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示单据的操作，如果审批，发货，取消等。
     /// </summary>
-    public class DocumentOperation
+    public class DocumentOperation : LJH.GeneralLibrary.Core.DAL.IEntity<int>
     {
         #region 构造函数
         public DocumentOperation()
@@ -32,7 +32,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置操作日期
         /// </summary>
-        public DateTime  OperatDate { get; set; }
+        public DateTime OperatDate { get; set; }
         /// <summary>
         /// 获取或设置操作
         /// </summary>

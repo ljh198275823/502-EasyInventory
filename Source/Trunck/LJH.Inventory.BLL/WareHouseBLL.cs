@@ -5,11 +5,11 @@ using System.Text;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.DAL.IProvider;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class WareHouseBLL:BLLBase <string,WareHouse >
+    public class WareHouseBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, WareHouse>
     {
         #region 构造函数
         public WareHouseBLL(string repoUri)
@@ -19,7 +19,7 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
-        
+
         public override CommandResult Add(WareHouse info)
         {
             if (string.IsNullOrEmpty(info.ID))

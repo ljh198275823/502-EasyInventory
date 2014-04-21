@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public abstract class SheetSearchCondition : LJH.GeneralLibrary.DAL.SearchCondition
+    public abstract class SheetSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
         /// <summary>
         /// 获取或设置单据号

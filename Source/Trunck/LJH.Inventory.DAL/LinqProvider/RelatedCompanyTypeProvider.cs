@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class RelatedCompanyTypeProvider : ProviderBase<RelatedCompanyType, string>, IRelatedCompanyTypeProvider
+    public class RelatedCompanyTypeProvider : ProviderBase<RelatedCompanyType, string>
     {
         #region 构造函数
         public RelatedCompanyTypeProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

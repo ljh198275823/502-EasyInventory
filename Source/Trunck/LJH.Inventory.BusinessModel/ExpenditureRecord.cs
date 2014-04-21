@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示公司的资金支出记录
     /// </summary>
-    public class ExpenditureRecord
+    public class ExpenditureRecord : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public ExpenditureRecord()
@@ -25,6 +25,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置ID
         /// </summary>
         public string ID { get; set; }
+        /// <summary>
+        /// 获取或设置最近一次活动日期
+        /// </summary>
+        public DateTime LastActiveDate { get; set; }
         /// <summary>
         /// 获取或设置支出日期
         /// </summary>

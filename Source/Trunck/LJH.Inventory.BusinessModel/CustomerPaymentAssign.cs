@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户付款与客户应收账款之间的分配
     /// </summary>
-    public class CustomerPaymentAssign
+    public class CustomerPaymentAssign : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
         public CustomerPaymentAssign()

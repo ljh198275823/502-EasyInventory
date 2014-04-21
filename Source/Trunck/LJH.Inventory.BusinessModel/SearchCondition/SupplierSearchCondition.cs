@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LJH.GeneralLibrary.DAL;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class SupplierSearchCondition : LJH.GeneralLibrary.DAL.SearchCondition
+    public class SupplierSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
         /// <summary>
         /// 获取或设置查询条件中的客户编号

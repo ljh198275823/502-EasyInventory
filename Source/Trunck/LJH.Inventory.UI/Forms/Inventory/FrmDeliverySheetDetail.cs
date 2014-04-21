@@ -185,7 +185,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 sheet = new DeliverySheet();
                 sheet.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
-                sheet.CreateDate = DateTime.Now;
+                sheet.LastActiveDate = DateTime.Now;
             }
             else
             {

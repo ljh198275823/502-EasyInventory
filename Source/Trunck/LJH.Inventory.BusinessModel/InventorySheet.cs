@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示收货单
     /// </summary>
-    public class InventorySheet
+    public class InventorySheet : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public InventorySheet()

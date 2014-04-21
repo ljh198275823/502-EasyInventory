@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户付款记录
     /// </summary>
-    public class CustomerPayment
+    public class CustomerPayment : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public CustomerPayment()

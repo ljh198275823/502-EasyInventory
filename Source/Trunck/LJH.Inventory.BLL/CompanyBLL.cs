@@ -5,16 +5,17 @@ using System.Text;
 using LJH.Inventory .DAL .IProvider ;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CompanyBLL : BLLBase<string, CompanyInfo>
+    public class CompanyBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, CompanyInfo>
     {
         #region 构造函数
         public CompanyBLL(string repUri)
             : base(repUri)
         {
+            ProviderFactory = (new ProviderFactory());
         }
         #endregion
 
@@ -24,15 +25,15 @@ namespace LJH.Inventory.BLL
             string id = null;
             if (classID == CustomerClass.Customer)
             {
-                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPrefix, UserSettings.Current.CustomerSerialCount, "customer");
+                id = ProviderFactory.CreateProvider<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPrefix, UserSettings.Current.CustomerSerialCount, "customer");
             }
             else if (classID == CustomerClass.Supplier)
             {
-                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "customer");
+                id = ProviderFactory.CreateProvider<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "customer");
             }
             else
             {
-                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("RC", 3, "customer");
+                id = ProviderFactory.CreateProvider<IAutoNumberCreater>(_RepoUri).CreateNumber("RC", 3, "customer");
             }
             return id;
         }
@@ -55,7 +56,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResultList<CustomerFinancialState> GetCustomerStates()
         {
-            return ProviderFactory.Create<ICustomerFinancialStateProvider>(_RepoUri).GetItems(null);
+            return ProviderFactory.CreateProvider<ICustomerFinancialStateProvider>(_RepoUri).GetItems(null);
         }
         /// <summary>
         /// 获取所有供应商信息
@@ -129,7 +130,7 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public override  CommandResult Delete(CompanyInfo info)
+        public override CommandResult Delete(CompanyInfo info)
         {
             DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
             con.CustomerID = info.ID;
@@ -166,10 +167,10 @@ namespace LJH.Inventory.BLL
             {
                 foreach (CustomerReceivable cr in crs)
                 {
-                    ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Delete(cr, unitWork);
+                    ProviderFactory.CreateProvider<ICustomerReceivableProvider>(_RepoUri).Delete(cr, unitWork);
                 }
             }
-            ProviderFactory.Create<ICustomerProvider>(_RepoUri).Delete(info, unitWork);
+            ProviderFactory.CreateProvider<ICustomerProvider>(_RepoUri).Delete(info, unitWork);
             return unitWork.Commit();
         }
         #endregion
