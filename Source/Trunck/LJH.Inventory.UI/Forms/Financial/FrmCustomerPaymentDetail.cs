@@ -9,8 +9,8 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
@@ -136,13 +136,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.Add(item as CustomerPayment, Operator.Current.Name);
+            return bll.ProcessSheet (item as CustomerPayment,SheetOperation .Create , Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.Update(item as CustomerPayment, Operator.Current.Name);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Modify , Operator.Current.Name);
         }
 
         protected override void ShowButtonState()
@@ -222,30 +222,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
-
-        private void btnNullify_Click(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    CustomerPayment item = UpdatingItem as CustomerPayment;
-                    CommandResult ret = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).Cancel(item, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        CustomerPayment item1 = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(item.ID).QueryObject;
-                        this.UpdatingItem = item1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(item1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
-                    }
-                }
-            }
-        }
 
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

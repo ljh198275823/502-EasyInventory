@@ -9,12 +9,12 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmInventorySheetDetail :FrmSheetDetailBase 
+    public partial class FrmInventorySheetDetail : FrmSheetDetailBase
     {
         public FrmInventorySheetDetail()
         {
@@ -55,7 +55,7 @@ namespace LJH.Inventory.UI.Forms
             return sum;
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, InventoryItem item,Product p)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, InventoryItem item, Product p)
         {
             row.Tag = item;
             row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
@@ -200,12 +200,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).Add(item as InventorySheet,Operator .Current .Name );
+            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as InventorySheet, SheetOperation.Create, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).Update(item as InventorySheet,Operator .Current .Name);
+            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as InventorySheet, SheetOperation.Modify, Operator.Current.Name);
         }
 
         protected override void ShowButtonState()
@@ -385,55 +385,20 @@ namespace LJH.Inventory.UI.Forms
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要审核此收货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    InventorySheet sheet = UpdatingItem as InventorySheet;
-                    CommandResult ret = (new InventorySheetBLL(AppSettings.Current.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            InventorySheetBLL bll = new InventorySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<InventorySheet>(bll, SheetOperation.Approve);
         }
 
         private void btnInventory_Click(object sender, EventArgs e)
         {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要将此收货单收货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    InventorySheet sheet = UpdatingItem as InventorySheet;
-                    CommandResult ret = (new InventorySheetBLL(AppSettings.Current.ConnStr)).Inventory(sheet.ID, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            InventorySheetBLL bll = new InventorySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<InventorySheet>(bll, SheetOperation.Inventory);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.btnOk.PerformClick();
+            InventorySheetBLL bll = new InventorySheetBLL(AppSettings.Current.ConnStr);
+            PerformCreateOrModify<InventorySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btn_PurchaseItemSelect_Click(object sender, EventArgs e)

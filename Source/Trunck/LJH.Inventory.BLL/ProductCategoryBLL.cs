@@ -37,20 +37,19 @@ namespace LJH.Inventory.BLL
 
         public override CommandResult Delete(ProductCategory info)
         {
-            List<ProductCategory> tps = ProviderFactory.Create<IProductCategoryProvider>(_RepoUri).GetItems(null).QueryObjects;
+            List<ProductCategory> tps = ProviderFactory.Create<IProvider<ProductCategory, string>>(_RepoUri).GetItems(null).QueryObjects;
             if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
                 return new CommandResult(ResultCode.Fail, "类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
-            IProductProvider sp = ProviderFactory.Create<IProductProvider>(_RepoUri);
+            IProvider<Product, string> sp = ProviderFactory.Create<IProvider<Product, string>>(_RepoUri);
             ProductSearchCondition con = new ProductSearchCondition() { CategoryID = info.ID };
             if (sp.GetItems(con).QueryObjects.Count > 0)
             {
                 return new CommandResult(ResultCode.Fail, "此类别不能删除，已经有物料归到此类别，如果确实要删除此类别，请先更改相关物料的所属类别");
             }
-            return ProviderFactory.Create<IProductCategoryProvider>(_RepoUri).Delete(info);
+            return base.Delete(info);
         }
         #endregion
-
     }
 }

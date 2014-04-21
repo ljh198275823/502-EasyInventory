@@ -9,12 +9,12 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmPurchaseOrderDetail : FrmSheetDetailBase 
+    public partial class FrmPurchaseOrderDetail : FrmSheetDetailBase
     {
         public FrmPurchaseOrderDetail()
         {
@@ -41,7 +41,7 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, PurchaseItem item,Product p)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, PurchaseItem item, Product p)
         {
             row.Tag = item;
             row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
@@ -181,7 +181,7 @@ namespace LJH.Inventory.UI.Forms
             if (PurchaseSheet == null)
             {
                 PurchaseSheet = new PurchaseOrder();
-                PurchaseSheet.LastActiveDate  = DateTime.Now;
+                PurchaseSheet.LastActiveDate = DateTime.Now;
                 PurchaseSheet.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
             }
             else
@@ -189,7 +189,7 @@ namespace LJH.Inventory.UI.Forms
                 PurchaseSheet = UpdatingItem as PurchaseOrder;
             }
             PurchaseSheet.OrderDate = this.dtOrderDate.Value;
-            PurchaseSheet.SupplierID =Supplier.ID;
+            PurchaseSheet.SupplierID = Supplier.ID;
             PurchaseSheet.Buyer = this.txtBuyer.Text;
             PurchaseSheet.DemandDate = this.dtDemandDate.Value;
             PurchaseSheet.WithTax = rdWithTax.Checked;
@@ -217,12 +217,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).Add(item as PurchaseOrder,Operator .Current.Name );
+            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as PurchaseOrder, SheetOperation.Create, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).Update(item as PurchaseOrder,Operator .Current .Name );
+            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as PurchaseOrder, SheetOperation.Modify, Operator.Current.Name);
         }
         #endregion
 
@@ -296,53 +296,20 @@ namespace LJH.Inventory.UI.Forms
         #region 事件处理程序
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.btnOk.PerformClick();
+            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
+            PerformCreateOrModify<PurchaseOrder>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要审核此采购单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
-                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        PurchaseOrder sheet1 = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
+            PerformOperation<PurchaseOrder>(bll, SheetOperation.Approve);
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否将此采购单作废?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
-                    CommandResult ret = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).Nullify(sheet.ID, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        PurchaseOrder sheet1 = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
+            PerformOperation<PurchaseOrder>(bll, SheetOperation.Nullify);
         }
 
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -428,7 +395,7 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Supplier  = frm.SelectedItem as CompanyInfo;
+                Supplier = frm.SelectedItem as CompanyInfo;
                 txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
             }
         }
@@ -443,7 +410,6 @@ namespace LJH.Inventory.UI.Forms
                 txtBuyer.Text = item.Name;
             }
         }
-        #endregion
 
         private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -472,6 +438,7 @@ namespace LJH.Inventory.UI.Forms
                 }
             }
         }
+        #endregion
     }
 }
 

@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class PurchaseOrderBLL:SheetProcessorBase <PurchaseOrder>
+    public class PurchaseOrderBLL : SheetProcessorBase<PurchaseOrder>
     {
         #region 构造函数
         public PurchaseOrderBLL(string repoUri)
@@ -34,7 +34,7 @@ namespace LJH.Inventory.BLL
         #region 公共方法
         public QueryResultList<PurchaseItemRecord> GetRecords(SearchCondition con)
         {
-            return ProviderFactory.Create<IPurchaseItemRecordProvider>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<PurchaseItemRecord, Guid>>(_RepoUri).GetItems(con);
         }
         #endregion
     }

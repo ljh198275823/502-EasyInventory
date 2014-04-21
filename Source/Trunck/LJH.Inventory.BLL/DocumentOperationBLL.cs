@@ -10,17 +10,13 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.BLL
 {
-    public class DocumentOperationBLL
+    public class DocumentOperationBLL:BLLBase <int,DocumentOperation >
     {
         #region 构造函数
         public DocumentOperationBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
@@ -37,43 +33,7 @@ namespace LJH.Inventory.BLL
                 DocumentID = documentID,
                 DocumentType = documentType,
             };
-            return ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).GetItems(con);
-        }
-
-        /// <summary>
-        /// 获取单据最后一次操作的操作记录
-        /// </summary>
-        /// <param name="sheet"></param>
-        /// <returns></returns>
-        public QueryResult<DocumentOperation> GetLatestOperation(Order sheet)
-        {
-            QueryResultList<DocumentOperation> ret = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(sheet.ID, sheet.DocumentType);
-            DocumentOperation log = null;
-            if (ret.Result == ResultCode.Successful)
-            {
-                List<DocumentOperation> items = ret.QueryObjects;
-                if (items != null && items.Count > 0)
-                {
-                    foreach (DocumentOperation item in items)
-                    {
-                        if (log == null || item.OperatDate > log.OperatDate) log = item;
-                    }
-                }
-            }
-            return new QueryResult<DocumentOperation>(ret.Result, ret.Message, log);
-        }
-
-        internal void AddOperationLog(string id, string docType, SheetOperation operation, string opt, IUnitWork unitWork, DateTime dt)
-        {
-            DocumentOperation doc = new DocumentOperation()
-            {
-                DocumentID = id,
-                DocumentType = docType,
-                OperatDate = dt,
-                Operation = SheetOperationDescription.GetDescription(operation),
-                Operator = opt,
-            };
-            ProviderFactory.Create<IProvider<DocumentOperation, int>>(_RepoUri).Insert(doc, unitWork);
+            return base.GetItems(con);
         }
         #endregion
     }

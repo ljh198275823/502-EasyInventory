@@ -10,8 +10,8 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.View;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
@@ -256,25 +256,25 @@ namespace LJH.Inventory.UI.Forms
         #region 工具栏处理程序
         private void btnSave_Click(object sender, EventArgs e)
         {
-            ISheetProcessor<Order> processor = new OrderBLL(AppSettings.Current.ConnStr);
+            OrderBLL  processor = new OrderBLL(AppSettings.Current.ConnStr);
             PerformCreateOrModify<Order>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            ISheetProcessor<Order> processor = new OrderBLL(AppSettings.Current.ConnStr);
+            OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);
             PerformCreateOrModify<Order>(processor, SheetOperation.Approve);
         }
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
-            ISheetProcessor<Order> processor = new OrderBLL(AppSettings.Current.ConnStr);
+            OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);
             PerformOperation<Order>(processor, SheetOperation.UndoApprove);
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            ISheetProcessor<Order> processor = new OrderBLL(AppSettings.Current.ConnStr);
+            OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);
             PerformOperation<Order>(processor, SheetOperation.Nullify);
         }
 

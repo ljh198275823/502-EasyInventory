@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ProductInventoryBLL : BLLBase<Guid, ProductInventoryItem>
+    public class ProductInventoryBLL : BLLBase<Guid, ProductInventory>
     {
         #region 构造函数
         public ProductInventoryBLL(string repoUri)

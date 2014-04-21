@@ -8,11 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmPortDetail :LJH.GeneralLibrary.UI.FrmDetailBase
+    public partial class FrmPortDetail :FrmDetailBase
     {
         public FrmPortDetail()
         {

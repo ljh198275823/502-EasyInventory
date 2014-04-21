@@ -38,7 +38,7 @@ namespace LJH.Inventory.BLL
                     InventoryItem = si.ID,
                     InventorySheet = si.SheetNo,
                 };
-                ProviderFactory.Create<IProvider <ProductInventoryItem ,Guid>>(_RepoUri).Insert(pii, unitWork);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii, unitWork);
             }
         }
 
@@ -112,7 +112,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResultList<InventoryRecord> GetInventoryRecords(SearchCondition con)
         {
-            return ProviderFactory.Create<IInventoryRecordProvider>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<InventoryRecord, Guid>>(_RepoUri).GetItems(con);
         }
         /// <summary>
         /// 收货单收货

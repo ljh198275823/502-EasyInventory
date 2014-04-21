@@ -11,8 +11,8 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Report;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
@@ -91,26 +91,6 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 事件处理程序
-        private void mnu_Cancel_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    CustomerOtherReceivable item = dataGridView1.SelectedRows[0].Tag as CustomerOtherReceivable;
-                    CommandResult ret = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).Cancel(item, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], item);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
-                    }
-                }
-            }
-        }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

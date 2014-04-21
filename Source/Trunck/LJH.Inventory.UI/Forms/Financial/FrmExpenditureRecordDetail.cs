@@ -8,12 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmExpenditureRecordDetail : FrmSheetDetailBase 
+    public partial class FrmExpenditureRecordDetail : FrmSheetDetailBase
     {
         public FrmExpenditureRecordDetail()
         {
@@ -25,7 +25,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         /// 获取或设置客户类别
         /// </summary>
         public ExpenditureType Category { get; set; }
-        #endregion 
+        #endregion
 
         #region 重写基类方法
         protected override bool CheckInput()
@@ -102,12 +102,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             ExpenditureRecordBLL bll = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
-            return bll.Add(item as ExpenditureRecord, Operator.Current.Name);
+            return bll.ProcessSheet(item as ExpenditureRecord, SheetOperation.Create, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            throw new Exception("资金支出不支持修改");
+            ExpenditureRecordBLL bll = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
+            return bll.ProcessSheet(item as ExpenditureRecord, SheetOperation.Modify, Operator.Current.Name);
         }
 
         protected override void ShowButtonState()
@@ -143,30 +144,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             PerformAttachOpen(gridAttachment);
         }
         #endregion
-
-        private void btnNullify_Click(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要取消此项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    ExpenditureRecord item = UpdatingItem as ExpenditureRecord;
-                    CommandResult ret = (new ExpenditureRecordBLL(AppSettings.Current.ConnStr)).Cancel(item, Operator.Current.Name);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        ExpenditureRecord item1 = (new ExpenditureRecordBLL(AppSettings.Current.ConnStr)).GetByID(item.ID).QueryObject;
-                        this.UpdatingItem = item1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(item1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
-                    }
-                }
-            }
-        }
 
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

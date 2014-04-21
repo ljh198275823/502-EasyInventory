@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
@@ -145,22 +145,14 @@ namespace LJH.Inventory.UI.Forms
         {
             Product p = addingItem as Product;
             CommandResult ret = null;
-            //if (txtWarehouse.SelectedWareHouse != null && txtCount.DecimalValue > 0)
-            //{
-            //    ret = (new ProductBLL(AppSettings.Current.ConnStr)).AddProduct(p, txtWarehouse.SelectedWareHouse.ID, txtCount.DecimalValue);
-            //}
-            //else
-            //{
-            ret = (new ProductBLL(AppSettings.Current.ConnStr)).AddProduct(p);
-            //}
+            ret = (new ProductBLL(AppSettings.Current.ConnStr)).Add(p);
             return ret;
         }
 
         protected override CommandResult UpdateItem(object updatingItem)
         {
             Product p = updatingItem as Product;
-            CommandResult ret = (new ProductBLL(AppSettings.Current.ConnStr)).UpdateProduct(p);
-            return ret;
+            return  (new ProductBLL(AppSettings.Current.ConnStr)).Update(p);
         }
         #endregion
 

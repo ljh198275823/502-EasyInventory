@@ -159,7 +159,15 @@ namespace LJH.Inventory.BLL
         /// <param name="dt"></param>
         protected virtual void AddOperationLog(string id, string docType, SheetOperation operation, string opt, IUnitWork unitWork, DateTime dt)
         {
-            (new DocumentOperationBLL(AppSettings.Current.ConnStr)).AddOperationLog(id, docType, operation, opt, unitWork, dt);
+            DocumentOperation doc = new DocumentOperation()
+            {
+                DocumentID = id,
+                DocumentType = docType,
+                OperatDate = dt,
+                Operation = SheetOperationDescription.GetDescription(operation),
+                Operator = opt,
+            };
+            ProviderFactory.Create<IProvider<DocumentOperation, int>>(_RepoUri).Insert(doc, unitWork);
         }
         /// <summary>
         /// 获取服务器时间

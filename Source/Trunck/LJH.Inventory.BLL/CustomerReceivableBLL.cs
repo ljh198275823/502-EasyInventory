@@ -9,28 +9,12 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CustomerReceivableBLL
+    public class CustomerReceivableBLL : BLLBase<Guid, CustomerReceivable>
     {
         #region 构造函数
         public CustomerReceivableBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
-        }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri = null;
-        #endregion
-
-        #region 公共方法
-        /// <summary>
-        /// 通过查询条件获取相关的客户应收账款数据
-        /// </summary>
-        /// <param name="con"></param>
-        /// <returns></returns>
-        public QueryResultList<CustomerReceivable> GetItems(SearchCondition con)
-        {
-            return ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetItems(con);
         }
         #endregion
     }

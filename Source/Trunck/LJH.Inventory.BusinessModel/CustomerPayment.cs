@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户付款记录
     /// </summary>
-    public class CustomerPayment : LJH.GeneralLibrary.Core.DAL.IEntity<string>
+    public class CustomerPayment : ISheet<string>
     {
         #region 构造函数
         public CustomerPayment()
@@ -16,15 +16,15 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
-        #region 只读变量
-        public readonly string DocumentType = "CustomerPayment";
-        #endregion
-
         #region 公共属性
         /// <summary>
         /// 获取或设置付款记录ID
         /// </summary>
         public string ID { get; set; }
+        /// <summary>
+        /// 获取或设置最近活动日期
+        /// </summary>
+        public DateTime LastActiveDate { get; set; }
         /// <summary>
         /// 获取或设置付款客户ID
         /// </summary>
@@ -71,10 +71,66 @@ namespace LJH.Inventory.BusinessModel
         public List<CustomerPaymentAssign> Assigns { get; set; }
         #endregion
 
-        #region 公共方法
-        public CustomerPayment Clone()
+        #region ISheet接口
+        /// <summary>
+        /// 获取送货单是否可编辑
+        /// </summary>
+        public bool CanEdit
         {
-            return this.MemberwiseClone() as CustomerPayment;
+            get { return (State == SheetState.Add); }
+        }
+        /// <summary>
+        /// 获取送货单是否可以审批
+        /// </summary>
+        public bool CanApprove
+        {
+            get
+            {
+                return (State == SheetState.Add);
+            }
+        }
+        /// <summary>
+        /// 获取送货单是否可以发货
+        /// </summary>
+        public bool CanShip
+        {
+            get { return (State == SheetState.Add || State == SheetState.Approved); }
+        }
+        /// <summary>
+        /// 获取是否可以打印送货单
+        /// </summary>
+        public bool CanPrint
+        {
+            get { return State != SheetState.Canceled; }
+        }
+        /// <summary>
+        /// 获取是否可以删除送货单
+        /// </summary>
+        public bool CanDelete
+        {
+            get { return State == SheetState.Add || State == SheetState.Approved; }
+        }
+        /// <summary>
+        /// 获取是否可以将送货单作废
+        /// </summary>
+        public bool CanCancel
+        {
+            get
+            {
+                return State != SheetState.Canceled;
+            }
+        }
+        /// <summary>
+        /// 获取单据类型
+        /// </summary>
+        public string DocumentType
+        {
+            get { return "CustomerPayment"; }
+        }
+
+        public ISheet<string> Clone()
+        {
+            return MemberwiseClone() as ISheet<string>;
         }
         #endregion
     }

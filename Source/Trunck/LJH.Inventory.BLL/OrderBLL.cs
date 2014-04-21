@@ -30,23 +30,6 @@ namespace LJH.Inventory.BLL
             }
             return info.ID;
         }
-
-        protected override DateTime? GetLastActiveDate(Order sheet)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override DateTime? GetServerDateTime()
-        {
-            DateTime? dt = null;
-            ProviderFactory.Create<IServerDatetimeProvider>(_RepoUri).GetServerDateTime(out dt);
-            return dt;
-        }
-
-        protected override void AddOperationLog(string id, string docType, SheetOperation operation, string opt, IUnitWork unitWork, DateTime dt)
-        {
-            (new DocumentOperationBLL(AppSettings.Current.ConnStr)).AddOperationLog(id, docType, operation, opt, unitWork, dt);
-        }
         #endregion
 
         #region 公共方法

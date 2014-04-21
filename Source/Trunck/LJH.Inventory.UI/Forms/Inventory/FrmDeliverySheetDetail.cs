@@ -11,12 +11,12 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.ExcelExporter;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmDeliverySheetDetail :FrmSheetDetailBase 
+    public partial class FrmDeliverySheetDetail : FrmSheetDetailBase
     {
         #region 构造函数
         public FrmDeliverySheetDetail()
@@ -57,7 +57,7 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, DeliveryItem item,Product p)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, DeliveryItem item, Product p)
         {
             row.Tag = item;
             row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
@@ -216,12 +216,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Add(item as DeliverySheet, Operator.Current.ID);
+            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as DeliverySheet, SheetOperation.Create, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Update(item as DeliverySheet, Operator.Current.ID);
+            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as DeliverySheet, SheetOperation.Modify, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
@@ -438,59 +438,14 @@ namespace LJH.Inventory.UI.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //this.btnOk.PerformClick();
-            DeliverySheet sheet = GetItemFromInput() as DeliverySheet;
-            CommandResult ret = null;
-            if (IsAdding)
-            {
-                ret = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Add(sheet, Operator.Current.Name);
-                if (ret.Result == ResultCode.Successful) OnItemAdded(new ItemAddedEventArgs(sheet));
-            }
-            else
-            {
-                ret = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Update(sheet, Operator.Current.Name);
-                if (ret.Result == ResultCode.Successful) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
-            }
-            if (ret.Result == ResultCode.Successful)
-            {
-                DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                this.UpdatingItem = sheet1;
-                ItemShowing();
-                ShowButtonState();
-                MessageBox.Show("保存成功");
-            }
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformCreateOrModify<DeliverySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            if (UpdatingItem != null)
-            {
-                try
-                {
-                    if (MessageBox.Show("是否要审核此送货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                    {
-                        DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                        CommandResult ret = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Approve(sheet.ID, Operator.Current.Name);
-                        if (ret.Result == ResultCode.Successful)
-                        {
-                            DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                            this.UpdatingItem = sheet1;
-                            ItemShowing();
-                            ShowButtonState();
-                            this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                            MessageBox.Show("审核成功");
-                        }
-                        else
-                        {
-                            MessageBox.Show(ret.Message, "失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<DeliverySheet>(bll, SheetOperation.Approve);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -524,57 +479,14 @@ namespace LJH.Inventory.UI.Forms
 
         private void btnShip_Click(object sender, EventArgs e)
         {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要发货?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    try
-                    {
-                        DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                        CommandResult ret = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Delivery(sheet.ID, Operator.Current.Name);
-                        if (ret.Result == ResultCode.Successful)
-                        {
-                            DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                            this.UpdatingItem = sheet1;
-                            ItemShowing();
-                            ShowButtonState();
-                            this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                        }
-                        else
-                        {
-                            MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<DeliverySheet>(bll, SheetOperation.Ship);
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            if (UpdatingItem != null)
-            {
-                if (MessageBox.Show("是否要作废此送货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                    CommandResult ret = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).Cancel(sheet, Operator.Current.Name, false);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheet.ID).QueryObject;
-                        this.UpdatingItem = sheet1;
-                        ItemShowing();
-                        ShowButtonState();
-                        this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<DeliverySheet>(bll, SheetOperation.Nullify);
         }
 
         private void btnPaymentAssign_Click(object sender, EventArgs e)

@@ -9,11 +9,11 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerOtherReceivableDetail : FrmSheetDetailBase 
+    public partial class FrmCustomerOtherReceivableDetail : FrmSheetDetailBase
     {
         public FrmCustomerOtherReceivableDetail()
         {
@@ -88,17 +88,18 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             CustomerOtherReceivableBLL bll = new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr);
-            return bll.Add(item as CustomerOtherReceivable, Operator.Current.Name);
+            return bll.ProcessSheet(item as CustomerOtherReceivable, SheetOperation.Create, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return null;
+            CustomerOtherReceivableBLL bll = new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr);
+            return bll.ProcessSheet(item as CustomerOtherReceivable, SheetOperation.Modify, Operator.Current.Name);
         }
 
         protected override void ShowButtonState()
         {
-            this.btnOk.Enabled = UpdatingItem == null; 
+            this.btnOk.Enabled = UpdatingItem == null;
         }
         #endregion
 

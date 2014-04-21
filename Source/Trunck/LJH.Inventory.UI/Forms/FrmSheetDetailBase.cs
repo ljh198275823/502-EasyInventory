@@ -10,12 +10,12 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.DAL;
-using LJH.GeneralLibrary.UI;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmSheetDetailBase : LJH.GeneralLibrary.UI.FrmDetailBase
+    public partial class FrmSheetDetailBase : FrmDetailBase
     {
         public FrmSheetDetailBase()
             : base()
@@ -206,7 +206,7 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 与工具栏有关的方法
-        protected virtual void PerformCreateOrModify<T>(ISheetProcessor<T> processor, SheetOperation operation) where T : class
+        protected virtual void PerformCreateOrModify<T>(SheetProcessorBase<T> processor, SheetOperation operation) where T : class,ISheet<string>
         {
             T sheet = GetItemFromInput() as T;
             CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
@@ -226,7 +226,7 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        protected virtual void PerformOperation<T>(ISheetProcessor<T> processor, SheetOperation operation) where T : class
+        protected virtual void PerformOperation<T>(SheetProcessorBase<T> processor, SheetOperation operation) where T : class,ISheet<string>
         {
             if (UpdatingItem != null)
             {

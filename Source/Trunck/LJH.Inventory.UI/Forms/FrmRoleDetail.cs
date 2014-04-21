@@ -8,11 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmRoleDetail :LJH.GeneralLibrary.UI.FrmDetailBase 
+    public partial class FrmRoleDetail :FrmDetailBase 
     {
         private RoleBLL bll = new RoleBLL(AppSettings.Current.ConnStr);
 

@@ -8,11 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
-using LJH.GeneralLibrary.DAL;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmCollectionTypeDetail :LJH.GeneralLibrary.UI.FrmDetailBase
+    public partial class FrmCollectionTypeDetail : FrmDetailBase
     {
         public FrmCollectionTypeDetail()
         {
@@ -40,7 +41,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override Object GetItemFromInput()
         {
-            CollectionType ct = UpdatingItem as CollectionType ;
+            CollectionType ct = UpdatingItem as CollectionType;
             if (IsAdding)
             {
                 ct = new CollectionType();

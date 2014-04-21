@@ -10,17 +10,13 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CustomerPaymentBLL
+    public class CustomerPaymentBLL:SheetProcessorBase <CustomerPayment>
     {
         #region 构造函数
         public CustomerPaymentBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 动态库内部方法
@@ -80,21 +76,21 @@ namespace LJH.Inventory.BLL
         }
         #endregion
 
+        #region 重写基类方法
+        protected override string CreateSheetID(CustomerPayment info)
+        {
+            info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
+                    UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType );
+            return info.ID;
+        }
+
+        protected override void DoNullify(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            base.DoNullify(info, unitWork, dt, opt);
+        }
+        #endregion
+
         #region 公共方法
-        public QueryResult<CustomerPayment> GetByID(string paymentID)
-        {
-            return ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetByID(paymentID);
-        }
-        /// <summary>
-        /// 通过指定条件获取符合的客户付款单
-        /// </summary>
-        /// <param name="con"></param>
-        /// <returns></returns>
-        public QueryResultList<CustomerPayment> GetItems(SearchCondition con)
-        {
-            ICustomerPaymentProvider provider = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri);
-            return provider.GetItems(con);
-        }
         /// <summary>
         /// 获取某个客户的所有还有余额的付款单
         /// </summary>
@@ -104,139 +100,7 @@ namespace LJH.Inventory.BLL
             CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
             con.CustomerID = customerID;
             con.HasRemain = true;
-            return ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetItems(con);
-        }
-        /// <summary>
-        /// 增加客户付款信息
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public CommandResult Add(CustomerPayment info, string opt)
-        {
-            CompanyInfo customer = (new CompanyBLL(_RepoUri)).GetByID(info.CustomerID).QueryObject;
-            if (customer == null) return new CommandResult(ResultCode.Fail, "系统中不存在编号为 " + info.CustomerID + " 的客户");
-            if (string.IsNullOrEmpty(info.ID))
-            {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
-                    UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, "customerPayment"); //付款单
-                if (string.IsNullOrEmpty(info.ID)) return new CommandResult(ResultCode.Fail, "创建单号失败，请重试");
-            }
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            ICustomerPaymentProvider provider = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri);
-            provider.Insert(info, unitWork);
-
-            DocumentOperation doc = new DocumentOperation()
-            {
-                DocumentID = info.ID,
-                DocumentType = info.DocumentType,
-                OperatDate = DateTime.Now,
-                Operation = "新增",
-                State = SheetState.Add,
-                Operator = opt,
-            };
-            ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-            return unitWork.Commit();
-        }
-        /// <summary>
-        /// 审核
-        /// </summary>
-        /// <param name="sheetNo"></param>
-        /// <param name="opt"></param>
-        /// <returns></returns>
-        public CommandResult Approve(string sheetNo, string opt)
-        {
-            CustomerPayment info = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetByID(sheetNo).QueryObject;
-            if (info != null)
-            {
-                if (info.State == SheetState.Add)
-                {
-                    IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                    CustomerPayment original = info.Clone();
-                    info.State = SheetState.Approved;
-                    ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Update(info, original, unitWork);
-
-                    DocumentOperation doc = new DocumentOperation()
-                    {
-                        DocumentID = info.ID,
-                        DocumentType = info.DocumentType,
-                        OperatDate = DateTime.Now,
-                        Operation = "审核",
-                        State = SheetState.Approved,
-                        Operator = opt,
-                    };
-                    ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-                    return unitWork.Commit();
-                }
-                else
-                {
-                    return new CommandResult(ResultCode.Fail, "已经审核过的单据不能再审核");
-                }
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "单据在系统中已经不存在");
-            }
-        }
-
-        /// <summary>
-        /// 增加并全部分配
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public CommandResult Update(CustomerPayment info, string opt)
-        {
-            ICustomerPaymentProvider provider = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri);
-            CustomerPayment original = provider.GetByID(info.ID).QueryObject;
-            if (original != null)
-            {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                provider.Update(info, original, unitWork);
-
-                DocumentOperation doc = new DocumentOperation()
-                {
-                    DocumentID = info.ID,
-                    DocumentType = info.DocumentType,
-                    OperatDate = DateTime.Now,
-                    Operation = "修改",
-                    State = info.State,
-                    Operator = opt,
-                };
-                ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-                return unitWork.Commit();
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "系统中已经不存在单号为 " + info.ID + " 的客户收款流水单");
-            }
-        }
-        /// <summary>
-        /// 取消客户的付款记录
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="firstFromPrepay"></param>
-        /// <returns></returns>
-        public CommandResult Cancel(CustomerPayment info, string opt)
-        {
-            CustomerPayment original = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original == null) return new CommandResult(ResultCode.Fail, "系统中不存在此项");
-            if (original.State == SheetState.Canceled) return new CommandResult(ResultCode.Fail, "取消的单据不能再次取消");
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            //首先删除付款流水，然后再增加回来，这样做要达到的效果是把付款流水状态变成作废，而且分配项全部删除。
-            CustomerPayment cp = info.Clone();
-            info.State = SheetState.Canceled;
-            ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Update(info, cp, unitWork);
-
-            DocumentOperation doc = new DocumentOperation()
-            {
-                DocumentID = info.ID,
-                DocumentType = info.DocumentType,
-                OperatDate = DateTime.Now,
-                Operation = "取消",
-                State = info.State,
-                Operator = opt,
-            };
-            ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-            return unitWork.Commit();
+            return GetItems(con);
         }
         #endregion
     }
