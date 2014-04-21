@@ -50,7 +50,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             row.Tag = item;
             row.Cells["colID"].Value = item.ID;
-            row.Cells["colPaidDate"].Value = item.PaidDate;
+            row.Cells["colPaidDate"].Value = item.LastActiveDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(item.PaymentMode);
             row.Cells["colAmount"].Value = item.Amount;
             row.Cells["colRemain"].Value = item.Amount - item.Assigned;

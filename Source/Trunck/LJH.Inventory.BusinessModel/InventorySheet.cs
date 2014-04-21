@@ -38,10 +38,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public SheetState State { get; set; }
         /// <summary>
-        /// 获取或设置入库日期
-        /// </summary>
-        public DateTime? InventoryDate { get; set; }
-        /// <summary>
         /// 获取或设置收货单的备注
         /// </summary>
         public string Memo { get; set; }

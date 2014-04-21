@@ -42,7 +42,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (pc != null) items = _Sheets.Where(it => it.CustomerID == pc.ID).ToList();
 
             return (from p in items
-                    orderby p.CreateDate descending
+                    orderby p.LastActiveDate descending
                     select (object)p).ToList();
         }
         #endregion
@@ -70,7 +70,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             CustomerOtherReceivable info = item as CustomerOtherReceivable;
             row.Cells["colID"].Value = info.ID;
-            row.Cells["colCreateDate"].Value = info.CreateDate.ToString("yyyy-MM-dd");
+            row.Cells["colCreateDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colCustomer"].Value = info.Customer != null ? info.Customer.Name : info.CustomerID;
             row.Cells["colCurrencyType"].Value = info.CurrencyType;
             row.Cells["colAmount"].Value = info.Amount.Trim();

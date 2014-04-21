@@ -34,10 +34,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public CompanyInfo Customer { get; set; }
         /// <summary>
-        /// 获取或设置付款日期
-        /// </summary>
-        public DateTime PaidDate { get; set; }
-        /// <summary>
         /// 获取或设置币别
         /// </summary>
         public string CurrencyType { get; set; }

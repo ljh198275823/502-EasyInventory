@@ -202,7 +202,7 @@ namespace LJH.Inventory.BLL
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             DeliverySheet sheet1 = sheet.Clone() as DeliverySheet;
-            sheet.ShipDate = dt.Value;
+            sheet.LastActiveDate = dt.Value;
             sheet.LastActiveDate = dt.Value;
             sheet.State = SheetState.Shipped;
             provider.Update(sheet, sheet1, unitWork);

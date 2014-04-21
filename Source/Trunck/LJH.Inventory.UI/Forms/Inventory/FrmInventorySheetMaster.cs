@@ -93,7 +93,7 @@ namespace LJH.Inventory.UI.Forms
             WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;
             row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
-            row.Cells["colInventoryDate"].Value = sheet.InventoryDate != null ? sheet.InventoryDate.Value.ToString("yyyy-MM-dd") : null;
+            row.Cells["colInventoryDate"].Value = sheet.State == SheetState.Inventory ? sheet.LastActiveDate.ToString("yyyy-MM-dd") : null;
             row.Cells["colAmount"].Value = sheet.Amount.Trim();
             row.Cells["colMemo"].Value = sheet.Memo;
             if (sheet.State == SheetState.Canceled)

@@ -111,7 +111,7 @@
   <Table Name="dbo.DeliverySheet" Member="LJH.Inventory.BusinessModel.DeliverySheet">
     <Type Name="LJH.Inventory.BusinessModel.DeliverySheet">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
-      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WareHouseID" Member="WareHouseID" DbType="nvarchar(50) NOT NULL"/>
       <Column Name="Linker" Member="Linker"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -124,7 +124,6 @@
       <Column Name="Discount" Member="Discount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="ShipDate" Member="ShipDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Sheet_Item" Member="Items" ThisKey="ID" OtherKey="SheetNo"/>
     </Type>
@@ -163,11 +162,10 @@
   <Table Name="dbo.InventorySheet" Member="LJH.Inventory.BusinessModel.InventorySheet">
     <Type Name="LJH.Inventory.BusinessModel.InventorySheet">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
-      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="InventoryDate" Member="InventoryDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Sheet_Item" Member="Items"  ThisKey="ID" OtherKey="SheetNo"/>
     </Type>
@@ -383,7 +381,7 @@
   <Table Name="dbo.ExpenditureRecord" Member="LJH.Inventory.BusinessModel.ExpenditureRecord">
     <Type Name="LJH.Inventory.BusinessModel.ExpenditureRecord">
       <Column Name="ID" Member="ID"   DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
-      <Column Name="ExpenditureDate" Member="ExpenditureDate"  DbType="datetime not null" UpdateCheck="Never" />
+      <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never" />
       <Column Name="Category" Member="Category"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(10,2) not null" UpdateCheck="Never"/>
@@ -407,7 +405,7 @@
     <Type Name="LJH.Inventory.BusinessModel.CustomerOtherReceivable">
       <Column Name="ID" Member="ID"   DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
       <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never" />
+      <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never" />
       <Column Name="CurrencyType" Member="CurrencyType" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
@@ -417,8 +415,8 @@
   <Table Name="dbo.CustomerPayment" Member="LJH.Inventory.BusinessModel.CustomerPayment">
     <Type Name="LJH.Inventory.BusinessModel.CustomerPayment">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="PaidDate" Member="PaidDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="CurrencyType" Member="CurrencyType" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>

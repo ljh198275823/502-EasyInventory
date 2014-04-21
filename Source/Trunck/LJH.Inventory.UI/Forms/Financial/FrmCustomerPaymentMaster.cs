@@ -84,7 +84,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             CustomerPayment info = item as CustomerPayment;
             row.Cells["colID"].Value = info.ID;
-            row.Cells["colPaidDate"].Value = info.PaidDate.ToString("yyyy-MM-dd");
+            row.Cells["colPaidDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colCustomer"].Value = info.Customer != null ? info.Customer.Name : info.CustomerID;
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount.Trim();

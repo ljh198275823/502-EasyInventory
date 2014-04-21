@@ -42,7 +42,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is CustomerReceivableSearchCondition)
             {
                 CustomerReceivableSearchCondition con = search as CustomerReceivableSearchCondition;
-                if (con.CreateDate != null) ret = ret.Where(item => item.v1.CreateDate >= con.CreateDate.Begin && item.v1.CreateDate <= con.CreateDate.End);
+                if (con.CreateDate != null) ret = ret.Where(item => item.v1.LastActiveDate >= con.CreateDate.Begin && item.v1.LastActiveDate <= con.CreateDate.End);
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.v1.CustomerID == con.CustomerID);
             }
             List<CustomerOtherReceivable> items = new List<CustomerOtherReceivable>();

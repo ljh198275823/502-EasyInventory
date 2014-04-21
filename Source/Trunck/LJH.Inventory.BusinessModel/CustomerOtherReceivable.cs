@@ -22,6 +22,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ID { get; set; }
         /// <summary>
+        /// 获取或设置最近活动日期
+        /// </summary>
+        public DateTime LastActiveDate { get; set; }
+        /// <summary>
         /// 获取或设置代付的客户ID
         /// </summary>
         public string CustomerID { get; set; }
@@ -29,10 +33,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置代付的客户
         /// </summary>
         public CompanyInfo Customer { get; set; }
-        /// <summary>
-        /// 获取或设置创建日期
-        /// </summary>
-        public DateTime CreateDate { get; set; }
         /// <summary>
         /// 获取或设置币别
         /// </summary>
@@ -72,18 +72,6 @@ namespace LJH.Inventory.BusinessModel
         public string DocumentType
         {
             get { return "CustomerOtherReceivable"; }
-        }
-
-        public DateTime LastActiveDate
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         public bool CanEdit

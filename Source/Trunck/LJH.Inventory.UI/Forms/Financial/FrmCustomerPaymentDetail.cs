@@ -83,7 +83,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
-                dtPaidDate.Value = item.PaidDate;
+                dtPaidDate.Value = item.LastActiveDate;
                 txtCurrencyType.Text = item.CurrencyType;
                 rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
                 rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
@@ -118,7 +118,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 info = UpdatingItem as CustomerPayment;
             }
             if (txtID.Text == _AutoCreate) info.ID = string.Empty;
-            info.PaidDate = dtPaidDate.Value;
+            info.LastActiveDate = dtPaidDate.Value;
             if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
             if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;

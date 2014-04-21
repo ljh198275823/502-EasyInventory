@@ -26,10 +26,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public DateTime LastActiveDate { get; set; }
         /// <summary>
-        /// 获取或设置支出日期
-        /// </summary>
-        public DateTime ExpenditureDate { get; set; }
-        /// <summary>
         /// 获取或设置支出类别
         /// </summary>
         public string Category { get; set; }

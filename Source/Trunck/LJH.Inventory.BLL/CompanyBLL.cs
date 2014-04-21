@@ -114,7 +114,7 @@ namespace LJH.Inventory.BLL
                         ID = info.ID + "初始预付款",
                         CustomerID = info.ID,
                         PaymentMode = PaymentMode.Cash,
-                        PaidDate = DateTime.Now,
+                        LastActiveDate = DateTime.Now,
                         Amount = prepayment,
                         State = SheetState.Add,
                         Memo = "初始预付款"

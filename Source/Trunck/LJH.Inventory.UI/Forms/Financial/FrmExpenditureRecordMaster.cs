@@ -88,7 +88,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             ExpenditureRecord info = item as ExpenditureRecord;
             row.Cells["colID"].Value = info.ID;
-            row.Cells["colExpenditureDate"].Value = info.ExpenditureDate.ToString("yyyy-MM-dd");
+            row.Cells["colLastActiveDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount;
             row.Cells["colCategory"].Value = info.Category;

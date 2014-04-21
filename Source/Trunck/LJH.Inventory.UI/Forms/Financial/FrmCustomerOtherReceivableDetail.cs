@@ -50,7 +50,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
-                dtCreateDate.Value = item.CreateDate;
+                dtCreateDate.Value = item.LastActiveDate;
                 txtCurrencyType.Text = item.CurrencyType;
                 txtAmount.DecimalValue = item.Amount;
                 txtCustomer.Text = item.Customer != null ? item.Customer.Name : string.Empty;
@@ -76,7 +76,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 info = UpdatingItem as CustomerOtherReceivable;
             }
             if (txtID.Text == _AutoCreate) info.ID = string.Empty;
-            info.CreateDate = dtCreateDate.Value;
+            info.LastActiveDate = dtCreateDate.Value;
             info.CurrencyType = txtCurrencyType.Text;
             info.Amount = txtAmount.DecimalValue;
             info.Customer = txtCustomer.Tag as CompanyInfo;

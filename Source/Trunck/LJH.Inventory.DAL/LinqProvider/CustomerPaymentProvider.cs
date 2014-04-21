@@ -42,7 +42,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is CustomerPaymentSearchCondition)
             {
                 CustomerPaymentSearchCondition con = search as CustomerPaymentSearchCondition;
-                if (con.PaidDate != null) ret = ret.Where(item => item.PaidDate >= con.PaidDate.Begin && item.PaidDate <= con.PaidDate.End);
+                if (con.PaidDate != null) ret = ret.Where(item => item.LastActiveDate >= con.PaidDate.Begin && item.LastActiveDate <= con.PaidDate.End);
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (con.HasRemain != null)
                 {

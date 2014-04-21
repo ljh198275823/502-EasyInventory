@@ -25,7 +25,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is ExpenditureRecordSearchCondition)
             {
                 ExpenditureRecordSearchCondition con = search as ExpenditureRecordSearchCondition;
-                if (con.PaidDate != null) ret = ret.Where(item => item.ExpenditureDate >= con.PaidDate.Begin && item.ExpenditureDate <= con.PaidDate.End);
+                if (con.PaidDate != null) ret = ret.Where(item => item.LastActiveDate >= con.PaidDate.Begin && item.LastActiveDate <= con.PaidDate.End);
                 if (!string.IsNullOrEmpty(con.Category)) ret = ret.Where(item => item.Category.Contains(con.Category));
                 if (!string.IsNullOrEmpty(con.Memo)) ret = ret.Where(item => item.Memo.Contains(con.Memo));
             }

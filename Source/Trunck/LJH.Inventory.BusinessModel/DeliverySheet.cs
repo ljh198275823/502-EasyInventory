@@ -74,10 +74,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public SheetState State { get; set; }
         /// <summary>
-        /// 获取或设置出货日期，只有已出货的单据这个日期才有意义
-        /// </summary>
-        public DateTime? ShipDate { get; set; }
-        /// <summary>
         /// 获取或设置备注描述
         /// </summary>
         public string Memo { get; set; }

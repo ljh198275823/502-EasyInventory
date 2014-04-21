@@ -131,7 +131,6 @@ namespace LJH.Inventory.BLL
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             InventorySheet sheet1 = sheet.Clone() as InventorySheet;
             sheet.State = SheetState.Inventory;
-            sheet.InventoryDate = dt.Value;
             sheet.LastActiveDate = dt.Value;
             ProviderFactory.Create<IProvider<InventorySheet, string>>(_RepoUri).Update(sheet, sheet1, unitWork);
 

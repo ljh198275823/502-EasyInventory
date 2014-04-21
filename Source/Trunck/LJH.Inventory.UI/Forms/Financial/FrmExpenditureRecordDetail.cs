@@ -51,7 +51,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (item != null)
             {
                 txtSheetNo.Text = item.ID;
-                dtPaidDate.Value = item.ExpenditureDate;
                 rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
                 rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
                 rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
@@ -85,7 +84,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 info = UpdatingItem as ExpenditureRecord;
             }
-            info.ExpenditureDate = dtPaidDate.Value;
             if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
             if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
