@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class WareHouseBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, WareHouse>
+    public class WareHouseBLL : BLLBase<string, WareHouse>
     {
         #region 构造函数
         public WareHouseBLL(string repoUri)

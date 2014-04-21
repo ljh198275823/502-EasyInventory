@@ -169,7 +169,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 sheet = new InventorySheet();
                 if (txtSheetNo.Text == "自动创建") sheet.ID = string.Empty;
-                sheet.CreateDate = DateTime.Now;
+                sheet.LastActiveDate = DateTime.Now;
             }
             else
             {

@@ -8,7 +8,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class PortBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, Port>
+    public class PortBLL : BLLBase<string, Port>
     {
         #region 构造函数
         public PortBLL(string repoUri)

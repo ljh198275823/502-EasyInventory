@@ -8,16 +8,12 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示公司的资金支出记录
     /// </summary>
-    public class ExpenditureRecord : LJH.GeneralLibrary.Core.DAL.IEntity<string>
+    public class ExpenditureRecord : ISheet<string>
     {
         #region 构造函数
         public ExpenditureRecord()
         {
         }
-        #endregion
-
-        #region 只读变量
-        public readonly string DocumentType = "ExpenditureRecord";
         #endregion
 
         #region 公共属性
@@ -69,6 +65,45 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置支付备注
         /// </summary>
         public string Memo { get; set; }
+        #endregion
+
+        #region ISheet 接口
+        public bool CanEdit
+        {
+            get
+            {
+                return (State == SheetState.Add);
+            }
+        }
+
+        public bool CanApprove
+        {
+            get
+            {
+                return State == SheetState.Add;
+            }
+        }
+
+        public bool CanCancel
+        {
+            get
+            {
+                return State != SheetState.Canceled && State != SheetState.Settled;
+            }
+        }
+
+        public string DocumentType
+        {
+            get
+            {
+                return "ExpenditureRecord";
+            }
+        }
+
+        public ISheet<string> Clone()
+        {
+            return this.MemberwiseClone() as Order;
+        }
         #endregion
     }
 }

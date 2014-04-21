@@ -8,7 +8,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class SystemParameterBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, SysparameterInfo>
+    public class SystemParameterBLL : BLLBase<string, SysparameterInfo>
     {
         #region 构造函数
         public SystemParameterBLL(string repUri)

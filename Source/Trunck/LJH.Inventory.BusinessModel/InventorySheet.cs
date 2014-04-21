@@ -8,16 +8,12 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示收货单
     /// </summary>
-    public class InventorySheet : LJH.GeneralLibrary.Core.DAL.IEntity<string>
+    public class InventorySheet : ISheet<string>
     {
         #region 构造函数
         public InventorySheet()
         {
         }
-        #endregion
-
-        #region 只读变量
-        public readonly string DocumentType = "InventorySheet";
         #endregion
 
         #region 公共属性
@@ -28,7 +24,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置单据创建日期
         /// </summary>
-        public DateTime CreateDate { get; set; }
+        public DateTime LastActiveDate { get; set; }
         /// <summary>
         /// 获取或设置仓库ID
         /// </summary>
@@ -73,7 +69,16 @@ namespace LJH.Inventory.BusinessModel
         {
             get { return State == SheetState.Add || State == SheetState.Approved; }
         }
+        #endregion
 
+        #region ISheet接口
+        /// <summary>
+        /// 获取送货单是否可编辑
+        /// </summary>
+        public bool CanEdit
+        {
+            get { return (State == SheetState.Add); }
+        }
         /// <summary>
         /// 获取送货单是否可以审批
         /// </summary>
@@ -85,6 +90,27 @@ namespace LJH.Inventory.BusinessModel
             }
         }
         /// <summary>
+        /// 获取送货单是否可以发货
+        /// </summary>
+        public bool CanShip
+        {
+            get { return (State == SheetState.Add || State == SheetState.Approved); }
+        }
+        /// <summary>
+        /// 获取是否可以打印送货单
+        /// </summary>
+        public bool CanPrint
+        {
+            get { return State != SheetState.Canceled; }
+        }
+        /// <summary>
+        /// 获取是否可以删除送货单
+        /// </summary>
+        public bool CanDelete
+        {
+            get { return State == SheetState.Add || State == SheetState.Approved; }
+        }
+        /// <summary>
         /// 获取是否可以将送货单作废
         /// </summary>
         public bool CanCancel
@@ -94,14 +120,18 @@ namespace LJH.Inventory.BusinessModel
                 return State != SheetState.Canceled;
             }
         }
-        #endregion
-
-        #region 公共方法
-        public InventorySheet Clone()
+        /// <summary>
+        /// 获取单据类型
+        /// </summary>
+        public string DocumentType
         {
-            return MemberwiseClone() as InventorySheet;
+            get { return "InventorySheet"; }
+        }
+
+        public ISheet<string> Clone()
+        {
+            return MemberwiseClone() as ISheet<string>;
         }
         #endregion
-
     }
 }

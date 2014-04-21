@@ -38,7 +38,7 @@ namespace LJH.Inventory.BLL
                     stream.Read(data, 0, (int)stream.Length);
                     string value = Encoding.UTF8.GetString(data);
                     SysparameterInfo para = new SysparameterInfo(t.Name, value, string.Empty);
-                    return bll.Insert(para);
+                    return bll.Add (para);
                 }
             }
             catch (Exception ex)
@@ -62,7 +62,7 @@ namespace LJH.Inventory.BLL
                 QueryResult<SysparameterInfo> result = null;
 
                 Type t = typeof(T);
-                result = bll.GetSysParameterByID(t.Name);
+                result = bll.GetByID(t.Name);
 
                 if (result.Result == ResultCode.Successful)
                 {

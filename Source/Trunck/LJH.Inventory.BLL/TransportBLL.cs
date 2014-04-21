@@ -8,7 +8,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class TransportBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, Transport>
+    public class TransportBLL : BLLBase<string, Transport>
     {
         #region 构造函数
         public TransportBLL(string repoUri)

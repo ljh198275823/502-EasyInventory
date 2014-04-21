@@ -9,13 +9,12 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CompanyBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, CompanyInfo>
+    public class CompanyBLL : BLLBase<string, CompanyInfo>
     {
         #region 构造函数
         public CompanyBLL(string repUri)
             : base(repUri)
         {
-            ProviderFactory = (new ProviderFactory());
         }
         #endregion
 
@@ -25,15 +24,15 @@ namespace LJH.Inventory.BLL
             string id = null;
             if (classID == CustomerClass.Customer)
             {
-                id = ProviderFactory.CreateProvider<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPrefix, UserSettings.Current.CustomerSerialCount, "customer");
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPrefix, UserSettings.Current.CustomerSerialCount, "customer");
             }
             else if (classID == CustomerClass.Supplier)
             {
-                id = ProviderFactory.CreateProvider<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "customer");
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "customer");
             }
             else
             {
-                id = ProviderFactory.CreateProvider<IAutoNumberCreater>(_RepoUri).CreateNumber("RC", 3, "customer");
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("RC", 3, "customer");
             }
             return id;
         }
@@ -56,7 +55,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResultList<CustomerFinancialState> GetCustomerStates()
         {
-            return ProviderFactory.CreateProvider<ICustomerFinancialStateProvider>(_RepoUri).GetItems(null);
+            return ProviderFactory.Create<IProvider<CustomerFinancialState, string>>(_RepoUri).GetItems(null);
         }
         /// <summary>
         /// 获取所有供应商信息
@@ -94,7 +93,7 @@ namespace LJH.Inventory.BLL
             if (!string.IsNullOrEmpty(info.ID))
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                ProviderFactory.Create<ICustomerProvider>(_RepoUri).Insert(info, unitWork);
+                ProviderFactory.Create<IProvider<CompanyInfo, string>>(_RepoUri).Insert(info, unitWork);
                 if (receivables > 0) //增加一条客户应收项
                 {
                     CustomerReceivable cr = new CustomerReceivable()
@@ -106,7 +105,7 @@ namespace LJH.Inventory.BLL
                         Amount = receivables,
                         Memo = "初始应收",
                     };
-                    ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Insert(cr, unitWork);
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
                 }
                 if (prepayment > 0)
                 {
@@ -120,7 +119,7 @@ namespace LJH.Inventory.BLL
                         State = SheetState.Add,
                         Memo = "初始预付款"
                     };
-                    ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Insert(cp, unitWork);
+                    ProviderFactory.Create<IProvider<CustomerPayment, string>>(_RepoUri).Insert(cp, unitWork);
                 }
                 return unitWork.Commit();
             }
@@ -142,35 +141,35 @@ namespace LJH.Inventory.BLL
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             CustomerPaymentSearchCondition con1 = new CustomerPaymentSearchCondition() { CustomerID = info.ID };
-            List<CustomerPayment> cps = ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).GetItems(con1).QueryObjects;
+            List<CustomerPayment> cps = ProviderFactory.Create<IProvider<CustomerPayment, string>>(_RepoUri).GetItems(con1).QueryObjects;
             if (cps != null && cps.Count > 0)
             {
                 foreach (CustomerPayment cp in cps)
                 {
-                    ProviderFactory.Create<ICustomerPaymentProvider>(_RepoUri).Delete(cp, unitWork);
+                    ProviderFactory.Create<IProvider<CustomerPayment, string>>(_RepoUri).Delete(cp, unitWork);
                 }
             }
 
             CustomerDaiFuSearchCondition con2 = new CustomerDaiFuSearchCondition() { CustomerID = info.ID };
-            List<CustomerOtherReceivable> cds = ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).GetItems(con2).QueryObjects;
+            List<CustomerOtherReceivable> cds = ProviderFactory.Create<IProvider<CustomerOtherReceivable, string>>(_RepoUri).GetItems(con2).QueryObjects;
             if (cds != null && cds.Count > 0)
             {
                 foreach (CustomerOtherReceivable cd in cds)
                 {
-                    ProviderFactory.Create<ICustomerOtherReceivableProvider>(_RepoUri).Delete(cd, unitWork);
+                    ProviderFactory.Create<IProvider<CustomerOtherReceivable, string>>(_RepoUri).Delete(cd, unitWork);
                 }
             }
 
             CustomerReceivableSearchCondition con3 = new CustomerReceivableSearchCondition() { CustomerID = info.ID };
-            List<CustomerReceivable> crs = ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetItems(con3).QueryObjects;
+            List<CustomerReceivable> crs = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).GetItems(con3).QueryObjects;
             if (crs != null && crs.Count > 0)
             {
                 foreach (CustomerReceivable cr in crs)
                 {
-                    ProviderFactory.CreateProvider<ICustomerReceivableProvider>(_RepoUri).Delete(cr, unitWork);
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Delete(cr, unitWork);
                 }
             }
-            ProviderFactory.CreateProvider<ICustomerProvider>(_RepoUri).Delete(info, unitWork);
+            ProviderFactory.Create<IProvider<CompanyInfo, string>>(_RepoUri).Delete(info, unitWork);
             return unitWork.Commit();
         }
         #endregion

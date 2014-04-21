@@ -9,13 +9,12 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ContactBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<int, Contact>
+    public class ContactBLL : BLLBase<int, Contact>
     {
         #region 构造函数
         public ContactBLL(string repoUri)
             : base(repoUri)
         {
-            ProviderFactory = new ProviderFactory();
         }
         #endregion
     }

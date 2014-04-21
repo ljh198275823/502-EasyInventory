@@ -9,24 +9,16 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ProductInventoryBLL
+    public class ProductInventoryBLL : BLLBase<Guid, ProductInventoryItem>
     {
         #region 构造函数
         public ProductInventoryBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
-        public QueryResultList<ProductInventory> GetItems(SearchCondition con)
-        {
-            return ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).GetItems(con);
-        }
         /// <summary>
         /// 建立库存
         /// </summary>
@@ -35,7 +27,7 @@ namespace LJH.Inventory.BLL
         public CommandResult CreateInventory(ProductInventory info)
         {
             ProductInventorySearchCondition con = new ProductInventorySearchCondition() { ProductID = info.ProductID, WareHouseID = info.WareHouseID };
-            List<ProductInventory> items = ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).GetItems(con).QueryObjects;
+            List<ProductInventory> items = ProviderFactory.Create<IProvider<ProductInventory, Guid>>(_RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0) return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点或收货单收货");
             ProductInventoryItem pii = new ProductInventoryItem()
             {
@@ -48,16 +40,7 @@ namespace LJH.Inventory.BLL
                 AddDate = DateTime.Now,
                 InventorySheet = "初始库存"
             };
-            return ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Insert(pii);
-        }
-        /// <summary>
-        /// 删除库存
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public CommandResult Delete(ProductInventory info)
-        {
-            return ProviderFactory.Create<IProductInventoryProvider>(_RepoUri).Delete(info);
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii);
         }
         /// <summary>
         /// 将库存分配给某个订单项,分配给某个订单项的库存不能再用于其它订单的出货，只能用于该订单项出货
@@ -76,7 +59,7 @@ namespace LJH.Inventory.BLL
                 UnShipped = true,    //未发货的库存项
                 UnReserved = true   //未分配给某个特定的订单
             };
-            List<ProductInventoryItem> items = ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).GetItems(con).QueryObjects;
+            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
             if (items.Sum(item => item.Count) < count) return new CommandResult(ResultCode.Fail, string.Format("库存不足，预分配失败!", productID));
 
             if (UserSettings.Current.InventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式排序
@@ -96,17 +79,17 @@ namespace LJH.Inventory.BLL
                     {
                         pii.OrderItem = orderItem;
                         pii.Count = count;
-                        ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Update(pii, pii1, unitWork);
+                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
 
                         pii1.ID = Guid.NewGuid();
                         pii1.Count -= count;
-                        ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Insert(pii1, unitWork);
+                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii1, unitWork);
                         count = 0;
                     }
                     else
                     {
                         pii.OrderItem = orderItem;
-                        ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Update(pii, pii1, unitWork);
+                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
                         count -= pii.Count;
                     }
                 }

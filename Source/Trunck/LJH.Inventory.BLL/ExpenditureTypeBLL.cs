@@ -8,7 +8,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ExpenditureTypeBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, ExpenditureType>
+    public class ExpenditureTypeBLL : BLLBase<string, ExpenditureType>
     {
         #region 构造函数
         public ExpenditureTypeBLL(string repoUri)

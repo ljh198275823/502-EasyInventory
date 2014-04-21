@@ -8,7 +8,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class RoleBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, Role>
+    public class RoleBLL : BLLBase<string, Role>
     {
         #region 构造函数
         public RoleBLL(string repUri)

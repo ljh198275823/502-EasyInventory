@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.DAL.IProvider;
 using LJH.GeneralLibrary.Core.DAL;
-using LJH.GeneralLibrary.Core.BLL;
 
 namespace LJH.Inventory.BLL
 {
@@ -200,7 +200,7 @@ namespace LJH.Inventory.BLL
                 {
                     DateTime? lastActiveDate = GetLastActiveDate(sheet);
                     //单据的最后活动时间与当前单据相同，说明其它操作员在此次修改之前没有修改过单据
-                    if (lastActiveDate != null)
+                    if (lastActiveDate != null && sheet.LastActiveDate == lastActiveDate.Value)
                     {
                         if (operation == SheetOperation.Modify)
                         {

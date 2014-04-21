@@ -5,7 +5,7 @@ using System.Text;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.Inventory.DAL.IProvider;
 
-namespace LJH.GeneralLibrary.Core.BLL
+namespace LJH.Inventory.BLL
 {
     public abstract class BLLBase<TID, TEntity> where TEntity : class , IEntity<TID>
     {

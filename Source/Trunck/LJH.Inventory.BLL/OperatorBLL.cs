@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class OperatorBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, Operator>
+    public class OperatorBLL : BLLBase<string, Operator>
     {
         #region 构造函数
         public OperatorBLL(string repUri):base(repUri )

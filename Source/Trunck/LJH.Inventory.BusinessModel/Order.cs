@@ -88,14 +88,14 @@ namespace LJH.Inventory.BusinessModel
                 return "Order";
             }
         }
-        #endregion
 
-        #region 公共方法
         public ISheet<string> Clone()
         {
             return this.MemberwiseClone() as Order;
         }
+        #endregion
 
+        #region 公共方法
         /// <summary>
         /// 计算订单的总金额
         /// </summary>

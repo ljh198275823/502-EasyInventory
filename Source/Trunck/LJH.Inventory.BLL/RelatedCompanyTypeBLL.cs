@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class RelatedCompanyTypeBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, RelatedCompanyType>
+    public class RelatedCompanyTypeBLL : BLLBase<string, RelatedCompanyType>
     {
         #region 构造函数
         public RelatedCompanyTypeBLL(string repoUri)

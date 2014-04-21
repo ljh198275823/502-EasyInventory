@@ -156,12 +156,10 @@ namespace LJH.Inventory.BusinessModel
         {
             get { return "DeliverySheet"; }
         }
-        #endregion
 
-        #region 公共方法
         public ISheet<string> Clone()
         {
-            return MemberwiseClone() as DeliverySheet;
+            return MemberwiseClone() as ISheet<string>;
         }
         #endregion
     }

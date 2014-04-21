@@ -327,9 +327,7 @@
     <Compile Include="Forms\Inventory\FrmProductInventoryMaster.Designer.cs">
       <DependentUpon>FrmProductInventoryMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmInventorySheetDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Inventory\FrmInventorySheetDetail.cs" />
     <Compile Include="Forms\Inventory\FrmInventorySheetDetail.Designer.cs">
       <DependentUpon>FrmInventorySheetDetail.cs</DependentUpon>
     </Compile>

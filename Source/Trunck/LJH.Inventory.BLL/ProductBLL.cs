@@ -9,44 +9,22 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ProductBLL
+    public class ProductBLL : BLLBase<string, Product>
     {
         #region 构造函数
         public ProductBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region  私有变量
-        private string _RepoUri;
         #endregion
 
         #region 公共方法
         /// <summary>
-        /// 通过ID获取商品信息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public QueryResult<Product> GetByID(string id)
-        {
-            return ProviderFactory.Create<IProductProvider>(_RepoUri).GetByID(id);
-        }
-        /// <summary>
-        /// 通过查询条件获取指定的商品信息
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        public QueryResultList<Product> GetItems(SearchCondition condition)
-        {
-            return ProviderFactory.Create<IProductProvider>(_RepoUri).GetItems(condition);
-        }
-        /// <summary>
-        /// 增加商品信息
+        /// 增加
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult AddProduct(Product info)
+        public override CommandResult Add(Product info)
         {
             if (string.IsNullOrEmpty(info.ID))
             {
@@ -61,7 +39,7 @@ namespace LJH.Inventory.BLL
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
-                return ProviderFactory.Create<IProductProvider>(_RepoUri).Insert(info);
+                return base.Add(info);
             }
             else
             {
@@ -77,7 +55,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult AddProduct(Product info, string wareHouseID, decimal count)
         {
-            WareHouse ws = ProviderFactory.Create<IWareHouseProvider>(_RepoUri).GetByID(wareHouseID).QueryObject;
+            WareHouse ws = ProviderFactory.Create<IProvider<WareHouse, string>>(_RepoUri).GetByID(wareHouseID).QueryObject;
             if (ws == null) return new CommandResult(ResultCode.Fail, "指定的仓库 \"" + wareHouseID + "\" 不存在");
             if (info.Category != null && !string.IsNullOrEmpty(info.Category.Prefix))
             {
@@ -90,7 +68,7 @@ namespace LJH.Inventory.BLL
             if (!string.IsNullOrEmpty(info.ID))
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                ProviderFactory.Create<IProductProvider>(_RepoUri).Insert(info, unitWork);
+                ProviderFactory.Create<IProvider<Product, string>>(_RepoUri).Insert(info, unitWork);
                 ProductInventoryItem pii = new ProductInventoryItem()
                 {
                     ID = Guid.NewGuid(),
@@ -102,36 +80,13 @@ namespace LJH.Inventory.BLL
                     AddDate = DateTime.Now,
                     InventorySheet = "初始库存"
                 };
-                ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Insert(pii, unitWork);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii, unitWork);
                 return unitWork.Commit();
             }
             else
             {
                 return new CommandResult(ResultCode.Fail, "创建商品编号失败，请重试");
             }
-        }
-        /// <summary>
-        /// 更新商品资料
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public CommandResult UpdateProduct(Product info)
-        {
-            Product original = ProviderFactory.Create<IProductProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            if (original != null)
-            {
-                return ProviderFactory.Create<IProductProvider>(_RepoUri).Update(info, original);
-            }
-            return new CommandResult(ResultCode.Fail, "编号为 " + info.ID + " 的商品不存在");
-        }
-        /// <summary>
-        /// 删除商品资料
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public CommandResult Delete(Product info)
-        {
-            return ProviderFactory.Create<IProductProvider>(_RepoUri).Delete(info);
         }
         #endregion
     }

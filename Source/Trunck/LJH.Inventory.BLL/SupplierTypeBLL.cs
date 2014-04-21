@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class SupplierTypeBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, SupplierType>
+    public class SupplierTypeBLL : BLLBase<string, SupplierType>
     {
         #region 构造函数
         public SupplierTypeBLL(string repoUri)

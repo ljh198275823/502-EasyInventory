@@ -9,17 +9,13 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class DeliverySheetBLL
+    public class DeliverySheetBLL : SheetProcessorBase<DeliverySheet>
     {
         #region 构造函数
         public DeliverySheetBLL(string repoUri)
+            : base(repoUri)
         {
-            _RepoUri = repoUri;
         }
-        #endregion
-
-        #region 私有变量
-        private string _RepoUri;
         #endregion
 
         #region 私有方法
@@ -34,7 +30,7 @@ namespace LJH.Inventory.BLL
                     WareHouseID = sheet.WareHouseID, //如果送货单没有指定仓库，这里就为空
                     UnShipped = true,     //所有未发货的库存项
                 };
-                List<ProductInventoryItem> items = ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).GetItems(con).QueryObjects;
+                List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
                 if (si.OrderItem != null)  //如果出货单项有相关的订单项，那么出货时只扣除与此订单项相关的库存项和未分配给任何订单的库存项
                 {
                     items = items.Where(item => item.OrderItem == si.OrderItem).ToList();
@@ -65,18 +61,18 @@ namespace LJH.Inventory.BLL
                             pii.DeliveryItem = si.ID;
                             pii.DeliverySheet = si.SheetNo;
                             pii.Count = count;
-                            ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Update(pii, pii1, unitWork);
+                            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
 
                             pii1.ID = Guid.NewGuid();
                             pii1.Count -= count;
-                            ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Insert(pii1, unitWork);
+                            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii1, unitWork);
                             count = 0;
                         }
                         else
                         {
                             pii.DeliveryItem = si.ID;
                             pii.DeliverySheet = si.SheetNo;
-                            ProviderFactory.Create<IProductInventoryItemProvider>(_RepoUri).Update(pii, pii1, unitWork);
+                            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
                             count -= pii.Count;
                         }
                     }
@@ -116,207 +112,23 @@ namespace LJH.Inventory.BLL
             }
             foreach (CustomerReceivable cr in crs)
             {
-                ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Insert(cr, unitWork);
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
             }
         }
         #endregion
 
-        #region 公共方法
-        /// <summary>
-        /// 通过送货单号查询相关送货单
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public QueryResult<DeliverySheet> GetByID(string id)
+        #region 重写基类方法
+        protected override string CreateSheetID(DeliverySheet info)
         {
-            IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
-            return provider.GetByID(id);
+            info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
+                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, info.DocumentType);
+            if (!string.IsNullOrEmpty(info.ID)) info.Items.ForEach(item => item.SheetNo = info.ID);//这一句不能省!!
+            return info.ID;
         }
-        /// <summary>
-        /// 获取符合指定条件的送货单
-        /// </summary>
-        /// <param name="con"></param>
-        /// <returns></returns>
-        public QueryResultList<DeliverySheet> GetItems(SearchCondition con)
-        {
-            IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
-            return provider.GetItems(con);
-        }
-        /// <summary>
-        /// 获取某个客户付款单的金额分配
-        /// </summary>
-        /// <param name="paymentID"></param>
-        /// <returns></returns>
-        public QueryResultList<CustomerPaymentAssign> GetAssigns(string sheetNo)
-        {
-            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
-            con.ReceivableID = sheetNo;
-            return ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).GetItems(con);
-        }
-        /// <summary>
-        /// 通过查询条件获取相关商品销售记录
-        /// </summary>
-        /// <param name="con"></param>
-        /// <returns></returns>
-        public QueryResultList<DeliveryRecord> GetDeliveryRecords(SearchCondition con)
-        {
-            return ProviderFactory.Create<IDeliveryRecordProvider>(_RepoUri).GetItems(con);
-        }
-        /// <summary>
-        /// 增加送货单
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public CommandResult Add(DeliverySheet info, string opt)
-        {
-            IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            if (string.IsNullOrEmpty(info.ID))
-            {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
-                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount,info.DocumentType);
-            }
-            if (!string.IsNullOrEmpty(info.ID))
-            {
-                info.Items.ForEach(item => item.SheetNo = info.ID);//这一句不能省!!
-                provider.Insert(info, unitWork);
 
-                DocumentOperation doc = new DocumentOperation()
-                {
-                    DocumentID = info.ID,
-                    DocumentType =info.DocumentType,
-                    OperatDate = DateTime.Now,
-                    Operation = "新增",
-                    State = SheetState.Add,
-                    Operator = opt,
-                };
-                ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-                return unitWork.Commit();
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "创建送货单号失败，请重试");
-            }
-        }
-        /// <summary>
-        /// 更新送货单
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public CommandResult Update(DeliverySheet info, string opt)
+        protected override void DoNullify(DeliverySheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
-            DeliverySheet original = provider.GetByID(info.ID).QueryObject;
-            if (original != null)
-            {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                provider.Update(info, original, unitWork);
-
-                DocumentOperation doc = new DocumentOperation()
-                {
-                    DocumentID = info.ID,
-                    DocumentType =info.DocumentType,
-                    OperatDate = DateTime.Now,
-                    Operation = "修改",
-                    State = info.State,
-                    Operator = opt,
-                };
-                ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-                return unitWork.Commit();
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "系统中已经不存在单号为 " + info.ID + " 的送货单");
-            }
-        }
-        /// <summary>
-        /// 审批送货单
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="approver"></param>
-        /// <returns></returns>
-        public CommandResult Approve(string sheetNo, string opt)
-        {
-            DeliverySheet info = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri).GetByID(sheetNo).QueryObject;
-            if (info != null)
-            {
-                if (info.CanApprove)
-                {
-                    IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                    DeliverySheet original = info.Clone();
-                    info.State = SheetState.Approved;
-
-                    DocumentOperation doc = new DocumentOperation()
-                    {
-                        DocumentID = info.ID,
-                        DocumentType =info.DocumentType,
-                        OperatDate = DateTime.Now,
-                        Operation = "审核",
-                        State = SheetState.Approved,
-                        Operator = opt,
-                    };
-                    ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-                    ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri).Update(info, original, unitWork);
-                    return unitWork.Commit();
-                }
-                else
-                {
-                    return new CommandResult(ResultCode.Fail, "单号为 " + info.ID + " 的送货单不能再审批，只有待发货的送货单才能审批");
-                }
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "系统中已经不存在单号为 " + info.ID + " 的送货单");
-            }
-        }
-        /// <summary>
-        /// 发货
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="opt"></param>
-        /// <returns></returns>
-        public CommandResult Delivery(string sheetNo, string opt)
-        {
-            IDeliverySheetProvider provider = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri);
-            DeliverySheet sheet = provider.GetByID(sheetNo).QueryObject;
-            if (sheet == null) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，系统中不存在该送货单");
-            if (!sheet.CanShip) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，只有待发货或者已审批的送货单才能发货");
-            if (sheet.Items == null || sheet.Items.Count == 0) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，没有送货单项");
-
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            DeliverySheet sheet1 = sheet.Clone();
-            sheet.ShipDate = DateTime.Now;
-            sheet.State = SheetState.Shipped;
-            provider.Update(sheet, sheet1, unitWork);
-
-            if (!string.IsNullOrEmpty(sheet.WareHouseID)) InventoryOut(sheet, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
-            AddReceivables(sheet, unitWork);         //增加供应商的应收账款
-            DocumentOperation doc = new DocumentOperation()
-            {
-                DocumentID = sheetNo,
-                DocumentType = sheet.DocumentType,
-                OperatDate = DateTime.Now,
-                Operation = "出库",
-                State = sheet.State,
-                Operator = opt,
-            };
-            ProviderFactory.Create<IDocumentOperationProvider>(_RepoUri).Insert(doc, unitWork);
-            return unitWork.Commit();
-        }
-        /// <summary>
-        /// 作废
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="opt"></param>
-        /// <returns></returns>
-        public CommandResult Cancel(DeliverySheet info, string opt, bool payforOtherReceivables)
-        {
-            //if (!info.CanCancel) return new CommandResult(ResultCode.Fail, "单号为 " + info.ID + " 的送货单不能作废");
-            //DeliverySheet original = ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            //if (original == null) return new CommandResult(ResultCode.Fail, "系统中已经不存在单号为 " + info.ID + " 的送货单");
-            //Customer c = ProviderFactory.Create<ICustomerProvider>(_RepoUri).GetByID(info.CustomerID).QueryObject;
-            //if (c == null) return new CommandResult(ResultCode.Fail, "系统中不存在送货单的客户");
-
+            base.DoNullify(info, unitWork, dt, opt);
             //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             ////如果已经有客户付款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
             //CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
@@ -348,20 +160,57 @@ namespace LJH.Inventory.BLL
             //        }
             //    }
             //}
+        }
+        #endregion
 
-            ////original.CancelOperator = opt;
-            ////original.CancelDate = DateTime.Now;
-            //original.State = SheetState.Canceled;
-            //ProviderFactory.Create<IDeliverySheetProvider>(_RepoUri).Update(original, info, unitWork);
-            //CommandResult ret = unitWork.Commit();
-            //if (ret.Result == ResultCode.Successful)
-            //{
-            //    //info.CancelOperator = original.CancelOperator;
-            //    //info.CancelDate = original.CancelDate;
-            //    info.State = original.State;
-            //}
-            //return ret;
-            return null;
+        #region 公共方法
+        /// <summary>
+        /// 获取某个客户付款单的金额分配
+        /// </summary>
+        /// <param name="paymentID"></param>
+        /// <returns></returns>
+        public QueryResultList<CustomerPaymentAssign> GetAssigns(string sheetNo)
+        {
+            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
+            con.ReceivableID = sheetNo;
+            return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con);
+        }
+        /// <summary>
+        /// 通过查询条件获取相关商品销售记录
+        /// </summary>
+        /// <param name="con"></param>
+        /// <returns></returns>
+        public QueryResultList<DeliveryRecord> GetDeliveryRecords(SearchCondition con)
+        {
+            return ProviderFactory.Create<IProvider<DeliveryRecord, Guid>>(_RepoUri).GetItems(con);
+        }
+        /// <summary>
+        /// 发货
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="opt"></param>
+        /// <returns></returns>
+        public CommandResult Delivery(string sheetNo, string opt)
+        {
+            DateTime? dt = GetServerDateTime(); //从服务器获取时间
+            if (dt == null) return new CommandResult(ResultCode.Fail, "从数据库服务器获取时间失败");
+            IProvider<DeliverySheet, string> provider = ProviderFactory.Create<IProvider<DeliverySheet, string>>(_RepoUri);
+            DeliverySheet sheet = provider.GetByID(sheetNo).QueryObject;
+            if (sheet == null) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，系统中不存在该送货单");
+            if (!sheet.CanShip) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，只有待发货或者已审批的送货单才能发货");
+            if (sheet.Items == null || sheet.Items.Count == 0) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，没有送货单项");
+
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            DeliverySheet sheet1 = sheet.Clone() as DeliverySheet;
+            sheet.ShipDate = dt.Value;
+            sheet.LastActiveDate = dt.Value;
+            sheet.State = SheetState.Shipped;
+            provider.Update(sheet, sheet1, unitWork);
+
+            if (!string.IsNullOrEmpty(sheet.WareHouseID)) InventoryOut(sheet, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
+            AddReceivables(sheet, unitWork);         //增加供应商的应收账款
+            AddOperationLog(sheetNo, sheet.DocumentType, SheetOperation.Ship, Operator.Current.Name, unitWork, dt.Value);
+            return unitWork.Commit();
         }
         #endregion
     }

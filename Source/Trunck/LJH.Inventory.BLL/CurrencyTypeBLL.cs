@@ -8,13 +8,12 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CurrencyTypeBLL : LJH.GeneralLibrary.Core.BLL.BLLBase<string, CurrencyType>
+    public class CurrencyTypeBLL : BLLBase<string, CurrencyType>
     {
         #region 构造函数
         public CurrencyTypeBLL(string repoUri)
             : base(repoUri)
         {
-            ProviderFactory = new ProviderFactory();
         }
         #endregion
     }

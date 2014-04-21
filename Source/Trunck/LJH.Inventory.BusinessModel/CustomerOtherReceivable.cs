@@ -8,16 +8,12 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户其它应收款,包括出口退税等都在这里
     /// </summary>
-    public class CustomerOtherReceivable : LJH.GeneralLibrary.Core.DAL.IEntity<string>
+    public class CustomerOtherReceivable : ISheet<string>
     {
         #region 构造函数
         public CustomerOtherReceivable()
         {
         }
-        #endregion
-
-        #region 只读变量
-        public readonly string DocumentType = "CustomerOtherReceivable";
         #endregion
 
         #region 公共属性
@@ -68,9 +64,42 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
-        public CustomerOtherReceivable Clone()
+        public ISheet<string> Clone()
         {
             return this.MemberwiseClone() as CustomerOtherReceivable;
+        }
+
+        public string DocumentType
+        {
+            get { return "CustomerOtherReceivable"; }
+        }
+
+        public DateTime LastActiveDate
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool CanEdit
+        {
+            get
+            {
+                return (State == SheetState.Add);
+            }
+        }
+
+        public bool CanApprove
+        {
+            get
+            {
+                return State == SheetState.Add;
+            }
         }
     }
 }
