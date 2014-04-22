@@ -249,8 +249,9 @@
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="WithTax" Member="WithTax"  DbType="bit not null" UpdateCheck="Never"/>
+      <Column Name="DemandDate" Member="DemandDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="Inventory" Member="Inventory"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="Shipped" Member="Shipped"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="Purchased" Member="Purchased"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>

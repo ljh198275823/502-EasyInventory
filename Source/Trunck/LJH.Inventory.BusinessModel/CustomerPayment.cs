@@ -61,10 +61,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
-        /// <summary>
-        /// 获取或设置客户付款分配列表
-        /// </summary>
-        public List<CustomerPaymentAssign> Assigns { get; set; }
         #endregion
 
         #region ISheet接口

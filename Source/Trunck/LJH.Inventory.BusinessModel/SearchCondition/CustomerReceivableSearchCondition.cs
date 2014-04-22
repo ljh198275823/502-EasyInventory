@@ -5,11 +5,11 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class CustomerReceivableSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
+    public class CustomerReceivableSearchCondition : LJH.GeneralLibrary .Core .DAL .SearchCondition 
     {
-        public string CustomerID { get; set; }
-
         public DateTimeRange CreateDate { get; set; }
+
+        public string CustomerID { get; set; }
 
         public string OrderID { get; set; }
 

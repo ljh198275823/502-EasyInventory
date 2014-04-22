@@ -102,6 +102,17 @@ namespace LJH.Inventory.BLL
             con.HasRemain = true;
             return GetItems(con);
         }
+        /// <summary>
+        /// 获取某个客户付款单的金额分配明细
+        /// </summary>
+        /// <param name="paymentID"></param>
+        /// <returns></returns>
+        public QueryResultList<CustomerPaymentAssign> GetAssigns(string paymentID)
+        {
+            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
+            con.PaymentID = paymentID;
+            return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con);
+        }
         #endregion
     }
 }

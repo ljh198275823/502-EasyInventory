@@ -14,104 +14,35 @@ namespace LJH.Inventory.DAL.LinqProvider
     {
         #region 构造函数
         public CustomerPaymentProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
         }
         #endregion
 
         #region 重写基类方法
-        protected override CustomerPayment GetingItemByID(string id, System.Data.Linq.DataContext dc)
-        {
-            DataLoadOptions opts = new DataLoadOptions();
-            opts.LoadWith<CustomerPayment>(item => item.Assigns);
-            dc.LoadOptions = opts;
-            CustomerPayment sheet = dc.GetTable<CustomerPayment>().SingleOrDefault(item => item.ID == id);
-            if (sheet != null)
-            {
-                sheet.Customer = (new CustomerProvider(ConnectStr, _MappingResource)).GetByID(sheet.CustomerID).QueryObject;
-            }
-            return sheet;
-        }
-
         protected override List<CustomerPayment> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
-            DataLoadOptions opts = new DataLoadOptions();
-            opts.LoadWith<CustomerPayment>(item => item.Assigns);
-            dc.LoadOptions = opts;
             IQueryable<CustomerPayment> ret = dc.GetTable<CustomerPayment>();
+            if (search is SheetSearchCondition)
+            {
+                SheetSearchCondition con = search as SheetSearchCondition;
+                if (con.LastActiveDate != null) ret = ret.Where(item => item.LastActiveDate >= con.LastActiveDate.Begin && item.LastActiveDate <= con.LastActiveDate.End);
+                if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
+            }
             if (search is CustomerPaymentSearchCondition)
             {
                 CustomerPaymentSearchCondition con = search as CustomerPaymentSearchCondition;
-                if (con.PaidDate != null) ret = ret.Where(item => item.LastActiveDate >= con.PaidDate.Begin && item.LastActiveDate <= con.PaidDate.End);
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (con.HasRemain != null)
                 {
-                    if (con.HasRemain.Value)
-                    {
-                        ret = ret.Where(item => item.Assigned < item.Amount);
-                    }
-                    else
-                    {
-                        ret = ret.Where(item => item.Assigned >= item.Amount);
-                    }
+                    if (con.HasRemain.Value) ret = ret.Where(item => item.Assigned < item.Amount);
+                    else ret = ret.Where(item => item.Assigned >= item.Amount);
                 }
             }
             List<CustomerPayment> sheets = ret.ToList();
-            if (sheets != null && sheets.Count > 0)  //有些查询不能直接用SQL语句查询
-            {
-                List<CompanyInfo> cs = (new CustomerProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                foreach (CustomerPayment sheet in sheets)
-                {
-                    sheet.Customer = cs.SingleOrDefault(item => item.ID == sheet.CustomerID);
-                }
-            }
             return sheets;
         }
-
-        //protected override void UpdatingItem(CustomerPayment newVal, CustomerPayment original, DataContext dc)
-        //{
-        //    dc.GetTable<CustomerPayment>().Attach(newVal, original);
-        //    if (newVal.Assigns != null)
-        //    {
-        //        foreach (CustomerPaymentAssign item in newVal.Assigns)
-        //        {
-        //            CustomerPaymentAssign old = original.Assigns != null ? original.Assigns.SingleOrDefault(it => it.ID == item.ID) : null;
-        //            if (old != null)
-        //            {
-        //                dc.GetTable<CustomerPaymentAssign>().Attach(item, old);
-        //            }
-        //            else
-        //            {
-        //                dc.GetTable<CustomerPaymentAssign>().InsertOnSubmit(item);
-        //            }
-        //        }
-        //    }
-        //    if (original.Assigns != null)
-        //    {
-        //        foreach (CustomerPaymentAssign item in original.Assigns)
-        //        {
-        //            if (newVal.Assigns == null || !newVal.Assigns.Exists(it => it.ID == item.ID))
-        //            {
-        //                dc.GetTable<CustomerPaymentAssign>().Attach(item);
-        //                dc.GetTable<CustomerPaymentAssign>().DeleteOnSubmit(item);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //protected override void DeletingItem(CustomerPayment info, DataContext dc)
-        //{
-        //    dc.GetTable<CustomerPayment>().Attach(info);
-        //    dc.GetTable<CustomerPayment>().DeleteOnSubmit(info);
-        //    if (info.Assigns != null)
-        //    {
-        //        foreach (CustomerPaymentAssign item in info.Assigns)
-        //        {
-        //            dc.GetTable<CustomerPaymentAssign>().Attach(item);
-        //            dc.GetTable<CustomerPaymentAssign>().DeleteOnSubmit(item);
-        //        }
-        //    }
-        //}
         #endregion
     }
 }

@@ -55,6 +55,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Price { get; set; }
         /// <summary>
+        /// 获取或设置是否含税
+        /// </summary>
+        public bool WithTax { get; set; }
+        /// <summary>
         /// 获取或设置客户要求的出货时间
         /// </summary>
         public DateTime DemandDate { get; set; }

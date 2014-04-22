@@ -150,7 +150,7 @@ namespace LJH.Inventory.BLL
                 }
             }
 
-            CustomerDaiFuSearchCondition con2 = new CustomerDaiFuSearchCondition() { CustomerID = info.ID };
+            CustomerOtherReceivableSearchCondition con2 = new CustomerOtherReceivableSearchCondition() { CustomerID = info.ID };
             List<CustomerOtherReceivable> cds = ProviderFactory.Create<IProvider<CustomerOtherReceivable, string>>(_RepoUri).GetItems(con2).QueryObjects;
             if (cds != null && cds.Count > 0)
             {

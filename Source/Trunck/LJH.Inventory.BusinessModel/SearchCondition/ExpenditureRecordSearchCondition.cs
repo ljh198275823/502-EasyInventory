@@ -5,10 +5,8 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class ExpenditureRecordSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
+    public class ExpenditureRecordSearchCondition : SheetSearchCondition
     {
-        public DateTimeRange PaidDate { get; set; }
         public string Category { get; set; }
-        public string Memo { get; set; }
     }
 }

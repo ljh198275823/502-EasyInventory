@@ -13,7 +13,7 @@ namespace LJH.Inventory.DAL.LinqProvider
     {
         #region 构造函数
         public CustomerPaymentAssignProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
         }
         #endregion

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class CustomerDaiFuSearchCondition :CustomerReceivableSearchCondition 
+    public class CustomerOtherReceivableSearchCondition : SheetSearchCondition
     {
-        public bool ContainCanceled { get; set; }
+        public string CustomerID { get; set; }
     }
 }

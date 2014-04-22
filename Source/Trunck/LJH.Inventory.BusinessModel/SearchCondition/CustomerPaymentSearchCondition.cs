@@ -5,16 +5,10 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class CustomerPaymentSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
+    public class CustomerPaymentSearchCondition : SheetSearchCondition
     {
         public string CustomerID { get; set; }
 
-        public DateTimeRange PaidDate { get; set; }
-
         public bool? HasRemain { get; set; }
-
-        public bool ContainCanceled { get; set; }
-
-
     }
 }

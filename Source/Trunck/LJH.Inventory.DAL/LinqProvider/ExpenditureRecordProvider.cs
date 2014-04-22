@@ -22,12 +22,17 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override List<ExpenditureRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             IQueryable<ExpenditureRecord> ret = dc.GetTable<ExpenditureRecord>();
+            if (search is SheetSearchCondition)
+            {
+                SheetSearchCondition con = search as SheetSearchCondition;
+                if (con.LastActiveDate != null) ret = ret.Where(item => item.LastActiveDate >= con.LastActiveDate.Begin && item.LastActiveDate <= con.LastActiveDate.End);
+                if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
+            }
             if (search is ExpenditureRecordSearchCondition)
             {
                 ExpenditureRecordSearchCondition con = search as ExpenditureRecordSearchCondition;
-                if (con.PaidDate != null) ret = ret.Where(item => item.LastActiveDate >= con.PaidDate.Begin && item.LastActiveDate <= con.PaidDate.End);
                 if (!string.IsNullOrEmpty(con.Category)) ret = ret.Where(item => item.Category.Contains(con.Category));
-                if (!string.IsNullOrEmpty(con.Memo)) ret = ret.Where(item => item.Memo.Contains(con.Memo));
             }
             return ret.ToList();
         }

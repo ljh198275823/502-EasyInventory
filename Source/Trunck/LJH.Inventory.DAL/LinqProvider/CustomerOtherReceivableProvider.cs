@@ -13,7 +13,7 @@ namespace LJH.Inventory.DAL.LinqProvider
     {
         #region 构造函数
         public CustomerOtherReceivableProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
         }
         #endregion
@@ -39,10 +39,16 @@ namespace LJH.Inventory.DAL.LinqProvider
                       join c in dc.GetTable<CompanyInfo>()
                       on cp.CustomerID equals c.ID
                       select new { v1 = cp, v2 = c };
+            if (search is SheetSearchCondition)
+            {
+                SheetSearchCondition con = search as SheetSearchCondition;
+                if (con.LastActiveDate != null) ret = ret.Where(item => item.v1.LastActiveDate >= con.LastActiveDate.Begin && item.v1.LastActiveDate <= con.LastActiveDate.End);
+                if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.v1.ID));
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.v1.State));
+            }
             if (search is CustomerReceivableSearchCondition)
             {
                 CustomerReceivableSearchCondition con = search as CustomerReceivableSearchCondition;
-                if (con.CreateDate != null) ret = ret.Where(item => item.v1.LastActiveDate >= con.CreateDate.Begin && item.v1.LastActiveDate <= con.CreateDate.End);
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.v1.CustomerID == con.CustomerID);
             }
             List<CustomerOtherReceivable> items = new List<CustomerOtherReceivable>();

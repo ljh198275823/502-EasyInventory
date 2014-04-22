@@ -97,7 +97,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                     txtCustomer.Tag = c;
                 }
                 txtMemo.Text = item.Memo;
-                ShowAssigns(item.Assigns);
+                List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns(item.ID).QueryObjects;
+                ShowAssigns(assigns);
                 List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
                 ShowOperations(items, dataGridView1);
                 List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
@@ -128,8 +129,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             CompanyInfo c = txtCustomer.Tag as CompanyInfo;
             info.CustomerID = c != null ? c.ID : null;
             info.Memo = txtMemo.Text;
-            info.Assigns = GetAssignsFromGrid();
-            info.Assigns.ForEach(item => item.PaymentID = info.ID);
             return info;
         }
 

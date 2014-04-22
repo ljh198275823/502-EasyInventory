@@ -116,7 +116,7 @@
     <Compile Include="Resource\SheetStateDescription.cs" />
     <Compile Include="SearchCondition\AttachmentSearchCondition.cs" />
     <Compile Include="SearchCondition\ContactSearchCondition.cs" />
-    <Compile Include="SearchCondition\CustomerDaiFuSearchCondition.cs" />
+    <Compile Include="SearchCondition\CustomerOtherReceivableSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerPaymentAssignSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerPaymentSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerReceivableSearchCondition.cs" />
@@ -141,7 +141,6 @@
     <Compile Include="Product.cs" />
     <Compile Include="ProductCategory.cs" />
     <Compile Include="SearchCondition\DeliveryRecordSearchCondition.cs" />
-    <Compile Include="SearchCondition\DeliverySheetPaymentSearchCondition.cs" />
     <Compile Include="SearchCondition\DeliverySheetSearchCondition.cs" />
     <Compile Include="SearchCondition\ProductInventorySearchCondition.cs" />
     <Compile Include="SearchCondition\ProductSearchCondition.cs" />
