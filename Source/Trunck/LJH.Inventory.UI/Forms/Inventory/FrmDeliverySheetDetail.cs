@@ -274,7 +274,7 @@ namespace LJH.Inventory.UI.Forms
         private void btnSave_Click(object sender, EventArgs e)
         {
             DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformCreateOrModify<DeliverySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            PerformOperation<DeliverySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)

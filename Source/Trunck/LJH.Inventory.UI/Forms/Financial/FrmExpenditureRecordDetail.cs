@@ -157,7 +157,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void btnSave_Click(object sender, EventArgs e)
         {
             ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
-            PerformCreateOrModify<ExpenditureRecord>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            PerformOperation<ExpenditureRecord>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)

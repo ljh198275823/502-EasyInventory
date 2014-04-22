@@ -120,7 +120,6 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
-            ShowButtonState();
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -147,7 +146,6 @@ namespace LJH.Inventory.UI.Forms
                 this.txtWareHouse.Tag = ws;
                 this.txtMemo.Text = item.Memo;
                 ShowSheetItemsOnGrid(item.Items);
-                ShowButtonState();
                 if (item.State != SheetState.Add)
                 {
                     this.ItemsGrid.ReadOnly = true;
@@ -259,7 +257,7 @@ namespace LJH.Inventory.UI.Forms
         private void btnSave_Click(object sender, EventArgs e)
         {
             InventorySheetBLL bll = new InventorySheetBLL(AppSettings.Current.ConnStr);
-            PerformCreateOrModify<InventorySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            PerformOperation<InventorySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)

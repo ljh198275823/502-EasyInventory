@@ -216,7 +216,7 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 与工具栏有关的方法
-        protected virtual void PerformCreateOrModify<T>(SheetProcessorBase<T> processor, SheetOperation operation) where T : class,ISheet<string>
+        private void PerformSave<T>(SheetProcessorBase<T> processor, SheetOperation operation) where T : class,ISheet<string>
         {
             T sheet = GetItemFromInput() as T;
             CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
@@ -238,34 +238,41 @@ namespace LJH.Inventory.UI.Forms
 
         protected virtual void PerformOperation<T>(SheetProcessorBase<T> processor, SheetOperation operation) where T : class,ISheet<string>
         {
-            if (UpdatingItem != null)
+            if (operation == SheetOperation.Create || operation == SheetOperation.Modify)
             {
-                T sheet = null;
-                if (operation == SheetOperation.Create || operation == SheetOperation.Modify)
+                PerformSave<T>(processor, operation);
+            }
+            else
+            {
+                if (UpdatingItem != null)
                 {
-                    MessageBox.Show("保存请调用 " + "PerformCreateOrModify()");
-                    return;
-                }
-                else
-                {
-                    sheet = UpdatingItem as T;
-                    if (MessageBox.Show(string.Format("是否要进行 {0}?", SheetOperationDescription.GetDescription(operation)),
-                               "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+                    T sheet = null;
+                    if (operation == SheetOperation.Create || operation == SheetOperation.Modify)
                     {
+                        MessageBox.Show("保存请调用 " + "PerformCreateOrModify()");
                         return;
                     }
-                }
-                CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
-                if (ret.Result == ResultCode.Successful)
-                {
-                    ItemShowing();
-                    ShowButtonState();
-                    if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
-                    MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        sheet = UpdatingItem as T;
+                        if (MessageBox.Show(string.Format("是否要进行 {0}?", SheetOperationDescription.GetDescription(operation)),
+                                   "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+                        {
+                            return;
+                        }
+                    }
+                    CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        ItemShowing();
+                        ShowButtonState();
+                        if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
+                        MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

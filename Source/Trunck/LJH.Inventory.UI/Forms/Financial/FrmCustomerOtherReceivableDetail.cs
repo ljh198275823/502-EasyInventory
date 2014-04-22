@@ -52,7 +52,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
-                ShowButtonState();
             }
         }
 
@@ -135,7 +134,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void btnSave_Click(object sender, EventArgs e)
         {
             CustomerOtherReceivableBLL processor = new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr);
-            PerformCreateOrModify<CustomerOtherReceivable>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            PerformOperation<CustomerOtherReceivable>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)

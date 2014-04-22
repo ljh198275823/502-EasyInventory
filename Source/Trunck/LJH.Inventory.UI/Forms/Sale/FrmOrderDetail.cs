@@ -165,7 +165,6 @@ namespace LJH.Inventory.UI.Forms
                 ShowDeliveryItemsOnGrid(item.Items);
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
-                ShowButtonState();
             }
         }
 
@@ -256,7 +255,7 @@ namespace LJH.Inventory.UI.Forms
         private void btnSave_Click(object sender, EventArgs e)
         {
             OrderBLL  processor = new OrderBLL(AppSettings.Current.ConnStr);
-            PerformCreateOrModify<Order>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            PerformOperation<Order>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
