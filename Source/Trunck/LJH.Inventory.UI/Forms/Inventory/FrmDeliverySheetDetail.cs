@@ -107,11 +107,8 @@ namespace LJH.Inventory.UI.Forms
             this.txtWareHouse.Tag = ws;
             this.txtMemo.Text = item.Memo;
             ShowDeliveryItemsOnGrid(item.Items);
-            List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
-            ShowOperations(items, dataGridView1);
-            List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
-            ShowAttachmentHeaders(headers, this.gridAttachment);
-            ShowButtonState();
+            ShowOperations(item.ID, item.DocumentType, dataGridView1);
+            ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
             if (item.State != SheetState.Add)
             {
                 this.ItemsGrid.ReadOnly = true;
@@ -159,7 +156,6 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            ShowButtonState();
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -228,19 +224,19 @@ namespace LJH.Inventory.UI.Forms
         {
             if (UpdatingItem == null)
             {
-                this.btnOk.Enabled = true;
-                this.btnPrint.Enabled = false;
+                this.btnSave.Enabled = true;
                 this.btnApprove.Enabled = false;
+                this.btnUndoApprove.Enabled = false;
                 this.btnShip.Enabled = false;
                 this.btnNullify.Enabled = false;
             }
             else
             {
-                DeliverySheet sheet = UpdatingItem as DeliverySheet;
+                ISheet<string> sheet = UpdatingItem as ISheet<string>;
                 this.btnSave.Enabled = sheet.CanEdit;
-                this.btnPrint.Enabled = sheet.CanPrint;
                 this.btnApprove.Enabled = sheet.CanApprove;
-                this.btnShip.Enabled = sheet.CanShip;
+                this.btnUndoApprove.Enabled = sheet.State == SheetState.Approved;
+                this.btnShip.Enabled = (sheet as DeliverySheet).CanShip ;
                 this.btnNullify.Enabled = sheet.CanCancel;
             }
         }
@@ -271,6 +267,43 @@ namespace LJH.Inventory.UI.Forms
         private void gridAttachment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             PerformAttachOpen(gridAttachment);
+        }
+        #endregion
+
+        #region 工具栏事件处理
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformCreateOrModify<DeliverySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<DeliverySheet>(bll, SheetOperation.Approve);
+        }
+
+        private void btnUndoApprove_Click(object sender, EventArgs e)
+        {
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<DeliverySheet>(bll, SheetOperation.UndoApprove);
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnShip_Click(object sender, EventArgs e)
+        {
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<DeliverySheet>(bll, SheetOperation.Ship);
+        }
+
+        private void btnNullify_Click(object sender, EventArgs e)
+        {
+            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<DeliverySheet>(bll, SheetOperation.Nullify);
         }
         #endregion
 
@@ -434,59 +467,6 @@ namespace LJH.Inventory.UI.Forms
                 }
                 ShowDeliveryItemsOnGrid(items);
             }
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformCreateOrModify<DeliverySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
-        }
-
-        private void btnApprove_Click(object sender, EventArgs e)
-        {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<DeliverySheet>(bll, SheetOperation.Approve);
-        }
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                try
-                {
-                    if (MessageBox.Show("是否要打印此送货单?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                    {
-                        string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
-                        DeliverySheetExporter exporter = null;
-                        if (System.IO.File.Exists(modal))
-                        {
-                            DeliverySheet sheet = UpdatingItem as DeliverySheet;
-                            exporter = new DeliverySheetExporter(modal);
-                            exporter.PrintDeliverySheet(sheet);
-                        }
-                        else
-                        {
-                            MessageBox.Show("未找到送货单导出模板", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void btnShip_Click(object sender, EventArgs e)
-        {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<DeliverySheet>(bll, SheetOperation.Ship);
-        }
-
-        private void btnNullify_Click(object sender, EventArgs e)
-        {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<DeliverySheet>(bll, SheetOperation.Nullify);
         }
 
         private void btnPaymentAssign_Click(object sender, EventArgs e)

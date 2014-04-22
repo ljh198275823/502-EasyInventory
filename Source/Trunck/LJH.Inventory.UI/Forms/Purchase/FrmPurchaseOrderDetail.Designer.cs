@@ -45,9 +45,9 @@
             this.txtBuyer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btn_AddOrderRecord = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_AddOrderRecord = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_AddItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
             this.dtDemandDate = new System.Windows.Forms.DateTimePicker();
@@ -73,6 +73,8 @@
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
+            this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
+            this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,7 +84,7 @@
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -263,32 +265,32 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btn_AddOrderRecord,
-            this.btn_AddItem,
-            this.mnu_RemoveItem});
+            this.cMnu_AddOrderRecord,
+            this.cMnu_AddItem,
+            this.cMnu_RemoveItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(161, 70);
             // 
-            // btn_AddOrderRecord
+            // cMnu_AddOrderRecord
             // 
-            this.btn_AddOrderRecord.Name = "btn_AddOrderRecord";
-            this.btn_AddOrderRecord.Size = new System.Drawing.Size(160, 22);
-            this.btn_AddOrderRecord.Text = "选择销售订单项";
-            this.btn_AddOrderRecord.Click += new System.EventHandler(this.btn_AddOrderRecord_Click);
+            this.cMnu_AddOrderRecord.Name = "cMnu_AddOrderRecord";
+            this.cMnu_AddOrderRecord.Size = new System.Drawing.Size(160, 22);
+            this.cMnu_AddOrderRecord.Text = "选择销售订单项";
+            this.cMnu_AddOrderRecord.Click += new System.EventHandler(this.cMnu_AddOrderRecord_Click);
             // 
-            // btn_AddItem
+            // cMnu_AddItem
             // 
-            this.btn_AddItem.Name = "btn_AddItem";
-            this.btn_AddItem.Size = new System.Drawing.Size(160, 22);
-            this.btn_AddItem.Text = "选择商品";
-            this.btn_AddItem.Click += new System.EventHandler(this.btn_Add_Click);
+            this.cMnu_AddItem.Name = "cMnu_AddItem";
+            this.cMnu_AddItem.Size = new System.Drawing.Size(160, 22);
+            this.cMnu_AddItem.Text = "选择商品";
+            this.cMnu_AddItem.Click += new System.EventHandler(this.cMnu_Add_Click);
             // 
-            // mnu_RemoveItem
+            // cMnu_RemoveItem
             // 
-            this.mnu_RemoveItem.Name = "mnu_RemoveItem";
-            this.mnu_RemoveItem.Size = new System.Drawing.Size(160, 22);
-            this.mnu_RemoveItem.Text = "删除";
-            this.mnu_RemoveItem.Click += new System.EventHandler(this.mnu_Remove_Click);
+            this.cMnu_RemoveItem.Name = "cMnu_RemoveItem";
+            this.cMnu_RemoveItem.Size = new System.Drawing.Size(160, 22);
+            this.cMnu_RemoveItem.Text = "删除";
+            this.cMnu_RemoveItem.Click += new System.EventHandler(this.cMnu_Remove_Click);
             // 
             // txtSheetNo
             // 
@@ -488,7 +490,9 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
             this.btnApprove,
-            this.btnPrint});
+            this.btnPrint,
+            this.btnUndoApprove,
+            this.btnNullify});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1004, 56);
@@ -524,6 +528,27 @@
             this.btnPrint.Size = new System.Drawing.Size(51, 53);
             this.btnPrint.Text = "打印(&P)";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.Visible = false;
+            // 
+            // btnUndoApprove
+            // 
+            this.btnUndoApprove.Image = global::LJH.Inventory.UI.Properties.Resources.canceled;
+            this.btnUndoApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUndoApprove.Name = "btnUndoApprove";
+            this.btnUndoApprove.Size = new System.Drawing.Size(60, 53);
+            this.btnUndoApprove.Text = "取消审核";
+            this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
+            // 
+            // btnNullify
+            // 
+            this.btnNullify.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
+            this.btnNullify.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNullify.Name = "btnNullify";
+            this.btnNullify.Size = new System.Drawing.Size(54, 53);
+            this.btnNullify.Text = "作废(&N)";
+            this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
             // colHeader
             // 
@@ -604,6 +629,7 @@
             this.colOrderID.Name = "colOrderID";
             this.colOrderID.ReadOnly = true;
             this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colMemo
             // 
@@ -665,15 +691,15 @@
         private System.Windows.Forms.ToolStripButton btnApprove;
         private System.Windows.Forms.ToolStripButton btnPrint;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem btn_AddItem;
-        private System.Windows.Forms.ToolStripMenuItem mnu_RemoveItem;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_AddItem;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_RemoveItem;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
-        private System.Windows.Forms.ToolStripMenuItem btn_AddOrderRecord;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_AddOrderRecord;
         private System.Windows.Forms.ContextMenuStrip mnu_Attachment;
         private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentAdd;
         private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentOpen;
@@ -687,6 +713,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
+        private System.Windows.Forms.ToolStripButton btnUndoApprove;
+        private System.Windows.Forms.ToolStripButton btnNullify;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
@@ -696,7 +724,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
-        private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

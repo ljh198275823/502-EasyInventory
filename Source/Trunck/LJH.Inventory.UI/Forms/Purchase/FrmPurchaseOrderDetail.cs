@@ -167,10 +167,8 @@ namespace LJH.Inventory.UI.Forms
                 this.rdWithoutTax.Checked = !item.WithTax;
                 this.dtDemandDate.Value = item.DemandDate;
                 ShowDeliveryItemsOnGrid(item.Items);
-                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
-                ShowOperations(items, dataGridView1);
-                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
-                ShowAttachmentHeaders(headers, this.gridAttachment);
+                ShowOperations(item.ID, item.DocumentType, dataGridView1);
+                ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
                 ShowButtonState();
             }
         }
@@ -203,15 +201,17 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 this.btnSave.Enabled = true;
-                this.btnPrint.Enabled = false;
                 this.btnApprove.Enabled = false;
+                this.btnUndoApprove.Enabled = false;
+                this.btnNullify.Enabled = false;
             }
             else
             {
-                PurchaseOrder sheet = UpdatingItem as PurchaseOrder;
+                ISheet<string> sheet = UpdatingItem as ISheet<string>;
                 this.btnSave.Enabled = sheet.CanEdit;
-                this.btnPrint.Enabled = true;
                 this.btnApprove.Enabled = sheet.CanApprove;
+                this.btnUndoApprove.Enabled = sheet.State == SheetState.Approved;
+                this.btnNullify.Enabled = sheet.CanCancel;
             }
         }
 
@@ -251,6 +251,32 @@ namespace LJH.Inventory.UI.Forms
         private void gridAttachment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             PerformAttachOpen(gridAttachment);
+        }
+        #endregion
+
+        #region 工具栏事件处理
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            PurchaseOrderBLL processor = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
+            PerformCreateOrModify<PurchaseOrder>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+        }
+
+        private void btnApprove_Click(object sender, EventArgs e)
+        {
+            PurchaseOrderBLL processor = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
+            PerformOperation<PurchaseOrder>(processor, SheetOperation.Approve);
+        }
+
+        private void btnUndoApprove_Click(object sender, EventArgs e)
+        {
+            PurchaseOrderBLL processor = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
+            PerformOperation<PurchaseOrder>(processor, SheetOperation.UndoApprove);
+        }
+
+        private void btnNullify_Click(object sender, EventArgs e)
+        {
+            PurchaseOrderBLL processor = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
+            PerformOperation<PurchaseOrder>(processor, SheetOperation.Nullify);
         }
         #endregion
 
@@ -294,24 +320,6 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理程序
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
-            PerformCreateOrModify<PurchaseOrder>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
-        }
-
-        private void btnApprove_Click(object sender, EventArgs e)
-        {
-            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
-            PerformOperation<PurchaseOrder>(bll, SheetOperation.Approve);
-        }
-
-        private void btnNullify_Click(object sender, EventArgs e)
-        {
-            PurchaseOrderBLL bll = new PurchaseOrderBLL(AppSettings.Current.ConnStr);
-            PerformOperation<PurchaseOrder>(bll, SheetOperation.Nullify);
-        }
-
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
@@ -348,7 +356,7 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void btn_Add_Click(object sender, EventArgs e)
+        private void cMnu_Add_Click(object sender, EventArgs e)
         {
             FrmProductMaster frm = new FrmProductMaster();
             frm.ForSelect = true;
@@ -359,7 +367,7 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void btn_AddOrderRecord_Click(object sender, EventArgs e)
+        private void cMnu_AddOrderRecord_Click(object sender, EventArgs e)
         {
             LJH.Inventory.UI.Forms.Sale.FrmOrderItemRecordMaster frm = new Sale.FrmOrderItemRecordMaster();
             frm.ForSelect = true;
@@ -376,7 +384,7 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        private void mnu_Remove_Click(object sender, EventArgs e)
+        private void cMnu_Remove_Click(object sender, EventArgs e)
         {
             if (ItemsGrid.SelectedRows.Count > 0)
             {
@@ -415,29 +423,29 @@ namespace LJH.Inventory.UI.Forms
         {
             if (e.RowIndex >= 0)
             {
-                if (ItemsGrid.Columns[e.ColumnIndex].Name == "colOrderID")
-                {
-                    string orderID = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    Order item = (new OrderBLL(AppSettings.Current.ConnStr)).GetByID(orderID).QueryObject;
-                    if (item != null)
-                    {
-                        FrmOrderDetail frm = new FrmOrderDetail();
-                        frm.IsForView = true;
-                        frm.UpdatingItem = item;
-                        frm.ShowDialog();
-                    }
-                }
-                else if (ItemsGrid.Columns[e.ColumnIndex].Name == "colReceived")
-                {
-                    PurchaseItem pi = ItemsGrid.Rows[e.RowIndex].Tag as PurchaseItem;
-                    InventoryRecordSearchCondition con = new InventoryRecordSearchCondition();
-                    con.PurchaseItem = pi.ID;
-                    con.States = new List<SheetState>();
-                    con.States.Add(SheetState.Inventory);
-                    LJH.Inventory.UI.View.FrmInventoryRecordView frm = new View.FrmInventoryRecordView();
-                    frm.SearchCondition = con;
-                    frm.ShowDialog();
-                }
+                //if (ItemsGrid.Columns[e.ColumnIndex].Name == "colOrderID")
+                //{
+                //    string orderID = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                //    Order item = (new OrderBLL(AppSettings.Current.ConnStr)).GetByID(orderID).QueryObject;
+                //    if (item != null)
+                //    {
+                //        FrmOrderDetail frm = new FrmOrderDetail();
+                //        frm.IsForView = true;
+                //        frm.UpdatingItem = item;
+                //        frm.ShowDialog();
+                //    }
+                //}
+                //else if (ItemsGrid.Columns[e.ColumnIndex].Name == "colReceived")
+                //{
+                //    PurchaseItem pi = ItemsGrid.Rows[e.RowIndex].Tag as PurchaseItem;
+                //    InventoryRecordSearchCondition con = new InventoryRecordSearchCondition();
+                //    con.PurchaseItem = pi.ID;
+                //    con.States = new List<SheetState>();
+                //    con.States.Add(SheetState.Inventory);
+                //    LJH.Inventory.UI.View.FrmInventoryRecordView frm = new View.FrmInventoryRecordView();
+                //    frm.SearchCondition = con;
+                //    frm.ShowDialog();
+                //}
             }
         }
         #endregion

@@ -43,10 +43,6 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.ItemsGrid = new System.Windows.Forms.DataGridView();
-            this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_SelectOrder = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +54,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
+            this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_Attachment = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AttachmentAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,29 +69,37 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnApprove = new System.Windows.Forms.ToolStripButton();
+            this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
+            this.btnNullify = new System.Windows.Forms.ToolStripButton();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).BeginInit();
             this.mnu_Attachment.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(428, 379);
+            this.btnClose.Location = new System.Drawing.Point(428, 304);
             this.btnClose.TabIndex = 10;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(323, 379);
+            this.btnOk.Location = new System.Drawing.Point(323, 304);
             this.btnOk.TabIndex = 9;
             // 
             // label7
@@ -220,17 +228,17 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(4, 6);
+            this.tabControl1.Location = new System.Drawing.Point(4, 60);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(508, 357);
+            this.tabControl1.Size = new System.Drawing.Size(508, 220);
             this.tabControl1.TabIndex = 90;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.ItemsGrid);
             this.tabPage1.Controls.Add(this.txtCurrencyType);
             this.tabPage1.Controls.Add(this.lnkCurrencyType);
             this.tabPage1.Controls.Add(this.txtCustomer);
@@ -252,55 +260,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(500, 331);
+            this.tabPage1.Size = new System.Drawing.Size(500, 194);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // ItemsGrid
-            // 
-            this.ItemsGrid.AllowUserToAddRows = false;
-            this.ItemsGrid.AllowUserToDeleteRows = false;
-            this.ItemsGrid.AllowUserToResizeRows = false;
-            this.ItemsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.ItemsGrid.BackgroundColor = System.Drawing.Color.White;
-            this.ItemsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ItemsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colOrderID,
-            this.colAssign,
-            this.dataGridViewTextBoxColumn1});
-            this.ItemsGrid.ContextMenuStrip = this.contextMenuStrip1;
-            this.ItemsGrid.Location = new System.Drawing.Point(15, 171);
-            this.ItemsGrid.Name = "ItemsGrid";
-            this.ItemsGrid.RowHeadersVisible = false;
-            this.ItemsGrid.RowTemplate.Height = 23;
-            this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(479, 154);
-            this.ItemsGrid.TabIndex = 121;
-            this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "销售订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colOrderID.Width = 150;
-            // 
-            // colAssign
-            // 
-            this.colAssign.HeaderText = "分配金额";
-            this.colAssign.Name = "colAssign";
-            this.colAssign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.HeaderText = "";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -385,7 +348,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(500, 331);
+            this.tabPage5.Size = new System.Drawing.Size(500, 178);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -409,9 +372,36 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(500, 331);
+            this.gridAttachment.Size = new System.Drawing.Size(500, 178);
             this.gridAttachment.TabIndex = 102;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
+            // 
+            // colUploadDateTime
+            // 
+            this.colUploadDateTime.HeaderText = "上传时间";
+            this.colUploadDateTime.Name = "colUploadDateTime";
+            this.colUploadDateTime.ReadOnly = true;
+            this.colUploadDateTime.Width = 130;
+            // 
+            // colOwner
+            // 
+            this.colOwner.HeaderText = "操作员";
+            this.colOwner.Name = "colOwner";
+            this.colOwner.ReadOnly = true;
+            // 
+            // colSize
+            // 
+            this.colSize.HeaderText = "文件大小";
+            this.colSize.Name = "colSize";
+            this.colSize.ReadOnly = true;
+            // 
+            // colFileName
+            // 
+            this.colFileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colFileName.HeaderText = "附件";
+            this.colFileName.MinimumWidth = 100;
+            this.colFileName.Name = "colFileName";
+            this.colFileName.ReadOnly = true;
             // 
             // mnu_Attachment
             // 
@@ -456,7 +446,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(500, 331);
+            this.tabPage2.Size = new System.Drawing.Size(500, 178);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -479,7 +469,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(500, 331);
+            this.dataGridView1.Size = new System.Drawing.Size(500, 178);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -510,32 +500,113 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // colUploadDateTime
+            // toolStrip1
             // 
-            this.colUploadDateTime.HeaderText = "上传时间";
-            this.colUploadDateTime.Name = "colUploadDateTime";
-            this.colUploadDateTime.ReadOnly = true;
-            this.colUploadDateTime.Width = 130;
+            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSave,
+            this.btnApprove,
+            this.btnUndoApprove,
+            this.btnNullify});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(515, 56);
+            this.toolStrip1.TabIndex = 93;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // colOwner
+            // btnSave
             // 
-            this.colOwner.HeaderText = "操作员";
-            this.colOwner.Name = "colOwner";
-            this.colOwner.ReadOnly = true;
+            this.btnSave.Image = global::LJH.Inventory.UI.Properties.Resources.save;
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(51, 53);
+            this.btnSave.Text = "保存(&S)";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSave.ToolTipText = "保存(&S)";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // colSize
+            // btnApprove
             // 
-            this.colSize.HeaderText = "文件大小";
-            this.colSize.Name = "colSize";
-            this.colSize.ReadOnly = true;
+            this.btnApprove.Image = global::LJH.Inventory.UI.Properties.Resources.approve;
+            this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnApprove.Name = "btnApprove";
+            this.btnApprove.Size = new System.Drawing.Size(52, 53);
+            this.btnApprove.Text = "审核(&A)";
+            this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
-            // colFileName
+            // btnUndoApprove
             // 
-            this.colFileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colFileName.HeaderText = "附件";
-            this.colFileName.MinimumWidth = 100;
-            this.colFileName.Name = "colFileName";
-            this.colFileName.ReadOnly = true;
+            this.btnUndoApprove.Image = global::LJH.Inventory.UI.Properties.Resources.canceled;
+            this.btnUndoApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUndoApprove.Name = "btnUndoApprove";
+            this.btnUndoApprove.Size = new System.Drawing.Size(60, 53);
+            this.btnUndoApprove.Text = "取消审核";
+            this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
+            // 
+            // btnNullify
+            // 
+            this.btnNullify.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
+            this.btnNullify.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNullify.Name = "btnNullify";
+            this.btnNullify.Size = new System.Drawing.Size(54, 53);
+            this.btnNullify.Text = "作废(&N)";
+            this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.ItemsGrid);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(500, 194);
+            this.tabPage3.TabIndex = 7;
+            this.tabPage3.Text = "金额分配";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // ItemsGrid
+            // 
+            this.ItemsGrid.AllowUserToAddRows = false;
+            this.ItemsGrid.AllowUserToDeleteRows = false;
+            this.ItemsGrid.AllowUserToResizeRows = false;
+            this.ItemsGrid.BackgroundColor = System.Drawing.Color.White;
+            this.ItemsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ItemsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colOrderID,
+            this.colAssign,
+            this.dataGridViewTextBoxColumn1});
+            this.ItemsGrid.ContextMenuStrip = this.contextMenuStrip1;
+            this.ItemsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ItemsGrid.Location = new System.Drawing.Point(0, 0);
+            this.ItemsGrid.Name = "ItemsGrid";
+            this.ItemsGrid.RowHeadersVisible = false;
+            this.ItemsGrid.RowTemplate.Height = 23;
+            this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ItemsGrid.Size = new System.Drawing.Size(500, 194);
+            this.ItemsGrid.TabIndex = 122;
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "销售订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOrderID.Width = 150;
+            // 
+            // colAssign
+            // 
+            this.colAssign.HeaderText = "分配金额";
+            this.colAssign.Name = "colAssign";
+            this.colAssign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // FrmCustomerPaymentDetail
             // 
@@ -543,24 +614,30 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(515, 414);
+            this.ClientSize = new System.Drawing.Size(515, 285);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmCustomerPaymentDetail";
             this.Text = "客户付款流水明细";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.tabControl1, 0);
+            this.Controls.SetChildIndex(this.toolStrip1, 0);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).EndInit();
             this.mnu_Attachment.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -593,13 +670,9 @@
         private System.Windows.Forms.LinkLabel lnkCustomer;
         private GeneralLibrary.WinformControl.DBCTextBox txtCurrencyType;
         private System.Windows.Forms.LinkLabel lnkCurrencyType;
-        private System.Windows.Forms.DataGridView ItemsGrid;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnu_SelectOrder;
         private System.Windows.Forms.ToolStripMenuItem mnu_Delete;
-        private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridView gridAttachment;
         private System.Windows.Forms.ContextMenuStrip mnu_Attachment;
         private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentAdd;
@@ -610,5 +683,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnSave;
+        private System.Windows.Forms.ToolStripButton btnApprove;
+        private System.Windows.Forms.ToolStripButton btnUndoApprove;
+        private System.Windows.Forms.ToolStripButton btnNullify;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView ItemsGrid;
+        private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }
 }

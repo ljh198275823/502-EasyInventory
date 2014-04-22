@@ -163,10 +163,8 @@ namespace LJH.Inventory.UI.Forms
                 this.rdWithTax.Checked = item.WithTax;
                 this.rdWithoutTax.Checked = !item.WithTax;
                 ShowDeliveryItemsOnGrid(item.Items);
-                List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(item.ID, item.DocumentType).QueryObjects;
-                ShowOperations(items, dataGridView1);
-                List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(item.ID, item.DocumentType).QueryObjects;
-                ShowAttachmentHeaders(headers, this.gridAttachment);
+                ShowOperations(item.ID, item.DocumentType, dataGridView1);
+                ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
                 ShowButtonState();
             }
         }
@@ -200,17 +198,18 @@ namespace LJH.Inventory.UI.Forms
         {
             if (UpdatingItem == null)
             {
-                this.btnOk.Enabled = true;
-                this.btnPrint.Enabled = false;
+                this.btnSave.Enabled = true;
                 this.btnApprove.Enabled = false;
-                this.btnShip.Enabled = false;
+                this.btnUndoApprove.Enabled = false;
+                this.btnNullify.Enabled = false;
             }
             else
             {
-                Order sheet = UpdatingItem as Order;
+                ISheet<string> sheet = UpdatingItem as ISheet<string>;
                 this.btnSave.Enabled = sheet.CanEdit;
-                this.btnPrint.Enabled = true;
                 this.btnApprove.Enabled = sheet.CanApprove;
+                this.btnUndoApprove.Enabled = sheet.State == SheetState.Approved;
+                this.btnNullify.Enabled = sheet.CanCancel;
             }
         }
 
@@ -263,9 +262,9 @@ namespace LJH.Inventory.UI.Forms
         private void btnApprove_Click(object sender, EventArgs e)
         {
             OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);
-            PerformCreateOrModify<Order>(processor, SheetOperation.Approve);
+            PerformOperation<Order>(processor, SheetOperation.Approve);
         }
-
+        
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
             OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);

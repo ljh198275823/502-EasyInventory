@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddOrderItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +42,7 @@
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnShip = new System.Windows.Forms.ToolStripButton();
+            this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -81,7 +82,7 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnNullify = new System.Windows.Forms.ToolStripButton();
+            this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -147,6 +148,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
             this.btnApprove,
+            this.btnUndoApprove,
             this.btnPrint,
             this.btnShip,
             this.btnNullify});
@@ -196,6 +198,16 @@
             this.btnShip.Text = "出货(&D)";
             this.btnShip.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnShip.Click += new System.EventHandler(this.btnShip_Click);
+            // 
+            // btnNullify
+            // 
+            this.btnNullify.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
+            this.btnNullify.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNullify.Name = "btnNullify";
+            this.btnNullify.Size = new System.Drawing.Size(54, 53);
+            this.btnNullify.Text = "作废(&N)";
+            this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
             // tabControl1
             // 
@@ -355,18 +367,18 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colCount
             // 
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -374,9 +386,9 @@
             // 
             // colTotal
             // 
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle6;
             this.colTotal.HeaderText = "金额";
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
@@ -578,14 +590,15 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // btnNullify
+            // btnUndoApprove
             // 
-            this.btnNullify.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
-            this.btnNullify.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNullify.Name = "btnNullify";
-            this.btnNullify.Size = new System.Drawing.Size(54, 53);
-            this.btnNullify.Text = "作废(&N)";
-            this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUndoApprove.Image = global::LJH.Inventory.UI.Properties.Resources.canceled;
+            this.btnUndoApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUndoApprove.Name = "btnUndoApprove";
+            this.btnUndoApprove.Size = new System.Drawing.Size(60, 53);
+            this.btnUndoApprove.Text = "取消审核";
+            this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
             // 
             // FrmDeliverySheetDetail
             // 
@@ -674,5 +687,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.ToolStripButton btnNullify;
+        private System.Windows.Forms.ToolStripButton btnUndoApprove;
     }
 }

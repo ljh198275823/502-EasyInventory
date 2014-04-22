@@ -91,10 +91,10 @@ namespace LJH.Inventory.UI.Report
                     {
                         group = g.GroupBy(item => item.CustomerID + " " + item.Customer.Name);
                     }
-                    //else if (rdBySalesPerson.Checked)
-                    //{
-                    //    group = g.GroupBy(item => item.SalesPerson);
-                    //}
+                    else if (rdBySalesPerson.Checked)
+                    {
+                        group = g.GroupBy(item => item.SalesPerson);
+                    }
                     else if (rdByCategory.Checked)
                     {
                         group = g.GroupBy(item => item.Product.CategoryID + " " + item.Product.Category.Name);

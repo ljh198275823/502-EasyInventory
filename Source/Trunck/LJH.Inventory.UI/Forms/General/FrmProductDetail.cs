@@ -93,8 +93,7 @@ namespace LJH.Inventory.UI.Forms
             }
             txtInternalID.Text = p.InternalID;
             txtMemo.Text = p.Memo;
-            List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(p.ID, p.DocumentType).QueryObjects;
-            ShowAttachmentHeaders(headers, this.gridAttachment);
+            ShowAttachmentHeaders(p.ID, p.DocumentType, this.gridAttachment);
         }
 
         protected override Object GetItemFromInput()

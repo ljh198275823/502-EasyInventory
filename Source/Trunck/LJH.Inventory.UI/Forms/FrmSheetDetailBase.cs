@@ -61,9 +61,18 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
-        #region 与操作记录有关的方法
-        protected void ShowOperations(List<DocumentOperation> items, DataGridView dataGridView1)
+        #region 重写基类方法
+        protected override void InitControls()
         {
+            base.InitControls();
+            ShowButtonState();
+        }
+        #endregion
+
+        #region 与操作记录有关的方法
+        protected virtual void ShowOperations(string docID, string docType, DataGridView dataGridView1)
+        {
+            List<DocumentOperation> items = (new DocumentOperationBLL(AppSettings.Current.ConnStr)).GetHisOperations(docID, docType).QueryObjects;
             dataGridView1.Rows.Clear();
             if (items != null && items.Count > 0)
             {
@@ -79,7 +88,7 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 与附件操作相关的方法和事件处理程序
-        protected virtual void ShowAttachmentHeaderOnRow(AttachmentHeader header, DataGridViewRow row)
+        protected virtual  void ShowAttachmentHeaderOnRow(AttachmentHeader header, DataGridViewRow row)
         {
             row.Tag = header;
             row.Cells["colUploadDateTime"].Value = header.UploadDateTime;
@@ -88,8 +97,9 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colSize"].Value = header.FileSize;
         }
 
-        protected virtual void ShowAttachmentHeaders(List<AttachmentHeader> items, DataGridView gridAttachment)
+        protected virtual void ShowAttachmentHeaders(string docID, string docType, DataGridView gridAttachment)
         {
+            List<AttachmentHeader> items = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(docID, docType).QueryObjects;
             gridAttachment.Rows.Clear();
             if (items != null && items.Count > 0)
             {

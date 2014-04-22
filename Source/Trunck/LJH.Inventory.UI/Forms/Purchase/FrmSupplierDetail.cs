@@ -89,8 +89,7 @@ namespace LJH.Inventory.UI.Forms
                     ShowItemOnRow(GridView.Rows[row], contact);
                 }
             }
-            List<AttachmentHeader> headers = (new AttachmentBLL(AppSettings.Current.ConnStr)).GetHeaders(c.ID, c.DocumentType).QueryObjects;
-            ShowAttachmentHeaders(headers, this.gridAttachment);
+            ShowAttachmentHeaders(c.ID, c.DocumentType, this.gridAttachment);
         }
 
         protected override object GetItemFromInput()
