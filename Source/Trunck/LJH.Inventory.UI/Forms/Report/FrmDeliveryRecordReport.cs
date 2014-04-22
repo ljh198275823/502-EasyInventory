@@ -34,7 +34,9 @@ namespace LJH.Inventory.UI.Report
         protected override void OnItemSearching(EventArgs e)
         {
             DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
-            con.DeliveryDateTime = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.LastActiveDate  = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.States = new List<SheetState>();
+            con.States.Add(SheetState.Shipped);
             if (customerCombobox1.SelectedCustomer != null)
             {
                 con.CustomerID = customerCombobox1.SelectedCustomer.ID;
@@ -54,7 +56,7 @@ namespace LJH.Inventory.UI.Report
 
         private void ShowItemOnRow(DataGridViewRow row, DeliveryRecord item)
         {
-            row.Cells["colDeliveryDate"].Value = item.DeliveryDate.ToString("yyyy-MM-dd");
+            row.Cells["colDeliveryDate"].Value = item.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = item.SheetNo;
             row.Cells["colCustomerName"].Value = item.Customer.Name;
             row.Cells["colOrderID"].Value = item.OrderID;

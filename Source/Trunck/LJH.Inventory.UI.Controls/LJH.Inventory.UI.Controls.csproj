@@ -96,6 +96,12 @@
     <Compile Include="CustomerTree.Designer.cs">
       <DependentUpon>CustomerTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="DepartmentTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DepartmentTree.Designer.cs">
+      <DependentUpon>DepartmentTree.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpenditureTypeTree.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -172,6 +178,9 @@
   <ItemGroup>
     <EmbeddedResource Include="CustomerTree.resx">
       <DependentUpon>CustomerTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DepartmentTree.resx">
+      <DependentUpon>DepartmentTree.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExpenditureTypeTree.resx">
       <DependentUpon>ExpenditureTypeTree.cs</DependentUpon>

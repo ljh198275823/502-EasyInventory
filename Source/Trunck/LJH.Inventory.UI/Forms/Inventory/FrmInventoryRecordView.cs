@@ -46,11 +46,11 @@ namespace LJH.Inventory.UI.View
             row.Cells["colProductID"].Value = c.ProductID;
             row.Cells["colProductName"].Value = c.Product.Name;
             row.Cells["colSpecification"].Value = c.Product.Specification;
-            row.Cells["colInventoryDate"].Value = c.InventoryDate.ToString("yyyy-MM-dd");
+            row.Cells["colInventoryDate"].Value = c.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colPrice"].Value = c.Price.Trim();
             row.Cells["colAmount"].Value = c.Amount.Trim();
-            row.Cells["colPurchaseID"].Value = c.PurchaseID;
+            row.Cells["colPurchaseID"].Value = c.PurchaseOrder;
             row.Cells["colSupplier"].Value = c.Supplier != null ? c.Supplier.Name : string.Empty;
             row.Cells["colWareHouse"].Value = c.WareHouse != null ? c.WareHouse.Name : string.Empty;
         }

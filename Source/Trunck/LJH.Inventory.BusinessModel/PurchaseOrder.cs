@@ -19,7 +19,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ID { get; set; }
         /// <summary>
-        /// 获取或设置创建日期
+        /// 获取或设置最近活动时间
         /// </summary>
         public DateTime LastActiveDate { get; set; }
         /// <summary>

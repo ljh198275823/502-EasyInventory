@@ -16,13 +16,17 @@ namespace LJH.Inventory.BusinessModel
         #region 公共属性
         public Guid ID { get; set; }
         /// <summary>
-        /// 获取或设置下单日期
+        /// 获取或设置上次活动时间
         /// </summary>
-        public DateTime OrderDate { get; set; }
+        public DateTime LastActiveDate { get; set; }
         /// <summary>
         /// 获取或设置采购单编号
         /// </summary>
-        public string PurchaseID { get; set; }
+        public string SheetNo { get; set; }
+        /// <summary>
+        /// 获取或设置下单日期
+        /// </summary>
+        public DateTime OrderDate { get; set; }
         /// <summary>
         /// 获取或设置采购项相关的销售订单
         /// </summary>
@@ -103,6 +107,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
+                if (IsComplete) return 0;
                 decimal ret = Count - Received;
                 return ret > 0 ? ret : 0;
             }

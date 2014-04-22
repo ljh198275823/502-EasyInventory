@@ -63,7 +63,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                                              ((item.IsComplete || item.Shipped == item.Count) && chkAllShipped.Checked))).ToList();
             }
             List<object> objs = null;
-            if (items != null && items.Count > 0) objs = (from item in items orderby item.OrderID descending select (object)item).ToList();
+            if (items != null && items.Count > 0) objs = (from item in items orderby item.SheetNo descending select (object)item).ToList();
             return objs;
         }
         #endregion
@@ -97,7 +97,7 @@ namespace LJH.Inventory.UI.Forms.Sale
         {
             OrderItemRecord info = item as OrderItemRecord;
             row.Tag = info;
-            row.Cells["colOrderID"].Value = info.OrderID;
+            row.Cells["colOrderID"].Value = info.SheetNo;
             row.Cells["colOrderDate"].Value = info.OrderDate;
             row.Cells["colCustomer"].Value = info.Customer.Name;
             row.Cells["colProduct"].Value = info.Product != null ? info.Product.Name : info.ProductID;
@@ -133,6 +133,8 @@ namespace LJH.Inventory.UI.Forms.Sale
             {
                 Order order = dataGridView1.Rows[e.RowIndex].Tag as Order;
                 DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
+                con.States = new List<SheetState>();
+                con.States.Add(SheetState.Shipped);
                 con.OrderID = order.ID;
                 FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
                 frm.SearchCondition = con;

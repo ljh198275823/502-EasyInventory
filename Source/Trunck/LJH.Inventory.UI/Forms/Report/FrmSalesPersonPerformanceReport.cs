@@ -23,9 +23,9 @@ namespace LJH.Inventory.UI.Report
         protected override void OnItemSearching(EventArgs e)
         {
             DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
-            con.DeliveryDateTime = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            con.States = new List<int>();
-            con.States.Add((int)SheetState.Shipped);
+            con.LastActiveDate  = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.States = new List<SheetState>();
+            con.States.Add(SheetState.Shipped);
             List<DeliverySheet> sheets = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
 
             var salesGroup = sheets.GroupBy(item => item.SalesPerson);

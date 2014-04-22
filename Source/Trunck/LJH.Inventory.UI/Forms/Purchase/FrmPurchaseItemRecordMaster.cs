@@ -94,7 +94,7 @@ namespace LJH.Inventory.UI.Forms
         {
             PurchaseItemRecord info = item as PurchaseItemRecord;
             row.Tag = info;
-            row.Cells["colSheetNo"].Value = info.PurchaseID;
+            row.Cells["colSheetNo"].Value = info.SheetNo;
             row.Cells["colProduct"].Value = info.Product.Name;
             row.Cells["colSpecification"].Value = info.Product.Specification;
             row.Cells["colCount"].Value = info.Count.Trim();
@@ -142,7 +142,7 @@ namespace LJH.Inventory.UI.Forms
                 PurchaseItemRecord record = dataGridView1.Rows[e.RowIndex].Tag as PurchaseItemRecord;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colSheetNo")
                 {
-                    PurchaseOrder sheet = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetByID(record.PurchaseID).QueryObject;
+                    PurchaseOrder sheet = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetByID(record.SheetNo).QueryObject;
                     if (sheet != null)
                     {
                         FrmPurchaseOrderDetail frm = new FrmPurchaseOrderDetail();

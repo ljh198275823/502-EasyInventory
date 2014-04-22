@@ -144,16 +144,20 @@
   <Table Name="dbo.View_DeliveryRecord" Member="LJH.Inventory.BusinessModel.DeliveryRecord">
     <Type Name="LJH.Inventory.BusinessModel.DeliveryRecord">
       <Column Name="ID" Member="ID"   DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SheetNo" Member="SheetNo" DbType="nvarchar(50) NOT NULL"/>
-      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)" />
       <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) NOT NULL" />
       <Column Name="WareHouseID" Member="WareHouseID" DbType="nvarchar(50) NOT NULL"/>
       <Column Name="ProductID" Member="ProductID" DbType="nvarchar(50)"/>
       <Column Name="Unit" Member="Unit" DbType="nvarchar(10)" />
       <Column Name="Price" Member="Price" DbType="decimal(18, 4) not Null" />
       <Column Name="Count" Member="Count" DbType="decimal(10,2) NOT NULL" />
-      <Column Name="DeliveryDate" Member="DeliveryDate" DbType="datetime not null" />
+      <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="IsWithTax" Member="IsWithTax" DbType="bit not null" UpdateCheck="Never"/>
+      <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)" />
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Sheet_Customer" Member="Customer"  ThisKey="CustomerID" OtherKey="ID" IsForeignKey="false" />
       <Association Name="FK_Sheet_WareHouse" Member="WareHouse"  ThisKey="WareHouseID" OtherKey="ID" IsForeignKey="false" />
       <Association Name="FK_Sheet_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID" IsForeignKey="false" />
@@ -188,18 +192,20 @@
   <Table Name="dbo.View_InventoryRecord" Member="LJH.Inventory.BusinessModel.InventoryRecord">
     <Type Name="LJH.Inventory.BusinessModel.InventoryRecord">
       <Column Name="ID" Member="ID"   DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SheetNo" Member="SheetNo" DbType="nvarchar(50) NOT NULL"/>
-      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)" />
-      <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="PurchaseOrder" Member="PurchaseOrder"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="SupplierID" Member="SupplierID" DbType="nvarchar(50) NOT NULL" />
       <Column Name="WareHouseID" Member="WareHouseID" DbType="nvarchar(50) NOT NULL"/>
       <Column Name="ProductID" Member="ProductID" DbType="nvarchar(50)"/>
       <Column Name="Unit" Member="Unit" DbType="nvarchar(10)" />
       <Column Name="Price" Member="Price" DbType="decimal(18, 4) not Null" />
       <Column Name="Count" Member="Count" DbType="decimal(10,2) NOT NULL" />
-      <Column Name="InventoryDate" Member="InventoryDate" DbType="datetime not null" />
+      <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)" />
+      <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="PurchaseOrder" Member="PurchaseOrder"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Sheet_Supplier" Member="Supplier"  ThisKey="SupplierID" OtherKey="ID" IsForeignKey="false" />
       <Association Name="FK_Sheet_WareHouse" Member="WareHouse"  ThisKey="WareHouseID" OtherKey="ID" IsForeignKey="false" />
       <Association Name="FK_Sheet_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID" IsForeignKey="false" />
@@ -223,6 +229,7 @@
   <Table Name="dbo.OrderItem" Member="LJH.Inventory.BusinessModel.OrderItem">
     <Type Name="LJH.Inventory.BusinessModel.OrderItem">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
@@ -237,7 +244,7 @@
     <Type Name="LJH.Inventory.BusinessModel.OrderItemRecord">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
       <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="SheetNo" Member="SheetNo"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
@@ -259,7 +266,7 @@
   <Table Name="dbo.PurchaseOrder" Member="LJH.Inventory.BusinessModel.PurchaseOrder">
     <Type Name="LJH.Inventory.BusinessModel.PurchaseOrder">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
-      <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax"  DbType="bit not null" UpdateCheck="Never"/>
       <Column Name="Buyer" Member="Buyer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -285,11 +292,11 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  
   <Table Name="dbo.View_PurchaseItemRecord" Member="LJH.Inventory.BusinessModel.PurchaseItemRecord">
     <Type Name="LJH.Inventory.BusinessModel.PurchaseItemRecord">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
-      <Column Name="PurchaseID" Member="PurchaseID"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="SheetNo" Member="SheetNo"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
@@ -308,13 +315,21 @@
       <Association Name="FK_Sheet_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID" IsForeignKey="false" />
     </Type>
   </Table>
+  <Table Name="dbo.Department" Member="LJH.Inventory.BusinessModel.Department">
+    <Type Name="LJH.Inventory.BusinessModel.Department">
+      <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
+      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="Parent" Member="Parent" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
   <Table Name="dbo.Operator" Member="LJH.Inventory.BusinessModel.Operator">
     <Type Name="LJH.Inventory.BusinessModel.Operator">
       <Column Name="ID" Member="ID" DbType="nVarChar(50) NOT NULL" CanBeNull="false" IsPrimaryKey="true" />
       <Column Name="Name" Member="Name"  DbType="nvarchar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
       <Column Name="Password" Member="_Password"  DbType="nVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
       <Column Name="RoleID" Member="RoleID" DbType="nvarchar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
-      <Column Name="Department" Member="Department" DbType="nVarChar(50)" CanBeNull="false" UpdateCheck="Never"/>
+      <Column Name="Department" Member="DepartmentID" DbType="nvarchar(50)" CanBeNull="false" UpdateCheck="Never"/>
       <Column Name="Post" Member="Post" DbType="nvarchar(50)" CanBeNull="false" UpdateCheck="Never"/>
       <Association Name="FK_Operator_Role" Member="Role"  ThisKey="RoleID" OtherKey="ID" IsForeignKey="false"/>
     </Type>

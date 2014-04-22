@@ -265,7 +265,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 OrderSearchCondition con = new OrderSearchCondition();
                 con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
-                con.HasNotPaid = true;
                 FrmOrderSelection frm = new FrmOrderSelection();
                 frm.SearchCondition = con;
                 frm.ForSelect = true;

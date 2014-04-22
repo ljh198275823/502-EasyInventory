@@ -10,5 +10,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public bool? HasOnway { get; set; }
 
         public string ProductID { get; set; }
+
+        public string OrderID { get; set; }
     }
 }

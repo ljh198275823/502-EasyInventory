@@ -122,6 +122,8 @@ namespace LJH.Inventory.UI.Forms
                 Order order = dataGridView1.Rows[e.RowIndex].Tag as Order;
                 DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
                 con.OrderID = order.ID;
+                con.States = new List<SheetState>();
+                con.States.Add(SheetState.Shipped);
                 FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
                 frm.SearchCondition = con;
                 frm.ShowDialog();

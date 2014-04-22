@@ -70,7 +70,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置操作员的部门
         /// </summary>
-        public string Department { get; set; }
+        public string DepartmentID { get; set; }
         /// <summary>
         /// 获取或设置操作员的职位
         /// </summary>

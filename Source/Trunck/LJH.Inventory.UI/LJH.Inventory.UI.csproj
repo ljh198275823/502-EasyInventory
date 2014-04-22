@@ -131,7 +131,9 @@
     <Compile Include="Forms\Inventory\FrmProductInventoryAssign.Designer.cs">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Purchase\FrmSupplierDetail.cs" />
+    <Compile Include="Forms\Purchase\FrmSupplierDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Purchase\FrmSupplierDetail.designer.cs">
       <DependentUpon>FrmSupplierDetail.cs</DependentUpon>
     </Compile>
@@ -153,7 +155,9 @@
     <Compile Include="Forms\Financial\FrmCustomerOtherReceivableMaster.designer.cs">
       <DependentUpon>FrmCustomerOtherReceivableMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Sale\FrmCustomerDetail.cs" />
+    <Compile Include="Forms\Sale\FrmCustomerDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Sale\FrmCustomerDetail.designer.cs">
       <DependentUpon>FrmCustomerDetail.cs</DependentUpon>
     </Compile>

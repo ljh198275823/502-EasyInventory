@@ -93,6 +93,7 @@
     <Compile Include="CustomerFinancialState.cs" />
     <Compile Include="CustomerType.cs" />
     <Compile Include="DecimalHelper.cs" />
+    <Compile Include="Department.cs" />
     <Compile Include="DocumentOperation.cs" />
     <Compile Include="ExpenditureType.cs" />
     <Compile Include="ExpenditureRecord.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="DeliverySheet.cs" />
     <Compile Include="SheetOperation.cs" />
     <Compile Include="SheetState.cs" />
+    <Compile Include="Staff.cs" />
     <Compile Include="SupplierReceivable.cs" />
     <Compile Include="SupplierType.cs" />
     <Compile Include="SysparameterInfo.cs" />

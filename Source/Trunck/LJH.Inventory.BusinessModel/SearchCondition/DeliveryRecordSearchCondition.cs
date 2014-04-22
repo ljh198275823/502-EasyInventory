@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class DeliveryRecordSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
+    public class DeliveryRecordSearchCondition : DeliverySheetSearchCondition 
     {
         /// <summary>
         /// 获取或设置出货记录查询条件中的货品ID
@@ -13,14 +13,6 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string ProductID { get; set; }
 
         public string CategoryID { get; set; }
-        /// <summary>
-        /// 获取或设置出货记录查询条件中的出货时间范围
-        /// </summary>
-        public DateTimeRange DeliveryDateTime { get; set; }
-        /// <summary>
-        /// 获取或设置出货记录查询条件中的客户公司编号
-        /// </summary>
-        public string CustomerID { get; set; }
 
         public string OrderID { get; set; }
 

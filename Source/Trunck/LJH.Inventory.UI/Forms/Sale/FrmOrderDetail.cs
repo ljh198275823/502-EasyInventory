@@ -409,6 +409,8 @@ namespace LJH.Inventory.UI.Forms
                 {
                     OrderItem pi = ItemsGrid.Rows[e.RowIndex].Tag as OrderItem;
                     DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
+                    con.States = new List<SheetState>();
+                    con.States.Add(SheetState.Shipped);
                     con.OrderItem = pi.ID;
                     FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
                     frm.SearchCondition = con;

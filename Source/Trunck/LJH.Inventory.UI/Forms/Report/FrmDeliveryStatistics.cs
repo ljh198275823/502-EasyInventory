@@ -44,7 +44,9 @@ namespace LJH.Inventory.UI.Report
         private List<DeliveryRecord> GetItems()
         {
             DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
-            con.DeliveryDateTime = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.States = new List<SheetState>();
+            con.States.Add(SheetState.Shipped);
             if (txtCustomer.SelectedCustomer != null)
             {
                 con.CustomerID = txtCustomer.SelectedCustomer.ID;
@@ -68,15 +70,15 @@ namespace LJH.Inventory.UI.Report
                 IEnumerable<IGrouping<string, DeliveryRecord>> dtGroup = null;
                 if (rdByDay.Checked)
                 {
-                    dtGroup = records.GroupBy(item => item.DeliveryDate.ToString("yyyy-MM-dd"));
+                    dtGroup = records.GroupBy(item => item.LastActiveDate .ToString("yyyy-MM-dd"));
                 }
                 else if (rdByMonth.Checked)
                 {
-                    dtGroup = records.GroupBy(item => item.DeliveryDate.ToString("yyyy-MM"));
+                    dtGroup = records.GroupBy(item => item.LastActiveDate .ToString("yyyy-MM"));
                 }
                 else
                 {
-                    dtGroup = records.GroupBy(item => item.DeliveryDate.ToString("yyyy"));
+                    dtGroup = records.GroupBy(item => item.LastActiveDate .ToString("yyyy"));
                 }
                 foreach (var g in dtGroup)
                 {

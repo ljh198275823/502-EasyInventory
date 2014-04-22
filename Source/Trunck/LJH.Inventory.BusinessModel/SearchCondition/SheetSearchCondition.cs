@@ -14,10 +14,10 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         /// <summary>
         /// 获取或设置录单日期
         /// </summary>
-        public DateTimeRange CreateDateTime { get; set; }
+        public DateTimeRange LastActiveDate { get; set; }
         /// <summary>
         /// 获取或设置出货记录查询条件中的送货单状态
         /// </summary>
-        public List<int> States { get; set; }
+        public List<SheetState> States { get; set; }
     }
 }

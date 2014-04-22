@@ -38,14 +38,14 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
+                if (con.LastActiveDate != null) ret = ret.Where(item => item.LastActiveDate >= con.LastActiveDate.Begin && item.LastActiveDate <= con.LastActiveDate.End);
                 if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
-                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains((int)item.State));
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
             }
             if (search is DeliverySheetSearchCondition)
             {
                 DeliverySheetSearchCondition con = search as DeliverySheetSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
-                if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.Items != null && item.Items.Exists(it => it.OrderID == con.OrderID));
                 if (con.WithTax != null)
                 {
                     if (con.WithTax.Value)

@@ -46,7 +46,7 @@ namespace LJH.Inventory.UI.View
             row.Cells["colProductID"].Value = c.ProductID;
             row.Cells["colProductName"].Value = c.Product.Name;
             row.Cells["colSpecification"].Value = c.Product.Specification;
-            row.Cells["colDeliveryDate"].Value = c.DeliveryDate.ToString("yyyy-MM-dd");
+            row.Cells["colDeliveryDate"].Value = c.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colPrice"].Value = c.Price.Trim();
             row.Cells["colAmount"].Value = c.Amount.Trim();

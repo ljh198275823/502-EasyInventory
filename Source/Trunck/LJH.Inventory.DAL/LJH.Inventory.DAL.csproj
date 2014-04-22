@@ -91,6 +91,7 @@
     <Compile Include="LinqProvider\CustomerReceivableProvider.cs" />
     <Compile Include="LinqProvider\CustomerFinancialStateProvider.cs" />
     <Compile Include="LinqProvider\CustomerTypeProvider.cs" />
+    <Compile Include="LinqProvider\DepartmentProvider.cs" />
     <Compile Include="LinqProvider\DocumentOperationProvider.cs" />
     <Compile Include="LinqProvider\ExpenditureTypeProvider.cs" />
     <Compile Include="LinqProvider\ExpenditureRecordProvider.cs" />

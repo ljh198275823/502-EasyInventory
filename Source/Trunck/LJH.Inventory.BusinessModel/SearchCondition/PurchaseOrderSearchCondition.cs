@@ -5,12 +5,8 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class PurchaseOrderSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
+    public class PurchaseOrderSearchCondition : SheetSearchCondition
     {
-        public string PurchaseID { get; set; }
-
-        public string OrderID { get; set; }
-
         public DateTimeRange OrderDate { get; set; }
 
         public string SupplierID { get; set; }
@@ -18,9 +14,5 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string Buyer { get; set; }
 
         public bool? WithTax { get; set; }
-
-        public List<SheetState> States { get; set; }
-
-       
     }
 }

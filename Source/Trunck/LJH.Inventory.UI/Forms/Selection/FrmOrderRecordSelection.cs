@@ -36,7 +36,7 @@ namespace LJH.Inventory.UI.Forms
         {
             List<OrderItemRecord> items = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
             return (from item in items
-                    orderby item.OrderID ascending
+                    orderby item.SheetNo ascending
                     select (object)item).ToList();
         }
 
@@ -44,7 +44,7 @@ namespace LJH.Inventory.UI.Forms
         {
             OrderItemRecord c = item as OrderItemRecord;
             row.Tag = c;
-            row.Cells["colOrderID"].Value = c.OrderID;
+            row.Cells["colOrderID"].Value = c.SheetNo;
             row.Cells["colProductName"].Value = c.Product.Name;
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colDemandDate"].Value = c.DemandDate.ToLongDateString();

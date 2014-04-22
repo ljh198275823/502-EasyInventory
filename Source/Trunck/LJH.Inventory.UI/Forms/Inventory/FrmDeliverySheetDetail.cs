@@ -302,7 +302,7 @@ namespace LJH.Inventory.UI.Forms
                 {
                     ID = Guid.NewGuid(),
                     OrderItem = oi.ID,
-                    OrderID = oi.OrderID,
+                    OrderID = oi.SheetNo,
                     ProductID = oi.ProductID,
                     Unit = oi.Unit,
                     Price = oi.Price,

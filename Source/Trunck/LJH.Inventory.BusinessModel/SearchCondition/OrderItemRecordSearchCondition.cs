@@ -19,7 +19,5 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string ProductID { get; set; }
 
         public string CategoryID { get; set; }
-
-        public string OrderID { get; set; }
     }
 }

@@ -13,6 +13,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid  ID { get; set; }
         /// <summary>
+        /// 获取或设置上次活动时间
+        /// </summary>
+        public DateTime LastActiveDate { get; set; }
+        /// <summary>
         /// 获取或设置出货单ID
         /// </summary>
         public string SheetNo { get; set; }

@@ -10,6 +10,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         /// <summary>
         /// 获取或设置出货记录查询条件中的客户公司名称
         /// </summary>
-        public string SupplierName { get; set; }
+        public string SupplierID { get; set; }
+
+        public bool? WithTax { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace LJH.Inventory.DAL.LinqProvider
     {
         #region 构造函数
         public PurchaseItemRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
         }
         #endregion
@@ -37,27 +37,37 @@ namespace LJH.Inventory.DAL.LinqProvider
             opt.LoadWith<PurchaseItemRecord>(item => item.Product);
             dc.LoadOptions = opt;
             IQueryable<PurchaseItemRecord> ret = dc.GetTable<PurchaseItemRecord>();
+            if (search is SheetSearchCondition)
+            {
+                SheetSearchCondition con = search as SheetSearchCondition;
+                if (con.LastActiveDate != null) ret = ret.Where(item => item.LastActiveDate >= con.LastActiveDate.Begin && item.LastActiveDate <= con.LastActiveDate.End);
+                if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.SheetNo));
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
+            }
+            if (search is PurchaseOrderSearchCondition)
+            {
+                PurchaseOrderSearchCondition con = search as PurchaseOrderSearchCondition;
+                if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
+                if (!string.IsNullOrEmpty(con.Buyer)) ret = ret.Where(item => item.Buyer == con.Buyer);
+                if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
+            }
             if (search is PurchaseItemRecordSearchCondition)
             {
                 PurchaseItemRecordSearchCondition con = search as PurchaseItemRecordSearchCondition;
                 if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
-                if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
-                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
-                if (con.HasOnway != null)
-                {
-                    if (con.HasOnway.Value)
-                    {
-                        ret = ret.Where(item => !item.IsComplete && item.Count - item.Received > 0);
-                    }
-                    else
-                    {
-                        ret = ret.Where(item => item.IsComplete || item.Count - item.Received == 0);
-                    }
-                }
             }
             List<PurchaseItemRecord> items = ret.ToList();
+            if (search is PurchaseItemRecordSearchCondition)
+            {
+                PurchaseItemRecordSearchCondition con = search as PurchaseItemRecordSearchCondition;
+                if (con.HasOnway != null)
+                {
+                    if (con.HasOnway.Value) items = items.Where(item => item.OnWay > 0).ToList();
+                    else items = items.Where(item => item.OnWay == 0).ToList();
+                }
+            }
             return items;
         }
         #endregion

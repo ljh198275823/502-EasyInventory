@@ -285,7 +285,7 @@ namespace LJH.Inventory.UI.Forms
                     ID = Guid.NewGuid(),
                     ProductID = pi.ProductID,
                     PurchaseItem = pi.ID,
-                    PurchaseOrder = pi.PurchaseID,
+                    PurchaseOrder = pi.SheetNo,
                     OrderItem = pi.OrderItem,
                     OrderID = pi.OrderID,
                     Unit = pi.Unit,

@@ -282,7 +282,7 @@ namespace LJH.Inventory.UI.Forms
                 {
                     ID = Guid.NewGuid(),
                     ProductID = oi.ProductID,
-                    OrderID = oi.OrderID,
+                    OrderID = oi.SheetNo,
                     OrderItem = oi.ID,
                     Unit = oi.Unit,
                     Count = oi.NotPurchased,
@@ -432,6 +432,8 @@ namespace LJH.Inventory.UI.Forms
                     PurchaseItem pi = ItemsGrid.Rows[e.RowIndex].Tag as PurchaseItem;
                     InventoryRecordSearchCondition con = new InventoryRecordSearchCondition();
                     con.PurchaseItem = pi.ID;
+                    con.States = new List<SheetState>();
+                    con.States.Add(SheetState.Inventory);
                     LJH.Inventory.UI.View.FrmInventoryRecordView frm = new View.FrmInventoryRecordView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();

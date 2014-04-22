@@ -89,6 +89,7 @@
     <Compile Include="CustomerTypeBLL.cs" />
     <Compile Include="DatetimeSyncService.cs" />
     <Compile Include="DeliverySheetBLL.cs" />
+    <Compile Include="DepartmentBLL.cs" />
     <Compile Include="DocumentOperationBLL.cs" />
     <Compile Include="ExpenditureTypeBLL.cs" />
     <Compile Include="ExpenditureRecordBLL.cs" />

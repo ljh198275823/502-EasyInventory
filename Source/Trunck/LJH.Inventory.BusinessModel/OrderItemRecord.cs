@@ -19,13 +19,17 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid ID { get; set; }
         /// <summary>
+        /// 获取或设置上次活动时间
+        /// </summary>
+        public DateTime LastActiveDate { get; set; }
+        /// <summary>
+        /// 获取或设置订单编号
+        /// </summary>
+        public string SheetNo { get; set; }
+        /// <summary>
         /// 获取或设置下单日期
         /// </summary>
         public DateTime OrderDate { get; set; }
-        /// <summary>
-        /// 获取或设置出货单ID
-        /// </summary>
-        public string OrderID { get; set; }
         /// <summary>
         /// 获取或设置客户id
         /// </summary>
@@ -122,6 +126,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
+                if (IsComplete) return 0;
                 decimal ret = NotShipped - OnWay - Inventory;
                 return ret > 0 ? ret : 0;
             }

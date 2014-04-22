@@ -39,13 +39,14 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
+                if (con.LastActiveDate != null) ret = ret.Where(item => item.LastActiveDate >= con.LastActiveDate.Begin && item.LastActiveDate <= con.LastActiveDate.End);
                 if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
-                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains((int)item.State));
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
             }
             if (search is InventorySheetSearchCondition)
             {
                 InventorySheetSearchCondition con = search as InventorySheetSearchCondition;
-                if (!string.IsNullOrEmpty(con.SupplierName)) ret = ret.Where(item => item.SupplierID.Contains(con.SupplierName));
+                if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
             }
             List<InventorySheet> sheets = ret.ToList();
             return sheets;
