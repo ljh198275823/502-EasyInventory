@@ -12,29 +12,34 @@ namespace LJH.Inventory.DAL.LinqProvider
     public class OperatorProvider : ProviderBase<Operator, string>
     {
         public OperatorProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
         }
 
         #region 重写模板方法
         protected override Operator GetingItemByID(string id, DataContext dc)
         {
-            DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<Operator>(o => o.Role);
-            dc.LoadOptions = opt;
-            return dc.GetTable<Operator>().SingleOrDefault(o => o.ID == id);
+            Operator item = dc.GetTable<Operator>().SingleOrDefault(o => o.ID == id);
+            if (item != null) item.Role = dc.GetTable<Role>().SingleOrDefault(r => r.ID == item.RoleID);
+            return item;
         }
 
         protected override List<Operator> GetingItems(DataContext dc, SearchCondition search)
         {
-            DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<Operator>(o => o.Role);
-            dc.LoadOptions = opt;
             IQueryable<Operator> ret = dc.GetTable<Operator>();
-            if (search != null)
+            List<Operator> items = ret.ToList();
+            if (items != null && items.Count > 0)
             {
+                List<Role> roles = dc.GetTable<Role>().ToList();
+                if (roles != null && roles.Count > 0)
+                {
+                    foreach (Operator item in items)
+                    {
+                        item.Role = roles.SingleOrDefault(r => r.ID == item.RoleID);
+                    }
+                }
             }
-            return ret.ToList();
+            return items;
         }
         #endregion
     }

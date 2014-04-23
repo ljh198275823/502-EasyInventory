@@ -121,6 +121,28 @@ namespace LJH.Inventory.BLL
                 throw new Exception("订单不能作废");
             }
         }
+
+        /// <summary>
+        /// 将订单作废
+        /// </summary>
+        /// <param name="sheetNo"></param>
+        /// <param name="opt"></param>
+        /// <returns></returns>
+        protected virtual void DoInventory(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.Inventory)));
+        }
+
+        /// <summary>
+        /// 将订单作废
+        /// </summary>
+        /// <param name="sheetNo"></param>
+        /// <param name="opt"></param>
+        /// <returns></returns>
+        protected virtual void DoShip(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.Ship)));
+        }
         #endregion
 
         #region 子类要实现的方法
@@ -225,6 +247,14 @@ namespace LJH.Inventory.BLL
                         else if (operation == SheetOperation.Nullify)
                         {
                             DoNullify(sheet, unitWork, dt.Value, opt);
+                        }
+                        else if (operation == SheetOperation.Inventory)
+                        {
+                            DoInventory(sheet, unitWork, dt.Value, opt);
+                        }
+                        else if (operation == SheetOperation.Ship)
+                        {
+                            DoShip(sheet, unitWork, dt.Value, opt);
                         }
                         else
                         {

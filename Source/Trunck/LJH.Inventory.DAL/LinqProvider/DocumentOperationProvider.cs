@@ -19,6 +19,11 @@ namespace LJH.Inventory.DAL.LinqProvider
         #endregion
 
         #region 重写基类方法
+        protected override DocumentOperation GetingItemByID(int id, System.Data.Linq.DataContext dc)
+        {
+            return dc.GetTable<DocumentOperation>().SingleOrDefault(item => item.ID == id);
+        }
+
         protected override List<DocumentOperation> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             IQueryable<DocumentOperation> ret = dc.GetTable<DocumentOperation>();

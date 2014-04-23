@@ -19,6 +19,11 @@ namespace LJH.Inventory.DAL.LinqProvider
         #endregion
 
         #region 重写基类方法
+        protected override ExpenditureRecord GetingItemByID(string id, System.Data.Linq.DataContext dc)
+        {
+            return dc.GetTable<ExpenditureRecord>().SingleOrDefault(item => item.ID == id);
+        }
+
         protected override List<ExpenditureRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             IQueryable<ExpenditureRecord> ret = dc.GetTable<ExpenditureRecord>();

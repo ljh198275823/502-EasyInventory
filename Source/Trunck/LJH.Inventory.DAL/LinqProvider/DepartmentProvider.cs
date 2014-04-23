@@ -16,5 +16,12 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
         }
         #endregion
+
+        #region 重写基类方法
+        protected override Department GetingItemByID(string id, System.Data.Linq.DataContext dc)
+        {
+            return dc.GetTable<Department>().SingleOrDefault(item => item.ID == id);
+        }
+        #endregion
     }
 }

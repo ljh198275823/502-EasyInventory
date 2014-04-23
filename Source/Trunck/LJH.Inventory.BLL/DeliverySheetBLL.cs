@@ -126,9 +126,25 @@ namespace LJH.Inventory.BLL
             return info.ID;
         }
 
+        protected override void DoShip(DeliverySheet info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            IProvider<DeliverySheet, string> provider = ProviderFactory.Create<IProvider<DeliverySheet, string>>(_RepoUri);
+            if (!info.CanShip) throw new Exception("单号为 " + info.ID + " 的送货单发货失败，只有待发货或者已审批的送货单才能发货");
+            if (info.Items == null || info.Items.Count == 0) throw new Exception("单号为 " + info.ID + " 的送货单发货失败，没有送货单项");
+            DeliverySheet sheet1 = info.Clone() as DeliverySheet;
+            info.LastActiveDate = dt;
+            info.State = SheetState.Shipped;
+            provider.Update(info, sheet1, unitWork);
+
+            if (!string.IsNullOrEmpty(info.WareHouseID)) InventoryOut(info, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
+            AddReceivables(info, unitWork);         //增加供应商的应收账款
+        }
+
         protected override void DoNullify(DeliverySheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            base.DoNullify(info, unitWork, dt, opt);
+            throw new Exception("没有实现 作废 方法");
+            //base.DoNullify(info, unitWork, dt, opt);
+
             //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             ////如果已经有客户付款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
             //CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
@@ -183,34 +199,6 @@ namespace LJH.Inventory.BLL
         public QueryResultList<DeliveryRecord> GetDeliveryRecords(SearchCondition con)
         {
             return ProviderFactory.Create<IProvider<DeliveryRecord, Guid>>(_RepoUri).GetItems(con);
-        }
-        /// <summary>
-        /// 发货
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="opt"></param>
-        /// <returns></returns>
-        public CommandResult Delivery(string sheetNo, string opt)
-        {
-            DateTime? dt = GetServerDateTime(); //从服务器获取时间
-            if (dt == null) return new CommandResult(ResultCode.Fail, "从数据库服务器获取时间失败");
-            IProvider<DeliverySheet, string> provider = ProviderFactory.Create<IProvider<DeliverySheet, string>>(_RepoUri);
-            DeliverySheet sheet = provider.GetByID(sheetNo).QueryObject;
-            if (sheet == null) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，系统中不存在该送货单");
-            if (!sheet.CanShip) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，只有待发货或者已审批的送货单才能发货");
-            if (sheet.Items == null || sheet.Items.Count == 0) return new CommandResult(ResultCode.Fail, "单号为 " + sheet.ID + " 的送货单发货失败，没有送货单项");
-
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            DeliverySheet sheet1 = sheet.Clone() as DeliverySheet;
-            sheet.LastActiveDate = dt.Value;
-            sheet.LastActiveDate = dt.Value;
-            sheet.State = SheetState.Shipped;
-            provider.Update(sheet, sheet1, unitWork);
-
-            if (!string.IsNullOrEmpty(sheet.WareHouseID)) InventoryOut(sheet, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
-            AddReceivables(sheet, unitWork);         //增加供应商的应收账款
-            AddOperationLog(sheetNo, sheet.DocumentType, SheetOperation.Ship, Operator.Current.Name, unitWork, dt.Value);
-            return unitWork.Commit();
         }
         #endregion
     }

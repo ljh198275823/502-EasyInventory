@@ -42,19 +42,6 @@ namespace LJH.Inventory.BLL
                 return false;
             }
         }
-        /// <summary>
-        /// 增加操作员,如果操作员编号已被使用,抛出InvalidOperationException
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public override CommandResult Add(Operator info)
-        {
-            Role role = info.Role;
-            info.Role = null;
-            CommandResult ret = base.Add(info);
-            info.Role = role;
-            return ret;
-        }
         #endregion
     }
 }

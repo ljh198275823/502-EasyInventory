@@ -75,6 +75,20 @@ namespace LJH.Inventory.BLL
             return info.ID;
         }
 
+        protected override void DoInventory(InventorySheet info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            if (!info.CanInventory) throw new Exception("状态为" + SheetStateDescription.GetDescription(info.State) + " 的收货单 " + " 不能收货");
+            if (info.Items == null || info.Items.Count == 0) throw new Exception("单号为 " + info.ID + " 的收货单发货失败，没有收货单项");
+
+            InventorySheet sheet1 = info.Clone() as InventorySheet;
+            info.State = SheetState.Inventory;
+            info.LastActiveDate = dt;
+            ProviderFactory.Create<IProvider<InventorySheet, string>>(_RepoUri).Update(info, sheet1, unitWork);
+
+            AddToProductInventory(info, unitWork); //更新商品库存
+            AddReceivables(info, unitWork);         //增加供应商的应收账款
+        }
+
         protected override void DoNullify(InventorySheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoNullify(info, unitWork, dt, opt);
@@ -113,31 +127,6 @@ namespace LJH.Inventory.BLL
         public QueryResultList<InventoryRecord> GetInventoryRecords(SearchCondition con)
         {
             return ProviderFactory.Create<IProvider<InventoryRecord, Guid>>(_RepoUri).GetItems(con);
-        }
-        /// <summary>
-        /// 收货单收货
-        /// </summary>
-        /// <param name="sheetNo">收货单单号</param>
-        /// <param name="opt">收货操作员</param>
-        /// <returns></returns>
-        public CommandResult Inventory(string sheetNo, string opt)
-        {
-            DateTime? dt = GetServerDateTime(); //从服务器获取时间
-            if (dt == null) return new CommandResult(ResultCode.Fail, "从数据库服务器获取时间失败");
-            InventorySheet sheet = ProviderFactory.Create<IProvider<InventorySheet, string>>(_RepoUri).GetByID(sheetNo).QueryObject;
-            if (sheet == null) return new CommandResult(ResultCode.Fail, "系统中已经不存在单号为 " + sheetNo + " 的收货单");
-            if (!sheet.CanInventory) return new CommandResult(ResultCode.Fail, "状态为" + SheetStateDescription.GetDescription(sheet.State) + " 的收货单 " + " 不能收货");
-
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            InventorySheet sheet1 = sheet.Clone() as InventorySheet;
-            sheet.State = SheetState.Inventory;
-            sheet.LastActiveDate = dt.Value;
-            ProviderFactory.Create<IProvider<InventorySheet, string>>(_RepoUri).Update(sheet, sheet1, unitWork);
-
-            AddToProductInventory(sheet, unitWork); //更新商品库存
-            AddReceivables(sheet, unitWork);         //增加供应商的应收账款
-            AddOperationLog(sheetNo, sheet.DocumentType, SheetOperation.Inventory, Operator.Current.Name, unitWork, dt.Value);
-            return unitWork.Commit();
         }
         #endregion
     }

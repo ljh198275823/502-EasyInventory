@@ -19,6 +19,11 @@ namespace LJH.Inventory.DAL.LinqProvider
         #endregion
 
         #region 构造函数
+        protected override CustomerPaymentAssign GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
+        {
+            return dc.GetTable<CustomerPaymentAssign>().SingleOrDefault(item => item.ID == id);
+        }
+
         protected override List<CustomerPaymentAssign> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             IQueryable<CustomerPaymentAssign> ret = dc.GetTable<CustomerPaymentAssign>();
