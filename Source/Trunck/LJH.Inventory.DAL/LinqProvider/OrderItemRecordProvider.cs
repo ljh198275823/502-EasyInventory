@@ -75,7 +75,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.HasToDelivery != null)
                 {
                     if (con.HasToDelivery.Value) items = items.Where(item => item.NotShipped > 0).ToList();
-                    else items = items.Where(item => item.IsComplete || item.NotShipped == 0).ToList();
+                    else items = items.Where(item => item.NotShipped == 0).ToList();
                 }
                 if (con.HasToPurchase != null)
                 {

@@ -80,10 +80,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public SheetState State { get; set; }
         /// <summary>
-        /// 获取或设置是否人工结束引项
-        /// </summary>
-        public bool IsComplete { get; set; }
-        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
@@ -107,7 +103,6 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (IsComplete) return 0;
                 decimal ret = Count - Received;
                 return ret > 0 ? ret : 0;
             }

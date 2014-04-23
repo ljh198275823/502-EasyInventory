@@ -58,9 +58,9 @@ namespace LJH.Inventory.UI.Forms.Sale
             }
             if (items != null && items.Count > 0)
             {
-                items = items.Where(item => ((!item.IsComplete && item.Shipped == 0 && chkNoneShipped.Checked) ||
-                                             (!item.IsComplete && item.Shipped < item.Count && chkPatialShipped.Checked) ||
-                                             ((item.IsComplete || item.Shipped == item.Count) && chkAllShipped.Checked))).ToList();
+                items = items.Where(item => ((item.Shipped == 0 && chkNoneShipped.Checked) ||
+                                             (item.Shipped > 0 && item.NotShipped > 0 && chkPatialShipped.Checked) ||
+                                             (item.NotShipped == 0 && chkAllShipped.Checked))).ToList();
             }
             List<object> objs = null;
             if (items != null && items.Count > 0) objs = (from item in items orderby item.SheetNo descending select (object)item).ToList();

@@ -63,10 +63,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public DateTime DemandDate { get; set; }
         /// <summary>
-        /// 获取或设置订单项是否已经全部出货，也可以表示人工完结未出完货的情况
-        /// </summary>
-        public bool IsComplete { get; set; }
-        /// <summary>
         /// 获取或设置订货数量
         /// </summary>
         public decimal Count { get; set; }
@@ -130,7 +126,6 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (IsComplete) return 0;
                 decimal ret = NotShipped - OnWay - Inventory;
                 return ret > 0 ? ret : 0;
             }
@@ -142,7 +137,6 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (IsComplete) return 0;
                 return Count - Shipped >= 0 ? (Count - Shipped) : 0;
             }
         }
@@ -155,7 +149,7 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 if (State == SheetState.Closed || State == SheetState.Canceled) return false;
-                return !IsComplete && DemandDate < DateTime.Today;
+                return NotShipped > 0 && DemandDate < DateTime.Today;
             }
         }
         /// <summary>
@@ -167,7 +161,7 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 if (State == SheetState.Closed || State == SheetState.Canceled) return false;
-                return !IsComplete && DemandDate.Date == DateTime.Today;
+                return NotShipped > 0 && DemandDate.Date == DateTime.Today;
             }
         }
         #endregion

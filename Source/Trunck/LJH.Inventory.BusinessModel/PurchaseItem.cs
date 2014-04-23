@@ -54,10 +54,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public DateTime DemandDate { get; set; }
         /// <summary>
-        /// 获取或设置订单项是否已经全部出货，也可以表示人工完结未出完货的情况
-        /// </summary>
-        public bool IsComplete { get; set; }
-        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }

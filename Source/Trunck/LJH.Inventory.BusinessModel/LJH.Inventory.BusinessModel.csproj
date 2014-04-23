@@ -108,7 +108,6 @@
     <Compile Include="PriceTerm.cs" />
     <Compile Include="PurchaseOrder.cs" />
     <Compile Include="PurchaseItem.cs" />
-    <Compile Include="PurchaseItemState.cs" />
     <Compile Include="PurchaseItemRecord.cs" />
     <Compile Include="RelatedCompanyType.cs" />
     <Compile Include="Resource\PaymentModeDescription.cs" />

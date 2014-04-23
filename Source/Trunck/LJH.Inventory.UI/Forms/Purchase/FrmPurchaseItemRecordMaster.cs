@@ -55,9 +55,9 @@ namespace LJH.Inventory.UI.Forms
             }
             if (items != null && items.Count > 0)
             {
-                items = items.Where(item => ((!item.IsComplete && item.Received == 0 && chkNoneShipped.Checked) ||
-                                             (!item.IsComplete && item.Received < item.Count && chkPatialShipped.Checked) ||
-                                             ((item.IsComplete || item.Received == item.Count) && chkAllShipped.Checked))).ToList();
+                items = items.Where(item => ((item.Received == 0 && chkNoneShipped.Checked) ||
+                                             (item.Received > 0 && item.OnWay > 0 && item.Received < item.Count && chkPatialShipped.Checked) ||
+                                             ((item.OnWay == 0) && chkAllShipped.Checked))).ToList();
             }
             List<object> objs = null;
             if (items != null && items.Count > 0) objs = (from item in items orderby item.OrderID descending select (object)item).ToList();
