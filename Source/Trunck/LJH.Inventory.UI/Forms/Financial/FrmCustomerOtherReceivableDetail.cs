@@ -20,10 +20,20 @@ namespace LJH.Inventory.UI.Forms.Financial
             InitializeComponent();
         }
 
+        #region 公共属性
+        public CompanyInfo Customer { get; set; }
+        #endregion
+
         #region 重写基类方法
+        protected override void InitControls()
+        {
+            base.InitControls();
+            txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+        }
+
         protected override bool CheckInput()
         {
-            if (txtCustomer.Tag == null)
+            if (Customer == null)
             {
                 MessageBox.Show("客户不能为空");
                 txtCustomer.Focus();
@@ -47,8 +57,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                 this.txtID.Enabled = false;
                 dtCreateDate.Value = item.LastActiveDate;
                 txtAmount.DecimalValue = item.Amount;
-                txtCustomer.Text = item.Customer != null ? item.Customer.Name : string.Empty;
-                txtCustomer.Tag = item.Customer;
+                Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
+                txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -69,8 +79,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (txtID.Text == _AutoCreate) info.ID = string.Empty;
             info.LastActiveDate = dtCreateDate.Value;
             info.Amount = txtAmount.DecimalValue;
-            info.Customer = txtCustomer.Tag as CompanyInfo;
-            info.CustomerID = info.Customer.ID;
+            info.CustomerID = Customer != null ? Customer.ID : null;
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -149,9 +158,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CompanyInfo item = frm.SelectedItem as CompanyInfo;
-                txtCustomer.Text = item.Name;
-                txtCustomer.Tag = item;
+                Customer = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             }
         }
         #endregion

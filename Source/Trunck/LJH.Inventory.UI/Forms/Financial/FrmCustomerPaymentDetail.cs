@@ -21,6 +21,13 @@ namespace LJH.Inventory.UI.Forms.Financial
             InitializeComponent();
         }
 
+        #region 公共属性
+        /// <summary>
+        /// 获取或设置付款的用户
+        /// </summary>
+        public CompanyInfo Customer{get;set;}
+        #endregion
+
         #region 私有方法
         private void ShowAssigns(List<CustomerPaymentAssign> assigns)
         {
@@ -52,9 +59,15 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 重写基类方法
+        protected override void InitControls()
+        {
+            base.InitControls();
+            txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+        }
+
         protected override bool CheckInput()
         {
-            if (txtCustomer.Tag == null)
+            if (Customer == null)
             {
                 MessageBox.Show("客户不能为空");
                 txtCustomer.Focus();
@@ -84,18 +97,13 @@ namespace LJH.Inventory.UI.Forms.Financial
                 this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
                 dtPaidDate.Value = item.LastActiveDate;
-                txtCurrencyType.Text = item.CurrencyType;
                 rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
                 rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
                 rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
                 txtAmount.DecimalValue = item.Amount;
                 txtCheckNum.Text = item.CheckNum;
-                if (!string.IsNullOrEmpty(item.CustomerID))
-                {
-                    CompanyInfo c = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
-                    txtCustomer.Text = c != null ? c.Name : string.Empty;
-                    txtCustomer.Tag = c;
-                }
+                CompanyInfo c = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
+                txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
                 txtMemo.Text = item.Memo;
                 List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns(item.ID).QueryObjects;
                 ShowAssigns(assigns);
@@ -120,11 +128,9 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
             if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
-            info.CurrencyType = txtCurrencyType.Text;
             info.Amount = txtAmount.DecimalValue;
             info.CheckNum = txtCheckNum.Text;
-            CompanyInfo c = txtCustomer.Tag as CompanyInfo;
-            info.CustomerID = c != null ? c.ID : null;
+            info.CustomerID = Customer != null ? Customer.ID : null;
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -220,32 +226,6 @@ namespace LJH.Inventory.UI.Forms.Financial
         }
         #endregion
 
-        #region 公共属性
-        /// <summary>
-        /// 获取或设置付款的用户
-        /// </summary>
-        public CompanyInfo Customer
-        {
-            get
-            {
-                return txtCustomer.Tag as CompanyInfo;
-            }
-            set
-            {
-                InitControls();
-                if (value != null)
-                {
-                    txtCustomer.Text = value.Name;
-                    txtCustomer.Tag = value;
-                }
-                else
-                {
-                    txtCustomer.Text = string.Empty;
-                }
-            }
-        }
-        #endregion
-
         #region 事件处理程序
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -253,20 +233,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CompanyInfo item = frm.SelectedItem as CompanyInfo;
-                txtCustomer.Text = item.Name;
-                txtCustomer.Tag = item;
-            }
-        }
-
-        private void lnkCurrencyType_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmCurrencyTypeMaster frm = new FrmCurrencyTypeMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                CurrencyType item = frm.SelectedItem as CurrencyType;
-                txtCurrencyType.Text = item.ID;
+                Customer = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             }
         }
 

@@ -149,5 +149,15 @@ namespace LJH.Inventory.UI.Forms
         {
             FreshData();
         }
+
+        private void mnu_FreshTree_Click(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void mnu_AddSheet_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
+        }
     }
 }

@@ -28,22 +28,31 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData()
         {
-            List<object> items = GetSelectedNodeItems();
-            ShowItemsOnGrid(items);
+            List<object> objs = FilterData();
+            ShowItemsOnGrid(objs);
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
             List<CustomerOtherReceivable> items = _Sheets;
-            CompanyInfo pc = null;
-            if (this.customerTree1.SelectedNode != null) pc = this.customerTree1.SelectedNode.Tag as CompanyInfo;
-            if (pc != null) items = _Sheets.Where(it => it.CustomerID == pc.ID).ToList();
-
-            return (from p in items
-                    orderby p.LastActiveDate descending
-                    select (object)p).ToList();
+            if (this.customerTree1.SelectedNode != null)
+            {
+                List<CompanyInfo> pcs = null;
+                pcs = this.customerTree1.GetCompanyofNode(this.customerTree1.SelectedNode);
+                if (pcs != null && pcs.Count > 0)
+                {
+                    items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
+                }
+                else
+                {
+                    items = null;
+                }
+            }
+            List<object> objs = null;
+            if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
+            return objs;
         }
         #endregion
 
@@ -57,13 +66,15 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmCustomerOtherReceivableDetail();
+            FrmCustomerOtherReceivableDetail frm = new FrmCustomerOtherReceivableDetail();
+            if (customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
+            return frm;
         }
 
         protected override List<object> GetDataSource()
         {
-            _Sheets  = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
-            return GetSelectedNodeItems();
+            _Sheets = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            return FilterData();
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -71,7 +82,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             CustomerOtherReceivable info = item as CustomerOtherReceivable;
             row.Cells["colID"].Value = info.ID;
             row.Cells["colCreateDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
-            row.Cells["colCustomer"].Value = info.Customer != null ? info.Customer.Name : info.CustomerID;
+            CompanyInfo customer = customerTree1.GetCustomer(info.CustomerID);
+            row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colCurrencyType"].Value = info.CurrencyType;
             row.Cells["colAmount"].Value = info.Amount.Trim();
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
@@ -87,6 +99,12 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override bool DeletingItem(object item)
         {
             return false;
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
         }
         #endregion
 
@@ -106,6 +124,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                     }
                 }
             }
+        }
+
+        private void mnu_Add_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
         }
 
         private void mnu_Pay_Click(object sender, EventArgs e)
@@ -134,7 +157,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData();
         }
         #endregion
     }

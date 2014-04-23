@@ -147,11 +147,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(277, 74);
+            this.label1.Location = new System.Drawing.Point(265, 74);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 101;
-            this.label1.Text = "票号";
+            this.label1.Text = "支票号";
             // 
             // txtCheckNum
             // 
@@ -187,7 +187,7 @@
             // 
             // txtCategory
             // 
-            this.txtCategory.Location = new System.Drawing.Point(73, 70);
+            this.txtCategory.Location = new System.Drawing.Point(73, 42);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(159, 21);
             this.txtCategory.TabIndex = 93;
@@ -195,7 +195,7 @@
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(14, 74);
+            this.lnkCategory.Location = new System.Drawing.Point(14, 46);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(53, 12);
             this.lnkCategory.TabIndex = 91;
@@ -252,7 +252,7 @@
             // rdCheck
             // 
             this.rdCheck.AutoSize = true;
-            this.rdCheck.Location = new System.Drawing.Point(185, 44);
+            this.rdCheck.Location = new System.Drawing.Point(185, 72);
             this.rdCheck.Name = "rdCheck";
             this.rdCheck.Size = new System.Drawing.Size(47, 16);
             this.rdCheck.TabIndex = 51;
@@ -262,7 +262,7 @@
             // rdCash
             // 
             this.rdCash.AutoSize = true;
-            this.rdCash.Location = new System.Drawing.Point(126, 44);
+            this.rdCash.Location = new System.Drawing.Point(126, 72);
             this.rdCash.Name = "rdCash";
             this.rdCash.Size = new System.Drawing.Size(47, 16);
             this.rdCash.TabIndex = 50;
@@ -273,7 +273,7 @@
             // 
             this.rdTransfer.AutoSize = true;
             this.rdTransfer.Checked = true;
-            this.rdTransfer.Location = new System.Drawing.Point(73, 44);
+            this.rdTransfer.Location = new System.Drawing.Point(73, 72);
             this.rdTransfer.Name = "rdTransfer";
             this.rdTransfer.Size = new System.Drawing.Size(47, 16);
             this.rdTransfer.TabIndex = 49;
@@ -318,7 +318,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 46);
+            this.label3.Location = new System.Drawing.Point(14, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 55;
@@ -329,7 +329,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(488, 201);
+            this.tabPage5.Size = new System.Drawing.Size(488, 167);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -353,7 +353,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(488, 201);
+            this.gridAttachment.Size = new System.Drawing.Size(488, 167);
             this.gridAttachment.TabIndex = 103;
             // 
             // colUploadDateTime
@@ -426,7 +426,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(488, 201);
+            this.tabPage2.Size = new System.Drawing.Size(488, 167);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -449,7 +449,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(488, 201);
+            this.dataGridView1.Size = new System.Drawing.Size(488, 167);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate

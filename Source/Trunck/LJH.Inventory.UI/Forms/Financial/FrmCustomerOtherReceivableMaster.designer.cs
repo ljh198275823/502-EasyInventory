@@ -41,7 +41,6 @@
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
@@ -60,10 +59,13 @@
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.treeMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -78,8 +80,7 @@
             this.mnu_PaymentAssign,
             this.btn_SelectColumns,
             this.toolStripSeparator1,
-            this.txtKeyword,
-            this.toolStripSeparator2});
+            this.txtKeyword});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(1193, 53);
@@ -149,12 +150,7 @@
             this.txtKeyword.AutoSize = false;
             this.txtKeyword.Margin = new System.Windows.Forms.Padding(6, 0, 1, 0);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(200, 30);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 49);
+            this.txtKeyword.Size = new System.Drawing.Size(300, 30);
             // 
             // splitter1
             // 
@@ -176,6 +172,7 @@
             // 
             // customerTree1
             // 
+            this.customerTree1.ContextMenuStrip = this.treeMenu;
             this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
@@ -315,6 +312,20 @@
             this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
             // 
+            // treeMenu
+            // 
+            this.treeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Add});
+            this.treeMenu.Name = "treeMenu";
+            this.treeMenu.Size = new System.Drawing.Size(153, 48);
+            // 
+            // mnu_Add
+            // 
+            this.mnu_Add.Name = "mnu_Add";
+            this.mnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Add.Text = "新建其它应收";
+            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
+            // 
             // FrmCustomerOtherReceivableMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -335,6 +346,7 @@
             this.pnlLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.treeMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,7 +363,6 @@
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private LJH.Inventory.UI.Controls.TooStripDBCTextBox txtKeyword;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -370,5 +381,7 @@
         private System.Windows.Forms.DataGridViewLinkColumn colPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ContextMenuStrip treeMenu;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Add;
     }
 }

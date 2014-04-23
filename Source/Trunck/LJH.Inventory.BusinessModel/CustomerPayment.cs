@@ -30,10 +30,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string CustomerID { get; set; }
         /// <summary>
-        /// 获取或设置付款客户
-        /// </summary>
-        public CompanyInfo Customer { get; set; }
-        /// <summary>
         /// 获取或设置币别
         /// </summary>
         public string CurrencyType { get; set; }

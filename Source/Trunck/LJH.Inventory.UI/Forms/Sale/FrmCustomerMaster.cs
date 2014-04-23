@@ -27,13 +27,13 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData(TreeNode node)
         {
-            List<object> items = GetSelectedNodeItems();
+            List<object> items = FilterData();
             ShowItemsOnGrid(items);
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
             List<CompanyInfo> items = _Customers;
             List<CustomerType> pc = null;
@@ -89,7 +89,7 @@ namespace LJH.Inventory.UI.Forms
                 SearchCondition = con;
             }
             _Customers = bll.GetItems(SearchCondition).QueryObjects;
-            List<object> records = GetSelectedNodeItems();
+            List<object> records = FilterData();
             return records;
         }
 
@@ -126,13 +126,13 @@ namespace LJH.Inventory.UI.Forms
         #region 类别树右键菜单
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData(e.Node);
         }
 
         private void mnu_FreshTree_Click(object sender, EventArgs e)
         {
             categoryTree.Init();
-            SelectNode(categoryTree.Nodes[0]);
+            FreshData(categoryTree.Nodes[0]);
         }
 
         private void mnu_AddCategory_Click(object sender, EventArgs e)

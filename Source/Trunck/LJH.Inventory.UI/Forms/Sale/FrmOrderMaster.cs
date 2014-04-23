@@ -145,5 +145,10 @@ namespace LJH.Inventory.UI.Forms
             FreshData();
         }
         #endregion
+
+        private void mnu_Add_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
+        }
     }
 }

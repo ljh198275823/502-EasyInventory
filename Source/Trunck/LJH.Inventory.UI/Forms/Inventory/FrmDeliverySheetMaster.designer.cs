@@ -275,19 +275,19 @@
             this.mnu_FreshTree,
             this.mnu_AddSheet});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(137, 48);
+            this.CategoryMenu.Size = new System.Drawing.Size(153, 70);
             // 
             // mnu_FreshTree
             // 
             this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(136, 22);
+            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
             // 
             // mnu_AddSheet
             // 
             this.mnu_AddSheet.Name = "mnu_AddSheet";
-            this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
+            this.mnu_AddSheet.Size = new System.Drawing.Size(152, 22);
             this.mnu_AddSheet.Text = "新建送货单";
             this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
             // 

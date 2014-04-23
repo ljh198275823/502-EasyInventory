@@ -71,7 +71,9 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmCustomerPaymentDetail();
+            FrmCustomerPaymentDetail frm= new FrmCustomerPaymentDetail();
+            if (customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
+            return frm;
         }
 
         protected override List<object> GetDataSource()
@@ -85,7 +87,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             CustomerPayment info = item as CustomerPayment;
             row.Cells["colID"].Value = info.ID;
             row.Cells["colPaidDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
-            row.Cells["colCustomer"].Value = info.Customer != null ? info.Customer.Name : info.CustomerID;
+            CompanyInfo customer = customerTree1.GetCustomer(info.CustomerID);
+            row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount.Trim();
             row.Cells["colCheckNum"].Value = info.CheckNum;
@@ -118,6 +121,11 @@ namespace LJH.Inventory.UI.Forms.Financial
             //    frm.SearchCondition = con;
             //    frm.ShowDialog();
             //}
+        }
+
+        private void mnu_Add_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
         }
 
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

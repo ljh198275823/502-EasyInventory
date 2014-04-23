@@ -184,6 +184,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             };
             frm.ShowDialog();
         }
+
+        private void mnu_Add_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
+        }
         #endregion
+
     }
 }

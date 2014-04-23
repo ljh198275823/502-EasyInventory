@@ -26,13 +26,13 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData(TreeNode node)
         {
-            List<object> items = GetSelectedNodeItems();
+            List<object> items = FilterData();
             ShowItemsOnGrid(items);
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
             List<Product> items = _Products;
             ProductCategory pc = null;
@@ -65,7 +65,7 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             _Products = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            List<object> records = GetSelectedNodeItems();
+            List<object> records = FilterData();
             return records;
         }
 
@@ -108,18 +108,24 @@ namespace LJH.Inventory.UI.Forms
             }
             return ret.Result == ResultCode.Successful;
         }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
+        }
         #endregion
 
         #region 类别树右键菜单
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData(e.Node);
         }
 
         private void mnu_FreshTree_Click(object sender, EventArgs e)
         {
             this.categoryTree.Init();
-            SelectNode(categoryTree.Nodes[0]);
+            FreshData(categoryTree.Nodes[0]);
         }
 
         private void mnu_AddCategory_Click(object sender, EventArgs e)
@@ -134,6 +140,11 @@ namespace LJH.Inventory.UI.Forms
                 this.categoryTree.AddCategoryNode(item, categoryTree.SelectedNode);
             };
             frm.ShowDialog();
+        }
+
+        private void mnu_AddProduct_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
         }
 
         private void mnu_DeleteCategory_Click(object sender, EventArgs e)

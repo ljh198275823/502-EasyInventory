@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -42,6 +42,7 @@
             this.chkAdded = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,13 +59,15 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
+            this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.treeMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFilter
@@ -195,6 +198,18 @@
             this.pnlLeft.Size = new System.Drawing.Size(200, 319);
             this.pnlLeft.TabIndex = 113;
             // 
+            // customerTree1
+            // 
+            this.customerTree1.ContextMenuStrip = this.treeMenu;
+            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.ItemHeight = 20;
+            this.customerTree1.LoadCustomer = true;
+            this.customerTree1.Location = new System.Drawing.Point(0, 0);
+            this.customerTree1.Name = "customerTree1";
+            this.customerTree1.Size = new System.Drawing.Size(200, 319);
+            this.customerTree1.TabIndex = 0;
+            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
+            // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -266,9 +281,9 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAmount.HeaderText = "付款金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -327,16 +342,19 @@
             this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Export.Text = "导出...";
             // 
-            // customerTree1
+            // treeMenu
             // 
-            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customerTree1.ItemHeight = 20;
-            this.customerTree1.LoadCustomer = true;
-            this.customerTree1.Location = new System.Drawing.Point(0, 0);
-            this.customerTree1.Name = "customerTree1";
-            this.customerTree1.Size = new System.Drawing.Size(200, 319);
-            this.customerTree1.TabIndex = 0;
-            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
+            this.treeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Add});
+            this.treeMenu.Name = "treeMenu";
+            this.treeMenu.Size = new System.Drawing.Size(153, 48);
+            // 
+            // mnu_Add
+            // 
+            this.mnu_Add.Name = "mnu_Add";
+            this.mnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Add.Text = "新建付款流水";
+            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
             // 
             // FrmCustomerPaymentMaster
             // 
@@ -362,6 +380,7 @@
             this.pnlLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.treeMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,5 +417,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ContextMenuStrip treeMenu;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Add;
     }
 }
