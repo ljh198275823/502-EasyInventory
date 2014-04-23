@@ -417,5 +417,41 @@ namespace InventoryApplication
         {
             ShowSingleForm<FrmPurchaseItemRecordMaster>();
         }
+
+        private void mnu_HorizontalSplit_Click(object sender, EventArgs e)
+        {
+            this.pSecondary.Visible = !this.pSecondary.Visible;
+            this.splitter1.Visible = !this.splitter1.Visible;
+            mnu_HorizontalSplit.Text = this.pSecondary.Visible ? "取消水平拆分" : "水平拆分";
+            this.mnu_VerticalSplit.Enabled = !this.pSecondary.Visible;
+            if (this.pSecondary.Visible)
+            {
+                this.pSecondary.Width = this.panel1.Width / 2;
+                this.pSecondary.Dock = DockStyle.Right;
+                this.splitter1.Dock = DockStyle.Right;
+            }
+            else
+            {
+                
+            }
+        }
+
+        private void mnu_VerticalSplit_Click(object sender, EventArgs e)
+        {
+            this.pSecondary.Visible = !this.pSecondary.Visible;
+            this.splitter1.Visible = !this.splitter1.Visible;
+            this.mnu_VerticalSplit.Text = this.pSecondary.Visible ? "取消垂直拆分" : "垂直拆分";
+            this.mnu_HorizontalSplit.Enabled = !this.pSecondary.Visible;
+            if (this.pSecondary.Visible)
+            {
+                this.pSecondary.Dock = DockStyle.Bottom;
+                this.splitter1.Dock = DockStyle.Bottom;
+                this.pSecondary.Height = this.panel1.Height / 2;
+            }
+            else
+            {
+
+            }
+        }
     }
 }

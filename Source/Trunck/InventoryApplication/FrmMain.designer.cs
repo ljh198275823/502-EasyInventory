@@ -79,6 +79,9 @@
             this.mnu_Options = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_BackupData = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_UpdateDB = new System.Windows.Forms.ToolStripMenuItem();
+            this.窗口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_HorizontalSplit = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_VerticalSplit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Help = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Manual = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DogInfo = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,11 +94,12 @@
             this.ucFormViewSecondary = new LJH.GeneralLibrary.WinformControl.UCFormView();
             this.pMain = new System.Windows.Forms.Panel();
             this.ucFormViewMain = new LJH.GeneralLibrary.WinformControl.UCFormView();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
-            this.pMain.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -111,6 +115,7 @@
             this.mnu_Reports,
             this.mnu_Security,
             this.工具ToolStripMenuItem,
+            this.窗口ToolStripMenuItem,
             this.mnu_Help});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -156,28 +161,28 @@
             // mnu_Product
             // 
             this.mnu_Product.Name = "mnu_Product";
-            this.mnu_Product.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Product.Size = new System.Drawing.Size(124, 22);
             this.mnu_Product.Text = "产品资料";
             this.mnu_Product.Click += new System.EventHandler(this.mnu_Product_Click);
             // 
             // mnu_WareHouse
             // 
             this.mnu_WareHouse.Name = "mnu_WareHouse";
-            this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
+            this.mnu_WareHouse.Size = new System.Drawing.Size(124, 22);
             this.mnu_WareHouse.Text = "仓库资料";
             this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click);
             // 
             // mnu_Unit
             // 
             this.mnu_Unit.Name = "mnu_Unit";
-            this.mnu_Unit.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Unit.Size = new System.Drawing.Size(124, 22);
             this.mnu_Unit.Text = "计量单位";
             this.mnu_Unit.Click += new System.EventHandler(this.mnu_Unit_Click);
             // 
             // mnu_CurrencyType
             // 
             this.mnu_CurrencyType.Name = "mnu_CurrencyType";
-            this.mnu_CurrencyType.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CurrencyType.Size = new System.Drawing.Size(124, 22);
             this.mnu_CurrencyType.Text = "货币种类";
             this.mnu_CurrencyType.Visible = false;
             this.mnu_CurrencyType.Click += new System.EventHandler(this.mnu_CurrencyType_Click);
@@ -185,7 +190,7 @@
             // mnu_Transport
             // 
             this.mnu_Transport.Name = "mnu_Transport";
-            this.mnu_Transport.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Transport.Size = new System.Drawing.Size(124, 22);
             this.mnu_Transport.Text = "运输方式";
             this.mnu_Transport.Click += new System.EventHandler(this.mnu_Transport_Click);
             // 
@@ -484,6 +489,29 @@
             this.mnu_UpdateDB.Text = "升级数据库";
             this.mnu_UpdateDB.Click += new System.EventHandler(this.mnu_UpdateDB_Click);
             // 
+            // 窗口ToolStripMenuItem
+            // 
+            this.窗口ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_HorizontalSplit,
+            this.mnu_VerticalSplit});
+            this.窗口ToolStripMenuItem.Name = "窗口ToolStripMenuItem";
+            this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.窗口ToolStripMenuItem.Text = "窗口";
+            // 
+            // mnu_HorizontalSplit
+            // 
+            this.mnu_HorizontalSplit.Name = "mnu_HorizontalSplit";
+            this.mnu_HorizontalSplit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_HorizontalSplit.Text = "水平拆分";
+            this.mnu_HorizontalSplit.Click += new System.EventHandler(this.mnu_HorizontalSplit_Click);
+            // 
+            // mnu_VerticalSplit
+            // 
+            this.mnu_VerticalSplit.Name = "mnu_VerticalSplit";
+            this.mnu_VerticalSplit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_VerticalSplit.Text = "垂直拆分";
+            this.mnu_VerticalSplit.Click += new System.EventHandler(this.mnu_VerticalSplit_Click);
+            // 
             // mnu_Help
             // 
             this.mnu_Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -550,11 +578,12 @@
             // pSecondary
             // 
             this.pSecondary.AutoScroll = true;
+            this.pSecondary.BackColor = System.Drawing.SystemColors.Control;
             this.pSecondary.Controls.Add(this.ucFormViewSecondary);
             this.pSecondary.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pSecondary.Location = new System.Drawing.Point(872, 25);
+            this.pSecondary.Location = new System.Drawing.Point(780, 0);
             this.pSecondary.Name = "pSecondary";
-            this.pSecondary.Size = new System.Drawing.Size(27, 283);
+            this.pSecondary.Size = new System.Drawing.Size(119, 283);
             this.pSecondary.TabIndex = 11;
             this.pSecondary.Visible = false;
             // 
@@ -564,18 +593,17 @@
             this.ucFormViewSecondary.FormHeaderLength = 135;
             this.ucFormViewSecondary.Location = new System.Drawing.Point(0, 0);
             this.ucFormViewSecondary.Name = "ucFormViewSecondary";
-            this.ucFormViewSecondary.Size = new System.Drawing.Size(27, 283);
+            this.ucFormViewSecondary.Size = new System.Drawing.Size(119, 283);
             this.ucFormViewSecondary.TabIndex = 7;
-            this.ucFormViewSecondary.Visible = false;
             // 
             // pMain
             // 
             this.pMain.AutoScroll = true;
-            this.pMain.Controls.Add(this.ucFormViewMain);
+            this.pMain.BackColor = System.Drawing.SystemColors.Control;
             this.pMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pMain.Location = new System.Drawing.Point(0, 25);
+            this.pMain.Location = new System.Drawing.Point(0, 0);
             this.pMain.Name = "pMain";
-            this.pMain.Size = new System.Drawing.Size(864, 283);
+            this.pMain.Size = new System.Drawing.Size(780, 283);
             this.pMain.TabIndex = 13;
             // 
             // ucFormViewMain
@@ -584,17 +612,29 @@
             this.ucFormViewMain.FormHeaderLength = 135;
             this.ucFormViewMain.Location = new System.Drawing.Point(0, 0);
             this.ucFormViewMain.Name = "ucFormViewMain";
-            this.ucFormViewMain.Size = new System.Drawing.Size(864, 283);
+            this.ucFormViewMain.Size = new System.Drawing.Size(772, 283);
             this.ucFormViewMain.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.ucFormViewMain);
+            this.panel1.Controls.Add(this.splitter1);
+            this.panel1.Controls.Add(this.pMain);
+            this.panel1.Controls.Add(this.pSecondary);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(899, 283);
+            this.panel1.TabIndex = 15;
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(864, 25);
+            this.splitter1.Location = new System.Drawing.Point(772, 0);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(8, 283);
-            this.splitter1.TabIndex = 12;
+            this.splitter1.TabIndex = 13;
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
             // 
@@ -603,9 +643,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 330);
-            this.Controls.Add(this.pMain);
-            this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.pSecondary);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -623,7 +661,7 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.pSecondary.ResumeLayout(false);
-            this.pMain.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -686,12 +724,16 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_OrderPaymentReport;
         private System.Windows.Forms.ToolStripMenuItem 销售毛利统计ToolStripMenuItem;
         private LJH.GeneralLibrary.WinformControl.UCFormView ucFormViewSecondary;
-        private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ToolStripMenuItem mnu_CustomerReceivable;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnu_OrderMonitor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem mnu_PurchaseMonitor;
         private System.Windows.Forms.ToolStripMenuItem mnu_WareHouse;
+        private System.Windows.Forms.ToolStripMenuItem 窗口ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnu_HorizontalSplit;
+        private System.Windows.Forms.ToolStripMenuItem mnu_VerticalSplit;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Splitter splitter1;
     }
 }
