@@ -165,6 +165,7 @@ namespace LJH.Inventory.UI.Forms
                 ShowDeliveryItemsOnGrid(item.Items);
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
+                chkShowState_CheckedChanged(chkShowState, EventArgs.Empty);
             }
         }
 
@@ -240,7 +241,7 @@ namespace LJH.Inventory.UI.Forms
         #region 工具栏处理程序
         private void btnSave_Click(object sender, EventArgs e)
         {
-            OrderBLL  processor = new OrderBLL(AppSettings.Current.ConnStr);
+            OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);
             PerformOperation<Order>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
@@ -249,7 +250,7 @@ namespace LJH.Inventory.UI.Forms
             OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);
             PerformOperation<Order>(processor, SheetOperation.Approve);
         }
-        
+
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
             OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);
@@ -403,5 +404,37 @@ namespace LJH.Inventory.UI.Forms
             }
         }
         #endregion
+
+        private void chkShowState_CheckedChanged(object sender, EventArgs e)
+        {
+            ItemsGrid.Columns["colShipped"].Visible = chkShowState.Checked;
+            ItemsGrid.Columns["colOnway"].Visible = chkShowState.Checked;
+            if (chkShowState.Checked) ShowOrderItemState();
+        }
+
+        private void ShowOrderItemState()
+        {
+            if (UpdatingItem != null)
+            {
+                List<string> sheets = new List<string>();
+                sheets.Add((UpdatingItem as Order).ID);
+                OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
+                con.SheetNo = sheets;
+                List<OrderItemRecord> states = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
+                if (states != null && states.Count > 0)
+                {
+                    foreach (DataGridViewRow row in ItemsGrid.Rows)
+                    {
+                        OrderItem oi = row.Tag as OrderItem;
+                        if (oi != null)
+                        {
+                            OrderItemRecord st = states.SingleOrDefault(item => item.ID == oi.ID);
+                            row.Cells["colShipped"].Value = st != null ? st.Shipped.ToString() : null;
+                            row.Cells["colOnway"].Value = st != null ? st.OnWay.ToString() : null;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
