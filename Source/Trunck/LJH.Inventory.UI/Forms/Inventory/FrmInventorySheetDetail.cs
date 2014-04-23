@@ -205,23 +205,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowButtonState()
         {
-            if (UpdatingItem == null)
-            {
-                this.btnSave.Enabled = true;
-                this.btnApprove.Enabled = false;
-                this.btnUndoApprove.Enabled = false;
-                this.btnInventory.Enabled = false;
-                this.btnNullify.Enabled = false;
-            }
-            else
-            {
-                ISheet<string> sheet = UpdatingItem as ISheet<string>;
-                this.btnSave.Enabled = sheet.CanEdit;
-                this.btnApprove.Enabled = sheet.CanApprove;
-                this.btnUndoApprove.Enabled = sheet.State == SheetState.Approved;
-                this.btnInventory.Enabled = (sheet as InventorySheet).CanInventory;
-                this.btnNullify.Enabled = sheet.CanCancel;
-            }
+            ShowButtonState(this.toolStrip1);
         }
         #endregion
 

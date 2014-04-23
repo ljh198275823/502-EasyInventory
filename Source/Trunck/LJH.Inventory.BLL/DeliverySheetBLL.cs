@@ -129,7 +129,6 @@ namespace LJH.Inventory.BLL
         protected override void DoShip(DeliverySheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             IProvider<DeliverySheet, string> provider = ProviderFactory.Create<IProvider<DeliverySheet, string>>(_RepoUri);
-            if (!info.CanShip) throw new Exception("单号为 " + info.ID + " 的送货单发货失败，只有待发货或者已审批的送货单才能发货");
             if (info.Items == null || info.Items.Count == 0) throw new Exception("单号为 " + info.ID + " 的送货单发货失败，没有送货单项");
             DeliverySheet sheet1 = info.Clone() as DeliverySheet;
             info.LastActiveDate = dt;

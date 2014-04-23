@@ -28,16 +28,8 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         Inventory = 3,
         /// <summary>
-        /// 结清
-        /// </summary>
-        Settled = 4,
-        /// <summary>
         /// 取消
         /// </summary>
-        Canceled = 5,
-        /// <summary>
-        /// 关闭
-        /// </summary>
-        Closed=6,
+        Canceled = 4,
     }
 }

@@ -64,52 +64,20 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region ISheet接口
-        /// <summary>
-        /// 获取送货单是否可编辑
-        /// </summary>
-        public bool CanEdit
+        public bool CanDo(SheetOperation operation)
         {
-            get { return (State == SheetState.Add); }
-        }
-        /// <summary>
-        /// 获取送货单是否可以审批
-        /// </summary>
-        public bool CanApprove
-        {
-            get
+            switch (operation)
             {
-                return (State == SheetState.Add);
-            }
-        }
-        /// <summary>
-        /// 获取送货单是否可以发货
-        /// </summary>
-        public bool CanShip
-        {
-            get { return (State == SheetState.Add || State == SheetState.Approved); }
-        }
-        /// <summary>
-        /// 获取是否可以打印送货单
-        /// </summary>
-        public bool CanPrint
-        {
-            get { return State != SheetState.Canceled; }
-        }
-        /// <summary>
-        /// 获取是否可以删除送货单
-        /// </summary>
-        public bool CanDelete
-        {
-            get { return State == SheetState.Add || State == SheetState.Approved; }
-        }
-        /// <summary>
-        /// 获取是否可以将送货单作废
-        /// </summary>
-        public bool CanCancel
-        {
-            get
-            {
-                return State != SheetState.Canceled;
+                case SheetOperation.Modify:
+                    return State == SheetState.Add;
+                case SheetOperation.Approve:
+                    return State == SheetState.Add;
+                case SheetOperation.UndoApprove:
+                    return State == SheetState.Approved;
+                case SheetOperation.Nullify:
+                    return State != SheetState.Canceled;
+                default:
+                    return false;
             }
         }
         /// <summary>

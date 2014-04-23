@@ -216,6 +216,32 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 与工具栏有关的方法
+        protected virtual void ShowButtonState(ToolStrip toolBar)
+        {
+            if (UpdatingItem == null)
+            {
+                if (toolBar.Items["btnSave"] != null) toolBar.Items["btnSave"].Enabled = true;
+                if (toolBar.Items["btnApprove"] != null) toolBar.Items["btnApprove"].Enabled = false;
+                if (toolBar.Items["btnUndoApprove"] != null) toolBar.Items["btnUndoApprove"].Enabled = false;
+                if (toolBar.Items["btnInventory"] != null) toolBar.Items["btnInventory"].Enabled = false;
+                if (toolBar.Items["btnShip"] != null) toolBar.Items["btnShip"].Enabled = false;
+                if (toolBar.Items["btnNullify"] != null) toolBar.Items["btnNullify"].Enabled = false;
+            }
+            else
+            {
+                ISheet<string> sheet = UpdatingItem as ISheet<string>;
+                if (sheet != null)
+                {
+                    if (toolBar.Items["btnSave"] != null) toolBar.Items["btnSave"].Enabled = sheet.CanDo(SheetOperation.Modify);
+                    if (toolBar.Items["btnApprove"] != null) toolBar.Items["btnApprove"].Enabled = sheet.CanDo(SheetOperation.Approve);
+                    if (toolBar.Items["btnUndoApprove"] != null) toolBar.Items["btnUndoApprove"].Enabled = sheet.CanDo(SheetOperation.UndoApprove);
+                    if (toolBar.Items["btnInventory"] != null) toolBar.Items["btnInventory"].Enabled = sheet.CanDo(SheetOperation.Inventory);
+                    if (toolBar.Items["btnShip"] != null) toolBar.Items["btnShip"].Enabled = sheet.CanDo(SheetOperation.Ship);
+                    if (toolBar.Items["btnNullify"] != null) toolBar.Items["btnNullify"].Enabled = sheet.CanDo(SheetOperation.Nullify);
+                }
+            }
+        }
+
         private void PerformSave<T>(SheetProcessorBase<T> processor, SheetOperation operation) where T : class,ISheet<string>
         {
             T sheet = GetItemFromInput() as T;

@@ -57,32 +57,35 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 实现ISheet接口
-        public bool CanEdit
+        public bool CanDo(SheetOperation operation)
         {
-            get { return (State == SheetState.Add); }
-        }
-
-        public bool CanApprove
-        {
-            get { return State == SheetState.Add; }
-        }
-
-        public bool CanCancel
-        {
-            get { return State != SheetState.Canceled && State != SheetState.Settled; }
+            switch (operation)
+            {
+                case SheetOperation.Modify:
+                    return State == SheetState.Add;
+                case SheetOperation.Approve:
+                    return State == SheetState.Add;
+                case SheetOperation.UndoApprove:
+                    return State == SheetState.Approved;
+                case SheetOperation.Nullify:
+                    return State != SheetState.Canceled;
+                default:
+                    return false;
+            }
         }
 
         public string DocumentType
         {
             get { return "PurchaseSheet"; }
         }
-        #endregion
 
-        #region 公共方法
         public ISheet<string> Clone()
         {
             return this.MemberwiseClone() as PurchaseOrder;
         }
+        #endregion
+
+        #region 公共方法
         /// <summary>
         /// 计算订单的总金额
         /// </summary>

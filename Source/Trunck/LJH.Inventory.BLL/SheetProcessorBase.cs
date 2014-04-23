@@ -69,17 +69,10 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         protected virtual void DoApprove(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            if (info.CanApprove)
-            {
-                TEntity original = info.Clone() as TEntity;
-                info.State = SheetState.Approved;
-                info.LastActiveDate = dt; //修改最后活动时间
-                ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
-            }
-            else
-            {
-                throw new Exception("已经审核，不能再次审核");
-            }
+            TEntity original = info.Clone() as TEntity;
+            info.State = SheetState.Approved;
+            info.LastActiveDate = dt; //修改最后活动时间
+            ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
         }
         /// <summary>
         /// 取消审核
@@ -89,17 +82,10 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         protected virtual void UndoApprove(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            if (info.State == SheetState.Approved)
-            {
-                TEntity original = info.Clone() as TEntity;
-                info.State = SheetState.Add;
-                info.LastActiveDate = dt; //修改最后活动时间
-                ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
-            }
-            else
-            {
-                throw new Exception("未审核单据，不能取消审核");
-            }
+            TEntity original = info.Clone() as TEntity;
+            info.State = SheetState.Add;
+            info.LastActiveDate = dt; //修改最后活动时间
+            ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
         }
         /// <summary>
         /// 将订单作废
@@ -109,17 +95,10 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         protected virtual void DoNullify(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            if (info.CanCancel)
-            {
-                TEntity original = info.Clone() as TEntity;
-                info.State = SheetState.Canceled;
-                info.LastActiveDate = dt; //修改最后活动时间
-                ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
-            }
-            else
-            {
-                throw new Exception("订单不能作废");
-            }
+            TEntity original = info.Clone() as TEntity;
+            info.State = SheetState.Canceled;
+            info.LastActiveDate = dt; //修改最后活动时间
+            ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
         }
 
         /// <summary>
@@ -216,11 +195,8 @@ namespace LJH.Inventory.BLL
             try
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                DateTime? dt = GetServerDateTime();
-                if (dt == null) //从数据库获取时间
-                {
-                    return new CommandResult(ResultCode.Fail, "从数据库服务器获取时间失败");
-                }
+                DateTime? dt = GetServerDateTime(); //从数据库获取时间
+                if (dt == null) return new CommandResult(ResultCode.Fail, "从数据库服务器获取时间失败");
                 if (operation == SheetOperation.Create)
                 {
                     sheet.LastActiveDate = dt.Value;
@@ -228,42 +204,33 @@ namespace LJH.Inventory.BLL
                 }
                 else
                 {
+                    if (!sheet.CanDo(operation)) return new CommandResult(ResultCode.Fail, string.Format("单据不能进行 {0} 操作", SheetOperationDescription.GetDescription(operation)));
                     DateTime? lastActiveDate = GetLastActiveDate(sheet);
-                    //单据的最后活动时间与当前单据相同，说明其它操作员在此次修改之前没有修改过单据
-                    if (lastActiveDate != null && sheet.LastActiveDate == lastActiveDate.Value)
+                    if (lastActiveDate == null) return new CommandResult(ResultCode.Fail, "获取单据最后操作时间失败，请重试");
+                    //单据的最后活动时间与当前值不相同，说明其它操作员在此次修改之前修改过单据
+                    if (sheet.LastActiveDate != lastActiveDate.Value) return new CommandResult(ResultCode.Fail, "其它操作员已经修改了数据，请先获取到最新数据后再做修改");
+                    switch (operation)
                     {
-                        if (operation == SheetOperation.Modify)
-                        {
+                        case SheetOperation.Modify:
                             DoUpdate(sheet, unitWork, dt.Value, opt);
-                        }
-                        else if (operation == SheetOperation.Approve)
-                        {
+                            break;
+                        case SheetOperation.Approve:
                             DoApprove(sheet, unitWork, dt.Value, opt);
-                        }
-                        else if (operation == SheetOperation.UndoApprove)
-                        {
+                            break;
+                        case SheetOperation.UndoApprove:
                             UndoApprove(sheet, unitWork, dt.Value, opt);
-                        }
-                        else if (operation == SheetOperation.Nullify)
-                        {
+                            break;
+                        case SheetOperation.Nullify:
                             DoNullify(sheet, unitWork, dt.Value, opt);
-                        }
-                        else if (operation == SheetOperation.Inventory)
-                        {
+                            break;
+                        case SheetOperation.Inventory:
                             DoInventory(sheet, unitWork, dt.Value, opt);
-                        }
-                        else if (operation == SheetOperation.Ship)
-                        {
+                            break;
+                        case SheetOperation.Ship:
                             DoShip(sheet, unitWork, dt.Value, opt);
-                        }
-                        else
-                        {
+                            break;
+                        default:
                             return new CommandResult(ResultCode.Fail, string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(operation)));
-                        }
-                    }
-                    else
-                    {
-                        return new CommandResult(ResultCode.Fail, "其它操作员已经修改了数据，请先获取到最新数据后再做修改");
                     }
                 }
                 AddOperationLog(sheet.ID, sheet.DocumentType, operation, opt, unitWork, dt.Value);

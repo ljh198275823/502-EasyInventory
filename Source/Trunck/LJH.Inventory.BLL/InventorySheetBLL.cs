@@ -77,7 +77,6 @@ namespace LJH.Inventory.BLL
 
         protected override void DoInventory(InventorySheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            if (!info.CanInventory) throw new Exception("状态为" + SheetStateDescription.GetDescription(info.State) + " 的收货单 " + " 不能收货");
             if (info.Items == null || info.Items.Count == 0) throw new Exception("单号为 " + info.ID + " 的收货单发货失败，没有收货单项");
 
             InventorySheet sheet1 = info.Clone() as InventorySheet;

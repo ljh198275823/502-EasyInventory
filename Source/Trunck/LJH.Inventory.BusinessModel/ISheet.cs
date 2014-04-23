@@ -23,17 +23,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         SheetState State { get; set; }
         /// <summary>
-        /// 获取单据是否可以修改
+        /// 检测单据是否可以进行某个操作
         /// </summary>
-        bool CanEdit { get; }
-        /// <summary>
-        /// 获取单据是否可以审批
-        /// </summary>
-        bool CanApprove { get; }
-        /// <summary>
-        /// 获取单据是否可以作废
-        /// </summary>
-        bool CanCancel { get; }
+        bool CanDo(SheetOperation operation);
         /// <summary>
         /// 克隆一个自身复本
         /// </summary>

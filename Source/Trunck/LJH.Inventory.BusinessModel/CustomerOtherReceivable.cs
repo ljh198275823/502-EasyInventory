@@ -51,19 +51,7 @@ namespace LJH.Inventory.BusinessModel
         public string Memo { get; set; }
         #endregion
 
-        #region 只读属性
-        /// <summary>
-        /// 获取是否可以作废
-        /// </summary>
-        public bool CanCancel
-        {
-            get
-            {
-                return State != SheetState.Canceled;
-            }
-        }
-        #endregion
-
+        #region 实现isheet接口
         public ISheet<string> Clone()
         {
             return this.MemberwiseClone() as CustomerOtherReceivable;
@@ -74,20 +62,22 @@ namespace LJH.Inventory.BusinessModel
             get { return "CustomerOtherReceivable"; }
         }
 
-        public bool CanEdit
+        public bool CanDo(SheetOperation operation)
         {
-            get
+            switch (operation)
             {
-                return (State == SheetState.Add);
+                case SheetOperation.Modify:
+                    return State == SheetState.Add;
+                case SheetOperation.Approve:
+                    return State == SheetState.Add;
+                case SheetOperation.UndoApprove:
+                    return State == SheetState.Approved;
+                case SheetOperation.Nullify:
+                    return State != SheetState.Canceled;
+                default:
+                    return false;
             }
         }
-
-        public bool CanApprove
-        {
-            get
-            {
-                return State == SheetState.Add;
-            }
-        }
+        #endregion
     }
 }

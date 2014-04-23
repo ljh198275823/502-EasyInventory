@@ -21,8 +21,6 @@ namespace LJH.Inventory.BusinessModel.Resource
                     return "已收货";
                 case SheetState.Shipped:
                     return "已发货";
-                case SheetState.Settled:
-                    return "完成";
                 default:
                     return string.Empty;
             }

@@ -64,27 +64,20 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region ISheet 接口
-        public bool CanEdit
+        public bool CanDo(SheetOperation operation)
         {
-            get
+            switch (operation)
             {
-                return (State == SheetState.Add);
-            }
-        }
-
-        public bool CanApprove
-        {
-            get
-            {
-                return State == SheetState.Add;
-            }
-        }
-
-        public bool CanCancel
-        {
-            get
-            {
-                return State != SheetState.Canceled && State != SheetState.Settled;
+                case SheetOperation.Modify:
+                    return State == SheetState.Add;
+                case SheetOperation.Approve:
+                    return State == SheetState.Add;
+                case SheetOperation.UndoApprove:
+                    return State == SheetState.Approved;
+                case SheetOperation.Nullify:
+                    return State != SheetState.Canceled;
+                default:
+                    return false;
             }
         }
 

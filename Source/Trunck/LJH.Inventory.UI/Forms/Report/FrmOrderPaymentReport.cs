@@ -30,7 +30,6 @@ namespace LJH.Inventory.UI.Report
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Add);
             con.States.Add(SheetState.Approved);
-            con.States.Add(SheetState.Closed);
             List<Order> items = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             foreach (Order item in items)
             {
