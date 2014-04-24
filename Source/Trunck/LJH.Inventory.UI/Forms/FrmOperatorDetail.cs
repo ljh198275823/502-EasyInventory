@@ -46,8 +46,6 @@ namespace LJH.Inventory.UI.Forms
             this.txtPassword.Enabled = false;
             this.txtPassword.BackColor = Color.White;
             this.comRoleList.SelectedRoleID = info.RoleID;
-            this.txtDepartment.Text = info.DepartmentID;
-            this.txtPost.Text = info.Post;
             this.comRoleList.Enabled = info.CanEdit;
         }
 
@@ -74,8 +72,6 @@ namespace LJH.Inventory.UI.Forms
                 info.Name = txtOperatorName.Text.Trim();
                 info.Role = comRoleList.Role;
                 info.RoleID = comRoleList.SelectedRoleID;
-                info.DepartmentID = txtDepartment.Text;
-                info.Post = txtPost.Text;
             }
             return info;
         }

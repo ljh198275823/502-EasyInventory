@@ -125,6 +125,18 @@
     <Compile Include="Forms\Financial\FrmCustomerFinancialStateMaster.Designer.cs">
       <DependentUpon>FrmCustomerFinancialStateMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\General\FrmDepartmentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\General\FrmDepartmentDetail.Designer.cs">
+      <DependentUpon>FrmDepartmentDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\General\FrmDepartmentMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\General\FrmDepartmentMaster.Designer.cs">
+      <DependentUpon>FrmDepartmentMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\FrmProductInventoryAssign.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -590,6 +602,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmCustomerFinancialStateMaster.resx">
       <DependentUpon>FrmCustomerFinancialStateMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\General\FrmDepartmentDetail.resx">
+      <DependentUpon>FrmDepartmentDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\General\FrmDepartmentMaster.resx">
+      <DependentUpon>FrmDepartmentMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmProductInventoryAssign.resx">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>

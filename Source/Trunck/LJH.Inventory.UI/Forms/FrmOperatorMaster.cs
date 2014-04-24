@@ -47,8 +47,6 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colOperatorID"].Value = info.ID;
             row.Cells["colOperatorName"].Value = info.Name;
             row.Cells["colRoleID"].Value = info.Role != null ? info.Role.ID : string.Empty;
-            row.Cells["colDepartment"].Value = info.DepartmentID;
-            row.Cells["colPost"].Value = info.Post;
         }
 
         protected override bool DeletingItem(object item)

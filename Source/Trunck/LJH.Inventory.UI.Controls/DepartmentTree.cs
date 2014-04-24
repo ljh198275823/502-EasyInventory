@@ -62,19 +62,19 @@ namespace LJH.Inventory.UI.Controls
             parent.SelectedImageIndex = 0;
         }
 
-        private void AddStaffNodes(List<Operator> customers, TreeNode parent)
+        private void AddStaffNodes(List<Staff> staffs, TreeNode parent)
         {
             Department ct = parent.Tag as Department;
-            List<Operator> items = null;
+            List<Staff> items = null;
             if (ct == null)
             {
-                items = customers.Where(it => string.IsNullOrEmpty(it.DepartmentID)).ToList();
+                items = staffs.Where(it => string.IsNullOrEmpty(it.DepartmentID)).ToList();
             }
             else
             {
-                items = customers.Where(it => it.DepartmentID == ct.ID).ToList();
+                items = staffs.Where(it => it.DepartmentID == ct.ID).ToList();
             }
-            foreach (Operator c in items)
+            foreach (Staff c in items)
             {
                 AddStaffNode(c, parent);
             }
@@ -99,16 +99,16 @@ namespace LJH.Inventory.UI.Controls
 
             if (LoadStaff)
             {
-                List<Operator> customers = (new OperatorBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-                if (customers != null && customers.Count > 0)
+                List<Staff> staffs = (new StaffBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                if (staffs != null && staffs.Count > 0)
                 {
                     _AllStaff = new Hashtable();
-                    customers.ForEach(it => _AllStaff.Add(it.ID, it));
+                    staffs.ForEach(it => _AllStaff.Add(it.ID, it));
                 }
-                AddStaffNodes(customers, this.Nodes[0]);
+                AddStaffNodes(staffs, this.Nodes[0]);
                 foreach (TreeNode cnode in _AllDeptNodes)
                 {
-                    AddStaffNodes(customers, cnode);
+                    AddStaffNodes(staffs, cnode);
                 }
             }
             this.ExpandAll();
@@ -134,7 +134,7 @@ namespace LJH.Inventory.UI.Controls
         /// <param name="c"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public TreeNode AddStaffNode(Operator c, TreeNode parent)
+        public TreeNode AddStaffNode(Staff c, TreeNode parent)
         {
             TreeNode node = parent.Nodes.Add(string.Format("[{0}]{1}", c.ID, c.Name));
             node.Tag = c;
@@ -190,11 +190,11 @@ namespace LJH.Inventory.UI.Controls
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Operator GetStaff(string id)
+        public Staff GetStaff(string id)
         {
             if (_AllStaff != null && _AllStaff.Count > 0)
             {
-                return _AllStaff[id] as Operator;
+                return _AllStaff[id] as Staff;
             }
             return null;
         }

@@ -106,6 +106,7 @@
     <Compile Include="RelatedCompanyTypeBLL.cs" />
     <Compile Include="RoleBLL.cs" />
     <Compile Include="SheetProcessorBase.cs" />
+    <Compile Include="StaffBLL.cs" />
     <Compile Include="SupplierTypeBLL.cs" />
     <Compile Include="SysParaSettingsBll.cs" />
     <Compile Include="SystemParameterBLL.cs" />

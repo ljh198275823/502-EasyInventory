@@ -23,21 +23,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// 获取或设置人员在考勤系统中的部门ID
+        /// 获取或设置人员编号
         /// </summary>
-        public string DepartmentID { get; set; }
-        /// <summary>
-        /// 获取或设置部门
-        /// </summary>
-        public Department Department { get; set; }
-        /// <summary>
-        /// 获取或设置
-        /// </summary>
-        public string CardID { get; set; }
-        /// <summary>
-        /// 获取或设置密码
-        /// </summary>
-        public string Password { get; set; }
+        public string Certificate { get; set; }
         /// <summary>
         /// 获取或设置员工姓别 1表示男，2表示女
         /// </summary>
@@ -47,30 +35,39 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public DateTime? Birthday { get; set; }
         /// <summary>
-        /// 获取或设置人员编号
-        /// </summary>
-        public string Certificate { get; set; }
-        /// <summary>
         /// 获取或设置人员职位
         /// </summary>
         public string UserPosition { get; set; }
         /// <summary>
         /// 获取或设置入职日期
         /// </summary>
-        public DateTime HireDate { get; set; }
+        public DateTime? HireDate { get; set; }
         /// <summary>
         /// 获取或设置员工是否已经离职
         /// </summary>
-        public bool Resigned { get; set; }
+        public bool? Resigned { get; set; }
         /// <summary>
         /// 或取或设置离职日期
         /// </summary>
         public DateTime? ResignDate { get; set; }
         /// <summary>
+        /// 获取或设置人员在考勤系统中的部门ID
+        /// </summary>
+        public string DepartmentID { get; set; }
+        /// <summary>
+        /// 获取或设置部门
+        /// </summary>
+        public Department Department { get; set; }
+        /// <summary>
         /// 获取或设置人员的备注信息
         /// </summary>
         public string Memo { get; set; }
         #endregion
+
+        public string DocumentType
+        {
+            get { return "Staff"; }
+        }
 
         #region 公共方法
         public Staff Clone()

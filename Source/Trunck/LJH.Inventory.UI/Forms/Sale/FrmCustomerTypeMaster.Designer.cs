@@ -30,11 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menu = new System.Windows.Forms.MenuStrip();
-            this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -46,6 +41,11 @@
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -68,51 +68,6 @@
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(724, 50);
             this.menu.TabIndex = 52;
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.Image = global::LJH.Inventory.UI.Properties.Resources.add;
-            this.btn_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(62, 46);
-            this.btn_Add.Text = "新建(&N)";
-            this.btn_Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
-            this.btn_Delete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(61, 46);
-            this.btn_Delete.Text = "删除(&D)";
-            this.btn_Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_Export
-            // 
-            this.btn_Export.Image = global::LJH.Inventory.UI.Properties.Resources.export;
-            this.btn_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Export.Name = "btn_Export";
-            this.btn_Export.Size = new System.Drawing.Size(59, 46);
-            this.btn_Export.Text = "导出(&E)";
-            this.btn_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_Fresh
-            // 
-            this.btn_Fresh.Image = global::LJH.Inventory.UI.Properties.Resources.refresh;
-            this.btn_Fresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Fresh.Name = "btn_Fresh";
-            this.btn_Fresh.Size = new System.Drawing.Size(58, 46);
-            this.btn_Fresh.Text = "刷新(&F)";
-            this.btn_Fresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_SelectColumns
-            // 
-            this.btn_SelectColumns.Image = global::LJH.Inventory.UI.Properties.Resources.columns;
-            this.btn_SelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_SelectColumns.Name = "btn_SelectColumns";
-            this.btn_SelectColumns.Size = new System.Drawing.Size(70, 46);
-            this.btn_SelectColumns.Text = "选择列(&L)";
-            this.btn_SelectColumns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // toolStripSeparator1
             // 
@@ -173,31 +128,76 @@
             this.cMnu_Delete,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // cMnu_Delete
             // 
             this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Delete.Text = "删除";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.Image = global::LJH.Inventory.UI.Properties.Resources.add;
+            this.btn_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(62, 46);
+            this.btn_Add.Text = "新建(&N)";
+            this.btn_Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
+            this.btn_Delete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(61, 46);
+            this.btn_Delete.Text = "删除(&D)";
+            this.btn_Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btn_Export
+            // 
+            this.btn_Export.Image = global::LJH.Inventory.UI.Properties.Resources.export;
+            this.btn_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Export.Name = "btn_Export";
+            this.btn_Export.Size = new System.Drawing.Size(59, 46);
+            this.btn_Export.Text = "导出(&E)";
+            this.btn_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btn_Fresh
+            // 
+            this.btn_Fresh.Image = global::LJH.Inventory.UI.Properties.Resources.refresh;
+            this.btn_Fresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Fresh.Name = "btn_Fresh";
+            this.btn_Fresh.Size = new System.Drawing.Size(58, 46);
+            this.btn_Fresh.Text = "刷新(&F)";
+            this.btn_Fresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btn_SelectColumns
+            // 
+            this.btn_SelectColumns.Image = global::LJH.Inventory.UI.Properties.Resources.columns;
+            this.btn_SelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_SelectColumns.Name = "btn_SelectColumns";
+            this.btn_SelectColumns.Size = new System.Drawing.Size(70, 46);
+            this.btn_SelectColumns.Text = "选择列(&L)";
+            this.btn_SelectColumns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // FrmCustomerTypeMaster
             // 

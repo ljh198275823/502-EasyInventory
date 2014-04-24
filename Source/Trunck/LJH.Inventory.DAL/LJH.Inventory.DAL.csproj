@@ -104,6 +104,7 @@
     <Compile Include="LinqProvider\PurchaseOrderProvider.cs" />
     <Compile Include="LinqProvider\RelatedCompanyTypeProvider.cs" />
     <Compile Include="LinqProvider\ServerDateTimeProvider.cs" />
+    <Compile Include="LinqProvider\StaffProvider.cs" />
     <Compile Include="LinqProvider\SupplierReceivableProvider.cs" />
     <Compile Include="LinqProvider\SupplierTypeProvider.cs" />
     <Compile Include="LinqProvider\TransportProvider.cs" />

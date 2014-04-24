@@ -68,19 +68,17 @@ namespace LJH.Inventory.BusinessModel
             }
         }
         /// <summary>
-        /// 获取或设置操作员的部门
-        /// </summary>
-        public string DepartmentID { get; set; }
-        /// <summary>
-        /// 获取或设置操作员的职位
-        /// </summary>
-        public string Post { get; set; }
-        /// <summary>
         /// 操作员角色ID
         /// </summary>
         public string RoleID { get; set; }
-
+        /// <summary>
+        /// 获取或设置角色信息
+        /// </summary>
         public Role Role { get; set; }
+        /// <summary>
+        /// 获取或设置操作员的职位
+        /// </summary>
+        public int? StaffID { get; set; }
         #endregion
 
         #region 只读属性

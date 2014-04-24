@@ -15,6 +15,7 @@ using LJH.Inventory.UI.Forms;
 using LJH.GeneralLibrary.SQLHelper;
 using LJH.Inventory.UI.Forms.Financial;
 using LJH.Inventory.UI.Forms.Sale;
+using LJH.Inventory.UI.Forms.General;
 
 namespace InventoryApplication
 {
@@ -463,6 +464,11 @@ namespace InventoryApplication
             {
 
             }
+        }
+
+        private void mnu_Staff_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmDepartmentMaster>();
         }
     }
 }
