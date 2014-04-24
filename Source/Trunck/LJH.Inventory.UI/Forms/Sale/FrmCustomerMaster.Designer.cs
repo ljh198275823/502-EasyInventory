@@ -29,13 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerMaster));
             this.menu = new System.Windows.Forms.MenuStrip();
-            this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -48,13 +42,7 @@
             this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +55,16 @@
             this.colPost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.CategoryMenu.SuspendLayout();
@@ -91,51 +89,6 @@
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(1178, 50);
             this.menu.TabIndex = 31;
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.Image = global::LJH.Inventory.UI.Properties.Resources.add;
-            this.btn_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(62, 46);
-            this.btn_Add.Text = "新建(&N)";
-            this.btn_Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_Delete
-            // 
-            this.btn_Delete.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
-            this.btn_Delete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(61, 46);
-            this.btn_Delete.Text = "删除(&D)";
-            this.btn_Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_Export
-            // 
-            this.btn_Export.Image = global::LJH.Inventory.UI.Properties.Resources.export;
-            this.btn_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Export.Name = "btn_Export";
-            this.btn_Export.Size = new System.Drawing.Size(59, 46);
-            this.btn_Export.Text = "导出(&E)";
-            this.btn_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_Fresh
-            // 
-            this.btn_Fresh.Image = global::LJH.Inventory.UI.Properties.Resources.refresh;
-            this.btn_Fresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_Fresh.Name = "btn_Fresh";
-            this.btn_Fresh.Size = new System.Drawing.Size(58, 46);
-            this.btn_Fresh.Text = "刷新(&F)";
-            this.btn_Fresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btn_SelectColumns
-            // 
-            this.btn_SelectColumns.Image = global::LJH.Inventory.UI.Properties.Resources.columns;
-            this.btn_SelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_SelectColumns.Name = "btn_SelectColumns";
-            this.btn_SelectColumns.Size = new System.Drawing.Size(70, 46);
-            this.btn_SelectColumns.Text = "选择列(&L)";
-            this.btn_SelectColumns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // toolStripSeparator1
             // 
@@ -176,13 +129,10 @@
             // 
             this.categoryTree.ContextMenuStrip = this.CategoryMenu;
             this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryTree.ImageIndex = 0;
-            this.categoryTree.ImageList = this.imageList1;
             this.categoryTree.ItemHeight = 20;
             this.categoryTree.LoadCustomer = false;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
-            this.categoryTree.SelectedImageIndex = 0;
             this.categoryTree.Size = new System.Drawing.Size(194, 294);
             this.categoryTree.TabIndex = 2;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.categoryTree_NodeMouseClick);
@@ -196,48 +146,42 @@
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(125, 114);
+            this.CategoryMenu.Size = new System.Drawing.Size(153, 136);
             // 
             // mnu_FreshTree
             // 
             this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
+            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
             // 
             // mnu_AddCustomer
             // 
             this.mnu_AddCustomer.Name = "mnu_AddCustomer";
-            this.mnu_AddCustomer.Size = new System.Drawing.Size(124, 22);
+            this.mnu_AddCustomer.Size = new System.Drawing.Size(152, 22);
             this.mnu_AddCustomer.Text = "新建客户";
             this.mnu_AddCustomer.Click += new System.EventHandler(this.mnu_AddCustomer_Click);
             // 
             // mnu_AddCategory
             // 
             this.mnu_AddCategory.Name = "mnu_AddCategory";
-            this.mnu_AddCategory.Size = new System.Drawing.Size(124, 22);
+            this.mnu_AddCategory.Size = new System.Drawing.Size(152, 22);
             this.mnu_AddCategory.Text = "增加类别";
             this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
             // 
             // mnu_DeleteCategory
             // 
             this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
-            this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
+            this.mnu_DeleteCategory.Size = new System.Drawing.Size(152, 22);
             this.mnu_DeleteCategory.Text = "删除类别";
             this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
             // 
             // mnu_CategoryProperty
             // 
             this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
-            this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
+            this.mnu_CategoryProperty.Size = new System.Drawing.Size(152, 22);
             this.mnu_CategoryProperty.Text = "属性";
             this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "category.png");
             // 
             // dataGridView1
             // 
@@ -269,40 +213,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(976, 294);
             this.dataGridView1.TabIndex = 111;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.cMnu_Delete,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // cMnu_Delete
-            // 
-            this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Delete.Text = "删除";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Export.Text = "导出...";
             // 
             // colImage
             // 
@@ -394,6 +304,85 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Delete,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // cMnu_Delete
+            // 
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Text = "删除";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.Image = global::LJH.Inventory.UI.Properties.Resources.add;
+            this.btn_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(62, 46);
+            this.btn_Add.Text = "新建(&N)";
+            this.btn_Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
+            this.btn_Delete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(61, 46);
+            this.btn_Delete.Text = "删除(&D)";
+            this.btn_Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btn_Export
+            // 
+            this.btn_Export.Image = global::LJH.Inventory.UI.Properties.Resources.export;
+            this.btn_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Export.Name = "btn_Export";
+            this.btn_Export.Size = new System.Drawing.Size(59, 46);
+            this.btn_Export.Text = "导出(&E)";
+            this.btn_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btn_Fresh
+            // 
+            this.btn_Fresh.Image = global::LJH.Inventory.UI.Properties.Resources.refresh;
+            this.btn_Fresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_Fresh.Name = "btn_Fresh";
+            this.btn_Fresh.Size = new System.Drawing.Size(58, 46);
+            this.btn_Fresh.Text = "刷新(&F)";
+            this.btn_Fresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btn_SelectColumns
+            // 
+            this.btn_SelectColumns.Image = global::LJH.Inventory.UI.Properties.Resources.columns;
+            this.btn_SelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_SelectColumns.Name = "btn_SelectColumns";
+            this.btn_SelectColumns.Size = new System.Drawing.Size(70, 46);
+            this.btn_SelectColumns.Text = "选择列(&L)";
+            this.btn_SelectColumns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
             // FrmCustomerMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -435,7 +424,6 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ImageList imageList1;
         private LJH.Inventory.UI.Controls.CustomerTree categoryTree;
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
         private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;

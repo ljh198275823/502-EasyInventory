@@ -65,7 +65,6 @@ namespace LJH.Inventory.UI.Forms.General
             if (IsAdding)
             {
                 ct = new Department();
-                ct.ID = txtName.Text;
             }
             ct.Name = txtName.Text;
             ct.Parent = ParentCategory != null ? ParentCategory.ID : null;

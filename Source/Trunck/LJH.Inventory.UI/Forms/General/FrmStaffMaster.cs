@@ -1,0 +1,191 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using LJH.Inventory.BLL;
+using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.Inventory.UI.Report;
+using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.UI;
+
+namespace LJH.Inventory.UI.Forms.General
+{
+    public partial class FrmStaffMaster : FrmMasterBase
+    {
+        public FrmStaffMaster()
+        {
+            InitializeComponent();
+        }
+
+        #region 私有变量
+        private List<Staff> _Staffs = null;
+        private List<Operator> _Operators = null;
+        #endregion
+
+        #region 私有方法
+        private void FreshData(TreeNode node)
+        {
+            List<object> items = FilterData();
+            ShowItemsOnGrid(items);
+        }
+
+        private List<object> FilterData()
+        {
+            List<Staff> items = _Staffs;
+            List<Department> pc = null;
+            if (this.departmentTree1.SelectedNode != null && this.departmentTree1.SelectedNode.Tag != null)
+            {
+                pc = departmentTree1.GetDepartmentofNode(this.departmentTree1.SelectedNode);
+                if (pc != null && pc.Count > 0) items = _Staffs.Where(it => pc.Exists(c => c.ID == it.DepartmentID)).ToList();
+            }
+            return (from p in items
+                    orderby p.Name ascending
+                    select (object)p).ToList();
+        }
+        #endregion
+
+        #region 重写基类方法
+        protected override void Init()
+        {
+            base.Init();
+            departmentTree1.Init();
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+        }
+
+        protected override FrmDetailBase GetDetailForm()
+        {
+            FrmStaffDetail frm = new FrmStaffDetail();
+            frm.Department = departmentTree1.SelectedNode != null ? (departmentTree1.SelectedNode.Tag as Department) : null;
+            return frm;
+        }
+
+        protected override bool DeletingItem(object item)
+        {
+            Staff c = item as Staff;
+            StaffBLL bll = new StaffBLL(AppSettings.Current.ConnStr);
+            CommandResult ret = bll.Delete(c);
+            if (ret.Result != ResultCode.Successful)
+            {
+                MessageBox.Show(ret.Message);
+            }
+            else
+            {
+                _Staffs.Remove(c);
+            }
+            return ret.Result == ResultCode.Successful;
+        }
+
+        protected override List<object> GetDataSource()
+        {
+            StaffBLL bll = new StaffBLL(AppSettings.Current.ConnStr);
+            _Staffs = bll.GetItems(SearchCondition).QueryObjects;
+            List<object> records = FilterData();
+            return records;
+        }
+
+        protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
+        {
+            Staff c = item as Staff;
+            row.Tag = c;
+            row.Cells["colImage"].Value = Properties.Resources.customer;
+            row.Cells["colName"].Value = c.Name;
+            Department dept = departmentTree1.GetDepartment(c.DepartmentID);
+            row.Cells["colDepartment"].Value = dept != null ? dept.Name : string.Empty;
+            row.Cells["colCertificate"].Value = c.Certificate;
+            row.Cells["colSex"].Value = c.Sex;
+            row.Cells["colPosition"].Value = c.UserPosition;
+            row.Cells["colHireDate"].Value = c.HireDate != null ? c.HireDate.Value.ToString("yyyy-MM-dd") : string.Empty;
+            if (_Operators != null && _Operators.Count > 0)
+            {
+                Operator opt = _Operators.FirstOrDefault(it => it.StaffID == c.ID);
+                row.Cells["colLogID"].Value = opt != null ? opt.ID : string.Empty;
+                row.Cells["colRole"].Value = opt != null && opt.Role != null ? opt.Role.ID : string.Empty;
+            }
+            row.Cells["colMemo"].Value = c.Memo;
+            if (_Staffs == null || !_Staffs.Exists(it => it.ID == c.ID))
+            {
+                if (_Staffs == null) _Staffs = new List<Staff>();
+                _Staffs.Add(c);
+            }
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            _Operators = new OperatorBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
+        }
+        #endregion
+
+        #region 类别树右键菜单
+        private void departmentTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            FreshData(e.Node);
+        }
+
+        private void mnu_FreshTree_Click(object sender, EventArgs e)
+        {
+            departmentTree1.Init();
+            FreshData(departmentTree1.Nodes[0]);
+        }
+
+        private void mnu_AddDepartment_Click(object sender, EventArgs e)
+        {
+            Department pc = departmentTree1.SelectedNode.Tag as Department;
+            FrmDepartmentDetail frm = new FrmDepartmentDetail();
+            frm.IsAdding = true;
+            frm.ParentCategory = pc;
+            frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+            {
+                Department item = args.AddedItem as Department;
+                departmentTree1.AddDepartmentNode(item, departmentTree1.SelectedNode);
+            };
+            frm.ShowDialog();
+        }
+
+        private void mnu_DeleteDepartment_Click(object sender, EventArgs e)
+        {
+            Department pc = departmentTree1.SelectedNode.Tag as Department;
+            if (pc != null && MessageBox.Show("是否删除此部门及其子部门?", "询问", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+            {
+                CommandResult ret = (new DepartmentBLL(AppSettings.Current.ConnStr)).Delete(pc);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    departmentTree1.SelectedNode.Parent.Nodes.Remove(departmentTree1.SelectedNode);
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
+        }
+
+        private void mnu_DepartmentProperty_Click(object sender, EventArgs e)
+        {
+            Department pc = departmentTree1.SelectedNode.Tag as Department;
+            FrmDepartmentDetail frm = new FrmDepartmentDetail();
+            frm.IsAdding = false;
+            frm.UpdatingItem = pc;
+            frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+            {
+                departmentTree1.SelectedNode.Text = string.Format("{0}", pc.Name);
+            };
+            frm.ShowDialog();
+        }
+
+        private void mnu_AddStaff_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
+        }
+        #endregion
+    }
+}

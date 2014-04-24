@@ -335,6 +335,12 @@
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(50)" UpdateCheck="Never"/>
     </Type>
   </Table>
+  <Table Name="StaffPhoto" Member="LJH.Inventory.BusinessModel.StaffPhoto">
+    <Type Name="LJH.Inventory.BusinessModel.StaffPhoto">
+      <Column Name="ID" Member="ID"  DbType="int NOT NULL" IsPrimaryKey="true"/>
+      <Column Name="Photo" Member="_Photo"  DbType="image not null" UpdateCheck="Never"/>
+    </Type>
+  </Table>
   <Table Name="dbo.Operator" Member="LJH.Inventory.BusinessModel.Operator">
     <Type Name="LJH.Inventory.BusinessModel.Operator">
       <Column Name="ID" Member="ID" DbType="nVarChar(50) NOT NULL" CanBeNull="false" IsPrimaryKey="true" />

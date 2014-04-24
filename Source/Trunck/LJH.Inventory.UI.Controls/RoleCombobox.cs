@@ -27,7 +27,9 @@ namespace LJH.Inventory.UI.Controls
         public void Init()
         {
             RoleBLL bll = new RoleBLL(AppSettings.Current.ConnStr);
-            this.DataSource = bll.GetItems(null).QueryObjects;
+            List<Role> roles = bll.GetItems(null).QueryObjects;
+            if (roles != null) roles.Insert(0, new Role());
+            this.DataSource = roles;
             this.DisplayMember = "ID";
             this.DropDownStyle = ComboBoxStyle.DropDownList;
         }
@@ -39,7 +41,7 @@ namespace LJH.Inventory.UI.Controls
         {
             get
             {
-                if (this.SelectedIndex == -1)
+                if (this.SelectedIndex <= 0)
                 {
                     return null;
                 }
@@ -50,7 +52,7 @@ namespace LJH.Inventory.UI.Controls
             }
             set
             {
-                for (int i=0 ;i<this.Items.Count ;i++)
+                for (int i = 1; i < this.Items.Count; i++)
                 {
                     Role info = (Role)this.Items[i];
                     if (info.ID == value.ID)
@@ -69,7 +71,7 @@ namespace LJH.Inventory.UI.Controls
         {
             get
             {
-                if (this.SelectedIndex == -1)
+                if (this.SelectedIndex <= 0)
                 {
                     return string.Empty;
                 }
@@ -81,7 +83,7 @@ namespace LJH.Inventory.UI.Controls
             }
             set
             {
-                for (int i = 0; i < this.Items.Count; i++)
+                for (int i = 1; i < this.Items.Count; i++)
                 {
                     Role info = (Role)this.Items[i];
                     if (info.ID == value)
@@ -92,7 +94,5 @@ namespace LJH.Inventory.UI.Controls
                 }
             }
         }
-
-
     }
 }

@@ -24,6 +24,11 @@ namespace LJH.Inventory.BusinessModel
             get { return currentOperator; }
             set { currentOperator = value; }
         }
+
+        /// <summary>
+        /// 系统默认登录ID
+        /// </summary>
+        public static string DefaultLogID = "admin";
         #endregion
 
         #region 构造函数

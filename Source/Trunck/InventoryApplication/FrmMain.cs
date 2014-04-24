@@ -103,7 +103,6 @@ namespace InventoryApplication
             // this.mnu_DaiFu.Enabled = cur.Permit(Permission.ReadDaiFuRecord) || cur.Permit(Permission.EditCustomerDaiFu);
             this.mnu_Expanditure.Enabled = opt.Permit(Permission.ReadExpenditureRecord) || opt.Permit(Permission.EditExpenditureRecord);
 
-            this.mnu_Operator.Enabled = opt.Permit(Permission.ReadOperaotor) || opt.Permit(Permission.EditOperator);
             this.mnu_Role.Enabled = opt.Permit(Permission.ReadRole) || opt.Permit(Permission.EditRole);
 
             this.mnu_DeliveryRecordReport.Enabled = opt.Permit(Permission.DeliveryRecordReport);
@@ -468,7 +467,7 @@ namespace InventoryApplication
 
         private void mnu_Staff_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmDepartmentMaster>();
+            ShowSingleForm<FrmStaffMaster>();
         }
     }
 }

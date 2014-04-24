@@ -148,12 +148,12 @@ namespace LJH.Inventory.UI.Controls
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public List<Operator> GetStaffofNode(TreeNode node)
+        public List<Staff> GetStaffofNode(TreeNode node)
         {
-            List<Operator> items = new List<Operator>();
+            List<Staff> items = new List<Staff>();
             if (node.Tag is Operator)
             {
-                items.Add(node.Tag as Operator);
+                items.Add(node.Tag as Staff);
             }
             else if (node.Nodes.Count > 0)
             {
@@ -169,7 +169,7 @@ namespace LJH.Inventory.UI.Controls
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public List<Department> GetCategoryofNode(TreeNode node)
+        public List<Department> GetDepartmentofNode(TreeNode node)
         {
             List<Department> items = new List<Department>();
             if (node.Tag is Department)
@@ -180,7 +180,7 @@ namespace LJH.Inventory.UI.Controls
             {
                 foreach (TreeNode child in node.Nodes)
                 {
-                    items.AddRange(GetCategoryofNode(child));
+                    items.AddRange(GetDepartmentofNode(child));
                 }
             }
             return items;
@@ -195,6 +195,23 @@ namespace LJH.Inventory.UI.Controls
             if (_AllStaff != null && _AllStaff.Count > 0)
             {
                 return _AllStaff[id] as Staff;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 通过部门ID获取部门信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Department GetDepartment(string id)
+        {
+            if (_AllDeptNodes != null && _AllDeptNodes.Count > 0)
+            {
+                foreach (TreeNode node in _AllDeptNodes)
+                {
+                    Department dept = node.Tag as Department;
+                    if (dept != null && dept.ID == id) return dept;
+                }
             }
             return null;
         }

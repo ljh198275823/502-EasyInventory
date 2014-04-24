@@ -154,6 +154,7 @@
     <Compile Include="SheetOperation.cs" />
     <Compile Include="SheetState.cs" />
     <Compile Include="Staff.cs" />
+    <Compile Include="StaffPhoto.cs" />
     <Compile Include="SupplierReceivable.cs" />
     <Compile Include="SupplierType.cs" />
     <Compile Include="SysparameterInfo.cs" />
