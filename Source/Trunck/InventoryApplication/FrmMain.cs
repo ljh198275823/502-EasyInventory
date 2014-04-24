@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Report;
 using LJH.Inventory.BusinessModel;
+using LJH.GeneralLibrary.Core.UI;
 using LJH.GeneralLibrary.SoftDog;
 using LJH.Inventory.UI.Forms;
 using LJH.GeneralLibrary.SQLHelper;
@@ -17,7 +18,7 @@ using LJH.Inventory.UI.Forms.Sale;
 
 namespace InventoryApplication
 {
-    public partial class FrmMain : Form
+    public partial class FrmMain : Form, LJH.GeneralLibrary .Core.UI .IOperatorRender
     {
         public FrmMain()
         {
@@ -72,6 +73,16 @@ namespace InventoryApplication
             if (ret == DialogResult.OK)
             {
                 ShowOperatorRights();
+                if (_openedForms != null && _openedForms.Count > 0)
+                {
+                    foreach (Form frm in _openedForms)
+                    {
+                        if (frm is IOperatorRender)
+                        {
+                            (frm as IOperatorRender).ShowOperatorRights();
+                        }
+                    }
+                }
                 this.lblOperator.Text = Operator.Current.Name;
             }
             else
@@ -80,22 +91,22 @@ namespace InventoryApplication
             }
         }
 
-        private void ShowOperatorRights()
+        public void ShowOperatorRights()
         {
-            Operator cur = Operator.Current;
-            this.mnu_Product.Enabled = cur.Permit(Permission.ReadProduct) || cur.Permit(Permission.EditProduct);
-            this.mnu_Customer.Enabled = cur.Permit(Permission.ReadCustomer) || cur.Permit(Permission.EditCustomer);
-            this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.ReadDeliverySheet) || cur.Permit(Permission.EditDeliverySheet);
-            this.mnu_Options.Enabled = cur.Permit(Permission.ReadSystemOptions) || cur.Permit(Permission.EditSystemOptions);
-            this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.ReadCustomerPayment) || cur.Permit(Permission.EditCustomerPayment);
+            Operator opt = Operator.Current;
+            this.mnu_Product.Enabled = opt.Permit(Permission.ReadProduct) || opt.Permit(Permission.EditProduct);
+            this.mnu_Customer.Enabled = opt.Permit(Permission.ReadCustomer) || opt.Permit(Permission.EditCustomer);
+            this.mnu_DeliverySheet.Enabled = opt.Permit(Permission.ReadDeliverySheet) || opt.Permit(Permission.EditDeliverySheet);
+            this.mnu_Options.Enabled = opt.Permit(Permission.ReadSystemOptions) || opt.Permit(Permission.EditSystemOptions);
+            this.mnu_CustomerPayment.Enabled = opt.Permit(Permission.ReadCustomerPayment) || opt.Permit(Permission.EditCustomerPayment);
             // this.mnu_DaiFu.Enabled = cur.Permit(Permission.ReadDaiFuRecord) || cur.Permit(Permission.EditCustomerDaiFu);
-            this.mnu_Expanditure.Enabled = cur.Permit(Permission.ReadExpenditureRecord) || cur.Permit(Permission.EditExpenditureRecord);
+            this.mnu_Expanditure.Enabled = opt.Permit(Permission.ReadExpenditureRecord) || opt.Permit(Permission.EditExpenditureRecord);
 
-            this.mnu_Operator.Enabled = cur.Permit(Permission.ReadOperaotor) || cur.Permit(Permission.EditOperator);
-            this.mnu_Role.Enabled = cur.Permit(Permission.ReadRole) || cur.Permit(Permission.EditRole);
+            this.mnu_Operator.Enabled = opt.Permit(Permission.ReadOperaotor) || opt.Permit(Permission.EditOperator);
+            this.mnu_Role.Enabled = opt.Permit(Permission.ReadRole) || opt.Permit(Permission.EditRole);
 
-            this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport);
-            this.mnu_InventoryRecord.Enabled = cur.Permit(Permission._InventoryRecordReport);
+            this.mnu_DeliveryRecordReport.Enabled = opt.Permit(Permission.DeliveryRecordReport);
+            this.mnu_InventoryRecord.Enabled = opt.Permit(Permission._InventoryRecordReport);
         }
         #endregion
 
@@ -432,7 +443,7 @@ namespace InventoryApplication
             }
             else
             {
-                
+
             }
         }
 

@@ -67,6 +67,11 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             ShowButtonState();
         }
+
+        protected virtual void ShowButtonState()
+        {
+
+        }
         #endregion
 
         #region 与操作记录有关的方法
