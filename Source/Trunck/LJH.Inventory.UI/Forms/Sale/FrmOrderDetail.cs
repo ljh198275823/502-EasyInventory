@@ -76,6 +76,31 @@ namespace LJH.Inventory.UI.Forms
             }
             return sum.Trim();
         }
+
+        private void ShowOrderItemState()
+        {
+            if (UpdatingItem != null)
+            {
+                List<string> sheets = new List<string>();
+                sheets.Add((UpdatingItem as Order).ID);
+                OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
+                con.SheetNo = sheets;
+                List<OrderItemRecord> states = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
+                if (states != null && states.Count > 0)
+                {
+                    foreach (DataGridViewRow row in ItemsGrid.Rows)
+                    {
+                        OrderItem oi = row.Tag as OrderItem;
+                        if (oi != null)
+                        {
+                            OrderItemRecord st = states.SingleOrDefault(item => item.ID == oi.ID);
+                            row.Cells["colShipped"].Value = st != null ? st.Shipped.Trim().ToString() : null;
+                            row.Cells["colOnway"].Value = st != null ? st.OnWay.Trim().ToString() : null;
+                        }
+                    }
+                }
+            }
+        }
         #endregion
 
         #region 公共属性
@@ -403,7 +428,6 @@ namespace LJH.Inventory.UI.Forms
                 }
             }
         }
-        #endregion
 
         private void chkShowState_CheckedChanged(object sender, EventArgs e)
         {
@@ -411,30 +435,6 @@ namespace LJH.Inventory.UI.Forms
             ItemsGrid.Columns["colOnway"].Visible = chkShowState.Checked;
             if (chkShowState.Checked) ShowOrderItemState();
         }
-
-        private void ShowOrderItemState()
-        {
-            if (UpdatingItem != null)
-            {
-                List<string> sheets = new List<string>();
-                sheets.Add((UpdatingItem as Order).ID);
-                OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
-                con.SheetNo = sheets;
-                List<OrderItemRecord> states = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
-                if (states != null && states.Count > 0)
-                {
-                    foreach (DataGridViewRow row in ItemsGrid.Rows)
-                    {
-                        OrderItem oi = row.Tag as OrderItem;
-                        if (oi != null)
-                        {
-                            OrderItemRecord st = states.SingleOrDefault(item => item.ID == oi.ID);
-                            row.Cells["colShipped"].Value = st != null ? st.Shipped.ToString() : null;
-                            row.Cells["colOnway"].Value = st != null ? st.OnWay.ToString() : null;
-                        }
-                    }
-                }
-            }
-        }
+        #endregion
     }
 }

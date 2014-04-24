@@ -399,6 +399,11 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmDetailBase.ShowOperatorRights">
+            <summary>
+            显示操作的权限
+            </summary>
+        </member>
         <member name="P:LJH.GeneralLibrary.Core.UI.FrmDetailBase.IsAdding">
             <summary>
             获取或设置是否是用于增加
@@ -1331,6 +1336,11 @@
             </summary>
             <param name="item"></param>
             <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmMasterBase.ShowOperatorRights">
+            <summary>
+            显示操作的权限
+            </summary>
         </member>
         <member name="F:LJH.GeneralLibrary.Core.UI.FrmMasterBase.components">
             <summary>
