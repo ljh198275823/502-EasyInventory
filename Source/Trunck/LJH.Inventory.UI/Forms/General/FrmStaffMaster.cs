@@ -124,6 +124,53 @@ namespace LJH.Inventory.UI.Forms.General
             base.ShowItemsOnGrid(items);
             Filter(txtKeyword.Text.Trim());
         }
+
+        protected override void PerformAddData()
+        {
+            try
+            {
+                FrmDetailBase detailForm = GetDetailForm();
+                if (detailForm != null)
+                {
+                    detailForm.IsAdding = true;
+                    DataGridViewRow row = null;
+                    detailForm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+                    {
+                        _Operators = new OperatorBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+                        row = Add_And_Show_Row(args.AddedItem);
+                    };
+                    detailForm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        protected override void PerformUpdateData()
+        {
+            if (this.GridView != null && this.GridView.SelectedRows != null && this.GridView.SelectedRows.Count > 0)
+            {
+                object pre = this.GridView.SelectedRows[0].Tag;
+                if (pre != null)
+                {
+                    FrmDetailBase detailForm = GetDetailForm();
+                    if (detailForm != null)
+                    {
+                        detailForm.IsAdding = false;
+                        detailForm.UpdatingItem = pre;
+
+                        detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+                        {
+                            _Operators = new OperatorBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+                            ShowItemInGridViewRow(this.GridView.SelectedRows[0], args.UpdatedItem);
+                        };
+                        detailForm.ShowDialog();
+                    }
+                }
+            }
+        }
         #endregion
 
         #region 类别树右键菜单

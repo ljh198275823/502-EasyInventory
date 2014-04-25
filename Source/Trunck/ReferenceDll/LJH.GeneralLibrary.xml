@@ -1225,6 +1225,13 @@
             <param name="items">要显示的数据</param>
             <param name="reload">是否重新加载数据，如果为真，则表示先会清空之前的数据，否则保留旧有数据</param>
         </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmMasterBase.Add_And_Show_Row(System.Object)">
+            <summary>
+            增加并显示一行
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
         <member name="M:LJH.GeneralLibrary.Core.UI.FrmMasterBase.ShowRowBackColor">
             <summary>
             显示数据行的颜色
