@@ -44,6 +44,11 @@ namespace LJH.Inventory.UI.Forms
             return true;
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+        }
+
         protected override void ItemShowing()
         {
             CurrencyType ct = UpdatingItem as CurrencyType;

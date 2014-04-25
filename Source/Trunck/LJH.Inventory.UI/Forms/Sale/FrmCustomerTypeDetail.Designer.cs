@@ -82,13 +82,14 @@
             // 
             // txtParentCategory
             // 
-            this.txtParentCategory.Enabled = false;
             this.txtParentCategory.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtParentCategory.Location = new System.Drawing.Point(54, 48);
             this.txtParentCategory.MaxLength = 100;
             this.txtParentCategory.Name = "txtParentCategory";
+            this.txtParentCategory.ReadOnly = true;
             this.txtParentCategory.Size = new System.Drawing.Size(319, 21);
             this.txtParentCategory.TabIndex = 38;
+            this.txtParentCategory.DoubleClick += new System.EventHandler(this.txtParentCategory_DoubleClick);
             // 
             // lnkParentCategory
             // 
@@ -106,6 +107,7 @@
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(385, 185);
             this.Controls.Add(this.txtParentCategory);

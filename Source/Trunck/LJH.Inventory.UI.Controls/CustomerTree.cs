@@ -116,33 +116,35 @@ namespace LJH.Inventory.UI.Controls
             this.ExpandAll();
         }
         /// <summary>
-        /// 增加客户类别
+        /// 增加客户类别节点
         /// </summary>
         /// <param name="pc"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public TreeNode AddCustomerTypeNode(CustomerType pc, TreeNode parent)
+        public TreeNode AddCustomerTypeNode(CustomerType pc, TreeNode parent, bool expand = false)
         {
             TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
             node.Tag = pc;
-            node.SelectedImageIndex = 0;
             node.ImageIndex = 0;
+            node.SelectedImageIndex = 1;
             _AllTypeNodes.Add(node);
+            if (expand) parent.Expand();
             return node;
         }
         /// <summary>
-        /// 增加客户
+        /// 增加客户节点
         /// </summary>
         /// <param name="c"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public TreeNode AddCustomerNode(CompanyInfo c, TreeNode parent)
+        public TreeNode AddCustomerNode(CompanyInfo c, TreeNode parent,bool expand=false)
         {
             TreeNode node = parent.Nodes.Add(string.Format("[{0}]{1}", c.ID, c.Name));
             node.Tag = c;
             node.SelectedImageIndex = 1;
             node.ImageIndex = 1;
             _AllCustomerNodes.Add(node);
+            if (expand) parent.Expand();
             return node;
         }
         /// <summary>

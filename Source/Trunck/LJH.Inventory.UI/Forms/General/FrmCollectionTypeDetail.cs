@@ -52,6 +52,13 @@ namespace LJH.Inventory.UI.Forms
             return ct;
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            Operator opt = Operator.Current;
+            btnOk.Enabled = opt.Permit(Permission.EditCollectionType);
+        }
+
         protected override CommandResult AddItem(object addingItem)
         {
             return (new CollectionTypeBLL(AppSettings.Current.ConnStr)).Add(addingItem as CollectionType);

@@ -191,6 +191,16 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Description = "查看价格")]
         ReadPrice = 36,
+        /// <summary>
+        /// 查看收汇方式
+        /// </summary>
+        [OperatorRight(Catalog = "数据管理", Description = "查看收汇方式")]
+        ReadCollectionType = 37,
+        /// <summary>
+        /// 编辑收汇方式
+        /// </summary>
+        [OperatorRight(Catalog = "数据管理", Description = "编辑收汇方式")]
+        EditCollectionType = 38,
         #endregion
 
         #region 安全

@@ -91,8 +91,14 @@ namespace LJH.Inventory.UI.Forms
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 ParentCategory = frm.SelectedItem as CustomerType;
-                this.txtParentCategory.Text = ParentCategory.Name;
+                this.txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
             }
+        }
+
+        private void txtParentCategory_DoubleClick(object sender, EventArgs e)
+        {
+            ParentCategory = null;
+            this.txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
         }
     }
 }

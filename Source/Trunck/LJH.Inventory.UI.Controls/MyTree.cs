@@ -16,6 +16,9 @@ namespace LJH.Inventory.UI.Controls
         public MyTree()
         {
             InitializeComponent();
+            this.HideSelection = false;
+            this.DrawMode = TreeViewDrawMode.OwnerDrawText;
+            this.DrawNode += new DrawTreeNodeEventHandler(MyTree_DrawNode);
             this.AfterCheck += MyTree_AfterCheck;
         }
 
@@ -23,11 +26,29 @@ namespace LJH.Inventory.UI.Controls
         {
             container.Add(this);
             InitializeComponent();
+            this.HideSelection = false;
             this.AfterCheck += MyTree_AfterCheck;
         }
         #endregion
 
         #region 私有方法
+        void MyTree_DrawNode(object sender, DrawTreeNodeEventArgs e)
+        {
+            Brush pen = Brushes.Black;
+            if ((e.State & TreeNodeStates.Selected) != 0)
+            {
+                //演示为蓝底白字
+                e.Graphics.FillRectangle(Brushes.Blue, e.Node.Bounds);
+                pen = Brushes.White;
+            }
+            Font nodeFont = e.Node.NodeFont;
+            if (nodeFont == null) nodeFont = ((TreeView)sender).Font;
+            int topPadding = (int)Math.Abs((e.Node.Bounds.Height - nodeFont.GetHeight()) / 2);
+            Console.WriteLine("{0} {1} {2}", nodeFont.GetHeight(), topPadding, e.Bounds.Height);
+            Rectangle r = new Rectangle(e.Bounds.X, e.Bounds.Y + topPadding, e.Bounds.Width + 5, e.Bounds.Height - topPadding * 2);
+            e.Graphics.DrawString(e.Node.Text, nodeFont, pen, r);
+        }
+
         private void MyTree_AfterCheck(object sender, TreeViewEventArgs e)
         {
             this.AfterCheck -= MyTree_AfterCheck;
@@ -70,14 +91,7 @@ namespace LJH.Inventory.UI.Controls
         {
             if (!object.ReferenceEquals(this.SelectedNode, e.Node))
             {
-                if (this.SelectedNode != null)
-                {
-                    this.SelectedNode.BackColor = Color.White;
-                    this.SelectedNode.ForeColor = Color.Black;
-                }
                 this.SelectedNode = e.Node;
-                this.SelectedNode.BackColor = Color.Blue;  //Color.FromArgb(128, 128, 255);
-                this.SelectedNode.ForeColor = Color.White;
             }
             base.OnNodeMouseClick(e);
         }

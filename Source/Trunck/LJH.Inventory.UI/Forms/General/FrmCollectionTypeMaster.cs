@@ -12,11 +12,11 @@ using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
-{ 
-    public partial class FrmCollectionTypeMaster :FrmMasterBase 
-    {                                                                                                                                     
+{
+    public partial class FrmCollectionTypeMaster : FrmMasterBase
+    {
         public FrmCollectionTypeMaster()
-        {                                                                                                                           
+        {
             InitializeComponent();
         }
 
@@ -38,7 +38,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            CollectionType ct=item as CollectionType ;
+            CollectionType ct = item as CollectionType;
             row.Cells["colName"].Value = ct.Name;
             row.Cells["colMemo"].Value = ct.Memo;
         }
@@ -51,6 +51,18 @@ namespace LJH.Inventory.UI.Forms
                 MessageBox.Show(ret.Message);
             }
             return ret.Result == ResultCode.Successful;
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            Operator opt = Operator.Current;
+            btn_Add.Enabled = opt.Permit(Permission.EditCollectionType);
+            btn_Delete.Enabled = opt.Permit(Permission.EditCollectionType);
+            btn_Export.Enabled = opt.Permit(Permission.ReadCollectionType);
+            cMnu_Add.Enabled = opt.Permit(Permission.EditCollectionType);
+            cMnu_Delete.Enabled = opt.Permit(Permission.EditCollectionType);
+            cMnu_Export.Enabled = opt.Permit(Permission.ReadCollectionType);
         }
         #endregion
     }

@@ -144,7 +144,11 @@ namespace LJH.Inventory.UI.Forms
             frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
                 CustomerType item = args.AddedItem as CustomerType;
-                categoryTree.AddCustomerTypeNode(item, categoryTree.SelectedNode);
+                TreeNode node = categoryTree.AddCustomerTypeNode(item, categoryTree.SelectedNode, true);
+                if (node != null && node.Parent != null)
+                {
+                    node.Parent.Expand();
+                }
             };
             frm.ShowDialog();
         }
