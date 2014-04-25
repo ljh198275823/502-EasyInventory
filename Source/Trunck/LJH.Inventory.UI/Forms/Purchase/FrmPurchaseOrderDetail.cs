@@ -11,6 +11,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.General;
 
 namespace LJH.Inventory.UI.Forms
 {
@@ -419,11 +420,11 @@ namespace LJH.Inventory.UI.Forms
 
         private void lnkBuyer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmOperatorMaster frm = new FrmOperatorMaster();
+            FrmStaffMaster frm = new FrmStaffMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Operator item = frm.SelectedItem as Operator;
+                Staff item = frm.SelectedItem as Staff;
                 txtBuyer.Text = item.Name;
             }
         }

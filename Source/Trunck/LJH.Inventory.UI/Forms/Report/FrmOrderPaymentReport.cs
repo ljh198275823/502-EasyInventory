@@ -87,11 +87,11 @@ namespace LJH.Inventory.UI.Report
 
         private void lnkSalesPerson_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmOperatorMaster frm = new FrmOperatorMaster();
+            Forms.General.FrmStaffMaster frm = new Forms.General.FrmStaffMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Operator item = frm.SelectedItem as Operator;
+                Staff item = frm.SelectedItem as Staff;
                 txtSalesPerson.Text = item.Name;
                 txtSalesPerson.Tag = item;
             }
