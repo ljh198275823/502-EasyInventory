@@ -80,6 +80,30 @@ namespace LJH.Inventory.UI.Forms
             return sum.Trim();
         }
 
+        private void ShowOrderItemState()
+        {
+            if (UpdatingItem != null)
+            {
+                List<string> sheets = new List<string>();
+                sheets.Add((UpdatingItem as PurchaseOrder).ID);
+                PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
+                con.SheetNo = sheets;
+                List<PurchaseItemRecord> states = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
+                if (states != null && states.Count > 0)
+                {
+                    foreach (DataGridViewRow row in ItemsGrid.Rows)
+                    {
+                        PurchaseItem oi = row.Tag as PurchaseItem;
+                        if (oi != null)
+                        {
+                            PurchaseItemRecord st = states.SingleOrDefault(item => item.ID == oi.ID);
+                            row.Cells["colReceived"].Value = st != null ? st.Received.Trim().ToString() : null;
+                            //row.Cells["colOnway"].Value = st != null ? st.OnWay.Trim().ToString() : null;
+                        }
+                    }
+                }
+            }
+        }
         #endregion
 
         #region 公共方法
@@ -434,6 +458,13 @@ namespace LJH.Inventory.UI.Forms
             }
         }
         #endregion
+
+        private void chkShowState_CheckedChanged(object sender, EventArgs e)
+        {
+            ItemsGrid.Columns["colReceived"].Visible = chkShowState.Checked;
+            //ItemsGrid.Columns["colOnway"].Visible = chkShowState.Checked;
+            if (chkShowState.Checked) ShowOrderItemState();
+        }
     }
 }
 

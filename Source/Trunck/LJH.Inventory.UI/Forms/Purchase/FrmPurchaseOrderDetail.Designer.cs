@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chkShowState = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdWithoutTax = new System.Windows.Forms.RadioButton();
             this.rdWithTax = new System.Windows.Forms.RadioButton();
@@ -84,6 +85,7 @@
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReceived = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
@@ -123,6 +125,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chkShowState);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.lnkBuyer);
             this.tabPage1.Controls.Add(this.txtSupplier);
@@ -142,6 +145,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chkShowState
+            // 
+            this.chkShowState.AutoSize = true;
+            this.chkShowState.Location = new System.Drawing.Point(630, 49);
+            this.chkShowState.Name = "chkShowState";
+            this.chkShowState.Size = new System.Drawing.Size(120, 16);
+            this.chkShowState.TabIndex = 124;
+            this.chkShowState.Text = "显示订单收货情况";
+            this.chkShowState.UseVisualStyleBackColor = true;
+            this.chkShowState.CheckedChanged += new System.EventHandler(this.chkShowState_CheckedChanged);
             // 
             // panel1
             // 
@@ -248,6 +262,7 @@
             this.colPrice,
             this.colCount,
             this.colTotal,
+            this.colReceived,
             this.colOrderID,
             this.colMemo});
             this.ItemsGrid.ContextMenuStrip = this.contextMenuStrip1;
@@ -623,6 +638,13 @@
             this.colTotal.ReadOnly = true;
             this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // colReceived
+            // 
+            this.colReceived.HeaderText = "已收货";
+            this.colReceived.Name = "colReceived";
+            this.colReceived.ReadOnly = true;
+            this.colReceived.Visible = false;
+            // 
             // colOrderID
             // 
             this.colOrderID.HeaderText = "销售订单";
@@ -633,10 +655,11 @@
             // 
             // colMemo
             // 
-            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colMemo.HeaderText = "备注";
+            this.colMemo.MinimumWidth = 150;
             this.colMemo.Name = "colMemo";
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colMemo.Width = 161;
             // 
             // FrmPurchaseOrderDetail
             // 
@@ -715,6 +738,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
         private System.Windows.Forms.ToolStripButton btnUndoApprove;
         private System.Windows.Forms.ToolStripButton btnNullify;
+        private System.Windows.Forms.CheckBox chkShowState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
@@ -724,6 +748,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReceived;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
