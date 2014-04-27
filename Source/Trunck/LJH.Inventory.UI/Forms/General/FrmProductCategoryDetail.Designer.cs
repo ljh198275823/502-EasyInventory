@@ -136,13 +136,14 @@
             // 
             // txtParentCategory
             // 
-            this.txtParentCategory.Enabled = false;
             this.txtParentCategory.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtParentCategory.Location = new System.Drawing.Point(9, 161);
             this.txtParentCategory.MaxLength = 100;
             this.txtParentCategory.Name = "txtParentCategory";
+            this.txtParentCategory.ReadOnly = true;
             this.txtParentCategory.Size = new System.Drawing.Size(248, 21);
             this.txtParentCategory.TabIndex = 11;
+            this.txtParentCategory.DoubleClick += new System.EventHandler(this.txtParentCategory_DoubleClick);
             // 
             // FrmProductCategoryDetail
             // 

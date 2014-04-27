@@ -54,8 +54,10 @@
             this.txtProductID.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtProductID.Location = new System.Drawing.Point(79, 38);
             this.txtProductID.Name = "txtProductID";
+            this.txtProductID.ReadOnly = true;
             this.txtProductID.Size = new System.Drawing.Size(184, 21);
             this.txtProductID.TabIndex = 1;
+            this.txtProductID.DoubleClick += new System.EventHandler(this.txtProductID_DoubleClick);
             // 
             // label4
             // 
@@ -174,8 +176,10 @@
             this.txtWareHouseID.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtWareHouseID.Location = new System.Drawing.Point(79, 11);
             this.txtWareHouseID.Name = "txtWareHouseID";
+            this.txtWareHouseID.ReadOnly = true;
             this.txtWareHouseID.Size = new System.Drawing.Size(184, 21);
             this.txtWareHouseID.TabIndex = 15;
+            this.txtWareHouseID.DoubleClick += new System.EventHandler(this.txtWareHouseID_DoubleClick);
             // 
             // FrmProductInventoryDetail
             // 

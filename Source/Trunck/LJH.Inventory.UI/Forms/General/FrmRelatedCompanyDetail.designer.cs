@@ -224,8 +224,10 @@
             this.txtCategory.Location = new System.Drawing.Point(70, 40);
             this.txtCategory.MaxLength = 100;
             this.txtCategory.Name = "txtCategory";
+            this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(143, 21);
             this.txtCategory.TabIndex = 1;
+            this.txtCategory.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
             // 
             // GridView
             // 
@@ -335,7 +337,7 @@
             this.lblCategory.Text = "客户类别";
             this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
             // 
-            // FrmCustomerDetail
+            // FrmRelatedCompanyDetail
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -361,7 +363,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.label1);
-            this.Name = "FrmCustomerDetail";
+            this.Name = "FrmRelatedCompanyDetail";
             this.Text = "客户资料";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);

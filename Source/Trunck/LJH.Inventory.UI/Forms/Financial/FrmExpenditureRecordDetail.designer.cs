@@ -31,10 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCheckNum = new System.Windows.Forms.TextBox();
-            this.txtPayee = new System.Windows.Forms.TextBox();
             this.txtRequest = new System.Windows.Forms.TextBox();
             this.lnkRequest = new System.Windows.Forms.LinkLabel();
             this.txtCategory = new System.Windows.Forms.TextBox();
@@ -107,10 +105,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txtCheckNum);
-            this.tabPage1.Controls.Add(this.txtPayee);
             this.tabPage1.Controls.Add(this.txtRequest);
             this.tabPage1.Controls.Add(this.lnkRequest);
             this.tabPage1.Controls.Add(this.txtCategory);
@@ -135,15 +131,6 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(253, 107);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 102;
-            this.label4.Text = "受款单位";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -160,19 +147,14 @@
             this.txtCheckNum.Size = new System.Drawing.Size(159, 21);
             this.txtCheckNum.TabIndex = 100;
             // 
-            // txtPayee
-            // 
-            this.txtPayee.Location = new System.Drawing.Point(313, 103);
-            this.txtPayee.Name = "txtPayee";
-            this.txtPayee.Size = new System.Drawing.Size(159, 21);
-            this.txtPayee.TabIndex = 98;
-            // 
             // txtRequest
             // 
             this.txtRequest.Location = new System.Drawing.Point(73, 103);
             this.txtRequest.Name = "txtRequest";
+            this.txtRequest.ReadOnly = true;
             this.txtRequest.Size = new System.Drawing.Size(159, 21);
             this.txtRequest.TabIndex = 96;
+            this.txtRequest.DoubleClick += new System.EventHandler(this.txtRequest_DoubleClick);
             // 
             // lnkRequest
             // 
@@ -189,8 +171,10 @@
             // 
             this.txtCategory.Location = new System.Drawing.Point(73, 42);
             this.txtCategory.Name = "txtCategory";
+            this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(159, 21);
             this.txtCategory.TabIndex = 93;
+            this.txtCategory.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
             // 
             // lnkCategory
             // 
@@ -589,10 +573,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
         private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCheckNum;
-        private System.Windows.Forms.TextBox txtPayee;
         private System.Windows.Forms.TextBox txtRequest;
         private System.Windows.Forms.LinkLabel lnkRequest;
         private System.Windows.Forms.TextBox txtCategory;

@@ -94,7 +94,7 @@ namespace LJH.Inventory.UI.Forms.General
 
         public override void ShowOperatorRights()
         {
-            
+
         }
 
         protected override void ItemShowing()
@@ -239,6 +239,12 @@ namespace LJH.Inventory.UI.Forms.General
                 Department = frm.SelectedItem as Department;
                 txtDepartment.Text = Department != null ? Department.Name : string.Empty;
             }
+        }
+
+        private void txtDepartment_DoubleClick(object sender, EventArgs e)
+        {
+            Department = null;
+            txtDepartment.Text = Department != null ? Department.Name : string.Empty;
         }
         #endregion
     }

@@ -418,6 +418,12 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
+        {
+            Supplier = null;
+            txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
+        }
+
         private void lnkBuyer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmStaffMaster frm = new FrmStaffMaster();
@@ -427,6 +433,18 @@ namespace LJH.Inventory.UI.Forms
                 Staff item = frm.SelectedItem as Staff;
                 txtBuyer.Text = item.Name;
             }
+        }
+
+        private void txtBuyer_DoubleClick(object sender, EventArgs e)
+        {
+            txtBuyer.Text = string.Empty;
+        }
+
+        private void chkShowState_CheckedChanged(object sender, EventArgs e)
+        {
+            ItemsGrid.Columns["colReceived"].Visible = chkShowState.Checked;
+            //ItemsGrid.Columns["colOnway"].Visible = chkShowState.Checked;
+            if (chkShowState.Checked) ShowOrderItemState();
         }
 
         private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -459,13 +477,6 @@ namespace LJH.Inventory.UI.Forms
             }
         }
         #endregion
-
-        private void chkShowState_CheckedChanged(object sender, EventArgs e)
-        {
-            ItemsGrid.Columns["colReceived"].Visible = chkShowState.Checked;
-            //ItemsGrid.Columns["colOnway"].Visible = chkShowState.Checked;
-            if (chkShowState.Checked) ShowOrderItemState();
-        }
     }
 }
 

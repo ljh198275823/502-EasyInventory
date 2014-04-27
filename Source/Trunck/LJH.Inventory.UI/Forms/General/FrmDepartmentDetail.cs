@@ -83,9 +83,23 @@ namespace LJH.Inventory.UI.Forms.General
         }
         #endregion
 
+        #region 事件处理程序
         private void lnkParentCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            FrmDepartmentMaster frm = new FrmDepartmentMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                ParentCategory = frm.SelectedItem as Department;
+                txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
+            }
         }
+
+        private void txtParentCategory_DoubleClick(object sender, EventArgs e)
+        {
+            ParentCategory = null; 
+            txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
+        }
+        #endregion
     }
 }

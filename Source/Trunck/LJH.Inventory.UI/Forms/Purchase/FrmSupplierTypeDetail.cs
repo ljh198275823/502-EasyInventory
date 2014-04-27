@@ -83,6 +83,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 事件处理程序
         private void lnkParentCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmSupplierTypeMaster frm = new FrmSupplierTypeMaster();
@@ -90,8 +91,15 @@ namespace LJH.Inventory.UI.Forms
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 ParentCategory = frm.SelectedItem as SupplierType;
-                this.txtParentCategory.Text = ParentCategory.Name;
+                this.txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
             }
         }
+
+        private void txtParentCategory_DoubleClick(object sender, EventArgs e)
+        {
+            ParentCategory = null;
+            txtParentCategory.Text = string.Empty;
+        }
+        #endregion
     }
 }

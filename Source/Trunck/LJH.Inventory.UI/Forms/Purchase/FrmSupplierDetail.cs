@@ -274,6 +274,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 事件处理程序
         private void lblCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmMasterBase frm = null;
@@ -285,5 +286,12 @@ namespace LJH.Inventory.UI.Forms
                 txtCategory.Text = Category != null ? Category.Name : string.Empty;
             }
         }
+
+        private void txtCategory_DoubleClick(object sender, EventArgs e)
+        {
+            Category = null;
+            txtCategory.Text = string.Empty;
+        }
+        #endregion
     }
 }

@@ -23,6 +23,8 @@ namespace LJH.Inventory.UI.Forms
 
         #region 公共属性
         public CompanyInfo Supplier { get; set; }
+
+        public WareHouse WareHouse { get; set; }
         #endregion
 
         #region 私有方法
@@ -120,6 +122,7 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
+            this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -141,9 +144,8 @@ namespace LJH.Inventory.UI.Forms
                 this.txtSheetNo.Enabled = false;
                 Supplier = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.SupplierID).QueryObject;
                 this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
-                WareHouse ws = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
-                this.txtWareHouse.Text = ws != null ? ws.Name : string.Empty;
-                this.txtWareHouse.Tag = ws;
+                WareHouse= (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
+                this.txtWareHouse.Text = WareHouse  != null ? WareHouse.Name : string.Empty;
                 this.txtMemo.Text = item.Memo;
                 ShowSheetItemsOnGrid(item.Items);
                 if (item.State != SheetState.Add)
@@ -170,15 +172,8 @@ namespace LJH.Inventory.UI.Forms
             {
                 sheet.ID = this.txtSheetNo.Text;
             }
-            if (!string.IsNullOrEmpty(this.txtWareHouse.Text) && this.txtWareHouse.Tag != null)
-            {
-                sheet.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
-            }
-            else
-            {
-                sheet.WareHouseID = null;
-            }
             sheet.SupplierID = Supplier != null ? Supplier.ID : null;
+            sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<InventoryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
@@ -328,16 +323,27 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
+        {
+            Supplier = null;
+            txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
+        }
+
         private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmWareHouseMaster frm = new FrmWareHouseMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                WareHouse item = frm.SelectedItem as WareHouse;
-                txtWareHouse.Text = item.Name;
-                txtWareHouse.Tag = item;
+                WareHouse = frm.SelectedItem as WareHouse;
+                txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             }
+        }
+
+        private void txtWareHouse_DoubleClick(object sender, EventArgs e)
+        {
+            WareHouse = null;
+            txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
         }
 
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)

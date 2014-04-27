@@ -30,12 +30,8 @@ namespace LJH.Inventory.UI.Forms
         #region 重写基类方法
         protected override void InitControls()
         {
-            if (ParentCategory != null)
-            {
-                txtParentCategory.Text = ParentCategory.Name;
-            }
             base.InitControls();
-            Operator opt = Operator.Current;
+            txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
         }
 
         protected override bool CheckInput()
@@ -114,6 +110,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 事件处理程序
         private void lnkParentCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmProductCategoryMaster frm = new FrmProductCategoryMaster();
@@ -124,5 +121,12 @@ namespace LJH.Inventory.UI.Forms
                 this.txtParentCategory.Text = ParentCategory.Name;
             }
         }
+
+        private void txtParentCategory_DoubleClick(object sender, EventArgs e)
+        {
+            ParentCategory = null;
+            this.txtParentCategory.Text = ParentCategory.Name;
+        }
+        #endregion
     }
 }

@@ -39,45 +39,46 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(300, 147);
+            this.btnClose.Location = new System.Drawing.Point(300, 125);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(191, 147);
+            this.btnOk.Location = new System.Drawing.Point(191, 125);
             // 
             // txtParentCategory
             // 
-            this.txtParentCategory.Enabled = false;
             this.txtParentCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtParentCategory.Location = new System.Drawing.Point(58, 49);
+            this.txtParentCategory.Location = new System.Drawing.Point(66, 49);
             this.txtParentCategory.MaxLength = 100;
             this.txtParentCategory.Name = "txtParentCategory";
-            this.txtParentCategory.Size = new System.Drawing.Size(319, 21);
+            this.txtParentCategory.ReadOnly = true;
+            this.txtParentCategory.Size = new System.Drawing.Size(311, 21);
             this.txtParentCategory.TabIndex = 44;
+            this.txtParentCategory.DoubleClick += new System.EventHandler(this.txtParentCategory_DoubleClick);
             // 
             // lnkParentCategory
             // 
             this.lnkParentCategory.AutoSize = true;
             this.lnkParentCategory.Location = new System.Drawing.Point(10, 52);
             this.lnkParentCategory.Name = "lnkParentCategory";
-            this.lnkParentCategory.Size = new System.Drawing.Size(41, 12);
+            this.lnkParentCategory.Size = new System.Drawing.Size(53, 12);
             this.lnkParentCategory.TabIndex = 43;
             this.lnkParentCategory.TabStop = true;
-            this.lnkParentCategory.Text = "父类别";
+            this.lnkParentCategory.Text = "上级部门";
             // 
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(58, 84);
+            this.txtMemo.Location = new System.Drawing.Point(66, 80);
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(319, 43);
+            this.txtMemo.Size = new System.Drawing.Size(311, 21);
             this.txtMemo.TabIndex = 40;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 84);
+            this.label2.Location = new System.Drawing.Point(34, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 42;
@@ -86,15 +87,15 @@
             // txtName
             // 
             this.txtName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtName.Location = new System.Drawing.Point(58, 19);
+            this.txtName.Location = new System.Drawing.Point(66, 19);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(319, 21);
+            this.txtName.Size = new System.Drawing.Size(311, 21);
             this.txtName.TabIndex = 39;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 22);
+            this.label3.Location = new System.Drawing.Point(34, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 41;
@@ -104,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 182);
+            this.ClientSize = new System.Drawing.Size(387, 160);
             this.Controls.Add(this.txtParentCategory);
             this.Controls.Add(this.lnkParentCategory);
             this.Controls.Add(this.txtMemo);

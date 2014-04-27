@@ -23,9 +23,13 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         #region 公共属性
         /// <summary>
-        /// 获取或设置客户类别
+        /// 获取或设置费用类别
         /// </summary>
         public ExpenditureType Category { get; set; }
+        /// <summary>
+        /// 获取或设置费用申请人
+        /// </summary>
+        public Staff Requster { get; set; }
         #endregion
 
         #region 重写基类方法
@@ -44,6 +48,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             dtPaidDate.Value = DateTime.Today;
             this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
+            this.txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
         }
 
         protected override void ItemShowing()
@@ -63,7 +68,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtCategory.Text = Category != null ? Category.Name : string.Empty;
                 txtCheckNum.Text = item.CheckNum;
                 txtRequest.Text = item.Request;
-                txtPayee.Text = item.Payee;
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -88,8 +92,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.Amount = txtAmount.DecimalValue;
             info.Category = Category != null ? Category.ID : null;
             info.CheckNum = txtCheckNum.Text;
-            info.Request = txtRequest.Text;
-            info.Payee = txtPayee.Text;
+            info.Request = Requster != null ? Requster.Name : string.Empty;
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -178,15 +181,27 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
 
+        private void txtCategory_DoubleClick(object sender, EventArgs e)
+        {
+            Category = null;
+            txtCategory.Text = Category != null ? Category.Name : string.Empty;
+        }
+
         private void lnkRequest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmStaffMaster frm = new FrmStaffMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Staff item = frm.SelectedItem as Staff;
-                txtRequest.Text = item.Name;
+                Requster = frm.SelectedItem as Staff;
+                txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
             }
+        }
+
+        private void txtRequest_DoubleClick(object sender, EventArgs e)
+        {
+            Requster = null;
+            txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
         }
         #endregion
     }

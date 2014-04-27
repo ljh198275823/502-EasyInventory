@@ -284,6 +284,12 @@ namespace LJH.Inventory.UI.Forms
                 this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
             }
         }
+
+        private void txtCategory_DoubleClick(object sender, EventArgs e)
+        {
+            Category = null;
+            txtCategory.Text = string.Empty;
+        }
         #endregion
     }
 }

@@ -266,6 +266,7 @@
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtCustomer.Location = new System.Drawing.Point(71, 44);
             this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(413, 21);
             this.txtCustomer.TabIndex = 0;
             // 

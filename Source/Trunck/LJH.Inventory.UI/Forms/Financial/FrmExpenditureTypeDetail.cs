@@ -24,7 +24,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         /// <summary>
         /// 获取或设置父类别
         /// </summary>
-        public ExpenditureType  ParentCategory { get; set; }
+        public ExpenditureType ParentCategory { get; set; }
         #endregion
 
         #region 重写基类方法
@@ -88,8 +88,14 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 ParentCategory = frm.SelectedItem as ExpenditureType;
-                this.txtParentCategory.Text = ParentCategory.Name;
+                this.txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
             }
+        }
+
+        private void txtParentCategory_DoubleClick(object sender, EventArgs e)
+        {
+            ParentCategory = null;
+            this.txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
         }
     }
 }

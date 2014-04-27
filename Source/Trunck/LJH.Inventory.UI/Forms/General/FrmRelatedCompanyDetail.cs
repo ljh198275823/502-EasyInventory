@@ -238,6 +238,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 事件处理程序
         private void lblCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmMasterBase frm = null;
@@ -245,10 +246,16 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                RelatedCompanyType ct = frm.SelectedItem as RelatedCompanyType;
-                txtCategory.Text = ct.Name;
-                txtCategory.Tag = ct;
+                Category = frm.SelectedItem as RelatedCompanyType;
+                txtCategory.Text = Category != null ? Category.Name : string.Empty;
             }
         }
+
+        private void txtCategory_DoubleClick(object sender, EventArgs e)
+        {
+            Category = null;
+            txtCategory.Text = Category != null ? Category.Name : string.Empty;
+        }
+        #endregion
     }
 }

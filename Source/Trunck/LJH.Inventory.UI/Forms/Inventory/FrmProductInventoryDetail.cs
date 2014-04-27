@@ -26,12 +26,16 @@ namespace LJH.Inventory.UI.Forms
         /// 获取或设置仓库
         /// </summary>
         public WareHouse WareHouse { get; set; }
+        /// <summary>
+        /// 获取或设置产品
+        /// </summary>
+        public Product Product { get; set; }
         #endregion
 
         #region 重写基类方法
         protected override bool CheckInput()
         {
-            if (IsAdding && txtProductID.Tag == null)
+            if (Product == null)
             {
                 MessageBox.Show("没有选择库存商品");
                 txtProductID.Focus();
@@ -56,6 +60,7 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtWareHouseID.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            txtProductID.Text = Product != null ? Product.Name : string.Empty;
             Operator opt = Operator.Current;
             this.btnOk.Enabled = opt.Permit(Permission.CreateInventory);
         }
@@ -69,6 +74,8 @@ namespace LJH.Inventory.UI.Forms
             lnkProduct.Enabled = false;
             WareHouse = item.WareHouse;
             txtWareHouseID.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            Product = item.Product;
+            txtProductID.Text = Product != null ? Product.Name : string.Empty;
             txtCount.DecimalValue = item.Count;
             txtAmount.DecimalValue = item.Amount;
             btnOk.Enabled = false;
@@ -90,6 +97,8 @@ namespace LJH.Inventory.UI.Forms
             item.Product = txtProductID.Tag as Product;
             item.WareHouseID = WareHouse != null ? WareHouse.ID : null;
             item.WareHouse = WareHouse;
+            item.ProductID = Product != null ? Product.ID : null;
+            item.Product = Product;
             item.Valid = txtCount.DecimalValue;
             item.Unit = item.Product.Unit;
             item.ValidAmount = txtAmount.DecimalValue;
@@ -120,17 +129,10 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Product p = frm.SelectedItem as Product;
-                txtProductID.Tag = p;
-                txtProductID.Text = p.ID + ":" + p.Name;
-            }
-            else
-            {
-                txtProductID.Text = string.Empty;
-                txtProductID.Tag = null;
+                Product = frm.SelectedItem as Product;
+                txtProductID.Text = Product != null ? Product.Name : string.Empty;
             }
         }
-        #endregion
 
         private void lnkWarehouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -142,5 +144,18 @@ namespace LJH.Inventory.UI.Forms
                 txtWareHouseID.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             }
         }
+
+        private void txtWareHouseID_DoubleClick(object sender, EventArgs e)
+        {
+            WareHouse = null;
+            txtWareHouseID.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+        }
+
+        private void txtProductID_DoubleClick(object sender, EventArgs e)
+        {
+            Product = null;
+            txtProductID.Text = Product != null ? Product.Name : string.Empty;
+        }
+        #endregion
     }
 }

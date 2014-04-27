@@ -35,6 +35,10 @@ namespace LJH.Inventory.UI.Forms
         /// 获取或设置发货的订单,用于增加送货单时指定要发货的订单
         /// </summary>
         public Order Order { get; set; }
+        /// <summary>
+        /// 获取或设置仓库
+        /// </summary>
+        public WareHouse WareHouse { get; set; }
         #endregion
 
         #region 私有方法
@@ -102,9 +106,8 @@ namespace LJH.Inventory.UI.Forms
             }
             Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            WareHouse ws = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
-            this.txtWareHouse.Text = ws != null ? ws.Name : string.Empty;
-            this.txtWareHouse.Tag = ws;
+            WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
+            this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             this.txtMemo.Text = item.Memo;
             ShowDeliveryItemsOnGrid(item.Items);
             ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -156,6 +159,7 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             Operator opt = Operator.Current;
             ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
@@ -188,14 +192,7 @@ namespace LJH.Inventory.UI.Forms
                 sheet = UpdatingItem as DeliverySheet;
             }
             sheet.CustomerID = Customer != null ? Customer.ID : null;
-            if (!string.IsNullOrEmpty(this.txtWareHouse.Text) && this.txtWareHouse.Tag != null)
-            {
-                sheet.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
-            }
-            else
-            {
-                sheet.WareHouseID = null;
-            }
+            sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<DeliveryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
@@ -341,10 +338,12 @@ namespace LJH.Inventory.UI.Forms
                 Customer = frm.SelectedItem as CompanyInfo;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             }
-            else
-            {
-                txtCustomer.Text = string.Empty;
-            }
+        }
+
+        private void txtCustomer_DoubleClick(object sender, EventArgs e)
+        {
+            Customer = null;
+            txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
         }
 
         private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -353,10 +352,15 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                WareHouse item = frm.SelectedItem as WareHouse;
-                txtWareHouse.Text = item.Name;
-                txtWareHouse.Tag = item;
+                WareHouse = frm.SelectedItem as WareHouse;
+                txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             }
+        }
+
+        private void txtWareHouse_DoubleClick(object sender, EventArgs e)
+        {
+            WareHouse = null;
+            txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
         }
 
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)

@@ -400,6 +400,12 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
+        private void txtCustomer_DoubleClick(object sender, EventArgs e)
+        {
+            Customer = null;
+            txtCustomer.Text = string.Empty;
+        }
+
         private void lnkSalesPerson_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Forms.General.FrmStaffMaster frm = new Forms.General.FrmStaffMaster();
@@ -407,8 +413,13 @@ namespace LJH.Inventory.UI.Forms
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 Staff item = frm.SelectedItem as Staff;
-                txtSalesPerson.Text = item.Name;
+                txtSalesPerson.Text = item != null ? item.Name : string.Empty;
             }
+        }
+
+        private void txtSalesPerson_DoubleClick(object sender, EventArgs e)
+        {
+            txtSalesPerson.Text = string.Empty;
         }
 
         private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)

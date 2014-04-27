@@ -185,8 +185,10 @@
             // 
             this.txtDepartment.Location = new System.Drawing.Point(59, 41);
             this.txtDepartment.Name = "txtDepartment";
+            this.txtDepartment.ReadOnly = true;
             this.txtDepartment.Size = new System.Drawing.Size(121, 21);
             this.txtDepartment.TabIndex = 58;
+            this.txtDepartment.DoubleClick += new System.EventHandler(this.txtDepartment_DoubleClick);
             // 
             // lnkDepartment
             // 

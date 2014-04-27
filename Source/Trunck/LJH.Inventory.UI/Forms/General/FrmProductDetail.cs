@@ -13,7 +13,7 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmProductDetail : FrmSheetDetailBase 
+    public partial class FrmProductDetail : FrmSheetDetailBase
     {
         public FrmProductDetail()
         {
@@ -151,7 +151,7 @@ namespace LJH.Inventory.UI.Forms
         protected override CommandResult UpdateItem(object updatingItem)
         {
             Product p = updatingItem as Product;
-            return  (new ProductBLL(AppSettings.Current.ConnStr)).Update(p);
+            return (new ProductBLL(AppSettings.Current.ConnStr)).Update(p);
         }
         #endregion
 
@@ -183,6 +183,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 事件处理程序
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmProductCategoryMaster frm = new FrmProductCategoryMaster();
@@ -190,8 +191,14 @@ namespace LJH.Inventory.UI.Forms
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 Category = frm.SelectedItem as ProductCategory;
-                txtCategory.Text = Category.Name;
+                txtCategory.Text = Category != null ? Category.Name : string.Empty;
             }
+        }
+
+        private void txtCategory_DoubleClick(object sender, EventArgs e)
+        {
+            Category = null;
+            txtCategory.Text = Category != null ? Category.Name : string.Empty;
         }
 
         private void lnkUnit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -200,8 +207,15 @@ namespace LJH.Inventory.UI.Forms
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                txtUnit.Text = (frm.SelectedItem as Unit).ID;
+                Unit u = frm.SelectedItem as Unit;
+                txtUnit.Text = u != null ? u.ID : string.Empty;
             }
+        }
+
+        private void txtUnit_DoubleClick(object sender, EventArgs e)
+        {
+            txtUnit.Text = string.Empty;
+            txtUnit.Tag = null;
         }
 
         private void lnkCompany_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -227,5 +241,18 @@ namespace LJH.Inventory.UI.Forms
                 txtInternalID.Tag = p;
             }
         }
+
+        private void txtCompany_DoubleClick(object sender, EventArgs e)
+        {
+            txtCompany.Text = string.Empty;
+            txtCompany.Tag = null;
+        }
+
+        private void txtInternalID_DoubleClick(object sender, EventArgs e)
+        {
+            txtInternalID.Text = string.Empty;
+            txtInternalID.Tag = null;
+        }
+        #endregion
     }
 }
