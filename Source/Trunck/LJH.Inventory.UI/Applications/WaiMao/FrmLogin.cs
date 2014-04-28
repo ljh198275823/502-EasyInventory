@@ -12,7 +12,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.SQLHelper;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Applications.WaiMao
 {
     public partial class FrmLogin : Form
     {

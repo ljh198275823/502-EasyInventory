@@ -58,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applications\WaiMao\FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\WaiMao\FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExcelExporter\DeliverySheetExporter.cs" />
     <Compile Include="Forms\Financial\FrmCustomerReceivableView.cs">
       <SubType>Form</SubType>
@@ -545,12 +551,6 @@
     <Compile Include="Forms\FrmRoleMaster.designer.cs">
       <DependentUpon>FrmRoleMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmLogin.designer.cs">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\FrmProductInventoryDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -576,6 +576,9 @@
     <Compile Include="Forms\Inventory\FrmInventoryRecordView.Designer.cs">
       <DependentUpon>FrmInventoryRecordView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Applications\WaiMao\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmCustomerReceivableView.resx">
       <DependentUpon>FrmCustomerReceivableView.cs</DependentUpon>
     </EmbeddedResource>
@@ -821,9 +824,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmRoleMaster.resx">
       <DependentUpon>FrmRoleMaster.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmLogin.resx">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\FrmSalesPersonPerformanceReport.resx">
       <DependentUpon>FrmSalesPersonPerformanceReport.cs</DependentUpon>

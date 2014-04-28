@@ -158,6 +158,7 @@ namespace LJH.Inventory.UI.Forms
                 if (this.UpdatingItem != null)
                 {
                     CompanyInfo c = UpdatingItem as CompanyInfo;
+                    ct.ID = Guid.NewGuid();
                     ct.Company = c.ID;
                     CommandResult ret = (new ContactBLL(AppSettings.Current.ConnStr)).Add(ct);
                     if (ret.Result != ResultCode.Successful)
@@ -179,14 +180,11 @@ namespace LJH.Inventory.UI.Forms
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     Contact ct = frm.Contact;
-                    if (ct.ID > 0)
+                    CommandResult ret = (new ContactBLL(AppSettings.Current.ConnStr)).Update(ct);
+                    if (ret.Result != ResultCode.Successful)
                     {
-                        CommandResult ret = (new ContactBLL(AppSettings.Current.ConnStr)).Update(ct);
-                        if (ret.Result != ResultCode.Successful)
-                        {
-                            MessageBox.Show(ret.Message);
-                            return;
-                        }
+                        MessageBox.Show(ret.Message);
+                        return;
                     }
                     ShowItemOnRow(GridView.Rows[e.RowIndex], ct);
                 }

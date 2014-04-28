@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示公司联系人
     /// </summary>
-    public class Contact : LJH.GeneralLibrary.Core.DAL.IEntity<int>
+    public class Contact : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
         public Contact()
@@ -20,7 +20,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置ID
         /// </summary>
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         /// <summary>
         /// 获取或设置联系人名称
         /// </summary>

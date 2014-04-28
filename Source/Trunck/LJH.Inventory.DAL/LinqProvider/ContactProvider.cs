@@ -10,17 +10,17 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class ContactProvider : ProviderBase<Contact, int>
+    public class ContactProvider : ProviderBase<Contact, Guid>
     {
         #region 构造函数
         public ContactProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
         }
         #endregion
 
         #region 重写基类方法
-        protected override Contact GetingItemByID(int id, System.Data.Linq.DataContext dc)
+        protected override Contact GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
             Contact c = dc.GetTable<Contact>().SingleOrDefault(item => item.ID == id);
             return c;

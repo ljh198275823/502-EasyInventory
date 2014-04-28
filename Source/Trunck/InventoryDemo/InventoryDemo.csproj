@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{10FB935E-CB3B-4BC2-9753-288BDCCAFD99}</ProjectGuid>
+    <ProjectGuid>{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InventoryApplication</RootNamespace>
-    <AssemblyName>InventoryApplication</AssemblyName>
+    <RootNamespace>InventoryDemo</RootNamespace>
+    <AssemblyName>InventoryDemo</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -20,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,13 +28,10 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\debug\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>inventory.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LJH.GeneralLibrary">
@@ -56,7 +52,7 @@
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmLogin.Designer.cs">
+    <Compile Include="FrmLogin.designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMain.cs">
@@ -81,7 +77,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -94,6 +89,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="inventory.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\LJH.Inventory.BLL\LJH.Inventory.BLL.csproj">
       <Project>{D250DC64-1E58-4B62-A5FD-5A4BD7BA7ABB}</Project>
       <Name>LJH.Inventory.BLL</Name>
@@ -102,16 +105,14 @@
       <Project>{E13ADAC1-9D84-4F58-B4A1-DEFB822F087E}</Project>
       <Name>LJH.Inventory.BusinessModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LJH.Inventory.UI.Controls\LJH.Inventory.UI.Controls.csproj">
+      <Project>{3945C03C-B3B2-4511-9324-2DF73A5FB3A0}</Project>
+      <Name>LJH.Inventory.UI.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LJH.Inventory.UI\LJH.Inventory.UI.csproj">
       <Project>{273C204B-4A1F-45E1-B7F0-A3A6CC3F6209}</Project>
       <Name>LJH.Inventory.UI</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="config.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="inventory.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

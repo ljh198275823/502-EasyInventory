@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ContactBLL : BLLBase<int, Contact>
+    public class ContactBLL : BLLBase<Guid, Contact>
     {
         #region 构造函数
         public ContactBLL(string repoUri)

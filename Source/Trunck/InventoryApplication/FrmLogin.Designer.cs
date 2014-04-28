@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms
+﻿namespace InventoryApplication
 {
     partial class FrmLogin
     {
@@ -47,19 +47,17 @@
             this.rdUser = new System.Windows.Forms.RadioButton();
             this.rdSystem = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnAdvance = new System.Windows.Forms.Button();
-            this.chkRememberLogid = new System.Windows.Forms.CheckBox();
             this.txtLogName = new System.Windows.Forms.ComboBox();
+            this.chkRememberLogid = new System.Windows.Forms.CheckBox();
+            this.btnAdvance = new System.Windows.Forms.Button();
             this.gpDB.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 23);
+            this.label1.Location = new System.Drawing.Point(16, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 12);
             this.label1.TabIndex = 0;
@@ -69,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(84, 53);
+            this.label2.Location = new System.Drawing.Point(24, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 1;
@@ -100,10 +98,10 @@
             // txtPassword
             // 
             this.txtPassword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPassword.Location = new System.Drawing.Point(136, 50);
+            this.txtPassword.Location = new System.Drawing.Point(69, 50);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(142, 21);
+            this.txtPassword.Size = new System.Drawing.Size(209, 21);
             this.txtPassword.TabIndex = 1;
             // 
             // gpDB
@@ -225,7 +223,6 @@
             // 
             this.groupBox3.Controls.Add(this.txtLogName);
             this.groupBox3.Controls.Add(this.chkRememberLogid);
-            this.groupBox3.Controls.Add(this.pictureBox1);
             this.groupBox3.Controls.Add(this.txtPassword);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label2);
@@ -235,25 +232,16 @@
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             // 
-            // pictureBox1
+            // txtLogName
             // 
-            this.pictureBox1.Image = global::LJH.Inventory.UI.Properties.Resources.Operator;
-            this.pictureBox1.Location = new System.Drawing.Point(7, 20);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(54, 51);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnAdvance
-            // 
-            this.btnAdvance.Location = new System.Drawing.Point(317, 71);
-            this.btnAdvance.Name = "btnAdvance";
-            this.btnAdvance.Size = new System.Drawing.Size(131, 23);
-            this.btnAdvance.TabIndex = 4;
-            this.btnAdvance.Text = "高级>>";
-            this.btnAdvance.UseVisualStyleBackColor = true;
-            this.btnAdvance.Click += new System.EventHandler(this.btnAdvance_Click);
+            this.txtLogName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.txtLogName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtLogName.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLogName.Location = new System.Drawing.Point(69, 20);
+            this.txtLogName.MaxLength = 20;
+            this.txtLogName.Name = "txtLogName";
+            this.txtLogName.Size = new System.Drawing.Size(209, 20);
+            this.txtLogName.TabIndex = 0;
             // 
             // chkRememberLogid
             // 
@@ -267,16 +255,15 @@
             this.chkRememberLogid.UseVisualStyleBackColor = true;
             this.chkRememberLogid.CheckedChanged += new System.EventHandler(this.chkRememberLogid_CheckedChanged);
             // 
-            // txtLogName
+            // btnAdvance
             // 
-            this.txtLogName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.txtLogName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtLogName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLogName.Location = new System.Drawing.Point(136, 20);
-            this.txtLogName.MaxLength = 20;
-            this.txtLogName.Name = "txtLogName";
-            this.txtLogName.Size = new System.Drawing.Size(142, 20);
-            this.txtLogName.TabIndex = 0;
+            this.btnAdvance.Location = new System.Drawing.Point(317, 71);
+            this.btnAdvance.Name = "btnAdvance";
+            this.btnAdvance.Size = new System.Drawing.Size(131, 23);
+            this.btnAdvance.TabIndex = 4;
+            this.btnAdvance.Text = "高级>>";
+            this.btnAdvance.UseVisualStyleBackColor = true;
+            this.btnAdvance.Click += new System.EventHandler(this.btnAdvance_Click);
             // 
             // FrmLogin
             // 
@@ -303,7 +290,6 @@
             this.gpDB.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -327,7 +313,6 @@
         private LJH.GeneralLibrary.WinformControl.DBCTextBox  txtDataBase;
         private LJH.GeneralLibrary.WinformControl.DBCTextBox  txtServer;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnAdvance;
         private System.Windows.Forms.CheckBox chkRememberLogid;
         public System.Windows.Forms.ComboBox txtLogName;

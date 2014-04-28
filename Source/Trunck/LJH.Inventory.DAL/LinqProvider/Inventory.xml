@@ -77,7 +77,7 @@
   </Table>
   <Table Name="dbo.Contact" Member="LJH.Inventory.BusinessModel.Contact">
     <Type Name="LJH.Inventory.BusinessModel.Contact">
-      <Column Name="ID" Member="ID"  DbType="int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" AutoSync="OnInsert"/>
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
       <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="Position" Member="Position" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Company" Member="Company" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
