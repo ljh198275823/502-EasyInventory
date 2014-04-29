@@ -162,13 +162,14 @@ namespace LJH.Inventory.BLL
         {
             DocumentOperation doc = new DocumentOperation()
             {
+                ID = Guid.NewGuid(),
                 DocumentID = id,
                 DocumentType = docType,
                 OperatDate = dt,
                 Operation = SheetOperationDescription.GetDescription(operation),
                 Operator = opt,
             };
-            ProviderFactory.Create<IProvider<DocumentOperation, int>>(_RepoUri).Insert(doc, unitWork);
+            ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(_RepoUri).Insert(doc, unitWork);
         }
         /// <summary>
         /// 获取服务器时间

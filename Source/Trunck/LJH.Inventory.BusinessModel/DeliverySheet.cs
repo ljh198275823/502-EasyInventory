@@ -108,9 +108,9 @@ namespace LJH.Inventory.BusinessModel
                 case SheetOperation.UndoApprove:
                     return State == SheetState.Approved;
                 case SheetOperation.Nullify:
-                    return State != SheetState.Canceled;
-                case SheetOperation.Ship :
-                    return (State == SheetState.Add || State == SheetState.Approved); 
+                    return State != SheetState.Canceled && State != SheetState.Shipped;
+                case SheetOperation.Ship:
+                    return (State == SheetState.Add || State == SheetState.Approved);
                 default:
                     return false;
             }

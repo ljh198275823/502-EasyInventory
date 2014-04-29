@@ -38,7 +38,7 @@ namespace LJH.Inventory.BLL
                     stream.Read(data, 0, (int)stream.Length);
                     string value = Encoding.UTF8.GetString(data);
                     SysparameterInfo para = new SysparameterInfo(t.Name, value, string.Empty);
-                    return bll.Add (para);
+                    return bll.Save(para);
                 }
             }
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LJH.Inventory.BLL
                 if (result.Result == ResultCode.Successful)
                 {
                     para = result.QueryObject;
-                    string value = para.ParameterValue;
+                    string value = para.Value;
                     if (!string.IsNullOrEmpty(value))
                     {
                         byte[] data = Encoding.UTF8.GetBytes(value);

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Linq;
+using System.Data;
 using System.Text;
-using System.Data.SqlClient;
 using LJH.Inventory.DAL.IProvider;
-using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
@@ -18,11 +18,13 @@ namespace LJH.Inventory.DAL.LinqProvider
         public ServerDateTimeProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
         {
             _ConnStr = connStr;
+            _MapSource = ms;
         }
         #endregion
 
         #region 私有变量
         private string _ConnStr;
+        private System.Data.Linq.Mapping.MappingSource _MapSource;
         #endregion
 
 
@@ -36,22 +38,15 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(_ConnStr))
-                {
-                    using (SqlCommand cmd = new SqlCommand("select getdate() ", con))
-                    {
-                        con.Open();
-                        object o = cmd.ExecuteScalar();
-                        serverDT = Convert.ToDateTime(o);
-                        return new CommandResult(ResultCode.Successful, string.Empty);
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
                 serverDT = null;
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
-                return new CommandResult(ResultCode.Fail, ex.Message);
+                DataContext dc = DataContextFactory.CreateDataContext(_ConnStr, _MapSource);
+                var ret = dc.ExecuteQuery<DateTime>("select Now from View_Now").ToList();
+                if (ret != null && ret.Count == 1)
+                {
+                    serverDT = ret[0];
+                    return new CommandResult(ResultCode.Successful, string.Empty);
+                }
+                return new CommandResult(ResultCode.Fail, "获取数据库时间失败");
             }
             catch (Exception ex)
             {
@@ -61,5 +56,10 @@ namespace LJH.Inventory.DAL.LinqProvider
             }
         }
         #endregion
+    }
+
+    internal class DatebaseTime
+    {
+        DateTime Now { get; set; }
     }
 }

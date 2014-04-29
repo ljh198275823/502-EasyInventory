@@ -272,7 +272,28 @@ namespace LJH.Inventory.UI.Forms
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-
+            DeliverySheet sheet = UpdatingItem as DeliverySheet;
+            if (sheet != null)
+            {
+                try
+                {
+                    string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
+                    DeliverySheetExporter exporter = null;
+                    if (System.IO.File.Exists(modal))
+                    {
+                        exporter = new DeliverySheetExporter(modal);
+                        exporter.PrintDeliverySheet(sheet);
+                    }
+                    else
+                    {
+                        MessageBox.Show("未找到送货单导出模板", "打印失败");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "打印失败");
+                }
+            }
         }
 
         private void btnShip_Click(object sender, EventArgs e)

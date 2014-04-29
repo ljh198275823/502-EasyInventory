@@ -9,62 +9,31 @@ namespace LJH.Inventory.BusinessModel
     [Serializable()]
     public class Role : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
+        #region 私有变量
         //系统预定义的三种角色
-        private readonly string Admin = "系统管理员"; //系统管理员
+        private readonly string Admin = "SYS"; //系统管理员
+        #endregion
 
-        public string ID { get; set; }
-
-        public string Description { get; set; }
-
-        private List<Permission> _rights;
-        private string _myRights;
-
+        #region 公共属性
         /// <summary>
-        /// 查看此角色是否被授予此权限
+        /// 获取或设置ID
         /// </summary>
-        public bool Permit(Permission right)
-        {
-            if (_myRights == "all")
-            {
-                return true;
-            }
-            else
-            {
-                if (_rights == null)
-                {
-                    _rights = new List<Permission>();
-                    if (!string.IsNullOrEmpty(_myRights))
-                    {
-                        foreach (string str in _myRights.Split(','))
-                        {
-                            int i;
-                            if (int.TryParse(str, out i))
-                            {
-                                _rights.Add((Permission)i);
-                            }
-                        }
-                    }
-                }
-                return _rights.Exists(r => r == right);
-            }
-        }
-
+        public string ID { get; set; }
+        /// <summary>
+        /// 获取或设置名称
+        /// </summary>
+        public string Name { get; set; }
         /// <summary>
         /// 权限列表
         /// </summary>
-        public string Permission
-        {
-            get
-            {
-                return _myRights;
-            }
-            set
-            {
-                _myRights = value.ToLower();
-                _rights = null;
-            }
-        }
+        public string Permission { get; set; }
+        /// <summary>
+        /// 获取或设置备注
+        /// </summary>
+        public string Memo { get; set; }
+        #endregion
 
+        #region 只读属性
         /// <summary>
         /// 是否可以删除,系统默认的角色(系统管理员,卡片操作员,进出口操作员)不能删除
         /// </summary>
@@ -93,5 +62,35 @@ namespace LJH.Inventory.BusinessModel
         {
             get { return ID.ToUpper() == Admin; }
         }
+        #endregion
+
+        #region 公共方法
+        /// <summary>
+        /// 查看此角色是否被授予此权限
+        /// </summary>
+        public bool Permit(Permission right)
+        {
+            if (Permission == "all")
+            {
+                return true;
+            }
+            else
+            {
+                List<Permission> rights = new List<Permission>();
+                if (!string.IsNullOrEmpty(Permission))
+                {
+                    foreach (string str in Permission.Split(','))
+                    {
+                        int i;
+                        if (int.TryParse(str, out i))
+                        {
+                            rights.Add((Permission)i);
+                        }
+                    }
+                }
+                return rights.Exists(r => r == right);
+            }
+        }
+        #endregion
     }
 }

@@ -46,13 +46,23 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置剩余的应收总额
+        /// 获取或设置已经支付的金额
         /// </summary>
-        public decimal Remain { get; set; }
+        public decimal HasPaid { get; set; }
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
+        #endregion
+
+        #region 只读属性
+        /// <summary>
+        /// 获取未支付的金额
+        /// </summary>
+        public decimal Remain
+        {
+            get { return Amount - HasPaid; }
+        }
         #endregion
 
         #region 公共方法

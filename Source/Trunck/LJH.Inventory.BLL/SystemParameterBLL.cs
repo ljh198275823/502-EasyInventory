@@ -16,5 +16,30 @@ namespace LJH.Inventory.BLL
         {
         }
         #endregion
+
+        #region 公共方法
+        /// <summary>
+        /// 保存参数
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        public CommandResult Save(SysparameterInfo parameter)
+        {
+            SysparameterInfo original = ProviderFactory.Create<IProvider<SysparameterInfo, string>>(_RepoUri).GetByID(parameter.ID).QueryObject;
+            if (original != null)
+            {
+                return ProviderFactory.Create<IProvider<SysparameterInfo, string>>(_RepoUri).Update(parameter, original);
+            }
+            else
+            {
+                return ProviderFactory.Create<IProvider<SysparameterInfo, string>>(_RepoUri).Insert(parameter);
+            }
+        }
+
+        public override CommandResult Add(SysparameterInfo info)
+        {
+            return Save(info);
+        }
+        #endregion
     }
 }

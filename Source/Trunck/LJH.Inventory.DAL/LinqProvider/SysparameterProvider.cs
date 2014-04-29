@@ -22,14 +22,6 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             return dc.GetTable<SysparameterInfo>().SingleOrDefault(s => s.ID == id);
         }
-
-        protected override void InsertingItem(SysparameterInfo info,DataContext dc)
-        {
-            string cmd = string.Format(@"delete Sysparameter where Parameter='{0}' " +
-                       "insert into SysParameter (Parameter,ParameterValue,Description) " +
-                       "values ('{1}','{2}','{3}')", info.ID, info.ID, info.ParameterValue, info.Description);
-            dc.ExecuteCommand(cmd);
-        }
         #endregion
     }
 }

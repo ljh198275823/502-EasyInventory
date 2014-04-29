@@ -28,7 +28,6 @@ namespace InventoryDemo
 
         #region 私有变量
         private List<Form> _openedForms = new List<Form>();
-        private DatetimeSyncService _DatetimeSyncService;
         private SoftDogInfo _SoftDog;
         #endregion
 
@@ -261,24 +260,6 @@ namespace InventoryDemo
         {
             ShowSingleForm<FrmDeliveryRecordReport>();
         }
-        #endregion
-
-        #region 事件处理程序
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-            //ReadSoftDog();
-            DoLogIn();
-            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
-            //启动同步时间服务
-            _DatetimeSyncService = new DatetimeSyncService(AppSettings.Current.ConnStr);
-            _DatetimeSyncService.Start();
-        }
-
-        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (_DatetimeSyncService != null) _DatetimeSyncService.Stop();
-        }
-        #endregion
 
         private void mnu_DeliveryStatistic_Click(object sender, EventArgs e)
         {
@@ -349,29 +330,6 @@ namespace InventoryDemo
         private void mnu_SupplierType_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmSupplierTypeMaster>();
-        }
-
-        private void mnu_UpdateDB_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("是否要升级数据库?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                string path = System.IO.Path.Combine(Application.StartupPath, "DbUpdate.sql");
-                if (System.IO.File.Exists(path))
-                {
-                    try
-                    {
-                        SqlClient client = new SqlClient(AppSettings.Current.ConnStr);
-                        client.Connect();
-                        client.ExecuteSQLFile(path);
-                        MessageBox.Show("数据库升级成功!");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
-                    }
-                }
-            }
         }
 
         private void mnu_Order_Click(object sender, EventArgs e)
@@ -469,5 +427,19 @@ namespace InventoryDemo
         {
             ShowSingleForm<FrmStaffMaster>();
         }
+        #endregion
+
+        #region 事件处理程序
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            //ReadSoftDog();
+            DoLogIn();
+            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
+        }
+
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+        }
+        #endregion
     }
 }

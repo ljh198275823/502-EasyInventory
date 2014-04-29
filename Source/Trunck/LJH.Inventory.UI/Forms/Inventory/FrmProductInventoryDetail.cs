@@ -68,14 +68,14 @@ namespace LJH.Inventory.UI.Forms
         protected override void ItemShowing()
         {
             ProductInventory item = UpdatingItem as ProductInventory;
-            txtProductID.Text = item.ProductID + ":" + item.Product.Name;
-            txtProductID.Tag = item.Product;
+            Product = item.Product;
+            txtProductID.Text = Product != null ? Product.Name : string.Empty;
             txtProductID.Enabled = false;
             lnkProduct.Enabled = false;
             WareHouse = item.WareHouse;
             txtWareHouseID.Text = WareHouse != null ? WareHouse.Name : string.Empty;
-            Product = item.Product;
-            txtProductID.Text = Product != null ? Product.Name : string.Empty;
+            txtWareHouseID.Enabled = false;
+            lnkWarehouse.Enabled = false;
             txtCount.DecimalValue = item.Count;
             txtAmount.DecimalValue = item.Amount;
             btnOk.Enabled = false;
@@ -93,8 +93,8 @@ namespace LJH.Inventory.UI.Forms
             {
                 item = UpdatingItem as ProductInventory;
             }
-            item.ProductID = (txtProductID.Tag as Product).ID;
-            item.Product = txtProductID.Tag as Product;
+            item.ProductID = Product.ID;
+            item.Product = Product;
             item.WareHouseID = WareHouse != null ? WareHouse.ID : null;
             item.WareHouse = WareHouse;
             item.ProductID = Product != null ? Product.ID : null;

@@ -100,14 +100,12 @@ namespace LJH.Inventory.BLL
                         SheetID = sheet.ID,
                         OrderID = si.OrderID,
                         Amount = si.Amount,
-                        Remain = si.Amount,
                     };
                     crs.Add(cr);
                 }
                 else
                 {
                     cr.Amount += si.Amount;
-                    cr.Remain += si.Amount;
                 }
             }
             foreach (CustomerReceivable cr in crs)
@@ -141,8 +139,7 @@ namespace LJH.Inventory.BLL
 
         protected override void DoNullify(DeliverySheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            throw new Exception("没有实现 作废 方法");
-            //base.DoNullify(info, unitWork, dt, opt);
+            base.DoNullify(info, unitWork, dt, opt);
 
             //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             ////如果已经有客户付款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.

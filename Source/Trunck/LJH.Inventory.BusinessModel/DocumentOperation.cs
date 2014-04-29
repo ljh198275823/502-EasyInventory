@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示单据的操作，如果审批，发货，取消等。
     /// </summary>
-    public class DocumentOperation : LJH.GeneralLibrary.Core.DAL.IEntity<int>
+    public class DocumentOperation : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
         public DocumentOperation()
@@ -20,7 +20,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置ID
         /// </summary>
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         /// <summary>
         /// 获取或设置单据ID
         /// </summary>
@@ -41,10 +41,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置操作员
         /// </summary>
         public string Operator { get; set; }
-        /// <summary>
-        /// 获取或设置当前操作后单据的状态
-        /// </summary>
-        public SheetState State { get; set; }
         /// <summary>
         /// 获取或设置备注
         /// </summary>

@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class DocumentOperationProvider : ProviderBase<DocumentOperation, int>
+    public class DocumentOperationProvider : ProviderBase<DocumentOperation, Guid>
     {
         #region 构造函数
         public DocumentOperationProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
@@ -19,7 +19,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         #endregion
 
         #region 重写基类方法
-        protected override DocumentOperation GetingItemByID(int id, System.Data.Linq.DataContext dc)
+        protected override DocumentOperation GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
             return dc.GetTable<DocumentOperation>().SingleOrDefault(item => item.ID == id);
         }

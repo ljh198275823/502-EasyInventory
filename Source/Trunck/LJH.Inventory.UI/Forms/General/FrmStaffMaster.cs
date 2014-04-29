@@ -108,7 +108,7 @@ namespace LJH.Inventory.UI.Forms.General
             {
                 Operator opt = _Operators.FirstOrDefault(it => it.StaffID == c.ID);
                 row.Cells["colLogID"].Value = opt != null ? opt.ID : string.Empty;
-                row.Cells["colRole"].Value = opt != null && opt.Role != null ? opt.Role.ID : string.Empty;
+                row.Cells["colRole"].Value = opt != null && opt.Role != null ? opt.Role.Name : string.Empty;
             }
             row.Cells["colMemo"].Value = c.Memo;
             if (_Staffs == null || !_Staffs.Exists(it => it.ID == c.ID))

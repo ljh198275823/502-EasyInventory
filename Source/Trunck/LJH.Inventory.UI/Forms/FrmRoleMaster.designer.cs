@@ -41,13 +41,13 @@
             this.btnClear = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.RoleView = new System.Windows.Forms.DataGridView();
-            this.colRoleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRoleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RoleView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -158,8 +158,8 @@
             this.RoleView.AllowUserToResizeRows = false;
             this.RoleView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.RoleView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colRoleID,
-            this.colRoleName});
+            this.colName,
+            this.colMemo});
             this.RoleView.ContextMenuStrip = this.contextMenuStrip1;
             this.RoleView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RoleView.Location = new System.Drawing.Point(0, 50);
@@ -169,21 +169,6 @@
             this.RoleView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.RoleView.Size = new System.Drawing.Size(696, 221);
             this.RoleView.TabIndex = 57;
-            // 
-            // colRoleID
-            // 
-            this.colRoleID.DataPropertyName = "RoleID";
-            this.colRoleID.HeaderText = "角色";
-            this.colRoleID.Name = "colRoleID";
-            this.colRoleID.ReadOnly = true;
-            // 
-            // colRoleName
-            // 
-            this.colRoleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colRoleName.DataPropertyName = "RoleName";
-            this.colRoleName.HeaderText = "描述";
-            this.colRoleName.Name = "colRoleName";
-            this.colRoleName.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -219,14 +204,29 @@
             this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
             // 
-            // FrmRoles
+            // colName
+            // 
+            this.colName.DataPropertyName = "RoleID";
+            this.colName.HeaderText = "角色";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.DataPropertyName = "RoleName";
+            this.colMemo.HeaderText = "描述";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            // 
+            // FrmRoleMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 293);
             this.Controls.Add(this.RoleView);
             this.Controls.Add(this.menu);
-            this.Name = "FrmRoles";
+            this.Name = "FrmRoleMaster";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "角色管理";
             this.Controls.SetChildIndex(this.menu, 0);
@@ -249,8 +249,6 @@
         private System.Windows.Forms.ToolStripMenuItem btn_Fresh;
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
         private System.Windows.Forms.DataGridView RoleView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRoleID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRoleName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private LJH.Inventory.UI.Controls.TooStripDBCTextBox txtKeyword;
         private System.Windows.Forms.ToolStripMenuItem btnSearch;
@@ -261,6 +259,8 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
 
     }
 }

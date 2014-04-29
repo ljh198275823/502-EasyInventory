@@ -72,7 +72,7 @@ namespace LJH.Inventory.BusinessModel
                 case SheetOperation.UndoApprove:
                     return State == SheetState.Approved;
                 case SheetOperation.Nullify:
-                    return State != SheetState.Canceled;
+                    return State != SheetState.Canceled && State != SheetState.Inventory;
                 case SheetOperation.Inventory:
                     return (State == SheetState.Add || State == SheetState.Approved);
                 default:

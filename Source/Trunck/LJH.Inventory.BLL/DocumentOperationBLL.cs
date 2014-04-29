@@ -10,7 +10,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.BLL
 {
-    public class DocumentOperationBLL:BLLBase <int,DocumentOperation >
+    public class DocumentOperationBLL : BLLBase<Guid, DocumentOperation>
     {
         #region 构造函数
         public DocumentOperationBLL(string repoUri)

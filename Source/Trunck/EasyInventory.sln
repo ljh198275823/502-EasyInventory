@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJH.Inventory.UI.Controls",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryDemo", "InventoryDemo\InventoryDemo.csproj", "{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InventoryDemoSetup", "InventoryDemoSetup\InventoryDemoSetup.vdproj", "{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = InventorySystem.vsmdi
@@ -106,6 +108,18 @@ Global
 		{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}.Release|Mixed Platforms.Build.0 = Release|x86
 		{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}.Release|x86.ActiveCfg = Release|x86
 		{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}.Release|x86.Build.0 = Release|x86
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|Any CPU.ActiveCfg = Debug
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|Any CPU.Build.0 = Debug
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|Mixed Platforms.Build.0 = Debug
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|x86.ActiveCfg = Debug
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|x86.Build.0 = Debug
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Any CPU.ActiveCfg = Release
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Any CPU.Build.0 = Release
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Mixed Platforms.ActiveCfg = Release
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Mixed Platforms.Build.0 = Release
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|x86.ActiveCfg = Release
+		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

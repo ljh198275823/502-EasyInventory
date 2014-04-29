@@ -14,6 +14,9 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 公共属性
+        /// <summary>
+        /// 获取或设置ID
+        /// </summary>
         public Guid ID { get; set; }
         /// <summary>
         /// 获取或设置仓库ID

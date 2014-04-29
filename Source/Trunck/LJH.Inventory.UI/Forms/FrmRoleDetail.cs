@@ -25,9 +25,9 @@ namespace LJH.Inventory.UI.Forms
         #region 重写基类方法
         protected override  bool CheckInput()
         {
-            if (string.IsNullOrEmpty (this.txtRoleID.Text.Trim()))
+            if (string.IsNullOrEmpty (this.txtName.Text.Trim()))
             {
-                MessageBox .Show ("角色ID不能为空!");
+                MessageBox .Show ("角色名称不能为空!");
                 return false;
             }
             return true;
@@ -46,10 +46,8 @@ namespace LJH.Inventory.UI.Forms
         protected override void ItemShowing()
         {
             Role info = (Role)UpdatingItem;
-            this.txtRoleID.Text = info.ID;
-            this.txtRoleID.Enabled = false;
-            this.txtRoleID.BackColor = Color.White;
-            this.txtDescription.Text = info.Description;
+            this.txtName.Text = info != null ? info.Name : string.Empty;
+            this.txtMemo.Text = info.Memo;
             this.functionTree1.SelectedRights = info.Permission;
             if (info.IsAdmin) this.functionTree1.Enabled = false;
             this.Text ="角色 "+ info.ID + " 的信息";
@@ -61,13 +59,14 @@ namespace LJH.Inventory.UI.Forms
             if (UpdatingItem == null)
             {
                 info = new Role();
+                info.ID = txtName.Text;
             }
             else
             {
                 info = UpdatingItem as Role;
             }
-            info.ID = this.txtRoleID.Text.Trim();
-            info.Description = this.txtDescription.Text.Trim();
+            info.Name = txtName.Text.Trim();
+            info.Memo = this.txtMemo.Text.Trim();
             info.Permission = this.functionTree1.SelectedRights;
             return info;
         }

@@ -56,8 +56,8 @@ namespace LJH.Inventory.UI.Forms
         {
             Role info = item as Role;
             row.Tag = item;
-            row.Cells["colRoleID"].Value = info.ID;
-            row.Cells["colRoleName"].Value = info.Description;
+            row.Cells["colName"].Value = info.Name;
+            row.Cells["colMemo"].Value = info.Memo;
         }
 
         protected override void Init()

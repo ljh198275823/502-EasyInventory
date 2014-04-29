@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Controls
             List<Role> roles = bll.GetItems(null).QueryObjects;
             if (roles != null) roles.Insert(0, new Role());
             this.DataSource = roles;
-            this.DisplayMember = "ID";
+            this.DisplayMember = "Name";
             this.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
