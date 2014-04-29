@@ -275,6 +275,7 @@ namespace LJH.Inventory.UI.Forms
             DeliverySheet sheet = UpdatingItem as DeliverySheet;
             if (sheet != null)
             {
+                if (MessageBox.Show("是否打印送货单?", "询问", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) != DialogResult.Yes) return;
                 try
                 {
                     string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");

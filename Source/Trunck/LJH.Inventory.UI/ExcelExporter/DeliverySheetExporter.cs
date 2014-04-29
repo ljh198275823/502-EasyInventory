@@ -85,7 +85,7 @@ namespace LJH.Inventory.UI.ExcelExporter
             r = sheet.get_Range("B" + 2, Type.Missing);
             r.Value2 = "'" + deliverySheet.ID;
             r = sheet.get_Range("D" + 2, Type.Missing);
-            //r.Value2 = deliverySheet.DeliveryDate != null ? deliverySheet.DeliveryDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd");
+            r.Value2 = deliverySheet.LastActiveDate.ToString("yyyy-MM-dd");
             CompanyInfo customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(deliverySheet.CustomerID).QueryObject;
             r = sheet.get_Range("B" + 3, Type.Missing);
             r.Value2 = customer != null ? customer.Name : string.Empty;
@@ -101,7 +101,7 @@ namespace LJH.Inventory.UI.ExcelExporter
             r.Value2 = deliverySheet.Memo;
 
             int count = 7;
-            List<string> pids = deliverySheet.Items .Select(it => it.ProductID).ToList();
+            List<string> pids = deliverySheet.Items.Select(it => it.ProductID).ToList();
             List<Product> ps = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(new ProductSearchCondition() { ProductIDS = pids }).QueryObjects;
             foreach (DeliveryItem item in deliverySheet.Items)
             {
