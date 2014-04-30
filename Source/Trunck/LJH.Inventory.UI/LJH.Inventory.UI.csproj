@@ -45,9 +45,14 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -160,6 +165,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\FrmProductInventoryAssign.Designer.cs">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Print\FrmDeliverySheetPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Print\FrmDeliverySheetPrint.Designer.cs">
+      <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Purchase\FrmSupplierDetail.cs">
       <SubType>Form</SubType>
@@ -626,6 +637,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmProductInventoryAssign.resx">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Print\FrmDeliverySheetPrint.resx">
+      <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Print\Report1.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchase\FrmSupplierDetail.resx">
       <DependentUpon>FrmSupplierDetail.cs</DependentUpon>

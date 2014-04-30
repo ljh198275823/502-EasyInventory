@@ -65,7 +65,6 @@ namespace LJH.Inventory.UI.ExcelExporter
                 Worksheet sheet = book.ActiveSheet as Worksheet;
                 FillDeliverySheet(sheet, deliverySheet);
                 sheet.PrintOutEx(Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-
             }
             catch (Exception ex)
             {

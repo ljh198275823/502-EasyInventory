@@ -86,12 +86,29 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置备注
         /// </summary>
         public string Memo { get; set; }
+        #endregion
+
+        #region 只读属性
         /// <summary>
         /// 获取货款金额
         /// </summary>
         public decimal Amount
         {
             get { return Price * Count; }
+        }
+        /// <summary>
+        /// 获取产品名称
+        /// </summary>
+        public string ProductName
+        {
+            get { return Product != null ? Product.Name : ProductID; }
+        }
+        /// <summary>
+        /// 获取产品规格
+        /// </summary>
+        public string Specification
+        {
+            get { return Product != null ? Product.Specification : string.Empty; }
         }
         #endregion
     }

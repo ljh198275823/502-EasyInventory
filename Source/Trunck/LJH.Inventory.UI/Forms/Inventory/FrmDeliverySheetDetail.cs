@@ -108,6 +108,9 @@ namespace LJH.Inventory.UI.Forms
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
             this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            this.txtLinker.Text = item.Linker;
+            this.txtLinkerPhone.Text = item.LinkerPhoneCall;
+            this.txtAddress.Text = item.Address;
             this.txtMemo.Text = item.Memo;
             ShowDeliveryItemsOnGrid(item.Items);
             ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -193,6 +196,9 @@ namespace LJH.Inventory.UI.Forms
             }
             sheet.CustomerID = Customer != null ? Customer.ID : null;
             sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
+            sheet.Linker = txtLinker.Text.Trim();
+            sheet.LinkerPhoneCall = txtLinkerPhone.Text.Trim();
+            sheet.Address = txtAddress.Text.Trim();
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<DeliveryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
@@ -275,25 +281,28 @@ namespace LJH.Inventory.UI.Forms
             DeliverySheet sheet = UpdatingItem as DeliverySheet;
             if (sheet != null)
             {
-                if (MessageBox.Show("是否打印送货单?", "询问", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) != DialogResult.Yes) return;
-                try
-                {
-                    string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
-                    DeliverySheetExporter exporter = null;
-                    if (System.IO.File.Exists(modal))
-                    {
-                        exporter = new DeliverySheetExporter(modal);
-                        exporter.PrintDeliverySheet(sheet);
-                    }
-                    else
-                    {
-                        MessageBox.Show("未找到送货单导出模板", "打印失败");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "打印失败");
-                }
+                Print.FrmDeliverySheetPrint frm = new Print.FrmDeliverySheetPrint();
+                frm.Sheet = sheet;
+                frm.ShowDialog();
+                //if (MessageBox.Show("是否打印送货单?", "询问", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) != DialogResult.Yes) return;
+                //try
+                //{
+                //    string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
+                //    DeliverySheetExporter exporter = null;
+                //    if (System.IO.File.Exists(modal))
+                //    {
+                //        exporter = new DeliverySheetExporter(modal);
+                //        exporter.PrintDeliverySheet(sheet);
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("未找到送货单导出模板", "打印失败");
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message, "打印失败");
+                //}
             }
         }
 
@@ -359,6 +368,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 Customer = frm.SelectedItem as CompanyInfo;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+                txtAddress.Text = Customer != null ? Customer.Address : string.Empty;
             }
         }
 
