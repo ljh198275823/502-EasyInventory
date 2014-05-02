@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,6 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.CategoryMenu.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -88,33 +88,40 @@
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(153, 136);
+            this.CategoryMenu.Size = new System.Drawing.Size(125, 114);
             // 
             // mnu_FreshTree
             // 
             this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
+            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
+            // 
+            // mnu_Add
+            // 
+            this.mnu_Add.Name = "mnu_Add";
+            this.mnu_Add.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Add.Text = "新建支出";
+            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
             // 
             // mnu_AddCategory
             // 
             this.mnu_AddCategory.Name = "mnu_AddCategory";
-            this.mnu_AddCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddCategory.Size = new System.Drawing.Size(124, 22);
             this.mnu_AddCategory.Text = "增加类别";
             this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
             // 
             // mnu_DeleteCategory
             // 
             this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
-            this.mnu_DeleteCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
             this.mnu_DeleteCategory.Text = "删除";
             this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
             // 
             // mnu_CategoryProperty
             // 
             this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
-            this.mnu_CategoryProperty.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
             this.mnu_CategoryProperty.Text = "属性";
             this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
             // 
@@ -256,6 +263,8 @@
             // 
             this.categoryTree.ContextMenuStrip = this.CategoryMenu;
             this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryTree.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.categoryTree.HideSelection = false;
             this.categoryTree.ItemHeight = 20;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
@@ -410,13 +419,6 @@
             this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Export.Text = "导出...";
             // 
-            // mnu_Add
-            // 
-            this.mnu_Add.Name = "mnu_Add";
-            this.mnu_Add.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Add.Text = "新建支出";
-            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
-            // 
             // FrmExpenditureRecordMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -427,7 +429,9 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.pnlFilter);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmExpenditureRecordMaster";
+            this.ShowInTaskbar = false;
             this.Text = "公司管理费用";
             this.Controls.SetChildIndex(this.pnlFilter, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBackUp));
             this.label2 = new System.Windows.Forms.Label();
             this.btnBrowser = new System.Windows.Forms.Button();
             this.txtBackUpPath = new System.Windows.Forms.TextBox();
@@ -133,9 +134,11 @@
             this.Controls.Add(this.txtBackUpPath);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmBackUp";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "数据库备份";
             this.statusStrip1.ResumeLayout(false);

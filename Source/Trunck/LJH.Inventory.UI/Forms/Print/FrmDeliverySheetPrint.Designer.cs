@@ -29,18 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDeliverySheetPrint));
             this.DeliveryRecordBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             ((System.ComponentModel.ISupportInitialize)(this.DeliveryRecordBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // DeliveryRecordBindingSource
+            // 
+            this.DeliveryRecordBindingSource.DataSource = typeof(LJH.Inventory.BusinessModel.DeliveryRecord);
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource2.Name = "Items";
-            reportDataSource2.Value = this.DeliveryRecordBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
+            reportDataSource1.Name = "Items";
+            reportDataSource1.Value = this.DeliveryRecordBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "LJH.Inventory.UI.Forms.Print.Report1.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
@@ -58,16 +63,13 @@
             this.reportViewer1.Size = new System.Drawing.Size(654, 330);
             this.reportViewer1.TabIndex = 1;
             // 
-            // DeliveryRecordBindingSource
-            // 
-            this.DeliveryRecordBindingSource.DataSource = typeof(LJH.Inventory.BusinessModel.DeliveryRecord);
-            // 
             // FrmDeliverySheetPrint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(654, 330);
             this.Controls.Add(this.reportViewer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmDeliverySheetPrint";
             this.ShowInTaskbar = false;
             this.Text = "送货单打印";

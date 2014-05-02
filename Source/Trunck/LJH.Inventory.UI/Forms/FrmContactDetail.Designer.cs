@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmContactDetail));
             this.txtEmail = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -222,7 +223,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtQQ);
             this.Controls.Add(this.label4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmContactDetail";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "联系人明细";
             this.Load += new System.EventHandler(this.FrmContactDetail_Load);

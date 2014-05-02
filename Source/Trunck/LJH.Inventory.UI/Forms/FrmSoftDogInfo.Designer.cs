@@ -116,6 +116,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmSoftDogInfo";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "软件授权信息";
             this.Load += new System.EventHandler(this.FrmSoftDogInfo_Load);

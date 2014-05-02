@@ -31,7 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerFinancialStateMaster));
             this.menu = new System.Windows.Forms.MenuStrip();
+            this.mnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +51,6 @@
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -71,6 +72,16 @@
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(1021, 50);
             this.menu.TabIndex = 32;
+            // 
+            // mnu_Payment
+            // 
+            this.mnu_Payment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
+            this.mnu_Payment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnu_Payment.Name = "mnu_Payment";
+            this.mnu_Payment.Size = new System.Drawing.Size(59, 46);
+            this.mnu_Payment.Text = "支付(&P)";
+            this.mnu_Payment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.mnu_Payment.Click += new System.EventHandler(this.mnu_Payment_Click);
             // 
             // btn_Export
             // 
@@ -128,6 +139,8 @@
             // categoryTree
             // 
             this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryTree.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.categoryTree.HideSelection = false;
             this.categoryTree.ItemHeight = 20;
             this.categoryTree.LoadCustomer = false;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
@@ -231,16 +244,6 @@
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             // 
-            // mnu_Payment
-            // 
-            this.mnu_Payment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
-            this.mnu_Payment.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnu_Payment.Name = "mnu_Payment";
-            this.mnu_Payment.Size = new System.Drawing.Size(59, 46);
-            this.mnu_Payment.Text = "支付(&P)";
-            this.mnu_Payment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.mnu_Payment.Click += new System.EventHandler(this.mnu_Payment_Click);
-            // 
             // FrmCustomerFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -250,7 +253,9 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerFinancialStateMaster";
+            this.ShowInTaskbar = false;
             this.Text = "客户应收账款";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);

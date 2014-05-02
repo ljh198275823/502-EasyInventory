@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerOtherReceivableMaster));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +45,8 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
+            this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,13 +62,11 @@
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
+            this.treeMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            this.treeMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -174,12 +175,28 @@
             // 
             this.customerTree1.ContextMenuStrip = this.treeMenu;
             this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.customerTree1.HideSelection = false;
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
             this.customerTree1.Name = "customerTree1";
             this.customerTree1.Size = new System.Drawing.Size(301, 335);
             this.customerTree1.TabIndex = 0;
             this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
+            // 
+            // treeMenu
+            // 
+            this.treeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Add});
+            this.treeMenu.Name = "treeMenu";
+            this.treeMenu.Size = new System.Drawing.Size(149, 26);
+            // 
+            // mnu_Add
+            // 
+            this.mnu_Add.Name = "mnu_Add";
+            this.mnu_Add.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Add.Text = "新建其它应收";
+            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
             // 
             // dataGridView1
             // 
@@ -312,20 +329,6 @@
             this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
             // 
-            // treeMenu
-            // 
-            this.treeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_Add});
-            this.treeMenu.Name = "treeMenu";
-            this.treeMenu.Size = new System.Drawing.Size(153, 48);
-            // 
-            // mnu_Add
-            // 
-            this.mnu_Add.Name = "mnu_Add";
-            this.mnu_Add.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Add.Text = "新建其它应收";
-            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
-            // 
             // FrmCustomerOtherReceivableMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -335,7 +338,9 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerOtherReceivableMaster";
+            this.ShowInTaskbar = false;
             this.Text = "其它应收款管理";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
@@ -344,9 +349,9 @@
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
+            this.treeMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.treeMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

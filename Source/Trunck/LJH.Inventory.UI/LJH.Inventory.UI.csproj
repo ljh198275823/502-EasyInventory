@@ -106,12 +106,6 @@
     <Compile Include="Forms\General\FrmCollectionTypeMaster.Designer.cs">
       <DependentUpon>FrmCollectionTypeMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmColumnSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmColumnSelection.Designer.cs">
-      <DependentUpon>FrmColumnSelection.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmContactDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -608,9 +602,6 @@
     <EmbeddedResource Include="Forms\General\FrmCollectionTypeMaster.resx">
       <DependentUpon>FrmCollectionTypeMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmColumnSelection.resx">
-      <DependentUpon>FrmColumnSelection.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmContactDetail.resx">
       <DependentUpon>FrmContactDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -641,7 +632,7 @@
     <EmbeddedResource Include="Forms\Print\FrmDeliverySheetPrint.resx">
       <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Print\Report1.rdlc">
+    <EmbeddedResource Include="Forms\Print\DeliverySheet.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchase\FrmSupplierDetail.resx">

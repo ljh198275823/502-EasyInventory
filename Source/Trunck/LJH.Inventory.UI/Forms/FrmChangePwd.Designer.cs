@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmChangePwd));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtOldPwd = new LJH.GeneralLibrary.WinformControl.DBCTextBox ();
-            this.txtNewPwd = new LJH.GeneralLibrary.WinformControl.DBCTextBox ();
-            this.txtConfirmPwd = new LJH.GeneralLibrary.WinformControl.DBCTextBox ();
+            this.txtOldPwd = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtNewPwd = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtConfirmPwd = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.btnOk = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -69,6 +70,7 @@
             // 
             // txtOldPwd
             // 
+            this.txtOldPwd.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtOldPwd.Location = new System.Drawing.Point(90, 14);
             this.txtOldPwd.Name = "txtOldPwd";
             this.txtOldPwd.PasswordChar = '*';
@@ -78,6 +80,7 @@
             // 
             // txtNewPwd
             // 
+            this.txtNewPwd.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtNewPwd.Location = new System.Drawing.Point(90, 43);
             this.txtNewPwd.Name = "txtNewPwd";
             this.txtNewPwd.PasswordChar = '*';
@@ -87,6 +90,7 @@
             // 
             // txtConfirmPwd
             // 
+            this.txtConfirmPwd.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtConfirmPwd.Location = new System.Drawing.Point(90, 74);
             this.txtConfirmPwd.Name = "txtConfirmPwd";
             this.txtConfirmPwd.PasswordChar = '*';
@@ -145,6 +149,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmChangePwd";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "修改密码";
             this.Load += new System.EventHandler(this.FrmChangePwd_Load);

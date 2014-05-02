@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSystemOptions));
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.tabAutoCreater = new System.Windows.Forms.TabPage();
@@ -1383,7 +1384,9 @@
             this.Controls.Add(this.tab1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOk);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSystemOptions";
+            this.ShowInTaskbar = false;
             this.Text = "系统参数设置";
             this.Load += new System.EventHandler(this.FrmSystemOptions_Load);
             this.tabAutoCreater.ResumeLayout(false);

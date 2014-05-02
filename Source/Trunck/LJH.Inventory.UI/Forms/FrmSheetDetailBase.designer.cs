@@ -31,17 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSheetDetailBase));
             this.SuspendLayout();
             // 
-            // FrmDetailBase
+            // FrmSheetDetailBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 273);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnOk);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmDetailBase";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FrmDetailBase";
+            this.Name = "FrmSheetDetailBase";
+            this.ShowInTaskbar = false;
             this.ResumeLayout(false);
 
         }

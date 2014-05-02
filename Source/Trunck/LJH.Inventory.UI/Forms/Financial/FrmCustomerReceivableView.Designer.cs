@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerReceivableView));
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -125,7 +126,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 362);
             this.Controls.Add(this.GridView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerReceivableView";
+            this.ShowInTaskbar = false;
             this.Text = "FrmCustomerReceivableView";
             this.Controls.SetChildIndex(this.GridView, 0);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
