@@ -14,7 +14,7 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerPaymentDetail : FrmSheetDetailBase 
+    public partial class FrmCustomerPaymentDetail : FrmSheetDetailBase
     {
         public FrmCustomerPaymentDetail()
         {
@@ -25,7 +25,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         /// <summary>
         /// 获取或设置付款的用户
         /// </summary>
-        public CompanyInfo Customer{get;set;}
+        public CompanyInfo Customer { get; set; }
         #endregion
 
         #region 私有方法
@@ -138,18 +138,19 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet (item as CustomerPayment,SheetOperation .Create , Operator.Current.Name);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Create, Operator.Current.Name);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Modify , Operator.Current.Name);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Modify, Operator.Current.Name);
         }
 
         protected override void ShowButtonState()
         {
-            ShowButtonState(this.toolStrip1);
+            base.ShowButtonState(this.toolStrip1);
+            btnPayment.Enabled = UpdatingItem != null && (UpdatingItem as CustomerPayment).State == SheetState.Approved ? true : false;
         }
         #endregion
 
@@ -198,6 +199,21 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
             PerformOperation<CustomerPayment>(processor, SheetOperation.UndoApprove);
+        }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            if (UpdatingItem != null)
+            {
+                string paymentID = (UpdatingItem as CustomerPayment).ID;
+                FrmPaymentAssign frm = new FrmPaymentAssign();
+                frm.CustomerPaymentID = paymentID;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns(paymentID).QueryObjects;
+                    ShowAssigns(assigns);
+                }
+            }
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
@@ -283,5 +299,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
+
     }
 }

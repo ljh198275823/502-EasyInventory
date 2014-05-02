@@ -42,7 +42,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置付款金额剩余未抵销的金额
+        /// 获取或设置已抵销的金额
         /// </summary>
         public decimal Assigned { get; set; }
         /// <summary>
@@ -57,6 +57,16 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
+        #endregion
+
+        #region 只读属性
+        /// <summary>
+        /// 获取待抵消金额
+        /// </summary>
+        public decimal Remain
+        {
+            get { return Amount - Assigned; }
+        }
         #endregion
 
         #region ISheet接口

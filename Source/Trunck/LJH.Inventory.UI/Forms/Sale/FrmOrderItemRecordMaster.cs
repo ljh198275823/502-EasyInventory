@@ -25,6 +25,7 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         #region 私有变量
         private List<OrderItemRecord> _Records = null;
+        private List<ProductInventory> _Inventories = null;
         #endregion
 
         #region 私有方法
@@ -83,6 +84,7 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         protected override List<object> GetDataSource()
         {
+            _Inventories = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             if (SearchCondition == null)
             {
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
@@ -110,6 +112,10 @@ namespace LJH.Inventory.UI.Forms.Sale
             row.Cells["colInventory"].Value = info.Inventory.Trim();
             row.Cells["colShipped"].Value = info.Shipped.Trim();
             row.Cells["colNotPurchased"].Value = info.NotPurchased.Trim();
+            if (_Inventories != null && _Inventories.Count > 0)
+            {
+                row.Cells["colValidInventory"].Value = _Inventories.Sum(it => it.ProductID == info.ProductID ? it.Valid : 0);
+            }
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)
             {
@@ -160,6 +166,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                     CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, frm.Count);
                     if (ret.Result == ResultCode.Successful)
                     {
+                        _Inventories = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
                         item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], item);
                     }

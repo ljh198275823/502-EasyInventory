@@ -76,6 +76,7 @@
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
+            this.btnPayment = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -297,7 +298,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 92;
-            this.label11.Text = "支出单号";
+            this.label11.Text = "付款单号";
             // 
             // tabPage3
             // 
@@ -538,6 +539,7 @@
             this.btnSave,
             this.btnApprove,
             this.btnUndoApprove,
+            this.btnPayment,
             this.btnNullify});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -575,6 +577,16 @@
             this.btnUndoApprove.Text = "取消审核";
             this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
+            this.btnPayment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(60, 53);
+            this.btnPayment.Text = "抵销应收";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // btnNullify
             // 
@@ -669,5 +681,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.ToolStripButton btnPayment;
     }
 }

@@ -60,13 +60,14 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colProduct = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventory = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colOnway = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colShipped = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colValidInventory = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colNotPurchased = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,42 +92,42 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 120);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(124, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(124, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // cMnu_Reserve
             // 
             this.cMnu_Reserve.Name = "cMnu_Reserve";
-            this.cMnu_Reserve.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Reserve.Size = new System.Drawing.Size(124, 22);
             this.cMnu_Reserve.Text = "库存预订";
             this.cMnu_Reserve.Click += new System.EventHandler(this.cMnu_Reserve_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(121, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(124, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(124, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // pnlFilter
@@ -319,6 +320,8 @@
             // customerTree1
             // 
             this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.customerTree1.HideSelection = false;
             this.customerTree1.ItemHeight = 20;
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
@@ -353,6 +356,7 @@
             this.colInventory,
             this.colOnway,
             this.colShipped,
+            this.colValidInventory,
             this.colNotPurchased,
             this.colDemandDate,
             this.colSales,
@@ -376,7 +380,6 @@
             this.colOrderID.ReadOnly = true;
             this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colOrderID.Width = 80;
             // 
             // colOrderDate
             // 
@@ -393,7 +396,6 @@
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
             this.colCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colCustomer.Width = 150;
             // 
             // colProduct
@@ -402,7 +404,6 @@
             this.colProduct.Name = "colProduct";
             this.colProduct.ReadOnly = true;
             this.colProduct.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colProduct.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colUnit
             // 
@@ -442,6 +443,14 @@
             this.colShipped.ReadOnly = true;
             this.colShipped.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colShipped.Width = 80;
+            // 
+            // colValidInventory
+            // 
+            this.colValidInventory.HeaderText = "可用库存";
+            this.colValidInventory.Name = "colValidInventory";
+            this.colValidInventory.ReadOnly = true;
+            this.colValidInventory.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colValidInventory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colNotPurchased
             // 
@@ -540,13 +549,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
-        private System.Windows.Forms.DataGridViewLinkColumn colCustomer;
-        private System.Windows.Forms.DataGridViewLinkColumn colProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewLinkColumn colInventory;
         private System.Windows.Forms.DataGridViewLinkColumn colOnway;
         private System.Windows.Forms.DataGridViewLinkColumn colShipped;
+        private System.Windows.Forms.DataGridViewLinkColumn colValidInventory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPurchased;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDemandDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSales;

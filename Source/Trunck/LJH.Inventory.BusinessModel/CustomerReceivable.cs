@@ -48,7 +48,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置已经支付的金额
         /// </summary>
-        public decimal HasPaid { get; set; }
+        public decimal Haspaid { get; set; }
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>
@@ -61,7 +61,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Remain
         {
-            get { return Amount - HasPaid; }
+            get { return Amount - Haspaid; }
         }
         #endregion
 
