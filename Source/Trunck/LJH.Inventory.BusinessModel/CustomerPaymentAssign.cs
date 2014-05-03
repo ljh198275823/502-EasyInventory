@@ -28,7 +28,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置客户应收账款ID
         /// </summary>
-        public string ReceivableID { get; set; }
+        public Guid ReceivableID { get; set; }
         /// <summary>
         /// 获取或设置付款项的总金额
         /// </summary>

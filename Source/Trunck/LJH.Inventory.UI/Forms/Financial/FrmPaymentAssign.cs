@@ -53,22 +53,132 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colSheetID"].Value = cr.SheetID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colClassID"].Value = cr.ClassID;
-            row.Cells["colAmount"].Value = cr.Amount;
             row.Cells["colRemain"].Value = cr.Remain;
+            row.Cells["colAssign"].Value = 0;
             row.Cells["colMemo"].Value = cr.Memo;
+        }
+
+        private decimal GetAssignsFromGrid()
+        {
+            decimal ret = 0;
+            foreach (DataGridViewRow row in GridView.Rows)
+            {
+                decimal temp = Convert.ToDecimal(row.Cells["colAssign"].Value);
+                ret += temp;
+            }
+            return ret;
         }
         #endregion
 
+        #region 事件处理程序
         private void FrmPaymentAssign_Load(object sender, EventArgs e)
         {
             CustomerPayment item = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(CustomerPaymentID).QueryObject;
             if (item != null)
             {
                 txtID.Text = item.ID;
-                txtAmount.DecimalValue = item.Amount.Trim();
+                txtAmount.DecimalValue = item.Remain.Trim();
                 txtRemain.DecimalValue = item.Remain.Trim();
                 ShowReceivables(item.CustomerID);
             }
         }
+
+        private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (GridView.Columns[e.ColumnIndex].Name == "colCheck")
+            {
+                DataGridViewCheckBoxCell chk = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewCheckBoxCell;
+                if ((bool)chk.EditedFormattedValue)
+                {
+                    if (txtRemain.DecimalValue > 0)
+                    {
+                        decimal temp = Convert.ToDecimal(GridView.Rows[e.RowIndex].Cells["colRemain"].Value);
+                        decimal assign = txtRemain.DecimalValue > temp ? temp : txtRemain.DecimalValue;
+                        GridView.Rows[e.RowIndex].Cells["colAssign"].Value = assign;
+                        txtRemain.DecimalValue = txtAmount.DecimalValue - GetAssignsFromGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("客户付款已经抵消完");
+                    }
+                }
+                else
+                {
+                    decimal temp = Convert.ToDecimal(GridView.Rows[e.RowIndex].Cells["colAssign"].Value);
+                    GridView.Rows[e.RowIndex].Cells["colAssign"].Value = 0;
+                    txtRemain.DecimalValue = txtAmount.DecimalValue - GetAssignsFromGrid();
+                }
+            }
+        }
+
+        private void GridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && GridView.Columns[e.ColumnIndex].Name == "colAssign")
+            {
+                string temp = GridView.Rows[e.RowIndex].Cells["colAssign"].Value.ToString();
+                decimal t = 0;
+                if (decimal.TryParse(temp, out t))
+                {
+                    decimal allAssigned = GetAssignsFromGrid();
+                    if (allAssigned > txtAmount.DecimalValue)
+                    {
+                        GridView.Rows[e.RowIndex].Cells["colAssign"].Value = 0;
+                        txtRemain.DecimalValue = txtAmount.DecimalValue - GetAssignsFromGrid();
+                        MessageBox.Show("分配的金额已经超出客户付款未分配额度");
+                    }
+                    else
+                    {
+                        txtRemain.DecimalValue = txtAmount.DecimalValue - allAssigned;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("输入的内容不能转换成金额,请重新输入");
+                    GridView.Rows[e.RowIndex].Cells["colAssign"].Value = 0;
+                }
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            List<CustomerPaymentAssign> assigns = new List<CustomerPaymentAssign>();
+            foreach (DataGridViewRow row in GridView.Rows)
+            {
+                DataGridViewCheckBoxCell chk = row.Cells["colCheck"] as DataGridViewCheckBoxCell;
+                if ((bool)chk.EditedFormattedValue)
+                {
+                    decimal temp = Convert.ToDecimal(row.Cells["colAssign"].Value);
+                    if (temp > 0)
+                    {
+                        CustomerPaymentAssign item = new CustomerPaymentAssign()
+                        {
+                            ID = Guid.NewGuid(),
+                            PaymentID = CustomerPaymentID,
+                            ReceivableID = (row.Tag as CustomerReceivable).ID,
+                            Amount = temp,
+                        };
+                        assigns.Add(item);
+                    }
+                }
+            }
+            if (assigns.Count > 0)
+            {
+                CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).Assign(assigns);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
+        }
+        #endregion
     }
 }

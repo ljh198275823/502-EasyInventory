@@ -137,7 +137,7 @@ namespace LJH.Inventory.UI.Controls
         /// <param name="c"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public TreeNode AddCustomerNode(CompanyInfo c, TreeNode parent,bool expand=false)
+        public TreeNode AddCustomerNode(CompanyInfo c, TreeNode parent, bool expand = false)
         {
             TreeNode node = parent.Nodes.Add(string.Format("[{0}]{1}", c.ID, c.Name));
             node.Tag = c;
@@ -196,7 +196,7 @@ namespace LJH.Inventory.UI.Controls
         /// <returns></returns>
         public CompanyInfo GetCustomer(string id)
         {
-            if (_Companys != null && _Companys.Count > 0)
+            if (!string.IsNullOrEmpty(id) && _Companys != null && _Companys.Count > 0)
             {
                 return _Companys[id] as CompanyInfo;
             }

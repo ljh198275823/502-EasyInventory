@@ -29,17 +29,17 @@ namespace LJH.Inventory.BLL
         protected override void DoNullify(CustomerOtherReceivable info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoNullify(info, unitWork, dt, opt);
-            //如果已经有客户付款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
-            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
-            con.ReceivableID = info.ID;
-            List<CustomerPaymentAssign> assigns = ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con).QueryObjects;
-            if (assigns != null && assigns.Count > 0)
-            {
-                foreach (CustomerPaymentAssign assign in assigns)
-                {
-                    ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).Delete(assign, unitWork);
-                }
-            }
+            ////如果已经有客户付款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
+            //CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
+            //con.ReceivableID = info.ID;
+            //List<CustomerPaymentAssign> assigns = ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            //if (assigns != null && assigns.Count > 0)
+            //{
+            //    foreach (CustomerPaymentAssign assign in assigns)
+            //    {
+            //        ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).Delete(assign, unitWork);
+            //    }
+            //}
         }
         #endregion
     }

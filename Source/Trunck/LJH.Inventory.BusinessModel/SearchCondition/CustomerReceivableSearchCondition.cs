@@ -9,11 +9,13 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     {
         public DateTimeRange CreateDate { get; set; }
 
+        public List<Guid> ReceivableIDS { get; set; }
+
         public string CustomerID { get; set; }
 
         public string OrderID { get; set; }
 
-        public string DeliverySheet { get; set; }
+        public string SheetID { get; set; }
 
         public bool? Settled { get; set; }
     }

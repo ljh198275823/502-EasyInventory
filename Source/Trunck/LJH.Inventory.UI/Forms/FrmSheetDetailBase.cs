@@ -249,21 +249,24 @@ namespace LJH.Inventory.UI.Forms
 
         private void PerformSave<T>(SheetProcessorBase<T> processor, SheetOperation operation) where T : class,ISheet<string>
         {
-            T sheet = GetItemFromInput() as T;
-            CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
-            if (ret.Result == ResultCode.Successful)
+            if (CheckInput())
             {
-                UpdatingItem = sheet;
-                IsAdding = false;
-                ItemShowing();
-                ShowButtonState();
-                if (operation == SheetOperation.Create) this.OnItemAdded(new ItemAddedEventArgs(sheet));
-                if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
-                MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
-            }
-            else
-            {
-                MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                T sheet = GetItemFromInput() as T;
+                CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    UpdatingItem = sheet;
+                    IsAdding = false;
+                    ItemShowing();
+                    ShowButtonState();
+                    if (operation == SheetOperation.Create) this.OnItemAdded(new ItemAddedEventArgs(sheet));
+                    if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
+                    MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

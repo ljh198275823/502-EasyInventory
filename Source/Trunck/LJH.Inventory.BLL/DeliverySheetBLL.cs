@@ -177,15 +177,24 @@ namespace LJH.Inventory.BLL
 
         #region 公共方法
         /// <summary>
-        /// 获取某个客户付款单的金额分配
+        /// 获取某个单据的所有付款明细
         /// </summary>
         /// <param name="paymentID"></param>
         /// <returns></returns>
         public QueryResultList<CustomerPaymentAssign> GetAssigns(string sheetNo)
         {
-            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
-            con.ReceivableID = sheetNo;
-            return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con);
+            CustomerReceivableSearchCondition con1 = new CustomerReceivableSearchCondition()
+            {
+                SheetID = sheetNo,
+            };
+            List<CustomerReceivable> items = (new CustomerReceivableBLL(_RepoUri)).GetItems(con1).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
+                con.ReceivableIDs = items.Select(it => it.ID).ToList();
+                return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con);
+            }
+            return new QueryResultList<CustomerPaymentAssign>(ResultCode.Fail, "没有找到记录", null);
         }
         /// <summary>
         /// 通过查询条件获取相关商品销售记录

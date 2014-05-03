@@ -462,7 +462,7 @@
     <Type Name="LJH.Inventory.BusinessModel.CustomerPaymentAssign">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
       <Column Name="PaymentID" Member="PaymentID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="ReceivableID" Member="ReceivableID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="ReceivableID" Member="ReceivableID"  DbType="uniqueidentifier NOT NULL" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
     </Type>
   </Table>
