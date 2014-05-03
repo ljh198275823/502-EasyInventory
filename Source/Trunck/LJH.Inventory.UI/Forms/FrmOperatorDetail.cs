@@ -32,7 +32,12 @@ namespace LJH.Inventory.UI.Forms
                 this.btnChangePwd.Visible = false;
                 this.txtPassword.Size = this.txtOperatorName.Size;
             }
-            this.btnOk.Enabled = Operator.Current.Permit(Permission.EditOperator);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            this.btnOk.Enabled = Operator.Current.Permit(Permission.Operator , PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

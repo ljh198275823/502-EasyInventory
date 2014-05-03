@@ -49,10 +49,15 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             this.categoryTree.Init();
-            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.EditProductCategory);
-            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.EditProductCategory);
-            this.mnu_CategoryProperty.Enabled = Operator.Current.Permit(Permission.EditProductCategory) || Operator.Current.Permit(Permission.ReadProductCategory);
             base.Init();
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
+            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
+            this.mnu_CategoryProperty.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit) || Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Read);
         }
 
         protected override FrmDetailBase GetDetailForm()

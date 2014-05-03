@@ -85,35 +85,35 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 120);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // pnlFilter
@@ -262,6 +262,8 @@
             // 
             this.customerTree1.ContextMenuStrip = this.CategoryMenu;
             this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.customerTree1.HideSelection = false;
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
             this.customerTree1.Name = "customerTree1";
@@ -275,19 +277,19 @@
             this.mnu_FreshTree,
             this.mnu_AddSheet});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(153, 70);
+            this.CategoryMenu.Size = new System.Drawing.Size(137, 48);
             // 
             // mnu_FreshTree
             // 
             this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
+            this.mnu_FreshTree.Size = new System.Drawing.Size(136, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
             // 
             // mnu_AddSheet
             // 
             this.mnu_AddSheet.Name = "mnu_AddSheet";
-            this.mnu_AddSheet.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
             this.mnu_AddSheet.Text = "新建送货单";
             this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
             // 

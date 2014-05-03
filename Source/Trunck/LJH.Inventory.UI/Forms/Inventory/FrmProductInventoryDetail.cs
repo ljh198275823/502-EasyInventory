@@ -61,8 +61,12 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtWareHouseID.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             txtProductID.Text = Product != null ? Product.Name : string.Empty;
-            Operator opt = Operator.Current;
-            this.btnOk.Enabled = opt.Permit(Permission.CreateInventory);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

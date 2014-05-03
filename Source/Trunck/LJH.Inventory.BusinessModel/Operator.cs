@@ -94,7 +94,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return (ID.ToUpper() != "ADMIN");
+                return (ID != DefaultLogID );
             }
         }
 
@@ -102,20 +102,23 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return (ID.ToUpper() != "ADMIN");
+                return (ID != DefaultLogID);
             }
         }
         #endregion
 
         #region 公共方法
         /// <summary>
-        /// 查看此操作员是否被授予此权限
+        /// 检测此操作员是否被授予某个权限
         /// </summary>
-        public bool Permit(Permission right)
+        /// <param name="right"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public bool Permit(Permission right,PermissionActions action)
         {
             if (this.Role != null)
             {
-                return Role.Permit(right);
+                return Role.Permit(right,action);
             }
             else
             {

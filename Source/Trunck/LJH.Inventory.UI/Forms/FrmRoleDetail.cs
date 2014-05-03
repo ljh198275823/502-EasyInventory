@@ -40,7 +40,12 @@ namespace LJH.Inventory.UI.Forms
             {
                 this.Text = "增加角色";
             }
-            this.btnOk.Enabled = Operator.Current.Permit(Permission.EditRole);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            this.btnOk.Enabled = Operator.Current.Permit(Permission.Role, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

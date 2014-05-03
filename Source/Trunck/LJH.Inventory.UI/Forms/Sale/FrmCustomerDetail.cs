@@ -50,8 +50,12 @@ namespace LJH.Inventory.UI.Forms
         {
             base.InitControls();
             this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
-            Operator opt = Operator.Current;
-            this.btnOk.Enabled = opt.Permit(Permission.EditCustomer);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

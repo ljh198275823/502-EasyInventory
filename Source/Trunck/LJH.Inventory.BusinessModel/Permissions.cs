@@ -14,256 +14,176 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 查看系统选项
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看系统选项")]
-        ReadSystemOptions = 1,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "系统选项")]
+        SystemOptions = 1,
         /// <summary>
-        /// 编辑系统选项
+        /// 产品类别
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑系统选项")]
-        EditSystemOptions = 2,
-        /// <summary>
-        /// 查看商品类别
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看商品类别")]
-        ReadProductCategory = 3,
-        /// <summary>
-        /// 编辑商品类别
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑商品类别")]
-        EditProductCategory = 4,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "产品类别")]
+        ProductCategory = 2,
         /// <summary>
         /// 查看商品
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看商品")]
-        ReadProduct = 5,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "产品资料")]
+        Product = 3,
         /// <summary>
-        /// 编辑商品
+        /// 仓库资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑商品")]
-        EditProduct = 6,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "仓库资料")]
+        WareHouse = 4,
         /// <summary>
-        /// 编辑系统选项
+        /// 部门资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看仓库信息")]
-        ReadWareHouse = 7,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "部门资料")]
+        Department=5,
         /// <summary>
-        /// 查看价格
+        /// 人员资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑仓库信息")]
-        EditWareHouse = 8,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "人员资料")]
+        Staff = 5,
         /// <summary>
-        /// 新建商品库存
+        /// 产品库存
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "新建商品库存")]
-        CreateInventory = 9,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "产品库存")]
+        ProductInventory = 5,
         /// <summary>
         /// 库存盘点
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "库存盘点")]
-        InventoryCheck = 10,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "库存盘点")]
+        InventoryCheck = 6,
         /// <summary>
-        /// 查看客户资料
+        /// 客户类别
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看客户资料")]
-        ReadCustomer = 11,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "客户类别")]
+        CustomerType = 7,
         /// <summary>
-        /// 编辑客户资料
+        /// 客户资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑客户资料")]
-        EditCustomer = 12,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "客户资料")]
+        Customer ,
         /// <summary>
-        /// 查看订单
+        /// 订单资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看订单")]
-        ReadOrder = 13,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "订单资料")]
+        Order ,
         /// <summary>
-        /// 编辑订单
+        /// 送货单资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑订单")]
-        EditOrder = 14,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "送货单资料")]
+        DeliverySheet = 9,
         /// <summary>
-        /// 打印订单
+        /// 供应商类别
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "打印订单")]
-        PrintOrder = 15,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "供应商类别")]
+        SupplierType = 10,
         /// <summary>
-        /// 审核订单
+        /// 供应商资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "审核订单")]
-        ApproveOrder = 16,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "供应商资料")]
+        Supplier = 10,
         /// <summary>
-        /// 取消订单
+        /// 采购单资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "取消订单")]
-        CancelOrder = 17,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "采购单资料")]
+        PurchaseOrder = 10,
         /// <summary>
-        /// 查看送货单
+        /// 收货单资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看送货单")]
-        ReadDeliverySheet = 18,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "收货单资料")]
+        InventorySheet = 11,
         /// <summary>
-        /// 编辑送货单
+        /// 客户还款资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑送货单")]
-        EditDeliverySheet = 19,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "客户还款资料")]
+        CustomerPayment = 12,
         /// <summary>
-        /// 查看价格
+        /// 资金支出资料
         /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "打印送货单")]
-        PrintDeliverySheet = 20,
-        /// <summary>
-        /// 审批送货单
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "审核送货单")]
-        ApproveDeliverySheet = 21,
-        /// <summary>
-        /// 出货
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "出货")]
-        Shipping = 22,
-        /// <summary>
-        /// 取消送货单
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "取消送货单")]
-        CancelDeliverySheet = 23,
-        /// <summary>
-        /// 查看供应商资料
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看供应商资料")]
-        ReadSupplier = 24,
-        /// <summary>
-        /// 编辑供应商资料
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑供应商资料")]
-        EditSupplier = 25,
-        /// <summary>
-        /// 查看收货单
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看收货单")]
-        ReadInventorySheet = 26,
-        /// <summary>
-        /// 编辑订单
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑收货单")]
-        EditInventorySheet = 27,
-        /// <summary>
-        /// 打印收货单
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "打印收货单")]
-        PrintInventorySheet = 28,
-        /// <summary>
-        /// 审核收货单
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "审核收货单")]
-        ApproveInventorySheet = 29,
-        /// <summary>
-        /// 收货
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "收货")]
-        Inventory = 30,
-        /// <summary>
-        /// 取消收货单
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "取消收货单")]
-        CancelInventorySheet = 31,
-        /// <summary>
-        /// 查看客户还款资料
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看客户还款资料")]
-        ReadCustomerPayment = 32,
-        /// <summary>
-        /// 编辑客户还款资料
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑客户还款资料")]
-        EditCustomerPayment = 33,
-        /// <summary>
-        /// 查看资金支出资料
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看资金支出资料")]
-        ReadExpenditureRecord = 34,
-        /// <summary>
-        /// 编辑资金支出资料
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑资金支出资料")]
-        EditExpenditureRecord = 35,
-        /// <summary>
-        /// 查看价格
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看价格")]
-        ReadPrice = 36,
-        /// <summary>
-        /// 查看收汇方式
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "查看收汇方式")]
-        ReadCollectionType = 37,
-        /// <summary>
-        /// 编辑收汇方式
-        /// </summary>
-        [OperatorRight(Catalog = "数据管理", Description = "编辑收汇方式")]
-        EditCollectionType = 38,
-        #endregion
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "资金支出资料")]
+        ExpenditureRecord = 13,
 
-        #region 安全
         /// <summary>
-        /// 查看操作员信息
+        /// 资金支出资料
         /// </summary>
-        [OperatorRight(Catalog = "安全", Description = "查看操作员信息")]
-        ReadOperaotor = 50,
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它公司类别")]
+        OtherCompanyType= 13,
         /// <summary>
-        /// 编辑操作员信息
+        /// 资金支出资料
         /// </summary>
-        [OperatorRight(Catalog = "安全", Description = "编辑操作员信息")]
-        EditOperator = 51,
-        /// <summary>
-        /// 查看角色信息
-        /// </summary>
-        [OperatorRight(Catalog = "安全", Description = "查看角色信息")]
-        ReadRole = 52,
-        /// <summary>
-        /// 编辑角色信息
-        /// </summary>
-        [OperatorRight(Catalog = "安全", Description = "编辑角色信息")]
-        EditRole = 53,
-
+        [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它公司资料")]
+        OtherCompany= 13,
         #endregion
 
         #region 查询与报表
         /// <summary>
         /// 出货记录查询
         /// </summary>
-        [OperatorRight(Catalog = "查询与报表", Description = "出货记录查询")]
-        DeliveryRecordReport = 60,
+        [OperatorRight(Catalog = "查询与报表", Actions = PermissionActions.Read, Description = "出货记录查询")]
+        DeliveryRecordReport = 101,
         /// <summary>
-        /// 商品出货统计
+        /// 产品出货统计
         /// </summary>
-        [OperatorRight(Catalog = "查询与报表", Description = "商品出货统计")]
-        DeliveryStatistics = 61,
+        [OperatorRight(Catalog = "查询与报表", Actions = PermissionActions.Read, Description = "产品出货统计")]
+        DeliveryStatistics = 102,
         /// <summary>
-        /// 原材料收货查询
+        /// 业务员业绩统计
         /// </summary>
-        [OperatorRight(Catalog = "查询与报表", Description = "业务员业绩统计")]
-        PerformanceStatistics = 62,
-        /// <summary>
-        /// 原材料库存统计
-        /// </summary>
-        [OperatorRight(Catalog = "查询与报表", Description = "原材料库存统计")]
-        _InventoryRecordReport = 63,
+        [OperatorRight(Catalog = "查询与报表", Actions = PermissionActions.Read, Description = "业务员业绩统计")]
+        PerformanceStatistics = 103,
         #endregion
+
+        #region 安全
+        /// <summary>
+        /// 操作员资料
+        /// </summary>
+        [OperatorRight(Catalog = "安全", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "操作员资料")]
+        Operator = 201,
+        /// <summary>
+        /// 查看角色资料
+        /// </summary>
+        [OperatorRight(Catalog = "安全", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "角色资料")]
+        Role = 202,
+        #endregion
+    }
+
+    /// <summary>
+    /// 表示权限的动作
+    /// </summary>
+    public enum PermissionActions
+    {
+        /// <summary>
+        /// 查看
+        /// </summary>
+        Read = 0x1,
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        Edit = 0x2,
+
+
     }
 
     public class OperatorRightAttribute : Attribute
     {
+        #region 构造函数
+        public OperatorRightAttribute()
+        {
+        }
+        #endregion
+
+        #region 公共属性
         /// <summary>
         /// 权限的类别
         /// </summary>
         public string Catalog { get; set; }
         /// <summary>
+        /// 获取或设置权限的所有操作
+        /// </summary>
+        public PermissionActions Actions { get; set; }
+        /// <summary>
         /// 权限的备注
         /// </summary>
         public string Description { get; set; }
-
-        public OperatorRightAttribute()
-        {
-        }
+        #endregion
     }
 }

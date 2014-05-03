@@ -13,7 +13,7 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmProductCategoryMaster :FrmMasterBase 
+    public partial class FrmProductCategoryMaster : FrmMasterBase
     {
         public FrmProductCategoryMaster()
         {
@@ -60,9 +60,13 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            Operator opt = Operator.Current;
-            menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditProductCategory);
-            menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditProductCategory);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
+            this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
         }
         #endregion
     }

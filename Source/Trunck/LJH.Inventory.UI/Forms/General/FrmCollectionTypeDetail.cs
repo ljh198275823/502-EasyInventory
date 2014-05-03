@@ -55,8 +55,6 @@ namespace LJH.Inventory.UI.Forms
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            Operator opt = Operator.Current;
-            btnOk.Enabled = opt.Permit(Permission.EditCollectionType);
         }
 
         protected override CommandResult AddItem(object addingItem)

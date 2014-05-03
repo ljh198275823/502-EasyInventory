@@ -32,8 +32,12 @@ namespace LJH.Inventory.UI.Forms.General
         {
             base.InitControls();
             txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
-            Operator opt = Operator.Current;
-            btnOk.Enabled = opt.Permit(Permission.EditCustomer);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.Department, PermissionActions.Edit);
         }
 
         protected override bool CheckInput()

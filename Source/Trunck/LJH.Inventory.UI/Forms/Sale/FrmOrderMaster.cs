@@ -66,8 +66,13 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             this.customerTree1.Init();
-            Operator opt = Operator.Current;
-            dataGridView1.Columns["colAmount"].Visible = Operator.Current.Permit(Permission.ReadPrice);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.Order, PermissionActions.Edit);
+            mnu_Add.Enabled = Operator.Current.Permit(Permission.Order, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()

@@ -47,8 +47,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void InitControls()
         {
-            Operator opt = Operator.Current;
-            this.btnOk.Enabled = opt.Permit(Permission.EditWareHouse);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.WareHouse, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

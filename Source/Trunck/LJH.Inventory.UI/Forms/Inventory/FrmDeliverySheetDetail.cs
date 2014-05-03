@@ -163,9 +163,6 @@ namespace LJH.Inventory.UI.Forms
             this.txtSheetNo.Text = _AutoCreate;
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
-            Operator opt = Operator.Current;
-            ItemsGrid.Columns["colPrice"].Visible = Operator.Current.Permit(Permission.ReadPrice);
-            ItemsGrid.Columns["colTotal"].Visible = Operator.Current.Permit(Permission.ReadPrice);
             if (IsForView)
             {
                 toolStrip1.Enabled = false;

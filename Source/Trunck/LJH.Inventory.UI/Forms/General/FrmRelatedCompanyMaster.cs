@@ -106,9 +106,18 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             InitCategoryTree();
-            Operator opt = Operator.Current;
-            menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditCustomer);
-            menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditCustomer);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            this.btn_Add.Enabled = Operator.Current.Permit(Permission.OtherCompany, PermissionActions.Edit);
+            this.btn_Delete.Enabled = Operator.Current.Permit(Permission.OtherCompany, PermissionActions.Edit);
+            this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.OtherCompany, PermissionActions.Edit);
+            this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.OtherCompany, PermissionActions.Edit);
+
+            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
+            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()

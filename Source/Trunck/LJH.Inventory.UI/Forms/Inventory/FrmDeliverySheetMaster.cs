@@ -69,8 +69,13 @@ namespace LJH.Inventory.UI.Forms
         {
             base.Init();
             customerTree1.Init();
-            this.contextMenuStrip1.Items["cMnu_Add"].Enabled = Operator.Current.Permit(Permission.EditDeliverySheet);
-            dataGridView1.Columns["colAmount"].Visible = Operator.Current.Permit(Permission.ReadPrice);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Edit);
+            mnu_AddSheet.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()

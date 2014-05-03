@@ -82,21 +82,19 @@ namespace LJH.Inventory.UI.Applications.WaiMao
         private void ShowOperatorRights()
         {
             Operator cur = Operator.Current;
-            this.mnu_Product.Enabled = cur.Permit(Permission.ReadProduct) || cur.Permit(Permission.EditProduct);
-            this.mnu_WareHouse.Enabled = cur.Permit(Permission.EditWareHouse) || cur.Permit(Permission.ReadWareHouse);
-            this.mnu_ProductCategory.Enabled = cur.Permit(Permission.ReadProductCategory) || cur.Permit(Permission.EditProductCategory);
-            this.mnu_Customer.Enabled = cur.Permit(Permission.ReadCustomer) || cur.Permit(Permission.EditCustomer);
-            this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.ReadDeliverySheet) || cur.Permit(Permission.EditDeliverySheet);
-            this.mnu_Options.Enabled = cur.Permit(Permission.ReadSystemOptions) || cur.Permit(Permission.EditSystemOptions);
-            this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.ReadCustomerPayment) || cur.Permit(Permission.EditCustomerPayment);
-            // this.mnu_DaiFu.Enabled = cur.Permit(Permission.ReadDaiFuRecord) || cur.Permit(Permission.EditCustomerDaiFu);
-            this.mnu_Expanditure.Enabled = cur.Permit(Permission.ReadExpenditureRecord) || cur.Permit(Permission.EditExpenditureRecord);
+            this.mnu_Product.Enabled = cur.Permit(Permission.Product, PermissionActions.Read) || cur.Permit(Permission.Product, PermissionActions.Edit);
+            this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
+            this.mnu_ProductCategory.Enabled = cur.Permit(Permission.ProductCategory, PermissionActions.Read) || cur.Permit(Permission.ProductCategory, PermissionActions.Edit);
+            this.mnu_Customer.Enabled = cur.Permit(Permission.Customer, PermissionActions.Read) || cur.Permit(Permission.Customer, PermissionActions.Edit);
+            this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.DeliverySheet, PermissionActions.Read) || cur.Permit(Permission.DeliverySheet, PermissionActions.Edit);
+            this.mnu_Options.Enabled = cur.Permit(Permission.SystemOptions, PermissionActions.Read) || cur.Permit(Permission.SystemOptions, PermissionActions.Edit);
+            this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+            this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
 
-            this.mnu_Operator.Enabled = cur.Permit(Permission.ReadOperaotor) || cur.Permit(Permission.EditOperator);
-            this.mnu_Role.Enabled = cur.Permit(Permission.ReadRole) || cur.Permit(Permission.EditRole);
+            this.mnu_Operator.Enabled = cur.Permit(Permission.Operator, PermissionActions.Read) || cur.Permit(Permission.Operator, PermissionActions.Edit);
+            this.mnu_Role.Enabled = cur.Permit(Permission.Role, PermissionActions.Read) || cur.Permit(Permission.Role, PermissionActions.Edit);
 
-            this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport);
-            this.mnu_InventoryRecord.Enabled = cur.Permit(Permission._InventoryRecordReport);
+            this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
         }
         #endregion
 

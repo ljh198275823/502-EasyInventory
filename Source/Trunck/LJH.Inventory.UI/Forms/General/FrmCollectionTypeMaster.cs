@@ -56,13 +56,6 @@ namespace LJH.Inventory.UI.Forms
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            Operator opt = Operator.Current;
-            btn_Add.Enabled = opt.Permit(Permission.EditCollectionType);
-            btn_Delete.Enabled = opt.Permit(Permission.EditCollectionType);
-            btn_Export.Enabled = opt.Permit(Permission.ReadCollectionType);
-            cMnu_Add.Enabled = opt.Permit(Permission.EditCollectionType);
-            cMnu_Delete.Enabled = opt.Permit(Permission.EditCollectionType);
-            cMnu_Export.Enabled = opt.Permit(Permission.ReadCollectionType);
         }
         #endregion
     }

@@ -68,7 +68,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 查看此角色是否被授予此权限
         /// </summary>
-        public bool Permit(Permission right)
+        public bool Permit(Permission right, PermissionActions action)
         {
             if (Permission == "all")
             {
