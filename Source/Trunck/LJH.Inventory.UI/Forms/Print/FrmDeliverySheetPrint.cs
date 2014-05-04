@@ -30,7 +30,12 @@ namespace LJH.Inventory.UI.Forms.Print
         #region　私有方法
         private void RenderSheet(DeliverySheet sheet)
         {
-            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("SheetHeader", UserSettings.Current.CompanyName));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("CompanyName", UserSettings.Current.CompanyName));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("ForeignName", UserSettings.Current.ForeignName));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("MyAddress", UserSettings.Current.Address));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("MyTelphone", UserSettings.Current.TelPhone));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("MyFax", UserSettings.Current.Fax));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("MyWeb", UserSettings.Current.Website));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("SheetNo", sheet.ID));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("ShipDate", sheet.LastActiveDate.ToString("yyyy年MM月dd日")));
             CompanyInfo customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(sheet.CustomerID).QueryObject;
@@ -58,6 +63,12 @@ namespace LJH.Inventory.UI.Forms.Print
         private void FrmDeliverySheetPrint_Load(object sender, EventArgs e)
         {
             if (Sheet != null) RenderSheet(Sheet);
+        }
+
+        private void FrmDeliverySheetPrint_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            reportViewer1.LocalReport.Dispose();
+            this.Dispose();
         }
     }
 }

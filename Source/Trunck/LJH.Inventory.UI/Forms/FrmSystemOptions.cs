@@ -21,8 +21,17 @@ namespace LJH.Inventory.UI.Forms
         #region 私有方法
         private void ShowSetting(UserSettings us)
         {
+            #region 公司信息
+            txtName.Text = us.CompanyName;
+            txtForeignName.Text = us.ForeignName;
+            txtTelphone.Text = us.TelPhone;
+            txtFax.Text = us.Fax;
+            txtPost.Text = us.PostalCode;
+            txtWeb.Text = us.Website;
+            txtAddress.Text = us.Address;
+            #endregion
+
             #region 送货单
-            txtCompanyName.Text = us.CompanyName;
             chkForbidWhenNoOrderID.Checked = us.ForbidWhenNoOrderID;
             chkForbidWhenOverCount.Checked = us.ForbidWhenOverCount;
             txtDeadlineDays.IntergerValue = us.DeadlineDays;
@@ -76,8 +85,17 @@ namespace LJH.Inventory.UI.Forms
         private UserSettings GetSettingFromInput()
         {
             UserSettings us = new UserSettings();
+            #region 公司信息
+            us.CompanyName = txtName.Text.Trim();
+            us.ForeignName = txtForeignName.Text.Trim();
+            us.TelPhone = txtTelphone.Text.Trim();
+            us.Fax = txtFax.Text.Trim();
+            us.PostalCode = txtPost.Text.Trim();
+            us.Website = txtWeb.Text.Trim();
+            us.Address = txtAddress.Text.Trim();
+            #endregion
+
             #region 送货单选项
-            us.CompanyName = txtCompanyName.Text;
             us.ForbidWhenNoOrderID = chkForbidWhenNoOrderID.Checked;
             us.ForbidWhenOverCount = chkForbidWhenOverCount.Checked;
             us.ReminderWhenOverCreditLimit = rdReminder.Checked;
@@ -120,6 +138,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
+        #region 事件处理程序
         private void FrmSystemOptions_Load(object sender, EventArgs e)
         {
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
@@ -133,5 +152,6 @@ namespace LJH.Inventory.UI.Forms
             SysParaSettingsBll.SaveSetting<UserSettings>(UserSettings.Current, AppSettings.Current.ConnStr);
             this.Close();
         }
+        #endregion
     }
 }

@@ -74,6 +74,7 @@
             this.ShowInTaskbar = false;
             this.Text = "送货单打印";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmDeliverySheetPrint_FormClosed);
             this.Load += new System.EventHandler(this.FrmDeliverySheetPrint_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DeliveryRecordBindingSource)).EndInit();
             this.ResumeLayout(false);

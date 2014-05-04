@@ -130,8 +130,6 @@
             this.tabDelivery = new System.Windows.Forms.TabPage();
             this.chkForbidWhenOverCount = new System.Windows.Forms.CheckBox();
             this.chkForbidWhenNoOrderID = new System.Windows.Forms.CheckBox();
-            this.txtCompanyName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label31 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdFILO = new System.Windows.Forms.RadioButton();
             this.rdFIFO = new System.Windows.Forms.RadioButton();
@@ -145,11 +143,27 @@
             this.rdReminder = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label73 = new System.Windows.Forms.Label();
+            this.txtAddress = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label74 = new System.Windows.Forms.Label();
+            this.txtWeb = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label75 = new System.Windows.Forms.Label();
+            this.txtPost = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label76 = new System.Windows.Forms.Label();
+            this.txtFax = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label77 = new System.Windows.Forms.Label();
+            this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label78 = new System.Windows.Forms.Label();
+            this.txtForeignName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label31 = new System.Windows.Forms.Label();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tab1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -1187,8 +1201,6 @@
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
             this.tabDelivery.Controls.Add(this.chkForbidWhenOverCount);
             this.tabDelivery.Controls.Add(this.chkForbidWhenNoOrderID);
-            this.tabDelivery.Controls.Add(this.txtCompanyName);
-            this.tabDelivery.Controls.Add(this.label31);
             this.tabDelivery.Controls.Add(this.panel2);
             this.tabDelivery.Controls.Add(this.label1);
             this.tabDelivery.Controls.Add(this.label6);
@@ -1206,7 +1218,7 @@
             // chkForbidWhenOverCount
             // 
             this.chkForbidWhenOverCount.AutoSize = true;
-            this.chkForbidWhenOverCount.Location = new System.Drawing.Point(16, 68);
+            this.chkForbidWhenOverCount.Location = new System.Drawing.Point(16, 45);
             this.chkForbidWhenOverCount.Name = "chkForbidWhenOverCount";
             this.chkForbidWhenOverCount.Size = new System.Drawing.Size(252, 16);
             this.chkForbidWhenOverCount.TabIndex = 50;
@@ -1216,36 +1228,18 @@
             // chkForbidWhenNoOrderID
             // 
             this.chkForbidWhenNoOrderID.AutoSize = true;
-            this.chkForbidWhenNoOrderID.Location = new System.Drawing.Point(16, 41);
+            this.chkForbidWhenNoOrderID.Location = new System.Drawing.Point(16, 18);
             this.chkForbidWhenNoOrderID.Name = "chkForbidWhenNoOrderID";
             this.chkForbidWhenNoOrderID.Size = new System.Drawing.Size(228, 16);
             this.chkForbidWhenNoOrderID.TabIndex = 49;
             this.chkForbidWhenNoOrderID.Text = "禁止保存，当送货单没有指定订单号时";
             this.chkForbidWhenNoOrderID.UseVisualStyleBackColor = true;
             // 
-            // txtCompanyName
-            // 
-            this.txtCompanyName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCompanyName.Location = new System.Drawing.Point(181, 10);
-            this.txtCompanyName.Name = "txtCompanyName";
-            this.txtCompanyName.Size = new System.Drawing.Size(363, 21);
-            this.txtCompanyName.TabIndex = 46;
-            this.txtCompanyName.Text = "易存企业管理系统送货单";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(14, 16);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(161, 12);
-            this.label31.TabIndex = 45;
-            this.label31.Text = "送货单打印时显示的公司抬头";
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.rdFILO);
             this.panel2.Controls.Add(this.rdFIFO);
-            this.panel2.Location = new System.Drawing.Point(96, 156);
+            this.panel2.Location = new System.Drawing.Point(96, 133);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(242, 26);
             this.panel2.TabIndex = 42;
@@ -1275,7 +1269,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 163);
+            this.label1.Location = new System.Drawing.Point(14, 140);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 41;
@@ -1284,7 +1278,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(268, 133);
+            this.label6.Location = new System.Drawing.Point(268, 110);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(245, 12);
             this.label6.TabIndex = 40;
@@ -1293,7 +1287,7 @@
             // txtDeadlineDays
             // 
             this.txtDeadlineDays.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 129);
+            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 106);
             this.txtDeadlineDays.MaxValue = 2147483647;
             this.txtDeadlineDays.MinValue = 0;
             this.txtDeadlineDays.Name = "txtDeadlineDays";
@@ -1304,7 +1298,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 133);
+            this.label5.Location = new System.Drawing.Point(14, 110);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(185, 12);
             this.label5.TabIndex = 38;
@@ -1315,7 +1309,7 @@
             this.panel1.Controls.Add(this.rdForbid);
             this.panel1.Controls.Add(this.rdNone);
             this.panel1.Controls.Add(this.rdReminder);
-            this.panel1.Location = new System.Drawing.Point(217, 96);
+            this.panel1.Location = new System.Drawing.Point(217, 73);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(242, 26);
             this.panel1.TabIndex = 36;
@@ -1355,7 +1349,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 103);
+            this.label7.Location = new System.Drawing.Point(14, 80);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(197, 12);
             this.label7.TabIndex = 35;
@@ -1366,6 +1360,7 @@
             this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.tab1.Controls.Add(this.tabPage1);
             this.tab1.Controls.Add(this.tabDelivery);
             this.tab1.Controls.Add(this.tabAutoCreater);
             this.tab1.Location = new System.Drawing.Point(5, 10);
@@ -1373,6 +1368,156 @@
             this.tab1.SelectedIndex = 0;
             this.tab1.Size = new System.Drawing.Size(571, 384);
             this.tab1.TabIndex = 31;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.txtForeignName);
+            this.tabPage1.Controls.Add(this.label31);
+            this.tabPage1.Controls.Add(this.label73);
+            this.tabPage1.Controls.Add(this.txtAddress);
+            this.tabPage1.Controls.Add(this.label74);
+            this.tabPage1.Controls.Add(this.txtWeb);
+            this.tabPage1.Controls.Add(this.label75);
+            this.tabPage1.Controls.Add(this.txtPost);
+            this.tabPage1.Controls.Add(this.label76);
+            this.tabPage1.Controls.Add(this.txtFax);
+            this.tabPage1.Controls.Add(this.label77);
+            this.tabPage1.Controls.Add(this.txtTelphone);
+            this.tabPage1.Controls.Add(this.txtName);
+            this.tabPage1.Controls.Add(this.label78);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(563, 358);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "公司信息";
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(40, 141);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(29, 12);
+            this.label73.TabIndex = 88;
+            this.label73.Text = "地址";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtAddress.Location = new System.Drawing.Point(74, 137);
+            this.txtAddress.MaxLength = 100;
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(412, 21);
+            this.txtAddress.TabIndex = 87;
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(273, 110);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(29, 12);
+            this.label74.TabIndex = 86;
+            this.label74.Text = "网址";
+            // 
+            // txtWeb
+            // 
+            this.txtWeb.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeb.Location = new System.Drawing.Point(308, 106);
+            this.txtWeb.MaxLength = 100;
+            this.txtWeb.Name = "txtWeb";
+            this.txtWeb.Size = new System.Drawing.Size(178, 21);
+            this.txtWeb.TabIndex = 85;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(40, 110);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(29, 12);
+            this.label75.TabIndex = 84;
+            this.label75.Text = "邮政";
+            // 
+            // txtPost
+            // 
+            this.txtPost.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPost.Location = new System.Drawing.Point(74, 106);
+            this.txtPost.MaxLength = 100;
+            this.txtPost.Name = "txtPost";
+            this.txtPost.Size = new System.Drawing.Size(178, 21);
+            this.txtPost.TabIndex = 83;
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(273, 79);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(29, 12);
+            this.label76.TabIndex = 82;
+            this.label76.Text = "传真";
+            // 
+            // txtFax
+            // 
+            this.txtFax.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtFax.Location = new System.Drawing.Point(308, 75);
+            this.txtFax.MaxLength = 100;
+            this.txtFax.Name = "txtFax";
+            this.txtFax.Size = new System.Drawing.Size(178, 21);
+            this.txtFax.TabIndex = 81;
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(40, 79);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(29, 12);
+            this.label77.TabIndex = 80;
+            this.label77.Text = "电话";
+            // 
+            // txtTelphone
+            // 
+            this.txtTelphone.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtTelphone.Location = new System.Drawing.Point(74, 75);
+            this.txtTelphone.MaxLength = 100;
+            this.txtTelphone.Name = "txtTelphone";
+            this.txtTelphone.Size = new System.Drawing.Size(178, 21);
+            this.txtTelphone.TabIndex = 79;
+            // 
+            // txtName
+            // 
+            this.txtName.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtName.Location = new System.Drawing.Point(74, 17);
+            this.txtName.MaxLength = 100;
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(412, 21);
+            this.txtName.TabIndex = 77;
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(16, 20);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(53, 12);
+            this.label78.TabIndex = 78;
+            this.label78.Text = "公司名称";
+            // 
+            // txtForeignName
+            // 
+            this.txtForeignName.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtForeignName.Location = new System.Drawing.Point(74, 45);
+            this.txtForeignName.MaxLength = 100;
+            this.txtForeignName.Name = "txtForeignName";
+            this.txtForeignName.Size = new System.Drawing.Size(412, 21);
+            this.txtForeignName.TabIndex = 89;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(16, 48);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(53, 12);
+            this.label31.TabIndex = 90;
+            this.label31.Text = "英文名称";
             // 
             // FrmSystemOptions
             // 
@@ -1398,6 +1543,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tab1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1461,8 +1608,6 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtInventorySheetPrefix;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label31;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCompanyName;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label41;
         private GeneralLibrary.WinformControl.IntergerTextBox txtWareHouseSerialCount;
@@ -1519,5 +1664,20 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtPurchaseSheetPrefix;
         private System.Windows.Forms.Label label71;
         private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label73;
+        private GeneralLibrary.WinformControl.DBCTextBox txtAddress;
+        private System.Windows.Forms.Label label74;
+        private GeneralLibrary.WinformControl.DBCTextBox txtWeb;
+        private System.Windows.Forms.Label label75;
+        private GeneralLibrary.WinformControl.DBCTextBox txtPost;
+        private System.Windows.Forms.Label label76;
+        private GeneralLibrary.WinformControl.DBCTextBox txtFax;
+        private System.Windows.Forms.Label label77;
+        private GeneralLibrary.WinformControl.DBCTextBox txtTelphone;
+        private GeneralLibrary.WinformControl.DBCTextBox txtName;
+        private System.Windows.Forms.Label label78;
+        private GeneralLibrary.WinformControl.DBCTextBox txtForeignName;
+        private System.Windows.Forms.Label label31;
     }
 }

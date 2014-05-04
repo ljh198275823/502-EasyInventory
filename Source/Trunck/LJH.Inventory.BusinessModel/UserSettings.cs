@@ -16,7 +16,7 @@ namespace LJH.Inventory.BusinessModel
         #region 构造函数
         public UserSettings()
         {
-            this.CompanyName = "易存企业管理系统送货单";
+            this.CompanyName = "易存信息系统有限公司";
 
             this.CustomerPrefix = "C";
             this.CustomerSerialCount = 3;
@@ -33,31 +33,31 @@ namespace LJH.Inventory.BusinessModel
             this.ProductSerialCount = 4;
 
             this.DeliverySheetPrefix = "SHD";
-            this.DeliverySheetDateFormat = "yyMM";
+            this.DeliverySheetDateFormat = "yyyyMM";
             this.DeliverySheetSerialCount = 5;
 
             this.InventorySheetPrefix = "RKD";
-            this.InventorySheetDateFormat = "yyMM";
+            this.InventorySheetDateFormat = "yyyyMM";
             this.InventorySheetSerialCount = 5;
 
             this.OrderPrefix = "DHD";
-            this.OrderDateFormat = "yyMM";
+            this.OrderDateFormat = "yyyyMM";
             this.OrderSerialCount = 5;
 
             this.PurchaseSheetPrefix = "CGD";
-            this.PurchaseSheetDateFormat = "yyMM";
+            this.PurchaseSheetDateFormat = "yyyyMM";
             this.PurchaseSheetSerialCount = 5;
 
             this.CustomerPaymentPrefix = "FKD";
-            this.CustomerPaymentDateFormat = "yyMM";
+            this.CustomerPaymentDateFormat = "yyyyMM";
             this.CustomerPaymentSerialCount = 5;
 
             this.DaiFuPrefix = "DFD";
-            this.DaiFuDateFormat = "yyMM";
+            this.DaiFuDateFormat = "yyyyMM";
             this.DaiFuSerialCount = 5;
 
             this.ExpenditureRecordPrefix = "ZCD";
-            this.ExpenditureRecordDateFormat = "yyMM";
+            this.ExpenditureRecordDateFormat = "yyyyMM";
             this.ExpenditureRecordSerialCount = 5;
         }
         #endregion
@@ -68,6 +68,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [DataMember]
         public string CompanyName { get; set; }
+        /// <summary>
+        /// 获取或设置英文名称
+        /// </summary>
+        [DataMember]
+        public string ForeignName { get; set; }
         /// <summary>
         /// 获取或设置联系电话
         /// </summary>
