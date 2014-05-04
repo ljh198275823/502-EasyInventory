@@ -13,10 +13,7 @@ namespace LJH.Inventory.UI.Controls
 {
     public partial class FunctionTree : MyTree
     {
-        private readonly string RootText = "所有权限";
-
-        private List<TreeNode> _rightNodes = new List<TreeNode>();
-
+        #region 构造函数
         public FunctionTree()
         {
             InitializeComponent();
@@ -27,6 +24,45 @@ namespace LJH.Inventory.UI.Controls
             container.Add(this);
             InitializeComponent();
         }
+        #endregion
+
+        #region 私有变量
+        private readonly string RootText = "所有权限类别";
+        private List<TreeNode> _rightNodes = new List<TreeNode>();
+        #endregion
+
+        #region 私有方法
+        private void AddRightNode(TreeNode parent, List<OperatorRightAttribute> rights)
+        {
+            foreach (OperatorRightAttribute right in rights)
+            {
+                if (right.Catalog == parent.Tag.ToString())
+                {
+                    TreeNode rightNode = new TreeNode(right.Description, 1, 1);
+                    rightNode.Tag = right.Value;
+                    _rightNodes.Add(rightNode);
+                    parent.Nodes.Add(rightNode);
+                    AddActionNodes(rightNode, right.Actions);
+                }
+            }
+        }
+
+        private void AddActionNodes(TreeNode parent, PermissionActions actions)
+        {
+            if ((actions & PermissionActions.Read) == PermissionActions.Read)
+            {
+                TreeNode actionNode = new TreeNode("查看", 1, 1);
+                actionNode.Tag = PermissionActions.Read;
+                parent.Nodes.Add(actionNode);
+            }
+            if ((actions & PermissionActions.Edit) == PermissionActions.Edit)
+            {
+                TreeNode actionNode = new TreeNode("编辑", 1, 1);
+                actionNode.Tag = PermissionActions.Edit;
+                parent.Nodes.Add(actionNode);
+            }
+        }
+        #endregion
 
         #region 公共方法和属性
         public void Init()
@@ -36,33 +72,16 @@ namespace LJH.Inventory.UI.Controls
             this.Nodes.Clear();
             TreeNode root = new TreeNode(RootText, 0, 0);
             this.Nodes.Add(root);
-            List<TreeNode> catalogs = new List<TreeNode>();
-            Type operatorEnum = typeof(Permission);
-            FieldInfo[] fields = operatorEnum.GetFields();
-            foreach (FieldInfo field in fields)
+            List<OperatorRightAttribute> items = PermissionResolver.Resolve();
+            if (items != null && items.Count > 0)
             {
-                if (field.FieldType.IsEnum)
+                List<string> categories = items.Select(it => it.Catalog).Distinct().ToList();
+                foreach (string category in categories)
                 {
-                    object[] attrs = field.GetCustomAttributes(false);
-                    foreach (object attr in attrs)
-                    {
-                        if (attr is OperatorRightAttribute)
-                        {
-                            OperatorRightAttribute right = attr as OperatorRightAttribute;
-                            string catalog = right.Catalog;
-                            TreeNode catalogNode = catalogs.Find(t => t.Text == catalog);
-                            if (catalogNode == null)
-                            {
-                                catalogNode = new TreeNode(catalog, 0, 0);
-                                root.Nodes.Add(catalogNode);
-                                catalogs.Add(catalogNode);
-                            }
-                            TreeNode rightNode = new TreeNode(right.Description, 1, 1);
-                            rightNode.Tag = field.GetValue(null);
-                            catalogNode.Nodes.Add(rightNode);
-                            _rightNodes.Add(rightNode);
-                        }
-                    }
+                    TreeNode catalogNode = new TreeNode(category, 0, 0);
+                    catalogNode.Tag = category;
+                    root.Nodes.Add(catalogNode);
+                    AddRightNode(catalogNode, items);
                 }
             }
             root.Expand();
@@ -81,19 +100,21 @@ namespace LJH.Inventory.UI.Controls
                 }
                 else
                 {
-                    List<Permission> rights = new List<Permission>();
+                    List<ulong> rights = new List<ulong>();
                     foreach (TreeNode node in _rightNodes)
                     {
-                        if (node.Checked)
+                        uint permission = Convert.ToUInt32(node.Tag);
+                        uint action = 0;
+                        foreach (TreeNode child in node.Nodes)
                         {
-                            rights.Add((Permission)node.Tag);
+                            if (child.Checked) action = (action | Convert.ToUInt32(child.Tag));
                         }
+                        if (action != 0) rights.Add(((ulong)permission << 32) + action);
                     }
                     var list = from right in rights
                                select right.ToString("D");
                     return string.Join(",", list.ToArray());
                 }
-
             }
             set
             {
@@ -105,13 +126,18 @@ namespace LJH.Inventory.UI.Controls
                 {
                     foreach (string str in value.Split(','))
                     {
-                        int i;
-                        if (int.TryParse(str, out i))
+                        ulong temp = 0;
+                        if (ulong.TryParse(str, out temp))
                         {
-                            TreeNode node = _rightNodes.Find(n => (int)n.Tag == i);
+                            uint permission = (uint)((temp >> 32) & 0xFFFFFFFF); //高32位表示权限
+                            uint actions = (uint)(temp & 0xFFFFFFFF); //低32位表示动作
+                            TreeNode node = _rightNodes.FirstOrDefault(n => Convert.ToUInt32(n.Tag) == permission);
                             if (node != null)
                             {
-                                node.Checked = true;
+                                foreach (TreeNode child in node.Nodes)
+                                {
+                                    child.Checked = (actions & Convert.ToUInt32(child.Tag)) != 0;
+                                }
                             }
                         }
                     }

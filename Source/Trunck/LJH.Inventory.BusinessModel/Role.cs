@@ -12,6 +12,8 @@ namespace LJH.Inventory.BusinessModel
         #region 私有变量
         //系统预定义的三种角色
         private readonly string Admin = "SYS"; //系统管理员
+        Dictionary<uint, uint> _AllRights = null;
+        private string _Permission=null ;
         #endregion
 
         #region 公共属性
@@ -26,7 +28,15 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 权限列表
         /// </summary>
-        public string Permission { get; set; }
+        public string Permission
+        {
+            get { return _Permission; }
+            set
+            {
+                _Permission = value;
+                _AllRights = null;
+            }
+        }
         /// <summary>
         /// 获取或设置备注
         /// </summary>
@@ -64,6 +74,34 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
+        #region 私有方法
+        private Dictionary<uint, uint> GetAllRights()
+        {
+            if (_AllRights == null) _AllRights = new Dictionary<uint, uint>();
+            if (!string.IsNullOrEmpty(Permission))
+            {
+                foreach (string str in Permission.Split(','))
+                {
+                    ulong temp = 0;
+                    if (ulong.TryParse(str, out temp))
+                    {
+                        uint permission = (uint)((temp >> 32) & 0xFFFFFFFF); //高32位表示权限
+                        uint actions = (uint)(temp & 0xFFFFFFFF); //低32位表示动作
+                        if (_AllRights.Keys.Contains(permission))
+                        {
+                            _AllRights[permission] = _AllRights[permission] | actions;
+                        }
+                        else
+                        {
+                            _AllRights.Add(permission, actions);
+                        }
+                    }
+                }
+            }
+            return _AllRights;
+        }
+        #endregion
+
         #region 公共方法
         /// <summary>
         /// 查看此角色是否被授予此权限
@@ -76,21 +114,39 @@ namespace LJH.Inventory.BusinessModel
             }
             else
             {
-                List<Permission> rights = new List<Permission>();
-                if (!string.IsNullOrEmpty(Permission))
+                if (_AllRights == null) GetAllRights();
+                if (_AllRights != null && _AllRights.Count > 0)
                 {
-                    foreach (string str in Permission.Split(','))
+                    if (_AllRights.Keys.Contains((uint)right))
                     {
-                        int i;
-                        if (int.TryParse(str, out i))
-                        {
-                            rights.Add((Permission)i);
-                        }
+                        return (_AllRights[(uint)right] & (uint)action) == (uint)action;
                     }
                 }
-                return rights.Exists(r => r == right);
+                return false;
             }
         }
+        ///// <summary>
+        ///// 在角色中增加某个权限
+        ///// </summary>
+        ///// <param name="right"></param>
+        ///// <param name="actions"></param>
+        ///// <returns></returns>
+        //public void AddRight(Permission right, PermissionActions actions)
+        //{
+        //    if (Permission == "all") return;
+        //    if (_AllRights == null) GetAllRights();
+        //    if (_AllRights != null)
+        //    {
+        //        if (_AllRights.Keys.Contains((uint)right))
+        //        {
+        //            _AllRights[(uint)right] = (_AllRights[(uint)right] | (uint)actions);
+        //        }
+        //        else
+        //        {
+        //            _AllRights.Add((uint)right, (uint)actions);
+        //        }
+        //    }
+        //}
         #endregion
     }
 }

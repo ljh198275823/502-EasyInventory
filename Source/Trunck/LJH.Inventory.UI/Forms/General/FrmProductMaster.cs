@@ -89,6 +89,7 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colUnit"].Value = p.Unit;
             row.Cells["colPrice"].Value = p.Price.Trim();
             row.Cells["colCost"].Value = p.Cost.Trim();
+            row.Cells["colService"].Value = p.IsService;
             row.Cells["colCompany"].Value = p.Company;
             row.Cells["colInternalID"].Value = p.InternalID;
             row.Cells["colMemo"].Value = p.Memo;

@@ -68,6 +68,7 @@
             this.mnu_AttachmentOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkService = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -361,6 +362,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.chkService);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.lnkInternalID);
             this.tabPage1.Controls.Add(this.label3);
@@ -493,6 +495,16 @@
             this.mnu_AttachmentDelete.Text = "删除";
             this.mnu_AttachmentDelete.Click += new System.EventHandler(this.mnu_AttachmentDelete_Click);
             // 
+            // chkService
+            // 
+            this.chkService.AutoSize = true;
+            this.chkService.Location = new System.Drawing.Point(255, 130);
+            this.chkService.Name = "chkService";
+            this.chkService.Size = new System.Drawing.Size(48, 16);
+            this.chkService.TabIndex = 34;
+            this.chkService.Text = "服务";
+            this.chkService.UseVisualStyleBackColor = true;
+            // 
             // FrmProductDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -555,5 +567,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
+        private System.Windows.Forms.CheckBox chkService;
     }
 }

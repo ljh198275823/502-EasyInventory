@@ -33,7 +33,8 @@ namespace LJH.Inventory.UI.Forms.Print
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("SheetHeader", UserSettings.Current.CompanyName));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("SheetNo", sheet.ID));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("ShipDate", sheet.LastActiveDate.ToString("yyyy年MM月dd日")));
-            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Customer", sheet.CustomerID));
+            CompanyInfo customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(sheet.CustomerID).QueryObject;
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Customer", customer != null ? customer.Name : sheet.CustomerID));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Linker", sheet.Linker));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("LinkerPhone", sheet.LinkerPhoneCall));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Address", sheet.Address));

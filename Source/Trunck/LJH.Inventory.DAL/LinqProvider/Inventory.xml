@@ -43,6 +43,7 @@
       <Column Name="HSCode" Member="HSCode"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="HSName" Member="HSName"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="BackTaxes" Member="BackTaxes"  DbType="decimal(18,4) not null"  UpdateCheck="Never"/>
+      <Column Name="IsService" Member="IsService"  DbType="bit null"  UpdateCheck="Never"/>
       <Column Name="Company" Member="Company"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="InternalID" Member="InternalID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>

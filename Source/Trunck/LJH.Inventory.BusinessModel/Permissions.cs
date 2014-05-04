@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 
 namespace LJH.Inventory.BusinessModel
 {
@@ -20,98 +21,97 @@ namespace LJH.Inventory.BusinessModel
         /// 产品类别
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "产品类别")]
-        ProductCategory = 2,
+        ProductCategory,
         /// <summary>
         /// 查看商品
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "产品资料")]
-        Product = 3,
+        Product,
         /// <summary>
         /// 仓库资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "仓库资料")]
-        WareHouse = 4,
+        WareHouse,
         /// <summary>
         /// 部门资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "部门资料")]
-        Department=5,
+        Department,
         /// <summary>
         /// 人员资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "人员资料")]
-        Staff = 5,
+        Staff,
         /// <summary>
         /// 产品库存
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "产品库存")]
-        ProductInventory = 5,
+        ProductInventory,
         /// <summary>
         /// 库存盘点
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "库存盘点")]
-        InventoryCheck = 6,
+        InventoryCheck,
         /// <summary>
         /// 客户类别
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "客户类别")]
-        CustomerType = 7,
+        CustomerType,
         /// <summary>
         /// 客户资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "客户资料")]
-        Customer ,
+        Customer,
         /// <summary>
         /// 订单资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "订单资料")]
-        Order ,
+        Order,
         /// <summary>
         /// 送货单资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "送货单资料")]
-        DeliverySheet = 9,
+        DeliverySheet,
         /// <summary>
         /// 供应商类别
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "供应商类别")]
-        SupplierType = 10,
+        SupplierType,
         /// <summary>
         /// 供应商资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "供应商资料")]
-        Supplier = 10,
+        Supplier,
         /// <summary>
         /// 采购单资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "采购单资料")]
-        PurchaseOrder = 10,
+        PurchaseOrder,
         /// <summary>
         /// 收货单资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "收货单资料")]
-        InventorySheet = 11,
+        InventorySheet,
         /// <summary>
         /// 客户还款资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "客户还款资料")]
-        CustomerPayment = 12,
+        CustomerPayment,
         /// <summary>
         /// 资金支出资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "资金支出资料")]
-        ExpenditureRecord = 13,
-
+        ExpenditureRecord,
         /// <summary>
-        /// 资金支出资料
+        /// 其它公司类别
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它公司类别")]
-        OtherCompanyType= 13,
+        OtherCompanyType,
         /// <summary>
-        /// 资金支出资料
+        /// 其它公司资料
         /// </summary>
         [OperatorRight(Catalog = "数据管理", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它公司资料")]
-        OtherCompany= 13,
+        OtherCompany,
         #endregion
 
         #region 查询与报表
@@ -177,6 +177,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Catalog { get; set; }
         /// <summary>
+        /// 获取或设置值
+        /// </summary>
+        public int Value { get; set; }
+        /// <summary>
         /// 获取或设置权限的所有操作
         /// </summary>
         public PermissionActions Actions { get; set; }
@@ -185,5 +189,34 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Description { get; set; }
         #endregion
+    }
+
+
+    public class PermissionResolver
+    {
+        public static List<OperatorRightAttribute> Resolve()
+        {
+            List<OperatorRightAttribute> items = new List<OperatorRightAttribute>();
+            Type operatorEnum = typeof(Permission);
+            FieldInfo[] fields = operatorEnum.GetFields();
+            List<string> categories = new List<string>();
+            foreach (FieldInfo field in fields)
+            {
+                if (field.FieldType.IsEnum)
+                {
+                    object[] attrs = field.GetCustomAttributes(false);
+                    foreach (object attr in attrs)
+                    {
+                        if (attr is OperatorRightAttribute)
+                        {
+                            OperatorRightAttribute right = attr as OperatorRightAttribute;
+                            right.Value = Convert.ToInt32(field.GetValue(null));
+                            items.Add(right);
+                        }
+                    }
+                }
+            }
+            return items;
+        }
     }
 }

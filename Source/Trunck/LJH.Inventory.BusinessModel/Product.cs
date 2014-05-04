@@ -82,6 +82,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public long? Point { get; set; }
         /// <summary>
+        /// 获取或设置产品是否是服务，如果是服务的话就不用进行库存管理
+        /// </summary>
+        public bool? IsService { get; set; }
+        /// <summary>
         /// 获取或设置商品描述
         /// </summary>
         public string Memo { get; set; }

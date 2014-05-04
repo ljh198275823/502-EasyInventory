@@ -24,6 +24,8 @@ namespace LJH.Inventory.BLL
             ////减少库存
             foreach (DeliveryItem si in sheet.Items)
             {
+                Product p = ProviderFactory.Create<IProvider<Product, string>>(_RepoUri).GetByID(si.ProductID).QueryObject;
+                if (p != null && p.IsService != null && p.IsService.Value) continue; //如果是产品是服务的话就不用再从库存中扣除了
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition()
                 {
                     ProductID = si.ProductID,

@@ -76,6 +76,7 @@ namespace LJH.Inventory.UI.Forms
             txtSpecification.Text = p.Specification;
             txtModel.Text = p.Model;
             txtUnit.Text = p.Unit;
+            chkService.Checked = p.IsService != null && p.IsService.Value;
             txtCost.DecimalValue = p.Cost;
             txtPrice.DecimalValue = p.Price;
             txtShortName.Text = p.ShortName;
@@ -115,6 +116,7 @@ namespace LJH.Inventory.UI.Forms
             p.Specification = txtSpecification.Text;
             p.Model = txtModel.Text;
             p.Unit = txtUnit.Text;
+            p.IsService = chkService.Checked;
             p.Price = txtPrice.DecimalValue;
             p.Cost = txtCost.DecimalValue;
             p.ShortName = txtShortName.Text;

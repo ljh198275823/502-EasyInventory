@@ -62,12 +62,42 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
-        #region 常规
+        #region 本公司信息
         /// <summary>
         /// 获取或设置公司名称
         /// </summary>
         [DataMember]
         public string CompanyName { get; set; }
+        /// <summary>
+        /// 获取或设置联系电话
+        /// </summary>
+        [DataMember]
+        public string TelPhone { get; set; }
+        /// <summary>
+        /// 获取或设置传真
+        /// </summary>
+        [DataMember]
+        public string Fax { get; set; }
+        /// <summary>
+        /// 获取或设置邮政编码
+        /// </summary>
+        [DataMember]
+        public string PostalCode { get; set; }
+        /// <summary>
+        /// 获取或设置网站
+        /// </summary>
+        [DataMember]
+        public string Website { get; set; }
+        /// <summary>
+        /// 获取或设置电子邮件
+        /// </summary>
+        [DataMember]
+        public string Email { get; set; }
+        /// <summary>
+        /// 获取或设置地址
+        /// </summary>
+        [DataMember]
+        public string Address { get; set; }
         #endregion
 
         #region 送货单选项

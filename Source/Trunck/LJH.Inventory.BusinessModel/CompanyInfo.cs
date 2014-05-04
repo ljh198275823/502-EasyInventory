@@ -8,6 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户
     /// </summary>
+    [Serializable]
     public class CompanyInfo : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
