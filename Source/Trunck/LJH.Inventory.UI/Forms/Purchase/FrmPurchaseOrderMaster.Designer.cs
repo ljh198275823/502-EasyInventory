@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +51,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.supplierTree1 = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
+            this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_AddSheet = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,16 +64,13 @@
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_AddSheet = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.CategoryMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -239,24 +238,40 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 33);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(294, 340);
+            this.pnlLeft.Size = new System.Drawing.Size(224, 340);
             this.pnlLeft.TabIndex = 113;
             // 
             // supplierTree1
             // 
             this.supplierTree1.ContextMenuStrip = this.CategoryMenu;
             this.supplierTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.supplierTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.supplierTree1.HideSelection = false;
             this.supplierTree1.LoadSupplier = true;
             this.supplierTree1.Location = new System.Drawing.Point(0, 0);
             this.supplierTree1.Name = "supplierTree1";
-            this.supplierTree1.Size = new System.Drawing.Size(294, 340);
+            this.supplierTree1.Size = new System.Drawing.Size(224, 340);
             this.supplierTree1.TabIndex = 0;
             this.supplierTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.supplierTree1_NodeMouseClick);
+            // 
+            // CategoryMenu
+            // 
+            this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_AddSheet});
+            this.CategoryMenu.Name = "contextMenuStrip1";
+            this.CategoryMenu.Size = new System.Drawing.Size(137, 26);
+            // 
+            // mnu_AddSheet
+            // 
+            this.mnu_AddSheet.Name = "mnu_AddSheet";
+            this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
+            this.mnu_AddSheet.Text = "新建采购单";
+            this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(294, 33);
+            this.splitter1.Location = new System.Drawing.Point(224, 33);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(8, 340);
             this.splitter1.TabIndex = 114;
@@ -281,12 +296,12 @@
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(302, 33);
+            this.dataGridView1.Location = new System.Drawing.Point(232, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(805, 340);
+            this.dataGridView1.Size = new System.Drawing.Size(875, 340);
             this.dataGridView1.TabIndex = 115;
             // 
             // colID
@@ -294,13 +309,12 @@
             this.colID.HeaderText = "合同号";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
-            this.colID.Width = 80;
             // 
             // colOrderDate
             // 
-            dataGridViewCellStyle7.Format = "D";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.colOrderDate.HeaderText = "签订日期";
             this.colOrderDate.Name = "colOrderDate";
             this.colOrderDate.ReadOnly = true;
@@ -320,8 +334,8 @@
             // 
             // colDeliveryDate
             // 
-            dataGridViewCellStyle8.Format = "D";
-            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Format = "D";
+            this.colDeliveryDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDeliveryDate.HeaderText = "交货日期";
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.ReadOnly = true;
@@ -335,9 +349,9 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle9.Format = "C2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAmount.HeaderText = "货款总额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -355,28 +369,6 @@
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
-            // 
-            // CategoryMenu
-            // 
-            this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_FreshTree,
-            this.mnu_AddSheet});
-            this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(137, 48);
-            // 
-            // mnu_FreshTree
-            // 
-            this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
-            this.mnu_FreshTree.Text = "刷新";
-            this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
-            // 
-            // mnu_AddSheet
-            // 
-            this.mnu_AddSheet.Name = "mnu_AddSheet";
-            this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
-            this.mnu_AddSheet.Text = "新建采购单";
-            this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
             // 
             // FrmPurchaseOrderMaster
             // 
@@ -400,8 +392,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.CategoryMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -430,6 +422,8 @@
         private Controls.SupplierTree supplierTree1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ContextMenuStrip CategoryMenu;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddSheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
@@ -439,8 +433,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ContextMenuStrip CategoryMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;
-        private System.Windows.Forms.ToolStripMenuItem mnu_AddSheet;
     }
 }

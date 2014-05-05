@@ -396,12 +396,14 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator1.Visible = false;
             // 
             // mnu_OrderPaymentReport
             // 
             this.mnu_OrderPaymentReport.Name = "mnu_OrderPaymentReport";
             this.mnu_OrderPaymentReport.Size = new System.Drawing.Size(172, 22);
             this.mnu_OrderPaymentReport.Text = "销售合同收款统计";
+            this.mnu_OrderPaymentReport.Visible = false;
             this.mnu_OrderPaymentReport.Click += new System.EventHandler(this.mnu_OrderPaymentReport_Click);
             // 
             // 销售毛利统计ToolStripMenuItem
@@ -409,6 +411,7 @@
             this.销售毛利统计ToolStripMenuItem.Name = "销售毛利统计ToolStripMenuItem";
             this.销售毛利统计ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.销售毛利统计ToolStripMenuItem.Text = "销售合同毛利统计";
+            this.销售毛利统计ToolStripMenuItem.Visible = false;
             // 
             // mnu_Reports
             // 
@@ -467,7 +470,7 @@
             // mnu_BackupData
             // 
             this.mnu_BackupData.Name = "mnu_BackupData";
-            this.mnu_BackupData.Size = new System.Drawing.Size(152, 22);
+            this.mnu_BackupData.Size = new System.Drawing.Size(124, 22);
             this.mnu_BackupData.Text = "备份数据";
             this.mnu_BackupData.Click += new System.EventHandler(this.mnu_BackupData_Click);
             // 

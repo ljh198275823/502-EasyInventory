@@ -41,6 +41,12 @@
             this.rdByMonth = new System.Windows.Forms.RadioButton();
             this.rdByDay = new System.Windows.Forms.RadioButton();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProfit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtSalesPerson = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
@@ -50,12 +56,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtCustomer = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label4 = new System.Windows.Forms.Label();
-            this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProfit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -216,6 +216,47 @@
             this.gridView.Size = new System.Drawing.Size(1105, 236);
             this.gridView.TabIndex = 27;
             // 
+            // colDeliveryDate
+            // 
+            this.colDeliveryDate.HeaderText = "统计日期";
+            this.colDeliveryDate.Name = "colDeliveryDate";
+            this.colDeliveryDate.ReadOnly = true;
+            this.colDeliveryDate.Width = 130;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.HeaderText = "名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 54;
+            // 
+            // colAmount
+            // 
+            this.colAmount.HeaderText = "销售金额";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            // 
+            // colCost
+            // 
+            this.colCost.HeaderText = "成本";
+            this.colCost.Name = "colCost";
+            this.colCost.ReadOnly = true;
+            // 
+            // colProfit
+            // 
+            this.colProfit.HeaderText = "利润率";
+            this.colProfit.Name = "colProfit";
+            this.colProfit.ReadOnly = true;
+            // 
+            // colFill
+            // 
+            this.colFill.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colFill.HeaderText = "";
+            this.colFill.Name = "colFill";
+            this.colFill.ReadOnly = true;
+            this.colFill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.txtSalesPerson);
@@ -302,47 +343,6 @@
             this.label4.TabIndex = 24;
             this.label4.Text = "客户";
             // 
-            // colDeliveryDate
-            // 
-            this.colDeliveryDate.HeaderText = "统计日期";
-            this.colDeliveryDate.Name = "colDeliveryDate";
-            this.colDeliveryDate.ReadOnly = true;
-            this.colDeliveryDate.Width = 130;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.HeaderText = "名称";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 54;
-            // 
-            // colAmount
-            // 
-            this.colAmount.HeaderText = "销售金额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            // 
-            // colCost
-            // 
-            this.colCost.HeaderText = "成本";
-            this.colCost.Name = "colCost";
-            this.colCost.ReadOnly = true;
-            // 
-            // colProfit
-            // 
-            this.colProfit.HeaderText = "利润率";
-            this.colProfit.Name = "colProfit";
-            this.colProfit.ReadOnly = true;
-            // 
-            // colFill
-            // 
-            this.colFill.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colFill.HeaderText = "";
-            this.colFill.Name = "colFill";
-            this.colFill.ReadOnly = true;
-            this.colFill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // FrmDeliveryStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -354,7 +354,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmDeliveryStatistics";
-            this.Text = "商品销售统计";
+            this.Text = "出货统计";
             this.Load += new System.EventHandler(this.FrmDeliveryStatistics_Load);
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.btnOkAs, 0);

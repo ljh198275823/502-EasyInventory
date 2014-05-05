@@ -43,7 +43,6 @@
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.categoryTree = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddSupplier = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +65,8 @@
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
@@ -192,20 +193,12 @@
             // CategoryMenu
             // 
             this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_FreshTree,
             this.mnu_AddSupplier,
             this.mnu_AddCategory,
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(137, 114);
-            // 
-            // mnu_FreshTree
-            // 
-            this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(136, 22);
-            this.mnu_FreshTree.Text = "刷新";
-            this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
+            this.CategoryMenu.Size = new System.Drawing.Size(137, 92);
             // 
             // mnu_AddSupplier
             // 
@@ -225,14 +218,14 @@
             // 
             this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
             this.mnu_DeleteCategory.Size = new System.Drawing.Size(136, 22);
-            this.mnu_DeleteCategory.Text = "删除";
+            this.mnu_DeleteCategory.Text = "删除类别";
             this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
             // 
             // mnu_CategoryProperty
             // 
             this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
             this.mnu_CategoryProperty.Size = new System.Drawing.Size(136, 22);
-            this.mnu_CategoryProperty.Text = "属性";
+            this.mnu_CategoryProperty.Text = "类别属性";
             this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
             // 
             // imageList1
@@ -367,9 +360,11 @@
             this.cMnu_Fresh,
             this.cMnu_Add,
             this.cMnu_Delete,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 120);
             // 
             // cMnu_Fresh
             // 
@@ -388,6 +383,17 @@
             this.cMnu_Delete.Name = "cMnu_Delete";
             this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Delete.Text = "删除";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
@@ -438,7 +444,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private LJH.Inventory.UI.Controls.SupplierTree categoryTree;
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddCategory;
         private System.Windows.Forms.ToolStripMenuItem mnu_DeleteCategory;
         private System.Windows.Forms.ToolStripMenuItem mnu_CategoryProperty;
@@ -460,5 +465,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPostalCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
     }
 }

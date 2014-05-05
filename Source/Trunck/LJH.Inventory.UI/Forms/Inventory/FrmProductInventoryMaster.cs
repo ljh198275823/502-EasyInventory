@@ -56,10 +56,15 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            this.categoryTree.Init();
             this.wareHouseComboBox1.Init();
             this.wareHouseComboBox1.SelectedIndexChanged -= wareHouseComboBox1_SelectedIndexChanged;
             this.wareHouseComboBox1.SelectedIndexChanged += wareHouseComboBox1_SelectedIndexChanged;
+        }
+
+        protected override void ReFreshData()
+        {
+            this.categoryTree.Init();
+            base.ReFreshData();
         }
 
         public override void ShowOperatorRights()

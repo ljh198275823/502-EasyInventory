@@ -20,11 +20,6 @@ namespace LJH.Inventory.UI.View
         }
 
         #region 重写基类方法
-        protected override void Init()
-        {
-            base.Init();
-        }
-
         protected override FrmDetailBase GetDetailForm()
         {
             return null;

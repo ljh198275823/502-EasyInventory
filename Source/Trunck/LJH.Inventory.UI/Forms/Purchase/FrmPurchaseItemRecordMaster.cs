@@ -66,16 +66,15 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 重写基类方法和处理事件
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             this.supplierTree1.Init();
-            Operator opt = Operator.Current;
+            base.ReFreshData();
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmPurchaseOrderDetail();
+            return null;
         }
 
         protected override List<object> GetDataSource()
@@ -120,21 +119,6 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理方法
-        private void btn_Add_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FrmPurchaseOrderDetail detailForm = new FrmPurchaseOrderDetail();
-                detailForm.IsAdding = true;
-                //detailForm.ItemAdded += new EventHandler<ItemAddedEventArgs>(frmPurchaseSheetDetail_ItemAdded);
-                detailForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
-            }
-        }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -148,7 +132,7 @@ namespace LJH.Inventory.UI.Forms
                         FrmPurchaseOrderDetail frm = new FrmPurchaseOrderDetail();
                         frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        //frm.ItemUpdated += new EventHandler<ItemUpdatedEventArgs>(frmPurchaseSheetDetail_ItemUpdated);
+                        frm.IsForView = true;
                         frm.ShowDialog();
                     }
                 }
@@ -168,19 +152,6 @@ namespace LJH.Inventory.UI.Forms
         private void chkState_CheckedChanged(object sender, EventArgs e)
         {
             FreshData();
-        }
-
-        private void btn_WaitPurchase_Click(object sender, EventArgs e)
-        {
-            //if (this.Tag  != null && this.Tag is IMyMDIForm)
-            //{
-            //    (this.Tag as IMyMDIForm).ShowSingleForm(typeof(FrmOrderItemSelection));
-            //}
-            //else
-            //{
-            FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
-            frm.Show();
-            //}
         }
         #endregion
     }

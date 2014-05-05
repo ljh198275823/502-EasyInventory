@@ -40,7 +40,6 @@
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.departmentTree1 = new LJH.Inventory.UI.Controls.DepartmentTree(this.components);
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddStaff = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddDepartment = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeleteDepartment = new System.Windows.Forms.ToolStripMenuItem();
@@ -171,20 +170,12 @@
             // CategoryMenu
             // 
             this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_FreshTree,
             this.mnu_AddStaff,
             this.mnu_AddDepartment,
             this.mnu_DeleteDepartment,
             this.mnu_DepartmentProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(153, 136);
-            // 
-            // mnu_FreshTree
-            // 
-            this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
-            this.mnu_FreshTree.Text = "刷新";
-            this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
+            this.CategoryMenu.Size = new System.Drawing.Size(153, 114);
             // 
             // mnu_AddStaff
             // 
@@ -422,7 +413,6 @@
         private System.Windows.Forms.DataGridView GridView;
         private Controls.DepartmentTree departmentTree1;
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddStaff;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddDepartment;
         private System.Windows.Forms.ToolStripMenuItem mnu_DeleteDepartment;

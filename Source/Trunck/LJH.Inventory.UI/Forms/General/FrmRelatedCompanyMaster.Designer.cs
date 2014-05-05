@@ -217,30 +217,30 @@
             this.cMnu_Delete,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // cMnu_Delete
             // 
             this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Delete.Text = "删除";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // splitter1
@@ -283,33 +283,33 @@
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
+            this.CategoryMenu.Size = new System.Drawing.Size(153, 114);
             // 
             // mnu_FreshTree
             // 
             this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
+            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
             // 
             // mnu_AddCategory
             // 
             this.mnu_AddCategory.Name = "mnu_AddCategory";
-            this.mnu_AddCategory.Size = new System.Drawing.Size(124, 22);
+            this.mnu_AddCategory.Size = new System.Drawing.Size(152, 22);
             this.mnu_AddCategory.Text = "增加类别";
             this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
             // 
             // mnu_DeleteCategory
             // 
             this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
-            this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
+            this.mnu_DeleteCategory.Size = new System.Drawing.Size(152, 22);
             this.mnu_DeleteCategory.Text = "删除";
             this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
             // 
             // mnu_CategoryProperty
             // 
             this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
-            this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
+            this.mnu_CategoryProperty.Size = new System.Drawing.Size(152, 22);
             this.mnu_CategoryProperty.Text = "属性";
             this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
             // 

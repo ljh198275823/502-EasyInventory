@@ -61,17 +61,22 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 重写基类方法和处理事件
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             customerTree1.Init();
-            Operator opt = Operator.Current;
-            //.Enabled = opt.Permit(Permission.EditCustomerPayment);
+            base.ReFreshData();
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+            mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmCustomerPaymentDetail frm= new FrmCustomerPaymentDetail();
+            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
             if (customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
             return frm;
         }
@@ -123,11 +128,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             //}
         }
 
-        private void mnu_Add_Click(object sender, EventArgs e)
-        {
-            PerformAddData();
-        }
-
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();
@@ -141,6 +141,11 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void chkState_CheckedChanged(object sender, EventArgs e)
         {
             FreshData();
+        }
+
+        private void mnu_Add_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
         }
         #endregion
     }

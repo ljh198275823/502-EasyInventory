@@ -24,7 +24,7 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<DeliverySheet > _Sheets = null;
+        private List<DeliverySheet> _Sheets = null;
         private List<WareHouse> _Warehouses = null;
         #endregion
 
@@ -65,10 +65,10 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 重写基类方法和处理事件
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             customerTree1.Init();
+            base.ReFreshData();
         }
 
         public override void ShowOperatorRights()
@@ -80,14 +80,14 @@ namespace LJH.Inventory.UI.Forms
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmDeliverySheetDetail frm= new FrmDeliverySheetDetail();
+            FrmDeliverySheetDetail frm = new FrmDeliverySheetDetail();
             if (customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
             return frm;
         }
 
         protected override List<object> GetDataSource()
         {
-            _Sheets  = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            _Sheets = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             return FilterData();
         }
@@ -159,19 +159,11 @@ namespace LJH.Inventory.UI.Forms
         {
             FreshData();
         }
-        #endregion
-
-        private void mnu_FreshTree_Click(object sender, EventArgs e)
-        {
-            customerTree1.Init();
-            FreshData();
-        }
 
         private void mnu_AddSheet_Click(object sender, EventArgs e)
         {
             PerformAddData();
         }
-
-
+        #endregion
     }
 }

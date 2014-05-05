@@ -62,10 +62,10 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 重写基类方法和处理事件
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             this.customerTree1.Init();
+            base.ReFreshData();
         }
 
         public override void ShowOperatorRights()
@@ -149,11 +149,11 @@ namespace LJH.Inventory.UI.Forms
         {
             FreshData();
         }
-        #endregion
 
         private void mnu_Add_Click(object sender, EventArgs e)
         {
             PerformAddData();
         }
+        #endregion
     }
 }

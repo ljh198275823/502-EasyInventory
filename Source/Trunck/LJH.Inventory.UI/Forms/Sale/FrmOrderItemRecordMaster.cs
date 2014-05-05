@@ -70,16 +70,15 @@ namespace LJH.Inventory.UI.Forms.Sale
         #endregion
 
         #region 重写基类方法和处理事件
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             this.customerTree1.Init();
-            Operator opt = Operator.Current;
+            base.ReFreshData();
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            return new FrmOrderDetail();
+            return null;
         }
 
         protected override List<object> GetDataSource()

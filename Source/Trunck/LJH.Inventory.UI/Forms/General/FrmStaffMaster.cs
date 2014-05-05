@@ -28,7 +28,7 @@ namespace LJH.Inventory.UI.Forms.General
         #endregion
 
         #region 私有方法
-        private void FreshData(TreeNode node)
+        private void FreshData()
         {
             List<object> items = FilterData();
             ShowItemsOnGrid(items);
@@ -50,10 +50,11 @@ namespace LJH.Inventory.UI.Forms.General
         #endregion
 
         #region 重写基类方法
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             departmentTree1.Init();
+            _Operators = new OperatorBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            base.ReFreshData();
         }
 
         public override void ShowOperatorRights()
@@ -127,7 +128,6 @@ namespace LJH.Inventory.UI.Forms.General
 
         protected override void ShowItemsOnGrid(List<object> items)
         {
-            _Operators = new OperatorBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             base.ShowItemsOnGrid(items);
             Filter(txtKeyword.Text.Trim());
         }
@@ -183,13 +183,7 @@ namespace LJH.Inventory.UI.Forms.General
         #region 类别树右键菜单
         private void departmentTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            FreshData(e.Node);
-        }
-
-        private void mnu_FreshTree_Click(object sender, EventArgs e)
-        {
-            departmentTree1.Init();
-            FreshData(departmentTree1.Nodes[0]);
+            FreshData();
         }
 
         private void mnu_AddDepartment_Click(object sender, EventArgs e)

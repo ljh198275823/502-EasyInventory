@@ -46,10 +46,10 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 重写基类方法
-        protected override void Init()
+        protected override void ReFreshData()
         {
             this.categoryTree.Init();
-            base.Init();
+            base.ReFreshData();
         }
 
         public override void ShowOperatorRights()
@@ -131,12 +131,6 @@ namespace LJH.Inventory.UI.Forms
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData(e.Node);
-        }
-
-        private void mnu_FreshTree_Click(object sender, EventArgs e)
-        {
-            this.categoryTree.Init();
-            FreshData(categoryTree.Nodes[0]);
         }
 
         private void mnu_AddCategory_Click(object sender, EventArgs e)

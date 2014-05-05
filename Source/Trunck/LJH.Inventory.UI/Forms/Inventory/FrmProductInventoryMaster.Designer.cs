@@ -82,9 +82,9 @@
             this.panel5.Controls.Add(this.txtKeyword);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(223, 0);
+            this.panel5.Location = new System.Drawing.Point(242, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(975, 38);
+            this.panel5.Size = new System.Drawing.Size(956, 38);
             this.panel5.TabIndex = 7;
             // 
             // txtKeyword
@@ -95,7 +95,7 @@
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(69, 7);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(894, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(875, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
@@ -112,7 +112,7 @@
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(222, 0);
+            this.panel4.Location = new System.Drawing.Point(241, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1, 38);
             this.panel4.TabIndex = 6;
@@ -124,7 +124,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(222, 38);
+            this.panel2.Size = new System.Drawing.Size(241, 38);
             this.panel2.TabIndex = 2;
             // 
             // wareHouseComboBox1
@@ -132,7 +132,7 @@
             this.wareHouseComboBox1.FormattingEnabled = true;
             this.wareHouseComboBox1.Location = new System.Drawing.Point(44, 7);
             this.wareHouseComboBox1.Name = "wareHouseComboBox1";
-            this.wareHouseComboBox1.Size = new System.Drawing.Size(172, 20);
+            this.wareHouseComboBox1.Size = new System.Drawing.Size(192, 20);
             this.wareHouseComboBox1.TabIndex = 1;
             // 
             // label1
@@ -150,7 +150,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 38);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(194, 321);
+            this.pnlLeft.Size = new System.Drawing.Size(242, 321);
             this.pnlLeft.TabIndex = 113;
             // 
             // categoryTree
@@ -164,14 +164,14 @@
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
             this.categoryTree.SelectedImageIndex = 0;
-            this.categoryTree.Size = new System.Drawing.Size(194, 321);
+            this.categoryTree.Size = new System.Drawing.Size(242, 321);
             this.categoryTree.TabIndex = 3;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.categoryTree_NodeMouseClick);
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(194, 38);
+            this.splitter1.Location = new System.Drawing.Point(242, 38);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(8, 321);
             this.splitter1.TabIndex = 114;
@@ -198,12 +198,12 @@
             this.colSum});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(202, 38);
+            this.dataGridView1.Location = new System.Drawing.Point(250, 38);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(996, 321);
+            this.dataGridView1.Size = new System.Drawing.Size(948, 321);
             this.dataGridView1.TabIndex = 115;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -291,35 +291,35 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 98);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // FrmProductInventoryMaster

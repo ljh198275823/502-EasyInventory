@@ -50,6 +50,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                     items = null;
                 }
             }
+            if (items != null && items.Count > 0)
+            {
+                items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
+                                        (item.State == SheetState.Approved && chkApproved.Checked) ||
+                                        (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+            }
             List<object> objs = null;
             if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
             return objs;
@@ -57,11 +63,17 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 重写基类方法和处理事件
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             this.customerTree1.Init();
-            Operator opt = Operator.Current;
+            base.ReFreshData();
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
+            mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -126,36 +138,22 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
 
+        private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            FreshData();
+        }
+
         private void mnu_Add_Click(object sender, EventArgs e)
         {
             PerformAddData();
         }
 
-        private void mnu_Pay_Click(object sender, EventArgs e)
+        private void chkState_CheckedChanged(object sender, EventArgs e)
         {
-            //if (dataGridView1.SelectedRows.Count == 1)
-            //{
-            //    CustomerOtherReceivable daifu = dataGridView1.SelectedRows[0].Tag as CustomerOtherReceivable;
-            //    if (daifu.Payable)
-            //    {
-            //        FrmReceivablesPaid frm = new FrmReceivablesPaid();
-            //        CompanyInfo c = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(daifu.CustomerID).QueryObject;
-            //        if (c != null)
-            //        {
-            //            frm.Customer = c;
-            //            frm.ReceivableID = daifu.ID;
-            //            frm.MaxAmount = daifu.NotPaid;
-            //            if (frm.ShowDialog() == DialogResult.OK)
-            //            {
-            //                CustomerOtherReceivable sheet1 = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetByID(daifu.ID).QueryObject;
-            //                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sheet1);
-            //            }
-            //        }
-            //    }
-            //}
+            FreshData();
         }
 
-        private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
         {
             FreshData();
         }

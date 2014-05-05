@@ -29,15 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmExpenditureRecordMaster));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmExpenditureRecordMaster));
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_FreshTree = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddExpenditure = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -82,27 +80,19 @@
             // CategoryMenu
             // 
             this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_FreshTree,
-            this.mnu_Add,
+            this.mnu_AddExpenditure,
             this.mnu_AddCategory,
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(125, 114);
+            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
             // 
-            // mnu_FreshTree
+            // mnu_AddExpenditure
             // 
-            this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
-            this.mnu_FreshTree.Text = "刷新";
-            this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
-            // 
-            // mnu_Add
-            // 
-            this.mnu_Add.Name = "mnu_Add";
-            this.mnu_Add.Size = new System.Drawing.Size(124, 22);
-            this.mnu_Add.Text = "新建支出";
-            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
+            this.mnu_AddExpenditure.Name = "mnu_AddExpenditure";
+            this.mnu_AddExpenditure.Size = new System.Drawing.Size(124, 22);
+            this.mnu_AddExpenditure.Text = "新建支出";
+            this.mnu_AddExpenditure.Click += new System.EventHandler(this.mnu_AddExpenditure_Click);
             // 
             // mnu_AddCategory
             // 
@@ -124,12 +114,6 @@
             this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
             this.mnu_CategoryProperty.Text = "属性";
             this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "category.png");
             // 
             // pnlFilter
             // 
@@ -256,7 +240,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 33);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(194, 315);
+            this.pnlLeft.Size = new System.Drawing.Size(224, 315);
             this.pnlLeft.TabIndex = 114;
             // 
             // categoryTree
@@ -268,14 +252,14 @@
             this.categoryTree.ItemHeight = 20;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
-            this.categoryTree.Size = new System.Drawing.Size(194, 315);
+            this.categoryTree.Size = new System.Drawing.Size(224, 315);
             this.categoryTree.TabIndex = 0;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.category_NodeMouseClick);
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(194, 33);
+            this.splitter1.Location = new System.Drawing.Point(224, 33);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(8, 315);
             this.splitter1.TabIndex = 115;
@@ -301,12 +285,12 @@
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(202, 33);
+            this.dataGridView1.Location = new System.Drawing.Point(232, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1027, 315);
+            this.dataGridView1.Size = new System.Drawing.Size(997, 315);
             this.dataGridView1.TabIndex = 116;
             // 
             // colID
@@ -431,7 +415,6 @@
             this.Controls.Add(this.pnlFilter);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmExpenditureRecordMaster";
-            this.ShowInTaskbar = false;
             this.Text = "公司管理费用";
             this.Controls.SetChildIndex(this.pnlFilter, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
@@ -454,11 +437,9 @@
         #endregion
 
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnu_FreshTree;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddCategory;
         private System.Windows.Forms.ToolStripMenuItem mnu_DeleteCategory;
         private System.Windows.Forms.ToolStripMenuItem mnu_CategoryProperty;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel pnlFilter;
         private System.Windows.Forms.Panel panel5;
         private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
@@ -491,6 +472,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPayee;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Add;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddExpenditure;
     }
 }

@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Reserve = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,47 +78,33 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.cMnu_Reserve,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 98);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(124, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // cMnu_Reserve
-            // 
-            this.cMnu_Reserve.Name = "cMnu_Reserve";
-            this.cMnu_Reserve.Size = new System.Drawing.Size(124, 22);
-            this.cMnu_Reserve.Text = "库存预订";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(121, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // pnlFilter
@@ -307,23 +291,25 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 33);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(200, 297);
+            this.pnlLeft.Size = new System.Drawing.Size(223, 297);
             this.pnlLeft.TabIndex = 112;
             // 
             // supplierTree1
             // 
             this.supplierTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.supplierTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.supplierTree1.HideSelection = false;
             this.supplierTree1.LoadSupplier = true;
             this.supplierTree1.Location = new System.Drawing.Point(0, 0);
             this.supplierTree1.Name = "supplierTree1";
-            this.supplierTree1.Size = new System.Drawing.Size(200, 297);
+            this.supplierTree1.Size = new System.Drawing.Size(223, 297);
             this.supplierTree1.TabIndex = 0;
             this.supplierTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.supplierTree1_NodeMouseClick);
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(200, 33);
+            this.splitter1.Location = new System.Drawing.Point(223, 33);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(8, 297);
             this.splitter1.TabIndex = 113;
@@ -349,12 +335,12 @@
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(208, 33);
+            this.dataGridView1.Location = new System.Drawing.Point(231, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(684, 297);
+            this.dataGridView1.Size = new System.Drawing.Size(661, 297);
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -389,8 +375,8 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle3.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle1;
             this.colCount.HeaderText = "采购数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -464,8 +450,6 @@
 
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Reserve;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;

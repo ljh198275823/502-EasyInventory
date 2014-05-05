@@ -28,13 +28,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData()
         {
-            List<object> items = GetSelectedNodeItems();
+            List<object> items = FilterData();
             ShowItemsOnGrid(items);
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
             List<CompanyInfo> items = _Customers;
             CustomerType pc = null;
@@ -48,11 +48,16 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 重写基类方法
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             categoryTree.Init();
-            Operator opt = Operator.Current;
+            base.ReFreshData();
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            cMnu_Payment.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -76,7 +81,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             _Customers = bll.GetItems(SearchCondition).QueryObjects;
             _CustomerStates = bll.GetCustomerStates().QueryObjects;
-            List<object> records = GetSelectedNodeItems();
+            List<object> records = FilterData();
             return records;
         }
 
@@ -98,7 +103,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 事件处理程序
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

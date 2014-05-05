@@ -63,11 +63,10 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 重写基类方法
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             supplierTree1.Init();
-            Operator opt = Operator.Current;
+            base.ReFreshData();
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -111,30 +110,7 @@ namespace LJH.Inventory.UI.Forms
         }
         #endregion
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            //if (UpdatingItem != null)
-            //{
-            //    if (MessageBox.Show("是否将此收货单作废?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            //    {
-            //        InventorySheet sheet = UpdatingItem as InventorySheet;
-            //        CommandResult ret = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).Nullify(sheet.ID, OperatorInfo.CurrentOperator.OperatorName);
-            //        if (ret.Result == ResultCode.Successful)
-            //        {
-            //            InventorySheet sheet1 = (new InventorySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(sheet.ID).QueryObject;
-            //            this.UpdatingItem = sheet1;
-            //            ItemShowing();
-            //            ShowButtonState();
-            //            this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //}
-        }
-
+        #region 事件处理程序
         private void supplierTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();
@@ -159,5 +135,6 @@ namespace LJH.Inventory.UI.Forms
         {
             PerformAddData();
         }
+        #endregion
     }
 }

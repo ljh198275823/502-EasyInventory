@@ -22,7 +22,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             InitializeComponent();
         }
 
-
         #region 私有变量
         private List<ExpenditureRecord> _Sheets = null;
         #endregion
@@ -63,12 +62,19 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 重写基类方法和处理事件
-        protected override void Init()
+        protected override void ReFreshData()
         {
-            base.Init();
             this.categoryTree.Init();
-            Operator opt = Operator.Current;
-            //menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditExpenditureRecord);
+            base.ReFreshData();
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
+            mnu_AddExpenditure.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
+            mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
+            mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -135,12 +141,6 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 类别树右键菜单
-        private void mnu_FreshTree_Click(object sender, EventArgs e)
-        {
-            categoryTree.Init();
-            FreshData();
-        }
-
         private void mnu_AddCategory_Click(object sender, EventArgs e)
         {
             ExpenditureType pc = categoryTree.SelectedNode.Tag as ExpenditureType;
@@ -185,7 +185,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             frm.ShowDialog();
         }
 
-        private void mnu_Add_Click(object sender, EventArgs e)
+        private void mnu_AddExpenditure_Click(object sender, EventArgs e)
         {
             PerformAddData();
         }
