@@ -129,13 +129,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Create, Operator.Current.Name);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Modify, Operator.Current.Name);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()

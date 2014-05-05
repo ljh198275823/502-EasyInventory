@@ -252,7 +252,7 @@ namespace LJH.Inventory.UI.Forms
             if (CheckInput())
             {
                 T sheet = GetItemFromInput() as T;
-                CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
+                CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name, Operator.Current.ID);
                 if (ret.Result == ResultCode.Successful)
                 {
                     UpdatingItem = sheet;
@@ -295,7 +295,7 @@ namespace LJH.Inventory.UI.Forms
                             return;
                         }
                     }
-                    CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name);
+                    CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ItemShowing();

@@ -187,13 +187,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as InventorySheet, SheetOperation.Create, Operator.Current.Name);
+            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as InventorySheet, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as InventorySheet, SheetOperation.Modify, Operator.Current.Name);
-        }
+            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as InventorySheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);        }
 
         protected override void ShowButtonState()
         {

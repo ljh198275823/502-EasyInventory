@@ -212,12 +212,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as DeliverySheet, SheetOperation.Create, Operator.Current.ID);
+            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as DeliverySheet, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as DeliverySheet, SheetOperation.Modify, Operator.Current.ID);
+            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as DeliverySheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()

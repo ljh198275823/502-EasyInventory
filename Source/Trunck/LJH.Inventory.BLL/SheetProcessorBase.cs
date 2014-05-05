@@ -158,7 +158,7 @@ namespace LJH.Inventory.BLL
         /// <param name="opt"></param>
         /// <param name="unitWork"></param>
         /// <param name="dt"></param>
-        protected virtual void AddOperationLog(string id, string docType, SheetOperation operation, string opt, IUnitWork unitWork, DateTime dt)
+        protected virtual void AddOperationLog(string id, string docType, SheetOperation operation, IUnitWork unitWork, DateTime dt, string opt, string logID = null)
         {
             DocumentOperation doc = new DocumentOperation()
             {
@@ -168,6 +168,7 @@ namespace LJH.Inventory.BLL
                 OperatDate = dt,
                 Operation = SheetOperationDescription.GetDescription(operation),
                 Operator = opt,
+                LogID = logID,
             };
             ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(_RepoUri).Insert(doc, unitWork);
         }
@@ -191,7 +192,7 @@ namespace LJH.Inventory.BLL
         /// <param name="operation"></param>
         /// <param name="opt"></param>
         /// <returns></returns>
-        public CommandResult ProcessSheet(TEntity sheet, SheetOperation operation, string opt)
+        public CommandResult ProcessSheet(TEntity sheet, SheetOperation operation, string opt, string logID)
         {
             try
             {
@@ -234,7 +235,7 @@ namespace LJH.Inventory.BLL
                             return new CommandResult(ResultCode.Fail, string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(operation)));
                     }
                 }
-                AddOperationLog(sheet.ID, sheet.DocumentType, operation, opt, unitWork, dt.Value);
+                AddOperationLog(sheet.ID, sheet.DocumentType, operation, unitWork, dt.Value, opt, logID);
                 return unitWork.Commit();
             }
             catch (Exception ex)
@@ -249,7 +250,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public override CommandResult Add(TEntity info)
         {
-            return ProcessSheet(info, SheetOperation.Create, string.Empty);
+            return ProcessSheet(info, SheetOperation.Create, string.Empty, string.Empty);
         }
         /// <summary>
         /// 修改
@@ -258,7 +259,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public override CommandResult Update(TEntity info)
         {
-            return ProcessSheet(info, SheetOperation.Modify, string.Empty);
+            return ProcessSheet(info, SheetOperation.Modify, string.Empty, string.Empty);
         }
         #endregion
     }

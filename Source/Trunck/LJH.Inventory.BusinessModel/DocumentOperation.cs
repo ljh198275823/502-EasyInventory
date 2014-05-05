@@ -42,6 +42,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Operator { get; set; }
         /// <summary>
+        /// 获取或设置操作员的登录ID
+        /// </summary>
+        public string LogID { get; set; }
+        /// <summary>
         /// 获取或设置备注
         /// </summary>
         public string Memo { get; set; }

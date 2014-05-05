@@ -224,12 +224,12 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult AddItem(object item)
         {
-            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as PurchaseOrder, SheetOperation.Create, Operator.Current.Name);
+            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as PurchaseOrder, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as PurchaseOrder, SheetOperation.Modify, Operator.Current.Name);
+            return (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as PurchaseOrder, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
         }
         #endregion
 

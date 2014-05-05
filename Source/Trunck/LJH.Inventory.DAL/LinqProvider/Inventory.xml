@@ -105,7 +105,7 @@
       <Column Name="OperatDate" Member="OperatDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="Operation" Member="Operation" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="Operator" Member="Operator" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="LogID" Member="LogID" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

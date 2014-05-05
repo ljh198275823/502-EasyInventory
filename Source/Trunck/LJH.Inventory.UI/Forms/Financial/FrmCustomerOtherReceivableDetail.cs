@@ -87,13 +87,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             CustomerOtherReceivableBLL bll = new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerOtherReceivable, SheetOperation.Create, Operator.Current.Name);
+            return bll.ProcessSheet(item as CustomerOtherReceivable, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
             CustomerOtherReceivableBLL bll = new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerOtherReceivable, SheetOperation.Modify, Operator.Current.Name);
+            return bll.ProcessSheet(item as CustomerOtherReceivable, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
