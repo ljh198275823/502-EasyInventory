@@ -94,16 +94,34 @@ namespace InventoryDemo
         public void ShowOperatorRights()
         {
             Operator cur = Operator.Current;
+            //基本资料
             this.mnu_Product.Enabled = cur.Permit(Permission.Product, PermissionActions.Read) || cur.Permit(Permission.Product, PermissionActions.Edit);
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
-            this.mnu_Customer.Enabled = cur.Permit(Permission.Customer, PermissionActions.Read) || cur.Permit(Permission.Customer, PermissionActions.Edit);
-            this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.DeliverySheet, PermissionActions.Read) || cur.Permit(Permission.DeliverySheet, PermissionActions.Edit);
+            this.mnu_Unit.Enabled = cur.Permit(Permission.Unit, PermissionActions.Read) || cur.Permit(Permission.Unit, PermissionActions.Edit);
+            this.mnu_CurrencyType.Enabled = cur.Permit(Permission.CurrencyType, PermissionActions.Read) || cur.Permit(Permission.CurrencyType, PermissionActions.Edit);
+            this.mnu_Transport.Enabled = cur.Permit(Permission.Transport, PermissionActions.Read) || cur.Permit(Permission.Transport, PermissionActions.Edit);
+            this.mnu_Staff.Enabled = cur.Permit(Permission.Staff, PermissionActions.Read) || cur.Permit(Permission.Staff, PermissionActions.Edit);
+            this.mnu_Role.Enabled = cur.Permit(Permission.Role, PermissionActions.Read) || cur.Permit(Permission.Role, PermissionActions.Edit);
             this.mnu_Options.Enabled = cur.Permit(Permission.SystemOptions, PermissionActions.Read) || cur.Permit(Permission.SystemOptions, PermissionActions.Edit);
+            //销售
+            this.mnu_Customer.Enabled = cur.Permit(Permission.Customer, PermissionActions.Read) || cur.Permit(Permission.Customer, PermissionActions.Edit);
+            this.mnu_Order.Enabled = cur.Permit(Permission.Order, PermissionActions.Read) || cur.Permit(Permission.Order, PermissionActions.Edit);
+            this.mnu_OrderMonitor.Enabled = cur.Permit(Permission.Order, PermissionActions.Read) || cur.Permit(Permission.Order, PermissionActions.Edit);
+            //采购
+            this.mnu_Supplier.Enabled = cur.Permit(Permission.Supplier, PermissionActions.Read) || cur.Permit(Permission.Supplier, PermissionActions.Edit);
+            this.mnu_PurchaseOrder.Enabled = cur.Permit(Permission.PurchaseOrder, PermissionActions.Read) || cur.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
+            this.mnu_PurchaseMonitor.Enabled = cur.Permit(Permission.PurchaseOrder, PermissionActions.Read) || cur.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
+            //仓库
+            this.mnu_Inventory.Enabled = cur.Permit(Permission.ProductInventory, PermissionActions.Read) || cur.Permit(Permission.ProductInventory, PermissionActions.Edit);
+            this.mnu_InventorySheet.Enabled = cur.Permit(Permission.InventorySheet, PermissionActions.Read) || cur.Permit(Permission.InventorySheet, PermissionActions.Edit);
+            this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.DeliverySheet, PermissionActions.Read) || cur.Permit(Permission.DeliverySheet, PermissionActions.Edit);
+            //财务
+            this.mnu_CustomerState .Enabled =cur.Permit (Permission.CustomerState ,PermissionActions.Read )|| cur.Permit (Permission.CustomerState ,PermissionActions.Edit );
+            this.mnu_CustomerOtherReceivable.Enabled = cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Read) || cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
             this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
-
-            this.mnu_Role.Enabled = cur.Permit(Permission.Role, PermissionActions.Read) || cur.Permit(Permission.Role, PermissionActions.Edit);
-
+            
+            //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
         }
         #endregion
@@ -182,11 +200,6 @@ namespace InventoryDemo
         private void mnu_WareHouse_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmWareHouseMaster>();
-        }
-
-        private void mnu_Supplier_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmSupplierMaster>();
         }
 
         private void mnu_Exit_Click(object sender, EventArgs e)
@@ -305,7 +318,7 @@ namespace InventoryDemo
             ShowSingleForm<FrmTransportMaster>();
         }
 
-        private void mnu_Supplier_Click_1(object sender, EventArgs e)
+        private void mnu_Supplier_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmSupplierMaster>();
         }

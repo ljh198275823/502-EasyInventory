@@ -26,6 +26,15 @@ namespace LJH.Inventory.UI.Forms
             return new FrmTransportDetail();
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.Transport, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.Transport, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.Transport, PermissionActions.Edit);
+            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Transport, PermissionActions.Edit);
+        }
+
         protected override List<object> GetDataSource()
         {
             List<Transport> items = (new TransportBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;

@@ -59,6 +59,13 @@ namespace LJH.Inventory.UI.Forms.General
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.Staff, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.Staff, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.Staff, PermissionActions.Edit);
+            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Staff, PermissionActions.Edit);
+            mnu_AddStaff.Enabled = Operator.Current.Permit(Permission.Staff, PermissionActions.Edit);
+            mnu_AddDepartment.Enabled = Operator.Current.Permit(Permission.Department, PermissionActions.Edit);
+            mnu_DeleteDepartment.Enabled = Operator.Current.Permit(Permission.Department, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -190,7 +197,7 @@ namespace LJH.Inventory.UI.Forms.General
             Department pc = departmentTree1.SelectedNode.Tag as Department;
             FrmDepartmentDetail frm = new FrmDepartmentDetail();
             frm.IsAdding = true;
-            frm.ParentCategory = pc;
+            frm.ParentDepartment = pc;
             frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
                 Department item = args.AddedItem as Department;

@@ -25,6 +25,7 @@ namespace LJH.Inventory.UI.Forms
         {
             return new FrmProductCategoryDetail();
         }
+
         protected override List<object> GetDataSource()
         {
             ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.Current.ConnStr);
@@ -65,6 +66,8 @@ namespace LJH.Inventory.UI.Forms
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
+            this.btn_Add.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
+            this.btn_Delete.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
             this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
             this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
         }

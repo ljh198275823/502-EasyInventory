@@ -49,17 +49,22 @@ namespace LJH.Inventory.UI.Controls
 
         private void AddActionNodes(TreeNode parent, PermissionActions actions)
         {
-            if ((actions & PermissionActions.Read) == PermissionActions.Read)
+            for (int i = 0; i < 32; i++)
             {
-                TreeNode actionNode = new TreeNode("查看", 1, 1);
-                actionNode.Tag = PermissionActions.Read;
-                parent.Nodes.Add(actionNode);
-            }
-            if ((actions & PermissionActions.Edit) == PermissionActions.Edit)
-            {
-                TreeNode actionNode = new TreeNode("编辑", 1, 1);
-                actionNode.Tag = PermissionActions.Edit;
-                parent.Nodes.Add(actionNode);
+                PermissionActions temp = (PermissionActions)(1 << i);
+                if (Enum.IsDefined(typeof(PermissionActions), temp))
+                {
+                    if ((temp & actions) != 0)
+                    {
+                        string descr = PermissionActionDescription.GetDescription(temp);
+                        if (!string.IsNullOrEmpty(descr))
+                        {
+                            TreeNode actionNode = new TreeNode(descr, 1, 1);
+                            actionNode.Tag = temp;
+                            parent.Nodes.Add(actionNode);
+                        }
+                    }
+                }
             }
         }
         #endregion

@@ -94,7 +94,10 @@ namespace LJH.Inventory.UI.Forms.General
 
         public override void ShowOperatorRights()
         {
-
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.Staff, PermissionActions.Edit);
+            btnBrowserPhoto.Enabled = Operator.Current.Permit(Permission.Staff, PermissionActions.Edit);
+            btnDelPhoto.Enabled = Operator.Current.Permit(Permission.Staff, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

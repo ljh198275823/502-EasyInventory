@@ -56,13 +56,13 @@ namespace LJH.Inventory.UI.Forms
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
+            this.btn_Add.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
+            this.btn_Delete.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
-
             this.mnu_AddCustomer.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit);
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit);
-            this.mnu_CategoryProperty.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit) || Operator.Current.Permit(Permission.CustomerType, PermissionActions.Read);
         }
 
         protected override FrmDetailBase GetDetailForm()

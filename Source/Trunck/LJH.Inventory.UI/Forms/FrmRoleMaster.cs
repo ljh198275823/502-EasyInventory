@@ -63,9 +63,15 @@ namespace LJH.Inventory.UI.Forms
         protected override void Init()
         {
             base.Init();
-            Operator opt = Operator.Current;
-            //menu.Items["btn_Add"].Enabled = opt.Permit(Permission.EditRole);
-            //menu.Items["btn_Delete"].Enabled = opt.Permit(Permission.EditRole);
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.Role, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.Role, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.Role, PermissionActions.Edit);
+            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Role, PermissionActions.Edit);
         }
         #endregion
     }

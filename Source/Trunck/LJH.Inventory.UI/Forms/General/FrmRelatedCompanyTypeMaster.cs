@@ -53,6 +53,15 @@ namespace LJH.Inventory.UI.Forms
             }
             return ret.Result == ResultCode.Successful;
         }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
+            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
+        }
         #endregion
     }
 }

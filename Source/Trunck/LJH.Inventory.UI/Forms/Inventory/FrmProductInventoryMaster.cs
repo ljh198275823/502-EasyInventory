@@ -60,7 +60,12 @@ namespace LJH.Inventory.UI.Forms
             this.wareHouseComboBox1.Init();
             this.wareHouseComboBox1.SelectedIndexChanged -= wareHouseComboBox1_SelectedIndexChanged;
             this.wareHouseComboBox1.SelectedIndexChanged += wareHouseComboBox1_SelectedIndexChanged;
-            Operator cur = Operator.Current;
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()

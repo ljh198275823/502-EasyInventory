@@ -13,10 +13,10 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmOperatorMaster:FrmMasterBase
+    public partial class FrmOperatorMaster : FrmMasterBase
     {
         private List<Operator> operators;
-        private OperatorBLL bll = new OperatorBLL(AppSettings .Current .ConnStr );
+        private OperatorBLL bll = new OperatorBLL(AppSettings.Current.ConnStr);
 
         public FrmOperatorMaster()
         {
@@ -68,6 +68,8 @@ namespace LJH.Inventory.UI.Forms
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
             cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
         }

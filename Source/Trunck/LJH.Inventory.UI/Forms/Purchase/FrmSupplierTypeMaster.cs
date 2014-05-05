@@ -26,6 +26,15 @@ namespace LJH.Inventory.UI.Forms
             return new FrmSupplierTypeDetail();
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.SupplierType, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.SupplierType, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierType, PermissionActions.Edit);
+            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.SupplierType, PermissionActions.Edit);
+        }
+
         protected override List<object> GetDataSource()
         {
             List<SupplierType> items = (new SupplierTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;

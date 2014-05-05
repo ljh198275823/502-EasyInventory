@@ -34,6 +34,12 @@ namespace LJH.Inventory.UI.Forms
             txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
+        }
+
         protected override bool CheckInput()
         {
             if (string.IsNullOrEmpty(txtID.Text))

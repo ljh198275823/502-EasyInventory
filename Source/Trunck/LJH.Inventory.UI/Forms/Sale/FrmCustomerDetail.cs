@@ -56,6 +56,9 @@ namespace LJH.Inventory.UI.Forms
         {
             base.ShowOperatorRights();
             btnOk.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
+            GridView.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
+            mnu_AttachmentAdd.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
+            mnu_AttachmentDelete.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

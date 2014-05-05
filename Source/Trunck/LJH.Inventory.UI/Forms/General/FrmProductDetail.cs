@@ -58,10 +58,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override void InitControls()
         {
-            if (Category != null)
-            {
-                txtCategory.Text = Category.Name;
-            }
+            if (Category != null) txtCategory.Text = Category.Name;
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
+            mnu_AttachmentAdd.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
+            mnu_AttachmentDelete.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

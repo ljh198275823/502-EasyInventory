@@ -32,6 +32,12 @@ namespace LJH.Inventory.UI.Forms
             return true;
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.Transport, PermissionActions.Edit);
+        }
+
         protected override void ItemShowing()
         {
             Transport ct = UpdatingItem as Transport;

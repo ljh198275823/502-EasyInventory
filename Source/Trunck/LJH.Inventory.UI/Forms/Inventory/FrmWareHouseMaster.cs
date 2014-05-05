@@ -14,7 +14,7 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms
 {
-    public partial class FrmWareHouseMaster :FrmMasterBase 
+    public partial class FrmWareHouseMaster : FrmMasterBase
     {
         public FrmWareHouseMaster()
         {
@@ -68,6 +68,8 @@ namespace LJH.Inventory.UI.Forms
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.WareHouse, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.WareHouse, PermissionActions.Edit);
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.WareHouse, PermissionActions.Edit);
             cMnu_Delete.Enabled = Operator.Current.Permit(Permission.WareHouse, PermissionActions.Edit);
         }

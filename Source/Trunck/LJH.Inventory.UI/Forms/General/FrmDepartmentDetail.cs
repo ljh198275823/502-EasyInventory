@@ -24,14 +24,14 @@ namespace LJH.Inventory.UI.Forms.General
         /// <summary>
         /// 获取或设置父类别
         /// </summary>
-        public Department ParentCategory { get; set; }
+        public Department ParentDepartment { get; set; }
         #endregion
 
         #region 重写基类方法
         protected override void InitControls()
         {
             base.InitControls();
-            txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
+            txtParentCategory.Text = ParentDepartment != null ? ParentDepartment.Name : string.Empty;
         }
 
         public override void ShowOperatorRights()
@@ -57,8 +57,8 @@ namespace LJH.Inventory.UI.Forms.General
             txtName.Text = ct.Name;
             if (!string.IsNullOrEmpty(ct.Parent))
             {
-                ParentCategory = (new DepartmentBLL(AppSettings.Current.ConnStr)).GetByID(ct.Parent).QueryObject;
-                txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
+                ParentDepartment = (new DepartmentBLL(AppSettings.Current.ConnStr)).GetByID(ct.Parent).QueryObject;
+                txtParentCategory.Text = ParentDepartment != null ? ParentDepartment.Name : string.Empty;
             }
             txtMemo.Text = ct.Memo;
         }
@@ -71,7 +71,7 @@ namespace LJH.Inventory.UI.Forms.General
                 ct = new Department();
             }
             ct.Name = txtName.Text;
-            ct.Parent = ParentCategory != null ? ParentCategory.ID : null;
+            ct.Parent = ParentDepartment != null ? ParentDepartment.ID : null;
             ct.Memo = txtMemo.Text;
             return ct;
         }
@@ -94,15 +94,15 @@ namespace LJH.Inventory.UI.Forms.General
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                ParentCategory = frm.SelectedItem as Department;
-                txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
+                ParentDepartment = frm.SelectedItem as Department;
+                txtParentCategory.Text = ParentDepartment != null ? ParentDepartment.Name : string.Empty;
             }
         }
 
         private void txtParentCategory_DoubleClick(object sender, EventArgs e)
         {
-            ParentCategory = null; 
-            txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
+            ParentDepartment = null; 
+            txtParentCategory.Text = ParentDepartment != null ? ParentDepartment.Name : string.Empty;
         }
         #endregion
     }

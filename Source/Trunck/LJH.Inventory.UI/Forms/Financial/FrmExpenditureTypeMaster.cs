@@ -27,6 +27,15 @@ namespace LJH.Inventory.UI.Forms.Financial
             return new FrmExpenditureTypeDetail();
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
+            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
+        }
+
         protected override List<object> GetDataSource()
         {
             List<ExpenditureType> items = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;

@@ -21,6 +21,15 @@ namespace LJH.Inventory.UI.Forms.General
         }
 
         #region 重写基类方法
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btn_Add.Enabled = Operator.Current.Permit(Permission.Department, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.Department, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.Department, PermissionActions.Edit);
+            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Department, PermissionActions.Edit);
+        }
+
         protected override FrmDetailBase GetDetailForm()
         {
             return new FrmDepartmentDetail();

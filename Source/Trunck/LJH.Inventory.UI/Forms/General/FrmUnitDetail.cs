@@ -44,6 +44,12 @@ namespace LJH.Inventory.UI.Forms
             return true;
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
+        }
+
         protected override void ItemShowing()
         {
             Unit ct = UpdatingItem as Unit;

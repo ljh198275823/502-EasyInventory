@@ -103,6 +103,10 @@
     <Compile Include="ISheet.cs" />
     <Compile Include="MyCompanyInfo.cs" />
     <Compile Include="OrderItemRecord.cs" />
+    <Compile Include="Permission\OperatorRightAttribute.cs" />
+    <Compile Include="Permission\PermissionActionDescription.cs" />
+    <Compile Include="Permission\PermissionActions.cs" />
+    <Compile Include="Permission\PermissionResolver.cs" />
     <Compile Include="ProductInventoryItem.cs" />
     <Compile Include="Port.cs" />
     <Compile Include="PriceTerm.cs" />
@@ -144,7 +148,7 @@
     <Compile Include="SearchCondition\ProductInventorySearchCondition.cs" />
     <Compile Include="SearchCondition\ProductSearchCondition.cs" />
     <Compile Include="Operator.cs" />
-    <Compile Include="Permissions.cs" />
+    <Compile Include="Permission\Permissions.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="DeliveryRecord.cs" />
     <Compile Include="SearchCondition\SheetSearchCondition.cs" />

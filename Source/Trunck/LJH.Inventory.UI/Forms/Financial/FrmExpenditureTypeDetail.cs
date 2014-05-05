@@ -33,6 +33,13 @@ namespace LJH.Inventory.UI.Forms.Financial
             base.InitControls();
             txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
         }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            btnOk.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
+        }
+
         protected override bool CheckInput()
         {
             if (string.IsNullOrEmpty(txtName.Text))
