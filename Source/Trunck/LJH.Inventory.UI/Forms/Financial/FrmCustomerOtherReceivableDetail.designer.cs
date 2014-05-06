@@ -62,8 +62,8 @@
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
-            this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.mnu_Pay = new System.Windows.Forms.ToolStripButton();
+            this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -420,6 +420,16 @@
             this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
             // 
+            // mnu_Pay
+            // 
+            this.mnu_Pay.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
+            this.mnu_Pay.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnu_Pay.Name = "mnu_Pay";
+            this.mnu_Pay.Size = new System.Drawing.Size(51, 53);
+            this.mnu_Pay.Text = "支付(&P)";
+            this.mnu_Pay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.mnu_Pay.Visible = false;
+            // 
             // btnNullify
             // 
             this.btnNullify.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
@@ -429,15 +439,6 @@
             this.btnNullify.Text = "作废(&N)";
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
-            // 
-            // mnu_Pay
-            // 
-            this.mnu_Pay.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
-            this.mnu_Pay.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnu_Pay.Name = "mnu_Pay";
-            this.mnu_Pay.Size = new System.Drawing.Size(51, 53);
-            this.mnu_Pay.Text = "支付(&P)";
-            this.mnu_Pay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // FrmCustomerOtherReceivableDetail
             // 

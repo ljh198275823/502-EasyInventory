@@ -49,6 +49,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
             this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,10 +76,6 @@
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnPayment = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
-            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -328,6 +328,34 @@
             this.ItemsGrid.Size = new System.Drawing.Size(578, 194);
             this.ItemsGrid.TabIndex = 119;
             // 
+            // colSheetID
+            // 
+            this.colSheetID.HeaderText = "应收款单号";
+            this.colSheetID.MinimumWidth = 120;
+            this.colSheetID.Name = "colSheetID";
+            this.colSheetID.ReadOnly = true;
+            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSheetID.Width = 150;
+            // 
+            // colClassID
+            // 
+            this.colClassID.HeaderText = "类型";
+            this.colClassID.Name = "colClassID";
+            this.colClassID.ReadOnly = true;
+            // 
+            // colAssign
+            // 
+            this.colAssign.HeaderText = "抵消金额";
+            this.colAssign.Name = "colAssign";
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Width = 120;
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.gridAttachment);
@@ -551,34 +579,6 @@
             this.btnNullify.Text = "作废(&N)";
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
-            // 
-            // colSheetID
-            // 
-            this.colSheetID.HeaderText = "应收款单号";
-            this.colSheetID.MinimumWidth = 120;
-            this.colSheetID.Name = "colSheetID";
-            this.colSheetID.ReadOnly = true;
-            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSheetID.Width = 150;
-            // 
-            // colClassID
-            // 
-            this.colClassID.HeaderText = "类型";
-            this.colClassID.Name = "colClassID";
-            this.colClassID.ReadOnly = true;
-            // 
-            // colAssign
-            // 
-            this.colAssign.HeaderText = "抵消金额";
-            this.colAssign.Name = "colAssign";
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Width = 120;
             // 
             // FrmCustomerPaymentDetail
             // 

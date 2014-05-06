@@ -93,7 +93,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 订单资料
         /// </summary>
-        [OperatorRight(Catalog = "销售", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "订单资料")]
+        [OperatorRight(Catalog = "销售", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "订单资料")]
         Order,
         #endregion
 
@@ -111,7 +111,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 采购单资料
         /// </summary>
-        [OperatorRight(Catalog = "采购", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "采购单资料")]
+        [OperatorRight(Catalog = "采购", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "采购单资料")]
         PurchaseOrder,
         #endregion
 
@@ -129,12 +129,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 收货单资料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "收货单资料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Inventory | PermissionActions.Print, Description = "收货单资料")]
         InventorySheet,
         /// <summary>
         /// 送货单资料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "送货单资料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print, Description = "送货单资料")]
         DeliverySheet,
         #endregion
 
@@ -147,12 +147,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 客户其它应收款
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "客户其它应收款")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户其它应收款")]
         CustomerOtherReceivable,
         /// <summary>
         /// 客户付款流水
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "客户还款资料")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户付款流水")]
         CustomerPayment,
         /// <summary>
         /// 资金支出类别
@@ -162,7 +162,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 资金支出资料
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "资金支出资料")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "资金支出资料")]
         ExpenditureRecord,
         #endregion
 

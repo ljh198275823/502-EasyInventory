@@ -112,6 +112,10 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
+            btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
+            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Approve);
+            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.UndoApprove);
+            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Nullify);
         }
         #endregion
 

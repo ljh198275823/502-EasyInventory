@@ -219,7 +219,13 @@ namespace LJH.Inventory.UI.Forms
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
-            if (UpdatingItem != null) ItemsGrid.Enabled = (UpdatingItem as Order).CanDo(SheetOperation.Create) || (UpdatingItem as Order).CanDo(SheetOperation.Modify);
+            btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Edit);
+            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Approve);
+            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.UndoApprove);
+            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Nullify);
+            btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Print);
+            btnShip.Enabled = btnShip.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Ship);
+            ItemsGrid.Enabled = btnSave.Enabled;
         }
 
         protected override CommandResult AddItem(object item)

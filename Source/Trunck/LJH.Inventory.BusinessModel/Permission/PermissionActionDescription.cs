@@ -34,6 +34,18 @@ namespace LJH.Inventory.BusinessModel
                     return "查看";
                 case PermissionActions.Edit:
                     return "编辑";
+                case PermissionActions.Approve :
+                    return "审核";
+                case PermissionActions.UndoApprove :
+                    return "取消审核";
+                case PermissionActions.Nullify :
+                    return "作废";
+                case PermissionActions.Ship :
+                    return "发货";
+                case PermissionActions.Inventory :
+                    return "入库";
+                case PermissionActions.Print :
+                    return "打印";
                 default:
                     return string.Empty;
             }
