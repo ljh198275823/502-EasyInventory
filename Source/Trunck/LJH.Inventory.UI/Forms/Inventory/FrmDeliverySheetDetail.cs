@@ -223,6 +223,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
+            if (UpdatingItem != null) ItemsGrid.Enabled = (UpdatingItem as DeliverySheet).CanDo(SheetOperation.Create) || (UpdatingItem as DeliverySheet).CanDo(SheetOperation.Modify);
         }
         #endregion
 
@@ -399,14 +400,25 @@ namespace LJH.Inventory.UI.Forms
             if (row.Tag != null)
             {
                 DeliveryItem item = row.Tag as DeliveryItem;
-                if (col.Name == "colPrice" && row.Tag != null)
+                if (col.Name == "colPrice")
                 {
                     decimal price;
                     if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out price))
                     {
                         if (price < 0) price = 0;
                         item.Price = price;
+                        item.Amount = price * item.Count;
                         row.Cells[e.ColumnIndex].Value = price;
+                    }
+                }
+                if (col.Name == "colTotal")
+                {
+                    decimal amount;
+                    if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out amount))
+                    {
+                        if (amount < 0) amount = 0;
+                        item.Amount = amount;
+                        row.Cells[e.ColumnIndex].Value = amount;
                     }
                 }
                 else if (col.Name == "colCount")
@@ -415,21 +427,8 @@ namespace LJH.Inventory.UI.Forms
                     if (int.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out count))
                     {
                         if (count < 0) count = 0;
-                        if (UserSettings.Current.CheckCountWhenSaveDeliverySheet)
-                        {
-                            string pid = (row.Tag as DeliveryItem).ProductID;
-                            //if (txtWareHouse.SelectedWareHouse != null)
-                            //{
-                            //    InventoryItemID id = new InventoryItemID(pid, txtWareHouse.SelectedWareHouseID);
-                            //    ProductInventory pi = (new ProductInventoryBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(id).QueryObject;
-                            //    if (pi != null && count > pi.Count)
-                            //    {
-                            //        MessageBox.Show("库存数量不足出货");
-                            //        count = 0;
-                            //    }
-                            //}
-                        }
                         item.Count = count;
+                        item.Amount = count * item.Price;
                         row.Cells[e.ColumnIndex].Value = count;
                     }
                 }

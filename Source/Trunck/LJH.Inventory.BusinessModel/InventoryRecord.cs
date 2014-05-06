@@ -63,6 +63,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
+        /// 获取或设置货物总金额
+        /// </summary>
+        public decimal Amount { get; set; }
+        /// <summary>
         /// 获取或设置状态
         /// </summary>
         public SheetState State { get; set; }
@@ -82,13 +86,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置采购单号
         /// </summary>
         public string PurchaseOrder { get; set; }
-        /// <summary>
-        /// 获取货款金额
-        /// </summary>
-        public decimal Amount
-        {
-            get { return Price * Count; }
-        }
         #endregion
     }
 }

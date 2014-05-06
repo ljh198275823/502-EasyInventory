@@ -39,6 +39,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
+        /// 获取或设置货物总金额
+        /// </summary>
+        public decimal Amount{get;set;}
+        /// <summary>
         /// 获取或设置客户要求的出货时间
         /// </summary>
         public DateTime DemandDate { get; set; }
@@ -46,20 +50,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置备注
         /// </summary>
         public string Memo { get; set; }
-        #endregion
-
-        #region 只读属性
-        /// <summary>
-        /// 获取货物总金额
-        /// </summary>
-        public decimal Amount
-        {
-            get
-            {
-                return Price * Count;
-            }
-        }
-        
         #endregion
     }
 }

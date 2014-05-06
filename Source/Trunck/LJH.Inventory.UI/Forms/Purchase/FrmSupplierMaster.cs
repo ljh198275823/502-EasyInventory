@@ -37,7 +37,7 @@ namespace LJH.Inventory.UI.Forms
         {
             List<CompanyInfo> items = _Customers;
             List<SupplierType> pc = null;
-            if (this.categoryTree.SelectedNode != null) pc = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+            if (this.categoryTree.SelectedNode != null && this.categoryTree.SelectedNode.Tag != null) pc = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
             if (pc != null && pc.Count > 0) items = _Customers.Where(it => pc.Exists(c => c.ID == it.CategoryID)).ToList();
 
             return (from p in items

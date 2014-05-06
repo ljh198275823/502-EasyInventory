@@ -63,6 +63,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
+        /// 获取或设置货物总金额
+        /// </summary>
+        public decimal Amount { get; set; }
+        /// <summary>
         /// 获取或设置是否含税
         /// </summary>
         public bool IsWithTax { get; set; }
@@ -89,13 +93,6 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 只读属性
-        /// <summary>
-        /// 获取货款金额
-        /// </summary>
-        public decimal Amount
-        {
-            get { return Price * Count; }
-        }
         /// <summary>
         /// 获取产品名称
         /// </summary>

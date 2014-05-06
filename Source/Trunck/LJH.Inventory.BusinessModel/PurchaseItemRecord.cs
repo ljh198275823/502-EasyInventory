@@ -64,6 +64,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
+        /// 获取或设置货物总金额
+        /// </summary>
+        public decimal Amount { get; set; }
+        /// <summary>
         /// 获取或设置采购到货数量
         /// </summary>
         public decimal Received { get; set; }
@@ -86,16 +90,6 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 只读属性
-        /// <summary>
-        /// 获取货物总金额
-        /// </summary>
-        public decimal Amount
-        {
-            get
-            {
-                return Price * Count;
-            }
-        }
         /// <summary>
         /// 获取未到货数量
         /// </summary>

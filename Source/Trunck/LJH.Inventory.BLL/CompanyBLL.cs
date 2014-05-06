@@ -28,11 +28,11 @@ namespace LJH.Inventory.BLL
             }
             else if (classID == CustomerClass.Supplier)
             {
-                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "customer");
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "supplier");
             }
             else
             {
-                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("RC", 3, "customer");
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("RC", 3, "relatedCompany");
             }
             return id;
         }

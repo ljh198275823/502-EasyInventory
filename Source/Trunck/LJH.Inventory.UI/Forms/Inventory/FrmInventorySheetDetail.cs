@@ -93,7 +93,7 @@ namespace LJH.Inventory.UI.Forms
                 txtSheetNo.Focus();
                 return false;
             }
-            if (txtWareHouse.Tag == null)
+            if (WareHouse == null)
             {
                 MessageBox.Show("请选择收货的仓库");
                 txtWareHouse.Focus();
@@ -197,6 +197,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
+            if (UpdatingItem != null) ItemsGrid.Enabled = (UpdatingItem as InventorySheet).CanDo(SheetOperation.Create) || (UpdatingItem as InventorySheet).CanDo(SheetOperation.Modify);
         }
         #endregion
 
@@ -349,23 +350,35 @@ namespace LJH.Inventory.UI.Forms
             if (row.Tag != null)
             {
                 InventoryItem item = row.Tag as InventoryItem;
-                if (col.Name == "colPrice" && row.Tag != null)
+                if (col.Name == "colPrice")
                 {
                     decimal price;
                     if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out price))
                     {
                         if (price < 0) price = 0;
                         item.Price = price;
+                        item.Amount = price * item.Count;
                         row.Cells[e.ColumnIndex].Value = price;
+                    }
+                }
+                if (col.Name == "colTotal")
+                {
+                    decimal amount;
+                    if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out amount))
+                    {
+                        if (amount < 0) amount = 0;
+                        item.Amount = amount;
+                        row.Cells[e.ColumnIndex].Value = amount;
                     }
                 }
                 else if (col.Name == "colCount")
                 {
-                    decimal count;
-                    if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out count))
+                    int count;
+                    if (int.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out count))
                     {
                         if (count < 0) count = 0;
                         item.Count = count;
+                        item.Amount = count * item.Price;
                         row.Cells[e.ColumnIndex].Value = count;
                     }
                 }

@@ -99,7 +99,7 @@ namespace LJH.Inventory.BusinessModel
             {
                 foreach (OrderItem item in Items)
                 {
-                    amount += item.Price * item.Count;
+                    amount += item.Amount;
                 }
             }
             return amount;

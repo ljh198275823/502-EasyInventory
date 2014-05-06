@@ -219,6 +219,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
+            if (UpdatingItem != null) ItemsGrid.Enabled = (UpdatingItem as Order).CanDo(SheetOperation.Create) || (UpdatingItem as Order).CanDo(SheetOperation.Modify);
         }
 
         protected override CommandResult AddItem(object item)
@@ -333,7 +334,18 @@ namespace LJH.Inventory.UI.Forms
                     {
                         if (price < 0) price = 0;
                         item.Price = price;
+                        item.Amount = price * item.Count;
                         row.Cells[e.ColumnIndex].Value = price;
+                    }
+                }
+                if (col.Name == "colTotal")
+                {
+                    decimal amount;
+                    if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out amount))
+                    {
+                        if (amount < 0) amount = 0;
+                        item.Amount = amount;
+                        row.Cells[e.ColumnIndex].Value = amount;
                     }
                 }
                 else if (col.Name == "colCount")
@@ -343,6 +355,7 @@ namespace LJH.Inventory.UI.Forms
                     {
                         if (count < 0) count = 0;
                         item.Count = count;
+                        item.Amount = count * item.Price;
                         row.Cells[e.ColumnIndex].Value = count;
                     }
                 }
@@ -357,7 +370,7 @@ namespace LJH.Inventory.UI.Forms
                         item.Memo = null;
                     }
                 }
-                row.Cells["colTotal"].Value = item.Amount.Trim(); ;
+                row.Cells["colTotal"].Value = item.Amount.Trim();
                 ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = GetTotalAmount();
             }
         }

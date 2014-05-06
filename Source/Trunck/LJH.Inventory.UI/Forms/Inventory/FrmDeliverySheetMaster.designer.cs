@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,8 +57,6 @@
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -263,6 +260,7 @@
             this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.customerTree1.HideSelection = false;
+            this.customerTree1.ItemHeight = 20;
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
             this.customerTree1.Name = "customerTree1";
@@ -304,8 +302,6 @@
             this.colSheetNo,
             this.colCustomer,
             this.colWareHouse,
-            this.colWithTax,
-            this.colAmount,
             this.colState,
             this.colShipDate,
             this.colLinker,
@@ -343,22 +339,6 @@
             this.colWareHouse.Name = "colWareHouse";
             this.colWareHouse.ReadOnly = true;
             // 
-            // colWithTax
-            // 
-            this.colWithTax.HeaderText = "含税";
-            this.colWithTax.Name = "colWithTax";
-            this.colWithTax.ReadOnly = true;
-            this.colWithTax.Width = 40;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colAmount.HeaderText = "金额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            // 
             // colState
             // 
             this.colState.HeaderText = "状态";
@@ -368,9 +348,9 @@
             // 
             // colShipDate
             // 
-            dataGridViewCellStyle2.Format = "D";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.colShipDate.HeaderText = "发货日期";
             this.colShipDate.Name = "colShipDate";
             this.colShipDate.ReadOnly = true;
@@ -461,8 +441,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colShipDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
