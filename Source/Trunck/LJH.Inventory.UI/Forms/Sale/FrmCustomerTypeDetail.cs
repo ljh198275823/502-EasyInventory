@@ -48,6 +48,11 @@ namespace LJH.Inventory.UI.Forms
                 txtName.Focus();
                 return false;
             }
+            if (ParentCategory != null && UpdatingItem != null && (UpdatingItem as CustomerType).ID == ParentCategory.ID)
+            {
+                MessageBox.Show("客户类别的父类别不能是本身");
+                return false;
+            }
             return true;
         }
 

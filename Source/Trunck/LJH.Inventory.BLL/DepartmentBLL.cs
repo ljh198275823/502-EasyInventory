@@ -41,12 +41,12 @@ namespace LJH.Inventory.BLL
             {
                 return new CommandResult(ResultCode.Fail, "部门下已经有子部门，请先将所有子部门删除，再删除此部门");
             }
-            IProvider<CompanyInfo, string> sp = ProviderFactory.Create<IProvider<CompanyInfo, string>>(_RepoUri);
-
-            //if (sp.GetItems(null).QueryObjects.Count > 0)
-            //{
-            //    return new CommandResult(ResultCode.Fail, "已经有客户归到此部门，如果确实要删除此部门，请先更改相关客户的所属部门");
-            //}
+            IProvider<Staff, int> sp = ProviderFactory.Create<IProvider<Staff, int>>(_RepoUri);
+            List<Staff> staffs = sp.GetItems(null).QueryObjects;
+            if (staffs.Exists(it => it.DepartmentID == info.ID))
+            {
+                return new CommandResult(ResultCode.Fail, "已经有员工归到此部门，如果确实要删除此部门，请先更改相关员工的所属部门");
+            }
             return base.Delete(info);
         }
         #endregion

@@ -89,6 +89,9 @@ namespace LJH.Inventory.UI.Controls
         /// </summary
         public void Init()
         {
+            _AllCustomerNodes.Clear();
+            _AllTypeNodes.Clear();
+            if (_Companys != null) _Companys.Clear();
             this.ImageList = imageList1;
             this.Nodes.Clear();
             this.Nodes.Add(LoadCustomer ? "所有客户" : "所有客户类别");
@@ -104,7 +107,7 @@ namespace LJH.Inventory.UI.Controls
                 List<CompanyInfo> customers = (new CompanyBLL(AppSettings.Current.ConnStr)).GetAllCustomers().QueryObjects;
                 if (customers != null && customers.Count > 0)
                 {
-                    _Companys = new Hashtable();
+                    if (_Companys == null) _Companys = new Hashtable();
                     customers.ForEach(it => _Companys.Add(it.ID, it));
                 }
                 AddCustomerNodes(customers, this.Nodes[0]);
@@ -201,6 +204,37 @@ namespace LJH.Inventory.UI.Controls
                 return _Companys[id] as CompanyInfo;
             }
             return null;
+        }
+        /// <summary>
+        /// 通过id获取客户类别
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CustomerType GetCustomerType(string id)
+        {
+            foreach (TreeNode node in _AllTypeNodes)
+            {
+                CustomerType ct = node.Tag as CustomerType;
+                if (ct.ID == id) return ct;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 选择指定类别ID的节点
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="parent"></param>
+        public void SelectCustomerTypeNode(string typeID)
+        {
+            foreach (TreeNode node in _AllTypeNodes)
+            {
+                CustomerType pdept = node.Tag as CustomerType;
+                if (pdept.ID == typeID)
+                {
+                    this.SelectedNode = node;
+                    break;
+                }
+            }
         }
         #endregion
     }

@@ -23,22 +23,22 @@ namespace LJH.Inventory.UI.Forms
         }
 
         #region 私有变量
-        private List<CompanyInfo> _Customers = null;
+        private List<CompanyInfo> _Suppliers = null;
         #endregion
 
         #region 私有方法
-        private void SelectNode(TreeNode node)
+        private void FreshData()
         {
-            List<object> items = GetSelectedNodeItems();
+            List<object> items = FilterData();
             ShowItemsOnGrid(items);
         }
 
-        private List<object> GetSelectedNodeItems()
+        private List<object> FilterData()
         {
-            List<CompanyInfo> items = _Customers;
+            List<CompanyInfo> items = _Suppliers;
             List<SupplierType> pc = null;
             if (this.categoryTree.SelectedNode != null && this.categoryTree.SelectedNode.Tag != null) pc = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
-            if (pc != null && pc.Count > 0) items = _Customers.Where(it => pc.Exists(c => c.ID == it.CategoryID)).ToList();
+            if (pc != null && pc.Count > 0) items = _Suppliers.Where(it => pc.Exists(c => c.ID == it.CategoryID)).ToList();
 
             return (from p in items
                     orderby p.Name ascending
@@ -83,7 +83,7 @@ namespace LJH.Inventory.UI.Forms
             }
             else
             {
-                _Customers.Remove(c);
+                _Suppliers.Remove(c);
             }
             return ret.Result == ResultCode.Successful;
         }
@@ -97,8 +97,8 @@ namespace LJH.Inventory.UI.Forms
                 con.ClassID = CustomerClass.Supplier;
                 SearchCondition = con;
             }
-            _Customers = bll.GetItems(SearchCondition).QueryObjects;
-            List<object> records = GetSelectedNodeItems();
+            _Suppliers = bll.GetItems(SearchCondition).QueryObjects;
+            List<object> records = FilterData();
             return records;
         }
 
@@ -109,7 +109,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
             row.Cells["colName"].Value = c.Name;
-            row.Cells["colCategory"].Value = c.CategoryID;
+            SupplierType st = categoryTree.GetSupplierType(c.CategoryID);
+            row.Cells["colCategory"].Value = st != null ? st.Name : string.Empty;
             row.Cells["colNation"].Value = c.Nation;
             row.Cells["colCity"].Value = c.City;
             row.Cells["colWebsite"].Value = c.Website;
@@ -118,10 +119,10 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colAddress"].Value = c.Address;
             row.Cells["colPostalCode"].Value = c.PostalCode;
             row.Cells["colMemo"].Value = c.Memo;
-            if (_Customers == null || !_Customers.Exists(it => it.ID == c.ID))
+            if (_Suppliers == null || !_Suppliers.Exists(it => it.ID == c.ID))
             {
-                if (_Customers == null) _Customers = new List<CompanyInfo>();
-                _Customers.Add(c);
+                if (_Suppliers == null) _Suppliers = new List<CompanyInfo>();
+                _Suppliers.Add(c);
             }
         }
 
@@ -135,7 +136,7 @@ namespace LJH.Inventory.UI.Forms
         #region 类别树右键菜单
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            SelectNode(e.Node);
+            FreshData();
         }
 
         private void mnu_AddCategory_Click(object sender, EventArgs e)
@@ -147,7 +148,8 @@ namespace LJH.Inventory.UI.Forms
             frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
                 SupplierType item = args.AddedItem as SupplierType;
-                categoryTree.AddSupplierTypeNode(item, categoryTree.SelectedNode);
+                TreeNode node = categoryTree.AddSupplierTypeNode(item, categoryTree.SelectedNode);
+                categoryTree.SelectedNode.Expand();
             };
             frm.ShowDialog();
         }
@@ -177,7 +179,9 @@ namespace LJH.Inventory.UI.Forms
             frm.UpdatingItem = pc;
             frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
             {
-                categoryTree.SelectedNode.Text = string.Format("{0}", pc.Name);
+                categoryTree.Init();
+                categoryTree.SelectSupplierTypeNode(pc.ID);
+                FreshData();
             };
             frm.ShowDialog();
         }

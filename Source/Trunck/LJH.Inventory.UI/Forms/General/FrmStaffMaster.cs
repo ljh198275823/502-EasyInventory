@@ -196,6 +196,7 @@ namespace LJH.Inventory.UI.Forms.General
             {
                 Department item = args.AddedItem as Department;
                 departmentTree1.AddDepartmentNode(item, departmentTree1.SelectedNode);
+                departmentTree1.SelectedNode.Expand();
             };
             frm.ShowDialog();
         }
@@ -225,7 +226,9 @@ namespace LJH.Inventory.UI.Forms.General
             frm.UpdatingItem = pc;
             frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
             {
-                departmentTree1.SelectedNode.Text = string.Format("{0}", pc.Name);
+                departmentTree1.Init();
+                departmentTree1.SelectDeptNode(pc.ID);
+                FreshData();
             };
             frm.ShowDialog();
         }

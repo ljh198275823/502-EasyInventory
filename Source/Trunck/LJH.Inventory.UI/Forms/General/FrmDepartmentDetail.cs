@@ -48,6 +48,11 @@ namespace LJH.Inventory.UI.Forms.General
                 txtName.Focus();
                 return false;
             }
+            if (ParentDepartment != null && UpdatingItem != null && ParentDepartment.ID == (UpdatingItem as Department).ID)
+            {
+                MessageBox.Show("部门的上级部门不能是本部门");
+                return false;
+            }
             return true;
         }
 

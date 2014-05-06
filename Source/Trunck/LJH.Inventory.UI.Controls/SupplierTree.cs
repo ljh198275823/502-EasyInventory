@@ -89,6 +89,9 @@ namespace LJH.Inventory.UI.Controls
         /// </summary>
         public void Init()
         {
+            _AllTypeNodes.Clear();
+            _AllCustomerNodes.Clear();
+            if (_Companys != null) _Companys.Clear();
             this.ImageList = imageList1;
             this.Nodes.Clear();
             this.Nodes.Add(LoadSupplier ? "所有供应商" : "所有供应商类别");
@@ -199,6 +202,37 @@ namespace LJH.Inventory.UI.Controls
                 return _Companys[id] as CompanyInfo;
             }
             return null;
+        }
+        /// <summary>
+        /// 通过id获取供应商类别
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SupplierType GetSupplierType(string id)
+        {
+            foreach (TreeNode node in _AllTypeNodes)
+            {
+                SupplierType ct = node.Tag as SupplierType;
+                if (ct.ID == id) return ct;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 选择指定类别ID的节点
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="parent"></param>
+        public void SelectSupplierTypeNode(string typeID)
+        {
+            foreach (TreeNode node in _AllTypeNodes)
+            {
+                SupplierType pdept = node.Tag as SupplierType;
+                if (pdept.ID == typeID)
+                {
+                    this.SelectedNode = node;
+                    break;
+                }
+            }
         }
         #endregion
     }

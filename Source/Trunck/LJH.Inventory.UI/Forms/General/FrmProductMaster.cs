@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void FreshData(TreeNode node)
+        private void FreshData()
         {
             List<object> items = FilterData();
             ShowItemsOnGrid(items);
@@ -86,7 +86,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colImage"].Value = Properties.Resources.product;
             row.Cells["colNumber"].Value = p.ID;
             row.Cells["colName"].Value = p.Name;
-            row.Cells["colCategoryID"].Value = p.Category != null ? p.Category.Name : p.CategoryID;
+            ProductCategory pc = categoryTree.GetCategory(p.CategoryID);
+            row.Cells["colCategoryID"].Value = pc != null ? pc.Name : string.Empty;
             row.Cells["colSpecification"].Value = p.Specification;
             row.Cells["colModel"].Value = p.Model;
             row.Cells["colBarCode"].Value = p.BarCode;
@@ -130,7 +131,7 @@ namespace LJH.Inventory.UI.Forms
         #region 类别树右键菜单
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            FreshData(e.Node);
+            FreshData();
         }
 
         private void mnu_AddCategory_Click(object sender, EventArgs e)
@@ -143,6 +144,7 @@ namespace LJH.Inventory.UI.Forms
             {
                 ProductCategory item = args.AddedItem as ProductCategory;
                 this.categoryTree.AddCategoryNode(item, categoryTree.SelectedNode);
+                categoryTree.SelectedNode.Expand();
             };
             frm.ShowDialog();
         }
@@ -177,7 +179,9 @@ namespace LJH.Inventory.UI.Forms
             frm.UpdatingItem = pc;
             frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
             {
-                categoryTree.SelectedNode.Text = string.Format("[{0}] {1}", pc.ID, pc.Name);
+                categoryTree.Init();
+                categoryTree.SelectCategoryNode(pc.ID);
+                FreshData();
             };
             frm.ShowDialog();
         }

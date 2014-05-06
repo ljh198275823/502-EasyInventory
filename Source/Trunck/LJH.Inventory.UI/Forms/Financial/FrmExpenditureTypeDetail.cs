@@ -48,6 +48,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtName.Focus();
                 return false;
             }
+            if (ParentCategory != null && UpdatingItem != null && (UpdatingItem as ExpenditureType).ID == ParentCategory.ID)
+            {
+                MessageBox.Show("费用类别的父类别不能是本身");
+                return false;
+            }
             return true;
         }
 

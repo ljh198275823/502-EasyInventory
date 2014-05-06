@@ -34,7 +34,7 @@ namespace LJH.Inventory.BLL
                 }
                 else
                 {
-                    info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(info.CategoryID, UserSettings.Current.ProductSerialCount, "product");
+                    info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
                 }
             }
             if (!string.IsNullOrEmpty(info.ID))
@@ -63,7 +63,7 @@ namespace LJH.Inventory.BLL
             }
             else
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(info.CategoryID, UserSettings.Current.ProductSerialCount, "product");
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
             }
             if (!string.IsNullOrEmpty(info.ID))
             {

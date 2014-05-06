@@ -79,6 +79,13 @@ namespace LJH.Inventory.UI.Controls
                 AddStaffNode(c, parent);
             }
         }
+
+        private void RenderDeptNode(Department pc, TreeNode node)
+        {
+            node.Tag = pc;
+            node.SelectedImageIndex = 0;
+            node.ImageIndex = 0;
+        }
         #endregion
 
         #region 公共方法
@@ -87,6 +94,9 @@ namespace LJH.Inventory.UI.Controls
         /// </summary
         public void Init()
         {
+            _AllDeptNodes.Clear();
+            _AllStaffNodes.Clear();
+            _AllStaff.Clear();
             this.ImageList = imageList1;
             this.Nodes.Clear();
             this.Nodes.Add(LoadStaff ? "所有用户" : "所有部门");
@@ -122,9 +132,7 @@ namespace LJH.Inventory.UI.Controls
         public TreeNode AddDepartmentNode(Department pc, TreeNode parent)
         {
             TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
-            node.Tag = pc;
-            node.SelectedImageIndex = 0;
-            node.ImageIndex = 0;
+            RenderDeptNode(pc, node);
             _AllDeptNodes.Add(node);
             return node;
         }
@@ -214,6 +222,23 @@ namespace LJH.Inventory.UI.Controls
                 }
             }
             return null;
+        }
+        /// <summary>
+        /// 选择指定部门ID的节点
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="parent"></param>
+        public void SelectDeptNode(string deptID)
+        {
+            foreach (TreeNode node in _AllDeptNodes)
+            {
+                Department pdept = node.Tag as Department;
+                if (pdept.ID == deptID)
+                {
+                    this.SelectedNode = node;
+                    break;
+                }
+            }
         }
         #endregion
     }

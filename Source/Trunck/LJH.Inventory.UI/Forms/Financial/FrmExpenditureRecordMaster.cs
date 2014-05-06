@@ -97,7 +97,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colLastActiveDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount;
-            row.Cells["colCategory"].Value = info.Category;
+            ExpenditureType et = categoryTree.GetExpenditureType(info.Category);
+            row.Cells["colCategory"].Value = et != null ? et.Name : string.Empty;
             row.Cells["colCheckNum"].Value = info.CheckNum;
             row.Cells["colRequest"].Value = info.Request;
             row.Cells["colPayee"].Value = info.Payee;
@@ -151,6 +152,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 ExpenditureType item = args.AddedItem as ExpenditureType;
                 categoryTree.AddExpenditureTypeNode(item, categoryTree.SelectedNode);
+                categoryTree.SelectedNode.Expand();
             };
             frm.ShowDialog();
         }
@@ -180,7 +182,9 @@ namespace LJH.Inventory.UI.Forms.Financial
             frm.UpdatingItem = pc;
             frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
             {
-                categoryTree.SelectedNode.Text = string.Format("{0}", pc.Name);
+                categoryTree.Init();
+                categoryTree.SelectCategoryNode(pc.ID);
+                FreshData();
             };
             frm.ShowDialog();
         }

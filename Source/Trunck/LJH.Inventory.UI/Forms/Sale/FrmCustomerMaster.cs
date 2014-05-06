@@ -27,7 +27,7 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 私有方法
-        private void FreshData(TreeNode node)
+        private void FreshData()
         {
             List<object> items = FilterData();
             ShowItemsOnGrid(items);
@@ -109,7 +109,8 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
             row.Cells["colName"].Value = c.Name;
-            row.Cells["colCategory"].Value = c.CategoryID;
+            CustomerType ct = categoryTree.GetCustomerType(c.CategoryID);
+            row.Cells["colCategory"].Value = ct != null ? ct.Name : string.Empty;
             row.Cells["colNation"].Value = c.Nation;
             row.Cells["colCity"].Value = c.City;
             row.Cells["colWeb"].Value = c.Website;
@@ -135,7 +136,7 @@ namespace LJH.Inventory.UI.Forms
         #region 类别树右键菜单
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            FreshData(e.Node);
+            FreshData();
         }
 
         private void mnu_AddCategory_Click(object sender, EventArgs e)
@@ -148,10 +149,6 @@ namespace LJH.Inventory.UI.Forms
             {
                 CustomerType item = args.AddedItem as CustomerType;
                 TreeNode node = categoryTree.AddCustomerTypeNode(item, categoryTree.SelectedNode, true);
-                if (node != null && node.Parent != null)
-                {
-                    node.Parent.Expand();
-                }
             };
             frm.ShowDialog();
         }
@@ -181,7 +178,9 @@ namespace LJH.Inventory.UI.Forms
             frm.UpdatingItem = pc;
             frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
             {
-                categoryTree.SelectedNode.Text = string.Format("{0}", pc.Name);
+                categoryTree.Init();
+                categoryTree.SelectCustomerTypeNode(pc.ID);
+                FreshData();
             };
             frm.ShowDialog();
         }

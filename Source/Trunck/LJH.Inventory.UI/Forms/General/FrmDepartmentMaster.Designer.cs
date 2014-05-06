@@ -45,6 +45,7 @@
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colParent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -173,6 +174,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
+            this.colParent,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -191,6 +193,13 @@
             this.colName.MinimumWidth = 100;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
+            // 
+            // colParent
+            // 
+            this.colParent.HeaderText = "上级部门";
+            this.colParent.Name = "colParent";
+            this.colParent.ReadOnly = true;
+            this.colParent.Width = 120;
             // 
             // colMemo
             // 
@@ -237,6 +246,7 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colParent;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

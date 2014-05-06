@@ -157,7 +157,6 @@
             // 
             this.departmentTree1.ContextMenuStrip = this.CategoryMenu;
             this.departmentTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.departmentTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.departmentTree1.HideSelection = false;
             this.departmentTree1.ItemHeight = 20;
             this.departmentTree1.LoadStaff = false;
@@ -175,33 +174,33 @@
             this.mnu_DeleteDepartment,
             this.mnu_DepartmentProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(153, 114);
+            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
             // 
             // mnu_AddStaff
             // 
             this.mnu_AddStaff.Name = "mnu_AddStaff";
-            this.mnu_AddStaff.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddStaff.Size = new System.Drawing.Size(124, 22);
             this.mnu_AddStaff.Text = "新建员工";
             this.mnu_AddStaff.Click += new System.EventHandler(this.mnu_AddStaff_Click);
             // 
             // mnu_AddDepartment
             // 
             this.mnu_AddDepartment.Name = "mnu_AddDepartment";
-            this.mnu_AddDepartment.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddDepartment.Size = new System.Drawing.Size(124, 22);
             this.mnu_AddDepartment.Text = "增加部门";
             this.mnu_AddDepartment.Click += new System.EventHandler(this.mnu_AddDepartment_Click);
             // 
             // mnu_DeleteDepartment
             // 
             this.mnu_DeleteDepartment.Name = "mnu_DeleteDepartment";
-            this.mnu_DeleteDepartment.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeleteDepartment.Size = new System.Drawing.Size(124, 22);
             this.mnu_DeleteDepartment.Text = "删除部门";
             this.mnu_DeleteDepartment.Click += new System.EventHandler(this.mnu_DeleteDepartment_Click);
             // 
             // mnu_DepartmentProperty
             // 
             this.mnu_DepartmentProperty.Name = "mnu_DepartmentProperty";
-            this.mnu_DepartmentProperty.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DepartmentProperty.Size = new System.Drawing.Size(124, 22);
             this.mnu_DepartmentProperty.Text = "属性";
             this.mnu_DepartmentProperty.Click += new System.EventHandler(this.mnu_DepartmentProperty_Click);
             // 

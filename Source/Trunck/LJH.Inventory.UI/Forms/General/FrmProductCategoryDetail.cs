@@ -54,10 +54,14 @@ namespace LJH.Inventory.UI.Forms
                 txtName.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(txtPrefix.Text))
+            if (ParentCategory != null && UpdatingItem != null && (UpdatingItem as ProductCategory).ID == ParentCategory.ID)
             {
-                MessageBox.Show("商品编号前缀不能为空,否则不能自动生成此类型的商品编号");
-                txtPrefix.Focus();
+                MessageBox.Show("产品类别的父类别不能是本身");
+                return false;
+            }
+            if (ParentCategory != null && UpdatingItem != null && (UpdatingItem as ExpenditureType).ID == ParentCategory.ID)
+            {
+                MessageBox.Show("费用类别的父类别不能是本身");
                 return false;
             }
             return true;
@@ -124,14 +128,14 @@ namespace LJH.Inventory.UI.Forms
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 ParentCategory = frm.SelectedItem as ProductCategory;
-                this.txtParentCategory.Text = ParentCategory.Name;
+                this.txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
             }
         }
 
         private void txtParentCategory_DoubleClick(object sender, EventArgs e)
         {
             ParentCategory = null;
-            this.txtParentCategory.Text = ParentCategory.Name;
+            this.txtParentCategory.Text = ParentCategory != null ? ParentCategory.Name : string.Empty;
         }
         #endregion
     }

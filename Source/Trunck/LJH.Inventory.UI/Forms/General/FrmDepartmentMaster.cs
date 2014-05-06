@@ -20,6 +20,10 @@ namespace LJH.Inventory.UI.Forms.General
             InitializeComponent();
         }
 
+        #region 私有变量
+        private List<Department> _depts = null;
+        #endregion
+
         #region 重写基类方法
         public override void ShowOperatorRights()
         {
@@ -37,10 +41,10 @@ namespace LJH.Inventory.UI.Forms.General
 
         protected override List<object> GetDataSource()
         {
-            List<Department> items = (new DepartmentBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            if (items != null)
+            _depts = (new DepartmentBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            if (_depts != null)
             {
-                return (from item in items select (object)item).ToList();
+                return (from item in _depts select (object)item).ToList();
             }
             return null;
         }
@@ -49,6 +53,11 @@ namespace LJH.Inventory.UI.Forms.General
         {
             Department ct = item as Department;
             row.Cells["colName"].Value = ct.Name;
+            if (!string.IsNullOrEmpty(ct.Parent) && _depts != null && _depts.Count > 0)
+            {
+                Department p = _depts.SingleOrDefault(it => it.ID == ct.Parent);
+                row.Cells["colParent"].Value = p != null ? p.Name : string.Empty;
+            }
             row.Cells["colMemo"].Value = ct.Memo;
         }
 

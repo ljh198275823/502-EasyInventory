@@ -45,6 +45,7 @@ namespace LJH.Inventory.UI.Controls
                 foreach (ExpenditureType pc in pcs)
                 {
                     TreeNode node = AddExpenditureTypeNode(pc, parent);
+                    _AllTypeNodes.Add(node);
                     AddDesendNodes(items, node);
                 }
             }
@@ -57,6 +58,7 @@ namespace LJH.Inventory.UI.Controls
         /// </summary>
         public void Init()
         {
+            _AllTypeNodes.Clear();
             this.ImageList = imageList1;
             this.Nodes.Clear();
             TreeNode root = this.Nodes.Add("所有支出类别");
@@ -105,6 +107,37 @@ namespace LJH.Inventory.UI.Controls
                 }
             }
             return items;
+        }
+        /// <summary>
+        /// 通过id获取费用类别
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ExpenditureType GetExpenditureType(string id)
+        {
+            foreach (TreeNode node in _AllTypeNodes)
+            {
+                ExpenditureType ct = node.Tag as ExpenditureType;
+                if (ct.ID == id) return ct;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 选择指定类别ID的节点
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="parent"></param>
+        public void SelectCategoryNode(string categoryID)
+        {
+            foreach (TreeNode node in _AllTypeNodes)
+            {
+                ExpenditureType pdept = node.Tag as ExpenditureType;
+                if (pdept.ID == categoryID)
+                {
+                    this.SelectedNode = node;
+                    break;
+                }
+            }
         }
         #endregion
     }

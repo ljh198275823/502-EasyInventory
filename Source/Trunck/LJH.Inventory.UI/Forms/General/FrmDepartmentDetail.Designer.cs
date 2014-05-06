@@ -65,6 +65,7 @@
             this.lnkParentCategory.TabIndex = 43;
             this.lnkParentCategory.TabStop = true;
             this.lnkParentCategory.Text = "上级部门";
+            this.lnkParentCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkParentCategory_LinkClicked);
             // 
             // txtMemo
             // 

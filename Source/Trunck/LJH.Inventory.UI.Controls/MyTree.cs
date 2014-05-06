@@ -44,7 +44,6 @@ namespace LJH.Inventory.UI.Controls
             Font nodeFont = e.Node.NodeFont;
             if (nodeFont == null) nodeFont = ((TreeView)sender).Font;
             int topPadding = (int)Math.Abs((e.Node.Bounds.Height - nodeFont.GetHeight()) / 2);
-            Console.WriteLine("{0} {1} {2}", nodeFont.GetHeight(), topPadding, e.Bounds.Height);
             Rectangle r = new Rectangle(e.Bounds.X, e.Bounds.Y + topPadding, e.Bounds.Width + 5, e.Bounds.Height - topPadding * 2);
             e.Graphics.DrawString(e.Node.Text, nodeFont, pen, r);
         }

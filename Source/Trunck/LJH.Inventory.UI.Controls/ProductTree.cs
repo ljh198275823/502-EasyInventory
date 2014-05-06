@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections ;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace LJH.Inventory.UI.Controls
         #region 私有变量
         private List<TreeNode> _AllCategoryNodes = new List<TreeNode>();
         private List<TreeNode> _AllProductNodes = new List<TreeNode>();
+        private Hashtable _AllProducts = null;
         #endregion
 
         #region 公共属性
@@ -83,6 +85,9 @@ namespace LJH.Inventory.UI.Controls
         /// </summary>
         public void Init()
         {
+            _AllCategoryNodes.Clear();
+            _AllProductNodes.Clear();
+            if (_AllProducts != null) _AllProducts.Clear();
             this.Nodes.Clear();
             this.Nodes.Add(LoadProduct ? "所有产品" : "所有产品类别");
 
@@ -94,6 +99,11 @@ namespace LJH.Inventory.UI.Controls
             if (LoadProduct)
             {
                 List<Product> products = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                if (products != null && products.Count > 0)
+                {
+                    if (_AllProducts == null) _AllProducts = new Hashtable();
+                    products.ForEach(it => _AllProducts.Add(it.ID, it));
+                }
                 AddProductNodes(products, this.Nodes[0]);
                 foreach (TreeNode cnode in _AllCategoryNodes)
                 {
@@ -173,6 +183,53 @@ namespace LJH.Inventory.UI.Controls
                 }
             }
             return items;
+        }
+        /// <summary>
+        /// 通过id获取树中的产品信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Product GetProduct(string id)
+        {
+            if (_AllProducts != null && _AllProducts.Count > 0)
+            {
+                return _AllProducts[id] as Product;
+            }
+            return null;
+        }
+        /// <summary>
+        /// 通过部门ID获取产品类别信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ProductCategory GetCategory(string id)
+        {
+            if (_AllCategoryNodes != null && _AllCategoryNodes.Count > 0)
+            {
+                foreach (TreeNode node in _AllCategoryNodes)
+                {
+                    ProductCategory dept = node.Tag as ProductCategory;
+                    if (dept != null && dept.ID == id) return dept;
+                }
+            }
+            return null;
+        }
+        /// <summary>
+        /// 选择指定类别ID的节点
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="parent"></param>
+        public void SelectCategoryNode(string categoryID)
+        {
+            foreach (TreeNode node in _AllCategoryNodes)
+            {
+                ProductCategory pdept = node.Tag as ProductCategory;
+                if (pdept.ID == categoryID)
+                {
+                    this.SelectedNode = node;
+                    break;
+                }
+            }
         }
         #endregion
     }
