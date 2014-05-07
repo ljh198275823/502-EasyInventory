@@ -98,7 +98,6 @@ namespace LJH.Inventory.UI.Forms
             row.Cells["colBuyer"].Value = info.Buyer;
             row.Cells["colDeliveryDate"].Value = info.DemandDate;
             row.Cells["colWithTax"].Value = info.WithTax;
-            row.Cells["colAmount"].Value = info.CalAmount().Trim();
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)

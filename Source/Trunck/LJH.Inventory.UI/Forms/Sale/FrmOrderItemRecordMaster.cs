@@ -157,6 +157,11 @@ namespace LJH.Inventory.UI.Forms.Sale
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
             {
                 OrderItemRecord item = dataGridView1.SelectedRows[0].Tag as OrderItemRecord;
+                if (item.Inventory >= item.NotShipped)
+                {
+                    MessageBox.Show("此订单项的备货数量已经大于或等于未出货数量，不用再分配库存");
+                    return;
+                }
                 LJH.Inventory.UI.Forms.Inventory.FrmProductInventoryAssign frm = new Inventory.FrmProductInventoryAssign();
                 frm.ProductID = item.ProductID;
                 frm.MaxCount = item.NotPurchased;
@@ -166,8 +171,10 @@ namespace LJH.Inventory.UI.Forms.Sale
                     if (ret.Result == ResultCode.Successful)
                     {
                         _Inventories = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                        _Records.Remove(item);
                         item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], item);
+                        if (item != null) _Records.Add(item); //更新某行数据
+                        FreshData();
                     }
                     else
                     {

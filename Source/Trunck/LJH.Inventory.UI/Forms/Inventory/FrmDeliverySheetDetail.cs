@@ -223,10 +223,10 @@ namespace LJH.Inventory.UI.Forms
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
-            btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.DeliverySheet , PermissionActions.Edit);
-            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.DeliverySheet , PermissionActions.Approve);
-            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.DeliverySheet , PermissionActions.UndoApprove);
-            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.DeliverySheet , PermissionActions.Nullify);
+            btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Edit);
+            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Approve);
+            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.UndoApprove);
+            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Nullify);
             btnPrint.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Print);
             btnShip.Enabled = btnShip.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Ship);
             ItemsGrid.Enabled = btnSave.Enabled;
@@ -329,14 +329,13 @@ namespace LJH.Inventory.UI.Forms
             List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.ProductID == p.ProductID))
             {
-                DeliveryItem item = new DeliveryItem()
-                {
-                    ID = Guid.NewGuid(),
-                    ProductID = p.ProductID,
-                    Unit = p.Unit,
-                    Price = p.Product != null ? p.Product.Price : 0,
-                    Count = 1
-                };
+                DeliveryItem item = new DeliveryItem();
+                item.ID = Guid.NewGuid();
+                item.ProductID = p.ProductID;
+                item.Unit = p.Unit;
+                item.Price = p.Product != null ? p.Product.Price : 0;
+                item.Count = 0;
+                item.Amount = item.Price * item.Count;
                 sources.Add(item);
             }
             ShowDeliveryItemsOnGrid(sources);
@@ -347,16 +346,15 @@ namespace LJH.Inventory.UI.Forms
             List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.OrderItem != null && it.OrderItem.Value == oi.ID))
             {
-                DeliveryItem item = new DeliveryItem()
-                {
-                    ID = Guid.NewGuid(),
-                    OrderItem = oi.ID,
-                    OrderID = oi.SheetNo,
-                    ProductID = oi.ProductID,
-                    Unit = oi.Unit,
-                    Price = oi.Price,
-                    Count = oi.Inventory,
-                };
+                DeliveryItem item = new DeliveryItem();
+                item.ID = Guid.NewGuid();
+                item.ProductID = oi.ProductID;
+                item.Unit = oi.Unit;
+                item.Price = oi.Price;
+                item.Count = oi.Inventory;
+                item.Amount = oi.Amount;
+                item.OrderItem = oi.ID;
+                item.OrderID = oi.SheetNo;
                 sources.Add(item);
             }
             ShowDeliveryItemsOnGrid(sources);

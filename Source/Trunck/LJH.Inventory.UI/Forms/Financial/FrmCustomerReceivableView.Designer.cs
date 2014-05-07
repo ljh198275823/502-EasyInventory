@@ -30,14 +30,13 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerReceivableView));
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
@@ -56,8 +55,8 @@
             this.colSheetID,
             this.colClassID,
             this.colCreateDate,
-            this.colAmount,
             this.colRemain,
+            this.colHowold,
             this.colMemo});
             this.GridView.Location = new System.Drawing.Point(0, 1);
             this.GridView.Name = "GridView";
@@ -92,24 +91,20 @@
             this.colCreateDate.ReadOnly = true;
             this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // colAmount
-            // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAmount.HeaderText = "总额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colAmount.Visible = false;
-            // 
             // colRemain
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colRemain.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Format = "C2";
+            this.colRemain.DefaultCellStyle = dataGridViewCellStyle2;
             this.colRemain.HeaderText = "金额";
             this.colRemain.Name = "colRemain";
             this.colRemain.ReadOnly = true;
             this.colRemain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colHowold
+            // 
+            this.colHowold.HeaderText = "账龄";
+            this.colHowold.Name = "colHowold";
+            this.colHowold.ReadOnly = true;
             // 
             // colMemo
             // 
@@ -128,7 +123,6 @@
             this.Controls.Add(this.GridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerReceivableView";
-            this.ShowInTaskbar = false;
             this.Text = "FrmCustomerReceivableView";
             this.Controls.SetChildIndex(this.GridView, 0);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
@@ -143,8 +137,8 @@
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHowold;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

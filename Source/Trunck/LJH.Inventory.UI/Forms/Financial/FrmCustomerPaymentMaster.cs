@@ -96,6 +96,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount.Trim();
+            row.Cells["colAssigned"].Value = info.Assigned.Trim();
+            row.Cells["colRemain"].Value = info.Remain.Trim();
             row.Cells["colCheckNum"].Value = info.CheckNum;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colMemo"].Value = info.Memo;

@@ -20,8 +20,16 @@ namespace LJH.Inventory.UI.Forms.Financial
             InitializeComponent();
         }
 
-        #region 公共方法
+        #region 公共属性
         public CompanyInfo Customer { get; set; }
+        #endregion
+
+        #region 私有方法
+        private int DaysBetween(DateTime endDt, DateTime beginDt)
+        {
+            TimeSpan ts1 = new TimeSpan(endDt.Ticks - beginDt.Ticks);
+            return (int)ts1.TotalDays;
+        }
         #endregion
 
         #region 重写基类方法
@@ -53,8 +61,9 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colSheetID"].Value = cr.SheetID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colClassID"].Value = cr.ClassID;
-            row.Cells["colAmount"].Value = cr.Amount;
             row.Cells["colRemain"].Value = cr.Remain;
+            int days = DaysBetween(DateTime.Today, cr.CreateDate);
+            row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
             row.Cells["colMemo"].Value = cr.Memo;
         }
 
