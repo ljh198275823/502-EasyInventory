@@ -95,7 +95,14 @@ namespace LJH.Inventory.UI.Forms.General
         protected override List<object> GetDataSource()
         {
             StaffBLL bll = new StaffBLL(AppSettings.Current.ConnStr);
-            _Staffs = bll.GetItems(SearchCondition).QueryObjects;
+            if (SearchCondition == null)
+            {
+                _Staffs = bll.GetItems(null).QueryObjects;
+            }
+            else
+            {
+                _Staffs = bll.GetItems(SearchCondition).QueryObjects;
+            }
             List<object> records = FilterData();
             return records;
         }

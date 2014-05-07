@@ -245,6 +245,7 @@
             this.supplierTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.supplierTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.supplierTree1.HideSelection = false;
+            this.supplierTree1.ItemHeight = 20;
             this.supplierTree1.LoadSupplier = true;
             this.supplierTree1.Location = new System.Drawing.Point(0, 0);
             this.supplierTree1.Name = "supplierTree1";

@@ -141,8 +141,8 @@ namespace LJH.Inventory.UI.Forms
                 this.txtSheetNo.Enabled = false;
                 Supplier = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.SupplierID).QueryObject;
                 this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
-                WareHouse= (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
-                this.txtWareHouse.Text = WareHouse  != null ? WareHouse.Name : string.Empty;
+                WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
+                this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
                 this.txtMemo.Text = item.Memo;
                 ShowSheetItemsOnGrid(item.Items);
                 if (item.State != SheetState.Add)
@@ -192,7 +192,8 @@ namespace LJH.Inventory.UI.Forms
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as InventorySheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);        }
+            return (new InventorySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as InventorySheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+        }
 
         protected override void ShowButtonState()
         {
@@ -296,18 +297,17 @@ namespace LJH.Inventory.UI.Forms
             List<InventoryItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.ProductID == pi.ProductID && it.PurchaseItem == pi.ID))
             {
-                InventoryItem item = new InventoryItem()
-                {
-                    ID = Guid.NewGuid(),
-                    ProductID = pi.ProductID,
-                    PurchaseItem = pi.ID,
-                    PurchaseOrder = pi.SheetNo,
-                    OrderItem = pi.OrderItem,
-                    OrderID = pi.OrderID,
-                    Unit = pi.Unit,
-                    Price = pi.Price,
-                    Count = pi.OnWay,
-                };
+                InventoryItem item = new InventoryItem();
+                item.ID = Guid.NewGuid();
+                item.ProductID = pi.ProductID;
+                item.PurchaseItem = pi.ID;
+                item.PurchaseOrder = pi.SheetNo;
+                item.OrderItem = pi.OrderItem;
+                item.OrderID = pi.OrderID;
+                item.Unit = pi.Unit;
+                item.Price = pi.Price;
+                item.Count = pi.OnWay;
+                item.Amount = item.Price * item.Count;
                 sources.Add(item);
             }
             ShowSheetItemsOnGrid(sources);
@@ -419,10 +419,10 @@ namespace LJH.Inventory.UI.Forms
 
         private void btn_PurchaseItemSelect_Click(object sender, EventArgs e)
         {
-            if (txtSupplier.Tag != null)
+            if (Supplier != null)
             {
                 PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
-                con.SupplierID = (txtSupplier.Tag as CompanyInfo).ID;
+                con.SupplierID = Supplier.ID;
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);

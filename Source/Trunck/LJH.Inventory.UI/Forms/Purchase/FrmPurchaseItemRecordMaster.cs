@@ -83,9 +83,12 @@ namespace LJH.Inventory.UI.Forms
             {
                 PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
                 con.OrderDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //获取最后一年产生的订单
-                SearchCondition = con;
+                _Records = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
             }
-            _Records = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
+            else
+            {
+                _Records = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
+            }
             return FilterData();
         }
 
@@ -94,12 +97,14 @@ namespace LJH.Inventory.UI.Forms
             PurchaseItemRecord info = item as PurchaseItemRecord;
             row.Tag = info;
             row.Cells["colSheetNo"].Value = info.SheetNo;
-            row.Cells["colProduct"].Value = info.Product.Name;
+            row.Cells["colSupplier"].Value = info.Supplier != null ? info.Supplier.Name : string.Empty;
+            row.Cells["colProduct"].Value =info.Product !=null? info.Product.Name:string.Empty ;
             row.Cells["colSpecification"].Value = info.Product.Specification;
+            row.Cells["colUnit"].Value = info.Unit;
             row.Cells["colCount"].Value = info.Count.Trim();
-            row.Cells["colDemandDate"].Value = info.DemandDate.ToLongDateString();
             row.Cells["colReceived"].Value = info.Received.Trim();
             row.Cells["colOnway"].Value = info.OnWay.Trim();
+            row.Cells["colDemandDate"].Value = info.DemandDate.ToLongDateString();
             row.Cells["colOrderID"].Value = info.OrderID;
             row.Cells["colBuyer"].Value = info.Buyer;
             row.Cells["colMemo"].Value = info.Memo;

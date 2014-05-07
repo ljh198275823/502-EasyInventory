@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -56,13 +56,15 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetNo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceived = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOnway = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
@@ -82,29 +84,29 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 76);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // pnlFilter
@@ -117,7 +119,7 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(892, 33);
+            this.pnlFilter.Size = new System.Drawing.Size(1122, 33);
             this.pnlFilter.TabIndex = 111;
             // 
             // panel5
@@ -127,7 +129,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(523, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(369, 33);
+            this.panel5.Size = new System.Drawing.Size(599, 33);
             this.panel5.TabIndex = 6;
             // 
             // txtKeyword
@@ -138,7 +140,7 @@
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(69, 7);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(288, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(518, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
@@ -299,6 +301,7 @@
             this.supplierTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.supplierTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.supplierTree1.HideSelection = false;
+            this.supplierTree1.ItemHeight = 20;
             this.supplierTree1.LoadSupplier = true;
             this.supplierTree1.Location = new System.Drawing.Point(0, 0);
             this.supplierTree1.Name = "supplierTree1";
@@ -324,13 +327,15 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetNo,
+            this.colSupplier,
             this.colProduct,
             this.colSpecification,
-            this.colDemandDate,
+            this.colUnit,
             this.colCount,
             this.colReceived,
             this.colOnway,
             this.colBuyer,
+            this.colDemandDate,
             this.colOrderID,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
@@ -340,7 +345,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(661, 297);
+            this.dataGridView1.Size = new System.Drawing.Size(891, 297);
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -352,9 +357,15 @@
             this.colSheetNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSheetNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // colSupplier
+            // 
+            this.colSupplier.HeaderText = "供应商";
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.ReadOnly = true;
+            // 
             // colProduct
             // 
-            this.colProduct.HeaderText = "商品";
+            this.colProduct.HeaderText = "产品";
             this.colProduct.Name = "colProduct";
             this.colProduct.ReadOnly = true;
             this.colProduct.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -367,17 +378,19 @@
             this.colSpecification.ReadOnly = true;
             this.colSpecification.Width = 80;
             // 
-            // colDemandDate
+            // colUnit
             // 
-            this.colDemandDate.HeaderText = "交货日期";
-            this.colDemandDate.Name = "colDemandDate";
-            this.colDemandDate.ReadOnly = true;
+            this.colUnit.HeaderText = "单位";
+            this.colUnit.Name = "colUnit";
+            this.colUnit.ReadOnly = true;
+            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUnit.Width = 40;
             // 
             // colCount
             // 
-            dataGridViewCellStyle1.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colCount.HeaderText = "采购数量";
+            dataGridViewCellStyle2.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colCount.Width = 80;
@@ -400,9 +413,15 @@
             // 
             // colBuyer
             // 
-            this.colBuyer.HeaderText = "采购";
+            this.colBuyer.HeaderText = "采购员";
             this.colBuyer.Name = "colBuyer";
             this.colBuyer.ReadOnly = true;
+            // 
+            // colDemandDate
+            // 
+            this.colDemandDate.HeaderText = "交货日期";
+            this.colDemandDate.Name = "colDemandDate";
+            this.colDemandDate.ReadOnly = true;
             // 
             // colOrderID
             // 
@@ -420,7 +439,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 352);
+            this.ClientSize = new System.Drawing.Size(1122, 352);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
@@ -474,13 +493,15 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDemandDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReceived;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOnway;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDemandDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }

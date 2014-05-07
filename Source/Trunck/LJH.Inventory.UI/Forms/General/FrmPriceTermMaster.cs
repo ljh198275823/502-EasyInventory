@@ -28,7 +28,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<PriceTerm> items = (new PriceTermBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            List<PriceTerm> items = null;
+            if (SearchCondition == null)
+            {
+                items = (new PriceTermBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            }
+            else
+            {
+                items = (new PriceTermBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();

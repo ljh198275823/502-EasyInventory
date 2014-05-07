@@ -87,10 +87,13 @@ namespace LJH.Inventory.UI.Forms.Sale
             if (SearchCondition == null)
             {
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
-                con.OrderDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //获取最后一年产生的订单
-                SearchCondition = con;
+                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //获取最后一年产生的订单
+                _Records = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
             }
-            _Records = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
+            else
+            {
+                _Records = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(SearchCondition).QueryObjects;
+            }
             return FilterData();
         }
 
@@ -99,7 +102,6 @@ namespace LJH.Inventory.UI.Forms.Sale
             OrderItemRecord info = item as OrderItemRecord;
             row.Tag = info;
             row.Cells["colOrderID"].Value = info.SheetNo;
-            row.Cells["colOrderDate"].Value = info.OrderDate;
             row.Cells["colCustomer"].Value = info.Customer.Name;
             row.Cells["colProduct"].Value = info.Product != null ? info.Product.Name : info.ProductID;
             row.Cells["colUnit"].Value = info.Unit;
@@ -136,14 +138,6 @@ namespace LJH.Inventory.UI.Forms.Sale
         {
             if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
             {
-                Order order = dataGridView1.Rows[e.RowIndex].Tag as Order;
-                DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
-                con.States = new List<SheetState>();
-                con.States.Add(SheetState.Shipped);
-                con.OrderID = order.ID;
-                FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
-                frm.SearchCondition = con;
-                frm.ShowDialog();
             }
         }
 

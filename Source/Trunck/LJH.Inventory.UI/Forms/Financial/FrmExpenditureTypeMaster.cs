@@ -38,7 +38,15 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
-            List<ExpenditureType> items = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            List<ExpenditureType> items = null;
+            if (SearchCondition == null)
+            {
+                items = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            }
+            else
+            {
+                items = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();

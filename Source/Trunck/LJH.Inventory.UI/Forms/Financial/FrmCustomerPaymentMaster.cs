@@ -83,7 +83,16 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
-            _Sheets = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            if (SearchCondition == null)
+            {
+                CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
+                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
+                _Sheets = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            }
+            else
+            {
+                _Sheets = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             return FilterData();
         }
 
@@ -119,15 +128,6 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 事件处理程序
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
-            //{
-            //    Order order = dataGridView1.Rows[e.RowIndex].Tag as Order;
-            //    DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
-            //    con.OrderID = order.ID;
-            //    FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
-            //    frm.SearchCondition = con;
-            //    frm.ShowDialog();
-            //}
         }
 
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

@@ -138,7 +138,6 @@ namespace LJH.Inventory.UI.Forms
             if (!rdWithTax.Checked && !rdWithoutTax.Checked)
             {
                 MessageBox.Show("没有选择订单的含税情况");
-                rdWithTax.Focus();
                 return false;
             }
             if (ItemsGrid.Rows.Count == 0)
@@ -317,15 +316,15 @@ namespace LJH.Inventory.UI.Forms
             List<PurchaseItem> sources = GetPurchaseSheetItemsFromGrid();
             if (!sources.Exists(it => it.OrderItem == oi.ID))
             {
-                PurchaseItem item = new PurchaseItem()
-                {
-                    ID = Guid.NewGuid(),
-                    ProductID = oi.ProductID,
-                    OrderID = oi.SheetNo,
-                    OrderItem = oi.ID,
-                    Unit = oi.Unit,
-                    Count = oi.NotPurchased,
-                };
+                PurchaseItem item = new PurchaseItem();
+                item.ID = Guid.NewGuid();
+                item.ProductID = oi.ProductID;
+                item.OrderID = oi.SheetNo;
+                item.OrderItem = oi.ID;
+                item.Unit = oi.Unit;
+                item.Price = oi.Product != null ? oi.Product.Cost : 0;
+                item.Count = oi.NotPurchased;
+                item.Amount = item.Price * item.Count;
                 sources.Add(item);
             }
             ShowDeliveryItemsOnGrid(sources);
@@ -394,7 +393,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void cMnu_AddOrderRecord_Click(object sender, EventArgs e)
         {
-            LJH.Inventory.UI.Forms.Sale.FrmOrderItemRecordMaster frm = new Sale.FrmOrderItemRecordMaster();
+            FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
             frm.ForSelect = true;
             OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
             con.States = new List<SheetState>();

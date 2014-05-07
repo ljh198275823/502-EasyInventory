@@ -34,7 +34,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<PurchaseItemRecord> items = new PurchaseOrderBLL(AppSettings.Current.ConnStr).GetRecords(SearchCondition).QueryObjects;
+            List<PurchaseItemRecord> items = null;
+            if (SearchCondition == null)
+            {
+                items = new PurchaseOrderBLL(AppSettings.Current.ConnStr).GetRecords(null).QueryObjects;
+            }
+            else
+            {
+                items = new PurchaseOrderBLL(AppSettings.Current.ConnStr).GetRecords(SearchCondition).QueryObjects;
+            }
             return (from item in items
                     orderby item.SheetNo ascending
                     select (object)item).ToList();

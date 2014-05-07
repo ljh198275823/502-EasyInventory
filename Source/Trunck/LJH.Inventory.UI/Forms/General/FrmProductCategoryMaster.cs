@@ -29,7 +29,15 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             ProductCategoryBLL bll = new ProductCategoryBLL(AppSettings.Current.ConnStr);
-            List<ProductCategory> items = bll.GetItems(null).QueryObjects;
+            List<ProductCategory> items = null;
+            if (SearchCondition == null)
+            {
+                items = bll.GetItems(null).QueryObjects;
+            }
+            else
+            {
+                items = bll.GetItems(SearchCondition).QueryObjects;
+            }
             return items.Select(p => (object)p).ToList();
         }
 

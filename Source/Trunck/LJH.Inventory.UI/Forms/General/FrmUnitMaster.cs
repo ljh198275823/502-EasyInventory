@@ -37,7 +37,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<Unit> items = (new UnitBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            List<Unit> items = null;
+            if (SearchCondition == null)
+            {
+                items = (new UnitBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            }
+            else
+            {
+                items = (new UnitBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();

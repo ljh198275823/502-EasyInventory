@@ -150,9 +150,12 @@ namespace LJH.Inventory.UI.Forms
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
                 con.ClassID = CustomerClass.Other;
-                SearchCondition = con;
+                _Customers = bll.GetItems(con).QueryObjects;
             }
-            _Customers = bll.GetItems(SearchCondition).QueryObjects;
+            else
+            {
+                _Customers = bll.GetItems(SearchCondition).QueryObjects;
+            }
             List<object> records = GetSelectedNodeItems();
             return records;
         }

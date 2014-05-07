@@ -84,7 +84,16 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            _Sheets = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            if (SearchCondition == null)
+            {
+                OrderSearchCondition con = new OrderSearchCondition();
+                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
+                _Sheets = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            }
+            else
+            {
+                _Sheets = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             return FilterData();
         }
 

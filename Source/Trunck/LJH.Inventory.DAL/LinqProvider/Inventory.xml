@@ -248,7 +248,7 @@
   <Table Name="View_OrderItemRecord" Member="LJH.Inventory.BusinessModel.OrderItemRecord">
     <Type Name="LJH.Inventory.BusinessModel.OrderItemRecord">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
-      <Column Name="OrderDate" Member="OrderDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SheetNo" Member="SheetNo"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>

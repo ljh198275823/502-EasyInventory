@@ -41,7 +41,15 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             WareHouseBLL bll = new WareHouseBLL(AppSettings.Current.ConnStr);
-            List<WareHouse> ret = bll.GetItems(null).QueryObjects.ToList();
+            List<WareHouse> ret = null;
+            if (SearchCondition == null)
+            {
+                ret = bll.GetItems(null).QueryObjects.ToList();
+            }
+            else
+            {
+                ret = bll.GetItems(SearchCondition).QueryObjects.ToList();
+            }
             List<object> source = new List<object>();
             foreach (object o in ret)
             {

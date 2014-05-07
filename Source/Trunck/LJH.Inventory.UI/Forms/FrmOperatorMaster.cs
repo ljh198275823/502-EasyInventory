@@ -31,7 +31,14 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            operators = bll.GetItems(null).QueryObjects.ToList();
+            if (SearchCondition == null)
+            {
+                operators = bll.GetItems(null).QueryObjects.ToList();
+            }
+            else
+            {
+                operators = bll.GetItems(SearchCondition).QueryObjects.ToList();
+            }
             List<object> source = new List<object>();
             foreach (object o in operators)
             {

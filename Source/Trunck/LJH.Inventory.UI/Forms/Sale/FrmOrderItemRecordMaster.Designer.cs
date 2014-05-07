@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Reserve = new System.Windows.Forms.ToolStripMenuItem();
+            this.创建送货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +58,6 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,7 +71,6 @@
             this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.创建送货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -106,6 +104,12 @@
             this.cMnu_Reserve.Size = new System.Drawing.Size(148, 22);
             this.cMnu_Reserve.Text = "库存转为备货";
             this.cMnu_Reserve.Click += new System.EventHandler(this.cMnu_Reserve_Click);
+            // 
+            // 创建送货单ToolStripMenuItem
+            // 
+            this.创建送货单ToolStripMenuItem.Name = "创建送货单ToolStripMenuItem";
+            this.创建送货单ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.创建送货单ToolStripMenuItem.Text = "创建送货单...";
             // 
             // toolStripSeparator3
             // 
@@ -342,7 +346,6 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colOrderID,
-            this.colOrderDate,
             this.colCustomer,
             this.colProduct,
             this.colUnit,
@@ -374,15 +377,6 @@
             this.colOrderID.ReadOnly = true;
             this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colOrderDate
-            // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colOrderDate.HeaderText = "合同日期";
-            this.colOrderDate.Name = "colOrderDate";
-            this.colOrderDate.ReadOnly = true;
             // 
             // colCustomer
             // 
@@ -456,8 +450,8 @@
             // 
             // colDemandDate
             // 
-            dataGridViewCellStyle2.Format = "D";
-            this.colDemandDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "D";
+            this.colDemandDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.colDemandDate.HeaderText = "交货日期";
             this.colDemandDate.Name = "colDemandDate";
             this.colDemandDate.ReadOnly = true;
@@ -481,12 +475,6 @@
             this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
-            // 
-            // 创建送货单ToolStripMenuItem
-            // 
-            this.创建送货单ToolStripMenuItem.Name = "创建送货单ToolStripMenuItem";
-            this.创建送货单ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.创建送货单ToolStripMenuItem.Text = "创建送货单...";
             // 
             // FrmOrderItemRecordMaster
             // 
@@ -546,8 +534,8 @@
         private System.Windows.Forms.Panel panel5;
         private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem 创建送货单ToolStripMenuItem;
         private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
@@ -561,7 +549,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSales;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ToolStripMenuItem 创建送货单ToolStripMenuItem;
 
     }
 }

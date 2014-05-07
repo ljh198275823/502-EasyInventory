@@ -77,9 +77,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
                 con.ClassID = CustomerClass.Customer;
-                SearchCondition = con;
+                _Customers = bll.GetItems(con).QueryObjects;
             }
-            _Customers = bll.GetItems(SearchCondition).QueryObjects;
+            else
+            {
+                _Customers = bll.GetItems(SearchCondition).QueryObjects;
+            }
             _CustomerStates = bll.GetCustomerStates().QueryObjects;
             List<object> records = FilterData();
             return records;

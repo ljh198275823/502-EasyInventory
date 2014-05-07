@@ -88,7 +88,15 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.Current.ConnStr);
-            List<ProductInventory> items = bll.GetItems(null).QueryObjects;
+            List<ProductInventory> items = null;
+            if (SearchCondition == null)
+            {
+                items = bll.GetItems(null).QueryObjects;
+            }
+            else
+            {
+                items = bll.GetItems(SearchCondition).QueryObjects;
+            }
             _ProductInventorys = bll.GetItems(SearchCondition).QueryObjects;
             List<object> records = FilterData();
             return records;

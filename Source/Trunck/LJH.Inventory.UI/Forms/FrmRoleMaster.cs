@@ -43,7 +43,14 @@ namespace LJH.Inventory.UI.Forms
         protected override List<object> GetDataSource()
         {
             RoleBLL bll = new RoleBLL(AppSettings.Current.ConnStr);
-            roles = bll.GetItems(null).QueryObjects.ToList();
+            if (SearchCondition == null)
+            {
+                roles = bll.GetItems(null).QueryObjects.ToList();
+            }
+            else
+            {
+                roles = bll.GetItems(SearchCondition ).QueryObjects.ToList();
+            }
             List<object> source = new List<object>();
             foreach (object o in roles)
             {

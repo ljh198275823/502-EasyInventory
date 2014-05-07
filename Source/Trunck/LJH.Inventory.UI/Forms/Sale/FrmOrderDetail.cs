@@ -134,7 +134,6 @@ namespace LJH.Inventory.UI.Forms
             if (!rdWithTax.Checked && !rdWithoutTax.Checked)
             {
                 MessageBox.Show("没有选择订单的含税情况");
-                rdWithTax.Focus();
                 return false;
             }
             if (ItemsGrid.Rows.Count == 0)

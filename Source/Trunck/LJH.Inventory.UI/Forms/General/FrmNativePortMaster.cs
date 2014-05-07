@@ -30,7 +30,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<Port> items = (new PortBLL(AppSettings.Current.ConnStr)).GetNativePorts();
+            List<Port> items = null;
+            if (SearchCondition == null)
+            {
+                items = (new PortBLL(AppSettings.Current.ConnStr)).GetNativePorts();
+            }
+            else
+            {
+                items = (new PortBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();

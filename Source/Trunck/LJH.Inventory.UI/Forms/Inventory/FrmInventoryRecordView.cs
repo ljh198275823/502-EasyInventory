@@ -32,7 +32,15 @@ namespace LJH.Inventory.UI.View
 
         protected override List<object> GetDataSource()
         {
-            List<InventoryRecord> records = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetInventoryRecords(SearchCondition).QueryObjects;
+            List<InventoryRecord> records = null;
+            if (SearchCondition == null)
+            {
+                records = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetInventoryRecords(null).QueryObjects;
+            }
+            else
+            {
+                records = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetInventoryRecords(SearchCondition).QueryObjects;
+            }
             return (from item in records
                     orderby item.ProductID ascending
                     select (object)item).ToList();

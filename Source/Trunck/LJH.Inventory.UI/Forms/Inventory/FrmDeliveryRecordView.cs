@@ -27,7 +27,15 @@ namespace LJH.Inventory.UI.View
 
         protected override List<object> GetDataSource()
         {
-            List<DeliveryRecord> records = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(SearchCondition).QueryObjects;
+            List<DeliveryRecord> records = null;
+            if (SearchCondition == null)
+            {
+                records = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(null).QueryObjects;
+            }
+            else
+            {
+                records = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(SearchCondition).QueryObjects;
+            }
             return (from item in records
                     orderby item.ProductID ascending
                     select (object)item).ToList();
@@ -43,8 +51,6 @@ namespace LJH.Inventory.UI.View
             row.Cells["colSpecification"].Value = c.Product.Specification;
             row.Cells["colDeliveryDate"].Value = c.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
-            row.Cells["colPrice"].Value = c.Price.Trim();
-            row.Cells["colAmount"].Value = c.Amount.Trim();
         }
         #endregion
     }

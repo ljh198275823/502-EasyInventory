@@ -85,7 +85,16 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
-            _Sheets = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            if (SearchCondition == null)
+            {
+                CustomerOtherReceivableSearchCondition con = new CustomerOtherReceivableSearchCondition();
+                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
+                _Sheets = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            }
+            else
+            {
+                _Sheets = (new CustomerOtherReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             return FilterData();
         }
 

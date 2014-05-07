@@ -41,15 +41,19 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
+            List<CustomerReceivable> items=null ;
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
                 CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
                 con.CustomerID = Customer != null ? Customer.ID : null;
                 con.Settled = false;
-                SearchCondition = con;
+                items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
-            List<CustomerReceivable> items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            else
+            {
+                items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             List<object> records = (from item in items orderby item.CreateDate ascending, item.SheetID ascending select (object)item).ToList();
             return records;
         }

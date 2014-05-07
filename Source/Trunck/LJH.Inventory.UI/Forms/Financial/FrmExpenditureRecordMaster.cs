@@ -86,7 +86,16 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
-            _Sheets = (new ExpenditureRecordBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            if (SearchCondition == null)
+            {
+                ExpenditureRecordSearchCondition con = new ExpenditureRecordSearchCondition();
+                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
+                _Sheets = (new ExpenditureRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            }
+            else
+            {
+                _Sheets = (new ExpenditureRecordBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             return FilterData();
         }
 

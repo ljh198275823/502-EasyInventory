@@ -37,7 +37,15 @@ namespace LJH.Inventory.UI.Forms
 
         protected override List<object> GetDataSource()
         {
-            List<CurrencyType> items = (new CurrencyTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            List<CurrencyType> items = null;
+            if (SearchCondition == null)
+            {
+                items = (new CurrencyTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            }
+            else
+            {
+                items = (new CurrencyTypeBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
             if (items != null)
             {
                 return (from item in items select (object)item).ToList();

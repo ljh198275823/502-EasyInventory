@@ -28,15 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.menu = new System.Windows.Forms.MenuStrip();
-            this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
-            this.btnSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnClear = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,61 +39,8 @@
             this.colPrepared = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNotPurchased = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // menu
-            // 
-            this.menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.menu.ImageScalingSize = new System.Drawing.Size(25, 25);
-            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtKeyword,
-            this.btnSearch,
-            this.btnClear,
-            this.toolStripSeparator2,
-            this.btn_SelectColumns});
-            this.menu.Location = new System.Drawing.Point(0, 0);
-            this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(804, 50);
-            this.menu.TabIndex = 32;
-            // 
-            // txtKeyword
-            // 
-            this.txtKeyword.AutoSize = false;
-            this.txtKeyword.Margin = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(200, 30);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Image = global::LJH.Inventory.UI.Properties.Resources.search;
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(59, 46);
-            this.btnSearch.Text = "查找(&S)";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnClear
-            // 
-            this.btnClear.Image = global::LJH.Inventory.UI.Properties.Resources.clear;
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(60, 46);
-            this.btnClear.Text = "清除(&C)";
-            this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
-            // 
-            // btn_SelectColumns
-            // 
-            this.btn_SelectColumns.Image = global::LJH.Inventory.UI.Properties.Resources.columns;
-            this.btn_SelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_SelectColumns.Name = "btn_SelectColumns";
-            this.btn_SelectColumns.Size = new System.Drawing.Size(70, 46);
-            this.btn_SelectColumns.Text = "选择列(&L)";
-            this.btn_SelectColumns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // dataGridView1
             // 
@@ -119,12 +59,12 @@
             this.colNotPurchased,
             this.colMemo});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 50);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(804, 294);
+            this.dataGridView1.Size = new System.Drawing.Size(804, 344);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOrderID
@@ -189,19 +129,15 @@
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colMemo.Width = 200;
             // 
-            // FrmNotPurchaseItems
+            // FrmOrderRecordSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 366);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.menu);
-            this.Name = "FrmNotPurchaseItems";
+            this.Name = "FrmOrderRecordSelection";
             this.Text = "选择销售订单项";
-            this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
-            this.menu.ResumeLayout(false);
-            this.menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -210,12 +146,6 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menu;
-        private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
-        private Controls.TooStripDBCTextBox txtKeyword;
-        private System.Windows.Forms.ToolStripMenuItem btnSearch;
-        private System.Windows.Forms.ToolStripMenuItem btnClear;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
