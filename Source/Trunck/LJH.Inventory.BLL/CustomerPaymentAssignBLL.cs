@@ -36,6 +36,11 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
+        /// <summary>
+        /// 客户付款和应收款进行抵销
+        /// </summary>
+        /// <param name="assigns"></param>
+        /// <returns></returns>
         public CommandResult Assign(List<CustomerPaymentAssign> assigns)
         {
             if (assigns == null || assigns.Count == 0) return new CommandResult(ResultCode.Fail, "没有分配项");
@@ -61,10 +66,34 @@ namespace LJH.Inventory.BLL
             }
             return unitWork.Commit();
         }
-
+        /// <summary>
+        /// 取消客户付款和应收款已抵销项
+        /// </summary>
+        /// <param name="assigns"></param>
+        /// <returns></returns>
         public CommandResult UndoAssign(List<CustomerPaymentAssign> assigns)
         {
-            return null;
+            if (assigns == null || assigns.Count == 0) return new CommandResult(ResultCode.Fail, "没有分配项");
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            foreach (CustomerPaymentAssign assign in assigns)
+            {
+                CustomerPayment cp = ProviderFactory.Create<IProvider<CustomerPayment, string>>(_RepoUri).GetByID(assign.PaymentID).QueryObject;
+                if (cp != null)
+                {
+                    CustomerReceivable cr = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).GetByID(assign.ReceivableID).QueryObject;
+                    if (cr != null)
+                    {
+                        CustomerPayment cp1 = cp.Clone() as CustomerPayment;
+                        CustomerReceivable cr1 = cr.Clone() as CustomerReceivable;
+                        cp.Assigned -= assign.Amount;
+                        cr.Haspaid -= assign.Amount;
+                        ProviderFactory.Create<IProvider<CustomerPayment, string>>(_RepoUri).Update(cp, cp1, unitWork);
+                        ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Update(cr, cr1, unitWork);
+                        ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).Delete(assign, unitWork);
+                    }
+                }
+            }
+            return unitWork.Commit();
         }
         #endregion
     }

@@ -144,6 +144,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtForeignName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label31 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
             this.txtAddress = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label74 = new System.Windows.Forms.Label();
@@ -156,8 +158,6 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
-            this.txtForeignName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label31 = new System.Windows.Forms.Label();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1393,6 +1393,24 @@
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "公司信息";
             // 
+            // txtForeignName
+            // 
+            this.txtForeignName.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtForeignName.Location = new System.Drawing.Point(74, 45);
+            this.txtForeignName.MaxLength = 100;
+            this.txtForeignName.Name = "txtForeignName";
+            this.txtForeignName.Size = new System.Drawing.Size(412, 21);
+            this.txtForeignName.TabIndex = 89;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(16, 48);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(53, 12);
+            this.label31.TabIndex = 90;
+            this.label31.Text = "英文名称";
+            // 
             // label73
             // 
             this.label73.AutoSize = true;
@@ -1501,24 +1519,6 @@
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
             // 
-            // txtForeignName
-            // 
-            this.txtForeignName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtForeignName.Location = new System.Drawing.Point(74, 45);
-            this.txtForeignName.MaxLength = 100;
-            this.txtForeignName.Name = "txtForeignName";
-            this.txtForeignName.Size = new System.Drawing.Size(412, 21);
-            this.txtForeignName.TabIndex = 89;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(16, 48);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(53, 12);
-            this.label31.TabIndex = 90;
-            this.label31.Text = "英文名称";
-            // 
             // FrmSystemOptions
             // 
             this.AcceptButton = this.btnOk;
@@ -1532,6 +1532,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSystemOptions";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "系统参数设置";
             this.Load += new System.EventHandler(this.FrmSystemOptions_Load);
             this.tabAutoCreater.ResumeLayout(false);

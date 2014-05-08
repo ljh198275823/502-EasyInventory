@@ -42,10 +42,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                 {
                     foreach (CustomerReceivable cr in crs)
                     {
+                        List<CustomerPaymentAssign> myAssigns = assigns.Where(it => it.ReceivableID == cr.ID).ToList();
                         int row = ItemsGrid.Rows.Add();
                         ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
                         ItemsGrid.Rows[row].Cells["colClassID"].Value = cr.ClassID.ToString();
-                        ItemsGrid.Rows[row].Cells["colAssign"].Value = assigns.Sum(it => it.ReceivableID == cr.ID ? it.Amount : 0);
+                        ItemsGrid.Rows[row].Cells["colAssign"].Value = myAssigns.Sum(it => it.Amount);
+                        ItemsGrid.Rows[row].Tag = myAssigns;
                     }
                 }
                 int rowTotal = ItemsGrid.Rows.Add();
@@ -232,5 +234,27 @@ namespace LJH.Inventory.UI.Forms.Financial
         }
         #endregion
 
+        private void mnu_UndoAssign_Click(object sender, EventArgs e)
+        {
+            if (ItemsGrid.SelectedRows != null && ItemsGrid.SelectedRows.Count > 0)
+            {
+                List<CustomerPaymentAssign> assigns = new List<CustomerPaymentAssign>();
+                foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
+                {
+                    List<CustomerPaymentAssign> cpa = row.Tag as List<CustomerPaymentAssign>;
+                    assigns.AddRange(cpa);
+                }
+                CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assigns);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+                    ShowAssigns(assigns);
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
+        }
     }
 }

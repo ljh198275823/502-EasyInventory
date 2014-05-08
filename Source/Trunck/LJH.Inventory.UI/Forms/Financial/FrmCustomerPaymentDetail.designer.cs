@@ -53,6 +53,8 @@
             this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_AssignGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_UndoAssign = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
             this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +82,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
+            this.mnu_AssignGrid.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).BeginInit();
             this.mnu_Attachment.SuspendLayout();
@@ -319,6 +322,7 @@
             this.colClassID,
             this.colAssign,
             this.colOrderID});
+            this.ItemsGrid.ContextMenuStrip = this.mnu_AssignGrid;
             this.ItemsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemsGrid.Location = new System.Drawing.Point(0, 0);
             this.ItemsGrid.Name = "ItemsGrid";
@@ -355,6 +359,20 @@
             this.colOrderID.Name = "colOrderID";
             this.colOrderID.ReadOnly = true;
             this.colOrderID.Width = 120;
+            // 
+            // mnu_AssignGrid
+            // 
+            this.mnu_AssignGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_UndoAssign});
+            this.mnu_AssignGrid.Name = "contextMenuStrip1";
+            this.mnu_AssignGrid.Size = new System.Drawing.Size(153, 48);
+            // 
+            // mnu_UndoAssign
+            // 
+            this.mnu_UndoAssign.Name = "mnu_UndoAssign";
+            this.mnu_UndoAssign.Size = new System.Drawing.Size(152, 22);
+            this.mnu_UndoAssign.Text = "取消抵销项";
+            this.mnu_UndoAssign.Click += new System.EventHandler(this.mnu_UndoAssign_Click);
             // 
             // tabPage5
             // 
@@ -600,6 +618,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
+            this.mnu_AssignGrid.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).EndInit();
             this.mnu_Attachment.ResumeLayout(false);
@@ -661,5 +680,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
+        private System.Windows.Forms.ContextMenuStrip mnu_AssignGrid;
+        private System.Windows.Forms.ToolStripMenuItem mnu_UndoAssign;
     }
 }
