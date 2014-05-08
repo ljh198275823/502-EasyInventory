@@ -149,6 +149,23 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             PerformAddData();
         }
+
+        private void mnu_Assign_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CustomerPayment cp = dataGridView1.SelectedRows[0].Tag as CustomerPayment;
+                if (cp.State == SheetState.Approved && cp.Remain > 0)
+                {
+                    string paymentID = cp.ID;
+                    FrmPaymentAssign frm = new FrmPaymentAssign();
+                    frm.CustomerPaymentID = paymentID;
+                    frm.ShowDialog();
+                    cp = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID).QueryObject;
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cp);
+                }
+            }
+        }
         #endregion
     }
 }

@@ -113,6 +113,7 @@
             // 
             // txtRemain
             // 
+            this.txtRemain.BackColor = System.Drawing.Color.White;
             this.txtRemain.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtRemain.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.txtRemain.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -129,6 +130,7 @@
             0});
             this.txtRemain.Name = "txtRemain";
             this.txtRemain.PointCount = 2;
+            this.txtRemain.ReadOnly = true;
             this.txtRemain.Size = new System.Drawing.Size(124, 21);
             this.txtRemain.TabIndex = 115;
             this.txtRemain.Text = "0.00";
@@ -164,9 +166,10 @@
             this.GridView.Name = "GridView";
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
-            this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.GridView.Size = new System.Drawing.Size(632, 215);
             this.GridView.TabIndex = 118;
+            this.GridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.GridView_CellBeginEdit);
             this.GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             this.GridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellEndEdit);
             // 

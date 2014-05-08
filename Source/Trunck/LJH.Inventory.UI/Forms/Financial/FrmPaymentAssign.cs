@@ -95,11 +95,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                         decimal temp = Convert.ToDecimal(GridView.Rows[e.RowIndex].Cells["colRemain"].Value);
                         decimal assign = txtRemain.DecimalValue > temp ? temp : txtRemain.DecimalValue;
                         GridView.Rows[e.RowIndex].Cells["colAssign"].Value = assign;
+                        GridView.Rows[e.RowIndex].Cells["colAssign"].Selected = true;
                         txtRemain.DecimalValue = txtAmount.DecimalValue - GetAssignsFromGrid();
-                    }
-                    else
-                    {
-                        MessageBox.Show("客户付款已经抵消完");
                     }
                 }
                 else
@@ -111,10 +108,27 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
 
+        private void GridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.RowIndex >= 0 && GridView.Columns[e.ColumnIndex].Name == "colAssign")
+            {
+                DataGridViewCheckBoxCell chk = GridView.Rows[e.RowIndex].Cells["colCheck"] as DataGridViewCheckBoxCell;
+                if (chk == null || !(bool)chk.EditedFormattedValue)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
         private void GridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && GridView.Columns[e.ColumnIndex].Name == "colAssign")
             {
+                if (GridView.Rows[e.RowIndex].Cells["colAssign"].Value == null)
+                {
+                    GridView.Rows[e.RowIndex].Cells["colAssign"].Value = 0;
+                    return;
+                }
                 string temp = GridView.Rows[e.RowIndex].Cells["colAssign"].Value.ToString();
                 decimal t = 0;
                 if (decimal.TryParse(temp, out t))
@@ -146,7 +160,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            List<CustomerPaymentAssign> assigns = new List<CustomerPaymentAssign>();
+            bool allSuccess = true;
             foreach (DataGridViewRow row in GridView.Rows)
             {
                 DataGridViewCheckBoxCell chk = row.Cells["colCheck"] as DataGridViewCheckBoxCell;
@@ -162,21 +176,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                             ReceivableID = (row.Tag as CustomerReceivable).ID,
                             Amount = temp,
                         };
-                        assigns.Add(item);
+                        CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).Assign(item);
+                        row.Cells["colMemo"].Value = ret.Result == ResultCode.Successful ? "成功" : "失败";
+                        if (ret.Result != ResultCode.Successful) allSuccess = false;
                     }
                 }
-            }
-            if (assigns.Count > 0)
-            {
-                CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).Assign(assigns);
-                if (ret.Result == ResultCode.Successful)
-                {
-                    this.DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message);
-                }
+                if (allSuccess) this.DialogResult = DialogResult.OK;
             }
         }
         #endregion

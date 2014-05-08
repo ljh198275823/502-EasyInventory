@@ -40,14 +40,14 @@ namespace LJH.Inventory.UI.Forms.Financial
                 List<CustomerReceivable> crs = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
                 if (crs != null && crs.Count > 0)
                 {
-                    foreach (CustomerReceivable cr in crs)
+                    foreach (CustomerPaymentAssign assign in assigns)
                     {
-                        List<CustomerPaymentAssign> myAssigns = assigns.Where(it => it.ReceivableID == cr.ID).ToList();
+                        CustomerReceivable cr = crs.FirstOrDefault(it => it.ID == assign.ReceivableID);
                         int row = ItemsGrid.Rows.Add();
+                        ItemsGrid.Rows[row].Tag = assign;
                         ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
                         ItemsGrid.Rows[row].Cells["colClassID"].Value = cr.ClassID.ToString();
-                        ItemsGrid.Rows[row].Cells["colAssign"].Value = myAssigns.Sum(it => it.Amount);
-                        ItemsGrid.Rows[row].Tag = myAssigns;
+                        ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount;
                     }
                 }
                 int rowTotal = ItemsGrid.Rows.Add();
@@ -55,7 +55,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                 ItemsGrid.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(item => item.Amount).Trim();
             }
         }
-
         #endregion
 
         #region 重写基类方法
@@ -206,11 +205,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                 string paymentID = (UpdatingItem as CustomerPayment).ID;
                 FrmPaymentAssign frm = new FrmPaymentAssign();
                 frm.CustomerPaymentID = paymentID;
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns(paymentID).QueryObjects;
-                    ShowAssigns(assigns);
-                }
+                frm.ShowDialog();
+                List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns(paymentID).QueryObjects;
+                ShowAssigns(assigns);
+                UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+                OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
+                ShowButtonState();
             }
         }
 
@@ -236,25 +236,23 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void mnu_UndoAssign_Click(object sender, EventArgs e)
         {
+            List<DataGridViewRow> delRows = new List<DataGridViewRow>();
             if (ItemsGrid.SelectedRows != null && ItemsGrid.SelectedRows.Count > 0)
             {
-                List<CustomerPaymentAssign> assigns = new List<CustomerPaymentAssign>();
-                foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
+                if (MessageBox.Show("是否要取消此应收抵销?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    List<CustomerPaymentAssign> cpa = row.Tag as List<CustomerPaymentAssign>;
-                    assigns.AddRange(cpa);
-                }
-                CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assigns);
-                if (ret.Result == ResultCode.Successful)
-                {
-                    assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
-                    ShowAssigns(assigns);
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message);
+                    foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
+                    {
+                        CustomerPaymentAssign assign = row.Tag as CustomerPaymentAssign;
+                        CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
+                        if (ret.Result == ResultCode.Successful) delRows.Add(row);
+                    }
                 }
             }
+            delRows.ForEach(it => ItemsGrid.Rows.Remove(it));
+            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
+            ShowButtonState();
         }
     }
 }

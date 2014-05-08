@@ -26,6 +26,23 @@ namespace LJH.Inventory.BLL
             return info.ID;
         }
 
+        protected override void DoApprove(CustomerOtherReceivable info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            CustomerReceivable cr = new CustomerReceivable()
+            {
+                ID = Guid.NewGuid(),
+                ClassID = CustomerReceivableClass.Other,
+                SheetID = info.ID,
+                CustomerID = info.CustomerID,
+                CreateDate = dt,
+                Amount = info.Amount,
+                Haspaid = 0,
+                Memo = info.Memo
+            };
+            ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
+            base.DoApprove(info, unitWork, dt, opt);
+        }
+
         protected override void DoNullify(CustomerOtherReceivable info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoNullify(info, unitWork, dt, opt);

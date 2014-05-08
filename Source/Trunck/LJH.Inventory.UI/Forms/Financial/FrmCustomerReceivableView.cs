@@ -27,7 +27,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 私有方法
         private int DaysBetween(DateTime endDt, DateTime beginDt)
         {
-            TimeSpan ts1 = new TimeSpan(endDt.Ticks - beginDt.Ticks);
+            TimeSpan ts1 = new TimeSpan(endDt.Date.Ticks - beginDt.Date.Ticks);
             return (int)ts1.TotalDays;
         }
         #endregion
@@ -76,7 +76,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             base.ShowItemsOnGrid(items);
             int rowTotal = GridView.Rows.Add();
             GridView.Rows[rowTotal].Cells["colCreateDate"].Value = "合计";
-            GridView.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerReceivable).Amount);
             GridView.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as CustomerReceivable).Remain);
         }
         #endregion
