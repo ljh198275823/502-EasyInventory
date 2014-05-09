@@ -403,7 +403,7 @@
             // 
             // colCount
             // 
-            this.colCount.HeaderText = "数量";
+            this.colCount.HeaderText = "订单数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;

@@ -24,7 +24,8 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         #region 私有变量
         private List<CompanyInfo> _Customers = null;
-        private List<CustomerFinancialState> _CustomerStates = null;
+        private List<CustomerPayment> _CustomerPayments = null;
+        private List<CustomerReceivable> _CustomerReceivables = null;
         #endregion
 
         #region 私有方法
@@ -72,6 +73,16 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
+            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+            cpsc.States = new List<SheetState>();
+            cpsc.States.Add(SheetState.Approved);
+            cpsc.HasRemain = true;
+            _CustomerPayments = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(cpsc).QueryObjects;
+
+            CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.Settled = false;
+            _CustomerReceivables = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(crsc).QueryObjects;
+
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
@@ -83,7 +94,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 _Customers = bll.GetItems(SearchCondition).QueryObjects;
             }
-            _CustomerStates = bll.GetCustomerStates().QueryObjects;
             List<object> records = FilterData();
             return records;
         }
@@ -96,10 +106,22 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colID"].Value = c.ID;
             row.Cells["colName"].Value = c.Name;
             row.Cells["colCategory"].Value = c.CategoryID;
-            CustomerFinancialState cs = null;
-            if (_CustomerStates != null && _CustomerStates.Count > 0) cs = _CustomerStates.SingleOrDefault(it => it.ID == c.ID);
-            row.Cells["colPrepay"].Value = cs != null ? cs.Prepay.Trim() : 0;
-            row.Cells["colReceivable"].Value = cs != null ? cs.Receivable.Trim() : 0;
+            if (_CustomerPayments != null && _CustomerPayments.Count > 0)
+            {
+                row.Cells["colPrepay"].Value = _CustomerPayments.Sum(it => it.CustomerID == c.ID ? it.Remain : 0).Trim();
+            }
+            else
+            {
+                row.Cells["colPrepay"].Value = 0;
+            }
+            if (_CustomerReceivables != null && _CustomerReceivables.Count > 0)
+            {
+                row.Cells["colReceivable"].Value = _CustomerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0).Trim();
+            }
+            else
+            {
+                row.Cells["colReceivable"].Value = 0;
+            }
         }
         #endregion
 

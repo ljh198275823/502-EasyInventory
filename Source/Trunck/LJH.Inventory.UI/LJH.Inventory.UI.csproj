@@ -63,17 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applications\WaiMao\FrmLogin.cs">
+    <Compile Include="Forms\Financial\View\FrmCustomerReceivableView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Applications\WaiMao\FrmLogin.Designer.cs">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ExcelExporter\DeliverySheetExporter.cs" />
-    <Compile Include="Forms\Financial\FrmCustomerReceivableView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerReceivableView.Designer.cs">
+    <Compile Include="Forms\Financial\View\FrmCustomerReceivableView.Designer.cs">
       <DependentUpon>FrmCustomerReceivableView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Financial\FrmPaymentAssign.cs">
@@ -279,12 +272,6 @@
     </Compile>
     <Compile Include="Forms\FrmHome.Designer.cs">
       <DependentUpon>FrmHome.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Applications\WaiMao\FrmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Applications\WaiMao\FrmMain.Designer.cs">
-      <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\General\FrmNativePortMaster.cs">
       <SubType>Form</SubType>
@@ -526,16 +513,16 @@
     <Compile Include="Forms\Report\FrmDeliveryStatistics.Designer.cs">
       <DependentUpon>FrmDeliveryStatistics.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Report\FrmReceivablePaymentAssigns.cs">
+    <Compile Include="Forms\Financial\View\FrmReceivablePaymentAssigns.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Report\FrmReceivablePaymentAssigns.designer.cs">
+    <Compile Include="Forms\Financial\View\FrmReceivablePaymentAssigns.designer.cs">
       <DependentUpon>FrmReceivablePaymentAssigns.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerPaymentRemainsView.cs">
+    <Compile Include="Forms\Financial\View\FrmCustomerPaymentRemainsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerPaymentRemainsView.designer.cs">
+    <Compile Include="Forms\Financial\View\FrmCustomerPaymentRemainsView.designer.cs">
       <DependentUpon>FrmCustomerPaymentRemainsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Selection\FrmOrderSelection.cs">
@@ -587,10 +574,7 @@
     <Compile Include="Forms\Inventory\FrmInventoryRecordView.Designer.cs">
       <DependentUpon>FrmInventoryRecordView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Applications\WaiMao\FrmLogin.resx">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmCustomerReceivableView.resx">
+    <EmbeddedResource Include="Forms\Financial\View\FrmCustomerReceivableView.resx">
       <DependentUpon>FrmCustomerReceivableView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmPaymentAssign.resx">
@@ -697,9 +681,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Applications\WaiMao\FrmMain.resx">
-      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\General\FrmNativePortMaster.resx">
       <DependentUpon>FrmNativePortMaster.cs</DependentUpon>
@@ -824,10 +805,10 @@
     <EmbeddedResource Include="Forms\Report\FrmDeliveryStatistics.resx">
       <DependentUpon>FrmDeliveryStatistics.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Report\FrmReceivablePaymentAssigns.resx">
+    <EmbeddedResource Include="Forms\Financial\View\FrmReceivablePaymentAssigns.resx">
       <DependentUpon>FrmReceivablePaymentAssigns.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmCustomerPaymentRemainsView.resx">
+    <EmbeddedResource Include="Forms\Financial\View\FrmCustomerPaymentRemainsView.resx">
       <DependentUpon>FrmCustomerPaymentRemainsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Selection\FrmOrderSelection.resx">
@@ -990,9 +971,7 @@
   <ItemGroup>
     <None Include="Resources\purchase.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\View\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

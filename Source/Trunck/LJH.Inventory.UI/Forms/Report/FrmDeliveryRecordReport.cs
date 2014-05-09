@@ -21,39 +21,7 @@ namespace LJH.Inventory.UI.Report
             InitializeComponent();
         }
 
-        private void FrmDeliveryRecordReport_Load(object sender, EventArgs e)
-        {
-            ucDateTimeInterval1.ShowTime = false;
-            ucDateTimeInterval1.Init();
-            ucDateTimeInterval1.SelectThisMonth();
-            customerCombobox1.Init();
-            productComboBox1.Init();
-            categoryComboBox1.Init();
-        }
-
-        protected override void OnItemSearching(EventArgs e)
-        {
-            DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
-            con.LastActiveDate  = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            con.States = new List<SheetState>();
-            con.States.Add(SheetState.Shipped);
-            if (customerCombobox1.SelectedCustomer != null)
-            {
-                con.CustomerID = customerCombobox1.SelectedCustomer.ID;
-            }
-            con.CategoryID = categoryComboBox1.SelectedCategoryID;
-            if (productComboBox1.SelectedProduct != null)
-            {
-                con.ProductID = productComboBox1.SelectedProduct.ID;
-            }
-            List<DeliveryRecord> items = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
-            foreach (DeliveryRecord item in items)
-            {
-                int row = gridView.Rows.Add();
-                ShowItemOnRow(gridView.Rows[row], item);
-            }
-        }
-
+        #region 私有方法
         private void ShowItemOnRow(DataGridViewRow row, DeliveryRecord item)
         {
             row.Cells["colDeliveryDate"].Value = item.LastActiveDate.ToString("yyyy-MM-dd");
@@ -67,50 +35,88 @@ namespace LJH.Inventory.UI.Report
             row.Cells["colCount"].Value = item.Count;
             row.Cells["colAmount"].Value = item.Amount.Trim();
         }
+        #endregion
 
-        private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        #region 重写基类方法
+        protected override void OnItemSearching(EventArgs e)
         {
-            if (e.RowIndex >= 0)
+            DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
+            con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.States = new List<SheetState>();
+            con.States.Add(SheetState.Shipped);
+            if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
+            if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
+            if (txtProduct.Tag != null) con.ProductID = (txtProduct.Tag as Product).ID;
+            List<DeliveryRecord> items = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            foreach (DeliveryRecord item in items)
             {
-                if (gridView.Columns[e.ColumnIndex].Name == "colSheetNo")
-                {
-                    string sheetNo = gridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    DeliverySheet sheet = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetByID(sheetNo).QueryObject;
-                    if (sheet != null)
-                    {
-                        FrmDeliverySheetDetail frm = new FrmDeliverySheetDetail();
-                        frm.StartPosition = FormStartPosition.CenterParent;
-                        frm.UpdatingItem = sheet;
-                        frm.IsForView = true;
-                        frm.ShowDialog();
-                    }
-                }
-                else if (gridView.Columns[e.ColumnIndex].Name == "colOrderID")
-                {
-                    string orderID = gridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    Order order = (new OrderBLL(AppSettings.Current.ConnStr)).GetByID(orderID ).QueryObject;
-                    if (order != null)
-                    {
-                        FrmOrderDetail frm = new FrmOrderDetail();
-                        frm.StartPosition = FormStartPosition.CenterParent;
-                        frm.UpdatingItem = order;
-                        frm.IsForView = true;
-                        frm.ShowDialog();
-                    }
-                }
+                int row = gridView.Rows.Add();
+                ShowItemOnRow(gridView.Rows[row], item);
+            }
+        }
+        #endregion
+
+        #region 事件处理程序
+        private void FrmDeliveryRecordReport_Load(object sender, EventArgs e)
+        {
+            ucDateTimeInterval1.ShowTime = false;
+            ucDateTimeInterval1.Init();
+            ucDateTimeInterval1.SelectThisMonth();
+        }
+
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmCustomerMaster frm = new FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo customer = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Text = customer != null ? customer.Name : string.Empty;
+                txtCustomer.Tag = customer;
             }
         }
 
-        private void categoryComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtCustomer_DoubleClick(object sender, EventArgs e)
         {
-            if (categoryComboBox1.SelectedCategory == null)
+            txtCustomer.Text = string.Empty;
+            txtCustomer.Tag = null;
+        }
+
+        private void lnkProduct_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmProductMaster frm = new FrmProductMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
             {
-                productComboBox1.Init();
-            }
-            else
-            {
-                productComboBox1.Init(categoryComboBox1.SelectedCategoryID);
+                Product p = frm.SelectedItem as Product;
+                txtProduct.Text = p != null ? p.Name : string.Empty;
+                txtProduct.Tag = p;
             }
         }
+
+        private void txtProduct_DoubleClick(object sender, EventArgs e)
+        {
+            txtProduct.Text = string.Empty;
+            txtProduct.Tag = null;
+        }
+
+        private void lnkProductCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmProductCategoryMaster frm = new FrmProductCategoryMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                ProductCategory pc = frm.SelectedItem as ProductCategory;
+                txtProductCategory.Text = pc != null ? pc.Name : string.Empty;
+                txtProductCategory.Tag = pc;
+            }
+        }
+
+        private void txtProductCategory_DoubleClick(object sender, EventArgs e)
+        {
+            txtProductCategory.Text = string.Empty;
+            txtProductCategory.Tag = null;
+        }
+        #endregion
     }
 }

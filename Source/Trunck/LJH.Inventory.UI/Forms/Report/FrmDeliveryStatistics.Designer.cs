@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -41,21 +44,21 @@
             this.rdByMonth = new System.Windows.Forms.RadioButton();
             this.rdByDay = new System.Windows.Forms.RadioButton();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtProduct = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkProductCategory = new System.Windows.Forms.LinkLabel();
+            this.lnkProduct = new System.Windows.Forms.LinkLabel();
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProfit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProfitRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtSalesPerson = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtProduct = new LJH.Inventory.UI.Controls.ProductComboBox(this.components);
-            this.txtCategory = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtCustomer = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -65,11 +68,11 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(986, 14);
+            this.btnSearch.Location = new System.Drawing.Point(991, 17);
             // 
             // btnOkAs
             // 
-            this.btnOkAs.Location = new System.Drawing.Point(987, 41);
+            this.btnOkAs.Location = new System.Drawing.Point(991, 46);
             // 
             // groupBox1
             // 
@@ -97,7 +100,7 @@
             this.groupBox2.Controls.Add(this.rdBySalesPerson);
             this.groupBox2.Controls.Add(this.rdByCustomer);
             this.groupBox2.Controls.Add(this.rdByProdcut);
-            this.groupBox2.Location = new System.Drawing.Point(644, 5);
+            this.groupBox2.Location = new System.Drawing.Point(652, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(333, 45);
             this.groupBox2.TabIndex = 6;
@@ -151,7 +154,7 @@
             this.groupBox3.Controls.Add(this.rdByYear);
             this.groupBox3.Controls.Add(this.rdByMonth);
             this.groupBox3.Controls.Add(this.rdByDay);
-            this.groupBox3.Location = new System.Drawing.Point(644, 56);
+            this.groupBox3.Location = new System.Drawing.Point(652, 56);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(221, 45);
             this.groupBox3.TabIndex = 7;
@@ -204,17 +207,97 @@
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDeliveryDate,
             this.colName,
+            this.colCount,
             this.colAmount,
             this.colCost,
             this.colProfit,
+            this.colProfitRate,
             this.colFill});
             this.gridView.Location = new System.Drawing.Point(4, 108);
             this.gridView.Name = "gridView";
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1105, 236);
+            this.gridView.Size = new System.Drawing.Size(1122, 236);
             this.gridView.TabIndex = 27;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.txtProductCategory);
+            this.groupBox4.Controls.Add(this.txtProduct);
+            this.groupBox4.Controls.Add(this.txtCustomer);
+            this.groupBox4.Controls.Add(this.lnkProductCategory);
+            this.groupBox4.Controls.Add(this.lnkProduct);
+            this.groupBox4.Controls.Add(this.lnkCustomer);
+            this.groupBox4.Location = new System.Drawing.Point(245, 5);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(401, 96);
+            this.groupBox4.TabIndex = 37;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "其它";
+            // 
+            // txtProductCategory
+            // 
+            this.txtProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtProductCategory.Location = new System.Drawing.Point(42, 48);
+            this.txtProductCategory.Name = "txtProductCategory";
+            this.txtProductCategory.ReadOnly = true;
+            this.txtProductCategory.Size = new System.Drawing.Size(153, 21);
+            this.txtProductCategory.TabIndex = 45;
+            this.txtProductCategory.DoubleClick += new System.EventHandler(this.txtProductCategory_DoubleClick);
+            // 
+            // txtProduct
+            // 
+            this.txtProduct.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtProduct.Location = new System.Drawing.Point(236, 19);
+            this.txtProduct.Name = "txtProduct";
+            this.txtProduct.ReadOnly = true;
+            this.txtProduct.Size = new System.Drawing.Size(153, 21);
+            this.txtProduct.TabIndex = 44;
+            this.txtProduct.DoubleClick += new System.EventHandler(this.txtProduct_DoubleClick);
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCustomer.Location = new System.Drawing.Point(42, 19);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(153, 21);
+            this.txtCustomer.TabIndex = 43;
+            this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
+            // 
+            // lnkProductCategory
+            // 
+            this.lnkProductCategory.AutoSize = true;
+            this.lnkProductCategory.Location = new System.Drawing.Point(6, 52);
+            this.lnkProductCategory.Name = "lnkProductCategory";
+            this.lnkProductCategory.Size = new System.Drawing.Size(29, 12);
+            this.lnkProductCategory.TabIndex = 42;
+            this.lnkProductCategory.TabStop = true;
+            this.lnkProductCategory.Text = "类别";
+            this.lnkProductCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProductCategory_LinkClicked);
+            // 
+            // lnkProduct
+            // 
+            this.lnkProduct.AutoSize = true;
+            this.lnkProduct.Location = new System.Drawing.Point(201, 23);
+            this.lnkProduct.Name = "lnkProduct";
+            this.lnkProduct.Size = new System.Drawing.Size(29, 12);
+            this.lnkProduct.TabIndex = 41;
+            this.lnkProduct.TabStop = true;
+            this.lnkProduct.Text = "产品";
+            this.lnkProduct.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProduct_LinkClicked);
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.AutoSize = true;
+            this.lnkCustomer.Location = new System.Drawing.Point(6, 23);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
+            this.lnkCustomer.TabIndex = 40;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
             // 
             // colDeliveryDate
             // 
@@ -225,29 +308,50 @@
             // 
             // colName
             // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colName.HeaderText = "名称";
+            this.colName.MinimumWidth = 150;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
-            this.colName.Width = 54;
+            this.colName.Width = 150;
+            // 
+            // colCount
+            // 
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
             // 
             // colAmount
             // 
-            this.colAmount.HeaderText = "销售金额";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colAmount.HeaderText = "销售收入";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             // 
             // colCost
             // 
-            this.colCost.HeaderText = "成本";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colCost.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCost.HeaderText = "销售成本";
             this.colCost.Name = "colCost";
             this.colCost.ReadOnly = true;
             // 
             // colProfit
             // 
-            this.colProfit.HeaderText = "利润率";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colProfit.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colProfit.HeaderText = "利润";
             this.colProfit.Name = "colProfit";
             this.colProfit.ReadOnly = true;
+            // 
+            // colProfitRate
+            // 
+            this.colProfitRate.HeaderText = "利润率";
+            this.colProfitRate.Name = "colProfitRate";
+            this.colProfitRate.ReadOnly = true;
             // 
             // colFill
             // 
@@ -257,97 +361,11 @@
             this.colFill.ReadOnly = true;
             this.colFill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.txtSalesPerson);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.txtProduct);
-            this.groupBox4.Controls.Add(this.txtCategory);
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.txtCustomer);
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Location = new System.Drawing.Point(245, 5);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(393, 96);
-            this.groupBox4.TabIndex = 37;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "其它";
-            // 
-            // txtSalesPerson
-            // 
-            this.txtSalesPerson.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSalesPerson.Location = new System.Drawing.Point(236, 16);
-            this.txtSalesPerson.Name = "txtSalesPerson";
-            this.txtSalesPerson.Size = new System.Drawing.Size(145, 21);
-            this.txtSalesPerson.TabIndex = 32;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(204, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "业务";
-            // 
-            // txtProduct
-            // 
-            this.txtProduct.FormattingEnabled = true;
-            this.txtProduct.Location = new System.Drawing.Point(236, 43);
-            this.txtProduct.Name = "txtProduct";
-            this.txtProduct.Size = new System.Drawing.Size(145, 20);
-            this.txtProduct.TabIndex = 30;
-            // 
-            // txtCategory
-            // 
-            this.txtCategory.FormattingEnabled = true;
-            this.txtCategory.Location = new System.Drawing.Point(48, 42);
-            this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(145, 20);
-            this.txtCategory.TabIndex = 29;
-            this.txtCategory.SelectedIndexChanged += new System.EventHandler(this.categoryComboBox1_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 46);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "类别";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(204, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "商品";
-            // 
-            // txtCustomer
-            // 
-            this.txtCustomer.FormattingEnabled = true;
-            this.txtCustomer.Location = new System.Drawing.Point(48, 16);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(145, 20);
-            this.txtCustomer.TabIndex = 25;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "客户";
-            // 
             // FrmDeliveryStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1112, 368);
+            this.ClientSize = new System.Drawing.Size(1129, 368);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.groupBox3);
@@ -391,19 +409,19 @@
         private System.Windows.Forms.RadioButton rdByMonth;
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.GroupBox groupBox4;
-        private GeneralLibrary.WinformControl.DBCTextBox txtSalesPerson;
-        private System.Windows.Forms.Label label3;
-        private Controls.ProductComboBox txtProduct;
-        private Controls.CategoryComboBox txtCategory;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private Controls.CustomerCombobox txtCustomer;
-        private System.Windows.Forms.Label label4;
+        private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
+        private GeneralLibrary.WinformControl.DBCTextBox txtProduct;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkProductCategory;
+        private System.Windows.Forms.LinkLabel lnkProduct;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProfit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProfitRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
     }
 }
