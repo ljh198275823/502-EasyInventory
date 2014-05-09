@@ -350,7 +350,7 @@ namespace LJH.Inventory.UI.Forms
                 item.ProductID = oi.ProductID;
                 item.Unit = oi.Unit;
                 item.Price = oi.Price;
-                item.Count = oi.Inventory;
+                item.Count = oi.NotShipped;
                 item.Amount = item.Price * item.Count;
                 item.OrderItem = oi.ID;
                 item.OrderID = oi.SheetNo;
@@ -449,7 +449,6 @@ namespace LJH.Inventory.UI.Forms
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
                 con.CustomerID = Customer.ID;
                 con.States = new List<SheetState>();
-                con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
                 con.HasToDelivery = true;
                 frm.SearchCondition = con;

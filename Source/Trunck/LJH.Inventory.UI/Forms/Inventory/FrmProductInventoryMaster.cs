@@ -131,26 +131,6 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理函数
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                if (dataGridView1.Columns[e.ColumnIndex].Name == "colProductID")
-                {
-                    ProductInventory pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
-                    Product p = (new ProductBLL(AppSettings.Current.ConnStr)).GetByID(pi.ProductID).QueryObject;
-                    if (p != null)
-                    {
-                        FrmProductDetail frm = new FrmProductDetail();
-                        frm.UpdatingItem = p;
-                        frm.IsAdding = false;
-                        frm.IsForView = true;
-                        frm.ShowDialog();
-                    }
-                }
-            }
-        }
-
         private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();
@@ -164,6 +144,21 @@ namespace LJH.Inventory.UI.Forms
         private void txtKeyword_TextChanged(object sender, EventArgs e)
         {
             FreshData();
+        }
+
+        private void mnu_InventoryDetail_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.ProductID = pi.ProductID;
+                con.WareHouseID = pi.WareHouseID;
+                con.UnShipped = true;
+                Inventory.FrmProductInventoryView frm = new Inventory.FrmProductInventoryView();
+                frm.SearchCondition = con;
+                frm.ShowDialog();
+            }
         }
         #endregion
     }

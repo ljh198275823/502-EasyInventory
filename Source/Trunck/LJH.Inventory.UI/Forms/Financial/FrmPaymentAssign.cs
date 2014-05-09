@@ -51,6 +51,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             row.Tag = cr;
             row.Cells["colSheetID"].Value = cr.SheetID;
+            row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colClassID"].Value = cr.ClassID;
             row.Cells["colRemain"].Value = cr.Remain;

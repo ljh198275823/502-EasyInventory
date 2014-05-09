@@ -91,29 +91,6 @@ namespace LJH.Inventory.BLL
         protected override void DoNullify(InventorySheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoNullify(info, unitWork, dt, opt);
-            if (info.State == SheetState.Inventory) //
-            {
-                foreach (InventoryItem si in info.Items)
-                {
-                    ProductInventoryItemSearchCondition piSearch = new ProductInventoryItemSearchCondition()
-                    {
-                        ProductID = si.ProductID,
-                        InventoryItem = si.ID
-                    };
-                    List<ProductInventoryItem> piItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(piSearch).QueryObjects;
-                    foreach (ProductInventoryItem pii in piItems)
-                    {
-                        if (pii.FromInventory) //如果已经被别的订单分配了，那么这些订单就要重新分配库存，包括已经出货的。
-                        {
-                        }
-                        else
-                        {
-                            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Delete(pii, unitWork);
-                        }
-                    }
-                    //删除供应商应付款项。
-                }
-            }
         }
         #endregion
 

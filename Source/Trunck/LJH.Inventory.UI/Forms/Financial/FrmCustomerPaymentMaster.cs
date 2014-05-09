@@ -100,7 +100,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             CustomerPayment info = item as CustomerPayment;
             row.Cells["colID"].Value = info.ID;
-            row.Cells["colPaidDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
+            //row.Cells["colPaidDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
             CompanyInfo customer = customerTree1.GetCustomer(info.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);

@@ -153,6 +153,12 @@
     <Compile Include="Forms\General\FrmStaffMaster.Designer.cs">
       <DependentUpon>FrmStaffMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\View\FrmProductInventoryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\FrmProductInventoryView.Designer.cs">
+      <DependentUpon>FrmProductInventoryView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\FrmProductInventoryAssign.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -562,16 +568,16 @@
       <DependentUpon>FrmSalesPersonPerformanceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\Inventory\FrmDeliveryRecordView.cs">
+    <Compile Include="Forms\Inventory\View\FrmDeliveryRecordView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmDeliveryRecordView.Designer.cs">
+    <Compile Include="Forms\Inventory\View\FrmDeliveryRecordView.Designer.cs">
       <DependentUpon>FrmDeliveryRecordView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmInventoryRecordView.cs">
+    <Compile Include="Forms\Inventory\View\FrmInventoryRecordView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmInventoryRecordView.Designer.cs">
+    <Compile Include="Forms\Inventory\View\FrmInventoryRecordView.Designer.cs">
       <DependentUpon>FrmInventoryRecordView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\Financial\View\FrmCustomerReceivableView.resx">
@@ -621,6 +627,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmProductInventoryAssign.resx">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\View\FrmProductInventoryView.resx">
+      <DependentUpon>FrmProductInventoryView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Print\FrmDeliverySheetPrint.resx">
       <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
@@ -836,10 +845,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Forms\Inventory\FrmDeliveryRecordView.resx">
+    <EmbeddedResource Include="Forms\Inventory\View\FrmDeliveryRecordView.resx">
       <DependentUpon>FrmDeliveryRecordView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\FrmInventoryRecordView.resx">
+    <EmbeddedResource Include="Forms\Inventory\View\FrmInventoryRecordView.resx">
       <DependentUpon>FrmInventoryRecordView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
