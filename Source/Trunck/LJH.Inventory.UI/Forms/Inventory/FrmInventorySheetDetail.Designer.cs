@@ -97,11 +97,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(574, 227);
+            this.btnClose.Location = new System.Drawing.Point(521, 227);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(494, 238);
+            this.btnOk.Location = new System.Drawing.Point(441, 238);
             // 
             // label15
             // 
@@ -132,7 +132,7 @@
             // 
             this.btn_AddItem.Name = "btn_AddItem";
             this.btn_AddItem.Size = new System.Drawing.Size(148, 22);
-            this.btn_AddItem.Text = "选择商品";
+            this.btn_AddItem.Text = "选择产品";
             this.btn_AddItem.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // mnu_RemoveItem
@@ -155,7 +155,7 @@
             this.btnNullify});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1049, 56);
+            this.toolStrip1.Size = new System.Drawing.Size(996, 56);
             this.toolStrip1.TabIndex = 87;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -232,7 +232,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 59);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1049, 331);
+            this.tabControl1.Size = new System.Drawing.Size(996, 331);
             this.tabControl1.TabIndex = 88;
             // 
             // tabPage1
@@ -249,7 +249,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1041, 305);
+            this.tabPage1.Size = new System.Drawing.Size(988, 305);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -351,7 +351,7 @@
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(1026, 229);
+            this.ItemsGrid.Size = new System.Drawing.Size(973, 229);
             this.ItemsGrid.TabIndex = 54;
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             // 
@@ -599,6 +599,7 @@
             this.colOrderID.ReadOnly = true;
             this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colOrderID.Visible = false;
             // 
             // comMemo
             // 
@@ -609,7 +610,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 393);
+            this.ClientSize = new System.Drawing.Size(996, 393);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "FrmInventorySheetDetail";

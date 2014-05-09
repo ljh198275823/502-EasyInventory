@@ -204,7 +204,7 @@ namespace LJH.Inventory.UI.Forms
             btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Nullify);
             btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Print);
             btnInventory.Enabled = btnInventory.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Inventory);
-            ItemsGrid.Enabled = btnSave.Enabled;
+            ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
         }
         #endregion
 
@@ -424,7 +424,6 @@ namespace LJH.Inventory.UI.Forms
                 PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
                 con.SupplierID = Supplier.ID;
                 con.States = new List<SheetState>();
-                con.States.Add(SheetState.Add);
                 con.States.Add(SheetState.Approved);
                 con.HasOnway = true;
                 FrmPurchaseRecordSelection frm = new FrmPurchaseRecordSelection();

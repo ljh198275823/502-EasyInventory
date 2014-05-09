@@ -152,7 +152,8 @@ namespace LJH.Inventory.UI.Forms
             {
                 ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.ProductID = pi.ProductID;
+                con.Products = new List<string>();
+                con.Products.Add(pi.ProductID);
                 con.WareHouseID = pi.WareHouseID;
                 con.UnShipped = true;
                 Inventory.FrmProductInventoryView frm = new Inventory.FrmProductInventoryView();

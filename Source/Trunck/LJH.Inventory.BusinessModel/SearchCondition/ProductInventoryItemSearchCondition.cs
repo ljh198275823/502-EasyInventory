@@ -5,9 +5,9 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class ProductInventoryItemSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition 
+    public class ProductInventoryItemSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
-        public string ProductID { get; set; }
+        public List<string> Products { get; set; }
 
         public string WareHouseID { get; set; }
 

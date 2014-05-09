@@ -26,12 +26,11 @@ namespace LJH.Inventory.BLL
             {
                 Product p = ProviderFactory.Create<IProvider<Product, string>>(_RepoUri).GetByID(si.ProductID).QueryObject;
                 if (p != null && p.IsService != null && p.IsService.Value) continue; //如果是产品是服务的话就不用再从库存中扣除了
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition()
-                {
-                    ProductID = si.ProductID,
-                    WareHouseID = sheet.WareHouseID, //如果送货单没有指定仓库，这里就为空
-                    UnShipped = true,     //所有未发货的库存项
-                };
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.Products = new List<string>();
+                con.Products.Add(si.ProductID);
+                con.WareHouseID = sheet.WareHouseID; //如果送货单没有指定仓库，这里就为空
+                con.UnShipped = true;     //所有未发货的库存项
                 List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
                 if (si.OrderItem != null)  //如果出货单项有相关的订单项，那么出货时只扣除与此订单项相关的库存项和未分配给任何订单的库存项
                 {
@@ -42,7 +41,7 @@ namespace LJH.Inventory.BLL
                 {
                     items = items.Where(item => item.OrderItem == null).ToList();
                 }
-                if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("商品 {0} 库存不足，出货失败!", si.ProductID));
+                if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("产品 {0} 库存不足，出货失败!", si.ProductID));
 
                 if (inventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式排序
                 {

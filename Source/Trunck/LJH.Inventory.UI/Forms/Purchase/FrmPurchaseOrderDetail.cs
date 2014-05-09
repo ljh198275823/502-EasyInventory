@@ -224,7 +224,7 @@ namespace LJH.Inventory.UI.Forms
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.PurchaseOrder, PermissionActions.UndoApprove);
             btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.PurchaseOrder, PermissionActions.Nullify);
             btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.PurchaseOrder, PermissionActions.Print);
-            ItemsGrid.Enabled = btnSave.Enabled;
+            ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
         }
 
         protected override CommandResult AddItem(object item)
@@ -303,7 +303,7 @@ namespace LJH.Inventory.UI.Forms
                     ID = Guid.NewGuid(),
                     ProductID = product.ID,
                     Unit = product.Unit,
-                    Price = product.Price,
+                    Price = product.Cost,
                     Count = 0
                 };
                 sources.Add(item);

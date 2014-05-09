@@ -51,50 +51,51 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Reserve(string warehouseID, string productID, Guid orderItem, decimal count)
         {
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition()
-            {
-                ProductID = productID,
-                WareHouseID = warehouseID, //如果送货单没有指定仓库，这里就为空
-                UnShipped = true,    //未发货的库存项
-                UnReserved = true   //未分配给某个特定的订单
-            };
-            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
-            if (items.Sum(item => item.Count) < count) return new CommandResult(ResultCode.Fail, string.Format("库存不足，预分配失败!", productID));
+            //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            //ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition()
+            //{
+            //    Products = productID,
+            //    WareHouseID = warehouseID, //如果送货单没有指定仓库，这里就为空
+            //    UnShipped = true,    //未发货的库存项
+            //    UnReserved = true   //未分配给某个特定的订单
+            //};
+            //List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            //if (items.Sum(item => item.Count) < count) return new CommandResult(ResultCode.Fail, string.Format("库存不足，预分配失败!", productID));
 
-            if (UserSettings.Current.InventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式排序
-            {
-                items = (from item in items orderby item.AddDate ascending select item).ToList();
-            }
-            else
-            {
-                items = (from item in items orderby item.AddDate descending select item).ToList();
-            }
-            foreach (ProductInventoryItem pii in items)
-            {
-                if (count > 0)
-                {
-                    ProductInventoryItem pii1 = pii.Clone();
-                    if (pii.Count > count) //对于部分出货的情况，一条库存记录拆成两条，其中一条表示出货的，另一条表示未出货部分，即要保证DelvieryItem不为空的都是未出货的，为空的都是已经出货的
-                    {
-                        pii.OrderItem = orderItem;
-                        pii.Count = count;
-                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
+            //if (UserSettings.Current.InventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式排序
+            //{
+            //    items = (from item in items orderby item.AddDate ascending select item).ToList();
+            //}
+            //else
+            //{
+            //    items = (from item in items orderby item.AddDate descending select item).ToList();
+            //}
+            //foreach (ProductInventoryItem pii in items)
+            //{
+            //    if (count > 0)
+            //    {
+            //        ProductInventoryItem pii1 = pii.Clone();
+            //        if (pii.Count > count) //对于部分出货的情况，一条库存记录拆成两条，其中一条表示出货的，另一条表示未出货部分，即要保证DelvieryItem不为空的都是未出货的，为空的都是已经出货的
+            //        {
+            //            pii.OrderItem = orderItem;
+            //            pii.Count = count;
+            //            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
 
-                        pii1.ID = Guid.NewGuid();
-                        pii1.Count -= count;
-                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii1, unitWork);
-                        count = 0;
-                    }
-                    else
-                    {
-                        pii.OrderItem = orderItem;
-                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
-                        count -= pii.Count;
-                    }
-                }
-            }
-            return unitWork.Commit();
+            //            pii1.ID = Guid.NewGuid();
+            //            pii1.Count -= count;
+            //            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii1, unitWork);
+            //            count = 0;
+            //        }
+            //        else
+            //        {
+            //            pii.OrderItem = orderItem;
+            //            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
+            //            count -= pii.Count;
+            //        }
+            //    }
+            //}
+            //return unitWork.Commit();
+            throw new Exception("没有实现此方法");
         }
         #endregion
     }

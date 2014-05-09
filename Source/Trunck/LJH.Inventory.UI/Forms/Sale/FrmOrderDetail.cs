@@ -224,7 +224,7 @@ namespace LJH.Inventory.UI.Forms
             btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Nullify);
             btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Print);
             btnShip.Enabled = btnShip.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Ship);
-            ItemsGrid.Enabled = btnSave.Enabled;
+            ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
         }
 
         protected override CommandResult AddItem(object item)
