@@ -90,42 +90,43 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 142);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Reserve
             // 
             this.cMnu_Reserve.Name = "cMnu_Reserve";
-            this.cMnu_Reserve.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Reserve.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Reserve.Text = "库存转为备货";
             this.cMnu_Reserve.Click += new System.EventHandler(this.cMnu_Reserve_Click);
             // 
             // 创建送货单ToolStripMenuItem
             // 
             this.创建送货单ToolStripMenuItem.Name = "创建送货单ToolStripMenuItem";
-            this.创建送货单ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.创建送货单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.创建送货单ToolStripMenuItem.Text = "创建送货单...";
+            this.创建送货单ToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // pnlFilter

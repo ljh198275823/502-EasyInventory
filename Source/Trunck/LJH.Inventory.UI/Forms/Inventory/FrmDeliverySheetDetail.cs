@@ -114,12 +114,6 @@ namespace LJH.Inventory.UI.Forms
             ShowDeliveryItemsOnGrid(item.Items);
             ShowOperations(item.ID, item.DocumentType, dataGridView1);
             ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
-            if (item.State != SheetState.Add)
-            {
-                this.ItemsGrid.ReadOnly = true;
-                this.ItemsGrid.ContextMenuStrip = null;
-                this.ItemsGrid.ContextMenu = null;
-            }
         }
         #endregion
 
@@ -162,6 +156,7 @@ namespace LJH.Inventory.UI.Forms
             this.txtSheetNo.Text = _AutoCreate;
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            btn_AddItem.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
@@ -229,6 +224,7 @@ namespace LJH.Inventory.UI.Forms
             btnPrint.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Print);
             btnShip.Enabled = btnShip.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Ship);
             ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
+            ItemsGrid.ReadOnly = !btnSave.Enabled;
         }
         #endregion
 

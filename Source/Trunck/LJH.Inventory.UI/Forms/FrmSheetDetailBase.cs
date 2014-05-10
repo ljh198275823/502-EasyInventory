@@ -70,7 +70,6 @@ namespace LJH.Inventory.UI.Forms
 
         protected virtual void ShowButtonState()
         {
-
         }
         #endregion
 
@@ -221,7 +220,7 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 与工具栏有关的方法
-        protected virtual void ShowButtonState(ToolStrip toolBar)
+        protected void ShowButtonState(ToolStrip toolBar)
         {
             if (UpdatingItem == null)
             {

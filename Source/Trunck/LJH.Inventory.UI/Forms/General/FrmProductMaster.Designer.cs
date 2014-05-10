@@ -423,7 +423,7 @@
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
             this.Name = "FrmProductMaster";
-            this.Text = "商品资料";
+            this.Text = "产品资料";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);

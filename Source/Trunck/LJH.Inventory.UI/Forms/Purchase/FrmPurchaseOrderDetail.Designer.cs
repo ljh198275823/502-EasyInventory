@@ -45,6 +45,18 @@
             this.lnkSupplier = new System.Windows.Forms.LinkLabel();
             this.txtBuyer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReceived = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_AddOrderRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_AddItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,18 +88,6 @@
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
-            this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReceived = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -281,6 +281,100 @@
             this.ItemsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellContentClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             // 
+            // colHeader
+            // 
+            this.colHeader.HeaderText = "";
+            this.colHeader.MinimumWidth = 20;
+            this.colHeader.Name = "colHeader";
+            this.colHeader.ReadOnly = true;
+            this.colHeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHeader.Width = 20;
+            // 
+            // colProductID
+            // 
+            this.colProductID.HeaderText = "产品编号";
+            this.colProductID.Name = "colProductID";
+            this.colProductID.ReadOnly = true;
+            this.colProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colProductName
+            // 
+            this.colProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colProductName.HeaderText = "名称";
+            this.colProductName.Name = "colProductName";
+            this.colProductName.ReadOnly = true;
+            this.colProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colProductName.Width = 35;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
+            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colUnit
+            // 
+            this.colUnit.HeaderText = "单位";
+            this.colUnit.Name = "colUnit";
+            this.colUnit.ReadOnly = true;
+            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUnit.Width = 60;
+            // 
+            // colPrice
+            // 
+            dataGridViewCellStyle1.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colPrice.HeaderText = "单价";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colCount
+            // 
+            dataGridViewCellStyle2.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colTotal
+            // 
+            dataGridViewCellStyle3.NullValue = null;
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colTotal.HeaderText = "金额";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colReceived
+            // 
+            this.colReceived.HeaderText = "已收货";
+            this.colReceived.Name = "colReceived";
+            this.colReceived.ReadOnly = true;
+            this.colReceived.Visible = false;
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "销售订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.MinimumWidth = 150;
+            this.colMemo.Name = "colMemo";
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colMemo.Width = 161;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -301,7 +395,7 @@
             // 
             this.cMnu_AddItem.Name = "cMnu_AddItem";
             this.cMnu_AddItem.Size = new System.Drawing.Size(160, 22);
-            this.cMnu_AddItem.Text = "选择商品";
+            this.cMnu_AddItem.Text = "选择产品";
             this.cMnu_AddItem.Click += new System.EventHandler(this.cMnu_Add_Click);
             // 
             // cMnu_RemoveItem
@@ -335,6 +429,7 @@
             this.dtDemandDate.Name = "dtDemandDate";
             this.dtDemandDate.Size = new System.Drawing.Size(112, 21);
             this.dtDemandDate.TabIndex = 85;
+            this.dtDemandDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // label4
             // 
@@ -568,100 +663,6 @@
             this.btnNullify.Text = "作废(&N)";
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
-            // 
-            // colHeader
-            // 
-            this.colHeader.HeaderText = "";
-            this.colHeader.MinimumWidth = 20;
-            this.colHeader.Name = "colHeader";
-            this.colHeader.ReadOnly = true;
-            this.colHeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colHeader.Width = 20;
-            // 
-            // colProductID
-            // 
-            this.colProductID.HeaderText = "产品编号";
-            this.colProductID.Name = "colProductID";
-            this.colProductID.ReadOnly = true;
-            this.colProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colProductName
-            // 
-            this.colProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colProductName.HeaderText = "名称";
-            this.colProductName.Name = "colProductName";
-            this.colProductName.ReadOnly = true;
-            this.colProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colProductName.Width = 35;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "类别";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colUnit
-            // 
-            this.colUnit.HeaderText = "单位";
-            this.colUnit.Name = "colUnit";
-            this.colUnit.ReadOnly = true;
-            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colUnit.Width = 60;
-            // 
-            // colPrice
-            // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colPrice.HeaderText = "单价";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colCount
-            // 
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCount.HeaderText = "数量";
-            this.colCount.Name = "colCount";
-            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colTotal
-            // 
-            dataGridViewCellStyle3.NullValue = null;
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colTotal.HeaderText = "金额";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colReceived
-            // 
-            this.colReceived.HeaderText = "已收货";
-            this.colReceived.Name = "colReceived";
-            this.colReceived.ReadOnly = true;
-            this.colReceived.Visible = false;
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "销售订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.MinimumWidth = 150;
-            this.colMemo.Name = "colMemo";
-            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colMemo.Width = 161;
             // 
             // FrmPurchaseOrderDetail
             // 

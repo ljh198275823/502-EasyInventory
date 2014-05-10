@@ -1230,9 +1230,9 @@
             this.chkForbidWhenNoOrderID.AutoSize = true;
             this.chkForbidWhenNoOrderID.Location = new System.Drawing.Point(16, 18);
             this.chkForbidWhenNoOrderID.Name = "chkForbidWhenNoOrderID";
-            this.chkForbidWhenNoOrderID.Size = new System.Drawing.Size(228, 16);
+            this.chkForbidWhenNoOrderID.Size = new System.Drawing.Size(156, 16);
             this.chkForbidWhenNoOrderID.TabIndex = 49;
-            this.chkForbidWhenNoOrderID.Text = "禁止保存，当送货单没有指定订单号时";
+            this.chkForbidWhenNoOrderID.Text = "送货单项需要指定订单项";
             this.chkForbidWhenNoOrderID.UseVisualStyleBackColor = true;
             // 
             // panel2

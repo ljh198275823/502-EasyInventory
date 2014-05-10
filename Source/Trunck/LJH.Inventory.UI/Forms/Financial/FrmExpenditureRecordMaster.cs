@@ -102,6 +102,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             ExpenditureRecord info = item as ExpenditureRecord;
+            row.Tag = info;
             row.Cells["colID"].Value = info.ID;
             row.Cells["colLastActiveDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);

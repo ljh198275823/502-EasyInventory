@@ -19,63 +19,6 @@ namespace LJH.Inventory.BLL
         }
         #endregion
 
-        #region 动态库内部方法
-        /// <summary>
-        /// 结算各项应收账款明细
-        /// </summary>
-        /// <param name="paymentID">客户付款ID</param>
-        /// <param name="customerID">客户ID</param>
-        /// <param name="amount">结算的金额</param>
-        /// <param name="firstSheet">结算的送货单,没有指定的话填空或null</param>
-        /// <param name="exceptID">不用结算的送货单,没有指定的话填空或null</param>
-        /// <param name="exceptDaiFu">不用结算的代付款项,没有指定的话填0</param>
-        /// <param name="unitWork">工作单元</param>
-        /// <returns></returns>
-        internal void SettleReceivables(string paymentID, string customerID, decimal amount, string receivableID, string exceptID, IUnitWork unitWork)
-        {
-            //if (amount <= 0) return;
-            //if (!string.IsNullOrEmpty(receivableID))
-            //{
-            //    CustomerReceivable cr = ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetByID(receivableID).QueryObject;
-            //    if (cr != null && cr.Receivable >0)
-            //    {
-            //        decimal temp = cr.Receivable >= amount ? amount : cr.Receivable;
-            //        CustomerPaymentAssign cpa = new CustomerPaymentAssign()
-            //        {
-            //            PaymentID = paymentID,
-            //            ReceivableID = cr.ID,
-            //            Amount = temp
-            //        };
-            //        ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(cpa, unitWork);
-            //    }
-            //}
-            //else
-            //{
-            //    List<CustomerReceivable> items = (new CustomerBLL(_RepoUri)).GetUnSettleReceivables(customerID);
-            //    if (items != null && items.Count > 0)
-            //    {
-            //        items = (from item in items orderby item.CreateDate ascending select item).ToList();
-            //        foreach (CustomerReceivable cr in items)
-            //        {
-            //            if (cr.ID != exceptID)
-            //            {
-            //                decimal temp = cr.Receivable >= amount ? amount : cr.Receivable;
-            //                CustomerPaymentAssign cpa = new CustomerPaymentAssign()
-            //                {
-            //                    PaymentID = paymentID,
-            //                    ReceivableID = cr.ID,
-            //                    Amount = temp
-            //                };
-            //                ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Insert(cpa, unitWork);
-            //                amount -= temp;
-            //                if (amount == 0) return;
-            //            }
-            //        }
-            //    }
-            //}
-        }
-        #endregion
-
         #region 重写基类方法
         protected override string CreateSheetID(CustomerPayment info)
         {
@@ -84,8 +27,35 @@ namespace LJH.Inventory.BLL
             return info.ID;
         }
 
+        protected override void UndoApprove(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(_RepoUri )).GetAssigns(info.ID).QueryObjects;
+            if (assigns != null && assigns.Count > 0)
+            {
+                bool allSuccess = true;
+                foreach (CustomerPaymentAssign assign in assigns)
+                {
+                    CommandResult ret = (new CustomerPaymentAssignBLL(_RepoUri )).UndoAssign(assign);
+                    if (ret.Result != ResultCode.Successful) allSuccess = false;
+                }
+                if (!allSuccess) throw new Exception("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"取消审核\"的操作");
+            }
+            base.UndoApprove(info, unitWork, dt, opt);
+        }
+
         protected override void DoNullify(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
         {
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(_RepoUri )).GetAssigns(info.ID).QueryObjects;
+            if (assigns != null && assigns.Count > 0)
+            {
+                bool allSuccess = true;
+                foreach (CustomerPaymentAssign assign in assigns)
+                {
+                    CommandResult ret = (new CustomerPaymentAssignBLL(_RepoUri)).UndoAssign(assign);
+                    if (ret.Result != ResultCode.Successful) allSuccess = false;
+                }
+                if (!allSuccess) throw new Exception("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"作废\"的操作");
+            }
             base.DoNullify(info, unitWork, dt, opt);
         }
         #endregion

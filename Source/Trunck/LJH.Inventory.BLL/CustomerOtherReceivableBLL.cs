@@ -43,20 +43,64 @@ namespace LJH.Inventory.BLL
             base.DoApprove(info, unitWork, dt, opt);
         }
 
+        protected override void UndoApprove(CustomerOtherReceivable info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = info.ID;
+            List<CustomerReceivable> items = new CustomerReceivableBLL(_RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                CustomerReceivable cr = items.FirstOrDefault(it => it.ClassID == CustomerReceivableClass.Other);
+                if (cr != null)
+                {
+                    CustomerPaymentAssignSearchCondition con1 = new CustomerPaymentAssignSearchCondition();
+                    con1.ReceivableIDs = new List<Guid>();
+                    con1.ReceivableIDs.Add(cr.ID);
+                    List<CustomerPaymentAssign> assigns = (new CustomerPaymentAssignBLL(_RepoUri)).GetItems(con1).QueryObjects;
+                    if (assigns != null && assigns.Count > 0)
+                    {
+                        bool allSuccess = true;
+                        foreach (CustomerPaymentAssign assign in assigns)
+                        {
+                            CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
+                            if (ret.Result != ResultCode.Successful) allSuccess = false;
+                        }
+                        if (!allSuccess) throw new Exception("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"取消审核\"的操作");
+                    }
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Delete(cr, unitWork); //删除应收
+                }
+            }
+            base.UndoApprove(info, unitWork, dt, opt);
+        }
+
         protected override void DoNullify(CustomerOtherReceivable info, IUnitWork unitWork, DateTime dt, string opt)
         {
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = info.ID;
+            List<CustomerReceivable> items = new CustomerReceivableBLL(_RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                CustomerReceivable cr = items.FirstOrDefault(it => it.ClassID == CustomerReceivableClass.Other);
+                if (cr != null)
+                {
+                    CustomerPaymentAssignSearchCondition con1 = new CustomerPaymentAssignSearchCondition();
+                    con1.ReceivableIDs = new List<Guid>();
+                    con1.ReceivableIDs.Add(cr.ID);
+                    List<CustomerPaymentAssign> assigns = (new CustomerPaymentAssignBLL(_RepoUri)).GetItems(con1).QueryObjects;
+                    if (assigns != null && assigns.Count > 0)
+                    {
+                        bool allSuccess = true;
+                        foreach (CustomerPaymentAssign assign in assigns)
+                        {
+                            CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
+                            if (ret.Result != ResultCode.Successful) allSuccess = false;
+                        }
+                        if (!allSuccess) throw new Exception("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"作废\"的操作");
+                    }
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Delete(cr, unitWork); //删除应收
+                }
+            }
             base.DoNullify(info, unitWork, dt, opt);
-            ////如果已经有客户付款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
-            //CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
-            //con.ReceivableID = info.ID;
-            //List<CustomerPaymentAssign> assigns = ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con).QueryObjects;
-            //if (assigns != null && assigns.Count > 0)
-            //{
-            //    foreach (CustomerPaymentAssign assign in assigns)
-            //    {
-            //        ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).Delete(assign, unitWork);
-            //    }
-            //}
         }
         #endregion
     }

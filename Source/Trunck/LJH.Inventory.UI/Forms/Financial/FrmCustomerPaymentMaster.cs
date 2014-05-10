@@ -99,6 +99,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             CustomerPayment info = item as CustomerPayment;
+            row.Tag = info;
             row.Cells["colID"].Value = info.ID;
             //row.Cells["colPaidDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
             CompanyInfo customer = customerTree1.GetCustomer(info.CustomerID);

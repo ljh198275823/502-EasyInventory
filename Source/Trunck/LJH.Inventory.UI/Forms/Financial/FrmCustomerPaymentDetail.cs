@@ -30,9 +30,11 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 私有方法
-        private void ShowAssigns(List<CustomerPaymentAssign> assigns)
+        private void ShowAssigns()
         {
             ItemsGrid.Rows.Clear();
+            if (UpdatingItem == null) return;
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
@@ -97,10 +99,10 @@ namespace LJH.Inventory.UI.Forms.Financial
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
                 txtMemo.Text = item.Memo;
-                List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns(item.ID).QueryObjects;
-                ShowAssigns(assigns);
+                ShowAssigns();
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
+                ShowButtonState();
             }
         }
 
@@ -194,8 +196,18 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            if (assigns != null && assigns.Count > 0)
+            {
+                string msg = "\"取消审核\"的操作会删除此付款的所有应收抵销项删除，是否继续?";
+                if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
             PerformOperation<CustomerPayment>(processor, SheetOperation.UndoApprove);
+
+            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+            ItemShowing();
+            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
@@ -206,18 +218,26 @@ namespace LJH.Inventory.UI.Forms.Financial
                 FrmPaymentAssign frm = new FrmPaymentAssign();
                 frm.CustomerPaymentID = paymentID;
                 frm.ShowDialog();
-                List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns(paymentID).QueryObjects;
-                ShowAssigns(assigns);
                 UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+                ItemShowing();
                 OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
-                ShowButtonState();
             }
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            if (assigns != null && assigns.Count > 0)
+            {
+                string msg = "\"作废\"的操作会删除此付款的所有应收抵销项删除，是否继续?";
+                if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
             PerformOperation<CustomerPayment>(processor, SheetOperation.Nullify);
+
+            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+            ItemShowing();
+            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
         }
         #endregion
 

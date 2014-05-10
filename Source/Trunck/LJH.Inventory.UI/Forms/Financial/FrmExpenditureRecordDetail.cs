@@ -162,14 +162,62 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as ExpenditureRecord).ID).QueryObjects;
+            if (assigns != null && assigns.Count > 0)
+            {
+                string msg = "\"取消审核\"的操作会删除相关的应收抵销项，是否继续?";
+                if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            }
+            if (assigns != null && assigns.Count > 0)
+            {
+                bool allSuccess = true;
+                foreach (CustomerPaymentAssign assign in assigns)
+                {
+                    CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
+                    if (ret.Result != ResultCode.Successful) allSuccess = false;
+                }
+                if (!allSuccess)
+                {
+                    MessageBox.Show("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"取消审核\"的操作", "消息");
+                    UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+                    OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
+                    return;
+                }
+            }
             ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
             PerformOperation<ExpenditureRecord>(processor, SheetOperation.UndoApprove);
+            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as ExpenditureRecord).ID).QueryObjects;
+            if (assigns != null && assigns.Count > 0)
+            {
+                string msg = "\"作废\"的操作会删除相关的应收抵销项，是否继续?";
+                if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            }
+            if (assigns != null && assigns.Count > 0)
+            {
+                bool allSuccess = true;
+                foreach (CustomerPaymentAssign assign in assigns)
+                {
+                    CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
+                    if (ret.Result != ResultCode.Successful) allSuccess = false;
+                }
+                if (!allSuccess)
+                {
+                    MessageBox.Show("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"作废\"的操作", "消息");
+                    UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+                    OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
+                    return;
+                }
+            }
             ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
             PerformOperation<ExpenditureRecord>(processor, SheetOperation.Nullify);
+            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
         }
         #endregion
 

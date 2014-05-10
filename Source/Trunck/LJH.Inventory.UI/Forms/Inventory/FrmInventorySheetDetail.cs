@@ -145,12 +145,6 @@ namespace LJH.Inventory.UI.Forms
                 this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
                 this.txtMemo.Text = item.Memo;
                 ShowSheetItemsOnGrid(item.Items);
-                if (item.State != SheetState.Add)
-                {
-                    this.ItemsGrid.ReadOnly = true;
-                    this.ItemsGrid.ContextMenuStrip = null;
-                    this.ItemsGrid.ContextMenu = null;
-                }
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
             }
@@ -205,6 +199,7 @@ namespace LJH.Inventory.UI.Forms
             btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Print);
             btnInventory.Enabled = btnInventory.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Inventory);
             ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
+            ItemsGrid.ReadOnly = !btnSave.Enabled;
         }
         #endregion
 

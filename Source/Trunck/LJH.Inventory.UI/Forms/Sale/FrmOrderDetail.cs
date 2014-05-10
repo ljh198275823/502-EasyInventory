@@ -131,6 +131,12 @@ namespace LJH.Inventory.UI.Forms
                 txtSalesPerson.Focus();
                 return false;
             }
+            if (dtDemandDate.Value == new DateTime(2000, 1, 1))
+            {
+                MessageBox.Show("没有指定交货日期");
+                dtDemandDate.Focus();
+                return false;
+            }
             if (!rdWithTax.Checked && !rdWithoutTax.Checked)
             {
                 MessageBox.Show("没有选择订单的含税情况");
@@ -159,7 +165,7 @@ namespace LJH.Inventory.UI.Forms
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            this.dtDemandDate.Value = DateTime.Today.AddDays(1);
+            this.dtDemandDate.Value = new DateTime(2000, 1, 1);
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
@@ -225,6 +231,7 @@ namespace LJH.Inventory.UI.Forms
             btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Print);
             btnShip.Enabled = btnShip.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Ship);
             ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
+            ItemsGrid.ReadOnly = !btnSave.Enabled;
         }
 
         protected override CommandResult AddItem(object item)

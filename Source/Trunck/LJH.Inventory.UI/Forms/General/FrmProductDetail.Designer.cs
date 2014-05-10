@@ -57,6 +57,7 @@
             this.txtInternalID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chkService = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
             this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,7 +69,6 @@
             this.mnu_AttachmentOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkService = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -396,6 +396,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本";
             // 
+            // chkService
+            // 
+            this.chkService.AutoSize = true;
+            this.chkService.Location = new System.Drawing.Point(255, 130);
+            this.chkService.Name = "chkService";
+            this.chkService.Size = new System.Drawing.Size(48, 16);
+            this.chkService.TabIndex = 34;
+            this.chkService.Text = "服务";
+            this.chkService.UseVisualStyleBackColor = true;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.gridAttachment);
@@ -495,16 +505,6 @@
             this.mnu_AttachmentDelete.Text = "删除";
             this.mnu_AttachmentDelete.Click += new System.EventHandler(this.mnu_AttachmentDelete_Click);
             // 
-            // chkService
-            // 
-            this.chkService.AutoSize = true;
-            this.chkService.Location = new System.Drawing.Point(255, 130);
-            this.chkService.Name = "chkService";
-            this.chkService.Size = new System.Drawing.Size(48, 16);
-            this.chkService.TabIndex = 34;
-            this.chkService.Text = "服务";
-            this.chkService.UseVisualStyleBackColor = true;
-            // 
             // FrmProductDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -512,7 +512,7 @@
             this.ClientSize = new System.Drawing.Size(557, 339);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmProductDetail";
-            this.Text = "商品明细";
+            this.Text = "产品明细";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.tabControl1, 0);
