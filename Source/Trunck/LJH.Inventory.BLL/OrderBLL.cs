@@ -30,6 +30,26 @@ namespace LJH.Inventory.BLL
             }
             return info.ID;
         }
+
+        protected override void DoNullify(Order info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            //首先取消订单的备货项
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            con.OrderID = info.ID;
+            con.UnShipped = true;
+            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                foreach (ProductInventoryItem item in items)
+                {
+                    ProductInventoryItem clone = item.Clone();
+                    item.OrderID = null;
+                    item.OrderItem = null;
+                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(item, clone, unitWork);
+                }
+            }
+            base.DoNullify(info, unitWork, dt, opt);
+        }
         #endregion
 
         #region 公共方法
