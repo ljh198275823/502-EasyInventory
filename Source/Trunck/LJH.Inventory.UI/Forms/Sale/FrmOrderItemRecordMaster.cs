@@ -161,7 +161,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                 frm.MaxCount = item.NotPurchased;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, frm.Count);
+                    CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
                     if (ret.Result == ResultCode.Successful)
                     {
                         _Inventories = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;

@@ -49,7 +49,7 @@ namespace LJH.Inventory.BLL
         /// <param name="orderItem"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public CommandResult Reserve(string warehouseID, string productID, Guid orderItem, decimal count)
+        public CommandResult Reserve(string warehouseID, string productID, Guid orderItem, string orderID,decimal count)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
@@ -77,6 +77,7 @@ namespace LJH.Inventory.BLL
                     if (pii.Count > count) //对于部分出货的情况，一条库存记录拆成两条，其中一条表示出货的，另一条表示未出货部分，即要保证DelvieryItem不为空的都是未出货的，为空的都是已经出货的
                     {
                         pii.OrderItem = orderItem;
+                        pii.OrderID = orderID;
                         pii.Count = count;
                         ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
 
@@ -88,6 +89,7 @@ namespace LJH.Inventory.BLL
                     else
                     {
                         pii.OrderItem = orderItem;
+                        pii.OrderID = orderID;
                         ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
                         count -= pii.Count;
                     }

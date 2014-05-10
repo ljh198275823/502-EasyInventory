@@ -34,7 +34,9 @@ namespace LJH.Inventory.BLL
                     Count = si.Count,
                     AddDate = DateTime.Now,
                     OrderItem = si.OrderItem,
+                    OrderID = si.OrderID,
                     PurchaseItem = si.PurchaseItem,
+                    PurchaseID = si.PurchaseOrder,
                     InventoryItem = si.ID,
                     InventorySheet = si.SheetNo,
                 };

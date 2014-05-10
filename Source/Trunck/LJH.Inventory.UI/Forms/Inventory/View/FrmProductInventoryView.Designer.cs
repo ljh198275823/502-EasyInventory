@@ -35,7 +35,7 @@
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReserved = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colReserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +60,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(685, 259);
+            this.dataGridView1.Size = new System.Drawing.Size(778, 252);
             this.dataGridView1.TabIndex = 101;
             // 
             // colInventoryDate
@@ -108,17 +108,17 @@
             // 
             // colReserved
             // 
-            this.colReserved.HeaderText = "订单备货";
+            this.colReserved.HeaderText = "备货订单";
             this.colReserved.Name = "colReserved";
             this.colReserved.ReadOnly = true;
             this.colReserved.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colReserved.Width = 60;
+            this.colReserved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FrmProductInventoryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 281);
+            this.ClientSize = new System.Drawing.Size(778, 274);
             this.Controls.Add(this.dataGridView1);
             this.Name = "FrmProductInventoryView";
             this.Text = "产品库存明细";
@@ -138,7 +138,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colReserved;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReserved;
 
     }
 }

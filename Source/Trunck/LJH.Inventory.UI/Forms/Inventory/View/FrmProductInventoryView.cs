@@ -51,7 +51,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
-            row.Cells["colReserved"].Value = c.OrderItem != null;
+            row.Cells["colReserved"].Value = c.OrderID;
         }
         #endregion
     }

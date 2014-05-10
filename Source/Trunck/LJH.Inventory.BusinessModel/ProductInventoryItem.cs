@@ -40,18 +40,32 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid? OrderItem { get; set; }
         /// <summary>
+        /// 获取或设置销售订单号
+        /// </summary>
+        public string OrderID { get; set; }
+        /// <summary>
         /// 获取或设置采购单项
         /// </summary>
         public Guid? PurchaseItem { get; set; }
         /// <summary>
+        /// 获取或设置采购订单号
+        /// </summary>
+        public string PurchaseID { get; set; }
+        /// <summary>
         /// 获取或设置收货单项
         /// </summary>
         public Guid? InventoryItem { get; set; }
-
+        /// <summary>
+        /// 获取或设置收货单号
+        /// </summary>
         public string InventorySheet { get; set; }
-
+        /// <summary>
+        /// 获取或设置送货单项
+        /// </summary>
         public Guid? DeliveryItem { get; set; }
-
+        /// <summary>
+        /// 获取或设置送货单号
+        /// </summary>
         public string DeliverySheet { get; set; }
         #endregion
 
