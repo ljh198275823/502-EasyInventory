@@ -22,6 +22,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ID { get; set; }
         /// <summary>
+        /// 获取或设置单据日期
+        /// </summary>
+        public DateTime SheetDate { get; set; }
+        /// <summary>
         /// 获取或设置单据创建日期
         /// </summary>
         public DateTime LastActiveDate { get; set; }
@@ -46,21 +50,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Address { get; set; }
         /// <summary>
-        /// 获取或设置送货人
-        /// </summary>
-        public string Driver { get; set; }
-        /// <summary>
-        /// 获取或设置送货人电话
-        /// </summary>
-        public string DriverMobile { get; set; }
-        /// <summary>
-        /// 获取或设置送货车牌号
-        /// </summary>
-        public string CarPlate { get; set; }
-        /// <summary>
         /// 获取或设置是否含税
         /// </summary>
-        public bool IsWithTax { get; set; }
+        public bool WithTax { get; set; }
         /// <summary>
         /// 获取或设置送货单的折扣额
         /// </summary>

@@ -49,12 +49,10 @@ namespace LJH.Inventory.DAL.LinqProvider
                 PurchaseOrderSearchCondition con = search as PurchaseOrderSearchCondition;
                 if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
                 if (!string.IsNullOrEmpty(con.Buyer)) ret = ret.Where(item => item.Buyer == con.Buyer);
-                if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
             }
             if (search is PurchaseItemRecordSearchCondition)
             {
                 PurchaseItemRecordSearchCondition con = search as PurchaseItemRecordSearchCondition;
-                if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
             }

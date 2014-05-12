@@ -131,7 +131,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                 txtSalesPerson.Focus();
                 return false;
             }
-            if (dtDemandDate.Value == new DateTime(2000, 1, 1))
+            if (dtDemandDate.IsNull)
             {
                 MessageBox.Show("没有指定交货日期");
                 dtDemandDate.Focus();
@@ -165,7 +165,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            this.dtDemandDate.Value = new DateTime(2000, 1, 1);
+            this.dtDemandDate.IsNull = true;
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
@@ -184,7 +184,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                 this.txtSheetNo.Enabled = false;
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 this.txtCustomer.Text = Customer != null ? Customer.Name : item.CustomerID;
-                this.dtOrderDate.Value = item.OrderDate;
+                this.dtSheetDate.Value = item.SheetDate;
                 this.txtSalesPerson.Text = item.SalesPerson;
                 this.dtDemandDate.Value = item.DemandDate;
                 this.rdWithTax.Checked = item.WithTax;
@@ -210,7 +210,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             {
                 order = UpdatingItem as Order;
             }
-            order.OrderDate = this.dtOrderDate.Value;
+            order.SheetDate = this.dtSheetDate.Value;
             order.CustomerID = Customer.ID;
             order.SalesPerson = this.txtSalesPerson.Text;
             order.DemandDate = this.dtDemandDate.Value;

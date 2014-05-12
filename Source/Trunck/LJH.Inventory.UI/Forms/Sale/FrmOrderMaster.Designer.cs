@@ -59,8 +59,8 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -253,8 +253,8 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
+            this.colSheetDate,
             this.colCustomer,
-            this.colOrderDate,
             this.colDeliveryDate,
             this.colSales,
             this.colWithTax,
@@ -320,21 +320,21 @@
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
             // 
+            // colSheetDate
+            // 
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colSheetDate.HeaderText = "日期";
+            this.colSheetDate.Name = "colSheetDate";
+            this.colSheetDate.ReadOnly = true;
+            // 
             // colCustomer
             // 
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
             this.colCustomer.Width = 150;
-            // 
-            // colOrderDate
-            // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colOrderDate.HeaderText = "签订日期";
-            this.colOrderDate.Name = "colOrderDate";
-            this.colOrderDate.ReadOnly = true;
             // 
             // colDeliveryDate
             // 
@@ -471,8 +471,8 @@
         private System.Windows.Forms.ContextMenuStrip treeMenu;
         private System.Windows.Forms.ToolStripMenuItem mnu_Add;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSales;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;

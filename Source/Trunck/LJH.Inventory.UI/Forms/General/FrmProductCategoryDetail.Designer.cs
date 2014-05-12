@@ -44,10 +44,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(178, 266);
+            this.btnClose.TabIndex = 6;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(69, 266);
+            this.btnOk.TabIndex = 5;
             // 
             // label1
             // 
@@ -65,7 +67,7 @@
             this.txtID.MaxLength = 100;
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(248, 21);
-            this.txtID.TabIndex = 3;
+            this.txtID.TabIndex = 7;
             this.txtID.Text = "自动创建";
             // 
             // label2
@@ -84,7 +86,7 @@
             this.txtName.MaxLength = 100;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(248, 21);
-            this.txtName.TabIndex = 5;
+            this.txtName.TabIndex = 0;
             // 
             // label3
             // 
@@ -103,7 +105,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(248, 43);
-            this.txtMemo.TabIndex = 7;
+            this.txtMemo.TabIndex = 4;
             // 
             // label4
             // 
@@ -121,7 +123,7 @@
             this.txtPrefix.MaxLength = 100;
             this.txtPrefix.Name = "txtPrefix";
             this.txtPrefix.Size = new System.Drawing.Size(248, 21);
-            this.txtPrefix.TabIndex = 9;
+            this.txtPrefix.TabIndex = 1;
             // 
             // lnkParentCategory
             // 
@@ -129,7 +131,7 @@
             this.lnkParentCategory.Location = new System.Drawing.Point(9, 146);
             this.lnkParentCategory.Name = "lnkParentCategory";
             this.lnkParentCategory.Size = new System.Drawing.Size(41, 12);
-            this.lnkParentCategory.TabIndex = 10;
+            this.lnkParentCategory.TabIndex = 2;
             this.lnkParentCategory.TabStop = true;
             this.lnkParentCategory.Text = "父类别";
             this.lnkParentCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkParentCategory_LinkClicked);
@@ -142,15 +144,13 @@
             this.txtParentCategory.Name = "txtParentCategory";
             this.txtParentCategory.ReadOnly = true;
             this.txtParentCategory.Size = new System.Drawing.Size(248, 21);
-            this.txtParentCategory.TabIndex = 11;
+            this.txtParentCategory.TabIndex = 3;
             this.txtParentCategory.DoubleClick += new System.EventHandler(this.txtParentCategory_DoubleClick);
             // 
             // FrmProductCategoryDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(265, 301);
             this.Controls.Add(this.txtParentCategory);
             this.Controls.Add(this.lnkParentCategory);

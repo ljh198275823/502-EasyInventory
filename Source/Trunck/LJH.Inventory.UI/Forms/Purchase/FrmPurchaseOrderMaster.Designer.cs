@@ -55,7 +55,7 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -285,7 +285,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
-            this.colOrderDate,
+            this.colSheetDate,
             this.colSupplier,
             this.colBuyer,
             this.colDeliveryDate,
@@ -304,18 +304,18 @@
             // 
             // colID
             // 
-            this.colID.HeaderText = "合同号";
+            this.colID.HeaderText = "采购单号";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
             // 
-            // colOrderDate
+            // colSheetDate
             // 
             dataGridViewCellStyle1.Format = "D";
             dataGridViewCellStyle1.NullValue = null;
-            this.colOrderDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colOrderDate.HeaderText = "签订日期";
-            this.colOrderDate.Name = "colOrderDate";
-            this.colOrderDate.ReadOnly = true;
+            this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colSheetDate.HeaderText = "日期";
+            this.colSheetDate.Name = "colSheetDate";
+            this.colSheetDate.ReadOnly = true;
             // 
             // colSupplier
             // 
@@ -413,7 +413,7 @@
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddSheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;

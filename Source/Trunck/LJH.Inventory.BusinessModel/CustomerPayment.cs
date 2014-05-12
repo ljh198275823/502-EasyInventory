@@ -6,7 +6,7 @@ using System.Text;
 namespace LJH.Inventory.BusinessModel
 {
     /// <summary>
-    /// 表示客户付款记录
+    /// 表示客户收款记录
     /// </summary>
     public class CustomerPayment : ISheet<string>
     {
@@ -21,6 +21,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置付款记录ID
         /// </summary>
         public string ID { get; set; }
+        /// <summary>
+        /// 获取或设置单据日期
+        /// </summary>
+        public DateTime SheetDate { get; set; }
         /// <summary>
         /// 获取或设置最近活动日期
         /// </summary>
@@ -42,7 +46,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置已抵销的金额
+        /// 获取或设置已核销的金额
         /// </summary>
         public decimal Assigned { get; set; }
         /// <summary>

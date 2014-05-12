@@ -24,10 +24,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string SheetNo { get; set; }
         /// <summary>
-        /// 获取或设置下单日期
-        /// </summary>
-        public DateTime OrderDate { get; set; }
-        /// <summary>
         /// 获取或设置采购项相关的销售订单
         /// </summary>
         public string OrderID { get; set; }

@@ -88,7 +88,7 @@
             this.txtProduct.Location = new System.Drawing.Point(70, 9);
             this.txtProduct.Name = "txtProduct";
             this.txtProduct.Size = new System.Drawing.Size(201, 21);
-            this.txtProduct.TabIndex = 9;
+            this.txtProduct.TabIndex = 0;
             // 
             // txtCount
             // 
@@ -107,7 +107,7 @@
             this.txtCount.Name = "txtCount";
             this.txtCount.PointCount = 2;
             this.txtCount.Size = new System.Drawing.Size(201, 21);
-            this.txtCount.TabIndex = 51;
+            this.txtCount.TabIndex = 2;
             this.txtCount.Text = "0.00";
             // 
             // label3
@@ -125,7 +125,7 @@
             this.wareHouseComboBox1.Location = new System.Drawing.Point(70, 39);
             this.wareHouseComboBox1.Name = "wareHouseComboBox1";
             this.wareHouseComboBox1.Size = new System.Drawing.Size(201, 20);
-            this.wareHouseComboBox1.TabIndex = 7;
+            this.wareHouseComboBox1.TabIndex = 1;
             this.wareHouseComboBox1.SelectedIndexChanged += new System.EventHandler(this.wareHouseComboBox1_SelectedIndexChanged);
             // 
             // FrmProductInventoryAssign

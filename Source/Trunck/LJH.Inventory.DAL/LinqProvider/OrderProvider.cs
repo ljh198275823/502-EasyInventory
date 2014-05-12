@@ -38,6 +38,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
+                if (con.SheetDate != null) ret = ret.Where(item => item.SheetDate >= con.SheetDate.Begin && item.SheetDate <= con.SheetDate.End);
                 if (con.LastActiveDate != null) ret = ret.Where(item => item.LastActiveDate >= con.LastActiveDate.Begin && item.LastActiveDate <= con.LastActiveDate.End);
                 if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
@@ -47,7 +48,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 OrderSearchCondition con = search as OrderSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.Sales)) ret = ret.Where(item => item.SalesPerson == con.Sales);
-                if (con.OrderDate != null) ret = ret.Where(item => item.OrderDate >= con.OrderDate.Begin && item.OrderDate <= con.OrderDate.End);
                 if (con.WithTax != null)
                 {
                     if (con.WithTax.Value)

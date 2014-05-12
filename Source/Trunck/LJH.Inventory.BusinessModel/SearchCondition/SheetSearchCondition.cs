@@ -12,6 +12,10 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         /// </summary>
         public List<string> SheetNo { get; set; }
         /// <summary>
+        /// 获取或设置单据日期
+        /// </summary>
+        public DateTimeRange SheetDate { get; set; }
+        /// <summary>
         /// 获取或设置录单日期
         /// </summary>
         public DateTimeRange LastActiveDate { get; set; }

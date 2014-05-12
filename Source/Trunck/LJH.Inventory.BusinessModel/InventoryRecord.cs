@@ -67,6 +67,14 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
+        /// 获取或设置是否含税
+        /// </summary>
+        public bool WithTax { get; set; }
+        /// <summary>
+        /// 获取或设置采购人员
+        /// </summary>
+        public string Buyer { get; set; }
+        /// <summary>
         /// 获取或设置状态
         /// </summary>
         public SheetState State { get; set; }

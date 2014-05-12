@@ -81,6 +81,8 @@ namespace LJH.Inventory.BLL
                     {
                         ProductInventoryItem pii = item.Clone();
                         pii.ID = Guid.NewGuid();
+                        pii.OrderItem = si.OrderItem;
+                        pii.OrderID = si.OrderID;
                         pii.DeliveryItem = si.ID;
                         pii.DeliverySheet = si.SheetNo;
                         pii.Count = count;
@@ -91,6 +93,8 @@ namespace LJH.Inventory.BLL
                     }
                     else
                     {
+                        item.OrderItem = si.OrderItem;
+                        item.OrderID = si.OrderID;
                         item.DeliveryItem = si.ID;
                         item.DeliverySheet = si.SheetNo;
                         count -= item.Count;
@@ -161,7 +165,7 @@ namespace LJH.Inventory.BLL
             base.DoNullify(info, unitWork, dt, opt);
 
             //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            ////如果已经有客户付款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
+            ////如果已经有客户收款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
             //CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
             //con.ReceivableID = info.ID;
             //List<CustomerPaymentAssign> assigns = ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).GetItems(con).QueryObjects;

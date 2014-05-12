@@ -104,7 +104,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             ExpenditureRecord info = item as ExpenditureRecord;
             row.Tag = info;
             row.Cells["colID"].Value = info.ID;
-            row.Cells["colLastActiveDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
+            row.Cells["colSheetDate"].Value = info.SheetDate.ToString("yyyy-MM-dd");
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount;
             ExpenditureType et = categoryTree.GetExpenditureType(info.Category);

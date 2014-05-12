@@ -128,7 +128,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabDelivery = new System.Windows.Forms.TabPage();
-            this.chkForbidWhenOverCount = new System.Windows.Forms.CheckBox();
             this.chkForbidWhenNoOrderID = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdFILO = new System.Windows.Forms.RadioButton();
@@ -1199,7 +1198,6 @@
             // tabDelivery
             // 
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
-            this.tabDelivery.Controls.Add(this.chkForbidWhenOverCount);
             this.tabDelivery.Controls.Add(this.chkForbidWhenNoOrderID);
             this.tabDelivery.Controls.Add(this.panel2);
             this.tabDelivery.Controls.Add(this.label1);
@@ -1215,23 +1213,13 @@
             this.tabDelivery.TabIndex = 0;
             this.tabDelivery.Text = "送货单";
             // 
-            // chkForbidWhenOverCount
-            // 
-            this.chkForbidWhenOverCount.AutoSize = true;
-            this.chkForbidWhenOverCount.Location = new System.Drawing.Point(16, 45);
-            this.chkForbidWhenOverCount.Name = "chkForbidWhenOverCount";
-            this.chkForbidWhenOverCount.Size = new System.Drawing.Size(252, 16);
-            this.chkForbidWhenOverCount.TabIndex = 50;
-            this.chkForbidWhenOverCount.Text = "禁止发货，当发货数量超出订单订货数量时";
-            this.chkForbidWhenOverCount.UseVisualStyleBackColor = true;
-            // 
             // chkForbidWhenNoOrderID
             // 
             this.chkForbidWhenNoOrderID.AutoSize = true;
             this.chkForbidWhenNoOrderID.Location = new System.Drawing.Point(16, 18);
             this.chkForbidWhenNoOrderID.Name = "chkForbidWhenNoOrderID";
             this.chkForbidWhenNoOrderID.Size = new System.Drawing.Size(156, 16);
-            this.chkForbidWhenNoOrderID.TabIndex = 49;
+            this.chkForbidWhenNoOrderID.TabIndex = 0;
             this.chkForbidWhenNoOrderID.Text = "送货单项需要指定订单项";
             this.chkForbidWhenNoOrderID.UseVisualStyleBackColor = true;
             // 
@@ -1239,7 +1227,7 @@
             // 
             this.panel2.Controls.Add(this.rdFILO);
             this.panel2.Controls.Add(this.rdFIFO);
-            this.panel2.Location = new System.Drawing.Point(96, 133);
+            this.panel2.Location = new System.Drawing.Point(96, 101);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(242, 26);
             this.panel2.TabIndex = 42;
@@ -1250,7 +1238,7 @@
             this.rdFILO.Location = new System.Drawing.Point(123, 5);
             this.rdFILO.Name = "rdFILO";
             this.rdFILO.Size = new System.Drawing.Size(107, 16);
-            this.rdFILO.TabIndex = 22;
+            this.rdFILO.TabIndex = 7;
             this.rdFILO.Text = "先进后出(FILO)";
             this.rdFILO.UseVisualStyleBackColor = true;
             // 
@@ -1261,7 +1249,7 @@
             this.rdFIFO.Location = new System.Drawing.Point(5, 5);
             this.rdFIFO.Name = "rdFIFO";
             this.rdFIFO.Size = new System.Drawing.Size(107, 16);
-            this.rdFIFO.TabIndex = 21;
+            this.rdFIFO.TabIndex = 6;
             this.rdFIFO.TabStop = true;
             this.rdFIFO.Text = "先进先出(FIFO)";
             this.rdFIFO.UseVisualStyleBackColor = true;
@@ -1269,7 +1257,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 140);
+            this.label1.Location = new System.Drawing.Point(14, 108);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 41;
@@ -1278,7 +1266,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(268, 110);
+            this.label6.Location = new System.Drawing.Point(268, 78);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(245, 12);
             this.label6.TabIndex = 40;
@@ -1287,18 +1275,18 @@
             // txtDeadlineDays
             // 
             this.txtDeadlineDays.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 106);
+            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 74);
             this.txtDeadlineDays.MaxValue = 2147483647;
             this.txtDeadlineDays.MinValue = 0;
             this.txtDeadlineDays.Name = "txtDeadlineDays";
             this.txtDeadlineDays.Size = new System.Drawing.Size(45, 21);
-            this.txtDeadlineDays.TabIndex = 39;
+            this.txtDeadlineDays.TabIndex = 5;
             this.txtDeadlineDays.Text = "7";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 110);
+            this.label5.Location = new System.Drawing.Point(14, 78);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(185, 12);
             this.label5.TabIndex = 38;
@@ -1309,7 +1297,7 @@
             this.panel1.Controls.Add(this.rdForbid);
             this.panel1.Controls.Add(this.rdNone);
             this.panel1.Controls.Add(this.rdReminder);
-            this.panel1.Location = new System.Drawing.Point(217, 73);
+            this.panel1.Location = new System.Drawing.Point(217, 41);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(242, 26);
             this.panel1.TabIndex = 36;
@@ -1320,7 +1308,7 @@
             this.rdForbid.Location = new System.Drawing.Point(144, 5);
             this.rdForbid.Name = "rdForbid";
             this.rdForbid.Size = new System.Drawing.Size(71, 16);
-            this.rdForbid.TabIndex = 22;
+            this.rdForbid.TabIndex = 4;
             this.rdForbid.Text = "禁止发货";
             this.rdForbid.UseVisualStyleBackColor = true;
             // 
@@ -1330,7 +1318,7 @@
             this.rdNone.Location = new System.Drawing.Point(5, 5);
             this.rdNone.Name = "rdNone";
             this.rdNone.Size = new System.Drawing.Size(47, 16);
-            this.rdNone.TabIndex = 20;
+            this.rdNone.TabIndex = 2;
             this.rdNone.Text = "忽略";
             this.rdNone.UseVisualStyleBackColor = true;
             // 
@@ -1341,7 +1329,7 @@
             this.rdReminder.Location = new System.Drawing.Point(70, 5);
             this.rdReminder.Name = "rdReminder";
             this.rdReminder.Size = new System.Drawing.Size(59, 16);
-            this.rdReminder.TabIndex = 21;
+            this.rdReminder.TabIndex = 3;
             this.rdReminder.TabStop = true;
             this.rdReminder.Text = "提醒我";
             this.rdReminder.UseVisualStyleBackColor = true;
@@ -1349,7 +1337,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 80);
+            this.label7.Location = new System.Drawing.Point(14, 48);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(197, 12);
             this.label7.TabIndex = 35;
@@ -1367,7 +1355,7 @@
             this.tab1.Name = "tab1";
             this.tab1.SelectedIndex = 0;
             this.tab1.Size = new System.Drawing.Size(571, 384);
-            this.tab1.TabIndex = 31;
+            this.tab1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -1400,7 +1388,7 @@
             this.txtForeignName.MaxLength = 100;
             this.txtForeignName.Name = "txtForeignName";
             this.txtForeignName.Size = new System.Drawing.Size(412, 21);
-            this.txtForeignName.TabIndex = 89;
+            this.txtForeignName.TabIndex = 1;
             // 
             // label31
             // 
@@ -1427,7 +1415,7 @@
             this.txtAddress.MaxLength = 100;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(412, 21);
-            this.txtAddress.TabIndex = 87;
+            this.txtAddress.TabIndex = 6;
             // 
             // label74
             // 
@@ -1445,7 +1433,7 @@
             this.txtWeb.MaxLength = 100;
             this.txtWeb.Name = "txtWeb";
             this.txtWeb.Size = new System.Drawing.Size(178, 21);
-            this.txtWeb.TabIndex = 85;
+            this.txtWeb.TabIndex = 5;
             // 
             // label75
             // 
@@ -1463,7 +1451,7 @@
             this.txtPost.MaxLength = 100;
             this.txtPost.Name = "txtPost";
             this.txtPost.Size = new System.Drawing.Size(178, 21);
-            this.txtPost.TabIndex = 83;
+            this.txtPost.TabIndex = 4;
             // 
             // label76
             // 
@@ -1481,7 +1469,7 @@
             this.txtFax.MaxLength = 100;
             this.txtFax.Name = "txtFax";
             this.txtFax.Size = new System.Drawing.Size(178, 21);
-            this.txtFax.TabIndex = 81;
+            this.txtFax.TabIndex = 3;
             // 
             // label77
             // 
@@ -1499,7 +1487,7 @@
             this.txtTelphone.MaxLength = 100;
             this.txtTelphone.Name = "txtTelphone";
             this.txtTelphone.Size = new System.Drawing.Size(178, 21);
-            this.txtTelphone.TabIndex = 79;
+            this.txtTelphone.TabIndex = 2;
             // 
             // txtName
             // 
@@ -1508,7 +1496,7 @@
             this.txtName.MaxLength = 100;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(412, 21);
-            this.txtName.TabIndex = 77;
+            this.txtName.TabIndex = 0;
             // 
             // label78
             // 
@@ -1653,7 +1641,6 @@
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.CheckBox chkForbidWhenOverCount;
         private System.Windows.Forms.CheckBox chkForbidWhenNoOrderID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label67;

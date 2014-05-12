@@ -40,7 +40,7 @@ namespace LJH.Inventory.UI.Report
 
         private void ShowItemOnRow(DataGridViewRow row, Order item)
         {
-            row.Cells["colOrderDate"].Value = item.OrderDate .ToLongDateString ();
+            row.Cells["colOrderDate"].Value = item.SheetDate .ToLongDateString ();
             row.Cells["colOrderID"].Value = item.ID;
             //row.Cells["colCustomer"].Value =item.Customer !=null ?item.Customer.Name:string.Empty ;
             //row.Cells["colFinalCustomer"].Value = item.FinalCustomer != null ? item.FinalCustomer.Name : string.Empty;

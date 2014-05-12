@@ -57,7 +57,7 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCurrencyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -287,7 +287,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
-            this.colCreateDate,
+            this.colSheetDate,
             this.colCustomer,
             this.colCurrencyType,
             this.colAmount,
@@ -312,11 +312,11 @@
             this.colID.ReadOnly = true;
             this.colID.Width = 120;
             // 
-            // colCreateDate
+            // colSheetDate
             // 
-            this.colCreateDate.HeaderText = "创建日期";
-            this.colCreateDate.Name = "colCreateDate";
-            this.colCreateDate.ReadOnly = true;
+            this.colSheetDate.HeaderText = "日期";
+            this.colSheetDate.Name = "colSheetDate";
+            this.colSheetDate.ReadOnly = true;
             // 
             // colCustomer
             // 
@@ -431,7 +431,7 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCurrencyType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;

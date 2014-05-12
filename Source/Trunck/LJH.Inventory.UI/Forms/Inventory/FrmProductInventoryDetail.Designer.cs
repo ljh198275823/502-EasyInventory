@@ -44,10 +44,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(186, 160);
+            this.btnClose.TabIndex = 8;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(99, 160);
+            this.btnOk.TabIndex = 7;
             // 
             // txtProductID
             // 
@@ -56,7 +58,7 @@
             this.txtProductID.Name = "txtProductID";
             this.txtProductID.ReadOnly = true;
             this.txtProductID.Size = new System.Drawing.Size(184, 21);
-            this.txtProductID.TabIndex = 1;
+            this.txtProductID.TabIndex = 3;
             this.txtProductID.DoubleClick += new System.EventHandler(this.txtProductID_DoubleClick);
             // 
             // label4
@@ -85,7 +87,7 @@
             this.txtCost.Name = "txtCost";
             this.txtCost.PointCount = 2;
             this.txtCost.Size = new System.Drawing.Size(184, 21);
-            this.txtCost.TabIndex = 3;
+            this.txtCost.TabIndex = 4;
             this.txtCost.Text = "0.00";
             this.txtCost.TextChanged += new System.EventHandler(this.txtCount_TextChanged);
             // 
@@ -106,7 +108,7 @@
             this.txtCount.Name = "txtCount";
             this.txtCount.PointCount = 2;
             this.txtCount.Size = new System.Drawing.Size(184, 21);
-            this.txtCount.TabIndex = 4;
+            this.txtCount.TabIndex = 5;
             this.txtCount.Text = "0.00";
             this.txtCount.TextChanged += new System.EventHandler(this.txtCount_TextChanged);
             // 
@@ -137,7 +139,7 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.PointCount = 2;
             this.txtAmount.Size = new System.Drawing.Size(184, 21);
-            this.txtAmount.TabIndex = 5;
+            this.txtAmount.TabIndex = 6;
             this.txtAmount.Text = "0.00";
             // 
             // label6
@@ -155,7 +157,7 @@
             this.lnkProduct.Location = new System.Drawing.Point(35, 42);
             this.lnkProduct.Name = "lnkProduct";
             this.lnkProduct.Size = new System.Drawing.Size(41, 12);
-            this.lnkProduct.TabIndex = 13;
+            this.lnkProduct.TabIndex = 2;
             this.lnkProduct.TabStop = true;
             this.lnkProduct.Text = "商品：";
             this.lnkProduct.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProduct_LinkClicked);
@@ -166,7 +168,7 @@
             this.lnkWarehouse.Location = new System.Drawing.Point(35, 14);
             this.lnkWarehouse.Name = "lnkWarehouse";
             this.lnkWarehouse.Size = new System.Drawing.Size(41, 12);
-            this.lnkWarehouse.TabIndex = 14;
+            this.lnkWarehouse.TabIndex = 0;
             this.lnkWarehouse.TabStop = true;
             this.lnkWarehouse.Text = "仓库：";
             this.lnkWarehouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWarehouse_LinkClicked);
@@ -178,15 +180,13 @@
             this.txtWareHouseID.Name = "txtWareHouseID";
             this.txtWareHouseID.ReadOnly = true;
             this.txtWareHouseID.Size = new System.Drawing.Size(184, 21);
-            this.txtWareHouseID.TabIndex = 15;
+            this.txtWareHouseID.TabIndex = 1;
             this.txtWareHouseID.DoubleClick += new System.EventHandler(this.txtWareHouseID_DoubleClick);
             // 
             // FrmProductInventoryDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(273, 195);
             this.Controls.Add(this.txtWareHouseID);
             this.Controls.Add(this.lnkWarehouse);

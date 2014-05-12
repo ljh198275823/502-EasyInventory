@@ -136,7 +136,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
                 txtBuyer.Focus();
                 return false;
             }
-            if (dtDemandDate.Value == new DateTime(2000, 1, 1))
+            if (dtDemandDate.IsNull)
             {
                 MessageBox.Show("没有指定交货日期");
                 dtDemandDate.Focus();
@@ -170,7 +170,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
-            this.dtDemandDate.Value = new DateTime(2000, 1, 1);
+            this.dtDemandDate.IsNull = true;
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
@@ -189,7 +189,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
                 this.txtSheetNo.Enabled = false;
                 Supplier = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.SupplierID).QueryObject;
                 this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
-                this.dtOrderDate.Value = item.OrderDate;
+                this.dtSheetDate.Value = item.SheetDate;
                 this.txtBuyer.Text = item.Buyer;
                 this.rdWithTax.Checked = item.WithTax;
                 this.rdWithoutTax.Checked = !item.WithTax;
@@ -213,7 +213,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
             {
                 PurchaseSheet = UpdatingItem as PurchaseOrder;
             }
-            PurchaseSheet.OrderDate = this.dtOrderDate.Value;
+            PurchaseSheet.SheetDate = this.dtSheetDate.Value;
             PurchaseSheet.SupplierID = Supplier.ID;
             PurchaseSheet.Buyer = this.txtBuyer.Text;
             PurchaseSheet.DemandDate = this.dtDemandDate.Value;

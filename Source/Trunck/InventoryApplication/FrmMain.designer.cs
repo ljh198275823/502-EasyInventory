@@ -382,7 +382,7 @@
             // 
             this.mnu_CustomerPayment.Name = "mnu_CustomerPayment";
             this.mnu_CustomerPayment.Size = new System.Drawing.Size(172, 22);
-            this.mnu_CustomerPayment.Text = "客户付款流水";
+            this.mnu_CustomerPayment.Text = "客户收款流水";
             this.mnu_CustomerPayment.Click += new System.EventHandler(this.mnu_CustomerPayment_Click);
             // 
             // mnu_Expanditure
@@ -390,6 +390,7 @@
             this.mnu_Expanditure.Name = "mnu_Expanditure";
             this.mnu_Expanditure.Size = new System.Drawing.Size(172, 22);
             this.mnu_Expanditure.Text = "公司管理费用";
+            this.mnu_Expanditure.Visible = false;
             this.mnu_Expanditure.Click += new System.EventHandler(this.mnu_Expanditure_Click);
             // 
             // toolStripSeparator1

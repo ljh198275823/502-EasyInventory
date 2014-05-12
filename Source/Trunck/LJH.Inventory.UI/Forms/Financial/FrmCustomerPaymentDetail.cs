@@ -91,7 +91,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
-                dtPaidDate.Value = item.LastActiveDate;
+                dtSheetDate.Value = item.SheetDate;
                 rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
                 rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
                 rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
@@ -119,7 +119,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 info = UpdatingItem as CustomerPayment;
             }
             if (txtID.Text == _AutoCreate) info.ID = string.Empty;
-            info.LastActiveDate = dtPaidDate.Value;
+            info.SheetDate = dtSheetDate.Value;
             if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
             if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
@@ -200,7 +200,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                string msg = "\"取消审核\"的操作会删除此付款的所有应收抵销项删除，是否继续?";
+                string msg = "\"取消审核\"的操作会删除此收款的所有应收核销项删除，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
@@ -230,7 +230,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                string msg = "\"作废\"的操作会删除此付款的所有应收抵销项删除，是否继续?";
+                string msg = "\"作废\"的操作会删除此收款的所有应收核销项删除，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
@@ -260,7 +260,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<DataGridViewRow> delRows = new List<DataGridViewRow>();
             if (ItemsGrid.SelectedRows != null && ItemsGrid.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show("是否要取消此应收抵销?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("是否要取消此应收核销?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
                     {

@@ -19,6 +19,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ID { get; set; }
         /// <summary>
+        /// 获取或设置单据日期
+        /// </summary>
+        public DateTime SheetDate { get; set; }
+        /// <summary>
         /// 获取或设置最近活动时间
         /// </summary>
         public DateTime LastActiveDate { get; set; }
@@ -30,10 +34,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置是否含税
         /// </summary>
         public bool WithTax { get; set; }
-        /// <summary>
-        /// 获取或设置下单日期
-        /// </summary>
-        public DateTime OrderDate { get; set; }
         /// <summary>
         /// 获取或设置订单要求的发货日期
         /// </summary>

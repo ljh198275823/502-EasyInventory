@@ -50,7 +50,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(319, 43);
-            this.txtMemo.TabIndex = 24;
+            this.txtMemo.TabIndex = 1;
             // 
             // label2
             // 
@@ -67,7 +67,7 @@
             this.txtName.Location = new System.Drawing.Point(52, 16);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(119, 21);
-            this.txtName.TabIndex = 22;
+            this.txtName.TabIndex = 0;
             // 
             // label3
             // 
@@ -80,10 +80,8 @@
             // 
             // FrmTransportDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(378, 155);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label2);

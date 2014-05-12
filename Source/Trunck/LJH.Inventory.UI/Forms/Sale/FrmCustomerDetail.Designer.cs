@@ -133,7 +133,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(604, 262);
-            this.tabControl1.TabIndex = 51;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage6
             // 
@@ -182,7 +182,7 @@
             this.txtMemo.MaxLength = 100;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(377, 21);
-            this.txtMemo.TabIndex = 79;
+            this.txtMemo.TabIndex = 10;
             // 
             // label10
             // 
@@ -200,7 +200,7 @@
             this.txtCity.MaxLength = 100;
             this.txtCity.Name = "txtCity";
             this.txtCity.Size = new System.Drawing.Size(143, 21);
-            this.txtCity.TabIndex = 77;
+            this.txtCity.TabIndex = 4;
             // 
             // label9
             // 
@@ -218,7 +218,7 @@
             this.txtAddress.MaxLength = 100;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(377, 21);
-            this.txtAddress.TabIndex = 75;
+            this.txtAddress.TabIndex = 9;
             // 
             // label8
             // 
@@ -236,7 +236,7 @@
             this.txtWeb.MaxLength = 100;
             this.txtWeb.Name = "txtWeb";
             this.txtWeb.Size = new System.Drawing.Size(143, 21);
-            this.txtWeb.TabIndex = 73;
+            this.txtWeb.TabIndex = 8;
             // 
             // label7
             // 
@@ -254,7 +254,7 @@
             this.txtPost.MaxLength = 100;
             this.txtPost.Name = "txtPost";
             this.txtPost.Size = new System.Drawing.Size(143, 21);
-            this.txtPost.TabIndex = 71;
+            this.txtPost.TabIndex = 7;
             // 
             // label6
             // 
@@ -272,7 +272,7 @@
             this.txtFax.MaxLength = 100;
             this.txtFax.Name = "txtFax";
             this.txtFax.Size = new System.Drawing.Size(143, 21);
-            this.txtFax.TabIndex = 69;
+            this.txtFax.TabIndex = 6;
             // 
             // label2
             // 
@@ -290,7 +290,7 @@
             this.txtTelphone.MaxLength = 100;
             this.txtTelphone.Name = "txtTelphone";
             this.txtTelphone.Size = new System.Drawing.Size(143, 21);
-            this.txtTelphone.TabIndex = 67;
+            this.txtTelphone.TabIndex = 5;
             // 
             // lblCategory
             // 
@@ -298,7 +298,7 @@
             this.lblCategory.Location = new System.Drawing.Point(252, 19);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(53, 12);
-            this.lblCategory.TabIndex = 62;
+            this.lblCategory.TabIndex = 0;
             this.lblCategory.TabStop = true;
             this.lblCategory.Text = "客户类别";
             this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
@@ -319,7 +319,7 @@
             this.txtNation.MaxLength = 100;
             this.txtNation.Name = "txtNation";
             this.txtNation.Size = new System.Drawing.Size(143, 21);
-            this.txtNation.TabIndex = 54;
+            this.txtNation.TabIndex = 3;
             // 
             // txtCategory
             // 
@@ -329,7 +329,7 @@
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(143, 21);
-            this.txtCategory.TabIndex = 53;
+            this.txtCategory.TabIndex = 1;
             this.txtCategory.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
             // 
             // txtName
@@ -339,7 +339,7 @@
             this.txtName.MaxLength = 100;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(377, 21);
-            this.txtName.TabIndex = 52;
+            this.txtName.TabIndex = 2;
             // 
             // label3
             // 
@@ -357,7 +357,7 @@
             this.txtID.MaxLength = 100;
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(143, 21);
-            this.txtID.TabIndex = 51;
+            this.txtID.TabIndex = 11;
             this.txtID.Text = "自动创建";
             // 
             // label1
@@ -585,10 +585,8 @@
             // 
             // FrmCustomerDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(622, 316);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmCustomerDetail";

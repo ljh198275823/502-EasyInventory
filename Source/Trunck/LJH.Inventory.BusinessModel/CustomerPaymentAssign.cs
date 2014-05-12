@@ -6,7 +6,7 @@ using System.Text;
 namespace LJH.Inventory.BusinessModel
 {
     /// <summary>
-    /// 表示客户付款与客户应收账款之间的分配
+    /// 表示客户收款与客户应收账款之间的分配
     /// </summary>
     public class CustomerPaymentAssign : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
@@ -22,7 +22,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid ID { get; set; }
         /// <summary>
-        /// 获取或设置客户付款ID
+        /// 获取或设置客户收款ID
         /// </summary>
         public string PaymentID { get; set; }
         /// <summary>

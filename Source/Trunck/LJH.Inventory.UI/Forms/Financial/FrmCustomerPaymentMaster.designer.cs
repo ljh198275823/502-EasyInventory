@@ -58,6 +58,7 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -249,6 +250,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
+            this.colSheetDate,
             this.colCustomer,
             this.colPaymentMode,
             this.colCheckNum,
@@ -296,7 +298,7 @@
             // 
             this.mnu_Assign.Name = "mnu_Assign";
             this.mnu_Assign.Size = new System.Drawing.Size(133, 22);
-            this.mnu_Assign.Text = "抵销应收...";
+            this.mnu_Assign.Text = "核销应收...";
             this.mnu_Assign.Click += new System.EventHandler(this.mnu_Assign_Click);
             // 
             // toolStripSeparator3
@@ -321,6 +323,12 @@
             this.colID.HeaderText = "付款流水号";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
+            // 
+            // colSheetDate
+            // 
+            this.colSheetDate.HeaderText = "日期";
+            this.colSheetDate.Name = "colSheetDate";
+            this.colSheetDate.ReadOnly = true;
             // 
             // colCustomer
             // 
@@ -357,7 +365,7 @@
             dataGridViewCellStyle2.Format = "C2";
             dataGridViewCellStyle2.NullValue = null;
             this.colAssigned.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAssigned.HeaderText = "已抵销应收";
+            this.colAssigned.HeaderText = "已核销应收";
             this.colAssigned.Name = "colAssigned";
             this.colAssigned.ReadOnly = true;
             // 
@@ -366,7 +374,7 @@
             dataGridViewCellStyle3.Format = "C2";
             dataGridViewCellStyle3.NullValue = null;
             this.colRemain.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colRemain.HeaderText = "未抵销金额";
+            this.colRemain.HeaderText = "未核销金额";
             this.colRemain.Name = "colRemain";
             this.colRemain.ReadOnly = true;
             // 
@@ -396,7 +404,7 @@
             this.Controls.Add(this.pnlFilter);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerPaymentMaster";
-            this.Text = "客户付款流水";
+            this.Text = "客户收款流水";
             this.Controls.SetChildIndex(this.pnlFilter, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);
@@ -442,6 +450,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_Add;
         private System.Windows.Forms.ToolStripMenuItem mnu_Assign;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckNum;

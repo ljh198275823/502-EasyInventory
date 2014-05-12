@@ -22,6 +22,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ID { get; set; }
         /// <summary>
+        /// 获取或设置单据日期
+        /// </summary>
+        public DateTime SheetDate { get; set; }
+        /// <summary>
         /// 获取或设置最近活动日期
         /// </summary>
         public DateTime LastActiveDate { get; set; }

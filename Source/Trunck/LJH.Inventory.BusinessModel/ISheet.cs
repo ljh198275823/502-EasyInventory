@@ -15,6 +15,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         string DocumentType { get; }
         /// <summary>
+        /// 获取或设置单据日期
+        /// </summary>
+        DateTime SheetDate { get; set; }
+        /// <summary>
         /// 获取或设置上次活动时间
         /// </summary>
         DateTime LastActiveDate { get; set; }

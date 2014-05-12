@@ -40,10 +40,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(300, 125);
+            this.btnClose.TabIndex = 5;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(191, 125);
+            this.btnOk.TabIndex = 4;
             // 
             // txtParentCategory
             // 
@@ -53,7 +55,7 @@
             this.txtParentCategory.Name = "txtParentCategory";
             this.txtParentCategory.ReadOnly = true;
             this.txtParentCategory.Size = new System.Drawing.Size(311, 21);
-            this.txtParentCategory.TabIndex = 44;
+            this.txtParentCategory.TabIndex = 2;
             this.txtParentCategory.DoubleClick += new System.EventHandler(this.txtParentCategory_DoubleClick);
             // 
             // lnkParentCategory
@@ -62,7 +64,7 @@
             this.lnkParentCategory.Location = new System.Drawing.Point(10, 52);
             this.lnkParentCategory.Name = "lnkParentCategory";
             this.lnkParentCategory.Size = new System.Drawing.Size(53, 12);
-            this.lnkParentCategory.TabIndex = 43;
+            this.lnkParentCategory.TabIndex = 1;
             this.lnkParentCategory.TabStop = true;
             this.lnkParentCategory.Text = "上级部门";
             this.lnkParentCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkParentCategory_LinkClicked);
@@ -74,7 +76,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(311, 21);
-            this.txtMemo.TabIndex = 40;
+            this.txtMemo.TabIndex = 3;
             // 
             // label2
             // 
@@ -91,7 +93,7 @@
             this.txtName.Location = new System.Drawing.Point(66, 19);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(311, 21);
-            this.txtName.TabIndex = 39;
+            this.txtName.TabIndex = 0;
             // 
             // label3
             // 

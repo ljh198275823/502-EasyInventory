@@ -40,7 +40,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dtCreateDate = new System.Windows.Forms.DateTimePicker();
+            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
             this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,7 +88,7 @@
             this.txtMemo.Location = new System.Drawing.Point(72, 108);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(371, 21);
-            this.txtMemo.TabIndex = 44;
+            this.txtMemo.TabIndex = 4;
             // 
             // txtAmount
             // 
@@ -107,7 +107,7 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.PointCount = 2;
             this.txtAmount.Size = new System.Drawing.Size(164, 21);
-            this.txtAmount.TabIndex = 41;
+            this.txtAmount.TabIndex = 3;
             this.txtAmount.Text = "0.00";
             // 
             // label5
@@ -131,7 +131,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(648, 169);
-            this.tabControl1.TabIndex = 91;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -144,7 +144,7 @@
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.dtCreateDate);
+            this.tabPage1.Controls.Add(this.dtSheetDate);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -160,7 +160,7 @@
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(412, 21);
-            this.txtCustomer.TabIndex = 6;
+            this.txtCustomer.TabIndex = 2;
             // 
             // lnkCustomer
             // 
@@ -168,7 +168,7 @@
             this.lnkCustomer.Location = new System.Drawing.Point(37, 47);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
-            this.lnkCustomer.TabIndex = 108;
+            this.lnkCustomer.TabIndex = 1;
             this.lnkCustomer.TabStop = true;
             this.lnkCustomer.Text = "客户";
             this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
@@ -203,18 +203,18 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(261, 17);
+            this.label4.Location = new System.Drawing.Point(288, 17);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 32;
-            this.label4.Text = "创建日期";
+            this.label4.Text = "日期";
             // 
-            // dtCreateDate
+            // dtSheetDate
             // 
-            this.dtCreateDate.Location = new System.Drawing.Point(320, 13);
-            this.dtCreateDate.Name = "dtCreateDate";
-            this.dtCreateDate.Size = new System.Drawing.Size(164, 21);
-            this.dtCreateDate.TabIndex = 0;
+            this.dtSheetDate.Location = new System.Drawing.Point(320, 13);
+            this.dtSheetDate.Name = "dtSheetDate";
+            this.dtSheetDate.Size = new System.Drawing.Size(164, 21);
+            this.dtSheetDate.TabIndex = 0;
             // 
             // tabPage5
             // 
@@ -442,10 +442,8 @@
             // 
             // FrmCustomerOtherReceivableDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(656, 232);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
@@ -483,7 +481,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dtCreateDate;
+        private System.Windows.Forms.DateTimePicker dtSheetDate;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridView1;

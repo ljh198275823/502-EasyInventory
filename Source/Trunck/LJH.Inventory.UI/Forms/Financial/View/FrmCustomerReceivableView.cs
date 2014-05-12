@@ -41,7 +41,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         protected override List<object> GetDataSource()
         {
-            List<CustomerReceivable> items=null ;
+            List<CustomerReceivable> items = null;
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
@@ -66,10 +66,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colClassID"].Value = cr.ClassID;
-            row.Cells["colRemain"].Value = cr.Remain;
+            row.Cells["colAmount"].Value = cr.Amount.Trim();
+            row.Cells["colHaspaid"].Value = cr.Haspaid.Trim();
+            row.Cells["colNotpaid"].Value = cr.Remain.Trim();
             int days = DaysBetween(DateTime.Today, cr.CreateDate);
             row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
-            row.Cells["colMemo"].Value = cr.Memo;
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
@@ -77,7 +78,9 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             base.ShowItemsOnGrid(items);
             int rowTotal = GridView.Rows.Add();
             GridView.Rows[rowTotal].Cells["colCreateDate"].Value = "合计";
-            GridView.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as CustomerReceivable).Remain);
+            GridView.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerReceivable).Amount).Trim();
+            GridView.Rows[rowTotal].Cells["colHaspaid"].Value = items.Sum(item => (item as CustomerReceivable).Haspaid).Trim();
+            GridView.Rows[rowTotal].Cells["colNotpaid"].Value = items.Sum(item => (item as CustomerReceivable).Remain).Trim();
         }
         #endregion
     }

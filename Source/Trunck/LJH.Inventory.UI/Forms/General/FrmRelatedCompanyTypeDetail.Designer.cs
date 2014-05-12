@@ -40,10 +40,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(297, 137);
+            this.btnClose.TabIndex = 5;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(186, 137);
+            this.btnOk.TabIndex = 4;
             // 
             // txtMemo
             // 
@@ -52,7 +54,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(319, 43);
-            this.txtMemo.TabIndex = 38;
+            this.txtMemo.TabIndex = 3;
             // 
             // label2
             // 
@@ -69,7 +71,7 @@
             this.txtName.Location = new System.Drawing.Point(52, 13);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(319, 21);
-            this.txtName.TabIndex = 37;
+            this.txtName.TabIndex = 0;
             // 
             // label3
             // 
@@ -88,7 +90,7 @@
             this.txtParentCategory.Name = "txtParentCategory";
             this.txtParentCategory.ReadOnly = true;
             this.txtParentCategory.Size = new System.Drawing.Size(319, 21);
-            this.txtParentCategory.TabIndex = 44;
+            this.txtParentCategory.TabIndex = 2;
             this.txtParentCategory.DoubleClick += new System.EventHandler(this.txtParentCategory_DoubleClick);
             // 
             // lnkParentCategory
@@ -97,7 +99,7 @@
             this.lnkParentCategory.Location = new System.Drawing.Point(3, 48);
             this.lnkParentCategory.Name = "lnkParentCategory";
             this.lnkParentCategory.Size = new System.Drawing.Size(41, 12);
-            this.lnkParentCategory.TabIndex = 43;
+            this.lnkParentCategory.TabIndex = 1;
             this.lnkParentCategory.TabStop = true;
             this.lnkParentCategory.Text = "父类别";
             this.lnkParentCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkParentCategory_LinkClicked);

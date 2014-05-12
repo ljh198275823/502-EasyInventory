@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dtHireDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.btnChangePwd = new System.Windows.Forms.Button();
             this.comRoleList = new LJH.Inventory.UI.Controls.RoleComboBox(this.components);
             this.txtPassword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -47,7 +48,6 @@
             this.rdResign = new System.Windows.Forms.RadioButton();
             this.rdUnResign = new System.Windows.Forms.RadioButton();
             this.label8 = new System.Windows.Forms.Label();
-            this.dtHireDate = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.btnDelPhoto = new System.Windows.Forms.Button();
             this.btnBrowserPhoto = new System.Windows.Forms.Button();
@@ -69,10 +69,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(466, 277);
+            this.btnClose.TabIndex = 17;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(357, 277);
+            this.btnOk.TabIndex = 16;
             // 
             // tabControl1
             // 
@@ -84,10 +86,11 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(535, 259);
-            this.tabControl1.TabIndex = 35;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dtHireDate);
             this.tabPage1.Controls.Add(this.btnChangePwd);
             this.tabPage1.Controls.Add(this.comRoleList);
             this.tabPage1.Controls.Add(this.txtPassword);
@@ -100,7 +103,6 @@
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.dtHireDate);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.btnDelPhoto);
             this.tabPage1.Controls.Add(this.btnBrowserPhoto);
@@ -120,12 +122,20 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dtHireDate
+            // 
+            this.dtHireDate.CustomFormat = "yyyy-MM-dd";
+            this.dtHireDate.Location = new System.Drawing.Point(59, 107);
+            this.dtHireDate.Name = "dtHireDate";
+            this.dtHireDate.Size = new System.Drawing.Size(121, 21);
+            this.dtHireDate.TabIndex = 78;
+            // 
             // btnChangePwd
             // 
             this.btnChangePwd.Location = new System.Drawing.Point(326, 139);
             this.btnChangePwd.Name = "btnChangePwd";
             this.btnChangePwd.Size = new System.Drawing.Size(28, 23);
-            this.btnChangePwd.TabIndex = 79;
+            this.btnChangePwd.TabIndex = 12;
             this.btnChangePwd.Text = "改";
             this.btnChangePwd.UseVisualStyleBackColor = true;
             // 
@@ -135,7 +145,7 @@
             this.comRoleList.Location = new System.Drawing.Point(59, 169);
             this.comRoleList.Name = "comRoleList";
             this.comRoleList.Size = new System.Drawing.Size(121, 20);
-            this.comRoleList.TabIndex = 78;
+            this.comRoleList.TabIndex = 13;
             // 
             // txtPassword
             // 
@@ -144,7 +154,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(96, 21);
-            this.txtPassword.TabIndex = 76;
+            this.txtPassword.TabIndex = 11;
             // 
             // txtOperatorID
             // 
@@ -152,7 +162,7 @@
             this.txtOperatorID.Location = new System.Drawing.Point(59, 139);
             this.txtOperatorID.Name = "txtOperatorID";
             this.txtOperatorID.Size = new System.Drawing.Size(121, 21);
-            this.txtOperatorID.TabIndex = 73;
+            this.txtOperatorID.TabIndex = 10;
             // 
             // label2
             // 
@@ -187,7 +197,7 @@
             this.txtDepartment.Name = "txtDepartment";
             this.txtDepartment.ReadOnly = true;
             this.txtDepartment.Size = new System.Drawing.Size(121, 21);
-            this.txtDepartment.TabIndex = 58;
+            this.txtDepartment.TabIndex = 3;
             this.txtDepartment.DoubleClick += new System.EventHandler(this.txtDepartment_DoubleClick);
             // 
             // lnkDepartment
@@ -196,7 +206,7 @@
             this.lnkDepartment.Location = new System.Drawing.Point(24, 46);
             this.lnkDepartment.Name = "lnkDepartment";
             this.lnkDepartment.Size = new System.Drawing.Size(29, 12);
-            this.lnkDepartment.TabIndex = 57;
+            this.lnkDepartment.TabIndex = 2;
             this.lnkDepartment.TabStop = true;
             this.lnkDepartment.Text = "部门";
             this.lnkDepartment.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDepartment_LinkClicked);
@@ -216,7 +226,7 @@
             this.rdFemale.Location = new System.Drawing.Point(55, 4);
             this.rdFemale.Name = "rdFemale";
             this.rdFemale.Size = new System.Drawing.Size(35, 16);
-            this.rdFemale.TabIndex = 5;
+            this.rdFemale.TabIndex = 6;
             this.rdFemale.Text = "女";
             this.rdFemale.UseVisualStyleBackColor = true;
             // 
@@ -227,7 +237,7 @@
             this.rdMale.Location = new System.Drawing.Point(2, 4);
             this.rdMale.Name = "rdMale";
             this.rdMale.Size = new System.Drawing.Size(35, 16);
-            this.rdMale.TabIndex = 4;
+            this.rdMale.TabIndex = 5;
             this.rdMale.TabStop = true;
             this.rdMale.Text = "男";
             this.rdMale.UseVisualStyleBackColor = true;
@@ -247,7 +257,7 @@
             this.rdResign.Location = new System.Drawing.Point(59, 4);
             this.rdResign.Name = "rdResign";
             this.rdResign.Size = new System.Drawing.Size(47, 16);
-            this.rdResign.TabIndex = 12;
+            this.rdResign.TabIndex = 9;
             this.rdResign.Text = "离职";
             this.rdResign.UseVisualStyleBackColor = true;
             // 
@@ -258,7 +268,7 @@
             this.rdUnResign.Location = new System.Drawing.Point(4, 4);
             this.rdUnResign.Name = "rdUnResign";
             this.rdUnResign.Size = new System.Drawing.Size(47, 16);
-            this.rdUnResign.TabIndex = 10;
+            this.rdUnResign.TabIndex = 8;
             this.rdUnResign.TabStop = true;
             this.rdUnResign.Text = "在职";
             this.rdUnResign.UseVisualStyleBackColor = true;
@@ -272,13 +282,6 @@
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 52;
             this.label8.Text = "性别";
-            // 
-            // dtHireDate
-            // 
-            this.dtHireDate.Location = new System.Drawing.Point(59, 106);
-            this.dtHireDate.Name = "dtHireDate";
-            this.dtHireDate.Size = new System.Drawing.Size(121, 21);
-            this.dtHireDate.TabIndex = 8;
             // 
             // label7
             // 
@@ -295,7 +298,7 @@
             this.btnDelPhoto.Location = new System.Drawing.Point(363, 187);
             this.btnDelPhoto.Name = "btnDelPhoto";
             this.btnDelPhoto.Size = new System.Drawing.Size(75, 23);
-            this.btnDelPhoto.TabIndex = 13;
+            this.btnDelPhoto.TabIndex = 14;
             this.btnDelPhoto.Text = "删除相片";
             this.btnDelPhoto.UseVisualStyleBackColor = true;
             this.btnDelPhoto.Click += new System.EventHandler(this.btnDelPhoto_Click);
@@ -305,7 +308,7 @@
             this.btnBrowserPhoto.Location = new System.Drawing.Point(444, 188);
             this.btnBrowserPhoto.Name = "btnBrowserPhoto";
             this.btnBrowserPhoto.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowserPhoto.TabIndex = 14;
+            this.btnBrowserPhoto.TabIndex = 15;
             this.btnBrowserPhoto.Text = "查找相片";
             this.btnBrowserPhoto.UseVisualStyleBackColor = true;
             this.btnBrowserPhoto.Click += new System.EventHandler(this.btnBrowserPhoto_Click);
@@ -337,7 +340,7 @@
             this.txtUserPosition.MaxLength = 20;
             this.txtUserPosition.Name = "txtUserPosition";
             this.txtUserPosition.Size = new System.Drawing.Size(121, 21);
-            this.txtUserPosition.TabIndex = 3;
+            this.txtUserPosition.TabIndex = 4;
             // 
             // label4
             // 
@@ -427,7 +430,6 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dtHireDate;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton rdFemale;
@@ -442,5 +444,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
+        private Controls.NullableDateTimePicker dtHireDate;
     }
 }

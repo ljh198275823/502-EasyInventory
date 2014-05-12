@@ -126,6 +126,12 @@
     <Compile Include="MyTree.Designer.cs">
       <DependentUpon>MyTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="NullableDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NullableDateTimePicker.Designer.cs">
+      <DependentUpon>NullableDateTimePicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="PaymentModeComboBox.cs">
       <SubType>Component</SubType>
     </Compile>

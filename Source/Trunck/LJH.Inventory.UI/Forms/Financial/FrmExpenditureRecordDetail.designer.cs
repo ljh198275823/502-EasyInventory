@@ -44,7 +44,7 @@
             this.rdCheck = new System.Windows.Forms.RadioButton();
             this.rdCash = new System.Windows.Forms.RadioButton();
             this.rdTransfer = new System.Windows.Forms.RadioButton();
-            this.dtPaidDate = new System.Windows.Forms.DateTimePicker();
+            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -101,7 +101,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(496, 193);
-            this.tabControl1.TabIndex = 89;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -118,7 +118,7 @@
             this.tabPage1.Controls.Add(this.rdCheck);
             this.tabPage1.Controls.Add(this.rdCash);
             this.tabPage1.Controls.Add(this.rdTransfer);
-            this.tabPage1.Controls.Add(this.dtPaidDate);
+            this.tabPage1.Controls.Add(this.dtSheetDate);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label2);
@@ -145,7 +145,7 @@
             this.txtCheckNum.Location = new System.Drawing.Point(313, 70);
             this.txtCheckNum.Name = "txtCheckNum";
             this.txtCheckNum.Size = new System.Drawing.Size(159, 21);
-            this.txtCheckNum.TabIndex = 100;
+            this.txtCheckNum.TabIndex = 7;
             // 
             // txtRequest
             // 
@@ -153,7 +153,7 @@
             this.txtRequest.Name = "txtRequest";
             this.txtRequest.ReadOnly = true;
             this.txtRequest.Size = new System.Drawing.Size(159, 21);
-            this.txtRequest.TabIndex = 96;
+            this.txtRequest.TabIndex = 9;
             this.txtRequest.DoubleClick += new System.EventHandler(this.txtRequest_DoubleClick);
             // 
             // lnkRequest
@@ -162,7 +162,7 @@
             this.lnkRequest.Location = new System.Drawing.Point(26, 107);
             this.lnkRequest.Name = "lnkRequest";
             this.lnkRequest.Size = new System.Drawing.Size(41, 12);
-            this.lnkRequest.TabIndex = 95;
+            this.lnkRequest.TabIndex = 8;
             this.lnkRequest.TabStop = true;
             this.lnkRequest.Text = "申请人";
             this.lnkRequest.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRequest_LinkClicked);
@@ -173,7 +173,7 @@
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(159, 21);
-            this.txtCategory.TabIndex = 93;
+            this.txtCategory.TabIndex = 2;
             this.txtCategory.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
             // 
             // lnkCategory
@@ -182,7 +182,7 @@
             this.lnkCategory.Location = new System.Drawing.Point(14, 46);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(53, 12);
-            this.lnkCategory.TabIndex = 91;
+            this.lnkCategory.TabIndex = 1;
             this.lnkCategory.TabStop = true;
             this.lnkCategory.Text = "费用类别";
             this.lnkCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
@@ -211,7 +211,7 @@
             this.txtMemo.Location = new System.Drawing.Point(73, 134);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(399, 21);
-            this.txtMemo.TabIndex = 54;
+            this.txtMemo.TabIndex = 10;
             // 
             // txtAmount
             // 
@@ -230,7 +230,7 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.PointCount = 2;
             this.txtAmount.Size = new System.Drawing.Size(159, 21);
-            this.txtAmount.TabIndex = 52;
+            this.txtAmount.TabIndex = 3;
             this.txtAmount.Text = "0.00";
             // 
             // rdCheck
@@ -239,7 +239,7 @@
             this.rdCheck.Location = new System.Drawing.Point(185, 72);
             this.rdCheck.Name = "rdCheck";
             this.rdCheck.Size = new System.Drawing.Size(47, 16);
-            this.rdCheck.TabIndex = 51;
+            this.rdCheck.TabIndex = 6;
             this.rdCheck.Text = "支票";
             this.rdCheck.UseVisualStyleBackColor = true;
             // 
@@ -249,7 +249,7 @@
             this.rdCash.Location = new System.Drawing.Point(126, 72);
             this.rdCash.Name = "rdCash";
             this.rdCash.Size = new System.Drawing.Size(47, 16);
-            this.rdCash.TabIndex = 50;
+            this.rdCash.TabIndex = 5;
             this.rdCash.Text = "现金";
             this.rdCash.UseVisualStyleBackColor = true;
             // 
@@ -260,17 +260,17 @@
             this.rdTransfer.Location = new System.Drawing.Point(73, 72);
             this.rdTransfer.Name = "rdTransfer";
             this.rdTransfer.Size = new System.Drawing.Size(47, 16);
-            this.rdTransfer.TabIndex = 49;
+            this.rdTransfer.TabIndex = 4;
             this.rdTransfer.TabStop = true;
             this.rdTransfer.Text = "转账";
             this.rdTransfer.UseVisualStyleBackColor = true;
             // 
-            // dtPaidDate
+            // dtSheetDate
             // 
-            this.dtPaidDate.Location = new System.Drawing.Point(313, 12);
-            this.dtPaidDate.Name = "dtPaidDate";
-            this.dtPaidDate.Size = new System.Drawing.Size(159, 21);
-            this.dtPaidDate.TabIndex = 53;
+            this.dtSheetDate.Location = new System.Drawing.Point(313, 12);
+            this.dtSheetDate.Name = "dtSheetDate";
+            this.dtSheetDate.Size = new System.Drawing.Size(159, 21);
+            this.dtSheetDate.TabIndex = 0;
             // 
             // label5
             // 
@@ -284,11 +284,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(253, 16);
+            this.label7.Location = new System.Drawing.Point(277, 16);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 57;
-            this.label7.Text = "支出日期";
+            this.label7.Text = "日期";
             // 
             // label2
             // 
@@ -522,10 +522,8 @@
             // 
             // FrmExpenditureRecordDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(501, 252);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
@@ -559,7 +557,7 @@
         private System.Windows.Forms.RadioButton rdCheck;
         private System.Windows.Forms.RadioButton rdCash;
         private System.Windows.Forms.RadioButton rdTransfer;
-        private System.Windows.Forms.DateTimePicker dtPaidDate;
+        private System.Windows.Forms.DateTimePicker dtSheetDate;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label2;

@@ -46,7 +46,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override void InitControls()
         {
-            dtPaidDate.Value = DateTime.Today;
+            dtSheetDate.Value = DateTime.Today;
             this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
             this.txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
         }
@@ -61,6 +61,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
                 rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
                 txtAmount.DecimalValue = item.Amount;
+                dtSheetDate.Value = item.SheetDate;
                 if (!string.IsNullOrEmpty(item.Category))
                 {
                     Category = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetByID(item.Category).QueryObject;
@@ -90,6 +91,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
             info.Amount = txtAmount.DecimalValue;
+            info.SheetDate = dtSheetDate.Value;
             info.Category = Category != null ? Category.ID : null;
             info.CheckNum = txtCheckNum.Text;
             info.Request = Requster != null ? Requster.Name : string.Empty;
@@ -165,7 +167,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as ExpenditureRecord).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                string msg = "\"取消审核\"的操作会删除相关的应收抵销项，是否继续?";
+                string msg = "\"取消审核\"的操作会删除相关的应收核销项，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
             if (assigns != null && assigns.Count > 0)
@@ -178,7 +180,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 }
                 if (!allSuccess)
                 {
-                    MessageBox.Show("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"取消审核\"的操作", "消息");
+                    MessageBox.Show("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"取消审核\"的操作", "消息");
                     UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
                     OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
                     return;
@@ -195,7 +197,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as ExpenditureRecord).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                string msg = "\"作废\"的操作会删除相关的应收抵销项，是否继续?";
+                string msg = "\"作废\"的操作会删除相关的应收核销项，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
             if (assigns != null && assigns.Count > 0)
@@ -208,7 +210,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 }
                 if (!allSuccess)
                 {
-                    MessageBox.Show("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"作废\"的操作", "消息");
+                    MessageBox.Show("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"作废\"的操作", "消息");
                     UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
                     OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
                     return;

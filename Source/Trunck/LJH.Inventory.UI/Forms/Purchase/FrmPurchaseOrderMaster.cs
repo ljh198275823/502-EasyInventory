@@ -101,7 +101,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
         {
             PurchaseOrder info = item as PurchaseOrder;
             row.Cells["colID"].Value = info.ID;
-            row.Cells["colOrderDate"].Value = info.OrderDate;
+            row.Cells["colSheetDate"].Value = info.SheetDate.ToString("yyyy-MM-dd");
             CompanyInfo supplier = supplierTree1.GetSupplier(info.SupplierID);
             row.Cells["colSupplier"].Value = supplier != null ? supplier.Name : string.Empty;
             row.Cells["colBuyer"].Value = info.Buyer;

@@ -79,10 +79,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(471, 301);
+            this.btnClose.TabIndex = 17;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(362, 301);
+            this.btnOk.TabIndex = 16;
             // 
             // label1
             // 
@@ -126,7 +128,7 @@
             this.txtID.Location = new System.Drawing.Point(52, 14);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(138, 21);
-            this.txtID.TabIndex = 0;
+            this.txtID.TabIndex = 15;
             this.txtID.Text = "自动创建";
             // 
             // txtName
@@ -135,7 +137,7 @@
             this.txtName.Location = new System.Drawing.Point(52, 43);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(341, 21);
-            this.txtName.TabIndex = 1;
+            this.txtName.TabIndex = 2;
             // 
             // txtBarCode
             // 
@@ -143,7 +145,7 @@
             this.txtBarCode.Location = new System.Drawing.Point(255, 99);
             this.txtBarCode.Name = "txtBarCode";
             this.txtBarCode.Size = new System.Drawing.Size(138, 21);
-            this.txtBarCode.TabIndex = 4;
+            this.txtBarCode.TabIndex = 6;
             // 
             // txtMemo
             // 
@@ -151,7 +153,7 @@
             this.txtMemo.Location = new System.Drawing.Point(52, 214);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(341, 21);
-            this.txtMemo.TabIndex = 11;
+            this.txtMemo.TabIndex = 14;
             // 
             // label6
             // 
@@ -188,7 +190,7 @@
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.PointCount = 2;
             this.txtPrice.Size = new System.Drawing.Size(138, 21);
-            this.txtPrice.TabIndex = 7;
+            this.txtPrice.TabIndex = 10;
             this.txtPrice.Text = "0.00";
             // 
             // txtCost
@@ -208,7 +210,7 @@
             this.txtCost.Name = "txtCost";
             this.txtCost.PointCount = 2;
             this.txtCost.Size = new System.Drawing.Size(138, 21);
-            this.txtCost.TabIndex = 8;
+            this.txtCost.TabIndex = 11;
             this.txtCost.Text = "0.00";
             // 
             // txtUnit
@@ -218,7 +220,7 @@
             this.txtUnit.Name = "txtUnit";
             this.txtUnit.ReadOnly = true;
             this.txtUnit.Size = new System.Drawing.Size(138, 21);
-            this.txtUnit.TabIndex = 5;
+            this.txtUnit.TabIndex = 8;
             this.txtUnit.DoubleClick += new System.EventHandler(this.txtUnit_DoubleClick);
             // 
             // txtSpecification
@@ -227,7 +229,7 @@
             this.txtSpecification.Location = new System.Drawing.Point(52, 70);
             this.txtSpecification.Name = "txtSpecification";
             this.txtSpecification.Size = new System.Drawing.Size(138, 21);
-            this.txtSpecification.TabIndex = 6;
+            this.txtSpecification.TabIndex = 3;
             // 
             // label10
             // 
@@ -244,7 +246,7 @@
             this.txtShortName.Location = new System.Drawing.Point(52, 99);
             this.txtShortName.Name = "txtShortName";
             this.txtShortName.Size = new System.Drawing.Size(138, 21);
-            this.txtShortName.TabIndex = 10;
+            this.txtShortName.TabIndex = 5;
             // 
             // label11
             // 
@@ -261,7 +263,7 @@
             this.txtModel.Location = new System.Drawing.Point(255, 70);
             this.txtModel.Name = "txtModel";
             this.txtModel.Size = new System.Drawing.Size(138, 21);
-            this.txtModel.TabIndex = 23;
+            this.txtModel.TabIndex = 4;
             // 
             // label14
             // 
@@ -279,7 +281,7 @@
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(138, 21);
-            this.txtCategory.TabIndex = 27;
+            this.txtCategory.TabIndex = 1;
             this.txtCategory.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
             // 
             // lnkCategory
@@ -288,7 +290,7 @@
             this.lnkCategory.Location = new System.Drawing.Point(218, 18);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(35, 12);
-            this.lnkCategory.TabIndex = 28;
+            this.lnkCategory.TabIndex = 0;
             this.lnkCategory.TabStop = true;
             this.lnkCategory.Text = "类别:";
             this.lnkCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
@@ -299,7 +301,7 @@
             this.lnkUnit.Location = new System.Drawing.Point(16, 132);
             this.lnkUnit.Name = "lnkUnit";
             this.lnkUnit.Size = new System.Drawing.Size(35, 12);
-            this.lnkUnit.TabIndex = 29;
+            this.lnkUnit.TabIndex = 7;
             this.lnkUnit.TabStop = true;
             this.lnkUnit.Text = "单位:";
             this.lnkUnit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUnit_LinkClicked);
@@ -310,7 +312,7 @@
             this.lnkCompany.Location = new System.Drawing.Point(16, 187);
             this.lnkCompany.Name = "lnkCompany";
             this.lnkCompany.Size = new System.Drawing.Size(35, 12);
-            this.lnkCompany.TabIndex = 31;
+            this.lnkCompany.TabIndex = 12;
             this.lnkCompany.TabStop = true;
             this.lnkCompany.Text = "客户:";
             this.lnkCompany.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCompany_LinkClicked);
@@ -331,7 +333,7 @@
             this.lnkInternalID.Location = new System.Drawing.Point(194, 187);
             this.lnkInternalID.Name = "lnkInternalID";
             this.lnkInternalID.Size = new System.Drawing.Size(59, 12);
-            this.lnkInternalID.TabIndex = 33;
+            this.lnkInternalID.TabIndex = 13;
             this.lnkInternalID.TabStop = true;
             this.lnkInternalID.Text = "库存编号:";
             this.lnkInternalID.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkInternalID_LinkClicked);
@@ -357,7 +359,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(538, 280);
-            this.tabControl1.TabIndex = 34;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -402,7 +404,7 @@
             this.chkService.Location = new System.Drawing.Point(255, 130);
             this.chkService.Name = "chkService";
             this.chkService.Size = new System.Drawing.Size(48, 16);
-            this.chkService.TabIndex = 34;
+            this.chkService.TabIndex = 9;
             this.chkService.Text = "服务";
             this.chkService.UseVisualStyleBackColor = true;
             // 

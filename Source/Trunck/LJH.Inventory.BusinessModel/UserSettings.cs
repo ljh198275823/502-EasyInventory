@@ -209,17 +209,17 @@ namespace LJH.Inventory.BusinessModel
         public int PurchaseSheetSerialCount { get; set; }
 
         /// <summary>
-        /// 获取或设置客户付款单前缀
+        /// 获取或设置客户收款单前缀
         /// </summary>
         [DataMember]
         public string CustomerPaymentPrefix { get; set; }
         /// <summary>
-        /// 获取或设置客户付款单日期部分的格式
+        /// 获取或设置客户收款单日期部分的格式
         /// </summary>
         [DataMember]
         public string CustomerPaymentDateFormat { get; set; }
         /// <summary>
-        /// 获取或设置客户付款单序列号部分的长度
+        /// 获取或设置客户收款单序列号部分的长度
         /// </summary>
         [DataMember]
         public int CustomerPaymentSerialCount { get; set; }

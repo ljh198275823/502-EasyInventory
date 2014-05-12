@@ -82,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
             if (SearchCondition == null)
             {
                 PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
-                con.OrderDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //获取最后一年产生的订单
+                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //获取最后一年产生的订单
                 _Records = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
             }
             else

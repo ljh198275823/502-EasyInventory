@@ -41,10 +41,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(302, 150);
+            this.btnClose.TabIndex = 5;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(193, 150);
+            this.btnOk.TabIndex = 4;
             // 
             // txtMemo
             // 
@@ -53,7 +55,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(319, 43);
-            this.txtMemo.TabIndex = 38;
+            this.txtMemo.TabIndex = 3;
             // 
             // label2
             // 
@@ -70,7 +72,7 @@
             this.txtName.Location = new System.Drawing.Point(60, 22);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(319, 21);
-            this.txtName.TabIndex = 37;
+            this.txtName.TabIndex = 0;
             // 
             // label3
             // 
@@ -89,7 +91,7 @@
             this.txtParentCategory.Name = "txtParentCategory";
             this.txtParentCategory.ReadOnly = true;
             this.txtParentCategory.Size = new System.Drawing.Size(319, 21);
-            this.txtParentCategory.TabIndex = 42;
+            this.txtParentCategory.TabIndex = 2;
             this.txtParentCategory.DoubleClick += new System.EventHandler(this.txtParentCategory_DoubleClick);
             // 
             // lnkParentCategory
@@ -98,7 +100,7 @@
             this.lnkParentCategory.Location = new System.Drawing.Point(14, 55);
             this.lnkParentCategory.Name = "lnkParentCategory";
             this.lnkParentCategory.Size = new System.Drawing.Size(41, 12);
-            this.lnkParentCategory.TabIndex = 41;
+            this.lnkParentCategory.TabIndex = 1;
             this.lnkParentCategory.TabStop = true;
             this.lnkParentCategory.Text = "父类别";
             this.lnkParentCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkParentCategory_LinkClicked);
@@ -116,7 +118,6 @@
             this.Controls.Add(this.label3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmExpenditureTypeDetail";
-            this.ShowInTaskbar = false;
             this.Text = "公司管理费用类别 明细";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);

@@ -139,7 +139,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                     {
                         GridView.Rows[e.RowIndex].Cells["colAssign"].Value = 0;
                         txtRemain.DecimalValue = txtAmount.DecimalValue - GetAssignsFromGrid();
-                        MessageBox.Show("分配的金额已经超出客户付款未分配额度");
+                        MessageBox.Show("分配的金额已经超出客户收款未分配额度");
                     }
                     else
                     {

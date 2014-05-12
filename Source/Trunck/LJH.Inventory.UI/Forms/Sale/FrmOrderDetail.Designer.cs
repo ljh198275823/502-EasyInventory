@@ -49,7 +49,7 @@
             this.rdWithTax = new System.Windows.Forms.RadioButton();
             this.lnkSalesPerson = new System.Windows.Forms.LinkLabel();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
+            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.txtSalesPerson = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -68,7 +68,7 @@
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
-            this.dtDemandDate = new System.Windows.Forms.DateTimePicker();
+            this.dtDemandDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
@@ -217,7 +217,7 @@
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.lnkSalesPerson);
             this.tabPage1.Controls.Add(this.txtCustomer);
-            this.tabPage1.Controls.Add(this.dtOrderDate);
+            this.tabPage1.Controls.Add(this.dtSheetDate);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.lnkCustomer);
             this.tabPage1.Controls.Add(this.txtSalesPerson);
@@ -297,21 +297,21 @@
             this.txtCustomer.TabIndex = 107;
             this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
             // 
-            // dtOrderDate
+            // dtSheetDate
             // 
-            this.dtOrderDate.Location = new System.Drawing.Point(640, 16);
-            this.dtOrderDate.Name = "dtOrderDate";
-            this.dtOrderDate.Size = new System.Drawing.Size(109, 21);
-            this.dtOrderDate.TabIndex = 105;
+            this.dtSheetDate.Location = new System.Drawing.Point(640, 16);
+            this.dtSheetDate.Name = "dtSheetDate";
+            this.dtSheetDate.Size = new System.Drawing.Size(109, 21);
+            this.dtSheetDate.TabIndex = 105;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(574, 20);
+            this.label1.Location = new System.Drawing.Point(602, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.Size = new System.Drawing.Size(35, 12);
             this.label1.TabIndex = 106;
-            this.label1.Text = "签订日期:";
+            this.label1.Text = "日期:";
             // 
             // lnkCustomer
             // 
@@ -485,6 +485,7 @@
             // 
             // dtDemandDate
             // 
+            this.dtDemandDate.CustomFormat = " ";
             this.dtDemandDate.Location = new System.Drawing.Point(86, 47);
             this.dtDemandDate.Name = "dtDemandDate";
             this.dtDemandDate.Size = new System.Drawing.Size(131, 21);
@@ -703,11 +704,11 @@
         private System.Windows.Forms.DataGridView ItemsGrid;
         private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DateTimePicker dtDemandDate;
+        private LJH.Inventory .UI .Controls .NullableDateTimePicker dtDemandDate;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.LinkLabel lnkCustomer;
-        private System.Windows.Forms.DateTimePicker dtOrderDate;
+        private System.Windows.Forms.DateTimePicker dtSheetDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel lnkSalesPerson;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;

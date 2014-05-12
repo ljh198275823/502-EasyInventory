@@ -100,7 +100,7 @@ namespace LJH.Inventory.UI.Forms.Sale
         {
             Order info = item as Order;
             row.Cells["colID"].Value = info.ID;
-            row.Cells["colOrderDate"].Value = info.OrderDate;
+            row.Cells["colSheetDate"].Value = info.SheetDate;
             CompanyInfo customer = customerTree1.GetCustomer(info.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colSales"].Value = info.SalesPerson;

@@ -69,7 +69,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置是否含税
         /// </summary>
-        public bool IsWithTax { get; set; }
+        public bool WithTax { get; set; }
         /// <summary>
         /// 获取或设置状态
         /// </summary>

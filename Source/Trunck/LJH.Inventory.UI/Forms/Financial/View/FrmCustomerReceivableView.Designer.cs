@@ -30,15 +30,18 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerReceivableView));
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHaspaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,15 +60,16 @@
             this.colOrderID,
             this.colClassID,
             this.colCreateDate,
-            this.colRemain,
-            this.colHowold,
-            this.colMemo});
+            this.colAmount,
+            this.colHaspaid,
+            this.colNotPaid,
+            this.colHowold});
             this.GridView.Location = new System.Drawing.Point(0, 1);
             this.GridView.Name = "GridView";
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(796, 336);
+            this.GridView.Size = new System.Drawing.Size(804, 336);
             this.GridView.TabIndex = 22;
             // 
             // colSheetID
@@ -97,14 +101,32 @@
             this.colCreateDate.ReadOnly = true;
             this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // colRemain
+            // colAmount
             // 
             dataGridViewCellStyle2.Format = "C2";
-            this.colRemain.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colRemain.HeaderText = "金额";
-            this.colRemain.Name = "colRemain";
-            this.colRemain.ReadOnly = true;
-            this.colRemain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAmount.HeaderText = "金额";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colHaspaid
+            // 
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colHaspaid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colHaspaid.HeaderText = "已核销";
+            this.colHaspaid.Name = "colHaspaid";
+            this.colHaspaid.ReadOnly = true;
+            // 
+            // colNotPaid
+            // 
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colNotPaid.HeaderText = "未核销";
+            this.colNotPaid.Name = "colNotPaid";
+            this.colNotPaid.ReadOnly = true;
             // 
             // colHowold
             // 
@@ -112,20 +134,11 @@
             this.colHowold.Name = "colHowold";
             this.colHowold.ReadOnly = true;
             // 
-            // colMemo
-            // 
-            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
-            this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // FrmCustomerReceivableView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 362);
+            this.ClientSize = new System.Drawing.Size(804, 362);
             this.Controls.Add(this.GridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerReceivableView";
@@ -144,8 +157,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHaspaid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHowold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

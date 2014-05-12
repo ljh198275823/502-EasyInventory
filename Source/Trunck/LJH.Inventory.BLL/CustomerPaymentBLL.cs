@@ -38,7 +38,7 @@ namespace LJH.Inventory.BLL
                     CommandResult ret = (new CustomerPaymentAssignBLL(_RepoUri )).UndoAssign(assign);
                     if (ret.Result != ResultCode.Successful) allSuccess = false;
                 }
-                if (!allSuccess) throw new Exception("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"取消审核\"的操作");
+                if (!allSuccess) throw new Exception("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"取消审核\"的操作");
             }
             base.UndoApprove(info, unitWork, dt, opt);
         }
@@ -54,7 +54,7 @@ namespace LJH.Inventory.BLL
                     CommandResult ret = (new CustomerPaymentAssignBLL(_RepoUri)).UndoAssign(assign);
                     if (ret.Result != ResultCode.Successful) allSuccess = false;
                 }
-                if (!allSuccess) throw new Exception("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"作废\"的操作");
+                if (!allSuccess) throw new Exception("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"作废\"的操作");
             }
             base.DoNullify(info, unitWork, dt, opt);
         }
@@ -73,7 +73,7 @@ namespace LJH.Inventory.BLL
             return GetItems(con);
         }
         /// <summary>
-        /// 获取某个客户付款单的金额分配明细
+        /// 获取某个客户收款单的金额分配明细
         /// </summary>
         /// <param name="paymentID"></param>
         /// <returns></returns>

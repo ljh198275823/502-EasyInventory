@@ -72,6 +72,7 @@ namespace LJH.Inventory.UI.Forms.General
                 this.txtPassword.Size = this.txtOperatorID.Size;
             }
             this.comRoleList.Init();
+            this.dtHireDate.IsNull = true;
             txtDepartment.Text = Department != null ? Department.Name : string.Empty;
         }
 
@@ -79,7 +80,7 @@ namespace LJH.Inventory.UI.Forms.General
         {
             if (string.IsNullOrEmpty(txtName.Text))
             {
-                MessageBox.Show("没有设置用户名称");
+                MessageBox.Show("没有设置员工姓名");
                 return false;
             }
             if (txtOperatorID.Text.Trim() == Operator.DefaultLogID)
@@ -110,7 +111,7 @@ namespace LJH.Inventory.UI.Forms.General
             txtUserPosition.Text = staff.UserPosition;
             rdMale.Checked = staff.Sex == "男";
             rdFemale.Checked = staff.Sex == "女";
-            dtHireDate.Value = staff.HireDate != null ? staff.HireDate.Value : DateTime.Today;
+            if (staff.HireDate != null) dtHireDate.Value = staff.HireDate.Value;
             rdResign.Checked = staff.Resigned != null && staff.Resigned.Value;
             List<Operator> opts = (new OperatorBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             Operator opt = opts.FirstOrDefault(item => item.StaffID == staff.ID);
@@ -181,7 +182,14 @@ namespace LJH.Inventory.UI.Forms.General
             info.DepartmentID = Department != null ? Department.ID : null;
             info.Sex = rdMale.Checked ? "男" : "女";
             info.UserPosition = txtUserPosition.Text;
-            info.HireDate = dtHireDate.Value.Date;
+            if (!dtHireDate.IsNull)
+            {
+                info.HireDate = dtHireDate.Value.Date;
+            }
+            else
+            {
+                info.HireDate = null;
+            }
             info.Resigned = rdResign.Checked;
             return info;
         }
@@ -250,5 +258,6 @@ namespace LJH.Inventory.UI.Forms.General
             txtDepartment.Text = Department != null ? Department.Name : string.Empty;
         }
         #endregion
+
     }
 }

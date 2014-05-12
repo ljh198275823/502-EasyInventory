@@ -44,10 +44,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(295, 136);
+            this.btnClose.TabIndex = 6;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(186, 136);
+            this.btnOk.TabIndex = 5;
             // 
             // txtCountry
             // 
@@ -55,7 +57,7 @@
             this.txtCountry.Location = new System.Drawing.Point(53, 39);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(119, 21);
-            this.txtCountry.TabIndex = 38;
+            this.txtCountry.TabIndex = 2;
             // 
             // label5
             // 
@@ -73,7 +75,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(319, 43);
-            this.txtMemo.TabIndex = 33;
+            this.txtMemo.TabIndex = 4;
             // 
             // label2
             // 
@@ -90,7 +92,7 @@
             this.txtName.Location = new System.Drawing.Point(252, 12);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(119, 21);
-            this.txtName.TabIndex = 31;
+            this.txtName.TabIndex = 1;
             // 
             // label3
             // 
@@ -107,7 +109,7 @@
             this.txtID.Location = new System.Drawing.Point(52, 12);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(119, 21);
-            this.txtID.TabIndex = 30;
+            this.txtID.TabIndex = 0;
             // 
             // label1
             // 
@@ -124,7 +126,7 @@
             this.txtRegion.Location = new System.Drawing.Point(252, 39);
             this.txtRegion.Name = "txtRegion";
             this.txtRegion.Size = new System.Drawing.Size(119, 21);
-            this.txtRegion.TabIndex = 40;
+            this.txtRegion.TabIndex = 3;
             // 
             // label4
             // 
@@ -137,10 +139,8 @@
             // 
             // FrmPortDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(382, 171);
             this.Controls.Add(this.txtRegion);
             this.Controls.Add(this.label4);

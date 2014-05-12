@@ -58,6 +58,17 @@
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label15 = new System.Windows.Forms.Label();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
@@ -78,17 +89,8 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -237,10 +239,12 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(965, 363);
-            this.tabControl1.TabIndex = 89;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dtSheetDate);
+            this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.txtAddress);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtLinkerPhone);
@@ -270,7 +274,7 @@
             this.txtAddress.Location = new System.Drawing.Point(489, 42);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(284, 21);
-            this.txtAddress.TabIndex = 124;
+            this.txtAddress.TabIndex = 6;
             // 
             // label3
             // 
@@ -287,7 +291,7 @@
             this.txtLinkerPhone.Location = new System.Drawing.Point(258, 42);
             this.txtLinkerPhone.Name = "txtLinkerPhone";
             this.txtLinkerPhone.Size = new System.Drawing.Size(138, 21);
-            this.txtLinkerPhone.TabIndex = 122;
+            this.txtLinkerPhone.TabIndex = 5;
             // 
             // label2
             // 
@@ -304,7 +308,7 @@
             this.txtLinker.Location = new System.Drawing.Point(73, 42);
             this.txtLinker.Name = "txtLinker";
             this.txtLinker.Size = new System.Drawing.Size(106, 21);
-            this.txtLinker.TabIndex = 120;
+            this.txtLinker.TabIndex = 4;
             // 
             // label1
             // 
@@ -322,7 +326,7 @@
             this.txtWareHouse.Name = "txtWareHouse";
             this.txtWareHouse.ReadOnly = true;
             this.txtWareHouse.Size = new System.Drawing.Size(140, 21);
-            this.txtWareHouse.TabIndex = 118;
+            this.txtWareHouse.TabIndex = 1;
             this.txtWareHouse.DoubleClick += new System.EventHandler(this.txtWareHouse_DoubleClick);
             // 
             // lnkWareHouse
@@ -331,7 +335,7 @@
             this.lnkWareHouse.Location = new System.Drawing.Point(217, 15);
             this.lnkWareHouse.Name = "lnkWareHouse";
             this.lnkWareHouse.Size = new System.Drawing.Size(35, 12);
-            this.lnkWareHouse.TabIndex = 117;
+            this.lnkWareHouse.TabIndex = 0;
             this.lnkWareHouse.TabStop = true;
             this.lnkWareHouse.Text = "仓库:";
             this.lnkWareHouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWareHouse_LinkClicked);
@@ -342,7 +346,7 @@
             this.txtMemo.Location = new System.Drawing.Point(73, 71);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(700, 21);
-            this.txtMemo.TabIndex = 116;
+            this.txtMemo.TabIndex = 7;
             // 
             // txtCustomer
             // 
@@ -351,7 +355,7 @@
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(284, 21);
-            this.txtCustomer.TabIndex = 115;
+            this.txtCustomer.TabIndex = 3;
             this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
             // 
             // lnkCustomer
@@ -360,7 +364,7 @@
             this.lnkCustomer.Location = new System.Drawing.Point(448, 16);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(35, 12);
-            this.lnkCustomer.TabIndex = 114;
+            this.lnkCustomer.TabIndex = 2;
             this.lnkCustomer.TabStop = true;
             this.lnkCustomer.Text = "客户:";
             this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
@@ -394,8 +398,95 @@
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ItemsGrid.Size = new System.Drawing.Size(934, 234);
-            this.ItemsGrid.TabIndex = 77;
+            this.ItemsGrid.TabIndex = 8;
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
+            // 
+            // colHeader
+            // 
+            this.colHeader.HeaderText = "";
+            this.colHeader.Name = "colHeader";
+            this.colHeader.ReadOnly = true;
+            this.colHeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHeader.Width = 20;
+            // 
+            // colProductID
+            // 
+            this.colProductID.HeaderText = "产品编号";
+            this.colProductID.Name = "colProductID";
+            this.colProductID.ReadOnly = true;
+            this.colProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colProductName
+            // 
+            this.colProductName.HeaderText = "名称";
+            this.colProductName.Name = "colProductName";
+            this.colProductName.ReadOnly = true;
+            this.colProductName.Width = 120;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
+            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSpecification.Width = 80;
+            // 
+            // colUnit
+            // 
+            this.colUnit.HeaderText = "单位";
+            this.colUnit.Name = "colUnit";
+            this.colUnit.ReadOnly = true;
+            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUnit.Width = 60;
+            // 
+            // colPrice
+            // 
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colPrice.HeaderText = "单价";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colCount
+            // 
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCount.Width = 80;
+            // 
+            // colTotal
+            // 
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colTotal.HeaderText = "金额";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTotal.Width = 80;
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "销售订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
             // 
             // label15
             // 
@@ -412,7 +503,7 @@
             this.txtSheetNo.Location = new System.Drawing.Point(73, 12);
             this.txtSheetNo.Name = "txtSheetNo";
             this.txtSheetNo.Size = new System.Drawing.Size(106, 21);
-            this.txtSheetNo.TabIndex = 55;
+            this.txtSheetNo.TabIndex = 9;
             this.txtSheetNo.Text = "自动创建";
             // 
             // label11
@@ -581,92 +672,21 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // colHeader
+            // dtSheetDate
             // 
-            this.colHeader.HeaderText = "";
-            this.colHeader.Name = "colHeader";
-            this.colHeader.ReadOnly = true;
-            this.colHeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colHeader.Width = 20;
+            this.dtSheetDate.Location = new System.Drawing.Point(826, 13);
+            this.dtSheetDate.Name = "dtSheetDate";
+            this.dtSheetDate.Size = new System.Drawing.Size(109, 21);
+            this.dtSheetDate.TabIndex = 124;
             // 
-            // colProductID
+            // label4
             // 
-            this.colProductID.HeaderText = "产品编号";
-            this.colProductID.Name = "colProductID";
-            this.colProductID.ReadOnly = true;
-            this.colProductID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colProductName
-            // 
-            this.colProductName.HeaderText = "名称";
-            this.colProductName.Name = "colProductName";
-            this.colProductName.ReadOnly = true;
-            this.colProductName.Width = 120;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "类别";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSpecification.Width = 80;
-            // 
-            // colUnit
-            // 
-            this.colUnit.HeaderText = "单位";
-            this.colUnit.Name = "colUnit";
-            this.colUnit.ReadOnly = true;
-            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colUnit.Width = 60;
-            // 
-            // colPrice
-            // 
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colPrice.HeaderText = "单价";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colCount
-            // 
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCount.HeaderText = "数量";
-            this.colCount.Name = "colCount";
-            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCount.Width = 80;
-            // 
-            // colTotal
-            // 
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colTotal.HeaderText = "金额";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTotal.Width = 80;
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "销售订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(788, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 12);
+            this.label4.TabIndex = 125;
+            this.label4.Text = "日期:";
             // 
             // FrmDeliverySheetDetail
             // 
@@ -762,5 +782,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.DateTimePicker dtSheetDate;
+        private System.Windows.Forms.Label label4;
     }
 }

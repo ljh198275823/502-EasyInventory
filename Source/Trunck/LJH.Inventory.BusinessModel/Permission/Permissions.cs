@@ -150,9 +150,9 @@ namespace LJH.Inventory.BusinessModel
         [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户其它应收款")]
         CustomerOtherReceivable,
         /// <summary>
-        /// 客户付款流水
+        /// 客户收款流水
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户付款流水")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户收款流水")]
         CustomerPayment,
         /// <summary>
         /// 资金支出类别

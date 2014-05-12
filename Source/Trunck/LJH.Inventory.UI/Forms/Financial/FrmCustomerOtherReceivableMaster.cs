@@ -102,7 +102,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             CustomerOtherReceivable info = item as CustomerOtherReceivable;
             row.Cells["colID"].Value = info.ID;
-            row.Cells["colCreateDate"].Value = info.LastActiveDate.ToString("yyyy-MM-dd");
+            row.Cells["colSheetDate"].Value = info.SheetDate.ToString("yyyy-MM-dd");
             CompanyInfo customer = customerTree1.GetCustomer(info.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colCurrencyType"].Value = info.CurrencyType;

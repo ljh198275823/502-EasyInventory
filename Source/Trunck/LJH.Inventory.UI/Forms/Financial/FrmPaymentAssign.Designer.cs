@@ -283,7 +283,7 @@
             this.Name = "FrmPaymentAssign";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "客户付款抵消";
+            this.Text = "客户收款抵消";
             this.Load += new System.EventHandler(this.FrmPaymentAssign_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.ResumeLayout(false);

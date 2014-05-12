@@ -141,6 +141,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
                 WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
                 this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+                dtSheetDate.Value = item.SheetDate;
                 this.txtMemo.Text = item.Memo;
                 ShowSheetItemsOnGrid(item.Items);
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -163,6 +164,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             sheet.SupplierID = Supplier != null ? Supplier.ID : null;
             sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
+            sheet.SheetDate = dtSheetDate.Value;
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<InventoryItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)

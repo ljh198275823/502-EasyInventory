@@ -75,7 +75,7 @@
             this.txtOldPwd.Name = "txtOldPwd";
             this.txtOldPwd.PasswordChar = '*';
             this.txtOldPwd.Size = new System.Drawing.Size(162, 21);
-            this.txtOldPwd.TabIndex = 3;
+            this.txtOldPwd.TabIndex = 0;
             this.txtOldPwd.UseSystemPasswordChar = true;
             // 
             // txtNewPwd
@@ -85,7 +85,7 @@
             this.txtNewPwd.Name = "txtNewPwd";
             this.txtNewPwd.PasswordChar = '*';
             this.txtNewPwd.Size = new System.Drawing.Size(162, 21);
-            this.txtNewPwd.TabIndex = 4;
+            this.txtNewPwd.TabIndex = 1;
             this.txtNewPwd.UseSystemPasswordChar = true;
             // 
             // txtConfirmPwd
@@ -95,7 +95,7 @@
             this.txtConfirmPwd.Name = "txtConfirmPwd";
             this.txtConfirmPwd.PasswordChar = '*';
             this.txtConfirmPwd.Size = new System.Drawing.Size(162, 21);
-            this.txtConfirmPwd.TabIndex = 5;
+            this.txtConfirmPwd.TabIndex = 2;
             this.txtConfirmPwd.UseSystemPasswordChar = true;
             // 
             // btnOk
@@ -103,7 +103,7 @@
             this.btnOk.Location = new System.Drawing.Point(81, 128);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 6;
+            this.btnOk.TabIndex = 3;
             this.btnOk.Text = "确认";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -114,7 +114,7 @@
             this.btnClose.Location = new System.Drawing.Point(180, 128);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 7;
+            this.btnClose.TabIndex = 4;
             this.btnClose.Text = "关闭";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);

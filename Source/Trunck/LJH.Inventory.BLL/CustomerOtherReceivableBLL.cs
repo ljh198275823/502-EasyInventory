@@ -65,7 +65,7 @@ namespace LJH.Inventory.BLL
                             CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
                             if (ret.Result != ResultCode.Successful) allSuccess = false;
                         }
-                        if (!allSuccess) throw new Exception("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"取消审核\"的操作");
+                        if (!allSuccess) throw new Exception("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"取消审核\"的操作");
                     }
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Delete(cr, unitWork); //删除应收
                 }
@@ -95,7 +95,7 @@ namespace LJH.Inventory.BLL
                             CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
                             if (ret.Result != ResultCode.Successful) allSuccess = false;
                         }
-                        if (!allSuccess) throw new Exception("某些应收抵销项删除失败，请手动删除这些应收抵销项后再继续\"作废\"的操作");
+                        if (!allSuccess) throw new Exception("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"作废\"的操作");
                     }
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Delete(cr, unitWork); //删除应收
                 }

@@ -7,8 +7,6 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 {
     public class OrderSearchCondition : SheetSearchCondition
     {
-        public DateTimeRange OrderDate { get; set; }
-
         public string CustomerID { get; set; }
 
         public string Sales { get; set; }

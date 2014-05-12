@@ -33,7 +33,6 @@ namespace LJH.Inventory.UI.Forms
 
             #region 送货单
             chkForbidWhenNoOrderID.Checked = us.ForbidWhenNoOrderID;
-            chkForbidWhenOverCount.Checked = us.ForbidWhenOverCount;
             txtDeadlineDays.IntergerValue = us.DeadlineDays;
             if (us.ForbidWhenOverCreditLimit)
             {
@@ -97,7 +96,6 @@ namespace LJH.Inventory.UI.Forms
 
             #region 送货单选项
             us.ForbidWhenNoOrderID = chkForbidWhenNoOrderID.Checked;
-            us.ForbidWhenOverCount = chkForbidWhenOverCount.Checked;
             us.ReminderWhenOverCreditLimit = rdReminder.Checked;
             us.ForbidWhenOverCreditLimit = rdForbid.Checked;
             us.DeadlineDays = txtDeadlineDays.IntergerValue;

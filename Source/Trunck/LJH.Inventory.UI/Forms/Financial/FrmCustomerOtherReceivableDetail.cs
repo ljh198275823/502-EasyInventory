@@ -56,7 +56,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
-                dtCreateDate.Value = item.LastActiveDate;
+                dtSheetDate.Value = item.SheetDate;
                 txtAmount.DecimalValue = item.Amount;
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
@@ -78,7 +78,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 info = UpdatingItem as CustomerOtherReceivable;
             }
             if (txtID.Text == _AutoCreate) info.ID = string.Empty;
-            info.LastActiveDate = dtCreateDate.Value;
+            info.SheetDate = dtSheetDate.Value;
             info.Amount = txtAmount.DecimalValue;
             info.CustomerID = Customer != null ? Customer.ID : null;
             info.Memo = txtMemo.Text;

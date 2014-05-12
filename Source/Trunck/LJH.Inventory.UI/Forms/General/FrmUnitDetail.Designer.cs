@@ -42,10 +42,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(295, 130);
+            this.btnClose.TabIndex = 5;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(186, 130);
+            this.btnOk.TabIndex = 4;
             // 
             // txtPlural
             // 
@@ -53,7 +55,7 @@
             this.txtPlural.Location = new System.Drawing.Point(54, 39);
             this.txtPlural.Name = "txtPlural";
             this.txtPlural.Size = new System.Drawing.Size(119, 21);
-            this.txtPlural.TabIndex = 38;
+            this.txtPlural.TabIndex = 2;
             // 
             // label5
             // 
@@ -71,7 +73,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(319, 43);
-            this.txtMemo.TabIndex = 33;
+            this.txtMemo.TabIndex = 3;
             // 
             // label2
             // 
@@ -88,7 +90,7 @@
             this.txtName.Location = new System.Drawing.Point(253, 12);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(119, 21);
-            this.txtName.TabIndex = 31;
+            this.txtName.TabIndex = 1;
             // 
             // label3
             // 
@@ -105,7 +107,7 @@
             this.txtID.Location = new System.Drawing.Point(53, 12);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(119, 21);
-            this.txtID.TabIndex = 30;
+            this.txtID.TabIndex = 0;
             // 
             // label1
             // 
@@ -118,10 +120,8 @@
             // 
             // FrmUnitDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(382, 165);
             this.Controls.Add(this.txtPlural);
             this.Controls.Add(this.label5);

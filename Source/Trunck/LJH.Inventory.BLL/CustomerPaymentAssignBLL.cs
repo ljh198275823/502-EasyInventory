@@ -37,7 +37,7 @@ namespace LJH.Inventory.BLL
 
         #region 公共方法
         /// <summary>
-        /// 客户付款和应收款进行抵销
+        /// 客户收款和应收款进行核销
         /// </summary>
         /// <param name="assign"></param>
         /// <returns></returns>
@@ -63,7 +63,7 @@ namespace LJH.Inventory.BLL
             return unitWork.Commit();
         }
         /// <summary>
-        /// 取消客户付款和应收款已抵销项
+        /// 取消客户收款和应收款已核销项
         /// </summary>
         /// <param name="assign"></param>
         /// <returns></returns>

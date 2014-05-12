@@ -103,6 +103,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
             this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            dtSheetDate.Value = item.SheetDate;
             this.txtLinker.Text = item.Linker;
             this.txtLinkerPhone.Text = item.LinkerPhoneCall;
             this.txtAddress.Text = item.Address;
@@ -183,6 +184,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             sheet.CustomerID = Customer != null ? Customer.ID : null;
             sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
+            sheet.SheetDate = dtSheetDate.Value;
             sheet.Linker = txtLinker.Text.Trim();
             sheet.LinkerPhoneCall = txtLinkerPhone.Text.Trim();
             sheet.Address = txtAddress.Text.Trim();

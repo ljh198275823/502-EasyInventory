@@ -65,12 +65,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(576, 334);
-            this.btnClose.TabIndex = 10;
+            this.btnClose.TabIndex = 12;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(467, 334);
-            this.btnOk.TabIndex = 9;
+            this.btnOk.TabIndex = 11;
             // 
             // txtName
             // 
@@ -97,7 +97,7 @@
             this.txtID.MaxLength = 100;
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(143, 21);
-            this.txtID.TabIndex = 0;
+            this.txtID.TabIndex = 13;
             this.txtID.Text = "自动创建";
             // 
             // label1
@@ -116,7 +116,7 @@
             this.txtTelephone.MaxLength = 100;
             this.txtTelephone.Name = "txtTelephone";
             this.txtTelephone.Size = new System.Drawing.Size(143, 21);
-            this.txtTelephone.TabIndex = 3;
+            this.txtTelephone.TabIndex = 4;
             // 
             // label2
             // 
@@ -135,7 +135,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(596, 47);
-            this.txtMemo.TabIndex = 7;
+            this.txtMemo.TabIndex = 8;
             // 
             // label5
             // 
@@ -153,7 +153,7 @@
             this.txtAddress.MaxLength = 200;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(595, 21);
-            this.txtAddress.TabIndex = 6;
+            this.txtAddress.TabIndex = 7;
             // 
             // label6
             // 
@@ -171,7 +171,7 @@
             this.txtFax.MaxLength = 100;
             this.txtFax.Name = "txtFax";
             this.txtFax.Size = new System.Drawing.Size(143, 21);
-            this.txtFax.TabIndex = 4;
+            this.txtFax.TabIndex = 5;
             // 
             // 传真
             // 
@@ -189,7 +189,7 @@
             this.txtPostalCode.MaxLength = 100;
             this.txtPostalCode.Name = "txtPostalCode";
             this.txtPostalCode.Size = new System.Drawing.Size(143, 21);
-            this.txtPostalCode.TabIndex = 5;
+            this.txtPostalCode.TabIndex = 6;
             // 
             // label12
             // 
@@ -216,7 +216,7 @@
             this.txtNation.MaxLength = 100;
             this.txtNation.Name = "txtNation";
             this.txtNation.Size = new System.Drawing.Size(143, 21);
-            this.txtNation.TabIndex = 2;
+            this.txtNation.TabIndex = 3;
             // 
             // txtCategory
             // 
@@ -226,7 +226,7 @@
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(143, 21);
-            this.txtCategory.TabIndex = 1;
+            this.txtCategory.TabIndex = 2;
             this.txtCategory.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
             // 
             // GridView
@@ -255,7 +255,7 @@
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridView.Size = new System.Drawing.Size(651, 140);
-            this.GridView.TabIndex = 8;
+            this.GridView.TabIndex = 9;
             this.GridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             // 
             // colName
@@ -332,17 +332,15 @@
             this.lblCategory.Location = new System.Drawing.Point(12, 44);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(53, 12);
-            this.lblCategory.TabIndex = 50;
+            this.lblCategory.TabIndex = 1;
             this.lblCategory.TabStop = true;
             this.lblCategory.Text = "客户类别";
             this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
             // 
             // FrmRelatedCompanyDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(672, 370);
             this.Controls.Add(this.lblCategory);
             this.Controls.Add(this.GridView);

@@ -74,7 +74,7 @@
             this.functionTree1.Location = new System.Drawing.Point(9, 17);
             this.functionTree1.Name = "functionTree1";
             this.functionTree1.Size = new System.Drawing.Size(248, 416);
-            this.functionTree1.TabIndex = 0;
+            this.functionTree1.TabIndex = 2;
             // 
             // txtName
             // 
@@ -82,7 +82,7 @@
             this.txtName.Location = new System.Drawing.Point(12, 30);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(157, 21);
-            this.txtName.TabIndex = 6;
+            this.txtName.TabIndex = 0;
             // 
             // label1
             // 
@@ -100,7 +100,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(157, 122);
-            this.txtMemo.TabIndex = 8;
+            this.txtMemo.TabIndex = 1;
             // 
             // label3
             // 
@@ -113,10 +113,8 @@
             // 
             // FrmRoleDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(461, 466);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMemo);
@@ -128,7 +126,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmRoleDetail";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RoleDetail";
             this.Controls.SetChildIndex(this.btnOk, 0);

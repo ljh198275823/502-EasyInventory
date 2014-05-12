@@ -44,12 +44,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(294, 127);
-            this.btnClose.TabIndex = 5;
+            this.btnClose.TabIndex = 6;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(185, 127);
-            this.btnOk.TabIndex = 4;
+            this.btnOk.TabIndex = 5;
             // 
             // txtMemo
             // 
@@ -58,7 +58,7 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(319, 43);
-            this.txtMemo.TabIndex = 3;
+            this.txtMemo.TabIndex = 4;
             // 
             // label2
             // 
@@ -138,7 +138,7 @@
             this.txtSymbol.Location = new System.Drawing.Point(253, 39);
             this.txtSymbol.Name = "txtSymbol";
             this.txtSymbol.Size = new System.Drawing.Size(119, 21);
-            this.txtSymbol.TabIndex = 28;
+            this.txtSymbol.TabIndex = 3;
             // 
             // label5
             // 
@@ -151,10 +151,8 @@
             // 
             // FrmCurrencyTypeDetail
             // 
-            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(381, 162);
             this.Controls.Add(this.txtSymbol);
             this.Controls.Add(this.label5);
