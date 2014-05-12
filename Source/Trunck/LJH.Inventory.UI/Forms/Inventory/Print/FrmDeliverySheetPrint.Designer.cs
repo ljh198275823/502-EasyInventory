@@ -46,7 +46,7 @@
             reportDataSource1.Name = "Items";
             reportDataSource1.Value = this.DeliveryRecordBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "LJH.Inventory.UI.Forms.Print.DeliverySheet.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "LJH.Inventory.UI.Forms.Inventory.Print.DeliverySheet.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ShowBackButton = false;

@@ -47,6 +47,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             con.SheetNo = new List<string>();
             con.SheetNo.Add(sheet.ID);
             List<DeliveryRecord> items = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            items.ForEach(item => { item.Price = item.Price.Trim(); item.Count = item.Count.Trim(); item.Amount = item.Amount.Trim(); });
             ReportDataSource sr = new ReportDataSource();
             sr.Name = "Items";
             sr.Value = items;

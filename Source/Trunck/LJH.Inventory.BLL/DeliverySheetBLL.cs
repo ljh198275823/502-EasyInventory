@@ -21,61 +21,79 @@ namespace LJH.Inventory.BLL
         #region 私有方法
         private void InventoryOut(DeliverySheet sheet, InventoryOutType inventoryOutType, IUnitWork unitWork)
         {
+            List<string> pids = sheet.Items.Select(it => it.ProductID).ToList();
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            con.Products = pids;
+            con.WareHouseID = sheet.WareHouseID;
+            con.UnShipped = true;
+            List<ProductInventoryItem> inventoryItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            if (inventoryItems == null || inventoryItems.Count == 0) throw new Exception("没有找到相关的库存项");
+            List<ProductInventoryItem> clones = new List<ProductInventoryItem>();
+            inventoryItems.ForEach(it => clones.Add(it.Clone())); //备分所有的项的克隆
+            List<ProductInventoryItem> addingItems = new List<ProductInventoryItem>(); //要于保存将要增加的项
             ////减少库存
             foreach (DeliveryItem si in sheet.Items)
             {
                 Product p = ProviderFactory.Create<IProvider<Product, string>>(_RepoUri).GetByID(si.ProductID).QueryObject;
                 if (p != null && p.IsService != null && p.IsService.Value) continue; //如果是产品是服务的话就不用再从库存中扣除了
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.Products = new List<string>();
-                con.Products.Add(si.ProductID);
-                con.WareHouseID = sheet.WareHouseID; //如果送货单没有指定仓库，这里就为空
-                con.UnShipped = true;     //所有未发货的库存项
-                List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
-                if (si.OrderItem != null)  //如果出货单项有相关的订单项，那么出货时只扣除与此订单项相关的库存项和未分配给任何订单的库存项
-                {
-                    items = items.Where(item => item.OrderItem == si.OrderItem).ToList();
-                    //items = items.Where(item => item.OrderItem == si.OrderItem || item.OrderItem == null).ToList();
-                }
-                else
-                {
-                    items = items.Where(item => item.OrderItem == null).ToList();
-                }
-                if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("产品 {0} 库存不足，出货失败!", si.ProductID));
+                Assign(si, inventoryOutType, inventoryItems, addingItems);
+            }
+            foreach (ProductInventoryItem item in inventoryItems)
+            {
+                ProductInventoryItem clone = clones.Single(it => it.ID == item.ID);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(item, clone, unitWork);
+            }
+            foreach (ProductInventoryItem item in addingItems)
+            {
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(item, unitWork);
+            }
+        }
 
-                if (inventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式排序
+        private void Assign(DeliveryItem si, InventoryOutType inventoryOutType, List<ProductInventoryItem> inventoryItems, List<ProductInventoryItem> addingItems)
+        {
+            List<ProductInventoryItem> items = new List<ProductInventoryItem>();
+            if (si.OrderItem != null)  //如果出货单项有相关的订单项，那么出货时只扣除与此订单项相关的库存项和未分配给任何订单的库存项
+            {
+                items.AddRange(inventoryItems.Where(item => item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == si.OrderItem));
+            }
+            if (inventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式将未指定订单项的库存排序
+            {
+                items.AddRange(from item in inventoryItems
+                               where item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == null
+                               orderby item.AddDate ascending
+                               select item);
+            }
+            else
+            {
+                items.AddRange(from item in inventoryItems
+                               where item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == null
+                               orderby item.AddDate descending
+                               select item);
+            }
+            if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("产品 {0} 库存不足，出货失败!", si.ProductID));
+
+            decimal count = si.Count;
+            foreach (ProductInventoryItem item in items)
+            {
+                if (count > 0)
                 {
-                    items = (from item in items orderby item.AddDate ascending select item).ToList();
-                }
-                else
-                {
-                    items = (from item in items orderby item.AddDate descending select item).ToList();
-                }
-                decimal count = si.Count;
-                foreach (ProductInventoryItem pii in items)
-                {
-                    if (count > 0)
+                    if (item.Count > count) //对于部分出货的情况，一条库存记录拆成两条，其中一条表示出货的，另一条表示未出货部分，即要保证DelvieryItem不为空的都是未出货的，为空的都是已经出货的
                     {
-                        ProductInventoryItem pii1 = pii.Clone();
-                        if (pii.Count > count) //对于部分出货的情况，一条库存记录拆成两条，其中一条表示出货的，另一条表示未出货部分，即要保证DelvieryItem不为空的都是未出货的，为空的都是已经出货的
-                        {
-                            pii.DeliveryItem = si.ID;
-                            pii.DeliverySheet = si.SheetNo;
-                            pii.Count = count;
-                            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
+                        ProductInventoryItem pii = item.Clone();
+                        pii.ID = Guid.NewGuid();
+                        pii.DeliveryItem = si.ID;
+                        pii.DeliverySheet = si.SheetNo;
+                        pii.Count = count;
+                        addingItems.Add(pii);
 
-                            pii1.ID = Guid.NewGuid();
-                            pii1.Count -= count;
-                            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii1, unitWork);
-                            count = 0;
-                        }
-                        else
-                        {
-                            pii.DeliveryItem = si.ID;
-                            pii.DeliverySheet = si.SheetNo;
-                            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
-                            count -= pii.Count;
-                        }
+                        item.Count -= count;
+                        count = 0;
+                    }
+                    else
+                    {
+                        item.DeliveryItem = si.ID;
+                        item.DeliverySheet = si.SheetNo;
+                        count -= item.Count;
                     }
                 }
             }
