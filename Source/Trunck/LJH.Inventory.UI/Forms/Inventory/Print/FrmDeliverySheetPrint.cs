@@ -11,7 +11,7 @@ using LJH.Inventory .BLL ;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory .BusinessModel .SearchCondition ;
 
-namespace LJH.Inventory.UI.Forms.Print
+namespace LJH.Inventory.UI.Forms.Inventory.Print
 {
     public partial class FrmDeliverySheetPrint : Form
     {

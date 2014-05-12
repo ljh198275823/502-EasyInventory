@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
-using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.General;
+using LJH.Inventory.UI.Forms.Purchase;
+using LJH.Inventory.UI.Forms.Purchase.View;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Inventory
 {
     public partial class FrmInventorySheetDetail : FrmSheetDetailBase
     {
@@ -421,7 +419,7 @@ namespace LJH.Inventory.UI.Forms
                 con.States = new List<SheetState>();
                 con.States.Add(SheetState.Approved);
                 con.HasOnway = true;
-                FrmPurchaseRecordSelection frm = new FrmPurchaseRecordSelection();
+                FrmPurchaseRecordView frm = new FrmPurchaseRecordView();
                 frm.ForSelect = true;
                 frm.SearchCondition = con;
                 if (frm.ShowDialog() == DialogResult.OK)

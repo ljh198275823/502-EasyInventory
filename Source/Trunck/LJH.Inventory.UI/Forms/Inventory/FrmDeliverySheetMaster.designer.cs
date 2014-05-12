@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms
+﻿namespace LJH.Inventory.UI.Forms.Inventory
 {
     partial class FrmDeliverySheetMaster
     {
@@ -317,7 +317,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(955, 364);
             this.dataGridView1.TabIndex = 116;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // colSheetNo
             // 

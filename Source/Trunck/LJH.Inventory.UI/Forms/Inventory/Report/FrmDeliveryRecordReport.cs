@@ -11,8 +11,10 @@ using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Forms;
+using LJH.Inventory.UI.Forms.General;
+using LJH.Inventory.UI.Forms.Sale;
 
-namespace LJH.Inventory.UI.Report
+namespace LJH.Inventory.UI.Forms.Inventory.Report
 {
     public partial class FrmDeliveryRecordReport : FrmReportBase
     {

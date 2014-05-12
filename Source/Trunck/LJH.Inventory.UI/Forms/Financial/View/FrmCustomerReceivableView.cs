@@ -11,7 +11,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms.Financial
+namespace LJH.Inventory.UI.Forms.Financial.View
 {
     public partial class FrmCustomerReceivableView : FrmMasterBase
     {

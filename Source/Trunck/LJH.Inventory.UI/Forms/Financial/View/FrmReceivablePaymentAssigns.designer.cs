@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Report
+﻿namespace LJH.Inventory.UI.Forms.Financial.View
 {
     partial class FrmReceivablePaymentAssigns
     {

@@ -139,7 +139,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                     CustomerOtherReceivable daifu = dataGridView1.Rows[e.RowIndex].Tag as CustomerOtherReceivable;
                     if (daifu != null)
                     {
-                        FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                        View.FrmReceivablePaymentAssigns frm = new View.FrmReceivablePaymentAssigns();
                         frm.ReceivableID = daifu.ID;
                         frm.ShowDialog();
                     }

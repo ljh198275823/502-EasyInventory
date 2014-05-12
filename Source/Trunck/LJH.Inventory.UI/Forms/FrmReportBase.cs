@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using LJH.GeneralLibrary.WinformControl;
 
-namespace LJH.Inventory.UI.Report
+namespace LJH.Inventory.UI.Forms
 {
     public partial class FrmReportBase : Form
     {

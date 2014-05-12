@@ -10,7 +10,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BusinessModel.Resource;
-using LJH.Inventory.UI.View;
+using LJH.Inventory.UI.Forms.Inventory.View;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 
@@ -115,7 +115,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             row.Cells["colNotPurchased"].Value = info.NotPurchased.Trim();
             if (_Inventories != null && _Inventories.Count > 0)
             {
-                row.Cells["colValidInventory"].Value = _Inventories.Sum(it => it.ProductID == info.ProductID ? it.Valid : 0);
+                row.Cells["colValidInventory"].Value = _Inventories.Sum(it => it.ProductID == info.ProductID ? it.Valid : 0).Trim();
             }
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)

@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms.Inventory
+﻿namespace LJH.Inventory.UI.Forms.Inventory.View
 {
     partial class FrmProductInventoryView
     {

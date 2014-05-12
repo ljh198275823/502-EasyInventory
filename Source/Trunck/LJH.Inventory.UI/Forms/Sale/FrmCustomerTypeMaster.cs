@@ -11,7 +11,7 @@ using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Sale
 {
     public partial class FrmCustomerTypeMaster : FrmMasterBase
     {

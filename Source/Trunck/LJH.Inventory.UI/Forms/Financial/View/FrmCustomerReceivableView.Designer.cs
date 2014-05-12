@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms.Financial
+﻿namespace LJH.Inventory.UI.Forms.Financial.View
 {
     partial class FrmCustomerReceivableView
     {

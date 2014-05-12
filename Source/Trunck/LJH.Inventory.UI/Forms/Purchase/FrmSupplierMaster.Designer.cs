@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms
+﻿namespace LJH.Inventory.UI.Forms.Purchase
 {
     partial class FrmSupplierMaster
     {

@@ -12,8 +12,9 @@ using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 using LJH.Inventory.UI.Forms.General;
+using LJH.Inventory.UI.Forms.Sale.View;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Purchase
 {
     public partial class FrmPurchaseOrderDetail : FrmSheetDetailBase
     {
@@ -400,7 +401,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void cMnu_AddOrderRecord_Click(object sender, EventArgs e)
         {
-            FrmOrderRecordSelection frm = new FrmOrderRecordSelection();
+            FrmOrderRecordView frm = new FrmOrderRecordView();
             frm.ForSelect = true;
             OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
             con.States = new List<SheetState>();

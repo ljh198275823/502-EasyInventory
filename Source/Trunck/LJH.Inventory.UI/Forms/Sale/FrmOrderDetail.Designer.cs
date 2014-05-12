@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms
+﻿namespace LJH.Inventory.UI.Forms.Sale
 {
     partial class FrmOrderDetail
     {
@@ -87,7 +87,6 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnShip = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -140,7 +139,6 @@
             this.btnApprove,
             this.btnUndoApprove,
             this.btnPrint,
-            this.btnShip,
             this.btnNullify});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -367,7 +365,6 @@
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ItemsGrid.Size = new System.Drawing.Size(987, 261);
             this.ItemsGrid.TabIndex = 97;
-            this.ItemsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellContentClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             // 
             // colHeader
@@ -659,17 +656,6 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // btnShip
-            // 
-            this.btnShip.Image = global::LJH.Inventory.UI.Properties.Resources.shipped;
-            this.btnShip.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnShip.Name = "btnShip";
-            this.btnShip.Size = new System.Drawing.Size(53, 53);
-            this.btnShip.Text = "出货(&D)";
-            this.btnShip.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnShip.Visible = false;
-            this.btnShip.Click += new System.EventHandler(this.btnShip_Click);
-            // 
             // FrmOrderDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -759,6 +745,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colShipped;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOnway;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ToolStripButton btnShip;
     }
 }

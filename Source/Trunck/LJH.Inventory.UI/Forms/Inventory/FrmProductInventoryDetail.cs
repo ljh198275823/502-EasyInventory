@@ -11,8 +11,9 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Controls;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.General;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Inventory
 {
     public partial class FrmProductInventoryDetail : FrmDetailBase
     {

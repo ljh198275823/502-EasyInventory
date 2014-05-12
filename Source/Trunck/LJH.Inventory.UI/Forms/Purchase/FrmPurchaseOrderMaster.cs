@@ -13,7 +13,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Purchase
 {
     public partial class FrmPurchaseOrderMaster : FrmMasterBase
     {

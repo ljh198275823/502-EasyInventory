@@ -10,7 +10,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Inventory.View
 {
     public partial class FrmInventoryRecordView : FrmMasterBase
     {

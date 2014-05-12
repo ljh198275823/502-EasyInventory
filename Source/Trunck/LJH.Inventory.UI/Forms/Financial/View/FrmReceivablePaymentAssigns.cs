@@ -12,7 +12,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Forms;
 using LJH.Inventory.UI.Forms.Financial;
 
-namespace LJH.Inventory.UI.Report
+namespace LJH.Inventory.UI.Forms.Financial.View
 {
     public partial class FrmReceivablePaymentAssigns : Form
     {

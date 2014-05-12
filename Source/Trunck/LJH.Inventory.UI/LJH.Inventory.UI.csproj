@@ -165,10 +165,10 @@
     <Compile Include="Forms\Inventory\FrmProductInventoryAssign.Designer.cs">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Print\FrmDeliverySheetPrint.cs">
+    <Compile Include="Forms\Inventory\Print\FrmDeliverySheetPrint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Print\FrmDeliverySheetPrint.Designer.cs">
+    <Compile Include="Forms\Inventory\Print\FrmDeliverySheetPrint.Designer.cs">
       <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Purchase\FrmSupplierDetail.cs">
@@ -333,11 +333,11 @@
     <Compile Include="Forms\Sale\FrmOrderItemRecordMaster.Designer.cs">
       <DependentUpon>FrmOrderItemRecordMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Selection\FrmOrderRecordSelection.cs">
+    <Compile Include="Forms\Sale\View\FrmOrderRecordView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Selection\FrmOrderRecordSelection.Designer.cs">
-      <DependentUpon>FrmOrderRecordSelection.cs</DependentUpon>
+    <Compile Include="Forms\Sale\View\FrmOrderRecordView.Designer.cs">
+      <DependentUpon>FrmOrderRecordView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\General\FrmPortDetail.cs">
       <SubType>Form</SubType>
@@ -399,11 +399,11 @@
     <Compile Include="Forms\General\FrmProductMaster.Designer.cs">
       <DependentUpon>FrmProductMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Selection\FrmPurchaseRecordSelection.cs">
+    <Compile Include="Forms\Purchase\View\FrmPurchaseRecordView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Selection\FrmPurchaseRecordSelection.Designer.cs">
-      <DependentUpon>FrmPurchaseRecordSelection.cs</DependentUpon>
+    <Compile Include="Forms\Purchase\View\FrmPurchaseRecordView.Designer.cs">
+      <DependentUpon>FrmPurchaseRecordView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Purchase\FrmPurchaseOrderDetail.cs">
       <SubType>Form</SubType>
@@ -507,16 +507,16 @@
     <Compile Include="Forms\Inventory\FrmWareHouseMaster.Designer.cs">
       <DependentUpon>FrmWareHouseMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Report\FrmDeliveryRecordReport.cs">
+    <Compile Include="Forms\Inventory\Report\FrmDeliveryRecordReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Report\FrmDeliveryRecordReport.designer.cs">
+    <Compile Include="Forms\Inventory\Report\FrmDeliveryRecordReport.designer.cs">
       <DependentUpon>FrmDeliveryRecordReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Report\FrmDeliveryStatistics.cs">
+    <Compile Include="Forms\Inventory\Report\FrmDeliveryStatistics.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Report\FrmDeliveryStatistics.Designer.cs">
+    <Compile Include="Forms\Inventory\Report\FrmDeliveryStatistics.Designer.cs">
       <DependentUpon>FrmDeliveryStatistics.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Financial\View\FrmReceivablePaymentAssigns.cs">
@@ -531,16 +531,16 @@
     <Compile Include="Forms\Financial\View\FrmCustomerPaymentRemainsView.designer.cs">
       <DependentUpon>FrmCustomerPaymentRemainsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Selection\FrmOrderSelection.cs">
+    <Compile Include="Forms\Sale\View\FrmOrderView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Selection\FrmOrderSelection.designer.cs">
-      <DependentUpon>FrmOrderSelection.cs</DependentUpon>
+    <Compile Include="Forms\Sale\View\FrmOrderView.designer.cs">
+      <DependentUpon>FrmOrderView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Report\FrmReportBase.cs">
+    <Compile Include="Forms\FrmReportBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Report\FrmReportBase.designer.cs">
+    <Compile Include="Forms\FrmReportBase.designer.cs">
       <DependentUpon>FrmReportBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmRoleDetail.cs">
@@ -631,10 +631,10 @@
     <EmbeddedResource Include="Forms\Inventory\View\FrmProductInventoryView.resx">
       <DependentUpon>FrmProductInventoryView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Print\FrmDeliverySheetPrint.resx">
+    <EmbeddedResource Include="Forms\Inventory\Print\FrmDeliverySheetPrint.resx">
       <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Print\DeliverySheet.rdlc">
+    <EmbeddedResource Include="Forms\Inventory\Print\DeliverySheet.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchase\FrmSupplierDetail.resx">
@@ -718,8 +718,8 @@
     <EmbeddedResource Include="Forms\Sale\FrmOrderItemRecordMaster.resx">
       <DependentUpon>FrmOrderItemRecordMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Selection\FrmOrderRecordSelection.resx">
-      <DependentUpon>FrmOrderRecordSelection.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Sale\View\FrmOrderRecordView.resx">
+      <DependentUpon>FrmOrderRecordView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\General\FrmPortDetail.resx">
       <DependentUpon>FrmPortDetail.cs</DependentUpon>
@@ -754,8 +754,8 @@
     <EmbeddedResource Include="Forms\General\FrmProductMaster.resx">
       <DependentUpon>FrmProductMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Selection\FrmPurchaseRecordSelection.resx">
-      <DependentUpon>FrmPurchaseRecordSelection.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Purchase\View\FrmPurchaseRecordView.resx">
+      <DependentUpon>FrmPurchaseRecordView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchase\FrmPurchaseOrderDetail.resx">
       <DependentUpon>FrmPurchaseOrderDetail.cs</DependentUpon>
@@ -808,10 +808,10 @@
     <EmbeddedResource Include="Forms\Inventory\FrmWareHouseMaster.resx">
       <DependentUpon>FrmWareHouseMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Report\FrmDeliveryRecordReport.resx">
+    <EmbeddedResource Include="Forms\Inventory\Report\FrmDeliveryRecordReport.resx">
       <DependentUpon>FrmDeliveryRecordReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Report\FrmDeliveryStatistics.resx">
+    <EmbeddedResource Include="Forms\Inventory\Report\FrmDeliveryStatistics.resx">
       <DependentUpon>FrmDeliveryStatistics.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\View\FrmReceivablePaymentAssigns.resx">
@@ -820,10 +820,10 @@
     <EmbeddedResource Include="Forms\Financial\View\FrmCustomerPaymentRemainsView.resx">
       <DependentUpon>FrmCustomerPaymentRemainsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Selection\FrmOrderSelection.resx">
-      <DependentUpon>FrmOrderSelection.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Sale\View\FrmOrderView.resx">
+      <DependentUpon>FrmOrderView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Report\FrmReportBase.resx">
+    <EmbeddedResource Include="Forms\FrmReportBase.resx">
       <DependentUpon>FrmReportBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmRoleDetail.resx">

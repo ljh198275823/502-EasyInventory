@@ -8,12 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.Inventory.UI.View;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.General;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Sale
 {
     public partial class FrmOrderDetail : FrmSheetDetailBase
     {
@@ -229,7 +229,6 @@ namespace LJH.Inventory.UI.Forms
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.UndoApprove);
             btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Nullify);
             btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Print);
-            btnShip.Enabled = btnShip.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Ship);
             ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
             ItemsGrid.ReadOnly = !btnSave.Enabled;
         }
@@ -296,18 +295,6 @@ namespace LJH.Inventory.UI.Forms
         {
             OrderBLL processor = new OrderBLL(AppSettings.Current.ConnStr);
             PerformOperation<Order>(processor, SheetOperation.Nullify);
-        }
-
-        private void btnShip_Click(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                Order order = UpdatingItem as Order;
-                FrmDeliverySheetDetail frm = new FrmDeliverySheetDetail();
-                frm.Order = order;
-                frm.IsAdding = true;
-                frm.ShowDialog();
-            }
         }
         #endregion
 
@@ -442,24 +429,6 @@ namespace LJH.Inventory.UI.Forms
         private void txtSalesPerson_DoubleClick(object sender, EventArgs e)
         {
             txtSalesPerson.Text = string.Empty;
-        }
-
-        private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                if (ItemsGrid.Columns[e.ColumnIndex].Name == "colShipped")
-                {
-                    OrderItem pi = ItemsGrid.Rows[e.RowIndex].Tag as OrderItem;
-                    DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
-                    con.States = new List<SheetState>();
-                    con.States.Add(SheetState.Shipped);
-                    con.OrderItem = pi.ID;
-                    FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
-                    frm.SearchCondition = con;
-                    frm.ShowDialog();
-                }
-            }
         }
 
         private void chkShowState_CheckedChanged(object sender, EventArgs e)

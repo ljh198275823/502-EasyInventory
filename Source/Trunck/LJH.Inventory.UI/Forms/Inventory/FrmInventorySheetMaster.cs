@@ -12,7 +12,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Inventory
 {
     public partial class FrmInventorySheetMaster : FrmMasterBase
     {

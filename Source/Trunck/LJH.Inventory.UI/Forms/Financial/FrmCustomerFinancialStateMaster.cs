@@ -138,14 +138,14 @@ namespace LJH.Inventory.UI.Forms.Financial
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
                 {
                     CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
-                    FrmCustomerReceivableView frm = new FrmCustomerReceivableView();
+                    View.FrmCustomerReceivableView frm = new View.FrmCustomerReceivableView();
                     frm.Customer = c;
                     frm.ShowDialog();
                 }
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
                     CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
-                    FrmCustomerPaymentRemainsView frm = new FrmCustomerPaymentRemainsView();
+                    View.FrmCustomerPaymentRemainsView frm = new View.FrmCustomerPaymentRemainsView();
                     frm.Customer = c;
                     frm.ShowDialog();
                 }

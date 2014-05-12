@@ -16,6 +16,9 @@ using LJH.GeneralLibrary.SQLHelper;
 using LJH.Inventory.UI.Forms.Financial;
 using LJH.Inventory.UI.Forms.Sale;
 using LJH.Inventory.UI.Forms.General;
+using LJH.Inventory.UI.Forms.Purchase;
+using LJH.Inventory.UI.Forms.Inventory;
+using LJH.Inventory.UI.Forms.Inventory.Report;
 
 namespace InventoryDemo
 {

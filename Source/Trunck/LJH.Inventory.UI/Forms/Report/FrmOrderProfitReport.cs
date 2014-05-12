@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using LJH.Inventory.UI.Forms;
 
 namespace LJH.Inventory.UI.Report
 {

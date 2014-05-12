@@ -13,7 +13,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Report;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Inventory
 {
     public partial class FrmDeliverySheetMaster : FrmMasterBase
     {
@@ -138,20 +138,6 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理程序
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DeliverySheet sheet = dataGridView1.Rows[e.RowIndex].Tag as DeliverySheet;
-                if (dataGridView1.Columns[e.ColumnIndex].Name == "colPaid")
-                {
-                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
-                    frm.ReceivableID = sheet.ID;
-                    frm.ShowDialog();
-                }
-            }
-        }
-
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();

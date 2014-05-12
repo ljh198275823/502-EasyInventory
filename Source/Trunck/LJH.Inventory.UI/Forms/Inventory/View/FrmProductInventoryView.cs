@@ -11,7 +11,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms.Inventory
+namespace LJH.Inventory.UI.Forms.Inventory.View
 {
     public partial class FrmProductInventoryView : FrmMasterBase
     {

@@ -10,8 +10,9 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.Sale;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.General
 {
     public partial class FrmProductDetail : FrmSheetDetailBase
     {

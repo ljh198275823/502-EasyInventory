@@ -1,6 +1,6 @@
-﻿namespace LJH.Inventory.UI.Forms
+﻿namespace LJH.Inventory.UI.Forms.Sale.View
 {
-    partial class FrmOrderRecordSelection
+    partial class FrmOrderRecordView
     {
         /// <summary>
         /// Required designer variable.

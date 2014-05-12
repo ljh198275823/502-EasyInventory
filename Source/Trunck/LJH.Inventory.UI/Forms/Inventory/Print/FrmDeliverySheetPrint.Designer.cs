@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms.Print
+﻿namespace LJH.Inventory.UI.Forms.Inventory.Print
 {
     partial class FrmDeliverySheetPrint
     {

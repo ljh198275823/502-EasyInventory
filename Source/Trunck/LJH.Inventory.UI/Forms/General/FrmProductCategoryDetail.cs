@@ -11,7 +11,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.General
 {
     public partial class FrmProductCategoryDetail : FrmDetailBase
     {

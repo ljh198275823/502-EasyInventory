@@ -10,10 +10,9 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BusinessModel.Resource;
-using LJH.Inventory.UI.View;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Sale
 {
     public partial class FrmOrderMaster : FrmMasterBase
     {
@@ -129,21 +128,6 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理程序
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
-            {
-                Order order = dataGridView1.Rows[e.RowIndex].Tag as Order;
-                DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
-                con.OrderID = order.ID;
-                con.States = new List<SheetState>();
-                con.States.Add(SheetState.Shipped);
-                FrmDeliveryRecordView frm = new FrmDeliveryRecordView();
-                frm.SearchCondition = con;
-                frm.ShowDialog();
-            }
-        }
-
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();

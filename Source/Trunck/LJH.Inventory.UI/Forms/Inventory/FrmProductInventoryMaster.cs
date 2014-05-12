@@ -12,7 +12,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Report;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Inventory
 {
     public partial class FrmProductInventoryMaster : FrmMasterBase
     {
@@ -156,7 +156,7 @@ namespace LJH.Inventory.UI.Forms
                 con.Products.Add(pi.ProductID);
                 con.WareHouseID = pi.WareHouseID;
                 con.UnShipped = true;
-                Inventory.FrmProductInventoryView frm = new Inventory.FrmProductInventoryView();
+                View.FrmProductInventoryView frm = new View.FrmProductInventoryView();
                 frm.SearchCondition = con;
                 frm.ShowDialog();
             }

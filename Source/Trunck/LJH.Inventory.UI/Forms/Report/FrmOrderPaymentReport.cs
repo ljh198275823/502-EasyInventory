@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.Inventory.UI.View;
 using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Forms;
+using LJH.Inventory.UI.Forms.Sale;
 
 namespace LJH.Inventory.UI.Report
 {

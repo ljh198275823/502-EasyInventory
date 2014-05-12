@@ -11,11 +11,11 @@ using LJH.Inventory .BusinessModel ;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Sale.View
 {
-    public partial class FrmOrderSelection : FrmMasterBase
+    public partial class FrmOrderView : FrmMasterBase
     {
-        public FrmOrderSelection()
+        public FrmOrderView()
         {
             InitializeComponent();
         }

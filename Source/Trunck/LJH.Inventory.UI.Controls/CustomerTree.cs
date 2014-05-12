@@ -129,7 +129,7 @@ namespace LJH.Inventory.UI.Controls
             TreeNode node = parent.Nodes.Add(string.Format("{0}", pc.Name));
             node.Tag = pc;
             node.ImageIndex = 0;
-            node.SelectedImageIndex = 1;
+            node.SelectedImageIndex = 0;
             _AllTypeNodes.Add(node);
             if (expand) parent.Expand();
             return node;

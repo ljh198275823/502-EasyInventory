@@ -12,11 +12,11 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Report;
 using LJH.GeneralLibrary.Core.UI;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Sale.View
 {
-    public partial class FrmOrderRecordSelection : FrmMasterBase
+    public partial class FrmOrderRecordView : FrmMasterBase
     {
-        public FrmOrderRecordSelection()
+        public FrmOrderRecordView()
         {
             InitializeComponent();
         }
