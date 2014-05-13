@@ -24,7 +24,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         }
 
         #region 私有方法
-        private void ShowItemOnRow(DataGridViewRow row, DeliveryRecord item)
+        private void ShowItemOnRow(DataGridViewRow row, StackOutRecord item)
         {
             row.Cells["colDeliveryDate"].Value = item.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = item.SheetNo;
@@ -42,15 +42,17 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         #region 重写基类方法
         protected override void OnItemSearching(EventArgs e)
         {
-            DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
+            StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
             con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Shipped);
+            con.SheetTypes = new List<StackOutSheetType>();
+            con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
             if (txtProduct.Tag != null) con.ProductID = (txtProduct.Tag as Product).ID;
-            List<DeliveryRecord> items = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
-            foreach (DeliveryRecord item in items)
+            List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            foreach (StackOutRecord item in items)
             {
                 int row = gridView.Rows.Add();
                 ShowItemOnRow(gridView.Rows[row], item);

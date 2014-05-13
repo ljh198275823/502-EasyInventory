@@ -21,9 +21,9 @@ namespace LJH.Inventory.BusinessModel.Resource
                     return "取消审核";
                 case SheetOperation.Nullify:
                     return "作废";
-                case SheetOperation.Inventory:
+                case SheetOperation.StackIn:
                     return "收货";
-                case SheetOperation.Ship:
+                case SheetOperation.StackOut:
                     return "发货";
                 default:
                     return string.Empty;

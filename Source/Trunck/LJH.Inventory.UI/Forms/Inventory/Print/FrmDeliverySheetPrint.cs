@@ -24,11 +24,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
         /// <summary>
         /// 获取或设置要打印的送货单
         /// </summary>
-        public DeliverySheet Sheet { get; set; }
+        public StackOutSheet Sheet { get; set; }
         #endregion
 
         #region　私有方法
-        private void RenderSheet(DeliverySheet sheet)
+        private void RenderSheet(StackOutSheet sheet)
         {
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("CompanyName", UserSettings.Current.CompanyName));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("ForeignName", UserSettings.Current.ForeignName));
@@ -43,10 +43,10 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Linker", sheet.Linker));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("LinkerPhone", sheet.LinkerPhoneCall));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Address", sheet.Address));
-            DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
+            StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
             con.SheetNo = new List<string>();
             con.SheetNo.Add(sheet.ID);
-            List<DeliveryRecord> items = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             items.ForEach(item => { item.Price = item.Price.Trim(); item.Count = item.Count.Trim(); item.Amount = item.Amount.Trim(); });
             ReportDataSource sr = new ReportDataSource();
             sr.Name = "Items";

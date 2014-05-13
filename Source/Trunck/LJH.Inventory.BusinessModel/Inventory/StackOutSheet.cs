@@ -6,27 +6,31 @@ using System.Text;
 namespace LJH.Inventory.BusinessModel
 {
     /// <summary>
-    /// 表示送货单
+    /// 表示出库单
     /// </summary>
-    public class DeliverySheet : ISheet<string>
+    public class StackOutSheet : ISheet<string>
     {
         #region 构造函数
-        public DeliverySheet()
+        public StackOutSheet()
         {
         }
         #endregion
 
         #region 公共属性
         /// <summary>
-        /// 获取或设置送货单据编号
+        /// 获取或设置出库单编号
         /// </summary>
         public string ID { get; set; }
+        /// <summary>
+        /// 获取或设置出库单类型
+        /// </summary>
+        public StackOutSheetType ClassID { get; set; }
         /// <summary>
         /// 获取或设置单据日期
         /// </summary>
         public DateTime SheetDate { get; set; }
         /// <summary>
-        /// 获取或设置单据创建日期
+        /// 获取或设置单据最后一次操作时间
         /// </summary>
         public DateTime LastActiveDate { get; set; }
         /// <summary>
@@ -72,7 +76,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置出货商品项(如果要在列表中增删改项，请不要直接在此对象中操作，而是调用DeliverySheet类的方法)
         /// </summary>
-        public List<DeliveryItem> Items { get; set; }
+        public List<StackOutItem> Items { get; set; }
         #endregion
 
         #region 只读属性
@@ -100,8 +104,10 @@ namespace LJH.Inventory.BusinessModel
                 case SheetOperation.UndoApprove:
                     return State == SheetState.Approved;
                 case SheetOperation.Nullify:
-                    return State != SheetState.Canceled && State != SheetState.Shipped;
-                case SheetOperation.Ship:
+                    return State != SheetState.Canceled && State != SheetState.Shipped && State != SheetState.Inventory;
+                case SheetOperation.StackOut:
+                    return (State == SheetState.Add || State == SheetState.Approved);
+                case SheetOperation.StackIn:
                     return (State == SheetState.Add || State == SheetState.Approved);
                 default:
                     return false;
@@ -112,7 +118,20 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string DocumentType
         {
-            get { return "DeliverySheet"; }
+            get
+            {
+                switch (ClassID)
+                {
+                    case StackOutSheetType.DeliverySheet:
+                        return "送货单";
+                    case StackOutSheetType.CustomerBorrow:
+                        return "客户借用单";
+                    case StackOutSheetType.Production:
+                        return "生产领用单";
+                    default:
+                        throw new Exception("出库单的类型没有指定");
+                }
+            }
         }
 
         public ISheet<string> Clone()

@@ -14,15 +14,15 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmInventorySheetMaster : FrmMasterBase
+    public partial class FrmStackInSheetMaster : FrmMasterBase
     {
-        public FrmInventorySheetMaster()
+        public FrmStackInSheetMaster()
         {
             InitializeComponent();
         }
 
         #region 私有变量
-        private List<InventorySheet> _Sheets = null;
+        private List<StackInSheet> _Sheets = null;
         private List<WareHouse> _Warehouses = null;
         #endregion
 
@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<object> FilterData()
         {
-            List<InventorySheet> items = _Sheets;
+            List<StackInSheet> items = _Sheets;
             if (this.supplierTree1.SelectedNode != null)
             {
                 List<CompanyInfo> pcs = null;
@@ -80,13 +80,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (SearchCondition == null)
             {
-                InventorySheetSearchCondition con = new InventorySheetSearchCondition();
+                StackInSheetSearchCondition con = new StackInSheetSearchCondition();
                 con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
-                _Sheets = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                _Sheets = (new StackInSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
             {
-                _Sheets = (new InventorySheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition ).QueryObjects;
+                _Sheets = (new StackInSheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition ).QueryObjects;
             }
             _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             return FilterData();
@@ -94,8 +94,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            InventorySheet sheet = item as InventorySheet;
+            StackInSheet sheet = item as StackInSheet;
             row.Cells["colSheetNo"].Value = sheet.ID;
+            row.Cells["colClass"].Value = sheet.DocumentType;
             CompanyInfo supplier = supplierTree1.GetSupplier(sheet.SupplierID);
             row.Cells["colSupplier"].Value = supplier != null ? supplier.Name : string.Empty;
             WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;

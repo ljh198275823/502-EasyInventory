@@ -38,14 +38,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 私有方法
-        private void ShowDeliveryItemsOnGrid(IEnumerable<DeliveryItem> items)
+        private void ShowDeliveryItemsOnGrid(IEnumerable<StackOutItem> items)
         {
             ItemsGrid.Rows.Clear();
             if (items != null)
             {
                 List<string> pids = items.Select(it => it.ProductID).ToList();
                 List<Product> ps = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(new ProductSearchCondition() { ProductIDS = pids }).QueryObjects;
-                foreach (DeliveryItem item in items)
+                foreach (StackOutItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
                     Product p = ps.SingleOrDefault(it => it.ID == item.ProductID);
@@ -57,7 +57,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, DeliveryItem item, Product p)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, StackOutItem item, Product p)
         {
             row.Tag = item;
             row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
@@ -73,12 +73,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colMemo"].Value = item.Memo;
         }
 
-        private List<DeliveryItem> GetDeliveryItemsFromGrid()
+        private List<StackOutItem> GetDeliveryItemsFromGrid()
         {
-            List<DeliveryItem> items = new List<DeliveryItem>();
+            List<StackOutItem> items = new List<StackOutItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
             {
-                if (row.Tag != null) items.Add(row.Tag as DeliveryItem);
+                if (row.Tag != null) items.Add(row.Tag as StackOutItem);
             }
             return items;
         }
@@ -88,12 +88,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             decimal sum = 0;
             foreach (DataGridViewRow row in ItemsGrid.Rows)
             {
-                if (row.Tag != null) sum += (row.Tag as DeliveryItem).Amount;
+                if (row.Tag != null) sum += (row.Tag as StackOutItem).Amount;
             }
             return sum;
         }
 
-        private void ShowSheet(DeliverySheet item)
+        private void ShowSheet(StackOutSheet item)
         {
             if (!string.IsNullOrEmpty(item.ID))
             {
@@ -137,7 +137,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             foreach (DataGridViewRow row in ItemsGrid.Rows)
             {
-                DeliveryItem item = row.Tag as DeliveryItem;
+                StackOutItem item = row.Tag as StackOutItem;
                 if (item != null && item.Count == 0)
                 {
                     MessageBox.Show(string.Format("送货单第 {0} 项送货数量为零", row.Index + 1));
@@ -166,22 +166,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ItemShowing()
         {
-            DeliverySheet sheet = UpdatingItem as DeliverySheet;
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
             if (sheet != null) ShowSheet(sheet);
         }
 
         protected override object GetItemFromInput()
         {
-            DeliverySheet sheet = UpdatingItem as DeliverySheet;
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
             if (sheet == null)
             {
-                sheet = new DeliverySheet();
+                sheet = new StackOutSheet();
                 sheet.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
-                sheet.LastActiveDate = DateTime.Now;
+                sheet.ClassID = StackOutSheetType.DeliverySheet;
             }
             else
             {
-                sheet = UpdatingItem as DeliverySheet;
+                sheet = UpdatingItem as StackOutSheet;
             }
             sheet.CustomerID = Customer != null ? Customer.ID : null;
             sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
@@ -190,12 +190,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             sheet.LinkerPhoneCall = txtLinkerPhone.Text.Trim();
             sheet.Address = txtAddress.Text.Trim();
             sheet.Memo = txtMemo.Text;
-            sheet.Items = new List<DeliveryItem>();
+            sheet.Items = new List<StackOutItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
             {
                 if (row.Tag != null)
                 {
-                    DeliveryItem item = row.Tag as DeliveryItem;
+                    StackOutItem item = row.Tag as StackOutItem;
                     item.SheetNo = sheet.ID;
                     sheet.Items.Add(item);
                 }
@@ -205,12 +205,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override CommandResult AddItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as DeliverySheet, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
+            return (new StackOutSheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as StackOutSheet, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as DeliverySheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+            return (new StackOutSheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as StackOutSheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
@@ -230,7 +230,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 与附件操作相关的方法和事件处理程序
         private void mnu_AttachmentAdd_Click(object sender, EventArgs e)
         {
-            DeliverySheet item = UpdatingItem as DeliverySheet;
+            StackOutSheet item = UpdatingItem as StackOutSheet;
             if (item != null) PerformAddAttach(item.ID, item.DocumentType, gridAttachment);
         }
 
@@ -258,25 +258,25 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 工具栏事件处理
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<DeliverySheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<StackOutSheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<DeliverySheet>(bll, SheetOperation.Approve);
+            StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<StackOutSheet>(bll, SheetOperation.Approve);
         }
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<DeliverySheet>(bll, SheetOperation.UndoApprove);
+            StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<StackOutSheet>(bll, SheetOperation.UndoApprove);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            DeliverySheet sheet = UpdatingItem as DeliverySheet;
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
             if (sheet != null)
             {
                 Print.FrmDeliverySheetPrint frm = new Print.FrmDeliverySheetPrint();
@@ -287,24 +287,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btnShip_Click(object sender, EventArgs e)
         {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<DeliverySheet>(bll, SheetOperation.Ship);
+            StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<StackOutSheet>(bll, SheetOperation.StackOut);
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            DeliverySheetBLL bll = new DeliverySheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<DeliverySheet>(bll, SheetOperation.Nullify);
+            StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
+            PerformOperation<StackOutSheet>(bll, SheetOperation.Nullify);
         }
         #endregion
 
         #region 公共方法
         public void AddDeliveryItem(ProductInventory p)
         {
-            List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
+            List<StackOutItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.ProductID == p.ProductID))
             {
-                DeliveryItem item = new DeliveryItem();
+                StackOutItem item = new StackOutItem();
                 item.ID = Guid.NewGuid();
                 item.ProductID = p.ProductID;
                 item.Unit = p.Unit;
@@ -318,10 +318,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         public void AddDeliveryItem(OrderItemRecord oi)
         {
-            List<DeliveryItem> sources = GetDeliveryItemsFromGrid();
+            List<StackOutItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.OrderItem != null && it.OrderItem.Value == oi.ID))
             {
-                DeliveryItem item = new DeliveryItem();
+                StackOutItem item = new StackOutItem();
                 item.ID = Guid.NewGuid();
                 item.ProductID = oi.ProductID;
                 item.Unit = oi.Unit;
@@ -378,7 +378,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             DataGridViewRow row = ItemsGrid.Rows[e.RowIndex];
             if (row.Tag != null)
             {
-                DeliveryItem item = row.Tag as DeliveryItem;
+                StackOutItem item = row.Tag as StackOutItem;
                 if (col.Name == "colPrice")
                 {
                     decimal price;
@@ -454,10 +454,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (ItemsGrid.SelectedRows.Count > 0)
             {
-                List<DeliveryItem> items = GetDeliveryItemsFromGrid();
+                List<StackOutItem> items = GetDeliveryItemsFromGrid();
                 foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
                 {
-                    if (row.Tag != null) items.Remove(row.Tag as DeliveryItem);
+                    if (row.Tag != null) items.Remove(row.Tag as StackOutItem);
                 }
                 ShowDeliveryItemsOnGrid(items);
             }

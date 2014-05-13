@@ -41,7 +41,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置相关公司类型代码，如1表示货代公司，2表示船公司，3表示保险公司，4表示快递公司 ,5表示客户，6表示供应商...
         /// </summary>
-        public CustomerClass ClassID { get; set; }
+        public CompanyClass ClassID { get; set; }
         /// <summary>
         /// 获取或设置所在国家
         /// </summary>

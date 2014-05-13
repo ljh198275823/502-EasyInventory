@@ -38,7 +38,7 @@
             // 
             // DeliveryRecordBindingSource
             // 
-            this.DeliveryRecordBindingSource.DataSource = typeof(LJH.Inventory.BusinessModel.DeliveryRecord);
+            this.DeliveryRecordBindingSource.DataSource = typeof(LJH.Inventory.BusinessModel.StackOutRecord);
             // 
             // reportViewer1
             // 

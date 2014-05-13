@@ -15,15 +15,15 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmDeliverySheetMaster : FrmMasterBase
+    public partial class FrmStackOutSheetMaster : FrmMasterBase
     {
-        public FrmDeliverySheetMaster()
+        public FrmStackOutSheetMaster()
         {
             InitializeComponent();
         }
 
         #region 私有变量
-        private List<DeliverySheet> _Sheets = null;
+        private List<StackOutSheet> _Sheets = null;
         private List<WareHouse> _Warehouses = null;
         #endregion
 
@@ -36,7 +36,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<object> FilterData()
         {
-            List<DeliverySheet> items = _Sheets;
+            List<StackOutSheet> items = _Sheets;
             if (this.customerTree1.SelectedNode != null)
             {
                 List<CompanyInfo> pcs = null;
@@ -88,13 +88,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (SearchCondition == null)
             {
-                DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
+                StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
                 con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
-                _Sheets = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
             {
-                _Sheets = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             return FilterData();
@@ -102,14 +102,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            DeliverySheet sheet = item as DeliverySheet;
+            StackOutSheet sheet = item as StackOutSheet;
             row.Tag = sheet;
             row.Cells["colSheetNo"].Value = sheet.ID;
+            row.Cells["colClass"].Value = sheet.DocumentType;
             CompanyInfo customer = customerTree1.GetCustomer(sheet.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
             WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;
             row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
-            //row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
             row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? sheet.LastActiveDate.ToString("yyyy-MM-dd") : null;
             row.Cells["colLinker"].Value = sheet.Linker;
@@ -134,6 +134,55 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.ShowItemsOnGrid(items);
             Filter(txtKeyword.Text.Trim());
+        }
+
+        protected override void PerformUpdateData()
+        {
+            if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
+            {
+                object pre = this.dataGridView1.SelectedRows[0].Tag;
+                if (pre != null)
+                {
+                    FrmDetailBase detailForm = GetDetailForm();
+                    if (detailForm != null)
+                    {
+                        detailForm.IsAdding = false;
+                        detailForm.UpdatingItem = pre;
+
+                        detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+                        {
+                            ShowItemInGridViewRow(this.dataGridView1.SelectedRows[0], args.UpdatedItem);
+                        };
+                        detailForm.ShowDialog();
+                    }
+                }
+            }
+        }
+
+        protected override void PerformAddData()
+        {
+            try
+            {
+                FrmDetailBase detailForm = GetDetailForm();
+                if (detailForm != null)
+                {
+                    detailForm.IsAdding = true;
+                    DataGridViewRow row = null;
+                    detailForm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+                    {
+                        row = Add_And_Show_Row(args.AddedItem);
+                    };
+                    detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+                    {
+                        ShowItemInGridViewRow(row, args.UpdatedItem);
+                    };
+                    detailForm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
         #endregion
 

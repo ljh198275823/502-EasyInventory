@@ -10,45 +10,45 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class InventoryRecordProvider : ProviderBase<InventoryRecord, Guid>
+    public class StackOutRecordProvider : ProviderBase<StackOutRecord, Guid>
     {
         #region 构造函数
-        public InventoryRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+        public StackOutRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr, ms)
         {
         }
         #endregion
 
         #region 重写基类方法
-        protected override InventoryRecord GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
+        protected override StackOutRecord GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
             throw new NotImplementedException();
         }
 
-        protected override void InsertingItem(InventoryRecord info, System.Data.Linq.DataContext dc)
+        protected override void InsertingItem(StackOutRecord info, System.Data.Linq.DataContext dc)
         {
             throw new NotImplementedException();
         }
 
-        protected override void UpdatingItem(InventoryRecord newVal, InventoryRecord original, System.Data.Linq.DataContext dc)
+        protected override void UpdatingItem(StackOutRecord newVal, StackOutRecord original, System.Data.Linq.DataContext dc)
         {
             throw new NotImplementedException();
         }
 
-        protected override void DeletingItem(InventoryRecord info, System.Data.Linq.DataContext dc)
+        protected override void DeletingItem(StackOutRecord info, System.Data.Linq.DataContext dc)
         {
             throw new NotImplementedException();
         }
 
-        protected override List<InventoryRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
+        protected override List<StackOutRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<InventoryRecord>(item => item.Supplier);
-            opt.LoadWith<InventoryRecord>(item => item.WareHouse);
-            opt.LoadWith<InventoryRecord>(item => item.Product);
+            opt.LoadWith<StackOutRecord>(item => item.Customer);
+            opt.LoadWith<StackOutRecord>(item => item.WareHouse);
+            opt.LoadWith<StackOutRecord>(item => item.Product);
             opt.LoadWith<Product>(item => item.Category);
             dc.LoadOptions = opt;
-            IQueryable<InventoryRecord> ret = dc.GetTable<InventoryRecord>();
+            IQueryable<StackOutRecord> ret = dc.GetTable<StackOutRecord>();
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
@@ -56,23 +56,22 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.SheetNo));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
             }
-            if (search is InventorySheetSearchCondition)
+            if (search is StackOutSheetSearchCondition)
             {
-                InventorySheetSearchCondition con = search as InventorySheetSearchCondition;
-                if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
+                StackOutSheetSearchCondition con = search as StackOutSheetSearchCondition;
+                if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
+                if (con.SheetTypes != null && con.SheetTypes.Count > 0) ret = ret.Where(item => con.SheetTypes.Contains(item.ClassID));
             }
-            if (search is InventoryRecordSearchCondition)
+            if (search is StackOutRecordSearchCondition)
             {
-                InventoryRecordSearchCondition con = search as InventoryRecordSearchCondition;
+                StackOutRecordSearchCondition con = search as StackOutRecordSearchCondition;
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
                 if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.Product.CategoryID == con.CategoryID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
-                if (!string.IsNullOrEmpty(con.PurchaseID)) ret = ret.Where(item => item.PurchaseOrder == con.PurchaseID);
                 if (con.OrderItem != null) ret = ret.Where(item => item.OrderItem == con.OrderItem);
-                if (con.PurchaseItem != null) ret = ret.Where(item => item.PurchaseItem == con.PurchaseItem);
             }
-            List<InventoryRecord> items = ret.ToList();
+            List<StackOutRecord> items = ret.ToList();
             return items;
         }
         #endregion

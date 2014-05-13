@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class InventoryRecordSearchCondition : InventorySheetSearchCondition
+    public class StackInRecordSearchCondition : StackInSheetSearchCondition
     {
         /// <summary>
         /// 获取或设置出货记录查询条件中的货品ID

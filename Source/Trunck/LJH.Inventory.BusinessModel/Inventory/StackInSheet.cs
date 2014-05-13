@@ -6,21 +6,25 @@ using System.Text;
 namespace LJH.Inventory.BusinessModel
 {
     /// <summary>
-    /// 表示收货单
+    /// 表示入库单
     /// </summary>
-    public class InventorySheet : ISheet<string>
+    public class StackInSheet : ISheet<string>
     {
         #region 构造函数
-        public InventorySheet()
+        public StackInSheet()
         {
         }
         #endregion
 
         #region 公共属性
         /// <summary>
-        /// 获取或设置收货单号
+        /// 获取或设置入库单单号
         /// </summary>
         public string ID { get; set; }
+        /// <summary>
+        /// 获取或设置入库单类型
+        /// </summary>
+        public StackInSheetType ClassID { get; set; }
         /// <summary>
         /// 获取或设置单据日期
         /// </summary>
@@ -58,9 +62,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Memo { get; set; }
         /// <summary>
-        /// 获取或设置所有收货单项
+        /// 获取或设置所有入库单项
         /// </summary>
-        public List<InventoryItem> Items { get; set; }
+        public List<StackInItem> Items { get; set; }
         #endregion
 
         #region 只读属性
@@ -89,7 +93,9 @@ namespace LJH.Inventory.BusinessModel
                     return State == SheetState.Approved;
                 case SheetOperation.Nullify:
                     return State != SheetState.Canceled && State != SheetState.Inventory;
-                case SheetOperation.Inventory:
+                case SheetOperation.StackIn:
+                    return (State == SheetState.Add || State == SheetState.Approved);
+                case SheetOperation.StackOut :
                     return (State == SheetState.Add || State == SheetState.Approved);
                 default:
                     return false;
@@ -100,7 +106,17 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string DocumentType
         {
-            get { return "InventorySheet"; }
+            get
+            {
+                switch (ClassID)
+                {
+                    case StackInSheetType.InventorySheet:
+                        return "采购入库单";
+                    default:
+                        throw new Exception("入库单的类型没有指定");
+                }
+
+            }
         }
 
         public ISheet<string> Clone()

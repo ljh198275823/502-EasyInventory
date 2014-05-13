@@ -23,16 +23,16 @@ namespace LJH.Inventory.UI.Report
         #region 重写基类方法
         protected override void OnItemSearching(EventArgs e)
         {
-            DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
+            StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
             con.LastActiveDate  = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Shipped);
-            List<DeliverySheet> sheets = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            List<StackOutSheet> sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
 
             var salesGroup = sheets.GroupBy(item => item.SalesPerson);
             foreach (var group in salesGroup)
             {
-                IEnumerable<IGrouping<string, DeliverySheet>> gs = null;
+                IEnumerable<IGrouping<string, StackOutSheet>> gs = null;
                 //if (rdByDay.Checked)
                 //{
                 //    gs = group.GroupBy(item => item.DeliveryDate.Value.ToString("yyyy-MM-dd"));

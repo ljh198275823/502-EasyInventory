@@ -249,11 +249,11 @@
     <Compile Include="Forms\Inventory\FrmDeliverySheetDetail.designer.cs">
       <DependentUpon>FrmDeliverySheetDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmDeliverySheetMaster.cs">
+    <Compile Include="Forms\Inventory\FrmStackOutSheetMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmDeliverySheetMaster.designer.cs">
-      <DependentUpon>FrmDeliverySheetMaster.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\FrmStackOutSheetMaster.designer.cs">
+      <DependentUpon>FrmStackOutSheetMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Financial\FrmExpenditureRecordDetail.cs">
       <SubType>Form</SubType>
@@ -381,11 +381,11 @@
     <Compile Include="Forms\Inventory\FrmInventorySheetDetail.Designer.cs">
       <DependentUpon>FrmInventorySheetDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmInventorySheetMaster.cs">
+    <Compile Include="Forms\Inventory\FrmStackInSheetMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmInventorySheetMaster.Designer.cs">
-      <DependentUpon>FrmInventorySheetMaster.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\FrmStackInSheetMaster.Designer.cs">
+      <DependentUpon>FrmStackInSheetMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\General\FrmProductCategoryMaster.cs">
       <SubType>Form</SubType>
@@ -676,8 +676,8 @@
     <EmbeddedResource Include="Forms\Inventory\FrmDeliverySheetDetail.resx">
       <DependentUpon>FrmDeliverySheetDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\FrmDeliverySheetMaster.resx">
-      <DependentUpon>FrmDeliverySheetMaster.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\FrmStackOutSheetMaster.resx">
+      <DependentUpon>FrmStackOutSheetMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmExpenditureRecordDetail.resx">
       <DependentUpon>FrmExpenditureRecordDetail.cs</DependentUpon>
@@ -745,8 +745,8 @@
     <EmbeddedResource Include="Forms\Inventory\FrmInventorySheetDetail.resx">
       <DependentUpon>FrmInventorySheetDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\FrmInventorySheetMaster.resx">
-      <DependentUpon>FrmInventorySheetMaster.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\FrmStackInSheetMaster.resx">
+      <DependentUpon>FrmStackInSheetMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\General\FrmProductCategoryMaster.resx">
       <DependentUpon>FrmProductCategoryMaster.cs</DependentUpon>

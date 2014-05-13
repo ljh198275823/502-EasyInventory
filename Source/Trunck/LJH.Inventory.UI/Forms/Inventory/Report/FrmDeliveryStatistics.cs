@@ -23,26 +23,28 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         }
 
         #region 私有方法
-        private List<DeliveryRecord> GetItems()
+        private List<StackOutRecord> GetItems()
         {
-            DeliveryRecordSearchCondition con = new DeliveryRecordSearchCondition();
+            StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
             con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.SheetTypes = new List<StackOutSheetType>();
+            con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Shipped);
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
             if (txtProduct.Tag != null) con.ProductID = (txtProduct.Tag as Product).ID;
-            return (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            return (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
         }
         #endregion
 
         #region 重写基类方法
         protected override void OnItemSearching(EventArgs e)
         {
-            List<DeliveryRecord> records = GetItems();
+            List<StackOutRecord> records = GetItems();
             if (records != null && records.Count > 0)
             {
-                IEnumerable<IGrouping<string, DeliveryRecord>> dtGroup = null;
+                IEnumerable<IGrouping<string, StackOutRecord>> dtGroup = null;
                 if (rdByDay.Checked)
                 {
                     dtGroup = records.GroupBy(item => item.LastActiveDate.ToString("yyyy-MM-dd"));
@@ -57,7 +59,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 }
                 foreach (var g in dtGroup)
                 {
-                    IEnumerable<IGrouping<string, DeliveryRecord>> group = null;
+                    IEnumerable<IGrouping<string, StackOutRecord>> group = null;
                     if (rdByProdcut.Checked)
                     {
                         group = g.GroupBy(item => (item.ProductID + " " + item.Product.Name));

@@ -94,7 +94,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
-                con.ClassID = CustomerClass.Supplier;
+                con.ClassID = CompanyClass.Supplier;
                 _Suppliers = bll.GetItems(con).QueryObjects;
             }
             else

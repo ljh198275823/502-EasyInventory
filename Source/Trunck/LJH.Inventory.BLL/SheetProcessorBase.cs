@@ -109,7 +109,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         protected virtual void DoInventory(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.Inventory)));
+            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.StackIn)));
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         protected virtual void DoShip(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.Ship)));
+            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.StackOut)));
         }
         #endregion
 
@@ -225,10 +225,10 @@ namespace LJH.Inventory.BLL
                         case SheetOperation.Nullify:
                             DoNullify(sheet, unitWork, dt.Value, opt);
                             break;
-                        case SheetOperation.Inventory:
+                        case SheetOperation.StackIn:
                             DoInventory(sheet, unitWork, dt.Value, opt);
                             break;
-                        case SheetOperation.Ship:
+                        case SheetOperation.StackOut:
                             DoShip(sheet, unitWork, dt.Value, opt);
                             break;
                         default:

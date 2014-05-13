@@ -6,18 +6,22 @@ using System.Text;
 namespace LJH.Inventory.BusinessModel
 {
     /// <summary>
-    /// 表示库存品的出货记录
+    /// 表示产品的出库记录
     /// </summary>
-    public class DeliveryRecord : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
+    public class StackOutRecord : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
-        public DeliveryRecord()
+        public StackOutRecord()
         {
         }
         #endregion
 
         #region 公共属性
         public Guid ID { get; set; }
+        /// <summary>
+        /// 获取或设置出库单类型
+        /// </summary>
+        public StackOutSheetType ClassID { get; set; }
         /// <summary>
         /// 获取或设置上次活动时间
         /// </summary>

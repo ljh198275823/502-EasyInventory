@@ -188,7 +188,7 @@ namespace InventoryApplication
 
         private void mnu_DeliverySheet_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmDeliverySheetMaster>();
+            ShowSingleForm<FrmStackOutSheetMaster>();
         }
 
         private void mnu_ProductCategory_Click(object sender, EventArgs e)
@@ -252,7 +252,7 @@ namespace InventoryApplication
 
         private void mnu_InventorySheet_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmInventorySheetMaster>();
+            ShowSingleForm<FrmStackInSheetMaster>();
         }
 
         private void mnu_CustomerPayment_Click(object sender, EventArgs e)

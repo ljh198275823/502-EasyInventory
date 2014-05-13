@@ -239,8 +239,8 @@ namespace LJH.Inventory.UI.Forms
                     if (toolBar.Items["btnSave"] != null) toolBar.Items["btnSave"].Enabled = sheet.CanDo(SheetOperation.Modify);
                     if (toolBar.Items["btnApprove"] != null) toolBar.Items["btnApprove"].Enabled = sheet.CanDo(SheetOperation.Approve);
                     if (toolBar.Items["btnUndoApprove"] != null) toolBar.Items["btnUndoApprove"].Enabled = sheet.CanDo(SheetOperation.UndoApprove);
-                    if (toolBar.Items["btnInventory"] != null) toolBar.Items["btnInventory"].Enabled = sheet.CanDo(SheetOperation.Inventory);
-                    if (toolBar.Items["btnShip"] != null) toolBar.Items["btnShip"].Enabled = sheet.CanDo(SheetOperation.Ship);
+                    if (toolBar.Items["btnInventory"] != null) toolBar.Items["btnInventory"].Enabled = sheet.CanDo(SheetOperation.StackIn);
+                    if (toolBar.Items["btnShip"] != null) toolBar.Items["btnShip"].Enabled = sheet.CanDo(SheetOperation.StackOut);
                     if (toolBar.Items["btnNullify"] != null) toolBar.Items["btnNullify"].Enabled = sheet.CanDo(SheetOperation.Nullify);
                 }
             }

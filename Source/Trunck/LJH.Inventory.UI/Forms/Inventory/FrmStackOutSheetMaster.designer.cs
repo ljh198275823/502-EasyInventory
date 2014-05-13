@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Inventory
 {
-    partial class FrmInventorySheetMaster
+    partial class FrmStackOutSheetMaster
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -37,37 +43,75 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chkInventory = new System.Windows.Forms.CheckBox();
+            this.chkShipped = new System.Windows.Forms.CheckBox();
             this.chkNullify = new System.Windows.Forms.CheckBox();
             this.chkApproved = new System.Windows.Forms.CheckBox();
             this.chkAdded = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.supplierTree1 = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
+            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddSheet = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.CategoryMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 98);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // pnlFilter
             // 
@@ -78,8 +122,8 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1197, 33);
-            this.pnlFilter.TabIndex = 114;
+            this.pnlFilter.Size = new System.Drawing.Size(1244, 33);
+            this.pnlFilter.TabIndex = 113;
             // 
             // panel5
             // 
@@ -88,7 +132,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(282, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(915, 33);
+            this.panel5.Size = new System.Drawing.Size(962, 33);
             this.panel5.TabIndex = 6;
             // 
             // txtKeyword
@@ -99,7 +143,7 @@
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(69, 7);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(834, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(881, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
@@ -132,7 +176,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.chkInventory);
+            this.panel1.Controls.Add(this.chkShipped);
             this.panel1.Controls.Add(this.chkNullify);
             this.panel1.Controls.Add(this.chkApproved);
             this.panel1.Controls.Add(this.chkAdded);
@@ -143,23 +187,23 @@
             this.panel1.Size = new System.Drawing.Size(280, 33);
             this.panel1.TabIndex = 1;
             // 
-            // chkInventory
+            // chkShipped
             // 
-            this.chkInventory.AutoSize = true;
-            this.chkInventory.Checked = true;
-            this.chkInventory.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkInventory.Location = new System.Drawing.Point(159, 9);
-            this.chkInventory.Name = "chkInventory";
-            this.chkInventory.Size = new System.Drawing.Size(60, 16);
-            this.chkInventory.TabIndex = 4;
-            this.chkInventory.Text = "已收货";
-            this.chkInventory.UseVisualStyleBackColor = true;
-            this.chkInventory.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
+            this.chkShipped.AutoSize = true;
+            this.chkShipped.Checked = true;
+            this.chkShipped.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkShipped.Location = new System.Drawing.Point(159, 9);
+            this.chkShipped.Name = "chkShipped";
+            this.chkShipped.Size = new System.Drawing.Size(60, 16);
+            this.chkShipped.TabIndex = 4;
+            this.chkShipped.Text = "已发货";
+            this.chkShipped.UseVisualStyleBackColor = true;
+            this.chkShipped.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // chkNullify
             // 
             this.chkNullify.AutoSize = true;
-            this.chkNullify.Location = new System.Drawing.Point(225, 9);
+            this.chkNullify.Location = new System.Drawing.Point(220, 9);
             this.chkNullify.Name = "chkNullify";
             this.chkNullify.Size = new System.Drawing.Size(48, 16);
             this.chkNullify.TabIndex = 3;
@@ -204,26 +248,26 @@
             // 
             // pnlLeft
             // 
-            this.pnlLeft.Controls.Add(this.supplierTree1);
+            this.pnlLeft.Controls.Add(this.customerTree1);
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 33);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(282, 319);
-            this.pnlLeft.TabIndex = 115;
+            this.pnlLeft.Size = new System.Drawing.Size(281, 364);
+            this.pnlLeft.TabIndex = 114;
             // 
-            // supplierTree1
+            // customerTree1
             // 
-            this.supplierTree1.ContextMenuStrip = this.CategoryMenu;
-            this.supplierTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.supplierTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.supplierTree1.HideSelection = false;
-            this.supplierTree1.ItemHeight = 20;
-            this.supplierTree1.LoadSupplier = true;
-            this.supplierTree1.Location = new System.Drawing.Point(0, 0);
-            this.supplierTree1.Name = "supplierTree1";
-            this.supplierTree1.Size = new System.Drawing.Size(282, 319);
-            this.supplierTree1.TabIndex = 0;
-            this.supplierTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.supplierTree1_NodeMouseClick);
+            this.customerTree1.ContextMenuStrip = this.CategoryMenu;
+            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.customerTree1.HideSelection = false;
+            this.customerTree1.ItemHeight = 20;
+            this.customerTree1.LoadCustomer = true;
+            this.customerTree1.Location = new System.Drawing.Point(0, 0);
+            this.customerTree1.Name = "customerTree1";
+            this.customerTree1.Size = new System.Drawing.Size(281, 364);
+            this.customerTree1.TabIndex = 0;
+            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
             // 
             // CategoryMenu
             // 
@@ -236,16 +280,16 @@
             // 
             this.mnu_AddSheet.Name = "mnu_AddSheet";
             this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
-            this.mnu_AddSheet.Text = "新建收货单";
+            this.mnu_AddSheet.Text = "新建送货单";
             this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(282, 33);
+            this.splitter1.Location = new System.Drawing.Point(281, 33);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 319);
-            this.splitter1.TabIndex = 116;
+            this.splitter1.Size = new System.Drawing.Size(8, 364);
+            this.splitter1.TabIndex = 115;
             this.splitter1.TabStop = false;
             // 
             // dataGridView1
@@ -257,76 +301,46 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetNo,
-            this.colSupplier,
+            this.colClass,
+            this.colCustomer,
             this.colWareHouse,
             this.colState,
-            this.colInventoryDate,
+            this.colShipDate,
+            this.colLinker,
+            this.colTelphone,
+            this.colAddress,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(290, 33);
+            this.dataGridView1.Location = new System.Drawing.Point(289, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(907, 319);
-            this.dataGridView1.TabIndex = 117;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 98);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_Export.Text = "导出...";
+            this.dataGridView1.Size = new System.Drawing.Size(955, 364);
+            this.dataGridView1.TabIndex = 116;
             // 
             // colSheetNo
             // 
-            this.colSheetNo.HeaderText = "收货单号";
+            this.colSheetNo.HeaderText = "出库单号";
             this.colSheetNo.Name = "colSheetNo";
             this.colSheetNo.ReadOnly = true;
             // 
-            // colSupplier
+            // colClass
             // 
-            this.colSupplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSupplier.HeaderText = "供应商";
-            this.colSupplier.MinimumWidth = 150;
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.ReadOnly = true;
-            this.colSupplier.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSupplier.Width = 150;
+            this.colClass.HeaderText = "出库单类型";
+            this.colClass.Name = "colClass";
+            this.colClass.ReadOnly = true;
+            // 
+            // colCustomer
+            // 
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCustomer.HeaderText = "客户";
+            this.colCustomer.MinimumWidth = 150;
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
+            this.colCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCustomer.Width = 150;
             // 
             // colWareHouse
             // 
@@ -339,16 +353,35 @@
             this.colState.HeaderText = "状态";
             this.colState.Name = "colState";
             this.colState.ReadOnly = true;
-            this.colState.Width = 80;
+            this.colState.Width = 60;
             // 
-            // colInventoryDate
+            // colShipDate
             // 
             dataGridViewCellStyle1.Format = "D";
             dataGridViewCellStyle1.NullValue = null;
-            this.colInventoryDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colInventoryDate.HeaderText = "收货日期";
-            this.colInventoryDate.Name = "colInventoryDate";
-            this.colInventoryDate.ReadOnly = true;
+            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colShipDate.HeaderText = "发货日期";
+            this.colShipDate.Name = "colShipDate";
+            this.colShipDate.ReadOnly = true;
+            // 
+            // colLinker
+            // 
+            this.colLinker.HeaderText = "联系人";
+            this.colLinker.Name = "colLinker";
+            this.colLinker.ReadOnly = true;
+            // 
+            // colTelphone
+            // 
+            this.colTelphone.HeaderText = "联系电话";
+            this.colTelphone.Name = "colTelphone";
+            this.colTelphone.ReadOnly = true;
+            // 
+            // colAddress
+            // 
+            this.colAddress.HeaderText = "送货地址";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.ReadOnly = true;
+            this.colAddress.Width = 150;
             // 
             // colMemo
             // 
@@ -358,22 +391,23 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
-            // FrmInventorySheetMaster
+            // FrmStackOutSheetMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1197, 374);
+            this.ClientSize = new System.Drawing.Size(1244, 419);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.pnlFilter);
-            this.Name = "FrmInventorySheetMaster";
-            this.Text = "收货单资料";
+            this.Name = "FrmStackOutSheetMaster";
+            this.Text = "出库单资料";
             this.Controls.SetChildIndex(this.pnlFilter, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.pnlFilter.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -382,7 +416,6 @@
             this.pnlLeft.ResumeLayout(false);
             this.CategoryMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,6 +423,12 @@
 
         #endregion
 
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.Panel pnlFilter;
         private System.Windows.Forms.Panel panel5;
         private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
@@ -397,28 +436,26 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.CheckBox chkInventory;
         private System.Windows.Forms.CheckBox chkNullify;
         private System.Windows.Forms.CheckBox chkApproved;
         private System.Windows.Forms.CheckBox chkAdded;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlLeft;
-        private Controls.SupplierTree supplierTree1;
+        private Controls.CustomerTree customerTree1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.CheckBox chkShipped;
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddSheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colShipDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

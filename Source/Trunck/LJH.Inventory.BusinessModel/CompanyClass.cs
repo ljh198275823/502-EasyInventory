@@ -8,7 +8,7 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户类型枚举
     /// </summary>
-    public enum  CustomerClass
+    public enum  CompanyClass
     {
         /// <summary>
         /// 其它

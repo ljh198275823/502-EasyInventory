@@ -52,21 +52,21 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         #region 事件处理程序
         private void FrmProductInventoryRecordsView_Load(object sender, EventArgs e)
         {
-            DeliveryRecordSearchCondition con1 = new DeliveryRecordSearchCondition();
+            StackOutRecordSearchCondition con1 = new StackOutRecordSearchCondition();
             con1.LastActiveDate = new DateTimeRange(DateTime.Today.AddMonths(-1), DateTime.Now);
             con1.States = new List<SheetState>();
             con1.States.Add(SheetState.Shipped);
             con1.ProductID = ProductInventory.ProductID;
             con1.WareHouseID = ProductInventory.WareHouseID;
-            List<DeliveryRecord> item1 = new DeliverySheetBLL(AppSettings.Current.ConnStr).GetDeliveryRecords(con1).QueryObjects;
+            List<StackOutRecord> item1 = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetDeliveryRecords(con1).QueryObjects;
 
-            InventoryRecordSearchCondition con2 = new InventoryRecordSearchCondition();
+            StackInRecordSearchCondition con2 = new StackInRecordSearchCondition();
             con2.LastActiveDate = new DateTimeRange(DateTime.Today.AddMonths(-1), DateTime.Now);
             con2.States = new List<SheetState>();
             con2.States.Add(SheetState.Inventory);
             con2.ProductID = ProductInventory.ProductID;
             con2.WareHouseID = ProductInventory.WareHouseID;
-            List<InventoryRecord> item2 = new InventorySheetBLL(AppSettings.Current.ConnStr).GetInventoryRecords(con2).QueryObjects;
+            List<StackInRecord> item2 = new StackInSheetBLL(AppSettings.Current.ConnStr).GetInventoryRecords(con2).QueryObjects;
 
             List<ProductInventoryRecord> items = new List<ProductInventoryRecord>();
             items.AddRange(item1.Select(item => new ProductInventoryRecord() { Date = item.LastActiveDate, ProductID = item.ProductID, ProductName = item.Product.Name, Out = item.Count, SheetNo = item.SheetNo }));

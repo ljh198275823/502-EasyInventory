@@ -5,10 +5,13 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class DeliveryItem
+    /// <summary>
+    /// 表示出库单项
+    /// </summary>
+    public class StackOutItem
     {
         #region 构造函数
-        public DeliveryItem()
+        public StackOutItem()
         {
         }
         #endregion

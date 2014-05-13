@@ -10,31 +10,31 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class DeliverySheetProvider : ProviderBase<DeliverySheet, string>
+    public class StackOutSheetProvider : ProviderBase<StackOutSheet, string>
     {
         #region 构造函数
-        public DeliverySheetProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+        public StackOutSheetProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
             : base(connStr, ms)
         {
         }
         #endregion
 
         #region 重写基类方法
-        protected override DeliverySheet GetingItemByID(string id, System.Data.Linq.DataContext dc)
+        protected override StackOutSheet GetingItemByID(string id, System.Data.Linq.DataContext dc)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<DeliverySheet>(item => item.Items);
+            opt.LoadWith<StackOutSheet>(item => item.Items);
             dc.LoadOptions = opt;
-            DeliverySheet sheet = dc.GetTable<DeliverySheet>().SingleOrDefault(item => item.ID == id);
+            StackOutSheet sheet = dc.GetTable<StackOutSheet>().SingleOrDefault(item => item.ID == id);
             return sheet;
         }
 
-        protected override List<DeliverySheet> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
+        protected override List<StackOutSheet> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<DeliverySheet>(item => item.Items);
+            opt.LoadWith<StackOutSheet>(item => item.Items);
             dc.LoadOptions = opt;
-            IQueryable<DeliverySheet> ret = dc.GetTable<DeliverySheet>();
+            IQueryable<StackOutSheet> ret = dc.GetTable<StackOutSheet>();
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
@@ -43,11 +43,12 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
             }
-            if (search is DeliverySheetSearchCondition)
+            if (search is StackOutSheetSearchCondition)
             {
-                DeliverySheetSearchCondition con = search as DeliverySheetSearchCondition;
+                StackOutSheetSearchCondition con = search as StackOutSheetSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
+                if (con.SheetTypes != null && con.SheetTypes.Count > 0) ret = ret.Where(item => con.SheetTypes.Contains(item.ClassID));
                 if (con.WithTax != null)
                 {
                     if (con.WithTax.Value)
@@ -60,31 +61,31 @@ namespace LJH.Inventory.DAL.LinqProvider
                     }
                 }
             }
-            List<DeliverySheet> sheets = ret.ToList();
+            List<StackOutSheet> sheets = ret.ToList();
             return sheets;
         }
 
-        protected override void UpdatingItem(DeliverySheet newVal, DeliverySheet original, DataContext dc)
+        protected override void UpdatingItem(StackOutSheet newVal, StackOutSheet original, DataContext dc)
         {
-            dc.GetTable<DeliverySheet>().Attach(newVal, original);
-            foreach (DeliveryItem item in newVal.Items)
+            dc.GetTable<StackOutSheet>().Attach(newVal, original);
+            foreach (StackOutItem item in newVal.Items)
             {
-                DeliveryItem old = original.Items.SingleOrDefault(it => it.ID == item.ID);
+                StackOutItem old = original.Items.SingleOrDefault(it => it.ID == item.ID);
                 if (old != null)
                 {
-                    dc.GetTable<DeliveryItem>().Attach(item, old);
+                    dc.GetTable<StackOutItem>().Attach(item, old);
                 }
                 else
                 {
-                    dc.GetTable<DeliveryItem>().InsertOnSubmit(item);
+                    dc.GetTable<StackOutItem>().InsertOnSubmit(item);
                 }
             }
-            foreach (DeliveryItem item in original.Items)
+            foreach (StackOutItem item in original.Items)
             {
                 if (newVal.Items.SingleOrDefault(it => it.ID == item.ID) == null)
                 {
-                    dc.GetTable<DeliveryItem>().Attach(item);
-                    dc.GetTable<DeliveryItem>().DeleteOnSubmit(item);
+                    dc.GetTable<StackOutItem>().Attach(item);
+                    dc.GetTable<StackOutItem>().DeleteOnSubmit(item);
                 }
             }
         }

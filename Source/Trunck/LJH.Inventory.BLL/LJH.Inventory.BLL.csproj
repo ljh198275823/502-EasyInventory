@@ -89,7 +89,7 @@
     <Compile Include="CustomerReceivableBLL.cs" />
     <Compile Include="CustomerTypeBLL.cs" />
     <Compile Include="DatetimeSyncService.cs" />
-    <Compile Include="DeliverySheetBLL.cs" />
+    <Compile Include="StackOutSheetBLL.cs" />
     <Compile Include="DepartmentBLL.cs" />
     <Compile Include="DocumentOperationBLL.cs" />
     <Compile Include="ExpenditureTypeBLL.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="PortBLL.cs" />
     <Compile Include="PriceTermBLL.cs" />
     <Compile Include="ProductInventoryBLL.cs" />
-    <Compile Include="InventorySheetBLL.cs" />
+    <Compile Include="StackInSheetBLL.cs" />
     <Compile Include="OrderBLL.cs" />
     <Compile Include="ProductBLL.cs" />
     <Compile Include="OperatorBLL.cs" />

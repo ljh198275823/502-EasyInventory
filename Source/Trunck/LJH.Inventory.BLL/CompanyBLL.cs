@@ -19,14 +19,14 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 私有方法
-        private string CreateCustomerID(CustomerClass classID)
+        private string CreateCustomerID(CompanyClass classID)
         {
             string id = null;
-            if (classID == CustomerClass.Customer)
+            if (classID == CompanyClass.Customer)
             {
                 id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPrefix, UserSettings.Current.CustomerSerialCount, "customer");
             }
-            else if (classID == CustomerClass.Supplier)
+            else if (classID == CompanyClass.Supplier)
             {
                 id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "supplier");
             }
@@ -46,7 +46,7 @@ namespace LJH.Inventory.BLL
         public QueryResultList<CompanyInfo> GetAllCustomers()
         {
             CustomerSearchCondition con = new CustomerSearchCondition();
-            con.ClassID = CustomerClass.Customer;
+            con.ClassID = CompanyClass.Customer;
             return GetItems(con);
         }
         /// <summary>
@@ -64,7 +64,7 @@ namespace LJH.Inventory.BLL
         public QueryResultList<CompanyInfo> GetAllSuppliers()
         {
             CustomerSearchCondition con = new CustomerSearchCondition();
-            con.ClassID = CustomerClass.Supplier;
+            con.ClassID = CompanyClass.Supplier;
             return GetItems(con);
         }
 
@@ -131,9 +131,9 @@ namespace LJH.Inventory.BLL
 
         public override CommandResult Delete(CompanyInfo info)
         {
-            DeliverySheetSearchCondition con = new DeliverySheetSearchCondition();
+            StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
             con.CustomerID = info.ID;
-            List<DeliverySheet> items = (new DeliverySheetBLL(_RepoUri)).GetItems(con).QueryObjects;
+            List<StackOutSheet> items = (new StackOutSheetBLL(_RepoUri)).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 return new CommandResult(ResultCode.Fail, string.Format("不能删除客户 {0} 的资料，系统中已经存在此客户的送货单", info.Name));

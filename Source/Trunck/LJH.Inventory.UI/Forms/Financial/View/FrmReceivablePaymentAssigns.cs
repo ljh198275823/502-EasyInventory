@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             this.Text = string.Format("{0} 的付款项", receivableID);
             GridView.Rows.Clear();
-            List<CustomerPaymentAssign> assigns = (new DeliverySheetBLL(AppSettings.Current.ConnStr)).GetAssigns(receivableID).QueryObjects;
+            List<CustomerPaymentAssign> assigns = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetAssigns(receivableID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 foreach (CustomerPaymentAssign assign in assigns)

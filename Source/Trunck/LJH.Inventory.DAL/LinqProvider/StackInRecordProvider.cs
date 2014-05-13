@@ -10,45 +10,45 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class DeliveryRecordProvider : ProviderBase<DeliveryRecord, Guid>
+    public class StackInRecordProvider : ProviderBase<StackInRecord, Guid>
     {
         #region 构造函数
-        public DeliveryRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr, ms)
+        public StackInRecordProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+            : base(connStr,ms)
         {
         }
         #endregion
 
         #region 重写基类方法
-        protected override DeliveryRecord GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
+        protected override StackInRecord GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
             throw new NotImplementedException();
         }
 
-        protected override void InsertingItem(DeliveryRecord info, System.Data.Linq.DataContext dc)
+        protected override void InsertingItem(StackInRecord info, System.Data.Linq.DataContext dc)
         {
             throw new NotImplementedException();
         }
 
-        protected override void UpdatingItem(DeliveryRecord newVal, DeliveryRecord original, System.Data.Linq.DataContext dc)
+        protected override void UpdatingItem(StackInRecord newVal, StackInRecord original, System.Data.Linq.DataContext dc)
         {
             throw new NotImplementedException();
         }
 
-        protected override void DeletingItem(DeliveryRecord info, System.Data.Linq.DataContext dc)
+        protected override void DeletingItem(StackInRecord info, System.Data.Linq.DataContext dc)
         {
             throw new NotImplementedException();
         }
 
-        protected override List<DeliveryRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
+        protected override List<StackInRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<DeliveryRecord>(item => item.Customer);
-            opt.LoadWith<DeliveryRecord>(item => item.WareHouse);
-            opt.LoadWith<DeliveryRecord>(item => item.Product);
+            opt.LoadWith<StackInRecord>(item => item.Supplier);
+            opt.LoadWith<StackInRecord>(item => item.WareHouse);
+            opt.LoadWith<StackInRecord>(item => item.Product);
             opt.LoadWith<Product>(item => item.Category);
             dc.LoadOptions = opt;
-            IQueryable<DeliveryRecord> ret = dc.GetTable<DeliveryRecord>();
+            IQueryable<StackInRecord> ret = dc.GetTable<StackInRecord>();
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
@@ -56,21 +56,23 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.SheetNo));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
             }
-            if (search is DeliverySheetSearchCondition)
+            if (search is StackInSheetSearchCondition)
             {
-                DeliverySheetSearchCondition con = search as DeliverySheetSearchCondition;
-                if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
+                StackInSheetSearchCondition con = search as StackInSheetSearchCondition;
+                if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
             }
-            if (search is DeliveryRecordSearchCondition)
+            if (search is StackInRecordSearchCondition)
             {
-                DeliveryRecordSearchCondition con = search as DeliveryRecordSearchCondition;
+                StackInRecordSearchCondition con = search as StackInRecordSearchCondition;
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
                 if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.Product.CategoryID == con.CategoryID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
+                if (!string.IsNullOrEmpty(con.PurchaseID)) ret = ret.Where(item => item.PurchaseOrder == con.PurchaseID);
                 if (con.OrderItem != null) ret = ret.Where(item => item.OrderItem == con.OrderItem);
+                if (con.PurchaseItem != null) ret = ret.Where(item => item.PurchaseItem == con.PurchaseItem);
             }
-            List<DeliveryRecord> items = ret.ToList();
+            List<StackInRecord> items = ret.ToList();
             return items;
         }
         #endregion

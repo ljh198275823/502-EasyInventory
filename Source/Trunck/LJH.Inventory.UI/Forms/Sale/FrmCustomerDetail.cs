@@ -105,7 +105,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             if (UpdatingItem == null)
             {
                 info = new CompanyInfo();
-                info.ClassID = CustomerClass.Customer;
+                info.ClassID = CompanyClass.Customer;
                 info.Creater = Operator.Current.Name;
             }
             else

@@ -107,7 +107,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
             if (UpdatingItem == null)
             {
                 info = new CompanyInfo();
-                info.ClassID = CustomerClass.Supplier ;
+                info.ClassID = CompanyClass.Supplier ;
                 info.Creater = Operator.Current.Name;
             }
             else

@@ -25,11 +25,11 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 发货
         /// </summary>
-        Ship=3,
+        StackOut=3,
         /// <summary>
         /// 入库
         /// </summary>
-        Inventory=4,
+        StackIn=4,
         /// <summary>
         /// 作废
         /// </summary>

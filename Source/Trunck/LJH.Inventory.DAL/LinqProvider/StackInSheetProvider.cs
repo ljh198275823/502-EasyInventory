@@ -10,32 +10,32 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class InventorySheetProvider : ProviderBase<InventorySheet, string>
+    public class StackInSheetProvider : ProviderBase<StackInSheet, string>
     {
         #region 构造函数
-        public InventorySheetProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+        public StackInSheetProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
             : base(connStr, ms)
         {
         }
         #endregion
 
         #region 重写基类方法
-        protected override InventorySheet GetingItemByID(string id, System.Data.Linq.DataContext dc)
+        protected override StackInSheet GetingItemByID(string id, System.Data.Linq.DataContext dc)
         {
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<InventorySheet>(s => s.Items);
+            opt.LoadWith<StackInSheet>(s => s.Items);
             dc.LoadOptions = opt;
-            InventorySheet sheet = dc.GetTable<InventorySheet>().SingleOrDefault(item => item.ID == id);
+            StackInSheet sheet = dc.GetTable<StackInSheet>().SingleOrDefault(item => item.ID == id);
             return sheet;
         }
 
-        protected override List<InventorySheet> GetingItems(DataContext dc, SearchCondition search)
+        protected override List<StackInSheet> GetingItems(DataContext dc, SearchCondition search)
         {
             //这种通过两次查询获取信息的方式，在商品很多时会引起性能问题，以后看能不能做联接查询，一次出结果
             DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<InventorySheet>(sheet => sheet.Items);
+            opt.LoadWith<StackInSheet>(sheet => sheet.Items);
             dc.LoadOptions = opt;
-            IQueryable<InventorySheet> ret = dc.GetTable<InventorySheet>();
+            IQueryable<StackInSheet> ret = dc.GetTable<StackInSheet>();
             if (search is SheetSearchCondition)
             {
                 SheetSearchCondition con = search as SheetSearchCondition;
@@ -44,49 +44,49 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
             }
-            if (search is InventorySheetSearchCondition)
+            if (search is StackInSheetSearchCondition)
             {
-                InventorySheetSearchCondition con = search as InventorySheetSearchCondition;
+                StackInSheetSearchCondition con = search as StackInSheetSearchCondition;
                 if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
             }
-            List<InventorySheet> sheets = ret.ToList();
+            List<StackInSheet> sheets = ret.ToList();
             return sheets;
         }
 
-        protected override void UpdatingItem(InventorySheet newVal, InventorySheet original, DataContext dc)
+        protected override void UpdatingItem(StackInSheet newVal, StackInSheet original, DataContext dc)
         {
-            dc.GetTable<InventorySheet>().Attach(newVal, original);
-            foreach (InventoryItem item in newVal.Items)
+            dc.GetTable<StackInSheet>().Attach(newVal, original);
+            foreach (StackInItem item in newVal.Items)
             {
-                InventoryItem old = original.Items.SingleOrDefault(it => it.ID == item.ID);
+                StackInItem old = original.Items.SingleOrDefault(it => it.ID == item.ID);
                 if (old != null)
                 {
-                    dc.GetTable<InventoryItem>().Attach(item, old);
+                    dc.GetTable<StackInItem>().Attach(item, old);
                 }
                 else
                 {
-                    dc.GetTable<InventoryItem>().InsertOnSubmit(item);
+                    dc.GetTable<StackInItem>().InsertOnSubmit(item);
                 }
             }
-            foreach (InventoryItem item in original.Items)
+            foreach (StackInItem item in original.Items)
             {
                 if (newVal.Items.SingleOrDefault(it => it.ID == item.ID) == null)
                 {
-                    dc.GetTable<InventoryItem>().Attach(item);
-                    dc.GetTable<InventoryItem>().DeleteOnSubmit(item);
+                    dc.GetTable<StackInItem>().Attach(item);
+                    dc.GetTable<StackInItem>().DeleteOnSubmit(item);
                 }
             }
         }
 
-        protected override void DeletingItem(InventorySheet info, DataContext dc)
+        protected override void DeletingItem(StackInSheet info, DataContext dc)
         {
-            dc.GetTable<InventorySheet>().Attach(info);
-            dc.GetTable<InventorySheet>().DeleteOnSubmit(info);
-            foreach (InventoryItem item in info.Items)
+            dc.GetTable<StackInSheet>().Attach(info);
+            dc.GetTable<StackInSheet>().DeleteOnSubmit(info);
+            foreach (StackInItem item in info.Items)
             {
-                dc.GetTable<InventoryItem>().Attach(item);
-                dc.GetTable<InventoryItem>().DeleteOnSubmit(item);
+                dc.GetTable<StackInItem>().Attach(item);
+                dc.GetTable<StackInItem>().DeleteOnSubmit(item);
             }
         }
         #endregion

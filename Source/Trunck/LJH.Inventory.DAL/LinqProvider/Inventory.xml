@@ -109,9 +109,10 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="DeliverySheet" Member="LJH.Inventory.BusinessModel.DeliverySheet">
-    <Type Name="LJH.Inventory.BusinessModel.DeliverySheet">
+  <Table Name="StackOutSheet" Member="LJH.Inventory.BusinessModel.StackOutSheet">
+    <Type Name="LJH.Inventory.BusinessModel.StackOutSheet">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
+      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="SheetDate" Member="SheetDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -127,8 +128,8 @@
       <Association Name="FK_Sheet_Item" Member="Items" ThisKey="ID" OtherKey="SheetNo"/>
     </Type>
   </Table>
-  <Table Name="DeliveryItem" Member="LJH.Inventory.BusinessModel.DeliveryItem">
-    <Type Name="LJH.Inventory.BusinessModel.DeliveryItem">
+  <Table Name="StackOutItem" Member="LJH.Inventory.BusinessModel.StackOutItem">
+    <Type Name="LJH.Inventory.BusinessModel.StackOutItem">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
       <Column Name="SheetNo" Member="SheetNo"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
@@ -141,9 +142,10 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="View_DeliveryRecord" Member="LJH.Inventory.BusinessModel.DeliveryRecord">
-    <Type Name="LJH.Inventory.BusinessModel.DeliveryRecord">
+  <Table Name="View_StackOutRecord" Member="LJH.Inventory.BusinessModel.StackOutRecord">
+    <Type Name="LJH.Inventory.BusinessModel.StackOutRecord">
       <Column Name="ID" Member="ID"   DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
+      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SheetNo" Member="SheetNo" DbType="nvarchar(50) NOT NULL"  UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) NOT NULL"  UpdateCheck="Never"/>
@@ -164,9 +166,10 @@
       <Association Name="FK_Sheet_Product" Member="Product"  ThisKey="ProductID" OtherKey="ID" IsForeignKey="false" />
     </Type>
   </Table>
-  <Table Name="InventorySheet" Member="LJH.Inventory.BusinessModel.InventorySheet">
-    <Type Name="LJH.Inventory.BusinessModel.InventorySheet">
+  <Table Name="StackInSheet" Member="LJH.Inventory.BusinessModel.StackInSheet">
+    <Type Name="LJH.Inventory.BusinessModel.StackInSheet">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true" />
+      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="SheetDate" Member="SheetDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -179,8 +182,8 @@
       <Association Name="FK_Sheet_Item" Member="Items"  ThisKey="ID" OtherKey="SheetNo"/>
     </Type>
   </Table>
-  <Table Name="InventoryItem" Member="LJH.Inventory.BusinessModel.InventoryItem">
-    <Type Name="LJH.Inventory.BusinessModel.InventoryItem">
+  <Table Name="StackInItem" Member="LJH.Inventory.BusinessModel.StackInItem">
+    <Type Name="LJH.Inventory.BusinessModel.StackInItem">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
       <Column Name="SheetNo" Member="SheetNo"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
@@ -195,9 +198,10 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="View_InventoryRecord" Member="LJH.Inventory.BusinessModel.InventoryRecord">
-    <Type Name="LJH.Inventory.BusinessModel.InventoryRecord">
+  <Table Name="View_StackInRecord" Member="LJH.Inventory.BusinessModel.StackInRecord">
+    <Type Name="LJH.Inventory.BusinessModel.StackInRecord">
       <Column Name="ID" Member="ID"   DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
+      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SheetNo" Member="SheetNo" DbType="nvarchar(50) NOT NULL"/>
       <Column Name="SupplierID" Member="SupplierID" DbType="nvarchar(50) NOT NULL" />

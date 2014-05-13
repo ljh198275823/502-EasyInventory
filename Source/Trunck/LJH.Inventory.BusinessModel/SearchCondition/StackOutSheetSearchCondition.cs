@@ -5,12 +5,14 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class InventorySheetSearchCondition : SheetSearchCondition
+    public class StackOutSheetSearchCondition : SheetSearchCondition
     {
         /// <summary>
-        /// 获取或设置出货记录查询条件中的客户公司名称
+        /// 获取或设置出货记录查询条件中的客户公司编号
         /// </summary>
-        public string SupplierID { get; set; }
+        public string CustomerID { get; set; }
+
+        public List<StackOutSheetType> SheetTypes { get; set; }
 
         public string WareHouseID { get; set; }
 

@@ -10,19 +10,19 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class InventorySheetBLL : SheetProcessorBase<InventorySheet>
+    public class StackInSheetBLL : SheetProcessorBase<StackInSheet>
     {
         #region 构造函数
-        public InventorySheetBLL(string repoUri)
+        public StackInSheetBLL(string repoUri)
             : base(repoUri)
         {
         }
         #endregion
 
         #region 私有方法
-        private void AddToProductInventory(InventorySheet sheet, IUnitWork unitWork)
+        private void AddToProductInventory(StackInSheet sheet, IUnitWork unitWork)
         {
-            foreach (InventoryItem si in sheet.Items)
+            foreach (StackInItem si in sheet.Items)
             {
                 ProductInventoryItem pii = new ProductInventoryItem()
                 {
@@ -44,9 +44,9 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        private void AddReceivables(InventorySheet sheet, IUnitWork unitWork)
+        private void AddReceivables(StackInSheet sheet, IUnitWork unitWork)
         {
-            foreach (InventoryItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
+            foreach (StackInItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
             {
                 //增加应收账款项
                 SupplierReceivable cr = new SupplierReceivable()
@@ -66,7 +66,7 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 重写基类方法
-        protected override string CreateSheetID(InventorySheet info)
+        protected override string CreateSheetID(StackInSheet info)
         {
             if (string.IsNullOrEmpty(info.ID))
             {
@@ -77,20 +77,20 @@ namespace LJH.Inventory.BLL
             return info.ID;
         }
 
-        protected override void DoInventory(InventorySheet info, IUnitWork unitWork, DateTime dt, string opt)
+        protected override void DoInventory(StackInSheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             if (info.Items == null || info.Items.Count == 0) throw new Exception("单号为 " + info.ID + " 的收货单发货失败，没有收货单项");
 
-            InventorySheet sheet1 = info.Clone() as InventorySheet;
+            StackInSheet sheet1 = info.Clone() as StackInSheet;
             info.State = SheetState.Inventory;
             info.LastActiveDate = dt;
-            ProviderFactory.Create<IProvider<InventorySheet, string>>(_RepoUri).Update(info, sheet1, unitWork);
+            ProviderFactory.Create<IProvider<StackInSheet, string>>(_RepoUri).Update(info, sheet1, unitWork);
 
             AddToProductInventory(info, unitWork); //更新商品库存
             AddReceivables(info, unitWork);         //增加供应商的应收账款
         }
 
-        protected override void DoNullify(InventorySheet info, IUnitWork unitWork, DateTime dt, string opt)
+        protected override void DoNullify(StackInSheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoNullify(info, unitWork, dt, opt);
         }
@@ -102,9 +102,9 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="con"></param>
         /// <returns></returns>
-        public QueryResultList<InventoryRecord> GetInventoryRecords(SearchCondition con)
+        public QueryResultList<StackInRecord> GetInventoryRecords(SearchCondition con)
         {
-            return ProviderFactory.Create<IProvider<InventoryRecord, Guid>>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<StackInRecord, Guid>>(_RepoUri).GetItems(con);
         }
         #endregion
     }
