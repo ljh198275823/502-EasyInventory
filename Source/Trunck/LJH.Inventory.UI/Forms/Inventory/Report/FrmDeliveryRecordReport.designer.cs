@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -216,10 +216,12 @@
             // 
             // colCustomerName
             // 
+            this.colCustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colCustomerName.HeaderText = "客户";
+            this.colCustomerName.MinimumWidth = 150;
             this.colCustomerName.Name = "colCustomerName";
             this.colCustomerName.ReadOnly = true;
-            this.colCustomerName.Width = 140;
+            this.colCustomerName.Width = 150;
             // 
             // colSheetNo
             // 
@@ -258,27 +260,27 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle7.Format = "C2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
             // 
             // colCount
             // 
-            dataGridViewCellStyle8.Format = "N0";
-            dataGridViewCellStyle8.NullValue = null;
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
             // 
             // colAmount
             // 
-            dataGridViewCellStyle9.Format = "C2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -320,6 +322,12 @@
         private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.LinkLabel lnkProductCategory;
+        private System.Windows.Forms.LinkLabel lnkProduct;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
+        private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
+        private GeneralLibrary.WinformControl.DBCTextBox txtProduct;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
@@ -331,11 +339,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
-        private System.Windows.Forms.LinkLabel lnkProductCategory;
-        private System.Windows.Forms.LinkLabel lnkProduct;
-        private System.Windows.Forms.LinkLabel lnkCustomer;
-        private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
-        private GeneralLibrary.WinformControl.DBCTextBox txtProduct;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
     }
 }

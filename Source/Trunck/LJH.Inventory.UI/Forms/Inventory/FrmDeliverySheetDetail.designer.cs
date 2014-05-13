@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddOrderItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,12 +46,13 @@
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtAddress = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.txtLinkerPhone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.txtLinker = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkWareHouse = new System.Windows.Forms.LinkLabel();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -89,8 +90,7 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lnkLinker = new System.Windows.Forms.LinkLabel();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -243,6 +243,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lnkLinker);
             this.tabPage1.Controls.Add(this.dtSheetDate);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.txtAddress);
@@ -250,7 +251,6 @@
             this.tabPage1.Controls.Add(this.txtLinkerPhone);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.txtLinker);
-            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txtWareHouse);
             this.tabPage1.Controls.Add(this.lnkWareHouse);
             this.tabPage1.Controls.Add(this.txtMemo);
@@ -267,6 +267,22 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dtSheetDate
+            // 
+            this.dtSheetDate.Location = new System.Drawing.Point(826, 13);
+            this.dtSheetDate.Name = "dtSheetDate";
+            this.dtSheetDate.Size = new System.Drawing.Size(109, 21);
+            this.dtSheetDate.TabIndex = 124;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(788, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 12);
+            this.label4.TabIndex = 125;
+            this.label4.Text = "日期:";
             // 
             // txtAddress
             // 
@@ -309,15 +325,6 @@
             this.txtLinker.Name = "txtLinker";
             this.txtLinker.Size = new System.Drawing.Size(106, 21);
             this.txtLinker.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 46);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 12);
-            this.label1.TabIndex = 119;
-            this.label1.Text = "联系人:";
             // 
             // txtWareHouse
             // 
@@ -448,18 +455,18 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colCount
             // 
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -467,9 +474,9 @@
             // 
             // colTotal
             // 
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle6;
             this.colTotal.HeaderText = "金额";
             this.colTotal.Name = "colTotal";
             this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -672,21 +679,16 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // dtSheetDate
+            // lnkLinker
             // 
-            this.dtSheetDate.Location = new System.Drawing.Point(826, 13);
-            this.dtSheetDate.Name = "dtSheetDate";
-            this.dtSheetDate.Size = new System.Drawing.Size(109, 21);
-            this.dtSheetDate.TabIndex = 124;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(788, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 12);
-            this.label4.TabIndex = 125;
-            this.label4.Text = "日期:";
+            this.lnkLinker.AutoSize = true;
+            this.lnkLinker.Location = new System.Drawing.Point(25, 46);
+            this.lnkLinker.Name = "lnkLinker";
+            this.lnkLinker.Size = new System.Drawing.Size(47, 12);
+            this.lnkLinker.TabIndex = 126;
+            this.lnkLinker.TabStop = true;
+            this.lnkLinker.Text = "联系人:";
+            this.lnkLinker.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLinker_LinkClicked);
             // 
             // FrmDeliverySheetDetail
             // 
@@ -770,7 +772,6 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtLinkerPhone;
         private System.Windows.Forms.Label label2;
         private GeneralLibrary.WinformControl.DBCTextBox txtLinker;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
@@ -784,5 +785,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DateTimePicker dtSheetDate;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.LinkLabel lnkLinker;
     }
 }

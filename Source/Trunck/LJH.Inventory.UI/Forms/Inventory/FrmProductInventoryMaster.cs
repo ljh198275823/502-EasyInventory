@@ -46,6 +46,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 items = items.Where(it => it.WareHouseID == warehouse).ToList();
             }
+            if (chkOnlyHasInventory.Checked)
+            {
+                items = items.Where(item => item.Valid + item.Reserved > 0).ToList();
+            }
             return (from p in items
                     orderby p.Product.Name ascending
                     select (object)p).ToList();
@@ -146,6 +150,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             FreshData();
         }
 
+        private void chkOnlyHasInventory_CheckedChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
         private void mnu_InventoryDetail_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 1)
@@ -158,6 +167,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 con.UnShipped = true;
                 View.FrmProductInventoryView frm = new View.FrmProductInventoryView();
                 frm.SearchCondition = con;
+                frm.ShowDialog();
+            }
+        }
+
+        private void mnu_InventoryRecords_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
+                View.FrmProductInventoryRecordsView frm = new View.FrmProductInventoryRecordsView();
+                frm.ProductInventory = pi;
                 frm.ShowDialog();
             }
         }

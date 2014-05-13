@@ -326,7 +326,9 @@
             // 
             // colCustomer
             // 
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colCustomer.HeaderText = "客户";
+            this.colCustomer.MinimumWidth = 150;
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
             this.colCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.True;

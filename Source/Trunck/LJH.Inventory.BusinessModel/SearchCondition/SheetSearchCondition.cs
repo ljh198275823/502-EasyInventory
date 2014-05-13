@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public abstract class SheetSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
+    public class SheetSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
         /// <summary>
         /// 获取或设置单据号

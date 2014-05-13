@@ -111,6 +111,12 @@
     <Compile Include="Forms\FrmContactDetail.Designer.cs">
       <DependentUpon>FrmContactDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\General\FrmContactMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\General\FrmContactMaster.Designer.cs">
+      <DependentUpon>FrmContactMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\General\FrmCurrencyTypeDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,12 @@
     </Compile>
     <Compile Include="Forms\General\FrmStaffMaster.Designer.cs">
       <DependentUpon>FrmStaffMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\FrmProductInventoryRecordsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\FrmProductInventoryRecordsView.Designer.cs">
+      <DependentUpon>FrmProductInventoryRecordsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\View\FrmProductInventoryView.cs">
       <SubType>Form</SubType>
@@ -568,18 +580,6 @@
       <DependentUpon>FrmSalesPersonPerformanceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\Inventory\View\FrmDeliveryRecordView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\View\FrmDeliveryRecordView.Designer.cs">
-      <DependentUpon>FrmDeliveryRecordView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\View\FrmInventoryRecordView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\View\FrmInventoryRecordView.Designer.cs">
-      <DependentUpon>FrmInventoryRecordView.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Forms\Financial\View\FrmCustomerReceivableView.resx">
       <DependentUpon>FrmCustomerReceivableView.cs</DependentUpon>
     </EmbeddedResource>
@@ -604,6 +604,9 @@
     <EmbeddedResource Include="Forms\FrmContactDetail.resx">
       <DependentUpon>FrmContactDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\General\FrmContactMaster.resx">
+      <DependentUpon>FrmContactMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\General\FrmCurrencyTypeDetail.resx">
       <DependentUpon>FrmCurrencyTypeDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -627,6 +630,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmProductInventoryAssign.resx">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\View\FrmProductInventoryRecordsView.resx">
+      <DependentUpon>FrmProductInventoryRecordsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\View\FrmProductInventoryView.resx">
       <DependentUpon>FrmProductInventoryView.cs</DependentUpon>
@@ -845,12 +851,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Forms\Inventory\View\FrmDeliveryRecordView.resx">
-      <DependentUpon>FrmDeliveryRecordView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\View\FrmInventoryRecordView.resx">
-      <DependentUpon>FrmInventoryRecordView.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

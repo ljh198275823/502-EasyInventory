@@ -47,6 +47,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 DeliverySheetSearchCondition con = search as DeliverySheetSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
+                if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
                 if (con.WithTax != null)
                 {
                     if (con.WithTax.Value)

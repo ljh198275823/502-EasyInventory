@@ -7,6 +7,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.Inventory.UI.Forms.Sale;
+using LJH.Inventory.UI.Forms.General;
 using LJH.Inventory.UI.Forms.Sale.View;
 
 namespace LJH.Inventory.UI.Forms.Inventory
@@ -281,25 +282,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 Print.FrmDeliverySheetPrint frm = new Print.FrmDeliverySheetPrint();
                 frm.Sheet = sheet;
                 frm.ShowDialog();
-                //if (MessageBox.Show("是否打印送货单?", "询问", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) != DialogResult.Yes) return;
-                //try
-                //{
-                //    string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
-                //    DeliverySheetExporter exporter = null;
-                //    if (System.IO.File.Exists(modal))
-                //    {
-                //        exporter = new DeliverySheetExporter(modal);
-                //        exporter.PrintDeliverySheet(sheet);
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show("未找到送货单导出模板", "打印失败");
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.Message, "打印失败");
-                //}
             }
         }
 
@@ -503,6 +485,29 @@ namespace LJH.Inventory.UI.Forms.Inventory
             //    }
             //}
         }
+
+        private void lnkLinker_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (Customer != null)
+            {
+                FrmContactMaster frm = new FrmContactMaster();
+                ContactSearchCondition con = new ContactSearchCondition();
+                con.CompanyID = Customer.ID;
+                frm.SearchCondition = con;
+                frm.ForSelect = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    Contact c = frm.SelectedItem as Contact;
+                    txtLinker.Text = c.Name;
+                    txtLinkerPhone.Text = c.Mobile;
+                }
+            }
+            else
+            {
+                MessageBox.Show("请先选择客户");
+            }
+        }
         #endregion
+
     }
 }

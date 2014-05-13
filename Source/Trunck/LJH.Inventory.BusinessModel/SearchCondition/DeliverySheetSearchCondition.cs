@@ -12,6 +12,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         /// </summary>
         public string CustomerID { get; set; }
 
+        public string WareHouseID { get; set; }
+
         public bool? WithTax { get; set; }
     }
 }

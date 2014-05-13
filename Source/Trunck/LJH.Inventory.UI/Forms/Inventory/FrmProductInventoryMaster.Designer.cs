@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.chkOnlyHasInventory = new System.Windows.Forms.CheckBox();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -42,13 +43,6 @@
             this.categoryTree = new LJH.Inventory.UI.Controls.ProductTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_InventoryDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +54,14 @@
             this.colReserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_InventoryDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_InventoryRecords = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -81,6 +83,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.chkOnlyHasInventory);
             this.panel5.Controls.Add(this.txtKeyword);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -89,22 +92,35 @@
             this.panel5.Size = new System.Drawing.Size(956, 38);
             this.panel5.TabIndex = 7;
             // 
+            // chkOnlyHasInventory
+            // 
+            this.chkOnlyHasInventory.AutoSize = true;
+            this.chkOnlyHasInventory.Checked = true;
+            this.chkOnlyHasInventory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOnlyHasInventory.Location = new System.Drawing.Point(8, 10);
+            this.chkOnlyHasInventory.Name = "chkOnlyHasInventory";
+            this.chkOnlyHasInventory.Size = new System.Drawing.Size(120, 16);
+            this.chkOnlyHasInventory.TabIndex = 2;
+            this.chkOnlyHasInventory.Text = "只显示有库存的项";
+            this.chkOnlyHasInventory.UseVisualStyleBackColor = true;
+            this.chkOnlyHasInventory.CheckedChanged += new System.EventHandler(this.chkOnlyHasInventory_CheckedChanged);
+            // 
             // txtKeyword
             // 
             this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtKeyword.Location = new System.Drawing.Point(69, 7);
+            this.txtKeyword.Location = new System.Drawing.Point(203, 7);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(875, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(741, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 11);
+            this.label2.Location = new System.Drawing.Point(144, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
@@ -208,54 +224,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(948, 321);
             this.dataGridView1.TabIndex = 115;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.mnu_InventoryDetail,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 120);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // mnu_InventoryDetail
-            // 
-            this.mnu_InventoryDetail.Name = "mnu_InventoryDetail";
-            this.mnu_InventoryDetail.Size = new System.Drawing.Size(148, 22);
-            this.mnu_InventoryDetail.Text = "查看库存明细";
-            this.mnu_InventoryDetail.Click += new System.EventHandler(this.mnu_InventoryDetail_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
             // colImage
             // 
             this.colImage.HeaderText = "";
@@ -334,6 +302,62 @@
             this.colSum.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.mnu_InventoryDetail,
+            this.mnu_InventoryRecords,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // mnu_InventoryDetail
+            // 
+            this.mnu_InventoryDetail.Name = "mnu_InventoryDetail";
+            this.mnu_InventoryDetail.Size = new System.Drawing.Size(152, 22);
+            this.mnu_InventoryDetail.Text = "查看库存明细";
+            this.mnu_InventoryDetail.Click += new System.EventHandler(this.mnu_InventoryDetail_Click);
+            // 
+            // mnu_InventoryRecords
+            // 
+            this.mnu_InventoryRecords.Name = "mnu_InventoryRecords";
+            this.mnu_InventoryRecords.Size = new System.Drawing.Size(152, 22);
+            this.mnu_InventoryRecords.Text = "查看进出明细";
+            this.mnu_InventoryRecords.Click += new System.EventHandler(this.mnu_InventoryRecords_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
             // FrmProductInventoryMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -395,5 +419,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colReserved;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSum;
+        private System.Windows.Forms.CheckBox chkOnlyHasInventory;
+        private System.Windows.Forms.ToolStripMenuItem mnu_InventoryRecords;
     }
 }

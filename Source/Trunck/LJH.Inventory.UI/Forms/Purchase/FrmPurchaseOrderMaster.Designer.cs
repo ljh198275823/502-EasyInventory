@@ -319,7 +319,9 @@
             // 
             // colSupplier
             // 
+            this.colSupplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSupplier.HeaderText = "供应商";
+            this.colSupplier.MinimumWidth = 150;
             this.colSupplier.Name = "colSupplier";
             this.colSupplier.ReadOnly = true;
             this.colSupplier.Width = 150;

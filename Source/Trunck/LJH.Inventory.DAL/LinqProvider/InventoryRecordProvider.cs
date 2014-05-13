@@ -60,6 +60,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 InventorySheetSearchCondition con = search as InventorySheetSearchCondition;
                 if (!string.IsNullOrEmpty(con.SupplierID)) ret = ret.Where(item => item.SupplierID == con.SupplierID);
+                if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
             }
             if (search is InventoryRecordSearchCondition)
             {
