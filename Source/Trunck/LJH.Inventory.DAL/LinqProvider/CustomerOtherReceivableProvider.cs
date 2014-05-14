@@ -35,9 +35,9 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
             }
-            if (search is CustomerReceivableSearchCondition)
+            if (search is CustomerOtherReceivableSearchCondition)
             {
-                CustomerReceivableSearchCondition con = search as CustomerReceivableSearchCondition;
+                CustomerOtherReceivableSearchCondition con = search as CustomerOtherReceivableSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
             }
             List<CustomerOtherReceivable> items = ret.ToList();

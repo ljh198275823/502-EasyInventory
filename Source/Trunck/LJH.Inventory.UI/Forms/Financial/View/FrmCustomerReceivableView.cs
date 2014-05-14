@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.Inventory.BusinessModel.Resource;
 using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
@@ -19,10 +20,6 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             InitializeComponent();
         }
-
-        #region 公共属性
-        public CompanyInfo Customer { get; set; }
-        #endregion
 
         #region 私有方法
         private int DaysBetween(DateTime endDt, DateTime beginDt)
@@ -36,7 +33,6 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         protected override void Init()
         {
             base.Init();
-            if (Customer != null) this.Text = string.Format("{0} 的应收款明细", Customer.Name);
         }
 
         protected override List<object> GetDataSource()
@@ -45,10 +41,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
-                CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-                con.CustomerID = Customer != null ? Customer.ID : null;
-                con.Settled = false;
-                items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             }
             else
             {
@@ -65,12 +58,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colSheetID"].Value = cr.SheetID;
             row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
-            row.Cells["colClassID"].Value = cr.ClassID;
+            row.Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
             row.Cells["colAmount"].Value = cr.Amount.Trim();
             row.Cells["colHaspaid"].Value = cr.Haspaid.Trim();
             row.Cells["colNotpaid"].Value = cr.Remain.Trim();
             int days = DaysBetween(DateTime.Today, cr.CreateDate);
             row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
+            if (cr.Amount < 0) row.DefaultCellStyle.ForeColor = Color.Red;
         }
 
         protected override void ShowItemsOnGrid(List<object> items)

@@ -89,11 +89,13 @@
     <Compile Include="Financial\CustomerOtherReceivable.cs" />
     <Compile Include="Financial\CustomerPayment.cs" />
     <Compile Include="Financial\CustomerPaymentAssign.cs" />
+    <Compile Include="Financial\CustomerPaymentType.cs" />
     <Compile Include="Financial\CustomerReceivable.cs" />
     <Compile Include="CustomerType.cs" />
     <Compile Include="DecimalHelper.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="DocumentOperation.cs" />
+    <Compile Include="Financial\CustomerReceivableType.cs" />
     <Compile Include="Financial\ExpenditureType.cs" />
     <Compile Include="Financial\ExpenditureRecord.cs" />
     <Compile Include="Inventory\StackInSheetType.cs" />
@@ -103,7 +105,7 @@
     <Compile Include="Inventory\StackInRecord.cs" />
     <Compile Include="ISheet.cs" />
     <Compile Include="MyCompanyInfo.cs" />
-    <Compile Include="Resource\StackOutSheetTypeDescription.cs" />
+    <Compile Include="Resource\CustomerReceivableTypeDescription.cs" />
     <Compile Include="Sale\OrderItemRecord.cs" />
     <Compile Include="Permission\OperatorRightAttribute.cs" />
     <Compile Include="Permission\PermissionActionDescription.cs" />
@@ -161,7 +163,6 @@
     <Compile Include="SheetState.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="StaffPhoto.cs" />
-    <Compile Include="SupplierReceivable.cs" />
     <Compile Include="Purchase\SupplierType.cs" />
     <Compile Include="SysparameterInfo.cs" />
     <Compile Include="Transport.cs" />

@@ -15,9 +15,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerFinancialStateMaster : FrmMasterBase
+    public partial class FrmSupplierFinancialStateMaster : FrmMasterBase
     {
-        public FrmCustomerFinancialStateMaster()
+        public FrmSupplierFinancialStateMaster()
         {
             InitializeComponent();
         }
@@ -75,7 +75,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
             cpsc.PaymentTypes = new List<CustomerPaymentType>();
-            cpsc.PaymentTypes.Add(CustomerPaymentType.Customer);
+            cpsc.PaymentTypes.Add(CustomerPaymentType.Supplier);
             cpsc.States = new List<SheetState>();
             cpsc.States.Add(SheetState.Approved);
             cpsc.HasRemain = true;
@@ -84,15 +84,15 @@ namespace LJH.Inventory.UI.Forms.Financial
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
             crsc.Settled = false;
             crsc.ReceivableTypes = new List<CustomerReceivableType>();
-            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
-            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
+            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierOtherReceivable);
             _CustomerReceivables = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(crsc).QueryObjects;
 
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
-                con.ClassID = CompanyClass.Customer;
+                con.ClassID = CompanyClass.Supplier;
                 _Customers = bll.GetItems(con).QueryObjects;
             }
             else
@@ -147,11 +147,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                     CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
                     con.CustomerID = c.ID;
                     con.ReceivableTypes = new List<CustomerReceivableType>();
-                    con.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
-                    con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
+                    con.ReceivableTypes.Add(CustomerReceivableType.SupplierOtherReceivable);
+                    con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
                     con.Settled = false;
                     frm.SearchCondition = con;
-                    frm.Text = string.Format("{0} 应收款明细", c.Name);
+                    frm.Text = string.Format("{0} 应付款明细", c.Name);
                     frm.ShowDialog();
                 }
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")

@@ -135,55 +135,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             base.ShowItemsOnGrid(items);
             Filter(txtKeyword.Text.Trim());
         }
-
-        protected override void PerformUpdateData()
-        {
-            if (this.dataGridView1.SelectedRows != null && this.dataGridView1.SelectedRows.Count > 0)
-            {
-                object pre = this.dataGridView1.SelectedRows[0].Tag;
-                if (pre != null)
-                {
-                    FrmDetailBase detailForm = GetDetailForm();
-                    if (detailForm != null)
-                    {
-                        detailForm.IsAdding = false;
-                        detailForm.UpdatingItem = pre;
-
-                        detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
-                        {
-                            ShowItemInGridViewRow(this.dataGridView1.SelectedRows[0], args.UpdatedItem);
-                        };
-                        detailForm.ShowDialog();
-                    }
-                }
-            }
-        }
-
-        protected override void PerformAddData()
-        {
-            try
-            {
-                FrmDetailBase detailForm = GetDetailForm();
-                if (detailForm != null)
-                {
-                    detailForm.IsAdding = true;
-                    DataGridViewRow row = null;
-                    detailForm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
-                    {
-                        row = Add_And_Show_Row(args.AddedItem);
-                    };
-                    detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
-                    {
-                        ShowItemInGridViewRow(row, args.UpdatedItem);
-                    };
-                    detailForm.ShowDialog();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
-            }
-        }
         #endregion
 
         #region 事件处理程序

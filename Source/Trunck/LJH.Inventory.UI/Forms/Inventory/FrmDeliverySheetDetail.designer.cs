@@ -46,6 +46,7 @@
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lnkLinker = new System.Windows.Forms.LinkLabel();
             this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.txtAddress = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -90,7 +91,8 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lnkLinker = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbSheetType = new System.Windows.Forms.ComboBox();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -105,11 +107,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(1111, 347);
+            this.btnClose.Location = new System.Drawing.Point(1111, 370);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(1002, 347);
+            this.btnOk.Location = new System.Drawing.Point(1002, 370);
             // 
             // contextMenuStrip1
             // 
@@ -238,11 +240,13 @@
             this.tabControl1.Location = new System.Drawing.Point(7, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(965, 363);
+            this.tabControl1.Size = new System.Drawing.Size(965, 386);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cmbSheetType);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.lnkLinker);
             this.tabPage1.Controls.Add(this.dtSheetDate);
             this.tabPage1.Controls.Add(this.label4);
@@ -263,22 +267,33 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(957, 337);
+            this.tabPage1.Size = new System.Drawing.Size(957, 360);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lnkLinker
+            // 
+            this.lnkLinker.AutoSize = true;
+            this.lnkLinker.Location = new System.Drawing.Point(25, 69);
+            this.lnkLinker.Name = "lnkLinker";
+            this.lnkLinker.Size = new System.Drawing.Size(47, 12);
+            this.lnkLinker.TabIndex = 126;
+            this.lnkLinker.TabStop = true;
+            this.lnkLinker.Text = "联系人:";
+            this.lnkLinker.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLinker_LinkClicked);
+            // 
             // dtSheetDate
             // 
-            this.dtSheetDate.Location = new System.Drawing.Point(826, 13);
+            this.dtSheetDate.Location = new System.Drawing.Point(266, 12);
             this.dtSheetDate.Name = "dtSheetDate";
-            this.dtSheetDate.Size = new System.Drawing.Size(109, 21);
+            this.dtSheetDate.Size = new System.Drawing.Size(141, 21);
             this.dtSheetDate.TabIndex = 124;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(788, 16);
+            this.label4.Location = new System.Drawing.Point(228, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 125;
@@ -287,7 +302,7 @@
             // txtAddress
             // 
             this.txtAddress.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAddress.Location = new System.Drawing.Point(489, 42);
+            this.txtAddress.Location = new System.Drawing.Point(494, 65);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(284, 21);
             this.txtAddress.TabIndex = 6;
@@ -295,7 +310,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(424, 46);
+            this.label3.Location = new System.Drawing.Point(429, 69);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 123;
@@ -304,7 +319,7 @@
             // txtLinkerPhone
             // 
             this.txtLinkerPhone.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLinkerPhone.Location = new System.Drawing.Point(258, 42);
+            this.txtLinkerPhone.Location = new System.Drawing.Point(269, 65);
             this.txtLinkerPhone.Name = "txtLinkerPhone";
             this.txtLinkerPhone.Size = new System.Drawing.Size(138, 21);
             this.txtLinkerPhone.TabIndex = 5;
@@ -312,7 +327,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(193, 46);
+            this.label2.Location = new System.Drawing.Point(204, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 121;
@@ -321,25 +336,25 @@
             // txtLinker
             // 
             this.txtLinker.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLinker.Location = new System.Drawing.Point(73, 42);
+            this.txtLinker.Location = new System.Drawing.Point(73, 65);
             this.txtLinker.Name = "txtLinker";
-            this.txtLinker.Size = new System.Drawing.Size(106, 21);
+            this.txtLinker.Size = new System.Drawing.Size(115, 21);
             this.txtLinker.TabIndex = 4;
             // 
             // txtWareHouse
             // 
             this.txtWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWareHouse.Location = new System.Drawing.Point(256, 11);
+            this.txtWareHouse.Location = new System.Drawing.Point(73, 39);
             this.txtWareHouse.Name = "txtWareHouse";
             this.txtWareHouse.ReadOnly = true;
-            this.txtWareHouse.Size = new System.Drawing.Size(140, 21);
+            this.txtWareHouse.Size = new System.Drawing.Size(115, 21);
             this.txtWareHouse.TabIndex = 1;
             this.txtWareHouse.DoubleClick += new System.EventHandler(this.txtWareHouse_DoubleClick);
             // 
             // lnkWareHouse
             // 
             this.lnkWareHouse.AutoSize = true;
-            this.lnkWareHouse.Location = new System.Drawing.Point(217, 15);
+            this.lnkWareHouse.Location = new System.Drawing.Point(25, 42);
             this.lnkWareHouse.Name = "lnkWareHouse";
             this.lnkWareHouse.Size = new System.Drawing.Size(35, 12);
             this.lnkWareHouse.TabIndex = 0;
@@ -350,7 +365,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(73, 71);
+            this.txtMemo.Location = new System.Drawing.Point(73, 94);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(700, 21);
             this.txtMemo.TabIndex = 7;
@@ -358,17 +373,17 @@
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(489, 12);
+            this.txtCustomer.Location = new System.Drawing.Point(269, 38);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
-            this.txtCustomer.Size = new System.Drawing.Size(284, 21);
+            this.txtCustomer.Size = new System.Drawing.Size(504, 21);
             this.txtCustomer.TabIndex = 3;
             this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
             // 
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(448, 16);
+            this.lnkCustomer.Location = new System.Drawing.Point(228, 42);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(35, 12);
             this.lnkCustomer.TabIndex = 2;
@@ -399,7 +414,7 @@
             this.colOrderID,
             this.colMemo});
             this.ItemsGrid.ContextMenuStrip = this.contextMenuStrip1;
-            this.ItemsGrid.Location = new System.Drawing.Point(16, 98);
+            this.ItemsGrid.Location = new System.Drawing.Point(16, 121);
             this.ItemsGrid.Name = "ItemsGrid";
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
@@ -498,7 +513,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(37, 74);
+            this.label15.Location = new System.Drawing.Point(37, 97);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(35, 12);
             this.label15.TabIndex = 60;
@@ -509,7 +524,7 @@
             this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtSheetNo.Location = new System.Drawing.Point(73, 12);
             this.txtSheetNo.Name = "txtSheetNo";
-            this.txtSheetNo.Size = new System.Drawing.Size(106, 21);
+            this.txtSheetNo.Size = new System.Drawing.Size(115, 21);
             this.txtSheetNo.TabIndex = 9;
             this.txtSheetNo.Text = "自动创建";
             // 
@@ -679,22 +694,32 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // lnkLinker
+            // label1
             // 
-            this.lnkLinker.AutoSize = true;
-            this.lnkLinker.Location = new System.Drawing.Point(25, 46);
-            this.lnkLinker.Name = "lnkLinker";
-            this.lnkLinker.Size = new System.Drawing.Size(47, 12);
-            this.lnkLinker.TabIndex = 126;
-            this.lnkLinker.TabStop = true;
-            this.lnkLinker.Text = "联系人:";
-            this.lnkLinker.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLinker_LinkClicked);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(417, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 12);
+            this.label1.TabIndex = 127;
+            this.label1.Text = "出库单类型:";
+            // 
+            // cmbSheetType
+            // 
+            this.cmbSheetType.FormattingEnabled = true;
+            this.cmbSheetType.Items.AddRange(new object[] {
+            "送货单",
+            "客户借用单"});
+            this.cmbSheetType.Location = new System.Drawing.Point(494, 12);
+            this.cmbSheetType.Name = "cmbSheetType";
+            this.cmbSheetType.Size = new System.Drawing.Size(139, 20);
+            this.cmbSheetType.TabIndex = 128;
+            this.cmbSheetType.SelectedIndexChanged += new System.EventHandler(this.cmbSheetType_SelectedIndexChanged);
             // 
             // FrmDeliverySheetDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 427);
+            this.ClientSize = new System.Drawing.Size(973, 450);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label5);
@@ -786,5 +811,7 @@
         private System.Windows.Forms.DateTimePicker dtSheetDate;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.LinkLabel lnkLinker;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbSheetType;
     }
 }

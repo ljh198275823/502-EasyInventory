@@ -489,5 +489,20 @@ namespace InventoryApplication
         {
             ShowSingleForm<FrmStaffMaster>();
         }
+
+        private void mnu_SupplierState_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmSupplierFinancialStateMaster>();
+        }
+
+        private void mnu_SupplierPayment_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmSupplierPaymentMaster>();
+        }
+
+        private void mnu_InventoryRecord_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmInventoryRecordReport>();
+        }
     }
 }

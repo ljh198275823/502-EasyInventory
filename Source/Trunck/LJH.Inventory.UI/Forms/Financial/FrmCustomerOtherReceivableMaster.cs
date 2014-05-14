@@ -25,6 +25,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         #region 私有变量
         private List<CustomerOtherReceivable> _Sheets = null;
+        private List<CustomerReceivable> _Receivables = null;
         #endregion
 
         #region 私有方法
@@ -85,6 +86,11 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
+            CustomerReceivableSearchCondition con1 = new CustomerReceivableSearchCondition();
+            con1.ReceivableTypes = new List<CustomerReceivableType>();
+            con1.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
+            _Receivables = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(con1).QueryObjects;
+
             if (SearchCondition == null)
             {
                 CustomerOtherReceivableSearchCondition con = new CustomerOtherReceivableSearchCondition();
@@ -107,6 +113,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colCurrencyType"].Value = info.CurrencyType;
             row.Cells["colAmount"].Value = info.Amount.Trim();
+            CustomerReceivable cr = _Receivables.SingleOrDefault(it => it.SheetID == info.ID);
+            if (cr != null)
+            {
+                row.Cells["colPaid"].Value = cr.Haspaid.Trim();
+                row.Cells["colNotPaid"].Value = cr.Remain.Trim();
+            }
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)

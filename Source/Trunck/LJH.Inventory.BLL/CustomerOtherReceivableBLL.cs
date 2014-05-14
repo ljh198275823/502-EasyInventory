@@ -31,7 +31,7 @@ namespace LJH.Inventory.BLL
             CustomerReceivable cr = new CustomerReceivable()
             {
                 ID = Guid.NewGuid(),
-                ClassID = CustomerReceivableClass.Other,
+                ClassID = CustomerReceivableType.CustomerOtherReceivable,
                 SheetID = info.ID,
                 CustomerID = info.CustomerID,
                 CreateDate = dt,
@@ -50,7 +50,7 @@ namespace LJH.Inventory.BLL
             List<CustomerReceivable> items = new CustomerReceivableBLL(_RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
-                CustomerReceivable cr = items.FirstOrDefault(it => it.ClassID == CustomerReceivableClass.Other);
+                CustomerReceivable cr = items.FirstOrDefault(it => it.ClassID == CustomerReceivableType.CustomerOtherReceivable);
                 if (cr != null)
                 {
                     CustomerPaymentAssignSearchCondition con1 = new CustomerPaymentAssignSearchCondition();
@@ -80,7 +80,7 @@ namespace LJH.Inventory.BLL
             List<CustomerReceivable> items = new CustomerReceivableBLL(_RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
-                CustomerReceivable cr = items.FirstOrDefault(it => it.ClassID == CustomerReceivableClass.Other);
+                CustomerReceivable cr = items.FirstOrDefault(it => it.ClassID == CustomerReceivableType.CustomerOtherReceivable);
                 if (cr != null)
                 {
                     CustomerPaymentAssignSearchCondition con1 = new CustomerPaymentAssignSearchCondition();

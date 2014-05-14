@@ -70,7 +70,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 113;
-            this.label11.Text = "付款单号";
+            this.label11.Text = "单据编号";
             // 
             // label2
             // 
@@ -79,7 +79,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 111;
-            this.label2.Text = "付款金额";
+            this.label2.Text = "单据金额";
             // 
             // txtAmount
             // 
@@ -141,9 +141,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 82);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 117;
-            this.label3.Text = "待抵消的应收";
+            this.label3.Text = "待核销项";
             // 
             // GridView
             // 
@@ -210,12 +210,12 @@
             // colSheetID
             // 
             this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSheetID.HeaderText = "应收款单号";
+            this.colSheetID.HeaderText = "单据编号";
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSheetID.Width = 71;
+            this.colSheetID.Width = 59;
             // 
             // colOrderID
             // 
@@ -250,7 +250,7 @@
             // 
             // colAssign
             // 
-            this.colAssign.HeaderText = "抵消金额";
+            this.colAssign.HeaderText = "核销金额";
             this.colAssign.Name = "colAssign";
             // 
             // colMemo
@@ -283,7 +283,7 @@
             this.Name = "FrmPaymentAssign";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "客户收款抵消";
+            this.Text = "核销";
             this.Load += new System.EventHandler(this.FrmPaymentAssign_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.ResumeLayout(false);

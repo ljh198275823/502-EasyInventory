@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Inventory.Report
 {
-    partial class FrmDeliveryRecordReport
+    partial class FrmInventoryRecordReport
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtProduct = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -54,7 +53,6 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSalesPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -62,21 +60,11 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(649, 14);
+            this.btnSearch.Location = new System.Drawing.Point(665, 12);
             // 
             // btnOkAs
             // 
-            this.btnOkAs.Location = new System.Drawing.Point(649, 43);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.groupBox3);
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1154, 96);
-            this.panel1.TabIndex = 25;
+            this.btnOkAs.Location = new System.Drawing.Point(665, 41);
             // 
             // groupBox3
             // 
@@ -86,17 +74,17 @@
             this.groupBox3.Controls.Add(this.lnkProductCategory);
             this.groupBox3.Controls.Add(this.lnkProduct);
             this.groupBox3.Controls.Add(this.lnkCustomer);
-            this.groupBox3.Location = new System.Drawing.Point(240, 3);
+            this.groupBox3.Location = new System.Drawing.Point(244, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(403, 90);
-            this.groupBox3.TabIndex = 36;
+            this.groupBox3.Size = new System.Drawing.Size(410, 90);
+            this.groupBox3.TabIndex = 38;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
             // 
             // txtProductCategory
             // 
             this.txtProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtProductCategory.Location = new System.Drawing.Point(48, 47);
+            this.txtProductCategory.Location = new System.Drawing.Point(53, 47);
             this.txtProductCategory.Name = "txtProductCategory";
             this.txtProductCategory.ReadOnly = true;
             this.txtProductCategory.Size = new System.Drawing.Size(153, 21);
@@ -106,7 +94,7 @@
             // txtProduct
             // 
             this.txtProduct.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtProduct.Location = new System.Drawing.Point(242, 18);
+            this.txtProduct.Location = new System.Drawing.Point(247, 18);
             this.txtProduct.Name = "txtProduct";
             this.txtProduct.ReadOnly = true;
             this.txtProduct.Size = new System.Drawing.Size(153, 21);
@@ -116,7 +104,7 @@
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(48, 18);
+            this.txtCustomer.Location = new System.Drawing.Point(53, 18);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(153, 21);
@@ -126,7 +114,7 @@
             // lnkProductCategory
             // 
             this.lnkProductCategory.AutoSize = true;
-            this.lnkProductCategory.Location = new System.Drawing.Point(12, 51);
+            this.lnkProductCategory.Location = new System.Drawing.Point(17, 51);
             this.lnkProductCategory.Name = "lnkProductCategory";
             this.lnkProductCategory.Size = new System.Drawing.Size(29, 12);
             this.lnkProductCategory.TabIndex = 36;
@@ -137,7 +125,7 @@
             // lnkProduct
             // 
             this.lnkProduct.AutoSize = true;
-            this.lnkProduct.Location = new System.Drawing.Point(207, 22);
+            this.lnkProduct.Location = new System.Drawing.Point(212, 22);
             this.lnkProduct.Name = "lnkProduct";
             this.lnkProduct.Size = new System.Drawing.Size(29, 12);
             this.lnkProduct.TabIndex = 34;
@@ -148,23 +136,23 @@
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(12, 22);
+            this.lnkCustomer.Location = new System.Drawing.Point(7, 22);
             this.lnkCustomer.Name = "lnkCustomer";
-            this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
+            this.lnkCustomer.Size = new System.Drawing.Size(41, 12);
             this.lnkCustomer.TabIndex = 33;
             this.lnkCustomer.TabStop = true;
-            this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.Text = "供应商";
             this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.ucDateTimeInterval1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(7, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(231, 90);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "出货日期";
+            this.groupBox1.Text = "收货日期";
             // 
             // ucDateTimeInterval1
             // 
@@ -199,17 +187,17 @@
             this.colCount,
             this.colAmount,
             this.colSalesPerson});
-            this.gridView.Location = new System.Drawing.Point(0, 102);
+            this.gridView.Location = new System.Drawing.Point(4, 100);
             this.gridView.Name = "gridView";
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1154, 292);
-            this.gridView.TabIndex = 26;
+            this.gridView.Size = new System.Drawing.Size(1128, 348);
+            this.gridView.TabIndex = 39;
             // 
             // colDeliveryDate
             // 
-            this.colDeliveryDate.HeaderText = "出货日期";
+            this.colDeliveryDate.HeaderText = "收货日期";
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.ReadOnly = true;
             this.colDeliveryDate.Width = 130;
@@ -217,7 +205,7 @@
             // colCustomerName
             // 
             this.colCustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCustomerName.HeaderText = "客户";
+            this.colCustomerName.HeaderText = "供应商";
             this.colCustomerName.MinimumWidth = 150;
             this.colCustomerName.Name = "colCustomerName";
             this.colCustomerName.ReadOnly = true;
@@ -225,14 +213,14 @@
             // 
             // colSheetNo
             // 
-            this.colSheetNo.HeaderText = "送货单";
+            this.colSheetNo.HeaderText = "收货单号";
             this.colSheetNo.Name = "colSheetNo";
             this.colSheetNo.ReadOnly = true;
             this.colSheetNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // colOrderID
             // 
-            this.colOrderID.HeaderText = "销售订单";
+            this.colOrderID.HeaderText = "采购单号";
             this.colOrderID.Name = "colOrderID";
             this.colOrderID.ReadOnly = true;
             this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -287,25 +275,26 @@
             // 
             // colSalesPerson
             // 
-            this.colSalesPerson.HeaderText = "业务";
+            this.colSalesPerson.HeaderText = "采购员";
             this.colSalesPerson.Name = "colSalesPerson";
             this.colSalesPerson.ReadOnly = true;
             // 
-            // FrmDeliveryRecordReport
+            // FrmInventoryRecordReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1154, 416);
+            this.ClientSize = new System.Drawing.Size(1135, 473);
             this.Controls.Add(this.gridView);
-            this.Controls.Add(this.panel1);
-            this.Name = "FrmDeliveryRecordReport";
-            this.Text = "出货记录报表";
-            this.Load += new System.EventHandler(this.FrmDeliveryRecordReport_Load);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.Controls.SetChildIndex(this.gridView, 0);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox1);
+            this.Name = "FrmInventoryRecordReport";
+            this.Text = "收货记录报表";
+            this.Load += new System.EventHandler(this.FrmInvnetoryRecordReport_Load);
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.btnOkAs, 0);
-            this.panel1.ResumeLayout(false);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.groupBox3, 0);
+            this.Controls.SetChildIndex(this.gridView, 0);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -317,17 +306,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
-        private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.LinkLabel lnkProductCategory;
-        private System.Windows.Forms.LinkLabel lnkProduct;
-        private System.Windows.Forms.LinkLabel lnkCustomer;
         private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
         private GeneralLibrary.WinformControl.DBCTextBox txtProduct;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkProductCategory;
+        private System.Windows.Forms.LinkLabel lnkProduct;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
+        private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;

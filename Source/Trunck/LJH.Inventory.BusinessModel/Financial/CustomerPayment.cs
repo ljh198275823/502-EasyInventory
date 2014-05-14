@@ -22,6 +22,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ID { get; set; }
         /// <summary>
+        /// 获取或设置单据类型
+        /// </summary>
+        public CustomerPaymentType ClassID { get; set; }
+        /// <summary>
         /// 获取或设置单据日期
         /// </summary>
         public DateTime SheetDate { get; set; }
@@ -95,7 +99,18 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string DocumentType
         {
-            get { return "CustomerPayment"; }
+            get
+            {
+                switch (ClassID)
+                {
+                    case CustomerPaymentType.Customer:
+                        return "客户应收款";
+                    case CustomerPaymentType.Supplier:
+                        return "供应商应付款";
+                    default:
+                        throw new Exception("客户付款单没有指定类型");
+                }
+            }
         }
 
         public ISheet<string> Clone()

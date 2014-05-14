@@ -24,7 +24,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置应收款的类型
         /// </summary>
-        public CustomerReceivableClass ClassID { get; set; }
+        public CustomerReceivableType ClassID { get; set; }
         /// <summary>
         /// 获取或设置应收账款的产生日期
         /// </summary>
@@ -71,20 +71,5 @@ namespace LJH.Inventory.BusinessModel
             return this.MemberwiseClone() as CustomerReceivable;
         }
         #endregion
-    }
-
-    /// <summary>
-    /// 客户应收款的类型
-    /// </summary>
-    public enum CustomerReceivableClass
-    {
-        /// <summary>
-        /// 其它应收款
-        /// </summary>
-        Other = 0,
-        /// <summary>
-        /// 送货单产生的应收款
-        /// </summary>
-        Delivery = 1,
     }
 }

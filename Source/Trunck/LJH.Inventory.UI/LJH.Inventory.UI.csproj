@@ -63,6 +63,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Financial\FrmSupplierFinancialStateMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmSupplierFinancialStateMaster.Designer.cs">
+      <DependentUpon>FrmSupplierFinancialStateMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmSupplierPaymentMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmSupplierPaymentMaster.Designer.cs">
+      <DependentUpon>FrmSupplierPaymentMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\View\FrmCustomerReceivableView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +170,12 @@
     </Compile>
     <Compile Include="Forms\General\FrmStaffMaster.Designer.cs">
       <DependentUpon>FrmStaffMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Report\FrmInventoryRecordReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Report\FrmInventoryRecordReport.Designer.cs">
+      <DependentUpon>FrmInventoryRecordReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\View\FrmProductInventoryRecordsView.cs">
       <SubType>Form</SubType>
@@ -580,6 +598,12 @@
       <DependentUpon>FrmSalesPersonPerformanceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Financial\FrmSupplierFinancialStateMaster.resx">
+      <DependentUpon>FrmSupplierFinancialStateMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\FrmSupplierPaymentMaster.resx">
+      <DependentUpon>FrmSupplierPaymentMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\View\FrmCustomerReceivableView.resx">
       <DependentUpon>FrmCustomerReceivableView.cs</DependentUpon>
     </EmbeddedResource>
@@ -630,6 +654,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmProductInventoryAssign.resx">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Report\FrmInventoryRecordReport.resx">
+      <DependentUpon>FrmInventoryRecordReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\View\FrmProductInventoryRecordsView.resx">
       <DependentUpon>FrmProductInventoryRecordsView.cs</DependentUpon>

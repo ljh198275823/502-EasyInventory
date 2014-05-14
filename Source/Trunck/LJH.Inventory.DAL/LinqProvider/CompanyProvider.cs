@@ -10,10 +10,10 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class CustomerProvider : ProviderBase<CompanyInfo, string>
+    public class CompanyProvider : ProviderBase<CompanyInfo, string>
     {
         #region 构造函数
-        public CustomerProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
+        public CompanyProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
             : base(connStr,ms)
         {
         }

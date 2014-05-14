@@ -49,10 +49,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
-            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_AssignGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_UndoAssign = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -78,6 +74,10 @@
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnPayment = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
+            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -273,13 +273,13 @@
             // 
             // lnkCustomer
             // 
-            this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(37, 48);
+            this.lnkCustomer.Location = new System.Drawing.Point(6, 48);
             this.lnkCustomer.Name = "lnkCustomer";
-            this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
+            this.lnkCustomer.Size = new System.Drawing.Size(60, 17);
             this.lnkCustomer.TabIndex = 1;
             this.lnkCustomer.TabStop = true;
             this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
             // 
             // txtID
@@ -307,7 +307,7 @@
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(578, 194);
             this.tabPage3.TabIndex = 7;
-            this.tabPage3.Text = "金额分配";
+            this.tabPage3.Text = "核销";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // ItemsGrid
@@ -331,34 +331,6 @@
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ItemsGrid.Size = new System.Drawing.Size(578, 194);
             this.ItemsGrid.TabIndex = 119;
-            // 
-            // colSheetID
-            // 
-            this.colSheetID.HeaderText = "应收款单号";
-            this.colSheetID.MinimumWidth = 120;
-            this.colSheetID.Name = "colSheetID";
-            this.colSheetID.ReadOnly = true;
-            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSheetID.Width = 150;
-            // 
-            // colClassID
-            // 
-            this.colClassID.HeaderText = "类型";
-            this.colClassID.Name = "colClassID";
-            this.colClassID.ReadOnly = true;
-            // 
-            // colAssign
-            // 
-            this.colAssign.HeaderText = "抵消金额";
-            this.colAssign.Name = "colAssign";
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Width = 120;
             // 
             // mnu_AssignGrid
             // 
@@ -583,8 +555,8 @@
             this.btnPayment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
             this.btnPayment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(60, 53);
-            this.btnPayment.Text = "核销应收";
+            this.btnPayment.Size = new System.Drawing.Size(36, 53);
+            this.btnPayment.Text = "核销";
             this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
@@ -597,6 +569,34 @@
             this.btnNullify.Text = "作废(&N)";
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
+            // 
+            // colSheetID
+            // 
+            this.colSheetID.HeaderText = "单据编号";
+            this.colSheetID.MinimumWidth = 120;
+            this.colSheetID.Name = "colSheetID";
+            this.colSheetID.ReadOnly = true;
+            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSheetID.Width = 150;
+            // 
+            // colClassID
+            // 
+            this.colClassID.HeaderText = "类型";
+            this.colClassID.Name = "colClassID";
+            this.colClassID.ReadOnly = true;
+            // 
+            // colAssign
+            // 
+            this.colAssign.HeaderText = "抵消金额";
+            this.colAssign.Name = "colAssign";
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Width = 120;
             // 
             // FrmCustomerPaymentDetail
             // 
@@ -674,11 +674,11 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ToolStripButton btnPayment;
         private System.Windows.Forms.DataGridView ItemsGrid;
+        private System.Windows.Forms.ContextMenuStrip mnu_AssignGrid;
+        private System.Windows.Forms.ToolStripMenuItem mnu_UndoAssign;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
-        private System.Windows.Forms.ContextMenuStrip mnu_AssignGrid;
-        private System.Windows.Forms.ToolStripMenuItem mnu_UndoAssign;
     }
 }

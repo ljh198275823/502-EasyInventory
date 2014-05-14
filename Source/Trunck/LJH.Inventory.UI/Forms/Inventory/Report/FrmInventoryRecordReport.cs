@@ -12,23 +12,23 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Forms;
 using LJH.Inventory.UI.Forms.General;
-using LJH.Inventory.UI.Forms.Sale;
+using LJH.Inventory.UI.Forms.Purchase;
 
 namespace LJH.Inventory.UI.Forms.Inventory.Report
 {
-    public partial class FrmDeliveryRecordReport : FrmReportBase
+    public partial class FrmInventoryRecordReport : FrmReportBase
     {
-        public FrmDeliveryRecordReport()
+        public FrmInventoryRecordReport()
         {
             InitializeComponent();
         }
 
         #region 私有方法
-        private void ShowItemOnRow(DataGridViewRow row, StackOutRecord item)
+        private void ShowItemOnRow(DataGridViewRow row, StackInRecord item)
         {
             row.Cells["colDeliveryDate"].Value = item.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = item.SheetNo;
-            row.Cells["colCustomerName"].Value = item.Customer.Name;
+            row.Cells["colCustomerName"].Value = item.Supplier.Name;
             row.Cells["colOrderID"].Value = item.OrderID;
             row.Cells["colProductID"].Value = item.ProductID;
             row.Cells["colProductName"].Value = item.Product.Name;
@@ -42,20 +42,20 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         #region 重写基类方法
         protected override void OnItemSearching(EventArgs e)
         {
-            StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
+            StackInRecordSearchCondition con = new StackInRecordSearchCondition();
             con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.States = new List<SheetState>();
-            con.States.Add(SheetState.Shipped);
-            con.SheetTypes = new List<StackOutSheetType>();
-            con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
-            if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
+            con.States.Add(SheetState.Inventory);
+            con.SheetTypes = new List<StackInSheetType>();
+            con.SheetTypes.Add(StackInSheetType.InventorySheet);
+            if (txtCustomer.Tag != null) con.SupplierID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
             if (txtProduct.Tag != null) con.ProductID = (txtProduct.Tag as Product).ID;
-            List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            List<StackInRecord> items = (new StackInSheetBLL(AppSettings.Current.ConnStr)).GetInventoryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 items = (from item in items orderby item.LastActiveDate ascending, item.ProductID ascending select item).ToList();
-                foreach (StackOutRecord item in items)
+                foreach (StackInRecord item in items)
                 {
                     int row = gridView.Rows.Add();
                     ShowItemOnRow(gridView.Rows[row], item);
@@ -65,7 +65,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         #endregion
 
         #region 事件处理程序
-        private void FrmDeliveryRecordReport_Load(object sender, EventArgs e)
+        private void FrmInvnetoryRecordReport_Load(object sender, EventArgs e)
         {
             ucDateTimeInterval1.ShowTime = false;
             ucDateTimeInterval1.Init();
@@ -74,7 +74,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
 
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmCustomerMaster frm = new FrmCustomerMaster();
+            FrmSupplierMaster frm = new FrmSupplierMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {

@@ -46,23 +46,23 @@ namespace LJH.Inventory.BLL
 
         private void AddReceivables(StackInSheet sheet, IUnitWork unitWork)
         {
-            List<SupplierReceivable> crs = new List<SupplierReceivable>();
+            List<CustomerReceivable> crs = new List<CustomerReceivable>();
             foreach (StackInItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
             {
-                SupplierReceivable cr = null;
-                if (string.IsNullOrEmpty(si.PurchaseOrder)) cr = crs.SingleOrDefault(it => string.IsNullOrEmpty(it.PurchaseID));
-                if (!string.IsNullOrEmpty(si.PurchaseOrder)) cr = crs.SingleOrDefault(it => it.PurchaseID == si.PurchaseOrder);
+                CustomerReceivable cr = null;
+                if (string.IsNullOrEmpty(si.PurchaseOrder)) cr = crs.SingleOrDefault(it => string.IsNullOrEmpty(it.OrderID));
+                if (!string.IsNullOrEmpty(si.PurchaseOrder)) cr = crs.SingleOrDefault(it => it.OrderID == si.PurchaseOrder);
                 if (cr == null)
                 {
                     DateTime dt = DateTime.Now;
-                    cr = new SupplierReceivable()
+                    cr = new CustomerReceivable()
                     {
                         ID = Guid.NewGuid(),
                         CreateDate = dt,
-                        ClassID = 1,
-                        SupplierID = sheet.SupplierID,
+                        ClassID = CustomerReceivableType.SupplierReceivable,
+                        CustomerID = sheet.SupplierID,
                         SheetID = sheet.ID,
-                        PurchaseID = si.PurchaseOrder,
+                        OrderID = si.PurchaseOrder,
                         Amount = si.Amount,
                     };
                     crs.Add(cr);
@@ -72,9 +72,9 @@ namespace LJH.Inventory.BLL
                     cr.Amount += si.Amount;
                 }
             }
-            foreach (SupplierReceivable cr in crs)
+            foreach (CustomerReceivable cr in crs)
             {
-                ProviderFactory.Create<IProvider<SupplierReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
             }
         }
         #endregion

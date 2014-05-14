@@ -22,8 +22,16 @@ namespace LJH.Inventory.BLL
         #region 重写基类方法
         protected override string CreateSheetID(CustomerPayment info)
         {
-            info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
-                    UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType );
+            if (info.ClassID == CustomerPaymentType.Customer)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
+                        UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
+            }
+            if (info.ClassID == CustomerPaymentType.Supplier)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("FKD",
+                        UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
+            }
             return info.ID;
         }
 

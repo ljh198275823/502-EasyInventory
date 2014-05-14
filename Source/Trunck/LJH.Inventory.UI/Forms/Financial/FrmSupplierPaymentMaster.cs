@@ -14,9 +14,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerPaymentMaster : FrmMasterBase
+    public partial class FrmSupplierPaymentMaster : FrmMasterBase
     {
-        public FrmCustomerPaymentMaster()
+        public FrmSupplierPaymentMaster()
         {
             InitializeComponent();
         }
@@ -78,7 +78,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
             if (customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
-            frm.PaymentType = CustomerPaymentType.Customer;
+            frm.PaymentType = CustomerPaymentType.Supplier;
             return frm;
         }
 
@@ -89,7 +89,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
                 con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
                 con.PaymentTypes = new List<CustomerPaymentType>();
-                con.PaymentTypes.Add(CustomerPaymentType.Customer);
+                con.PaymentTypes.Add(CustomerPaymentType.Supplier);
                 _Sheets = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
@@ -105,7 +105,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Tag = info;
             row.Cells["colID"].Value = info.ID;
             row.Cells["colSheetDate"].Value = info.SheetDate.ToString("yyyy-MM-dd");
-            CompanyInfo customer = customerTree1.GetCustomer(info.CustomerID);
+            CompanyInfo customer = customerTree1.GetSupplier(info.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : info.CustomerID;
             row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount.Trim();
@@ -130,10 +130,6 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 事件处理程序
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();
@@ -149,11 +145,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             FreshData();
         }
 
-        private void mnu_Add_Click(object sender, EventArgs e)
-        {
-            PerformAddData();
-        }
-
         private void mnu_Assign_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 1)
@@ -164,12 +155,17 @@ namespace LJH.Inventory.UI.Forms.Financial
                     string paymentID = cp.ID;
                     FrmPaymentAssign frm = new FrmPaymentAssign();
                     frm.CustomerPaymentID = paymentID;
-                    frm.PaymentType = CustomerPaymentType.Customer;
+                    frm.PaymentType = CustomerPaymentType.Supplier;
                     frm.ShowDialog();
                     cp = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID).QueryObject;
                     ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cp);
                 }
             }
+        }
+
+        private void mnu_Add_Click(object sender, EventArgs e)
+        {
+            PerformAddData();
         }
         #endregion
     }

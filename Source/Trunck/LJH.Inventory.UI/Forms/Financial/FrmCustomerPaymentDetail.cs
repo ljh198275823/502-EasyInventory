@@ -13,6 +13,7 @@ using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 using LJH.Inventory.UI.Forms.Sale;
+using LJH.Inventory.UI.Forms.Purchase;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
@@ -25,9 +26,13 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         #region 公共属性
         /// <summary>
-        /// 获取或设置付款的用户
+        /// 获取或设置收款或付款的客户
         /// </summary>
         public CompanyInfo Customer { get; set; }
+        /// <summary>
+        /// 获取或设置收款或付款类型
+        /// </summary>
+        public CustomerPaymentType PaymentType { get; set; }
         #endregion
 
         #region 私有方法
@@ -49,7 +54,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                         int row = ItemsGrid.Rows.Add();
                         ItemsGrid.Rows[row].Tag = assign;
                         ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
-                        ItemsGrid.Rows[row].Cells["colClassID"].Value = cr.ClassID.ToString();
+                        ItemsGrid.Rows[row].Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
                         ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount;
                     }
                 }
@@ -65,19 +70,21 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.InitControls();
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户收款明细" : "供应商付款明细";
+            this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
         }
 
         protected override bool CheckInput()
         {
             if (Customer == null)
             {
-                MessageBox.Show("客户不能为空");
+                MessageBox.Show(PaymentType == CustomerPaymentType.Customer ? "客户不能为空" : "供应商不能为空");
                 txtCustomer.Focus();
                 return false;
             }
             if (txtAmount.DecimalValue <= 0)
             {
-                MessageBox.Show("付款金额不正确");
+                MessageBox.Show("金额不正确");
                 txtAmount.Focus();
                 return false;
             }
@@ -113,6 +120,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (UpdatingItem == null)
             {
                 info = new CustomerPayment();
+                info.ClassID = PaymentType;
             }
             else
             {
@@ -200,7 +208,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                string msg = "\"取消审核\"的操作会删除此收款的所有应收核销项删除，是否继续?";
+                string msg = "\"取消审核\"的操作会删除此单的所有核销项删除，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
@@ -217,6 +225,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 string paymentID = (UpdatingItem as CustomerPayment).ID;
                 FrmPaymentAssign frm = new FrmPaymentAssign();
+                frm.PaymentType = PaymentType;
                 frm.CustomerPaymentID = paymentID;
                 frm.ShowDialog();
                 UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
@@ -230,7 +239,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                string msg = "\"作废\"的操作会删除此收款的所有应收核销项删除，是否继续?";
+                string msg = "\"作废\"的操作会删除此单的所有核销项删除，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
@@ -245,7 +254,15 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 事件处理程序
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmCustomerMaster frm = new FrmCustomerMaster();
+            FrmMasterBase frm = null;
+            if (PaymentType == CustomerPaymentType.Customer)
+            {
+                frm = new FrmCustomerMaster();
+            }
+            else
+            {
+                frm = new FrmSupplierMaster();
+            }
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -253,14 +270,13 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             }
         }
-        #endregion
 
         private void mnu_UndoAssign_Click(object sender, EventArgs e)
         {
             List<DataGridViewRow> delRows = new List<DataGridViewRow>();
             if (ItemsGrid.SelectedRows != null && ItemsGrid.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show("是否要取消此应收核销?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("是否要取消此核销项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
                     {
@@ -275,5 +291,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
             ShowButtonState();
         }
+        #endregion
     }
 }

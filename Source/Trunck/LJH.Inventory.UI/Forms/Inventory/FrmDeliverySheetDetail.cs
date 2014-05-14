@@ -102,6 +102,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            if (item.ClassID == StackOutSheetType.DeliverySheet) this.cmbSheetType.SelectedIndex = 0;
+            if (item.ClassID == StackOutSheetType.CustomerBorrow) this.cmbSheetType.SelectedIndex = 1;
+            this.cmbSheetType.Enabled = false;
             WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
             this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             dtSheetDate.Value = item.SheetDate;
@@ -154,6 +157,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.txtSheetNo.Text = _AutoCreate;
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            cmbSheetType.SelectedIndex = 0;
             btn_AddItem.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
             if (IsForView)
             {
@@ -184,6 +188,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 sheet = UpdatingItem as StackOutSheet;
             }
             sheet.CustomerID = Customer != null ? Customer.ID : null;
+            if (cmbSheetType.SelectedIndex == 0) sheet.ClassID = StackOutSheetType.DeliverySheet;
+            if (cmbSheetType.SelectedIndex == 1) sheet.ClassID = StackOutSheetType.CustomerBorrow;
             sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
             sheet.SheetDate = dtSheetDate.Value;
             sheet.Linker = txtLinker.Text.Trim();
@@ -507,7 +513,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("请先选择客户");
             }
         }
-        #endregion
 
+        private void cmbSheetType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbSheetType.SelectedIndex == 1)
+            {
+                btn_AddItem.Visible = true;
+                mnu_AddOrderItem.Visible = false;
+            }
+            else
+            {
+                btn_AddItem.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
+                mnu_AddOrderItem.Visible = true;
+            }
+        }
+        #endregion
     }
 }

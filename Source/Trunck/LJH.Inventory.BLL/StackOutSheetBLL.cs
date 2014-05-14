@@ -118,7 +118,7 @@ namespace LJH.Inventory.BLL
                     {
                         ID = Guid.NewGuid(),
                         CreateDate = dt,
-                        ClassID = CustomerReceivableClass.Delivery,
+                        ClassID = CustomerReceivableType.CustomerReceivable,
                         CustomerID = sheet.CustomerID,
                         SheetID = sheet.ID,
                         OrderID = si.OrderID,
@@ -141,8 +141,16 @@ namespace LJH.Inventory.BLL
         #region 重写基类方法
         protected override string CreateSheetID(StackOutSheet info)
         {
-            info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
-                    UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, info.DocumentType);
+            if (info.ClassID == StackOutSheetType.DeliverySheet)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
+                        UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, info.DocumentType);
+            }
+            else if (info.ClassID == StackOutSheetType.CustomerBorrow)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("JYD",
+                        UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, info.DocumentType);
+            }
             if (!string.IsNullOrEmpty(info.ID)) info.Items.ForEach(item => item.SheetNo = info.ID);//这一句不能省!!
             return info.ID;
         }

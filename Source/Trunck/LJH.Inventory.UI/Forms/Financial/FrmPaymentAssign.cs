@@ -26,6 +26,8 @@ namespace LJH.Inventory.UI.Forms.Financial
         /// 获取或设置要分配的客户收款单号
         /// </summary>
         public string CustomerPaymentID { get; set; }
+
+        public CustomerPaymentType PaymentType { get; set; }
         #endregion
 
         #region 私有方法
@@ -34,6 +36,17 @@ namespace LJH.Inventory.UI.Forms.Financial
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
             con.CustomerID = customerID;
+            con.ReceivableTypes = new List<CustomerReceivableType>();
+            if (PaymentType == CustomerPaymentType.Customer)
+            {
+                con.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
+                con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
+            }
+            else
+            {
+                con.ReceivableTypes.Add(CustomerReceivableType.SupplierOtherReceivable);
+                con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            }
             con.Settled = false;
             List<CustomerReceivable> items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
@@ -41,8 +54,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 items = (from item in items orderby item.CreateDate ascending, item.SheetID ascending select item).ToList();
                 foreach (CustomerReceivable cr in items)
                 {
-                    int row = GridView.Rows.Add();
-                    ShowItemInGridViewRow(GridView.Rows[row], cr);
+                    if (cr.Remain > 0)  //只核销金额为正的应收或应付
+                    {
+                        int row = GridView.Rows.Add();
+                        ShowItemInGridViewRow(GridView.Rows[row], cr);
+                    }
                 }
             }
         }
