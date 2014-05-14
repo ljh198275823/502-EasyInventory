@@ -22,6 +22,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid ID { get; set; }
         /// <summary>
+        /// 获取或设置应收款的类型
+        /// </summary>
+        public CustomerReceivableClass ClassID { get; set; }
+        /// <summary>
         /// 获取或设置应收账款的产生日期
         /// </summary>
         public DateTime CreateDate { get; set; }
@@ -29,10 +33,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置付款客户ID
         /// </summary>
         public string CustomerID { get; set; }
-        /// <summary>
-        /// 获取或设置应收款的类型
-        /// </summary>
-        public CustomerReceivableClass ClassID { get; set; }
         /// <summary>
         /// 获取或设置产生应收账款的单据号，比如送货单号，其它应收款单号等
         /// </summary>
@@ -46,7 +46,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置已经支付的金额
+        /// 获取或设置已经核销的金额
         /// </summary>
         public decimal Haspaid { get; set; }
         /// <summary>

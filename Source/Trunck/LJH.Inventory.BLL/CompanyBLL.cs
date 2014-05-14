@@ -50,14 +50,6 @@ namespace LJH.Inventory.BLL
             return GetItems(con);
         }
         /// <summary>
-        /// 获取所有客户的财务状态信息
-        /// </summary>
-        /// <returns></returns>
-        public QueryResultList<CustomerFinancialState> GetCustomerStates()
-        {
-            return ProviderFactory.Create<IProvider<CustomerFinancialState, string>>(_RepoUri).GetItems(null);
-        }
-        /// <summary>
         /// 获取所有供应商信息
         /// </summary>
         /// <returns></returns>

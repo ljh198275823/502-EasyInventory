@@ -90,7 +90,6 @@
     <Compile Include="Financial\CustomerPayment.cs" />
     <Compile Include="Financial\CustomerPaymentAssign.cs" />
     <Compile Include="Financial\CustomerReceivable.cs" />
-    <Compile Include="Financial\CustomerFinancialState.cs" />
     <Compile Include="CustomerType.cs" />
     <Compile Include="DecimalHelper.cs" />
     <Compile Include="Department.cs" />

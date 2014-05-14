@@ -46,20 +46,34 @@ namespace LJH.Inventory.BLL
 
         private void AddReceivables(StackInSheet sheet, IUnitWork unitWork)
         {
+            List<SupplierReceivable> crs = new List<SupplierReceivable>();
             foreach (StackInItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
             {
-                //增加应收账款项
-                SupplierReceivable cr = new SupplierReceivable()
+                SupplierReceivable cr = null;
+                if (string.IsNullOrEmpty(si.PurchaseOrder)) cr = crs.SingleOrDefault(it => string.IsNullOrEmpty(it.PurchaseID));
+                if (!string.IsNullOrEmpty(si.PurchaseOrder)) cr = crs.SingleOrDefault(it => it.PurchaseID == si.PurchaseOrder);
+                if (cr == null)
                 {
-                    ID = Guid.NewGuid(),
-                    CreateDate = DateTime.Now,
-                    SupplierID = sheet.SupplierID,
-                    PurchaseID = si.PurchaseOrder,
-                    PurchaseItem = si.PurchaseItem,
-                    InventorySheet = sheet.ID,
-                    InventoryItem = si.ID,
-                    Amount = si.Amount,
-                };
+                    DateTime dt = DateTime.Now;
+                    cr = new SupplierReceivable()
+                    {
+                        ID = Guid.NewGuid(),
+                        CreateDate = dt,
+                        ClassID = 1,
+                        SupplierID = sheet.SupplierID,
+                        SheetID = sheet.ID,
+                        PurchaseID = si.PurchaseOrder,
+                        Amount = si.Amount,
+                    };
+                    crs.Add(cr);
+                }
+                else
+                {
+                    cr.Amount += si.Amount;
+                }
+            }
+            foreach (SupplierReceivable cr in crs)
+            {
                 ProviderFactory.Create<IProvider<SupplierReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
             }
         }
@@ -87,7 +101,7 @@ namespace LJH.Inventory.BLL
             ProviderFactory.Create<IProvider<StackInSheet, string>>(_RepoUri).Update(info, sheet1, unitWork);
 
             AddToProductInventory(info, unitWork); //更新商品库存
-            AddReceivables(info, unitWork);         //增加供应商的应收账款
+            if (info.ClassID == StackInSheetType.InventorySheet) AddReceivables(info, unitWork);         //增加供应商的应收账款
         }
 
         protected override void DoNullify(StackInSheet info, IUnitWork unitWork, DateTime dt, string opt)

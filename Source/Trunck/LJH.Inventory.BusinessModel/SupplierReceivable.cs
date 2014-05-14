@@ -22,6 +22,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid ID { get; set; }
         /// <summary>
+        /// 获取或设置应收款的类型
+        /// </summary>
+        public int ClassID { get; set; }
+        /// <summary>
         /// 获取或设置应收账款的产生日期
         /// </summary>
         public DateTime CreateDate { get; set; }
@@ -30,25 +34,21 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string SupplierID { get; set; }
         /// <summary>
+        /// 获取或设置收货单编号
+        /// </summary>
+        public string SheetID { get; set; }
+        /// <summary>
         /// 获取或设置产生应收款的采购订单号
         /// </summary>
         public string PurchaseID { get; set; }
         /// <summary>
-        /// 获取或设置采购订单项
-        /// </summary>
-        public Guid? PurchaseItem { get; set; }
-        /// <summary>
-        /// 获取或设置收货单编号
-        /// </summary>
-        public string InventorySheet { get; set; }
-        /// <summary>
-        /// 获取或设置收货单项ID
-        /// </summary>
-        public Guid? InventoryItem { get; set; }
-        /// <summary>
         /// 获取或设置应收总额
         /// </summary>
         public decimal Amount { get; set; }
+        /// <summary>
+        /// 获取或设置已经核销的金额
+        /// </summary>
+        public decimal Haspaid { get; set; }
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>

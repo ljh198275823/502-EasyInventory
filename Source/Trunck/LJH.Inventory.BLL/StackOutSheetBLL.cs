@@ -157,7 +157,7 @@ namespace LJH.Inventory.BLL
             provider.Update(info, sheet1, unitWork);
 
             if (!string.IsNullOrEmpty(info.WareHouseID)) InventoryOut(info, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
-            AddReceivables(info, unitWork);         //增加供应商的应收账款
+            if (info.ClassID == StackOutSheetType.DeliverySheet) AddReceivables(info, unitWork);         //类型为送货单的出库单出货时增加应收
         }
 
         protected override void DoNullify(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)

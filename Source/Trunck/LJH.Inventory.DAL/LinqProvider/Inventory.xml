@@ -90,13 +90,6 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="View_CustomerFinancialState" Member="LJH.Inventory.BusinessModel.CustomerFinancialState">
-    <Type Name="LJH.Inventory.BusinessModel.CustomerFinancialState">
-      <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true"/>
-      <Column Name="Prepay" Member="Prepay" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="Receivable" Member="Receivable" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-    </Type>
-  </Table>  
   <Table Name="DocumentOperation" Member="LJH.Inventory.BusinessModel.DocumentOperation">
     <Type Name="LJH.Inventory.BusinessModel.DocumentOperation">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
@@ -505,13 +498,13 @@
   <Table Name="SupplierReceivable" Member="LJH.Inventory.BusinessModel.SupplierReceivable">
     <Type Name="LJH.Inventory.BusinessModel.SupplierReceivable">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
-      <Column Name="SupplierID" Member="SupplierID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="PurchaseID" Member="PurchseID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="InventorySheet" Member="InventorySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="InventoryItem" Member="InventoryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="SupplierID" Member="SupplierID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="SheetID" Member="SheetID"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="PurchaseID" Member="PurchaseID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Haspaid" Member="Haspaid" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

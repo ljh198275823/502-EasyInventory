@@ -170,6 +170,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
             this.txtSupplier.Text = Supplier != null ? Supplier.Name : string.Empty;
+            this.dtDemandDate.Value = DateTime.Today;
             this.dtDemandDate.IsNull = true;
             if (IsForView)
             {

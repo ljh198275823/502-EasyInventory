@@ -38,6 +38,15 @@ namespace LJH.Inventory.UI.Controls
             }
             base.OnValueChanged(eventargs);
         }
+
+        protected override void OnClick(EventArgs e)
+        {
+            if (this.IsNull)
+            {
+                this.Value = DateTime.Today;
+            }
+            base.OnClick(e);
+        }
         #endregion
 
         /// <summary>
