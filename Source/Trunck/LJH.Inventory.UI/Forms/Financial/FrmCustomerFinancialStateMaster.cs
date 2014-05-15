@@ -157,8 +157,16 @@ namespace LJH.Inventory.UI.Forms.Financial
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
                     CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
-                    View.FrmCustomerPaymentRemainsView frm = new View.FrmCustomerPaymentRemainsView();
-                    frm.Customer = c;
+                    View.FrmCustomerPaymentView frm = new View.FrmCustomerPaymentView();
+                    CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
+                    con.CustomerID = c.ID;
+                    con.PaymentTypes = new List<CustomerPaymentType>();
+                    con.PaymentTypes.Add(CustomerPaymentType.Customer);
+                    con.States = new List<SheetState>();
+                    con.States.Add(SheetState.Approved);
+                    con.HasRemain = true;
+                    frm.SearchCondition = con;
+                    frm.Text = string.Format("{0} 收款流水明细", c.Name);
                     frm.ShowDialog();
                 }
             }

@@ -29,7 +29,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colDeliveryDate"].Value = item.LastActiveDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = item.SheetNo;
             row.Cells["colCustomerName"].Value = item.Supplier.Name;
-            row.Cells["colOrderID"].Value = item.OrderID;
+            row.Cells["colOrderID"].Value = item.PurchaseOrder;
             row.Cells["colProductID"].Value = item.ProductID;
             row.Cells["colProductName"].Value = item.Product.Name;
             row.Cells["colCategoryID"].Value = item.Product.Category.Name;

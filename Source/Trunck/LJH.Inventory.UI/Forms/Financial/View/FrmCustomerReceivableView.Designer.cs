@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerReceivableView));
             this.GridView = new System.Windows.Forms.DataGridView();
+            this.chkShowAll = new System.Windows.Forms.CheckBox();
             this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,17 +65,29 @@
             this.colHaspaid,
             this.colNotPaid,
             this.colHowold});
-            this.GridView.Location = new System.Drawing.Point(0, 1);
+            this.GridView.Location = new System.Drawing.Point(0, 36);
             this.GridView.Name = "GridView";
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(804, 336);
+            this.GridView.Size = new System.Drawing.Size(804, 301);
             this.GridView.TabIndex = 22;
+            // 
+            // chkShowAll
+            // 
+            this.chkShowAll.AutoSize = true;
+            this.chkShowAll.Location = new System.Drawing.Point(12, 12);
+            this.chkShowAll.Name = "chkShowAll";
+            this.chkShowAll.Size = new System.Drawing.Size(72, 16);
+            this.chkShowAll.TabIndex = 23;
+            this.chkShowAll.Text = "显示所有";
+            this.chkShowAll.UseVisualStyleBackColor = true;
+            this.chkShowAll.CheckedChanged += new System.EventHandler(this.chkShowAll_CheckedChanged);
             // 
             // colSheetID
             // 
-            this.colSheetID.HeaderText = "应收款单号";
+            this.colSheetID.HeaderText = "单据编号";
+            this.colSheetID.MinimumWidth = 100;
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -140,11 +153,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 362);
+            this.Controls.Add(this.chkShowAll);
             this.Controls.Add(this.GridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerReceivableView";
             this.Text = "FrmCustomerReceivableView";
             this.Controls.SetChildIndex(this.GridView, 0);
+            this.Controls.SetChildIndex(this.chkShowAll, 0);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -154,6 +169,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView GridView;
+        private System.Windows.Forms.CheckBox chkShowAll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;

@@ -60,8 +60,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
             row.Cells["colAmount"].Value = cr.Amount.Trim();
-            row.Cells["colHaspaid"].Value = cr.Haspaid.Trim();
-            row.Cells["colNotpaid"].Value = cr.Remain.Trim();
+            if (cr.Haspaid != 0) row.Cells["colHaspaid"].Value = cr.Haspaid.Trim();
+            if (cr.Remain != 0) row.Cells["colNotpaid"].Value = cr.Remain.Trim();
             int days = DaysBetween(DateTime.Today, cr.CreateDate);
             row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
             if (cr.Amount < 0) row.DefaultCellStyle.ForeColor = Color.Red;
@@ -75,6 +75,23 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             GridView.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerReceivable).Amount).Trim();
             GridView.Rows[rowTotal].Cells["colHaspaid"].Value = items.Sum(item => (item as CustomerReceivable).Haspaid).Trim();
             GridView.Rows[rowTotal].Cells["colNotpaid"].Value = items.Sum(item => (item as CustomerReceivable).Remain).Trim();
+        }
+        #endregion
+
+        #region 事件处理程序
+        private void chkShowAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SearchCondition != null)
+            {
+                CustomerReceivableSearchCondition cpsc = SearchCondition as CustomerReceivableSearchCondition;
+                if (cpsc != null)
+                {
+                    if (!chkShowAll.Checked) cpsc.Settled = false;
+                    else cpsc.Settled = null;
+                }
+
+                ReFreshData();
+            }
         }
         #endregion
     }

@@ -29,12 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.categoryTree = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,12 +48,6 @@
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -68,7 +68,7 @@
             this.categoryTree.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.categoryTree.HideSelection = false;
             this.categoryTree.ItemHeight = 20;
-            this.categoryTree.LoadSupplier  = false;
+            this.categoryTree.LoadSupplier = false;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
             this.categoryTree.Size = new System.Drawing.Size(194, 350);
@@ -111,66 +111,6 @@
             this.dataGridView1.TabIndex = 113;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // colImage
-            // 
-            this.colImage.HeaderText = "";
-            this.colImage.Name = "colImage";
-            this.colImage.ReadOnly = true;
-            this.colImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colImage.Width = 30;
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "客户编号";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.HeaderText = "公司名称";
-            this.colName.MinimumWidth = 150;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 150;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "类别";
-            this.colCategory.MinimumWidth = 120;
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.Width = 120;
-            // 
-            // colReceivable
-            // 
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colReceivable.HeaderText = "应收金额";
-            this.colReceivable.Name = "colReceivable";
-            this.colReceivable.ReadOnly = true;
-            this.colReceivable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colReceivable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colPrepay
-            // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colPrepay.HeaderText = "预付款";
-            this.colPrepay.Name = "colPrepay";
-            this.colPrepay.ReadOnly = true;
-            this.colPrepay.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colPrepay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colTotal
-            // 
-            this.colTotal.HeaderText = "合计";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.ReadOnly = true;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -212,6 +152,66 @@
             this.cMnu_Export.Size = new System.Drawing.Size(124, 22);
             this.cMnu_Export.Text = "导出...";
             // 
+            // colImage
+            // 
+            this.colImage.HeaderText = "";
+            this.colImage.Name = "colImage";
+            this.colImage.ReadOnly = true;
+            this.colImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colImage.Width = 30;
+            // 
+            // colID
+            // 
+            this.colID.HeaderText = "客户编号";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.HeaderText = "公司名称";
+            this.colName.MinimumWidth = 150;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 150;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.MinimumWidth = 120;
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.Width = 120;
+            // 
+            // colReceivable
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colReceivable.HeaderText = "应付账款";
+            this.colReceivable.Name = "colReceivable";
+            this.colReceivable.ReadOnly = true;
+            this.colReceivable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colReceivable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colPrepay
+            // 
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colPrepay.HeaderText = "预付款";
+            this.colPrepay.Name = "colPrepay";
+            this.colPrepay.ReadOnly = true;
+            this.colPrepay.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colPrepay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colTotal
+            // 
+            this.colTotal.HeaderText = "合计";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.ReadOnly = true;
+            // 
             // FrmSupplierFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -239,6 +239,12 @@
         private Controls.SupplierTree categoryTree;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Payment;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
@@ -246,11 +252,5 @@
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Payment;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
     }
 }

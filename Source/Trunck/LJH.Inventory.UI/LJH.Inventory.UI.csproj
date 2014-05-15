@@ -555,11 +555,11 @@
     <Compile Include="Forms\Financial\View\FrmReceivablePaymentAssigns.designer.cs">
       <DependentUpon>FrmReceivablePaymentAssigns.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Financial\View\FrmCustomerPaymentRemainsView.cs">
+    <Compile Include="Forms\Financial\View\FrmCustomerPaymentView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Financial\View\FrmCustomerPaymentRemainsView.designer.cs">
-      <DependentUpon>FrmCustomerPaymentRemainsView.cs</DependentUpon>
+    <Compile Include="Forms\Financial\View\FrmCustomerPaymentView.designer.cs">
+      <DependentUpon>FrmCustomerPaymentView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sale\View\FrmOrderView.cs">
       <SubType>Form</SubType>
@@ -850,8 +850,8 @@
     <EmbeddedResource Include="Forms\Financial\View\FrmReceivablePaymentAssigns.resx">
       <DependentUpon>FrmReceivablePaymentAssigns.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\View\FrmCustomerPaymentRemainsView.resx">
-      <DependentUpon>FrmCustomerPaymentRemainsView.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Financial\View\FrmCustomerPaymentView.resx">
+      <DependentUpon>FrmCustomerPaymentView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\View\FrmOrderView.resx">
       <DependentUpon>FrmOrderView.cs</DependentUpon>
