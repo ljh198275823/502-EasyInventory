@@ -10,10 +10,10 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class ProductInventoryItemProvider : ProviderBase<ProductInventoryItem, Guid >
+    public class ProductInventoryItemProvider : ProviderBase<ProductInventoryItem, Guid>
     {
         public ProductInventoryItemProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
         }
 
@@ -58,7 +58,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                     }
                     else
                     {
-                        ret = ret.Where(item => item.DeliveryItem != null);
+                        ret = ret.Where(item => item.OrderItem != null);
                     }
                 }
             }

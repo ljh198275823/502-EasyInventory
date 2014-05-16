@@ -113,7 +113,8 @@ namespace LJH.Inventory.UI.Forms.Sale
             row.Cells["colInventory"].Value = info.Inventory.Trim();
             row.Cells["colShipped"].Value = info.Shipped.Trim();
             row.Cells["colNotPurchased"].Value = info.NotPurchased.Trim();
-            if (_Inventories != null && _Inventories.Count > 0)
+            //当订单的已出货加备货数小于订单数时才提示产品的有效库存,这么做也是减少垃圾信息，方便用户准确找到信息
+            if ((info.Inventory + info.Shipped < info.Count) && _Inventories != null && _Inventories.Count > 0) 
             {
                 row.Cells["colValidInventory"].Value = _Inventories.Sum(it => it.ProductID == info.ProductID ? it.Valid : 0).Trim();
             }
@@ -136,8 +137,37 @@ namespace LJH.Inventory.UI.Forms.Sale
         #region 事件处理程序
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
+            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colInventory")
             {
+                OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.OrderItem = item.ID;
+                con.UnShipped = true;
+                FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
+                frm.SearchCondition = con;
+                frm.ShowDialog();
+            }
+            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colShipped")
+            {
+                OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.OrderItem = item.ID;
+                con.UnShipped = false;
+                FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
+                frm.SearchCondition = con;
+                frm.ShowDialog();
+            }
+            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colValidInventory")
+            {
+                OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.Products = new List<string>();
+                con.Products.Add(item.ProductID);
+                con.UnShipped = true;
+                con.UnReserved = true;
+                FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
+                frm.SearchCondition = con;
+                frm.ShowDialog();
             }
         }
 
@@ -156,7 +186,39 @@ namespace LJH.Inventory.UI.Forms.Sale
                     MessageBox.Show("此订单项的备货数量已经大于或等于未出货数量，不用再分配库存");
                     return;
                 }
-                LJH.Inventory.UI.Forms.Inventory.FrmProductInventoryAssign frm = new Inventory.FrmProductInventoryAssign();
+                FrmProductInventoryAssign frm = new FrmProductInventoryAssign();
+                frm.ProductID = item.ProductID;
+                frm.MaxCount = item.NotPurchased;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        _Inventories = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                        _Records.Remove(item);
+                        item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
+                        if (item != null) _Records.Add(item); //更新某行数据
+                        FreshData();
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
+        }
+
+        private void mnu_UnReserve_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
+            {
+                OrderItemRecord item = dataGridView1.SelectedRows[0].Tag as OrderItemRecord;
+                if (item.Inventory == 0)
+                {
+                    MessageBox.Show("此订单项的还没有任何备货");
+                    return;
+                }
+                FrmProductInventoryAssign frm = new FrmProductInventoryAssign();
                 frm.ProductID = item.ProductID;
                 frm.MaxCount = item.NotPurchased;
                 if (frm.ShowDialog() == DialogResult.OK)

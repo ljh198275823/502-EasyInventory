@@ -13,9 +13,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {
-    public partial class FrmProductInventoryView : FrmMasterBase
+    public partial class FrmProductInventoryItemView : FrmMasterBase
     {
-        public FrmProductInventoryView()
+        public FrmProductInventoryItemView()
         {
             InitializeComponent();
         }
@@ -25,10 +25,10 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         #region 重写基类方法
         protected override List<object> GetDataSource()
         {
-            _Products = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             List<ProductInventoryItem> records = null;
             if (SearchCondition == null)
             {
+                _Products = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
                 records = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             }
             else
@@ -46,12 +46,25 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Tag = c;
             row.Cells["colInventorySheet"].Value = c.InventorySheet;
             row.Cells["colProductID"].Value = c.ProductID;
+            if (_Products == null) _Products = new List<Product>();
             Product p = _Products.SingleOrDefault(it => it.ID == c.ProductID);
+            if (p == null)
+            {
+                p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(c.ProductID).QueryObject;
+                _Products.Add(p);
+            }
             row.Cells["colProductName"].Value = p != null ? p.Name : string.Empty;
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colReserved"].Value = c.OrderID;
+            row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
         }
         #endregion
     }

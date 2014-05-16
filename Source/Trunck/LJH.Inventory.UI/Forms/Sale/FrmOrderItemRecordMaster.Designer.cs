@@ -33,6 +33,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Reserve = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_UnReserve = new System.Windows.Forms.ToolStripMenuItem();
             this.创建送货单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,6 @@
             this.chkAdded = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -71,6 +71,7 @@
             this.colSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -85,12 +86,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
             this.cMnu_Reserve,
+            this.mnu_UnReserve,
             this.创建送货单ToolStripMenuItem,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 142);
             // 
             // cMnu_Fresh
             // 
@@ -104,6 +106,13 @@
             this.cMnu_Reserve.Size = new System.Drawing.Size(148, 22);
             this.cMnu_Reserve.Text = "库存转为备货";
             this.cMnu_Reserve.Click += new System.EventHandler(this.cMnu_Reserve_Click);
+            // 
+            // mnu_UnReserve
+            // 
+            this.mnu_UnReserve.Name = "mnu_UnReserve";
+            this.mnu_UnReserve.Size = new System.Drawing.Size(148, 22);
+            this.mnu_UnReserve.Text = "备货转为库存";
+            this.mnu_UnReserve.Click += new System.EventHandler(this.mnu_UnReserve_Click);
             // 
             // 创建送货单ToolStripMenuItem
             // 
@@ -316,19 +325,6 @@
             this.pnlLeft.Size = new System.Drawing.Size(223, 335);
             this.pnlLeft.TabIndex = 112;
             // 
-            // customerTree1
-            // 
-            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.customerTree1.HideSelection = false;
-            this.customerTree1.ItemHeight = 20;
-            this.customerTree1.LoadCustomer = true;
-            this.customerTree1.Location = new System.Drawing.Point(0, 0);
-            this.customerTree1.Name = "customerTree1";
-            this.customerTree1.Size = new System.Drawing.Size(223, 335);
-            this.customerTree1.TabIndex = 1;
-            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
-            // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -479,6 +475,19 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
+            // customerTree1
+            // 
+            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.customerTree1.HideSelection = false;
+            this.customerTree1.ItemHeight = 20;
+            this.customerTree1.LoadCustomer = true;
+            this.customerTree1.Location = new System.Drawing.Point(0, 0);
+            this.customerTree1.Name = "customerTree1";
+            this.customerTree1.Size = new System.Drawing.Size(223, 335);
+            this.customerTree1.TabIndex = 1;
+            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
+            // 
             // FrmOrderItemRecordMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -552,6 +561,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSales;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripMenuItem mnu_UnReserve;
 
     }
 }

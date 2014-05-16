@@ -165,7 +165,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 con.Products.Add(pi.ProductID);
                 con.WareHouseID = pi.WareHouseID;
                 con.UnShipped = true;
-                View.FrmProductInventoryView frm = new View.FrmProductInventoryView();
+                View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
                 frm.SearchCondition = con;
                 frm.ShowDialog();
             }
@@ -179,6 +179,51 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 View.FrmProductInventoryRecordsView frm = new View.FrmProductInventoryRecordsView();
                 frm.ProductInventory = pi;
                 frm.ShowDialog();
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "colValid")
+                {
+                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
+                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                    con.Products = new List<string>();
+                    con.Products.Add(item.ProductID);
+                    con.WareHouseID = item.WareHouseID;
+                    con.UnReserved = true;
+                    con.UnShipped = true;
+                    View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
+                    frm.SearchCondition = con;
+                    frm.ShowDialog();
+                }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colReserved")
+                {
+                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
+                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                    con.Products = new List<string>();
+                    con.Products.Add(item.ProductID);
+                    con.WareHouseID = item.WareHouseID;
+                    con.UnReserved = false;
+                    con.UnShipped = true;
+                    View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
+                    frm.SearchCondition = con;
+                    frm.ShowDialog();
+                }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colSum")
+                {
+                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
+                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                    con.Products = new List<string>();
+                    con.Products.Add(item.ProductID);
+                    con.WareHouseID = item.WareHouseID;
+                    con.UnShipped = true;
+                    View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
+                    frm.SearchCondition = con;
+                    frm.ShowDialog();
+                }
             }
         }
         #endregion

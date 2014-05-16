@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.chkOnlyHasInventory = new System.Windows.Forms.CheckBox();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -43,6 +42,12 @@
             this.categoryTree = new LJH.Inventory.UI.Controls.ProductTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,18 +56,10 @@
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReserved = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_InventoryDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_InventoryRecords = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1.SuspendLayout();
+            this.colReserved = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colValid = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colSum = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlLeft.SuspendLayout();
@@ -70,16 +67,16 @@
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlFilter
             // 
-            this.panel1.Controls.Add(this.panel5);
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1198, 38);
-            this.panel1.TabIndex = 112;
+            this.pnlFilter.Controls.Add(this.panel5);
+            this.pnlFilter.Controls.Add(this.panel4);
+            this.pnlFilter.Controls.Add(this.panel2);
+            this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFilter.Location = new System.Drawing.Point(0, 0);
+            this.pnlFilter.Name = "pnlFilter";
+            this.pnlFilter.Size = new System.Drawing.Size(1198, 38);
+            this.pnlFilter.TabIndex = 112;
             // 
             // panel5
             // 
@@ -223,6 +220,47 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(948, 321);
             this.dataGridView1.TabIndex = 115;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 98);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // colImage
             // 
@@ -281,18 +319,19 @@
             // 
             // colReserved
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.colReserved.DefaultCellStyle = dataGridViewCellStyle1;
             this.colReserved.HeaderText = "订单备货";
             this.colReserved.Name = "colReserved";
             this.colReserved.ReadOnly = true;
             this.colReserved.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colReserved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colValid
             // 
             this.colValid.HeaderText = "可用库存";
             this.colValid.Name = "colValid";
             this.colValid.ReadOnly = true;
+            this.colValid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colValid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colSum
             // 
@@ -300,63 +339,6 @@
             this.colSum.Name = "colSum";
             this.colSum.ReadOnly = true;
             this.colSum.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.mnu_InventoryDetail,
-            this.mnu_InventoryRecords,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // mnu_InventoryDetail
-            // 
-            this.mnu_InventoryDetail.Name = "mnu_InventoryDetail";
-            this.mnu_InventoryDetail.Size = new System.Drawing.Size(152, 22);
-            this.mnu_InventoryDetail.Text = "查看库存明细";
-            this.mnu_InventoryDetail.Click += new System.EventHandler(this.mnu_InventoryDetail_Click);
-            // 
-            // mnu_InventoryRecords
-            // 
-            this.mnu_InventoryRecords.Name = "mnu_InventoryRecords";
-            this.mnu_InventoryRecords.Size = new System.Drawing.Size(152, 22);
-            this.mnu_InventoryRecords.Text = "查看进出明细";
-            this.mnu_InventoryRecords.Click += new System.EventHandler(this.mnu_InventoryRecords_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Export.Text = "导出...";
             // 
             // FrmProductInventoryMaster
             // 
@@ -367,14 +349,14 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlFilter);
             this.Name = "FrmProductInventoryMaster";
             this.Text = "商品库存资料";
-            this.Controls.SetChildIndex(this.panel1, 0);
+            this.Controls.SetChildIndex(this.pnlFilter, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
-            this.panel1.ResumeLayout(false);
+            this.pnlFilter.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -389,7 +371,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlFilter;
         private System.Windows.Forms.Panel pnlLeft;
         private Controls.ProductTree categoryTree;
         private System.Windows.Forms.Splitter splitter1;
@@ -407,7 +389,7 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
         private System.Windows.Forms.Label label2;
         private Controls.WareHouseComboBox wareHouseComboBox1;
-        private System.Windows.Forms.ToolStripMenuItem mnu_InventoryDetail;
+        private System.Windows.Forms.CheckBox chkOnlyHasInventory;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
@@ -416,10 +398,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReserved;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colValid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSum;
-        private System.Windows.Forms.CheckBox chkOnlyHasInventory;
-        private System.Windows.Forms.ToolStripMenuItem mnu_InventoryRecords;
+        private System.Windows.Forms.DataGridViewLinkColumn colReserved;
+        private System.Windows.Forms.DataGridViewLinkColumn colValid;
+        private System.Windows.Forms.DataGridViewLinkColumn colSum;
     }
 }

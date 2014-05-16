@@ -10,7 +10,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 
-namespace LJH.Inventory.UI.Forms.Inventory
+namespace LJH.Inventory.UI.Forms.Sale
 {
     public partial class FrmProductInventoryAssign : Form
     {

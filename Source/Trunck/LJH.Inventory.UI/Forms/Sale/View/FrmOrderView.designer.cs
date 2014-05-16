@@ -29,17 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_Pay = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
-            this.btnSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnClear = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colOrderID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,14 +66,10 @@
             this.menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.menu.ImageScalingSize = new System.Drawing.Size(25, 25);
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtKeyword,
-            this.btnSearch,
-            this.btnClear,
-            this.toolStripSeparator2,
-            this.btn_SelectColumns});
+            this.txtKeyword});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(637, 50);
+            this.menu.Size = new System.Drawing.Size(637, 34);
             this.menu.TabIndex = 33;
             // 
             // txtKeyword
@@ -86,36 +78,6 @@
             this.txtKeyword.Margin = new System.Windows.Forms.Padding(6, 0, 1, 0);
             this.txtKeyword.Name = "txtKeyword";
             this.txtKeyword.Size = new System.Drawing.Size(200, 30);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Image = global::LJH.Inventory.UI.Properties.Resources.search;
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(59, 46);
-            this.btnSearch.Text = "查找(&S)";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnClear
-            // 
-            this.btnClear.Image = global::LJH.Inventory.UI.Properties.Resources.clear;
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(60, 46);
-            this.btnClear.Text = "清除(&C)";
-            this.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
-            // 
-            // btn_SelectColumns
-            // 
-            this.btn_SelectColumns.Image = global::LJH.Inventory.UI.Properties.Resources.columns;
-            this.btn_SelectColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_SelectColumns.Name = "btn_SelectColumns";
-            this.btn_SelectColumns.Size = new System.Drawing.Size(70, 46);
-            this.btn_SelectColumns.Text = "选择列(&L)";
-            this.btn_SelectColumns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // GridView
             // 
@@ -133,12 +95,12 @@
             this.colFill});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
             this.GridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridView.Location = new System.Drawing.Point(0, 50);
+            this.GridView.Location = new System.Drawing.Point(0, 34);
             this.GridView.Name = "GridView";
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(637, 244);
+            this.GridView.Size = new System.Drawing.Size(637, 260);
             this.GridView.TabIndex = 34;
             // 
             // colOrderID
@@ -150,8 +112,8 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "C2";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle4;
             this.colAmount.HeaderText = "总金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -166,8 +128,8 @@
             // 
             // colHasPaid
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colHasPaid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "C2";
+            this.colHasPaid.DefaultCellStyle = dataGridViewCellStyle5;
             this.colHasPaid.HeaderText = "已收款";
             this.colHasPaid.Name = "colHasPaid";
             this.colHasPaid.ReadOnly = true;
@@ -176,10 +138,10 @@
             // 
             // colNotPaid
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle6;
             this.colNotPaid.HeaderText = "未收款";
             this.colNotPaid.Name = "colNotPaid";
             this.colNotPaid.ReadOnly = true;
@@ -192,14 +154,14 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // FrmOrderSelection
+            // FrmOrderView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 316);
             this.Controls.Add(this.GridView);
             this.Controls.Add(this.menu);
-            this.Name = "FrmOrderSelection";
+            this.Name = "FrmOrderView";
             this.Text = "销售订单选择";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.GridView, 0);
@@ -218,10 +180,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_Pay;
         private System.Windows.Forms.MenuStrip menu;
         private Controls.TooStripDBCTextBox txtKeyword;
-        private System.Windows.Forms.ToolStripMenuItem btnSearch;
-        private System.Windows.Forms.ToolStripMenuItem btnClear;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
         private System.Windows.Forms.DataGridView GridView;
         private System.Windows.Forms.DataGridViewLinkColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
