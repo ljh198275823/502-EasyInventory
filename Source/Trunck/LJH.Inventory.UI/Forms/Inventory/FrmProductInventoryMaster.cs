@@ -119,7 +119,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colUnit"].Value = pi.Unit;
             row.Cells["colReserved"].Value = pi.Reserved.Trim();
             row.Cells["colValid"].Value = pi.Valid.Trim();
-            row.Cells["colSum"].Value = pi.Count.Trim();
+            row.Cells["colAmount"].Value = pi.Count.Trim();
             if (_ProductInventorys == null || !_ProductInventorys.Exists(it => it.ID == pi.ID))
             {
                 if (_ProductInventorys == null) _ProductInventorys = new List<ProductInventory>();
@@ -155,28 +155,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             FreshData();
         }
 
-        private void mnu_InventoryDetail_Click(object sender, EventArgs e)
+        private void mnu_StackRecords_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.Products = new List<string>();
-                con.Products.Add(pi.ProductID);
-                con.WareHouseID = pi.WareHouseID;
-                con.UnShipped = true;
-                View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
-                frm.SearchCondition = con;
-                frm.ShowDialog();
-            }
-        }
-
-        private void mnu_InventoryRecords_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
-                View.FrmProductInventoryRecordsView frm = new View.FrmProductInventoryRecordsView();
+                View.FrmProductStackRecordsView frm = new View.FrmProductStackRecordsView();
                 frm.ProductInventory = pi;
                 frm.ShowDialog();
             }
@@ -212,7 +196,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     frm.SearchCondition = con;
                     frm.ShowDialog();
                 }
-                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colSum")
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colAmount")
                 {
                     ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();

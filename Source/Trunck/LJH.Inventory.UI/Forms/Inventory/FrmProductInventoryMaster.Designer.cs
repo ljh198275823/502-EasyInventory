@@ -58,7 +58,8 @@
             this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReserved = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colValid = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colSum = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.mnu_StackRecords = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -210,7 +211,7 @@
             this.colUnit,
             this.colReserved,
             this.colValid,
-            this.colSum});
+            this.colAmount});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(250, 38);
@@ -227,39 +228,40 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
             this.cMnu_Add,
+            this.mnu_StackRecords,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 142);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // colImage
@@ -278,7 +280,7 @@
             // 
             // colProductID
             // 
-            this.colProductID.HeaderText = "商品编号";
+            this.colProductID.HeaderText = "产品编号";
             this.colProductID.Name = "colProductID";
             this.colProductID.ReadOnly = true;
             this.colProductID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -286,14 +288,14 @@
             // 
             // colProduct
             // 
-            this.colProduct.HeaderText = "商品名称";
+            this.colProduct.HeaderText = "产品名称";
             this.colProduct.Name = "colProduct";
             this.colProduct.ReadOnly = true;
             this.colProduct.Width = 150;
             // 
             // colCategory
             // 
-            this.colCategory.HeaderText = "商品类别";
+            this.colCategory.HeaderText = "产品类别";
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
             // 
@@ -333,12 +335,19 @@
             this.colValid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colValid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // colSum
+            // colAmount
             // 
-            this.colSum.HeaderText = "库存合计";
-            this.colSum.Name = "colSum";
-            this.colSum.ReadOnly = true;
-            this.colSum.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colAmount.HeaderText = "库存合计";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // mnu_StackRecords
+            // 
+            this.mnu_StackRecords.Name = "mnu_StackRecords";
+            this.mnu_StackRecords.Size = new System.Drawing.Size(152, 22);
+            this.mnu_StackRecords.Text = "产品进出明细";
+            this.mnu_StackRecords.Click += new System.EventHandler(this.mnu_StackRecords_Click);
             // 
             // FrmProductInventoryMaster
             // 
@@ -351,7 +360,7 @@
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.pnlFilter);
             this.Name = "FrmProductInventoryMaster";
-            this.Text = "商品库存资料";
+            this.Text = "产品库存资料";
             this.Controls.SetChildIndex(this.pnlFilter, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);
@@ -400,6 +409,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
         private System.Windows.Forms.DataGridViewLinkColumn colReserved;
         private System.Windows.Forms.DataGridViewLinkColumn colValid;
-        private System.Windows.Forms.DataGridViewLinkColumn colSum;
+        private System.Windows.Forms.DataGridViewLinkColumn colAmount;
+        private System.Windows.Forms.ToolStripMenuItem mnu_StackRecords;
     }
 }

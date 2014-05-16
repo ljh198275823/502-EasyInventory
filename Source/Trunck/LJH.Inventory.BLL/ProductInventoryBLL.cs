@@ -49,7 +49,7 @@ namespace LJH.Inventory.BLL
         /// <param name="orderItem"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public CommandResult Reserve(string warehouseID, string productID, Guid orderItem, string orderID,decimal count)
+        public CommandResult Reserve(string warehouseID, string productID, Guid orderItem, string orderID, decimal count)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
@@ -96,6 +96,18 @@ namespace LJH.Inventory.BLL
                 }
             }
             return unitWork.Commit();
+        }
+        /// <summary>
+        /// 取消备货
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public CommandResult UnReserve(ProductInventoryItem item)
+        {
+            ProductInventoryItem clone = item.Clone();
+            item.OrderItem = null;
+            item.OrderID = null;
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(item, clone);
         }
         #endregion
     }

@@ -13,9 +13,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {
-    public partial class FrmProductInventoryRecordsView : Form
+    public partial class FrmProductStackRecordsView : Form
     {
-        public FrmProductInventoryRecordsView()
+        public FrmProductStackRecordsView()
         {
             InitializeComponent();
         }

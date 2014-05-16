@@ -10,6 +10,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {
@@ -45,6 +46,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             ProductInventoryItem c = item as ProductInventoryItem;
             row.Tag = c;
             row.Cells["colInventorySheet"].Value = c.InventorySheet;
+            row.Cells["colPurchaseID"].Value = c.PurchaseID;
             row.Cells["colProductID"].Value = c.ProductID;
             if (_Products == null) _Products = new List<Product>();
             Product p = _Products.SingleOrDefault(it => it.ID == c.ProductID);
@@ -57,7 +59,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
-            row.Cells["colReserved"].Value = c.OrderID;
+            row.Cells["colOrderID"].Value = c.OrderID;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
         }
 
@@ -65,6 +67,29 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         {
             base.ShowItemsOnGrid(items);
             Filter(txtKeyword.Text.Trim());
+        }
+        #endregion
+
+        #region 事件处理程序
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            Filter(txtKeyword.Text.Trim());
+        }
+
+        private void mnu_UnReserve_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("是否取消选中的订单备货项?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    ProductInventoryItem pii = row.Tag as ProductInventoryItem;
+                    CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).UnReserve(pii);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        row.Cells["colOrderID"].Value = string.Empty;
+                    }
+                }
+            }
         }
         #endregion
     }
