@@ -25,20 +25,8 @@ namespace LJH.Inventory.UI.Forms.General
         {
             if (string.IsNullOrEmpty(txtID.Text))
             {
-                MessageBox.Show("ID不能为空");
-                txtID.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtName.Text))
-            {
                 MessageBox.Show("名称不能为空");
-                txtName.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtPlural.Text))
-            {
-                MessageBox.Show("复数不能为空");
-                txtPlural.Focus();
+                txtID.Focus();
                 return false;
             }
             return true;
@@ -55,8 +43,6 @@ namespace LJH.Inventory.UI.Forms.General
             Unit ct = UpdatingItem as Unit;
             txtID.Text = ct.ID;
             txtID.Enabled = false;
-            txtName.Text = ct.Name;
-            txtPlural.Text = ct.Plural ;
             txtMemo.Text = ct.Memo;
         }
 
@@ -68,8 +54,8 @@ namespace LJH.Inventory.UI.Forms.General
                 ct = new Unit();
             }
             ct.ID = txtID.Text;
-            ct.Name = txtName.Text;
-            ct.Plural  = txtPlural.Text;
+            ct.Name = txtID.Text;
+            ct.Plural = txtID.Text;
             ct.Memo = txtMemo.Text;
             return ct;
         }

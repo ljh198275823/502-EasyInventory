@@ -55,13 +55,13 @@
             this.supplierTree1 = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colSheetNo = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReceived = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReceived = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colOnway = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDemandDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -355,7 +355,6 @@
             this.colSheetNo.Name = "colSheetNo";
             this.colSheetNo.ReadOnly = true;
             this.colSheetNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colSupplier
             // 
@@ -368,7 +367,9 @@
             // 
             // colProduct
             // 
+            this.colProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colProduct.HeaderText = "产品";
+            this.colProduct.MinimumWidth = 120;
             this.colProduct.Name = "colProduct";
             this.colProduct.ReadOnly = true;
             this.colProduct.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -403,7 +404,7 @@
             this.colReceived.HeaderText = "已到货数";
             this.colReceived.Name = "colReceived";
             this.colReceived.ReadOnly = true;
-            this.colReceived.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colReceived.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colReceived.Width = 80;
             // 
             // colOnway
@@ -411,6 +412,7 @@
             this.colOnway.HeaderText = "采购在途";
             this.colOnway.Name = "colOnway";
             this.colOnway.ReadOnly = true;
+            this.colOnway.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colOnway.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colOnway.Width = 80;
             // 
@@ -495,13 +497,13 @@
         private Controls.SupplierTree supplierTree1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewLinkColumn colSheetNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReceived;
+        private System.Windows.Forms.DataGridViewLinkColumn colReceived;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOnway;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDemandDate;

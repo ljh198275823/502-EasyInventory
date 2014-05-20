@@ -10,6 +10,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.Inventory.View;
 
 namespace LJH.Inventory.UI.Forms.Purchase
 {
@@ -140,6 +141,14 @@ namespace LJH.Inventory.UI.Forms.Purchase
                         frm.IsForView = true;
                         frm.ShowDialog();
                     }
+                }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colReceived")
+                {
+                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                    con.PurchaseItem = record.ID;
+                    FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
+                    frm.SearchCondition = con;
+                    frm.ShowDialog();
                 }
             }
         }

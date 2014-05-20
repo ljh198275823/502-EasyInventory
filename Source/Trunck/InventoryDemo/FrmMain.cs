@@ -22,7 +22,7 @@ using LJH.Inventory.UI.Forms.Inventory.Report;
 
 namespace InventoryDemo
 {
-    public partial class FrmMain : Form, LJH.GeneralLibrary .Core.UI .IOperatorRender
+    public partial class FrmMain : Form, LJH.GeneralLibrary.Core.UI.IOperatorRender
     {
         public FrmMain()
         {
@@ -102,7 +102,7 @@ namespace InventoryDemo
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             this.mnu_Unit.Enabled = cur.Permit(Permission.Unit, PermissionActions.Read) || cur.Permit(Permission.Unit, PermissionActions.Edit);
             this.mnu_CurrencyType.Enabled = cur.Permit(Permission.CurrencyType, PermissionActions.Read) || cur.Permit(Permission.CurrencyType, PermissionActions.Edit);
-            this.mnu_Transport.Enabled = cur.Permit(Permission.Transport, PermissionActions.Read) || cur.Permit(Permission.Transport, PermissionActions.Edit);
+            //this.mnu_Transport.Enabled = cur.Permit(Permission.Transport, PermissionActions.Read) || cur.Permit(Permission.Transport, PermissionActions.Edit);
             this.mnu_Staff.Enabled = cur.Permit(Permission.Staff, PermissionActions.Read) || cur.Permit(Permission.Staff, PermissionActions.Edit);
             this.mnu_Role.Enabled = cur.Permit(Permission.Role, PermissionActions.Read) || cur.Permit(Permission.Role, PermissionActions.Edit);
             this.mnu_Options.Enabled = cur.Permit(Permission.SystemOptions, PermissionActions.Read) || cur.Permit(Permission.SystemOptions, PermissionActions.Edit);
@@ -119,11 +119,11 @@ namespace InventoryDemo
             this.mnu_InventorySheet.Enabled = cur.Permit(Permission.InventorySheet, PermissionActions.Read) || cur.Permit(Permission.InventorySheet, PermissionActions.Edit);
             this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.DeliverySheet, PermissionActions.Read) || cur.Permit(Permission.DeliverySheet, PermissionActions.Edit);
             //财务
-            this.mnu_CustomerState .Enabled =cur.Permit (Permission.CustomerState ,PermissionActions.Read )|| cur.Permit (Permission.CustomerState ,PermissionActions.Edit );
+            this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read) || cur.Permit(Permission.CustomerState, PermissionActions.Edit);
             this.mnu_CustomerOtherReceivable.Enabled = cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Read) || cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
             this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
-            
+
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
         }
@@ -442,6 +442,21 @@ namespace InventoryDemo
         {
             ShowSingleForm<FrmStaffMaster>();
         }
+
+        private void mnu_SupplierState_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmSupplierFinancialStateMaster>();
+        }
+
+        private void mnu_SupplierPayment_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmSupplierPaymentMaster>();
+        }
+
+        private void mnu_InventoryRecord_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmInventoryRecordReport>();
+        }
         #endregion
 
         #region 事件处理程序
@@ -456,6 +471,5 @@ namespace InventoryDemo
         {
         }
         #endregion
-
     }
 }

@@ -57,8 +57,6 @@ namespace LJH.Inventory.UI.Forms.General
         {
             Unit ct = item as Unit;
             row.Cells["colID"].Value = ct.ID;
-            row.Cells["colName"].Value = ct.Name;
-            row.Cells["colPlural"].Value = ct.Plural;
             row.Cells["colMemo"].Value = ct.Memo;
         }
 

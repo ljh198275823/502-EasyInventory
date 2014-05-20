@@ -103,7 +103,7 @@ namespace InventoryApplication
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             this.mnu_Unit.Enabled = cur.Permit(Permission.Unit, PermissionActions.Read) || cur.Permit(Permission.Unit, PermissionActions.Edit);
             this.mnu_CurrencyType.Enabled = cur.Permit(Permission.CurrencyType, PermissionActions.Read) || cur.Permit(Permission.CurrencyType, PermissionActions.Edit);
-            this.mnu_Transport.Enabled = cur.Permit(Permission.Transport, PermissionActions.Read) || cur.Permit(Permission.Transport, PermissionActions.Edit);
+            //this.mnu_Transport.Enabled = cur.Permit(Permission.Transport, PermissionActions.Read) || cur.Permit(Permission.Transport, PermissionActions.Edit);
             this.mnu_Staff.Enabled = cur.Permit(Permission.Staff, PermissionActions.Read) || cur.Permit(Permission.Staff, PermissionActions.Edit);
             this.mnu_Role.Enabled = cur.Permit(Permission.Role, PermissionActions.Read) || cur.Permit(Permission.Role, PermissionActions.Edit);
             this.mnu_Options.Enabled = cur.Permit(Permission.SystemOptions, PermissionActions.Read) || cur.Permit(Permission.SystemOptions, PermissionActions.Edit);
