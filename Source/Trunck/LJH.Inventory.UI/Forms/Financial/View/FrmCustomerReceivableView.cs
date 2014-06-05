@@ -61,9 +61,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
             row.Cells["colAmount"].Value = cr.Amount.Trim();
             if (cr.Haspaid != 0) row.Cells["colHaspaid"].Value = cr.Haspaid.Trim();
-            if (cr.Remain != 0) row.Cells["colNotpaid"].Value = cr.Remain.Trim();
-            int days = DaysBetween(DateTime.Today, cr.CreateDate);
-            row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
+            if (cr.Remain != 0)
+            {
+                row.Cells["colNotpaid"].Value = cr.Remain.Trim();
+                int days = DaysBetween(DateTime.Today, cr.CreateDate);
+                row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
+            }
             if (cr.Amount < 0) row.DefaultCellStyle.ForeColor = Color.Red;
         }
 

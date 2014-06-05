@@ -55,7 +55,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                         ItemsGrid.Rows[row].Tag = assign;
                         ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
                         ItemsGrid.Rows[row].Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
-                        ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount;
+                        ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount.Trim();
                     }
                 }
                 int rowTotal = ItemsGrid.Rows.Add();

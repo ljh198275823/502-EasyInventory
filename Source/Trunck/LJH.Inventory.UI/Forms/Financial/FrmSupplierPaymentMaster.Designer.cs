@@ -53,9 +53,9 @@
             this.chkAdded = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.customerTree1 = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.customerTree1 = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -265,6 +265,20 @@
             this.pnlLeft.Size = new System.Drawing.Size(224, 324);
             this.pnlLeft.TabIndex = 119;
             // 
+            // customerTree1
+            // 
+            this.customerTree1.ContextMenuStrip = this.treeMenu;
+            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.customerTree1.HideSelection = false;
+            this.customerTree1.ItemHeight = 20;
+            this.customerTree1.LoadSupplier = true;
+            this.customerTree1.Location = new System.Drawing.Point(0, 0);
+            this.customerTree1.Name = "customerTree1";
+            this.customerTree1.Size = new System.Drawing.Size(224, 324);
+            this.customerTree1.TabIndex = 0;
+            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
+            // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -302,20 +316,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(830, 324);
             this.dataGridView1.TabIndex = 121;
             // 
-            // customerTree1
-            // 
-            this.customerTree1.ContextMenuStrip = this.treeMenu;
-            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.customerTree1.HideSelection = false;
-            this.customerTree1.ItemHeight = 20;
-            this.customerTree1.LoadSupplier = true;
-            this.customerTree1.Location = new System.Drawing.Point(0, 0);
-            this.customerTree1.Name = "customerTree1";
-            this.customerTree1.Size = new System.Drawing.Size(224, 324);
-            this.customerTree1.TabIndex = 0;
-            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
-            // 
             // colID
             // 
             this.colID.HeaderText = "流水号";
@@ -331,7 +331,7 @@
             // colCustomer
             // 
             this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCustomer.HeaderText = "客户";
+            this.colCustomer.HeaderText = "供应商";
             this.colCustomer.MinimumWidth = 150;
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;

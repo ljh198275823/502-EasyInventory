@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
@@ -69,7 +70,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colSheetID"].Value = cr.SheetID;
             row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
-            row.Cells["colClassID"].Value = cr.ClassID;
+            row.Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
             row.Cells["colRemain"].Value = cr.Remain;
             row.Cells["colAssign"].Value = 0;
             row.Cells["colMemo"].Value = cr.Memo;
