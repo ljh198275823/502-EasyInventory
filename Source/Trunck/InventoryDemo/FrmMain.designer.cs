@@ -166,28 +166,28 @@
             // mnu_Product
             // 
             this.mnu_Product.Name = "mnu_Product";
-            this.mnu_Product.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Product.Size = new System.Drawing.Size(152, 22);
             this.mnu_Product.Text = "产品资料";
             this.mnu_Product.Click += new System.EventHandler(this.mnu_Product_Click);
             // 
             // mnu_WareHouse
             // 
             this.mnu_WareHouse.Name = "mnu_WareHouse";
-            this.mnu_WareHouse.Size = new System.Drawing.Size(124, 22);
+            this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
             this.mnu_WareHouse.Text = "仓库资料";
             this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click);
             // 
             // mnu_Unit
             // 
             this.mnu_Unit.Name = "mnu_Unit";
-            this.mnu_Unit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Unit.Size = new System.Drawing.Size(152, 22);
             this.mnu_Unit.Text = "计量单位";
             this.mnu_Unit.Click += new System.EventHandler(this.mnu_Unit_Click);
             // 
             // mnu_CurrencyType
             // 
             this.mnu_CurrencyType.Name = "mnu_CurrencyType";
-            this.mnu_CurrencyType.Size = new System.Drawing.Size(124, 22);
+            this.mnu_CurrencyType.Size = new System.Drawing.Size(152, 22);
             this.mnu_CurrencyType.Text = "货币种类";
             this.mnu_CurrencyType.Visible = false;
             this.mnu_CurrencyType.Click += new System.EventHandler(this.mnu_CurrencyType_Click);
@@ -195,27 +195,27 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(121, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // mnu_Staff
             // 
             this.mnu_Staff.Name = "mnu_Staff";
-            this.mnu_Staff.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Staff.Size = new System.Drawing.Size(152, 22);
             this.mnu_Staff.Text = "人员部门";
             this.mnu_Staff.Click += new System.EventHandler(this.mnu_Staff_Click);
             // 
             // mnu_Role
             // 
             this.mnu_Role.Name = "mnu_Role";
-            this.mnu_Role.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Role.Size = new System.Drawing.Size(152, 22);
             this.mnu_Role.Text = "角色";
             this.mnu_Role.Click += new System.EventHandler(this.mnu_Role_Click);
             // 
             // mnu_Options
             // 
             this.mnu_Options.Name = "mnu_Options";
-            this.mnu_Options.Size = new System.Drawing.Size(124, 22);
-            this.mnu_Options.Text = "系统选项";
+            this.mnu_Options.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Options.Text = "系统参数";
             this.mnu_Options.Click += new System.EventHandler(this.mnu_Options_Click);
             // 
             // mnu_DataManage

@@ -1521,7 +1521,7 @@
             this.Name = "FrmSystemOptions";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "系统参数设置";
+            this.Text = "系统参数";
             this.Load += new System.EventHandler(this.FrmSystemOptions_Load);
             this.tabAutoCreater.ResumeLayout(false);
             this.tabAutoCreater.PerformLayout();

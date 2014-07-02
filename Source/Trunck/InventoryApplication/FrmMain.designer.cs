@@ -218,7 +218,7 @@
             // 
             this.mnu_Options.Name = "mnu_Options";
             this.mnu_Options.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Options.Text = "系统选项";
+            this.mnu_Options.Text = "系统参数";
             this.mnu_Options.Click += new System.EventHandler(this.mnu_Options_Click);
             // 
             // mnu_DataManage
