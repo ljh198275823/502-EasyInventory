@@ -16,31 +16,32 @@ using LJH.Inventory.UI.Forms.Sale;
 
 namespace LJH.Inventory.UI.Forms.Inventory.Report
 {
-    public partial class FrmDeliveryRecordReport : FrmReportBase
+    public partial class FrmDeliveryRecordReport :FrmReportBase 
     {
         public FrmDeliveryRecordReport()
         {
             InitializeComponent();
         }
 
-        #region 私有方法
-        private void ShowItemOnRow(DataGridViewRow row, StackOutRecord item)
-        {
-            row.Cells["colDeliveryDate"].Value = item.LastActiveDate.ToString("yyyy-MM-dd");
-            row.Cells["colSheetNo"].Value = item.SheetNo;
-            row.Cells["colCustomerName"].Value = item.Customer.Name;
-            row.Cells["colOrderID"].Value = item.OrderID;
-            row.Cells["colProductID"].Value = item.ProductID;
-            row.Cells["colProductName"].Value = item.Product.Name;
-            row.Cells["colCategoryID"].Value = item.Product.Category.Name;
-            row.Cells["colPrice"].Value = item.Price;
-            row.Cells["colCount"].Value = item.Count;
-            row.Cells["colAmount"].Value = item.Amount.Trim();
-        }
-        #endregion
+        
 
         #region 重写基类方法
-        protected override void OnItemSearching(EventArgs e)
+        protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
+        {
+            StackOutRecord sor = item as StackOutRecord;
+            row.Cells["colDeliveryDate"].Value = sor.LastActiveDate.ToString("yyyy-MM-dd");
+            row.Cells["colSheetNo"].Value = sor.SheetNo;
+            row.Cells["colCustomerName"].Value = sor.Customer.Name;
+            row.Cells["colOrderID"].Value = sor.OrderID;
+            row.Cells["colProductID"].Value = sor.ProductID;
+            row.Cells["colProductName"].Value = sor.Product.Name;
+            row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
+            row.Cells["colPrice"].Value = sor.Price;
+            row.Cells["colCount"].Value = sor.Count;
+            row.Cells["colAmount"].Value = sor.Amount.Trim();
+        }
+
+        protected override List<object> GetDataSource()
         {
             StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
             con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
@@ -54,24 +55,21 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
-                items = (from item in items orderby item.LastActiveDate ascending, item.ProductID ascending select item).ToList();
-                foreach (StackOutRecord item in items)
-                {
-                    int row = gridView.Rows.Add();
-                    ShowItemOnRow(gridView.Rows[row], item);
-                }
+                return (from item in items orderby item.LastActiveDate ascending, item.ProductID ascending select (object)item).ToList();
             }
+            return base.GetDataSource();
         }
-        #endregion
 
-        #region 事件处理程序
-        private void FrmDeliveryRecordReport_Load(object sender, EventArgs e)
+        protected override void Init()
         {
             ucDateTimeInterval1.ShowTime = false;
             ucDateTimeInterval1.Init();
             ucDateTimeInterval1.SelectThisMonth();
+            base.Init();
         }
+        #endregion
 
+        #region 事件处理程序
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmCustomerMaster frm = new FrmCustomerMaster();

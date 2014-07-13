@@ -22,7 +22,7 @@ namespace LJH.Inventory.UI.Report
         }
 
         #region 重写基类方法
-        protected override void OnItemSearching(EventArgs e)
+        protected override List<object> GetDataSource()
         {
             OrderSearchCondition con = new OrderSearchCondition();
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
@@ -31,11 +31,7 @@ namespace LJH.Inventory.UI.Report
             con.States.Add(SheetState.Add);
             con.States.Add(SheetState.Approved);
             List<Order> items = (new OrderBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-            foreach (Order item in items)
-            {
-                int row = gridView.Rows.Add();
-                ShowItemOnRow(gridView.Rows[row], item);
-            }
+            return (from item in items select (object)item).ToList();
         }
 
         private void ShowItemOnRow(DataGridViewRow row, Order item)

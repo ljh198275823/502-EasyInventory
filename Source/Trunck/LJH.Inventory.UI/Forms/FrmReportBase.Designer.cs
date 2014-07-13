@@ -30,10 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReportBase));
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnOkAs = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.searchInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip1.SuspendLayout();
+            this.btnSaveAs = new System.Windows.Forms.Button();
+            this.btnColumn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSearch
@@ -46,50 +44,42 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnOkAs
+            // btnSaveAs
             // 
-            this.btnOkAs.Location = new System.Drawing.Point(660, 41);
-            this.btnOkAs.Name = "btnOkAs";
-            this.btnOkAs.Size = new System.Drawing.Size(111, 23);
-            this.btnOkAs.TabIndex = 1;
-            this.btnOkAs.Text = "另存为(&S)";
-            this.btnOkAs.UseVisualStyleBackColor = true;
-            this.btnOkAs.Click += new System.EventHandler(this.btnOkAs_Click);
+            this.btnSaveAs.Location = new System.Drawing.Point(660, 41);
+            this.btnSaveAs.Name = "btnSaveAs";
+            this.btnSaveAs.Size = new System.Drawing.Size(111, 23);
+            this.btnSaveAs.TabIndex = 1;
+            this.btnSaveAs.Text = "另存为(&S)";
+            this.btnSaveAs.UseVisualStyleBackColor = true;
+            this.btnSaveAs.Click += new System.EventHandler(this.btnSaveAs_Click);
             // 
-            // statusStrip1
+            // btnColumn
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.searchInfo});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 451);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(792, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // searchInfo
-            // 
-            this.searchInfo.Name = "searchInfo";
-            this.searchInfo.Size = new System.Drawing.Size(777, 17);
-            this.searchInfo.Spring = true;
-            this.searchInfo.Text = "共0项";
+            this.btnColumn.Location = new System.Drawing.Point(660, 70);
+            this.btnColumn.Name = "btnColumn";
+            this.btnColumn.Size = new System.Drawing.Size(111, 23);
+            this.btnColumn.TabIndex = 17;
+            this.btnColumn.Text = "选择列(&C)";
+            this.btnColumn.UseVisualStyleBackColor = true;
+            this.btnColumn.Click += new System.EventHandler(this.btnColumn_Click);
             // 
             // FrmReportBase
             // 
             this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 473);
-            this.Controls.Add(this.btnOkAs);
+            this.ClientSize = new System.Drawing.Size(792, 343);
+            this.Controls.Add(this.btnColumn);
+            this.Controls.Add(this.btnSaveAs);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmReportBase";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmReportBase";
-            this.Load += new System.EventHandler(this.FrmReportBase_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.Controls.SetChildIndex(this.btnSearch, 0);
+            this.Controls.SetChildIndex(this.btnSaveAs, 0);
+            this.Controls.SetChildIndex(this.btnColumn, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,8 +88,7 @@
         #endregion
 
         protected System.Windows.Forms.Button btnSearch;
-        protected System.Windows.Forms.Button btnOkAs;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel searchInfo;
+        protected System.Windows.Forms.Button btnSaveAs;
+        protected System.Windows.Forms.Button btnColumn;
     }
 }

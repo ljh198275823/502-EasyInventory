@@ -56,7 +56,7 @@
             // 
             // btnOkAs
             // 
-            this.btnOkAs.Location = new System.Drawing.Point(472, 35);
+            this.btnSaveAs.Location = new System.Drawing.Point(472, 35);
             // 
             // groupBox1
             // 
@@ -212,7 +212,7 @@
             this.Name = "FrmSalesPersonPerformanceReport";
             this.Text = "业务员业绩统计";
             this.Controls.SetChildIndex(this.btnSearch, 0);
-            this.Controls.SetChildIndex(this.btnOkAs, 0);
+            this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.gridView, 0);
             this.Controls.SetChildIndex(this.groupBox3, 0);

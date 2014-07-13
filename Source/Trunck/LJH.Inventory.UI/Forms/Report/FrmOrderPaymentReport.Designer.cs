@@ -60,7 +60,7 @@
             // 
             // btnOkAs
             // 
-            this.btnOkAs.Location = new System.Drawing.Point(573, 41);
+            this.btnSaveAs.Location = new System.Drawing.Point(573, 41);
             // 
             // groupBox3
             // 
@@ -258,7 +258,7 @@
             this.Text = "销售订单收款统计";
             this.Load += new System.EventHandler(this.FrmOrderPaymentReport_Load);
             this.Controls.SetChildIndex(this.btnSearch, 0);
-            this.Controls.SetChildIndex(this.btnOkAs, 0);
+            this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.gridView, 0);

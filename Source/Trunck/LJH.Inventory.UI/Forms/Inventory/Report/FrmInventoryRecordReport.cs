@@ -23,24 +23,16 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             InitializeComponent();
         }
 
-        #region 私有方法
-        private void ShowItemOnRow(DataGridViewRow row, StackInRecord item)
-        {
-            row.Cells["colDeliveryDate"].Value = item.LastActiveDate.ToString("yyyy-MM-dd");
-            row.Cells["colSheetNo"].Value = item.SheetNo;
-            row.Cells["colCustomerName"].Value = item.Supplier.Name;
-            row.Cells["colOrderID"].Value = item.PurchaseOrder;
-            row.Cells["colProductID"].Value = item.ProductID;
-            row.Cells["colProductName"].Value = item.Product.Name;
-            row.Cells["colCategoryID"].Value = item.Product.Category.Name;
-            row.Cells["colPrice"].Value = item.Price;
-            row.Cells["colCount"].Value = item.Count;
-            row.Cells["colAmount"].Value = item.Amount.Trim();
-        }
-        #endregion
-
         #region 重写基类方法
-        protected override void OnItemSearching(EventArgs e)
+        protected override void Init()
+        {
+            ucDateTimeInterval1.ShowTime = false;
+            ucDateTimeInterval1.Init();
+            ucDateTimeInterval1.SelectThisMonth();
+            base.Init();
+        }
+
+        protected override List<object> GetDataSource()
         {
             StackInRecordSearchCondition con = new StackInRecordSearchCondition();
             con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
@@ -54,24 +46,28 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             List<StackInRecord> items = (new StackInSheetBLL(AppSettings.Current.ConnStr)).GetInventoryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
-                items = (from item in items orderby item.LastActiveDate ascending, item.ProductID ascending select item).ToList();
-                foreach (StackInRecord item in items)
-                {
-                    int row = gridView.Rows.Add();
-                    ShowItemOnRow(gridView.Rows[row], item);
-                }
+                return (from item in items orderby item.LastActiveDate ascending, item.ProductID ascending select (object)item).ToList();
             }
+            return null;
+        }
+
+        protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
+        {
+            StackInRecord sir = item as StackInRecord;
+            row.Cells["colDeliveryDate"].Value = sir.LastActiveDate.ToString("yyyy-MM-dd");
+            row.Cells["colSheetNo"].Value = sir.SheetNo;
+            row.Cells["colCustomerName"].Value = sir.Supplier.Name;
+            row.Cells["colOrderID"].Value = sir.PurchaseOrder;
+            row.Cells["colProductID"].Value = sir.ProductID;
+            row.Cells["colProductName"].Value = sir.Product.Name;
+            row.Cells["colCategoryID"].Value = sir.Product.Category.Name;
+            row.Cells["colPrice"].Value = sir.Price;
+            row.Cells["colCount"].Value = sir.Count;
+            row.Cells["colAmount"].Value = sir.Amount.Trim();
         }
         #endregion
 
         #region 事件处理程序
-        private void FrmInvnetoryRecordReport_Load(object sender, EventArgs e)
-        {
-            ucDateTimeInterval1.ShowTime = false;
-            ucDateTimeInterval1.Init();
-            ucDateTimeInterval1.SelectThisMonth();
-        }
-
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmSupplierMaster frm = new FrmSupplierMaster();

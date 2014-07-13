@@ -62,20 +62,23 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(649, 14);
+            this.btnSearch.Location = new System.Drawing.Point(657, 12);
             // 
             // btnOkAs
             // 
-            this.btnOkAs.Location = new System.Drawing.Point(649, 43);
+            this.btnSaveAs.Location = new System.Drawing.Point(657, 40);
+            // 
+            // button1
+            // 
+            this.btnColumn.Location = new System.Drawing.Point(657, 70);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1154, 96);
+            this.panel1.Size = new System.Drawing.Size(651, 96);
             this.panel1.TabIndex = 25;
             // 
             // groupBox3
@@ -199,12 +202,12 @@
             this.colCount,
             this.colAmount,
             this.colSalesPerson});
-            this.gridView.Location = new System.Drawing.Point(0, 102);
+            this.gridView.Location = new System.Drawing.Point(0, 106);
             this.gridView.Name = "gridView";
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1154, 292);
+            this.gridView.Size = new System.Drawing.Size(1154, 288);
             this.gridView.TabIndex = 26;
             // 
             // colDeliveryDate
@@ -300,11 +303,11 @@
             this.Controls.Add(this.panel1);
             this.Name = "FrmDeliveryRecordReport";
             this.Text = "出货记录报表";
-            this.Load += new System.EventHandler(this.FrmDeliveryRecordReport_Load);
+            this.Controls.SetChildIndex(this.btnColumn, 0);
+            this.Controls.SetChildIndex(this.btnSearch, 0);
+            this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.gridView, 0);
-            this.Controls.SetChildIndex(this.btnSearch, 0);
-            this.Controls.SetChildIndex(this.btnOkAs, 0);
             this.panel1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

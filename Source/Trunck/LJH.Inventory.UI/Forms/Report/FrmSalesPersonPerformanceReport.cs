@@ -21,10 +21,19 @@ namespace LJH.Inventory.UI.Report
         }
 
         #region 重写基类方法
-        protected override void OnItemSearching(EventArgs e)
+        protected override void Init()
         {
+            this.ucDateTimeInterval1.ShowTime = false;
+            this.ucDateTimeInterval1.Init();
+            this.ucDateTimeInterval1.SelectThisMonth();
+            base.Init();
+        }
+
+        protected override List<object> GetDataSource()
+        {
+            List<object> items = null;
             StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
-            con.LastActiveDate  = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Shipped);
             List<StackOutSheet> sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
@@ -33,44 +42,52 @@ namespace LJH.Inventory.UI.Report
             foreach (var group in salesGroup)
             {
                 IEnumerable<IGrouping<string, StackOutSheet>> gs = null;
-                //if (rdByDay.Checked)
-                //{
-                //    gs = group.GroupBy(item => item.DeliveryDate.Value.ToString("yyyy-MM-dd"));
-                //}
-                //if (rdByMonth.Checked)
-                //{
-                //    gs = group.GroupBy(item => item.DeliveryDate.Value.ToString("yyyy-MM"));
-                //}
-                //if (rdByYear.Checked)
-                //{
-                //    gs = group.GroupBy(item => item.DeliveryDate.Value.ToString("yyyy"));
-                //}
+                if (rdByDay.Checked)
+                {
+                    gs = group.GroupBy(item => item.LastActiveDate.ToString("yyyy-MM-dd"));
+                }
+                if (rdByMonth.Checked)
+                {
+                    gs = group.GroupBy(item => item.LastActiveDate.ToString("yyyy-MM"));
+                }
+                if (rdByYear.Checked)
+                {
+                    gs = group.GroupBy(item => item.LastActiveDate.ToString("yyyy"));
+                }
                 foreach (var g in gs)
                 {
                     if (!string.IsNullOrEmpty(group.Key))
                     {
-                        int row = gridView.Rows.Add();
-                        gridView.Rows[row].Cells["colDeliveryDate"].Value = g.Key;
-                        gridView.Rows[row].Cells["colSalesPerson"].Value = group.Key;
-                        decimal d1;
-                        d1 = g.Sum(it => it.Amount).Trim();
-                        //d2 = g.Sum(it => it.Cost).Trim();
-                        gridView.Rows[row].Cells["colAmount"].Value = d1;
-                        //gridView.Rows[row].Cells["colCost"].Value = d2;
-                        //gridView.Rows[row].Cells["colProfitRate"].Value = ((d1 - d2) / d1).ToString("F3");
-                        //d2 = g.Sum(it => it.Paid);
-                        //gridView.Rows[row].Cells["colPaid"].Value = d2;
-                        //gridView.Rows[row].Cells["colPaidRate"].Value = (d2 / d1).ToString("F3");
+                        if (items == null) items = new List<object>();
+                        GroupData gd = new GroupData() { Key = g.Key, Group = g };
+                        items.Add(gd);
                     }
                 }
             }
+            return items;
         }
 
-        protected override void OnLoad(EventArgs e)
+        protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            this.ucDateTimeInterval1.Init();
-            this.ucDateTimeInterval1.SelectThisMonth();
+            GroupData gd = item as GroupData;
+            row.Cells["colDeliveryDate"].Value = gd.Group.Key;
+            row.Cells["colSalesPerson"].Value = gd.Key;
+            decimal d1;
+            d1 = gd.Group.Sum(it => it.Amount).Trim();
+            //d2 = g.Sum(it => it.Cost).Trim();
+            row.Cells["colAmount"].Value = d1;
+            //row.Cells["colCost"].Value = d2;
+            //row.Cells["colProfitRate"].Value = ((d1 - d2) / d1).ToString("F3");
+            //d2 = g.Sum(it => it.Paid);
+            //row.Cells["colPaid"].Value = d2;
+            //row.Cells["colPaidRate"].Value = (d2 / d1).ToString("F3");
         }
         #endregion
+
+        private class GroupData
+        {
+            public string Key { get; set; }
+            public IGrouping<string, StackOutSheet> Group { get; set; }
+        }
     }
 }

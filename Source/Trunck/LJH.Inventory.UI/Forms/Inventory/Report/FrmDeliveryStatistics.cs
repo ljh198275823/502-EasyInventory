@@ -39,8 +39,17 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         #endregion
 
         #region 重写基类方法
-        protected override void OnItemSearching(EventArgs e)
+        protected override void Init()
         {
+            ucDateTimeInterval1.ShowTime = false;
+            ucDateTimeInterval1.Init();
+            ucDateTimeInterval1.SelectThisMonth();
+            base.Init();
+        }
+
+        protected override List<object> GetDataSource()
+        {
+            List<object> items = null;
             List<StackOutRecord> records = GetItems();
             if (records != null && records.Count > 0)
             {
@@ -80,40 +89,42 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                     {
                         if (!string.IsNullOrEmpty(gp.Key))
                         {
-                            int row = gridView.Rows.Add();
-                            gridView.Rows[row].Cells["colDeliveryDate"].Value = g.Key;
-                            gridView.Rows[row].Cells["colName"].Value = gp.Key;
-                            decimal count = gp.Sum(item => item.Count).Trim();
-                            gridView.Rows[row].Cells["colCount"].Value = count;
-                            decimal d1 = gp.Sum(item => item.Amount).Trim();
-                            gridView.Rows[row].Cells["colAmount"].Value = d1;
-                            decimal d2 = gp.Sum(item => item.Product.Cost * item.Count).Trim();
-                            gridView.Rows[row].Cells["colCost"].Value = d2;
-                            if (d2 > 0)
-                            {
-                                gridView.Rows[row].Cells["colProfit"].Value = (d1 - d2).Trim();
-                                gridView.Rows[row].Cells["colProfitRate"].Value = ((d1 - d2) / d2).ToString("P3");
-                            }
-                            else
-                            {
-                                gridView.Rows[row].Cells["colProfit"].Value = "---";
-                                gridView.Rows[row].Cells["colProfitRate"].Value = "---";
-                            }
+                            if (items == null) items = new List<object>();
+                            GroupData gd = new GroupData() { Key = g.Key, Group = gp };
+                            items.Add(gd);
                         }
                     }
                 }
+            }
+            return items;
+        }
+
+        protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
+        {
+            GroupData gd = item as GroupData;
+            IGrouping<string, StackOutRecord> gp = gd.Group;
+            row.Cells["colDeliveryDate"].Value = gd.Key;
+            row.Cells["colName"].Value = gp.Key;
+            decimal count = gp.Sum(it => it.Count).Trim();
+            row.Cells["colCount"].Value = count;
+            decimal d1 = gp.Sum(it => it.Amount).Trim();
+            row.Cells["colAmount"].Value = d1;
+            decimal d2 = gp.Sum(it => it.Product.Cost * it.Count).Trim();
+            row.Cells["colCost"].Value = d2;
+            if (d2 > 0)
+            {
+                row.Cells["colProfit"].Value = (d1 - d2).Trim();
+                row.Cells["colProfitRate"].Value = ((d1 - d2) / d2).ToString("P3");
+            }
+            else
+            {
+                row.Cells["colProfit"].Value = "---";
+                row.Cells["colProfitRate"].Value = "---";
             }
         }
         #endregion
 
         #region 事件处理程序
-        private void FrmDeliveryStatistics_Load(object sender, EventArgs e)
-        {
-            ucDateTimeInterval1.ShowTime = false;
-            ucDateTimeInterval1.Init();
-            ucDateTimeInterval1.SelectThisMonth();
-        }
-
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmCustomerMaster frm = new FrmCustomerMaster();
@@ -168,5 +179,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             txtProductCategory.Tag = null;
         }
         #endregion
+
+        private class GroupData
+        {
+            public string Key { get; set; }
+            public IGrouping<string, StackOutRecord> Group { get; set; }
+        }
     }
 }

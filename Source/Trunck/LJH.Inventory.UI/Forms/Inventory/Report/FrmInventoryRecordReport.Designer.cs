@@ -64,7 +64,11 @@
             // 
             // btnOkAs
             // 
-            this.btnOkAs.Location = new System.Drawing.Point(665, 41);
+            this.btnSaveAs.Location = new System.Drawing.Point(665, 41);
+            // 
+            // button1
+            // 
+            this.btnColumn.Location = new System.Drawing.Point(665, 70);
             // 
             // groupBox3
             // 
@@ -289,9 +293,9 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmInventoryRecordReport";
             this.Text = "收货记录报表";
-            this.Load += new System.EventHandler(this.FrmInvnetoryRecordReport_Load);
+            this.Controls.SetChildIndex(this.btnColumn, 0);
             this.Controls.SetChildIndex(this.btnSearch, 0);
-            this.Controls.SetChildIndex(this.btnOkAs, 0);
+            this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.gridView, 0);

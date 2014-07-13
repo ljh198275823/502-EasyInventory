@@ -62,7 +62,7 @@
             // 
             // btnOkAs
             // 
-            this.btnOkAs.Location = new System.Drawing.Point(574, 41);
+            this.btnSaveAs.Location = new System.Drawing.Point(574, 41);
             // 
             // gridView
             // 
@@ -270,7 +270,7 @@
             this.Name = "FrmOrderProfitReport";
             this.Text = "销售订单毛利统计";
             this.Controls.SetChildIndex(this.btnSearch, 0);
-            this.Controls.SetChildIndex(this.btnOkAs, 0);
+            this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.gridView, 0);
