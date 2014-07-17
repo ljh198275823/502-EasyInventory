@@ -98,6 +98,7 @@
     <Compile Include="Financial\CustomerReceivableType.cs" />
     <Compile Include="Financial\ExpenditureType.cs" />
     <Compile Include="Financial\ExpenditureRecord.cs" />
+    <Compile Include="Inventory\InventoryCheckRecord.cs" />
     <Compile Include="Inventory\StackInSheetType.cs" />
     <Compile Include="Inventory\StackOutSheetType.cs" />
     <Compile Include="Inventory\StackInItem.cs" />

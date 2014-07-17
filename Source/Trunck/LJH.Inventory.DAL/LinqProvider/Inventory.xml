@@ -568,5 +568,18 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
- 
+  <Table Name="InventoryCheckRecord" Member="LJH.Inventory.BusinessModel.InventoryCheckRecord">
+    <Type Name="LJH.Inventory.BusinessModel.InventoryCheckRecord">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="CheckDateTime" Member="CheckDateTime" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="WarehouseID" Member="WarehouseID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
+      <Column Name="Inventory" Member="Inventory"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="CheckCount" Member="CheckCount"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="Checker" Member="Checker"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Operator" Member="Operator"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
 </Database>

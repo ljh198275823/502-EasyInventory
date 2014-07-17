@@ -171,6 +171,12 @@
     <Compile Include="Forms\General\FrmStaffMaster.Designer.cs">
       <DependentUpon>FrmStaffMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\FrmInvnetoryCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\FrmInvnetoryCheck.Designer.cs">
+      <DependentUpon>FrmInvnetoryCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Report\FrmInventoryRecordReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -651,6 +657,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\General\FrmStaffMaster.resx">
       <DependentUpon>FrmStaffMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\FrmInvnetoryCheck.resx">
+      <DependentUpon>FrmInvnetoryCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmProductInventoryAssign.resx">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>

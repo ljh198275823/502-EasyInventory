@@ -210,6 +210,26 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
             }
         }
+
+        private void mnu_Check_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
+                FrmInvnetoryCheck frm = new FrmInvnetoryCheck();
+                frm.ProductInventory = pi;
+                DialogResult ret= frm.ShowDialog();
+                if (ret == DialogResult.OK)
+                {
+                    ProductInventorySearchCondition con = new ProductInventorySearchCondition();
+                    con.ProductID = pi.ProductID;
+                    con.WareHouseID = pi.WareHouseID;
+                    List<ProductInventory> items = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                    ProductInventory pii = items[0];
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pii);
+                }
+            }
+        }
         #endregion
     }
 }
