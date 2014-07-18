@@ -6,6 +6,7 @@ BEGIN
 	[CheckDateTime] [datetime] NOT NULL,
 	[ProductID] [varchar](50) COLLATE Chinese_PRC_CI_AS NOT NULL,
 	[WarehouseID] [nvarchar](50) COLLATE Chinese_PRC_CI_AS NOT NULL,
+    [Unit] [nvarchar](50) COLLATE Chinese_PRC_CI_AS NOT NULL,
 	[Inventory] [decimal](18, 4) NOT NULL,
 	[CheckCount] [decimal](18, 4) NOT NULL,
 	[Checker] [nvarchar](50) COLLATE Chinese_PRC_CI_AS NOT NULL,
