@@ -51,9 +51,12 @@ Begin VB.MDIForm FrmMain
       Appearance      =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   1
+         NumButtons      =   2
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "º½ÐÇ¿¨"
+         EndProperty
+         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "³ÐµÂ¿¨"
          EndProperty
       EndProperty
    End
@@ -67,6 +70,7 @@ Attribute VB_Exposed = False
 
 Private Declare Function SetParent Lib "user32" (ByVal hWndChild As Long, ByVal hWndNewParent As Long) As Long
 Dim frmHx As FrmHangXing
+Dim frmCd As FrmChengde
 
 
 Private Sub MDIForm_Load()
@@ -78,11 +82,18 @@ Private Sub MDIForm_Unload(Cancel As Integer)
         Unload frmHx
         Set frmHx = Nothing
     End If
+    If Not frmCd Is Nothing Then
+        Unload frmCd
+        Set frmCd = Nothing
+    End If
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     If Button.Index = 1 Then
         If frmHx Is Nothing Then Set frmHx = New FrmHangXing
         Call SetParent(frmHx.SSTab1.hWnd, Me.Picture1.hWnd)
+    ElseIf Button.Caption = "³ÐµÂ¿¨" Then
+        If frmCd Is Nothing Then Set frmCd = New FrmChengde
+        Call SetParent(frmCd.SSTab1.hWnd, Me.Picture1.hWnd)
     End If
 End Sub
