@@ -25,7 +25,7 @@ Const ERROR_USERCARD = 21  '//非用户卡
 Const ERROR_CHECKSUM = 22  '//校验和错误
 Const ERROR_AMOUNT = 23  '//气量超大
 '///////////明华函数
-Public Declare Function ic_init Lib "MWIC_32" (ByVal port As Long, ByVal baud As Long) As Long
+Public Declare Function ic_init Lib "MWIC_32" (ByVal port As Long, ByVal Baud As Long) As Long
 Public Declare Function ic_exit Lib "MWIC_32" (ByVal icDev As Long) As Long
 Public Declare Function csc_4442 Lib "MWIC_32" (ByVal icDev As Long, ByVal leng As Long, ByVal databuff As String) As Long
 Public Declare Function wsc_4442 Lib "MWIC_32" (ByVal icDev As Long, ByVal leng As Long, ByVal databuff As String) As Long
@@ -36,7 +36,7 @@ Public Declare Function readCard Lib "BGCard" (ByVal icDev As Long, ByVal userCo
 Public Declare Function makeCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, ByVal Amount As Single, ByVal saveInfo As String, ByVal mark As Byte) As Long
 Public Declare Function writeCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, ByVal Amount As Single, ByVal saveInfo As String) As Long
 Public Declare Function clearCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String) As Long
-Public Declare Function writeToolCard Lib "BGCard" (ByVal icDev As Long, ByVal WriteType As Long, ByVal TestAmount As Single, ByVal TestTimes As Long) As Long
+Public Declare Function writetoolCard Lib "BGCard" (ByVal icDev As Long, ByVal WriteType As Long, ByVal TestAmount As Single, ByVal TestTimes As Long) As Long
 
 '////全局变量，保存返回信息
 Public Sub WriteInfo(s As String)

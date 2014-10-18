@@ -46,17 +46,20 @@ Begin VB.MDIForm FrmMain
       Width           =   11775
       _ExtentX        =   20770
       _ExtentY        =   1085
-      ButtonWidth     =   1138
+      ButtonWidth     =   1455
       ButtonHeight    =   926
       Appearance      =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   2
+         NumButtons      =   3
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "º½ÐÇ¿¨"
          EndProperty
          BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "³ÐµÂ¿¨"
+         EndProperty
+         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "Õã½­½ð¿¨"
          EndProperty
       EndProperty
    End
@@ -71,6 +74,7 @@ Attribute VB_Exposed = False
 Private Declare Function SetParent Lib "user32" (ByVal hWndChild As Long, ByVal hWndNewParent As Long) As Long
 Dim frmHx As FrmHangXing
 Dim frmCd As FrmChengde
+Dim frmGold As FrmGoldCard
 
 
 Private Sub MDIForm_Load()
@@ -86,14 +90,21 @@ Private Sub MDIForm_Unload(Cancel As Integer)
         Unload frmCd
         Set frmCd = Nothing
     End If
+    If Not frmGold Is Nothing Then
+        Unload frmGold
+        Set frmGold = Nothing
+    End If
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    If Button.Index = 1 Then
+    If Button.Caption = "º½ÐÇ¿¨" Then
         If frmHx Is Nothing Then Set frmHx = New FrmHangXing
         Call SetParent(frmHx.SSTab1.hWnd, Me.Picture1.hWnd)
     ElseIf Button.Caption = "³ÐµÂ¿¨" Then
         If frmCd Is Nothing Then Set frmCd = New FrmChengde
         Call SetParent(frmCd.SSTab1.hWnd, Me.Picture1.hWnd)
+    ElseIf Button.Caption = "Õã½­½ð¿¨" Then
+        If frmGold Is Nothing Then Set frmGold = New FrmGoldCard
+        Call SetParent(frmGold.SSTab1.hWnd, Me.Picture1.hWnd)
     End If
 End Sub
