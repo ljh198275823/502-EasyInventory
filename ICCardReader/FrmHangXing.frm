@@ -20,40 +20,47 @@ Begin VB.Form FrmHangXing
       _ExtentY        =   9763
       _Version        =   393216
       Style           =   1
-      Tab             =   2
       TabHeight       =   520
       TabCaption(0)   =   "开/补卡"
       TabPicture(0)   =   "FrmHangXing.frx":0000
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1(0)"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(1)"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "cmdClear"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "cmdRemake"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "cmdMake"
+      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "txtCardID"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "rdHome"
+      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "rdIndustry"
+      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).ControlCount=   8
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmHangXing.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label10(1)"
-      Tab(1).Control(1)=   "Label3(2)"
-      Tab(1).Control(2)=   "Label10(0)"
-      Tab(1).Control(3)=   "Label1(2)"
-      Tab(1).Control(4)=   "txtCount"
-      Tab(1).Control(5)=   "txtFPID"
+      Tab(1).Control(0)=   "List1"
+      Tab(1).Control(1)=   "cmdRead"
+      Tab(1).Control(2)=   "cmdBuy"
+      Tab(1).Control(3)=   "cmdBuqi"
+      Tab(1).Control(4)=   "CmdBack"
+      Tab(1).Control(5)=   "txtCardID1"
       Tab(1).Control(6)=   "txtAmount"
-      Tab(1).Control(7)=   "txtCardID1"
-      Tab(1).Control(8)=   "CmdBack"
-      Tab(1).Control(9)=   "cmdBuqi"
-      Tab(1).Control(10)=   "cmdBuy"
-      Tab(1).Control(11)=   "cmdRead"
-      Tab(1).Control(12)=   "List1"
+      Tab(1).Control(7)=   "txtFPID"
+      Tab(1).Control(8)=   "txtCount"
+      Tab(1).Control(9)=   "Label1(2)"
+      Tab(1).Control(10)=   "Label10(0)"
+      Tab(1).Control(11)=   "Label3(2)"
+      Tab(1).Control(12)=   "Label10(1)"
       Tab(1).ControlCount=   13
       TabCaption(2)   =   "工具卡"
       TabPicture(2)   =   "FrmHangXing.frx":0038
-      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Text4"
       Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Option1(5)"
@@ -90,7 +97,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   495
          Index           =   1
-         Left            =   3360
+         Left            =   -71640
          TabIndex        =   32
          Top             =   4200
          Visible         =   0   'False
@@ -109,7 +116,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   495
          Index           =   0
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   31
          Top             =   600
          Value           =   -1  'True
@@ -128,7 +135,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   495
          Index           =   1
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   30
          Top             =   1140
          Width           =   2775
@@ -146,7 +153,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   495
          Index           =   2
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   29
          Top             =   1680
          Width           =   2775
@@ -164,7 +171,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   495
          Index           =   3
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   28
          Top             =   2220
          Width           =   2775
@@ -182,7 +189,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   495
          Index           =   4
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   27
          Top             =   2760
          Width           =   1695
@@ -200,7 +207,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   495
          Index           =   0
-         Left            =   1200
+         Left            =   -73800
          TabIndex        =   26
          Top             =   4200
          Width           =   1815
@@ -216,7 +223,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   2040
+         Left            =   -72960
          TabIndex        =   25
          Text            =   "60"
          Top             =   2280
@@ -233,7 +240,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   2640
+         Left            =   -72360
          TabIndex        =   24
          Top             =   2820
          Width           =   1455
@@ -251,7 +258,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   495
          Index           =   5
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   23
          Top             =   3420
          Width           =   1695
@@ -267,7 +274,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   2640
+         Left            =   -72360
          TabIndex        =   22
          Top             =   3480
          Width           =   1455
@@ -420,7 +427,7 @@ Begin VB.Form FrmHangXing
       Begin VB.OptionButton rdIndustry 
          Caption         =   "工业用卡"
          Height          =   195
-         Left            =   -72000
+         Left            =   3000
          TabIndex        =   8
          Top             =   1770
          Width           =   1335
@@ -428,7 +435,7 @@ Begin VB.Form FrmHangXing
       Begin VB.OptionButton rdHome 
          Caption         =   "家用卡"
          Height          =   375
-         Left            =   -73200
+         Left            =   1800
          TabIndex        =   7
          Top             =   1680
          Width           =   975
@@ -444,7 +451,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73320
+         Left            =   1680
          TabIndex        =   4
          Top             =   840
          Width           =   2055
@@ -461,7 +468,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -74160
+         Left            =   840
          TabIndex        =   3
          Top             =   3360
          Width           =   1095
@@ -478,7 +485,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -72600
+         Left            =   2400
          TabIndex        =   2
          Top             =   3360
          Width           =   1095
@@ -495,7 +502,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   1
          Top             =   3360
          Width           =   1335
@@ -586,7 +593,7 @@ Begin VB.Form FrmHangXing
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   1
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   6
          Top             =   900
          Width           =   735
@@ -604,7 +611,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   -74040
+         Left            =   960
          TabIndex        =   5
          Top             =   900
          Width           =   735
