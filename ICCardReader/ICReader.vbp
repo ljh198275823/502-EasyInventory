@@ -16,6 +16,7 @@ Form=FrmBeite.frm
 Form=FrmDandong.frm
 Form=FrmFuluke.frm
 Form=FrmBlue.frm
+Form=FrmSetting.frm
 Startup="FrmMain"
 HelpFile=""
 ExeName32="ICReader.exe"

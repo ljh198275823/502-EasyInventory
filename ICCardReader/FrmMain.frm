@@ -6,7 +6,8 @@ Begin VB.MDIForm FrmMain
    ClientHeight    =   6960
    ClientLeft      =   60
    ClientTop       =   345
-   ClientWidth     =   11775
+   ClientWidth     =   7980
+   Icon            =   "FrmMain.frx":0000
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   3  'Windows Default
    Begin MSComctlLib.StatusBar StatusBar1 
@@ -15,8 +16,8 @@ Begin VB.MDIForm FrmMain
       Left            =   0
       TabIndex        =   2
       Top             =   6585
-      Width           =   11775
-      _ExtentX        =   20770
+      Width           =   7980
+      _ExtentX        =   14076
       _ExtentY        =   661
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -29,13 +30,13 @@ Begin VB.MDIForm FrmMain
       Align           =   1  'Align Top
       AutoSize        =   -1  'True
       BorderStyle     =   0  'None
-      Height          =   5880
+      Height          =   6000
       Left            =   0
-      ScaleHeight     =   5880
-      ScaleWidth      =   11775
+      ScaleHeight     =   6000
+      ScaleWidth      =   7980
       TabIndex        =   1
       Top             =   615
-      Width           =   11775
+      Width           =   7980
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
@@ -43,8 +44,8 @@ Begin VB.MDIForm FrmMain
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   11775
-      _ExtentX        =   20770
+      Width           =   7980
+      _ExtentX        =   14076
       _ExtentY        =   1085
       ButtonWidth     =   1455
       ButtonHeight    =   926
@@ -100,7 +101,9 @@ Dim frmfu As FrmFuluke
 
 
 Private Sub MDIForm_Load()
-    My_Commport = 4
+    Dim strTemp As String
+    strTemp = GetIniStr("Reader", "Commport")
+    My_Commport = Val(strTemp)
     
     Set frmHx = New FrmHangXing
     Set frmCd = New FrmChengde
@@ -138,8 +141,10 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case "¿∂±¶ Ø"
             Call SetParent(frmbs.SSTab1.hWnd, Me.Picture1.hWnd)
         Case "…Ë÷√"
-            
+            FrmSetting.Show vbModal
         Case "ÕÀ≥ˆ"
             Unload Me
     End Select
 End Sub
+
+
