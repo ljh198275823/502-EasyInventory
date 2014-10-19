@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Begin VB.Form FrmChengde 
+Begin VB.Form FrmBlue 
    Caption         =   "承德卡"
    ClientHeight    =   6255
    ClientLeft      =   60
@@ -22,7 +22,7 @@ Begin VB.Form FrmChengde
       Style           =   1
       TabHeight       =   520
       TabCaption(0)   =   "开/补卡"
-      TabPicture(0)   =   "FrmChengde.frx":0000
+      TabPicture(0)   =   "FrmBlue.frx":0000
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1(0)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -38,57 +38,57 @@ Begin VB.Form FrmChengde
       Tab(0).Control(5).Enabled=   0   'False
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "售气"
-      TabPicture(1)   =   "FrmChengde.frx":001C
+      TabPicture(1)   =   "FrmBlue.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label10(1)"
+      Tab(1).Control(0)=   "List1"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "Label3(2)"
+      Tab(1).Control(1)=   "cmdRead"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "Label10(0)"
+      Tab(1).Control(2)=   "cmdBuy"
       Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "Label1(2)"
+      Tab(1).Control(3)=   "txtCardID1"
       Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "txtCount"
+      Tab(1).Control(4)=   "txtAmount"
       Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "txtFPID"
       Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "txtAmount"
+      Tab(1).Control(6)=   "txtCount"
       Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "txtCardID1"
+      Tab(1).Control(7)=   "Label1(2)"
       Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "cmdBuy"
+      Tab(1).Control(8)=   "Label10(0)"
       Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "cmdRead"
+      Tab(1).Control(9)=   "Label3(2)"
       Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "List1"
+      Tab(1).Control(10)=   "Label10(1)"
       Tab(1).Control(10).Enabled=   0   'False
       Tab(1).ControlCount=   11
       TabCaption(2)   =   "工具卡"
-      TabPicture(2)   =   "FrmChengde.frx":0038
+      TabPicture(2)   =   "FrmBlue.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label1(3)"
+      Tab(2).Control(0)=   "txtTestCount"
       Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Label1(4)"
+      Tab(2).Control(1)=   "Option1(5)"
       Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Option1(6)"
+      Tab(2).Control(2)=   "Option1(0)"
       Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "txtTestAmount"
+      Tab(2).Control(3)=   "Option1(1)"
       Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "CmdTool(0)"
+      Tab(2).Control(4)=   "Option1(2)"
       Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "Option1(4)"
+      Tab(2).Control(5)=   "Option1(3)"
       Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Option1(3)"
+      Tab(2).Control(6)=   "Option1(4)"
       Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "Option1(2)"
+      Tab(2).Control(7)=   "CmdTool(0)"
       Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "Option1(1)"
+      Tab(2).Control(8)=   "txtTestAmount"
       Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Option1(0)"
+      Tab(2).Control(9)=   "Option1(6)"
       Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "Option1(5)"
+      Tab(2).Control(10)=   "Label1(4)"
       Tab(2).Control(10).Enabled=   0   'False
-      Tab(2).Control(11)=   "txtTestCount"
+      Tab(2).Control(11)=   "Label1(3)"
       Tab(2).Control(11).Enabled=   0   'False
       Tab(2).ControlCount=   12
       Begin VB.TextBox txtTestCount 
@@ -275,9 +275,9 @@ Begin VB.Form FrmChengde
       Begin VB.ListBox List1 
          Appearance      =   0  'Flat
          Height          =   2175
-         ItemData        =   "FrmChengde.frx":0054
+         ItemData        =   "FrmBlue.frx":0054
          Left            =   -71280
-         List            =   "FrmChengde.frx":0056
+         List            =   "FrmBlue.frx":0056
          TabIndex        =   17
          Top             =   660
          Width           =   3615
@@ -596,7 +596,7 @@ Begin VB.Form FrmChengde
       End
    End
 End
-Attribute VB_Name = "FrmChengde"
+Attribute VB_Name = "FrmBlue"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

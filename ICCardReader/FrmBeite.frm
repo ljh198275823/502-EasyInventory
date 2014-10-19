@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Begin VB.Form FrmChengde 
+Begin VB.Form FrmBeite 
    Caption         =   "承德卡"
    ClientHeight    =   6255
    ClientLeft      =   60
@@ -20,26 +20,21 @@ Begin VB.Form FrmChengde
       _ExtentY        =   9763
       _Version        =   393216
       Style           =   1
+      Tab             =   1
       TabHeight       =   520
       TabCaption(0)   =   "开/补卡"
-      TabPicture(0)   =   "FrmChengde.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(0)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label1(1)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "cmdClear"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "cmdRemake"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "cmdMake"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "txtCardID"
-      Tab(0).Control(5).Enabled=   0   'False
+      TabPicture(0)   =   "FrmBeite.frx":0000
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "txtCardID"
+      Tab(0).Control(1)=   "cmdMake"
+      Tab(0).Control(2)=   "cmdRemake"
+      Tab(0).Control(3)=   "cmdClear"
+      Tab(0).Control(4)=   "Label1(1)"
+      Tab(0).Control(5)=   "Label1(0)"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "售气"
-      TabPicture(1)   =   "FrmChengde.frx":001C
-      Tab(1).ControlEnabled=   0   'False
+      TabPicture(1)   =   "FrmBeite.frx":001C
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "Label10(1)"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label3(2)"
@@ -64,32 +59,20 @@ Begin VB.Form FrmChengde
       Tab(1).Control(10).Enabled=   0   'False
       Tab(1).ControlCount=   11
       TabCaption(2)   =   "工具卡"
-      TabPicture(2)   =   "FrmChengde.frx":0038
+      TabPicture(2)   =   "FrmBeite.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label1(3)"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Label1(4)"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Option1(6)"
-      Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "txtTestAmount"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "CmdTool(0)"
-      Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "Option1(4)"
-      Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Option1(3)"
-      Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "Option1(2)"
-      Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "Option1(1)"
-      Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Option1(0)"
-      Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "Option1(5)"
-      Tab(2).Control(10).Enabled=   0   'False
-      Tab(2).Control(11)=   "txtTestCount"
-      Tab(2).Control(11).Enabled=   0   'False
+      Tab(2).Control(0)=   "txtTestCount"
+      Tab(2).Control(1)=   "Option1(5)"
+      Tab(2).Control(2)=   "Option1(0)"
+      Tab(2).Control(3)=   "Option1(1)"
+      Tab(2).Control(4)=   "Option1(2)"
+      Tab(2).Control(5)=   "Option1(3)"
+      Tab(2).Control(6)=   "Option1(4)"
+      Tab(2).Control(7)=   "CmdTool(0)"
+      Tab(2).Control(8)=   "txtTestAmount"
+      Tab(2).Control(9)=   "Option1(6)"
+      Tab(2).Control(10)=   "Label1(4)"
+      Tab(2).Control(11)=   "Label1(3)"
       Tab(2).ControlCount=   12
       Begin VB.TextBox txtTestCount 
          Enabled         =   0   'False
@@ -275,9 +258,9 @@ Begin VB.Form FrmChengde
       Begin VB.ListBox List1 
          Appearance      =   0  'Flat
          Height          =   2175
-         ItemData        =   "FrmChengde.frx":0054
-         Left            =   -71280
-         List            =   "FrmChengde.frx":0056
+         ItemData        =   "FrmBeite.frx":0054
+         Left            =   3720
+         List            =   "FrmBeite.frx":0056
          TabIndex        =   17
          Top             =   660
          Width           =   3615
@@ -294,7 +277,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   16
          Top             =   3840
          Width           =   1095
@@ -312,7 +295,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -72480
+         Left            =   2520
          TabIndex        =   15
          Top             =   3840
          Width           =   1095
@@ -329,7 +312,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   10
          Top             =   660
          Width           =   2175
@@ -345,7 +328,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   9
          Top             =   1200
          Width           =   2175
@@ -361,7 +344,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   450
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   8
          Top             =   2400
          Width           =   2175
@@ -377,7 +360,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   7
          Top             =   1800
          Width           =   2175
@@ -393,7 +376,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   1680
+         Left            =   -73320
          TabIndex        =   4
          Top             =   840
          Width           =   2055
@@ -410,7 +393,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   840
+         Left            =   -74160
          TabIndex        =   3
          Top             =   3360
          Width           =   1095
@@ -427,7 +410,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   2400
+         Left            =   -72600
          TabIndex        =   2
          Top             =   3360
          Width           =   1095
@@ -444,7 +427,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   1
          Top             =   3360
          Width           =   1335
@@ -498,7 +481,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   14
          Top             =   720
          Width           =   735
@@ -516,7 +499,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   13
          Top             =   1260
          Width           =   855
@@ -534,7 +517,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   12
          Top             =   2505
          Width           =   975
@@ -552,7 +535,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   11
          Top             =   1860
          Width           =   855
@@ -571,7 +554,7 @@ Begin VB.Form FrmChengde
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   1
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   6
          Top             =   900
          Width           =   735
@@ -589,89 +572,71 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   5
          Top             =   900
          Width           =   735
       End
    End
 End
-Attribute VB_Name = "FrmChengde"
+Attribute VB_Name = "FrmBeite"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 '/底层动态库
-'///////////明华函数
-Private Declare Function ic_init Lib "MWIC_32" (ByVal port As Long, ByVal Baud As Long) As Long
-Private Declare Function ic_exit Lib "MWIC_32" (ByVal icDev As Long) As Long
-Private Declare Function csc_4442 Lib "MWIC_32" (ByVal icDev As Long, ByVal leng As Long, ByVal databuff As String) As Long
-Private Declare Function wsc_4442 Lib "MWIC_32" (ByVal icDev As Long, ByVal leng As Long, ByVal databuff As String) As Long
 
-'///////////IC卡函数
-Private Declare Function rdcompany Lib "BGCard" (ByVal icDev As Long, isTrue As Byte) As Long
-Private Declare Function readCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, cardAmount As Single, meterAmount As Single, TestAmount As Single, inserted As Byte) As Long
-Private Declare Function makeCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, ByVal Amount As Single, ByVal saveInfo As String, ByVal mark As Byte) As Long
-Private Declare Function writeCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, ByVal Amount As Single, ByVal saveInfo As String) As Long
-Private Declare Function clearCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String) As Long
-Private Declare Function writetoolCard Lib "BGCard" (ByVal icDev As Long, ByVal WriteType As Long, ByVal TestAmount As Single, ByVal TestTimes As Long) As Long
+'用户卡个人化函数
+'1.只有处于初始状态的卡片才能进行卡片的个人化操作
+'2.完成个人化操作后的用户卡卡上预购气量为零
+Private Declare Function Personalize Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal userNo As String, _
+ByVal AlarmValue As Integer, ByVal InputValue As Integer, ByVal OverLimit As Long, ByVal Control As Long, ByRef pErrMsg As String) As Long
 
-'////全局变量，保存返回信息
-Private Sub WriteInfo(s As String)
-    Open App.Path & "\saveinf.txt" For Output As #1
-    Print #1, s
-    Close #1
-End Sub
+'用户卡充值函数  每进行一次用户卡购气交易，卡上交易序号加1
+Private Declare Function Credit Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal userNo As String, _
+ByVal ChargeSerialNum As Long, ByVal purchaeAmount As Long, ByRef pErrMsg As String) As Long
 
-Private Function ReadInfo() As String
-    Open App.Path & "\saveinf.txt" For Input As #1
-    Dim FileData As String
-    Input #1, FileData
-    ReadInfo = FileData
-    Close #1
-End Function
+'用户卡增款函数  完成操作后，原卡上交易序号保持不变
+Private Declare Function Increase Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal userNo As String, _
+ByRef Buygas As Long, ByVal PurchaseAmount As Long, ByRef pErrMsg As String) As Long
 
-Private Function ChengdeErr(ByVal err As Integer) As String
-    ChengdeErr = "未知错误"
-    Select Case err
-        Case 1
-            ChengdeErr = "读卡数据是错误的"
-        Case 2
-            ChengdeErr = "没有这个用户"
-        Case 3
-            ChengdeErr = "加密数据出错"
-        Case 6
-            ChengdeErr = "负气量错误"
-        Case 9
-            ChengdeErr = "用户号和卡不对应"
-        Case 10
-            ChengdeErr = "写卡出错"
-        Case 11
-            ChengdeErr = "读卡出错"
-        Case 13
-            ChengdeErr = "用户号长度错误"
-        Case 14
-            ChengdeErr = "用户号字符非法"
-        Case 15
-            ChengdeErr = "用户号已存在"
-        Case 16
-            ChengdeErr = "非博冠卡"
-        Case 17
-            ChengdeErr = "校验卡密码错误"
-        Case 18
-            ChengdeErr = "数据错误"
-        Case 19
-            ChengdeErr = "IC卡已报废"
-        Case 20
-            ChengdeErr = "扣气量大于卡内存量错误"
-        Case 21
-            ChengdeErr = "非用户卡"
-        Case 22
-            ChengdeErr = "校验和错误"
-        Case 23
-            ChengdeErr = "气量超大"
-    End Select
-End Function
+'退气 完成退购交易后，原卡上交易序号保持不变
+Private Declare Function Decrease Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, _
+    ByVal userNo As String, ByRef Buygas As Long, ByVal PurchaseAmount As Long, ByRef pErrMsg As String) As Long
+
+'读用户卡购气区数据
+Private Declare Function rUserData Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByRef userNo As String, _
+ByRef ChargeSerialNum As Long, ByRef PurchaseAmount As Long, ByRef AlarmValue As Long, ByRef InputValue As Long, _
+ByRef OverLimit As Long, ByRef Control As Long, ByRef pErrMsg As String) As Long
+
+'读用户卡返回写区数据
+Private Declare Function rUserDataR Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByRef RStartcode As String, _
+ByRef meterNo As String, ByRef TotalBuyGas As Long, ByRef TotalBuyNum As Long, ByRef residualGas As Long, _
+ByRef TotalTakeGas As Single, ByRef ChangePassNum As Long, ByRef FMState As Long, ByRef ESAMState As Long, _
+ByRef DCState As Long, ByRef CGRState As Long, ByRef Magnet As Long, ByRef Low As Long, ByRef MonthUserGas As String, _
+ByRef RDate As String, ByRef pErrMsg As String) As Long
+
+'补卡
+Private Declare Function ReissueCard Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal userNo As String, _
+ByVal AlarmValue As Integer, ByVal InputValue As Integer, ByVal OverLimit As Long, ByVal Control As Long, ByRef pErrMsg As String) As Long
+
+'创建一张换表卡
+Private Declare Function ChangeMeter Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal userNo As String, _
+ByVal AlarmValue As Integer, ByVal InputValue As Integer, ByVal OverLimit As Long, ByVal buy As Long, _
+ByVal TotalBuyGas As Long, ByVal TotalBuyNum As Long, ByVal residualGas As Long, ByVal TotalTakeGas As Single, ByVal Control As Long, _
+ByRef pErrMsg As String) As Long
+
+'清空卡
+Private Declare Function clearCard Lib "PC001" Alias "ClearCard" (ByVal port As Integer, ByVal Baud As Long, ByRef pErrMsg As String) As Long
+
+'制作初使化卡
+Private Declare Function MakeIniCard Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal upfrontGas As Long, ByVal AlarmValue As Long, _
+ByVal OverLimit As Long, ByVal Control As Long, ByRef pErrMsg As String) As Long
+
+'设置用户卡参数
+Private Declare Function SetUserParameter Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal userNo As String, _
+ByVal AlarmValue As Long, ByVal OverLimit As Long, ByVal Control As Long, ByRef pErrMsg As String) As Long
+
 '-----------------------------------------------------end-----------------------------------------------------
 
 Private Sub cmdBuy_Click()

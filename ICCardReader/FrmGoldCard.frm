@@ -250,23 +250,50 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+''读卡
+'参数:     intcom: 串口号 com1为0, com2为1
+'Baud：串口通讯波特率（1200－115200）。
+'          vskh：用户卡号（00000000－99999999）；
+'vlql： 可用气量；
+'vics: 表卡内购气次数
+'viklx：表类型，1民用表，2工业表，3清零卡，4工程卡（即转移卡）
+'  返回值：int
+'          = 0：正确
+'其它:  厂家自行定义
+Private Declare Function Gold_Readcard Lib "goldcard" (ByVal intcom As Integer, ByVal Baud As Long, ByRef userNo As String, ByRef vlql As Long, ByRef vics As Integer, ByRef viklx As Integer) As Long
+
+'购气
+Private Declare Function Gold_Buycard Lib "goldcard" (ByVal intcom As Integer, ByVal Baud As Long, ByVal userNo As String, ByVal vlql As Long, ByVal vics As Long) As Long
+
+'清除卡内气量
+Private Declare Function Gold_Clearcard Lib "goldcard" (ByVal intcom As Integer, ByVal Baud As Long, ByVal userNo As String) As Long
+
+'返回错误信息字符串
+Private Declare Sub Error_message Lib "goldcard" (ByVal errCode As Long, ByVal msg As String)
+
+'检查是否是本公司的卡 返回值 0：用户卡；1：工具卡；其它出错。
+Private Declare Function Gold_CheckCard Lib "goldcard" (ByVal intcom As Integer, ByVal Baud As Long, ByRef error As String) As Long
+
+'注意事项
+'1、 购气次数一定要正确，购气次数只能比上次购气次数大，否则表会不认卡。
+'2、 购气写卡时，如果卡内还有气量，DLL会把卡内的气量替换了，并不会相加。
+
+'-----------------------------------end--------------------------------------------------------------------
+
 Private Sub cmdBuy_Click()
-    Dim icDev As Long
-    Dim reVal As Long
-    Dim userCode As String * 8
-    Dim saveInfo As String * 16
+    Dim ret As Long
+    Dim msg As String * 50
     
-    icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-    userCode = txtCardID1.Text
-    saveInfo = ReadInfo
-    reVal = writeCard(icDev, userCode, Val(txtAmount.Text), saveInfo)
-    If reVal = 0 Then
-        WriteInfo saveInfo
+    ret = Gold_Buycard(My_Commport - 1, 9600, txtCardID1.Text, Val(txtAmount.Text), Val(txtCount.Text) + 1)
+    If ret = 0 Then
         MsgBox "售气成功。"
+        Me.cmdBuy.Enabled = False
+        Me.cmdBuy.Enabled = False
     Else
-        MsgBox "售气失败，错误:" & ChengdeErr(reVal)
+        Call Error_message(ret, msg)
+        MsgBox "售气失败，错误:" & msg
     End If
-    ic_exit icDev
 End Sub
 
 Private Sub cmdClear_Click()
@@ -276,6 +303,8 @@ Private Sub cmdClear_Click()
     ret = Gold_Clearcard(My_Commport - 1, 9600, txtCardID1.Text)
     If ret = 0 Then
         MsgBox "清卡成功。"
+        Me.cmdBuy.Enabled = False
+        Me.cmdBuy.Enabled = False
     Else
         Call Error_message(ret, msg)
         MsgBox "清卡失败，错误:" & msg
@@ -283,15 +312,15 @@ Private Sub cmdClear_Click()
 End Sub
 
 Private Sub cmdRead_Click()
+    Dim ret As Long
     Dim userNo As String
     Dim vlql As Long
     Dim vics As Integer
     Dim viklx As Integer
-    Dim reVal As Long
     Dim msg As String * 50
     
-    reVal = Gold_Readcard(My_Commport - 1, 9600, userNo, vlql, vics, viklx) '串口号0开始，所以要减一
-    If reVal = 0 Then
+    ret = Gold_Readcard(My_Commport - 1, 9600, userNo, vlql, vics, viklx) '串口号0开始，所以要减一
+    If ret = 0 Then
         Me.txtCardID1.Text = userCode
         Me.txtAmount.Text = vlql
         Me.txtCount.Text = vics
@@ -305,8 +334,10 @@ Private Sub cmdRead_Click()
             Case 4
                 txtCardType.Text = "转移卡"
         End Select
+        Me.cmdBuy.Enabled = True
+        Me.cmdBuy.Enabled = True
     Else
-        Call Error_message(reVal, msg)
+        Call Error_message(ret, msg)
         MsgBox "读卡失败，错误:" & msg
     End If
 End Sub

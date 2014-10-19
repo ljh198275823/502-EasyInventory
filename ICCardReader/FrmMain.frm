@@ -51,7 +51,7 @@ Begin VB.MDIForm FrmMain
       Appearance      =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   3
+         NumButtons      =   9
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "º½ÐÇ¿¨"
          EndProperty
@@ -60,6 +60,24 @@ Begin VB.MDIForm FrmMain
          EndProperty
          BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "Õã½­½ð¿¨"
+         EndProperty
+         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "Õã½­±´ÌØ"
+         EndProperty
+         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "µ¤¶«¿¨"
+         EndProperty
+         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "¸£Â»¿Ë"
+         EndProperty
+         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "À¶±¦Ê¯"
+         EndProperty
+         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "ÉèÖÃ"
+         EndProperty
+         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "ÍË³ö"
          EndProperty
       EndProperty
    End
@@ -75,36 +93,53 @@ Private Declare Function SetParent Lib "user32" (ByVal hWndChild As Long, ByVal 
 Dim frmHx As FrmHangXing
 Dim frmCd As FrmChengde
 Dim frmGold As FrmGoldCard
+Dim frmBt As FrmBeite
+Dim frmDd As FrmDandong
+Dim frmbs As FrmBlue
+Dim frmfu As FrmFuluke
 
 
 Private Sub MDIForm_Load()
     My_Commport = 4
+    
+    Set frmHx = New FrmHangXing
+    Set frmCd = New FrmChengde
+    Set frmGold = New FrmGoldCard
+    Set frmBt = New FrmBeite
+    Set frmDd = New FrmDandong
+    Set frmbs = New FrmBlue
+    Set frmfu = New FrmFuluke
 End Sub
 
 Private Sub MDIForm_Unload(Cancel As Integer)
-    If Not frmHx Is Nothing Then
-        Unload frmHx
-        Set frmHx = Nothing
-    End If
-    If Not frmCd Is Nothing Then
-        Unload frmCd
-        Set frmCd = Nothing
-    End If
-    If Not frmGold Is Nothing Then
-        Unload frmGold
-        Set frmGold = Nothing
-    End If
+    Unload frmHx
+    Unload frmCd
+    Unload frmGold
+    Unload frmBt
+    Unload frmDd
+    Unload frmbs
+    Unload frmfu
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    If Button.Caption = "º½ÐÇ¿¨" Then
-        If frmHx Is Nothing Then Set frmHx = New FrmHangXing
-        Call SetParent(frmHx.SSTab1.hWnd, Me.Picture1.hWnd)
-    ElseIf Button.Caption = "³ÐµÂ¿¨" Then
-        If frmCd Is Nothing Then Set frmCd = New FrmChengde
-        Call SetParent(frmCd.SSTab1.hWnd, Me.Picture1.hWnd)
-    ElseIf Button.Caption = "Õã½­½ð¿¨" Then
-        If frmGold Is Nothing Then Set frmGold = New FrmGoldCard
-        Call SetParent(frmGold.SSTab1.hWnd, Me.Picture1.hWnd)
-    End If
+    Select Case Button.Caption
+        Case "º½ÐÇ¿¨"
+            Call SetParent(frmHx.SSTab1.hWnd, Me.Picture1.hWnd)
+        Case "³ÐµÂ¿¨"
+            Call SetParent(frmCd.SSTab1.hWnd, Me.Picture1.hWnd)
+        Case "Õã½­½ð¿¨"
+            Call SetParent(frmGold.SSTab1.hWnd, Me.Picture1.hWnd)
+        Case "Õã½­±´ÌØ"
+            Call SetParent(frmBt.SSTab1.hWnd, Me.Picture1.hWnd)
+        Case "µ¤¶«¿¨"
+            Call SetParent(frmDd.SSTab1.hWnd, Me.Picture1.hWnd)
+        Case "¸£Â»¿Ë"
+            Call SetParent(frmfu.SSTab1.hWnd, Me.Picture1.hWnd)
+        Case "À¶±¦Ê¯"
+            Call SetParent(frmbs.SSTab1.hWnd, Me.Picture1.hWnd)
+        Case "ÉèÖÃ"
+            
+        Case "ÍË³ö"
+            Unload Me
+    End Select
 End Sub
