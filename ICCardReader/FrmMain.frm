@@ -63,6 +63,7 @@ Begin VB.MDIForm FrmMain
             Caption         =   "浙江金卡"
          EndProperty
          BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Enabled         =   0   'False
             Caption         =   "浙江贝特"
          EndProperty
          BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
@@ -72,6 +73,7 @@ Begin VB.MDIForm FrmMain
             Caption         =   "福禄克"
          EndProperty
          BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Enabled         =   0   'False
             Caption         =   "蓝宝石"
          EndProperty
          BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 

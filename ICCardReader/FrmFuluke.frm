@@ -30,69 +30,50 @@ Begin VB.Form FrmFuluke
       Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "cmdClear"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "cmdRemake"
+      Tab(0).Control(3)=   "cmdMake"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "cmdMake"
+      Tab(0).Control(4)=   "txtCardID"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "txtCardID"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).ControlCount=   6
+      Tab(0).ControlCount=   5
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmFuluke.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "List1"
+      Tab(1).Control(0)=   "Label10(1)"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "cmdRead"
+      Tab(1).Control(1)=   "Label10(0)"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "cmdBuy"
+      Tab(1).Control(2)=   "Label1(2)"
       Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "txtCardID1"
+      Tab(1).Control(3)=   "txtCount"
       Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "txtAmount"
       Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "txtFPID"
+      Tab(1).Control(5)=   "txtCardID1"
       Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "txtCount"
+      Tab(1).Control(6)=   "cmdBuy"
       Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "Label1(2)"
+      Tab(1).Control(7)=   "cmdRead"
       Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "Label10(0)"
+      Tab(1).Control(8)=   "List1"
       Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "Label3(2)"
-      Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "Label10(1)"
-      Tab(1).Control(10).Enabled=   0   'False
-      Tab(1).ControlCount=   11
+      Tab(1).ControlCount=   9
       TabCaption(2)   =   "工具卡"
       TabPicture(2)   =   "FrmFuluke.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "txtTestCount"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Option1(5)"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Option1(0)"
-      Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "Option1(1)"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "Option1(2)"
-      Tab(2).Control(4).Enabled=   0   'False
+      Tab(2).Control(0)=   "Label1(5)"
+      Tab(2).Control(1)=   "Label1(6)"
+      Tab(2).Control(2)=   "Label1(3)"
+      Tab(2).Control(3)=   "Label1(4)"
+      Tab(2).Control(4)=   "CmdTool(0)"
       Tab(2).Control(5)=   "Option1(3)"
-      Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Option1(4)"
-      Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "CmdTool(0)"
-      Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "txtTestAmount"
-      Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Option1(6)"
-      Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "Label1(4)"
-      Tab(2).Control(10).Enabled=   0   'False
-      Tab(2).Control(11)=   "Label1(3)"
-      Tab(2).Control(11).Enabled=   0   'False
+      Tab(2).Control(6)=   "Option1(2)"
+      Tab(2).Control(7)=   "Option1(1)"
+      Tab(2).Control(8)=   "Option1(0)"
+      Tab(2).Control(9)=   "txtDataRestorePwd"
+      Tab(2).Control(10)=   "txtDataManagePwd"
+      Tab(2).Control(11)=   "txtDataChangePWD"
       Tab(2).ControlCount=   12
-      Begin VB.TextBox txtTestCount 
-         Enabled         =   0   'False
+      Begin VB.TextBox txtDataChangePWD 
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -103,14 +84,13 @@ Begin VB.Form FrmFuluke
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -68640
-         TabIndex        =   28
-         Text            =   "100"
-         Top             =   2220
-         Width           =   975
+         Left            =   -71760
+         TabIndex        =   22
+         Text            =   "10"
+         Top             =   1740
+         Width           =   1935
       End
-      Begin VB.OptionButton Option1 
-         Caption         =   "补测试卡"
+      Begin VB.TextBox txtDataManagePwd 
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -120,15 +100,32 @@ Begin VB.Form FrmFuluke
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   495
-         Index           =   5
-         Left            =   -74040
-         TabIndex        =   26
-         Top             =   3360
-         Width           =   1215
+         Height          =   375
+         Left            =   -71760
+         TabIndex        =   21
+         Text            =   "10"
+         Top             =   2220
+         Width           =   1935
+      End
+      Begin VB.TextBox txtDataRestorePwd 
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   -71760
+         TabIndex        =   20
+         Text            =   "10"
+         Top             =   1200
+         Width           =   1935
       End
       Begin VB.OptionButton Option1 
-         Caption         =   "初始化卡"
+         Caption         =   "清零卡"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -141,13 +138,13 @@ Begin VB.Form FrmFuluke
          Height          =   495
          Index           =   0
          Left            =   -74040
-         TabIndex        =   25
+         TabIndex        =   19
          Top             =   600
          Value           =   -1  'True
-         Width           =   2775
+         Width           =   1335
       End
       Begin VB.OptionButton Option1 
-         Caption         =   "异常清除卡"
+         Caption         =   "恢复卡"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -160,9 +157,9 @@ Begin VB.Form FrmFuluke
          Height          =   495
          Index           =   1
          Left            =   -74040
-         TabIndex        =   24
+         TabIndex        =   18
          Top             =   1140
-         Width           =   2775
+         Width           =   1335
       End
       Begin VB.OptionButton Option1 
          Caption         =   "换表卡"
@@ -178,12 +175,12 @@ Begin VB.Form FrmFuluke
          Height          =   495
          Index           =   2
          Left            =   -74040
-         TabIndex        =   23
+         TabIndex        =   17
          Top             =   1680
-         Width           =   2775
+         Width           =   1095
       End
       Begin VB.OptionButton Option1 
-         Caption         =   "测试卡"
+         Caption         =   "管理卡"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -196,26 +193,8 @@ Begin VB.Form FrmFuluke
          Height          =   495
          Index           =   3
          Left            =   -74040
-         TabIndex        =   22
+         TabIndex        =   16
          Top             =   2160
-         Width           =   975
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "清零卡"
-         BeginProperty Font 
-            Name            =   "宋体"
-            Size            =   10.5
-            Charset         =   134
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   495
-         Index           =   4
-         Left            =   -74040
-         TabIndex        =   21
-         Top             =   2760
          Width           =   975
       End
       Begin VB.CommandButton CmdTool 
@@ -231,46 +210,10 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   495
          Index           =   0
-         Left            =   -73200
-         TabIndex        =   20
-         Top             =   4680
+         Left            =   -73080
+         TabIndex        =   15
+         Top             =   3840
          Width           =   1815
-      End
-      Begin VB.TextBox txtTestAmount 
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "宋体"
-            Size            =   10.5
-            Charset         =   134
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   -71400
-         TabIndex        =   19
-         Text            =   "10"
-         Top             =   2220
-         Width           =   975
-      End
-      Begin VB.OptionButton Option1 
-         Caption         =   "恢复工具卡为空白卡"
-         BeginProperty Font 
-            Name            =   "宋体"
-            Size            =   10.5
-            Charset         =   134
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   495
-         Index           =   6
-         Left            =   -74040
-         TabIndex        =   18
-         Top             =   3960
-         Width           =   3615
       End
       Begin VB.ListBox List1 
          Appearance      =   0  'Flat
@@ -278,7 +221,7 @@ Begin VB.Form FrmFuluke
          ItemData        =   "FrmFuluke.frx":0054
          Left            =   -71280
          List            =   "FrmFuluke.frx":0056
-         TabIndex        =   17
+         TabIndex        =   14
          Top             =   660
          Width           =   3615
       End
@@ -295,7 +238,7 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   495
          Left            =   -73800
-         TabIndex        =   16
+         TabIndex        =   13
          Top             =   3840
          Width           =   1095
       End
@@ -313,7 +256,7 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   495
          Left            =   -72480
-         TabIndex        =   15
+         TabIndex        =   12
          Top             =   3840
          Width           =   1095
       End
@@ -330,7 +273,7 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   375
          Left            =   -73800
-         TabIndex        =   10
+         TabIndex        =   8
          Top             =   660
          Width           =   2175
       End
@@ -346,24 +289,8 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   375
          Left            =   -73800
-         TabIndex        =   9
+         TabIndex        =   7
          Top             =   1200
-         Width           =   2175
-      End
-      Begin VB.TextBox txtFPID 
-         BeginProperty Font 
-            Name            =   "宋体"
-            Size            =   10.5
-            Charset         =   134
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   450
-         Left            =   -73800
-         TabIndex        =   8
-         Top             =   2400
          Width           =   2175
       End
       Begin VB.TextBox txtCount 
@@ -378,7 +305,7 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   375
          Left            =   -73800
-         TabIndex        =   7
+         TabIndex        =   6
          Top             =   1800
          Width           =   2175
       End
@@ -394,7 +321,7 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   375
          Left            =   1680
-         TabIndex        =   4
+         TabIndex        =   3
          Top             =   840
          Width           =   2055
       End
@@ -410,26 +337,9 @@ Begin VB.Form FrmFuluke
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   840
-         TabIndex        =   3
-         Top             =   3360
-         Width           =   1095
-      End
-      Begin VB.CommandButton cmdRemake 
-         Caption         =   "补卡"
-         BeginProperty Font 
-            Name            =   "宋体"
-            Size            =   10.5
-            Charset         =   134
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   495
-         Left            =   2400
+         Left            =   1920
          TabIndex        =   2
-         Top             =   3360
+         Top             =   4320
          Width           =   1095
       End
       Begin VB.CommandButton cmdClear 
@@ -446,11 +356,12 @@ Begin VB.Form FrmFuluke
          Height          =   495
          Left            =   3840
          TabIndex        =   1
-         Top             =   3360
+         Top             =   4320
          Width           =   1335
       End
       Begin VB.Label Label1 
-         Caption         =   "测试用量(0-100)"
+         Alignment       =   1  'Right Justify
+         Caption         =   "密码"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -462,13 +373,14 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   255
          Index           =   4
-         Left            =   -72960
-         TabIndex        =   29
-         Top             =   2280
-         Width           =   1575
+         Left            =   -72840
+         TabIndex        =   26
+         Top             =   1800
+         Width           =   615
       End
       Begin VB.Label Label1 
-         Caption         =   "测试次数(0-255)"
+         Alignment       =   1  'Right Justify
+         Caption         =   "密码"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -480,10 +392,48 @@ Begin VB.Form FrmFuluke
          EndProperty
          Height          =   255
          Index           =   3
-         Left            =   -70200
-         TabIndex        =   27
+         Left            =   -72840
+         TabIndex        =   25
+         Top             =   720
+         Width           =   615
+      End
+      Begin VB.Label Label1 
+         Alignment       =   1  'Right Justify
+         Caption         =   "密码"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   6
+         Left            =   -72840
+         TabIndex        =   24
          Top             =   2280
-         Width           =   1575
+         Width           =   615
+      End
+      Begin VB.Label Label1 
+         Alignment       =   1  'Right Justify
+         Caption         =   "密码"
+         BeginProperty Font 
+            Name            =   "宋体"
+            Size            =   10.5
+            Charset         =   134
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   5
+         Left            =   -72840
+         TabIndex        =   23
+         Top             =   1260
+         Width           =   615
       End
       Begin VB.Label Label1 
          Caption         =   "卡号："
@@ -499,7 +449,7 @@ Begin VB.Form FrmFuluke
          Height          =   255
          Index           =   2
          Left            =   -74640
-         TabIndex        =   14
+         TabIndex        =   11
          Top             =   720
          Width           =   735
       End
@@ -517,27 +467,9 @@ Begin VB.Form FrmFuluke
          Height          =   255
          Index           =   0
          Left            =   -74760
-         TabIndex        =   13
+         TabIndex        =   10
          Top             =   1260
          Width           =   855
-      End
-      Begin VB.Label Label3 
-         Caption         =   "发票号："
-         BeginProperty Font 
-            Name            =   "宋体"
-            Size            =   10.5
-            Charset         =   134
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   2
-         Left            =   -74760
-         TabIndex        =   12
-         Top             =   2505
-         Width           =   975
       End
       Begin VB.Label Label10 
          Caption         =   "售气次数："
@@ -553,7 +485,7 @@ Begin VB.Form FrmFuluke
          Height          =   255
          Index           =   1
          Left            =   -74760
-         TabIndex        =   11
+         TabIndex        =   9
          Top             =   1860
          Width           =   855
       End
@@ -572,7 +504,7 @@ Begin VB.Form FrmFuluke
          Height          =   255
          Index           =   1
          Left            =   3840
-         TabIndex        =   6
+         TabIndex        =   5
          Top             =   900
          Width           =   735
       End
@@ -590,7 +522,7 @@ Begin VB.Form FrmFuluke
          Height          =   255
          Index           =   0
          Left            =   960
-         TabIndex        =   5
+         TabIndex        =   4
          Top             =   900
          Width           =   735
       End
@@ -602,95 +534,40 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 '/底层动态库
-'///////////明华函数
-Private Declare Function ic_init Lib "MWIC_32" (ByVal port As Long, ByVal Baud As Long) As Long
-Private Declare Function ic_exit Lib "MWIC_32" (ByVal icDev As Long) As Long
-Private Declare Function csc_4442 Lib "MWIC_32" (ByVal icDev As Long, ByVal leng As Long, ByVal databuff As String) As Long
-Private Declare Function wsc_4442 Lib "MWIC_32" (ByVal icDev As Long, ByVal leng As Long, ByVal databuff As String) As Long
+'制作换表卡
+Private Declare Function Sle4442_MakeCard_Change Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long, ByVal pwd As Long) As Long
+'制作设置卡
+Private Declare Function Sle4442_MakeCard_Setting Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long, ByVal DataUserPWD As Long, ByVal DataManagePwd As Long, ByVal DataRestorePwd As Long, ByVal DataChangePWD As Long, ByVal AlarmNum As Long, ByVal MaxNum As Long, ByVal Minnum As Long) As Long
+'制作恢复卡
+Private Declare Function Sle4442_MakeCard_Restore Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long, ByVal DataRestorePwd As Long) As Long
+'制作管理卡
+Private Declare Function Sle4442_MakeCard_Manage Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long, ByVal DataManagePwd As String) As Long
+'制作清零卡
+Private Declare Function Sle4442_MakeCard_Clear Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long) As Long
+'制作用户卡
+Private Declare Function Sle4442_MakeCard_Consumer Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long, ByVal CardNumber As Long, ByVal QAmount As Long, ByVal DataUserPWD As Long, ByVal passwd As String) As Long
+'读用户卡
+Private Declare Function Sle4442_ReadCard Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long, ByRef cardType As Long, ByRef CardCode As Long, ByRef UsedNum As Long, ByRef MeterNum As Long, ByRef cardnum As Long, ByRef BuyCount As Long) As Long
+'写用户卡
+Private Declare Function Sle4442_WriteCard_Consumer Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long, ByVal CardNumber As Long, ByVal BuyCount As Long, ByVal QAmount As Long, ByVal passwd As String) As Long
+'清空卡
+Private Declare Function Sle4442_ClearCard Lib "FLK_Card" (ByVal port As Long, ByVal Baud As Long, ByVal passwd As String) As Long
 
-'///////////IC卡函数
-Private Declare Function rdcompany Lib "BGCard" (ByVal icDev As Long, isTrue As Byte) As Long
-Private Declare Function readCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, cardAmount As Single, meterAmount As Single, TestAmount As Single, inserted As Byte) As Long
-Private Declare Function makeCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, ByVal Amount As Single, ByVal saveInfo As String, ByVal mark As Byte) As Long
-Private Declare Function writeCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, ByVal Amount As Single, ByVal saveInfo As String) As Long
-Private Declare Function clearCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String) As Long
-Private Declare Function writetoolCard Lib "BGCard" (ByVal icDev As Long, ByVal WriteType As Long, ByVal TestAmount As Single, ByVal TestTimes As Long) As Long
-
-'////全局变量，保存返回信息
-Private Sub WriteInfo(s As String)
-    Open App.Path & "\saveinf.txt" For Output As #1
-    Print #1, s
-    Close #1
-End Sub
-
-Private Function ReadInfo() As String
-    Open App.Path & "\saveinf.txt" For Input As #1
-    Dim FileData As String
-    Input #1, FileData
-    ReadInfo = FileData
-    Close #1
-End Function
 
 Private Function ChengdeErr(ByVal err As Integer) As String
     ChengdeErr = "未知错误"
-    Select Case err
-        Case 1
-            ChengdeErr = "读卡数据是错误的"
-        Case 2
-            ChengdeErr = "没有这个用户"
-        Case 3
-            ChengdeErr = "加密数据出错"
-        Case 6
-            ChengdeErr = "负气量错误"
-        Case 9
-            ChengdeErr = "用户号和卡不对应"
-        Case 10
-            ChengdeErr = "写卡出错"
-        Case 11
-            ChengdeErr = "读卡出错"
-        Case 13
-            ChengdeErr = "用户号长度错误"
-        Case 14
-            ChengdeErr = "用户号字符非法"
-        Case 15
-            ChengdeErr = "用户号已存在"
-        Case 16
-            ChengdeErr = "非博冠卡"
-        Case 17
-            ChengdeErr = "校验卡密码错误"
-        Case 18
-            ChengdeErr = "数据错误"
-        Case 19
-            ChengdeErr = "IC卡已报废"
-        Case 20
-            ChengdeErr = "扣气量大于卡内存量错误"
-        Case 21
-            ChengdeErr = "非用户卡"
-        Case 22
-            ChengdeErr = "校验和错误"
-        Case 23
-            ChengdeErr = "气量超大"
-    End Select
 End Function
 '-----------------------------------------------------end-----------------------------------------------------
 
 Private Sub cmdBuy_Click()
-    Dim icDev As Long
-    Dim reVal As Long
-    Dim userCode As String * 8
-    Dim saveInfo As String * 16
+    Dim ret As Long
     
-    icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-    userCode = txtCardID1.Text
-    saveInfo = ReadInfo
-    reVal = writeCard(icDev, userCode, Val(txtAmount.Text), saveInfo)
-    If reVal = 0 Then
-        WriteInfo saveInfo
+    ret = Sle4442_WriteCard_Consumer(My_Commport - 1, 9600, Val(txtCardID1.Text), Val(txtCount.Text) + 1, Val(txtAmount.Text) * 10, "")
+    If ret = 0 Then
         MsgBox "售气成功。"
     Else
-        MsgBox "售气失败，错误:" & ChengdeErr(reVal)
+        MsgBox "售气失败，错误:" & ChengdeErr(ret)
     End If
-    ic_exit icDev
 End Sub
 
 Private Function CheckForMake() As Boolean
@@ -708,119 +585,98 @@ Private Function CheckForMake() As Boolean
 End Function
 
 Private Sub cmdMake_Click()
-    Dim icDev As Long
-    Dim reVal As Long
-    
-    Dim saveInfo As String * 16
+    Dim ret As Long
+    Dim password As String * 20
     
     If CheckForMake() Then
-        icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-        reVal = makeCard(icDev, txtCardID.Text, 0, saveInfo, 129)
-        If reVal = 0 Then
-            WriteInfo saveInfo
-            MsgBox "发卡成功"
+        ret = ret = Sle4442_MakeCard_Consumer(My_Commport - 1, 9600, Val(txtCardID.Text), 0, 123456, password)
+        If ret = 0 Then
+            MsgBox "发卡成功 请记住卡片密码: " & Trim(password)
         Else
-            MsgBox "发卡失败，错误:" & ChengdeErr(reVal)
+            MsgBox "发卡失败，错误:" & ChengdeErr(ret)
         End If
-        ic_exit icDev
-    End If
-End Sub
-
-Private Sub cmdRemake_Click()
-    Dim icDev As Long
-    Dim reVal As Long
-    Dim saveInfo As String * 16
-    
-    If CheckForMake() Then
-        icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-        saveInfo = ReadInfo
-        reVal = makeCard(icDev, txtCardID.Text, 0, saveInfo, 0)  '//mark=0 最后一次购气未输入到气表内，mark=1 最后一次购气已输入到表内
-        If reVal = 0 Then
-            WriteInfo saveInfo
-            MsgBox "补卡成功"
-        Else
-            MsgBox "补卡失败，错误:" & ChengdeErr(reVal)
-        End If
-        ic_exit icDev
     End If
 End Sub
 
 Private Sub cmdClear_Click()
-    Dim icDev As Long
-    Dim reVal As Long
-    Dim userCode As String * 8
-    
-    If CheckForMake() Then
-        icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-        userCode = txtCardID.Text
-        reVal = clearCard(icDev, userCode)
-        If reVal = 0 Then
-            MsgBox "清卡成功。"
-        Else
-            MsgBox "清卡失败，错误:" & ChengdeErr(reVal)
-        End If
-        ic_exit icDev
+    Dim ret As Long
+
+    ret = Sle4442_ClearCard(My_Commport - 1, 9600, "")
+    If ret = 0 Then
+        MsgBox "清卡成功。"
+    Else
+        MsgBox "清卡失败，错误:" & ChengdeErr(ret)
     End If
 End Sub
 
 Private Sub cmdRead_Click()
-    Dim icDev As Long
-    Dim reVal As Long
-    Dim userCode As String * 8
-    Dim cardAmount, meterAmount, TestAmount As Single
-    Dim inserted As Byte
-    Dim times As Long
+    Dim ret As Long
+    Dim cardType  As Long
+    Dim CardCode As Long
+    Dim UsedNum As Long ' ：已用气量          必须/10得到小数
+    Dim MeterNum As Long    '　：表中剩余气量    必须/10得到小数
+    Dim cardnum As Long    ' ： 卡总的剩余气量   必须/10得到小数
+    Dim BuyCount As Long ':       次数
     
-    icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-    reVal = readCard(icDev, userCode, cardAmount, meterAmount, TestAmount, inserted)
-    If reVal = 0 Then
-        Me.txtCardID1.Text = userCode
-        Me.txtAmount.Text = cardAmount
-        Me.List1.AddItem "卡号:" & userCode
-        Me.List1.AddItem "卡上余量:" & cardAmount
-        Me.List1.AddItem "表上余量:" & meterAmount
-        Me.List1.AddItem "测试用量:" & TestAmount
-        Me.List1.AddItem IIf(inserted = 0, "未", "已") & "在气表上插卡"
+    Me.List1.Clear
+    ret = Sle4442_ReadCard(My_Commport - 1, 9600, cardType, CardCode, usernum, MeterNum, cardnum, BuyCount)
+    If ret = 0 Then
+        If cardType = 5050 Then
+            Me.txtCardID1.Text = CardCode
+            Me.txtAmount.Text = cardnum / 10
+            Me.txtCount.Text = BuyCount
+            Me.List1.AddItem "卡号:" & CardCode
+            Me.List1.AddItem "卡上余量:" & cardnum / 10
+            Me.List1.AddItem "表上余量:" & MeterNum / 10
+            Me.List1.AddItem "已用气量:" & usenum / 10
+            Me.cmdBuy.Enabled = True
+        Else
+            Me.List1.AddItem "卡号:" & CardCode
+            Me.List1.AddItem "卡片类型：" & CardTypeStr(cardType)
+        End If
     Else
-        MsgBox "读卡失败，错误:" & ChengdeErr(reVal)
+        MsgBox "读卡失败，错误:" & ChengdeErr(ret)
     End If
-    ic_exit icDev
 End Sub
 
-Private Sub Option1_Click(Index As Integer)
-    txtTestAmount.Enabled = IIf(Index = 3, True, False)
-    txtTestCount.Enabled = IIf(Index = 3, True, False)
-End Sub
+Private Function CardTypeStr(ByVal cardType As Long) As String
+    Select Case cardType
+        Case 1010
+           CardTypeStr = "恢复卡"
+        Case 2020
+            CardTypeStr = "设置卡"
+        Case 3030
+            CardTypeStr = "管理卡"
+        Case 4040
+            CardTypeStr = "换表卡"
+        Case 5050
+            CardTypeStr = "用户卡"
+        Case 6060
+            CardTypeStr = "时间卡"
+        Case 7070
+            CardTypeStr = "测试卡"
+        Case 8080
+            CardTypeStr = "清零卡"
+    End Select
+End Function
 
 Private Sub CmdTool_Click(Index As Integer)
-    Dim icDev As Long
-    Dim reVal As Long
-    Dim WriteType As Long  '写工具卡类型*，其传入值见下面说明
-    Dim TestAmount As Single ' （in） 写测试卡用量 不大于100，写非测试卡时传入0
-    Dim TestTimes As Long '写测试卡可使用次数 不大于255，写非测试卡时传入0
-
-    icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-    If Option1(0).Value Then
-        reVal = writetoolCard(icDev, 5, 0, 0)
-    ElseIf Option1(1).Value Then
-        reVal = writetoolCard(icDev, 6, 0, 0)
-    ElseIf Option1(2).Value Then
-        reVal = writetoolCard(icDev, 7, 0, 0)
-    ElseIf Option1(3).Value Then
-        reVal = writetoolCard(icDev, 8, Val(txtTestAmount.Text), Val(txtTestCount.Text))
-    ElseIf Option1(4).Value Then
-        reVal = writetoolCard(icDev, 9, 0, 0)
-    ElseIf Option1(5).Value Then
-        reVal = writetoolCard(icDev, 10, 0, 0)
-    ElseIf Option1(6).Value Then
-        reVal = writetoolCard(icDev, 11, 0, 0)
+    Dim ret As Long
+    
+    If Option1(0).Value Then '制作清零卡
+        ret = Sle4442_MakeCard_Clear(My_Commport - 1, 9600)
+    ElseIf Option1(1).Value Then '制作恢复卡
+        ret = Sle4442_MakeCard_Restore(My_Commport - 1, 9600, Val(Me.txtDataRestorePwd.Text))
+    ElseIf Option1(2).Value Then '制作换表卡
+        ret = Sle4442_MakeCard_Change(My_Commport - 1, 9600, Val(Me.txtDataChangePWD.Text))
+    ElseIf Option1(3).Value Then '制作管理卡
+        ret = Sle4442_MakeCard_Manage(My_Commport - 1, 9600, Val(Me.txtDataManagePwd.Text))
     End If
-    If reVal = 0 Then
+    If ret = 0 Then
         MsgBox "发工具卡成功。"
     Else
-        MsgBox "发工具卡失败，错误:" & ChengdeErr(reVal)
+        MsgBox "发工具卡失败，错误:" & ChengdeErr(ret)
     End If
-    ic_exit icDev
 End Sub
 
 
