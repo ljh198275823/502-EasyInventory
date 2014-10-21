@@ -834,11 +834,10 @@ ByVal overlimit As Long, ByVal Control As Long, ByVal pErrMsg As String) As Long
 
 '设置用户卡参数
 Private Declare Function SetUserParameter Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal userNo As String, _
-ByVal AlarmValue As Long, ByVal overlimit As Long, ByVal Control As Long, ByVal pErrMsg As String) As Long
+ByVal AlarmValue As Long, ByVal overlimit As Long, ByVal Control As Long, ByVal pErrMsg As Long) As Long
 
 '清空卡
-Private Declare Function clearCard Lib "PC001" Alias "ClearCard" (ByVal port As Integer, ByVal Baud As Long, ByVal pErrMsg As String) As Long
-
+Private Declare Function clearCard Lib "PC001" Alias "ClearCard" (ByVal port As Integer, ByVal Baud As Long, ByVal pErrMsg As Long) As Long
 
 '-----------------------------------------------------end-----------------------------------------------------
 
@@ -916,13 +915,15 @@ End Sub
 
 Private Sub cmdClear_Click()
     Dim ret As Long
-    Dim pErrMsg As String * 10
+    Dim pErrMsg As String
+    Dim abc(1000) As Byte
     
-    ret = clearCard(My_Commport, CLng(9600), pErrMsg)
+    pErrMsg = Space(1024)
+    ret = clearCard(My_Commport, 9600, VarPtrArray(abc))
     If ret = 1 Then
         MsgBox "清卡成功"
     Else
-        MsgBox "清卡失败，错误:" & pErrMsg
+        'MsgBox "清卡失败，错误:" & pErrMsg
     End If
 End Sub
 
