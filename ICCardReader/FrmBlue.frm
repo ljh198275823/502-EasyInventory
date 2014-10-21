@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form FrmBlue 
-   Caption         =   "承德卡"
+   Caption         =   "蓝宝石"
    ClientHeight    =   6255
    ClientLeft      =   60
    ClientTop       =   345
@@ -36,61 +36,58 @@ Begin VB.Form FrmBlue
       Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "txtCardID"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).ControlCount=   6
+      Tab(0).Control(6)=   "rdHome"
+      Tab(0).Control(6).Enabled=   0   'False
+      Tab(0).Control(7)=   "rdIndustry"
+      Tab(0).Control(7).Enabled=   0   'False
+      Tab(0).ControlCount=   8
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmBlue.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "List1"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "cmdRead"
-      Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "cmdBuy"
-      Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "txtCardID1"
-      Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "txtAmount"
-      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(0)=   "Label10(1)"
+      Tab(1).Control(1)=   "Label3(2)"
+      Tab(1).Control(2)=   "Label10(0)"
+      Tab(1).Control(3)=   "Label1(2)"
+      Tab(1).Control(4)=   "txtCount"
       Tab(1).Control(5)=   "txtFPID"
-      Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "txtCount"
-      Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "Label1(2)"
-      Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "Label10(0)"
-      Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "Label3(2)"
-      Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "Label10(1)"
-      Tab(1).Control(10).Enabled=   0   'False
+      Tab(1).Control(6)=   "txtAmount"
+      Tab(1).Control(7)=   "txtCardID1"
+      Tab(1).Control(8)=   "cmdBuy"
+      Tab(1).Control(9)=   "cmdRead"
+      Tab(1).Control(10)=   "List1"
       Tab(1).ControlCount=   11
       TabCaption(2)   =   "工具卡"
       TabPicture(2)   =   "FrmBlue.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "txtTestCount"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Option1(5)"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Option1(0)"
-      Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "Option1(1)"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "Option1(2)"
-      Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "Option1(3)"
-      Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Option1(4)"
-      Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "CmdTool(0)"
-      Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "txtTestAmount"
-      Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Option1(6)"
-      Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "Label1(4)"
-      Tab(2).Control(10).Enabled=   0   'False
-      Tab(2).Control(11)=   "Label1(3)"
-      Tab(2).Control(11).Enabled=   0   'False
+      Tab(2).Control(0)=   "Label1(3)"
+      Tab(2).Control(1)=   "Label1(4)"
+      Tab(2).Control(2)=   "Option1(6)"
+      Tab(2).Control(3)=   "txtTestAmount"
+      Tab(2).Control(4)=   "CmdTool(0)"
+      Tab(2).Control(5)=   "Option1(4)"
+      Tab(2).Control(6)=   "Option1(3)"
+      Tab(2).Control(7)=   "Option1(2)"
+      Tab(2).Control(8)=   "Option1(1)"
+      Tab(2).Control(9)=   "Option1(0)"
+      Tab(2).Control(10)=   "Option1(5)"
+      Tab(2).Control(11)=   "txtTestCount"
       Tab(2).ControlCount=   12
+      Begin VB.OptionButton rdIndustry 
+         Caption         =   "工业用卡"
+         Height          =   195
+         Left            =   2880
+         TabIndex        =   31
+         Top             =   1530
+         Width           =   1335
+      End
+      Begin VB.OptionButton rdHome 
+         Caption         =   "家用卡"
+         Height          =   375
+         Left            =   1680
+         TabIndex        =   30
+         Top             =   1440
+         Width           =   975
+      End
       Begin VB.TextBox txtTestCount 
          Enabled         =   0   'False
          BeginProperty Font 
@@ -412,7 +409,7 @@ Begin VB.Form FrmBlue
          Height          =   495
          Left            =   840
          TabIndex        =   3
-         Top             =   3360
+         Top             =   4320
          Width           =   1095
       End
       Begin VB.CommandButton cmdRemake 
@@ -429,7 +426,7 @@ Begin VB.Form FrmBlue
          Height          =   495
          Left            =   2400
          TabIndex        =   2
-         Top             =   3360
+         Top             =   4320
          Width           =   1095
       End
       Begin VB.CommandButton cmdClear 
@@ -446,7 +443,7 @@ Begin VB.Form FrmBlue
          Height          =   495
          Left            =   3840
          TabIndex        =   1
-         Top             =   3360
+         Top             =   4320
          Width           =   1335
       End
       Begin VB.Label Label1 
@@ -602,74 +599,114 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 '/底层动态库
-'///////////明华函数
-Private Declare Function ic_init Lib "MWIC_32" (ByVal port As Long, ByVal Baud As Long) As Long
-Private Declare Function ic_exit Lib "MWIC_32" (ByVal icDev As Long) As Long
-Private Declare Function csc_4442 Lib "MWIC_32" (ByVal icDev As Long, ByVal leng As Long, ByVal databuff As String) As Long
-Private Declare Function wsc_4442 Lib "MWIC_32" (ByVal icDev As Long, ByVal leng As Long, ByVal databuff As String) As Long
+Private Type LtCardReader
+    dwDevType As Long  '本系统选2 2为明华RD系列（澳汉、明泰通用）
+    dwPort As Long
+    dwBaud As Long
+    dv_beep As Long
+    Reserved(3108) As Byte
+End Type
 
-'///////////IC卡函数
-Private Declare Function rdcompany Lib "BGCard" (ByVal icDev As Long, isTrue As Byte) As Long
-Private Declare Function readCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, cardAmount As Single, meterAmount As Single, TestAmount As Single, inserted As Byte) As Long
-Private Declare Function makeCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, ByVal Amount As Single, ByVal saveInfo As String, ByVal mark As Byte) As Long
-Private Declare Function writeCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String, ByVal Amount As Single, ByVal saveInfo As String) As Long
-Private Declare Function clearCard Lib "BGCard" (ByVal icDev As Long, ByVal userCode As String) As Long
-Private Declare Function writetoolCard Lib "BGCard" (ByVal icDev As Long, ByVal WriteType As Long, ByVal TestAmount As Single, ByVal TestTimes As Long) As Long
+Private Type LtMeterStrut
+    cbSize As Long
+    WriteBack As Long
+    TotalAmount As Currency
+    TotalMoney As Currency
+    RemainAmount As Currency
+    RemainMoney As Currency
+    RechargeTimes As Long
+    OverflowTimes As Long
+    MagnettismInterferedTimes As Long
+    Valve As Long
+    Battery As Long
+End Type
 
-'////全局变量，保存返回信息
-Private Sub WriteInfo(s As String)
-    Open App.Path & "\saveinf.txt" For Output As #1
-    Print #1, s
-    Close #1
-End Sub
+Private Type AdvancedSettingsStruct
+    cbSize As Long
+    WarnAmount As Currency
+    WarnMoney As Currency
+    AllowedOverdraftAmount As Currency
+    AllowedOverdraftMoney As Currency
+    ValveOffOnIdle As Long
+    ValveOffOnWarning As Long
+    ValveOffOnLowPower As Long
+End Type
 
-Private Function ReadInfo() As String
-    Open App.Path & "\saveinf.txt" For Input As #1
-    Dim FileData As String
-    Input #1, FileData
-    ReadInfo = FileData
-    Close #1
-End Function
+Private Type UserCard
+    cbSize As Long
+    CardNO As String * 40
+    UserNo As String * 40
+    RechargeTime As Long
+    RechargeAmount As Currency
+    RechargeMoney As Currency
+    StepPrice As String * 16
+    IssueTimes As Long
+    Reserved As Long
+    MecMeterType As Long
+    ExtraData As String * 256
+    pass As AdvancedSettingsStruct
+    Meter As LtMeterStrut
+End Type
 
-Private Function ChengdeErr(ByVal err As Integer) As String
+Private Type TypeInfo
+    TypeName As String
+    LicenseCode As String
+    ID As Long
+End Type
+'判断卡
+Private Declare Function CheckLibrary Lib "LtLBSHIC2013" (ByRef reader As LtCardReader, ByRef puc As UserCard, ByRef IsTrue) As Long
+'读卡
+Private Declare Function ReadUserCard Lib "LtLBSHIC2013" (ByRef reader As LtCardReader, ByRef puc As UserCard, ByRef t As TypeInfo) As Long
+
+'开卡 补卡
+Private Declare Function IssueUserCard Lib "LtLBSHIC2013" (ByRef reader As LtCardReader, ByRef puc As UserCard, ByRef t As TypeInfo) As Long
+
+'充气
+Private Declare Function RechargeUserCard Lib "LtLBSHIC2013" (ByRef reader As LtCardReader, ByRef puc As UserCard, ByRef t As TypeInfo) As Long
+'清空卡
+Private Declare Function RecycleUserCard Lib "LtLBSHIC2013" (ByRef reader As LtCardReader, ByRef puc As UserCard, ByRef t As TypeInfo) As Long
+'制作转移卡
+Private Declare Function IssueEDataTransCard Lib "LtLBSHIC2013" (ByRef reader As LtCardReader, ByRef puc As UserCard, ByRef t As TypeInfo) As Long
+
+Private Declare Function ToolCard Lib "LtLBSHIC2013" (ByRef reader As LtCardReader, ByRef puc As UserCard, ByRef t As TypeInfo, ByVal cardType As Long, ByVal lParam As String) As Long
+
+Private Function ChengdeErr(ByVal err As Long) As String
     ChengdeErr = "未知错误"
     Select Case err
-        Case 1
-            ChengdeErr = "读卡数据是错误的"
-        Case 2
-            ChengdeErr = "没有这个用户"
-        Case 3
-            ChengdeErr = "加密数据出错"
-        Case 6
-            ChengdeErr = "负气量错误"
-        Case 9
-            ChengdeErr = "用户号和卡不对应"
-        Case 10
-            ChengdeErr = "写卡出错"
-        Case 11
-            ChengdeErr = "读卡出错"
-        Case 13
-            ChengdeErr = "用户号长度错误"
-        Case 14
-            ChengdeErr = "用户号字符非法"
-        Case 15
-            ChengdeErr = "用户号已存在"
-        Case 16
-            ChengdeErr = "非博冠卡"
-        Case 17
-            ChengdeErr = "校验卡密码错误"
-        Case 18
-            ChengdeErr = "数据错误"
-        Case 19
-            ChengdeErr = "IC卡已报废"
-        Case 20
-            ChengdeErr = "扣气量大于卡内存量错误"
-        Case 21
+        Case &HC0000001
+            ChengdeErr = "通讯失败(读写器连接失败)"
+        Case &HC0000002
+            ChengdeErr = "读写器中无卡"
+        Case &HC0000003
+            ChengdeErr = "卡型错误(不是系统所要求的IC卡类型)"
+        Case &HC0000004
+            ChengdeErr = "卡已报废(密码错误计数为0)"
+        Case &HC0000005
+            ChengdeErr = "读数据出错"
+        Case &HC0000006
+            ChengdeErr = "写数据出错"
+        Case &HC0000009
+            ChengdeErr = "没有适合操作该卡的DLL"
+        Case &HC000000C
+            ChengdeErr = "无法识别的卡"
+        Case &HC000000D
+            ChengdeErr = "所需的功能未实现"
+        Case &HC000000F
+            ChengdeErr = "程序发生了异常"
+        Case &H40000001
+            ChengdeErr = "空白卡"
+        Case &H40000002
+            ChengdeErr = "非空白卡"
+        Case &H80000001
             ChengdeErr = "非用户卡"
-        Case 22
-            ChengdeErr = "校验和错误"
-        Case 23
-            ChengdeErr = "气量超大"
+        Case &H80000002
+            ChengdeErr = "卡密钥错误"
+        Case &H80000003
+            ChengdeErr = "购气量范围超限"
+        Case &H80000005
+            ChengdeErr = "参数取值超限"
+        Case &H80000006
+            ChengdeErr = "参数中的数据与卡上的数据不符（错误的用户卡）"
     End Select
 End Function
 '-----------------------------------------------------end-----------------------------------------------------
@@ -694,8 +731,8 @@ Private Sub cmdBuy_Click()
 End Sub
 
 Private Function CheckForMake() As Boolean
-    If Len(Me.txtCardID.Text) <> 8 Then
-        MsgBox "卡号不正确，应该为8位数字"
+    If Len(Me.txtCardID.Text) <> 10 Then
+        MsgBox "卡号不正确，应该为10位数字"
         CheckForMake = False
         Exit Function
     End If
@@ -704,25 +741,36 @@ Private Function CheckForMake() As Boolean
         CheckForMake = False
         Exit Function
     End If
+    If rdHome.Value = False And rdIndustry.Value = False Then
+        MsgBox "请选择用户类型"
+        Exit Function
+    End If
     CheckForMake = True
 End Function
 
+Private Sub CreateReader(ByRef reader As LtCardReader)
+    reader.dwBaud = 9600
+    reader.dwDevType = 2
+    reader.dwPort = My_Commport - 1
+End Sub
+
 Private Sub cmdMake_Click()
-    Dim icDev As Long
     Dim reVal As Long
-    
-    Dim saveInfo As String * 16
+    Dim reader As LtCardReader
+    Dim puc As UserCard
+    Dim t As TypeInfo
     
     If CheckForMake() Then
-        icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-        reVal = makeCard(icDev, txtCardID.Text, 0, saveInfo, 129)
+        Call CreateReader(reader)
+        puc.CardNO = txtCardID.Text
+        puc.UserNo = txtCardID.Text
+        puc.MecMeterType = IIf(rdHome.Value, 0, 1)
+        reVal = IssueUserCard(reader, puc, t)
         If reVal = 0 Then
-            WriteInfo saveInfo
             MsgBox "发卡成功"
         Else
             MsgBox "发卡失败，错误:" & ChengdeErr(reVal)
         End If
-        ic_exit icDev
     End If
 End Sub
 

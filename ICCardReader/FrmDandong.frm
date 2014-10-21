@@ -20,36 +20,43 @@ Begin VB.Form FrmDandong
       _ExtentY        =   9763
       _Version        =   393216
       Style           =   1
-      Tab             =   2
       TabHeight       =   520
       TabCaption(0)   =   "开/补卡"
       TabPicture(0)   =   "FrmDandong.frx":0000
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1(0)"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(1)"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "cmdClear"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "cmdRemake"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "cmdMake"
+      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "txtCardID"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "rdIndustry"
+      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "rdHome"
+      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).ControlCount=   8
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmDandong.frx":001C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "cmdBack"
-      Tab(1).Control(1)=   "List1"
-      Tab(1).Control(2)=   "cmdRead"
-      Tab(1).Control(3)=   "cmdBuy"
+      Tab(1).Control(0)=   "Label10(0)"
+      Tab(1).Control(1)=   "Label1(2)"
+      Tab(1).Control(2)=   "Label10(2)"
+      Tab(1).Control(3)=   "txtAmount"
       Tab(1).Control(4)=   "txtCardID1"
-      Tab(1).Control(5)=   "txtAmount"
-      Tab(1).Control(6)=   "Label10(2)"
-      Tab(1).Control(7)=   "Label1(2)"
-      Tab(1).Control(8)=   "Label10(0)"
+      Tab(1).Control(5)=   "cmdBuy"
+      Tab(1).Control(6)=   "cmdRead"
+      Tab(1).Control(7)=   "List1"
+      Tab(1).Control(8)=   "cmdBack"
       Tab(1).ControlCount=   9
       TabCaption(2)   =   "工具卡"
       TabPicture(2)   =   "FrmDandong.frx":0038
-      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Label10(3)"
       Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Label10(4)"
@@ -79,7 +86,7 @@ Begin VB.Form FrmDandong
       Tab(2).ControlCount=   13
       Begin VB.TextBox txtInputValue 
          Height          =   375
-         Left            =   2280
+         Left            =   -72720
          TabIndex        =   29
          Text            =   "0"
          Top             =   1560
@@ -87,7 +94,7 @@ Begin VB.Form FrmDandong
       End
       Begin VB.TextBox txtControlValue 
          Height          =   375
-         Left            =   5040
+         Left            =   -69960
          TabIndex        =   28
          Text            =   "0"
          Top             =   1560
@@ -95,7 +102,7 @@ Begin VB.Form FrmDandong
       End
       Begin VB.TextBox txtAlarmValue 
          Height          =   375
-         Left            =   5040
+         Left            =   -69960
          TabIndex        =   27
          Text            =   "0"
          Top             =   1080
@@ -103,7 +110,7 @@ Begin VB.Form FrmDandong
       End
       Begin VB.TextBox txtFrontGas 
          Height          =   375
-         Left            =   2280
+         Left            =   -72720
          TabIndex        =   26
          Text            =   "0"
          Top             =   1080
@@ -130,7 +137,7 @@ Begin VB.Form FrmDandong
       Begin VB.OptionButton rdHome 
          Caption         =   "家用卡"
          Height          =   375
-         Left            =   -73320
+         Left            =   1680
          TabIndex        =   20
          Top             =   1440
          Width           =   975
@@ -138,7 +145,7 @@ Begin VB.Form FrmDandong
       Begin VB.OptionButton rdIndustry 
          Caption         =   "工业用卡"
          Height          =   195
-         Left            =   -72120
+         Left            =   2880
          TabIndex        =   19
          Top             =   1530
          Width           =   1335
@@ -156,7 +163,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   495
          Index           =   0
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   18
          Top             =   600
          Width           =   2775
@@ -174,7 +181,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   495
          Index           =   1
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   17
          Top             =   1980
          Value           =   -1  'True
@@ -193,7 +200,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   495
          Index           =   2
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   16
          Top             =   2520
          Width           =   975
@@ -211,7 +218,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   495
          Index           =   3
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   15
          Top             =   3000
          Width           =   975
@@ -230,7 +237,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   495
          Index           =   0
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   14
          Top             =   4680
          Width           =   1815
@@ -324,7 +331,7 @@ Begin VB.Form FrmDandong
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73320
+         Left            =   1680
          TabIndex        =   4
          Top             =   840
          Width           =   2055
@@ -341,7 +348,7 @@ Begin VB.Form FrmDandong
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -74160
+         Left            =   840
          TabIndex        =   3
          Top             =   3360
          Width           =   1095
@@ -358,7 +365,7 @@ Begin VB.Form FrmDandong
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -72600
+         Left            =   2400
          TabIndex        =   2
          Top             =   3360
          Width           =   1095
@@ -375,7 +382,7 @@ Begin VB.Form FrmDandong
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   1
          Top             =   3360
          Width           =   1335
@@ -394,7 +401,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   255
          Index           =   6
-         Left            =   1320
+         Left            =   -73680
          TabIndex        =   30
          Top             =   1140
          Width           =   855
@@ -413,7 +420,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   255
          Index           =   5
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   25
          Top             =   1620
          Width           =   1095
@@ -432,7 +439,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   255
          Index           =   4
-         Left            =   1320
+         Left            =   -73680
          TabIndex        =   24
          Top             =   1620
          Width           =   855
@@ -451,7 +458,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   255
          Index           =   3
-         Left            =   4080
+         Left            =   -70920
          TabIndex        =   23
          Top             =   1140
          Width           =   855
@@ -528,7 +535,7 @@ Begin VB.Form FrmDandong
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   1
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   6
          Top             =   900
          Width           =   735
@@ -546,7 +553,7 @@ Begin VB.Form FrmDandong
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   -74040
+         Left            =   960
          TabIndex        =   5
          Top             =   900
          Width           =   735
