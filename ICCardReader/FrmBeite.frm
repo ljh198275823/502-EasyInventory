@@ -916,10 +916,9 @@ End Sub
 Private Sub cmdClear_Click()
     Dim ret As Long
     Dim pErrMsg As String
-    Dim abc(1000) As Byte
     
     pErrMsg = Space(1024)
-    ret = clearCard(My_Commport, 9600, VarPtrArray(abc))
+    ret = clearCard(My_Commport, 9600, pErrMsg)
     If ret = 1 Then
         MsgBox "Çå¿¨³É¹¦"
     Else

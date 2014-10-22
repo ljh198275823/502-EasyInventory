@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form FrmGoldCard 
-   Caption         =   "承德卡"
+   Caption         =   "浙江金卡"
    ClientHeight    =   6255
    ClientLeft      =   60
    ClientTop       =   345
@@ -319,8 +319,13 @@ Private Sub cmdRead_Click()
     Dim viklx As Integer
     Dim msg As String * 50
     
+    Call CheckReadCount
+    Call IncreaseReadCount
+    
     ret = Gold_Readcard(My_Commport - 1, 9600, userNo, vlql, vics, viklx) '串口号0开始，所以要减一
     If ret = 0 Then
+        Call CheckReadCount
+        Call IncreaseReadCount
         Me.txtCardID1.Text = userCode
         Me.txtAmount.Text = vlql
         Me.txtCount.Text = vics

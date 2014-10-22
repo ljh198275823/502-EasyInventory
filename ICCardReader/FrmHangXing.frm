@@ -20,69 +20,64 @@ Begin VB.Form FrmHangXing
       _ExtentY        =   9763
       _Version        =   393216
       Style           =   1
+      Tab             =   1
       TabHeight       =   520
       TabCaption(0)   =   "开/补卡"
       TabPicture(0)   =   "FrmHangXing.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Label1(0)"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(1)"
-      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "cmdClear"
-      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "cmdRemake"
-      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "cmdMake"
-      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "txtCardID"
-      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "rdHome"
-      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "rdIndustry"
-      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).ControlCount=   8
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmHangXing.frx":001C
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "List1"
-      Tab(1).Control(1)=   "cmdRead"
-      Tab(1).Control(2)=   "cmdBuy"
-      Tab(1).Control(3)=   "cmdBuqi"
-      Tab(1).Control(4)=   "CmdBack"
-      Tab(1).Control(5)=   "txtCardID1"
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "Label10(1)"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "Label3(2)"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "Label10(0)"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(3)=   "Label1(2)"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "txtCount"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "txtFPID"
+      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "txtAmount"
-      Tab(1).Control(7)=   "txtFPID"
-      Tab(1).Control(8)=   "txtCount"
-      Tab(1).Control(9)=   "Label1(2)"
-      Tab(1).Control(10)=   "Label10(0)"
-      Tab(1).Control(11)=   "Label3(2)"
-      Tab(1).Control(12)=   "Label10(1)"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(7)=   "txtCardID1"
+      Tab(1).Control(7).Enabled=   0   'False
+      Tab(1).Control(8)=   "CmdBack"
+      Tab(1).Control(8).Enabled=   0   'False
+      Tab(1).Control(9)=   "cmdBuqi"
+      Tab(1).Control(9).Enabled=   0   'False
+      Tab(1).Control(10)=   "cmdBuy"
+      Tab(1).Control(10).Enabled=   0   'False
+      Tab(1).Control(11)=   "cmdRead"
+      Tab(1).Control(11).Enabled=   0   'False
+      Tab(1).Control(12)=   "List1"
+      Tab(1).Control(12).Enabled=   0   'False
       Tab(1).ControlCount=   13
       TabCaption(2)   =   "工具卡"
       TabPicture(2)   =   "FrmHangXing.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Text4"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Option1(5)"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Text12"
-      Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "Text11"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "CmdTool(0)"
-      Tab(2).Control(4).Enabled=   0   'False
+      Tab(2).Control(0)=   "CmdTool(1)"
+      Tab(2).Control(1)=   "Option1(0)"
+      Tab(2).Control(2)=   "Option1(1)"
+      Tab(2).Control(3)=   "Option1(2)"
+      Tab(2).Control(4)=   "Option1(3)"
       Tab(2).Control(5)=   "Option1(4)"
-      Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Option1(3)"
-      Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "Option1(2)"
-      Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "Option1(1)"
-      Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Option1(0)"
-      Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "CmdTool(1)"
-      Tab(2).Control(10).Enabled=   0   'False
+      Tab(2).Control(6)=   "CmdTool(0)"
+      Tab(2).Control(7)=   "Text11"
+      Tab(2).Control(8)=   "Text12"
+      Tab(2).Control(9)=   "Option1(5)"
+      Tab(2).Control(10)=   "Text4"
       Tab(2).ControlCount=   11
       Begin VB.CommandButton CmdTool 
          Caption         =   "发工业表工具卡"
@@ -283,7 +278,7 @@ Begin VB.Form FrmHangXing
          Appearance      =   0  'Flat
          Height          =   2175
          ItemData        =   "FrmHangXing.frx":0054
-         Left            =   -71280
+         Left            =   3720
          List            =   "FrmHangXing.frx":0056
          TabIndex        =   21
          Top             =   660
@@ -301,7 +296,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   20
          Top             =   3840
          Width           =   1095
@@ -319,7 +314,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -72480
+         Left            =   2520
          TabIndex        =   19
          Top             =   3840
          Width           =   1095
@@ -337,7 +332,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -71040
+         Left            =   3960
          TabIndex        =   18
          Top             =   3840
          Width           =   1095
@@ -355,7 +350,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -69720
+         Left            =   5280
          TabIndex        =   17
          Top             =   3840
          Width           =   1095
@@ -371,7 +366,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   12
          Top             =   660
          Width           =   2175
@@ -387,7 +382,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   11
          Top             =   1200
          Width           =   2175
@@ -403,7 +398,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   450
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   10
          Top             =   2400
          Width           =   2175
@@ -419,7 +414,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   9
          Top             =   1800
          Width           =   2175
@@ -427,7 +422,7 @@ Begin VB.Form FrmHangXing
       Begin VB.OptionButton rdIndustry 
          Caption         =   "工业用卡"
          Height          =   195
-         Left            =   3000
+         Left            =   -72000
          TabIndex        =   8
          Top             =   1770
          Width           =   1335
@@ -435,7 +430,7 @@ Begin VB.Form FrmHangXing
       Begin VB.OptionButton rdHome 
          Caption         =   "家用卡"
          Height          =   375
-         Left            =   1800
+         Left            =   -73200
          TabIndex        =   7
          Top             =   1680
          Width           =   975
@@ -451,7 +446,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   1680
+         Left            =   -73320
          TabIndex        =   4
          Top             =   840
          Width           =   2055
@@ -468,7 +463,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   840
+         Left            =   -74160
          TabIndex        =   3
          Top             =   3360
          Width           =   1095
@@ -485,7 +480,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   2400
+         Left            =   -72600
          TabIndex        =   2
          Top             =   3360
          Width           =   1095
@@ -502,7 +497,7 @@ Begin VB.Form FrmHangXing
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   1
          Top             =   3360
          Width           =   1335
@@ -520,7 +515,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   16
          Top             =   720
          Width           =   735
@@ -538,7 +533,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   15
          Top             =   1260
          Width           =   855
@@ -556,7 +551,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   14
          Top             =   2505
          Width           =   975
@@ -574,7 +569,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   13
          Top             =   1860
          Width           =   855
@@ -593,7 +588,7 @@ Begin VB.Form FrmHangXing
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   1
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   6
          Top             =   900
          Width           =   735
@@ -611,7 +606,7 @@ Begin VB.Form FrmHangXing
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   5
          Top             =   900
          Width           =   735
@@ -749,7 +744,7 @@ End Function
 
 
 
-Private Sub CmdBack_Click()
+Private Sub cmdBack_Click()
     If Card_Type = 10 Then
         Ht = Write_CardBuy(Str_Commport, 1, 0, Str_QuID, 4)
     Else
@@ -761,7 +756,7 @@ Private Sub CmdBack_Click()
     End If
     cmdBuy.Enabled = False
     cmdBuqi.Enabled = False
-    CmdBack.Enabled = False
+    cmdBack.Enabled = False
 End Sub
 
 Private Sub cmdBuqi_Click()
@@ -776,7 +771,7 @@ Private Sub cmdBuqi_Click()
     End If
     cmdBuy.Enabled = False
     cmdBuqi.Enabled = False
-    CmdBack.Enabled = False
+    cmdBack.Enabled = False
 End Sub
 
 Private Sub cmdBuy_Click()
@@ -796,7 +791,7 @@ Private Sub cmdBuy_Click()
     End If
     cmdBuy.Enabled = False
     cmdBuqi.Enabled = False
-    CmdBack.Enabled = False
+    cmdBack.Enabled = False
 End Sub
 
 Private Sub Form_Load()
@@ -947,6 +942,8 @@ Private Sub cmdRead_Click()
     cmdBuy.Enabled = False
     st = Read_CardType(Str_Commport, 0, Int_CardType)
     If st < 0 Then GoTo ReadFail
+    Call CheckReadCount
+    Call IncreaseReadCount
     List1.Clear
     List1.AddItem "卡的类型：" & str_CardType(Int_CardType)
     Select Case Int_CardType
@@ -990,7 +987,7 @@ Private Sub cmdRead_Click()
               cmdBuy.Enabled = True
             End If
             cmdBuqi.Enabled = True
-            CmdBack.Enabled = True
+            cmdBack.Enabled = True
         Case 31
           st = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
           If st < 0 Then GoTo ReadFail

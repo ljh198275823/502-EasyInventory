@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form FrmFuluke 
-   Caption         =   "承德卡"
+   Caption         =   "福禄克"
    ClientHeight    =   6255
    ClientLeft      =   60
    ClientTop       =   345
@@ -39,23 +39,14 @@ Begin VB.Form FrmFuluke
       TabPicture(1)   =   "FrmFuluke.frx":001C
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Label10(1)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label10(0)"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "Label1(2)"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "txtCount"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "txtAmount"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "txtCardID1"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "cmdBuy"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).Control(7)=   "cmdRead"
-      Tab(1).Control(7).Enabled=   0   'False
       Tab(1).Control(8)=   "List1"
-      Tab(1).Control(8).Enabled=   0   'False
       Tab(1).ControlCount=   9
       TabCaption(2)   =   "工具卡"
       TabPicture(2)   =   "FrmFuluke.frx":0038

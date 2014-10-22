@@ -20,26 +20,21 @@ Begin VB.Form FrmChengde
       _ExtentY        =   9763
       _Version        =   393216
       Style           =   1
+      Tab             =   1
       TabHeight       =   520
       TabCaption(0)   =   "开/补卡"
       TabPicture(0)   =   "FrmChengde.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(0)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label1(1)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "cmdClear"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "cmdRemake"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "cmdMake"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "txtCardID"
-      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "txtCardID"
+      Tab(0).Control(1)=   "cmdMake"
+      Tab(0).Control(2)=   "cmdRemake"
+      Tab(0).Control(3)=   "cmdClear"
+      Tab(0).Control(4)=   "Label1(1)"
+      Tab(0).Control(5)=   "Label1(0)"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmChengde.frx":001C
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "Label10(1)"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label3(2)"
@@ -66,30 +61,18 @@ Begin VB.Form FrmChengde
       TabCaption(2)   =   "工具卡"
       TabPicture(2)   =   "FrmChengde.frx":0038
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label1(3)"
-      Tab(2).Control(0).Enabled=   0   'False
-      Tab(2).Control(1)=   "Label1(4)"
-      Tab(2).Control(1).Enabled=   0   'False
-      Tab(2).Control(2)=   "Option1(6)"
-      Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "txtTestAmount"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "CmdTool(0)"
-      Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "Option1(4)"
-      Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).Control(6)=   "Option1(3)"
-      Tab(2).Control(6).Enabled=   0   'False
-      Tab(2).Control(7)=   "Option1(2)"
-      Tab(2).Control(7).Enabled=   0   'False
-      Tab(2).Control(8)=   "Option1(1)"
-      Tab(2).Control(8).Enabled=   0   'False
-      Tab(2).Control(9)=   "Option1(0)"
-      Tab(2).Control(9).Enabled=   0   'False
-      Tab(2).Control(10)=   "Option1(5)"
-      Tab(2).Control(10).Enabled=   0   'False
-      Tab(2).Control(11)=   "txtTestCount"
-      Tab(2).Control(11).Enabled=   0   'False
+      Tab(2).Control(0)=   "txtTestCount"
+      Tab(2).Control(1)=   "Option1(5)"
+      Tab(2).Control(2)=   "Option1(0)"
+      Tab(2).Control(3)=   "Option1(1)"
+      Tab(2).Control(4)=   "Option1(2)"
+      Tab(2).Control(5)=   "Option1(3)"
+      Tab(2).Control(6)=   "Option1(4)"
+      Tab(2).Control(7)=   "CmdTool(0)"
+      Tab(2).Control(8)=   "txtTestAmount"
+      Tab(2).Control(9)=   "Option1(6)"
+      Tab(2).Control(10)=   "Label1(4)"
+      Tab(2).Control(11)=   "Label1(3)"
       Tab(2).ControlCount=   12
       Begin VB.TextBox txtTestCount 
          Enabled         =   0   'False
@@ -276,7 +259,7 @@ Begin VB.Form FrmChengde
          Appearance      =   0  'Flat
          Height          =   2175
          ItemData        =   "FrmChengde.frx":0054
-         Left            =   -71280
+         Left            =   3720
          List            =   "FrmChengde.frx":0056
          TabIndex        =   17
          Top             =   660
@@ -294,7 +277,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   16
          Top             =   3840
          Width           =   1095
@@ -312,7 +295,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -72480
+         Left            =   2520
          TabIndex        =   15
          Top             =   3840
          Width           =   1095
@@ -329,7 +312,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   10
          Top             =   660
          Width           =   2175
@@ -345,7 +328,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   9
          Top             =   1200
          Width           =   2175
@@ -361,7 +344,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   450
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   8
          Top             =   2400
          Width           =   2175
@@ -377,7 +360,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   7
          Top             =   1800
          Width           =   2175
@@ -393,7 +376,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   1680
+         Left            =   -73320
          TabIndex        =   4
          Top             =   840
          Width           =   2055
@@ -410,7 +393,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   840
+         Left            =   -74160
          TabIndex        =   3
          Top             =   3360
          Width           =   1095
@@ -427,7 +410,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   2400
+         Left            =   -72600
          TabIndex        =   2
          Top             =   3360
          Width           =   1095
@@ -444,7 +427,7 @@ Begin VB.Form FrmChengde
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   1
          Top             =   3360
          Width           =   1335
@@ -498,7 +481,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   14
          Top             =   720
          Width           =   735
@@ -516,7 +499,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   13
          Top             =   1260
          Width           =   855
@@ -534,7 +517,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   12
          Top             =   2505
          Width           =   975
@@ -552,7 +535,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   11
          Top             =   1860
          Width           =   855
@@ -571,7 +554,7 @@ Begin VB.Form FrmChengde
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   1
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   6
          Top             =   900
          Width           =   735
@@ -589,7 +572,7 @@ Begin VB.Form FrmChengde
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   5
          Top             =   900
          Width           =   735
@@ -774,6 +757,8 @@ Private Sub cmdRead_Click()
     icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
     reVal = readCard(icDev, userCode, cardAmount, meterAmount, TestAmount, inserted)
     If reVal = 0 Then
+        Call CheckReadCount
+        Call IncreaseReadCount
         Me.txtCardID1.Text = userCode
         Me.txtAmount.Text = cardAmount
         Me.List1.AddItem "卡号:" & userCode

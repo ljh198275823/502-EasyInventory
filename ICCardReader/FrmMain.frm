@@ -106,7 +106,7 @@ Private Sub MDIForm_Load()
     Dim strTemp As String
     strTemp = GetIniStr("Reader", "Commport")
     My_Commport = Val(strTemp)
-    
+
     Set frmHx = New FrmHangXing
     Set frmCd = New FrmChengde
     Set frmGold = New FrmGoldCard
@@ -129,18 +129,25 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Caption
         Case "º½ÐÇ¿¨"
+            frmHx.SSTab1.Tab = 1
             Call SetParent(frmHx.SSTab1.hWnd, Me.Picture1.hWnd)
         Case "³ÐµÂ¿¨"
+            frmCd.SSTab1.Tab = 1
             Call SetParent(frmCd.SSTab1.hWnd, Me.Picture1.hWnd)
         Case "Õã½­½ð¿¨"
+            frmGold.SSTab1.Tab = 0
             Call SetParent(frmGold.SSTab1.hWnd, Me.Picture1.hWnd)
         Case "Õã½­±´ÌØ"
+            frmBt.SSTab1.Tab = 1
             Call SetParent(frmBt.SSTab1.hWnd, Me.Picture1.hWnd)
         Case "µ¤¶«¿¨"
+            frmDd.SSTab1.Tab = 1
             Call SetParent(frmDd.SSTab1.hWnd, Me.Picture1.hWnd)
         Case "¸£Â»¿Ë"
+            frmfu.SSTab1.Tab = 1
             Call SetParent(frmfu.SSTab1.hWnd, Me.Picture1.hWnd)
         Case "À¶±¦Ê¯"
+            frmbs.SSTab1.Tab = 1
             Call SetParent(frmbs.SSTab1.hWnd, Me.Picture1.hWnd)
         Case "ÉèÖÃ"
             FrmSetting.Show vbModal

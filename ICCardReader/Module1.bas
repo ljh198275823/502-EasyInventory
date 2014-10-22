@@ -1,6 +1,7 @@
 Attribute VB_Name = "Module1"
 
 Public My_Commport As Integer
+Public ReadCount As Integer
 
 Private Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
 Private Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpString As Any, ByVal lpFileName As String) As Long
@@ -23,6 +24,18 @@ GetIniStrErr:
     GetIniStr = ""
     GetStr = ""
 End Function
+
+Public Sub IncreaseReadCount()
+    ReadCount = ReadCount + 1
+End Sub
+
+Public Sub CheckReadCount()
+    If ReadCount > 10 Then
+        MsgBox "试用版读卡次数为10次，软件自动关闭"
+        End
+    End If
+End Sub
+
 
 Public Function WriteIniStr(ByVal AppName As String, ByVal In_Key As String, ByVal In_Data As String) As Boolean
 On Error GoTo WriteIniStrErr
