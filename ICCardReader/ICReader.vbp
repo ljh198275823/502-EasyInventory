@@ -18,6 +18,7 @@ Form=FrmBlue.frm
 Form=FrmSetting.frm
 Form=FrmCardReader.frm
 Class=HangXing; HangXing.cls
+Class=GoldCard; GoldCard.cls
 Startup="FrmCardReader"
 HelpFile=""
 ExeName32="ICReader.exe"

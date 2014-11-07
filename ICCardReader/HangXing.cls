@@ -93,7 +93,6 @@ Private Function IcErrMsg(ByVal intErrCode As Integer) As String
           Str_Err = "数据超限"
         Case -13
           Str_Err = "卡已经损坏"
-       
         Case -100
           Str_Err = "未知错误"
          Case -101
@@ -138,6 +137,15 @@ Private Sub Class_Initialize()
     Str_Commport = "COM" & My_Commport
 End Sub
 
+Public Function IsMycard() As Boolean
+    Dim FInt_CardType As Long
+       
+    Ht = Read_CardType(Str_Commport, 0, FInt_CardType)
+    If Ht < 0 Then Exit Function
+    If FInt_CardType <> 70 Then
+        IsMycard = True
+    End If
+End Function
 
 Public Sub Back()  '退气
     If Card_Type = 10 Then
@@ -179,8 +187,8 @@ Public Sub Buy()  '购气
       MsgBox IcErrMsg(Ht)
       Exit Sub
     End If
-    st = Write_FPID(Str_Commport, 1, Trim(FrmCardReader.txtFPID.Text))
-    If st < 0 Then
+    Ht = Write_FPID(Str_Commport, 1, Trim(FrmCardReader.txtFPID.Text))
+    If Ht < 0 Then
       MsgBox IcErrMsg(st), vbExclamation, Title
       Exit Sub
     End If
@@ -225,7 +233,7 @@ Public Sub MakeCard()  '发卡
         Else
             Ht = Write_CardBuy_01(Str_Commport, 1, 0, Str_QuID, 1)
         End If
-        If st < 0 Then
+        If Ht < 0 Then
           MsgBox IcErrMsg(st), vbExclamation, Title
           Exit Sub
         End If
@@ -250,7 +258,7 @@ Public Sub RemakeCard() '补卡
         Else
             Ht = Write_CardBuy_01(Str_Commport, 1, 0, Str_QuID, 3)
         End If
-        If st < 0 Then
+        If Ht < 0 Then
           MsgBox IcErrMsg(st), vbExclamation, Title
           Exit Sub
         End If
@@ -270,8 +278,8 @@ Public Sub ClearCard() '清除卡片
     FStr_CityNum = Space(4)
     Str_type1 = Space(4)
        
-    st = Read_CardType(Str_Commport, 0, FInt_CardType)
-    If (st < 0) And (st <> -14) Then
+    Ht = Read_CardType(Str_Commport, 0, FInt_CardType)
+    If (Ht < 0) And (Ht <> -14) Then
         MsgBox IcErrMsg(st), vbExclamation, Title
         Exit Sub
      End If
@@ -279,12 +287,12 @@ Public Sub ClearCard() '清除卡片
     Select Case FInt_CardType
         Case 10, 90 ' 用户卡
             Card_Type = FInt_CardType
-            st = Read_UserCard(Str_Commport, 0, Fstr_UserID, FStr_CityNum, Str_type1)
+            Ht = Read_UserCard(Str_Commport, 0, Fstr_UserID, FStr_CityNum, Str_type1)
             Str_CardNum1 = Fstr_UserID
             msg = MsgBox(str_CardType(FInt_CardType) & "要擦除吗？", vbOKCancel + vbQuestion + vbDefaultButton2, "擦除提示：")
             If msg = vbOK Then
-                st = Write_BackCard(Str_Commport, 1, Str_CardNum1)
-                If st < 0 Then
+                Ht = Write_BackCard(Str_Commport, 1, Str_CardNum1)
+                If Ht < 0 Then
                     MsgBox IcErrMsg(st), vbExclamation, Title
                     Exit Sub
                 End If
@@ -294,8 +302,8 @@ Public Sub ClearCard() '清除卡片
             Str_CardNum1 = "000000"
             msg = MsgBox(str_CardType(FInt_CardType) & "要擦除吗？", vbOKCancel + vbQuestion + vbDefaultButton2, "擦除提示：")
             If msg = vbOK Then
-                st = Write_BackCard(Str_Commport, 1, Str_CardNum1)
-                If st < 0 Then
+                Ht = Write_BackCard(Str_Commport, 1, Str_CardNum1)
+                If Ht < 0 Then
                     MsgBox IcErrMsg(st), vbExclamation, Title
                     Exit Sub
                 End If
@@ -330,36 +338,36 @@ Public Sub Read() '读卡
     fstr_FP = Space(10)
     
     FrmCardReader.cmdBuy.Enabled = False
-    st = Read_CardType(Str_Commport, 0, Int_CardType)
-    If st < 0 Then GoTo ReadFail
+    Ht = Read_CardType(Str_Commport, 0, Int_CardType)
+    If Ht < 0 Then GoTo ReadFail
     Call CheckReadCount
     Call IncreaseReadCount
     FrmCardReader.List1.Clear
     FrmCardReader.List1.AddItem "卡的类型：" & str_CardType(Int_CardType)
     Select Case Int_CardType
         Case 10, 90
-            st = Read_UserCard(Str_Commport, 0, Fstr_UserID, FStr_CityNum, Str_type)
-            If st < 0 Then GoTo ReadFail
+            Ht = Read_UserCard(Str_Commport, 0, Fstr_UserID, FStr_CityNum, Str_type)
+            If Ht < 0 Then GoTo ReadFail
             FrmCardReader.List1.AddItem "卡号：" & Fstr_UserID
             FrmCardReader.txtCardID1.Text = Fstr_UserID
             If Int_CardType = 10 Then
-                st = Read_CardBuy(Str_Commport, 0, Str_Flag, FR_BuyNum, Int_Count, Str_QYID)
+                Ht = Read_CardBuy(Str_Commport, 0, Str_Flag, FR_BuyNum, Int_Count, Str_QYID)
             Else
-                st = Read_CardBuy_01(Str_Commport, 0, Str_Flag, FR_BuyNum, Int_Count, Str_QYID)
+                Ht = Read_CardBuy_01(Str_Commport, 0, Str_Flag, FR_BuyNum, Int_Count, Str_QYID)
             End If
-            If st < 0 Then GoTo ReadFail
+            If Ht < 0 Then GoTo ReadFail
             FrmCardReader.txtAmount.Text = FR_BuyNum
             FrmCardReader.txtCount.Text = Int_Count
-            st = Read_FPID(Str_Commport, 0, fstr_FP) '发票号
-            If st < 0 Then GoTo ReadFail
+            Ht = Read_FPID(Str_Commport, 0, fstr_FP) '发票号
+            If Ht < 0 Then GoTo ReadFail
             FrmCardReader.txtFPID.Text = Format(Val(fstr_FP) + 1, "0000000000")
             If Int_CardType = 10 Then
-                st = Read_BackNum(Str_Commport, 0, D_SYNum1, D_LJNum1)
+                Ht = Read_BackNum(Str_Commport, 0, D_SYNum1, D_LJNum1)
             Else
-                st = Read_BackNum_01(Str_Commport, 0, D_SYNum1, D_LJNum1)
+                Ht = Read_BackNum_01(Str_Commport, 0, D_SYNum1, D_LJNum1)
             End If
-            st = Read_BackNum(Str_Commport, 0, D_SYNum1, D_LJNum1)
-            If st < 0 Then GoTo ReadFail
+            Ht = Read_BackNum(Str_Commport, 0, D_SYNum1, D_LJNum1)
+            If Ht < 0 Then GoTo ReadFail
             If Str_Flag = 11 Then
               FrmCardReader.List1.AddItem "卡的状态：新卡(未用)"
               FrmCardReader.List1.AddItem "购买量(立方米)：" & Format(FR_BuyNum, "##0.00")
@@ -379,24 +387,24 @@ Public Sub Read() '读卡
             FrmCardReader.cmdBuqi.Enabled = True
             FrmCardReader.CmdBack.Enabled = True
         Case 31
-          st = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
-          If st < 0 Then GoTo ReadFail
+          Ht = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
+          If Ht < 0 Then GoTo ReadFail
           FrmCardReader.List1.AddItem "要转的数据(家用表)：" & Format(FR_BuyNum, "##0.00")
         Case 40
-          st = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
-          If st < 0 Then GoTo ReadFail
+          Ht = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
+          If Ht < 0 Then GoTo ReadFail
           FrmCardReader.List1.AddItem "累计量：" & Format(FR_BuyNum, "##0.00")
         Case 50
-          st = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
-          If st < 0 Then GoTo ReadFail
+          Ht = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
+          If Ht < 0 Then GoTo ReadFail
           FrmCardReader.List1.AddItem "限时天数(天)：" & FR_BuyNum
         Case 41
-          st = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
-          If st < 0 Then GoTo ReadFail
+          Ht = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
+          If Ht < 0 Then GoTo ReadFail
           FrmCardReader.List1.AddItem "数据量：" & Format(FR_BuyNum, "0.00")
         Case 51
-          st = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
-          If st < 0 Then GoTo ReadFail
+          Ht = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
+          If Ht < 0 Then GoTo ReadFail
           FrmCardReader.List1.AddItem "数据量：" & Format(FR_BuyNum, "0.00")
     End Select
     Exit Sub

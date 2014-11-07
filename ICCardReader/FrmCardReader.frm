@@ -53,13 +53,21 @@ Begin VB.Form FrmCardReader
       TabPicture(0)   =   "FrmCardReader.frx":0000
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Label1(1)"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(0)"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "rdIndustry"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "rdHome"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "txtCardID"
+      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "cmdMake"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "cmdRemake"
+      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "cmdClear"
+      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).ControlCount=   8
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmCardReader.frx":001C
@@ -95,16 +103,27 @@ Begin VB.Form FrmCardReader
       TabPicture(2)   =   "FrmCardReader.frx":0038
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "CmdTool(1)"
+      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Option1(0)"
+      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).Control(2)=   "Option1(1)"
+      Tab(2).Control(2).Enabled=   0   'False
       Tab(2).Control(3)=   "Option1(2)"
+      Tab(2).Control(3).Enabled=   0   'False
       Tab(2).Control(4)=   "Option1(3)"
+      Tab(2).Control(4).Enabled=   0   'False
       Tab(2).Control(5)=   "Option1(4)"
+      Tab(2).Control(5).Enabled=   0   'False
       Tab(2).Control(6)=   "CmdTool(0)"
+      Tab(2).Control(6).Enabled=   0   'False
       Tab(2).Control(7)=   "Text11"
+      Tab(2).Control(7).Enabled=   0   'False
       Tab(2).Control(8)=   "Text12"
+      Tab(2).Control(8).Enabled=   0   'False
       Tab(2).Control(9)=   "Option1(5)"
+      Tab(2).Control(9).Enabled=   0   'False
       Tab(2).Control(10)=   "Text4"
+      Tab(2).Control(10).Enabled=   0   'False
       Tab(2).ControlCount=   11
       Begin VB.CommandButton cmdClear 
          Caption         =   "擦卡"
@@ -646,28 +665,33 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private m_HangXing As HangXing
-
-Private Supplier As Integer
+Private m_goldcard As GoldCard
+Private Supplier As Integer '卡片供应商 1航星卡 2浙江金卡
 
 
 Private Sub cmdRead_Click()
-    Dim strTemp As String
-    strTemp = GetIniStr("Reader", "Commport")
-    My_Commport = Val(strTemp)
-    If Supplier = 0 Then
+    If m_HangXing.IsMyCard() Then
         m_HangXing.Read
+        Supplier = 1
+    ElseIf m_goldcard.IsMyCard() Then
+        m_goldcard.Read
+        Supplier = 2
     End If
 End Sub
 
 Private Sub Form_Load()
+    Dim strTemp As String
+    strTemp = GetIniStr("Reader", "Commport")
+    My_Commport = Val(strTemp)
     Set m_HangXing = New HangXing
+    Set m_goldcard = New GoldCard
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Caption
-        Case "设置"
+    Select Case Button.Index
+        Case 1 '"设置"
             FrmSetting.Show vbModal
-        Case "退出"
+        Case 2 '"退出"
             Unload Me
     End Select
 End Sub
