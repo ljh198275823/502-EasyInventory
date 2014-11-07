@@ -9,7 +9,7 @@ Begin VB.MDIForm FrmMain
    ClientWidth     =   7980
    Icon            =   "FrmMain.frx":0000
    LinkTopic       =   "MDIForm1"
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   3  '´°¿ÚÈ±Ê¡
    Begin MSComctlLib.StatusBar StatusBar1 
       Align           =   2  'Align Bottom
       Height          =   375
