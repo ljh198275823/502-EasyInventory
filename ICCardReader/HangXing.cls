@@ -141,7 +141,6 @@ Public Function IsMyCard() As Boolean
     Dim FInt_CardType As Long
        
     Ht = Read_CardType(Str_Commport, 0, FInt_CardType)
-    If Ht < 0 Then Exit Function
     If FInt_CardType <> 70 Then
         IsMyCard = True
     End If
@@ -392,7 +391,7 @@ Public Sub Read() '¶Á¿¨
     End Select
     Exit Sub
 ReadFail:
-    MsgBox IcErrMsg(st), vbExclamation, Title
+    MsgBox IcErrMsg(Ht), vbExclamation, "º½ÐÇ¿¨"
     Exit Sub
 End Sub
 

@@ -86,14 +86,14 @@ End Function
 
 Public Function IsMyCard() As Boolean
     Dim icDev As Long
-    Dim reVal As Long
     Dim isTrue As Byte
-    
+    Dim reVal As Long
     icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
     reVal = rdcompany(icDev, isTrue)
-    If reVal = 0 And isTrue <> 0 Then
-        IsMyCard = True
+    If reVal = 0 Then
+        If isTrue = 0 Then IsMyCard = True
     End If
+    ic_exit icDev
 End Function
 
 Public Sub Buy()
@@ -104,10 +104,10 @@ Public Sub Buy()
     
     icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
     userCode = FrmCardReader.txtCardID1.Text
-    saveInfo = ReadInfo
+'    saveInfo = ReadInfo
     reVal = writeCard(icDev, userCode, Val(FrmCardReader.txtAmount.Text), saveInfo)
     If reVal = 0 Then
-        WriteInfo saveInfo
+'        WriteInfo saveInfo
         MsgBox "售气成功。"
     Else
         MsgBox "售气失败，错误:" & ChengdeErr(reVal)
@@ -123,10 +123,10 @@ Public Sub Back()
     
     icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
     userCode = FrmCardReader.txtCardID1.Text
-    saveInfo = ReadInfo
+'    saveInfo = ReadInfo
     reVal = writeCard(icDev, userCode, 0, saveInfo)
     If reVal = 0 Then
-        WriteInfo saveInfo
+'        WriteInfo saveInfo
         MsgBox "退气成功。"
     Else
         MsgBox "退气失败，错误:" & ChengdeErr(reVal)
@@ -158,7 +158,7 @@ Public Sub Make()
         icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
         reVal = MakeCard(icDev, FrmCardReader.txtCardID.Text, 0, saveInfo, 129)
         If reVal = 0 Then
-            WriteInfo saveInfo
+'            WriteInfo saveInfo
             MsgBox "发卡成功"
         Else
             MsgBox "发卡失败，错误:" & ChengdeErr(reVal)
@@ -174,10 +174,10 @@ Public Sub Remake()
     
     If CheckForMake() Then
         icDev = ic_init(My_Commport - 1, 9600) '串口号0开始，所以要减一
-        saveInfo = ReadInfo
+'        saveInfo = ReadInfo
         reVal = MakeCard(icDev, FrmCardReader.txtCardID.Text, 0, saveInfo, 0)  '//mark=0 最后一次购气未输入到气表内，mark=1 最后一次购气已输入到表内
         If reVal = 0 Then
-            WriteInfo saveInfo
+'            WriteInfo saveInfo
             MsgBox "补卡成功"
         Else
             MsgBox "补卡失败，错误:" & ChengdeErr(reVal)
@@ -235,7 +235,7 @@ Public Sub MakeTool()
     If FrmCardReader.Option1(0).Value Then
         reVal = writetoolCard(icDev, 5, 0, 0)
     ElseIf FrmCardReader.Option1(1).Value Then
-        reVal = writetoolCard(icDev, 6, 0, 0)
+        reVal = writetoolCard(icDev, 9, 0, 0)
     ElseIf FrmCardReader.Option1(2).Value Then
         reVal = writetoolCard(icDev, 7, 0, 0)
     End If

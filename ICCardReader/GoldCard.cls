@@ -33,7 +33,7 @@ Private Declare Function Gold_Clearcard Lib "GoldCard" (ByVal intcom As Integer,
 Private Declare Sub Error_message Lib "GoldCard" (ByVal errCode As Long, ByVal msg As String)
 
 '检查是否是本公司的卡 返回值 0：用户卡；1：工具卡；其它出错。
-Private Declare Function Gold_CheckCard Lib "GoldCard" (ByVal intcom As Integer, ByVal Baud As Long, ByRef error As String) As Long
+Private Declare Function Gold_CheckCard Lib "GoldCard" (ByVal intcom As Integer, ByVal Baud As Long) As Long
 
 '注意事项
 '1、 购气次数一定要正确，购气次数只能比上次购气次数大，否则表会不认卡。
@@ -127,6 +127,9 @@ Public Sub Read()
                 FrmCardReader.List1.AddItem "卡片类型：转移卡"
         End Select
         FrmCardReader.cmdBuy.Enabled = True
+        FrmCardReader.CmdTool.Enabled = False
+        FrmCardReader.cmdClear.Enabled = True
+        FrmCardReader.CmdBack.Enabled = True
     Else
         Call Error_message(ret, msg)
         MsgBox "读卡失败，错误:" & msg
@@ -137,7 +140,7 @@ Public Function IsMyCard() As Boolean
     Dim ret As Long
     Dim msg As String * 50
     
-    ret = Gold_CheckCard(My_Commport - 1, 9600, msg)
+    ret = Gold_CheckCard(My_Commport - 1, 9600)
     If ret = 0 Or ret = 1 Then
         IsMyCard = True
     End If

@@ -85,7 +85,7 @@ Private Function CheckForMake() As Boolean
         MsgBox "卡号不能包函非数字"
         Exit Function
     End If
-    If rdHome.Value = False And rdIndustry.Value = False Then
+    If FrmCardReader.rdHome.Value = False And FrmCardReader.rdIndustry.Value = False Then
         MsgBox "请选择用户类型"
         Exit Function
     End If
@@ -153,14 +153,16 @@ Public Sub Read()
         Call IncreaseReadCount
         FrmCardReader.txtCardID1.Text = Trim(ICId)
         FrmCardReader.txtAmount.Text = 0
-        FrmCardReader.txtAmount.Text = GASCount + 1
+        FrmCardReader.txtCount.Text = IIf(GASCount < 0, 0, GASCount) + 1
         Cus_Type = CusType  '用于写卡的时候
-        FrmCardReader.List1.AddItem "卡号:" & Trim(ICId)
-        FrmCardReader.List1.AddItem "用户类型" & IIf(CusType = 1, "家用卡", "工业卡")
-        FrmCardReader.List1.AddItem "卡上余量:" & ICCSpare
-        FrmCardReader.List1.AddItem "购气次数:" & GASCount
+        FrmCardReader.List1.AddItem "卡号：" & Trim(ICId)
+        FrmCardReader.List1.AddItem "用户类型：" & IIf(CusType = 1, "家用卡", "工业卡")
+        FrmCardReader.List1.AddItem "卡上余量：" & ICCSpare
+        FrmCardReader.List1.AddItem "卡片种类：" & "丹东卡"
         FrmCardReader.cmdBuy.Enabled = True
         FrmCardReader.CmdBack.Enabled = IIf(ICCSpare > 0, True, False)
+        FrmCardReader.cmdClear.Enabled = True
+        FrmCardReader.Option1(0).Enabled = False
     Else
         MsgBox "读卡失败，错误:" & ErrorMsg(ret)
     End If
@@ -170,7 +172,7 @@ Public Sub Buy()
     Dim ret As Long
     Dim ICMark As String * 20
 
-    ret = WriteICCard(My_Commport - 1, 9600, FrmCardReader.txtCardID1.Text, 6, Val(FrmCardReader.txtCount.Text) + 1, Val(FrmCardReader.txtAmount.Text), 32, Cus_Type, ICMark)
+    ret = WriteICCard(My_Commport - 1, 9600, FrmCardReader.txtCardID1.Text, 6, Val(FrmCardReader.txtCount.Text), Val(FrmCardReader.txtAmount.Text), 32, Cus_Type, ICMark)
     If ret = 0 Then
         MsgBox "购气成功"
         FrmCardReader.cmdBuy.Enabled = False
@@ -188,8 +190,8 @@ Public Sub Back()
     ret = WriteICCard(My_Commport - 1, 9600, FrmCardReader.txtCardID1.Text, 6, Val(FrmCardReader.txtCount.Text), 0, 32, Cus_Type, ICMark)
     If ret = 0 Then
         MsgBox "退气成功"
-        cmdBuy.Enabled = False
-        CmdBack.Enabled = False
+        FrmCardReader.cmdBuy.Enabled = False
+        FrmCardReader.CmdBack.Enabled = False
     Else
         MsgBox "退气失败，错误:" & ErrorMsg(ret)
     End If
@@ -204,8 +206,6 @@ Public Sub MakeTool()
     If FrmCardReader.Option1(1).Value Then
         ret = WriteGjkCard(My_Commport - 1, 9600, 4)
     ElseIf FrmCardReader.Option1(2).Value Then
-        ret = WriteGjkCard(My_Commport - 1, 9600, 5)
-    ElseIf FrmCardReader.Option1(3).Value Then
         ret = WriteGjkCard(My_Commport - 1, 9600, 6)
     End If
     If ret = 0 Then

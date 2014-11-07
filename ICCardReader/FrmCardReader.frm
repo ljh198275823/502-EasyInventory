@@ -13,7 +13,7 @@ Begin VB.Form FrmCardReader
    MinButton       =   0   'False
    ScaleHeight     =   6330
    ScaleWidth      =   7995
-   StartUpPosition =   1  '所有者中心
+   StartUpPosition =   1  'CenterOwner
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
       Height          =   615
@@ -47,21 +47,21 @@ Begin VB.Form FrmCardReader
       _ExtentY        =   9340
       _Version        =   393216
       Style           =   1
-      Tab             =   1
+      Tab             =   2
       TabHeight       =   520
       TabCaption(0)   =   "开/补卡"
       TabPicture(0)   =   "FrmCardReader.frx":0000
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "cmdRemake"
-      Tab(0).Control(1)=   "cmdMake"
-      Tab(0).Control(2)=   "txtCardID"
-      Tab(0).Control(3)=   "rdHome"
-      Tab(0).Control(4)=   "rdIndustry"
-      Tab(0).Control(5)=   "Label1(0)"
+      Tab(0).Control(0)=   "Label1(0)"
+      Tab(0).Control(1)=   "rdIndustry"
+      Tab(0).Control(2)=   "rdHome"
+      Tab(0).Control(3)=   "txtCardID"
+      Tab(0).Control(4)=   "cmdMake"
+      Tab(0).Control(5)=   "cmdRemake"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmCardReader.frx":001C
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Label1(2)"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label10(0)"
@@ -91,7 +91,7 @@ Begin VB.Form FrmCardReader
       Tab(1).ControlCount=   13
       TabCaption(2)   =   "工具卡"
       TabPicture(2)   =   "FrmCardReader.frx":0038
-      Tab(2).ControlEnabled=   0   'False
+      Tab(2).ControlEnabled=   -1  'True
       Tab(2).Control(0)=   "Label10(6)"
       Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Label10(5)"
@@ -118,7 +118,7 @@ Begin VB.Form FrmCardReader
       Tab(2).Control(11).Enabled=   0   'False
       Tab(2).ControlCount=   12
       Begin VB.OptionButton Option1 
-         Caption         =   "换表卡"
+         Caption         =   "转移卡"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -130,7 +130,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   495
          Index           =   2
-         Left            =   -74280
+         Left            =   720
          TabIndex        =   32
          Top             =   2760
          Width           =   2775
@@ -148,14 +148,14 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   495
          Index           =   0
-         Left            =   -74280
+         Left            =   720
          TabIndex        =   27
          Top             =   480
          Width           =   2775
       End
       Begin VB.TextBox txtFrontGas 
          Height          =   375
-         Left            =   -72960
+         Left            =   2040
          TabIndex        =   26
          Text            =   "0"
          Top             =   960
@@ -163,7 +163,7 @@ Begin VB.Form FrmCardReader
       End
       Begin VB.TextBox txtAlarmValue 
          Height          =   375
-         Left            =   -70200
+         Left            =   4800
          TabIndex        =   25
          Text            =   "0"
          Top             =   960
@@ -171,7 +171,7 @@ Begin VB.Form FrmCardReader
       End
       Begin VB.TextBox txtControlValue 
          Height          =   375
-         Left            =   -70200
+         Left            =   4800
          TabIndex        =   24
          Text            =   "0"
          Top             =   1440
@@ -179,7 +179,7 @@ Begin VB.Form FrmCardReader
       End
       Begin VB.TextBox txtInputValue 
          Height          =   375
-         Left            =   -72960
+         Left            =   2040
          TabIndex        =   23
          Text            =   "0"
          Top             =   1440
@@ -198,7 +198,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   5760
+         Left            =   -69240
          TabIndex        =   22
          Top             =   3840
          Width           =   1335
@@ -281,7 +281,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   1200
+         Left            =   -73800
          TabIndex        =   11
          Top             =   1800
          Width           =   2175
@@ -298,7 +298,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   450
-         Left            =   1200
+         Left            =   -73800
          TabIndex        =   10
          Top             =   2400
          Width           =   2175
@@ -314,7 +314,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   1200
+         Left            =   -73800
          TabIndex        =   9
          Top             =   1200
          Width           =   2175
@@ -331,7 +331,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   1200
+         Left            =   -73800
          TabIndex        =   8
          Top             =   660
          Width           =   2175
@@ -349,7 +349,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   4080
+         Left            =   -70920
          TabIndex        =   7
          Top             =   3840
          Width           =   1335
@@ -367,7 +367,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   2400
+         Left            =   -72600
          TabIndex        =   6
          Top             =   3840
          Width           =   1335
@@ -384,16 +384,16 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   720
+         Left            =   -74280
          TabIndex        =   5
          Top             =   3840
          Width           =   1335
       End
       Begin VB.ListBox List1 
          Appearance      =   0  'Flat
-         Height          =   2730
+         Height          =   2565
          ItemData        =   "FrmCardReader.frx":0054
-         Left            =   3720
+         Left            =   -71280
          List            =   "FrmCardReader.frx":0056
          TabIndex        =   4
          Top             =   660
@@ -411,7 +411,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   3
          Top             =   4200
          Width           =   1815
@@ -429,7 +429,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   495
          Index           =   1
-         Left            =   -74280
+         Left            =   720
          TabIndex        =   2
          Top             =   2040
          Width           =   2775
@@ -448,7 +448,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   3
-         Left            =   -71160
+         Left            =   3840
          TabIndex        =   31
          Top             =   1020
          Width           =   855
@@ -467,7 +467,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   4
-         Left            =   -73920
+         Left            =   1080
          TabIndex        =   30
          Top             =   1500
          Width           =   855
@@ -486,7 +486,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   5
-         Left            =   -71400
+         Left            =   3600
          TabIndex        =   29
          Top             =   1500
          Width           =   1095
@@ -505,7 +505,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   6
-         Left            =   -73920
+         Left            =   1080
          TabIndex        =   28
          Top             =   1020
          Width           =   855
@@ -543,7 +543,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   20
          Top             =   1860
          Width           =   855
@@ -562,7 +562,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   19
          Top             =   2520
          Width           =   975
@@ -581,7 +581,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   18
          Top             =   1260
          Width           =   855
@@ -600,7 +600,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   17
          Top             =   720
          Width           =   735
@@ -667,6 +667,8 @@ Private Sub cmdRead_Click()
     ElseIf m_ChengDe.IsMyCard() Then
         m_ChengDe.Read
         Supplier = 4
+    Else
+        MsgBox "未识别的卡片类别"
     End If
 End Sub
 
