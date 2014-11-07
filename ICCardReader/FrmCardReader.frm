@@ -47,26 +47,21 @@ Begin VB.Form FrmCardReader
       _ExtentY        =   9340
       _Version        =   393216
       Style           =   1
+      Tab             =   1
       TabHeight       =   520
       TabCaption(0)   =   "开/补卡"
       TabPicture(0)   =   "FrmCardReader.frx":0000
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(0)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "rdIndustry"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "rdHome"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "txtCardID"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "cmdMake"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "cmdRemake"
-      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "cmdRemake"
+      Tab(0).Control(1)=   "cmdMake"
+      Tab(0).Control(2)=   "txtCardID"
+      Tab(0).Control(3)=   "rdHome"
+      Tab(0).Control(4)=   "rdIndustry"
+      Tab(0).Control(5)=   "Label1(0)"
       Tab(0).ControlCount=   6
       TabCaption(1)   =   "售气"
       TabPicture(1)   =   "FrmCardReader.frx":001C
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "Label1(2)"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label10(0)"
@@ -191,7 +186,7 @@ Begin VB.Form FrmCardReader
          Width           =   1455
       End
       Begin VB.CommandButton cmdClear 
-         Caption         =   "清除卡片"
+         Caption         =   "清除卡片(&A)"
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "宋体"
@@ -203,7 +198,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -69600
+         Left            =   5760
          TabIndex        =   22
          Top             =   3840
          Width           =   1335
@@ -220,7 +215,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   16
          Top             =   3000
          Width           =   1575
@@ -237,7 +232,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   1920
+         Left            =   -73080
          TabIndex        =   15
          Top             =   3000
          Width           =   1455
@@ -253,7 +248,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   2400
+         Left            =   -72600
          TabIndex        =   14
          Top             =   1320
          Width           =   2895
@@ -261,7 +256,7 @@ Begin VB.Form FrmCardReader
       Begin VB.OptionButton rdHome 
          Caption         =   "家用卡"
          Height          =   375
-         Left            =   2400
+         Left            =   -72600
          TabIndex        =   13
          Top             =   2160
          Width           =   975
@@ -269,7 +264,7 @@ Begin VB.Form FrmCardReader
       Begin VB.OptionButton rdIndustry 
          Caption         =   "工业用卡"
          Height          =   195
-         Left            =   3600
+         Left            =   -71400
          TabIndex        =   12
          Top             =   2250
          Width           =   1335
@@ -286,7 +281,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   11
          Top             =   1800
          Width           =   2175
@@ -303,7 +298,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   450
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   10
          Top             =   2400
          Width           =   2175
@@ -319,7 +314,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   9
          Top             =   1200
          Width           =   2175
@@ -336,13 +331,13 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   -73800
+         Left            =   1200
          TabIndex        =   8
          Top             =   660
          Width           =   2175
       End
       Begin VB.CommandButton CmdBack 
-         Caption         =   "退气"
+         Caption         =   "退气(&D)"
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "宋体"
@@ -354,13 +349,13 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -71040
+         Left            =   4080
          TabIndex        =   7
          Top             =   3840
          Width           =   1335
       End
       Begin VB.CommandButton cmdBuy 
-         Caption         =   "售气"
+         Caption         =   "售气(&S)"
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "宋体"
@@ -372,13 +367,13 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -72480
+         Left            =   2400
          TabIndex        =   6
          Top             =   3840
          Width           =   1335
       End
       Begin VB.CommandButton cmdRead 
-         Caption         =   "读卡"
+         Caption         =   "读卡(&R)"
          BeginProperty Font 
             Name            =   "宋体"
             Size            =   10.5
@@ -389,7 +384,7 @@ Begin VB.Form FrmCardReader
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   -73920
+         Left            =   720
          TabIndex        =   5
          Top             =   3840
          Width           =   1335
@@ -398,7 +393,7 @@ Begin VB.Form FrmCardReader
          Appearance      =   0  'Flat
          Height          =   2730
          ItemData        =   "FrmCardReader.frx":0054
-         Left            =   -71280
+         Left            =   3720
          List            =   "FrmCardReader.frx":0056
          TabIndex        =   4
          Top             =   660
@@ -529,7 +524,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   1440
+         Left            =   -73560
          TabIndex        =   21
          Top             =   1380
          Width           =   735
@@ -548,7 +543,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   20
          Top             =   1860
          Width           =   855
@@ -567,7 +562,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   19
          Top             =   2520
          Width           =   975
@@ -586,7 +581,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   18
          Top             =   1260
          Width           =   855
@@ -605,7 +600,7 @@ Begin VB.Form FrmCardReader
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   17
          Top             =   720
          Width           =   735
@@ -620,13 +615,43 @@ Attribute VB_Exposed = False
 Private m_HangXing As HangXing
 Private m_goldcard As GoldCard
 Private m_DanDong As DanDong
+Private m_ChengDe As ChengDe
 Private Supplier As Integer '卡片供应商 1航星卡 2浙江金卡 3丹东卡 4承德卡
 
+Private Sub Form_Load()
+    Dim strTemp As String
+    strTemp = GetIniStr("Reader", "Commport")
+    My_Commport = Val(strTemp)
+    Set m_HangXing = New HangXing
+    Set m_goldcard = New GoldCard
+    Set m_DanDong = New DanDong
+    Set m_ChengDe = New ChengDe
+End Sub
 
-Private Sub cmdClear_Click()
-    If MsgBox("清除卡片后，卡内信息将丢失，是否要清除卡片？", vbYesNo, "警告") = vbYes Then
-    
-    End If
+Private Sub cmdMake_Click()
+    Select Case Supplier
+        Case 1
+            m_HangXing.Make
+        Case 2
+            m_goldcard.Make
+        Case 3
+            m_DanDong.Make
+        Case 4
+            m_ChengDe.Make
+    End Select
+End Sub
+
+Private Sub cmdRemake_Click()
+    Select Case Supplier
+        Case 1
+            m_HangXing.Remake
+        Case 2
+            m_goldcard.Remake
+        Case 3
+            m_DanDong.Remake
+        Case 4
+            m_ChengDe.Remake
+    End Select
 End Sub
 
 Private Sub cmdRead_Click()
@@ -639,15 +664,64 @@ Private Sub cmdRead_Click()
     ElseIf m_DanDong.IsMyCard() Then
         m_DanDong.Read
         Supplier = 3
+    ElseIf m_ChengDe.IsMyCard() Then
+        m_ChengDe.Read
+        Supplier = 4
     End If
 End Sub
 
-Private Sub Form_Load()
-    Dim strTemp As String
-    strTemp = GetIniStr("Reader", "Commport")
-    My_Commport = Val(strTemp)
-    Set m_HangXing = New HangXing
-    Set m_goldcard = New GoldCard
+Private Sub cmdBuy_Click()
+    Select Case Supplier
+        Case 1
+            m_HangXing.Buy
+        Case 2
+            m_goldcard.Buy
+        Case 3
+            m_DanDong.Buy
+        Case 4
+            m_ChengDe.Buy
+    End Select
+End Sub
+
+Private Sub CmdBack_Click()
+    Select Case Supplier
+        Case 1
+            m_HangXing.Back
+        Case 2
+            m_goldcard.Back
+        Case 3
+            m_DanDong.Back
+        Case 4
+            m_ChengDe.Back
+    End Select
+End Sub
+
+Private Sub cmdClear_Click()
+    If MsgBox("清除卡片后，卡内信息将丢失，是否要清除卡片？", vbYesNo, "警告") = vbYes Then
+        Select Case Supplier
+        Case 1
+            m_HangXing.Clear
+        Case 2
+            m_goldcard.Clear
+        Case 3
+            m_DanDong.Clear
+        Case 4
+            m_ChengDe.Clear
+    End Select
+    End If
+End Sub
+
+Private Sub CmdTool_Click()
+    Select Case Supplier
+        Case 1
+            m_HangXing.MakeTool
+        Case 2
+            m_goldcard.MakeTool
+        Case 3
+            m_DanDong.MakeTool
+        Case 4
+            m_ChengDe.MakeTool
+    End Select
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)

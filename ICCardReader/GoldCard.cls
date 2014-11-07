@@ -41,6 +41,18 @@ Private Declare Function Gold_CheckCard Lib "GoldCard" (ByVal intcom As Integer,
 
 '-----------------------------------end--------------------------------------------------------------------
 
+Public Sub Make()
+    MsgBox "浙江金卡不支持发卡操作"
+End Sub
+
+Public Sub Remake()
+    MsgBox "浙江金卡不支持补卡操作"
+End Sub
+
+Public Sub MakeTool()
+    MsgBox "浙江金卡不支持工具卡操作"
+End Sub
+
 Public Sub Buy()
     Dim ret As Long
     Dim msg As String * 50
