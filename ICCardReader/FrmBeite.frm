@@ -9,7 +9,7 @@ Begin VB.Form FrmBeite
    LinkTopic       =   "Form1"
    ScaleHeight     =   6255
    ScaleWidth      =   8085
-   StartUpPosition =   3  'Windows Default
+   StartUpPosition =   3  '窗口缺省
    Begin TabDlg.SSTab SSTab1 
       Height          =   5535
       Left            =   120
@@ -307,7 +307,7 @@ Begin VB.Form FrmBeite
       End
       Begin VB.ListBox List1 
          Appearance      =   0  'Flat
-         Height          =   2175
+         Height          =   2010
          ItemData        =   "FrmBeite.frx":0054
          Left            =   -71280
          List            =   "FrmBeite.frx":0056
@@ -823,7 +823,7 @@ Private Declare Function ReissueCard Lib "PC001" (ByVal port As Integer, ByVal B
 
 '创建一张换表卡
 Private Declare Function ChangeMeter Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal userNo As String, _
-ByVal AlarmValue As Integer, ByVal InputValue As Integer, ByVal overlimit As Long, ByVal buy As Long, _
+ByVal AlarmValue As Integer, ByVal InputValue As Integer, ByVal overlimit As Long, ByVal Buy As Long, _
 ByVal TotalBuyGas As Long, ByVal TotalBuyNum As Long, ByVal residualGas As Long, ByVal TotalTakeGas As Single, ByVal Control As Long, _
 ByVal pErrMsg As String) As Long
 
@@ -837,7 +837,7 @@ Private Declare Function SetUserParameter Lib "PC001" (ByVal port As Integer, By
 ByVal AlarmValue As Long, ByVal overlimit As Long, ByVal Control As Long, ByVal pErrMsg As Long) As Long
 
 '清空卡
-Private Declare Function clearCard Lib "PC001" Alias "ClearCard" (ByVal port As Integer, ByVal Baud As Long, ByVal pErrMsg As Long) As Long
+Private Declare Function ClearCard Lib "PC001" (ByVal port As Integer, ByVal Baud As Long, ByVal pErrMsg As Long) As Long
 
 '-----------------------------------------------------end-----------------------------------------------------
 
@@ -918,7 +918,7 @@ Private Sub cmdClear_Click()
     Dim pErrMsg As String
     
     pErrMsg = Space(1024)
-    ret = clearCard(My_Commport, 9600, pErrMsg)
+    ret = ClearCard(My_Commport, 9600, pErrMsg)
     If ret = 1 Then
         MsgBox "清卡成功"
     Else

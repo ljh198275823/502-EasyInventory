@@ -137,13 +137,13 @@ Private Sub Class_Initialize()
     Str_Commport = "COM" & My_Commport
 End Sub
 
-Public Function IsMycard() As Boolean
+Public Function IsMyCard() As Boolean
     Dim FInt_CardType As Long
        
     Ht = Read_CardType(Str_Commport, 0, FInt_CardType)
     If Ht < 0 Then Exit Function
     If FInt_CardType <> 70 Then
-        IsMycard = True
+        IsMyCard = True
     End If
 End Function
 
@@ -151,31 +151,16 @@ Public Sub Back()  '退气
     If Card_Type = 10 Then
         Ht = Write_CardBuy(Str_Commport, 1, 0, Str_QuID, 4)
     Else
-        Ht = Write_CardBuy(Str_Commport, 1, 0, Str_QuID, 4)
+        Ht = Write_CardBuy_01(Str_Commport, 1, 0, Str_QuID, 4)
     End If
     If Ht < 0 Then
       MsgBox IcErrMsg(Ht)
       Exit Sub
     End If
     FrmCardReader.cmdBuy.Enabled = False
-    FrmCardReader.cmdBuqi.Enabled = False
     FrmCardReader.CmdBack.Enabled = False
 End Sub
 
-Public Sub Buqi()  '补气
-    If Card_Type = 10 Then
-        Ht = Write_CardBuy(Str_Commport, 1, Val(txtAmount.Text), Str_QuID, 3)
-    Else
-        Ht = Write_CardBuy(Str_Commport, 1, Val(txtAmount.Text), Str_QuID, 3)
-    End If
-    If Ht < 0 Then
-      MsgBox IcErrMsg(Ht)
-      Exit Sub
-    End If
-    FrmCardReader.cmdBuy.Enabled = False
-    FrmCardReader.cmdBuqi.Enabled = False
-    FrmCardReader.CmdBack.Enabled = False
-End Sub
 
 Public Sub Buy()  '购气
     If Card_Type = 10 Then
@@ -193,7 +178,6 @@ Public Sub Buy()  '购气
       Exit Sub
     End If
     FrmCardReader.cmdBuy.Enabled = False
-    FrmCardReader.cmdBuqi.Enabled = False
     FrmCardReader.CmdBack.Enabled = False
 End Sub
 
@@ -209,26 +193,26 @@ Private Function CheckForMake() As Boolean
         CheckForMake = False
         Exit Function
     End If
-    If FrmCardReader.rdHome.value = False And FrmCardReader.rdIndustry.value = False Then
+    If FrmCardReader.rdHome.Value = False And FrmCardReader.rdIndustry.Value = False Then
         MsgBox "请选择一种卡片类型"
         Exit Function
     End If
     CheckForMake = True
 End Function
 
-Public Sub MakeCard()  '发卡
+Public Sub Make()  '发卡
     Dim str_CardType  As String
     Dim str_CityCode As String
     
     If CheckForMake() Then
         str_CityCode = "0001"
-        str_CardType = IIf(FrmCardReader.rdHome.value, "0001", "0002")
+        str_CardType = IIf(FrmCardReader.rdHome.Value, "0001", "0002")
         Ht = Write_UserCard(Str_Commport, 0, Trim(FrmCardReader.txtCardID.Text), str_CityCode, str_CardType)
         If Ht < 0 Then
           MsgBox IcErrMsg(Ht)
           Exit Sub
         End If
-        If FrmCardReader.rdHome.value Then
+        If FrmCardReader.rdHome.Value Then
             Ht = Write_CardBuy(Str_Commport, 1, 0, Str_QuID, 1)
         Else
             Ht = Write_CardBuy_01(Str_Commport, 1, 0, Str_QuID, 1)
@@ -241,19 +225,19 @@ Public Sub MakeCard()  '发卡
     End If
 End Sub
 
-Public Sub RemakeCard() '补卡
+Public Sub Remake() '补卡
     Dim str_CardType  As String
     Dim str_CityCode As String
     
     If CheckForMake() Then
     str_CityCode = "0001"
-        str_CardType = IIf(FrmCardReader.rdHome.value, "0001", "0002")
+        str_CardType = IIf(FrmCardReader.rdHome.Value, "0001", "0002")
         Ht = Write_UserCard(Str_Commport, 0, Trim(FrmCardReader.txtCardID.Text), str_CityCode, str_CardType)
         If Ht < 0 Then
           MsgBox IcErrMsg(Ht)
           Exit Sub
         End If
-        If FrmCardReader.rdHome.value Then
+        If FrmCardReader.rdHome.Value Then
             Ht = Write_CardBuy(Str_Commport, 1, 0, Str_QuID, 3)
         Else
             Ht = Write_CardBuy_01(Str_Commport, 1, 0, Str_QuID, 3)
@@ -266,7 +250,7 @@ Public Sub RemakeCard() '补卡
     End If
 End Sub
 
-Public Sub ClearCard() '清除卡片
+Public Sub Clear() '清除卡片
     Dim msg As Integer
     Dim Int_type1 As Integer
     Dim FInt_CardType As Long
@@ -384,7 +368,6 @@ Public Sub Read() '读卡
               FrmCardReader.List1.AddItem "卡的状态：补卡"
               FrmCardReader.cmdBuy.Enabled = True
             End If
-            FrmCardReader.cmdBuqi.Enabled = True
             FrmCardReader.CmdBack.Enabled = True
         Case 31
           Ht = Read_Tool(Str_Commport, 1, FR_BuyNum, 48, Str_QYID)
@@ -419,19 +402,12 @@ Public Sub MakeTool()
     Dim D_Temp As Double
     Str_City = "1234"
     Int_Offset = 48 '家用表48 工业表80
-    If FrmCardReader.Option1(0).value Then  '清零
+    If FrmCardReader.Option1(0).Value Then  '初始化
+      
+    ElseIf FrmCardReader.Option1(1) Then '清零
       Ht = Write_Tools(Str_Commport, 1, 20, Str_City, Str_QuID, Int_Offset)
-    ElseIf FrmCardReader.Option1(1) Then '工程卡
-      Ht = Write_Tools(Str_Commport, 1, 30, Str_City, Str_QuID, Int_Offset)
-    ElseIf FrmCardReader.Option1(2) Then  '一方卡
-      D_Temp = 1
-      Ht = Write_Tools1(Str_Commport, 1, 41, D_Temp, Str_QuID, Int_Offset)
-    ElseIf FrmCardReader.Option1(3) Then  '限时卡
-      Ht = Write_Tools1(Str_Commport, 1, 50, Val(FrmCardReader.Text11.Text), Str_QuID, Int_Offset)
-    ElseIf FrmCardReader.Option1(4) Then '设定累积量
-      Ht = Write_Tools1(Str_Commport, 1, 40, Val(FrmCardReader.Text12.Text), Str_QuID, Int_Offset)
-    ElseIf FrmCardReader.Option1(5) Then  '报警量设置卡
-      Ht = Write_Tools1(Str_Commport, 1, 51, Val(FrmCardReader.Text4.Text), Str_QuID, Int_Offset)
+    ElseIf FrmCardReader.Option1(2) Then  '转移卡
+    
     End If
     If Ht < 0 Then
       MsgBox IcErrMsg(Ht)

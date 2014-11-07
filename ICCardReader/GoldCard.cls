@@ -55,6 +55,20 @@ Public Sub Buy()
     End If
 End Sub
 
+Public Sub Back()
+    Dim ret As Long
+    Dim msg As String * 50
+    
+    ret = Gold_Buycard(My_Commport - 1, 9600, FrmCardReader.txtCardID1.Text, 0, IIf(Val(FrmCardReader.txtCount.Text) > 1, Val(FrmCardReader.txtCount.Text) - 1, 0))
+    If ret = 0 Then
+        MsgBox "退气成功。"
+        FrmCardReader.cmdBuy.Enabled = False
+    Else
+        Call Error_message(ret, msg)
+        MsgBox "退气失败，错误:" & msg
+    End If
+End Sub
+
 Public Sub Clear()
     Dim ret As Long
     Dim msg As String * 50
