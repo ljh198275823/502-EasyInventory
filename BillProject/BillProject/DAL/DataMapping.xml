@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="BillProject" xmlns="http://schemas.microsoft.com/linqtosql/mapping/2007">
+  <Table Name="PaymentLog" Member="LJH.BillProject.Model.PaymentLog">
+    <Type Name="LJH.BillProject.Model.PaymentLog">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="PaymentDate" Member="PaymentDate" DbType="datetime NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Category" Member="Category" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount" DbType="decimal(10,2) not null" UpdateCheck="Never"/>
+      <Column Name="PaymentMode" Member="PaymentMode" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="User" Member="User" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(50)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
+</Database>
