@@ -22,6 +22,9 @@ namespace LJH.BillProject.BillProject
 
         #region 私有变量
         private string _ConStr = string.Format("SQLITE:Data Source={0}", Path.Combine(Application.StartupPath, "BillProject.db"));
+        private List<PaymentPanel> _months = new List<PaymentPanel>();
+        private DateTime _LogFrom = DateTime.Now;
+        private int _Showmode = 0;
         #endregion
 
         #region 私有方法
@@ -58,39 +61,111 @@ namespace LJH.BillProject.BillProject
             }
         }
 
-        private void InitPanel()
+        private void ShowThisMonth()
         {
-            for (int i = 0; i < 6; i++)
-            {
-                PaymentPanel p = new PaymentPanel();
-                this.flowLayoutPanel1.Controls.Add(p);
-            }
-
-            Button btnAdd = new Button();
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(100, 40);
-            btnAdd.Text = "增加消费";
-            btnAdd.Click += new EventHandler(btnAdd_Click);
-            this.flowLayoutPanel1.Controls.Add(btnAdd);
+            DateTime dt = DateTime.Now;
+            _LogFrom = new DateTime(dt.Year, dt.Month, 1);
+            _Showmode = 1;
+            InitPanel(_LogFrom, _Showmode);
         }
 
 
-        #endregion
+        private void ShowThisYear()
+        {
+            DateTime dt = DateTime.Now;
+            _LogFrom = new DateTime(dt.Year, 1, 1);
+            _Showmode = 0;
+            InitPanel(_LogFrom, _Showmode);
+        }
 
+        private void InitPanel(DateTime logFrom, int mode)
+        {
+            foreach (PaymentPanel p in _months)
+            {
+                this.flowLayoutPanel1.Controls.Remove(p);
+            }
+            _months.Clear();
+            PaymentLogSearchCondition con = new PaymentLogSearchCondition() { LogFrom = logFrom };
+            List<PaymentLog> items = new PaymentLogBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                IEnumerable<IGrouping<string, PaymentLog>> groups = null;
+                if (mode == 0) //按月
+                {
+                    groups = from item in items
+                             orderby item.PaymentDate ascending
+                             group item by item.PaymentDate.ToString("yyyy年MM月");
+                }
+                else if (mode == 1) //按天
+                {
+                    groups = from item in items
+                             orderby item.PaymentDate ascending
+                             group item by item.PaymentDate.ToString("yyyy年MM月dd日");
+                }
+                else  //按年
+                {
+                    groups = from item in items
+                             orderby item.PaymentDate ascending
+                             group item by item.PaymentDate.ToString("yyyy年");
+                }
+                foreach (var group in groups)
+                {
+                    PaymentPanel p = new PaymentPanel();
+                    p.Title = group.Key;
+                    p.Amount = group.Sum(it => it.Amount);
+                    p.Tag = group.ToList();
+                    p.ContentDoubleClick += new EventHandler(p_DoubleClick);
+                    _months.Add(p);
+                    this.flowLayoutPanel1.Controls.Add(p);
+                }
+            }
+        }
+        #endregion
 
         #region 事件处理程序
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            this.Text += string.Format(" [{0}]", Application.ProductVersion);
             AppSettings.Current.ConnStr = _ConStr;
             UpGradeDataBase();
-            InitPanel();
+            DateTime dt = DateTime.Now;
+            _LogFrom = new DateTime(dt.Year, dt.Month, 1).AddMonths(-5);
+            _Showmode = 0;
+            InitPanel(_LogFrom, _Showmode);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddLog_Click(object sender, EventArgs e)
         {
             FrmPaymentLogDetail frm = new FrmPaymentLogDetail();
             frm.IsAdding = true;
             frm.ShowDialog();
+            InitPanel(_LogFrom, _Showmode);
+        }
+
+        private void btnThisMonth_Click(object sender, EventArgs e)
+        {
+            ShowThisMonth();
+        }
+
+        private void btnShowThisYear_Click(object sender, EventArgs e)
+        {
+            ShowThisYear();
+        }
+
+        private void p_DoubleClick(object sender, EventArgs e)
+        {
+            PaymentPanel p=sender as PaymentPanel ;
+            FrmPaymentLogMaster frm = new FrmPaymentLogMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.PaymentLogs = (sender as PaymentPanel).Tag as List<PaymentLog>;
+            frm.Text = string.Format("{0} 消费总额 {1} 元", p.Title, p.Amount);
+            frm.ShowDialog();
+            InitPanel(_LogFrom, _Showmode);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
         #endregion
     }

@@ -28,6 +28,10 @@ namespace LJH.BillProject.Model
         private string _path;
 
         private string _ConnectString;
+
+        private string _Categorys;
+        private string _Users;
+        private string _PaymentModes;
         #endregion
 
         #region 构造函数
@@ -45,6 +49,9 @@ namespace LJH.BillProject.Model
                     _ConnectString = GetConfigContent("ConnectString");
 
                     string temp;
+                    _Categorys = GetConfigContent("Categorys");
+                    _Users = GetConfigContent("Users");
+                    _PaymentModes = GetConfigContent("PaymentModes");
                 }
                 catch
                 {
@@ -53,7 +60,7 @@ namespace LJH.BillProject.Model
         }
         #endregion
 
-        #region 公共属性      
+        #region 公共属性
         /// <summary>
         /// 停车场连接字串
         /// </summary>
@@ -79,7 +86,46 @@ namespace LJH.BillProject.Model
                 }
             }
         }
-       
+
+        public string Categorys
+        {
+            get { return _Categorys; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _Categorys = value;
+                    SaveConfig("Categorys", value);
+                }
+            }
+        }
+
+        public string Users
+        {
+            get { return _Users; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _Users = value;
+                    SaveConfig("Users", value);
+                }
+            }
+        }
+
+        public string PaymentModes
+        {
+            get { return _PaymentModes; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    _PaymentModes = value;
+                    SaveConfig("PaymentModes", value);
+                }
+            }
+        }
+
         public bool SaveConfig(string configName, string configContent)
         {
             if (_parent != null)
@@ -134,7 +180,7 @@ namespace LJH.BillProject.Model
                 {
                     XmlNodeList nodeList = _parent.ChildNodes;
                     foreach (XmlNode xn in nodeList)
-                    {                        
+                    {
                         if (xn is XmlElement)
                         {
                             XmlElement xe = (XmlElement)xn;

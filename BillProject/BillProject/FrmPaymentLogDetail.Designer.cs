@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPaymentLogDetail));
             this.label1 = new System.Windows.Forms.Label();
             this.dtPaymentLog = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,10 +47,12 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(197, 293);
+            this.btnClose.TabIndex = 6;
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(88, 293);
+            this.btnOk.TabIndex = 5;
             // 
             // label1
             // 
@@ -58,7 +61,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 5;
-            this.label1.Text = "日    期";
+            this.label1.Text = "消费日期";
             // 
             // dtPaymentLog
             // 
@@ -72,7 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 71);
+            this.label2.Location = new System.Drawing.Point(18, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 7;
@@ -81,7 +84,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 113);
+            this.label3.Location = new System.Drawing.Point(30, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 8;
@@ -90,11 +93,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 151);
+            this.label4.Location = new System.Drawing.Point(18, 69);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 9;
-            this.label4.Text = "金    额";
+            this.label4.Text = "消费金额";
             // 
             // label5
             // 
@@ -121,12 +124,13 @@
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(229, 48);
-            this.txtMemo.TabIndex = 12;
+            this.txtMemo.TabIndex = 4;
             // 
             // txtAmount
             // 
+            this.txtAmount.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtAmount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAmount.Location = new System.Drawing.Point(88, 147);
+            this.txtAmount.Location = new System.Drawing.Point(88, 62);
             this.txtAmount.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -139,32 +143,42 @@
             -2147483648});
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.PointCount = -1;
-            this.txtAmount.Size = new System.Drawing.Size(229, 21);
-            this.txtAmount.TabIndex = 13;
+            this.txtAmount.Size = new System.Drawing.Size(229, 26);
+            this.txtAmount.TabIndex = 0;
+            this.txtAmount.Text = "0";
             // 
             // txtCategory
             // 
+            this.txtCategory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.txtCategory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtCategory.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCategory.FormattingEnabled = true;
-            this.txtCategory.Location = new System.Drawing.Point(88, 67);
+            this.txtCategory.Location = new System.Drawing.Point(88, 100);
             this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(229, 20);
-            this.txtCategory.TabIndex = 14;
+            this.txtCategory.Size = new System.Drawing.Size(229, 24);
+            this.txtCategory.TabIndex = 1;
             // 
             // txtUser
             // 
+            this.txtUser.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.txtUser.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtUser.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtUser.FormattingEnabled = true;
-            this.txtUser.Location = new System.Drawing.Point(88, 109);
+            this.txtUser.Location = new System.Drawing.Point(88, 142);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(230, 20);
-            this.txtUser.TabIndex = 15;
+            this.txtUser.Size = new System.Drawing.Size(230, 24);
+            this.txtUser.TabIndex = 2;
             // 
             // txtPaymentMode
             // 
+            this.txtPaymentMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.txtPaymentMode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtPaymentMode.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtPaymentMode.FormattingEnabled = true;
-            this.txtPaymentMode.Location = new System.Drawing.Point(88, 184);
+            this.txtPaymentMode.Location = new System.Drawing.Point(88, 182);
             this.txtPaymentMode.Name = "txtPaymentMode";
-            this.txtPaymentMode.Size = new System.Drawing.Size(229, 20);
-            this.txtPaymentMode.TabIndex = 16;
+            this.txtPaymentMode.Size = new System.Drawing.Size(229, 24);
+            this.txtPaymentMode.TabIndex = 3;
             // 
             // FrmPaymentLogDetail
             // 
@@ -183,6 +197,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtPaymentLog);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPaymentLogDetail";
             this.Text = "消费明细";
             this.Controls.SetChildIndex(this.btnOk, 0);

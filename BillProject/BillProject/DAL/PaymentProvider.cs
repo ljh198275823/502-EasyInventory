@@ -22,7 +22,14 @@ namespace LJH.BillProject.DAL
 
         protected override List<PaymentLog> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
-            return base.GetingItems(dc, search);
+            IQueryable<PaymentLog> ret = dc.GetTable<PaymentLog>();
+            if (search is PaymentLogSearchCondition)
+            {
+                PaymentLogSearchCondition con = search as PaymentLogSearchCondition;
+                if (con.LogFrom != null) ret = ret.Where(item => item.PaymentDate >= con.LogFrom.Value);
+                if (!string.IsNullOrEmpty(con.User)) ret = ret.Where(item => item.User == con.User);
+            }
+            return ret.ToList();
         }
         #endregion
     }

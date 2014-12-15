@@ -20,6 +20,65 @@ namespace LJH.BillProject
             InitializeComponent();
         }
 
+        #region 私有方法
+        private void InittxtCategorys()
+        {
+            txtCategory.Items.Clear();
+            string categorys = AppSettings.Current.Categorys;
+            if (!string.IsNullOrEmpty(categorys))
+            {
+                string[] temp = categorys.Split(',');
+                this.txtCategory.AutoCompleteCustomSource = new AutoCompleteStringCollection();
+                foreach (string item in temp)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        this.txtCategory.AutoCompleteCustomSource.Add(item);
+                        this.txtCategory.Items.Add(item);
+                    }
+                }
+            }
+        }
+
+        private void InittxtUsers()
+        {
+            txtUser.Items.Clear();
+            string Users = AppSettings.Current.Users;
+            if (!string.IsNullOrEmpty(Users))
+            {
+                string[] temp = Users.Split(',');
+                this.txtUser .AutoCompleteCustomSource = new AutoCompleteStringCollection();
+                foreach (string item in temp)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        this.txtUser.AutoCompleteCustomSource.Add(item);
+                        this.txtUser.Items.Add(item);
+                    }
+                }
+            }
+        }
+
+        private void InittxtPaymentModes()
+        {
+            txtPaymentMode.Items.Clear();
+            string PaymentModes = AppSettings.Current.PaymentModes;
+            if (!string.IsNullOrEmpty(PaymentModes))
+            {
+                string[] temp = PaymentModes.Split(',');
+                this.txtPaymentMode.AutoCompleteCustomSource = new AutoCompleteStringCollection();
+                foreach (string item in temp)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        this.txtPaymentMode.AutoCompleteCustomSource.Add(item);
+                        this.txtPaymentMode.Items.Add(item);
+                    }
+                }
+            }
+        }
+        #endregion
+
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -30,6 +89,9 @@ namespace LJH.BillProject
         {
             base.InitControls();
             dtPaymentLog.Value = DateTime.Today;
+            InittxtCategorys();
+            InittxtUsers();
+            InittxtPaymentModes();
         }
 
         protected override void ItemShowing()
