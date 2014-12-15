@@ -122,6 +122,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="money.ico" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\export.png" />
+    <None Include="Resources\columns.png" />
+    <None Include="Resources\add.png" />
     <None Include="Resources\delete.png" />
     <None Include="Resources\month.png" />
     <None Include="Resources\Write.png" />
