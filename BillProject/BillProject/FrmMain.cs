@@ -158,7 +158,7 @@ namespace LJH.BillProject.BillProject
             FrmPaymentLogMaster frm = new FrmPaymentLogMaster();
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.PaymentLogs = (sender as PaymentPanel).Tag as List<PaymentLog>;
-            frm.Text = string.Format("{0} 消费总额 {1} 元", p.Title, p.Amount);
+            frm.Text = string.Format("{0}", p.Title);
             frm.ShowDialog();
             InitPanel(_LogFrom, _Showmode);
         }

@@ -40,6 +40,41 @@ namespace LJH.BillProject
             return ret;
         }
 
+        protected override void FreshStatusBar()
+        {
+            System.Windows.Forms.Control[] ctrls = this.Controls.Find("statusStrip1", true);
+            if (ctrls != null && ctrls.Length == 1)
+            {
+                StatusStrip ctrl = ctrls[0] as StatusStrip;
+                var items = ctrl.Items.Find("toolStripStatusLabel1", false);
+                if (items != null && items.Length == 1)
+                {
+                    ToolStripStatusLabel lbl = items[0] as ToolStripStatusLabel;
+                    if (lbl != null) lbl.Text = string.Format("总共 {0} 项  总额 {1} 元", VisiableCount (), GetAmount());
+                }
+            }
+        }
+
+        private decimal GetAmount()
+        {
+            decimal ret = 0;
+            foreach (DataGridViewRow row in OperatorView.Rows)
+            {
+                if (row.Visible) ret += (row.Tag as PaymentLog).Amount;
+            }
+            return ret.Trim();
+        }
+
+        private int VisiableCount()
+        {
+            int ret = 0;
+            foreach (DataGridViewRow row in OperatorView.Rows)
+            {
+                if (row.Visible) ret++;
+            }
+            return ret;
+        }
+
         protected override bool DeletingItem(object item)
         {
             CommandResult ret = new PaymentLogBLL(AppSettings.Current.ConnStr).Delete(item as PaymentLog);
@@ -66,6 +101,12 @@ namespace LJH.BillProject
             row.Cells["colUser"].Value = log.User;
             row.Cells["colMemo"].Value = log.Memo;
         }
+
+        //protected override void ShowItemsOnGrid(List<object> items)
+        //{
+        //    base.ShowItemsOnGrid(items);
+        //    FreshStatusBar();
+        //}
         #endregion
     }
 }
