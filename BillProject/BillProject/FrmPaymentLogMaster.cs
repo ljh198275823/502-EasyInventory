@@ -60,7 +60,11 @@ namespace LJH.BillProject
             decimal ret = 0;
             foreach (DataGridViewRow row in OperatorView.Rows)
             {
-                if (row.Visible) ret += (row.Tag as PaymentLog).Amount;
+                if (row.Visible)
+                {
+                    PaymentLog log = row.Tag as PaymentLog;
+                    ret += log.Deleted != null && log.Deleted.Value ? 0 : log.Amount;
+                }
             }
             return ret.Trim();
         }
@@ -100,6 +104,11 @@ namespace LJH.BillProject
             row.Cells["colPaymentMode"].Value = log.PaymentMode;
             row.Cells["colUser"].Value = log.User;
             row.Cells["colMemo"].Value = log.Memo;
+            if (log.Deleted != null && log.Deleted.Value)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
+                row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            }
         }
 
         //protected override void ShowItemsOnGrid(List<object> items)

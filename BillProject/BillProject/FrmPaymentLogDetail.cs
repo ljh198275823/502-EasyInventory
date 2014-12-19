@@ -103,6 +103,7 @@ namespace LJH.BillProject
             txtAmount.DecimalValue = log.Amount;
             txtPaymentMode.Text = log.PaymentMode;
             txtMemo.Text = log.Memo;
+            btnOk.Enabled = false;
         }
 
         protected override object GetItemFromInput()

@@ -112,7 +112,7 @@ namespace LJH.BillProject.BillProject
                 {
                     PaymentPanel p = new PaymentPanel();
                     p.Title = group.Key;
-                    p.Amount = group.Sum(it => it.Amount);
+                    p.Amount = group.Sum(it => it.Deleted != null && it.Deleted.Value ? 0 : it.Amount);
                     p.Tag = group.ToList();
                     p.ContentDoubleClick += new EventHandler(p_DoubleClick);
                     _months.Add(p);

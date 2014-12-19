@@ -37,9 +37,18 @@ namespace LJH.BillProject.Model
         /// </summary>
         public string User { get; set; }
         /// <summary>
+        /// 获取或设置记录是否已经删除
+        /// </summary>
+        public bool? Deleted { get; set; }
+        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
         #endregion
+
+        public PaymentLog Clone()
+        {
+            return this.MemberwiseClone() as PaymentLog;
+        }
     }
 }
