@@ -23,7 +23,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -76,17 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\BLLBase.cs" />
-    <Compile Include="BLL\PaymentLogBLL.cs" />
     <Compile Include="Control\PaymentPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Control\PaymentPanel.Designer.cs">
       <DependentUpon>PaymentPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="DAL\PaymentProvider.cs" />
-    <Compile Include="DAL\ProviderFactory.cs" />
-    <Compile Include="DAL\UnitWork.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,9 +99,6 @@
     <Compile Include="FrmPaymentLogMaster.Designer.cs">
       <DependentUpon>FrmPaymentLogMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\AppSettings.cs" />
-    <Compile Include="Model\PaymentLog.cs" />
-    <Compile Include="Model\PaymentLogSearchCondition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -117,7 +108,16 @@
     </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BillProject.BLL\BillProject.BLL.csproj">
+      <Project>{366B0F14-2EF5-4395-86B6-7824C370A6CB}</Project>
+      <Name>BillProject.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BillProject.Model\BillProject.Model.csproj">
+      <Project>{FE1AB49D-BEF0-4527-98DD-86F9699FB664}</Project>
+      <Name>BillProject.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -131,7 +131,6 @@
     <None Include="Resources\month.png" />
     <None Include="Resources\Write.png" />
     <None Include="Resources\jizhang.png" />
-    <EmbeddedResource Include="DAL\DataMapping.xml" />
     <EmbeddedResource Include="FrmPaymentLogMaster.resx">
       <DependentUpon>FrmPaymentLogMaster.cs</DependentUpon>
     </EmbeddedResource>

@@ -110,12 +110,6 @@ namespace LJH.BillProject
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
         }
-
-        //protected override void ShowItemsOnGrid(List<object> items)
-        //{
-        //    base.ShowItemsOnGrid(items);
-        //    FreshStatusBar();
-        //}
         #endregion
     }
 }
