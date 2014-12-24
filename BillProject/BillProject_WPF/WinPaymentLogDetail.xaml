@@ -1,0 +1,16 @@
+﻿<Window x:Class="BillProject_WPF.WinPaymentLogDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="459" Width="875" Loaded="Window_Loaded">
+    <Grid Name="gridMain">
+        <DataGrid AutoGenerateColumns="False"  HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" Name="dataGrid1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="日期" Width="130" />
+                <DataGridTextColumn Header="金额" Width="Auto" />
+                <DataGridTextColumn Header="用途" />
+                <DataGridTextColumn Header="支付方式" />
+                <DataGridTextColumn Header="消费者" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
