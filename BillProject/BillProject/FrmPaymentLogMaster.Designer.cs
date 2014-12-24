@@ -44,7 +44,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.OperatorView = new System.Windows.Forms.DataGridView();
+            this.dataGridview1 = new System.Windows.Forms.DataGridView();
             this.colPaymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +53,7 @@
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.OperatorView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridview1)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -168,29 +168,29 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
             // 
-            // OperatorView
+            // dataGridview1
             // 
-            this.OperatorView.AllowUserToAddRows = false;
-            this.OperatorView.AllowUserToOrderColumns = true;
-            this.OperatorView.AllowUserToResizeRows = false;
-            this.OperatorView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OperatorView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridview1.AllowUserToAddRows = false;
+            this.dataGridview1.AllowUserToOrderColumns = true;
+            this.dataGridview1.AllowUserToResizeRows = false;
+            this.dataGridview1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridview1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colPaymentDate,
             this.colCategory,
             this.colAmount,
             this.colPaymentMode,
             this.colUser,
             this.colMemo});
-            this.OperatorView.ContextMenuStrip = this.contextMenuStrip1;
-            this.OperatorView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OperatorView.Location = new System.Drawing.Point(0, 50);
-            this.OperatorView.Name = "OperatorView";
-            this.OperatorView.RowHeadersVisible = false;
-            this.OperatorView.RowHeadersWidth = 20;
-            this.OperatorView.RowTemplate.Height = 23;
-            this.OperatorView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OperatorView.Size = new System.Drawing.Size(939, 343);
-            this.OperatorView.TabIndex = 65;
+            this.dataGridview1.ContextMenuStrip = this.contextMenuStrip1;
+            this.dataGridview1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridview1.Location = new System.Drawing.Point(0, 50);
+            this.dataGridview1.Name = "dataGridview1";
+            this.dataGridview1.RowHeadersVisible = false;
+            this.dataGridview1.RowHeadersWidth = 20;
+            this.dataGridview1.RowTemplate.Height = 23;
+            this.dataGridview1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridview1.Size = new System.Drawing.Size(939, 343);
+            this.dataGridview1.TabIndex = 65;
             // 
             // colPaymentDate
             // 
@@ -235,17 +235,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 415);
-            this.Controls.Add(this.OperatorView);
+            this.Controls.Add(this.dataGridview1);
             this.Controls.Add(this.menu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPaymentLogMaster";
             this.Text = "";
             this.Controls.SetChildIndex(this.menu, 0);
-            this.Controls.SetChildIndex(this.OperatorView, 0);
+            this.Controls.SetChildIndex(this.dataGridview1, 0);
             this.contextMenuStrip1.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.OperatorView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridview1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,7 +267,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox txtKeyword;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.DataGridView OperatorView;
+        private System.Windows.Forms.DataGridView dataGridview1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;

@@ -93,19 +93,19 @@ namespace LJH.BillProject.BillProject
                 if (mode == 0) //按月
                 {
                     groups = from item in items
-                             orderby item.PaymentDate ascending
+                             orderby item.PaymentDate descending
                              group item by item.PaymentDate.ToString("yyyy年MM月");
                 }
                 else if (mode == 1) //按天
                 {
                     groups = from item in items
-                             orderby item.PaymentDate ascending
+                             orderby item.PaymentDate descending
                              group item by item.PaymentDate.ToString("yyyy年MM月dd日");
                 }
                 else  //按年
                 {
                     groups = from item in items
-                             orderby item.PaymentDate ascending
+                             orderby item.PaymentDate descending
                              group item by item.PaymentDate.ToString("yyyy年");
                 }
                 foreach (var group in groups)
@@ -128,10 +128,7 @@ namespace LJH.BillProject.BillProject
             this.Text += string.Format(" [{0}]", Application.ProductVersion);
             AppSettings.Current.ConnStr = _ConStr;
             UpGradeDataBase();
-            DateTime dt = DateTime.Now;
-            _LogFrom = new DateTime(dt.Year, dt.Month, 1).AddMonths(-5);
-            _Showmode = 0;
-            InitPanel(_LogFrom, _Showmode);
+            ShowThisMonth();
         }
 
         private void btnAddLog_Click(object sender, EventArgs e)
@@ -154,7 +151,7 @@ namespace LJH.BillProject.BillProject
 
         private void p_DoubleClick(object sender, EventArgs e)
         {
-            PaymentPanel p=sender as PaymentPanel ;
+            PaymentPanel p = sender as PaymentPanel;
             FrmPaymentLogMaster frm = new FrmPaymentLogMaster();
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.PaymentLogs = (sender as PaymentPanel).Tag as List<PaymentLog>;
