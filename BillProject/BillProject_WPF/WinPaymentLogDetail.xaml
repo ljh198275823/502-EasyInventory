@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Window1" Height="459" Width="875" Loaded="Window_Loaded">
     <Grid Name="gridMain">
-        <DataGrid AutoGenerateColumns="False"  HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch" Name="dataGrid1">
+        <DataGrid AutoGenerateColumns="False"  HorizontalAlignment="Stretch" Name="dataGrid1" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="日期" Width="130" />
                 <DataGridTextColumn Header="金额" Width="Auto" />
