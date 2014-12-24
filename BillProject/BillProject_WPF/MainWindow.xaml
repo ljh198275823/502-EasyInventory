@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BillProject_WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="记账小秘" Height="407" Width="801" Icon="/Images/money.ico" Loaded="Window_Loaded">
+        Title="记账小秘" Height="407" Width="801" Icon="/Images/money.ico" Loaded="Window_Loaded" WindowState="Maximized">
     <Grid Background="White" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
         <!-- Define four rows: -->
         <Grid.RowDefinitions>
