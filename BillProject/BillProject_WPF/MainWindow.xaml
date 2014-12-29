@@ -41,6 +41,14 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+            <Button Name="btn_Report" Click="btn_Report_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Vertical" >
+                        <Image Source="/Images/columns.png" Height="48"/>
+                        <Label HorizontalContentAlignment="Center" Height="25">消费报表</Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
             <Separator />
             <Button Name="btn_Exit" Click="btn_Exit_Click">
                 <Button.Content>

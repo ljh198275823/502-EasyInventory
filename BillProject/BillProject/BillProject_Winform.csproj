@@ -132,6 +132,12 @@
     <Compile Include="FrmPaymentLogMaster.Designer.cs">
       <DependentUpon>FrmPaymentLogMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPaymentLogReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPaymentLogReport.Designer.cs">
+      <DependentUpon>FrmPaymentLogReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -166,6 +172,9 @@
     <None Include="Resources\jizhang.png" />
     <EmbeddedResource Include="FrmPaymentLogMaster.resx">
       <DependentUpon>FrmPaymentLogMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPaymentLogReport.resx">
+      <DependentUpon>FrmPaymentLogReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

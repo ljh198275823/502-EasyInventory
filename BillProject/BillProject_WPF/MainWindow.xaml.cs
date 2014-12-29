@@ -171,6 +171,13 @@ namespace BillProject_WPF
             frm.ShowDialog();
             InitPanel(_LogFrom, _Showmode);
         }
+
+        private void btn_Report_Click(object sender, RoutedEventArgs e)
+        {
+            LJH.BillProject.FrmPaymentLogReport frm = new LJH.BillProject.FrmPaymentLogReport();
+            frm.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
         #endregion
     }
 }

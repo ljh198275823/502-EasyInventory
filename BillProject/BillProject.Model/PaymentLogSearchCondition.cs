@@ -9,6 +9,12 @@ namespace LJH.BillProject.Model
     {
         public DateTime? LogFrom { get; set; }
 
+        public DateTime? LogEnd { get; set; }
+
         public string User { get; set; }
+
+        public string Category { get; set; }
+
+        public string PaymentMode { get; set; }
     }
 }
