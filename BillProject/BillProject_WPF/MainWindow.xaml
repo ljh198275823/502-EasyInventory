@@ -28,8 +28,8 @@
             <Button Name="btn_ThisYear" Click="btn_ThisYear_Click">
                 <Button.Content>
                     <StackPanel Orientation="Vertical" >
-                        <Image Source="/Images/month.png" Height="48"/>
-                        <Label HorizontalContentAlignment="Center" Height="25">显示本年</Label>
+                        <Image Source="/Images/month.png" Height="48" />
+                        <Label HorizontalContentAlignment="Center" Height="25">最近一年</Label>
                     </StackPanel>
                 </Button.Content>
             </Button>

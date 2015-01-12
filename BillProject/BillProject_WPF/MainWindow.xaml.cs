@@ -78,7 +78,7 @@ namespace BillProject_WPF
         private void ShowThisYear()
         {
             DateTime dt = DateTime.Now;
-            _LogFrom = new DateTime(dt.Year, 1, 1);
+            _LogFrom = new DateTime(dt.Year, dt.Month, 1).AddMonths(-11);
             _Showmode = 0;
             InitPanel(_LogFrom, _Showmode);
         }
