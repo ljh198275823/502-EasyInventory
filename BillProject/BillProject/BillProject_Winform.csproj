@@ -162,6 +162,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="money.ico" />
+    <None Include="Resources\jizhang1.png" />
     <None Include="Resources\refresh.png" />
     <None Include="Resources\export.png" />
     <None Include="Resources\columns.png" />

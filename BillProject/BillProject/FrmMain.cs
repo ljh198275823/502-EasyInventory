@@ -119,6 +119,7 @@ namespace LJH.BillProject.BillProject
                     this.flowLayoutPanel1.Controls.Add(p);
                 }
             }
+            lblAmount.Text = string.Format("共消费 {0} 元", items != null && items.Count > 0 ? items.Sum(it => it.Deleted != null && it.Deleted.Value ? 0 : it.Amount) : 0);
         }
         #endregion
 
@@ -165,5 +166,20 @@ namespace LJH.BillProject.BillProject
             Environment.Exit(0);
         }
         #endregion
+
+        private void btn_Report_Click(object sender, EventArgs e)
+        {
+            FrmPaymentLogReport frm = new FrmPaymentLogReport();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
+
+        private void btnShowLastYear_Click(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            _LogFrom = new DateTime(dt.Year, dt.Month, 1).AddMonths(-11);
+            _Showmode = 0;
+            InitPanel(_LogFrom, _Showmode);
+        }
     }
 }
