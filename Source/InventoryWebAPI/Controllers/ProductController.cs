@@ -12,14 +12,16 @@ namespace LJH.Inventory.WebAPI.Controllers
 {
     public class ProductController : ApiController
     {
-        public string[] GetAll()
+        public List<Product> GetAll()
         {
-            List<Product> ps = new ProductBLL(WebConfigurationManager .ConnectionStrings["Inventory"].ConnectionString ).GetItems(null).QueryObjects;
-            if (ps != null && ps.Count > 0)
-            {
-                return ps.Select(it => it.Name).ToArray();
-            }
-            return new string[] { "not found" };
+            List<Product> ps = new ProductBLL(WebConfigurationManager.ConnectionStrings["Inventory"].ConnectionString).GetItems(null).QueryObjects;
+            return ps;
+        }
+
+        public Product Get(string id)
+        {
+            Product p = new ProductBLL(WebConfigurationManager.ConnectionStrings["Inventory"].ConnectionString).GetByID(id).QueryObject;
+            return p;
         }
     }
 }
