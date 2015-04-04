@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryDemo", "InventoryD
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InventoryDemoSetup", "InventoryDemoSetup\InventoryDemoSetup.vdproj", "{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWeb", "InventoryWeb\InventoryWeb.csproj", "{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = InventorySystem.vsmdi
@@ -119,6 +121,16 @@ Global
 		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Mixed Platforms.Build.0 = Release
 		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|x86.ActiveCfg = Release
 		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|x86.Build.0 = Release
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9FDFEBC1-96E0-4D23-97D3-6B729D39632D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
