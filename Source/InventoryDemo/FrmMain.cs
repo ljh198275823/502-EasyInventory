@@ -22,7 +22,7 @@ using LJH.Inventory.UI.Forms.Inventory.Report;
 
 namespace InventoryDemo
 {
-    public partial class FrmMain : Form, LJH.GeneralLibrary.Core.UI.IOperatorRender
+    public partial class FrmMain : Form,IMyMDIForm, LJH.GeneralLibrary.Core.UI.IOperatorRender
     {
         public FrmMain()
         {
@@ -37,7 +37,13 @@ namespace InventoryDemo
         #region 私有方法
         private void ReadSoftDog()
         {
-            SoftDogReader reader = new SoftDogReader();
+            string skey = AppSettings.Current.GetConfigContent("SKey");
+            if (string.IsNullOrEmpty(skey))
+            {
+                skey = @"#i~xnUc4RH1G@\)$&7z6qv9xy@~<mTR5nUR?OU}jh`4r<qN>:*xZwz~E$0";
+                AppSettings.Current.SaveConfig("SKey", skey);
+            }
+            SoftDogReader reader = new SoftDogReader(skey);
             try
             {
                 _SoftDog = reader.ReadDog();
@@ -90,7 +96,7 @@ namespace InventoryDemo
             }
             else
             {
-                this.Close();
+                Environment.Exit(0);
             }
         }
 
@@ -119,10 +125,12 @@ namespace InventoryDemo
             this.mnu_InventorySheet.Enabled = cur.Permit(Permission.InventorySheet, PermissionActions.Read) || cur.Permit(Permission.InventorySheet, PermissionActions.Edit);
             this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.DeliverySheet, PermissionActions.Read) || cur.Permit(Permission.DeliverySheet, PermissionActions.Edit);
             //财务
-            this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read) || cur.Permit(Permission.CustomerState, PermissionActions.Edit);
+            this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
             this.mnu_CustomerOtherReceivable.Enabled = cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Read) || cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
             this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
+            this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
+            this.mnu_SupplierPayment.Enabled = cur.Permit(Permission.SupplierPayment, PermissionActions.Read) || cur.Permit(Permission.SupplierPayment, PermissionActions.Edit);
 
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
@@ -130,15 +138,15 @@ namespace InventoryDemo
         #endregion
 
         #region 公共方法
-        private void AddForm(Form frm, bool mainPanel)
+        private void AddForm(Form frm, bool mainPanel, bool showHeader = true)
         {
             if (!mainPanel && this.ucFormViewSecondary.Visible)
             {
-                this.ucFormViewSecondary.AddAForm(frm);
+                this.ucFormViewSecondary.AddAForm(frm, showHeader);
             }
             else
             {
-                this.ucFormViewMain.AddAForm(frm);
+                this.ucFormViewMain.AddAForm(frm, showHeader);
             }
         }
         /// <summary>
@@ -146,7 +154,7 @@ namespace InventoryDemo
         /// </summary>
         /// <param name="formType">要打开的窗体类型</param>
         /// <param name="mainPanel">是否在主面板中打开,否则在从面板中打开</param>
-        public T ShowSingleForm<T>(bool mainPanel = true) where T : Form
+        public T ShowSingleForm<T>(bool mainPanel = true, bool showHeader = true) where T : Form
         {
             T instance = null;
             foreach (Form frm in _openedForms)
@@ -164,7 +172,7 @@ namespace InventoryDemo
                 instance.Tag = this;
                 instance.TopLevel = false;
                 _openedForms.Add(instance);
-                AddForm(instance, mainPanel);
+                AddForm(instance, mainPanel, showHeader);
                 instance.FormClosed += delegate(object sender, FormClosedEventArgs e)
                 {
                     _openedForms.Remove(instance);
@@ -465,11 +473,18 @@ namespace InventoryDemo
             //ReadSoftDog();
             DoLogIn();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
+            mnu_Home.PerformClick();
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
         }
         #endregion
+
+        private void mnu_Home_Click(object sender, EventArgs e)
+        {
+            FrmHome frm = ShowSingleForm<FrmHome>(true,true);
+            frm.MDIForm = this;
+        }
     }
 }

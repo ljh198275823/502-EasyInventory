@@ -465,7 +465,7 @@
             刷新
             </summary>
         </member>
-        <member name="M:LJH.GeneralLibrary.WinformControl.UCFormView.AddAForm(System.Windows.Forms.Form)">
+        <member name="M:LJH.GeneralLibrary.WinformControl.UCFormView.AddAForm(System.Windows.Forms.Form,System.Boolean)">
             <summary>
             增加一个窗体
             </summary>
@@ -503,6 +503,11 @@
         <member name="P:LJH.GeneralLibrary.WinformControl.UCFormView.FormHeaderLength">
             <summary>
             获取或设置每个窗体标题栏的长度
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.WinformControl.UCFormView.HideHeader">
+            <summary>
+            获取或设置是否隐藏窗体头
             </summary>
         </member>
         <member name="F:LJH.GeneralLibrary.WinformControl.FormHeader.components">
@@ -557,24 +562,9 @@
             表示加密狗中保存的信息
             </summary>
         </member>
-        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.logID">
-            <summary>
-            ID
-            </summary>
-        </member>
-        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.WriteDateTime">
-            <summary>
-            写入日期
-            </summary>
-        </member>
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.ProjectNo">
             <summary>
             项目编号
-            </summary>
-        </member>
-        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.ProjectName">
-            <summary>
-            项目名称
             </summary>
         </member>
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.SoftwareList">
@@ -582,24 +572,14 @@
             软件列表
             </summary>
         </member>
-        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.TryPeriodStartDate">
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.StartDate">
             <summary>
             软件试用开始时间
             </summary>
         </member>
-        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.TryPeriodDays1">
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.Days">
             <summary>
             软件试用第一次时长(天)
-            </summary>
-        </member>
-        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.TryPeriodDays2">
-            <summary>
-            软件试用第二次时长(天)目前暂不用,为0
-            </summary>
-        </member>
-        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.PayPointQuantity">
-            <summary>
-            消费系统消费点数量
             </summary>
         </member>
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.ExpiredDate">
@@ -612,6 +592,11 @@
             加密狗支持的软件类型
             </summary>
         </member>
+        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.None">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_Inventory">
             <summary>
             进销存软件
@@ -620,6 +605,16 @@
         <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_TA">
             <summary>
             考勤软件
+            </summary>
+        </member>
+        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_ACS">
+            <summary>
+            门禁软件
+            </summary>
+        </member>
+        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_ZHONGKAO">
+            <summary>
+            中考/体质测试软件
             </summary>
         </member>
         <member name="T:LJH.GeneralLibrary.LED.ZhongKuangLed">
@@ -1107,7 +1102,7 @@
         </member>
         <member name="M:LJH.GeneralLibrary.SoftDog.SoftDogReader.ReadDog">
             <summary>
-            读取加密狗信息,保存到info中,成功返回TRUE,如果加密狗信息错误会产生InvalidOperationException异常
+            读取加密狗信息
             </summary>
         </member>
         <member name="M:LJH.GeneralLibrary.SoftDog.KeyCreator.CreateKey(System.Int32)">
@@ -1236,6 +1231,11 @@
             </summary>
             <param name="items">要显示的数据</param>
             <param name="reload">是否重新加载数据，如果为真，则表示先会清空之前的数据，否则保留旧有数据</param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmMasterBase.FreshStatusBar">
+            <summary>
+            刷新状态栏
+            </summary>
         </member>
         <member name="M:LJH.GeneralLibrary.Core.UI.FrmMasterBase.Add_And_Show_Row(System.Object)">
             <summary>
@@ -1925,50 +1925,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:LJH.GeneralLibrary.WinformControl.FormPanel">
-            <summary>
-            表示一个用于放置窗口标题的面板
-            </summary>
-        </member>
-        <member name="M:LJH.GeneralLibrary.WinformControl.FormPanel.AddAForm(System.Windows.Forms.Form)">
-            <summary>
-            增加一个窗体
-            </summary>
-            <param name="frm"></param>
-        </member>
-        <member name="M:LJH.GeneralLibrary.WinformControl.FormPanel.HighLightForm(System.Windows.Forms.Form)">
-            <summary>
-            高亮显示窗体
-            </summary>
-            <param name="frm"></param>
-        </member>
-        <member name="M:LJH.GeneralLibrary.WinformControl.FormPanel.Fresh">
-            <summary>
-            刷新
-            </summary>
-        </member>
-        <member name="F:LJH.GeneralLibrary.WinformControl.FormPanel.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:LJH.GeneralLibrary.WinformControl.FormPanel.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:LJH.GeneralLibrary.WinformControl.FormPanel.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="P:LJH.GeneralLibrary.WinformControl.FormPanel.FormHeaderLength">
-            <summary>
-            获取或设置每个窗体标题栏的长度
-            </summary>
-        </member>
         <member name="P:LJH.GeneralLibrary.Core.UI.RowChangeEventArgs.IsFirstRow">
             <summary>
             获取或设置是否是第一项
@@ -1982,6 +1938,11 @@
         <member name="P:LJH.GeneralLibrary.Core.UI.RowChangeEventArgs.UpdatingItem">
             <summary>
             获取或设置当前行所指向的对象
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.SoftDog.SoftDogReader_RLD.ReadDog">
+            <summary>
+            读取加密狗信息,保存到info中,成功返回TRUE,如果加密狗信息错误会产生InvalidOperationException异常
             </summary>
         </member>
         <member name="T:LJH.GeneralLibrary.Printer.Justification">
@@ -2187,7 +2148,7 @@
         </member>
         <member name="P:LJH.GeneralLibrary.WinformControl.DecimalTextBox.PointCount">
             <summary>
-            获取或设置显示成文字时的小位点后位数
+            获取或设置显示成文字时的小位点后位数,如果指定为-1则表示不强制显示小数点
             </summary>
         </member>
         <member name="T:LJH.GeneralLibrary.SingleInstance">
@@ -2831,7 +2792,7 @@
             <param name="str"></param>
             <returns></returns>
         </member>
-        <member name="M:LJH.GeneralLibrary.HexStringConverter.HexToString(System.Byte[])">
+        <member name="M:LJH.GeneralLibrary.HexStringConverter.HexToString(System.Byte[],System.String)">
             <summary>
             字节组转十六进制字符串
             </summary>
@@ -2858,7 +2819,7 @@
             <param name="portNum">串口号</param>
             <param name="baud">波特率</param>
         </member>
-        <member name="M:LJH.GeneralLibrary.CommPort.InitCommPort(System.Int16,System.Int32)">
+        <member name="M:LJH.GeneralLibrary.CommPort.InitCommPort(System.String,System.Int32)">
             <summary>
             初始化串口
             </summary>
@@ -2890,6 +2851,16 @@
         <member name="P:LJH.GeneralLibrary.CommPort.Port">
             <summary>
             获取串口号
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.CommPort.BaudRate">
+            <summary>
+            获取或设置串口的波特率
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.CommPort.DtrEnable">
+            <summary>
+            获取或设置一个值，该值在串行通信过程中启用数据终端就绪 (DTR) 信号。
             </summary>
         </member>
         <member name="E:LJH.GeneralLibrary.CommPort.OnDataArrivedEvent">
@@ -3350,6 +3321,25 @@
             <param name="e"></param>
             <returns></returns>
         </member>
+        <member name="T:LJH.GeneralLibrary.SQLHelper.SQLStringExtractor">
+            <summary>
+            表示sql语句提取器,可以从一段文字或文件中提取可以执行的SQL语名,比如会去掉注释
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.SQLHelper.SQLStringExtractor.ExtractFromFile(System.String)">
+            <summary>
+            从文件中提取所有可执行的SQL语句
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.SQLHelper.SQLStringExtractor.ExtractFromStr(System.String)">
+            <summary>
+            从字符串中提取所有可执行的SQL语句
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
         <member name="T:LJH.GeneralLibrary.SQLHelper.DatabaseTable">
             <summary>
             表示一个数据表
@@ -3553,6 +3543,11 @@
             </summary>
         </member>
         <member name="P:LJH.GeneralLibrary.Properties.Resources.arrow_up">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Properties.Resources.button_grey_close">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>

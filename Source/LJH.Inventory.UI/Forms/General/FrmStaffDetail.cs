@@ -41,8 +41,8 @@ namespace LJH.Inventory.UI.Forms.General
                 {
                     info.Password = txtPassword.Tag.ToString();
                 }
-                info.RoleID = comRoleList.SelectedRoleID;
-                info.Role = comRoleList.Role;
+                info.Role = txtRole.Tag as Role;
+                info.RoleID = info.Role != null ? info.Role.ID : null;
                 return info;
             }
             return null;
@@ -54,7 +54,8 @@ namespace LJH.Inventory.UI.Forms.General
             txtPassword.Text = _subPwd;
             txtPassword.Tag = info.Password;
             txtPassword.Enabled = false;
-            comRoleList.SelectedRoleID = info.RoleID;
+            txtRole.Tag = info.Role;
+            txtRole.Text = info.Role != null ? info.Role.Name : null;
         }
         #endregion
 
@@ -71,7 +72,6 @@ namespace LJH.Inventory.UI.Forms.General
                 this.btnChangePwd.Visible = false;
                 this.txtPassword.Size = this.txtOperatorID.Size;
             }
-            this.comRoleList.Init();
             this.dtHireDate.IsNull = true;
             txtDepartment.Text = Department != null ? Department.Name : string.Empty;
         }
@@ -258,6 +258,24 @@ namespace LJH.Inventory.UI.Forms.General
             txtDepartment.Text = Department != null ? Department.Name : string.Empty;
         }
         #endregion
+
+        private void lnkRole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmRoleMaster frm = new FrmRoleMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Role r = frm.SelectedItem as Role;
+                txtRole.Tag = r;
+                txtRole.Text = r != null ? r.Name : null;
+            }
+        }
+
+        private void txtRole_DoubleClick(object sender, EventArgs e)
+        {
+            txtRole.Text = null;
+            txtRole.Tag = null;
+        }
 
     }
 }

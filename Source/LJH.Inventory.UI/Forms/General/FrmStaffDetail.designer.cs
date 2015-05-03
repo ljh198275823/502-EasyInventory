@@ -31,12 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dtHireDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.btnChangePwd = new System.Windows.Forms.Button();
-            this.comRoleList = new LJH.Inventory.UI.Controls.RoleComboBox(this.components);
             this.txtPassword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtOperatorID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtDepartment = new System.Windows.Forms.TextBox();
@@ -59,6 +56,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.lnkRole = new System.Windows.Forms.LinkLabel();
+            this.txtRole = new System.Windows.Forms.TextBox();
+            this.dtHireDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -78,9 +78,9 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(9, 9);
             this.tabControl1.Name = "tabControl1";
@@ -90,12 +90,12 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtRole);
+            this.tabPage1.Controls.Add(this.lnkRole);
             this.tabPage1.Controls.Add(this.dtHireDate);
             this.tabPage1.Controls.Add(this.btnChangePwd);
-            this.tabPage1.Controls.Add(this.comRoleList);
             this.tabPage1.Controls.Add(this.txtPassword);
             this.tabPage1.Controls.Add(this.txtOperatorID);
-            this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.txtDepartment);
@@ -122,14 +122,6 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // dtHireDate
-            // 
-            this.dtHireDate.CustomFormat = "yyyy-MM-dd";
-            this.dtHireDate.Location = new System.Drawing.Point(59, 107);
-            this.dtHireDate.Name = "dtHireDate";
-            this.dtHireDate.Size = new System.Drawing.Size(121, 21);
-            this.dtHireDate.TabIndex = 78;
-            // 
             // btnChangePwd
             // 
             this.btnChangePwd.Location = new System.Drawing.Point(326, 139);
@@ -138,14 +130,6 @@
             this.btnChangePwd.TabIndex = 12;
             this.btnChangePwd.Text = "改";
             this.btnChangePwd.UseVisualStyleBackColor = true;
-            // 
-            // comRoleList
-            // 
-            this.comRoleList.FormattingEnabled = true;
-            this.comRoleList.Location = new System.Drawing.Point(59, 169);
-            this.comRoleList.Name = "comRoleList";
-            this.comRoleList.Size = new System.Drawing.Size(121, 20);
-            this.comRoleList.TabIndex = 13;
             // 
             // txtPassword
             // 
@@ -163,15 +147,6 @@
             this.txtOperatorID.Name = "txtOperatorID";
             this.txtOperatorID.Size = new System.Drawing.Size(121, 21);
             this.txtOperatorID.TabIndex = 10;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 173);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 77;
-            this.label2.Text = "角色";
             // 
             // label5
             // 
@@ -390,6 +365,34 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "姓名";
             // 
+            // lnkRole
+            // 
+            this.lnkRole.AutoSize = true;
+            this.lnkRole.Location = new System.Drawing.Point(24, 172);
+            this.lnkRole.Name = "lnkRole";
+            this.lnkRole.Size = new System.Drawing.Size(29, 12);
+            this.lnkRole.TabIndex = 79;
+            this.lnkRole.TabStop = true;
+            this.lnkRole.Text = "角色";
+            this.lnkRole.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRole_LinkClicked);
+            // 
+            // txtRole
+            // 
+            this.txtRole.Location = new System.Drawing.Point(61, 169);
+            this.txtRole.Name = "txtRole";
+            this.txtRole.ReadOnly = true;
+            this.txtRole.Size = new System.Drawing.Size(121, 21);
+            this.txtRole.TabIndex = 80;
+            this.txtRole.DoubleClick += new System.EventHandler(this.txtRole_DoubleClick);
+            // 
+            // dtHireDate
+            // 
+            this.dtHireDate.CustomFormat = "yyyy-MM-dd";
+            this.dtHireDate.Location = new System.Drawing.Point(59, 107);
+            this.dtHireDate.Name = "dtHireDate";
+            this.dtHireDate.Size = new System.Drawing.Size(121, 21);
+            this.dtHireDate.TabIndex = 78;
+            // 
             // FrmStaffDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -438,12 +441,12 @@
         private System.Windows.Forms.LinkLabel lnkDepartment;
         private System.Windows.Forms.TextBox txtDepartment;
         private System.Windows.Forms.Button btnChangePwd;
-        private Controls.RoleComboBox comRoleList;
         private GeneralLibrary.WinformControl.DBCTextBox txtPassword;
         private GeneralLibrary.WinformControl.DBCTextBox txtOperatorID;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
         private Controls.NullableDateTimePicker dtHireDate;
+        private System.Windows.Forms.TextBox txtRole;
+        private System.Windows.Forms.LinkLabel lnkRole;
     }
 }

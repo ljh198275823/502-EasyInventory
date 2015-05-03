@@ -164,6 +164,16 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "资金支出资料")]
         ExpenditureRecord,
+        /// <summary>
+        /// 供应商应付管理
+        /// </summary>
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read, Description = "供应商应付管理")]
+        SupplierState,
+        /// <summary>
+        /// 供应商付款流水
+        /// </summary>
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "供应商付款流水")]
+        SupplierPayment,
         #endregion
 
         #region 其它

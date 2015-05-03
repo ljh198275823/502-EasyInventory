@@ -22,7 +22,7 @@ using LJH.Inventory.UI.Forms.Inventory.Report;
 
 namespace InventoryApplication
 {
-    public partial class FrmMain : Form, LJH.GeneralLibrary .Core.UI .IOperatorRender
+    public partial class FrmMain : Form,IMyMDIForm , LJH.GeneralLibrary .Core.UI .IOperatorRender
     {
         public FrmMain()
         {
@@ -38,7 +38,13 @@ namespace InventoryApplication
         #region 私有方法
         private void ReadSoftDog()
         {
-            SoftDogReader reader = new SoftDogReader();
+            string skey = AppSettings.Current.GetConfigContent("SKey");
+            if (string.IsNullOrEmpty(skey))
+            {
+                skey = @"#i~xnUc4RH1G@\)$&7z6qv9xy@~<mTR5nUR?OU}jh`4r<qN>:*xZwz~E$0";
+                AppSettings.Current.SaveConfig("SKey", skey);
+            }
+            SoftDogReader reader = new SoftDogReader(skey);
             try
             {
                 _SoftDog = reader.ReadDog();
@@ -131,15 +137,15 @@ namespace InventoryApplication
         #endregion
 
         #region 公共方法
-        private void AddForm(Form frm, bool mainPanel)
+        private void AddForm(Form frm, bool mainPanel, bool showHeader = true)
         {
             if (!mainPanel && this.ucFormViewSecondary.Visible)
             {
-                this.ucFormViewSecondary.AddAForm(frm);
+                this.ucFormViewSecondary.AddAForm(frm, showHeader);
             }
             else
             {
-                this.ucFormViewMain.AddAForm(frm);
+                this.ucFormViewMain.AddAForm(frm, showHeader);
             }
         }
         /// <summary>
@@ -147,7 +153,7 @@ namespace InventoryApplication
         /// </summary>
         /// <param name="formType">要打开的窗体类型</param>
         /// <param name="mainPanel">是否在主面板中打开,否则在从面板中打开</param>
-        public T ShowSingleForm<T>(bool mainPanel = true) where T : Form
+        public T ShowSingleForm<T>(bool mainPanel = true, bool showHeader = true) where T : Form
         {
             T instance = null;
             foreach (Form frm in _openedForms)
@@ -165,7 +171,7 @@ namespace InventoryApplication
                 instance.Tag = this;
                 instance.TopLevel = false;
                 _openedForms.Add(instance);
-                AddForm(instance, mainPanel);
+                AddForm(instance, mainPanel, showHeader);
                 instance.FormClosed += delegate(object sender, FormClosedEventArgs e)
                 {
                     _openedForms.Remove(instance);

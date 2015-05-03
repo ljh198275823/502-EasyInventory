@@ -23,7 +23,7 @@ namespace LJH.Inventory.UI.Forms
             if (SoftDog != null)
             {
                 lblProjectNum.Text = SoftDog.ProjectNo.ToString();
-                lblStartDate.Text = SoftDog.TryPeriodStartDate.ToShortDateString();
+                lblStartDate.Text = SoftDog.StartDate.ToShortDateString();
                 lblExpireDate.Text = SoftDog.ExpiredDate.ToShortDateString();
             }
         }

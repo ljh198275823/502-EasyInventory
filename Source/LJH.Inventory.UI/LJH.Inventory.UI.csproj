@@ -171,6 +171,7 @@
     <Compile Include="Forms\General\FrmStaffMaster.Designer.cs">
       <DependentUpon>FrmStaffMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IMyMDIForm.cs" />
     <Compile Include="Forms\Inventory\FrmInvnetoryCheck.cs">
       <SubType>Form</SubType>
     </Compile>

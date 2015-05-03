@@ -354,11 +354,11 @@
   </Table>
   <Table Name="Operator" Member="LJH.Inventory.BusinessModel.Operator">
     <Type Name="LJH.Inventory.BusinessModel.Operator">
-      <Column Name="ID" Member="ID" DbType="nVarChar(50) NOT NULL" CanBeNull="false" IsPrimaryKey="true" />
-      <Column Name="Name" Member="Name"  DbType="nvarchar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
-      <Column Name="Password" Member="_Password"  DbType="nVarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never"/>
-      <Column Name="RoleID" Member="RoleID" DbType="nvarchar(50) NULL" CanBeNull="false" UpdateCheck="Never"/>
-      <Column Name="StaffID" Member="StaffID" DbType="int null" CanBeNull="false" UpdateCheck="Never"/>
+      <Column Name="ID" Member="ID" DbType="nVarChar(50) NOT NULL" IsPrimaryKey="true" />
+      <Column Name="Name" Member="Name"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Password" Member="_Password"  DbType="nVarChar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="RoleID" Member="RoleID" DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
+      <Column Name="StaffID" Member="StaffID" DbType="int null" UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="Role" Member="LJH.Inventory.BusinessModel.Role">
