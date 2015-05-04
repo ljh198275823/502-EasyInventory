@@ -1,4 +1,4 @@
-﻿namespace InventoryDemo
+﻿namespace LJH.Inventory.UI.Forms.SQLite
 {
     partial class FrmMain
     {
@@ -31,6 +31,30 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_Help = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Manual = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_DogInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Aboat = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new LJH.GeneralLibrary.WinformControl.MyToolStrip(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblOperator = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pSecondary = new System.Windows.Forms.Panel();
+            this.ucFormViewSecondary = new LJH.GeneralLibrary.WinformControl.UCFormView();
+            this.pMain = new System.Windows.Forms.Panel();
+            this.ucFormViewMain = new LJH.GeneralLibrary.WinformControl.UCFormView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.mnu_Home = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_System = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_ChangePwd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_LogOut = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,21 +102,6 @@
             this.窗口ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_HorizontalSplit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_VerticalSplit = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Help = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Manual = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_DogInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Aboat = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new LJH.GeneralLibrary.WinformControl.MyToolStrip(this.components);
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblOperator = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pSecondary = new System.Windows.Forms.Panel();
-            this.ucFormViewSecondary = new LJH.GeneralLibrary.WinformControl.UCFormView();
-            this.pMain = new System.Windows.Forms.Panel();
-            this.ucFormViewMain = new LJH.GeneralLibrary.WinformControl.UCFormView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.mnu_Home = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -102,22 +111,214 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(30, 30);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_Home,
+            this.toolStripSeparator7,
             this.mnu_System,
+            this.toolStripSeparator8,
             this.业务资料ToolStripMenuItem,
+            this.toolStripSeparator9,
             this.mnu_DataManage,
+            this.toolStripSeparator10,
             this.采购库存ToolStripMenuItem,
+            this.toolStripSeparator11,
             this.商务ToolStripMenuItem,
+            this.toolStripSeparator12,
             this.财务ToolStripMenuItem,
+            this.toolStripSeparator13,
             this.mnu_Reports,
+            this.toolStripSeparator14,
             this.窗口ToolStripMenuItem,
+            this.toolStripSeparator15,
             this.mnu_Help});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(899, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(899, 38);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 34);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 34);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 34);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 34);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 34);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 34);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 34);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 34);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 34);
+            // 
+            // mnu_Help
+            // 
+            this.mnu_Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Manual,
+            this.mnu_DogInfo,
+            this.mnu_Aboat});
+            this.mnu_Help.Image = global::LJH.Inventory.UI.Properties.Resources.help;
+            this.mnu_Help.Name = "mnu_Help";
+            this.mnu_Help.Size = new System.Drawing.Size(74, 34);
+            this.mnu_Help.Text = "帮助";
+            // 
+            // mnu_Manual
+            // 
+            this.mnu_Manual.Name = "mnu_Manual";
+            this.mnu_Manual.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Manual.Text = "用户手册";
+            this.mnu_Manual.Click += new System.EventHandler(this.mnu_Manual_Click);
+            // 
+            // mnu_DogInfo
+            // 
+            this.mnu_DogInfo.Name = "mnu_DogInfo";
+            this.mnu_DogInfo.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DogInfo.Text = "软件授权信息";
+            this.mnu_DogInfo.Click += new System.EventHandler(this.mnu_DogInfo_Click);
+            // 
+            // mnu_Aboat
+            // 
+            this.mnu_Aboat.Name = "mnu_Aboat";
+            this.mnu_Aboat.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Aboat.Text = "关于";
+            this.mnu_Aboat.Click += new System.EventHandler(this.mnu_Aboat_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ClickThrough = true;
+            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(899, 25);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Visible = false;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lblOperator});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 308);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(899, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(47, 17);
+            this.toolStripStatusLabel1.Text = "操作员:";
+            // 
+            // lblOperator
+            // 
+            this.lblOperator.Name = "lblOperator";
+            this.lblOperator.Size = new System.Drawing.Size(0, 17);
+            // 
+            // pSecondary
+            // 
+            this.pSecondary.AutoScroll = true;
+            this.pSecondary.BackColor = System.Drawing.SystemColors.Control;
+            this.pSecondary.Controls.Add(this.ucFormViewSecondary);
+            this.pSecondary.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pSecondary.Location = new System.Drawing.Point(780, 0);
+            this.pSecondary.Name = "pSecondary";
+            this.pSecondary.Size = new System.Drawing.Size(119, 270);
+            this.pSecondary.TabIndex = 11;
+            this.pSecondary.Visible = false;
+            // 
+            // ucFormViewSecondary
+            // 
+            this.ucFormViewSecondary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucFormViewSecondary.FormHeaderLength = 135;
+            this.ucFormViewSecondary.HideHeader = false;
+            this.ucFormViewSecondary.Location = new System.Drawing.Point(0, 0);
+            this.ucFormViewSecondary.Name = "ucFormViewSecondary";
+            this.ucFormViewSecondary.Size = new System.Drawing.Size(119, 270);
+            this.ucFormViewSecondary.TabIndex = 7;
+            // 
+            // pMain
+            // 
+            this.pMain.AutoScroll = true;
+            this.pMain.BackColor = System.Drawing.SystemColors.Control;
+            this.pMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pMain.Location = new System.Drawing.Point(0, 0);
+            this.pMain.Name = "pMain";
+            this.pMain.Size = new System.Drawing.Size(780, 270);
+            this.pMain.TabIndex = 13;
+            // 
+            // ucFormViewMain
+            // 
+            this.ucFormViewMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucFormViewMain.FormHeaderLength = 135;
+            this.ucFormViewMain.HideHeader = false;
+            this.ucFormViewMain.Location = new System.Drawing.Point(0, 0);
+            this.ucFormViewMain.Name = "ucFormViewMain";
+            this.ucFormViewMain.Size = new System.Drawing.Size(772, 270);
+            this.ucFormViewMain.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.ucFormViewMain);
+            this.panel1.Controls.Add(this.splitter1);
+            this.panel1.Controls.Add(this.pMain);
+            this.panel1.Controls.Add(this.pSecondary);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 38);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(899, 270);
+            this.panel1.TabIndex = 15;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter1.Location = new System.Drawing.Point(772, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(8, 270);
+            this.splitter1.TabIndex = 13;
+            this.splitter1.TabStop = false;
+            this.splitter1.Visible = false;
+            // 
+            // mnu_Home
+            // 
+            this.mnu_Home.Image = global::LJH.Inventory.UI.Properties.Resources.home;
+            this.mnu_Home.Name = "mnu_Home";
+            this.mnu_Home.Size = new System.Drawing.Size(74, 34);
+            this.mnu_Home.Text = "首页";
+            this.mnu_Home.Click += new System.EventHandler(this.mnu_Home_Click);
             // 
             // mnu_System
             // 
@@ -125,8 +326,9 @@
             this.mnu_ChangePwd,
             this.mnu_LogOut,
             this.mnu_Exit});
+            this.mnu_System.Image = global::LJH.Inventory.UI.Properties.Resources.system;
             this.mnu_System.Name = "mnu_System";
-            this.mnu_System.Size = new System.Drawing.Size(44, 21);
+            this.mnu_System.Size = new System.Drawing.Size(74, 34);
             this.mnu_System.Text = "系统";
             // 
             // mnu_ChangePwd
@@ -161,8 +363,9 @@
             this.mnu_Staff,
             this.mnu_Role,
             this.mnu_Options});
+            this.业务资料ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.information;
             this.业务资料ToolStripMenuItem.Name = "业务资料ToolStripMenuItem";
-            this.业务资料ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.业务资料ToolStripMenuItem.Size = new System.Drawing.Size(98, 34);
             this.业务资料ToolStripMenuItem.Text = "基本资料";
             // 
             // mnu_Product
@@ -235,8 +438,9 @@
             this.mnu_Order,
             this.toolStripSeparator3,
             this.mnu_OrderMonitor});
+            this.mnu_DataManage.Image = global::LJH.Inventory.UI.Properties.Resources.sale;
             this.mnu_DataManage.Name = "mnu_DataManage";
-            this.mnu_DataManage.Size = new System.Drawing.Size(44, 21);
+            this.mnu_DataManage.Size = new System.Drawing.Size(74, 34);
             this.mnu_DataManage.Text = "销售";
             // 
             // mnu_Customer
@@ -284,8 +488,9 @@
             this.mnu_PurchaseOrder,
             this.toolStripSeparator5,
             this.mnu_PurchaseMonitor});
+            this.采购库存ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.buy;
             this.采购库存ToolStripMenuItem.Name = "采购库存ToolStripMenuItem";
-            this.采购库存ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.采购库存ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
             this.采购库存ToolStripMenuItem.Text = "采购";
             // 
             // mnu_Supplier
@@ -331,8 +536,9 @@
             this.mnu_Inventory,
             this.mnu_InventorySheet,
             this.mnu_DeliverySheet});
+            this.商务ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.inventory1;
             this.商务ToolStripMenuItem.Name = "商务ToolStripMenuItem";
-            this.商务ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.商务ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
             this.商务ToolStripMenuItem.Text = "仓库";
             // 
             // mnu_Inventory
@@ -370,8 +576,9 @@
             this.mnu_SupplierPayment,
             this.toolStripSeparator1,
             this.mnu_Expanditure});
+            this.财务ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.finance;
             this.财务ToolStripMenuItem.Name = "财务ToolStripMenuItem";
-            this.财务ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.财务ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
             this.财务ToolStripMenuItem.Text = "财务";
             // 
             // mnu_CustomerState
@@ -441,8 +648,9 @@
             this.mnu_Performance,
             this.toolStripSeparator4,
             this.mnu_InventoryRecord});
+            this.mnu_Reports.Image = global::LJH.Inventory.UI.Properties.Resources.report;
             this.mnu_Reports.Name = "mnu_Reports";
-            this.mnu_Reports.Size = new System.Drawing.Size(44, 21);
+            this.mnu_Reports.Size = new System.Drawing.Size(74, 34);
             this.mnu_Reports.Text = "报表";
             // 
             // mnu_DeliveryRecordReport
@@ -488,158 +696,24 @@
             this.窗口ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_HorizontalSplit,
             this.mnu_VerticalSplit});
+            this.窗口ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.windows;
             this.窗口ToolStripMenuItem.Name = "窗口ToolStripMenuItem";
-            this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
             this.窗口ToolStripMenuItem.Text = "窗口";
             // 
             // mnu_HorizontalSplit
             // 
             this.mnu_HorizontalSplit.Name = "mnu_HorizontalSplit";
-            this.mnu_HorizontalSplit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_HorizontalSplit.Size = new System.Drawing.Size(152, 22);
             this.mnu_HorizontalSplit.Text = "水平拆分";
             this.mnu_HorizontalSplit.Click += new System.EventHandler(this.mnu_HorizontalSplit_Click);
             // 
             // mnu_VerticalSplit
             // 
             this.mnu_VerticalSplit.Name = "mnu_VerticalSplit";
-            this.mnu_VerticalSplit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_VerticalSplit.Size = new System.Drawing.Size(152, 22);
             this.mnu_VerticalSplit.Text = "垂直拆分";
             this.mnu_VerticalSplit.Click += new System.EventHandler(this.mnu_VerticalSplit_Click);
-            // 
-            // mnu_Help
-            // 
-            this.mnu_Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_Manual,
-            this.mnu_DogInfo,
-            this.mnu_Aboat});
-            this.mnu_Help.Name = "mnu_Help";
-            this.mnu_Help.Size = new System.Drawing.Size(44, 21);
-            this.mnu_Help.Text = "帮助";
-            // 
-            // mnu_Manual
-            // 
-            this.mnu_Manual.Name = "mnu_Manual";
-            this.mnu_Manual.Size = new System.Drawing.Size(148, 22);
-            this.mnu_Manual.Text = "用户手册";
-            this.mnu_Manual.Click += new System.EventHandler(this.mnu_Manual_Click);
-            // 
-            // mnu_DogInfo
-            // 
-            this.mnu_DogInfo.Name = "mnu_DogInfo";
-            this.mnu_DogInfo.Size = new System.Drawing.Size(148, 22);
-            this.mnu_DogInfo.Text = "软件授权信息";
-            this.mnu_DogInfo.Click += new System.EventHandler(this.mnu_DogInfo_Click);
-            // 
-            // mnu_Aboat
-            // 
-            this.mnu_Aboat.Name = "mnu_Aboat";
-            this.mnu_Aboat.Size = new System.Drawing.Size(148, 22);
-            this.mnu_Aboat.Text = "关于";
-            this.mnu_Aboat.Click += new System.EventHandler(this.mnu_Aboat_Click);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.ClickThrough = true;
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(899, 25);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.Visible = false;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.lblOperator});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 308);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(899, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(47, 17);
-            this.toolStripStatusLabel1.Text = "操作员:";
-            // 
-            // lblOperator
-            // 
-            this.lblOperator.Name = "lblOperator";
-            this.lblOperator.Size = new System.Drawing.Size(0, 17);
-            // 
-            // pSecondary
-            // 
-            this.pSecondary.AutoScroll = true;
-            this.pSecondary.BackColor = System.Drawing.SystemColors.Control;
-            this.pSecondary.Controls.Add(this.ucFormViewSecondary);
-            this.pSecondary.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pSecondary.Location = new System.Drawing.Point(780, 0);
-            this.pSecondary.Name = "pSecondary";
-            this.pSecondary.Size = new System.Drawing.Size(119, 283);
-            this.pSecondary.TabIndex = 11;
-            this.pSecondary.Visible = false;
-            // 
-            // ucFormViewSecondary
-            // 
-            this.ucFormViewSecondary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucFormViewSecondary.FormHeaderLength = 135;
-            this.ucFormViewSecondary.HideHeader = false;
-            this.ucFormViewSecondary.Location = new System.Drawing.Point(0, 0);
-            this.ucFormViewSecondary.Name = "ucFormViewSecondary";
-            this.ucFormViewSecondary.Size = new System.Drawing.Size(119, 283);
-            this.ucFormViewSecondary.TabIndex = 7;
-            // 
-            // pMain
-            // 
-            this.pMain.AutoScroll = true;
-            this.pMain.BackColor = System.Drawing.SystemColors.Control;
-            this.pMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pMain.Location = new System.Drawing.Point(0, 0);
-            this.pMain.Name = "pMain";
-            this.pMain.Size = new System.Drawing.Size(780, 283);
-            this.pMain.TabIndex = 13;
-            // 
-            // ucFormViewMain
-            // 
-            this.ucFormViewMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucFormViewMain.FormHeaderLength = 135;
-            this.ucFormViewMain.HideHeader = false;
-            this.ucFormViewMain.Location = new System.Drawing.Point(0, 0);
-            this.ucFormViewMain.Name = "ucFormViewMain";
-            this.ucFormViewMain.Size = new System.Drawing.Size(772, 283);
-            this.ucFormViewMain.TabIndex = 11;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.ucFormViewMain);
-            this.panel1.Controls.Add(this.splitter1);
-            this.panel1.Controls.Add(this.pMain);
-            this.panel1.Controls.Add(this.pSecondary);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(899, 283);
-            this.panel1.TabIndex = 15;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(772, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 283);
-            this.splitter1.TabIndex = 13;
-            this.splitter1.TabStop = false;
-            this.splitter1.Visible = false;
-            // 
-            // mnu_Home
-            // 
-            this.mnu_Home.Name = "mnu_Home";
-            this.mnu_Home.Size = new System.Drawing.Size(44, 21);
-            this.mnu_Home.Text = "首页";
-            this.mnu_Home.Click += new System.EventHandler(this.mnu_Home_Click);
             // 
             // FrmMain
             // 
@@ -735,5 +809,14 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_SupplierState;
         private System.Windows.Forms.ToolStripMenuItem mnu_SupplierPayment;
         private System.Windows.Forms.ToolStripMenuItem mnu_Home;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
     }
 }

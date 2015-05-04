@@ -1,4 +1,4 @@
-﻿namespace InventoryDemo
+﻿namespace LJH.Inventory.UI.Forms.SQLite
 {
     partial class FrmLogin
     {

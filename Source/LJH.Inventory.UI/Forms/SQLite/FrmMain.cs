@@ -20,7 +20,7 @@ using LJH.Inventory.UI.Forms.Purchase;
 using LJH.Inventory.UI.Forms.Inventory;
 using LJH.Inventory.UI.Forms.Inventory.Report;
 
-namespace InventoryDemo
+namespace LJH.Inventory.UI.Forms.SQLite
 {
     public partial class FrmMain : Form,IMyMDIForm, LJH.GeneralLibrary.Core.UI.IOperatorRender
     {
@@ -52,7 +52,7 @@ namespace InventoryDemo
                     MessageBox.Show("加密狗访问错误：没有找到加密狗。如果加密狗已经插上，则可能是加密狗还没有加密，请先联系厂家进行加密!", "注意");
                     System.Environment.Exit(0);
                 }
-                else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)  //没有写停车场权限
+                else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)  //没有开放进销存软件权限
                 {
                     MessageBox.Show("加密狗权限不足：原因可能是加密狗中没有开放进销存软件权限,请联系厂家开放相应的权限!", "注意");
                     System.Environment.Exit(0);
@@ -465,6 +465,12 @@ namespace InventoryDemo
         {
             ShowSingleForm<FrmInventoryRecordReport>();
         }
+
+        private void mnu_Home_Click(object sender, EventArgs e)
+        {
+            FrmHome frm = ShowSingleForm<FrmHome>(true, true);
+            frm.MDIForm = this;
+        }
         #endregion
 
         #region 事件处理程序
@@ -478,13 +484,8 @@ namespace InventoryDemo
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Environment.Exit(0);
         }
         #endregion
-
-        private void mnu_Home_Click(object sender, EventArgs e)
-        {
-            FrmHome frm = ShowSingleForm<FrmHome>(true,true);
-            frm.MDIForm = this;
-        }
     }
 }

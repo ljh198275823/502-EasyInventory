@@ -21,27 +21,23 @@ namespace LJH.Inventory.UI.Forms
 
         private void btn_Click(object sender, EventArgs e)
         {
-            foreach (Control ctrl in pnlLeft.Controls)
+            foreach (ToolStripItem  b in toolStrip1.Items)
             {
-                if (ctrl is Button)
+                if (object.ReferenceEquals(sender, b))
                 {
-                    Button b = ctrl as Button;
-                    if (object.ReferenceEquals(sender, b))
+                    b.BackColor = Color.Blue;
+                    b.ForeColor = Color.White;
+                    if (b.Tag != null)
                     {
-                        b.BackColor = Color.Pink;
-                        b.ForeColor = Color.White;
-                        if (b.Tag != null)
-                        {
-                            string tag = b.Tag.ToString();
-                            int index = tabControl1.TabPages.IndexOfKey(tag);
-                            if (index >= 0) tabControl1.SelectedIndex = index;
-                        }
+                        string tag = b.Tag.ToString();
+                        int index = tabControl1.TabPages.IndexOfKey(tag);
+                        if (index >= 0) tabControl1.SelectedIndex = index;
                     }
-                    else
-                    {
-                        b.BackColor = SystemColors.Control;
-                        b.ForeColor = Color.Black;
-                    }
+                }
+                else
+                {
+                    b.BackColor = SystemColors.Control;
+                    b.ForeColor = Color.Black;
                 }
             }
         }
@@ -52,7 +48,7 @@ namespace LJH.Inventory.UI.Forms
             tabControl1.Top = -5;
             tabControl1.Width = panel2.Width + 10;
             tabControl1.Height = panel2.Height + 10;
-            btn_General.PerformClick();
+            btnGeneral.PerformClick();
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
