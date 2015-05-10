@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using LJH.InventoryWeb.Models;
 
 namespace InventoryWeb
 {
@@ -16,8 +17,9 @@ namespace InventoryWeb
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+            Appsetting.Current = new Appsetting() { ConnStr = string.Format("SQLITE:Data Source={0}", @"D:\InventoryWeb\Data\Inventory.db") };
 
+            AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

@@ -81,17 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="inventory.ico" />
-    <None Include="Resources\help.png" />
-    <None Include="Resources\windows.png" />
-    <None Include="Resources\report.png" />
-    <None Include="Resources\finance.png" />
-    <None Include="Resources\inventory.png" />
-    <None Include="Resources\buy.png" />
-    <None Include="Resources\sale.png" />
-    <None Include="Resources\information1.png" />
-    <None Include="Resources\information.png" />
-    <None Include="Resources\system.png" />
-    <None Include="Resources\home.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJH.Inventory.BLL\LJH.Inventory.BLL.csproj">
@@ -110,6 +99,9 @@
       <Project>{273C204B-4A1F-45E1-B7F0-A3A6CC3F6209}</Project>
       <Name>LJH.Inventory.UI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
