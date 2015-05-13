@@ -23,5 +23,13 @@ namespace InventoryWeb.Controllers
             Product p = new ProductBLL(Appsetting.Current.ConnStr).GetByID(id).QueryObject;
             return p;
         }
+
+        [HttpGet()]
+        public Product FetchByID(string id)
+        {
+            Product p = new ProductBLL(Appsetting.Current.ConnStr).GetByID(id).QueryObject;
+            p.Memo = "GetByID";
+            return p;
+        }
     }
 }
