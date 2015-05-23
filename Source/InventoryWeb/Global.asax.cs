@@ -17,7 +17,9 @@ namespace InventoryWeb
     {
         protected void Application_Start()
         {
-            Appsetting.Current = new Appsetting() { ConnStr = string.Format("SQLITE:Data Source={0}", @"D:\InventoryWeb\Data\Inventory.db") };
+            string temp = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["Inventory"].ConnectionString;
+            if (string.IsNullOrEmpty(temp)) temp = @"D:\InventoryWeb\Data\Inventory.db";
+            Appsetting.Current = new Appsetting() { ConnStr = string.Format("SQLITE:Data Source={0}", temp) };
 
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
