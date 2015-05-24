@@ -30,6 +30,10 @@ namespace LJH.Inventory.BLL
             {
                 id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.SupplierPrefix, UserSettings.Current.SupplierSerialCount, "supplier");
             }
+            else if (classID == CompanyClass.Proxy)
+            {
+                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("P", 3, "ProxyCompany");
+            }
             else
             {
                 id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("RC", 3, "relatedCompany");

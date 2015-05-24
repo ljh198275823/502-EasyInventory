@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LJH.GeneralLibrary.SoftDog;
 
 namespace LJH.Inventory.BusinessModel
 {
@@ -17,8 +18,10 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
-        #region 只读变量
+        #region 私有变量
         public readonly string DocumentType = "CompanyInfo";
+
+        private string _Password;
         #endregion
 
         #region 公共属性
@@ -74,6 +77,30 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置电子邮件
         /// </summary>
         public string Email { get; set; }
+        /// <summary>
+        /// 获取或设置客户的密码
+        /// </summary>
+        /// <summary>
+        /// 操作员登录密码
+        /// </summary>
+        public string Password
+        {
+            get
+            {
+                if (_Password.Length > 14)
+                {
+                    return (new DTEncrypt()).DSEncrypt(_Password);
+                }
+                else
+                {
+                    return _Password;
+                }
+            }
+            set
+            {
+                _Password = (new DTEncrypt()).Encrypt(value);
+            }
+        }
         /// <summary>
         /// 获取或设置地址
         /// </summary>

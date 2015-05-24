@@ -160,6 +160,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Inventory\StackOutItem.cs" />
     <Compile Include="Inventory\StackOutSheet.cs" />
+    <Compile Include="SearchCondition\YouhuiQuanSearchCondition.cs" />
     <Compile Include="SheetOperation.cs" />
     <Compile Include="SheetState.cs" />
     <Compile Include="Staff.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Unit.cs" />
     <Compile Include="UserSettings.cs" />
     <Compile Include="WareHouse.cs" />
+    <Compile Include="YouhuiQuan.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

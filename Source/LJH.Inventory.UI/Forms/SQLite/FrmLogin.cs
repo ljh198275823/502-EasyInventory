@@ -24,6 +24,10 @@ namespace LJH.Inventory.UI.Forms.SQLite
             InitializeComponent();
         }
 
+        #region 私有变量
+        private string _DefaultDBPath = Path.Combine(Application.StartupPath, "Inventory.db");
+        #endregion
+
         #region 私有方法
         private bool DoLogin(string logName, string pwd)
         {
@@ -44,8 +48,9 @@ namespace LJH.Inventory.UI.Forms.SQLite
 
         private void SaveConnectString()
         {
-            string p = "Data Source=" + Path.Combine(Application.StartupPath, "Inventory.db");
-            AppSettings.Current.ConnStr = "SQLITE:" + p;
+            string p = txtConnstr.Text.Trim();
+            if (string.IsNullOrEmpty(p)) p = _DefaultDBPath;
+            AppSettings.Current.ConnStr = "SQLITE:Data Source=" + p;
         }
 
         private List<string> GetHistoryOperators()
@@ -60,7 +65,7 @@ namespace LJH.Inventory.UI.Forms.SQLite
                     {
                         using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
                         {
-                            items= new List<string>();
+                            items = new List<string>();
                             while (!reader.EndOfStream)
                             {
                                 items.Add(reader.ReadLine());
@@ -110,6 +115,7 @@ namespace LJH.Inventory.UI.Forms.SQLite
 
         private void Login_Load(object sender, EventArgs e)
         {
+            txtConnstr.Text = AppSettings.Current.GetConfigContent("DBPath");
             if (!string.IsNullOrEmpty(CommandLineArgs.UserName))
             {
                 this.txtLogName.Text = CommandLineArgs.UserName;
@@ -168,6 +174,17 @@ namespace LJH.Inventory.UI.Forms.SQLite
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dig = new OpenFileDialog();
+            dig.Filter =  "DB 文件|*.db|所有文件(*.*)|*.*";
+            if (dig.ShowDialog() == DialogResult.OK)
+            {
+                AppSettings.Current.SaveConfig("DBPath", dig.FileName);
+                txtConnstr.Text = dig.FileName;
+            }
         }
     }
 }

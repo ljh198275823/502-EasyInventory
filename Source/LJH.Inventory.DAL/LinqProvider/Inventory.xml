@@ -64,6 +64,7 @@
       <Column Name="PostalCode" Member="PostalCode" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Website" Member="Website" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Email" Member="Email" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Password" Member="_Password" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Address" Member="Address" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Bank" Member="Bank" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="BankAccount" Member="BankAccount" DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -579,6 +580,19 @@
       <Column Name="CheckCount" Member="CheckCount"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="Checker" Member="Checker"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Operator" Member="Operator"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
+  <Table Name="YouhuiQuan" Member="LJH.Inventory.BusinessModel.YouhuiQuan">
+    <Type Name="LJH.Inventory.BusinessModel.YouhuiQuan">
+      <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
+      <Column Name="YouhuiID" Member="YouhuiID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="UserID" Member="UserID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="ExpireDate" Member="ExpireDate"  DbType="Datetime" UpdateCheck="Never"/>
+      <Column Name="Proxy" Member="Proxy"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="ComsumeDate" Member="ComsumeDate"  DbType="Datetime" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

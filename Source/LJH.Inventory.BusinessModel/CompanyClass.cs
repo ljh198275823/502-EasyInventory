@@ -8,19 +8,23 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户类型枚举
     /// </summary>
-    public enum  CompanyClass
+    public enum CompanyClass
     {
         /// <summary>
         /// 其它
         /// </summary>
-        Other=3,
+        Other = 3,
         /// <summary>
         /// 客户
         /// </summary>
-        Customer=5,
+        Customer = 5,
         /// <summary>
         /// 供应商
         /// </summary>
-        Supplier=6
+        Supplier = 6,
+        /// <summary>
+        /// 代理商
+        /// </summary>
+        Proxy = 7,
     }
 }

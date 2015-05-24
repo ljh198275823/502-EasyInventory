@@ -105,6 +105,18 @@
     <Compile Include="Forms\FrmChangePwd.designer.cs">
       <DependentUpon>FrmChangePwd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Sale\FrmProxyDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sale\FrmProxyDetail.Designer.cs">
+      <DependentUpon>FrmProxyDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sale\FrmProxyMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sale\FrmProxyMaster.Designer.cs">
+      <DependentUpon>FrmProxyMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\General\FrmCollectionTypeDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -637,6 +649,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmChangePwd.resx">
       <DependentUpon>FrmChangePwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sale\FrmProxyDetail.resx">
+      <DependentUpon>FrmProxyDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sale\FrmProxyMaster.resx">
+      <DependentUpon>FrmProxyMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\General\FrmCollectionTypeDetail.resx">
       <DependentUpon>FrmCollectionTypeDetail.cs</DependentUpon>

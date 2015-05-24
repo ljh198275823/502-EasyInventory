@@ -479,7 +479,7 @@ namespace LJH.Inventory.UI.Forms.SQLite
             //ReadSoftDog();
             DoLogIn();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
-            mnu_Home.PerformClick();
+            //mnu_Home.PerformClick();
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -487,5 +487,10 @@ namespace LJH.Inventory.UI.Forms.SQLite
             Environment.Exit(0);
         }
         #endregion
+
+        private void mnu_Proxy_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmProxyMaster>();
+        }
     }
 }

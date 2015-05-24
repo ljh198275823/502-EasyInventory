@@ -201,7 +201,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="btnLogin.Location" type="System.Drawing.Point, System.Drawing">
     <value>317, 12</value>
@@ -225,7 +225,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnLogin.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txtLogName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -277,13 +277,28 @@
     <value>txtPassword</value>
   </data>
   <data name="&gt;&gt;txtPassword.Type" xml:space="preserve">
-    <value>LJH.GeneralLibrary.WinformControl.DBCTextBox, LJH.GeneralLibrary, Version=2.0.2014.424, Culture=neutral, PublicKeyToken=null</value>
+    <value>LJH.GeneralLibrary.WinformControl.DBCTextBox, LJH.GeneralLibrary, Version=2.0.2015.413, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtPassword.Parent" xml:space="preserve">
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;txtPassword.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="chkRememberLogid.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkRememberLogid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 75</value>
+  </data>
+  <data name="chkRememberLogid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 16</value>
+  </data>
+  <data name="chkRememberLogid.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="chkRememberLogid.Text" xml:space="preserve">
+    <value>记住登录名</value>
   </data>
   <data name="&gt;&gt;chkRememberLogid.Name" xml:space="preserve">
     <value>chkRememberLogid</value>
@@ -316,33 +331,93 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="chkRememberLogid.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkRememberLogid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 75</value>
-  </data>
-  <data name="chkRememberLogid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 16</value>
-  </data>
-  <data name="chkRememberLogid.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="chkRememberLogid.Text" xml:space="preserve">
-    <value>记住登录名</value>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;chkRememberLogid.Name" xml:space="preserve">
-    <value>chkRememberLogid</value>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;chkRememberLogid.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 129</value>
   </data>
-  <data name="&gt;&gt;chkRememberLogid.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
   </data>
-  <data name="&gt;&gt;chkRememberLogid.ZOrder" xml:space="preserve">
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>数据库：</value>
+  </data>
+  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtConnstr.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="txtConnstr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>On</value>
+  </data>
+  <data name="txtConnstr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 125</value>
+  </data>
+  <data name="txtConnstr.MaxLength" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="txtConnstr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 21</value>
+  </data>
+  <data name="txtConnstr.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;txtConnstr.Name" xml:space="preserve">
+    <value>txtConnstr</value>
+  </data>
+  <data name="&gt;&gt;txtConnstr.Type" xml:space="preserve">
+    <value>LJH.GeneralLibrary.WinformControl.DBCTextBox, LJH.GeneralLibrary, Version=2.0.2015.413, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtConnstr.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtConnstr.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>387, 125</value>
+  </data>
+  <data name="btnBrowse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 21</value>
+  </data>
+  <data name="btnBrowse.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnBrowse.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Name" xml:space="preserve">
+    <value>btnBrowse</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -352,7 +427,7 @@
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>463, 115</value>
+    <value>463, 161</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

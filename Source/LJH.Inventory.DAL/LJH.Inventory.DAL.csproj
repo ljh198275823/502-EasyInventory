@@ -128,6 +128,7 @@
     <Compile Include="LinqProvider\UnitProvider.cs" />
     <Compile Include="LinqProvider\UnitWork.cs" />
     <Compile Include="LinqProvider\WareHouseProvider.cs" />
+    <Compile Include="LinqProvider\YouhuiQuanProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

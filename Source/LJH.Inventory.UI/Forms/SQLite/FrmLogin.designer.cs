@@ -38,6 +38,9 @@
             this.txtPassword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkRememberLogid = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtConnstr = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,12 +99,32 @@
             this.chkRememberLogid.UseVisualStyleBackColor = true;
             this.chkRememberLogid.CheckedChanged += new System.EventHandler(this.chkRememberLogid_CheckedChanged);
             // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // txtConnstr
+            // 
+            resources.ApplyResources(this.txtConnstr, "txtConnstr");
+            this.txtConnstr.Name = "txtConnstr";
+            // 
+            // btnBrowse
+            // 
+            resources.ApplyResources(this.btnBrowse, "btnBrowse");
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
             // FrmLogin
             // 
             this.AcceptButton = this.btnLogin;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.btnBrowse);
+            this.Controls.Add(this.txtConnstr);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnCancel);
@@ -114,6 +137,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -127,5 +151,8 @@
         public LJH.GeneralLibrary.WinformControl.DBCTextBox txtPassword;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox chkRememberLogid;
+        public System.Windows.Forms.Label label3;
+        public GeneralLibrary.WinformControl.DBCTextBox txtConnstr;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }
