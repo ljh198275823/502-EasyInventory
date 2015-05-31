@@ -21,7 +21,6 @@ namespace InventoryWeb.Controllers
 
         public Product Get(string id)
         {
-
             Product p = new ProductBLL(Appsetting.Current.ConnStr).GetByID(id).QueryObject;
             return p;
         }
