@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWeb", "InventoryWe
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InventoryWebSetup", "InventoryWebSetup\InventoryWebSetup.vdproj", "{B4A77956-51DF-4FBE-9AB1-6951CBC087B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWebFormTest", "WebAPIFormTest\InventoryWebFormTest.csproj", "{BE9065B8-0D88-4E56-BB54-C4D61435D56E}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = InventorySystem.vsmdi
@@ -139,6 +141,16 @@ Global
 		{B4A77956-51DF-4FBE-9AB1-6951CBC087B5}.Release|Any CPU.ActiveCfg = Release
 		{B4A77956-51DF-4FBE-9AB1-6951CBC087B5}.Release|Mixed Platforms.ActiveCfg = Release
 		{B4A77956-51DF-4FBE-9AB1-6951CBC087B5}.Release|x86.ActiveCfg = Release
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Debug|x86.ActiveCfg = Debug|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Debug|x86.Build.0 = Debug|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Release|Any CPU.ActiveCfg = Release|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Release|x86.ActiveCfg = Release|x86
+		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
