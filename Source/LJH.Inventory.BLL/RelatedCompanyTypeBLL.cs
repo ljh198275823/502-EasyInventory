@@ -21,18 +21,18 @@ namespace LJH.Inventory.BLL
         #region 公共方法
         public override CommandResult Delete(RelatedCompanyType info)
         {
-            List<RelatedCompanyType> tps = ProviderFactory.Create<IProvider<RelatedCompanyType, string>>(_RepoUri).GetItems(null).QueryObjects;
+            List<RelatedCompanyType> tps = ProviderFactory.Create<IProvider<RelatedCompanyType, string>>(RepoUri).GetItems(null).QueryObjects;
             if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
                 return new CommandResult(ResultCode.Fail, "客户类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
-            IProvider<CompanyInfo, string> sp = ProviderFactory.Create<IProvider<CompanyInfo, string>>(_RepoUri);
+            IProvider<CompanyInfo, string> sp = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri);
             CustomerSearchCondition con = new CustomerSearchCondition() { ClassID = CompanyClass.Other, Category = info.ID };
             if (sp.GetItems(con).QueryObjects.Count > 0)
             {
                 return new CommandResult(ResultCode.Fail, "已经有客户归到此类别，如果确实要删除此类别，请先更改相关客户的所属类别");
             }
-            return ProviderFactory.Create<IProvider<RelatedCompanyType, string>>(_RepoUri).Delete(info);
+            return ProviderFactory.Create<IProvider<RelatedCompanyType, string>>(RepoUri).Delete(info);
         }
         #endregion
     }

@@ -25,14 +25,14 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Save(SysparameterInfo parameter)
         {
-            SysparameterInfo original = ProviderFactory.Create<IProvider<SysparameterInfo, string>>(_RepoUri).GetByID(parameter.ID).QueryObject;
+            SysparameterInfo original = ProviderFactory.Create<IProvider<SysparameterInfo, string>>(RepoUri).GetByID(parameter.ID).QueryObject;
             if (original != null)
             {
-                return ProviderFactory.Create<IProvider<SysparameterInfo, string>>(_RepoUri).Update(parameter, original);
+                return ProviderFactory.Create<IProvider<SysparameterInfo, string>>(RepoUri).Update(parameter, original);
             }
             else
             {
-                return ProviderFactory.Create<IProvider<SysparameterInfo, string>>(_RepoUri).Insert(parameter);
+                return ProviderFactory.Create<IProvider<SysparameterInfo, string>>(RepoUri).Insert(parameter);
             }
         }
 

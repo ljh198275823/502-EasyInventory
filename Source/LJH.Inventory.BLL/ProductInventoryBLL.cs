@@ -27,7 +27,7 @@ namespace LJH.Inventory.BLL
         public CommandResult CreateInventory(ProductInventory info)
         {
             ProductInventorySearchCondition con = new ProductInventorySearchCondition() { ProductID = info.ProductID, WareHouseID = info.WareHouseID };
-            List<ProductInventory> items = ProviderFactory.Create<IProvider<ProductInventory, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            List<ProductInventory> items = ProviderFactory.Create<IProvider<ProductInventory, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0) return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点或收货单收货");
             ProductInventoryItem pii = new ProductInventoryItem()
             {
@@ -40,7 +40,7 @@ namespace LJH.Inventory.BLL
                 AddDate = DateTime.Now,
                 InventorySheet = "初始库存"
             };
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii);
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii);
         }
         /// <summary>
         /// 将库存分配给某个订单项,分配给某个订单项的库存不能再用于其它订单的出货，只能用于该订单项出货
@@ -51,14 +51,14 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Reserve(string warehouseID, string productID, Guid orderItem, string orderID, decimal count)
         {
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
             con.Products = new List<string>();
             con.Products.Add(productID);
             con.WareHouseID = warehouseID;
             con.UnShipped = true;    //未发货的库存项
             con.UnReserved = true;  //未分配给某个特定的订单
-            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items.Sum(item => item.Count) < count) return new CommandResult(ResultCode.Fail, string.Format("库存不足，预分配失败!", productID));
 
             if (UserSettings.Current.InventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式排序
@@ -79,18 +79,18 @@ namespace LJH.Inventory.BLL
                         pii.OrderItem = orderItem;
                         pii.OrderID = orderID;
                         pii.Count = count;
-                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
+                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(pii, pii1, unitWork);
 
                         pii1.ID = Guid.NewGuid();
                         pii1.Count -= count;
-                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii1, unitWork);
+                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii1, unitWork);
                         count = 0;
                     }
                     else
                     {
                         pii.OrderItem = orderItem;
                         pii.OrderID = orderID;
-                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(pii, pii1, unitWork);
+                        ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(pii, pii1, unitWork);
                         count -= pii.Count;
                     }
                 }
@@ -107,7 +107,7 @@ namespace LJH.Inventory.BLL
             ProductInventoryItem clone = item.Clone();
             item.OrderItem = null;
             item.OrderID = null;
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(item, clone);
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(item, clone);
         }
         #endregion
     }

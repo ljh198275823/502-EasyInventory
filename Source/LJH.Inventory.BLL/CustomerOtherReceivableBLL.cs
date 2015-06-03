@@ -21,7 +21,7 @@ namespace LJH.Inventory.BLL
         #region 重写基类方法
         protected override string CreateSheetID(CustomerOtherReceivable info)
         {
-            info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DaiFuPrefix,
+            info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.DaiFuPrefix,
                     UserSettings.Current.DaiFuDateFormat, UserSettings.Current.DaiFuSerialCount, info.DocumentType); //代付款
             return info.ID;
         }
@@ -39,7 +39,7 @@ namespace LJH.Inventory.BLL
                 Haspaid = 0,
                 Memo = info.Memo
             };
-            ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
+            ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
             base.DoApprove(info, unitWork, dt, opt);
         }
 
@@ -47,7 +47,7 @@ namespace LJH.Inventory.BLL
         {
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
             con.SheetID = info.ID;
-            List<CustomerReceivable> items = new CustomerReceivableBLL(_RepoUri).GetItems(con).QueryObjects;
+            List<CustomerReceivable> items = new CustomerReceivableBLL(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 CustomerReceivable cr = items.FirstOrDefault(it => it.ClassID == CustomerReceivableType.CustomerOtherReceivable);
@@ -56,7 +56,7 @@ namespace LJH.Inventory.BLL
                     CustomerPaymentAssignSearchCondition con1 = new CustomerPaymentAssignSearchCondition();
                     con1.ReceivableIDs = new List<Guid>();
                     con1.ReceivableIDs.Add(cr.ID);
-                    List<CustomerPaymentAssign> assigns = (new CustomerPaymentAssignBLL(_RepoUri)).GetItems(con1).QueryObjects;
+                    List<CustomerPaymentAssign> assigns = (new CustomerPaymentAssignBLL(RepoUri)).GetItems(con1).QueryObjects;
                     if (assigns != null && assigns.Count > 0)
                     {
                         bool allSuccess = true;
@@ -67,7 +67,7 @@ namespace LJH.Inventory.BLL
                         }
                         if (!allSuccess) throw new Exception("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"取消审核\"的操作");
                     }
-                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Delete(cr, unitWork); //删除应收
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Delete(cr, unitWork); //删除应收
                 }
             }
             base.UndoApprove(info, unitWork, dt, opt);
@@ -77,7 +77,7 @@ namespace LJH.Inventory.BLL
         {
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
             con.SheetID = info.ID;
-            List<CustomerReceivable> items = new CustomerReceivableBLL(_RepoUri).GetItems(con).QueryObjects;
+            List<CustomerReceivable> items = new CustomerReceivableBLL(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 CustomerReceivable cr = items.FirstOrDefault(it => it.ClassID == CustomerReceivableType.CustomerOtherReceivable);
@@ -86,7 +86,7 @@ namespace LJH.Inventory.BLL
                     CustomerPaymentAssignSearchCondition con1 = new CustomerPaymentAssignSearchCondition();
                     con1.ReceivableIDs = new List<Guid>();
                     con1.ReceivableIDs.Add(cr.ID);
-                    List<CustomerPaymentAssign> assigns = (new CustomerPaymentAssignBLL(_RepoUri)).GetItems(con1).QueryObjects;
+                    List<CustomerPaymentAssign> assigns = (new CustomerPaymentAssignBLL(RepoUri)).GetItems(con1).QueryObjects;
                     if (assigns != null && assigns.Count > 0)
                     {
                         bool allSuccess = true;
@@ -97,7 +97,7 @@ namespace LJH.Inventory.BLL
                         }
                         if (!allSuccess) throw new Exception("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"作废\"的操作");
                     }
-                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Delete(cr, unitWork); //删除应收
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Delete(cr, unitWork); //删除应收
                 }
             }
             base.DoNullify(info, unitWork, dt, opt);

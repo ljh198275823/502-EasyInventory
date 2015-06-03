@@ -20,12 +20,12 @@ namespace LJH.Inventory.BLL
         #region 公共方法
         public override CommandResult Delete(ExpenditureType info)
         {
-            List<ExpenditureType> tps = ProviderFactory.Create<IProvider<ExpenditureType, string>>(_RepoUri).GetItems(null).QueryObjects;
+            List<ExpenditureType> tps = ProviderFactory.Create<IProvider<ExpenditureType, string>>(RepoUri).GetItems(null).QueryObjects;
             if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
                 return new CommandResult(ResultCode.Fail, "类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
-            return ProviderFactory.Create<IProvider<ExpenditureType, string>>(_RepoUri).Delete(info);
+            return ProviderFactory.Create<IProvider<ExpenditureType, string>>(RepoUri).Delete(info);
         }
         #endregion
     }

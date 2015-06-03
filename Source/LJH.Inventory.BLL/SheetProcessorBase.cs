@@ -34,7 +34,7 @@ namespace LJH.Inventory.BLL
             {
                 info.LastActiveDate = dt; //修改最后活动时间
                 info.State = SheetState.Add; //单据状态
-                IProvider<TEntity, string> provider = ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri);
+                IProvider<TEntity, string> provider = ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri);
                 provider.Insert(info, unitWork);
             }
             else
@@ -50,11 +50,11 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         protected virtual void DoUpdate(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            TEntity original = ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).GetByID(info.ID).QueryObject;
+            TEntity original = ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).GetByID(info.ID).QueryObject;
             if (original != null)
             {
                 info.LastActiveDate = dt; //修改最后活动时间
-                ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
+                ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).Update(info, original, unitWork);
             }
             else
             {
@@ -72,7 +72,7 @@ namespace LJH.Inventory.BLL
             TEntity original = info.Clone() as TEntity;
             info.State = SheetState.Approved;
             info.LastActiveDate = dt; //修改最后活动时间
-            ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
+            ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).Update(info, original, unitWork);
         }
         /// <summary>
         /// 取消审核
@@ -85,7 +85,7 @@ namespace LJH.Inventory.BLL
             TEntity original = info.Clone() as TEntity;
             info.State = SheetState.Add;
             info.LastActiveDate = dt; //修改最后活动时间
-            ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
+            ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).Update(info, original, unitWork);
         }
         /// <summary>
         /// 将订单作废
@@ -98,7 +98,7 @@ namespace LJH.Inventory.BLL
             TEntity original = info.Clone() as TEntity;
             info.State = SheetState.Canceled;
             info.LastActiveDate = dt; //修改最后活动时间
-            ProviderFactory.Create<IProvider<TEntity, string>>(_RepoUri).Update(info, original, unitWork);
+            ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).Update(info, original, unitWork);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace LJH.Inventory.BLL
         protected virtual DateTime? GetLastActiveDate(TEntity sheet)
         {
             DateTime? dt = null;
-            QueryResultList<DocumentOperation> ret = (new DocumentOperationBLL(_RepoUri)).GetHisOperations(sheet.ID, sheet.DocumentType);
+            QueryResultList<DocumentOperation> ret = (new DocumentOperationBLL(RepoUri)).GetHisOperations(sheet.ID, sheet.DocumentType);
             if (ret.Result == ResultCode.Successful && ret.QueryObjects.Count > 0)
             {
                 foreach (DocumentOperation item in ret.QueryObjects)
@@ -170,7 +170,7 @@ namespace LJH.Inventory.BLL
                 Operator = opt,
                 LogID = logID,
             };
-            ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(_RepoUri).Insert(doc, unitWork);
+            ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(RepoUri).Insert(doc, unitWork);
         }
         /// <summary>
         /// 获取服务器时间
@@ -179,7 +179,7 @@ namespace LJH.Inventory.BLL
         protected virtual DateTime? GetServerDateTime()
         {
             DateTime? dt = null;
-            ProviderFactory.Create<IServerDatetimeProvider>(_RepoUri).GetServerDateTime(out dt);
+            ProviderFactory.Create<IServerDatetimeProvider>(RepoUri).GetServerDateTime(out dt);
             return dt;
         }
         #endregion
@@ -196,7 +196,7 @@ namespace LJH.Inventory.BLL
         {
             try
             {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 DateTime? dt = GetServerDateTime(); //从数据库获取时间
                 if (dt == null) return new CommandResult(ResultCode.Fail, "从数据库服务器获取时间失败");
                 if (operation == SheetOperation.Create)

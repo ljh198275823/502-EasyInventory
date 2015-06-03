@@ -23,7 +23,7 @@ namespace LJH.Inventory.BLL
         {
             if (string.IsNullOrEmpty(info.ID))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.PurchaseSheetPrefix,
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.PurchaseSheetPrefix,
                     UserSettings.Current.PurchaseSheetDateFormat, UserSettings.Current.PurchaseSheetSerialCount, info.DocumentType);
             }
             if (!string.IsNullOrEmpty(info.ID)) info.Items.ForEach(item => item.PurchaseID = info.ID);//这一句不能省!!
@@ -34,7 +34,7 @@ namespace LJH.Inventory.BLL
         #region 公共方法
         public QueryResultList<PurchaseItemRecord> GetRecords(SearchCondition con)
         {
-            return ProviderFactory.Create<IProvider<PurchaseItemRecord, Guid>>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<PurchaseItemRecord, Guid>>(RepoUri).GetItems(con);
         }
         #endregion
     }

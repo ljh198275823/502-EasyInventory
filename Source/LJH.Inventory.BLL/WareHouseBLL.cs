@@ -24,7 +24,7 @@ namespace LJH.Inventory.BLL
         {
             if (string.IsNullOrEmpty(info.ID))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.WareHousePrefix, UserSettings.Current.WareHouseSerialCount, "warehouse");
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.WareHousePrefix, UserSettings.Current.WareHouseSerialCount, "warehouse");
             }
             if (!string.IsNullOrEmpty(info.ID))
             {

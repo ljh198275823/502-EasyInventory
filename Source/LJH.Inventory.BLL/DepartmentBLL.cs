@@ -22,7 +22,7 @@ namespace LJH.Inventory.BLL
         {
             if (string.IsNullOrEmpty(info.ID))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("D", 4, "Department");
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("D", 4, "Department");
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
@@ -36,12 +36,12 @@ namespace LJH.Inventory.BLL
 
         public override CommandResult Delete(Department info)
         {
-            List<Department> tps = ProviderFactory.Create<IProvider<Department, string>>(_RepoUri).GetItems(null).QueryObjects;
+            List<Department> tps = ProviderFactory.Create<IProvider<Department, string>>(RepoUri).GetItems(null).QueryObjects;
             if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
                 return new CommandResult(ResultCode.Fail, "部门下已经有子部门，请先将所有子部门删除，再删除此部门");
             }
-            IProvider<Staff, int> sp = ProviderFactory.Create<IProvider<Staff, int>>(_RepoUri);
+            IProvider<Staff, int> sp = ProviderFactory.Create<IProvider<Staff, int>>(RepoUri);
             List<Staff> staffs = sp.GetItems(null).QueryObjects;
             if (staffs.Exists(it => it.DepartmentID == info.ID))
             {

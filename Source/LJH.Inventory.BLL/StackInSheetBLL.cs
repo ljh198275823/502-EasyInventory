@@ -40,7 +40,7 @@ namespace LJH.Inventory.BLL
                     InventoryItem = si.ID,
                     InventorySheet = si.SheetNo,
                 };
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii, unitWork);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii, unitWork);
             }
         }
 
@@ -74,7 +74,7 @@ namespace LJH.Inventory.BLL
             }
             foreach (CustomerReceivable cr in crs)
             {
-                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
             }
         }
         #endregion
@@ -84,7 +84,7 @@ namespace LJH.Inventory.BLL
         {
             if (string.IsNullOrEmpty(info.ID))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.InventorySheetPrefix,
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.InventorySheetPrefix,
                     UserSettings.Current.InventorySheetDateFormat, UserSettings.Current.InventorySheetSerialCount, info.DocumentType);
             }
             if (!string.IsNullOrEmpty(info.ID)) info.Items.ForEach(item => item.SheetNo = info.ID);//这一句不能省!!
@@ -98,7 +98,7 @@ namespace LJH.Inventory.BLL
             StackInSheet sheet1 = info.Clone() as StackInSheet;
             info.State = SheetState.Inventory;
             info.LastActiveDate = dt;
-            ProviderFactory.Create<IProvider<StackInSheet, string>>(_RepoUri).Update(info, sheet1, unitWork);
+            ProviderFactory.Create<IProvider<StackInSheet, string>>(RepoUri).Update(info, sheet1, unitWork);
 
             AddToProductInventory(info, unitWork); //更新商品库存
             if (info.ClassID == StackInSheetType.InventorySheet) AddReceivables(info, unitWork);         //增加供应商的应收账款
@@ -118,7 +118,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResultList<StackInRecord> GetInventoryRecords(SearchCondition con)
         {
-            return ProviderFactory.Create<IProvider<StackInRecord, Guid>>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<StackInRecord, Guid>>(RepoUri).GetItems(con);
         }
         #endregion
     }

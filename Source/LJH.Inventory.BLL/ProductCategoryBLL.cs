@@ -23,7 +23,7 @@ namespace LJH.Inventory.BLL
         {
             if (string.IsNullOrEmpty(info.ID))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CategoryPrefix, UserSettings.Current.CategorySerialCount, "category");
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.CategoryPrefix, UserSettings.Current.CategorySerialCount, "category");
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
@@ -37,12 +37,12 @@ namespace LJH.Inventory.BLL
 
         public override CommandResult Delete(ProductCategory info)
         {
-            List<ProductCategory> tps = ProviderFactory.Create<IProvider<ProductCategory, string>>(_RepoUri).GetItems(null).QueryObjects;
+            List<ProductCategory> tps = ProviderFactory.Create<IProvider<ProductCategory, string>>(RepoUri).GetItems(null).QueryObjects;
             if (tps != null && tps.Count > 0 && tps.Exists(item => item.Parent == info.ID))
             {
                 return new CommandResult(ResultCode.Fail, "类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
-            IProvider<Product, string> sp = ProviderFactory.Create<IProvider<Product, string>>(_RepoUri);
+            IProvider<Product, string> sp = ProviderFactory.Create<IProvider<Product, string>>(RepoUri);
             ProductSearchCondition con = new ProductSearchCondition() { CategoryID = info.ID };
             if (sp.GetItems(con).QueryObjects.Count > 0)
             {

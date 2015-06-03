@@ -16,5 +16,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string Proxy { get; set; }
 
         public DateTimeRange ComsumeDate { get; set; }
+
+        public bool? CanUseNow { get; set; }
     }
 }

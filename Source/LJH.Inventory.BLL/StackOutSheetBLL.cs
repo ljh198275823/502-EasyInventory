@@ -26,7 +26,7 @@ namespace LJH.Inventory.BLL
             con.Products = pids;
             con.WareHouseID = sheet.WareHouseID;
             con.UnShipped = true;
-            List<ProductInventoryItem> inventoryItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            List<ProductInventoryItem> inventoryItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (inventoryItems == null || inventoryItems.Count == 0) throw new Exception("没有找到相关的库存项");
             List<ProductInventoryItem> clones = new List<ProductInventoryItem>();
             inventoryItems.ForEach(it => clones.Add(it.Clone())); //备分所有的项的克隆
@@ -34,18 +34,18 @@ namespace LJH.Inventory.BLL
             ////减少库存
             foreach (StackOutItem si in sheet.Items)
             {
-                Product p = ProviderFactory.Create<IProvider<Product, string>>(_RepoUri).GetByID(si.ProductID).QueryObject;
+                Product p = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetByID(si.ProductID).QueryObject;
                 if (p != null && p.IsService != null && p.IsService.Value) continue; //如果是产品是服务的话就不用再从库存中扣除了
                 Assign(si, inventoryOutType, inventoryItems, addingItems);
             }
             foreach (ProductInventoryItem item in inventoryItems)
             {
                 ProductInventoryItem clone = clones.Single(it => it.ID == item.ID);
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(item, clone, unitWork);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(item, clone, unitWork);
             }
             foreach (ProductInventoryItem item in addingItems)
             {
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(item, unitWork);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(item, unitWork);
             }
         }
 
@@ -133,7 +133,7 @@ namespace LJH.Inventory.BLL
             }
             foreach (CustomerReceivable cr in crs)
             {
-                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(_RepoUri).Insert(cr, unitWork);
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
             }
         }
         #endregion
@@ -143,12 +143,12 @@ namespace LJH.Inventory.BLL
         {
             if (info.ClassID == StackOutSheetType.DeliverySheet)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.DeliverySheetPrefix,
                         UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, info.DocumentType);
             }
             else if (info.ClassID == StackOutSheetType.CustomerBorrow)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("JYD",
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("JYD",
                         UserSettings.Current.DeliverySheetDateFormat, UserSettings.Current.DeliverySheetSerialCount, info.DocumentType);
             }
             if (!string.IsNullOrEmpty(info.ID)) info.Items.ForEach(item => item.SheetNo = info.ID);//这一句不能省!!
@@ -157,7 +157,7 @@ namespace LJH.Inventory.BLL
 
         protected override void DoShip(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            IProvider<StackOutSheet, string> provider = ProviderFactory.Create<IProvider<StackOutSheet, string>>(_RepoUri);
+            IProvider<StackOutSheet, string> provider = ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri);
             if (info.Items == null || info.Items.Count == 0) throw new Exception("单号为 " + info.ID + " 的送货单发货失败，没有送货单项");
             StackOutSheet sheet1 = info.Clone() as StackOutSheet;
             info.LastActiveDate = dt;
@@ -218,12 +218,12 @@ namespace LJH.Inventory.BLL
             {
                 SheetID = sheetNo,
             };
-            List<CustomerReceivable> items = (new CustomerReceivableBLL(_RepoUri)).GetItems(con1).QueryObjects;
+            List<CustomerReceivable> items = (new CustomerReceivableBLL(RepoUri)).GetItems(con1).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
                 con.ReceivableIDs = items.Select(it => it.ID).ToList();
-                return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con);
+                return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(RepoUri).GetItems(con);
             }
             return new QueryResultList<CustomerPaymentAssign>(ResultCode.Fail, "没有找到记录", null);
         }
@@ -234,7 +234,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResultList<StackOutRecord> GetDeliveryRecords(SearchCondition con)
         {
-            return ProviderFactory.Create<IProvider<StackOutRecord, Guid>>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<StackOutRecord, Guid>>(RepoUri).GetItems(con);
         }
         #endregion
     }

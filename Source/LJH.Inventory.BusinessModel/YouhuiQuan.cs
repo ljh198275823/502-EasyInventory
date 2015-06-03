@@ -33,9 +33,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置券的过期时间
+        /// 获取或设置券的有效开始日期
         /// </summary>
-        public DateTime? ExpireDate { get; set; }
+        public DateTime? From { get; set; }
+        /// <summary>
+        /// 获取或设置券的有效截止日期
+        /// </summary>
+        public DateTime? To { get; set; }
         /// <summary>
         /// 获取或设置券兑换的代理商
         /// </summary>

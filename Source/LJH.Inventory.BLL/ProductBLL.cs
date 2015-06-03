@@ -30,11 +30,11 @@ namespace LJH.Inventory.BLL
             {
                 if (info.Category != null && !string.IsNullOrEmpty(info.Category.Prefix))
                 {
-                    info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(info.Category.Prefix, UserSettings.Current.ProductSerialCount, "product");
+                    info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(info.Category.Prefix, UserSettings.Current.ProductSerialCount, "product");
                 }
                 else
                 {
-                    info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
+                    info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
                 }
             }
             if (!string.IsNullOrEmpty(info.ID))
@@ -55,20 +55,20 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult AddProduct(Product info, string wareHouseID, decimal count)
         {
-            WareHouse ws = ProviderFactory.Create<IProvider<WareHouse, string>>(_RepoUri).GetByID(wareHouseID).QueryObject;
+            WareHouse ws = ProviderFactory.Create<IProvider<WareHouse, string>>(RepoUri).GetByID(wareHouseID).QueryObject;
             if (ws == null) return new CommandResult(ResultCode.Fail, "指定的仓库 \"" + wareHouseID + "\" 不存在");
             if (info.Category != null && !string.IsNullOrEmpty(info.Category.Prefix))
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(info.Category.Prefix, UserSettings.Current.ProductSerialCount, "product");
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(info.Category.Prefix, UserSettings.Current.ProductSerialCount, "product");
             }
             else
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
             }
             if (!string.IsNullOrEmpty(info.ID))
             {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-                ProviderFactory.Create<IProvider<Product, string>>(_RepoUri).Insert(info, unitWork);
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                ProviderFactory.Create<IProvider<Product, string>>(RepoUri).Insert(info, unitWork);
                 ProductInventoryItem pii = new ProductInventoryItem()
                 {
                     ID = Guid.NewGuid(),
@@ -80,7 +80,7 @@ namespace LJH.Inventory.BLL
                     AddDate = DateTime.Now,
                     InventorySheet = "初始库存"
                 };
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii, unitWork);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii, unitWork);
                 return unitWork.Commit();
             }
             else

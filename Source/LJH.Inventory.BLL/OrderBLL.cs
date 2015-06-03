@@ -22,7 +22,7 @@ namespace LJH.Inventory.BLL
         #region 基类重写的方法
         protected override string CreateSheetID(Order info)
         {
-            info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.OrderPrefix,
+            info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.OrderPrefix,
                 UserSettings.Current.OrderDateFormat, UserSettings.Current.OrderSerialCount, info.DocumentType);
             if (!string.IsNullOrEmpty(info.ID))
             {
@@ -37,7 +37,7 @@ namespace LJH.Inventory.BLL
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
             con.OrderID = info.ID;
             con.UnShipped = true;
-            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 foreach (ProductInventoryItem item in items)
@@ -45,7 +45,7 @@ namespace LJH.Inventory.BLL
                     ProductInventoryItem clone = item.Clone();
                     item.OrderID = null;
                     item.OrderItem = null;
-                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(item, clone, unitWork);
+                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(item, clone, unitWork);
                 }
             }
             base.DoNullify(info, unitWork, dt, opt);
@@ -60,7 +60,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResultList<OrderItemRecord> GetRecords(SearchCondition con)
         {
-            return ProviderFactory.Create<IProvider<OrderItemRecord, Guid>>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<OrderItemRecord, Guid>>(RepoUri).GetItems(con);
         }
         /// <summary>
         /// 通过id获取订单记录
@@ -69,7 +69,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResult<OrderItemRecord> GetRecordById(Guid id)
         {
-            return ProviderFactory.Create<IProvider<OrderItemRecord, Guid>>(_RepoUri).GetByID(id);
+            return ProviderFactory.Create<IProvider<OrderItemRecord, Guid>>(RepoUri).GetByID(id);
         }
         #endregion
     }

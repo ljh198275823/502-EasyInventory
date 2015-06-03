@@ -33,7 +33,7 @@ namespace LJH.Inventory.BLL
                 InventoryItem = record.ID,
                 InventorySheet = "盘盈",
             };
-            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(pii, unitWork);
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii, unitWork);
         }
 
         private void InventoryOut(InventoryCheckRecord record, InventoryOutType inventoryOutType, IUnitWork unitWork)
@@ -44,24 +44,24 @@ namespace LJH.Inventory.BLL
             con.Products = pids;
             con.WareHouseID = record.WarehouseID;
             con.UnShipped = true;
-            List<ProductInventoryItem> inventoryItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            List<ProductInventoryItem> inventoryItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (inventoryItems == null || inventoryItems.Count == 0) throw new Exception("没有找到相关的库存项");
             List<ProductInventoryItem> clones = new List<ProductInventoryItem>();
             inventoryItems.ForEach(it => clones.Add(it.Clone())); //备分所有的项的克隆
             List<ProductInventoryItem> addingItems = new List<ProductInventoryItem>(); //要于保存将要增加的项
             ////减少库存
-            Product p = ProviderFactory.Create<IProvider<Product, string>>(_RepoUri).GetByID(record.ProductID).QueryObject;
+            Product p = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetByID(record.ProductID).QueryObject;
             if (p != null && p.IsService != null && p.IsService.Value) return; //如果是产品是服务的话就不用再从库存中扣除了
             Assign(record, inventoryOutType, inventoryItems, addingItems);
 
             foreach (ProductInventoryItem item in inventoryItems)
             {
                 ProductInventoryItem clone = clones.Single(it => it.ID == item.ID);
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Update(item, clone, unitWork);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(item, clone, unitWork);
             }
             foreach (ProductInventoryItem item in addingItems)
             {
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(_RepoUri).Insert(item, unitWork);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(item, unitWork);
             }
         }
 
@@ -114,11 +114,11 @@ namespace LJH.Inventory.BLL
         #region 重写基类方法
         public override CommandResult Add(InventoryCheckRecord info)
         {
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             ProductInventorySearchCondition con = new ProductInventorySearchCondition();
             con.ProductID = info.ProductID;
             con.WareHouseID = info.WarehouseID;
-            List<ProductInventory> items = ProviderFactory.Create<IProvider<ProductInventory, Guid>>(_RepoUri).GetItems(con).QueryObjects;
+            List<ProductInventory> items = ProviderFactory.Create<IProvider<ProductInventory, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items == null || items.Count == 0) throw new Exception("没有该产品的库存项");
             ProductInventory pi = items[0];
             if (info.Inventory != pi.Count) throw new Exception("产品库存有改动，请重新操作");
@@ -130,7 +130,7 @@ namespace LJH.Inventory.BLL
             {
                 InventoryOut(info, UserSettings.Current.InventoryOutType, unitWork);
             }
-            ProviderFactory.Create<IProvider<InventoryCheckRecord, Guid>>(_RepoUri).Insert(info, unitWork);
+            ProviderFactory.Create<IProvider<InventoryCheckRecord, Guid>>(RepoUri).Insert(info, unitWork);
             return unitWork.Commit();
         }
         #endregion

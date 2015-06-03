@@ -24,12 +24,12 @@ namespace LJH.Inventory.BLL
         {
             if (info.ClassID == CustomerPaymentType.Customer)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
                         UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
             }
             if (info.ClassID == CustomerPaymentType.Supplier)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber("FKD",
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("FKD",
                         UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
             }
             return info.ID;
@@ -37,13 +37,13 @@ namespace LJH.Inventory.BLL
 
         protected override void UndoApprove(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(_RepoUri )).GetAssigns(info.ID).QueryObjects;
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(RepoUri )).GetAssigns(info.ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 bool allSuccess = true;
                 foreach (CustomerPaymentAssign assign in assigns)
                 {
-                    CommandResult ret = (new CustomerPaymentAssignBLL(_RepoUri )).UndoAssign(assign);
+                    CommandResult ret = (new CustomerPaymentAssignBLL(RepoUri )).UndoAssign(assign);
                     if (ret.Result != ResultCode.Successful) allSuccess = false;
                 }
                 if (!allSuccess) throw new Exception("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"取消审核\"的操作");
@@ -53,13 +53,13 @@ namespace LJH.Inventory.BLL
 
         protected override void DoNullify(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(_RepoUri )).GetAssigns(info.ID).QueryObjects;
+            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(RepoUri )).GetAssigns(info.ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 bool allSuccess = true;
                 foreach (CustomerPaymentAssign assign in assigns)
                 {
-                    CommandResult ret = (new CustomerPaymentAssignBLL(_RepoUri)).UndoAssign(assign);
+                    CommandResult ret = (new CustomerPaymentAssignBLL(RepoUri)).UndoAssign(assign);
                     if (ret.Result != ResultCode.Successful) allSuccess = false;
                 }
                 if (!allSuccess) throw new Exception("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"作废\"的操作");
@@ -89,7 +89,7 @@ namespace LJH.Inventory.BLL
         {
             CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
             con.PaymentID = paymentID;
-            return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(_RepoUri).GetItems(con);
+            return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(RepoUri).GetItems(con);
         }
         #endregion
     }

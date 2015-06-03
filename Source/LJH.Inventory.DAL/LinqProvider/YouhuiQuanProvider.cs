@@ -35,6 +35,10 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.CreateDate != null) ret = ret.Where(item => item.CreateDate >= con.CreateDate.Begin && item.CreateDate <= con.CreateDate.End);
                 if (!string.IsNullOrEmpty(con.Proxy)) ret = ret.Where(it => it.Proxy == con.Proxy);
                 if (con.ComsumeDate != null) ret = ret.Where(item => item.ComsumeDate >= con.ComsumeDate.Begin && item.ComsumeDate <= con.ComsumeDate.End);
+                if (con.CanUseNow != null && con.CanUseNow.Value)
+                {
+                    ret = ret.Where(item => item.ComsumeDate == null && (item.From == null || item.From.Value <= DateTime.Now) && (item.To == null || item.To >= DateTime.Now));
+                }
             }
             List<YouhuiQuan> cs = ret.ToList();
             return cs;

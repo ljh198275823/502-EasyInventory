@@ -24,7 +24,7 @@ namespace LJH.Inventory.BLL
             int intID = 0;
             if (info.ID == 0)
             {
-                id = ProviderFactory.Create<IAutoNumberCreater>(_RepoUri).CreateNumber(string.Empty, 4, info.DocumentType);
+                id = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(string.Empty, 4, info.DocumentType);
                 if (string.IsNullOrEmpty(id) || !int.TryParse(id, out intID))
                 {
                     return new CommandResult(ResultCode.Fail, "创建编号失败");
@@ -41,8 +41,8 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult SaveOperator(Operator info, Staff staff)
         {
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            List<Operator> opts = (new OperatorBLL(_RepoUri)).GetItems(null).QueryObjects;
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            List<Operator> opts = (new OperatorBLL(RepoUri)).GetItems(null).QueryObjects;
             if (opts != null && opts.Count > 0)
             {
                 List<Operator> items = opts.Where(item => item.StaffID == staff.ID).ToList();
@@ -50,7 +50,7 @@ namespace LJH.Inventory.BLL
                 {
                     foreach (Operator opt in items)
                     {
-                        ProviderFactory.Create<IProvider<Operator, string>>(_RepoUri).Delete(opt, unitWork);
+                        ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Delete(opt, unitWork);
                     }
                 }
             }
@@ -58,7 +58,7 @@ namespace LJH.Inventory.BLL
             {
                 info.Name = staff.Name;
                 info.StaffID = staff.ID;
-                ProviderFactory.Create<IProvider<Operator, string>>(_RepoUri).Insert(info, unitWork);
+                ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Insert(info, unitWork);
             }
             return unitWork.Commit();
         }
@@ -67,20 +67,20 @@ namespace LJH.Inventory.BLL
         #region 人员照片相关
         public QueryResult<StaffPhoto> GetPhoto(int staffID)
         {
-            return ProviderFactory.Create<IProvider<StaffPhoto, int>>(_RepoUri).GetByID(staffID);
+            return ProviderFactory.Create<IProvider<StaffPhoto, int>>(RepoUri).GetByID(staffID);
         }
 
         public CommandResult SavePhoto(int staffID, string path)
         {
             StaffPhoto sp = new StaffPhoto(staffID, path);
-            return ProviderFactory.Create<IProvider<StaffPhoto, int>>(_RepoUri).Insert(sp);
+            return ProviderFactory.Create<IProvider<StaffPhoto, int>>(RepoUri).Insert(sp);
         }
 
         public CommandResult DeletePhoto(int staffID)
         {
             StaffPhoto sp = new StaffPhoto();
             sp.ID = staffID;
-            return ProviderFactory.Create<IProvider<StaffPhoto, int>>(_RepoUri).Delete(sp);
+            return ProviderFactory.Create<IProvider<StaffPhoto, int>>(RepoUri).Delete(sp);
         }
         #endregion
     }
