@@ -51,5 +51,10 @@ namespace LJH.Inventory.BusinessModel
 
         public string Memo { get; set; }
         #endregion
+
+        public YouhuiQuan Clone()
+        {
+            return this.MemberwiseClone() as YouhuiQuan;
+        }
     }
 }

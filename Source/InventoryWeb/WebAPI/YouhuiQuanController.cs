@@ -4,43 +4,59 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using LJH.Inventory .BusinessModel ;
-using LJH.Inventory .BusinessModel .SearchCondition ;
-using LJH.Inventory .BLL;
+using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.Inventory.BLL;
 using LJH.InventoryWeb.Models;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.InventoryWeb.WebAPI
 {
     public class YouhuiQuanController : ApiController
     {
         // GET api/youhuiquan/5
-        public YouhuiQuan Get(string id)
+        public HttpResponseMessage Get(string id)
         {
             var ret = new YouhuiQuanBLL(Appsetting.Current.ConnStr).GetByID(id).QueryObject;
-            if (ret!=null )return ret;
-            HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.NotFound, "找不到对象");
-            throw new HttpResponseException(response );
+            if (ret != null) return Request.CreateResponse(HttpStatusCode.OK, ret);
+            return Request.CreateErrorResponse(HttpStatusCode.NotFound, "找不到相关信息");
         }
 
-        public IEnumerable<YouhuiQuan> GetOf(string userID)
+        public HttpResponseMessage GetOf(string userID)
         {
             YouhuiQuanSearchCondition con = new YouhuiQuanSearchCondition() { User = userID, CanUseNow = true };
-            return new YouhuiQuanBLL(Appsetting.Current.ConnStr).GetItems(con).QueryObjects;
+            QueryResultList<YouhuiQuan> ret = new YouhuiQuanBLL(Appsetting.Current.ConnStr).GetItems(con);
+            if (ret.Result == ResultCode.Successful) return Request.CreateResponse(HttpStatusCode.OK, ret.QueryObjects);
+            return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ret.Message);
         }
 
-        // POST api/youhuiquan
-        public void Post([FromBody]string value)
+        public HttpResponseMessage GetOfProxy(string proxyID)
         {
+            YouhuiQuanSearchCondition con = new YouhuiQuanSearchCondition() { Proxy = proxyID.ToUpper() };
+            QueryResultList<YouhuiQuan> ret = new YouhuiQuanBLL(Appsetting.Current.ConnStr).GetItems(con);
+            if (ret.Result == ResultCode.Successful) return Request.CreateResponse(HttpStatusCode.OK, ret.QueryObjects);
+            return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ret.Message);
         }
 
-        // PUT api/youhuiquan/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public HttpResponseMessage AssignTo(string id, string proxyID)
         {
+            CommandResult ret = new YouhuiQuanBLL(Appsetting.Current.ConnStr).AssignTo(id, proxyID);
+            if (ret.Result == ResultCode.Successful)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ret.Message);
         }
 
-        // DELETE api/youhuiquan/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(string id)
         {
+            CommandResult ret = new YouhuiQuanBLL(Appsetting.Current.ConnStr).Delete(id);
+            if (ret.Result == ResultCode.Successful)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ret.Message);
         }
     }
 }

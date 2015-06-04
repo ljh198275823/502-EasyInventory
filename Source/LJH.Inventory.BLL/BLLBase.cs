@@ -71,6 +71,17 @@ namespace LJH.Inventory.BLL
         {
             return ProviderFactory.Create<IProvider<TEntity, TID>>(RepoUri).Delete(info);
         }
+        /// <summary>
+        /// 删除实体
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public virtual CommandResult Delete(TID id)
+        {
+            TEntity en = ProviderFactory.Create<IProvider<TEntity, TID>>(RepoUri).GetByID(id).QueryObject;
+            if (en == null) return new CommandResult(ResultCode.Fail, "记录已经被移除");
+            return ProviderFactory.Create<IProvider<TEntity, TID>>(RepoUri).Delete(en);
+        }
         #endregion
     }
 }

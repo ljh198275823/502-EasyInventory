@@ -31,9 +31,9 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 YouhuiQuanSearchCondition con = search as YouhuiQuanSearchCondition;
                 if (!string.IsNullOrEmpty(con.YouhuiID)) ret = ret.Where(item => item.YouhuiID == con.YouhuiID);
-                if (!string.IsNullOrEmpty(con.User)) ret = ret.Where(item => item.User == con.User);
+                if (!string.IsNullOrEmpty(con.User)) ret = ret.Where(item => item.User.ToUpper() == con.User);
                 if (con.CreateDate != null) ret = ret.Where(item => item.CreateDate >= con.CreateDate.Begin && item.CreateDate <= con.CreateDate.End);
-                if (!string.IsNullOrEmpty(con.Proxy)) ret = ret.Where(it => it.Proxy == con.Proxy);
+                if (!string.IsNullOrEmpty(con.Proxy)) ret = ret.Where(it => it.Proxy.ToUpper() == con.Proxy);
                 if (con.ComsumeDate != null) ret = ret.Where(item => item.ComsumeDate >= con.ComsumeDate.Begin && item.ComsumeDate <= con.ComsumeDate.End);
                 if (con.CanUseNow != null && con.CanUseNow.Value)
                 {
