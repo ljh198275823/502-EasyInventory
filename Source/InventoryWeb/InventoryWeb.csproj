@@ -126,9 +126,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\Appsetting.cs" />
+    <Compile Include="Appsetting.cs" />
     <Compile Include="WebAPI\AccountsController.cs" />
-    <Compile Include="WebAPI\BasicAuthenticationHandler.cs" />
     <Compile Include="WebAPI\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -225,6 +224,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Data\" />
+    <Folder Include="Results\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
