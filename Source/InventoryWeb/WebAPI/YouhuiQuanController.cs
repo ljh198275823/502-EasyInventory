@@ -17,7 +17,9 @@ namespace LJH.InventoryWeb.WebAPI
         public YouhuiQuan Get(string id)
         {
             var ret = new YouhuiQuanBLL(Appsetting.Current.ConnStr).GetByID(id).QueryObject;
-            return ret;
+            if (ret!=null )return ret;
+            HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.NotFound, "找不到对象");
+            throw new HttpResponseException(response );
         }
 
         public IEnumerable<YouhuiQuan> GetOf(string userID)

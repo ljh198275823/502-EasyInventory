@@ -34,5 +34,10 @@ namespace LJH.InventoryWeb.WebAPI
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState.ToString());
         }
+
+        public Account Get(string id)
+        {
+            return new Account() { Email = "LJAE", UserName = "测试" };
+        }
     }
 }
