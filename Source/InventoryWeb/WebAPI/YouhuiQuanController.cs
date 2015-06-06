@@ -22,6 +22,7 @@ namespace LJH.InventoryWeb.WebAPI
             return Request.CreateErrorResponse(HttpStatusCode.NotFound, "找不到相关信息");
         }
 
+        [Authorize]
         public HttpResponseMessage GetOf(string userID)
         {
             YouhuiQuanSearchCondition con = new YouhuiQuanSearchCondition() { User = userID, CanUseNow = true };
@@ -30,9 +31,10 @@ namespace LJH.InventoryWeb.WebAPI
             return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ret.Message);
         }
 
+        [Authorize]
         public HttpResponseMessage GetOfProxy(string proxyID)
         {
-            YouhuiQuanSearchCondition con = new YouhuiQuanSearchCondition() { Proxy = proxyID.ToUpper() };
+            YouhuiQuanSearchCondition con = new YouhuiQuanSearchCondition() { Proxy = proxyID };
             QueryResultList<YouhuiQuan> ret = new YouhuiQuanBLL(Appsetting.Current.ConnStr).GetItems(con);
             if (ret.Result == ResultCode.Successful) return Request.CreateResponse(HttpStatusCode.OK, ret.QueryObjects);
             return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ret.Message);

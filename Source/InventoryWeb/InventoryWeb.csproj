@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AsyncCtpLibrary">
+      <HintPath>..\ReferenceDll\AsyncCtpLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="LJH.GeneralLibrary">
       <HintPath>..\ReferenceDll\LJH.GeneralLibrary.dll</HintPath>
     </Reference>
@@ -125,6 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Handler\BasicAuthenticateHandler.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Appsetting.cs" />
     <Compile Include="WebAPI\AccountsController.cs" />

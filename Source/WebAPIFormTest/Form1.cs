@@ -24,10 +24,10 @@ namespace WebAPIFormTest
 
         private bool CheckAccount()
         {
-            if(string.IsNullOrEmpty (txtEmail .Text ))
+            if (string.IsNullOrEmpty(txtEmail.Text))
             {
             }
-            return true ;
+            return true;
         }
 
         private async void btnRegister_Click(object sender, EventArgs e)
@@ -58,12 +58,25 @@ namespace WebAPIFormTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtBaseAddress .Text  = AppSettings.Current.GetConfigContent("BaseAddress");
+            txtBaseAddress.Text = AppSettings.Current.GetConfigContent("BaseAddress");
         }
 
         private void txtBaseAddress_TextChanged(object sender, EventArgs e)
         {
             AppSettings.Current.SaveConfig("BaseAddress", txtBaseAddress.Text.Trim());
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtBaseAddress.Text.Trim()))
+            {
+                MessageBox.Show("请指定服务器地址");
+                return;
+            }
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(txtBaseAddress.Text.Trim());
+            HttpResponseMessage response = await client.GetAsync("api/youhuiquan/?userID=23395501@QQ.COM", new CancellationToken());
+            MessageBox.Show(await response.Content.ReadAsStringAsync());
         }
     }
 }

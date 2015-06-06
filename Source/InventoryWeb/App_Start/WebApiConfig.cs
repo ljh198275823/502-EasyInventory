@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using LJH.InventoryWeb.Handler;
 
 namespace InventoryWeb
 {
@@ -9,6 +10,7 @@ namespace InventoryWeb
     {
         public static void Register(HttpConfiguration config)
         {
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
             //config.Routes.MapHttpRoute(
             //    name: "DefaultApiWithAction",
             //    routeTemplate: "api/{controller}/{action}/{id}",
@@ -20,6 +22,8 @@ namespace InventoryWeb
                routeTemplate: "api/{controller}/{id}",
                defaults: new { id = RouteParameter.Optional }
            );
+
+            config.MessageHandlers.Add(new BasicAuthenticateHandler());
         }
     }
 }
