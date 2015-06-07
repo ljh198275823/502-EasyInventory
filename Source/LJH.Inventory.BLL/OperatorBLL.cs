@@ -65,17 +65,21 @@ namespace LJH.Inventory.BLL
             o.Password = password;
             ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Insert(o, unitWork);
             DateTime now = DateTime.Now;
-            YouhuiQuan yh = new YouhuiQuan()
+            for (int i = 0; i < 10; i++)
             {
-                ID = Guid.NewGuid().ToString(),
-                CreateDate = now,
-                User = email,
-                From = DateTime.Today,
-                To = DateTime.Today.AddMonths(1),
-                Amount =100,
-                Memo = "注册即送优惠券",
-            };
-            ProviderFactory.Create<IProvider<YouhuiQuan, string>>(RepoUri).Insert(yh, unitWork);
+                DateTime from = new DateTime(now.Year, now.Month, now.Day).AddMonths(i);
+                YouhuiQuan yh = new YouhuiQuan()
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    CreateDate = now,
+                    User = email,
+                    From = from,
+                    To = from.AddMonths(1).AddDays(-1),
+                    Amount = 100,
+                    Memo = "注册即送优惠券",
+                };
+                ProviderFactory.Create<IProvider<YouhuiQuan, string>>(RepoUri).Insert(yh, unitWork);
+            }
             return unitWork.Commit();
         }
         #endregion

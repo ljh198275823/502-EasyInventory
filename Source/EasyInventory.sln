@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJH.Inventory.BusinessModel", "LJH.Inventory.BusinessModel\LJH.Inventory.BusinessModel.csproj", "{E13ADAC1-9D84-4F58-B4A1-DEFB822F087E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJH.Inventory.UI", "LJH.Inventory.UI\LJH.Inventory.UI.csproj", "{273C204B-4A1F-45E1-B7F0-A3A6CC3F6209}"
@@ -11,22 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJH.Inventory.BLL", "LJH.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryApplication", "InventoryApplication\InventoryApplication.csproj", "{10FB935E-CB3B-4BC2-9753-288BDCCAFD99}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InventorySetup", "InventorySetup\InventorySetup.vdproj", "{4B554E8C-2BC8-4098-97CC-604DA4B4A258}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LJH.Inventory.UI.Controls", "LJH.Inventory.UI.Controls\LJH.Inventory.UI.Controls.csproj", "{3945C03C-B3B2-4511-9324-2DF73A5FB3A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryDemo", "InventoryDemo\InventoryDemo.csproj", "{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InventoryDemoSetup", "InventoryDemoSetup\InventoryDemoSetup.vdproj", "{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWeb", "InventoryWeb\InventoryWeb.csproj", "{88F1C154-1797-4614-BA18-3921B52462C6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWebFormTest", "WebAPIFormTest\InventoryWebFormTest.csproj", "{BE9065B8-0D88-4E56-BB54-C4D61435D56E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWebAPI", "InventoryWebAPI\InventoryWebAPI.csproj", "{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}"
+EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = InventorySystem.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -86,12 +81,6 @@ Global
 		{10FB935E-CB3B-4BC2-9753-288BDCCAFD99}.Release|Mixed Platforms.Build.0 = Release|x86
 		{10FB935E-CB3B-4BC2-9753-288BDCCAFD99}.Release|x86.ActiveCfg = Release|x86
 		{10FB935E-CB3B-4BC2-9753-288BDCCAFD99}.Release|x86.Build.0 = Release|x86
-		{4B554E8C-2BC8-4098-97CC-604DA4B4A258}.Debug|Any CPU.ActiveCfg = Debug
-		{4B554E8C-2BC8-4098-97CC-604DA4B4A258}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{4B554E8C-2BC8-4098-97CC-604DA4B4A258}.Debug|x86.ActiveCfg = Debug
-		{4B554E8C-2BC8-4098-97CC-604DA4B4A258}.Release|Any CPU.ActiveCfg = Release
-		{4B554E8C-2BC8-4098-97CC-604DA4B4A258}.Release|Mixed Platforms.ActiveCfg = Release
-		{4B554E8C-2BC8-4098-97CC-604DA4B4A258}.Release|x86.ActiveCfg = Release
 		{3945C03C-B3B2-4511-9324-2DF73A5FB3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3945C03C-B3B2-4511-9324-2DF73A5FB3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3945C03C-B3B2-4511-9324-2DF73A5FB3A0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
@@ -112,27 +101,6 @@ Global
 		{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}.Release|Mixed Platforms.Build.0 = Release|x86
 		{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}.Release|x86.ActiveCfg = Release|x86
 		{AE196CFF-DD0F-4825-971D-6CEA231EF8A8}.Release|x86.Build.0 = Release|x86
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|Any CPU.ActiveCfg = Debug
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|Any CPU.Build.0 = Debug
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|x86.ActiveCfg = Debug
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Debug|x86.Build.0 = Debug
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Any CPU.ActiveCfg = Release
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Any CPU.Build.0 = Release
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Mixed Platforms.ActiveCfg = Release
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|Mixed Platforms.Build.0 = Release
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|x86.ActiveCfg = Release
-		{EF9EEAAA-403B-4BC4-A64D-924E6CA2880A}.Release|x86.Build.0 = Release
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{88F1C154-1797-4614-BA18-3921B52462C6}.Release|x86.ActiveCfg = Release|Any CPU
 		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -143,8 +111,21 @@ Global
 		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Release|Mixed Platforms.Build.0 = Release|x86
 		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Release|x86.ActiveCfg = Release|x86
 		{BE9065B8-0D88-4E56-BB54-C4D61435D56E}.Release|x86.Build.0 = Release|x86
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7E80806B-B9C4-4F95-AFD3-8FC49EC8983C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = InventorySystem.vsmdi
 	EndGlobalSection
 EndGlobal
