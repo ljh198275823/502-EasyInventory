@@ -92,13 +92,14 @@
   <ItemGroup>
     <Compile Include="Appsetting.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\YouhuiQuanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\BasicAuthenticateHandler.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +132,9 @@
       <Project>{b75a34a4-ce15-4957-9665-08c074ce7006}</Project>
       <Name>LJH.Inventory.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\本机发布.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

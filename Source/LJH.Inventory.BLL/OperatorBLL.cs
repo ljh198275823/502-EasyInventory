@@ -52,16 +52,16 @@ namespace LJH.Inventory.BLL
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public CommandResult Register(string email, string userName, string password)
+        public CommandResult Register(string userName, string password)
         {
-            if (string.IsNullOrEmpty(email)) return new CommandResult(ResultCode.Fail, "用户邮箱不能为空");
+            if (string.IsNullOrEmpty(userName)) return new CommandResult(ResultCode.Fail, "用户名称不能为空");
             if (string.IsNullOrEmpty(password)) return new CommandResult(ResultCode.Fail, "用户密码不能为空");
-            Operator o = GetByID(email).QueryObject;
-            if (o != null) return new CommandResult(ResultCode.Fail, "用户邮箱已经被使用,请使用其它的邮箱");
+            Operator o = GetByID(userName).QueryObject;
+            if (o != null) return new CommandResult(ResultCode.Fail, "用户名称已经被使用,请使用其它的名称");
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             o = new Operator();
-            o.ID = email;
-            o.Name = !string.IsNullOrEmpty(userName) ? userName : email;
+            o.ID = userName;
+            o.Name = userName;
             o.Password = password;
             ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Insert(o, unitWork);
             DateTime now = DateTime.Now;
@@ -72,7 +72,7 @@ namespace LJH.Inventory.BLL
                 {
                     ID = Guid.NewGuid().ToString(),
                     CreateDate = now,
-                    User = email,
+                    User = userName,
                     From = from,
                     To = from.AddMonths(1).AddDays(-1),
                     Amount = 100,

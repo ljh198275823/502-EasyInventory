@@ -14,7 +14,7 @@ namespace LJH.InventoryWebAPI.Models
         #region 公共属性
         public string UserName { get; set; }
         
-        public string Email { get; set; }
+        //public string Email { get; set; }
 
         public string Password { get; set; }
         #endregion

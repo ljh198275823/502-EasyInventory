@@ -64,7 +64,12 @@ namespace LJH.InventoryWebAPI.Handlers
                     fuck.SetResult(response);
                     return fuck.Task;
                 }
-                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(nameAndpwd.Item1), null);
+                IPrincipal principal = new GenericPrincipal(new GenericIdentity(nameAndpwd.Item1), null);
+                Thread.CurrentPrincipal = principal;
+                if (HttpContext.Current != null)
+                {
+                    HttpContext.Current.User = principal;
+                }
             }
             var ret = base.SendAsync(request, cancellationToken).ContinueWith<HttpResponseMessage>(
                 (task) =>

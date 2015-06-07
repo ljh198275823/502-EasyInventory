@@ -23,7 +23,7 @@ namespace LJH.InventoryWebAPI.Controllers
         }
 
         [Authorize]
-        [Route ("api/Accounts/{userID}/YouHuiQuan/")]
+        [Route("api/Accounts/{userID}/YouHuiQuan/")]
         public HttpResponseMessage GetOf(string userID)
         {
             YouhuiQuanSearchCondition con = new YouhuiQuanSearchCondition() { User = userID, CanUseNow = true };
@@ -33,6 +33,7 @@ namespace LJH.InventoryWebAPI.Controllers
         }
 
         [Authorize]
+        [Route ("api/proxys/{proxyID}/youhuiquan/")]
         public HttpResponseMessage GetOfProxy(string proxyID)
         {
             YouhuiQuanSearchCondition con = new YouhuiQuanSearchCondition() { Proxy = proxyID };

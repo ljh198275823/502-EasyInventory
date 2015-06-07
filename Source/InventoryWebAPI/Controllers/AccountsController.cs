@@ -23,7 +23,7 @@ namespace LJH.InventoryWebAPI.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                CommandResult ret = new OperatorBLL(Appsetting.Current.ConnStr).Register(account.Email, account.UserName, account.Password);
+                CommandResult ret = new OperatorBLL(Appsetting.Current.ConnStr).Register( account.UserName, account.Password);
                 if (ret.Result == ResultCode.Successful)
                 {
                     return Request.CreateResponse(HttpStatusCode.Created, "注册成功");
@@ -36,9 +36,10 @@ namespace LJH.InventoryWebAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState.ToString());
         }
 
+        [Authorize]
         public Account Get(string id)
         {
-            return new Account() { Email = "LJAE", UserName = "测试" };
+            return new Account() {UserName = "测试" };
         }
     }
 }
