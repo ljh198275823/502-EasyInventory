@@ -81,8 +81,9 @@ namespace WebAPIFormTest
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(txtBaseAddress.Text.Trim());
             var account = new { UserName = txtUserName.Text.Trim(), Password = txtPassword.Text.Trim() };
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(account));
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(account),UTF8Encoding .UTF8 );
+            content.Headers.ContentType.MediaType ="application/json";
+            content.Headers.ContentType.CharSet = "utf-8";
             HttpResponseMessage response = await client.PostAsync("api/accounts/", content, new CancellationToken());
             if (response.StatusCode == HttpStatusCode.Created)
             {
