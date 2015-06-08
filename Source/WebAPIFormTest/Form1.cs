@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
 using System.Threading;
 using LJH.Inventory.BusinessModel;
 
@@ -81,10 +80,7 @@ namespace WebAPIFormTest
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(txtBaseAddress.Text.Trim());
             var account = new { UserName = txtUserName.Text.Trim(), Password = txtPassword.Text.Trim() };
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(account),UTF8Encoding .UTF8 );
-            content.Headers.ContentType.MediaType ="application/json";
-            content.Headers.ContentType.CharSet = "utf-8";
-            HttpResponseMessage response = await client.PostAsync("api/accounts/", content, new CancellationToken());
+            var response = await client.PostAsJsonAsync("api/accounts/", account);
             if (response.StatusCode == HttpStatusCode.Created)
             {
                 string auth = string.Format("{0}:{1}", account.UserName, account.Password);
@@ -120,23 +116,30 @@ namespace WebAPIFormTest
             }
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(txtBaseAddress.Text.Trim());
-            string auth = AppSettings.Current.GetConfigContent("Authenticate");
+            client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/jason"));
+            string auth = AppSettings.Current.GetConfigContent("Authenticate");
             if (!string.IsNullOrEmpty(auth)) client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("basic", auth);
             HttpResponseMessage response = await client.GetAsync(string.Format("api/accounts/{0}/youhuiquan/", _UserName), new CancellationToken());
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                string json = await response.Content.ReadAsStringAsync();
-                var items = JsonConvert.DeserializeObject(json, typeof(YouhuiQuan[])) as YouhuiQuan[];
-                var item = items[0];
-                if (item != null)
+                try
                 {
-                    this.Invoke((Action)(() =>
+                    var items = await response.Content.ReadAsAsync<YouhuiQuan[]>();
+                    var item = items[0];
+                    if (item != null)
                     {
-                        this.panel1.Visible = true;
-                        this.qrYouhuiquan.Text = new Uri(new Uri(txtBaseAddress.Text), "api/Youhuiquan/" + item.ID).ToString();
-                        this.lblAmount.Text = item.Amount.ToString();
-                    }));
+                        this.Invoke((Action)(() =>
+                        {
+                            this.panel1.Visible = true;
+                            this.qrYouhuiquan.Text = new Uri(new Uri(txtBaseAddress.Text), "api/Youhuiquan/" + item.ID).ToString();
+                            this.lblAmount.Text = item.Amount.ToString();
+                        }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
             else

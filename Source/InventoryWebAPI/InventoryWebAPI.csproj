@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\本机发布.pubxml" />
+    <None Include="Properties\PublishProfiles\涂总主机.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
