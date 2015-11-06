@@ -13,7 +13,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary;
 
-namespace LJH.Inventory.UI.Forms.SQLite
+namespace InventoryDemo
 {
     public partial class FrmLogin : Form
     {

@@ -20,7 +20,7 @@ using LJH.Inventory.UI.Forms.Purchase;
 using LJH.Inventory.UI.Forms.Inventory;
 using LJH.Inventory.UI.Forms.Inventory.Report;
 
-namespace LJH.Inventory.UI.Forms.SQLite
+namespace InventoryDemo
 {
     public partial class FrmMain : Form,IMyMDIForm, LJH.GeneralLibrary.Core.UI.IOperatorRender
     {
@@ -464,12 +464,6 @@ namespace LJH.Inventory.UI.Forms.SQLite
         private void mnu_InventoryRecord_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmInventoryRecordReport>();
-        }
-
-        private void mnu_Home_Click(object sender, EventArgs e)
-        {
-            FrmHome frm = ShowSingleForm<FrmHome>(true, true);
-            frm.MDIForm = this;
         }
         #endregion
 

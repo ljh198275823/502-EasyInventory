@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms.SQLite
+﻿namespace InventoryDemo
 {
     partial class FrmMain
     {
@@ -141,12 +141,11 @@
             // 
             // mnu_Home
             // 
-            this.mnu_Home.Image = global::LJH.Inventory.UI.Properties.Resources.home;
+            this.mnu_Home.Image = global::InventoryDemo.Properties.Resources.home;
             this.mnu_Home.Name = "mnu_Home";
             this.mnu_Home.Size = new System.Drawing.Size(74, 34);
             this.mnu_Home.Text = "首页";
             this.mnu_Home.Visible = false;
-            this.mnu_Home.Click += new System.EventHandler(this.mnu_Home_Click);
             // 
             // toolStripSeparator7
             // 
@@ -160,7 +159,7 @@
             this.mnu_ChangePwd,
             this.mnu_LogOut,
             this.mnu_Exit});
-            this.mnu_System.Image = global::LJH.Inventory.UI.Properties.Resources.system;
+            this.mnu_System.Image = global::InventoryDemo.Properties.Resources.system;
             this.mnu_System.Name = "mnu_System";
             this.mnu_System.Size = new System.Drawing.Size(74, 34);
             this.mnu_System.Text = "系统";
@@ -202,7 +201,7 @@
             this.mnu_Staff,
             this.mnu_Role,
             this.mnu_Options});
-            this.业务资料ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.information;
+            this.业务资料ToolStripMenuItem.Image = global::InventoryDemo.Properties.Resources.information;
             this.业务资料ToolStripMenuItem.Name = "业务资料ToolStripMenuItem";
             this.业务资料ToolStripMenuItem.Size = new System.Drawing.Size(98, 34);
             this.业务资料ToolStripMenuItem.Text = "基本资料";
@@ -283,7 +282,7 @@
             this.mnu_Order,
             this.toolStripSeparator3,
             this.mnu_OrderMonitor});
-            this.mnu_DataManage.Image = global::LJH.Inventory.UI.Properties.Resources.sale;
+            this.mnu_DataManage.Image = global::InventoryDemo.Properties.Resources.sale;
             this.mnu_DataManage.Name = "mnu_DataManage";
             this.mnu_DataManage.Size = new System.Drawing.Size(74, 34);
             this.mnu_DataManage.Text = "销售";
@@ -338,7 +337,7 @@
             this.mnu_PurchaseOrder,
             this.toolStripSeparator5,
             this.mnu_PurchaseMonitor});
-            this.采购库存ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.buy;
+            this.采购库存ToolStripMenuItem.Image = global::InventoryDemo.Properties.Resources.buy;
             this.采购库存ToolStripMenuItem.Name = "采购库存ToolStripMenuItem";
             this.采购库存ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
             this.采购库存ToolStripMenuItem.Text = "采购";
@@ -391,7 +390,7 @@
             this.mnu_Inventory,
             this.mnu_InventorySheet,
             this.mnu_DeliverySheet});
-            this.商务ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.inventory1;
+            this.商务ToolStripMenuItem.Image = global::InventoryDemo.Properties.Resources.inventory1;
             this.商务ToolStripMenuItem.Name = "商务ToolStripMenuItem";
             this.商务ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
             this.商务ToolStripMenuItem.Text = "仓库";
@@ -436,7 +435,7 @@
             this.mnu_SupplierPayment,
             this.toolStripSeparator1,
             this.mnu_Expanditure});
-            this.财务ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.finance;
+            this.财务ToolStripMenuItem.Image = global::InventoryDemo.Properties.Resources.finance;
             this.财务ToolStripMenuItem.Name = "财务ToolStripMenuItem";
             this.财务ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
             this.财务ToolStripMenuItem.Text = "财务";
@@ -513,7 +512,7 @@
             this.mnu_Performance,
             this.toolStripSeparator4,
             this.mnu_InventoryRecord});
-            this.mnu_Reports.Image = global::LJH.Inventory.UI.Properties.Resources.report;
+            this.mnu_Reports.Image = global::InventoryDemo.Properties.Resources.report;
             this.mnu_Reports.Name = "mnu_Reports";
             this.mnu_Reports.Size = new System.Drawing.Size(74, 34);
             this.mnu_Reports.Text = "报表";
@@ -566,7 +565,7 @@
             this.窗口ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_HorizontalSplit,
             this.mnu_VerticalSplit});
-            this.窗口ToolStripMenuItem.Image = global::LJH.Inventory.UI.Properties.Resources.windows;
+            this.窗口ToolStripMenuItem.Image = global::InventoryDemo.Properties.Resources.windows;
             this.窗口ToolStripMenuItem.Name = "窗口ToolStripMenuItem";
             this.窗口ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
             this.窗口ToolStripMenuItem.Text = "窗口";
@@ -596,7 +595,7 @@
             this.mnu_Manual,
             this.mnu_DogInfo,
             this.mnu_Aboat});
-            this.mnu_Help.Image = global::LJH.Inventory.UI.Properties.Resources.help;
+            this.mnu_Help.Image = global::InventoryDemo.Properties.Resources.help;
             this.mnu_Help.Name = "mnu_Help";
             this.mnu_Help.Size = new System.Drawing.Size(74, 34);
             this.mnu_Help.Text = "帮助";

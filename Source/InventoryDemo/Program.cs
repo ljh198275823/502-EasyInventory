@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using LJH.Inventory.UI.Forms.SQLite;
 
 namespace InventoryDemo
 {

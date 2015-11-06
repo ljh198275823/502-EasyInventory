@@ -1,4 +1,4 @@
-﻿namespace LJH.Inventory.UI.Forms.SQLite
+﻿namespace InventoryDemo
 {
     partial class FrmLogin
     {
@@ -152,7 +152,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox chkRememberLogid;
         public System.Windows.Forms.Label label3;
-        public GeneralLibrary.WinformControl.DBCTextBox txtConnstr;
+        public LJH.GeneralLibrary.WinformControl.DBCTextBox txtConnstr;
         private System.Windows.Forms.Button btnBrowse;
     }
 }
