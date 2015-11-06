@@ -104,6 +104,7 @@ namespace InventoryDemo
         {
             Operator cur = Operator.Current;
             //基本资料
+            this.mnu_Material.Enabled = cur.Permit(Permission.Product, PermissionActions.Read) || cur.Permit(Permission.Product, PermissionActions.Edit);
             this.mnu_Product.Enabled = cur.Permit(Permission.Product, PermissionActions.Read) || cur.Permit(Permission.Product, PermissionActions.Edit);
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             this.mnu_Unit.Enabled = cur.Permit(Permission.Unit, PermissionActions.Read) || cur.Permit(Permission.Unit, PermissionActions.Edit);
@@ -485,6 +486,11 @@ namespace InventoryDemo
         private void mnu_Proxy_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmProxyMaster>();
+        }
+
+        private void mnu_Material_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmSteelRollMaster>();
         }
     }
 }

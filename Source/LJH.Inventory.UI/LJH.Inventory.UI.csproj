@@ -105,6 +105,12 @@
     <Compile Include="Forms\FrmChangePwd.designer.cs">
       <DependentUpon>FrmChangePwd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\FrmSteelRollMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\FrmSteelRollMaster.Designer.cs">
+      <DependentUpon>FrmSteelRollMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Sale\FrmProxyDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -631,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmChangePwd.resx">
       <DependentUpon>FrmChangePwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\FrmSteelRollMaster.resx">
+      <DependentUpon>FrmSteelRollMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmProxyDetail.resx">
       <DependentUpon>FrmProxyDetail.cs</DependentUpon>
