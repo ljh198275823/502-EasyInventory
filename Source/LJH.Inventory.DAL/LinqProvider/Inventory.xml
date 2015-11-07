@@ -31,21 +31,14 @@
     <Type Name="LJH.Inventory.BusinessModel.Product">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50) NOT NULL" IsPrimaryKey="true"/>
       <Column Name="Name" Member="Name"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="ForeignName" Member="ForeignName"  DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
-      <Column Name="ShortName" Member="ShortName"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CategoryID" Member="CategoryID"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="BarCode" Member="BarCode"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="Model" Member="Model"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="Specification" Member="Specification"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
+      <Column Name="Brand" Member="Brand"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10)"  UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18,4) not null"  UpdateCheck="Never"/>
       <Column Name="Cost" Member="Cost"  DbType="decimal(18,4) not null"  UpdateCheck="Never"/>
-      <Column Name="HSCode" Member="HSCode"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="HSName" Member="HSName"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="BackTaxes" Member="BackTaxes"  DbType="decimal(18,4) not null"  UpdateCheck="Never"/>
       <Column Name="IsService" Member="IsService"  DbType="bit null"  UpdateCheck="Never"/>
-      <Column Name="Company" Member="Company"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="InternalID" Member="InternalID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Product_Category" Member="Category"  ThisKey="CategoryID" OtherKey="ID"/>
     </Type>
@@ -180,15 +173,16 @@
     <Type Name="LJH.Inventory.BusinessModel.StackInItem">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
       <Column Name="SheetNo" Member="SheetNo"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="PurchaseOrder" Member="PurchaseOrder"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
-      <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount"  DbType="decimal(18,4) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="PurchaseOrder" Member="PurchaseOrder"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
@@ -404,6 +398,7 @@
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
       <Column Name="FromInventory" Member="FromInventory"  DbType="bit not Null" UpdateCheck="Never"/>
       <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
@@ -414,6 +409,7 @@
       <Column Name="InventorySheet" Member="InventorySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="DeliveryItem" Member="DeliveryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="DeliverySheet" Member="DeliverySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="SourceID" Member="SourceID"  DbType="uniqueidentifier"  UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="AutoCreateNumber" Member="LJH.Inventory.DAL.LinqProvider.AutoCreateNumber">

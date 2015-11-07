@@ -32,6 +32,7 @@ namespace LJH.Inventory.BLL
                     Unit = si.Unit,
                     Price = si.Price,
                     Count = si.Count,
+                    Length = si.Length,
                     AddDate = DateTime.Now,
                     OrderItem = si.OrderItem,
                     OrderID = si.OrderID,

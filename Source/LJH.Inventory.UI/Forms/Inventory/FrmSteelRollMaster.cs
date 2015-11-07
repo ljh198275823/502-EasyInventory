@@ -10,6 +10,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Report;
+using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Inventory
@@ -120,10 +121,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSpecification"].Value = pi.Product.Specification;
             row.Cells["colModel"].Value = pi.Product.Model;
             row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
-            row.Cells["colUnit"].Value = pi.Unit;
             row.Cells["colReserved"].Value = pi.Reserved.Trim();
             row.Cells["colValid"].Value = pi.Valid.Trim();
             row.Cells["colAmount"].Value = pi.Count.Trim();
+            //row.Cells ["colStackInSheet"].Value =pi.in
             if (_ProductInventorys == null || !_ProductInventorys.Exists(it => it.ID == pi.ID))
             {
                 if (_ProductInventorys == null) _ProductInventorys = new List<ProductInventory>();

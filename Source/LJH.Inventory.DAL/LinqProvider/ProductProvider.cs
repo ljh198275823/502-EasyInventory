@@ -40,7 +40,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 ProductSearchCondition con = search as ProductSearchCondition;
                 if (con.ProductIDS != null && con.ProductIDS.Count > 0) ret = ret.Where(item => con.ProductIDS.Contains(item.ID));
                 if (!string.IsNullOrEmpty(con.Name)) ret = ret.Where(item => item.Name.Contains(con.Name));
-                if (!string.IsNullOrEmpty(con.BarCode)) ret = ret.Where(item => item.BarCode.Contains(con.BarCode));
                 if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.CategoryID == con.CategoryID);
                 if (!string.IsNullOrEmpty(con.Specification)) ret = ret.Where(item => item.Specification.Contains(con.Specification));
             }

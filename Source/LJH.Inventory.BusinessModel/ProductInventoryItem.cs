@@ -15,18 +15,30 @@ namespace LJH.Inventory.BusinessModel
 
         #region 公共属性
         public Guid ID { get; set; }
-
+        /// <summary>
+        /// 获取或设置库存项的产品ID
+        /// </summary>
         public string ProductID { get; set; }
-
+        /// <summary>
+        /// 获取或设置库存项的仓库
+        /// </summary>
         public string WareHouseID { get; set; }
-
+        /// <summary>
+        /// 获取或设置库存项的单位
+        /// </summary>
         public string Unit { get; set; }
-
+        /// <summary>
+        /// 获取或设置库存项的价格
+        /// </summary>
         public decimal Price { get; set; }
         /// <summary>
         /// 获取或设置库存数量
         /// </summary>
         public decimal Count { get; set; }
+        /// <summary>
+        /// 获取或设置库存的货物的长度
+        /// </summary>
+        public decimal? Length { get; set; }
         /// <summary>
         /// 获取收货或分配时间
         /// </summary>
@@ -67,6 +79,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置送货单号
         /// </summary>
         public string DeliverySheet { get; set; }
+        /// <summary>
+        /// 获取或设置次库存项的来源，库存项在出货时会分开成多项
+        /// </summary>
+        public Guid? SourceID { get; set; }
         #endregion
 
         public ProductInventoryItem Clone()

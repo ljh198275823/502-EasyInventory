@@ -13,6 +13,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Forms;
 using LJH.Inventory.UI.Forms.General;
 using LJH.Inventory.UI.Forms.Purchase;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.UI.Forms.Inventory.Report
 {

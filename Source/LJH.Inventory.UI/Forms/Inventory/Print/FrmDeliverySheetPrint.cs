@@ -10,6 +10,7 @@ using Microsoft.Reporting.WinForms;
 using LJH.Inventory .BLL ;
 using LJH.Inventory .BusinessModel ;
 using LJH.Inventory .BusinessModel .SearchCondition ;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.UI.Forms.Inventory.Print
 {

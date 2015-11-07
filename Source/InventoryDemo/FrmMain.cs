@@ -474,7 +474,7 @@ namespace InventoryDemo
             //ReadSoftDog();
             DoLogIn();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
-            //mnu_Home.PerformClick();
+            lblDBPath.Text = AppSettings.Current.GetConfigContent("DBPath");
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)

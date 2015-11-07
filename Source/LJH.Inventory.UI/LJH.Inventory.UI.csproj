@@ -412,11 +412,11 @@
     <Compile Include="Forms\Inventory\FrmProductInventoryMaster.Designer.cs">
       <DependentUpon>FrmProductInventoryMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmInventorySheetDetail.cs">
+    <Compile Include="Forms\Inventory\FrmStackInSheetDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmInventorySheetDetail.Designer.cs">
-      <DependentUpon>FrmInventorySheetDetail.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\FrmStackInSheetDetail.Designer.cs">
+      <DependentUpon>FrmStackInSheetDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\FrmStackInSheetMaster.cs">
       <SubType>Form</SubType>
@@ -797,8 +797,8 @@
     <EmbeddedResource Include="Forms\Inventory\FrmProductInventoryMaster.resx">
       <DependentUpon>FrmProductInventoryMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\FrmInventorySheetDetail.resx">
-      <DependentUpon>FrmInventorySheetDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\FrmStackInSheetDetail.resx">
+      <DependentUpon>FrmStackInSheetDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmStackInSheetMaster.resx">
       <DependentUpon>FrmStackInSheetMaster.cs</DependentUpon>

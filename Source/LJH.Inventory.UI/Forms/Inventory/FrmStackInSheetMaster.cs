@@ -71,7 +71,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmInventorySheetDetail frm= new FrmInventorySheetDetail();
+            FrmStackInSheetDetail frm= new FrmStackInSheetDetail();
             if (supplierTree1.SelectedNode != null) frm.Supplier = supplierTree1.SelectedNode.Tag as CompanyInfo;
             return frm;
         }

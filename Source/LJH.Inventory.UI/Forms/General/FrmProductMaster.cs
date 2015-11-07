@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 
@@ -25,6 +26,10 @@ namespace LJH.Inventory.UI.Forms.General
         List<Product> _Products = null;
         #endregion
 
+        public string Models { get; set; }
+
+        public string ExcludeModels { get; set; }
+
         #region 私有方法
         private void FreshData()
         {
@@ -40,7 +45,8 @@ namespace LJH.Inventory.UI.Forms.General
             if (pc != null) items = _Products.Where(it => it.CategoryID == pc.ID).ToList();
 
             return (from p in items
-                    orderby p.Name ascending
+                    where (string.IsNullOrEmpty(Models) || Models.Contains(p.Model)) && (string.IsNullOrEmpty(ExcludeModels) || !ExcludeModels.Contains(p.Model))
+                    orderby p.CategoryID ascending, p.Brand ascending, p.Specification ascending
                     select (object)p).ToList();
         }
         #endregion
@@ -55,10 +61,7 @@ namespace LJH.Inventory.UI.Forms.General
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            this.btn_Add.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
-            this.btn_Delete.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
             this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
-            this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
             this.mnu_AddProduct.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
             this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
@@ -97,14 +100,9 @@ namespace LJH.Inventory.UI.Forms.General
             row.Cells["colCategoryID"].Value = pc != null ? pc.Name : string.Empty;
             row.Cells["colSpecification"].Value = p.Specification;
             row.Cells["colModel"].Value = p.Model;
-            row.Cells["colBarCode"].Value = p.BarCode;
-            row.Cells["colShortName"].Value = p.ShortName;
-            row.Cells["colUnit"].Value = p.Unit;
             row.Cells["colPrice"].Value = p.Price.Trim();
             row.Cells["colCost"].Value = p.Cost.Trim();
-            row.Cells["colService"].Value = p.IsService;
-            row.Cells["colCompany"].Value = p.Company;
-            row.Cells["colInternalID"].Value = p.InternalID;
+            row.Cells["colBrand"].Value = p.Brand;
             row.Cells["colMemo"].Value = p.Memo;
             if (_Products == null || !_Products.Exists(it => it.ID == p.ID))
             {
@@ -126,12 +124,6 @@ namespace LJH.Inventory.UI.Forms.General
                 _Products.Remove(p);
             }
             return ret.Result == ResultCode.Successful;
-        }
-
-        protected override void ShowItemsOnGrid(List<object> items)
-        {
-            base.ShowItemsOnGrid(items);
-            Filter(txtKeyword.Text.Trim());
         }
         #endregion
 

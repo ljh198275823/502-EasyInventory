@@ -21,6 +21,44 @@ namespace LJH.Inventory.UI.Forms.General
             InitializeComponent();
         }
 
+        #region 私有变量
+        private List<Product> _AllProducts = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+        #endregion
+
+        #region 私有方法
+        private void InitCmbSpecification()
+        {
+            cmbSpecification.Items.Clear();
+            if (_AllProducts != null && _AllProducts.Count > 0)
+            {
+                var items = (from p in _AllProducts
+                             where !string.IsNullOrEmpty(p.Specification)
+                             orderby p.Specification ascending
+                             select p.Specification).Distinct();
+                foreach (var item in items)
+                {
+                    cmbSpecification.Items.Add(item);
+                }
+            }
+        }
+
+        private void InitCmbBrand()
+        {
+            cmbBrand.Items.Clear();
+            if (_AllProducts != null && _AllProducts.Count > 0)
+            {
+                var items = (from p in _AllProducts
+                             where !string.IsNullOrEmpty(p.Brand)
+                             orderby p.Brand ascending
+                             select p.Brand).Distinct();
+                foreach (var item in items)
+                {
+                    cmbBrand.Items.Add(item);
+                }
+            }
+        }
+        #endregion
+
         #region 公共属性
         /// <summary>
         /// 获取或设置产品类别
@@ -33,25 +71,24 @@ namespace LJH.Inventory.UI.Forms.General
         {
             if (string.IsNullOrEmpty(txtID.Text))
             {
-                MessageBox.Show("商品编号不能为空");
+                MessageBox.Show("编号不能为空");
                 txtID.Focus();
                 return false;
             }
             if (string.IsNullOrEmpty(txtName.Text))
             {
-                MessageBox.Show("商品名称不能为空");
+                MessageBox.Show("名称不能为空");
                 txtName.Focus();
                 return false;
             }
             if (Category == null)
             {
-                MessageBox.Show("商品类别不能为空");
+                MessageBox.Show("类别没有指定");
                 return false;
             }
-            if (string.IsNullOrEmpty(txtUnit.Text))
+            if (string.IsNullOrEmpty(cmbSpecification.Text))
             {
-                MessageBox.Show("商品单位不能为空");
-                txtUnit.Focus();
+                MessageBox.Show("规格没有指定");
                 return false;
             }
             return true;
@@ -60,14 +97,14 @@ namespace LJH.Inventory.UI.Forms.General
         protected override void InitControls()
         {
             if (Category != null) txtCategory.Text = Category.Name;
+            InitCmbSpecification();
+            InitCmbBrand();
         }
 
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
             btnOk.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
-            mnu_AttachmentAdd.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
-            mnu_AttachmentDelete.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()
@@ -78,29 +115,11 @@ namespace LJH.Inventory.UI.Forms.General
             txtName.Text = p.Name;
             txtCategory.Text = p.Category.Name;
             Category = p.Category;
-            txtBarCode.Text = p.BarCode;
-            txtSpecification.Text = p.Specification;
-            txtModel.Text = p.Model;
-            txtUnit.Text = p.Unit;
-            chkService.Checked = p.IsService != null && p.IsService.Value;
+            cmbSpecification.Text = p.Specification;
             txtCost.DecimalValue = p.Cost;
             txtPrice.DecimalValue = p.Price;
-            txtShortName.Text = p.ShortName;
-            if (!string.IsNullOrEmpty(p.Company))
-            {
-                CompanyInfo c = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(p.Company).QueryObject;
-                txtCompany.Tag = c;
-                txtCompany.Text = c != null ? c.ID : string.Empty;
-            }
-            if (!string.IsNullOrEmpty(p.InternalID))
-            {
-                Product pi = (new ProductBLL(AppSettings.Current.ConnStr)).GetByID(p.InternalID).QueryObject;
-                txtInternalID.Tag = pi;
-                txtInternalID.Text = pi != null ? pi.ID : string.Empty;
-            }
-            txtInternalID.Text = p.InternalID;
+            cmbBrand.Text = p.Brand;
             txtMemo.Text = p.Memo;
-            ShowAttachmentHeaders(p.ID, p.DocumentType, this.gridAttachment);
         }
 
         protected override Object GetItemFromInput()
@@ -118,32 +137,12 @@ namespace LJH.Inventory.UI.Forms.General
             p.Name = txtName.Text;
             p.CategoryID = Category != null ? Category.ID : null;
             p.Category = Category;
-            p.BarCode = txtBarCode.Text;
-            p.Specification = txtSpecification.Text;
-            p.Model = txtModel.Text;
-            p.Unit = txtUnit.Text;
-            p.IsService = chkService.Checked;
+            p.Specification = cmbSpecification.Text;
+            p.Model = "原材料";
+            p.Unit = "吨";
             p.Price = txtPrice.DecimalValue;
             p.Cost = txtCost.DecimalValue;
-            p.ShortName = txtShortName.Text;
-            if (!string.IsNullOrEmpty(txtCompany.Text))
-            {
-                CompanyInfo c = txtCompany.Tag as CompanyInfo;
-                p.Company = c != null ? c.ID : null;
-            }
-            else
-            {
-                p.Company = null;
-            }
-            if (!string.IsNullOrEmpty(txtInternalID.Text))
-            {
-                Product pi = txtInternalID.Tag as Product;
-                p.InternalID = pi != null ? pi.ID : null;
-            }
-            else
-            {
-                p.InternalID = null;
-            }
+            p.Brand = cmbBrand.Text;
             p.Memo = txtMemo.Text;
             return p;
         }
@@ -163,34 +162,6 @@ namespace LJH.Inventory.UI.Forms.General
         }
         #endregion
 
-        #region 与附件操作相关的方法和事件处理程序
-        private void mnu_AttachmentAdd_Click(object sender, EventArgs e)
-        {
-            Product item = UpdatingItem as Product;
-            if (item != null) PerformAddAttach(item.ID, item.DocumentType, gridAttachment);
-        }
-
-        private void mnu_AttachmentDelete_Click(object sender, EventArgs e)
-        {
-            PerformDelAttach(gridAttachment);
-        }
-
-        private void mnu_AttachmentSaveAs_Click(object sender, EventArgs e)
-        {
-            PerformAttachSaveAs(gridAttachment);
-        }
-
-        private void mnu_AttachmentOpen_Click(object sender, EventArgs e)
-        {
-            PerformAttachOpen(gridAttachment);
-        }
-
-        private void gridAttachment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            PerformAttachOpen(gridAttachment);
-        }
-        #endregion
-
         #region 事件处理程序
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -207,59 +178,6 @@ namespace LJH.Inventory.UI.Forms.General
         {
             Category = null;
             txtCategory.Text = Category != null ? Category.Name : string.Empty;
-        }
-
-        private void lnkUnit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmUnitMaster frm = new FrmUnitMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Unit u = frm.SelectedItem as Unit;
-                txtUnit.Text = u != null ? u.ID : string.Empty;
-            }
-        }
-
-        private void txtUnit_DoubleClick(object sender, EventArgs e)
-        {
-            txtUnit.Text = string.Empty;
-            txtUnit.Tag = null;
-        }
-
-        private void lnkCompany_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmCustomerMaster frm = new FrmCustomerMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                CompanyInfo c = frm.SelectedItem as CompanyInfo;
-                txtCompany.Text = c.ID;
-                txtCompany.Tag = c;
-            }
-        }
-
-        private void lnkInternalID_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmProductMaster frm = new FrmProductMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Product p = frm.SelectedItem as Product;
-                txtInternalID.Text = p.ID;
-                txtInternalID.Tag = p;
-            }
-        }
-
-        private void txtCompany_DoubleClick(object sender, EventArgs e)
-        {
-            txtCompany.Text = string.Empty;
-            txtCompany.Tag = null;
-        }
-
-        private void txtInternalID_DoubleClick(object sender, EventArgs e)
-        {
-            txtInternalID.Text = string.Empty;
-            txtInternalID.Tag = null;
         }
         #endregion
     }

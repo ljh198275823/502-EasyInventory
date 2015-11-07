@@ -53,6 +53,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount{get;set;}
         /// <summary>
+        /// 获取或设置货物的长度
+        /// </summary>
+        public decimal? Length { get; set; }
+        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }

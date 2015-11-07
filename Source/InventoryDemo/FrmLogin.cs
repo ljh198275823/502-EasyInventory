@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.IO;
 using System.Text;
-using System.Configuration ;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary;
@@ -17,8 +11,6 @@ namespace InventoryDemo
 {
     public partial class FrmLogin : Form
     {
-        private SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();
-
         public FrmLogin()
         {
             InitializeComponent();
@@ -26,12 +18,14 @@ namespace InventoryDemo
 
         #region 私有变量
         private string _DefaultDBPath = Path.Combine(Application.StartupPath, "Inventory.db");
+        private string _DBPath = null;
         #endregion
 
         #region 私有方法
         private bool DoLogin(string logName, string pwd)
         {
             SaveConnectString();
+            UpgradeLocalDB(); //升级本地数据库
             OperatorBLL authen = new OperatorBLL(AppSettings.Current.ConnStr);
             if (authen.Authentication(logName, pwd))
             {
@@ -48,9 +42,42 @@ namespace InventoryDemo
 
         private void SaveConnectString()
         {
-            string p = txtConnstr.Text.Trim();
-            if (string.IsNullOrEmpty(p)) p = _DefaultDBPath;
-            AppSettings.Current.ConnStr = "SQLITE:Data Source=" + p;
+            _DBPath = txtConnstr.Text.Trim();
+            if (string.IsNullOrEmpty(_DBPath)) _DBPath = _DefaultDBPath;
+            AppSettings.Current.SaveConfig("DBPath", _DBPath);
+            AppSettings.Current.ConnStr = "SQLITE:Data Source=" + _DBPath;
+
+        }
+
+        private void UpgradeLocalDB()
+        {
+            string path = System.IO.Path.Combine(Application.StartupPath, "DbUpdate_Sqlite.sql");
+            if (File.Exists(path))
+            {
+                List<string> commands = (new LJH.GeneralLibrary.SQLHelper.SQLStringExtractor()).ExtractFromFile(path);
+                if (commands != null && commands.Count > 0)
+                {
+                    using (System.Data.SQLite.SQLiteConnection con = new System.Data.SQLite.SQLiteConnection("Data Source=" + _DBPath))
+                    {
+                        using (System.Data.SQLite.SQLiteCommand cmd = new System.Data.SQLite.SQLiteCommand(con))
+                        {
+                            con.Open();
+                            foreach (string command in commands)
+                            {
+                                try
+                                {
+                                    cmd.CommandText = command;
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch (Exception ex)
+                                {
+                                    //LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private List<string> GetHistoryOperators()
@@ -179,7 +206,7 @@ namespace InventoryDemo
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog dig = new OpenFileDialog();
-            dig.Filter =  "DB 文件|*.db|所有文件(*.*)|*.*";
+            dig.Filter = "DB 文件|*.db|所有文件(*.*)|*.*";
             if (dig.ShowDialog() == DialogResult.OK)
             {
                 AppSettings.Current.SaveConfig("DBPath", dig.FileName);

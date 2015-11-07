@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Inventory
 {
-    partial class FrmInventorySheetDetail
+    partial class FrmStackInSheetDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -78,12 +78,11 @@
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPurchaseOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -99,11 +98,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(521, 227);
+            this.btnClose.Location = new System.Drawing.Point(545, 227);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(441, 238);
+            this.btnOk.Location = new System.Drawing.Point(465, 238);
             // 
             // label15
             // 
@@ -128,13 +127,14 @@
             this.btn_PurchaseRecordSelect.Name = "btn_PurchaseRecordSelect";
             this.btn_PurchaseRecordSelect.Size = new System.Drawing.Size(148, 22);
             this.btn_PurchaseRecordSelect.Text = "选择采购单项";
+            this.btn_PurchaseRecordSelect.Visible = false;
             this.btn_PurchaseRecordSelect.Click += new System.EventHandler(this.btn_PurchaseItemSelect_Click);
             // 
             // btn_AddItem
             // 
             this.btn_AddItem.Name = "btn_AddItem";
             this.btn_AddItem.Size = new System.Drawing.Size(148, 22);
-            this.btn_AddItem.Text = "选择产品";
+            this.btn_AddItem.Text = "增加项";
             this.btn_AddItem.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // mnu_RemoveItem
@@ -157,7 +157,7 @@
             this.btnNullify});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(996, 56);
+            this.toolStrip1.Size = new System.Drawing.Size(1020, 56);
             this.toolStrip1.TabIndex = 87;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -209,7 +209,7 @@
             this.btnInventory.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnInventory.Name = "btnInventory";
             this.btnInventory.Size = new System.Drawing.Size(48, 53);
-            this.btnInventory.Text = "收货(&I)";
+            this.btnInventory.Text = "入库(&I)";
             this.btnInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
             // 
@@ -225,16 +225,16 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(0, 59);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(996, 331);
+            this.tabControl1.Size = new System.Drawing.Size(1020, 331);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -253,7 +253,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(988, 305);
+            this.tabPage1.Size = new System.Drawing.Size(1012, 305);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -348,9 +348,9 @@
             this.ItemsGrid.AllowUserToAddRows = false;
             this.ItemsGrid.AllowUserToDeleteRows = false;
             this.ItemsGrid.AllowUserToResizeRows = false;
-            this.ItemsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ItemsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ItemsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ItemsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colHeader,
@@ -358,20 +358,19 @@
             this.colProductName,
             this.colCategory,
             this.colSpecification,
-            this.colUnit,
+            this.colLength,
             this.colPrice,
             this.colCount,
             this.colTotal,
             this.colPurchaseOrder,
-            this.colOrderID,
             this.comMemo});
             this.ItemsGrid.ContextMenuStrip = this.contextMenuStrip1;
             this.ItemsGrid.Location = new System.Drawing.Point(7, 70);
             this.ItemsGrid.Name = "ItemsGrid";
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
-            this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(973, 229);
+            this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.ItemsGrid.Size = new System.Drawing.Size(997, 229);
             this.ItemsGrid.TabIndex = 5;
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             // 
@@ -380,7 +379,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(988, 305);
+            this.tabPage5.Size = new System.Drawing.Size(1012, 305);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "附件";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -404,7 +403,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(988, 305);
+            this.gridAttachment.Size = new System.Drawing.Size(1012, 305);
             this.gridAttachment.TabIndex = 100;
             // 
             // colUploadDateTime
@@ -477,7 +476,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(988, 305);
+            this.tabPage2.Size = new System.Drawing.Size(1012, 305);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -500,7 +499,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(988, 305);
+            this.dataGridView1.Size = new System.Drawing.Size(1012, 305);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -568,20 +567,17 @@
             this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colSpecification.Width = 80;
             // 
-            // colUnit
+            // colLength
             // 
-            this.colUnit.HeaderText = "单位";
-            this.colUnit.Name = "colUnit";
-            this.colUnit.ReadOnly = true;
-            this.colUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colUnit.Width = 80;
+            this.colLength.HeaderText = "长度(米)";
+            this.colLength.Name = "colLength";
             // 
             // colPrice
             // 
             dataGridViewCellStyle1.Format = "C2";
             dataGridViewCellStyle1.NullValue = null;
             this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colPrice.HeaderText = "单价";
+            this.colPrice.HeaderText = "单价(/吨)";
             this.colPrice.Name = "colPrice";
             this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -589,7 +585,7 @@
             // 
             dataGridViewCellStyle2.NullValue = "0";
             this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCount.HeaderText = "数量";
+            this.colCount.HeaderText = "重量(吨)";
             this.colCount.Name = "colCount";
             this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colCount.Width = 80;
@@ -612,29 +608,20 @@
             this.colPurchaseOrder.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colPurchaseOrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "销售订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colOrderID.Visible = false;
-            // 
             // comMemo
             // 
             this.comMemo.HeaderText = "备注";
             this.comMemo.Name = "comMemo";
             // 
-            // FrmInventorySheetDetail
+            // FrmStackInSheetDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 393);
+            this.ClientSize = new System.Drawing.Size(1020, 393);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "FrmInventorySheetDetail";
-            this.Text = "收货单";
+            this.Name = "FrmStackInSheetDetail";
+            this.Text = "原材料入库单";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.toolStrip1, 0);
@@ -704,12 +691,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUnit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseOrder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn comMemo;
     }
 }

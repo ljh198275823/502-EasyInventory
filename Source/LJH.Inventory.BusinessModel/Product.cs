@@ -30,14 +30,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// 获取或设置商品的外文名称
-        /// </summary>
-        public string ForeignName { get; set; }
-        /// <summary>
-        /// 获取或设置简称
-        /// </summary>
-        public string ShortName { get; set; }
-        /// <summary>
         /// 获取或设置商品类别编号
         /// </summary>
         public string CategoryID { get; set; }
@@ -46,10 +38,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public ProductCategory Category { get; set; }
         /// <summary>
-        /// 获取或设置商品条码
-        /// </summary>
-        public string BarCode { get; set; }
-        /// <summary>
         /// 获取或设置商品型号
         /// </summary>
         public string Model { get; set; }
@@ -57,6 +45,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置商品规格
         /// </summary>
         public string Specification { get; set; }
+        /// <summary>
+        /// 获取或设置商品的品牌或生产商
+        /// </summary>
+        public string Brand { get; set; }
         /// <summary>
         /// 获取或设置商品的默认单位
         /// </summary>
@@ -69,18 +61,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置商品的成本价
         /// </summary>
         public decimal Cost { get; set; }
-        /// <summary>
-        /// 获取或设置产品用于哪些客户，比如有些产品针对不同的客户有不同的物料编号
-        /// </summary>
-        public string Company { get; set; }
-        /// <summary>
-        /// 获取或设置产品的内部编号，主要是针对某种产品针对不同的客户有不同的编号，但在内部统计库存等时则需要用一个统一的内部编号
-        /// </summary>
-        public string InternalID { get; set; }
-        /// <summary>
-        /// 获取或设置产品的权重,主要用于产品排序，数据越大的产品排得越靠前
-        /// </summary>
-        public long? Point { get; set; }
         /// <summary>
         /// 获取或设置产品是否是服务，如果是服务的话就不用进行库存管理
         /// </summary>
