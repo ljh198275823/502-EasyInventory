@@ -31,6 +31,7 @@ namespace LJH.Inventory.UI.Controls
             List<Product> ps = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             if (ps != null && ps.Count > 0)
             {
+                this.Items.Add(string.Empty);
                 var items = (from p in ps
                              where !string.IsNullOrEmpty(p.Specification)
                              orderby p.Specification ascending

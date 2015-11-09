@@ -27,6 +27,41 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 私有方法
+        private void InitCmbBrand()
+        {
+            cmbBrand.Items.Clear();
+            List<Product> _AllProducts = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            if (_AllProducts != null && _AllProducts.Count > 0)
+            {
+                cmbBrand.Items.Add(string.Empty);
+                var items = (from p in _AllProducts
+                             where !string.IsNullOrEmpty(p.Brand)
+                             orderby p.Brand ascending
+                             select p.Brand).Distinct();
+                foreach (var item in items)
+                {
+                    cmbBrand.Items.Add(item);
+                }
+            }
+        }
+
+        private void InitCmbSupplier()
+        {
+            cmbSupplier.Items.Clear();
+            List<CompanyInfo> cs = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
+            if (cs != null && cs.Count > 0)
+            {
+                cmbSupplier.Items.Add(string.Empty);
+                var items = from it in cs
+                            orderby it.Name ascending
+                            select it.Name;
+                foreach (var c in items)
+                {
+                    cmbSupplier.Items.Add(c);
+                }
+            }
+        }
+
         private void FreshData()
         {
             List<object> items = FilterData();
@@ -42,11 +77,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 cs = this.categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
                 if (cs != null && cs.Count > 0) items = _SteelRolls.Where(it => cs.Exists(c => c.ID == it.Product.CategoryID)).ToList();
             }
-            string warehouse = wareHouseComboBox1.SelectedWareHouseID;
-            if (items != null && items.Count > 0 && !string.IsNullOrEmpty(warehouse))
-            {
-                items = items.Where(it => it.WareHouseID == warehouse).ToList();
-            }
+            if (chkStorageDT.Checked) items = items.Where(it => it.AddDate.Date == dtStorage.Value.Date).ToList();
+            if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
+            if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification == cmbSpecification.Text).ToList();
+            if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.SupplierID == cmbSupplier.Text).ToList();
+            if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
+            if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Weight == txtWeight.DecimalValue).ToList();
+            items = items.Where(it => (chkIntact.Checked && it.State == ProductInventoryState.Intact) ||
+                                   (chkPartial.Checked && it.State == ProductInventoryState.Partial) ||
+                                   (chkWaitShip.Checked && it.State == ProductInventoryState.WaitShip) ||
+                                   (chkOnlyTail.Checked && it.State == ProductInventoryState.OnlyTail) ||
+                                   (chkShipped.Checked && it.State == ProductInventoryState.Shipped) ||
+                                   (chkRemainless.Checked && it.State == ProductInventoryState.RemainLess)).ToList();
             if (items != null && items.Count > 0)
             {
                 return (from p in items
@@ -64,6 +106,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.wareHouseComboBox1.Init();
             this.wareHouseComboBox1.SelectedIndexChanged -= wareHouseComboBox1_SelectedIndexChanged;
             this.wareHouseComboBox1.SelectedIndexChanged += wareHouseComboBox1_SelectedIndexChanged;
+            this.cmbSpecification.Init();
+            InitCmbBrand();
+            InitCmbSupplier();
         }
 
         protected override void ReFreshData()
@@ -95,6 +140,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<ProductInventoryItem> items = null;
             if (SearchCondition == null)
             {
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.Model = "原材料";
                 items = bll.GetItems(null).QueryObjects;
             }
             else
@@ -132,6 +179,36 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         private void wareHouseComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void cmbSpecification_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void txtWeight_TextChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void cmbSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void cmbBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void chkState_CheckedChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void dtStorage_ValueChanged(object sender, EventArgs e)
         {
             FreshData();
         }
@@ -212,5 +289,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
+
+       
+        
     }
 }

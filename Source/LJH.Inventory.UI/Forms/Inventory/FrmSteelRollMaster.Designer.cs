@@ -31,7 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.decimalTextBox1 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbSupplier = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbBrand = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.chkShipped = new System.Windows.Forms.CheckBox();
             this.chkWaitShip = new System.Windows.Forms.CheckBox();
@@ -41,21 +49,11 @@
             this.chkIntact = new System.Windows.Forms.CheckBox();
             this.dtStorage = new System.Windows.Forms.DateTimePicker();
             this.chkStorageDT = new System.Windows.Forms.CheckBox();
-            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.categoryTree = new LJH.Inventory.UI.Controls.ProductTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +67,14 @@
             this.colSerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlLeft.SuspendLayout();
@@ -88,7 +94,15 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.decimalTextBox1);
+            this.panel5.Controls.Add(this.wareHouseComboBox1);
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Controls.Add(this.cmbSupplier);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.cmbBrand);
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.cmbSpecification);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.txtWeight);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.chkShipped);
             this.panel5.Controls.Add(this.chkWaitShip);
@@ -98,38 +112,112 @@
             this.panel5.Controls.Add(this.chkIntact);
             this.panel5.Controls.Add(this.dtStorage);
             this.panel5.Controls.Add(this.chkStorageDT);
-            this.panel5.Controls.Add(this.wareHouseComboBox1);
-            this.panel5.Controls.Add(this.label1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(1, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1480, 75);
             this.panel5.TabIndex = 7;
             // 
-            // decimalTextBox1
+            // wareHouseComboBox1
             // 
-            this.decimalTextBox1.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.decimalTextBox1.Location = new System.Drawing.Point(346, 10);
-            this.decimalTextBox1.MaxValue = new decimal(new int[] {
+            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.wareHouseComboBox1.FormattingEnabled = true;
+            this.wareHouseComboBox1.Location = new System.Drawing.Point(292, 14);
+            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
+            this.wareHouseComboBox1.Size = new System.Drawing.Size(112, 20);
+            this.wareHouseComboBox1.TabIndex = 83;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(257, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 81;
+            this.label4.Text = "仓库";
+            // 
+            // cmbSupplier
+            // 
+            this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSupplier.FormattingEnabled = true;
+            this.cmbSupplier.Location = new System.Drawing.Point(292, 45);
+            this.cmbSupplier.Name = "cmbSupplier";
+            this.cmbSupplier.Size = new System.Drawing.Size(112, 20);
+            this.cmbSupplier.TabIndex = 80;
+            this.cmbSupplier.SelectedIndexChanged += new System.EventHandler(this.cmbSupplier_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(250, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.TabIndex = 79;
+            this.label3.Text = "供应商";
+            // 
+            // cmbBrand
+            // 
+            this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBrand.FormattingEnabled = true;
+            this.cmbBrand.Location = new System.Drawing.Point(455, 45);
+            this.cmbBrand.Name = "cmbBrand";
+            this.cmbBrand.Size = new System.Drawing.Size(121, 20);
+            this.cmbBrand.TabIndex = 78;
+            this.cmbBrand.SelectedIndexChanged += new System.EventHandler(this.cmbBrand_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(421, 49);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 12);
+            this.label9.TabIndex = 77;
+            this.label9.Text = "厂家";
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSpecification.FormattingEnabled = true;
+            this.cmbSpecification.Location = new System.Drawing.Point(455, 14);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
+            this.cmbSpecification.TabIndex = 76;
+            this.cmbSpecification.SelectedIndexChanged += new System.EventHandler(this.cmbSpecification_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(423, 18);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 75;
+            this.label5.Text = "规格";
+            // 
+            // txtWeight
+            // 
+            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeight.Location = new System.Drawing.Point(662, 14);
+            this.txtWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
             -1,
             0});
-            this.decimalTextBox1.MinValue = new decimal(new int[] {
+            this.txtWeight.MinValue = new decimal(new int[] {
             -1,
             -1,
             -1,
             -2147483648});
-            this.decimalTextBox1.Name = "decimalTextBox1";
-            this.decimalTextBox1.PointCount = -1;
-            this.decimalTextBox1.Size = new System.Drawing.Size(70, 21);
-            this.decimalTextBox1.TabIndex = 53;
-            this.decimalTextBox1.Text = "0";
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.PointCount = -1;
+            this.txtWeight.Size = new System.Drawing.Size(70, 21);
+            this.txtWeight.TabIndex = 53;
+            this.txtWeight.Text = "0";
+            this.txtWeight.TextChanged += new System.EventHandler(this.txtWeight_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(290, 15);
+            this.label2.Location = new System.Drawing.Point(606, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 52;
@@ -138,106 +226,97 @@
             // chkShipped
             // 
             this.chkShipped.AutoSize = true;
-            this.chkShipped.Location = new System.Drawing.Point(450, 44);
+            this.chkShipped.Location = new System.Drawing.Point(814, 47);
             this.chkShipped.Name = "chkShipped";
             this.chkShipped.Size = new System.Drawing.Size(60, 16);
             this.chkShipped.TabIndex = 51;
             this.chkShipped.Text = "已发货";
             this.chkShipped.UseVisualStyleBackColor = true;
+            this.chkShipped.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // chkWaitShip
             // 
             this.chkWaitShip.AutoSize = true;
             this.chkWaitShip.Checked = true;
             this.chkWaitShip.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkWaitShip.Location = new System.Drawing.Point(389, 44);
+            this.chkWaitShip.Location = new System.Drawing.Point(705, 47);
             this.chkWaitShip.Name = "chkWaitShip";
             this.chkWaitShip.Size = new System.Drawing.Size(60, 16);
             this.chkWaitShip.TabIndex = 50;
             this.chkWaitShip.Text = "待发货";
             this.chkWaitShip.UseVisualStyleBackColor = true;
+            this.chkWaitShip.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // chkRemainless
             // 
             this.chkRemainless.AutoSize = true;
-            this.chkRemainless.Location = new System.Drawing.Point(560, 43);
+            this.chkRemainless.Location = new System.Drawing.Point(876, 47);
             this.chkRemainless.Name = "chkRemainless";
             this.chkRemainless.Size = new System.Drawing.Size(60, 16);
             this.chkRemainless.TabIndex = 49;
             this.chkRemainless.Text = "无余料";
             this.chkRemainless.UseVisualStyleBackColor = true;
+            this.chkRemainless.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // chkOnlyTail
             // 
             this.chkOnlyTail.AutoSize = true;
             this.chkOnlyTail.Checked = true;
             this.chkOnlyTail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOnlyTail.Location = new System.Drawing.Point(512, 43);
+            this.chkOnlyTail.Location = new System.Drawing.Point(766, 47);
             this.chkOnlyTail.Name = "chkOnlyTail";
             this.chkOnlyTail.Size = new System.Drawing.Size(48, 16);
             this.chkOnlyTail.TabIndex = 48;
             this.chkOnlyTail.Text = "尾卷";
             this.chkOnlyTail.UseVisualStyleBackColor = true;
+            this.chkOnlyTail.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // chkPartial
             // 
             this.chkPartial.AutoSize = true;
             this.chkPartial.Checked = true;
             this.chkPartial.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPartial.Location = new System.Drawing.Point(341, 44);
+            this.chkPartial.Location = new System.Drawing.Point(657, 47);
             this.chkPartial.Name = "chkPartial";
             this.chkPartial.Size = new System.Drawing.Size(48, 16);
             this.chkPartial.TabIndex = 47;
             this.chkPartial.Text = "余卷";
             this.chkPartial.UseVisualStyleBackColor = true;
+            this.chkPartial.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // chkIntact
             // 
             this.chkIntact.AutoSize = true;
             this.chkIntact.Checked = true;
             this.chkIntact.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIntact.Location = new System.Drawing.Point(292, 44);
+            this.chkIntact.Location = new System.Drawing.Point(608, 47);
             this.chkIntact.Name = "chkIntact";
             this.chkIntact.Size = new System.Drawing.Size(48, 16);
             this.chkIntact.TabIndex = 46;
             this.chkIntact.Text = "整卷";
             this.chkIntact.UseVisualStyleBackColor = true;
+            this.chkIntact.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // dtStorage
             // 
             this.dtStorage.CustomFormat = "yyyy-MM-dd";
             this.dtStorage.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtStorage.Location = new System.Drawing.Point(505, 11);
+            this.dtStorage.Location = new System.Drawing.Point(821, 14);
             this.dtStorage.Name = "dtStorage";
             this.dtStorage.Size = new System.Drawing.Size(106, 21);
             this.dtStorage.TabIndex = 45;
+            this.dtStorage.ValueChanged += new System.EventHandler(this.dtStorage_ValueChanged);
             // 
             // chkStorageDT
             // 
             this.chkStorageDT.AutoSize = true;
-            this.chkStorageDT.Location = new System.Drawing.Point(433, 13);
+            this.chkStorageDT.Location = new System.Drawing.Point(749, 16);
             this.chkStorageDT.Name = "chkStorageDT";
             this.chkStorageDT.Size = new System.Drawing.Size(72, 16);
             this.chkStorageDT.TabIndex = 44;
             this.chkStorageDT.Text = "进货日期";
             this.chkStorageDT.UseVisualStyleBackColor = true;
-            // 
-            // wareHouseComboBox1
-            // 
-            this.wareHouseComboBox1.FormattingEnabled = true;
-            this.wareHouseComboBox1.Location = new System.Drawing.Point(44, 12);
-            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
-            this.wareHouseComboBox1.Size = new System.Drawing.Size(112, 20);
-            this.wareHouseComboBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "仓库";
+            this.chkStorageDT.CheckedChanged += new System.EventHandler(this.chkState_CheckedChanged);
             // 
             // panel4
             // 
@@ -312,61 +391,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(1231, 457);
             this.dataGridView1.TabIndex = 115;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.mnu_Check,
-            this.mnu_Nullify,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 142);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // mnu_Check
-            // 
-            this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(121, 22);
-            this.mnu_Check.Text = "盘点";
-            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
-            // 
-            // mnu_Nullify
-            // 
-            this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(121, 22);
-            this.mnu_Nullify.Text = "作废";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_Export.Text = "导出...";
             // 
             // colAddDate
             // 
@@ -447,6 +471,61 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.mnu_Check,
+            this.mnu_Nullify,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 142);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // mnu_Check
+            // 
+            this.mnu_Check.Name = "mnu_Check";
+            this.mnu_Check.Size = new System.Drawing.Size(121, 22);
+            this.mnu_Check.Text = "盘点";
+            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
+            // 
+            // mnu_Nullify
+            // 
+            this.mnu_Nullify.Name = "mnu_Nullify";
+            this.mnu_Nullify.Size = new System.Drawing.Size(121, 22);
+            this.mnu_Nullify.Text = "作废";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
             // FrmSteelRollMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -487,10 +566,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
-        private Controls.WareHouseComboBox wareHouseComboBox1;
         private System.Windows.Forms.ToolStripMenuItem mnu_Check;
         private System.Windows.Forms.ToolStripMenuItem mnu_Nullify;
         private System.Windows.Forms.Label label2;
@@ -502,7 +579,7 @@
         private System.Windows.Forms.CheckBox chkIntact;
         private System.Windows.Forms.DateTimePicker dtStorage;
         private System.Windows.Forms.CheckBox chkStorageDT;
-        private GeneralLibrary.WinformControl.DecimalTextBox decimalTextBox1;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
@@ -516,5 +593,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private Controls.SpecificationComboBox cmbSpecification;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbSupplier;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbBrand;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label4;
+        private Controls.WareHouseComboBox wareHouseComboBox1;
     }
 }

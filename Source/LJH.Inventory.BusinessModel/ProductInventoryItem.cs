@@ -34,18 +34,9 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置商品信息
         /// </summary>
         public Product Product { get; set; }
-        /// <summary>
-        /// 获取或设置库存项的单位
-        /// </summary>
-        public string Unit { get; set; }
-        /// <summary>
-        /// 获取或设置库存项的价格
-        /// </summary>
-        public decimal Price { get; set; }
-        /// <summary>
-        /// 获取或设置库存数量
-        /// </summary>
-        public decimal Count { get; set; }
+
+        public string Model { get; set; }
+        
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
@@ -62,6 +53,18 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置库存单个长度
         /// </summary>
         public decimal Length { get; set; }
+        /// <summary>
+        /// 获取或设置库存项的单位
+        /// </summary>
+        public string Unit { get; set; }
+        /// <summary>
+        /// 获取或设置库存项的价格
+        /// </summary>
+        public decimal Price { get; set; }
+        /// <summary>
+        /// 获取或设置库存数量
+        /// </summary>
+        public decimal Count { get; set; }
         /// <summary>
         /// 获取收货或分配时间
         /// </summary>

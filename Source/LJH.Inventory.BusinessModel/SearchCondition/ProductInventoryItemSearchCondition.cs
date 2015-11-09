@@ -30,5 +30,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public bool? UnShipped { get; set; }
 
         public bool? UnReserved { get; set; }
+
+        public string Model { get; set; }
     }
 }

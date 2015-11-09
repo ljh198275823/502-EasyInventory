@@ -23,16 +23,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             InitializeComponent();
         }
 
-        #region 私有变量
-        private List<Product> _AllProducts = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-        #endregion
-
         #region 私有方法
         private void InitCmbBrand()
         {
             cmbBrand.Items.Clear();
+            List<Product> _AllProducts = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             if (_AllProducts != null && _AllProducts.Count > 0)
             {
+                cmbBrand.Items.Add(string.Empty);
                 var items = (from p in _AllProducts
                              where !string.IsNullOrEmpty(p.Brand)
                              orderby p.Brand ascending
@@ -145,7 +143,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 item = new ProductInventoryItem();
                 item.ID = Guid.NewGuid();
             }
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, cmbSpecification.Text);
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Text).Trim());
             if (p == null) throw new Exception("创建相关产品信息失败");
             item.Product = p;
             item.ProductID = p.ID;
