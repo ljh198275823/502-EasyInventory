@@ -62,7 +62,18 @@ namespace LJH.Inventory.DAL.LinqProvider
                     }
                 }
             }
-            return ret.ToList();
+            var items = ret.ToList();
+            if (items != null && items.Count > 0)
+            {
+                List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
+                List<WareHouse> ws = (new WareHouseProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
+                foreach (ProductInventoryItem pi in items)
+                {
+                    pi.Product = ps.SingleOrDefault(p => p.ID == pi.ProductID);
+                    pi.WareHouse = ws.SingleOrDefault(w => w.ID == pi.WareHouseID);
+                }
+            }
+            return items.Where(it => it.Product != null && it.WareHouse != null).ToList();
         }
         #endregion
     }

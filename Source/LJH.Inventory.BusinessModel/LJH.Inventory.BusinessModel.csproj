@@ -105,6 +105,7 @@
     <Compile Include="Inventory\StackInRecord.cs" />
     <Compile Include="ISheet.cs" />
     <Compile Include="MyCompanyInfo.cs" />
+    <Compile Include="ProductInventoryState.cs" />
     <Compile Include="Resource\CustomerReceivableTypeDescription.cs" />
     <Compile Include="Sale\OrderItemRecord.cs" />
     <Compile Include="Permission\OperatorRightAttribute.cs" />

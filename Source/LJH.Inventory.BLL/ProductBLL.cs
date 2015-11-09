@@ -88,6 +88,30 @@ namespace LJH.Inventory.BLL
                 return new CommandResult(ResultCode.Fail, "创建商品编号失败，请重试");
             }
         }
+
+        public Product Create(string categoryID, string specification)
+        {
+            List<Product> ps = GetItems(null).QueryObjects;
+            if (ps != null && ps.Exists(it => it.CategoryID == categoryID && it.Specification == specification))
+            {
+                return ps.Single(it => it.CategoryID == categoryID && it.Specification == specification);
+            }
+            else
+            {
+                Product p = new Product();
+                p.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
+                p.Specification = specification;
+                p.CategoryID = categoryID;
+                p.Name = p.ID;
+                p.Unit = string.Empty;
+                if (!string.IsNullOrEmpty(p.ID))
+                {
+                    var ret = base.Add(p);
+                    if (ret.Result == ResultCode.Successful) return Create(categoryID, specification);
+                }
+            }
+            return null;
+        }
         #endregion
     }
 }

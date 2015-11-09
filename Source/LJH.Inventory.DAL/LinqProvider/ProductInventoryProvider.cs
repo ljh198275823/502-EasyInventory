@@ -21,13 +21,6 @@ namespace LJH.Inventory.DAL.LinqProvider
         #region 重写基类方法
         protected override ProductInventory GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
-            //ProductInventory pi = dc.GetTable<ProductInventory>().SingleOrDefault(item => item.ID == id);
-            //if (pi != null)
-            //{
-            //    pi.Product = dc.GetTable<Product>().SingleOrDefault(p => p.ID == pi.ProductID);
-            //    pi.WareHouse = dc.GetTable<WareHouse>().SingleOrDefault(w => w.ID == pi.WareHouseID);
-            //}
-            //return pi;
             throw new Exception("未实现此方法");
         }
 

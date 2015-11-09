@@ -157,6 +157,12 @@
     <Compile Include="RoleCombobox.designer.cs">
       <DependentUpon>RoleCombobox.cs</DependentUpon>
     </Compile>
+    <Compile Include="SpecificationComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SpecificationComboBox.Designer.cs">
+      <DependentUpon>SpecificationComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="SupplierTree.cs">
       <SubType>Component</SubType>
     </Compile>

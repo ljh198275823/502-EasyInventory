@@ -23,7 +23,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         #region 私有变量
-        private List<ProductInventory> _ProductInventorys = null;
+        private List<ProductInventoryItem> _SteelRolls = null;
         #endregion
 
         #region 私有方法
@@ -35,26 +35,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<object> FilterData()
         {
-            List<ProductInventory> items = _ProductInventorys;
+            List<ProductInventoryItem> items = _SteelRolls;
             List<ProductCategory> cs = null;
             if (this.categoryTree.SelectedNode != null)
             {
                 cs = this.categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
-                if (cs != null && cs.Count > 0) items = _ProductInventorys.Where(it => cs.Exists(c => c.ID == it.Product.CategoryID)).ToList();
+                if (cs != null && cs.Count > 0) items = _SteelRolls.Where(it => cs.Exists(c => c.ID == it.Product.CategoryID)).ToList();
             }
             string warehouse = wareHouseComboBox1.SelectedWareHouseID;
             if (items != null && items.Count > 0 && !string.IsNullOrEmpty(warehouse))
             {
                 items = items.Where(it => it.WareHouseID == warehouse).ToList();
             }
-            if (chkOnlyHasInventory.Checked)
-            {
-                items = items.Where(item => item.Valid + item.Reserved > 0).ToList();
-            }
             if (items != null && items.Count > 0)
             {
                 return (from p in items
-                        orderby p.Product.Name ascending
+                        orderby p.AddDate descending, p.Product.CategoryID ascending, p.Product.Specification ascending
                         select (object)p).ToList();
             }
             return null;
@@ -84,8 +80,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmProductInventoryDetail frm = new FrmProductInventoryDetail();
-            frm.WareHouse = categoryTree.SelectedNode != null ? (categoryTree.SelectedNode.Tag as WareHouse) : null;
+            FrmSteelRollDetail frm = new FrmSteelRollDetail();
             return frm;
         }
 
@@ -96,8 +91,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
-            ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.Current.ConnStr);
-            List<ProductInventory> items = null;
+            ProductInventoryItemBLL bll = new ProductInventoryItemBLL(AppSettings.Current.ConnStr);
+            List<ProductInventoryItem> items = null;
             if (SearchCondition == null)
             {
                 items = bll.GetItems(null).QueryObjects;
@@ -106,36 +101,27 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 items = bll.GetItems(SearchCondition).QueryObjects;
             }
-            _ProductInventorys = bll.GetItems(SearchCondition).QueryObjects;
+            _SteelRolls = bll.GetItems(SearchCondition).QueryObjects;
             List<object> records = FilterData();
             return records;
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            ProductInventory pi = item as ProductInventory;
-            row.Cells["colImage"].Value = Properties.Resources.inventory;
-            row.Cells["colProductID"].Value = pi.ProductID;
-            row.Cells["colProduct"].Value = pi.Product.Name;
-            row.Cells["colCategory"].Value = pi.Product.Category == null ? pi.Product.CategoryID : pi.Product.Category.Name;
-            row.Cells["colSpecification"].Value = pi.Product.Specification;
-            row.Cells["colModel"].Value = pi.Product.Model;
-            row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
-            row.Cells["colReserved"].Value = pi.Reserved.Trim();
-            row.Cells["colValid"].Value = pi.Valid.Trim();
-            row.Cells["colAmount"].Value = pi.Count.Trim();
-            //row.Cells ["colStackInSheet"].Value =pi.in
-            if (_ProductInventorys == null || !_ProductInventorys.Exists(it => it.ID == pi.ID))
-            {
-                if (_ProductInventorys == null) _ProductInventorys = new List<ProductInventory>();
-                _ProductInventorys.Add(pi);
-            }
-        }
-
-        protected override void ShowItemsOnGrid(List<object> items)
-        {
-            base.ShowItemsOnGrid(items);
-            Filter(txtKeyword.Text.Trim());
+            ProductInventoryItem sr = item as ProductInventoryItem;
+            row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy年MM月dd日");
+            row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
+            row.Cells["colSpecification"].Value = sr.Product.Specification;
+            row.Cells["colWareHouse"].Value = sr.WareHouse.Name;
+            row.Cells["colOriginalWeight"].Value = sr.OriginalWeight.ToString("F3");
+            row.Cells["colOriginalLength"].Value = sr.OriginalLength.ToString("F2");
+            row.Cells["colWeight"].Value = sr.Weight.ToString("F3");
+            row.Cells["colLength"].Value = sr.Length.ToString("F2");
+            row.Cells["colSupplier"].Value = sr.SupplierID;
+            row.Cells["colManufacture"].Value = sr.Manufacture;
+            row.Cells["colState"].Value = sr.State;
+            row.Cells["colSerialNumber"].Value = sr.SerialNumber;
+            row.Cells["colMemo"].Value = sr.Memo;
         }
         #endregion
 
@@ -146,16 +132,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         private void wareHouseComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FreshData();
-        }
-
-        private void txtKeyword_TextChanged(object sender, EventArgs e)
-        {
-            FreshData();
-        }
-
-        private void chkOnlyHasInventory_CheckedChanged(object sender, EventArgs e)
         {
             FreshData();
         }

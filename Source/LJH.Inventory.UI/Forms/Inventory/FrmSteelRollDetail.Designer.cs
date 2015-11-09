@@ -1,0 +1,385 @@
+﻿namespace LJH.Inventory.UI.Forms.Inventory
+{
+    partial class FrmSteelRollDetail
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.dtStorageDateTime = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtOriginalWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtOriginalLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtPrice = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtSerialNumber = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkSupplier = new System.Windows.Forms.LinkLabel();
+            this.lnkCategory = new System.Windows.Forms.LinkLabel();
+            this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtSupplier = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.cmbBrand = new System.Windows.Forms.ComboBox();
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
+            this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkWareHouse = new System.Windows.Forms.LinkLabel();
+            this.SuspendLayout();
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(384, 240);
+            this.btnClose.Size = new System.Drawing.Size(107, 35);
+            // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(256, 240);
+            this.btnOk.Size = new System.Drawing.Size(107, 35);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(284, 125);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 12);
+            this.label14.TabIndex = 57;
+            this.label14.Text = "钢卷号";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(67, 186);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 12);
+            this.label12.TabIndex = 55;
+            this.label12.Text = "描述";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(25, 125);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 12);
+            this.label10.TabIndex = 54;
+            this.label10.Text = "单价(元/吨)";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(296, 157);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 12);
+            this.label9.TabIndex = 53;
+            this.label9.Text = "厂家";
+            // 
+            // dtStorageDateTime
+            // 
+            this.dtStorageDateTime.Location = new System.Drawing.Point(100, 25);
+            this.dtStorageDateTime.Name = "dtStorageDateTime";
+            this.dtStorageDateTime.Size = new System.Drawing.Size(121, 21);
+            this.dtStorageDateTime.TabIndex = 43;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(43, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 51;
+            this.label6.Text = "进货日期";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 90);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.TabIndex = 50;
+            this.label3.Text = "购入重量(吨)";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(67, 59);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 48;
+            this.label5.Text = "规格";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(248, 90);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 12);
+            this.label1.TabIndex = 45;
+            this.label1.Text = "购入长度(米)";
+            // 
+            // txtOriginalWeight
+            // 
+            this.txtOriginalWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtOriginalWeight.Location = new System.Drawing.Point(100, 87);
+            this.txtOriginalWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtOriginalWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtOriginalWeight.Name = "txtOriginalWeight";
+            this.txtOriginalWeight.PointCount = 3;
+            this.txtOriginalWeight.Size = new System.Drawing.Size(121, 21);
+            this.txtOriginalWeight.TabIndex = 62;
+            this.txtOriginalWeight.Text = "0";
+            this.txtOriginalWeight.TextChanged += new System.EventHandler(this.txtOriginalWeight_TextChanged);
+            // 
+            // txtOriginalLength
+            // 
+            this.txtOriginalLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtOriginalLength.Location = new System.Drawing.Point(329, 87);
+            this.txtOriginalLength.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtOriginalLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtOriginalLength.Name = "txtOriginalLength";
+            this.txtOriginalLength.PointCount = 2;
+            this.txtOriginalLength.Size = new System.Drawing.Size(145, 21);
+            this.txtOriginalLength.TabIndex = 63;
+            this.txtOriginalLength.Text = "0";
+            this.txtOriginalLength.TextChanged += new System.EventHandler(this.txtOriginalLength_TextChanged);
+            // 
+            // txtPrice
+            // 
+            this.txtPrice.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPrice.Location = new System.Drawing.Point(100, 122);
+            this.txtPrice.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtPrice.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.PointCount = 2;
+            this.txtPrice.Size = new System.Drawing.Size(121, 21);
+            this.txtPrice.TabIndex = 66;
+            this.txtPrice.Text = "0";
+            // 
+            // txtMemo
+            // 
+            this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtMemo.Location = new System.Drawing.Point(100, 186);
+            this.txtMemo.Name = "txtMemo";
+            this.txtMemo.Size = new System.Drawing.Size(374, 21);
+            this.txtMemo.TabIndex = 67;
+            // 
+            // txtSerialNumber
+            // 
+            this.txtSerialNumber.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSerialNumber.Location = new System.Drawing.Point(329, 122);
+            this.txtSerialNumber.Name = "txtSerialNumber";
+            this.txtSerialNumber.Size = new System.Drawing.Size(145, 21);
+            this.txtSerialNumber.TabIndex = 68;
+            // 
+            // lnkSupplier
+            // 
+            this.lnkSupplier.AutoSize = true;
+            this.lnkSupplier.Location = new System.Drawing.Point(55, 157);
+            this.lnkSupplier.Name = "lnkSupplier";
+            this.lnkSupplier.Size = new System.Drawing.Size(41, 12);
+            this.lnkSupplier.TabIndex = 69;
+            this.lnkSupplier.TabStop = true;
+            this.lnkSupplier.Text = "供应商";
+            this.lnkSupplier.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_LinkClicked);
+            // 
+            // lnkCategory
+            // 
+            this.lnkCategory.AutoSize = true;
+            this.lnkCategory.Location = new System.Drawing.Point(296, 61);
+            this.lnkCategory.Name = "lnkCategory";
+            this.lnkCategory.Size = new System.Drawing.Size(29, 12);
+            this.lnkCategory.TabIndex = 70;
+            this.lnkCategory.TabStop = true;
+            this.lnkCategory.Text = "类别";
+            this.lnkCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
+            // 
+            // txtCategory
+            // 
+            this.txtCategory.Enabled = false;
+            this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCategory.Location = new System.Drawing.Point(329, 57);
+            this.txtCategory.Name = "txtCategory";
+            this.txtCategory.Size = new System.Drawing.Size(145, 21);
+            this.txtCategory.TabIndex = 71;
+            this.txtCategory.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
+            // 
+            // txtSupplier
+            // 
+            this.txtSupplier.Enabled = false;
+            this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSupplier.Location = new System.Drawing.Point(100, 153);
+            this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.Size = new System.Drawing.Size(121, 21);
+            this.txtSupplier.TabIndex = 72;
+            this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
+            // 
+            // cmbBrand
+            // 
+            this.cmbBrand.FormattingEnabled = true;
+            this.cmbBrand.Location = new System.Drawing.Point(329, 153);
+            this.cmbBrand.Name = "cmbBrand";
+            this.cmbBrand.Size = new System.Drawing.Size(145, 20);
+            this.cmbBrand.TabIndex = 73;
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.FormattingEnabled = true;
+            this.cmbSpecification.Location = new System.Drawing.Point(100, 55);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
+            this.cmbSpecification.TabIndex = 74;
+            // 
+            // txtWareHouse
+            // 
+            this.txtWareHouse.Enabled = false;
+            this.txtWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWareHouse.Location = new System.Drawing.Point(329, 25);
+            this.txtWareHouse.Name = "txtWareHouse";
+            this.txtWareHouse.Size = new System.Drawing.Size(145, 21);
+            this.txtWareHouse.TabIndex = 76;
+            this.txtWareHouse.DoubleClick += new System.EventHandler(this.txtWareHouse_DoubleClick);
+            // 
+            // lnkWareHouse
+            // 
+            this.lnkWareHouse.AutoSize = true;
+            this.lnkWareHouse.Location = new System.Drawing.Point(296, 29);
+            this.lnkWareHouse.Name = "lnkWareHouse";
+            this.lnkWareHouse.Size = new System.Drawing.Size(29, 12);
+            this.lnkWareHouse.TabIndex = 75;
+            this.lnkWareHouse.TabStop = true;
+            this.lnkWareHouse.Text = "仓库";
+            this.lnkWareHouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWareHouse_LinkClicked);
+            // 
+            // FrmSteelRollDetail
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(496, 287);
+            this.Controls.Add(this.txtWareHouse);
+            this.Controls.Add(this.lnkWareHouse);
+            this.Controls.Add(this.cmbSpecification);
+            this.Controls.Add(this.cmbBrand);
+            this.Controls.Add(this.txtSupplier);
+            this.Controls.Add(this.txtCategory);
+            this.Controls.Add(this.lnkCategory);
+            this.Controls.Add(this.lnkSupplier);
+            this.Controls.Add(this.txtSerialNumber);
+            this.Controls.Add(this.txtMemo);
+            this.Controls.Add(this.txtPrice);
+            this.Controls.Add(this.txtOriginalLength);
+            this.Controls.Add(this.txtOriginalWeight);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.dtStorageDateTime);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label1);
+            this.Name = "FrmSteelRollDetail";
+            this.Text = "原材料入库";
+            this.Controls.SetChildIndex(this.btnOk, 0);
+            this.Controls.SetChildIndex(this.btnClose, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.dtStorageDateTime, 0);
+            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.label12, 0);
+            this.Controls.SetChildIndex(this.label14, 0);
+            this.Controls.SetChildIndex(this.txtOriginalWeight, 0);
+            this.Controls.SetChildIndex(this.txtOriginalLength, 0);
+            this.Controls.SetChildIndex(this.txtPrice, 0);
+            this.Controls.SetChildIndex(this.txtMemo, 0);
+            this.Controls.SetChildIndex(this.txtSerialNumber, 0);
+            this.Controls.SetChildIndex(this.lnkSupplier, 0);
+            this.Controls.SetChildIndex(this.lnkCategory, 0);
+            this.Controls.SetChildIndex(this.txtCategory, 0);
+            this.Controls.SetChildIndex(this.txtSupplier, 0);
+            this.Controls.SetChildIndex(this.cmbBrand, 0);
+            this.Controls.SetChildIndex(this.cmbSpecification, 0);
+            this.Controls.SetChildIndex(this.lnkWareHouse, 0);
+            this.Controls.SetChildIndex(this.txtWareHouse, 0);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker dtStorageDateTime;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label1;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtOriginalWeight;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtOriginalLength;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtPrice;
+        private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSerialNumber;
+        private System.Windows.Forms.LinkLabel lnkSupplier;
+        private System.Windows.Forms.LinkLabel lnkCategory;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
+        private System.Windows.Forms.ComboBox cmbBrand;
+        private Controls.SpecificationComboBox cmbSpecification;
+        private GeneralLibrary.WinformControl.DBCTextBox txtWareHouse;
+        private System.Windows.Forms.LinkLabel lnkWareHouse;
+    }
+}

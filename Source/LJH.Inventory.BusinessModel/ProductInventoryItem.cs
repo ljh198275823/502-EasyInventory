@@ -5,6 +5,9 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
+    /// <summary>
+    /// 表示一个库存项
+    /// </summary>
     public class ProductInventoryItem : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
@@ -16,13 +19,21 @@ namespace LJH.Inventory.BusinessModel
         #region 公共属性
         public Guid ID { get; set; }
         /// <summary>
-        /// 获取或设置库存项的产品ID
+        /// 获取或设置仓库ID
+        /// </summary>
+        public string WareHouseID { get; set; }
+        /// <summary>
+        /// 获取或设置仓库
+        /// </summary>
+        public WareHouse WareHouse { get; set; }
+        /// <summary>
+        /// 获取或设置商品ID
         /// </summary>
         public string ProductID { get; set; }
         /// <summary>
-        /// 获取或设置库存项的仓库
+        /// 获取或设置商品信息
         /// </summary>
-        public string WareHouseID { get; set; }
+        public Product Product { get; set; }
         /// <summary>
         /// 获取或设置库存项的单位
         /// </summary>
@@ -36,17 +47,35 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
-        /// 获取或设置库存的货物的长度
+        /// 获取或设置库存单个重量
         /// </summary>
-        public decimal? Length { get; set; }
+        public decimal OriginalWeight { get; set; }
+        /// <summary>
+        /// 获取或设置库存单个长度
+        /// </summary>
+        public decimal OriginalLength { get; set; }
+        /// <summary>
+        /// 获取或设置库存单个重量
+        /// </summary>
+        public decimal Weight { get; set; }
+        /// <summary>
+        /// 获取或设置库存单个长度
+        /// </summary>
+        public decimal Length { get; set; }
         /// <summary>
         /// 获取收货或分配时间
         /// </summary>
         public DateTime AddDate { get; set; }
         /// <summary>
-        /// 获取或设置订单的备货是否是从库存中分配
+        /// 获取或设置状态
         /// </summary>
-        public bool FromInventory { get; set; }
+        public ProductInventoryState State { get; set; }
+
+        public string SupplierID { get; set; }
+
+        public string Manufacture { get; set; }
+
+        public string SerialNumber { get; set; }
         /// <summary>
         /// 获取或设置销售订单项
         /// </summary>
@@ -83,11 +112,23 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置次库存项的来源，库存项在出货时会分开成多项
         /// </summary>
         public Guid? SourceID { get; set; }
+
+        public string Operator { get; set; }
+
+        public string Memo { get; set; }
         #endregion
 
         public ProductInventoryItem Clone()
         {
             return this.MemberwiseClone() as ProductInventoryItem;
+        }
+
+        /// <summary>
+        /// 获取原材料资料是否可以修改
+        /// </summary>
+        public bool CanEdit
+        {
+            get { return (State == ProductInventoryState.Intact); }
         }
     }
 }
