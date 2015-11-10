@@ -29,6 +29,9 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult SteelRollSlice(ProductInventoryItem item, SteelRollSliceRecord slice, WareHouse wh)
         {
+            Product p = new ProductBLL(RepoUri).Create(item.Product.CategoryID, item.Product.Specification, slice.SliceType, slice.Weight, slice.Length);
+            if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
+
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(slice, unitWork);
             ProductInventoryItem newVal = item.Clone();
@@ -39,8 +42,8 @@ namespace LJH.Inventory.BLL
             ProductInventoryItem pi = new ProductInventoryItem()
             {
                 ID = Guid.NewGuid(),
-                ProductID = item.ProductID,
-                Product = item.Product,
+                ProductID = p.ID,
+                Product = p,
                 AddDate = slice.SliceDate,
                 SourceID = item.ID,
                 Weight = slice.Weight,

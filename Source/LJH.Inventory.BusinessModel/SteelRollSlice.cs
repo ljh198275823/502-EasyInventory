@@ -5,10 +5,10 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public class ProductInventory : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
+    public class SteelRollSlice : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
-        public ProductInventory()
+        public SteelRollSlice()
         {
         }
         #endregion
@@ -77,9 +77,9 @@ namespace LJH.Inventory.BusinessModel
         #endregion
 
         #region 公共方法
-        public ProductInventory Clone()
+        public SteelRollSlice Clone()
         {
-            return this.MemberwiseClone() as ProductInventory;
+            return this.MemberwiseClone() as SteelRollSlice;
         }
         #endregion
     }

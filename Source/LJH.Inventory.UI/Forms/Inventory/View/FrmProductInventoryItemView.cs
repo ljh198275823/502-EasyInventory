@@ -84,7 +84,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     ProductInventoryItem pii = row.Tag as ProductInventoryItem;
-                    CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).UnReserve(pii);
+                    CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).UnReserve(pii);
                     if (ret.Result == ResultCode.Successful)
                     {
                         row.Cells["colOrderID"].Value = string.Empty;

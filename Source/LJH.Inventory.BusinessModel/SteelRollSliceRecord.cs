@@ -38,11 +38,11 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置切割品的长度
         /// </summary>
-        public decimal Length { get; set; }
+        public decimal? Length { get; set; }
         /// <summary>
         /// 获取或设置小件的重量，有些小件是用重量来计量的
         /// </summary>
-        public decimal Weight { get; set; }
+        public decimal? Weight { get; set; }
         /// <summary>
         /// 获取或设置切割的数量
         /// </summary>

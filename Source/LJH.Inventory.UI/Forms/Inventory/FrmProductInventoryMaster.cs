@@ -23,7 +23,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         #region 私有变量
-        private List<ProductInventory> _ProductInventorys = null;
+        private List<SteelRollSlice> _ProductInventorys = null;
         #endregion
 
         #region 私有方法
@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<object> FilterData()
         {
-            List<ProductInventory> items = _ProductInventorys;
+            List<SteelRollSlice> items = _ProductInventorys;
             List<ProductCategory> cs = null;
             if (this.categoryTree.SelectedNode != null)
             {
@@ -92,8 +92,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
-            ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.Current.ConnStr);
-            List<ProductInventory> items = null;
+            SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
+            List<SteelRollSlice> items = null;
             if (SearchCondition == null)
             {
                 items = bll.GetItems(null).QueryObjects;
@@ -109,7 +109,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            ProductInventory pi = item as ProductInventory;
+            SteelRollSlice pi = item as SteelRollSlice;
             row.Cells["colImage"].Value = Properties.Resources.inventory;
             row.Cells["colProductID"].Value = pi.ProductID;
             row.Cells["colProduct"].Value = pi.Product.Name;
@@ -123,7 +123,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colAmount"].Value = pi.Count.Trim();
             if (_ProductInventorys == null || !_ProductInventorys.Exists(it => it.ID == pi.ID))
             {
-                if (_ProductInventorys == null) _ProductInventorys = new List<ProductInventory>();
+                if (_ProductInventorys == null) _ProductInventorys = new List<SteelRollSlice>();
                 _ProductInventorys.Add(pi);
             }
         }
@@ -160,7 +160,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
+                SteelRollSlice pi = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
                 View.FrmProductStackRecordsView frm = new View.FrmProductStackRecordsView();
                 frm.ProductInventory = pi;
                 frm.ShowDialog();
@@ -173,7 +173,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colValid")
                 {
-                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
+                    SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.Products = new List<string>();
                     con.Products.Add(item.ProductID);
@@ -186,7 +186,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colReserved")
                 {
-                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
+                    SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.Products = new List<string>();
                     con.Products.Add(item.ProductID);
@@ -199,7 +199,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colAmount")
                 {
-                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
+                    SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.Products = new List<string>();
                     con.Products.Add(item.ProductID);
@@ -216,7 +216,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
+                SteelRollSlice pi = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
                 FrmInvnetoryCheck frm = new FrmInvnetoryCheck();
                 frm.ProductInventory = pi;
                 DialogResult ret= frm.ShowDialog();
@@ -225,8 +225,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     ProductInventorySearchCondition con = new ProductInventorySearchCondition();
                     con.ProductID = pi.ProductID;
                     con.WareHouseID = pi.WareHouseID;
-                    List<ProductInventory> items = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-                    ProductInventory pii = items[0];
+                    List<SteelRollSlice> items = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                    SteelRollSlice pii = items[0];
                     ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pii);
                 }
             }

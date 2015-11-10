@@ -97,7 +97,7 @@
     <Compile Include="ExpenditureRecordBLL.cs" />
     <Compile Include="PortBLL.cs" />
     <Compile Include="PriceTermBLL.cs" />
-    <Compile Include="ProductInventoryBLL.cs" />
+    <Compile Include="SteelRollSliceBLL.cs" />
     <Compile Include="StackInSheetBLL.cs" />
     <Compile Include="OrderBLL.cs" />
     <Compile Include="ProductBLL.cs" />
@@ -110,6 +110,7 @@
     <Compile Include="RoleBLL.cs" />
     <Compile Include="SheetProcessorBase.cs" />
     <Compile Include="StaffBLL.cs" />
+    <Compile Include="SteelRollSliceRecordBLL.cs" />
     <Compile Include="SupplierTypeBLL.cs" />
     <Compile Include="SysParaSettingsBll.cs" />
     <Compile Include="SystemParameterBLL.cs" />

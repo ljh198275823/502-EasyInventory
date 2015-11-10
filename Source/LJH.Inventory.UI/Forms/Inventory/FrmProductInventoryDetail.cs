@@ -72,7 +72,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ItemShowing()
         {
-            ProductInventory item = UpdatingItem as ProductInventory;
+            SteelRollSlice item = UpdatingItem as SteelRollSlice;
             Product = item.Product;
             txtProductID.Text = Product != null ? Product.Name : string.Empty;
             txtProductID.Enabled = false;
@@ -88,15 +88,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override object GetItemFromInput()
         {
-            ProductInventory item = null;
+            SteelRollSlice item = null;
             if (UpdatingItem == null)
             {
-                item = new ProductInventory();
+                item = new SteelRollSlice();
                 item.ID = Guid.NewGuid();
             }
             else
             {
-                item = UpdatingItem as ProductInventory;
+                item = UpdatingItem as SteelRollSlice;
             }
             item.ProductID = Product.ID;
             item.Product = Product;
@@ -112,8 +112,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override CommandResult AddItem(object item)
         {
-            ProductInventoryBLL bll = new ProductInventoryBLL(AppSettings.Current.ConnStr);
-            return bll.CreateInventory(item as ProductInventory);
+            SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
+            return bll.CreateInventory(item as SteelRollSlice);
         }
 
         protected override CommandResult UpdateItem(object item)

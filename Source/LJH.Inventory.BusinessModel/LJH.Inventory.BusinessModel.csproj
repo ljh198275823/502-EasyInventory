@@ -142,7 +142,7 @@
     <Compile Include="SearchCondition\SupplierReceivableSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierSearchCondition.cs" />
     <Compile Include="DateTimeRange.cs" />
-    <Compile Include="ProductInventory.cs" />
+    <Compile Include="SteelRollSlice.cs" />
     <Compile Include="Inventory\StackInSheet.cs" />
     <Compile Include="Sale\Order.cs" />
     <Compile Include="Sale\OrderItem.cs" />

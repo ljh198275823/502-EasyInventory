@@ -61,6 +61,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置商品的成本价
         /// </summary>
         public decimal Cost { get; set; }
+
+        public decimal? Weight { get; set; }
+
+        public decimal? Length { get; set; }
         /// <summary>
         /// 获取或设置产品是否是服务，如果是服务的话就不用进行库存管理
         /// </summary>

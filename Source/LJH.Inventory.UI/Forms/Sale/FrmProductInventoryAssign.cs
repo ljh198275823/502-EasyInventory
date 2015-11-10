@@ -86,7 +86,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             if (!string.IsNullOrEmpty(WarehouseID) && !string.IsNullOrEmpty(ProductID))
             {
                 ProductInventorySearchCondition con = new ProductInventorySearchCondition() { ProductID = ProductID, WareHouseID = WarehouseID };
-                List<ProductInventory> items = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                List<SteelRollSlice> items = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
                 if (items != null && items.Count > 0)
                 {
                     txtCount.DecimalValue = items[0].Valid < MaxCount ? items[0].Valid : MaxCount;

@@ -10,6 +10,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Report;
+using LJH.Inventory.UI.Forms.Inventory.View;
 using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;
 
@@ -162,8 +163,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWareHouse"].Value = sr.WareHouse.Name;
             row.Cells["colOriginalWeight"].Value = sr.OriginalWeight.ToString("F3");
             row.Cells["colOriginalLength"].Value = sr.OriginalLength.ToString("F2");
-            row.Cells["colWeight"].Value = sr.Weight.ToString("F3");
-            row.Cells["colLength"].Value = sr.Length.ToString("F2");
+            row.Cells["colWeight"].Value = sr.Weight.Value.ToString("F3");
+            row.Cells["colLength"].Value = sr.Length.Value.ToString("F2");
             row.Cells["colSupplier"].Value = sr.SupplierID;
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = sr.State;
@@ -227,13 +228,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void mnu_StackRecords_Click(object sender, EventArgs e)
+        private void mnu_SliceView_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 1)
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
-                ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
-                View.FrmProductStackRecordsView frm = new View.FrmProductStackRecordsView();
-                frm.ProductInventory = pi;
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                SliceRecordSearchCondition con = new SliceRecordSearchCondition();
+                con.SourceRoll = sr.ID;
+                List<SteelRollSliceRecord> items = (new SteelRollSliceRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                if (items != null && items.Count > 0)
+                {
+                    items = (from it in items
+                             orderby it.SliceDate ascending
+                             select it).ToList();
+                }
+                FrmSlicedRecordView frm = new FrmSlicedRecordView();
+                frm.ShowingItems = items;
                 frm.ShowDialog();
             }
         }
@@ -242,23 +252,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                ProductInventory pi = dataGridView1.SelectedRows[0].Tag as ProductInventory;
+                SteelRollSlice pi = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
                 FrmInvnetoryCheck frm = new FrmInvnetoryCheck();
                 frm.ProductInventory = pi;
-                DialogResult ret= frm.ShowDialog();
+                DialogResult ret = frm.ShowDialog();
                 if (ret == DialogResult.OK)
                 {
                     ProductInventorySearchCondition con = new ProductInventorySearchCondition();
                     con.ProductID = pi.ProductID;
                     con.WareHouseID = pi.WareHouseID;
-                    List<ProductInventory> items = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-                    ProductInventory pii = items[0];
+                    List<SteelRollSlice> items = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                    SteelRollSlice pii = items[0];
                     ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pii);
                 }
             }
         }
         #endregion
-
-       
     }
 }

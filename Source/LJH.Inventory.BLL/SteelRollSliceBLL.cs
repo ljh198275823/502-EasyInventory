@@ -9,25 +9,54 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class ProductInventoryBLL : BLLBase<Guid, ProductInventory>
+    public class SteelRollSliceBLL 
     {
         #region 构造函数
-        public ProductInventoryBLL(string repoUri)
-            : base(repoUri)
+        public SteelRollSliceBLL(string repoUri)
         {
+            RepoUri = repoUri;
         }
         #endregion
 
+        private string RepoUri = null;
+
         #region 公共方法
+        public QueryResultList<SteelRollSlice> GetItems(SearchCondition s)
+        {
+            List<SteelRollSlice> items = null;
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            con.ExcludeModel = "原材料"; //
+            QueryResultList<ProductInventoryItem> ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
+            {
+                List<Product> ps = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetItems(null).QueryObjects;
+                List<WareHouse> ws = ProviderFactory.Create<IProvider<WareHouse, string>>(RepoUri).GetItems(null).QueryObjects;
+                var gs = from it in ret.QueryObjects
+                         group it by it.ProductID;
+                foreach (var g in gs)
+                {
+                    if (items == null) items = new List<SteelRollSlice>();
+                    SteelRollSlice srs = new SteelRollSlice();
+                    srs.ID = Guid.Empty;
+                    srs.ProductID = g.Key;
+                    srs.Product = ps.SingleOrDefault(it => it.ID == g.Key);
+                    srs.WareHouseID = g.First().WareHouseID;
+                    srs.WareHouse = ws.SingleOrDefault(it => it.ID == srs.WareHouseID);
+
+                    items.Add(srs);
+                }
+            }
+            return new QueryResultList<SteelRollSlice>(ret.Result, ret.Message, items);
+        }
         /// <summary>
         /// 建立库存
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult CreateInventory(ProductInventory info)
+        public CommandResult CreateInventory(SteelRollSlice info)
         {
             ProductInventorySearchCondition con = new ProductInventorySearchCondition() { ProductID = info.ProductID, WareHouseID = info.WareHouseID };
-            List<ProductInventory> items = ProviderFactory.Create<IProvider<ProductInventory, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            List<SteelRollSlice> items = ProviderFactory.Create<IProvider<SteelRollSlice, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0) return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点或收货单收货");
             ProductInventoryItem pii = new ProductInventoryItem()
             {

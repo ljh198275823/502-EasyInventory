@@ -390,6 +390,7 @@
             // 
             // txtCategory
             // 
+            this.txtCategory.Enabled = false;
             this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtCategory.Location = new System.Drawing.Point(96, 47);
             this.txtCategory.Name = "txtCategory";
@@ -398,6 +399,7 @@
             // 
             // txtSpecification
             // 
+            this.txtSpecification.Enabled = false;
             this.txtSpecification.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtSpecification.Location = new System.Drawing.Point(300, 47);
             this.txtSpecification.Name = "txtSpecification";

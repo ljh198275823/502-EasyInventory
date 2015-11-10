@@ -21,7 +21,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             InitializeComponent();
         }
 
-        public ProductInventory ProductInventory { get; set; }
+        public SteelRollSlice ProductInventory { get; set; }
 
         #region 私有方法
         private void ShowItemInGridViewRow(DataGridViewRow row, ProductInventoryRecord item)

@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         #region 私有变量
         private List<OrderItemRecord> _Records = null;
-        private List<ProductInventory> _Inventories = null;
+        private List<SteelRollSlice> _Inventories = null;
         #endregion
 
         #region 私有方法
@@ -84,7 +84,7 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         protected override List<object> GetDataSource()
         {
-            _Inventories = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             if (SearchCondition == null)
             {
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
@@ -192,10 +192,10 @@ namespace LJH.Inventory.UI.Forms.Sale
                 frm.MaxCount = item.NotPurchased;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
+                    CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        _Inventories = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                        _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
                         _Records.Remove(item);
                         item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
                         if (item != null) _Records.Add(item); //更新某行数据
@@ -224,10 +224,10 @@ namespace LJH.Inventory.UI.Forms.Sale
                 frm.MaxCount = item.NotPurchased;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    CommandResult ret = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
+                    CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        _Inventories = (new ProductInventoryBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                        _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
                         _Records.Remove(item);
                         item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
                         if (item != null) _Records.Add(item); //更新某行数据

@@ -32,5 +32,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public bool? UnReserved { get; set; }
 
         public string Model { get; set; }
+
+        public string ExcludeModel { get; set; }
     }
 }

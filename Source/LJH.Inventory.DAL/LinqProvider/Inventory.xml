@@ -38,6 +38,8 @@
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10)"  UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18,4) not null"  UpdateCheck="Never"/>
       <Column Name="Cost" Member="Cost"  DbType="decimal(18,4) not null"  UpdateCheck="Never"/>
+      <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
+      <Column Name="Length" Member="Length"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="IsService" Member="IsService"  DbType="bit null"  UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Product_Category" Member="Category"  ThisKey="CategoryID" OtherKey="ID"/>
@@ -400,8 +402,8 @@
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="OriginalWeight" Member="OriginalWeight"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="OriginalLength" Member="OriginalLength"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="Weight" Member="Weight"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="Length" Member="Length"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Model" Member="Model"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
@@ -429,8 +431,8 @@
       <Column Name="Category" Member="Category"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="Specification" Member="Specification"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="SliceType" Member="SliceType"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="Length" Member="Length"  DbType="decimal(10, 4) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="Weight" Member="Weight"  DbType="decimal(10, 4)" UpdateCheck="Never"/>
+      <Column Name="Length" Member="Length"  DbType="decimal(18, 4)" UpdateCheck="Never"/>
+      <Column Name="Weight" Member="Weight"  DbType="decimal(18, 4)" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="int NOT NULL" UpdateCheck="Never"/> 
       <Column Name="BeforeWeight" Member="BeforeWeight" DbType="decimal(10,4) not null" UpdateCheck="Never"/>
       <Column Name="BeforeLength" Member="BeforeLength" DbType="decimal(10,4) not null" UpdateCheck="Never"/>

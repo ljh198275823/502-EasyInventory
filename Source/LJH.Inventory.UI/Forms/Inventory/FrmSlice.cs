@@ -39,10 +39,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             txtCategory.Text = item.Product.Category.Name;
             txtSpecification.Text = item.Product.Specification;
-            txtCurrentLength.DecimalValue = item.Length;
-            txtCurrentWeigth.DecimalValue = item.Weight;
-            txtRemainLength.DecimalValue = item.Length;
-            txtRemainWeight.DecimalValue = item.Weight;
+            txtCurrentLength.DecimalValue = item.Length.Value;
+            txtCurrentWeigth.DecimalValue = item.Weight.Value;
+            txtRemainLength.DecimalValue = item.Length.Value;
+            txtRemainWeight.DecimalValue = item.Weight.Value;
             txtWareHouse.Text = item.WareHouse.Name;
             txtWareHouse.Tag = item.WareHouse;
         }
@@ -63,11 +63,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
-            if (!rdToWeight.Checked)
+            if (object.ReferenceEquals(sender, txtLength)) //长度
             {
                 if (txtLength.DecimalValue * txtCount.IntergerValue <= SlicingItem.Length)
                 {
-                    this.txtRemainLength.DecimalValue = SlicingItem.Length - txtLength.DecimalValue * txtCount.IntergerValue;
+                    this.txtRemainLength.DecimalValue = SlicingItem.Length.Value - txtLength.DecimalValue * txtCount.IntergerValue;
                     this.txtRemainWeight.DecimalValue = (txtRemainLength.DecimalValue / SlicingItem.OriginalLength) * SlicingItem.OriginalWeight;
                 }
                 else
@@ -77,11 +77,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     (sender as TextBox).SelectAll();
                 }
             }
-            else
+            else if (object.ReferenceEquals(sender, txtWeight)) //重量
             {
                 if (txtWeight.DecimalValue * txtCount.IntergerValue <= SlicingItem.Weight)
                 {
-                    this.txtRemainWeight.DecimalValue = SlicingItem.Weight - txtWeight.DecimalValue * txtCount.IntergerValue;
+                    this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - txtWeight.DecimalValue * txtCount.IntergerValue;
                     this.txtRemainLength.DecimalValue = (txtRemainWeight.DecimalValue / SlicingItem.OriginalWeight) * SlicingItem.OriginalLength;
                 }
                 else
@@ -90,6 +90,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     (sender as TextBox).Text = "0";
                     (sender as TextBox).SelectAll();
                 }
+            }
+            else
+            {
+                if (txtWeight.Enabled && txtWeight.DecimalValue > 0) txtLength_TextChanged(txtWeight, EventArgs.Empty);
+                else txtLength_TextChanged(txtLength, EventArgs.Empty);
             }
         }
 
@@ -110,20 +115,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Category = SlicingItem.Product.Category.Name,
                     Specification = SlicingItem.Product.Specification,
                     SliceType = SliceTo,
-                    BeforeLength = SlicingItem.Length,
-                    BeforeWeight = SlicingItem.Weight,
-                    Weight = txtWeight.DecimalValue,
-                    Length = txtLength.DecimalValue,
+                    BeforeLength = SlicingItem.Length.Value,
+                    BeforeWeight = SlicingItem.Weight.Value,
                     Count = txtCount.IntergerValue,
                     AfterLength = txtRemainLength.DecimalValue,
                     AfterWeight = txtRemainWeight.DecimalValue,
                     Customer = string.Empty,
                     Slicer = txtSlicers.Text,
-                    Warehouse =(txtWareHouse .Tag as WareHouse ).Name ,
+                    Warehouse = (txtWareHouse.Tag as WareHouse).Name,
                     Operator = Operator.Current.Name
                 };
-                if (txtWeight.Enabled) record.Weight = txtWeight.DecimalValue;
-
+                if (txtLength.DecimalValue > 0) record.Length = txtLength.DecimalValue;
+                if (txtWeight.DecimalValue > 0) record.Weight = txtWeight.DecimalValue;
                 CommandResult ret = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).SteelRollSlice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
                 if (ret.Result == ResultCode.Successful)
                 {

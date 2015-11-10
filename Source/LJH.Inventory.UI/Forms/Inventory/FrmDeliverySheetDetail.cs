@@ -305,7 +305,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 公共方法
-        public void AddDeliveryItem(ProductInventory p)
+        public void AddDeliveryItem(SteelRollSlice p)
         {
             List<StackOutItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.ProductID == p.ProductID))
@@ -451,7 +451,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                ProductInventory p = frm.SelectedItem as ProductInventory;
+                SteelRollSlice p = frm.SelectedItem as SteelRollSlice;
                 AddDeliveryItem(p);
             }
         }

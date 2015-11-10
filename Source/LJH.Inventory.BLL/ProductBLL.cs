@@ -91,24 +91,33 @@ namespace LJH.Inventory.BLL
 
         public Product Create(string categoryID, string specification)
         {
+            return Create(categoryID, specification, null, null, null);
+        }
+
+        public Product Create(string categoryID, string specification, string model, decimal? weight, decimal? length)
+        {
+            Product p = null;
             List<Product> ps = GetItems(null).QueryObjects;
-            if (ps != null && ps.Exists(it => it.CategoryID == categoryID && it.Specification == specification))
+
+            if (ps != null && ps.Count > 0)
             {
-                return ps.Single(it => it.CategoryID == categoryID && it.Specification == specification);
+                p = ps.SingleOrDefault(it => it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
             }
-            else
+            if (p != null) return p;
+
+            p = new Product();
+            p.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
+            p.Specification = specification;
+            p.CategoryID = categoryID;
+            p.Name = p.ID;
+            p.Unit = string.Empty;
+            p.Model = model;
+            p.Length = length;
+            p.Weight = weight;
+            if (!string.IsNullOrEmpty(p.ID))
             {
-                Product p = new Product();
-                p.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
-                p.Specification = specification;
-                p.CategoryID = categoryID;
-                p.Name = p.ID;
-                p.Unit = string.Empty;
-                if (!string.IsNullOrEmpty(p.ID))
-                {
-                    var ret = base.Add(p);
-                    if (ret.Result == ResultCode.Successful) return Create(categoryID, specification);
-                }
+                var ret = base.Add(p);
+                if (ret.Result == ResultCode.Successful) return GetByID(p.ID).QueryObject; ;
             }
             return null;
         }

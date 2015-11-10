@@ -77,6 +77,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_SliceView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlLeft.SuspendLayout();
@@ -485,62 +487,76 @@
             this.cMnu_Fresh,
             this.cMnu_Add,
             this.mnu_Slice,
+            this.mnu_SliceView,
+            this.toolStripSeparator1,
             this.mnu_Check,
             this.mnu_Nullify,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 214);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // mnu_Slice
             // 
             this.mnu_Slice.Name = "mnu_Slice";
-            this.mnu_Slice.Size = new System.Drawing.Size(121, 22);
+            this.mnu_Slice.Size = new System.Drawing.Size(152, 22);
             this.mnu_Slice.Text = "加工";
             this.mnu_Slice.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_Check
             // 
             this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(121, 22);
+            this.mnu_Check.Size = new System.Drawing.Size(152, 22);
             this.mnu_Check.Text = "盘点";
             this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
             // 
             // mnu_Nullify
             // 
             this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(121, 22);
+            this.mnu_Nullify.Size = new System.Drawing.Size(152, 22);
             this.mnu_Nullify.Text = "作废";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // mnu_SliceView
+            // 
+            this.mnu_SliceView.Name = "mnu_SliceView";
+            this.mnu_SliceView.Size = new System.Drawing.Size(152, 22);
+            this.mnu_SliceView.Text = "查看加工记录";
+            this.mnu_SliceView.Click += new System.EventHandler(this.mnu_SliceView_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // FrmSteelRollMaster
             // 
@@ -619,5 +635,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripMenuItem mnu_SliceView;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

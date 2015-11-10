@@ -118,9 +118,9 @@ namespace LJH.Inventory.BLL
             ProductInventorySearchCondition con = new ProductInventorySearchCondition();
             con.ProductID = info.ProductID;
             con.WareHouseID = info.WarehouseID;
-            List<ProductInventory> items = ProviderFactory.Create<IProvider<ProductInventory, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            List<SteelRollSlice> items = ProviderFactory.Create<IProvider<SteelRollSlice, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items == null || items.Count == 0) throw new Exception("没有该产品的库存项");
-            ProductInventory pi = items[0];
+            SteelRollSlice pi = items[0];
             if (info.Inventory != pi.Count) throw new Exception("产品库存有改动，请重新操作");
             if (info.CheckCount > pi.Count) //盘盈
             {
