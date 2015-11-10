@@ -142,6 +142,13 @@
             this.rdReminder = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txtBecomeRemainlessAt = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtBecomeTailAt = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label79 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtForeignName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label31 = new System.Windows.Forms.Label();
@@ -162,6 +169,7 @@
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tab1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1345,9 +1353,10 @@
             // 
             // tab1
             // 
-            this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tab1.Controls.Add(this.tabPage2);
             this.tab1.Controls.Add(this.tabPage1);
             this.tab1.Controls.Add(this.tabDelivery);
             this.tab1.Controls.Add(this.tabAutoCreater);
@@ -1356,6 +1365,98 @@
             this.tab1.SelectedIndex = 0;
             this.tab1.Size = new System.Drawing.Size(571, 384);
             this.tab1.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.txtBecomeRemainlessAt);
+            this.tabPage2.Controls.Add(this.txtBecomeTailAt);
+            this.tabPage2.Controls.Add(this.label79);
+            this.tabPage2.Controls.Add(this.label80);
+            this.tabPage2.Controls.Add(this.label81);
+            this.tabPage2.Controls.Add(this.label82);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(563, 358);
+            this.tabPage2.TabIndex = 4;
+            this.tabPage2.Text = "基本";
+            // 
+            // txtBecomeRemainlessAt
+            // 
+            this.txtBecomeRemainlessAt.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtBecomeRemainlessAt.Location = new System.Drawing.Point(128, 53);
+            this.txtBecomeRemainlessAt.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.txtBecomeRemainlessAt.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtBecomeRemainlessAt.Name = "txtBecomeRemainlessAt";
+            this.txtBecomeRemainlessAt.PointCount = 2;
+            this.txtBecomeRemainlessAt.Size = new System.Drawing.Size(92, 21);
+            this.txtBecomeRemainlessAt.TabIndex = 39;
+            this.txtBecomeRemainlessAt.Text = "0.00";
+            // 
+            // txtBecomeTailAt
+            // 
+            this.txtBecomeTailAt.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtBecomeTailAt.Location = new System.Drawing.Point(128, 23);
+            this.txtBecomeTailAt.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.txtBecomeTailAt.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtBecomeTailAt.Name = "txtBecomeTailAt";
+            this.txtBecomeTailAt.PointCount = 2;
+            this.txtBecomeTailAt.Size = new System.Drawing.Size(92, 21);
+            this.txtBecomeTailAt.TabIndex = 38;
+            this.txtBecomeTailAt.Text = "0.00";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(226, 57);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(89, 12);
+            this.label79.TabIndex = 16;
+            this.label79.Text = "米时当成无余料";
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(21, 57);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(101, 12);
+            this.label80.TabIndex = 15;
+            this.label80.Text = "原材料等于或少于";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(226, 27);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(77, 12);
+            this.label81.TabIndex = 14;
+            this.label81.Text = "米时当成尾卷";
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(21, 27);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(101, 12);
+            this.label82.TabIndex = 13;
+            this.label82.Text = "原材料等于或少于";
             // 
             // tabPage1
             // 
@@ -1532,6 +1633,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tab1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
@@ -1667,5 +1770,12 @@
         private System.Windows.Forms.Label label78;
         private GeneralLibrary.WinformControl.DBCTextBox txtForeignName;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label label82;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtBecomeRemainlessAt;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtBecomeTailAt;
     }
 }

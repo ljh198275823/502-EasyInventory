@@ -36,9 +36,6 @@
             this.mnu_Unit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CurrencyType = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_Staff = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Role = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Options = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.商务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Material = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,6 +101,10 @@
             this.ucFormViewMain = new LJH.GeneralLibrary.WinformControl.UCFormView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.mnu_Options = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_Staff = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Role = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -115,8 +116,6 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(30, 30);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.业务资料ToolStripMenuItem,
-            this.toolStripSeparator12,
             this.商务ToolStripMenuItem,
             this.toolStripSeparator9,
             this.mnu_DataManage,
@@ -124,12 +123,14 @@
             this.采购库存ToolStripMenuItem,
             this.toolStripSeparator11,
             this.财务ToolStripMenuItem,
+            this.toolStripSeparator12,
+            this.业务资料ToolStripMenuItem,
             this.toolStripSeparator13,
             this.mnu_Reports,
             this.toolStripSeparator14,
-            this.窗口ToolStripMenuItem,
-            this.toolStripSeparator15,
             this.mnu_System,
+            this.toolStripSeparator15,
+            this.窗口ToolStripMenuItem,
             this.toolStripSeparator8,
             this.mnu_Help});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -144,21 +145,18 @@
             this.mnu_Product,
             this.mnu_Unit,
             this.mnu_CurrencyType,
-            this.toolStripSeparator2,
-            this.mnu_Staff,
-            this.mnu_Role,
-            this.mnu_Options});
+            this.toolStripSeparator2});
             this.业务资料ToolStripMenuItem.Image = global::InventoryDemo.Properties.Resources.information;
             this.业务资料ToolStripMenuItem.Name = "业务资料ToolStripMenuItem";
-            this.业务资料ToolStripMenuItem.Size = new System.Drawing.Size(98, 34);
-            this.业务资料ToolStripMenuItem.Text = "基本资料";
+            this.业务资料ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
+            this.业务资料ToolStripMenuItem.Text = "其它";
             this.业务资料ToolStripMenuItem.Visible = false;
             // 
             // mnu_Product
             // 
             this.mnu_Product.Enabled = false;
             this.mnu_Product.Name = "mnu_Product";
-            this.mnu_Product.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Product.Size = new System.Drawing.Size(152, 22);
             this.mnu_Product.Text = "产品资料";
             this.mnu_Product.Visible = false;
             this.mnu_Product.Click += new System.EventHandler(this.mnu_Product_Click);
@@ -167,15 +165,16 @@
             // 
             this.mnu_Unit.Enabled = false;
             this.mnu_Unit.Name = "mnu_Unit";
-            this.mnu_Unit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Unit.Size = new System.Drawing.Size(152, 22);
             this.mnu_Unit.Text = "计量单位";
+            this.mnu_Unit.Visible = false;
             this.mnu_Unit.Click += new System.EventHandler(this.mnu_Unit_Click);
             // 
             // mnu_CurrencyType
             // 
             this.mnu_CurrencyType.Enabled = false;
             this.mnu_CurrencyType.Name = "mnu_CurrencyType";
-            this.mnu_CurrencyType.Size = new System.Drawing.Size(124, 22);
+            this.mnu_CurrencyType.Size = new System.Drawing.Size(152, 22);
             this.mnu_CurrencyType.Text = "货币种类";
             this.mnu_CurrencyType.Visible = false;
             this.mnu_CurrencyType.Click += new System.EventHandler(this.mnu_CurrencyType_Click);
@@ -183,31 +182,8 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(121, 6);
-            // 
-            // mnu_Staff
-            // 
-            this.mnu_Staff.Enabled = false;
-            this.mnu_Staff.Name = "mnu_Staff";
-            this.mnu_Staff.Size = new System.Drawing.Size(124, 22);
-            this.mnu_Staff.Text = "人员部门";
-            this.mnu_Staff.Click += new System.EventHandler(this.mnu_Staff_Click);
-            // 
-            // mnu_Role
-            // 
-            this.mnu_Role.Enabled = false;
-            this.mnu_Role.Name = "mnu_Role";
-            this.mnu_Role.Size = new System.Drawing.Size(124, 22);
-            this.mnu_Role.Text = "角色";
-            this.mnu_Role.Click += new System.EventHandler(this.mnu_Role_Click);
-            // 
-            // mnu_Options
-            // 
-            this.mnu_Options.Enabled = false;
-            this.mnu_Options.Name = "mnu_Options";
-            this.mnu_Options.Size = new System.Drawing.Size(124, 22);
-            this.mnu_Options.Text = "系统参数";
-            this.mnu_Options.Click += new System.EventHandler(this.mnu_Options_Click);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Visible = false;
             // 
             // toolStripSeparator12
             // 
@@ -267,6 +243,7 @@
             this.mnu_WareHouse.Name = "mnu_WareHouse";
             this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
             this.mnu_WareHouse.Text = "仓库资料";
+            this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click_1);
             // 
             // toolStripSeparator9
             // 
@@ -446,6 +423,7 @@
             this.mnu_SupplierState.Name = "mnu_SupplierState";
             this.mnu_SupplierState.Size = new System.Drawing.Size(160, 22);
             this.mnu_SupplierState.Text = "供应商应付账款";
+            this.mnu_SupplierState.Visible = false;
             this.mnu_SupplierState.Click += new System.EventHandler(this.mnu_SupplierState_Click);
             // 
             // mnu_SupplierPayment
@@ -454,6 +432,7 @@
             this.mnu_SupplierPayment.Name = "mnu_SupplierPayment";
             this.mnu_SupplierPayment.Size = new System.Drawing.Size(160, 22);
             this.mnu_SupplierPayment.Text = "供应商付款流水";
+            this.mnu_SupplierPayment.Visible = false;
             this.mnu_SupplierPayment.Click += new System.EventHandler(this.mnu_SupplierPayment_Click);
             // 
             // toolStripSeparator1
@@ -544,14 +523,14 @@
             // mnu_HorizontalSplit
             // 
             this.mnu_HorizontalSplit.Name = "mnu_HorizontalSplit";
-            this.mnu_HorizontalSplit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_HorizontalSplit.Size = new System.Drawing.Size(152, 22);
             this.mnu_HorizontalSplit.Text = "水平拆分";
             this.mnu_HorizontalSplit.Click += new System.EventHandler(this.mnu_HorizontalSplit_Click);
             // 
             // mnu_VerticalSplit
             // 
             this.mnu_VerticalSplit.Name = "mnu_VerticalSplit";
-            this.mnu_VerticalSplit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_VerticalSplit.Size = new System.Drawing.Size(152, 22);
             this.mnu_VerticalSplit.Text = "垂直拆分";
             this.mnu_VerticalSplit.Click += new System.EventHandler(this.mnu_VerticalSplit_Click);
             // 
@@ -563,6 +542,10 @@
             // mnu_System
             // 
             this.mnu_System.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Options,
+            this.mnu_Staff,
+            this.mnu_Role,
+            this.toolStripSeparator7,
             this.mnu_ChangePwd,
             this.mnu_LogOut,
             this.mnu_Exit});
@@ -574,21 +557,21 @@
             // mnu_ChangePwd
             // 
             this.mnu_ChangePwd.Name = "mnu_ChangePwd";
-            this.mnu_ChangePwd.Size = new System.Drawing.Size(124, 22);
+            this.mnu_ChangePwd.Size = new System.Drawing.Size(152, 22);
             this.mnu_ChangePwd.Text = "更改密码";
             this.mnu_ChangePwd.Click += new System.EventHandler(this.mnu_ChangePwd_Click);
             // 
             // mnu_LogOut
             // 
             this.mnu_LogOut.Name = "mnu_LogOut";
-            this.mnu_LogOut.Size = new System.Drawing.Size(124, 22);
+            this.mnu_LogOut.Size = new System.Drawing.Size(152, 22);
             this.mnu_LogOut.Text = "更改用户";
             this.mnu_LogOut.Click += new System.EventHandler(this.mnu_LogOut_Click);
             // 
             // mnu_Exit
             // 
             this.mnu_Exit.Name = "mnu_Exit";
-            this.mnu_Exit.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Exit.Size = new System.Drawing.Size(152, 22);
             this.mnu_Exit.Text = "退出";
             this.mnu_Exit.Click += new System.EventHandler(this.mnu_Exit_Click);
             // 
@@ -740,6 +723,35 @@
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
             // 
+            // mnu_Options
+            // 
+            this.mnu_Options.Enabled = false;
+            this.mnu_Options.Name = "mnu_Options";
+            this.mnu_Options.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Options.Text = "系统参数";
+            this.mnu_Options.Click += new System.EventHandler(this.mnu_Options_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            // 
+            // mnu_Staff
+            // 
+            this.mnu_Staff.Enabled = false;
+            this.mnu_Staff.Name = "mnu_Staff";
+            this.mnu_Staff.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Staff.Text = "人员部门";
+            this.mnu_Staff.Click += new System.EventHandler(this.mnu_Staff_Click);
+            // 
+            // mnu_Role
+            // 
+            this.mnu_Role.Enabled = false;
+            this.mnu_Role.Name = "mnu_Role";
+            this.mnu_Role.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Role.Text = "角色";
+            this.mnu_Role.Click += new System.EventHandler(this.mnu_Role_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -824,11 +836,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_VerticalSplit;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Staff;
         private System.Windows.Forms.ToolStripMenuItem mnu_ChangePwd;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Role;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Options;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem mnu_SupplierState;
         private System.Windows.Forms.ToolStripMenuItem mnu_SupplierPayment;
@@ -845,5 +854,9 @@
         private System.Windows.Forms.ToolStripStatusLabel lblDBPath;
         private System.Windows.Forms.ToolStripMenuItem mnu_Material;
         private System.Windows.Forms.ToolStripMenuItem mnu_WareHouse;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Options;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Staff;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Role;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     }
 }

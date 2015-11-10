@@ -36,7 +36,7 @@ namespace LJH.Inventory.BusinessModel
         public Product Product { get; set; }
 
         public string Model { get; set; }
-        
+
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
@@ -126,12 +126,31 @@ namespace LJH.Inventory.BusinessModel
             return this.MemberwiseClone() as ProductInventoryItem;
         }
 
+        #region 只读属性
         /// <summary>
         /// 获取原材料资料是否可以修改
         /// </summary>
         public bool CanEdit
         {
-            get { return (State == ProductInventoryState.Intact); }
+            get { return (Status == "整卷"); }
         }
+        /// <summary>
+        /// 获取原材料的状态
+        /// </summary>
+        public string Status
+        {
+            get
+            {
+                if (Model == "原材料")
+                {
+                    if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "无余料";
+                    else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
+                    else if (OriginalLength > Length) return "余卷";
+                    return "整卷";
+                }
+                return string.Empty;
+            }
+        }
+        #endregion
     }
 }

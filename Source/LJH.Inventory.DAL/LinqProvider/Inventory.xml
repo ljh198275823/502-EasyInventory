@@ -402,6 +402,7 @@
       <Column Name="OriginalLength" Member="OriginalLength"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Model" Member="Model"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -418,6 +419,26 @@
       <Column Name="SourceID" Member="SourceID"  DbType="uniqueidentifier"  UpdateCheck="Never"/>
       <Column Name="Operator" Member="Operator"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
+  <Table Name="SteelRollSliceRecord" Member="LJH.Inventory.BusinessModel.SteelRollSliceRecord">
+    <Type Name="LJH.Inventory.BusinessModel.SteelRollSliceRecord">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true" />
+      <Column Name="SliceDate" Member="SliceDate"  DbType="datetime NOT NULL" UpdateCheck="Never"/>
+      <Column Name="SliceSource" Member="SliceSource" DbType="uniqueidentifier not null" UpdateCheck="Never"/>
+      <Column Name="Category" Member="Category"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="Specification" Member="Specification"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="SliceType" Member="SliceType"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Length" Member="Length"  DbType="decimal(10, 4) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Weight" Member="Weight"  DbType="decimal(10, 4)" UpdateCheck="Never"/>
+      <Column Name="Count" Member="Count"  DbType="int NOT NULL" UpdateCheck="Never"/> 
+      <Column Name="BeforeWeight" Member="BeforeWeight" DbType="decimal(10,4) not null" UpdateCheck="Never"/>
+      <Column Name="BeforeLength" Member="BeforeLength" DbType="decimal(10,4) not null" UpdateCheck="Never"/>
+      <Column Name="AfterWeight" Member="AfterWeight" DbType="decimal(10,4) not null" UpdateCheck="Never"/>
+      <Column Name="AfterLength" Member="AfterLength" DbType="decimal(10,4) not null" UpdateCheck="Never"/>
+      <Column Name="Operator" Member="Operator"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Customer" Member="Customer"  DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
+      <Column Name="Slicer" Member="Slicer"  DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="AutoCreateNumber" Member="LJH.Inventory.DAL.LinqProvider.AutoCreateNumber">

@@ -83,12 +83,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.SupplierID == cmbSupplier.Text).ToList();
             if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
             if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Weight == txtWeight.DecimalValue).ToList();
-            items = items.Where(it => (chkIntact.Checked && it.State == ProductInventoryState.Intact) ||
-                                   (chkPartial.Checked && it.State == ProductInventoryState.Partial) ||
+            items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
+                                   (chkPartial.Checked && it.Status == "余卷") ||
+                                   (chkOnlyTail.Checked && it.Status == "尾卷") ||
+                                   (chkRemainless.Checked && it.Status == "余料") ||
                                    (chkWaitShip.Checked && it.State == ProductInventoryState.WaitShip) ||
-                                   (chkOnlyTail.Checked && it.State == ProductInventoryState.OnlyTail) ||
-                                   (chkShipped.Checked && it.State == ProductInventoryState.Shipped) ||
-                                   (chkRemainless.Checked && it.State == ProductInventoryState.RemainLess)).ToList();
+                                   (chkShipped.Checked && it.State == ProductInventoryState.Shipped)).ToList();
+
             if (items != null && items.Count > 0)
             {
                 return (from p in items
@@ -137,18 +138,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override List<object> GetDataSource()
         {
             ProductInventoryItemBLL bll = new ProductInventoryItemBLL(AppSettings.Current.ConnStr);
-            List<ProductInventoryItem> items = null;
             if (SearchCondition == null)
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.Model = "原材料";
-                items = bll.GetItems(null).QueryObjects;
+                _SteelRolls = bll.GetItems(con).QueryObjects;
             }
             else
             {
-                items = bll.GetItems(SearchCondition).QueryObjects;
+                _SteelRolls = bll.GetItems(SearchCondition).QueryObjects;
             }
-            _SteelRolls = bll.GetItems(SearchCondition).QueryObjects;
             List<object> records = FilterData();
             return records;
         }
@@ -156,6 +155,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             ProductInventoryItem sr = item as ProductInventoryItem;
+            row.Tag = sr;
             row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy年MM月dd日");
             row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
             row.Cells["colSpecification"].Value = sr.Product.Specification;
@@ -167,6 +167,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSupplier"].Value = sr.SupplierID;
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = sr.State;
+            row.Cells["colStatus"].Value = sr.Status;
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
             row.Cells["colMemo"].Value = sr.Memo;
         }
@@ -213,6 +214,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             FreshData();
         }
 
+        private void mnu_Slice_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                FrmSlice frm = new FrmSlice();
+                frm.SlicingItem = sr;
+                frm.SliceTo = "开平";
+                frm.ShowDialog();
+                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+            }
+        }
+
         private void mnu_StackRecords_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 1)
@@ -221,51 +235,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 View.FrmProductStackRecordsView frm = new View.FrmProductStackRecordsView();
                 frm.ProductInventory = pi;
                 frm.ShowDialog();
-            }
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                if (dataGridView1.Columns[e.ColumnIndex].Name == "colValid")
-                {
-                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.Products = new List<string>();
-                    con.Products.Add(item.ProductID);
-                    con.WareHouseID = item.WareHouseID;
-                    con.UnReserved = true;
-                    con.UnShipped = true;
-                    View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
-                    frm.SearchCondition = con;
-                    frm.ShowDialog();
-                }
-                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colReserved")
-                {
-                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.Products = new List<string>();
-                    con.Products.Add(item.ProductID);
-                    con.WareHouseID = item.WareHouseID;
-                    con.UnReserved = false;
-                    con.UnShipped = true;
-                    View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
-                    frm.SearchCondition = con;
-                    frm.ShowDialog();
-                }
-                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colAmount")
-                {
-                    ProductInventory item = dataGridView1.Rows[e.RowIndex].Tag as ProductInventory;
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.Products = new List<string>();
-                    con.Products.Add(item.ProductID);
-                    con.WareHouseID = item.WareHouseID;
-                    con.UnShipped = true;
-                    View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
-                    frm.SearchCondition = con;
-                    frm.ShowDialog();
-                }
             }
         }
 
@@ -291,6 +260,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
        
-        
     }
 }

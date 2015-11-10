@@ -112,6 +112,7 @@
     <Compile Include="LinqProvider\ServerDateTimeProvider.cs" />
     <Compile Include="LinqProvider\StaffPhotoProvider.cs" />
     <Compile Include="LinqProvider\StaffProvider.cs" />
+    <Compile Include="LinqProvider\SteelRollSliceRecordProvider.cs" />
     <Compile Include="LinqProvider\SupplierTypeProvider.cs" />
     <Compile Include="LinqProvider\TransportProvider.cs" />
     <Compile Include="LinqProvider\AutoNumberCreater.cs" />

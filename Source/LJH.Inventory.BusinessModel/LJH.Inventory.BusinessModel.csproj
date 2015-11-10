@@ -131,6 +131,7 @@
     <Compile Include="SearchCondition\CustomerSearchCondition.cs" />
     <Compile Include="SearchCondition\DocumentSearchCondition.cs" />
     <Compile Include="SearchCondition\ExpenditureRecordSearchCondition.cs" />
+    <Compile Include="SearchCondition\SliceRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\StackInRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\StackInSheetSearchCondition.cs" />
     <Compile Include="SearchCondition\OrderItemRecordSearchCondition.cs" />
@@ -163,9 +164,11 @@
     <Compile Include="SearchCondition\YouhuiQuanSearchCondition.cs" />
     <Compile Include="SheetOperation.cs" />
     <Compile Include="SheetState.cs" />
+    <Compile Include="SliceType.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="StaffPhoto.cs" />
     <Compile Include="Purchase\SupplierType.cs" />
+    <Compile Include="SteelRollSliceRecord.cs" />
     <Compile Include="SysparameterInfo.cs" />
     <Compile Include="Transport.cs" />
     <Compile Include="Unit.cs" />

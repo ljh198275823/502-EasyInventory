@@ -21,6 +21,11 @@ namespace LJH.Inventory.UI.Forms
         #region 私有方法
         private void ShowSetting(UserSettings us)
         {
+            #region 基本
+            txtBecomeTailAt.DecimalValue = UserSettings.Current.BecomeTailAt;
+            txtBecomeRemainlessAt.DecimalValue = UserSettings.Current.BecomeRemainlessAt;
+            #endregion
+
             #region 公司信息
             txtName.Text = us.CompanyName;
             txtForeignName.Text = us.ForeignName;
@@ -84,6 +89,12 @@ namespace LJH.Inventory.UI.Forms
         private UserSettings GetSettingFromInput()
         {
             UserSettings us = new UserSettings();
+
+            #region 基本
+            us.BecomeTailAt = txtBecomeTailAt.DecimalValue;
+            us.BecomeRemainlessAt = txtBecomeRemainlessAt.DecimalValue;
+            #endregion
+
             #region 公司信息
             us.CompanyName = txtName.Text.Trim();
             us.ForeignName = txtForeignName.Text.Trim();

@@ -16,6 +16,8 @@ namespace LJH.Inventory.BusinessModel
         #region 构造函数
         public UserSettings()
         {
+            BecomeRemainlessAt = 5;
+            BecomeTailAt = 30;
             this.CompanyName = "易存信息系统有限公司";
 
             this.CustomerPrefix = "C";
@@ -60,6 +62,19 @@ namespace LJH.Inventory.BusinessModel
             this.ExpenditureRecordDateFormat = "yyyyMM";
             this.ExpenditureRecordSerialCount = 5;
         }
+        #endregion
+
+        #region 基本
+        /// <summary>
+        /// 获取或设置原料在小于或等于多长后当成无尾料
+        /// </summary>
+        [DataMember]
+        public decimal BecomeRemainlessAt { get; set; }
+        /// <summary>
+        /// 获取或设置原料在小于或等于多长后当成尾卷
+        /// </summary>
+        [DataMember]
+        public decimal BecomeTailAt { get; set; }
         #endregion
 
         #region 本公司信息

@@ -150,6 +150,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouse = txtWareHouse.Tag as WareHouse;
             item.WareHouseID = item.WareHouse.ID;
+            item.Model = "原材料";
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
             item.OriginalLength = txtOriginalLength.DecimalValue;
             item.Weight = txtOriginalWeight.DecimalValue;
