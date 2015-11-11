@@ -13,6 +13,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public string ExcludeModel { get; set; }
 
+        public string ProductID { get; set; }
+
         public string WareHouseID { get; set; }
 
         public int? States { get; set; }

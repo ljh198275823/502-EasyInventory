@@ -107,6 +107,7 @@
     <Compile Include="MyCompanyInfo.cs" />
     <Compile Include="ProductInventoryState.cs" />
     <Compile Include="Resource\CustomerReceivableTypeDescription.cs" />
+    <Compile Include="Resource\ProductInventoryStateDescription.cs" />
     <Compile Include="Sale\OrderItemRecord.cs" />
     <Compile Include="Permission\OperatorRightAttribute.cs" />
     <Compile Include="Permission\PermissionActionDescription.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="SearchCondition\CustomerSearchCondition.cs" />
     <Compile Include="SearchCondition\DocumentSearchCondition.cs" />
     <Compile Include="SearchCondition\ExpenditureRecordSearchCondition.cs" />
+    <Compile Include="SearchCondition\InventoryCheckRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\SliceRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\StackInRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\StackInSheetSearchCondition.cs" />
@@ -152,7 +154,6 @@
     <Compile Include="ProductCategory.cs" />
     <Compile Include="SearchCondition\StackOutRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\StackOutSheetSearchCondition.cs" />
-    <Compile Include="SearchCondition\ProductInventorySearchCondition.cs" />
     <Compile Include="SearchCondition\ProductSearchCondition.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="Permission\Permissions.cs" />

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using LJH.Inventory .BusinessModel ;
+using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {

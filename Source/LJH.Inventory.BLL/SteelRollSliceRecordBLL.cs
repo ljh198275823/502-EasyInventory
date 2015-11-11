@@ -17,5 +17,9 @@ namespace LJH.Inventory.BLL
         {
         }
         #endregion
+
+        #region 公共方法
+
+        #endregion
     }
 }

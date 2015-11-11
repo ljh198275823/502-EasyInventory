@@ -57,7 +57,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult CreateInventory(SteelRollSlice info)
         {
-            ProductInventorySearchCondition con = new ProductInventorySearchCondition() { ProductID = info.ProductID, WareHouseID = info.WareHouseID };
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = info.ProductID, WareHouseID = info.WareHouseID };
             List<SteelRollSlice> items = ProviderFactory.Create<IProvider<SteelRollSlice, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0) return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点或收货单收货");
             ProductInventoryItem pii = new ProductInventoryItem()

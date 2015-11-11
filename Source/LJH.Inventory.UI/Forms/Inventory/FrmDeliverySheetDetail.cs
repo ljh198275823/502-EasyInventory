@@ -446,7 +446,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             FrmSteelRollSliceMaster frm = new FrmSteelRollSliceMaster();
             frm.ForSelect = true;
-            ProductInventorySearchCondition con = new ProductInventorySearchCondition();
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
             con.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)

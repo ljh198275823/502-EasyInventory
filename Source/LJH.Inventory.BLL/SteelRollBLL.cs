@@ -91,6 +91,7 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
+
         public QueryResult<SteelRoll> GetByID(Guid id)
         {
             SteelRoll sr = null;
@@ -178,6 +179,74 @@ namespace LJH.Inventory.BLL
             {
                 sr.Weight = slice.AfterWeight;
                 sr.Length = slice.AfterLength;
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 原材料盘点
+        /// </summary>
+        /// <returns></returns>
+        public CommandResult Check(SteelRoll sr, decimal newWeight, decimal newLength, string memo, string checker, string operatorName)
+        {
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            ProductInventoryItem newVal = Convert(sr);
+            ProductInventoryItem item = newVal.Clone();
+            newVal.Weight = newWeight;
+            newVal.Length = newLength;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, item, unitWork);
+            InventoryCheckRecord citem = new InventoryCheckRecord()
+            {
+                ID = Guid.NewGuid(),
+                CheckDateTime = DateTime.Now,
+                ProductID = sr.ProductID,
+                WarehouseID = sr.WareHouseID,
+                SourceID = sr.ID,
+                BeforeLength = sr.Length,
+                BeforeWeight = sr.Weight,
+                Length = newLength,
+                Weight = newWeight,
+                Inventory = 1,
+                CheckCount = 1,
+                Unit = sr.Unit,
+                Price = sr.Price,
+                Operator = operatorName,
+                Checker = checker,
+                Memo = memo
+            };
+            ProviderFactory.Create<IProvider<InventoryCheckRecord, Guid>>(RepoUri).Insert(citem, unitWork);
+            CommandResult ret = unitWork.Commit();
+            if (ret.Result == ResultCode.Successful)
+            {
+                sr.Weight = newWeight;
+                sr.Length = newLength;
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 废品处理
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public CommandResult Nullify(SteelRoll sr)
+        {
+            ProductInventoryItem newVal = Convert(sr);
+            ProductInventoryItem item = newVal.Clone();
+            newVal.State = ProductInventoryState.Nullified;
+            if (string.IsNullOrEmpty(newVal.Memo))
+            {
+                newVal.Memo = "废品处理";
+            }
+            else
+            {
+                newVal.Memo += ",废品处理";
+            }
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, item);
+            if (ret.Result == ResultCode.Successful)
+            {
+                sr.State = newVal.State;
+                sr.Memo = newVal.Memo;
             }
             return ret;
         }

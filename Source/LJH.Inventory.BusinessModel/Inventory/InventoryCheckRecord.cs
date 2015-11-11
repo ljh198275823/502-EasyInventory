@@ -44,6 +44,26 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal CheckCount { get; set; }
         /// <summary>
+        /// 获取或设置盘点前账面重量
+        /// </summary>
+        public decimal? BeforeWeight { get; set; }
+        /// <summary>
+        /// 获取或设置盘点前账面长度
+        /// </summary>
+        public decimal? BeforeLength { get; set; }
+        /// <summary>
+        /// 获取或设置盘点重量
+        /// </summary>
+        public decimal? Weight { get; set; }
+        /// <summary>
+        /// 获取或设置盘点长度
+        /// </summary>
+        public decimal? Length { get; set; }
+        /// <summary>
+        /// 获取或设置盘点的库存项
+        /// </summary>
+        public Guid? SourceID { get; set; }
+        /// <summary>
         /// 获取或设置盘点人员
         /// </summary>
         public string Checker { get; set; }

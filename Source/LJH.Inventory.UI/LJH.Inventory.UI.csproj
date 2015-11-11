@@ -111,6 +111,12 @@
     <Compile Include="Forms\Inventory\FrmSlice.designer.cs">
       <DependentUpon>FrmSlice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\FrmSteelRollCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\FrmSteelRollCheck.designer.cs">
+      <DependentUpon>FrmSteelRollCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\FrmSteelRollDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\View\FrmSlicedRecordView.designer.cs">
       <DependentUpon>FrmSlicedRecordView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\FrmSteelRollCheckRecordView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\FrmSteelRollCheckRecordView.Designer.cs">
+      <DependentUpon>FrmSteelRollCheckRecordView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sale\FrmProxyDetail.cs">
       <SubType>Form</SubType>
@@ -659,6 +671,9 @@
     <EmbeddedResource Include="Forms\Inventory\FrmSlice.resx">
       <DependentUpon>FrmSlice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\FrmSteelRollCheck.resx">
+      <DependentUpon>FrmSteelRollCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollDetail.resx">
       <DependentUpon>FrmSteelRollDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -667,6 +682,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\View\FrmSlicedRecordView.resx">
       <DependentUpon>FrmSlicedRecordView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollCheckRecordView.resx">
+      <DependentUpon>FrmSteelRollCheckRecordView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmProxyDetail.resx">
       <DependentUpon>FrmProxyDetail.cs</DependentUpon>

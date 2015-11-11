@@ -594,8 +594,13 @@
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Inventory" Member="Inventory"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="CheckCount" Member="CheckCount"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="Checker" Member="Checker"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="Operator" Member="Operator"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="BeforeWeight" Member="BeforeWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="BeforeLength" Member="BeforeLength"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="Weight" Member="Weight"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
+      <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="SourceID" Member="SourceID"  DbType="uniqueidentifier"  UpdateCheck="Never"/>
+      <Column Name="Checker" Member="Checker"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Operator" Member="Operator"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

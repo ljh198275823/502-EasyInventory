@@ -117,7 +117,6 @@
     <Compile Include="LinqProvider\TransportProvider.cs" />
     <Compile Include="LinqProvider\AutoNumberCreater.cs" />
     <Compile Include="LinqProvider\StackOutSheetProvider.cs" />
-    <Compile Include="LinqProvider\ProductInventoryProvider.cs" />
     <Compile Include="LinqProvider\StackInSheetProvider.cs" />
     <Compile Include="LinqProvider\OrderProvider.cs" />
     <Compile Include="LinqProvider\ProductProvider.cs" />

@@ -28,8 +28,13 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override List<InventoryCheckRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             IQueryable<InventoryCheckRecord> ret = dc.GetTable<InventoryCheckRecord>();
-            List<InventoryCheckRecord> items = ret.ToList();
-            return items;
+            if (search != null && search is InventoryCheckRecordSearchCondition)
+            {
+                var con = search as InventoryCheckRecordSearchCondition;
+                if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(it => it.ProductID == con.ProductID);
+                if (con.SourceID.HasValue) ret = ret.Where(it => it.SourceID == con.SourceID.Value);
+            }
+            return ret.ToList();
         }
         #endregion
     }

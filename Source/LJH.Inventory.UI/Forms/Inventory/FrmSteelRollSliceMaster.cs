@@ -192,7 +192,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 DialogResult ret= frm.ShowDialog();
                 if (ret == DialogResult.OK)
                 {
-                    ProductInventorySearchCondition con = new ProductInventorySearchCondition();
+                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.ProductID = pi.ProductID;
                     con.WareHouseID = pi.WareHouseID;
                     List<SteelRollSlice> items = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSlicedRecordView));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.GridView = new System.Windows.Forms.DataGridView();
@@ -193,6 +194,7 @@
             this.ClientSize = new System.Drawing.Size(1005, 311);
             this.Controls.Add(this.GridView);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSlicedRecordView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "铁皮卷加工记录";

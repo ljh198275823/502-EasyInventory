@@ -115,7 +115,7 @@ namespace LJH.Inventory.BLL
         public override CommandResult Add(InventoryCheckRecord info)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            ProductInventorySearchCondition con = new ProductInventorySearchCondition();
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
             con.ProductID = info.ProductID;
             con.WareHouseID = info.WarehouseID;
             List<SteelRollSlice> items = ProviderFactory.Create<IProvider<SteelRollSlice, Guid>>(RepoUri).GetItems(con).QueryObjects;
