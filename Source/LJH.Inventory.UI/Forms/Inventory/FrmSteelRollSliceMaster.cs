@@ -36,24 +36,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private List<object> FilterData()
         {
             List<SteelRollSlice> items = _ProductInventorys;
-            List<ProductCategory> cs = null;
-            if (this.categoryTree.SelectedNode != null)
+            if (items != null && items.Count > 0)
             {
-                cs = this.categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
-                if (cs != null && cs.Count > 0) items = _ProductInventorys.Where(it => cs.Exists(c => c.ID == it.Product.CategoryID)).ToList();
+                if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
+                if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
+                if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification == cmbSpecification.Text).ToList();
+                items = items.Where(it => (chk开平.Checked && it.Product.Model == "开平") ||
+                                          (chk开卷.Checked && it.Product.Model == "开卷") ||
+                                          (chk开吨.Checked && it.Product.Model == "开吨")).ToList();
+                if (chkOnlyHasInventory.Checked)
+                {
+                    items = items.Where(item => item.Count > 0).ToList();
+                }
+                return (from p in items
+                        orderby p.Product.Name ascending
+                        select (object)p).ToList();
             }
-            string warehouse = wareHouseComboBox1.SelectedWareHouseID;
-            if (items != null && items.Count > 0 && !string.IsNullOrEmpty(warehouse))
-            {
-                items = items.Where(it => it.WareHouseID == warehouse).ToList();
-            }
-            if (chkOnlyHasInventory.Checked)
-            {
-                items = items.Where(item => item.Valid + item.Reserved > 0).ToList();
-            }
-            return (from p in items
-                    orderby p.Product.Name ascending
-                    select (object)p).ToList();
+            return null;
         }
         #endregion
 
@@ -62,14 +61,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.Init();
             this.wareHouseComboBox1.Init();
-            this.wareHouseComboBox1.SelectedIndexChanged -= wareHouseComboBox1_SelectedIndexChanged;
-            this.wareHouseComboBox1.SelectedIndexChanged += wareHouseComboBox1_SelectedIndexChanged;
-        }
-
-        protected override void ReFreshData()
-        {
-            this.categoryTree.Init();
-            base.ReFreshData();
+            this.wareHouseComboBox1.SelectedIndexChanged -= FreshDate_Clicked;
+            this.wareHouseComboBox1.SelectedIndexChanged += FreshDate_Clicked;
+            this.cmbSpecification.Init();
+            this.categoryComboBox1.Init();
         }
 
         public override void ShowOperatorRights()
@@ -81,7 +76,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override FrmDetailBase GetDetailForm()
         {
             FrmProductInventoryDetail frm = new FrmProductInventoryDetail();
-            frm.WareHouse = categoryTree.SelectedNode != null ? (categoryTree.SelectedNode.Tag as WareHouse) : null;
             return frm;
         }
 
@@ -93,11 +87,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override List<object> GetDataSource()
         {
             SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
-            List<SteelRollSlice> items = null;
             if (SearchCondition == null)
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.ExcludeModel = "原材料"; //
+                con.ExcludeModel = "原材料"; //排除原材料库存项
                 _ProductInventorys = bll.GetItems(con).QueryObjects;
             }
             else
@@ -127,31 +120,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 _ProductInventorys.Add(pi);
             }
         }
-
-        protected override void ShowItemsOnGrid(List<object> items)
-        {
-            base.ShowItemsOnGrid(items);
-            Filter(txtKeyword.Text.Trim());
-        }
         #endregion
 
         #region 事件处理函数
-        private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            FreshData();
-        }
-
-        private void wareHouseComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FreshData();
-        }
-
-        private void txtKeyword_TextChanged(object sender, EventArgs e)
-        {
-            FreshData();
-        }
-
-        private void chkOnlyHasInventory_CheckedChanged(object sender, EventArgs e)
+        private void FreshDate_Clicked(object sender, EventArgs e)
         {
             FreshData();
         }

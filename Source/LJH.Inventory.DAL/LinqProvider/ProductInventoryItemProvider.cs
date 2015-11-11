@@ -20,13 +20,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         #region 重写模板方法
         protected override ProductInventoryItem GetingItemByID(Guid id, DataContext dc)
         {
-            var ret = dc.GetTable<ProductInventoryItem>().SingleOrDefault(item => item.ID == id);
-            if (ret != null)
-            {
-                ret.Product = new ProductProvider(ConnectStr, _MappingResource).GetByID(ret.ProductID).QueryObject;
-                ret.WareHouse = new WareHouseProvider(ConnectStr, _MappingResource).GetByID(ret.WareHouseID).QueryObject;
-            }
-            return ret.Product != null && ret.WareHouse != null ? ret : null;
+            return dc.GetTable<ProductInventoryItem>().SingleOrDefault(item => item.ID == id);
         }
 
         protected override List<ProductInventoryItem> GetingItems(DataContext dc, SearchCondition search)

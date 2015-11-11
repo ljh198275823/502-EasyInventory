@@ -43,8 +43,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCurrentWeigth.DecimalValue = item.Weight.Value;
             txtRemainLength.DecimalValue = item.Length.Value;
             txtRemainWeight.DecimalValue = item.Weight.Value;
-            txtWareHouse.Text = item.WareHouse.Name;
-            txtWareHouse.Tag = item.WareHouse;
         }
         #endregion
 
@@ -173,6 +171,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void rdSliceType_CheckedChanged(object sender, EventArgs e)
         {
             SliceTo = (sender as RadioButton).Text;
+            txtLength.Enabled = !rdToWeight.Checked;
             txtWeight.Enabled = rdToWeight.Checked;
         }
         #endregion

@@ -161,7 +161,6 @@ namespace LJH.Inventory.BLL
             {
                 ID = Guid.NewGuid(),
                 ProductID = p.ID,
-                Product = p,
                 AddDate = slice.SliceDate,
                 SourceID = sr.ID,
                 Weight = slice.Weight,
@@ -171,7 +170,6 @@ namespace LJH.Inventory.BLL
                 State = ProductInventoryState.Inventory,
                 Unit = "件",
                 WareHouseID = wh.ID,
-                WareHouse = wh,
                 Memo = slice.Customer,
             };
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi, unitWork);

@@ -31,15 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.chkOnlyHasInventory = new System.Windows.Forms.CheckBox();
-            this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.chk开卷 = new System.Windows.Forms.CheckBox();
+            this.chk开吨 = new System.Windows.Forms.CheckBox();
+            this.chk开平 = new System.Windows.Forms.CheckBox();
+            this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.pnlLeft = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.chkOnlyHasInventory = new System.Windows.Forms.CheckBox();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,8 +50,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.categoryTree = new LJH.Inventory.UI.Controls.ProductTree(this.components);
-            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,17 +63,14 @@
             this.colTotal = new System.Windows.Forms.DataGridViewLinkColumn();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.pnlLeft.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlFilter
             // 
             this.pnlFilter.Controls.Add(this.panel5);
             this.pnlFilter.Controls.Add(this.panel4);
-            this.pnlFilter.Controls.Add(this.panel2);
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
@@ -81,123 +79,138 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.chkOnlyHasInventory);
-            this.panel5.Controls.Add(this.txtKeyword);
+            this.panel5.Controls.Add(this.chk开卷);
+            this.panel5.Controls.Add(this.chk开吨);
+            this.panel5.Controls.Add(this.chk开平);
+            this.panel5.Controls.Add(this.categoryComboBox1);
             this.panel5.Controls.Add(this.label2);
+            this.panel5.Controls.Add(this.cmbSpecification);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.wareHouseComboBox1);
+            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.chkOnlyHasInventory);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(242, 0);
+            this.panel5.Location = new System.Drawing.Point(1, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(977, 38);
+            this.panel5.Size = new System.Drawing.Size(1218, 38);
             this.panel5.TabIndex = 7;
+            // 
+            // chk开卷
+            // 
+            this.chk开卷.AutoSize = true;
+            this.chk开卷.Checked = true;
+            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开卷.Location = new System.Drawing.Point(574, 12);
+            this.chk开卷.Name = "chk开卷";
+            this.chk开卷.Size = new System.Drawing.Size(48, 16);
+            this.chk开卷.TabIndex = 85;
+            this.chk开卷.Text = "开卷";
+            this.chk开卷.UseVisualStyleBackColor = true;
+            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // chk开吨
+            // 
+            this.chk开吨.AutoSize = true;
+            this.chk开吨.Checked = true;
+            this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开吨.Location = new System.Drawing.Point(683, 12);
+            this.chk开吨.Name = "chk开吨";
+            this.chk开吨.Size = new System.Drawing.Size(48, 16);
+            this.chk开吨.TabIndex = 84;
+            this.chk开吨.Text = "开吨";
+            this.chk开吨.UseVisualStyleBackColor = true;
+            this.chk开吨.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // chk开平
+            // 
+            this.chk开平.AutoSize = true;
+            this.chk开平.Checked = true;
+            this.chk开平.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开平.Location = new System.Drawing.Point(629, 12);
+            this.chk开平.Name = "chk开平";
+            this.chk开平.Size = new System.Drawing.Size(48, 16);
+            this.chk开平.TabIndex = 83;
+            this.chk开平.Text = "开平";
+            this.chk开平.UseVisualStyleBackColor = true;
+            this.chk开平.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // categoryComboBox1
+            // 
+            this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryComboBox1.FormattingEnabled = true;
+            this.categoryComboBox1.Location = new System.Drawing.Point(262, 10);
+            this.categoryComboBox1.Name = "categoryComboBox1";
+            this.categoryComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.categoryComboBox1.TabIndex = 82;
+            this.categoryComboBox1.SelectedIndexChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(226, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 81;
+            this.label2.Text = "类别";
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSpecification.FormattingEnabled = true;
+            this.cmbSpecification.Location = new System.Drawing.Point(423, 10);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
+            this.cmbSpecification.TabIndex = 80;
+            this.cmbSpecification.SelectedIndexChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(391, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 79;
+            this.label5.Text = "规格";
+            // 
+            // wareHouseComboBox1
+            // 
+            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.wareHouseComboBox1.FormattingEnabled = true;
+            this.wareHouseComboBox1.Location = new System.Drawing.Point(59, 10);
+            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
+            this.wareHouseComboBox1.Size = new System.Drawing.Size(151, 20);
+            this.wareHouseComboBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "仓库";
             // 
             // chkOnlyHasInventory
             // 
             this.chkOnlyHasInventory.AutoSize = true;
             this.chkOnlyHasInventory.Checked = true;
             this.chkOnlyHasInventory.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOnlyHasInventory.Location = new System.Drawing.Point(8, 10);
+            this.chkOnlyHasInventory.Location = new System.Drawing.Point(1037, 12);
             this.chkOnlyHasInventory.Name = "chkOnlyHasInventory";
             this.chkOnlyHasInventory.Size = new System.Drawing.Size(120, 16);
             this.chkOnlyHasInventory.TabIndex = 2;
             this.chkOnlyHasInventory.Text = "只显示有库存的项";
             this.chkOnlyHasInventory.UseVisualStyleBackColor = true;
-            this.chkOnlyHasInventory.CheckedChanged += new System.EventHandler(this.chkOnlyHasInventory_CheckedChanged);
-            // 
-            // txtKeyword
-            // 
-            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtKeyword.Location = new System.Drawing.Point(203, 7);
-            this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(762, 21);
-            this.txtKeyword.TabIndex = 1;
-            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(144, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "模糊匹配";
+            this.chkOnlyHasInventory.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(241, 0);
+            this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1, 38);
             this.panel4.TabIndex = 6;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.wareHouseComboBox1);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(241, 38);
-            this.panel2.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "仓库";
-            // 
-            // pnlLeft
-            // 
-            this.pnlLeft.Controls.Add(this.categoryTree);
-            this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlLeft.Location = new System.Drawing.Point(0, 38);
-            this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(242, 334);
-            this.pnlLeft.TabIndex = 113;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(242, 38);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 334);
-            this.splitter1.TabIndex = 114;
-            this.splitter1.TabStop = false;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colImage,
-            this.colWareHouse,
-            this.colCategory,
-            this.colSpecification,
-            this.colModel,
-            this.colWeight,
-            this.colLength,
-            this.colReserved,
-            this.colValid,
-            this.colTotal});
-            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(250, 38);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(969, 334);
-            this.dataGridView1.TabIndex = 115;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // contextMenuStrip1
             // 
@@ -255,28 +268,34 @@
             this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
             this.cMnu_Export.Text = "导出...";
             // 
-            // categoryTree
+            // dataGridView1
             // 
-            this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryTree.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.categoryTree.HideSelection = false;
-            this.categoryTree.ImageIndex = 0;
-            this.categoryTree.ItemHeight = 20;
-            this.categoryTree.LoadProduct = false;
-            this.categoryTree.Location = new System.Drawing.Point(0, 0);
-            this.categoryTree.Name = "categoryTree";
-            this.categoryTree.SelectedImageIndex = 0;
-            this.categoryTree.Size = new System.Drawing.Size(242, 334);
-            this.categoryTree.TabIndex = 3;
-            this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.categoryTree_NodeMouseClick);
-            // 
-            // wareHouseComboBox1
-            // 
-            this.wareHouseComboBox1.FormattingEnabled = true;
-            this.wareHouseComboBox1.Location = new System.Drawing.Point(44, 7);
-            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
-            this.wareHouseComboBox1.Size = new System.Drawing.Size(192, 20);
-            this.wareHouseComboBox1.TabIndex = 1;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colImage,
+            this.colWareHouse,
+            this.colCategory,
+            this.colSpecification,
+            this.colModel,
+            this.colWeight,
+            this.colLength,
+            this.colReserved,
+            this.colValid,
+            this.colTotal});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 38);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(1219, 334);
+            this.dataGridView1.TabIndex = 115;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // colImage
             // 
@@ -306,7 +325,7 @@
             // 
             // colModel
             // 
-            this.colModel.HeaderText = "型号";
+            this.colModel.HeaderText = "加工类型";
             this.colModel.Name = "colModel";
             this.colModel.ReadOnly = true;
             // 
@@ -352,23 +371,16 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1219, 394);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.pnlFilter);
             this.Name = "FrmSteelRollSliceMaster";
             this.Text = "小件管理";
             this.Controls.SetChildIndex(this.pnlFilter, 0);
-            this.Controls.SetChildIndex(this.pnlLeft, 0);
-            this.Controls.SetChildIndex(this.splitter1, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.pnlFilter.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.pnlLeft.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,26 +389,24 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlFilter;
-        private System.Windows.Forms.Panel pnlLeft;
-        private Controls.ProductTree categoryTree;
-        private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
-        private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
-        private System.Windows.Forms.Label label2;
         private Controls.WareHouseComboBox wareHouseComboBox1;
         private System.Windows.Forms.CheckBox chkOnlyHasInventory;
         private System.Windows.Forms.ToolStripMenuItem mnu_StackRecords;
         private System.Windows.Forms.ToolStripMenuItem mnu_Check;
+        private Controls.SpecificationComboBox cmbSpecification;
+        private System.Windows.Forms.Label label5;
+        private Controls.CategoryComboBox categoryComboBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
@@ -407,5 +417,8 @@
         private System.Windows.Forms.DataGridViewLinkColumn colReserved;
         private System.Windows.Forms.DataGridViewLinkColumn colValid;
         private System.Windows.Forms.DataGridViewLinkColumn colTotal;
+        private System.Windows.Forms.CheckBox chk开卷;
+        private System.Windows.Forms.CheckBox chk开吨;
+        private System.Windows.Forms.CheckBox chk开平;
     }
 }

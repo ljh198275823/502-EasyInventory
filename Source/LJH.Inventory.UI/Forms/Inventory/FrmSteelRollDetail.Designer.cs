@@ -32,7 +32,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.dtStorageDateTime = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,10 +46,11 @@
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtSupplier = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.cmbBrand = new System.Windows.Forms.ComboBox();
             this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkWareHouse = new System.Windows.Forms.LinkLabel();
+            this.cmbBrand = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkBrand = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnClose
@@ -90,15 +90,6 @@
             this.label10.TabIndex = 54;
             this.label10.Text = "单价(元/吨)";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(296, 157);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(29, 12);
-            this.label9.TabIndex = 53;
-            this.label9.Text = "厂家";
-            // 
             // dtStorageDateTime
             // 
             this.dtStorageDateTime.Location = new System.Drawing.Point(100, 25);
@@ -118,11 +109,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 90);
+            this.label3.Location = new System.Drawing.Point(43, 90);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 50;
-            this.label3.Text = "购入重量(吨)";
+            this.label3.Text = "重量(吨)";
             // 
             // label5
             // 
@@ -136,11 +127,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(248, 90);
+            this.label1.Location = new System.Drawing.Point(272, 90);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 45;
-            this.label1.Text = "购入长度(米)";
+            this.label1.Text = "长度(米)";
             // 
             // txtOriginalWeight
             // 
@@ -254,21 +245,12 @@
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Enabled = false;
             this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtSupplier.Location = new System.Drawing.Point(100, 153);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.Size = new System.Drawing.Size(121, 21);
             this.txtSupplier.TabIndex = 72;
             this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
-            // 
-            // cmbBrand
-            // 
-            this.cmbBrand.FormattingEnabled = true;
-            this.cmbBrand.Location = new System.Drawing.Point(329, 153);
-            this.cmbBrand.Name = "cmbBrand";
-            this.cmbBrand.Size = new System.Drawing.Size(145, 20);
-            this.cmbBrand.TabIndex = 73;
             // 
             // cmbSpecification
             // 
@@ -299,15 +281,35 @@
             this.lnkWareHouse.Text = "仓库";
             this.lnkWareHouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWareHouse_LinkClicked);
             // 
+            // cmbBrand
+            // 
+            this.cmbBrand.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.cmbBrand.Location = new System.Drawing.Point(329, 153);
+            this.cmbBrand.Name = "cmbBrand";
+            this.cmbBrand.Size = new System.Drawing.Size(145, 21);
+            this.cmbBrand.TabIndex = 78;
+            // 
+            // lnkBrand
+            // 
+            this.lnkBrand.AutoSize = true;
+            this.lnkBrand.Location = new System.Drawing.Point(296, 157);
+            this.lnkBrand.Name = "lnkBrand";
+            this.lnkBrand.Size = new System.Drawing.Size(29, 12);
+            this.lnkBrand.TabIndex = 77;
+            this.lnkBrand.TabStop = true;
+            this.lnkBrand.Text = "厂家";
+            this.lnkBrand.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkBrand_LinkClicked);
+            // 
             // FrmSteelRollDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(496, 287);
+            this.Controls.Add(this.cmbBrand);
+            this.Controls.Add(this.lnkBrand);
             this.Controls.Add(this.txtWareHouse);
             this.Controls.Add(this.lnkWareHouse);
             this.Controls.Add(this.cmbSpecification);
-            this.Controls.Add(this.cmbBrand);
             this.Controls.Add(this.txtSupplier);
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.lnkCategory);
@@ -320,7 +322,6 @@
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.dtStorageDateTime);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
@@ -335,7 +336,6 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.dtStorageDateTime, 0);
-            this.Controls.SetChildIndex(this.label9, 0);
             this.Controls.SetChildIndex(this.label10, 0);
             this.Controls.SetChildIndex(this.label12, 0);
             this.Controls.SetChildIndex(this.label14, 0);
@@ -348,10 +348,11 @@
             this.Controls.SetChildIndex(this.lnkCategory, 0);
             this.Controls.SetChildIndex(this.txtCategory, 0);
             this.Controls.SetChildIndex(this.txtSupplier, 0);
-            this.Controls.SetChildIndex(this.cmbBrand, 0);
             this.Controls.SetChildIndex(this.cmbSpecification, 0);
             this.Controls.SetChildIndex(this.lnkWareHouse, 0);
             this.Controls.SetChildIndex(this.txtWareHouse, 0);
+            this.Controls.SetChildIndex(this.lnkBrand, 0);
+            this.Controls.SetChildIndex(this.cmbBrand, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -362,7 +363,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DateTimePicker dtStorageDateTime;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
@@ -377,9 +377,10 @@
         private System.Windows.Forms.LinkLabel lnkCategory;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
         private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
-        private System.Windows.Forms.ComboBox cmbBrand;
         private Controls.SpecificationComboBox cmbSpecification;
         private GeneralLibrary.WinformControl.DBCTextBox txtWareHouse;
         private System.Windows.Forms.LinkLabel lnkWareHouse;
+        private GeneralLibrary.WinformControl.DBCTextBox cmbBrand;
+        private System.Windows.Forms.LinkLabel lnkBrand;
     }
 }

@@ -23,26 +23,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             InitializeComponent();
         }
 
-        #region 私有方法
-        private void InitCmbBrand()
-        {
-            cmbBrand.Items.Clear();
-            List<Product> _AllProducts = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-            if (_AllProducts != null && _AllProducts.Count > 0)
-            {
-                cmbBrand.Items.Add(string.Empty);
-                var items = (from p in _AllProducts
-                             where !string.IsNullOrEmpty(p.Brand)
-                             orderby p.Brand ascending
-                             select p.Brand).Distinct();
-                foreach (var item in items)
-                {
-                    cmbBrand.Items.Add(item);
-                }
-            }
-        }
-        #endregion
-
         #region 重写基类方法
         protected override bool CheckInput()
         {
@@ -93,7 +73,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void InitControls()
         {
             this.dtStorageDateTime.Value = DateTime.Today;
-            InitCmbBrand();
             cmbSpecification.Init();
         }
 
@@ -249,6 +228,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 txtWareHouse.Text = string.Empty;
                 txtWareHouse.Tag = null;
+            }
+        }
+
+        private void lnkBrand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                cmbBrand.Text = (frm.SelectedItem as CompanyInfo).Name;
             }
         }
     }
