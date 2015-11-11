@@ -21,28 +21,30 @@ namespace LJH.Inventory.BLL
         private string RepoUri = null;
 
         #region 公共方法
-        public QueryResultList<SteelRollSlice> GetItems(SearchCondition s)
+        public QueryResultList<SteelRollSlice> GetItems(SearchCondition con)
         {
             List<SteelRollSlice> items = null;
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.ExcludeModel = "原材料"; //
             QueryResultList<ProductInventoryItem> ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
             {
                 List<Product> ps = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetItems(null).QueryObjects;
                 List<WareHouse> ws = ProviderFactory.Create<IProvider<WareHouse, string>>(RepoUri).GetItems(null).QueryObjects;
                 var gs = from it in ret.QueryObjects
-                         group it by it.ProductID;
+                         group it by new { it.ProductID, it.WareHouseID };
                 foreach (var g in gs)
                 {
                     if (items == null) items = new List<SteelRollSlice>();
                     SteelRollSlice srs = new SteelRollSlice();
                     srs.ID = Guid.Empty;
-                    srs.ProductID = g.Key;
-                    srs.Product = ps.SingleOrDefault(it => it.ID == g.Key);
+                    srs.ProductID = g.First().ProductID;
+                    srs.Product = ps.SingleOrDefault(it => it.ID == srs.ProductID);
                     srs.WareHouseID = g.First().WareHouseID;
                     srs.WareHouse = ws.SingleOrDefault(it => it.ID == srs.WareHouseID);
-
+                    srs.Unit = g.First().Unit;
+                    srs.Weight = g.First().Weight;
+                    srs.Length = g.First().Length;
+                    srs.Reserved = g.Sum(it => it.State == ProductInventoryState.Reserved ? it.Count : 0);
+                    srs.Valid = g.Sum(it => it.State == ProductInventoryState.Inventory ? it.Count : 0);
                     items.Add(srs);
                 }
             }
@@ -85,8 +87,7 @@ namespace LJH.Inventory.BLL
             con.Products = new List<string>();
             con.Products.Add(productID);
             con.WareHouseID = warehouseID;
-            con.UnShipped = true;    //未发货的库存项
-            con.UnReserved = true;  //未分配给某个特定的订单
+            con.States = (int)ProductInventoryState.Inventory;
             List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items.Sum(item => item.Count) < count) return new CommandResult(ResultCode.Fail, string.Format("库存不足，预分配失败!", productID));
 

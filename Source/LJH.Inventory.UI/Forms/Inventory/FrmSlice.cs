@@ -27,7 +27,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         /// <summary>
         /// 获取或设置要加工的原材料
         /// </summary>
-        public ProductInventoryItem SlicingItem { get; set; }
+        public SteelRoll SlicingItem { get; set; }
         /// <summary>
         /// 获取或设置要加工的类型
         /// </summary>
@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 私有方法
-        private void ShowSlicingItem(ProductInventoryItem item)
+        private void ShowSlicingItem(SteelRoll item)
         {
             txtCategory.Text = item.Product.Category.Name;
             txtSpecification.Text = item.Product.Specification;
@@ -127,7 +127,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 };
                 if (txtLength.DecimalValue > 0) record.Length = txtLength.DecimalValue;
                 if (txtWeight.DecimalValue > 0) record.Weight = txtWeight.DecimalValue;
-                CommandResult ret = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).SteelRollSlice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
+                CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Slice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
                 if (ret.Result == ResultCode.Successful)
                 {
                     ShowSlicingItem(SlicingItem);

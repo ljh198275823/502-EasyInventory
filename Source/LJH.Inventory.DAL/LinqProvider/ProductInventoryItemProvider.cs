@@ -47,41 +47,26 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.InventorySheetNo)) ret = ret.Where(item => item.InventorySheet == con.InventorySheetNo);
                 if (con.DeliveryItem != null) ret = ret.Where(item => item.DeliveryItem == con.DeliveryItem);
                 if (!string.IsNullOrEmpty(con.DeliverySheetNo)) ret = ret.Where(item => item.DeliverySheet == con.DeliverySheetNo);
-                if (con.UnShipped != null)
-                {
-                    if (con.UnShipped.Value)
-                    {
-                        ret = ret.Where(item => item.DeliveryItem == null);
-                    }
-                    else
-                    {
-                        ret = ret.Where(item => item.DeliveryItem != null);
-                    }
-                }
-                if (con.UnReserved != null)
-                {
-                    if (con.UnReserved.Value)
-                    {
-                        ret = ret.Where(item => item.OrderItem == null);
-                    }
-                    else
-                    {
-                        ret = ret.Where(item => item.OrderItem != null);
-                    }
-                }
             }
             var items = ret.ToList();
             if (items != null && items.Count > 0)
             {
-                List<Product> ps = (new ProductProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                List<WareHouse> ws = (new WareHouseProvider(ConnectStr, _MappingResource)).GetItems(null).QueryObjects;
-                foreach (ProductInventoryItem pi in items)
+                if (search is ProductInventoryItemSearchCondition)
                 {
-                    pi.Product = ps.SingleOrDefault(p => p.ID == pi.ProductID);
-                    pi.WareHouse = ws.SingleOrDefault(w => w.ID == pi.WareHouseID);
+                    ProductInventoryItemSearchCondition con = search as ProductInventoryItemSearchCondition;
+                    if (con.States.HasValue && con.States.Value > 0)
+                    {
+                        int s = con.States.Value;
+                        items = items.Where(it => ((s & (int)ProductInventoryState.Inventory) > 0 && it.State == ProductInventoryState.Inventory) ||
+                                                  ((s & (int)ProductInventoryState.Reserved) > 0 && it.State == ProductInventoryState.Reserved) ||
+                                                  ((s & (int)ProductInventoryState.WaitShip) > 0 && it.State == ProductInventoryState.WaitShip) ||
+                                                  ((s & (int)ProductInventoryState.Shipped) > 0 && it.State == ProductInventoryState.Shipped) ||
+                                                  ((s & (int)ProductInventoryState.Nullified) > 0 && it.State == ProductInventoryState.Nullified)
+                                           ).ToList();
+                    }
                 }
             }
-            return items.Where(it => it.Product != null && it.WareHouse != null).ToList();
+            return items;
         }
         #endregion
     }

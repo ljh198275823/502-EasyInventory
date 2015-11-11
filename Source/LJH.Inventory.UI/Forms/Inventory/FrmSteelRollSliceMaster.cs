@@ -15,9 +15,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmProductInventoryMaster : FrmMasterBase
+    public partial class FrmSteelRollSliceMaster : FrmMasterBase
     {
-        public FrmProductInventoryMaster()
+        public FrmSteelRollSliceMaster()
         {
             InitializeComponent();
         }
@@ -96,13 +96,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<SteelRollSlice> items = null;
             if (SearchCondition == null)
             {
-                items = bll.GetItems(null).QueryObjects;
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.ExcludeModel = "原材料"; //
+                _ProductInventorys = bll.GetItems(con).QueryObjects;
             }
             else
             {
-                items = bll.GetItems(SearchCondition).QueryObjects;
+                _ProductInventorys = bll.GetItems(SearchCondition).QueryObjects;
             }
-            _ProductInventorys = bll.GetItems(SearchCondition).QueryObjects;
             List<object> records = FilterData();
             return records;
         }
@@ -111,16 +112,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             SteelRollSlice pi = item as SteelRollSlice;
             row.Cells["colImage"].Value = Properties.Resources.inventory;
-            row.Cells["colProductID"].Value = pi.ProductID;
-            row.Cells["colProduct"].Value = pi.Product.Name;
             row.Cells["colCategory"].Value = pi.Product.Category == null ? pi.Product.CategoryID : pi.Product.Category.Name;
             row.Cells["colSpecification"].Value = pi.Product.Specification;
             row.Cells["colModel"].Value = pi.Product.Model;
             row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
-            row.Cells["colUnit"].Value = pi.Unit;
+            row.Cells["colWeight"].Value = pi.Weight;
+            row.Cells["colLength"].Value = pi.Length;
             row.Cells["colReserved"].Value = pi.Reserved.Trim();
             row.Cells["colValid"].Value = pi.Valid.Trim();
-            row.Cells["colAmount"].Value = pi.Count.Trim();
+            row.Cells["colTotal"].Value = pi.Count.Trim();
             if (_ProductInventorys == null || !_ProductInventorys.Exists(it => it.ID == pi.ID))
             {
                 if (_ProductInventorys == null) _ProductInventorys = new List<SteelRollSlice>();
@@ -178,8 +178,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     con.Products = new List<string>();
                     con.Products.Add(item.ProductID);
                     con.WareHouseID = item.WareHouseID;
-                    con.UnReserved = true;
-                    con.UnShipped = true;
+                    con.States = (int)ProductInventoryState.Inventory;
                     View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();
@@ -191,20 +190,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     con.Products = new List<string>();
                     con.Products.Add(item.ProductID);
                     con.WareHouseID = item.WareHouseID;
-                    con.UnReserved = false;
-                    con.UnShipped = true;
+                    con.States = (int)ProductInventoryState.Reserved;
                     View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();
                 }
-                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colAmount")
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTotal")
                 {
                     SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.Products = new List<string>();
                     con.Products.Add(item.ProductID);
                     con.WareHouseID = item.WareHouseID;
-                    con.UnShipped = true;
+                    con.States = (int)ProductInventoryState.UnShipped;
                     View.FrmProductInventoryItemView frm = new View.FrmProductInventoryItemView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();

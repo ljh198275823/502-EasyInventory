@@ -35,6 +35,14 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Product Product { get; set; }
         /// <summary>
+        /// 获取或设置库存单个重量
+        /// </summary>
+        public decimal? Weight { get; set; }
+        /// <summary>
+        /// 获取或设置库存单个长度
+        /// </summary>
+        public decimal? Length { get; set; }
+        /// <summary>
         /// 获取或设置库存数量
         /// </summary>
         public string Unit { get; set; }

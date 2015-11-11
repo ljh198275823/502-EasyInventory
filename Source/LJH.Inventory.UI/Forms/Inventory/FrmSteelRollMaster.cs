@@ -24,7 +24,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         #region 私有变量
-        private List<ProductInventoryItem> _SteelRolls = null;
+        private List<SteelRoll> _SteelRolls = null;
         #endregion
 
         #region 私有方法
@@ -71,7 +71,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<object> FilterData()
         {
-            List<ProductInventoryItem> items = _SteelRolls;
+            List<SteelRoll> items = _SteelRolls;
             List<ProductCategory> cs = null;
             if (this.categoryTree.SelectedNode != null)
             {
@@ -138,7 +138,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
-            ProductInventoryItemBLL bll = new ProductInventoryItemBLL(AppSettings.Current.ConnStr);
+            var bll = new SteelRollBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
@@ -155,7 +155,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            ProductInventoryItem sr = item as ProductInventoryItem;
+            SteelRoll sr = item as SteelRoll;
             row.Tag = sr;
             row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy年MM月dd日");
             row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
@@ -219,7 +219,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                SteelRoll sr = dataGridView1.SelectedRows[0].Tag as SteelRoll;
                 FrmSlice frm = new FrmSlice();
                 frm.SlicingItem = sr;
                 frm.SliceTo = "开平";

@@ -46,7 +46,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 重写基类方法
         protected override bool CheckInput()
         {
-            if (txtCategory .Tag ==null )
+            if (txtCategory.Tag == null)
             {
                 MessageBox.Show("产品类别没有指定");
                 return false;
@@ -76,12 +76,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             //    MessageBox.Show("剩余重量大于入库重量");
             //    return false;
             //}
-            if (string.IsNullOrEmpty (txtSupplier .Text ))
+            if (string.IsNullOrEmpty(txtSupplier.Text))
             {
                 MessageBox.Show("没有指定供货商");
                 return false;
             }
-            if (string.IsNullOrEmpty(cmbBrand .Text ))
+            if (string.IsNullOrEmpty(cmbBrand.Text))
             {
                 MessageBox.Show("没有输入厂商");
                 cmbBrand.Focus();
@@ -105,15 +105,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ItemShowing()
         {
-            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
+            SteelRoll item = UpdatingItem as SteelRoll;
             dtStorageDateTime.Value = item.AddDate;
             txtWareHouse.Text = item.WareHouse.Name;
             txtWareHouse.Tag = item.WareHouse;
             txtCategory.Text = item.Product.Category.Name;
             txtCategory.Tag = item.Product.Category;
             cmbSpecification.Text = item.Product.Specification;
-            txtOriginalWeight.DecimalValue = item.OriginalWeight.Trim ();
-            txtOriginalLength.DecimalValue = item.OriginalLength.Trim ();
+            txtOriginalWeight.DecimalValue = item.OriginalWeight.Trim();
+            txtOriginalLength.DecimalValue = item.OriginalLength.Trim();
             //txtLength.DecimalValue = item.Length.Trim();
             //txtWeight.DecimalValue = item.Weight.Trim();
             txtPrice.DecimalValue = item.Price.Trim();
@@ -137,10 +137,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override object GetItemFromInput()
         {
-            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
+            SteelRoll item = UpdatingItem as SteelRoll;
             if (UpdatingItem == null)
             {
-                item = new ProductInventoryItem();
+                item = new SteelRoll();
                 item.ID = Guid.NewGuid();
             }
             Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Text).Trim());
@@ -158,6 +158,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Price = txtPrice.DecimalValue;
             item.Unit = "卷";
             item.Count = 1;
+            item.State = ProductInventoryState.Inventory;
             item.SupplierID = txtSupplier.Text;
             item.Manufacture = cmbBrand.Text;
             item.SerialNumber = txtSerialNumber.Text;
@@ -168,12 +169,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override CommandResult AddItem(object item)
         {
-            return (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).Add(item as ProductInventoryItem);
+            return (new SteelRollBLL(AppSettings.Current.ConnStr)).Add(item as SteelRoll);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).Update (item as ProductInventoryItem);
+            return (new SteelRollBLL(AppSettings.Current.ConnStr)).Update(item as SteelRoll);
         }
         #endregion
 
@@ -192,7 +193,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void txtCategory_DoubleClick(object sender, EventArgs e)
         {
-            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
+            SteelRoll item = UpdatingItem as SteelRoll;
             if (item == null || item.CanEdit)
             {
                 txtCategory.Text = string.Empty;
@@ -212,7 +213,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void txtSupplier_DoubleClick(object sender, EventArgs e)
         {
-            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
+            SteelRoll item = UpdatingItem as SteelRoll;
             if (item == null || item.CanEdit)
             {
                 txtSupplier.Text = string.Empty;
@@ -243,7 +244,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void txtWareHouse_DoubleClick(object sender, EventArgs e)
         {
-            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
+            SteelRoll item = UpdatingItem as SteelRoll;
             if (item == null || item.CanEdit)
             {
                 txtWareHouse.Text = string.Empty;

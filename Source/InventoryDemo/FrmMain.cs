@@ -250,7 +250,7 @@ namespace InventoryDemo
 
         private void mnu_Inventory_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmProductInventoryMaster>();
+            ShowSingleForm<FrmSteelRollSliceMaster>();
         }
 
         private void mnu_InventorySheet_Click(object sender, EventArgs e)

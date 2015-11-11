@@ -444,7 +444,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            FrmProductInventoryMaster frm = new FrmProductInventoryMaster();
+            FrmSteelRollSliceMaster frm = new FrmSteelRollSliceMaster();
             frm.ForSelect = true;
             ProductInventorySearchCondition con = new ProductInventorySearchCondition();
             con.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;

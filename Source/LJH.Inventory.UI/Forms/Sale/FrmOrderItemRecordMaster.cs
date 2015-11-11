@@ -138,38 +138,38 @@ namespace LJH.Inventory.UI.Forms.Sale
         #region 事件处理程序
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colInventory")
-            {
-                OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.OrderItem = item.ID;
-                con.UnShipped = true;
-                FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
-                frm.SearchCondition = con;
-                frm.ShowDialog();
-            }
-            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colShipped")
-            {
-                OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.OrderItem = item.ID;
-                con.UnShipped = false;
-                FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
-                frm.SearchCondition = con;
-                frm.ShowDialog();
-            }
-            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colValidInventory")
-            {
-                OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.Products = new List<string>();
-                con.Products.Add(item.ProductID);
-                con.UnShipped = true;
-                con.UnReserved = true;
-                FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
-                frm.SearchCondition = con;
-                frm.ShowDialog();
-            }
+            //if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colInventory")
+            //{
+            //    OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
+            //    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            //    con.OrderItem = item.ID;
+            //    con.UnShipped = true;
+            //    FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
+            //    frm.SearchCondition = con;
+            //    frm.ShowDialog();
+            //}
+            //if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colShipped")
+            //{
+            //    OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
+            //    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            //    con.OrderItem = item.ID;
+            //    con.UnShipped = false;
+            //    FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
+            //    frm.SearchCondition = con;
+            //    frm.ShowDialog();
+            //}
+            //if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "colValidInventory")
+            //{
+            //    OrderItemRecord item = dataGridView1.Rows[e.RowIndex].Tag as OrderItemRecord;
+            //    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            //    con.Products = new List<string>();
+            //    con.Products.Add(item.ProductID);
+            //    con.UnShipped = true;
+            //    con.UnReserved = true;
+            //    FrmProductInventoryItemView frm = new FrmProductInventoryItemView();
+            //    frm.SearchCondition = con;
+            //    frm.ShowDialog();
+            //}
         }
 
         private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

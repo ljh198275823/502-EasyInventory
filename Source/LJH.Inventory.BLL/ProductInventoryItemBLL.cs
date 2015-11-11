@@ -17,54 +17,5 @@ namespace LJH.Inventory.BLL
         {
         }
         #endregion
-
-        #region 公共方法
-        /// <summary>
-        /// 原材料加工
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="slicedTo"></param>
-        /// <param name="length"></param>
-        /// <param name="amount"></param>
-        /// <returns></returns>
-        public CommandResult SteelRollSlice(ProductInventoryItem item, SteelRollSliceRecord slice, WareHouse wh)
-        {
-            Product p = new ProductBLL(RepoUri).Create(item.Product.CategoryID, item.Product.Specification, slice.SliceType, slice.Weight, slice.Length);
-            if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
-
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(slice, unitWork);
-            ProductInventoryItem newVal = item.Clone();
-            newVal.Weight = slice.AfterWeight;
-            newVal.Length = slice.AfterLength;
-            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, item, unitWork);
-
-            ProductInventoryItem pi = new ProductInventoryItem()
-            {
-                ID = Guid.NewGuid(),
-                ProductID = p.ID,
-                Product = p,
-                AddDate = slice.SliceDate,
-                SourceID = item.ID,
-                Weight = slice.Weight,
-                Length = slice.Length,
-                Count = slice.Count,
-                Model = slice.SliceType, //slice.SliceType == "开平" ? "板材" : "卷材",
-                State = ProductInventoryState.Inventory,
-                Unit = "件",
-                WareHouseID = wh.ID,
-                WareHouse = wh,
-                Memo = slice.Customer,
-            };
-            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi, unitWork);
-            CommandResult ret = unitWork.Commit();
-            if (ret.Result == ResultCode.Successful)
-            {
-                item.Weight = slice.AfterWeight;
-                item.Length = slice.AfterLength;
-            }
-            return ret;
-        }
-        #endregion
     }
 }

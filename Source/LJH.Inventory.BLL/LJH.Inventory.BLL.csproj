@@ -97,6 +97,7 @@
     <Compile Include="ExpenditureRecordBLL.cs" />
     <Compile Include="PortBLL.cs" />
     <Compile Include="PriceTermBLL.cs" />
+    <Compile Include="SteelRollBLL.cs" />
     <Compile Include="SteelRollSliceBLL.cs" />
     <Compile Include="StackInSheetBLL.cs" />
     <Compile Include="OrderBLL.cs" />

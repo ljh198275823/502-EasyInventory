@@ -381,17 +381,6 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="View_ProductInventory" Member="LJH.Inventory.BusinessModel.ProductInventory">
-    <Type Name="LJH.Inventory.BusinessModel.ProductInventory">
-      <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50) not null"/>
-      <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) NOT NULL"/>
-      <Column Name="Unit" Member="Unit"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="Valid" Member="Valid"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="ValidAmount" Member="ValidAmount"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="Reserved" Member="Reserved"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="ReservedAmount" Member="ReservedAmount"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-    </Type>
-  </Table>
   <Table Name="ProductInventoryItem" Member="LJH.Inventory.BusinessModel.ProductInventoryItem">
     <Type Name="LJH.Inventory.BusinessModel.ProductInventoryItem">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>

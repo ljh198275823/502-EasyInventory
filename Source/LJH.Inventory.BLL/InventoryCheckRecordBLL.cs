@@ -43,7 +43,7 @@ namespace LJH.Inventory.BLL
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
             con.Products = pids;
             con.WareHouseID = record.WarehouseID;
-            con.UnShipped = true;
+            con.States = (int)ProductInventoryState.UnShipped;
             List<ProductInventoryItem> inventoryItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (inventoryItems == null || inventoryItems.Count == 0) throw new Exception("没有找到相关的库存项");
             List<ProductInventoryItem> clones = new List<ProductInventoryItem>();

@@ -9,7 +9,13 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     {
         public List<string> Products { get; set; }
 
+        public string Model { get; set; }
+
+        public string ExcludeModel { get; set; }
+
         public string WareHouseID { get; set; }
+
+        public int? States { get; set; }
 
         public Guid? OrderItem { get; set; }
 
@@ -26,13 +32,5 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public Guid? DeliveryItem { get; set; }
 
         public string DeliverySheetNo { get; set; }
-
-        public bool? UnShipped { get; set; }
-
-        public bool? UnReserved { get; set; }
-
-        public string Model { get; set; }
-
-        public string ExcludeModel { get; set; }
     }
 }
