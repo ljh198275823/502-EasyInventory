@@ -68,9 +68,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
                                        (chkPartial.Checked && it.Status == "余卷") ||
                                        (chkOnlyTail.Checked && it.Status == "尾卷") ||
-                                       (chkRemainless.Checked && it.Status == "余料") ||
-                                       (chkWaitShip.Checked && it.State == ProductInventoryState.WaitShip) ||
-                                       (chkShipped.Checked && it.State == ProductInventoryState.Shipped)).ToList();
+                                       (chkRemainless.Checked && it.Status == "余料") ).ToList ();
+                items.RemoveAll(it => (!chkNullified.Checked && it.State == ProductInventoryState.Nullified) ||
+                                     (!chkShipped.Checked && it.State == ProductInventoryState.Shipped)
+                                );
             }
             if (items != null && items.Count > 0)
             {
@@ -176,15 +177,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 SteelRoll sr = dataGridView1.SelectedRows[0].Tag as SteelRoll;
                 SliceRecordSearchCondition con = new SliceRecordSearchCondition();
                 con.SourceRoll = sr.ID;
-                List<SteelRollSliceRecord> items = (new SteelRollSliceRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-                if (items != null && items.Count > 0)
-                {
-                    items = (from it in items
-                             orderby it.SliceDate ascending
-                             select it).ToList();
-                }
                 FrmSlicedRecordView frm = new FrmSlicedRecordView();
-                frm.ShowingItems = items;
+                frm.SearchCondition = con;
                 frm.ShowDialog();
             }
         }

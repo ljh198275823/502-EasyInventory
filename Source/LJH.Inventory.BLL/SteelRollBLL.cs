@@ -91,7 +91,6 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
-
         public QueryResult<SteelRoll> GetByID(Guid id)
         {
             SteelRoll sr = null;
@@ -163,6 +162,8 @@ namespace LJH.Inventory.BLL
                 ID = Guid.NewGuid(),
                 ProductID = p.ID,
                 AddDate = slice.SliceDate,
+                InventorySheet = "加工",
+                InventoryItem = slice.ID,
                 SourceID = sr.ID,
                 Weight = slice.Weight,
                 Length = slice.Length,
@@ -182,7 +183,6 @@ namespace LJH.Inventory.BLL
             }
             return ret;
         }
-
         /// <summary>
         /// 原材料盘点
         /// </summary>
@@ -223,7 +223,6 @@ namespace LJH.Inventory.BLL
             }
             return ret;
         }
-
         /// <summary>
         /// 废品处理
         /// </summary>

@@ -15,9 +15,9 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {
-    public partial class FrmProductInventoryItemView : FrmMasterBase
+    public partial class FrmSteelRollSliceItemView : FrmMasterBase
     {
-        public FrmProductInventoryItemView()
+        public FrmSteelRollSliceItemView()
         {
             InitializeComponent();
         }
@@ -63,21 +63,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colOrderID"].Value = c.OrderID;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
-        }
-
-        protected override void ShowItemsOnGrid(List<object> items)
-        {
-            base.ShowItemsOnGrid(items);
-            Filter(txtKeyword.Text.Trim());
+            row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion
 
         #region 事件处理程序
-        private void txtKeyword_TextChanged(object sender, EventArgs e)
-        {
-            Filter(txtKeyword.Text.Trim());
-        }
-
         private void mnu_UnReserve_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("是否取消选中的订单备货项?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

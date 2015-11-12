@@ -238,11 +238,11 @@
     <Compile Include="Forms\Inventory\View\FrmProductStackRecordsView.Designer.cs">
       <DependentUpon>FrmProductStackRecordsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\View\FrmProductInventoryItemView.cs">
+    <Compile Include="Forms\Inventory\View\FrmSteelRollSliceItemView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\View\FrmProductInventoryItemView.Designer.cs">
-      <DependentUpon>FrmProductInventoryItemView.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\View\FrmSteelRollSliceItemView.Designer.cs">
+      <DependentUpon>FrmSteelRollSliceItemView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sale\FrmProductInventoryAssign.cs">
       <SubType>Form</SubType>
@@ -737,8 +737,8 @@
     <EmbeddedResource Include="Forms\Inventory\View\FrmProductStackRecordsView.resx">
       <DependentUpon>FrmProductStackRecordsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\View\FrmProductInventoryItemView.resx">
-      <DependentUpon>FrmProductInventoryItemView.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollSliceItemView.resx">
+      <DependentUpon>FrmSteelRollSliceItemView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Print\FrmDeliverySheetPrint.resx">
       <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
