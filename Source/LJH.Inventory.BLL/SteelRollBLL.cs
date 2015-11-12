@@ -164,7 +164,6 @@ namespace LJH.Inventory.BLL
                 AddDate = slice.SliceDate,
                 InventorySheet = "加工入库",
                 InventoryItem = slice.ID,
-                SourceID = sr.ID,
                 Weight = slice.Weight,
                 Length = slice.Length,
                 Count = slice.Count,
@@ -209,7 +208,7 @@ namespace LJH.Inventory.BLL
                 Inventory = 1,
                 CheckCount = 1,
                 Unit = sr.Unit,
-                Price = sr.Price,
+                Price = 0,
                 Operator = operatorName,
                 Checker = checker,
                 Memo = memo

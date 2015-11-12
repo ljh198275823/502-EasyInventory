@@ -189,7 +189,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 SteelRollSlice pi = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
-                FrmInvnetoryCheck frm = new FrmInvnetoryCheck();
+                FrmSteelRollSliceCheck frm = new FrmSteelRollSliceCheck();
                 frm.ProductInventory = pi;
                 DialogResult ret= frm.ShowDialog();
                 if (ret == DialogResult.OK)

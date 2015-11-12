@@ -36,10 +36,10 @@
             this.txtNewWeigth = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtNewLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtChecker = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkChecker = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnClose
@@ -122,15 +122,6 @@
             this.label4.TabIndex = 21;
             this.label4.Text = "长度(米)";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "盘点人";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -156,6 +147,17 @@
             this.txtChecker.Size = new System.Drawing.Size(302, 21);
             this.txtChecker.TabIndex = 2;
             // 
+            // lnkChecker
+            // 
+            this.lnkChecker.AutoSize = true;
+            this.lnkChecker.Location = new System.Drawing.Point(34, 60);
+            this.lnkChecker.Name = "lnkChecker";
+            this.lnkChecker.Size = new System.Drawing.Size(41, 12);
+            this.lnkChecker.TabIndex = 24;
+            this.lnkChecker.TabStop = true;
+            this.lnkChecker.Text = "盘点人";
+            this.lnkChecker.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkChecker_LinkClicked);
+            // 
             // FrmSteelRollCheck
             // 
             this.AcceptButton = this.btnOk;
@@ -163,10 +165,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(404, 177);
+            this.Controls.Add(this.lnkChecker);
             this.Controls.Add(this.txtChecker);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNewLength);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtNewWeigth);
@@ -194,9 +196,9 @@
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtNewWeigth;
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtNewLength;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private GeneralLibrary.WinformControl.DBCTextBox txtChecker;
+        private System.Windows.Forms.LinkLabel lnkChecker;
     }
 }

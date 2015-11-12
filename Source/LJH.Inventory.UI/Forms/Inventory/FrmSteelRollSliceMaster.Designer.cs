@@ -208,49 +208,49 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建库存";
             // 
             // mnu_Check
             // 
             this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Check.Size = new System.Drawing.Size(152, 22);
             this.mnu_Check.Text = "盘点";
             this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
             // 
             // mnu_StackRecords
             // 
             this.mnu_StackRecords.Name = "mnu_StackRecords";
-            this.mnu_StackRecords.Size = new System.Drawing.Size(148, 22);
+            this.mnu_StackRecords.Size = new System.Drawing.Size(152, 22);
             this.mnu_StackRecords.Text = "产品进出明细";
             this.mnu_StackRecords.Click += new System.EventHandler(this.mnu_StackRecords_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // dataGridView1

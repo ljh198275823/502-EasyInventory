@@ -50,7 +50,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
 
                 var outs = from it in pis
                            where it.State == ProductInventoryState.Shipped
-                           group it by new { it.AddDate, it.DeliveryItem };
+                           group it by new {it.DeliveryItem };
                 foreach (var item in outs)
                 {
                     Product p = ps.SingleOrDefault(it => it.ID == item.First().ProductID);
@@ -58,7 +58,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                     if (p != null && w != null)
                     {
                         ProductInventoryRecord record = new ProductInventoryRecord();
-                        record.Date = item.First().AddDate;
+                        record.Date = item.Max (it=>it.AddDate);
                         record.Product = p;
                         record.WareHouse = w;
                         record.SheetNo = item.First().DeliverySheet;

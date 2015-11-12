@@ -12,9 +12,9 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmInvnetoryCheck : Form
+    public partial class FrmSteelRollSliceCheck : Form
     {
-        public FrmInvnetoryCheck()
+        public FrmSteelRollSliceCheck()
         {
             InitializeComponent();
         }
@@ -28,8 +28,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (ProductInventory != null)
             {
-                txtProduct.Text = ProductInventory.Product.Name;
-                txtWarehouse.Text = ProductInventory.WareHouse.Name;
                 txtInventory.DecimalValue = ProductInventory.Count;
                 txtCheckCount.DecimalValue = ProductInventory.Count;
                 txtCheckCount.Focus();
@@ -49,19 +47,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("盘点数量不能为负数");
                 return;
             }
-            InventoryCheckRecord record = new InventoryCheckRecord();
-            record.ID = Guid.NewGuid();
-            record.ProductID = ProductInventory.Product.ID;
-            record.WarehouseID = ProductInventory.WareHouse.ID;
-            record.Unit = ProductInventory.Unit;
-            record.Price = ProductInventory.Product.Cost;
-            record.CheckDateTime = DateTime.Now;
-            record.Inventory = ProductInventory.Count;
-            record.CheckCount = txtCheckCount.DecimalValue;
-            record.Checker = txtChecker.Text;
-            record.Operator = Operator.Current.Name;
-            record.Memo = txtMemo.Text;
-            CommandResult ret = (new InventoryCheckRecordBLL(AppSettings.Current.ConnStr)).Add(record);
+            CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Check(ProductInventory, txtCheckCount.DecimalValue, txtChecker.Text, txtMemo.Text);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message, "失败");

@@ -50,5 +50,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show(ret.Message);
             }
         }
+
+        private void lnkChecker_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forms.General.FrmStaffMaster frm = new Forms.General.FrmStaffMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Staff item = frm.SelectedItem as Staff;
+                txtChecker.Text = item != null ? item.Name : string.Empty;
+            }
+        }
     }
 }
