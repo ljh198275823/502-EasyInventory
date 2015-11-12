@@ -31,6 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.chkNullified = new System.Windows.Forms.CheckBox();
+            this.chkShipped = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.chkIntact = new System.Windows.Forms.CheckBox();
+            this.chkPartial = new System.Windows.Forms.CheckBox();
+            this.chkOnlyTail = new System.Windows.Forms.CheckBox();
+            this.chkRemainless = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
@@ -43,12 +53,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.chkShipped = new System.Windows.Forms.CheckBox();
-            this.chkNullified = new System.Windows.Forms.CheckBox();
-            this.chkRemainless = new System.Windows.Forms.CheckBox();
-            this.chkOnlyTail = new System.Windows.Forms.CheckBox();
-            this.chkPartial = new System.Windows.Forms.CheckBox();
-            this.chkIntact = new System.Windows.Forms.CheckBox();
             this.dtStorage = new System.Windows.Forms.DateTimePicker();
             this.chkStorageDT = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -80,13 +84,12 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFilter
@@ -101,6 +104,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.panel2);
+            this.panel5.Controls.Add(this.label7);
             this.panel5.Controls.Add(this.panel1);
             this.panel5.Controls.Add(this.label6);
             this.panel5.Controls.Add(this.categoryComboBox1);
@@ -115,8 +120,6 @@
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.txtWeight);
             this.panel5.Controls.Add(this.label2);
-            this.panel5.Controls.Add(this.chkShipped);
-            this.panel5.Controls.Add(this.chkNullified);
             this.panel5.Controls.Add(this.dtStorage);
             this.panel5.Controls.Add(this.chkStorageDT);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -124,6 +127,118 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1510, 81);
             this.panel5.TabIndex = 7;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.chkNullified);
+            this.panel2.Controls.Add(this.chkShipped);
+            this.panel2.Location = new System.Drawing.Point(792, 44);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(205, 24);
+            this.panel2.TabIndex = 89;
+            // 
+            // chkNullified
+            // 
+            this.chkNullified.AutoSize = true;
+            this.chkNullified.Location = new System.Drawing.Point(67, 3);
+            this.chkNullified.Name = "chkNullified";
+            this.chkNullified.Size = new System.Drawing.Size(60, 16);
+            this.chkNullified.TabIndex = 50;
+            this.chkNullified.Text = "已作废";
+            this.chkNullified.UseVisualStyleBackColor = true;
+            this.chkNullified.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chkShipped
+            // 
+            this.chkShipped.AutoSize = true;
+            this.chkShipped.Location = new System.Drawing.Point(3, 3);
+            this.chkShipped.Name = "chkShipped";
+            this.chkShipped.Size = new System.Drawing.Size(60, 16);
+            this.chkShipped.TabIndex = 51;
+            this.chkShipped.Text = "已发货";
+            this.chkShipped.UseVisualStyleBackColor = true;
+            this.chkShipped.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(733, 50);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 88;
+            this.label7.Text = "库存状态";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.chkIntact);
+            this.panel1.Controls.Add(this.chkPartial);
+            this.panel1.Controls.Add(this.chkOnlyTail);
+            this.panel1.Controls.Add(this.chkRemainless);
+            this.panel1.Location = new System.Drawing.Point(792, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(205, 24);
+            this.panel1.TabIndex = 87;
+            // 
+            // chkIntact
+            // 
+            this.chkIntact.AutoSize = true;
+            this.chkIntact.Checked = true;
+            this.chkIntact.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIntact.Location = new System.Drawing.Point(3, 3);
+            this.chkIntact.Name = "chkIntact";
+            this.chkIntact.Size = new System.Drawing.Size(48, 16);
+            this.chkIntact.TabIndex = 46;
+            this.chkIntact.Text = "整卷";
+            this.chkIntact.UseVisualStyleBackColor = true;
+            this.chkIntact.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chkPartial
+            // 
+            this.chkPartial.AutoSize = true;
+            this.chkPartial.Checked = true;
+            this.chkPartial.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPartial.Location = new System.Drawing.Point(52, 3);
+            this.chkPartial.Name = "chkPartial";
+            this.chkPartial.Size = new System.Drawing.Size(48, 16);
+            this.chkPartial.TabIndex = 47;
+            this.chkPartial.Text = "余卷";
+            this.chkPartial.UseVisualStyleBackColor = true;
+            this.chkPartial.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chkOnlyTail
+            // 
+            this.chkOnlyTail.AutoSize = true;
+            this.chkOnlyTail.Checked = true;
+            this.chkOnlyTail.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkOnlyTail.Location = new System.Drawing.Point(101, 3);
+            this.chkOnlyTail.Name = "chkOnlyTail";
+            this.chkOnlyTail.Size = new System.Drawing.Size(48, 16);
+            this.chkOnlyTail.TabIndex = 48;
+            this.chkOnlyTail.Text = "尾卷";
+            this.chkOnlyTail.UseVisualStyleBackColor = true;
+            this.chkOnlyTail.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chkRemainless
+            // 
+            this.chkRemainless.AutoSize = true;
+            this.chkRemainless.Location = new System.Drawing.Point(150, 3);
+            this.chkRemainless.Name = "chkRemainless";
+            this.chkRemainless.Size = new System.Drawing.Size(48, 16);
+            this.chkRemainless.TabIndex = 49;
+            this.chkRemainless.Text = "余料";
+            this.chkRemainless.UseVisualStyleBackColor = true;
+            this.chkRemainless.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(733, 18);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 86;
+            this.label6.Text = "物料状态";
             // 
             // categoryComboBox1
             // 
@@ -250,78 +365,6 @@
             this.label2.TabIndex = 52;
             this.label2.Text = "剩余重量";
             // 
-            // chkShipped
-            // 
-            this.chkShipped.AutoSize = true;
-            this.chkShipped.Location = new System.Drawing.Point(792, 48);
-            this.chkShipped.Name = "chkShipped";
-            this.chkShipped.Size = new System.Drawing.Size(60, 16);
-            this.chkShipped.TabIndex = 51;
-            this.chkShipped.Text = "已发货";
-            this.chkShipped.UseVisualStyleBackColor = true;
-            this.chkShipped.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkNullified
-            // 
-            this.chkNullified.AutoSize = true;
-            this.chkNullified.Location = new System.Drawing.Point(856, 48);
-            this.chkNullified.Name = "chkNullified";
-            this.chkNullified.Size = new System.Drawing.Size(60, 16);
-            this.chkNullified.TabIndex = 50;
-            this.chkNullified.Text = "已作废";
-            this.chkNullified.UseVisualStyleBackColor = true;
-            this.chkNullified.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkRemainless
-            // 
-            this.chkRemainless.AutoSize = true;
-            this.chkRemainless.Location = new System.Drawing.Point(150, 3);
-            this.chkRemainless.Name = "chkRemainless";
-            this.chkRemainless.Size = new System.Drawing.Size(48, 16);
-            this.chkRemainless.TabIndex = 49;
-            this.chkRemainless.Text = "余料";
-            this.chkRemainless.UseVisualStyleBackColor = true;
-            this.chkRemainless.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkOnlyTail
-            // 
-            this.chkOnlyTail.AutoSize = true;
-            this.chkOnlyTail.Checked = true;
-            this.chkOnlyTail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOnlyTail.Location = new System.Drawing.Point(101, 3);
-            this.chkOnlyTail.Name = "chkOnlyTail";
-            this.chkOnlyTail.Size = new System.Drawing.Size(48, 16);
-            this.chkOnlyTail.TabIndex = 48;
-            this.chkOnlyTail.Text = "尾卷";
-            this.chkOnlyTail.UseVisualStyleBackColor = true;
-            this.chkOnlyTail.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkPartial
-            // 
-            this.chkPartial.AutoSize = true;
-            this.chkPartial.Checked = true;
-            this.chkPartial.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPartial.Location = new System.Drawing.Point(52, 3);
-            this.chkPartial.Name = "chkPartial";
-            this.chkPartial.Size = new System.Drawing.Size(48, 16);
-            this.chkPartial.TabIndex = 47;
-            this.chkPartial.Text = "余卷";
-            this.chkPartial.UseVisualStyleBackColor = true;
-            this.chkPartial.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkIntact
-            // 
-            this.chkIntact.AutoSize = true;
-            this.chkIntact.Checked = true;
-            this.chkIntact.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIntact.Location = new System.Drawing.Point(3, 3);
-            this.chkIntact.Name = "chkIntact";
-            this.chkIntact.Size = new System.Drawing.Size(48, 16);
-            this.chkIntact.TabIndex = 46;
-            this.chkIntact.Text = "整卷";
-            this.chkIntact.UseVisualStyleBackColor = true;
-            this.chkIntact.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
             // dtStorage
             // 
             this.dtStorage.CustomFormat = "yyyy-MM-dd";
@@ -379,7 +422,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 81);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 20;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1511, 451);
@@ -562,27 +605,6 @@
             this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
             this.cMnu_Export.Text = "导出...";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(733, 18);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
-            this.label6.TabIndex = 86;
-            this.label6.Text = "物料状态";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.chkIntact);
-            this.panel1.Controls.Add(this.chkPartial);
-            this.panel1.Controls.Add(this.chkOnlyTail);
-            this.panel1.Controls.Add(this.chkRemainless);
-            this.panel1.Location = new System.Drawing.Point(792, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(205, 24);
-            this.panel1.TabIndex = 87;
-            // 
             // FrmSteelRollMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -598,10 +620,12 @@
             this.pnlFilter.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -622,8 +646,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_Check;
         private System.Windows.Forms.ToolStripMenuItem mnu_Nullify;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chkShipped;
-        private System.Windows.Forms.CheckBox chkNullified;
         private System.Windows.Forms.CheckBox chkRemainless;
         private System.Windows.Forms.CheckBox chkOnlyTail;
         private System.Windows.Forms.CheckBox chkPartial;
@@ -662,5 +684,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.CheckBox chkNullified;
+        private System.Windows.Forms.CheckBox chkShipped;
+        private System.Windows.Forms.Label label7;
     }
 }

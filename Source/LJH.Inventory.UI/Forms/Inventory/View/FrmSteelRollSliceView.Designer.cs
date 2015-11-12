@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Inventory.View
 {
-    partial class FrmSteelRollSliceItemView
+    partial class FrmSteelRollSliceView
     {
         /// <summary>
         /// Required designer variable.
@@ -30,11 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_UnReserve = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,10 +37,14 @@
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventorySheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPurchaseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliverySheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_UnReserve = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +64,6 @@
             this.colLength,
             this.colCount,
             this.colInventorySheet,
-            this.colPurchaseID,
             this.colOrderID,
             this.colDeliverySheet,
             this.colMemo});
@@ -78,40 +76,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(964, 347);
             this.dataGridView1.TabIndex = 114;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_UnReserve,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 76);
-            // 
-            // mnu_UnReserve
-            // 
-            this.mnu_UnReserve.Name = "mnu_UnReserve";
-            this.mnu_UnReserve.Size = new System.Drawing.Size(148, 22);
-            this.mnu_UnReserve.Text = "取消订单备货";
-            this.mnu_UnReserve.Click += new System.EventHandler(this.mnu_UnReserve_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_Export.Text = "导出...";
             // 
             // colInventoryDate
             // 
@@ -152,27 +116,20 @@
             // 
             // colInventorySheet
             // 
-            this.colInventorySheet.HeaderText = "入库单号";
+            this.colInventorySheet.HeaderText = "入库单";
             this.colInventorySheet.Name = "colInventorySheet";
             this.colInventorySheet.ReadOnly = true;
             this.colInventorySheet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colInventorySheet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colInventorySheet.Visible = false;
-            // 
-            // colPurchaseID
-            // 
-            this.colPurchaseID.HeaderText = "采购单编号";
-            this.colPurchaseID.Name = "colPurchaseID";
-            this.colPurchaseID.ReadOnly = true;
-            this.colPurchaseID.Visible = false;
             // 
             // colOrderID
             // 
-            this.colOrderID.HeaderText = "订单编号";
+            this.colOrderID.HeaderText = "订单";
             this.colOrderID.Name = "colOrderID";
             this.colOrderID.ReadOnly = true;
             this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colOrderID.Visible = false;
             // 
             // colDeliverySheet
             // 
@@ -187,13 +144,47 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Width = 150;
             // 
-            // FrmSteelRollSliceItemView
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_UnReserve,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 76);
+            // 
+            // mnu_UnReserve
+            // 
+            this.mnu_UnReserve.Name = "mnu_UnReserve";
+            this.mnu_UnReserve.Size = new System.Drawing.Size(148, 22);
+            this.mnu_UnReserve.Text = "取消订单备货";
+            this.mnu_UnReserve.Click += new System.EventHandler(this.mnu_UnReserve_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
+            // FrmSteelRollSliceView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 369);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "FrmSteelRollSliceItemView";
+            this.Name = "FrmSteelRollSliceView";
             this.Text = "小件库存明细";
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -218,7 +209,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventorySheet;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliverySheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;

@@ -51,8 +51,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             InventoryCheckRecord record = new InventoryCheckRecord();
             record.ID = Guid.NewGuid();
-            record.ProductID = ProductInventory.ProductID;
-            record.WarehouseID = ProductInventory.WareHouseID;
+            record.ProductID = ProductInventory.Product.ID;
+            record.WarehouseID = ProductInventory.WareHouse.ID;
             record.Unit = ProductInventory.Unit;
             record.Price = ProductInventory.Product.Cost;
             record.CheckDateTime = DateTime.Now;

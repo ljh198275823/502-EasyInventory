@@ -238,11 +238,11 @@
     <Compile Include="Forms\Inventory\View\FrmProductStackRecordsView.Designer.cs">
       <DependentUpon>FrmProductStackRecordsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\View\FrmSteelRollSliceItemView.cs">
+    <Compile Include="Forms\Inventory\View\FrmSteelRollSliceView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\View\FrmSteelRollSliceItemView.Designer.cs">
-      <DependentUpon>FrmSteelRollSliceItemView.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\View\FrmSteelRollSliceView.Designer.cs">
+      <DependentUpon>FrmSteelRollSliceView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sale\FrmProductInventoryAssign.cs">
       <SubType>Form</SubType>
@@ -634,11 +634,11 @@
     <Compile Include="Forms\FrmRoleMaster.designer.cs">
       <DependentUpon>FrmRoleMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmProductInventoryDetail.cs">
+    <Compile Include="Forms\Inventory\FrmSteelRollSliceDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmProductInventoryDetail.Designer.cs">
-      <DependentUpon>FrmProductInventoryDetail.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\FrmSteelRollSliceDetail.Designer.cs">
+      <DependentUpon>FrmSteelRollSliceDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Report\FrmSalesPersonPerformanceReport.cs">
       <SubType>Form</SubType>
@@ -737,8 +737,8 @@
     <EmbeddedResource Include="Forms\Inventory\View\FrmProductStackRecordsView.resx">
       <DependentUpon>FrmProductStackRecordsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollSliceItemView.resx">
-      <DependentUpon>FrmSteelRollSliceItemView.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollSliceView.resx">
+      <DependentUpon>FrmSteelRollSliceView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Print\FrmDeliverySheetPrint.resx">
       <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
@@ -836,8 +836,8 @@
     <EmbeddedResource Include="Forms\General\FrmPriceTermMaster.resx">
       <DependentUpon>FrmPriceTermMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\FrmProductInventoryDetail.resx">
-      <DependentUpon>FrmProductInventoryDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceDetail.resx">
+      <DependentUpon>FrmSteelRollSliceDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceMaster.resx">
       <DependentUpon>FrmSteelRollSliceMaster.cs</DependentUpon>

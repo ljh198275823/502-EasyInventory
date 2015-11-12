@@ -27,7 +27,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 records = (new SteelRollSliceRecordBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             return (from item in records
-                    orderby item.SliceDate ascending
+                    orderby item.SliceDate descending 
                     select (object)item).ToList();
         }
 

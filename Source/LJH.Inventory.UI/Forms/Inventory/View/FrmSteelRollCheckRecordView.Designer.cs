@@ -66,7 +66,7 @@
             this.GridView.ReadOnly = true;
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
-            this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.GridView.Size = new System.Drawing.Size(708, 309);
             this.GridView.TabIndex = 23;
             // 

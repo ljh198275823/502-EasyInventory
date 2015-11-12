@@ -308,11 +308,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public void AddDeliveryItem(SteelRollSlice p)
         {
             List<StackOutItem> sources = GetDeliveryItemsFromGrid();
-            if (!sources.Exists(it => it.ProductID == p.ProductID))
+            if (!sources.Exists(it => it.ProductID == p.Product.ID))
             {
                 StackOutItem item = new StackOutItem();
                 item.ID = Guid.NewGuid();
-                item.ProductID = p.ProductID;
+                item.ProductID = p.Product.ID;
                 item.Unit = p.Unit;
                 item.Price = p.Product != null ? p.Product.Price : 0;
                 item.Count = 0;

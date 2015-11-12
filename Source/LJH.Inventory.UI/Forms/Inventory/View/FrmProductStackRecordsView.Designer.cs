@@ -37,7 +37,6 @@
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,7 +61,6 @@
             this.colDate,
             this.colCategory,
             this.colSpecification,
-            this.colModel,
             this.colLength,
             this.colWeight,
             this.colIn,
@@ -74,7 +72,7 @@
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(972, 358);
+            this.gridView.Size = new System.Drawing.Size(874, 358);
             this.gridView.TabIndex = 27;
             // 
             // contextMenuStrip1
@@ -118,12 +116,6 @@
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.ReadOnly = true;
             // 
-            // colModel
-            // 
-            this.colModel.HeaderText = "加工";
-            this.colModel.Name = "colModel";
-            this.colModel.ReadOnly = true;
-            // 
             // colLength
             // 
             this.colLength.HeaderText = "长度(米)";
@@ -160,7 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(974, 362);
+            this.ClientSize = new System.Drawing.Size(876, 362);
             this.Controls.Add(this.gridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmProductStackRecordsView";
@@ -182,7 +174,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIn;

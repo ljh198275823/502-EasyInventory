@@ -15,9 +15,9 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {
-    public partial class FrmSteelRollSliceItemView : FrmMasterBase
+    public partial class FrmSteelRollSliceView : FrmMasterBase
     {
-        public FrmSteelRollSliceItemView()
+        public FrmSteelRollSliceView()
         {
             InitializeComponent();
         }
@@ -38,7 +38,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 records = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             return (from item in records
-                    orderby item.AddDate ascending
+                    orderby item.AddDate ascending 
                     select (object)item).ToList();
         }
 
@@ -46,8 +46,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         {
             ProductInventoryItem c = item as ProductInventoryItem;
             row.Tag = c;
-            row.Cells["colInventorySheet"].Value = c.InventorySheet;
-            row.Cells["colPurchaseID"].Value = c.PurchaseID;
             if (_Products == null) _Products = new List<Product>();
             Product p = _Products.SingleOrDefault(it => it.ID == c.ProductID);
             if (p == null)
@@ -61,6 +59,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colLength"].Value = c.Length;
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
+            row.Cells["colInventorySheet"].Value = c.InventorySheet;
             row.Cells["colOrderID"].Value = c.OrderID;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
             row.Cells["colMemo"].Value = c.Memo;

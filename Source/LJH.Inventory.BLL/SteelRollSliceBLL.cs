@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class SteelRollSliceBLL 
+    public class SteelRollSliceBLL
     {
         #region 构造函数
         public SteelRollSliceBLL(string repoUri)
@@ -36,15 +36,13 @@ namespace LJH.Inventory.BLL
                     if (items == null) items = new List<SteelRollSlice>();
                     SteelRollSlice srs = new SteelRollSlice();
                     srs.ID = Guid.Empty;
-                    srs.ProductID = g.First().ProductID;
-                    srs.Product = ps.SingleOrDefault(it => it.ID == srs.ProductID);
-                    srs.WareHouseID = g.First().WareHouseID;
-                    srs.WareHouse = ws.SingleOrDefault(it => it.ID == srs.WareHouseID);
+                    srs.Product = ps.SingleOrDefault(it => it.ID == g.First().ProductID);
+                    srs.WareHouse = ws.SingleOrDefault(it => it.ID == g.First().WareHouseID);
                     srs.Unit = g.First().Unit;
-                    srs.Weight = g.First().Weight;
-                    srs.Length = g.First().Length;
                     srs.Reserved = g.Sum(it => it.State == ProductInventoryState.Reserved ? it.Count : 0);
+                    srs.ReservedAmount = g.Sum(it => it.State == ProductInventoryState.Reserved ? (it.Count * it.Price) : 0);
                     srs.Valid = g.Sum(it => it.State == ProductInventoryState.Inventory ? it.Count : 0);
+                    srs.ValidAmount = g.Sum(it => it.State == ProductInventoryState.Inventory ? (it.Count * it.Price) : 0);
                     items.Add(srs);
                 }
             }
@@ -55,21 +53,27 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult CreateInventory(SteelRollSlice info)
+        public CommandResult CreateInventory(SteelRollSlice info, string op, string memo)
         {
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = info.ProductID, WareHouseID = info.WareHouseID };
-            List<SteelRollSlice> items = ProviderFactory.Create<IProvider<SteelRollSlice, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = info.Product.ID, WareHouseID = info.WareHouse.ID };
+            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0) return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点或收货单收货");
             ProductInventoryItem pii = new ProductInventoryItem()
             {
                 ID = Guid.NewGuid(),
-                ProductID = info.ProductID,
-                WareHouseID = info.WareHouseID,
-                Unit = info.Unit,
+                AddDate = DateTime.Now,
+                ProductID = info.Product.ID,
+                WareHouseID = info.WareHouse.ID,
+                Unit = "件",
                 Price = info.Amount / info.Count,
                 Count = info.Count,
-                AddDate = DateTime.Now,
-                InventorySheet = "初始库存"
+                InventorySheet = "初始库存",
+                Weight = info.Product.Weight,
+                Length = info.Product.Length,
+                Model = info.Product.Model,
+                State = ProductInventoryState.Inventory,
+                Operator = op,
+                Memo = memo,
             };
             return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii);
         }
@@ -134,10 +138,20 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult UnReserve(ProductInventoryItem item)
         {
-            ProductInventoryItem clone = item.Clone();
-            item.OrderItem = null;
-            item.OrderID = null;
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(item, clone);
+            if (item.State == ProductInventoryState.Reserved || item.State != ProductInventoryState.WaitShip)
+            {
+                ProductInventoryItem clone = item.Clone();
+                item.OrderItem = null;
+                item.OrderID = null;
+                item.DeliverySheet = null;
+                item.DeliveryItem = null;
+                item.State = ProductInventoryState.Inventory;
+                return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(item, clone);
+            }
+            else
+            {
+                return new CommandResult(ResultCode.Fail, "该项不能取消预定");
+            }
         }
         #endregion
     }

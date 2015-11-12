@@ -38,14 +38,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<SteelRollSlice> items = _ProductInventorys;
             if (items != null && items.Count > 0)
             {
-                if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
+                if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouse.ID == wareHouseComboBox1.SelectedWareHouseID).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification == cmbSpecification.Text).ToList();
                 items = items.Where(it => (chk开平.Checked && it.Product.Model == "开平") ||
                                           (chk开卷.Checked && it.Product.Model == "开卷") ||
                                           (chk开吨.Checked && it.Product.Model == "开吨")).ToList();
                 return (from p in items
-                        orderby p.Product.Name ascending
+                        orderby p.Product.Specification ascending
                         select (object)p).ToList();
             }
             return null;
@@ -66,12 +66,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            mnu_Create.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmProductInventoryDetail frm = new FrmProductInventoryDetail();
+            FrmSteelRollSliceDetail frm = new FrmSteelRollSliceDetail();
             return frm;
         }
 
@@ -106,8 +106,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSpecification"].Value = pi.Product.Specification;
             row.Cells["colModel"].Value = pi.Product.Model;
             row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
-            row.Cells["colWeight"].Value = pi.Weight;
-            row.Cells["colLength"].Value = pi.Length;
+            row.Cells["colWeight"].Value = pi.Product.Weight;
+            row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colReserved"].Value = pi.Reserved.Trim();
             row.Cells["colValid"].Value = pi.Valid.Trim();
             row.Cells["colTotal"].Value = pi.Count.Trim();
@@ -133,8 +133,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 View.FrmProductStackRecordsView frm = new View.FrmProductStackRecordsView();
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.ExcludeModel = "原材料";
-                con.ProductID = srs.ProductID;
-                con.WareHouseID = srs.WareHouseID;
+                con.ProductID = srs.Product.ID;
+                con.WareHouseID = srs.WareHouse.ID;
                 con.States = (int)ProductInventoryState.UnShipped | (int)ProductInventoryState.Shipped;
                 frm.SearchCondition = con;
                 frm.ShowDialog();
@@ -150,10 +150,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.Products = new List<string>();
-                    con.Products.Add(item.ProductID);
-                    con.WareHouseID = item.WareHouseID;
+                    con.Products.Add(item.Product.ID);
+                    con.WareHouseID = item.WareHouse.ID;
                     con.States = (int)ProductInventoryState.Inventory;
-                    View.FrmSteelRollSliceItemView frm = new View.FrmSteelRollSliceItemView();
+                    View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();
                 }
@@ -162,10 +162,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.Products = new List<string>();
-                    con.Products.Add(item.ProductID);
-                    con.WareHouseID = item.WareHouseID;
+                    con.Products.Add(item.Product.ID);
+                    con.WareHouseID = item.WareHouse.ID;
                     con.States = (int)ProductInventoryState.Reserved;
-                    View.FrmSteelRollSliceItemView frm = new View.FrmSteelRollSliceItemView();
+                    View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();
                 }
@@ -174,10 +174,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.Products = new List<string>();
-                    con.Products.Add(item.ProductID);
-                    con.WareHouseID = item.WareHouseID;
+                    con.Products.Add(item.Product.ID);
+                    con.WareHouseID = item.WareHouse.ID;
                     con.States = (int)ProductInventoryState.UnShipped;
-                    View.FrmSteelRollSliceItemView frm = new View.FrmSteelRollSliceItemView();
+                    View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();
                 }
@@ -195,8 +195,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (ret == DialogResult.OK)
                 {
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.ProductID = pi.ProductID;
-                    con.WareHouseID = pi.WareHouseID;
+                    con.ProductID = pi.Product.ID;
+                    con.WareHouseID = pi.WareHouse.ID;
                     List<SteelRollSlice> items = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
                     SteelRollSlice pii = items[0];
                     ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pii);

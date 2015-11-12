@@ -89,7 +89,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colDate"].Value = record.Date.ToString("yyyy-MM-dd");
             row.Cells["colCategory"].Value = record.Product.Category.Name;
             row.Cells["colSpecification"].Value = record.Product.Specification;
-            row.Cells["colModel"].Value = record.Product.Model;
+            //row.Cells["colModel"].Value = record.Product.Model;
             row.Cells["colWeight"].Value = record.Product.Weight;
             row.Cells["colLength"].Value = record.Product.Length;
             row.Cells["colIn"].Value = record.In != 0 ? record.In.Trim().ToString() : string.Empty;

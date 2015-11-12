@@ -147,7 +147,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
                 {
                     ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                     con.PurchaseItem = record.ID;
-                    FrmSteelRollSliceItemView frm = new FrmSteelRollSliceItemView();
+                    FrmSteelRollSliceView frm = new FrmSteelRollSliceView();
                     frm.SearchCondition = con;
                     frm.ShowDialog();
                 }

@@ -104,9 +104,7 @@ namespace LJH.Inventory.BLL
                 p = ps.SingleOrDefault(it => it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
             }
             if (p != null) return p;
-
             p = new Product();
-            p.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
             p.Specification = specification;
             p.CategoryID = categoryID;
             p.Name = p.ID;
@@ -114,11 +112,8 @@ namespace LJH.Inventory.BLL
             p.Model = model;
             p.Length = length;
             p.Weight = weight;
-            if (!string.IsNullOrEmpty(p.ID))
-            {
-                var ret = base.Add(p);
-                if (ret.Result == ResultCode.Successful) return GetByID(p.ID).QueryObject; ;
-            }
+            var ret = Add(p);
+            if (ret.Result == ResultCode.Successful) return p;
             return null;
         }
         #endregion

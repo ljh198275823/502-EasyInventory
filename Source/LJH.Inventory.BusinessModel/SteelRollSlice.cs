@@ -19,29 +19,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid ID { get; set; }
         /// <summary>
-        /// 获取或设置仓库ID
-        /// </summary>
-        public string WareHouseID { get; set; }
-        /// <summary>
         /// 获取或设置仓库
         /// </summary>
         public WareHouse WareHouse { get; set; }
         /// <summary>
-        /// 获取或设置商品ID
-        /// </summary>
-        public string ProductID { get; set; }
-        /// <summary>
         /// 获取或设置商品信息
         /// </summary>
         public Product Product { get; set; }
-        /// <summary>
-        /// 获取或设置库存单个重量
-        /// </summary>
-        public decimal? Weight { get; set; }
-        /// <summary>
-        /// 获取或设置库存单个长度
-        /// </summary>
-        public decimal? Length { get; set; }
         /// <summary>
         /// 获取或设置库存数量
         /// </summary>

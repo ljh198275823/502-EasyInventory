@@ -15,7 +15,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {
-    public partial class FrmSteelRollCheckRecordView : FrmMasterBase 
+    public partial class FrmSteelRollCheckRecordView : FrmMasterBase
     {
         public FrmSteelRollCheckRecordView()
         {
@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 records = (new InventoryCheckRecordBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             return (from item in records
-                    orderby item.CheckDateTime ascending
+                    orderby item.CheckDateTime descending
                     select (object)item).ToList();
         }
 
