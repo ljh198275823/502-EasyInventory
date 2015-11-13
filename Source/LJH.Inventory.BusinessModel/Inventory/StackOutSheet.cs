@@ -48,11 +48,23 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置联系人手机号
         /// </summary>
-        public string LinkerPhoneCall { get; set; }
+        public string LinkerCall { get; set; }
         /// <summary>
         /// 获取或设置送货地址
         /// </summary>
         public string Address { get; set; }
+        /// <summary>
+        /// 获取或设置送货人
+        /// </summary>
+        public string Driver { get; set; }
+        /// <summary>
+        /// 获取或设置送货人电话
+        /// </summary>
+        public string DriverCall { get; set; }
+        /// <summary>
+        /// 获取或设置送货车牌号
+        /// </summary>
+        public string CarPlate { get; set; }
         /// <summary>
         /// 获取或设置是否含税
         /// </summary>
@@ -61,6 +73,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置送货单的折扣额
         /// </summary>
         public decimal Discount { get; set; }
+        /// <summary>
+        /// 获取或设置送货单最迟付款期限
+        /// </summary>
+        public DateTime? DeadlineDate { get; set; }
         /// <summary>
         /// 获取或设置销售人员
         /// </summary>

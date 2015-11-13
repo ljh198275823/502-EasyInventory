@@ -39,6 +39,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string UserPosition { get; set; }
         /// <summary>
+        /// 获取或设置电话号码
+        /// </summary>
+        public string Phone { get; set; }
+        /// <summary>
         /// 获取或设置入职日期
         /// </summary>
         public DateTime? HireDate { get; set; }

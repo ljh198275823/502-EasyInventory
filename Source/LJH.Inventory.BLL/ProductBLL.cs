@@ -89,9 +89,9 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public Product Create(string categoryID, string specification)
+        public Product Create(string categoryID, string specification, string model)
         {
-            return Create(categoryID, specification, null, null, null);
+            return Create(categoryID, specification, model, null, null);
         }
 
         public Product Create(string categoryID, string specification, string model, decimal? weight, decimal? length)

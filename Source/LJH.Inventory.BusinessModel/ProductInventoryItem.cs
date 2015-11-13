@@ -28,7 +28,6 @@ namespace LJH.Inventory.BusinessModel
         public string ProductID { get; set; }
 
         public string Model { get; set; }
-
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>

@@ -322,11 +322,11 @@
     <Compile Include="Forms\Sale\FrmCustomerTypeMaster.Designer.cs">
       <DependentUpon>FrmCustomerTypeMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmDeliverySheetDetail.cs">
+    <Compile Include="Forms\Inventory\FrmStackOutSheetDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmDeliverySheetDetail.designer.cs">
-      <DependentUpon>FrmDeliverySheetDetail.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\FrmStackOutSheetDetail.designer.cs">
+      <DependentUpon>FrmStackOutSheetDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\FrmStackOutSheetMaster.cs">
       <SubType>Form</SubType>
@@ -785,8 +785,8 @@
     <EmbeddedResource Include="Forms\Sale\FrmCustomerTypeMaster.resx">
       <DependentUpon>FrmCustomerTypeMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\FrmDeliverySheetDetail.resx">
-      <DependentUpon>FrmDeliverySheetDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\FrmStackOutSheetDetail.resx">
+      <DependentUpon>FrmStackOutSheetDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmStackOutSheetMaster.resx">
       <DependentUpon>FrmStackOutSheetMaster.cs</DependentUpon>

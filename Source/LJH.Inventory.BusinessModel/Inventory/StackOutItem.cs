@@ -42,6 +42,14 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Unit { get; set; }
         /// <summary>
+        /// 获取或设置重量
+        /// </summary>
+        public decimal? Weight { get; set; }
+        /// <summary>
+        /// 获取或设置长度
+        /// </summary>
+        public decimal? Length { get; set; }
+        /// <summary>
         /// 获取或设置单价
         /// </summary>
         public decimal Price { get; set; }
@@ -54,9 +62,18 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
+        /// 获取或设置库存项, 用于直接指定某件库存出货
+        /// </summary>
+        public Guid? ProductInventoryItem { get; set; }
+        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
         #endregion
+
+        public decimal CalAmount()
+        {
+            return Weight.HasValue ? Weight.Value * Price * Count : Count * Price;  //如果有重量,即单价为重量计价
+        }
     }
 }

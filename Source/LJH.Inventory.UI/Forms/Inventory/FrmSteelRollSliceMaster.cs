@@ -86,7 +86,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SearchCondition == null)
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.ExcludeModel = "原材料"; //排除原材料库存项
                 con.States = (int)ProductInventoryState.UnShipped;
                 _ProductInventorys = bll.GetItems(con).QueryObjects;
             }
@@ -128,7 +127,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 SteelRollSlice srs = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
                 View.FrmProductStackRecordsView frm = new View.FrmProductStackRecordsView();
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.ExcludeModel = "原材料";
                 con.ProductID = srs.Product.ID;
                 con.WareHouseID = srs.WareHouse.ID;
                 con.States = (int)ProductInventoryState.UnShipped | (int)ProductInventoryState.Shipped;

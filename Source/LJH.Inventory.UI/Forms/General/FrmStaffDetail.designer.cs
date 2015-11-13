@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtRole = new System.Windows.Forms.TextBox();
+            this.lnkRole = new System.Windows.Forms.LinkLabel();
+            this.dtHireDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.btnChangePwd = new System.Windows.Forms.Button();
             this.txtPassword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtOperatorID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -56,9 +59,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.lnkRole = new System.Windows.Forms.LinkLabel();
-            this.txtRole = new System.Windows.Forms.TextBox();
-            this.dtHireDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
+            this.txtPhone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -90,6 +92,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtPhone);
+            this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.txtRole);
             this.tabPage1.Controls.Add(this.lnkRole);
             this.tabPage1.Controls.Add(this.dtHireDate);
@@ -121,6 +125,34 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtRole
+            // 
+            this.txtRole.Location = new System.Drawing.Point(61, 169);
+            this.txtRole.Name = "txtRole";
+            this.txtRole.ReadOnly = true;
+            this.txtRole.Size = new System.Drawing.Size(121, 21);
+            this.txtRole.TabIndex = 80;
+            this.txtRole.DoubleClick += new System.EventHandler(this.txtRole_DoubleClick);
+            // 
+            // lnkRole
+            // 
+            this.lnkRole.AutoSize = true;
+            this.lnkRole.Location = new System.Drawing.Point(24, 172);
+            this.lnkRole.Name = "lnkRole";
+            this.lnkRole.Size = new System.Drawing.Size(29, 12);
+            this.lnkRole.TabIndex = 79;
+            this.lnkRole.TabStop = true;
+            this.lnkRole.Text = "角色";
+            this.lnkRole.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRole_LinkClicked);
+            // 
+            // dtHireDate
+            // 
+            this.dtHireDate.CustomFormat = "yyyy-MM-dd";
+            this.dtHireDate.Location = new System.Drawing.Point(59, 107);
+            this.dtHireDate.Name = "dtHireDate";
+            this.dtHireDate.Size = new System.Drawing.Size(121, 21);
+            this.dtHireDate.TabIndex = 78;
             // 
             // btnChangePwd
             // 
@@ -365,33 +397,24 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "姓名";
             // 
-            // lnkRole
+            // txtPhone
             // 
-            this.lnkRole.AutoSize = true;
-            this.lnkRole.Location = new System.Drawing.Point(24, 172);
-            this.lnkRole.Name = "lnkRole";
-            this.lnkRole.Size = new System.Drawing.Size(29, 12);
-            this.lnkRole.TabIndex = 79;
-            this.lnkRole.TabStop = true;
-            this.lnkRole.Text = "角色";
-            this.lnkRole.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRole_LinkClicked);
+            this.txtPhone.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPhone.Location = new System.Drawing.Point(227, 74);
+            this.txtPhone.MaxLength = 20;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(121, 21);
+            this.txtPhone.TabIndex = 81;
             // 
-            // txtRole
+            // label2
             // 
-            this.txtRole.Location = new System.Drawing.Point(61, 169);
-            this.txtRole.Name = "txtRole";
-            this.txtRole.ReadOnly = true;
-            this.txtRole.Size = new System.Drawing.Size(121, 21);
-            this.txtRole.TabIndex = 80;
-            this.txtRole.DoubleClick += new System.EventHandler(this.txtRole_DoubleClick);
-            // 
-            // dtHireDate
-            // 
-            this.dtHireDate.CustomFormat = "yyyy-MM-dd";
-            this.dtHireDate.Location = new System.Drawing.Point(59, 107);
-            this.dtHireDate.Name = "dtHireDate";
-            this.dtHireDate.Size = new System.Drawing.Size(121, 21);
-            this.dtHireDate.TabIndex = 78;
+            this.label2.AutoSize = true;
+            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label2.Location = new System.Drawing.Point(194, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 82;
+            this.label2.Text = "电话";
             // 
             // FrmStaffDetail
             // 
@@ -448,5 +471,7 @@
         private Controls.NullableDateTimePicker dtHireDate;
         private System.Windows.Forms.TextBox txtRole;
         private System.Windows.Forms.LinkLabel lnkRole;
+        private GeneralLibrary.WinformControl.DBCTextBox txtPhone;
+        private System.Windows.Forms.Label label2;
     }
 }

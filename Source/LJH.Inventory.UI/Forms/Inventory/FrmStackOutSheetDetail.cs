@@ -12,10 +12,10 @@ using LJH.Inventory.UI.Forms.Sale.View;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmDeliverySheetDetail : FrmSheetDetailBase
+    public partial class FrmStackOutSheetDetail : FrmSheetDetailBase
     {
         #region 构造函数
-        public FrmDeliverySheetDetail()
+        public FrmStackOutSheetDetail()
         {
             InitializeComponent();
         }
@@ -43,13 +43,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ItemsGrid.Rows.Clear();
             if (items != null)
             {
-                List<string> pids = items.Select(it => it.ProductID).ToList();
-                List<Product> ps = (new ProductBLL(AppSettings.Current.ConnStr)).GetItems(new ProductSearchCondition() { ProductIDS = pids }).QueryObjects;
                 foreach (StackOutItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
-                    Product p = ps.SingleOrDefault(it => it.ID == item.ProductID);
-                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item, p);
+                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
@@ -57,15 +54,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, StackOutItem item, Product p)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, StackOutItem item)
         {
             row.Tag = item;
+            Product p=new ProductBLL(AppSettings.Current.ConnStr).GetByID (item.ProductID ).QueryObject ;
+            ProductInventoryItem pi=null;
+            if(item.ProductInventoryItem .HasValue )pi=new ProductInventoryItemBLL (AppSettings .Current .ConnStr ).GetByID (item.ProductInventoryItem .Value ).QueryObject ;
             row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
-            row.Cells["colProductID"].Value = item.ProductID;
-            row.Cells["colProductName"].Value = p != null ? p.Name : string.Empty;
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
-            row.Cells["colUnit"].Value = item.Unit;
+            row.Cells["colModel"].Value =  p.Model;
+            row.Cells["colLength"].Value = item.Length;
+            row.Cells["colWeight"].Value = item.Weight;
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count;
             row.Cells["colTotal"].Value = item.Amount;
@@ -109,8 +109,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             dtSheetDate.Value = item.SheetDate;
             this.txtLinker.Text = item.Linker;
-            this.txtLinkerPhone.Text = item.LinkerPhoneCall;
+            this.txtLinkerPhone.Text = item.LinkerCall;
             this.txtAddress.Text = item.Address;
+            txtDriver.Text = item.Driver;
+            txtDriverCall.Text = item.DriverCall;
+            txtCarPlate.Text = item.CarPlate;
+            chkDeadline.Checked = item.DeadlineDate.HasValue;
+            dtDeadline.Value = item.DeadlineDate.HasValue ? item.DeadlineDate.Value : DateTime.Today;
+            rdWithoutTax.Checked = item.WithTax == false;
+            rdWithTax.Checked = item.WithTax == true;
             this.txtMemo.Text = item.Memo;
             ShowDeliveryItemsOnGrid(item.Items);
             ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -131,6 +138,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 MessageBox.Show("没有选择客户");
                 txtCustomer.Focus();
+                return false;
+            }
+            if (!rdWithTax.Checked && !rdWithoutTax.Checked)
+            {
+                MessageBox.Show("请选择是否是含税价");
+                rdWithTax.Focus();
                 return false;
             }
             if (ItemsGrid.Rows.Count == 0)
@@ -193,8 +206,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
             sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
             sheet.SheetDate = dtSheetDate.Value;
             sheet.Linker = txtLinker.Text.Trim();
-            sheet.LinkerPhoneCall = txtLinkerPhone.Text.Trim();
+            sheet.LinkerCall = txtLinkerPhone.Text.Trim();
             sheet.Address = txtAddress.Text.Trim();
+            sheet.DriverCall = txtDriverCall.Text;
+            sheet.Driver = txtDriver.Text;
+            sheet.CarPlate = txtCarPlate.Text;
+            if (chkDeadline.Checked)
+            {
+                sheet.DeadlineDate = dtDeadline.Value;
+            }
+            else
+            {
+                sheet.DeadlineDate = null;
+            }
+            if (rdWithTax.Checked) sheet.WithTax = true;
+            if (rdWithoutTax.Checked) sheet.WithTax = false;
             sheet.Memo = txtMemo.Text;
             sheet.Items = new List<StackOutItem>();
             foreach (DataGridViewRow row in ItemsGrid.Rows)
@@ -313,10 +339,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 StackOutItem item = new StackOutItem();
                 item.ID = Guid.NewGuid();
                 item.ProductID = p.Product.ID;
-                item.Unit = p.Unit;
+                item.Length = p.Product.Length;
+                item.Weight = p.Product.Weight;
+                item.Unit = p.Product.Unit;
                 item.Price = p.Product != null ? p.Product.Price : 0;
                 item.Count = 0;
-                item.Amount = item.Price * item.Count;
                 sources.Add(item);
             }
             ShowDeliveryItemsOnGrid(sources);
@@ -385,17 +412,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (row.Tag != null)
             {
                 StackOutItem item = row.Tag as StackOutItem;
-                if (col.Name == "colPrice")
-                {
-                    decimal price;
-                    if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out price))
-                    {
-                        if (price < 0) price = 0;
-                        item.Price = price;
-                        item.Amount = price * item.Count;
-                        row.Cells[e.ColumnIndex].Value = price;
-                    }
-                }
                 if (col.Name == "colTotal")
                 {
                     decimal amount;
@@ -406,18 +422,48 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         row.Cells[e.ColumnIndex].Value = amount;
                     }
                 }
-                else if (col.Name == "colCount")
+                else
                 {
-                    int count;
-                    if (int.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out count))
+                    if (col.Name == "colPrice")
                     {
-                        if (count < 0) count = 0;
-                        item.Count = count;
-                        item.Amount = count * item.Price;
-                        row.Cells[e.ColumnIndex].Value = count;
+                        decimal price;
+                        if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out price))
+                        {
+                            if (price < 0) price = 0;
+                            item.Price = price;
+                            row.Cells[e.ColumnIndex].Value = price;
+                        }
                     }
+                    else if (col.Name == "colCount")
+                    {
+                        int count;
+                        if (int.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out count))
+                        {
+                            if (count < 0) count = 0;
+                            item.Count = count;
+                            row.Cells[e.ColumnIndex].Value = count;
+                        }
+                    }
+                    else if (col.Name == "colWeight")
+                    {
+                        decimal weight;
+                        if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out weight))
+                        {
+                            if (weight <= 0)
+                            {
+                                weight = 0;
+                                item.Weight = null;
+                            }
+                            else
+                            {
+                                item.Weight = weight;
+                            }
+                            row.Cells[e.ColumnIndex].Value = weight;
+                        }
+                    }
+                    item.Amount = item.CalAmount();
+                    row.Cells["colTotal"].Value = item.Amount;
                 }
-                row.Cells["colTotal"].Value = item.Amount;
                 ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = GetTotalAmount();
             }
         }
@@ -519,12 +565,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (cmbSheetType.SelectedIndex == 1)
             {
                 btn_AddItem.Visible = true;
-                mnu_AddOrderItem.Visible = false;
+                //mnu_AddOrderItem.Visible = false;
             }
             else
             {
                 btn_AddItem.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
-                mnu_AddOrderItem.Visible = true;
+                //mnu_AddOrderItem.Visible = true;
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmStaffMaster frm = new FrmStaffMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Staff s = frm.SelectedItem as Staff;
+                txtDriver.Text = s.Name;
+                txtDriverCall.Text = s.Phone;
             }
         }
         #endregion

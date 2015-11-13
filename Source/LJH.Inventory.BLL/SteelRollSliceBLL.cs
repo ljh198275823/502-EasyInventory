@@ -143,9 +143,15 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
+        public QueryResult<SteelRollSlice> GetByID(string productID, string wareHouseID)
+        {
+            return null;
+        }
+
         public QueryResultList<SteelRollSlice> GetItems(SearchCondition con)
         {
             List<SteelRollSlice> items = null;
+            if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).ExcludeModel = MODEL;  //排除原材料库存项
             QueryResultList<ProductInventoryItem> ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
             {

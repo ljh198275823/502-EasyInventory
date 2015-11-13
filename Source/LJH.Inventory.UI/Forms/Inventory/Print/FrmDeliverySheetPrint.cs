@@ -42,7 +42,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             CompanyInfo customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(sheet.CustomerID).QueryObject;
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Customer", customer != null ? customer.Name : sheet.CustomerID));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Linker", sheet.Linker));
-            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("LinkerPhone", sheet.LinkerPhoneCall));
+            this.reportViewer1.LocalReport.SetParameters(new ReportParameter("LinkerPhone", sheet.LinkerCall));
             this.reportViewer1.LocalReport.SetParameters(new ReportParameter("Address", sheet.Address));
             StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
             con.SheetNo = new List<string>();

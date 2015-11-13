@@ -37,25 +37,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private List<object> FilterData()
         {
             List<StackOutSheet> items = _Sheets;
-            if (this.customerTree1.SelectedNode != null)
-            {
-                List<CompanyInfo> pcs = null;
-                pcs = this.customerTree1.GetCompanyofNode(this.customerTree1.SelectedNode);
-                if (pcs != null && pcs.Count > 0)
-                {
-                    items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
-                }
-                else
-                {
-                    items = null;
-                }
-            }
             if (items != null && items.Count > 0)
             {
+                if (this.customerTree1.SelectedNode != null)
+                {
+                    List<CompanyInfo> pcs = null;
+                    pcs = this.customerTree1.GetCompanyofNode(this.customerTree1.SelectedNode);
+                    if (pcs != null && pcs.Count > 0)
+                    {
+                        items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
+                    }
+                    else
+                    {
+                        items = null;
+                    }
+                }
+                if (chkSheetDate.Checked) items = items.Where(it => it.SheetDate.Date == dtSheetDate.Value.Date).ToList();
                 items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
                                         (item.State == SheetState.Approved && chkApproved.Checked) ||
                                         (item.State == SheetState.Shipped && chkShipped.Checked) ||
                                         (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+                items = items.Where(item => (chkWithTax.Checked && item.WithTax) ||
+                                            (chkWithoutTax.Checked && !item.WithTax)).ToList();
             }
             List<object> objs = null;
             if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
@@ -79,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmDeliverySheetDetail frm = new FrmDeliverySheetDetail();
+            FrmStackOutSheetDetail frm = new FrmStackOutSheetDetail();
             if (customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
             return frm;
         }
@@ -89,7 +92,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SearchCondition == null)
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
-                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
+                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
                 _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
@@ -104,17 +107,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             StackOutSheet sheet = item as StackOutSheet;
             row.Tag = sheet;
+            row.Cells["colSheetDate"].Value = sheet.SheetDate.ToString("yyyy年MM月dd日");
             row.Cells["colSheetNo"].Value = sheet.ID;
-            row.Cells["colClass"].Value = sheet.DocumentType;
             CompanyInfo customer = customerTree1.GetCustomer(sheet.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
             WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;
             row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
+            row.Cells["colWithTax"].Value = sheet.WithTax;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
             row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? sheet.LastActiveDate.ToString("yyyy-MM-dd") : null;
             row.Cells["colLinker"].Value = sheet.Linker;
-            row.Cells["colTelphone"].Value = sheet.LinkerPhoneCall;
+            row.Cells["colTelphone"].Value = sheet.LinkerCall;
             row.Cells["colAddress"].Value = sheet.Address;
+            row.Cells["colDriver"].Value = sheet.Driver;
+            row.Cells["colDriverCall"].Value = sheet.DriverCall;
+            row.Cells["colCarPlate"].Value = sheet.CarPlate;
             row.Cells["colMemo"].Value = sheet.Memo;
             if (sheet.State == SheetState.Canceled)
             {
@@ -129,26 +136,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             MessageBox.Show("不能删除送货单,可以将送货单作废", "删除失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return false;
         }
-
-        protected override void ShowItemsOnGrid(List<object> items)
-        {
-            base.ShowItemsOnGrid(items);
-            Filter(txtKeyword.Text.Trim());
-        }
         #endregion
 
         #region 事件处理程序
-        private void customerTree1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void FreshData_Clicked(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();
         }
 
-        private void txtKeyword_TextChanged(object sender, EventArgs e)
-        {
-            FreshData();
-        }
-
-        private void chkState_CheckedChanged(object sender, EventArgs e)
+        private void FreshData_Clicked(object sender, EventArgs e)
         {
             FreshData();
         }

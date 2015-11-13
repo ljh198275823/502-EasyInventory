@@ -113,6 +113,7 @@ namespace LJH.Inventory.UI.Forms.General
             rdFemale.Checked = staff.Sex == "女";
             if (staff.HireDate != null) dtHireDate.Value = staff.HireDate.Value;
             rdResign.Checked = staff.Resigned != null && staff.Resigned.Value;
+            txtPhone.Text = staff.Phone;
             List<Operator> opts = (new OperatorBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             Operator opt = opts.FirstOrDefault(item => item.StaffID == staff.ID);
             if (opt != null)
@@ -182,6 +183,7 @@ namespace LJH.Inventory.UI.Forms.General
             info.DepartmentID = Department != null ? Department.ID : null;
             info.Sex = rdMale.Checked ? "男" : "女";
             info.UserPosition = txtUserPosition.Text;
+            info.Phone = txtPhone.Text;
             if (!dtHireDate.IsNull)
             {
                 info.HireDate = dtHireDate.Value.Date;

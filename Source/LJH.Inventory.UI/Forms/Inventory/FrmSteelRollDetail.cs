@@ -122,7 +122,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 item = new SteelRoll();
                 item.ID = Guid.NewGuid();
             }
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Text).Trim());
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Text).Trim(), "原材料");
             if (p == null) throw new Exception("创建相关产品信息失败");
             item.Product = p;
             item.ProductID = p.ID;
