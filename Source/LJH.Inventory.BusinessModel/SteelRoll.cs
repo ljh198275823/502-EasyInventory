@@ -7,7 +7,7 @@ namespace LJH.Inventory.BusinessModel
 {
     public class SteelRoll
     {
-          #region 构造函数
+        #region 构造函数
         public SteelRoll()
         {
         }
@@ -31,8 +31,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置商品信息
         /// </summary>
         public Product Product { get; set; }
-
-        public string Model { get; set; }
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
@@ -132,22 +130,19 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (Model == "原材料")
-                {
-                    if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "无余料";
-                    else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
-                    else if (OriginalLength > Length) return "余卷";
-                    return "整卷";
-                }
+                if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "无余料";
+                else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
+                else if (OriginalLength > Length) return "余卷";
+                return "整卷";
                 return string.Empty;
             }
         }
         #endregion
 
         #region 公共方法
-        public SteelRoll  Clone()
+        public SteelRoll Clone()
         {
-            return this.MemberwiseClone() as SteelRoll ;
+            return this.MemberwiseClone() as SteelRoll;
         }
         #endregion
     }

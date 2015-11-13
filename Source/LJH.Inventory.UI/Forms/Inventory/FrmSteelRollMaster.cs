@@ -116,9 +116,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var bll = new SteelRollBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.Model = "原材料";
-                _SteelRolls = bll.GetItems(con).QueryObjects;
+                _SteelRolls = bll.GetItems(null).QueryObjects;
             }
             else
             {

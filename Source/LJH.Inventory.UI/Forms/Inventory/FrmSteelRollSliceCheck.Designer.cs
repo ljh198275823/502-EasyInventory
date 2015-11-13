@@ -77,10 +77,9 @@
             this.txtChecker.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtChecker.Location = new System.Drawing.Point(91, 83);
             this.txtChecker.Name = "txtChecker";
-            this.txtChecker.ReadOnly = true;
+            this.txtChecker.ReadOnly = false;
             this.txtChecker.Size = new System.Drawing.Size(239, 21);
             this.txtChecker.TabIndex = 1;
-            this.txtChecker.DoubleClick += new System.EventHandler(this.txtChecker_DoubleClick);
             // 
             // txtInventory
             // 

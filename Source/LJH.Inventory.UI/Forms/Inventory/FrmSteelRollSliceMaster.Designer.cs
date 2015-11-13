@@ -60,6 +60,7 @@
             this.colValid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colReserved = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.mnu_CheckView = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -98,7 +99,7 @@
             this.chk开卷.AutoSize = true;
             this.chk开卷.Checked = true;
             this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开卷.Location = new System.Drawing.Point(574, 12);
+            this.chk开卷.Location = new System.Drawing.Point(628, 12);
             this.chk开卷.Name = "chk开卷";
             this.chk开卷.Size = new System.Drawing.Size(48, 16);
             this.chk开卷.TabIndex = 85;
@@ -124,7 +125,7 @@
             this.chk开平.AutoSize = true;
             this.chk开平.Checked = true;
             this.chk开平.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开平.Location = new System.Drawing.Point(629, 12);
+            this.chk开平.Location = new System.Drawing.Point(574, 12);
             this.chk开平.Name = "chk开平";
             this.chk开平.Size = new System.Drawing.Size(48, 16);
             this.chk开平.TabIndex = 83;
@@ -203,12 +204,13 @@
             this.cMnu_Fresh,
             this.cMnu_Add,
             this.mnu_Check,
+            this.mnu_CheckView,
             this.mnu_StackRecords,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 186);
             // 
             // cMnu_Fresh
             // 
@@ -234,6 +236,7 @@
             this.mnu_StackRecords.Name = "mnu_StackRecords";
             this.mnu_StackRecords.Size = new System.Drawing.Size(152, 22);
             this.mnu_StackRecords.Text = "产品进出明细";
+            this.mnu_StackRecords.Visible = false;
             this.mnu_StackRecords.Click += new System.EventHandler(this.mnu_StackRecords_Click);
             // 
             // toolStripSeparator3
@@ -349,6 +352,13 @@
             this.colTotal.ReadOnly = true;
             this.colTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // mnu_CheckView
+            // 
+            this.mnu_CheckView.Name = "mnu_CheckView";
+            this.mnu_CheckView.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CheckView.Text = "查看盘点记录";
+            this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
+            // 
             // FrmSteelRollSliceMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -404,5 +414,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colValid;
         private System.Windows.Forms.DataGridViewLinkColumn colReserved;
         private System.Windows.Forms.DataGridViewLinkColumn colTotal;
+        private System.Windows.Forms.ToolStripMenuItem mnu_CheckView;
     }
 }

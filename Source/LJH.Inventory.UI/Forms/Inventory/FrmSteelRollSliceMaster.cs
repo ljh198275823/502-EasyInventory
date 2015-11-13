@@ -101,6 +101,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             SteelRollSlice pi = item as SteelRollSlice;
+            row.Tag = pi;
             row.Cells["colImage"].Value = Properties.Resources.inventory;
             row.Cells["colCategory"].Value = pi.Product.Category == null ? pi.Product.CategoryID : pi.Product.Category.Name;
             row.Cells["colSpecification"].Value = pi.Product.Specification;
@@ -111,11 +112,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colReserved"].Value = pi.Reserved.Trim();
             row.Cells["colValid"].Value = pi.Valid.Trim();
             row.Cells["colTotal"].Value = pi.Count.Trim();
-            if (_ProductInventorys == null || !_ProductInventorys.Exists(it => it.ID == pi.ID))
-            {
-                if (_ProductInventorys == null) _ProductInventorys = new List<SteelRollSlice>();
-                _ProductInventorys.Add(pi);
-            }
         }
         #endregion
 
@@ -203,6 +199,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
             }
         }
+
+        private void mnu_CheckView_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                SteelRollSlice pi = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
+                InventoryCheckRecordSearchCondition con = new InventoryCheckRecordSearchCondition();
+                con.ProductID = pi.Product.ID;
+                con.WareHouseID = pi.WareHouse.ID;
+                View.FrmSteelRollSliceCheckRecordView frm = new View.FrmSteelRollSliceCheckRecordView();
+                frm.SearchCondition = con;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
+            }
+        }
         #endregion
+
+       
     }
 }

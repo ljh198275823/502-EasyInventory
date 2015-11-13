@@ -73,11 +73,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtChecker.Text = item != null ? item.Name : string.Empty;
             }
         }
-
-        private void txtChecker_DoubleClick(object sender, EventArgs e)
-        {
-            txtChecker.Text = string.Empty;
-        }
         #endregion
     }
 }

@@ -19,6 +19,7 @@ namespace LJH.Inventory.BLL
         #endregion
 
         private string RepoUri = null;
+        private const string MODEL = "原材料";
 
         #region 私有方法
         private void 盘盈(InventoryCheckRecord record, string model, IUnitWork unitWork)
@@ -69,10 +70,10 @@ namespace LJH.Inventory.BLL
             }
 
             decimal assign = record.Inventory - record.CheckCount;
-            assign -= Assign(assign, ProductInventoryState.Shipped, record.ID, inventoryOutType, inventoryItems, addingItems);
-            if (assign > 0)
+            assign -= Assign(record, assign, inventoryOutType, inventoryItems, addingItems);
+            if (assign > 0) //如果在库的不足以全部扣除，则再从已经预定和待出货的里面扣除
             {
-                if (inventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式将未指定订单项的库存排序
+                if (inventoryOutType == InventoryOutType.FIFO)
                 {
                     items = from item in inventoryItems
                             where item.State == ProductInventoryState.Reserved || item.State == ProductInventoryState.WaitShip
@@ -86,7 +87,7 @@ namespace LJH.Inventory.BLL
                             orderby item.AddDate descending
                             select item;
                 }
-                assign -= Assign(assign, ProductInventoryState.Shipped, record.ID, inventoryOutType, inventoryItems, addingItems);
+                assign -= Assign(record, assign, inventoryOutType, inventoryItems, addingItems);
             }
             if (assign == 0)
             {
@@ -107,7 +108,7 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        private decimal Assign(decimal assign, ProductInventoryState state, Guid itemID, InventoryOutType inventoryOutType, IEnumerable<ProductInventoryItem> inventoryItems, List<ProductInventoryItem> addingItems)
+        private decimal Assign(InventoryCheckRecord record, decimal assign, InventoryOutType inventoryOutType, IEnumerable<ProductInventoryItem> inventoryItems, List<ProductInventoryItem> addingItems)
         {
             decimal ret = assign;
             foreach (ProductInventoryItem item in inventoryItems)
@@ -118,22 +119,21 @@ namespace LJH.Inventory.BLL
                     {
                         ProductInventoryItem pii = item.Clone();
                         pii.ID = Guid.NewGuid();
-                        pii.SourceID = item.ID;
-                        pii.DeliverySheet = "盘亏";
-                        pii.DeliveryItem = itemID;
+                        pii.SourceID = item.ID;  //指定之前的记录为源记录
                         pii.Count = assign;
-                        pii.State = state;
+                        pii.DeliverySheet = "盘亏";
+                        pii.DeliveryItem = record.ID;
+                        pii.State = ProductInventoryState.Shipped;
                         addingItems.Add(pii);
-                        item.Count -= assign;
+                        item.Count -= assign; //源记录中减除如干数
                         assign = 0;
                         break;
                     }
                     else
                     {
                         item.DeliverySheet = "盘亏";
-                        item.DeliveryItem = itemID;
-                        item.State = state;
-
+                        item.DeliveryItem = record.ID;
+                        item.State = ProductInventoryState.Shipped;
                         assign -= item.Count;
                     }
                 }

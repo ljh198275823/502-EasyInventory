@@ -38,7 +38,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 records = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             return (from item in records
-                    orderby item.AddDate ascending 
+                    orderby item.AddDate descending  
                     select (object)item).ToList();
         }
 

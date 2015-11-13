@@ -19,6 +19,7 @@ namespace LJH.Inventory.BLL
         #endregion
 
         private string RepoUri = null;
+        private const string MODEL = "原材料";
 
         #region 私有方法
         private SteelRoll Convert(ProductInventoryItem info)
@@ -28,7 +29,6 @@ namespace LJH.Inventory.BLL
                 ID = info.ID,
                 WareHouseID = info.WareHouseID,
                 ProductID = info.ProductID,
-                Model = info.Model,
                 OriginalLength = info.OriginalLength,
                 OriginalWeight = info.OriginalWeight,
                 Weight = info.Weight,
@@ -62,7 +62,7 @@ namespace LJH.Inventory.BLL
                 ID = info.ID,
                 WareHouseID = info.WareHouseID,
                 ProductID = info.ProductID,
-                Model = info.Model,
+                Model = MODEL ,
                 OriginalLength = info.OriginalLength,
                 OriginalWeight = info.OriginalWeight,
                 Weight = info.Weight,
@@ -108,6 +108,14 @@ namespace LJH.Inventory.BLL
         public QueryResultList<SteelRoll> GetItems(SearchCondition con)
         {
             List<SteelRoll> items = null;
+            if (con == null)
+            {
+                con = new ProductInventoryItemSearchCondition() { Model = MODEL };
+            }
+            else if (con is ProductInventoryItemSearchCondition)
+            {
+                (con as ProductInventoryItemSearchCondition).Model = MODEL;
+            }
             var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
             {
