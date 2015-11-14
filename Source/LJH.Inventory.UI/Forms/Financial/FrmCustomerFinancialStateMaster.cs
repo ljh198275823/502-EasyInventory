@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.Inventory.UI.Report;
-using LJH.Inventory.UI.Forms.Financial;
 using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;
 
@@ -112,6 +106,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colID"].Value = c.ID;
             row.Cells["colName"].Value = c.Name;
             row.Cells["colCategory"].Value = c.CategoryID;
+            row.Cells["colCreditLine"].Value = c.CreditLine;
             if (_CustomerPayments != null && _CustomerPayments.Count > 0)
             {
                 row.Cells["colPrepay"].Value = _CustomerPayments.Sum(it => it.CustomerID == c.ID ? it.Remain : 0).Trim();
@@ -167,7 +162,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                     con.States.Add(SheetState.Approved);
                     con.HasRemain = true;
                     frm.SearchCondition = con;
-                    frm.Text = string.Format("{0} 收款流水明细", c.Name);
+                    frm.PaymentType = CustomerPaymentType.Customer;
+                    frm.Text = string.Format("{0} 付款流水明细", c.Name);
                     frm.ShowDialog();
                 }
             }
@@ -180,16 +176,25 @@ namespace LJH.Inventory.UI.Forms.Financial
                 CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
                 FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                 frm.Customer = c;
+                frm.PaymentType = CustomerPaymentType.Customer;
                 frm.IsAdding = true;
                 frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
                 {
-                    CompanyInfo c1 = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(c.ID).QueryObject;
-                    if (c1 != null)
-                    {
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
-                    }
+                    ReFreshData();
                 };
                 frm.ShowDialog();
+            }
+        }
+
+        private void mnu_UpdateCreditLine_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
+                FrmCreditLine frm = new FrmCreditLine();
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.Customer = c;
+                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c);
             }
         }
         #endregion

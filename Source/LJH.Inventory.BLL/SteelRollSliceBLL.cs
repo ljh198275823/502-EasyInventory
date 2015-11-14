@@ -98,7 +98,6 @@ namespace LJH.Inventory.BLL
                 }
                 foreach (ProductInventoryItem item in addingItems)
                 {
-                    item.AddDate = record.CheckDateTime;
                     ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(item, unitWork);
                 }
             }
@@ -119,6 +118,7 @@ namespace LJH.Inventory.BLL
                     {
                         ProductInventoryItem pii = item.Clone();
                         pii.ID = Guid.NewGuid();
+                        pii.AddDate = record.CheckDateTime;
                         pii.SourceID = item.ID;  //指定之前的记录为源记录
                         pii.Count = assign;
                         pii.DeliverySheet = "盘亏";

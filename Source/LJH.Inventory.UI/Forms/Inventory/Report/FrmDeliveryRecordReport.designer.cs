@@ -47,9 +47,11 @@
             this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,11 +66,11 @@
             // 
             this.btnSearch.Location = new System.Drawing.Point(657, 12);
             // 
-            // btnOkAs
+            // btnSaveAs
             // 
             this.btnSaveAs.Location = new System.Drawing.Point(657, 40);
             // 
-            // button1
+            // btnColumn
             // 
             this.btnColumn.Location = new System.Drawing.Point(657, 70);
             // 
@@ -185,9 +187,9 @@
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToResizeColumns = false;
             this.gridView.AllowUserToResizeRows = false;
-            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -195,9 +197,11 @@
             this.colCustomerName,
             this.colSheetNo,
             this.colOrderID,
-            this.colProductID,
-            this.colProductName,
             this.colCategoryID,
+            this.colSpecification,
+            this.colModel,
+            this.colLength,
+            this.colWeight,
             this.colPrice,
             this.colCount,
             this.colAmount,
@@ -241,25 +245,37 @@
             this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // colProductID
-            // 
-            this.colProductID.HeaderText = "产品编号";
-            this.colProductID.Name = "colProductID";
-            this.colProductID.ReadOnly = true;
-            // 
-            // colProductName
-            // 
-            this.colProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colProductName.HeaderText = "产品名称";
-            this.colProductName.Name = "colProductName";
-            this.colProductName.ReadOnly = true;
-            this.colProductName.Width = 78;
-            // 
             // colCategoryID
             // 
-            this.colCategoryID.HeaderText = "产品类别";
+            this.colCategoryID.HeaderText = "类别";
             this.colCategoryID.Name = "colCategoryID";
             this.colCategoryID.ReadOnly = true;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
+            // 
+            // colModel
+            // 
+            this.colModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colModel.HeaderText = "产品型号";
+            this.colModel.Name = "colModel";
+            this.colModel.ReadOnly = true;
+            this.colModel.Width = 78;
+            // 
+            // colLength
+            // 
+            this.colLength.HeaderText = "长度";
+            this.colLength.Name = "colLength";
+            this.colLength.ReadOnly = true;
+            // 
+            // colWeight
+            // 
+            this.colWeight.HeaderText = "重量";
+            this.colWeight.Name = "colWeight";
+            this.colWeight.ReadOnly = true;
             // 
             // colPrice
             // 
@@ -335,9 +351,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;

@@ -34,8 +34,6 @@ namespace LJH.Inventory.BLL
             ////减少库存
             foreach (StackOutItem si in sheet.Items)
             {
-                Product p = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetByID(si.ProductID).QueryObject;
-                if (p != null && p.IsService != null && p.IsService.Value) continue; //如果是产品是服务的话就不用再从库存中扣除了
                 Assign(si, inventoryOutType, inventoryItems, addingItems);
             }
             foreach (ProductInventoryItem item in inventoryItems)
@@ -52,21 +50,19 @@ namespace LJH.Inventory.BLL
         private void Assign(StackOutItem si, InventoryOutType inventoryOutType, List<ProductInventoryItem> inventoryItems, List<ProductInventoryItem> addingItems)
         {
             List<ProductInventoryItem> items = new List<ProductInventoryItem>();
-            if (si.OrderItem != null)  //如果出货单项有相关的订单项，那么出货时只扣除与此订单项相关的库存项和未分配给任何订单的库存项
-            {
-                items.AddRange(inventoryItems.Where(item => item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == si.OrderItem));
-            }
-            if (inventoryOutType == InventoryOutType.FIFO) //根据产品的出货方式将未指定订单项的库存排序
+            items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.WaitShip && item.ProductID == si.ProductID && item.DeliveryItem == si.ID)); //出货单项待出货的项最高优先级
+            if (si.OrderItem != null) items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.Reserved && item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == si.OrderItem)); //订单备货优先级次之
+            if (inventoryOutType == InventoryOutType.FIFO) //其它未分配的项优先级最后
             {
                 items.AddRange(from item in inventoryItems
-                               where item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == null
+                               where item.ProductID == si.ProductID && item.State == ProductInventoryState.Inventory && item.DeliveryItem == null && item.OrderItem == null
                                orderby item.AddDate ascending
                                select item);
             }
             else
             {
                 items.AddRange(from item in inventoryItems
-                               where item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == null
+                               where item.ProductID == si.ProductID && item.State == ProductInventoryState.Inventory && item.DeliveryItem == null && item.OrderItem == null
                                orderby item.AddDate descending
                                select item);
             }
@@ -81,13 +77,14 @@ namespace LJH.Inventory.BLL
                     {
                         ProductInventoryItem pii = item.Clone();
                         pii.ID = Guid.NewGuid();
+                        pii.SourceID = item.ID;
                         pii.OrderItem = si.OrderItem;
                         pii.OrderID = si.OrderID;
                         pii.DeliveryItem = si.ID;
                         pii.DeliverySheet = si.SheetNo;
                         pii.Count = count;
+                        pii.State = ProductInventoryState.Shipped;
                         addingItems.Add(pii);
-
                         item.Count -= count;
                         count = 0;
                     }
@@ -97,6 +94,7 @@ namespace LJH.Inventory.BLL
                         item.OrderID = si.OrderID;
                         item.DeliveryItem = si.ID;
                         item.DeliverySheet = si.SheetNo;
+                        item.State = ProductInventoryState.Shipped;
                         count -= item.Count;
                     }
                 }

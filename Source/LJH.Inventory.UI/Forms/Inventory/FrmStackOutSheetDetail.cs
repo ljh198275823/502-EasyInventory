@@ -455,12 +455,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     }
                     else if (col.Name == "colCount")
                     {
-                        int count;
-                        if (int.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out count))
+                        if (item.ProductInventoryItem != null) //原材料数量不能改
                         {
-                            if (count < 0) count = 0;
-                            item.Count = count;
-                            row.Cells[e.ColumnIndex].Value = count;
+                            row.Cells[e.ColumnIndex].Value = item.Count;
+                        }
+                        else
+                        {
+                            int count;
+                            if (int.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out count))
+                            {
+                                if (count < 0) count = 0;
+                                item.Count = count;
+                                row.Cells[e.ColumnIndex].Value = count;
+                            }
                         }
                     }
                     else if (col.Name == "colWeight")

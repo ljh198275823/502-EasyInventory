@@ -32,6 +32,7 @@ namespace InventoryDemo
         #region 私有变量
         private List<Form> _openedForms = new List<Form>();
         private SoftDogInfo _SoftDog;
+        private DateTime _ExpireDate = new DateTime(2016, 6, 30);
         #endregion
 
         #region 私有方法
@@ -471,7 +472,12 @@ namespace InventoryDemo
         #region 事件处理程序
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            //ReadSoftDog();
+            if (DateTime.Today > _ExpireDate)
+            {
+                MessageBox.Show("软件已经过期,请联系供应商");
+                Environment.Exit(0);
+            }
+            this.Text += string.Format(" [{0}]", Application.ProductVersion);
             DoLogIn();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
             lblDBPath.Text = AppSettings.Current.GetConfigContent("DBPath");

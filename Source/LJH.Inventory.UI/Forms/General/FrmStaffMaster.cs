@@ -118,6 +118,7 @@ namespace LJH.Inventory.UI.Forms.General
             row.Cells["colCertificate"].Value = c.Certificate;
             row.Cells["colSex"].Value = c.Sex;
             row.Cells["colPosition"].Value = c.UserPosition;
+            row.Cells["colPhone"].Value = c.Phone;
             row.Cells["colHireDate"].Value = c.HireDate != null ? c.HireDate.Value.ToString("yyyy-MM-dd") : string.Empty;
             if (_Operators != null && _Operators.Count > 0)
             {

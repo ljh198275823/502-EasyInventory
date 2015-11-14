@@ -22,6 +22,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 获取或设置收款或付款类型
+        /// </summary>
+        public CustomerPaymentType PaymentType { get; set; }
+
         #region 重写基类方法
         protected override List<object> GetDataSource()
         {
@@ -89,6 +94,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                         frm.IsAdding = false;
                         frm.IsForView = true;
+                        frm.PaymentType = PaymentType;
                         frm.UpdatingItem = cp;
                         frm.ShowDialog();
                     }

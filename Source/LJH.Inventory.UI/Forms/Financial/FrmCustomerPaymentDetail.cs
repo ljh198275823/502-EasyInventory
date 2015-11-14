@@ -67,7 +67,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.InitControls();
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户收款明细" : "供应商付款明细";
+            this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户付款流水" : "供应商付款流水";
             this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
         }
 

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerFinancialStateMaster));
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
@@ -40,12 +41,14 @@
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_UpdateCreditLine = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,6 +100,7 @@
             this.colID,
             this.colName,
             this.colCategory,
+            this.colCreditLine,
             this.colReceivable,
             this.colPrepay,
             this.colTotal});
@@ -144,11 +148,20 @@
             this.colCategory.ReadOnly = true;
             this.colCategory.Width = 120;
             // 
-            // colReceivable
+            // colCreditLine
             // 
             dataGridViewCellStyle1.Format = "C2";
             dataGridViewCellStyle1.NullValue = null;
-            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colCreditLine.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colCreditLine.HeaderText = "信用额度";
+            this.colCreditLine.Name = "colCreditLine";
+            this.colCreditLine.ReadOnly = true;
+            // 
+            // colReceivable
+            // 
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle2;
             this.colReceivable.HeaderText = "应收账款";
             this.colReceivable.Name = "colReceivable";
             this.colReceivable.ReadOnly = true;
@@ -157,10 +170,10 @@
             // 
             // colPrepay
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colPrepay.HeaderText = "预收款";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colPrepay.HeaderText = "未核消收款";
             this.colPrepay.Name = "colPrepay";
             this.colPrepay.ReadOnly = true;
             this.colPrepay.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -177,40 +190,48 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
             this.cMnu_Payment,
+            this.mnu_UpdateCreditLine,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 142);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(172, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Payment
             // 
             this.cMnu_Payment.Name = "cMnu_Payment";
-            this.cMnu_Payment.Size = new System.Drawing.Size(124, 22);
-            this.cMnu_Payment.Text = "新增付款";
+            this.cMnu_Payment.Size = new System.Drawing.Size(172, 22);
+            this.cMnu_Payment.Text = "新增客户付款流水";
             this.cMnu_Payment.Click += new System.EventHandler(this.mnu_Payment_Click);
+            // 
+            // mnu_UpdateCreditLine
+            // 
+            this.mnu_UpdateCreditLine.Name = "mnu_UpdateCreditLine";
+            this.mnu_UpdateCreditLine.Size = new System.Drawing.Size(172, 22);
+            this.mnu_UpdateCreditLine.Text = "修改信用额度";
+            this.mnu_UpdateCreditLine.Click += new System.EventHandler(this.mnu_UpdateCreditLine_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(121, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(172, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(172, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // FrmCustomerFinancialStateMaster
@@ -247,10 +268,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.ToolStripMenuItem mnu_UpdateCreditLine;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;

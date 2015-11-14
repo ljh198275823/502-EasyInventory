@@ -34,9 +34,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSheetNo"].Value = sor.SheetNo;
             row.Cells["colCustomerName"].Value = sor.Customer.Name;
             row.Cells["colOrderID"].Value = sor.OrderID;
-            row.Cells["colProductID"].Value = sor.ProductID;
-            row.Cells["colProductName"].Value = sor.Product.Name;
+            row.Cells["colSpecification"].Value = sor.Product.Specification;
+            row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
+            row.Cells["colLength"].Value = sor.Length;
+            row.Cells["colWeight"].Value = sor.Weight;
             row.Cells["colPrice"].Value = sor.Price;
             row.Cells["colCount"].Value = sor.Count;
             row.Cells["colAmount"].Value = sor.Amount.Trim();
