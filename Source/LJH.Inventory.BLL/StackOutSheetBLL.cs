@@ -155,6 +155,67 @@ namespace LJH.Inventory.BLL
             return info.ID;
         }
 
+        protected override void DoAdd(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            base.DoAdd(info, unitWork, dt, opt);
+            foreach (var item in info.Items)  //将原材料的项的状态变成待出货状态
+            {
+                var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+                if (item.ProductInventoryItem != null)
+                {
+                    ProductInventoryItem sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                    if (sr != null)
+                    {
+                        ProductInventoryItem cloneSr = sr.Clone();
+                        sr.State = ProductInventoryState.WaitShip;
+                        sr.DeliverySheet = info.ID;
+                        sr.DeliveryItem = item.ID;
+                        isrp.Update(sr, cloneSr, unitWork);
+                    }
+                }
+            }
+        }
+
+        protected override void DoUpdate(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            base.DoUpdate(info, unitWork, dt, opt);
+            var original = GetByID(info.ID).QueryObject;
+            if (original != null)
+            {
+                var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+                foreach (var item in info.Items)
+                {
+                    if (item.ProductInventoryItem != null)
+                    {
+                        var sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                        if (sr != null)
+                        {
+                            var cloneSr = sr.Clone();
+                            sr.State = ProductInventoryState.WaitShip;
+                            sr.DeliverySheet = info.ID;
+                            sr.DeliveryItem = item.ID;
+                            isrp.Update(sr, cloneSr, unitWork);
+                        }
+                    }
+                }
+                foreach (var item in original.Items)
+                {
+                    if (!info.Items.Exists(it => it.ID == item.ID) && item.ProductInventoryItem.HasValue)
+                    {
+                        ProductInventoryItem sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                        if (sr != null)
+                        {
+                            ProductInventoryItem cloneSr = sr.Clone();
+                            sr.State = ProductInventoryState.Inventory;
+                            sr.DeliveryItem = null;
+                            sr.DeliverySheet = null;
+                            isrp.Update(sr, cloneSr, unitWork);
+                        }
+                    }
+                }
+            }
+        }
+
         protected override void DoShip(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             IProvider<StackOutSheet, string> provider = ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri);
@@ -171,7 +232,22 @@ namespace LJH.Inventory.BLL
         protected override void DoNullify(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoNullify(info, unitWork, dt, opt);
-
+            foreach (var item in info.Items)  //将原材料的项的状态恢复到在库状态
+            {
+                var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+                if (item.ProductInventoryItem != null)
+                {
+                    ProductInventoryItem sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                    if (sr != null)
+                    {
+                        ProductInventoryItem cloneSr = sr.Clone();
+                        sr.State = ProductInventoryState.Inventory;
+                        sr.DeliveryItem = null;
+                        sr.DeliverySheet = null;
+                        isrp.Update(sr, cloneSr, unitWork);
+                    }
+                }
+            }
             //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             ////如果已经有客户收款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
             //CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();

@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddOrderItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_AddItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_AddSlice = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddSteelRoll = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -46,6 +47,17 @@
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.txtCarPlate = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtDriverCall = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtDriver = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdWithTax = new System.Windows.Forms.RadioButton();
+            this.rdWithoutTax = new System.Windows.Forms.RadioButton();
+            this.dtDeadline = new System.Windows.Forms.DateTimePicker();
+            this.chkDeadline = new System.Windows.Forms.CheckBox();
             this.cmbSheetType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lnkLinker = new System.Windows.Forms.LinkLabel();
@@ -62,6 +74,17 @@
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label15 = new System.Windows.Forms.Label();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
@@ -82,40 +105,17 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rdWithoutTax = new System.Windows.Forms.RadioButton();
-            this.rdWithTax = new System.Windows.Forms.RadioButton();
-            this.dtDeadline = new System.Windows.Forms.DateTimePicker();
-            this.chkDeadline = new System.Windows.Forms.CheckBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtDriver = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtDriverCall = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtCarPlate = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.选择原材料ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).BeginInit();
             this.mnu_Attachment.SuspendLayout();
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -130,8 +130,8 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_AddOrderItem,
-            this.选择原材料ToolStripMenuItem,
-            this.btn_AddItem,
+            this.btn_AddSlice,
+            this.mnu_AddSteelRoll,
             this.mnu_RemoveItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
@@ -144,12 +144,19 @@
             this.mnu_AddOrderItem.Visible = false;
             this.mnu_AddOrderItem.Click += new System.EventHandler(this.mnu_AddOrderItem_Click);
             // 
-            // btn_AddItem
+            // btn_AddSlice
             // 
-            this.btn_AddItem.Name = "btn_AddItem";
-            this.btn_AddItem.Size = new System.Drawing.Size(160, 22);
-            this.btn_AddItem.Text = "选择小件";
-            this.btn_AddItem.Click += new System.EventHandler(this.btn_Add_Click);
+            this.btn_AddSlice.Name = "btn_AddSlice";
+            this.btn_AddSlice.Size = new System.Drawing.Size(160, 22);
+            this.btn_AddSlice.Text = "选择小件";
+            this.btn_AddSlice.Click += new System.EventHandler(this.btn_AddSlice_Click);
+            // 
+            // mnu_AddSteelRoll
+            // 
+            this.mnu_AddSteelRoll.Name = "mnu_AddSteelRoll";
+            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(160, 22);
+            this.mnu_AddSteelRoll.Text = "选择原材料";
+            this.mnu_AddSteelRoll.Click += new System.EventHandler(this.mnu_AddSteelRoll_Click);
             // 
             // mnu_RemoveItem
             // 
@@ -296,6 +303,108 @@
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(14, 81);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(59, 12);
+            this.linkLabel1.TabIndex = 140;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "送货司机:";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // txtCarPlate
+            // 
+            this.txtCarPlate.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCarPlate.Location = new System.Drawing.Point(512, 77);
+            this.txtCarPlate.Name = "txtCarPlate";
+            this.txtCarPlate.Size = new System.Drawing.Size(135, 21);
+            this.txtCarPlate.TabIndex = 139;
+            // 
+            // txtDriverCall
+            // 
+            this.txtDriverCall.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtDriverCall.Location = new System.Drawing.Point(284, 77);
+            this.txtDriverCall.Name = "txtDriverCall";
+            this.txtDriverCall.Size = new System.Drawing.Size(135, 21);
+            this.txtDriverCall.TabIndex = 138;
+            // 
+            // txtDriver
+            // 
+            this.txtDriver.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtDriver.Location = new System.Drawing.Point(73, 77);
+            this.txtDriver.Name = "txtDriver";
+            this.txtDriver.Size = new System.Drawing.Size(135, 21);
+            this.txtDriver.TabIndex = 137;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(222, 81);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(59, 12);
+            this.label12.TabIndex = 136;
+            this.label12.Text = "司机电话:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(459, 81);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 12);
+            this.label10.TabIndex = 135;
+            this.label10.Text = "车牌号:";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rdWithTax);
+            this.panel1.Controls.Add(this.rdWithoutTax);
+            this.panel1.Location = new System.Drawing.Point(664, 10);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(126, 25);
+            this.panel1.TabIndex = 133;
+            // 
+            // rdWithTax
+            // 
+            this.rdWithTax.AutoSize = true;
+            this.rdWithTax.Location = new System.Drawing.Point(3, 3);
+            this.rdWithTax.Name = "rdWithTax";
+            this.rdWithTax.Size = new System.Drawing.Size(47, 16);
+            this.rdWithTax.TabIndex = 129;
+            this.rdWithTax.TabStop = true;
+            this.rdWithTax.Text = "含税";
+            this.rdWithTax.UseVisualStyleBackColor = true;
+            // 
+            // rdWithoutTax
+            // 
+            this.rdWithoutTax.AutoSize = true;
+            this.rdWithoutTax.Location = new System.Drawing.Point(57, 3);
+            this.rdWithoutTax.Name = "rdWithoutTax";
+            this.rdWithoutTax.Size = new System.Drawing.Size(59, 16);
+            this.rdWithoutTax.TabIndex = 130;
+            this.rdWithoutTax.TabStop = true;
+            this.rdWithoutTax.Text = "不含税";
+            this.rdWithoutTax.UseVisualStyleBackColor = true;
+            // 
+            // dtDeadline
+            // 
+            this.dtDeadline.Location = new System.Drawing.Point(887, 12);
+            this.dtDeadline.Name = "dtDeadline";
+            this.dtDeadline.Size = new System.Drawing.Size(106, 21);
+            this.dtDeadline.TabIndex = 132;
+            // 
+            // chkDeadline
+            // 
+            this.chkDeadline.AutoSize = true;
+            this.chkDeadline.Location = new System.Drawing.Point(814, 14);
+            this.chkDeadline.Name = "chkDeadline";
+            this.chkDeadline.Size = new System.Drawing.Size(72, 16);
+            this.chkDeadline.TabIndex = 131;
+            this.chkDeadline.Text = "还款期限";
+            this.chkDeadline.UseVisualStyleBackColor = true;
+            // 
             // cmbSheetType
             // 
             this.cmbSheetType.FormattingEnabled = true;
@@ -400,12 +509,12 @@
             // lnkWareHouse
             // 
             this.lnkWareHouse.AutoSize = true;
-            this.lnkWareHouse.Location = new System.Drawing.Point(38, 47);
+            this.lnkWareHouse.Location = new System.Drawing.Point(14, 47);
             this.lnkWareHouse.Name = "lnkWareHouse";
-            this.lnkWareHouse.Size = new System.Drawing.Size(35, 12);
+            this.lnkWareHouse.Size = new System.Drawing.Size(59, 12);
             this.lnkWareHouse.TabIndex = 0;
             this.lnkWareHouse.TabStop = true;
-            this.lnkWareHouse.Text = "仓库:";
+            this.lnkWareHouse.Text = "发货仓库:";
             this.lnkWareHouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWareHouse_LinkClicked);
             // 
             // txtMemo
@@ -470,6 +579,88 @@
             this.ItemsGrid.TabIndex = 8;
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             // 
+            // colHeader
+            // 
+            this.colHeader.HeaderText = "";
+            this.colHeader.Name = "colHeader";
+            this.colHeader.ReadOnly = true;
+            this.colHeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHeader.Width = 20;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
+            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSpecification.Width = 80;
+            // 
+            // colModel
+            // 
+            this.colModel.HeaderText = "产品种类";
+            this.colModel.Name = "colModel";
+            this.colModel.ReadOnly = true;
+            // 
+            // colLength
+            // 
+            this.colLength.HeaderText = "长度";
+            this.colLength.Name = "colLength";
+            this.colLength.ReadOnly = true;
+            // 
+            // colPrice
+            // 
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colPrice.HeaderText = "单价";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colCount
+            // 
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCount.Width = 80;
+            // 
+            // colWeight
+            // 
+            this.colWeight.HeaderText = "单重";
+            this.colWeight.Name = "colWeight";
+            // 
+            // colTotal
+            // 
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colTotal.HeaderText = "金额";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTotal.Width = 80;
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "销售订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -502,7 +693,7 @@
             this.tabPage6.Controls.Add(this.gridAttachment);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(957, 360);
+            this.tabPage6.Size = new System.Drawing.Size(1007, 430);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "附件";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -526,7 +717,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(957, 360);
+            this.gridAttachment.Size = new System.Drawing.Size(1007, 430);
             this.gridAttachment.TabIndex = 103;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -600,7 +791,7 @@
             this.tabPage7.Controls.Add(this.dataGridView1);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(957, 360);
+            this.tabPage7.Size = new System.Drawing.Size(1007, 430);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "操作记录";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -623,7 +814,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(957, 360);
+            this.dataGridView1.Size = new System.Drawing.Size(1007, 430);
             this.dataGridView1.TabIndex = 99;
             // 
             // colOperateDate
@@ -654,196 +845,6 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // rdWithoutTax
-            // 
-            this.rdWithoutTax.AutoSize = true;
-            this.rdWithoutTax.Location = new System.Drawing.Point(57, 3);
-            this.rdWithoutTax.Name = "rdWithoutTax";
-            this.rdWithoutTax.Size = new System.Drawing.Size(59, 16);
-            this.rdWithoutTax.TabIndex = 130;
-            this.rdWithoutTax.TabStop = true;
-            this.rdWithoutTax.Text = "不含税";
-            this.rdWithoutTax.UseVisualStyleBackColor = true;
-            // 
-            // rdWithTax
-            // 
-            this.rdWithTax.AutoSize = true;
-            this.rdWithTax.Location = new System.Drawing.Point(3, 3);
-            this.rdWithTax.Name = "rdWithTax";
-            this.rdWithTax.Size = new System.Drawing.Size(47, 16);
-            this.rdWithTax.TabIndex = 129;
-            this.rdWithTax.TabStop = true;
-            this.rdWithTax.Text = "含税";
-            this.rdWithTax.UseVisualStyleBackColor = true;
-            // 
-            // dtDeadline
-            // 
-            this.dtDeadline.Location = new System.Drawing.Point(887, 12);
-            this.dtDeadline.Name = "dtDeadline";
-            this.dtDeadline.Size = new System.Drawing.Size(106, 21);
-            this.dtDeadline.TabIndex = 132;
-            // 
-            // chkDeadline
-            // 
-            this.chkDeadline.AutoSize = true;
-            this.chkDeadline.Location = new System.Drawing.Point(814, 14);
-            this.chkDeadline.Name = "chkDeadline";
-            this.chkDeadline.Size = new System.Drawing.Size(72, 16);
-            this.chkDeadline.TabIndex = 131;
-            this.chkDeadline.Text = "还款期限";
-            this.chkDeadline.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.rdWithTax);
-            this.panel1.Controls.Add(this.rdWithoutTax);
-            this.panel1.Location = new System.Drawing.Point(664, 10);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(126, 25);
-            this.panel1.TabIndex = 133;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(222, 81);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(59, 12);
-            this.label12.TabIndex = 136;
-            this.label12.Text = "司机电话:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(459, 81);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 12);
-            this.label10.TabIndex = 135;
-            this.label10.Text = "车牌号:";
-            // 
-            // txtDriver
-            // 
-            this.txtDriver.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDriver.Location = new System.Drawing.Point(73, 77);
-            this.txtDriver.Name = "txtDriver";
-            this.txtDriver.Size = new System.Drawing.Size(135, 21);
-            this.txtDriver.TabIndex = 137;
-            // 
-            // txtDriverCall
-            // 
-            this.txtDriverCall.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDriverCall.Location = new System.Drawing.Point(284, 77);
-            this.txtDriverCall.Name = "txtDriverCall";
-            this.txtDriverCall.Size = new System.Drawing.Size(135, 21);
-            this.txtDriverCall.TabIndex = 138;
-            // 
-            // txtCarPlate
-            // 
-            this.txtCarPlate.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCarPlate.Location = new System.Drawing.Point(512, 77);
-            this.txtCarPlate.Name = "txtCarPlate";
-            this.txtCarPlate.Size = new System.Drawing.Size(135, 21);
-            this.txtCarPlate.TabIndex = 139;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(14, 81);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(59, 12);
-            this.linkLabel1.TabIndex = 140;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "送货司机:";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // colHeader
-            // 
-            this.colHeader.HeaderText = "";
-            this.colHeader.Name = "colHeader";
-            this.colHeader.ReadOnly = true;
-            this.colHeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colHeader.Width = 20;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "类别";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSpecification.Width = 80;
-            // 
-            // colModel
-            // 
-            this.colModel.HeaderText = "产品种类";
-            this.colModel.Name = "colModel";
-            this.colModel.ReadOnly = true;
-            // 
-            // colLength
-            // 
-            this.colLength.HeaderText = "长度";
-            this.colLength.Name = "colLength";
-            this.colLength.ReadOnly = true;
-            // 
-            // colPrice
-            // 
-            dataGridViewCellStyle10.Format = "C2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colPrice.HeaderText = "单价";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colCount
-            // 
-            dataGridViewCellStyle11.Format = "N0";
-            dataGridViewCellStyle11.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colCount.HeaderText = "数量";
-            this.colCount.Name = "colCount";
-            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCount.Width = 80;
-            // 
-            // colWeight
-            // 
-            this.colWeight.HeaderText = "单重";
-            this.colWeight.Name = "colWeight";
-            // 
-            // colTotal
-            // 
-            dataGridViewCellStyle12.Format = "C2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle12;
-            this.colTotal.HeaderText = "金额";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTotal.Width = 80;
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "销售订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            // 
-            // 选择原材料ToolStripMenuItem
-            // 
-            this.选择原材料ToolStripMenuItem.Name = "选择原材料ToolStripMenuItem";
-            this.选择原材料ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.选择原材料ToolStripMenuItem.Text = "选择原材料";
-            // 
             // FrmStackOutSheetDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -868,14 +869,14 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).EndInit();
             this.mnu_Attachment.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -885,7 +886,7 @@
 
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem btn_AddItem;
+        private System.Windows.Forms.ToolStripMenuItem btn_AddSlice;
         private System.Windows.Forms.ToolStripMenuItem mnu_RemoveItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnSave;
@@ -955,6 +956,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ToolStripMenuItem 选择原材料ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddSteelRoll;
     }
 }

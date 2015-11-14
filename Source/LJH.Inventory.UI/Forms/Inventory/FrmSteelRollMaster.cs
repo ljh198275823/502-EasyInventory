@@ -68,7 +68,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
                                        (chkPartial.Checked && it.Status == "余卷") ||
                                        (chkOnlyTail.Checked && it.Status == "尾卷") ||
-                                       (chkRemainless.Checked && it.Status == "余料") ).ToList ();
+                                       (chkRemainless.Checked && it.Status == "余料")).ToList();
                 items.RemoveAll(it => (!chkNullified.Checked && it.State == ProductInventoryState.Nullified) ||
                                      (!chkShipped.Checked && it.State == ProductInventoryState.Shipped)
                                 );
@@ -141,7 +141,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSupplier"].Value = sr.SupplierID;
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
-            row.Cells["colStatus"].Value =sr.Status;
+            row.Cells["colStatus"].Value = sr.Status;
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colMemo"].Value = sr.Memo;
@@ -160,11 +160,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
                 SteelRoll sr = dataGridView1.SelectedRows[0].Tag as SteelRoll;
-                FrmSlice frm = new FrmSlice();
-                frm.SlicingItem = sr;
-                frm.SliceTo = "开平";
-                frm.ShowDialog();
-                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                if (sr.State == ProductInventoryState.Inventory)
+                {
+                    FrmSlice frm = new FrmSlice();
+                    frm.SlicingItem = sr;
+                    frm.SliceTo = "开平";
+                    frm.ShowDialog();
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
+                }
             }
         }
 
@@ -186,11 +193,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 SteelRoll sr = dataGridView1.SelectedRows[0].Tag as SteelRoll;
-                FrmSteelRollCheck frm = new FrmSteelRollCheck();
-                frm.SteelRoll = sr;
-                if (frm.ShowDialog() == DialogResult.OK)
+                if (sr.State == ProductInventoryState.Inventory)
                 {
-                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                    FrmSteelRollCheck frm = new FrmSteelRollCheck();
+                    frm.SteelRoll = sr;
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行盘点", ProductInventoryStateDescription.GetDescription(sr.State)));
                 }
             }
         }
@@ -214,14 +228,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     SteelRoll item = row.Tag as SteelRoll;
-                    CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Nullify(item);
-                    if (ret.Result == ResultCode.Successful)
+                    if (item.State == ProductInventoryState.Inventory)
                     {
-                        ShowItemInGridViewRow(row, item);
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
+                        CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Nullify(item);
+                        if (ret.Result == ResultCode.Successful)
+                        {
+                            ShowItemInGridViewRow(row, item);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ret.Message);
+                        }
                     }
                 }
             }

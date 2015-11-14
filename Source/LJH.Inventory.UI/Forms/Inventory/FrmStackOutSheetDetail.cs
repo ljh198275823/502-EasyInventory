@@ -143,7 +143,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (!rdWithTax.Checked && !rdWithoutTax.Checked)
             {
                 MessageBox.Show("请选择是否是含税价");
-                rdWithTax.Focus();
                 return false;
             }
             if (ItemsGrid.Rows.Count == 0)
@@ -171,7 +170,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
             cmbSheetType.SelectedIndex = 0;
-            btn_AddItem.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
+            btn_AddSlice.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
@@ -349,6 +348,26 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ShowDeliveryItemsOnGrid(sources);
         }
 
+        public void AddDeliveryItem(SteelRoll p)
+        {
+            List<StackOutItem> sources = GetDeliveryItemsFromGrid();
+            if (!sources.Exists(it => it.ProductInventoryItem == p.ID))  //原材料只能属于一个送货单项
+            {
+                StackOutItem item = new StackOutItem();
+                item.ID = Guid.NewGuid();
+                item.ProductID = p.Product.ID;
+                item.Unit = p.Product.Unit;
+                item.ProductInventoryItem = p.ID;
+                item.Price = p.Price > 0 ? p.Price : (p.Product.Price); //直接采用
+                item.Length = p.Length;
+                item.Weight = p.Weight;
+                item.Count = 1;
+                item.Amount = item.CalAmount();
+                sources.Add(item);
+            }
+            ShowDeliveryItemsOnGrid(sources);
+        }
+
         public void AddDeliveryItem(OrderItemRecord oi)
         {
             List<StackOutItem> sources = GetDeliveryItemsFromGrid();
@@ -447,7 +466,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     else if (col.Name == "colWeight")
                     {
                         decimal weight;
-                        if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out weight))
+                        if (row.Cells[e.ColumnIndex].Value!=null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out weight))
                         {
                             if (weight <= 0)
                             {
@@ -488,17 +507,33 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void btn_Add_Click(object sender, EventArgs e)
+        private void btn_AddSlice_Click(object sender, EventArgs e)
         {
             FrmSteelRollSliceMaster frm = new FrmSteelRollSliceMaster();
             frm.ForSelect = true;
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
+            con.WareHouseID = WareHouse != null ? WareHouse.ID : null;
+            con.States = (int)ProductInventoryState.UnShipped;
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                SteelRollSlice p = frm.SelectedItem as SteelRollSlice;
-                AddDeliveryItem(p);
+                SteelRollSlice srs = frm.SelectedItem as SteelRollSlice;
+                AddDeliveryItem(srs);
+            }
+        }
+
+        private void mnu_AddSteelRoll_Click(object sender, EventArgs e)
+        {
+            FrmSteelRollMaster frm = new FrmSteelRollMaster();
+            frm.ForSelect = true;
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            con.WareHouseID = WareHouse != null ? WareHouse.ID : null;
+            con.States = (int)ProductInventoryState.Inventory; //只显示在库的原材料
+            frm.SearchCondition = con;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                SteelRoll sr= frm.SelectedItem as SteelRoll;
+                AddDeliveryItem(sr);
             }
         }
 
@@ -564,12 +599,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (cmbSheetType.SelectedIndex == 1)
             {
-                btn_AddItem.Visible = true;
+                btn_AddSlice.Visible = true;
                 //mnu_AddOrderItem.Visible = false;
             }
             else
             {
-                btn_AddItem.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
+                btn_AddSlice.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
                 //mnu_AddOrderItem.Visible = true;
             }
         }

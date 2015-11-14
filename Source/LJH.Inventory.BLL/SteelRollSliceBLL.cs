@@ -151,6 +151,7 @@ namespace LJH.Inventory.BLL
         public QueryResultList<SteelRollSlice> GetItems(SearchCondition con)
         {
             List<SteelRollSlice> items = null;
+            if (con == null) con = new ProductInventoryItemSearchCondition();
             if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).ExcludeModel = MODEL;  //排除原材料库存项
             QueryResultList<ProductInventoryItem> ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
