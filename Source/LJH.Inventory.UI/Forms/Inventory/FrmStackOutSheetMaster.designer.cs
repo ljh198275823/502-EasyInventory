@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,6 +38,8 @@
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
+            this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.chkWithoutTax = new System.Windows.Forms.CheckBox();
@@ -70,8 +72,6 @@
             this.colDriverCall = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarPlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
-            this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -146,6 +146,25 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1242, 84);
             this.panel5.TabIndex = 6;
+            // 
+            // dtSheetDate
+            // 
+            this.dtSheetDate.Location = new System.Drawing.Point(382, 12);
+            this.dtSheetDate.Name = "dtSheetDate";
+            this.dtSheetDate.Size = new System.Drawing.Size(131, 21);
+            this.dtSheetDate.TabIndex = 134;
+            this.dtSheetDate.ValueChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chkSheetDate
+            // 
+            this.chkSheetDate.AutoSize = true;
+            this.chkSheetDate.Location = new System.Drawing.Point(309, 14);
+            this.chkSheetDate.Name = "chkSheetDate";
+            this.chkSheetDate.Size = new System.Drawing.Size(72, 16);
+            this.chkSheetDate.TabIndex = 133;
+            this.chkSheetDate.Text = "开单日期";
+            this.chkSheetDate.UseVisualStyleBackColor = true;
+            this.chkSheetDate.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label3
             // 
@@ -403,9 +422,9 @@
             // 
             // colShipDate
             // 
-            dataGridViewCellStyle3.Format = "D";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.colShipDate.HeaderText = "发货日期";
             this.colShipDate.Name = "colShipDate";
             this.colShipDate.ReadOnly = true;
@@ -454,24 +473,6 @@
             this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
-            // 
-            // dtSheetDate
-            // 
-            this.dtSheetDate.Location = new System.Drawing.Point(382, 12);
-            this.dtSheetDate.Name = "dtSheetDate";
-            this.dtSheetDate.Size = new System.Drawing.Size(131, 21);
-            this.dtSheetDate.TabIndex = 134;
-            this.dtSheetDate.ValueChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkSheetDate
-            // 
-            this.chkSheetDate.AutoSize = true;
-            this.chkSheetDate.Location = new System.Drawing.Point(309, 14);
-            this.chkSheetDate.Name = "chkSheetDate";
-            this.chkSheetDate.Size = new System.Drawing.Size(72, 16);
-            this.chkSheetDate.TabIndex = 133;
-            this.chkSheetDate.Text = "开单日期";
-            this.chkSheetDate.UseVisualStyleBackColor = true;
             // 
             // FrmStackOutSheetMaster
             // 
