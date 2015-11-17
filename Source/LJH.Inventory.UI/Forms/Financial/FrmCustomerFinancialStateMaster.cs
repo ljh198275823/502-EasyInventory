@@ -124,10 +124,21 @@ namespace LJH.Inventory.UI.Forms.Financial
                 row.Cells["colReceivable"].Value = 0;
             }
         }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            Filter(txtKeyword.Text.Trim());
+        }
         #endregion
 
         #region 事件处理程序
-        private void categoryTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void FreshData_Clicked(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            FreshData();
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
         {
             FreshData();
         }
@@ -171,19 +182,15 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void mnu_Payment_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 1)
+            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+            frm.Customer = dataGridView1.SelectedRows.Count == 1 ? (dataGridView1.SelectedRows[0].Tag as CompanyInfo) : null;
+            frm.PaymentType = CustomerPaymentType.Customer;
+            frm.IsAdding = true;
+            frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
             {
-                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
-                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                frm.Customer = c;
-                frm.PaymentType = CustomerPaymentType.Customer;
-                frm.IsAdding = true;
-                frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
-                {
-                    ReFreshData();
-                };
-                frm.ShowDialog();
-            }
+                ReFreshData();
+            };
+            frm.ShowDialog();
         }
 
         private void mnu_UpdateCreditLine_Click(object sender, EventArgs e)

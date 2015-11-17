@@ -175,11 +175,11 @@ namespace LJH.Inventory.BLL
                 Weight = slice.Weight,
                 Length = slice.Length,
                 Count = slice.Count,
-                Model = slice.SliceType, 
+                Model = slice.SliceType,
                 State = ProductInventoryState.Inventory,
                 Unit = "件",
                 WareHouseID = wh.ID,
-                Memo = slice.Customer,
+                Memo = "客户:" + slice.Customer,
             };
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi, unitWork);
             CommandResult ret = unitWork.Commit();

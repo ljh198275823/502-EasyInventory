@@ -43,6 +43,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCurrentWeigth.DecimalValue = item.Weight.Value;
             txtRemainLength.DecimalValue = item.Length.Value;
             txtRemainWeight.DecimalValue = item.Weight.Value;
+            txtWareHouse.Text = item.WareHouse.Name;
+            txtWareHouse.Tag = item.WareHouse;
         }
         #endregion
 
@@ -118,7 +120,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Count = txtCount.IntergerValue,
                     AfterLength = txtRemainLength.DecimalValue,
                     AfterWeight = txtRemainWeight.DecimalValue,
-                    Customer = string.Empty,
+                    Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,
                     Warehouse = (txtWareHouse.Tag as WareHouse).Name,
                     Operator = Operator.Current.Name
@@ -132,6 +134,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     this.txtLength.DecimalValue = 0;
                     this.txtCount.IntergerValue = 0;
                     this.txtWeight.DecimalValue = 0;
+                    MessageBox.Show("加工成功!");
                 }
                 else
                 {
@@ -191,6 +194,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             txtWareHouse.Text = string.Empty;
             txtWareHouse.Tag = null;
+        }
+
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Sale. FrmCustomerMaster frm = new Sale.FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txtCustomer.Text = (frm.SelectedItem as CompanyInfo).Name;
+                txtCustomer.Tag = frm.SelectedItem;
+            }
+        }
+
+        private void txtCustomer_DoubleClick(object sender, EventArgs e)
+        {
+            txtCustomer.Text = string.Empty;
+            txtCustomer.Tag = null;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (chkStorageDT.Checked) items = items.Where(it => it.AddDate.Date == dtStorage.Value.Date).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
-                if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification == cmbSpecification.Text).ToList();
+                if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
                 if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.SupplierID == cmbSupplier.Text).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Weight == txtWeight.DecimalValue).ToList();

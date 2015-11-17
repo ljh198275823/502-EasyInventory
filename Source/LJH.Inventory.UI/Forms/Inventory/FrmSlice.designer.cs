@@ -60,6 +60,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkWareHouse = new System.Windows.Forms.LinkLabel();
+            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +69,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(313, 319);
+            this.btnClose.Location = new System.Drawing.Point(313, 341);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 23);
             this.btnClose.TabIndex = 5;
@@ -78,7 +80,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(191, 319);
+            this.btnOk.Location = new System.Drawing.Point(191, 341);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 23);
             this.btnOk.TabIndex = 5;
@@ -343,7 +345,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 273);
+            this.label1.Location = new System.Drawing.Point(38, 299);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 49;
@@ -352,7 +354,7 @@
             // txtSlicers
             // 
             this.txtSlicers.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSlicers.Location = new System.Drawing.Point(97, 270);
+            this.txtSlicers.Location = new System.Drawing.Point(96, 296);
             this.txtSlicers.Name = "txtSlicers";
             this.txtSlicers.Size = new System.Drawing.Size(328, 21);
             this.txtSlicers.TabIndex = 50;
@@ -421,7 +423,7 @@
             this.txtWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtWareHouse.Location = new System.Drawing.Point(96, 236);
             this.txtWareHouse.Name = "txtWareHouse";
-            this.txtWareHouse.Size = new System.Drawing.Size(115, 21);
+            this.txtWareHouse.Size = new System.Drawing.Size(328, 21);
             this.txtWareHouse.TabIndex = 78;
             this.txtWareHouse.DoubleClick += new System.EventHandler(this.txtWareHouse_DoubleClick);
             // 
@@ -436,13 +438,37 @@
             this.lnkWareHouse.Text = "存放仓库";
             this.lnkWareHouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWareHouse_LinkClicked);
             // 
+            // txtCustomer
+            // 
+            this.txtCustomer.BackColor = System.Drawing.Color.White;
+            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCustomer.Location = new System.Drawing.Point(96, 266);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(328, 21);
+            this.txtCustomer.TabIndex = 80;
+            this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.AutoSize = true;
+            this.lnkCustomer.Location = new System.Drawing.Point(56, 270);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(35, 12);
+            this.lnkCustomer.TabIndex = 79;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "客户:";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
             // FrmSlice
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(436, 354);
+            this.ClientSize = new System.Drawing.Size(436, 376);
+            this.Controls.Add(this.txtCustomer);
+            this.Controls.Add(this.lnkCustomer);
             this.Controls.Add(this.txtWareHouse);
             this.Controls.Add(this.lnkWareHouse);
             this.Controls.Add(this.txtSpecification);
@@ -517,6 +543,8 @@
         private System.Windows.Forms.Label label5;
         private GeneralLibrary.WinformControl.DBCTextBox txtWareHouse;
         private System.Windows.Forms.LinkLabel lnkWareHouse;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
 
     }
 }
