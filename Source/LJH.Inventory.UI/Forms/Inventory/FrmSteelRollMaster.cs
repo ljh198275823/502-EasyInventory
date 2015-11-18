@@ -62,7 +62,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
-                if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.SupplierID == cmbSupplier.Text).ToList();
+                if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.Supplier == cmbSupplier.Text).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Weight == txtWeight.DecimalValue).ToList();
                 items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
@@ -76,10 +76,38 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (items != null && items.Count > 0)
             {
                 return (from p in items
-                        orderby p.AddDate descending, p.Product.CategoryID ascending, p.Product.Specification ascending
+                        orderby p.Product.CategoryID ascending,
+                                SpecificationHelper.GetWrittenWidth (p.Product .Specification ) ascending ,
+                                SpecificationHelper.GetWrittenThick (p.Product .Specification )ascending ,
+                                p.AddDate descending
                         select (object)p).ToList();
             }
             return null;
+        }
+
+        private void ShowRowColor(DataGridViewRow row)
+        {
+            SteelRoll sr = row.Tag as SteelRoll;
+            if (sr.State == ProductInventoryState.Nullified)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
+            }
+            else if (sr.Status == "整卷")
+            {
+                row.DefaultCellStyle.ForeColor = Color.Green;
+            }
+            else if (sr.Status == "余卷")
+            {
+                row.DefaultCellStyle.ForeColor = Color.Blue;
+            }
+            else if (sr.Status == "尾卷")
+            {
+                row.DefaultCellStyle.ForeColor = Color.Orange;
+            }
+            else
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
+            }
         }
         #endregion
 
@@ -134,18 +162,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
             row.Cells["colSpecification"].Value = sr.Product.Specification;
             row.Cells["colWareHouse"].Value = sr.WareHouse.Name;
-            row.Cells["colOriginalWeight"].Value = sr.OriginalWeight.ToString("F3");
-            row.Cells["colOriginalLength"].Value = sr.OriginalLength.ToString("F2");
-            row.Cells["colWeight"].Value = sr.Weight.Value.ToString("F3");
-            row.Cells["colLength"].Value = sr.Length.Value.ToString("F2");
-            row.Cells["colSupplier"].Value = sr.SupplierID;
+            row.Cells["colOriginalWeight"].Value = sr.OriginalWeight;
+            row.Cells["colOriginalLength"].Value = sr.OriginalLength;
+            row.Cells["colWeight"].Value = sr.Weight;
+            row.Cells["colLength"].Value = sr.Length;
+            row.Cells["colRealThick"].Value = sr.RealThick;
+            row.Cells["colCustomer"].Value = sr.Customer;
+            row.Cells["colSupplier"].Value = sr.Supplier;
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
             row.Cells["colStatus"].Value = sr.Status;
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colMemo"].Value = sr.Memo;
-            row.DefaultCellStyle.ForeColor = sr.State == ProductInventoryState.Nullified ? Color.Red : Color.Black;
+            ShowRowColor(row);
         }
         #endregion
 

@@ -441,6 +441,7 @@
             // txtCustomer
             // 
             this.txtCustomer.BackColor = System.Drawing.Color.White;
+            this.txtCustomer.Enabled = false;
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtCustomer.Location = new System.Drawing.Point(96, 266);
             this.txtCustomer.Name = "txtCustomer";

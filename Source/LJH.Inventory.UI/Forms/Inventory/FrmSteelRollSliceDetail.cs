@@ -97,7 +97,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                                                                   StringHelper.ToDBC(cmbSpecification.Text).Trim(),
                                                                                   sliceTo,
                                                                                   txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null,
-                                                                                  txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null);
+                                                                                  txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null, 7.85m);
                 if (p != null)
                 {
                     item = new SteelRollSlice();

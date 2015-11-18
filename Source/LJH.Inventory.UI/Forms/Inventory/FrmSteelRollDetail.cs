@@ -36,6 +36,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定规格");
                 return false;
             }
+            if (SpecificationHelper.GetWrittenThick(cmbSpecification.Text) == null || SpecificationHelper.GetWrittenWidth(cmbSpecification.Text) == null)
+            {
+                MessageBox.Show("规格设置不正确,  规格格式为 \"厚度*宽度\" ");
+                return false;
+            }
             if (this.txtOriginalWeight.DecimalValue <= 0)
             {
                 MessageBox.Show("原材料的入库重量不正确");
@@ -91,12 +96,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCategory.Text = item.Product.Category.Name;
             txtCategory.Tag = item.Product.Category;
             cmbSpecification.Text = item.Product.Specification;
-            txtOriginalWeight.DecimalValue = item.OriginalWeight.Trim();
-            txtOriginalLength.DecimalValue = item.OriginalLength.Trim();
+            if (item.OriginalWeight.HasValue) txtOriginalWeight.DecimalValue = item.OriginalWeight.Value;
+            if (item.OriginalLength.HasValue) txtOriginalLength.DecimalValue = item.OriginalLength.Value;
             //txtLength.DecimalValue = item.Length.Trim();
             //txtWeight.DecimalValue = item.Weight.Trim();
             txtPrice.DecimalValue = item.Price.Trim();
-            txtSupplier.Text = item.SupplierID;
+            txtSupplier.Text = item.Supplier;
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
             txtMemo.Text = item.Memo;
@@ -122,7 +127,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 item = new SteelRoll();
                 item.ID = Guid.NewGuid();
             }
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Text).Trim(), "原材料");
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Text).Trim(), "原材料", 7.85m);
             if (p == null) throw new Exception("创建相关产品信息失败");
             item.Product = p;
             item.ProductID = p.ID;
@@ -137,11 +142,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;
-            item.SupplierID = txtSupplier.Text;
+            item.Supplier = txtSupplier.Text;
             item.Manufacture = cmbBrand.Text;
             item.SerialNumber = txtSerialNumber.Text;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;
+            item.RealThick = item.CalThick(); //计算实际厚度
             return item;
         }
 

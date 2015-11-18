@@ -65,6 +65,8 @@ namespace LJH.Inventory.BusinessModel
         public decimal? Weight { get; set; }
 
         public decimal? Length { get; set; }
+
+        public decimal? Density { get; set; }
         /// <summary>
         /// 获取或设置产品是否是服务，如果是服务的话就不用进行库存管理
         /// </summary>

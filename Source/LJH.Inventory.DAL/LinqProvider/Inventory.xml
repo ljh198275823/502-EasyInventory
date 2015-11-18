@@ -40,6 +40,7 @@
       <Column Name="Cost" Member="Cost"  DbType="decimal(18,4) not null"  UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
+      <Column Name="Density" Member="Density"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="IsService" Member="IsService"  DbType="bit null"  UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Product_Category" Member="Category"  ThisKey="CategoryID" OtherKey="ID"/>
@@ -399,14 +400,16 @@
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="OriginalWeight" Member="OriginalWeight"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="OriginalLength" Member="OriginalLength"  DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="OriginalWeight" Member="OriginalWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="OriginalLength" Member="OriginalLength"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="RealThick" Member="RealThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="Model" Member="Model"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="SupplierID" Member="SupplierID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Customer" Member="Customer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Supplier" Member="Supplier"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Manufacture" Member="Manufacture"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="SerialNumber" Member="SerialNumber"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>

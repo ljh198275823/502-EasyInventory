@@ -29,8 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSlicedRecordView));
             this.GridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colSlicedDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,10 +55,8 @@
             this.colTotalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAfterWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAfterLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSlicer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +82,7 @@
             this.colTotalLength,
             this.colAfterWeight,
             this.colAfterLength,
+            this.colCustomer,
             this.colSlicer});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
             this.GridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -82,8 +92,28 @@
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridView.Size = new System.Drawing.Size(1013, 383);
+            this.GridView.Size = new System.Drawing.Size(1106, 383);
             this.GridView.TabIndex = 22;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 48);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // colSlicedDateTime
             // 
@@ -111,6 +141,8 @@
             // 
             // colBeforeWeight
             // 
+            dataGridViewCellStyle1.Format = "N3";
+            this.colBeforeWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colBeforeWeight.HeaderText = "加工前重量";
             this.colBeforeWeight.Name = "colBeforeWeight";
             this.colBeforeWeight.ReadOnly = true;
@@ -118,6 +150,8 @@
             // 
             // colBeforeLength
             // 
+            dataGridViewCellStyle2.Format = "N2";
+            this.colBeforeLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colBeforeLength.HeaderText = "加工前长度";
             this.colBeforeLength.Name = "colBeforeLength";
             this.colBeforeLength.ReadOnly = true;
@@ -125,12 +159,16 @@
             // 
             // colLength
             // 
+            dataGridViewCellStyle3.Format = "N2";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle3;
             this.colLength.HeaderText = "小件长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
             // colWeight
             // 
+            dataGridViewCellStyle4.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle4;
             this.colWeight.HeaderText = "小件重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
@@ -143,6 +181,8 @@
             // 
             // colTotalWeight
             // 
+            dataGridViewCellStyle5.Format = "N3";
+            this.colTotalWeight.DefaultCellStyle = dataGridViewCellStyle5;
             this.colTotalWeight.HeaderText = "加工重量";
             this.colTotalWeight.Name = "colTotalWeight";
             this.colTotalWeight.ReadOnly = true;
@@ -150,6 +190,8 @@
             // 
             // colTotalLength
             // 
+            dataGridViewCellStyle6.Format = "N2";
+            this.colTotalLength.DefaultCellStyle = dataGridViewCellStyle6;
             this.colTotalLength.HeaderText = "加工长度";
             this.colTotalLength.Name = "colTotalLength";
             this.colTotalLength.ReadOnly = true;
@@ -157,15 +199,25 @@
             // 
             // colAfterWeight
             // 
+            dataGridViewCellStyle7.Format = "N3";
+            this.colAfterWeight.DefaultCellStyle = dataGridViewCellStyle7;
             this.colAfterWeight.HeaderText = "加工后重量";
             this.colAfterWeight.Name = "colAfterWeight";
             this.colAfterWeight.ReadOnly = true;
             // 
             // colAfterLength
             // 
+            dataGridViewCellStyle8.Format = "N2";
+            this.colAfterLength.DefaultCellStyle = dataGridViewCellStyle8;
             this.colAfterLength.HeaderText = "加工后长度";
             this.colAfterLength.Name = "colAfterLength";
             this.colAfterLength.ReadOnly = true;
+            // 
+            // colCustomer
+            // 
+            this.colCustomer.HeaderText = "客户";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
             // 
             // colSlicer
             // 
@@ -173,31 +225,11 @@
             this.colSlicer.Name = "colSlicer";
             this.colSlicer.ReadOnly = true;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 48);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
             // FrmSlicedRecordView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1013, 405);
+            this.ClientSize = new System.Drawing.Size(1106, 405);
             this.Controls.Add(this.GridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSlicedRecordView";
@@ -213,6 +245,9 @@
         #endregion
 
         protected System.Windows.Forms.DataGridView GridView;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicedDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
@@ -226,9 +261,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAfterWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAfterLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicer;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
     }
 }

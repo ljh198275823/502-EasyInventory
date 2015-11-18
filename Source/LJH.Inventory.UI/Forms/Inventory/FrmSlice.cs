@@ -68,7 +68,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (txtLength.DecimalValue * txtCount.IntergerValue <= SlicingItem.Length)
                 {
                     this.txtRemainLength.DecimalValue = SlicingItem.Length.Value - txtLength.DecimalValue * txtCount.IntergerValue;
-                    this.txtRemainWeight.DecimalValue = (txtRemainLength.DecimalValue / SlicingItem.OriginalLength) * SlicingItem.OriginalWeight;
+                    this.txtRemainWeight.DecimalValue = (txtRemainLength.DecimalValue / SlicingItem.OriginalLength.Value) * SlicingItem.OriginalWeight.Value;
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (txtWeight.DecimalValue * txtCount.IntergerValue <= SlicingItem.Weight)
                 {
                     this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - txtWeight.DecimalValue * txtCount.IntergerValue;
-                    this.txtRemainLength.DecimalValue = (txtRemainWeight.DecimalValue / SlicingItem.OriginalWeight) * SlicingItem.OriginalLength;
+                    this.txtRemainLength.DecimalValue = (txtRemainWeight.DecimalValue / SlicingItem.OriginalWeight.Value) * SlicingItem.OriginalLength.Value;
                 }
                 else
                 {
@@ -135,6 +135,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     this.txtCount.IntergerValue = 0;
                     this.txtWeight.DecimalValue = 0;
                     MessageBox.Show("加工成功!");
+                    if (SlicingItem.Status == "余料")
+                    {
+                        //重新计算厚度
+                        this.DialogResult = DialogResult.OK;
+                    }
                 }
                 else
                 {
@@ -166,6 +171,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (this.txtWareHouse.Tag == null)
             {
                 MessageBox.Show("没有指定加工件存放的仓库");
+                return false;
+            }
+            if (this.txtCustomer.Tag == null)
+            {
+                MessageBox.Show("没有指定加工的客户");
                 return false;
             }
             return true;

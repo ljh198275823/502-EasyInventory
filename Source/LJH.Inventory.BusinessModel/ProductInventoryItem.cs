@@ -31,11 +31,11 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
-        public decimal OriginalWeight { get; set; }
+        public decimal? OriginalWeight { get; set; }
         /// <summary>
         /// 获取或设置库存单个长度
         /// </summary>
-        public decimal OriginalLength { get; set; }
+        public decimal? OriginalLength { get; set; }
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
@@ -44,6 +44,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置库存单个长度
         /// </summary>
         public decimal? Length { get; set; }
+        /// <summary>
+        /// 获取或设置真实厚度
+        /// </summary>
+        public decimal? RealThick { get; set; }
         /// <summary>
         /// 获取或设置库存项的单位
         /// </summary>
@@ -65,7 +69,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public ProductInventoryState State { get; set; }
 
-        public string SupplierID { get; set; }
+        public string Customer { get; set; }
+
+        public string Supplier { get; set; }
 
         public string Manufacture { get; set; }
 

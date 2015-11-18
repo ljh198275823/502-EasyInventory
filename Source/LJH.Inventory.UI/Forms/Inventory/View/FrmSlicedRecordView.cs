@@ -49,6 +49,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colTotalLength"].Value = record.BeforeLength - record.AfterLength;
             row.Cells["colTotalWeight"].Value = record.BeforeWeight - record.AfterWeight;
             row.Cells["colSlicer"].Value = record.Slicer;
+            row.Cells["colCustomer"].Value = record.Customer;
         }
         #endregion
     }

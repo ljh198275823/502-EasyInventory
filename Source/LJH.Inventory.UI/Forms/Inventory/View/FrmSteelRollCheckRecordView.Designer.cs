@@ -29,7 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBeforeWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBeforeLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,9 +44,6 @@
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChecker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -70,48 +74,6 @@
             this.GridView.Size = new System.Drawing.Size(708, 309);
             this.GridView.TabIndex = 23;
             // 
-            // colCheckDate
-            // 
-            this.colCheckDate.HeaderText = "盘点日期";
-            this.colCheckDate.Name = "colCheckDate";
-            this.colCheckDate.ReadOnly = true;
-            // 
-            // colBeforeWeight
-            // 
-            this.colBeforeWeight.HeaderText = "盘点前重量";
-            this.colBeforeWeight.Name = "colBeforeWeight";
-            this.colBeforeWeight.ReadOnly = true;
-            // 
-            // colBeforeLength
-            // 
-            this.colBeforeLength.HeaderText = "盘点前长度";
-            this.colBeforeLength.Name = "colBeforeLength";
-            this.colBeforeLength.ReadOnly = true;
-            // 
-            // colWeight
-            // 
-            this.colWeight.HeaderText = "盘点后重量";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.ReadOnly = true;
-            // 
-            // colLength
-            // 
-            this.colLength.HeaderText = "盘点后长度";
-            this.colLength.Name = "colLength";
-            this.colLength.ReadOnly = true;
-            // 
-            // colChecker
-            // 
-            this.colChecker.HeaderText = "盘点人员";
-            this.colChecker.Name = "colChecker";
-            this.colChecker.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -131,6 +93,56 @@
             this.cMnu_Export.Name = "cMnu_Export";
             this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // colCheckDate
+            // 
+            this.colCheckDate.HeaderText = "盘点日期";
+            this.colCheckDate.Name = "colCheckDate";
+            this.colCheckDate.ReadOnly = true;
+            // 
+            // colBeforeWeight
+            // 
+            dataGridViewCellStyle1.Format = "N3";
+            this.colBeforeWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colBeforeWeight.HeaderText = "盘点前重量";
+            this.colBeforeWeight.Name = "colBeforeWeight";
+            this.colBeforeWeight.ReadOnly = true;
+            // 
+            // colBeforeLength
+            // 
+            dataGridViewCellStyle2.Format = "N2";
+            this.colBeforeLength.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colBeforeLength.HeaderText = "盘点前长度";
+            this.colBeforeLength.Name = "colBeforeLength";
+            this.colBeforeLength.ReadOnly = true;
+            // 
+            // colWeight
+            // 
+            dataGridViewCellStyle3.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colWeight.HeaderText = "盘点后重量";
+            this.colWeight.Name = "colWeight";
+            this.colWeight.ReadOnly = true;
+            // 
+            // colLength
+            // 
+            dataGridViewCellStyle4.Format = "N2";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colLength.HeaderText = "盘点后长度";
+            this.colLength.Name = "colLength";
+            this.colLength.ReadOnly = true;
+            // 
+            // colChecker
+            // 
+            this.colChecker.HeaderText = "盘点人员";
+            this.colChecker.Name = "colChecker";
+            this.colChecker.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
             // 
             // FrmSteelRollCheckRecordView
             // 

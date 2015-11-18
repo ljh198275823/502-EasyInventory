@@ -33,12 +33,14 @@ namespace LJH.Inventory.BLL
                 OriginalWeight = info.OriginalWeight,
                 Weight = info.Weight,
                 Length = info.Length,
+                RealThick = info.RealThick,
                 Unit = info.Unit,
                 Price = info.Price,
                 Count = info.Count,
                 AddDate = info.AddDate,
                 State = info.State,
-                SupplierID = info.SupplierID,
+                Customer = info.Customer,
+                Supplier = info.Supplier,
                 Manufacture = info.Manufacture,
                 SerialNumber = info.SerialNumber,
                 OrderID = info.OrderID,
@@ -62,17 +64,19 @@ namespace LJH.Inventory.BLL
                 ID = info.ID,
                 WareHouseID = info.WareHouseID,
                 ProductID = info.ProductID,
-                Model = MODEL ,
+                Model = MODEL,
                 OriginalLength = info.OriginalLength,
                 OriginalWeight = info.OriginalWeight,
                 Weight = info.Weight,
                 Length = info.Length,
+                RealThick = info.RealThick,
                 Unit = info.Unit,
                 Price = info.Price,
                 Count = info.Count,
                 AddDate = info.AddDate,
                 State = info.State,
-                SupplierID = info.SupplierID,
+                Customer = info.Customer,
+                Supplier = info.Supplier,
                 Manufacture = info.Manufacture,
                 SerialNumber = info.SerialNumber,
                 OrderID = info.OrderID,
@@ -151,42 +155,43 @@ namespace LJH.Inventory.BLL
         /// <param name="length"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public CommandResult Slice(SteelRoll sr, SteelRollSliceRecord slice, WareHouse wh)
+        public CommandResult Slice(SteelRoll sr, SteelRollSliceRecord sliceSheet, WareHouse wh)
         {
-            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, slice.SliceType, slice.Weight, slice.Length);
+            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length, sr.Product.Density);
             if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(slice, unitWork);
+            ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(sliceSheet, unitWork);
 
             ProductInventoryItem item = Convert(sr);
             ProductInventoryItem newVal = item.Clone();
-            newVal.Weight = slice.AfterWeight;
-            newVal.Length = slice.AfterLength;
+            newVal.Weight = sliceSheet.AfterWeight;
+            newVal.Length = sliceSheet.AfterLength;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, item, unitWork);
 
             ProductInventoryItem pi = new ProductInventoryItem()
             {
                 ID = Guid.NewGuid(),
                 ProductID = p.ID,
-                AddDate = slice.SliceDate,
+                AddDate = sliceSheet.SliceDate,
                 InventorySheet = "加工入库",
-                InventoryItem = slice.ID,
-                Weight = slice.Weight,
-                Length = slice.Length,
-                Count = slice.Count,
-                Model = slice.SliceType,
+                InventoryItem = sliceSheet.ID,
+                Weight = sliceSheet.Weight,
+                Length = sliceSheet.Length,
+                RealThick = sr.RealThick,
+                Count = sliceSheet.Count,
+                Model = sliceSheet.SliceType,
                 State = ProductInventoryState.Inventory,
                 Unit = "件",
                 WareHouseID = wh.ID,
-                Memo = "客户:" + slice.Customer,
+                Customer =sliceSheet.Customer ,
             };
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi, unitWork);
             CommandResult ret = unitWork.Commit();
             if (ret.Result == ResultCode.Successful)
             {
-                sr.Weight = slice.AfterWeight;
-                sr.Length = slice.AfterLength;
+                sr.Weight = sliceSheet.AfterWeight;
+                sr.Length = sliceSheet.AfterLength;
             }
             return ret;
         }

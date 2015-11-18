@@ -34,11 +34,11 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
-        public decimal OriginalWeight { get; set; }
+        public decimal? OriginalWeight { get; set; }
         /// <summary>
         /// 获取或设置库存单个长度
         /// </summary>
-        public decimal OriginalLength { get; set; }
+        public decimal? OriginalLength { get; set; }
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
@@ -47,6 +47,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置库存单个长度
         /// </summary>
         public decimal? Length { get; set; }
+        /// <summary>
+        /// 获取或设置真实厚度
+        /// </summary>
+        public decimal? RealThick { get; set; }
         /// <summary>
         /// 获取或设置库存项的单位
         /// </summary>
@@ -68,7 +72,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public ProductInventoryState State { get; set; }
 
-        public string SupplierID { get; set; }
+        public string Customer { get; set; }
+
+        public string Supplier { get; set; }
 
         public string Manufacture { get; set; }
 
@@ -130,7 +136,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "无余料";
+                if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "余料";
                 else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
                 else if (OriginalLength > Length) return "余卷";
                 return "整卷";
@@ -143,6 +149,25 @@ namespace LJH.Inventory.BusinessModel
         public SteelRoll Clone()
         {
             return this.MemberwiseClone() as SteelRoll;
+        }
+
+        public decimal? CalThick()
+        {
+            if (Product != null && !string.IsNullOrEmpty(Product.Specification) && Product.Density.HasValue)
+            {
+                try
+                {
+                    decimal? width = SpecificationHelper.GetWrittenWidth(Product.Specification);
+                    if (width.HasValue && width > 0)
+                    {
+                        return OriginalWeight * 1000 * 1000 / (width.Value * OriginalLength * Product.Density.Value);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            return null;
         }
         #endregion
     }

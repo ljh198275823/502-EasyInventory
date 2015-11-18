@@ -45,7 +45,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                           (chk开卷.Checked && it.Product.Model == "开卷") ||
                                           (chk开吨.Checked && it.Product.Model == "开吨")).ToList();
                 return (from p in items
-                        orderby p.Product.Specification ascending
+                        orderby p.Product.CategoryID ascending,
+                                SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
+                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
+                                p.WareHouse.Name descending
                         select (object)p).ToList();
             }
             return null;

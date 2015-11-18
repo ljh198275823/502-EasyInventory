@@ -89,12 +89,12 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public Product Create(string categoryID, string specification, string model)
+        public Product Create(string categoryID, string specification, string model, decimal? density)
         {
-            return Create(categoryID, specification, model, null, null);
+            return Create(categoryID, specification, model, null, null, density);
         }
 
-        public Product Create(string categoryID, string specification, string model, decimal? weight, decimal? length)
+        public Product Create(string categoryID, string specification, string model, decimal? weight, decimal? length, decimal? density)
         {
             Product p = null;
             List<Product> ps = GetItems(null).QueryObjects;
@@ -107,11 +107,13 @@ namespace LJH.Inventory.BLL
             p = new Product();
             p.Specification = specification;
             p.CategoryID = categoryID;
+            p.Category = new ProductCategoryBLL(RepoUri).GetByID(categoryID).QueryObject;
             p.Name = p.ID;
             p.Unit = string.Empty;
             p.Model = model;
             p.Length = length;
             p.Weight = weight;
+            p.Density = density;
             var ret = Add(p);
             if (ret.Result == ResultCode.Successful) return p;
             return null;

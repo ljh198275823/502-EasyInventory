@@ -57,11 +57,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colWeight"].Value = c.Weight;
             row.Cells["colLength"].Value = c.Length;
+            row.Cells["colRealThick"].Value = c.RealThick;
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colInventorySheet"].Value = c.InventorySheet;
             row.Cells["colOrderID"].Value = c.OrderID;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
+            row.Cells["colCustomer"].Value = c.Customer;
             row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion
