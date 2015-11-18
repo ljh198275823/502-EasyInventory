@@ -117,11 +117,14 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             if (_CustomerReceivables != null && _CustomerReceivables.Count > 0)
             {
-                row.Cells["colReceivable"].Value = _CustomerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0).Trim();
+                decimal rs = _CustomerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0).Trim();
+                row.Cells["colReceivable"].Value = rs;
+                row.Cells["colFileID"].Value = rs > 0 ? (c.FileID.HasValue ? c.FileID.ToString() : null) : null;
             }
             else
             {
                 row.Cells["colReceivable"].Value = 0;
+                row.Cells["colFileID"].Value = null;
             }
         }
 
@@ -197,13 +200,34 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
+                CompanyInfo customer = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
                 FrmCreditLine frm = new FrmCreditLine();
                 frm.StartPosition = FormStartPosition.CenterParent;
-                frm.Customer = c;
-                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c);
+                frm.Customer = customer;
+                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customer);
             }
         }
         #endregion
+
+        private void mnu_SetFileID_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo customer = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
+                List<int> exludes = new List<int>();
+                foreach (var c in _Customers)
+                {
+                    if (c.ID != customer.ID  && c.City == customer.City && c.FileID .HasValue && _CustomerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0) > 0)
+                    {
+                        exludes.Add(c.FileID.Value);
+                    }
+                }
+                FrmSetFileID frm = new FrmSetFileID();
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ExcludeFileIDs = exludes;
+                frm.Customer = customer;
+                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customer);
+            }
+        }
     }
 }

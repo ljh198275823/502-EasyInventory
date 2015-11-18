@@ -52,9 +52,11 @@
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_SetFileID = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -67,7 +69,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(194, 368);
+            this.pnlLeft.Size = new System.Drawing.Size(194, 366);
             this.pnlLeft.TabIndex = 110;
             // 
             // categoryTree
@@ -79,7 +81,7 @@
             this.categoryTree.LoadCustomer = false;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
-            this.categoryTree.Size = new System.Drawing.Size(194, 368);
+            this.categoryTree.Size = new System.Drawing.Size(194, 366);
             this.categoryTree.TabIndex = 2;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.FreshData_Clicked);
             // 
@@ -88,7 +90,7 @@
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.splitter1.Location = new System.Drawing.Point(194, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 368);
+            this.splitter1.Size = new System.Drawing.Size(8, 366);
             this.splitter1.TabIndex = 111;
             this.splitter1.TabStop = false;
             // 
@@ -98,11 +100,12 @@
             this.cMnu_Fresh,
             this.cMnu_Payment,
             this.mnu_UpdateCreditLine,
+            this.mnu_SetFileID,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 164);
             // 
             // cMnu_Fresh
             // 
@@ -148,7 +151,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(202, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(819, 36);
+            this.panel5.Size = new System.Drawing.Size(913, 36);
             this.panel5.TabIndex = 113;
             // 
             // txtKeyword
@@ -159,7 +162,7 @@
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(69, 7);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(738, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(832, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
@@ -185,6 +188,7 @@
             this.colName,
             this.colCategory,
             this.colCreditLine,
+            this.colFileID,
             this.colReceivable,
             this.colPrepay,
             this.colTotal});
@@ -196,7 +200,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(819, 310);
+            this.dataGridView1.Size = new System.Drawing.Size(913, 330);
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -241,6 +245,12 @@
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
             // 
+            // colFileID
+            // 
+            this.colFileID.HeaderText = "归档码";
+            this.colFileID.Name = "colFileID";
+            this.colFileID.ReadOnly = true;
+            // 
             // colReceivable
             // 
             dataGridViewCellStyle2.Format = "C2";
@@ -269,11 +279,18 @@
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             // 
+            // mnu_SetFileID
+            // 
+            this.mnu_SetFileID.Name = "mnu_SetFileID";
+            this.mnu_SetFileID.Size = new System.Drawing.Size(172, 22);
+            this.mnu_SetFileID.Text = "设置归档号";
+            this.mnu_SetFileID.Click += new System.EventHandler(this.mnu_SetFileID_Click);
+            // 
             // FrmCustomerFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1021, 368);
+            this.ClientSize = new System.Drawing.Size(1115, 388);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.splitter1);
@@ -316,8 +333,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFileID;
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.ToolStripMenuItem mnu_SetFileID;
     }
 }

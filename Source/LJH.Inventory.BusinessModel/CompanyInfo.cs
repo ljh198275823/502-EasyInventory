@@ -78,30 +78,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Email { get; set; }
         /// <summary>
-        /// 获取或设置客户的密码
-        /// </summary>
-        /// <summary>
-        /// 操作员登录密码
-        /// </summary>
-        public string Password
-        {
-            get
-            {
-                if (_Password.Length > 14)
-                {
-                    return (new DTEncrypt()).DSEncrypt(_Password);
-                }
-                else
-                {
-                    return _Password;
-                }
-            }
-            set
-            {
-                _Password = (new DTEncrypt()).Encrypt(value);
-            }
-        }
-        /// <summary>
         /// 获取或设置地址
         /// </summary>
         public string Address { get; set; }
@@ -114,10 +90,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string BankAccount { get; set; }
         /// <summary>
-        /// 获取或设置SwiftNo
-        /// </summary>
-        public string SwiftNO { get; set; }
-        /// <summary>
         /// 获取或设置客户资料的创建者
         /// </summary>
         public string Creater { get; set; }
@@ -126,13 +98,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string BusinessMan { get; set; }
         /// <summary>
-        /// 获取或设置客户的来源，比如说是从展会认识的，还是网上认识的等。
+        /// 获取或设置客户的归档码
         /// </summary>
-        public string DevelopFrom { get; set; }
-        /// <summary>
-        /// 获取或设置客户给本公司的编号
-        /// </summary>
-        public string MyID { get; set; }
+        public int? FileID { get; set; }
         /// <summary>
         /// 获取或设置备注
         /// </summary>

@@ -168,6 +168,31 @@ namespace LJH.Inventory.BLL
             ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Delete(info, unitWork);
             return unitWork.Commit();
         }
+
+        public CommandResult SetFileID(CompanyInfo customer, int fid)
+        {
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            var provider=ProviderFactory .Create <IProvider <CompanyInfo ,string>>(RepoUri );
+            List<CompanyInfo> cs = GetAllCustomers().QueryObjects;
+            foreach (var c in cs)
+            {
+                if (c.ID != customer.ID && c.City ==customer .City &&  c.FileID == fid) //将同一个城市的其它有相同归档码的客户的归档码设置成空
+                {
+                    var newVal = c.Clone();
+                    newVal.FileID = null;
+                    provider.Update(newVal, c, unitWork);
+                }
+            }
+            var clone = customer.Clone();
+            clone.FileID = fid;
+            provider.Update(clone, customer, unitWork);
+            var ret = unitWork.Commit();
+            if (ret.Result == ResultCode.Successful)
+            {
+                customer.FileID = fid;
+            }
+            return ret;
+        }
         #endregion
     }
 }
