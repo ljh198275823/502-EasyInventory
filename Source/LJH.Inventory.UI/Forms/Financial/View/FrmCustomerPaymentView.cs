@@ -75,30 +75,10 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 CustomerPaymentSearchCondition cpsc = SearchCondition as CustomerPaymentSearchCondition;
                 if (cpsc != null)
                 {
-                    if (!chkShowAll.Checked) cpsc.HasRemain = false;
+                    if (!chkShowAll.Checked) cpsc.HasRemain = true;
                     else cpsc.HasRemain = null;
                 }
                 ReFreshData();
-            }
-        }
-
-        private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                if (GridView.Columns[e.ColumnIndex].Name == "colID")
-                {
-                    CustomerPayment cp = GridView.Rows[e.RowIndex].Tag as CustomerPayment;
-                    if (cp != null)
-                    {
-                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                        frm.IsAdding = false;
-                        frm.IsForView = true;
-                        frm.PaymentType = PaymentType;
-                        frm.UpdatingItem = cp;
-                        frm.ShowDialog();
-                    }
-                }
             }
         }
         #endregion

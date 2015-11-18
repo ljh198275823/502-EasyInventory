@@ -40,10 +40,12 @@
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_UpdateCreditLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_SetFileID = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.chkOnlyHasRecievables = new System.Windows.Forms.CheckBox();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -56,7 +58,6 @@
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_SetFileID = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -105,7 +106,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 142);
             // 
             // cMnu_Fresh
             // 
@@ -127,6 +128,13 @@
             this.mnu_UpdateCreditLine.Text = "修改信用额度";
             this.mnu_UpdateCreditLine.Click += new System.EventHandler(this.mnu_UpdateCreditLine_Click);
             // 
+            // mnu_SetFileID
+            // 
+            this.mnu_SetFileID.Name = "mnu_SetFileID";
+            this.mnu_SetFileID.Size = new System.Drawing.Size(172, 22);
+            this.mnu_SetFileID.Text = "设置归档号";
+            this.mnu_SetFileID.Click += new System.EventHandler(this.mnu_SetFileID_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -146,6 +154,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.chkOnlyHasRecievables);
             this.panel5.Controls.Add(this.txtKeyword);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
@@ -154,22 +163,33 @@
             this.panel5.Size = new System.Drawing.Size(913, 36);
             this.panel5.TabIndex = 113;
             // 
+            // chkOnlyHasRecievables
+            // 
+            this.chkOnlyHasRecievables.AutoSize = true;
+            this.chkOnlyHasRecievables.Location = new System.Drawing.Point(20, 10);
+            this.chkOnlyHasRecievables.Name = "chkOnlyHasRecievables";
+            this.chkOnlyHasRecievables.Size = new System.Drawing.Size(156, 16);
+            this.chkOnlyHasRecievables.TabIndex = 2;
+            this.chkOnlyHasRecievables.Text = "只显示有应收账款的客户";
+            this.chkOnlyHasRecievables.UseVisualStyleBackColor = true;
+            this.chkOnlyHasRecievables.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
             // txtKeyword
             // 
             this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtKeyword.Location = new System.Drawing.Point(69, 7);
+            this.txtKeyword.Location = new System.Drawing.Point(262, 8);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(832, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(586, 21);
             this.txtKeyword.TabIndex = 1;
-            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
+            this.txtKeyword.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 11);
+            this.label2.Location = new System.Drawing.Point(203, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
@@ -279,13 +299,6 @@
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             // 
-            // mnu_SetFileID
-            // 
-            this.mnu_SetFileID.Name = "mnu_SetFileID";
-            this.mnu_SetFileID.Size = new System.Drawing.Size(172, 22);
-            this.mnu_SetFileID.Text = "设置归档号";
-            this.mnu_SetFileID.Click += new System.EventHandler(this.mnu_SetFileID_Click);
-            // 
             // FrmCustomerFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -338,5 +351,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.ToolStripMenuItem mnu_SetFileID;
+        private System.Windows.Forms.CheckBox chkOnlyHasRecievables;
     }
 }

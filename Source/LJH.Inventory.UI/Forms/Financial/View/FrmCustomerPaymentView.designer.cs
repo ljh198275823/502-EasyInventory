@@ -35,7 +35,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerPaymentView));
             this.GridView = new System.Windows.Forms.DataGridView();
             this.chkShowAll = new System.Windows.Forms.CheckBox();
-            this.colID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,9 +50,9 @@
             this.GridView.AllowUserToAddRows = false;
             this.GridView.AllowUserToDeleteRows = false;
             this.GridView.AllowUserToResizeRows = false;
-            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GridView.BackgroundColor = System.Drawing.Color.White;
             this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -70,7 +70,6 @@
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridView.Size = new System.Drawing.Size(714, 304);
             this.GridView.TabIndex = 21;
-            this.GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             // 
             // chkShowAll
             // 
@@ -91,6 +90,7 @@
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
             this.colID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colSheetDate
             // 
@@ -107,6 +107,7 @@
             this.colPaymentMode.HeaderText = "付款方式";
             this.colPaymentMode.Name = "colPaymentMode";
             this.colPaymentMode.ReadOnly = true;
+            this.colPaymentMode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAmount
             // 
@@ -125,6 +126,7 @@
             this.colAssigned.HeaderText = "已核销";
             this.colAssigned.Name = "colAssigned";
             this.colAssigned.ReadOnly = true;
+            this.colAssigned.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colRemain
             // 
@@ -166,7 +168,7 @@
 
         private System.Windows.Forms.DataGridView GridView;
         private System.Windows.Forms.CheckBox chkShowAll;
-        private System.Windows.Forms.DataGridViewLinkColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;

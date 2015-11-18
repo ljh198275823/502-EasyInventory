@@ -18,9 +18,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         }
 
         #region 私有变量
-        private List<CompanyInfo> _Customers = null;
-        private List<CustomerPayment> _CustomerPayments = null;
-        private List<CustomerReceivable> _CustomerReceivables = null;
+        private List<CustomerState> _CustomerStates = null;
         #endregion
 
         #region 私有方法
@@ -32,14 +30,20 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private List<object> FilterData()
         {
-            List<CompanyInfo> items = _Customers;
-            CustomerType pc = null;
-            if (this.categoryTree.SelectedNode != null) pc = this.categoryTree.SelectedNode.Tag as CustomerType;
-            if (pc != null) items = _Customers.Where(it => it.CategoryID == pc.ID).ToList();
-
-            return (from p in items
-                    orderby p.Name ascending
-                    select (object)p).ToList();
+            List<CustomerState> items = _CustomerStates;
+            if (items != null && items.Count > 0)
+            {
+                if (this.categoryTree.SelectedNode != null)
+                {
+                    var categories = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+                    if (categories != null) items = items.Where(it => categories.Exists(c => c.ID == it.Customer.CategoryID)).ToList();
+                }
+                if (chkOnlyHasRecievables.Checked) items = items.Where(it => it.Recievables > 0).ToList();
+                return (from p in items
+                        orderby p.Customer.Name ascending
+                        select (object)p).ToList();
+            }
+            return null;
         }
         #endregion
 
@@ -72,60 +76,63 @@ namespace LJH.Inventory.UI.Forms.Financial
             cpsc.PaymentTypes = new List<CustomerPaymentType>();
             cpsc.PaymentTypes.Add(CustomerPaymentType.Customer);
             cpsc.States = new List<SheetState>();
+            cpsc.States.Add(SheetState.Add);
             cpsc.States.Add(SheetState.Approved);
             cpsc.HasRemain = true;
-            _CustomerPayments = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(cpsc).QueryObjects;
+            var customerPayments = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(cpsc).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
             crsc.Settled = false;
             crsc.ReceivableTypes = new List<CustomerReceivableType>();
             crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
             crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
-            _CustomerReceivables = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(crsc).QueryObjects;
+            var customerReceivables = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(crsc).QueryObjects;
 
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
+            List<CompanyInfo> customers = null;
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
                 con.ClassID = CompanyClass.Customer;
-                _Customers = bll.GetItems(con).QueryObjects;
+                customers = bll.GetItems(con).QueryObjects;
             }
             else
             {
-                _Customers = bll.GetItems(SearchCondition).QueryObjects;
+                customers = bll.GetItems(SearchCondition).QueryObjects;
             }
+
+            if (customers != null && customers.Count > 0)
+            {
+                _CustomerStates = new List<CustomerState>();
+                foreach (var c in customers)
+                {
+                    CustomerState cs = new CustomerState()
+                    {
+                        Customer = c,
+                        Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0) : 0,
+                        Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID ? it.Remain : 0) : 0,
+                    };
+                    _CustomerStates.Add(cs);
+                }
+            }
+
             List<object> records = FilterData();
             return records;
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            CompanyInfo c = item as CompanyInfo;
+            CustomerState cs = item as CustomerState;
+            CompanyInfo c = cs.Customer;
             row.Tag = c;
             row.Cells["colImage"].Value = Properties.Resources.customer;
             row.Cells["colID"].Value = c.ID;
             row.Cells["colName"].Value = c.Name;
             row.Cells["colCategory"].Value = c.CategoryID;
             row.Cells["colCreditLine"].Value = c.CreditLine;
-            if (_CustomerPayments != null && _CustomerPayments.Count > 0)
-            {
-                row.Cells["colPrepay"].Value = _CustomerPayments.Sum(it => it.CustomerID == c.ID ? it.Remain : 0).Trim();
-            }
-            else
-            {
-                row.Cells["colPrepay"].Value = 0;
-            }
-            if (_CustomerReceivables != null && _CustomerReceivables.Count > 0)
-            {
-                decimal rs = _CustomerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0).Trim();
-                row.Cells["colReceivable"].Value = rs;
-                row.Cells["colFileID"].Value = rs > 0 ? (c.FileID.HasValue ? c.FileID.ToString() : null) : null;
-            }
-            else
-            {
-                row.Cells["colReceivable"].Value = 0;
-                row.Cells["colFileID"].Value = null;
-            }
+            row.Cells["colPrepay"].Value = cs.Prepay;
+            row.Cells["colReceivable"].Value = cs.Recievables;
+            row.Cells["colFileID"].Value = cs.Recievables > 0 ? (c.FileID.HasValue ? c.FileID.ToString() : null) : null;
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
@@ -141,7 +148,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             FreshData();
         }
 
-        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        private void FreshData_Clicked(object sender, EventArgs e)
         {
             FreshData();
         }
@@ -152,7 +159,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
                 {
-                    CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
+                    CompanyInfo c = (dataGridView1.Rows[e.RowIndex].Tag as CustomerState).Customer;
                     View.FrmCustomerReceivableView frm = new View.FrmCustomerReceivableView();
                     CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
                     con.CustomerID = c.ID;
@@ -166,13 +173,14 @@ namespace LJH.Inventory.UI.Forms.Financial
                 }
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
-                    CompanyInfo c = dataGridView1.Rows[e.RowIndex].Tag as CompanyInfo;
+                    CompanyInfo c = (dataGridView1.Rows[e.RowIndex].Tag as CustomerState).Customer;
                     View.FrmCustomerPaymentView frm = new View.FrmCustomerPaymentView();
                     CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
                     con.CustomerID = c.ID;
                     con.PaymentTypes = new List<CustomerPaymentType>();
                     con.PaymentTypes.Add(CustomerPaymentType.Customer);
                     con.States = new List<SheetState>();
+                    con.States.Add(SheetState.Add);
                     con.States.Add(SheetState.Approved);
                     con.HasRemain = true;
                     frm.SearchCondition = con;
@@ -186,48 +194,68 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void mnu_Payment_Click(object sender, EventArgs e)
         {
             FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-            frm.Customer = dataGridView1.SelectedRows.Count == 1 ? (dataGridView1.SelectedRows[0].Tag as CompanyInfo) : null;
+            CompanyInfo customer = dataGridView1.SelectedRows.Count == 1 ? (dataGridView1.SelectedRows[0].Tag as CustomerState).Customer : null;
+            frm.Customer = customer;
             frm.PaymentType = CustomerPaymentType.Customer;
             frm.IsAdding = true;
-            frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
-            {
-                ReFreshData();
-            };
             frm.ShowDialog();
+            ReFreshData();
+            if (customer != null)
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    var cs = row.Tag as CustomerState;
+                    row.Selected = cs.Customer.ID == customer.ID;
+                }
+            }
+        }
+
+        private void mnu_SetFileID_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CustomerState customerState = dataGridView1.SelectedRows[0].Tag as CustomerState;
+                if (customerState.Recievables > 0)
+                {
+                    CompanyInfo customer = customerState.Customer;
+                    List<int> exludes = new List<int>();
+                    foreach (var cs in _CustomerStates)
+                    {
+                        CompanyInfo c = cs.Customer;
+                        if (c.ID != customer.ID && c.City == customer.City && c.FileID.HasValue && cs.Recievables > 0)
+                        {
+                            exludes.Add(c.FileID.Value);
+                        }
+                    }
+                    FrmSetFileID frm = new FrmSetFileID();
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ExcludeFileIDs = exludes;
+                    frm.Customer = customer;
+                    if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customerState);
+                }
+            }
         }
 
         private void mnu_UpdateCreditLine_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                CompanyInfo customer = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
+                var cs = dataGridView1.SelectedRows[0].Tag as CustomerState;
                 FrmCreditLine frm = new FrmCreditLine();
                 frm.StartPosition = FormStartPosition.CenterParent;
-                frm.Customer = customer;
-                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customer);
+                frm.Customer = cs.Customer;
+                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
             }
         }
         #endregion
 
-        private void mnu_SetFileID_Click(object sender, EventArgs e)
+        internal class CustomerState
         {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                CompanyInfo customer = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
-                List<int> exludes = new List<int>();
-                foreach (var c in _Customers)
-                {
-                    if (c.ID != customer.ID  && c.City == customer.City && c.FileID .HasValue && _CustomerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0) > 0)
-                    {
-                        exludes.Add(c.FileID.Value);
-                    }
-                }
-                FrmSetFileID frm = new FrmSetFileID();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.ExcludeFileIDs = exludes;
-                frm.Customer = customer;
-                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customer);
-            }
+            public CompanyInfo Customer { get; set; }
+
+            public decimal Recievables { get; set; }
+
+            public decimal Prepay { get; set; }
         }
     }
 }

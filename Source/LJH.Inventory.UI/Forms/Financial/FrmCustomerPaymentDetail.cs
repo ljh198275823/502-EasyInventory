@@ -151,7 +151,8 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.ShowButtonState(this.toolStrip1);
             CustomerPayment cp = UpdatingItem != null ? UpdatingItem as CustomerPayment : null;
-            btnPayment.Enabled = cp != null && cp.State == SheetState.Approved && cp.Remain > 0;
+            btnPayment.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
+            //btnPayment.Enabled = cp != null && cp.State == SheetState.Approved && cp.Remain > 0;
             btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Approve);
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
@@ -224,10 +225,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 FrmPaymentAssign frm = new FrmPaymentAssign();
                 frm.PaymentType = PaymentType;
                 frm.CustomerPaymentID = paymentID;
+                this.Close();
                 frm.ShowDialog();
-                UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
-                ItemShowing();
-                OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
+                //UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
+                //ItemShowing();
+                //OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
             }
         }
 
