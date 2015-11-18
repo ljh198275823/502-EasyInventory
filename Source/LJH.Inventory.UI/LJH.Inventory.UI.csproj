@@ -111,10 +111,10 @@
     <Compile Include="Forms\FrmChangePwd.designer.cs">
       <DependentUpon>FrmChangePwd.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmSetFileID.cs">
+    <Compile Include="Forms\Financial\FrmSetFileID.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmSetFileID.Designer.cs">
+    <Compile Include="Forms\Financial\FrmSetFileID.Designer.cs">
       <DependentUpon>FrmSetFileID.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\FrmSlice.cs">
@@ -689,7 +689,7 @@
     <EmbeddedResource Include="Forms\FrmChangePwd.resx">
       <DependentUpon>FrmChangePwd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmSetFileID.resx">
+    <EmbeddedResource Include="Forms\Financial\FrmSetFileID.resx">
       <DependentUpon>FrmSetFileID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSlice.resx">

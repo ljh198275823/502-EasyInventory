@@ -130,10 +130,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Slice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
                 if (ret.Result == ResultCode.Successful)
                 {
-                    ShowSlicingItem(SlicingItem);
                     this.txtLength.DecimalValue = 0;
                     this.txtCount.IntergerValue = 0;
                     this.txtWeight.DecimalValue = 0;
+                    ShowSlicingItem(SlicingItem);
                     MessageBox.Show("加工成功!");
                     if (SlicingItem.Status == "余料")
                     {

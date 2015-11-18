@@ -51,16 +51,18 @@
             this.lnkWareHouse = new System.Windows.Forms.LinkLabel();
             this.cmbBrand = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkBrand = new System.Windows.Forms.LinkLabel();
+            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(384, 240);
+            this.btnClose.Location = new System.Drawing.Point(362, 270);
             this.btnClose.Size = new System.Drawing.Size(107, 35);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(256, 240);
+            this.btnOk.Location = new System.Drawing.Point(234, 270);
             this.btnOk.Size = new System.Drawing.Size(107, 35);
             // 
             // label14
@@ -75,7 +77,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(67, 186);
+            this.label12.Location = new System.Drawing.Point(67, 218);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 55;
@@ -94,7 +96,7 @@
             // 
             this.dtStorageDateTime.Location = new System.Drawing.Point(100, 25);
             this.dtStorageDateTime.Name = "dtStorageDateTime";
-            this.dtStorageDateTime.Size = new System.Drawing.Size(121, 21);
+            this.dtStorageDateTime.Size = new System.Drawing.Size(145, 21);
             this.dtStorageDateTime.TabIndex = 43;
             // 
             // label6
@@ -149,7 +151,7 @@
             0});
             this.txtOriginalWeight.Name = "txtOriginalWeight";
             this.txtOriginalWeight.PointCount = 3;
-            this.txtOriginalWeight.Size = new System.Drawing.Size(121, 21);
+            this.txtOriginalWeight.Size = new System.Drawing.Size(145, 21);
             this.txtOriginalWeight.TabIndex = 62;
             this.txtOriginalWeight.Text = "0";
             this.txtOriginalWeight.TextChanged += new System.EventHandler(this.txtOriginalWeight_TextChanged);
@@ -191,14 +193,14 @@
             0});
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.PointCount = 2;
-            this.txtPrice.Size = new System.Drawing.Size(121, 21);
+            this.txtPrice.Size = new System.Drawing.Size(145, 21);
             this.txtPrice.TabIndex = 66;
             this.txtPrice.Text = "0";
             // 
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(100, 186);
+            this.txtMemo.Location = new System.Drawing.Point(100, 218);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(374, 21);
             this.txtMemo.TabIndex = 67;
@@ -235,40 +237,38 @@
             // 
             // txtCategory
             // 
-            this.txtCategory.Enabled = false;
             this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtCategory.Location = new System.Drawing.Point(329, 57);
             this.txtCategory.Name = "txtCategory";
+            this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(145, 21);
             this.txtCategory.TabIndex = 71;
-            this.txtCategory.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
             // 
             // txtSupplier
             // 
             this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtSupplier.Location = new System.Drawing.Point(100, 153);
             this.txtSupplier.Name = "txtSupplier";
-            this.txtSupplier.Size = new System.Drawing.Size(121, 21);
+            this.txtSupplier.ReadOnly = true;
+            this.txtSupplier.Size = new System.Drawing.Size(145, 21);
             this.txtSupplier.TabIndex = 72;
-            this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
             // 
             // cmbSpecification
             // 
             this.cmbSpecification.FormattingEnabled = true;
             this.cmbSpecification.Location = new System.Drawing.Point(100, 55);
             this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
+            this.cmbSpecification.Size = new System.Drawing.Size(145, 20);
             this.cmbSpecification.TabIndex = 74;
             // 
             // txtWareHouse
             // 
-            this.txtWareHouse.Enabled = false;
             this.txtWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtWareHouse.Location = new System.Drawing.Point(329, 25);
             this.txtWareHouse.Name = "txtWareHouse";
+            this.txtWareHouse.ReadOnly = true;
             this.txtWareHouse.Size = new System.Drawing.Size(145, 21);
             this.txtWareHouse.TabIndex = 76;
-            this.txtWareHouse.DoubleClick += new System.EventHandler(this.txtWareHouse_DoubleClick);
             // 
             // lnkWareHouse
             // 
@@ -286,6 +286,7 @@
             this.cmbBrand.ImeMode = System.Windows.Forms.ImeMode.On;
             this.cmbBrand.Location = new System.Drawing.Point(329, 153);
             this.cmbBrand.Name = "cmbBrand";
+            this.cmbBrand.ReadOnly = true;
             this.cmbBrand.Size = new System.Drawing.Size(145, 21);
             this.cmbBrand.TabIndex = 78;
             // 
@@ -300,11 +301,34 @@
             this.lnkBrand.Text = "厂家";
             this.lnkBrand.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkBrand_LinkClicked);
             // 
+            // txtCustomer
+            // 
+            this.txtCustomer.BackColor = System.Drawing.SystemColors.Control;
+            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCustomer.Location = new System.Drawing.Point(100, 184);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(374, 21);
+            this.txtCustomer.TabIndex = 82;
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.AutoSize = true;
+            this.lnkCustomer.Location = new System.Drawing.Point(67, 188);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
+            this.lnkCustomer.TabIndex = 81;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
             // FrmSteelRollDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 287);
+            this.ClientSize = new System.Drawing.Size(496, 326);
+            this.Controls.Add(this.txtCustomer);
+            this.Controls.Add(this.lnkCustomer);
             this.Controls.Add(this.cmbBrand);
             this.Controls.Add(this.lnkBrand);
             this.Controls.Add(this.txtWareHouse);
@@ -353,6 +377,8 @@
             this.Controls.SetChildIndex(this.txtWareHouse, 0);
             this.Controls.SetChildIndex(this.lnkBrand, 0);
             this.Controls.SetChildIndex(this.cmbBrand, 0);
+            this.Controls.SetChildIndex(this.lnkCustomer, 0);
+            this.Controls.SetChildIndex(this.txtCustomer, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,5 +408,7 @@
         private System.Windows.Forms.LinkLabel lnkWareHouse;
         private GeneralLibrary.WinformControl.DBCTextBox cmbBrand;
         private System.Windows.Forms.LinkLabel lnkBrand;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
     }
 }

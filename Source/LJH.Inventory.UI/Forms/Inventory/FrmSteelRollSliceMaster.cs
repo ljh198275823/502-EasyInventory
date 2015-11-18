@@ -41,6 +41,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouse.ID == wareHouseComboBox1.SelectedWareHouseID).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
+                if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Product.Weight == txtWeight.DecimalValue).ToList();
+                if (txtLength.DecimalValue > 0) items = items.Where(it => it.Product.Length == txtLength.DecimalValue).ToList();
                 items = items.Where(it => (chk开平.Checked && it.Product.Model == "开平") ||
                                           (chk开卷.Checked && it.Product.Model == "开卷") ||
                                           (chk开吨.Checked && it.Product.Model == "开吨")).ToList();

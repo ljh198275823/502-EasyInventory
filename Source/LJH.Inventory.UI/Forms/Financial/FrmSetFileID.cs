@@ -10,7 +10,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 
-namespace LJH.Inventory.UI.Forms
+namespace LJH.Inventory.UI.Forms.Financial
 {
     public partial class FrmSetFileID : Form
     {

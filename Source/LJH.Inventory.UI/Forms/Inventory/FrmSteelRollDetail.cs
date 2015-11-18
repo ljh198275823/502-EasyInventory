@@ -61,6 +61,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             //    MessageBox.Show("剩余重量大于入库重量");
             //    return false;
             //}
+            if (string.IsNullOrEmpty(txtCustomer.Text))
+            {
+                MessageBox.Show("没有指定客户");
+                return false;
+            }
             if (string.IsNullOrEmpty(txtSupplier.Text))
             {
                 MessageBox.Show("没有指定供货商");
@@ -77,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void InitControls()
         {
-            this.dtStorageDateTime.Value = DateTime.Today;
+            this.dtStorageDateTime.Value = DateTime.Now;
             cmbSpecification.Init();
         }
 
@@ -101,6 +106,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             //txtLength.DecimalValue = item.Length.Trim();
             //txtWeight.DecimalValue = item.Weight.Trim();
             txtPrice.DecimalValue = item.Price.Trim();
+            txtCustomer.Text = item.Customer;
             txtSupplier.Text = item.Supplier;
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
@@ -115,8 +121,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             //txtWeight.Enabled = item.CanEdit;
             txtPrice.Enabled = item.CanEdit;
             lnkSupplier.Enabled = item.CanEdit;
-            cmbBrand.Enabled = item.CanEdit;
             txtSerialNumber.Enabled = item.CanEdit;
+            btnOk.Enabled = item.CanEdit;
         }
 
         protected override object GetItemFromInput()
@@ -142,6 +148,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;
+            item.Customer = txtCustomer.Text;
             item.Supplier = txtSupplier.Text;
             item.Manufacture = cmbBrand.Text;
             item.SerialNumber = txtSerialNumber.Text;
@@ -175,16 +182,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void txtCategory_DoubleClick(object sender, EventArgs e)
-        {
-            SteelRoll item = UpdatingItem as SteelRoll;
-            if (item == null || item.CanEdit)
-            {
-                txtCategory.Text = string.Empty;
-                txtCategory.Tag = null;
-            }
-        }
-
         private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
@@ -195,12 +192,34 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void txtSupplier_DoubleClick(object sender, EventArgs e)
+        private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            SteelRoll item = UpdatingItem as SteelRoll;
-            if (item == null || item.CanEdit)
+            FrmWareHouseMaster frm = new FrmWareHouseMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
             {
-                txtSupplier.Text = string.Empty;
+                txtWareHouse.Text = (frm.SelectedItem as WareHouse).Name;
+                txtWareHouse.Tag = frm.SelectedItem;
+            }
+        }
+
+        private void lnkBrand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                cmbBrand.Text = (frm.SelectedItem as CompanyInfo).Name;
+            }
+        }
+
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Sale.FrmCustomerMaster frm = new Sale.FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txtCustomer.Text = (frm.SelectedItem as CompanyInfo).Name;
             }
         }
         #endregion
@@ -215,35 +234,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             //if (txtLength.DecimalValue == 0) txtWeight.DecimalValue = txtOriginalLength.DecimalValue;
         }
 
-        private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmWareHouseMaster frm = new FrmWareHouseMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                txtWareHouse.Text = (frm.SelectedItem as WareHouse).Name;
-                txtWareHouse.Tag = frm.SelectedItem;
-            }
-        }
-
-        private void txtWareHouse_DoubleClick(object sender, EventArgs e)
-        {
-            SteelRoll item = UpdatingItem as SteelRoll;
-            if (item == null || item.CanEdit)
-            {
-                txtWareHouse.Text = string.Empty;
-                txtWareHouse.Tag = null;
-            }
-        }
-
-        private void lnkBrand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                cmbBrand.Text = (frm.SelectedItem as CompanyInfo).Name;
-            }
-        }
+       
     }
 }

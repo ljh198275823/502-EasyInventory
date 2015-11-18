@@ -58,13 +58,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<SteelRoll> items = _SteelRolls;
             if (items != null && items.Count > 0)
             {
-                if (chkStorageDT.Checked) items = items.Where(it => it.AddDate.Date == dtStorage.Value.Date).ToList();
+                if (chkStackInFrom.Checked) items = items.Where(it => it.AddDate >= dtStackInFrom.Value.Date).ToList();
+                if (chkStackInEnd.Checked) items = items.Where(it => it.AddDate < dtStackInEnd.Value.Date.AddDays(1)).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
                 if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.Supplier == cmbSupplier.Text).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
-                if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Weight == txtWeight.DecimalValue).ToList();
+                if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer == customerCombobox1.Text).ToList();
                 items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
                                        (chkPartial.Checked && it.Status == "余卷") ||
                                        (chkOnlyTail.Checked && it.Status == "尾卷") ||
@@ -118,6 +119,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.wareHouseComboBox1.Init();
             this.cmbSpecification.Init();
             this.categoryComboBox1.Init();
+            this.customerCombobox1.Init();
             InitSupplier(cmbBrand);
             InitSupplier(cmbSupplier);
         }

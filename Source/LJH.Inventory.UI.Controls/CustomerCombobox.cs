@@ -57,7 +57,7 @@ namespace LJH.Inventory.UI.Controls
             {
                 if (_SourceItems != null && _SourceItems.Count > 0)
                 {
-                    int sp=this.SelectionStart ;
+                    int sp = this.SelectionStart;
                     if (!string.IsNullOrEmpty(this.Text))
                     {
                         _RenderItems = (from item in _SourceItems
@@ -73,7 +73,7 @@ namespace LJH.Inventory.UI.Controls
                     }
                     this.Items.Clear();
                     this.Items.Add(string.Empty);
-                    foreach (CompanyInfo  item in _RenderItems)
+                    foreach (CompanyInfo item in _RenderItems)
                     {
                         this.Items.Add(item.Name);
                         if (item.Name == this.Text)
@@ -95,7 +95,7 @@ namespace LJH.Inventory.UI.Controls
             this.Items.Add(string.Empty);
             if (_SourceItems == null)
             {
-                _SourceItems = (new CompanyBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                _SourceItems = (new CompanyBLL(AppSettings.Current.ConnStr)).GetAllCustomers().QueryObjects;
             }
             if (_SourceItems != null && _SourceItems.Count > 0)
             {
@@ -107,27 +107,6 @@ namespace LJH.Inventory.UI.Controls
                     this.Items.Add(item.Name);
                 }
             }
-        }
-        /// <summary>
-        /// 获取所有某个节点下的所有公司信息，包括此节点下所有后代公司节点的公司信息
-        /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
-        public List<CompanyInfo> GetCompanyofNode(TreeNode node)
-        {
-            List<CompanyInfo> items = new List<CompanyInfo>();
-            if (node.Tag is CompanyInfo)
-            {
-                items.Add(node.Tag as CompanyInfo);
-            }
-            else if (node.Tag is CustomerType && node.Nodes.Count > 0)
-            {
-                foreach (TreeNode child in node.Nodes)
-                {
-                    items.AddRange(GetCompanyofNode(child));
-                }
-            }
-            return items;
         }
         #endregion
     }

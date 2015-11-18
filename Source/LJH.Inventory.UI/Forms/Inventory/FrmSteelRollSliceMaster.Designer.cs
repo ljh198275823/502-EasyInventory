@@ -61,6 +61,10 @@
             this.colValid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colReserved = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -79,6 +83,10 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.txtLength);
+            this.panel5.Controls.Add(this.txtWeight);
             this.panel5.Controls.Add(this.chk开卷);
             this.panel5.Controls.Add(this.chk开吨);
             this.panel5.Controls.Add(this.chk开平);
@@ -99,7 +107,7 @@
             this.chk开卷.AutoSize = true;
             this.chk开卷.Checked = true;
             this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开卷.Location = new System.Drawing.Point(628, 12);
+            this.chk开卷.Location = new System.Drawing.Point(875, 12);
             this.chk开卷.Name = "chk开卷";
             this.chk开卷.Size = new System.Drawing.Size(48, 16);
             this.chk开卷.TabIndex = 85;
@@ -112,7 +120,7 @@
             this.chk开吨.AutoSize = true;
             this.chk开吨.Checked = true;
             this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开吨.Location = new System.Drawing.Point(683, 12);
+            this.chk开吨.Location = new System.Drawing.Point(930, 12);
             this.chk开吨.Name = "chk开吨";
             this.chk开吨.Size = new System.Drawing.Size(48, 16);
             this.chk开吨.TabIndex = 84;
@@ -125,7 +133,7 @@
             this.chk开平.AutoSize = true;
             this.chk开平.Checked = true;
             this.chk开平.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开平.Location = new System.Drawing.Point(574, 12);
+            this.chk开平.Location = new System.Drawing.Point(821, 12);
             this.chk开平.Name = "chk开平";
             this.chk开平.Size = new System.Drawing.Size(48, 16);
             this.chk开平.TabIndex = 83;
@@ -358,6 +366,66 @@
             this.colTotal.ReadOnly = true;
             this.colTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // txtWeight
+            // 
+            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeight.Location = new System.Drawing.Point(598, 10);
+            this.txtWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.PointCount = 3;
+            this.txtWeight.Size = new System.Drawing.Size(81, 21);
+            this.txtWeight.TabIndex = 86;
+            this.txtWeight.Text = "0";
+            this.txtWeight.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // txtLength
+            // 
+            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLength.Location = new System.Drawing.Point(724, 10);
+            this.txtLength.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtLength.Name = "txtLength";
+            this.txtLength.PointCount = 2;
+            this.txtLength.Size = new System.Drawing.Size(72, 21);
+            this.txtLength.TabIndex = 87;
+            this.txtLength.Text = "0";
+            this.txtLength.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(563, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 88;
+            this.label3.Text = "重量";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(689, 14);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 89;
+            this.label4.Text = "长度";
+            // 
             // FrmSteelRollSliceMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -414,5 +482,9 @@
         private System.Windows.Forms.DataGridViewLinkColumn colReserved;
         private System.Windows.Forms.DataGridViewLinkColumn colTotal;
         private System.Windows.Forms.ToolStripMenuItem mnu_CheckView;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
     }
 }
