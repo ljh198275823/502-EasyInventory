@@ -39,6 +39,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             rdToWeight.Checked = product.Model == "开吨";
             txtLength.DecimalValue = product.Length.HasValue ? product.Length.Value : 0;
             txtWeight.DecimalValue = product.Weight.HasValue ? product.Weight.Value : 0;
+            decimal ? thick=SpecificationHelper .GetWrittenThick (product.Specification );
+            txtThick.DecimalValue = thick != null ? thick.Value : 0;
         }
 
         private Product CreateProduct()
@@ -62,6 +64,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (txtCategory.Tag == null)
             {
                 MessageBox.Show("没有选择类别");
+                return false;
+            }
+            if (txtThick.DecimalValue <= 0)
+            {
+                MessageBox.Show("厚度不正确");
+                txtThick.Focus();
                 return false;
             }
             if (txtWareHouse.Tag == null)
@@ -93,21 +101,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Text = WareHouse.Name;
                 txtWareHouse.Tag = WareHouse;
             }
+            txtCount.Focus();
             btnOk.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
         }
-
-        //protected override CommandResult AddItem(object item)
-        //{
-        //    if (item != null)
-        //    {
-        //        SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
-        //        return bll.CreateInventory(item as SteelRollSlice, Operator.Current.Name, txtMemo.Text);
-        //    }
-        //    else
-        //    {
-        //        return new CommandResult(ResultCode.Fail, "创建产品信息失败");
-        //    }
-        //}
         #endregion
 
         #region 事件处理程序
@@ -165,7 +161,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return;
             }
             SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
-            var ret = bll.CreateInventory(p, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtCount.DecimalValue, Operator.Current.Name, txtMemo.Text);
+            var ret = bll.CreateInventory(p, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtCount.DecimalValue, txtThick.DecimalValue, Operator.Current.Name, txtMemo.Text);
             if (ret.Result == ResultCode.Successful)
             {
                 this.DialogResult = DialogResult.OK;

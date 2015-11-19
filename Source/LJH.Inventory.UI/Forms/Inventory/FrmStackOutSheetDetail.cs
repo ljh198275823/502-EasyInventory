@@ -516,11 +516,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btn_AddSlice_Click(object sender, EventArgs e)
         {
-            FrmSteelRollSliceMaster frm = new FrmSteelRollSliceMaster();
-            frm.ForSelect = true;
+            if (WareHouse == null)
+            {
+                MessageBox.Show("请先选择出货仓库");
+                return;
+            }
+            FrmSteelRollSliceSelection frm = new FrmSteelRollSliceSelection();
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
             con.WareHouseID = WareHouse != null ? WareHouse.ID : null;
-            con.States = (int)ProductInventoryState.UnShipped;
+            con.States = (int)ProductInventoryState.Inventory; //只显示在库的
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {

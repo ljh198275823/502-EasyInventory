@@ -93,11 +93,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.States = (int)ProductInventoryState.UnShipped;
-                _ProductInventorys = bll.GetItems(con).QueryObjects;
+                _ProductInventorys = bll.GetSteelRollSlices(con).QueryObjects;
             }
             else
             {
-                _ProductInventorys = bll.GetItems(SearchCondition).QueryObjects;
+                _ProductInventorys = bll.GetSteelRollSlices(SearchCondition).QueryObjects;
             }
             List<object> records = FilterData();
             return records;

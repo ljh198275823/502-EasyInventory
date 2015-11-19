@@ -84,7 +84,7 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         protected override List<object> GetDataSource()
         {
-            _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+            _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetSteelRollSlices(null).QueryObjects;
             if (SearchCondition == null)
             {
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
@@ -195,7 +195,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                     CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                        _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetSteelRollSlices(null).QueryObjects;
                         _Records.Remove(item);
                         item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
                         if (item != null) _Records.Add(item); //更新某行数据
@@ -227,7 +227,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                     CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                        _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetSteelRollSlices(null).QueryObjects;
                         _Records.Remove(item);
                         item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
                         if (item != null) _Records.Add(item); //更新某行数据

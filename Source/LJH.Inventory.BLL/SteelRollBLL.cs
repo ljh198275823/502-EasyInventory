@@ -28,7 +28,9 @@ namespace LJH.Inventory.BLL
             {
                 ID = info.ID,
                 WareHouseID = info.WareHouseID,
+                WareHouse = info.WareHouse,
                 ProductID = info.ProductID,
+                Product = info.Product,
                 OriginalLength = info.OriginalLength,
                 OriginalWeight = info.OriginalWeight,
                 Weight = info.Weight,
@@ -63,7 +65,9 @@ namespace LJH.Inventory.BLL
             {
                 ID = info.ID,
                 WareHouseID = info.WareHouseID,
+                WareHouse = info.WareHouse,
                 ProductID = info.ProductID,
+                Product = info.Product,
                 Model = MODEL,
                 OriginalLength = info.OriginalLength,
                 OriginalWeight = info.OriginalWeight,
@@ -102,9 +106,6 @@ namespace LJH.Inventory.BLL
             if (ret.QueryObject != null)
             {
                 sr = Convert(ret.QueryObject);
-                sr.Product = new ProductBLL(RepoUri).GetByID(sr.ProductID).QueryObject;
-                sr.WareHouse = new WareHouseBLL(RepoUri).GetByID(sr.WareHouseID).QueryObject;
-                if (sr.Product == null || sr.WareHouse == null) sr = null;
             }
             return new QueryResult<SteelRoll>(ret.Result, ret.Message, sr);
         }
@@ -123,14 +124,10 @@ namespace LJH.Inventory.BLL
             var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
             {
-                List<Product> ps = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetItems(null).QueryObjects;
-                List<WareHouse> ws = ProviderFactory.Create<IProvider<WareHouse, string>>(RepoUri).GetItems(null).QueryObjects;
                 if (items == null) items = new List<SteelRoll>();
                 foreach (var pi in ret.QueryObjects)
                 {
                     var sr = Convert(pi);
-                    sr.Product = ps.SingleOrDefault(it => it.ID == sr.ProductID);
-                    sr.WareHouse = ws.SingleOrDefault(it => it.ID == sr.WareHouseID);
                     if (sr.Product != null && sr.WareHouse != null) items.Add(sr);
                 }
             }

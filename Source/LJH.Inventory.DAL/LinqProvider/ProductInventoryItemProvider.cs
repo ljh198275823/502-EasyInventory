@@ -20,7 +20,14 @@ namespace LJH.Inventory.DAL.LinqProvider
         #region 重写模板方法
         protected override ProductInventoryItem GetingItemByID(Guid id, DataContext dc)
         {
-            return dc.GetTable<ProductInventoryItem>().SingleOrDefault(item => item.ID == id);
+            var ret = dc.GetTable<ProductInventoryItem>().SingleOrDefault(item => item.ID == id);
+            if (ret != null)
+            {
+                ret.Product = new ProductProvider(ConnectStr, _MappingResource).GetByID(ret.ProductID).QueryObject;
+                ret.WareHouse = new WareHouseProvider(ConnectStr, _MappingResource).GetByID(ret.WareHouseID).QueryObject;
+                if (ret.Product == null || ret.WareHouse == null) ret = null;
+            }
+            return ret;
         }
 
         protected override List<ProductInventoryItem> GetingItems(DataContext dc, SearchCondition search)
@@ -59,6 +66,17 @@ namespace LJH.Inventory.DAL.LinqProvider
                                                   ((s & (int)ProductInventoryState.Nullified) > 0 && it.State == ProductInventoryState.Nullified)
                                            ).ToList();
                     }
+                }
+                if (items != null && items.Count > 0)
+                {
+                    List<Product> ps = new ProductProvider(ConnectStr, _MappingResource).GetItems(null).QueryObjects;
+                    List<WareHouse> ws = new WareHouseProvider(ConnectStr, _MappingResource).GetItems(null).QueryObjects;
+                    foreach (var pi in items)
+                    {
+                        pi.Product = ps.SingleOrDefault(it => it.ID == pi.ProductID);
+                        pi.WareHouse = ws.SingleOrDefault(it => it.ID == pi.WareHouseID);
+                    }
+                    items.RemoveAll(it => it.Product == null || it.WareHouse == null);
                 }
             }
             return items;

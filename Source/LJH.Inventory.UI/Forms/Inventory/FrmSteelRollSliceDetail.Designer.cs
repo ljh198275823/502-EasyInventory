@@ -38,7 +38,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label7 = new System.Windows.Forms.Label();
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,6 +52,9 @@
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtThick = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,14 +167,6 @@
             this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 56;
             this.label7.Text = "长度";
-            // 
-            // cmbSpecification
-            // 
-            this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(73, 25);
-            this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(145, 20);
-            this.cmbSpecification.TabIndex = 0;
             // 
             // txtCategory
             // 
@@ -320,6 +314,43 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(244, 126);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 89;
+            this.label4.Text = "厚度";
+            // 
+            // txtThick
+            // 
+            this.txtThick.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtThick.Location = new System.Drawing.Point(278, 122);
+            this.txtThick.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.txtThick.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtThick.Name = "txtThick";
+            this.txtThick.PointCount = 3;
+            this.txtThick.Size = new System.Drawing.Size(145, 21);
+            this.txtThick.TabIndex = 90;
+            this.txtThick.Text = "0.00";
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.FormattingEnabled = true;
+            this.cmbSpecification.Location = new System.Drawing.Point(73, 25);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(145, 20);
+            this.cmbSpecification.TabIndex = 0;
+            // 
             // FrmSteelRollSliceDetail
             // 
             this.AcceptButton = this.btnOk;
@@ -327,6 +358,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(447, 295);
+            this.Controls.Add(this.txtThick);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtCustomer);
@@ -383,6 +416,8 @@
         private System.Windows.Forms.LinkLabel lnkCustomer;
         protected System.Windows.Forms.Button btnClose;
         protected System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Label label4;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtThick;
 
     }
 }

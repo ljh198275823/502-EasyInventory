@@ -143,17 +143,10 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
-        public QueryResult<SteelRollSlice> GetByID(string productID, string wareHouseID)
-        {
-            return null;
-        }
-
-        public QueryResultList<SteelRollSlice> GetItems(SearchCondition con)
+        public QueryResultList<SteelRollSlice> GetSteelRollSlices(SearchCondition con)
         {
             List<SteelRollSlice> items = null;
-            if (con == null) con = new ProductInventoryItemSearchCondition();
-            if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).ExcludeModel = MODEL;  //排除原材料库存项
-            QueryResultList<ProductInventoryItem> ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            QueryResultList<ProductInventoryItem> ret = GetItems(con);
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
             {
                 List<Product> ps = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetItems(null).QueryObjects;
@@ -176,12 +169,19 @@ namespace LJH.Inventory.BLL
             }
             return new QueryResultList<SteelRollSlice>(ret.Result, ret.Message, items);
         }
+
+        public QueryResultList<ProductInventoryItem> GetItems(SearchCondition con)
+        {
+            if (con == null) con = new ProductInventoryItemSearchCondition();
+            if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).ExcludeModel = MODEL;  //排除原材料库存项
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+        }
         /// <summary>
         /// 建立库存
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult CreateInventory(Product p, WareHouse w, string customer, decimal count, string op, string memo)
+        public CommandResult CreateInventory(Product p, WareHouse w, string customer, decimal count, decimal thick, string op, string memo)
         {
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = p.ID, WareHouseID = w.ID };
             con.States = (int)ProductInventoryState.UnShipped;
@@ -202,6 +202,7 @@ namespace LJH.Inventory.BLL
                 Weight = p.Weight,
                 Length = p.Length,
                 Model = p.Model,
+                RealThick = thick,
                 Customer = customer,
                 State = ProductInventoryState.Inventory,
                 Operator = op,
