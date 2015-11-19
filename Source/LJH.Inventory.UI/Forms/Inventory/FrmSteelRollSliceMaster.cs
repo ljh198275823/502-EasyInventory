@@ -71,13 +71,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            cMnu_Add.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
+            mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmSteelRollSliceDetail frm = new FrmSteelRollSliceDetail();
-            return frm;
+            //FrmSteelRollSliceDetail frm = new FrmSteelRollSliceDetail();
+            //return frm;
+            return null;
         }
 
         protected override bool DeletingItem(object item)
@@ -113,9 +114,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
             row.Cells["colWeight"].Value = pi.Product.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
-            row.Cells["colReserved"].Value = pi.Reserved.Trim();
-            row.Cells["colValid"].Value = pi.Valid.Trim();
-            row.Cells["colTotal"].Value = pi.Count.Trim();
+            row.Cells["colWaitShipping"].Value = pi.WaitShipping;
+            row.Cells["colReserved"].Value = pi.Reserved;
+            row.Cells["colValid"].Value = pi.Valid;
+            row.Cells["colTotal"].Value = pi.Total;
         }
         #endregion
 
@@ -123,6 +125,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void FreshDate_Clicked(object sender, EventArgs e)
         {
             FreshData();
+        }
+
+        private void mnu_CreateInventory_Click(object sender, EventArgs e)
+        {
+            FrmSteelRollSliceDetail frm = new FrmSteelRollSliceDetail();
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                SteelRollSlice srs = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
+                frm.Product = srs.Product;
+                frm.WareHouse = srs.WareHouse;
+            }
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                ReFreshData();
+            }
         }
 
         private void mnu_StackRecords_Click(object sender, EventArgs e)
@@ -154,6 +171,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     con.States = (int)ProductInventoryState.Inventory;
                     View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
                     frm.SearchCondition = con;
+                    frm.SteelRollSlice = item;
+                    frm.ShowDialog();
+                }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colWaitShipping")
+                {
+                    SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
+                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                    con.Products = new List<string>();
+                    con.Products.Add(item.Product.ID);
+                    con.WareHouseID = item.WareHouse.ID;
+                    con.States = (int)ProductInventoryState.WaitShipping;
+                    View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
+                    frm.SearchCondition = con;
+                    frm.SteelRollSlice = item;
                     frm.ShowDialog();
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colReserved")
@@ -166,6 +197,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     con.States = (int)ProductInventoryState.Reserved;
                     View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
                     frm.SearchCondition = con;
+                    frm.SteelRollSlice = item;
                     frm.ShowDialog();
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTotal")
@@ -178,27 +210,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     con.States = (int)ProductInventoryState.UnShipped;
                     View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
                     frm.SearchCondition = con;
+                    frm.SteelRollSlice = item;
                     frm.ShowDialog();
-                }
-            }
-        }
-
-        private void mnu_Check_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                SteelRollSlice pi = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
-                FrmSteelRollSliceCheck frm = new FrmSteelRollSliceCheck();
-                frm.ProductInventory = pi;
-                DialogResult ret= frm.ShowDialog();
-                if (ret == DialogResult.OK)
-                {
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.ProductID = pi.Product.ID;
-                    con.WareHouseID = pi.WareHouse.ID;
-                    List<SteelRollSlice> items = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-                    SteelRollSlice pii = items[0];
-                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pii);
                 }
             }
         }
@@ -218,7 +231,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
-
        
     }
 }

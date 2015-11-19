@@ -50,7 +50,7 @@ namespace LJH.Inventory.BLL
         private void Assign(StackOutItem si, InventoryOutType inventoryOutType, List<ProductInventoryItem> inventoryItems, List<ProductInventoryItem> addingItems)
         {
             List<ProductInventoryItem> items = new List<ProductInventoryItem>();
-            items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.WaitShip && item.ProductID == si.ProductID && item.DeliveryItem == si.ID)); //出货单项待出货的项最高优先级
+            items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.WaitShipping && item.ProductID == si.ProductID && item.DeliveryItem == si.ID)); //出货单项待出货的项最高优先级
             if (si.OrderItem != null) items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.Reserved && item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == si.OrderItem)); //订单备货优先级次之
             if (inventoryOutType == InventoryOutType.FIFO) //其它未分配的项优先级最后
             {
@@ -165,7 +165,7 @@ namespace LJH.Inventory.BLL
                     if (sr != null)
                     {
                         ProductInventoryItem cloneSr = sr.Clone();
-                        sr.State = ProductInventoryState.WaitShip;
+                        sr.State = ProductInventoryState.WaitShipping;
                         sr.DeliverySheet = info.ID;
                         sr.DeliveryItem = item.ID;
                         isrp.Update(sr, cloneSr, unitWork);
@@ -189,7 +189,7 @@ namespace LJH.Inventory.BLL
                         if (sr != null)
                         {
                             var cloneSr = sr.Clone();
-                            sr.State = ProductInventoryState.WaitShip;
+                            sr.State = ProductInventoryState.WaitShipping;
                             sr.DeliverySheet = info.ID;
                             sr.DeliveryItem = item.ID;
                             isrp.Update(sr, cloneSr, unitWork);

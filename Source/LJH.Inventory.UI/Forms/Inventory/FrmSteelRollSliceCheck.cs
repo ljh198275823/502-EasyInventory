@@ -20,7 +20,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         #region 公共属性
-        public SteelRollSlice ProductInventory { get; set; }
+        public ProductInventoryItem ProductInventory { get; set; }
         #endregion
 
         #region 事件处理程序

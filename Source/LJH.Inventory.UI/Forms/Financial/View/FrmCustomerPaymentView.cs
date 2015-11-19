@@ -50,20 +50,22 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colID"].Value = cp.ID;
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
-            row.Cells["colAmount"].Value = cp.Amount.Trim();
-            if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain.Trim();
-            if (cp.Assigned != 0) row.Cells["colAssigned"].Value = cp.Assigned.Trim();
+            row.Cells["colAmount"].Value = cp.Amount;
+            if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
+            else row.Cells["colRemain"].Value = null;
+            if (cp.Assigned != 0) row.Cells["colAssigned"].Value = cp.Assigned;
+            else row.Cells["colAssigned"].Value = null;
             row.Cells["colMemo"].Value = cp.Memo;
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
         {
             base.ShowItemsOnGrid(items);
-            int rowTotal = GridView.Rows.Add();
-            GridView.Rows[rowTotal].Cells["colSheetDate"].Value = "合计";
-            GridView.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerPayment).Amount).Trim();
-            GridView.Rows[rowTotal].Cells["colAssigned"].Value = items.Sum(item => (item as CustomerPayment).Assigned).Trim();
-            GridView.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as CustomerPayment).Remain).Trim();
+            int rowTotal = dataGridView1.Rows.Add();
+            dataGridView1.Rows[rowTotal].Cells["colSheetDate"].Value = "合计";
+            dataGridView1.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerPayment).Amount).Trim();
+            dataGridView1.Rows[rowTotal].Cells["colAssigned"].Value = items.Sum(item => (item as CustomerPayment).Assigned).Trim();
+            dataGridView1.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as CustomerPayment).Remain).Trim();
         }
         #endregion
 
@@ -79,6 +81,24 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     else cpsc.HasRemain = null;
                 }
                 ReFreshData();
+            }
+        }
+
+        private void mnu_Assign_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CustomerPayment cp = dataGridView1.SelectedRows[0].Tag as CustomerPayment;
+                if (cp.State != SheetState.Canceled && cp.Remain > 0)
+                {
+                    string paymentID = cp.ID;
+                    FrmPaymentAssign frm = new FrmPaymentAssign();
+                    frm.CustomerPaymentID = paymentID;
+                    frm.PaymentType = CustomerPaymentType.Customer;
+                    frm.ShowDialog();
+                    cp = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID).QueryObject;
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cp);
+                }
             }
         }
         #endregion

@@ -39,6 +39,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<StackOutSheet> items = _Sheets;
             if (items != null && items.Count > 0)
             {
+                if (chkSheetDate.Checked) items = items.Where(it => it.SheetDate >= ucDateTimeInterval1.StartDateTime && it.SheetDate <= ucDateTimeInterval1.EndDateTime).ToList();
                 if (this.customerTree1.SelectedNode != null)
                 {
                     List<CompanyInfo> pcs = null;
@@ -52,7 +53,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         items = null;
                     }
                 }
-                if (chkSheetDate.Checked) items = items.Where(it => it.SheetDate.Date == dtSheetDate.Value.Date).ToList();
                 items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
                                         (item.State == SheetState.Approved && chkApproved.Checked) ||
                                         (item.State == SheetState.Shipped && chkShipped.Checked) ||
@@ -70,6 +70,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void ReFreshData()
         {
             customerTree1.Init();
+            this.ucDateTimeInterval1.Init();
+            this.ucDateTimeInterval1.SelectThisMonth();
             base.ReFreshData();
         }
 
@@ -139,6 +141,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 事件处理程序
+        private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
+        {
+            if (chkSheetDate.Checked) FreshData();
+        }
+
         private void FreshData_Clicked(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();
@@ -154,5 +161,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             PerformAddData();
         }
         #endregion
+
+       
     }
 }

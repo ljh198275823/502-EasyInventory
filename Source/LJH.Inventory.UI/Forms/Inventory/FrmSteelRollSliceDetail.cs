@@ -16,15 +16,48 @@ using LJH.Inventory.UI.Forms.General;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmSteelRollSliceDetail : FrmDetailBase
+    public partial class FrmSteelRollSliceDetail : Form
     {
         public FrmSteelRollSliceDetail()
         {
             InitializeComponent();
         }
 
+        #region 公共属性
+        public Product Product { get; set; }
+
+        public WareHouse WareHouse { get; set; }
+        #endregion
+
+        private void ShowProduct(Product product)
+        {
+            cmbSpecification.Text = product.Specification;
+            txtCategory.Text = product.Category.Name;
+            txtCategory.Tag = product.Category;
+            rdToPanel.Checked = product.Model == "开平";
+            rdToRoll.Checked = product.Model == "开卷";
+            rdToWeight.Checked = product.Model == "开吨";
+            txtLength.DecimalValue = product.Length.HasValue ? product.Length.Value : 0;
+            txtWeight.DecimalValue = product.Weight.HasValue ? product.Weight.Value : 0;
+        }
+
+        private Product CreateProduct()
+        {
+            string sliceTo = null;
+            if (rdToPanel.Checked) sliceTo = rdToPanel.Text;
+            else if (rdToRoll.Checked) sliceTo = rdToRoll.Text;
+            else if (rdToWeight.Checked) sliceTo = rdToWeight.Text;
+            return new ProductBLL(AppSettings.Current.ConnStr).Create(
+                             (txtCategory.Tag as ProductCategory).ID,
+                             StringHelper.ToDBC(cmbSpecification.Text).Trim(),
+                             sliceTo,
+                             txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null,
+                             txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null,
+                             7.85m);
+        }
+
         #region 重写基类方法
-        protected override bool CheckInput()
+        private bool CheckInput()
         {
             if (txtCategory.Tag == null)
             {
@@ -51,90 +84,38 @@ namespace LJH.Inventory.UI.Forms.Inventory
             return true;
         }
 
-        protected override void InitControls()
+        private void InitControls()
         {
-            base.InitControls();
             cmbSpecification.Init();
-        }
-
-        public override void ShowOperatorRights()
-        {
-            base.ShowOperatorRights();
+            if (Product != null) ShowProduct(Product);
+            if (WareHouse != null)
+            {
+                txtWareHouse.Text = WareHouse.Name;
+                txtWareHouse.Tag = WareHouse;
+            }
             btnOk.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
         }
 
-        protected override void ItemShowing()
-        {
-            SteelRollSlice item = UpdatingItem as SteelRollSlice;
-            cmbSpecification.Text = item.Product.Specification;
-            txtCategory.Text = item.Product.Category.Name;
-            txtCategory.Tag = item.Product.Category;
-            rdToPanel.Checked = item.Product.Model == "开平";
-            rdToRoll.Checked = item.Product.Model == "开卷";
-            rdToWeight.Checked = item.Product.Model == "开吨";
-            txtLength.DecimalValue = item.Product.Length.HasValue ? item.Product.Length.Value : 0;
-            txtWeight.DecimalValue = item.Product.Weight.HasValue ? item.Product.Weight.Value : 0;
-            txtPrice.Visible = false;
-            lblPrice.Visible = false;
-            txtCount.DecimalValue = item.Count;
-            txtWareHouse.Text = item.WareHouse.Name;
-            txtWareHouse.Tag = item.WareHouse;
-            txtWareHouse.Enabled = false;
-            lnkWarehouse.Enabled = false;
-            btnOk.Enabled = false;
-        }
-
-        protected override object GetItemFromInput()
-        {
-            SteelRollSlice item = null;
-            if (UpdatingItem == null)
-            {
-                string sliceTo = null;
-                if (rdToPanel.Checked) sliceTo = rdToPanel.Text;
-                else if (rdToRoll.Checked) sliceTo = rdToRoll.Text;
-                else if (rdToWeight.Checked) sliceTo = rdToWeight.Text;
-                Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID,
-                                                                                  StringHelper.ToDBC(cmbSpecification.Text).Trim(),
-                                                                                  sliceTo,
-                                                                                  txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null,
-                                                                                  txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null, 7.85m);
-                if (p != null)
-                {
-                    item = new SteelRollSlice();
-                    item.ID = Guid.NewGuid();
-                    item.Product = p;
-                    item.WareHouse = txtWareHouse.Tag as WareHouse;
-                    item.Valid = txtCount.DecimalValue;
-                    item.ValidAmount = txtCount.DecimalValue * txtPrice.DecimalValue;
-                }
-            }
-            else
-            {
-                item = UpdatingItem as SteelRollSlice;
-            }
-            return item;
-        }
-
-        protected override CommandResult AddItem(object item)
-        {
-            if (item != null)
-            {
-                SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
-                return bll.CreateInventory(item as SteelRollSlice, Operator.Current.Name, txtMemo.Text);
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "创建产品信息失败");
-            }
-        }
-
-        protected override CommandResult UpdateItem(object item)
-        {
-            return new CommandResult(ResultCode.Fail, "库存项不能进行更新操作");
-        }
+        //protected override CommandResult AddItem(object item)
+        //{
+        //    if (item != null)
+        //    {
+        //        SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
+        //        return bll.CreateInventory(item as SteelRollSlice, Operator.Current.Name, txtMemo.Text);
+        //    }
+        //    else
+        //    {
+        //        return new CommandResult(ResultCode.Fail, "创建产品信息失败");
+        //    }
+        //}
         #endregion
 
         #region 事件处理程序
+        private void FrmSteelRollSliceDetail_Load(object sender, EventArgs e)
+        {
+            InitControls();
+        }
+
         private void rdSliceType_CheckedChanged(object sender, EventArgs e)
         {
             txtLength.Enabled = !rdToWeight.Checked;
@@ -164,7 +145,36 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Tag = w;
             }
         }
+
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Sale.FrmCustomerMaster frm = new Sale.FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txtCustomer.Text = (frm.SelectedItem as CompanyInfo).Name;
+            }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            var p = CreateProduct();
+            if (p == null)
+            {
+                MessageBox.Show("创建产品信息失败");
+                return;
+            }
+            SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
+            var ret = bll.CreateInventory(p, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtCount.DecimalValue, Operator.Current.Name, txtMemo.Text);
+            if (ret.Result == ResultCode.Successful)
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show(ret.Message);
+            }
+        }
         #endregion
-        
     }
 }

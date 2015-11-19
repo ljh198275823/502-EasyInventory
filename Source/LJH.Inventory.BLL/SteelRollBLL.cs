@@ -223,6 +223,7 @@ namespace LJH.Inventory.BLL
                 Unit = sr.Unit,
                 Price = 0,
                 Operator = operatorName,
+                Customer = sr.Customer,
                 Checker = checker,
                 Memo = memo
             };

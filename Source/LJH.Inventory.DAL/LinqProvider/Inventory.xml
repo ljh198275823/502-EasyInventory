@@ -610,6 +610,7 @@
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="SourceID" Member="SourceID"  DbType="uniqueidentifier"  UpdateCheck="Never"/>
+      <Column Name="Customer" Member="Customer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Checker" Member="Checker"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Operator" Member="Operator"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>

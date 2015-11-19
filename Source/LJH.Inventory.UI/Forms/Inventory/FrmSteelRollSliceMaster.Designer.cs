@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.chk开吨 = new System.Windows.Forms.CheckBox();
             this.chk开平 = new System.Windows.Forms.CheckBox();
@@ -43,8 +47,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_CreateInventory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CheckView = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_StackRecords = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -58,13 +61,10 @@
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWaitShipping = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colValid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colReserved = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -101,6 +101,66 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1218, 38);
             this.panel5.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(689, 14);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 89;
+            this.label4.Text = "长度";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(563, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 88;
+            this.label3.Text = "重量";
+            // 
+            // txtLength
+            // 
+            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLength.Location = new System.Drawing.Point(724, 10);
+            this.txtLength.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtLength.Name = "txtLength";
+            this.txtLength.PointCount = 2;
+            this.txtLength.Size = new System.Drawing.Size(72, 21);
+            this.txtLength.TabIndex = 87;
+            this.txtLength.Text = "0";
+            this.txtLength.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // txtWeight
+            // 
+            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeight.Location = new System.Drawing.Point(598, 10);
+            this.txtWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.PointCount = 3;
+            this.txtWeight.Size = new System.Drawing.Size(81, 21);
+            this.txtWeight.TabIndex = 86;
+            this.txtWeight.Text = "0";
+            this.txtWeight.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // chk开卷
             // 
@@ -209,46 +269,39 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.mnu_Check,
+            this.mnu_CreateInventory,
             this.mnu_CheckView,
             this.mnu_StackRecords,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
-            // cMnu_Add
+            // mnu_CreateInventory
             // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_Add.Text = "新建库存";
-            // 
-            // mnu_Check
-            // 
-            this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(148, 22);
-            this.mnu_Check.Text = "盘点";
-            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
+            this.mnu_CreateInventory.Name = "mnu_CreateInventory";
+            this.mnu_CreateInventory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CreateInventory.Text = "新建库存";
+            this.mnu_CreateInventory.Click += new System.EventHandler(this.mnu_CreateInventory_Click);
             // 
             // mnu_CheckView
             // 
             this.mnu_CheckView.Name = "mnu_CheckView";
-            this.mnu_CheckView.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CheckView.Size = new System.Drawing.Size(152, 22);
             this.mnu_CheckView.Text = "查看盘点记录";
             this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
             // 
             // mnu_StackRecords
             // 
             this.mnu_StackRecords.Name = "mnu_StackRecords";
-            this.mnu_StackRecords.Size = new System.Drawing.Size(148, 22);
+            this.mnu_StackRecords.Size = new System.Drawing.Size(152, 22);
             this.mnu_StackRecords.Text = "产品进出明细";
             this.mnu_StackRecords.Visible = false;
             this.mnu_StackRecords.Click += new System.EventHandler(this.mnu_StackRecords_Click);
@@ -256,18 +309,18 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // dataGridView1
@@ -285,6 +338,7 @@
             this.colModel,
             this.colWeight,
             this.colLength,
+            this.colWaitShipping,
             this.colValid,
             this.colReserved,
             this.colTotal});
@@ -343,6 +397,12 @@
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
+            // colWaitShipping
+            // 
+            this.colWaitShipping.HeaderText = "待发货";
+            this.colWaitShipping.Name = "colWaitShipping";
+            this.colWaitShipping.ReadOnly = true;
+            // 
             // colValid
             // 
             this.colValid.HeaderText = "可用库存";
@@ -358,6 +418,7 @@
             this.colReserved.ReadOnly = true;
             this.colReserved.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colReserved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colReserved.Visible = false;
             // 
             // colTotal
             // 
@@ -365,66 +426,6 @@
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             this.colTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // txtWeight
-            // 
-            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(598, 10);
-            this.txtWeight.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txtWeight.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtWeight.Name = "txtWeight";
-            this.txtWeight.PointCount = 3;
-            this.txtWeight.Size = new System.Drawing.Size(81, 21);
-            this.txtWeight.TabIndex = 86;
-            this.txtWeight.Text = "0";
-            this.txtWeight.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
-            // 
-            // txtLength
-            // 
-            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(724, 10);
-            this.txtLength.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txtLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtLength.Name = "txtLength";
-            this.txtLength.PointCount = 2;
-            this.txtLength.Size = new System.Drawing.Size(72, 21);
-            this.txtLength.TabIndex = 87;
-            this.txtLength.Text = "0";
-            this.txtLength.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(563, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 88;
-            this.label3.Text = "重量";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(689, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 89;
-            this.label4.Text = "长度";
             // 
             // FrmSteelRollSliceMaster
             // 
@@ -453,7 +454,7 @@
         private System.Windows.Forms.Panel pnlFilter;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
+        private System.Windows.Forms.ToolStripMenuItem mnu_CreateInventory;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
@@ -462,7 +463,6 @@
         private System.Windows.Forms.Panel panel5;
         private Controls.WareHouseComboBox wareHouseComboBox1;
         private System.Windows.Forms.ToolStripMenuItem mnu_StackRecords;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Check;
         private Controls.SpecificationComboBox cmbSpecification;
         private System.Windows.Forms.Label label5;
         private Controls.CategoryComboBox categoryComboBox1;
@@ -471,6 +471,11 @@
         private System.Windows.Forms.CheckBox chk开卷;
         private System.Windows.Forms.CheckBox chk开吨;
         private System.Windows.Forms.CheckBox chk开平;
+        private System.Windows.Forms.ToolStripMenuItem mnu_CheckView;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
@@ -478,13 +483,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
+        private System.Windows.Forms.DataGridViewLinkColumn colWaitShipping;
         private System.Windows.Forms.DataGridViewLinkColumn colValid;
         private System.Windows.Forms.DataGridViewLinkColumn colReserved;
         private System.Windows.Forms.DataGridViewLinkColumn colTotal;
-        private System.Windows.Forms.ToolStripMenuItem mnu_CheckView;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
     }
 }

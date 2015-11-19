@@ -69,9 +69,9 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(313, 341);
+            this.btnClose.Location = new System.Drawing.Point(313, 333);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(112, 23);
+            this.btnClose.Size = new System.Drawing.Size(112, 41);
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "关闭(&C)";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(191, 341);
+            this.btnOk.Location = new System.Drawing.Point(191, 333);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(112, 23);
+            this.btnOk.Size = new System.Drawing.Size(112, 41);
             this.btnOk.TabIndex = 5;
             this.btnOk.Text = "确定(&O)";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -467,7 +467,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(436, 376);
+            this.ClientSize = new System.Drawing.Size(436, 386);
             this.Controls.Add(this.txtCustomer);
             this.Controls.Add(this.lnkCustomer);
             this.Controls.Add(this.txtWareHouse);

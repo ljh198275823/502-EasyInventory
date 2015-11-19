@@ -58,8 +58,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<SteelRoll> items = _SteelRolls;
             if (items != null && items.Count > 0)
             {
-                if (chkStackInFrom.Checked) items = items.Where(it => it.AddDate >= dtStackInFrom.Value.Date).ToList();
-                if (chkStackInEnd.Checked) items = items.Where(it => it.AddDate < dtStackInEnd.Value.Date.AddDays(1)).ToList();
+                if (chkStackIn.Checked) items = items.Where(it => it.AddDate >= ucDateTimeInterval1.StartDateTime && it.AddDate <= ucDateTimeInterval1.EndDateTime).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
@@ -120,6 +119,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.cmbSpecification.Init();
             this.categoryComboBox1.Init();
             this.customerCombobox1.Init();
+            this.ucDateTimeInterval1.Init();
+            this.ucDateTimeInterval1.SelectToday();
             InitSupplier(cmbBrand);
             InitSupplier(cmbSupplier);
         }
@@ -185,6 +186,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void FreshData_Clicked(object sender, EventArgs e)
         {
             FreshData();
+        }
+
+        private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
+        {
+            if (chkStackIn.Checked) FreshData_Clicked(sender, e);
         }
 
         private void mnu_Slice_Click(object sender, EventArgs e)
@@ -276,5 +282,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
+
+        
     }
 }

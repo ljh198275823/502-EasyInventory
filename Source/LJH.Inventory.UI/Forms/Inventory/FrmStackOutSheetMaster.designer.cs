@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,7 +38,6 @@
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -72,6 +71,7 @@
             this.colDriverCall = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarPlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -130,12 +130,12 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1244, 84);
+            this.pnlFilter.Size = new System.Drawing.Size(1244, 87);
             this.pnlFilter.TabIndex = 113;
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.dtSheetDate);
+            this.panel5.Controls.Add(this.ucDateTimeInterval1);
             this.panel5.Controls.Add(this.chkSheetDate);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.panel2);
@@ -144,16 +144,8 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(2, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1242, 84);
+            this.panel5.Size = new System.Drawing.Size(1242, 87);
             this.panel5.TabIndex = 6;
-            // 
-            // dtSheetDate
-            // 
-            this.dtSheetDate.Location = new System.Drawing.Point(382, 12);
-            this.dtSheetDate.Name = "dtSheetDate";
-            this.dtSheetDate.Size = new System.Drawing.Size(131, 21);
-            this.dtSheetDate.TabIndex = 134;
-            this.dtSheetDate.ValueChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // chkSheetDate
             // 
@@ -288,7 +280,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(1, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1, 84);
+            this.panel4.Size = new System.Drawing.Size(1, 87);
             this.panel4.TabIndex = 5;
             // 
             // panel3
@@ -297,16 +289,16 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1, 84);
+            this.panel3.Size = new System.Drawing.Size(1, 87);
             this.panel3.TabIndex = 3;
             // 
             // pnlLeft
             // 
             this.pnlLeft.Controls.Add(this.customerTree1);
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlLeft.Location = new System.Drawing.Point(0, 84);
+            this.pnlLeft.Location = new System.Drawing.Point(0, 87);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(281, 399);
+            this.pnlLeft.Size = new System.Drawing.Size(281, 396);
             this.pnlLeft.TabIndex = 114;
             // 
             // customerTree1
@@ -319,7 +311,7 @@
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
             this.customerTree1.Name = "customerTree1";
-            this.customerTree1.Size = new System.Drawing.Size(281, 399);
+            this.customerTree1.Size = new System.Drawing.Size(281, 396);
             this.customerTree1.TabIndex = 0;
             this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.FreshData_Clicked);
             // 
@@ -340,9 +332,9 @@
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(281, 84);
+            this.splitter1.Location = new System.Drawing.Point(281, 87);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 399);
+            this.splitter1.Size = new System.Drawing.Size(8, 396);
             this.splitter1.TabIndex = 115;
             this.splitter1.TabStop = false;
             // 
@@ -370,12 +362,12 @@
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(289, 84);
+            this.dataGridView1.Location = new System.Drawing.Point(289, 87);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(955, 399);
+            this.dataGridView1.Size = new System.Drawing.Size(955, 396);
             this.dataGridView1.TabIndex = 116;
             // 
             // colSheetDate
@@ -422,9 +414,9 @@
             // 
             // colShipDate
             // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "D";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colShipDate.HeaderText = "发货日期";
             this.colShipDate.Name = "colShipDate";
             this.colShipDate.ReadOnly = true;
@@ -473,6 +465,18 @@
             this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
+            // 
+            // ucDateTimeInterval1
+            // 
+            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(382, 7);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = true;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.TabIndex = 134;
+            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
             // 
             // FrmStackOutSheetMaster
             // 
@@ -548,7 +552,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDriverCall;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarPlate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.DateTimePicker dtSheetDate;
         private System.Windows.Forms.CheckBox chkSheetDate;
+        private Controls.UCDateTimeInterval ucDateTimeInterval1;
     }
 }

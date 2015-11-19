@@ -31,39 +31,25 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Unit { get; set; }
         /// <summary>
+        /// 获取或设置待发货数量
+        /// </summary>
+        public decimal WaitShipping { get; set; }
+        /// <summary>
         /// 获取或设置可用库存数量
         /// </summary>
         public decimal Valid { get; set; }
-        /// <summary>
-        /// 获取或设置可用库存数量金额
-        /// </summary>
-        public decimal ValidAmount { get; set; }
         /// <summary>
         /// 获取或设置已经预订的数量
         /// </summary>
         public decimal Reserved { get; set; }
         /// <summary>
-        /// 获取或设置已经预订的数量金额
-        /// </summary>
-        public decimal ReservedAmount { get; set; }
-        /// <summary>
         /// 获取库存总数
         /// </summary>
-        public decimal Count
+        public decimal Total
         {
             get
             {
-                return Reserved + Valid;
-            }
-        }
-        /// <summary>
-        /// 获取库存金额
-        /// </summary>
-        public decimal Amount
-        {
-            get
-            {
-                return ValidAmount + ReservedAmount;
+                return Reserved + Valid + WaitShipping;
             }
         }
         #endregion

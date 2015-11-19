@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollSliceDetail));
             this.txtCount = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.lnkWarehouse = new System.Windows.Forms.LinkLabel();
@@ -46,22 +47,14 @@
             this.rdToRoll = new System.Windows.Forms.RadioButton();
             this.rdToPanel = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtPrice = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.lblPrice = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
+            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnOk = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(360, 233);
-            this.btnClose.TabIndex = 8;
-            // 
-            // btnOk
-            // 
-            this.btnOk.Location = new System.Drawing.Point(273, 233);
-            this.btnOk.TabIndex = 7;
             // 
             // txtCount
             // 
@@ -95,7 +88,7 @@
             // lnkWarehouse
             // 
             this.lnkWarehouse.AutoSize = true;
-            this.lnkWarehouse.Location = new System.Drawing.Point(40, 158);
+            this.lnkWarehouse.Location = new System.Drawing.Point(40, 155);
             this.lnkWarehouse.Name = "lnkWarehouse";
             this.lnkWarehouse.Size = new System.Drawing.Size(29, 12);
             this.lnkWarehouse.TabIndex = 7;
@@ -105,9 +98,10 @@
             // 
             // txtWareHouse
             // 
-            this.txtWareHouse.BackColor = System.Drawing.Color.White;
+            this.txtWareHouse.BackColor = System.Drawing.SystemColors.Control;
+            this.txtWareHouse.Enabled = false;
             this.txtWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWareHouse.Location = new System.Drawing.Point(73, 155);
+            this.txtWareHouse.Location = new System.Drawing.Point(73, 152);
             this.txtWareHouse.Name = "txtWareHouse";
             this.txtWareHouse.ReadOnly = true;
             this.txtWareHouse.Size = new System.Drawing.Size(350, 21);
@@ -158,7 +152,7 @@
             0,
             0});
             this.txtLength.Name = "txtLength";
-            this.txtLength.PointCount = 3;
+            this.txtLength.PointCount = 2;
             this.txtLength.Size = new System.Drawing.Size(145, 21);
             this.txtLength.TabIndex = 3;
             this.txtLength.Text = "0.00";
@@ -182,6 +176,7 @@
             // 
             // txtCategory
             // 
+            this.txtCategory.BackColor = System.Drawing.SystemColors.Control;
             this.txtCategory.Enabled = false;
             this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtCategory.Location = new System.Drawing.Point(278, 27);
@@ -264,39 +259,10 @@
             this.label10.TabIndex = 79;
             this.label10.Text = "加工";
             // 
-            // txtPrice
-            // 
-            this.txtPrice.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPrice.Location = new System.Drawing.Point(278, 122);
-            this.txtPrice.MaxValue = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.txtPrice.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.PointCount = 3;
-            this.txtPrice.Size = new System.Drawing.Size(145, 21);
-            this.txtPrice.TabIndex = 6;
-            this.txtPrice.Text = "0.00";
-            // 
-            // lblPrice
-            // 
-            this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(245, 125);
-            this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(29, 12);
-            this.lblPrice.TabIndex = 81;
-            this.lblPrice.Text = "单价";
-            // 
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(73, 186);
+            this.txtMemo.Location = new System.Drawing.Point(73, 214);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(350, 21);
             this.txtMemo.TabIndex = 8;
@@ -304,21 +270,69 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(39, 189);
+            this.label3.Location = new System.Drawing.Point(39, 217);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 84;
             this.label3.Text = "备注";
             // 
+            // txtCustomer
+            // 
+            this.txtCustomer.BackColor = System.Drawing.SystemColors.Control;
+            this.txtCustomer.Enabled = false;
+            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCustomer.Location = new System.Drawing.Point(73, 183);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(350, 21);
+            this.txtCustomer.TabIndex = 86;
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.AutoSize = true;
+            this.lnkCustomer.Location = new System.Drawing.Point(42, 187);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
+            this.lnkCustomer.TabIndex = 85;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Location = new System.Drawing.Point(311, 251);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(112, 32);
+            this.btnClose.TabIndex = 88;
+            this.btnClose.Text = "关闭(&C)";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnOk.Location = new System.Drawing.Point(189, 251);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(112, 32);
+            this.btnOk.TabIndex = 87;
+            this.btnOk.Text = "确定(&O)";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
             // FrmSteelRollSliceDetail
             // 
+            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 268);
+            this.CancelButton = this.btnClose;
+            this.ClientSize = new System.Drawing.Size(447, 295);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.txtCustomer);
+            this.Controls.Add(this.lnkCustomer);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtPrice);
-            this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cmbSpecification);
@@ -333,28 +347,10 @@
             this.Controls.Add(this.lnkWarehouse);
             this.Controls.Add(this.txtCount);
             this.Controls.Add(this.label5);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSteelRollSliceDetail";
-            this.Text = "库存信息";
-            this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.txtCount, 0);
-            this.Controls.SetChildIndex(this.lnkWarehouse, 0);
-            this.Controls.SetChildIndex(this.txtWareHouse, 0);
-            this.Controls.SetChildIndex(this.label7, 0);
-            this.Controls.SetChildIndex(this.txtLength, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.txtWeight, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.lnkCategory, 0);
-            this.Controls.SetChildIndex(this.txtCategory, 0);
-            this.Controls.SetChildIndex(this.cmbSpecification, 0);
-            this.Controls.SetChildIndex(this.btnOk, 0);
-            this.Controls.SetChildIndex(this.btnClose, 0);
-            this.Controls.SetChildIndex(this.label10, 0);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.Controls.SetChildIndex(this.lblPrice, 0);
-            this.Controls.SetChildIndex(this.txtPrice, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.txtMemo, 0);
+            this.Text = "创建小件库存";
+            this.Load += new System.EventHandler(this.FrmSteelRollSliceDetail_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -381,10 +377,12 @@
         private System.Windows.Forms.RadioButton rdToRoll;
         private System.Windows.Forms.RadioButton rdToPanel;
         private System.Windows.Forms.Label label10;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtPrice;
-        private System.Windows.Forms.Label lblPrice;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.Label label3;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
+        protected System.Windows.Forms.Button btnClose;
+        protected System.Windows.Forms.Button btnOk;
 
     }
 }

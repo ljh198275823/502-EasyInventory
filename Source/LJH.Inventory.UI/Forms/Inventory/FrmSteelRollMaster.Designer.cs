@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
@@ -58,8 +58,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
-            this.dtStackInFrom = new System.Windows.Forms.DateTimePicker();
-            this.chkStackInFrom = new System.Windows.Forms.CheckBox();
+            this.chkStackIn = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,8 +90,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.dtStackInEnd = new System.Windows.Forms.DateTimePicker();
-            this.chkStackInEnd = new System.Windows.Forms.CheckBox();
+            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -108,13 +106,12 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1511, 81);
+            this.pnlFilter.Size = new System.Drawing.Size(1511, 86);
             this.pnlFilter.TabIndex = 112;
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.dtStackInEnd);
-            this.panel5.Controls.Add(this.chkStackInEnd);
+            this.panel5.Controls.Add(this.ucDateTimeInterval1);
             this.panel5.Controls.Add(this.customerCombobox1);
             this.panel5.Controls.Add(this.label8);
             this.panel5.Controls.Add(this.panel2);
@@ -131,12 +128,11 @@
             this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.cmbSpecification);
             this.panel5.Controls.Add(this.label5);
-            this.panel5.Controls.Add(this.dtStackInFrom);
-            this.panel5.Controls.Add(this.chkStackInFrom);
+            this.panel5.Controls.Add(this.chkStackIn);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(1, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1510, 81);
+            this.panel5.Size = new System.Drawing.Size(1510, 86);
             this.panel5.TabIndex = 7;
             // 
             // customerCombobox1
@@ -162,7 +158,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.chkNullified);
             this.panel2.Controls.Add(this.chkShipped);
-            this.panel2.Location = new System.Drawing.Point(805, 44);
+            this.panel2.Location = new System.Drawing.Point(897, 44);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(205, 24);
             this.panel2.TabIndex = 89;
@@ -192,7 +188,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(746, 50);
+            this.label7.Location = new System.Drawing.Point(838, 50);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 88;
@@ -205,7 +201,7 @@
             this.panel1.Controls.Add(this.chkPartial);
             this.panel1.Controls.Add(this.chkOnlyTail);
             this.panel1.Controls.Add(this.chkRemainless);
-            this.panel1.Location = new System.Drawing.Point(805, 12);
+            this.panel1.Location = new System.Drawing.Point(897, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(205, 24);
             this.panel1.TabIndex = 87;
@@ -263,7 +259,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(746, 18);
+            this.label6.Location = new System.Drawing.Point(838, 18);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 86;
@@ -363,26 +359,16 @@
             this.label5.TabIndex = 75;
             this.label5.Text = "规格";
             // 
-            // dtStackInFrom
+            // chkStackIn
             // 
-            this.dtStackInFrom.CustomFormat = "yyyy-MM-dd";
-            this.dtStackInFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtStackInFrom.Location = new System.Drawing.Point(615, 14);
-            this.dtStackInFrom.Name = "dtStackInFrom";
-            this.dtStackInFrom.Size = new System.Drawing.Size(108, 21);
-            this.dtStackInFrom.TabIndex = 45;
-            this.dtStackInFrom.ValueChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkStackInFrom
-            // 
-            this.chkStackInFrom.AutoSize = true;
-            this.chkStackInFrom.Location = new System.Drawing.Point(531, 16);
-            this.chkStackInFrom.Name = "chkStackInFrom";
-            this.chkStackInFrom.Size = new System.Drawing.Size(84, 16);
-            this.chkStackInFrom.TabIndex = 44;
-            this.chkStackInFrom.Text = "入库日期从";
-            this.chkStackInFrom.UseVisualStyleBackColor = true;
-            this.chkStackInFrom.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.chkStackIn.AutoSize = true;
+            this.chkStackIn.Location = new System.Drawing.Point(527, 15);
+            this.chkStackIn.Name = "chkStackIn";
+            this.chkStackIn.Size = new System.Drawing.Size(72, 16);
+            this.chkStackIn.TabIndex = 44;
+            this.chkStackIn.Text = "入库日期";
+            this.chkStackIn.UseVisualStyleBackColor = true;
+            this.chkStackIn.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // panel4
             // 
@@ -390,7 +376,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1, 81);
+            this.panel4.Size = new System.Drawing.Size(1, 86);
             this.panel4.TabIndex = 6;
             // 
             // dataGridView1
@@ -420,12 +406,12 @@
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 81);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1511, 451);
+            this.dataGridView1.Size = new System.Drawing.Size(1511, 446);
             this.dataGridView1.TabIndex = 115;
             // 
             // colAddDate
@@ -455,45 +441,45 @@
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle6.Format = "N3";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle11.Format = "N3";
+            dataGridViewCellStyle11.NullValue = null;
+            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle11;
             this.colOriginalWeight.HeaderText = "入库重量";
             this.colOriginalWeight.Name = "colOriginalWeight";
             this.colOriginalWeight.ReadOnly = true;
             // 
             // colOriginalLength
             // 
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle12;
             this.colOriginalLength.HeaderText = "入库长度";
             this.colOriginalLength.Name = "colOriginalLength";
             this.colOriginalLength.ReadOnly = true;
             // 
             // colWeight
             // 
-            dataGridViewCellStyle8.Format = "N3";
-            dataGridViewCellStyle8.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle13.Format = "N3";
+            dataGridViewCellStyle13.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle13;
             this.colWeight.HeaderText = "剩余重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colLength
             // 
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle14.Format = "N2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle14;
             this.colLength.HeaderText = "剩余长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
             // colRealThick
             // 
-            dataGridViewCellStyle10.Format = "N3";
-            dataGridViewCellStyle10.NullValue = null;
-            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle15.Format = "N3";
+            dataGridViewCellStyle15.NullValue = null;
+            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle15;
             this.colRealThick.HeaderText = "厚度";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
@@ -632,26 +618,17 @@
             this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
             this.cMnu_Export.Text = "导出...";
             // 
-            // dtStackInEnd
+            // ucDateTimeInterval1
             // 
-            this.dtStackInEnd.CustomFormat = "yyyy-MM-dd";
-            this.dtStackInEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtStackInEnd.Location = new System.Drawing.Point(615, 47);
-            this.dtStackInEnd.Name = "dtStackInEnd";
-            this.dtStackInEnd.Size = new System.Drawing.Size(108, 21);
-            this.dtStackInEnd.TabIndex = 93;
-            this.dtStackInEnd.ValueChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkStackInEnd
-            // 
-            this.chkStackInEnd.AutoSize = true;
-            this.chkStackInEnd.Location = new System.Drawing.Point(531, 49);
-            this.chkStackInEnd.Name = "chkStackInEnd";
-            this.chkStackInEnd.Size = new System.Drawing.Size(84, 16);
-            this.chkStackInEnd.TabIndex = 92;
-            this.chkStackInEnd.Text = "入库日期到";
-            this.chkStackInEnd.UseVisualStyleBackColor = true;
-            this.chkStackInEnd.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(602, 7);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = true;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.TabIndex = 92;
+            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
             // 
             // FrmSteelRollMaster
             // 
@@ -697,8 +674,7 @@
         private System.Windows.Forms.CheckBox chkOnlyTail;
         private System.Windows.Forms.CheckBox chkPartial;
         private System.Windows.Forms.CheckBox chkIntact;
-        private System.Windows.Forms.DateTimePicker dtStackInFrom;
-        private System.Windows.Forms.CheckBox chkStackInFrom;
+        private System.Windows.Forms.CheckBox chkStackIn;
         private Controls.SpecificationComboBox cmbSpecification;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbSupplier;
@@ -738,7 +714,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.Label label8;
         private Controls.CustomerCombobox customerCombobox1;
-        private System.Windows.Forms.DateTimePicker dtStackInEnd;
-        private System.Windows.Forms.CheckBox chkStackInEnd;
+        private Controls.UCDateTimeInterval ucDateTimeInterval1;
     }
 }

@@ -39,6 +39,7 @@
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChecker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +63,7 @@
             this.colLength,
             this.colInventory,
             this.colCheckCount,
+            this.colCustomer,
             this.colState,
             this.colChecker,
             this.colMemo});
@@ -133,6 +135,12 @@
             this.colCheckCount.Name = "colCheckCount";
             this.colCheckCount.ReadOnly = true;
             // 
+            // colCustomer
+            // 
+            this.colCustomer.HeaderText = "客户";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
+            // 
             // colState
             // 
             this.colState.HeaderText = "盈亏";
@@ -152,14 +160,14 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Width = 150;
             // 
-            // FrmSteelRollSliceCheckView
+            // FrmSteelRollSliceCheckRecordView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1079, 429);
             this.Controls.Add(this.GridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmSteelRollSliceCheckView";
+            this.Name = "FrmSteelRollSliceCheckRecordView";
             this.Text = "小件盘点记录";
             this.Controls.SetChildIndex(this.GridView, 0);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
@@ -180,6 +188,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colChecker;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;

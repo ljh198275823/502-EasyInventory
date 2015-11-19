@@ -20,7 +20,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 待发货(已经生成了发货单,但发货还未发货)
         /// </summary>
-        WaitShip = 0x04,
+        WaitShipping = 0x04,
         /// <summary>
         /// 所有未出货, 包括在库,已预定和待发货的
         /// </summary>

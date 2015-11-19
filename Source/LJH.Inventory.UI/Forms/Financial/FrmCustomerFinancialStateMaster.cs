@@ -187,6 +187,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                     frm.PaymentType = CustomerPaymentType.Customer;
                     frm.Text = string.Format("{0} 付款流水明细", c.Name);
                     frm.ShowDialog();
+                    ReFreshData(); //刷新数据
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        var cs = row.Tag as CustomerState;
+                        row.Selected = cs.Customer.ID == c.ID;
+                    }
                 }
             }
         }

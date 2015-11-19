@@ -54,7 +54,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                         int s = con.States.Value;
                         items = items.Where(it => ((s & (int)ProductInventoryState.Inventory) > 0 && it.State == ProductInventoryState.Inventory) ||
                                                   ((s & (int)ProductInventoryState.Reserved) > 0 && it.State == ProductInventoryState.Reserved) ||
-                                                  ((s & (int)ProductInventoryState.WaitShip) > 0 && it.State == ProductInventoryState.WaitShip) ||
+                                                  ((s & (int)ProductInventoryState.WaitShipping) > 0 && it.State == ProductInventoryState.WaitShipping) ||
                                                   ((s & (int)ProductInventoryState.Shipped) > 0 && it.State == ProductInventoryState.Shipped) ||
                                                   ((s & (int)ProductInventoryState.Nullified) > 0 && it.State == ProductInventoryState.Nullified)
                                            ).ToList();

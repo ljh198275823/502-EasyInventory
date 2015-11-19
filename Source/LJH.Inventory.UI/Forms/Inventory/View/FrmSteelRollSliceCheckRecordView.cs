@@ -58,6 +58,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colState"].Value = record.CheckCount > record.Inventory ? "盘盈" : "盘亏";
             row.DefaultCellStyle.ForeColor = record.CheckCount > record.Inventory ? Color.Black : Color.Red;
             row.Cells["colChecker"].Value = record.Checker;
+            row.Cells["colCustomer"].Value = record.Customer;
             row.Cells["colMemo"].Value = record.Memo;
         }
         #endregion

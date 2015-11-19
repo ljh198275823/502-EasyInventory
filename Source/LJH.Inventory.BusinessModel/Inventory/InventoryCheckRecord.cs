@@ -63,6 +63,8 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置盘点的库存项
         /// </summary>
         public Guid? SourceID { get; set; }
+
+        public string Customer { get; set; }
         /// <summary>
         /// 获取或设置盘点人员
         /// </summary>

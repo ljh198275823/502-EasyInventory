@@ -19,7 +19,7 @@ namespace LJH.Inventory.BusinessModel.Resource
                     return "预定";
                 case ProductInventoryState.Shipped:
                     return "已出货";
-                case ProductInventoryState.WaitShip:
+                case ProductInventoryState.WaitShipping:
                     return "待出货";
                 default:
                     return "未知";

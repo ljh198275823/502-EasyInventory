@@ -22,6 +22,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             InitializeComponent();
         }
 
+        public SteelRollSlice SteelRollSlice { get; set; }
+
         List<Product> _Products = null;
 
         #region 重写基类方法
@@ -38,7 +40,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 records = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             return (from item in records
-                    orderby item.AddDate descending  
+                    orderby item.AddDate descending
                     select (object)item).ToList();
         }
 
@@ -69,6 +71,20 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         #endregion
 
         #region 事件处理程序
+        private void mnu_CreateInventory_Click(object sender, EventArgs e)
+        {
+            FrmSteelRollSliceDetail frm = new FrmSteelRollSliceDetail();
+            if (SteelRollSlice != null)
+            {
+                frm.Product = SteelRollSlice.Product;
+                frm.WareHouse = SteelRollSlice.WareHouse;
+            }
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                ReFreshData();
+            }
+        }
+
         private void mnu_UnReserve_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("是否取消选中的订单备货项?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -84,6 +100,20 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 }
             }
         }
+
+        private void mnu_Check_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                FrmSteelRollSliceCheck frm = new FrmSteelRollSliceCheck();
+                frm.ProductInventory = pi;
+                DialogResult ret = frm.ShowDialog();
+                if (ret == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pi);
+            }
+        }
         #endregion
+
+        
     }
 }

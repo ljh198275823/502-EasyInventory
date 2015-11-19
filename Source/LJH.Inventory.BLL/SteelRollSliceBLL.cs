@@ -76,14 +76,14 @@ namespace LJH.Inventory.BLL
                 if (inventoryOutType == InventoryOutType.FIFO)
                 {
                     items = from item in inventoryItems
-                            where item.State == ProductInventoryState.Reserved || item.State == ProductInventoryState.WaitShip
+                            where item.State == ProductInventoryState.Reserved || item.State == ProductInventoryState.WaitShipping
                             orderby item.AddDate ascending
                             select item;
                 }
                 else
                 {
                     items = from item in inventoryItems
-                            where item.State == ProductInventoryState.Reserved || item.State == ProductInventoryState.WaitShip
+                            where item.State == ProductInventoryState.Reserved || item.State == ProductInventoryState.WaitShipping
                             orderby item.AddDate descending
                             select item;
                 }
@@ -168,10 +168,9 @@ namespace LJH.Inventory.BLL
                     srs.Product = ps.SingleOrDefault(it => it.ID == g.First().ProductID);
                     srs.WareHouse = ws.SingleOrDefault(it => it.ID == g.First().WareHouseID);
                     srs.Unit = g.First().Unit;
+                    srs.WaitShipping = g.Sum(it => it.State == ProductInventoryState.WaitShipping ? it.Count : 0);
                     srs.Reserved = g.Sum(it => it.State == ProductInventoryState.Reserved ? it.Count : 0);
-                    srs.ReservedAmount = g.Sum(it => it.State == ProductInventoryState.Reserved ? (it.Count * it.Price) : 0);
                     srs.Valid = g.Sum(it => it.State == ProductInventoryState.Inventory ? it.Count : 0);
-                    srs.ValidAmount = g.Sum(it => it.State == ProductInventoryState.Inventory ? (it.Count * it.Price) : 0);
                     items.Add(srs);
                 }
             }
@@ -182,24 +181,28 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult CreateInventory(SteelRollSlice info, string op, string memo)
+        public CommandResult CreateInventory(Product p, WareHouse w, string customer, decimal count, string op, string memo)
         {
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = info.Product.ID, WareHouseID = info.WareHouse.ID };
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = p.ID, WareHouseID = w.ID };
+            con.States = (int)ProductInventoryState.UnShipped;
             List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            if (items != null && items.Count > 0) return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点或收货单收货");
+            if (items != null && items.Count > 0 && items.Exists(it => it.Customer == customer))
+            {
+                return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点来操作");
+            }
             ProductInventoryItem pii = new ProductInventoryItem()
             {
                 ID = Guid.NewGuid(),
                 AddDate = DateTime.Now,
-                ProductID = info.Product.ID,
-                WareHouseID = info.WareHouse.ID,
+                ProductID = p.ID,
+                WareHouseID = w.ID,
                 Unit = "件",
-                Price = info.Amount / info.Count,
-                Count = info.Count,
-                InventorySheet = "初始库存",
-                Weight = info.Product.Weight,
-                Length = info.Product.Length,
-                Model = info.Product.Model,
+                Count = count,
+                InventorySheet = "新建库存",
+                Weight = p.Weight,
+                Length = p.Length,
+                Model = p.Model,
+                Customer = customer,
                 State = ProductInventoryState.Inventory,
                 Operator = op,
                 Memo = memo,
@@ -211,7 +214,7 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult Check(SteelRollSlice info, decimal newCount, string checker, string memo)
+        public CommandResult Check(ProductInventoryItem info, decimal newCount, string checker, string memo)
         {
             try
             {
@@ -219,34 +222,28 @@ namespace LJH.Inventory.BLL
                 InventoryCheckRecord record = new InventoryCheckRecord();
                 record.ID = Guid.NewGuid();
                 record.CheckDateTime = DateTime.Now;
-                record.ProductID = info.Product.ID;
-                record.WarehouseID = info.WareHouse.ID;
+                record.ProductID = info.ProductID;
+                record.WarehouseID = info.WareHouseID;
                 record.Unit = info.Unit;
                 record.Price = 0;
                 record.Inventory = info.Count;
                 record.CheckCount = newCount;
+                record.SourceID = info.ID;
+                record.Customer = info.Customer;
                 record.Checker = checker;
                 record.Operator = Operator.Current.Name;
                 record.Memo = memo;
                 ProviderFactory.Create<IProvider<InventoryCheckRecord, Guid>>(RepoUri).Insert(record, unitWork);
-                if (info.Product != null && info.Product.IsService != null && info.Product.IsService.Value) return unitWork.Commit(); //如果是产品是服务的话就不用再从库存中扣除了
 
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.ProductID = info.Product.ID;
-                con.WareHouseID = info.WareHouse.ID;
-                List<SteelRollSlice> items = GetItems(con).QueryObjects;
-                if (items == null || items.Count == 0) throw new Exception("没有该产品的库存项");
-                SteelRollSlice pi = items[0];
-                if (info.Count != pi.Count) throw new Exception("产品库存有改动，请重新操作");
-                if (info.Count < newCount) //盘盈
+                ProductInventoryItem clone = info.Clone();
+                clone.Count = newCount;
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
+                var ret = unitWork.Commit();
+                if (ret.Result == ResultCode.Successful)
                 {
-                    盘盈(record, info.Product.Model, unitWork);
+                    info.Count = newCount;
                 }
-                else if (info.Count > newCount)  //盘亏
-                {
-                    盘亏(record, UserSettings.Current.InventoryOutType, unitWork);
-                }
-                return unitWork.Commit();
+                return ret;
             }
             catch (Exception ex)
             {
@@ -314,7 +311,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult UnReserve(ProductInventoryItem item)
         {
-            if (item.State == ProductInventoryState.Reserved || item.State != ProductInventoryState.WaitShip)
+            if (item.State == ProductInventoryState.Reserved || item.State != ProductInventoryState.WaitShipping)
             {
                 ProductInventoryItem clone = item.Clone();
                 item.OrderItem = null;
