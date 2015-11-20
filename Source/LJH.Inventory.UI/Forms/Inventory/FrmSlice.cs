@@ -27,7 +27,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         /// <summary>
         /// 获取或设置要加工的原材料
         /// </summary>
-        public SteelRoll SlicingItem { get; set; }
+        public ProductInventoryItem SlicingItem { get; set; }
         /// <summary>
         /// 获取或设置要加工的类型
         /// </summary>
@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 私有方法
-        private void ShowSlicingItem(SteelRoll item)
+        private void ShowSlicingItem(ProductInventoryItem item)
         {
             txtCategory.Text = item.Product.Category.Name;
             txtSpecification.Text = item.Product.Specification;

@@ -14,7 +14,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         #region 公共属性
-        public SteelRoll SteelRoll { get; set; }
+        public ProductInventoryItem SteelRoll { get; set; }
         #endregion
 
         private void FrmSteelRollCheck_Load(object sender, EventArgs e)

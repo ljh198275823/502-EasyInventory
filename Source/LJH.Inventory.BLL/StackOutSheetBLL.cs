@@ -52,20 +52,20 @@ namespace LJH.Inventory.BLL
             List<ProductInventoryItem> items = new List<ProductInventoryItem>();
             items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.WaitShipping && item.ProductID == si.ProductID && item.DeliveryItem == si.ID)); //出货单项待出货的项最高优先级
             if (si.OrderItem != null) items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.Reserved && item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == si.OrderItem)); //订单备货优先级次之
-            if (inventoryOutType == InventoryOutType.FIFO) //其它未分配的项优先级最后
-            {
-                items.AddRange(from item in inventoryItems
-                               where item.ProductID == si.ProductID && item.State == ProductInventoryState.Inventory && item.DeliveryItem == null && item.OrderItem == null
-                               orderby item.AddDate ascending
-                               select item);
-            }
-            else
-            {
-                items.AddRange(from item in inventoryItems
-                               where item.ProductID == si.ProductID && item.State == ProductInventoryState.Inventory && item.DeliveryItem == null && item.OrderItem == null
-                               orderby item.AddDate descending
-                               select item);
-            }
+            //if (inventoryOutType == InventoryOutType.FIFO) //其它未分配的项优先级最后
+            //{
+            //    items.AddRange(from item in inventoryItems
+            //                   where item.ProductID == si.ProductID && item.State == ProductInventoryState.Inventory && item.DeliveryItem == null && item.OrderItem == null
+            //                   orderby item.AddDate ascending
+            //                   select item);
+            //}
+            //else
+            //{
+            //    items.AddRange(from item in inventoryItems
+            //                   where item.ProductID == si.ProductID && item.State == ProductInventoryState.Inventory && item.DeliveryItem == null && item.OrderItem == null
+            //                   orderby item.AddDate descending
+            //                   select item);
+            //}
             if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("产品 {0} 库存不足，出货失败!", si.ProductID));
 
             decimal count = si.Count;
@@ -73,11 +73,10 @@ namespace LJH.Inventory.BLL
             {
                 if (count > 0)
                 {
-                    if (item.Count > count) //对于部分出货的情况，一条库存记录拆成两条，其中一条表示出货的，另一条表示未出货部分，即要保证DelvieryItem不为空的都是未出货的，为空的都是已经出货的
+                    if (item.Count > count)
                     {
                         ProductInventoryItem pii = item.Clone();
                         pii.ID = Guid.NewGuid();
-                        pii.SourceID = item.ID;
                         pii.OrderItem = si.OrderItem;
                         pii.OrderID = si.OrderID;
                         pii.DeliveryItem = si.ID;

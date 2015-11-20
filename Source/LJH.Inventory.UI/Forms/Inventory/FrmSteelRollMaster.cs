@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         #region 私有变量
-        private List<SteelRoll> _SteelRolls = null;
+        private List<ProductInventoryItem> _SteelRolls = null;
         #endregion
 
         #region 私有方法
@@ -55,7 +55,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<object> FilterData()
         {
-            List<SteelRoll> items = _SteelRolls;
+            List<ProductInventoryItem> items = _SteelRolls;
             if (items != null && items.Count > 0)
             {
                 if (chkStackIn.Checked) items = items.Where(it => it.AddDate >= ucDateTimeInterval1.StartDateTime && it.AddDate <= ucDateTimeInterval1.EndDateTime).ToList();
@@ -87,7 +87,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void ShowRowColor(DataGridViewRow row)
         {
-            SteelRoll sr = row.Tag as SteelRoll;
+            ProductInventoryItem sr = row.Tag as ProductInventoryItem;
             if (sr.State == ProductInventoryState.Nullified)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
@@ -159,7 +159,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            SteelRoll sr = item as SteelRoll;
+            ProductInventoryItem sr = item as ProductInventoryItem;
             row.Tag = sr;
             row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy年MM月dd日");
             row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
@@ -179,6 +179,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colMemo"].Value = sr.Memo;
             ShowRowColor(row);
+            if (!_SteelRolls.Exists(it => it.ID == sr.ID))
+            {
+                _SteelRolls.Add(sr);
+            }
         }
         #endregion
 
@@ -197,7 +201,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
-                SteelRoll sr = dataGridView1.SelectedRows[0].Tag as SteelRoll;
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
                 if (sr.State == ProductInventoryState.Inventory)
                 {
                     FrmSlice frm = new FrmSlice();
@@ -217,7 +221,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
-                SteelRoll sr = dataGridView1.SelectedRows[0].Tag as SteelRoll;
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
                 SliceRecordSearchCondition con = new SliceRecordSearchCondition();
                 con.SourceRoll = sr.ID;
                 FrmSlicedRecordView frm = new FrmSlicedRecordView();
@@ -230,7 +234,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                SteelRoll sr = dataGridView1.SelectedRows[0].Tag as SteelRoll;
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
                 if (sr.State == ProductInventoryState.Inventory)
                 {
                     FrmSteelRollCheck frm = new FrmSteelRollCheck();
@@ -251,7 +255,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                SteelRoll sr = dataGridView1.SelectedRows[0].Tag as SteelRoll;
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
                 View.FrmSteelRollCheckRecordView frm = new FrmSteelRollCheckRecordView();
                 frm.SearchCondition = new InventoryCheckRecordSearchCondition() { SourceID = sr.ID };
                 frm.StartPosition = FormStartPosition.CenterParent;
@@ -265,7 +269,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
-                    SteelRoll item = row.Tag as SteelRoll;
+                    ProductInventoryItem item = row.Tag as ProductInventoryItem;
                     if (item.State == ProductInventoryState.Inventory)
                     {
                         CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Nullify(item);

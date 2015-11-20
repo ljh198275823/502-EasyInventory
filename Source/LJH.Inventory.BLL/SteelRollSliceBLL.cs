@@ -144,6 +144,7 @@ namespace LJH.Inventory.BLL
                 {
                     ProductInventoryItem newItem = info.Clone();
                     newItem.ID = Guid.NewGuid();
+                    newItem.SourceID = info.ID; //设置库存项的来源
                     newItem.Count = info.Count - newCount;
                     newItem.State = ProductInventoryState.Shipped;
                     newItem.OrderItem = null;

@@ -113,9 +113,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string DeliverySheet { get; set; }
         /// <summary>
-        /// 获取或设置次库存项的来源，库存项在出货时会分开成多项
+        /// 获取或设置库存项的来源，库存项在出货时会分开成多项,
         /// </summary>
         public Guid? SourceID { get; set; }
+        /// <summary>
+        /// 获取或设置库存项的原材料项ID,如果此库存项是通过加工得到的话
+        /// </summary>
+        public Guid? SourceRoll { get; set; }
 
         public string Operator { get; set; }
 
@@ -126,5 +130,51 @@ namespace LJH.Inventory.BusinessModel
         {
             return this.MemberwiseClone() as ProductInventoryItem;
         }
+
+        #region 与原材料有关
+        /// <summary>
+        /// 获取原材料资料是否可以修改
+        /// </summary>
+        public bool CanEdit
+        {
+            get { return (Status == "整卷"); }
+        }
+        /// <summary>
+        /// 获取原材料的状态
+        /// </summary>
+        public string Status
+        {
+            get
+            {
+                if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "余料";
+                else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
+                else if (OriginalLength > Length) return "余卷";
+                return "整卷";
+                return string.Empty;
+            }
+        }
+        /// <summary>
+        /// 计算真实厚度
+        /// </summary>
+        /// <returns></returns>
+        public decimal? CalThick()
+        {
+            if (Product != null && !string.IsNullOrEmpty(Product.Specification) && Product.Density.HasValue)
+            {
+                try
+                {
+                    decimal? width = SpecificationHelper.GetWrittenWidth(Product.Specification);
+                    if (width.HasValue && width > 0)
+                    {
+                        return OriginalWeight * 1000 * 1000 / (width.Value * OriginalLength * Product.Density.Value);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            return null;
+        }
+        #endregion
     }
 }

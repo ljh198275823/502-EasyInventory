@@ -348,7 +348,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ShowDeliveryItemsOnGrid(sources);
         }
 
-        public void AddDeliveryItem(SteelRoll p)
+        public void AddDeliveryItem(ProductInventoryItem p)
         {
             List<StackOutItem> sources = GetDeliveryItemsFromGrid();
             if (!sources.Exists(it => it.ProductInventoryItem == p.ID))  //原材料只能属于一个送货单项
@@ -543,7 +543,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                SteelRoll sr= frm.SelectedItem as SteelRoll;
+                ProductInventoryItem sr= frm.SelectedItem as ProductInventoryItem;
                 AddDeliveryItem(sr);
             }
         }

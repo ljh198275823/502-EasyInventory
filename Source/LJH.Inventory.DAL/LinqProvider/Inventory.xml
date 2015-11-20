@@ -419,6 +419,7 @@
       <Column Name="DeliveryItem" Member="DeliveryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="DeliverySheet" Member="DeliverySheet"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="SourceID" Member="SourceID"  DbType="uniqueidentifier"  UpdateCheck="Never"/>
+      <Column Name="SourceRoll" Member="SourceRoll"  DbType="uniqueidentifier"  UpdateCheck="Never"/>
       <Column Name="Operator" Member="Operator"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>

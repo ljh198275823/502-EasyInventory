@@ -42,7 +42,7 @@ namespace LJH.Inventory.BLL
         }
         #endregion
 
-        #region 公共方法}
+        #region 公共方法
         /// <summary>
         /// 获取所有客户信息
         /// </summary>
@@ -192,6 +192,75 @@ namespace LJH.Inventory.BLL
                 customer.FileID = fid;
             }
             return ret;
+        }
+
+        public QueryResultList<CustomerFinancialState> GetAllCustomerStates()
+        {
+            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+            cpsc.PaymentTypes = new List<CustomerPaymentType>();
+            cpsc.PaymentTypes.Add(CustomerPaymentType.Customer);
+            cpsc.States = new List<SheetState>();
+            cpsc.States.Add(SheetState.Add);
+            cpsc.States.Add(SheetState.Approved);
+            cpsc.HasRemain = true;
+            var customerPayments = (new CustomerPaymentBLL(RepoUri )).GetItems(cpsc).QueryObjects;
+
+            CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.Settled = false;
+            crsc.ReceivableTypes = new List<CustomerReceivableType>();
+            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
+            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
+            var customerReceivables = (new CustomerReceivableBLL(RepoUri )).GetItems(crsc).QueryObjects;
+
+            List<CompanyInfo> customers = GetAllCustomers().QueryObjects;
+            if (customers != null && customers.Count > 0)
+            {
+                var items = new List<CustomerFinancialState>();
+                foreach (var c in customers)
+                {
+                    CustomerFinancialState cs = new CustomerFinancialState()
+                    {
+                        Customer = c,
+                        Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0) : 0,
+                        Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID ? it.Remain : 0) : 0,
+                    };
+                    items.Add(cs);
+                }
+                return new QueryResultList<CustomerFinancialState>(ResultCode.Successful, string.Empty, items);
+            }
+            return new QueryResultList<CustomerFinancialState>(ResultCode.Successful, string.Empty, null);
+        }
+
+        public QueryResult<CustomerFinancialState> GetCustomerState(string customerID)
+        {
+            var c = GetByID(customerID).QueryObject;
+            if (c == null) return new QueryResult<CustomerFinancialState>(ResultCode.Fail, string.Empty, null);
+
+            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+            cpsc.PaymentTypes = new List<CustomerPaymentType>();
+            cpsc.PaymentTypes.Add(CustomerPaymentType.Customer);
+            cpsc.States = new List<SheetState>();
+            cpsc.States.Add(SheetState.Add);
+            cpsc.States.Add(SheetState.Approved);
+            cpsc.HasRemain = true;
+            cpsc.CustomerID = customerID;
+            var customerPayments = (new CustomerPaymentBLL(RepoUri)).GetItems(cpsc).QueryObjects;
+
+            CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.Settled = false;
+            crsc.CustomerID = customerID;
+            crsc.ReceivableTypes = new List<CustomerReceivableType>();
+            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
+            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
+            var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
+
+            CustomerFinancialState cs = new CustomerFinancialState()
+            {
+                Customer = c,
+                Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID ? it.Remain : 0) : 0,
+                Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID ? it.Remain : 0) : 0,
+            };
+            return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
         }
         #endregion
     }

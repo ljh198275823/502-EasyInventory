@@ -21,98 +21,15 @@ namespace LJH.Inventory.BLL
         private string RepoUri = null;
         private const string MODEL = "原材料";
 
-        #region 私有方法
-        private SteelRoll Convert(ProductInventoryItem info)
-        {
-            return new SteelRoll()
-            {
-                ID = info.ID,
-                WareHouseID = info.WareHouseID,
-                WareHouse = info.WareHouse,
-                ProductID = info.ProductID,
-                Product = info.Product,
-                OriginalLength = info.OriginalLength,
-                OriginalWeight = info.OriginalWeight,
-                Weight = info.Weight,
-                Length = info.Length,
-                RealThick = info.RealThick,
-                Unit = info.Unit,
-                Price = info.Price,
-                Count = info.Count,
-                AddDate = info.AddDate,
-                State = info.State,
-                Customer = info.Customer,
-                Supplier = info.Supplier,
-                Manufacture = info.Manufacture,
-                SerialNumber = info.SerialNumber,
-                OrderID = info.OrderID,
-                OrderItem = info.OrderItem,
-                PurchaseID = info.PurchaseID,
-                PurchaseItem = info.PurchaseItem,
-                InventoryItem = info.InventoryItem,
-                InventorySheet = info.InventorySheet,
-                DeliveryItem = info.DeliveryItem,
-                DeliverySheet = info.DeliverySheet,
-                SourceID = info.SourceID,
-                Operator = info.Operator,
-                Memo = info.Memo
-            };
-        }
-
-        private ProductInventoryItem Convert(SteelRoll info)
-        {
-            return new ProductInventoryItem()
-            {
-                ID = info.ID,
-                WareHouseID = info.WareHouseID,
-                WareHouse = info.WareHouse,
-                ProductID = info.ProductID,
-                Product = info.Product,
-                Model = MODEL,
-                OriginalLength = info.OriginalLength,
-                OriginalWeight = info.OriginalWeight,
-                Weight = info.Weight,
-                Length = info.Length,
-                RealThick = info.RealThick,
-                Unit = info.Unit,
-                Price = info.Price,
-                Count = info.Count,
-                AddDate = info.AddDate,
-                State = info.State,
-                Customer = info.Customer,
-                Supplier = info.Supplier,
-                Manufacture = info.Manufacture,
-                SerialNumber = info.SerialNumber,
-                OrderID = info.OrderID,
-                OrderItem = info.OrderItem,
-                PurchaseID = info.PurchaseID,
-                PurchaseItem = info.PurchaseItem,
-                InventoryItem = info.InventoryItem,
-                InventorySheet = info.InventorySheet,
-                DeliveryItem = info.DeliveryItem,
-                DeliverySheet = info.DeliverySheet,
-                SourceID = info.SourceID,
-                Operator = info.Operator,
-                Memo = info.Memo
-            };
-        }
-        #endregion
-
         #region 公共方法
-        public QueryResult<SteelRoll> GetByID(Guid id)
+        public QueryResult<ProductInventoryItem> GetByID(Guid id)
         {
-            SteelRoll sr = null;
-            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(id);
-            if (ret.QueryObject != null)
-            {
-                sr = Convert(ret.QueryObject);
-            }
-            return new QueryResult<SteelRoll>(ret.Result, ret.Message, sr);
+            ProductInventoryItem sr = null;
+            return  ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(id);
         }
 
-        public QueryResultList<SteelRoll> GetItems(SearchCondition con)
+        public QueryResultList<ProductInventoryItem> GetItems(SearchCondition con)
         {
-            List<SteelRoll> items = null;
             if (con == null)
             {
                 con = new ProductInventoryItemSearchCondition() { Model = MODEL };
@@ -121,28 +38,17 @@ namespace LJH.Inventory.BLL
             {
                 (con as ProductInventoryItemSearchCondition).Model = MODEL;
             }
-            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
-            if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
-            {
-                if (items == null) items = new List<SteelRoll>();
-                foreach (var pi in ret.QueryObjects)
-                {
-                    var sr = Convert(pi);
-                    if (sr.Product != null && sr.WareHouse != null) items.Add(sr);
-                }
-            }
-            return new QueryResultList<SteelRoll>(ret.Result, ret.Message, items);
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
         }
 
-        public CommandResult Add(SteelRoll sr)
+        public CommandResult Add(ProductInventoryItem sr)
         {
-            var pi = Convert(sr);
-            return new ProductInventoryItemBLL(RepoUri).Add(pi);
+            return new ProductInventoryItemBLL(RepoUri).Add(sr);
         }
 
-        public CommandResult Update(SteelRoll sr)
+        public CommandResult Update(ProductInventoryItem sr)
         {
-            return new ProductInventoryItemBLL(RepoUri).Update(Convert(sr));
+            return new ProductInventoryItemBLL(RepoUri).Update(sr);
         }
         /// <summary>
         /// 原材料加工
@@ -152,7 +58,7 @@ namespace LJH.Inventory.BLL
         /// <param name="length"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public CommandResult Slice(SteelRoll sr, SteelRollSliceRecord sliceSheet, WareHouse wh)
+        public CommandResult Slice(ProductInventoryItem sr, SteelRollSliceRecord sliceSheet, WareHouse wh)
         {
             Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length, sr.Product.Density);
             if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
@@ -160,11 +66,10 @@ namespace LJH.Inventory.BLL
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(sliceSheet, unitWork);
 
-            ProductInventoryItem item = Convert(sr);
-            ProductInventoryItem newVal = item.Clone();
+            ProductInventoryItem newVal = sr.Clone();
             newVal.Weight = sliceSheet.AfterWeight;
             newVal.Length = sliceSheet.AfterLength;
-            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, item, unitWork);
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr, unitWork);
 
             ProductInventoryItem pi = new ProductInventoryItem()
             {
@@ -181,7 +86,8 @@ namespace LJH.Inventory.BLL
                 State = ProductInventoryState.Inventory,
                 Unit = "件",
                 WareHouseID = wh.ID,
-                Customer =sliceSheet.Customer ,
+                Customer = sliceSheet.Customer,
+                SourceRoll = sr.ID,  //设置加工来源
             };
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi, unitWork);
             CommandResult ret = unitWork.Commit();
@@ -196,14 +102,13 @@ namespace LJH.Inventory.BLL
         /// 原材料盘点
         /// </summary>
         /// <returns></returns>
-        public CommandResult Check(SteelRoll sr, decimal newWeight, decimal newLength, string memo, string checker, string operatorName)
+        public CommandResult Check(ProductInventoryItem sr, decimal newWeight, decimal newLength, string memo, string checker, string operatorName)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            ProductInventoryItem newVal = Convert(sr);
-            ProductInventoryItem item = newVal.Clone();
+            ProductInventoryItem newVal = sr.Clone();
             newVal.Weight = newWeight;
             newVal.Length = newLength;
-            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, item, unitWork);
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr, unitWork);
             InventoryCheckRecord citem = new InventoryCheckRecord()
             {
                 ID = Guid.NewGuid(),
@@ -238,10 +143,9 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public CommandResult Nullify(SteelRoll sr)
+        public CommandResult Nullify(ProductInventoryItem sr)
         {
-            ProductInventoryItem newVal = Convert(sr);
-            ProductInventoryItem item = newVal.Clone();
+            ProductInventoryItem newVal = sr.Clone();
             newVal.State = ProductInventoryState.Nullified;
             if (string.IsNullOrEmpty(newVal.Memo))
             {
@@ -251,7 +155,7 @@ namespace LJH.Inventory.BLL
             {
                 newVal.Memo += ",废品处理";
             }
-            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, item);
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
             if (ret.Result == ResultCode.Successful)
             {
                 sr.State = newVal.State;

@@ -94,7 +94,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ItemShowing()
         {
-            SteelRoll item = UpdatingItem as SteelRoll;
+            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
             dtStorageDateTime.Value = item.AddDate;
             txtWareHouse.Text = item.WareHouse.Name;
             txtWareHouse.Tag = item.WareHouse;
@@ -127,10 +127,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override object GetItemFromInput()
         {
-            SteelRoll item = UpdatingItem as SteelRoll;
+            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
             if (UpdatingItem == null)
             {
-                item = new SteelRoll();
+                item = new ProductInventoryItem();
                 item.ID = Guid.NewGuid();
             }
             Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Text).Trim(), "原材料", 7.85m);
@@ -160,12 +160,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override CommandResult AddItem(object item)
         {
-            return (new SteelRollBLL(AppSettings.Current.ConnStr)).Add(item as SteelRoll);
+            return (new SteelRollBLL(AppSettings.Current.ConnStr)).Add(item as ProductInventoryItem);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new SteelRollBLL(AppSettings.Current.ConnStr)).Update(item as SteelRoll);
+            return (new SteelRollBLL(AppSettings.Current.ConnStr)).Update(item as ProductInventoryItem);
         }
         #endregion
 
