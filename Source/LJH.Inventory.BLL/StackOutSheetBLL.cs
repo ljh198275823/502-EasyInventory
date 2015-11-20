@@ -163,11 +163,33 @@ namespace LJH.Inventory.BLL
                     ProductInventoryItem sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
                     if (sr != null)
                     {
-                        ProductInventoryItem cloneSr = sr.Clone();
-                        sr.State = ProductInventoryState.WaitShipping;
-                        sr.DeliverySheet = info.ID;
-                        sr.DeliveryItem = item.ID;
-                        isrp.Update(sr, cloneSr, unitWork);
+                        if (sr.Count == item.Count)
+                        {
+                            ProductInventoryItem clone = sr.Clone();
+                            clone.State = ProductInventoryState.WaitShipping;
+                            clone.DeliverySheet = info.ID;
+                            clone.DeliveryItem = item.ID;
+                            isrp.Update(clone, sr, unitWork);
+                        }
+                        else if (sr.Count > item.Count)
+                        {
+                            ProductInventoryItem cloneSr = sr.Clone();
+                            cloneSr.Count -= item.Count;
+                            isrp.Update(sr, cloneSr, unitWork);
+
+                            ProductInventoryItem newItem = sr.Clone();
+                            newItem.ID = Guid.NewGuid();
+                            newItem.SourceID = sr.ID;
+                            newItem.Count = item.Count;
+                            newItem.State = ProductInventoryState.WaitShipping;
+                            newItem.DeliveryItem = item.ID;
+                            newItem.DeliverySheet = info.ID;
+                            isrp.Insert(newItem, unitWork);
+                        }
+                        else
+                        {
+                            throw new Exception("出货数量超出库存数量");
+                        }
                     }
                 }
             }
@@ -232,16 +254,26 @@ namespace LJH.Inventory.BLL
             foreach (var item in info.Items)  //将原材料的项的状态恢复到在库状态
             {
                 var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.ProductID = item.ProductID;
+                con.DeliveryItem = item.ID;
+                List<ProductInventoryItem> piis = isrp.GetItems(con).QueryObjects;
+                ProductInventoryItem source = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                ProductInventoryItem clone = source.Clone();
+                if (piis != null && piis.Count > 0)
+                {
+                    
+                }
                 if (item.ProductInventoryItem != null)
                 {
-                    ProductInventoryItem sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
-                    if (sr != null)
+                    
+                    if (source != null)
                     {
-                        ProductInventoryItem cloneSr = sr.Clone();
-                        sr.State = ProductInventoryState.Inventory;
-                        sr.DeliveryItem = null;
-                        sr.DeliverySheet = null;
-                        isrp.Update(sr, cloneSr, unitWork);
+                        ProductInventoryItem cloneSr = source.Clone();
+                        source.State = ProductInventoryState.Inventory;
+                        source.DeliveryItem = null;
+                        source.DeliverySheet = null;
+                        isrp.Update(source, cloneSr, unitWork);
                     }
                 }
             }
