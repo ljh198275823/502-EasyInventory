@@ -21,127 +21,6 @@ namespace LJH.Inventory.BLL
         private string RepoUri = null;
         private const string MODEL = "原材料";
 
-        #region 私有方法
-        private void 盘盈(InventoryCheckRecord record, string model, IUnitWork unitWork)
-        {
-            ProductInventoryItem pii = new ProductInventoryItem()
-            {
-                ID = Guid.NewGuid(),
-                AddDate = record.CheckDateTime,
-                ProductID = record.ProductID,
-                WareHouseID = record.WarehouseID,
-                Unit = record.Unit,
-                Count = record.CheckCount - record.Inventory,
-                Model = model,
-                InventoryItem = record.ID,
-                InventorySheet = "盘盈",
-                State = ProductInventoryState.Inventory,
-                Memo = record.Memo
-            };
-            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii, unitWork);
-        }
-
-        private void 盘亏(InventoryCheckRecord record, InventoryOutType inventoryOutType, IUnitWork unitWork)
-        {
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.ProductID = record.ProductID;
-            con.WareHouseID = record.WarehouseID;
-            con.States = (int)ProductInventoryState.UnShipped;
-            List<ProductInventoryItem> inventoryItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            if (inventoryItems == null || inventoryItems.Count == 0) throw new Exception("没有找到相关的库存项");
-            List<ProductInventoryItem> clones = new List<ProductInventoryItem>();
-            inventoryItems.ForEach(it => clones.Add(it.Clone())); //备分所有的项的克隆
-            List<ProductInventoryItem> addingItems = new List<ProductInventoryItem>(); //要于保存将要增加的项
-
-            IEnumerable<ProductInventoryItem> items = null;
-            if (inventoryOutType == InventoryOutType.FIFO) //先从在库的项开始
-            {
-                items = from item in inventoryItems
-                        where item.State == ProductInventoryState.Inventory
-                        orderby item.AddDate ascending
-                        select item;
-            }
-            else
-            {
-                items = from item in inventoryItems
-                        where item.State == ProductInventoryState.Inventory
-                        orderby item.AddDate descending
-                        select item;
-            }
-
-            decimal assign = record.Inventory - record.CheckCount;
-            assign -= Assign(record, assign, inventoryOutType, inventoryItems, addingItems);
-            if (assign > 0) //如果在库的不足以全部扣除，则再从已经预定和待出货的里面扣除
-            {
-                if (inventoryOutType == InventoryOutType.FIFO)
-                {
-                    items = from item in inventoryItems
-                            where item.State == ProductInventoryState.Reserved || item.State == ProductInventoryState.WaitShipping
-                            orderby item.AddDate ascending
-                            select item;
-                }
-                else
-                {
-                    items = from item in inventoryItems
-                            where item.State == ProductInventoryState.Reserved || item.State == ProductInventoryState.WaitShipping
-                            orderby item.AddDate descending
-                            select item;
-                }
-                assign -= Assign(record, assign, inventoryOutType, inventoryItems, addingItems);
-            }
-            if (assign == 0)
-            {
-                foreach (ProductInventoryItem item in inventoryItems)
-                {
-                    ProductInventoryItem clone = clones.Single(it => it.ID == item.ID);
-                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(item, clone, unitWork);
-                }
-                foreach (ProductInventoryItem item in addingItems)
-                {
-                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(item, unitWork);
-                }
-            }
-            else
-            {
-                throw new Exception("库存不足");
-            }
-        }
-
-        private decimal Assign(InventoryCheckRecord record, decimal assign, InventoryOutType inventoryOutType, IEnumerable<ProductInventoryItem> inventoryItems, List<ProductInventoryItem> addingItems)
-        {
-            decimal ret = assign;
-            foreach (ProductInventoryItem item in inventoryItems)
-            {
-                if (assign > 0)
-                {
-                    if (item.Count > assign) //对于部分出货的情况，一条库存记录拆成两条，其中一条表示出货的，另一条表示未出货部分
-                    {
-                        ProductInventoryItem pii = item.Clone();
-                        pii.ID = Guid.NewGuid();
-                        pii.AddDate = record.CheckDateTime;
-                        pii.SourceID = item.ID;  //指定之前的记录为源记录
-                        pii.Count = assign;
-                        pii.DeliverySheet = "盘亏";
-                        pii.DeliveryItem = record.ID;
-                        pii.State = ProductInventoryState.Shipped;
-                        addingItems.Add(pii);
-                        item.Count -= assign; //源记录中减除如干数
-                        assign = 0;
-                        break;
-                    }
-                    else
-                    {
-                        item.DeliverySheet = "盘亏";
-                        item.DeliveryItem = record.ID;
-                        item.State = ProductInventoryState.Shipped;
-                        assign -= item.Count;
-                    }
-                }
-            }
-            return ret - assign;
-        }
-        #endregion
-
         #region 公共方法
         public QueryResultList<SteelRollSlice> GetSteelRollSlices(SearchCondition con)
         {
@@ -219,6 +98,10 @@ namespace LJH.Inventory.BLL
         {
             try
             {
+                if (info.Count == newCount) return new CommandResult(ResultCode.Fail, "实盘数量和库存数量一致");
+                if (info.State == ProductInventoryState.Nullified) return new CommandResult(ResultCode.Fail, "作废的库存项不能进行盘点操作");
+                //如果处理其它的状态的库存项可以做盘盈操作,但不能做盘亏操作
+                if (info.State != ProductInventoryState.Inventory && info.Count > newCount) return new CommandResult(ResultCode.Fail, "库存项数量处于锁定状态,不能减少");
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 InventoryCheckRecord record = new InventoryCheckRecord();
                 record.ID = Guid.NewGuid();
@@ -236,13 +119,46 @@ namespace LJH.Inventory.BLL
                 record.Memo = memo;
                 ProviderFactory.Create<IProvider<InventoryCheckRecord, Guid>>(RepoUri).Insert(record, unitWork);
 
-                ProductInventoryItem clone = info.Clone();
-                clone.Count = newCount;
+                var clone = info.Clone();
+                if (newCount > info.Count) //盘盈
+                {
+                    ProductInventoryItem newItem = info.Clone();
+                    newItem.ID = Guid.NewGuid();
+                    newItem.Count = newCount - info.Count;
+                    newItem.State = ProductInventoryState.Inventory;
+                    newItem.OrderItem = null;
+                    newItem.OrderID = null;
+                    newItem.PurchaseID = null;
+                    newItem.PurchaseItem = null;
+                    newItem.InventorySheet = "盘盈";
+                    newItem.InventoryItem = null;
+                    newItem.DeliveryItem = null;
+                    newItem.DeliverySheet = null;
+                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newItem, unitWork);
+                }
+                else if (newCount == 0)
+                {
+                    clone.State = ProductInventoryState.Shipped;
+                }
+                else //盘亏
+                {
+                    ProductInventoryItem newItem = info.Clone();
+                    newItem.ID = Guid.NewGuid();
+                    newItem.Count = info.Count - newCount;
+                    newItem.State = ProductInventoryState.Shipped;
+                    newItem.OrderItem = null;
+                    newItem.OrderID = null;
+                    newItem.DeliveryItem = null;
+                    newItem.DeliverySheet = "盘亏";
+                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newItem, unitWork);
+                    clone.Count = newCount;
+                }
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
                 var ret = unitWork.Commit();
                 if (ret.Result == ResultCode.Successful)
                 {
-                    info.Count = newCount;
+                    info.State = clone.State;
+                    info.Count = clone.Count;
                 }
                 return ret;
             }

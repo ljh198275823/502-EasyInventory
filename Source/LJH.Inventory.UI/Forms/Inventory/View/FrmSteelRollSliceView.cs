@@ -109,7 +109,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 FrmSteelRollSliceCheck frm = new FrmSteelRollSliceCheck();
                 frm.ProductInventory = pi;
                 DialogResult ret = frm.ShowDialog();
-                if (ret == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pi);
+                if (ret == DialogResult.OK) ReFreshData();
             }
         }
         #endregion

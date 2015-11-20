@@ -74,18 +74,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
         }
 
-        protected override FrmDetailBase GetDetailForm()
-        {
-            //FrmSteelRollSliceDetail frm = new FrmSteelRollSliceDetail();
-            //return frm;
-            return null;
-        }
-
-        protected override bool DeletingItem(object item)
-        {
-            return false;
-        }
-
         protected override List<object> GetDataSource()
         {
             SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
@@ -118,6 +106,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colReserved"].Value = pi.Reserved;
             row.Cells["colValid"].Value = pi.Valid;
             row.Cells["colTotal"].Value = pi.Total;
+            if(!_ProductInventorys .Exists (it=>it.Product .ID ==pi.Product .ID && it.WareHouse .ID ==pi.WareHouse .ID ))
+            {
+                _ProductInventorys .Add (pi);
+            }
         }
         #endregion
 
@@ -161,58 +153,34 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (e.RowIndex >= 0)
             {
+                SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.ProductID = item.Product.ID;
+                con.WareHouseID = item.WareHouse.ID;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colValid")
                 {
-                    SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.Products = new List<string>();
-                    con.Products.Add(item.Product.ID);
-                    con.WareHouseID = item.WareHouse.ID;
                     con.States = (int)ProductInventoryState.Inventory;
-                    View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
-                    frm.SearchCondition = con;
-                    frm.SteelRollSlice = item;
-                    frm.ShowDialog();
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colWaitShipping")
                 {
-                    SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.Products = new List<string>();
-                    con.Products.Add(item.Product.ID);
-                    con.WareHouseID = item.WareHouse.ID;
                     con.States = (int)ProductInventoryState.WaitShipping;
-                    View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
-                    frm.SearchCondition = con;
-                    frm.SteelRollSlice = item;
-                    frm.ShowDialog();
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colReserved")
                 {
-                    SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.Products = new List<string>();
-                    con.Products.Add(item.Product.ID);
-                    con.WareHouseID = item.WareHouse.ID;
                     con.States = (int)ProductInventoryState.Reserved;
-                    View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
-                    frm.SearchCondition = con;
-                    frm.SteelRollSlice = item;
-                    frm.ShowDialog();
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTotal")
                 {
-                    SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.Products = new List<string>();
-                    con.Products.Add(item.Product.ID);
-                    con.WareHouseID = item.WareHouse.ID;
                     con.States = (int)ProductInventoryState.UnShipped;
-                    View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
-                    frm.SearchCondition = con;
-                    frm.SteelRollSlice = item;
-                    frm.ShowDialog();
                 }
+                View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
+                frm.SearchCondition = con;
+                frm.SteelRollSlice = item;
+                frm.ShowDialog();
+                //由于显示明细的时候有可能有改变数量的操作,所以要刷新这一行的状态
+                con.States = (int)ProductInventoryState.UnShipped;
+                List<SteelRollSlice> items = new SteelRollSliceBLL(AppSettings.Current.ConnStr).GetSteelRollSlices(con).QueryObjects;
+                if (items != null && items.Count == 1) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], items[0]); //
             }
         }
 
