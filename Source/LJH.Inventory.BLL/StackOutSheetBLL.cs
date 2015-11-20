@@ -163,15 +163,7 @@ namespace LJH.Inventory.BLL
                     ProductInventoryItem sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
                     if (sr != null)
                     {
-                        if (sr.Count == item.Count)
-                        {
-                            ProductInventoryItem clone = sr.Clone();
-                            clone.State = ProductInventoryState.WaitShipping;
-                            clone.DeliverySheet = info.ID;
-                            clone.DeliveryItem = item.ID;
-                            isrp.Update(clone, sr, unitWork);
-                        }
-                        else if (sr.Count > item.Count)
+                        if (sr.Count >= item.Count)
                         {
                             ProductInventoryItem cloneSr = sr.Clone();
                             cloneSr.Count -= item.Count;

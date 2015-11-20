@@ -136,10 +136,6 @@ namespace LJH.Inventory.BLL
                     newItem.DeliverySheet = null;
                     ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newItem, unitWork);
                 }
-                else if (newCount == 0)
-                {
-                    clone.State = ProductInventoryState.Shipped;
-                }
                 else //盘亏
                 {
                     ProductInventoryItem newItem = info.Clone();
@@ -153,12 +149,11 @@ namespace LJH.Inventory.BLL
                     newItem.DeliverySheet = "盘亏";
                     ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newItem, unitWork);
                     clone.Count = newCount;
+                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
                 }
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
                 var ret = unitWork.Commit();
                 if (ret.Result == ResultCode.Successful)
                 {
-                    info.State = clone.State;
                     info.Count = clone.Count;
                 }
                 return ret;
