@@ -86,7 +86,7 @@
     <Compile Include="CurrencyType.cs" />
     <Compile Include="CompanyInfo.cs" />
     <Compile Include="CompanyClass.cs" />
-    <Compile Include="CustomerFinancialState.cs" />
+    <Compile Include="Financial\CustomerFinancialState.cs" />
     <Compile Include="Financial\CustomerOtherReceivable.cs" />
     <Compile Include="Financial\CustomerPayment.cs" />
     <Compile Include="Financial\CustomerPaymentAssign.cs" />

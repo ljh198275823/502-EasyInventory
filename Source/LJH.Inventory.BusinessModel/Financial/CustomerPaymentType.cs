@@ -18,5 +18,9 @@ namespace LJH.Inventory.BusinessModel
         /// 供应商付款
         /// </summary>
         Supplier=2,
+        /// <summary>
+        /// 开给客户的增值税发票
+        /// </summary>
+        CustomerTax=3,
     }
 }

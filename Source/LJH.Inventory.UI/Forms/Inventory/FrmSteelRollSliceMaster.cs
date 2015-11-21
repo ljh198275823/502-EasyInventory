@@ -71,7 +71,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
+            mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
         }
 
         protected override List<object> GetDataSource()
@@ -121,7 +121,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void mnu_CreateInventory_Click(object sender, EventArgs e)
         {
-            FrmSteelRollSliceDetail frm = new FrmSteelRollSliceDetail();
+            FrmSteelRollSliceStackIn frm = new FrmSteelRollSliceStackIn();
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 SteelRollSlice srs = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;

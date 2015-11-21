@@ -41,12 +41,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             con.ReceivableTypes = new List<CustomerReceivableType>();
             if (PaymentType == CustomerPaymentType.Customer)
             {
-                con.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
+                con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
                 con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
             }
             else
             {
-                con.ReceivableTypes.Add(CustomerReceivableType.SupplierOtherReceivable);
+                con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
                 con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
             }
             con.Settled = false;

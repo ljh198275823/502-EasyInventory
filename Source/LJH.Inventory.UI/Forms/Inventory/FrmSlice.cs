@@ -59,6 +59,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             rdToPanel.Checked = (string.IsNullOrEmpty(SliceTo) || SliceTo == "开平");
             rdToRoll.Checked = SliceTo == "开卷";
             rdToWeight.Checked = SliceTo == "开吨";
+            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
         }
 
         private void txtLength_TextChanged(object sender, EventArgs e)

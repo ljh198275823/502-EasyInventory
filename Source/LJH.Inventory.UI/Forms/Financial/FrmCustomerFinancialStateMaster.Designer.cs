@@ -38,9 +38,14 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddRecievable = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddPayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_UpdateCreditLine = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_SetFileID = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_AddTax = new System.Windows.Forms.ToolStripMenuItem();
+            this.新增增值税发票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +62,8 @@
             this.colFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTax = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colTaxBill = new System.Windows.Forms.DataGridViewLinkColumn();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -70,7 +76,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(194, 366);
+            this.pnlLeft.Size = new System.Drawing.Size(194, 367);
             this.pnlLeft.TabIndex = 110;
             // 
             // categoryTree
@@ -82,7 +88,7 @@
             this.categoryTree.LoadCustomer = false;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
-            this.categoryTree.Size = new System.Drawing.Size(194, 366);
+            this.categoryTree.Size = new System.Drawing.Size(194, 367);
             this.categoryTree.TabIndex = 2;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.FreshData_Clicked);
             // 
@@ -91,7 +97,7 @@
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.splitter1.Location = new System.Drawing.Point(194, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 366);
+            this.splitter1.Size = new System.Drawing.Size(8, 367);
             this.splitter1.TabIndex = 111;
             this.splitter1.TabStop = false;
             // 
@@ -99,57 +105,92 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
-            this.cMnu_Payment,
+            this.mnu_AddRecievable,
+            this.mnu_AddPayment,
+            this.toolStripSeparator2,
             this.mnu_UpdateCreditLine,
             this.mnu_SetFileID,
+            this.toolStripSeparator1,
+            this.mnu_AddTax,
+            this.新增增值税发票ToolStripMenuItem,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 220);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(172, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(160, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
-            // cMnu_Payment
+            // mnu_AddRecievable
             // 
-            this.cMnu_Payment.Name = "cMnu_Payment";
-            this.cMnu_Payment.Size = new System.Drawing.Size(172, 22);
-            this.cMnu_Payment.Text = "新增客户付款流水";
-            this.cMnu_Payment.Click += new System.EventHandler(this.mnu_Payment_Click);
+            this.mnu_AddRecievable.Name = "mnu_AddRecievable";
+            this.mnu_AddRecievable.Size = new System.Drawing.Size(160, 22);
+            this.mnu_AddRecievable.Text = "新增应收账款";
+            this.mnu_AddRecievable.Click += new System.EventHandler(this.mnu_AddRecievable_Click);
+            // 
+            // mnu_AddPayment
+            // 
+            this.mnu_AddPayment.Name = "mnu_AddPayment";
+            this.mnu_AddPayment.Size = new System.Drawing.Size(160, 22);
+            this.mnu_AddPayment.Text = "新增付款流水";
+            this.mnu_AddPayment.Click += new System.EventHandler(this.mnu_AddPayment_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
             // 
             // mnu_UpdateCreditLine
             // 
             this.mnu_UpdateCreditLine.Name = "mnu_UpdateCreditLine";
-            this.mnu_UpdateCreditLine.Size = new System.Drawing.Size(172, 22);
+            this.mnu_UpdateCreditLine.Size = new System.Drawing.Size(160, 22);
             this.mnu_UpdateCreditLine.Text = "修改信用额度";
             this.mnu_UpdateCreditLine.Click += new System.EventHandler(this.mnu_UpdateCreditLine_Click);
             // 
             // mnu_SetFileID
             // 
             this.mnu_SetFileID.Name = "mnu_SetFileID";
-            this.mnu_SetFileID.Size = new System.Drawing.Size(172, 22);
+            this.mnu_SetFileID.Size = new System.Drawing.Size(160, 22);
             this.mnu_SetFileID.Text = "设置归档号";
             this.mnu_SetFileID.Click += new System.EventHandler(this.mnu_SetFileID_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            // 
+            // mnu_AddTax
+            // 
+            this.mnu_AddTax.Name = "mnu_AddTax";
+            this.mnu_AddTax.Size = new System.Drawing.Size(160, 22);
+            this.mnu_AddTax.Text = "新增应开税额";
+            this.mnu_AddTax.Click += new System.EventHandler(this.mnu_AddTax_Click);
+            // 
+            // 新增增值税发票ToolStripMenuItem
+            // 
+            this.新增增值税发票ToolStripMenuItem.Name = "新增增值税发票ToolStripMenuItem";
+            this.新增增值税发票ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.新增增值税发票ToolStripMenuItem.Text = "新增增值税发票";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(157, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(172, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(160, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(172, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(160, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // panel5
@@ -160,7 +201,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(202, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(913, 36);
+            this.panel5.Size = new System.Drawing.Size(1038, 36);
             this.panel5.TabIndex = 113;
             // 
             // chkOnlyHasRecievables
@@ -182,7 +223,7 @@
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(262, 8);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(586, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(711, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
@@ -211,7 +252,8 @@
             this.colFileID,
             this.colReceivable,
             this.colPrepay,
-            this.colTotal});
+            this.colTax,
+            this.colTaxBill});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 36);
@@ -220,7 +262,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(913, 330);
+            this.dataGridView1.Size = new System.Drawing.Size(1038, 331);
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -293,17 +335,26 @@
             this.colPrepay.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colPrepay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // colTotal
+            // colTax
             // 
-            this.colTotal.HeaderText = "合计";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.ReadOnly = true;
+            this.colTax.HeaderText = "应开增值税";
+            this.colTax.Name = "colTax";
+            this.colTax.ReadOnly = true;
+            this.colTax.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colTax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colTaxBill
+            // 
+            this.colTaxBill.HeaderText = "未核销增值税发票";
+            this.colTaxBill.Name = "colTaxBill";
+            this.colTaxBill.ReadOnly = true;
+            this.colTaxBill.Width = 120;
             // 
             // FrmCustomerFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1115, 388);
+            this.ClientSize = new System.Drawing.Size(1240, 389);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.splitter1);
@@ -332,7 +383,7 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Payment;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddPayment;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
@@ -341,6 +392,13 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripMenuItem mnu_SetFileID;
+        private System.Windows.Forms.CheckBox chkOnlyHasRecievables;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddRecievable;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddTax;
+        private System.Windows.Forms.ToolStripMenuItem 新增增值税发票ToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
@@ -349,8 +407,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileID;
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
-        private System.Windows.Forms.ToolStripMenuItem mnu_SetFileID;
-        private System.Windows.Forms.CheckBox chkOnlyHasRecievables;
+        private System.Windows.Forms.DataGridViewLinkColumn colTax;
+        private System.Windows.Forms.DataGridViewLinkColumn colTaxBill;
     }
 }

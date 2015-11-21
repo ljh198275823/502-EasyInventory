@@ -25,8 +25,18 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 产品资料
         /// </summary>
-        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "产品资料")]
+        //[OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "产品资料")]
         Product,
+        /// <summary>
+        /// 原材料
+        /// </summary>
+        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify, Description = "原材料")]
+        SteelRoll,
+        /// <summary>
+        /// 加工小件
+        /// </summary>
+        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Check | PermissionActions.Nullify, Description = "加工小件")]
+        SteelRollSlice,
         /// <summary>
         /// 仓库资料
         /// </summary>
@@ -45,27 +55,27 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 其它公司类别
         /// </summary>
-        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它公司类别")]
+        //[OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它公司类别")]
         OtherCompanyType,
         /// <summary>
         /// 其它公司资料
         /// </summary>
-        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它公司资料")]
+        //[OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它公司资料")]
         OtherCompany,
         /// <summary>
         /// 计量单位资料
         /// </summary>
-        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "计量单位资料")]
+        //[OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "计量单位资料")]
         Unit,
         /// <summary>
         /// 币别资料
         /// </summary>
-        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "币别资料")]
+        //[OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "币别资料")]
         CurrencyType,
         /// <summary>
         /// 运输方式
         /// </summary>
-        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "运输方式")]
+        //[OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "运输方式")]
         Transport,
         /// <summary>
         /// 操作员资料

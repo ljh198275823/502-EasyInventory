@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Inventory
 {
-    partial class FrmSteelRollSliceDetail
+    partial class FrmSteelRollSliceStackIn
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollSliceDetail));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollSliceStackIn));
             this.txtCount = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.lnkWarehouse = new System.Windows.Forms.LinkLabel();

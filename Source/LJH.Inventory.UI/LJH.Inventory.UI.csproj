@@ -69,6 +69,12 @@
     <Compile Include="Forms\Financial\FrmCreditLine.Designer.cs">
       <DependentUpon>FrmCreditLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\FrmCustomerReceivableAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmCustomerReceivableAdd.Designer.cs">
+      <DependentUpon>FrmCustomerReceivableAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\FrmSupplierFinancialStateMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -658,11 +664,11 @@
     <Compile Include="Forms\FrmRoleMaster.designer.cs">
       <DependentUpon>FrmRoleMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmSteelRollSliceDetail.cs">
+    <Compile Include="Forms\Inventory\FrmSteelRollSliceStackIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\FrmSteelRollSliceDetail.Designer.cs">
-      <DependentUpon>FrmSteelRollSliceDetail.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\FrmSteelRollSliceStackIn.Designer.cs">
+      <DependentUpon>FrmSteelRollSliceStackIn.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Report\FrmSalesPersonPerformanceReport.cs">
       <SubType>Form</SubType>
@@ -673,6 +679,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Financial\FrmCreditLine.resx">
       <DependentUpon>FrmCreditLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\FrmCustomerReceivableAdd.resx">
+      <DependentUpon>FrmCustomerReceivableAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmSupplierFinancialStateMaster.resx">
       <DependentUpon>FrmSupplierFinancialStateMaster.cs</DependentUpon>
@@ -872,8 +881,8 @@
     <EmbeddedResource Include="Forms\General\FrmPriceTermMaster.resx">
       <DependentUpon>FrmPriceTermMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceDetail.resx">
-      <DependentUpon>FrmSteelRollSliceDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceStackIn.resx">
+      <DependentUpon>FrmSteelRollSliceStackIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceMaster.resx">
       <DependentUpon>FrmSteelRollSliceMaster.cs</DependentUpon>

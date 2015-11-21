@@ -46,6 +46,10 @@ namespace LJH.Inventory.BusinessModel
                     return "入库";
                 case PermissionActions.Print :
                     return "打印";
+                case PermissionActions.Check :
+                    return "盘点";
+                case PermissionActions.Slice :
+                    return "加工";
                 default:
                     return string.Empty;
             }

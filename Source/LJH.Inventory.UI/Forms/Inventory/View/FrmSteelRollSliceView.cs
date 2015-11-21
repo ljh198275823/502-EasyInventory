@@ -44,6 +44,14 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                     select (object)item).ToList();
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Check);
+            mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
+            mnu_UnReserve.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
+        }
+
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             ProductInventoryItem c = item as ProductInventoryItem;
@@ -73,7 +81,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         #region 事件处理程序
         private void mnu_CreateInventory_Click(object sender, EventArgs e)
         {
-            FrmSteelRollSliceDetail frm = new FrmSteelRollSliceDetail();
+            FrmSteelRollSliceStackIn frm = new FrmSteelRollSliceStackIn();
             if (SteelRollSlice != null)
             {
                 frm.Product = SteelRollSlice.Product;

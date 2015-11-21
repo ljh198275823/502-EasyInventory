@@ -16,9 +16,9 @@ using LJH.Inventory.UI.Forms.General;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmSteelRollSliceDetail : Form
+    public partial class FrmSteelRollSliceStackIn : Form
     {
-        public FrmSteelRollSliceDetail()
+        public FrmSteelRollSliceStackIn()
         {
             InitializeComponent();
         }
@@ -102,7 +102,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Tag = WareHouse;
             }
             txtCount.Focus();
-            btnOk.Enabled = Operator.Current.Permit(Permission.ProductInventory, PermissionActions.Edit);
+            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
         }
         #endregion
 

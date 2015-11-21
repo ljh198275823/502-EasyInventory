@@ -89,7 +89,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             CustomerReceivableSearchCondition con1 = new CustomerReceivableSearchCondition();
             con1.ReceivableTypes = new List<CustomerReceivableType>();
-            con1.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
+            con1.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
             _Receivables = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(con1).QueryObjects;
 
             if (SearchCondition == null)

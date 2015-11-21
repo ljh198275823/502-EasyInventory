@@ -33,6 +33,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtCheckCount.Focus();
                 txtCheckCount.SelectAll();
             }
+            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Check);
         }
 
         private void btnOk_Click(object sender, EventArgs e)

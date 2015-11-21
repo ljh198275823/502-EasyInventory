@@ -11,14 +11,12 @@ namespace LJH.Inventory.BusinessModel.Resource
         {
             switch (receivableType)
             {
-                case CustomerReceivableType .CustomerOtherReceivable :
-                    return "其它应收款";
                 case CustomerReceivableType .CustomerReceivable :
                     return "应收款";
-                case CustomerReceivableType.SupplierOtherReceivable :
-                    return "其它应付款";
                 case CustomerReceivableType.SupplierReceivable :
                     return "应付款";
+                case  CustomerReceivableType.CustomerTax :
+                    return "应开增值税";
                 default:
                     return string.Empty;
             }

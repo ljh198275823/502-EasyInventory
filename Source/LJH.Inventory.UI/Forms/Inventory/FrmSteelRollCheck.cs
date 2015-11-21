@@ -24,6 +24,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtNewLength.DecimalValue = SteelRoll.Length.Value;
                 txtNewWeigth.DecimalValue = SteelRoll.Weight.Value;
             }
+            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
         }
 
         private void btnOk_Click(object sender, EventArgs e)

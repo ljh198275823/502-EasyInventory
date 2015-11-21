@@ -57,7 +57,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            cMnu_Payment.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+            mnu_AddPayment.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
         }
 
         protected override List<object> GetDataSource()
@@ -76,9 +76,11 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colName"].Value = cs.Customer.Name;
             row.Cells["colCategory"].Value = cs.Customer.CategoryID;
             row.Cells["colCreditLine"].Value = cs.Customer.CreditLine;
+            row.Cells["colFileID"].Value = cs.Recievables > 0 ? (cs.Customer.FileID.HasValue ? cs.Customer.FileID.ToString() : null) : null;
             row.Cells["colPrepay"].Value = cs.Prepay;
             row.Cells["colReceivable"].Value = cs.Recievables;
-            row.Cells["colFileID"].Value = cs.Recievables > 0 ? (cs.Customer.FileID.HasValue ? cs.Customer.FileID.ToString() : null) : null;
+            row.Cells["colTax"].Value = cs.Tax;
+            row.Cells["colTaxBill"].Value = cs.TaxBill;
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
@@ -110,14 +112,17 @@ namespace LJH.Inventory.UI.Forms.Financial
                     CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
                     con.CustomerID = c.ID;
                     con.ReceivableTypes = new List<CustomerReceivableType>();
-                    con.ReceivableTypes.Add(CustomerReceivableType.CustomerOtherReceivable);
+                    con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
                     con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
                     con.Settled = false;
                     frm.SearchCondition = con;
                     frm.Text = string.Format("{0} 应收款明细", c.Name);
                     frm.ShowDialog();
+                    //刷新数据
+                    var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(c.ID).QueryObject;
+                    if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);
                 }
-                if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colPrepay")
                 {
                     CompanyInfo c = (dataGridView1.Rows[e.RowIndex].Tag as CustomerFinancialState).Customer;
                     View.FrmCustomerPaymentView frm = new View.FrmCustomerPaymentView();
@@ -137,24 +142,74 @@ namespace LJH.Inventory.UI.Forms.Financial
                     var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(c.ID).QueryObject;
                     if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);
                 }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTax")
+                {
+                    CompanyInfo c = (dataGridView1.Rows[e.RowIndex].Tag as CustomerFinancialState).Customer;
+                    View.FrmCustomerReceivableView frm = new View.FrmCustomerReceivableView();
+                    CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+                    con.CustomerID = c.ID;
+                    con.ReceivableTypes = new List<CustomerReceivableType>();
+                    con.ReceivableTypes.Add(CustomerReceivableType.CustomerTax);
+                    con.Settled = false;
+                    frm.SearchCondition = con;
+                    frm.Text = string.Format("{0} 应开增值税明细", c.Name);
+                    frm.ShowDialog();
+                    //刷新数据
+                    var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(c.ID).QueryObject;
+                    if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);
+                }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTaxBill")
+                {
+                    CompanyInfo c = (dataGridView1.Rows[e.RowIndex].Tag as CustomerFinancialState).Customer;
+                    View.FrmCustomerPaymentView frm = new View.FrmCustomerPaymentView();
+                    CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
+                    con.CustomerID = c.ID;
+                    con.PaymentTypes = new List<CustomerPaymentType>();
+                    con.PaymentTypes.Add(CustomerPaymentType.CustomerTax );
+                    con.States = new List<SheetState>();
+                    con.States.Add(SheetState.Add);
+                    con.States.Add(SheetState.Approved);
+                    con.HasRemain = true;
+                    frm.SearchCondition = con;
+                    frm.PaymentType = CustomerPaymentType.Customer;
+                    frm.Text = string.Format("{0} 已开增值税发票明细", c.Name);
+                    frm.ShowDialog();
+                    //刷新数据
+                    var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(c.ID).QueryObject;
+                    if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);
+                }
             }
         }
 
-        private void mnu_Payment_Click(object sender, EventArgs e)
+        private void mnu_AddRecievable_Click(object sender, EventArgs e)
         {
-            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-            CompanyInfo customer = dataGridView1.SelectedRows.Count == 1 ? (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer : null;
-            frm.Customer = customer;
-            frm.PaymentType = CustomerPaymentType.Customer;
-            frm.IsAdding = true;
-            frm.ShowDialog();
-            ReFreshData();
-            if (customer != null)
+            if (dataGridView1.SelectedRows.Count == 1)
             {
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
+                frm.Customer = customer;
+                frm.ReceivableType = CustomerReceivableType.CustomerReceivable;
+                if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    var cs = row.Tag as CustomerFinancialState;
-                    row.Selected = cs.Customer.ID == customer.ID;
+                    var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(customer.ID).QueryObject;
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
+                }
+            }
+        }
+
+        private void mnu_AddPayment_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                frm.Customer = customer;
+                frm.PaymentType = CustomerPaymentType.Customer;
+                frm.IsAdding = true;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(customer.ID).QueryObject;
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
                 }
             }
         }
@@ -197,6 +252,22 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
+
+        private void mnu_AddTax_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
+                frm.Customer = customer;
+                frm.ReceivableType = CustomerReceivableType.CustomerTax;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(customer.ID).QueryObject;
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
+                }
+            }
+        }
 
        
     }

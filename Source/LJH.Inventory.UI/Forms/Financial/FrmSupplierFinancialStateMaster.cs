@@ -86,7 +86,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             crsc.Settled = false;
             crsc.ReceivableTypes = new List<CustomerReceivableType>();
             crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
-            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierOtherReceivable);
+            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
             _CustomerReceivables = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(crsc).QueryObjects;
 
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
@@ -148,7 +148,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                     CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
                     con.CustomerID = c.ID;
                     con.ReceivableTypes = new List<CustomerReceivableType>();
-                    con.ReceivableTypes.Add(CustomerReceivableType.SupplierOtherReceivable);
+                    con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
                     con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
                     con.Settled = false;
                     frm.SearchCondition = con;

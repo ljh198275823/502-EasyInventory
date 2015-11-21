@@ -47,6 +47,14 @@ namespace LJH.Inventory.BusinessModel
         /// 打印
         /// </summary>
         Print = 0x80,
+        /// <summary>
+        /// 盘点
+        /// </summary>
+        Check=0x100,
+        /// <summary>
+        /// 原材料加工
+        /// </summary>
+        Slice=0x200,
     }
 }
         

@@ -13,18 +13,14 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 客户其它应收款
         /// </summary>
-        CustomerOtherReceivable = 1,
+        CustomerReceivable = 1,
         /// <summary>
-        /// 客户应收款
+        /// 客户应开增值税发票
         /// </summary>
-        CustomerReceivable = 2,
+        CustomerTax =2,
         /// <summary>
         /// 供应商应付款
         /// </summary>
         SupplierReceivable = 3,
-        /// <summary>
-        /// 供应商其它应付款
-        /// </summary>
-        SupplierOtherReceivable = 4,
     }
 }
