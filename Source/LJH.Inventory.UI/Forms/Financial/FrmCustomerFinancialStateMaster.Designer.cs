@@ -45,7 +45,7 @@
             this.mnu_SetFileID = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_AddTax = new System.Windows.Forms.ToolStripMenuItem();
-            this.新增增值税发票ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_AddTaxBill = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,12 +112,12 @@
             this.mnu_SetFileID,
             this.toolStripSeparator1,
             this.mnu_AddTax,
-            this.新增增值税发票ToolStripMenuItem,
+            this.mnu_AddTaxBill,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 220);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 242);
             // 
             // cMnu_Fresh
             // 
@@ -170,11 +170,12 @@
             this.mnu_AddTax.Text = "新增应开税额";
             this.mnu_AddTax.Click += new System.EventHandler(this.mnu_AddTax_Click);
             // 
-            // 新增增值税发票ToolStripMenuItem
+            // mnu_AddTaxBill
             // 
-            this.新增增值税发票ToolStripMenuItem.Name = "新增增值税发票ToolStripMenuItem";
-            this.新增增值税发票ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.新增增值税发票ToolStripMenuItem.Text = "新增增值税发票";
+            this.mnu_AddTaxBill.Name = "mnu_AddTaxBill";
+            this.mnu_AddTaxBill.Size = new System.Drawing.Size(160, 22);
+            this.mnu_AddTaxBill.Text = "新增增值税发票";
+            this.mnu_AddTaxBill.Click += new System.EventHandler(this.mnu_AddTaxBill_Click);
             // 
             // toolStripSeparator3
             // 
@@ -345,7 +346,7 @@
             // 
             // colTaxBill
             // 
-            this.colTaxBill.HeaderText = "未核销增值税发票";
+            this.colTaxBill.HeaderText = "已开增值税发票";
             this.colTaxBill.Name = "colTaxBill";
             this.colTaxBill.ReadOnly = true;
             this.colTaxBill.Width = 120;
@@ -398,7 +399,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddTax;
-        private System.Windows.Forms.ToolStripMenuItem 新增增值税发票ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnu_AddTaxBill;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;

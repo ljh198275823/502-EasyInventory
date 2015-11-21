@@ -49,6 +49,18 @@
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NPOI">
+      <HintPath>..\ReferenceDll\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\ReferenceDll\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\ReferenceDll\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\ReferenceDll\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -75,6 +87,12 @@
     <Compile Include="Forms\Financial\FrmCustomerReceivableAdd.Designer.cs">
       <DependentUpon>FrmCustomerReceivableAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\FrmCustomerTaxBillDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmCustomerTaxBillDetail.designer.cs">
+      <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\FrmSupplierFinancialStateMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +116,18 @@
     </Compile>
     <Compile Include="Forms\Financial\FrmPaymentAssign.Designer.cs">
       <DependentUpon>FrmPaymentAssign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\View\FrmCustomerTaxBillView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\View\FrmCustomerTaxBillView.designer.cs">
+      <DependentUpon>FrmCustomerTaxBillView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\View\FrmCustomerTaxView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\View\FrmCustomerTaxView.designer.cs">
+      <DependentUpon>FrmCustomerTaxView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmAboat.cs">
       <SubType>Form</SubType>
@@ -297,18 +327,6 @@
     </Compile>
     <Compile Include="Forms\General\FrmRelatedCompanyDetail.designer.cs">
       <DependentUpon>FrmRelatedCompanyDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerOtherReceivableDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerOtherReceivableDetail.designer.cs">
-      <DependentUpon>FrmCustomerOtherReceivableDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerOtherReceivableMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerOtherReceivableMaster.designer.cs">
-      <DependentUpon>FrmCustomerOtherReceivableMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sale\FrmCustomerDetail.cs">
       <SubType>Form</SubType>
@@ -676,12 +694,16 @@
     <Compile Include="Forms\Report\FrmSalesPersonPerformanceReport.Designer.cs">
       <DependentUpon>FrmSalesPersonPerformanceReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NPOIExcelHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Financial\FrmCreditLine.resx">
       <DependentUpon>FrmCreditLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmCustomerReceivableAdd.resx">
       <DependentUpon>FrmCustomerReceivableAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\FrmCustomerTaxBillDetail.resx">
+      <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmSupplierFinancialStateMaster.resx">
       <DependentUpon>FrmSupplierFinancialStateMaster.cs</DependentUpon>
@@ -694,6 +716,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmPaymentAssign.resx">
       <DependentUpon>FrmPaymentAssign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\View\FrmCustomerTaxBillView.resx">
+      <DependentUpon>FrmCustomerTaxBillView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\View\FrmCustomerTaxView.resx">
+      <DependentUpon>FrmCustomerTaxView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAboat.resx">
       <DependentUpon>FrmAboat.cs</DependentUpon>
@@ -796,12 +824,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\General\FrmRelatedCompanyDetail.resx">
       <DependentUpon>FrmRelatedCompanyDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmCustomerOtherReceivableDetail.resx">
-      <DependentUpon>FrmCustomerOtherReceivableDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmCustomerOtherReceivableMaster.resx">
-      <DependentUpon>FrmCustomerOtherReceivableMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmCustomerDetail.resx">
       <DependentUpon>FrmCustomerDetail.cs</DependentUpon>

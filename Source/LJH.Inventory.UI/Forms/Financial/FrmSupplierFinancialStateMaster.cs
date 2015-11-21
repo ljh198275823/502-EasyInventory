@@ -151,7 +151,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                     con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
                     con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
                     con.Settled = false;
-                    frm.SearchCondition = con;
+                    //frm.SearchCondition = con;
                     frm.Text = string.Format("{0} 应付款明细", c.Name);
                     frm.ShowDialog();
                 }
@@ -166,7 +166,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                     con.States = new List<SheetState>();
                     con.States.Add(SheetState.Approved);
                     con.HasRemain = true;
-                    frm.SearchCondition = con;
+                    //frm.SearchCondition = con;
                     frm.Text = string.Format("{0} 付款流水明细", c.Name);
                     frm.ShowDialog();
                 }

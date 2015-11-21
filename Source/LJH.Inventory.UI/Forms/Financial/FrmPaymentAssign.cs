@@ -28,12 +28,10 @@ namespace LJH.Inventory.UI.Forms.Financial
         /// 获取或设置要分配的客户收款单号
         /// </summary>
         public string CustomerPaymentID { get; set; }
-
-        public CustomerPaymentType PaymentType { get; set; }
         #endregion
 
         #region 私有方法
-        private void ShowReceivables(string customerID)
+        private void ShowReceivables(string customerID,CustomerPaymentType PaymentType)
         {
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
@@ -42,12 +40,14 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (PaymentType == CustomerPaymentType.Customer)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
-                con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
             }
-            else
+            else if(PaymentType ==CustomerPaymentType .Supplier )
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
-                con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            }
+            else if (PaymentType == CustomerPaymentType.CustomerTax)
+            {
+                con.ReceivableTypes.Add(CustomerReceivableType.CustomerTax);
             }
             con.Settled = false;
             List<CustomerReceivable> items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
@@ -98,7 +98,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtID.Text = item.ID;
                 txtAmount.DecimalValue = item.Remain.Trim();
                 txtRemain.DecimalValue = item.Remain.Trim();
-                ShowReceivables(item.CustomerID);
+                ShowReceivables(item.CustomerID, item.ClassID);
             }
         }
 

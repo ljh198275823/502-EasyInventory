@@ -14,9 +14,9 @@ using LJH.Inventory.UI.Forms.Purchase;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerPaymentDetail : FrmSheetDetailBase
+    public partial class FrmCustomerTaxBillDetail : FrmSheetDetailBase
     {
-        public FrmCustomerPaymentDetail()
+        public FrmCustomerTaxBillDetail()
         {
             InitializeComponent();
         }
@@ -26,10 +26,6 @@ namespace LJH.Inventory.UI.Forms.Financial
         /// 获取或设置收款或付款的客户
         /// </summary>
         public CompanyInfo Customer { get; set; }
-        /// <summary>
-        /// 获取或设置收款或付款类型
-        /// </summary>
-        public CustomerPaymentType PaymentType { get; set; }
         #endregion
 
         #region 私有方法
@@ -67,15 +63,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.InitControls();
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户付款流水" : "供应商付款流水";
-            this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
         }
 
         protected override bool CheckInput()
         {
             if (Customer == null)
             {
-                MessageBox.Show(PaymentType == CustomerPaymentType.Customer ? "客户不能为空" : "供应商不能为空");
+                MessageBox.Show("客户不能为空");
                 txtCustomer.Focus();
                 return false;
             }
@@ -96,11 +90,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
                 dtSheetDate.Value = item.SheetDate;
-                rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
-                rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
-                rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
                 txtAmount.DecimalValue = item.Amount;
-                txtCheckNum.Text = item.CheckNum;
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
                 txtMemo.Text = item.Memo;
@@ -117,7 +107,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (UpdatingItem == null)
             {
                 info = new CustomerPayment();
-                info.ClassID = PaymentType;
+                info.ClassID = CustomerPaymentType.CustomerTax;
                 info.ID = txtID.Text == _AutoCreate ? string.Empty : txtID.Text.Trim();
             }
             else
@@ -125,11 +115,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 info = UpdatingItem as CustomerPayment;
             }
             info.SheetDate = dtSheetDate.Value;
-            if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
-            if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
-            if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
             info.Amount = txtAmount.DecimalValue;
-            info.CheckNum = txtCheckNum.Text;
             info.CustomerID = Customer != null ? Customer.ID : null;
             info.Memo = txtMemo.Text;
             return info;
@@ -152,7 +138,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             base.ShowButtonState(this.toolStrip1);
             CustomerPayment cp = UpdatingItem != null ? UpdatingItem as CustomerPayment : null;
             btnPayment.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
-            //btnPayment.Enabled = cp != null && cp.State == SheetState.Approved && cp.Remain > 0;
             btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Approve);
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
@@ -206,7 +191,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                string msg = "\"取消审核\"的操作会删除此单的所有核销项删除，是否继续?";
+                string msg = "\"取消审核\" 操作会删除此单的所有核销项删除，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
@@ -234,7 +219,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                string msg = "\"作废\"的操作会删除此单的所有核销项删除，是否继续?";
+                string msg = "\"作废\" 操作会删除此单的所有核销项删除，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
@@ -249,15 +234,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 事件处理程序
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmMasterBase frm = null;
-            if (PaymentType == CustomerPaymentType.Customer)
-            {
-                frm = new FrmCustomerMaster();
-            }
-            else
-            {
-                frm = new FrmSupplierMaster();
-            }
+            var frm = new FrmCustomerMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {

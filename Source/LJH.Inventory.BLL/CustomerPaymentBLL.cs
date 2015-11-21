@@ -27,7 +27,7 @@ namespace LJH.Inventory.BLL
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
                         UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
             }
-            if (info.ClassID == CustomerPaymentType.Supplier)
+            else  if (info.ClassID == CustomerPaymentType.Supplier)
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("FKD",
                         UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);

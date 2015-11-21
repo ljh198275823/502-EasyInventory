@@ -165,7 +165,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                     string paymentID = cp.ID;
                     FrmPaymentAssign frm = new FrmPaymentAssign();
                     frm.CustomerPaymentID = paymentID;
-                    frm.PaymentType = CustomerPaymentType.Customer;
                     frm.ShowDialog();
                     cp = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID).QueryObject;
                     ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cp);

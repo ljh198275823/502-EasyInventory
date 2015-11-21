@@ -369,7 +369,6 @@
             this.mnu_CustomerOtherReceivable.Name = "mnu_CustomerOtherReceivable";
             this.mnu_CustomerOtherReceivable.Size = new System.Drawing.Size(160, 22);
             this.mnu_CustomerOtherReceivable.Text = "其它应收款管理";
-            this.mnu_CustomerOtherReceivable.Click += new System.EventHandler(this.mnu_CustomerOtherReceivable_Click);
             // 
             // mnu_CustomerPayment
             // 

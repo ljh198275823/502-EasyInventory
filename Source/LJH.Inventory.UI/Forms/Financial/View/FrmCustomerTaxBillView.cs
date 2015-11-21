@@ -15,9 +15,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
 {
-    public partial class FrmCustomerPaymentView : Form
+    public partial class FrmCustomerTaxBillView : Form 
     {
-        public FrmCustomerPaymentView()
+        public FrmCustomerTaxBillView()
         {
             InitializeComponent();
         }
@@ -55,7 +55,6 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Tag = cp;
             row.Cells["colID"].Value = cp.ID;
             row.Cells["colSheetDate"].Value = cp.SheetDate;
-            row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
             row.Cells["colAmount"].Value = cp.Amount;
             if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
             else row.Cells["colRemain"].Value = null;
@@ -102,12 +101,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         private void mnu_Add_Click(object sender, EventArgs e)
         {
-            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+            FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
             frm.Customer = Customer;
-            frm.PaymentType = PaymentType;
             frm.IsAdding = true;
             frm.StartPosition = FormStartPosition.CenterParent;
-            if (frm.ShowDialog() == DialogResult.OK) FreshData();
+            frm.ShowDialog();
+            FreshData();
         }
 
         private void mnu_Assign_Click(object sender, EventArgs e)

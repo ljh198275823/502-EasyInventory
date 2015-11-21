@@ -15,25 +15,15 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
 {
-    public partial class FrmCustomerReceivableView : Form
+    public partial class FrmCustomerTaxView : Form
     {
-        public FrmCustomerReceivableView()
+        public FrmCustomerTaxView()
         {
             InitializeComponent();
         }
 
-        #region 私有方法
-        private int DaysBetween(DateTime endDt, DateTime beginDt)
-        {
-            TimeSpan ts1 = new TimeSpan(endDt.Date.Ticks - beginDt.Date.Ticks);
-            return (int)ts1.TotalDays;
-        }
-        #endregion
-
         #region 公共属性
         public CompanyInfo Customer { get; set; }
-
-        public CustomerReceivableType ReceivableType { get; set; }
         #endregion
 
         #region 重写基类方法
@@ -42,7 +32,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             var con = new CustomerReceivableSearchCondition();
             con.CustomerID = Customer != null ? Customer.ID : null;
             con.ReceivableTypes = new List<CustomerReceivableType>();
-            con.ReceivableTypes.Add(ReceivableType);
+            con.ReceivableTypes.Add(CustomerReceivableType.CustomerTax);
             con.Settled = false;
             if (!chkShowAll.Checked)
             {
@@ -64,15 +54,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             row.Tag = cr;
             row.Cells["colSheetID"].Value = cr.SheetID;
-            row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colAmount"].Value = cr.Amount.Trim();
             if (cr.Haspaid != 0) row.Cells["colHaspaid"].Value = cr.Haspaid.Trim();
             if (cr.Remain != 0)
             {
                 row.Cells["colNotpaid"].Value = cr.Remain.Trim();
-                int days = DaysBetween(DateTime.Today, cr.CreateDate);
-                row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
             }
             row.Cells["colMemo"].Value = cr.Memo;
             if (cr.State == SheetState.Canceled)
@@ -103,7 +90,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         #endregion
 
         #region 事件处理程序
-        private void FrmCustomerReceivableView_Load(object sender, EventArgs e)
+        private void FrmCustomerTaxView_Load(object sender, EventArgs e)
         {
             FreshData();
         }
@@ -113,12 +100,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             FreshData();
         }
 
-        private void mnu_Add_Click(object sender, EventArgs e)
+        private void mnu_AddTax_Click(object sender, EventArgs e)
         {
             CompanyInfo customer = Customer;
             FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
             frm.Customer = customer;
-            frm.ReceivableType = ReceivableType;
+            frm.ReceivableType = CustomerReceivableType.CustomerTax;
             if (frm.ShowDialog() == DialogResult.OK) FreshData();
         }
 

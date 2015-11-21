@@ -271,11 +271,6 @@ namespace InventoryApplication
             ShowSingleForm<FrmExpenditureRecordMaster>();
         }
 
-        private void mnu_DaiFu_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCustomerOtherReceivableMaster>();
-        }
-
         private void mnu_DogInfo_Click(object sender, EventArgs e)
         {
             FrmSoftDogInfo frm = new FrmSoftDogInfo();
@@ -408,11 +403,6 @@ namespace InventoryApplication
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmExpenditureTypeMaster>();
-        }
-
-        private void mnu_CustomerOtherReceivable_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCustomerOtherReceivableMaster>();
         }
 
         private void mnu_OrderPaymentReport_Click(object sender, EventArgs e)

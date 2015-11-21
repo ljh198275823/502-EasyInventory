@@ -127,7 +127,6 @@ namespace InventoryDemo
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             //财务
             this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
-            this.mnu_CustomerOtherReceivable.Enabled = cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Read) || cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
             this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
@@ -267,11 +266,6 @@ namespace InventoryDemo
             ShowSingleForm<FrmExpenditureRecordMaster>();
         }
 
-        private void mnu_DaiFu_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCustomerOtherReceivableMaster>();
-        }
-
         private void mnu_DogInfo_Click(object sender, EventArgs e)
         {
             FrmSoftDogInfo frm = new FrmSoftDogInfo();
@@ -363,11 +357,6 @@ namespace InventoryDemo
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmExpenditureTypeMaster>();
-        }
-
-        private void mnu_CustomerOtherReceivable_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCustomerOtherReceivableMaster>();
         }
 
         private void mnu_OrderPaymentReport_Click(object sender, EventArgs e)
