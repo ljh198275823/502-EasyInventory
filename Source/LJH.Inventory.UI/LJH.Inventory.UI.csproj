@@ -38,6 +38,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Jurassic">
+      <HintPath>..\ReferenceDll\Jurassic.dll</HintPath>
+    </Reference>
     <Reference Include="LJH.GeneralLibrary">
       <HintPath>..\ReferenceDll\LJH.GeneralLibrary.dll</HintPath>
     </Reference>
@@ -695,6 +698,7 @@
       <DependentUpon>FrmSalesPersonPerformanceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\NPOIExcelHelper.cs" />
+    <Compile Include="Forms\JSEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Financial\FrmCreditLine.resx">
       <DependentUpon>FrmCreditLine.cs</DependentUpon>

@@ -35,7 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.chk开卷 = new System.Windows.Forms.CheckBox();
+            this.chk开条 = new System.Windows.Forms.CheckBox();
             this.chk开吨 = new System.Windows.Forms.CheckBox();
             this.chk开平 = new System.Windows.Forms.CheckBox();
             this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
@@ -87,7 +87,7 @@
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.txtLength);
             this.panel5.Controls.Add(this.txtWeight);
-            this.panel5.Controls.Add(this.chk开卷);
+            this.panel5.Controls.Add(this.chk开条);
             this.panel5.Controls.Add(this.chk开吨);
             this.panel5.Controls.Add(this.chk开平);
             this.panel5.Controls.Add(this.categoryComboBox1);
@@ -105,7 +105,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(689, 14);
+            this.label4.Location = new System.Drawing.Point(867, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 89;
@@ -114,7 +114,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(563, 14);
+            this.label3.Location = new System.Drawing.Point(741, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 88;
@@ -123,7 +123,7 @@
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(724, 10);
+            this.txtLength.Location = new System.Drawing.Point(902, 10);
             this.txtLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -144,7 +144,7 @@
             // txtWeight
             // 
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(598, 10);
+            this.txtWeight.Location = new System.Drawing.Point(776, 10);
             this.txtWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -162,25 +162,25 @@
             this.txtWeight.Text = "0";
             this.txtWeight.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
-            // chk开卷
+            // chk开条
             // 
-            this.chk开卷.AutoSize = true;
-            this.chk开卷.Checked = true;
-            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开卷.Location = new System.Drawing.Point(875, 12);
-            this.chk开卷.Name = "chk开卷";
-            this.chk开卷.Size = new System.Drawing.Size(48, 16);
-            this.chk开卷.TabIndex = 85;
-            this.chk开卷.Text = "开卷";
-            this.chk开卷.UseVisualStyleBackColor = true;
-            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
+            this.chk开条.AutoSize = true;
+            this.chk开条.Checked = true;
+            this.chk开条.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开条.Location = new System.Drawing.Point(614, 12);
+            this.chk开条.Name = "chk开条";
+            this.chk开条.Size = new System.Drawing.Size(48, 16);
+            this.chk开条.TabIndex = 85;
+            this.chk开条.Text = "开条";
+            this.chk开条.UseVisualStyleBackColor = true;
+            this.chk开条.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // chk开吨
             // 
             this.chk开吨.AutoSize = true;
             this.chk开吨.Checked = true;
             this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开吨.Location = new System.Drawing.Point(930, 12);
+            this.chk开吨.Location = new System.Drawing.Point(669, 12);
             this.chk开吨.Name = "chk开吨";
             this.chk开吨.Size = new System.Drawing.Size(48, 16);
             this.chk开吨.TabIndex = 84;
@@ -193,7 +193,7 @@
             this.chk开平.AutoSize = true;
             this.chk开平.Checked = true;
             this.chk开平.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开平.Location = new System.Drawing.Point(821, 12);
+            this.chk开平.Location = new System.Drawing.Point(560, 12);
             this.chk开平.Name = "chk开平";
             this.chk开平.Size = new System.Drawing.Size(48, 16);
             this.chk开平.TabIndex = 83;
@@ -276,32 +276,32 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 142);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // mnu_CreateInventory
             // 
             this.mnu_CreateInventory.Name = "mnu_CreateInventory";
-            this.mnu_CreateInventory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CreateInventory.Size = new System.Drawing.Size(148, 22);
             this.mnu_CreateInventory.Text = "新建库存";
             this.mnu_CreateInventory.Click += new System.EventHandler(this.mnu_CreateInventory_Click);
             // 
             // mnu_CheckView
             // 
             this.mnu_CheckView.Name = "mnu_CheckView";
-            this.mnu_CheckView.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CheckView.Size = new System.Drawing.Size(148, 22);
             this.mnu_CheckView.Text = "查看盘点记录";
             this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
             // 
             // mnu_StackRecords
             // 
             this.mnu_StackRecords.Name = "mnu_StackRecords";
-            this.mnu_StackRecords.Size = new System.Drawing.Size(152, 22);
+            this.mnu_StackRecords.Size = new System.Drawing.Size(148, 22);
             this.mnu_StackRecords.Text = "产品进出明细";
             this.mnu_StackRecords.Visible = false;
             this.mnu_StackRecords.Click += new System.EventHandler(this.mnu_StackRecords_Click);
@@ -309,18 +309,18 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // dataGridView1
@@ -468,7 +468,7 @@
         private Controls.CategoryComboBox categoryComboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.CheckBox chk开卷;
+        private System.Windows.Forms.CheckBox chk开条;
         private System.Windows.Forms.CheckBox chk开吨;
         private System.Windows.Forms.CheckBox chk开平;
         private System.Windows.Forms.ToolStripMenuItem mnu_CheckView;

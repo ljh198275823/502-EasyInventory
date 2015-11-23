@@ -38,7 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.chk开卷 = new System.Windows.Forms.CheckBox();
+            this.chk开条 = new System.Windows.Forms.CheckBox();
             this.chk开吨 = new System.Windows.Forms.CheckBox();
             this.chk开平 = new System.Windows.Forms.CheckBox();
             this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
@@ -71,7 +71,7 @@
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.txtLength);
             this.panel5.Controls.Add(this.txtWeight);
-            this.panel5.Controls.Add(this.chk开卷);
+            this.panel5.Controls.Add(this.chk开条);
             this.panel5.Controls.Add(this.chk开吨);
             this.panel5.Controls.Add(this.chk开平);
             this.panel5.Controls.Add(this.categoryComboBox1);
@@ -144,18 +144,18 @@
             this.txtWeight.Text = "0";
             this.txtWeight.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
-            // chk开卷
+            // chk开条
             // 
-            this.chk开卷.AutoSize = true;
-            this.chk开卷.Checked = true;
-            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开卷.Location = new System.Drawing.Point(684, 17);
-            this.chk开卷.Name = "chk开卷";
-            this.chk开卷.Size = new System.Drawing.Size(48, 16);
-            this.chk开卷.TabIndex = 85;
-            this.chk开卷.Text = "开卷";
-            this.chk开卷.UseVisualStyleBackColor = true;
-            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
+            this.chk开条.AutoSize = true;
+            this.chk开条.Checked = true;
+            this.chk开条.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开条.Location = new System.Drawing.Point(684, 17);
+            this.chk开条.Name = "chk开条";
+            this.chk开条.Size = new System.Drawing.Size(48, 16);
+            this.chk开条.TabIndex = 85;
+            this.chk开条.Text = "开条";
+            this.chk开条.UseVisualStyleBackColor = true;
+            this.chk开条.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // chk开吨
             // 
@@ -394,7 +394,7 @@
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
         private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
-        private System.Windows.Forms.CheckBox chk开卷;
+        private System.Windows.Forms.CheckBox chk开条;
         private System.Windows.Forms.CheckBox chk开吨;
         private System.Windows.Forms.CheckBox chk开平;
         private Controls.CategoryComboBox categoryComboBox1;

@@ -60,7 +60,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Slice(ProductInventoryItem sr, SteelRollSliceRecord sliceSheet, WareHouse wh)
         {
-            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length, sr.Product.Density);
+            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sliceSheet.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length, sr.Product.Density);
             if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);

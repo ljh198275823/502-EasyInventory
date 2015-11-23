@@ -34,12 +34,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Text = product.Specification;
             txtCategory.Text = product.Category.Name;
             txtCategory.Tag = product.Category;
-            rdToPanel.Checked = product.Model == "开平";
-            rdToRoll.Checked = product.Model == "开卷";
-            rdToWeight.Checked = product.Model == "开吨";
+            rdToPanel.Checked = product.Model == rdToPanel.Text;
+            rdToRoll.Checked = product.Model == rdToRoll.Text;
+            rdToWeight.Checked = product.Model == rdToWeight.Text;
             txtLength.DecimalValue = product.Length.HasValue ? product.Length.Value : 0;
             txtWeight.DecimalValue = product.Weight.HasValue ? product.Weight.Value : 0;
-            decimal ? thick=SpecificationHelper .GetWrittenThick (product.Specification );
+            decimal? thick = SpecificationHelper.GetWrittenThick(product.Specification);
             txtThick.DecimalValue = thick != null ? thick.Value : 0;
         }
 

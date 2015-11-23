@@ -77,8 +77,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 return (from p in items
                         orderby p.Product.CategoryID ascending,
-                                SpecificationHelper.GetWrittenWidth (p.Product .Specification ) ascending ,
-                                SpecificationHelper.GetWrittenThick (p.Product .Specification )ascending ,
+                                SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
+                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
                                 p.AddDate descending
                         select (object)p).ToList();
             }
@@ -129,7 +129,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.ShowOperatorRights();
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
-            mnu_Slice.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
+            mnu_开平.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
+            mnu_开条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
+            mnu_开吨.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
         }
@@ -200,7 +202,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (chkStackIn.Checked) FreshData_Clicked(sender, e);
         }
 
-        private void mnu_Slice_Click(object sender, EventArgs e)
+        private void mnu_开平_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
@@ -210,6 +212,46 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     FrmSlice frm = new FrmSlice();
                     frm.SlicingItem = sr;
                     frm.SliceTo = "开平";
+                    frm.ShowDialog();
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
+                }
+            }
+        }
+
+        private void mnu_开条_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                if (sr.State == ProductInventoryState.Inventory)
+                {
+                    FrmSlice frm = new FrmSlice();
+                    frm.SlicingItem = sr;
+                    frm.SliceTo = "开条";
+                    frm.ShowDialog();
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
+                }
+            }
+        }
+
+        private void mnu_开吨_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                if (sr.State == ProductInventoryState.Inventory)
+                {
+                    FrmSlice frm = new FrmSlice();
+                    frm.SlicingItem = sr;
+                    frm.SliceTo = "开吨";
                     frm.ShowDialog();
                     ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
                 }
@@ -290,6 +332,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
-        
     }
 }

@@ -32,6 +32,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         /// 获取或设置要加工的类型
         /// </summary>
         public string SliceTo { get; set; }
+
         #endregion
 
         #region 私有方法
@@ -46,128 +47,36 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtWareHouse.Text = item.WareHouse.Name;
             txtWareHouse.Tag = item.WareHouse;
         }
-        #endregion
-
-        #region 事件处理程序
-        private void FrmSlice_Load(object sender, EventArgs e)
-        {
-            dtSliceDate.Value = DateTime.Today;
-            if (SlicingItem != null)
-            {
-                ShowSlicingItem(SlicingItem);
-            }
-            rdToPanel.Checked = (string.IsNullOrEmpty(SliceTo) || SliceTo == "开平");
-            rdToRoll.Checked = SliceTo == "开卷";
-            rdToWeight.Checked = SliceTo == "开吨";
-            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-        }
-
-        private void txtLength_TextChanged(object sender, EventArgs e)
-        {
-            if (object.ReferenceEquals(sender, txtLength)) //长度
-            {
-                if (txtLength.DecimalValue * txtCount.IntergerValue <= SlicingItem.Length)
-                {
-                    this.txtRemainLength.DecimalValue = SlicingItem.Length.Value - txtLength.DecimalValue * txtCount.IntergerValue;
-                    this.txtRemainWeight.DecimalValue = (txtRemainLength.DecimalValue / SlicingItem.OriginalLength.Value) * SlicingItem.OriginalWeight.Value;
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("原料长度不足，不能加工长度为 {0} 米的小件 {1} 块", txtLength.DecimalValue, txtCount.IntergerValue));
-                    (sender as TextBox).Text = "0";
-                    (sender as TextBox).SelectAll();
-                }
-            }
-            else if (object.ReferenceEquals(sender, txtWeight)) //重量
-            {
-                if (txtWeight.DecimalValue * txtCount.IntergerValue <= SlicingItem.Weight)
-                {
-                    this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - txtWeight.DecimalValue * txtCount.IntergerValue;
-                    this.txtRemainLength.DecimalValue = (txtRemainWeight.DecimalValue / SlicingItem.OriginalWeight.Value) * SlicingItem.OriginalLength.Value;
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("原料重量不足，不能加工重量为 {0} 吨的小件 {1} 块", txtWeight.DecimalValue, txtCount.IntergerValue));
-                    (sender as TextBox).Text = "0";
-                    (sender as TextBox).SelectAll();
-                }
-            }
-            else
-            {
-                if (txtWeight.Enabled && txtWeight.DecimalValue > 0) txtLength_TextChanged(txtWeight, EventArgs.Empty);
-                else txtLength_TextChanged(txtLength, EventArgs.Empty);
-            }
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            if (CheckInput())
-            {
-                SteelRollSliceRecord record = new SteelRollSliceRecord()
-                {
-                    ID = Guid.NewGuid(),
-                    SliceDate = dtSliceDate.Value,
-                    SliceSource = SlicingItem.ID,
-                    Category = SlicingItem.Product.Category.Name,
-                    Specification = SlicingItem.Product.Specification,
-                    SliceType = SliceTo,
-                    BeforeLength = SlicingItem.Length.Value,
-                    BeforeWeight = SlicingItem.Weight.Value,
-                    Count = txtCount.IntergerValue,
-                    AfterLength = txtRemainLength.DecimalValue,
-                    AfterWeight = txtRemainWeight.DecimalValue,
-                    Customer = txtCustomer.Text,
-                    Slicer = txtSlicers.Text,
-                    Warehouse = (txtWareHouse.Tag as WareHouse).Name,
-                    Operator = Operator.Current.Name
-                };
-                if (txtLength.DecimalValue > 0) record.Length = txtLength.DecimalValue;
-                if (txtWeight.DecimalValue > 0) record.Weight = txtWeight.DecimalValue;
-                CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Slice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
-                if (ret.Result == ResultCode.Successful)
-                {
-                    this.txtLength.DecimalValue = 0;
-                    this.txtCount.IntergerValue = 0;
-                    this.txtWeight.DecimalValue = 0;
-                    ShowSlicingItem(SlicingItem);
-                    MessageBox.Show("加工成功!");
-                    if (SlicingItem.Status == "余料")
-                    {
-                        //重新计算厚度
-                        this.DialogResult = DialogResult.OK;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message);
-                }
-            }
-        }
 
         private bool CheckInput()
         {
-            if (!rdToWeight.Checked && this.txtLength.DecimalValue <= 0)
+            if (rd开平.Checked)
             {
-                MessageBox.Show("加工长度不正确，请重新输入");
-                this.txtLength.Focus();
-                return false;
+                if (this.txtLength.DecimalValue <= 0)
+                {
+                    MessageBox.Show("开平长度不正确，请重新输入");
+                    this.txtLength.Focus();
+                    return false;
+                }
+                if (this.txtCount.IntergerValue <= 0)
+                {
+                    MessageBox.Show("开平数量不正确，请重新输入");
+                    this.txtCount.Focus();
+                    return false;
+                }
             }
-            if (rdToWeight.Checked && this.txtWeight.DecimalValue <= 0)
+            if (rd开条.Checked)
             {
-                MessageBox.Show("加工重量不正确，请重新输入");
-                txtWeight.Focus();
-                return false;
-            }
-            if (this.txtCount.IntergerValue <= 0)
-            {
-                MessageBox.Show("加工数量不正确，请重新输入");
-                this.txtCount.Focus();
-                return false;
+                if (string.IsNullOrEmpty(txtFormula.Text))
+                {
+                    MessageBox.Show("没有输入开条公式");
+                    return false;
+                }
+                if (string.IsNullOrEmpty(txtResult.Text))
+                {
+                    MessageBox.Show("开条公式不是有效的数学公式，不能计算出结果");
+                    return false;
+                }
             }
             if (this.txtWareHouse.Tag == null)
             {
@@ -182,13 +91,100 @@ namespace LJH.Inventory.UI.Forms.Inventory
             return true;
         }
 
-        private void rdSliceType_CheckedChanged(object sender, EventArgs e)
+        private string GetSliceType()
         {
-            SliceTo = (sender as RadioButton).Text;
-            txtLength.Enabled = !rdToWeight.Checked;
-            txtWeight.Enabled = rdToWeight.Checked;
+            if (rd开平.Checked) return rd开平.Text;
+            if (rd开条.Checked) return rd开条.Text;
+            if (rd开吨.Checked) return rd开吨.Text;
+            return null;
         }
         #endregion
+
+        #region 事件处理程序
+        private void FrmSlice_Load(object sender, EventArgs e)
+        {
+            dtSliceDate.Value = DateTime.Today;
+            if (SlicingItem != null)
+            {
+                ShowSlicingItem(SlicingItem);
+            }
+            rd开平.Checked = SliceTo == rd开平.Text;
+            rd开条.Checked = SliceTo == rd开条.Text;
+            rd开吨.Checked = SliceTo == rd开吨.Text;
+            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
+        }
+
+        private void rd开平_CheckedChanged(object sender, EventArgs e)
+        {
+            txtLength.Enabled = rd开平.Checked;
+            txtCount.Enabled = rd开平.Checked;
+        }
+
+        private void rd开条_CheckedChanged(object sender, EventArgs e)
+        {
+            txtFormula.Enabled = rd开条.Checked;
+            if (rd开条.Checked)
+            {
+                txtRemainLength.DecimalValue = 0;
+                txtRemainWeight.DecimalValue = 0;
+            }
+        }
+
+        private void rd开吨_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rd开吨.Checked)
+            {
+                txtLength.DecimalValue = SlicingItem.Length.Value;
+                txtRemainLength.DecimalValue = 0;
+                txtRemainWeight.DecimalValue = 0;
+            }
+        }
+
+        private void txtLength_TextChanged(object sender, EventArgs e)
+        {
+            if (txtLength.DecimalValue * txtCount.IntergerValue <= SlicingItem.Length)
+            {
+                this.txtRemainLength.DecimalValue = SlicingItem.Length.Value - txtLength.DecimalValue * txtCount.IntergerValue;
+                this.txtRemainWeight.DecimalValue = (txtRemainLength.DecimalValue / SlicingItem.OriginalLength.Value) * SlicingItem.OriginalWeight.Value;
+            }
+            else
+            {
+                var ret = MessageBox.Show(string.Format("原料长度不足，不能加工长度为 {0} 米的小件 {1} 块, 是否继续开平?", txtLength.DecimalValue, txtCount.IntergerValue),
+                                          "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (ret == DialogResult.Yes)
+                {
+                    this.txtRemainLength.DecimalValue = 0;
+                    this.txtRemainWeight.DecimalValue = 0;
+                    btnOk.BackColor = Color.Red;
+                    btnOk.ForeColor = Color.White;
+                }
+                else
+                {
+                    (sender as TextBox).Text = "0";
+                    (sender as TextBox).SelectAll();
+                }
+            }
+        }
+
+        private void txtFormula_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtFormula.Text.Trim()))
+            {
+                decimal ret;
+                if (JSEngine.CalExpression(txtFormula.Text, out ret))
+                {
+                    txtResult.Text = ret.ToString();
+                }
+                else
+                {
+                    txtResult.Text = string.Empty;
+                }
+            }
+            else
+            {
+                txtResult.Text = string.Empty;
+            }
+        }
 
         private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -201,15 +197,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void txtWareHouse_DoubleClick(object sender, EventArgs e)
-        {
-            txtWareHouse.Text = string.Empty;
-            txtWareHouse.Tag = null;
-        }
-
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Sale. FrmCustomerMaster frm = new Sale.FrmCustomerMaster();
+            Sale.FrmCustomerMaster frm = new Sale.FrmCustomerMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -218,10 +208,76 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void txtCustomer_DoubleClick(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
-            txtCustomer.Text = string.Empty;
-            txtCustomer.Tag = null;
+            if (CheckInput())
+            {
+                SteelRollSliceRecord record = new SteelRollSliceRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    SliceDate = dtSliceDate.Value,
+                    SliceSource = SlicingItem.ID,
+                    Category = SlicingItem.Product.Category.Name,
+                    Specification = SlicingItem.Product.Specification,
+                    SliceType = GetSliceType(),
+                    BeforeLength = SlicingItem.Length.Value,
+                    BeforeWeight = SlicingItem.Weight.Value,
+                    AfterLength = txtRemainLength.DecimalValue,
+                    AfterWeight = txtRemainWeight.DecimalValue,
+                    Customer = txtCustomer.Text,
+                    Slicer = txtSlicers.Text,
+                    Warehouse = (txtWareHouse.Tag as WareHouse).Name,
+                    Operator = Operator.Current.Name
+                };
+                if (rd开平.Checked)
+                {
+                    if (txtLength.DecimalValue > 0) record.Length = txtLength.DecimalValue;
+                    record.Count = txtCount.IntergerValue;
+                }
+                else if (rd开吨.Checked)
+                {
+                    record.Length = SlicingItem.Length;
+                    record.Weight = SlicingItem.Weight;
+                    record.AfterLength = 0;
+                    record.AfterWeight = 0;
+                    record.Count = 1;
+                }
+                else if (rd开条.Checked)
+                {
+                    record.Specification = SlicingItem.Product.Specification + " 开条" + string.Format("{0} = {1}", txtFormula.Text.Trim(), txtResult.Text.Trim());
+                    record.Length = SlicingItem.Length;
+                    record.Weight = SlicingItem.Weight;
+                    record.AfterLength = 0;
+                    record.AfterWeight = 0;
+                    record.Count = 1;
+                }
+                CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Slice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    MessageBox.Show("加工成功!");
+                    if (SlicingItem.Status == "余料")
+                    {
+                        //重新计算厚度
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        this.txtLength.DecimalValue = 0;
+                        this.txtCount.IntergerValue = 0;
+                        ShowSlicingItem(SlicingItem);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
     }
 }
