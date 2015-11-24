@@ -119,13 +119,13 @@ namespace LJH.Inventory.BLL
                         CustomerID = sheet.CustomerID,
                         SheetID = sheet.ID,
                         OrderID = si.OrderID,
-                        Amount = si.Amount,
+                        Amount = si.CalAmount(),
                     };
                     crs.Add(cr);
                 }
                 else
                 {
-                    cr.Amount += si.Amount;
+                    cr.Amount += si.CalAmount();
                 }
             }
             foreach (CustomerReceivable cr in crs)
@@ -158,9 +158,9 @@ namespace LJH.Inventory.BLL
             foreach (var item in info.Items)  //将原材料的项的状态变成待出货状态
             {
                 var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
-                if (item.ProductInventoryItem != null)
+                if (item.InventoryItem != null)
                 {
-                    ProductInventoryItem sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                    ProductInventoryItem sr = isrp.GetByID(item.InventoryItem.Value).QueryObject;
                     if (sr != null)
                     {
                         if (sr.Count >= item.Count)
@@ -196,9 +196,9 @@ namespace LJH.Inventory.BLL
                 var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
                 foreach (var item in info.Items)
                 {
-                    if (item.ProductInventoryItem != null)
+                    if (item.InventoryItem != null)
                     {
-                        var sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                        var sr = isrp.GetByID(item.InventoryItem.Value).QueryObject;
                         if (sr != null)
                         {
                             var cloneSr = sr.Clone();
@@ -211,9 +211,9 @@ namespace LJH.Inventory.BLL
                 }
                 foreach (var item in original.Items)
                 {
-                    if (!info.Items.Exists(it => it.ID == item.ID) && item.ProductInventoryItem.HasValue)
+                    if (!info.Items.Exists(it => it.ID == item.ID) && item.InventoryItem.HasValue)
                     {
-                        ProductInventoryItem sr = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                        ProductInventoryItem sr = isrp.GetByID(item.InventoryItem.Value).QueryObject;
                         if (sr != null)
                         {
                             ProductInventoryItem cloneSr = sr.Clone();
@@ -250,13 +250,13 @@ namespace LJH.Inventory.BLL
                 con.ProductID = item.ProductID;
                 con.DeliveryItem = item.ID;
                 List<ProductInventoryItem> piis = isrp.GetItems(con).QueryObjects;
-                ProductInventoryItem source = isrp.GetByID(item.ProductInventoryItem.Value).QueryObject;
+                ProductInventoryItem source = isrp.GetByID(item.InventoryItem.Value).QueryObject;
                 ProductInventoryItem clone = source.Clone();
                 if (piis != null && piis.Count > 0)
                 {
                     
                 }
-                if (item.ProductInventoryItem != null)
+                if (item.InventoryItem != null)
                 {
                     
                     if (source != null)

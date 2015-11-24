@@ -85,7 +85,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override FrmDetailBase GetDetailForm()
         {
             FrmStackOutSheetDetail frm = new FrmStackOutSheetDetail();
-            if (customerTree1.SelectedNode != null) frm.Customer = customerTree1.SelectedNode.Tag as CompanyInfo;
+            var customer = (customerTree1.SelectedNode != null) ? customerTree1.SelectedNode.Tag as CompanyInfo : null;
+            frm.IsAdding = true;
+            frm.UpdatingItem = StackOutSheet.Create(customer, null);
             return frm;
         }
 

@@ -53,10 +53,7 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置单价
         /// </summary>
         public decimal Price { get; set; }
-        /// <summary>
-        /// 获取货物总金额
-        /// </summary>
-        public decimal Amount { get; set; }
+        
         /// <summary>
         /// 获取或设置商品数量
         /// </summary>
@@ -64,7 +61,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置库存项, 用于直接指定某件库存出货
         /// </summary>
-        public Guid? ProductInventoryItem { get; set; }
+        public Guid? InventoryItem { get; set; }
         /// <summary>
         /// 获取或设置备注信息
         /// </summary>

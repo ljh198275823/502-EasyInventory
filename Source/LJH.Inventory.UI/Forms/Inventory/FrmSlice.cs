@@ -244,12 +244,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else if (rd开条.Checked)
                 {
-                    record.Specification = SlicingItem.Product.Specification + " 开条" + string.Format("{0} = {1}", txtFormula.Text.Trim(), txtResult.Text.Trim());
                     record.Length = SlicingItem.Length;
                     record.Weight = SlicingItem.Weight;
                     record.AfterLength = 0;
                     record.AfterWeight = 0;
                     record.Count = 1;
+                    record.Memo = "开条:" + string.Format("{0} = {1}", txtFormula.Text.Trim(), txtResult.Text.Trim());
                 }
                 CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Slice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
                 if (ret.Result == ResultCode.Successful)

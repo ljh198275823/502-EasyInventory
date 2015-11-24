@@ -22,25 +22,39 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         #endregion
 
-        #region 公共属性
-        /// <summary>
-        /// 获取或设置要发货的客户
-        /// </summary>
-        public CompanyInfo Customer { get; set; }
-        /// <summary>
-        /// 获取或设置发货的订单,用于增加送货单时指定要发货的订单
-        /// </summary>
-        public Order Order { get; set; }
-        /// <summary>
-        /// 获取或设置仓库
-        /// </summary>
-        public WareHouse WareHouse { get; set; }
-        #endregion
-
         #region 私有方法
-        private void ShowDeliveryItemsOnGrid(IEnumerable<StackOutItem> items)
+        private void ShowSheet(StackOutSheet item)
+        {
+            if (!string.IsNullOrEmpty(item.ID))
+            {
+                this.txtSheetNo.Text = item.ID;
+                this.txtSheetNo.Enabled = false;
+            }
+            var Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
+            this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            var WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
+            this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            dtSheetDate.Value = item.SheetDate;
+            this.txtLinker.Text = item.Linker;
+            this.txtLinkerPhone.Text = item.LinkerCall;
+            this.txtAddress.Text = item.Address;
+            txtDriver.Text = item.Driver;
+            txtDriverCall.Text = item.DriverCall;
+            txtCarPlate.Text = item.CarPlate;
+            chkDeadline.Checked = item.DeadlineDate.HasValue;
+            dtDeadline.Value = item.DeadlineDate.HasValue ? item.DeadlineDate.Value : DateTime.Today;
+            rdWithoutTax.Checked = item.WithTax == false;
+            rdWithTax.Checked = item.WithTax == true;
+            this.txtMemo.Text = item.Memo;
+            ShowDeliveryItemsOnGrid(item);
+            ShowOperations(item.ID, item.DocumentType, dataGridView1);
+            ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
+        }
+
+        private void ShowDeliveryItemsOnGrid(StackOutSheet sheet)
         {
             ItemsGrid.Rows.Clear();
+            var items = sheet.GetSummaryItems();
             if (items != null)
             {
                 foreach (StackOutItem item in items)
@@ -50,26 +64,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
-                ItemsGrid.Rows[r].Cells["colTotal"].Value = items.Sum(it => it.Amount);
+                ItemsGrid.Rows[r].Cells["colTotal"].Value = sheet.Amount;
             }
         }
 
         private void ShowDeliveryItemOnRow(DataGridViewRow row, StackOutItem item)
         {
             row.Tag = item;
-            Product p=new ProductBLL(AppSettings.Current.ConnStr).GetByID (item.ProductID ).QueryObject ;
-            ProductInventoryItem pi=null;
-            if(item.ProductInventoryItem .HasValue )pi=new ProductInventoryItemBLL (AppSettings .Current .ConnStr ).GetByID (item.ProductInventoryItem .Value ).QueryObject ;
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
             row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
-            row.Cells["colModel"].Value =  p.Model;
+            row.Cells["colModel"].Value = p.Model;
             row.Cells["colLength"].Value = item.Length;
             row.Cells["colWeight"].Value = item.Weight;
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count;
-            row.Cells["colTotal"].Value = item.Amount;
-            row.Cells["colOrderID"].Value = item.OrderID;
+            row.Cells["colTotal"].Value = item.CalAmount();
             row.Cells["colMemo"].Value = item.Memo;
         }
 
@@ -88,40 +99,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             decimal sum = 0;
             foreach (DataGridViewRow row in ItemsGrid.Rows)
             {
-                if (row.Tag != null) sum += (row.Tag as StackOutItem).Amount;
+                if (row.Tag != null) sum += (row.Tag as StackOutItem).CalAmount();
             }
             return sum;
-        }
-
-        private void ShowSheet(StackOutSheet item)
-        {
-            if (!string.IsNullOrEmpty(item.ID))
-            {
-                this.txtSheetNo.Text = item.ID;
-                this.txtSheetNo.Enabled = false;
-            }
-            Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
-            this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            if (item.ClassID == StackOutSheetType.DeliverySheet) this.cmbSheetType.SelectedIndex = 0;
-            if (item.ClassID == StackOutSheetType.CustomerBorrow) this.cmbSheetType.SelectedIndex = 1;
-            this.cmbSheetType.Enabled = false;
-            WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
-            this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
-            dtSheetDate.Value = item.SheetDate;
-            this.txtLinker.Text = item.Linker;
-            this.txtLinkerPhone.Text = item.LinkerCall;
-            this.txtAddress.Text = item.Address;
-            txtDriver.Text = item.Driver;
-            txtDriverCall.Text = item.DriverCall;
-            txtCarPlate.Text = item.CarPlate;
-            chkDeadline.Checked = item.DeadlineDate.HasValue;
-            dtDeadline.Value = item.DeadlineDate.HasValue ? item.DeadlineDate.Value : DateTime.Today;
-            rdWithoutTax.Checked = item.WithTax == false;
-            rdWithTax.Checked = item.WithTax == true;
-            this.txtMemo.Text = item.Memo;
-            ShowDeliveryItemsOnGrid(item.Items);
-            ShowOperations(item.ID, item.DocumentType, dataGridView1);
-            ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
         }
         #endregion
 
@@ -134,7 +114,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtSheetNo.Focus();
                 return false;
             }
-            if (Customer == null)
+            if (txtCustomer.Tag == null)
             {
                 MessageBox.Show("没有选择客户");
                 txtCustomer.Focus();
@@ -167,9 +147,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
-            txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
-            cmbSheetType.SelectedIndex = 0;
             btn_AddSlice.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
             if (IsForView)
             {
@@ -189,20 +166,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override object GetItemFromInput()
         {
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
-            if (sheet == null)
-            {
-                sheet = new StackOutSheet();
-                sheet.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
-                sheet.ClassID = StackOutSheetType.DeliverySheet;
-            }
-            else
-            {
-                sheet = UpdatingItem as StackOutSheet;
-            }
-            sheet.CustomerID = Customer != null ? Customer.ID : null;
-            if (cmbSheetType.SelectedIndex == 0) sheet.ClassID = StackOutSheetType.DeliverySheet;
-            if (cmbSheetType.SelectedIndex == 1) sheet.ClassID = StackOutSheetType.CustomerBorrow;
-            sheet.WareHouseID = WareHouse != null ? WareHouse.ID : null;
+            sheet.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
+            sheet.CustomerID = txtCustomer.Tag != null ? (txtCustomer.Tag as CompanyInfo).ID : null;
+            sheet.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
             sheet.SheetDate = dtSheetDate.Value;
             sheet.Linker = txtLinker.Text.Trim();
             sheet.LinkerCall = txtLinkerPhone.Text.Trim();
@@ -210,38 +176,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             sheet.DriverCall = txtDriverCall.Text;
             sheet.Driver = txtDriver.Text;
             sheet.CarPlate = txtCarPlate.Text;
-            if (chkDeadline.Checked)
-            {
-                sheet.DeadlineDate = dtDeadline.Value;
-            }
-            else
-            {
-                sheet.DeadlineDate = null;
-            }
+            sheet.DeadlineDate = chkDeadline.Checked ? (DateTime?)dtDeadline.Value : null;
             if (rdWithTax.Checked) sheet.WithTax = true;
             if (rdWithoutTax.Checked) sheet.WithTax = false;
             sheet.Memo = txtMemo.Text;
-            sheet.Items = new List<StackOutItem>();
-            foreach (DataGridViewRow row in ItemsGrid.Rows)
-            {
-                if (row.Tag != null)
-                {
-                    StackOutItem item = row.Tag as StackOutItem;
-                    item.SheetNo = sheet.ID;
-                    sheet.Items.Add(item);
-                }
-            }
             return sheet;
-        }
-
-        protected override CommandResult AddItem(object item)
-        {
-            return (new StackOutSheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as StackOutSheet, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
-        }
-
-        protected override CommandResult UpdateItem(object item)
-        {
-            return (new StackOutSheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as StackOutSheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
@@ -329,65 +268,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
-        #region 公共方法
-        public void AddDeliveryItem(SteelRollSlice p)
-        {
-            List<StackOutItem> sources = GetDeliveryItemsFromGrid();
-            if (!sources.Exists(it => it.ProductID == p.Product.ID))
-            {
-                StackOutItem item = new StackOutItem();
-                item.ID = Guid.NewGuid();
-                item.ProductID = p.Product.ID;
-                item.Length = p.Product.Length;
-                item.Weight = p.Product.Weight;
-                item.Unit = p.Product.Unit;
-                item.Price = p.Product != null ? p.Product.Price : 0;
-                item.Count = 0;
-                sources.Add(item);
-            }
-            ShowDeliveryItemsOnGrid(sources);
-        }
-
-        public void AddDeliveryItem(ProductInventoryItem p)
-        {
-            List<StackOutItem> sources = GetDeliveryItemsFromGrid();
-            if (!sources.Exists(it => it.ProductInventoryItem == p.ID))  //原材料只能属于一个送货单项
-            {
-                StackOutItem item = new StackOutItem();
-                item.ID = Guid.NewGuid();
-                item.ProductID = p.Product.ID;
-                item.Unit = p.Product.Unit;
-                item.ProductInventoryItem = p.ID;
-                item.Price = p.Price > 0 ? p.Price : (p.Product.Price); //直接采用
-                item.Length = p.Length;
-                item.Weight = p.Weight;
-                item.Count = 1;
-                item.Amount = item.CalAmount();
-                sources.Add(item);
-            }
-            ShowDeliveryItemsOnGrid(sources);
-        }
-
-        public void AddDeliveryItem(OrderItemRecord oi)
-        {
-            List<StackOutItem> sources = GetDeliveryItemsFromGrid();
-            if (!sources.Exists(it => it.OrderItem != null && it.OrderItem.Value == oi.ID))
-            {
-                StackOutItem item = new StackOutItem();
-                item.ID = Guid.NewGuid();
-                item.ProductID = oi.ProductID;
-                item.Unit = oi.Unit;
-                item.Price = oi.Price;
-                item.Count = oi.NotShipped;
-                item.Amount = item.Price * item.Count;
-                item.OrderItem = oi.ID;
-                item.OrderID = oi.SheetNo;
-                sources.Add(item);
-            }
-            ShowDeliveryItemsOnGrid(sources);
-        }
-        #endregion
-
         #region 事件处理程序
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -395,16 +275,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Customer = frm.SelectedItem as CompanyInfo;
-                txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-                txtAddress.Text = Customer != null ? Customer.Address : string.Empty;
+                var c = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Tag = c;
+                txtCustomer.Text = c != null ? c.Name : string.Empty;
+                txtAddress.Text = c != null ? c.Address : string.Empty;
             }
         }
 
         private void txtCustomer_DoubleClick(object sender, EventArgs e)
         {
-            Customer = null;
-            txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            txtCustomer.Text =  string.Empty;
+            txtCustomer.Tag = null;
         }
 
         private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -413,15 +294,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                WareHouse = frm.SelectedItem as WareHouse;
-                txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+                var w = frm.SelectedItem as WareHouse;
+                txtWareHouse.Tag = w;
+                txtWareHouse.Text = w != null ? w.Name : string.Empty;
             }
         }
 
         private void txtWareHouse_DoubleClick(object sender, EventArgs e)
         {
-            WareHouse = null;
-            txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            txtWareHouse.Tag = null;
+            txtWareHouse.Text = string.Empty;
         }
 
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -431,120 +313,75 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (row.Tag != null)
             {
                 StackOutItem item = row.Tag as StackOutItem;
-                if (col.Name == "colTotal")
+                decimal value;
+                if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out value))
                 {
-                    decimal amount;
-                    if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out amount))
-                    {
-                        if (amount < 0) amount = 0;
-                        item.Amount = amount;
-                        row.Cells[e.ColumnIndex].Value = amount;
-                    }
+                    if (value < 0) value = 0;
+                    row.Cells[e.ColumnIndex].Value = value;
                 }
-                else
+                if (col.Name == "colPrice")
                 {
-                    if (col.Name == "colPrice")
-                    {
-                        decimal price;
-                        if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out price))
-                        {
-                            if (price < 0) price = 0;
-                            item.Price = price;
-                            row.Cells[e.ColumnIndex].Value = price;
-                        }
-                    }
-                    else if (col.Name == "colCount")
-                    {
-                        if (item.ProductInventoryItem != null) //原材料数量不能改
-                        {
-                            row.Cells[e.ColumnIndex].Value = item.Count;
-                        }
-                        else
-                        {
-                            int count;
-                            if (int.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out count))
-                            {
-                                if (count < 0) count = 0;
-                                item.Count = count;
-                                row.Cells[e.ColumnIndex].Value = count;
-                            }
-                        }
-                    }
-                    else if (col.Name == "colWeight")
-                    {
-                        decimal weight;
-                        if (row.Cells[e.ColumnIndex].Value!=null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out weight))
-                        {
-                            if (weight <= 0)
-                            {
-                                weight = 0;
-                                item.Weight = null;
-                            }
-                            else
-                            {
-                                item.Weight = weight;
-                            }
-                            row.Cells[e.ColumnIndex].Value = weight;
-                        }
-                    }
-                    item.Amount = item.CalAmount();
-                    row.Cells["colTotal"].Value = item.Amount;
+                    item.Price = value;
                 }
-                ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = GetTotalAmount();
+                else if (col.Name == "colCount")
+                {
+                    item.Count = value;
+                }
+                else if (col.Name == "colWeight")
+                {
+                    item.Weight = value > 0 ? (decimal?)value : null;
+                }
+                row.Cells["colTotal"].Value = item.CalAmount();
             }
-        }
-
-        private void mnu_AddOrderItem_Click(object sender, EventArgs e)
-        {
-            if (Customer != null)
-            {
-                FrmOrderRecordView frm = new FrmOrderRecordView();
-                frm.ForSelect = true;
-                OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
-                con.CustomerID = Customer.ID;
-                con.States = new List<SheetState>();
-                con.States.Add(SheetState.Approved);
-                con.HasToDelivery = true;
-                frm.SearchCondition = con;
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    OrderItemRecord oi = frm.SelectedItem as OrderItemRecord;
-                    AddDeliveryItem(oi);
-                }
-            }
+            ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = GetTotalAmount();
         }
 
         private void btn_AddSlice_Click(object sender, EventArgs e)
         {
-            if (WareHouse == null)
+            if (txtWareHouse.Tag == null)
             {
                 MessageBox.Show("请先选择出货仓库");
                 return;
             }
             FrmSteelRollSliceSelection frm = new FrmSteelRollSliceSelection();
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.WareHouseID = WareHouse != null ? WareHouse.ID : null;
+            con.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
             con.States = (int)ProductInventoryState.Inventory; //只显示在库的
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                SteelRollSlice srs = frm.SelectedItem as SteelRollSlice;
-                AddDeliveryItem(srs);
+                StackOutSheet sheet = UpdatingItem as StackOutSheet;
+                var items = frm.SelectedItems;
+                if (items != null && items.Count > 0)
+                {
+                    foreach (var item in items)
+                    {
+                        sheet.AddItems(item.Key, item.Value);
+                    }
+                    ShowDeliveryItemsOnGrid(sheet);
+                }
             }
         }
 
         private void mnu_AddSteelRoll_Click(object sender, EventArgs e)
         {
+            if (txtWareHouse.Tag == null)
+            {
+                MessageBox.Show("请先选择出货仓库");
+                return;
+            }
             FrmSteelRollMaster frm = new FrmSteelRollMaster();
             frm.ForSelect = true;
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.WareHouseID = WareHouse != null ? WareHouse.ID : null;
+            con.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
             con.States = (int)ProductInventoryState.Inventory; //只显示在库的原材料
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                ProductInventoryItem sr= frm.SelectedItem as ProductInventoryItem;
-                AddDeliveryItem(sr);
+                ProductInventoryItem sr = frm.SelectedItem as ProductInventoryItem;
+                var sheet = UpdatingItem as StackOutSheet;
+                sheet.AddItems(sr, 1);
+                ShowDeliveryItemsOnGrid(sheet);
             }
         }
 
@@ -557,7 +394,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     if (row.Tag != null) items.Remove(row.Tag as StackOutItem);
                 }
-                ShowDeliveryItemsOnGrid(items);
+                ShowDeliveryItemsOnGrid(UpdatingItem as StackOutSheet);
             }
         }
 
@@ -586,11 +423,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void lnkLinker_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (Customer != null)
+            if (txtCustomer.Tag != null)
             {
                 FrmContactMaster frm = new FrmContactMaster();
                 ContactSearchCondition con = new ContactSearchCondition();
-                con.CompanyID = Customer.ID;
+                con.CompanyID = (txtCustomer.Tag as CompanyInfo).ID;
                 frm.SearchCondition = con;
                 frm.ForSelect = true;
                 if (frm.ShowDialog() == DialogResult.OK)
@@ -606,21 +443,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void cmbSheetType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbSheetType.SelectedIndex == 1)
-            {
-                btn_AddSlice.Visible = true;
-                //mnu_AddOrderItem.Visible = false;
-            }
-            else
-            {
-                btn_AddSlice.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
-                //mnu_AddOrderItem.Visible = true;
-            }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkDriver_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmStaffMaster frm = new FrmStaffMaster();
             frm.ForSelect = true;

@@ -88,6 +88,7 @@ namespace LJH.Inventory.BLL
                 WareHouseID = wh.ID,
                 Customer = sliceSheet.Customer,
                 SourceRoll = sr.ID,  //设置加工来源
+                Memo = sliceSheet.Memo,
             };
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi, unitWork);
             CommandResult ret = unitWork.Commit();

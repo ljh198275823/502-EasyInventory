@@ -49,6 +49,8 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridview1 = new System.Windows.Forms.DataGridView();
+            this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
+            this.label8 = new System.Windows.Forms.Label();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +61,6 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridview1)).BeginInit();
@@ -67,6 +68,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.customerCombobox1);
+            this.panel5.Controls.Add(this.label8);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.txtLength);
@@ -87,7 +90,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(494, 19);
+            this.label4.Location = new System.Drawing.Point(672, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 89;
@@ -96,7 +99,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(368, 19);
+            this.label3.Location = new System.Drawing.Point(546, 19);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 88;
@@ -105,7 +108,7 @@
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(529, 15);
+            this.txtLength.Location = new System.Drawing.Point(707, 15);
             this.txtLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -126,7 +129,7 @@
             // txtWeight
             // 
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(403, 15);
+            this.txtWeight.Location = new System.Drawing.Point(581, 15);
             this.txtWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -149,7 +152,7 @@
             this.chk开条.AutoSize = true;
             this.chk开条.Checked = true;
             this.chk开条.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开条.Location = new System.Drawing.Point(684, 17);
+            this.chk开条.Location = new System.Drawing.Point(862, 17);
             this.chk开条.Name = "chk开条";
             this.chk开条.Size = new System.Drawing.Size(48, 16);
             this.chk开条.TabIndex = 85;
@@ -162,7 +165,7 @@
             this.chk开吨.AutoSize = true;
             this.chk开吨.Checked = true;
             this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开吨.Location = new System.Drawing.Point(739, 17);
+            this.chk开吨.Location = new System.Drawing.Point(917, 17);
             this.chk开吨.Name = "chk开吨";
             this.chk开吨.Size = new System.Drawing.Size(48, 16);
             this.chk开吨.TabIndex = 84;
@@ -175,7 +178,7 @@
             this.chk开平.AutoSize = true;
             this.chk开平.Checked = true;
             this.chk开平.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开平.Location = new System.Drawing.Point(630, 17);
+            this.chk开平.Location = new System.Drawing.Point(808, 17);
             this.chk开平.Name = "chk开平";
             this.chk开平.Size = new System.Drawing.Size(48, 16);
             this.chk开平.TabIndex = 83;
@@ -240,6 +243,7 @@
             this.btnOk.TabIndex = 90;
             this.btnOk.Text = "确定(&O)";
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // panel1
             // 
@@ -272,8 +276,7 @@
             this.colRealThick,
             this.colCustomer,
             this.colCount,
-            this.colDeliveryCount,
-            this.colCheck});
+            this.colDeliveryCount});
             this.dataGridview1.Location = new System.Drawing.Point(2, 50);
             this.dataGridview1.Name = "dataGridview1";
             this.dataGridview1.RowHeadersVisible = false;
@@ -283,6 +286,23 @@
             this.dataGridview1.TabIndex = 118;
             this.dataGridview1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridview1_CellContentClick);
             this.dataGridview1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridview1_CellEndEdit);
+            // 
+            // customerCombobox1
+            // 
+            this.customerCombobox1.FormattingEnabled = true;
+            this.customerCombobox1.Location = new System.Drawing.Point(398, 15);
+            this.customerCombobox1.Name = "customerCombobox1";
+            this.customerCombobox1.Size = new System.Drawing.Size(121, 20);
+            this.customerCombobox1.TabIndex = 93;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(366, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.TabIndex = 92;
+            this.label8.Text = "客户";
             // 
             // colWareHouse
             // 
@@ -354,13 +374,6 @@
             this.colDeliveryCount.Name = "colDeliveryCount";
             this.colDeliveryCount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // colCheck
-            // 
-            this.colCheck.HeaderText = "";
-            this.colCheck.Name = "colCheck";
-            this.colCheck.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCheck.Width = 30;
-            // 
             // FrmSteelRollSliceSelection
             // 
             this.AcceptButton = this.btnOk;
@@ -405,6 +418,8 @@
         protected System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridview1;
+        private Controls.CustomerCombobox customerCombobox1;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
@@ -415,6 +430,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheck;
     }
 }

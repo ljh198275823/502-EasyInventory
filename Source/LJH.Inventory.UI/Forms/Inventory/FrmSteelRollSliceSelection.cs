@@ -26,6 +26,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private List<ProductInventoryItem> _ProductInventorys = null;
         #endregion
 
+        public Dictionary<ProductInventoryItem, decimal> SelectedItems { get; set; }
+
         #region 私有方法
         private void FreshData()
         {
@@ -40,6 +42,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
+                if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer.Contains(customerCombobox1.Text)).ToList();
                 if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Product.Weight == txtWeight.DecimalValue).ToList();
                 if (txtLength.DecimalValue > 0) items = items.Where(it => it.Product.Length == txtLength.DecimalValue).ToList();
                 items = items.Where(it => (chk开平.Checked && it.Product.Model == chk开平.Text) ||
@@ -62,6 +65,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             base.Init();
             this.cmbSpecification.Init();
             this.categoryComboBox1.Init();
+            this.customerCombobox1.Init();
         }
 
         protected override List<object> GetDataSource()
@@ -74,7 +78,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             else
             {
-
                 _ProductInventorys = new SteelRollSliceBLL(AppSettings.Current.ConnStr).GetItems(SearchCondition).QueryObjects;
             }
             List<object> records = FilterData();
@@ -97,6 +100,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
+        #region 事件处理程序
         private void FreshDate_Clicked(object sender, EventArgs e)
         {
             FreshData();
@@ -141,5 +145,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
             }
         }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            this.SelectedItems = new Dictionary<ProductInventoryItem, decimal>();
+            foreach (DataGridViewRow row in dataGridview1.Rows)
+            {
+                if (row.Cells["colDeliveryCount"].Value != null)
+                {
+                    int count = 0;
+                    if (int.TryParse(row.Cells["colDeliveryCount"].Value.ToString(), out count))
+                    {
+                        this.SelectedItems.Add(row.Tag as ProductInventoryItem, count);
+                    }
+                }
+            }
+            this.DialogResult = DialogResult.OK;
+        }
+        #endregion
     }
 }

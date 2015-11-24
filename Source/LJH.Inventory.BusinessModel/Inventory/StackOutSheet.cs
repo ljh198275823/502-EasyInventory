@@ -10,6 +10,22 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public class StackOutSheet : ISheet<string>
     {
+        #region 工厂方法
+        public static StackOutSheet Create(CompanyInfo customer, WareHouse wareHouse)
+        {
+            return new StackOutSheet()
+            {
+                ClassID = StackOutSheetType.DeliverySheet,
+                SheetDate = DateTime.Now,
+                LastActiveDate = DateTime.Now,
+                CustomerID = customer != null ? customer.ID : null,
+                WareHouseID = wareHouse != null ? wareHouse.ID : null,
+                State = SheetState.Add,
+                Items = new List<StackOutItem>()
+            };
+        }
+        #endregion
+
         #region 构造函数
         public StackOutSheet()
         {
@@ -103,7 +119,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return Items.Sum(item => item.Amount);
+                return Items.Sum(item => item.CalAmount());
             }
         }
         #endregion
@@ -153,6 +169,61 @@ namespace LJH.Inventory.BusinessModel
         public ISheet<string> Clone()
         {
             return MemberwiseClone() as ISheet<string>;
+        }
+        #endregion
+
+        #region 公共方法
+        public void AddItems(ProductInventoryItem inventory, decimal count)
+        {
+            if (Items == null) Items = new List<StackOutItem>();
+            var si = Items.SingleOrDefault(it => it.InventoryItem == inventory.ID);
+            if (si != null)
+            {
+                if (si.Count + count <= inventory.Count) si.Count += count; //增加的数量不能超过库存项的库存数
+            }
+            else
+            {
+                si = new StackOutItem()
+                {
+                    ID = Guid.NewGuid(),
+                    ProductID = inventory.ProductID,
+                    Length = inventory.Length,
+                    Weight = inventory.Weight,
+                    Unit = inventory.Unit,
+                    InventoryItem = inventory.ID,
+                    SheetNo = this.ID,
+                    Price = 0,
+                    Count = count,
+                };
+                Items.Add(si);
+            }
+        }
+        /// <summary>
+        /// 获取
+        /// </summary>
+        /// <returns></returns>
+        public List<StackOutItem> GetSummaryItems()
+        {
+            if (Items == null) return null;
+            List<StackOutItem> ret = new List<StackOutItem>();
+            var groups = from it in Items
+                         group it by it.ProductID;
+            foreach (var g in groups)
+            {
+                var si = new StackOutItem()
+                {
+                    ID = Guid.Empty,
+                    ProductID = g.First().ProductID,
+                    Length = g.First().Length,
+                    Weight = g.First().Weight,
+                    Unit = g.First().Unit,
+                    Count = g.Sum(it => it.Count),
+                    SheetNo = this.ID,
+                    Price = g.First().Price,
+                };
+                ret.Add(si);
+            }
+            return ret;
         }
         #endregion
     }

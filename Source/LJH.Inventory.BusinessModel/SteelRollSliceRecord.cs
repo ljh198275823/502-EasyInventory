@@ -79,6 +79,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置加工者姓名，如果有多个人员，每个人员之间用逗号分隔
         /// </summary>
         public string Slicer { get; set; }
+        /// <summary>
+        /// 获取或设置备注
+        /// </summary>
+        public string Memo { get; set; }
         #endregion
     }
 }
