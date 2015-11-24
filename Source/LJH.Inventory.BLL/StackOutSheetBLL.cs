@@ -103,13 +103,13 @@ namespace LJH.Inventory.BLL
                         CustomerID = sheet.CustomerID,
                         SheetID = sheet.ID,
                         OrderID = si.OrderID,
-                        Amount = si.CalAmount(),
+                        Amount = si.Amount,
                     };
                     crs.Add(cr);
                 }
                 else
                 {
-                    cr.Amount += si.CalAmount();
+                    cr.Amount += si.Amount;
                 }
             }
             foreach (CustomerReceivable cr in crs)
@@ -313,7 +313,7 @@ namespace LJH.Inventory.BLL
             if (info.ClassID == StackOutSheetType.DeliverySheet)
             {
                 AddReceivables(info, unitWork);         //类型为送货单的出库单出货时增加应收
-                //AddTax(info, unitWork);
+                if (info.WithTax) AddTax(info, unitWork); //含税时需要增加应开增值税发票
             }
         }
 

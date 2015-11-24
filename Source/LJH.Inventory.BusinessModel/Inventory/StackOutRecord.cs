@@ -75,10 +75,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Count { get; set; }
         /// <summary>
-        /// 获取或设置货物总金额
-        /// </summary>
-        public decimal Amount { get; set; }
-        /// <summary>
         /// 获取或设置是否含税
         /// </summary>
         public bool WithTax { get; set; }
@@ -118,6 +114,14 @@ namespace LJH.Inventory.BusinessModel
         public string Specification
         {
             get { return Product != null ? Product.Specification : string.Empty; }
+        }
+
+        public decimal Amount
+        {
+            get
+            {
+                return Weight.HasValue ? Weight.Value * Price * Count : Count * Price;  //如果有重量,即单价为重量计价
+            }
         }
         #endregion
     }

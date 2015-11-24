@@ -119,7 +119,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return Items.Sum(item => item.CalAmount());
+                return Items.Sum(item => item.Amount);
             }
         }
         #endregion
@@ -194,6 +194,7 @@ namespace LJH.Inventory.BusinessModel
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
+                    Memo = inventory.Memo,
                 };
                 Items.Add(si);
             }
@@ -220,6 +221,7 @@ namespace LJH.Inventory.BusinessModel
                     Count = g.Sum(it => it.Count),
                     SheetNo = this.ID,
                     Price = g.First().Price,
+                    Memo = g.First().Memo
                 };
                 ret.Add(si);
             }

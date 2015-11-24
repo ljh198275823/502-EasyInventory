@@ -82,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWeight"].Value = item.Weight;
             row.Cells["colPrice"].Value = item.Price;
             row.Cells["colCount"].Value = item.Count;
-            row.Cells["colTotal"].Value = item.CalAmount();
+            row.Cells["colTotal"].Value = item.Amount;
             row.Cells["colMemo"].Value = item.Memo;
         }
 
@@ -318,7 +318,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     item.Price = value;
                     foreach (var it in sheet.Items)
                     {
-                        it.Price = value;
+                        if (it.ProductID == item.ProductID) it.Price = value;
                     }
                 }
                 else if (col.Name == "colCount")
@@ -336,7 +336,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 //{
                 //    item.Weight = value > 0 ? (decimal?)value : null;
                 //}
-                row.Cells["colTotal"].Value = item.CalAmount();
+                row.Cells["colTotal"].Value = item.Amount;
             }
             ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
         }

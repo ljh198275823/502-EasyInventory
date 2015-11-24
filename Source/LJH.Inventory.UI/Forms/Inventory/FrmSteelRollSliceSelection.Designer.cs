@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
+            this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
@@ -49,8 +51,6 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridview1 = new System.Windows.Forms.DataGridView();
-            this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
-            this.label8 = new System.Windows.Forms.Label();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +61,7 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridview1)).BeginInit();
@@ -84,8 +85,26 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1111, 48);
+            this.panel5.Size = new System.Drawing.Size(1185, 48);
             this.panel5.TabIndex = 7;
+            // 
+            // customerCombobox1
+            // 
+            this.customerCombobox1.FormattingEnabled = true;
+            this.customerCombobox1.Location = new System.Drawing.Point(398, 15);
+            this.customerCombobox1.Name = "customerCombobox1";
+            this.customerCombobox1.Size = new System.Drawing.Size(121, 20);
+            this.customerCombobox1.TabIndex = 93;
+            this.customerCombobox1.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(366, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.TabIndex = 92;
+            this.label8.Text = "客户";
             // 
             // label4
             // 
@@ -227,7 +246,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(959, 471);
+            this.btnClose.Location = new System.Drawing.Point(996, 471);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 41);
             this.btnClose.TabIndex = 91;
@@ -237,7 +256,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(837, 471);
+            this.btnOk.Location = new System.Drawing.Point(874, 471);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 41);
             this.btnOk.TabIndex = 90;
@@ -247,13 +266,13 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Location = new System.Drawing.Point(0, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1111, 50);
+            this.panel1.Size = new System.Drawing.Size(1185, 50);
             this.panel1.TabIndex = 117;
             // 
             // dataGridview1
@@ -261,9 +280,9 @@
             this.dataGridview1.AllowUserToAddRows = false;
             this.dataGridview1.AllowUserToDeleteRows = false;
             this.dataGridview1.AllowUserToResizeRows = false;
-            this.dataGridview1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridview1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridview1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridview1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridview1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -276,33 +295,17 @@
             this.colRealThick,
             this.colCustomer,
             this.colCount,
-            this.colDeliveryCount});
+            this.colDeliveryCount,
+            this.colMemo});
             this.dataGridview1.Location = new System.Drawing.Point(2, 50);
             this.dataGridview1.Name = "dataGridview1";
             this.dataGridview1.RowHeadersVisible = false;
             this.dataGridview1.RowTemplate.Height = 23;
             this.dataGridview1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridview1.Size = new System.Drawing.Size(1106, 402);
+            this.dataGridview1.Size = new System.Drawing.Size(1180, 402);
             this.dataGridview1.TabIndex = 118;
             this.dataGridview1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridview1_CellContentClick);
             this.dataGridview1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridview1_CellEndEdit);
-            // 
-            // customerCombobox1
-            // 
-            this.customerCombobox1.FormattingEnabled = true;
-            this.customerCombobox1.Location = new System.Drawing.Point(398, 15);
-            this.customerCombobox1.Name = "customerCombobox1";
-            this.customerCombobox1.Size = new System.Drawing.Size(121, 20);
-            this.customerCombobox1.TabIndex = 93;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(366, 17);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 12);
-            this.label8.TabIndex = 92;
-            this.label8.Text = "客户";
             // 
             // colWareHouse
             // 
@@ -331,24 +334,24 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle5;
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colLength
             // 
-            dataGridViewCellStyle2.Format = "N2";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "N2";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle6;
             this.colLength.HeaderText = "长度(米)";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
             // colRealThick
             // 
-            dataGridViewCellStyle3.Format = "N3";
-            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "N3";
+            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle7;
             this.colRealThick.HeaderText = "厚度";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
@@ -361,8 +364,8 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle4.Format = "N0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Format = "N0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle8;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
@@ -374,13 +377,20 @@
             this.colDeliveryCount.Name = "colDeliveryCount";
             this.colDeliveryCount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            this.colMemo.Width = 150;
+            // 
             // FrmSteelRollSliceSelection
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(1111, 554);
+            this.ClientSize = new System.Drawing.Size(1185, 554);
             this.Controls.Add(this.dataGridview1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.panel1);
@@ -430,5 +440,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

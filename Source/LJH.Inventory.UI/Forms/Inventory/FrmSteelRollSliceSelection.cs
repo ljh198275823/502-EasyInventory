@@ -42,7 +42,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
-                if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer.Contains(customerCombobox1.Text)).ToList();
+                if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => !string.IsNullOrEmpty(it.Customer) && it.Customer.Contains(customerCombobox1.Text)).ToList();
                 if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Product.Weight == txtWeight.DecimalValue).ToList();
                 if (txtLength.DecimalValue > 0) items = items.Where(it => it.Product.Length == txtLength.DecimalValue).ToList();
                 items = items.Where(it => (chk开平.Checked && it.Product.Model == chk开平.Text) ||
@@ -97,6 +97,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCount"].Value = pi.Count;
             row.Cells["colRealThick"].Value = pi.RealThick;
             row.Cells["colCustomer"].Value = pi.Customer;
+            row.Cells["colMemo"].Value = pi.Memo;
         }
         #endregion
 

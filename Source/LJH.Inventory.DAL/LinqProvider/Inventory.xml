@@ -148,7 +148,6 @@
       <Column Name="Unit" Member="Unit" DbType="nvarchar(10)"  UpdateCheck="Never"/>
       <Column Name="Price" Member="Price" DbType="decimal(18, 4) not Null"  UpdateCheck="Never"/>
       <Column Name="Count" Member="Count" DbType="decimal(10,2) NOT NULL"  UpdateCheck="Never"/>
-      <Column Name="Amount" Member="Amount"  DbType="decimal(18,4) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>

@@ -53,7 +53,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置单价
         /// </summary>
         public decimal Price { get; set; }
-        
         /// <summary>
         /// 获取或设置商品数量
         /// </summary>
@@ -68,9 +67,12 @@ namespace LJH.Inventory.BusinessModel
         public string Memo { get; set; }
         #endregion
 
-        public decimal CalAmount()
+        public decimal Amount
         {
-            return Weight.HasValue ? Weight.Value * Price * Count : Count * Price;  //如果有重量,即单价为重量计价
+            get
+            {
+                return Weight.HasValue ? Weight.Value * Price * Count : Count * Price;  //如果有重量,即单价为重量计价
+            }
         }
     }
 }
