@@ -33,11 +33,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             List<ProductInventoryItem> records = null;
             if (SearchCondition == null)
             {
-                records = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+                records = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             }
             else
             {
-                records = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+                records = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             return (from item in records
                     orderby item.AddDate descending

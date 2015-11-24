@@ -32,8 +32,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             var Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            this.txtCustomer.Tag = Customer;
             var WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
             this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
+            this.txtWareHouse.Tag = WareHouse;
             dtSheetDate.Value = item.SheetDate;
             this.txtLinker.Text = item.Linker;
             this.txtLinkerPhone.Text = item.LinkerCall;
@@ -94,15 +96,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             return items;
         }
 
-        private decimal GetTotalAmount()
-        {
-            decimal sum = 0;
-            foreach (DataGridViewRow row in ItemsGrid.Rows)
-            {
-                if (row.Tag != null) sum += (row.Tag as StackOutItem).CalAmount();
-            }
-            return sum;
-        }
         #endregion
 
         #region 重写基类方法
@@ -308,6 +301,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
             DataGridViewRow row = ItemsGrid.Rows[e.RowIndex];
             if (row.Tag != null)
@@ -322,18 +316,29 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (col.Name == "colPrice")
                 {
                     item.Price = value;
+                    foreach (var it in sheet.Items)
+                    {
+                        it.Price = value;
+                    }
                 }
                 else if (col.Name == "colCount")
                 {
-                    item.Count = value;
+                    if (item.ID != Guid.Empty)
+                    {
+                        item.Count = value;
+                    }
+                    else
+                    {
+                        row.Cells[e.ColumnIndex].Value = item.Count;
+                    }
                 }
-                else if (col.Name == "colWeight")
-                {
-                    item.Weight = value > 0 ? (decimal?)value : null;
-                }
+                //else if (col.Name == "colWeight")
+                //{
+                //    item.Weight = value > 0 ? (decimal?)value : null;
+                //}
                 row.Cells["colTotal"].Value = item.CalAmount();
             }
-            ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = GetTotalAmount();
+            ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
         }
 
         private void btn_AddSlice_Click(object sender, EventArgs e)

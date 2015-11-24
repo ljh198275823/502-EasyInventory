@@ -53,7 +53,9 @@ namespace LJH.Inventory.BLL
         {
             if (con == null) con = new ProductInventoryItemSearchCondition();
             if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).ExcludeModel = MODEL;  //排除原材料库存项
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            var ret= ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            if (ret.QueryObjects != null) ret.QueryObjects = ret.QueryObjects.Where(it => it.Count != 0).ToList();
+            return ret;
         }
         /// <summary>
         /// 建立库存

@@ -38,17 +38,20 @@ namespace LJH.Inventory.BLL
             {
                 (con as ProductInventoryItemSearchCondition).Model = MODEL;
             }
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            var ret= ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            if (ret.QueryObjects != null) ret.QueryObjects = ret.QueryObjects.Where(it => it.Count != 0).ToList();
+            return ret;
         }
 
         public CommandResult Add(ProductInventoryItem sr)
         {
-            return new ProductInventoryItemBLL(RepoUri).Add(sr);
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert (sr);
         }
 
         public CommandResult Update(ProductInventoryItem sr)
         {
-            return new ProductInventoryItemBLL(RepoUri).Update(sr);
+            var o = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sr.ID).QueryObject;
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o);
         }
         /// <summary>
         /// 原材料加工

@@ -51,23 +51,7 @@ namespace LJH.Inventory.BLL
         {
             List<ProductInventoryItem> items = new List<ProductInventoryItem>();
             items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.WaitShipping && item.ProductID == si.ProductID && item.DeliveryItem == si.ID)); //出货单项待出货的项最高优先级
-            if (si.OrderItem != null) items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.Reserved && item.ProductID == si.ProductID && item.DeliveryItem == null && item.OrderItem == si.OrderItem)); //订单备货优先级次之
-            //if (inventoryOutType == InventoryOutType.FIFO) //其它未分配的项优先级最后
-            //{
-            //    items.AddRange(from item in inventoryItems
-            //                   where item.ProductID == si.ProductID && item.State == ProductInventoryState.Inventory && item.DeliveryItem == null && item.OrderItem == null
-            //                   orderby item.AddDate ascending
-            //                   select item);
-            //}
-            //else
-            //{
-            //    items.AddRange(from item in inventoryItems
-            //                   where item.ProductID == si.ProductID && item.State == ProductInventoryState.Inventory && item.DeliveryItem == null && item.OrderItem == null
-            //                   orderby item.AddDate descending
-            //                   select item);
-            //}
             if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("产品 {0} 库存不足，出货失败!", si.ProductID));
-
             decimal count = si.Count;
             foreach (ProductInventoryItem item in items)
             {
@@ -133,6 +117,107 @@ namespace LJH.Inventory.BLL
                 ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
             }
         }
+
+        private void AddTax(StackOutSheet sheet, IUnitWork unitWork)
+        {
+            CustomerReceivable tax = null;
+            DateTime dt = DateTime.Now;
+            tax = new CustomerReceivable()
+            {
+                ID = Guid.NewGuid(),
+                CreateDate = dt,
+                ClassID = CustomerReceivableType.CustomerTax,
+                CustomerID = sheet.CustomerID,
+                SheetID = sheet.ID,
+                Amount = sheet.Amount,
+            };
+            ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(tax, unitWork);
+        }
+
+        //分配, 为某个送货单项分配指定数量的库存
+        private void F_Assign(ProductInventoryItem source, StackOutItem si, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems)
+        {
+            if (source.Count >= si.Count)
+            {
+                if (!updatingitems.Exists(it => it.ID == source.ID))
+                {
+                    updatingitems.Add(source);
+                    cloneItems.Add(source.Clone());
+                }
+                source.Count -= si.Count;
+
+                ProductInventoryItem newItem = source.Clone();
+                newItem.ID = Guid.NewGuid();
+                newItem.SourceID = source.ID;
+                newItem.Count = si.Count;
+                newItem.State = ProductInventoryState.WaitShipping;
+                newItem.DeliveryItem = si.ID;
+                newItem.DeliverySheet = si.SheetNo;
+                addingItems.Add(newItem);
+            }
+            else
+            {
+                throw new Exception("出货数量超出库存数量");
+            }
+        }
+
+        //更新分配置的数量,
+        private void F_Change(ProductInventoryItem source, ProductInventoryItem des, decimal newCount, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems)
+        {
+            if (des.Count == newCount) return;
+            if (!updatingitems.Exists(it => it.ID == source.ID))
+            {
+                updatingitems.Add(source);
+                cloneItems.Add(source.Clone());
+            }
+            if (!updatingitems.Exists(it => it.ID == des.ID))
+            {
+                updatingitems.Add(des);
+                cloneItems.Add(des.Clone());
+            }
+            //两行的顺序不能反!
+            source.Count += des.Count - newCount; //相减的两者不管谁大谁小都用同一个表达式,不会出错的
+            des.Count = newCount;
+        }
+
+        //合并项,将deleting项的数量合并到source中,并删除deleting
+        private void F_Merge(ProductInventoryItem source, ProductInventoryItem deleting, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems)
+        {
+            if (!updatingitems.Exists(it => it.ID == source.ID))
+            {
+                updatingitems.Add(source);
+                cloneItems.Add(source.Clone());
+            }
+            source.Count += source.Count;
+            deletingItems.Add(source);
+        }
+
+        private void F_CommitChanges(List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems, IUnitWork unitWork)
+        {
+            var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+            if (addingItems != null && addingItems.Count > 0)
+            {
+                foreach (var item in addingItems)
+                {
+                    provider.Insert(item, unitWork);
+                }
+            }
+            if (updatingitems != null && updatingitems.Count > 0)
+            {
+                foreach (var item in updatingitems)
+                {
+                    var clone = cloneItems.Single(it => it.ID == item.ID);
+                    provider.Update(item, clone, unitWork);
+                }
+            }
+            if (deletingItems != null && deletingItems.Count > 0)
+            {
+                foreach (var item in deletingItems)
+                {
+                    provider.Delete(item, unitWork);
+                }
+            }
+        }
         #endregion
 
         #region 重写基类方法
@@ -155,76 +240,64 @@ namespace LJH.Inventory.BLL
         protected override void DoAdd(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoAdd(info, unitWork, dt, opt);
+            List<ProductInventoryItem> addingItems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> updatingitems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> cloneItems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> deletingItems = new List<ProductInventoryItem>();
             foreach (var item in info.Items)  //将原材料的项的状态变成待出货状态
             {
                 var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
                 if (item.InventoryItem != null)
                 {
-                    ProductInventoryItem sr = isrp.GetByID(item.InventoryItem.Value).QueryObject;
-                    if (sr != null)
+                    ProductInventoryItem pi = isrp.GetByID(item.InventoryItem.Value).QueryObject;
+                    if (pi != null)
                     {
-                        if (sr.Count >= item.Count)
-                        {
-                            ProductInventoryItem cloneSr = sr.Clone();
-                            cloneSr.Count -= item.Count;
-                            isrp.Update(sr, cloneSr, unitWork);
-
-                            ProductInventoryItem newItem = sr.Clone();
-                            newItem.ID = Guid.NewGuid();
-                            newItem.SourceID = sr.ID;
-                            newItem.Count = item.Count;
-                            newItem.State = ProductInventoryState.WaitShipping;
-                            newItem.DeliveryItem = item.ID;
-                            newItem.DeliverySheet = info.ID;
-                            isrp.Insert(newItem, unitWork);
-                        }
-                        else
-                        {
-                            throw new Exception("出货数量超出库存数量");
-                        }
+                        F_Assign(pi, item, addingItems, updatingitems, cloneItems, deletingItems);
                     }
                 }
             }
+            F_CommitChanges(addingItems, updatingitems, cloneItems, deletingItems, unitWork);
         }
 
         protected override void DoUpdate(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoUpdate(info, unitWork, dt, opt);
             var original = GetByID(info.ID).QueryObject;
-            if (original != null)
+            List<ProductInventoryItem> addingItems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> updatingitems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> cloneItems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> deletingItems = new List<ProductInventoryItem>();
+            var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+            foreach (var item in info.Items)
             {
-                var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
-                foreach (var item in info.Items)
+                if (item.InventoryItem != null) //如果有进行分配
                 {
-                    if (item.InventoryItem != null)
+                    ProductInventoryItem source = provider.GetByID(item.InventoryItem.Value).QueryObject;
+                    if (original.Items.Exists(it => it.ID == item.ID))
                     {
-                        var sr = isrp.GetByID(item.InventoryItem.Value).QueryObject;
-                        if (sr != null)
-                        {
-                            var cloneSr = sr.Clone();
-                            sr.State = ProductInventoryState.WaitShipping;
-                            sr.DeliverySheet = info.ID;
-                            sr.DeliveryItem = item.ID;
-                            isrp.Update(sr, cloneSr, unitWork);
-                        }
+                        ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                        con.DeliveryItem = item.ID;
+                        var assigned = provider.GetItems(con).QueryObjects[0];  //每一个出货单项有且只有一项分配项
+                        F_Change(source, assigned, item.Count, addingItems, updatingitems, cloneItems, deletingItems);
                     }
-                }
-                foreach (var item in original.Items)
-                {
-                    if (!info.Items.Exists(it => it.ID == item.ID) && item.InventoryItem.HasValue)
+                    else
                     {
-                        ProductInventoryItem sr = isrp.GetByID(item.InventoryItem.Value).QueryObject;
-                        if (sr != null)
-                        {
-                            ProductInventoryItem cloneSr = sr.Clone();
-                            sr.State = ProductInventoryState.Inventory;
-                            sr.DeliveryItem = null;
-                            sr.DeliverySheet = null;
-                            isrp.Update(sr, cloneSr, unitWork);
-                        }
+                        F_Assign(source, item, addingItems, updatingitems, cloneItems, deletingItems);
                     }
                 }
             }
+            foreach (var item in original.Items)
+            {
+                if (item.InventoryItem != null && !info.Items.Exists(it => it.ID == item.ID))
+                {
+                    ProductInventoryItem source = provider.GetByID(item.InventoryItem.Value).QueryObject;
+                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                    con.DeliveryItem = item.ID;
+                    var assigned = provider.GetItems(con).QueryObjects[0];  //每一个出货单项有且只有一项分配项
+                    F_Merge(source, assigned, addingItems, updatingitems, cloneItems, deletingItems);
+                }
+            }
+            F_CommitChanges(addingItems, updatingitems, cloneItems, deletingItems, unitWork);
         }
 
         protected override void DoShip(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
@@ -236,39 +309,52 @@ namespace LJH.Inventory.BLL
             info.State = SheetState.Shipped;
             provider.Update(info, sheet1, unitWork);
 
-            if (!string.IsNullOrEmpty(info.WareHouseID)) InventoryOut(info, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
-            if (info.ClassID == StackOutSheetType.DeliverySheet) AddReceivables(info, unitWork);         //类型为送货单的出库单出货时增加应收
+            InventoryOut(info, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
+            if (info.ClassID == StackOutSheetType.DeliverySheet)
+            {
+                AddReceivables(info, unitWork);         //类型为送货单的出库单出货时增加应收
+                //AddTax(info, unitWork);
+            }
         }
 
         protected override void DoNullify(StackOutSheet info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoNullify(info, unitWork, dt, opt);
+            List<ProductInventoryItem> addingItems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> updatingitems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> cloneItems = new List<ProductInventoryItem>();
+            List<ProductInventoryItem> deletingItems = new List<ProductInventoryItem>();
+            var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
             foreach (var item in info.Items)  //将原材料的项的状态恢复到在库状态
             {
-                var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.ProductID = item.ProductID;
                 con.DeliveryItem = item.ID;
-                List<ProductInventoryItem> piis = isrp.GetItems(con).QueryObjects;
-                ProductInventoryItem source = isrp.GetByID(item.InventoryItem.Value).QueryObject;
-                ProductInventoryItem clone = source.Clone();
+                List<ProductInventoryItem> piis = provider.GetItems(con).QueryObjects;
+                ProductInventoryItem sourcePi = null;
+                if (item.InventoryItem != null) sourcePi = provider.GetByID(item.InventoryItem.Value).QueryObject;
                 if (piis != null && piis.Count > 0)
                 {
-                    
-                }
-                if (item.InventoryItem != null)
-                {
-                    
-                    if (source != null)
+                    if (sourcePi != null)
                     {
-                        ProductInventoryItem cloneSr = source.Clone();
-                        source.State = ProductInventoryState.Inventory;
-                        source.DeliveryItem = null;
-                        source.DeliverySheet = null;
-                        isrp.Update(source, cloneSr, unitWork);
+                        foreach (var pi in piis)
+                        {
+                            F_Merge(sourcePi, pi, addingItems, updatingitems, cloneItems, deletingItems);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var pi in piis)
+                        {
+                            var clone = pi.Clone();
+                            pi.State = ProductInventoryState.Inventory;
+                            pi.DeliveryItem = null;
+                            pi.DeliverySheet = null;
+                            provider.Update(pi, clone, unitWork);
+                        }
                     }
                 }
             }
+            F_CommitChanges(addingItems, updatingitems, cloneItems, deletingItems, unitWork);
             //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
             ////如果已经有客户收款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
             //CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
