@@ -34,8 +34,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             this.txtCustomer.Tag = Customer;
             var WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
-            this.txtWareHouse.Text = WareHouse != null ? WareHouse.Name : string.Empty;
-            this.txtWareHouse.Tag = WareHouse;
             dtSheetDate.Value = item.SheetDate;
             this.txtLinker.Text = item.Linker;
             this.txtLinkerPhone.Text = item.LinkerCall;
@@ -98,6 +96,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
+                row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
                 row.Cells["colWeight"].Value = pi != null ? (decimal?)pi.RealThick : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
@@ -174,7 +173,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
             sheet.ID = txtSheetNo.Text == "自动创建" ? string.Empty : this.txtSheetNo.Text;
             sheet.CustomerID = txtCustomer.Tag != null ? (txtCustomer.Tag as CompanyInfo).ID : null;
-            sheet.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
             sheet.SheetDate = dtSheetDate.Value;
             sheet.Linker = txtLinker.Text.Trim();
             sheet.LinkerCall = txtLinkerPhone.Text.Trim();
@@ -294,24 +292,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCustomer.Tag = null;
         }
 
-        private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmWareHouseMaster frm = new FrmWareHouseMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                var w = frm.SelectedItem as WareHouse;
-                txtWareHouse.Tag = w;
-                txtWareHouse.Text = w != null ? w.Name : string.Empty;
-            }
-        }
-
-        private void txtWareHouse_DoubleClick(object sender, EventArgs e)
-        {
-            txtWareHouse.Tag = null;
-            txtWareHouse.Text = string.Empty;
-        }
-
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = ItemsGrid.Rows[e.RowIndex];
@@ -428,14 +408,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btn_AddSlice_Click(object sender, EventArgs e)
         {
-            if (txtWareHouse.Tag == null)
-            {
-                MessageBox.Show("请先选择出货仓库");
-                return;
-            }
             FrmSteelRollSliceSelection frm = new FrmSteelRollSliceSelection();
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
             con.States = (int)ProductInventoryState.Inventory; //只显示在库的
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
@@ -455,15 +429,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void mnu_AddSteelRoll_Click(object sender, EventArgs e)
         {
-            if (txtWareHouse.Tag == null)
-            {
-                MessageBox.Show("请先选择出货仓库");
-                return;
-            }
             FrmSteelRollMaster frm = new FrmSteelRollMaster();
             frm.ForSelect = true;
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.WareHouseID = txtWareHouse.Tag != null ? (txtWareHouse.Tag as WareHouse).ID : null;
             con.States = (int)ProductInventoryState.Inventory; //只显示在库的原材料
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)

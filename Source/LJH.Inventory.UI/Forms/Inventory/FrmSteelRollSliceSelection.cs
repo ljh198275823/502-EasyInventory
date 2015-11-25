@@ -40,6 +40,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<ProductInventoryItem> items = _ProductInventorys;
             if (items != null && items.Count > 0)
             {
+                if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouse.Name == wareHouseComboBox1.Text).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => !string.IsNullOrEmpty(it.Customer) && it.Customer.Contains(customerCombobox1.Text)).ToList();
@@ -63,6 +64,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void Init()
         {
             base.Init();
+            this.wareHouseComboBox1.Init();
             this.cmbSpecification.Init();
             this.categoryComboBox1.Init();
             this.customerCombobox1.Init();
