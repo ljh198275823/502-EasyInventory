@@ -63,6 +63,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     int row = ItemsGrid.Rows.Add();
                     ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
+                    //foreach (var it in sheet.Items)
+                    //{
+                    //    row=ItemsGrid .rows
+                    //}
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
@@ -74,28 +78,37 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             row.Tag = item;
             Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
-            row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
-            row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
-            row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
-            row.Cells["colModel"].Value = p.Model;
-            row.Cells["colLength"].Value = item.Length;
-            row.Cells["colWeight"].Value = item.Weight;
-            row.Cells["colPrice"].Value = item.Price;
-            row.Cells["colCount"].Value = item.Count;
-            row.Cells["colTotal"].Value = item.Amount;
-            row.Cells["colMemo"].Value = item.Memo;
-        }
-
-        private List<StackOutItem> GetDeliveryItemsFromGrid()
-        {
-            List<StackOutItem> items = new List<StackOutItem>();
-            foreach (DataGridViewRow row in ItemsGrid.Rows)
+            if (item.ID == Guid.Empty)
             {
-                if (row.Tag != null) items.Add(row.Tag as StackOutItem);
-            }
-            return items;
-        }
+                row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
+                row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
+                row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
+                row.Cells["colModel"].Value = p.Model;
+                row.Cells["colLength"].Value = item.Length;
+                row.Cells["colWeight"].Value = item.Weight;
+                row.Cells["colPrice"].Value = item.Price;
+                row.Cells["colCount"].Value = item.Count;
+                row.Cells["colTotal"].Value = item.Amount;
+                row.Cells["colMemo"].Value = item.Memo;
 
+                row.Cells["colWeight"].ReadOnly = true;
+                row.Cells["colCount"].ReadOnly = true;
+            }
+            else
+            {
+                ProductInventoryItem pi = null;
+                if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
+                row.Cells["colWeight"].Value = pi != null ? (decimal?)pi.RealThick : null;
+                row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
+                row.Cells["colCount"].Value = item.Count;
+                row.Cells["colTotal"].Value = pi != null ? (pi.Count + item.Count) : item.Amount;
+                row.Cells["colTotal"].Style.Format = "N0";
+                row.Cells["colMemo"].Value = pi != null ? pi.Memo : null;
+               
+                row.Cells["colPrice"].ReadOnly = true;
+                row.Cells["colMemo"].ReadOnly = true;
+            }
+        }
         #endregion
 
         #region 重写基类方法
@@ -301,18 +314,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            DataGridViewRow row = ItemsGrid.Rows[e.RowIndex];
+            StackOutItem item = row.Tag as StackOutItem;
+            if (item == null) return; //表示合计行
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
-            DataGridViewRow row = ItemsGrid.Rows[e.RowIndex];
-            if (row.Tag != null)
+            decimal value;
+            if (row.Cells[e.ColumnIndex].Value != null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out value))
             {
-                StackOutItem item = row.Tag as StackOutItem;
-                decimal value;
-                if (decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out value))
-                {
-                    if (value < 0) value = 0;
-                    row.Cells[e.ColumnIndex].Value = value;
-                }
+                if (value < 0) value = 0;
+
                 if (col.Name == "colPrice")
                 {
                     item.Price = value;
@@ -320,10 +331,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     {
                         if (it.ProductID == item.ProductID) it.Price = value;
                     }
+                    row.Cells[e.ColumnIndex].Value = value;
+                    row.Cells["colTotal"].Value = item.Amount;
                 }
                 else if (col.Name == "colCount")
                 {
-                    if (item.ID != Guid.Empty)
+                    if (value <= Convert.ToInt32(row.Cells["colTotal"].Value)) //数量不能超出库存项的数量
                     {
                         item.Count = value;
                     }
@@ -331,14 +344,86 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     {
                         row.Cells[e.ColumnIndex].Value = item.Count;
                     }
+                    for (int i = e.RowIndex; i >= 0; i--) //找合并送货单项的行
+                    {
+                        var si = ItemsGrid.Rows[i].Tag as StackOutItem;
+                        if (si.ID == Guid.Empty && si.ProductID == item.ProductID)
+                        {
+                            si.Count = sheet.Items.Sum(it => it.ProductID == item.ProductID ? it.Count : 0);
+                            ItemsGrid.Rows[i].Cells["colCount"].Value = si.Count;
+                            ItemsGrid.Rows[i].Cells["colTotal"].Value = si.Amount;
+                            break;
+                        }
+                    }
                 }
-                //else if (col.Name == "colWeight")
-                //{
-                //    item.Weight = value > 0 ? (decimal?)value : null;
-                //}
-                row.Cells["colTotal"].Value = item.Amount;
+                else if (col.Name == "colWeight")
+                {
+                    item.Weight = value > 0 ? (decimal?)value : null;
+                    row.Cells[e.ColumnIndex].Value = value;
+                    for (int i = e.RowIndex; i >= 0; i--) //找合并送货单项的行
+                    {
+                        var si = ItemsGrid.Rows[i].Tag as StackOutItem;
+                        if (si.ID == Guid.Empty && si.ProductID == item.ProductID)
+                        {
+                            ItemsGrid.Rows[i].Cells["colTotal"].Value = item.Amount;
+                            break;
+                        }
+                    }
+                }
+                ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
             }
-            ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
+        }
+
+        private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
+            if (col.Name != "colCount") return;
+            DataGridViewRow row = ItemsGrid.Rows[e.RowIndex];
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
+            StackOutItem item = row.Tag as StackOutItem;
+            if (item == null || item.ID != Guid.Empty) return; //没有点在合并的列上, 不动作
+            List<DataGridViewRow> delingRows = new List<DataGridViewRow>();
+            for (int i = e.RowIndex + 1; i < ItemsGrid.Rows.Count; i++)
+            {
+                StackOutItem d = ItemsGrid.Rows[i].Tag as StackOutItem;
+                if (d != null && d.ID != Guid.Empty)
+                {
+                    delingRows.Add(ItemsGrid.Rows[i]);
+                }
+                else if (d != null)
+                {
+                    ItemsGrid.CurrentCell = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex ];
+                    DataGridViewEditMode oldMode = ItemsGrid.EditMode;
+                    ItemsGrid.EditMode = DataGridViewEditMode.EditProgrammatically;
+                    ItemsGrid.BeginEdit(true);
+                    ItemsGrid.EditMode = oldMode;
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (delingRows.Count > 0) //之前已经展开,则收起
+            {
+                foreach (var dr in delingRows)
+                {
+                    ItemsGrid.Rows.Remove(dr);
+                }
+            }
+            else //之前没有展开,展开
+            {
+                int rowIndex = e.RowIndex + 1;
+                foreach (var si in sheet.Items)
+                {
+                    if (item.ProductID == si.ProductID)
+                    {
+                        ItemsGrid.Rows.Insert(rowIndex);
+                        ShowDeliveryItemOnRow(ItemsGrid.Rows[rowIndex], si);
+                        rowIndex++;
+                    }
+                }
+            }
         }
 
         private void btn_AddSlice_Click(object sender, EventArgs e)
@@ -392,14 +477,26 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void mnu_Remove_Click(object sender, EventArgs e)
         {
-            if (ItemsGrid.SelectedRows.Count > 0)
+            if (ItemsGrid.SelectedCells.Count > 0)
             {
-                List<StackOutItem> items = GetDeliveryItemsFromGrid();
-                foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
+                StackOutSheet sheet = UpdatingItem as StackOutSheet;
+                foreach (DataGridViewCell cell in ItemsGrid.SelectedCells)
                 {
-                    if (row.Tag != null) items.Remove(row.Tag as StackOutItem);
+                    var row = ItemsGrid.Rows[cell.RowIndex];
+                    if (row.Tag != null)
+                    {
+                        StackOutItem si = row.Tag as StackOutItem;
+                        if (si.ID == Guid.Empty)
+                        {
+                            sheet.Items.RemoveAll(it => it.ProductID == si.ProductID);
+                        }
+                        else
+                        {
+                            sheet.Items.Remove(si);
+                        }
+                    }
                 }
-                ShowDeliveryItemsOnGrid(UpdatingItem as StackOutSheet);
+                ShowDeliveryItemsOnGrid(sheet);
             }
         }
 
@@ -460,5 +557,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
+
+        
     }
 }

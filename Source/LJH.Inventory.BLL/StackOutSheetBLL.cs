@@ -188,8 +188,8 @@ namespace LJH.Inventory.BLL
                 updatingitems.Add(source);
                 cloneItems.Add(source.Clone());
             }
-            source.Count += source.Count;
-            deletingItems.Add(source);
+            source.Count += deleting.Count;
+            deletingItems.Add(deleting);
         }
 
         private void F_CommitChanges(List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems, IUnitWork unitWork)
@@ -355,37 +355,6 @@ namespace LJH.Inventory.BLL
                 }
             }
             F_CommitChanges(addingItems, updatingitems, cloneItems, deletingItems, unitWork);
-            //IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(_RepoUri);
-            ////如果已经有客户收款分配项了,则先将分配金额转移到别的应收项里面,并删除此项应收项的分配项.
-            //CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
-            //con.ReceivableID = info.ID;
-            //List<CustomerPaymentAssign> assigns = ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).GetItems(con).QueryObjects;
-            //if (assigns != null && assigns.Count > 0)
-            //{
-            //    foreach (CustomerPaymentAssign assign in assigns)
-            //    {
-            //        if (payforOtherReceivables) (new CustomerPaymentBLL(_RepoUri)).SettleReceivables(assign.PaymentID, c.ID, assign.Amount, null, info.ID, unitWork);
-            //        ProviderFactory.Create<ICustomerPaymentAssignProvider>(_RepoUri).Delete(assign);
-            //    }
-            //}
-            ////删除对应的应收项
-            //CustomerReceivable cr = ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).GetByID(info.ID).QueryObject;
-            //if (cr != null) ProviderFactory.Create<ICustomerReceivableProvider>(_RepoUri).Delete(cr, unitWork);
-
-            ////删除相关的库存分配项
-            //foreach (DeliveryItem si in info.Items)
-            //{
-            //    InventoryItemAssignSearchCondition con1 = new InventoryItemAssignSearchCondition();
-            //    con1.DeliveryItem = si.ID;
-            //    List<InventoryItemAssign> inventoryAssigns = ProviderFactory.Create<IInventoryItemAssignProvider>(_RepoUri).GetItems(con1).QueryObjects;
-            //    if (inventoryAssigns != null && inventoryAssigns.Count > 0)
-            //    {
-            //        foreach (InventoryItemAssign iia in inventoryAssigns)
-            //        {
-            //            ProviderFactory.Create<IInventoryItemAssignProvider>(_RepoUri).Delete(iia, unitWork);
-            //        }
-            //    }
-            //}
         }
         #endregion
 
