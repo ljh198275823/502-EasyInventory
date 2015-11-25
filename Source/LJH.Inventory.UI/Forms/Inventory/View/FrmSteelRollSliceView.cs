@@ -49,21 +49,15 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             base.ShowOperatorRights();
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Check);
             mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
-            mnu_UnReserve.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             ProductInventoryItem c = item as ProductInventoryItem;
             row.Tag = c;
-            if (_Products == null) _Products = new List<Product>();
-            Product p = _Products.SingleOrDefault(it => it.ID == c.ProductID);
-            if (p == null)
-            {
-                p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(c.ProductID).QueryObject;
-                _Products.Add(p);
-            }
+            Product p = c.Product;
             row.Cells["colCategory"].Value = p != null ? p.Category.Name : string.Empty;
+            row.Cells["colWareHouse"].Value = c.WareHouse.Name;
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colWeight"].Value = c.Weight;
             row.Cells["colLength"].Value = c.Length;
@@ -71,7 +65,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();
             row.Cells["colInventorySheet"].Value = c.InventorySheet;
-            row.Cells["colOrderID"].Value = c.OrderID;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
             row.Cells["colCustomer"].Value = c.Customer;
             row.Cells["colMemo"].Value = c.Memo;
@@ -85,27 +78,10 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             if (SteelRollSlice != null)
             {
                 frm.Product = SteelRollSlice.Product;
-                frm.WareHouse = SteelRollSlice.WareHouse;
             }
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 ReFreshData();
-            }
-        }
-
-        private void mnu_UnReserve_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("是否取消选中的订单备货项?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-                    ProductInventoryItem pii = row.Tag as ProductInventoryItem;
-                    CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).UnReserve(pii);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        row.Cells["colOrderID"].Value = string.Empty;
-                    }
-                }
             }
         }
 

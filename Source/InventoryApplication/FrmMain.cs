@@ -454,7 +454,6 @@ namespace InventoryApplication
             this.Text += string.Format(" [{0}]", Application.ProductVersion);
             DoLogIn();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
-            lblDBPath.Text = AppSettings.Current.GetConfigContent("DBPath");
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)

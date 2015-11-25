@@ -119,7 +119,9 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return Items.Sum(item => item.Amount);
+                var items = GetSummaryItems();
+                if (items == null || items.Count == 0) return 0;
+                return items.Sum(item => item.Amount);
             }
         }
         #endregion

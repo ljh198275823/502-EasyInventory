@@ -47,20 +47,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
-            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CreateInventory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CheckView = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_StackRecords = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
-            this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,8 +94,6 @@
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.cmbSpecification);
             this.panel5.Controls.Add(this.label5);
-            this.panel5.Controls.Add(this.wareHouseComboBox1);
-            this.panel5.Controls.Add(this.label1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(1, 0);
             this.panel5.Name = "panel5";
@@ -109,7 +103,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(867, 14);
+            this.label4.Location = new System.Drawing.Point(661, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 89;
@@ -118,7 +112,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(741, 14);
+            this.label3.Location = new System.Drawing.Point(535, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 88;
@@ -127,7 +121,7 @@
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(902, 10);
+            this.txtLength.Location = new System.Drawing.Point(696, 10);
             this.txtLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -148,7 +142,7 @@
             // txtWeight
             // 
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(776, 10);
+            this.txtWeight.Location = new System.Drawing.Point(570, 10);
             this.txtWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -171,7 +165,7 @@
             this.chk开条.AutoSize = true;
             this.chk开条.Checked = true;
             this.chk开条.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开条.Location = new System.Drawing.Point(614, 12);
+            this.chk开条.Location = new System.Drawing.Point(408, 12);
             this.chk开条.Name = "chk开条";
             this.chk开条.Size = new System.Drawing.Size(48, 16);
             this.chk开条.TabIndex = 85;
@@ -184,7 +178,7 @@
             this.chk开吨.AutoSize = true;
             this.chk开吨.Checked = true;
             this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开吨.Location = new System.Drawing.Point(669, 12);
+            this.chk开吨.Location = new System.Drawing.Point(463, 12);
             this.chk开吨.Name = "chk开吨";
             this.chk开吨.Size = new System.Drawing.Size(48, 16);
             this.chk开吨.TabIndex = 84;
@@ -197,7 +191,7 @@
             this.chk开平.AutoSize = true;
             this.chk开平.Checked = true;
             this.chk开平.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开平.Location = new System.Drawing.Point(560, 12);
+            this.chk开平.Location = new System.Drawing.Point(354, 12);
             this.chk开平.Name = "chk开平";
             this.chk开平.Size = new System.Drawing.Size(48, 16);
             this.chk开平.TabIndex = 83;
@@ -209,7 +203,7 @@
             // 
             this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryComboBox1.FormattingEnabled = true;
-            this.categoryComboBox1.Location = new System.Drawing.Point(262, 10);
+            this.categoryComboBox1.Location = new System.Drawing.Point(56, 10);
             this.categoryComboBox1.Name = "categoryComboBox1";
             this.categoryComboBox1.Size = new System.Drawing.Size(121, 20);
             this.categoryComboBox1.TabIndex = 82;
@@ -218,7 +212,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(226, 14);
+            this.label2.Location = new System.Drawing.Point(20, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 81;
@@ -227,7 +221,7 @@
             // cmbSpecification
             // 
             this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(423, 10);
+            this.cmbSpecification.Location = new System.Drawing.Point(217, 10);
             this.cmbSpecification.Name = "cmbSpecification";
             this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
             this.cmbSpecification.TabIndex = 80;
@@ -236,29 +230,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(391, 14);
+            this.label5.Location = new System.Drawing.Point(185, 14);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 79;
             this.label5.Text = "规格";
-            // 
-            // wareHouseComboBox1
-            // 
-            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.wareHouseComboBox1.FormattingEnabled = true;
-            this.wareHouseComboBox1.Location = new System.Drawing.Point(59, 10);
-            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
-            this.wareHouseComboBox1.Size = new System.Drawing.Size(151, 20);
-            this.wareHouseComboBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "仓库";
             // 
             // panel4
             // 
@@ -275,56 +251,47 @@
             this.cMnu_Fresh,
             this.mnu_CreateInventory,
             this.mnu_CheckView,
-            this.mnu_StackRecords,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 142);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // mnu_CreateInventory
             // 
             this.mnu_CreateInventory.Name = "mnu_CreateInventory";
-            this.mnu_CreateInventory.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CreateInventory.Size = new System.Drawing.Size(152, 22);
             this.mnu_CreateInventory.Text = "新建库存";
             this.mnu_CreateInventory.Click += new System.EventHandler(this.mnu_CreateInventory_Click);
             // 
             // mnu_CheckView
             // 
             this.mnu_CheckView.Name = "mnu_CheckView";
-            this.mnu_CheckView.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CheckView.Size = new System.Drawing.Size(152, 22);
             this.mnu_CheckView.Text = "查看盘点记录";
             this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
-            // 
-            // mnu_StackRecords
-            // 
-            this.mnu_StackRecords.Name = "mnu_StackRecords";
-            this.mnu_StackRecords.Size = new System.Drawing.Size(148, 22);
-            this.mnu_StackRecords.Text = "产品进出明细";
-            this.mnu_StackRecords.Visible = false;
-            this.mnu_StackRecords.Click += new System.EventHandler(this.mnu_StackRecords_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // dataGridView1
@@ -336,7 +303,6 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colImage,
-            this.colWareHouse,
             this.colCategory,
             this.colSpecification,
             this.colModel,
@@ -362,13 +328,6 @@
             this.colImage.Name = "colImage";
             this.colImage.ReadOnly = true;
             this.colImage.Width = 30;
-            // 
-            // colWareHouse
-            // 
-            this.colWareHouse.HeaderText = "仓库";
-            this.colWareHouse.Name = "colWareHouse";
-            this.colWareHouse.ReadOnly = true;
-            this.colWareHouse.Width = 120;
             // 
             // colCategory
             // 
@@ -462,11 +421,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
-        private Controls.WareHouseComboBox wareHouseComboBox1;
-        private System.Windows.Forms.ToolStripMenuItem mnu_StackRecords;
         private Controls.SpecificationComboBox cmbSpecification;
         private System.Windows.Forms.Label label5;
         private Controls.CategoryComboBox categoryComboBox1;
@@ -481,7 +437,6 @@
         private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
         private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;

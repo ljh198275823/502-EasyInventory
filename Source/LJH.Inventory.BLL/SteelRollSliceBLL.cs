@@ -29,16 +29,14 @@ namespace LJH.Inventory.BLL
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
             {
                 List<Product> ps = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetItems(null).QueryObjects;
-                List<WareHouse> ws = ProviderFactory.Create<IProvider<WareHouse, string>>(RepoUri).GetItems(null).QueryObjects;
                 var gs = from it in ret.QueryObjects
-                         group it by new { it.ProductID, it.WareHouseID };
+                         group it by new { it.ProductID };
                 foreach (var g in gs)
                 {
                     if (items == null) items = new List<SteelRollSlice>();
                     SteelRollSlice srs = new SteelRollSlice();
                     srs.ID = Guid.Empty;
                     srs.Product = ps.SingleOrDefault(it => it.ID == g.First().ProductID);
-                    srs.WareHouse = ws.SingleOrDefault(it => it.ID == g.First().WareHouseID);
                     srs.Unit = g.First().Unit;
                     srs.WaitShipping = g.Sum(it => it.State == ProductInventoryState.WaitShipping ? it.Count : 0);
                     srs.Reserved = g.Sum(it => it.State == ProductInventoryState.Reserved ? it.Count : 0);

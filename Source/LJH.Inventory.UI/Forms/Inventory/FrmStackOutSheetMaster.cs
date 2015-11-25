@@ -115,11 +115,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSheetNo"].Value = sheet.ID;
             CompanyInfo customer = customerTree1.GetCustomer(sheet.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
-            WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;
-            row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
             row.Cells["colWithTax"].Value = sheet.WithTax;
+            row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
-            row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? sheet.LastActiveDate.ToString("yyyy-MM-dd") : null;
+            row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? (DateTime?)sheet.LastActiveDate: null;
             row.Cells["colLinker"].Value = sheet.Linker;
             row.Cells["colTelphone"].Value = sheet.LinkerCall;
             row.Cells["colAddress"].Value = sheet.Address;

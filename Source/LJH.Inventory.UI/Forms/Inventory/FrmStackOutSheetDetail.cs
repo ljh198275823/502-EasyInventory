@@ -89,7 +89,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colTotal"].Value = item.Amount;
                 row.Cells["colMemo"].Value = item.Memo;
 
-                row.Cells["colWeight"].ReadOnly = true;
                 row.Cells["colCount"].ReadOnly = true;
             }
             else
@@ -97,14 +96,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
                 row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
-                row.Cells["colLength"].Value = pi != null ? (decimal?)pi.RealThick : null;
-                row.Cells["colWeight"].Value = item.Weight;
+                row.Cells["colWeight"].Value = pi != null ? (decimal?)pi.RealThick : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
                 row.Cells["colTotal"].Value = pi != null ? (pi.Count + item.Count) : item.Amount;
                 row.Cells["colTotal"].Style.Format = "N0";
                 row.Cells["colMemo"].Value = pi != null ? pi.Memo : null;
-               
+
+                row.Cells["colWeight"].ReadOnly = true;
                 row.Cells["colPrice"].ReadOnly = true;
                 row.Cells["colMemo"].ReadOnly = true;
             }
@@ -341,15 +340,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     item.Weight = value > 0 ? (decimal?)value : null;
                     row.Cells[e.ColumnIndex].Value = value;
-                    for (int i = e.RowIndex; i >= 0; i--) //找合并送货单项的行
+                    foreach (var it in sheet.Items)
                     {
-                        var si = ItemsGrid.Rows[i].Tag as StackOutItem;
-                        if (si.ID == Guid.Empty && si.ProductID == item.ProductID)
-                        {
-                            ItemsGrid.Rows[i].Cells["colTotal"].Value = item.Amount;
-                            break;
-                        }
+                        if (it.ProductID == item.ProductID) it.Weight = value;
                     }
+                    row.Cells["colTotal"].Value = item.Amount;
                 }
                 ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
             }
@@ -527,6 +522,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
-        
     }
 }

@@ -71,7 +71,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return Weight.HasValue ? Weight.Value * Price * Count : Count * Price;  //如果有重量,即单价为重量计价
+                return Weight.HasValue ? Weight.Value * Price : Count * Price;  //如果有重量,即单价为重量计价
             }
         }
     }

@@ -38,7 +38,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<SteelRollSlice> items = _ProductInventorys;
             if (items != null && items.Count > 0)
             {
-                if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouse.ID == wareHouseComboBox1.SelectedWareHouseID).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
                 if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Product.Weight == txtWeight.DecimalValue).ToList();
@@ -49,8 +48,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return (from p in items
                         orderby p.Product.CategoryID ascending,
                                 SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
-                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
-                                p.WareHouse.Name descending
+                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending
                         select (object)p).ToList();
             }
             return null;
@@ -61,9 +59,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void Init()
         {
             base.Init();
-            this.wareHouseComboBox1.Init();
-            this.wareHouseComboBox1.SelectedIndexChanged -= FreshDate_Clicked;
-            this.wareHouseComboBox1.SelectedIndexChanged += FreshDate_Clicked;
             this.cmbSpecification.Init();
             this.categoryComboBox1.Init();
         }
@@ -99,15 +94,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCategory"].Value = pi.Product.Category == null ? pi.Product.CategoryID : pi.Product.Category.Name;
             row.Cells["colSpecification"].Value = pi.Product.Specification;
             row.Cells["colModel"].Value = pi.Product.Model;
-            row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
             row.Cells["colWeight"].Value = pi.Product.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colWaitShipping"].Value = pi.WaitShipping;
             row.Cells["colValid"].Value = pi.Valid;
             row.Cells["colTotal"].Value = pi.Total;
-            if(!_ProductInventorys .Exists (it=>it.Product .ID ==pi.Product .ID && it.WareHouse .ID ==pi.WareHouse .ID ))
+            if (!_ProductInventorys.Exists(it => it.Product.ID == pi.Product.ID))
             {
-                _ProductInventorys .Add (pi);
+                _ProductInventorys.Add(pi);
             }
         }
         #endregion
@@ -125,26 +119,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 SteelRollSlice srs = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
                 frm.Product = srs.Product;
-                frm.WareHouse = srs.WareHouse;
             }
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 ReFreshData();
-            }
-        }
-
-        private void mnu_StackRecords_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                SteelRollSlice srs = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
-                View.FrmProductStackRecordsView frm = new View.FrmProductStackRecordsView();
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.ProductID = srs.Product.ID;
-                con.WareHouseID = srs.WareHouse.ID;
-                con.States = (int)ProductInventoryState.UnShipped | (int)ProductInventoryState.Shipped;
-                frm.SearchCondition = con;
-                frm.ShowDialog();
             }
         }
 
@@ -156,7 +134,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.ProductID = item.Product.ID;
-                con.WareHouseID = item.WareHouse.ID;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colValid")
                 {
                     con.States = (int)ProductInventoryState.Inventory;
@@ -187,7 +164,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 SteelRollSlice pi = dataGridView1.SelectedRows[0].Tag as SteelRollSlice;
                 InventoryCheckRecordSearchCondition con = new InventoryCheckRecordSearchCondition();
                 con.ProductID = pi.Product.ID;
-                con.WareHouseID = pi.WareHouse.ID;
                 View.FrmSteelRollSliceCheckRecordView frm = new View.FrmSteelRollSliceCheckRecordView();
                 frm.SearchCondition = con;
                 frm.StartPosition = FormStartPosition.CenterParent;
