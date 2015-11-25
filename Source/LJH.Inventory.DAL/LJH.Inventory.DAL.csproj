@@ -90,7 +90,6 @@
     <Compile Include="LinqProvider\CollectionTypeProvider.cs" />
     <Compile Include="LinqProvider\ContactProvider.cs" />
     <Compile Include="LinqProvider\CurrencyTypeProvider.cs" />
-    <Compile Include="LinqProvider\CustomerOtherReceivableProvider.cs" />
     <Compile Include="LinqProvider\CustomerPaymentAssignProvider.cs" />
     <Compile Include="LinqProvider\CustomerPaymentProvider.cs" />
     <Compile Include="LinqProvider\CompanyProvider.cs" />
@@ -104,8 +103,6 @@
     <Compile Include="LinqProvider\StackInRecordProvider.cs" />
     <Compile Include="LinqProvider\OrderItemRecordProvider.cs" />
     <Compile Include="LinqProvider\ProductInventoryItemProvider.cs" />
-    <Compile Include="LinqProvider\PortProvider.cs" />
-    <Compile Include="LinqProvider\PriceTermProvider.cs" />
     <Compile Include="LinqProvider\PurchaseItemRecordProvider.cs" />
     <Compile Include="LinqProvider\PurchaseOrderProvider.cs" />
     <Compile Include="LinqProvider\RelatedCompanyTypeProvider.cs" />
@@ -128,7 +125,6 @@
     <Compile Include="LinqProvider\UnitProvider.cs" />
     <Compile Include="LinqProvider\UnitWork.cs" />
     <Compile Include="LinqProvider\WareHouseProvider.cs" />
-    <Compile Include="LinqProvider\YouhuiQuanProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

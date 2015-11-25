@@ -403,18 +403,6 @@
     <Compile Include="Forms\Financial\FrmExpenditureTypeMaster.Designer.cs">
       <DependentUpon>FrmExpenditureTypeMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\General\FrmForeignPortMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\General\FrmForeignPortMaster.Designer.cs">
-      <DependentUpon>FrmForeignPortMaster.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\General\FrmNativePortMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\General\FrmNativePortMaster.Designer.cs">
-      <DependentUpon>FrmNativePortMaster.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Sale\FrmOrderDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -468,24 +456,6 @@
     </Compile>
     <Compile Include="Forms\Sale\View\FrmOrderRecordView.Designer.cs">
       <DependentUpon>FrmOrderRecordView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\General\FrmPortDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\General\FrmPortDetail.Designer.cs">
-      <DependentUpon>FrmPortDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\General\FrmPriceTermDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\General\FrmPriceTermDetail.Designer.cs">
-      <DependentUpon>FrmPriceTermDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\General\FrmPriceTermMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\General\FrmPriceTermMaster.Designer.cs">
-      <DependentUpon>FrmPriceTermMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\FrmSteelRollSliceMaster.cs">
       <SubType>Form</SubType>
@@ -865,12 +835,6 @@
     <EmbeddedResource Include="Forms\Financial\FrmExpenditureTypeMaster.resx">
       <DependentUpon>FrmExpenditureTypeMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\General\FrmForeignPortMaster.resx">
-      <DependentUpon>FrmForeignPortMaster.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\General\FrmNativePortMaster.resx">
-      <DependentUpon>FrmNativePortMaster.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmOrderDetail.resx">
       <DependentUpon>FrmOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -897,15 +861,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\View\FrmOrderRecordView.resx">
       <DependentUpon>FrmOrderRecordView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\General\FrmPortDetail.resx">
-      <DependentUpon>FrmPortDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\General\FrmPriceTermDetail.resx">
-      <DependentUpon>FrmPriceTermDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\General\FrmPriceTermMaster.resx">
-      <DependentUpon>FrmPriceTermMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceStackIn.resx">
       <DependentUpon>FrmSteelRollSliceStackIn.cs</DependentUpon>

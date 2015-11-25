@@ -87,7 +87,6 @@
     <Compile Include="CompanyInfo.cs" />
     <Compile Include="CompanyClass.cs" />
     <Compile Include="Financial\CustomerFinancialState.cs" />
-    <Compile Include="Financial\CustomerOtherReceivable.cs" />
     <Compile Include="Financial\CustomerPayment.cs" />
     <Compile Include="Financial\CustomerPaymentAssign.cs" />
     <Compile Include="Financial\CustomerPaymentType.cs" />
@@ -115,8 +114,6 @@
     <Compile Include="Permission\PermissionActions.cs" />
     <Compile Include="Permission\PermissionResolver.cs" />
     <Compile Include="ProductInventoryItem.cs" />
-    <Compile Include="Port.cs" />
-    <Compile Include="PriceTerm.cs" />
     <Compile Include="Purchase\PurchaseOrder.cs" />
     <Compile Include="Purchase\PurchaseItem.cs" />
     <Compile Include="Purchase\PurchaseItemRecord.cs" />
@@ -177,7 +174,6 @@
     <Compile Include="Unit.cs" />
     <Compile Include="UserSettings.cs" />
     <Compile Include="WareHouse.cs" />
-    <Compile Include="YouhuiQuan.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

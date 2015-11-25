@@ -103,7 +103,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWeight"].Value = pi.Product.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colWaitShipping"].Value = pi.WaitShipping;
-            row.Cells["colReserved"].Value = pi.Reserved;
             row.Cells["colValid"].Value = pi.Valid;
             row.Cells["colTotal"].Value = pi.Total;
             if(!_ProductInventorys .Exists (it=>it.Product .ID ==pi.Product .ID && it.WareHouse .ID ==pi.WareHouse .ID ))
@@ -165,10 +164,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colWaitShipping")
                 {
                     con.States = (int)ProductInventoryState.WaitShipping;
-                }
-                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colReserved")
-                {
-                    con.States = (int)ProductInventoryState.Reserved;
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTotal")
                 {

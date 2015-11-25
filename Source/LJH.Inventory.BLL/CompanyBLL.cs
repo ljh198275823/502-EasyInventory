@@ -146,16 +146,6 @@ namespace LJH.Inventory.BLL
                 }
             }
 
-            CustomerOtherReceivableSearchCondition con2 = new CustomerOtherReceivableSearchCondition() { CustomerID = info.ID };
-            List<CustomerOtherReceivable> cds = ProviderFactory.Create<IProvider<CustomerOtherReceivable, string>>(RepoUri).GetItems(con2).QueryObjects;
-            if (cds != null && cds.Count > 0)
-            {
-                foreach (CustomerOtherReceivable cd in cds)
-                {
-                    ProviderFactory.Create<IProvider<CustomerOtherReceivable, string>>(RepoUri).Delete(cd, unitWork);
-                }
-            }
-
             CustomerReceivableSearchCondition con3 = new CustomerReceivableSearchCondition() { CustomerID = info.ID };
             List<CustomerReceivable> crs = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con3).QueryObjects;
             if (crs != null && crs.Count > 0)

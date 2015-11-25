@@ -108,7 +108,7 @@ namespace LJH.Inventory.BLL
             p.Specification = specification;
             p.CategoryID = categoryID;
             p.Category = new ProductCategoryBLL(RepoUri).GetByID(categoryID).QueryObject;
-            p.Name = p.ID;
+            p.Name = p.Category != null ? p.Category.Name : categoryID;
             p.Unit = string.Empty;
             p.Model = model;
             p.Length = length;

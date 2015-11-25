@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
@@ -63,7 +68,6 @@
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWaitShipping = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colValid = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colReserved = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewLinkColumn();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -340,7 +344,6 @@
             this.colLength,
             this.colWaitShipping,
             this.colValid,
-            this.colReserved,
             this.colTotal});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -387,41 +390,42 @@
             // 
             // colWeight
             // 
+            dataGridViewCellStyle1.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colLength
             // 
+            dataGridViewCellStyle2.Format = "N2";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLength.HeaderText = "长度(米)";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
             // colWaitShipping
             // 
+            dataGridViewCellStyle3.Format = "N0";
+            this.colWaitShipping.DefaultCellStyle = dataGridViewCellStyle3;
             this.colWaitShipping.HeaderText = "待发货";
             this.colWaitShipping.Name = "colWaitShipping";
             this.colWaitShipping.ReadOnly = true;
             // 
             // colValid
             // 
+            dataGridViewCellStyle4.Format = "N0";
+            this.colValid.DefaultCellStyle = dataGridViewCellStyle4;
             this.colValid.HeaderText = "可用库存";
             this.colValid.Name = "colValid";
             this.colValid.ReadOnly = true;
             this.colValid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colValid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // colReserved
-            // 
-            this.colReserved.HeaderText = "订单备货";
-            this.colReserved.Name = "colReserved";
-            this.colReserved.ReadOnly = true;
-            this.colReserved.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colReserved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colReserved.Visible = false;
-            // 
             // colTotal
             // 
+            dataGridViewCellStyle5.Format = "N0";
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle5;
             this.colTotal.HeaderText = "库存合计";
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
@@ -485,7 +489,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewLinkColumn colWaitShipping;
         private System.Windows.Forms.DataGridViewLinkColumn colValid;
-        private System.Windows.Forms.DataGridViewLinkColumn colReserved;
         private System.Windows.Forms.DataGridViewLinkColumn colTotal;
     }
 }

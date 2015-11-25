@@ -106,7 +106,6 @@ namespace LJH.Inventory.UI.Forms.Sale
             {
                 info = new CompanyInfo();
                 info.ClassID = CompanyClass.Proxy;
-                info.Creater = Operator.Current.Name;
             }
             else
             {

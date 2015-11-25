@@ -22,7 +22,7 @@ using LJH.Inventory.UI.Forms.Inventory.Report;
 
 namespace InventoryApplication
 {
-    public partial class FrmMain : Form,IMyMDIForm , LJH.GeneralLibrary .Core.UI .IOperatorRender
+    public partial class FrmMain : Form,IMyMDIForm, LJH.GeneralLibrary.Core.UI.IOperatorRender
     {
         public FrmMain()
         {
@@ -31,8 +31,8 @@ namespace InventoryApplication
 
         #region 私有变量
         private List<Form> _openedForms = new List<Form>();
-        private DatetimeSyncService _DatetimeSyncService;
         private SoftDogInfo _SoftDog;
+        private DateTime _ExpireDate = new DateTime(2015, 12, 1);
         #endregion
 
         #region 私有方法
@@ -53,7 +53,7 @@ namespace InventoryApplication
                     MessageBox.Show("加密狗访问错误：没有找到加密狗。如果加密狗已经插上，则可能是加密狗还没有加密，请先联系厂家进行加密!", "注意");
                     System.Environment.Exit(0);
                 }
-                else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)  //没有写停车场权限
+                else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)  //没有开放进销存软件权限
                 {
                     MessageBox.Show("加密狗权限不足：原因可能是加密狗中没有开放进销存软件权限,请联系厂家开放相应的权限!", "注意");
                     System.Environment.Exit(0);
@@ -97,7 +97,7 @@ namespace InventoryApplication
             }
             else
             {
-                this.Close();
+                Environment.Exit(0);
             }
         }
 
@@ -105,16 +105,10 @@ namespace InventoryApplication
         {
             Operator cur = Operator.Current;
             //基本资料
-            this.mnu_Product.Enabled = cur.Permit(Permission.Product, PermissionActions.Read) || cur.Permit(Permission.Product, PermissionActions.Edit);
-            this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
-            this.mnu_Unit.Enabled = cur.Permit(Permission.Unit, PermissionActions.Read) || cur.Permit(Permission.Unit, PermissionActions.Edit);
-            this.mnu_CurrencyType.Enabled = cur.Permit(Permission.CurrencyType, PermissionActions.Read) || cur.Permit(Permission.CurrencyType, PermissionActions.Edit);
-            //this.mnu_Transport.Enabled = cur.Permit(Permission.Transport, PermissionActions.Read) || cur.Permit(Permission.Transport, PermissionActions.Edit);
             this.mnu_Staff.Enabled = cur.Permit(Permission.Staff, PermissionActions.Read) || cur.Permit(Permission.Staff, PermissionActions.Edit);
             this.mnu_Role.Enabled = cur.Permit(Permission.Role, PermissionActions.Read) || cur.Permit(Permission.Role, PermissionActions.Edit);
             this.mnu_Options.Enabled = cur.Permit(Permission.SystemOptions, PermissionActions.Read) || cur.Permit(Permission.SystemOptions, PermissionActions.Edit);
             //销售
-            this.mnu_Customer.Enabled = cur.Permit(Permission.Customer, PermissionActions.Read) || cur.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_Order.Enabled = cur.Permit(Permission.Order, PermissionActions.Read) || cur.Permit(Permission.Order, PermissionActions.Edit);
             this.mnu_OrderMonitor.Enabled = cur.Permit(Permission.Order, PermissionActions.Read) || cur.Permit(Permission.Order, PermissionActions.Edit);
             //采购
@@ -122,15 +116,18 @@ namespace InventoryApplication
             this.mnu_PurchaseOrder.Enabled = cur.Permit(Permission.PurchaseOrder, PermissionActions.Read) || cur.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
             this.mnu_PurchaseMonitor.Enabled = cur.Permit(Permission.PurchaseOrder, PermissionActions.Read) || cur.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
             //仓库
-            this.mnu_Inventory.Enabled = cur.Permit(Permission.ProductInventory, PermissionActions.Read) || cur.Permit(Permission.ProductInventory, PermissionActions.Edit);
+            this.mnu_SteelRoll.Enabled = cur.Permit(Permission.SteelRoll, PermissionActions.Read) || cur.Permit(Permission.SteelRoll, PermissionActions.Edit);
+            this.mnu_SteelRollSlice.Enabled = cur.Permit(Permission.SteelRollSlice, PermissionActions.Read) || cur.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
             this.mnu_InventorySheet.Enabled = cur.Permit(Permission.InventorySheet, PermissionActions.Read) || cur.Permit(Permission.InventorySheet, PermissionActions.Edit);
             this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.DeliverySheet, PermissionActions.Read) || cur.Permit(Permission.DeliverySheet, PermissionActions.Edit);
+            this.mnu_Customer.Enabled = cur.Permit(Permission.Customer, PermissionActions.Read) || cur.Permit(Permission.Customer, PermissionActions.Edit);
+            this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             //财务
-            this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read) || cur.Permit(Permission.CustomerState, PermissionActions.Edit);
-            this.mnu_CustomerOtherReceivable.Enabled = cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Read) || cur.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
+            this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
             this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
-
+            this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
+            this.mnu_SupplierPayment.Enabled = cur.Permit(Permission.SupplierPayment, PermissionActions.Read) || cur.Permit(Permission.SupplierPayment, PermissionActions.Edit);
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
         }
@@ -212,11 +209,6 @@ namespace InventoryApplication
             ShowSingleForm<FrmWareHouseMaster>();
         }
 
-        private void mnu_Supplier_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmSupplierMaster>();
-        }
-
         private void mnu_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -282,24 +274,6 @@ namespace InventoryApplication
         {
             ShowSingleForm<FrmDeliveryRecordReport>();
         }
-        #endregion
-
-        #region 事件处理程序
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-            //ReadSoftDog();
-            DoLogIn();
-            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
-            //启动同步时间服务
-            _DatetimeSyncService = new DatetimeSyncService(AppSettings.Current.ConnStr);
-            _DatetimeSyncService.Start();
-        }
-
-        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (_DatetimeSyncService != null) _DatetimeSyncService.Stop();
-        }
-        #endregion
 
         private void mnu_DeliveryStatistic_Click(object sender, EventArgs e)
         {
@@ -321,24 +295,9 @@ namespace InventoryApplication
             ShowSingleForm<FrmCurrencyTypeMaster>();
         }
 
-        private void mnu_PriceTerm_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmPriceTermMaster>();
-        }
-
         private void mnu_Unit_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmUnitMaster>();
-        }
-
-        private void mnu_NativePort_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmNativePortMaster>();
-        }
-
-        private void mnu_ForeignPort_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmForeignPortMaster>();
         }
 
         private void mnu_Transport_Click(object sender, EventArgs e)
@@ -346,7 +305,7 @@ namespace InventoryApplication
             ShowSingleForm<FrmTransportMaster>();
         }
 
-        private void mnu_Supplier_Click_1(object sender, EventArgs e)
+        private void mnu_Supplier_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmSupplierMaster>();
         }
@@ -372,29 +331,6 @@ namespace InventoryApplication
             ShowSingleForm<FrmSupplierTypeMaster>();
         }
 
-        private void mnu_UpdateDB_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("是否要升级数据库?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                string path = System.IO.Path.Combine(Application.StartupPath, "DbUpdate.sql");
-                if (System.IO.File.Exists(path))
-                {
-                    try
-                    {
-                        SqlClient client = new SqlClient(AppSettings.Current.ConnStr);
-                        client.Connect();
-                        client.ExecuteSQLFile(path);
-                        MessageBox.Show("数据库升级成功!");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
-                    }
-                }
-            }
-        }
-
         private void mnu_Order_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmOrderMaster>();
@@ -408,11 +344,6 @@ namespace InventoryApplication
         private void mnu_OrderPaymentReport_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmOrderPaymentReport>();
-        }
-
-        private void mnu_Manual_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void mnu_RelatedCompanyType_Click(object sender, EventArgs e)
@@ -500,5 +431,38 @@ namespace InventoryApplication
         {
             ShowSingleForm<FrmInventoryRecordReport>();
         }
+
+        private void mnu_Proxy_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmProxyMaster>();
+        }
+
+        private void mnu_Material_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmSteelRollMaster>();
+        }
+        #endregion
+
+        #region 事件处理程序
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            if (DateTime.Today > _ExpireDate)
+            {
+                MessageBox.Show("软件已经过期,请联系供应商");
+                Environment.Exit(0);
+            }
+            this.Text += string.Format(" [{0}]", Application.ProductVersion);
+            DoLogIn();
+            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
+            lblDBPath.Text = AppSettings.Current.GetConfigContent("DBPath");
+        }
+
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+        #endregion
+
+        
     }
 }

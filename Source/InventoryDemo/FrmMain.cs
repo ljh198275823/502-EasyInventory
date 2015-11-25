@@ -298,24 +298,9 @@ namespace InventoryDemo
             ShowSingleForm<FrmCurrencyTypeMaster>();
         }
 
-        private void mnu_PriceTerm_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmPriceTermMaster>();
-        }
-
         private void mnu_Unit_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmUnitMaster>();
-        }
-
-        private void mnu_NativePort_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmNativePortMaster>();
-        }
-
-        private void mnu_ForeignPort_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmForeignPortMaster>();
         }
 
         private void mnu_Transport_Click(object sender, EventArgs e)

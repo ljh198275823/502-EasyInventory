@@ -106,7 +106,6 @@ namespace LJH.Inventory.UI.Forms.Sale
             {
                 info = new CompanyInfo();
                 info.ClassID = CompanyClass.Customer;
-                info.Creater = Operator.Current.Name;
                 info.CreditLine = 50000; //默认5W的信用额度
             }
             else

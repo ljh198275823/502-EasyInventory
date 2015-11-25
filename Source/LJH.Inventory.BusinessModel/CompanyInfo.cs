@@ -82,22 +82,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Address { get; set; }
         /// <summary>
-        /// 获取或设置开户行
-        /// </summary>
-        public string Bank { get; set; }
-        /// <summary>
-        /// 获取或设置银行账号
-        /// </summary>
-        public string BankAccount { get; set; }
-        /// <summary>
-        /// 获取或设置客户资料的创建者
-        /// </summary>
-        public string Creater { get; set; }
-        /// <summary>
-        /// 获取或设置客户的业务负责人
-        /// </summary>
-        public string BusinessMan { get; set; }
-        /// <summary>
         /// 获取或设置客户的归档码
         /// </summary>
         public int? FileID { get; set; }

@@ -83,7 +83,6 @@
     <Compile Include="ContactBLL.cs" />
     <Compile Include="CurrencyTypeBLL.cs" />
     <Compile Include="CompanyBLL.cs" />
-    <Compile Include="CustomerOtherReceivableBLL.cs" />
     <Compile Include="CustomerPaymentAssignBLL.cs" />
     <Compile Include="CustomerPaymentBLL.cs" />
     <Compile Include="CustomerReceivableBLL.cs" />
@@ -95,8 +94,6 @@
     <Compile Include="DocumentOperationBLL.cs" />
     <Compile Include="ExpenditureTypeBLL.cs" />
     <Compile Include="ExpenditureRecordBLL.cs" />
-    <Compile Include="PortBLL.cs" />
-    <Compile Include="PriceTermBLL.cs" />
     <Compile Include="SteelRollBLL.cs" />
     <Compile Include="SteelRollSliceBLL.cs" />
     <Compile Include="StackInSheetBLL.cs" />
@@ -118,7 +115,6 @@
     <Compile Include="TransportBLL.cs" />
     <Compile Include="UnitBLL.cs" />
     <Compile Include="WareHouseBLL.cs" />
-    <Compile Include="YouhuiQuanBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJH.Inventory.BusinessModel\LJH.Inventory.BusinessModel.csproj">

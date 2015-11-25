@@ -97,7 +97,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
                 row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
-                row.Cells["colWeight"].Value = pi != null ? (decimal?)pi.RealThick : null;
+                row.Cells["colLength"].Value = pi != null ? (decimal?)pi.RealThick : null;
+                row.Cells["colWeight"].Value = item.Weight;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
                 row.Cells["colTotal"].Value = pi != null ? (pi.Count + item.Count) : item.Amount;
