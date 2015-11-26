@@ -48,10 +48,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NPOI">
       <HintPath>..\ReferenceDll\NPOI.dll</HintPath>
     </Reference>
@@ -186,6 +182,7 @@
     <Compile Include="Forms\Inventory\FrmSteelRollSliceSelection.Designer.cs">
       <DependentUpon>FrmSteelRollSliceSelection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Print\StackOutSheetExporter.cs" />
     <Compile Include="Forms\Inventory\View\FrmSlicedRecordView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -312,12 +309,6 @@
     </Compile>
     <Compile Include="Forms\Sale\FrmProductInventoryAssign.Designer.cs">
       <DependentUpon>FrmProductInventoryAssign.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\Print\FrmDeliverySheetPrint.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\Print\FrmDeliverySheetPrint.Designer.cs">
-      <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Purchase\FrmSupplierDetail.cs">
       <SubType>Form</SubType>
@@ -786,12 +777,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollSliceView.resx">
       <DependentUpon>FrmSteelRollSliceView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Print\FrmDeliverySheetPrint.resx">
-      <DependentUpon>FrmDeliverySheetPrint.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Print\DeliverySheet.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchase\FrmSupplierDetail.resx">
       <DependentUpon>FrmSupplierDetail.cs</DependentUpon>

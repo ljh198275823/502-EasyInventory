@@ -67,6 +67,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colInventorySheet"].Value = c.InventorySheet;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
             row.Cells["colCustomer"].Value = c.Customer;
+            row.Cells["colSourceRoll"].Value = "查看来源卷";
             row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion
@@ -98,6 +99,25 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         }
         #endregion
 
-        
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "colSourceRoll")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+                if (pi != null && pi.SourceRoll != null)
+                {
+                    var steelRoll = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(pi.SourceRoll.Value).QueryObject;
+                    if (steelRoll != null)
+                    {
+                        FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                        frm.IsForView = true;
+                        frm.UpdatingItem = steelRoll;
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.ShowDialog();
+                    }
+                }
+            }
+        }
     }
 }

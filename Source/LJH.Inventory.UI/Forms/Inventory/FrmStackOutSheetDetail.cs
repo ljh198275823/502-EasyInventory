@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Diagnostics;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
@@ -249,9 +251,38 @@ namespace LJH.Inventory.UI.Forms.Inventory
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
             if (sheet != null)
             {
-                Print.FrmDeliverySheetPrint frm = new Print.FrmDeliverySheetPrint();
-                frm.Sheet = sheet;
-                frm.ShowDialog();
+                try
+                {
+                    string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
+                    Print.StackOutSheetExporter exporter = null;
+                    if (System.IO.File.Exists(modal))
+                    {
+                        string path = Path.Combine(LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder(), Guid.NewGuid().ToString() + ".xls");
+                        exporter = new Print.StackOutSheetExporter(modal);
+                        exporter.Export(sheet, path);
+                        if (System.IO.File.Exists(path))
+                        {
+                            ProcessStartInfo psi = new ProcessStartInfo(path);
+                            psi.Verb = "Print";
+                            psi.CreateNoWindow = true;
+                            psi.WindowStyle = ProcessWindowStyle.Hidden;
+                            psi.UseShellExecute = true;
+
+                            Process prs = new Process();
+                            prs.StartInfo = psi;
+                            prs.Start();
+                            prs.WaitForExit();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("未找到送货单导出模板", "打印失败");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "打印失败");
+                }
             }
         }
 

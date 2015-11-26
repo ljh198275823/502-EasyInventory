@@ -65,6 +65,7 @@
             this.txtFormula = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.txtResult = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.chkOver = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,11 +120,11 @@
             // 
             this.txtCount.Enabled = false;
             this.txtCount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCount.Location = new System.Drawing.Point(300, 138);
+            this.txtCount.Location = new System.Drawing.Point(250, 140);
             this.txtCount.MaxValue = 10000;
             this.txtCount.MinValue = 0;
             this.txtCount.Name = "txtCount";
-            this.txtCount.Size = new System.Drawing.Size(124, 21);
+            this.txtCount.Size = new System.Drawing.Size(70, 21);
             this.txtCount.TabIndex = 13;
             this.txtCount.Text = "0";
             this.txtCount.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
@@ -145,7 +146,7 @@
             0});
             this.txtLength.Name = "txtLength";
             this.txtLength.PointCount = 3;
-            this.txtLength.Size = new System.Drawing.Size(114, 21);
+            this.txtLength.Size = new System.Drawing.Size(82, 21);
             this.txtLength.TabIndex = 12;
             this.txtLength.Text = "0.00";
             this.txtLength.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
@@ -153,7 +154,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(242, 143);
+            this.label3.Location = new System.Drawing.Point(192, 144);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 11;
@@ -467,6 +468,18 @@
             this.txtResult.Size = new System.Drawing.Size(88, 21);
             this.txtResult.TabIndex = 84;
             // 
+            // chkOver
+            // 
+            this.chkOver.AutoSize = true;
+            this.chkOver.ForeColor = System.Drawing.Color.Red;
+            this.chkOver.Location = new System.Drawing.Point(336, 142);
+            this.chkOver.Name = "chkOver";
+            this.chkOver.Size = new System.Drawing.Size(84, 16);
+            this.chkOver.TabIndex = 85;
+            this.chkOver.Text = "卷子已开完";
+            this.chkOver.UseVisualStyleBackColor = true;
+            this.chkOver.CheckedChanged += new System.EventHandler(this.chkOver_CheckedChanged);
+            // 
             // FrmSlice
             // 
             this.AcceptButton = this.btnOk;
@@ -474,6 +487,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(436, 386);
+            this.Controls.Add(this.chkOver);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtFormula);
@@ -557,6 +571,7 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtFormula;
         private System.Windows.Forms.Label label7;
         private GeneralLibrary.WinformControl.DBCTextBox txtResult;
+        private System.Windows.Forms.CheckBox chkOver;
 
     }
 }

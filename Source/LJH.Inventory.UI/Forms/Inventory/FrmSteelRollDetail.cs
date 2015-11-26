@@ -41,14 +41,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("规格设置不正确,  规格格式为 \"厚度*宽度\" ");
                 return false;
             }
-            if (this.txtOriginalWeight.DecimalValue <= 0)
+            if (this.txtWeight.DecimalValue <= 0)
             {
-                MessageBox.Show("原材料的入库重量不正确");
+                MessageBox.Show("原材料的剩余重量不正确");
                 return false;
             }
-            if (this.txtOriginalLength.DecimalValue <= 0)
+            if (this.txtLength.DecimalValue <= 0)
             {
-                MessageBox.Show("原材料的入库长度不正确");
+                MessageBox.Show("原材料的剩余长度不正确");
+                return false;
+            }
+            if (txtOriginalLength.DecimalValue < txtLength.DecimalValue)
+            {
+                MessageBox.Show("剩余长度大于入库长度");
+                return false;
+            }
+            if (txtOriginalWeight.DecimalValue < txtWeight.DecimalValue)
+            {
+                MessageBox.Show("剩余重量大于入库重量");
                 return false;
             }
             if (string.IsNullOrEmpty(txtCustomer.Text))
@@ -79,7 +89,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            this.btnOk.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
+            this.btnOk.Enabled = !IsForView && Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()
@@ -91,22 +101,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCategory.Text = item.Product.Category.Name;
             txtCategory.Tag = item.Product.Category;
             cmbSpecification.Text = item.Product.Specification;
-            if (item.OriginalWeight.HasValue) txtOriginalWeight.DecimalValue = item.OriginalWeight.Value;
-            if (item.OriginalLength.HasValue) txtOriginalLength.DecimalValue = item.OriginalLength.Value;
+            txtOriginalWeight.DecimalValue = item.OriginalWeight.Value;
+            txtOriginalLength.DecimalValue = item.OriginalLength.Value;
+            txtLength.DecimalValue = item.Length.Value;
+            txtWeight.DecimalValue = item.Weight.Value;
             txtCustomer.Text = item.Customer;
             txtSupplier.Text = item.Supplier;
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
             txtMemo.Text = item.Memo;
-
-            dtStorageDateTime.Enabled = item.CanEdit;
-            lnkCategory.Enabled = item.CanEdit;
-            cmbSpecification.Enabled = item.CanEdit;
-            txtOriginalLength.Enabled = item.CanEdit;
-            txtOriginalWeight.Enabled = item.CanEdit;
-            lnkSupplier.Enabled = item.CanEdit;
-            txtSerialNumber.Enabled = item.CanEdit;
-            btnOk.Enabled = item.CanEdit;
+            btnOk.Enabled = btnOk.Enabled && item.CanEdit;
         }
 
         protected override object GetItemFromInput()
@@ -127,8 +131,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.WareHouseID = item.WareHouse.ID;
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
             item.OriginalLength = txtOriginalLength.DecimalValue;
-            item.Weight = txtOriginalWeight.DecimalValue;
-            item.Length = txtOriginalLength.DecimalValue;
+            item.Weight = txtWeight.DecimalValue;
+            item.Length = txtLength.DecimalValue;
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;
@@ -205,6 +209,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 txtCustomer.Text = (frm.SelectedItem as CompanyInfo).Name;
             }
+        }
+
+        private void txtOriginalWeight_TextChanged(object sender, EventArgs e)
+        {
+            if (IsAdding) txtWeight.DecimalValue = txtOriginalWeight.DecimalValue;
+        }
+
+        private void txtOriginalLength_TextChanged(object sender, EventArgs e)
+        {
+            if (IsAdding) txtLength.DecimalValue = txtOriginalLength.DecimalValue;
         }
         #endregion
     }

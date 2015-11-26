@@ -166,6 +166,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        private void chkOver_CheckedChanged(object sender, EventArgs e)
+        {
+            this.txtRemainLength.DecimalValue = 0;
+            this.txtRemainWeight.DecimalValue = 0;
+        }
+
         private void txtFormula_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtFormula.Text.Trim()))
@@ -249,7 +255,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     record.AfterLength = 0;
                     record.AfterWeight = 0;
                     record.Count = 1;
-                    record.Memo = "开条:" + string.Format("{0} = {1}", txtFormula.Text.Trim(), txtResult.Text.Trim());
+                    record.Memo = "开条:" + string.Format("{0}={1}", txtFormula.Text.Trim(), txtResult.Text.Trim());
                 }
                 CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Slice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
                 if (ret.Result == ResultCode.Successful)
