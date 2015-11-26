@@ -53,7 +53,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void ShowItemInGridViewRow(DataGridViewRow row, CustomerPayment cp)
         {
             row.Tag = cp;
-            row.Cells["colID"].Value = cp.ID;
+            row.Cells["colSheetID"].Value = cp.ID;
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
             row.Cells["colAmount"].Value = cp.Amount;
@@ -129,6 +129,27 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void cMnu_Export_Click(object sender, EventArgs e)
         {
             NPOIExcelHelper.Export(dataGridView1);
+        }
+
+        private void GridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (cell.Value == null) return;
+                if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
+                {
+                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cell.Value.ToString()).QueryObject;
+                    if (sheet != null)
+                    {
+                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.PaymentType = CustomerPaymentType.Customer;
+                        frm.ShowDialog();
+                    }
+                }
+            }
         }
         #endregion
     }

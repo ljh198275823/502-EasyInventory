@@ -41,10 +41,10 @@
             this.chkShowAll = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMSG = new System.Windows.Forms.ToolStripStatusLabel();
-            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHaspaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHaspaid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
@@ -77,6 +77,7 @@
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridView.Size = new System.Drawing.Size(684, 300);
             this.GridView.TabIndex = 22;
+            this.GridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
             // 
             // contextMenuStrip1
             // 
@@ -136,7 +137,6 @@
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colCreateDate
             // 
@@ -161,12 +161,11 @@
             // colHaspaid
             // 
             dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
             this.colHaspaid.DefaultCellStyle = dataGridViewCellStyle3;
             this.colHaspaid.HeaderText = "已核销";
             this.colHaspaid.Name = "colHaspaid";
             this.colHaspaid.ReadOnly = true;
-            this.colHaspaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHaspaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // colNotPaid
             // 
@@ -216,10 +215,10 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblMSG;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
+        private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHaspaid;
+        private System.Windows.Forms.DataGridViewLinkColumn colHaspaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }

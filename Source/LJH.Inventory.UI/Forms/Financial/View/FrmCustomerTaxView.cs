@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         public CompanyInfo Customer { get; set; }
         #endregion
 
-        #region 重写基类方法
+        #region 私有方法
         private void FreshData()
         {
             var con = new CustomerReceivableSearchCondition();
@@ -112,6 +112,27 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void cMnu_Export_Click(object sender, EventArgs e)
         {
             NPOIExcelHelper.Export(GridView);
+        }
+
+        private void GridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                var cell = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (cell.Value == null) return;
+                if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
+                {
+                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cell.Value.ToString()).QueryObject;
+                    if (sheet != null)
+                    {
+                        Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                        frm.IsAdding = false;
+                        frm.IsForView = true;
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                }
+            }
         }
         #endregion
     }

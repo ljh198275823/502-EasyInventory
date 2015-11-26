@@ -35,20 +35,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerReceivableView));
             this.GridView = new System.Windows.Forms.DataGridView();
-            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHaspaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.chkShowAll = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMSG = new System.Windows.Forms.ToolStripStatusLabel();
+            this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHaspaid = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -81,75 +81,7 @@
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridView.Size = new System.Drawing.Size(751, 317);
             this.GridView.TabIndex = 22;
-            // 
-            // colSheetID
-            // 
-            this.colSheetID.HeaderText = "单据编号";
-            this.colSheetID.MinimumWidth = 100;
-            this.colSheetID.Name = "colSheetID";
-            this.colSheetID.ReadOnly = true;
-            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "订单号";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Visible = false;
-            // 
-            // colCreateDate
-            // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colCreateDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colCreateDate.HeaderText = "日期";
-            this.colCreateDate.Name = "colCreateDate";
-            this.colCreateDate.ReadOnly = true;
-            this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAmount.HeaderText = "金额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colHaspaid
-            // 
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colHaspaid.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colHaspaid.HeaderText = "已核销";
-            this.colHaspaid.Name = "colHaspaid";
-            this.colHaspaid.ReadOnly = true;
-            this.colHaspaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colNotPaid
-            // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colNotPaid.HeaderText = "未核销";
-            this.colNotPaid.Name = "colNotPaid";
-            this.colNotPaid.ReadOnly = true;
-            this.colNotPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colHowold
-            // 
-            this.colHowold.HeaderText = "账龄";
-            this.colHowold.Name = "colHowold";
-            this.colHowold.ReadOnly = true;
-            this.colHowold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
-            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.GridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
             // 
             // contextMenuStrip1
             // 
@@ -202,6 +134,73 @@
             this.lblMSG.Spring = true;
             this.lblMSG.Text = "共 0 项";
             // 
+            // colSheetID
+            // 
+            this.colSheetID.HeaderText = "单据编号";
+            this.colSheetID.MinimumWidth = 100;
+            this.colSheetID.Name = "colSheetID";
+            this.colSheetID.ReadOnly = true;
+            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "订单号";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Visible = false;
+            // 
+            // colCreateDate
+            // 
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colCreateDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colCreateDate.HeaderText = "日期";
+            this.colCreateDate.Name = "colCreateDate";
+            this.colCreateDate.ReadOnly = true;
+            this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colAmount
+            // 
+            dataGridViewCellStyle2.Format = "C2";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAmount.HeaderText = "金额";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colHaspaid
+            // 
+            dataGridViewCellStyle3.Format = "C2";
+            this.colHaspaid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colHaspaid.HeaderText = "已核销";
+            this.colHaspaid.Name = "colHaspaid";
+            this.colHaspaid.ReadOnly = true;
+            this.colHaspaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colNotPaid
+            // 
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colNotPaid.HeaderText = "未核销";
+            this.colNotPaid.Name = "colNotPaid";
+            this.colNotPaid.ReadOnly = true;
+            this.colNotPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colHowold
+            // 
+            this.colHowold.HeaderText = "账龄";
+            this.colHowold.Name = "colHowold";
+            this.colHowold.ReadOnly = true;
+            this.colHowold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // FrmCustomerReceivableView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -233,11 +232,11 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblMSG;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
+        private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHaspaid;
+        private System.Windows.Forms.DataGridViewLinkColumn colHaspaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHowold;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;

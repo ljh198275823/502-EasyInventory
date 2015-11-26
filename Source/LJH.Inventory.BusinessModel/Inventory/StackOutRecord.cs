@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.BusinessModel
 {
@@ -120,7 +121,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                return Weight.HasValue ? Weight.Value * Price * Count : Count * Price;  //如果有重量,即单价为重量计价
+                return (Weight.HasValue ? Weight.Value * Price : Count * Price).Trim();  //如果有重量,即单价为重量计价
             }
         }
         #endregion

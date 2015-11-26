@@ -15,7 +15,7 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
 {
-    public partial class FrmCustomerTaxBillView : Form 
+    public partial class FrmCustomerTaxBillView : Form
     {
         public FrmCustomerTaxBillView()
         {
@@ -53,7 +53,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void ShowItemInGridViewRow(DataGridViewRow row, CustomerPayment cp)
         {
             row.Tag = cp;
-            row.Cells["colID"].Value = cp.ID;
+            row.Cells["colSheetID"].Value = cp.ID;
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colAmount"].Value = cp.Amount;
             if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
@@ -128,6 +128,26 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void cMnu_Export_Click(object sender, EventArgs e)
         {
             NPOIExcelHelper.Export(dataGridView1);
+        }
+
+        private void GridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (cell.Value == null) return;
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
+                {
+                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cell.Value.ToString()).QueryObject;
+                    if (sheet != null)
+                    {
+                        FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                }
+            }
         }
         #endregion
     }

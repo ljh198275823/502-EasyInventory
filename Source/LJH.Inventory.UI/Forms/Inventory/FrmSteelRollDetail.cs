@@ -51,16 +51,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("原材料的入库长度不正确");
                 return false;
             }
-            //if (txtOriginalLength.DecimalValue < txtLength.DecimalValue)
-            //{
-            //    MessageBox.Show("剩余长度大于入库长度");
-            //    return false;
-            //}
-            //if (txtOriginalWeight.DecimalValue < txtWeight.DecimalValue)
-            //{
-            //    MessageBox.Show("剩余重量大于入库重量");
-            //    return false;
-            //}
             if (string.IsNullOrEmpty(txtCustomer.Text))
             {
                 MessageBox.Show("没有指定客户");
@@ -103,9 +93,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Text = item.Product.Specification;
             if (item.OriginalWeight.HasValue) txtOriginalWeight.DecimalValue = item.OriginalWeight.Value;
             if (item.OriginalLength.HasValue) txtOriginalLength.DecimalValue = item.OriginalLength.Value;
-            //txtLength.DecimalValue = item.Length.Trim();
-            //txtWeight.DecimalValue = item.Weight.Trim();
-            txtPrice.DecimalValue = item.Price.Trim();
             txtCustomer.Text = item.Customer;
             txtSupplier.Text = item.Supplier;
             cmbBrand.Text = item.Manufacture;
@@ -117,9 +104,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Enabled = item.CanEdit;
             txtOriginalLength.Enabled = item.CanEdit;
             txtOriginalWeight.Enabled = item.CanEdit;
-            //txtLength.Enabled = item.CanEdit;
-            //txtWeight.Enabled = item.CanEdit;
-            txtPrice.Enabled = item.CanEdit;
             lnkSupplier.Enabled = item.CanEdit;
             txtSerialNumber.Enabled = item.CanEdit;
             btnOk.Enabled = item.CanEdit;
@@ -145,7 +129,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.OriginalLength = txtOriginalLength.DecimalValue;
             item.Weight = txtOriginalWeight.DecimalValue;
             item.Length = txtOriginalLength.DecimalValue;
-            item.Price = txtPrice.DecimalValue;
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;
@@ -224,17 +207,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
-
-        private void txtOriginalWeight_TextChanged(object sender, EventArgs e)
-        {
-            //if (txtWeight.DecimalValue == 0) txtWeight.DecimalValue = txtOriginalWeight.DecimalValue;
-        }
-
-        private void txtOriginalLength_TextChanged(object sender, EventArgs e)
-        {
-            //if (txtLength.DecimalValue == 0) txtWeight.DecimalValue = txtOriginalLength.DecimalValue;
-        }
-
-       
     }
 }

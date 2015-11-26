@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.BusinessModel
 {
@@ -26,29 +27,25 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string SheetNo { get; set; }
         /// <summary>
-        /// 获取或设置订单项ID
-        /// </summary>
-        public Guid? OrderItem { get; set; }
-        /// <summary>
-        /// 获取或设置订单编号
-        /// </summary>
-        public string OrderID { get; set; }
-        /// <summary>
         /// 获取或设置商品ID
         /// </summary>
         public string ProductID { get; set; }
+        /// <summary>
+        /// 获取或设置出货项的产品
+        /// </summary>
+        public Product Product { get; set; }
         /// <summary>
         /// 获取或设置单位
         /// </summary>
         public string Unit { get; set; }
         /// <summary>
-        /// 获取或设置重量
+        /// 获取或设置出货商品的单重
         /// </summary>
         public decimal? Weight { get; set; }
         /// <summary>
-        /// 获取或设置长度
+        /// 获取或设置同一商品多个出货项的总重
         /// </summary>
-        public decimal? Length { get; set; }
+        public decimal? TotalWeight { get; set; }
         /// <summary>
         /// 获取或设置单价
         /// </summary>
@@ -62,16 +59,29 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid? InventoryItem { get; set; }
         /// <summary>
+        /// 获取或设置订单项ID
+        /// </summary>
+        public Guid? OrderItem { get; set; }
+        /// <summary>
+        /// 获取或设置订单编号
+        /// </summary>
+        public string OrderID { get; set; }
+        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
         #endregion
 
+        /// <summary>
+        /// 获取当前计算的总额
+        /// </summary>
         public decimal Amount
         {
             get
             {
-                return Weight.HasValue ? Weight.Value * Price : Count * Price;  //如果有重量,即单价为重量计价
+                if (TotalWeight.HasValue) return TotalWeight.Value * Price;
+                if (Weight.HasValue) return Weight.Value  * Price * Count;
+                return Price * Count;
             }
         }
     }

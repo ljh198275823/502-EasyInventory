@@ -126,6 +126,27 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             NPOIExcelHelper.Export(GridView);
         }
+
+        private void GridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                var cell = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (cell.Value == null) return;
+                if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
+                {
+                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cell.Value.ToString()).QueryObject;
+                    if (sheet != null)
+                    {
+                        Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                        frm.IsAdding = false;
+                        frm.IsForView = true;
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                }
+            }
+        }
         #endregion
     }
 }

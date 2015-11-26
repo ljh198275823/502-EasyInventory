@@ -520,7 +520,7 @@
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.ItemsGrid.Size = new System.Drawing.Size(923, 284);
             this.ItemsGrid.TabIndex = 8;
-            this.ItemsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellContentClick);
+            this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             // 
             // colHeader
@@ -551,23 +551,26 @@
             dataGridViewCellStyle1.Format = "N2";
             dataGridViewCellStyle1.NullValue = null;
             this.colLength.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colLength.HeaderText = "长度";
+            this.colLength.HeaderText = "长度(米)";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
+            this.colLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colModel
             // 
             this.colModel.HeaderText = "产品种类";
             this.colModel.Name = "colModel";
             this.colModel.ReadOnly = true;
+            this.colModel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colWeight
             // 
             dataGridViewCellStyle2.Format = "N3";
             dataGridViewCellStyle2.NullValue = null;
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colWeight.HeaderText = "重量";
+            this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
+            this.colWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colPrice
             // 
@@ -604,6 +607,7 @@
             // 
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colMemo.Width = 150;
             // 
             // label15

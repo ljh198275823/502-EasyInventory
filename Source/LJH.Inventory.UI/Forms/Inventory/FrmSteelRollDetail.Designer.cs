@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.dtStorageDateTime = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,7 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtOriginalWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtOriginalLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txtPrice = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtSerialNumber = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkSupplier = new System.Windows.Forms.LinkLabel();
@@ -68,7 +66,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(284, 125);
+            this.label14.Location = new System.Drawing.Point(55, 121);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(41, 12);
             this.label14.TabIndex = 57;
@@ -82,15 +80,6 @@
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 55;
             this.label12.Text = "描述";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(25, 125);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 12);
-            this.label10.TabIndex = 54;
-            this.label10.Text = "单价(元/吨)";
             // 
             // dtStorageDateTime
             // 
@@ -154,7 +143,6 @@
             this.txtOriginalWeight.Size = new System.Drawing.Size(145, 21);
             this.txtOriginalWeight.TabIndex = 62;
             this.txtOriginalWeight.Text = "0";
-            this.txtOriginalWeight.TextChanged += new System.EventHandler(this.txtOriginalWeight_TextChanged);
             // 
             // txtOriginalLength
             // 
@@ -175,27 +163,6 @@
             this.txtOriginalLength.Size = new System.Drawing.Size(145, 21);
             this.txtOriginalLength.TabIndex = 63;
             this.txtOriginalLength.Text = "0";
-            this.txtOriginalLength.TextChanged += new System.EventHandler(this.txtOriginalLength_TextChanged);
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPrice.Location = new System.Drawing.Point(100, 122);
-            this.txtPrice.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txtPrice.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.PointCount = 2;
-            this.txtPrice.Size = new System.Drawing.Size(145, 21);
-            this.txtPrice.TabIndex = 66;
-            this.txtPrice.Text = "0";
             // 
             // txtMemo
             // 
@@ -208,7 +175,7 @@
             // txtSerialNumber
             // 
             this.txtSerialNumber.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSerialNumber.Location = new System.Drawing.Point(329, 122);
+            this.txtSerialNumber.Location = new System.Drawing.Point(100, 118);
             this.txtSerialNumber.Name = "txtSerialNumber";
             this.txtSerialNumber.Size = new System.Drawing.Size(145, 21);
             this.txtSerialNumber.TabIndex = 68;
@@ -340,12 +307,10 @@
             this.Controls.Add(this.lnkSupplier);
             this.Controls.Add(this.txtSerialNumber);
             this.Controls.Add(this.txtMemo);
-            this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.txtOriginalLength);
             this.Controls.Add(this.txtOriginalWeight);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.dtStorageDateTime);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
@@ -360,12 +325,10 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.dtStorageDateTime, 0);
-            this.Controls.SetChildIndex(this.label10, 0);
             this.Controls.SetChildIndex(this.label12, 0);
             this.Controls.SetChildIndex(this.label14, 0);
             this.Controls.SetChildIndex(this.txtOriginalWeight, 0);
             this.Controls.SetChildIndex(this.txtOriginalLength, 0);
-            this.Controls.SetChildIndex(this.txtPrice, 0);
             this.Controls.SetChildIndex(this.txtMemo, 0);
             this.Controls.SetChildIndex(this.txtSerialNumber, 0);
             this.Controls.SetChildIndex(this.lnkSupplier, 0);
@@ -388,7 +351,6 @@
 
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dtStorageDateTime;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
@@ -396,7 +358,6 @@
         private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.DecimalTextBox txtOriginalWeight;
         private GeneralLibrary.WinformControl.DecimalTextBox txtOriginalLength;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtPrice;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private GeneralLibrary.WinformControl.DBCTextBox txtSerialNumber;
         private System.Windows.Forms.LinkLabel lnkSupplier;

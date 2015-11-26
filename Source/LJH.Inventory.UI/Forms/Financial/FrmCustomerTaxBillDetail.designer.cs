@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -280,8 +280,8 @@
             // 
             // colAssign
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAssign.HeaderText = "抵消金额";
             this.colAssign.Name = "colAssign";
             // 
@@ -498,6 +498,7 @@
             this.btnApprove.Size = new System.Drawing.Size(52, 53);
             this.btnApprove.Text = "审核(&A)";
             this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnApprove.Visible = false;
             this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // btnUndoApprove
@@ -508,6 +509,7 @@
             this.btnUndoApprove.Size = new System.Drawing.Size(60, 53);
             this.btnUndoApprove.Text = "取消审核";
             this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUndoApprove.Visible = false;
             this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
             // 
             // btnPayment

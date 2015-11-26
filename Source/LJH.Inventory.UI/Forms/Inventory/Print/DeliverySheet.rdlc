@@ -904,14 +904,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox3">
+                    <Textbox Name="Memo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!Memo.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -920,7 +920,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <rd:DefaultName>Memo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1174,7 +1174,7 @@
         <Top>3.32531cm</Top>
         <Left>0.27353cm</Left>
         <Height>1.94937cm</Height>
-        <Width>16.51862cm</Width>
+        <Width>16.51861cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>

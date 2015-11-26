@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerFinancialStateMaster));
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
@@ -117,7 +119,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 242);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 220);
             // 
             // cMnu_Fresh
             // 
@@ -338,6 +340,9 @@
             // 
             // colTax
             // 
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colTax.DefaultCellStyle = dataGridViewCellStyle4;
             this.colTax.HeaderText = "应开增值税";
             this.colTax.Name = "colTax";
             this.colTax.ReadOnly = true;
@@ -346,6 +351,9 @@
             // 
             // colTaxBill
             // 
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colTaxBill.DefaultCellStyle = dataGridViewCellStyle5;
             this.colTaxBill.HeaderText = "已开增值税发票";
             this.colTaxBill.Name = "colTaxBill";
             this.colTaxBill.ReadOnly = true;

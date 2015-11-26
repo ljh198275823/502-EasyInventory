@@ -61,10 +61,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     int row = ItemsGrid.Rows.Add();
                     ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
-                    //foreach (var it in sheet.Items)
-                    //{
-                    //    row=ItemsGrid .rows
-                    //}
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
@@ -82,8 +78,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
                 row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
                 row.Cells["colModel"].Value = p.Model;
-                row.Cells["colLength"].Value = item.Length;
-                row.Cells["colWeight"].Value = item.Weight;
+                row.Cells["colLength"].Value = p.Length;
+                row.Cells["colWeight"].Value = item.TotalWeight.HasValue ? item.TotalWeight : item.Weight;
                 row.Cells["colPrice"].Value = item.Price;
                 row.Cells["colCount"].Value = item.Count;
                 row.Cells["colTotal"].Value = item.Amount;
@@ -338,11 +334,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else if (col.Name == "colWeight")
                 {
-                    item.Weight = value > 0 ? (decimal?)value : null;
+                    item.TotalWeight = value > 0 ? (decimal?)value : null;
                     row.Cells[e.ColumnIndex].Value = value;
                     foreach (var it in sheet.Items)
                     {
-                        if (it.ProductID == item.ProductID) it.Weight = value;
+                        if (it.ProductID == item.ProductID) it.TotalWeight = value;
                     }
                     row.Cells["colTotal"].Value = item.Amount;
                 }
@@ -350,7 +346,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void ItemsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ItemsGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
             if (col.Name != "colCount") return;
@@ -366,7 +362,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     delingRows.Add(ItemsGrid.Rows[i]);
                 }
-                else if (d != null)
+                else if (d != null) //如果是明细项，进入编辑模式
                 {
                     ItemsGrid.CurrentCell = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex ];
                     DataGridViewEditMode oldMode = ItemsGrid.EditMode;

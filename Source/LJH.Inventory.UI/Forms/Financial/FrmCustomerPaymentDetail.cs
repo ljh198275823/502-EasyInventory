@@ -69,6 +69,13 @@ namespace LJH.Inventory.UI.Forms.Financial
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户付款流水" : "供应商付款流水";
             this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
+            if (IsForView)
+            {
+                toolStrip1.Enabled = false;
+                ItemsGrid.ReadOnly = true;
+                ItemsGrid.ContextMenu = null;
+                ItemsGrid.ContextMenuStrip = null;
+            }
         }
 
         protected override bool CheckInput()

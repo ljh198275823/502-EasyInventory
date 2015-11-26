@@ -50,6 +50,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnu_AssignGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_UndoAssign = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -75,10 +79,6 @@
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnPayment = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
-            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -224,9 +224,9 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage5);
@@ -332,6 +332,36 @@
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ItemsGrid.Size = new System.Drawing.Size(578, 194);
             this.ItemsGrid.TabIndex = 119;
+            // 
+            // colSheetID
+            // 
+            this.colSheetID.HeaderText = "单据编号";
+            this.colSheetID.MinimumWidth = 120;
+            this.colSheetID.Name = "colSheetID";
+            this.colSheetID.ReadOnly = true;
+            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSheetID.Width = 150;
+            // 
+            // colClassID
+            // 
+            this.colClassID.HeaderText = "类型";
+            this.colClassID.Name = "colClassID";
+            this.colClassID.ReadOnly = true;
+            // 
+            // colAssign
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colAssign.HeaderText = "抵消金额";
+            this.colAssign.Name = "colAssign";
+            // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "订单";
+            this.colOrderID.Name = "colOrderID";
+            this.colOrderID.ReadOnly = true;
+            this.colOrderID.Width = 120;
             // 
             // mnu_AssignGrid
             // 
@@ -539,6 +569,7 @@
             this.btnApprove.Size = new System.Drawing.Size(52, 53);
             this.btnApprove.Text = "审核(&A)";
             this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnApprove.Visible = false;
             this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // btnUndoApprove
@@ -549,6 +580,7 @@
             this.btnUndoApprove.Size = new System.Drawing.Size(60, 53);
             this.btnUndoApprove.Text = "取消审核";
             this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUndoApprove.Visible = false;
             this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
             // 
             // btnPayment
@@ -570,36 +602,6 @@
             this.btnNullify.Text = "作废(&N)";
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
-            // 
-            // colSheetID
-            // 
-            this.colSheetID.HeaderText = "单据编号";
-            this.colSheetID.MinimumWidth = 120;
-            this.colSheetID.Name = "colSheetID";
-            this.colSheetID.ReadOnly = true;
-            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSheetID.Width = 150;
-            // 
-            // colClassID
-            // 
-            this.colClassID.HeaderText = "类型";
-            this.colClassID.Name = "colClassID";
-            this.colClassID.ReadOnly = true;
-            // 
-            // colAssign
-            // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colAssign.HeaderText = "抵消金额";
-            this.colAssign.Name = "colAssign";
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Width = 120;
             // 
             // FrmCustomerPaymentDetail
             // 

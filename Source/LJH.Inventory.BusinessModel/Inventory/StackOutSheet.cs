@@ -177,11 +177,15 @@ namespace LJH.Inventory.BusinessModel
         #region 公共方法
         public void AddItems(ProductInventoryItem inventory, decimal count)
         {
+            if (count <= 0) return;
             if (Items == null) Items = new List<StackOutItem>();
             var si = Items.SingleOrDefault(it => it.InventoryItem == inventory.ID);
             if (si != null)
             {
-                if (si.Count + count <= inventory.Count) si.Count += count; //增加的数量不能超过库存项的库存数
+                if (si.Count + count <= inventory.Count)
+                {
+                    si.Count += count; //增加的数量不能超过库存项的库存数
+                }
             }
             else
             {
@@ -189,10 +193,9 @@ namespace LJH.Inventory.BusinessModel
                 {
                     ID = Guid.NewGuid(),
                     ProductID = inventory.ProductID,
-                    Length = inventory.Length,
-                    Weight = inventory.Weight,
                     Unit = inventory.Unit,
                     InventoryItem = inventory.ID,
+                    Weight = inventory.Weight,
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
@@ -217,8 +220,8 @@ namespace LJH.Inventory.BusinessModel
                 {
                     ID = Guid.Empty,
                     ProductID = g.First().ProductID,
-                    Length = g.First().Length,
                     Weight = g.First().Weight,
+                    TotalWeight = g.First().TotalWeight,
                     Unit = g.First().Unit,
                     Count = g.Sum(it => it.Count),
                     SheetNo = this.ID,
