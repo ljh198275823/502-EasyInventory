@@ -85,7 +85,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                 List<string> sheets = new List<string>();
                 sheets.Add((UpdatingItem as Order).ID);
                 OrderItemRecordSearchCondition con = new OrderItemRecordSearchCondition();
-                con.SheetNo = sheets;
+                con.SheetIDs = sheets;
                 List<OrderItemRecord> states = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
                 if (states != null && states.Count > 0)
                 {

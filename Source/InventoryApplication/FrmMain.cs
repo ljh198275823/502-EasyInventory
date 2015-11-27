@@ -32,7 +32,7 @@ namespace InventoryApplication
         #region 私有变量
         private List<Form> _openedForms = new List<Form>();
         private SoftDogInfo _SoftDog;
-        private DateTime _ExpireDate = new DateTime(2015, 12, 1);
+        private DateTime _ExpireDate = new DateTime(2015, 12, 31);
         #endregion
 
         #region 私有方法
@@ -130,6 +130,7 @@ namespace InventoryApplication
             this.mnu_SupplierPayment.Enabled = cur.Permit(Permission.SupplierPayment, PermissionActions.Read) || cur.Permit(Permission.SupplierPayment, PermissionActions.Edit);
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
+            this.mnu_DeliveryStatistic.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
         }
         #endregion
 
@@ -461,7 +462,5 @@ namespace InventoryApplication
             Environment.Exit(0);
         }
         #endregion
-
-        
     }
 }

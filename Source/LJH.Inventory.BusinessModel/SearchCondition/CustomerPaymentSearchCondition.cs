@@ -9,6 +9,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     {
         public string CustomerID { get; set; }
 
+        public string StackSheetID { get; set; }
+
         public List<CustomerPaymentType> PaymentTypes { get; set; }
 
         public bool? HasRemain { get; set; }

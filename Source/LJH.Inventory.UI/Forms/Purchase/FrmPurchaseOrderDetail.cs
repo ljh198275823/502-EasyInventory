@@ -90,7 +90,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
                 List<string> sheets = new List<string>();
                 sheets.Add((UpdatingItem as PurchaseOrder).ID);
                 PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
-                con.SheetNo = sheets;
+                con.SheetIDs = sheets;
                 List<PurchaseItemRecord> states = (new PurchaseOrderBLL(AppSettings.Current.ConnStr)).GetRecords(con).QueryObjects;
                 if (states != null && states.Count > 0)
                 {

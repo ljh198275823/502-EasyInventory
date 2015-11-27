@@ -58,6 +58,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string CheckNum { get; set; }
         /// <summary>
+        /// 获取或设置付款流水的收发货单据号
+        /// </summary>
+        public string StackSheetID { get; set; }
+        /// <summary>
         /// 获取或设置当前状态
         /// </summary>
         public SheetState State { get; set; }

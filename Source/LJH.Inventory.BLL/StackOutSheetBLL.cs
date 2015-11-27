@@ -355,6 +355,20 @@ namespace LJH.Inventory.BLL
                 }
             }
             F_CommitChanges(addingItems, updatingitems, cloneItems, deletingItems, unitWork);
+            //删除所有的应收和应开增值税
+            CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.SheetID = info.ID;
+            crsc.States = new List<SheetState>();
+            crsc.States.Add(SheetState.Add);
+            crsc.States.Add(SheetState.Approved);
+            List<CustomerReceivable> crs = new CustomerReceivableBLL(RepoUri).GetItems(crsc).QueryObjects;
+            if (crs != null && crs.Count > 0)
+            {
+                foreach (var cr in crs)
+                {
+                    new CustomerReceivableBLL(RepoUri).Delete(cr);
+                }
+            }
         }
         #endregion
 

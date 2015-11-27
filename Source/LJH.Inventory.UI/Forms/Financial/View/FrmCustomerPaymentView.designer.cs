@@ -48,6 +48,7 @@
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStackSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -71,6 +72,7 @@
             this.colAmount,
             this.colAssigned,
             this.colRemain,
+            this.colStackSheetID,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Location = new System.Drawing.Point(0, 33);
@@ -194,6 +196,12 @@
             this.colRemain.ReadOnly = true;
             this.colRemain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // colStackSheetID
+            // 
+            this.colStackSheetID.HeaderText = "送货单";
+            this.colStackSheetID.Name = "colStackSheetID";
+            this.colStackSheetID.ReadOnly = true;
+            // 
             // colMemo
             // 
             this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -241,6 +249,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
+        private System.Windows.Forms.DataGridViewLinkColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

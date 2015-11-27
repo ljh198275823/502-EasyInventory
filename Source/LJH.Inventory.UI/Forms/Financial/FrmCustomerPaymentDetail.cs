@@ -30,6 +30,8 @@ namespace LJH.Inventory.UI.Forms.Financial
         /// 获取或设置收款或付款类型
         /// </summary>
         public CustomerPaymentType PaymentType { get; set; }
+
+        public string StackSheetID { get; set; }
         #endregion
 
         #region 私有方法
@@ -138,6 +140,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.Amount = txtAmount.DecimalValue;
             info.CheckNum = txtCheckNum.Text;
             info.CustomerID = Customer != null ? Customer.ID : null;
+            if (!string.IsNullOrEmpty(StackSheetID)) info.StackSheetID = StackSheetID;
             info.Memo = txtMemo.Text;
             return info;
         }

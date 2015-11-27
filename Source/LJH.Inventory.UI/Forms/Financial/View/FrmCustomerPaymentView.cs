@@ -57,10 +57,9 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
             row.Cells["colAmount"].Value = cp.Amount;
-            if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
-            else row.Cells["colRemain"].Value = null;
-            if (cp.Assigned != 0) row.Cells["colAssigned"].Value = cp.Assigned;
-            else row.Cells["colAssigned"].Value = null;
+            row.Cells["colRemain"].Value = cp.Remain != 0 ? (decimal?)cp.Remain : null;
+            row.Cells["colAssigned"].Value =cp.Assigned !=0?(decimal ?) cp.Assigned:null;
+            row.Cells["colStackSheetID"].Value = cp.StackSheetID;
             row.Cells["colMemo"].Value = cp.Memo;
             if (cp.State == SheetState.Canceled)
             {
@@ -135,11 +134,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if(dataGridView1.Rows[e.RowIndex ].Tag ==null )return ;
-                CustomerPayment cp=dataGridView1.Rows[e.RowIndex ].Tag as CustomerPayment ;
+                if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
+                CustomerPayment cp = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID ).QueryObject;
+                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID).QueryObject;
                     if (sheet != null)
                     {
                         FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
@@ -155,6 +154,21 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     frm.StartPosition = FormStartPosition.CenterParent;
                     frm.ShowAssigns(cp);
                     frm.ShowDialog();
+                }
+                else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colStackSheetID")
+                {
+                    if (!string.IsNullOrEmpty(cp.StackSheetID))
+                    {
+                        var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cp.StackSheetID).QueryObject;
+                        if (sheet != null)
+                        {
+                            Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                            frm.IsAdding = false;
+                            frm.IsForView = true;
+                            frm.UpdatingItem = sheet;
+                            frm.ShowDialog();
+                        }
+                    }
                 }
             }
         }

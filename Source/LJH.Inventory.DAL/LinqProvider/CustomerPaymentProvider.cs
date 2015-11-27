@@ -33,14 +33,16 @@ namespace LJH.Inventory.DAL.LinqProvider
                 SheetSearchCondition con = search as SheetSearchCondition;
                 if (con.SheetDate != null) ret = ret.Where(item => item.SheetDate >= con.SheetDate.Begin && item.SheetDate <= con.SheetDate.End);
                 if (con.LastActiveDate != null) ret = ret.Where(item => item.LastActiveDate >= con.LastActiveDate.Begin && item.LastActiveDate <= con.LastActiveDate.End);
-                if (con.SheetNo != null && con.SheetNo.Count > 0) ret = ret.Where(item => con.SheetNo.Contains(item.ID));
+                if (con.SheetIDs != null && con.SheetIDs.Count > 0) ret = ret.Where(item => con.SheetIDs.Contains(item.ID));
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
             }
             if (search is CustomerPaymentSearchCondition)
             {
                 CustomerPaymentSearchCondition con = search as CustomerPaymentSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
+                if (!string.IsNullOrEmpty(con.StackSheetID)) ret = ret.Where(item => item.StackSheetID == con.StackSheetID);
                 if (con.PaymentTypes != null && con.PaymentTypes.Count > 0) ret = ret.Where(item => con.PaymentTypes.Contains(item.ClassID));
+
                 if (con.HasRemain != null)
                 {
                     if (con.HasRemain.Value) ret = ret.Where(item => item.Assigned < item.Amount);

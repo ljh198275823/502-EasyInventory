@@ -51,6 +51,32 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ShowDeliveryItemsOnGrid(item);
             ShowOperations(item.ID, item.DocumentType, dataGridView1);
             ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
+            ShowPaymentState(item);
+        }
+
+        private void ShowPaymentState(StackOutSheet item)
+        {
+            if (item.State != SheetState.Shipped)
+            {
+                if (!string.IsNullOrEmpty(item.ID))
+                {
+                    CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
+                    con.PaymentTypes = new List<CustomerPaymentType>();
+                    con.PaymentTypes.Add(CustomerPaymentType.Customer);
+                    con.States = new List<SheetState>();
+                    con.States.Add(SheetState.Add);
+                    con.States.Add(SheetState.Approved);
+                    con.StackSheetID = item.ID;
+                    var cps = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+                    if (cps != null) lnkPayment.Text = cps.Sum(it => it.Remain).ToString("C2");
+                }
+            }
+            else
+            {
+                CustomerReceivableSearchCondition con1 = new CustomerReceivableSearchCondition() { SheetID = item.ID };
+                List<CustomerReceivable> crs = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con1).QueryObjects;
+                if (crs != null) lnkPayment.Text = crs.Sum(it => it.Haspaid).ToString("C2");
+            }
         }
 
         private void ShowDeliveryItemsOnGrid(StackOutSheet sheet)
@@ -189,11 +215,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             ShowButtonState(this.toolStrip1);
             btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Edit);
-            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Approve);
-            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.UndoApprove);
             btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Nullify);
-            btnPrint.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Print);
+            btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Print);
             btnShip.Enabled = btnShip.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Ship);
+            btnPayment.Enabled = btnPayment.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
             ItemsGrid.ReadOnly = !btnSave.Enabled;
         }
@@ -232,6 +257,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
             PerformOperation<StackOutSheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+        }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            var sheet = UpdatingItem as StackOutSheet;
+            if (sheet == null || sheet.State == SheetState.Canceled) return;
+            if (string.IsNullOrEmpty(sheet.ID))
+            {
+                MessageBox.Show("请先保存送货单后再支付");
+                return;
+            }
+            Financial.FrmCustomerPaymentDetail frm = new Financial.FrmCustomerPaymentDetail();
+            frm.PaymentType = CustomerPaymentType.Customer;
+            frm.Customer = (txtCustomer.Tag as CompanyInfo);
+            frm.StackSheetID = sheet.ID;
+            frm.IsAdding = true;
+            frm.ShowDialog();
+            ShowPaymentState(sheet);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
@@ -315,7 +358,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void txtCustomer_DoubleClick(object sender, EventArgs e)
         {
-            txtCustomer.Text =  string.Empty;
+            txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
         }
 
@@ -395,7 +438,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else if (d != null) //如果是明细项，进入编辑模式
                 {
-                    ItemsGrid.CurrentCell = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex ];
+                    ItemsGrid.CurrentCell = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     DataGridViewEditMode oldMode = ItemsGrid.EditMode;
                     ItemsGrid.EditMode = DataGridViewEditMode.EditProgrammatically;
                     ItemsGrid.BeginEdit(true);
@@ -548,6 +591,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
-
     }
 }

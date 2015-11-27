@@ -8,9 +8,9 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     public class SheetSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
         /// <summary>
-        /// 获取或设置单据号
+        /// 获取或设置查询的多个单据号
         /// </summary>
-        public List<string> SheetNo { get; set; }
+        public List<string> SheetIDs { get; set; }
         /// <summary>
         /// 获取或设置单据日期
         /// </summary>

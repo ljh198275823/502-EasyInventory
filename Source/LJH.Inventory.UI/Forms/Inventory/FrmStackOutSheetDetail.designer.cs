@@ -41,13 +41,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnApprove = new System.Windows.Forms.ToolStripButton();
-            this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
+            this.btnPayment = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnShip = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lnkPayment = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
             this.lnkDriver = new System.Windows.Forms.LinkLabel();
             this.txtCarPlate = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtDriverCall = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -166,8 +167,7 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
-            this.btnApprove,
-            this.btnUndoApprove,
+            this.btnPayment,
             this.btnPrint,
             this.btnShip,
             this.btnNullify});
@@ -188,27 +188,15 @@
             this.btnSave.ToolTipText = "保存(&S)";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnApprove
+            // btnPayment
             // 
-            this.btnApprove.Image = global::LJH.Inventory.UI.Properties.Resources.approve;
-            this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(52, 53);
-            this.btnApprove.Text = "审核(&A)";
-            this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnApprove.Visible = false;
-            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
-            // 
-            // btnUndoApprove
-            // 
-            this.btnUndoApprove.Image = global::LJH.Inventory.UI.Properties.Resources.canceled;
-            this.btnUndoApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnUndoApprove.Name = "btnUndoApprove";
-            this.btnUndoApprove.Size = new System.Drawing.Size(60, 53);
-            this.btnUndoApprove.Text = "取消审核";
-            this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnUndoApprove.Visible = false;
-            this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
+            this.btnPayment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
+            this.btnPayment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(52, 53);
+            this.btnPayment.Text = "付款(&C)";
+            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // btnPrint
             // 
@@ -256,6 +244,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lnkPayment);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.lnkDriver);
             this.tabPage1.Controls.Add(this.txtCarPlate);
             this.tabPage1.Controls.Add(this.txtDriverCall);
@@ -288,6 +278,27 @@
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lnkPayment
+            // 
+            this.lnkPayment.AutoSize = true;
+            this.lnkPayment.DisabledLinkColor = System.Drawing.Color.Blue;
+            this.lnkPayment.Enabled = false;
+            this.lnkPayment.Location = new System.Drawing.Point(723, 80);
+            this.lnkPayment.Name = "lnkPayment";
+            this.lnkPayment.Size = new System.Drawing.Size(11, 12);
+            this.lnkPayment.TabIndex = 142;
+            this.lnkPayment.TabStop = true;
+            this.lnkPayment.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(665, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 141;
+            this.label1.Text = "已付金额:";
+            // 
             // lnkDriver
             // 
             this.lnkDriver.AutoSize = true;
@@ -302,9 +313,9 @@
             // txtCarPlate
             // 
             this.txtCarPlate.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCarPlate.Location = new System.Drawing.Point(725, 110);
+            this.txtCarPlate.Location = new System.Drawing.Point(512, 77);
             this.txtCarPlate.Name = "txtCarPlate";
-            this.txtCarPlate.Size = new System.Drawing.Size(120, 21);
+            this.txtCarPlate.Size = new System.Drawing.Size(135, 21);
             this.txtCarPlate.TabIndex = 139;
             this.txtCarPlate.Visible = false;
             // 
@@ -336,7 +347,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(676, 114);
+            this.label10.Location = new System.Drawing.Point(459, 81);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 12);
             this.label10.TabIndex = 135;
@@ -422,15 +433,15 @@
             // txtAddress
             // 
             this.txtAddress.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAddress.Location = new System.Drawing.Point(512, 77);
+            this.txtAddress.Location = new System.Drawing.Point(73, 110);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(334, 21);
+            this.txtAddress.Size = new System.Drawing.Size(346, 21);
             this.txtAddress.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(447, 81);
+            this.label3.Location = new System.Drawing.Point(12, 114);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 123;
@@ -464,9 +475,9 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(73, 110);
+            this.txtMemo.Location = new System.Drawing.Point(512, 110);
             this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(574, 21);
+            this.txtMemo.Size = new System.Drawing.Size(333, 21);
             this.txtMemo.TabIndex = 7;
             // 
             // txtCustomer
@@ -613,7 +624,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(36, 113);
+            this.label15.Location = new System.Drawing.Point(471, 114);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(35, 12);
             this.label15.TabIndex = 60;
@@ -839,7 +850,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_RemoveItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnSave;
-        private System.Windows.Forms.ToolStripButton btnApprove;
         private System.Windows.Forms.ToolStripButton btnPrint;
         private System.Windows.Forms.ToolStripButton btnShip;
         private System.Windows.Forms.TabControl tabControl1;
@@ -869,7 +879,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
         private System.Windows.Forms.ToolStripButton btnNullify;
-        private System.Windows.Forms.ToolStripButton btnUndoApprove;
         private GeneralLibrary.WinformControl.DBCTextBox txtAddress;
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DBCTextBox txtLinkerPhone;
@@ -900,5 +909,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripButton btnPayment;
+        private System.Windows.Forms.LinkLabel lnkPayment;
+        private System.Windows.Forms.Label label1;
     }
 }
