@@ -34,5 +34,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public Guid? DeliveryItem { get; set; }
 
         public string DeliverySheetNo { get; set; }
+
+        public Guid? SourceRoll { get; set; }
     }
 }

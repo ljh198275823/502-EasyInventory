@@ -49,6 +49,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal? Length { get; set; }
         /// <summary>
+        /// 获取或设置根据入库重量和长度计算出来的厚度
+        /// </summary>
+        public decimal? OriginalThick { get; set; }
+        /// <summary>
         /// 获取或设置真实厚度
         /// </summary>
         public decimal? RealThick { get; set; }
@@ -157,16 +161,16 @@ namespace LJH.Inventory.BusinessModel
         /// 计算真实厚度
         /// </summary>
         /// <returns></returns>
-        public decimal? CalThick()
+        public decimal? CalThick(string specification, decimal weight, decimal length, decimal density)
         {
-            if (Product != null && !string.IsNullOrEmpty(Product.Specification) && Product.Density.HasValue)
+            if (!string.IsNullOrEmpty(specification))
             {
                 try
                 {
-                    decimal? width = SpecificationHelper.GetWrittenWidth(Product.Specification);
+                    decimal? width = SpecificationHelper.GetWrittenWidth(specification);
                     if (width.HasValue && width > 0)
                     {
-                        return OriginalWeight * 1000 * 1000 / (width.Value * OriginalLength * Product.Density.Value);
+                        return weight * 1000 * 1000 / (width.Value * length * density);
                     }
                 }
                 catch

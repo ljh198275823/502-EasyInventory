@@ -49,6 +49,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.InventorySheetNo)) ret = ret.Where(item => item.InventorySheet == con.InventorySheetNo);
                 if (con.DeliveryItem != null) ret = ret.Where(item => item.DeliveryItem == con.DeliveryItem);
                 if (!string.IsNullOrEmpty(con.DeliverySheetNo)) ret = ret.Where(item => item.DeliverySheet == con.DeliverySheetNo);
+                if (con.SourceRoll.HasValue) ret = ret.Where(item => item.SourceRoll == con.SourceRoll);
             }
             var items = ret.ToList();
             if (items != null && items.Count > 0)

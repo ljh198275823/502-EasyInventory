@@ -83,7 +83,7 @@ namespace LJH.Inventory.BLL
                 InventoryItem = sliceSheet.ID,
                 Weight = sliceSheet.Weight,
                 Length = sliceSheet.Length,
-                RealThick = sr.RealThick,
+                OriginalThick = sr.OriginalThick,
                 Count = sliceSheet.Count,
                 Model = sliceSheet.SliceType,
                 State = ProductInventoryState.Inventory,
@@ -101,6 +101,46 @@ namespace LJH.Inventory.BLL
                 sr.Length = sliceSheet.AfterLength;
             }
             return ret;
+        }
+
+        public CommandResult CalRealThick(ProductInventoryItem pi)
+        {
+            try
+            {
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                decimal? thick=null ;
+                SliceRecordSearchCondition con = new SliceRecordSearchCondition();
+                con.SourceRoll = pi.ID;
+                var items = new SteelRollSliceRecordBLL(RepoUri).GetItems(con).QueryObjects;
+                if (items != null && items.Count > 0 && items.TrueForAll(it => it.SliceType == "开平"))
+                {
+
+                    var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+                    decimal len = items.Sum(it => it.Length.Value * it.Count);
+                    thick = pi.CalThick(pi.Product.Specification, pi.OriginalWeight.Value, pi.OriginalLength.Value, pi.Product.Density.Value);
+                    if (thick.HasValue)
+                    {
+                        ProductInventoryItem clone = pi.Clone();
+                        clone.RealThick = thick;
+                        provider.Update(clone, pi, unitWork);
+                        var search = new ProductInventoryItemSearchCondition() { SourceRoll = pi.ID };
+                        var pis = provider.GetItems(search).QueryObjects;
+                        foreach (var slice in pis)
+                        {
+                            var sliceClone = slice.Clone();
+                            slice.RealThick = thick;
+                            provider.Update(slice, sliceClone, unitWork);
+                        }
+                    }
+                }
+                var ret =unitWork.Commit();
+                if (ret.Result == ResultCode.Successful) pi.RealThick = thick;
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
         }
         /// <summary>
         /// 原材料盘点

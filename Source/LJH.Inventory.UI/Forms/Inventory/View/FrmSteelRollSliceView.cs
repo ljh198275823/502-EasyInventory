@@ -61,6 +61,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colWeight"].Value = c.Weight;
             row.Cells["colLength"].Value = c.Length;
+            row.Cells["colOriginalThick"].Value = c.OriginalThick;
             row.Cells["colRealThick"].Value = c.RealThick;
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count.Trim();

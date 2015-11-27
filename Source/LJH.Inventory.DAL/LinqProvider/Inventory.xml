@@ -395,6 +395,7 @@
       <Column Name="OriginalLength" Member="OriginalLength"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="OriginalThick" Member="OriginalThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="RealThick" Member="RealThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="Model" Member="Model"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>

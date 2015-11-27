@@ -120,7 +120,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
                 row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
-                row.Cells["colWeight"].Value = pi != null ? (decimal?)pi.RealThick : null;
+                row.Cells["colWeight"].Value = pi != null ? (pi.RealThick.HasValue ? (decimal?)pi.RealThick : (decimal?)pi.OriginalThick) : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
                 row.Cells["colTotal"].Value = pi != null ? (pi.Count + item.Count) : item.Amount;
@@ -532,29 +532,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 ShowDeliveryItemsOnGrid(sheet);
             }
-        }
-
-        private void btnPaymentAssign_Click(object sender, EventArgs e)
-        {
-            //if (UpdatingItem != null)
-            //{
-            //    DeliverySheet sheet = UpdatingItem as DeliverySheet;
-            //    if (sheet.Payable)
-            //    {
-            //        FrmPaymentAssign frm = new FrmPaymentAssign();
-            //        frm.CustomerID = sheet.CustomerID;
-            //        frm.ReceivableID = sheet.ID;
-            //        frm.Receivables = sheet.Receivables;
-            //        if (frm.ShowDialog() == DialogResult.OK)
-            //        {
-            //            DeliverySheet sheet1 = (new DeliverySheetBLL(AppSettings.CurrentSetting.ConnectString)).GetByID(sheet.ID).QueryObject;
-            //            this.UpdatingItem = sheet1;
-            //            ItemShowing();
-            //            ShowButtonState();
-            //            this.OnItemUpdated(new ItemUpdatedEventArgs(sheet1));
-            //        }
-            //    }
-            //}
         }
 
         private void lnkLinker_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

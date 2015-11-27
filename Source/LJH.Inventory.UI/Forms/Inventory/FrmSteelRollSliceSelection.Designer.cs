@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,13 +60,12 @@
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOriginalThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRealThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridview1)).BeginInit();
@@ -91,6 +93,25 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1185, 48);
             this.panel5.TabIndex = 7;
+            // 
+            // wareHouseComboBox1
+            // 
+            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.wareHouseComboBox1.FormattingEnabled = true;
+            this.wareHouseComboBox1.Location = new System.Drawing.Point(54, 15);
+            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
+            this.wareHouseComboBox1.Size = new System.Drawing.Size(112, 20);
+            this.wareHouseComboBox1.TabIndex = 95;
+            this.wareHouseComboBox1.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 94;
+            this.label1.Text = "仓库";
             // 
             // customerCombobox1
             // 
@@ -296,6 +317,7 @@
             this.colModel,
             this.colWeight,
             this.colLength,
+            this.colOriginalThick,
             this.colRealThick,
             this.colCustomer,
             this.colCount,
@@ -338,25 +360,33 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle5.Format = "N3";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colLength
             // 
-            dataGridViewCellStyle6.Format = "N2";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Format = "N2";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLength.HeaderText = "长度(米)";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
+            // colOriginalThick
+            // 
+            dataGridViewCellStyle3.Format = "N3";
+            this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colOriginalThick.HeaderText = "入库厚度";
+            this.colOriginalThick.Name = "colOriginalThick";
+            this.colOriginalThick.ReadOnly = true;
+            // 
             // colRealThick
             // 
-            dataGridViewCellStyle7.Format = "N3";
-            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colRealThick.HeaderText = "厚度";
+            dataGridViewCellStyle4.Format = "N3";
+            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colRealThick.HeaderText = "开平厚度";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
             // 
@@ -368,8 +398,8 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle8.Format = "N0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Format = "N0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
@@ -387,25 +417,6 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             this.colMemo.Width = 150;
-            // 
-            // wareHouseComboBox1
-            // 
-            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.wareHouseComboBox1.FormattingEnabled = true;
-            this.wareHouseComboBox1.Location = new System.Drawing.Point(54, 15);
-            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
-            this.wareHouseComboBox1.Size = new System.Drawing.Size(112, 20);
-            this.wareHouseComboBox1.TabIndex = 95;
-            this.wareHouseComboBox1.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 94;
-            this.label1.Text = "仓库";
             // 
             // FrmSteelRollSliceSelection
             // 
@@ -453,18 +464,19 @@
         private System.Windows.Forms.DataGridView dataGridview1;
         private Controls.CustomerCombobox customerCombobox1;
         private System.Windows.Forms.Label label8;
+        private Controls.WareHouseComboBox wareHouseComboBox1;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRealThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private Controls.WareHouseComboBox wareHouseComboBox1;
-        private System.Windows.Forms.Label label1;
     }
 }

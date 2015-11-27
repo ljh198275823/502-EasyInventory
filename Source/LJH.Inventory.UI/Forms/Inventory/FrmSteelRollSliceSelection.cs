@@ -97,6 +97,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWeight"].Value = pi.Product.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colCount"].Value = pi.Count;
+            row.Cells["colOriginalThick"].Value = pi.OriginalThick;
             row.Cells["colRealThick"].Value = pi.RealThick;
             row.Cells["colCustomer"].Value = pi.Customer;
             row.Cells["colMemo"].Value = pi.Memo;

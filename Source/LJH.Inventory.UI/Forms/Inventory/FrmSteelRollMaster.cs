@@ -174,6 +174,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colOriginalLength"].Value = sr.OriginalLength;
             row.Cells["colWeight"].Value = sr.Weight;
             row.Cells["colLength"].Value = sr.Length;
+            row.Cells["colOriginalThick"].Value = sr.OriginalThick;
             row.Cells["colRealThick"].Value = sr.RealThick;
             row.Cells["colCustomer"].Value = sr.Customer;
             row.Cells["colSupplier"].Value = sr.Supplier;
