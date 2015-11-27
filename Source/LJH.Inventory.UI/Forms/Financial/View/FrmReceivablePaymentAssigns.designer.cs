@@ -29,15 +29,12 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReceivablePaymentAssigns));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.GridView = new System.Windows.Forms.DataGridView();
-            this.colPaidDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomerPaymentID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
@@ -65,16 +62,14 @@
             this.GridView.AllowUserToAddRows = false;
             this.GridView.AllowUserToDeleteRows = false;
             this.GridView.AllowUserToResizeRows = false;
-            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GridView.BackgroundColor = System.Drawing.Color.White;
             this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colPaidDate,
-            this.colCustomerPaymentID,
+            this.colSheetID,
             this.colAssign,
-            this.colAmount,
             this.colFill});
             this.GridView.Location = new System.Drawing.Point(0, 1);
             this.GridView.Name = "GridView";
@@ -83,40 +78,23 @@
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridView.Size = new System.Drawing.Size(555, 246);
             this.GridView.TabIndex = 21;
-            this.GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             // 
-            // colPaidDate
+            // colSheetID
             // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPaidDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colPaidDate.HeaderText = "付款日期";
-            this.colPaidDate.Name = "colPaidDate";
-            this.colPaidDate.ReadOnly = true;
-            // 
-            // colCustomerPaymentID
-            // 
-            this.colCustomerPaymentID.HeaderText = "付款单号";
-            this.colCustomerPaymentID.Name = "colCustomerPaymentID";
-            this.colCustomerPaymentID.ReadOnly = true;
-            this.colCustomerPaymentID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCustomerPaymentID.Width = 150;
+            this.colSheetID.HeaderText = "单据编号";
+            this.colSheetID.Name = "colSheetID";
+            this.colSheetID.ReadOnly = true;
+            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSheetID.Width = 150;
             // 
             // colAssign
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAssign.HeaderText = "分配金额";
             this.colAssign.Name = "colAssign";
             this.colAssign.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colAmount.HeaderText = "付款单总额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
+            this.colAssign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colFill
             // 
@@ -124,6 +102,7 @@
             this.colFill.HeaderText = "";
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
+            this.colFill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FrmReceivablePaymentAssigns
             // 
@@ -132,10 +111,10 @@
             this.ClientSize = new System.Drawing.Size(555, 272);
             this.Controls.Add(this.GridView);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmReceivablePaymentAssigns";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "付款明细";
-            this.Load += new System.EventHandler(this.FrmCustomerPaymentAssignView_Load);
+            this.Text = "核销明细";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
@@ -149,10 +128,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.DataGridView GridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaidDate;
-        private System.Windows.Forms.DataGridViewLinkColumn colCustomerPaymentID;
+        private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
     }
 }

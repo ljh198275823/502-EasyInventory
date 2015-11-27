@@ -131,11 +131,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                var cell = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (cell.Value == null) return;
+                if (GridView.Rows[e.RowIndex].Tag == null) return;
+                CustomerReceivable cr = GridView.Rows[e.RowIndex].Tag as CustomerReceivable;
                 if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cell.Value.ToString()).QueryObject;
+                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
                     if (sheet != null)
                     {
                         Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
@@ -144,6 +144,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
                     }
+                }
+                else if (GridView.Columns[e.ColumnIndex].Name == "colHaspaid")
+                {
+                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowAssigns(cr);
+                    frm.ShowDialog();
                 }
             }
         }

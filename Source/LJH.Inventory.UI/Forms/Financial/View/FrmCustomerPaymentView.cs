@@ -135,11 +135,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (cell.Value == null) return;
+                if(dataGridView1.Rows[e.RowIndex ].Tag ==null )return ;
+                CustomerPayment cp=dataGridView1.Rows[e.RowIndex ].Tag as CustomerPayment ;
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cell.Value.ToString()).QueryObject;
+                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID ).QueryObject;
                     if (sheet != null)
                     {
                         FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
@@ -148,6 +148,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         frm.PaymentType = CustomerPaymentType.Customer;
                         frm.ShowDialog();
                     }
+                }
+                else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
+                {
+                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowAssigns(cp);
+                    frm.ShowDialog();
                 }
             }
         }

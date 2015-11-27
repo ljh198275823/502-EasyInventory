@@ -123,7 +123,6 @@
     <Compile Include="Resource\SheetStateDescription.cs" />
     <Compile Include="SearchCondition\AttachmentSearchCondition.cs" />
     <Compile Include="SearchCondition\ContactSearchCondition.cs" />
-    <Compile Include="SearchCondition\CustomerOtherReceivableSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerPaymentAssignSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerPaymentSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerReceivableSearchCondition.cs" />

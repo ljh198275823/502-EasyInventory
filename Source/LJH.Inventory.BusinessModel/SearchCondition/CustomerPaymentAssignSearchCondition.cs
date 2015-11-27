@@ -9,6 +9,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     {
         public string PaymentID { get; set; }
 
+        public Guid? ReceivableID { get; set; }
+
         public List<Guid> ReceivableIDs { get; set; }
     }
 }

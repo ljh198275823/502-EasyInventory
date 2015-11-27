@@ -22,48 +22,89 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         }
 
         #region 私有方法
-        private void ShowDelivery(string receivableID)
+        public void ShowAssigns(CustomerReceivable item)
         {
-            this.Text = string.Format("{0} 的付款项", receivableID);
             GridView.Rows.Clear();
-            List<CustomerPaymentAssign> assigns = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetAssigns(receivableID).QueryObjects;
+            GridView.CellClick -= StackoutSheetID_Click;
+            GridView.CellClick -= PaymentID_Click;
+            GridView.CellClick += PaymentID_Click;
+            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
+            con.ReceivableID = item.ID;
+            var assigns = new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 foreach (CustomerPaymentAssign assign in assigns)
                 {
                     int row = GridView.Rows.Add();
-                    GridView.Rows[row].Cells["colCustomerPaymentID"].Value = assign.PaymentID;
-                    GridView.Rows[row].Cells["colAmount"].Value = assign.Amount;
+                    GridView.Rows[row].Tag = assign;
+                    GridView.Rows[row].Cells["colSheetID"].Value = assign.PaymentID;
+                    GridView.Rows[row].Cells["colAssign"].Value = assign.Amount;
                 }
                 int rowTotal = GridView.Rows.Add();
-                GridView.Rows[rowTotal].Cells["colCustomerPaymentID"].Value = "合计";
-                GridView.Rows[rowTotal].Cells["colAmount"].Value = assigns.Sum(item => item.Amount);
+                GridView.Rows[rowTotal].Cells["colSheetID"].Value = "合计";
+                GridView.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(it => it.Amount);
+                this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", assigns.Count);
+            }
+        }
 
+        public void ShowAssigns(CustomerPayment item)
+        {
+            GridView.Rows.Clear();
+            GridView.CellClick -= StackoutSheetID_Click;
+            GridView.CellClick -= PaymentID_Click;
+            GridView.CellClick += StackoutSheetID_Click;
+            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
+            con.PaymentID = item.ID;
+            var assigns = new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+            if (assigns != null && assigns.Count > 0)
+            {
+                foreach (CustomerPaymentAssign assign in assigns)
+                {
+                    var cr = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetByID(assign.ReceivableID).QueryObject;
+                    if (cr != null)
+                    {
+                        int row = GridView.Rows.Add();
+                        GridView.Rows[row].Tag = assign;
+                        GridView.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
+                        GridView.Rows[row].Cells["colAssign"].Value = assign.Amount;
+                    }
+                }
+                int rowTotal = GridView.Rows.Add();
+                GridView.Rows[rowTotal].Cells["colSheetID"].Value = "合计";
+                GridView.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(it => it.Amount);
                 this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", assigns.Count);
             }
         }
         #endregion
 
-        #region 公共属性
-        /// <summary>
-        /// 获取或设置要显示的送货单
-        /// </summary>
-        public string ReceivableID { get; set; }
-        #endregion
-
-        private void FrmCustomerPaymentAssignView_Load(object sender, EventArgs e)
+        #region 事件处理程序
+        private void StackoutSheetID_Click(object sender, DataGridViewCellEventArgs e)
         {
-            if (!string.IsNullOrEmpty (ReceivableID))
+            if (e.RowIndex >= 0 && e.ColumnIndex >=0)
             {
-                ShowDelivery(ReceivableID);
+                if (GridView.Rows[e.RowIndex].Tag == null) return;
+                if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
+                {
+                    string sheetID = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheetID).QueryObject;
+                    if (sheet != null)
+                    {
+                        Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                        frm.IsAdding = false;
+                        frm.IsForView = true;
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                }
             }
         }
 
-        private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void PaymentID_Click(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (GridView.Columns[e.ColumnIndex].Name == "colCustomerPaymentID")
+                if (GridView.Rows[e.RowIndex].Tag == null) return;
+                if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
                     string paymentID = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                     CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(paymentID).QueryObject;
@@ -78,5 +119,6 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 }
             }
         }
+        #endregion
     }
 }

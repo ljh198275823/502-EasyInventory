@@ -31,6 +31,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 CustomerPaymentAssignSearchCondition con = search as CustomerPaymentAssignSearchCondition;
                 if (!string.IsNullOrEmpty(con.PaymentID)) ret = ret.Where(item => item.PaymentID == con.PaymentID);
+                if (con.ReceivableID.HasValue) ret = ret.Where(it => it.ReceivableID == con.ReceivableID.Value);
                 if (con.ReceivableIDs != null && con.ReceivableIDs.Count > 0) ret = ret.Where(item => con.ReceivableIDs.Contains(item.ReceivableID));
             }
             return ret.ToList();
