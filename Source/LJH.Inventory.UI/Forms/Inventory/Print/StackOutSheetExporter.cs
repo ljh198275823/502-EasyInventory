@@ -127,7 +127,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                     ICell cell = row.GetCell(7);
                     if (cell != null) cell.SetCellValue((double)info.Amount);
                     cell = row.GetCell(2);
-                    if (cell != null) cell.SetCellValue((double)info.Amount);
+                    if (cell != null) cell.SetCellValue(RMBHelper.NumGetStr((double)info.Amount));
                 }
                 MemoryStream stream = new MemoryStream();
                 wb.Write(stream);

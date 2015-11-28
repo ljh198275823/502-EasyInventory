@@ -178,6 +178,7 @@
     <Compile Include="Forms\Inventory\FrmSteelRollSliceSelection.Designer.cs">
       <DependentUpon>FrmSteelRollSliceSelection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Print\RMBHelper.cs" />
     <Compile Include="Forms\Inventory\Print\StackOutSheetExporter.cs" />
     <Compile Include="Forms\Inventory\View\FrmSlicedRecordView.cs">
       <SubType>Form</SubType>

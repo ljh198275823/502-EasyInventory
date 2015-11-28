@@ -142,6 +142,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
+            if (chkOver.Checked) return;
             if (txtLength.DecimalValue * txtCount.IntergerValue <= SlicingItem.Length)
             {
                 this.txtRemainLength.DecimalValue = SlicingItem.Length.Value - txtLength.DecimalValue * txtCount.IntergerValue;
@@ -168,8 +169,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void chkOver_CheckedChanged(object sender, EventArgs e)
         {
-            this.txtRemainLength.DecimalValue = 0;
-            this.txtRemainWeight.DecimalValue = 0;
+            if (chkOver.Checked)
+            {
+                this.txtRemainLength.DecimalValue = 0;
+                this.txtRemainWeight.DecimalValue = 0;
+                btnOk.BackColor = Color.Red;
+                btnOk.ForeColor = Color.White;
+            }
+            else
+            {
+                btnOk.ForeColor = Color.Black;
+                btnOk.BackColor = SystemColors.Control;
+                txtLength_TextChanged(txtLength, EventArgs.Empty);
+            }
         }
 
         private void txtFormula_TextChanged(object sender, EventArgs e)

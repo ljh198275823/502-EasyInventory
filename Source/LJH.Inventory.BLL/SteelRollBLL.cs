@@ -108,7 +108,7 @@ namespace LJH.Inventory.BLL
             try
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-                decimal? thick=null ;
+                decimal? thick = null;
                 SliceRecordSearchCondition con = new SliceRecordSearchCondition();
                 con.SourceRoll = pi.ID;
                 var items = new SteelRollSliceRecordBLL(RepoUri).GetItems(con).QueryObjects;
@@ -117,7 +117,7 @@ namespace LJH.Inventory.BLL
 
                     var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
                     decimal len = items.Sum(it => it.Length.Value * it.Count);
-                    thick = pi.CalThick(pi.Product.Specification, pi.OriginalWeight.Value, pi.OriginalLength.Value, pi.Product.Density.Value);
+                    thick = pi.CalThick(pi.Product.Specification, pi.OriginalWeight.Value, len, pi.Product.Density.Value);
                     if (thick.HasValue)
                     {
                         ProductInventoryItem clone = pi.Clone();
@@ -133,7 +133,7 @@ namespace LJH.Inventory.BLL
                         }
                     }
                 }
-                var ret =unitWork.Commit();
+                var ret = unitWork.Commit();
                 if (ret.Result == ResultCode.Successful) pi.RealThick = thick;
                 return ret;
             }
