@@ -32,6 +32,7 @@ namespace InventoryApplication
         #region 私有变量
         private List<Form> _openedForms = new List<Form>();
         private SoftDogInfo _SoftDog;
+        private bool _EnableSoftDog = false; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2015, 12, 31);
         #endregion
 
@@ -447,14 +448,28 @@ namespace InventoryApplication
         #region 事件处理程序
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            if (DateTime.Today > _ExpireDate)
+            if (!_EnableSoftDog)
             {
-                MessageBox.Show("软件已经过期,请联系供应商");
-                Environment.Exit(0);
+                if (DateTime.Today > _ExpireDate)
+                {
+                    MessageBox.Show("软件已经过期,请联系供应商");
+                    Environment.Exit(0);
+                }
             }
+            else
+            {
+                ReadSoftDog();
+            }
+            this.tmrSoftDogChecker.Enabled = _EnableSoftDog;
+
             this.Text += string.Format(" [{0}]", Application.ProductVersion);
             DoLogIn();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
+        }
+
+        private void tmrSoftDogChecker_Tick(object sender, EventArgs e)
+        {
+            ReadSoftDog();
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -462,5 +477,7 @@ namespace InventoryApplication
             Environment.Exit(0);
         }
         #endregion
+
+       
     }
 }

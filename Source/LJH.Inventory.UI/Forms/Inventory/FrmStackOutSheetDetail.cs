@@ -333,6 +333,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
             PerformOperation<StackOutSheet>(bll, SheetOperation.StackOut);
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
+            if (sheet.State == SheetState.Shipped)
+            {
+                new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
+                ShowPaymentState(sheet);
+            }
         }
 
         private void btnNullify_Click(object sender, EventArgs e)

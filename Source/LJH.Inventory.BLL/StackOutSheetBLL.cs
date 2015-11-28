@@ -84,45 +84,23 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        private void AddReceivables(StackOutSheet sheet, IUnitWork unitWork)
+        private void AddReceivables(StackOutSheet sheet, DateTime dt, IUnitWork unitWork)
         {
-            List<CustomerReceivable> crs = new List<CustomerReceivable>();
-            foreach (StackOutItem si in sheet.Items)  //每一个送货项生成一个应收项，因为一个送货单可能包括多个订单的货，所以分别统计
+            CustomerReceivable cr = new CustomerReceivable()
             {
-                CustomerReceivable cr = null;
-                if (string.IsNullOrEmpty(si.OrderID)) cr = crs.SingleOrDefault(it => string.IsNullOrEmpty(it.OrderID));
-                if (!string.IsNullOrEmpty(si.OrderID)) cr = crs.SingleOrDefault(it => it.OrderID == si.OrderID);
-                if (cr == null)
-                {
-                    DateTime dt = DateTime.Now;
-                    cr = new CustomerReceivable()
-                    {
-                        ID = Guid.NewGuid(),
-                        CreateDate = dt,
-                        ClassID = CustomerReceivableType.CustomerReceivable,
-                        CustomerID = sheet.CustomerID,
-                        SheetID = sheet.ID,
-                        OrderID = si.OrderID,
-                        Amount = si.Amount,
-                    };
-                    crs.Add(cr);
-                }
-                else
-                {
-                    cr.Amount += si.Amount;
-                }
-            }
-            foreach (CustomerReceivable cr in crs)
-            {
-                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
-            }
+                ID = Guid.NewGuid(),
+                CreateDate = dt,
+                ClassID = CustomerReceivableType.CustomerReceivable,
+                CustomerID = sheet.CustomerID,
+                SheetID = sheet.ID,
+                Amount = sheet.Amount,
+            };
+            ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
         }
 
-        private void AddTax(StackOutSheet sheet, IUnitWork unitWork)
+        private void AddTax(StackOutSheet sheet, DateTime dt, IUnitWork unitWork)
         {
-            CustomerReceivable tax = null;
-            DateTime dt = DateTime.Now;
-            tax = new CustomerReceivable()
+            CustomerReceivable tax = new CustomerReceivable()
             {
                 ID = Guid.NewGuid(),
                 CreateDate = dt,
@@ -312,8 +290,8 @@ namespace LJH.Inventory.BLL
             InventoryOut(info, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
             if (info.ClassID == StackOutSheetType.DeliverySheet)
             {
-                AddReceivables(info, unitWork);         //类型为送货单的出库单出货时增加应收
-                if (info.WithTax) AddTax(info, unitWork); //含税时需要增加应开增值税发票
+                AddReceivables(info,dt, unitWork);         //类型为送货单的出库单出货时增加应收
+                if (info.WithTax) AddTax(info,dt, unitWork); //含税时需要增加应开增值税发票
             }
         }
 
@@ -401,6 +379,46 @@ namespace LJH.Inventory.BLL
         public QueryResultList<StackOutRecord> GetDeliveryRecords(SearchCondition con)
         {
             return ProviderFactory.Create<IProvider<StackOutRecord, Guid>>(RepoUri).GetItems(con);
+        }
+
+        public void AssignPayment(StackOutSheet info)
+        {
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = info.ID;
+            con.Settled = false;
+            con.ReceivableTypes = new List<CustomerReceivableType>();
+            con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
+            var crs = new CustomerReceivableBLL(RepoUri).GetItems(con).QueryObjects;
+            if (crs != null && crs.Count > 0)
+            {
+                CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+                cpsc.StackSheetID = info.ID;
+                cpsc.HasRemain = true;
+                cpsc.States = new List<SheetState>();
+                cpsc.States.Add(SheetState.Add);
+                cpsc.States.Add(SheetState.Approved);
+                var cps = new CustomerPaymentBLL(RepoUri).GetItems(cpsc).QueryObjects;
+                if (cps != null && cps.Count > 0)
+                {
+                    foreach (var cr in crs)
+                    {
+                        foreach (var cp in cps.Where(it => it.Remain > 0))
+                        {
+                            var assign = new CustomerPaymentAssign()
+                            {
+                                ID = Guid.NewGuid(),
+                                PaymentID = cp.ID,
+                                ReceivableID = cr.ID,
+                                Amount = cr.Remain >= cp.Remain ? cp.Remain : cr.Remain
+                            };
+                            cr.Haspaid += assign.Amount;
+                            cp.Assigned += assign.Amount;
+                            if (assign.Amount > 0) new CustomerPaymentAssignBLL(RepoUri).Assign(assign);
+                            if (cr.Remain == 0) break;
+                        }
+                    }
+                }
+            }
         }
         #endregion
     }

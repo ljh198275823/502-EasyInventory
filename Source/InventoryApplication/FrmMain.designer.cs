@@ -95,6 +95,7 @@
             this.ucFormViewMain = new LJH.GeneralLibrary.WinformControl.UCFormView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.tmrSoftDogChecker = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -349,7 +350,7 @@
             // 
             this.mnu_Options.Enabled = false;
             this.mnu_Options.Name = "mnu_Options";
-            this.mnu_Options.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Options.Size = new System.Drawing.Size(124, 22);
             this.mnu_Options.Text = "系统参数";
             this.mnu_Options.Click += new System.EventHandler(this.mnu_Options_Click);
             // 
@@ -357,7 +358,7 @@
             // 
             this.mnu_Staff.Enabled = false;
             this.mnu_Staff.Name = "mnu_Staff";
-            this.mnu_Staff.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Staff.Size = new System.Drawing.Size(124, 22);
             this.mnu_Staff.Text = "人员部门";
             this.mnu_Staff.Click += new System.EventHandler(this.mnu_Staff_Click);
             // 
@@ -365,33 +366,33 @@
             // 
             this.mnu_Role.Enabled = false;
             this.mnu_Role.Name = "mnu_Role";
-            this.mnu_Role.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Role.Size = new System.Drawing.Size(124, 22);
             this.mnu_Role.Text = "角色";
             this.mnu_Role.Click += new System.EventHandler(this.mnu_Role_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(121, 6);
             // 
             // mnu_ChangePwd
             // 
             this.mnu_ChangePwd.Name = "mnu_ChangePwd";
-            this.mnu_ChangePwd.Size = new System.Drawing.Size(152, 22);
+            this.mnu_ChangePwd.Size = new System.Drawing.Size(124, 22);
             this.mnu_ChangePwd.Text = "更改密码";
             this.mnu_ChangePwd.Click += new System.EventHandler(this.mnu_ChangePwd_Click);
             // 
             // mnu_LogOut
             // 
             this.mnu_LogOut.Name = "mnu_LogOut";
-            this.mnu_LogOut.Size = new System.Drawing.Size(152, 22);
+            this.mnu_LogOut.Size = new System.Drawing.Size(124, 22);
             this.mnu_LogOut.Text = "更改用户";
             this.mnu_LogOut.Click += new System.EventHandler(this.mnu_LogOut_Click);
             // 
             // mnu_Exit
             // 
             this.mnu_Exit.Name = "mnu_Exit";
-            this.mnu_Exit.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Exit.Size = new System.Drawing.Size(124, 22);
             this.mnu_Exit.Text = "退出";
             this.mnu_Exit.Click += new System.EventHandler(this.mnu_Exit_Click);
             // 
@@ -566,7 +567,7 @@
             // toolStrip1
             // 
             this.toolStrip1.ClickThrough = true;
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 38);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(899, 25);
             this.toolStrip1.TabIndex = 2;
@@ -659,6 +660,11 @@
             this.splitter1.TabIndex = 13;
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
+            // 
+            // tmrSoftDogChecker
+            // 
+            this.tmrSoftDogChecker.Interval = 5000;
+            this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
             // 
             // FrmMain
             // 
@@ -756,5 +762,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripMenuItem mnu_Customer;
+        private System.Windows.Forms.Timer tmrSoftDogChecker;
     }
 }

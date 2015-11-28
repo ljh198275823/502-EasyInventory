@@ -202,7 +202,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void btnSave_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            PerformOperation<CustomerPayment>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            SheetOperation so = IsAdding ? SheetOperation.Create : SheetOperation.Modify;
+            PerformOperation<CustomerPayment>(processor, so);
+            if (so == SheetOperation.Create && !string.IsNullOrEmpty(StackSheetID)) //如果已经是确定收款是用于哪个出入库单了, 新建时直接核销
+            {
+                new CustomerPaymentBLL(AppSettings.Current.ConnStr).PaymentAssign(UpdatingItem as CustomerPayment);
+                ItemShowing();
+            }
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
