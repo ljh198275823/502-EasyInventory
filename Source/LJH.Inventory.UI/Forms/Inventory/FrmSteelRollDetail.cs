@@ -214,12 +214,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void txtOriginalWeight_TextChanged(object sender, EventArgs e)
         {
-            if (IsAdding) txtWeight.DecimalValue = txtOriginalWeight.DecimalValue;
+            txtWeight.DecimalValue = txtOriginalWeight.DecimalValue;
         }
 
         private void txtOriginalLength_TextChanged(object sender, EventArgs e)
         {
-            if (IsAdding) txtLength.DecimalValue = txtOriginalLength.DecimalValue;
+            txtLength.DecimalValue = txtOriginalLength.DecimalValue;
         }
         #endregion
     }
