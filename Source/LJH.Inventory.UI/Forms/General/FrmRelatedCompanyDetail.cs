@@ -33,7 +33,7 @@ namespace LJH.Inventory.UI.Forms.General
         {
             if (string.IsNullOrEmpty(txtID.Text))
             {
-                MessageBox.Show("客户编号不能为空");
+                MessageBox.Show("厂家编号不能为空");
                 txtID.Focus();
                 return false;
             }

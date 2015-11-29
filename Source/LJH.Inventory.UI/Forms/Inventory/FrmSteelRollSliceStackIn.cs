@@ -31,7 +31,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void ShowProduct(Product product)
         {
-            cmbSpecification.Text = product.Specification;
+            cmbSpecification.Specification  = product.Specification;
             txtCategory.Text = product.Category.Name;
             txtCategory.Tag = product.Category;
             rdToPanel.Checked = product.Model == rdToPanel.Text;
@@ -51,7 +51,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             else if (rdToWeight.Checked) sliceTo = rdToWeight.Text;
             return new ProductBLL(AppSettings.Current.ConnStr).Create(
                              (txtCategory.Tag as ProductCategory).ID,
-                             StringHelper.ToDBC(cmbSpecification.Text).Trim(),
+                             StringHelper.ToDBC(cmbSpecification.Specification).Trim(),
                              sliceTo,
                              txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null,
                              txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null,
@@ -64,6 +64,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (txtCategory.Tag == null)
             {
                 MessageBox.Show("没有选择类别");
+                return false;
+            }
+            if (string.IsNullOrEmpty(cmbSpecification.Specification))
+            {
+                MessageBox.Show("没有指定规格");
+                return false;
+            }
+            if (SpecificationHelper.GetWrittenThick(cmbSpecification.Specification) == null || SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification) == null)
+            {
+                MessageBox.Show("规格设置不正确,  规格格式为 \"厚度*宽度\" ");
                 return false;
             }
             if (txtThick.DecimalValue <= 0)
@@ -154,6 +164,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            if (!CheckInput()) return;
             var p = CreateProduct();
             if (p == null)
             {

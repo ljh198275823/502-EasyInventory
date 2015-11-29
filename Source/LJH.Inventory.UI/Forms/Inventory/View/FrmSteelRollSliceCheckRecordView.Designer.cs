@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollSliceCheckRecordView));
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -35,12 +37,12 @@
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChecker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
@@ -59,12 +61,12 @@
             this.colCategoryID,
             this.colSpecification,
             this.colModel,
-            this.colWeight,
             this.colLength,
+            this.colWeight,
             this.colInventory,
             this.colCheckCount,
-            this.colCustomer,
             this.colState,
+            this.colCustomer,
             this.colChecker,
             this.colMemo});
             this.GridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -94,6 +96,7 @@
             this.colCategoryID.HeaderText = "类别";
             this.colCategoryID.Name = "colCategoryID";
             this.colCategoryID.ReadOnly = true;
+            this.colCategoryID.Width = 80;
             // 
             // colSpecification
             // 
@@ -106,46 +109,52 @@
             this.colModel.HeaderText = "类型";
             this.colModel.Name = "colModel";
             this.colModel.ReadOnly = true;
-            // 
-            // colWeight
-            // 
-            this.colWeight.HeaderText = "重量";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.ReadOnly = true;
-            this.colWeight.Visible = false;
-            this.colWeight.Width = 80;
+            this.colModel.Width = 80;
             // 
             // colLength
             // 
+            dataGridViewCellStyle1.Format = "N3";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle1;
             this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
-            this.colLength.Visible = false;
             this.colLength.Width = 80;
+            // 
+            // colWeight
+            // 
+            dataGridViewCellStyle2.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colWeight.HeaderText = "重量";
+            this.colWeight.Name = "colWeight";
+            this.colWeight.ReadOnly = true;
+            this.colWeight.Width = 80;
             // 
             // colInventory
             // 
             this.colInventory.HeaderText = "盘点前数量";
             this.colInventory.Name = "colInventory";
             this.colInventory.ReadOnly = true;
+            this.colInventory.Width = 80;
             // 
             // colCheckCount
             // 
             this.colCheckCount.HeaderText = "盘点数量";
             this.colCheckCount.Name = "colCheckCount";
             this.colCheckCount.ReadOnly = true;
-            // 
-            // colCustomer
-            // 
-            this.colCustomer.HeaderText = "客户";
-            this.colCustomer.Name = "colCustomer";
-            this.colCustomer.ReadOnly = true;
+            this.colCheckCount.Width = 80;
             // 
             // colState
             // 
             this.colState.HeaderText = "盈亏";
             this.colState.Name = "colState";
             this.colState.ReadOnly = true;
+            this.colState.Width = 80;
+            // 
+            // colCustomer
+            // 
+            this.colCustomer.HeaderText = "客户";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
             // 
             // colChecker
             // 
@@ -184,12 +193,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colChecker;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }

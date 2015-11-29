@@ -88,7 +88,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1160, 347);
+            this.dataGridView1.Size = new System.Drawing.Size(1224, 347);
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -172,7 +172,7 @@
             // 
             // colLength
             // 
-            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.Format = "N3";
             dataGridViewCellStyle2.NullValue = null;
             this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLength.HeaderText = "长度(米)";
@@ -187,6 +187,7 @@
             this.colOriginalThick.HeaderText = "入库厚度";
             this.colOriginalThick.Name = "colOriginalThick";
             this.colOriginalThick.ReadOnly = true;
+            this.colOriginalThick.Width = 80;
             // 
             // colRealThick
             // 
@@ -244,7 +245,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 369);
+            this.ClientSize = new System.Drawing.Size(1224, 369);
             this.Controls.Add(this.dataGridView1);
             this.Name = "FrmSteelRollSliceView";
             this.Text = "小件库存明细";

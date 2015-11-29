@@ -188,6 +188,12 @@
     <Compile Include="UCProductSelection.designer.cs">
       <DependentUpon>UCProductSelection.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCSpecification.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCSpecification.Designer.cs">
+      <DependentUpon>UCSpecification.cs</DependentUpon>
+    </Compile>
     <Compile Include="WareHouseComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -220,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCProductSelection.resx">
       <DependentUpon>UCProductSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCSpecification.resx">
+      <DependentUpon>UCSpecification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms.General
         private void InitCategoryTree()
         {
             this.categoryTree.Nodes.Clear();
-            this.categoryTree.Nodes.Add("所有供应商类别");
+            this.categoryTree.Nodes.Add("所有厂家类别");
 
             List<RelatedCompanyType> items = (new RelatedCompanyTypeBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             if (items != null && items.Count > 0)

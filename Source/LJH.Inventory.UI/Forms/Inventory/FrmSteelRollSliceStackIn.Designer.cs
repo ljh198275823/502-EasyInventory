@@ -54,7 +54,7 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtThick = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -154,7 +154,7 @@
             0,
             0});
             this.txtLength.Name = "txtLength";
-            this.txtLength.PointCount = 2;
+            this.txtLength.PointCount = 3;
             this.txtLength.Size = new System.Drawing.Size(145, 21);
             this.txtLength.TabIndex = 3;
             this.txtLength.Text = "0.00";
@@ -345,11 +345,11 @@
             // 
             // cmbSpecification
             // 
-            this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(73, 25);
+            this.cmbSpecification.Location = new System.Drawing.Point(73, 22);
             this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(145, 20);
-            this.cmbSpecification.TabIndex = 0;
+            this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
+            this.cmbSpecification.Specification = "*";
+            this.cmbSpecification.TabIndex = 91;
             // 
             // FrmSteelRollSliceStackIn
             // 
@@ -358,6 +358,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(447, 295);
+            this.Controls.Add(this.cmbSpecification);
             this.Controls.Add(this.txtThick);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnClose);
@@ -368,7 +369,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.cmbSpecification);
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.lnkCategory);
             this.Controls.Add(this.label1);
@@ -401,7 +401,6 @@
         private System.Windows.Forms.Label label2;
         private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
         private System.Windows.Forms.Label label7;
-        private Controls.SpecificationComboBox cmbSpecification;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
         private System.Windows.Forms.LinkLabel lnkCategory;
         private System.Windows.Forms.Label label1;
@@ -418,6 +417,7 @@
         protected System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Label label4;
         private GeneralLibrary.WinformControl.DecimalTextBox txtThick;
+        private Controls.UCSpecification cmbSpecification;
 
     }
 }

@@ -116,7 +116,7 @@
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label2);
             this.Name = "FrmRelatedCompanyTypeDetail";
-            this.Text = "相关公司类别";
+            this.Text = "厂家类别";
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.txtMemo, 0);
             this.Controls.SetChildIndex(this.btnOk, 0);

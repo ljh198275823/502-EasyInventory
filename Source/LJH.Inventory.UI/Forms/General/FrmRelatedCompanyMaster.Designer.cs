@@ -66,7 +66,6 @@
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Payment = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
@@ -283,33 +282,33 @@
             this.mnu_DeleteCategory,
             this.mnu_CategoryProperty});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(153, 114);
+            this.CategoryMenu.Size = new System.Drawing.Size(125, 92);
             // 
             // mnu_FreshTree
             // 
             this.mnu_FreshTree.Name = "mnu_FreshTree";
-            this.mnu_FreshTree.Size = new System.Drawing.Size(152, 22);
+            this.mnu_FreshTree.Size = new System.Drawing.Size(124, 22);
             this.mnu_FreshTree.Text = "刷新";
             this.mnu_FreshTree.Click += new System.EventHandler(this.mnu_FreshTree_Click);
             // 
             // mnu_AddCategory
             // 
             this.mnu_AddCategory.Name = "mnu_AddCategory";
-            this.mnu_AddCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddCategory.Size = new System.Drawing.Size(124, 22);
             this.mnu_AddCategory.Text = "增加类别";
             this.mnu_AddCategory.Click += new System.EventHandler(this.mnu_AddCategory_Click);
             // 
             // mnu_DeleteCategory
             // 
             this.mnu_DeleteCategory.Name = "mnu_DeleteCategory";
-            this.mnu_DeleteCategory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeleteCategory.Size = new System.Drawing.Size(124, 22);
             this.mnu_DeleteCategory.Text = "删除";
             this.mnu_DeleteCategory.Click += new System.EventHandler(this.mnu_DeleteCategory_Click);
             // 
             // mnu_CategoryProperty
             // 
             this.mnu_CategoryProperty.Name = "mnu_CategoryProperty";
-            this.mnu_CategoryProperty.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CategoryProperty.Size = new System.Drawing.Size(124, 22);
             this.mnu_CategoryProperty.Text = "属性";
             this.mnu_CategoryProperty.Click += new System.EventHandler(this.mnu_CategoryProperty_Click);
             // 
@@ -328,7 +327,6 @@
             this.btn_Delete,
             this.btn_Export,
             this.btn_Fresh,
-            this.mnu_Payment,
             this.btn_SelectColumns,
             this.toolStripSeparator1,
             this.txtKeyword,
@@ -374,15 +372,6 @@
             this.btn_Fresh.Text = "刷新(&F)";
             this.btn_Fresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // mnu_Payment
-            // 
-            this.mnu_Payment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
-            this.mnu_Payment.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mnu_Payment.Name = "mnu_Payment";
-            this.mnu_Payment.Size = new System.Drawing.Size(59, 46);
-            this.mnu_Payment.Text = "支付(&P)";
-            this.mnu_Payment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // btn_SelectColumns
             // 
             this.btn_SelectColumns.Image = global::LJH.Inventory.UI.Properties.Resources.columns;
@@ -419,7 +408,7 @@
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menu);
             this.Name = "FrmRelatedCompanyMaster";
-            this.Text = "其它公司资料";
+            this.Text = "厂家";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);
@@ -458,7 +447,6 @@
         private System.Windows.Forms.ToolStripMenuItem btn_Delete;
         private System.Windows.Forms.ToolStripMenuItem btn_Export;
         private System.Windows.Forms.ToolStripMenuItem btn_Fresh;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Payment;
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private Controls.TooStripDBCTextBox txtKeyword;

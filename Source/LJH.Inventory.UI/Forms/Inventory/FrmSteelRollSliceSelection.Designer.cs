@@ -291,9 +291,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Location = new System.Drawing.Point(0, 1);
             this.panel1.Name = "panel1";
@@ -305,9 +305,9 @@
             this.dataGridview1.AllowUserToAddRows = false;
             this.dataGridview1.AllowUserToDeleteRows = false;
             this.dataGridview1.AllowUserToResizeRows = false;
-            this.dataGridview1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridview1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridview1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridview1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridview1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -368,7 +368,7 @@
             // 
             // colLength
             // 
-            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.Format = "N3";
             this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLength.HeaderText = "长度(米)";
             this.colLength.Name = "colLength";

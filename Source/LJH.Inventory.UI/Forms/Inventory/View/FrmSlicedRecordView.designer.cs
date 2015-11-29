@@ -159,7 +159,7 @@
             // 
             // colLength
             // 
-            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.Format = "N3";
             this.colLength.DefaultCellStyle = dataGridViewCellStyle3;
             this.colLength.HeaderText = "小件长度";
             this.colLength.Name = "colLength";

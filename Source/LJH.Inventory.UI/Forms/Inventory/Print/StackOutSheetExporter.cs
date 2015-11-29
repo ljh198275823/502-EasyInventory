@@ -104,7 +104,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                             cell = row.GetCell(1);
                             if (cell != null) cell.SetCellValue(p.Specification);
                             cell = row.GetCell(2);
-                            if (cell != null) cell.SetCellValue(p.Length.HasValue ? p.Length.Value.ToString("F2") : string.Empty);
+                            if (cell != null) cell.SetCellValue(p.Length.HasValue ? p.Length.Value.ToString("F3") : string.Empty);
                             cell = row.GetCell(3);
                             if (cell != null) cell.SetCellValue(item.Count.ToString("F0"));
                             cell = row.GetCell(4);

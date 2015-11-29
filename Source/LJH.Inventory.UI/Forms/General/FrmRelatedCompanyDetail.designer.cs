@@ -107,7 +107,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 15;
-            this.label1.Text = "客户编号";
+            this.label1.Text = "厂家编号";
             // 
             // txtTelephone
             // 
@@ -334,7 +334,7 @@
             this.lblCategory.Size = new System.Drawing.Size(53, 12);
             this.lblCategory.TabIndex = 1;
             this.lblCategory.TabStop = true;
-            this.lblCategory.Text = "客户类别";
+            this.lblCategory.Text = "厂家类别";
             this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
             // 
             // FrmRelatedCompanyDetail
@@ -362,7 +362,7 @@
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.label1);
             this.Name = "FrmRelatedCompanyDetail";
-            this.Text = "客户资料";
+            this.Text = "厂家资料";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.label1, 0);

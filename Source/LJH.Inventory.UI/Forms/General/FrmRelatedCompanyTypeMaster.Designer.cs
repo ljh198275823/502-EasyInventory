@@ -32,6 +32,11 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,14 +46,9 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.menu.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -84,6 +84,40 @@
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Delete,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // cMnu_Delete
+            // 
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Text = "删除";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // menu
             // 
@@ -165,40 +199,6 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.cMnu_Delete,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // cMnu_Delete
-            // 
-            this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Delete.Text = "删除";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
             // FrmRelatedCompanyTypeMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -207,13 +207,13 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menu);
             this.Name = "FrmRelatedCompanyTypeMaster";
-            this.Text = "相关公司类别";
+            this.Text = "厂家类别";
             this.Controls.SetChildIndex(this.menu, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
