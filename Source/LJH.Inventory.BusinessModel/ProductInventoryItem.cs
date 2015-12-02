@@ -154,7 +154,6 @@ namespace LJH.Inventory.BusinessModel
                 else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
                 else if (OriginalLength > Length) return "余卷";
                 return "整卷";
-                return string.Empty;
             }
         }
         /// <summary>

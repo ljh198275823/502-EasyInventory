@@ -7,6 +7,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.DAL.IProvider;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.DAL.Linq;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
@@ -23,8 +24,8 @@ namespace LJH.Inventory.DAL.LinqProvider
             var ret = dc.GetTable<ProductInventoryItem>().SingleOrDefault(item => item.ID == id);
             if (ret != null)
             {
-                ret.Product = new ProductProvider(ConnectStr, _MappingResource).GetByID(ret.ProductID).QueryObject;
-                ret.WareHouse = new WareHouseProvider(ConnectStr, _MappingResource).GetByID(ret.WareHouseID).QueryObject;
+                ret.Product = new ProductProvider(SqlURI, _MappingResource).GetByID(ret.ProductID).QueryObject;
+                ret.WareHouse = new WareHouseProvider(SqlURI, _MappingResource).GetByID(ret.WareHouseID).QueryObject;
                 if (ret.Product == null || ret.WareHouse == null) ret = null;
             }
             return ret;
@@ -70,8 +71,8 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
                 if (items != null && items.Count > 0)
                 {
-                    List<Product> ps = new ProductProvider(ConnectStr, _MappingResource).GetItems(null).QueryObjects;
-                    List<WareHouse> ws = new WareHouseProvider(ConnectStr, _MappingResource).GetItems(null).QueryObjects;
+                    List<Product> ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                    List<WareHouse> ws = new WareHouseProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
                     foreach (var pi in items)
                     {
                         pi.Product = ps.SingleOrDefault(it => it.ID == pi.ProductID);

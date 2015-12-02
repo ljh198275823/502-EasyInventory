@@ -24,7 +24,6 @@ namespace LJH.Inventory.BLL
         #region 公共方法
         public QueryResult<ProductInventoryItem> GetByID(Guid id)
         {
-            ProductInventoryItem sr = null;
             return  ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(id);
         }
 

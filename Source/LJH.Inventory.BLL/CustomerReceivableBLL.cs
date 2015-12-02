@@ -18,7 +18,8 @@ namespace LJH.Inventory.BLL
         }
         #endregion
 
-        public CommandResult Delete(CustomerReceivable info)
+        #region 重写基类方法
+        public override CommandResult Delete(CustomerReceivable info)
         {
             CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition() { ReceivableID = info.ID };
             List<CustomerPaymentAssign> assigns = new CustomerPaymentAssignBLL(RepoUri).GetItems(con).QueryObjects;
@@ -34,5 +35,6 @@ namespace LJH.Inventory.BLL
             }
             return base.Delete(info);
         }
+        #endregion
     }
 }

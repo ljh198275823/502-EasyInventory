@@ -20,8 +20,6 @@ namespace LJH.Inventory.BusinessModel
 
         #region 私有变量
         public readonly string DocumentType = "CompanyInfo";
-
-        private string _Password;
         #endregion
 
         #region 公共属性

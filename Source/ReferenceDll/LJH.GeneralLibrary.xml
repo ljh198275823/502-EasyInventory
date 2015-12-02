@@ -337,6 +337,32 @@
             <param name="msg"></param>
             <returns></returns>
         </member>
+        <member name="T:LJH.GeneralLibrary.Core.DAL.Linq.LinqUnitWork">
+            <summary>
+            表示LINQ单元操作
+            </summary>
+        </member>
+        <member name="T:LJH.GeneralLibrary.Core.DAL.IUnitWork">
+            <summary>
+            表示一个单元操作,用于把多个操作组成一个事务操作.
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IUnitWork.Commit">
+            <summary>
+            提交操作
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.LinqUnitWork.Commit">
+            <summary>
+            提交事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.Linq.LinqUnitWork.DataContext">
+            <summary>
+            获取执行单元的数据上下文
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.CardReader.CardOperationResultCode">
             <summary>
             卡片操作结果代码枚举
@@ -1149,25 +1175,6 @@
             获取串口号
             </summary>
         </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.DataContextFactory.CreateDataContext(System.String,System.Data.Linq.Mapping.MappingSource,System.Boolean)">
-            <summary>
-            创建数据上下文
-            </summary>
-            <param name="connStr"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.DataContextFactory.GetSQLType(System.String)">
-            <summary>
-            从数据库连接资源uri中获取数据库类型
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.DataContextFactory.GetConnectString(System.String)">
-            <summary>
-             从数据库连接资源uri获取数据库连接字符串
-            </summary>
-            <returns></returns>
-        </member>
         <member name="F:LJH.GeneralLibrary.WinformControl.UCDateTimeInterval.components">
             <summary> 
             必需的设计器变量。
@@ -1393,6 +1400,27 @@
             获取或设置查询条件
             </summary>
         </member>
+        <member name="M:LJH.GeneralLibrary.Net.LJHSocket.Open">
+            <summary>
+            连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Net.LJHSocket.SendData(System.Byte[])">
+            <summary>
+            发送数据
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Net.LJHSocket.Close">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="E:LJH.GeneralLibrary.Net.LJHSocket.OnDataArrivedEvent">
+            <summary>
+            数据到达事件
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.WinformControl.MyToolStrip">
             <summary>
             这个类继承自ToolStrip,用于解决窗体中使用UCFormView显示窗体时，工具栏需要按两次才有反应的问题。
@@ -1597,131 +1625,6 @@
             获取或设置两条指令下发间隔(ms)
             </summary>
         </member>
-        <member name="T:LJH.GeneralLibrary.Core.DAL.ProviderBase`2">
-            <summary>
-            表示所有数据提供者的基类
-            </summary>
-            <typeparam name="TInfo"></typeparam>
-            <typeparam name="TID"></typeparam>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.GetByID(`1)">
-            <summary>
-            通过ID获取对像
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.GetItems(LJH.GeneralLibrary.Core.DAL.SearchCondition)">
-            <summary>
-            通过查询条件获取对象
-            </summary>
-            <param name="search"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Insert(`0)">
-            <summary>
-            插入对象
-            </summary>
-            <param name="t"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Update(`0,`0)">
-            <summary>
-            更新对象
-            </summary>
-            <param name="newVal"></param>
-            <param name="originalVal"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Delete(`0)">
-            <summary>
-            删除对象
-            </summary>
-            <param name="t"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Insert(`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
-            <summary>
-            插入对象,这个操作属于一个单元操作的一部分
-            </summary>
-            <param name="t"></param>
-            <param name="unitWork"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Update(`0,`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
-            <summary>
-            更新对象,这个操作属于一个单元操作的一部分
-            </summary>
-            <param name="t"></param>
-            <param name="unitWork"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Delete(`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
-            <summary>
-            删除对象,这个操作属于一个单元操作的一部分
-            </summary>
-            <param name="t"></param>
-            <param name="unitWork"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.ProviderBase`2.GetByID(`1)">
-            <summary>
-            通过ID获取实体对象
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.ProviderBase`2.GetItems(LJH.GeneralLibrary.Core.DAL.SearchCondition)">
-            <summary>
-            通过查询条件获取实体对象
-            </summary>
-            <param name="search"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.ProviderBase`2.Insert(`0)">
-            <summary>
-            插入实体对象
-            </summary>
-            <param name="info"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.ProviderBase`2.Update(`0,`0)">
-            <summary>
-            更新实体对象
-            </summary>
-            <param name="newVal"></param>
-            <param name="original"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.ProviderBase`2.Delete(`0)">
-            <summary>
-            删除实体对象
-            </summary>
-            <param name="info"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.ProviderBase`2.Insert(`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
-            <summary>
-            通过工作单元插入实体对象，实际插入发生在工作单元提交时
-            </summary>
-            <param name="info"></param>
-            <param name="unitWork"></param>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.ProviderBase`2.Update(`0,`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
-            <summary>
-            通过工作单元更新实体对象，实际更新发生在工作单元提交时
-            </summary>
-            <param name="newVal"></param>
-            <param name="originalVal"></param>
-            <param name="unitWork"></param>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.ProviderBase`2.Delete(`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
-            <summary>
-            通过工作单元删除实体对象，实际删除发生在工作单元提交时
-            </summary>
-            <param name="info"></param>
-            <param name="unitWork"></param>
-        </member>
         <member name="T:LJH.GeneralLibrary.CardReader.ZSTReaderEventArgs">
             <summary>
             表示中山通读卡事件参数
@@ -1778,6 +1681,20 @@
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.DataContextFactory.CreateDataContext(LJH.GeneralLibrary.Core.DAL.SQLConnectionURI,System.Data.Linq.Mapping.MappingSource,System.Boolean)">
+            <summary>
+            创建数据上下文
+            </summary>
+            <param name="sqlURI"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.DataContextFactory.CreateDataContext(System.String,System.Data.Linq.Mapping.MappingSource,System.Boolean)">
+            <summary>
+            创建数据上下文
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
         </member>
         <member name="F:LJH.GeneralLibrary.CardReader.MUR200CardReader.KEY_TYPE_A">
             <summary>
@@ -2251,26 +2168,6 @@
         <member name="P:LJH.GeneralLibrary.CardReader.YangChengTongPacket.Code">
             <summary>
             获取或设置包的指令码
-            </summary>
-        </member>
-        <member name="T:LJH.GeneralLibrary.Core.DAL.ILinqUnitWork">
-            <summary>
-            单元操作
-            </summary>
-        </member>
-        <member name="T:LJH.GeneralLibrary.Core.DAL.IUnitWork">
-            <summary>
-            表示一个单元操作,用于把多个操作组成一个事务操作.
-            </summary>
-        </member>
-        <member name="M:LJH.GeneralLibrary.Core.DAL.IUnitWork.Commit">
-            <summary>
-            提交操作
-            </summary>
-        </member>
-        <member name="P:LJH.GeneralLibrary.Core.DAL.ILinqUnitWork.DataContext">
-            <summary>
-            获取执行单元的数据上下文
             </summary>
         </member>
         <member name="T:LJH.GeneralLibrary.WinformControl.PercentageProgressBar">
@@ -2807,6 +2704,176 @@
             <param name="bytes2"></param>
             <returns></returns>
         </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.SQLConnectionURI.SQLType">
+            <summary>
+            获取或设置数据库类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.SQLConnectionURI.ConnectString">
+            <summary>
+             获取或设置数据库连接字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2">
+            <summary>
+            表示所有数据提供者的基类
+            </summary>
+            <typeparam name="TInfo"></typeparam>
+            <typeparam name="TID"></typeparam>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.GetByID(`1)">
+            <summary>
+            通过ID获取对像
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.GetItems(LJH.GeneralLibrary.Core.DAL.SearchCondition)">
+            <summary>
+            通过查询条件获取对象
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Insert(`0)">
+            <summary>
+            插入对象
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Update(`0,`0)">
+            <summary>
+            更新对象
+            </summary>
+            <param name="newVal"></param>
+            <param name="originalVal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Delete(`0)">
+            <summary>
+            删除对象
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.CreateUnitWork">
+            <summary>
+            创建操作单元
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Insert(`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
+            <summary>
+            插入对象,这个操作属于一个单元操作的一部分
+            </summary>
+            <param name="t"></param>
+            <param name="unitWork"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Update(`0,`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
+            <summary>
+            更新对象,这个操作属于一个单元操作的一部分
+            </summary>
+            <param name="t"></param>
+            <param name="unitWork"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.IProvider`2.Delete(`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
+            <summary>
+            删除对象,这个操作属于一个单元操作的一部分
+            </summary>
+            <param name="t"></param>
+            <param name="unitWork"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.CreateDataContext">
+            <summary>
+            创建一个数据库上下文
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.CreateUnitWork">
+            <summary>
+            创建一个单元操作对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.GetByID(`1)">
+            <summary>
+            通过ID获取实体对象
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.GetItems(LJH.GeneralLibrary.Core.DAL.SearchCondition)">
+            <summary>
+            通过查询条件获取实体对象
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.Insert(`0)">
+            <summary>
+            插入实体对象
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.Update(`0,`0)">
+            <summary>
+            更新实体对象
+            </summary>
+            <param name="newVal"></param>
+            <param name="original"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.Delete(`0)">
+            <summary>
+            删除实体对象
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.Insert(`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
+            <summary>
+            通过工作单元插入实体对象，实际插入发生在工作单元提交时
+            </summary>
+            <param name="info"></param>
+            <param name="unitWork"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.Update(`0,`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
+            <summary>
+            通过工作单元更新实体对象，实际更新发生在工作单元提交时
+            </summary>
+            <param name="newVal"></param>
+            <param name="originalVal"></param>
+            <param name="unitWork"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.Delete(`0,LJH.GeneralLibrary.Core.DAL.IUnitWork)">
+            <summary>
+            通过工作单元删除实体对象，实际删除发生在工作单元提交时
+            </summary>
+            <param name="info"></param>
+            <param name="unitWork"></param>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.Linq.ProviderBase`2.SqlURI">
+            <summary>
+            获取或设置SQL数据库URI
+            </summary>
+        </member>
+        <member name="T:LJH.GeneralLibrary.CardReader.IDR210Reader">
+            <summary>
+            表示精仑IDR210 二代身份证读卡器
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.CardReader.IDR210Reader.Comport">
+            <summary>
+            获取或设置读卡器串口, 其中1001表示USB接口
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.CommPort">
             <summary>
             串口操作
@@ -3252,13 +3319,6 @@
             <summary>
             向下移动
             </summary>
-        </member>
-        <member name="M:LJH.GeneralLibrary.DecimalHelper.Trim(System.Decimal)">
-            <summary>
-            去掉实数小数点后不必要的0,比如12.500 会变成12.5,12.00会变成12等
-            </summary>
-            <param name="d"></param>
-            <returns></returns>
         </member>
         <member name="M:LJH.GeneralLibrary.CardReader.ZSTReader.Init">
             <summary>
@@ -3744,6 +3804,13 @@
             从字节数组生成短整形数
             </summary>
             <param name="bytes">字节数组的长度小于或等于2,否则产生InvalidCastException异常</param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.DecimalExtention.Trim(System.Decimal)">
+            <summary>
+            去掉实数小数点后不必要的0,比如12.500 会变成12.5,12.00会变成12等
+            </summary>
+            <param name="d"></param>
             <returns></returns>
         </member>
     </members>

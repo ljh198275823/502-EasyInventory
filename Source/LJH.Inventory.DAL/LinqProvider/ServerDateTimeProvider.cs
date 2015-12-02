@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using LJH.Inventory.DAL.IProvider;
 using LJH.GeneralLibrary.Core.DAL;
+using LJH.GeneralLibrary.Core.DAL.Linq;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
