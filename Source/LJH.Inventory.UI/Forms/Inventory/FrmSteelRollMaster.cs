@@ -94,11 +94,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             else if (sr.Status == "整卷")
             {
-                row.DefaultCellStyle.ForeColor = Color.Green;
+                row.DefaultCellStyle.ForeColor = Color.Blue;
             }
             else if (sr.Status == "余卷")
             {
-                row.DefaultCellStyle.ForeColor = Color.Blue;
+                row.DefaultCellStyle.ForeColor = Color.Black;
             }
             else if (sr.Status == "尾卷")
             {
