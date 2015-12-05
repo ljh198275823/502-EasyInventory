@@ -166,7 +166,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             ProductInventoryItem sr = item as ProductInventoryItem;
             row.Tag = sr;
-            row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy年MM月dd日");
+            row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
             row.Cells["colSpecification"].Value = sr.Product.Specification;
             row.Cells["colWareHouse"].Value = sr.WareHouse.Name;
