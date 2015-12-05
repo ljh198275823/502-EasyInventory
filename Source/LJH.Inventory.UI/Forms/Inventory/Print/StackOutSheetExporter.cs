@@ -81,12 +81,16 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 row = sheet.GetRow(5);
                 if (row != null)
                 {
-                    //ICell cell = row.GetCell(1);
-                    //if (cell != null) cell.SetCellValue(info.Driver);
-                    //cell = row.GetCell(4);
-                    //if (cell != null) cell.SetCellValue(info.DriverCall);
-                    //cell = row.GetCell(7);
-                    //if (cell != null) cell.SetCellValue(info.CarPlate);
+                    var customerState = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(info.CustomerID).QueryObject;
+                    var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
+                    ICell cell = row.GetCell(1);
+                    if (cell != null) cell.SetCellValue((double)(finance != null ? finance.Paid : 0));
+                    cell = row.GetCell(4);
+                    if (cell != null) cell.SetCellValue((double)(finance != null ? finance.NotPaid : 0));
+                    cell = row.GetCell(7);
+                    decimal total = customerState != null ? (customerState.Recievables - customerState.Prepay) : 0;
+                    if (info.State != LJH.Inventory.BusinessModel.SheetState.Shipped) total += info.Amount; //如果送货单还未处于送货状态，说明此单的还没有加到应收里面，此时总欠款要加上这一笔
+                    if (cell != null) cell.SetCellValue((double)total);
                 }
 
                 var items = info.GetSummaryItems();
@@ -115,8 +119,17 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                             if (cell != null) cell.SetCellValue((Double)item.Price);
                             cell = row.GetCell(7);
                             if (cell != null) cell.SetCellValue((Double)item.Amount);
-                            cell = row.GetCell(8);
-                            if (cell != null) cell.SetCellValue(item.Memo);
+                            if (!string.IsNullOrEmpty(item.Memo)) //备注另起一行
+                            {
+                                rowIndex++;
+                                row = sheet.GetRow(rowIndex);
+                                if (row != null)
+                                {
+                                    sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(rowIndex, rowIndex, 1, 7));
+                                    cell = row.GetCell(1);
+                                    if (cell != null) cell.SetCellValue(item.Memo);
+                                }
+                            }
                         }
                     }
                     rowIndex++;

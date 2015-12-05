@@ -56,27 +56,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void ShowPaymentState(StackOutSheet item)
         {
-            if (item.State != SheetState.Shipped)
-            {
-                if (!string.IsNullOrEmpty(item.ID))
-                {
-                    CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
-                    con.PaymentTypes = new List<CustomerPaymentType>();
-                    con.PaymentTypes.Add(CustomerPaymentType.Customer);
-                    con.States = new List<SheetState>();
-                    con.States.Add(SheetState.Add);
-                    con.States.Add(SheetState.Approved);
-                    con.StackSheetID = item.ID;
-                    var cps = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
-                    if (cps != null) lnkPayment.Text = cps.Sum(it => it.Remain).ToString("C2");
-                }
-            }
-            else
-            {
-                CustomerReceivableSearchCondition con1 = new CustomerReceivableSearchCondition() { SheetID = item.ID };
-                List<CustomerReceivable> crs = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con1).QueryObjects;
-                if (crs != null) lnkPayment.Text = crs.Sum(it => it.Haspaid).ToString("C2");
-            }
+            var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(item.ID).QueryObject;
+            if (finance != null) lnkPayment.Text = finance.Paid.ToString("C2");
         }
 
         private void ShowDeliveryItemsOnGrid(StackOutSheet sheet)
@@ -376,10 +357,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
             decimal value;
-            if (row.Cells[e.ColumnIndex].Value != null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString(), out value))
+            if (row.Cells[e.ColumnIndex].Value != null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString().TrimStart ('¥'), out value))
             {
                 if (value < 0) value = 0;
-
                 if (col.Name == "colPrice")
                 {
                     item.Price = value;

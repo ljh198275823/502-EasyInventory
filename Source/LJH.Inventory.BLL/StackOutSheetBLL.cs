@@ -420,6 +420,40 @@ namespace LJH.Inventory.BLL
                 }
             }
         }
+        /// <summary>
+        /// 获取某个送货单的财务状态
+        /// </summary>
+        /// <param name="sheetID"></param>
+        /// <returns></returns>
+        public QueryResult<StackOutSheetFinancialState> GetFinancialStateOf(string sheetID)
+        {
+            var item = GetByID(sheetID).QueryObject;
+            if (item == null) return new QueryResult<StackOutSheetFinancialState>(ResultCode.Fail, "没有找到相关送货单信息", null);
+            var ret = new StackOutSheetFinancialState() { ID = sheetID };
+            if (item.State != SheetState.Shipped)
+            {
+                if (!string.IsNullOrEmpty(item.ID))
+                {
+                    CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
+                    con.PaymentTypes = new List<CustomerPaymentType>();
+                    con.PaymentTypes.Add(CustomerPaymentType.Customer);
+                    con.States = new List<SheetState>();
+                    con.States.Add(SheetState.Add);
+                    con.States.Add(SheetState.Approved);
+                    con.StackSheetID = item.ID;
+                    var cps = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+                    if (cps != null) ret.Paid = cps.Sum(it => it.Remain);
+                }
+            }
+            else
+            {
+                CustomerReceivableSearchCondition con1 = new CustomerReceivableSearchCondition() { SheetID = item.ID };
+                List<CustomerReceivable> crs = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con1).QueryObjects;
+                if (crs != null) ret.Paid = crs.Sum(it => it.Haspaid);
+            }
+            ret.NotPaid = item.Amount - item.Discount - ret.Paid;
+            return new QueryResult<StackOutSheetFinancialState>(ResultCode.Successful, string.Empty, ret);
+        }
         #endregion
     }
 }

@@ -234,4 +234,15 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
     }
+
+    public class StackOutSheetFinancialState
+    {
+        public string ID { get; set; }
+        /// <summary>
+        /// 获取或设置已收款金额
+        /// </summary>
+        public decimal Paid { get; set; }
+
+        public decimal NotPaid { get; set; }
+    }
 }
