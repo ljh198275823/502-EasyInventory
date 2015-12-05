@@ -119,17 +119,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                             if (cell != null) cell.SetCellValue((Double)item.Price);
                             cell = row.GetCell(7);
                             if (cell != null) cell.SetCellValue((Double)item.Amount);
-                            if (!string.IsNullOrEmpty(item.Memo)) //备注另起一行
-                            {
-                                rowIndex++;
-                                row = sheet.GetRow(rowIndex);
-                                if (row != null)
-                                {
-                                    sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(rowIndex, rowIndex, 1, 7));
-                                    cell = row.GetCell(1);
-                                    if (cell != null) cell.SetCellValue(item.Memo);
-                                }
-                            }
+                            cell = row.GetCell(8);
+                            if (cell != null) cell.SetCellValue(item.Memo);
                         }
                     }
                     rowIndex++;
