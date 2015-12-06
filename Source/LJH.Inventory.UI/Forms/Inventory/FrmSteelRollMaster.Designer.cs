@@ -111,7 +111,7 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1511, 86);
+            this.pnlFilter.Size = new System.Drawing.Size(1362, 86);
             this.pnlFilter.TabIndex = 112;
             // 
             // panel5
@@ -137,7 +137,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(1, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1510, 86);
+            this.panel5.Size = new System.Drawing.Size(1361, 86);
             this.panel5.TabIndex = 7;
             // 
             // ucDateTimeInterval1
@@ -431,7 +431,7 @@
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1511, 446);
+            this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
             this.dataGridView1.TabIndex = 115;
             // 
             // contextMenuStrip1
@@ -573,7 +573,7 @@
             // 
             // colOriginalLength
             // 
-            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.Format = "N3";
             dataGridViewCellStyle2.NullValue = null;
             this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colOriginalLength.HeaderText = "入库长度";
@@ -591,7 +591,7 @@
             // 
             // colLength
             // 
-            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.Format = "N3";
             dataGridViewCellStyle4.NullValue = null;
             this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
             this.colLength.HeaderText = "剩余长度";
@@ -669,7 +669,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1511, 554);
+            this.ClientSize = new System.Drawing.Size(1362, 554);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pnlFilter);
             this.Name = "FrmSteelRollMaster";

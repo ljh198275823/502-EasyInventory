@@ -60,15 +60,15 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public CommandResult CreateInventory(Product p, WareHouse w, string customer, decimal count, decimal thick, string op, string memo)
+        public CommandResult CreateInventory(Product p, WareHouse w, string customer, decimal count,decimal weight, decimal thick, string op, string memo)
         {
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = p.ID, WareHouseID = w.ID };
-            con.States = (int)ProductInventoryState.UnShipped;
-            List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            if (items != null && items.Count > 0 && items.Exists(it => it.Customer == customer))
-            {
-                return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点来操作");
-            }
+            //ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = p.ID, WareHouseID = w.ID };
+            //con.States = (int)ProductInventoryState.UnShipped;
+            //List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            //if (items != null && items.Count > 0 && items.Exists(it => it.Customer == customer))
+            //{
+            //    return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点来操作");
+            //}
             ProductInventoryItem pii = new ProductInventoryItem()
             {
                 ID = Guid.NewGuid(),
@@ -78,7 +78,7 @@ namespace LJH.Inventory.BLL
                 Unit = "件",
                 Count = count,
                 InventorySheet = "新建库存",
-                Weight = p.Weight,
+                Weight = weight,
                 Length = p.Length,
                 Model = p.Model,
                 RealThick = thick,

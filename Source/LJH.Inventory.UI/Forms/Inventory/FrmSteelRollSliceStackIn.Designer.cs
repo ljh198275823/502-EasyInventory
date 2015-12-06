@@ -42,9 +42,9 @@
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rdToWeight = new System.Windows.Forms.RadioButton();
-            this.rdToRoll = new System.Windows.Forms.RadioButton();
-            this.rdToPanel = new System.Windows.Forms.RadioButton();
+            this.rd开吨 = new System.Windows.Forms.RadioButton();
+            this.rd开条 = new System.Windows.Forms.RadioButton();
+            this.rd开平 = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
@@ -111,7 +111,6 @@
             // 
             // txtWeight
             // 
-            this.txtWeight.Enabled = false;
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtWeight.Location = new System.Drawing.Point(278, 90);
             this.txtWeight.MaxValue = new decimal(new int[] {
@@ -128,7 +127,7 @@
             this.txtWeight.PointCount = 3;
             this.txtWeight.Size = new System.Drawing.Size(145, 21);
             this.txtWeight.TabIndex = 4;
-            this.txtWeight.Text = "0.00";
+            this.txtWeight.Text = "0.000";
             // 
             // label2
             // 
@@ -157,7 +156,7 @@
             this.txtLength.PointCount = 3;
             this.txtLength.Size = new System.Drawing.Size(145, 21);
             this.txtLength.TabIndex = 3;
-            this.txtLength.Text = "0.00";
+            this.txtLength.Text = "0.000";
             // 
             // label7
             // 
@@ -200,49 +199,49 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.rdToWeight);
-            this.panel1.Controls.Add(this.rdToRoll);
-            this.panel1.Controls.Add(this.rdToPanel);
+            this.panel1.Controls.Add(this.rd开吨);
+            this.panel1.Controls.Add(this.rd开条);
+            this.panel1.Controls.Add(this.rd开平);
             this.panel1.Location = new System.Drawing.Point(73, 56);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 21);
             this.panel1.TabIndex = 2;
             // 
-            // rdToWeight
+            // rd开吨
             // 
-            this.rdToWeight.AutoSize = true;
-            this.rdToWeight.Location = new System.Drawing.Point(128, 2);
-            this.rdToWeight.Name = "rdToWeight";
-            this.rdToWeight.Size = new System.Drawing.Size(47, 16);
-            this.rdToWeight.TabIndex = 2;
-            this.rdToWeight.Tag = "开吨";
-            this.rdToWeight.Text = "开吨";
-            this.rdToWeight.UseVisualStyleBackColor = true;
-            this.rdToWeight.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
+            this.rd开吨.AutoSize = true;
+            this.rd开吨.Location = new System.Drawing.Point(128, 2);
+            this.rd开吨.Name = "rd开吨";
+            this.rd开吨.Size = new System.Drawing.Size(47, 16);
+            this.rd开吨.TabIndex = 2;
+            this.rd开吨.Tag = "开吨";
+            this.rd开吨.Text = "开吨";
+            this.rd开吨.UseVisualStyleBackColor = true;
+            this.rd开吨.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
-            // rdToRoll
+            // rd开条
             // 
-            this.rdToRoll.AutoSize = true;
-            this.rdToRoll.Location = new System.Drawing.Point(65, 3);
-            this.rdToRoll.Name = "rdToRoll";
-            this.rdToRoll.Size = new System.Drawing.Size(47, 16);
-            this.rdToRoll.TabIndex = 1;
-            this.rdToRoll.Tag = "卷材";
-            this.rdToRoll.Text = "开条";
-            this.rdToRoll.UseVisualStyleBackColor = true;
-            this.rdToRoll.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
+            this.rd开条.AutoSize = true;
+            this.rd开条.Location = new System.Drawing.Point(65, 3);
+            this.rd开条.Name = "rd开条";
+            this.rd开条.Size = new System.Drawing.Size(47, 16);
+            this.rd开条.TabIndex = 1;
+            this.rd开条.Tag = "卷材";
+            this.rd开条.Text = "开条";
+            this.rd开条.UseVisualStyleBackColor = true;
+            this.rd开条.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
-            // rdToPanel
+            // rd开平
             // 
-            this.rdToPanel.AutoSize = true;
-            this.rdToPanel.Location = new System.Drawing.Point(4, 3);
-            this.rdToPanel.Name = "rdToPanel";
-            this.rdToPanel.Size = new System.Drawing.Size(47, 16);
-            this.rdToPanel.TabIndex = 0;
-            this.rdToPanel.Tag = "板材";
-            this.rdToPanel.Text = "开平";
-            this.rdToPanel.UseVisualStyleBackColor = true;
-            this.rdToPanel.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
+            this.rd开平.AutoSize = true;
+            this.rd开平.Location = new System.Drawing.Point(4, 3);
+            this.rd开平.Name = "rd开平";
+            this.rd开平.Size = new System.Drawing.Size(47, 16);
+            this.rd开平.TabIndex = 0;
+            this.rd开平.Tag = "板材";
+            this.rd开平.Text = "开平";
+            this.rd开平.UseVisualStyleBackColor = true;
+            this.rd开平.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
             // label10
             // 
@@ -341,7 +340,7 @@
             this.txtThick.PointCount = 3;
             this.txtThick.Size = new System.Drawing.Size(145, 21);
             this.txtThick.TabIndex = 90;
-            this.txtThick.Text = "0.00";
+            this.txtThick.Text = "0.000";
             // 
             // cmbSpecification
             // 
@@ -382,6 +381,7 @@
             this.Controls.Add(this.label5);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSteelRollSliceStackIn";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "创建小件库存";
             this.Load += new System.EventHandler(this.FrmSteelRollSliceDetail_Load);
             this.panel1.ResumeLayout(false);
@@ -405,9 +405,9 @@
         private System.Windows.Forms.LinkLabel lnkCategory;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton rdToWeight;
-        private System.Windows.Forms.RadioButton rdToRoll;
-        private System.Windows.Forms.RadioButton rdToPanel;
+        private System.Windows.Forms.RadioButton rd开吨;
+        private System.Windows.Forms.RadioButton rd开条;
+        private System.Windows.Forms.RadioButton rd开平;
         private System.Windows.Forms.Label label10;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.Label label3;
