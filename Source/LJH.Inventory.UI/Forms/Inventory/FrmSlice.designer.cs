@@ -231,7 +231,7 @@
             0,
             0});
             this.txtCurrentLength.Name = "txtCurrentLength";
-            this.txtCurrentLength.PointCount = 2;
+            this.txtCurrentLength.PointCount = 3;
             this.txtCurrentLength.Size = new System.Drawing.Size(126, 21);
             this.txtCurrentLength.TabIndex = 37;
             this.txtCurrentLength.Text = "0.00";
@@ -322,7 +322,7 @@
             0,
             0});
             this.txtRemainLength.Name = "txtRemainLength";
-            this.txtRemainLength.PointCount = 2;
+            this.txtRemainLength.PointCount = 3;
             this.txtRemainLength.Size = new System.Drawing.Size(126, 21);
             this.txtRemainLength.TabIndex = 47;
             this.txtRemainLength.Text = "0.00";

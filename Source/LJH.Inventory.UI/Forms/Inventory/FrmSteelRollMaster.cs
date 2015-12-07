@@ -98,7 +98,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             else if (sr.Status == "余卷")
             {
-                row.DefaultCellStyle.ForeColor = Color.Black;
+                row.DefaultCellStyle.ForeColor = Color.Red;
             }
             else if (sr.Status == "尾卷")
             {

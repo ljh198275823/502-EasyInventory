@@ -31,12 +31,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void ShowProduct(Product product)
         {
-            cmbSpecification.Specification  = product.Specification;
+            cmbSpecification.Specification = product.Specification;
             txtCategory.Text = product.Category.Name;
             txtCategory.Tag = product.Category;
-            rdToPanel.Checked = product.Model == rdToPanel.Text;
-            rdToRoll.Checked = product.Model == rdToRoll.Text;
-            rdToWeight.Checked = product.Model == rdToWeight.Text;
+            rd开平.Checked = product.Model == rd开平.Text;
+            rd开条.Checked = product.Model == rd开条.Text;
+            rd开吨.Checked = product.Model == rd开吨.Text;
             txtLength.DecimalValue = product.Length.HasValue ? product.Length.Value : 0;
             txtWeight.DecimalValue = product.Weight.HasValue ? product.Weight.Value : 0;
             decimal? thick = SpecificationHelper.GetWrittenThick(product.Specification);
@@ -46,14 +46,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private Product CreateProduct()
         {
             string sliceTo = null;
-            if (rdToPanel.Checked) sliceTo = rdToPanel.Text;
-            else if (rdToRoll.Checked) sliceTo = rdToRoll.Text;
-            else if (rdToWeight.Checked) sliceTo = rdToWeight.Text;
+            if (rd开平.Checked) sliceTo = rd开平.Text;
+            else if (rd开条.Checked) sliceTo = rd开条.Text;
+            else if (rd开吨.Checked) sliceTo = rd开吨.Text;
+            decimal? weight = null;
+            if (!rd开平.Checked) weight = txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null;
             return new ProductBLL(AppSettings.Current.ConnStr).Create(
                              (txtCategory.Tag as ProductCategory).ID,
                              StringHelper.ToDBC(cmbSpecification.Specification).Trim(),
                              sliceTo,
-                             txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null,
+                             weight,
                              txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null,
                              7.85m);
         }
@@ -69,6 +71,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (string.IsNullOrEmpty(cmbSpecification.Specification))
             {
                 MessageBox.Show("没有指定规格");
+                return false;
+            }
+            if (!rd开平.Checked && !rd开条.Checked && !rd开吨.Checked)
+            {
+                MessageBox.Show("没有指定加工类型");
                 return false;
             }
             if (SpecificationHelper.GetWrittenThick(cmbSpecification.Specification) == null || SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification) == null)
@@ -124,8 +131,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void rdSliceType_CheckedChanged(object sender, EventArgs e)
         {
-            txtLength.Enabled = !rdToWeight.Checked;
-            txtWeight.Enabled = rdToWeight.Checked;
+            txtLength.Enabled = !rd开吨.Checked;
+            // txtWeight.Enabled = rdToWeight.Checked || rdToRoll.Checked;
         }
 
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -172,7 +179,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return;
             }
             SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
-            var ret = bll.CreateInventory(p, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtCount.DecimalValue, txtThick.DecimalValue, Operator.Current.Name, txtMemo.Text);
+            var ret = bll.CreateInventory(p, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtCount.DecimalValue, txtWeight.DecimalValue, txtThick.DecimalValue, Operator.Current.Name, txtMemo.Text);
             if (ret.Result == ResultCode.Successful)
             {
                 this.DialogResult = DialogResult.OK;
