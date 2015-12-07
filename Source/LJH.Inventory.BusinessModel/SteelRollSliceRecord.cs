@@ -24,6 +24,14 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid SliceSource { get; set; }
         /// <summary>
+        /// 获取或设置加工的原材料卷初始重量
+        /// </summary>
+        public decimal? OriginalWeight { get; set; }
+        /// <summary>
+        /// 获取或设置加工的原材料卷初始长度
+        /// </summary>
+        public decimal? OriginalLength { get; set; }
+        /// <summary>
         /// 获取或设置商品类别编号
         /// </summary>
         public string Category { get; set; }

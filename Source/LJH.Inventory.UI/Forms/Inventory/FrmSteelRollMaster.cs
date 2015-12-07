@@ -270,7 +270,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
                 SliceRecordSearchCondition con = new SliceRecordSearchCondition();
                 con.SourceRoll = sr.ID;
-                FrmSlicedRecordView frm = new FrmSlicedRecordView();
+                FrmSliceRecordView frm = new FrmSliceRecordView();
                 frm.SearchCondition = con;
                 frm.ShowDialog();
             }

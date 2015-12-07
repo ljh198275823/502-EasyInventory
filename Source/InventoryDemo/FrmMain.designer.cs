@@ -105,6 +105,7 @@
             this.ucFormViewMain = new LJH.GeneralLibrary.WinformControl.UCFormView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.mnu_SliceRecordReport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -459,7 +460,8 @@
             this.mnu_DeliveryStatistic,
             this.mnu_Performance,
             this.toolStripSeparator4,
-            this.mnu_InventoryRecord});
+            this.mnu_InventoryRecord,
+            this.mnu_SliceRecordReport});
             this.mnu_Reports.Image = global::InventoryDemo.Properties.Resources.report;
             this.mnu_Reports.Name = "mnu_Reports";
             this.mnu_Reports.Size = new System.Drawing.Size(74, 34);
@@ -752,6 +754,13 @@
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
             // 
+            // mnu_SliceRecordReport
+            // 
+            this.mnu_SliceRecordReport.Name = "mnu_SliceRecordReport";
+            this.mnu_SliceRecordReport.Size = new System.Drawing.Size(160, 22);
+            this.mnu_SliceRecordReport.Text = "原料卷加工记录";
+            this.mnu_SliceRecordReport.Click += new System.EventHandler(this.mnu_SliceRecordReport_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -858,5 +867,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripMenuItem mnu_Customer;
+        private System.Windows.Forms.ToolStripMenuItem mnu_SliceRecordReport;
     }
 }

@@ -7,9 +7,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {
-    public partial class FrmSlicedRecordView : FrmMasterBase 
+    public partial class FrmSliceRecordView : FrmMasterBase 
     {
-        public FrmSlicedRecordView()
+        public FrmSliceRecordView()
         {
             InitializeComponent();
         }

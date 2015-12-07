@@ -443,6 +443,11 @@ namespace InventoryApplication
         {
             ShowSingleForm<FrmSteelRollMaster>();
         }
+
+        private void mnu_SliceRecordReport_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmSliceRecordReport>();
+        }
         #endregion
 
         #region 事件处理程序
@@ -477,7 +482,5 @@ namespace InventoryApplication
             Environment.Exit(0);
         }
         #endregion
-
-       
     }
 }

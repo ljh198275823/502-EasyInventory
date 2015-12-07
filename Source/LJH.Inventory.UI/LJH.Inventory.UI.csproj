@@ -180,11 +180,17 @@
     </Compile>
     <Compile Include="Forms\Inventory\Print\RMBHelper.cs" />
     <Compile Include="Forms\Inventory\Print\StackOutSheetExporter.cs" />
-    <Compile Include="Forms\Inventory\View\FrmSlicedRecordView.cs">
+    <Compile Include="Forms\Inventory\Report\FrmSliceRecordReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\View\FrmSlicedRecordView.designer.cs">
-      <DependentUpon>FrmSlicedRecordView.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Report\FrmSliceRecordReport.designer.cs">
+      <DependentUpon>FrmSliceRecordReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\FrmSliceRecordView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\FrmSliceRecordView.designer.cs">
+      <DependentUpon>FrmSliceRecordView.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\View\FrmSteelRollCheckRecordView.cs">
       <SubType>Form</SubType>
@@ -712,8 +718,11 @@
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceSelection.resx">
       <DependentUpon>FrmSteelRollSliceSelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\View\FrmSlicedRecordView.resx">
-      <DependentUpon>FrmSlicedRecordView.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Report\FrmSliceRecordReport.resx">
+      <DependentUpon>FrmSliceRecordReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\View\FrmSliceRecordView.resx">
+      <DependentUpon>FrmSliceRecordView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollCheckRecordView.resx">
       <DependentUpon>FrmSteelRollCheckRecordView.cs</DependentUpon>

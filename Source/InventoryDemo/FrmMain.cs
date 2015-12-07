@@ -470,5 +470,10 @@ namespace InventoryDemo
         {
             ShowSingleForm<FrmSteelRollMaster>();
         }
+
+        private void mnu_SliceRecordReport_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<FrmSliceRecordReport>();
+        }
     }
 }

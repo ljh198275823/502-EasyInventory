@@ -235,6 +235,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     ID = Guid.NewGuid(),
                     SliceDate = dtSliceDate.Value,
                     SliceSource = SlicingItem.ID,
+                    OriginalLength = SlicingItem.OriginalLength,
+                    OriginalWeight = SlicingItem.OriginalWeight,
                     Category = SlicingItem.Product.Category.Name,
                     Specification = SlicingItem.Product.Specification,
                     SliceType = GetSliceType(),
