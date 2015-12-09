@@ -111,6 +111,7 @@
     <Compile Include="SteelRollSliceRecordBLL.cs" />
     <Compile Include="SupplierTypeBLL.cs" />
     <Compile Include="SysParaSettingsBll.cs" />
+    <Compile Include="SysparameterInfoBLL.cs" />
     <Compile Include="SystemParameterBLL.cs" />
     <Compile Include="TransportBLL.cs" />
     <Compile Include="UnitBLL.cs" />

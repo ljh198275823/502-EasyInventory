@@ -3030,6 +3030,11 @@
             过期日期
             </summary>
         </member>
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.IsHost">
+            <summary>
+            获取或设置是否是主机加密狗
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.SoftDog.SoftwareType">
             <summary>
             加密狗支持的软件类型
