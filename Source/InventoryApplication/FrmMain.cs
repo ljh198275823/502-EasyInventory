@@ -529,9 +529,11 @@ namespace InventoryApplication
                     DateTime now = DateTime.Now;
                     if (_HostDogLastDate.AddDays(1) < now) //主机狗超过3天没有登录
                     {
+                        tmrSoftDogChecker.Enabled = false;
                         MessageBox.Show("主机加密狗处于长时间离线状态，为了避免软件被锁定，请及时让主机加密狗处于在线状态");
+                        tmrSoftDogChecker.Enabled = true;
                     }
-                    if (_HostDogLastDate.AddDays(7) < now)//超过7天就退出软件
+                    if (_HostDogLastDate.AddDays(10) < now)//超过7天就退出软件
                     {
                         MessageBox.Show("主机加密狗处于长时间离线状态，系统即将退出，你可以用主机加密狗登录或者联系供应商");
                         Environment.Exit(0);
