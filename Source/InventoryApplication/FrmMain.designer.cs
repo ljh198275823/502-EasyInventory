@@ -51,11 +51,11 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_Reports = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeliveryRecordReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_SliceRecordReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeliveryStatistic = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Performance = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_InventoryRecord = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_SliceRecordReport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_System = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Options = new System.Windows.Forms.ToolStripMenuItem();
@@ -298,6 +298,13 @@
             this.mnu_DeliveryRecordReport.Text = "出货记录查询";
             this.mnu_DeliveryRecordReport.Click += new System.EventHandler(this.mnu_DeliveryRecordReport_Click);
             // 
+            // mnu_SliceRecordReport
+            // 
+            this.mnu_SliceRecordReport.Name = "mnu_SliceRecordReport";
+            this.mnu_SliceRecordReport.Size = new System.Drawing.Size(160, 22);
+            this.mnu_SliceRecordReport.Text = "原料卷加工记录";
+            this.mnu_SliceRecordReport.Click += new System.EventHandler(this.mnu_SliceRecordReport_Click);
+            // 
             // mnu_DeliveryStatistic
             // 
             this.mnu_DeliveryStatistic.Enabled = false;
@@ -330,13 +337,6 @@
             this.mnu_InventoryRecord.Text = "收货记录查询";
             this.mnu_InventoryRecord.Visible = false;
             this.mnu_InventoryRecord.Click += new System.EventHandler(this.mnu_InventoryRecord_Click);
-            // 
-            // mnu_SliceRecordReport
-            // 
-            this.mnu_SliceRecordReport.Name = "mnu_SliceRecordReport";
-            this.mnu_SliceRecordReport.Size = new System.Drawing.Size(160, 22);
-            this.mnu_SliceRecordReport.Text = "原料卷加工记录";
-            this.mnu_SliceRecordReport.Click += new System.EventHandler(this.mnu_SliceRecordReport_Click);
             // 
             // toolStripSeparator14
             // 
@@ -675,7 +675,7 @@
             // 
             // tmrSoftDogChecker
             // 
-            this.tmrSoftDogChecker.Interval = 5000;
+            this.tmrSoftDogChecker.Interval = 10000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
             // 
             // FrmMain

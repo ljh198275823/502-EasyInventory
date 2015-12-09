@@ -22,7 +22,7 @@ using LJH.Inventory.UI.Forms.Inventory.Report;
 
 namespace InventoryApplication
 {
-    public partial class FrmMain : Form,IMyMDIForm, LJH.GeneralLibrary.Core.UI.IOperatorRender
+    public partial class FrmMain : Form, IMyMDIForm, LJH.GeneralLibrary.Core.UI.IOperatorRender
     {
         public FrmMain()
         {
@@ -32,13 +32,12 @@ namespace InventoryApplication
         #region 私有变量
         private List<Form> _openedForms = new List<Form>();
         private SoftDogInfo _SoftDog;
-        private bool _EnableSoftDog = false; //启用加密狗
+        private bool _EnableSoftDog = true; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2015, 12, 31);
-        private DateTime _HostDogLastDate = DateTime.MinValue;
         #endregion
 
         #region 私有方法
-        private void ReadSoftDog()
+        private void CheckDog()
         {
             string skey = AppSettings.Current.GetConfigContent("SKey");
             if (string.IsNullOrEmpty(skey))
@@ -71,40 +70,61 @@ namespace InventoryApplication
                     MessageBox.Show("软件已经过期，请联系厂家延长期限!", "注意");
                     System.Environment.Exit(0);
                 }
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message);
+                System.Environment.Exit(0);
+            }
+        }
 
-                if (!_SoftDog.IsHost) //非主机加密狗
+        private void CheckHostDog()
+        {
+            if (_SoftDog == null) return;
+            if (_SoftDog.IsHost) return;
+            try
+            {
+                var p = new SysparameterInfoBLL(AppSettings.Current.ConnStr).GetByID("__dog").QueryObject; ;
+                if (p == null)
                 {
-                    var p = new SysparameterInfoBLL(AppSettings.Current.ConnStr).GetByID("__dog").QueryObject; ;
-                    if (p == null)
+                    MessageBox.Show("没有检测到主机加密狗，软件即将退出");
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    DateTime hostLastDate = DateTime.MinValue;
+                    string memo = new DTEncrypt().DSEncrypt(p.Memo);
+                    if (DateTime.TryParse(p.Value, out hostLastDate) && !string.IsNullOrEmpty(memo))
                     {
-                        MessageBox.Show("没有检测到主机加密狗，软件即将退出");
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-                        DateTime dt = DateTime.MinValue;
-                        string memo = new DTEncrypt().DSEncrypt(p.Memo);
-                        if (DateTime.TryParse(p.Value, out dt) && !string.IsNullOrEmpty(memo))
+                        string[] temp = memo.Split(';');
+                        if (temp[0] != _SoftDog.ProjectNo.ToString())
                         {
-                            string[] temp = memo.Split(';');
-                            if (temp[0] != _SoftDog.ProjectNo.ToString())
-                            {
-                                MessageBox.Show("加密狗不是本客户的加密狗，软件即将退出");
-                                Environment.Exit(0);
-                            }
-                            DateTime dt2 = DateTime.MinValue;
-                            if (!DateTime.TryParse(temp[1], out dt2) || dt2 != dt)
-                            {
-                                MessageBox.Show("没有检测到主机加密狗，软件即将退出");
-                                Environment.Exit(0);
-                            }
-                            _HostDogLastDate = dt;
+                            MessageBox.Show("加密狗不是本客户的加密狗，软件即将退出");
+                            Environment.Exit(0);
                         }
-                        else
+                        DateTime dt2 = DateTime.MinValue;
+                        if (!DateTime.TryParse(temp[1], out dt2) || dt2 != hostLastDate)
                         {
                             MessageBox.Show("没有检测到主机加密狗，软件即将退出");
                             Environment.Exit(0);
                         }
+                        DateTime now = DateTime.Now;
+                        if (hostLastDate.AddDays(10) < now)//超过7天就退出软件
+                        {
+                            MessageBox.Show("主机加密狗处于长时间离线状态，系统即将退出，你可以用主机加密狗登录或者联系供应商");
+                            Environment.Exit(0);
+                        }
+                        else if (hostLastDate.AddDays(1) < now) //主机狗超过3天没有登录
+                        {
+                            tmrSoftDogChecker.Enabled = false;
+                            MessageBox.Show("主机加密狗处于长时间离线状态，为了避免软件被锁定，请及时让主机加密狗处于在线状态", "软件过期", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            tmrSoftDogChecker.Enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("没有检测到主机加密狗，软件即将退出");
+                        Environment.Exit(0);
                     }
                 }
             }
@@ -500,18 +520,19 @@ namespace InventoryApplication
             }
             else
             {
-                ReadSoftDog();
+                CheckDog();
             }
-            this.tmrSoftDogChecker.Enabled = _EnableSoftDog;
 
             this.Text += string.Format(" [{0}]", Application.ProductVersion);
             DoLogIn();
+            CheckHostDog();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
+            this.tmrSoftDogChecker.Enabled = _EnableSoftDog;
         }
 
         private void tmrSoftDogChecker_Tick(object sender, EventArgs e)
         {
-            ReadSoftDog();
+            CheckDog();
             if (_SoftDog != null)
             {
                 if (_SoftDog.IsHost)
@@ -523,21 +544,11 @@ namespace InventoryApplication
                         Memo = new DTEncrypt().Encrypt(string.Format("{0};{1}", _SoftDog.ProjectNo, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))),
                     };
                     new SysparameterInfoBLL(AppSettings.Current.ConnStr).Save(p);
+                    tmrSoftDogChecker.Interval = 60000;
                 }
                 else
                 {
-                    DateTime now = DateTime.Now;
-                    if (_HostDogLastDate.AddDays(1) < now) //主机狗超过3天没有登录
-                    {
-                        tmrSoftDogChecker.Enabled = false;
-                        MessageBox.Show("主机加密狗处于长时间离线状态，为了避免软件被锁定，请及时让主机加密狗处于在线状态");
-                        tmrSoftDogChecker.Enabled = true;
-                    }
-                    if (_HostDogLastDate.AddDays(10) < now)//超过7天就退出软件
-                    {
-                        MessageBox.Show("主机加密狗处于长时间离线状态，系统即将退出，你可以用主机加密狗登录或者联系供应商");
-                        Environment.Exit(0);
-                    }
+                    CheckHostDog();
                 }
             }
         }
