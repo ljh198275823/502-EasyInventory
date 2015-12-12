@@ -195,7 +195,8 @@ namespace LJH.Inventory.BusinessModel
                     ProductID = inventory.ProductID,
                     Unit = inventory.Unit,
                     InventoryItem = inventory.ID,
-                    Weight = inventory.Weight,
+                    Length = inventory.Length,
+                    TotalWeight = inventory.Weight * count,
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
@@ -220,7 +221,7 @@ namespace LJH.Inventory.BusinessModel
                 {
                     ID = Guid.Empty,
                     ProductID = g.First().ProductID,
-                    Weight = g.First().Weight,
+                    Length = g.First().Length,
                     TotalWeight = g.First().TotalWeight,
                     Unit = g.First().Unit,
                     Count = g.Sum(it => it.Count),

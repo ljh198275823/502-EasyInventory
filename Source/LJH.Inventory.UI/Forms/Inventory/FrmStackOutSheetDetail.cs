@@ -87,24 +87,27 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
                 row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
                 row.Cells["colModel"].Value = p.Model;
-                row.Cells["colLength"].Value = p.Length;
-                row.Cells["colWeight"].Value = item.TotalWeight.HasValue ? item.TotalWeight : item.Weight;
+                row.Cells["colLength"].Value =item.Length;
+                row.Cells["colWeight"].Value = item.TotalWeight;
                 row.Cells["colPrice"].Value = item.Price;
                 row.Cells["colCount"].Value = item.Count;
                 row.Cells["colTotal"].Value = item.Amount;
                 row.Cells["colMemo"].Value = item.Memo;
-
                 row.Cells["colCount"].ReadOnly = true;
             }
             else
             {
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition(){DeliveryItem =item.ID };
+                var assigns = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
                 row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
                 row.Cells["colWeight"].Value = pi != null ? (pi.RealThick.HasValue ? (decimal?)pi.RealThick : (decimal?)pi.OriginalThick) : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
-                row.Cells["colTotal"].Value = pi != null ? (pi.Count + item.Count) : item.Amount;
+                decimal maxCount = (assigns == null || assigns.Count == 0) ? pi.Count : pi.Count + assigns.Sum(it => it.Count); //
+                row.Cells["colTotal"].Value = maxCount - item.Count;
+                row.Cells["colTotal"].Tag = maxCount;
                 row.Cells["colTotal"].Style.Format = "N0";
                 row.Cells["colMemo"].Value = pi != null ? pi.Memo : null;
 
@@ -357,7 +360,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
             decimal value;
-            if (row.Cells[e.ColumnIndex].Value != null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString().TrimStart ('¥'), out value))
+            if (row.Cells[e.ColumnIndex].Value != null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString().TrimStart('¥'), out value))
             {
                 if (value < 0) value = 0;
                 if (col.Name == "colPrice")
@@ -372,9 +375,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else if (col.Name == "colCount")
                 {
-                    if (value <= Convert.ToInt32(row.Cells["colTotal"].Value)) //数量不能超出库存项的数量
+                    if (value <= Convert.ToInt32(row.Cells["colTotal"].Tag)) //数量不能超出库存项的数量
                     {
                         item.Count = value;
+                        row.Cells["colTotal"].Value = Convert.ToInt32(row.Cells["colTotal"].Tag) - item.Count;
                     }
                     else
                     {

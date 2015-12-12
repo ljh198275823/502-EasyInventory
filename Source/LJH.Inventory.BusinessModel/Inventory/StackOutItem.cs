@@ -39,9 +39,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Unit { get; set; }
         /// <summary>
-        /// 获取或设置出货商品的单重
+        /// 获取或设置出货商品的长度
         /// </summary>
-        public decimal? Weight { get; set; }
+        public decimal? Length { get; set; }
         /// <summary>
         /// 获取或设置同一商品多个出货项的总重
         /// </summary>
@@ -80,7 +80,6 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 if (TotalWeight.HasValue) return TotalWeight.Value * Price;
-                if (Weight.HasValue) return Weight.Value  * Price * Count;
                 return Price * Count;
             }
         }

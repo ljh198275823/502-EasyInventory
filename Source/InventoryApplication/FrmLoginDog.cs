@@ -35,7 +35,7 @@ namespace InventoryApplication
         {
             sb.DataSource = this.txtServer.Text;
             sb.InitialCatalog = DBNAME;
-            sb.IntegratedSecurity = true;
+            sb.IntegratedSecurity = false;
             sb.UserID = SoftDog != null ? SoftDog.DBUser : string.Empty;
             sb.Password = SoftDog != null ? SoftDog.DBPassword : string.Empty;
             sb.PersistSecurityInfo = true;
@@ -53,6 +53,7 @@ namespace InventoryApplication
             }
             catch (Exception ex)
             {
+                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return false;
             }
         }
@@ -196,7 +197,7 @@ namespace InventoryApplication
             }
 
             UpGradeDataBase(); //升级数据库
-            if (DoLogin(logName, pwd)==false)
+            if (DoLogin(logName, pwd) == false)
             {
                 MessageBox.Show("用户名或者密码输入不正确!");
             }

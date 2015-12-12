@@ -108,13 +108,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                             cell = row.GetCell(1);
                             if (cell != null) cell.SetCellValue(p.Specification);
                             cell = row.GetCell(2);
-                            if (cell != null) cell.SetCellValue(p.Length.HasValue ? p.Length.Value.ToString("F3") : string.Empty);
+                            if (cell != null) cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F3") : string.Empty);
                             cell = row.GetCell(3);
                             if (cell != null) cell.SetCellValue(item.Count.ToString("F0"));
                             cell = row.GetCell(4);
-                            if (cell != null) cell.SetCellValue(item.TotalWeight.HasValue ? item.TotalWeight.Value.ToString("F3") : (p.Weight.HasValue ? p.Weight.Value.ToString("F3") : string.Empty));
+                            if (cell != null) cell.SetCellValue(item.TotalWeight.HasValue ? item.TotalWeight.Value.ToString("F3") : string.Empty);
                             cell = row.GetCell(5);
-                            if (cell != null) cell.SetCellValue(p.Model);
+                            if (cell != null) cell.SetCellValue(p.Model == "原材料" ? "卷" : p.Model);
                             cell = row.GetCell(6);
                             if (cell != null) cell.SetCellValue((Double)item.Price);
                             cell = row.GetCell(7);
