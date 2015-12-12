@@ -137,7 +137,19 @@ namespace InventoryApplication
 
         private void DoLogIn()
         {
-            DialogResult ret = (new FrmLogin()).ShowDialog();
+
+            DialogResult ret = DialogResult.Cancel;
+            if (!_EnableSoftDog)
+            {
+                ret = (new FrmLogin()).ShowDialog();
+            }
+            else
+            {
+                FrmLoginDog frm = new FrmLoginDog();
+                frm.SoftDog = _SoftDog;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                ret = frm.ShowDialog();
+            }
             if (ret == DialogResult.OK)
             {
                 ShowOperatorRights();
@@ -510,6 +522,7 @@ namespace InventoryApplication
         #region 事件处理程序
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            this.Text += string.Format(" [{0}]", Application.ProductVersion);
             if (!_EnableSoftDog)
             {
                 if (DateTime.Today > _ExpireDate)
@@ -523,7 +536,6 @@ namespace InventoryApplication
                 CheckDog();
             }
 
-            this.Text += string.Format(" [{0}]", Application.ProductVersion);
             DoLogIn();
             CheckHostDog();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
