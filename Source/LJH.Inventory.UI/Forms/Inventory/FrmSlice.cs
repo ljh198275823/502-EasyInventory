@@ -247,7 +247,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,
                     Warehouse = (txtWareHouse.Tag as WareHouse).Name,
-                    Operator = Operator.Current.Name
+                    Operator = Operator.Current.Name,
+                    Memo = txtMemo.Text,
                 };
                 if (rd开平.Checked)
                 {

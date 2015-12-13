@@ -7,10 +7,6 @@ BEGIN
 end
 go
 
-if exists (SELECT * FROM dbo.syscolumns WHERE name ='Count' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
-BEGIN
-	exec ('alter table ProductInventoryItem Alter column Count decimal(18,4) null')
-end
+
+update productinventoryitem set model='Ô­²ÄÁÏ' where model='¾í'
 go
-
-

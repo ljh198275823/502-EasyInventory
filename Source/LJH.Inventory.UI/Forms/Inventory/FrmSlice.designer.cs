@@ -66,6 +66,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtResult = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.chkOver = new System.Windows.Forms.CheckBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtMemo = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +75,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(313, 333);
+            this.btnClose.Location = new System.Drawing.Point(313, 366);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 41);
             this.btnClose.TabIndex = 5;
@@ -84,7 +86,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(191, 333);
+            this.btnOk.Location = new System.Drawing.Point(191, 366);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 41);
             this.btnOk.TabIndex = 5;
@@ -480,13 +482,34 @@
             this.chkOver.UseVisualStyleBackColor = true;
             this.chkOver.CheckedChanged += new System.EventHandler(this.chkOver_CheckedChanged);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(62, 335);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 12);
+            this.label14.TabIndex = 86;
+            this.label14.Text = "备注";
+            // 
+            // txtMemo
+            // 
+            this.txtMemo.FormattingEnabled = true;
+            this.txtMemo.Items.AddRange(new object[] {
+            "库存数量以实际开平数量为准"});
+            this.txtMemo.Location = new System.Drawing.Point(96, 331);
+            this.txtMemo.Name = "txtMemo";
+            this.txtMemo.Size = new System.Drawing.Size(328, 20);
+            this.txtMemo.TabIndex = 87;
+            // 
             // FrmSlice
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(436, 386);
+            this.ClientSize = new System.Drawing.Size(436, 419);
+            this.Controls.Add(this.txtMemo);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.chkOver);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.label7);
@@ -572,6 +595,8 @@
         private System.Windows.Forms.Label label7;
         private GeneralLibrary.WinformControl.DBCTextBox txtResult;
         private System.Windows.Forms.CheckBox chkOver;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox txtMemo;
 
     }
 }
