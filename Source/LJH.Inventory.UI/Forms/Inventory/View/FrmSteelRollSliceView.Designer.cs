@@ -202,6 +202,7 @@
             // colCount
             // 
             dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "?";
             this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";

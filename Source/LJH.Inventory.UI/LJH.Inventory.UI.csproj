@@ -295,12 +295,6 @@
     <Compile Include="Forms\Inventory\Report\FrmInventoryRecordReport.Designer.cs">
       <DependentUpon>FrmInventoryRecordReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\View\FrmProductStackRecordsView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\View\FrmProductStackRecordsView.Designer.cs">
-      <DependentUpon>FrmProductStackRecordsView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Inventory\View\FrmSteelRollSliceView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -777,9 +771,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Report\FrmInventoryRecordReport.resx">
       <DependentUpon>FrmInventoryRecordReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\View\FrmProductStackRecordsView.resx">
-      <DependentUpon>FrmProductStackRecordsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollSliceView.resx">
       <DependentUpon>FrmSteelRollSliceView.cs</DependentUpon>

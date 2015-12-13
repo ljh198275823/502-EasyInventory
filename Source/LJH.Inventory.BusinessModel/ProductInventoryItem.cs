@@ -178,6 +178,30 @@ namespace LJH.Inventory.BusinessModel
             }
             return null;
         }
+
+        /// <summary>
+        /// 计算真实厚度
+        /// </summary>
+        /// <returns></returns>
+        public decimal? CalLength(string specification, decimal weight, decimal density)
+        {
+            if (!string.IsNullOrEmpty(specification))
+            {
+                try
+                {
+                    decimal? width = SpecificationHelper.GetWrittenWidth(specification);
+                    decimal? thick = SpecificationHelper.GetWrittenThick(specification);
+                    if (width.HasValue && width > 0 && thick.HasValue && thick > 0)
+                    {
+                        return weight * 1000 * 1000 / (width.Value * thick.Value * density);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            return null;
+        }
         #endregion
     }
 }

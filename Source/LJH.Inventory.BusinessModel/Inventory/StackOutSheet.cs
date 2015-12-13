@@ -196,7 +196,7 @@ namespace LJH.Inventory.BusinessModel
                     Unit = inventory.Unit,
                     InventoryItem = inventory.ID,
                     Length = inventory.Length,
-                    TotalWeight = inventory.Weight * count,
+                    TotalWeight = inventory.Model != "开平" ? (decimal?)(inventory.Weight * count) : null,
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,

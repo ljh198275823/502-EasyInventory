@@ -46,16 +46,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("原材料的剩余重量不正确");
                 return false;
             }
-            if (this.txtLength.DecimalValue <= 0)
-            {
-                MessageBox.Show("原材料的剩余长度不正确");
-                return false;
-            }
-            if (txtOriginalLength.DecimalValue < txtLength.DecimalValue)
-            {
-                MessageBox.Show("剩余长度大于入库长度");
-                return false;
-            }
+            //if (this.txtLength.DecimalValue <= 0)
+            //{
+            //    MessageBox.Show("原材料的剩余长度不正确");
+            //    return false;
+            //}
+            //if (txtOriginalLength.DecimalValue < txtLength.DecimalValue)
+            //{
+            //    MessageBox.Show("剩余长度大于入库长度");
+            //    return false;
+            //}
             if (txtOriginalWeight.DecimalValue < txtWeight.DecimalValue)
             {
                 MessageBox.Show("剩余重量大于入库重量");
@@ -121,7 +121,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 item = new ProductInventoryItem();
                 item.ID = Guid.NewGuid();
             }
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Specification).Trim(), "卷", 7.85m);
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Specification).Trim(), "原材料", 7.85m);
             if (p == null) throw new Exception("创建相关产品信息失败");
             item.Product = p;
             item.ProductID = p.ID;
@@ -129,10 +129,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouse = txtWareHouse.Tag as WareHouse;
             item.WareHouseID = item.WareHouse.ID;
+            item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
-            item.OriginalLength = txtOriginalLength.DecimalValue;
+            item.OriginalLength = item.CalLength(p.Specification, item.OriginalWeight.Value, p.Density.Value); // txtOriginalLength.DecimalValue;
             item.Weight = txtWeight.DecimalValue;
-            item.Length = txtLength.DecimalValue;
+            item.Length = item.CalLength(p.Specification, item.Weight.Value, p.Density.Value);  //txtLength.DecimalValue;
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;
@@ -142,7 +143,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.SerialNumber = txtSerialNumber.Text;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;
-            item.OriginalThick = item.CalThick(p.Specification, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value);//计算入库厚度
+             // item.CalThick(p.Specification, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value);//计算入库厚度
             return item;
         }
 

@@ -284,21 +284,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Print.StackOutSheetExporter exporter = null;
                     if (System.IO.File.Exists(modal))
                     {
-                        string path = Path.Combine(LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder(), Guid.NewGuid().ToString() + ".xls");
                         exporter = new Print.StackOutSheetExporter(modal);
-                        exporter.Export(sheet, path);
-                        if (System.IO.File.Exists(path))
+                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
+                        foreach (var file in files)
                         {
-                            ProcessStartInfo psi = new ProcessStartInfo(path);
-                            psi.Verb = "Print";
-                            psi.CreateNoWindow = true;
-                            psi.WindowStyle = ProcessWindowStyle.Hidden;
-                            psi.UseShellExecute = true;
+                            if (System.IO.File.Exists(file))
+                            {
+                                ProcessStartInfo psi = new ProcessStartInfo(file);
+                                psi.Verb = "Print";
+                                psi.CreateNoWindow = true;
+                                psi.WindowStyle = ProcessWindowStyle.Hidden;
+                                psi.UseShellExecute = true;
 
-                            Process prs = new Process();
-                            prs.StartInfo = psi;
-                            prs.Start();
-                            prs.WaitForExit();
+                                Process prs = new Process();
+                                prs.StartInfo = psi;
+                                prs.Start();
+                                prs.WaitForExit();
+                            }
                         }
                     }
                     else

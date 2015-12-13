@@ -29,7 +29,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (ProductInventory != null)
             {
                 txtInventory.DecimalValue = ProductInventory.Count;
-                txtCheckCount.DecimalValue = ProductInventory.Count;
                 txtCheckCount.Focus();
                 txtCheckCount.SelectAll();
             }

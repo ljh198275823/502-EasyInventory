@@ -117,11 +117,15 @@ namespace LJH.Inventory.BusinessModel
             get { return Product != null ? Product.Specification : string.Empty; }
         }
 
+        /// <summary>
+        /// 获取当前计算的总额
+        /// </summary>
         public decimal Amount
         {
             get
             {
-                return (Weight.HasValue ? Weight.Value * Price : Count * Price).Trim();  //如果有重量,即单价为重量计价
+                if (Weight.HasValue && Weight.Value != 0) return Weight.Value * Price;
+                return Price * Count;
             }
         }
         #endregion

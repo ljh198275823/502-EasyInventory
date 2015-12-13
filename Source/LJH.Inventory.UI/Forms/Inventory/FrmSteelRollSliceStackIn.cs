@@ -132,7 +132,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void rdSliceType_CheckedChanged(object sender, EventArgs e)
         {
             txtLength.Enabled = !rd开吨.Checked;
-            // txtWeight.Enabled = rdToWeight.Checked || rdToRoll.Checked;
+            txtWeight.Enabled = rd开条.Checked || rd开吨.Checked;
         }
 
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

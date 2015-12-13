@@ -117,7 +117,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             //当订单的已出货加备货数小于订单数时才提示产品的有效库存,这么做也是减少垃圾信息，方便用户准确找到信息
             if ((info.Inventory + info.Shipped < info.Count) && _Inventories != null && _Inventories.Count > 0) 
             {
-                row.Cells["colValidInventory"].Value = _Inventories.Sum(it => it.Product.ID == info.ProductID ? it.Valid : 0).Trim();
+                row.Cells["colValidInventory"].Value = _Inventories.Sum(it => it.Product.ID == info.ProductID ? it.Valid : 0);
             }
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)

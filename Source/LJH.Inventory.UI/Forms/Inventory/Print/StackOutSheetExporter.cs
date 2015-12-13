@@ -35,7 +35,22 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
         /// 导出操作员当班信息到EXCEL中
         /// </summary>
         /// <param name="optLog"></param>
-        public void Export(StackOutSheet info, string path)
+        public List<string> Export(StackOutSheet info, string path)
+        {
+            List<string> files = new List<string>();
+            var items = info.GetSummaryItems();
+            for (int i = 0; i < items.Count; i += 8)
+            {
+                StackOutItem[] temp = new StackOutItem[8];
+                items.CopyTo(i, temp, 0, items.Count - i >= temp.Length ? temp.Length : (items.Count - i));
+                string file = Path.Combine(path, Guid.NewGuid().ToString() + ".xls");
+                files.Add(file);
+                Export(info, temp, file);
+            }
+            return files;
+        }
+
+        private void Export(StackOutSheet info, StackOutItem[] items, string path)
         {
             using (FileStream fs = new FileStream(modal, FileMode.Open, FileAccess.Read))
             {
@@ -64,11 +79,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 if (row != null)
                 {
                     ICell cell = row.GetCell(1);
-                    if (cell != null) cell.SetCellValue(info.Driver );
+                    if (cell != null) cell.SetCellValue(info.Driver);
                     cell = row.GetCell(4);
-                    if (cell != null) cell.SetCellValue(info.DriverCall );
+                    if (cell != null) cell.SetCellValue(info.DriverCall);
                     cell = row.GetCell(7);
-                    if (cell != null) cell.SetCellValue(info.CarPlate );
+                    if (cell != null) cell.SetCellValue(info.CarPlate);
                 }
                 row = sheet.GetRow(4);
                 if (row != null)
@@ -76,7 +91,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                     ICell cell = row.GetCell(1);
                     if (cell != null) cell.SetCellValue(info.Address);
                     cell = row.GetCell(7);
-                    if (cell != null) cell.SetCellValue(info.WithTax  ? "KP" : "BK");
+                    if (cell != null) cell.SetCellValue(info.WithTax ? "KP" : "BK");
                 }
                 row = sheet.GetRow(5);
                 if (row != null)
@@ -93,10 +108,10 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                     if (cell != null) cell.SetCellValue((double)total);
                 }
 
-                var items = info.GetSummaryItems();
-                int rowIndex=7;
+                int rowIndex = 7;
                 foreach (var item in items)
                 {
+                    if (item == null) continue;
                     if (rowIndex < 15)
                     {
                         row = sheet.GetRow(rowIndex);

@@ -64,7 +64,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colOriginalThick"].Value = c.OriginalThick;
             row.Cells["colRealThick"].Value = c.RealThick;
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
-            row.Cells["colCount"].Value = c.Count.Trim();
+            row.Cells["colCount"].Value = c.Count;
             row.Cells["colInventorySheet"].Value = c.InventorySheet;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
             row.Cells["colCustomer"].Value = c.Customer;

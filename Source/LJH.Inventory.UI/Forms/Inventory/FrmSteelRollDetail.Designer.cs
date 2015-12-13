@@ -129,6 +129,7 @@
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 45;
             this.label1.Text = "剩余长度(米)";
+            this.label1.Visible = false;
             // 
             // txtWeight
             // 
@@ -169,6 +170,7 @@
             this.txtLength.Size = new System.Drawing.Size(145, 21);
             this.txtLength.TabIndex = 7;
             this.txtLength.Text = "0";
+            this.txtLength.Visible = false;
             // 
             // txtMemo
             // 
@@ -306,6 +308,7 @@
             this.txtOriginalLength.Size = new System.Drawing.Size(145, 21);
             this.txtOriginalLength.TabIndex = 5;
             this.txtOriginalLength.Text = "0";
+            this.txtOriginalLength.Visible = false;
             this.txtOriginalLength.TextChanged += new System.EventHandler(this.txtOriginalLength_TextChanged);
             // 
             // txtOriginalWeight
@@ -346,6 +349,7 @@
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 83;
             this.label4.Text = "入库长度(米)";
+            this.label4.Visible = false;
             // 
             // cmbSpecification
             // 
