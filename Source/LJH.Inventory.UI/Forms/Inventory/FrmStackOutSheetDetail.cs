@@ -135,7 +135,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             if (!rdWithTax.Checked && !rdWithoutTax.Checked)
             {
-                MessageBox.Show("请选择是否是含税价");
+                MessageBox.Show("请选择是否含税");
                 return false;
             }
             if (ItemsGrid.Rows.Count == 0)

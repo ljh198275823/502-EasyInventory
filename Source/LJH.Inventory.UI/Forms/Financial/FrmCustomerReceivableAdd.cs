@@ -35,11 +35,13 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             if (ReceivableType == CustomerReceivableType.CustomerReceivable)
             {
+                this.panel1.Visible = true;
                 this.Text = "新增客户应收账款";
                 btnOk.Enabled = Operator.Current.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
             }
             else if (ReceivableType == CustomerReceivableType.CustomerTax)
             {
+                this.panel1.Visible = false;
                 this.Text = "新增应开增值税";
             }
             else
@@ -71,6 +73,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("金额不正确，需要填写大于零的数值");
                 return;
             }
+            if (ReceivableType ==CustomerReceivableType.CustomerReceivable && !rdWithoutTax.Checked && !rdWithTax.Checked)
+            {
+                MessageBox.Show("请选择是否含税");
+                return;
+            }
             CustomerReceivable cr = new CustomerReceivable();
             cr.ID = Guid.NewGuid();
             cr.ClassID = ReceivableType;
@@ -80,9 +87,25 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (ReceivableType == CustomerReceivableType.CustomerReceivable) cr.SheetID = "其它应收款";
             if (ReceivableType == CustomerReceivableType.CustomerTax) cr.SheetID = "其它应开增值税";
             if (!string.IsNullOrEmpty(txtMemo.Text)) cr.Memo = txtMemo.Text;
+            if (rdWithTax.Checked)
+            {
+                if (string.IsNullOrEmpty(cr.Memo)) cr.Memo = "含税";
+                else cr.Memo += ",含税";
+            }
             var ret = new CustomerReceivableBLL(AppSettings.Current.ConnStr).Add(cr);
             if (ret.Result == ResultCode.Successful)
             {
+                if (rdWithTax.Checked && cr.ClassID ==CustomerReceivableType.CustomerReceivable ) //如果是客户应收款，则增加相应的应开税额
+                {
+                    CustomerReceivable tax= new CustomerReceivable();
+                    tax.ID = Guid.NewGuid();
+                    tax.ClassID = CustomerReceivableType.CustomerTax;
+                    tax.CustomerID = cr.CustomerID;
+                    tax.CreateDate = cr.CreateDate;
+                    tax.Amount = cr.Amount;
+                    tax.SheetID = "其它应开增值税";
+                    new CustomerReceivableBLL(AppSettings.Current.ConnStr).Add(tax);
+                }
                 this.DialogResult = DialogResult.OK;
             }
             else
