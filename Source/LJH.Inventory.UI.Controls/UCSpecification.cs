@@ -53,6 +53,11 @@ namespace LJH.Inventory.UI.Controls
         {
             get
             {
+                decimal thick = 0;
+                if (decimal.TryParse(txtThick.Text, out thick))
+                {
+                    return string.Format("{0}*{1}", thick.ToString("F2"), txtWidth.Text);
+                }
                 return string.Format("{0}*{1}", txtThick.Text, txtWidth.Text);
             }
             set
