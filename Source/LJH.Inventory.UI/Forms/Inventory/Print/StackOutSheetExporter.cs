@@ -62,7 +62,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                     ICell cell = row.GetCell(1);
                     if (cell != null) cell.SetCellValue(info.ID);
                     cell = row.GetCell(4);
-                    if (cell != null) cell.SetCellValue(info.State == BusinessModel.SheetState.Shipped ? info.LastActiveDate.ToString("yyyy-MM-dd") : DateTime.Today.ToString("yyyy-MM-dd"));
+                    if (cell != null) cell.SetCellValue(info.SheetDate.ToString("yyyy-MM-dd"));
                 }
                 row = sheet.GetRow(2);
                 if (row != null)
