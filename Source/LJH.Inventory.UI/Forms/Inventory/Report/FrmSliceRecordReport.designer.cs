@@ -151,7 +151,7 @@
             this.chk开平.Name = "chk开平";
             this.chk开平.Size = new System.Drawing.Size(48, 16);
             this.chk开平.TabIndex = 30;
-            this.chk开平.Text = "平板";
+            this.chk开平.Text = "开平";
             this.chk开平.UseVisualStyleBackColor = true;
             // 
             // categoryComboBox1
