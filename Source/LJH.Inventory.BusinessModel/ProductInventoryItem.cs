@@ -141,7 +141,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public bool CanEdit
         {
-            get { return (Status == "整卷"); }
+            get { return (State == ProductInventoryState.Inventory && Status == "整卷"); }
         }
         /// <summary>
         /// 获取原材料的状态

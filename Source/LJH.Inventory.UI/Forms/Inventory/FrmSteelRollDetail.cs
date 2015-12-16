@@ -143,7 +143,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.SerialNumber = txtSerialNumber.Text;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;
-             // item.CalThick(p.Specification, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value);//计算入库厚度
             return item;
         }
 

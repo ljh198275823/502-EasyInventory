@@ -53,6 +53,37 @@ namespace LJH.Inventory.BLL
             return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o);
         }
         /// <summary>
+        /// 更换库存的所属产品
+        /// </summary>
+        /// <param name="sr"></param>
+        /// <returns></returns>
+        public CommandResult UpdateProduct(ProductInventoryItem sr)
+        {
+            if (sr.Product.Weight == null && sr.Product.Model == MODEL)
+            {
+                var p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, sr.Product.Model, sr.Weight, sr.Length, sr.Product.Density, true);
+                if (p != null)
+                {
+                    var clone = sr.Clone();
+                    clone.ProductID = p.ID;
+                    clone.Product = p;
+                    var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        sr.ProductID = p.ID;
+                        sr.Product = p;
+                    }
+                    return ret;
+                }
+                else
+                {
+                    return new CommandResult(ResultCode.Fail, "创建产品信息失败");
+                }
+            }
+            return new CommandResult(ResultCode.Successful, string.Empty);
+        }
+
+        /// <summary>
         /// 原材料加工
         /// </summary>
         /// <param name="sr"></param>

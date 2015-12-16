@@ -182,10 +182,7 @@ namespace LJH.Inventory.BusinessModel
             var si = Items.SingleOrDefault(it => it.InventoryItem == inventory.ID);
             if (si != null)
             {
-                if (si.Count + count <= inventory.Count)
-                {
-                    si.Count += count; //增加的数量不能超过库存项的库存数
-                }
+                si.Count += count;
             }
             else
             {
@@ -196,12 +193,16 @@ namespace LJH.Inventory.BusinessModel
                     Unit = inventory.Unit,
                     InventoryItem = inventory.ID,
                     Length = inventory.Length,
-                    TotalWeight = inventory.Model != "开平" ? (decimal?)(inventory.Weight * count) : null,
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
                     Memo = inventory.Memo,
                 };
+                if (inventory.Weight.HasValue && inventory.Model != "开平")
+                {
+                    if (si.TotalWeight == null) si.TotalWeight = 0;
+                    si.TotalWeight += inventory.Weight * count;
+                }
                 Items.Add(si);
             }
         }
@@ -213,6 +214,7 @@ namespace LJH.Inventory.BusinessModel
         {
             if (Items == null) return null;
             List<StackOutItem> ret = new List<StackOutItem>();
+
             var groups = from it in Items
                          group it by it.ProductID;
             foreach (var g in groups)

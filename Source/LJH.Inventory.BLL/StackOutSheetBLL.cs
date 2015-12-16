@@ -115,34 +115,29 @@ namespace LJH.Inventory.BLL
         //分配, 为某个送货单项分配指定数量的库存
         private void F_Assign(ProductInventoryItem source, StackOutItem si, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems)
         {
-            if (source.Count >= si.Count)
+            if (source.Count < si.Count) throw new Exception("出货数量超出库存数量");
+            if (!updatingitems.Exists(it => it.ID == source.ID))
             {
-                if (!updatingitems.Exists(it => it.ID == source.ID))
-                {
-                    updatingitems.Add(source);
-                    cloneItems.Add(source.Clone());
-                }
-                source.Count -= si.Count;
+                updatingitems.Add(source);
+                cloneItems.Add(source.Clone());
+            }
+            source.Count -= si.Count;
 
-                ProductInventoryItem newItem = source.Clone();
-                newItem.ID = Guid.NewGuid();
-                newItem.SourceID = source.ID;
-                newItem.Count = si.Count;
-                newItem.State = ProductInventoryState.WaitShipping;
-                newItem.DeliveryItem = si.ID;
-                newItem.DeliverySheet = si.SheetNo;
-                addingItems.Add(newItem);
-            }
-            else
-            {
-                throw new Exception("出货数量超出库存数量");
-            }
+            ProductInventoryItem newItem = source.Clone();
+            newItem.ID = Guid.NewGuid();
+            newItem.SourceID = source.ID;
+            newItem.Count = si.Count;
+            newItem.State = ProductInventoryState.WaitShipping;
+            newItem.DeliveryItem = si.ID;
+            newItem.DeliverySheet = si.SheetNo;
+            addingItems.Add(newItem);
         }
 
         //更新分配置的数量,
         private void F_Change(ProductInventoryItem source, ProductInventoryItem des, decimal newCount, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems)
         {
             if (des.Count == newCount) return;
+            if ((des.Count + source.Count) < newCount) throw new Exception("出货数量超出库存数量");
             if (!updatingitems.Exists(it => it.ID == source.ID))
             {
                 updatingitems.Add(source);

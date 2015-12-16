@@ -89,21 +89,23 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public Product Create(string categoryID, string specification, string model, decimal? density)
+        public Product Create(string categoryID, string specification, string model, decimal? density,bool onlyCreate=false)
         {
-            return Create(categoryID, specification, model, null, null, density);
+            return Create(categoryID, specification, model, null, null, density, onlyCreate);
         }
 
-        public Product Create(string categoryID, string specification, string model, decimal? weight, decimal? length, decimal? density)
+        public Product Create(string categoryID, string specification, string model, decimal? weight, decimal? length, decimal? density, bool onlyCreate = false)
         {
             Product p = null;
-            List<Product> ps = GetItems(null).QueryObjects;
-
-            if (ps != null && ps.Count > 0)
+            if (!onlyCreate)
             {
-                p = ps.SingleOrDefault(it => it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
+                List<Product> ps = GetItems(null).QueryObjects;
+                if (ps != null && ps.Count > 0)
+                {
+                    p = ps.SingleOrDefault(it => it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
+                }
+                if (p != null) return p;
             }
-            if (p != null) return p;
             p = new Product();
             p.Specification = specification;
             p.CategoryID = categoryID;

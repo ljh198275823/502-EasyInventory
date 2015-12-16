@@ -87,7 +87,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
                 row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
                 row.Cells["colModel"].Value = p.Model;
-                row.Cells["colLength"].Value =item.Length;
+                row.Cells["colLength"].Value = item.Length;
                 row.Cells["colWeight"].Value = item.TotalWeight;
                 row.Cells["colPrice"].Value = item.Price;
                 row.Cells["colCount"].Value = item.Count;
@@ -99,7 +99,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition(){DeliveryItem =item.ID };
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { DeliveryItem = item.ID };
                 var assigns = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
                 row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
                 row.Cells["colWeight"].Value = pi != null ? (pi.RealThick.HasValue ? (decimal?)pi.RealThick : (decimal?)pi.OriginalThick) : null;
@@ -299,7 +299,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 Process prs = new Process();
                                 prs.StartInfo = psi;
                                 prs.Start();
-                                prs.WaitForExit();
+                                //prs.WaitForExit();
+                                LJH.GeneralLibrary.LOG.FileLog.Log("打印", file);
                             }
                         }
                     }
@@ -424,18 +425,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             for (int i = e.RowIndex + 1; i < ItemsGrid.Rows.Count; i++)
             {
                 StackOutItem d = ItemsGrid.Rows[i].Tag as StackOutItem;
-                if (d != null && d.ID != Guid.Empty)
+                if (d != null && d.ProductID == item.ProductID && d.ID != Guid.Empty) //如果下一行是同一种产品，则说明可以合并起来
                 {
                     delingRows.Add(ItemsGrid.Rows[i]);
-                }
-                else if (d != null) //如果是明细项，进入编辑模式
-                {
-                    ItemsGrid.CurrentCell = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    DataGridViewEditMode oldMode = ItemsGrid.EditMode;
-                    ItemsGrid.EditMode = DataGridViewEditMode.EditProgrammatically;
-                    ItemsGrid.BeginEdit(true);
-                    ItemsGrid.EditMode = oldMode;
-                    break;
                 }
                 else
                 {
@@ -495,9 +487,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 ProductInventoryItem sr = frm.SelectedItem as ProductInventoryItem;
-                var sheet = UpdatingItem as StackOutSheet;
-                sheet.AddItems(sr, 1);
-                ShowDeliveryItemsOnGrid(sheet);
+                var ret = new SteelRollBLL(AppSettings.Current.ConnStr).UpdateProduct(sr);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    var sheet = UpdatingItem as StackOutSheet;
+                    sheet.AddItems(sr, 1);
+                    ShowDeliveryItemsOnGrid(sheet);
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
             }
         }
 
