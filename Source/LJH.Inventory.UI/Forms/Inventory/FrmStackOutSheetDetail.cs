@@ -346,6 +346,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtCustomer.Tag = c;
                 txtCustomer.Text = c != null ? c.Name : string.Empty;
                 txtAddress.Text = c != null ? c.Address : string.Empty;
+                if (c.DefaultLinker != null)
+                {
+                    var contact = new ContactBLL(AppSettings.Current.ConnStr).GetByID(c.DefaultLinker.Value).QueryObject;
+                    if (contact != null)
+                    {
+                        txtLinker.Text = contact.Name;
+                        txtLinkerPhone.Text = contact.Mobile;
+                    }
+                }
             }
         }
 
@@ -353,6 +362,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
+            txtLinker.Text = string.Empty;
+            txtLinkerPhone.Text = string.Empty;
         }
 
         private void ItemsGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -362,54 +373,64 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (item == null) return; //表示合计行
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
             DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
-            decimal value;
-            if (row.Cells[e.ColumnIndex].Value != null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString().TrimStart('¥'), out value))
+            if (col.Name == "colMemo")
             {
-                if (value < 0) value = 0;
-                if (col.Name == "colPrice")
+                foreach (var it in sheet.Items)
                 {
-                    item.Price = value;
-                    foreach (var it in sheet.Items)
-                    {
-                        if (it.ProductID == item.ProductID) it.Price = value;
-                    }
-                    row.Cells[e.ColumnIndex].Value = value;
-                    row.Cells["colTotal"].Value = item.Amount;
+                    if (it.ProductID == item.ProductID) it.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString() : null;
                 }
-                else if (col.Name == "colCount")
+            }
+            else
+            {
+                decimal value;
+                if (row.Cells[e.ColumnIndex].Value != null && decimal.TryParse(row.Cells[e.ColumnIndex].Value.ToString().TrimStart('¥'), out value))
                 {
-                    if (value <= Convert.ToInt32(row.Cells["colTotal"].Tag)) //数量不能超出库存项的数量
+                    if (value < 0) value = 0;
+                    if (col.Name == "colPrice")
                     {
-                        item.Count = value;
-                        row.Cells["colTotal"].Value = Convert.ToInt32(row.Cells["colTotal"].Tag) - item.Count;
-                    }
-                    else
-                    {
-                        row.Cells[e.ColumnIndex].Value = item.Count;
-                    }
-                    for (int i = e.RowIndex; i >= 0; i--) //找合并送货单项的行
-                    {
-                        var si = ItemsGrid.Rows[i].Tag as StackOutItem;
-                        if (si.ID == Guid.Empty && si.ProductID == item.ProductID)
+                        item.Price = value;
+                        foreach (var it in sheet.Items)
                         {
-                            si.Count = sheet.Items.Sum(it => it.ProductID == item.ProductID ? it.Count : 0);
-                            ItemsGrid.Rows[i].Cells["colCount"].Value = si.Count;
-                            ItemsGrid.Rows[i].Cells["colTotal"].Value = si.Amount;
-                            break;
+                            if (it.ProductID == item.ProductID) it.Price = value;
+                        }
+                        row.Cells[e.ColumnIndex].Value = value;
+                        row.Cells["colTotal"].Value = item.Amount;
+                    }
+                    else if (col.Name == "colCount")
+                    {
+                        if (value <= Convert.ToInt32(row.Cells["colTotal"].Tag)) //数量不能超出库存项的数量
+                        {
+                            item.Count = value;
+                            row.Cells["colTotal"].Value = Convert.ToInt32(row.Cells["colTotal"].Tag) - item.Count;
+                        }
+                        else
+                        {
+                            row.Cells[e.ColumnIndex].Value = item.Count;
+                        }
+                        for (int i = e.RowIndex; i >= 0; i--) //找合并送货单项的行
+                        {
+                            var si = ItemsGrid.Rows[i].Tag as StackOutItem;
+                            if (si.ID == Guid.Empty && si.ProductID == item.ProductID)
+                            {
+                                si.Count = sheet.Items.Sum(it => it.ProductID == item.ProductID ? it.Count : 0);
+                                ItemsGrid.Rows[i].Cells["colCount"].Value = si.Count;
+                                ItemsGrid.Rows[i].Cells["colTotal"].Value = si.Amount;
+                                break;
+                            }
                         }
                     }
-                }
-                else if (col.Name == "colWeight")
-                {
-                    item.TotalWeight = value > 0 ? (decimal?)value : null;
-                    row.Cells[e.ColumnIndex].Value = value;
-                    foreach (var it in sheet.Items)
+                    else if (col.Name == "colWeight")
                     {
-                        if (it.ProductID == item.ProductID) it.TotalWeight = value;
+                        item.TotalWeight = value > 0 ? (decimal?)value : null;
+                        row.Cells[e.ColumnIndex].Value = value;
+                        foreach (var it in sheet.Items)
+                        {
+                            if (it.ProductID == item.ProductID) it.TotalWeight = value;
+                        }
+                        row.Cells["colTotal"].Value = item.Amount;
                     }
-                    row.Cells["colTotal"].Value = item.Amount;
+                    ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
                 }
-                ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
             }
         }
 

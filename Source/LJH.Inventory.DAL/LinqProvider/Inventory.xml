@@ -61,6 +61,7 @@
       <Column Name="Website" Member="Website" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Email" Member="Email" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Address" Member="Address" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="DefaultLinker" Member="DefaultLinker" DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="CreditLine" Member="CreditLine" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="FileID" Member="FileID" DbType="int" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>

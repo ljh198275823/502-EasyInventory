@@ -54,7 +54,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Tag = record;
             row.Cells["colSlicedDateTime"].Value = record.SliceDate.ToString("yyyy年MM月dd日");
             row.Cells["colCategoryID"].Value = record.Category;
-            row.Cells["colSpecification"].Value = record.Specification;
+            row.Cells["colThick"].Value = SpecificationHelper.GetWrittenThick(record.Specification);
+            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(record.Specification);
             row.Cells["colSlicedTo"].Value = record.SliceType;
             row.Cells["colLength"].Value = record.Length;
             row.Cells["colWeight"].Value = record.Weight;

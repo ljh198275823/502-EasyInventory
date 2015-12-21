@@ -37,6 +37,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -50,7 +53,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSlicedDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSlicedTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBeforeWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBeforeLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -204,7 +208,8 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSlicedDateTime,
             this.colCategoryID,
-            this.colSpecification,
+            this.colThick,
+            this.colWidth,
             this.colSlicedTo,
             this.colBeforeWeight,
             this.colBeforeLength,
@@ -241,40 +246,50 @@
             this.colCategoryID.Name = "colCategoryID";
             this.colCategoryID.ReadOnly = true;
             // 
-            // colSpecification
+            // colThick
             // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            this.colSpecification.Width = 80;
+            dataGridViewCellStyle1.Format = "N2";
+            this.colThick.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colThick.HeaderText = "规格厚度";
+            this.colThick.Name = "colThick";
+            this.colThick.ReadOnly = true;
+            this.colThick.Width = 80;
+            // 
+            // colWidth
+            // 
+            dataGridViewCellStyle2.Format = "N0";
+            this.colWidth.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colWidth.HeaderText = "规格宽度";
+            this.colWidth.Name = "colWidth";
+            this.colWidth.ReadOnly = true;
             // 
             // colSlicedTo
             // 
-            this.colSlicedTo.HeaderText = "小件类型";
+            this.colSlicedTo.HeaderText = "加工类型";
             this.colSlicedTo.Name = "colSlicedTo";
             this.colSlicedTo.ReadOnly = true;
             this.colSlicedTo.Width = 80;
             // 
             // colBeforeWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
-            this.colBeforeWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "N3";
+            this.colBeforeWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colBeforeWeight.HeaderText = "加工前重量";
             this.colBeforeWeight.Name = "colBeforeWeight";
             this.colBeforeWeight.ReadOnly = true;
             // 
             // colBeforeLength
             // 
-            dataGridViewCellStyle2.Format = "N3";
-            this.colBeforeLength.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "N3";
+            this.colBeforeLength.DefaultCellStyle = dataGridViewCellStyle4;
             this.colBeforeLength.HeaderText = "加工前长度";
             this.colBeforeLength.Name = "colBeforeLength";
             this.colBeforeLength.ReadOnly = true;
             // 
             // colLength
             // 
-            dataGridViewCellStyle3.Format = "N3";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Format = "N3";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle5;
             this.colLength.HeaderText = "小件长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
@@ -282,8 +297,8 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle4.Format = "N3";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle6;
             this.colWeight.HeaderText = "小件重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
@@ -291,6 +306,8 @@
             // 
             // colAmount
             // 
+            dataGridViewCellStyle7.Format = "N0";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle7;
             this.colAmount.HeaderText = "加工数量";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -298,8 +315,8 @@
             // 
             // colTotalWeight
             // 
-            dataGridViewCellStyle5.Format = "N3";
-            this.colTotalWeight.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Format = "N3";
+            this.colTotalWeight.DefaultCellStyle = dataGridViewCellStyle8;
             this.colTotalWeight.HeaderText = "加工重量";
             this.colTotalWeight.Name = "colTotalWeight";
             this.colTotalWeight.ReadOnly = true;
@@ -307,8 +324,8 @@
             // 
             // colTotalLength
             // 
-            dataGridViewCellStyle6.Format = "N3";
-            this.colTotalLength.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Format = "N3";
+            this.colTotalLength.DefaultCellStyle = dataGridViewCellStyle9;
             this.colTotalLength.HeaderText = "加工长度";
             this.colTotalLength.Name = "colTotalLength";
             this.colTotalLength.ReadOnly = true;
@@ -316,16 +333,16 @@
             // 
             // colAfterWeight
             // 
-            dataGridViewCellStyle7.Format = "N3";
-            this.colAfterWeight.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle10.Format = "N3";
+            this.colAfterWeight.DefaultCellStyle = dataGridViewCellStyle10;
             this.colAfterWeight.HeaderText = "加工后重量";
             this.colAfterWeight.Name = "colAfterWeight";
             this.colAfterWeight.ReadOnly = true;
             // 
             // colAfterLength
             // 
-            dataGridViewCellStyle8.Format = "N3";
-            this.colAfterLength.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle11.Format = "N3";
+            this.colAfterLength.DefaultCellStyle = dataGridViewCellStyle11;
             this.colAfterLength.HeaderText = "加工后长度";
             this.colAfterLength.Name = "colAfterLength";
             this.colAfterLength.ReadOnly = true;
@@ -395,7 +412,8 @@
         protected System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicedDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicedTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBeforeWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBeforeLength;

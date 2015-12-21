@@ -195,13 +195,16 @@ namespace LJH.Inventory.BusinessModel
                     Length = inventory.Length,
                     SheetNo = this.ID,
                     Price = 0,
-                    Count = count,
-                    Memo = inventory.Memo,
+                    Count = count
                 };
                 if (inventory.Weight.HasValue && inventory.Model != "开平")
                 {
                     if (si.TotalWeight == null) si.TotalWeight = 0;
                     si.TotalWeight += inventory.Weight * count;
+                }
+                if (inventory.Model != "原材料")
+                {
+                    si.Memo = inventory.Memo;
                 }
                 Items.Add(si);
             }

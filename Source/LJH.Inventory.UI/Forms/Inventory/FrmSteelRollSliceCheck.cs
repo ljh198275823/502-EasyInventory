@@ -32,7 +32,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtCheckCount.Focus();
                 txtCheckCount.SelectAll();
             }
-            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Check);
+
+            if (ProductInventory.SourceRoll.HasValue)
+            {
+                var source = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(ProductInventory.SourceRoll.Value).QueryObject;
+                chkCalThick.Enabled = source.Status == "余料";
+            }
+            btnOk.Enabled = ProductInventory.State == ProductInventoryState.Inventory && Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Check);
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -54,6 +60,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             else
             {
+                if (chkCalThick.Enabled && chkCalThick.Checked)
+                {
+                    if (ProductInventory.SourceRoll.HasValue)
+                    {
+                        var source = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(ProductInventory.SourceRoll.Value).QueryObject;
+                        if (source.Status == "余料")
+                        {
+                            //重新计算厚度
+                            new SteelRollBLL(AppSettings.Current.ConnStr).CalRealThick(source);
+                        }
+                    }
+                }
                 this.DialogResult = DialogResult.OK;
             }
         }

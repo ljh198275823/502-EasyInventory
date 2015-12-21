@@ -32,6 +32,9 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnSaveAs = new System.Windows.Forms.Button();
             this.btnColumn = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSearch
@@ -52,7 +55,7 @@
             this.btnSaveAs.TabIndex = 1;
             this.btnSaveAs.Text = "另存为(&S)";
             this.btnSaveAs.UseVisualStyleBackColor = true;
-            this.btnSaveAs.Click += new System.EventHandler(this.btnSaveAs_Click);
+            this.btnSaveAs.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnColumn
             // 
@@ -62,7 +65,25 @@
             this.btnColumn.TabIndex = 17;
             this.btnColumn.Text = "选择列(&C)";
             this.btnColumn.UseVisualStyleBackColor = true;
-            this.btnColumn.Click += new System.EventHandler(this.btnColumn_Click);
+            this.btnColumn.Click += new System.EventHandler(this.btnSelectColumns_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 321);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(792, 22);
+            this.statusStrip1.TabIndex = 18;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(777, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            this.toolStripStatusLabel1.Text = "总共 0 项";
             // 
             // FrmReportBase
             // 
@@ -70,6 +91,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 343);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnColumn);
             this.Controls.Add(this.btnSaveAs);
             this.Controls.Add(this.btnSearch);
@@ -77,9 +99,9 @@
             this.Name = "FrmReportBase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmReportBase";
-            this.Controls.SetChildIndex(this.btnSearch, 0);
-            this.Controls.SetChildIndex(this.btnSaveAs, 0);
-            this.Controls.SetChildIndex(this.btnColumn, 0);
+            this.Load += new System.EventHandler(this.FrmReportBase_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -90,5 +112,7 @@
         protected System.Windows.Forms.Button btnSearch;
         protected System.Windows.Forms.Button btnSaveAs;
         protected System.Windows.Forms.Button btnColumn;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

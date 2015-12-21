@@ -139,12 +139,11 @@ namespace LJH.Inventory.BLL
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 decimal? thick = null;
-                SliceRecordSearchCondition con = new SliceRecordSearchCondition();
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.SourceRoll = pi.ID;
-                var items = new SteelRollSliceRecordBLL(RepoUri).GetItems(con).QueryObjects;
-                if (items != null && items.Count > 0 && items.TrueForAll(it => it.SliceType == "开平"))
+                var items = new SteelRollSliceBLL(RepoUri).GetItems(con).QueryObjects;
+                if (items != null && items.Count > 0 && items.TrueForAll(it => it.Product != null && it.Product.Model == "开平"))
                 {
-
                     var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
                     decimal len = items.Sum(it => it.Length.Value * it.Count);
                     thick = pi.CalThick(pi.Product.Specification, pi.OriginalWeight.Value, len, pi.Product.Density.Value);
@@ -153,9 +152,7 @@ namespace LJH.Inventory.BLL
                         ProductInventoryItem clone = pi.Clone();
                         clone.RealThick = thick;
                         provider.Update(clone, pi, unitWork);
-                        var search = new ProductInventoryItemSearchCondition() { SourceRoll = pi.ID };
-                        var pis = provider.GetItems(search).QueryObjects;
-                        foreach (var slice in pis)
+                        foreach (var slice in items)
                         {
                             var sliceClone = slice.Clone();
                             slice.RealThick = thick;

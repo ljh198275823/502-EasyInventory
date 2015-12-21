@@ -21,7 +21,7 @@ namespace LJH.Inventory.UI.Forms
     public class NPOIExcelHelper
     {
         #region 私有方法
-        private static DataTable GetData(DataGridView Dgv)
+        private static DataTable GetData(DataGridView Dgv, bool forText)
         {
             DataTable dt = new DataTable();
             List<string> cols = Columns(Dgv);
@@ -36,7 +36,7 @@ namespace LJH.Inventory.UI.Forms
                     DataRow dtRow = dt.NewRow();
                     for (int i = 0; i < cols.Count; i++)
                     {
-                        dtRow[i] = row.Cells[cols[i]].Value;
+                        dtRow[i] = forText ? row.Cells[cols[i]].FormattedValue : row.Cells[cols[i]].Value;
                     }
                     dt.Rows.Add(dtRow);
                 }
@@ -220,9 +220,9 @@ namespace LJH.Inventory.UI.Forms
         /// <param name="dtSource">源DataTGridview</param>
         /// <param name="strHeaderText">表头文本</param>
         /// <param name="fileName">保存位置</param>
-        public static void Export(DataGridView myDgv, string fileName)
+        public static void Export(DataGridView myDgv, string fileName, bool forText)
         {
-            DataTable dt = GetData(myDgv);
+            DataTable dt = GetData(myDgv, forText);
             Export(dt, fileName);
         }
 
@@ -232,7 +232,7 @@ namespace LJH.Inventory.UI.Forms
         /// <param name="dtSource">源DataTGridview</param>
         /// <param name="strHeaderText">表头文本</param>
         /// <param name="fileName">保存位置</param>
-        public static void Export(DataGridView myDgv)
+        public static void Export(DataGridView myDgv, bool forText = false)
         {
             try
             {
@@ -242,7 +242,7 @@ namespace LJH.Inventory.UI.Forms
                 if (dig.ShowDialog() == DialogResult.OK)
                 {
                     string path = dig.FileName;
-                    Export(myDgv, path);
+                    Export(myDgv, path, forText);
                     MessageBox.Show("导出成功");
                 }
             }

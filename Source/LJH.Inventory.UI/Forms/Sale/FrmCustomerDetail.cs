@@ -21,6 +21,8 @@ namespace LJH.Inventory.UI.Forms.Sale
             InitializeComponent();
         }
 
+        private Guid? _DefaultLinker = null;
+
         #region 公共属性
         /// <summary>
         /// 获取或设置客户类别
@@ -83,6 +85,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                 txtWeb.Text = c.Website;
                 txtAddress.Text = c.Address;
                 txtMemo.Text = c.Memo;
+                _DefaultLinker = c.DefaultLinker;
             }
 
             GridView.Rows.Clear();
@@ -124,6 +127,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             info.Website = txtWeb.Text;
             info.Address = txtAddress.Text;
             info.Memo = txtMemo.Text;
+            info.DefaultLinker = _DefaultLinker;
             return info;
         }
 
@@ -199,6 +203,29 @@ namespace LJH.Inventory.UI.Forms.Sale
             }
         }
 
+        private void GridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (GridView.Columns[e.ColumnIndex].Name == "colDefault")
+                {
+                    DataGridViewCheckBoxCell cell = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewCheckBoxCell;
+                    if (cell.FormattedValue != null && Convert.ToBoolean(cell.FormattedValue))
+                    {
+                        _DefaultLinker = (GridView.Rows[e.RowIndex].Tag as Contact).ID;
+                    }
+                    else
+                    {
+                        _DefaultLinker = null;
+                    }
+                    foreach (DataGridViewRow row in GridView.Rows)
+                    {
+                        ShowItemOnRow(row, row.Tag as Contact);
+                    }
+                }
+            }
+        }
+
         private void ShowItemOnRow(DataGridViewRow row, Contact item)
         {
             row.Tag = item;
@@ -209,6 +236,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             row.Cells["colEmail"].Value = item.Email;
             row.Cells["colQQ"].Value = item.QQ;
             row.Cells["colMemo"].Value = item.Memo;
+            row.Cells["colDefault"].Value = _DefaultLinker == item.ID;
         }
 
         private void mnu_DeleteContact_Click(object sender, EventArgs e)
@@ -299,5 +327,9 @@ namespace LJH.Inventory.UI.Forms.Sale
             txtCategory.Text = string.Empty;
         }
         #endregion
+
+        
+
+        
     }
 }

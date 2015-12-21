@@ -64,6 +64,7 @@
             this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDefault = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHobby = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,12 +92,12 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(526, 283);
+            this.btnClose.Location = new System.Drawing.Point(639, 283);
             this.btnClose.TabIndex = 10;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(417, 283);
+            this.btnOk.Location = new System.Drawing.Point(530, 283);
             this.btnOk.TabIndex = 9;
             // 
             // contextMenuStrip1
@@ -123,16 +124,16 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(604, 262);
+            this.tabControl1.Size = new System.Drawing.Size(717, 262);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage6
@@ -161,7 +162,7 @@
             this.tabPage6.Controls.Add(this.label1);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(596, 236);
+            this.tabPage6.Size = new System.Drawing.Size(709, 236);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "基本资料";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -374,7 +375,7 @@
             this.tabPage1.Controls.Add(this.GridView);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(596, 236);
+            this.tabPage1.Size = new System.Drawing.Size(709, 236);
             this.tabPage1.TabIndex = 6;
             this.tabPage1.Text = "联系人";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -384,9 +385,9 @@
             this.GridView.AllowUserToAddRows = false;
             this.GridView.AllowUserToDeleteRows = false;
             this.GridView.AllowUserToResizeRows = false;
-            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GridView.BackgroundColor = System.Drawing.Color.White;
             this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -396,6 +397,7 @@
             this.colTelphone,
             this.colQQ,
             this.colEmail,
+            this.colDefault,
             this.colHowold,
             this.colBirthday,
             this.colHobby,
@@ -407,9 +409,10 @@
             this.GridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(590, 230);
+            this.GridView.Size = new System.Drawing.Size(703, 230);
             this.GridView.TabIndex = 65;
             this.GridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
+            this.GridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellEndEdit);
             // 
             // colName
             // 
@@ -451,6 +454,12 @@
             this.colEmail.ReadOnly = true;
             this.colEmail.Width = 60;
             // 
+            // colDefault
+            // 
+            this.colDefault.HeaderText = "默认";
+            this.colDefault.Name = "colDefault";
+            this.colDefault.Width = 60;
+            // 
             // colHowold
             // 
             this.colHowold.HeaderText = "年龄";
@@ -490,7 +499,7 @@
             this.tabPage2.Controls.Add(this.gridAttachment);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(596, 236);
+            this.tabPage2.Size = new System.Drawing.Size(709, 236);
             this.tabPage2.TabIndex = 7;
             this.tabPage2.Text = "附件";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -514,7 +523,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(596, 236);
+            this.gridAttachment.Size = new System.Drawing.Size(709, 236);
             this.gridAttachment.TabIndex = 100;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -587,7 +596,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 316);
+            this.ClientSize = new System.Drawing.Size(735, 316);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmCustomerDetail";
             this.Text = "客户资料";
@@ -638,16 +647,6 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtCity;
         private System.Windows.Forms.Label label5;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMobile;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQQ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHowold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBirthday;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHobby;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ContextMenuStrip mnu_Attachment;
         private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentAdd;
@@ -659,5 +658,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMobile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQQ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colDefault;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHowold;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBirthday;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHobby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

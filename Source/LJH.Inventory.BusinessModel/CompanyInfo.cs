@@ -80,6 +80,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Address { get; set; }
         /// <summary>
+        /// 获取或设置默认联系人
+        /// </summary>
+        public Guid? DefaultLinker { get; set; }
+        /// <summary>
         /// 获取或设置客户的归档码
         /// </summary>
         public int? FileID { get; set; }

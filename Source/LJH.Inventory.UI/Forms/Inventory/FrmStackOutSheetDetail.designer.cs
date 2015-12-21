@@ -802,7 +802,6 @@
             // 
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colMemo.Width = 150;
             // 

@@ -40,6 +40,7 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.chkCalThick = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -77,7 +78,6 @@
             this.txtChecker.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtChecker.Location = new System.Drawing.Point(91, 83);
             this.txtChecker.Name = "txtChecker";
-            this.txtChecker.ReadOnly = false;
             this.txtChecker.Size = new System.Drawing.Size(239, 21);
             this.txtChecker.TabIndex = 1;
             // 
@@ -127,7 +127,7 @@
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnClose.Location = new System.Drawing.Point(262, 161);
+            this.btnClose.Location = new System.Drawing.Point(262, 186);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 4;
@@ -139,7 +139,7 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOk.Location = new System.Drawing.Point(175, 161);
+            this.btnOk.Location = new System.Drawing.Point(175, 186);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 3;
@@ -164,13 +164,26 @@
             this.txtMemo.Size = new System.Drawing.Size(239, 21);
             this.txtMemo.TabIndex = 2;
             // 
+            // chkCalThick
+            // 
+            this.chkCalThick.AutoSize = true;
+            this.chkCalThick.Enabled = false;
+            this.chkCalThick.ForeColor = System.Drawing.Color.Red;
+            this.chkCalThick.Location = new System.Drawing.Point(91, 143);
+            this.chkCalThick.Name = "chkCalThick";
+            this.chkCalThick.Size = new System.Drawing.Size(96, 16);
+            this.chkCalThick.TabIndex = 13;
+            this.chkCalThick.Text = "重新计算厚度";
+            this.chkCalThick.UseVisualStyleBackColor = true;
+            // 
             // FrmSteelRollSliceCheck
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(353, 194);
+            this.ClientSize = new System.Drawing.Size(353, 219);
+            this.Controls.Add(this.chkCalThick);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnClose);
@@ -203,5 +216,6 @@
         protected System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Label label5;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
+        private System.Windows.Forms.CheckBox chkCalThick;
     }
 }

@@ -62,13 +62,6 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult CreateInventory(Product p, WareHouse w, string customer, decimal count,decimal weight, decimal thick, string op, string memo)
         {
-            //ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { ProductID = p.ID, WareHouseID = w.ID };
-            //con.States = (int)ProductInventoryState.UnShipped;
-            //List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            //if (items != null && items.Count > 0 && items.Exists(it => it.Customer == customer))
-            //{
-            //    return new CommandResult(ResultCode.Fail, "库存项已经存在，如果想要更新库库数量，请通过盘点来操作");
-            //}
             ProductInventoryItem pii = new ProductInventoryItem()
             {
                 ID = Guid.NewGuid(),
@@ -100,9 +93,12 @@ namespace LJH.Inventory.BLL
             {
                 if (info.Count == newCount) return new CommandResult(ResultCode.Fail, "实盘数量和库存数量一致");
                 if (info.State == ProductInventoryState.Nullified) return new CommandResult(ResultCode.Fail, "作废的库存项不能进行盘点操作");
-                //如果处理其它的状态的库存项可以做盘盈操作,但不能做盘亏操作
-                if (info.State != ProductInventoryState.Inventory && info.Count > newCount) return new CommandResult(ResultCode.Fail, "库存项数量处于锁定状态,不能减少");
+                if (info.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "库存项数量处于锁定状态,不能盘点");
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                ProductInventoryItem clone = info.Clone();
+                clone.Count = newCount;
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
+
                 InventoryCheckRecord record = new InventoryCheckRecord();
                 record.ID = Guid.NewGuid();
                 record.CheckDateTime = DateTime.Now;
@@ -119,38 +115,6 @@ namespace LJH.Inventory.BLL
                 record.Memo = memo;
                 ProviderFactory.Create<IProvider<InventoryCheckRecord, Guid>>(RepoUri).Insert(record, unitWork);
 
-                var clone = info.Clone();
-                if (newCount > info.Count) //盘盈
-                {
-                    ProductInventoryItem newItem = info.Clone();
-                    newItem.ID = Guid.NewGuid();
-                    newItem.Count = newCount - info.Count;
-                    newItem.State = ProductInventoryState.Inventory;
-                    newItem.OrderItem = null;
-                    newItem.OrderID = null;
-                    newItem.PurchaseID = null;
-                    newItem.PurchaseItem = null;
-                    newItem.InventorySheet = "盘盈";
-                    newItem.InventoryItem = null;
-                    newItem.DeliveryItem = null;
-                    newItem.DeliverySheet = null;
-                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newItem, unitWork);
-                }
-                else //盘亏
-                {
-                    ProductInventoryItem newItem = info.Clone();
-                    newItem.ID = Guid.NewGuid();
-                    newItem.SourceID = info.ID; //设置库存项的来源
-                    newItem.Count = info.Count - newCount;
-                    newItem.State = ProductInventoryState.Shipped;
-                    newItem.OrderItem = null;
-                    newItem.OrderID = null;
-                    newItem.DeliveryItem = null;
-                    newItem.DeliverySheet = "盘亏";
-                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newItem, unitWork);
-                    clone.Count = newCount;
-                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
-                }
                 var ret = unitWork.Commit();
                 if (ret.Result == ResultCode.Successful)
                 {
@@ -162,6 +126,33 @@ namespace LJH.Inventory.BLL
             {
                 return new CommandResult(ResultCode.Fail, ex.Message);
             }
+        }
+
+        public CommandResult Depart(ProductInventoryItem info, WareHouse w, string customer, decimal count, string memo)
+        {
+            if (info.Count < count) return new CommandResult(ResultCode.Fail, "拆包数量大于原包数量");
+            if (info.State == ProductInventoryState.Nullified) return new CommandResult(ResultCode.Fail, "作废的库存项不能进行拆包操作");
+            if (info.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "库存项数量处于锁定状态,不能拆包");
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            ProductInventoryItem clone = info.Clone();
+            clone.Count -= count;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
+
+            ProductInventoryItem depart = info.Clone ();
+            depart.ID =Guid.NewGuid ();
+            depart.WareHouseID = w.ID;
+            depart.Customer =customer ;
+            depart.Count =count;
+            depart.SourceID =info.ID ;
+            depart.Memo =memo ;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(depart, unitWork);
+
+            var ret = unitWork.Commit();
+            if (ret.Result == ResultCode.Successful)
+            {
+                info.Count = clone.Count;
+            }
+            return ret;
         }
         /// <summary>
         /// 将库存分配给某个订单项,分配给某个订单项的库存不能再用于其它订单的出货，只能用于该订单项出货

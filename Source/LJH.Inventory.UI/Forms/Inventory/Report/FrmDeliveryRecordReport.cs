@@ -34,7 +34,9 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSheetNo"].Value = sor.SheetNo;
             row.Cells["colCustomerName"].Value = sor.Customer.Name;
             row.Cells["colOrderID"].Value = sor.OrderID;
-            row.Cells["colSpecification"].Value = sor.Product.Specification;
+            row.Cells["colThick"].Value= SpecificationHelper.GetWrittenThick(sor.Specification);
+            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(sor.Specification);
+            //row.Cells["colSpecification"].Value = sor.Product.Specification;
             row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
             row.Cells["colLength"].Value = sor.Length;

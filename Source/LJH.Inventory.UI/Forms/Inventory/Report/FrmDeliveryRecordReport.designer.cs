@@ -32,6 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -48,8 +52,9 @@
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -198,8 +203,9 @@
             this.colSheetNo,
             this.colOrderID,
             this.colCategoryID,
-            this.colSpecification,
             this.colModel,
+            this.colThick,
+            this.colWidth,
             this.colLength,
             this.colWeight,
             this.colPrice,
@@ -244,18 +250,13 @@
             this.colOrderID.ReadOnly = true;
             this.colOrderID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colOrderID.Visible = false;
             // 
             // colCategoryID
             // 
             this.colCategoryID.HeaderText = "类别";
             this.colCategoryID.Name = "colCategoryID";
             this.colCategoryID.ReadOnly = true;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
             // 
             // colModel
             // 
@@ -265,41 +266,64 @@
             this.colModel.ReadOnly = true;
             this.colModel.Width = 78;
             // 
+            // colThick
+            // 
+            dataGridViewCellStyle1.Format = "N2";
+            this.colThick.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colThick.HeaderText = "规格厚度";
+            this.colThick.Name = "colThick";
+            this.colThick.ReadOnly = true;
+            this.colThick.Width = 80;
+            // 
+            // colWidth
+            // 
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colWidth.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colWidth.HeaderText = "规格宽度";
+            this.colWidth.Name = "colWidth";
+            this.colWidth.ReadOnly = true;
+            this.colWidth.Width = 80;
+            // 
             // colLength
             // 
+            dataGridViewCellStyle3.Format = "N3";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle3;
             this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
             // colWeight
             // 
+            dataGridViewCellStyle4.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle4;
             this.colWeight.HeaderText = "重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colPrice
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
             // 
             // colCount
             // 
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "N0";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
             // 
             // colAmount
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle7;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -352,8 +376,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;

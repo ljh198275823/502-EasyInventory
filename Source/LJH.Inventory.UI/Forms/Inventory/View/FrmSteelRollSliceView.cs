@@ -68,7 +68,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colInventorySheet"].Value = c.InventorySheet;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
             row.Cells["colCustomer"].Value = c.Customer;
-            row.Cells["colSourceRoll"].Value = "查看来源卷";
+            row.Cells["colSourceRoll"].Value = c.SourceRoll.HasValue ? "查看来源卷" : null;
             row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion
@@ -98,7 +98,18 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 if (ret == DialogResult.OK) ReFreshData();
             }
         }
-        #endregion
+
+        private void 折包ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                FrmSteelRollSliceDepart frm = new FrmSteelRollSliceDepart();
+                frm.ProductInventory = pi;
+                DialogResult ret = frm.ShowDialog();
+                if (ret == DialogResult.OK) ReFreshData();
+            }
+        }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -120,5 +131,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 }
             }
         }
+        #endregion
     }
 }
