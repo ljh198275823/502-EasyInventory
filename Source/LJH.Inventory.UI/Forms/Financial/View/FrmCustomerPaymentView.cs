@@ -146,6 +146,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         frm.UpdatingItem = sheet;
                         frm.PaymentType = CustomerPaymentType.Customer;
                         frm.ShowDialog();
+                        FreshData();
                     }
                 }
                 else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")

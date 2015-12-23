@@ -145,6 +145,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
+                        FreshData();
                     }
                 }
             }
