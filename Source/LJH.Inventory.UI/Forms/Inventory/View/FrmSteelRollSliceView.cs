@@ -131,6 +131,25 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 }
             }
         }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "colMemo")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string memo = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UpdateMemo(pi, memo);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.Memo;
+                }
+            }
+        }
         #endregion
+
+        
     }
 }

@@ -17,5 +17,14 @@ namespace LJH.Inventory.BLL
         {
         }
         #endregion
+
+        public CommandResult UpdateMemo(ProductInventoryItem pi,string memo)
+        {
+            var clone = pi.Clone();
+            clone.Memo = memo;
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful) pi.Memo = memo;
+            return ret;
+        }
     }
 }
