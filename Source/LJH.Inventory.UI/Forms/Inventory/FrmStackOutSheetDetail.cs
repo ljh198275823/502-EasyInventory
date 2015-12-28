@@ -311,7 +311,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "打印失败");
+                    LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
+                    //MessageBox.Show(ex.Message, "打印失败");
                 }
             }
         }
