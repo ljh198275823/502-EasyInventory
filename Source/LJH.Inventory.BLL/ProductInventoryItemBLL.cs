@@ -26,5 +26,18 @@ namespace LJH.Inventory.BLL
             if (ret.Result == ResultCode.Successful) pi.Memo = memo;
             return ret;
         }
+
+        public CommandResult UpdateWareHouse(ProductInventoryItem pi, WareHouse  ws)
+        {
+            var clone = pi.Clone();
+            clone.WareHouseID = ws.ID;
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful)
+            {
+                pi.WareHouseID = clone.WareHouseID;
+                pi.WareHouse = ws;
+            }
+            return ret;
+        }
     }
 }

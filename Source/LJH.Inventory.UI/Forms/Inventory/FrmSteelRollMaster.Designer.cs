@@ -97,6 +97,7 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -568,6 +569,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
             this.cMnu_Add,
+            this.toolStripSeparator2,
             this.mnu_开平,
             this.mnu_开条,
             this.mnu_开吨,
@@ -581,7 +583,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 302);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 308);
             // 
             // cMnu_Fresh
             // 
@@ -673,6 +675,11 @@
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
             // FrmSteelRollMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -762,5 +769,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colDeliverySheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.ToolStripMenuItem mnu_Import;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

@@ -38,6 +38,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtProduct = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -69,15 +71,15 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(657, 12);
+            this.btnSearch.Location = new System.Drawing.Point(681, 12);
             // 
             // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(657, 40);
+            this.btnSaveAs.Location = new System.Drawing.Point(681, 40);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(657, 70);
+            this.btnColumn.Location = new System.Drawing.Point(681, 70);
             // 
             // panel1
             // 
@@ -85,11 +87,13 @@
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Location = new System.Drawing.Point(0, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(651, 96);
+            this.panel1.Size = new System.Drawing.Size(675, 96);
             this.panel1.TabIndex = 25;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cmbSpecification);
+            this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.txtProductCategory);
             this.groupBox3.Controls.Add(this.txtProduct);
             this.groupBox3.Controls.Add(this.txtCustomer);
@@ -98,10 +102,27 @@
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Location = new System.Drawing.Point(240, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(403, 90);
+            this.groupBox3.Size = new System.Drawing.Size(432, 90);
             this.groupBox3.TabIndex = 36;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.Location = new System.Drawing.Point(254, 44);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
+            this.cmbSpecification.Specification = "*";
+            this.cmbSpecification.TabIndex = 87;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(221, 51);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 86;
+            this.label5.Text = "规格";
             // 
             // txtProductCategory
             // 
@@ -116,7 +137,7 @@
             // txtProduct
             // 
             this.txtProduct.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtProduct.Location = new System.Drawing.Point(242, 18);
+            this.txtProduct.Location = new System.Drawing.Point(254, 18);
             this.txtProduct.Name = "txtProduct";
             this.txtProduct.ReadOnly = true;
             this.txtProduct.Size = new System.Drawing.Size(153, 21);
@@ -147,7 +168,7 @@
             // lnkProduct
             // 
             this.lnkProduct.AutoSize = true;
-            this.lnkProduct.Location = new System.Drawing.Point(207, 22);
+            this.lnkProduct.Location = new System.Drawing.Point(219, 22);
             this.lnkProduct.Name = "lnkProduct";
             this.lnkProduct.Size = new System.Drawing.Size(29, 12);
             this.lnkProduct.TabIndex = 34;
@@ -371,6 +392,8 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
         private GeneralLibrary.WinformControl.DBCTextBox txtProduct;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private Controls.UCSpecification cmbSpecification;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;

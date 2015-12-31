@@ -111,6 +111,18 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             }
         }
 
+        private void 更换仓库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                FrmChangeWareHouse frm = new FrmChangeWareHouse();
+                frm.ProductInventory = pi;
+                DialogResult ret = frm.ShowDialog();
+                if (ret == DialogResult.OK) ReFreshData();
+            }
+        }
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
@@ -150,6 +162,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         }
         #endregion
 
-        
+       
     }
 }

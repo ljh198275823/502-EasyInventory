@@ -254,6 +254,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     if (txtLength.DecimalValue > 0) record.Length = txtLength.DecimalValue;
                     record.Count = txtCount.IntergerValue;
+                    record.Weight = record.BeforeWeight - record.AfterWeight;
                 }
                 else if (rd开吨.Checked)
                 {

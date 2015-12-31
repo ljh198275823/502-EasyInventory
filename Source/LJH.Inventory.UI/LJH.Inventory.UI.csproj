@@ -148,6 +148,12 @@
     <Compile Include="Forms\Financial\FrmSetFileID.Designer.cs">
       <DependentUpon>FrmSetFileID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\FrmChangeWareHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\FrmChangeWareHouse.Designer.cs">
+      <DependentUpon>FrmChangeWareHouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\FrmSlice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -708,6 +714,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmSetFileID.resx">
       <DependentUpon>FrmSetFileID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\FrmChangeWareHouse.resx">
+      <DependentUpon>FrmChangeWareHouse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSlice.resx">
       <DependentUpon>FrmSlice.cs</DependentUpon>

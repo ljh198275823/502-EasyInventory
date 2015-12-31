@@ -200,7 +200,7 @@ namespace LJH.Inventory.BusinessModel
                 if (inventory.Weight.HasValue && inventory.Model != "开平")
                 {
                     if (si.TotalWeight == null) si.TotalWeight = 0;
-                    si.TotalWeight += inventory.Weight * count;
+                    si.TotalWeight += (inventory.Product != null ? inventory.Product.Weight : inventory.Weight) * count;
                 }
                 if (inventory.Model != "原材料")
                 {

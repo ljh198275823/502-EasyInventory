@@ -17,14 +17,12 @@ using LJH.Inventory.UI.Forms.Sale;
 
 namespace LJH.Inventory.UI.Forms.Inventory.Report
 {
-    public partial class FrmDeliveryRecordReport :FrmReportBase 
+    public partial class FrmDeliveryRecordReport : FrmReportBase
     {
         public FrmDeliveryRecordReport()
         {
             InitializeComponent();
         }
-
-        
 
         #region 重写基类方法
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -34,7 +32,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSheetNo"].Value = sor.SheetNo;
             row.Cells["colCustomerName"].Value = sor.Customer.Name;
             row.Cells["colOrderID"].Value = sor.OrderID;
-            row.Cells["colThick"].Value= SpecificationHelper.GetWrittenThick(sor.Specification);
+            row.Cells["colThick"].Value = SpecificationHelper.GetWrittenThick(sor.Specification);
             row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(sor.Specification);
             //row.Cells["colSpecification"].Value = sor.Product.Specification;
             row.Cells["colModel"].Value = sor.Product.Model;
@@ -44,6 +42,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colPrice"].Value = sor.Price;
             row.Cells["colCount"].Value = sor.Count;
             row.Cells["colAmount"].Value = sor.Amount.Trim();
+            //row.Cells["colWareHouse"].Value = sor.WareHouse != null ? sor.WareHouse.Name : sor.WareHouseID;
         }
 
         protected override List<object> GetDataSource()
@@ -60,7 +59,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
-                return (from item in items orderby item.LastActiveDate ascending, item.ProductID ascending select (object)item).ToList();
+                decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
+                decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
+                return (from item in items
+                        orderby item.LastActiveDate ascending, item.ProductID ascending
+                        where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Specification) == width) &&
+                              (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Specification) == thick)
+                        select (object)item).ToList();
             }
             return base.GetDataSource();
         }
@@ -70,6 +75,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             ucDateTimeInterval1.ShowTime = false;
             ucDateTimeInterval1.Init();
             ucDateTimeInterval1.SelectThisMonth();
+            cmbSpecification.Init();
             base.Init();
         }
         #endregion
