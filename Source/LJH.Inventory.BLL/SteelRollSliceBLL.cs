@@ -55,6 +55,12 @@ namespace LJH.Inventory.BLL
             if (ret.QueryObjects != null) ret.QueryObjects = ret.QueryObjects.Where(it => it.Count != 0).ToList();
             return ret;
         }
+
+        public CommandResult Add(ProductInventoryItem pi)
+        {
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi);
+        }
+
         /// <summary>
         /// 建立库存
         /// </summary>

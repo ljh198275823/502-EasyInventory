@@ -15,15 +15,16 @@ using LJH.GeneralLibrary.WinformControl;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmSteelRollImport : Form
+    public partial class FrmSteelRollSliceImport : Form
     {
-        public FrmSteelRollImport()
+        public FrmSteelRollSliceImport()
         {
             InitializeComponent();
         }
 
         private List<WareHouse> _AllWareHouses = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
         private List<ProductCategory> _Categories = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+
         #region 私有方法
         private void ClearData()
         {
@@ -57,7 +58,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private ProductInventoryItem GetStudentFromRow(DataGridViewRow row)
         {
             DateTime addDate = DateTime.Now;
-            if (row.Cells["colAddDate"].Value != null && !string.IsNullOrEmpty(row.Cells["colAddDate"].Value.ToString().Trim()) && !DateTime.TryParse(row.Cells["colAddDate"].Value.ToString().Trim(), out addDate))
+            if (row.Cells["colAddDate"].Value != null && !string.IsNullOrEmpty(row.Cells["colAddDate"].Value.ToString().Trim()) &&
+                !DateTime.TryParse(row.Cells["colAddDate"].Value.ToString().Trim(), out addDate))
             {
                 row.Cells["colReason"].Value = "入库日期列不能转化成日期";
                 return null;
@@ -112,53 +114,55 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 specification = string.Format("{0:F2}*{1:F0}", thick > width ? width : thick, width > thick ? width : thick); //一般来说厚度小于宽度，这里将表格中的“宽*厚”这种格式改成“厚*宽”
             }
-            decimal originalWeight = 0;
-            if (row.Cells["colOriginalWeight"].Value == null ||
-                !decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colOriginalWeight"].Value.ToString().Trim()), out originalWeight) || originalWeight <= 0)
+            if (row.Cells["colModel"].Value == null || string.IsNullOrEmpty(row.Cells["colModel"].Value.ToString().Trim()))
             {
-                row.Cells["colReason"].Value = "没有指定入库重量";
+                row.Cells["colReason"].Value = "没有指定加工类型";
                 return null;
             }
-            decimal originalLength = 0;
-            if (row.Cells["colOriginalLength"].Value != null && !string.IsNullOrEmpty(row.Cells["colOriginalLength"].Value.ToString().Trim()) &&
-                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colOriginalLength"].Value.ToString().Trim()), out originalLength) || originalLength <= 0))
-            {
-                row.Cells["colReason"].Value = "入库长度不正确";
-                return null;
-            }
+            string model = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colModel"].Value.ToString().Trim());
             decimal weight = 0;
-            if (row.Cells["colWeight"].Value == null ||
-               !decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colWeight"].Value.ToString().Trim()), out weight) || weight <= 0)
+            if (row.Cells["colWeight"].Value != null && !string.IsNullOrEmpty(row.Cells["colWeight"].Value.ToString().Trim()) &&
+               (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colWeight"].Value.ToString().Trim()), out weight) || weight <= 0))
             {
-                row.Cells["colReason"].Value = "没有指定剩余重量";
+                row.Cells["colReason"].Value = "重量不正确";
                 return null;
             }
             decimal length = 0;
             if (row.Cells["colLength"].Value != null && !string.IsNullOrEmpty(row.Cells["colLength"].Value.ToString().Trim()) &&
                 (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colLength"].Value.ToString().Trim()), out length) || length <= 0))
             {
-                row.Cells["colReason"].Value = "剩余长度不正确";
+                row.Cells["colReason"].Value = "长度不正确";
                 return null;
             }
+            if (weight == 0 && length == 0)
+            {
+                row.Cells["colReason"].Value = "重量和长度至少指定一个";
+                return null;
+            }
+            decimal reaThick = 0;
+            if (row.Cells["colThick"].Value != null && !string.IsNullOrEmpty(row.Cells["colThick"].Value.ToString().Trim()) &&
+                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colThick"].Value.ToString().Trim()), out reaThick) || reaThick <= 0))
+            {
+                row.Cells["colReason"].Value = "厚度不正确";
+                return null;
+            }
+            decimal count = 0;
+            if (row.Cells["colCount"].Value == null ||
+                !decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCount"].Value.ToString().Trim()), out count) || count <= 0)
+            {
+                row.Cells["colReason"].Value = "数量不正确";
+                return null;
+            }
+            count = (int)count; //取整
             if (row.Cells["colCustomer"].Value == null || string.IsNullOrEmpty(row.Cells["colCustomer"].Value.ToString().Trim()))
             {
                 row.Cells["colReason"].Value = "没有指定客户";
                 return null;
             }
             string customer = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCustomer"].Value.ToString().Trim());
-            if (row.Cells["colSupplier"].Value == null || string.IsNullOrEmpty(row.Cells["colSupplier"].Value.ToString().Trim()))
-            {
-                row.Cells["colReason"].Value = "没有指定供应商";
-                return null;
-            }
-            string supplier = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSupplier"].Value.ToString().Trim());
-            if (row.Cells["colManufacture"].Value == null || string.IsNullOrEmpty(row.Cells["colManufacture"].Value.ToString().Trim()))
-            {
-                row.Cells["colReason"].Value = "没有指定厂家";
-                return null;
-            }
-            string manufacture = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
-            var product = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, "原材料", 7.85m);
+            string supplier = row.Cells["colSupplier"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSupplier"].Value.ToString().Trim());
+            string manufacture = row.Cells["colManufacture"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
+            var product = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, weight == 0 || model == "开平" ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
             if (product == null)
             {
                 row.Cells["colReason"].Value = "创建产品失败";
@@ -171,18 +175,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Product = product;
             pi.Model = product.Model;
             pi.WareHouseID = ws;
-            pi.OriginalThick = originalLength == 0 ? SpecificationHelper.GetWrittenThick(specification) : pi.CalThick(specification, originalWeight, originalLength, product.Density.Value); //如果有入库长度，则要计算入库厚度
-            pi.OriginalWeight = originalWeight;
-            pi.OriginalLength = originalLength == 0 ? pi.CalLength(specification, originalWeight, product.Density.Value) : originalLength;
+            pi.OriginalThick = reaThick == 0 ? null : (decimal?)reaThick;
             pi.Weight = weight;
-            if (length == 0 && originalWeight == weight) pi.Length = pi.OriginalLength; //如果入库重量与剩余重量相等，并且没有指定剩余长度，则剩余长度等于入库长度
-            else pi.Length = length == 0 ? pi.CalLength(specification, weight, product.Density.Value) : length;
-            pi.Count = 1;
+            pi.Length = length;
+            pi.Count = count;
             pi.Unit = "卷";
             pi.Customer = customer;
             pi.Supplier = supplier;
             pi.Manufacture = manufacture;
-            pi.SerialNumber = row.Cells["colSerialNumber"].Value != null ? row.Cells["colSerialNumber"].Value.ToString().Trim() : null;
             pi.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString().Trim() : null;
             pi.InventorySheet = "导入";
             pi.State = ProductInventoryState.Inventory;
@@ -240,7 +240,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 try
                 {
-                    SteelRollBLL bll = new SteelRollBLL(AppSettings.Current.ConnStr);
+                    SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
                     for (int i = firstRow - 1; i < dataGridView1.Rows.Count; i++)
                     {
                         try

@@ -170,7 +170,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 frm.ShowDialog();
             }
         }
+
+        private void mnu_Import_Click(object sender, EventArgs e)
+        {
+            FrmSteelRollSliceImport frm = new FrmSteelRollSliceImport();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+            cMnu_Fresh.PerformClick();
+        }
         #endregion
-       
     }
 }

@@ -85,6 +85,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_开平 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_开条 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_开吨 = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,7 +98,6 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -597,6 +597,11 @@
             this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
             // mnu_开平
             // 
             this.mnu_开平.Name = "mnu_开平";
@@ -674,11 +679,6 @@
             this.mnu_Import.Size = new System.Drawing.Size(152, 22);
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // FrmSteelRollMaster
             // 

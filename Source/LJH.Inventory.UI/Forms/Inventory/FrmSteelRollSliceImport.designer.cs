@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Inventory
 {
-    partial class FrmSteelRollImport
+    partial class FrmSteelRollSliceImport
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollImport));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollSliceImport));
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -45,23 +44,23 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblSource = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.colRowIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblSource = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -95,7 +94,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1263, 708);
+            this.panel3.Size = new System.Drawing.Size(1394, 708);
             this.panel3.TabIndex = 2;
             // 
             // groupBox3
@@ -107,7 +106,7 @@
             this.groupBox3.Controls.Add(this.btnImport);
             this.groupBox3.Location = new System.Drawing.Point(646, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(605, 73);
+            this.groupBox3.Size = new System.Drawing.Size(736, 73);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "第二步 导入";
@@ -163,7 +162,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(6, 91);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1254, 614);
+            this.groupBox2.Size = new System.Drawing.Size(1385, 614);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数据预览";
@@ -184,26 +183,49 @@
             this.colWareHouse,
             this.colCategory,
             this.colSpecification,
-            this.colOriginalWeight,
-            this.colOriginalLength,
+            this.colModel,
             this.colWeight,
             this.colLength,
+            this.colThick,
+            this.colCount,
             this.colCustomer,
             this.colSupplier,
             this.colManufacture,
-            this.colSerialNumber,
             this.colMemo,
             this.colReason});
             this.dataGridView1.Location = new System.Drawing.Point(3, 42);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1251, 572);
+            this.dataGridView1.Size = new System.Drawing.Size(1382, 572);
             this.dataGridView1.TabIndex = 116;
+            // 
+            // lblSource
+            // 
+            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSource.AutoSize = true;
+            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSource.ForeColor = System.Drawing.Color.Blue;
+            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblSource.Location = new System.Drawing.Point(1304, 24);
+            this.lblSource.Name = "lblSource";
+            this.lblSource.Size = new System.Drawing.Size(44, 12);
+            this.lblSource.TabIndex = 17;
+            this.lblSource.Text = "条数据";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1145, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "待导入数据预览";
             // 
             // colRowIndex
             // 
@@ -235,41 +257,38 @@
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.Width = 80;
             // 
-            // colOriginalWeight
+            // colModel
             // 
-            dataGridViewCellStyle1.Format = "N3";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colOriginalWeight.HeaderText = "入库重量*";
-            this.colOriginalWeight.Name = "colOriginalWeight";
-            this.colOriginalWeight.Width = 85;
-            // 
-            // colOriginalLength
-            // 
-            dataGridViewCellStyle2.Format = "N3";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colOriginalLength.HeaderText = "入库长度";
-            this.colOriginalLength.Name = "colOriginalLength";
-            this.colOriginalLength.Width = 80;
+            this.colModel.HeaderText = "加工类别*";
+            this.colModel.Name = "colModel";
             // 
             // colWeight
             // 
-            dataGridViewCellStyle3.Format = "N3";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colWeight.HeaderText = "剩余重量*";
+            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colWeight.HeaderText = "重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.Width = 85;
             // 
             // colLength
             // 
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colLength.HeaderText = "剩余长度";
+            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.Width = 80;
+            // 
+            // colThick
+            // 
+            this.colThick.HeaderText = "厚度";
+            this.colThick.Name = "colThick";
+            // 
+            // colCount
+            // 
+            this.colCount.HeaderText = "数量*";
+            this.colCount.Name = "colCount";
             // 
             // colCustomer
             // 
@@ -279,21 +298,15 @@
             // 
             // colSupplier
             // 
-            this.colSupplier.HeaderText = "供应商*";
+            this.colSupplier.HeaderText = "供应商";
             this.colSupplier.Name = "colSupplier";
             this.colSupplier.Width = 80;
             // 
             // colManufacture
             // 
-            this.colManufacture.HeaderText = "厂家*";
+            this.colManufacture.HeaderText = "厂家";
             this.colManufacture.Name = "colManufacture";
             this.colManufacture.Width = 80;
-            // 
-            // colSerialNumber
-            // 
-            this.colSerialNumber.HeaderText = "卷号";
-            this.colSerialNumber.Name = "colSerialNumber";
-            this.colSerialNumber.Width = 60;
             // 
             // colMemo
             // 
@@ -302,43 +315,23 @@
             // 
             // colReason
             // 
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
+            this.colReason.DefaultCellStyle = dataGridViewCellStyle3;
             this.colReason.HeaderText = "导入状态";
             this.colReason.Name = "colReason";
             this.colReason.ReadOnly = true;
+            this.colReason.Width = 150;
             // 
-            // lblSource
-            // 
-            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSource.AutoSize = true;
-            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblSource.ForeColor = System.Drawing.Color.Blue;
-            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblSource.Location = new System.Drawing.Point(1163, 24);
-            this.lblSource.Name = "lblSource";
-            this.lblSource.Size = new System.Drawing.Size(44, 12);
-            this.lblSource.TabIndex = 17;
-            this.lblSource.Text = "条数据";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1004, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "待导入数据预览";
-            // 
-            // FrmSteelRollImport
+            // FrmSteelRollSliceImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1263, 708);
+            this.ClientSize = new System.Drawing.Size(1394, 708);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmSteelRollImport";
+            this.Name = "FrmSteelRollSliceImport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "原材料导入";
+            this.Text = "小件导入";
             this.Load += new System.EventHandler(this.FrmStudentImport_Load);
             this.panel3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -371,14 +364,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReason;
     }
