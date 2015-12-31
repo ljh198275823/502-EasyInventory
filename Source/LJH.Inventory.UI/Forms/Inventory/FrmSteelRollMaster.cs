@@ -333,5 +333,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
+        private void mnu_Import_Click(object sender, EventArgs e)
+        {
+            FrmSteelRollImport frm = new FrmSteelRollImport();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+            cMnu_Fresh.PerformClick();
+        }
     }
 }

@@ -150,6 +150,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
+                if (OriginalWeight == Weight) return "整卷";
                 if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "余料";
                 else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
                 else if (OriginalLength > Length) return "余卷";
