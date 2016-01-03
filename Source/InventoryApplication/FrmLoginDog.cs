@@ -34,7 +34,7 @@ namespace InventoryApplication
         private bool CheckConnect()
         {
             sb.DataSource = this.txtServer.Text;
-            sb.InitialCatalog = DBNAME;
+            sb.InitialCatalog = (SoftDog != null && !string.IsNullOrEmpty(SoftDog.DBName)) ? SoftDog.DBName : DBNAME;
             sb.IntegratedSecurity = false;
             sb.UserID = SoftDog != null ? SoftDog.DBUser : string.Empty;
             sb.Password = SoftDog != null ? SoftDog.DBPassword : string.Empty;

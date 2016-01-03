@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -37,43 +38,58 @@ namespace InventoryApplication
         #endregion
 
         #region 私有方法
-        private void CheckDog()
+        private void ReadDog()
         {
+            string lic = Path.Combine(Application.StartupPath, "ljh.lic");
             string skey = AppSettings.Current.GetConfigContent("SKey");
             if (string.IsNullOrEmpty(skey))
             {
                 skey = @"#i~xnUc4RH1G@\)$&7z6qv9xy@~<mTR5nUR?OU}jh`4r<qN>:*xZwz~E$0";
                 AppSettings.Current.SaveConfig("SKey", skey);
             }
-            SoftDogReader reader = new SoftDogReader(skey);
             try
             {
+                SoftDogReader reader = new SoftDogReader(skey);
                 _SoftDog = reader.ReadDog();
-                if (_SoftDog == null)
+            }
+            catch
+            {
+            }
+            try
+            {
+                if (_SoftDog == null && File.Exists(lic))
                 {
-                    MessageBox.Show("加密狗访问错误：没有找到加密狗。如果加密狗已经插上，则可能是加密狗还没有加密，请先联系厂家进行加密!", "注意");
-                    System.Environment.Exit(0);
-                }
-                else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)  //没有开放进销存软件权限
-                {
-                    MessageBox.Show("加密狗权限不足：原因可能是加密狗中没有开放进销存软件权限,请联系厂家开放相应的权限!", "注意");
-                    System.Environment.Exit(0);
-                }
-                else if (_SoftDog.ExpiredDate < DateTime.Today && _SoftDog.ExpiredDate.AddDays(15) >= DateTime.Today) //已经过期
-                {
-                    DateTime expire = _SoftDog.ExpiredDate.AddDays(15);
-                    TimeSpan ts = new TimeSpan(expire.Ticks - DateTime.Today.Ticks);
-                    MessageBox.Show(string.Format("软件已经过期，还可以再试用 {0} 天，请尽快与供应商联系延长您的软件使用期!", (int)(ts.TotalDays + 1)), "注意");
-                }
-                else if (_SoftDog.ExpiredDate.AddDays(15) < DateTime.Today)
-                {
-                    MessageBox.Show("软件已经过期，请联系厂家延长期限!", "注意");
-                    System.Environment.Exit(0);
+                    _SoftDog = LICReader.ReadDog(lic);
                 }
             }
-            catch (InvalidOperationException ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+
+            }
+        }
+
+        private void CheckDog()
+        {
+            ReadDog();
+            if (_SoftDog == null)
+            {
+                MessageBox.Show("加密狗访问错误：没有找到加密狗。如果加密狗已经插上，则可能是加密狗还没有加密，请先联系厂家进行加密!", "注意");
+                System.Environment.Exit(0);
+            }
+            else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)  //没有开放进销存软件权限
+            {
+                MessageBox.Show("加密狗权限不足：原因可能是加密狗中没有开放进销存软件权限,请联系厂家开放相应的权限!", "注意");
+                System.Environment.Exit(0);
+            }
+            else if (_SoftDog.ExpiredDate < DateTime.Today && _SoftDog.ExpiredDate.AddDays(15) >= DateTime.Today) //已经过期
+            {
+                DateTime expire = _SoftDog.ExpiredDate.AddDays(15);
+                TimeSpan ts = new TimeSpan(expire.Ticks - DateTime.Today.Ticks);
+                MessageBox.Show(string.Format("软件已经过期，还可以再试用 {0} 天，请尽快与供应商联系延长您的软件使用期!", (int)(ts.TotalDays + 1)), "注意");
+            }
+            else if (_SoftDog.ExpiredDate.AddDays(15) < DateTime.Today)
+            {
+                MessageBox.Show("软件已经过期，请联系厂家延长期限!", "注意");
                 System.Environment.Exit(0);
             }
         }

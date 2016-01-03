@@ -2727,6 +2727,23 @@
             获取或设置显示成文字时的小位点后位数,如果指定为-1则表示不强制显示小数点
             </summary>
         </member>
+        <member name="F:LJH.GeneralLibrary.WinformControl.FrmProcessing.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WinformControl.FrmProcessing.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WinformControl.FrmProcessing.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="P:LJH.GeneralLibrary.Printer.BarCodePrinterStatusChangedEventArgs.Status">
             <summary>
             获取或设置打印机状态
@@ -3096,6 +3113,11 @@
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.IsHost">
             <summary>
             获取或设置是否是主机加密狗
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.DBName">
+            <summary>
+            获取或设置数据库名称
             </summary>
         </member>
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.DBUser">
@@ -3894,23 +3916,6 @@
         <member name="F:LJH.GeneralLibrary.CardReader.CardOperationResultCode.InitKeyFail">
             <summary>
             初始化密钥失败
-            </summary>
-        </member>
-        <member name="F:LJH.GeneralLibrary.WinformControl.FrmProcessing.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:LJH.GeneralLibrary.WinformControl.FrmProcessing.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:LJH.GeneralLibrary.WinformControl.FrmProcessing.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
             </summary>
         </member>
     </members>
