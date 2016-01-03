@@ -373,7 +373,21 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public QueryResultList<StackOutRecord> GetDeliveryRecords(SearchCondition con)
         {
-            return ProviderFactory.Create<IProvider<StackOutRecord, Guid>>(RepoUri).GetItems(con);
+            var ret = ProviderFactory.Create<IProvider<StackOutRecord, Guid>>(RepoUri).GetItems(con);
+            if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
+            {
+                List<ProductInventoryItem> pis = new ProductInventoryItemBLL(RepoUri).GetItems(null).QueryObjects;
+                foreach (var item in ret.QueryObjects)
+                {
+                    var pi = pis.FirstOrDefault(it => it.DeliveryItem == item.ID);
+                    if (pi != null && pi.SourceRoll.HasValue)
+                    {
+                        pi = pis.SingleOrDefault(it => it.ID == pi.SourceRoll.Value);
+                        if (pi != null) item.SourceRollWeight = pi.OriginalWeight;
+                    }
+                }
+            }
+            return ret;
         }
 
         public void AssignPayment(StackOutSheet info)

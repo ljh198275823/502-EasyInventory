@@ -36,6 +36,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
@@ -60,9 +61,16 @@
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceRollWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSalesPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSourceRollWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -71,15 +79,15 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(681, 12);
+            this.btnSearch.Location = new System.Drawing.Point(865, 12);
             // 
             // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(681, 40);
+            this.btnSaveAs.Location = new System.Drawing.Point(865, 40);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(681, 70);
+            this.btnColumn.Location = new System.Drawing.Point(865, 70);
             // 
             // panel1
             // 
@@ -87,11 +95,17 @@
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Location = new System.Drawing.Point(0, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(675, 96);
+            this.panel1.Size = new System.Drawing.Size(859, 96);
             this.panel1.TabIndex = 25;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.txtSourceRollWeight);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.txtLength);
+            this.groupBox3.Controls.Add(this.txtWeight);
             this.groupBox3.Controls.Add(this.cmbSpecification);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.txtProductCategory);
@@ -102,7 +116,7 @@
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Location = new System.Drawing.Point(240, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(432, 90);
+            this.groupBox3.Size = new System.Drawing.Size(616, 90);
             this.groupBox3.TabIndex = 36;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
@@ -230,6 +244,7 @@
             this.colLength,
             this.colWeight,
             this.colPrice,
+            this.colSourceRollWeight,
             this.colCount,
             this.colAmount,
             this.colSalesPerson});
@@ -238,7 +253,7 @@
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1154, 288);
+            this.gridView.Size = new System.Drawing.Size(1314, 401);
             this.gridView.TabIndex = 26;
             // 
             // colDeliveryDate
@@ -313,6 +328,7 @@
             this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
+            this.colLength.Width = 80;
             // 
             // colWeight
             // 
@@ -321,6 +337,7 @@
             this.colWeight.HeaderText = "重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
+            this.colWeight.Width = 80;
             // 
             // colPrice
             // 
@@ -330,24 +347,38 @@
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
+            this.colPrice.Width = 80;
+            // 
+            // colSourceRollWeight
+            // 
+            dataGridViewCellStyle6.Format = "N3";
+            this.colSourceRollWeight.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colSourceRollWeight.HeaderText = "来源卷重";
+            this.colSourceRollWeight.Name = "colSourceRollWeight";
+            this.colSourceRollWeight.ReadOnly = true;
+            this.colSourceRollWeight.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSourceRollWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSourceRollWeight.Width = 80;
             // 
             // colCount
             // 
-            dataGridViewCellStyle6.Format = "N0";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Format = "N0";
+            dataGridViewCellStyle7.NullValue = null;
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle7;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
+            this.colCount.Width = 80;
             // 
             // colAmount
             // 
-            dataGridViewCellStyle7.Format = "C2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle8;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
+            this.colAmount.Width = 80;
             // 
             // colSalesPerson
             // 
@@ -355,11 +386,98 @@
             this.colSalesPerson.Name = "colSalesPerson";
             this.colSalesPerson.ReadOnly = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(435, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 93;
+            this.label4.Text = "长度";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(435, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 92;
+            this.label3.Text = "重量";
+            // 
+            // txtLength
+            // 
+            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLength.Location = new System.Drawing.Point(470, 41);
+            this.txtLength.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtLength.Name = "txtLength";
+            this.txtLength.PointCount = 3;
+            this.txtLength.Size = new System.Drawing.Size(100, 21);
+            this.txtLength.TabIndex = 91;
+            this.txtLength.Text = "0";
+            // 
+            // txtWeight
+            // 
+            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeight.Location = new System.Drawing.Point(470, 12);
+            this.txtWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.PointCount = 3;
+            this.txtWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtWeight.TabIndex = 90;
+            this.txtWeight.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(413, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 95;
+            this.label1.Text = "来源卷重";
+            // 
+            // txtSourceRollWeight
+            // 
+            this.txtSourceRollWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSourceRollWeight.Location = new System.Drawing.Point(470, 68);
+            this.txtSourceRollWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtSourceRollWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtSourceRollWeight.Name = "txtSourceRollWeight";
+            this.txtSourceRollWeight.PointCount = 3;
+            this.txtSourceRollWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtSourceRollWeight.TabIndex = 94;
+            this.txtSourceRollWeight.Text = "0";
+            // 
             // FrmDeliveryRecordReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1154, 416);
+            this.ClientSize = new System.Drawing.Size(1314, 529);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.panel1);
             this.Name = "FrmDeliveryRecordReport";
@@ -405,8 +523,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceRollWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
+        private System.Windows.Forms.Label label1;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtSourceRollWeight;
     }
 }

@@ -96,6 +96,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string OrderID { get; set; }
         /// <summary>
+        /// 获取或设置来源卷重
+        /// </summary>
+        public decimal? SourceRollWeight { get; set; }
+        /// <summary>
         /// 获取或设置备注
         /// </summary>
         public string Memo { get; set; }

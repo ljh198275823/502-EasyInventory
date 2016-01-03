@@ -42,7 +42,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colPrice"].Value = sor.Price;
             row.Cells["colCount"].Value = sor.Count;
             row.Cells["colAmount"].Value = sor.Amount.Trim();
-            //row.Cells["colWareHouse"].Value = sor.WareHouse != null ? sor.WareHouse.Name : sor.WareHouseID;
+            row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
         }
 
         protected override List<object> GetDataSource()
@@ -59,6 +59,12 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
+                decimal length = txtLength.DecimalValue;
+                if (length != 0) items = items.Where(it => it.Length.HasValue && it.Length == length).ToList();
+                decimal weight = txtWeight.DecimalValue;
+                if (weight != 0) items = items.Where(it => it.Weight.HasValue && it.Weight == weight).ToList();
+                decimal sourceRollWeight = txtSourceRollWeight.DecimalValue;
+                if (sourceRollWeight != 0) items = items.Where(it => it.SourceRollWeight.HasValue && it.SourceRollWeight == sourceRollWeight).ToList();
                 decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
                 decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
                 return (from item in items
