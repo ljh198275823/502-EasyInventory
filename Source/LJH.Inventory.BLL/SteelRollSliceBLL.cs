@@ -51,8 +51,22 @@ namespace LJH.Inventory.BLL
         {
             if (con == null) con = new ProductInventoryItemSearchCondition();
             if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).ExcludeModel = MODEL;  //排除原材料库存项
-            var ret= ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
-            if (ret.QueryObjects != null) ret.QueryObjects = ret.QueryObjects.Where(it => it.Count != 0).ToList();
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            if (ret.QueryObjects != null)
+            {
+                List<ProductInventoryItem> srs = new SteelRollBLL(RepoUri).GetItems(null).QueryObjects;
+                if (srs != null && srs.Count > 0)
+                {
+                    foreach (var item in ret.QueryObjects)
+                    {
+                        if (item.SourceRoll.HasValue)
+                        {
+                            var sr = srs.SingleOrDefault(it => it.ID == item.SourceRoll);
+                            if (sr != null) item.SourceRollWeight = sr.OriginalWeight;
+                        }
+                    }
+                }
+            }
             return ret;
         }
 

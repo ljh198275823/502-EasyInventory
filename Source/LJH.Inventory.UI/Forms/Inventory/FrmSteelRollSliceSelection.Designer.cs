@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel5 = new System.Windows.Forms.Panel();
             this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -62,6 +63,8 @@
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOriginalThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRealThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceRoll = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colSourceRollWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,7 +94,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1185, 48);
+            this.panel5.Size = new System.Drawing.Size(1303, 48);
             this.panel5.TabIndex = 7;
             // 
             // wareHouseComboBox1
@@ -271,7 +274,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(996, 471);
+            this.btnClose.Location = new System.Drawing.Point(1055, 471);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 41);
             this.btnClose.TabIndex = 91;
@@ -281,7 +284,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(874, 471);
+            this.btnOk.Location = new System.Drawing.Point(933, 471);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 41);
             this.btnOk.TabIndex = 90;
@@ -291,13 +294,13 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Location = new System.Drawing.Point(0, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1185, 50);
+            this.panel1.Size = new System.Drawing.Size(1303, 50);
             this.panel1.TabIndex = 117;
             // 
             // dataGridview1
@@ -305,9 +308,9 @@
             this.dataGridview1.AllowUserToAddRows = false;
             this.dataGridview1.AllowUserToDeleteRows = false;
             this.dataGridview1.AllowUserToResizeRows = false;
-            this.dataGridview1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridview1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridview1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridview1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridview1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -319,6 +322,8 @@
             this.colLength,
             this.colOriginalThick,
             this.colRealThick,
+            this.colSourceRoll,
+            this.colSourceRollWeight,
             this.colCustomer,
             this.colCount,
             this.colDeliveryCount,
@@ -328,7 +333,7 @@
             this.dataGridview1.RowHeadersVisible = false;
             this.dataGridview1.RowTemplate.Height = 23;
             this.dataGridview1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridview1.Size = new System.Drawing.Size(1180, 402);
+            this.dataGridview1.Size = new System.Drawing.Size(1298, 402);
             this.dataGridview1.TabIndex = 118;
             this.dataGridview1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridview1_CellContentClick);
             this.dataGridview1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridview1_CellEndEdit);
@@ -345,6 +350,7 @@
             this.colCategory.HeaderText = "产品类别";
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
+            this.colCategory.Width = 80;
             // 
             // colSpecification
             // 
@@ -357,6 +363,7 @@
             this.colModel.HeaderText = "加工类型";
             this.colModel.Name = "colModel";
             this.colModel.ReadOnly = true;
+            this.colModel.Width = 80;
             // 
             // colWeight
             // 
@@ -365,6 +372,7 @@
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
+            this.colWeight.Width = 80;
             // 
             // colLength
             // 
@@ -373,6 +381,7 @@
             this.colLength.HeaderText = "长度(米)";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
+            this.colLength.Width = 80;
             // 
             // colOriginalThick
             // 
@@ -381,6 +390,7 @@
             this.colOriginalThick.HeaderText = "入库厚度";
             this.colOriginalThick.Name = "colOriginalThick";
             this.colOriginalThick.ReadOnly = true;
+            this.colOriginalThick.Width = 80;
             // 
             // colRealThick
             // 
@@ -389,6 +399,22 @@
             this.colRealThick.HeaderText = "开平厚度";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
+            this.colRealThick.Width = 80;
+            // 
+            // colSourceRoll
+            // 
+            this.colSourceRoll.HeaderText = "来源卷";
+            this.colSourceRoll.Name = "colSourceRoll";
+            this.colSourceRoll.ReadOnly = true;
+            // 
+            // colSourceRollWeight
+            // 
+            dataGridViewCellStyle5.Format = "N3";
+            this.colSourceRollWeight.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colSourceRollWeight.HeaderText = "来源卷重";
+            this.colSourceRollWeight.Name = "colSourceRollWeight";
+            this.colSourceRollWeight.ReadOnly = true;
+            this.colSourceRollWeight.Width = 80;
             // 
             // colCustomer
             // 
@@ -398,18 +424,20 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle5.Format = "N0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Format = "N0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
             this.colCount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCount.Width = 80;
             // 
             // colDeliveryCount
             // 
             this.colDeliveryCount.HeaderText = "出货数量";
             this.colDeliveryCount.Name = "colDeliveryCount";
             this.colDeliveryCount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDeliveryCount.Width = 80;
             // 
             // colMemo
             // 
@@ -424,7 +452,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(1185, 554);
+            this.ClientSize = new System.Drawing.Size(1303, 554);
             this.Controls.Add(this.dataGridview1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.panel1);
@@ -474,6 +502,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRealThick;
+        private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceRollWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;

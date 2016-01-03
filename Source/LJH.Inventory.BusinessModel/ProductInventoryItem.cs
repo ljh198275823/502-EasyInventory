@@ -124,6 +124,10 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置库存项的原材料项ID,如果此库存项是通过加工得到的话
         /// </summary>
         public Guid? SourceRoll { get; set; }
+        /// <summary>
+        /// 小件库存显示加工来源卷的入库重量，用于区别小件的来源卷
+        /// </summary>
+        public decimal? SourceRollWeight { get; set; }
 
         public string Operator { get; set; }
 

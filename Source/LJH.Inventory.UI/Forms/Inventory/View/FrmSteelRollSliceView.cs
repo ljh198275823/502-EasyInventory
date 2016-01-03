@@ -69,6 +69,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
             row.Cells["colCustomer"].Value = c.Customer;
             row.Cells["colSourceRoll"].Value = c.SourceRoll.HasValue ? "查看来源卷" : null;
+            row.Cells["colSourceRollWeight"].Value = c.SourceRollWeight;
             row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion

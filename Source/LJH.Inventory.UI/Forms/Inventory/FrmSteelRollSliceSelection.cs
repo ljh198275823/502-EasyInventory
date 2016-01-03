@@ -99,6 +99,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCount"].Value = pi.Count;
             row.Cells["colOriginalThick"].Value = pi.OriginalThick;
             row.Cells["colRealThick"].Value = pi.RealThick;
+            row.Cells["colSourceRoll"].Value = pi.SourceRoll.HasValue ? "查看来源卷" : null;
+            row.Cells["colSourceRollWeight"].Value = pi.SourceRollWeight;
             row.Cells["colCustomer"].Value = pi.Customer;
             row.Cells["colMemo"].Value = pi.Memo;
         }
@@ -136,16 +138,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void dataGridview1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridview1.Columns[e.ColumnIndex].Name == "colCheck")
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridview1.Columns[e.ColumnIndex].Name == "colSourceRoll")
             {
-                DataGridViewCheckBoxCell cell = dataGridview1.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewCheckBoxCell;
-                if (Convert.ToBoolean(cell.EditedFormattedValue))
+                var pi = dataGridview1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+                if (pi != null && pi.SourceRoll != null)
                 {
-                    dataGridview1.CurrentCell = dataGridview1.Rows[e.RowIndex].Cells["colDeliveryCount"];
-                    DataGridViewEditMode oldMode = dataGridview1.EditMode;
-                    dataGridview1.EditMode = DataGridViewEditMode.EditProgrammatically;
-                    dataGridview1.BeginEdit(true);
-                    dataGridview1.EditMode = oldMode;
+                    var steelRoll = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(pi.SourceRoll.Value).QueryObject;
+                    if (steelRoll != null)
+                    {
+                        FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                        frm.IsForView = true;
+                        frm.UpdatingItem = steelRoll;
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.ShowDialog();
+                    }
                 }
             }
         }
