@@ -76,6 +76,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.States = (int)ProductInventoryState.UnShipped;
+                con.HasRemain = chkOnlyRemain.Checked;
                 _ProductInventorys = bll.GetSteelRollSlices(con).QueryObjects;
             }
             else
@@ -134,6 +135,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.ProductID = item.Product.ID;
+                con.HasRemain = true;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colValid")
                 {
                     con.States = (int)ProductInventoryState.Inventory;
@@ -179,5 +181,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cMnu_Fresh.PerformClick();
         }
         #endregion
+
+        private void chkOnlyRemain_CheckedChanged(object sender, EventArgs e)
+        {
+            this.cMnu_Fresh.PerformClick();
+        }
     }
 }

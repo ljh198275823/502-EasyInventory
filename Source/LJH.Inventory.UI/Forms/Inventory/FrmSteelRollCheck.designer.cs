@@ -40,13 +40,14 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtChecker = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkChecker = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClose
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(208, 142);
+            this.btnClose.Location = new System.Drawing.Point(297, 142);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 15;
@@ -56,7 +57,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(116, 142);
+            this.btnOk.Location = new System.Drawing.Point(205, 142);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 14;
@@ -89,14 +90,14 @@
             0});
             this.txtNewWeigth.Name = "txtNewWeigth";
             this.txtNewWeigth.PointCount = 3;
-            this.txtNewWeigth.Size = new System.Drawing.Size(93, 21);
+            this.txtNewWeigth.Size = new System.Drawing.Size(78, 21);
             this.txtNewWeigth.TabIndex = 0;
             this.txtNewWeigth.Text = "0.00";
             // 
             // txtNewLength
             // 
             this.txtNewLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtNewLength.Location = new System.Drawing.Point(289, 18);
+            this.txtNewLength.Location = new System.Drawing.Point(226, 18);
             this.txtNewLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -109,14 +110,14 @@
             0});
             this.txtNewLength.Name = "txtNewLength";
             this.txtNewLength.PointCount = 2;
-            this.txtNewLength.Size = new System.Drawing.Size(93, 21);
+            this.txtNewLength.Size = new System.Drawing.Size(65, 21);
             this.txtNewLength.TabIndex = 1;
             this.txtNewLength.Text = "0.00";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 22);
+            this.label4.Location = new System.Drawing.Point(167, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 21;
@@ -158,13 +159,25 @@
             this.lnkChecker.Text = "盘点人";
             this.lnkChecker.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkChecker_LinkClicked);
             // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button1.Location = new System.Drawing.Point(297, 17);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(85, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "设为入库状态";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmSteelRollCheck
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(404, 177);
+            this.ClientSize = new System.Drawing.Size(398, 177);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lnkChecker);
             this.Controls.Add(this.txtChecker);
             this.Controls.Add(this.txtMemo);
@@ -200,5 +213,6 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private GeneralLibrary.WinformControl.DBCTextBox txtChecker;
         private System.Windows.Forms.LinkLabel lnkChecker;
+        protected System.Windows.Forms.Button button1;
     }
 }

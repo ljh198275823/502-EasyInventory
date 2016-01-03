@@ -62,5 +62,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtChecker.Text = item != null ? item.Name : string.Empty;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txtNewWeigth.DecimalValue = SteelRoll.OriginalWeight.Value;
+            txtNewLength.DecimalValue = SteelRoll.OriginalLength.Value;
+        }
     }
 }

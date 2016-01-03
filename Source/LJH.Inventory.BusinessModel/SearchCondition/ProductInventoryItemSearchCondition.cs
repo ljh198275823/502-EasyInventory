@@ -19,6 +19,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public int? States { get; set; }
 
+        public bool HasRemain { get; set; }
+
         public Guid? OrderItem { get; set; }
 
         public string OrderID { get; set; }
