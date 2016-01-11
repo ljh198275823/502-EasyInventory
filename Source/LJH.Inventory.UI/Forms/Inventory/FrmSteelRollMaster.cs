@@ -55,7 +55,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<object> FilterData()
         {
-            List<ProductInventoryItem> items = _SteelRolls;
+            if (_SteelRolls == null) return null;
+            List<ProductInventoryItem> items = _SteelRolls.ToList();
             if (items != null && items.Count > 0)
             {
                 if (chkStackIn.Checked) items = items.Where(it => it.AddDate >= ucDateTimeInterval1.StartDateTime && it.AddDate <= ucDateTimeInterval1.EndDateTime).ToList();
@@ -65,10 +66,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.Supplier == cmbSupplier.Text).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer == customerCombobox1.Text).ToList();
-                items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
-                                       (chkPartial.Checked && it.Status == "余卷") ||
-                                       (chkOnlyTail.Checked && it.Status == "尾卷") ||
-                                       (chkRemainless.Checked && it.Status == "余料")).ToList();
                 items.RemoveAll(it => (!chkNullified.Checked && it.State == ProductInventoryState.Nullified) ||
                                      (!chkShipped.Checked && it.State == ProductInventoryState.Shipped)
                                 );
@@ -92,21 +89,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
             }
-            else if (sr.Status == "整卷")
-            {
-                row.DefaultCellStyle.ForeColor = Color.Blue;
-            }
-            else if (sr.Status == "余卷")
-            {
-                row.DefaultCellStyle.ForeColor = Color.Red;
-            }
-            else if (sr.Status == "尾卷")
-            {
-                row.DefaultCellStyle.ForeColor = Color.Orange;
-            }
             else
             {
-                row.DefaultCellStyle.ForeColor = Color.Red;
+                row.DefaultCellStyle.ForeColor = Color.Blue;
             }
         }
         #endregion
@@ -129,9 +114,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.ShowOperatorRights();
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
-            mnu_开平.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_开条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_开吨.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
         }
@@ -174,17 +156,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colOriginalLength"].Value = sr.OriginalLength;
             row.Cells["colWeight"].Value = sr.Weight;
             row.Cells["colLength"].Value = sr.Length;
-            row.Cells["colOriginalThick"].Value = sr.OriginalThick;
-            row.Cells["colRealThick"].Value = sr.RealThick;
             row.Cells["colCustomer"].Value = sr.Customer;
             row.Cells["colSupplier"].Value = sr.Supplier;
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
-            row.Cells["colStatus"].Value = sr.Status;
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colMemo"].Value = sr.Memo;
             ShowRowColor(row);
+            if (sr.State==ProductInventoryState .Nullified)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
+                row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            }
             if (!_SteelRolls.Exists(it => it.ID == sr.ID))
             {
                 _SteelRolls.Add(sr);
@@ -201,66 +185,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
         {
             if (chkStackIn.Checked) FreshData_Clicked(sender, e);
-        }
-
-        private void mnu_开平_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
-            {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (sr.State == ProductInventoryState.Inventory)
-                {
-                    FrmSlice frm = new FrmSlice();
-                    frm.SlicingItem = sr;
-                    frm.SliceTo = "开平";
-                    frm.ShowDialog();
-                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
-                }
-            }
-        }
-
-        private void mnu_开条_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
-            {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (sr.State == ProductInventoryState.Inventory)
-                {
-                    FrmSlice frm = new FrmSlice();
-                    frm.SlicingItem = sr;
-                    frm.SliceTo = "开条";
-                    frm.ShowDialog();
-                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
-                }
-            }
-        }
-
-        private void mnu_开吨_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
-            {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (sr.State == ProductInventoryState.Inventory)
-                {
-                    FrmSlice frm = new FrmSlice();
-                    frm.SlicingItem = sr;
-                    frm.SliceTo = "开吨";
-                    frm.ShowDialog();
-                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
-                }
-            }
         }
 
         private void mnu_SliceView_Click(object sender, EventArgs e)

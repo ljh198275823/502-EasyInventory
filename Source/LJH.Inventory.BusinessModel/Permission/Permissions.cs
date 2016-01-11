@@ -35,7 +35,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 加工小件
         /// </summary>
-        [OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Check | PermissionActions.Nullify, Description = "加工小件")]
+        //[OperatorRight(Catalog = "基本资料", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Check | PermissionActions.Nullify, Description = "加工小件")]
         SteelRollSlice,
         /// <summary>
         /// 仓库资料
@@ -121,7 +121,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 采购单资料
         /// </summary>
-        [OperatorRight(Catalog = "采购", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "采购单资料")]
+        //[OperatorRight(Catalog = "采购", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "采购单资料")]
         PurchaseOrder,
         #endregion
 
@@ -139,7 +139,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 收货单资料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Inventory | PermissionActions.Print, Description = "收货单资料")]
+        //[OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Inventory | PermissionActions.Print, Description = "收货单资料")]
         InventorySheet,
         /// <summary>
         /// 送货单资料

@@ -160,7 +160,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.InitControls();
             this.txtSheetNo.Text = _AutoCreate;
-            btn_AddSlice.Visible = !UserSettings.Current.ForbidWhenNoOrderID;
             if (IsForView)
             {
                 toolStrip1.Enabled = false;

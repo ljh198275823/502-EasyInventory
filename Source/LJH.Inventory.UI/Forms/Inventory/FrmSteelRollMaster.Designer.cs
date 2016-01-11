@@ -29,13 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
@@ -45,12 +43,6 @@
             this.chkNullified = new System.Windows.Forms.CheckBox();
             this.chkShipped = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.chkIntact = new System.Windows.Forms.CheckBox();
-            this.chkPartial = new System.Windows.Forms.CheckBox();
-            this.chkOnlyTail = new System.Windows.Forms.CheckBox();
-            this.chkRemainless = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
@@ -64,6 +56,17 @@
             this.chkStackIn = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_CheckView = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,36 +75,16 @@
             this.colOriginalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRealThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliverySheet = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_开平 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_开条 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_开吨 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_SliceView = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_CheckView = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -123,8 +106,6 @@
             this.panel5.Controls.Add(this.label8);
             this.panel5.Controls.Add(this.panel2);
             this.panel5.Controls.Add(this.label7);
-            this.panel5.Controls.Add(this.panel1);
-            this.panel5.Controls.Add(this.label6);
             this.panel5.Controls.Add(this.categoryComboBox1);
             this.panel5.Controls.Add(this.label1);
             this.panel5.Controls.Add(this.wareHouseComboBox1);
@@ -177,7 +158,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.chkNullified);
             this.panel2.Controls.Add(this.chkShipped);
-            this.panel2.Location = new System.Drawing.Point(897, 44);
+            this.panel2.Location = new System.Drawing.Point(897, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(205, 24);
             this.panel2.TabIndex = 89;
@@ -207,82 +188,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(838, 50);
+            this.label7.Location = new System.Drawing.Point(838, 18);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 88;
             this.label7.Text = "库存状态";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.chkIntact);
-            this.panel1.Controls.Add(this.chkPartial);
-            this.panel1.Controls.Add(this.chkOnlyTail);
-            this.panel1.Controls.Add(this.chkRemainless);
-            this.panel1.Location = new System.Drawing.Point(897, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(205, 24);
-            this.panel1.TabIndex = 87;
-            // 
-            // chkIntact
-            // 
-            this.chkIntact.AutoSize = true;
-            this.chkIntact.Checked = true;
-            this.chkIntact.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIntact.Location = new System.Drawing.Point(3, 3);
-            this.chkIntact.Name = "chkIntact";
-            this.chkIntact.Size = new System.Drawing.Size(48, 16);
-            this.chkIntact.TabIndex = 46;
-            this.chkIntact.Text = "整卷";
-            this.chkIntact.UseVisualStyleBackColor = true;
-            this.chkIntact.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkPartial
-            // 
-            this.chkPartial.AutoSize = true;
-            this.chkPartial.Checked = true;
-            this.chkPartial.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPartial.Location = new System.Drawing.Point(52, 3);
-            this.chkPartial.Name = "chkPartial";
-            this.chkPartial.Size = new System.Drawing.Size(48, 16);
-            this.chkPartial.TabIndex = 47;
-            this.chkPartial.Text = "余卷";
-            this.chkPartial.UseVisualStyleBackColor = true;
-            this.chkPartial.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkOnlyTail
-            // 
-            this.chkOnlyTail.AutoSize = true;
-            this.chkOnlyTail.Checked = true;
-            this.chkOnlyTail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkOnlyTail.Location = new System.Drawing.Point(101, 3);
-            this.chkOnlyTail.Name = "chkOnlyTail";
-            this.chkOnlyTail.Size = new System.Drawing.Size(48, 16);
-            this.chkOnlyTail.TabIndex = 48;
-            this.chkOnlyTail.Text = "尾卷";
-            this.chkOnlyTail.UseVisualStyleBackColor = true;
-            this.chkOnlyTail.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // chkRemainless
-            // 
-            this.chkRemainless.AutoSize = true;
-            this.chkRemainless.Location = new System.Drawing.Point(150, 3);
-            this.chkRemainless.Name = "chkRemainless";
-            this.chkRemainless.Size = new System.Drawing.Size(48, 16);
-            this.chkRemainless.TabIndex = 49;
-            this.chkRemainless.Text = "余料";
-            this.chkRemainless.UseVisualStyleBackColor = true;
-            this.chkRemainless.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(838, 18);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
-            this.label6.TabIndex = 86;
-            this.label6.Text = "物料状态";
             // 
             // categoryComboBox1
             // 
@@ -414,13 +324,10 @@
             this.colOriginalLength,
             this.colWeight,
             this.colLength,
-            this.colOriginalThick,
-            this.colRealThick,
             this.colCustomer,
             this.colSupplier,
             this.colManufacture,
             this.colSerialNumber,
-            this.colStatus,
             this.colState,
             this.colDeliverySheet,
             this.colMemo});
@@ -429,12 +336,90 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
             this.dataGridView1.TabIndex = 115;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.toolStripSeparator2,
+            this.mnu_Check,
+            this.mnu_CheckView,
+            this.mnu_Nullify,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export,
+            this.mnu_Import});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 192);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(145, 6);
+            // 
+            // mnu_Check
+            // 
+            this.mnu_Check.Name = "mnu_Check";
+            this.mnu_Check.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Check.Text = "盘点";
+            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
+            // 
+            // mnu_CheckView
+            // 
+            this.mnu_CheckView.Name = "mnu_CheckView";
+            this.mnu_CheckView.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CheckView.Text = "查看盘点记录";
+            this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
+            // 
+            // mnu_Nullify
+            // 
+            this.mnu_Nullify.Name = "mnu_Nullify";
+            this.mnu_Nullify.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Nullify.Text = "作废";
+            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
+            // mnu_Import
+            // 
+            this.mnu_Import.Name = "mnu_Import";
+            this.mnu_Import.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Import.Text = "导入...";
+            this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
             // colAddDate
             // 
@@ -498,24 +483,6 @@
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
-            // colOriginalThick
-            // 
-            dataGridViewCellStyle5.Format = "N3";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colOriginalThick.HeaderText = "入库厚度";
-            this.colOriginalThick.Name = "colOriginalThick";
-            this.colOriginalThick.ReadOnly = true;
-            // 
-            // colRealThick
-            // 
-            dataGridViewCellStyle6.Format = "N3";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colRealThick.HeaderText = "开平厚度";
-            this.colRealThick.Name = "colRealThick";
-            this.colRealThick.ReadOnly = true;
-            // 
             // colCustomer
             // 
             this.colCustomer.HeaderText = "客户";
@@ -540,12 +507,6 @@
             this.colSerialNumber.Name = "colSerialNumber";
             this.colSerialNumber.ReadOnly = true;
             // 
-            // colStatus
-            // 
-            this.colStatus.HeaderText = "物料状态";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
             // colState
             // 
             this.colState.HeaderText = "库存状态";
@@ -564,122 +525,6 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.toolStripSeparator2,
-            this.mnu_开平,
-            this.mnu_开条,
-            this.mnu_开吨,
-            this.mnu_SliceView,
-            this.toolStripSeparator1,
-            this.mnu_Check,
-            this.mnu_CheckView,
-            this.mnu_Nullify,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export,
-            this.mnu_Import});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 308);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // mnu_开平
-            // 
-            this.mnu_开平.Name = "mnu_开平";
-            this.mnu_开平.Size = new System.Drawing.Size(152, 22);
-            this.mnu_开平.Text = "开平";
-            this.mnu_开平.Click += new System.EventHandler(this.mnu_开平_Click);
-            // 
-            // mnu_开条
-            // 
-            this.mnu_开条.Name = "mnu_开条";
-            this.mnu_开条.Size = new System.Drawing.Size(152, 22);
-            this.mnu_开条.Text = "开条";
-            this.mnu_开条.Click += new System.EventHandler(this.mnu_开条_Click);
-            // 
-            // mnu_开吨
-            // 
-            this.mnu_开吨.Name = "mnu_开吨";
-            this.mnu_开吨.Size = new System.Drawing.Size(152, 22);
-            this.mnu_开吨.Text = "开吨";
-            this.mnu_开吨.Click += new System.EventHandler(this.mnu_开吨_Click);
-            // 
-            // mnu_SliceView
-            // 
-            this.mnu_SliceView.Name = "mnu_SliceView";
-            this.mnu_SliceView.Size = new System.Drawing.Size(152, 22);
-            this.mnu_SliceView.Text = "查看加工记录";
-            this.mnu_SliceView.Click += new System.EventHandler(this.mnu_SliceView_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // mnu_Check
-            // 
-            this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Check.Text = "盘点";
-            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
-            // 
-            // mnu_CheckView
-            // 
-            this.mnu_CheckView.Name = "mnu_CheckView";
-            this.mnu_CheckView.Size = new System.Drawing.Size(152, 22);
-            this.mnu_CheckView.Text = "查看盘点记录";
-            this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
-            // 
-            // mnu_Nullify
-            // 
-            this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Nullify.Text = "作废";
-            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
-            // mnu_Import
-            // 
-            this.mnu_Import.Name = "mnu_Import";
-            this.mnu_Import.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Import.Text = "导入...";
-            this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
-            // 
             // FrmSteelRollMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -697,8 +542,6 @@
             this.panel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -718,12 +561,7 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Check;
         private System.Windows.Forms.ToolStripMenuItem mnu_Nullify;
-        private System.Windows.Forms.CheckBox chkRemainless;
-        private System.Windows.Forms.CheckBox chkOnlyTail;
-        private System.Windows.Forms.CheckBox chkPartial;
-        private System.Windows.Forms.CheckBox chkIntact;
         private System.Windows.Forms.CheckBox chkStackIn;
         private Controls.SpecificationComboBox cmbSpecification;
         private System.Windows.Forms.Label label5;
@@ -733,14 +571,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
         private Controls.WareHouseComboBox wareHouseComboBox1;
-        private System.Windows.Forms.ToolStripMenuItem mnu_开平;
-        private System.Windows.Forms.ToolStripMenuItem mnu_SliceView;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private Controls.CategoryComboBox categoryComboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripMenuItem mnu_CheckView;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox chkNullified;
         private System.Windows.Forms.CheckBox chkShipped;
@@ -748,8 +580,10 @@
         private System.Windows.Forms.Label label8;
         private Controls.CustomerCombobox customerCombobox1;
         private Controls.UCDateTimeInterval ucDateTimeInterval1;
-        private System.Windows.Forms.ToolStripMenuItem mnu_开吨;
-        private System.Windows.Forms.ToolStripMenuItem mnu_开条;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Import;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Check;
+        private System.Windows.Forms.ToolStripMenuItem mnu_CheckView;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
@@ -758,17 +592,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalThick;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRealThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewLinkColumn colDeliverySheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Import;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
