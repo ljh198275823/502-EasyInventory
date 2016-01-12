@@ -84,6 +84,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             this.dtStorageDateTime.Value = DateTime.Now;
             cmbSpecification.Init();
+            txtCarPlate.Init();
+            txtMaterial.Init();
         }
 
         public override void ShowOperatorRights()
@@ -109,6 +111,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtSupplier.Text = item.Supplier;
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
+            txtCarPlate.Text = item.Carplate;
+            txtMaterial.Text = item.Material;
+            if (item.PurchasePrice.HasValue) txtPurchasePrice.DecimalValue = item.PurchasePrice.Value;
+            if (item.TransCost.HasValue) txtTransCost.DecimalValue = item.TransCost.Value;
+            if (item.OtherCost.HasValue) txtOtherCost.DecimalValue = item.OtherCost.Value;
             txtMemo.Text = item.Memo;
             btnOk.Enabled = btnOk.Enabled && item.CanEdit;
         }
@@ -141,6 +148,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Supplier = txtSupplier.Text;
             item.Manufacture = cmbBrand.Text;
             item.SerialNumber = txtSerialNumber.Text;
+            item.Carplate = txtCarPlate.Text;
+            item.Material = txtMaterial.Text;
+            item.PurchasePrice = txtPurchasePrice.DecimalValue > 0 ? (decimal?)txtPurchasePrice.DecimalValue : null;
+            item.TransCost = txtTransCost.DecimalValue > 0 ? (decimal?)txtTransCost.DecimalValue : null;
+            item.OtherCost = txtOtherCost.DecimalValue > 0 ? (decimal?)txtOtherCost.DecimalValue : null;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;
             return item;

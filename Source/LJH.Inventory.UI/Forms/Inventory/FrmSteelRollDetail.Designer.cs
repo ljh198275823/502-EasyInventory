@@ -55,24 +55,34 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtTransCost = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtPurchasePrice = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtOtherCost = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
+            this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(382, 271);
+            this.btnClose.Location = new System.Drawing.Point(418, 377);
             this.btnClose.Size = new System.Drawing.Size(107, 35);
             this.btnClose.TabIndex = 21;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(254, 271);
+            this.btnOk.Location = new System.Drawing.Point(290, 377);
             this.btnOk.Size = new System.Drawing.Size(107, 35);
             this.btnOk.TabIndex = 20;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(301, 188);
+            this.label14.Location = new System.Drawing.Point(327, 191);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(41, 12);
             this.label14.TabIndex = 57;
@@ -81,7 +91,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(67, 219);
+            this.label12.Location = new System.Drawing.Point(67, 329);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 55;
@@ -106,7 +116,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 122);
+            this.label3.Location = new System.Drawing.Point(19, 124);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 12);
             this.label3.TabIndex = 50;
@@ -124,7 +134,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(265, 122);
+            this.label1.Location = new System.Drawing.Point(291, 124);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 45;
@@ -134,7 +144,7 @@
             // txtWeight
             // 
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(100, 119);
+            this.txtWeight.Location = new System.Drawing.Point(100, 121);
             this.txtWeight.MaxValue = new decimal(new int[] {
             15,
             0,
@@ -154,7 +164,7 @@
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(346, 119);
+            this.txtLength.Location = new System.Drawing.Point(372, 121);
             this.txtLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -175,15 +185,15 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(100, 219);
+            this.txtMemo.Location = new System.Drawing.Point(100, 329);
             this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(391, 21);
+            this.txtMemo.Size = new System.Drawing.Size(417, 21);
             this.txtMemo.TabIndex = 12;
             // 
             // txtSerialNumber
             // 
             this.txtSerialNumber.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSerialNumber.Location = new System.Drawing.Point(346, 185);
+            this.txtSerialNumber.Location = new System.Drawing.Point(372, 188);
             this.txtSerialNumber.Name = "txtSerialNumber";
             this.txtSerialNumber.Size = new System.Drawing.Size(145, 21);
             this.txtSerialNumber.TabIndex = 11;
@@ -191,7 +201,7 @@
             // lnkSupplier
             // 
             this.lnkSupplier.AutoSize = true;
-            this.lnkSupplier.Location = new System.Drawing.Point(55, 158);
+            this.lnkSupplier.Location = new System.Drawing.Point(55, 160);
             this.lnkSupplier.Name = "lnkSupplier";
             this.lnkSupplier.Size = new System.Drawing.Size(41, 12);
             this.lnkSupplier.TabIndex = 8;
@@ -202,7 +212,7 @@
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(313, 61);
+            this.lnkCategory.Location = new System.Drawing.Point(339, 61);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(29, 12);
             this.lnkCategory.TabIndex = 3;
@@ -213,7 +223,7 @@
             // txtCategory
             // 
             this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCategory.Location = new System.Drawing.Point(346, 57);
+            this.txtCategory.Location = new System.Drawing.Point(372, 57);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(145, 21);
@@ -222,7 +232,7 @@
             // txtSupplier
             // 
             this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSupplier.Location = new System.Drawing.Point(100, 154);
+            this.txtSupplier.Location = new System.Drawing.Point(100, 156);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(145, 21);
@@ -231,7 +241,7 @@
             // txtWareHouse
             // 
             this.txtWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWareHouse.Location = new System.Drawing.Point(346, 25);
+            this.txtWareHouse.Location = new System.Drawing.Point(372, 25);
             this.txtWareHouse.Name = "txtWareHouse";
             this.txtWareHouse.ReadOnly = true;
             this.txtWareHouse.Size = new System.Drawing.Size(145, 21);
@@ -240,7 +250,7 @@
             // lnkWareHouse
             // 
             this.lnkWareHouse.AutoSize = true;
-            this.lnkWareHouse.Location = new System.Drawing.Point(313, 29);
+            this.lnkWareHouse.Location = new System.Drawing.Point(339, 29);
             this.lnkWareHouse.Name = "lnkWareHouse";
             this.lnkWareHouse.Size = new System.Drawing.Size(29, 12);
             this.lnkWareHouse.TabIndex = 1;
@@ -251,7 +261,7 @@
             // cmbBrand
             // 
             this.cmbBrand.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cmbBrand.Location = new System.Drawing.Point(346, 154);
+            this.cmbBrand.Location = new System.Drawing.Point(372, 156);
             this.cmbBrand.Name = "cmbBrand";
             this.cmbBrand.ReadOnly = true;
             this.cmbBrand.Size = new System.Drawing.Size(145, 21);
@@ -260,7 +270,7 @@
             // lnkBrand
             // 
             this.lnkBrand.AutoSize = true;
-            this.lnkBrand.Location = new System.Drawing.Point(313, 158);
+            this.lnkBrand.Location = new System.Drawing.Point(339, 160);
             this.lnkBrand.Name = "lnkBrand";
             this.lnkBrand.Size = new System.Drawing.Size(29, 12);
             this.lnkBrand.TabIndex = 9;
@@ -272,7 +282,7 @@
             // 
             this.txtCustomer.BackColor = System.Drawing.SystemColors.Control;
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(100, 185);
+            this.txtCustomer.Location = new System.Drawing.Point(100, 188);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(145, 21);
@@ -282,7 +292,7 @@
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(67, 189);
+            this.lnkCustomer.Location = new System.Drawing.Point(67, 192);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
             this.lnkCustomer.TabIndex = 10;
@@ -293,7 +303,7 @@
             // txtOriginalLength
             // 
             this.txtOriginalLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtOriginalLength.Location = new System.Drawing.Point(346, 86);
+            this.txtOriginalLength.Location = new System.Drawing.Point(372, 87);
             this.txtOriginalLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -315,7 +325,7 @@
             // txtOriginalWeight
             // 
             this.txtOriginalWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtOriginalWeight.Location = new System.Drawing.Point(100, 86);
+            this.txtOriginalWeight.Location = new System.Drawing.Point(100, 87);
             this.txtOriginalWeight.MaxValue = new decimal(new int[] {
             15,
             0,
@@ -336,7 +346,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 89);
+            this.label2.Location = new System.Drawing.Point(19, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 84;
@@ -345,7 +355,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(265, 89);
+            this.label4.Location = new System.Drawing.Point(291, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 83;
@@ -360,11 +370,142 @@
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 85;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(55, 229);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 12);
+            this.label7.TabIndex = 86;
+            this.label7.Text = "车皮号";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(339, 229);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.TabIndex = 87;
+            this.label8.Text = "材质";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 263);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(83, 12);
+            this.label9.TabIndex = 88;
+            this.label9.Text = "采购单价(/吨)";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(285, 263);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 12);
+            this.label10.TabIndex = 89;
+            this.label10.Text = "运输费用(/吨)";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 298);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(83, 12);
+            this.label11.TabIndex = 90;
+            this.label11.Text = "其它费用(/吨)";
+            // 
+            // txtTransCost
+            // 
+            this.txtTransCost.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtTransCost.Location = new System.Drawing.Point(372, 259);
+            this.txtTransCost.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtTransCost.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtTransCost.Name = "txtTransCost";
+            this.txtTransCost.PointCount = 2;
+            this.txtTransCost.Size = new System.Drawing.Size(145, 21);
+            this.txtTransCost.TabIndex = 91;
+            this.txtTransCost.Text = "0";
+            // 
+            // txtPurchasePrice
+            // 
+            this.txtPurchasePrice.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPurchasePrice.Location = new System.Drawing.Point(100, 259);
+            this.txtPurchasePrice.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtPurchasePrice.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPurchasePrice.Name = "txtPurchasePrice";
+            this.txtPurchasePrice.PointCount = 2;
+            this.txtPurchasePrice.Size = new System.Drawing.Size(145, 21);
+            this.txtPurchasePrice.TabIndex = 92;
+            this.txtPurchasePrice.Text = "0";
+            // 
+            // txtOtherCost
+            // 
+            this.txtOtherCost.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtOtherCost.Location = new System.Drawing.Point(100, 294);
+            this.txtOtherCost.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtOtherCost.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtOtherCost.Name = "txtOtherCost";
+            this.txtOtherCost.PointCount = 2;
+            this.txtOtherCost.Size = new System.Drawing.Size(145, 21);
+            this.txtOtherCost.TabIndex = 93;
+            this.txtOtherCost.Text = "0";
+            // 
+            // txtMaterial
+            // 
+            this.txtMaterial.FormattingEnabled = true;
+            this.txtMaterial.Location = new System.Drawing.Point(372, 225);
+            this.txtMaterial.Name = "txtMaterial";
+            this.txtMaterial.Size = new System.Drawing.Size(145, 20);
+            this.txtMaterial.TabIndex = 94;
+            // 
+            // txtCarPlate
+            // 
+            this.txtCarPlate.FormattingEnabled = true;
+            this.txtCarPlate.Location = new System.Drawing.Point(100, 225);
+            this.txtCarPlate.Name = "txtCarPlate";
+            this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
+            this.txtCarPlate.TabIndex = 95;
+            // 
             // FrmSteelRollDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 327);
+            this.ClientSize = new System.Drawing.Size(552, 433);
+            this.Controls.Add(this.txtCarPlate);
+            this.Controls.Add(this.txtMaterial);
+            this.Controls.Add(this.txtOtherCost);
+            this.Controls.Add(this.txtPurchasePrice);
+            this.Controls.Add(this.txtTransCost);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbSpecification);
             this.Controls.Add(this.txtOriginalLength);
             this.Controls.Add(this.txtOriginalWeight);
@@ -421,6 +562,16 @@
             this.Controls.SetChildIndex(this.txtOriginalWeight, 0);
             this.Controls.SetChildIndex(this.txtOriginalLength, 0);
             this.Controls.SetChildIndex(this.cmbSpecification, 0);
+            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.label8, 0);
+            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.label11, 0);
+            this.Controls.SetChildIndex(this.txtTransCost, 0);
+            this.Controls.SetChildIndex(this.txtPurchasePrice, 0);
+            this.Controls.SetChildIndex(this.txtOtherCost, 0);
+            this.Controls.SetChildIndex(this.txtMaterial, 0);
+            this.Controls.SetChildIndex(this.txtCarPlate, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,5 +605,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private Controls.UCSpecification cmbSpecification;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtTransCost;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtPurchasePrice;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtOtherCost;
+        private Controls.MaterialComboBox txtMaterial;
+        private Controls.CarplateComboBox txtCarPlate;
     }
 }

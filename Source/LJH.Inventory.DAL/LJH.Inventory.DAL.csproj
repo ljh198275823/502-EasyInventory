@@ -83,10 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProvider\IAutoNumberCreater.cs" />
+    <Compile Include="IProvider\ICarplateProvider.cs" />
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
     <Compile Include="IProvider\ProviderFactory.cs" />
     <Compile Include="LinqProvider\AttachmentHeaderProvider.cs" />
     <Compile Include="LinqProvider\AttachmentProvider.cs" />
+    <Compile Include="LinqProvider\CarplateProvider.cs" />
     <Compile Include="LinqProvider\CollectionTypeProvider.cs" />
     <Compile Include="LinqProvider\ContactProvider.cs" />
     <Compile Include="LinqProvider\CurrencyTypeProvider.cs" />

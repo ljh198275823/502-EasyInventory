@@ -178,7 +178,7 @@
             this.Name = "FrmLoginDog";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "易存企业管理系统 登录";
+            this.Text = "登录";
             this.Load += new System.EventHandler(this.Login_Load);
             this.gpDB.ResumeLayout(false);
             this.gpDB.PerformLayout();

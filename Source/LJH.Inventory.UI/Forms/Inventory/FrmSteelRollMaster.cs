@@ -161,6 +161,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
+            row.Cells["colCarplate"].Value = sr.Carplate;
+            row.Cells["colMaterial"].Value = sr.Material;
+            row.Cells["colPurchasePrice"].Value = sr.PurchasePrice;
+            row.Cells["colTransCost"].Value = sr.TransCost;
+            row.Cells["colOtherCost"].Value = sr.OtherCost;
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colMemo"].Value = sr.Memo;
             ShowRowColor(row);

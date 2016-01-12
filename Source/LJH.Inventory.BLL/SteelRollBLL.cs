@@ -235,5 +235,15 @@ namespace LJH.Inventory.BLL
             return ret;
         }
         #endregion
+
+        public List<string> GetAllCarplates()
+        {
+            return ProviderFactory.Create<ICarplateProvider>(RepoUri).GetItems();
+        }
+
+        public List<string> GetAllMaterails()
+        {
+            return ProviderFactory.Create<IMaterialProvider>(RepoUri).GetItems();
+        }
     }
 }

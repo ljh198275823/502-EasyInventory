@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
@@ -79,6 +82,11 @@
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOtherCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliverySheet = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,7 +104,7 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1362, 86);
+            this.pnlFilter.Size = new System.Drawing.Size(1562, 86);
             this.pnlFilter.TabIndex = 112;
             // 
             // panel5
@@ -120,7 +128,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(1, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1361, 86);
+            this.panel5.Size = new System.Drawing.Size(1561, 86);
             this.panel5.TabIndex = 7;
             // 
             // ucDateTimeInterval1
@@ -328,6 +336,11 @@
             this.colSupplier,
             this.colManufacture,
             this.colSerialNumber,
+            this.colCarplate,
+            this.colMaterial,
+            this.colPurchasePrice,
+            this.colTransCost,
+            this.colOtherCost,
             this.colState,
             this.colDeliverySheet,
             this.colMemo});
@@ -336,11 +349,11 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
+            this.dataGridView1.Size = new System.Drawing.Size(1562, 521);
             this.dataGridView1.TabIndex = 115;
             // 
             // contextMenuStrip1
@@ -440,6 +453,7 @@
             this.colCategory.HeaderText = "类别";
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
+            this.colCategory.Width = 80;
             // 
             // colSpecification
             // 
@@ -455,6 +469,8 @@
             this.colOriginalWeight.HeaderText = "入库重量";
             this.colOriginalWeight.Name = "colOriginalWeight";
             this.colOriginalWeight.ReadOnly = true;
+            this.colOriginalWeight.Visible = false;
+            this.colOriginalWeight.Width = 80;
             // 
             // colOriginalLength
             // 
@@ -464,22 +480,24 @@
             this.colOriginalLength.HeaderText = "入库长度";
             this.colOriginalLength.Name = "colOriginalLength";
             this.colOriginalLength.ReadOnly = true;
+            this.colOriginalLength.Visible = false;
             // 
             // colWeight
             // 
             dataGridViewCellStyle3.Format = "N3";
             dataGridViewCellStyle3.NullValue = null;
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colWeight.HeaderText = "剩余重量";
+            this.colWeight.HeaderText = "重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
+            this.colWeight.Width = 80;
             // 
             // colLength
             // 
             dataGridViewCellStyle4.Format = "N3";
             dataGridViewCellStyle4.NullValue = null;
             this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colLength.HeaderText = "剩余长度";
+            this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
@@ -506,6 +524,43 @@
             this.colSerialNumber.HeaderText = "卷号";
             this.colSerialNumber.Name = "colSerialNumber";
             this.colSerialNumber.ReadOnly = true;
+            this.colSerialNumber.Width = 80;
+            // 
+            // colCarplate
+            // 
+            this.colCarplate.HeaderText = "车皮号";
+            this.colCarplate.Name = "colCarplate";
+            this.colCarplate.ReadOnly = true;
+            // 
+            // colMaterial
+            // 
+            this.colMaterial.HeaderText = "材质";
+            this.colMaterial.Name = "colMaterial";
+            this.colMaterial.ReadOnly = true;
+            // 
+            // colPurchasePrice
+            // 
+            dataGridViewCellStyle5.Format = "C2";
+            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colPurchasePrice.HeaderText = "采购价格";
+            this.colPurchasePrice.Name = "colPurchasePrice";
+            this.colPurchasePrice.ReadOnly = true;
+            // 
+            // colTransCost
+            // 
+            dataGridViewCellStyle6.Format = "C2";
+            this.colTransCost.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colTransCost.HeaderText = "运输费用";
+            this.colTransCost.Name = "colTransCost";
+            this.colTransCost.ReadOnly = true;
+            // 
+            // colOtherCost
+            // 
+            dataGridViewCellStyle7.Format = "C2";
+            this.colOtherCost.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colOtherCost.HeaderText = "其它费用";
+            this.colOtherCost.Name = "colOtherCost";
+            this.colOtherCost.ReadOnly = true;
             // 
             // colState
             // 
@@ -518,6 +573,7 @@
             this.colDeliverySheet.HeaderText = "送货单";
             this.colDeliverySheet.Name = "colDeliverySheet";
             this.colDeliverySheet.ReadOnly = true;
+            this.colDeliverySheet.Width = 120;
             // 
             // colMemo
             // 
@@ -530,7 +586,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1362, 554);
+            this.ClientSize = new System.Drawing.Size(1562, 629);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pnlFilter);
             this.Name = "FrmSteelRollMaster";
@@ -596,6 +652,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCarplate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPurchasePrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOtherCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewLinkColumn colDeliverySheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;

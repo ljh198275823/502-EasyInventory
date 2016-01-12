@@ -76,14 +76,52 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置状态
         /// </summary>
         public ProductInventoryState State { get; set; }
-
+        /// <summary>
+        /// 获取或设置客户
+        /// </summary>
         public string Customer { get; set; }
-
+        /// <summary>
+        /// 获取或设置供应商
+        /// </summary>
         public string Supplier { get; set; }
-
+        /// <summary>
+        /// 获取或设置厂家
+        /// </summary>
         public string Manufacture { get; set; }
-
+        /// <summary>
+        /// 获取或设置卷号
+        /// </summary>
         public string SerialNumber { get; set; }
+        /// <summary>
+        /// 获取或设置材质
+        /// </summary>
+        public string Material { get; set; }
+        /// <summary>
+        /// 获取或设置车皮号
+        /// </summary>
+        public string Carplate { get; set; }
+        /// <summary>
+        /// 获取或设置备注
+        /// </summary>
+        public string Memo { get; set; }
+        #endregion
+
+        #region 成本相关的属性
+        /// <summary>
+        /// 获取或设置采购价格
+        /// </summary>
+        public decimal? PurchasePrice { get; set; }
+        /// <summary>
+        /// 获取或设置运输成本
+        /// </summary>
+        public decimal? TransCost { get; set; }
+        /// <summary>
+        /// 获取或设置其它成本
+        /// </summary>
+        public decimal? OtherCost { get; set; }
+        #endregion
+
+        #region 与库存状态相关的公共属性
         /// <summary>
         /// 获取或设置销售订单项
         /// </summary>
@@ -128,16 +166,18 @@ namespace LJH.Inventory.BusinessModel
         /// 小件库存显示加工来源卷的入库重量，用于区别小件的来源卷
         /// </summary>
         public decimal? SourceRollWeight { get; set; }
-
+        /// <summary>
+        /// 获取或设置入库操作员
+        /// </summary>
         public string Operator { get; set; }
-
-        public string Memo { get; set; }
         #endregion
 
+        #region 公共方法
         public ProductInventoryItem Clone()
         {
             return this.MemberwiseClone() as ProductInventoryItem;
         }
+        #endregion
 
         #region 与原材料有关
         /// <summary>

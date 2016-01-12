@@ -78,6 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarplateComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CarplateComboBox.Designer.cs">
+      <DependentUpon>CarplateComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="CategoryComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -119,6 +125,12 @@
     </Compile>
     <Compile Include="FunctionTree.designer.cs">
       <DependentUpon>FunctionTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MaterialComboBox.Designer.cs">
+      <DependentUpon>MaterialComboBox.cs</DependentUpon>
     </Compile>
     <Compile Include="MyTree.cs">
       <SubType>Component</SubType>
