@@ -28,14 +28,28 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         {
             StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
             con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            con.SheetTypes = new List<StackOutSheetType>();
-            con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Shipped);
+            con.SheetTypes = new List<StackOutSheetType>();
+            con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
-            if (txtProduct.Tag != null) con.ProductID = (txtProduct.Tag as Product).ID;
-            return (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                decimal length = txtLength.DecimalValue;
+                if (length != 0) items = items.Where(it => it.Length.HasValue && it.Length == length).ToList();
+                decimal weight = txtWeight.DecimalValue;
+                if (weight != 0) items = items.Where(it => it.Weight.HasValue && it.Weight == weight).ToList();
+                decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
+                decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
+                return (from item in items
+                        orderby item.LastActiveDate ascending, item.ProductID ascending
+                        where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Specification) == width) &&
+                              (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Specification) == thick)
+                        select item).ToList();
+            }
+            return null;
         }
         #endregion
 
@@ -45,6 +59,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             ucDateTimeInterval1.ShowTime = false;
             ucDateTimeInterval1.Init();
             ucDateTimeInterval1.SelectThisMonth();
+            cmbSpecification.Init();
             base.Init();
         }
 
@@ -72,28 +87,34 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                     IEnumerable<IGrouping<string, StackOutRecord>> group = null;
                     if (rdByProdcut.Checked)
                     {
-                        group = g.GroupBy(item => (item.ProductID + " " + item.Product.Name));
+                        gridView.Columns["colName"].HeaderText = "卷";
+                        group = g.GroupBy(item => item.ProductID);
+                    }
+                    else if (rdBySheet.Checked)
+                    {
+                        gridView.Columns["colName"].HeaderText = "送货单";
+                        group = g.GroupBy(item => item.SheetNo);
                     }
                     else if (rdByCustomer.Checked)
                     {
-                        group = g.GroupBy(item => item.CustomerID + " " + item.Customer.Name);
-                    }
-                    else if (rdBySalesPerson.Checked)
-                    {
-                        group = g.GroupBy(item => item.SalesPerson);
+                        gridView.Columns["colName"].HeaderText = "客户";
+                        group = g.GroupBy(item => item.Customer.Name);
                     }
                     else if (rdByCategory.Checked)
                     {
-                        group = g.GroupBy(item => item.Product.CategoryID + " " + item.Product.Category.Name);
+                        gridView.Columns["colName"].HeaderText = "类别";
+                        group = g.GroupBy(item => item.Product.Category.Name);
+                    }
+                    else if (rdByNone.Checked)
+                    {
+                        gridView.Columns["colName"].HeaderText = string.Empty;
+                        group = g.GroupBy(it => string.Empty);
                     }
                     foreach (var gp in group)
                     {
-                        if (!string.IsNullOrEmpty(gp.Key))
-                        {
-                            if (items == null) items = new List<object>();
-                            GroupData gd = new GroupData() { Key = g.Key, Group = gp };
-                            items.Add(gd);
-                        }
+                        if (items == null) items = new List<object>();
+                        GroupData gd = new GroupData() { Key = g.Key, Group = gp };
+                        items.Add(gd);
                     }
                 }
             }
@@ -110,7 +131,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colCount"].Value = count;
             decimal d1 = gp.Sum(it => it.Amount).Trim();
             row.Cells["colAmount"].Value = d1;
-            decimal d2 = gp.Sum(it => it.Product.Cost * it.Count).Trim();
+            decimal d2 = gp.Sum(it => it.Cost).Trim();
             row.Cells["colCost"].Value = d2;
             if (d2 > 0)
             {
@@ -142,24 +163,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         {
             txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
-        }
-
-        private void lnkProduct_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmProductMaster frm = new FrmProductMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Product p = frm.SelectedItem as Product;
-                txtProduct.Text = p != null ? p.Name : string.Empty;
-                txtProduct.Tag = p;
-            }
-        }
-
-        private void txtProduct_DoubleClick(object sender, EventArgs e)
-        {
-            txtProduct.Text = string.Empty;
-            txtProduct.Tag = null;
         }
 
         private void lnkProductCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

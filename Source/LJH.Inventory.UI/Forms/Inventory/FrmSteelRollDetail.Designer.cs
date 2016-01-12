@@ -395,7 +395,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(83, 12);
             this.label9.TabIndex = 88;
-            this.label9.Text = "采购单价(/吨)";
+            this.label9.Text = "出厂价格(/吨)";
             // 
             // label10
             // 

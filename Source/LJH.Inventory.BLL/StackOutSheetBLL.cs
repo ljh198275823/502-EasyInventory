@@ -380,10 +380,12 @@ namespace LJH.Inventory.BLL
                 foreach (var item in ret.QueryObjects)
                 {
                     var pi = pis.FirstOrDefault(it => it.DeliveryItem == item.ID);
-                    if (pi != null && pi.SourceRoll.HasValue)
+                    if (pi != null && item.Weight.HasValue)
                     {
-                        pi = pis.SingleOrDefault(it => it.ID == pi.SourceRoll.Value);
-                        if (pi != null) item.SourceRollWeight = pi.OriginalWeight;
+                        item.Cost = item.Weight.Value * (
+                            (pi.PurchasePrice.HasValue ? pi.PurchasePrice.Value : 0) +
+                            (pi.TransCost.HasValue ? pi.TransCost.Value : 0) +
+                            (pi.OtherCost.HasValue ? pi.OtherCost.Value : 0));
                     }
                 }
             }

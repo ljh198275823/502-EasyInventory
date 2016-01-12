@@ -89,7 +89,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 if (row != null)
                 {
                     ICell cell = row.GetCell(1);
-                    if (cell != null) cell.SetCellValue(info.Address);
+                    if (!string.IsNullOrEmpty(info.WareHouseID))
+                    {
+                        WareHouse ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(info.WareHouseID).QueryObject;
+                        if (cell != null) cell.SetCellValue(ws != null ? ws.Name : string.Empty);
+                    }
                     cell = row.GetCell(7);
                     if (cell != null) cell.SetCellValue(info.WithTax ? "KP" : "BK");
                 }

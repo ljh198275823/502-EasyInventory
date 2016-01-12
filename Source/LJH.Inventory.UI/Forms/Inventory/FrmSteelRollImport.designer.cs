@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollImport));
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
@@ -45,6 +43,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblSource = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.colRowIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,16 +52,17 @@
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOriginalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTransCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOtherCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblSource = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -186,24 +187,50 @@
             this.colSpecification,
             this.colOriginalWeight,
             this.colOriginalLength,
-            this.colWeight,
-            this.colLength,
             this.colCustomer,
             this.colSupplier,
             this.colManufacture,
+            this.colPurchasePrice,
+            this.colTransCost,
+            this.colOtherCost,
             this.colSerialNumber,
+            this.colCarplate,
+            this.colMaterial,
             this.colMemo,
             this.colReason});
             this.dataGridView1.Location = new System.Drawing.Point(3, 42);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1251, 572);
             this.dataGridView1.TabIndex = 116;
+            // 
+            // lblSource
+            // 
+            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSource.AutoSize = true;
+            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSource.ForeColor = System.Drawing.Color.Blue;
+            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblSource.Location = new System.Drawing.Point(1163, 24);
+            this.lblSource.Name = "lblSource";
+            this.lblSource.Size = new System.Drawing.Size(44, 12);
+            this.lblSource.TabIndex = 17;
+            this.lblSource.Text = "条数据";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1004, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "待导入数据预览";
             // 
             // colRowIndex
             // 
@@ -233,14 +260,14 @@
             // 
             this.colSpecification.HeaderText = "规格*";
             this.colSpecification.Name = "colSpecification";
-            this.colSpecification.Width = 80;
+            this.colSpecification.Width = 120;
             // 
             // colOriginalWeight
             // 
             dataGridViewCellStyle1.Format = "N3";
             dataGridViewCellStyle1.NullValue = null;
             this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colOriginalWeight.HeaderText = "入库重量*";
+            this.colOriginalWeight.HeaderText = "重量*";
             this.colOriginalWeight.Name = "colOriginalWeight";
             this.colOriginalWeight.Width = 85;
             // 
@@ -249,27 +276,9 @@
             dataGridViewCellStyle2.Format = "N3";
             dataGridViewCellStyle2.NullValue = null;
             this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colOriginalLength.HeaderText = "入库长度";
+            this.colOriginalLength.HeaderText = "长度";
             this.colOriginalLength.Name = "colOriginalLength";
             this.colOriginalLength.Width = 80;
-            // 
-            // colWeight
-            // 
-            dataGridViewCellStyle3.Format = "N3";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colWeight.HeaderText = "剩余重量*";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.Width = 85;
-            // 
-            // colLength
-            // 
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colLength.HeaderText = "剩余长度";
-            this.colLength.Name = "colLength";
-            this.colLength.Width = 80;
             // 
             // colCustomer
             // 
@@ -289,11 +298,36 @@
             this.colManufacture.Name = "colManufacture";
             this.colManufacture.Width = 80;
             // 
+            // colPurchasePrice
+            // 
+            this.colPurchasePrice.HeaderText = "出厂价格";
+            this.colPurchasePrice.Name = "colPurchasePrice";
+            // 
+            // colTransCost
+            // 
+            this.colTransCost.HeaderText = "运输费用";
+            this.colTransCost.Name = "colTransCost";
+            // 
+            // colOtherCost
+            // 
+            this.colOtherCost.HeaderText = "其它费用";
+            this.colOtherCost.Name = "colOtherCost";
+            // 
             // colSerialNumber
             // 
             this.colSerialNumber.HeaderText = "卷号";
             this.colSerialNumber.Name = "colSerialNumber";
             this.colSerialNumber.Width = 60;
+            // 
+            // colCarplate
+            // 
+            this.colCarplate.HeaderText = "车皮号";
+            this.colCarplate.Name = "colCarplate";
+            // 
+            // colMaterial
+            // 
+            this.colMaterial.HeaderText = "材质";
+            this.colMaterial.Name = "colMaterial";
             // 
             // colMemo
             // 
@@ -305,29 +339,6 @@
             this.colReason.HeaderText = "导入状态";
             this.colReason.Name = "colReason";
             this.colReason.ReadOnly = true;
-            // 
-            // lblSource
-            // 
-            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSource.AutoSize = true;
-            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblSource.ForeColor = System.Drawing.Color.Blue;
-            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblSource.Location = new System.Drawing.Point(1163, 24);
-            this.lblSource.Name = "lblSource";
-            this.lblSource.Size = new System.Drawing.Size(44, 12);
-            this.lblSource.TabIndex = 17;
-            this.lblSource.Text = "条数据";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1004, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "待导入数据预览";
             // 
             // FrmSteelRollImport
             // 
@@ -373,12 +384,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPurchasePrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTransCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOtherCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCarplate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReason;
     }

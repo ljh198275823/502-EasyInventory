@@ -101,6 +101,8 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtWarehouse = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -235,6 +237,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtWarehouse);
+            this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.lnkPayment);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.lnkDriver);
@@ -466,9 +470,9 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(512, 110);
+            this.txtMemo.Location = new System.Drawing.Point(725, 110);
             this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(333, 21);
+            this.txtMemo.Size = new System.Drawing.Size(201, 21);
             this.txtMemo.TabIndex = 7;
             // 
             // txtCustomer
@@ -615,7 +619,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(471, 114);
+            this.label15.Location = new System.Drawing.Point(684, 114);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(35, 12);
             this.label15.TabIndex = 60;
@@ -796,6 +800,24 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
+            // txtWarehouse
+            // 
+            this.txtWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtWarehouse.FormattingEnabled = true;
+            this.txtWarehouse.Location = new System.Drawing.Point(512, 110);
+            this.txtWarehouse.Name = "txtWarehouse";
+            this.txtWarehouse.Size = new System.Drawing.Size(135, 20);
+            this.txtWarehouse.TabIndex = 144;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(472, 114);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 12);
+            this.label6.TabIndex = 143;
+            this.label6.Text = "仓库:";
+            // 
             // FrmStackOutSheetDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -902,5 +924,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private Controls.WareHouseComboBox txtWarehouse;
+        private System.Windows.Forms.Label label6;
     }
 }

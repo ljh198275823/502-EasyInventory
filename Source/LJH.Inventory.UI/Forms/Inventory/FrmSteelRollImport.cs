@@ -24,6 +24,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<WareHouse> _AllWareHouses = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
         private List<ProductCategory> _Categories = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+
         #region 私有方法
         private void ClearData()
         {
@@ -126,20 +127,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colReason"].Value = "入库长度不正确";
                 return null;
             }
-            decimal weight = 0;
-            if (row.Cells["colWeight"].Value == null ||
-               !decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colWeight"].Value.ToString().Trim()), out weight) || weight <= 0)
-            {
-                row.Cells["colReason"].Value = "没有指定剩余重量";
-                return null;
-            }
-            decimal length = 0;
-            if (row.Cells["colLength"].Value != null && !string.IsNullOrEmpty(row.Cells["colLength"].Value.ToString().Trim()) &&
-                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colLength"].Value.ToString().Trim()), out length) || length <= 0))
-            {
-                row.Cells["colReason"].Value = "剩余长度不正确";
-                return null;
-            }
             if (row.Cells["colCustomer"].Value == null || string.IsNullOrEmpty(row.Cells["colCustomer"].Value.ToString().Trim()))
             {
                 row.Cells["colReason"].Value = "没有指定客户";
@@ -164,6 +151,27 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colReason"].Value = "创建产品失败";
                 return null;
             }
+            decimal purchasePrice = 0;
+            if (row.Cells["colPurchasePrice"].Value != null && !string.IsNullOrEmpty(row.Cells["colPurchasePrice"].Value.ToString().Trim()) &&
+                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colPurchasePrice"].Value.ToString().Trim()), out purchasePrice) || purchasePrice <= 0))
+            {
+                row.Cells["colReason"].Value = "采购价格不正确";
+                return null;
+            }
+            decimal transCost = 0;
+            if (row.Cells["colTransCost"].Value != null && !string.IsNullOrEmpty(row.Cells["colTransCost"].Value.ToString().Trim()) &&
+                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colTransCost"].Value.ToString().Trim()), out transCost) || transCost <= 0))
+            {
+                row.Cells["colReason"].Value = "运输费用不正确";
+                return null;
+            }
+            decimal otherCost = 0;
+            if (row.Cells["colOtherCost"].Value != null && !string.IsNullOrEmpty(row.Cells["colOtherCost"].Value.ToString().Trim()) &&
+                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colOtherCost"].Value.ToString().Trim()), out otherCost) || otherCost <= 0))
+            {
+                row.Cells["colReason"].Value = "其它费用不正确";
+                return null;
+            }
             ProductInventoryItem pi = new ProductInventoryItem();
             pi.ID = Guid.NewGuid();
             pi.AddDate = addDate;
@@ -174,15 +182,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.OriginalThick = originalLength == 0 ? SpecificationHelper.GetWrittenThick(specification) : pi.CalThick(specification, originalWeight, originalLength, product.Density.Value); //如果有入库长度，则要计算入库厚度
             pi.OriginalWeight = originalWeight;
             pi.OriginalLength = originalLength == 0 ? pi.CalLength(specification, originalWeight, product.Density.Value) : originalLength;
-            pi.Weight = weight;
-            if (length == 0 && originalWeight == weight) pi.Length = pi.OriginalLength; //如果入库重量与剩余重量相等，并且没有指定剩余长度，则剩余长度等于入库长度
-            else pi.Length = length == 0 ? pi.CalLength(specification, weight, product.Density.Value) : length;
+            pi.Weight = pi.OriginalWeight;
+            pi.Length = pi.OriginalLength;
             pi.Count = 1;
             pi.Unit = "卷";
             pi.Customer = customer;
             pi.Supplier = supplier;
             pi.Manufacture = manufacture;
+            if (purchasePrice > 0) pi.PurchasePrice = purchasePrice;
+            if (transCost > 0) pi.TransCost = transCost;
+            if (otherCost > 0) pi.OtherCost = otherCost;
             pi.SerialNumber = row.Cells["colSerialNumber"].Value != null ? row.Cells["colSerialNumber"].Value.ToString().Trim() : null;
+            pi.Material = row.Cells["colMaterial"].Value != null ? row.Cells["colMaterial"].Value.ToString().Trim() : null;
+            pi.Carplate = row.Cells["colCarPlate"].Value != null ? row.Cells["colCarplate"].Value.ToString().Trim() : null;
             pi.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString().Trim() : null;
             pi.InventorySheet = "导入";
             pi.State = ProductInventoryState.Inventory;

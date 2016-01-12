@@ -542,7 +542,7 @@
             // 
             dataGridViewCellStyle5.Format = "C2";
             this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colPurchasePrice.HeaderText = "采购价格";
+            this.colPurchasePrice.HeaderText = "出厂价格";
             this.colPurchasePrice.Name = "colPurchasePrice";
             this.colPurchasePrice.ReadOnly = true;
             // 

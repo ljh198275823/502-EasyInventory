@@ -47,6 +47,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             dtDeadline.Value = item.DeadlineDate.HasValue ? item.DeadlineDate.Value : DateTime.Today;
             rdWithoutTax.Checked = item.WithTax == false;
             rdWithTax.Checked = item.WithTax == true;
+            txtWarehouse.SelectedWareHouseID = item.WareHouseID;
             this.txtMemo.Text = item.Memo;
             ShowDeliveryItemsOnGrid(item);
             ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -159,6 +160,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void InitControls()
         {
             base.InitControls();
+            this.txtWarehouse.Init();
             this.txtSheetNo.Text = _AutoCreate;
             if (IsForView)
             {
@@ -188,6 +190,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             sheet.Driver = txtDriver.Text;
             sheet.CarPlate = txtCarPlate.Text;
             sheet.DeadlineDate = chkDeadline.Checked ? (DateTime?)dtDeadline.Value : null;
+            sheet.WareHouseID = txtWarehouse.SelectedWareHouseID;
             if (rdWithTax.Checked) sheet.WithTax = true;
             if (rdWithoutTax.Checked) sheet.WithTax = false;
             sheet.Memo = txtMemo.Text;

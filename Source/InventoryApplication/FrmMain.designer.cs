@@ -282,6 +282,7 @@
             this.mnu_SliceRecordReport.Name = "mnu_SliceRecordReport";
             this.mnu_SliceRecordReport.Size = new System.Drawing.Size(160, 22);
             this.mnu_SliceRecordReport.Text = "原料卷加工记录";
+            this.mnu_SliceRecordReport.Visible = false;
             this.mnu_SliceRecordReport.Click += new System.EventHandler(this.mnu_SliceRecordReport_Click);
             // 
             // mnu_DeliveryStatistic
@@ -289,8 +290,7 @@
             this.mnu_DeliveryStatistic.Enabled = false;
             this.mnu_DeliveryStatistic.Name = "mnu_DeliveryStatistic";
             this.mnu_DeliveryStatistic.Size = new System.Drawing.Size(160, 22);
-            this.mnu_DeliveryStatistic.Text = "出货统计";
-            this.mnu_DeliveryStatistic.Visible = false;
+            this.mnu_DeliveryStatistic.Text = "销售毛利统计";
             this.mnu_DeliveryStatistic.Click += new System.EventHandler(this.mnu_DeliveryStatistic_Click);
             // 
             // mnu_Performance

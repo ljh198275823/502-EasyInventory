@@ -32,11 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdByCategory = new System.Windows.Forms.RadioButton();
-            this.rdBySalesPerson = new System.Windows.Forms.RadioButton();
             this.rdByCustomer = new System.Windows.Forms.RadioButton();
             this.rdByProdcut = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -52,61 +49,50 @@
             this.colProfit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProfitRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtProduct = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkProductCategory = new System.Windows.Forms.LinkLabel();
-            this.lnkProduct = new System.Windows.Forms.LinkLabel();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
-            this.groupBox1.SuspendLayout();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
+            this.rdBySheet = new System.Windows.Forms.RadioButton();
+            this.rdByNone = new System.Windows.Forms.RadioButton();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(991, 17);
+            this.btnSearch.Location = new System.Drawing.Point(1197, 17);
             // 
-            // btnOkAs
+            // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(991, 46);
+            this.btnSaveAs.Location = new System.Drawing.Point(1197, 46);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(991, 75);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.ucDateTimeInterval1);
-            this.groupBox1.Location = new System.Drawing.Point(6, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(231, 96);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "统计日期";
-            // 
-            // ucDateTimeInterval1
-            // 
-            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2012, 6, 2, 10, 42, 8, 482);
-            this.ucDateTimeInterval1.Location = new System.Drawing.Point(4, 14);
-            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
-            this.ucDateTimeInterval1.ShowTime = false;
-            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
-            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2012, 6, 2, 10, 42, 8, 482);
-            this.ucDateTimeInterval1.TabIndex = 1;
+            this.btnColumn.Location = new System.Drawing.Point(1197, 75);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.rdByNone);
+            this.groupBox2.Controls.Add(this.rdBySheet);
             this.groupBox2.Controls.Add(this.rdByCategory);
-            this.groupBox2.Controls.Add(this.rdBySalesPerson);
             this.groupBox2.Controls.Add(this.rdByCustomer);
             this.groupBox2.Controls.Add(this.rdByProdcut);
-            this.groupBox2.Location = new System.Drawing.Point(652, 5);
+            this.groupBox2.Location = new System.Drawing.Point(831, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(333, 45);
+            this.groupBox2.Size = new System.Drawing.Size(360, 45);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "统计方式";
@@ -114,27 +100,17 @@
             // rdByCategory
             // 
             this.rdByCategory.AutoSize = true;
-            this.rdByCategory.Location = new System.Drawing.Point(245, 21);
+            this.rdByCategory.Location = new System.Drawing.Point(162, 21);
             this.rdByCategory.Name = "rdByCategory";
-            this.rdByCategory.Size = new System.Drawing.Size(83, 16);
+            this.rdByCategory.Size = new System.Drawing.Size(59, 16);
             this.rdByCategory.TabIndex = 3;
-            this.rdByCategory.Text = "按商品类别";
+            this.rdByCategory.Text = "按类别";
             this.rdByCategory.UseVisualStyleBackColor = true;
-            // 
-            // rdBySalesPerson
-            // 
-            this.rdBySalesPerson.AutoSize = true;
-            this.rdBySalesPerson.Location = new System.Drawing.Point(163, 21);
-            this.rdBySalesPerson.Name = "rdBySalesPerson";
-            this.rdBySalesPerson.Size = new System.Drawing.Size(71, 16);
-            this.rdBySalesPerson.TabIndex = 2;
-            this.rdBySalesPerson.Text = "按业务员";
-            this.rdBySalesPerson.UseVisualStyleBackColor = true;
             // 
             // rdByCustomer
             // 
             this.rdByCustomer.AutoSize = true;
-            this.rdByCustomer.Location = new System.Drawing.Point(90, 21);
+            this.rdByCustomer.Location = new System.Drawing.Point(235, 21);
             this.rdByCustomer.Name = "rdByCustomer";
             this.rdByCustomer.Size = new System.Drawing.Size(59, 16);
             this.rdByCustomer.TabIndex = 1;
@@ -147,10 +123,10 @@
             this.rdByProdcut.Checked = true;
             this.rdByProdcut.Location = new System.Drawing.Point(18, 21);
             this.rdByProdcut.Name = "rdByProdcut";
-            this.rdByProdcut.Size = new System.Drawing.Size(59, 16);
+            this.rdByProdcut.Size = new System.Drawing.Size(47, 16);
             this.rdByProdcut.TabIndex = 0;
             this.rdByProdcut.TabStop = true;
-            this.rdByProdcut.Text = "按商品";
+            this.rdByProdcut.Text = "按卷";
             this.rdByProdcut.UseVisualStyleBackColor = true;
             // 
             // groupBox3
@@ -158,7 +134,7 @@
             this.groupBox3.Controls.Add(this.rdByYear);
             this.groupBox3.Controls.Add(this.rdByMonth);
             this.groupBox3.Controls.Add(this.rdByDay);
-            this.groupBox3.Location = new System.Drawing.Point(652, 57);
+            this.groupBox3.Location = new System.Drawing.Point(831, 57);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(221, 45);
             this.groupBox3.TabIndex = 7;
@@ -203,9 +179,9 @@
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToResizeColumns = false;
             this.gridView.AllowUserToResizeRows = false;
-            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -222,7 +198,7 @@
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1122, 236);
+            this.gridView.Size = new System.Drawing.Size(1350, 392);
             this.gridView.TabIndex = 27;
             // 
             // colDeliveryDate
@@ -288,112 +264,206 @@
             this.colFill.ReadOnly = true;
             this.colFill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // groupBox4
+            // groupBox1
             // 
-            this.groupBox4.Controls.Add(this.txtProductCategory);
-            this.groupBox4.Controls.Add(this.txtProduct);
-            this.groupBox4.Controls.Add(this.txtCustomer);
-            this.groupBox4.Controls.Add(this.lnkProductCategory);
-            this.groupBox4.Controls.Add(this.lnkProduct);
-            this.groupBox4.Controls.Add(this.lnkCustomer);
-            this.groupBox4.Location = new System.Drawing.Point(245, 5);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(401, 96);
-            this.groupBox4.TabIndex = 37;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "其它";
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtLength);
+            this.groupBox1.Controls.Add(this.txtWeight);
+            this.groupBox1.Controls.Add(this.cmbSpecification);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtProductCategory);
+            this.groupBox1.Controls.Add(this.txtCustomer);
+            this.groupBox1.Controls.Add(this.lnkProductCategory);
+            this.groupBox1.Controls.Add(this.lnkCustomer);
+            this.groupBox1.Location = new System.Drawing.Point(244, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(580, 90);
+            this.groupBox1.TabIndex = 38;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "其它";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(435, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 93;
+            this.label4.Text = "长度";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(435, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 92;
+            this.label3.Text = "重量";
+            // 
+            // txtLength
+            // 
+            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLength.Location = new System.Drawing.Point(470, 41);
+            this.txtLength.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtLength.Name = "txtLength";
+            this.txtLength.PointCount = 3;
+            this.txtLength.Size = new System.Drawing.Size(100, 21);
+            this.txtLength.TabIndex = 91;
+            this.txtLength.Text = "0";
+            // 
+            // txtWeight
+            // 
+            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeight.Location = new System.Drawing.Point(470, 12);
+            this.txtWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.PointCount = 3;
+            this.txtWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtWeight.TabIndex = 90;
+            this.txtWeight.Text = "0";
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.Location = new System.Drawing.Point(240, 15);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
+            this.cmbSpecification.Specification = "*";
+            this.cmbSpecification.TabIndex = 87;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(207, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 86;
+            this.label5.Text = "规格";
             // 
             // txtProductCategory
             // 
             this.txtProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtProductCategory.Location = new System.Drawing.Point(42, 48);
+            this.txtProductCategory.Location = new System.Drawing.Point(48, 47);
             this.txtProductCategory.Name = "txtProductCategory";
             this.txtProductCategory.ReadOnly = true;
             this.txtProductCategory.Size = new System.Drawing.Size(153, 21);
-            this.txtProductCategory.TabIndex = 45;
-            this.txtProductCategory.DoubleClick += new System.EventHandler(this.txtProductCategory_DoubleClick);
-            // 
-            // txtProduct
-            // 
-            this.txtProduct.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtProduct.Location = new System.Drawing.Point(236, 19);
-            this.txtProduct.Name = "txtProduct";
-            this.txtProduct.ReadOnly = true;
-            this.txtProduct.Size = new System.Drawing.Size(153, 21);
-            this.txtProduct.TabIndex = 44;
-            this.txtProduct.DoubleClick += new System.EventHandler(this.txtProduct_DoubleClick);
+            this.txtProductCategory.TabIndex = 39;
             // 
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(42, 19);
+            this.txtCustomer.Location = new System.Drawing.Point(48, 18);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(153, 21);
-            this.txtCustomer.TabIndex = 43;
-            this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
+            this.txtCustomer.TabIndex = 37;
             // 
             // lnkProductCategory
             // 
             this.lnkProductCategory.AutoSize = true;
-            this.lnkProductCategory.Location = new System.Drawing.Point(6, 52);
+            this.lnkProductCategory.Location = new System.Drawing.Point(12, 51);
             this.lnkProductCategory.Name = "lnkProductCategory";
             this.lnkProductCategory.Size = new System.Drawing.Size(29, 12);
-            this.lnkProductCategory.TabIndex = 42;
+            this.lnkProductCategory.TabIndex = 36;
             this.lnkProductCategory.TabStop = true;
             this.lnkProductCategory.Text = "类别";
-            this.lnkProductCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProductCategory_LinkClicked);
-            // 
-            // lnkProduct
-            // 
-            this.lnkProduct.AutoSize = true;
-            this.lnkProduct.Location = new System.Drawing.Point(201, 23);
-            this.lnkProduct.Name = "lnkProduct";
-            this.lnkProduct.Size = new System.Drawing.Size(29, 12);
-            this.lnkProduct.TabIndex = 41;
-            this.lnkProduct.TabStop = true;
-            this.lnkProduct.Text = "产品";
-            this.lnkProduct.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProduct_LinkClicked);
             // 
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(6, 23);
+            this.lnkCustomer.Location = new System.Drawing.Point(12, 22);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
-            this.lnkCustomer.TabIndex = 40;
+            this.lnkCustomer.TabIndex = 33;
             this.lnkCustomer.TabStop = true;
             this.lnkCustomer.Text = "客户";
-            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.ucDateTimeInterval1);
+            this.groupBox4.Location = new System.Drawing.Point(7, 9);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(231, 90);
+            this.groupBox4.TabIndex = 37;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "出货日期";
+            // 
+            // ucDateTimeInterval1
+            // 
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2012, 6, 2, 10, 42, 8, 482);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(4, 14);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = false;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2012, 6, 2, 10, 42, 8, 482);
+            this.ucDateTimeInterval1.TabIndex = 1;
+            // 
+            // rdBySheet
+            // 
+            this.rdBySheet.AutoSize = true;
+            this.rdBySheet.Location = new System.Drawing.Point(79, 21);
+            this.rdBySheet.Name = "rdBySheet";
+            this.rdBySheet.Size = new System.Drawing.Size(71, 16);
+            this.rdBySheet.TabIndex = 4;
+            this.rdBySheet.Text = "按送货单";
+            this.rdBySheet.UseVisualStyleBackColor = true;
+            // 
+            // rdByNone
+            // 
+            this.rdByNone.AutoSize = true;
+            this.rdByNone.Location = new System.Drawing.Point(300, 21);
+            this.rdByNone.Name = "rdByNone";
+            this.rdByNone.Size = new System.Drawing.Size(47, 16);
+            this.rdByNone.TabIndex = 5;
+            this.rdByNone.Text = "合计";
+            this.rdByNone.UseVisualStyleBackColor = true;
             // 
             // FrmDeliveryStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 368);
+            this.ClientSize = new System.Drawing.Size(1357, 524);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Name = "FrmDeliveryStatistics";
             this.Text = "出货统计";
             this.Controls.SetChildIndex(this.btnColumn, 0);
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.btnSaveAs, 0);
-            this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.gridView, 0);
             this.Controls.SetChildIndex(this.groupBox4, 0);
-            this.groupBox1.ResumeLayout(false);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,11 +471,8 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton rdByCategory;
-        private System.Windows.Forms.RadioButton rdBySalesPerson;
         private System.Windows.Forms.RadioButton rdByCustomer;
         private System.Windows.Forms.RadioButton rdByProdcut;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -413,13 +480,6 @@
         private System.Windows.Forms.RadioButton rdByYear;
         private System.Windows.Forms.RadioButton rdByMonth;
         private System.Windows.Forms.DataGridView gridView;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
-        private GeneralLibrary.WinformControl.DBCTextBox txtProduct;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
-        private System.Windows.Forms.LinkLabel lnkProductCategory;
-        private System.Windows.Forms.LinkLabel lnkProduct;
-        private System.Windows.Forms.LinkLabel lnkCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
@@ -428,5 +488,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colProfit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProfitRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
+        private Controls.UCSpecification cmbSpecification;
+        private System.Windows.Forms.Label label5;
+        private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkProductCategory;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
+        private System.Windows.Forms.RadioButton rdByNone;
+        private System.Windows.Forms.RadioButton rdBySheet;
     }
 }

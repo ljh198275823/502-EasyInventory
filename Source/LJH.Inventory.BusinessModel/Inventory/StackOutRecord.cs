@@ -96,9 +96,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string OrderID { get; set; }
         /// <summary>
-        /// 获取或设置来源卷重
+        /// 获取或设置此送货单项的成本
         /// </summary>
-        public decimal? SourceRollWeight { get; set; }
+        public decimal Cost { get; set; }
         /// <summary>
         /// 获取或设置备注
         /// </summary>
