@@ -138,9 +138,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.WareHouseID = item.WareHouse.ID;
             item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
-            item.OriginalLength = item.CalLength(p.Specification, item.OriginalWeight.Value, p.Density.Value); // txtOriginalLength.DecimalValue;
+            //item.OriginalLength = item.CalLength(p.Specification, item.OriginalWeight.Value, p.Density.Value); // txtOriginalLength.DecimalValue;
             item.Weight = txtWeight.DecimalValue;
-            item.Length = item.CalLength(p.Specification, item.Weight.Value, p.Density.Value);  //txtLength.DecimalValue;
+            //item.Length = item.CalLength(p.Specification, item.Weight.Value, p.Density.Value);  //txtLength.DecimalValue;
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;
@@ -179,16 +179,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 var c = frm.SelectedItem as ProductCategory;
                 txtCategory.Text = c != null ? c.Name : string.Empty;
                 txtCategory.Tag = c;
-            }
-        }
-
-        private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                txtSupplier.Text = (frm.SelectedItem as CompanyInfo).Name;
             }
         }
 

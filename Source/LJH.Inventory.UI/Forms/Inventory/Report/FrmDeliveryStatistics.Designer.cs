@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rdByNone = new System.Windows.Forms.RadioButton();
+            this.rdBySheet = new System.Windows.Forms.RadioButton();
             this.rdByCategory = new System.Windows.Forms.RadioButton();
             this.rdByCustomer = new System.Windows.Forms.RadioButton();
             this.rdByProdcut = new System.Windows.Forms.RadioButton();
@@ -62,8 +64,6 @@
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
-            this.rdBySheet = new System.Windows.Forms.RadioButton();
-            this.rdByNone = new System.Windows.Forms.RadioButton();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -97,10 +97,32 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "统计方式";
             // 
+            // rdByNone
+            // 
+            this.rdByNone.AutoSize = true;
+            this.rdByNone.Location = new System.Drawing.Point(300, 21);
+            this.rdByNone.Name = "rdByNone";
+            this.rdByNone.Size = new System.Drawing.Size(47, 16);
+            this.rdByNone.TabIndex = 5;
+            this.rdByNone.Text = "合计";
+            this.rdByNone.UseVisualStyleBackColor = true;
+            // 
+            // rdBySheet
+            // 
+            this.rdBySheet.AutoSize = true;
+            this.rdBySheet.Checked = true;
+            this.rdBySheet.Location = new System.Drawing.Point(79, 21);
+            this.rdBySheet.Name = "rdBySheet";
+            this.rdBySheet.Size = new System.Drawing.Size(71, 16);
+            this.rdBySheet.TabIndex = 4;
+            this.rdBySheet.TabStop = true;
+            this.rdBySheet.Text = "按送货单";
+            this.rdBySheet.UseVisualStyleBackColor = true;
+            // 
             // rdByCategory
             // 
             this.rdByCategory.AutoSize = true;
-            this.rdByCategory.Location = new System.Drawing.Point(162, 21);
+            this.rdByCategory.Location = new System.Drawing.Point(160, 21);
             this.rdByCategory.Name = "rdByCategory";
             this.rdByCategory.Size = new System.Drawing.Size(59, 16);
             this.rdByCategory.TabIndex = 3;
@@ -110,7 +132,7 @@
             // rdByCustomer
             // 
             this.rdByCustomer.AutoSize = true;
-            this.rdByCustomer.Location = new System.Drawing.Point(235, 21);
+            this.rdByCustomer.Location = new System.Drawing.Point(232, 21);
             this.rdByCustomer.Name = "rdByCustomer";
             this.rdByCustomer.Size = new System.Drawing.Size(59, 16);
             this.rdByCustomer.TabIndex = 1;
@@ -120,12 +142,10 @@
             // rdByProdcut
             // 
             this.rdByProdcut.AutoSize = true;
-            this.rdByProdcut.Checked = true;
             this.rdByProdcut.Location = new System.Drawing.Point(18, 21);
             this.rdByProdcut.Name = "rdByProdcut";
             this.rdByProdcut.Size = new System.Drawing.Size(47, 16);
             this.rdByProdcut.TabIndex = 0;
-            this.rdByProdcut.TabStop = true;
             this.rdByProdcut.Text = "按卷";
             this.rdByProdcut.UseVisualStyleBackColor = true;
             // 
@@ -225,27 +245,27 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle4;
             this.colAmount.HeaderText = "销售收入";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             // 
             // colCost
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colCost.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colCost.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCost.HeaderText = "销售成本";
             this.colCost.Name = "colCost";
             this.colCost.ReadOnly = true;
             // 
             // colProfit
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colProfit.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colProfit.DefaultCellStyle = dataGridViewCellStyle6;
             this.colProfit.HeaderText = "利润";
             this.colProfit.Name = "colProfit";
             this.colProfit.ReadOnly = true;
@@ -415,26 +435,6 @@
             this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
             this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2012, 6, 2, 10, 42, 8, 482);
             this.ucDateTimeInterval1.TabIndex = 1;
-            // 
-            // rdBySheet
-            // 
-            this.rdBySheet.AutoSize = true;
-            this.rdBySheet.Location = new System.Drawing.Point(79, 21);
-            this.rdBySheet.Name = "rdBySheet";
-            this.rdBySheet.Size = new System.Drawing.Size(71, 16);
-            this.rdBySheet.TabIndex = 4;
-            this.rdBySheet.Text = "按送货单";
-            this.rdBySheet.UseVisualStyleBackColor = true;
-            // 
-            // rdByNone
-            // 
-            this.rdByNone.AutoSize = true;
-            this.rdByNone.Location = new System.Drawing.Point(300, 21);
-            this.rdByNone.Name = "rdByNone";
-            this.rdByNone.Size = new System.Drawing.Size(47, 16);
-            this.rdByNone.TabIndex = 5;
-            this.rdByNone.Text = "合计";
-            this.rdByNone.UseVisualStyleBackColor = true;
             // 
             // FrmDeliveryStatistics
             // 

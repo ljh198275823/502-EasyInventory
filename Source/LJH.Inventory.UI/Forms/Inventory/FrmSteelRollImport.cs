@@ -7,6 +7,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
@@ -181,7 +182,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.WareHouseID = ws;
             pi.OriginalThick = originalLength == 0 ? SpecificationHelper.GetWrittenThick(specification) : pi.CalThick(specification, originalWeight, originalLength, product.Density.Value); //如果有入库长度，则要计算入库厚度
             pi.OriginalWeight = originalWeight;
-            pi.OriginalLength = originalLength == 0 ? pi.CalLength(specification, originalWeight, product.Density.Value) : originalLength;
+            //pi.OriginalLength = originalLength == 0 ? pi.CalLength(specification, originalWeight, product.Density.Value) : originalLength;
             pi.Weight = pi.OriginalWeight;
             pi.Length = pi.OriginalLength;
             pi.Count = 1;
@@ -297,6 +298,29 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 t.Abort();
             }
             MessageBox.Show(string.Format("共成功导入{0}条数据", success), "结果");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string modal = System.IO.Path.Combine(Application.StartupPath, "原材料导入模板.xls");
+                if (File.Exists(modal))
+                {
+                    SaveFileDialog dig = new SaveFileDialog();
+                    dig.Filter = "Excel文档|*.xls;*.xlsx|所有文件(*.*)|*.*";
+                    dig.FileName = "原材料.xls";
+                    if (dig.ShowDialog() == DialogResult.OK && dig.FileName != modal)
+                    {
+                        File.Copy(modal, dig.FileName);
+                        MessageBox.Show("模板保存成功");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
     }

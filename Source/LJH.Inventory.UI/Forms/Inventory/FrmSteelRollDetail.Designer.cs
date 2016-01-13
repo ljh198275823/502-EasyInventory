@@ -43,7 +43,6 @@
             this.lnkSupplier = new System.Windows.Forms.LinkLabel();
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtSupplier = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkWareHouse = new System.Windows.Forms.LinkLabel();
             this.cmbBrand = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -65,6 +64,7 @@
             this.txtOtherCost = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
             this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
+            this.txtSupplier = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnClose
@@ -207,7 +207,6 @@
             this.lnkSupplier.TabIndex = 8;
             this.lnkSupplier.TabStop = true;
             this.lnkSupplier.Text = "供应商";
-            this.lnkSupplier.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_LinkClicked);
             // 
             // lnkCategory
             // 
@@ -228,15 +227,6 @@
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(145, 21);
             this.txtCategory.TabIndex = 71;
-            // 
-            // txtSupplier
-            // 
-            this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSupplier.Location = new System.Drawing.Point(100, 156);
-            this.txtSupplier.Name = "txtSupplier";
-            this.txtSupplier.ReadOnly = true;
-            this.txtSupplier.Size = new System.Drawing.Size(145, 21);
-            this.txtSupplier.TabIndex = 72;
             // 
             // txtWareHouse
             // 
@@ -491,11 +481,23 @@
             this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
             this.txtCarPlate.TabIndex = 95;
             // 
+            // txtSupplier
+            // 
+            this.txtSupplier.FormattingEnabled = true;
+            this.txtSupplier.Items.AddRange(new object[] {
+            "一冷扎",
+            "二冷扎"});
+            this.txtSupplier.Location = new System.Drawing.Point(100, 156);
+            this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.Size = new System.Drawing.Size(145, 20);
+            this.txtSupplier.TabIndex = 96;
+            // 
             // FrmSteelRollDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 433);
+            this.Controls.Add(this.txtSupplier);
             this.Controls.Add(this.txtCarPlate);
             this.Controls.Add(this.txtMaterial);
             this.Controls.Add(this.txtOtherCost);
@@ -517,7 +519,6 @@
             this.Controls.Add(this.lnkBrand);
             this.Controls.Add(this.txtWareHouse);
             this.Controls.Add(this.lnkWareHouse);
-            this.Controls.Add(this.txtSupplier);
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.lnkCategory);
             this.Controls.Add(this.lnkSupplier);
@@ -550,7 +551,6 @@
             this.Controls.SetChildIndex(this.lnkSupplier, 0);
             this.Controls.SetChildIndex(this.lnkCategory, 0);
             this.Controls.SetChildIndex(this.txtCategory, 0);
-            this.Controls.SetChildIndex(this.txtSupplier, 0);
             this.Controls.SetChildIndex(this.lnkWareHouse, 0);
             this.Controls.SetChildIndex(this.txtWareHouse, 0);
             this.Controls.SetChildIndex(this.lnkBrand, 0);
@@ -572,6 +572,7 @@
             this.Controls.SetChildIndex(this.txtOtherCost, 0);
             this.Controls.SetChildIndex(this.txtMaterial, 0);
             this.Controls.SetChildIndex(this.txtCarPlate, 0);
+            this.Controls.SetChildIndex(this.txtSupplier, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,7 +594,6 @@
         private System.Windows.Forms.LinkLabel lnkSupplier;
         private System.Windows.Forms.LinkLabel lnkCategory;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
-        private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
         private GeneralLibrary.WinformControl.DBCTextBox txtWareHouse;
         private System.Windows.Forms.LinkLabel lnkWareHouse;
         private GeneralLibrary.WinformControl.DBCTextBox cmbBrand;
@@ -615,5 +615,6 @@
         private GeneralLibrary.WinformControl.DecimalTextBox txtOtherCost;
         private Controls.MaterialComboBox txtMaterial;
         private Controls.CarplateComboBox txtCarPlate;
+        private System.Windows.Forms.ComboBox txtSupplier;
     }
 }

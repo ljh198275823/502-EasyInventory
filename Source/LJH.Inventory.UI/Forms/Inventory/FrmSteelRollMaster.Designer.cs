@@ -500,6 +500,7 @@
             this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
+            this.colLength.Visible = false;
             // 
             // colCustomer
             // 

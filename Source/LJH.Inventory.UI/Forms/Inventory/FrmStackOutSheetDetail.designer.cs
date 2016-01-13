@@ -46,6 +46,8 @@
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtWarehouse = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.lnkPayment = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.lnkDriver = new System.Windows.Forms.LinkLabel();
@@ -101,8 +103,6 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtWarehouse = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
-            this.label6 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -273,6 +273,24 @@
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // txtWarehouse
+            // 
+            this.txtWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtWarehouse.FormattingEnabled = true;
+            this.txtWarehouse.Location = new System.Drawing.Point(512, 110);
+            this.txtWarehouse.Name = "txtWarehouse";
+            this.txtWarehouse.Size = new System.Drawing.Size(135, 20);
+            this.txtWarehouse.TabIndex = 144;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(472, 114);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 12);
+            this.label6.TabIndex = 143;
+            this.label6.Text = "仓库:";
+            // 
             // lnkPayment
             // 
             this.lnkPayment.AutoSize = true;
@@ -362,6 +380,7 @@
             // rdWithTax
             // 
             this.rdWithTax.AutoSize = true;
+            this.rdWithTax.Checked = true;
             this.rdWithTax.Location = new System.Drawing.Point(3, 3);
             this.rdWithTax.Name = "rdWithTax";
             this.rdWithTax.Size = new System.Drawing.Size(47, 16);
@@ -373,11 +392,11 @@
             // rdWithoutTax
             // 
             this.rdWithoutTax.AutoSize = true;
+            this.rdWithoutTax.Enabled = false;
             this.rdWithoutTax.Location = new System.Drawing.Point(57, 3);
             this.rdWithoutTax.Name = "rdWithoutTax";
             this.rdWithoutTax.Size = new System.Drawing.Size(59, 16);
             this.rdWithoutTax.TabIndex = 130;
-            this.rdWithoutTax.TabStop = true;
             this.rdWithoutTax.Text = "不含税";
             this.rdWithoutTax.UseVisualStyleBackColor = true;
             // 
@@ -799,24 +818,6 @@
             this.colFill.HeaderText = "";
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
-            // 
-            // txtWarehouse
-            // 
-            this.txtWarehouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.txtWarehouse.FormattingEnabled = true;
-            this.txtWarehouse.Location = new System.Drawing.Point(512, 110);
-            this.txtWarehouse.Name = "txtWarehouse";
-            this.txtWarehouse.Size = new System.Drawing.Size(135, 20);
-            this.txtWarehouse.TabIndex = 144;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(472, 114);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 12);
-            this.label6.TabIndex = 143;
-            this.label6.Text = "仓库:";
             // 
             // FrmStackOutSheetDetail
             // 
