@@ -277,7 +277,7 @@
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(145, 21);
             this.txtCustomer.TabIndex = 82;
-            this.txtCustomer.Text = "联谊";
+            this.txtCustomer.Text = "悦涵";
             // 
             // lnkCustomer
             // 

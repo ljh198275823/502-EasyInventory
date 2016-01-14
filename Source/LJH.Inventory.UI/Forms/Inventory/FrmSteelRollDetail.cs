@@ -104,8 +104,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCategory.Tag = item.Product.Category;
             cmbSpecification.Specification = item.Product.Specification;
             txtOriginalWeight.DecimalValue = item.OriginalWeight.Value;
-            txtOriginalLength.DecimalValue = item.OriginalLength.Value;
-            txtLength.DecimalValue = item.Length.Value;
             txtWeight.DecimalValue = item.Weight.Value;
             txtCustomer.Text = item.Customer;
             txtSupplier.Text = item.Supplier;

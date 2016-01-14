@@ -48,3 +48,9 @@ BEGIN
 	exec ('alter table ProductInventoryItem add OtherCost decimal(18,4)')
 end
 go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OriginalThick' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add OriginalThick decimal(18,4)')
+end
+go
