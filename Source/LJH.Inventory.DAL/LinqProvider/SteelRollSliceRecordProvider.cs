@@ -36,6 +36,8 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.Category)) ret = ret.Where(item => item.Category == con.Category);
                 if (!string.IsNullOrEmpty(con.Specification)) ret = ret.Where(item => item.Specification == con.Specification);
                 if (!string.IsNullOrEmpty(con.SliceType)) ret = ret.Where(item => item.SliceType == con.SliceType);
+                if (!string.IsNullOrEmpty(con.Customer)) ret = ret.Where(it => it.Customer == con.Customer);
+                if (!string.IsNullOrEmpty(con.Warehouse)) ret = ret.Where(it => it.Warehouse == con.Warehouse);
             }
             return ret.ToList();
         }

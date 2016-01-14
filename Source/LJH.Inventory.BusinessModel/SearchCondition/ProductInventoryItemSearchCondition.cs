@@ -38,5 +38,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string DeliverySheetNo { get; set; }
 
         public Guid? SourceRoll { get; set; }
+
+        public decimal? OriginalWeight { get; set; }
     }
 }

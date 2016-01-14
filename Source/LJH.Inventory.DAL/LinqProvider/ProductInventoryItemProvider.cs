@@ -51,6 +51,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.DeliveryItem != null) ret = ret.Where(item => item.DeliveryItem == con.DeliveryItem);
                 if (!string.IsNullOrEmpty(con.DeliverySheetNo)) ret = ret.Where(item => item.DeliverySheet == con.DeliverySheetNo);
                 if (con.SourceRoll.HasValue) ret = ret.Where(item => item.SourceRoll == con.SourceRoll);
+                if (con.OriginalWeight.HasValue) ret = ret.Where(it => it.OriginalWeight == con.OriginalWeight);
                 if (con.HasRemain) ret = ret.Where(item => item.Count > 0);
             }
             var items = ret.ToList();

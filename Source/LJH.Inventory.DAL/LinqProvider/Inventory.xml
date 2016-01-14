@@ -437,6 +437,7 @@
       <Column Name="Operator" Member="Operator"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Customer" Member="Customer"  DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
       <Column Name="Slicer" Member="Slicer"  DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
+      <Column Name="Warehouse" Member="Warehouse"  DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="AutoCreateNumber" Member="LJH.Inventory.DAL.LinqProvider.AutoCreateNumber">

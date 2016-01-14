@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
+using LJH.Inventory.UI.Forms.Sale;
 
 namespace LJH.Inventory.UI.Forms.Inventory.Report
 {
@@ -27,6 +28,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             this.ucDateTimeInterval1.SelectThisMonth();
             this.categoryComboBox1.Init();
             this.comSpecification1.Init();
+            this.wareHouseComboBox1.Init();
         }
 
         protected override List<object> GetDataSource()
@@ -35,9 +37,20 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             con.SliceDate = new DateTimeRange(this.ucDateTimeInterval1.StartDateTime, this.ucDateTimeInterval1.EndDateTime);
             con.Category = this.categoryComboBox1.SelectedCategoryID;
             con.Specification = this.comSpecification1.Text;
+            con.Customer =txtCustomer .Text ;
+            con.Warehouse =wareHouseComboBox1 .Text ;
             List<SteelRollSliceRecord> records = (new SteelRollSliceRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             if (records != null && records.Count > 0)
             {
+                if (txtSourceRollWeight.DecimalValue > 0)
+                {
+                    ProductInventoryItemSearchCondition pcon = new ProductInventoryItemSearchCondition() { OriginalWeight = txtSourceRollWeight.DecimalValue };
+                    List<ProductInventoryItem> srs = new SteelRollBLL(AppSettings.Current.ConnStr).GetItems(pcon).QueryObjects;
+                    if (srs != null && srs.Count > 0)
+                    {
+                        records = records.Where(it => srs.Exists(p => p.ID == it.SliceSource)).ToList();
+                    }
+                }
                 return (from it in records
                         orderby it.SliceDate ascending
                         where ((chk开平.Checked && it.SliceType == chk开平.Text) ||
@@ -69,6 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSlicer"].Value = record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;
             row.Cells["colSourceRoll"].Value = "查看原料卷";
+            row.Cells["colWarehouse"].Value = record.Warehouse;
             row.Cells["colMemo"].Value = record.Memo;
         }
         #endregion
@@ -95,5 +109,17 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
         }
         #endregion
+
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmCustomerMaster frm = new FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo customer = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Text = customer != null ? customer.Name : string.Empty;
+                txtCustomer.Tag = customer;
+            }
+        }
     }
 }

@@ -129,7 +129,7 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 if (Weight.HasValue && Weight.Value != 0) return Weight.Value * Price;
-                return Price * Count;
+                return 0;
             }
         }
         #endregion

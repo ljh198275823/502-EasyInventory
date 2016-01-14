@@ -21,5 +21,9 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string Specification { get; set; }
 
         public string SliceType { get; set; }
+
+        public string Customer { get; set; }
+
+        public string Warehouse { get; set; }
     }
 }
