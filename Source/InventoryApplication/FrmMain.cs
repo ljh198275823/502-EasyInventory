@@ -33,7 +33,7 @@ namespace InventoryApplication
         #region 私有变量
         private List<Form> _openedForms = new List<Form>();
         private SoftDogInfo _SoftDog;
-        private bool _EnableSoftDog = false; //启用加密狗
+        private bool _EnableSoftDog = true; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2016, 1, 31);
         #endregion
 
