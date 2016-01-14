@@ -1,20 +1,13 @@
----修改于2015-12-13 
-if exists (SELECT * FROM dbo.syscolumns WHERE name ='TotalWeight' AND id = OBJECT_ID(N'[dbo].[StackOutItem]'))
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='TotalWeight' AND id = OBJECT_ID(N'[dbo].[StackOutItem]'))
 BEGIN
-    exec ('update stackoutItem set length=weight ')
-	exec ('update stackoutItem set weight=totalweight ')
-	exec ('alter table StackOutItem drop column TotalWeight')
+	exec ('alter table StackOutItem add TotalWeight decimal(18,4) null')
 end
 go
 
-
-update productinventoryitem set model='原材料' where model='卷'
-go
-
----修改于2015-12-21
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='DefaultLinker' AND id = OBJECT_ID(N'[dbo].[Customer]'))
+--2015-11-27 
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OriginalThick' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
 BEGIN
-	exec ('alter table Customer add DefaultLinker uniqueidentifier')
+	exec ('alter table ProductInventoryItem add OriginalThick decimal(18,4) null')
 end
 go
 
@@ -46,11 +39,5 @@ go
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OtherCost' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
 BEGIN
 	exec ('alter table ProductInventoryItem add OtherCost decimal(18,4)')
-end
-go
-
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OriginalThick' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
-BEGIN
-	exec ('alter table ProductInventoryItem add OriginalThick decimal(18,4)')
 end
 go
