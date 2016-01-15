@@ -16,18 +16,18 @@ namespace LJH.Inventory.BusinessModel.Resource
         {
             switch (pm)
             {
-                case PaymentMode .None :
+                case PaymentMode.None:
                     return "未付款";
-                case PaymentMode.Cash :
+                case PaymentMode.Cash:
                     return "现金";
-                case PaymentMode.Transfer :
+                case PaymentMode.Transfer:
                     return "转账";
-                case PaymentMode.Check :
+                case PaymentMode.Check:
                     return "支票";
-                case  PaymentMode.Prepay :
+                case PaymentMode.Prepay:
                     return "预付款";
-                default :
-                    return string.Empty;
+                default:
+                    return pm.ToString();
             }
         }
     }

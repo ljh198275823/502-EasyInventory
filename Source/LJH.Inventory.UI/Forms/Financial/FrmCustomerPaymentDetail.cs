@@ -62,6 +62,20 @@ namespace LJH.Inventory.UI.Forms.Financial
                 ItemsGrid.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(item => item.Amount).Trim();
             }
         }
+
+        private void InittxtxBank()
+        {
+            this.txtBank.Items.Clear();
+            this.txtBank.Items.Add(string.Empty);
+            List<string> banks = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetAllBanks();
+            if (banks != null && banks.Count > 0)
+            {
+                foreach (var bank in banks)
+                {
+                    this.txtBank.Items.Add(bank);
+                }
+            }
+        }
         #endregion
 
         #region 重写基类方法
@@ -69,6 +83,8 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.InitControls();
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            txtBank.Enabled = rdTransfer.Checked;
+            InittxtxBank();
             this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户付款流水" : "供应商付款流水";
             this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
             if (IsForView)
@@ -107,9 +123,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 dtSheetDate.Value = item.SheetDate;
                 rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
                 rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
-                rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
+                rd转公账.Checked = item.PaymentMode == PaymentMode.转公账;
+                rd付承兑.Checked = item.PaymentMode == PaymentMode.付承兑;
                 txtAmount.DecimalValue = item.Amount;
                 txtCheckNum.Text = item.CheckNum;
+                txtBank.Text = item.Bank;
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
                 txtMemo.Text = item.Memo;
@@ -135,10 +153,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             info.SheetDate = dtSheetDate.Value;
             if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
-            if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
+            if (rd转公账.Checked) info.PaymentMode = PaymentMode.转公账;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
+            if (rd付承兑.Checked) info.PaymentMode = PaymentMode.付承兑;
             info.Amount = txtAmount.DecimalValue;
             info.CheckNum = txtCheckNum.Text;
+            info.Bank = txtBank.Text;
             info.CustomerID = Customer != null ? Customer.ID : null;
             if (!string.IsNullOrEmpty(StackSheetID)) info.StackSheetID = StackSheetID;
             info.Memo = txtMemo.Text;
@@ -162,7 +182,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             base.ShowButtonState(this.toolStrip1);
             CustomerPayment cp = UpdatingItem != null ? UpdatingItem as CustomerPayment : null;
             btnPayment.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
-            //btnPayment.Enabled = cp != null && cp.State == SheetState.Approved && cp.Remain > 0;
             btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Approve);
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
@@ -303,5 +322,10 @@ namespace LJH.Inventory.UI.Forms.Financial
             ShowButtonState();
         }
         #endregion
+
+        private void rdTransfer_CheckedChanged(object sender, EventArgs e)
+        {
+            txtBank.Enabled = rdTransfer.Checked;
+        }
     }
 }

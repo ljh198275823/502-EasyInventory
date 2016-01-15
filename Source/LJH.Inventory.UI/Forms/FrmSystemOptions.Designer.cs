@@ -1356,8 +1356,8 @@
             this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tab1.Controls.Add(this.tabPage2);
             this.tab1.Controls.Add(this.tabPage1);
+            this.tab1.Controls.Add(this.tabPage2);
             this.tab1.Controls.Add(this.tabDelivery);
             this.tab1.Controls.Add(this.tabAutoCreater);
             this.tab1.Location = new System.Drawing.Point(5, 10);

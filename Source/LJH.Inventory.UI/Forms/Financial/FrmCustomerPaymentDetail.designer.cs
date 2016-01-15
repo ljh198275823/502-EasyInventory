@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,7 +39,7 @@
             this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
             this.rdTransfer = new System.Windows.Forms.RadioButton();
             this.rdCash = new System.Windows.Forms.RadioButton();
-            this.rdCheck = new System.Windows.Forms.RadioButton();
+            this.rd转公账 = new System.Windows.Forms.RadioButton();
             this.txtAmount = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -79,6 +79,9 @@
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnPayment = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtBank = new System.Windows.Forms.ComboBox();
+            this.rd付承兑 = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -136,6 +139,7 @@
             this.txtCheckNum.Name = "txtCheckNum";
             this.txtCheckNum.Size = new System.Drawing.Size(164, 21);
             this.txtCheckNum.TabIndex = 7;
+            this.txtCheckNum.Visible = false;
             // 
             // label5
             // 
@@ -154,6 +158,7 @@
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 35;
             this.label6.Text = "支票号";
+            this.label6.Visible = false;
             // 
             // dtSheetDate
             // 
@@ -173,6 +178,7 @@
             this.rdTransfer.TabStop = true;
             this.rdTransfer.Text = "转账";
             this.rdTransfer.UseVisualStyleBackColor = true;
+            this.rdTransfer.CheckedChanged += new System.EventHandler(this.rdTransfer_CheckedChanged);
             // 
             // rdCash
             // 
@@ -183,16 +189,18 @@
             this.rdCash.TabIndex = 5;
             this.rdCash.Text = "现金";
             this.rdCash.UseVisualStyleBackColor = true;
+            this.rdCash.CheckedChanged += new System.EventHandler(this.rdTransfer_CheckedChanged);
             // 
-            // rdCheck
+            // rd转公账
             // 
-            this.rdCheck.AutoSize = true;
-            this.rdCheck.Location = new System.Drawing.Point(427, 77);
-            this.rdCheck.Name = "rdCheck";
-            this.rdCheck.Size = new System.Drawing.Size(47, 16);
-            this.rdCheck.TabIndex = 6;
-            this.rdCheck.Text = "支票";
-            this.rdCheck.UseVisualStyleBackColor = true;
+            this.rd转公账.AutoSize = true;
+            this.rd转公账.Location = new System.Drawing.Point(427, 77);
+            this.rd转公账.Name = "rd转公账";
+            this.rd转公账.Size = new System.Drawing.Size(59, 16);
+            this.rd转公账.TabIndex = 6;
+            this.rd转公账.Text = "转公帐";
+            this.rd转公账.UseVisualStyleBackColor = true;
+            this.rd转公账.CheckedChanged += new System.EventHandler(this.rdTransfer_CheckedChanged);
             // 
             // txtAmount
             // 
@@ -239,6 +247,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rd付承兑);
+            this.tabPage1.Controls.Add(this.txtBank);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txtCustomer);
             this.tabPage1.Controls.Add(this.lnkCustomer);
             this.tabPage1.Controls.Add(this.txtID);
@@ -248,7 +259,7 @@
             this.tabPage1.Controls.Add(this.txtMemo);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.txtAmount);
-            this.tabPage1.Controls.Add(this.rdCheck);
+            this.tabPage1.Controls.Add(this.rd转公账);
             this.tabPage1.Controls.Add(this.txtCheckNum);
             this.tabPage1.Controls.Add(this.rdCash);
             this.tabPage1.Controls.Add(this.label6);
@@ -351,8 +362,8 @@
             // 
             // colAssign
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAssign.HeaderText = "抵消金额";
             this.colAssign.Name = "colAssign";
             // 
@@ -603,6 +614,34 @@
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(273, 114);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 93;
+            this.label1.Text = "转账行";
+            // 
+            // txtBank
+            // 
+            this.txtBank.FormattingEnabled = true;
+            this.txtBank.Location = new System.Drawing.Point(321, 110);
+            this.txtBank.Name = "txtBank";
+            this.txtBank.Size = new System.Drawing.Size(163, 20);
+            this.txtBank.TabIndex = 94;
+            // 
+            // rd付承兑
+            // 
+            this.rd付承兑.AutoSize = true;
+            this.rd付承兑.Location = new System.Drawing.Point(492, 77);
+            this.rd付承兑.Name = "rd付承兑";
+            this.rd付承兑.Size = new System.Drawing.Size(59, 16);
+            this.rd付承兑.TabIndex = 95;
+            this.rd付承兑.Text = "付承兑";
+            this.rd付承兑.UseVisualStyleBackColor = true;
+            this.rd付承兑.CheckedChanged += new System.EventHandler(this.rdTransfer_CheckedChanged);
+            // 
             // FrmCustomerPaymentDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -645,7 +684,7 @@
         private System.Windows.Forms.DateTimePicker dtSheetDate;
         private System.Windows.Forms.RadioButton rdTransfer;
         private System.Windows.Forms.RadioButton rdCash;
-        private System.Windows.Forms.RadioButton rdCheck;
+        private System.Windows.Forms.RadioButton rd转公账;
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtAmount;
         private LJH.GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.TabControl tabControl1;
@@ -685,5 +724,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
+        private System.Windows.Forms.ComboBox txtBank;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton rd付承兑;
     }
 }

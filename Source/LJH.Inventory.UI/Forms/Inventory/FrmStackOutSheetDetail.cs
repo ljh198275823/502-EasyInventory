@@ -317,15 +317,43 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        private bool CheckCredit()
+        {
+            StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
+            StackOutSheetFinancialState fstate = bll.GetFinancialStateOf(sheet.ID).QueryObject;
+            CustomerFinancialState cstate = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(sheet.CustomerID).QueryObject;
+            decimal credit = cstate.Credit + (fstate != null ? fstate.NotPaid : 0);
+            if (credit > cstate.Customer.CreditLine)
+            {
+                if (UserSettings.Current.ForbidWhenOverCreditLimit)
+                {
+                    MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，不能再发货。");
+                    return false;
+                }
+                else if (UserSettings.Current.ReminderWhenOverCreditLimit)
+                {
+                    if (MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，是否继续发货?", "询问", MessageBoxButtons.YesNo) == DialogResult.No)
+                    {
+                        return false ;
+                    }
+                }
+            }
+            return true;
+        }
+
         private void btnShip_Click(object sender, EventArgs e)
         {
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackOutSheet>(bll, SheetOperation.StackOut);
-            StackOutSheet sheet = UpdatingItem as StackOutSheet;
-            if (sheet.State == SheetState.Shipped)
+            if (CheckCredit())
             {
-                new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
-                ShowPaymentState(sheet);
+                PerformOperation<StackOutSheet>(bll, SheetOperation.StackOut);
+                StackOutSheet sheet = UpdatingItem as StackOutSheet;
+                if (sheet.State == SheetState.Shipped)
+                {
+                    new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
+                    ShowPaymentState(sheet);
+                }
             }
         }
 

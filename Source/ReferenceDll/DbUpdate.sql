@@ -12,3 +12,10 @@ BEGIN
 	exec ('alter table ProductInventoryItem add OriginalThick decimal(18,4) null')
 end
 go
+
+--2016-1-15
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Bank' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
+BEGIN
+	exec ('alter table CustomerPayment add Bank nvarchar(50)')
+end
+go

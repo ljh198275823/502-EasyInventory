@@ -113,6 +113,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colAssigned"].Value = info.Assigned.Trim();
             row.Cells["colRemain"].Value = info.Remain.Trim();
             row.Cells["colCheckNum"].Value = info.CheckNum;
+            row.Cells["colBank"].Value = info.Bank;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)

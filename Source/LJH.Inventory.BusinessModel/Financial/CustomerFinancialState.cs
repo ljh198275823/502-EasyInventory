@@ -27,5 +27,12 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置未核销的已开增值税发票金额
         /// </summary>
         public decimal TaxBill { get; set; }
+        /// <summary>
+        /// 获取客户的欠款
+        /// </summary>
+        public decimal Credit
+        {
+            get { return Recievables - Prepay; }
+        }
     }
 }

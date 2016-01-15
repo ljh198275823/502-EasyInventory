@@ -50,16 +50,6 @@
             this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +57,17 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBank = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -85,7 +86,7 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1179, 33);
+            this.pnlFilter.Size = new System.Drawing.Size(1417, 33);
             this.pnlFilter.TabIndex = 112;
             // 
             // panel5
@@ -95,7 +96,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(224, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(955, 33);
+            this.panel5.Size = new System.Drawing.Size(1193, 33);
             this.panel5.TabIndex = 6;
             // 
             // txtKeyword
@@ -106,7 +107,7 @@
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(69, 7);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(874, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(1112, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
@@ -201,7 +202,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 33);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(224, 319);
+            this.pnlLeft.Size = new System.Drawing.Size(224, 391);
             this.pnlLeft.TabIndex = 113;
             // 
             // customerTree1
@@ -214,7 +215,7 @@
             this.customerTree1.LoadCustomer = true;
             this.customerTree1.Location = new System.Drawing.Point(0, 0);
             this.customerTree1.Name = "customerTree1";
-            this.customerTree1.Size = new System.Drawing.Size(224, 319);
+            this.customerTree1.Size = new System.Drawing.Size(224, 391);
             this.customerTree1.TabIndex = 0;
             this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.customerTree1_NodeMouseClick);
             // 
@@ -237,7 +238,7 @@
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.splitter1.Location = new System.Drawing.Point(224, 33);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 319);
+            this.splitter1.Size = new System.Drawing.Size(8, 391);
             this.splitter1.TabIndex = 114;
             this.splitter1.TabStop = false;
             // 
@@ -253,6 +254,7 @@
             this.colSheetDate,
             this.colCustomer,
             this.colPaymentMode,
+            this.colBank,
             this.colCheckNum,
             this.colAmount,
             this.colAssigned,
@@ -266,9 +268,57 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(947, 319);
+            this.dataGridView1.Size = new System.Drawing.Size(1185, 391);
             this.dataGridView1.TabIndex = 115;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.mnu_Assign,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 120);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // mnu_Assign
+            // 
+            this.mnu_Assign.Name = "mnu_Assign";
+            this.mnu_Assign.Size = new System.Drawing.Size(121, 22);
+            this.mnu_Assign.Text = "核销...";
+            this.mnu_Assign.Click += new System.EventHandler(this.mnu_Assign_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // colID
             // 
@@ -296,6 +346,12 @@
             this.colPaymentMode.HeaderText = "付款方式";
             this.colPaymentMode.Name = "colPaymentMode";
             this.colPaymentMode.ReadOnly = true;
+            // 
+            // colBank
+            // 
+            this.colBank.HeaderText = "转账行";
+            this.colBank.Name = "colBank";
+            this.colBank.ReadOnly = true;
             // 
             // colCheckNum
             // 
@@ -346,60 +402,12 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.mnu_Assign,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 142);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // mnu_Assign
-            // 
-            this.mnu_Assign.Name = "mnu_Assign";
-            this.mnu_Assign.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Assign.Text = "核销...";
-            this.mnu_Assign.Click += new System.EventHandler(this.mnu_Assign_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
             // FrmCustomerPaymentMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1179, 374);
+            this.ClientSize = new System.Drawing.Size(1417, 446);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
@@ -455,6 +463,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBank;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssigned;

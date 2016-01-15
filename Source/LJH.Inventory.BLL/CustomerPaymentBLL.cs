@@ -134,6 +134,11 @@ namespace LJH.Inventory.BLL
                 }
             }
         }
+
+        public List<string> GetAllBanks()
+        {
+            return ProviderFactory.Create<ICustomerPaymentBankProvider>(RepoUri).GetBanks();
+        }
         #endregion
     }
 }
