@@ -154,21 +154,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             decimal purchasePrice = 0;
             if (row.Cells["colPurchasePrice"].Value != null && !string.IsNullOrEmpty(row.Cells["colPurchasePrice"].Value.ToString().Trim()) &&
-                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colPurchasePrice"].Value.ToString().Trim()), out purchasePrice) || purchasePrice <= 0))
+                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colPurchasePrice"].Value.ToString().Trim()), out purchasePrice) || purchasePrice < 0))
             {
                 row.Cells["colReason"].Value = "采购价格不正确";
                 return null;
             }
             decimal transCost = 0;
             if (row.Cells["colTransCost"].Value != null && !string.IsNullOrEmpty(row.Cells["colTransCost"].Value.ToString().Trim()) &&
-                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colTransCost"].Value.ToString().Trim()), out transCost) || transCost <= 0))
+                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colTransCost"].Value.ToString().Trim()), out transCost) || transCost < 0))
             {
                 row.Cells["colReason"].Value = "运输费用不正确";
                 return null;
             }
             decimal otherCost = 0;
             if (row.Cells["colOtherCost"].Value != null && !string.IsNullOrEmpty(row.Cells["colOtherCost"].Value.ToString().Trim()) &&
-                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colOtherCost"].Value.ToString().Trim()), out otherCost) || otherCost <= 0))
+                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colOtherCost"].Value.ToString().Trim()), out otherCost) || otherCost < 0))
             {
                 row.Cells["colReason"].Value = "其它费用不正确";
                 return null;
