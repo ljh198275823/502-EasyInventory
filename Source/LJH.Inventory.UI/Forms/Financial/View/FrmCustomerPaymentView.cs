@@ -56,6 +56,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colSheetID"].Value = cp.ID;
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
+            row.Cells["colBank"].Value = cp.Bank;
             row.Cells["colAmount"].Value = cp.Amount;
             row.Cells["colRemain"].Value = cp.Remain != 0 ? (decimal?)cp.Remain : null;
             row.Cells["colAssigned"].Value =cp.Assigned !=0?(decimal ?) cp.Assigned:null;

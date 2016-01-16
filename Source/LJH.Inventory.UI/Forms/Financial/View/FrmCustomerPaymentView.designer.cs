@@ -45,6 +45,7 @@
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBank = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +70,7 @@
             this.colSheetID,
             this.colSheetDate,
             this.colPaymentMode,
+            this.colBank,
             this.colAmount,
             this.colAssigned,
             this.colRemain,
@@ -80,7 +82,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(765, 304);
+            this.dataGridView1.Size = new System.Drawing.Size(1000, 354);
             this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
             // 
@@ -130,16 +132,16 @@
             this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblMSG});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 340);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 390);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(765, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1000, 22);
             this.statusStrip1.TabIndex = 26;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblMSG
             // 
             this.lblMSG.Name = "lblMSG";
-            this.lblMSG.Size = new System.Drawing.Size(750, 17);
+            this.lblMSG.Size = new System.Drawing.Size(985, 17);
             this.lblMSG.Spring = true;
             this.lblMSG.Text = "共 0 项";
             // 
@@ -168,6 +170,13 @@
             this.colPaymentMode.Name = "colPaymentMode";
             this.colPaymentMode.ReadOnly = true;
             this.colPaymentMode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colBank
+            // 
+            this.colBank.HeaderText = "转账行";
+            this.colBank.Name = "colBank";
+            this.colBank.ReadOnly = true;
+            this.colBank.Width = 150;
             // 
             // colAmount
             // 
@@ -215,7 +224,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 362);
+            this.ClientSize = new System.Drawing.Size(1000, 412);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.chkShowAll);
             this.Controls.Add(this.dataGridView1);
@@ -246,6 +255,7 @@
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBank;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
