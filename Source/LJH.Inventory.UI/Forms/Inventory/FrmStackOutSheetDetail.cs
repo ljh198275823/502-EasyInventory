@@ -280,12 +280,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 try
                 {
+                    StackOutSheet original = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheet.ID).QueryObject;
                     string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
                     Print.StackOutSheetExporter exporter = null;
                     if (System.IO.File.Exists(modal))
                     {
                         exporter = new Print.StackOutSheetExporter(modal);
-                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
+                        var files = exporter.Export(original, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
                         foreach (var file in files)
                         {
                             if (System.IO.File.Exists(file))
@@ -299,7 +300,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 Process prs = new Process();
                                 prs.StartInfo = psi;
                                 prs.Start();
-                                //prs.WaitForExit();
                                 LJH.GeneralLibrary.LOG.FileLog.Log("打印", file);
                             }
                         }
@@ -312,7 +312,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 catch (Exception ex)
                 {
                     LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
-                    //MessageBox.Show(ex.Message, "打印失败");
                 }
             }
         }

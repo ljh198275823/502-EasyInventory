@@ -75,8 +75,16 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (TotalWeight.HasValue && TotalWeight.Value != 0) return TotalWeight.Value * Price;
-                return Price * Count;
+                decimal ret = 0;
+                if (TotalWeight.HasValue && TotalWeight.Value != 0)
+                {
+                    ret = TotalWeight.Value * Price;
+                }
+                else
+                {
+                    ret= Price * Count;
+                }
+                return Math.Round(ret, 2);
             }
         }
     }
