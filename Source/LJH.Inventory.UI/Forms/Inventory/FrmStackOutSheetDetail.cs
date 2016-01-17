@@ -282,12 +282,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 try
                 {
+                    StackOutSheet real = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheet.ID).QueryObject; //从数据库获取最新的送货单，防止用户将当前未保存的数据打印出来
                     string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
                     Print.StackOutSheetExporter exporter = null;
                     if (System.IO.File.Exists(modal))
                     {
                         exporter = new Print.StackOutSheetExporter(modal);
-                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
+                        var files = exporter.Export(real, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
                         foreach (var file in files)
                         {
                             if (System.IO.File.Exists(file))
