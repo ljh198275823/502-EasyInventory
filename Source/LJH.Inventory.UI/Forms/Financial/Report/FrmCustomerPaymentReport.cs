@@ -49,6 +49,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.CustomerID = txtCustomer.Tag != null ? (txtCustomer.Tag as CompanyInfo).ID : null;
             con.PaymentTypes = new List<CustomerPaymentType>();
+            con.PaymentTypes.Add(CustomerPaymentType.Customer);
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }
