@@ -217,6 +217,7 @@ namespace InventoryApplication
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
             this.mnu_DeliveryStatistic.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
+            this.mnu_CustomerPaymentReport.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
         }
         #endregion
 
@@ -463,6 +464,11 @@ namespace InventoryApplication
             ShowSingleForm<FrmPurchaseItemRecordMaster>();
         }
 
+        private void mnu_CustomerPaymentReport_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>();
+        }
+
         private void mnu_HorizontalSplit_Click(object sender, EventArgs e)
         {
             this.pSecondary.Visible = !this.pSecondary.Visible;
@@ -586,5 +592,7 @@ namespace InventoryApplication
             Environment.Exit(0);
         }
         #endregion
+
+        
     }
 }

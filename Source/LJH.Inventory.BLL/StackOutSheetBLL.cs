@@ -285,8 +285,8 @@ namespace LJH.Inventory.BLL
             InventoryOut(info, UserSettings.Current.InventoryOutType, unitWork);  //送货单指定了仓库时，从指定仓库出货
             if (info.ClassID == StackOutSheetType.DeliverySheet)
             {
-                AddReceivables(info,dt, unitWork);         //类型为送货单的出库单出货时增加应收
-                if (info.WithTax) AddTax(info,dt, unitWork); //含税时需要增加应开增值税发票
+                AddReceivables(info, dt, unitWork);         //类型为送货单的出库单出货时增加应收
+                if (info.WithTax) AddTax(info, dt, unitWork); //含税时需要增加应开增值税发票
             }
         }
 
@@ -439,20 +439,23 @@ namespace LJH.Inventory.BLL
             var item = GetByID(sheetID).QueryObject;
             if (item == null) return new QueryResult<StackOutSheetFinancialState>(ResultCode.Fail, "没有找到相关送货单信息", null);
             var ret = new StackOutSheetFinancialState() { ID = sheetID };
+
+            CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
+            con.PaymentTypes = new List<CustomerPaymentType>();
+            con.PaymentTypes.Add(CustomerPaymentType.Customer);
+            con.States = new List<SheetState>();
+            con.States.Add(SheetState.Add);
+            con.States.Add(SheetState.Approved);
+            con.StackSheetID = item.ID;
+            var cps = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+            if (cps != null && cps.Count == 1)
+            {
+                ret.FirstPaymentMode = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cps[0].PaymentMode);
+            }
+
             if (item.State != SheetState.Shipped)
             {
-                if (!string.IsNullOrEmpty(item.ID))
-                {
-                    CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
-                    con.PaymentTypes = new List<CustomerPaymentType>();
-                    con.PaymentTypes.Add(CustomerPaymentType.Customer);
-                    con.States = new List<SheetState>();
-                    con.States.Add(SheetState.Add);
-                    con.States.Add(SheetState.Approved);
-                    con.StackSheetID = item.ID;
-                    var cps = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
-                    if (cps != null) ret.Paid = cps.Sum(it => it.Remain);
-                }
+                if (cps != null) ret.Paid = cps.Sum(it => it.Remain);
             }
             else
             {

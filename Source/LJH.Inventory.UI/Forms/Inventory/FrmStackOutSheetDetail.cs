@@ -280,13 +280,25 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 try
                 {
-                    StackOutSheet original = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheet.ID).QueryObject;
+                    if (sheet.State == SheetState.Add)
+                    {
+                        var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+                        if (ret.Result != ResultCode.Successful)
+                        {
+                            MessageBox.Show(ret.Message);
+                            return;
+                        }
+                        else
+                        {
+                            this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
+                        }
+                    }
                     string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
                     Print.StackOutSheetExporter exporter = null;
                     if (System.IO.File.Exists(modal))
                     {
                         exporter = new Print.StackOutSheetExporter(modal);
-                        var files = exporter.Export(original, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
+                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
                         foreach (var file in files)
                         {
                             if (System.IO.File.Exists(file))

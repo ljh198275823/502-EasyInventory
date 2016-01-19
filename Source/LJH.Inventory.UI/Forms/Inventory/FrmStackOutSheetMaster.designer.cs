@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +39,7 @@
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnLast3Month = new System.Windows.Forms.Button();
             this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -73,6 +74,8 @@
             this.colDriverCall = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarPlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -136,6 +139,9 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.txtCustomer);
+            this.panel5.Controls.Add(this.label2);
+            this.panel5.Controls.Add(this.btnLast3Month);
             this.panel5.Controls.Add(this.ucDateTimeInterval1);
             this.panel5.Controls.Add(this.chkSheetDate);
             this.panel5.Controls.Add(this.label3);
@@ -148,14 +154,24 @@
             this.panel5.Size = new System.Drawing.Size(1242, 87);
             this.panel5.TabIndex = 6;
             // 
+            // btnLast3Month
+            // 
+            this.btnLast3Month.Location = new System.Drawing.Point(329, 36);
+            this.btnLast3Month.Name = "btnLast3Month";
+            this.btnLast3Month.Size = new System.Drawing.Size(75, 39);
+            this.btnLast3Month.TabIndex = 135;
+            this.btnLast3Month.Text = "最近三个月";
+            this.btnLast3Month.UseVisualStyleBackColor = true;
+            this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
+            // 
             // ucDateTimeInterval1
             // 
             this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.Location = new System.Drawing.Point(382, 7);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(405, 7);
             this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
             this.ucDateTimeInterval1.ShowTime = true;
-            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(223, 74);
             this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
             this.ucDateTimeInterval1.TabIndex = 134;
             this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
@@ -163,7 +179,7 @@
             // chkSheetDate
             // 
             this.chkSheetDate.AutoSize = true;
-            this.chkSheetDate.Location = new System.Drawing.Point(309, 14);
+            this.chkSheetDate.Location = new System.Drawing.Point(332, 14);
             this.chkSheetDate.Name = "chkSheetDate";
             this.chkSheetDate.Size = new System.Drawing.Size(72, 16);
             this.chkSheetDate.TabIndex = 133;
@@ -414,9 +430,9 @@
             // 
             // colAmount
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -430,9 +446,9 @@
             // 
             // colShipDate
             // 
-            dataGridViewCellStyle2.Format = "G";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "G";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.colShipDate.HeaderText = "发货日期";
             this.colShipDate.Name = "colShipDate";
             this.colShipDate.ReadOnly = true;
@@ -482,6 +498,24 @@
             this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(645, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 136;
+            this.label2.Text = "客户";
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCustomer.Location = new System.Drawing.Point(680, 33);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(238, 30);
+            this.txtCustomer.TabIndex = 137;
+            this.txtCustomer.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // FrmStackOutSheetMaster
             // 
@@ -559,5 +593,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDriverCall;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarPlate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Button btnLast3Month;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtCustomer;
     }
 }
