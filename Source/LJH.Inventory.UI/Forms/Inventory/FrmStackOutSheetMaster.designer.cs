@@ -73,6 +73,9 @@
             this.colDriverCall = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarPlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
+            this.btnLast3Month = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -136,6 +139,9 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnLast3Month);
+            this.panel5.Controls.Add(this.txtCustomer);
+            this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.ucDateTimeInterval1);
             this.panel5.Controls.Add(this.chkSheetDate);
             this.panel5.Controls.Add(this.label3);
@@ -152,7 +158,7 @@
             // 
             this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.Location = new System.Drawing.Point(382, 7);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(397, 7);
             this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
             this.ucDateTimeInterval1.ShowTime = true;
             this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
@@ -163,7 +169,7 @@
             // chkSheetDate
             // 
             this.chkSheetDate.AutoSize = true;
-            this.chkSheetDate.Location = new System.Drawing.Point(309, 14);
+            this.chkSheetDate.Location = new System.Drawing.Point(324, 14);
             this.chkSheetDate.Name = "chkSheetDate";
             this.chkSheetDate.Size = new System.Drawing.Size(72, 16);
             this.chkSheetDate.TabIndex = 133;
@@ -483,6 +489,34 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(635, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 135;
+            this.label2.Text = "客户";
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCustomer.Location = new System.Drawing.Point(670, 24);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(235, 30);
+            this.txtCustomer.TabIndex = 136;
+            this.txtCustomer.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // btnLast3Month
+            // 
+            this.btnLast3Month.Location = new System.Drawing.Point(320, 36);
+            this.btnLast3Month.Name = "btnLast3Month";
+            this.btnLast3Month.Size = new System.Drawing.Size(75, 34);
+            this.btnLast3Month.TabIndex = 137;
+            this.btnLast3Month.Text = "最近三个月";
+            this.btnLast3Month.UseVisualStyleBackColor = true;
+            this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
+            // 
             // FrmStackOutSheetMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -559,5 +593,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDriverCall;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarPlate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Button btnLast3Month;
+        private System.Windows.Forms.TextBox txtCustomer;
+        private System.Windows.Forms.Label label2;
     }
 }

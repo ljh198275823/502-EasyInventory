@@ -474,5 +474,10 @@ namespace InventoryDemo
         {
             ShowSingleForm<FrmSliceRecordReport>();
         }
+
+        private void 客户付款流水报表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>();
+        }
     }
 }

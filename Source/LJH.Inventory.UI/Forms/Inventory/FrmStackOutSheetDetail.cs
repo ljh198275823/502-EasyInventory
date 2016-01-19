@@ -282,13 +282,25 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 try
                 {
-                    StackOutSheet real = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheet.ID).QueryObject; //从数据库获取最新的送货单，防止用户将当前未保存的数据打印出来
+                    if (sheet.State == SheetState.Add)
+                    {
+                        var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+                        if (ret.Result != ResultCode.Successful)
+                        {
+                            MessageBox.Show(ret.Message);
+                            return;
+                        }
+                        else
+                        {
+                            this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
+                        }
+                    }
                     string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
                     Print.StackOutSheetExporter exporter = null;
                     if (System.IO.File.Exists(modal))
                     {
                         exporter = new Print.StackOutSheetExporter(modal);
-                        var files = exporter.Export(real, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
+                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
                         foreach (var file in files)
                         {
                             if (System.IO.File.Exists(file))
@@ -302,7 +314,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 Process prs = new Process();
                                 prs.StartInfo = psi;
                                 prs.Start();
-                                //prs.WaitForExit();
                                 LJH.GeneralLibrary.LOG.FileLog.Log("打印", file);
                             }
                         }
@@ -315,7 +326,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 catch (Exception ex)
                 {
                     LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
-                    //MessageBox.Show(ex.Message, "打印失败");
                 }
             }
         }

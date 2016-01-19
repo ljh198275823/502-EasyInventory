@@ -29,6 +29,8 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 预付款
         /// </summary>
-        Prepay=4
+        Prepay=4,
+        转公账 = 5,
+        付承兑 = 6,
     }
 }

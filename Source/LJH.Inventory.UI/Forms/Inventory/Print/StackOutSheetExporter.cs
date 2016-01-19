@@ -85,10 +85,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                     cell = row.GetCell(7);
                     if (cell != null) cell.SetCellValue(info.CarPlate);
                 }
+                var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
                 row = sheet.GetRow(4);
                 if (row != null)
                 {
                     ICell cell = row.GetCell(1);
+                    if (cell != null) cell.SetCellValue(finance != null ? finance.FirstPaymentMode : null);
+                    cell = row.GetCell(4);
                     if (!string.IsNullOrEmpty(info.WareHouseID))
                     {
                         WareHouse ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(info.WareHouseID).QueryObject;
@@ -101,7 +104,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 if (row != null)
                 {
                     var customerState = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(info.CustomerID).QueryObject;
-                    var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
                     ICell cell = row.GetCell(1);
                     if (cell != null) cell.SetCellValue((double)(finance != null ? finance.Paid : 0));
                     cell = row.GetCell(4);

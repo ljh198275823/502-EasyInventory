@@ -100,6 +100,12 @@
     <Compile Include="Forms\Financial\FrmSupplierPaymentMaster.Designer.cs">
       <DependentUpon>FrmSupplierPaymentMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\Report\FrmCustomerPaymentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Report\FrmCustomerPaymentReport.Designer.cs">
+      <DependentUpon>FrmCustomerPaymentReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\View\FrmCustomerReceivableView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -697,6 +703,9 @@
     <EmbeddedResource Include="Forms\Financial\FrmSupplierPaymentMaster.resx">
       <DependentUpon>FrmSupplierPaymentMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Report\FrmCustomerPaymentReport.resx">
+      <DependentUpon>FrmCustomerPaymentReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\View\FrmCustomerReceivableView.resx">
       <DependentUpon>FrmCustomerReceivableView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1151,6 +1160,7 @@
   <ItemGroup>
     <None Include="Resources\help.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1080,7 +1080,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:悦涵企业管理系统"
         "ProductCode" = "8:{9CF9D9A7-5D1A-4BE0-BD35-39143209D142}"
-        "PackageCode" = "8:{1F330612-3292-4FAB-AB4E-6E440CAA4400}"
+        "PackageCode" = "8:{8C38B706-8885-4351-912E-FD6C9BC69AF9}"
         "UpgradeCode" = "8:{261BA1C0-59AB-4607-ACDF-09356A0C61A3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

@@ -27,7 +27,7 @@ namespace LJH.Inventory.BusinessModel.Resource
                 case  PaymentMode.Prepay :
                     return "预付款";
                 default :
-                    return string.Empty;
+                    return pm.ToString();
             }
         }
     }

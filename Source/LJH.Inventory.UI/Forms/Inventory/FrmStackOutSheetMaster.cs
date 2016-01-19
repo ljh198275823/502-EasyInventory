@@ -25,6 +25,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 私有变量
         private List<StackOutSheet> _Sheets = null;
         private List<WareHouse> _Warehouses = null;
+        private List<CompanyInfo> _AllCustomers = null;
         #endregion
 
         #region 私有方法
@@ -51,6 +52,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     else
                     {
                         items = null;
+                    }
+                }
+                if (!string.IsNullOrEmpty(txtCustomer.Text))
+                {
+                    if (_AllCustomers == null) _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
+                    if (_AllCustomers != null)
+                    {
+                        List<CompanyInfo> pcs = _AllCustomers.Where(it => it.Name.Contains(txtCustomer.Text)).ToList();
+                        if (pcs != null && pcs.Count > 0)
+                        {
+                            items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
                 }
                 items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
@@ -162,6 +179,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             PerformAddData();
         }
         #endregion
+
+        private void btnLast3Month_Click(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Today;
+            ucDateTimeInterval1.StartDateTime = today.AddMonths(-3);
+            ucDateTimeInterval1.EndDateTime = today.AddDays(1).AddSeconds(-1);
+        }
 
        
     }
