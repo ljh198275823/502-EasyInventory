@@ -9,6 +9,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.Inventory.UI.Forms.Sale;
+using LJH.Inventory.UI.Forms.Financial;
 using LJH.Inventory.UI.Forms.General;
 using LJH.Inventory.UI.Forms.Sale.View;
 
@@ -378,11 +379,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 事件处理程序
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmCustomerMaster frm = new FrmCustomerMaster();
+            FrmCustomerFinancialStateMaster frm = new FrmCustomerFinancialStateMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                var c = frm.SelectedItem as CompanyInfo;
+                var ct = frm.SelectedItem as CustomerFinancialState;
+                var c = ct.Customer;
                 txtCustomer.Tag = c;
                 txtCustomer.Text = c != null ? c.Name : string.Empty;
                 txtAddress.Text = c != null ? c.Address : string.Empty;

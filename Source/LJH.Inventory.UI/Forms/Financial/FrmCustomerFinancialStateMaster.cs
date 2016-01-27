@@ -48,6 +48,18 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 重写基类方法
+        protected override void Init()
+        {
+            base.Init();
+            if (ForSelect)
+            {
+                this.Text = "客户选择";
+                this.GridView.ContextMenuStrip = null;
+                this.GridView.Columns["colTax"].Visible = false;
+                this.GridView.Columns["colTaxBill"].Visible = false;
+            }
+        }
+
         protected override void ReFreshData()
         {
             categoryTree.Init();
