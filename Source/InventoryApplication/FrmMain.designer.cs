@@ -488,7 +488,6 @@
             this.mnu_PurchaseOrder.Name = "mnu_PurchaseOrder";
             this.mnu_PurchaseOrder.Size = new System.Drawing.Size(160, 22);
             this.mnu_PurchaseOrder.Text = "采购订单管理";
-            this.mnu_PurchaseOrder.Click += new System.EventHandler(this.mnu_PurchaseOrder_Click);
             // 
             // toolStripSeparator5
             // 
@@ -538,7 +537,6 @@
             this.mnu_Order.Name = "mnu_Order";
             this.mnu_Order.Size = new System.Drawing.Size(148, 22);
             this.mnu_Order.Text = "销售订单管理";
-            this.mnu_Order.Click += new System.EventHandler(this.mnu_Order_Click);
             // 
             // toolStripSeparator3
             // 

@@ -23,7 +23,7 @@ using LJH.Inventory.UI.Forms.Inventory.Report;
 
 namespace InventoryApplication
 {
-    public partial class FrmMain : Form, IMyMDIForm, LJH.GeneralLibrary.Core.UI.IOperatorRender
+    public partial class FrmMain : Form, LJH.GeneralLibrary.Core.UI.IOperatorRender
     {
         public FrmMain()
         {
@@ -31,9 +31,9 @@ namespace InventoryApplication
         }
 
         #region 私有变量
-        private List<Form> _openedForms = new List<Form>();
+        private Dictionary<Form, string> _openedForms = new Dictionary<Form, string>();
         private SoftDogInfo _SoftDog;
-        private bool _EnableSoftDog = true; //启用加密狗
+        private bool _EnableSoftDog = false; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2016, 1, 31);
         #endregion
 
@@ -171,7 +171,7 @@ namespace InventoryApplication
                 ShowOperatorRights();
                 if (_openedForms != null && _openedForms.Count > 0)
                 {
-                    foreach (Form frm in _openedForms)
+                    foreach (Form frm in _openedForms.Keys)
                     {
                         if (frm is IOperatorRender)
                         {
@@ -238,10 +238,13 @@ namespace InventoryApplication
         /// </summary>
         /// <param name="formType">要打开的窗体类型</param>
         /// <param name="mainPanel">是否在主面板中打开,否则在从面板中打开</param>
-        public T ShowSingleForm<T>(bool mainPanel = true, bool showHeader = true) where T : Form
+        public T ShowSingleForm<T>(object menu,bool mainPanel = true) where T : Form
         {
+            string cmd = null;
+            if (menu is ToolStripMenuItem) cmd = (menu as ToolStripMenuItem).Name;
+
             T instance = null;
-            foreach (Form frm in _openedForms)
+            foreach (Form frm in _openedForms.Keys)
             {
                 if (frm.GetType() == typeof(T))
                 {
@@ -255,14 +258,44 @@ namespace InventoryApplication
                 instance = Activator.CreateInstance(typeof(T)) as T;
                 instance.Tag = this;
                 instance.TopLevel = false;
-                _openedForms.Add(instance);
-                AddForm(instance, mainPanel, showHeader);
+                _openedForms.Add(instance, cmd);
+                AddForm(instance, mainPanel, true);
                 instance.FormClosed += delegate(object sender, FormClosedEventArgs e)
                 {
                     _openedForms.Remove(instance);
                 };
             }
             return instance;
+        }
+
+        private void SaveOpenedForms()
+        {
+            string temp = string.Empty;
+            foreach (var pair in _openedForms)
+            {
+                if (!string.IsNullOrEmpty(pair.Value))
+                {
+                    temp += pair.Value + ";";
+                }
+            }
+            if (!string.IsNullOrEmpty(temp)) AppSettings.Current.SaveConfig("OpenedForms", temp);
+        }
+
+        private void OpenLastForms()
+        {
+            string temp = AppSettings.Current.GetConfigContent("OpenedForms");
+            if (!string.IsNullOrEmpty(temp))
+            {
+                string[] ms = temp.Split(';');
+                foreach (var str in ms)
+                {
+                    if (!string.IsNullOrEmpty(str))
+                    {
+                        var c = this.menuStrip1.Items.Find(str, true);
+                        if (c != null && c.Length == 1 && c[0].Enabled) c[0].PerformClick();
+                    }
+                }
+            }
         }
         #endregion
 
@@ -274,27 +307,27 @@ namespace InventoryApplication
 
         private void mnu_Product_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmProductMaster>();
+            ShowSingleForm<FrmProductMaster>(sender);
         }
 
         private void mnu_DeliverySheet_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmStackOutSheetMaster>();
+            ShowSingleForm<FrmStackOutSheetMaster>(sender);
         }
 
         private void mnu_ProductCategory_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmProductCategoryMaster>();
+            ShowSingleForm<FrmProductCategoryMaster>(sender);
         }
 
         private void mnu_Customer_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmCustomerMaster>();
+            ShowSingleForm<FrmCustomerMaster>(sender);
         }
 
         private void mnu_WareHouse_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmWareHouseMaster>();
+            ShowSingleForm<FrmWareHouseMaster>(sender);
         }
 
         private void mnu_Exit_Click(object sender, EventArgs e)
@@ -304,12 +337,12 @@ namespace InventoryApplication
 
         private void mnu_Operator_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmOperatorMaster>();
+            ShowSingleForm<FrmOperatorMaster>(sender);
         }
 
         private void mnu_Role_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmRoleMaster>();
+            ShowSingleForm<FrmRoleMaster>(sender);
         }
 
         private void mnu_ChangePwd_Click(object sender, EventArgs e)
@@ -333,22 +366,22 @@ namespace InventoryApplication
 
         private void mnu_Inventory_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSteelRollSliceMaster>();
+            ShowSingleForm<FrmSteelRollSliceMaster>(sender);
         }
 
         private void mnu_InventorySheet_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmStackInSheetMaster>();
+            ShowSingleForm<FrmStackInSheetMaster>(sender);
         }
 
         private void mnu_CustomerPayment_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmCustomerPaymentMaster>();
+            ShowSingleForm<FrmCustomerPaymentMaster>(sender);
         }
 
         private void mnu_Expanditure_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmExpenditureRecordMaster>();
+            ShowSingleForm<FrmExpenditureRecordMaster>(sender);
         }
 
         private void mnu_DogInfo_Click(object sender, EventArgs e)
@@ -360,42 +393,42 @@ namespace InventoryApplication
 
         private void mnu_DeliveryRecordReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmDeliveryRecordReport>();
+            ShowSingleForm<FrmDeliveryRecordReport>(sender);
         }
 
         private void mnu_DeliveryStatistic_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmDeliveryStatistics>();
+            ShowSingleForm<FrmDeliveryStatistics>(sender);
         }
 
         private void mnu_Performance_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSalesPersonPerformanceReport>();
+            ShowSingleForm<FrmSalesPersonPerformanceReport>(sender);
         }
 
         private void mnu_CollectionType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmCollectionTypeMaster>();
+            ShowSingleForm<FrmCollectionTypeMaster>(sender);
         }
 
         private void mnu_CurrencyType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmCurrencyTypeMaster>();
+            ShowSingleForm<FrmCurrencyTypeMaster>(sender);
         }
 
         private void mnu_Unit_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmUnitMaster>();
+            ShowSingleForm<FrmUnitMaster>(sender);
         }
 
         private void mnu_Transport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmTransportMaster>();
+            ShowSingleForm<FrmTransportMaster>(sender);
         }
 
         private void mnu_Supplier_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSupplierMaster>();
+            ShowSingleForm<FrmSupplierMaster>(sender);
         }
 
         private void mnu_BackupData_Click(object sender, EventArgs e)
@@ -404,69 +437,49 @@ namespace InventoryApplication
             frm.ShowDialog();
         }
 
-        private void mnu_PurchaseOrder_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmPurchaseOrderMaster>();
-        }
-
-        private void mnu_CustomerType_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCustomerTypeMaster>();
-        }
-
-        private void mnu_SupplierType_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmSupplierTypeMaster>();
-        }
-
-        private void mnu_Order_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmOrderMaster>();
-        }
-
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmExpenditureTypeMaster>();
+            ShowSingleForm<FrmExpenditureTypeMaster>(sender);
         }
 
         private void mnu_OrderPaymentReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmOrderPaymentReport>();
+            ShowSingleForm<FrmOrderPaymentReport>(sender);
         }
 
         private void mnu_RelatedCompanyType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmRelatedCompanyTypeMaster>();
+            ShowSingleForm<FrmRelatedCompanyTypeMaster>(sender);
         }
 
         private void mnu_RelatedCompany_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmRelatedCompanyMaster>();
+            ShowSingleForm<FrmRelatedCompanyMaster>(sender);
         }
 
         private void mnu_WareHouse_Click_1(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmWareHouseMaster>();
+            ShowSingleForm<FrmWareHouseMaster>(sender);
         }
 
         private void mnu_CustomerReceivable_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmCustomerFinancialStateMaster>();
+            ShowSingleForm<FrmCustomerFinancialStateMaster>(sender);
         }
 
         private void mnu_OrderMonitor_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmOrderItemRecordMaster>();
+            ShowSingleForm<FrmOrderItemRecordMaster>(sender);
         }
 
         private void mnu_PurchaseMonitor_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmPurchaseItemRecordMaster>();
+            ShowSingleForm<FrmPurchaseItemRecordMaster>(sender);
         }
 
         private void mnu_CustomerPaymentReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>();
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>(sender);
         }
 
         private void mnu_HorizontalSplit_Click(object sender, EventArgs e)
@@ -507,37 +520,37 @@ namespace InventoryApplication
 
         private void mnu_Staff_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmStaffMaster>();
+            ShowSingleForm<FrmStaffMaster>(sender);
         }
 
         private void mnu_SupplierState_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSupplierFinancialStateMaster>();
+            ShowSingleForm<FrmSupplierFinancialStateMaster>(sender);
         }
 
         private void mnu_SupplierPayment_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSupplierPaymentMaster>();
+            ShowSingleForm<FrmSupplierPaymentMaster>(sender);
         }
 
         private void mnu_InventoryRecord_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmInventoryRecordReport>();
+            ShowSingleForm<FrmInventoryRecordReport>(sender);
         }
 
         private void mnu_Proxy_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmProxyMaster>();
+            ShowSingleForm<FrmProxyMaster>(sender);
         }
 
         private void mnu_Material_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSteelRollMaster>();
+            ShowSingleForm<FrmSteelRollMaster>(sender);
         }
 
         private void mnu_SliceRecordReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSliceRecordReport>();
+            ShowSingleForm<FrmSliceRecordReport>(sender);
         }
         #endregion
 
@@ -562,6 +575,8 @@ namespace InventoryApplication
             CheckHostDog();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
             this.tmrSoftDogChecker.Enabled = _EnableSoftDog;
+
+            OpenLastForms();
         }
 
         private void tmrSoftDogChecker_Tick(object sender, EventArgs e)
@@ -589,10 +604,9 @@ namespace InventoryApplication
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
+            SaveOpenedForms();
             Environment.Exit(0);
         }
         #endregion
-
-
     }
 }
