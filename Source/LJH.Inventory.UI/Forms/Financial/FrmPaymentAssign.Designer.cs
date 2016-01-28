@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPaymentAssign));
             this.txtID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
@@ -42,13 +43,13 @@
             this.GridView = new System.Windows.Forms.DataGridView();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheck = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
@@ -150,28 +151,27 @@
             this.GridView.AllowUserToAddRows = false;
             this.GridView.AllowUserToDeleteRows = false;
             this.GridView.AllowUserToResizeRows = false;
-            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GridView.BackgroundColor = System.Drawing.Color.White;
             this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCheck,
             this.colSheetID,
             this.colOrderID,
             this.colClassID,
             this.colCreateDate,
             this.colRemain,
             this.colAssign,
+            this.colCheck,
             this.colMemo});
             this.GridView.Location = new System.Drawing.Point(6, 101);
             this.GridView.Name = "GridView";
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridView.Size = new System.Drawing.Size(702, 215);
+            this.GridView.Size = new System.Drawing.Size(800, 215);
             this.GridView.TabIndex = 118;
-            this.GridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.GridView_CellBeginEdit);
             this.GridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             this.GridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellEndEdit);
             // 
@@ -180,7 +180,7 @@
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnClose.Location = new System.Drawing.Point(621, 330);
+            this.btnClose.Location = new System.Drawing.Point(719, 330);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 120;
@@ -192,20 +192,13 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOk.Location = new System.Drawing.Point(512, 330);
+            this.btnOk.Location = new System.Drawing.Point(610, 330);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 119;
             this.btnOk.Text = "确定(&O)";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // colCheck
-            // 
-            this.colCheck.HeaderText = "选择";
-            this.colCheck.Name = "colCheck";
-            this.colCheck.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCheck.Width = 40;
             // 
             // colSheetID
             // 
@@ -250,8 +243,18 @@
             // 
             // colAssign
             // 
+            dataGridViewCellStyle3.Format = "N2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAssign.HeaderText = "核销金额";
             this.colAssign.Name = "colAssign";
+            // 
+            // colCheck
+            // 
+            this.colCheck.HeaderText = "";
+            this.colCheck.Name = "colCheck";
+            this.colCheck.ReadOnly = true;
+            this.colCheck.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCheck.Width = 60;
             // 
             // colMemo
             // 
@@ -268,7 +271,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(716, 365);
+            this.ClientSize = new System.Drawing.Size(814, 365);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.GridView);
@@ -303,13 +306,13 @@
         private System.Windows.Forms.DataGridView GridView;
         protected System.Windows.Forms.Button btnClose;
         protected System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
+        private System.Windows.Forms.DataGridViewButtonColumn colCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }
