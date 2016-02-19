@@ -19,3 +19,10 @@ BEGIN
 	exec ('alter table CustomerPayment add Bank nvarchar(50)')
 end
 go
+
+--2016-2-19
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='DefaultLinker' AND id = OBJECT_ID(N'[dbo].[Customer]'))
+BEGIN
+	exec ('alter table Customer add DefaultLinker uniqueidentifier')
+end
+go
