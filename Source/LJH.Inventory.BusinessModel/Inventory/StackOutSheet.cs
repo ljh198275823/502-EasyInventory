@@ -196,7 +196,7 @@ namespace LJH.Inventory.BusinessModel
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
-                    Memo =inventory.SerialNumber 
+                    Memo =inventory.Carplate  
                 };
                 if (inventory.Weight.HasValue && inventory.Model != "开平")
                 {
