@@ -32,7 +32,7 @@ namespace InventoryDemo
         #region 私有变量
         private List<Form> _openedForms = new List<Form>();
         private SoftDogInfo _SoftDog;
-        private DateTime _ExpireDate = new DateTime(2016, 1, 31);
+        private DateTime _ExpireDate = new DateTime(2016, 5, 31);
         #endregion
 
         #region 私有方法

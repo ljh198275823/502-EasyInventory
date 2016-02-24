@@ -66,6 +66,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.Supplier == cmbSupplier.Text).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer == customerCombobox1.Text).ToList();
+                if (!string.IsNullOrEmpty(txtCarPlate.Text.Trim())) items = items.Where(it => !string.IsNullOrEmpty(it.Carplate) && it.Carplate.Contains(txtCarPlate.Text.Trim())).ToList();
                 items.RemoveAll(it => (!chkNullified.Checked && it.State == ProductInventoryState.Nullified) ||
                                      (!chkShipped.Checked && it.State == ProductInventoryState.Shipped)
                                 );
