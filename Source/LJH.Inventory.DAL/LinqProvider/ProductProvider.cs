@@ -43,6 +43,17 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.Name)) ret = ret.Where(item => item.Name.Contains(con.Name));
                 if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.CategoryID == con.CategoryID);
                 if (!string.IsNullOrEmpty(con.Specification)) ret = ret.Where(item => item.Specification.Contains(con.Specification));
+                if (con.IsService.HasValue)
+                {
+                    if (con.IsService.Value)
+                    {
+                        ret = ret.Where(it => it.IsService == true);
+                    }
+                    else
+                    {
+                        ret = ret.Where(it => it.IsService == false);
+                    }
+                }
             }
             return ret.ToList();
         }

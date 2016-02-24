@@ -33,7 +33,7 @@ namespace InventoryApplication
         #region 私有变量
         private Dictionary<Form, string> _openedForms = new Dictionary<Form, string>();
         private SoftDogInfo _SoftDog;
-        private bool _EnableSoftDog = false; //启用加密狗
+        private bool _EnableSoftDog = true; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2016, 1, 31);
         #endregion
 
@@ -238,7 +238,7 @@ namespace InventoryApplication
         /// </summary>
         /// <param name="formType">要打开的窗体类型</param>
         /// <param name="mainPanel">是否在主面板中打开,否则在从面板中打开</param>
-        public T ShowSingleForm<T>(object menu,bool mainPanel = true) where T : Form
+        public T ShowSingleForm<T>(object menu, bool mainPanel = true) where T : Form
         {
             string cmd = null;
             if (menu is ToolStripMenuItem) cmd = (menu as ToolStripMenuItem).Name;
@@ -608,5 +608,14 @@ namespace InventoryApplication
             Environment.Exit(0);
         }
         #endregion
+
+        private void 其它费用管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProductMaster frm = new FrmProductMaster();
+            LJH.Inventory.BusinessModel.SearchCondition.ProductSearchCondition con = new LJH.Inventory.BusinessModel.SearchCondition.ProductSearchCondition();
+            con.IsService = true;
+            frm.SearchCondition = con;
+            frm.ShowDialog();
+        }
     }
 }

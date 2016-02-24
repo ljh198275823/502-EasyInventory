@@ -48,6 +48,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lnkPayment = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
             this.lnkDriver = new System.Windows.Forms.LinkLabel();
             this.txtCarPlate = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtDriverCall = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -101,7 +102,7 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
+            this.其它费用ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -128,28 +129,29 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_AddSlice,
             this.mnu_AddSteelRoll,
+            this.其它费用ToolStripMenuItem,
             this.mnu_RemoveItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
             // 
             // btn_AddSlice
             // 
             this.btn_AddSlice.Name = "btn_AddSlice";
-            this.btn_AddSlice.Size = new System.Drawing.Size(136, 22);
+            this.btn_AddSlice.Size = new System.Drawing.Size(152, 22);
             this.btn_AddSlice.Text = "选择小件";
             this.btn_AddSlice.Click += new System.EventHandler(this.btn_AddSlice_Click);
             // 
             // mnu_AddSteelRoll
             // 
             this.mnu_AddSteelRoll.Name = "mnu_AddSteelRoll";
-            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(136, 22);
+            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(152, 22);
             this.mnu_AddSteelRoll.Text = "选择原材料";
             this.mnu_AddSteelRoll.Click += new System.EventHandler(this.mnu_AddSteelRoll_Click);
             // 
             // mnu_RemoveItem
             // 
             this.mnu_RemoveItem.Name = "mnu_RemoveItem";
-            this.mnu_RemoveItem.Size = new System.Drawing.Size(136, 22);
+            this.mnu_RemoveItem.Size = new System.Drawing.Size(152, 22);
             this.mnu_RemoveItem.Text = "删除";
             this.mnu_RemoveItem.Click += new System.EventHandler(this.mnu_Remove_Click);
             // 
@@ -289,6 +291,15 @@
             this.lnkPayment.TabIndex = 142;
             this.lnkPayment.TabStop = true;
             this.lnkPayment.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(665, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.TabIndex = 141;
+            this.label1.Text = "已付金额:";
             // 
             // lnkDriver
             // 
@@ -796,14 +807,12 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // label1
+            // 其它费用ToolStripMenuItem
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(665, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
-            this.label1.TabIndex = 141;
-            this.label1.Text = "已付金额:";
+            this.其它费用ToolStripMenuItem.Name = "其它费用ToolStripMenuItem";
+            this.其它费用ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.其它费用ToolStripMenuItem.Text = "其它费用";
+            this.其它费用ToolStripMenuItem.Click += new System.EventHandler(this.其它费用ToolStripMenuItem_Click);
             // 
             // FrmStackOutSheetDetail
             // 
@@ -912,5 +921,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem 其它费用ToolStripMenuItem;
     }
 }

@@ -516,5 +516,14 @@ namespace InventoryDemo
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>(sender);
         }
+
+        private void 其它费用管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProductMaster frm = new FrmProductMaster();
+            LJH.Inventory.BusinessModel.SearchCondition.ProductSearchCondition con = new LJH.Inventory.BusinessModel.SearchCondition.ProductSearchCondition();
+            con.IsService = true;
+            frm.SearchCondition = con;
+            frm.ShowDialog();
+        }
     }
 }

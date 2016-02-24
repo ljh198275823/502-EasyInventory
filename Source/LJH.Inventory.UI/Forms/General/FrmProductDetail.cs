@@ -86,11 +86,11 @@ namespace LJH.Inventory.UI.Forms.General
                 MessageBox.Show("类别没有指定");
                 return false;
             }
-            if (string.IsNullOrEmpty(cmbSpecification.Text))
-            {
-                MessageBox.Show("规格没有指定");
-                return false;
-            }
+            //if (string.IsNullOrEmpty(cmbSpecification.Text))
+            //{
+            //    MessageBox.Show("规格没有指定");
+            //    return false;
+            //}
             return true;
         }
 
@@ -138,11 +138,12 @@ namespace LJH.Inventory.UI.Forms.General
             p.CategoryID = Category != null ? Category.ID : null;
             p.Category = Category;
             p.Specification = cmbSpecification.Text;
-            p.Model = "原材料";
-            p.Unit = "吨";
+            p.Model = string.Empty;
+            p.Unit = string.Empty;
             p.Price = txtPrice.DecimalValue;
             p.Cost = txtCost.DecimalValue;
             p.Brand = cmbBrand.Text;
+            p.IsService = true;
             p.Memo = txtMemo.Text;
             return p;
         }

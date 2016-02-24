@@ -31,6 +31,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         /// 获取或设置要查询的产品的ID列表
         /// </summary>
         public List<string> ProductIDS { get; set; }
+
+        public bool? IsService { get; set; }
         #endregion
     }
 }

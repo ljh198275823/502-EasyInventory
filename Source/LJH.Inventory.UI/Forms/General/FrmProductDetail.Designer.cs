@@ -53,12 +53,12 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(471, 226);
+            this.btnClose.Location = new System.Drawing.Point(471, 166);
             this.btnClose.TabIndex = 17;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(362, 226);
+            this.btnOk.Location = new System.Drawing.Point(362, 166);
             this.btnOk.TabIndex = 16;
             // 
             // label1
@@ -82,7 +82,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 144);
+            this.label5.Location = new System.Drawing.Point(16, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 12);
             this.label5.TabIndex = 6;
@@ -108,7 +108,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(52, 140);
+            this.txtMemo.Location = new System.Drawing.Point(52, 75);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(341, 21);
             this.txtMemo.TabIndex = 14;
@@ -116,25 +116,27 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 110);
+            this.label6.Location = new System.Drawing.Point(16, 147);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 8;
             this.label6.Text = "售价:";
+            this.label6.Visible = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(218, 110);
+            this.label7.Location = new System.Drawing.Point(218, 147);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 12);
             this.label7.TabIndex = 9;
             this.label7.Text = "采购:";
+            this.label7.Visible = false;
             // 
             // txtPrice
             // 
             this.txtPrice.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPrice.Location = new System.Drawing.Point(52, 105);
+            this.txtPrice.Location = new System.Drawing.Point(52, 142);
             this.txtPrice.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -150,11 +152,12 @@
             this.txtPrice.Size = new System.Drawing.Size(138, 21);
             this.txtPrice.TabIndex = 10;
             this.txtPrice.Text = "0.00";
+            this.txtPrice.Visible = false;
             // 
             // txtCost
             // 
             this.txtCost.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCost.Location = new System.Drawing.Point(255, 105);
+            this.txtCost.Location = new System.Drawing.Point(255, 142);
             this.txtCost.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -170,24 +173,27 @@
             this.txtCost.Size = new System.Drawing.Size(138, 21);
             this.txtCost.TabIndex = 11;
             this.txtCost.Text = "0.00";
+            this.txtCost.Visible = false;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 74);
+            this.label10.Location = new System.Drawing.Point(16, 174);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 12);
             this.label10.TabIndex = 15;
             this.label10.Text = "规格:";
+            this.label10.Visible = false;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(214, 74);
+            this.label11.Location = new System.Drawing.Point(214, 174);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 12);
             this.label11.TabIndex = 17;
             this.label11.Text = "厂家:";
+            this.label11.Visible = false;
             // 
             // txtCategory
             // 
@@ -219,7 +225,7 @@
             this.tabControl1.Location = new System.Drawing.Point(10, 7);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(538, 205);
+            this.tabControl1.Size = new System.Drawing.Size(538, 145);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -244,34 +250,36 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(530, 179);
+            this.tabPage1.Size = new System.Drawing.Size(530, 119);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本";
             // 
             // cmbBrand
             // 
             this.cmbBrand.FormattingEnabled = true;
-            this.cmbBrand.Location = new System.Drawing.Point(255, 71);
+            this.cmbBrand.Location = new System.Drawing.Point(255, 171);
             this.cmbBrand.Name = "cmbBrand";
             this.cmbBrand.Size = new System.Drawing.Size(138, 20);
             this.cmbBrand.TabIndex = 26;
+            this.cmbBrand.Visible = false;
             // 
             // cmbSpecification
             // 
             this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(52, 71);
+            this.cmbSpecification.Location = new System.Drawing.Point(52, 171);
             this.cmbSpecification.Name = "cmbSpecification";
             this.cmbSpecification.Size = new System.Drawing.Size(138, 20);
             this.cmbSpecification.TabIndex = 25;
+            this.cmbSpecification.Visible = false;
             // 
             // FrmProductDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(557, 264);
+            this.ClientSize = new System.Drawing.Size(557, 204);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmProductDetail";
-            this.Text = "原材料明细";
+            this.Text = "产品明细";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.tabControl1, 0);

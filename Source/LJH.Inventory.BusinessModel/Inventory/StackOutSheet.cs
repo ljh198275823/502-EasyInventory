@@ -209,6 +209,30 @@ namespace LJH.Inventory.BusinessModel
                 Items.Add(si);
             }
         }
+
+        public void AddItems(Product p, decimal count)
+        {
+            if (count <= 0) return;
+            if (Items == null) Items = new List<StackOutItem>();
+            var si = Items.SingleOrDefault(it => it.ProductID == p.ID);
+            if (si != null)
+            {
+                si.Count += count;
+            }
+            else
+            {
+                si = new StackOutItem()
+                {
+                    ID = Guid.NewGuid(),
+                    ProductID = p.ID,
+                    Unit = p.Unit,
+                    SheetNo = this.ID,
+                    Price = 0,
+                    Count = count
+                };
+                Items.Add(si);
+            }
+        }
         /// <summary>
         /// 获取
         /// </summary>
@@ -219,6 +243,7 @@ namespace LJH.Inventory.BusinessModel
             List<StackOutItem> ret = new List<StackOutItem>();
 
             var groups = from it in Items
+                         orderby it.InventoryItem descending 
                          group it by it.ProductID;
             foreach (var g in groups)
             {

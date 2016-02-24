@@ -82,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             row.Tag = item;
             Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
-            if (item.ID == Guid.Empty)
+            if (item.ID == Guid.Empty || item.InventoryItem == null)
             {
                 row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
                 row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
@@ -565,6 +565,25 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        private void 其它费用ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProductMaster frm = new FrmProductMaster();
+            frm.ForSelect = true;
+            ProductSearchCondition con = new ProductSearchCondition();
+            con.IsService = true;
+            frm.SearchCondition = con;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                StackOutSheet sheet = UpdatingItem as StackOutSheet;
+                Product p = frm.SelectedItem as Product;
+                if (p != null)
+                {
+                    sheet.AddItems(p, 1);
+                    ShowDeliveryItemsOnGrid(sheet);
+                }
+            }
+        }
+
         private void mnu_Remove_Click(object sender, EventArgs e)
         {
             if (ItemsGrid.SelectedCells.Count > 0)
@@ -624,5 +643,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
+
+        
     }
 }

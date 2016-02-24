@@ -49,6 +49,8 @@ namespace LJH.Inventory.BLL
 
         private void Assign(StackOutItem si, InventoryOutType inventoryOutType, List<ProductInventoryItem> inventoryItems, List<ProductInventoryItem> addingItems)
         {
+            Product p = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetByID(si.ProductID).QueryObject;
+            if (p.IsService.HasValue && p.IsService.Value) return; //如果是服务，则不用更新库存
             List<ProductInventoryItem> items = new List<ProductInventoryItem>();
             items.AddRange(inventoryItems.Where(item => item.State == ProductInventoryState.WaitShipping && item.ProductID == si.ProductID && item.DeliveryItem == si.ID)); //出货单项待出货的项最高优先级
             if (items.Sum(item => item.Count) < si.Count) throw new Exception(string.Format("产品 {0} 库存不足，出货失败!", si.ProductID));

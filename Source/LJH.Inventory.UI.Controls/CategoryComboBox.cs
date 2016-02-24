@@ -38,7 +38,7 @@ namespace LJH.Inventory.UI.Controls
             if (items.Count > 0)
             {
                 items = (from item in items
-                         orderby item.Name descending
+                         orderby item.ID ascending
                          select item).ToList();
                 items.Insert(0, new ProductCategory());
                 this.DataSource = items;
