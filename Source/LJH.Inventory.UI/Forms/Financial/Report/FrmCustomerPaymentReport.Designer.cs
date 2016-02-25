@@ -91,6 +91,7 @@
             this.lnkCustomer.TabIndex = 33;
             this.lnkCustomer.TabStop = true;
             this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
             // 
             // groupBox3
             // 
@@ -111,6 +112,7 @@
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(153, 21);
             this.txtCustomer.TabIndex = 37;
+            this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
             // 
             // dataGridView1
             // 

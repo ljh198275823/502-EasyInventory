@@ -35,6 +35,8 @@
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtBillID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,8 +44,6 @@
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtBillID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -90,6 +90,7 @@
             this.lnkCustomer.TabIndex = 33;
             this.lnkCustomer.TabStop = true;
             this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
             // 
             // groupBox3
             // 
@@ -104,6 +105,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "发票号";
+            // 
+            // txtBillID
+            // 
+            this.txtBillID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtBillID.Location = new System.Drawing.Point(59, 56);
+            this.txtBillID.Name = "txtBillID";
+            this.txtBillID.Size = new System.Drawing.Size(153, 21);
+            this.txtBillID.TabIndex = 38;
+            // 
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -112,6 +130,7 @@
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(153, 21);
             this.txtCustomer.TabIndex = 37;
+            this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
             // 
             // dataGridView1
             // 
@@ -184,23 +203,6 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // txtBillID
-            // 
-            this.txtBillID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtBillID.Location = new System.Drawing.Point(59, 56);
-            this.txtBillID.Name = "txtBillID";
-            this.txtBillID.Size = new System.Drawing.Size(153, 21);
-            this.txtBillID.TabIndex = 38;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 39;
-            this.label1.Text = "发票号";
             // 
             // FrmCustomerTaxBillReport
             // 
