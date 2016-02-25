@@ -405,6 +405,12 @@
       <Column Name="Supplier" Member="Supplier"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Manufacture" Member="Manufacture"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="SerialNumber" Member="SerialNumber"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Material" Member="Material"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Carplate" Member="Carplate"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="PurchasePrice" Member="PurchasePrice"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="WithTax" Member="WithTax"  DbType="bit" UpdateCheck="Never"/>
+      <Column Name="TransCost" Member="TransCost"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="OtherCost" Member="OtherCost"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>

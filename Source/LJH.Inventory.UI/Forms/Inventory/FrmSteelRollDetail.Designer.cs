@@ -54,18 +54,28 @@
             this.txtOriginalWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.txtOtherCost = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtPurchasePrice = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtTransCost = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdWithTax = new System.Windows.Forms.RadioButton();
+            this.rdWithoutTax = new System.Windows.Forms.RadioButton();
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(382, 271);
+            this.btnClose.Location = new System.Drawing.Point(382, 334);
             this.btnClose.Size = new System.Drawing.Size(107, 35);
             this.btnClose.TabIndex = 21;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(254, 271);
+            this.btnOk.Location = new System.Drawing.Point(254, 334);
             this.btnOk.Size = new System.Drawing.Size(107, 35);
             this.btnOk.TabIndex = 20;
             // 
@@ -81,7 +91,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(67, 219);
+            this.label12.Location = new System.Drawing.Point(67, 292);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 55;
@@ -129,7 +139,6 @@
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 45;
             this.label1.Text = "剩余长度(米)";
-            this.label1.Visible = false;
             // 
             // txtWeight
             // 
@@ -170,12 +179,11 @@
             this.txtLength.Size = new System.Drawing.Size(145, 21);
             this.txtLength.TabIndex = 7;
             this.txtLength.Text = "0";
-            this.txtLength.Visible = false;
             // 
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(100, 219);
+            this.txtMemo.Location = new System.Drawing.Point(100, 288);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(391, 21);
             this.txtMemo.TabIndex = 12;
@@ -227,6 +235,7 @@
             this.txtSupplier.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(145, 21);
             this.txtSupplier.TabIndex = 72;
+            this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
             // 
             // txtWareHouse
             // 
@@ -277,7 +286,6 @@
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(145, 21);
             this.txtCustomer.TabIndex = 82;
-            this.txtCustomer.Text = "联谊";
             // 
             // lnkCustomer
             // 
@@ -309,7 +317,6 @@
             this.txtOriginalLength.Size = new System.Drawing.Size(145, 21);
             this.txtOriginalLength.TabIndex = 5;
             this.txtOriginalLength.Text = "0";
-            this.txtOriginalLength.Visible = false;
             this.txtOriginalLength.TextChanged += new System.EventHandler(this.txtOriginalLength_TextChanged);
             // 
             // txtOriginalWeight
@@ -350,13 +357,131 @@
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 83;
             this.label4.Text = "入库长度(米)";
-            this.label4.Visible = false;
+            // 
+            // txtOtherCost
+            // 
+            this.txtOtherCost.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtOtherCost.Location = new System.Drawing.Point(100, 253);
+            this.txtOtherCost.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtOtherCost.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtOtherCost.Name = "txtOtherCost";
+            this.txtOtherCost.PointCount = 2;
+            this.txtOtherCost.Size = new System.Drawing.Size(145, 21);
+            this.txtOtherCost.TabIndex = 99;
+            this.txtOtherCost.Text = "0";
+            // 
+            // txtPurchasePrice
+            // 
+            this.txtPurchasePrice.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPurchasePrice.Location = new System.Drawing.Point(100, 218);
+            this.txtPurchasePrice.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtPurchasePrice.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPurchasePrice.Name = "txtPurchasePrice";
+            this.txtPurchasePrice.PointCount = 2;
+            this.txtPurchasePrice.Size = new System.Drawing.Size(145, 21);
+            this.txtPurchasePrice.TabIndex = 98;
+            this.txtPurchasePrice.Text = "0";
+            // 
+            // txtTransCost
+            // 
+            this.txtTransCost.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtTransCost.Location = new System.Drawing.Point(346, 253);
+            this.txtTransCost.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtTransCost.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtTransCost.Name = "txtTransCost";
+            this.txtTransCost.PointCount = 2;
+            this.txtTransCost.Size = new System.Drawing.Size(145, 21);
+            this.txtTransCost.TabIndex = 97;
+            this.txtTransCost.Text = "0";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 257);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(83, 12);
+            this.label11.TabIndex = 96;
+            this.label11.Text = "其它费用(/吨)";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(285, 257);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 12);
+            this.label10.TabIndex = 95;
+            this.label10.Text = "运费(/吨)";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(35, 222);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 12);
+            this.label9.TabIndex = 94;
+            this.label9.Text = "单价(/吨)";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rdWithTax);
+            this.panel1.Controls.Add(this.rdWithoutTax);
+            this.panel1.Location = new System.Drawing.Point(346, 216);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(145, 25);
+            this.panel1.TabIndex = 134;
+            // 
+            // rdWithTax
+            // 
+            this.rdWithTax.AutoSize = true;
+            this.rdWithTax.Location = new System.Drawing.Point(3, 3);
+            this.rdWithTax.Name = "rdWithTax";
+            this.rdWithTax.Size = new System.Drawing.Size(47, 16);
+            this.rdWithTax.TabIndex = 129;
+            this.rdWithTax.TabStop = true;
+            this.rdWithTax.Text = "含税";
+            this.rdWithTax.UseVisualStyleBackColor = true;
+            // 
+            // rdWithoutTax
+            // 
+            this.rdWithoutTax.AutoSize = true;
+            this.rdWithoutTax.Location = new System.Drawing.Point(57, 3);
+            this.rdWithoutTax.Name = "rdWithoutTax";
+            this.rdWithoutTax.Size = new System.Drawing.Size(59, 16);
+            this.rdWithoutTax.TabIndex = 130;
+            this.rdWithoutTax.TabStop = true;
+            this.rdWithoutTax.Text = "不含税";
+            this.rdWithoutTax.UseVisualStyleBackColor = true;
             // 
             // cmbSpecification
             // 
             this.cmbSpecification.Location = new System.Drawing.Point(100, 52);
             this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
+            this.cmbSpecification.Size = new System.Drawing.Size(164, 26);
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 85;
             // 
@@ -364,7 +489,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 327);
+            this.ClientSize = new System.Drawing.Size(516, 390);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.txtOtherCost);
+            this.Controls.Add(this.txtPurchasePrice);
+            this.Controls.Add(this.txtTransCost);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.cmbSpecification);
             this.Controls.Add(this.txtOriginalLength);
             this.Controls.Add(this.txtOriginalWeight);
@@ -421,6 +553,15 @@
             this.Controls.SetChildIndex(this.txtOriginalWeight, 0);
             this.Controls.SetChildIndex(this.txtOriginalLength, 0);
             this.Controls.SetChildIndex(this.cmbSpecification, 0);
+            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.label11, 0);
+            this.Controls.SetChildIndex(this.txtTransCost, 0);
+            this.Controls.SetChildIndex(this.txtPurchasePrice, 0);
+            this.Controls.SetChildIndex(this.txtOtherCost, 0);
+            this.Controls.SetChildIndex(this.panel1, 0);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,5 +595,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private Controls.UCSpecification cmbSpecification;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtOtherCost;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtPurchasePrice;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtTransCost;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rdWithTax;
+        private System.Windows.Forms.RadioButton rdWithoutTax;
     }
 }

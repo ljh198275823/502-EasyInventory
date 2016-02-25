@@ -46,16 +46,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("原材料的剩余重量不正确");
                 return false;
             }
-            //if (this.txtLength.DecimalValue <= 0)
-            //{
-            //    MessageBox.Show("原材料的剩余长度不正确");
-            //    return false;
-            //}
-            //if (txtOriginalLength.DecimalValue < txtLength.DecimalValue)
-            //{
-            //    MessageBox.Show("剩余长度大于入库长度");
-            //    return false;
-            //}
+            if (this.txtLength.DecimalValue <= 0)
+            {
+                MessageBox.Show("原材料的剩余长度不正确");
+                return false;
+            }
+            if (txtOriginalLength.DecimalValue < txtLength.DecimalValue)
+            {
+                MessageBox.Show("剩余长度大于入库长度");
+                return false;
+            }
             if (txtOriginalWeight.DecimalValue < txtWeight.DecimalValue)
             {
                 MessageBox.Show("剩余重量大于入库重量");
@@ -66,7 +66,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定客户");
                 return false;
             }
-            if (string.IsNullOrEmpty(txtSupplier.Text))
+            if (txtSupplier.Tag == null)
             {
                 MessageBox.Show("没有指定供货商");
                 return false;
@@ -106,9 +106,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtLength.DecimalValue = item.Length.Value;
             txtWeight.DecimalValue = item.Weight.Value;
             txtCustomer.Text = item.Customer;
-            txtSupplier.Text = item.Supplier;
+            if (!string.IsNullOrEmpty(item.Supplier))
+            {
+                CompanyInfo s = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.Supplier).QueryObject;
+                txtSupplier.Text = s != null ? s.Name : null;
+                txtSupplier.Tag = s;
+            }
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
+            if (item.PurchasePrice.HasValue) txtPurchasePrice.DecimalValue = item.PurchasePrice.Value;
+            rdWithTax.Checked = item.WithTax.HasValue && item.WithTax.Value;
+            rdWithoutTax.Checked = item.WithTax.HasValue && !item.WithTax.Value;
+            if (item.TransCost.HasValue) txtTransCost.DecimalValue = item.TransCost.Value;
+            if (item.OtherCost.HasValue) txtOtherCost.DecimalValue = item.OtherCost.Value;
             txtMemo.Text = item.Memo;
             btnOk.Enabled = btnOk.Enabled && item.CanEdit;
         }
@@ -129,18 +139,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouse = txtWareHouse.Tag as WareHouse;
             item.WareHouseID = item.WareHouse.ID;
-            item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
-            item.OriginalLength = item.CalLength(p.Specification, item.OriginalWeight.Value, p.Density.Value); // txtOriginalLength.DecimalValue;
+            item.OriginalLength = txtOriginalLength.DecimalValue;
+            item.OriginalThick = item.CalThick(p.Specification, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value);
             item.Weight = txtWeight.DecimalValue;
-            item.Length = item.CalLength(p.Specification, item.Weight.Value, p.Density.Value);  //txtLength.DecimalValue;
+            item.Length = txtLength.DecimalValue;
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;
             item.Customer = txtCustomer.Text;
-            item.Supplier = txtSupplier.Text;
+            if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             item.Manufacture = cmbBrand.Text;
             item.SerialNumber = txtSerialNumber.Text;
+            item.PurchasePrice = txtPurchasePrice.DecimalValue > 0 ? (decimal?)txtPurchasePrice.DecimalValue : null;
+            if (rdWithTax.Checked) item.WithTax = true;
+            if (rdWithoutTax.Checked) item.WithTax = false;
+            item.TransCost = txtTransCost.DecimalValue > 0 ? (decimal?)txtTransCost.DecimalValue : null;
+            item.OtherCost = txtOtherCost.DecimalValue > 0 ? (decimal?)txtOtherCost.DecimalValue : null;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;
             return item;
@@ -176,8 +191,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                txtSupplier.Text = (frm.SelectedItem as CompanyInfo).Name;
+                CompanyInfo s=frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = s.Name;
+                txtSupplier.Tag = s;
             }
+        }
+
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
+        {
+            txtSupplier.Text = string.Empty;
+            txtSupplier.Tag = null;
         }
 
         private void lnkWareHouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -221,5 +244,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtLength.DecimalValue = txtOriginalLength.DecimalValue;
         }
         #endregion
+
+        
     }
 }

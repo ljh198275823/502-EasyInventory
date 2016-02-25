@@ -26,3 +26,41 @@ BEGIN
 	exec ('alter table Customer add DefaultLinker uniqueidentifier')
 end
 go
+
+--2016-2-25
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='CarPlate' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add Carplate nvarchar(50)')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Material' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add Material nvarchar(50)')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='PurchasePrice' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add PurchasePrice decimal(18,4)')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='WithTax' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add WithTax bit')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='TransCost' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add TransCost decimal(18,4)')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OtherCost' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add OtherCost decimal(18,4)')
+end
+go
+

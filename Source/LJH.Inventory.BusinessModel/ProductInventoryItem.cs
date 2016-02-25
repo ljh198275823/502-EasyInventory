@@ -84,6 +84,30 @@ namespace LJH.Inventory.BusinessModel
         public string Manufacture { get; set; }
 
         public string SerialNumber { get; set; }
+
+        public string Memo { get; set; }
+        #endregion
+
+        #region 成本相关的属性
+        /// <summary>
+        /// 获取或设置采购价格
+        /// </summary>
+        public decimal? PurchasePrice { get; set; }
+        /// <summary>
+        /// 获取或设置采购价格中是否含税
+        /// </summary>
+        public bool? WithTax { get; set; }
+        /// <summary>
+        /// 获取或设置运输成本
+        /// </summary>
+        public decimal? TransCost { get; set; }
+        /// <summary>
+        /// 获取或设置其它成本
+        /// </summary>
+        public decimal? OtherCost { get; set; }
+        #endregion
+
+        #region 与库存状态相关的公共属性
         /// <summary>
         /// 获取或设置销售订单项
         /// </summary>
@@ -128,16 +152,11 @@ namespace LJH.Inventory.BusinessModel
         /// 小件库存显示加工来源卷的入库重量，用于区别小件的来源卷
         /// </summary>
         public decimal? SourceRollWeight { get; set; }
-
+        /// <summary>
+        /// 获取或设置入库操作员
+        /// </summary>
         public string Operator { get; set; }
-
-        public string Memo { get; set; }
         #endregion
-
-        public ProductInventoryItem Clone()
-        {
-            return this.MemberwiseClone() as ProductInventoryItem;
-        }
 
         #region 与原材料有关
         /// <summary>
@@ -206,6 +225,13 @@ namespace LJH.Inventory.BusinessModel
                 }
             }
             return null;
+        }
+        #endregion
+
+        #region 公共方法
+        public ProductInventoryItem Clone()
+        {
+            return this.MemberwiseClone() as ProductInventoryItem;
         }
         #endregion
     }

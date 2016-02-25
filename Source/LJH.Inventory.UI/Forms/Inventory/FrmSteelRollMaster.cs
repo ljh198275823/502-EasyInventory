@@ -27,6 +27,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         #region 私有变量
         private List<ProductInventoryItem> _SteelRolls = null;
+        private List<CompanyInfo> _AllSuppliers = null;
         #endregion
 
         #region 私有方法
@@ -149,6 +150,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
+            _AllSuppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
             var bll = new SteelRollBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
@@ -177,11 +179,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colOriginalThick"].Value = sr.OriginalThick;
             row.Cells["colRealThick"].Value = sr.RealThick;
             row.Cells["colCustomer"].Value = sr.Customer;
-            row.Cells["colSupplier"].Value = sr.Supplier;
+            if (_AllSuppliers != null)
+            {
+                var s = _AllSuppliers.SingleOrDefault(it => it.ID == sr.Supplier);
+                row.Cells["colSupplier"].Value = s != null ? s.Name : null;
+            }
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
             row.Cells["colStatus"].Value = sr.Status;
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
+            row.Cells["colPurchasePrice"].Value = sr.PurchasePrice;
+            row.Cells["colPurchaseTax"].Value = sr.WithTax;
+            row.Cells["colTransCost"].Value = sr.TransCost;
+            row.Cells["colOtherCost"].Value = sr.OtherCost;
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colMemo"].Value = sr.Memo;
             ShowRowColor(row);
