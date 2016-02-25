@@ -137,7 +137,7 @@ namespace LJH.Inventory.UI.Forms.General
             p.Name = txtName.Text;
             p.CategoryID = Category != null ? Category.ID : null;
             p.Category = Category;
-            p.Specification = cmbSpecification.Text;
+            p.Specification = txtName.Text;
             p.Model = string.Empty;
             p.Unit = string.Empty;
             p.Price = txtPrice.DecimalValue;

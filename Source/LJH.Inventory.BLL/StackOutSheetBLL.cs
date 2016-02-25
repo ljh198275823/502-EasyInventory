@@ -24,7 +24,6 @@ namespace LJH.Inventory.BLL
             List<string> pids = sheet.Items.Select(it => it.ProductID).ToList();
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
             con.Products = pids;
-            con.WareHouseID = sheet.WareHouseID;
             con.States = (int)ProductInventoryState.UnShipped;
             List<ProductInventoryItem> inventoryItems = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (inventoryItems == null || inventoryItems.Count == 0) throw new Exception("没有找到相关的库存项");
