@@ -106,6 +106,12 @@
     <Compile Include="Forms\Financial\Report\FrmCustomerPaymentReport.Designer.cs">
       <DependentUpon>FrmCustomerPaymentReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\Report\FrmCustomerTaxBillReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Report\FrmCustomerTaxBillReport.designer.cs">
+      <DependentUpon>FrmCustomerTaxBillReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\View\FrmCustomerReceivableView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -705,6 +711,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Report\FrmCustomerPaymentReport.resx">
       <DependentUpon>FrmCustomerPaymentReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Report\FrmCustomerTaxBillReport.resx">
+      <DependentUpon>FrmCustomerTaxBillReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\View\FrmCustomerReceivableView.resx">
       <DependentUpon>FrmCustomerReceivableView.cs</DependentUpon>

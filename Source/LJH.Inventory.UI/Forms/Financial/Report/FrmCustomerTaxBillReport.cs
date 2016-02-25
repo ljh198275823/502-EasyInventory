@@ -17,9 +17,9 @@ using LJH.Inventory.UI.Forms.Sale;
 
 namespace LJH.Inventory.UI.Forms.Financial.Report
 {
-    public partial class FrmCustomerPaymentReport : FrmReportBase
+    public partial class FrmCustomerTaxBillReport : FrmReportBase
     {
-        public FrmCustomerPaymentReport()
+        public FrmCustomerTaxBillReport()
         {
             InitializeComponent();
         }
@@ -33,10 +33,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.ID;
             row.Cells["colSheetDate"].Value = cp.SheetDate;
-            row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
-            row.Cells["colBank"].Value = cp.Bank;
             row.Cells["colAmount"].Value = cp.Amount;
-            row.Cells["colStackSheetID"].Value = cp.StackSheetID;
             if (_AllCustomers != null)
             {
                 var c = _AllCustomers.SingleOrDefault(it => it.ID == cp.CustomerID);
@@ -58,8 +55,12 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.CustomerID = txtCustomer.Tag != null ? (txtCustomer.Tag as CompanyInfo).ID : null;
             con.PaymentTypes = new List<CustomerPaymentType>();
-            con.PaymentTypes.Add(CustomerPaymentType.Customer);
+            con.PaymentTypes.Add(CustomerPaymentType.CustomerTax);
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            if (!string.IsNullOrEmpty(txtBillID.Text.Trim()) && items != null && items.Count > 0)
+            {
+                items = items.Where(it => it.ID.Contains(txtBillID.Text.Trim())).ToList();
+            }
             return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }
 
