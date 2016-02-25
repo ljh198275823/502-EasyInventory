@@ -479,5 +479,10 @@ namespace InventoryDemo
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>();
         }
+
+        private void 客户增值税发票报表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerTaxBillReport>();
+        }
     }
 }

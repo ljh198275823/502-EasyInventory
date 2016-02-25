@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Financial.Report
 {
-    partial class FrmCustomerPaymentReport
+    partial class FrmCustomerTaxBillReport
     {
         /// <summary>
         /// Required designer variable.
@@ -35,14 +35,14 @@
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtBillID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStackSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -69,7 +69,7 @@
             this.groupBox1.Size = new System.Drawing.Size(231, 90);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "付款日期";
+            this.groupBox1.Text = "开票日期";
             // 
             // ucDateTimeInterval1
             // 
@@ -84,7 +84,7 @@
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(12, 24);
+            this.lnkCustomer.Location = new System.Drawing.Point(23, 29);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
             this.lnkCustomer.TabIndex = 33;
@@ -94,6 +94,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.txtBillID);
             this.groupBox3.Controls.Add(this.txtCustomer);
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Location = new System.Drawing.Point(242, 8);
@@ -103,10 +105,27 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "发票号";
+            // 
+            // txtBillID
+            // 
+            this.txtBillID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtBillID.Location = new System.Drawing.Point(59, 56);
+            this.txtBillID.Name = "txtBillID";
+            this.txtBillID.Size = new System.Drawing.Size(153, 21);
+            this.txtBillID.TabIndex = 38;
+            // 
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(48, 20);
+            this.txtCustomer.Location = new System.Drawing.Point(59, 25);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(153, 21);
@@ -126,17 +145,15 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetDate,
             this.colSheetID,
-            this.colPaymentMode,
             this.colAmount,
             this.colCustomer,
-            this.colStackSheetID,
             this.colMemo});
             this.dataGridView1.Location = new System.Drawing.Point(5, 102);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1074, 376);
+            this.dataGridView1.Size = new System.Drawing.Size(794, 376);
             this.dataGridView1.TabIndex = 39;
             // 
             // colSheetDate
@@ -152,19 +169,12 @@
             // colSheetID
             // 
             this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSheetID.HeaderText = "单据编号";
+            this.colSheetID.HeaderText = "发票号";
             this.colSheetID.MinimumWidth = 100;
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colPaymentMode
-            // 
-            this.colPaymentMode.HeaderText = "付款方式";
-            this.colPaymentMode.Name = "colPaymentMode";
-            this.colPaymentMode.ReadOnly = true;
-            this.colPaymentMode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAmount
             // 
@@ -181,17 +191,9 @@
             this.colCustomer.MinimumWidth = 150;
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
+            this.colCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colCustomer.Width = 150;
-            // 
-            // colStackSheetID
-            // 
-            this.colStackSheetID.HeaderText = "送货单";
-            this.colStackSheetID.MinimumWidth = 150;
-            this.colStackSheetID.Name = "colStackSheetID";
-            this.colStackSheetID.ReadOnly = true;
-            this.colStackSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colStackSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colStackSheetID.Width = 150;
             // 
             // colMemo
             // 
@@ -202,16 +204,16 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // FrmCustomerPaymentReport
+            // FrmCustomerTaxBillReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1079, 503);
+            this.ClientSize = new System.Drawing.Size(799, 503);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Name = "FrmCustomerPaymentReport";
-            this.Text = "客户付款流水报表";
+            this.Name = "FrmCustomerTaxBillReport";
+            this.Text = "客户增值税发票报表";
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.btnSearch, 0);
@@ -237,10 +239,10 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Label label1;
+        private GeneralLibrary.WinformControl.DBCTextBox txtBillID;
     }
 }
