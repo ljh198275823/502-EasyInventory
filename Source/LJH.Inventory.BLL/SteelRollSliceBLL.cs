@@ -147,7 +147,9 @@ namespace LJH.Inventory.BLL
                 return new CommandResult(ResultCode.Fail, ex.Message);
             }
         }
-
+        /// <summary>
+        /// 拆包
+        /// </summary>
         public CommandResult Depart(ProductInventoryItem info, WareHouse w, string customer, decimal count, string memo)
         {
             if (info.Count < count) return new CommandResult(ResultCode.Fail, "拆包数量大于原包数量");

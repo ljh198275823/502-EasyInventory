@@ -85,6 +85,8 @@ namespace LJH.Inventory.BusinessModel
 
         public string SerialNumber { get; set; }
 
+        public string Position { get; set; }
+
         public string Memo { get; set; }
         #endregion
 
@@ -102,9 +104,17 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal? TransCost { get; set; }
         /// <summary>
-        /// 获取或设置其它成本
+        /// 获取或设置运费是否由供应商代垫
+        /// </summary>
+        public bool? TransCostPrepay { get; set; }
+        /// <summary>
+        /// 获取或设置其它费用
         /// </summary>
         public decimal? OtherCost { get; set; }
+        /// <summary>
+        /// 获取或设置其它费用是否由供应商代垫
+        /// </summary>
+        public bool? OtherCostPrepay { get; set; }
         #endregion
 
         #region 与库存状态相关的公共属性

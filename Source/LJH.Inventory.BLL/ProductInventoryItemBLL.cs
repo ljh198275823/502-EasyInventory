@@ -18,6 +18,7 @@ namespace LJH.Inventory.BLL
         }
         #endregion
 
+        #region 公共方法
         public CommandResult UpdateMemo(ProductInventoryItem pi,string memo)
         {
             var clone = pi.Clone();
@@ -39,5 +40,6 @@ namespace LJH.Inventory.BLL
             }
             return ret;
         }
+        #endregion
     }
 }

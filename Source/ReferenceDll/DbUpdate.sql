@@ -58,9 +58,27 @@ BEGIN
 end
 go
 
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='TransCostPrepay' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add TransCostPrepay bit')
+end
+go
+
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OtherCost' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
 BEGIN
 	exec ('alter table ProductInventoryItem add OtherCost decimal(18,4)')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OtherCostPrepay' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add OtherCostPrepay bit')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Position' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add Position nvarchar(50) null')
 end
 go
 

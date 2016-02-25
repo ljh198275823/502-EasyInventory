@@ -118,7 +118,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             rdWithTax.Checked = item.WithTax.HasValue && item.WithTax.Value;
             rdWithoutTax.Checked = item.WithTax.HasValue && !item.WithTax.Value;
             if (item.TransCost.HasValue) txtTransCost.DecimalValue = item.TransCost.Value;
+            chkTransCostPrepay.Checked = item.TransCostPrepay.HasValue && item.TransCostPrepay.Value;
             if (item.OtherCost.HasValue) txtOtherCost.DecimalValue = item.OtherCost.Value;
+            chkOtherCostPrepay.Checked = item.OtherCostPrepay.HasValue && item.OtherCostPrepay.Value;
+            txtPosition.Text = item.Position;
             txtMemo.Text = item.Memo;
             btnOk.Enabled = btnOk.Enabled && item.CanEdit;
         }
@@ -155,7 +158,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (rdWithTax.Checked) item.WithTax = true;
             if (rdWithoutTax.Checked) item.WithTax = false;
             item.TransCost = txtTransCost.DecimalValue > 0 ? (decimal?)txtTransCost.DecimalValue : null;
+            item.TransCostPrepay = chkTransCostPrepay.Checked;
             item.OtherCost = txtOtherCost.DecimalValue > 0 ? (decimal?)txtOtherCost.DecimalValue : null;
+            item.OtherCostPrepay = chkOtherCostPrepay.Checked;
+            item.Position = txtPosition.Text;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;
             return item;

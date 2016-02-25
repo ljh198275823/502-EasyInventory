@@ -410,7 +410,10 @@
       <Column Name="PurchasePrice" Member="PurchasePrice"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax"  DbType="bit" UpdateCheck="Never"/>
       <Column Name="TransCost" Member="TransCost"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="TransCostPrepay" Member="TransCostPrepay"  DbType="bit" UpdateCheck="Never"/>
       <Column Name="OtherCost" Member="OtherCost"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="OtherCostPrepay" Member="OtherCostPrepay"  DbType="bit" UpdateCheck="Never"/>
+      <Column Name="Position" Member="Position"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="PurchaseItem" Member="PurchaseItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
