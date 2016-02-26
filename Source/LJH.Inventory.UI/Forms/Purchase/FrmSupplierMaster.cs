@@ -63,6 +63,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
             this.mnu_AddSupplier.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
             this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.SupplierType, PermissionActions.Edit);
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.SupplierType, PermissionActions.Edit);
+            this.mnu_Import.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -193,6 +194,14 @@ namespace LJH.Inventory.UI.Forms.Purchase
         private void mnu_AddSupplier_Click(object sender, EventArgs e)
         {
             PerformAddData();
+        }
+
+        private void mnu_Import_Click(object sender, EventArgs e)
+        {
+            FrmSupplierImport frm = new FrmSupplierImport();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+            btn_Fresh.PerformClick();
         }
     }
 }

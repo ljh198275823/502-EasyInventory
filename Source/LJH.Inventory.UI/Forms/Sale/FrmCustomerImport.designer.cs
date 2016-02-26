@@ -1,6 +1,6 @@
-﻿namespace LJH.Inventory.UI.Forms.Inventory
+﻿namespace LJH.Inventory.UI.Forms.Sale
 {
-    partial class FrmSteelRollImport
+    partial class FrmCustomerImport
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollImport));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerImport));
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -46,23 +42,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colRowIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblSource = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.colRowIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPostCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -97,13 +89,13 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1311, 708);
+            this.panel3.Size = new System.Drawing.Size(1282, 708);
             this.panel3.TabIndex = 2;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button1.Location = new System.Drawing.Point(1046, 39);
+            this.button1.Location = new System.Drawing.Point(1013, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(176, 34);
             this.button1.TabIndex = 21;
@@ -113,14 +105,12 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.txtFirstRow);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.btnImport);
             this.groupBox3.Location = new System.Drawing.Point(646, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(355, 73);
+            this.groupBox3.Size = new System.Drawing.Size(361, 73);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "第二步 导入";
@@ -176,7 +166,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(6, 91);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1302, 614);
+            this.groupBox2.Size = new System.Drawing.Size(1273, 614);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数据预览";
@@ -193,131 +183,26 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colRowIndex,
-            this.colAddDate,
-            this.colWareHouse,
+            this.colName,
             this.colCategory,
-            this.colSpecification,
-            this.colOriginalWeight,
-            this.colOriginalLength,
-            this.colWeight,
-            this.colLength,
-            this.colCustomer,
-            this.colSupplier,
-            this.colManufacture,
-            this.colSerialNumber,
-            this.colMemo,
+            this.colCity,
+            this.colPhone,
+            this.colFax,
+            this.colPostCode,
+            this.colEmail,
+            this.colWeb,
+            this.colAddress,
             this.colReason});
             this.dataGridView1.Location = new System.Drawing.Point(3, 42);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1299, 572);
+            this.dataGridView1.Size = new System.Drawing.Size(1270, 572);
             this.dataGridView1.TabIndex = 116;
-            // 
-            // colRowIndex
-            // 
-            this.colRowIndex.HeaderText = "行号";
-            this.colRowIndex.Name = "colRowIndex";
-            this.colRowIndex.ReadOnly = true;
-            this.colRowIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colRowIndex.Width = 60;
-            // 
-            // colAddDate
-            // 
-            this.colAddDate.HeaderText = "入库日期";
-            this.colAddDate.Name = "colAddDate";
-            // 
-            // colWareHouse
-            // 
-            this.colWareHouse.HeaderText = "仓库*";
-            this.colWareHouse.Name = "colWareHouse";
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "类别*";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.Width = 80;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格*";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.Width = 80;
-            // 
-            // colOriginalWeight
-            // 
-            dataGridViewCellStyle1.Format = "N3";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colOriginalWeight.HeaderText = "入库重量*";
-            this.colOriginalWeight.Name = "colOriginalWeight";
-            this.colOriginalWeight.Width = 85;
-            // 
-            // colOriginalLength
-            // 
-            dataGridViewCellStyle2.Format = "N3";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colOriginalLength.HeaderText = "入库长度";
-            this.colOriginalLength.Name = "colOriginalLength";
-            this.colOriginalLength.Width = 80;
-            // 
-            // colWeight
-            // 
-            dataGridViewCellStyle3.Format = "N3";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colWeight.HeaderText = "剩余重量*";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.Width = 85;
-            // 
-            // colLength
-            // 
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colLength.HeaderText = "剩余长度";
-            this.colLength.Name = "colLength";
-            this.colLength.Width = 80;
-            // 
-            // colCustomer
-            // 
-            this.colCustomer.HeaderText = "客户*";
-            this.colCustomer.Name = "colCustomer";
-            this.colCustomer.Width = 80;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.HeaderText = "供应商*";
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.Width = 80;
-            // 
-            // colManufacture
-            // 
-            this.colManufacture.HeaderText = "厂家*";
-            this.colManufacture.Name = "colManufacture";
-            this.colManufacture.Width = 80;
-            // 
-            // colSerialNumber
-            // 
-            this.colSerialNumber.HeaderText = "卷号";
-            this.colSerialNumber.Name = "colSerialNumber";
-            this.colSerialNumber.Width = 60;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            // 
-            // colReason
-            // 
-            this.colReason.HeaderText = "导入状态";
-            this.colReason.Name = "colReason";
-            this.colReason.ReadOnly = true;
             // 
             // lblSource
             // 
@@ -326,7 +211,7 @@
             this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSource.ForeColor = System.Drawing.Color.Blue;
             this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblSource.Location = new System.Drawing.Point(1211, 24);
+            this.lblSource.Location = new System.Drawing.Point(1182, 24);
             this.lblSource.Name = "lblSource";
             this.lblSource.Size = new System.Drawing.Size(44, 12);
             this.lblSource.TabIndex = 17;
@@ -336,22 +221,87 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1052, 24);
+            this.label3.Location = new System.Drawing.Point(1023, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 12);
             this.label3.TabIndex = 3;
             this.label3.Text = "待导入数据预览";
             // 
-            // FrmSteelRollImport
+            // colRowIndex
+            // 
+            this.colRowIndex.HeaderText = "行号";
+            this.colRowIndex.Name = "colRowIndex";
+            this.colRowIndex.ReadOnly = true;
+            this.colRowIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colRowIndex.Width = 60;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "名称*";
+            this.colName.MinimumWidth = 150;
+            this.colName.Name = "colName";
+            this.colName.Width = 150;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.Name = "colCategory";
+            // 
+            // colCity
+            // 
+            this.colCity.HeaderText = "城市";
+            this.colCity.Name = "colCity";
+            // 
+            // colPhone
+            // 
+            this.colPhone.HeaderText = "电话";
+            this.colPhone.Name = "colPhone";
+            // 
+            // colFax
+            // 
+            this.colFax.HeaderText = "传真";
+            this.colFax.Name = "colFax";
+            // 
+            // colPostCode
+            // 
+            this.colPostCode.HeaderText = "邮编";
+            this.colPostCode.Name = "colPostCode";
+            // 
+            // colEmail
+            // 
+            this.colEmail.HeaderText = "Email";
+            this.colEmail.MinimumWidth = 150;
+            this.colEmail.Name = "colEmail";
+            this.colEmail.Width = 150;
+            // 
+            // colWeb
+            // 
+            this.colWeb.HeaderText = "网址";
+            this.colWeb.Name = "colWeb";
+            // 
+            // colAddress
+            // 
+            this.colAddress.HeaderText = "地址";
+            this.colAddress.MinimumWidth = 200;
+            this.colAddress.Name = "colAddress";
+            this.colAddress.Width = 200;
+            // 
+            // colReason
+            // 
+            this.colReason.HeaderText = "导入状态";
+            this.colReason.Name = "colReason";
+            this.colReason.ReadOnly = true;
+            // 
+            // FrmCustomerImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1311, 708);
+            this.ClientSize = new System.Drawing.Size(1282, 708);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmSteelRollImport";
+            this.Name = "FrmCustomerImport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "原材料导入";
+            this.Text = "客户导入";
             this.Load += new System.EventHandler(this.FrmStudentImport_Load);
             this.panel3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -379,21 +329,17 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.IntergerTextBox txtFirstRow;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRowIndex;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReason;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRowIndex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPostCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeb;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReason;
     }
 }

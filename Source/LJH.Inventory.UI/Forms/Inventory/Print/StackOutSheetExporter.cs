@@ -32,7 +32,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
         public string modal;
 
         /// <summary>
-        /// 导出操作员当班信息到EXCEL中
+        /// 导出信息到EXCEL中
         /// </summary>
         /// <param name="optLog"></param>
         public List<string> Export(StackOutSheet info, string path)

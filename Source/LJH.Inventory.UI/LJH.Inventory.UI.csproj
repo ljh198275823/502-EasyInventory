@@ -240,6 +240,18 @@
     <Compile Include="Forms\Inventory\View\FrmSteelRollSliceCheckRecordView.Designer.cs">
       <DependentUpon>FrmSteelRollSliceCheckRecordView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Purchase\FrmSupplierImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Purchase\FrmSupplierImport.designer.cs">
+      <DependentUpon>FrmSupplierImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sale\FrmCustomerImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sale\FrmCustomerImport.designer.cs">
+      <DependentUpon>FrmCustomerImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Sale\FrmProxyDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -777,6 +789,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollSliceCheckRecordView.resx">
       <DependentUpon>FrmSteelRollSliceCheckRecordView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Purchase\FrmSupplierImport.resx">
+      <DependentUpon>FrmSupplierImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sale\FrmCustomerImport.resx">
+      <DependentUpon>FrmCustomerImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmProxyDetail.resx">
       <DependentUpon>FrmProxyDetail.cs</DependentUpon>

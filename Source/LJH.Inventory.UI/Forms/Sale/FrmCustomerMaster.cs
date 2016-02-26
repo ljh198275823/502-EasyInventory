@@ -63,6 +63,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             this.mnu_AddCustomer.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit);
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit);
+            this.mnu_Import.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -191,6 +192,14 @@ namespace LJH.Inventory.UI.Forms.Sale
         private void mnu_AddCustomer_Click(object sender, EventArgs e)
         {
             PerformAddData();
+        }
+
+        private void mnu_Import_Click(object sender, EventArgs e)
+        {
+            FrmCustomerImport frm = new FrmCustomerImport();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+            btn_Fresh.PerformClick();
         }
         #endregion
     }

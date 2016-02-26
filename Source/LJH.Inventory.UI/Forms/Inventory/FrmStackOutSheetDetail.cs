@@ -313,7 +313,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 Process prs = new Process();
                                 prs.StartInfo = psi;
                                 prs.Start();
-                                LJH.GeneralLibrary.LOG.FileLog.Log("打印", file);
                             }
                         }
                     }
