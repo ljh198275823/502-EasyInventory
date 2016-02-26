@@ -21,6 +21,54 @@ namespace LJH.Inventory.BLL
         private string RepoUri = null;
         private const string MODEL = "原材料";
 
+        #region 私有方法
+        private void AddReceivables(ProductInventoryItem sheet, DateTime dt, IUnitWork unitWork)
+        {
+            CustomerReceivable cr = null;
+            CustomerReceivable original = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetByID(sheet.ID).QueryObject;
+            if (original == null)
+            {
+                cr = new CustomerReceivable();
+                cr.ID = Guid.NewGuid();
+                cr.CreateDate = dt;
+                cr.ClassID = CustomerReceivableType.SupplierReceivable;
+                cr.SheetID = sheet.ID.ToString();
+            }
+            else
+            {
+                cr = original.Clone();
+            }
+            cr.CustomerID = sheet.Supplier;
+            decimal amount = 0;
+            if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
+            if (sheet.TransCost.HasValue && sheet.TransCostPrepay.HasValue && sheet.TransCostPrepay.Value) amount += sheet.TransCost.Value * sheet.OriginalWeight.Value;
+            if (sheet.OtherCost.HasValue && sheet.OtherCostPrepay.HasValue && sheet.OtherCostPrepay.Value) amount += sheet.OtherCost.Value * sheet.OriginalWeight.Value;
+            cr.Amount = amount;
+            if (original == null)
+            {
+                if (cr.Amount > 0) ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+            }
+            else
+            {
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(cr, original, unitWork);
+            }
+        }
+
+        private void AddTax(ProductInventoryItem sheet, DateTime dt, IUnitWork unitWork)
+        {
+            CustomerReceivable tax = new CustomerReceivable()
+            {
+                ID = sheet.ID,
+                CreateDate = dt,
+                ClassID = CustomerReceivableType.SupplierTax,
+            };
+            decimal amount = 0;
+            if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
+            tax.Amount = amount;
+            if (amount > 0) ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(tax, unitWork);
+        }
+        #endregion
+
         #region 公共方法
         public QueryResult<ProductInventoryItem> GetByID(Guid id)
         {
@@ -44,7 +92,21 @@ namespace LJH.Inventory.BLL
 
         public CommandResult Add(ProductInventoryItem sr)
         {
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert (sr);
+            try
+            {
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(sr, unitWork);
+                if (!string.IsNullOrEmpty(sr.Supplier))
+                {
+                    AddReceivables(sr, sr.AddDate, unitWork);
+                    if (sr.WithTax.HasValue && sr.WithTax.Value) AddTax(sr, sr.AddDate, unitWork);
+                }
+                return unitWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
         }
 
         public CommandResult Update(ProductInventoryItem sr)
