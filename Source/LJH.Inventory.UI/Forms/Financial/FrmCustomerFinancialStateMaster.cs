@@ -138,6 +138,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 {
                     View.FrmCustomerTaxView frm = new View.FrmCustomerTaxView();
                     frm.Customer = c;
+                    frm.ReceivableType = CustomerReceivableType.CustomerTax;
                     frm.Text = string.Format("{0} 应开增值税明细", c.Name);
                     frm.ShowDialog();
 

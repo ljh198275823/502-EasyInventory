@@ -7,6 +7,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
@@ -24,6 +25,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<WareHouse> _AllWareHouses = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
         private List<ProductCategory> _Categories = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+        private List<CompanyInfo> _AllSuppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
+
         #region 私有方法
         private void ClearData()
         {
@@ -54,7 +57,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             return false;
         }
 
-        private ProductInventoryItem GetStudentFromRow(DataGridViewRow row)
+        private ProductInventoryItem GetSteelRollFromRow(DataGridViewRow row)
         {
             DateTime addDate = DateTime.Now;
             if (row.Cells["colAddDate"].Value != null && !string.IsNullOrEmpty(row.Cells["colAddDate"].Value.ToString().Trim()) && !DateTime.TryParse(row.Cells["colAddDate"].Value.ToString().Trim(), out addDate))
@@ -152,6 +155,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return null;
             }
             string supplier = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSupplier"].Value.ToString().Trim());
+            if (_AllSuppliers != null)
+            {
+                var s = _AllSuppliers.FirstOrDefault(it => it.Name == supplier);
+                if (s == null)
+                {
+                    row.Cells["colReason"].Value = "系统中不存在此供应商";
+                    return null;
+                }
+                supplier = s.ID;
+            }
             if (row.Cells["colManufacture"].Value == null || string.IsNullOrEmpty(row.Cells["colManufacture"].Value.ToString().Trim()))
             {
                 row.Cells["colReason"].Value = "没有指定厂家";
@@ -248,7 +261,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                             if (dataGridView1.Rows[i].Visible)
                             {
                                 count++;
-                                var sr = GetStudentFromRow(dataGridView1.Rows[i]);
+                                var sr = GetSteelRollFromRow(dataGridView1.Rows[i]);
                                 if (sr != null)
                                 {
                                     CommandResult ret = bll.Add(sr);
@@ -285,6 +298,29 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 t.Abort();
             }
             MessageBox.Show(string.Format("共成功导入{0}条数据", success), "结果");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string modal = System.IO.Path.Combine(Application.StartupPath, "原材料导入模板.xls");
+                if (File.Exists(modal))
+                {
+                    SaveFileDialog dig = new SaveFileDialog();
+                    dig.Filter = "Excel文档|*.xls;*.xlsx|所有文件(*.*)|*.*";
+                    dig.FileName = "原材料.xls";
+                    if (dig.ShowDialog() == DialogResult.OK && dig.FileName != modal)
+                    {
+                        File.Copy(modal, dig.FileName);
+                        MessageBox.Show("模板保存成功");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
     }

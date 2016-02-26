@@ -270,6 +270,85 @@ namespace LJH.Inventory.BLL
             };
             return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
         }
+
+        public QueryResultList<CustomerFinancialState> GetAllSupplierStates()
+        {
+            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+            cpsc.PaymentTypes = new List<CustomerPaymentType>();
+            cpsc.PaymentTypes.Add(CustomerPaymentType.Supplier);
+            cpsc.PaymentTypes.Add(CustomerPaymentType.SupplierTax);
+            cpsc.States = new List<SheetState>();
+            cpsc.States.Add(SheetState.Add);
+            cpsc.States.Add(SheetState.Approved);
+            cpsc.HasRemain = true;
+            var customerPayments = (new CustomerPaymentBLL(RepoUri)).GetItems(cpsc).QueryObjects;
+
+            CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.Settled = false;
+            crsc.ReceivableTypes = new List<CustomerReceivableType>();
+            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
+            crsc.States = new List<SheetState>();
+            crsc.States.Add(SheetState.Add);
+            var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
+
+            List<CompanyInfo> customers = GetAllSuppliers().QueryObjects;
+            if (customers != null && customers.Count > 0)
+            {
+                var items = new List<CustomerFinancialState>();
+                foreach (var c in customers)
+                {
+                    CustomerFinancialState cs = new CustomerFinancialState()
+                    {
+                        Customer = c,
+                        Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.SupplierReceivable ? it.Remain : 0) : 0,
+                        Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.Supplier ? it.Remain : 0) : 0,
+                        Tax = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.SupplierTax ? it.Remain : 0) : 0,
+                        TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.SupplierTax ? it.Remain : 0) : 0,
+                    };
+                    items.Add(cs);
+                }
+                return new QueryResultList<CustomerFinancialState>(ResultCode.Successful, string.Empty, items);
+            }
+            return new QueryResultList<CustomerFinancialState>(ResultCode.Successful, string.Empty, null);
+        }
+
+        public QueryResult<CustomerFinancialState> GetSupplierState(string customerID)
+        {
+            var c = GetByID(customerID).QueryObject;
+            if (c == null) return new QueryResult<CustomerFinancialState>(ResultCode.Fail, string.Empty, null);
+
+            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+            cpsc.PaymentTypes = new List<CustomerPaymentType>();
+            cpsc.PaymentTypes.Add(CustomerPaymentType.Supplier);
+            cpsc.PaymentTypes.Add(CustomerPaymentType.SupplierTax);
+            cpsc.States = new List<SheetState>();
+            cpsc.States.Add(SheetState.Add);
+            cpsc.States.Add(SheetState.Approved);
+            cpsc.HasRemain = true;
+            cpsc.CustomerID = customerID;
+            var customerPayments = (new CustomerPaymentBLL(RepoUri)).GetItems(cpsc).QueryObjects;
+
+            CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.Settled = false;
+            crsc.CustomerID = customerID;
+            crsc.ReceivableTypes = new List<CustomerReceivableType>();
+            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
+            crsc.States = new List<SheetState>();
+            crsc.States.Add(SheetState.Add);
+            var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
+
+            CustomerFinancialState cs = new CustomerFinancialState()
+            {
+                Customer = c,
+                Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.SupplierReceivable ? it.Remain : 0) : 0,
+                Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.Supplier ? it.Remain : 0) : 0,
+                Tax = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.SupplierTax ? it.Remain : 0) : 0,
+                TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.SupplierTax ? it.Remain : 0) : 0,
+            };
+            return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
+        }
         #endregion
     }
 }

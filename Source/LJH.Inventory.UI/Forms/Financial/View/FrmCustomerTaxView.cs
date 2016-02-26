@@ -24,6 +24,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         #region 公共属性
         public CompanyInfo Customer { get; set; }
+
+        public CustomerReceivableType ReceivableType { get; set; }
         #endregion
 
         #region 私有方法
@@ -105,7 +107,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             CompanyInfo customer = Customer;
             FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
             frm.Customer = customer;
-            frm.ReceivableType = CustomerReceivableType.CustomerTax;
+            frm.ReceivableType = ReceivableType;
             if (frm.ShowDialog() == DialogResult.OK) FreshData();
         }
 
