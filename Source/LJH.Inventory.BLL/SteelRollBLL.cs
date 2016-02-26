@@ -25,7 +25,14 @@ namespace LJH.Inventory.BLL
         private void AddReceivables(ProductInventoryItem sheet, DateTime dt, IUnitWork unitWork)
         {
             CustomerReceivable cr = null;
-            CustomerReceivable original = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetByID(sheet.ID).QueryObject;
+            CustomerReceivable original = null;
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = sheet.ID.ToString();
+            con.ReceivableTypes = new List<CustomerReceivableType>();
+            con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count >= 1) original = items[0];
+           
             if (original == null)
             {
                 cr = new CustomerReceivable();
@@ -56,16 +63,41 @@ namespace LJH.Inventory.BLL
 
         private void AddTax(ProductInventoryItem sheet, DateTime dt, IUnitWork unitWork)
         {
-            CustomerReceivable tax = new CustomerReceivable()
+            CustomerReceivable tax = null;
+            CustomerReceivable original = null;
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = sheet.ID.ToString();
+            con.ReceivableTypes = new List<CustomerReceivableType>();
+            con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count >= 1) original = items[0];
+
+            if (original == null)
             {
-                ID = sheet.ID,
-                CreateDate = dt,
-                ClassID = CustomerReceivableType.SupplierTax,
-            };
+                tax = new CustomerReceivable()
+                {
+                    ID = Guid.NewGuid(),
+                    CreateDate = dt,
+                    ClassID = CustomerReceivableType.SupplierTax,
+                    SheetID = sheet.ID.ToString(),
+                };
+            }
+            else
+            {
+                tax = original.Clone();
+            }
+            tax.CustomerID = sheet.Supplier;
             decimal amount = 0;
             if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
             tax.Amount = amount;
-            if (amount > 0) ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(tax, unitWork);
+            if (original == null)
+            {
+                if (amount > 0) ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(tax, unitWork);
+            }
+            else
+            {
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(tax, original, unitWork);
+            }
         }
         #endregion
 
@@ -111,8 +143,22 @@ namespace LJH.Inventory.BLL
 
         public CommandResult Update(ProductInventoryItem sr)
         {
-            var o = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sr.ID).QueryObject;
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o);
+            try
+            {
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                var o = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sr.ID).QueryObject;
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o, unitWork);
+                if (!string.IsNullOrEmpty(sr.Supplier))
+                {
+                    AddReceivables(sr, sr.AddDate, unitWork);
+                    if (sr.WithTax.HasValue && sr.WithTax.Value) AddTax(sr, sr.AddDate, unitWork);
+                }
+                return unitWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
         }
         /// <summary>
         /// 更换库存的所属产品
