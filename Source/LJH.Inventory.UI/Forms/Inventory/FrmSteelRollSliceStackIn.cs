@@ -29,28 +29,40 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public WareHouse WareHouse { get; set; }
         #endregion
 
+        #region 私有方法
+        private void InitControls()
+        {
+            cmbSpecification.Init();
+            if (Product != null) ShowProduct(Product);
+            if (WareHouse != null)
+            {
+                txtWareHouse.Text = WareHouse.Name;
+                txtWareHouse.Tag = WareHouse;
+            }
+            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
+        }
+
         private void ShowProduct(Product product)
         {
             cmbSpecification.Specification = product.Specification;
             txtCategory.Text = product.Category.Name;
             txtCategory.Tag = product.Category;
             rd开平.Checked = product.Model == rd开平.Text;
-            rd开条.Checked = product.Model == rd开条.Text;
+            rd开卷.Checked = product.Model == rd开卷.Text;
             rd开吨.Checked = product.Model == rd开吨.Text;
             txtLength.DecimalValue = product.Length.HasValue ? product.Length.Value : 0;
             txtWeight.DecimalValue = product.Weight.HasValue ? product.Weight.Value : 0;
             decimal? thick = SpecificationHelper.GetWrittenThick(product.Specification);
-            txtThick.DecimalValue = thick != null ? thick.Value : 0;
         }
 
         private Product CreateProduct()
         {
             string sliceTo = null;
             if (rd开平.Checked) sliceTo = rd开平.Text;
-            else if (rd开条.Checked) sliceTo = rd开条.Text;
+            else if (rd开卷.Checked) sliceTo = rd开卷.Text;
             else if (rd开吨.Checked) sliceTo = rd开吨.Text;
             decimal? weight = null;
-            if (!rd开平.Checked) weight = txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null;
+            if (rd单件重.Checked) weight = txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null;
             return new ProductBLL(AppSettings.Current.ConnStr).Create(
                              (txtCategory.Tag as ProductCategory).ID,
                              StringHelper.ToDBC(cmbSpecification.Specification).Trim(),
@@ -58,9 +70,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                              weight,
                              txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null,
                              7.85m);
+
         }
 
-        #region 重写基类方法
         private bool CheckInput()
         {
             if (txtCategory.Tag == null)
@@ -73,7 +85,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定规格");
                 return false;
             }
-            if (!rd开平.Checked && !rd开条.Checked && !rd开吨.Checked)
+            if (!rd开平.Checked && !rd开卷.Checked && !rd开吨.Checked)
             {
                 MessageBox.Show("没有指定加工类型");
                 return false;
@@ -108,19 +120,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             return true;
         }
-
-        private void InitControls()
-        {
-            cmbSpecification.Init();
-            if (Product != null) ShowProduct(Product);
-            if (WareHouse != null)
-            {
-                txtWareHouse.Text = WareHouse.Name;
-                txtWareHouse.Tag = WareHouse;
-            }
-            txtCount.Focus();
-            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
-        }
         #endregion
 
         #region 事件处理程序
@@ -132,7 +131,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void rdSliceType_CheckedChanged(object sender, EventArgs e)
         {
             txtLength.Enabled = !rd开吨.Checked;
-            txtWeight.Enabled = rd开条.Checked || rd开吨.Checked;
+            txtWeight.Enabled = rd开卷.Checked || rd开吨.Checked;
         }
 
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -169,6 +168,34 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = s.Name;
+                txtSupplier.Tag = s;
+            }
+        }
+
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
+        {
+            txtSupplier.Text = string.Empty;
+            txtSupplier.Tag = null;
+        }
+
+        private void lnkBrand_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmRelatedCompanyMaster frm = new FrmRelatedCompanyMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                cmbBrand.Text = (frm.SelectedItem as CompanyInfo).Name;
+            }
+        }
+
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (!CheckInput()) return;
@@ -178,6 +205,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("创建产品信息失败");
                 return;
             }
+
             SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
             var ret = bll.CreateInventory(p, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtCount.DecimalValue, txtWeight.DecimalValue, txtThick.DecimalValue, Operator.Current.Name, txtMemo.Text);
             if (ret.Result == ResultCode.Successful)

@@ -115,7 +115,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 51;
-            this.label6.Text = "进货日期";
+            this.label6.Text = "入库日期";
             // 
             // label3
             // 
@@ -214,7 +214,7 @@
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(313, 61);
+            this.lnkCategory.Location = new System.Drawing.Point(313, 59);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(29, 12);
             this.lnkCategory.TabIndex = 3;
@@ -225,7 +225,7 @@
             // txtCategory
             // 
             this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCategory.Location = new System.Drawing.Point(346, 57);
+            this.txtCategory.Location = new System.Drawing.Point(346, 55);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(145, 21);

@@ -250,7 +250,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtLength.DecimalValue = txtOriginalLength.DecimalValue;
         }
         #endregion
-
-        
     }
 }
