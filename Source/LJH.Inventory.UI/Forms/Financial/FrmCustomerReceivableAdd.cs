@@ -44,6 +44,17 @@ namespace LJH.Inventory.UI.Forms.Financial
                 this.panel1.Visible = false;
                 this.Text = "新增应开增值税";
             }
+            else if (ReceivableType == CustomerReceivableType.SupplierReceivable)
+            {
+                this.panel1.Visible = true;
+                this.Text = "新增供应商应付账款";
+                btnOk.Enabled = Operator.Current.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
+            }
+            else if (ReceivableType == CustomerReceivableType.SupplierTax)
+            {
+                this.panel1.Visible = false;
+                this.Text = "新增应开增值税";
+            }
             else
             {
                 btnOk.Enabled = false;
@@ -73,7 +84,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("金额不正确，需要填写大于零的数值");
                 return;
             }
-            if (ReceivableType ==CustomerReceivableType.CustomerReceivable && !rdWithoutTax.Checked && !rdWithTax.Checked)
+            if ((ReceivableType == CustomerReceivableType.CustomerReceivable || ReceivableType == CustomerReceivableType.SupplierReceivable) &&
+                !rdWithoutTax.Checked && !rdWithTax.Checked)
             {
                 MessageBox.Show("请选择是否含税");
                 return;
@@ -85,7 +97,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             cr.CreateDate = DateTime.Now;
             cr.Amount = txtAmount.DecimalValue;
             if (ReceivableType == CustomerReceivableType.CustomerReceivable) cr.SheetID = "其它应收款";
-            if (ReceivableType == CustomerReceivableType.CustomerTax) cr.SheetID = "其它应开增值税";
+            if (ReceivableType == CustomerReceivableType.CustomerTax || ReceivableType == CustomerReceivableType.SupplierTax) cr.SheetID = "其它应开增值税";
+            if (ReceivableType == CustomerReceivableType.SupplierReceivable) cr.SheetID = "其它应付款";
             if (!string.IsNullOrEmpty(txtMemo.Text)) cr.Memo = txtMemo.Text;
             if (rdWithTax.Checked)
             {
@@ -95,11 +108,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             var ret = new CustomerReceivableBLL(AppSettings.Current.ConnStr).Add(cr);
             if (ret.Result == ResultCode.Successful)
             {
-                if (rdWithTax.Checked && cr.ClassID ==CustomerReceivableType.CustomerReceivable ) //如果是客户应收款，则增加相应的应开税额
+                if (rdWithTax.Checked && (cr.ClassID == CustomerReceivableType.CustomerReceivable || cr.ClassID == CustomerReceivableType.SupplierReceivable)) //如果是客户应收款，则增加相应的应开税额
                 {
-                    CustomerReceivable tax= new CustomerReceivable();
+                    CustomerReceivable tax = new CustomerReceivable();
                     tax.ID = Guid.NewGuid();
-                    tax.ClassID = CustomerReceivableType.CustomerTax;
+                    if(cr.ClassID == CustomerReceivableType.CustomerReceivable) tax.ClassID = CustomerReceivableType.CustomerTax;
+                    if (cr.ClassID == CustomerReceivableType.SupplierReceivable) tax.ClassID = CustomerReceivableType.SupplierTax;
                     tax.CustomerID = cr.CustomerID;
                     tax.CreateDate = cr.CreateDate;
                     tax.Amount = cr.Amount;

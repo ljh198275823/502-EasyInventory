@@ -26,6 +26,8 @@ namespace LJH.Inventory.UI.Forms.Financial
         /// 获取或设置收款或付款的客户
         /// </summary>
         public CompanyInfo Customer { get; set; }
+
+        public CustomerPaymentType TaxType { get; set; }
         #endregion
 
         #region 私有方法
@@ -107,7 +109,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (UpdatingItem == null)
             {
                 info = new CustomerPayment();
-                info.ClassID = CustomerPaymentType.CustomerTax;
+                info.ClassID = TaxType;
                 info.ID = txtID.Text == _AutoCreate ? string.Empty : txtID.Text.Trim();
             }
             else

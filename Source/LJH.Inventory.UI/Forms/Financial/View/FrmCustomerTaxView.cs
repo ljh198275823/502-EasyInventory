@@ -34,7 +34,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             var con = new CustomerReceivableSearchCondition();
             con.CustomerID = Customer != null ? Customer.ID : null;
             con.ReceivableTypes = new List<CustomerReceivableType>();
-            con.ReceivableTypes.Add(CustomerReceivableType.CustomerTax);
+            con.ReceivableTypes.Add(ReceivableType);
             con.Settled = false;
             if (!chkShowAll.Checked)
             {

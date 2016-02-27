@@ -146,19 +146,58 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                CompanyInfo c = dataGridView1.SelectedRows[0].Tag as CompanyInfo;
+                CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
                 FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                frm.Customer = c;
+                frm.Customer = customer;
+                frm.PaymentType = CustomerPaymentType.Supplier;
                 frm.IsAdding = true;
-                frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
-                {
-                    CompanyInfo c1 = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(c.ID).QueryObject;
-                    if (c1 != null)
-                    {
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], c1);
-                    }
-                };
                 frm.ShowDialog();
+                var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetSupplierState(customer.ID).QueryObject;
+                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
+            }
+        }
+
+        private void mnu_AddRecievable_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
+                frm.Customer = customer;
+                frm.ReceivableType = CustomerReceivableType.SupplierReceivable;
+                frm.ShowDialog();
+                var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetSupplierState(customer.ID).QueryObject;
+                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
+            }
+        }
+
+        private void mnu_AddTax_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
+                frm.Customer = customer;
+                frm.ReceivableType = CustomerReceivableType.SupplierTax;
+                frm.ShowDialog();
+                var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetSupplierState(customer.ID).QueryObject;
+                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
+            }
+        }
+
+        private void mnu_AddTaxBill_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
+                frm.Customer = customer;
+                frm.TaxType = CustomerPaymentType.SupplierTax;
+                frm.IsAdding = true;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
+                var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetSupplierState(customer.ID).QueryObject;
+                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
             }
         }
         #endregion

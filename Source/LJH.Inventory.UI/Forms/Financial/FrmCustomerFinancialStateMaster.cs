@@ -245,6 +245,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
                 FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
                 frm.Customer = customer;
+                frm.TaxType = CustomerPaymentType.CustomerTax;
                 frm.IsAdding = true;
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();

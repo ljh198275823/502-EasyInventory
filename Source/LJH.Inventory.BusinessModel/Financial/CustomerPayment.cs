@@ -117,6 +117,8 @@ namespace LJH.Inventory.BusinessModel
                         return "供应商应付款";
                     case CustomerPaymentType.CustomerTax:
                         return "客户增值税发票";
+                    case CustomerPaymentType .SupplierTax :
+                        return "供应商增值税发票";
                     default:
                         throw new Exception("客户付款单没有指定类型");
                 }

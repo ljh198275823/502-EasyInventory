@@ -31,7 +31,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 私有方法
-        private void ShowReceivables(string customerID,CustomerPaymentType PaymentType)
+        private void ShowReceivables(string customerID, CustomerPaymentType PaymentType)
         {
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
@@ -41,13 +41,17 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
             }
-            else if(PaymentType ==CustomerPaymentType .Supplier )
+            else if (PaymentType == CustomerPaymentType.Supplier)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
             }
             else if (PaymentType == CustomerPaymentType.CustomerTax)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.CustomerTax);
+            }
+            else if (PaymentType == CustomerPaymentType.SupplierTax)
+            {
+                con.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
             }
             con.Settled = false;
             List<CustomerReceivable> items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;

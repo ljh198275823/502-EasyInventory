@@ -29,7 +29,7 @@ namespace LJH.Inventory.BLL
             }
             else if (info.ClassID == CustomerPaymentType.Supplier)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("FKD",
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("HKD",
                         UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
             }
             return info.ID;

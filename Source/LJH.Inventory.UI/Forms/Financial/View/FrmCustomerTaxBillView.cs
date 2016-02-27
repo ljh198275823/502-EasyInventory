@@ -103,6 +103,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
             frm.Customer = Customer;
+            frm.TaxType = PaymentType;
             frm.IsAdding = true;
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog();
@@ -148,6 +149,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         FreshData();
                     }
                 }
+                //else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
+                //{
+                //    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                //    frm.StartPosition = FormStartPosition.CenterParent;
+                //    frm.ShowAssigns(cp);
+                //    frm.ShowDialog();
+                //}
             }
         }
         #endregion
