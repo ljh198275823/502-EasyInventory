@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.chkOnlyRemain = new System.Windows.Forms.CheckBox();
@@ -45,7 +45,9 @@
             this.chk开条 = new System.Windows.Forms.CheckBox();
             this.chk开吨 = new System.Windows.Forms.CheckBox();
             this.chk开平 = new System.Windows.Forms.CheckBox();
+            this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -66,8 +68,7 @@
             this.colWaitShipping = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colValid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
+            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.chk开卷);
             this.panel5.Controls.Add(this.chkOnlyRemain);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.label3);
@@ -110,7 +112,7 @@
             this.chkOnlyRemain.Checked = true;
             this.chkOnlyRemain.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkOnlyRemain.ForeColor = System.Drawing.Color.Red;
-            this.chkOnlyRemain.Location = new System.Drawing.Point(789, 12);
+            this.chkOnlyRemain.Location = new System.Drawing.Point(847, 12);
             this.chkOnlyRemain.Name = "chkOnlyRemain";
             this.chkOnlyRemain.Size = new System.Drawing.Size(120, 16);
             this.chkOnlyRemain.TabIndex = 90;
@@ -121,7 +123,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(661, 14);
+            this.label4.Location = new System.Drawing.Point(719, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 89;
@@ -130,7 +132,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(535, 14);
+            this.label3.Location = new System.Drawing.Point(593, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 88;
@@ -139,7 +141,7 @@
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(696, 10);
+            this.txtLength.Location = new System.Drawing.Point(754, 10);
             this.txtLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -160,7 +162,7 @@
             // txtWeight
             // 
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(570, 10);
+            this.txtWeight.Location = new System.Drawing.Point(628, 10);
             this.txtWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -183,7 +185,7 @@
             this.chk开条.AutoSize = true;
             this.chk开条.Checked = true;
             this.chk开条.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开条.Location = new System.Drawing.Point(408, 12);
+            this.chk开条.Location = new System.Drawing.Point(466, 12);
             this.chk开条.Name = "chk开条";
             this.chk开条.Size = new System.Drawing.Size(48, 16);
             this.chk开条.TabIndex = 85;
@@ -196,7 +198,7 @@
             this.chk开吨.AutoSize = true;
             this.chk开吨.Checked = true;
             this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开吨.Location = new System.Drawing.Point(463, 12);
+            this.chk开吨.Location = new System.Drawing.Point(521, 12);
             this.chk开吨.Name = "chk开吨";
             this.chk开吨.Size = new System.Drawing.Size(48, 16);
             this.chk开吨.TabIndex = 84;
@@ -217,6 +219,16 @@
             this.chk开平.UseVisualStyleBackColor = true;
             this.chk开平.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
+            // categoryComboBox1
+            // 
+            this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryComboBox1.FormattingEnabled = true;
+            this.categoryComboBox1.Location = new System.Drawing.Point(56, 10);
+            this.categoryComboBox1.Name = "categoryComboBox1";
+            this.categoryComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.categoryComboBox1.TabIndex = 82;
+            this.categoryComboBox1.SelectedIndexChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -225,6 +237,15 @@
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 81;
             this.label2.Text = "类别";
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.FormattingEnabled = true;
+            this.cmbSpecification.Location = new System.Drawing.Point(217, 10);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
+            this.cmbSpecification.TabIndex = 80;
+            this.cmbSpecification.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // label5
             // 
@@ -324,8 +345,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 38);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1219, 334);
@@ -359,32 +380,32 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle7;
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colLength
             // 
-            dataGridViewCellStyle2.Format = "N3";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Format = "N3";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle8;
             this.colLength.HeaderText = "长度(米)";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
             // colWaitShipping
             // 
-            dataGridViewCellStyle3.Format = "N0";
-            this.colWaitShipping.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Format = "N0";
+            this.colWaitShipping.DefaultCellStyle = dataGridViewCellStyle9;
             this.colWaitShipping.HeaderText = "待发货";
             this.colWaitShipping.Name = "colWaitShipping";
             this.colWaitShipping.ReadOnly = true;
             // 
             // colValid
             // 
-            dataGridViewCellStyle4.Format = "N0";
-            this.colValid.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Format = "N0";
+            this.colValid.DefaultCellStyle = dataGridViewCellStyle10;
             this.colValid.HeaderText = "可用库存";
             this.colValid.Name = "colValid";
             this.colValid.ReadOnly = true;
@@ -393,31 +414,25 @@
             // 
             // colTotal
             // 
-            dataGridViewCellStyle5.Format = "N0";
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Format = "N0";
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle11;
             this.colTotal.HeaderText = "库存合计";
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             this.colTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // categoryComboBox1
+            // chk开卷
             // 
-            this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.categoryComboBox1.FormattingEnabled = true;
-            this.categoryComboBox1.Location = new System.Drawing.Point(56, 10);
-            this.categoryComboBox1.Name = "categoryComboBox1";
-            this.categoryComboBox1.Size = new System.Drawing.Size(121, 20);
-            this.categoryComboBox1.TabIndex = 82;
-            this.categoryComboBox1.SelectedIndexChanged += new System.EventHandler(this.FreshDate_Clicked);
-            // 
-            // cmbSpecification
-            // 
-            this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(217, 10);
-            this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
-            this.cmbSpecification.TabIndex = 80;
-            this.cmbSpecification.TextChanged += new System.EventHandler(this.FreshDate_Clicked);
+            this.chk开卷.AutoSize = true;
+            this.chk开卷.Checked = true;
+            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开卷.Location = new System.Drawing.Point(408, 12);
+            this.chk开卷.Name = "chk开卷";
+            this.chk开卷.Size = new System.Drawing.Size(48, 16);
+            this.chk开卷.TabIndex = 91;
+            this.chk开卷.Text = "开卷";
+            this.chk开卷.UseVisualStyleBackColor = true;
+            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // FrmSteelRollSliceMaster
             // 
@@ -476,5 +491,6 @@
         private System.Windows.Forms.DataGridViewLinkColumn colTotal;
         private System.Windows.Forms.ToolStripMenuItem mnu_Import;
         private System.Windows.Forms.CheckBox chkOnlyRemain;
+        private System.Windows.Forms.CheckBox chk开卷;
     }
 }

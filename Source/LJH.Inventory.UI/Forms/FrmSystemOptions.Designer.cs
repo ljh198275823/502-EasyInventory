@@ -171,6 +171,7 @@
             this.label80 = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
+            this.chkDoShipAfterPrint = new System.Windows.Forms.CheckBox();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1214,6 +1215,7 @@
             // tabDelivery
             // 
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDelivery.Controls.Add(this.chkDoShipAfterPrint);
             this.tabDelivery.Controls.Add(this.chkForbidWhenNoOrderID);
             this.tabDelivery.Controls.Add(this.panel2);
             this.tabDelivery.Controls.Add(this.label1);
@@ -1692,6 +1694,16 @@
             this.label82.TabIndex = 13;
             this.label82.Text = "原材料等于或少于";
             // 
+            // chkDoShipAfterPrint
+            // 
+            this.chkDoShipAfterPrint.AutoSize = true;
+            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 137);
+            this.chkDoShipAfterPrint.Name = "chkDoShipAfterPrint";
+            this.chkDoShipAfterPrint.Size = new System.Drawing.Size(144, 16);
+            this.chkDoShipAfterPrint.TabIndex = 43;
+            this.chkDoShipAfterPrint.Text = "送货单打印后自动出货";
+            this.chkDoShipAfterPrint.UseVisualStyleBackColor = true;
+            // 
             // FrmSystemOptions
             // 
             this.AcceptButton = this.btnOk;
@@ -1870,5 +1882,6 @@
         private System.Windows.Forms.LinkLabel lnkCategory;
         private GeneralLibrary.WinformControl.DBCTextBox txtDefaultWareHouse;
         private System.Windows.Forms.LinkLabel lnkWarehouse;
+        private System.Windows.Forms.CheckBox chkDoShipAfterPrint;
     }
 }

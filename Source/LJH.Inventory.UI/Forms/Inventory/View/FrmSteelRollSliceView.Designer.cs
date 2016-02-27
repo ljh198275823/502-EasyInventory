@@ -54,7 +54,6 @@
             this.colRealThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInventorySheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSourceRoll = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSourceRollWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliverySheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +80,6 @@
             this.colRealThick,
             this.colCount,
             this.colCustomer,
-            this.colInventorySheet,
             this.colSourceRoll,
             this.colSourceRollWeight,
             this.colDeliverySheet,
@@ -237,14 +235,6 @@
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
             // 
-            // colInventorySheet
-            // 
-            this.colInventorySheet.HeaderText = "入库单";
-            this.colInventorySheet.Name = "colInventorySheet";
-            this.colInventorySheet.ReadOnly = true;
-            this.colInventorySheet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colInventorySheet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // colSourceRoll
             // 
             this.colSourceRoll.HeaderText = "来源卷";
@@ -308,7 +298,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRealThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInventorySheet;
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSourceRollWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliverySheet;

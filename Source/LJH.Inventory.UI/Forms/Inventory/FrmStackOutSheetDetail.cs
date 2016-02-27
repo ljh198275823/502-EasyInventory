@@ -169,6 +169,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ItemsGrid.ContextMenu = null;
                 ItemsGrid.ContextMenuStrip = null;
             }
+            btnShip.Visible = !(UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint);
         }
 
         protected override void ItemShowing()
@@ -313,6 +314,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 Process prs = new Process();
                                 prs.StartInfo = psi;
                                 prs.Start();
+                            }
+                        }
+                        if (sheet.State != SheetState.Shipped && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint)
+                        {
+                            var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.StackOut, Operator.Current.Name, Operator.Current.ID);
+                            if (ret.Result != ResultCode.Successful)
+                            {
+                                MessageBox.Show(ret.Message);
+                                return;
+                            }
+                            else
+                            {
+                                ShowButtonState();
+                                this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
                             }
                         }
                     }

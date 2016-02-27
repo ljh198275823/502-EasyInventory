@@ -60,12 +60,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colWareHouse"].Value = c.WareHouse.Name;
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colWeight"].Value = c.Weight;
-            row.Cells["colLength"].Value = c.Length;
+            row.Cells["colLength"].Value = c.Product.Length;
             row.Cells["colOriginalThick"].Value = c.OriginalThick;
             row.Cells["colRealThick"].Value = c.RealThick;
             row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = c.Count;
-            row.Cells["colInventorySheet"].Value = c.InventorySheet;
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
             row.Cells["colCustomer"].Value = c.Customer;
             row.Cells["colSourceRoll"].Value = c.SourceRoll.HasValue ? "查看来源卷" : null;

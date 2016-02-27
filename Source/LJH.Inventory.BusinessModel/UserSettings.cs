@@ -165,6 +165,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [DataMember]
         public InventoryOutType InventoryOutType { get; set; }
+        /// <summary>
+        /// 获取或设置打印送货单的时候即出货
+        /// </summary>
+        [DataMember]
+        public bool DoShipAfterPrint { get; set; }
         #endregion
           
         #region 自动生成单号  

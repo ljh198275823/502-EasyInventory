@@ -56,6 +56,7 @@ namespace LJH.Inventory.UI.Forms
             }
             rdFIFO.Checked = us.InventoryOutType == InventoryOutType.FIFO;
             rdFILO.Checked = us.InventoryOutType == InventoryOutType.FILO;
+            chkDoShipAfterPrint.Checked = us.DoShipAfterPrint;
             #endregion
 
             #region 自动生成编号
@@ -118,6 +119,7 @@ namespace LJH.Inventory.UI.Forms
             us.DeadlineDays = txtDeadlineDays.IntergerValue;
             if (rdFIFO.Checked) us.InventoryOutType = InventoryOutType.FIFO;
             if (rdFILO.Checked) us.InventoryOutType = InventoryOutType.FILO;
+            us.DoShipAfterPrint = chkDoShipAfterPrint.Checked;
             #endregion
 
             #region 自动生成编号

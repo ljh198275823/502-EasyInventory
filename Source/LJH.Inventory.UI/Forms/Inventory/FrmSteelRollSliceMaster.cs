@@ -43,6 +43,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Product.Weight == txtWeight.DecimalValue).ToList();
                 if (txtLength.DecimalValue > 0) items = items.Where(it => it.Product.Length == txtLength.DecimalValue).ToList();
                 items = items.Where(it => (chk开平.Checked && it.Product.Model == chk开平.Text) ||
+                                          (chk开卷.Checked && it.Product.Model == chk开卷.Text) ||
                                           (chk开条.Checked && it.Product.Model == chk开条.Text) ||
                                           (chk开吨.Checked && it.Product.Model == chk开吨.Text)).ToList();
                 return (from p in items
