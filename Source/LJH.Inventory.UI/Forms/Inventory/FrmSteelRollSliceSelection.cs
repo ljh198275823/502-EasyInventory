@@ -47,6 +47,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Product.Weight == txtWeight.DecimalValue).ToList();
                 if (txtLength.DecimalValue > 0) items = items.Where(it => it.Product.Length == txtLength.DecimalValue).ToList();
                 items = items.Where(it => (chk开平.Checked && it.Product.Model == chk开平.Text) ||
+                                          (chk开卷.Checked && it.Product.Model == chk开卷.Text) ||
                                           (chk开条.Checked && it.Product.Model == chk开条.Text) ||
                                           (chk开吨.Checked && it.Product.Model == chk开吨.Text)).ToList();
                 return (from p in items
@@ -94,7 +95,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSpecification"].Value = pi.Product.Specification;
             row.Cells["colModel"].Value = pi.Product.Model;
             row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
-            row.Cells["colWeight"].Value = pi.Product.Weight;
+            row.Cells["colWeight"].Value = pi.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colCount"].Value = pi.Count;
             row.Cells["colOriginalThick"].Value = pi.OriginalThick;

@@ -182,6 +182,8 @@ namespace LJH.Inventory.BLL
                 if (info.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "库存项数量处于锁定状态,不能盘点");
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 ProductInventoryItem clone = info.Clone();
+                decimal? uw = info.UnitWeight;
+                if (uw != null) clone.Weight = newCount * uw; 
                 clone.Count = newCount;
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
 
@@ -205,6 +207,7 @@ namespace LJH.Inventory.BLL
                 if (ret.Result == ResultCode.Successful)
                 {
                     info.Count = clone.Count;
+                    info.Weight = clone.Weight;
                 }
                 return ret;
             }
@@ -222,23 +225,36 @@ namespace LJH.Inventory.BLL
             if (info.State == ProductInventoryState.Nullified) return new CommandResult(ResultCode.Fail, "作废的库存项不能进行拆包操作");
             if (info.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "库存项数量处于锁定状态,不能拆包");
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            decimal? uw = info.UnitWeight;
             ProductInventoryItem clone = info.Clone();
             clone.Count -= count;
+            if (uw.HasValue) clone.Weight = clone.Count * uw;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
 
-            ProductInventoryItem depart = info.Clone ();
-            depart.ID =Guid.NewGuid ();
+            ProductInventoryItem depart = info.Clone();
+            depart.ID = Guid.NewGuid();
             depart.WareHouseID = w.ID;
-            depart.Customer =customer ;
-            depart.Count =count;
-            depart.SourceID =info.ID ;
-            depart.Memo =memo ;
+            depart.Customer = customer;
+            depart.Count = count;
+            if (uw.HasValue)
+            {
+                depart.OriginalWeight = depart.Count * uw;
+                depart.Weight = depart.OriginalWeight;
+            }
+            else
+            {
+                depart.OriginalWeight = null;
+                depart.Weight = null;
+            }
+            depart.SourceID = info.ID;
+            depart.Memo = memo;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(depart, unitWork);
 
             var ret = unitWork.Commit();
             if (ret.Result == ResultCode.Successful)
             {
                 info.Count = clone.Count;
+                info.Weight = clone.Weight;
             }
             return ret;
         }

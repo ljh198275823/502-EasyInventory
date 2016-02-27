@@ -236,6 +236,18 @@ namespace LJH.Inventory.BusinessModel
             }
             return null;
         }
+        /// <summary>
+        /// 获取库存项的单重
+        /// </summary>
+        public decimal? UnitWeight
+        {
+            get
+            {
+                if (Weight == null) return null;
+                if (Count <= 0) return null;
+                return Weight / Count;
+            }
+        }
         #endregion
 
         #region 公共方法

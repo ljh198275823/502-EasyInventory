@@ -122,12 +122,19 @@ namespace LJH.Inventory.BLL
                 updatingitems.Add(source);
                 cloneItems.Add(source.Clone());
             }
+            decimal? uw = source.UnitWeight;
             source.Count -= si.Count;
+            if (uw != null) source.Weight = source.Count * uw;
 
             ProductInventoryItem newItem = source.Clone();
             newItem.ID = Guid.NewGuid();
             newItem.SourceID = source.ID;
             newItem.Count = si.Count;
+            if (uw != null)
+            {
+                newItem.OriginalWeight = newItem.Count * uw;
+                newItem.Weight = newItem.Count * uw;
+            }
             newItem.State = ProductInventoryState.WaitShipping;
             newItem.DeliveryItem = si.ID;
             newItem.DeliverySheet = si.SheetNo;
@@ -149,9 +156,16 @@ namespace LJH.Inventory.BLL
                 updatingitems.Add(des);
                 cloneItems.Add(des.Clone());
             }
+
+            decimal? uw = source.UnitWeight;
             //两行的顺序不能反!
             source.Count += des.Count - newCount; //相减的两者不管谁大谁小都用同一个表达式,不会出错的
             des.Count = newCount;
+            if (uw != null)
+            {
+                source.Weight = source.Count * uw;
+                des.Weight = des.Count * uw;
+            }
         }
 
         //合并项,将deleting项的数量合并到source中,并删除deleting
@@ -163,6 +177,7 @@ namespace LJH.Inventory.BLL
                 cloneItems.Add(source.Clone());
             }
             source.Count += deleting.Count;
+            source.Weight += deleting.Weight;
             deletingItems.Add(deleting);
         }
 

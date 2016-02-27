@@ -69,6 +69,7 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridview1)).BeginInit();
@@ -76,6 +77,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.chk开卷);
             this.panel5.Controls.Add(this.wareHouseComboBox1);
             this.panel5.Controls.Add(this.label1);
             this.panel5.Controls.Add(this.customerCombobox1);
@@ -128,7 +130,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(512, 17);
+            this.label8.Location = new System.Drawing.Point(512, 19);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 92;
@@ -199,7 +201,7 @@
             this.chk开条.AutoSize = true;
             this.chk开条.Checked = true;
             this.chk开条.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开条.Location = new System.Drawing.Point(1008, 17);
+            this.chk开条.Location = new System.Drawing.Point(1056, 17);
             this.chk开条.Name = "chk开条";
             this.chk开条.Size = new System.Drawing.Size(48, 16);
             this.chk开条.TabIndex = 85;
@@ -212,7 +214,7 @@
             this.chk开吨.AutoSize = true;
             this.chk开吨.Checked = true;
             this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开吨.Location = new System.Drawing.Point(1063, 17);
+            this.chk开吨.Location = new System.Drawing.Point(1111, 17);
             this.chk开吨.Name = "chk开吨";
             this.chk开吨.Size = new System.Drawing.Size(48, 16);
             this.chk开吨.TabIndex = 84;
@@ -446,6 +448,19 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Width = 150;
             // 
+            // chk开卷
+            // 
+            this.chk开卷.AutoSize = true;
+            this.chk开卷.Checked = true;
+            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开卷.Location = new System.Drawing.Point(1004, 17);
+            this.chk开卷.Name = "chk开卷";
+            this.chk开卷.Size = new System.Drawing.Size(48, 16);
+            this.chk开卷.TabIndex = 96;
+            this.chk开卷.Text = "开卷";
+            this.chk开卷.UseVisualStyleBackColor = true;
+            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
+            // 
             // FrmSteelRollSliceSelection
             // 
             this.AcceptButton = this.btnOk;
@@ -508,5 +523,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.CheckBox chk开卷;
     }
 }
