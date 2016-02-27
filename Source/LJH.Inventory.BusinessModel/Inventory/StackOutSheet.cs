@@ -192,7 +192,7 @@ namespace LJH.Inventory.BusinessModel
                     ProductID = inventory.ProductID,
                     Unit = inventory.Unit,
                     InventoryItem = inventory.ID,
-                    Length = inventory.Length,
+                    Length = inventory.Product.Length,
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count
@@ -200,7 +200,7 @@ namespace LJH.Inventory.BusinessModel
                 if (inventory.Weight.HasValue && inventory.Model != "开平")
                 {
                     if (si.TotalWeight == null) si.TotalWeight = 0;
-                    si.TotalWeight += (inventory.Product != null ? inventory.Product.Weight : inventory.Weight) * count;
+                    si.TotalWeight += inventory.Product.Weight * count;
                 }
                 if (inventory.Model != "原材料")
                 {

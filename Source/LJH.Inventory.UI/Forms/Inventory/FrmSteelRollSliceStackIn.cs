@@ -33,12 +33,36 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void InitControls()
         {
             cmbSpecification.Init();
+            dtStorageDateTime.Value = DateTime.Now;
+            if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultWarehouse))
+            {
+                List<WareHouse> ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+                var w = ws.FirstOrDefault(it => it.Name == UserSettings.Current.DefaultWarehouse);
+                if (w != null)
+                {
+                    txtWareHouse.Text = w.Name;
+                    txtWareHouse.Tag = w;
+                }
+            }
+            if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultProductCategory))
+            {
+                List<ProductCategory> cs = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+                var c = cs.FirstOrDefault(it => it.Name == UserSettings.Current.DefaultProductCategory);
+                if (c != null)
+                {
+                    txtCategory.Text = c.Name;
+                    txtCategory.Tag = c;
+                }
+            }
+            if (UserSettings.Current != null) txtCustomer.Text = UserSettings.Current.DefaultCustomer;
+
             if (Product != null) ShowProduct(Product);
             if (WareHouse != null)
             {
                 txtWareHouse.Text = WareHouse.Name;
                 txtWareHouse.Tag = WareHouse;
             }
+
             btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
         }
 
@@ -95,21 +119,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("规格设置不正确,  规格格式为 \"厚度*宽度\" ");
                 return false;
             }
-            if (txtThick.DecimalValue <= 0)
-            {
-                MessageBox.Show("厚度不正确");
-                txtThick.Focus();
-                return false;
-            }
             if (txtWareHouse.Tag == null)
             {
                 MessageBox.Show("没有选择仓库");
                 txtWareHouse.Focus();
                 return false;
             }
-            if (txtLength.DecimalValue == 0 && txtWeight.DecimalValue == 0)
+            if (txtWeight.DecimalValue <= 0)
             {
-                MessageBox.Show("至少要指定小件的长度或重量中的一项");
+                MessageBox.Show("没有设置重量");
+                return false;
+            }
+            if (txtWeight.DecimalValue > 0 && !rd总重.Checked && !rd单件重.Checked)
+            {
+                MessageBox.Show("重量没有指定是总重还是单件重量");
                 return false;
             }
             if (txtCount.DecimalValue == 0)
@@ -118,6 +141,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtCount.Focus();
                 return false;
             }
+            //if (string.IsNullOrEmpty(txtCustomer.Text))
+            //{
+            //    MessageBox.Show("没有指定客户");
+            //    return false;
+            //}
+            //if (txtSupplier.Tag == null)
+            //{
+            //    MessageBox.Show("没有指定供货商");
+            //    return false;
+            //}
+            //if (string.IsNullOrEmpty(cmbBrand.Text))
+            //{
+            //    MessageBox.Show("没有输入厂商");
+            //    cmbBrand.Focus();
+            //    return false;
+            //}
             return true;
         }
         #endregion
@@ -130,8 +169,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void rdSliceType_CheckedChanged(object sender, EventArgs e)
         {
-            txtLength.Enabled = !rd开吨.Checked;
-            txtWeight.Enabled = rd开卷.Checked || rd开吨.Checked;
+            rd总重.Checked = rd开平.Checked;
         }
 
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -205,9 +243,33 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("创建产品信息失败");
                 return;
             }
-
-            SteelRollSliceBLL bll = new SteelRollSliceBLL(AppSettings.Current.ConnStr);
-            var ret = bll.CreateInventory(p, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtCount.DecimalValue, txtWeight.DecimalValue, txtThick.DecimalValue, Operator.Current.Name, txtMemo.Text);
+            ProductInventoryItem item = new ProductInventoryItem();
+            item.ID = Guid.NewGuid();
+            item.Product = p;
+            item.ProductID = p.ID;
+            item.Model = p.Model;
+            item.AddDate = dtStorageDateTime.Value;
+            item.WareHouse = txtWareHouse.Tag as WareHouse;
+            item.WareHouseID = item.WareHouse.ID;
+            item.OriginalWeight = rd总重.Checked ? txtWeight.DecimalValue : txtWeight.DecimalValue * txtCount.DecimalValue; //区分总重和单重
+            item.Weight = item.OriginalWeight;
+            item.Unit = "件";
+            item.Count = txtCount.DecimalValue;
+            item.State = ProductInventoryState.Inventory;
+            item.Customer = txtCustomer.Text;
+            if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
+            item.Manufacture = cmbBrand.Text;
+            item.PurchasePrice = txtPurchasePrice.DecimalValue > 0 ? (decimal?)txtPurchasePrice.DecimalValue : null;
+            if (rdWithTax.Checked) item.WithTax = true;
+            if (rdWithoutTax.Checked) item.WithTax = false;
+            item.TransCost = txtTransCost.DecimalValue > 0 ? (decimal?)txtTransCost.DecimalValue : null;
+            item.TransCostPrepay = chkTransCostPrepay.Checked;
+            item.OtherCost = txtOtherCost.DecimalValue > 0 ? (decimal?)txtOtherCost.DecimalValue : null;
+            item.OtherCostPrepay = chkOtherCostPrepay.Checked;
+            item.Position = txtPosition.Text;
+            item.Memo = txtMemo.Text;
+            item.Operator = Operator.Current.Name;
+            var ret = new SteelRollSliceBLL(AppSettings.Current.ConnStr).Add(item);
             if (ret.Result == ResultCode.Successful)
             {
                 this.DialogResult = DialogResult.OK;

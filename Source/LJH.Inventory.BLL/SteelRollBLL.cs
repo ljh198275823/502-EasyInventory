@@ -68,7 +68,7 @@ namespace LJH.Inventory.BLL
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
             con.SheetID = sheet.ID.ToString();
             con.ReceivableTypes = new List<CustomerReceivableType>();
-            con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            con.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
             var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count >= 1) original = items[0];
 

@@ -24,6 +24,9 @@ namespace LJH.Inventory.UI.Forms
             #region 基本
             txtBecomeTailAt.DecimalValue = UserSettings.Current.BecomeTailAt;
             txtBecomeRemainlessAt.DecimalValue = UserSettings.Current.BecomeRemainlessAt;
+            txtDefaultWareHouse.Text = UserSettings.Current.DefaultWarehouse;
+            txtDefaultCustomer.Text = UserSettings.Current.DefaultCustomer;
+            txtDefaultProductCategory.Text = UserSettings.Current.DefaultProductCategory;
             #endregion
 
             #region 公司信息
@@ -93,6 +96,9 @@ namespace LJH.Inventory.UI.Forms
             #region 基本
             us.BecomeTailAt = txtBecomeTailAt.DecimalValue;
             us.BecomeRemainlessAt = txtBecomeRemainlessAt.DecimalValue;
+            us.DefaultCustomer = txtDefaultCustomer.Text;
+            us.DefaultProductCategory = txtDefaultProductCategory.Text;
+            us.DefaultWarehouse = txtDefaultWareHouse.Text;
             #endregion
 
             #region 公司信息
@@ -148,6 +154,40 @@ namespace LJH.Inventory.UI.Forms
         #endregion
 
         #region 事件处理程序
+        private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            General.FrmProductCategoryMaster frm = new General.FrmProductCategoryMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var c = frm.SelectedItem as ProductCategory;
+                txtDefaultProductCategory.Text = c != null ? c.Name : string.Empty;
+                txtDefaultProductCategory.Tag = c;
+            }
+        }
+
+        private void lnkWarehouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Inventory.FrmWareHouseMaster frm = new Inventory.FrmWareHouseMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                WareHouse w = frm.SelectedItem as WareHouse;
+                txtDefaultWareHouse.Text = w != null ? w.Name : string.Empty;
+                txtDefaultWareHouse.Tag = w;
+            }
+        }
+
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Sale.FrmCustomerMaster frm = new Sale.FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txtDefaultCustomer.Text = (frm.SelectedItem as CompanyInfo).Name;
+            }
+        }
+
         private void FrmSystemOptions_Load(object sender, EventArgs e)
         {
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);

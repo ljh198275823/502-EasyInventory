@@ -61,28 +61,52 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("剩余重量大于入库重量");
                 return false;
             }
-            if (string.IsNullOrEmpty(txtCustomer.Text))
-            {
-                MessageBox.Show("没有指定客户");
-                return false;
-            }
-            if (txtSupplier.Tag == null)
-            {
-                MessageBox.Show("没有指定供货商");
-                return false;
-            }
-            if (string.IsNullOrEmpty(cmbBrand.Text))
-            {
-                MessageBox.Show("没有输入厂商");
-                cmbBrand.Focus();
-                return false;
-            }
+            //if (string.IsNullOrEmpty(txtCustomer.Text))
+            //{
+            //    MessageBox.Show("没有指定客户");
+            //    return false;
+            //}
+            //if (txtSupplier.Tag == null)
+            //{
+            //    MessageBox.Show("没有指定供货商");
+            //    return false;
+            //}
+            //if (string.IsNullOrEmpty(cmbBrand.Text))
+            //{
+            //    MessageBox.Show("没有输入厂商");
+            //    cmbBrand.Focus();
+            //    return false;
+            //}
             return true;
         }
 
         protected override void InitControls()
         {
             this.dtStorageDateTime.Value = DateTime.Now;
+            if (IsAdding)
+            {
+                if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultWarehouse))
+                {
+                    List<WareHouse> ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+                    var w = ws.FirstOrDefault(it => it.Name == UserSettings .Current .DefaultWarehouse );
+                    if (w != null)
+                    {
+                        txtWareHouse.Text = w.Name;
+                        txtWareHouse.Tag = w;
+                    }
+                }
+                if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultProductCategory))
+                {
+                    List<ProductCategory> cs = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+                    var c = cs.FirstOrDefault(it => it.Name ==UserSettings .Current .DefaultProductCategory );
+                    if (c != null)
+                    {
+                        txtCategory.Text = c.Name;
+                        txtCategory.Tag = c;
+                    }
+                }
+                if (UserSettings.Current != null) txtCustomer.Text = UserSettings.Current.DefaultCustomer;
+            }
             cmbSpecification.Init();
         }
 

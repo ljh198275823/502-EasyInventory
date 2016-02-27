@@ -75,6 +75,15 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [DataMember]
         public decimal BecomeTailAt { get; set; }
+
+        [DataMember]
+        public string DefaultCustomer { get; set; }
+
+        [DataMember]
+        public string DefaultWarehouse { get; set; }
+
+        [DataMember]
+        public string DefaultProductCategory { get; set; }
         #endregion
 
         #region 本公司信息

@@ -21,6 +21,86 @@ namespace LJH.Inventory.BLL
         private string RepoUri = null;
         private const string MODEL = "原材料";
 
+        #region 私有方法
+        private void AddReceivables(ProductInventoryItem sheet, DateTime dt, IUnitWork unitWork)
+        {
+            CustomerReceivable cr = null;
+            CustomerReceivable original = null;
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = sheet.ID.ToString();
+            con.ReceivableTypes = new List<CustomerReceivableType>();
+            con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
+            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count >= 1) original = items[0];
+
+            if (original == null)
+            {
+                cr = new CustomerReceivable();
+                cr.ID = Guid.NewGuid();
+                cr.CreateDate = dt;
+                cr.ClassID = CustomerReceivableType.SupplierReceivable;
+                cr.SheetID = sheet.ID.ToString();
+            }
+            else
+            {
+                cr = original.Clone();
+            }
+            cr.CustomerID = sheet.Supplier;
+            decimal amount = 0;
+            if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
+            if (sheet.TransCost.HasValue && sheet.TransCostPrepay.HasValue && sheet.TransCostPrepay.Value) amount += sheet.TransCost.Value * sheet.OriginalWeight.Value;
+            if (sheet.OtherCost.HasValue && sheet.OtherCostPrepay.HasValue && sheet.OtherCostPrepay.Value) amount += sheet.OtherCost.Value * sheet.OriginalWeight.Value;
+            cr.Amount = amount;
+            if (original == null)
+            {
+                if (cr.Amount > 0) ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+            }
+            else
+            {
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(cr, original, unitWork);
+            }
+        }
+
+        private void AddTax(ProductInventoryItem sheet, DateTime dt, IUnitWork unitWork)
+        {
+            CustomerReceivable tax = null;
+            CustomerReceivable original = null;
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = sheet.ID.ToString();
+            con.ReceivableTypes = new List<CustomerReceivableType>();
+            con.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
+            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count >= 1) original = items[0];
+
+            if (original == null)
+            {
+                tax = new CustomerReceivable()
+                {
+                    ID = Guid.NewGuid(),
+                    CreateDate = dt,
+                    ClassID = CustomerReceivableType.SupplierTax,
+                    SheetID = sheet.ID.ToString(),
+                };
+            }
+            else
+            {
+                tax = original.Clone();
+            }
+            tax.CustomerID = sheet.Supplier;
+            decimal amount = 0;
+            if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
+            tax.Amount = amount;
+            if (original == null)
+            {
+                if (amount > 0) ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(tax, unitWork);
+            }
+            else
+            {
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(tax, original, unitWork);
+            }
+        }
+        #endregion
+
         #region 公共方法
         public QueryResultList<SteelRollSlice> GetSteelRollSlices(SearchCondition con)
         {
@@ -70,37 +150,23 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult Add(ProductInventoryItem pi)
+        public CommandResult Add(ProductInventoryItem info)
         {
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi);
-        }
-
-        /// <summary>
-        /// 建立库存
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public CommandResult CreateInventory(Product p, WareHouse w, string customer, decimal count,decimal weight, decimal thick, string op, string memo)
-        {
-            ProductInventoryItem pii = new ProductInventoryItem()
+            try
             {
-                ID = Guid.NewGuid(),
-                AddDate = DateTime.Now,
-                ProductID = p.ID,
-                WareHouseID = w.ID,
-                Unit = "件",
-                Count = count,
-                InventorySheet = "新建库存",
-                Weight = weight,
-                Length = p.Length,
-                Model = p.Model,
-                RealThick = thick,
-                Customer = customer,
-                State = ProductInventoryState.Inventory,
-                Operator = op,
-                Memo = memo,
-            };
-            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii);
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(info, unitWork);
+                if (!string.IsNullOrEmpty(info.Supplier))
+                {
+                    AddReceivables(info, info.AddDate, unitWork);
+                    if (info.WithTax.HasValue && info.WithTax.Value) AddTax(info, info.AddDate, unitWork);
+                }
+                return unitWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
         }
         /// <summary>
         /// 盘点
