@@ -47,6 +47,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rd开卷 = new System.Windows.Forms.RadioButton();
             this.rd开吨 = new System.Windows.Forms.RadioButton();
             this.txtRemainWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtRemainLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
@@ -97,14 +98,14 @@
             // rd开条
             // 
             this.rd开条.AutoSize = true;
-            this.rd开条.Location = new System.Drawing.Point(65, 3);
+            this.rd开条.Location = new System.Drawing.Point(128, 3);
             this.rd开条.Name = "rd开条";
             this.rd开条.Size = new System.Drawing.Size(47, 16);
             this.rd开条.TabIndex = 1;
             this.rd开条.Tag = "卷材";
             this.rd开条.Text = "开条";
             this.rd开条.UseVisualStyleBackColor = true;
-            this.rd开条.CheckedChanged += new System.EventHandler(this.rd开条_CheckedChanged);
+            this.rd开条.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
             // rd开平
             // 
@@ -116,7 +117,7 @@
             this.rd开平.Tag = "板材";
             this.rd开平.Text = "开平";
             this.rd开平.UseVisualStyleBackColor = true;
-            this.rd开平.CheckedChanged += new System.EventHandler(this.rd开平_CheckedChanged);
+            this.rd开平.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
             // txtCount
             // 
@@ -160,7 +161,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 11;
-            this.label3.Text = "开平数量";
+            this.label3.Text = "小件数量";
             // 
             // label4
             // 
@@ -169,7 +170,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 10;
-            this.label4.Text = "开平长度(米)";
+            this.label4.Text = "小件长度(米)";
             // 
             // label13
             // 
@@ -267,25 +268,38 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.rd开卷);
             this.panel1.Controls.Add(this.rd开吨);
             this.panel1.Controls.Add(this.rd开条);
             this.panel1.Controls.Add(this.rd开平);
             this.panel1.Location = new System.Drawing.Point(96, 108);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 21);
+            this.panel1.Size = new System.Drawing.Size(303, 21);
             this.panel1.TabIndex = 44;
+            // 
+            // rd开卷
+            // 
+            this.rd开卷.AutoSize = true;
+            this.rd开卷.Location = new System.Drawing.Point(64, 3);
+            this.rd开卷.Name = "rd开卷";
+            this.rd开卷.Size = new System.Drawing.Size(47, 16);
+            this.rd开卷.TabIndex = 3;
+            this.rd开卷.Tag = "";
+            this.rd开卷.Text = "开卷";
+            this.rd开卷.UseVisualStyleBackColor = true;
+            this.rd开卷.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
             // rd开吨
             // 
             this.rd开吨.AutoSize = true;
-            this.rd开吨.Location = new System.Drawing.Point(128, 2);
+            this.rd开吨.Location = new System.Drawing.Point(191, 2);
             this.rd开吨.Name = "rd开吨";
             this.rd开吨.Size = new System.Drawing.Size(47, 16);
             this.rd开吨.TabIndex = 2;
             this.rd开吨.Tag = "开吨";
             this.rd开吨.Text = "开吨";
             this.rd开吨.UseVisualStyleBackColor = true;
-            this.rd开吨.CheckedChanged += new System.EventHandler(this.rd开吨_CheckedChanged);
+            this.rd开吨.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
             // txtRemainWeight
             // 
@@ -597,6 +611,7 @@
         private System.Windows.Forms.CheckBox chkOver;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox txtMemo;
+        private System.Windows.Forms.RadioButton rd开卷;
 
     }
 }

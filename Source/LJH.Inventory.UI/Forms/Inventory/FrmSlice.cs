@@ -50,7 +50,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private bool CheckInput()
         {
-            if (rd开平.Checked)
+            if (rd开平.Checked || rd开卷.Checked)
             {
                 if (this.txtLength.DecimalValue <= 0)
                 {
@@ -94,6 +94,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private string GetSliceType()
         {
             if (rd开平.Checked) return rd开平.Text;
+            if (rd开卷.Checked) return rd开卷.Text;
             if (rd开条.Checked) return rd开条.Text;
             if (rd开吨.Checked) return rd开吨.Text;
             return null;
@@ -109,32 +110,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ShowSlicingItem(SlicingItem);
             }
             rd开平.Checked = SliceTo == rd开平.Text;
+            rd开卷.Checked = SliceTo == rd开卷.Text;
             rd开条.Checked = SliceTo == rd开条.Text;
             rd开吨.Checked = SliceTo == rd开吨.Text;
+            if (UserSettings.Current != null) txtCustomer.Text = UserSettings.Current.DefaultCustomer;
             btnOk.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
         }
 
-        private void rd开平_CheckedChanged(object sender, EventArgs e)
+        private void rdSliceType_CheckedChanged(object sender, EventArgs e)
         {
-            txtLength.Enabled = rd开平.Checked;
-            txtCount.Enabled = rd开平.Checked;
-        }
+            txtLength.Enabled = rd开平.Checked || rd开卷.Checked;
+            txtCount.Enabled = rd开平.Checked || rd开卷.Checked;
+            chkOver.Enabled = rd开平.Checked || rd开卷.Checked;
+            if (rd开吨.Checked || rd开条.Checked) chkOver.Checked = false;
 
-        private void rd开条_CheckedChanged(object sender, EventArgs e)
-        {
             txtFormula.Enabled = rd开条.Checked;
-            if (rd开条.Checked)
+            if (rd开条.Checked || rd开吨.Checked)
             {
-                txtRemainLength.DecimalValue = 0;
-                txtRemainWeight.DecimalValue = 0;
-            }
-        }
-
-        private void rd开吨_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rd开吨.Checked)
-            {
-                txtLength.DecimalValue = SlicingItem.Length.Value;
                 txtRemainLength.DecimalValue = 0;
                 txtRemainWeight.DecimalValue = 0;
             }
@@ -250,11 +242,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Operator = Operator.Current.Name,
                     Memo = txtMemo.Text,
                 };
-                if (rd开平.Checked)
+                if (rd开平.Checked || rd开卷.Checked)
                 {
-                    if (txtLength.DecimalValue > 0) record.Length = txtLength.DecimalValue;
+                    record.Length = txtLength.DecimalValue;
                     record.Count = txtCount.IntergerValue;
-                    record.Weight = record.BeforeWeight - record.AfterWeight;
                 }
                 else if (rd开吨.Checked)
                 {

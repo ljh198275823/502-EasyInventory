@@ -105,6 +105,7 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_开卷 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -615,6 +616,7 @@
             this.cMnu_Add,
             this.toolStripSeparator2,
             this.mnu_开平,
+            this.mnu_开卷,
             this.mnu_开条,
             this.mnu_开吨,
             this.mnu_SliceView,
@@ -627,7 +629,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 330);
             // 
             // cMnu_Fresh
             // 
@@ -651,21 +653,21 @@
             this.mnu_开平.Name = "mnu_开平";
             this.mnu_开平.Size = new System.Drawing.Size(152, 22);
             this.mnu_开平.Text = "开平";
-            this.mnu_开平.Click += new System.EventHandler(this.mnu_开平_Click);
+            this.mnu_开平.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_开条
             // 
             this.mnu_开条.Name = "mnu_开条";
             this.mnu_开条.Size = new System.Drawing.Size(152, 22);
             this.mnu_开条.Text = "开条";
-            this.mnu_开条.Click += new System.EventHandler(this.mnu_开条_Click);
+            this.mnu_开条.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_开吨
             // 
             this.mnu_开吨.Name = "mnu_开吨";
             this.mnu_开吨.Size = new System.Drawing.Size(152, 22);
             this.mnu_开吨.Text = "开吨";
-            this.mnu_开吨.Click += new System.EventHandler(this.mnu_开吨_Click);
+            this.mnu_开吨.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_SliceView
             // 
@@ -723,6 +725,13 @@
             this.mnu_Import.Size = new System.Drawing.Size(152, 22);
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
+            // 
+            // mnu_开卷
+            // 
+            this.mnu_开卷.Name = "mnu_开卷";
+            this.mnu_开卷.Size = new System.Drawing.Size(152, 22);
+            this.mnu_开卷.Text = "开卷";
+            this.mnu_开卷.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // FrmSteelRollMaster
             // 
@@ -818,5 +827,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOtherCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripMenuItem mnu_开卷;
     }
 }

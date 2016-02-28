@@ -48,7 +48,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal? Length { get; set; }
         /// <summary>
-        /// 获取或设置小件的重量，有些小件是用重量来计量的
+        /// 获取或设置小件的重量
         /// </summary>
         public decimal? Weight { get; set; }
         /// <summary>

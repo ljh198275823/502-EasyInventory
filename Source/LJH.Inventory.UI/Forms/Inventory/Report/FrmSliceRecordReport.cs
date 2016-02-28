@@ -20,6 +20,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             InitializeComponent();
         }
 
+        private List<ProductInventoryItem> _AllSteelRolls = null;
+
         #region 重写基类方法
         protected override void Init()
         {
@@ -33,27 +35,21 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
 
         protected override List<object> GetDataSource()
         {
+            _AllSteelRolls = new SteelRollBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+
             SliceRecordSearchCondition con = new SliceRecordSearchCondition();
             con.SliceDate = new DateTimeRange(this.ucDateTimeInterval1.StartDateTime, this.ucDateTimeInterval1.EndDateTime);
             con.Category = this.categoryComboBox1.SelectedCategoryID;
             con.Specification = this.comSpecification1.Text;
-            con.Customer =txtCustomer .Text ;
-            con.Warehouse =wareHouseComboBox1 .Text ;
+            con.Customer = txtCustomer.Text;
+            con.Warehouse = wareHouseComboBox1.Text;
             List<SteelRollSliceRecord> records = (new SteelRollSliceRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             if (records != null && records.Count > 0)
             {
-                if (txtSourceRollWeight.DecimalValue > 0)
-                {
-                    ProductInventoryItemSearchCondition pcon = new ProductInventoryItemSearchCondition() { OriginalWeight = txtSourceRollWeight.DecimalValue };
-                    List<ProductInventoryItem> srs = new SteelRollBLL(AppSettings.Current.ConnStr).GetItems(pcon).QueryObjects;
-                    if (srs != null && srs.Count > 0)
-                    {
-                        records = records.Where(it => srs.Exists(p => p.ID == it.SliceSource)).ToList();
-                    }
-                }
                 return (from it in records
                         orderby it.SliceDate ascending
                         where ((chk开平.Checked && it.SliceType == chk开平.Text) ||
+                               (chk开卷.Checked && it.SliceType == chk开卷.Text) ||
                                (chk开条.Checked && it.SliceType == chk开条.Text) ||
                                (chk开吨.Checked && it.SliceType == chk开吨.Text))
                         select (object)it).ToList();
@@ -82,6 +78,15 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSlicer"].Value = record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;
             row.Cells["colSourceRoll"].Value = "查看原料卷";
+            if (_AllSteelRolls != null && _AllSteelRolls.Count > 0)
+            {
+                ProductInventoryItem sr=_AllSteelRolls .SingleOrDefault (it=>it.ID ==record.SliceSource );
+                if (sr != null) row.Cells["colSourceOriginalWeight"].Value = sr.OriginalWeight;
+                if (txtSourceRollWeight.DecimalValue > 0) //如果指定了来源卷重
+                {
+                    row.Visible = txtSourceRollWeight.DecimalValue == sr.OriginalWeight;
+                }
+            }
             row.Cells["colWarehouse"].Value = record.Warehouse;
             row.Cells["colMemo"].Value = record.Memo;
         }

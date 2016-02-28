@@ -40,6 +40,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -73,9 +74,11 @@
             this.colAfterLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSourceRoll = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSlicer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -83,15 +86,15 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(717, 18);
+            this.btnSearch.Location = new System.Drawing.Point(831, 18);
             // 
             // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(717, 47);
+            this.btnSaveAs.Location = new System.Drawing.Point(831, 47);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(717, 78);
+            this.btnColumn.Location = new System.Drawing.Point(831, 78);
             // 
             // groupBox1
             // 
@@ -115,6 +118,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chk开卷);
             this.groupBox3.Controls.Add(this.txtCustomer);
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Controls.Add(this.wareHouseComboBox1);
@@ -130,7 +134,7 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Location = new System.Drawing.Point(247, 11);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(447, 90);
+            this.groupBox3.Size = new System.Drawing.Size(578, 90);
             this.groupBox3.TabIndex = 37;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
@@ -176,7 +180,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(209, 69);
+            this.label3.Location = new System.Drawing.Point(440, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 97;
@@ -185,7 +189,7 @@
             // txtSourceRollWeight
             // 
             this.txtSourceRollWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSourceRollWeight.Location = new System.Drawing.Point(269, 65);
+            this.txtSourceRollWeight.Location = new System.Drawing.Point(500, 16);
             this.txtSourceRollWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -198,7 +202,7 @@
             0});
             this.txtSourceRollWeight.Name = "txtSourceRollWeight";
             this.txtSourceRollWeight.PointCount = 3;
-            this.txtSourceRollWeight.Size = new System.Drawing.Size(153, 21);
+            this.txtSourceRollWeight.Size = new System.Drawing.Size(72, 21);
             this.txtSourceRollWeight.TabIndex = 96;
             this.txtSourceRollWeight.Text = "0";
             // 
@@ -207,7 +211,7 @@
             this.chk开吨.AutoSize = true;
             this.chk开吨.Checked = true;
             this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开吨.Location = new System.Drawing.Point(149, 68);
+            this.chk开吨.Location = new System.Drawing.Point(196, 68);
             this.chk开吨.Name = "chk开吨";
             this.chk开吨.Size = new System.Drawing.Size(48, 16);
             this.chk开吨.TabIndex = 32;
@@ -219,7 +223,7 @@
             this.chk开条.AutoSize = true;
             this.chk开条.Checked = true;
             this.chk开条.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开条.Location = new System.Drawing.Point(99, 68);
+            this.chk开条.Location = new System.Drawing.Point(146, 68);
             this.chk开条.Name = "chk开条";
             this.chk开条.Size = new System.Drawing.Size(48, 16);
             this.chk开条.TabIndex = 31;
@@ -302,6 +306,7 @@
             this.colAfterLength,
             this.colCustomer,
             this.colWarehouse,
+            this.colSourceOriginalWeight,
             this.colSourceRoll,
             this.colSlicer,
             this.colMemo});
@@ -440,6 +445,14 @@
             this.colWarehouse.Name = "colWarehouse";
             this.colWarehouse.ReadOnly = true;
             // 
+            // colSourceOriginalWeight
+            // 
+            dataGridViewCellStyle12.Format = "N3";
+            this.colSourceOriginalWeight.DefaultCellStyle = dataGridViewCellStyle12;
+            this.colSourceOriginalWeight.HeaderText = "来源卷重";
+            this.colSourceOriginalWeight.Name = "colSourceOriginalWeight";
+            this.colSourceOriginalWeight.ReadOnly = true;
+            // 
             // colSourceRoll
             // 
             this.colSourceRoll.HeaderText = "原材料卷";
@@ -458,6 +471,18 @@
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
+            // 
+            // chk开卷
+            // 
+            this.chk开卷.AutoSize = true;
+            this.chk开卷.Checked = true;
+            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开卷.Location = new System.Drawing.Point(96, 68);
+            this.chk开卷.Name = "chk开卷";
+            this.chk开卷.Size = new System.Drawing.Size(48, 16);
+            this.chk开卷.TabIndex = 102;
+            this.chk开卷.Text = "开卷";
+            this.chk开卷.UseVisualStyleBackColor = true;
             // 
             // FrmSliceRecordReport
             // 
@@ -519,8 +544,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAfterLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceOriginalWeight;
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.CheckBox chk开卷;
     }
 }

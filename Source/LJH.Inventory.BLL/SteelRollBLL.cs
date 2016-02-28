@@ -201,7 +201,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Slice(ProductInventoryItem sr, SteelRollSliceRecord sliceSheet, WareHouse wh)
         {
-            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sliceSheet.Specification, sliceSheet.SliceType, sliceSheet.SliceType != "开平" ? sliceSheet.Weight : null, sliceSheet.Length, sr.Product.Density);
+            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sliceSheet.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length, sr.Product.Density);
             if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
@@ -219,8 +219,8 @@ namespace LJH.Inventory.BLL
                 AddDate = sliceSheet.SliceDate,
                 InventorySheet = "加工入库",
                 InventoryItem = sliceSheet.ID,
-                OriginalWeight = sliceSheet.Weight,
-                Weight = sliceSheet.Weight,
+                OriginalWeight = sliceSheet.BeforeWeight - sliceSheet.AfterWeight,
+                Weight = sliceSheet.BeforeWeight - sliceSheet.AfterWeight,
                 OriginalThick = sr.OriginalThick,
                 Count = sliceSheet.Count,
                 Model = sliceSheet.SliceType,
@@ -250,7 +250,7 @@ namespace LJH.Inventory.BLL
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.SourceRoll = pi.ID;
                 var items = new SteelRollSliceBLL(RepoUri).GetItems(con).QueryObjects;
-                if (items != null && items.Count > 0 && items.TrueForAll(it => it.Product != null && it.Product.Model == "开平"))
+                if (items != null && items.Count > 0 && items.TrueForAll(it => it.Product != null && (it.Product.Model == "开平" || it.Product.Model == "开卷")))
                 {
                     var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
                     decimal len = items.Sum(it => it.Length.Value * it.Count);
