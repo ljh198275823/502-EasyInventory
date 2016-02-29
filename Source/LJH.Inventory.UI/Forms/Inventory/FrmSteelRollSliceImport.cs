@@ -6,6 +6,7 @@ using System.Threading;
 using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
