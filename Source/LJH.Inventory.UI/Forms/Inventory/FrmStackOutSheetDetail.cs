@@ -325,7 +325,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 psi.Verb = "Print";
                                 psi.CreateNoWindow = true;
                                 psi.WindowStyle = ProcessWindowStyle.Hidden;
-                                psi.UseShellExecute = true;
+                                psi.UseShellExecute = false;
 
                                 Process prs = new Process();
                                 prs.StartInfo = psi;
