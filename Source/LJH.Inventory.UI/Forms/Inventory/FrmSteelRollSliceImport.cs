@@ -287,5 +287,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
             MessageBox.Show(string.Format("共成功导入{0}条数据", success), "结果");
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string modal = System.IO.Path.Combine(Application.StartupPath, "数据导入模板", "小件导入模板.xls");
+                if (File.Exists(modal))
+                {
+                    SaveFileDialog dig = new SaveFileDialog();
+                    dig.Filter = "Excel文档|*.xls;*.xlsx|所有文件(*.*)|*.*";
+                    dig.FileName = "原材料.xls";
+                    if (dig.ShowDialog() == DialogResult.OK && dig.FileName != modal)
+                    {
+                        File.Copy(modal, dig.FileName);
+                        MessageBox.Show("模板保存成功");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

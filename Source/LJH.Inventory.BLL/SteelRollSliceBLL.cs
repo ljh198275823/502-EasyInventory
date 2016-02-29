@@ -158,8 +158,12 @@ namespace LJH.Inventory.BLL
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(info, unitWork);
                 if (!string.IsNullOrEmpty(info.Supplier))
                 {
-                    AddReceivables(info, info.AddDate, unitWork);
-                    if (info.WithTax.HasValue && info.WithTax.Value) AddTax(info, info.AddDate, unitWork);
+                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(info.Supplier).QueryObject;
+                    if (s != null)
+                    {
+                        AddReceivables(info, info.AddDate, unitWork);
+                        if (info.WithTax.HasValue && info.WithTax.Value) AddTax(info, info.AddDate, unitWork);
+                    }
                 }
                 return unitWork.Commit();
             }

@@ -130,8 +130,12 @@ namespace LJH.Inventory.BLL
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(sr, unitWork);
                 if (!string.IsNullOrEmpty(sr.Supplier))
                 {
-                    AddReceivables(sr, sr.AddDate, unitWork);
-                    if (sr.WithTax.HasValue && sr.WithTax.Value) AddTax(sr, sr.AddDate, unitWork);
+                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
+                    if (s != null)
+                    {
+                        AddReceivables(sr, sr.AddDate, unitWork);
+                        if (sr.WithTax.HasValue && sr.WithTax.Value) AddTax(sr, sr.AddDate, unitWork);
+                    }
                 }
                 return unitWork.Commit();
             }
@@ -150,8 +154,12 @@ namespace LJH.Inventory.BLL
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o, unitWork);
                 if (!string.IsNullOrEmpty(sr.Supplier))
                 {
-                    AddReceivables(sr, sr.AddDate, unitWork);
-                    if (sr.WithTax.HasValue && sr.WithTax.Value) AddTax(sr, sr.AddDate, unitWork);
+                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
+                    if (s != null)
+                    {
+                        AddReceivables(sr, sr.AddDate, unitWork);
+                        if (sr.WithTax.HasValue && sr.WithTax.Value) AddTax(sr, sr.AddDate, unitWork);
+                    }
                 }
                 return unitWork.Commit();
             }

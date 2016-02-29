@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.chkOnlyRemain = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,7 +69,6 @@
             this.colWaitShipping = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colValid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -105,6 +105,19 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1218, 38);
             this.panel5.TabIndex = 7;
+            // 
+            // chk开卷
+            // 
+            this.chk开卷.AutoSize = true;
+            this.chk开卷.Checked = true;
+            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开卷.Location = new System.Drawing.Point(408, 12);
+            this.chk开卷.Name = "chk开卷";
+            this.chk开卷.Size = new System.Drawing.Size(48, 16);
+            this.chk开卷.TabIndex = 91;
+            this.chk开卷.Text = "开卷";
+            this.chk开卷.UseVisualStyleBackColor = true;
+            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // chkOnlyRemain
             // 
@@ -276,51 +289,50 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // mnu_CreateInventory
             // 
             this.mnu_CreateInventory.Name = "mnu_CreateInventory";
-            this.mnu_CreateInventory.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CreateInventory.Size = new System.Drawing.Size(152, 22);
             this.mnu_CreateInventory.Text = "新建库存";
             this.mnu_CreateInventory.Click += new System.EventHandler(this.mnu_CreateInventory_Click);
             // 
             // mnu_CheckView
             // 
             this.mnu_CheckView.Name = "mnu_CheckView";
-            this.mnu_CheckView.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CheckView.Size = new System.Drawing.Size(152, 22);
             this.mnu_CheckView.Text = "查看盘点记录";
             this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // mnu_Import
             // 
             this.mnu_Import.Name = "mnu_Import";
-            this.mnu_Import.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Import.Size = new System.Drawing.Size(152, 22);
             this.mnu_Import.Text = "导入...";
-            this.mnu_Import.Visible = false;
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
             // dataGridView1
@@ -345,8 +357,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 38);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1219, 334);
@@ -380,32 +392,32 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle7.Format = "N3";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colLength
             // 
-            dataGridViewCellStyle8.Format = "N3";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Format = "N3";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLength.HeaderText = "长度(米)";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             // 
             // colWaitShipping
             // 
-            dataGridViewCellStyle9.Format = "N0";
-            this.colWaitShipping.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Format = "N0";
+            this.colWaitShipping.DefaultCellStyle = dataGridViewCellStyle3;
             this.colWaitShipping.HeaderText = "待发货";
             this.colWaitShipping.Name = "colWaitShipping";
             this.colWaitShipping.ReadOnly = true;
             // 
             // colValid
             // 
-            dataGridViewCellStyle10.Format = "N0";
-            this.colValid.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Format = "N0";
+            this.colValid.DefaultCellStyle = dataGridViewCellStyle4;
             this.colValid.HeaderText = "可用库存";
             this.colValid.Name = "colValid";
             this.colValid.ReadOnly = true;
@@ -414,25 +426,12 @@
             // 
             // colTotal
             // 
-            dataGridViewCellStyle11.Format = "N0";
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Format = "N0";
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle5;
             this.colTotal.HeaderText = "库存合计";
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             this.colTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // chk开卷
-            // 
-            this.chk开卷.AutoSize = true;
-            this.chk开卷.Checked = true;
-            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开卷.Location = new System.Drawing.Point(408, 12);
-            this.chk开卷.Name = "chk开卷";
-            this.chk开卷.Size = new System.Drawing.Size(48, 16);
-            this.chk开卷.TabIndex = 91;
-            this.chk开卷.Text = "开卷";
-            this.chk开卷.UseVisualStyleBackColor = true;
-            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // FrmSteelRollSliceMaster
             // 
