@@ -473,11 +473,11 @@
             // 
             this.mnu_Reports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_DeliveryRecordReport,
+            this.mnu_SliceRecordReport,
             this.mnu_DeliveryStatistic,
             this.mnu_Performance,
-            this.toolStripSeparator4,
             this.mnu_InventoryRecord,
-            this.mnu_SliceRecordReport,
+            this.toolStripSeparator4,
             this.客户付款流水报表ToolStripMenuItem,
             this.客户增值税发票报表ToolStripMenuItem});
             this.mnu_Reports.Image = global::InventoryDemo.Properties.Resources.report;
