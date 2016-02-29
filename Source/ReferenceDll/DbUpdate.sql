@@ -82,3 +82,10 @@ BEGIN
 end
 go
 
+--2016-2-29 
+if exists (SELECT * FROM dbo.syscolumns WHERE name ='Weight' AND id = OBJECT_ID(N'[dbo].[StackOutItem]'))
+BEGIN
+	exec ('update StackoutItem set TotalWeight = Weight')
+end
+go
+

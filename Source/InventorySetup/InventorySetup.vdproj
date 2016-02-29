@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_11D2A90988D4A4C77981446B1F8C3807"
-        "OwnerKey" = "8:_3BCAAD00AF614BEC94715555EF4D65EF"
+        "MsmKey" = "8:_0A994B270FD64FDD86C6C846CE6B23E9"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_24AC197D1A0F4FB9BDCF8DA05009C2B2"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_11D2A90988D4A4C77981446B1F8C3807"
+        "OwnerKey" = "8:_3BCAAD00AF614BEC94715555EF4D65EF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -41,12 +41,6 @@
         {
         "MsmKey" = "8:_27428604BB9D4EE39BC03157F483EA58"
         "OwnerKey" = "8:_5976A00551993F4913E5C33850CB5B57"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2CC0CBE50D324B25BD1C8D9D3AC98062"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -81,6 +75,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_41738942D10042EB816C7BCEBD129C15"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_426B40AC669A1184FBCB37F1C499F30E"
         "OwnerKey" = "8:_27428604BB9D4EE39BC03157F483EA58"
         "MsmSig" = "8:_UNDEFINED"
@@ -94,6 +94,12 @@
         "Entry"
         {
         "MsmKey" = "8:_4DAB6282132D44019620BD9F21D2CAD2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_52823A9EADC44E638FDC34FFA33909C0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -183,7 +189,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_802E7D37C082438BAD4C1E218EB099FB"
+        "MsmKey" = "8:_8A92B436F3194BD6941C909788CCFFA1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -231,7 +237,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A688CF44B4ED4F19880FAEDEC18930A8"
+        "MsmKey" = "8:_B6627748556749EBB3FB544DD481AFBC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -281,6 +287,12 @@
         {
         "MsmKey" = "8:_F566AB49CCDA14811DBE1F0702F80DCE"
         "OwnerKey" = "8:_303A545FB057567EC9000A311A674066"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F9301A1C673B4C9E8E6D4094CF12D3AD"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -472,6 +484,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0A994B270FD64FDD86C6C846CE6B23E9"
+            {
+            "SourcePath" = "8:..\\ReferenceDll\\数据导入模板\\原材料导入模板.xls"
+            "TargetName" = "8:原材料导入模板.xls"
+            "Tag" = "8:"
+            "Folder" = "8:_F2F9FEF6F4C242BBAB1A190C055D0DDF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_11D2A90988D4A4C77981446B1F8C3807"
             {
             "AssemblyRegister" = "3:1"
@@ -503,26 +535,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_24AC197D1A0F4FB9BDCF8DA05009C2B2"
-            {
-            "SourcePath" = "8:..\\ReferenceDll\\模板\\送货单模板.xls"
-            "TargetName" = "8:送货单模板.xls"
-            "Tag" = "8:"
-            "Folder" = "8:_3E91B3A3DE8F431BB1919EDAF6D254EF"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_27428604BB9D4EE39BC03157F483EA58"
             {
             "AssemblyRegister" = "3:1"
@@ -552,26 +564,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2CC0CBE50D324B25BD1C8D9D3AC98062"
-            {
-            "SourcePath" = "8:..\\ReferenceDll\\模板\\客户导入模板.xls"
-            "TargetName" = "8:客户导入模板.xls"
-            "Tag" = "8:"
-            "Folder" = "8:_3E91B3A3DE8F431BB1919EDAF6D254EF"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_303A545FB057567EC9000A311A674066"
@@ -636,6 +628,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_41738942D10042EB816C7BCEBD129C15"
+            {
+            "SourcePath" = "8:..\\ReferenceDll\\数据导入模板\\客户导入模板.xls"
+            "TargetName" = "8:客户导入模板.xls"
+            "Tag" = "8:"
+            "Folder" = "8:_F2F9FEF6F4C242BBAB1A190C055D0DDF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_426B40AC669A1184FBCB37F1C499F30E"
             {
             "AssemblyRegister" = "3:1"
@@ -673,6 +685,26 @@
             "TargetName" = "8:易存企业管理系统用户手册.doc"
             "Tag" = "8:"
             "Folder" = "8:_3E91B3A3DE8F431BB1919EDAF6D254EF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_52823A9EADC44E638FDC34FFA33909C0"
+            {
+            "SourcePath" = "8:..\\ReferenceDll\\送货单模板\\送货单模板.xls"
+            "TargetName" = "8:送货单模板.xls"
+            "Tag" = "8:"
+            "Folder" = "8:_6E1109C61D664DC894F6D92DE60791CA"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -800,12 +832,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_802E7D37C082438BAD4C1E218EB099FB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A92B436F3194BD6941C909788CCFFA1"
             {
-            "SourcePath" = "8:..\\ReferenceDll\\模板\\原材料导入模板.xls"
-            "TargetName" = "8:原材料导入模板.xls"
+            "SourcePath" = "8:..\\ReferenceDll\\送货单模板\\方和.xls"
+            "TargetName" = "8:方和.xls"
             "Tag" = "8:"
-            "Folder" = "8:_3E91B3A3DE8F431BB1919EDAF6D254EF"
+            "Folder" = "8:_6E1109C61D664DC894F6D92DE60791CA"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -913,12 +945,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A688CF44B4ED4F19880FAEDEC18930A8"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B6627748556749EBB3FB544DD481AFBC"
             {
-            "SourcePath" = "8:..\\ReferenceDll\\模板\\小件导入模板.xls"
-            "TargetName" = "8:小件导入模板.xls"
+            "SourcePath" = "8:..\\ReferenceDll\\送货单模板\\联谊.xls"
+            "TargetName" = "8:联谊.xls"
             "Tag" = "8:"
-            "Folder" = "8:_3E91B3A3DE8F431BB1919EDAF6D254EF"
+            "Folder" = "8:_6E1109C61D664DC894F6D92DE60791CA"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1044,6 +1076,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F9301A1C673B4C9E8E6D4094CF12D3AD"
+            {
+            "SourcePath" = "8:..\\ReferenceDll\\数据导入模板\\小件导入模板.xls"
+            "TargetName" = "8:小件导入模板.xls"
+            "Tag" = "8:"
+            "Folder" = "8:_F2F9FEF6F4C242BBAB1A190C055D0DDF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F969561D4B1E469D8887614EDEC009F4"
             {
             "SourcePath" = "8:..\\ReferenceDll\\inventory.ico"
@@ -1091,6 +1143,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_6E1109C61D664DC894F6D92DE60791CA"
+                    {
+                    "Name" = "8:送货单模板"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_D908A0AC1213415F80E6A77F32FBB0A7"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_F2F9FEF6F4C242BBAB1A190C055D0DDF"
+                    {
+                    "Name" = "8:数据导入模板"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_EF2DFB262A5D44B29A98CB957A9DBEA3"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_885FA34407E6409E8F99C2F509D73D82"
@@ -1132,7 +1206,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:易存企业管理系统"
         "ProductCode" = "8:{EF1BC19D-08BD-4C00-BED8-3D3721BDAB35}"
-        "PackageCode" = "8:{F2BE4C4C-5234-4042-B5C0-3587D99E72C2}"
+        "PackageCode" = "8:{87EE8902-BE48-4EF1-96DC-9F6950E4A5F0}"
         "UpgradeCode" = "8:{99D9C92D-53B2-4530-B7A1-CA7241289C18}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

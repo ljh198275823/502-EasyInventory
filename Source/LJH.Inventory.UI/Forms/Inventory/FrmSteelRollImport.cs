@@ -304,7 +304,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             try
             {
-                string modal = System.IO.Path.Combine(Application.StartupPath, "原材料导入模板.xls");
+                string modal = System.IO.Path.Combine(Application.StartupPath, "数据导入模板", "原材料导入模板.xls");
                 if (File.Exists(modal))
                 {
                     SaveFileDialog dig = new SaveFileDialog();

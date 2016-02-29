@@ -247,19 +247,24 @@ namespace LJH.Inventory.BLL
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 decimal? thick = null;
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                SliceRecordSearchCondition con = new SliceRecordSearchCondition();
                 con.SourceRoll = pi.ID;
-                var items = new SteelRollSliceBLL(RepoUri).GetItems(con).QueryObjects;
-                if (items != null && items.Count > 0 && items.TrueForAll(it => it.Product != null && (it.Product.Model == "开平" || it.Product.Model == "开卷")))
+                var records = new SteelRollSliceRecordBLL(RepoUri).GetItems(con).QueryObjects;
+                if (records != null && records.Count > 0 && records.TrueForAll(it => it.SliceType == "开平" || it.SliceType == "开卷"))
                 {
+                    decimal len = records.Sum(it => it.Length.Value * it.Count);
+                    decimal weight = records.Max(it => it.BeforeWeight); //获取第一次加工记录前的重量
+                    thick = pi.CalThick(pi.Product.Specification, weight, len, pi.Product.Density.Value);
+
                     var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
-                    decimal len = items.Sum(it => it.Length.Value * it.Count);
-                    thick = pi.CalThick(pi.Product.Specification, pi.OriginalWeight.Value, len, pi.Product.Density.Value);
                     if (thick.HasValue)
                     {
                         ProductInventoryItem clone = pi.Clone();
                         clone.RealThick = thick;
                         provider.Update(clone, pi, unitWork);
+                        ProductInventoryItemSearchCondition pcon = new ProductInventoryItemSearchCondition();
+                        pcon.SourceRoll = pi.ID;
+                        var items = provider.GetItems(pcon).QueryObjects;
                         foreach (var slice in items)
                         {
                             var sliceClone = slice.Clone();
@@ -277,6 +282,7 @@ namespace LJH.Inventory.BLL
                 return new CommandResult(ResultCode.Fail, ex.Message);
             }
         }
+
         /// <summary>
         /// 原材料盘点
         /// </summary>

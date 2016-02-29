@@ -295,7 +295,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
                             this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
                         }
                     }
-                    string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板.xls");
+
+                    if (sheet.State != SheetState.Shipped && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint)
+                    {
+                        var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.StackOut, Operator.Current.Name, Operator.Current.ID);
+                        if (ret.Result != ResultCode.Successful)
+                        {
+                            MessageBox.Show(ret.Message);
+                            return;
+                        }
+                        else
+                        {
+                            ShowButtonState();
+                            this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
+                        }
+                    }
+
+                    string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板", "送货单模板.xls");
                     Print.StackOutSheetExporter exporter = null;
                     if (System.IO.File.Exists(modal))
                     {
@@ -314,20 +330,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 Process prs = new Process();
                                 prs.StartInfo = psi;
                                 prs.Start();
-                            }
-                        }
-                        if (sheet.State != SheetState.Shipped && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint)
-                        {
-                            var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.StackOut, Operator.Current.Name, Operator.Current.ID);
-                            if (ret.Result != ResultCode.Successful)
-                            {
-                                MessageBox.Show(ret.Message);
-                                return;
-                            }
-                            else
-                            {
-                                ShowButtonState();
-                                this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
                             }
                         }
                     }
