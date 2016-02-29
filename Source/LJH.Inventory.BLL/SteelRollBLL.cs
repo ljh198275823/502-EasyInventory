@@ -217,7 +217,7 @@ namespace LJH.Inventory.BLL
 
             ProductInventoryItem newVal = sr.Clone();
             newVal.Weight = sliceSheet.AfterWeight;
-            newVal.Length = sliceSheet.AfterLength;
+            newVal.Length = sr.CalLength(sr.Product.Specification, sr.Weight.Value, sr.Product.Density.Value); //剩余长度通过计算得到
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr, unitWork);
 
             ProductInventoryItem pi = new ProductInventoryItem()
@@ -243,8 +243,8 @@ namespace LJH.Inventory.BLL
             CommandResult ret = unitWork.Commit();
             if (ret.Result == ResultCode.Successful)
             {
-                sr.Weight = sliceSheet.AfterWeight;
-                sr.Length = sliceSheet.AfterLength;
+                sr.Weight = newVal.Weight;
+                sr.Length = newVal.Length;
             }
             return ret;
         }
@@ -295,12 +295,11 @@ namespace LJH.Inventory.BLL
         /// 原材料盘点
         /// </summary>
         /// <returns></returns>
-        public CommandResult Check(ProductInventoryItem sr, decimal newWeight, decimal newLength, string memo, string checker, string operatorName)
+        public CommandResult Check(ProductInventoryItem sr, decimal newWeight, string memo, string checker, string operatorName)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             ProductInventoryItem newVal = sr.Clone();
             newVal.Weight = newWeight;
-            newVal.Length = newLength;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr, unitWork);
             InventoryCheckRecord citem = new InventoryCheckRecord()
             {
@@ -309,9 +308,7 @@ namespace LJH.Inventory.BLL
                 ProductID = sr.ProductID,
                 WarehouseID = sr.WareHouseID,
                 SourceID = sr.ID,
-                BeforeLength = sr.Length,
                 BeforeWeight = sr.Weight,
-                Length = newLength,
                 Weight = newWeight,
                 Inventory = 1,
                 CheckCount = 1,
@@ -327,7 +324,6 @@ namespace LJH.Inventory.BLL
             if (ret.Result == ResultCode.Successful)
             {
                 sr.Weight = newWeight;
-                sr.Length = newLength;
             }
             return ret;
         }

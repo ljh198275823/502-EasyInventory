@@ -21,7 +21,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (SteelRoll != null)
             {
-                txtNewLength.DecimalValue = SteelRoll.Length.Value;
                 txtNewWeigth.DecimalValue = SteelRoll.Weight.Value;
             }
             btnOk.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
@@ -35,13 +34,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtNewWeigth.Focus();
                 return;
             }
-            if (txtNewLength.DecimalValue < 0)
-            {
-                MessageBox.Show("长度输入不正确，请重新输入");
-                txtNewLength.Focus();
-                return;
-            }
-            CommandResult ret = new SteelRollBLL(AppSettings.Current.ConnStr).Check(SteelRoll, txtNewWeigth.DecimalValue, txtNewLength.DecimalValue, txtMemo.Text, txtChecker.Text, Operator.Current.Name);
+            CommandResult ret = new SteelRollBLL(AppSettings.Current.ConnStr).Check(SteelRoll, txtNewWeigth.DecimalValue, txtMemo.Text, txtChecker.Text, Operator.Current.Name);
             if (ret.Result == ResultCode.Successful)
             {
                 this.DialogResult = DialogResult.OK;
@@ -66,7 +59,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void button1_Click(object sender, EventArgs e)
         {
             txtNewWeigth.DecimalValue = SteelRoll.OriginalWeight.Value;
-            txtNewLength.DecimalValue = SteelRoll.OriginalLength.Value;
         }
     }
 }

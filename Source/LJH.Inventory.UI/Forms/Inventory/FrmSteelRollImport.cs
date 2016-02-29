@@ -184,12 +184,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Product = product;
             pi.Model = product.Model;
             pi.WareHouseID = ws;
-            pi.OriginalThick = originalLength == 0 ? SpecificationHelper.GetWrittenThick(specification) : pi.CalThick(specification, originalWeight, originalLength, product.Density.Value); //如果有入库长度，则要计算入库厚度
+            pi.OriginalThick = SpecificationHelper.GetWrittenThick(specification);
             pi.OriginalWeight = originalWeight;
-            pi.OriginalLength = originalLength == 0 ? pi.CalLength(specification, originalWeight, product.Density.Value) : originalLength;
+            if (originalLength > 0) pi.OriginalLength = originalLength;
             pi.Weight = weight;
-            if (length == 0 && originalWeight == weight) pi.Length = pi.OriginalLength; //如果入库重量与剩余重量相等，并且没有指定剩余长度，则剩余长度等于入库长度
-            else pi.Length = length == 0 ? pi.CalLength(specification, weight, product.Density.Value) : length;
+            if (length > 0) pi.Length = length;
             pi.Count = 1;
             pi.Unit = "卷";
             pi.Customer = customer;

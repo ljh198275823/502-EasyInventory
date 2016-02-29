@@ -46,7 +46,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("原材料的剩余重量不正确");
                 return false;
             }
-            if (this.txtLength.DecimalValue <= 0)
+            if (this.txtLength.DecimalValue < 0)
             {
                 MessageBox.Show("原材料的剩余长度不正确");
                 return false;
@@ -126,9 +126,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCategory.Tag = item.Product.Category;
             cmbSpecification.Specification = item.Product.Specification;
             txtOriginalWeight.DecimalValue = item.OriginalWeight.Value;
-            txtOriginalLength.DecimalValue = item.OriginalLength.Value;
+            if (item.OriginalLength.HasValue) txtOriginalLength.DecimalValue = item.OriginalLength.Value;
             txtLength.DecimalValue = item.Length.Value;
-            txtWeight.DecimalValue = item.Weight.Value;
+            if (item.Length.HasValue) txtLength.DecimalValue = item.Length.Value;
             txtCustomer.Text = item.Customer;
             if (!string.IsNullOrEmpty(item.Supplier))
             {
@@ -166,11 +166,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouse = txtWareHouse.Tag as WareHouse;
             item.WareHouseID = item.WareHouse.ID;
+            item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
+            if (txtOriginalLength.DecimalValue > 0) item.OriginalLength = txtOriginalLength.DecimalValue;
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
-            item.OriginalLength = txtOriginalLength.DecimalValue;
-            item.OriginalThick = item.CalThick(p.Specification, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value);
+            if (txtLength.DecimalValue > 0) item.Length = txtLength.DecimalValue;
             item.Weight = txtWeight.DecimalValue;
-            item.Length = txtLength.DecimalValue;
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;

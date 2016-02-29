@@ -10,6 +10,35 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public class ProductInventoryItem : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
+        #region 静态方法
+        /// <summary>
+        /// 计算某个规格指定长度的重量
+        /// </summary>
+        /// <param name="specification"></param>
+        /// <param name="length"></param>
+        /// <param name="density"></param>
+        /// <returns></returns>
+        public static decimal? CalWeight(string specification, decimal length, decimal density)
+        {
+            if (!string.IsNullOrEmpty(specification))
+            {
+                try
+                {
+                    decimal? thick = SpecificationHelper.GetWrittenThick(specification);
+                    decimal? width = SpecificationHelper.GetWrittenWidth(specification);
+                    if (width.HasValue && width > 0 && thick.HasValue && thick > 0)
+                    {
+                        return (thick * width * length * density) / (1000 * 1000);
+                    }
+                }
+                catch
+                {
+                }
+            }
+            return null;
+        }
+        #endregion
+
         #region 构造函数
         public ProductInventoryItem()
         {
@@ -183,11 +212,10 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (OriginalWeight == Weight) return "整卷";
+                if (OriginalWeight <= Weight) return "整卷";
                 if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "余料";
                 else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
-                else if (OriginalLength > Length) return "余卷";
-                return "整卷";
+                return "余卷";
             }
         }
         /// <summary>
@@ -236,6 +264,7 @@ namespace LJH.Inventory.BusinessModel
             }
             return null;
         }
+        
         /// <summary>
         /// 获取库存项的单重
         /// </summary>

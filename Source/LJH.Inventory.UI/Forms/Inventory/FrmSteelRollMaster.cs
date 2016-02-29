@@ -93,6 +93,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
             }
+            else if (sr.State == ProductInventoryState.Shipped)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Brown;
+            }
             else if (sr.Status == "整卷")
             {
                 row.DefaultCellStyle.ForeColor = Color.Blue;
@@ -198,6 +202,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (!_SteelRolls.Exists(it => it.ID == sr.ID))
             {
                 _SteelRolls.Add(sr);
+            }
+            if (sr.State == ProductInventoryState.Nullified)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
+                row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
         }
         #endregion

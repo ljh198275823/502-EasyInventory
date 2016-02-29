@@ -40,9 +40,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             txtCategory.Text = item.Product.Category.Name;
             txtSpecification.Text = item.Product.Specification;
-            txtCurrentLength.DecimalValue = item.Length.Value;
             txtCurrentWeigth.DecimalValue = item.Weight.Value;
-            txtRemainLength.DecimalValue = item.Length.Value;
             txtRemainWeight.DecimalValue = item.Weight.Value;
             txtWareHouse.Text = item.WareHouse.Name;
             txtWareHouse.Tag = item.WareHouse;
@@ -83,7 +81,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定加工件存放的仓库");
                 return false;
             }
-            if (this.txtCustomer.Tag == null)
+            if (string.IsNullOrEmpty(this.txtCustomer.Text))
             {
                 MessageBox.Show("没有指定加工的客户");
                 return false;
@@ -127,7 +125,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtFormula.Enabled = rd开条.Checked;
             if (rd开条.Checked || rd开吨.Checked)
             {
-                txtRemainLength.DecimalValue = 0;
                 txtRemainWeight.DecimalValue = 0;
             }
         }
@@ -135,18 +132,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
             if (chkOver.Checked) return;
-            if (txtLength.DecimalValue * txtCount.IntergerValue <= SlicingItem.Length)
+            decimal? weight = ProductInventoryItem.CalWeight(SlicingItem.Product.Specification, txtLength.DecimalValue * txtCount.IntergerValue, SlicingItem.Product.Density.Value);
+            if (weight.HasValue && weight <= SlicingItem.Weight)
             {
-                this.txtRemainLength.DecimalValue = SlicingItem.Length.Value - txtLength.DecimalValue * txtCount.IntergerValue;
-                this.txtRemainWeight.DecimalValue = (txtRemainLength.DecimalValue / SlicingItem.OriginalLength.Value) * SlicingItem.OriginalWeight.Value;
+                this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - weight.Value;
             }
             else
             {
-                var ret = MessageBox.Show(string.Format("原料长度不足，不能加工长度为 {0} 米的小件 {1} 块, 是否继续开平?", txtLength.DecimalValue, txtCount.IntergerValue),
+                var ret = MessageBox.Show(string.Format("原料当前重量不足以加工成 长度为 {0} 米的小件 {1} 件, 是否继续?", txtLength.DecimalValue, txtCount.IntergerValue),
                                           "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (ret == DialogResult.Yes)
                 {
-                    this.txtRemainLength.DecimalValue = 0;
                     this.txtRemainWeight.DecimalValue = 0;
                     btnOk.BackColor = Color.Red;
                     btnOk.ForeColor = Color.White;
@@ -163,7 +159,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (chkOver.Checked)
             {
-                this.txtRemainLength.DecimalValue = 0;
                 this.txtRemainWeight.DecimalValue = 0;
                 btnOk.BackColor = Color.Red;
                 btnOk.ForeColor = Color.White;
@@ -232,9 +227,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Category = SlicingItem.Product.Category.Name,
                     Specification = SlicingItem.Product.Specification,
                     SliceType = GetSliceType(),
-                    BeforeLength = SlicingItem.Length.Value,
                     BeforeWeight = SlicingItem.Weight.Value,
-                    AfterLength = txtRemainLength.DecimalValue,
                     AfterWeight = txtRemainWeight.DecimalValue,
                     Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,

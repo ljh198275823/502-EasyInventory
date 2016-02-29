@@ -42,16 +42,12 @@
             this.dtSliceDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCurrentWeigth = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txtCurrentLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rd开卷 = new System.Windows.Forms.RadioButton();
             this.rd开吨 = new System.Windows.Forms.RadioButton();
             this.txtRemainWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txtRemainLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSlicers = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -218,36 +214,6 @@
             this.txtCurrentWeigth.TabIndex = 36;
             this.txtCurrentWeigth.Text = "0.00";
             // 
-            // txtCurrentLength
-            // 
-            this.txtCurrentLength.Enabled = false;
-            this.txtCurrentLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCurrentLength.Location = new System.Drawing.Point(300, 78);
-            this.txtCurrentLength.MaxValue = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.txtCurrentLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtCurrentLength.Name = "txtCurrentLength";
-            this.txtCurrentLength.PointCount = 3;
-            this.txtCurrentLength.Size = new System.Drawing.Size(126, 21);
-            this.txtCurrentLength.TabIndex = 37;
-            this.txtCurrentLength.Text = "0.00";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(219, 82);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 12);
-            this.label8.TabIndex = 38;
-            this.label8.Text = "当前长度(米)";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -321,36 +287,6 @@
             this.txtRemainWeight.Size = new System.Drawing.Size(114, 21);
             this.txtRemainWeight.TabIndex = 46;
             this.txtRemainWeight.Text = "0.00";
-            // 
-            // txtRemainLength
-            // 
-            this.txtRemainLength.Enabled = false;
-            this.txtRemainLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtRemainLength.Location = new System.Drawing.Point(300, 202);
-            this.txtRemainLength.MaxValue = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.txtRemainLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtRemainLength.Name = "txtRemainLength";
-            this.txtRemainLength.PointCount = 3;
-            this.txtRemainLength.Size = new System.Drawing.Size(126, 21);
-            this.txtRemainLength.TabIndex = 47;
-            this.txtRemainLength.Text = "0.00";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(219, 206);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(77, 12);
-            this.label11.TabIndex = 48;
-            this.label11.Text = "剩余长度(米)";
             // 
             // label12
             // 
@@ -539,8 +475,6 @@
             this.Controls.Add(this.txtSlicers);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtRemainWeight);
-            this.Controls.Add(this.txtRemainLength);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label10);
@@ -548,8 +482,6 @@
             this.Controls.Add(this.dtSliceDate);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtCurrentWeigth);
-            this.Controls.Add(this.txtCurrentLength);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtCount);
             this.Controls.Add(this.txtLength);
@@ -585,14 +517,10 @@
         private System.Windows.Forms.DateTimePicker dtSliceDate;
         private System.Windows.Forms.Label label6;
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtCurrentWeigth;
-        private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtCurrentLength;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel1;
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtRemainWeight;
-        private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtRemainLength;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label1;
         private LJH.GeneralLibrary.WinformControl.DBCTextBox txtSlicers;

@@ -34,8 +34,6 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNewWeigth = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txtNewLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtChecker = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -90,38 +88,9 @@
             0});
             this.txtNewWeigth.Name = "txtNewWeigth";
             this.txtNewWeigth.PointCount = 3;
-            this.txtNewWeigth.Size = new System.Drawing.Size(78, 21);
+            this.txtNewWeigth.Size = new System.Drawing.Size(200, 21);
             this.txtNewWeigth.TabIndex = 0;
             this.txtNewWeigth.Text = "0.00";
-            // 
-            // txtNewLength
-            // 
-            this.txtNewLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtNewLength.Location = new System.Drawing.Point(226, 18);
-            this.txtNewLength.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txtNewLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtNewLength.Name = "txtNewLength";
-            this.txtNewLength.PointCount = 2;
-            this.txtNewLength.Size = new System.Drawing.Size(65, 21);
-            this.txtNewLength.TabIndex = 1;
-            this.txtNewLength.Text = "0.00";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(167, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "长度(米)";
             // 
             // label3
             // 
@@ -182,8 +151,6 @@
             this.Controls.Add(this.txtChecker);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtNewLength);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtNewWeigth);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOk);
@@ -207,8 +174,6 @@
         protected System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Label label2;
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtNewWeigth;
-        private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtNewLength;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private GeneralLibrary.WinformControl.DBCTextBox txtChecker;
