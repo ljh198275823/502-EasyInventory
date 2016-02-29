@@ -32,6 +32,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             CustomerPayment cp = item as CustomerPayment;
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.ID;
+            if (cp.ClassID == CustomerPaymentType.Customer) row.Cells["colClass"].Value = "收款";
+            else if (cp.ClassID == CustomerPaymentType.Supplier) row.Cells["colClass"].Value = "付款";
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
             row.Cells["colBank"].Value = cp.Bank;
@@ -43,6 +45,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
             }
             row.Cells["colMemo"].Value = cp.Memo;
+            if (cp.ClassID == CustomerPaymentType.Customer) row.DefaultCellStyle.ForeColor = Color.Blue;
+            else if (cp.ClassID == CustomerPaymentType.Supplier) row.DefaultCellStyle.ForeColor = Color.Red;
             if (cp.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
@@ -52,13 +56,16 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
 
         protected override List<object> GetDataSource()
         {
-            _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
+            _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            if (!chk支.Checked && !chk收.Checked) return null;
 
             var con = new CustomerPaymentSearchCondition();
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            con.CustomerID = txtCustomer.Tag != null ? (txtCustomer.Tag as CompanyInfo).ID : null;
+            if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
+            if (txtSupplier.Tag != null) con.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
             con.PaymentTypes = new List<CustomerPaymentType>();
-            con.PaymentTypes.Add(CustomerPaymentType.Customer);
+            if (chk收.Checked) con.PaymentTypes.Add(CustomerPaymentType.Customer);
+            if (chk支.Checked) con.PaymentTypes.Add(CustomerPaymentType.Supplier);
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }
@@ -70,6 +77,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             ucDateTimeInterval1.SelectThisMonth();
             base.Init();
         }
+
         #endregion
 
         #region 事件处理程序
@@ -89,6 +97,24 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
+        }
+
+        private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = s.Name;
+                txtSupplier.Tag = s;
+            }
+        }
+
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
+        {
+            txtSupplier.Text = string.Empty;
+            txtSupplier.Tag = null;
         }
         #endregion
 

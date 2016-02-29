@@ -32,6 +32,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             CustomerPayment cp = item as CustomerPayment;
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.ID;
+            if (cp.ClassID == CustomerPaymentType.CustomerTax) row.Cells["colClass"].Value = "销售";
+            else if (cp.ClassID == CustomerPaymentType.SupplierTax) row.Cells["colClass"].Value = "采购";
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colAmount"].Value = cp.Amount;
             if (_AllCustomers != null)
@@ -40,6 +42,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
             }
             row.Cells["colMemo"].Value = cp.Memo;
+            if (cp.ClassID == CustomerPaymentType.CustomerTax) row.DefaultCellStyle.ForeColor = Color.Blue;
+            else if (cp.ClassID == CustomerPaymentType.SupplierTax) row.DefaultCellStyle.ForeColor = Color.Red;
             if (cp.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
@@ -49,13 +53,16 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
 
         protected override List<object> GetDataSource()
         {
-            _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
+            _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            if (!chk支.Checked && !chk收.Checked) return null;
 
             var con = new CustomerPaymentSearchCondition();
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            con.CustomerID = txtCustomer.Tag != null ? (txtCustomer.Tag as CompanyInfo).ID : null;
+            if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
+            if (txtSupplier.Tag != null) con.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
             con.PaymentTypes = new List<CustomerPaymentType>();
-            con.PaymentTypes.Add(CustomerPaymentType.CustomerTax);
+            if (chk收.Checked) con.PaymentTypes.Add(CustomerPaymentType.CustomerTax);
+            if (chk支.Checked) con.PaymentTypes.Add(CustomerPaymentType.SupplierTax);
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             if (!string.IsNullOrEmpty(txtBillID.Text.Trim()) && items != null && items.Count > 0)
             {
@@ -91,7 +98,24 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
         }
-        #endregion
 
+        private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = s.Name;
+                txtSupplier.Tag = s;
+            }
+        }
+
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
+        {
+            txtSupplier.Text = string.Empty;
+            txtSupplier.Tag = null;
+        }
+        #endregion
     }
 }
