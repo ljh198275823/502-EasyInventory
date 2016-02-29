@@ -146,7 +146,6 @@
             this.colBeforeWeight.HeaderText = "加工前重量";
             this.colBeforeWeight.Name = "colBeforeWeight";
             this.colBeforeWeight.ReadOnly = true;
-            this.colBeforeWeight.Visible = false;
             // 
             // colBeforeLength
             // 
@@ -212,6 +211,7 @@
             this.colAfterLength.HeaderText = "加工后长度";
             this.colAfterLength.Name = "colAfterLength";
             this.colAfterLength.ReadOnly = true;
+            this.colAfterLength.Visible = false;
             // 
             // colCustomer
             // 
@@ -225,14 +225,14 @@
             this.colSlicer.Name = "colSlicer";
             this.colSlicer.ReadOnly = true;
             // 
-            // FrmSlicedRecordView
+            // FrmSliceRecordView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 405);
             this.Controls.Add(this.GridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmSlicedRecordView";
+            this.Name = "FrmSliceRecordView";
             this.Text = "铁皮卷加工记录";
             this.Controls.SetChildIndex(this.GridView, 0);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();

@@ -44,6 +44,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
@@ -78,7 +79,6 @@
             this.colSourceRoll = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSlicer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -138,6 +138,18 @@
             this.groupBox3.TabIndex = 37;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
+            // 
+            // chk开卷
+            // 
+            this.chk开卷.AutoSize = true;
+            this.chk开卷.Checked = true;
+            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开卷.Location = new System.Drawing.Point(96, 68);
+            this.chk开卷.Name = "chk开卷";
+            this.chk开卷.Size = new System.Drawing.Size(48, 16);
+            this.chk开卷.TabIndex = 102;
+            this.chk开卷.Text = "开卷";
+            this.chk开卷.UseVisualStyleBackColor = true;
             // 
             // txtCustomer
             // 
@@ -284,9 +296,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -371,6 +383,7 @@
             this.colBeforeLength.HeaderText = "加工前长度";
             this.colBeforeLength.Name = "colBeforeLength";
             this.colBeforeLength.ReadOnly = true;
+            this.colBeforeLength.Visible = false;
             // 
             // colLength
             // 
@@ -406,6 +419,7 @@
             this.colTotalWeight.HeaderText = "加工重量";
             this.colTotalWeight.Name = "colTotalWeight";
             this.colTotalWeight.ReadOnly = true;
+            this.colTotalWeight.Visible = false;
             this.colTotalWeight.Width = 80;
             // 
             // colTotalLength
@@ -415,6 +429,7 @@
             this.colTotalLength.HeaderText = "加工长度";
             this.colTotalLength.Name = "colTotalLength";
             this.colTotalLength.ReadOnly = true;
+            this.colTotalLength.Visible = false;
             this.colTotalLength.Width = 80;
             // 
             // colAfterWeight
@@ -432,6 +447,7 @@
             this.colAfterLength.HeaderText = "加工后长度";
             this.colAfterLength.Name = "colAfterLength";
             this.colAfterLength.ReadOnly = true;
+            this.colAfterLength.Visible = false;
             // 
             // colCustomer
             // 
@@ -471,18 +487,6 @@
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
-            // 
-            // chk开卷
-            // 
-            this.chk开卷.AutoSize = true;
-            this.chk开卷.Checked = true;
-            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开卷.Location = new System.Drawing.Point(96, 68);
-            this.chk开卷.Name = "chk开卷";
-            this.chk开卷.Size = new System.Drawing.Size(48, 16);
-            this.chk开卷.TabIndex = 102;
-            this.chk开卷.Text = "开卷";
-            this.chk开卷.UseVisualStyleBackColor = true;
             // 
             // FrmSliceRecordReport
             // 
@@ -528,6 +532,7 @@
         private System.Windows.Forms.Label label4;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.LinkLabel lnkCustomer;
+        private System.Windows.Forms.CheckBox chk开卷;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicedDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
@@ -548,6 +553,5 @@
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.CheckBox chk开卷;
     }
 }

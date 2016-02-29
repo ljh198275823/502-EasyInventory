@@ -242,7 +242,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else if (rd开吨.Checked)
                 {
-                    record.Length = SlicingItem.Length;
                     record.Weight = SlicingItem.Weight;
                     record.AfterLength = 0;
                     record.AfterWeight = 0;
@@ -250,7 +249,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else if (rd开条.Checked)
                 {
-                    record.Length = SlicingItem.Length;
                     record.Weight = SlicingItem.Weight;
                     record.AfterLength = 0;
                     record.AfterWeight = 0;

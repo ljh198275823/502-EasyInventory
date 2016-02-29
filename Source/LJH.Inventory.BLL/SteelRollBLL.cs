@@ -213,12 +213,14 @@ namespace LJH.Inventory.BLL
             if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(sliceSheet, unitWork);
 
             ProductInventoryItem newVal = sr.Clone();
             newVal.Weight = sliceSheet.AfterWeight;
-            newVal.Length = sr.CalLength(sr.Product.Specification, sr.Weight.Value, sr.Product.Density.Value); //剩余长度通过计算得到
+            newVal.Length = sr.CalLength(sr.Product.Specification, newVal.Weight.Value, sr.Product.Density.Value); //剩余长度通过计算得到
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr, unitWork);
+
+            sliceSheet.AfterLength = newVal.Length.Value; //
+            ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(sliceSheet, unitWork);
 
             ProductInventoryItem pi = new ProductInventoryItem()
             {
