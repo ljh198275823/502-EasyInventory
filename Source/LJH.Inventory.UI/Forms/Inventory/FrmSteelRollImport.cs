@@ -189,6 +189,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (originalLength > 0) pi.OriginalLength = originalLength;
             pi.Weight = weight;
             if (length > 0) pi.Length = length;
+            pi.OriginalCount = 1;
             pi.Count = 1;
             pi.Unit = "卷";
             pi.Customer = customer;

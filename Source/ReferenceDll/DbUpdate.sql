@@ -89,3 +89,10 @@ BEGIN
 end
 go
 
+--2016-3-1
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OriginalCount' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add OriginalCount decimal(18,4)')
+end
+go
+

@@ -34,7 +34,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colOrderID"].Value = sor.OrderID;
             row.Cells["colThick"].Value = SpecificationHelper.GetWrittenThick(sor.Specification);
             row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(sor.Specification);
-            //row.Cells["colSpecification"].Value = sor.Product.Specification;
             row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
             row.Cells["colLength"].Value = sor.Length;
@@ -55,7 +54,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
-            if (txtProduct.Tag != null) con.ProductID = (txtProduct.Tag as Product).ID;
             List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
@@ -103,24 +101,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         {
             txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
-        }
-
-        private void lnkProduct_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmProductMaster frm = new FrmProductMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Product p = frm.SelectedItem as Product;
-                txtProduct.Text = p != null ? p.Name : string.Empty;
-                txtProduct.Tag = p;
-            }
-        }
-
-        private void txtProduct_DoubleClick(object sender, EventArgs e)
-        {
-            txtProduct.Text = string.Empty;
-            txtProduct.Tag = null;
         }
 
         private void lnkProductCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

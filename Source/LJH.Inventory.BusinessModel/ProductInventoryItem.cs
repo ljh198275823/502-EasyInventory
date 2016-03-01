@@ -62,6 +62,10 @@ namespace LJH.Inventory.BusinessModel
 
         public string Model { get; set; }
         /// <summary>
+        /// 获取或设置根据入库重量和长度计算出来的厚度
+        /// </summary>
+        public decimal? OriginalThick { get; set; }
+        /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
         public decimal? OriginalWeight { get; set; }
@@ -69,6 +73,14 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置库存单个长度
         /// </summary>
         public decimal? OriginalLength { get; set; }
+        /// <summary>
+        /// 获取或设置初始数量
+        /// </summary>
+        public decimal? OriginalCount { get; set; }
+        /// <summary>
+        /// 获取或设置真实厚度
+        /// </summary>
+        public decimal? RealThick { get; set; }
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
@@ -78,13 +90,9 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal? Length { get; set; }
         /// <summary>
-        /// 获取或设置根据入库重量和长度计算出来的厚度
+        /// 获取或设置库存数量
         /// </summary>
-        public decimal? OriginalThick { get; set; }
-        /// <summary>
-        /// 获取或设置真实厚度
-        /// </summary>
-        public decimal? RealThick { get; set; }
+        public decimal Count { get; set; }
         /// <summary>
         /// 获取或设置库存项的单位
         /// </summary>
@@ -93,10 +101,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置库存项的价格
         /// </summary>
         public decimal Price { get; set; }
-        /// <summary>
-        /// 获取或设置库存数量
-        /// </summary>
-        public decimal Count { get; set; }
         /// <summary>
         /// 获取收货或分配时间
         /// </summary>

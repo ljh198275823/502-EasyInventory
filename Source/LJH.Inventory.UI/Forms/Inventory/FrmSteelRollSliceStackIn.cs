@@ -252,6 +252,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.WareHouse = txtWareHouse.Tag as WareHouse;
             item.WareHouseID = item.WareHouse.ID;
             item.OriginalWeight = rd总重.Checked ? txtWeight.DecimalValue : txtWeight.DecimalValue * txtCount.DecimalValue; //区分总重和单重
+            item.OriginalCount = txtCount.DecimalValue;
             item.Weight = item.OriginalWeight;
             item.Unit = "件";
             item.Count = txtCount.DecimalValue;

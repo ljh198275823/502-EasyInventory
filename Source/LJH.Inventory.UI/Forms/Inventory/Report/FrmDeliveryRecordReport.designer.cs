@@ -39,13 +39,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSourceRollWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.label5 = new System.Windows.Forms.Label();
             this.txtProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtProduct = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkProductCategory = new System.Windows.Forms.LinkLabel();
-            this.lnkProduct = new System.Windows.Forms.LinkLabel();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
@@ -65,12 +69,6 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSalesPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtSourceRollWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -109,10 +107,8 @@
             this.groupBox3.Controls.Add(this.cmbSpecification);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.txtProductCategory);
-            this.groupBox3.Controls.Add(this.txtProduct);
             this.groupBox3.Controls.Add(this.txtCustomer);
             this.groupBox3.Controls.Add(this.lnkProductCategory);
-            this.groupBox3.Controls.Add(this.lnkProduct);
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Location = new System.Drawing.Point(240, 3);
             this.groupBox3.Name = "groupBox3";
@@ -121,9 +117,96 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(430, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 95;
+            this.label1.Text = "来源卷重";
+            // 
+            // txtSourceRollWeight
+            // 
+            this.txtSourceRollWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSourceRollWeight.Location = new System.Drawing.Point(487, 68);
+            this.txtSourceRollWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtSourceRollWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtSourceRollWeight.Name = "txtSourceRollWeight";
+            this.txtSourceRollWeight.PointCount = 3;
+            this.txtSourceRollWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtSourceRollWeight.TabIndex = 94;
+            this.txtSourceRollWeight.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(452, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 93;
+            this.label4.Text = "长度";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(452, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 92;
+            this.label3.Text = "重量";
+            // 
+            // txtLength
+            // 
+            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLength.Location = new System.Drawing.Point(487, 41);
+            this.txtLength.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtLength.Name = "txtLength";
+            this.txtLength.PointCount = 3;
+            this.txtLength.Size = new System.Drawing.Size(100, 21);
+            this.txtLength.TabIndex = 91;
+            this.txtLength.Text = "0";
+            // 
+            // txtWeight
+            // 
+            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeight.Location = new System.Drawing.Point(487, 12);
+            this.txtWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.PointCount = 3;
+            this.txtWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtWeight.TabIndex = 90;
+            this.txtWeight.Text = "0";
+            // 
             // cmbSpecification
             // 
-            this.cmbSpecification.Location = new System.Drawing.Point(254, 44);
+            this.cmbSpecification.Location = new System.Drawing.Point(254, 15);
             this.cmbSpecification.Name = "cmbSpecification";
             this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
             this.cmbSpecification.Specification = "*";
@@ -132,7 +215,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(221, 51);
+            this.label5.Location = new System.Drawing.Point(221, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 86;
@@ -147,16 +230,6 @@
             this.txtProductCategory.Size = new System.Drawing.Size(153, 21);
             this.txtProductCategory.TabIndex = 39;
             this.txtProductCategory.DoubleClick += new System.EventHandler(this.txtProductCategory_DoubleClick);
-            // 
-            // txtProduct
-            // 
-            this.txtProduct.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtProduct.Location = new System.Drawing.Point(254, 18);
-            this.txtProduct.Name = "txtProduct";
-            this.txtProduct.ReadOnly = true;
-            this.txtProduct.Size = new System.Drawing.Size(153, 21);
-            this.txtProduct.TabIndex = 38;
-            this.txtProduct.DoubleClick += new System.EventHandler(this.txtProduct_DoubleClick);
             // 
             // txtCustomer
             // 
@@ -178,17 +251,6 @@
             this.lnkProductCategory.TabStop = true;
             this.lnkProductCategory.Text = "类别";
             this.lnkProductCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProductCategory_LinkClicked);
-            // 
-            // lnkProduct
-            // 
-            this.lnkProduct.AutoSize = true;
-            this.lnkProduct.Location = new System.Drawing.Point(219, 22);
-            this.lnkProduct.Name = "lnkProduct";
-            this.lnkProduct.Size = new System.Drawing.Size(29, 12);
-            this.lnkProduct.TabIndex = 34;
-            this.lnkProduct.TabStop = true;
-            this.lnkProduct.Text = "产品";
-            this.lnkProduct.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProduct_LinkClicked);
             // 
             // lnkCustomer
             // 
@@ -297,10 +359,10 @@
             // colModel
             // 
             this.colModel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colModel.HeaderText = "产品型号";
+            this.colModel.HeaderText = "型号";
             this.colModel.Name = "colModel";
             this.colModel.ReadOnly = true;
-            this.colModel.Width = 78;
+            this.colModel.Width = 54;
             // 
             // colThick
             // 
@@ -386,93 +448,6 @@
             this.colSalesPerson.Name = "colSalesPerson";
             this.colSalesPerson.ReadOnly = true;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(435, 45);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 93;
-            this.label4.Text = "长度";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(435, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 92;
-            this.label3.Text = "重量";
-            // 
-            // txtLength
-            // 
-            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(470, 41);
-            this.txtLength.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txtLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtLength.Name = "txtLength";
-            this.txtLength.PointCount = 3;
-            this.txtLength.Size = new System.Drawing.Size(100, 21);
-            this.txtLength.TabIndex = 91;
-            this.txtLength.Text = "0";
-            // 
-            // txtWeight
-            // 
-            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(470, 12);
-            this.txtWeight.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txtWeight.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtWeight.Name = "txtWeight";
-            this.txtWeight.PointCount = 3;
-            this.txtWeight.Size = new System.Drawing.Size(100, 21);
-            this.txtWeight.TabIndex = 90;
-            this.txtWeight.Text = "0";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(413, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 95;
-            this.label1.Text = "来源卷重";
-            // 
-            // txtSourceRollWeight
-            // 
-            this.txtSourceRollWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSourceRollWeight.Location = new System.Drawing.Point(470, 68);
-            this.txtSourceRollWeight.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txtSourceRollWeight.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtSourceRollWeight.Name = "txtSourceRollWeight";
-            this.txtSourceRollWeight.PointCount = 3;
-            this.txtSourceRollWeight.Size = new System.Drawing.Size(100, 21);
-            this.txtSourceRollWeight.TabIndex = 94;
-            this.txtSourceRollWeight.Text = "0";
-            // 
             // FrmDeliveryRecordReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -505,13 +480,17 @@
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.LinkLabel lnkProductCategory;
-        private System.Windows.Forms.LinkLabel lnkProduct;
         private System.Windows.Forms.LinkLabel lnkCustomer;
         private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
-        private GeneralLibrary.WinformControl.DBCTextBox txtProduct;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private Controls.UCSpecification cmbSpecification;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
+        private System.Windows.Forms.Label label1;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtSourceRollWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
@@ -527,11 +506,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
-        private System.Windows.Forms.Label label1;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtSourceRollWeight;
     }
 }

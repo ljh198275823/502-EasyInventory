@@ -167,10 +167,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.WareHouse = txtWareHouse.Tag as WareHouse;
             item.WareHouseID = item.WareHouse.ID;
             item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
-            if (txtOriginalLength.DecimalValue > 0) item.OriginalLength = txtOriginalLength.DecimalValue;
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
-            if (txtLength.DecimalValue > 0) item.Length = txtLength.DecimalValue;
+            if (txtOriginalLength.DecimalValue > 0) item.OriginalLength = txtOriginalLength.DecimalValue;
+            item.OriginalCount = 1;
             item.Weight = txtWeight.DecimalValue;
+            if (txtLength.DecimalValue > 0) item.Length = txtLength.DecimalValue;
             item.Unit = "卷";
             item.Count = 1;
             item.State = ProductInventoryState.Inventory;

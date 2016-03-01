@@ -179,6 +179,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.OriginalThick = reaThick == 0 ? null : (decimal?)reaThick;
             pi.Weight = weight;
             pi.Length = length;
+            pi.OriginalCount = count;
             pi.Count = count;
             pi.Unit = "卷";
             pi.Customer = customer;

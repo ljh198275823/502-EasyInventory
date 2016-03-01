@@ -24,47 +24,67 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             InitializeComponent();
         }
 
+        private List<CompanyInfo> _AllSuppliers = null;
+
         #region 重写基类方法
         protected override void Init()
         {
             ucDateTimeInterval1.ShowTime = false;
             ucDateTimeInterval1.Init();
             ucDateTimeInterval1.SelectThisMonth();
+            cmbSpecification.Init();
             base.Init();
         }
 
         protected override List<object> GetDataSource()
         {
-            StackInRecordSearchCondition con = new StackInRecordSearchCondition();
-            con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            con.States = new List<SheetState>();
-            con.States.Add(SheetState.Inventory);
-            con.SheetTypes = new List<StackInSheetType>();
-            con.SheetTypes.Add(StackInSheetType.InventorySheet);
-            if (txtCustomer.Tag != null) con.SupplierID = (txtCustomer.Tag as CompanyInfo).ID;
-            if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
-            if (txtProduct.Tag != null) con.ProductID = (txtProduct.Tag as Product).ID;
-            List<StackInRecord> items = (new StackInSheetBLL(AppSettings.Current.ConnStr)).GetInventoryRecords(con).QueryObjects;
+            _AllSuppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
+
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            con.AddDateRange = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            List<ProductInventoryItem> items = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
-                return (from item in items orderby item.LastActiveDate ascending, item.ProductID ascending select (object)item).ToList();
+                items = items.Where(it => it.State != ProductInventoryState.Nullified && it.SourceID == null && it.SourceRoll == null).ToList(); //首先排除作废的，库存项分项和加工而来的项
+                if (txtCustomer.Tag != null) items = items.Where(it => it.Supplier == (txtCustomer.Tag as CompanyInfo).ID).ToList();
+                if (txtProductCategory.Tag != null) items = items.Where(it => it.Product.CategoryID == (txtProductCategory.Tag as ProductCategory).ID).ToList();
+                decimal length = txtLength.DecimalValue;
+                if (length != 0) items = items.Where(it => (it.OriginalLength.HasValue && it.OriginalLength == txtLength.DecimalValue) || (it.Product.Length.HasValue && it.Product.Length == length)).ToList();
+                decimal weight = txtWeight.DecimalValue;
+                if (weight != 0) items = items.Where(it => it.Weight.HasValue && it.Weight == weight).ToList();
+                decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
+                decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
+                return (from item in items
+                        orderby item.AddDate ascending, item.Product.Specification ascending
+                        where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Product.Specification) == width) &&
+                              (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Product.Specification) == thick)
+                        select (object)item).ToList();
             }
             return null;
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            StackInRecord sir = item as StackInRecord;
-            row.Cells["colDeliveryDate"].Value = sir.LastActiveDate.ToString("yyyy-MM-dd");
-            row.Cells["colSheetNo"].Value = sir.SheetNo;
-            row.Cells["colCustomerName"].Value = sir.Supplier.Name;
-            row.Cells["colOrderID"].Value = sir.PurchaseOrder;
-            row.Cells["colProductID"].Value = sir.ProductID;
-            row.Cells["colProductName"].Value = sir.Product.Name;
-            row.Cells["colCategoryID"].Value = sir.Product.Category.Name;
-            row.Cells["colPrice"].Value = sir.Price;
-            row.Cells["colCount"].Value = sir.Count;
-            row.Cells["colAmount"].Value = sir.Amount.Trim();
+            ProductInventoryItem info = item as ProductInventoryItem;
+            row.Tag = info;
+            row.Cells["colAddDate"].Value = info.AddDate.ToString("yyyy-MM-dd");
+            row.Cells["colCategoryID"].Value = info.Product.Category == null ? info.Product.CategoryID : info.Product.Category.Name;
+            row.Cells["colModel"].Value = info.Product.Model;
+            row.Cells["colThick"].Value = SpecificationHelper.GetWrittenThick(info.Product.Specification);
+            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(info.Product.Specification);
+            row.Cells["colOriginalWeight"].Value = info.OriginalWeight;
+            row.Cells["colLength"].Value = info.OriginalLength.HasValue ? info.OriginalLength : info.Product.Length;
+            row.Cells["colCustomer"].Value = info.Customer;
+            row.Cells["colManufacturer"].Value = info.Manufacture;
+            if (_AllSuppliers != null)
+            {
+                var s = _AllSuppliers.SingleOrDefault(it => it.ID == info.Supplier);
+                row.Cells["colSupplier"].Value = s != null ? s.Name : null;
+            }
+            row.Cells["colPurchasePrice"].Value = info.PurchasePrice;
+            row.Cells["colPurchaseTax"].Value = info.WithTax;
+            row.Cells["colTransCost"].Value = info.TransCost;
+            row.Cells["colOtherCost"].Value = info.OtherCost;
         }
         #endregion
 
@@ -85,24 +105,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         {
             txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
-        }
-
-        private void lnkProduct_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmProductMaster frm = new FrmProductMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Product p = frm.SelectedItem as Product;
-                txtProduct.Text = p != null ? p.Name : string.Empty;
-                txtProduct.Tag = p;
-            }
-        }
-
-        private void txtProduct_DoubleClick(object sender, EventArgs e)
-        {
-            txtProduct.Text = string.Empty;
-            txtProduct.Tag = null;
         }
 
         private void lnkProductCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

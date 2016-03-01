@@ -218,6 +218,7 @@ namespace InventoryApplication
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
             this.mnu_DeliveryStatistic.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
             this.mnu_CustomerPaymentReport.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+            this.mnu_InventoryRecord.Enabled = true;
         }
         #endregion
 

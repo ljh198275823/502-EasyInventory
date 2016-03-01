@@ -37,6 +37,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is ProductInventoryItemSearchCondition)
             {
                 ProductInventoryItemSearchCondition con = search as ProductInventoryItemSearchCondition;
+                if (con.AddDateRange != null) ret = ret.Where(item => item.AddDate >= con.AddDateRange.Begin && item.AddDate <= con.AddDateRange.End);
                 if (con.Products != null && con.Products.Count > 0) ret = ret.Where(item => con.Products.Contains(item.ProductID));
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);

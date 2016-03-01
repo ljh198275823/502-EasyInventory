@@ -357,8 +357,7 @@
             this.mnu_InventoryRecord.Enabled = false;
             this.mnu_InventoryRecord.Name = "mnu_InventoryRecord";
             this.mnu_InventoryRecord.Size = new System.Drawing.Size(160, 22);
-            this.mnu_InventoryRecord.Text = "收货记录查询";
-            this.mnu_InventoryRecord.Visible = false;
+            this.mnu_InventoryRecord.Text = "入库记录查询";
             this.mnu_InventoryRecord.Click += new System.EventHandler(this.mnu_InventoryRecord_Click);
             // 
             // toolStripSeparator4
