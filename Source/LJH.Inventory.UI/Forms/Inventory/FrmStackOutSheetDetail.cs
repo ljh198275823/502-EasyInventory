@@ -306,6 +306,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         }
                         else
                         {
+                            new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
                             ShowButtonState();
                             this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
                         }
