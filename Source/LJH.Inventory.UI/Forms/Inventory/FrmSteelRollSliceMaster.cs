@@ -153,10 +153,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 frm.SearchCondition = con;
                 frm.SteelRollSlice = item;
                 frm.ShowDialog();
-                //由于显示明细的时候有可能有改变数量的操作,所以要刷新这一行的状态
-                con.States = (int)ProductInventoryState.UnShipped;
-                List<SteelRollSlice> items = new SteelRollSliceBLL(AppSettings.Current.ConnStr).GetSteelRollSlices(con).QueryObjects;
-                if (items != null && items.Count == 1) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], items[0]); //
+
+                cMnu_Fresh.PerformClick();
+                ////由于显示明细的时候有可能有改变数量的操作,所以要刷新这一行的状态
+                //con.States = (int)ProductInventoryState.UnShipped;
+                //List<SteelRollSlice> items = new SteelRollSliceBLL(AppSettings.Current.ConnStr).GetSteelRollSlices(con).QueryObjects;
+                //if (items != null && items.Count == 1) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], items[0]); //
             }
         }
 

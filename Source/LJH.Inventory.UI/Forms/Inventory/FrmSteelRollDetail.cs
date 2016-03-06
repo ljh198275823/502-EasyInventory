@@ -127,7 +127,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Specification = item.Product.Specification;
             txtOriginalWeight.DecimalValue = item.OriginalWeight.Value;
             if (item.OriginalLength.HasValue) txtOriginalLength.DecimalValue = item.OriginalLength.Value;
-            txtLength.DecimalValue = item.Length.Value;
+            if (item.Length.HasValue) txtLength.DecimalValue = item.Length.Value;
             if (item.Length.HasValue) txtLength.DecimalValue = item.Length.Value;
             txtCustomer.Text = item.Customer;
             if (!string.IsNullOrEmpty(item.Supplier))

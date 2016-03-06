@@ -45,7 +45,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             List<ProductInventoryItem> items = (new ProductInventoryItemBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
-                items = items.Where(it => it.State != ProductInventoryState.Nullified && it.SourceID == null && it.SourceRoll == null).ToList(); //首先排除作废的，库存项分项和加工而来的项
+                items.RemoveAll(it => it.State == ProductInventoryState.Nullified && it.Status == "整卷");
+                items = items.Where(it => it.SourceID == null && it.SourceRoll == null).ToList(); //首先排除作废的，库存项分项和加工而来的项
                 if (txtCustomer.Tag != null) items = items.Where(it => it.Supplier == (txtCustomer.Tag as CompanyInfo).ID).ToList();
                 if (txtProductCategory.Tag != null) items = items.Where(it => it.Product.CategoryID == (txtProductCategory.Tag as ProductCategory).ID).ToList();
                 decimal length = txtLength.DecimalValue;

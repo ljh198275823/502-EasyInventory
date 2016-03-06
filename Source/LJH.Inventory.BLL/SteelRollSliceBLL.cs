@@ -223,11 +223,15 @@ namespace LJH.Inventory.BLL
         /// <summary>
         /// 拆包
         /// </summary>
-        public CommandResult Depart(ProductInventoryItem info, WareHouse w, string customer, decimal count, string memo)
+        public CommandResult Depart(ProductInventoryItem info, WareHouse w, string customer, decimal count, string specification, string memo)
         {
             if (info.Count < count) return new CommandResult(ResultCode.Fail, "拆包数量大于原包数量");
             if (info.State == ProductInventoryState.Nullified) return new CommandResult(ResultCode.Fail, "作废的库存项不能进行拆包操作");
             if (info.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "库存项数量处于锁定状态,不能拆包");
+
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(info.Product.CategoryID, specification, info.Product.Model, info.Product.Weight, info.Product.Length, info.Product.Density);
+            if (p == null) return new CommandResult(ResultCode.Fail, "创建产品信息失败");
+
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             decimal? uw = info.UnitWeight;
             ProductInventoryItem clone = info.Clone();
@@ -240,6 +244,8 @@ namespace LJH.Inventory.BLL
             depart.WareHouseID = w.ID;
             depart.Customer = customer;
             depart.Count = count;
+            depart.ProductID = p.ID;
+            depart.Product = p;
             if (uw.HasValue)
             {
                 depart.OriginalWeight = depart.Count * uw;

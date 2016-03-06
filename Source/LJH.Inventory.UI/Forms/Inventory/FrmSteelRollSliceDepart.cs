@@ -25,9 +25,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void FrmSteelRollSliceDepart_Load(object sender, EventArgs e)
         {
+            ucSpecification1.Init();
             if (ProductInventory != null)
             {
                 txtOriginal.DecimalValue = ProductInventory.Count;
+                ucSpecification1.Specification = ProductInventory.Product.Specification;
                 WareHouse w = ProductInventory.WareHouse;
                 txtWareHouse.Text = w != null ? w.Name : string.Empty;
                 txtWareHouse.Tag = w;
@@ -67,20 +69,26 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (txtDepart.DecimalValue == ProductInventory.Count)
             {
                 MessageBox.Show("拆包数量与原包数量一致，没有必要拆包");
-                return ;
+                return;
             }
             if (txtWareHouse.Tag == null)
             {
                 MessageBox.Show("没有选择仓库");
                 txtWareHouse.Focus();
-                return ;
+                return;
             }
             if (string.IsNullOrEmpty(txtCustomer.Text))
             {
                 MessageBox.Show("没有指定客户");
                 return;
             }
-            CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Depart(ProductInventory, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtDepart.DecimalValue, txtMemo.Text);
+            if (SpecificationHelper.GetWrittenThick(ucSpecification1.Specification) == null ||
+                SpecificationHelper .GetWrittenWidth (ucSpecification1 .Specification )==null )
+            {
+                MessageBox.Show("规格不正确，请同时指定厚度和长度");
+                return;
+            }
+            CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Depart(ProductInventory, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtDepart.DecimalValue, ucSpecification1.Specification, txtMemo.Text);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message, "失败");

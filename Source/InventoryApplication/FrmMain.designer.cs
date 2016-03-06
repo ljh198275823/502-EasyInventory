@@ -271,7 +271,6 @@
             this.mnu_SupplierState.Name = "mnu_SupplierState";
             this.mnu_SupplierState.Size = new System.Drawing.Size(160, 22);
             this.mnu_SupplierState.Text = "供应商应付账款";
-            this.mnu_SupplierState.Visible = false;
             this.mnu_SupplierState.Click += new System.EventHandler(this.mnu_SupplierState_Click);
             // 
             // mnu_SupplierPayment

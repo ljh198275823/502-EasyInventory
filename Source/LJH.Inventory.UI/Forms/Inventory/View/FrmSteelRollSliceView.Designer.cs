@@ -36,14 +36,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_CreateInventory = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
-            this.折包ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +50,14 @@
             this.colSourceRollWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliverySheet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_CreateInventory = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
+            this.折包ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -95,64 +95,6 @@
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_CreateInventory,
-            this.mnu_Check,
-            this.折包ToolStripMenuItem,
-            this.更换仓库ToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 142);
-            // 
-            // mnu_CreateInventory
-            // 
-            this.mnu_CreateInventory.Name = "mnu_CreateInventory";
-            this.mnu_CreateInventory.Size = new System.Drawing.Size(124, 22);
-            this.mnu_CreateInventory.Text = "新建库存";
-            this.mnu_CreateInventory.Click += new System.EventHandler(this.mnu_CreateInventory_Click);
-            // 
-            // mnu_Check
-            // 
-            this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(124, 22);
-            this.mnu_Check.Text = "盘点";
-            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
-            // 
-            // 折包ToolStripMenuItem
-            // 
-            this.折包ToolStripMenuItem.Name = "折包ToolStripMenuItem";
-            this.折包ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.折包ToolStripMenuItem.Text = "拆包";
-            this.折包ToolStripMenuItem.Click += new System.EventHandler(this.折包ToolStripMenuItem_Click);
-            // 
-            // 更换仓库ToolStripMenuItem
-            // 
-            this.更换仓库ToolStripMenuItem.Name = "更换仓库ToolStripMenuItem";
-            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.更换仓库ToolStripMenuItem.Text = "更换仓库";
-            this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(121, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(124, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(124, 22);
-            this.cMnu_Export.Text = "导出...";
             // 
             // colInventoryDate
             // 
@@ -260,6 +202,64 @@
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
             this.colMemo.Width = 150;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_CreateInventory,
+            this.mnu_Check,
+            this.折包ToolStripMenuItem,
+            this.更换仓库ToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
+            // 
+            // mnu_CreateInventory
+            // 
+            this.mnu_CreateInventory.Name = "mnu_CreateInventory";
+            this.mnu_CreateInventory.Size = new System.Drawing.Size(152, 22);
+            this.mnu_CreateInventory.Text = "新建库存";
+            this.mnu_CreateInventory.Click += new System.EventHandler(this.mnu_CreateInventory_Click);
+            // 
+            // mnu_Check
+            // 
+            this.mnu_Check.Name = "mnu_Check";
+            this.mnu_Check.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Check.Text = "盘点";
+            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
+            // 
+            // 折包ToolStripMenuItem
+            // 
+            this.折包ToolStripMenuItem.Name = "折包ToolStripMenuItem";
+            this.折包ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.折包ToolStripMenuItem.Text = "拆包";
+            this.折包ToolStripMenuItem.Click += new System.EventHandler(this.折包ToolStripMenuItem_Click);
+            // 
+            // 更换仓库ToolStripMenuItem
+            // 
+            this.更换仓库ToolStripMenuItem.Name = "更换仓库ToolStripMenuItem";
+            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.更换仓库ToolStripMenuItem.Text = "更换仓库";
+            this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // FrmSteelRollSliceView
             // 

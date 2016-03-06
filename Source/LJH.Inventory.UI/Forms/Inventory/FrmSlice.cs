@@ -143,9 +143,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                           "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (ret == DialogResult.Yes)
                 {
-                    this.txtRemainWeight.DecimalValue = 0;
-                    btnOk.BackColor = Color.Red;
-                    btnOk.ForeColor = Color.White;
+                    if (!chkOver.Checked) chkOver.Checked = true;
                 }
                 else
                 {
