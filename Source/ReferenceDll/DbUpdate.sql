@@ -86,6 +86,7 @@ go
 if exists (SELECT * FROM dbo.syscolumns WHERE name ='Weight' AND id = OBJECT_ID(N'[dbo].[StackOutItem]'))
 BEGIN
 	exec ('update StackoutItem set TotalWeight = Weight')
+	exec ('alter table StackOutItem drop column weight')
 end
 go
 
