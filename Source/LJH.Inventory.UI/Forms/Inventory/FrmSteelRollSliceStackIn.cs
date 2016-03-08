@@ -141,6 +141,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtCount.Focus();
                 return false;
             }
+            if (txtPurchasePrice.DecimalValue > 0 && !rdWithoutTax.Checked && !rdWithTax.Checked)
+            {
+                MessageBox.Show("没有指定价格是否含税");
+                return false;
+            }
             //if (string.IsNullOrEmpty(txtCustomer.Text))
             //{
             //    MessageBox.Show("没有指定客户");

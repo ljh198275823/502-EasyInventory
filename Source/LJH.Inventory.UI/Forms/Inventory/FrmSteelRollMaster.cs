@@ -237,7 +237,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     FrmSlice frm = new FrmSlice();
                     frm.SlicingItem = sr;
-                    frm.SliceTo =sliceTo ;
+                    frm.SliceTo = sliceTo;
                     frm.ShowDialog();
                     ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
                 }
@@ -326,6 +326,53 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cMnu_Fresh.PerformClick();
         }
 
-       
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                var pi = GridView.Rows[e.RowIndex].Tag as ProductInventoryItem;
+                if (GridView.Columns[e.ColumnIndex].Name == "colDeliverySheet" && !string.IsNullOrEmpty(pi.DeliverySheet))
+                {
+                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(pi.DeliverySheet).QueryObject;
+                    if (sheet != null)
+                    {
+                        Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                        frm.IsAdding = false;
+                        frm.IsForView = true;
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                }
+            }
+        }
+
+        private void 更换仓库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                FrmChangeWareHouse frm = new FrmChangeWareHouse();
+                frm.ProductInventory = pi;
+                DialogResult ret = frm.ShowDialog();
+                if (ret == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pi);
+            }
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "colMemo")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string memo = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UpdateMemo(pi, memo);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.Memo;
+                }
+            }
+        }
     }
 }

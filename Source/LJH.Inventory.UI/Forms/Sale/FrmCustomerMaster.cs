@@ -24,6 +24,7 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         #region 私有变量
         private List<CompanyInfo> _Customers = null;
+        private List<Contact> _AllContacts = null;
         #endregion
 
         #region 私有方法
@@ -123,6 +124,18 @@ namespace LJH.Inventory.UI.Forms.Sale
             row.Cells["colPost"].Value = c.PostalCode;
             row.Cells["colAddress"].Value = c.Address;
             row.Cells["colMemo"].Value = c.Memo;
+            if (c.DefaultLinker != null)
+            {
+                Contact linker = null;
+                if (_AllContacts != null) linker = _AllContacts.SingleOrDefault(it => it.ID == c.DefaultLinker);
+                else linker = new ContactBLL(AppSettings.Current.ConnStr).GetByID(c.DefaultLinker.Value).QueryObject;
+
+                if (linker != null)
+                {
+                    row.Cells["colLinker"].Value = linker.Name;
+                    row.Cells["colLinkerPhone"].Value = linker.Mobile;
+                }
+            }
             if (_Customers == null || !_Customers.Exists(it => it.ID == c.ID))
             {
                 if (_Customers == null) _Customers = new List<CompanyInfo>();
@@ -132,8 +145,10 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         protected override void ShowItemsOnGrid(List<object> items)
         {
+            _AllContacts = new ContactBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             base.ShowItemsOnGrid(items);
             Filter(txtKeyword.Text.Trim());
+            _AllContacts = null;
         }
         #endregion
 

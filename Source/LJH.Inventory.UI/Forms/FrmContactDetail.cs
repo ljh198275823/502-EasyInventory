@@ -53,6 +53,7 @@ namespace LJH.Inventory.UI.Forms
             if (Contact == null)
             {
                 Contact = new Contact();
+                Contact.ID = Guid.NewGuid();
             }
             Contact.Name = txtName.Text;
             Contact.Position = txtPosition.Text;

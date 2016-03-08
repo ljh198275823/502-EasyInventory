@@ -32,6 +32,8 @@ namespace LJH.Inventory.UI.Forms.Financial
         public CustomerPaymentType PaymentType { get; set; }
 
         public string StackSheetID { get; set; }
+
+        public decimal Amount { get; set; }
         #endregion
 
         #region 私有方法
@@ -87,6 +89,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             InittxtxBank();
             this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户付款流水" : "供应商付款流水";
             this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
+            if (Amount != 0)
+            {
+                txtAmount.DecimalValue = Amount;
+                txtAmount.ForeColor = System.Drawing.Color.Red;
+                txtAmount.Focus();
+            }
             if (IsForView)
             {
                 toolStrip1.Enabled = false;

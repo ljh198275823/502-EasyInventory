@@ -170,6 +170,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [DataMember]
         public bool DoShipAfterPrint { get; set; }
+        /// <summary>
+        /// 获取或设置送货单打印模板
+        /// </summary>
+        [DataMember]
+        public string StackoutSheetModel { get; set; }
         #endregion
           
         #region 自动生成单号  

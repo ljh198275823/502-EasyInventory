@@ -126,9 +126,9 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
             if (dataGridView1.Columns[e.ColumnIndex].Name == "colSourceRoll")
             {
-                var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
                 if (pi != null && pi.SourceRoll != null)
                 {
                     var steelRoll = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(pi.SourceRoll.Value).QueryObject;
@@ -140,6 +140,18 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                         frm.StartPosition = FormStartPosition.CenterParent;
                         frm.ShowDialog();
                     }
+                }
+            }
+            else if (GridView.Columns[e.ColumnIndex].Name == "colDeliverySheet" && !string.IsNullOrEmpty(pi.DeliverySheet))
+            {
+                var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(pi.DeliverySheet).QueryObject;
+                if (sheet != null)
+                {
+                    Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                    frm.IsAdding = false;
+                    frm.IsForView = true;
+                    frm.UpdatingItem = sheet;
+                    frm.ShowDialog();
                 }
             }
         }

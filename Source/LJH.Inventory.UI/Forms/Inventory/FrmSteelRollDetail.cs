@@ -61,6 +61,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("剩余重量大于入库重量");
                 return false;
             }
+            if (txtPurchasePrice.DecimalValue > 0 && !rdWithoutTax.Checked && !rdWithTax.Checked)
+            {
+                MessageBox.Show("没有指定价格是否含税");
+                return false;
+            }
             //if (string.IsNullOrEmpty(txtCustomer.Text))
             //{
             //    MessageBox.Show("没有指定客户");
@@ -166,9 +171,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouse = txtWareHouse.Tag as WareHouse;
             item.WareHouseID = item.WareHouse.ID;
-            item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
-            if (txtOriginalLength.DecimalValue > 0) item.OriginalLength = txtOriginalLength.DecimalValue;
+            if (txtOriginalLength.DecimalValue > 0)
+            {
+                item.OriginalLength = txtOriginalLength.DecimalValue;
+                item.OriginalThick = item.CalThick(p.Specification, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value); //指定长度时计算入库厚度
+            }
+            else
+            {
+                item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
+            }
             item.OriginalCount = 1;
             item.Weight = txtWeight.DecimalValue;
             if (txtLength.DecimalValue > 0) item.Length = txtLength.DecimalValue;

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 
@@ -57,6 +58,7 @@ namespace LJH.Inventory.UI.Forms
             rdFIFO.Checked = us.InventoryOutType == InventoryOutType.FIFO;
             rdFILO.Checked = us.InventoryOutType == InventoryOutType.FILO;
             chkDoShipAfterPrint.Checked = us.DoShipAfterPrint;
+            cmbStackoutSheetModel.Text = us.StackoutSheetModel;
             #endregion
 
             #region 自动生成编号
@@ -120,6 +122,7 @@ namespace LJH.Inventory.UI.Forms
             if (rdFIFO.Checked) us.InventoryOutType = InventoryOutType.FIFO;
             if (rdFILO.Checked) us.InventoryOutType = InventoryOutType.FILO;
             us.DoShipAfterPrint = chkDoShipAfterPrint.Checked;
+            us.StackoutSheetModel = cmbStackoutSheetModel.Text.Trim();
             #endregion
 
             #region 自动生成编号
@@ -192,6 +195,7 @@ namespace LJH.Inventory.UI.Forms
 
         private void FrmSystemOptions_Load(object sender, EventArgs e)
         {
+            InitCmbStackoutSheetModel();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
             ShowSetting(UserSettings.Current);
             btnOk.Enabled = Operator.Current.Permit(Permission.SystemOptions, PermissionActions.Edit);
@@ -202,6 +206,28 @@ namespace LJH.Inventory.UI.Forms
             UserSettings.Current = GetSettingFromInput();
             SysParaSettingsBll.SaveSetting<UserSettings>(UserSettings.Current, AppSettings.Current.ConnStr);
             this.Close();
+        }
+
+        private void InitCmbStackoutSheetModel()
+        {
+            this.cmbStackoutSheetModel.Items.Clear();
+            this.cmbStackoutSheetModel.Items.Add(string.Empty);
+            string dir = System.IO.Path.Combine(Application.StartupPath, "送货单模板");
+            if (Directory.Exists(dir))
+            {
+                var files = Directory.GetFiles(dir);
+                if (files != null && files.Length > 0)
+                {
+                    foreach (var f in files)
+                    {
+                        string model = Path.GetFileNameWithoutExtension(f);
+                        if (model != "送货单模板")
+                        {
+                            cmbStackoutSheetModel.Items.Add(Path.GetFileNameWithoutExtension(model));
+                        }
+                    }
+                }
+            }
         }
         #endregion
     }

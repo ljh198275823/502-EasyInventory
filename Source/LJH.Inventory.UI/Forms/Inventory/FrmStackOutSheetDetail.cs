@@ -258,6 +258,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.PaymentType = CustomerPaymentType.Customer;
             frm.Customer = (txtCustomer.Tag as CompanyInfo);
             frm.StackSheetID = sheet.ID;
+            frm.Amount = sheet.Amount;
             frm.IsAdding = true;
             frm.ShowDialog();
             ShowPaymentState(sheet);
@@ -312,7 +313,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         }
                     }
 
-                    string modal = System.IO.Path.Combine(Application.StartupPath, "送货单模板", "送货单模板.xls");
+                    string modal = GetModel();
                     Print.StackOutSheetExporter exporter = null;
                     if (System.IO.File.Exists(modal))
                     {
@@ -344,6 +345,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 }
             }
+        }
+
+        private string GetModel()
+        {
+            string model = null;
+            if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.StackoutSheetModel))
+            {
+                model = System.IO.Path.Combine(Application.StartupPath, "送货单模板", UserSettings.Current.StackoutSheetModel + ".xls");
+                if (File.Exists(model)) return model;
+            }
+            return System.IO.Path.Combine(Application.StartupPath, "送货单模板", "送货单模板.xls");
         }
 
         private bool CheckCredit()
@@ -572,8 +584,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (ret.Result == ResultCode.Successful)
                 {
                     var sheet = UpdatingItem as StackOutSheet;
-                    sheet.AddItems(sr, 1);
-                    ShowDeliveryItemsOnGrid(sheet);
+                    if (sheet.Items != null && sheet.Items.Exists(it => it.InventoryItem == sr.ID))//原材料只加一次
+                    {
+                    }
+                    else
+                    {
+                        sheet.AddItems(sr, 1);
+                        ShowDeliveryItemsOnGrid(sheet);
+                    }
                 }
                 else
                 {

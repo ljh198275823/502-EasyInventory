@@ -60,9 +60,11 @@
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeb = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -237,9 +239,11 @@
             this.colName,
             this.colCategory,
             this.colNation,
+            this.colTelphone,
+            this.colLinker,
+            this.colLinkerPhone,
             this.colCity,
             this.colWeb,
-            this.colTelphone,
             this.colFax,
             this.colPost,
             this.colAddress,
@@ -350,6 +354,24 @@
             this.colNation.Visible = false;
             this.colNation.Width = 80;
             // 
+            // colTelphone
+            // 
+            this.colTelphone.HeaderText = "电话";
+            this.colTelphone.Name = "colTelphone";
+            this.colTelphone.ReadOnly = true;
+            // 
+            // colLinker
+            // 
+            this.colLinker.HeaderText = "联系人";
+            this.colLinker.Name = "colLinker";
+            this.colLinker.ReadOnly = true;
+            // 
+            // colLinkerPhone
+            // 
+            this.colLinkerPhone.HeaderText = "联系人电话";
+            this.colLinkerPhone.Name = "colLinkerPhone";
+            this.colLinkerPhone.ReadOnly = true;
+            // 
             // colCity
             // 
             this.colCity.HeaderText = "地区";
@@ -367,23 +389,19 @@
             this.colWeb.Visible = false;
             this.colWeb.Width = 150;
             // 
-            // colTelphone
-            // 
-            this.colTelphone.HeaderText = "电话";
-            this.colTelphone.Name = "colTelphone";
-            this.colTelphone.ReadOnly = true;
-            // 
             // colFax
             // 
             this.colFax.HeaderText = "传真";
             this.colFax.Name = "colFax";
             this.colFax.ReadOnly = true;
+            this.colFax.Visible = false;
             // 
             // colPost
             // 
             this.colPost.HeaderText = "邮政";
             this.colPost.Name = "colPost";
             this.colPost.ReadOnly = true;
+            this.colPost.Visible = false;
             // 
             // colAddress
             // 
@@ -461,9 +479,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeb;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFax;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;

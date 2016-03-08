@@ -169,7 +169,6 @@ namespace LJH.Inventory.UI.Forms.Sale
                 if (this.UpdatingItem != null)
                 {
                     CompanyInfo c = UpdatingItem as CompanyInfo;
-                    ct.ID = Guid.NewGuid();
                     ct.Company = c.ID;
                     CommandResult ret = (new ContactBLL(AppSettings.Current.ConnStr)).Add(ct);
                     if (ret.Result != ResultCode.Successful)

@@ -138,6 +138,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
                 foreach (DataGridViewRow row in GridView.Rows)
                 {
                     Contact ct = row.Tag as Contact;
+                    ct.ID = Guid.NewGuid();
                     ct.Company = c.ID;
                     CommandResult r = (new ContactBLL(AppSettings.Current.ConnStr)).Add(ct);
                     if (r.Result != ResultCode.Successful)

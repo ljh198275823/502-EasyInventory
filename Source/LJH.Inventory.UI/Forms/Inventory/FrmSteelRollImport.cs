@@ -184,9 +184,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Product = product;
             pi.Model = product.Model;
             pi.WareHouseID = ws;
-            pi.OriginalThick = SpecificationHelper.GetWrittenThick(specification);
             pi.OriginalWeight = originalWeight;
-            if (originalLength > 0) pi.OriginalLength = originalLength;
+            if (originalLength > 0)
+            {
+                pi.OriginalLength = originalLength;
+                pi.OriginalThick = pi.CalThick(pi.Product.Specification, pi.OriginalWeight.Value, pi.OriginalLength.Value, pi.Product.Density.Value);
+            }
+            else
+            {
+                pi.OriginalThick = SpecificationHelper.GetWrittenThick(specification);
+            }
             pi.Weight = weight;
             if (length > 0) pi.Length = length;
             pi.OriginalCount = 1;
@@ -196,6 +203,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Supplier = supplier;
             pi.Manufacture = manufacture;
             pi.SerialNumber = row.Cells["colSerialNumber"].Value != null ? row.Cells["colSerialNumber"].Value.ToString().Trim() : null;
+            pi.Position = row.Cells["colPosition"].Value != null ? row.Cells["colPosition"].Value.ToString().Trim() : null;
             pi.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString().Trim() : null;
             pi.InventorySheet = "导入";
             pi.State = ProductInventoryState.Inventory;

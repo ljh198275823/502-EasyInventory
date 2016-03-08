@@ -84,6 +84,7 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -447,6 +448,8 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
             this.dataGridView1.TabIndex = 115;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // contextMenuStrip1
             // 
@@ -460,6 +463,7 @@
             this.mnu_开吨,
             this.mnu_SliceView,
             this.toolStripSeparator1,
+            this.更换仓库ToolStripMenuItem,
             this.mnu_Check,
             this.mnu_CheckView,
             this.mnu_Nullify,
@@ -468,7 +472,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 330);
             // 
             // cMnu_Fresh
             // 
@@ -571,6 +575,13 @@
             this.mnu_Import.Size = new System.Drawing.Size(148, 22);
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
+            // 
+            // 更换仓库ToolStripMenuItem
+            // 
+            this.更换仓库ToolStripMenuItem.Name = "更换仓库ToolStripMenuItem";
+            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.更换仓库ToolStripMenuItem.Text = "更换仓库";
+            this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
             // 
             // colAddDate
             // 
@@ -734,7 +745,6 @@
             // 
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
             // 
             // FrmSteelRollMaster
             // 
@@ -809,6 +819,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_Import;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnu_开卷;
+        private System.Windows.Forms.ToolStripMenuItem 更换仓库ToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;

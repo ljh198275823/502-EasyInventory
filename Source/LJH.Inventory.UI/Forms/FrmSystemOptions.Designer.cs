@@ -128,6 +128,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabDelivery = new System.Windows.Forms.TabPage();
+            this.chkDoShipAfterPrint = new System.Windows.Forms.CheckBox();
             this.chkForbidWhenNoOrderID = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdFILO = new System.Windows.Forms.RadioButton();
@@ -171,7 +172,8 @@
             this.label80 = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
-            this.chkDoShipAfterPrint = new System.Windows.Forms.CheckBox();
+            this.label83 = new System.Windows.Forms.Label();
+            this.cmbStackoutSheetModel = new System.Windows.Forms.ComboBox();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1215,6 +1217,8 @@
             // tabDelivery
             // 
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDelivery.Controls.Add(this.cmbStackoutSheetModel);
+            this.tabDelivery.Controls.Add(this.label83);
             this.tabDelivery.Controls.Add(this.chkDoShipAfterPrint);
             this.tabDelivery.Controls.Add(this.chkForbidWhenNoOrderID);
             this.tabDelivery.Controls.Add(this.panel2);
@@ -1230,6 +1234,16 @@
             this.tabDelivery.Size = new System.Drawing.Size(563, 358);
             this.tabDelivery.TabIndex = 0;
             this.tabDelivery.Text = "送货单";
+            // 
+            // chkDoShipAfterPrint
+            // 
+            this.chkDoShipAfterPrint.AutoSize = true;
+            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 137);
+            this.chkDoShipAfterPrint.Name = "chkDoShipAfterPrint";
+            this.chkDoShipAfterPrint.Size = new System.Drawing.Size(144, 16);
+            this.chkDoShipAfterPrint.TabIndex = 43;
+            this.chkDoShipAfterPrint.Text = "送货单打印后自动出货";
+            this.chkDoShipAfterPrint.UseVisualStyleBackColor = true;
             // 
             // chkForbidWhenNoOrderID
             // 
@@ -1694,15 +1708,23 @@
             this.label82.TabIndex = 13;
             this.label82.Text = "原材料等于或少于";
             // 
-            // chkDoShipAfterPrint
+            // label83
             // 
-            this.chkDoShipAfterPrint.AutoSize = true;
-            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 137);
-            this.chkDoShipAfterPrint.Name = "chkDoShipAfterPrint";
-            this.chkDoShipAfterPrint.Size = new System.Drawing.Size(144, 16);
-            this.chkDoShipAfterPrint.TabIndex = 43;
-            this.chkDoShipAfterPrint.Text = "送货单打印后自动出货";
-            this.chkDoShipAfterPrint.UseVisualStyleBackColor = true;
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(14, 168);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(89, 12);
+            this.label83.TabIndex = 44;
+            this.label83.Text = "送货单打印模板";
+            // 
+            // cmbStackoutSheetModel
+            // 
+            this.cmbStackoutSheetModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStackoutSheetModel.FormattingEnabled = true;
+            this.cmbStackoutSheetModel.Location = new System.Drawing.Point(109, 165);
+            this.cmbStackoutSheetModel.Name = "cmbStackoutSheetModel";
+            this.cmbStackoutSheetModel.Size = new System.Drawing.Size(229, 20);
+            this.cmbStackoutSheetModel.TabIndex = 45;
             // 
             // FrmSystemOptions
             // 
@@ -1883,5 +1905,7 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtDefaultWareHouse;
         private System.Windows.Forms.LinkLabel lnkWarehouse;
         private System.Windows.Forms.CheckBox chkDoShipAfterPrint;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.ComboBox cmbStackoutSheetModel;
     }
 }
