@@ -26,6 +26,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private List<StackOutSheet> _Sheets = null;
         private List<WareHouse> _Warehouses = null;
         private List<CompanyInfo> _AllCustomers = null;
+
+        private List<CustomerPayment> _AllPayments = null;
+        private List<CustomerReceivable> _AllReceivables = null;
+        private bool _Fresh = false;
         #endregion
 
         #region 私有方法
@@ -120,8 +124,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
-            _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             return FilterData();
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
+
+            _AllReceivables = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+
+            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+            cpsc.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
+            cpsc.PaymentTypes = new List<CustomerPaymentType>();
+            cpsc.PaymentTypes.Add(CustomerPaymentType.Customer);
+            _AllPayments = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(cpsc).QueryObjects;
+
+            _Fresh = true;
+            base.ShowItemsOnGrid(items);
+            _Fresh = false;
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -135,7 +155,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWithTax"].Value = sheet.WithTax;
             row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
-            row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? (DateTime?)sheet.LastActiveDate: null;
+            row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? (DateTime?)sheet.LastActiveDate : null;
             row.Cells["colLinker"].Value = sheet.Linker;
             row.Cells["colTelphone"].Value = sheet.LinkerCall;
             row.Cells["colAddress"].Value = sheet.Address;
@@ -143,6 +163,33 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colDriverCall"].Value = sheet.DriverCall;
             row.Cells["colCarPlate"].Value = sheet.CarPlate;
             row.Cells["colMemo"].Value = sheet.Memo;
+            if (_Fresh) //全部刷新
+            {
+                if (sheet.State == SheetState.Shipped && _AllReceivables != null)
+                {
+                    var cr = _AllReceivables.Where(it => it.SheetID == sheet.ID && it.ClassID == CustomerReceivableType.CustomerReceivable);
+                    row.Cells["colPaid"].Value = cr.Sum(it => it.Haspaid);
+                    row.Cells["colNotPaid"].Value = cr.Sum(it => it.Remain);
+                }
+                else if (sheet.State == SheetState.Add || sheet.State == SheetState.Approved)
+                {
+                    if (_AllPayments != null)
+                    {
+                        var cr = _AllPayments.Where(it => it.StackSheetID == sheet.ID && it.ClassID == CustomerPaymentType.Customer);
+                        row.Cells["colPaid"].Value = cr.Sum(it => it.Remain);
+                        row.Cells["colNotPaid"].Value = sheet.Amount - cr.Sum(it => it.Remain);
+                    }
+                }
+            }
+            else //单独一条记录刷新
+            {
+                var sheetState = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(sheet.ID).QueryObject ;
+                if (sheetState != null)
+                {
+                    row.Cells["colPaid"].Value = sheetState.Paid;
+                    row.Cells["colNotPaid"].Value = sheetState.NotPaid;
+                }
+            }
             if (sheet.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;

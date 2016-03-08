@@ -258,7 +258,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.PaymentType = CustomerPaymentType.Customer;
             frm.Customer = (txtCustomer.Tag as CompanyInfo);
             frm.StackSheetID = sheet.ID;
-            frm.Amount = sheet.Amount;
+            //frm.Amount = sheet.Amount;
             frm.IsAdding = true;
             frm.ShowDialog();
             ShowPaymentState(sheet);
