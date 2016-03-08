@@ -97,6 +97,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 row.DefaultCellStyle.ForeColor = Color.Brown;
             }
+            else if (sr.State == ProductInventoryState.Reserved)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Cyan;
+            }
             else if (sr.Status == "整卷")
             {
                 row.DefaultCellStyle.ForeColor = Color.Blue;
@@ -139,6 +143,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             mnu_开吨.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
+            更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
+            this.取消预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
+            this.预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -166,6 +173,32 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             List<object> records = FilterData();
             return records;
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            if (items != null)
+            {
+                decimal total = 0;
+                decimal original = 0;
+                foreach (var item in items)
+                {
+                    var pi = item as ProductInventoryItem;
+                    if (pi.State != ProductInventoryState.Nullified && pi.State != ProductInventoryState.Shipped && pi.Status != "余料")
+                    {
+                        total += pi.Weight.Value;
+                    }
+                    if (pi.State != ProductInventoryState.Nullified) original += pi.OriginalWeight.Value;
+                }
+                lblTotalWeight.Text = string.Format("总剩余 {0:F3}吨", total);
+                lblOriginalTotal.Text = string.Format("总入库 {0:F3}吨", original);
+            }
+            else
+            {
+                lblTotalWeight.Text = string.Empty;
+                lblOriginalTotal.Text = string.Empty;
+            }
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -371,6 +404,43 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     MessageBox.Show(ret.Message);
                     cell.Value = pi.Memo;
+                }
+            }
+        }
+
+        private void 预订ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                if (pi.State == ProductInventoryState.Inventory)
+                {
+                    FrmReserve frm = new FrmReserve();
+                    frm.ProductInventory = pi;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    DialogResult ret = frm.ShowDialog();
+                    if (ret == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pi);
+                }
+                else
+                {
+                    MessageBox.Show("此项不能预订");
+                }
+            }
+        }
+
+        private void 取消预订ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0 &&
+                MessageBox.Show("是否取消预订？", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    var pi = row.Tag as ProductInventoryItem;
+                    if (pi.State == ProductInventoryState.Reserved)
+                    {
+                        var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UnReserve(pi);
+                        if (ret.Result == ResultCode.Successful) ShowItemInGridViewRow(row, pi);
+                    }
                 }
             }
         }

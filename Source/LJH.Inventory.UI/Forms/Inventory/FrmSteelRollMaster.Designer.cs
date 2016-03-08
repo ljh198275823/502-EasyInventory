@@ -41,6 +41,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lblOriginalTotal = new System.Windows.Forms.Label();
+            this.lblTotalWeight = new System.Windows.Forms.Label();
             this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label8 = new System.Windows.Forms.Label();
@@ -67,24 +69,6 @@
             this.chkStackIn = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_开平 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_开卷 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_开条 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_开吨 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_SliceView = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_CheckView = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
-            this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,6 +91,27 @@
             this.colTransCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOtherCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_开平 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_开卷 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_开条 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_开吨 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_SliceView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_CheckView = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.预订ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.取消预订ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -127,6 +132,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.lblOriginalTotal);
+            this.panel5.Controls.Add(this.lblTotalWeight);
             this.panel5.Controls.Add(this.ucDateTimeInterval1);
             this.panel5.Controls.Add(this.customerCombobox1);
             this.panel5.Controls.Add(this.label8);
@@ -150,6 +157,28 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1361, 86);
             this.panel5.TabIndex = 7;
+            // 
+            // lblOriginalTotal
+            // 
+            this.lblOriginalTotal.AutoSize = true;
+            this.lblOriginalTotal.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblOriginalTotal.ForeColor = System.Drawing.Color.Blue;
+            this.lblOriginalTotal.Location = new System.Drawing.Point(1125, 9);
+            this.lblOriginalTotal.Name = "lblOriginalTotal";
+            this.lblOriginalTotal.Size = new System.Drawing.Size(29, 29);
+            this.lblOriginalTotal.TabIndex = 94;
+            this.lblOriginalTotal.Text = "0";
+            // 
+            // lblTotalWeight
+            // 
+            this.lblTotalWeight.AutoSize = true;
+            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
+            this.lblTotalWeight.Location = new System.Drawing.Point(1125, 44);
+            this.lblTotalWeight.Name = "lblTotalWeight";
+            this.lblTotalWeight.Size = new System.Drawing.Size(29, 29);
+            this.lblTotalWeight.TabIndex = 93;
+            this.lblTotalWeight.Text = "0";
             // 
             // ucDateTimeInterval1
             // 
@@ -451,138 +480,6 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.toolStripSeparator2,
-            this.mnu_开平,
-            this.mnu_开卷,
-            this.mnu_开条,
-            this.mnu_开吨,
-            this.mnu_SliceView,
-            this.toolStripSeparator1,
-            this.更换仓库ToolStripMenuItem,
-            this.mnu_Check,
-            this.mnu_CheckView,
-            this.mnu_Nullify,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export,
-            this.mnu_Import});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 330);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(145, 6);
-            // 
-            // mnu_开平
-            // 
-            this.mnu_开平.Name = "mnu_开平";
-            this.mnu_开平.Size = new System.Drawing.Size(148, 22);
-            this.mnu_开平.Text = "开平";
-            this.mnu_开平.Click += new System.EventHandler(this.mnu_Slice_Click);
-            // 
-            // mnu_开卷
-            // 
-            this.mnu_开卷.Name = "mnu_开卷";
-            this.mnu_开卷.Size = new System.Drawing.Size(148, 22);
-            this.mnu_开卷.Text = "开卷";
-            this.mnu_开卷.Click += new System.EventHandler(this.mnu_Slice_Click);
-            // 
-            // mnu_开条
-            // 
-            this.mnu_开条.Name = "mnu_开条";
-            this.mnu_开条.Size = new System.Drawing.Size(148, 22);
-            this.mnu_开条.Text = "开条";
-            this.mnu_开条.Click += new System.EventHandler(this.mnu_Slice_Click);
-            // 
-            // mnu_开吨
-            // 
-            this.mnu_开吨.Name = "mnu_开吨";
-            this.mnu_开吨.Size = new System.Drawing.Size(148, 22);
-            this.mnu_开吨.Text = "开吨";
-            this.mnu_开吨.Click += new System.EventHandler(this.mnu_Slice_Click);
-            // 
-            // mnu_SliceView
-            // 
-            this.mnu_SliceView.Name = "mnu_SliceView";
-            this.mnu_SliceView.Size = new System.Drawing.Size(148, 22);
-            this.mnu_SliceView.Text = "查看加工记录";
-            this.mnu_SliceView.Click += new System.EventHandler(this.mnu_SliceView_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
-            // 
-            // mnu_Check
-            // 
-            this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(148, 22);
-            this.mnu_Check.Text = "盘点";
-            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
-            // 
-            // mnu_CheckView
-            // 
-            this.mnu_CheckView.Name = "mnu_CheckView";
-            this.mnu_CheckView.Size = new System.Drawing.Size(148, 22);
-            this.mnu_CheckView.Text = "查看盘点记录";
-            this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
-            // 
-            // mnu_Nullify
-            // 
-            this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(148, 22);
-            this.mnu_Nullify.Text = "作废";
-            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
-            // mnu_Import
-            // 
-            this.mnu_Import.Name = "mnu_Import";
-            this.mnu_Import.Size = new System.Drawing.Size(148, 22);
-            this.mnu_Import.Text = "导入...";
-            this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
-            // 
-            // 更换仓库ToolStripMenuItem
-            // 
-            this.更换仓库ToolStripMenuItem.Name = "更换仓库ToolStripMenuItem";
-            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.更换仓库ToolStripMenuItem.Text = "更换仓库";
-            this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
-            // 
             // colAddDate
             // 
             this.colAddDate.HeaderText = "入库日期";
@@ -746,6 +643,160 @@
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.toolStripSeparator2,
+            this.mnu_开平,
+            this.mnu_开卷,
+            this.mnu_开条,
+            this.mnu_开吨,
+            this.mnu_SliceView,
+            this.toolStripSeparator1,
+            this.更换仓库ToolStripMenuItem,
+            this.mnu_Check,
+            this.mnu_CheckView,
+            this.mnu_Nullify,
+            this.toolStripSeparator3,
+            this.预订ToolStripMenuItem,
+            this.取消预订ToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export,
+            this.mnu_Import});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 380);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(145, 6);
+            // 
+            // mnu_开平
+            // 
+            this.mnu_开平.Name = "mnu_开平";
+            this.mnu_开平.Size = new System.Drawing.Size(148, 22);
+            this.mnu_开平.Text = "开平";
+            this.mnu_开平.Click += new System.EventHandler(this.mnu_Slice_Click);
+            // 
+            // mnu_开卷
+            // 
+            this.mnu_开卷.Name = "mnu_开卷";
+            this.mnu_开卷.Size = new System.Drawing.Size(148, 22);
+            this.mnu_开卷.Text = "开卷";
+            this.mnu_开卷.Click += new System.EventHandler(this.mnu_Slice_Click);
+            // 
+            // mnu_开条
+            // 
+            this.mnu_开条.Name = "mnu_开条";
+            this.mnu_开条.Size = new System.Drawing.Size(148, 22);
+            this.mnu_开条.Text = "开条";
+            this.mnu_开条.Click += new System.EventHandler(this.mnu_Slice_Click);
+            // 
+            // mnu_开吨
+            // 
+            this.mnu_开吨.Name = "mnu_开吨";
+            this.mnu_开吨.Size = new System.Drawing.Size(148, 22);
+            this.mnu_开吨.Text = "开吨";
+            this.mnu_开吨.Click += new System.EventHandler(this.mnu_Slice_Click);
+            // 
+            // mnu_SliceView
+            // 
+            this.mnu_SliceView.Name = "mnu_SliceView";
+            this.mnu_SliceView.Size = new System.Drawing.Size(148, 22);
+            this.mnu_SliceView.Text = "查看加工记录";
+            this.mnu_SliceView.Click += new System.EventHandler(this.mnu_SliceView_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            // 
+            // 更换仓库ToolStripMenuItem
+            // 
+            this.更换仓库ToolStripMenuItem.Name = "更换仓库ToolStripMenuItem";
+            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.更换仓库ToolStripMenuItem.Text = "更换仓库";
+            this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
+            // 
+            // mnu_Check
+            // 
+            this.mnu_Check.Name = "mnu_Check";
+            this.mnu_Check.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Check.Text = "盘点";
+            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
+            // 
+            // mnu_CheckView
+            // 
+            this.mnu_CheckView.Name = "mnu_CheckView";
+            this.mnu_CheckView.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CheckView.Text = "查看盘点记录";
+            this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
+            // 
+            // mnu_Nullify
+            // 
+            this.mnu_Nullify.Name = "mnu_Nullify";
+            this.mnu_Nullify.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Nullify.Text = "作废";
+            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            // 
+            // 预订ToolStripMenuItem
+            // 
+            this.预订ToolStripMenuItem.Name = "预订ToolStripMenuItem";
+            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.预订ToolStripMenuItem.Text = "预订";
+            this.预订ToolStripMenuItem.Click += new System.EventHandler(this.预订ToolStripMenuItem_Click);
+            // 
+            // 取消预订ToolStripMenuItem
+            // 
+            this.取消预订ToolStripMenuItem.Name = "取消预订ToolStripMenuItem";
+            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.取消预订ToolStripMenuItem.Text = "取消预订";
+            this.取消预订ToolStripMenuItem.Click += new System.EventHandler(this.取消预订ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
+            // mnu_Import
+            // 
+            this.mnu_Import.Name = "mnu_Import";
+            this.mnu_Import.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Import.Text = "导入...";
+            this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
+            // 
             // FrmSteelRollMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -842,5 +893,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTransCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOtherCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Label lblTotalWeight;
+        private System.Windows.Forms.Label lblOriginalTotal;
+        private System.Windows.Forms.ToolStripMenuItem 预订ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 取消预订ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }

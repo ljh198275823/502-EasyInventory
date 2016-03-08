@@ -19,7 +19,7 @@ namespace LJH.Inventory.BLL
         #endregion
 
         #region 公共方法
-        public CommandResult UpdateMemo(ProductInventoryItem pi,string memo)
+        public CommandResult UpdateMemo(ProductInventoryItem pi, string memo)
         {
             var clone = pi.Clone();
             clone.Memo = memo;
@@ -28,7 +28,7 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult UpdateWareHouse(ProductInventoryItem pi, WareHouse  ws)
+        public CommandResult UpdateWareHouse(ProductInventoryItem pi, WareHouse ws)
         {
             var clone = pi.Clone();
             clone.WareHouseID = ws.ID;
@@ -37,6 +37,34 @@ namespace LJH.Inventory.BLL
             {
                 pi.WareHouseID = clone.WareHouseID;
                 pi.WareHouse = ws;
+            }
+            return ret;
+        }
+
+        public CommandResult Reserve(ProductInventoryItem pi, string customer)
+        {
+            if (pi.State != ProductInventoryState.Inventory ) return new CommandResult(ResultCode.Fail, "不能预订");
+            var clone = pi.Clone();
+            clone.State = ProductInventoryState.Reserved;
+            clone.Customer = customer;
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful)
+            {
+                pi.State = clone.State;
+                pi.Customer = clone.Customer;
+            }
+            return ret;
+        }
+
+        public CommandResult UnReserve(ProductInventoryItem pi)
+        {
+            if (pi.State != ProductInventoryState.Reserved) return new CommandResult(ResultCode.Fail, "没有预订的项不能取消预订");
+            var clone = pi.Clone();
+            clone.State = ProductInventoryState.Inventory;
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful)
+            {
+                pi.State = clone.State;
             }
             return ret;
         }
