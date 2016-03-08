@@ -505,6 +505,11 @@
             "AssemblyAsmDisplayName" = "8:LJH.Inventory.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_11D2A90988D4A4C77981446B1F8C3807"
+                    {
+                    "Name" = "8:LJH.Inventory.UI.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:LJH.Inventory.UI.dll"
             "TargetName" = "8:"
@@ -531,6 +536,11 @@
             "AssemblyAsmDisplayName" = "8:LJH.Inventory.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_27428604BB9D4EE39BC03157F483EA58"
+                    {
+                    "Name" = "8:LJH.Inventory.BLL.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:LJH.Inventory.BLL.dll"
             "TargetName" = "8:"
@@ -557,6 +567,11 @@
             "AssemblyAsmDisplayName" = "8:NPOI.OOXML, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_303A545FB057567EC9000A311A674066"
+                    {
+                    "Name" = "8:NPOI.OOXML.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:NPOI.OOXML.dll"
             "TargetName" = "8:"
@@ -583,6 +598,11 @@
             "AssemblyAsmDisplayName" = "8:Jurassic, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_35C73A8F360408579A0B7D9432418DB0"
+                    {
+                    "Name" = "8:Jurassic.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Jurassic.dll"
             "TargetName" = "8:"
@@ -629,6 +649,11 @@
             "AssemblyAsmDisplayName" = "8:LJH.Inventory.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_426B40AC669A1184FBCB37F1C499F30E"
+                    {
+                    "Name" = "8:LJH.Inventory.DAL.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:LJH.Inventory.DAL.dll"
             "TargetName" = "8:"
@@ -695,6 +720,11 @@
             "AssemblyAsmDisplayName" = "8:LJH.Inventory.BusinessModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_532B43E1048B7BE333ED8F06FE9D9EA6"
+                    {
+                    "Name" = "8:LJH.Inventory.BusinessModel.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:LJH.Inventory.BusinessModel.dll"
             "TargetName" = "8:"
@@ -721,6 +751,11 @@
             "AssemblyAsmDisplayName" = "8:LJH.Inventory.UI.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_5976A00551993F4913E5C33850CB5B57"
+                    {
+                    "Name" = "8:LJH.Inventory.UI.Controls.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:LJH.Inventory.UI.Controls.dll"
             "TargetName" = "8:"
@@ -747,6 +782,11 @@
             "AssemblyAsmDisplayName" = "8:LJH.GeneralLibrary, Version=2.0.2016.103, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_64790B1DABD00D63F590F50EE2D374C8"
+                    {
+                    "Name" = "8:LJH.GeneralLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:LJH.GeneralLibrary.dll"
             "TargetName" = "8:"
@@ -813,6 +853,11 @@
             "AssemblyAsmDisplayName" = "8:System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
+                    "_8C86BD33F3CD836D44A1B54AB162AB64"
+                    {
+                    "Name" = "8:System.Data.SQLite.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Data.SQLite.dll"
             "TargetName" = "8:"
@@ -839,6 +884,11 @@
             "AssemblyAsmDisplayName" = "8:NPOI.OpenXml4Net, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_8FB2D907262FB8F98C02970894677A89"
+                    {
+                    "Name" = "8:NPOI.OpenXml4Net.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:NPOI.OpenXml4Net.dll"
             "TargetName" = "8:"
@@ -865,6 +915,11 @@
             "AssemblyAsmDisplayName" = "8:NPOI.OpenXmlFormats, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_922314EFF3B6F29935954619FFAFA2A9"
+                    {
+                    "Name" = "8:NPOI.OpenXmlFormats.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:NPOI.OpenXmlFormats.dll"
             "TargetName" = "8:"
@@ -971,6 +1026,11 @@
             "AssemblyAsmDisplayName" = "8:NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_F566AB49CCDA14811DBE1F0702F80DCE"
+                    {
+                    "Name" = "8:NPOI.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:NPOI.dll"
             "TargetName" = "8:"
@@ -1120,7 +1180,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:易存企业管理系统"
         "ProductCode" = "8:{E5247BA0-745A-4F18-AE75-EC091FEEF386}"
-        "PackageCode" = "8:{64DE3B8A-3F79-4D6C-BB0F-3CFF503E1173}"
+        "PackageCode" = "8:{AB91E644-A02F-408E-B266-201CA7D86EBA}"
         "UpgradeCode" = "8:{99D9C92D-53B2-4530-B7A1-CA7241289C18}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
