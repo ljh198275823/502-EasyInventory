@@ -226,7 +226,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Specification = SlicingItem.Product.Specification,
                     SliceType = GetSliceType(),
                     BeforeWeight = SlicingItem.Weight.Value,
-                    AfterWeight = txtRemainWeight.DecimalValue,
+                    BeforeLength = SlicingItem.CalLength(SlicingItem.Product.Specification, SlicingItem.Weight.Value, SlicingItem.Product.Density.Value).Value,
                     Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,
                     Warehouse = (txtWareHouse.Tag as WareHouse).Name,
@@ -237,6 +237,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     record.Length = txtLength.DecimalValue;
                     record.Count = txtCount.IntergerValue;
+                    record.AfterWeight = txtRemainWeight.DecimalValue;
+                    record.AfterLength = SlicingItem.CalLength(SlicingItem.Product.Specification, record.AfterWeight, SlicingItem.Product.Density.Value).Value ;
                 }
                 else if (rd开吨.Checked)
                 {

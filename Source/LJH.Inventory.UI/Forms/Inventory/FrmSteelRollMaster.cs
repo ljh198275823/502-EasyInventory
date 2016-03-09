@@ -232,6 +232,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colTransCost"].Value = sr.TransCost;
             row.Cells["colOtherCost"].Value = sr.OtherCost;
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
+            row.Cells["colPosition"].Value = sr.Position;
             row.Cells["colMemo"].Value = sr.Memo;
             ShowRowColor(row);
             if (!_SteelRolls.Exists(it => it.ID == sr.ID))
@@ -293,6 +294,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 FrmSliceRecordView frm = new FrmSliceRecordView();
                 frm.SearchCondition = con;
                 frm.ShowDialog();
+                cMnu_Fresh.PerformClick(); //
             }
         }
 

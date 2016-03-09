@@ -216,10 +216,9 @@ namespace LJH.Inventory.BLL
 
             ProductInventoryItem newVal = sr.Clone();
             newVal.Weight = sliceSheet.AfterWeight;
-            newVal.Length = sr.CalLength(sr.Product.Specification, newVal.Weight.Value, sr.Product.Density.Value); //剩余长度通过计算得到
+            newVal.Length = sliceSheet.AfterLength;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr, unitWork);
 
-            sliceSheet.AfterLength = newVal.Length.Value; //
             ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(sliceSheet, unitWork);
 
             ProductInventoryItem pi = new ProductInventoryItem()
@@ -270,7 +269,7 @@ namespace LJH.Inventory.BLL
             var clone = sr.Clone();
             clone.Weight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
             if (clone.Weight == clone.OriginalWeight) clone.Length = clone.OriginalLength; //如果回到整件，则长度设置成入库长度
-            else clone.Length += sliceSheet.BeforeLength - sliceSheet.AfterLength;
+            else clone.Length = clone.CalLength(clone.Product.Specification, clone.Weight.Value, clone.Product.Density.Value);
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork); //
 
             foreach (var pi in pis) //删除所有加工产生的小件库存
@@ -280,14 +279,14 @@ namespace LJH.Inventory.BLL
 
             ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Delete(sliceSheet, unitWork); //删除加工记录
 
-            var sheets = records.Where(it => it.SliceDate > sliceSheet.SliceDate); //后续的加工记录也要修改加工前和加工后四个参数
+            var sheets = records.Where(it => it.BeforeWeight < sliceSheet.BeforeWeight); //后续的加工记录也要修改加工前和加工后四个参数
             foreach (var sheet in sheets)
             {
                 var cloneSheet = sheet.Clone();
                 cloneSheet.BeforeWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
-                cloneSheet.BeforeLength += sliceSheet.BeforeLength - sliceSheet.AfterLength;
+                cloneSheet.BeforeLength = clone.CalLength(clone.Product.Specification, cloneSheet.BeforeWeight, clone.Product.Density.Value).Value;
                 cloneSheet.AfterWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
-                cloneSheet.AfterLength += sliceSheet.BeforeLength - sliceSheet.AfterLength;
+                cloneSheet.AfterLength = clone.CalLength(clone.Product.Specification, cloneSheet.AfterWeight, clone.Product.Density.Value).Value;
                 ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Update(cloneSheet, sheet, unitWork);
             }
             return unitWork.Commit();
