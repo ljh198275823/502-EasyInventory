@@ -27,6 +27,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public Product Product { get; set; }
 
         public WareHouse WareHouse { get; set; }
+
+        public ProductInventoryItem SteelRollSlice { get; set; }
+
+        public bool IsForView { get; set; }
         #endregion
 
         #region 私有方法
@@ -164,12 +168,56 @@ namespace LJH.Inventory.UI.Forms.Inventory
             //}
             return true;
         }
+
+        private void ShowItem(ProductInventoryItem item)
+        {
+            dtStorageDateTime.Value = item.AddDate;
+            txtWareHouse.Text = item.WareHouse.Name;
+            txtWareHouse.Tag = item.WareHouse;
+            txtCategory.Text = item.Product.Category.Name;
+            txtCategory.Tag = item.Product.Category;
+            cmbSpecification.Specification = item.Product.Specification;
+            if (item.Product.Model == rd开平.Text) rd开平.Checked = true;
+            if (item.Product.Model == rd开卷.Text) rd开卷.Checked = true;
+            if (item.Product.Model == rd开吨.Text) rd开吨.Checked = true;
+            if (item.Product.Weight.HasValue)
+            {
+                txtWeight.DecimalValue = item.Product.Weight.Value;
+                rd单件重.Checked = true;
+            }
+            else
+            {
+                txtWeight.DecimalValue = item.OriginalWeight.Value;
+                rd总重.Checked = true;
+            }
+            if (item.Product.Length.HasValue) txtLength.DecimalValue = item.Product.Length.Value;
+            if (item.OriginalCount.HasValue) txtCount.DecimalValue = item.OriginalCount.Value;
+            txtCustomer.Text = item.Customer;
+            if (!string.IsNullOrEmpty(item.Supplier))
+            {
+                CompanyInfo s = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.Supplier).QueryObject;
+                txtSupplier.Text = s != null ? s.Name : null;
+                txtSupplier.Tag = s;
+            }
+            cmbBrand.Text = item.Manufacture;
+            if (item.PurchasePrice.HasValue) txtPurchasePrice.DecimalValue = item.PurchasePrice.Value;
+            rdWithTax.Checked = item.WithTax.HasValue && item.WithTax.Value;
+            rdWithoutTax.Checked = item.WithTax.HasValue && !item.WithTax.Value;
+            if (item.TransCost.HasValue) txtTransCost.DecimalValue = item.TransCost.Value;
+            chkTransCostPrepay.Checked = item.TransCostPrepay.HasValue && item.TransCostPrepay.Value;
+            if (item.OtherCost.HasValue) txtOtherCost.DecimalValue = item.OtherCost.Value;
+            chkOtherCostPrepay.Checked = item.OtherCostPrepay.HasValue && item.OtherCostPrepay.Value;
+            txtPosition.Text = item.Position;
+            txtMemo.Text = item.Memo;
+            btnOk.Enabled = !IsForView;
+        }
         #endregion
 
         #region 事件处理程序
         private void FrmSteelRollSliceDetail_Load(object sender, EventArgs e)
         {
             InitControls();
+            if (SteelRollSlice != null) ShowItem(SteelRollSlice);
         }
 
         private void rdSliceType_CheckedChanged(object sender, EventArgs e)

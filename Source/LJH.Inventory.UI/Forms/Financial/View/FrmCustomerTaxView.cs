@@ -12,6 +12,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.Inventory;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
 {
@@ -122,16 +123,45 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             {
                 var cell = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (cell.Value == null) return;
+                CustomerReceivable cr = GridView.Rows[e.RowIndex].Tag as CustomerReceivable;
                 if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cell.Value.ToString()).QueryObject;
-                    if (sheet != null)
+                    if (ReceivableType == CustomerReceivableType.CustomerTax)
                     {
-                        Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
-                        frm.IsAdding = false;
-                        frm.IsForView = true;
-                        frm.UpdatingItem = sheet;
-                        frm.ShowDialog();
+                        var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                        if (sheet != null)
+                        {
+                            Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                            frm.IsAdding = false;
+                            frm.IsForView = true;
+                            frm.UpdatingItem = sheet;
+                            frm.ShowDialog();
+                        }
+                    }
+                    else if (ReceivableType == CustomerReceivableType.SupplierTax)
+                    {
+                        Guid gid;
+                        if (Guid.TryParse(cr.SheetID, out gid))
+                        {
+                            var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(gid).QueryObject;
+                            if (pi != null)
+                            {
+                                if (pi.Product.Model == "原材料")
+                                {
+                                    FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                                    frm.UpdatingItem = pi;
+                                    frm.IsForView = true;
+                                    frm.ShowDialog();
+                                }
+                                else
+                                {
+                                    FrmSteelRollSliceStackIn frm = new FrmSteelRollSliceStackIn();
+                                    frm.SteelRollSlice = pi;
+                                    frm.IsForView = true;
+                                    frm.ShowDialog();
+                                }
+                            }
+                        }
                     }
                 }
             }
