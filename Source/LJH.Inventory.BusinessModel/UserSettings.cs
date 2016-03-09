@@ -175,6 +175,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [DataMember]
         public string StackoutSheetModel { get; set; }
+        /// <summary>
+        /// 获取或设置是否只默认显示本月送货单
+        /// </summary>
+        [DataMember]
+        public bool SheetsOfThisMothDefault { get; set; }
         #endregion
           
         #region 自动生成单号  

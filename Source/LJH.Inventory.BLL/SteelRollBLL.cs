@@ -251,6 +251,48 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
+        public CommandResult UndoSlice(SteelRollSliceRecord sliceSheet)
+        {
+            ProductInventoryItemSearchCondition con1 = new ProductInventoryItemSearchCondition();
+            con1.InventoryItem = sliceSheet.ID;
+            List<ProductInventoryItem> pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con1).QueryObjects;
+            if (pis != null && pis.Exists(it => it.State != ProductInventoryState.Inventory && it.State != ProductInventoryState.Reserved)) return new CommandResult(ResultCode.Fail, "加工的某些小件已经出货或待出货，不能撤回此次加工");
+
+            SliceRecordSearchCondition con = new SliceRecordSearchCondition();
+            con.SourceRoll = sliceSheet.SliceSource;
+            List<SteelRollSliceRecord> records = ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (!records.Exists(it => it.ID == sliceSheet.ID)) return new CommandResult(ResultCode.Fail, "没有找到要撤回的加工记录");
+
+            ProductInventoryItem sr = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sliceSheet.SliceSource).QueryObject;
+            if (sr == null) return new CommandResult(ResultCode.Fail, "没有找到相关的原材料卷");
+
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            var clone = sr.Clone();
+            clone.Weight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
+            if (clone.Weight == clone.OriginalWeight) clone.Length = clone.OriginalLength; //如果回到整件，则长度设置成入库长度
+            else clone.Length += sliceSheet.BeforeLength - sliceSheet.AfterLength;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork); //
+
+            foreach (var pi in pis) //删除所有加工产生的小件库存
+            {
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Delete(pi, unitWork);
+            }
+
+            ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Delete(sliceSheet, unitWork); //删除加工记录
+
+            var sheets = records.Where(it => it.SliceDate > sliceSheet.SliceDate); //后续的加工记录也要修改加工前和加工后四个参数
+            foreach (var sheet in sheets)
+            {
+                var cloneSheet = sheet.Clone();
+                cloneSheet.BeforeWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
+                cloneSheet.BeforeLength += sliceSheet.BeforeLength - sliceSheet.AfterLength;
+                cloneSheet.AfterWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
+                cloneSheet.AfterLength += sliceSheet.BeforeLength - sliceSheet.AfterLength;
+                ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Update(cloneSheet, sheet, unitWork);
+            }
+            return unitWork.Commit();
+        }
+
         public CommandResult CalRealThick(ProductInventoryItem pi)
         {
             try

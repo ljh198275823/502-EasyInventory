@@ -128,6 +128,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabDelivery = new System.Windows.Forms.TabPage();
+            this.cmbStackoutSheetModel = new System.Windows.Forms.ComboBox();
+            this.label83 = new System.Windows.Forms.Label();
             this.chkDoShipAfterPrint = new System.Windows.Forms.CheckBox();
             this.chkForbidWhenNoOrderID = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -172,8 +174,7 @@
             this.label80 = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
-            this.label83 = new System.Windows.Forms.Label();
-            this.cmbStackoutSheetModel = new System.Windows.Forms.ComboBox();
+            this.chkSheetsOfThisMothDefault = new System.Windows.Forms.CheckBox();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1217,6 +1218,7 @@
             // tabDelivery
             // 
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDelivery.Controls.Add(this.chkSheetsOfThisMothDefault);
             this.tabDelivery.Controls.Add(this.cmbStackoutSheetModel);
             this.tabDelivery.Controls.Add(this.label83);
             this.tabDelivery.Controls.Add(this.chkDoShipAfterPrint);
@@ -1235,10 +1237,28 @@
             this.tabDelivery.TabIndex = 0;
             this.tabDelivery.Text = "送货单";
             // 
+            // cmbStackoutSheetModel
+            // 
+            this.cmbStackoutSheetModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStackoutSheetModel.FormattingEnabled = true;
+            this.cmbStackoutSheetModel.Location = new System.Drawing.Point(109, 108);
+            this.cmbStackoutSheetModel.Name = "cmbStackoutSheetModel";
+            this.cmbStackoutSheetModel.Size = new System.Drawing.Size(229, 20);
+            this.cmbStackoutSheetModel.TabIndex = 45;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(14, 111);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(89, 12);
+            this.label83.TabIndex = 44;
+            this.label83.Text = "送货单打印模板";
+            // 
             // chkDoShipAfterPrint
             // 
             this.chkDoShipAfterPrint.AutoSize = true;
-            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 137);
+            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 139);
             this.chkDoShipAfterPrint.Name = "chkDoShipAfterPrint";
             this.chkDoShipAfterPrint.Size = new System.Drawing.Size(144, 16);
             this.chkDoShipAfterPrint.TabIndex = 43;
@@ -1248,7 +1268,7 @@
             // chkForbidWhenNoOrderID
             // 
             this.chkForbidWhenNoOrderID.AutoSize = true;
-            this.chkForbidWhenNoOrderID.Location = new System.Drawing.Point(16, 18);
+            this.chkForbidWhenNoOrderID.Location = new System.Drawing.Point(16, 192);
             this.chkForbidWhenNoOrderID.Name = "chkForbidWhenNoOrderID";
             this.chkForbidWhenNoOrderID.Size = new System.Drawing.Size(156, 16);
             this.chkForbidWhenNoOrderID.TabIndex = 0;
@@ -1259,7 +1279,7 @@
             // 
             this.panel2.Controls.Add(this.rdFILO);
             this.panel2.Controls.Add(this.rdFIFO);
-            this.panel2.Location = new System.Drawing.Point(96, 101);
+            this.panel2.Location = new System.Drawing.Point(96, 69);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(242, 26);
             this.panel2.TabIndex = 42;
@@ -1289,7 +1309,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 108);
+            this.label1.Location = new System.Drawing.Point(14, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 41;
@@ -1298,7 +1318,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(268, 78);
+            this.label6.Location = new System.Drawing.Point(268, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(245, 12);
             this.label6.TabIndex = 40;
@@ -1307,7 +1327,7 @@
             // txtDeadlineDays
             // 
             this.txtDeadlineDays.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 74);
+            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 42);
             this.txtDeadlineDays.MaxValue = 2147483647;
             this.txtDeadlineDays.MinValue = 0;
             this.txtDeadlineDays.Name = "txtDeadlineDays";
@@ -1318,7 +1338,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 78);
+            this.label5.Location = new System.Drawing.Point(14, 46);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(185, 12);
             this.label5.TabIndex = 38;
@@ -1329,7 +1349,7 @@
             this.panel1.Controls.Add(this.rdForbid);
             this.panel1.Controls.Add(this.rdNone);
             this.panel1.Controls.Add(this.rdReminder);
-            this.panel1.Location = new System.Drawing.Point(217, 41);
+            this.panel1.Location = new System.Drawing.Point(217, 9);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(242, 26);
             this.panel1.TabIndex = 36;
@@ -1369,7 +1389,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 48);
+            this.label7.Location = new System.Drawing.Point(14, 16);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(197, 12);
             this.label7.TabIndex = 35;
@@ -1708,23 +1728,15 @@
             this.label82.TabIndex = 13;
             this.label82.Text = "原材料等于或少于";
             // 
-            // label83
+            // chkSheetsOfThisMothDefault
             // 
-            this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(14, 168);
-            this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(89, 12);
-            this.label83.TabIndex = 44;
-            this.label83.Text = "送货单打印模板";
-            // 
-            // cmbStackoutSheetModel
-            // 
-            this.cmbStackoutSheetModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStackoutSheetModel.FormattingEnabled = true;
-            this.cmbStackoutSheetModel.Location = new System.Drawing.Point(109, 165);
-            this.cmbStackoutSheetModel.Name = "cmbStackoutSheetModel";
-            this.cmbStackoutSheetModel.Size = new System.Drawing.Size(229, 20);
-            this.cmbStackoutSheetModel.TabIndex = 45;
+            this.chkSheetsOfThisMothDefault.AutoSize = true;
+            this.chkSheetsOfThisMothDefault.Location = new System.Drawing.Point(16, 165);
+            this.chkSheetsOfThisMothDefault.Name = "chkSheetsOfThisMothDefault";
+            this.chkSheetsOfThisMothDefault.Size = new System.Drawing.Size(156, 16);
+            this.chkSheetsOfThisMothDefault.TabIndex = 46;
+            this.chkSheetsOfThisMothDefault.Text = "默认只显示本月的送货单";
+            this.chkSheetsOfThisMothDefault.UseVisualStyleBackColor = true;
             // 
             // FrmSystemOptions
             // 
@@ -1907,5 +1919,6 @@
         private System.Windows.Forms.CheckBox chkDoShipAfterPrint;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.ComboBox cmbStackoutSheetModel;
+        private System.Windows.Forms.CheckBox chkSheetsOfThisMothDefault;
     }
 }

@@ -92,5 +92,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Memo { get; set; }
         #endregion
+
+        public SteelRollSliceRecord Clone()
+        {
+            return this.MemberwiseClone() as SteelRollSliceRecord;
+        }
     }
 }

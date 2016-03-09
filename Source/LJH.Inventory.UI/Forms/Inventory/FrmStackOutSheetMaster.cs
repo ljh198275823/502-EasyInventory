@@ -88,11 +88,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 重写基类方法和处理事件
+        protected override void Init()
+        {
+            base.Init();
+            this.ucDateTimeInterval1.Init();
+            if (UserSettings.Current != null && UserSettings.Current.SheetsOfThisMothDefault)
+            {
+                chkSheetDate.Checked = true;
+                this.ucDateTimeInterval1.SelectThisMonth();
+            }
+        }
         protected override void ReFreshData()
         {
             customerTree1.Init();
-            this.ucDateTimeInterval1.Init();
-            this.ucDateTimeInterval1.SelectThisMonth();
             base.ReFreshData();
         }
 

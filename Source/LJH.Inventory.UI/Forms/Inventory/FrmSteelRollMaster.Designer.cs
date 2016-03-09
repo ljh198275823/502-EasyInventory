@@ -43,12 +43,10 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblOriginalTotal = new System.Windows.Forms.Label();
             this.lblTotalWeight = new System.Windows.Forms.Label();
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
-            this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chkNullified = new System.Windows.Forms.CheckBox();
-            this.chkShipped = new System.Windows.Forms.CheckBox();
+            this.chk作废 = new System.Windows.Forms.CheckBox();
+            this.chk发货 = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.chkIntact = new System.Windows.Forms.CheckBox();
@@ -56,15 +54,12 @@
             this.chkOnlyTail = new System.Windows.Forms.CheckBox();
             this.chkRemainless = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.cmbSupplier = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbBrand = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.chkStackIn = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -112,6 +107,14 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
+            this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
+            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
+            this.chk在库 = new System.Windows.Forms.CheckBox();
+            this.chk预订 = new System.Windows.Forms.CheckBox();
+            this.chk待发货 = new System.Windows.Forms.CheckBox();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -163,7 +166,7 @@
             this.lblOriginalTotal.AutoSize = true;
             this.lblOriginalTotal.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblOriginalTotal.ForeColor = System.Drawing.Color.Blue;
-            this.lblOriginalTotal.Location = new System.Drawing.Point(1125, 9);
+            this.lblOriginalTotal.Location = new System.Drawing.Point(1118, 12);
             this.lblOriginalTotal.Name = "lblOriginalTotal";
             this.lblOriginalTotal.Size = new System.Drawing.Size(29, 29);
             this.lblOriginalTotal.TabIndex = 94;
@@ -174,32 +177,11 @@
             this.lblTotalWeight.AutoSize = true;
             this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalWeight.Location = new System.Drawing.Point(1125, 44);
+            this.lblTotalWeight.Location = new System.Drawing.Point(1118, 47);
             this.lblTotalWeight.Name = "lblTotalWeight";
             this.lblTotalWeight.Size = new System.Drawing.Size(29, 29);
             this.lblTotalWeight.TabIndex = 93;
             this.lblTotalWeight.Text = "0";
-            // 
-            // ucDateTimeInterval1
-            // 
-            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.Location = new System.Drawing.Point(602, 7);
-            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
-            this.ucDateTimeInterval1.ShowTime = true;
-            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
-            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.TabIndex = 92;
-            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
-            // 
-            // customerCombobox1
-            // 
-            this.customerCombobox1.FormattingEnabled = true;
-            this.customerCombobox1.Location = new System.Drawing.Point(384, 46);
-            this.customerCombobox1.Name = "customerCombobox1";
-            this.customerCombobox1.Size = new System.Drawing.Size(121, 20);
-            this.customerCombobox1.TabIndex = 91;
-            this.customerCombobox1.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label8
             // 
@@ -213,34 +195,37 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.chkNullified);
-            this.panel2.Controls.Add(this.chkShipped);
-            this.panel2.Location = new System.Drawing.Point(897, 44);
+            this.panel2.Controls.Add(this.chk待发货);
+            this.panel2.Controls.Add(this.chk预订);
+            this.panel2.Controls.Add(this.chk在库);
+            this.panel2.Controls.Add(this.chk作废);
+            this.panel2.Controls.Add(this.chk发货);
+            this.panel2.Location = new System.Drawing.Point(897, 35);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(205, 24);
+            this.panel2.Size = new System.Drawing.Size(205, 47);
             this.panel2.TabIndex = 89;
             // 
-            // chkNullified
+            // chk作废
             // 
-            this.chkNullified.AutoSize = true;
-            this.chkNullified.Location = new System.Drawing.Point(67, 3);
-            this.chkNullified.Name = "chkNullified";
-            this.chkNullified.Size = new System.Drawing.Size(60, 16);
-            this.chkNullified.TabIndex = 50;
-            this.chkNullified.Text = "已作废";
-            this.chkNullified.UseVisualStyleBackColor = true;
-            this.chkNullified.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.chk作废.AutoSize = true;
+            this.chk作废.Location = new System.Drawing.Point(54, 26);
+            this.chk作废.Name = "chk作废";
+            this.chk作废.Size = new System.Drawing.Size(48, 16);
+            this.chk作废.TabIndex = 50;
+            this.chk作废.Text = "作废";
+            this.chk作废.UseVisualStyleBackColor = true;
+            this.chk作废.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
-            // chkShipped
+            // chk发货
             // 
-            this.chkShipped.AutoSize = true;
-            this.chkShipped.Location = new System.Drawing.Point(3, 3);
-            this.chkShipped.Name = "chkShipped";
-            this.chkShipped.Size = new System.Drawing.Size(60, 16);
-            this.chkShipped.TabIndex = 51;
-            this.chkShipped.Text = "已发货";
-            this.chkShipped.UseVisualStyleBackColor = true;
-            this.chkShipped.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.chk发货.AutoSize = true;
+            this.chk发货.Location = new System.Drawing.Point(5, 26);
+            this.chk发货.Name = "chk发货";
+            this.chk发货.Size = new System.Drawing.Size(48, 16);
+            this.chk发货.TabIndex = 51;
+            this.chk发货.Text = "发货";
+            this.chk发货.UseVisualStyleBackColor = true;
+            this.chk发货.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label7
             // 
@@ -258,7 +243,7 @@
             this.panel1.Controls.Add(this.chkPartial);
             this.panel1.Controls.Add(this.chkOnlyTail);
             this.panel1.Controls.Add(this.chkRemainless);
-            this.panel1.Location = new System.Drawing.Point(897, 12);
+            this.panel1.Location = new System.Drawing.Point(897, 7);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(205, 24);
             this.panel1.TabIndex = 87;
@@ -316,21 +301,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(838, 18);
+            this.label6.Location = new System.Drawing.Point(838, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 86;
             this.label6.Text = "物料状态";
-            // 
-            // categoryComboBox1
-            // 
-            this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.categoryComboBox1.FormattingEnabled = true;
-            this.categoryComboBox1.Location = new System.Drawing.Point(216, 14);
-            this.categoryComboBox1.Name = "categoryComboBox1";
-            this.categoryComboBox1.Size = new System.Drawing.Size(121, 20);
-            this.categoryComboBox1.TabIndex = 85;
-            this.categoryComboBox1.SelectedIndexChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label1
             // 
@@ -340,16 +315,6 @@
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 84;
             this.label1.Text = "类别";
-            // 
-            // wareHouseComboBox1
-            // 
-            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.wareHouseComboBox1.FormattingEnabled = true;
-            this.wareHouseComboBox1.Location = new System.Drawing.Point(57, 14);
-            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
-            this.wareHouseComboBox1.Size = new System.Drawing.Size(112, 20);
-            this.wareHouseComboBox1.TabIndex = 83;
-            this.wareHouseComboBox1.SelectedIndexChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label4
             // 
@@ -397,15 +362,6 @@
             this.label9.Size = new System.Drawing.Size(29, 12);
             this.label9.TabIndex = 77;
             this.label9.Text = "厂家";
-            // 
-            // cmbSpecification
-            // 
-            this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(384, 14);
-            this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
-            this.cmbSpecification.TabIndex = 76;
-            this.cmbSpecification.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label5
             // 
@@ -797,6 +753,95 @@
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
+            // ucDateTimeInterval1
+            // 
+            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(602, 7);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = true;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.TabIndex = 92;
+            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
+            // 
+            // customerCombobox1
+            // 
+            this.customerCombobox1.FormattingEnabled = true;
+            this.customerCombobox1.Location = new System.Drawing.Point(384, 46);
+            this.customerCombobox1.Name = "customerCombobox1";
+            this.customerCombobox1.Size = new System.Drawing.Size(121, 20);
+            this.customerCombobox1.TabIndex = 91;
+            this.customerCombobox1.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // categoryComboBox1
+            // 
+            this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryComboBox1.FormattingEnabled = true;
+            this.categoryComboBox1.Location = new System.Drawing.Point(216, 14);
+            this.categoryComboBox1.Name = "categoryComboBox1";
+            this.categoryComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.categoryComboBox1.TabIndex = 85;
+            this.categoryComboBox1.SelectedIndexChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // wareHouseComboBox1
+            // 
+            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.wareHouseComboBox1.FormattingEnabled = true;
+            this.wareHouseComboBox1.Location = new System.Drawing.Point(57, 14);
+            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
+            this.wareHouseComboBox1.Size = new System.Drawing.Size(112, 20);
+            this.wareHouseComboBox1.TabIndex = 83;
+            this.wareHouseComboBox1.SelectedIndexChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.FormattingEnabled = true;
+            this.cmbSpecification.Location = new System.Drawing.Point(384, 14);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(121, 20);
+            this.cmbSpecification.TabIndex = 76;
+            this.cmbSpecification.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chk在库
+            // 
+            this.chk在库.AutoSize = true;
+            this.chk在库.Checked = true;
+            this.chk在库.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk在库.Location = new System.Drawing.Point(5, 3);
+            this.chk在库.Name = "chk在库";
+            this.chk在库.Size = new System.Drawing.Size(48, 16);
+            this.chk在库.TabIndex = 52;
+            this.chk在库.Text = "在库";
+            this.chk在库.UseVisualStyleBackColor = true;
+            this.chk在库.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chk预订
+            // 
+            this.chk预订.AutoSize = true;
+            this.chk预订.Checked = true;
+            this.chk预订.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk预订.Location = new System.Drawing.Point(54, 3);
+            this.chk预订.Name = "chk预订";
+            this.chk预订.Size = new System.Drawing.Size(48, 16);
+            this.chk预订.TabIndex = 53;
+            this.chk预订.Text = "预订";
+            this.chk预订.UseVisualStyleBackColor = true;
+            this.chk预订.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chk待发货
+            // 
+            this.chk待发货.AutoSize = true;
+            this.chk待发货.Checked = true;
+            this.chk待发货.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk待发货.Location = new System.Drawing.Point(102, 3);
+            this.chk待发货.Name = "chk待发货";
+            this.chk待发货.Size = new System.Drawing.Size(60, 16);
+            this.chk待发货.TabIndex = 54;
+            this.chk待发货.Text = "待发货";
+            this.chk待发货.UseVisualStyleBackColor = true;
+            this.chk待发货.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
             // FrmSteelRollMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -859,8 +904,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.CheckBox chkNullified;
-        private System.Windows.Forms.CheckBox chkShipped;
+        private System.Windows.Forms.CheckBox chk作废;
+        private System.Windows.Forms.CheckBox chk发货;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private Controls.CustomerCombobox customerCombobox1;
@@ -898,5 +943,8 @@
         private System.Windows.Forms.ToolStripMenuItem 预订ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 取消预订ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.CheckBox chk待发货;
+        private System.Windows.Forms.CheckBox chk预订;
+        private System.Windows.Forms.CheckBox chk在库;
     }
 }

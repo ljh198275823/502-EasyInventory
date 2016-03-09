@@ -7,7 +7,7 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Inventory.View
 {
-    public partial class FrmSliceRecordView : FrmMasterBase 
+    public partial class FrmSliceRecordView : FrmMasterBase
     {
         public FrmSliceRecordView()
         {
@@ -27,7 +27,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 records = (new SteelRollSliceRecordBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             return (from item in records
-                    orderby item.SliceDate descending 
+                    orderby item.SliceDate descending
                     select (object)item).ToList();
         }
 
@@ -52,5 +52,26 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colCustomer"].Value = record.Customer;
         }
         #endregion
+
+        private void 撤回加工ToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (this.GridView.SelectedRows.Count > 0 &&
+                MessageBox.Show("是否撤销这些加工记录？", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                List<SteelRollSliceRecord> records = new List<SteelRollSliceRecord>();
+                foreach (DataGridViewRow row in this.GridView.SelectedRows)
+                {
+                    records.Add(row.Tag as SteelRollSliceRecord);
+                }
+                records = (from it in records
+                           orderby it.SliceDate descending
+                           select it).ToList();
+                foreach (var record in records)
+                {
+                    new SteelRollBLL(AppSettings.Current.ConnStr).UndoSlice(record);
+                }
+                this.ReFreshData();
+            }
+        }
     }
 }

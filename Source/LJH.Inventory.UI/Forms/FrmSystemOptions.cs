@@ -59,6 +59,7 @@ namespace LJH.Inventory.UI.Forms
             rdFILO.Checked = us.InventoryOutType == InventoryOutType.FILO;
             chkDoShipAfterPrint.Checked = us.DoShipAfterPrint;
             cmbStackoutSheetModel.Text = us.StackoutSheetModel;
+            chkSheetsOfThisMothDefault.Checked = us.SheetsOfThisMothDefault;
             #endregion
 
             #region 自动生成编号
@@ -123,6 +124,7 @@ namespace LJH.Inventory.UI.Forms
             if (rdFILO.Checked) us.InventoryOutType = InventoryOutType.FILO;
             us.DoShipAfterPrint = chkDoShipAfterPrint.Checked;
             us.StackoutSheetModel = cmbStackoutSheetModel.Text.Trim();
+            us.SheetsOfThisMothDefault = chkSheetsOfThisMothDefault.Checked;
             #endregion
 
             #region 自动生成编号

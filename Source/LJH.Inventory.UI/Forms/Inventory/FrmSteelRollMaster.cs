@@ -70,9 +70,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                        (chkPartial.Checked && it.Status == "余卷") ||
                                        (chkOnlyTail.Checked && it.Status == "尾卷") ||
                                        (chkRemainless.Checked && it.Status == "余料")).ToList();
-                items.RemoveAll(it => (!chkNullified.Checked && it.State == ProductInventoryState.Nullified) ||
-                                     (!chkShipped.Checked && it.State == ProductInventoryState.Shipped)
-                                );
+                items = items.Where(it => (chk作废.Checked && it.State == ProductInventoryState.Nullified) ||
+                                          (chk发货.Checked && it.State == ProductInventoryState.Shipped) ||
+                                          (chk待发货.Checked && it.State == ProductInventoryState.WaitShipping) ||
+                                          (chk预订.Checked && it.State == ProductInventoryState.Reserved) ||
+                                          (chk在库.Checked && it.State == ProductInventoryState.Inventory)).ToList();
             }
             if (items != null && items.Count > 0)
             {
