@@ -47,6 +47,10 @@
             this.txtNation = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.GridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_AddContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_DeleteContact = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblCategory = new System.Windows.Forms.LinkLabel();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +58,6 @@
             this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_AddContact = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_DeleteContact = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblCategory = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -258,52 +258,6 @@
             this.GridView.TabIndex = 9;
             this.GridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellDoubleClick);
             // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.HeaderText = "姓名";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 54;
-            // 
-            // colPosition
-            // 
-            this.colPosition.HeaderText = "职位";
-            this.colPosition.Name = "colPosition";
-            this.colPosition.ReadOnly = true;
-            // 
-            // colMobile
-            // 
-            this.colMobile.HeaderText = "移动电话";
-            this.colMobile.Name = "colMobile";
-            this.colMobile.ReadOnly = true;
-            // 
-            // colTelphone
-            // 
-            this.colTelphone.HeaderText = "电话";
-            this.colTelphone.Name = "colTelphone";
-            this.colTelphone.ReadOnly = true;
-            // 
-            // colEmail
-            // 
-            this.colEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colEmail.HeaderText = "Email";
-            this.colEmail.Name = "colEmail";
-            this.colEmail.ReadOnly = true;
-            this.colEmail.Width = 60;
-            // 
-            // colQQ
-            // 
-            this.colQQ.HeaderText = "QQ";
-            this.colQQ.Name = "colQQ";
-            this.colQQ.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -336,6 +290,51 @@
             this.lblCategory.TabStop = true;
             this.lblCategory.Text = "厂家类别";
             this.lblCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCategory_LinkClicked);
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "姓名";
+            this.colName.MinimumWidth = 100;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colPosition
+            // 
+            this.colPosition.HeaderText = "职位";
+            this.colPosition.Name = "colPosition";
+            this.colPosition.ReadOnly = true;
+            // 
+            // colMobile
+            // 
+            this.colMobile.HeaderText = "移动电话";
+            this.colMobile.Name = "colMobile";
+            this.colMobile.ReadOnly = true;
+            // 
+            // colTelphone
+            // 
+            this.colTelphone.HeaderText = "电话";
+            this.colTelphone.Name = "colTelphone";
+            this.colTelphone.ReadOnly = true;
+            // 
+            // colEmail
+            // 
+            this.colEmail.HeaderText = "Email";
+            this.colEmail.MinimumWidth = 150;
+            this.colEmail.Name = "colEmail";
+            this.colEmail.ReadOnly = true;
+            this.colEmail.Width = 150;
+            // 
+            // colQQ
+            // 
+            this.colQQ.HeaderText = "QQ";
+            this.colQQ.Name = "colQQ";
+            this.colQQ.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
             // 
             // FrmRelatedCompanyDetail
             // 
@@ -414,6 +413,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddContact;
         private System.Windows.Forms.ToolStripMenuItem mnu_DeleteContact;
+        private System.Windows.Forms.LinkLabel lblCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMobile;
@@ -421,6 +421,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colQQ;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.LinkLabel lblCategory;
     }
 }

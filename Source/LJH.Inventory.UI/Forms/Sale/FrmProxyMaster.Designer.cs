@@ -272,7 +272,7 @@
             // 
             // colName
             // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colName.HeaderText = "公司名称";
             this.colName.MinimumWidth = 150;
             this.colName.Name = "colName";
@@ -303,7 +303,7 @@
             // 
             // colWeb
             // 
-            this.colWeb.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colWeb.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colWeb.HeaderText = "网站";
             this.colWeb.Name = "colWeb";
             this.colWeb.ReadOnly = true;
@@ -329,7 +329,7 @@
             // 
             // colAddress
             // 
-            this.colAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colAddress.HeaderText = "地址";
             this.colAddress.MinimumWidth = 120;
             this.colAddress.Name = "colAddress";

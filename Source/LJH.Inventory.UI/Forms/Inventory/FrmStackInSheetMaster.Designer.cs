@@ -48,6 +48,12 @@
             this.mnu_AddSheet = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,12 +61,6 @@
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -274,58 +274,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(907, 319);
             this.dataGridView1.TabIndex = 117;
             // 
-            // colSheetNo
-            // 
-            this.colSheetNo.HeaderText = "收货单号";
-            this.colSheetNo.Name = "colSheetNo";
-            this.colSheetNo.ReadOnly = true;
-            // 
-            // colClass
-            // 
-            this.colClass.HeaderText = "入库单类型";
-            this.colClass.Name = "colClass";
-            this.colClass.ReadOnly = true;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colSupplier.HeaderText = "供应商";
-            this.colSupplier.MinimumWidth = 150;
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.ReadOnly = true;
-            this.colSupplier.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSupplier.Width = 150;
-            // 
-            // colWareHouse
-            // 
-            this.colWareHouse.HeaderText = "仓库";
-            this.colWareHouse.Name = "colWareHouse";
-            this.colWareHouse.ReadOnly = true;
-            // 
-            // colState
-            // 
-            this.colState.HeaderText = "状态";
-            this.colState.Name = "colState";
-            this.colState.ReadOnly = true;
-            this.colState.Width = 80;
-            // 
-            // colInventoryDate
-            // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colInventoryDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colInventoryDate.HeaderText = "收货日期";
-            this.colInventoryDate.Name = "colInventoryDate";
-            this.colInventoryDate.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.MinimumWidth = 100;
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -365,6 +313,57 @@
             this.cMnu_Export.Name = "cMnu_Export";
             this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // colSheetNo
+            // 
+            this.colSheetNo.HeaderText = "收货单号";
+            this.colSheetNo.Name = "colSheetNo";
+            this.colSheetNo.ReadOnly = true;
+            // 
+            // colClass
+            // 
+            this.colClass.HeaderText = "入库单类型";
+            this.colClass.Name = "colClass";
+            this.colClass.ReadOnly = true;
+            // 
+            // colSupplier
+            // 
+            this.colSupplier.HeaderText = "供应商";
+            this.colSupplier.MinimumWidth = 150;
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.ReadOnly = true;
+            this.colSupplier.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSupplier.Width = 150;
+            // 
+            // colWareHouse
+            // 
+            this.colWareHouse.HeaderText = "仓库";
+            this.colWareHouse.Name = "colWareHouse";
+            this.colWareHouse.ReadOnly = true;
+            // 
+            // colState
+            // 
+            this.colState.HeaderText = "状态";
+            this.colState.Name = "colState";
+            this.colState.ReadOnly = true;
+            this.colState.Width = 80;
+            // 
+            // colInventoryDate
+            // 
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colInventoryDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colInventoryDate.HeaderText = "收货日期";
+            this.colInventoryDate.Name = "colInventoryDate";
+            this.colInventoryDate.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.MinimumWidth = 100;
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
             // 
             // FrmStackInSheetMaster
             // 

@@ -358,7 +358,7 @@
             // 
             // colSupplier
             // 
-            this.colSupplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colSupplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colSupplier.HeaderText = "供应商";
             this.colSupplier.MinimumWidth = 150;
             this.colSupplier.Name = "colSupplier";
@@ -367,7 +367,6 @@
             // 
             // colProduct
             // 
-            this.colProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colProduct.HeaderText = "产品";
             this.colProduct.MinimumWidth = 120;
             this.colProduct.Name = "colProduct";

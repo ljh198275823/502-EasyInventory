@@ -73,7 +73,7 @@
             // 
             // colName
             // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colName.HeaderText = "名称";
             this.colName.MinimumWidth = 100;
             this.colName.Name = "colName";

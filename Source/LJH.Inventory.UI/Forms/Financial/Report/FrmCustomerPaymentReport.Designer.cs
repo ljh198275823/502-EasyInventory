@@ -187,9 +187,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -229,13 +229,13 @@
             // 
             // colSheetID
             // 
-            this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colSheetID.HeaderText = "单据编号";
-            this.colSheetID.MinimumWidth = 100;
+            this.colSheetID.MinimumWidth = 150;
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSheetID.Width = 150;
             // 
             // colPaymentMode
             // 
@@ -320,6 +320,11 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
+        private System.Windows.Forms.LinkLabel lnkSupplier;
+        private System.Windows.Forms.CheckBox chk支;
+        private System.Windows.Forms.CheckBox chk收;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
@@ -329,10 +334,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.Label label1;
-        private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
-        private System.Windows.Forms.LinkLabel lnkSupplier;
-        private System.Windows.Forms.CheckBox chk支;
-        private System.Windows.Forms.CheckBox chk收;
     }
 }

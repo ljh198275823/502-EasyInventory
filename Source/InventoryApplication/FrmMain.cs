@@ -308,7 +308,7 @@ namespace InventoryApplication
 
         private void mnu_Product_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmProductMaster>(sender);
+            ShowSingleForm<FrmProductMaster>(null);
         }
 
         private void mnu_DeliverySheet_Click(object sender, EventArgs e)
@@ -318,7 +318,7 @@ namespace InventoryApplication
 
         private void mnu_ProductCategory_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmProductCategoryMaster>(sender);
+            ShowSingleForm<FrmProductCategoryMaster>(null);
         }
 
         private void mnu_Customer_Click(object sender, EventArgs e)
@@ -328,7 +328,7 @@ namespace InventoryApplication
 
         private void mnu_WareHouse_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmWareHouseMaster>(sender);
+            ShowSingleForm<FrmWareHouseMaster>(null);
         }
 
         private void mnu_Exit_Click(object sender, EventArgs e)
@@ -338,12 +338,12 @@ namespace InventoryApplication
 
         private void mnu_Operator_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmOperatorMaster>(sender);
+            ShowSingleForm<FrmOperatorMaster>(null);
         }
 
         private void mnu_Role_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmRoleMaster>(sender);
+            ShowSingleForm<FrmRoleMaster>(null);
         }
 
         private void mnu_ChangePwd_Click(object sender, EventArgs e)
@@ -394,37 +394,37 @@ namespace InventoryApplication
 
         private void mnu_DeliveryRecordReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmDeliveryRecordReport>(sender);
+            ShowSingleForm<FrmDeliveryRecordReport>(null);
         }
 
         private void mnu_DeliveryStatistic_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmDeliveryStatistics>(sender);
+            ShowSingleForm<FrmDeliveryStatistics>(null);
         }
 
         private void mnu_Performance_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSalesPersonPerformanceReport>(sender);
+            ShowSingleForm<FrmSalesPersonPerformanceReport>(null);
         }
 
         private void mnu_CollectionType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmCollectionTypeMaster>(sender);
+            ShowSingleForm<FrmCollectionTypeMaster>(null);
         }
 
         private void mnu_CurrencyType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmCurrencyTypeMaster>(sender);
+            ShowSingleForm<FrmCurrencyTypeMaster>(null);
         }
 
         private void mnu_Unit_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmUnitMaster>(sender);
+            ShowSingleForm<FrmUnitMaster>(null);
         }
 
         private void mnu_Transport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmTransportMaster>(sender);
+            ShowSingleForm<FrmTransportMaster>(null);
         }
 
         private void mnu_Supplier_Click(object sender, EventArgs e)
@@ -460,7 +460,7 @@ namespace InventoryApplication
 
         private void mnu_WareHouse_Click_1(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmWareHouseMaster>(sender);
+            ShowSingleForm<FrmWareHouseMaster>(null);
         }
 
         private void mnu_CustomerReceivable_Click(object sender, EventArgs e)
@@ -480,7 +480,7 @@ namespace InventoryApplication
 
         private void mnu_CustomerPaymentReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>(sender);
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>(null);
         }
 
         private void mnu_HorizontalSplit_Click(object sender, EventArgs e)
@@ -521,7 +521,7 @@ namespace InventoryApplication
 
         private void mnu_Staff_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmStaffMaster>(sender);
+            ShowSingleForm<FrmStaffMaster>(null);
         }
 
         private void mnu_SupplierState_Click(object sender, EventArgs e)
@@ -536,7 +536,7 @@ namespace InventoryApplication
 
         private void mnu_InventoryRecord_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmInventoryRecordReport>(sender);
+            ShowSingleForm<FrmInventoryRecordReport>(null);
         }
 
         private void mnu_Proxy_Click(object sender, EventArgs e)
@@ -551,7 +551,7 @@ namespace InventoryApplication
 
         private void mnu_SliceRecordReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSliceRecordReport>(sender);
+            ShowSingleForm<FrmSliceRecordReport>(null);
         }
         #endregion
 
@@ -621,7 +621,7 @@ namespace InventoryApplication
 
         private void 客户增值税发票报表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerTaxBillReport>(sender);
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerTaxBillReport>(null);
         }
     }
 }

@@ -589,12 +589,12 @@
             // 
             // colProductName
             // 
-            this.colProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colProductName.HeaderText = "名称";
+            this.colProductName.MinimumWidth = 150;
             this.colProductName.Name = "colProductName";
             this.colProductName.ReadOnly = true;
             this.colProductName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colProductName.Width = 35;
+            this.colProductName.Width = 150;
             // 
             // colCategory
             // 

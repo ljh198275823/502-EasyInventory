@@ -188,18 +188,21 @@
             // 
             // colName
             // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colName.HeaderText = "名称";
-            this.colName.MinimumWidth = 100;
+            this.colName.MinimumWidth = 200;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
+            this.colName.Width = 200;
             // 
             // colParent
             // 
+            this.colParent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colParent.HeaderText = "上级部门";
+            this.colParent.MinimumWidth = 150;
             this.colParent.Name = "colParent";
             this.colParent.ReadOnly = true;
-            this.colParent.Width = 120;
+            this.colParent.Width = 150;
             // 
             // colMemo
             // 

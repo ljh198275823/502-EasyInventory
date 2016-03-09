@@ -509,7 +509,7 @@ namespace InventoryDemo
 
         private void mnu_SliceRecordReport_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSliceRecordReport>(sender);
+            ShowSingleForm<FrmSliceRecordReport>(null);
         }
 
         private void 客户付款流水报表ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -528,7 +528,7 @@ namespace InventoryDemo
 
         private void 客户增值税发票报表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerTaxBillReport>(sender);
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerTaxBillReport>(null);
         }
     }
 }

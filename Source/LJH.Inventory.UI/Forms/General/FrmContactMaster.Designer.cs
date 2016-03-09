@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menu = new System.Windows.Forms.MenuStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btn_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,23 +67,6 @@
             this.menu.Size = new System.Drawing.Size(679, 50);
             this.menu.TabIndex = 21;
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
-            // 
-            // txtKeyword
-            // 
-            this.txtKeyword.AutoSize = false;
-            this.txtKeyword.Margin = new System.Windows.Forms.Padding(6, 0, 1, 0);
-            this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(200, 30);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
-            // 
             // btn_Export
             // 
             this.btn_Export.Image = global::LJH.Inventory.UI.Properties.Resources.export;
@@ -110,6 +93,23 @@
             this.btn_SelectColumns.Size = new System.Drawing.Size(70, 46);
             this.btn_SelectColumns.Text = "选择列(&L)";
             this.btn_SelectColumns.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
+            // 
+            // txtKeyword
+            // 
+            this.txtKeyword.AutoSize = false;
+            this.txtKeyword.Margin = new System.Windows.Forms.Padding(6, 0, 1, 0);
+            this.txtKeyword.Name = "txtKeyword";
+            this.txtKeyword.Size = new System.Drawing.Size(200, 30);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
             // 
             // GridView
             // 
@@ -141,11 +141,10 @@
             // 
             // colName
             // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colName.HeaderText = "姓名";
+            this.colName.MinimumWidth = 100;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
-            this.colName.Width = 54;
             // 
             // colPosition
             // 
@@ -173,11 +172,12 @@
             // 
             // colEmail
             // 
-            this.colEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colEmail.HeaderText = "Email";
+            this.colEmail.MinimumWidth = 150;
             this.colEmail.Name = "colEmail";
             this.colEmail.ReadOnly = true;
-            this.colEmail.Width = 60;
+            this.colEmail.Width = 150;
             // 
             // colHowold
             // 

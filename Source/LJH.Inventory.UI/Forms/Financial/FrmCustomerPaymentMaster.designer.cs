@@ -86,7 +86,7 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1417, 33);
+            this.pnlFilter.Size = new System.Drawing.Size(1362, 33);
             this.pnlFilter.TabIndex = 112;
             // 
             // panel5
@@ -96,18 +96,18 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(224, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1193, 33);
+            this.panel5.Size = new System.Drawing.Size(1138, 33);
             this.panel5.TabIndex = 6;
             // 
             // txtKeyword
             // 
-            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(69, 7);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(1112, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(1057, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
@@ -268,7 +268,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1185, 391);
+            this.dataGridView1.Size = new System.Drawing.Size(1130, 391);
             this.dataGridView1.TabIndex = 115;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -334,7 +334,7 @@
             // 
             // colCustomer
             // 
-            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.MinimumWidth = 150;
             this.colCustomer.Name = "colCustomer";
@@ -407,7 +407,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1417, 446);
+            this.ClientSize = new System.Drawing.Size(1362, 446);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);

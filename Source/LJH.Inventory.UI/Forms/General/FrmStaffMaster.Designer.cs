@@ -292,7 +292,7 @@
             // 
             // colName
             // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colName.HeaderText = "名称";
             this.colName.MinimumWidth = 120;
             this.colName.Name = "colName";
@@ -348,7 +348,6 @@
             // 
             // colRole
             // 
-            this.colRole.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colRole.HeaderText = "角色";
             this.colRole.MinimumWidth = 100;
             this.colRole.Name = "colRole";

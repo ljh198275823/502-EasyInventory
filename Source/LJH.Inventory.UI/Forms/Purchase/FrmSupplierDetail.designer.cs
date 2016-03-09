@@ -58,16 +58,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.GridView = new System.Windows.Forms.DataGridView();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHobby = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
             this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,6 +69,16 @@
             this.mnu_AttachmentOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHowold = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHobby = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -410,80 +410,6 @@
             this.GridView.Size = new System.Drawing.Size(590, 230);
             this.GridView.TabIndex = 65;
             // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colName.HeaderText = "姓名";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 54;
-            // 
-            // colPosition
-            // 
-            this.colPosition.HeaderText = "职位";
-            this.colPosition.Name = "colPosition";
-            this.colPosition.ReadOnly = true;
-            // 
-            // colMobile
-            // 
-            this.colMobile.HeaderText = "移动电话";
-            this.colMobile.Name = "colMobile";
-            this.colMobile.ReadOnly = true;
-            // 
-            // colTelphone
-            // 
-            this.colTelphone.HeaderText = "电话";
-            this.colTelphone.Name = "colTelphone";
-            this.colTelphone.ReadOnly = true;
-            // 
-            // colQQ
-            // 
-            this.colQQ.HeaderText = "QQ";
-            this.colQQ.Name = "colQQ";
-            this.colQQ.ReadOnly = true;
-            // 
-            // colEmail
-            // 
-            this.colEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colEmail.HeaderText = "Email";
-            this.colEmail.Name = "colEmail";
-            this.colEmail.ReadOnly = true;
-            this.colEmail.Width = 60;
-            // 
-            // colHowold
-            // 
-            this.colHowold.HeaderText = "年龄";
-            this.colHowold.Name = "colHowold";
-            this.colHowold.ReadOnly = true;
-            this.colHowold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colHowold.Visible = false;
-            this.colHowold.Width = 40;
-            // 
-            // colBirthday
-            // 
-            this.colBirthday.HeaderText = "生日";
-            this.colBirthday.Name = "colBirthday";
-            this.colBirthday.ReadOnly = true;
-            this.colBirthday.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colBirthday.Visible = false;
-            this.colBirthday.Width = 80;
-            // 
-            // colHobby
-            // 
-            this.colHobby.HeaderText = "爱好";
-            this.colHobby.Name = "colHobby";
-            this.colHobby.ReadOnly = true;
-            this.colHobby.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colHobby.Visible = false;
-            // 
-            // colMemo
-            // 
-            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.MinimumWidth = 100;
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.gridAttachment);
@@ -582,6 +508,80 @@
             this.mnu_AttachmentDelete.Text = "删除";
             this.mnu_AttachmentDelete.Click += new System.EventHandler(this.mnu_AttachmentDelete_Click);
             // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colName.HeaderText = "姓名";
+            this.colName.MinimumWidth = 100;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colPosition
+            // 
+            this.colPosition.HeaderText = "职位";
+            this.colPosition.Name = "colPosition";
+            this.colPosition.ReadOnly = true;
+            // 
+            // colMobile
+            // 
+            this.colMobile.HeaderText = "移动电话";
+            this.colMobile.Name = "colMobile";
+            this.colMobile.ReadOnly = true;
+            // 
+            // colTelphone
+            // 
+            this.colTelphone.HeaderText = "电话";
+            this.colTelphone.Name = "colTelphone";
+            this.colTelphone.ReadOnly = true;
+            // 
+            // colQQ
+            // 
+            this.colQQ.HeaderText = "QQ";
+            this.colQQ.Name = "colQQ";
+            this.colQQ.ReadOnly = true;
+            // 
+            // colEmail
+            // 
+            this.colEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colEmail.HeaderText = "Email";
+            this.colEmail.Name = "colEmail";
+            this.colEmail.ReadOnly = true;
+            this.colEmail.Width = 60;
+            // 
+            // colHowold
+            // 
+            this.colHowold.HeaderText = "年龄";
+            this.colHowold.Name = "colHowold";
+            this.colHowold.ReadOnly = true;
+            this.colHowold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHowold.Visible = false;
+            this.colHowold.Width = 40;
+            // 
+            // colBirthday
+            // 
+            this.colBirthday.HeaderText = "生日";
+            this.colBirthday.Name = "colBirthday";
+            this.colBirthday.ReadOnly = true;
+            this.colBirthday.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colBirthday.Visible = false;
+            this.colBirthday.Width = 80;
+            // 
+            // colHobby
+            // 
+            this.colHobby.HeaderText = "爱好";
+            this.colHobby.Name = "colHobby";
+            this.colHobby.ReadOnly = true;
+            this.colHobby.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHobby.Visible = false;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.MinimumWidth = 100;
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            // 
             // FrmSupplierDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -637,16 +637,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView GridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMobile;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQQ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHowold;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBirthday;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHobby;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ContextMenuStrip mnu_Attachment;
         private System.Windows.Forms.ToolStripMenuItem mnu_AttachmentAdd;
@@ -658,5 +648,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMobile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQQ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHowold;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBirthday;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHobby;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }
