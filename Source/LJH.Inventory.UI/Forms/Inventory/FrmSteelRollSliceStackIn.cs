@@ -150,22 +150,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定价格是否含税");
                 return false;
             }
-            //if (string.IsNullOrEmpty(txtCustomer.Text))
-            //{
-            //    MessageBox.Show("没有指定客户");
-            //    return false;
-            //}
-            //if (txtSupplier.Tag == null)
-            //{
-            //    MessageBox.Show("没有指定供货商");
-            //    return false;
-            //}
-            //if (string.IsNullOrEmpty(cmbBrand.Text))
-            //{
-            //    MessageBox.Show("没有输入厂商");
-            //    cmbBrand.Focus();
-            //    return false;
-            //}
+            if (string.IsNullOrEmpty(txtCustomer.Text))
+            {
+                MessageBox.Show("没有指定客户");
+                return false;
+            }
+            if (txtSupplier.Tag == null)
+            {
+                MessageBox.Show("没有指定供货商");
+                return false;
+            }
+            if (string.IsNullOrEmpty(cmbBrand.Text))
+            {
+                MessageBox.Show("没有输入厂商");
+                cmbBrand.Focus();
+                return false;
+            }
             return true;
         }
 
