@@ -128,6 +128,7 @@
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="TotalWeight" Member="TotalWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="AddDate" Member="AddDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="InventoryItem" Member="InventoryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>

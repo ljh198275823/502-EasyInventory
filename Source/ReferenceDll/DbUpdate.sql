@@ -97,3 +97,15 @@ BEGIN
 end
 go
 
+--2016-3-10
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='AddDate' AND id = OBJECT_ID(N'[dbo].[StackOutItem]'))
+BEGIN
+	exec ('alter table StackOutItem add AddDate DateTime null')
+end
+go
+
+--2016-3-10 
+ALTER VIEW [dbo].[View_StackOutRecord] AS
+ SELECT     a.ID, b.LastActiveDate, a.SheetNo, b.CustomerID, b.WareHouseID, a.ProductID, a.Unit, a.Price, a.Count, a.Length, a.TotalWeight as Weight, b.State, b.SalesPerson, b.WithTax, a.OrderID, a.OrderItem, a.Memo, b.ClassID
+ FROM         dbo.StackOutItem AS a INNER JOIN  dbo.StackOutSheet AS b ON a.SheetNo = b.ID
+go

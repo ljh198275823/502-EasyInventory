@@ -195,7 +195,8 @@ namespace LJH.Inventory.BusinessModel
                     Length = inventory.Product.Length,
                     SheetNo = this.ID,
                     Price = 0,
-                    Count = count
+                    Count = count,
+                    AddDate = DateTime.Now,
                 };
                 if (inventory.Weight.HasValue && inventory.Model != "开平")
                 {
@@ -228,7 +229,8 @@ namespace LJH.Inventory.BusinessModel
                     Unit = p.Unit,
                     SheetNo = this.ID,
                     Price = 0,
-                    Count = count
+                    Count = count,
+                    AddDate = DateTime.Now,
                 };
                 Items.Add(si);
             }
@@ -243,7 +245,7 @@ namespace LJH.Inventory.BusinessModel
             List<StackOutItem> ret = new List<StackOutItem>();
 
             var groups = from it in Items
-                         orderby it.InventoryItem descending 
+                         orderby it.AddDate ascending
                          group it by it.ProductID;
             foreach (var g in groups)
             {
@@ -257,7 +259,8 @@ namespace LJH.Inventory.BusinessModel
                     Count = g.Sum(it => it.Count),
                     SheetNo = this.ID,
                     Price = g.First().Price,
-                    Memo = g.First().Memo
+                    AddDate = g.First().AddDate,
+                    Memo = g.First().Memo,
                 };
                 ret.Add(si);
             }
