@@ -60,7 +60,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置转账银行
         /// </summary>
-        public string Bank{ get; set; }
+        public string Bank { get; set; }
         /// <summary>
         /// 获取或设置付款流水的收发货单据号
         /// </summary>
@@ -117,7 +117,7 @@ namespace LJH.Inventory.BusinessModel
                         return "供应商应付款";
                     case CustomerPaymentType.CustomerTax:
                         return "客户增值税发票";
-                    case CustomerPaymentType .SupplierTax :
+                    case CustomerPaymentType.SupplierTax:
                         return "供应商增值税发票";
                     default:
                         throw new Exception("客户付款单没有指定类型");
@@ -127,7 +127,7 @@ namespace LJH.Inventory.BusinessModel
 
         public ISheet<string> Clone()
         {
-            return MemberwiseClone() as ISheet<string>;
+            return MemberwiseClone() as CustomerPayment;
         }
         #endregion
     }

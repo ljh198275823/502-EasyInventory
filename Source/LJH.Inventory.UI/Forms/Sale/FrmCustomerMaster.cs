@@ -65,6 +65,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit);
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit);
             this.mnu_Import.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
+            this.mnu_Merge.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -217,5 +218,20 @@ namespace LJH.Inventory.UI.Forms.Sale
             btn_Fresh.PerformClick();
         }
         #endregion
+
+        private void mnu_Merge_Click(object sender, EventArgs e)
+        {
+            if (this.GridView.SelectedRows.Count == 1)
+            {
+                var c = this.GridView.SelectedRows[0].Tag as CompanyInfo;
+                FrmCustomerMerge frm = new FrmCustomerMerge();
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.Source = c;
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    btn_Fresh.PerformClick();
+                }
+            }
+        }
     }
 }

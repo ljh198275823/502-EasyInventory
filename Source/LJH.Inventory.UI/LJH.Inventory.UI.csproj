@@ -160,6 +160,12 @@
     <Compile Include="Forms\Financial\FrmSetFileID.Designer.cs">
       <DependentUpon>FrmSetFileID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Sale\FrmCustomerMerge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sale\FrmCustomerMerge.Designer.cs">
+      <DependentUpon>FrmCustomerMerge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\FrmChangeWareHouse.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -756,6 +762,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmSetFileID.resx">
       <DependentUpon>FrmSetFileID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sale\FrmCustomerMerge.resx">
+      <DependentUpon>FrmCustomerMerge.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmChangeWareHouse.resx">
       <DependentUpon>FrmChangeWareHouse.cs</DependentUpon>

@@ -170,7 +170,7 @@ namespace LJH.Inventory.BusinessModel
 
         public ISheet<string> Clone()
         {
-            return MemberwiseClone() as ISheet<string>;
+            return MemberwiseClone() as StackOutSheet;
         }
         #endregion
 

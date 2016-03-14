@@ -349,6 +349,61 @@ namespace LJH.Inventory.BLL
             };
             return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
         }
+        /// <summary>
+        /// 将指定的公司合并到另一个公司
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="des"></param>
+        /// <returns></returns>
+        public CommandResult Merge(string source, string des)
+        {
+            var sc = GetByID(source).QueryObject;
+            var dc = GetByID(des).QueryObject;
+            if (sc == null) return new CommandResult(ResultCode.Fail, "系统中不存在被合并的公司信息");
+            if (dc == null) return new CommandResult(ResultCode.Fail, "系统中不存在合并公司的信息");
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            var scon = new StackOutSheetSearchCondition();
+            scon.CustomerID = source;
+            List<StackOutSheet> sheets = ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri).GetItems(scon).QueryObjects;
+            if (sheets != null && sheets.Count > 0)
+            {
+                foreach (StackOutSheet sheet in sheets)
+                {
+                    StackOutSheet clone = sheet.Clone() as StackOutSheet;
+                    clone.CustomerID = des;
+                    ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri).Update(clone, sheet, unitWork);
+                }
+            }
+
+            var rcon = new CustomerReceivableSearchCondition();
+            rcon.CustomerID = source;
+            List<CustomerReceivable> crs = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(rcon).QueryObjects;
+            if (crs != null && crs.Count > 0)
+            {
+                foreach (var cr in crs)
+                {
+                    var clone = cr.Clone();
+                    clone.CustomerID = des;
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(clone, cr, unitWork);
+                }
+            }
+
+            var pcon = new CustomerPaymentSearchCondition();
+            pcon.CustomerID = source;
+            List<CustomerPayment> cps = ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).GetItems(pcon).QueryObjects;
+            if (cps != null && cps.Count > 0)
+            {
+                foreach (var cp in cps)
+                {
+                    var clone = cp.Clone() as CustomerPayment;
+                    clone.CustomerID = des;
+                    ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Update(clone, cp, unitWork);
+                }
+            }
+
+            ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Delete(sc, unitWork);
+            return unitWork.Commit();
+        }
         #endregion
     }
 }
