@@ -122,6 +122,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
+        public List<ProductInventoryItem> SelectedItems
+        {
+            get
+            {
+                List<ProductInventoryItem> ret = new List<ProductInventoryItem>();
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    ret.Add(row.Tag as ProductInventoryItem);
+                }
+                return ret;
+            }
+        }
+
         #region 重写基类方法
         protected override void Init()
         {

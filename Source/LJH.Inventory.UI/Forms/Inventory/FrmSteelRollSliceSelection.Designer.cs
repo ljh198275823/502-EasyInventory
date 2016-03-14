@@ -36,6 +36,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
@@ -58,9 +59,9 @@
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOriginalThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRealThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSourceRoll = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -69,7 +70,6 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridview1)).BeginInit();
@@ -96,8 +96,21 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1303, 48);
+            this.panel5.Size = new System.Drawing.Size(1310, 48);
             this.panel5.TabIndex = 7;
+            // 
+            // chk开卷
+            // 
+            this.chk开卷.AutoSize = true;
+            this.chk开卷.Checked = true;
+            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk开卷.Location = new System.Drawing.Point(1004, 17);
+            this.chk开卷.Name = "chk开卷";
+            this.chk开卷.Size = new System.Drawing.Size(48, 16);
+            this.chk开卷.TabIndex = 96;
+            this.chk开卷.Text = "开卷";
+            this.chk开卷.UseVisualStyleBackColor = true;
+            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
             // 
             // wareHouseComboBox1
             // 
@@ -274,9 +287,9 @@
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(1055, 471);
+            this.btnClose.Location = new System.Drawing.Point(1186, 471);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 41);
             this.btnClose.TabIndex = 91;
@@ -285,8 +298,8 @@
             // 
             // btnOk
             // 
-            this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(933, 471);
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.Location = new System.Drawing.Point(1024, 471);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 41);
             this.btnOk.TabIndex = 90;
@@ -302,7 +315,7 @@
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Location = new System.Drawing.Point(0, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1303, 50);
+            this.panel1.Size = new System.Drawing.Size(1310, 50);
             this.panel1.TabIndex = 117;
             // 
             // dataGridview1
@@ -319,9 +332,9 @@
             this.colWareHouse,
             this.colCategory,
             this.colSpecification,
+            this.colLength,
             this.colModel,
             this.colWeight,
-            this.colLength,
             this.colOriginalThick,
             this.colRealThick,
             this.colSourceRoll,
@@ -335,7 +348,7 @@
             this.dataGridview1.RowHeadersVisible = false;
             this.dataGridview1.RowTemplate.Height = 23;
             this.dataGridview1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridview1.Size = new System.Drawing.Size(1298, 402);
+            this.dataGridview1.Size = new System.Drawing.Size(1305, 402);
             this.dataGridview1.TabIndex = 118;
             this.dataGridview1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridview1_CellContentClick);
             this.dataGridview1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridview1_CellEndEdit);
@@ -360,6 +373,15 @@
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.ReadOnly = true;
             // 
+            // colLength
+            // 
+            dataGridViewCellStyle1.Format = "N3";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colLength.HeaderText = "长度(米)";
+            this.colLength.Name = "colLength";
+            this.colLength.ReadOnly = true;
+            this.colLength.Width = 80;
+            // 
             // colModel
             // 
             this.colModel.HeaderText = "加工类型";
@@ -369,21 +391,12 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle2;
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             this.colWeight.Width = 80;
-            // 
-            // colLength
-            // 
-            dataGridViewCellStyle2.Format = "N3";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colLength.HeaderText = "长度(米)";
-            this.colLength.Name = "colLength";
-            this.colLength.ReadOnly = true;
-            this.colLength.Width = 80;
             // 
             // colOriginalThick
             // 
@@ -448,26 +461,13 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Width = 150;
             // 
-            // chk开卷
-            // 
-            this.chk开卷.AutoSize = true;
-            this.chk开卷.Checked = true;
-            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开卷.Location = new System.Drawing.Point(1004, 17);
-            this.chk开卷.Name = "chk开卷";
-            this.chk开卷.Size = new System.Drawing.Size(48, 16);
-            this.chk开卷.TabIndex = 96;
-            this.chk开卷.Text = "开卷";
-            this.chk开卷.UseVisualStyleBackColor = true;
-            this.chk开卷.CheckedChanged += new System.EventHandler(this.FreshDate_Clicked);
-            // 
             // FrmSteelRollSliceSelection
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(1303, 554);
+            this.ClientSize = new System.Drawing.Size(1310, 554);
             this.Controls.Add(this.dataGridview1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.panel1);
@@ -509,12 +509,13 @@
         private System.Windows.Forms.Label label8;
         private Controls.WareHouseComboBox wareHouseComboBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chk开卷;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRealThick;
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
@@ -523,6 +524,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.CheckBox chk开卷;
     }
 }

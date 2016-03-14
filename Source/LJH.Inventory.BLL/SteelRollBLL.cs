@@ -297,25 +297,27 @@ namespace LJH.Inventory.BLL
             try
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
                 decimal? thick = null;
                 SliceRecordSearchCondition con = new SliceRecordSearchCondition();
                 con.SourceRoll = pi.ID;
                 var records = new SteelRollSliceRecordBLL(RepoUri).GetItems(con).QueryObjects;
                 if (records != null && records.Count > 0 && records.TrueForAll(it => it.SliceType == "开平" || it.SliceType == "开卷"))
                 {
-                    decimal len = records.Sum(it => it.Length.Value * it.Count);
-                    decimal weight = records.Max(it => it.BeforeWeight); //获取第一次加工记录前的重量
-                    thick = pi.CalThick(pi.Product.Specification, weight, len, pi.Product.Density.Value);
+                    decimal weight = records.Max(it => it.BeforeWeight); //获取第一次加工记录前的重量，这个重量即为这个卷加工前的重量
+                    
+                    ProductInventoryItemSearchCondition pcon = new ProductInventoryItemSearchCondition();
+                    pcon.SourceRoll = pi.ID;
+                    var items = provider.GetItems(pcon).QueryObjects;
+                    decimal len = items.Sum(it => it.Product.Length.Value * it.Count); //长度，为所有库存中小件数量乘以其长度，这里不能以加工记录的数量为准，是因为小件会有盘点，所以数量以库存中的为准
 
-                    var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+                    thick = pi.CalThick(pi.Product.Specification, weight, len, pi.Product.Density.Value);
                     if (thick.HasValue)
                     {
                         ProductInventoryItem clone = pi.Clone();
                         clone.RealThick = thick;
                         provider.Update(clone, pi, unitWork);
-                        ProductInventoryItemSearchCondition pcon = new ProductInventoryItemSearchCondition();
-                        pcon.SourceRoll = pi.ID;
-                        var items = provider.GetItems(pcon).QueryObjects;
+                        
                         foreach (var slice in items)
                         {
                             var sliceClone = slice.Clone();
