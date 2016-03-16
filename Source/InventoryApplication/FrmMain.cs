@@ -73,12 +73,16 @@ namespace InventoryApplication
             ReadDog();
             if (_SoftDog == null)
             {
-                MessageBox.Show("加密狗访问错误：没有找到加密狗。如果加密狗已经插上，则可能是加密狗还没有加密，请先联系厂家进行加密!", "注意");
+                FrmContactUs frm = new FrmContactUs();
+                frm.txtMessage.Text = "没有找到加密狗";
+                frm.ShowDialog();
                 System.Environment.Exit(0);
             }
             else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)  //没有开放进销存软件权限
             {
-                MessageBox.Show("加密狗权限不足：原因可能是加密狗中没有开放进销存软件权限,请联系厂家开放相应的权限!", "注意");
+                FrmContactUs frm = new FrmContactUs();
+                frm.txtMessage.Text = "加密狗权限不足";
+                frm.ShowDialog();
                 System.Environment.Exit(0);
             }
             else if (_SoftDog.ExpiredDate < DateTime.Today && _SoftDog.ExpiredDate.AddDays(15) >= DateTime.Today) //已经过期
@@ -89,7 +93,9 @@ namespace InventoryApplication
             }
             else if (_SoftDog.ExpiredDate.AddDays(15) < DateTime.Today)
             {
-                MessageBox.Show("软件已经过期，请联系厂家延长期限!", "注意");
+                 FrmContactUs frm = new FrmContactUs();
+                frm.txtMessage.Text = "软件已经过期";
+                frm.ShowDialog();
                 System.Environment.Exit(0);
             }
         }
@@ -103,7 +109,9 @@ namespace InventoryApplication
                 var p = new SysparameterInfoBLL(AppSettings.Current.ConnStr).GetByID("__dog").QueryObject; ;
                 if (p == null)
                 {
-                    MessageBox.Show("没有检测到主机加密狗，软件即将退出");
+                    FrmContactUs frm = new FrmContactUs();
+                    frm.txtMessage.Text = "没有找到加密狗";
+                    frm.ShowDialog();
                     Environment.Exit(0);
                 }
                 else
@@ -115,19 +123,25 @@ namespace InventoryApplication
                         string[] temp = memo.Split(';');
                         if (temp[0] != _SoftDog.ProjectNo.ToString())
                         {
-                            MessageBox.Show("加密狗不是本客户的加密狗，软件即将退出");
+                            FrmContactUs frm = new FrmContactUs();
+                            frm.txtMessage.Text = "加密狗权限不足";
+                            frm.ShowDialog();
                             Environment.Exit(0);
                         }
                         DateTime dt2 = DateTime.MinValue;
                         if (!DateTime.TryParse(temp[1], out dt2) || dt2 != hostLastDate)
                         {
-                            MessageBox.Show("没有检测到主机加密狗，软件即将退出");
+                            FrmContactUs frm = new FrmContactUs();
+                            frm.txtMessage.Text = "没有检测到主机加密狗";
+                            frm.ShowDialog();
                             Environment.Exit(0);
                         }
                         DateTime now = DateTime.Now;
                         if (hostLastDate.AddDays(10) < now)//超过7天就退出软件
                         {
-                            MessageBox.Show("主机加密狗处于长时间离线状态，系统即将退出，你可以用主机加密狗登录或者联系供应商");
+                            FrmContactUs frm = new FrmContactUs();
+                            frm.txtMessage.Text = "没有检测到主机加密狗";
+                            frm.ShowDialog();
                             Environment.Exit(0);
                         }
                         else if (hostLastDate.AddDays(1) < now) //主机狗超过3天没有登录
@@ -139,7 +153,9 @@ namespace InventoryApplication
                     }
                     else
                     {
-                        MessageBox.Show("没有检测到主机加密狗，软件即将退出");
+                        FrmContactUs frm = new FrmContactUs();
+                        frm.txtMessage.Text = "没有找到加密狗";
+                        frm.ShowDialog();
                         Environment.Exit(0);
                     }
                 }
