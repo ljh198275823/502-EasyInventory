@@ -180,6 +180,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 _SteelRolls.Add(sr);
             }
         }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            if (items != null)
+            {
+                decimal total = 0;
+                foreach (var item in items)
+                {
+                    var pi = item as ProductInventoryItem;
+                    if (pi.State != ProductInventoryState.Nullified && pi.State != ProductInventoryState.Shipped && pi.Status != "余料")
+                    {
+                        total += pi.Weight.Value;
+                    }
+                }
+                lblTotalWeight.Text = string.Format("总库存 {0:F3}吨", total);
+            }
+            else
+            {
+                lblTotalWeight.Text = string.Empty;
+            }
+        }
         #endregion
 
         #region 事件处理函数

@@ -129,6 +129,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colName"].Value = gp.Key;
             decimal count = gp.Sum(it => it.Count).Trim();
             row.Cells["colCount"].Value = count;
+            row.Cells["colWeight"].Value = gp.Sum(it => it.Weight);
             decimal d1 = gp.Sum(it => it.Amount).Trim();
             row.Cells["colAmount"].Value = d1;
             decimal d2 = gp.Sum(it => it.Cost).Trim();

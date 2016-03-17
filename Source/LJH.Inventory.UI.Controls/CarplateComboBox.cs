@@ -33,7 +33,7 @@ namespace LJH.Inventory.UI.Controls
             {
                 foreach (var item in cs)
                 {
-                    this.Items.Add(item);
+                    if (!string.IsNullOrEmpty(item)) this.Items.Add(item);
                 }
             }
         }
