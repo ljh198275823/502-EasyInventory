@@ -67,9 +67,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer == customerCombobox1.Text).ToList();
                 if (!string.IsNullOrEmpty(txtCarPlate.Text.Trim())) items = items.Where(it => !string.IsNullOrEmpty(it.Carplate) && it.Carplate.Contains(txtCarPlate.Text.Trim())).ToList();
-                items.RemoveAll(it => (!chkNullified.Checked && it.State == ProductInventoryState.Nullified) ||
-                                     (!chkShipped.Checked && it.State == ProductInventoryState.Shipped)
-                                );
+                items = items.Where(it => (chk作废.Checked && it.State == ProductInventoryState.Nullified) ||
+                                          (chk发货.Checked && it.State == ProductInventoryState.Shipped) ||
+                                          (chk待发货.Checked && it.State == ProductInventoryState.WaitShipping) ||
+                                          (chk在库.Checked && it.State == ProductInventoryState.Inventory)).ToList();
             }
             if (items != null && items.Count > 0)
             {
@@ -181,21 +182,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        protected override void ShowItemsOnGrid(List<object> items)
+        protected override void FreshStatusBar()
         {
-            base.ShowItemsOnGrid(items);
-            if (items != null)
+            base.FreshStatusBar();
+            if (dataGridView1.Rows.Count > 0)
             {
                 decimal total = 0;
-                foreach (var item in items)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    var pi = item as ProductInventoryItem;
-                    if (pi.State != ProductInventoryState.Nullified && pi.State != ProductInventoryState.Shipped && pi.Status != "余料")
-                    {
-                        total += pi.Weight.Value;
-                    }
+                    var pi = row.Tag as ProductInventoryItem;
+                    if (pi.State != ProductInventoryState.Nullified) total += pi.Weight.Value;
                 }
-                lblTotalWeight.Text = string.Format("总库存 {0:F3}吨", total);
+                lblTotalWeight.Text = string.Format("合计 {0:F3}吨", total);
             }
             else
             {

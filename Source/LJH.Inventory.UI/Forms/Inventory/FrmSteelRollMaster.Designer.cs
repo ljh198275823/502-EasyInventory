@@ -39,14 +39,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lblTotalWeight = new System.Windows.Forms.Label();
             this.txtCarPlate = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chkNullified = new System.Windows.Forms.CheckBox();
-            this.chkShipped = new System.Windows.Forms.CheckBox();
+            this.chk待发货 = new System.Windows.Forms.CheckBox();
+            this.chk在库 = new System.Windows.Forms.CheckBox();
+            this.chk作废 = new System.Windows.Forms.CheckBox();
+            this.chk发货 = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -92,7 +95,6 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblTotalWeight = new System.Windows.Forms.Label();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -136,6 +138,16 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1561, 86);
             this.panel5.TabIndex = 7;
+            // 
+            // lblTotalWeight
+            // 
+            this.lblTotalWeight.AutoSize = true;
+            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
+            this.lblTotalWeight.Location = new System.Drawing.Point(1054, 45);
+            this.lblTotalWeight.Name = "lblTotalWeight";
+            this.lblTotalWeight.Size = new System.Drawing.Size(0, 35);
+            this.lblTotalWeight.TabIndex = 95;
             // 
             // txtCarPlate
             // 
@@ -187,34 +199,62 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.chkNullified);
-            this.panel2.Controls.Add(this.chkShipped);
+            this.panel2.Controls.Add(this.chk待发货);
+            this.panel2.Controls.Add(this.chk在库);
+            this.panel2.Controls.Add(this.chk作废);
+            this.panel2.Controls.Add(this.chk发货);
             this.panel2.Location = new System.Drawing.Point(897, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(140, 24);
+            this.panel2.Size = new System.Drawing.Size(258, 24);
             this.panel2.TabIndex = 89;
             // 
-            // chkNullified
+            // chk待发货
             // 
-            this.chkNullified.AutoSize = true;
-            this.chkNullified.Location = new System.Drawing.Point(67, 3);
-            this.chkNullified.Name = "chkNullified";
-            this.chkNullified.Size = new System.Drawing.Size(60, 16);
-            this.chkNullified.TabIndex = 50;
-            this.chkNullified.Text = "已作废";
-            this.chkNullified.UseVisualStyleBackColor = true;
-            this.chkNullified.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.chk待发货.AutoSize = true;
+            this.chk待发货.Checked = true;
+            this.chk待发货.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk待发货.Location = new System.Drawing.Point(53, 4);
+            this.chk待发货.Name = "chk待发货";
+            this.chk待发货.Size = new System.Drawing.Size(60, 16);
+            this.chk待发货.TabIndex = 53;
+            this.chk待发货.Text = "待发货";
+            this.chk待发货.UseVisualStyleBackColor = true;
+            this.chk待发货.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
-            // chkShipped
+            // chk在库
             // 
-            this.chkShipped.AutoSize = true;
-            this.chkShipped.Location = new System.Drawing.Point(3, 3);
-            this.chkShipped.Name = "chkShipped";
-            this.chkShipped.Size = new System.Drawing.Size(60, 16);
-            this.chkShipped.TabIndex = 51;
-            this.chkShipped.Text = "已发货";
-            this.chkShipped.UseVisualStyleBackColor = true;
-            this.chkShipped.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.chk在库.AutoSize = true;
+            this.chk在库.Checked = true;
+            this.chk在库.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk在库.Location = new System.Drawing.Point(2, 4);
+            this.chk在库.Name = "chk在库";
+            this.chk在库.Size = new System.Drawing.Size(48, 16);
+            this.chk在库.TabIndex = 52;
+            this.chk在库.Text = "在库";
+            this.chk在库.UseVisualStyleBackColor = true;
+            this.chk在库.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chk作废
+            // 
+            this.chk作废.AutoSize = true;
+            this.chk作废.Location = new System.Drawing.Point(182, 4);
+            this.chk作废.Name = "chk作废";
+            this.chk作废.Size = new System.Drawing.Size(60, 16);
+            this.chk作废.TabIndex = 50;
+            this.chk作废.Text = "已作废";
+            this.chk作废.UseVisualStyleBackColor = true;
+            this.chk作废.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // chk发货
+            // 
+            this.chk发货.AutoSize = true;
+            this.chk发货.Location = new System.Drawing.Point(118, 4);
+            this.chk发货.Name = "chk发货";
+            this.chk发货.Size = new System.Drawing.Size(60, 16);
+            this.chk发货.TabIndex = 51;
+            this.chk发货.Text = "已发货";
+            this.chk发货.UseVisualStyleBackColor = true;
+            this.chk发货.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label7
             // 
@@ -605,16 +645,6 @@
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
-            // lblTotalWeight
-            // 
-            this.lblTotalWeight.AutoSize = true;
-            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalWeight.Location = new System.Drawing.Point(1054, 22);
-            this.lblTotalWeight.Name = "lblTotalWeight";
-            this.lblTotalWeight.Size = new System.Drawing.Size(0, 35);
-            this.lblTotalWeight.TabIndex = 95;
-            // 
             // FrmSteelRollMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -664,8 +694,8 @@
         private Controls.CategoryComboBox categoryComboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.CheckBox chkNullified;
-        private System.Windows.Forms.CheckBox chkShipped;
+        private System.Windows.Forms.CheckBox chk作废;
+        private System.Windows.Forms.CheckBox chk发货;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private Controls.CustomerCombobox customerCombobox1;
@@ -697,5 +727,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCarPlate;
         private System.Windows.Forms.Label lblTotalWeight;
+        private System.Windows.Forms.CheckBox chk待发货;
+        private System.Windows.Forms.CheckBox chk在库;
     }
 }
