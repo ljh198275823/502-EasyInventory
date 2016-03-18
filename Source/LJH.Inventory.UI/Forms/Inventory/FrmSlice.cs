@@ -41,6 +41,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCategory.Text = item.Product.Category.Name;
             txtSpecification.Text = item.Product.Specification;
             txtCurrentWeigth.DecimalValue = item.Weight.Value;
+            if (item.Length.HasValue) txtBeforeLength.DecimalValue = item.Length.Value;
             txtRemainWeight.DecimalValue = item.Weight.Value;
             txtWareHouse.Text = item.WareHouse.Name;
             txtWareHouse.Tag = item.WareHouse;
@@ -126,6 +127,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (rd开条.Checked || rd开吨.Checked)
             {
                 txtRemainWeight.DecimalValue = 0;
+                txtAfterLength.DecimalValue = 0;
             }
         }
 
@@ -136,6 +138,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (weight.HasValue && weight <= SlicingItem.Weight)
             {
                 this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - weight.Value;
+                var f=SlicingItem.CalLength(SlicingItem.Product.Specification, txtRemainWeight.DecimalValue, SlicingItem.Product.Density.Value).Value;
+                txtAfterLength.DecimalValue = f;
             }
             else
             {
@@ -158,6 +162,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (chkOver.Checked)
             {
                 this.txtRemainWeight.DecimalValue = 0;
+                this.txtAfterLength.DecimalValue = 0;
                 btnOk.BackColor = Color.Red;
                 btnOk.ForeColor = Color.White;
             }

@@ -95,6 +95,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
             }
+            else if (sr.State == ProductInventoryState.WaitShipping)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Cyan;
+            }
             else if (sr.State == ProductInventoryState.Shipped)
             {
                 row.DefaultCellStyle.ForeColor = Color.Brown;

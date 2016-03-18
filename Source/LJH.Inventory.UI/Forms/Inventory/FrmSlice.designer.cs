@@ -65,6 +65,10 @@
             this.chkOver = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtMemo = new System.Windows.Forms.ComboBox();
+            this.txtBeforeLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtAfterLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label11 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -451,6 +455,66 @@
             this.txtMemo.Size = new System.Drawing.Size(328, 20);
             this.txtMemo.TabIndex = 87;
             // 
+            // txtBeforeLength
+            // 
+            this.txtBeforeLength.Enabled = false;
+            this.txtBeforeLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtBeforeLength.Location = new System.Drawing.Point(300, 78);
+            this.txtBeforeLength.MaxValue = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.txtBeforeLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtBeforeLength.Name = "txtBeforeLength";
+            this.txtBeforeLength.PointCount = 3;
+            this.txtBeforeLength.Size = new System.Drawing.Size(124, 21);
+            this.txtBeforeLength.TabIndex = 89;
+            this.txtBeforeLength.Text = "0.00";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(241, 82);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 88;
+            this.label8.Text = "当前长度";
+            // 
+            // txtAfterLength
+            // 
+            this.txtAfterLength.Enabled = false;
+            this.txtAfterLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtAfterLength.Location = new System.Drawing.Point(300, 202);
+            this.txtAfterLength.MaxValue = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.txtAfterLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtAfterLength.Name = "txtAfterLength";
+            this.txtAfterLength.PointCount = 3;
+            this.txtAfterLength.Size = new System.Drawing.Size(124, 21);
+            this.txtAfterLength.TabIndex = 91;
+            this.txtAfterLength.Text = "0.00";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(241, 206);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 12);
+            this.label11.TabIndex = 90;
+            this.label11.Text = "剩余长度";
+            // 
             // FrmSlice
             // 
             this.AcceptButton = this.btnOk;
@@ -458,6 +522,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(436, 419);
+            this.Controls.Add(this.txtAfterLength);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.txtBeforeLength);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.chkOver);
@@ -540,6 +608,10 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox txtMemo;
         private System.Windows.Forms.RadioButton rd开卷;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtBeforeLength;
+        private System.Windows.Forms.Label label8;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtAfterLength;
+        private System.Windows.Forms.Label label11;
 
     }
 }
