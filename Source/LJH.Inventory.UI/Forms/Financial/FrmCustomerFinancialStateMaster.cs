@@ -61,7 +61,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
 
-        protected override void ReFreshData()
+        public override void ReFreshData()
         {
             categoryTree.Init();
             base.ReFreshData();

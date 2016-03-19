@@ -258,7 +258,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.PaymentType = CustomerPaymentType.Customer;
             frm.Customer = (txtCustomer.Tag as CompanyInfo);
             frm.StackSheetID = sheet.ID;
-            //frm.Amount = sheet.Amount;
+            frm.Amount = sheet.Amount;
             frm.IsAdding = true;
             frm.ShowDialog();
             ShowPaymentState(sheet);
@@ -334,6 +334,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 prs.Start();
                             }
                         }
+                        if (sheet.State == SheetState.Shipped && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint) this.Close(); //打印后自动出货，打印完成之后关闭窗体
                     }
                     else
                     {

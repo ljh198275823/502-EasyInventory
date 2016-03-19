@@ -594,6 +594,17 @@ namespace InventoryApplication
             this.tmrSoftDogChecker.Enabled = _EnableSoftDog;
 
             OpenLastForms();
+
+            this.ucFormViewMain.FormActivated += new EventHandler(ucFormViewMain_FormActivated);
+            this.ucFormViewSecondary.FormActivated += new EventHandler(ucFormViewMain_FormActivated);
+        }
+
+        private void ucFormViewMain_FormActivated(object sender, EventArgs e)
+        {
+            if (sender is LJH.GeneralLibrary.Core.UI.FrmMasterBase)
+            {
+                (sender as LJH.GeneralLibrary.Core.UI.FrmMasterBase).ReFreshData();
+            }
         }
 
         private void tmrSoftDogChecker_Tick(object sender, EventArgs e)

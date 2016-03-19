@@ -47,7 +47,7 @@ namespace LJH.Inventory.UI.Forms.Sale
         #endregion
 
         #region 重写基类方法
-        protected override void ReFreshData()
+        public override void ReFreshData()
         {
             categoryTree.Init();
             base.ReFreshData();

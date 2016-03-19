@@ -98,7 +98,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 this.ucDateTimeInterval1.SelectThisMonth();
             }
         }
-        protected override void ReFreshData()
+        public override void ReFreshData()
         {
             customerTree1.Init();
             base.ReFreshData();

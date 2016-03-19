@@ -234,7 +234,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (so == SheetOperation.Create && !string.IsNullOrEmpty(StackSheetID)) //如果已经是确定收款是用于哪个出入库单了, 新建时直接核销
             {
                 new CustomerPaymentBLL(AppSettings.Current.ConnStr).PaymentAssign(UpdatingItem as CustomerPayment);
-                ItemShowing();
+                this.Close();
             }
         }
 

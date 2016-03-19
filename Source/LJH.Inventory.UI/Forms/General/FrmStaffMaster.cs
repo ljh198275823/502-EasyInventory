@@ -50,7 +50,7 @@ namespace LJH.Inventory.UI.Forms.General
         #endregion
 
         #region 重写基类方法
-        protected override void ReFreshData()
+        public override void ReFreshData()
         {
             departmentTree1.Init();
             _Operators = new OperatorBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
