@@ -32,7 +32,7 @@ namespace LJH.Inventory.BLL
             con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
             var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count >= 1) original = items[0];
-           
+
             if (original == null)
             {
                 cr = new CustomerReceivable();
@@ -104,7 +104,7 @@ namespace LJH.Inventory.BLL
         #region 公共方法
         public QueryResult<ProductInventoryItem> GetByID(Guid id)
         {
-            return  ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(id);
+            return ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(id);
         }
 
         public QueryResultList<ProductInventoryItem> GetItems(SearchCondition con)
@@ -117,7 +117,7 @@ namespace LJH.Inventory.BLL
             {
                 (con as ProductInventoryItemSearchCondition).Model = MODEL;
             }
-            var ret= ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
             if (ret.QueryObjects != null) ret.QueryObjects = ret.QueryObjects.Where(it => it.Count != 0).ToList();
             return ret;
         }
@@ -269,7 +269,7 @@ namespace LJH.Inventory.BLL
             var clone = sr.Clone();
             clone.Weight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
             if (clone.Weight == clone.OriginalWeight) clone.Length = clone.OriginalLength; //如果回到整件，则长度设置成入库长度
-            else clone.Length = clone.CalLength(clone.Product.Specification, clone.Weight.Value, clone.Product.Density.Value);
+            else clone.Length = ProductInventoryItem.CalLength(clone.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, clone.Weight.Value, clone.Product.Density.Value);
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork); //
 
             foreach (var pi in pis) //删除所有加工产生的小件库存
@@ -284,9 +284,9 @@ namespace LJH.Inventory.BLL
             {
                 var cloneSheet = sheet.Clone();
                 cloneSheet.BeforeWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
-                cloneSheet.BeforeLength = clone.CalLength(clone.Product.Specification, cloneSheet.BeforeWeight, clone.Product.Density.Value).Value;
+                cloneSheet.BeforeLength = ProductInventoryItem.CalLength(clone.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, cloneSheet.BeforeWeight, clone.Product.Density.Value);
                 cloneSheet.AfterWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
-                cloneSheet.AfterLength = clone.CalLength(clone.Product.Specification, cloneSheet.AfterWeight, clone.Product.Density.Value).Value;
+                cloneSheet.AfterLength = ProductInventoryItem.CalLength(clone.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, cloneSheet.AfterWeight, clone.Product.Density.Value);
                 ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Update(cloneSheet, sheet, unitWork);
             }
             return unitWork.Commit();
@@ -305,19 +305,19 @@ namespace LJH.Inventory.BLL
                 if (records != null && records.Count > 0 && records.TrueForAll(it => it.SliceType == "开平" || it.SliceType == "开卷"))
                 {
                     decimal weight = records.Max(it => it.BeforeWeight); //获取第一次加工记录前的重量，这个重量即为这个卷加工前的重量
-                    
+
                     ProductInventoryItemSearchCondition pcon = new ProductInventoryItemSearchCondition();
                     pcon.SourceRoll = pi.ID;
                     var items = provider.GetItems(pcon).QueryObjects;
                     decimal len = items.Sum(it => it.Product.Length.Value * it.Count); //长度，为所有库存中小件数量乘以其长度，这里不能以加工记录的数量为准，是因为小件会有盘点，所以数量以库存中的为准
 
-                    thick = pi.CalThick(pi.Product.Specification, weight, len, pi.Product.Density.Value);
+                    thick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(pi.Product.Specification).Value, weight, len, pi.Product.Density.Value);
                     if (thick.HasValue)
                     {
                         ProductInventoryItem clone = pi.Clone();
                         clone.RealThick = thick;
                         provider.Update(clone, pi, unitWork);
-                        
+
                         foreach (var slice in items)
                         {
                             var sliceClone = slice.Clone();

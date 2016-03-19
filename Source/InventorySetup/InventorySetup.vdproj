@@ -785,7 +785,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:LJH.GeneralLibrary, Version=2.0.2016.103, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:LJH.GeneralLibrary, Version=2.0.2016.318, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_64790B1DABD00D63F590F50EE2D374C8"
@@ -1206,7 +1206,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:易存企业管理系统"
         "ProductCode" = "8:{E5247BA0-745A-4F18-AE75-EC091FEEF386}"
-        "PackageCode" = "8:{C2F3B2FE-CCFF-4224-B592-C36E5A759626}"
+        "PackageCode" = "8:{63406269-10A0-4C57-8427-C442164CDD28}"
         "UpgradeCode" = "8:{99D9C92D-53B2-4530-B7A1-CA7241289C18}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

@@ -175,7 +175,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (txtOriginalLength.DecimalValue > 0)
             {
                 item.OriginalLength = txtOriginalLength.DecimalValue;
-                item.OriginalThick = item.CalThick(p.Specification, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value); //指定长度时计算入库厚度
+                item.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value); //指定长度时计算入库厚度
             }
             else
             {

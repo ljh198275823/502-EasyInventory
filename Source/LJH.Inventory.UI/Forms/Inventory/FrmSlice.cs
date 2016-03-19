@@ -138,8 +138,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (weight.HasValue && weight <= SlicingItem.Weight)
             {
                 this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - weight.Value;
-                var f=SlicingItem.CalLength(SlicingItem.Product.Specification, txtRemainWeight.DecimalValue, SlicingItem.Product.Density.Value).Value;
-                txtAfterLength.DecimalValue = f;
+                txtAfterLength.DecimalValue = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, txtRemainWeight.DecimalValue, SlicingItem.Product.Density.Value);
             }
             else
             {
@@ -231,7 +230,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Specification = SlicingItem.Product.Specification,
                     SliceType = GetSliceType(),
                     BeforeWeight = SlicingItem.Weight.Value,
-                    BeforeLength = SlicingItem.CalLength(SlicingItem.Product.Specification, SlicingItem.Weight.Value, SlicingItem.Product.Density.Value).Value,
+                    BeforeLength = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, SlicingItem.Weight.Value, SlicingItem.Product.Density.Value),
                     Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,
                     Warehouse = (txtWareHouse.Tag as WareHouse).Name,
@@ -243,7 +242,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     record.Length = txtLength.DecimalValue;
                     record.Count = txtCount.IntergerValue;
                     record.AfterWeight = txtRemainWeight.DecimalValue;
-                    record.AfterLength = SlicingItem.CalLength(SlicingItem.Product.Specification, record.AfterWeight, SlicingItem.Product.Density.Value).Value ;
+                    record.AfterLength = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, record.AfterWeight, SlicingItem.Product.Density.Value);
                 }
                 else if (rd开吨.Checked)
                 {

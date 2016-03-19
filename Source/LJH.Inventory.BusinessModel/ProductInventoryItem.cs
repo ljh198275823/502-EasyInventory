@@ -37,6 +37,24 @@ namespace LJH.Inventory.BusinessModel
             }
             return null;
         }
+
+        /// <summary>
+        /// 计算厚度，返回毫米为单位的厚度
+        /// </summary>
+        /// <returns></returns>
+        public static decimal CalThick(decimal width, decimal weight, decimal length, decimal density)
+        {
+            return weight * 1000 * 1000 / (width * length * density);
+        }
+
+        /// <summary>
+        /// 计算长度,返回米为单位的长度
+        /// </summary>
+        /// <returns></returns>
+        public static decimal CalLength(decimal thick, decimal width, decimal weight, decimal density)
+        {
+            return weight * 1000 * 1000 / (width * thick * density);
+        }
         #endregion
 
         #region 构造函数
@@ -222,53 +240,6 @@ namespace LJH.Inventory.BusinessModel
                 return "余卷";
             }
         }
-        /// <summary>
-        /// 计算真实厚度
-        /// </summary>
-        /// <returns></returns>
-        public decimal? CalThick(string specification, decimal weight, decimal length, decimal density)
-        {
-            if (!string.IsNullOrEmpty(specification))
-            {
-                try
-                {
-                    decimal? width = SpecificationHelper.GetWrittenWidth(specification);
-                    if (width.HasValue && width > 0)
-                    {
-                        return weight * 1000 * 1000 / (width.Value * length * density);
-                    }
-                }
-                catch
-                {
-                }
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// 计算真实厚度
-        /// </summary>
-        /// <returns></returns>
-        public decimal? CalLength(string specification, decimal weight, decimal density)
-        {
-            if (!string.IsNullOrEmpty(specification))
-            {
-                try
-                {
-                    decimal? width = SpecificationHelper.GetWrittenWidth(specification);
-                    decimal? thick = SpecificationHelper.GetWrittenThick(specification);
-                    if (width.HasValue && width > 0 && thick.HasValue && thick > 0)
-                    {
-                        return weight * 1000 * 1000 / (width.Value * thick.Value * density);
-                    }
-                }
-                catch
-                {
-                }
-            }
-            return null;
-        }
-        
         /// <summary>
         /// 获取库存项的单重
         /// </summary>

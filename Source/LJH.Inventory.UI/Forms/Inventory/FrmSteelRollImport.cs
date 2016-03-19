@@ -171,8 +171,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return null;
             }
             string manufacture = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
-            var product = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, "原材料", 7.85m);
-            if (product == null)
+            var p = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, "原材料", 7.85m);
+            if (p == null)
             {
                 row.Cells["colReason"].Value = "创建产品失败";
                 return null;
@@ -180,15 +180,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ProductInventoryItem pi = new ProductInventoryItem();
             pi.ID = Guid.NewGuid();
             pi.AddDate = addDate;
-            pi.ProductID = product.ID;
-            pi.Product = product;
-            pi.Model = product.Model;
+            pi.ProductID = p.ID;
+            pi.Product = p;
+            pi.Model = p.Model;
             pi.WareHouseID = ws;
             pi.OriginalWeight = originalWeight;
             if (originalLength > 0)
             {
                 pi.OriginalLength = originalLength;
-                pi.OriginalThick = pi.CalThick(pi.Product.Specification, pi.OriginalWeight.Value, pi.OriginalLength.Value, pi.Product.Density.Value);
+                pi.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, pi.OriginalWeight.Value, pi.OriginalLength.Value, pi.Product.Density.Value);
             }
             else
             {
