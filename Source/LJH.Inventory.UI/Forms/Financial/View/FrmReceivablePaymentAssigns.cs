@@ -110,11 +110,24 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(paymentID).QueryObject;
                     if (cp != null)
                     {
-                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                        frm.IsAdding = false;
-                        frm.IsForView = true;
-                        frm.UpdatingItem = cp;
-                        frm.ShowDialog();
+                        if (cp.ClassID == CustomerPaymentType.Customer || cp.ClassID == CustomerPaymentType.Supplier)
+                        {
+                            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                            frm.IsAdding = false;
+                            frm.IsForView = true;
+                            frm.UpdatingItem = cp;
+                            frm.PaymentType = cp.ClassID;
+                            frm.ShowDialog();
+                        }
+                        else if (cp.ClassID == CustomerPaymentType.CustomerTax || cp.ClassID == CustomerPaymentType.SupplierTax)
+                        {
+                            FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
+                            frm.IsAdding = false;
+                            frm.IsForView = true;
+                            frm.UpdatingItem = cp;
+                            frm.TaxType = cp.ClassID;
+                            frm.ShowDialog();
+                        }
                     }
                 }
             }

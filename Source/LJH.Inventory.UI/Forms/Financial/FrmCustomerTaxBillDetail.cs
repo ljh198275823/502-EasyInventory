@@ -64,6 +64,8 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override void InitControls()
         {
             base.InitControls();
+            this.Text = (TaxType == CustomerPaymentType.CustomerTax) ? "客户增值税" : "供应商增值税";
+            this.lnkCustomer.Text = (TaxType == CustomerPaymentType.CustomerTax) ? "客户" : "供应商";
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
         }
 

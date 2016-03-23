@@ -339,7 +339,7 @@ namespace InventoryApplication
 
         private void mnu_Customer_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmCustomerMaster>(sender);
+            ShowSingleForm<FrmCustomerMaster>(null);
         }
 
         private void mnu_WareHouse_Click(object sender, EventArgs e)
@@ -445,7 +445,7 @@ namespace InventoryApplication
 
         private void mnu_Supplier_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSupplierMaster>(sender);
+            ShowSingleForm<FrmSupplierMaster>(null);
         }
 
         private void mnu_BackupData_Click(object sender, EventArgs e)

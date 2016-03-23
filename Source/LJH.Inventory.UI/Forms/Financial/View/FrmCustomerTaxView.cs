@@ -164,6 +164,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         }
                     }
                 }
+                else if (GridView.Columns[e.ColumnIndex].Name == "colHaspaid")
+                {
+                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowAssigns(cr);
+                    frm.ShowDialog();
+                }
             }
         }
         #endregion
