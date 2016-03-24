@@ -312,5 +312,35 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show(ex.Message);
             }
         }
+
+        #region 工具栏事件
+        private void btn产品类别管理_Click(object sender, EventArgs e)
+        {
+            General.FrmProductCategoryMaster frm = new General.FrmProductCategoryMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
+
+        private void btn仓库管理_Click(object sender, EventArgs e)
+        {
+            Inventory.FrmWareHouseMaster frm = new FrmWareHouseMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
+
+        private void btn供应商管理_Click(object sender, EventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
+
+        private void btn客户管理_Click(object sender, EventArgs e)
+        {
+            Sale.FrmCustomerMaster frm = new Sale.FrmCustomerMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
+        #endregion
     }
 }

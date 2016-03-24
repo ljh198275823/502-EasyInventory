@@ -33,10 +33,18 @@ namespace LJH.Inventory.UI.Forms.Financial
             List<CustomerFinancialState> items = _CustomerStates;
             if (items != null && items.Count > 0)
             {
-                if (this.categoryTree.SelectedNode != null && this.categoryTree.SelectedNode.Tag != null) 
+                if (this.categoryTree.SelectedNode != null && this.categoryTree.SelectedNode != this.categoryTree.Nodes[0])
                 {
-                    var categories = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
-                    if (categories != null) items = items.Where(it => categories.Exists(c => c.ID == it.Customer.CategoryID)).ToList();
+                    if (this.categoryTree.SelectedNode.Tag != null)
+                    {
+                        var categories = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+                        if (categories != null) items = items.Where(it => categories.Exists(c => c.ID == it.Customer.CategoryID)).ToList();
+                    }
+                    else
+                    {
+                        var categories = categoryTree.GetCategoryofNode(this.categoryTree.Nodes[0]);
+                        if (categories != null) items = items.Where(it => string.IsNullOrEmpty(it.Customer.CategoryID) || !categories.Exists(c => c.ID == it.Customer.CategoryID)).ToList();
+                    }
                 }
                 if (!string.IsNullOrEmpty(txtKeyword.Text.Trim())) items = items.Where(it => it.Customer.Name.Contains(txtKeyword.Text.Trim())).ToList();
                 if (chkOnlyHasRecievables.Checked) items = items.Where(it => it.Recievables > 0).ToList();

@@ -131,14 +131,6 @@
             this.cmbStackoutSheetModel = new System.Windows.Forms.ComboBox();
             this.label83 = new System.Windows.Forms.Label();
             this.chkDoShipAfterPrint = new System.Windows.Forms.CheckBox();
-            this.chkForbidWhenNoOrderID = new System.Windows.Forms.CheckBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.rdFILO = new System.Windows.Forms.RadioButton();
-            this.rdFIFO = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtDeadlineDays = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdForbid = new System.Windows.Forms.RadioButton();
             this.rdNone = new System.Windows.Forms.RadioButton();
@@ -174,15 +166,20 @@
             this.label80 = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
-            this.chkSheetsOfThisMothDefault = new System.Windows.Forms.CheckBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.rdLoadSheetsBefore = new System.Windows.Forms.RadioButton();
+            this.rdOnlyThisMonth = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtLoadSheetsBefore = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
+            this.label5 = new System.Windows.Forms.Label();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tab1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -1218,16 +1215,11 @@
             // tabDelivery
             // 
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
-            this.tabDelivery.Controls.Add(this.chkSheetsOfThisMothDefault);
+            this.tabDelivery.Controls.Add(this.panel2);
+            this.tabDelivery.Controls.Add(this.label1);
             this.tabDelivery.Controls.Add(this.cmbStackoutSheetModel);
             this.tabDelivery.Controls.Add(this.label83);
             this.tabDelivery.Controls.Add(this.chkDoShipAfterPrint);
-            this.tabDelivery.Controls.Add(this.chkForbidWhenNoOrderID);
-            this.tabDelivery.Controls.Add(this.panel2);
-            this.tabDelivery.Controls.Add(this.label1);
-            this.tabDelivery.Controls.Add(this.label6);
-            this.tabDelivery.Controls.Add(this.txtDeadlineDays);
-            this.tabDelivery.Controls.Add(this.label5);
             this.tabDelivery.Controls.Add(this.panel1);
             this.tabDelivery.Controls.Add(this.label7);
             this.tabDelivery.Location = new System.Drawing.Point(4, 22);
@@ -1241,7 +1233,7 @@
             // 
             this.cmbStackoutSheetModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStackoutSheetModel.FormattingEnabled = true;
-            this.cmbStackoutSheetModel.Location = new System.Drawing.Point(109, 108);
+            this.cmbStackoutSheetModel.Location = new System.Drawing.Point(109, 83);
             this.cmbStackoutSheetModel.Name = "cmbStackoutSheetModel";
             this.cmbStackoutSheetModel.Size = new System.Drawing.Size(229, 20);
             this.cmbStackoutSheetModel.TabIndex = 45;
@@ -1249,7 +1241,7 @@
             // label83
             // 
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(14, 111);
+            this.label83.Location = new System.Drawing.Point(14, 86);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(89, 12);
             this.label83.TabIndex = 44;
@@ -1258,91 +1250,12 @@
             // chkDoShipAfterPrint
             // 
             this.chkDoShipAfterPrint.AutoSize = true;
-            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 139);
+            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 114);
             this.chkDoShipAfterPrint.Name = "chkDoShipAfterPrint";
             this.chkDoShipAfterPrint.Size = new System.Drawing.Size(144, 16);
             this.chkDoShipAfterPrint.TabIndex = 43;
             this.chkDoShipAfterPrint.Text = "送货单打印后自动出货";
             this.chkDoShipAfterPrint.UseVisualStyleBackColor = true;
-            // 
-            // chkForbidWhenNoOrderID
-            // 
-            this.chkForbidWhenNoOrderID.AutoSize = true;
-            this.chkForbidWhenNoOrderID.Location = new System.Drawing.Point(16, 192);
-            this.chkForbidWhenNoOrderID.Name = "chkForbidWhenNoOrderID";
-            this.chkForbidWhenNoOrderID.Size = new System.Drawing.Size(156, 16);
-            this.chkForbidWhenNoOrderID.TabIndex = 0;
-            this.chkForbidWhenNoOrderID.Text = "送货单项需要指定订单项";
-            this.chkForbidWhenNoOrderID.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.rdFILO);
-            this.panel2.Controls.Add(this.rdFIFO);
-            this.panel2.Location = new System.Drawing.Point(96, 69);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(242, 26);
-            this.panel2.TabIndex = 42;
-            // 
-            // rdFILO
-            // 
-            this.rdFILO.AutoSize = true;
-            this.rdFILO.Location = new System.Drawing.Point(123, 5);
-            this.rdFILO.Name = "rdFILO";
-            this.rdFILO.Size = new System.Drawing.Size(107, 16);
-            this.rdFILO.TabIndex = 7;
-            this.rdFILO.Text = "先进后出(FILO)";
-            this.rdFILO.UseVisualStyleBackColor = true;
-            // 
-            // rdFIFO
-            // 
-            this.rdFIFO.AutoSize = true;
-            this.rdFIFO.Checked = true;
-            this.rdFIFO.Location = new System.Drawing.Point(5, 5);
-            this.rdFIFO.Name = "rdFIFO";
-            this.rdFIFO.Size = new System.Drawing.Size(107, 16);
-            this.rdFIFO.TabIndex = 6;
-            this.rdFIFO.TabStop = true;
-            this.rdFIFO.Text = "先进先出(FIFO)";
-            this.rdFIFO.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 76);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
-            this.label1.TabIndex = 41;
-            this.label1.Text = "库存出库方式";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(268, 47);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(245, 12);
-            this.label6.TabIndex = 40;
-            this.label6.Text = "天(0表示不设还款期，1表示当天，以此类推)";
-            // 
-            // txtDeadlineDays
-            // 
-            this.txtDeadlineDays.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 42);
-            this.txtDeadlineDays.MaxValue = 2147483647;
-            this.txtDeadlineDays.MinValue = 0;
-            this.txtDeadlineDays.Name = "txtDeadlineDays";
-            this.txtDeadlineDays.Size = new System.Drawing.Size(45, 21);
-            this.txtDeadlineDays.TabIndex = 5;
-            this.txtDeadlineDays.Text = "7";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 46);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(185, 12);
-            this.label5.TabIndex = 38;
-            this.label5.Text = "送货单的还款期限为送货之日起第";
             // 
             // panel1
             // 
@@ -1400,10 +1313,10 @@
             this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tab1.Controls.Add(this.tabPage1);
             this.tab1.Controls.Add(this.tabPage2);
             this.tab1.Controls.Add(this.tabDelivery);
             this.tab1.Controls.Add(this.tabAutoCreater);
+            this.tab1.Controls.Add(this.tabPage1);
             this.tab1.Location = new System.Drawing.Point(5, 10);
             this.tab1.Name = "tab1";
             this.tab1.SelectedIndex = 0;
@@ -1728,15 +1641,67 @@
             this.label82.TabIndex = 13;
             this.label82.Text = "原材料等于或少于";
             // 
-            // chkSheetsOfThisMothDefault
+            // panel2
             // 
-            this.chkSheetsOfThisMothDefault.AutoSize = true;
-            this.chkSheetsOfThisMothDefault.Location = new System.Drawing.Point(16, 165);
-            this.chkSheetsOfThisMothDefault.Name = "chkSheetsOfThisMothDefault";
-            this.chkSheetsOfThisMothDefault.Size = new System.Drawing.Size(156, 16);
-            this.chkSheetsOfThisMothDefault.TabIndex = 46;
-            this.chkSheetsOfThisMothDefault.Text = "默认只显示本月的送货单";
-            this.chkSheetsOfThisMothDefault.UseVisualStyleBackColor = true;
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.txtLoadSheetsBefore);
+            this.panel2.Controls.Add(this.rdLoadSheetsBefore);
+            this.panel2.Controls.Add(this.rdOnlyThisMonth);
+            this.panel2.Location = new System.Drawing.Point(85, 43);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(374, 26);
+            this.panel2.TabIndex = 47;
+            // 
+            // rdLoadSheetsBefore
+            // 
+            this.rdLoadSheetsBefore.AutoSize = true;
+            this.rdLoadSheetsBefore.Location = new System.Drawing.Point(144, 5);
+            this.rdLoadSheetsBefore.Name = "rdLoadSheetsBefore";
+            this.rdLoadSheetsBefore.Size = new System.Drawing.Size(71, 16);
+            this.rdLoadSheetsBefore.TabIndex = 4;
+            this.rdLoadSheetsBefore.Text = "显示最近";
+            this.rdLoadSheetsBefore.UseVisualStyleBackColor = true;
+            // 
+            // rdOnlyThisMonth
+            // 
+            this.rdOnlyThisMonth.AutoSize = true;
+            this.rdOnlyThisMonth.Checked = true;
+            this.rdOnlyThisMonth.Location = new System.Drawing.Point(5, 5);
+            this.rdOnlyThisMonth.Name = "rdOnlyThisMonth";
+            this.rdOnlyThisMonth.Size = new System.Drawing.Size(119, 16);
+            this.rdOnlyThisMonth.TabIndex = 2;
+            this.rdOnlyThisMonth.TabStop = true;
+            this.rdOnlyThisMonth.Text = "只显示本月送货单";
+            this.rdOnlyThisMonth.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "送货单管理";
+            // 
+            // txtLoadSheetsBefore
+            // 
+            this.txtLoadSheetsBefore.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLoadSheetsBefore.Location = new System.Drawing.Point(215, 3);
+            this.txtLoadSheetsBefore.MaxValue = 20;
+            this.txtLoadSheetsBefore.MinValue = 1;
+            this.txtLoadSheetsBefore.Name = "txtLoadSheetsBefore";
+            this.txtLoadSheetsBefore.Size = new System.Drawing.Size(31, 21);
+            this.txtLoadSheetsBefore.TabIndex = 68;
+            this.txtLoadSheetsBefore.Text = "1";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(249, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 12);
+            this.label5.TabIndex = 69;
+            this.label5.Text = "个月的送货单";
             // 
             // FrmSystemOptions
             // 
@@ -1758,8 +1723,6 @@
             this.tabAutoCreater.PerformLayout();
             this.tabDelivery.ResumeLayout(false);
             this.tabDelivery.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tab1.ResumeLayout(false);
@@ -1769,6 +1732,8 @@
             this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1779,19 +1744,12 @@
         protected System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.TabPage tabAutoCreater;
         private System.Windows.Forms.TabPage tabDelivery;
-        private System.Windows.Forms.Label label6;
-        private LJH.GeneralLibrary.WinformControl.IntergerTextBox txtDeadlineDays;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rdForbid;
         private System.Windows.Forms.RadioButton rdNone;
         private System.Windows.Forms.RadioButton rdReminder;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabControl tab1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton rdFILO;
-        private System.Windows.Forms.RadioButton rdFIFO;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private GeneralLibrary.WinformControl.IntergerTextBox txtDeliverySheetNum;
@@ -1876,7 +1834,6 @@
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.CheckBox chkForbidWhenNoOrderID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.Label label68;
@@ -1919,6 +1876,11 @@
         private System.Windows.Forms.CheckBox chkDoShipAfterPrint;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.ComboBox cmbStackoutSheetModel;
-        private System.Windows.Forms.CheckBox chkSheetsOfThisMothDefault;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton rdLoadSheetsBefore;
+        private System.Windows.Forms.RadioButton rdOnlyThisMonth;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label5;
+        private GeneralLibrary.WinformControl.IntergerTextBox txtLoadSheetsBefore;
     }
 }

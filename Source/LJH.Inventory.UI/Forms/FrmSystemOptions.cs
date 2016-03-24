@@ -41,8 +41,6 @@ namespace LJH.Inventory.UI.Forms
             #endregion
 
             #region 送货单
-            chkForbidWhenNoOrderID.Checked = us.ForbidWhenNoOrderID;
-            txtDeadlineDays.IntergerValue = us.DeadlineDays;
             if (us.ForbidWhenOverCreditLimit)
             {
                 rdForbid.Checked = true;
@@ -55,11 +53,17 @@ namespace LJH.Inventory.UI.Forms
             {
                 rdNone.Checked = true;
             }
-            rdFIFO.Checked = us.InventoryOutType == InventoryOutType.FIFO;
-            rdFILO.Checked = us.InventoryOutType == InventoryOutType.FILO;
             chkDoShipAfterPrint.Checked = us.DoShipAfterPrint;
             cmbStackoutSheetModel.Text = us.StackoutSheetModel;
-            chkSheetsOfThisMothDefault.Checked = us.SheetsOfThisMothDefault;
+            if (us.LoadSheetsBefore == 0)
+            {
+                rdOnlyThisMonth.Checked = true;
+            }
+            else
+            {
+                rdLoadSheetsBefore.Checked = true;
+                txtLoadSheetsBefore.IntergerValue = us.LoadSheetsBefore;
+            }
             #endregion
 
             #region 自动生成编号
@@ -116,15 +120,12 @@ namespace LJH.Inventory.UI.Forms
             #endregion
 
             #region 送货单选项
-            us.ForbidWhenNoOrderID = chkForbidWhenNoOrderID.Checked;
             us.ReminderWhenOverCreditLimit = rdReminder.Checked;
             us.ForbidWhenOverCreditLimit = rdForbid.Checked;
-            us.DeadlineDays = txtDeadlineDays.IntergerValue;
-            if (rdFIFO.Checked) us.InventoryOutType = InventoryOutType.FIFO;
-            if (rdFILO.Checked) us.InventoryOutType = InventoryOutType.FILO;
             us.DoShipAfterPrint = chkDoShipAfterPrint.Checked;
             us.StackoutSheetModel = cmbStackoutSheetModel.Text.Trim();
-            us.SheetsOfThisMothDefault = chkSheetsOfThisMothDefault.Checked;
+            if (rdOnlyThisMonth.Checked) us.LoadSheetsBefore = 0;
+            else us.LoadSheetsBefore = txtLoadSheetsBefore.IntergerValue;
             #endregion
 
             #region 自动生成编号

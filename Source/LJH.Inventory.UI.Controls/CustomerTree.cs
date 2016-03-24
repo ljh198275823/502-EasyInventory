@@ -30,6 +30,7 @@ namespace LJH.Inventory.UI.Controls
         #region 私有变量
         private List<TreeNode> _AllTypeNodes = new List<TreeNode>();
         private List<TreeNode> _AllCustomerNodes = new List<TreeNode>();
+        private TreeNode _UnGroupNode = null;
         private Hashtable _Companys = null;
         #endregion
 
@@ -101,6 +102,7 @@ namespace LJH.Inventory.UI.Controls
             {
                 AddDesendNodes(items, this.Nodes[0]);
             }
+            _UnGroupNode = this.Nodes[0].Nodes.Add("未分组客户");
 
             if (LoadCustomer)
             {
@@ -110,7 +112,7 @@ namespace LJH.Inventory.UI.Controls
                     if (_Companys == null) _Companys = new Hashtable();
                     customers.ForEach(it => _Companys.Add(it.ID, it));
                 }
-                AddCustomerNodes(customers, this.Nodes[0]);
+                AddCustomerNodes(customers, _UnGroupNode);
                 foreach (TreeNode cnode in _AllTypeNodes)
                 {
                     AddCustomerNodes(customers, cnode);

@@ -38,7 +38,19 @@ namespace LJH.Inventory.UI.Forms.Sale
         {
             List<CompanyInfo> items = _Customers;
             List<CustomerType> pc = null;
-            if (this.categoryTree.SelectedNode != null && this.categoryTree.SelectedNode.Tag != null) pc = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+            if (this.categoryTree.SelectedNode != null && this.categoryTree.SelectedNode != this.categoryTree.Nodes[0])
+            {
+                if (this.categoryTree.SelectedNode.Tag != null)
+                {
+                    var categories = categoryTree.GetCategoryofNode(this.categoryTree.SelectedNode);
+                    if (categories != null) items = items.Where(it => categories.Exists(c => c.ID == it.CategoryID)).ToList();
+                }
+                else
+                {
+                    var categories = categoryTree.GetCategoryofNode(this.categoryTree.Nodes[0]);
+                    if (categories != null) items = items.Where(it => string.IsNullOrEmpty(it.CategoryID) || !categories.Exists(c => c.ID == it.CategoryID)).ToList();
+                }
+            }
             if (pc != null && pc.Count > 0) items = _Customers.Where(it => pc.Exists(c => c.ID == it.CategoryID)).ToList();
 
             return (from p in items

@@ -77,7 +77,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
                 con.States = (int)ProductInventoryState.UnShipped;
-                con.HasRemain = chkOnlyRemain.Checked;
+                con.HasRemain = true;
                 _ProductInventorys = bll.GetSteelRollSlices(con).QueryObjects;
             }
             else
@@ -155,10 +155,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 frm.ShowDialog();
 
                 cMnu_Fresh.PerformClick();
-                ////由于显示明细的时候有可能有改变数量的操作,所以要刷新这一行的状态
-                //con.States = (int)ProductInventoryState.UnShipped;
-                //List<SteelRollSlice> items = new SteelRollSliceBLL(AppSettings.Current.ConnStr).GetSteelRollSlices(con).QueryObjects;
-                //if (items != null && items.Count == 1) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], items[0]); //
             }
         }
 
@@ -184,10 +180,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cMnu_Fresh.PerformClick();
         }
         #endregion
-
-        private void chkOnlyRemain_CheckedChanged(object sender, EventArgs e)
-        {
-            this.cMnu_Fresh.PerformClick();
-        }
     }
 }

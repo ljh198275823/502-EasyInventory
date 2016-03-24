@@ -176,10 +176,10 @@ namespace LJH.Inventory.BusinessModel
         [DataMember]
         public string StackoutSheetModel { get; set; }
         /// <summary>
-        /// 获取或设置是否只默认显示本月送货单
+        /// 获取或设置加载多少个月之前的送货单 0表示本月，1表示最近一月，依此类推
         /// </summary>
         [DataMember]
-        public bool SheetsOfThisMothDefault { get; set; }
+        public int LoadSheetsBefore { get; set; }
         #endregion
           
         #region 自动生成单号  

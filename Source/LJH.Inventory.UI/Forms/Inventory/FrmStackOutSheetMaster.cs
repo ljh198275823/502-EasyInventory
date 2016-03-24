@@ -92,12 +92,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.Init();
             this.ucDateTimeInterval1.Init();
-            if (UserSettings.Current != null && UserSettings.Current.SheetsOfThisMothDefault)
-            {
-                chkSheetDate.Checked = true;
-                this.ucDateTimeInterval1.SelectThisMonth();
-            }
+            this.ucDateTimeInterval1.SelectThisMonth();
         }
+
         public override void ReFreshData()
         {
             customerTree1.Init();
@@ -125,7 +122,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SearchCondition == null)
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
-                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
+                if (UserSettings.Current != null)
+                {
+                    if (UserSettings.Current.LoadSheetsBefore == 0) con.LastActiveDate = new DateTimeRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now);
+                    else con.LastActiveDate = new DateTimeRange(DateTime.Today.AddMonths(-UserSettings.Current.LoadSheetsBefore), DateTime.Now);
+                }
+                else
+                {
+                    con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
+                }
                 _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else

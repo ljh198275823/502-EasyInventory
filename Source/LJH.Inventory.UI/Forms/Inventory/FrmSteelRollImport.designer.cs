@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollImport));
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
@@ -47,8 +47,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.lblSource = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.colRowIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,11 +63,22 @@
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblSource = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btn产品类别管理 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn仓库管理 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn供应商管理 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn客户管理 = new System.Windows.Forms.ToolStripButton();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -92,6 +101,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.toolStrip1);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.groupBox3);
             this.panel3.Controls.Add(this.groupBox1);
@@ -105,7 +115,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button1.Location = new System.Drawing.Point(1046, 39);
+            this.button1.Location = new System.Drawing.Point(1046, 61);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(176, 34);
             this.button1.TabIndex = 21;
@@ -120,7 +130,7 @@
             this.groupBox3.Controls.Add(this.txtFirstRow);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.btnImport);
-            this.groupBox3.Location = new System.Drawing.Point(646, 12);
+            this.groupBox3.Location = new System.Drawing.Point(646, 34);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(355, 73);
             this.groupBox3.TabIndex = 20;
@@ -161,7 +171,7 @@
             // 
             this.groupBox1.Controls.Add(this.txtPath);
             this.groupBox1.Controls.Add(this.btnBrowse);
-            this.groupBox1.Location = new System.Drawing.Point(14, 12);
+            this.groupBox1.Location = new System.Drawing.Point(14, 34);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(623, 73);
             this.groupBox1.TabIndex = 19;
@@ -176,9 +186,9 @@
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Controls.Add(this.lblSource);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(6, 91);
+            this.groupBox2.Location = new System.Drawing.Point(6, 116);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1302, 614);
+            this.groupBox2.Size = new System.Drawing.Size(1302, 589);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数据预览";
@@ -214,35 +224,12 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1299, 572);
+            this.dataGridView1.Size = new System.Drawing.Size(1299, 547);
             this.dataGridView1.TabIndex = 116;
-            // 
-            // lblSource
-            // 
-            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSource.AutoSize = true;
-            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblSource.ForeColor = System.Drawing.Color.Blue;
-            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblSource.Location = new System.Drawing.Point(1211, 24);
-            this.lblSource.Name = "lblSource";
-            this.lblSource.Size = new System.Drawing.Size(44, 12);
-            this.lblSource.TabIndex = 17;
-            this.lblSource.Text = "条数据";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1052, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "待导入数据预览";
             // 
             // colRowIndex
             // 
@@ -276,36 +263,36 @@
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Format = "N3";
+            dataGridViewCellStyle19.NullValue = null;
+            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle19;
             this.colOriginalWeight.HeaderText = "入库重量*";
             this.colOriginalWeight.Name = "colOriginalWeight";
             this.colOriginalWeight.Width = 85;
             // 
             // colOriginalLength
             // 
-            dataGridViewCellStyle2.Format = "N3";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Format = "N3";
+            dataGridViewCellStyle20.NullValue = null;
+            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle20;
             this.colOriginalLength.HeaderText = "入库长度";
             this.colOriginalLength.Name = "colOriginalLength";
             this.colOriginalLength.Width = 80;
             // 
             // colWeight
             // 
-            dataGridViewCellStyle3.Format = "N3";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Format = "N3";
+            dataGridViewCellStyle21.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle21;
             this.colWeight.HeaderText = "剩余重量*";
             this.colWeight.Name = "colWeight";
             this.colWeight.Width = 85;
             // 
             // colLength
             // 
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Format = "N3";
+            dataGridViewCellStyle22.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle22;
             this.colLength.HeaderText = "剩余长度";
             this.colLength.Name = "colLength";
             this.colLength.Width = 80;
@@ -346,13 +333,108 @@
             // 
             // colReason
             // 
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
-            this.colReason.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Red;
+            this.colReason.DefaultCellStyle = dataGridViewCellStyle23;
             this.colReason.HeaderText = "导入状态";
             this.colReason.MinimumWidth = 200;
             this.colReason.Name = "colReason";
             this.colReason.ReadOnly = true;
             this.colReason.Width = 200;
+            // 
+            // lblSource
+            // 
+            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSource.AutoSize = true;
+            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSource.ForeColor = System.Drawing.Color.Blue;
+            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblSource.Location = new System.Drawing.Point(1211, 24);
+            this.lblSource.Name = "lblSource";
+            this.lblSource.Size = new System.Drawing.Size(44, 12);
+            this.lblSource.TabIndex = 17;
+            this.lblSource.Text = "条数据";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1052, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "待导入数据预览";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btn产品类别管理,
+            this.toolStripSeparator1,
+            this.btn仓库管理,
+            this.toolStripSeparator2,
+            this.btn供应商管理,
+            this.toolStripSeparator3,
+            this.btn客户管理});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1311, 25);
+            this.toolStrip1.TabIndex = 24;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btn产品类别管理
+            // 
+            this.btn产品类别管理.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn产品类别管理.Image = ((System.Drawing.Image)(resources.GetObject("btn产品类别管理.Image")));
+            this.btn产品类别管理.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn产品类别管理.Name = "btn产品类别管理";
+            this.btn产品类别管理.Size = new System.Drawing.Size(84, 22);
+            this.btn产品类别管理.Text = "产品类别管理";
+            this.btn产品类别管理.Click += new System.EventHandler(this.btn产品类别管理_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btn仓库管理
+            // 
+            this.btn仓库管理.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn仓库管理.Image = ((System.Drawing.Image)(resources.GetObject("btn仓库管理.Image")));
+            this.btn仓库管理.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn仓库管理.Name = "btn仓库管理";
+            this.btn仓库管理.Size = new System.Drawing.Size(60, 22);
+            this.btn仓库管理.Text = "仓库管理";
+            this.btn仓库管理.Click += new System.EventHandler(this.btn仓库管理_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btn供应商管理
+            // 
+            this.btn供应商管理.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn供应商管理.Image = ((System.Drawing.Image)(resources.GetObject("btn供应商管理.Image")));
+            this.btn供应商管理.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn供应商管理.Name = "btn供应商管理";
+            this.btn供应商管理.Size = new System.Drawing.Size(72, 22);
+            this.btn供应商管理.Text = "供应商管理";
+            this.btn供应商管理.Click += new System.EventHandler(this.btn供应商管理_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btn客户管理
+            // 
+            this.btn客户管理.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn客户管理.Image = ((System.Drawing.Image)(resources.GetObject("btn客户管理.Image")));
+            this.btn客户管理.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn客户管理.Name = "btn客户管理";
+            this.btn客户管理.Size = new System.Drawing.Size(60, 22);
+            this.btn客户管理.Text = "客户管理";
+            this.btn客户管理.Click += new System.EventHandler(this.btn客户管理_Click);
             // 
             // FrmSteelRollImport
             // 
@@ -366,6 +448,7 @@
             this.Text = "原材料导入";
             this.Load += new System.EventHandler(this.FrmStudentImport_Load);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -373,6 +456,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -408,5 +493,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReason;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btn产品类别管理;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btn仓库管理;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton btn供应商管理;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton btn客户管理;
     }
 }
