@@ -67,6 +67,9 @@
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTax = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTaxBill = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -221,9 +224,9 @@
             // 
             // txtKeyword
             // 
-            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(262, 8);
             this.txtKeyword.Name = "txtKeyword";
@@ -257,7 +260,10 @@
             this.colReceivable,
             this.colPrepay,
             this.colTax,
-            this.colTaxBill});
+            this.colTaxBill,
+            this.colPhone,
+            this.colLinker,
+            this.colLinkerPhone});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 36);
@@ -361,6 +367,24 @@
             this.colTaxBill.ReadOnly = true;
             this.colTaxBill.Width = 120;
             // 
+            // colPhone
+            // 
+            this.colPhone.HeaderText = "电话";
+            this.colPhone.Name = "colPhone";
+            this.colPhone.ReadOnly = true;
+            // 
+            // colLinker
+            // 
+            this.colLinker.HeaderText = "联系人";
+            this.colLinker.Name = "colLinker";
+            this.colLinker.ReadOnly = true;
+            // 
+            // colLinkerPhone
+            // 
+            this.colLinkerPhone.HeaderText = "联系人电话";
+            this.colLinkerPhone.Name = "colLinkerPhone";
+            this.colLinkerPhone.ReadOnly = true;
+            // 
             // FrmCustomerFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -420,5 +444,8 @@
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewLinkColumn colTax;
         private System.Windows.Forms.DataGridViewLinkColumn colTaxBill;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;
     }
 }

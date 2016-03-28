@@ -19,6 +19,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         #region 私有变量
         private List<CustomerFinancialState> _CustomerStates = null;
+        private List<Contact> _AllContacts = null;
         #endregion
 
         #region 私有方法
@@ -88,6 +89,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             return records;
         }
 
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            _AllContacts = new ContactBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            base.ShowItemsOnGrid(items);
+        }
+
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             CustomerFinancialState cs = item as CustomerFinancialState;
@@ -102,6 +109,18 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colReceivable"].Value = cs.Recievables;
             row.Cells["colTax"].Value = cs.Tax;
             row.Cells["colTaxBill"].Value = cs.TaxBill;
+            row.Cells["colPhone"].Value = cs.Customer.TelPhone;
+            if (cs.Customer.DefaultLinker != null)
+            {
+                Contact linker = null;
+                if (_AllContacts != null) linker = _AllContacts.SingleOrDefault(it => it.ID == cs.Customer.DefaultLinker);
+                else linker = new ContactBLL(AppSettings.Current.ConnStr).GetByID(cs.Customer.DefaultLinker.Value).QueryObject;
+                if (linker != null)
+                {
+                    row.Cells["colLinker"].Value = linker.Name;
+                    row.Cells["colLinkerPhone"].Value = linker.Mobile;
+                }
+            }
         }
         #endregion
 
