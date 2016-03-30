@@ -144,12 +144,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
 
-            _AllReceivables = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            if (UserSettings.Current != null)
+            {
+                if (UserSettings.Current.LoadSheetsBefore == 0) crsc.CreateDate = new DateTimeRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now);
+                else crsc.CreateDate = new DateTimeRange(DateTime.Today.AddMonths(-UserSettings.Current.LoadSheetsBefore), DateTime.Now);
+            }
+            else
+            {
+                crsc.CreateDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
+            }
+            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable };
+            _AllReceivables = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(crsc).QueryObjects;
 
             CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
-            cpsc.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now);
-            cpsc.PaymentTypes = new List<CustomerPaymentType>();
-            cpsc.PaymentTypes.Add(CustomerPaymentType.Customer);
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer };
+            cpsc.HasRemain = true;
             _AllPayments = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(cpsc).QueryObjects;
 
             _Fresh = true;
