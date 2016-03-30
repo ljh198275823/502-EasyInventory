@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -418,6 +419,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(289, 87);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(955, 396);
@@ -428,12 +431,14 @@
             this.colSheetDate.HeaderText = "录单日期";
             this.colSheetDate.Name = "colSheetDate";
             this.colSheetDate.ReadOnly = true;
+            this.colSheetDate.Width = 130;
             // 
             // colSheetNo
             // 
             this.colSheetNo.HeaderText = "出库单号";
             this.colSheetNo.Name = "colSheetNo";
             this.colSheetNo.ReadOnly = true;
+            this.colSheetNo.Width = 130;
             // 
             // colCustomer
             // 
@@ -485,13 +490,13 @@
             // 
             // colShipDate
             // 
-            dataGridViewCellStyle4.Format = "G";
+            dataGridViewCellStyle4.Format = "g";
             dataGridViewCellStyle4.NullValue = null;
             this.colShipDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.colShipDate.HeaderText = "发货日期";
             this.colShipDate.Name = "colShipDate";
             this.colShipDate.ReadOnly = true;
-            this.colShipDate.Width = 130;
+            this.colShipDate.Width = 150;
             // 
             // colLinker
             // 

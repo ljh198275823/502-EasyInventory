@@ -213,12 +213,26 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     row.Cells["colNotPaid"].Value = sheetState.NotPaid;
                 }
             }
-            if (sheet.State == SheetState.Canceled)
+            if (!_Sheets.Exists(it => it.ID == sheet.ID)) _Sheets.Add(sheet);
+            ShowRowColor(row);
+        }
+
+        private void ShowRowColor(DataGridViewRow row)
+        {
+            StackOutSheet sheet = row.Tag as StackOutSheet;
+            if (sheet.State == SheetState.Add)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
+            }
+            else if (sheet.State == SheetState.Shipped)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Blue;
+            }
+            else if (sheet.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
-            if (!_Sheets.Exists(it => it.ID == sheet.ID)) _Sheets.Add(sheet);
         }
 
         protected override bool DeletingItem(object item)
