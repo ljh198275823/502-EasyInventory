@@ -80,5 +80,10 @@ namespace LJH.Inventory.UI.Forms.General
             this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
         }
         #endregion
+
+        private void cMnu_Edit_Click(object sender, EventArgs e)
+        {
+            PerformUpdateData();
+        }
     }
 }

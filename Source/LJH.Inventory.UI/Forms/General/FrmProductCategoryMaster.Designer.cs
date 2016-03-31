@@ -49,6 +49,7 @@
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -196,34 +197,42 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
             this.cMnu_Add,
+            this.cMnu_Edit,
             this.cMnu_Delete,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 136);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // cMnu_Delete
             // 
             this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Delete.Text = "删除";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // cMnu_Edit
+            // 
+            this.cMnu_Edit.Name = "cMnu_Edit";
+            this.cMnu_Edit.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Edit.Text = "编辑";
+            this.cMnu_Edit.Click += new System.EventHandler(this.cMnu_Edit_Click);
             // 
             // FrmProductCategoryMaster
             // 
@@ -267,5 +276,6 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Edit;
     }
 }

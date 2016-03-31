@@ -52,7 +52,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 decimal length = txtLength.DecimalValue;
                 if (length != 0) items = items.Where(it => (it.OriginalLength.HasValue && it.OriginalLength == txtLength.DecimalValue) || (it.Product.Length.HasValue && it.Product.Length == length)).ToList();
                 decimal weight = txtWeight.DecimalValue;
-                if (weight != 0) items = items.Where(it => it.Weight.HasValue && it.Weight == weight).ToList();
+                if (weight != 0) items = items.Where(it => it.OriginalWeight.HasValue && it.OriginalWeight == weight).ToList();
                 decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
                 decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
                 return (from item in items

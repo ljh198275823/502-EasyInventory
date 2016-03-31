@@ -103,7 +103,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(398, 53);
+            this.label4.Location = new System.Drawing.Point(416, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 97;
@@ -112,16 +112,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(422, 22);
+            this.label3.Location = new System.Drawing.Point(416, 22);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 96;
-            this.label3.Text = "重量";
+            this.label3.Text = "入库重量";
             // 
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(457, 49);
+            this.txtLength.Location = new System.Drawing.Point(469, 49);
             this.txtLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -134,14 +134,14 @@
             0});
             this.txtLength.Name = "txtLength";
             this.txtLength.PointCount = 3;
-            this.txtLength.Size = new System.Drawing.Size(100, 21);
+            this.txtLength.Size = new System.Drawing.Size(99, 21);
             this.txtLength.TabIndex = 95;
             this.txtLength.Text = "0";
             // 
             // txtWeight
             // 
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(457, 18);
+            this.txtWeight.Location = new System.Drawing.Point(469, 18);
             this.txtWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -154,7 +154,7 @@
             0});
             this.txtWeight.Name = "txtWeight";
             this.txtWeight.PointCount = 3;
-            this.txtWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtWeight.Size = new System.Drawing.Size(99, 21);
             this.txtWeight.TabIndex = 94;
             this.txtWeight.Text = "0";
             // 
@@ -243,9 +243,9 @@
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToResizeColumns = false;
             this.gridView.AllowUserToResizeRows = false;
-            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
