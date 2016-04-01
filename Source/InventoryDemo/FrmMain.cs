@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
-using LJH.Inventory.UI.Report;
 using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.Core.UI;
 using LJH.GeneralLibrary.SoftDog;
@@ -282,11 +281,6 @@ namespace InventoryDemo
             ShowSingleForm<FrmStackInSheetMaster>(null);
         }
 
-        private void mnu_CustomerPayment_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCustomerPaymentMaster>(null);
-        }
-
         private void mnu_Expanditure_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmExpenditureRecordMaster>(null);
@@ -309,31 +303,6 @@ namespace InventoryDemo
             ShowSingleForm<FrmDeliveryStatistics>(null);
         }
 
-        private void mnu_Performance_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmSalesPersonPerformanceReport>(null);
-        }
-
-        private void mnu_CollectionType_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCollectionTypeMaster>(null);
-        }
-
-        private void mnu_CurrencyType_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCurrencyTypeMaster>(null);
-        }
-
-        private void mnu_Unit_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmUnitMaster>(null);
-        }
-
-        private void mnu_Transport_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmTransportMaster>(null);
-        }
-
         private void mnu_Supplier_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmSupplierMaster>(null);
@@ -343,11 +312,6 @@ namespace InventoryDemo
         {
             FrmBackUp frm = new FrmBackUp();
             frm.ShowDialog();
-        }
-
-        private void mnu_PurchaseOrder_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmPurchaseOrderMaster>(null);
         }
 
         private void mnu_CustomerType_Click(object sender, EventArgs e)
@@ -360,19 +324,9 @@ namespace InventoryDemo
             ShowSingleForm<FrmSupplierTypeMaster>(null);
         }
 
-        private void mnu_Order_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmOrderMaster>(null);
-        }
-
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmExpenditureTypeMaster>(null);
-        }
-
-        private void mnu_OrderPaymentReport_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmOrderPaymentReport>(null);
         }
 
         private void mnu_Manual_Click(object sender, EventArgs e)
@@ -400,16 +354,6 @@ namespace InventoryDemo
             ShowSingleForm<FrmCustomerFinancialStateMaster>(sender);
         }
 
-        private void mnu_OrderMonitor_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmOrderItemRecordMaster>(null);
-        }
-
-        private void mnu_PurchaseMonitor_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmPurchaseItemRecordMaster>(null);
-        }
-
         private void mnu_Staff_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmStaffMaster>(null);
@@ -418,11 +362,6 @@ namespace InventoryDemo
         private void mnu_SupplierState_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmSupplierFinancialStateMaster>(sender);
-        }
-
-        private void mnu_SupplierPayment_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmSupplierPaymentMaster>(null);
         }
 
         private void mnu_InventoryRecord_Click(object sender, EventArgs e)
@@ -463,11 +402,6 @@ namespace InventoryDemo
             Environment.Exit(0);
         }
         #endregion
-
-        private void mnu_Proxy_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmProxyMaster>(null);
-        }
 
         private void mnu_Material_Click(object sender, EventArgs e)
         {

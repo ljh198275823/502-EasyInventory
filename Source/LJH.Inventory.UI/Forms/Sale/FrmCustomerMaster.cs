@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.Inventory.UI.Report;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 
@@ -70,6 +69,7 @@ namespace LJH.Inventory.UI.Forms.Sale
         {
             base.ShowOperatorRights();
             this.btn_Add.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
+            this.cMnu_Edit.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.btn_Delete.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);

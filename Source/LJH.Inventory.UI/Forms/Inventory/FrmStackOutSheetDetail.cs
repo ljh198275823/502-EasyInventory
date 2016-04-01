@@ -11,7 +11,6 @@ using LJH.GeneralLibrary.Core.DAL;
 using LJH.Inventory.UI.Forms.Sale;
 using LJH.Inventory.UI.Forms.Financial;
 using LJH.Inventory.UI.Forms.General;
-using LJH.Inventory.UI.Forms.Sale.View;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {

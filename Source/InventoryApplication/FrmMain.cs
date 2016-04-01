@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
-using LJH.Inventory.UI.Report;
 using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.Core.UI;
 using LJH.GeneralLibrary.SoftDog;
@@ -384,11 +383,6 @@ namespace InventoryApplication
             ShowSingleForm<FrmStackInSheetMaster>(sender);
         }
 
-        private void mnu_CustomerPayment_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCustomerPaymentMaster>(sender);
-        }
-
         private void mnu_Expanditure_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmExpenditureRecordMaster>(sender);
@@ -411,31 +405,6 @@ namespace InventoryApplication
             ShowSingleForm<FrmDeliveryStatistics>(null);
         }
 
-        private void mnu_Performance_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmSalesPersonPerformanceReport>(null);
-        }
-
-        private void mnu_CollectionType_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCollectionTypeMaster>(null);
-        }
-
-        private void mnu_CurrencyType_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmCurrencyTypeMaster>(null);
-        }
-
-        private void mnu_Unit_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmUnitMaster>(null);
-        }
-
-        private void mnu_Transport_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmTransportMaster>(null);
-        }
-
         private void mnu_Supplier_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmSupplierMaster>(null);
@@ -450,11 +419,6 @@ namespace InventoryApplication
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmExpenditureTypeMaster>(sender);
-        }
-
-        private void mnu_OrderPaymentReport_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmOrderPaymentReport>(sender);
         }
 
         private void mnu_RelatedCompanyType_Click(object sender, EventArgs e)
@@ -477,16 +441,6 @@ namespace InventoryApplication
             ShowSingleForm<FrmCustomerFinancialStateMaster>(sender);
         }
 
-        private void mnu_OrderMonitor_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmOrderItemRecordMaster>(sender);
-        }
-
-        private void mnu_PurchaseMonitor_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmPurchaseItemRecordMaster>(sender);
-        }
-
         private void mnu_CustomerPaymentReport_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>(null);
@@ -502,19 +456,9 @@ namespace InventoryApplication
             ShowSingleForm<FrmSupplierFinancialStateMaster>(sender);
         }
 
-        private void mnu_SupplierPayment_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmSupplierPaymentMaster>(sender);
-        }
-
         private void mnu_InventoryRecord_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmInventoryRecordReport>(null);
-        }
-
-        private void mnu_Proxy_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmProxyMaster>(sender);
         }
 
         private void mnu_Material_Click(object sender, EventArgs e)

@@ -27,7 +27,7 @@ namespace LJH.Inventory.BLL
                 return new CommandResult(ResultCode.Fail, "客户类别下已经有子类别，请先将所有子类别删除，再删除此类别");
             }
             IProvider<CompanyInfo, string> sp = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri);
-            CustomerSearchCondition con = new CustomerSearchCondition() { ClassID = CompanyClass.Other, Category = info.ID };
+            CustomerSearchCondition con = new CustomerSearchCondition() { ClassID = CompanyClass.厂家, Category = info.ID };
             if (sp.GetItems(con).QueryObjects.Count > 0)
             {
                 return new CommandResult(ResultCode.Fail, "已经有客户归到此类别，如果确实要删除此类别，请先更改相关客户的所属类别");

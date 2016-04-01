@@ -70,6 +70,7 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.CategoryMenu.SuspendLayout();
@@ -370,6 +371,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
             this.cMnu_Add,
+            this.cMnu_Edit,
             this.cMnu_Delete,
             this.mnu_Merge,
             this.toolStripSeparator3,
@@ -377,7 +379,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 186);
             // 
             // cMnu_Fresh
             // 
@@ -427,6 +429,12 @@
             this.mnu_Import.Size = new System.Drawing.Size(121, 22);
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
+            // 
+            // cMnu_Edit
+            // 
+            this.cMnu_Edit.Name = "cMnu_Edit";
+            this.cMnu_Edit.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Edit.Text = "编辑";
             // 
             // FrmCustomerMaster
             // 
@@ -498,5 +506,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.ToolStripMenuItem mnu_Merge;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Edit;
     }
 }

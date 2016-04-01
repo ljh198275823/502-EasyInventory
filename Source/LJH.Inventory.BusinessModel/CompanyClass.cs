@@ -13,7 +13,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 其它
         /// </summary>
-        Other = 3,
+        厂家 = 3,
         /// <summary>
         /// 客户
         /// </summary>

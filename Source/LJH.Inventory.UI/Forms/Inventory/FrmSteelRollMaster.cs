@@ -10,7 +10,6 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.Inventory.UI.Report;
 using LJH.Inventory.UI.Forms.Inventory.View;
 using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;

@@ -9,7 +9,6 @@ using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.Inventory.UI.Forms.General;
 using LJH.Inventory.UI.Forms.Purchase;
-using LJH.Inventory.UI.Forms.Purchase.View;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
@@ -421,21 +420,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btn_PurchaseItemSelect_Click(object sender, EventArgs e)
         {
-            if (Supplier != null)
-            {
-                PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
-                con.SupplierID = Supplier.ID;
-                con.States = new List<SheetState>();
-                con.States.Add(SheetState.Approved);
-                con.HasOnway = true;
-                FrmPurchaseRecordView frm = new FrmPurchaseRecordView();
-                frm.ForSelect = true;
-                frm.SearchCondition = con;
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    AddInventoryItem(frm.SelectedItem as PurchaseItemRecord);
-                }
-            }
+            //if (Supplier != null)
+            //{
+            //    PurchaseItemRecordSearchCondition con = new PurchaseItemRecordSearchCondition();
+            //    con.SupplierID = Supplier.ID;
+            //    con.States = new List<SheetState>();
+            //    con.States.Add(SheetState.Approved);
+            //    con.HasOnway = true;
+            //    FrmPurchaseRecordView frm = new FrmPurchaseRecordView();
+            //    frm.ForSelect = true;
+            //    frm.SearchCondition = con;
+            //    if (frm.ShowDialog() == DialogResult.OK)
+            //    {
+            //        AddInventoryItem(frm.SelectedItem as PurchaseItemRecord);
+            //    }
+            //}
         }
         #endregion
     }

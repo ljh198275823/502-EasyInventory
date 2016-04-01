@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.Inventory.UI.Report;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
 
@@ -149,7 +148,7 @@ namespace LJH.Inventory.UI.Forms.General
             if (SearchCondition == null)
             {
                 CustomerSearchCondition con = new CustomerSearchCondition();
-                con.ClassID = CompanyClass.Other;
+                con.ClassID = CompanyClass.厂家;
                 _Customers = bll.GetItems(con).QueryObjects;
             }
             else
