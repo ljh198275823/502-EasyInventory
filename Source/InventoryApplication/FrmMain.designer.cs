@@ -49,10 +49,10 @@
             this.mnu_Expanditure = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_Reports = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_DeliveryRecordReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_SliceRecordReport = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_DeliveryStatistic = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_InventoryRecord = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_DeliveryRecordReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_DeliveryStatistic = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_SliceRecordReport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_PaymentReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_TaxBillReport = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,7 +129,7 @@
             // 
             this.mnu_SteelRoll.Enabled = false;
             this.mnu_SteelRoll.Name = "mnu_SteelRoll";
-            this.mnu_SteelRoll.Size = new System.Drawing.Size(152, 22);
+            this.mnu_SteelRoll.Size = new System.Drawing.Size(136, 22);
             this.mnu_SteelRoll.Text = "原材料管理";
             this.mnu_SteelRoll.Click += new System.EventHandler(this.mnu_Material_Click);
             // 
@@ -137,7 +137,7 @@
             // 
             this.mnu_SteelRollSlice.Enabled = false;
             this.mnu_SteelRollSlice.Name = "mnu_SteelRollSlice";
-            this.mnu_SteelRollSlice.Size = new System.Drawing.Size(152, 22);
+            this.mnu_SteelRollSlice.Size = new System.Drawing.Size(136, 22);
             this.mnu_SteelRollSlice.Text = "小件管理";
             this.mnu_SteelRollSlice.Click += new System.EventHandler(this.mnu_Inventory_Click);
             // 
@@ -145,20 +145,20 @@
             // 
             this.mnu_DeliverySheet.Enabled = false;
             this.mnu_DeliverySheet.Name = "mnu_DeliverySheet";
-            this.mnu_DeliverySheet.Size = new System.Drawing.Size(152, 22);
+            this.mnu_DeliverySheet.Size = new System.Drawing.Size(136, 22);
             this.mnu_DeliverySheet.Text = "送货单管理";
             this.mnu_DeliverySheet.Click += new System.EventHandler(this.mnu_DeliverySheet_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(133, 6);
             // 
             // mnu_Customer
             // 
             this.mnu_Customer.Enabled = false;
             this.mnu_Customer.Name = "mnu_Customer";
-            this.mnu_Customer.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Customer.Size = new System.Drawing.Size(136, 22);
             this.mnu_Customer.Text = "客户资料";
             this.mnu_Customer.Click += new System.EventHandler(this.mnu_Customer_Click);
             // 
@@ -166,7 +166,7 @@
             // 
             this.mnu_Supplier.Enabled = false;
             this.mnu_Supplier.Name = "mnu_Supplier";
-            this.mnu_Supplier.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Supplier.Size = new System.Drawing.Size(136, 22);
             this.mnu_Supplier.Text = "供应商资料";
             this.mnu_Supplier.Click += new System.EventHandler(this.mnu_Supplier_Click);
             // 
@@ -174,14 +174,14 @@
             // 
             this.mnu_WareHouse.Enabled = false;
             this.mnu_WareHouse.Name = "mnu_WareHouse";
-            this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
+            this.mnu_WareHouse.Size = new System.Drawing.Size(136, 22);
             this.mnu_WareHouse.Text = "仓库资料";
             this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click_1);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(133, 6);
             // 
             // toolStripSeparator9
             // 
@@ -226,7 +226,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
-            this.toolStripSeparator1.Visible = false;
             // 
             // mnu_Expanditure
             // 
@@ -256,6 +255,14 @@
             this.mnu_Reports.Size = new System.Drawing.Size(74, 34);
             this.mnu_Reports.Text = "报表";
             // 
+            // mnu_InventoryRecord
+            // 
+            this.mnu_InventoryRecord.Enabled = false;
+            this.mnu_InventoryRecord.Name = "mnu_InventoryRecord";
+            this.mnu_InventoryRecord.Size = new System.Drawing.Size(184, 22);
+            this.mnu_InventoryRecord.Text = "入库记录报表";
+            this.mnu_InventoryRecord.Click += new System.EventHandler(this.mnu_InventoryRecord_Click);
+            // 
             // mnu_DeliveryRecordReport
             // 
             this.mnu_DeliveryRecordReport.Enabled = false;
@@ -263,14 +270,6 @@
             this.mnu_DeliveryRecordReport.Size = new System.Drawing.Size(184, 22);
             this.mnu_DeliveryRecordReport.Text = "出货记录报表";
             this.mnu_DeliveryRecordReport.Click += new System.EventHandler(this.mnu_DeliveryRecordReport_Click);
-            // 
-            // mnu_SliceRecordReport
-            // 
-            this.mnu_SliceRecordReport.Enabled = false;
-            this.mnu_SliceRecordReport.Name = "mnu_SliceRecordReport";
-            this.mnu_SliceRecordReport.Size = new System.Drawing.Size(184, 22);
-            this.mnu_SliceRecordReport.Text = "原料卷加工记录报表";
-            this.mnu_SliceRecordReport.Click += new System.EventHandler(this.mnu_SliceRecordReport_Click);
             // 
             // mnu_DeliveryStatistic
             // 
@@ -281,19 +280,18 @@
             this.mnu_DeliveryStatistic.Visible = false;
             this.mnu_DeliveryStatistic.Click += new System.EventHandler(this.mnu_DeliveryStatistic_Click);
             // 
-            // mnu_InventoryRecord
+            // mnu_SliceRecordReport
             // 
-            this.mnu_InventoryRecord.Enabled = false;
-            this.mnu_InventoryRecord.Name = "mnu_InventoryRecord";
-            this.mnu_InventoryRecord.Size = new System.Drawing.Size(184, 22);
-            this.mnu_InventoryRecord.Text = "入库记录报表";
-            this.mnu_InventoryRecord.Click += new System.EventHandler(this.mnu_InventoryRecord_Click);
+            this.mnu_SliceRecordReport.Enabled = false;
+            this.mnu_SliceRecordReport.Name = "mnu_SliceRecordReport";
+            this.mnu_SliceRecordReport.Size = new System.Drawing.Size(184, 22);
+            this.mnu_SliceRecordReport.Text = "原料卷加工记录报表";
+            this.mnu_SliceRecordReport.Click += new System.EventHandler(this.mnu_SliceRecordReport_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(181, 6);
-            this.toolStripSeparator4.Visible = false;
             // 
             // mnu_PaymentReport
             // 

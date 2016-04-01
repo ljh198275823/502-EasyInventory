@@ -31,14 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtRole = new System.Windows.Forms.TextBox();
+            this.txtPhone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtLogID = new System.Windows.Forms.TextBox();
             this.lnkRole = new System.Windows.Forms.LinkLabel();
             this.dtHireDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
-            this.btnChangePwd = new System.Windows.Forms.Button();
-            this.txtPassword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtOperatorID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.txtDepartment = new System.Windows.Forms.TextBox();
             this.lnkDepartment = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -59,8 +56,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.txtPhone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -94,14 +89,9 @@
             // 
             this.tabPage1.Controls.Add(this.txtPhone);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.txtRole);
+            this.tabPage1.Controls.Add(this.txtLogID);
             this.tabPage1.Controls.Add(this.lnkRole);
             this.tabPage1.Controls.Add(this.dtHireDate);
-            this.tabPage1.Controls.Add(this.btnChangePwd);
-            this.tabPage1.Controls.Add(this.txtPassword);
-            this.tabPage1.Controls.Add(this.txtOperatorID);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.txtDepartment);
             this.tabPage1.Controls.Add(this.lnkDepartment);
             this.tabPage1.Controls.Add(this.panel2);
@@ -126,24 +116,43 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // txtRole
+            // txtPhone
             // 
-            this.txtRole.Location = new System.Drawing.Point(61, 169);
-            this.txtRole.Name = "txtRole";
-            this.txtRole.ReadOnly = true;
-            this.txtRole.Size = new System.Drawing.Size(121, 21);
-            this.txtRole.TabIndex = 80;
-            this.txtRole.DoubleClick += new System.EventHandler(this.txtRole_DoubleClick);
+            this.txtPhone.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPhone.Location = new System.Drawing.Point(227, 74);
+            this.txtPhone.MaxLength = 20;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(121, 21);
+            this.txtPhone.TabIndex = 81;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label2.Location = new System.Drawing.Point(194, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 82;
+            this.label2.Text = "电话";
+            // 
+            // txtLogID
+            // 
+            this.txtLogID.Location = new System.Drawing.Point(59, 143);
+            this.txtLogID.Name = "txtLogID";
+            this.txtLogID.ReadOnly = true;
+            this.txtLogID.Size = new System.Drawing.Size(121, 21);
+            this.txtLogID.TabIndex = 80;
+            this.txtLogID.DoubleClick += new System.EventHandler(this.txtRole_DoubleClick);
             // 
             // lnkRole
             // 
             this.lnkRole.AutoSize = true;
-            this.lnkRole.Location = new System.Drawing.Point(24, 172);
+            this.lnkRole.Location = new System.Drawing.Point(12, 146);
             this.lnkRole.Name = "lnkRole";
-            this.lnkRole.Size = new System.Drawing.Size(29, 12);
+            this.lnkRole.Size = new System.Drawing.Size(41, 12);
             this.lnkRole.TabIndex = 79;
             this.lnkRole.TabStop = true;
-            this.lnkRole.Text = "角色";
+            this.lnkRole.Text = "登录ID";
             this.lnkRole.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRole_LinkClicked);
             // 
             // dtHireDate
@@ -153,50 +162,6 @@
             this.dtHireDate.Name = "dtHireDate";
             this.dtHireDate.Size = new System.Drawing.Size(121, 21);
             this.dtHireDate.TabIndex = 78;
-            // 
-            // btnChangePwd
-            // 
-            this.btnChangePwd.Location = new System.Drawing.Point(326, 139);
-            this.btnChangePwd.Name = "btnChangePwd";
-            this.btnChangePwd.Size = new System.Drawing.Size(28, 23);
-            this.btnChangePwd.TabIndex = 12;
-            this.btnChangePwd.Text = "改";
-            this.btnChangePwd.UseVisualStyleBackColor = true;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPassword.Location = new System.Drawing.Point(227, 139);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(96, 21);
-            this.txtPassword.TabIndex = 11;
-            // 
-            // txtOperatorID
-            // 
-            this.txtOperatorID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtOperatorID.Location = new System.Drawing.Point(59, 139);
-            this.txtOperatorID.Name = "txtOperatorID";
-            this.txtOperatorID.Size = new System.Drawing.Size(121, 21);
-            this.txtOperatorID.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(194, 143);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 75;
-            this.label5.Text = "密码";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 143);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(41, 12);
-            this.label9.TabIndex = 74;
-            this.label9.Text = "登录ID";
             // 
             // txtDepartment
             // 
@@ -397,25 +362,6 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "姓名";
             // 
-            // txtPhone
-            // 
-            this.txtPhone.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPhone.Location = new System.Drawing.Point(227, 74);
-            this.txtPhone.MaxLength = 20;
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(121, 21);
-            this.txtPhone.TabIndex = 81;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(194, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 82;
-            this.label2.Text = "电话";
-            // 
             // FrmStaffDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -463,13 +409,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.LinkLabel lnkDepartment;
         private System.Windows.Forms.TextBox txtDepartment;
-        private System.Windows.Forms.Button btnChangePwd;
-        private GeneralLibrary.WinformControl.DBCTextBox txtPassword;
-        private GeneralLibrary.WinformControl.DBCTextBox txtOperatorID;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label9;
         private Controls.NullableDateTimePicker dtHireDate;
-        private System.Windows.Forms.TextBox txtRole;
+        private System.Windows.Forms.TextBox txtLogID;
         private System.Windows.Forms.LinkLabel lnkRole;
         private GeneralLibrary.WinformControl.DBCTextBox txtPhone;
         private System.Windows.Forms.Label label2;

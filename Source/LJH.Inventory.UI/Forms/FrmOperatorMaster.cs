@@ -79,8 +79,8 @@ namespace LJH.Inventory.UI.Forms
             btn_Delete.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
             cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
+            cmnu_Edit.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
         }
-
         #endregion
     }
 }

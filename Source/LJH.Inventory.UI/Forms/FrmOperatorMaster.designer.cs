@@ -40,17 +40,16 @@
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.OperatorView = new System.Windows.Forms.DataGridView();
-            this.colOperatorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperatorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRoleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmnu_Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.colOperatorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperatorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRoleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OperatorView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -146,8 +145,6 @@
             this.colOperatorID,
             this.colOperatorName,
             this.colRoleID,
-            this.colDepartment,
-            this.colPost,
             this.Column1});
             this.OperatorView.ContextMenuStrip = this.contextMenuStrip1;
             this.OperatorView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -160,58 +157,16 @@
             this.OperatorView.Size = new System.Drawing.Size(713, 221);
             this.OperatorView.TabIndex = 58;
             // 
-            // colOperatorID
-            // 
-            this.colOperatorID.DataPropertyName = "OperatorID";
-            this.colOperatorID.HeaderText = "登录ID";
-            this.colOperatorID.Name = "colOperatorID";
-            this.colOperatorID.ReadOnly = true;
-            // 
-            // colOperatorName
-            // 
-            this.colOperatorName.DataPropertyName = "OperatorName";
-            this.colOperatorName.HeaderText = "操作员名";
-            this.colOperatorName.Name = "colOperatorName";
-            this.colOperatorName.ReadOnly = true;
-            // 
-            // colRoleID
-            // 
-            this.colRoleID.DataPropertyName = "RoleID";
-            this.colRoleID.HeaderText = "角色";
-            this.colRoleID.Name = "colRoleID";
-            this.colRoleID.ReadOnly = true;
-            // 
-            // colDepartment
-            // 
-            this.colDepartment.HeaderText = "部门";
-            this.colDepartment.Name = "colDepartment";
-            this.colDepartment.ReadOnly = true;
-            this.colDepartment.Width = 150;
-            // 
-            // colPost
-            // 
-            this.colPost.HeaderText = "职位";
-            this.colPost.Name = "colPost";
-            this.colPost.ReadOnly = true;
-            this.colPost.Width = 150;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cMnu_Fresh,
             this.cMnu_Add,
+            this.cmnu_Edit,
             this.cMnu_Delete,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 114);
             // 
             // cMnu_Fresh
             // 
@@ -225,6 +180,12 @@
             this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Add.Text = "新建";
             // 
+            // cmnu_Edit
+            // 
+            this.cmnu_Edit.Name = "cmnu_Edit";
+            this.cmnu_Edit.Size = new System.Drawing.Size(109, 22);
+            this.cmnu_Edit.Text = "编辑";
+            // 
             // cMnu_Delete
             // 
             this.cMnu_Delete.Name = "cMnu_Delete";
@@ -237,6 +198,35 @@
             this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
             this.cMnu_Export.Text = "导出...";
             // 
+            // colOperatorID
+            // 
+            this.colOperatorID.DataPropertyName = "OperatorID";
+            this.colOperatorID.HeaderText = "登录ID";
+            this.colOperatorID.Name = "colOperatorID";
+            this.colOperatorID.ReadOnly = true;
+            // 
+            // colOperatorName
+            // 
+            this.colOperatorName.DataPropertyName = "OperatorName";
+            this.colOperatorName.HeaderText = "姓名";
+            this.colOperatorName.Name = "colOperatorName";
+            this.colOperatorName.ReadOnly = true;
+            // 
+            // colRoleID
+            // 
+            this.colRoleID.DataPropertyName = "RoleID";
+            this.colRoleID.HeaderText = "角色";
+            this.colRoleID.Name = "colRoleID";
+            this.colRoleID.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // FrmOperatorMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -246,7 +236,6 @@
             this.Controls.Add(this.menu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmOperatorMaster";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "操作员管理";
             this.Controls.SetChildIndex(this.menu, 0);
@@ -268,12 +257,6 @@
         private System.Windows.Forms.ToolStripMenuItem btn_Export;
         private System.Windows.Forms.ToolStripMenuItem btn_Fresh;
         private System.Windows.Forms.DataGridView OperatorView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperatorID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperatorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRoleID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDepartment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.ToolStripMenuItem btn_SelectColumns;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private LJH.Inventory.UI.Controls.TooStripDBCTextBox txtKeyword;
@@ -283,6 +266,11 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Add;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.ToolStripMenuItem cmnu_Edit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperatorID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperatorName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRoleID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 
 
     }

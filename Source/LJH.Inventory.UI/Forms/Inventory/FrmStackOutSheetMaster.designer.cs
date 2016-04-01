@@ -208,7 +208,7 @@
             this.chkSheetDate.TabIndex = 133;
             this.chkSheetDate.Text = "开单日期";
             this.chkSheetDate.UseVisualStyleBackColor = true;
-            this.chkSheetDate.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.chkSheetDate.CheckedChanged += new System.EventHandler(this.chkSheetDate_CheckedChanged);
             // 
             // label3
             // 

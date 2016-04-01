@@ -30,14 +30,14 @@ namespace LJH.Inventory.UI.Forms
             if (IsAdding)
             {
                 this.btnChangePwd.Visible = false;
-                this.txtPassword.Size = this.txtOperatorName.Size;
+                this.txtPassword.Size = this.txtOperatorID.Size;
             }
         }
 
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            this.btnOk.Enabled = Operator.Current.Permit(Permission.Operator , PermissionActions.Edit);
+            this.btnOk.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()
@@ -46,14 +46,11 @@ namespace LJH.Inventory.UI.Forms
             this.txtOperatorID.Text = info.ID;
             this.txtOperatorID.Enabled = false;
             this.txtOperatorID.BackColor = Color.White;
-            this.txtOperatorName.Text = info.Name;
             this.txtPassword.Text = _subPwd;
             this.txtPassword.Enabled = false;
             this.txtPassword.BackColor = Color.White;
             this.comRoleList.SelectedRoleID = info.RoleID;
-            this.comRoleList.Enabled = info.CanEdit;
         }
-
 
         protected override object GetItemFromInput()
         {
@@ -63,6 +60,8 @@ namespace LJH.Inventory.UI.Forms
                 if (IsAdding)
                 {
                     info = new Operator();
+                    info.ID = txtOperatorID.Text.Trim();
+                    info.Name = txtOperatorID.Text.Trim();
                     info.Password = txtPassword.Text.Trim();
                 }
                 else
@@ -73,8 +72,6 @@ namespace LJH.Inventory.UI.Forms
                         info.Password = txtPassword.Text.Trim();
                     }
                 }
-                info.ID = txtOperatorID.Text.Trim();
-                info.Name = txtOperatorName.Text.Trim();
                 info.Role = comRoleList.Role;
                 info.RoleID = comRoleList.SelectedRoleID;
             }
@@ -96,12 +93,6 @@ namespace LJH.Inventory.UI.Forms
             if (txtOperatorID.Text.Trim().Length == 0)
             {
                 MessageBox.Show("操作员登录ID不能为空!");
-                return false;
-            }
-
-            if (txtOperatorName.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("操作员姓名不能为空!");
                 return false;
             }
 

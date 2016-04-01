@@ -39,12 +39,25 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ShowItemsOnGrid(objs);
         }
 
+        private DateTimeRange GetDateTimeRange()
+        {
+            if (chkSheetDate.Checked)
+            {
+                return new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            }
+            if (UserSettings.Current != null)
+            {
+                if (UserSettings.Current.LoadSheetsBefore == 0) return new DateTimeRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now);
+                return new DateTimeRange(DateTime.Today.AddMonths(-UserSettings.Current.LoadSheetsBefore), DateTime.Now);
+            }
+            return new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
+        }
+
         private List<object> FilterData()
         {
             List<StackOutSheet> items = _Sheets;
             if (items != null && items.Count > 0)
             {
-                if (chkSheetDate.Checked) items = items.Where(it => it.SheetDate >= ucDateTimeInterval1.StartDateTime && it.SheetDate <= ucDateTimeInterval1.EndDateTime).ToList();
                 if (this.customerTree1.SelectedNode != null)
                 {
                     List<CompanyInfo> pcs = null;
@@ -122,15 +135,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SearchCondition == null)
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
-                if (UserSettings.Current != null)
-                {
-                    if (UserSettings.Current.LoadSheetsBefore == 0) con.LastActiveDate = new DateTimeRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now);
-                    else con.LastActiveDate = new DateTimeRange(DateTime.Today.AddMonths(-UserSettings.Current.LoadSheetsBefore), DateTime.Now);
-                }
-                else
-                {
-                    con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
-                }
+                con.LastActiveDate = GetDateTimeRange();
                 _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
@@ -145,15 +150,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
-            if (UserSettings.Current != null)
-            {
-                if (UserSettings.Current.LoadSheetsBefore == 0) crsc.CreateDate = new DateTimeRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now);
-                else crsc.CreateDate = new DateTimeRange(DateTime.Today.AddMonths(-UserSettings.Current.LoadSheetsBefore), DateTime.Now);
-            }
-            else
-            {
-                crsc.CreateDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
-            }
+            crsc.CreateDate = GetDateTimeRange();
             crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable };
             _AllReceivables = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(crsc).QueryObjects;
 
@@ -206,7 +203,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             else //单独一条记录刷新
             {
-                var sheetState = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(sheet.ID).QueryObject ;
+                var sheetState = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(sheet.ID).QueryObject;
                 if (sheetState != null)
                 {
                     row.Cells["colPaid"].Value = sheetState.Paid;
@@ -243,10 +240,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 事件处理程序
-        private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
-        {
-            if (chkSheetDate.Checked) FreshData();
-        }
+
 
         private void FreshData_Clicked(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -262,7 +256,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             PerformAddData();
         }
-        #endregion
+
+        private void chkSheetDate_CheckedChanged(object sender, EventArgs e)
+        {
+            cMnu_Fresh.PerformClick();
+        }
 
         private void btnLast3Month_Click(object sender, EventArgs e)
         {
@@ -270,5 +268,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ucDateTimeInterval1.StartDateTime = today.AddMonths(-3);
             ucDateTimeInterval1.EndDateTime = today.AddDays(1).AddSeconds(-1);
         }
+
+        private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
+        {
+            if (chkSheetDate.Checked) cMnu_Fresh.PerformClick();
+        }
+        #endregion
     }
 }

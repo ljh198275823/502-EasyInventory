@@ -77,13 +77,10 @@ namespace LJH.Inventory.UI.Forms.General
             this.btn_Add.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
             this.btn_Delete.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
             this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
+            this.cMnu_Edit.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
             this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
         }
         #endregion
 
-        private void cMnu_Edit_Click(object sender, EventArgs e)
-        {
-            PerformUpdateData();
-        }
     }
 }

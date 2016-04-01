@@ -26,39 +26,6 @@ namespace LJH.Inventory.UI.Forms.General
         private string _subPwd = new string('*', 12);
         #endregion
 
-        #region 私有方法
-        private Operator GetOperatorFromInput()
-        {
-            if (!string.IsNullOrEmpty(txtOperatorID.Text.Trim()))
-            {
-                Operator info = new Operator();
-                info.ID = txtOperatorID.Text.Trim();
-                if (txtPassword.Tag == null)
-                {
-                    info.Password = txtPassword.Text.Trim();
-                }
-                else
-                {
-                    info.Password = txtPassword.Tag.ToString();
-                }
-                info.Role = txtRole.Tag as Role;
-                info.RoleID = info.Role != null ? info.Role.ID : null;
-                return info;
-            }
-            return null;
-        }
-
-        private void ShowOperator(Operator info)
-        {
-            txtOperatorID.Text = info.ID;
-            txtPassword.Text = _subPwd;
-            txtPassword.Tag = info.Password;
-            txtPassword.Enabled = false;
-            txtRole.Tag = info.Role;
-            txtRole.Text = info.Role != null ? info.Role.Name : null;
-        }
-        #endregion
-
         #region 公共属性
         public Department Department { get; set; }
         #endregion
@@ -67,11 +34,6 @@ namespace LJH.Inventory.UI.Forms.General
         protected override void InitControls()
         {
             base.InitControls();
-            if (IsAdding)
-            {
-                this.btnChangePwd.Visible = false;
-                this.txtPassword.Size = this.txtOperatorID.Size;
-            }
             this.dtHireDate.IsNull = true;
             txtDepartment.Text = Department != null ? Department.Name : string.Empty;
         }
@@ -81,13 +43,6 @@ namespace LJH.Inventory.UI.Forms.General
             if (string.IsNullOrEmpty(txtName.Text))
             {
                 MessageBox.Show("没有设置员工姓名");
-                return false;
-            }
-            if (txtOperatorID.Text.Trim() == Operator.DefaultLogID)
-            {
-                MessageBox.Show("admin 为系统默认操作员，不能归属到任何员工,请选择其它的登录ID");
-                txtOperatorID.Text = string.Empty;
-                txtOperatorID.Focus();
                 return false;
             }
             return true;
@@ -116,10 +71,8 @@ namespace LJH.Inventory.UI.Forms.General
             txtPhone.Text = staff.Phone;
             List<Operator> opts = (new OperatorBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
             Operator opt = opts.FirstOrDefault(item => item.StaffID == staff.ID);
-            if (opt != null)
-            {
-                ShowOperator(opt);
-            }
+            if (opt != null) txtLogID.Text = opt.ID;
+            txtLogID.Tag = opt;
             StaffPhoto sp = (new StaffBLL(AppSettings.Current.ConnStr)).GetPhoto(staff.ID).QueryObject;
             if (sp != null)
             {
@@ -133,7 +86,7 @@ namespace LJH.Inventory.UI.Forms.General
             CommandResult ret = (new StaffBLL(AppSettings.Current.ConnStr)).Add(staff);
             if (ret.Result == ResultCode.Successful)
             {
-                Operator opt = GetOperatorFromInput();
+                Operator opt = txtLogID.Tag as Operator;
                 ret = new StaffBLL(AppSettings.Current.ConnStr).SaveOperator(opt, staff);
             }
             if (ret.Result == ResultCode.Successful && picPhoto.Tag != null)
@@ -153,7 +106,7 @@ namespace LJH.Inventory.UI.Forms.General
             CommandResult ret = (new StaffBLL(AppSettings.Current.ConnStr)).Update(staff);
             if (ret.Result == ResultCode.Successful)
             {
-                Operator opt = GetOperatorFromInput();
+                Operator opt = txtLogID.Tag as Operator;
                 ret = new StaffBLL(AppSettings.Current.ConnStr).SaveOperator(opt, staff);
             }
             if (ret.Result == ResultCode.Successful && picPhoto.Tag != null)
@@ -263,20 +216,20 @@ namespace LJH.Inventory.UI.Forms.General
 
         private void lnkRole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmRoleMaster frm = new FrmRoleMaster();
+            FrmOperatorMaster frm = new FrmOperatorMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Role r = frm.SelectedItem as Role;
-                txtRole.Tag = r;
-                txtRole.Text = r != null ? r.Name : null;
+                Operator r = frm.SelectedItem as Operator;
+                txtLogID.Tag = r;
+                txtLogID.Text = r != null ? r.Name : null;
             }
         }
 
         private void txtRole_DoubleClick(object sender, EventArgs e)
         {
-            txtRole.Text = null;
-            txtRole.Tag = null;
+            txtLogID.Text = null;
+            txtLogID.Tag = null;
         }
 
     }

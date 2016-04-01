@@ -125,6 +125,11 @@ namespace LJH.Inventory.BusinessModel
                 return false;
             }
         }
+
+        public Operator Clone()
+        {
+            return this.MemberwiseClone() as Operator;
+        }
         #endregion
     }
 }

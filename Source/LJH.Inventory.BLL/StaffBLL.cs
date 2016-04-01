@@ -42,23 +42,33 @@ namespace LJH.Inventory.BLL
         public CommandResult SaveOperator(Operator info, Staff staff)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            List<Operator> opts = (new OperatorBLL(RepoUri)).GetItems(null).QueryObjects;
-            if (opts != null && opts.Count > 0)
+            List<Operator> opts = ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).GetItems(null).QueryObjects;
+            Operator original = opts.SingleOrDefault(it => it.ID == info.ID);
+            if (original != null)
             {
-                List<Operator> items = opts.Where(item => item.StaffID == staff.ID).ToList();
-                if (items != null && items.Count > 0)
-                {
-                    foreach (Operator opt in items)
-                    {
-                        ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Delete(opt, unitWork);
-                    }
-                }
+                info.Name = staff.Name;
+                info.StaffID = staff.ID;
+                ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Update(info, original, unitWork);
             }
-            if (info != null)
+            else
             {
                 info.Name = staff.Name;
                 info.StaffID = staff.ID;
                 ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Insert(info, unitWork);
+            }
+            foreach (var item in opts.Where(it => it.ID != info.ID && it.StaffID == staff.ID)) //将其它归属到此员工的所有操作员删除
+            {
+                if (item.ID != Operator.DefaultLogID)
+                {
+                    ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Delete(item, unitWork);
+                }
+                else
+                {
+                    var newV = item.Clone();
+                    newV.Name = item.ID;
+                    newV.StaffID = null;
+                    ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Update(newV, item, unitWork);
+                }
             }
             return unitWork.Commit();
         }
