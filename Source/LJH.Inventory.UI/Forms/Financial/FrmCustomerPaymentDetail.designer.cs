@@ -44,6 +44,7 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rd退货 = new System.Windows.Forms.RadioButton();
             this.rd付承兑 = new System.Windows.Forms.RadioButton();
             this.txtBank = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -97,12 +98,12 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(506, 304);
+            this.btnClose.Location = new System.Drawing.Point(506, 312);
             this.btnClose.TabIndex = 10;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(401, 304);
+            this.btnOk.Location = new System.Drawing.Point(401, 312);
             this.btnOk.TabIndex = 9;
             // 
             // label7
@@ -126,7 +127,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 79);
+            this.label3.Location = new System.Drawing.Point(13, 110);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 29;
@@ -135,7 +136,7 @@
             // txtCheckNum
             // 
             this.txtCheckNum.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCheckNum.Location = new System.Drawing.Point(71, 110);
+            this.txtCheckNum.Location = new System.Drawing.Point(320, 139);
             this.txtCheckNum.Name = "txtCheckNum";
             this.txtCheckNum.Size = new System.Drawing.Size(164, 21);
             this.txtCheckNum.TabIndex = 7;
@@ -144,7 +145,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 144);
+            this.label5.Location = new System.Drawing.Point(37, 172);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 36;
@@ -153,7 +154,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 114);
+            this.label6.Location = new System.Drawing.Point(274, 143);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 12);
             this.label6.TabIndex = 35;
@@ -171,7 +172,7 @@
             // 
             this.rdTransfer.AutoSize = true;
             this.rdTransfer.Checked = true;
-            this.rdTransfer.Location = new System.Drawing.Point(319, 77);
+            this.rdTransfer.Location = new System.Drawing.Point(71, 108);
             this.rdTransfer.Name = "rdTransfer";
             this.rdTransfer.Size = new System.Drawing.Size(47, 16);
             this.rdTransfer.TabIndex = 4;
@@ -183,7 +184,7 @@
             // rdCash
             // 
             this.rdCash.AutoSize = true;
-            this.rdCash.Location = new System.Drawing.Point(372, 77);
+            this.rdCash.Location = new System.Drawing.Point(124, 108);
             this.rdCash.Name = "rdCash";
             this.rdCash.Size = new System.Drawing.Size(47, 16);
             this.rdCash.TabIndex = 5;
@@ -194,7 +195,7 @@
             // rd转公账
             // 
             this.rd转公账.AutoSize = true;
-            this.rd转公账.Location = new System.Drawing.Point(427, 77);
+            this.rd转公账.Location = new System.Drawing.Point(179, 108);
             this.rd转公账.Name = "rd转公账";
             this.rd转公账.Size = new System.Drawing.Size(59, 16);
             this.rd转公账.TabIndex = 6;
@@ -225,7 +226,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(71, 141);
+            this.txtMemo.Location = new System.Drawing.Point(71, 169);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(414, 21);
             this.txtMemo.TabIndex = 8;
@@ -242,11 +243,12 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 60);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(586, 220);
+            this.tabControl1.Size = new System.Drawing.Size(586, 228);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rd退货);
             this.tabPage1.Controls.Add(this.rd付承兑);
             this.tabPage1.Controls.Add(this.txtBank);
             this.tabPage1.Controls.Add(this.label1);
@@ -269,15 +271,25 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(578, 194);
+            this.tabPage1.Size = new System.Drawing.Size(578, 202);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // rd退货
+            // 
+            this.rd退货.AutoSize = true;
+            this.rd退货.Location = new System.Drawing.Point(309, 108);
+            this.rd退货.Name = "rd退货";
+            this.rd退货.Size = new System.Drawing.Size(47, 16);
+            this.rd退货.TabIndex = 96;
+            this.rd退货.Text = "退货";
+            this.rd退货.UseVisualStyleBackColor = true;
+            // 
             // rd付承兑
             // 
             this.rd付承兑.AutoSize = true;
-            this.rd付承兑.Location = new System.Drawing.Point(492, 77);
+            this.rd付承兑.Location = new System.Drawing.Point(244, 108);
             this.rd付承兑.Name = "rd付承兑";
             this.rd付承兑.Size = new System.Drawing.Size(59, 16);
             this.rd付承兑.TabIndex = 95;
@@ -288,7 +300,7 @@
             // txtBank
             // 
             this.txtBank.FormattingEnabled = true;
-            this.txtBank.Location = new System.Drawing.Point(321, 110);
+            this.txtBank.Location = new System.Drawing.Point(73, 139);
             this.txtBank.Name = "txtBank";
             this.txtBank.Size = new System.Drawing.Size(163, 20);
             this.txtBank.TabIndex = 94;
@@ -296,7 +308,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(273, 114);
+            this.label1.Location = new System.Drawing.Point(25, 143);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 93;
@@ -345,7 +357,7 @@
             this.tabPage3.Controls.Add(this.ItemsGrid);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(578, 194);
+            this.tabPage3.Size = new System.Drawing.Size(578, 202);
             this.tabPage3.TabIndex = 7;
             this.tabPage3.Text = "核销";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -369,7 +381,7 @@
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(578, 194);
+            this.ItemsGrid.Size = new System.Drawing.Size(578, 202);
             this.ItemsGrid.TabIndex = 119;
             // 
             // colSheetID
@@ -421,7 +433,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(578, 194);
+            this.tabPage5.Size = new System.Drawing.Size(578, 202);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -445,7 +457,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(578, 194);
+            this.gridAttachment.Size = new System.Drawing.Size(578, 202);
             this.gridAttachment.TabIndex = 102;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -519,7 +531,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(578, 194);
+            this.tabPage2.Size = new System.Drawing.Size(578, 202);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -542,7 +554,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(578, 194);
+            this.dataGridView1.Size = new System.Drawing.Size(578, 202);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -647,7 +659,7 @@
             this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 285);
+            this.ClientSize = new System.Drawing.Size(593, 293);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmCustomerPaymentDetail";
@@ -728,5 +740,6 @@
         private System.Windows.Forms.ComboBox txtBank;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rd付承兑;
+        private System.Windows.Forms.RadioButton rd退货;
     }
 }

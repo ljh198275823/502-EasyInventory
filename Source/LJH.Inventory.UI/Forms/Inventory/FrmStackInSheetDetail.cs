@@ -192,12 +192,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
-            btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Edit);
-            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Approve);
-            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.UndoApprove);
-            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Nullify);
-            btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Print);
-            btnInventory.Enabled = btnInventory.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Inventory);
+            //btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Edit);
+            //btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Approve);
+            //btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.UndoApprove);
+            //btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Nullify);
+            //btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Print);
+            //btnInventory.Enabled = btnInventory.Enabled && Operator.Current.Permit(Permission.InventorySheet, PermissionActions.Inventory);
             ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
             ItemsGrid.ReadOnly = !btnSave.Enabled;
         }

@@ -61,8 +61,8 @@ namespace LJH.Inventory.UI.Forms.Purchase
             this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
             this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
             this.mnu_AddSupplier.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
-            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.SupplierType, PermissionActions.Edit);
-            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.SupplierType, PermissionActions.Edit);
+            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
+            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
             this.mnu_Import.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
         }
 

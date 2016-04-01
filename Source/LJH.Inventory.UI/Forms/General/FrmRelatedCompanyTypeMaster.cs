@@ -65,10 +65,10 @@ namespace LJH.Inventory.UI.Forms.General
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            btn_Add.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
-            btn_Delete.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
-            cMnu_Add.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
-            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
+            btn_Add.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
+            btn_Delete.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
+            cMnu_Add.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
+            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
         }
         #endregion
     }

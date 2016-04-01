@@ -111,13 +111,13 @@ namespace LJH.Inventory.UI.Forms.General
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            this.btn_Add.Enabled = Operator.Current.Permit(Permission.OtherCompany, PermissionActions.Edit);
-            this.btn_Delete.Enabled = Operator.Current.Permit(Permission.OtherCompany, PermissionActions.Edit);
-            this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.OtherCompany, PermissionActions.Edit);
-            this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.OtherCompany, PermissionActions.Edit);
+            this.btn_Add.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
+            this.btn_Delete.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
+            this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
+            this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
 
-            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
-            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.OtherCompanyType, PermissionActions.Edit);
+            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
+            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.Manufacturer, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()

@@ -225,11 +225,11 @@ namespace LJH.Inventory.UI.Forms.Sale
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
-            btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Edit);
-            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Approve);
-            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.UndoApprove);
-            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Nullify);
-            btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Print);
+            //btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Edit);
+            //btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Approve);
+            //btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.UndoApprove);
+            //btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Nullify);
+            //btnPrint.Enabled = btnPrint.Enabled && Operator.Current.Permit(Permission.Order, PermissionActions.Print);
             ItemsGrid.ContextMenuStrip = btnSave.Enabled ? this.contextMenuStrip1 : null;
             ItemsGrid.ReadOnly = !btnSave.Enabled;
         }

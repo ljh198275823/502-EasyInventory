@@ -37,7 +37,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            btnOk.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
+            btnOk.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
         }
 
         protected override bool CheckInput()

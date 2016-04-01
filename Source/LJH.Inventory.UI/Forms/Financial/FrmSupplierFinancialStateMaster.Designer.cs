@@ -191,9 +191,9 @@
             // 
             // txtKeyword
             // 
-            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(262, 8);
             this.txtKeyword.Name = "txtKeyword";
@@ -317,7 +317,7 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
             this.Name = "FrmSupplierFinancialStateMaster";
-            this.Text = "供应商应付账款";
+            this.Text = "供应商财务管理";
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);
             this.Controls.SetChildIndex(this.panel5, 0);

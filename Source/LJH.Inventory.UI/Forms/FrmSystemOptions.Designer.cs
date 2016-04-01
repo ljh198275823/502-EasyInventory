@@ -128,6 +128,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabDelivery = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtLoadSheetsBefore = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
+            this.rdLoadSheetsBefore = new System.Windows.Forms.RadioButton();
+            this.rdOnlyThisMonth = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.cmbStackoutSheetModel = new System.Windows.Forms.ComboBox();
             this.label83 = new System.Windows.Forms.Label();
             this.chkDoShipAfterPrint = new System.Windows.Forms.CheckBox();
@@ -137,6 +143,20 @@
             this.rdReminder = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtDefaultCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
+            this.txtDefaultProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCategory = new System.Windows.Forms.LinkLabel();
+            this.txtDefaultWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkWarehouse = new System.Windows.Forms.LinkLabel();
+            this.txtBecomeRemainlessAt = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtBecomeTailAt = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label79 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtForeignName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label31 = new System.Windows.Forms.Label();
@@ -152,34 +172,15 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtDefaultCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
-            this.txtDefaultProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.lnkCategory = new System.Windows.Forms.LinkLabel();
-            this.txtDefaultWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.lnkWarehouse = new System.Windows.Forms.LinkLabel();
-            this.txtBecomeRemainlessAt = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txtBecomeTailAt = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label79 = new System.Windows.Forms.Label();
-            this.label80 = new System.Windows.Forms.Label();
-            this.label81 = new System.Windows.Forms.Label();
-            this.label82 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.rdLoadSheetsBefore = new System.Windows.Forms.RadioButton();
-            this.rdOnlyThisMonth = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtLoadSheetsBefore = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
-            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tab1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -1229,6 +1230,68 @@
             this.tabDelivery.TabIndex = 0;
             this.tabDelivery.Text = "送货单";
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.txtLoadSheetsBefore);
+            this.panel2.Controls.Add(this.rdLoadSheetsBefore);
+            this.panel2.Controls.Add(this.rdOnlyThisMonth);
+            this.panel2.Location = new System.Drawing.Point(85, 43);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(374, 26);
+            this.panel2.TabIndex = 47;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(249, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 12);
+            this.label5.TabIndex = 69;
+            this.label5.Text = "个月的送货单";
+            // 
+            // txtLoadSheetsBefore
+            // 
+            this.txtLoadSheetsBefore.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLoadSheetsBefore.Location = new System.Drawing.Point(215, 3);
+            this.txtLoadSheetsBefore.MaxValue = 20;
+            this.txtLoadSheetsBefore.MinValue = 1;
+            this.txtLoadSheetsBefore.Name = "txtLoadSheetsBefore";
+            this.txtLoadSheetsBefore.Size = new System.Drawing.Size(31, 21);
+            this.txtLoadSheetsBefore.TabIndex = 68;
+            this.txtLoadSheetsBefore.Text = "1";
+            // 
+            // rdLoadSheetsBefore
+            // 
+            this.rdLoadSheetsBefore.AutoSize = true;
+            this.rdLoadSheetsBefore.Location = new System.Drawing.Point(144, 5);
+            this.rdLoadSheetsBefore.Name = "rdLoadSheetsBefore";
+            this.rdLoadSheetsBefore.Size = new System.Drawing.Size(71, 16);
+            this.rdLoadSheetsBefore.TabIndex = 4;
+            this.rdLoadSheetsBefore.Text = "显示最近";
+            this.rdLoadSheetsBefore.UseVisualStyleBackColor = true;
+            // 
+            // rdOnlyThisMonth
+            // 
+            this.rdOnlyThisMonth.AutoSize = true;
+            this.rdOnlyThisMonth.Checked = true;
+            this.rdOnlyThisMonth.Location = new System.Drawing.Point(5, 5);
+            this.rdOnlyThisMonth.Name = "rdOnlyThisMonth";
+            this.rdOnlyThisMonth.Size = new System.Drawing.Size(119, 16);
+            this.rdOnlyThisMonth.TabIndex = 2;
+            this.rdOnlyThisMonth.TabStop = true;
+            this.rdOnlyThisMonth.Text = "只显示本月送货单";
+            this.rdOnlyThisMonth.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "送货单管理";
+            // 
             // cmbStackoutSheetModel
             // 
             this.cmbStackoutSheetModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1322,6 +1385,175 @@
             this.tab1.SelectedIndex = 0;
             this.tab1.Size = new System.Drawing.Size(571, 384);
             this.tab1.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.txtBecomeRemainlessAt);
+            this.tabPage2.Controls.Add(this.txtBecomeTailAt);
+            this.tabPage2.Controls.Add(this.label79);
+            this.tabPage2.Controls.Add(this.label80);
+            this.tabPage2.Controls.Add(this.label81);
+            this.tabPage2.Controls.Add(this.label82);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(563, 358);
+            this.tabPage2.TabIndex = 4;
+            this.tabPage2.Text = "基本";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtDefaultCustomer);
+            this.groupBox1.Controls.Add(this.lnkCustomer);
+            this.groupBox1.Controls.Add(this.txtDefaultProductCategory);
+            this.groupBox1.Controls.Add(this.lnkCategory);
+            this.groupBox1.Controls.Add(this.txtDefaultWareHouse);
+            this.groupBox1.Controls.Add(this.lnkWarehouse);
+            this.groupBox1.Location = new System.Drawing.Point(23, 96);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(292, 146);
+            this.groupBox1.TabIndex = 93;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "产品入库";
+            // 
+            // txtDefaultCustomer
+            // 
+            this.txtDefaultCustomer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtDefaultCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtDefaultCustomer.Location = new System.Drawing.Point(92, 101);
+            this.txtDefaultCustomer.Name = "txtDefaultCustomer";
+            this.txtDefaultCustomer.Size = new System.Drawing.Size(188, 21);
+            this.txtDefaultCustomer.TabIndex = 98;
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.AutoSize = true;
+            this.lnkCustomer.Location = new System.Drawing.Point(31, 105);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(53, 12);
+            this.lnkCustomer.TabIndex = 97;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "默认客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
+            // txtDefaultProductCategory
+            // 
+            this.txtDefaultProductCategory.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtDefaultProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtDefaultProductCategory.Location = new System.Drawing.Point(92, 68);
+            this.txtDefaultProductCategory.Name = "txtDefaultProductCategory";
+            this.txtDefaultProductCategory.Size = new System.Drawing.Size(188, 21);
+            this.txtDefaultProductCategory.TabIndex = 94;
+            // 
+            // lnkCategory
+            // 
+            this.lnkCategory.AutoSize = true;
+            this.lnkCategory.Location = new System.Drawing.Point(7, 72);
+            this.lnkCategory.Name = "lnkCategory";
+            this.lnkCategory.Size = new System.Drawing.Size(77, 12);
+            this.lnkCategory.TabIndex = 96;
+            this.lnkCategory.TabStop = true;
+            this.lnkCategory.Text = "默认产品类别";
+            this.lnkCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
+            // 
+            // txtDefaultWareHouse
+            // 
+            this.txtDefaultWareHouse.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtDefaultWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtDefaultWareHouse.Location = new System.Drawing.Point(92, 35);
+            this.txtDefaultWareHouse.Name = "txtDefaultWareHouse";
+            this.txtDefaultWareHouse.Size = new System.Drawing.Size(188, 21);
+            this.txtDefaultWareHouse.TabIndex = 93;
+            // 
+            // lnkWarehouse
+            // 
+            this.lnkWarehouse.AutoSize = true;
+            this.lnkWarehouse.Location = new System.Drawing.Point(31, 39);
+            this.lnkWarehouse.Name = "lnkWarehouse";
+            this.lnkWarehouse.Size = new System.Drawing.Size(53, 12);
+            this.lnkWarehouse.TabIndex = 95;
+            this.lnkWarehouse.TabStop = true;
+            this.lnkWarehouse.Text = "默认仓库";
+            this.lnkWarehouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWarehouse_LinkClicked);
+            // 
+            // txtBecomeRemainlessAt
+            // 
+            this.txtBecomeRemainlessAt.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtBecomeRemainlessAt.Location = new System.Drawing.Point(128, 53);
+            this.txtBecomeRemainlessAt.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.txtBecomeRemainlessAt.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtBecomeRemainlessAt.Name = "txtBecomeRemainlessAt";
+            this.txtBecomeRemainlessAt.PointCount = 2;
+            this.txtBecomeRemainlessAt.Size = new System.Drawing.Size(92, 21);
+            this.txtBecomeRemainlessAt.TabIndex = 39;
+            this.txtBecomeRemainlessAt.Text = "0.00";
+            // 
+            // txtBecomeTailAt
+            // 
+            this.txtBecomeTailAt.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtBecomeTailAt.Location = new System.Drawing.Point(128, 23);
+            this.txtBecomeTailAt.MaxValue = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.txtBecomeTailAt.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtBecomeTailAt.Name = "txtBecomeTailAt";
+            this.txtBecomeTailAt.PointCount = 2;
+            this.txtBecomeTailAt.Size = new System.Drawing.Size(92, 21);
+            this.txtBecomeTailAt.TabIndex = 38;
+            this.txtBecomeTailAt.Text = "0.00";
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(226, 57);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(89, 12);
+            this.label79.TabIndex = 16;
+            this.label79.Text = "米时当成无余料";
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(21, 57);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(101, 12);
+            this.label80.TabIndex = 15;
+            this.label80.Text = "原材料等于或少于";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(226, 27);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(77, 12);
+            this.label81.TabIndex = 14;
+            this.label81.Text = "米时当成尾卷";
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(21, 27);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(101, 12);
+            this.label82.TabIndex = 13;
+            this.label82.Text = "原材料等于或少于";
             // 
             // tabPage1
             // 
@@ -1473,235 +1705,13 @@
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
             // 
-            // tabPage2
+            // label6
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Controls.Add(this.txtBecomeRemainlessAt);
-            this.tabPage2.Controls.Add(this.txtBecomeTailAt);
-            this.tabPage2.Controls.Add(this.label79);
-            this.tabPage2.Controls.Add(this.label80);
-            this.tabPage2.Controls.Add(this.label81);
-            this.tabPage2.Controls.Add(this.label82);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(563, 358);
-            this.tabPage2.TabIndex = 4;
-            this.tabPage2.Text = "基本";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtDefaultCustomer);
-            this.groupBox1.Controls.Add(this.lnkCustomer);
-            this.groupBox1.Controls.Add(this.txtDefaultProductCategory);
-            this.groupBox1.Controls.Add(this.lnkCategory);
-            this.groupBox1.Controls.Add(this.txtDefaultWareHouse);
-            this.groupBox1.Controls.Add(this.lnkWarehouse);
-            this.groupBox1.Location = new System.Drawing.Point(23, 89);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(292, 146);
-            this.groupBox1.TabIndex = 93;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "产品入库";
-            // 
-            // txtDefaultCustomer
-            // 
-            this.txtDefaultCustomer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtDefaultCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultCustomer.Location = new System.Drawing.Point(92, 101);
-            this.txtDefaultCustomer.Name = "txtDefaultCustomer";
-            this.txtDefaultCustomer.Size = new System.Drawing.Size(188, 21);
-            this.txtDefaultCustomer.TabIndex = 98;
-            // 
-            // lnkCustomer
-            // 
-            this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(31, 105);
-            this.lnkCustomer.Name = "lnkCustomer";
-            this.lnkCustomer.Size = new System.Drawing.Size(53, 12);
-            this.lnkCustomer.TabIndex = 97;
-            this.lnkCustomer.TabStop = true;
-            this.lnkCustomer.Text = "默认客户";
-            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
-            // 
-            // txtDefaultProductCategory
-            // 
-            this.txtDefaultProductCategory.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtDefaultProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultProductCategory.Location = new System.Drawing.Point(92, 68);
-            this.txtDefaultProductCategory.Name = "txtDefaultProductCategory";
-            this.txtDefaultProductCategory.Size = new System.Drawing.Size(188, 21);
-            this.txtDefaultProductCategory.TabIndex = 94;
-            // 
-            // lnkCategory
-            // 
-            this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(7, 72);
-            this.lnkCategory.Name = "lnkCategory";
-            this.lnkCategory.Size = new System.Drawing.Size(77, 12);
-            this.lnkCategory.TabIndex = 96;
-            this.lnkCategory.TabStop = true;
-            this.lnkCategory.Text = "默认产品类别";
-            this.lnkCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
-            // 
-            // txtDefaultWareHouse
-            // 
-            this.txtDefaultWareHouse.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtDefaultWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultWareHouse.Location = new System.Drawing.Point(92, 35);
-            this.txtDefaultWareHouse.Name = "txtDefaultWareHouse";
-            this.txtDefaultWareHouse.Size = new System.Drawing.Size(188, 21);
-            this.txtDefaultWareHouse.TabIndex = 93;
-            // 
-            // lnkWarehouse
-            // 
-            this.lnkWarehouse.AutoSize = true;
-            this.lnkWarehouse.Location = new System.Drawing.Point(31, 39);
-            this.lnkWarehouse.Name = "lnkWarehouse";
-            this.lnkWarehouse.Size = new System.Drawing.Size(53, 12);
-            this.lnkWarehouse.TabIndex = 95;
-            this.lnkWarehouse.TabStop = true;
-            this.lnkWarehouse.Text = "默认仓库";
-            this.lnkWarehouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWarehouse_LinkClicked);
-            // 
-            // txtBecomeRemainlessAt
-            // 
-            this.txtBecomeRemainlessAt.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtBecomeRemainlessAt.Location = new System.Drawing.Point(128, 53);
-            this.txtBecomeRemainlessAt.MaxValue = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.txtBecomeRemainlessAt.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtBecomeRemainlessAt.Name = "txtBecomeRemainlessAt";
-            this.txtBecomeRemainlessAt.PointCount = 2;
-            this.txtBecomeRemainlessAt.Size = new System.Drawing.Size(92, 21);
-            this.txtBecomeRemainlessAt.TabIndex = 39;
-            this.txtBecomeRemainlessAt.Text = "0.00";
-            // 
-            // txtBecomeTailAt
-            // 
-            this.txtBecomeTailAt.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtBecomeTailAt.Location = new System.Drawing.Point(128, 23);
-            this.txtBecomeTailAt.MaxValue = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.txtBecomeTailAt.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtBecomeTailAt.Name = "txtBecomeTailAt";
-            this.txtBecomeTailAt.PointCount = 2;
-            this.txtBecomeTailAt.Size = new System.Drawing.Size(92, 21);
-            this.txtBecomeTailAt.TabIndex = 38;
-            this.txtBecomeTailAt.Text = "0.00";
-            // 
-            // label79
-            // 
-            this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(226, 57);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(89, 12);
-            this.label79.TabIndex = 16;
-            this.label79.Text = "米时当成无余料";
-            // 
-            // label80
-            // 
-            this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(21, 57);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(101, 12);
-            this.label80.TabIndex = 15;
-            this.label80.Text = "原材料等于或少于";
-            // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(226, 27);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(77, 12);
-            this.label81.TabIndex = 14;
-            this.label81.Text = "米时当成尾卷";
-            // 
-            // label82
-            // 
-            this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(21, 27);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(101, 12);
-            this.label82.TabIndex = 13;
-            this.label82.Text = "原材料等于或少于";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.txtLoadSheetsBefore);
-            this.panel2.Controls.Add(this.rdLoadSheetsBefore);
-            this.panel2.Controls.Add(this.rdOnlyThisMonth);
-            this.panel2.Location = new System.Drawing.Point(85, 43);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(374, 26);
-            this.panel2.TabIndex = 47;
-            // 
-            // rdLoadSheetsBefore
-            // 
-            this.rdLoadSheetsBefore.AutoSize = true;
-            this.rdLoadSheetsBefore.Location = new System.Drawing.Point(144, 5);
-            this.rdLoadSheetsBefore.Name = "rdLoadSheetsBefore";
-            this.rdLoadSheetsBefore.Size = new System.Drawing.Size(71, 16);
-            this.rdLoadSheetsBefore.TabIndex = 4;
-            this.rdLoadSheetsBefore.Text = "显示最近";
-            this.rdLoadSheetsBefore.UseVisualStyleBackColor = true;
-            // 
-            // rdOnlyThisMonth
-            // 
-            this.rdOnlyThisMonth.AutoSize = true;
-            this.rdOnlyThisMonth.Checked = true;
-            this.rdOnlyThisMonth.Location = new System.Drawing.Point(5, 5);
-            this.rdOnlyThisMonth.Name = "rdOnlyThisMonth";
-            this.rdOnlyThisMonth.Size = new System.Drawing.Size(119, 16);
-            this.rdOnlyThisMonth.TabIndex = 2;
-            this.rdOnlyThisMonth.TabStop = true;
-            this.rdOnlyThisMonth.Text = "只显示本月送货单";
-            this.rdOnlyThisMonth.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 46;
-            this.label1.Text = "送货单管理";
-            // 
-            // txtLoadSheetsBefore
-            // 
-            this.txtLoadSheetsBefore.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLoadSheetsBefore.Location = new System.Drawing.Point(215, 3);
-            this.txtLoadSheetsBefore.MaxValue = 20;
-            this.txtLoadSheetsBefore.MinValue = 1;
-            this.txtLoadSheetsBefore.Name = "txtLoadSheetsBefore";
-            this.txtLoadSheetsBefore.Size = new System.Drawing.Size(31, 21);
-            this.txtLoadSheetsBefore.TabIndex = 68;
-            this.txtLoadSheetsBefore.Text = "1";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(249, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 12);
-            this.label5.TabIndex = 69;
-            this.label5.Text = "个月的送货单";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(21, 97);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 12);
+            this.label6.TabIndex = 94;
             // 
             // FrmSystemOptions
             // 
@@ -1723,17 +1733,17 @@
             this.tabAutoCreater.PerformLayout();
             this.tabDelivery.ResumeLayout(false);
             this.tabDelivery.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tab1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1882,5 +1892,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private GeneralLibrary.WinformControl.IntergerTextBox txtLoadSheetsBefore;
+        private System.Windows.Forms.Label label6;
     }
 }

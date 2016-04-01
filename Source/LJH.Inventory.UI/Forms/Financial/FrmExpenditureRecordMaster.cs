@@ -73,8 +73,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             base.ShowOperatorRights();
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             mnu_AddExpenditure.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
-            mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
-            mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.ExpenditureType, PermissionActions.Edit);
+            mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
+            mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()

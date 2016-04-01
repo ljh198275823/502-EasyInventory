@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.General
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            btnOk.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
+            //btnOk.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
         }
 
         protected override void ItemShowing()

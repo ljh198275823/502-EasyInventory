@@ -37,7 +37,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 this.panel1.Visible = true;
                 this.Text = "新增客户应收账款";
-                btnOk.Enabled = Operator.Current.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
+                btnOk.Enabled = Operator.Current.Permit(Permission.CustomerReceivable, PermissionActions.Edit);
             }
             else if (ReceivableType == CustomerReceivableType.CustomerTax)
             {
@@ -48,7 +48,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 this.panel1.Visible = true;
                 this.Text = "新增供应商应付账款";
-                btnOk.Enabled = Operator.Current.Permit(Permission.CustomerOtherReceivable, PermissionActions.Edit);
+                btnOk.Enabled = Operator.Current.Permit(Permission.SupplierReceivable, PermissionActions.Edit);
             }
             else if (ReceivableType == CustomerReceivableType.SupplierTax)
             {

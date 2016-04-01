@@ -133,6 +133,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
                 rd转公账.Checked = item.PaymentMode == PaymentMode.转公账;
                 rd付承兑.Checked = item.PaymentMode == PaymentMode.付承兑;
+                rd退货.Checked = item.PaymentMode == PaymentMode.退货;
                 txtAmount.DecimalValue = item.Amount;
                 txtCheckNum.Text = item.CheckNum;
                 txtBank.Text = item.Bank;
@@ -164,6 +165,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (rd转公账.Checked) info.PaymentMode = PaymentMode.转公账;
             if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
             if (rd付承兑.Checked) info.PaymentMode = PaymentMode.付承兑;
+            if (rd退货.Checked) info.PaymentMode = PaymentMode.退货;
             info.Amount = txtAmount.DecimalValue;
             info.CheckNum = txtCheckNum.Text;
             info.Bank = txtBank.Text;

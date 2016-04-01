@@ -61,8 +61,8 @@ namespace LJH.Inventory.UI.Forms.General
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
-            this.mnu_AddProduct.Enabled = Operator.Current.Permit(Permission.Product, PermissionActions.Edit);
+            this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Edit);
+            this.mnu_AddProduct.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Edit);
             this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit);
             this.mnu_CategoryProperty.Enabled = Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Edit) || Operator.Current.Permit(Permission.ProductCategory, PermissionActions.Read);

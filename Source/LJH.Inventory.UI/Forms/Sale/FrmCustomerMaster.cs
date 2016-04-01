@@ -74,8 +74,8 @@ namespace LJH.Inventory.UI.Forms.Sale
             this.cMnu_Add.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_AddCustomer.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
-            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit);
-            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.CustomerType, PermissionActions.Edit);
+            this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
+            this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_Import.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_Merge.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
         }

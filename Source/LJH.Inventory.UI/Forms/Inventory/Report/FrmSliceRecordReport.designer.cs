@@ -497,7 +497,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmSliceRecordReport";
-            this.Text = "加工记录查询";
+            this.Text = "原材料加工记录报表";
             this.Controls.SetChildIndex(this.btnColumn, 0);
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.btnSaveAs, 0);

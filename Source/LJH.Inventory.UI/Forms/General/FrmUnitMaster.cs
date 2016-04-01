@@ -29,10 +29,10 @@ namespace LJH.Inventory.UI.Forms.General
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            btn_Add.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
-            btn_Delete.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
-            cMnu_Add.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
-            cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
+            //btn_Add.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
+            //btn_Delete.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
+            //cMnu_Add.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
+            //cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Unit, PermissionActions.Edit);
         }
 
         protected override List<object> GetDataSource()

@@ -396,7 +396,7 @@
             this.Controls.Add(this.pnlLeft);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerFinancialStateMaster";
-            this.Text = "客户应收账款";
+            this.Text = "客户财务管理";
             this.Controls.SetChildIndex(this.pnlLeft, 0);
             this.Controls.SetChildIndex(this.splitter1, 0);
             this.Controls.SetChildIndex(this.panel5, 0);

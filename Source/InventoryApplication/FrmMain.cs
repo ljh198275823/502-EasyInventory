@@ -210,31 +210,24 @@ namespace InventoryApplication
             this.mnu_Staff.Enabled = cur.Permit(Permission.Staff, PermissionActions.Read) || cur.Permit(Permission.Staff, PermissionActions.Edit);
             this.mnu_Role.Enabled = cur.Permit(Permission.Role, PermissionActions.Read) || cur.Permit(Permission.Role, PermissionActions.Edit);
             this.mnu_Options.Enabled = cur.Permit(Permission.SystemOptions, PermissionActions.Read) || cur.Permit(Permission.SystemOptions, PermissionActions.Edit);
-            //销售
-            this.mnu_Order.Enabled = cur.Permit(Permission.Order, PermissionActions.Read) || cur.Permit(Permission.Order, PermissionActions.Edit);
-            this.mnu_OrderMonitor.Enabled = cur.Permit(Permission.Order, PermissionActions.Read) || cur.Permit(Permission.Order, PermissionActions.Edit);
-            //采购
-            this.mnu_Supplier.Enabled = cur.Permit(Permission.Supplier, PermissionActions.Read) || cur.Permit(Permission.Supplier, PermissionActions.Edit);
-            this.mnu_PurchaseOrder.Enabled = cur.Permit(Permission.PurchaseOrder, PermissionActions.Read) || cur.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
-            this.mnu_PurchaseMonitor.Enabled = cur.Permit(Permission.PurchaseOrder, PermissionActions.Read) || cur.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
             //仓库
             this.mnu_SteelRoll.Enabled = cur.Permit(Permission.SteelRoll, PermissionActions.Read) || cur.Permit(Permission.SteelRoll, PermissionActions.Edit);
             this.mnu_SteelRollSlice.Enabled = cur.Permit(Permission.SteelRollSlice, PermissionActions.Read) || cur.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
-            this.mnu_InventorySheet.Enabled = cur.Permit(Permission.InventorySheet, PermissionActions.Read) || cur.Permit(Permission.InventorySheet, PermissionActions.Edit);
             this.mnu_DeliverySheet.Enabled = cur.Permit(Permission.DeliverySheet, PermissionActions.Read) || cur.Permit(Permission.DeliverySheet, PermissionActions.Edit);
             this.mnu_Customer.Enabled = cur.Permit(Permission.Customer, PermissionActions.Read) || cur.Permit(Permission.Customer, PermissionActions.Edit);
+            this.mnu_Supplier.Enabled = cur.Permit(Permission.Supplier, PermissionActions.Read) || cur.Permit(Permission.Supplier, PermissionActions.Edit);
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             //财务
             this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
-            this.mnu_CustomerPayment.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
-            this.mnu_SupplierPayment.Enabled = cur.Permit(Permission.SupplierPayment, PermissionActions.Read) || cur.Permit(Permission.SupplierPayment, PermissionActions.Edit);
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
             this.mnu_DeliveryStatistic.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
-            this.mnu_CustomerPaymentReport.Enabled = cur.Permit(Permission.CustomerPayment, PermissionActions.Read) || cur.Permit(Permission.CustomerPayment, PermissionActions.Edit);
-            this.mnu_InventoryRecord.Enabled = true;
+            this.mnu_InventoryRecord.Enabled = cur.Permit(Permission.InventoryRecordReport, PermissionActions.Read);
+            this.mnu_SliceRecordReport.Enabled = cur.Permit(Permission.SliceRecordReport, PermissionActions.Read);
+            this.mnu_PaymentReport.Enabled = cur.Permit(Permission.PaymentReport, PermissionActions.Read);
+            this.mnu_TaxBillReport.Enabled = cur.Permit(Permission.TaxBillReport, PermissionActions.Read);
         }
         #endregion
 
@@ -497,42 +490,6 @@ namespace InventoryApplication
         private void mnu_CustomerPaymentReport_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerPaymentReport>(null);
-        }
-
-        private void mnu_HorizontalSplit_Click(object sender, EventArgs e)
-        {
-            this.pSecondary.Visible = !this.pSecondary.Visible;
-            this.splitter1.Visible = !this.splitter1.Visible;
-            mnu_HorizontalSplit.Text = this.pSecondary.Visible ? "取消水平拆分" : "水平拆分";
-            this.mnu_VerticalSplit.Enabled = !this.pSecondary.Visible;
-            if (this.pSecondary.Visible)
-            {
-                this.pSecondary.Width = this.panel1.Width / 2;
-                this.pSecondary.Dock = DockStyle.Right;
-                this.splitter1.Dock = DockStyle.Right;
-            }
-            else
-            {
-
-            }
-        }
-
-        private void mnu_VerticalSplit_Click(object sender, EventArgs e)
-        {
-            this.pSecondary.Visible = !this.pSecondary.Visible;
-            this.splitter1.Visible = !this.splitter1.Visible;
-            this.mnu_VerticalSplit.Text = this.pSecondary.Visible ? "取消垂直拆分" : "垂直拆分";
-            this.mnu_HorizontalSplit.Enabled = !this.pSecondary.Visible;
-            if (this.pSecondary.Visible)
-            {
-                this.pSecondary.Dock = DockStyle.Bottom;
-                this.splitter1.Dock = DockStyle.Bottom;
-                this.pSecondary.Height = this.panel1.Height / 2;
-            }
-            else
-            {
-
-            }
         }
 
         private void mnu_Staff_Click(object sender, EventArgs e)

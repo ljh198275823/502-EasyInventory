@@ -71,8 +71,8 @@ namespace LJH.Inventory.UI.Forms.Purchase
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            cMnu_Add.Enabled = Operator.Current.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
-            mnu_AddSheet.Enabled = Operator.Current.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
+            //cMnu_Add.Enabled = Operator.Current.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
+            //mnu_AddSheet.Enabled = Operator.Current.Permit(Permission.PurchaseOrder, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()

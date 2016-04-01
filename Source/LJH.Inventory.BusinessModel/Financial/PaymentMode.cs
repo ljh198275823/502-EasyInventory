@@ -32,5 +32,6 @@ namespace LJH.Inventory.BusinessModel
         Prepay = 4,
         转公账 = 5,
         付承兑 = 6,
+        退货=7,
     }
 }

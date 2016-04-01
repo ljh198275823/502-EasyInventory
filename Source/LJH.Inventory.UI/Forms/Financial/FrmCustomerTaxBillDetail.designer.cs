@@ -71,7 +71,7 @@
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
-            this.btnPayment = new System.Windows.Forms.ToolStripButton();
+            this.btnAssign = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -471,7 +471,7 @@
             this.btnSave,
             this.btnApprove,
             this.btnUndoApprove,
-            this.btnPayment,
+            this.btnAssign,
             this.btnNullify});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -512,15 +512,15 @@
             this.btnUndoApprove.Visible = false;
             this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
             // 
-            // btnPayment
+            // btnAssign
             // 
-            this.btnPayment.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
-            this.btnPayment.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(36, 53);
-            this.btnPayment.Text = "核销";
-            this.btnPayment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
+            this.btnAssign.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
+            this.btnAssign.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAssign.Name = "btnAssign";
+            this.btnAssign.Size = new System.Drawing.Size(36, 53);
+            this.btnAssign.Text = "核销";
+            this.btnAssign.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAssign.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // btnNullify
             // 
@@ -600,7 +600,7 @@
         private System.Windows.Forms.ToolStripButton btnUndoApprove;
         private System.Windows.Forms.ToolStripButton btnNullify;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ToolStripButton btnPayment;
+        private System.Windows.Forms.ToolStripButton btnAssign;
         private System.Windows.Forms.DataGridView ItemsGrid;
         private System.Windows.Forms.ContextMenuStrip mnu_AssignGrid;
         private System.Windows.Forms.ToolStripMenuItem mnu_UndoAssign;
