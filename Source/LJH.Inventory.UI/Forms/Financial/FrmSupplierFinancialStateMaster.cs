@@ -64,7 +64,10 @@ namespace LJH.Inventory.UI.Forms.Financial
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            cMnu_Payment.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+            cMnu_Payment.Enabled = Operator.Current.Permit(Permission.SupplierPayment , PermissionActions.Edit);
+            mnu_AddRecievable.Enabled = Operator.Current.Permit(Permission.SupplierReceivable, PermissionActions.Edit);
+            mnu_AddTax.Enabled = Operator.Current.Permit(Permission.SupplierTax, PermissionActions.Edit);
+            mnu_AddTaxBill.Enabled = Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
         }
 
         protected override List<object> GetDataSource()

@@ -109,7 +109,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 192);
             // 
             // cMnu_Fresh
             // 

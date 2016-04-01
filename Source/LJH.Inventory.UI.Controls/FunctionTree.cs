@@ -87,6 +87,7 @@ namespace LJH.Inventory.UI.Controls
                     catalogNode.Tag = category;
                     root.Nodes.Add(catalogNode);
                     AddRightNode(catalogNode, items);
+                    catalogNode.Expand();
                 }
             }
             root.Expand();

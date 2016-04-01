@@ -141,11 +141,30 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.ShowButtonState(this.toolStrip1);
             CustomerPayment cp = UpdatingItem != null ? UpdatingItem as CustomerPayment : null;
-            btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
-            btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
-            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Approve);
-            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
-            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Nullify);
+            if (TaxType == CustomerPaymentType.CustomerTax)
+            {
+                btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
+                btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.Customer, PermissionActions.Approve);
+                btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.UndoApprove);
+                btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Nullify);
+            }
+            else if (TaxType == CustomerPaymentType.SupplierTax)
+            {
+                btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
+                btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Approve);
+                btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.UndoApprove);
+                btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Nullify);
+            }
+            else
+            {
+                btnSave.Enabled = false;
+                btnAssign.Enabled = false;
+                btnApprove.Enabled = false;
+                btnUndoApprove.Enabled = false;
+                btnNullify.Enabled = false;
+            }
         }
         #endregion
 

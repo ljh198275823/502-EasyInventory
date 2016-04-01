@@ -87,11 +87,28 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             }
             lblMSG.Text = string.Format("共 {0} 项", items != null ? items.Count : 0);
         }
+
+        private void ShowOperatorRights()
+        {
+            if (PaymentType == CustomerPaymentType.Customer)
+            {
+                mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+            }
+            else if (PaymentType == CustomerPaymentType.Supplier)
+            {
+                mnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
+            }
+            else
+            {
+                mnu_Add.Enabled = false;
+            }
+        }
         #endregion
 
         #region 事件处理程序
         private void FrmCustomerPaymentView_Load(object sender, EventArgs e)
         {
+            ShowOperatorRights();
             FreshData();
         }
 

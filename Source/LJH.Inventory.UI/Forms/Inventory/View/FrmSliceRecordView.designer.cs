@@ -55,7 +55,7 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSlicer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.撤回加工ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Undo = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
@@ -209,29 +209,29 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.撤回加工ToolStripMenuItem,
+            this.mnu_Undo,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
             // 
-            // 撤回加工ToolStripMenuItem
+            // mnu_Undo
             // 
-            this.撤回加工ToolStripMenuItem.Name = "撤回加工ToolStripMenuItem";
-            this.撤回加工ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.撤回加工ToolStripMenuItem.Text = "撤销加工";
-            this.撤回加工ToolStripMenuItem.Click += new System.EventHandler(this.撤回加工ToolStripMenuItem_Click);
+            this.mnu_Undo.Name = "mnu_Undo";
+            this.mnu_Undo.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Undo.Text = "撤销加工";
+            this.mnu_Undo.Click += new System.EventHandler(this.撤回加工ToolStripMenuItem_Click);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // FrmSliceRecordView
@@ -272,6 +272,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAfterLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicer;
-        private System.Windows.Forms.ToolStripMenuItem 撤回加工ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Undo;
     }
 }

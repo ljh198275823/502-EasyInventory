@@ -51,6 +51,12 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colSlicer"].Value = record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;
         }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            mnu_Undo.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
+        }
         #endregion
 
         private void 撤回加工ToolStripMenuItem_Click(object sender, System.EventArgs e)
