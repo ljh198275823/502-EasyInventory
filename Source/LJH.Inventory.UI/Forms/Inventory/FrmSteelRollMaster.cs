@@ -96,7 +96,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             else if (sr.State == ProductInventoryState.WaitShipping)
             {
-                row.DefaultCellStyle.ForeColor = Color.Cyan;
+                row.DefaultCellStyle.ForeColor = Color.Brown;
             }
             else if (sr.State == ProductInventoryState.Shipped)
             {
@@ -104,7 +104,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             else if (sr.State == ProductInventoryState.Reserved)
             {
-                row.DefaultCellStyle.ForeColor = Color.Cyan;
+                row.DefaultCellStyle.ForeColor = Color.Brown;
             }
             else if (sr.Status == "整卷")
             {

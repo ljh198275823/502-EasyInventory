@@ -515,6 +515,11 @@
             获取或设置窗体在选择模式下的选择项
             </summary>
         </member>
+        <member name="P:LJH.GeneralLibrary.Core.UI.FrmMasterBase.MultiSelect">
+            <summary>
+            获取或设置是否支持多选
+            </summary>
+        </member>
         <member name="P:LJH.GeneralLibrary.Core.UI.FrmMasterBase.SearchCondition">
             <summary>
             获取或设置查询条件

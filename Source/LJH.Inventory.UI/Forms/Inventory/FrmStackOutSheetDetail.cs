@@ -551,10 +551,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btn_AddSlice_Click(object sender, EventArgs e)
         {
             FrmSteelRollSliceSelection frm = new FrmSteelRollSliceSelection();
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.States = (int)ProductInventoryState.Inventory; //只显示在库的
-            con.HasRemain = true;
-            frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;

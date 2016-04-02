@@ -1206,7 +1206,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:易存企业管理系统"
         "ProductCode" = "8:{E5247BA0-745A-4F18-AE75-EC091FEEF386}"
-        "PackageCode" = "8:{76584ECB-445A-422B-8FE1-5463074D1EE9}"
+        "PackageCode" = "8:{578474DD-F755-4C2B-9D20-C0CBAC0D7758}"
         "UpgradeCode" = "8:{99D9C92D-53B2-4530-B7A1-CA7241289C18}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
