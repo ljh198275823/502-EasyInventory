@@ -80,7 +80,18 @@ namespace LJH.Inventory.UI.Forms
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
             cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
             cmnu_Edit.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
+            mnu_ChangePWD.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
         }
         #endregion
+
+        private void mnu_ChangePWD_Click(object sender, EventArgs e)
+        {
+            if (GridView.SelectedRows != null && GridView.SelectedRows.Count == 1)
+            {
+                FrmChangePwd frm = new FrmChangePwd();
+                frm.Operator = GridView.SelectedRows[0].Tag as Operator;
+                frm.ShowDialog();
+            }
+        }
     }
 }

@@ -68,10 +68,6 @@ namespace LJH.Inventory.UI.Forms.General
             if (staff.HireDate != null) dtHireDate.Value = staff.HireDate.Value;
             rdResign.Checked = staff.Resigned != null && staff.Resigned.Value;
             txtPhone.Text = staff.Phone;
-            List<Operator> opts = (new OperatorBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-            Operator opt = opts.FirstOrDefault(item => item.StaffID == staff.ID);
-            if (opt != null) txtLogID.Text = opt.ID;
-            txtLogID.Tag = opt;
             StaffPhoto sp = (new StaffBLL(AppSettings.Current.ConnStr)).GetPhoto(staff.ID).QueryObject;
             if (sp != null)
             {
@@ -83,11 +79,11 @@ namespace LJH.Inventory.UI.Forms.General
         {
             Staff staff = addingItem as Staff;
             CommandResult ret = (new StaffBLL(AppSettings.Current.ConnStr)).Add(staff);
-            if (ret.Result == ResultCode.Successful)
-            {
-                Operator opt = txtLogID.Tag as Operator;
-                ret = new StaffBLL(AppSettings.Current.ConnStr).SaveOperator(opt, staff);
-            }
+            //if (ret.Result == ResultCode.Successful)
+            //{
+            //    Operator opt = txtLogID.Tag as Operator;
+            //    ret = new StaffBLL(AppSettings.Current.ConnStr).SaveOperator(opt, staff);
+            //}
             if (ret.Result == ResultCode.Successful && picPhoto.Tag != null)
             {
                 ret = (new StaffBLL(AppSettings.Current.ConnStr)).SavePhoto(staff.ID, picPhoto.Tag.ToString());
@@ -103,11 +99,6 @@ namespace LJH.Inventory.UI.Forms.General
         {
             Staff staff = updatingItem as Staff;
             CommandResult ret = (new StaffBLL(AppSettings.Current.ConnStr)).Update(staff);
-            if (ret.Result == ResultCode.Successful)
-            {
-                Operator opt = txtLogID.Tag as Operator;
-                ret = new StaffBLL(AppSettings.Current.ConnStr).SaveOperator(opt, staff);
-            }
             if (ret.Result == ResultCode.Successful && picPhoto.Tag != null)
             {
                 ret = (new StaffBLL(AppSettings.Current.ConnStr)).SavePhoto(staff.ID, picPhoto.Tag.ToString());
@@ -213,23 +204,23 @@ namespace LJH.Inventory.UI.Forms.General
         }
         #endregion
 
-        private void lnkRole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmOperatorMaster frm = new FrmOperatorMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Operator r = frm.SelectedItem as Operator;
-                txtLogID.Tag = r;
-                txtLogID.Text = r != null ? r.Name : null;
-            }
-        }
+        //private void lnkRole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        //{
+        //    FrmOperatorMaster frm = new FrmOperatorMaster();
+        //    frm.ForSelect = true;
+        //    if (frm.ShowDialog() == DialogResult.OK)
+        //    {
+        //        Operator r = frm.SelectedItem as Operator;
+        //        txtLogID.Tag = r;
+        //        txtLogID.Text = r != null ? r.Name : null;
+        //    }
+        //}
 
-        private void txtRole_DoubleClick(object sender, EventArgs e)
-        {
-            txtLogID.Text = null;
-            txtLogID.Tag = null;
-        }
+        //private void txtRole_DoubleClick(object sender, EventArgs e)
+        //{
+        //    txtLogID.Text = null;
+        //    txtLogID.Tag = null;
+        //}
 
     }
 }

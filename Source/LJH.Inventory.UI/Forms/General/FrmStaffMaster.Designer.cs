@@ -345,6 +345,7 @@
             this.colLogID.HeaderText = "登录ID";
             this.colLogID.Name = "colLogID";
             this.colLogID.ReadOnly = true;
+            this.colLogID.Visible = false;
             // 
             // colRole
             // 
@@ -352,6 +353,7 @@
             this.colRole.MinimumWidth = 100;
             this.colRole.Name = "colRole";
             this.colRole.ReadOnly = true;
+            this.colRole.Visible = false;
             this.colRole.Width = 120;
             // 
             // colResigned

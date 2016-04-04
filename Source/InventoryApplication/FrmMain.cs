@@ -207,6 +207,7 @@ namespace InventoryApplication
             Operator cur = Operator.Current;
             //基本资料
             this.mnu_Staff.Enabled = cur.Permit(Permission.Staff, PermissionActions.Read) || cur.Permit(Permission.Staff, PermissionActions.Edit);
+            this.mnu_Operator.Enabled = cur.Permit(Permission.Operator, PermissionActions.Read) || cur.Permit(Permission.Operator, PermissionActions.Edit);
             this.mnu_Role.Enabled = cur.Permit(Permission.Role, PermissionActions.Read) || cur.Permit(Permission.Role, PermissionActions.Edit);
             this.mnu_Options.Enabled = cur.Permit(Permission.SystemOptions, PermissionActions.Read) || cur.Permit(Permission.SystemOptions, PermissionActions.Edit);
             //仓库

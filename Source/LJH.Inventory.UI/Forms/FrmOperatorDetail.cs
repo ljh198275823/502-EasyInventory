@@ -32,11 +32,13 @@ namespace LJH.Inventory.UI.Forms
                 this.btnChangePwd.Visible = false;
                 this.txtPassword.Size = this.txtOperatorID.Size;
             }
+            base.InitControls();
         }
 
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
+            this.btnChangePwd.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
             this.btnOk.Enabled = Operator.Current.Permit(Permission.Operator, PermissionActions.Edit);
         }
 
@@ -46,6 +48,7 @@ namespace LJH.Inventory.UI.Forms
             this.txtOperatorID.Text = info.ID;
             this.txtOperatorID.Enabled = false;
             this.txtOperatorID.BackColor = Color.White;
+            this.txtName.Text = info.Name;
             this.txtPassword.Text = _subPwd;
             this.txtPassword.Enabled = false;
             this.txtPassword.BackColor = Color.White;
@@ -61,7 +64,6 @@ namespace LJH.Inventory.UI.Forms
                 {
                     info = new Operator();
                     info.ID = txtOperatorID.Text.Trim();
-                    info.Name = txtOperatorID.Text.Trim();
                     info.Password = txtPassword.Text.Trim();
                 }
                 else
@@ -72,6 +74,7 @@ namespace LJH.Inventory.UI.Forms
                         info.Password = txtPassword.Text.Trim();
                     }
                 }
+                info.Name = txtOperatorID.Text.Trim();
                 info.Role = comRoleList.Role;
                 info.RoleID = comRoleList.SelectedRoleID;
             }

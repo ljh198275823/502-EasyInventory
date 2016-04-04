@@ -38,15 +38,17 @@ namespace LJH.Inventory.UI.Forms
             this.txtPassword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.comRoleList = new LJH.Inventory.UI.Controls.RoleComboBox(this.components);
             this.btnChangePwd = new System.Windows.Forms.Button();
+            this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(217, 134);
+            this.btnClose.Location = new System.Drawing.Point(217, 170);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(104, 134);
+            this.btnOk.Location = new System.Drawing.Point(104, 170);
             // 
             // label1
             // 
@@ -60,7 +62,7 @@ namespace LJH.Inventory.UI.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 60);
+            this.label2.Location = new System.Drawing.Point(30, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 1;
@@ -69,7 +71,7 @@ namespace LJH.Inventory.UI.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 92);
+            this.label4.Location = new System.Drawing.Point(30, 126);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 3;
@@ -86,7 +88,7 @@ namespace LJH.Inventory.UI.Forms
             // txtPassword
             // 
             this.txtPassword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPassword.Location = new System.Drawing.Point(70, 56);
+            this.txtPassword.Location = new System.Drawing.Point(70, 90);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(188, 21);
@@ -95,14 +97,14 @@ namespace LJH.Inventory.UI.Forms
             // comRoleList
             // 
             this.comRoleList.FormattingEnabled = true;
-            this.comRoleList.Location = new System.Drawing.Point(70, 88);
+            this.comRoleList.Location = new System.Drawing.Point(70, 122);
             this.comRoleList.Name = "comRoleList";
             this.comRoleList.Size = new System.Drawing.Size(222, 20);
             this.comRoleList.TabIndex = 4;
             // 
             // btnChangePwd
             // 
-            this.btnChangePwd.Location = new System.Drawing.Point(264, 54);
+            this.btnChangePwd.Location = new System.Drawing.Point(264, 88);
             this.btnChangePwd.Name = "btnChangePwd";
             this.btnChangePwd.Size = new System.Drawing.Size(28, 23);
             this.btnChangePwd.TabIndex = 19;
@@ -110,11 +112,30 @@ namespace LJH.Inventory.UI.Forms
             this.btnChangePwd.UseVisualStyleBackColor = true;
             this.btnChangePwd.Click += new System.EventHandler(this.btnChangePwd_Click);
             // 
+            // txtName
+            // 
+            this.txtName.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtName.Location = new System.Drawing.Point(70, 56);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(222, 21);
+            this.txtName.TabIndex = 21;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "姓名";
+            // 
             // FrmOperatorDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 173);
+            this.ClientSize = new System.Drawing.Size(304, 209);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnChangePwd);
             this.Controls.Add(this.comRoleList);
             this.Controls.Add(this.txtPassword);
@@ -136,6 +157,8 @@ namespace LJH.Inventory.UI.Forms
             this.Controls.SetChildIndex(this.txtPassword, 0);
             this.Controls.SetChildIndex(this.comRoleList, 0);
             this.Controls.SetChildIndex(this.btnChangePwd, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.txtName, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,5 +173,7 @@ namespace LJH.Inventory.UI.Forms
         private LJH.GeneralLibrary.WinformControl.DBCTextBox  txtPassword;
         private LJH.Inventory.UI.Controls.RoleComboBox comRoleList;
         private System.Windows.Forms.Button btnChangePwd;
+        private GeneralLibrary.WinformControl.DBCTextBox txtName;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -82,6 +82,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tmrSoftDogChecker = new System.Windows.Forms.Timer(this.components);
+            this.mnu_Operator = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -319,6 +320,7 @@
             this.mnu_System.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_Options,
             this.mnu_Staff,
+            this.mnu_Operator,
             this.mnu_Role,
             this.toolStripSeparator7,
             this.mnu_ChangePwd,
@@ -523,6 +525,14 @@
             this.tmrSoftDogChecker.Interval = 10000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
             // 
+            // mnu_Operator
+            // 
+            this.mnu_Operator.Enabled = false;
+            this.mnu_Operator.Name = "mnu_Operator";
+            this.mnu_Operator.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Operator.Text = "操作员管理";
+            this.mnu_Operator.Click += new System.EventHandler(this.mnu_Operator_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -606,5 +616,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_TaxBillReport;
         private System.Windows.Forms.ToolStripMenuItem mnu_Supplier;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Operator;
     }
 }

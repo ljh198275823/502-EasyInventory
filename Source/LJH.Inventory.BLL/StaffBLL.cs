@@ -39,39 +39,39 @@ namespace LJH.Inventory.BLL
         /// <param name="info"></param>
         /// <param name="staff"></param>
         /// <returns></returns>
-        public CommandResult SaveOperator(Operator info, Staff staff)
-        {
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            List<Operator> opts = ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).GetItems(null).QueryObjects;
-            Operator original = opts.SingleOrDefault(it => it.ID == info.ID);
-            if (original != null)
-            {
-                info.Name = staff.Name;
-                info.StaffID = staff.ID;
-                ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Update(info, original, unitWork);
-            }
-            else
-            {
-                info.Name = staff.Name;
-                info.StaffID = staff.ID;
-                ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Insert(info, unitWork);
-            }
-            foreach (var item in opts.Where(it => it.ID != info.ID && it.StaffID == staff.ID)) //将其它归属到此员工的所有操作员删除
-            {
-                if (item.ID != Operator.DefaultLogID)
-                {
-                    ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Delete(item, unitWork);
-                }
-                else
-                {
-                    var newV = item.Clone();
-                    newV.Name = item.ID;
-                    newV.StaffID = null;
-                    ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Update(newV, item, unitWork);
-                }
-            }
-            return unitWork.Commit();
-        }
+        //public CommandResult SaveOperator(Operator info, Staff staff)
+        //{
+        //    IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+        //    List<Operator> opts = ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).GetItems(null).QueryObjects;
+        //    Operator original = opts.SingleOrDefault(it => it.ID == info.ID);
+        //    if (original != null)
+        //    {
+        //        info.Name = staff.Name;
+        //        info.StaffID = staff.ID;
+        //        ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Update(info, original, unitWork);
+        //    }
+        //    else
+        //    {
+        //        info.Name = staff.Name;
+        //        info.StaffID = staff.ID;
+        //        ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Insert(info, unitWork);
+        //    }
+        //    foreach (var item in opts.Where(it => it.ID != info.ID && it.StaffID == staff.ID)) //将其它归属到此员工的所有操作员删除
+        //    {
+        //        if (item.ID != Operator.DefaultLogID)
+        //        {
+        //            ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Delete(item, unitWork);
+        //        }
+        //        else
+        //        {
+        //            var newV = item.Clone();
+        //            newV.Name = item.ID;
+        //            newV.StaffID = null;
+        //            ProviderFactory.Create<IProvider<Operator, string>>(RepoUri).Update(newV, item, unitWork);
+        //        }
+        //    }
+        //    return unitWork.Commit();
+        //}
         #endregion
 
         #region 人员照片相关

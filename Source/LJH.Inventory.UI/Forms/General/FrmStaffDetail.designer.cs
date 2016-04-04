@@ -33,8 +33,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtPhone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.txtLogID = new System.Windows.Forms.TextBox();
-            this.lnkRole = new System.Windows.Forms.LinkLabel();
             this.dtHireDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.txtDepartment = new System.Windows.Forms.TextBox();
             this.lnkDepartment = new System.Windows.Forms.LinkLabel();
@@ -75,9 +73,9 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(9, 9);
             this.tabControl1.Name = "tabControl1";
@@ -89,8 +87,6 @@
             // 
             this.tabPage1.Controls.Add(this.txtPhone);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.txtLogID);
-            this.tabPage1.Controls.Add(this.lnkRole);
             this.tabPage1.Controls.Add(this.dtHireDate);
             this.tabPage1.Controls.Add(this.txtDepartment);
             this.tabPage1.Controls.Add(this.lnkDepartment);
@@ -134,26 +130,6 @@
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 82;
             this.label2.Text = "电话";
-            // 
-            // txtLogID
-            // 
-            this.txtLogID.Location = new System.Drawing.Point(59, 143);
-            this.txtLogID.Name = "txtLogID";
-            this.txtLogID.ReadOnly = true;
-            this.txtLogID.Size = new System.Drawing.Size(121, 21);
-            this.txtLogID.TabIndex = 80;
-            this.txtLogID.DoubleClick += new System.EventHandler(this.txtRole_DoubleClick);
-            // 
-            // lnkRole
-            // 
-            this.lnkRole.AutoSize = true;
-            this.lnkRole.Location = new System.Drawing.Point(12, 146);
-            this.lnkRole.Name = "lnkRole";
-            this.lnkRole.Size = new System.Drawing.Size(41, 12);
-            this.lnkRole.TabIndex = 79;
-            this.lnkRole.TabStop = true;
-            this.lnkRole.Text = "登录ID";
-            this.lnkRole.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRole_LinkClicked);
             // 
             // dtHireDate
             // 
@@ -410,8 +386,6 @@
         private System.Windows.Forms.LinkLabel lnkDepartment;
         private System.Windows.Forms.TextBox txtDepartment;
         private Controls.NullableDateTimePicker dtHireDate;
-        private System.Windows.Forms.TextBox txtLogID;
-        private System.Windows.Forms.LinkLabel lnkRole;
         private GeneralLibrary.WinformControl.DBCTextBox txtPhone;
         private System.Windows.Forms.Label label2;
     }

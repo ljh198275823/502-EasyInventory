@@ -40,16 +40,17 @@
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.OperatorView = new System.Windows.Forms.DataGridView();
+            this.colOperatorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperatorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRoleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cmnu_Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.colOperatorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperatorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRoleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_ChangePWD = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OperatorView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -157,47 +158,6 @@
             this.OperatorView.Size = new System.Drawing.Size(713, 221);
             this.OperatorView.TabIndex = 58;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.cmnu_Edit,
-            this.cMnu_Delete,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 114);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // cmnu_Edit
-            // 
-            this.cmnu_Edit.Name = "cmnu_Edit";
-            this.cmnu_Edit.Size = new System.Drawing.Size(109, 22);
-            this.cmnu_Edit.Text = "编辑";
-            // 
-            // cMnu_Delete
-            // 
-            this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Delete.Text = "删除";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
             // colOperatorID
             // 
             this.colOperatorID.DataPropertyName = "OperatorID";
@@ -226,6 +186,55 @@
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cmnu_Edit,
+            this.mnu_ChangePWD,
+            this.cMnu_Delete,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 158);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // cmnu_Edit
+            // 
+            this.cmnu_Edit.Name = "cmnu_Edit";
+            this.cmnu_Edit.Size = new System.Drawing.Size(152, 22);
+            this.cmnu_Edit.Text = "编辑";
+            // 
+            // cMnu_Delete
+            // 
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Delete.Text = "删除";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
+            // mnu_ChangePWD
+            // 
+            this.mnu_ChangePWD.Name = "mnu_ChangePWD";
+            this.mnu_ChangePWD.Size = new System.Drawing.Size(152, 22);
+            this.mnu_ChangePWD.Text = "修改密码";
+            this.mnu_ChangePWD.Click += new System.EventHandler(this.mnu_ChangePWD_Click);
             // 
             // FrmOperatorMaster
             // 
@@ -271,6 +280,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperatorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRoleID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.ToolStripMenuItem mnu_ChangePWD;
 
 
     }

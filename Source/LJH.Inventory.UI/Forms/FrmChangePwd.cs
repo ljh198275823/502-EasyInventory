@@ -31,6 +31,7 @@ namespace LJH.Inventory.UI.Forms
             if (CheckInput())
             {
                 OperatorBLL bll = new OperatorBLL(AppSettings.Current.ConnStr);
+                string oldPwd = Operator.Password;
                 Operator.Password = txtNewPwd.Text;
                 CommandResult result=bll.Update (Operator );
                 if (result.Result == ResultCode.Successful)
@@ -39,7 +40,7 @@ namespace LJH.Inventory.UI.Forms
                 }
                 else
                 {
-                    Operator.Password = txtOldPwd.Text;
+                    Operator.Password = oldPwd;
                     MessageBox.Show(result.Message);
                 }
             }
@@ -52,12 +53,6 @@ namespace LJH.Inventory.UI.Forms
 
         private bool CheckInput()
         {
-            if (Operator.Password != txtOldPwd.Text)
-            {
-                MessageBox.Show("旧密码输入不正确!");
-                txtOldPwd.SelectAll();
-                return false;
-            }
             if (string.IsNullOrEmpty(txtNewPwd.Text))
             {
                 MessageBox.Show("新密码不能为空!");
