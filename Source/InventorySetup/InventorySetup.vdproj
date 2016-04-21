@@ -721,7 +721,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:LJH.GeneralLibrary, Version=2.0.2016.103, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:LJH.GeneralLibrary, Version=2.0.2016.319, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_64790B1DABD00D63F590F50EE2D374C8"
@@ -1080,7 +1080,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:悦涵企业管理系统"
         "ProductCode" = "8:{9CF9D9A7-5D1A-4BE0-BD35-39143209D142}"
-        "PackageCode" = "8:{8C38B706-8885-4351-912E-FD6C9BC69AF9}"
+        "PackageCode" = "8:{CB23FCC6-A8B0-4CE2-BB88-FBA60DA0F4DC}"
         "UpgradeCode" = "8:{261BA1C0-59AB-4607-ACDF-09356A0C61A3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

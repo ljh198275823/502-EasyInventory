@@ -515,24 +515,29 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void mnu_AddSteelRoll_Click(object sender, EventArgs e)
         {
-            FrmSteelRollMaster frm = new FrmSteelRollMaster();
-            frm.ForSelect = true;
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.States = (int)ProductInventoryState.Inventory; //只显示在库的原材料
-            frm.SearchCondition = con;
+            FrmSteelRollSelection frm = new FrmSteelRollSelection();
+            frm.StartPosition = FormStartPosition.CenterParent;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                ProductInventoryItem sr = frm.SelectedItem as ProductInventoryItem;
-                var ret = new SteelRollBLL(AppSettings.Current.ConnStr).UpdateProduct(sr);
-                if (ret.Result == ResultCode.Successful)
+                List<ProductInventoryItem> srs = frm.SelectedItems;
+                if (srs != null && srs.Count > 0)
                 {
-                    var sheet = UpdatingItem as StackOutSheet;
-                    sheet.AddItems(sr, 1);
-                    ShowDeliveryItemsOnGrid(sheet);
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message);
+                    foreach (var sr in srs)
+                    {
+                        var ret = new SteelRollBLL(AppSettings.Current.ConnStr).UpdateProduct(sr);
+                        if (ret.Result == ResultCode.Successful)
+                        {
+                            var sheet = UpdatingItem as StackOutSheet;
+                            if (sheet.Items != null && sheet.Items.Exists(it => it.InventoryItem == sr.ID))//原材料只加一次
+                            {
+                            }
+                            else
+                            {
+                                sheet.AddItems(sr, 1);
+                                ShowDeliveryItemsOnGrid(sheet);
+                            }
+                        }
+                    }
                 }
             }
         }

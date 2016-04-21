@@ -190,6 +190,12 @@
     <Compile Include="Forms\Inventory\FrmSteelRollMaster.Designer.cs">
       <DependentUpon>FrmSteelRollMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\FrmSteelRollSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\FrmSteelRollSelection.designer.cs">
+      <DependentUpon>FrmSteelRollSelection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\FrmSteelRollSliceDepart.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -753,6 +759,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollMaster.resx">
       <DependentUpon>FrmSteelRollMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSelection.resx">
+      <DependentUpon>FrmSteelRollSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceDepart.resx">
       <DependentUpon>FrmSteelRollSliceDepart.cs</DependentUpon>
