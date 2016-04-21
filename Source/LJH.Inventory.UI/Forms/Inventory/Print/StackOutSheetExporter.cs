@@ -128,8 +128,12 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                             if (cell != null) cell.SetCellValue(p.Category.Name);
                             cell = row.GetCell(1);
                             if (cell != null) cell.SetCellValue(p.Specification);
-                            //cell = row.GetCell(2);
-                            //if (cell != null) cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F3") : string.Empty);
+                            if (item.InventoryItem.HasValue)
+                            {
+                                var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
+                                cell = row.GetCell(2);
+                                if (cell != null) cell.SetCellValue(pi != null ? pi.Material : null);
+                            }
                             cell = row.GetCell(3);
                             if (cell != null) cell.SetCellValue(item.Count.ToString("F0"));
                             cell = row.GetCell(4);

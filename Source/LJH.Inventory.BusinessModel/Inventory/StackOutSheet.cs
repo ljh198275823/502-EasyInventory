@@ -234,6 +234,7 @@ namespace LJH.Inventory.BusinessModel
                     Count = g.Sum(it => it.Count),
                     SheetNo = this.ID,
                     Price = g.First().Price,
+                    InventoryItem = g.First().InventoryItem,
                     Memo = g.First().Memo
                 };
                 ret.Add(si);
