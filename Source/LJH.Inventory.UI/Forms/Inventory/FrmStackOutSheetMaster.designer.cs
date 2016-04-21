@@ -68,6 +68,7 @@
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -401,6 +402,7 @@
             this.colSheetDate,
             this.colSheetNo,
             this.colCustomer,
+            this.colFileID,
             this.colWithTax,
             this.colAmount,
             this.colPaid,
@@ -442,12 +444,20 @@
             // 
             // colCustomer
             // 
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.MinimumWidth = 150;
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
             this.colCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colCustomer.Width = 150;
+            // 
+            // colFileID
+            // 
+            this.colFileID.HeaderText = "归档码";
+            this.colFileID.Name = "colFileID";
+            this.colFileID.ReadOnly = true;
+            this.colFileID.Width = 80;
             // 
             // colWithTax
             // 
@@ -611,6 +621,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFileID;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaid;

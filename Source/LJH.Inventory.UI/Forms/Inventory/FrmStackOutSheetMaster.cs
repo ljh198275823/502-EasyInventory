@@ -171,6 +171,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSheetNo"].Value = sheet.ID;
             CompanyInfo customer = customerTree1.GetCustomer(sheet.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
+            row.Cells["colFileID"].Value = customer != null ? customer.FileID : null;
             row.Cells["colWithTax"].Value = sheet.WithTax;
             row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
