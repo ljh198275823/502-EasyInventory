@@ -198,11 +198,6 @@ namespace LJH.Inventory.BusinessModel
                     Count = count,
                     Memo = inventory.Carplate
                 };
-                if (!string.IsNullOrEmpty(inventory.Material))
-                {
-                    if (!string.IsNullOrEmpty(si.Memo)) si.Memo += "," + inventory.Material;
-                    else si.Memo = inventory.Material;
-                }
                 if (inventory.Weight.HasValue && inventory.Model != "开平")
                 {
                     if (si.TotalWeight == null) si.TotalWeight = 0;
