@@ -410,7 +410,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             FrmSteelRollSliceSelection frm = new FrmSteelRollSliceSelection();
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.States = (int)ProductInventoryState.Inventory; //只显示在库的
+            con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.Reserved };
             con.HasRemain = true;
             frm.SearchCondition = con;
             if (frm.ShowDialog() == DialogResult.OK)

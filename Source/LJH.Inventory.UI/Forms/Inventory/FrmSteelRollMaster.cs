@@ -30,10 +30,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 私有方法
-        private void InitSupplier(ComboBox cmb)
+        private void InitBrand(ComboBox cmb)
         {
             cmb.Items.Clear();
-            List<CompanyInfo> cs = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
+            CustomerSearchCondition con = new CustomerSearchCondition();
+            con.ClassID = CompanyClass.Other;
+            List<CompanyInfo> cs = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             if (cs != null && cs.Count > 0)
             {
                 cmb.Items.Add(string.Empty);
@@ -108,8 +110,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.customerCombobox1.Init();
             this.ucDateTimeInterval1.Init();
             this.ucDateTimeInterval1.SelectToday();
-            InitSupplier(cmbBrand);
-            InitSupplier(cmbSupplier);
+            InitBrand(cmbBrand);
         }
 
         public override void ShowOperatorRights()
@@ -136,7 +137,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var bll = new SteelRollBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
-                _SteelRolls = bll.GetItems(null).QueryObjects;
+                var con = new ProductInventoryItemSearchCondition();
+                con.HasRemain = true;
+                con.States = new List<ProductInventoryState>();
+                if (chk待发货.Checked) con.States.Add(ProductInventoryState.WaitShipping);
+                if (chk在库.Checked) con.States.Add(ProductInventoryState.Inventory);
+                if (chk发货.Checked) con.States.Add(ProductInventoryState.Shipped);
+                if (chk作废.Checked) con.States.Add(ProductInventoryState.Nullified);
+                _SteelRolls = bll.GetItems(con).QueryObjects;
             }
             else
             {
@@ -288,6 +296,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             FrmSteelRollImport frm = new FrmSteelRollImport();
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog();
+            cMnu_Fresh.PerformClick();
+        }
+
+        private void chk发货_CheckedChanged(object sender, EventArgs e)
+        {
             cMnu_Fresh.PerformClick();
         }
     }

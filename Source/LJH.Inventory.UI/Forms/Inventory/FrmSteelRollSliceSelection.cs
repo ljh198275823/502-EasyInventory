@@ -75,7 +75,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SearchCondition == null)
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.States = (int)ProductInventoryState.UnShipped;
+                con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.Reserved };
                 _ProductInventorys = new SteelRollSliceBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             }
             else

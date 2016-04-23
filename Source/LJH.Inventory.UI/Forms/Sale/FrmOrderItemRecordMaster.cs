@@ -179,66 +179,12 @@ namespace LJH.Inventory.UI.Forms.Sale
 
         private void cMnu_Reserve_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
-            {
-                OrderItemRecord item = dataGridView1.SelectedRows[0].Tag as OrderItemRecord;
-                if (item.Inventory >= item.NotShipped)
-                {
-                    MessageBox.Show("此订单项的备货数量已经大于或等于未出货数量，不用再分配库存");
-                    return;
-                }
-                FrmProductInventoryAssign frm = new FrmProductInventoryAssign();
-                frm.ProductID = item.ProductID;
-                frm.MaxCount = item.NotPurchased;
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetSteelRollSlices(null).QueryObjects;
-                        _Records.Remove(item);
-                        item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
-                        if (item != null) _Records.Add(item); //更新某行数据
-                        FreshData();
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
-                    }
-                }
-            }
+            
         }
 
         private void mnu_UnReserve_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 0)
-            {
-                OrderItemRecord item = dataGridView1.SelectedRows[0].Tag as OrderItemRecord;
-                if (item.Inventory == 0)
-                {
-                    MessageBox.Show("此订单项的还没有任何备货");
-                    return;
-                }
-                FrmProductInventoryAssign frm = new FrmProductInventoryAssign();
-                frm.ProductID = item.ProductID;
-                frm.MaxCount = item.NotPurchased;
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Reserve(frm.WarehouseID, item.ProductID, item.ID, item.SheetNo, frm.Count);
-                    if (ret.Result == ResultCode.Successful)
-                    {
-                        _Inventories = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetSteelRollSlices(null).QueryObjects;
-                        _Records.Remove(item);
-                        item = (new OrderBLL(AppSettings.Current.ConnStr)).GetRecordById(item.ID).QueryObject;
-                        if (item != null) _Records.Add(item); //更新某行数据
-                        FreshData();
-                    }
-                    else
-                    {
-                        MessageBox.Show(ret.Message);
-                    }
-                }
-            }
+           
         }
 
         private void txtKeyword_TextChanged(object sender, EventArgs e)

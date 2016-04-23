@@ -71,7 +71,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             _FrmSteelRoll.ItemSelected += new EventHandler<GeneralLibrary.Core.UI.ItemSelectedEventArgs>(_FrmSteelRoll_ItemSelected);
             var con = new ProductInventoryItemSearchCondition();
             con.HasRemain = true;
-            con.States = (int)(ProductInventoryState.Inventory | ProductInventoryState.Reserved);
+            con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.Reserved };
             _FrmSteelRoll.SearchCondition = con;
             this.ucFormViewMain.AddAForm(_FrmSteelRoll, false);
         }
