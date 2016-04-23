@@ -340,9 +340,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:LJH.GeneralLibrary.Net.NetTool.GetLocalMac">
+        <member name="M:LJH.GeneralLibrary.Net.NetTool.GetLocalMAC">
             <summary>
-            获取本机的MAC地址,如果有多个网卡，返回第一个网卡的MAC地址
+            获取本机的MAC地址,如果有多个，各个之前用逗号分开
             </summary>
             <returns></returns>
         </member>
@@ -3165,6 +3165,16 @@
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.DBPassword">
             <summary>
             获取或设置数据库密码
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.MAC">
+            <summary>
+            获取或设置授权可用的电脑的MAC,如果有多个，用逗号隔开
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.DogDevice">
+            <summary>
+            获取或设置DOGINFO是否是从硬件加密狗中获取而来
             </summary>
         </member>
         <member name="T:LJH.GeneralLibrary.SoftDog.SoftwareType">

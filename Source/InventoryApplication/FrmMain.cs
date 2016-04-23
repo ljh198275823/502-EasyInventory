@@ -97,6 +97,25 @@ namespace InventoryApplication
                 frm.ShowDialog();
                 System.Environment.Exit(0);
             }
+            else if (!string.IsNullOrEmpty(_SoftDog.MAC))
+            {
+                string[] auMac = _SoftDog.MAC.Split(',', '，');
+                string local = LJH.GeneralLibrary.Net.NetTool.GetLocalMAC();
+                if (string.IsNullOrEmpty(local))
+                {
+                    MessageBox.Show("软件不允许在此电脑上使用!", "注意");
+                    System.Environment.Exit(0);
+                }
+                var locMac = local.Split(',', '，');
+                if (locMac.Any(it => !string.IsNullOrEmpty(it) && auMac.Any(f => !string.IsNullOrEmpty(f) && it.Replace("-", string.Empty).ToUpper() == f.Replace("-", string.Empty).ToUpper())))
+                {
+                }
+                else
+                {
+                    MessageBox.Show("软件不允许在此电脑上使用!", "注意");
+                    System.Environment.Exit(0);
+                }
+            }
         }
 
         private void CheckHostDog()

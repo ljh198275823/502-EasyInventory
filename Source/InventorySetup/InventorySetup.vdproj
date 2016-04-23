@@ -1135,7 +1135,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_3E91B3A3DE8F431BB1919EDAF6D254EF"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder]\\Inventory"
+            "DefaultLocation" = "8:d:\\LJH\\Inventory"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -1206,7 +1206,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:易存企业管理系统"
         "ProductCode" = "8:{E5247BA0-745A-4F18-AE75-EC091FEEF386}"
-        "PackageCode" = "8:{8BA96865-811C-4791-B7F4-4BA2798A0FC1}"
+        "PackageCode" = "8:{BAAFF55C-0156-4DC1-8C59-FBF123F57A7F}"
         "UpgradeCode" = "8:{99D9C92D-53B2-4530-B7A1-CA7241289C18}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
