@@ -55,6 +55,11 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.OriginalWeight.HasValue) ret = ret.Where(it => it.OriginalWeight == con.OriginalWeight);
                 if (con.HasRemain) ret = ret.Where(item => item.Count > 0);
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(it => con.States.Contains(it.State));
+                if (con.Sliced.HasValue)
+                {
+                    if (con.Sliced.Value) ret = ret.Where(it => it.OriginalWeight > it.Weight);
+                    else ret = ret.Where(it => it.OriginalWeight == it.Weight);
+                }
             }
             var items = ret.ToList();
             if (items != null && items.Count > 0)

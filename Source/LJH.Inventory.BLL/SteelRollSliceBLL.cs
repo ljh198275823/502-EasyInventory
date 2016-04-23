@@ -108,7 +108,6 @@ namespace LJH.Inventory.BLL
             QueryResultList<ProductInventoryItem> ret = GetItems(con);
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
             {
-                List<Product> ps = ProviderFactory.Create<IProvider<Product, string>>(RepoUri).GetItems(null).QueryObjects;
                 var gs = from it in ret.QueryObjects
                          group it by new { it.ProductID };
                 foreach (var g in gs)
@@ -116,7 +115,7 @@ namespace LJH.Inventory.BLL
                     if (items == null) items = new List<SteelRollSlice>();
                     SteelRollSlice srs = new SteelRollSlice();
                     srs.ID = Guid.Empty;
-                    srs.Product = ps.SingleOrDefault(it => it.ID == g.First().ProductID);
+                    srs.Product = g.First().Product;
                     srs.Unit = g.First().Unit;
                     srs.WaitShipping = g.Sum(it => it.State == ProductInventoryState.WaitShipping ? it.Count : 0);
                     srs.Reserved = g.Sum(it => it.State == ProductInventoryState.Reserved ? it.Count : 0);
@@ -132,21 +131,6 @@ namespace LJH.Inventory.BLL
             if (con == null) con = new ProductInventoryItemSearchCondition();
             if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).ExcludeModel = MODEL;  //排除原材料库存项
             var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
-            if (ret.QueryObjects != null)
-            {
-                List<ProductInventoryItem> srs = new SteelRollBLL(RepoUri).GetItems(null).QueryObjects;
-                if (srs != null && srs.Count > 0)
-                {
-                    foreach (var item in ret.QueryObjects)
-                    {
-                        if (item.SourceRoll.HasValue)
-                        {
-                            var sr = srs.SingleOrDefault(it => it.ID == item.SourceRoll);
-                            if (sr != null) item.SourceRollWeight = sr.OriginalWeight;
-                        }
-                    }
-                }
-            }
             return ret;
         }
 

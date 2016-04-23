@@ -142,13 +142,13 @@ namespace InventoryApplication
         #region 事件处理程序
         private void Login_Load(object sender, EventArgs e)
         {
+            txtDBName.Text = (SoftDog != null && !string.IsNullOrEmpty(SoftDog.DBName)) ? SoftDog.DBName : DBNAME;
             if (!string.IsNullOrEmpty(AppSettings.Current.ConnStr))
             {
                 try
                 {
                     sb = new SqlConnectionStringBuilder(AppSettings.Current.ConnStr);
                     txtServer.Text = sb.DataSource;
-                    txtDBName.Text = (SoftDog != null && !string.IsNullOrEmpty(SoftDog.DBName)) ? SoftDog.DBName : DBNAME;
                 }
                 catch
                 {

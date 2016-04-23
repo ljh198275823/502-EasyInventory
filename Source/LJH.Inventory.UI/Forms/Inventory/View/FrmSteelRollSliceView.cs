@@ -24,12 +24,15 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
 
         public SteelRollSlice SteelRollSlice { get; set; }
 
-        List<Product> _Products = null;
+        List<ProductInventoryItem> srs = null;
 
         #region 重写基类方法
         protected override List<object> GetDataSource()
         {
-            _Products = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            var f = new ProductInventoryItemSearchCondition();
+            f.Sliced = true;
+            srs = new SteelRollBLL(AppSettings .Current .ConnStr ).GetItems(f).QueryObjects;
+           
             List<ProductInventoryItem> records = null;
             if (SearchCondition == null)
             {
@@ -70,7 +73,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
             row.Cells["colCustomer"].Value = c.Customer;
             row.Cells["colSourceRoll"].Value = c.SourceRoll.HasValue ? "查看来源卷" : null;
-            row.Cells["colSourceRollWeight"].Value = c.SourceRollWeight;
+            if (srs != null)
+            {
+                var source = srs.SingleOrDefault(it => it.ID == c.SourceRoll);
+                row.Cells["colSourceRollWeight"].Value = source != null ? source.OriginalWeight : null;
+            }
             row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion

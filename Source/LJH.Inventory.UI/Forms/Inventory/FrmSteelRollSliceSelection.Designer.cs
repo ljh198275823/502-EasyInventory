@@ -83,9 +83,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.ucFormViewMain);
             this.panel1.Controls.Add(this.splitter1);
@@ -232,6 +232,7 @@
             this.colSourceRollWeight.HeaderText = "来源卷重";
             this.colSourceRollWeight.Name = "colSourceRollWeight";
             this.colSourceRollWeight.ReadOnly = true;
+            this.colSourceRollWeight.Visible = false;
             this.colSourceRollWeight.Width = 80;
             // 
             // colCustomer

@@ -23,6 +23,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public bool HasRemain { get; set; }
 
+        public bool? Sliced { get; set; }
+
         public Guid? OrderItem { get; set; }
 
         public string OrderID { get; set; }

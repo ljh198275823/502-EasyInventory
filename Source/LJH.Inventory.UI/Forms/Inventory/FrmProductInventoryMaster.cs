@@ -26,6 +26,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         #region 私有变量
         private List<ProductInventoryItem> _ProductInventorys = null;
+        private List<ProductInventoryItem> srs = null; //表示加工源
         #endregion
 
         #region 私有方法
@@ -73,6 +74,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
+            var f = new ProductInventoryItemSearchCondition();
+            f.Sliced = true;
+            srs = new SteelRollBLL(AppSettings.Current.ConnStr).GetItems(f).QueryObjects;
+
             if (SearchCondition == null)
             {
                 _ProductInventorys = new SteelRollSliceBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
@@ -99,7 +104,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colOriginalThick"].Value = pi.OriginalThick;
             row.Cells["colRealThick"].Value = pi.RealThick;
             row.Cells["colSourceRoll"].Value = pi.SourceRoll.HasValue ? "查看来源卷" : null;
-            row.Cells["colSourceRollWeight"].Value = pi.SourceRollWeight;
+            if (srs != null && srs.Count > 0)
+            {
+                var source = srs.SingleOrDefault(it => it.ID == pi.SourceRoll);
+                row.Cells["colSourceRollWeight"].Value = source != null ? source.OriginalWeight : null;
+            }
             row.Cells["colCustomer"].Value = pi.Customer;
             row.Cells["colMemo"].Value = pi.Memo;
         }

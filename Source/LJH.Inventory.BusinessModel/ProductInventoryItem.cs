@@ -210,10 +210,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid? SourceRoll { get; set; }
         /// <summary>
-        /// 小件库存显示加工来源卷的入库重量，用于区别小件的来源卷
-        /// </summary>
-        public decimal? SourceRollWeight { get; set; }
-        /// <summary>
         /// 获取或设置入库操作员
         /// </summary>
         public string Operator { get; set; }
