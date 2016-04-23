@@ -148,6 +148,7 @@ namespace InventoryApplication
                 {
                     sb = new SqlConnectionStringBuilder(AppSettings.Current.ConnStr);
                     txtServer.Text = sb.DataSource;
+                    txtDBName.Text = (SoftDog != null && !string.IsNullOrEmpty(SoftDog.DBName)) ? SoftDog.DBName : DBNAME;
                 }
                 catch
                 {

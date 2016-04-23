@@ -76,7 +76,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SearchCondition == null)
             {
                 ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                con.States = (int)ProductInventoryState.UnShipped;
+                con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.WaitShipping, ProductInventoryState.Reserved };
                 con.HasRemain = true;
                 _ProductInventorys = bll.GetSteelRollSlices(con).QueryObjects;
             }
@@ -130,7 +130,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 )
+            if (e.RowIndex >= 0)
             {
                 if (!(dataGridView1.Columns[e.ColumnIndex] is DataGridViewLinkColumn)) return;
                 SteelRollSlice item = dataGridView1.Rows[e.RowIndex].Tag as SteelRollSlice;
@@ -139,15 +139,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 con.HasRemain = true;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colValid")
                 {
-                    con.States = (int)ProductInventoryState.Inventory;
+                    con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory };
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colWaitShipping")
                 {
-                    con.States = (int)ProductInventoryState.WaitShipping;
+                    con.States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping };
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTotal")
                 {
-                    con.States = (int)ProductInventoryState.UnShipped;
+                    con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.WaitShipping, ProductInventoryState.Reserved };
                 }
                 View.FrmSteelRollSliceView frm = new View.FrmSteelRollSliceView();
                 frm.SearchCondition = con;

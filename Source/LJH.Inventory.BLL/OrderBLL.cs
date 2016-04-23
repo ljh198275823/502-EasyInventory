@@ -36,7 +36,7 @@ namespace LJH.Inventory.BLL
             //首先取消订单的备货项
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
             con.OrderID = info.ID;
-            con.States = (int)ProductInventoryState.UnShipped;
+            con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.WaitShipping, ProductInventoryState.Reserved };
             List<ProductInventoryItem> items = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (items != null && items.Count > 0)
             {

@@ -33,7 +33,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             _FrmSteelRollSlice.ItemSelected += new EventHandler<GeneralLibrary.Core.UI.ItemSelectedEventArgs>(FrmSteelRollSlice_ItemSelected);
             var con = new ProductInventoryItemSearchCondition();
             con.HasRemain = true;
-            con.States = (int)(ProductInventoryState.Inventory | ProductInventoryState.Reserved);
+            con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.Reserved };
             _FrmSteelRollSlice.SearchCondition = con;
             this.ucFormViewMain.AddAForm(_FrmSteelRollSlice, false);
         }

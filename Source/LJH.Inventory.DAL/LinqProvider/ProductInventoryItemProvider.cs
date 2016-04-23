@@ -54,35 +54,19 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.SourceRoll.HasValue) ret = ret.Where(item => item.SourceRoll == con.SourceRoll);
                 if (con.OriginalWeight.HasValue) ret = ret.Where(it => it.OriginalWeight == con.OriginalWeight);
                 if (con.HasRemain) ret = ret.Where(item => item.Count > 0);
+                if (con.States != null && con.States.Count > 0) ret = ret.Where(it => con.States.Contains(it.State));
             }
             var items = ret.ToList();
             if (items != null && items.Count > 0)
             {
-                if (search is ProductInventoryItemSearchCondition)
+                List<Product> ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                List<WareHouse> ws = new WareHouseProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                foreach (var pi in items)
                 {
-                    ProductInventoryItemSearchCondition con = search as ProductInventoryItemSearchCondition;
-                    if (con.States.HasValue && con.States.Value > 0)
-                    {
-                        int s = con.States.Value;
-                        items = items.Where(it => ((s & (int)ProductInventoryState.Inventory) > 0 && it.State == ProductInventoryState.Inventory) ||
-                                                  ((s & (int)ProductInventoryState.Reserved) > 0 && it.State == ProductInventoryState.Reserved) ||
-                                                  ((s & (int)ProductInventoryState.WaitShipping) > 0 && it.State == ProductInventoryState.WaitShipping) ||
-                                                  ((s & (int)ProductInventoryState.Shipped) > 0 && it.State == ProductInventoryState.Shipped) ||
-                                                  ((s & (int)ProductInventoryState.Nullified) > 0 && it.State == ProductInventoryState.Nullified)
-                                           ).ToList();
-                    }
+                    pi.Product = ps.SingleOrDefault(it => it.ID == pi.ProductID);
+                    pi.WareHouse = ws.SingleOrDefault(it => it.ID == pi.WareHouseID);
                 }
-                if (items != null && items.Count > 0)
-                {
-                    List<Product> ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
-                    List<WareHouse> ws = new WareHouseProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
-                    foreach (var pi in items)
-                    {
-                        pi.Product = ps.SingleOrDefault(it => it.ID == pi.ProductID);
-                        pi.WareHouse = ws.SingleOrDefault(it => it.ID == pi.WareHouseID);
-                    }
-                    items.RemoveAll(it => it.Product == null || it.WareHouse == null);
-                }
+                items.RemoveAll(it => it.Product == null || it.WareHouse == null);
             }
             return items;
         }

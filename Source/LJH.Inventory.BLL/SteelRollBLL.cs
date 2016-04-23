@@ -111,11 +111,12 @@ namespace LJH.Inventory.BLL
         {
             if (con == null)
             {
-                con = new ProductInventoryItemSearchCondition() { Model = MODEL };
+                con = new ProductInventoryItemSearchCondition() { Model = MODEL,HasRemain =true  };
             }
             else if (con is ProductInventoryItemSearchCondition)
             {
                 (con as ProductInventoryItemSearchCondition).Model = MODEL;
+                (con as ProductInventoryItemSearchCondition).HasRemain = true;
             }
             var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
             if (ret.QueryObjects != null) ret.QueryObjects = ret.QueryObjects.Where(it => it.Count != 0).ToList();

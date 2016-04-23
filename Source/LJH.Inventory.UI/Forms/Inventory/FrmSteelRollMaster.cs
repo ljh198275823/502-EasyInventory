@@ -47,6 +47,25 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        private void InitBrand(ComboBox cmb)
+        {
+            cmb.Items.Clear();
+            CustomerSearchCondition con = new CustomerSearchCondition();
+            con.ClassID = CompanyClass.厂家;
+            List<CompanyInfo> cs = new CompanyBLL(AppSettings.Current.ConnStr).GetItems (con).QueryObjects;
+            if (cs != null && cs.Count > 0)
+            {
+                cmb.Items.Add(string.Empty);
+                var items = (from p in cs
+                             orderby p.Name ascending
+                             select p.Name);
+                foreach (var item in items)
+                {
+                    cmb.Items.Add(item);
+                }
+            }
+        }
+
         private void FreshData()
         {
             List<object> items = FilterData();
@@ -148,8 +167,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.customerCombobox1.Init();
             this.ucDateTimeInterval1.Init();
             this.ucDateTimeInterval1.SelectToday();
-            InitSupplier(cmbBrand);
+            InitBrand(cmbBrand);
             InitSupplier(cmbSupplier);
+            pnlStates.Enabled = !ForSelect;
         }
 
         public override void ShowOperatorRights()
@@ -185,7 +205,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var bll = new SteelRollBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
-                _SteelRolls = bll.GetItems(null).QueryObjects;
+                var con= new ProductInventoryItemSearchCondition();
+                con.HasRemain = true;
+                con.States = new List<ProductInventoryState>();
+                if (chk在库.Checked) con.States.Add(ProductInventoryState.Inventory);
+                if (chk发货.Checked) con.States.Add(ProductInventoryState.Shipped);
+                if (chk待发货.Checked) con.States.Add(ProductInventoryState.WaitShipping);
+                if (chk预订.Checked) con.States.Add(ProductInventoryState.Reserved);
+                if (chk作废.Checked) con.States.Add(ProductInventoryState.Nullified);
+                _SteelRolls = bll.GetItems(con).QueryObjects;
             }
             else
             {
@@ -269,6 +297,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void FreshData_Clicked(object sender, EventArgs e)
         {
             FreshData();
+        }
+
+        private void chk发货_CheckedChanged(object sender, EventArgs e)
+        {
+            cMnu_Fresh.PerformClick();
         }
 
         private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)

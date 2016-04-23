@@ -86,11 +86,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         }
                     }
                 }
-                items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
-                                        (item.State == SheetState.Approved && chkApproved.Checked) ||
-                                        (item.State == SheetState.Shipped && chkShipped.Checked) ||
-                                        (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
-                items = items.Where(item => (chkWithTax.Checked && item.WithTax) ||
+                if (items != null)
+                {
+                    items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
+                                            (item.State == SheetState.Approved && chkApproved.Checked) ||
+                                            (item.State == SheetState.Shipped && chkShipped.Checked) ||
+                                            (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+                }
+                if(items!=null ) items = items.Where(item => (chkWithTax.Checked && item.WithTax) ||
                                             (chkWithoutTax.Checked && !item.WithTax)).ToList();
             }
             List<object> objs = null;

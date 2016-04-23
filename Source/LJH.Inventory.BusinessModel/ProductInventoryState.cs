@@ -22,10 +22,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         WaitShipping = 0x04,
         /// <summary>
-        /// 所有未出货, 包括在库,已预定和待发货的
-        /// </summary>
-        UnShipped = 0x07,
-        /// <summary>
         /// 已发货
         /// </summary>
         Shipped = 0x08,

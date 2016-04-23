@@ -41,6 +41,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtLogName = new System.Windows.Forms.ComboBox();
             this.chkRememberLogid = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtDBName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.gpDB.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -98,11 +100,13 @@
             // gpDB
             // 
             this.gpDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gpDB.Controls.Add(this.txtDBName);
+            this.gpDB.Controls.Add(this.label4);
             this.gpDB.Controls.Add(this.txtServer);
             this.gpDB.Controls.Add(this.label3);
-            this.gpDB.Location = new System.Drawing.Point(12, 118);
+            this.gpDB.Location = new System.Drawing.Point(12, 117);
             this.gpDB.Name = "gpDB";
-            this.gpDB.Size = new System.Drawing.Size(436, 65);
+            this.gpDB.Size = new System.Drawing.Size(436, 94);
             this.gpDB.TabIndex = 5;
             this.gpDB.TabStop = false;
             this.gpDB.Text = "数据库设置";
@@ -118,11 +122,12 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 30);
+            this.label3.Location = new System.Drawing.Point(7, 30);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "数据库服务器：";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBox3
             // 
@@ -160,13 +165,32 @@
             this.chkRememberLogid.UseVisualStyleBackColor = true;
             this.chkRememberLogid.CheckedChanged += new System.EventHandler(this.chkRememberLogid_CheckedChanged);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 66);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "数据库名称：";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtDBName
+            // 
+            this.txtDBName.Enabled = false;
+            this.txtDBName.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtDBName.Location = new System.Drawing.Point(99, 60);
+            this.txtDBName.Name = "txtDBName";
+            this.txtDBName.Size = new System.Drawing.Size(331, 21);
+            this.txtDBName.TabIndex = 4;
+            // 
             // FrmLoginDog
             // 
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(463, 195);
+            this.ClientSize = new System.Drawing.Size(463, 216);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.gpDB);
             this.Controls.Add(this.btnLogin);
@@ -201,5 +225,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox chkRememberLogid;
         public System.Windows.Forms.ComboBox txtLogName;
+        private LJH.GeneralLibrary.WinformControl.DBCTextBox txtDBName;
+        private System.Windows.Forms.Label label4;
     }
 }

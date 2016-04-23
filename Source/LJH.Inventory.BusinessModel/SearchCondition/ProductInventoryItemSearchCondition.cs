@@ -19,7 +19,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public string WareHouseID { get; set; }
 
-        public int? States { get; set; }
+        public List<ProductInventoryState> States { get; set; }
 
         public bool HasRemain { get; set; }
 
