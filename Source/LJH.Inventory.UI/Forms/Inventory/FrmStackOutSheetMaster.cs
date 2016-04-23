@@ -35,6 +35,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ShowItemsOnGrid(objs);
         }
 
+        private DateTimeRange GetDateTimeRange()
+        {
+            if (chkSheetDate.Checked)
+            {
+                return new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            }
+            if (UserSettings.Current != null)
+            {
+                if (UserSettings.Current.LoadSheetsBefore == 0) return new DateTimeRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now);
+                return new DateTimeRange(DateTime.Today.AddMonths(-UserSettings.Current.LoadSheetsBefore), DateTime.Now);
+            }
+            return new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
+        }
+
         private List<object> FilterData()
         {
             List<StackOutSheet> items = _Sheets;
@@ -87,8 +101,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ReFreshData()
         {
             customerTree1.Init();
-            this.ucDateTimeInterval1.Init();
-            this.ucDateTimeInterval1.SelectThisMonth();
             base.ReFreshData();
         }
 
@@ -113,7 +125,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SearchCondition == null)
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
-                con.LastActiveDate = new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
+                con.LastActiveDate = GetDateTimeRange();
                 _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
@@ -161,7 +173,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 事件处理程序
         private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
         {
-            if (chkSheetDate.Checked) FreshData();
+            if (chkSheetDate.Checked) cMnu_Fresh.PerformClick();
         }
 
         private void FreshData_Clicked(object sender, TreeNodeMouseClickEventArgs e)
@@ -172,6 +184,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void FreshData_Clicked(object sender, EventArgs e)
         {
             FreshData();
+        }
+
+        private void chkSheetDate_CheckedChanged(object sender, EventArgs e)
+        {
+            cMnu_Fresh.PerformClick();
         }
 
         private void mnu_AddSheet_Click(object sender, EventArgs e)

@@ -39,6 +39,9 @@
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnLast3Month = new System.Windows.Forms.Button();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -73,9 +76,6 @@
             this.colDriverCall = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarPlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtCustomer = new System.Windows.Forms.TextBox();
-            this.btnLast3Month = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -154,6 +154,34 @@
             this.panel5.Size = new System.Drawing.Size(1242, 87);
             this.panel5.TabIndex = 6;
             // 
+            // btnLast3Month
+            // 
+            this.btnLast3Month.Location = new System.Drawing.Point(320, 36);
+            this.btnLast3Month.Name = "btnLast3Month";
+            this.btnLast3Month.Size = new System.Drawing.Size(75, 34);
+            this.btnLast3Month.TabIndex = 137;
+            this.btnLast3Month.Text = "最近三个月";
+            this.btnLast3Month.UseVisualStyleBackColor = true;
+            this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCustomer.Location = new System.Drawing.Point(670, 24);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(235, 30);
+            this.txtCustomer.TabIndex = 136;
+            this.txtCustomer.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(635, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 135;
+            this.label2.Text = "客户";
+            // 
             // ucDateTimeInterval1
             // 
             this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -175,7 +203,7 @@
             this.chkSheetDate.TabIndex = 133;
             this.chkSheetDate.Text = "开单日期";
             this.chkSheetDate.UseVisualStyleBackColor = true;
-            this.chkSheetDate.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.chkSheetDate.CheckedChanged += new System.EventHandler(this.chkSheetDate_CheckedChanged);
             // 
             // label3
             // 
@@ -488,34 +516,6 @@
             this.colMemo.MinimumWidth = 100;
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(635, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 135;
-            this.label2.Text = "客户";
-            // 
-            // txtCustomer
-            // 
-            this.txtCustomer.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCustomer.Location = new System.Drawing.Point(670, 24);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(235, 30);
-            this.txtCustomer.TabIndex = 136;
-            this.txtCustomer.TextChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // btnLast3Month
-            // 
-            this.btnLast3Month.Location = new System.Drawing.Point(320, 36);
-            this.btnLast3Month.Name = "btnLast3Month";
-            this.btnLast3Month.Size = new System.Drawing.Size(75, 34);
-            this.btnLast3Month.TabIndex = 137;
-            this.btnLast3Month.Text = "最近三个月";
-            this.btnLast3Month.UseVisualStyleBackColor = true;
-            this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
             // 
             // FrmStackOutSheetMaster
             // 

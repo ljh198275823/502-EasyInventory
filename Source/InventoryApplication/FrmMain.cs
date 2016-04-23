@@ -92,6 +92,25 @@ namespace InventoryApplication
                 MessageBox.Show("软件已经过期，请联系厂家延长期限!", "注意");
                 System.Environment.Exit(0);
             }
+            else if (!string.IsNullOrEmpty(_SoftDog.MAC))
+            {
+                string[] auMac = _SoftDog.MAC.Split(',', '，');
+                string local = LJH.GeneralLibrary.Net.NetTool.GetLocalMAC();
+                if (string.IsNullOrEmpty(local))
+                {
+                    MessageBox.Show("软件不允许在此电脑上使用!", "注意");
+                    System.Environment.Exit(0);
+                }
+                var locMac = local.Split(',', '，');
+                if (locMac.Any(it => !string.IsNullOrEmpty(it) && auMac.Any(f => !string.IsNullOrEmpty(f) && it.Replace("-", string.Empty).ToUpper() == f.Replace("-", string.Empty).ToUpper())))
+                {
+                }
+                else
+                {
+                    MessageBox.Show("软件不允许在此电脑上使用!", "注意");
+                    System.Environment.Exit(0);
+                }
+            }
         }
 
         private void CheckHostDog()
@@ -125,12 +144,12 @@ namespace InventoryApplication
                             Environment.Exit(0);
                         }
                         DateTime now = DateTime.Now;
-                        if (hostLastDate.AddDays(10) < now)//超过7天就退出软件
+                        if (hostLastDate.AddDays(10) < now)//超过10天就退出软件
                         {
                             MessageBox.Show("主机加密狗处于长时间离线状态，系统即将退出，你可以用主机加密狗登录或者联系供应商");
                             Environment.Exit(0);
                         }
-                        else if (hostLastDate.AddDays(1) < now) //主机狗超过3天没有登录
+                        else if (hostLastDate.AddDays(1) < now) //主机狗超过1天没有登录
                         {
                             tmrSoftDogChecker.Enabled = false;
                             MessageBox.Show("主机加密狗处于长时间离线状态，为了避免软件被锁定，请及时让主机加密狗处于在线状态", "软件过期", MessageBoxButtons.OK, MessageBoxIcon.Error);

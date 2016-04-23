@@ -63,6 +63,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string OrderID { get; set; }
         /// <summary>
+        /// 获取订单项添加的时间
+        /// </summary>
+        public DateTime? AddDate { get; set; }
+        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }

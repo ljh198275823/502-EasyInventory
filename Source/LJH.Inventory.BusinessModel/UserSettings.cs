@@ -156,6 +156,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [DataMember]
         public InventoryOutType InventoryOutType { get; set; }
+        /// <summary>
+        /// 获取或设置加载多少个月之前的送货单 0表示本月，1表示最近一月，依此类推
+        /// </summary>
+        [DataMember]
+        public int LoadSheetsBefore { get; set; }
         #endregion
           
         #region 自动生成单号  

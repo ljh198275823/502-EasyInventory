@@ -128,11 +128,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabDelivery = new System.Windows.Forms.TabPage();
-            this.chkForbidWhenNoOrderID = new System.Windows.Forms.CheckBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.rdFILO = new System.Windows.Forms.RadioButton();
-            this.rdFIFO = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtDeadlineDays = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
@@ -164,13 +159,19 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label83 = new System.Windows.Forms.Label();
+            this.txtLoadSheetsBefore = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
+            this.rdLoadSheetsBefore = new System.Windows.Forms.RadioButton();
+            this.rdOnlyThisMonth = new System.Windows.Forms.RadioButton();
+            this.label84 = new System.Windows.Forms.Label();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tab1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -1206,9 +1207,8 @@
             // tabDelivery
             // 
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
-            this.tabDelivery.Controls.Add(this.chkForbidWhenNoOrderID);
-            this.tabDelivery.Controls.Add(this.panel2);
-            this.tabDelivery.Controls.Add(this.label1);
+            this.tabDelivery.Controls.Add(this.panel3);
+            this.tabDelivery.Controls.Add(this.label84);
             this.tabDelivery.Controls.Add(this.label6);
             this.tabDelivery.Controls.Add(this.txtDeadlineDays);
             this.tabDelivery.Controls.Add(this.label5);
@@ -1221,60 +1221,10 @@
             this.tabDelivery.TabIndex = 0;
             this.tabDelivery.Text = "送货单";
             // 
-            // chkForbidWhenNoOrderID
-            // 
-            this.chkForbidWhenNoOrderID.AutoSize = true;
-            this.chkForbidWhenNoOrderID.Location = new System.Drawing.Point(16, 18);
-            this.chkForbidWhenNoOrderID.Name = "chkForbidWhenNoOrderID";
-            this.chkForbidWhenNoOrderID.Size = new System.Drawing.Size(156, 16);
-            this.chkForbidWhenNoOrderID.TabIndex = 0;
-            this.chkForbidWhenNoOrderID.Text = "送货单项需要指定订单项";
-            this.chkForbidWhenNoOrderID.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.rdFILO);
-            this.panel2.Controls.Add(this.rdFIFO);
-            this.panel2.Location = new System.Drawing.Point(96, 101);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(242, 26);
-            this.panel2.TabIndex = 42;
-            // 
-            // rdFILO
-            // 
-            this.rdFILO.AutoSize = true;
-            this.rdFILO.Location = new System.Drawing.Point(123, 5);
-            this.rdFILO.Name = "rdFILO";
-            this.rdFILO.Size = new System.Drawing.Size(107, 16);
-            this.rdFILO.TabIndex = 7;
-            this.rdFILO.Text = "先进后出(FILO)";
-            this.rdFILO.UseVisualStyleBackColor = true;
-            // 
-            // rdFIFO
-            // 
-            this.rdFIFO.AutoSize = true;
-            this.rdFIFO.Checked = true;
-            this.rdFIFO.Location = new System.Drawing.Point(5, 5);
-            this.rdFIFO.Name = "rdFIFO";
-            this.rdFIFO.Size = new System.Drawing.Size(107, 16);
-            this.rdFIFO.TabIndex = 6;
-            this.rdFIFO.TabStop = true;
-            this.rdFIFO.Text = "先进先出(FIFO)";
-            this.rdFIFO.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
-            this.label1.TabIndex = 41;
-            this.label1.Text = "库存出库方式";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(268, 78);
+            this.label6.Location = new System.Drawing.Point(268, 53);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(245, 12);
             this.label6.TabIndex = 40;
@@ -1283,7 +1233,7 @@
             // txtDeadlineDays
             // 
             this.txtDeadlineDays.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 74);
+            this.txtDeadlineDays.Location = new System.Drawing.Point(217, 49);
             this.txtDeadlineDays.MaxValue = 2147483647;
             this.txtDeadlineDays.MinValue = 0;
             this.txtDeadlineDays.Name = "txtDeadlineDays";
@@ -1294,7 +1244,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 78);
+            this.label5.Location = new System.Drawing.Point(14, 53);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(185, 12);
             this.label5.TabIndex = 38;
@@ -1305,7 +1255,7 @@
             this.panel1.Controls.Add(this.rdForbid);
             this.panel1.Controls.Add(this.rdNone);
             this.panel1.Controls.Add(this.rdReminder);
-            this.panel1.Location = new System.Drawing.Point(217, 41);
+            this.panel1.Location = new System.Drawing.Point(217, 16);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(242, 26);
             this.panel1.TabIndex = 36;
@@ -1345,7 +1295,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 48);
+            this.label7.Location = new System.Drawing.Point(14, 23);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(197, 12);
             this.label7.TabIndex = 35;
@@ -1608,6 +1558,68 @@
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label83);
+            this.panel3.Controls.Add(this.txtLoadSheetsBefore);
+            this.panel3.Controls.Add(this.rdLoadSheetsBefore);
+            this.panel3.Controls.Add(this.rdOnlyThisMonth);
+            this.panel3.Location = new System.Drawing.Point(85, 77);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(374, 26);
+            this.panel3.TabIndex = 49;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(249, 7);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(77, 12);
+            this.label83.TabIndex = 69;
+            this.label83.Text = "个月的送货单";
+            // 
+            // txtLoadSheetsBefore
+            // 
+            this.txtLoadSheetsBefore.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLoadSheetsBefore.Location = new System.Drawing.Point(215, 3);
+            this.txtLoadSheetsBefore.MaxValue = 20;
+            this.txtLoadSheetsBefore.MinValue = 1;
+            this.txtLoadSheetsBefore.Name = "txtLoadSheetsBefore";
+            this.txtLoadSheetsBefore.Size = new System.Drawing.Size(31, 21);
+            this.txtLoadSheetsBefore.TabIndex = 68;
+            this.txtLoadSheetsBefore.Text = "1";
+            // 
+            // rdLoadSheetsBefore
+            // 
+            this.rdLoadSheetsBefore.AutoSize = true;
+            this.rdLoadSheetsBefore.Location = new System.Drawing.Point(144, 5);
+            this.rdLoadSheetsBefore.Name = "rdLoadSheetsBefore";
+            this.rdLoadSheetsBefore.Size = new System.Drawing.Size(71, 16);
+            this.rdLoadSheetsBefore.TabIndex = 4;
+            this.rdLoadSheetsBefore.Text = "显示最近";
+            this.rdLoadSheetsBefore.UseVisualStyleBackColor = true;
+            // 
+            // rdOnlyThisMonth
+            // 
+            this.rdOnlyThisMonth.AutoSize = true;
+            this.rdOnlyThisMonth.Checked = true;
+            this.rdOnlyThisMonth.Location = new System.Drawing.Point(5, 5);
+            this.rdOnlyThisMonth.Name = "rdOnlyThisMonth";
+            this.rdOnlyThisMonth.Size = new System.Drawing.Size(119, 16);
+            this.rdOnlyThisMonth.TabIndex = 2;
+            this.rdOnlyThisMonth.TabStop = true;
+            this.rdOnlyThisMonth.Text = "只显示本月送货单";
+            this.rdOnlyThisMonth.UseVisualStyleBackColor = true;
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(14, 84);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(65, 12);
+            this.label84.TabIndex = 48;
+            this.label84.Text = "送货单管理";
+            // 
             // FrmSystemOptions
             // 
             this.AcceptButton = this.btnOk;
@@ -1628,8 +1640,6 @@
             this.tabAutoCreater.PerformLayout();
             this.tabDelivery.ResumeLayout(false);
             this.tabDelivery.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tab1.ResumeLayout(false);
@@ -1637,6 +1647,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1656,10 +1668,6 @@
         private System.Windows.Forms.RadioButton rdReminder;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabControl tab1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton rdFILO;
-        private System.Windows.Forms.RadioButton rdFIFO;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private GeneralLibrary.WinformControl.IntergerTextBox txtDeliverySheetNum;
@@ -1744,7 +1752,6 @@
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.CheckBox chkForbidWhenNoOrderID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.Label label68;
@@ -1777,5 +1784,11 @@
         private System.Windows.Forms.Label label82;
         private GeneralLibrary.WinformControl.DecimalTextBox txtBecomeRemainlessAt;
         private GeneralLibrary.WinformControl.DecimalTextBox txtBecomeTailAt;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label83;
+        private GeneralLibrary.WinformControl.IntergerTextBox txtLoadSheetsBefore;
+        private System.Windows.Forms.RadioButton rdLoadSheetsBefore;
+        private System.Windows.Forms.RadioButton rdOnlyThisMonth;
+        private System.Windows.Forms.Label label84;
     }
 }

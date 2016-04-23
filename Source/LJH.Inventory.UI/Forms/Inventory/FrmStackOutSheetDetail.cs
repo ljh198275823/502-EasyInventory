@@ -82,40 +82,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             row.Tag = item;
             Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
-            if (item.ID == Guid.Empty)
+            row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
+            row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
+            row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
+            if (item.InventoryItem.HasValue)
             {
-                row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
-                row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
-                row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
-                row.Cells["colModel"].Value = p.Model;
-                row.Cells["colLength"].Value = item.Length;
-                row.Cells["colWeight"].Value = item.TotalWeight;
-                row.Cells["colPrice"].Value = item.Price;
-                row.Cells["colCount"].Value = item.Count;
-                row.Cells["colTotal"].Value = item.Amount;
-                row.Cells["colMemo"].Value = item.Memo;
-                row.Cells["colCount"].ReadOnly = true;
+                var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
+                row.Cells["colMaterial"].Value = pi != null ? pi.Material : null;
             }
-            else
-            {
-                ProductInventoryItem pi = null;
-                if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { DeliveryItem = item.ID };
-                var assigns = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
-                row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
-                row.Cells["colWeight"].Value = pi != null ? (pi.RealThick.HasValue ? (decimal?)pi.RealThick : (decimal?)pi.OriginalThick) : null;
-                row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
-                row.Cells["colCount"].Value = item.Count;
-                decimal maxCount = (assigns == null || assigns.Count == 0) ? pi.Count : pi.Count + assigns.Sum(it => it.Count); //
-                row.Cells["colTotal"].Value = maxCount - item.Count;
-                row.Cells["colTotal"].Tag = maxCount;
-                row.Cells["colTotal"].Style.Format = "N0";
-                row.Cells["colMemo"].Value = pi != null ? pi.Memo : null;
-
-                row.Cells["colWeight"].ReadOnly = true;
-                row.Cells["colPrice"].ReadOnly = true;
-                row.Cells["colMemo"].ReadOnly = true;
-            }
+            row.Cells["colLength"].Value = item.Length;
+            row.Cells["colWeight"].Value = item.TotalWeight;
+            row.Cells["colPrice"].Value = item.Price;
+            row.Cells["colCount"].Value = item.Count;
+            row.Cells["colTotal"].Value = item.Amount;
+            row.Cells["colMemo"].Value = item.Memo;
+            row.Cells["colCount"].ReadOnly = true;
         }
         #endregion
 
@@ -410,29 +391,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         row.Cells[e.ColumnIndex].Value = value;
                         row.Cells["colTotal"].Value = item.Amount;
                     }
-                    else if (col.Name == "colCount")
-                    {
-                        if (value <= Convert.ToInt32(row.Cells["colTotal"].Tag)) //数量不能超出库存项的数量
-                        {
-                            item.Count = value;
-                            row.Cells["colTotal"].Value = Convert.ToInt32(row.Cells["colTotal"].Tag) - item.Count;
-                        }
-                        else
-                        {
-                            row.Cells[e.ColumnIndex].Value = item.Count;
-                        }
-                        for (int i = e.RowIndex; i >= 0; i--) //找合并送货单项的行
-                        {
-                            var si = ItemsGrid.Rows[i].Tag as StackOutItem;
-                            if (si.ID == Guid.Empty && si.ProductID == item.ProductID)
-                            {
-                                si.Count = sheet.Items.Sum(it => it.ProductID == item.ProductID ? it.Count : 0);
-                                ItemsGrid.Rows[i].Cells["colCount"].Value = si.Count;
-                                ItemsGrid.Rows[i].Cells["colTotal"].Value = si.Amount;
-                                break;
-                            }
-                        }
-                    }
                     else if (col.Name == "colWeight")
                     {
                         item.TotalWeight = value > 0 ? (decimal?)value : null;
@@ -444,49 +402,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         row.Cells["colTotal"].Value = item.Amount;
                     }
                     ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
-                }
-            }
-        }
-
-        private void ItemsGrid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DataGridViewColumn col = ItemsGrid.Columns[e.ColumnIndex];
-            if (col.Name != "colCount") return;
-            DataGridViewRow row = ItemsGrid.Rows[e.RowIndex];
-            StackOutSheet sheet = UpdatingItem as StackOutSheet;
-            StackOutItem item = row.Tag as StackOutItem;
-            if (item == null || item.ID != Guid.Empty) return; //没有点在合并的列上, 不动作
-            List<DataGridViewRow> delingRows = new List<DataGridViewRow>();
-            for (int i = e.RowIndex + 1; i < ItemsGrid.Rows.Count; i++)
-            {
-                StackOutItem d = ItemsGrid.Rows[i].Tag as StackOutItem;
-                if (d != null && d.ProductID == item.ProductID && d.ID != Guid.Empty) //如果下一行是同一种产品，则说明可以合并起来
-                {
-                    delingRows.Add(ItemsGrid.Rows[i]);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            if (delingRows.Count > 0) //之前已经展开,则收起
-            {
-                foreach (var dr in delingRows)
-                {
-                    ItemsGrid.Rows.Remove(dr);
-                }
-            }
-            else //之前没有展开,展开
-            {
-                int rowIndex = e.RowIndex + 1;
-                foreach (var si in sheet.Items)
-                {
-                    if (item.ProductID == si.ProductID)
-                    {
-                        ItemsGrid.Rows.Insert(rowIndex);
-                        ShowDeliveryItemOnRow(ItemsGrid.Rows[rowIndex], si);
-                        rowIndex++;
-                    }
                 }
             }
         }
