@@ -23,9 +23,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             InitializeComponent();
         }
 
-        private List<WareHouse> _AllWareHouses = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-        private List<ProductCategory> _Categories = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-        private List<CompanyInfo> _AllSuppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
+        private List<WareHouse> _AllWareHouses = null;
+        private List<ProductCategory> _Categories = null;
+        private List<CompanyInfo> _AllSuppliers = null;
 
         #region 私有方法
         private void ClearData()
@@ -250,6 +250,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btnImport_Click(object sender, EventArgs e)
         {
+            _AllWareHouses = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            _Categories = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            _AllSuppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
+
             int total = dataGridView1.Rows.Count - txtFirstRow.IntergerValue + 1;
             if (total == 0) return;
             int firstRow = txtFirstRow.IntergerValue;
