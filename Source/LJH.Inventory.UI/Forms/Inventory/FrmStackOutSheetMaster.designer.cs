@@ -59,11 +59,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pnlLeft = new System.Windows.Forms.Panel();
-            this.customerTree1 = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddSheet = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,7 +84,6 @@
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.pnlLeft.SuspendLayout();
             this.CategoryMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -345,29 +341,6 @@
             this.panel3.Size = new System.Drawing.Size(1, 87);
             this.panel3.TabIndex = 3;
             // 
-            // pnlLeft
-            // 
-            this.pnlLeft.Controls.Add(this.customerTree1);
-            this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlLeft.Location = new System.Drawing.Point(0, 87);
-            this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(281, 396);
-            this.pnlLeft.TabIndex = 114;
-            // 
-            // customerTree1
-            // 
-            this.customerTree1.ContextMenuStrip = this.CategoryMenu;
-            this.customerTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customerTree1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.customerTree1.HideSelection = false;
-            this.customerTree1.ItemHeight = 20;
-            this.customerTree1.LoadCustomer = true;
-            this.customerTree1.Location = new System.Drawing.Point(0, 0);
-            this.customerTree1.Name = "customerTree1";
-            this.customerTree1.Size = new System.Drawing.Size(281, 396);
-            this.customerTree1.TabIndex = 0;
-            this.customerTree1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.FreshData_Clicked);
-            // 
             // CategoryMenu
             // 
             this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -381,15 +354,6 @@
             this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
             this.mnu_AddSheet.Text = "新建送货单";
             this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
-            // 
-            // splitter1
-            // 
-            this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitter1.Location = new System.Drawing.Point(281, 87);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 396);
-            this.splitter1.TabIndex = 115;
-            this.splitter1.TabStop = false;
             // 
             // dataGridView1
             // 
@@ -418,14 +382,14 @@
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(289, 87);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 87);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 20;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(955, 396);
+            this.dataGridView1.Size = new System.Drawing.Size(1244, 396);
             this.dataGridView1.TabIndex = 116;
             // 
             // colSheetDate
@@ -560,14 +524,10 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1244, 505);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.pnlFilter);
             this.Name = "FrmStackOutSheetMaster";
             this.Text = "送货单管理";
             this.Controls.SetChildIndex(this.pnlFilter, 0);
-            this.Controls.SetChildIndex(this.pnlLeft, 0);
-            this.Controls.SetChildIndex(this.splitter1, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.contextMenuStrip1.ResumeLayout(false);
             this.pnlFilter.ResumeLayout(false);
@@ -577,7 +537,6 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.pnlLeft.ResumeLayout(false);
             this.CategoryMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -601,9 +560,6 @@
         private System.Windows.Forms.CheckBox chkApproved;
         private System.Windows.Forms.CheckBox chkAdded;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel pnlLeft;
-        private Controls.CustomerTree customerTree1;
-        private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.CheckBox chkShipped;
         private System.Windows.Forms.ContextMenuStrip CategoryMenu;

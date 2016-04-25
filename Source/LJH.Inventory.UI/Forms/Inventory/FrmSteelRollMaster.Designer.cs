@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblOriginalTotal = new System.Windows.Forms.Label();
@@ -518,8 +518,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
@@ -555,18 +555,18 @@
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle20.Format = "N3";
-            dataGridViewCellStyle20.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colOriginalWeight.HeaderText = "入库重量";
             this.colOriginalWeight.Name = "colOriginalWeight";
             this.colOriginalWeight.ReadOnly = true;
             // 
             // colOriginalLength
             // 
-            dataGridViewCellStyle30.Format = "N3";
-            dataGridViewCellStyle30.NullValue = null;
-            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colOriginalLength.HeaderText = "入库长度";
             this.colOriginalLength.Name = "colOriginalLength";
             this.colOriginalLength.ReadOnly = true;
@@ -574,18 +574,18 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle31.Format = "N3";
-            dataGridViewCellStyle31.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colWeight.HeaderText = "剩余重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colLength
             // 
-            dataGridViewCellStyle32.Format = "N3";
-            dataGridViewCellStyle32.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle4.Format = "N3";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
             this.colLength.HeaderText = "剩余长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
@@ -593,9 +593,9 @@
             // 
             // colOriginalThick
             // 
-            dataGridViewCellStyle33.Format = "N3";
-            dataGridViewCellStyle33.NullValue = null;
-            this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle5.Format = "N3";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle5;
             this.colOriginalThick.HeaderText = "入库厚度";
             this.colOriginalThick.Name = "colOriginalThick";
             this.colOriginalThick.ReadOnly = true;
@@ -603,9 +603,9 @@
             // 
             // colRealThick
             // 
-            dataGridViewCellStyle34.Format = "N3";
-            dataGridViewCellStyle34.NullValue = null;
-            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle6.Format = "N3";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle6;
             this.colRealThick.HeaderText = "开平厚度";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
@@ -656,8 +656,8 @@
             // 
             // colPurchasePrice
             // 
-            dataGridViewCellStyle35.Format = "C2";
-            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle7.Format = "C2";
+            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPurchasePrice.HeaderText = "吨价";
             this.colPurchasePrice.Name = "colPurchasePrice";
             this.colPurchasePrice.ReadOnly = true;
@@ -671,16 +671,16 @@
             // 
             // colTransCost
             // 
-            dataGridViewCellStyle36.Format = "C2";
-            this.colTransCost.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle8.Format = "C2";
+            this.colTransCost.DefaultCellStyle = dataGridViewCellStyle8;
             this.colTransCost.HeaderText = "运输费用";
             this.colTransCost.Name = "colTransCost";
             this.colTransCost.ReadOnly = true;
             // 
             // colOtherCost
             // 
-            dataGridViewCellStyle37.Format = "C2";
-            this.colOtherCost.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle9.Format = "C2";
+            this.colOtherCost.DefaultCellStyle = dataGridViewCellStyle9;
             this.colOtherCost.HeaderText = "其它费用";
             this.colOtherCost.Name = "colOtherCost";
             this.colOtherCost.ReadOnly = true;
@@ -720,133 +720,133 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 380);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 402);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "原材料入库";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // mnu_开平
             // 
             this.mnu_开平.Name = "mnu_开平";
-            this.mnu_开平.Size = new System.Drawing.Size(148, 22);
+            this.mnu_开平.Size = new System.Drawing.Size(152, 22);
             this.mnu_开平.Text = "开平";
             this.mnu_开平.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_开卷
             // 
             this.mnu_开卷.Name = "mnu_开卷";
-            this.mnu_开卷.Size = new System.Drawing.Size(148, 22);
+            this.mnu_开卷.Size = new System.Drawing.Size(152, 22);
             this.mnu_开卷.Text = "开卷";
             this.mnu_开卷.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_开条
             // 
             this.mnu_开条.Name = "mnu_开条";
-            this.mnu_开条.Size = new System.Drawing.Size(148, 22);
+            this.mnu_开条.Size = new System.Drawing.Size(152, 22);
             this.mnu_开条.Text = "开条";
             this.mnu_开条.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_开吨
             // 
             this.mnu_开吨.Name = "mnu_开吨";
-            this.mnu_开吨.Size = new System.Drawing.Size(148, 22);
+            this.mnu_开吨.Size = new System.Drawing.Size(152, 22);
             this.mnu_开吨.Text = "开吨";
             this.mnu_开吨.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_SliceView
             // 
             this.mnu_SliceView.Name = "mnu_SliceView";
-            this.mnu_SliceView.Size = new System.Drawing.Size(148, 22);
+            this.mnu_SliceView.Size = new System.Drawing.Size(152, 22);
             this.mnu_SliceView.Text = "查看加工记录";
             this.mnu_SliceView.Click += new System.EventHandler(this.mnu_SliceView_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // 更换仓库ToolStripMenuItem
             // 
             this.更换仓库ToolStripMenuItem.Name = "更换仓库ToolStripMenuItem";
-            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.更换仓库ToolStripMenuItem.Text = "更换仓库";
             this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
             // 
             // mnu_Check
             // 
             this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Check.Size = new System.Drawing.Size(152, 22);
             this.mnu_Check.Text = "盘点";
             this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
             // 
             // mnu_CheckView
             // 
             this.mnu_CheckView.Name = "mnu_CheckView";
-            this.mnu_CheckView.Size = new System.Drawing.Size(148, 22);
+            this.mnu_CheckView.Size = new System.Drawing.Size(152, 22);
             this.mnu_CheckView.Text = "查看盘点记录";
             this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
             // 
             // mnu_Nullify
             // 
             this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Nullify.Size = new System.Drawing.Size(152, 22);
             this.mnu_Nullify.Text = "作废";
             this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // 预订ToolStripMenuItem
             // 
             this.预订ToolStripMenuItem.Name = "预订ToolStripMenuItem";
-            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.预订ToolStripMenuItem.Text = "预订";
             this.预订ToolStripMenuItem.Click += new System.EventHandler(this.预订ToolStripMenuItem_Click);
             // 
             // 取消预订ToolStripMenuItem
             // 
             this.取消预订ToolStripMenuItem.Name = "取消预订ToolStripMenuItem";
-            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.取消预订ToolStripMenuItem.Text = "取消预订";
             this.取消预订ToolStripMenuItem.Click += new System.EventHandler(this.取消预订ToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
             this.cMnu_SelectColumns.Text = "选择列...";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             // 
             // mnu_Import
             // 
             this.mnu_Import.Name = "mnu_Import";
-            this.mnu_Import.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Import.Size = new System.Drawing.Size(152, 22);
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 

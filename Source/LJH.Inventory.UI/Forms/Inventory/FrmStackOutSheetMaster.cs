@@ -57,22 +57,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<StackOutSheet> items = _Sheets;
             if (items != null && items.Count > 0)
             {
-                if (this.customerTree1.SelectedNode != null)
-                {
-                    List<CompanyInfo> pcs = null;
-                    pcs = this.customerTree1.GetCompanyofNode(this.customerTree1.SelectedNode);
-                    if (pcs != null && pcs.Count > 0)
-                    {
-                        items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
-                    }
-                    else
-                    {
-                        items = null;
-                    }
-                }
                 if (!string.IsNullOrEmpty(txtCustomer.Text))
                 {
-                    if (_AllCustomers == null) _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
                     if (_AllCustomers != null)
                     {
                         List<CompanyInfo> pcs = _AllCustomers.Where(it => it.Name.Contains(txtCustomer.Text)).ToList();
@@ -110,12 +96,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.ucDateTimeInterval1.SelectThisMonth();
         }
 
-        public override void ReFreshData()
-        {
-            customerTree1.Init();
-            base.ReFreshData();
-        }
-
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
@@ -126,14 +106,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override FrmDetailBase GetDetailForm()
         {
             FrmStackOutSheetDetail frm = new FrmStackOutSheetDetail();
-            var customer = (customerTree1.SelectedNode != null) ? customerTree1.SelectedNode.Tag as CompanyInfo : null;
             frm.IsAdding = true;
-            frm.UpdatingItem = StackOutSheet.Create(customer, null);
+            frm.UpdatingItem = StackOutSheet.Create(null, null);
             return frm;
         }
 
         protected override List<object> GetDataSource()
         {
+            if (_AllCustomers == null) _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
             if (SearchCondition == null)
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
@@ -172,7 +152,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Tag = sheet;
             row.Cells["colSheetDate"].Value = sheet.SheetDate.ToString("yyyy年MM月dd日");
             row.Cells["colSheetNo"].Value = sheet.ID;
-            CompanyInfo customer = customerTree1.GetCustomer(sheet.CustomerID);
+            CompanyInfo customer = _AllCustomers != null ? _AllCustomers.SingleOrDefault(it => it.ID == sheet.CustomerID) : null;
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
             row.Cells["colFileID"].Value = customer != null ? customer.FileID : null;
             row.Cells["colWithTax"].Value = sheet.WithTax;

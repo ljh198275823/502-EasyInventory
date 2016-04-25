@@ -29,16 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollImport));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btn产品类别管理 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn仓库管理 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn供应商管理 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn客户管理 = new System.Windows.Forms.ToolStripButton();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtFirstRow = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
@@ -65,25 +73,17 @@
             this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblSource = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btn产品类别管理 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btn仓库管理 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btn供应商管理 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btn客户管理 = new System.Windows.Forms.ToolStripButton();
             this.panel3.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(570, 27);
+            this.btnBrowse.Location = new System.Drawing.Point(570, 26);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(47, 23);
             this.btnBrowse.TabIndex = 4;
@@ -102,267 +102,17 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.toolStrip1);
+            this.panel3.Controls.Add(this.lblSource);
             this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.groupBox3);
             this.panel3.Controls.Add(this.groupBox1);
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1311, 708);
+            this.panel3.Size = new System.Drawing.Size(1499, 568);
             this.panel3.TabIndex = 2;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button1.Location = new System.Drawing.Point(1046, 61);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(176, 34);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "导出模板文件...";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.txtFirstRow);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.btnImport);
-            this.groupBox3.Location = new System.Drawing.Point(646, 34);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(355, 73);
-            this.groupBox3.TabIndex = 20;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "第二步 导入";
-            // 
-            // txtFirstRow
-            // 
-            this.txtFirstRow.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtFirstRow.Location = new System.Drawing.Point(76, 31);
-            this.txtFirstRow.MaxValue = 10000;
-            this.txtFirstRow.MinValue = 0;
-            this.txtFirstRow.Name = "txtFirstRow";
-            this.txtFirstRow.Size = new System.Drawing.Size(70, 21);
-            this.txtFirstRow.TabIndex = 15;
-            this.txtFirstRow.Text = "1";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "从 第";
-            // 
-            // btnImport
-            // 
-            this.btnImport.Location = new System.Drawing.Point(152, 24);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(176, 34);
-            this.btnImport.TabIndex = 13;
-            this.btnImport.Text = "开始导入";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtPath);
-            this.groupBox1.Controls.Add(this.btnBrowse);
-            this.groupBox1.Location = new System.Drawing.Point(14, 34);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(623, 73);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "第一步 选择要导入的电子表格文件";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Controls.Add(this.lblSource);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(6, 116);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1302, 589);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "数据预览";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colRowIndex,
-            this.colAddDate,
-            this.colWareHouse,
-            this.colCategory,
-            this.colSpecification,
-            this.colOriginalWeight,
-            this.colOriginalLength,
-            this.colWeight,
-            this.colLength,
-            this.colCustomer,
-            this.colSupplier,
-            this.colManufacture,
-            this.colSerialNumber,
-            this.colPosition,
-            this.colMemo,
-            this.colReason});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 42);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle24;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1299, 547);
-            this.dataGridView1.TabIndex = 116;
-            // 
-            // colRowIndex
-            // 
-            this.colRowIndex.HeaderText = "行号";
-            this.colRowIndex.Name = "colRowIndex";
-            this.colRowIndex.ReadOnly = true;
-            this.colRowIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colRowIndex.Width = 60;
-            // 
-            // colAddDate
-            // 
-            this.colAddDate.HeaderText = "入库日期";
-            this.colAddDate.Name = "colAddDate";
-            // 
-            // colWareHouse
-            // 
-            this.colWareHouse.HeaderText = "仓库*";
-            this.colWareHouse.Name = "colWareHouse";
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "类别*";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.Width = 80;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格*";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.Width = 80;
-            // 
-            // colOriginalWeight
-            // 
-            dataGridViewCellStyle19.Format = "N3";
-            dataGridViewCellStyle19.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle19;
-            this.colOriginalWeight.HeaderText = "入库重量*";
-            this.colOriginalWeight.Name = "colOriginalWeight";
-            this.colOriginalWeight.Width = 85;
-            // 
-            // colOriginalLength
-            // 
-            dataGridViewCellStyle20.Format = "N3";
-            dataGridViewCellStyle20.NullValue = null;
-            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle20;
-            this.colOriginalLength.HeaderText = "入库长度";
-            this.colOriginalLength.Name = "colOriginalLength";
-            this.colOriginalLength.Width = 80;
-            // 
-            // colWeight
-            // 
-            dataGridViewCellStyle21.Format = "N3";
-            dataGridViewCellStyle21.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle21;
-            this.colWeight.HeaderText = "剩余重量*";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.Width = 85;
-            // 
-            // colLength
-            // 
-            dataGridViewCellStyle22.Format = "N3";
-            dataGridViewCellStyle22.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle22;
-            this.colLength.HeaderText = "剩余长度";
-            this.colLength.Name = "colLength";
-            this.colLength.Width = 80;
-            // 
-            // colCustomer
-            // 
-            this.colCustomer.HeaderText = "客户*";
-            this.colCustomer.Name = "colCustomer";
-            this.colCustomer.Width = 80;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.HeaderText = "供应商*";
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.Width = 80;
-            // 
-            // colManufacture
-            // 
-            this.colManufacture.HeaderText = "厂家*";
-            this.colManufacture.Name = "colManufacture";
-            this.colManufacture.Width = 80;
-            // 
-            // colSerialNumber
-            // 
-            this.colSerialNumber.HeaderText = "卷号";
-            this.colSerialNumber.Name = "colSerialNumber";
-            this.colSerialNumber.Width = 60;
-            // 
-            // colPosition
-            // 
-            this.colPosition.HeaderText = "摆放位置";
-            this.colPosition.Name = "colPosition";
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            // 
-            // colReason
-            // 
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Red;
-            this.colReason.DefaultCellStyle = dataGridViewCellStyle23;
-            this.colReason.HeaderText = "导入状态";
-            this.colReason.MinimumWidth = 200;
-            this.colReason.Name = "colReason";
-            this.colReason.ReadOnly = true;
-            this.colReason.Width = 200;
-            // 
-            // lblSource
-            // 
-            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSource.AutoSize = true;
-            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblSource.ForeColor = System.Drawing.Color.Blue;
-            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblSource.Location = new System.Drawing.Point(1211, 24);
-            this.lblSource.Name = "lblSource";
-            this.lblSource.Size = new System.Drawing.Size(44, 12);
-            this.lblSource.TabIndex = 17;
-            this.lblSource.Text = "条数据";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1052, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "待导入数据预览";
             // 
             // toolStrip1
             // 
@@ -377,7 +127,7 @@
             this.btn客户管理});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1311, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1499, 25);
             this.toolStrip1.TabIndex = 24;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -436,11 +186,260 @@
             this.btn客户管理.Text = "客户管理";
             this.btn客户管理.Click += new System.EventHandler(this.btn客户管理_Click);
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.Location = new System.Drawing.Point(1350, 34);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(146, 24);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "导出模板文件...";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtFirstRow);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.btnImport);
+            this.groupBox3.Location = new System.Drawing.Point(646, 34);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(361, 58);
+            this.groupBox3.TabIndex = 20;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "第二步 导入";
+            // 
+            // txtFirstRow
+            // 
+            this.txtFirstRow.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtFirstRow.Location = new System.Drawing.Point(76, 27);
+            this.txtFirstRow.MaxValue = 10000;
+            this.txtFirstRow.MinValue = 0;
+            this.txtFirstRow.Name = "txtFirstRow";
+            this.txtFirstRow.Size = new System.Drawing.Size(70, 21);
+            this.txtFirstRow.TabIndex = 15;
+            this.txtFirstRow.Text = "1";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 12);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "从 第";
+            // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(152, 20);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(176, 34);
+            this.btnImport.TabIndex = 13;
+            this.btnImport.Text = "开始导入";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtPath);
+            this.groupBox1.Controls.Add(this.btnBrowse);
+            this.groupBox1.Location = new System.Drawing.Point(14, 34);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(623, 58);
+            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "第一步 选择要导入的电子表格文件";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Location = new System.Drawing.Point(6, 98);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1490, 467);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "数据预览";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colRowIndex,
+            this.colAddDate,
+            this.colWareHouse,
+            this.colCategory,
+            this.colSpecification,
+            this.colOriginalWeight,
+            this.colOriginalLength,
+            this.colWeight,
+            this.colLength,
+            this.colCustomer,
+            this.colSupplier,
+            this.colManufacture,
+            this.colSerialNumber,
+            this.colPosition,
+            this.colMemo,
+            this.colReason});
+            this.dataGridView1.Location = new System.Drawing.Point(3, 20);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 20;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(1487, 447);
+            this.dataGridView1.TabIndex = 116;
+            // 
+            // colRowIndex
+            // 
+            this.colRowIndex.HeaderText = "行号";
+            this.colRowIndex.Name = "colRowIndex";
+            this.colRowIndex.ReadOnly = true;
+            this.colRowIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colRowIndex.Width = 60;
+            // 
+            // colAddDate
+            // 
+            this.colAddDate.HeaderText = "入库日期";
+            this.colAddDate.Name = "colAddDate";
+            // 
+            // colWareHouse
+            // 
+            this.colWareHouse.HeaderText = "仓库*";
+            this.colWareHouse.Name = "colWareHouse";
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别*";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.Width = 80;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格*";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.Width = 80;
+            // 
+            // colOriginalWeight
+            // 
+            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colOriginalWeight.HeaderText = "入库重量*";
+            this.colOriginalWeight.Name = "colOriginalWeight";
+            this.colOriginalWeight.Width = 85;
+            // 
+            // colOriginalLength
+            // 
+            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colOriginalLength.HeaderText = "入库长度";
+            this.colOriginalLength.Name = "colOriginalLength";
+            this.colOriginalLength.Width = 80;
+            // 
+            // colWeight
+            // 
+            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colWeight.HeaderText = "剩余重量*";
+            this.colWeight.Name = "colWeight";
+            this.colWeight.Width = 85;
+            // 
+            // colLength
+            // 
+            dataGridViewCellStyle4.Format = "N3";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colLength.HeaderText = "剩余长度";
+            this.colLength.Name = "colLength";
+            this.colLength.Width = 80;
+            // 
+            // colCustomer
+            // 
+            this.colCustomer.HeaderText = "客户*";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.Width = 80;
+            // 
+            // colSupplier
+            // 
+            this.colSupplier.HeaderText = "供应商*";
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.Width = 80;
+            // 
+            // colManufacture
+            // 
+            this.colManufacture.HeaderText = "厂家*";
+            this.colManufacture.Name = "colManufacture";
+            this.colManufacture.Width = 80;
+            // 
+            // colSerialNumber
+            // 
+            this.colSerialNumber.HeaderText = "卷号";
+            this.colSerialNumber.Name = "colSerialNumber";
+            this.colSerialNumber.Width = 60;
+            // 
+            // colPosition
+            // 
+            this.colPosition.HeaderText = "摆放位置";
+            this.colPosition.Name = "colPosition";
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            // 
+            // colReason
+            // 
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
+            this.colReason.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colReason.HeaderText = "导入状态";
+            this.colReason.MinimumWidth = 200;
+            this.colReason.Name = "colReason";
+            this.colReason.ReadOnly = true;
+            this.colReason.Width = 200;
+            // 
+            // lblSource
+            // 
+            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSource.AutoSize = true;
+            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSource.ForeColor = System.Drawing.Color.Blue;
+            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblSource.Location = new System.Drawing.Point(1388, 87);
+            this.lblSource.Name = "lblSource";
+            this.lblSource.Size = new System.Drawing.Size(44, 12);
+            this.lblSource.TabIndex = 17;
+            this.lblSource.Text = "条数据";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1284, 87);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "待导入数据预览";
+            // 
             // FrmSteelRollImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1311, 708);
+            this.ClientSize = new System.Drawing.Size(1499, 568);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSteelRollImport";
@@ -449,15 +448,14 @@
             this.Load += new System.EventHandler(this.FrmStudentImport_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
