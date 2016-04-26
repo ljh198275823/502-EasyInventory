@@ -64,7 +64,18 @@ namespace LJH.Inventory.DAL.LinqProvider
             var items = ret.ToList();
             if (items != null && items.Count > 0)
             {
-                List<Product> ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                List<Product> ps = null;
+                var pids = items.Select(it => it.ProductID).Distinct().ToList();
+                if (pids.Count > 20)
+                {
+                    ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                }
+                else
+                {
+                    ProductSearchCondition pcon = new ProductSearchCondition();
+                    pcon.ProductIDS = pids;
+                    ps = new ProductProvider(SqlURI, _MappingResource).GetItems(pcon).QueryObjects;
+                }
                 List<WareHouse> ws = new WareHouseProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
                 foreach (var pi in items)
                 {

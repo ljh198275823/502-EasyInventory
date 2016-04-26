@@ -7,7 +7,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.DAL.Linq;
 
-namespace LJH.Attendance.DAL.LinqDataProvider
+namespace LJH.Inventory.DAL.LinqProvider
 {
     public class StaffPhotoProvider : ProviderBase<StaffPhoto, int>
     {

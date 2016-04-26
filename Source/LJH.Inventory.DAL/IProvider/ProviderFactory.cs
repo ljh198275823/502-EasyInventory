@@ -25,6 +25,7 @@ namespace LJH.Inventory.DAL.IProvider
         /// <returns></returns>
         public static T Create<T>(string connStr) where T : class
         {
+            LJH.GeneralLibrary.Core.DAL.DALConfig.Default.Log = true;
             T instance = null;
             try
             {

@@ -98,16 +98,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             else
             {
                 ProductInventoryItem pi = null;
-                if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
-                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { DeliveryItem = item.ID };
-                var assigns = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+                if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject; //获取出货项对应的库存项，即是从哪个库存项出货的
                 row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
                 row.Cells["colWeight"].Value = pi != null ? (pi.RealThick.HasValue ? (decimal?)pi.RealThick : (decimal?)pi.OriginalThick) : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
-                decimal maxCount = (assigns == null || assigns.Count == 0) ? pi.Count : pi.Count + assigns.Sum(it => it.Count); //
-                row.Cells["colTotal"].Value = maxCount - item.Count;
-                row.Cells["colTotal"].Tag = maxCount;
+                row.Cells["colTotal"].Value = pi.Count; //表示当前可用库存
+                row.Cells["colTotal"].Tag = item.Count + pi.Count; //保存最大出货量
                 row.Cells["colTotal"].Style.Format = "N0";
                 row.Cells["colMemo"].Value = pi != null ? pi.Memo : null;
 

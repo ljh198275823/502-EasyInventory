@@ -3965,5 +3965,15 @@
             初始化密钥失败
             </summary>
         </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.DALConfig.Default">
+            <summary>
+            获取默认设置
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.DALConfig.Log">
+            <summary>
+            获取或设置是否记录日志
+            </summary>
+        </member>
     </members>
 </doc>
