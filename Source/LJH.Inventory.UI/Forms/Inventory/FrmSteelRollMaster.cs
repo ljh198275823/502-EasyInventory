@@ -170,6 +170,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             InitBrand(cmbBrand);
             InitSupplier(cmbSupplier);
             pnlStates.Enabled = !ForSelect;
+            if (this.MultiSelect) GridView.ContextMenuStrip = null;
         }
 
         public override void ShowOperatorRights()

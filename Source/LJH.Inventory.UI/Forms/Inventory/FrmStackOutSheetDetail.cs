@@ -564,6 +564,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btn_AddSlice_Click(object sender, EventArgs e)
         {
             FrmSteelRollSliceSelection frm = new FrmSteelRollSliceSelection();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.WindowState = FormWindowState.Maximized;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;
@@ -582,6 +584,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void mnu_AddSteelRoll_Click(object sender, EventArgs e)
         {
             FrmSteelRollSelection frm = new FrmSteelRollSelection();
+            frm.WindowState = FormWindowState.Maximized;
             frm.StartPosition = FormStartPosition.CenterParent;
             if (frm.ShowDialog() == DialogResult.OK)
             {

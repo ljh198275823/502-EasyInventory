@@ -69,9 +69,9 @@
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(1304, 683);
+            this.btnClose.Location = new System.Drawing.Point(1100, 435);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(141, 41);
+            this.btnClose.Size = new System.Drawing.Size(141, 29);
             this.btnClose.TabIndex = 93;
             this.btnClose.Text = "取消(&C)";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -79,9 +79,9 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(1142, 683);
+            this.btnOk.Location = new System.Drawing.Point(938, 435);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(141, 41);
+            this.btnOk.Size = new System.Drawing.Size(141, 29);
             this.btnOk.TabIndex = 92;
             this.btnOk.Text = "确定(&O)";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -89,16 +89,16 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.ucFormViewMain);
             this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1463, 658);
+            this.panel1.Size = new System.Drawing.Size(1259, 424);
             this.panel1.TabIndex = 94;
             // 
             // ucFormViewMain
@@ -108,16 +108,16 @@
             this.ucFormViewMain.HideHeader = true;
             this.ucFormViewMain.Location = new System.Drawing.Point(0, 0);
             this.ucFormViewMain.Name = "ucFormViewMain";
-            this.ucFormViewMain.Size = new System.Drawing.Size(1461, 446);
+            this.ucFormViewMain.Size = new System.Drawing.Size(1257, 247);
             this.ucFormViewMain.TabIndex = 13;
             // 
             // splitter1
             // 
             this.splitter1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter1.Location = new System.Drawing.Point(0, 446);
+            this.splitter1.Location = new System.Drawing.Point(0, 247);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1461, 6);
+            this.splitter1.Size = new System.Drawing.Size(1257, 6);
             this.splitter1.TabIndex = 1;
             this.splitter1.TabStop = false;
             // 
@@ -125,9 +125,9 @@
             // 
             this.panel2.Controls.Add(this.dataGridView1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 452);
+            this.panel2.Location = new System.Drawing.Point(0, 253);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1461, 204);
+            this.panel2.Size = new System.Drawing.Size(1257, 169);
             this.panel2.TabIndex = 0;
             // 
             // dataGridView1
@@ -162,7 +162,7 @@
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1461, 204);
+            this.dataGridView1.Size = new System.Drawing.Size(1257, 169);
             this.dataGridView1.TabIndex = 116;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -185,6 +185,8 @@
             this.colCategory.HeaderText = "类别";
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
+            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCategory.Width = 80;
             // 
             // colSpecification
             // 
@@ -200,6 +202,8 @@
             this.colOriginalWeight.HeaderText = "入库重量";
             this.colOriginalWeight.Name = "colOriginalWeight";
             this.colOriginalWeight.ReadOnly = true;
+            this.colOriginalWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colOriginalWeight.Width = 80;
             // 
             // colOriginalLength
             // 
@@ -209,7 +213,9 @@
             this.colOriginalLength.HeaderText = "入库长度";
             this.colOriginalLength.Name = "colOriginalLength";
             this.colOriginalLength.ReadOnly = true;
+            this.colOriginalLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colOriginalLength.Visible = false;
+            this.colOriginalLength.Width = 80;
             // 
             // colWeight
             // 
@@ -219,6 +225,7 @@
             this.colWeight.HeaderText = "剩余重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
+            this.colWeight.Width = 80;
             // 
             // colLength
             // 
@@ -229,6 +236,7 @@
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             this.colLength.Visible = false;
+            this.colLength.Width = 80;
             // 
             // colOriginalThick
             // 
@@ -239,6 +247,7 @@
             this.colOriginalThick.Name = "colOriginalThick";
             this.colOriginalThick.ReadOnly = true;
             this.colOriginalThick.Visible = false;
+            this.colOriginalThick.Width = 80;
             // 
             // colRealThick
             // 
@@ -248,6 +257,8 @@
             this.colRealThick.HeaderText = "开平厚度";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
+            this.colRealThick.Visible = false;
+            this.colRealThick.Width = 80;
             // 
             // colCustomer
             // 
@@ -278,6 +289,7 @@
             this.colStatus.HeaderText = "状态";
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
+            this.colStatus.Width = 80;
             // 
             // colAction
             // 
@@ -296,7 +308,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(1467, 735);
+            this.ClientSize = new System.Drawing.Size(1263, 472);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOk);
