@@ -257,7 +257,6 @@ namespace LJH.Inventory.UI.Forms
                 {
                     UpdatingItem = sheet;
                     IsAdding = false;
-                    ItemShowing();
                     ShowButtonState();
                     if (operation == SheetOperation.Create) this.OnItemAdded(new ItemAddedEventArgs(sheet));
                     if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
@@ -281,24 +280,15 @@ namespace LJH.Inventory.UI.Forms
                 if (UpdatingItem != null)
                 {
                     T sheet = null;
-                    if (operation == SheetOperation.Create || operation == SheetOperation.Modify)
+                    sheet = UpdatingItem as T;
+                    if (MessageBox.Show(string.Format("是否要进行 {0}?", SheetOperationDescription.GetDescription(operation)),
+                               "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
                     {
-                        MessageBox.Show("保存请调用 " + "PerformCreateOrModify()");
                         return;
-                    }
-                    else
-                    {
-                        sheet = UpdatingItem as T;
-                        if (MessageBox.Show(string.Format("是否要进行 {0}?", SheetOperationDescription.GetDescription(operation)),
-                                   "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
-                        {
-                            return;
-                        }
                     }
                     CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result == ResultCode.Successful)
                     {
-                        ItemShowing();
                         ShowButtonState();
                         if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
                         MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");

@@ -216,12 +216,15 @@ namespace LJH.Inventory.BLL
             List<ProductInventoryItem> updatingitems = new List<ProductInventoryItem>();
             List<ProductInventoryItem> cloneItems = new List<ProductInventoryItem>();
             List<ProductInventoryItem> deletingItems = new List<ProductInventoryItem>();
+
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            con.IDS = info.Items.Select(it => it.InventoryItem.Value).ToList();
+            var pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             foreach (var item in info.Items)  //将原材料的项的状态变成待出货状态
             {
-                var isrp = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
                 if (item.InventoryItem != null)
                 {
-                    ProductInventoryItem pi = isrp.GetByID(item.InventoryItem.Value).QueryObject;
+                    ProductInventoryItem pi = pis.SingleOrDefault(it => it.ID == item.InventoryItem);
                     if (pi != null)
                     {
                         F_Assign(pi, item, addingItems, updatingitems, cloneItems, deletingItems);
@@ -240,16 +243,22 @@ namespace LJH.Inventory.BLL
             List<ProductInventoryItem> cloneItems = new List<ProductInventoryItem>();
             List<ProductInventoryItem> deletingItems = new List<ProductInventoryItem>();
             var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
+
+            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+            con.IDS = info.Items.Select(it => it.InventoryItem.Value).Union(original.Items.Select(it => it.InventoryItem.Value)).Distinct().ToList();
+            var sources = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
+
+            con = new ProductInventoryItemSearchCondition();
+            con.DeliverySheetNo = info.ID;
+            var assigns = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             foreach (var item in info.Items)
             {
                 if (item.InventoryItem != null) //如果有进行分配
                 {
-                    ProductInventoryItem source = provider.GetByID(item.InventoryItem.Value).QueryObject;
+                    ProductInventoryItem source = sources.SingleOrDefault(it => it.ID == item.InventoryItem);
                     if (original.Items.Exists(it => it.ID == item.ID))
                     {
-                        ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                        con.DeliveryItem = item.ID;
-                        var assigned = provider.GetItems(con).QueryObjects[0];  //每一个出货单项有且只有一项分配项
+                        var assigned = assigns.SingleOrDefault(it => it.DeliveryItem == item.ID);  //每一个出货单项有且只有一项分配项
                         F_Change(source, assigned, item.Count, addingItems, updatingitems, cloneItems, deletingItems);
                     }
                     else
@@ -262,10 +271,8 @@ namespace LJH.Inventory.BLL
             {
                 if (item.InventoryItem != null && !info.Items.Exists(it => it.ID == item.ID))
                 {
-                    ProductInventoryItem source = provider.GetByID(item.InventoryItem.Value).QueryObject;
-                    ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-                    con.DeliveryItem = item.ID;
-                    var assigned = provider.GetItems(con).QueryObjects[0];  //每一个出货单项有且只有一项分配项
+                    ProductInventoryItem source = sources.SingleOrDefault(it => it.ID == item.InventoryItem);
+                    var assigned = assigns.SingleOrDefault(it => it.DeliveryItem == item.ID);  //每一个出货单项有且只有一项分配项
                     F_Merge(source, assigned, addingItems, updatingitems, cloneItems, deletingItems);
                 }
             }
