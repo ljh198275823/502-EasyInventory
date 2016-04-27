@@ -21,7 +21,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 私有方法
+        private List<Product> _Products = null;
         #endregion
 
         #region 私有方法
@@ -35,7 +38,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             this.txtCustomer.Tag = Customer;
-            var WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
             dtSheetDate.Value = item.SheetDate;
             this.txtLinker.Text = item.Linker;
             this.txtLinkerPhone.Text = item.LinkerCall;
@@ -66,6 +68,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var items = sheet.GetSummaryItems();
             if (items != null)
             {
+                ProductSearchCondition con = new ProductSearchCondition();
+                con.ProductIDS = items.Select(it => it.ProductID).Distinct().ToList();
+                _Products = new ProductBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
                 foreach (StackOutItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
@@ -80,9 +85,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void ShowDeliveryItemOnRow(DataGridViewRow row, StackOutItem item)
         {
             row.Tag = item;
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
             if (item.ID == Guid.Empty || item.InventoryItem == null)
             {
+                Product p = _Products.Single(it => it.ID == item.ProductID);
                 row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
                 row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
                 row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
@@ -103,11 +108,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colWeight"].Value = pi != null ? (pi.RealThick.HasValue ? (decimal?)pi.RealThick : (decimal?)pi.OriginalThick) : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
-                row.Cells["colTotal"].Value = pi.Count; //表示当前可用库存
+                row.Cells["colTotal"].Value = item.Count + pi.Count; //显示最大可出货数量
                 row.Cells["colTotal"].Tag = item.Count + pi.Count; //保存最大出货量
                 row.Cells["colTotal"].Style.Format = "N0";
                 row.Cells["colMemo"].Value = pi != null ? pi.Memo : null;
-
                 row.Cells["colWeight"].ReadOnly = true;
                 row.Cells["colPrice"].ReadOnly = true;
                 row.Cells["colMemo"].ReadOnly = true;
@@ -385,8 +389,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
             if (CheckCredit())
             {
-                PerformOperation<StackOutSheet>(bll, SheetOperation.StackOut);
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;
+                if (sheet.State == SheetState.Add)
+                {
+                    var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+                    if (ret.Result != ResultCode.Successful)
+                    {
+                        MessageBox.Show(ret.Message);
+                        return;
+                    }
+                    else
+                    {
+                        this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
+                    }
+                }
+                PerformOperation<StackOutSheet>(bll, SheetOperation.StackOut);
                 if (sheet.State == SheetState.Shipped)
                 {
                     new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
@@ -469,7 +486,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         if (value <= Convert.ToInt32(row.Cells["colTotal"].Tag)) //数量不能超出库存项的数量
                         {
                             item.Count = value;
-                            row.Cells["colTotal"].Value = Convert.ToInt32(row.Cells["colTotal"].Tag) - item.Count;
                         }
                         else
                         {
@@ -569,25 +585,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.StartPosition = FormStartPosition.CenterParent;
             if (frm.ShowDialog() == DialogResult.OK)
             {
+                var sheet = UpdatingItem as StackOutSheet;
                 List<ProductInventoryItem> srs = frm.SelectedItems;
                 if (srs != null && srs.Count > 0)
                 {
                     foreach (var sr in srs)
                     {
+                        if (sheet.Items != null && sheet.Items.Exists(it => it.InventoryItem == sr.ID)) continue; //原材料只加一次
                         var ret = new SteelRollBLL(AppSettings.Current.ConnStr).UpdateProduct(sr);
-                        if (ret.Result == ResultCode.Successful)
-                        {
-                            var sheet = UpdatingItem as StackOutSheet;
-                            if (sheet.Items != null && sheet.Items.Exists(it => it.InventoryItem == sr.ID))//原材料只加一次
-                            {
-                            }
-                            else
-                            {
-                                sheet.AddItems(sr, 1);
-                                ShowDeliveryItemsOnGrid(sheet);
-                            }
-                        }
+                        if (ret.Result == ResultCode.Successful) sheet.AddItems(sr, 1);
                     }
+                    ShowDeliveryItemsOnGrid(sheet);
                 }
             }
         }
@@ -670,7 +678,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
-
-        
     }
 }

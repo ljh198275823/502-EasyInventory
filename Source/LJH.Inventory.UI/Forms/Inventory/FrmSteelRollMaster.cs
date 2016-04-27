@@ -208,10 +208,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 var con= new ProductInventoryItemSearchCondition();
                 con.HasRemain = true;
                 con.States = new List<ProductInventoryState>();
-                if (chk在库.Checked) con.States.Add(ProductInventoryState.Inventory);
+                con.States.Add(ProductInventoryState.Inventory);
+                con.States.Add(ProductInventoryState.WaitShipping);
+                con.States.Add(ProductInventoryState.Reserved);
                 if (chk发货.Checked) con.States.Add(ProductInventoryState.Shipped);
-                if (chk待发货.Checked) con.States.Add(ProductInventoryState.WaitShipping);
-                if (chk预订.Checked) con.States.Add(ProductInventoryState.Reserved);
                 if (chk作废.Checked) con.States.Add(ProductInventoryState.Nullified);
                 _SteelRolls = bll.GetItems(con).QueryObjects;
             }
