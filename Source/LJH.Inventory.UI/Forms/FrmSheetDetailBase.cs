@@ -261,6 +261,7 @@ namespace LJH.Inventory.UI.Forms
                     if (operation == SheetOperation.Create) this.OnItemAdded(new ItemAddedEventArgs(sheet));
                     if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
                     MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
+                    ItemShowing();
                 }
                 else
                 {
@@ -292,6 +293,7 @@ namespace LJH.Inventory.UI.Forms
                         ShowButtonState();
                         if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
                         MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
+                        ItemShowing();
                     }
                     else
                     {
