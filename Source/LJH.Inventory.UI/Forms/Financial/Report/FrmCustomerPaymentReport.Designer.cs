@@ -151,13 +151,14 @@
             // 
             // colSheetID
             // 
-            this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colSheetID.HeaderText = "单据编号";
-            this.colSheetID.MinimumWidth = 100;
+            this.colSheetID.MinimumWidth = 150;
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSheetID.Width = 150;
             // 
             // colPaymentMode
             // 
@@ -177,6 +178,7 @@
             // 
             // colCustomer
             // 
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.MinimumWidth = 150;
             this.colCustomer.Name = "colCustomer";

@@ -168,13 +168,14 @@
             // 
             // colSheetID
             // 
-            this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colSheetID.HeaderText = "发票号";
-            this.colSheetID.MinimumWidth = 100;
+            this.colSheetID.MinimumWidth = 150;
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSheetID.Width = 150;
             // 
             // colAmount
             // 
@@ -187,6 +188,7 @@
             // 
             // colCustomer
             // 
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.MinimumWidth = 150;
             this.colCustomer.Name = "colCustomer";
@@ -237,12 +239,12 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private GeneralLibrary.WinformControl.DBCTextBox txtBillID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.Label label1;
-        private GeneralLibrary.WinformControl.DBCTextBox txtBillID;
     }
 }
