@@ -392,10 +392,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     if (col.Name == "colPrice")
                     {
                         item.Price = value;
-                        foreach (var it in sheet.Items)
-                        {
-                            if (it.ProductID == item.ProductID) it.Price = value;
-                        }
                         row.Cells[e.ColumnIndex].Value = value;
                         row.Cells["colTotal"].Value = item.Amount;
                     }
@@ -403,10 +399,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     {
                         item.TotalWeight = value > 0 ? (decimal?)value : null;
                         row.Cells[e.ColumnIndex].Value = value;
-                        foreach (var it in sheet.Items)
-                        {
-                            if (it.ProductID == item.ProductID) it.TotalWeight = value;
-                        }
                         row.Cells["colTotal"].Value = item.Amount;
                     }
                     ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
