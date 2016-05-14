@@ -24,9 +24,17 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string ProductID { get; set; }
         /// <summary>
+        /// 获取或设置产品
+        /// </summary>
+        public Product Product { get; set; }
+        /// <summary>
         /// 获取或设置仓库ID
         /// </summary>
         public string WarehouseID { get; set; }
+        /// <summary>
+        ///  获取或设置仓库
+        /// </summary>
+        public WareHouse WareHouse { get; set; }
         /// <summary>
         /// 获取或设置盘点产品的单位
         /// </summary>

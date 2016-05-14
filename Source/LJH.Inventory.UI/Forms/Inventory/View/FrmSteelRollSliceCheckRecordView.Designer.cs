@@ -30,6 +30,8 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollSliceCheckRecordView));
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,7 +78,7 @@
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridView.Size = new System.Drawing.Size(1079, 407);
+            this.GridView.Size = new System.Drawing.Size(1198, 407);
             this.GridView.TabIndex = 23;
             // 
             // colCheckDate
@@ -131,13 +133,16 @@
             // 
             // colInventory
             // 
+            dataGridViewCellStyle3.Format = "N0";
+            this.colInventory.DefaultCellStyle = dataGridViewCellStyle3;
             this.colInventory.HeaderText = "盘点前数量";
             this.colInventory.Name = "colInventory";
             this.colInventory.ReadOnly = true;
-            this.colInventory.Width = 80;
             // 
             // colCheckCount
             // 
+            dataGridViewCellStyle4.Format = "N0";
+            this.colCheckCount.DefaultCellStyle = dataGridViewCellStyle4;
             this.colCheckCount.HeaderText = "盘点数量";
             this.colCheckCount.Name = "colCheckCount";
             this.colCheckCount.ReadOnly = true;
@@ -173,7 +178,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1079, 429);
+            this.ClientSize = new System.Drawing.Size(1198, 429);
             this.Controls.Add(this.GridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSteelRollSliceCheckRecordView";

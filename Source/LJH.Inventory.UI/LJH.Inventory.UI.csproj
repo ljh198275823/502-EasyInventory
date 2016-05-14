@@ -172,11 +172,17 @@
     <Compile Include="Forms\Inventory\FrmSteelRollSelection.Designer.cs">
       <DependentUpon>FrmSteelRollSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Report\FrmSteelRollCheckReport.cs">
+    <Compile Include="Forms\Inventory\Report\Frm原材料盘点记录报表.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Report\FrmSteelRollCheckReport.designer.cs">
-      <DependentUpon>FrmSteelRollCheckReport.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Report\Frm原材料盘点记录报表.designer.cs">
+      <DependentUpon>Frm原材料盘点记录报表.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\Report\Frm小件盘点记录报表.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Report\Frm小件盘点记录报表.designer.cs">
+      <DependentUpon>Frm小件盘点记录报表.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sale\FrmCustomerMerge.cs">
       <SubType>Form</SubType>
@@ -643,8 +649,11 @@
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSelection.resx">
       <DependentUpon>FrmSteelRollSelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Report\FrmSteelRollCheckReport.resx">
-      <DependentUpon>FrmSteelRollCheckReport.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Report\Frm原材料盘点记录报表.resx">
+      <DependentUpon>Frm原材料盘点记录报表.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Report\Frm小件盘点记录报表.resx">
+      <DependentUpon>Frm小件盘点记录报表.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmCustomerMerge.resx">
       <DependentUpon>FrmCustomerMerge.cs</DependentUpon>

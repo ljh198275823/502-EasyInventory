@@ -32,11 +32,35 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search != null && search is InventoryCheckRecordSearchCondition)
             {
                 var con = search as InventoryCheckRecordSearchCondition;
+                if (con.CheckDate != null) ret = ret.Where(it => it.CheckDateTime >= con.CheckDate.Begin && it.CheckDateTime <= con.CheckDate.End);
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(it => it.ProductID == con.ProductID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(it => it.WarehouseID == con.WareHouseID);
                 if (con.SourceID.HasValue) ret =  ret.Where(it => it.SourceID == con.SourceID.Value);
             }
-            return ret.ToList();
+            var items = ret.ToList();
+            if (items != null && items.Count > 0)
+            {
+                List<Product> ps = null;
+                var pids = items.Select(it => it.ProductID).Distinct().ToList();
+                if (pids.Count > 20)
+                {
+                    ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                }
+                else
+                {
+                    ProductSearchCondition pcon = new ProductSearchCondition();
+                    pcon.ProductIDS = pids;
+                    ps = new ProductProvider(SqlURI, _MappingResource).GetItems(pcon).QueryObjects;
+                }
+                List<WareHouse> ws = new WareHouseProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                foreach (var pi in items)
+                {
+                    pi.Product = ps.SingleOrDefault(it => it.ID == pi.ProductID);
+                    pi.WareHouse = ws.SingleOrDefault(it => it.ID == pi.WarehouseID);
+                }
+                items.RemoveAll(it => it.Product == null || it.WareHouse == null);
+            }
+            return items;
         }
         #endregion
     }

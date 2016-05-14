@@ -53,6 +53,9 @@
             this.mnu_DeliveryRecordReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeliveryStatistic = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_SliceRecordReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.原材料盘点报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.小件盘点报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_PaymentReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_TaxBillReport = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +79,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblOperator = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCategory = new System.Windows.Forms.ToolStripStatusLabel();
             this.pSecondary = new System.Windows.Forms.Panel();
             this.ucFormViewSecondary = new LJH.GeneralLibrary.WinformControl.UCFormView();
             this.pMain = new System.Windows.Forms.Panel();
@@ -83,7 +87,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tmrSoftDogChecker = new System.Windows.Forms.Timer(this.components);
-            this.lblCategory = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -249,6 +252,9 @@
             this.mnu_DeliveryRecordReport,
             this.mnu_DeliveryStatistic,
             this.mnu_SliceRecordReport,
+            this.toolStripSeparator3,
+            this.原材料盘点报表ToolStripMenuItem,
+            this.小件盘点报表ToolStripMenuItem,
             this.toolStripSeparator4,
             this.mnu_PaymentReport,
             this.mnu_TaxBillReport});
@@ -289,6 +295,25 @@
             this.mnu_SliceRecordReport.Size = new System.Drawing.Size(184, 22);
             this.mnu_SliceRecordReport.Text = "原料卷加工记录报表";
             this.mnu_SliceRecordReport.Click += new System.EventHandler(this.mnu_SliceRecordReport_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(181, 6);
+            // 
+            // 原材料盘点报表ToolStripMenuItem
+            // 
+            this.原材料盘点报表ToolStripMenuItem.Name = "原材料盘点报表ToolStripMenuItem";
+            this.原材料盘点报表ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.原材料盘点报表ToolStripMenuItem.Text = "原材料盘点报表";
+            this.原材料盘点报表ToolStripMenuItem.Click += new System.EventHandler(this.原材料盘点报表ToolStripMenuItem_Click);
+            // 
+            // 小件盘点报表ToolStripMenuItem
+            // 
+            this.小件盘点报表ToolStripMenuItem.Name = "小件盘点报表ToolStripMenuItem";
+            this.小件盘点报表ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.小件盘点报表ToolStripMenuItem.Text = "小件盘点报表";
+            this.小件盘点报表ToolStripMenuItem.Click += new System.EventHandler(this.小件盘点报表ToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -465,6 +490,11 @@
             this.lblOperator.Name = "lblOperator";
             this.lblOperator.Size = new System.Drawing.Size(0, 17);
             // 
+            // lblCategory
+            // 
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(0, 17);
+            // 
             // pSecondary
             // 
             this.pSecondary.AutoScroll = true;
@@ -534,11 +564,6 @@
             // 
             this.tmrSoftDogChecker.Interval = 10000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
-            // 
-            // lblCategory
-            // 
-            this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(0, 17);
             // 
             // FrmMain
             // 
@@ -625,5 +650,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnu_Operator;
         private System.Windows.Forms.ToolStripStatusLabel lblCategory;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem 原材料盘点报表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 小件盘点报表ToolStripMenuItem;
     }
 }

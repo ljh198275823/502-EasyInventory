@@ -432,5 +432,15 @@ namespace InventoryDemo
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmCustomerTaxBillReport>(null);
         }
+
+        private void 小件盘点报表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Inventory.Report.Frm小件盘点记录报表>(null);
+        }
+
+        private void 原材料盘点报表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Inventory.Report.Frm原材料盘点记录报表>(null);
+        }
     }
 }

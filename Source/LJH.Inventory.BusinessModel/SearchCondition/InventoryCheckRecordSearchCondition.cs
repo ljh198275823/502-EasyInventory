@@ -7,6 +7,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 {
     public class InventoryCheckRecordSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
+        public DateTimeRange CheckDate { get; set; }
         public string ProductID { get; set; }
         public string WareHouseID { get; set; }
         public Guid? SourceID { get; set; }

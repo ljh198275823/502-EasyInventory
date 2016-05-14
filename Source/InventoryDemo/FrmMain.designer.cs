@@ -61,6 +61,7 @@
             this.mnu_System = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Options = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Staff = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Operator = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Role = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_ChangePwd = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +84,9 @@
             this.ucFormViewMain = new LJH.GeneralLibrary.WinformControl.UCFormView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.mnu_Operator = new System.Windows.Forms.ToolStripMenuItem();
+            this.原材料盘点报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.小件盘点报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -259,6 +262,9 @@
             this.mnu_SliceRecordReport,
             this.mnu_DeliveryStatistic,
             this.mnu_InventoryRecord,
+            this.toolStripSeparator2,
+            this.原材料盘点报表ToolStripMenuItem,
+            this.小件盘点报表ToolStripMenuItem,
             this.toolStripSeparator4,
             this.mnu_PaymentReport,
             this.mnu_TaxBillReport});
@@ -351,6 +357,14 @@
             this.mnu_Staff.Size = new System.Drawing.Size(152, 22);
             this.mnu_Staff.Text = "人员部门";
             this.mnu_Staff.Click += new System.EventHandler(this.mnu_Staff_Click);
+            // 
+            // mnu_Operator
+            // 
+            this.mnu_Operator.Enabled = false;
+            this.mnu_Operator.Name = "mnu_Operator";
+            this.mnu_Operator.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Operator.Text = "操作员管理";
+            this.mnu_Operator.Click += new System.EventHandler(this.mnu_Operator_Click);
             // 
             // mnu_Role
             // 
@@ -534,13 +548,24 @@
             this.splitter1.TabStop = false;
             this.splitter1.Visible = false;
             // 
-            // mnu_Operator
+            // 原材料盘点报表ToolStripMenuItem
             // 
-            this.mnu_Operator.Enabled = false;
-            this.mnu_Operator.Name = "mnu_Operator";
-            this.mnu_Operator.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Operator.Text = "操作员管理";
-            this.mnu_Operator.Click += new System.EventHandler(this.mnu_Operator_Click);
+            this.原材料盘点报表ToolStripMenuItem.Name = "原材料盘点报表ToolStripMenuItem";
+            this.原材料盘点报表ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.原材料盘点报表ToolStripMenuItem.Text = "原材料盘点报表";
+            this.原材料盘点报表ToolStripMenuItem.Click += new System.EventHandler(this.原材料盘点报表ToolStripMenuItem_Click);
+            // 
+            // 小件盘点报表ToolStripMenuItem
+            // 
+            this.小件盘点报表ToolStripMenuItem.Name = "小件盘点报表ToolStripMenuItem";
+            this.小件盘点报表ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.小件盘点报表ToolStripMenuItem.Text = "小件盘点报表";
+            this.小件盘点报表ToolStripMenuItem.Click += new System.EventHandler(this.小件盘点报表ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
             // 
             // FrmMain
             // 
@@ -627,5 +652,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_Supplier;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripMenuItem mnu_Operator;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem 原材料盘点报表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 小件盘点报表ToolStripMenuItem;
     }
 }
