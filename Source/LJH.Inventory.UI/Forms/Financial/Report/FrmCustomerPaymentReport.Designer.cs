@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
@@ -41,8 +43,10 @@
             this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStackSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStackSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -128,6 +132,8 @@
             this.colSheetID,
             this.colPaymentMode,
             this.colAmount,
+            this.colAssigned,
+            this.colRemain,
             this.colCustomer,
             this.colStackSheetID,
             this.colMemo});
@@ -138,6 +144,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1074, 376);
             this.dataGridView1.TabIndex = 39;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // colSheetDate
             // 
@@ -176,6 +183,24 @@
             this.colAmount.ReadOnly = true;
             this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // colAssigned
+            // 
+            dataGridViewCellStyle3.Format = "C2";
+            this.colAssigned.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colAssigned.HeaderText = "已核销";
+            this.colAssigned.Name = "colAssigned";
+            this.colAssigned.ReadOnly = true;
+            this.colAssigned.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colAssigned.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colRemain
+            // 
+            dataGridViewCellStyle4.Format = "C2";
+            this.colRemain.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colRemain.HeaderText = "未核销";
+            this.colRemain.Name = "colRemain";
+            this.colRemain.ReadOnly = true;
+            // 
             // colCustomer
             // 
             this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -192,7 +217,6 @@
             this.colStackSheetID.Name = "colStackSheetID";
             this.colStackSheetID.ReadOnly = true;
             this.colStackSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colStackSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colStackSheetID.Width = 150;
             // 
             // colMemo
@@ -241,8 +265,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
+        private System.Windows.Forms.DataGridViewLinkColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

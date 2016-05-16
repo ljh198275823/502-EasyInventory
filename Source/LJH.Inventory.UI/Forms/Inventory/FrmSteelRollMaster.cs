@@ -72,6 +72,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 items = items.Where(it => (chk作废.Checked && it.State == ProductInventoryState.Nullified) ||
                                           (chk发货.Checked && it.State == ProductInventoryState.Shipped) ||
                                           (chk待发货.Checked && it.State == ProductInventoryState.WaitShipping) ||
+                                          (chk预订.Checked && it.State == ProductInventoryState.Reserved) ||
                                           (chk在库.Checked && it.State == ProductInventoryState.Inventory)).ToList();
             }
             if (items != null && items.Count > 0)
@@ -92,6 +93,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (sr.State == ProductInventoryState.Nullified)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
+            }
+            else if (sr.State == ProductInventoryState.Reserved)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Brown;
             }
             else
             {
@@ -119,6 +124,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
+            this.预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
+            this.取消预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -142,6 +149,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 con.States = new List<ProductInventoryState>();
                 con.States.Add(ProductInventoryState.WaitShipping);
                 con.States.Add(ProductInventoryState.Inventory);
+                con.States.Add(ProductInventoryState.Reserved);
                 if (chk发货.Checked) con.States.Add(ProductInventoryState.Shipped);
                 if (chk作废.Checked) con.States.Add(ProductInventoryState.Nullified);
                 _SteelRolls = bll.GetItems(con).QueryObjects;
@@ -179,7 +187,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colMemo"].Value = sr.Memo;
             ShowRowColor(row);
-            if (sr.State==ProductInventoryState .Nullified)
+            if (sr.State == ProductInventoryState.Nullified)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -302,6 +310,46 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void chk发货_CheckedChanged(object sender, EventArgs e)
         {
             cMnu_Fresh.PerformClick();
+        }
+
+        private void 预订ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                List<ProductInventoryItem> pis = new List<ProductInventoryItem>();
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    pis.Add(row.Tag as ProductInventoryItem);
+                }
+                FrmReserve frm = new FrmReserve();
+                frm.ProductInventorys = pis;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                DialogResult ret = frm.ShowDialog();
+                if (ret == DialogResult.OK)
+                {
+                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    {
+                        ShowItemInGridViewRow(row, row.Tag as ProductInventoryItem);
+                    }
+                }
+            }
+        }
+
+        private void 取消预订ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0 &&
+                MessageBox.Show("是否取消预订？", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    var pi = row.Tag as ProductInventoryItem;
+                    if (pi.State == ProductInventoryState.Reserved)
+                    {
+                        var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UnReserve(pi);
+                        if (ret.Result == ResultCode.Successful) ShowItemInGridViewRow(row, pi);
+                    }
+                }
+            }
         }
     }
 }

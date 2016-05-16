@@ -166,6 +166,12 @@
     <Compile Include="Forms\Inventory\FrmChangeWareHouse.Designer.cs">
       <DependentUpon>FrmChangeWareHouse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\FrmReserve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\FrmReserve.designer.cs">
+      <DependentUpon>FrmReserve.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\FrmSlice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -747,6 +753,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmChangeWareHouse.resx">
       <DependentUpon>FrmChangeWareHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\FrmReserve.resx">
+      <DependentUpon>FrmReserve.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSlice.resx">
       <DependentUpon>FrmSlice.cs</DependentUpon>
