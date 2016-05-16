@@ -14,6 +14,7 @@ using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Forms;
 using LJH.Inventory.UI.Forms.General;
 using LJH.Inventory.UI.Forms.Sale;
+using LJH.Inventory.UI.Forms.Financial.View;
 
 namespace LJH.Inventory.UI.Forms.Financial.Report
 {
@@ -38,6 +39,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
             row.Cells["colBank"].Value = cp.Bank;
             row.Cells["colAmount"].Value = cp.Amount;
+            row.Cells["colRemain"].Value = cp.Remain != 0 ? (decimal?)cp.Remain : null;
+            row.Cells["colAssigned"].Value = cp.Assigned != 0 ? (decimal?)cp.Assigned : null;
             row.Cells["colStackSheetID"].Value = cp.StackSheetID;
             if (_AllCustomers != null)
             {
@@ -116,7 +119,22 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             txtSupplier.Text = string.Empty;
             txtSupplier.Tag = null;
         }
-        #endregion
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
+                CustomerPayment cp = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
+                if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
+                {
+                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowAssigns(cp);
+                    frm.ShowDialog();
+                }
+            }
+        }
+        #endregion
     }
 }
