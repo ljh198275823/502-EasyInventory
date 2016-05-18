@@ -261,7 +261,9 @@ namespace LJH.Inventory.BLL
             List<ProductInventoryItem> deletingItems = new List<ProductInventoryItem>();
 
             ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.IDS = info.Items.Select(it => it.InventoryItem.Value).Union(original.Items.Select(it => it.InventoryItem.Value)).Distinct().ToList();
+            con.IDS = info.Items.Where(it => it.InventoryItem != null).Select(it => it.InventoryItem.Value).Union(
+                      original.Items.Where(it => it.InventoryItem != null).Select(it => it.InventoryItem.Value)
+                      ).Distinct().ToList();
             var sources = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
 
             con = new ProductInventoryItemSearchCondition();
