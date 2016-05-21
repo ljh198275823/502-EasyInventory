@@ -162,7 +162,7 @@ namespace InventoryApplication
                             frm.ShowDialog();
                             Environment.Exit(0);
                         }
-                        else if (hostLastDate.AddDays(1) < now) //主机狗超过3天没有登录
+                        else if (hostLastDate.AddDays(3) < now) //主机狗超过3天没有登录
                         {
                             tmrSoftDogChecker.Enabled = false;
                             MessageBox.Show("主机加密狗处于长时间离线状态，为了避免软件被锁定，请及时让主机加密狗处于在线状态", "软件过期", MessageBoxButtons.OK, MessageBoxIcon.Error);
