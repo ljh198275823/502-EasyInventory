@@ -143,6 +143,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
+
+            txtPurchasePrice.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            txtTransCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            txtOtherCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            chkOtherCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            chkTransCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            pnlTax.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+
             if (item.PurchasePrice.HasValue) txtPurchasePrice.DecimalValue = item.PurchasePrice.Value;
             rdWithTax.Checked = item.WithTax.HasValue && item.WithTax.Value;
             rdWithoutTax.Checked = item.WithTax.HasValue && !item.WithTax.Value;

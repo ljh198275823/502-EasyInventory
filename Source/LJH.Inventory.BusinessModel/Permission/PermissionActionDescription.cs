@@ -50,6 +50,8 @@ namespace LJH.Inventory.BusinessModel
                     return "盘点";
                 case PermissionActions.Slice :
                     return "加工";
+                case PermissionActions.ShowPrice:
+                    return "查看价格";
                 default:
                     return string.Empty;
             }

@@ -83,10 +83,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 var s = _AllSuppliers.SingleOrDefault(it => it.ID == info.Supplier);
                 row.Cells["colSupplier"].Value = s != null ? s.Name : null;
             }
-            row.Cells["colPurchasePrice"].Value = info.PurchasePrice;
-            row.Cells["colPurchaseTax"].Value = info.WithTax;
-            row.Cells["colTransCost"].Value = info.TransCost;
-            row.Cells["colOtherCost"].Value = info.OtherCost;
+            if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
+            {
+                row.Cells["colPurchasePrice"].Value = info.PurchasePrice;
+                row.Cells["colPurchaseTax"].Value = info.WithTax;
+                row.Cells["colTransCost"].Value = info.TransCost;
+                row.Cells["colOtherCost"].Value = info.OtherCost;
+            }
         }
         #endregion
 

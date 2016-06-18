@@ -274,10 +274,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
             row.Cells["colStatus"].Value = sr.Status;
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
-            row.Cells["colPurchasePrice"].Value = sr.PurchasePrice;
-            row.Cells["colPurchaseTax"].Value = sr.WithTax;
-            row.Cells["colTransCost"].Value = sr.TransCost;
-            row.Cells["colOtherCost"].Value = sr.OtherCost;
+            if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
+            {
+                row.Cells["colPurchasePrice"].Value = sr.PurchasePrice;
+                row.Cells["colPurchaseTax"].Value = sr.WithTax;
+                row.Cells["colTransCost"].Value = sr.TransCost;
+                row.Cells["colOtherCost"].Value = sr.OtherCost;
+            }
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colPosition"].Value = sr.Position;
             row.Cells["colMemo"].Value = sr.Memo;

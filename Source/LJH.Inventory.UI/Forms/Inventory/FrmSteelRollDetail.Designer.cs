@@ -60,7 +60,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlTax = new System.Windows.Forms.Panel();
             this.rdWithTax = new System.Windows.Forms.RadioButton();
             this.rdWithoutTax = new System.Windows.Forms.RadioButton();
             this.chkOtherCostPrepay = new System.Windows.Forms.CheckBox();
@@ -68,7 +68,7 @@
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.label7 = new System.Windows.Forms.Label();
             this.txtPosition = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.panel1.SuspendLayout();
+            this.pnlTax.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -449,15 +449,15 @@
             this.label9.TabIndex = 94;
             this.label9.Text = "单价(/吨)";
             // 
-            // panel1
+            // pnlTax
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.rdWithTax);
-            this.panel1.Controls.Add(this.rdWithoutTax);
-            this.panel1.Location = new System.Drawing.Point(346, 216);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(145, 25);
-            this.panel1.TabIndex = 134;
+            this.pnlTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTax.Controls.Add(this.rdWithTax);
+            this.pnlTax.Controls.Add(this.rdWithoutTax);
+            this.pnlTax.Location = new System.Drawing.Point(346, 216);
+            this.pnlTax.Name = "pnlTax";
+            this.pnlTax.Size = new System.Drawing.Size(145, 25);
+            this.pnlTax.TabIndex = 134;
             // 
             // rdWithTax
             // 
@@ -535,7 +535,7 @@
             this.Controls.Add(this.txtPosition);
             this.Controls.Add(this.chkTransCostPrepay);
             this.Controls.Add(this.chkOtherCostPrepay);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlTax);
             this.Controls.Add(this.txtOtherCost);
             this.Controls.Add(this.txtPurchasePrice);
             this.Controls.Add(this.txtTransCost);
@@ -604,13 +604,13 @@
             this.Controls.SetChildIndex(this.txtTransCost, 0);
             this.Controls.SetChildIndex(this.txtPurchasePrice, 0);
             this.Controls.SetChildIndex(this.txtOtherCost, 0);
-            this.Controls.SetChildIndex(this.panel1, 0);
+            this.Controls.SetChildIndex(this.pnlTax, 0);
             this.Controls.SetChildIndex(this.chkOtherCostPrepay, 0);
             this.Controls.SetChildIndex(this.chkTransCostPrepay, 0);
             this.Controls.SetChildIndex(this.txtPosition, 0);
             this.Controls.SetChildIndex(this.label7, 0);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlTax.ResumeLayout(false);
+            this.pnlTax.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -650,7 +650,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlTax;
         private System.Windows.Forms.RadioButton rdWithTax;
         private System.Windows.Forms.RadioButton rdWithoutTax;
         private System.Windows.Forms.CheckBox chkOtherCostPrepay;

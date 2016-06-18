@@ -133,24 +133,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
             if (chkOver.Checked) return;
-            decimal? weight = ProductInventoryItem.CalWeight(SlicingItem.Product.Specification, txtLength.DecimalValue * txtCount.IntergerValue, SlicingItem.Product.Density.Value);
-            if (weight.HasValue && weight <= SlicingItem.Weight)
+            decimal? width = SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification);
+            if (width.HasValue && width > 0 && SlicingItem.OriginalThick.HasValue && SlicingItem.OriginalThick > 0)
             {
-                this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - weight.Value;
-                txtAfterLength.DecimalValue = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, txtRemainWeight.DecimalValue, SlicingItem.Product.Density.Value);
-            }
-            else
-            {
-                var ret = MessageBox.Show(string.Format("原料当前重量不足以加工成 长度为 {0} 米的小件 {1} 件, 是否继续?", txtLength.DecimalValue, txtCount.IntergerValue),
-                                          "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (ret == DialogResult.Yes)
+                decimal weight = ProductInventoryItem.CalWeight(SlicingItem.OriginalThick.Value, width.Value, txtLength.DecimalValue * txtCount.IntergerValue, SlicingItem.Product.Density.Value);
+                if (weight <= SlicingItem.Weight)
                 {
-                    if (!chkOver.Checked) chkOver.Checked = true;
+                    this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - weight;
+                    txtAfterLength.DecimalValue = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, txtRemainWeight.DecimalValue, SlicingItem.Product.Density.Value);
                 }
                 else
                 {
-                    (sender as TextBox).Text = "0";
-                    (sender as TextBox).SelectAll();
+                    var ret = MessageBox.Show(string.Format("原料当前重量不足以加工成 长度为 {0} 米的小件 {1} 件, 是否继续?", txtLength.DecimalValue, txtCount.IntergerValue),
+                                              "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (ret == DialogResult.Yes)
+                    {
+                        if (!chkOver.Checked) chkOver.Checked = true;
+                    }
+                    else
+                    {
+                        (sender as TextBox).Text = "0";
+                        (sender as TextBox).SelectAll();
+                    }
                 }
             }
         }
@@ -265,7 +269,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     if (SlicingItem.Status == "余料")
                     {
                         //重新计算厚度
-                        new SteelRollBLL(AppSettings.Current.ConnStr).CalRealThick(SlicingItem);
+                        new SteelRollBLL(AppSettings.Current.ConnStr).CalRealThick(SlicingItem, false);
                         this.DialogResult = DialogResult.OK;
                     }
                     else

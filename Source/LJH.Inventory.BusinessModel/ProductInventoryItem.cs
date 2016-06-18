@@ -18,24 +18,9 @@ namespace LJH.Inventory.BusinessModel
         /// <param name="length"></param>
         /// <param name="density"></param>
         /// <returns></returns>
-        public static decimal? CalWeight(string specification, decimal length, decimal density)
+        public static decimal CalWeight(decimal thick, decimal width, decimal length, decimal density)
         {
-            if (!string.IsNullOrEmpty(specification))
-            {
-                try
-                {
-                    decimal? thick = SpecificationHelper.GetWrittenThick(specification);
-                    decimal? width = SpecificationHelper.GetWrittenWidth(specification);
-                    if (width.HasValue && width > 0 && thick.HasValue && thick > 0)
-                    {
-                        return (thick * width * length * density) / (1000 * 1000);
-                    }
-                }
-                catch
-                {
-                }
-            }
-            return null;
+            return (thick * width * length * density) / (1000 * 1000);
         }
 
         /// <summary>

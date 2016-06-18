@@ -68,7 +68,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         if (source.Status == "余料")
                         {
                             //重新计算厚度
-                            new SteelRollBLL(AppSettings.Current.ConnStr).CalRealThick(source);
+                            new SteelRollBLL(AppSettings.Current.ConnStr).CalRealThick(source, true);
                         }
                     }
                 }

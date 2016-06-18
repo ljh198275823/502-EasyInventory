@@ -293,7 +293,13 @@ namespace LJH.Inventory.BLL
             return unitWork.Commit();
         }
 
-        public CommandResult CalRealThick(ProductInventoryItem pi)
+        /// <summary>
+        /// 计算实际厚度
+        /// </summary>
+        /// <param name="pi"></param>
+        /// <param name="realCount">为真表示按库存实际数量计算，为假表示按加工实际数量计算</param>
+        /// <returns></returns>
+        public CommandResult CalRealThick(ProductInventoryItem pi, bool realCount)
         {
             try
             {
@@ -306,11 +312,18 @@ namespace LJH.Inventory.BLL
                 if (records != null && records.Count > 0 && records.TrueForAll(it => it.SliceType == "开平" || it.SliceType == "开卷"))
                 {
                     decimal weight = records.Max(it => it.BeforeWeight); //获取第一次加工记录前的重量，这个重量即为这个卷加工前的重量
-
+                    decimal len = 0;
                     ProductInventoryItemSearchCondition pcon = new ProductInventoryItemSearchCondition();
                     pcon.SourceRoll = pi.ID;
                     var items = provider.GetItems(pcon).QueryObjects;
-                    decimal len = items.Sum(it => it.Product.Length.Value * it.Count); //长度，为所有库存中小件数量乘以其长度，这里不能以加工记录的数量为准，是因为小件会有盘点，所以数量以库存中的为准
+                    if (realCount)
+                    {
+                        len = items.Sum(it => it.Product.Length.Value * it.Count); //长度，为所有库存中小件数量乘以其长度，这里不能以加工记录的数量为准，是因为小件会有盘点，所以数量以库存中的为准
+                    }
+                    else
+                    {
+                        len = records.Sum(it => it.Length.Value * it.Count);
+                    }
 
                     thick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(pi.Product.Specification).Value, weight, len, pi.Product.Density.Value);
                     if (thick.HasValue)

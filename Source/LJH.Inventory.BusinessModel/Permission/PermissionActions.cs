@@ -55,6 +55,10 @@ namespace LJH.Inventory.BusinessModel
         /// 原材料加工
         /// </summary>
         Slice=0x200,
+        /// <summary>
+        /// 显示价格
+        /// </summary>
+        ShowPrice=0x400,
     }
 }
         

@@ -63,7 +63,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 原材料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify, Description = "原材料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.ShowPrice, Description = "原材料")]
         SteelRoll = 101,
         /// <summary>
         /// 小件
