@@ -28,6 +28,8 @@ namespace LJH.Inventory.UI.Forms
             txtDefaultWareHouse.Text = UserSettings.Current.DefaultWarehouse;
             txtDefaultCustomer.Text = UserSettings.Current.DefaultCustomer;
             txtDefaultProductCategory.Text = UserSettings.Current.DefaultProductCategory;
+            chkRealCount.Checked = UserSettings.Current.RealCountWhenCalRealThick;
+            chkNeedMaterial.Checked = UserSettings.Current.NeedMaterial;
             #endregion
 
             #region 公司信息
@@ -107,6 +109,8 @@ namespace LJH.Inventory.UI.Forms
             us.DefaultCustomer = txtDefaultCustomer.Text;
             us.DefaultProductCategory = txtDefaultProductCategory.Text;
             us.DefaultWarehouse = txtDefaultWareHouse.Text;
+            us.RealCountWhenCalRealThick = chkRealCount.Checked;
+            us.NeedMaterial = chkNeedMaterial.Checked;
             #endregion
 
             #region 公司信息

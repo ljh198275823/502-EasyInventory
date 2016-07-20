@@ -65,21 +65,25 @@
             this.rdWithoutTax = new System.Windows.Forms.RadioButton();
             this.chkOtherCostPrepay = new System.Windows.Forms.CheckBox();
             this.chkTransCostPrepay = new System.Windows.Forms.CheckBox();
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.label7 = new System.Windows.Forms.Label();
             this.txtPosition = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
+            this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.pnlTax.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(382, 362);
+            this.btnClose.Location = new System.Drawing.Point(382, 405);
             this.btnClose.Size = new System.Drawing.Size(107, 35);
             this.btnClose.TabIndex = 21;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(254, 362);
+            this.btnOk.Location = new System.Drawing.Point(254, 405);
             this.btnOk.Size = new System.Drawing.Size(107, 35);
             this.btnOk.TabIndex = 20;
             // 
@@ -95,7 +99,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(67, 322);
+            this.label12.Location = new System.Drawing.Point(67, 353);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 55;
@@ -187,7 +191,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(100, 318);
+            this.txtMemo.Location = new System.Drawing.Point(100, 349);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(391, 21);
             this.txtMemo.TabIndex = 12;
@@ -365,7 +369,7 @@
             // txtOtherCost
             // 
             this.txtOtherCost.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtOtherCost.Location = new System.Drawing.Point(100, 253);
+            this.txtOtherCost.Location = new System.Drawing.Point(100, 284);
             this.txtOtherCost.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -385,7 +389,7 @@
             // txtPurchasePrice
             // 
             this.txtPurchasePrice.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPurchasePrice.Location = new System.Drawing.Point(100, 218);
+            this.txtPurchasePrice.Location = new System.Drawing.Point(100, 249);
             this.txtPurchasePrice.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -405,7 +409,7 @@
             // txtTransCost
             // 
             this.txtTransCost.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtTransCost.Location = new System.Drawing.Point(346, 253);
+            this.txtTransCost.Location = new System.Drawing.Point(346, 284);
             this.txtTransCost.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -425,7 +429,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 257);
+            this.label11.Location = new System.Drawing.Point(13, 288);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(83, 12);
             this.label11.TabIndex = 96;
@@ -434,7 +438,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(285, 257);
+            this.label10.Location = new System.Drawing.Point(285, 288);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 12);
             this.label10.TabIndex = 95;
@@ -443,7 +447,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(35, 222);
+            this.label9.Location = new System.Drawing.Point(35, 253);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 12);
             this.label9.TabIndex = 94;
@@ -454,7 +458,7 @@
             this.pnlTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTax.Controls.Add(this.rdWithTax);
             this.pnlTax.Controls.Add(this.rdWithoutTax);
-            this.pnlTax.Location = new System.Drawing.Point(346, 216);
+            this.pnlTax.Location = new System.Drawing.Point(346, 247);
             this.pnlTax.Name = "pnlTax";
             this.pnlTax.Size = new System.Drawing.Size(145, 25);
             this.pnlTax.TabIndex = 134;
@@ -484,7 +488,7 @@
             // chkOtherCostPrepay
             // 
             this.chkOtherCostPrepay.AutoSize = true;
-            this.chkOtherCostPrepay.Location = new System.Drawing.Point(166, 255);
+            this.chkOtherCostPrepay.Location = new System.Drawing.Point(166, 286);
             this.chkOtherCostPrepay.Name = "chkOtherCostPrepay";
             this.chkOtherCostPrepay.Size = new System.Drawing.Size(84, 16);
             this.chkOtherCostPrepay.TabIndex = 135;
@@ -494,12 +498,55 @@
             // chkTransCostPrepay
             // 
             this.chkTransCostPrepay.AutoSize = true;
-            this.chkTransCostPrepay.Location = new System.Drawing.Point(412, 255);
+            this.chkTransCostPrepay.Location = new System.Drawing.Point(412, 286);
             this.chkTransCostPrepay.Name = "chkTransCostPrepay";
             this.chkTransCostPrepay.Size = new System.Drawing.Size(84, 16);
             this.chkTransCostPrepay.TabIndex = 136;
             this.chkTransCostPrepay.Text = "供应商代垫";
             this.chkTransCostPrepay.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(43, 321);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 138;
+            this.label7.Text = "存放位置";
+            // 
+            // txtPosition
+            // 
+            this.txtPosition.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPosition.Location = new System.Drawing.Point(100, 317);
+            this.txtPosition.Name = "txtPosition";
+            this.txtPosition.Size = new System.Drawing.Size(145, 21);
+            this.txtPosition.TabIndex = 137;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(311, 221);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.TabIndex = 140;
+            this.label8.Text = "材质";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(55, 221);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(41, 12);
+            this.label13.TabIndex = 139;
+            this.label13.Text = "车皮号";
+            // 
+            // txtMaterial
+            // 
+            this.txtMaterial.FormattingEnabled = true;
+            this.txtMaterial.Location = new System.Drawing.Point(344, 217);
+            this.txtMaterial.Name = "txtMaterial";
+            this.txtMaterial.Size = new System.Drawing.Size(145, 20);
+            this.txtMaterial.TabIndex = 141;
             // 
             // cmbSpecification
             // 
@@ -509,28 +556,23 @@
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 85;
             // 
-            // label7
+            // txtCarPlate
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(43, 290);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 138;
-            this.label7.Text = "存放位置";
-            // 
-            // txtPosition
-            // 
-            this.txtPosition.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPosition.Location = new System.Drawing.Point(100, 286);
-            this.txtPosition.Name = "txtPosition";
-            this.txtPosition.Size = new System.Drawing.Size(145, 21);
-            this.txtPosition.TabIndex = 137;
+            this.txtCarPlate.FormattingEnabled = true;
+            this.txtCarPlate.Location = new System.Drawing.Point(100, 217);
+            this.txtCarPlate.Name = "txtCarPlate";
+            this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
+            this.txtCarPlate.TabIndex = 142;
             // 
             // FrmSteelRollDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 418);
+            this.ClientSize = new System.Drawing.Size(516, 461);
+            this.Controls.Add(this.txtCarPlate);
+            this.Controls.Add(this.txtMaterial);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtPosition);
             this.Controls.Add(this.chkTransCostPrepay);
@@ -609,6 +651,10 @@
             this.Controls.SetChildIndex(this.chkTransCostPrepay, 0);
             this.Controls.SetChildIndex(this.txtPosition, 0);
             this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.label13, 0);
+            this.Controls.SetChildIndex(this.label8, 0);
+            this.Controls.SetChildIndex(this.txtMaterial, 0);
+            this.Controls.SetChildIndex(this.txtCarPlate, 0);
             this.pnlTax.ResumeLayout(false);
             this.pnlTax.PerformLayout();
             this.ResumeLayout(false);
@@ -657,5 +703,9 @@
         private System.Windows.Forms.CheckBox chkTransCostPrepay;
         private System.Windows.Forms.Label label7;
         private GeneralLibrary.WinformControl.DBCTextBox txtPosition;
+        private Controls.MaterialComboBox txtMaterial;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label13;
+        private Controls.CarplateComboBox txtCarPlate;
     }
 }

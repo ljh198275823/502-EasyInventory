@@ -75,6 +75,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.rd单件重 = new System.Windows.Forms.RadioButton();
             this.rd总重 = new System.Windows.Forms.RadioButton();
+            this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
+            this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -277,7 +281,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(99, 339);
+            this.txtMemo.Location = new System.Drawing.Point(99, 377);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(386, 21);
             this.txtMemo.TabIndex = 8;
@@ -285,7 +289,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(66, 342);
+            this.label3.Location = new System.Drawing.Point(66, 380);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 84;
@@ -317,7 +321,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(371, 386);
+            this.btnClose.Location = new System.Drawing.Point(371, 432);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 32);
             this.btnClose.TabIndex = 88;
@@ -327,7 +331,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(249, 386);
+            this.btnOk.Location = new System.Drawing.Point(249, 432);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 32);
             this.btnOk.TabIndex = 87;
@@ -403,7 +407,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(42, 311);
+            this.label8.Location = new System.Drawing.Point(42, 349);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 12);
             this.label8.TabIndex = 149;
@@ -412,7 +416,7 @@
             // txtPosition
             // 
             this.txtPosition.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPosition.Location = new System.Drawing.Point(99, 307);
+            this.txtPosition.Location = new System.Drawing.Point(99, 345);
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.Size = new System.Drawing.Size(145, 21);
             this.txtPosition.TabIndex = 148;
@@ -420,7 +424,7 @@
             // chkTransCostPrepay
             // 
             this.chkTransCostPrepay.AutoSize = true;
-            this.chkTransCostPrepay.Location = new System.Drawing.Point(406, 277);
+            this.chkTransCostPrepay.Location = new System.Drawing.Point(406, 315);
             this.chkTransCostPrepay.Name = "chkTransCostPrepay";
             this.chkTransCostPrepay.Size = new System.Drawing.Size(84, 16);
             this.chkTransCostPrepay.TabIndex = 147;
@@ -430,7 +434,7 @@
             // chkOtherCostPrepay
             // 
             this.chkOtherCostPrepay.AutoSize = true;
-            this.chkOtherCostPrepay.Location = new System.Drawing.Point(164, 277);
+            this.chkOtherCostPrepay.Location = new System.Drawing.Point(164, 315);
             this.chkOtherCostPrepay.Name = "chkOtherCostPrepay";
             this.chkOtherCostPrepay.Size = new System.Drawing.Size(84, 16);
             this.chkOtherCostPrepay.TabIndex = 146;
@@ -442,7 +446,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.rdWithTax);
             this.panel2.Controls.Add(this.rdWithoutTax);
-            this.panel2.Location = new System.Drawing.Point(250, 237);
+            this.panel2.Location = new System.Drawing.Point(250, 275);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(124, 25);
             this.panel2.TabIndex = 145;
@@ -472,7 +476,7 @@
             // txtOtherCost
             // 
             this.txtOtherCost.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtOtherCost.Location = new System.Drawing.Point(99, 275);
+            this.txtOtherCost.Location = new System.Drawing.Point(99, 313);
             this.txtOtherCost.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -492,7 +496,7 @@
             // txtPurchasePrice
             // 
             this.txtPurchasePrice.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPurchasePrice.Location = new System.Drawing.Point(99, 239);
+            this.txtPurchasePrice.Location = new System.Drawing.Point(99, 277);
             this.txtPurchasePrice.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -512,7 +516,7 @@
             // txtTransCost
             // 
             this.txtTransCost.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtTransCost.Location = new System.Drawing.Point(340, 275);
+            this.txtTransCost.Location = new System.Drawing.Point(340, 313);
             this.txtTransCost.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -532,7 +536,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 279);
+            this.label11.Location = new System.Drawing.Point(12, 317);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(83, 12);
             this.label11.TabIndex = 141;
@@ -541,7 +545,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(278, 279);
+            this.label9.Location = new System.Drawing.Point(278, 317);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 12);
             this.label9.TabIndex = 140;
@@ -550,7 +554,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(36, 243);
+            this.label12.Location = new System.Drawing.Point(36, 281);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(59, 12);
             this.label12.TabIndex = 139;
@@ -586,13 +590,51 @@
             this.rd总重.Text = "总重";
             this.rd总重.UseVisualStyleBackColor = true;
             // 
+            // txtCarPlate
+            // 
+            this.txtCarPlate.FormattingEnabled = true;
+            this.txtCarPlate.Location = new System.Drawing.Point(99, 241);
+            this.txtCarPlate.Name = "txtCarPlate";
+            this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
+            this.txtCarPlate.TabIndex = 154;
+            // 
+            // txtMaterial
+            // 
+            this.txtMaterial.FormattingEnabled = true;
+            this.txtMaterial.Location = new System.Drawing.Point(340, 241);
+            this.txtMaterial.Name = "txtMaterial";
+            this.txtMaterial.Size = new System.Drawing.Size(145, 20);
+            this.txtMaterial.TabIndex = 153;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(307, 245);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 152;
+            this.label4.Text = "材质";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(54, 245);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(41, 12);
+            this.label13.TabIndex = 151;
+            this.label13.Text = "车皮号";
+            // 
             // FrmSteelRollSliceStackIn
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(503, 442);
+            this.ClientSize = new System.Drawing.Size(503, 488);
+            this.Controls.Add(this.txtCarPlate);
+            this.Controls.Add(this.txtMaterial);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtPosition);
@@ -694,6 +736,10 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RadioButton rd单件重;
         private System.Windows.Forms.RadioButton rd总重;
+        private Controls.CarplateComboBox txtCarPlate;
+        private Controls.MaterialComboBox txtMaterial;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label13;
 
     }
 }

@@ -186,6 +186,7 @@ namespace LJH.Inventory.BusinessModel
             }
             else
             {
+                DateTime? dt = Items != null && Items.Count > 0 ? Items.Max(it => it.AddDate) : null;
                 si = new StackOutItem()
                 {
                     ID = Guid.NewGuid(),
@@ -196,7 +197,7 @@ namespace LJH.Inventory.BusinessModel
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
-                    AddDate = DateTime.Now,
+                    AddDate = dt.HasValue ? dt.Value.AddSeconds(1) : DateTime.Now,
                 };
                 if (inventory.Weight.HasValue && inventory.Model != "开平")
                 {
@@ -222,6 +223,7 @@ namespace LJH.Inventory.BusinessModel
             }
             else
             {
+                DateTime? dt = Items != null && Items.Count > 0 ? Items.Max(it => it.AddDate) : null;
                 si = new StackOutItem()
                 {
                     ID = Guid.NewGuid(),
@@ -230,7 +232,7 @@ namespace LJH.Inventory.BusinessModel
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
-                    AddDate = DateTime.Now,
+                    AddDate = dt.HasValue ? dt.Value.AddSeconds(1) : DateTime.Now,
                 };
                 Items.Add(si);
             }

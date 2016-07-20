@@ -269,7 +269,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     if (SlicingItem.Status == "余料")
                     {
                         //重新计算厚度
-                        new SteelRollBLL(AppSettings.Current.ConnStr).CalRealThick(SlicingItem, false);
+                        new SteelRollBLL(AppSettings.Current.ConnStr).CalRealThick(SlicingItem, UserSettings.Current.RealCountWhenCalRealThick);
                         this.DialogResult = DialogResult.OK;
                     }
                     else

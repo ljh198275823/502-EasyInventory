@@ -144,6 +144,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDefaultCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
@@ -172,7 +173,8 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.chkRealCount = new System.Windows.Forms.CheckBox();
+            this.chkNeedMaterial = new System.Windows.Forms.CheckBox();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1389,6 +1391,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.chkRealCount);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.txtBecomeRemainlessAt);
@@ -1404,17 +1407,26 @@
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "基本";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(21, 97);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 12);
+            this.label6.TabIndex = 94;
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkNeedMaterial);
             this.groupBox1.Controls.Add(this.txtDefaultCustomer);
             this.groupBox1.Controls.Add(this.lnkCustomer);
             this.groupBox1.Controls.Add(this.txtDefaultProductCategory);
             this.groupBox1.Controls.Add(this.lnkCategory);
             this.groupBox1.Controls.Add(this.txtDefaultWareHouse);
             this.groupBox1.Controls.Add(this.lnkWarehouse);
-            this.groupBox1.Location = new System.Drawing.Point(23, 96);
+            this.groupBox1.Location = new System.Drawing.Point(23, 125);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(292, 146);
+            this.groupBox1.Size = new System.Drawing.Size(292, 179);
             this.groupBox1.TabIndex = 93;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "产品入库";
@@ -1705,13 +1717,25 @@
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
             // 
-            // label6
+            // chkRealCount
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 97);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 12);
-            this.label6.TabIndex = 94;
+            this.chkRealCount.AutoSize = true;
+            this.chkRealCount.Location = new System.Drawing.Point(23, 91);
+            this.chkRealCount.Name = "chkRealCount";
+            this.chkRealCount.Size = new System.Drawing.Size(204, 16);
+            this.chkRealCount.TabIndex = 95;
+            this.chkRealCount.Text = "计算开平厚度以小件盘点数量为准";
+            this.chkRealCount.UseVisualStyleBackColor = true;
+            // 
+            // chkNeedMaterial
+            // 
+            this.chkNeedMaterial.AutoSize = true;
+            this.chkNeedMaterial.Location = new System.Drawing.Point(92, 140);
+            this.chkNeedMaterial.Name = "chkNeedMaterial";
+            this.chkNeedMaterial.Size = new System.Drawing.Size(132, 16);
+            this.chkNeedMaterial.TabIndex = 99;
+            this.chkNeedMaterial.Text = "入库时需要输入产品";
+            this.chkNeedMaterial.UseVisualStyleBackColor = true;
             // 
             // FrmSystemOptions
             // 
@@ -1893,5 +1917,7 @@
         private System.Windows.Forms.Label label5;
         private GeneralLibrary.WinformControl.IntergerTextBox txtLoadSheetsBefore;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox chkRealCount;
+        private System.Windows.Forms.CheckBox chkNeedMaterial;
     }
 }

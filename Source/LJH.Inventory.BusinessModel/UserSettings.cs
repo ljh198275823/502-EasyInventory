@@ -84,6 +84,16 @@ namespace LJH.Inventory.BusinessModel
 
         [DataMember]
         public string DefaultProductCategory { get; set; }
+        /// <summary>
+        /// 获取或设置计算开平厚度时是否以真实小件数量(包括盘点数量）为准（否则以开平数量为准)
+        /// </summary>
+        [DataMember]
+        public bool RealCountWhenCalRealThick { get; set; }
+        /// <summary>
+        /// 获取或设置产品入库时是否需要录入材质
+        /// </summary>
+        [DataMember]
+        public bool NeedMaterial { get; set; }
         #endregion
 
         #region 本公司信息

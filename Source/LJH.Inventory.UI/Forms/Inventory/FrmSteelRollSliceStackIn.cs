@@ -166,6 +166,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 cmbBrand.Focus();
                 return false;
             }
+            if (string.IsNullOrEmpty(txtMaterial.Text) && UserSettings.Current.NeedMaterial)
+            {
+                MessageBox.Show("请输入产品材质");
+                txtMaterial.Focus();
+                return false;
+            }
             return true;
         }
 
@@ -208,6 +214,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (item.OtherCost.HasValue) txtOtherCost.DecimalValue = item.OtherCost.Value;
             chkOtherCostPrepay.Checked = item.OtherCostPrepay.HasValue && item.OtherCostPrepay.Value;
             txtPosition.Text = item.Position;
+            txtCarPlate.Text = item.Carplate;
+            txtMaterial.Text = item.Material;
             txtMemo.Text = item.Memo;
             btnOk.Enabled = !IsForView;
         }
@@ -321,6 +329,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.OtherCost = txtOtherCost.DecimalValue > 0 ? (decimal?)txtOtherCost.DecimalValue : null;
             item.OtherCostPrepay = chkOtherCostPrepay.Checked;
             item.Position = txtPosition.Text;
+            item.Material = txtMaterial.Text;
+            item.Carplate = txtCarPlate.Text;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;
             var ret = new SteelRollSliceBLL(AppSettings.Current.ConnStr).Add(item);

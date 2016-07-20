@@ -123,6 +123,10 @@ namespace LJH.Inventory.BusinessModel
 
         public string Position { get; set; }
 
+        public string Material { get; set; }
+
+        public string Carplate { get; set; }
+
         public string Memo { get; set; }
         #endregion
 
