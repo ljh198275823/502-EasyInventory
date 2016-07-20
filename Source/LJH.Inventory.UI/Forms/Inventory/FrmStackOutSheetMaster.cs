@@ -113,6 +113,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
+            LJH.GeneralLibrary.LOG.FileLog.Log("数据加载", "送货单管理开始加载数据");
             _AllCustomers.Clear();
             var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
             if (cs != null && cs.Count > 0)
@@ -130,11 +131,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
-            return FilterData();
+            var ret = FilterData();
+            LJH.GeneralLibrary.LOG.FileLog.Log("数据加载", string.Format("送货单管理完成加载数据 共 {0} 条数据", ret != null ? ret.Count : 0));
+            return ret;
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
         {
+            LJH.GeneralLibrary.LOG.FileLog.Log("数据加载", "送货单管理开始显示数据");
             _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
@@ -159,6 +163,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             _Fresh = true;
             base.ShowItemsOnGrid(items);
             _Fresh = false;
+            LJH.GeneralLibrary.LOG.FileLog.Log("数据加载", "送货单管理完成显示数据");
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)

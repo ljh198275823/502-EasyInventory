@@ -25,9 +25,9 @@ namespace LJH.Inventory.DAL.IProvider
         /// <returns></returns>
         public static T Create<T>(string connStr) where T : class
         {
-#if DEBUG
-            LJH.GeneralLibrary.Core.DAL.DALConfig.Default.Log = true;
-#endif
+//#if DEBUG
+//            LJH.GeneralLibrary.Core.DAL.DALConfig.Default.Log = true;
+//#endif
 
             T instance = null;
             try
