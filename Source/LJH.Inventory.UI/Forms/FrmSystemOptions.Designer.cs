@@ -144,8 +144,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chkRealCount = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkNeedMaterial = new System.Windows.Forms.CheckBox();
             this.txtDefaultCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.txtDefaultProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -173,8 +175,6 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
-            this.chkRealCount = new System.Windows.Forms.CheckBox();
-            this.chkNeedMaterial = new System.Windows.Forms.CheckBox();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1407,6 +1407,16 @@
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "基本";
             // 
+            // chkRealCount
+            // 
+            this.chkRealCount.AutoSize = true;
+            this.chkRealCount.Location = new System.Drawing.Point(23, 91);
+            this.chkRealCount.Name = "chkRealCount";
+            this.chkRealCount.Size = new System.Drawing.Size(204, 16);
+            this.chkRealCount.TabIndex = 95;
+            this.chkRealCount.Text = "计算开平厚度以小件盘点数量为准";
+            this.chkRealCount.UseVisualStyleBackColor = true;
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -1430,6 +1440,16 @@
             this.groupBox1.TabIndex = 93;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "产品入库";
+            // 
+            // chkNeedMaterial
+            // 
+            this.chkNeedMaterial.AutoSize = true;
+            this.chkNeedMaterial.Location = new System.Drawing.Point(92, 140);
+            this.chkNeedMaterial.Name = "chkNeedMaterial";
+            this.chkNeedMaterial.Size = new System.Drawing.Size(156, 16);
+            this.chkNeedMaterial.TabIndex = 99;
+            this.chkNeedMaterial.Text = "入库时需要输入产品材质";
+            this.chkNeedMaterial.UseVisualStyleBackColor = true;
             // 
             // txtDefaultCustomer
             // 
@@ -1716,26 +1736,6 @@
             this.label78.Size = new System.Drawing.Size(53, 12);
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
-            // 
-            // chkRealCount
-            // 
-            this.chkRealCount.AutoSize = true;
-            this.chkRealCount.Location = new System.Drawing.Point(23, 91);
-            this.chkRealCount.Name = "chkRealCount";
-            this.chkRealCount.Size = new System.Drawing.Size(204, 16);
-            this.chkRealCount.TabIndex = 95;
-            this.chkRealCount.Text = "计算开平厚度以小件盘点数量为准";
-            this.chkRealCount.UseVisualStyleBackColor = true;
-            // 
-            // chkNeedMaterial
-            // 
-            this.chkNeedMaterial.AutoSize = true;
-            this.chkNeedMaterial.Location = new System.Drawing.Point(92, 140);
-            this.chkNeedMaterial.Name = "chkNeedMaterial";
-            this.chkNeedMaterial.Size = new System.Drawing.Size(132, 16);
-            this.chkNeedMaterial.TabIndex = 99;
-            this.chkNeedMaterial.Text = "入库时需要输入产品";
-            this.chkNeedMaterial.UseVisualStyleBackColor = true;
             // 
             // FrmSystemOptions
             // 
