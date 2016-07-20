@@ -24,10 +24,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 私有变量
         private List<StackOutSheet> _Sheets = null;
         private List<WareHouse> _Warehouses = null;
-        private List<CompanyInfo> _AllCustomers = null;
+        private Dictionary<string, CompanyInfo> _AllCustomers = new Dictionary<string, CompanyInfo>();
 
         private List<CustomerPayment> _AllPayments = null;
-        private List<CustomerReceivable> _AllReceivables = null;
+        private Dictionary<string, List<CustomerReceivable>> _Receivables = new Dictionary<string, List<CustomerReceivable>>();
         private bool _Fresh = false;
         #endregion
 
@@ -61,7 +61,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     if (_AllCustomers != null)
                     {
-                        List<CompanyInfo> pcs = _AllCustomers.Where(it => it.Name.Contains(txtCustomer.Text)).ToList();
+                        List<CompanyInfo> pcs = _AllCustomers.Where(it => it.Value.Name.Contains(txtCustomer.Text)).Select(it => it.Value).ToList();
                         if (pcs != null && pcs.Count > 0)
                         {
                             items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
@@ -79,8 +79,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                             (item.State == SheetState.Shipped && chkShipped.Checked) ||
                                             (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
                 }
-                if(items!=null ) items = items.Where(item => (chkWithTax.Checked && item.WithTax) ||
-                                            (chkWithoutTax.Checked && !item.WithTax)).ToList();
+                if (items != null) items = items.Where(item => (chkWithTax.Checked && item.WithTax) ||
+                                              (chkWithoutTax.Checked && !item.WithTax)).ToList();
             }
             List<object> objs = null;
             if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
@@ -113,7 +113,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
-            if (_AllCustomers == null) _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
+            _AllCustomers.Clear();
+            var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
+            if (cs != null && cs.Count > 0)
+            {
+                foreach (var c in cs) _AllCustomers.Add(c.ID, c);
+            }
+
             if (SearchCondition == null)
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
@@ -134,7 +140,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
             crsc.CreateDate = GetDateTimeRange();
             crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable };
-            _AllReceivables = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(crsc).QueryObjects;
+            var crs = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(crsc).QueryObjects;
+            _Receivables.Clear();
+            if (crs != null && crs.Count > 0)
+            {
+                foreach (var cr in crs)
+                {
+                    if (!_Receivables.ContainsKey(cr.SheetID)) _Receivables.Add(cr.SheetID, new List<CustomerReceivable>());
+                    _Receivables[cr.SheetID].Add(cr);
+                }
+            }
 
             CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
             cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer };
@@ -152,7 +167,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Tag = sheet;
             row.Cells["colSheetDate"].Value = sheet.SheetDate.ToString("yyyy年MM月dd日");
             row.Cells["colSheetNo"].Value = sheet.ID;
-            CompanyInfo customer = _AllCustomers != null ? _AllCustomers.SingleOrDefault(it => it.ID == sheet.CustomerID) : null;
+            CompanyInfo customer = _AllCustomers.ContainsKey(sheet.CustomerID) ? _AllCustomers[sheet.CustomerID] : null;
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
             row.Cells["colFileID"].Value = customer != null ? customer.FileID : null;
             row.Cells["colWithTax"].Value = sheet.WithTax;
@@ -168,11 +183,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colMemo"].Value = sheet.Memo;
             if (_Fresh) //全部刷新
             {
-                if (sheet.State == SheetState.Shipped && _AllReceivables != null)
+                if (sheet.State == SheetState.Shipped)
                 {
-                    var cr = _AllReceivables.Where(it => it.SheetID == sheet.ID && it.ClassID == CustomerReceivableType.CustomerReceivable);
-                    row.Cells["colPaid"].Value = cr.Sum(it => it.Haspaid);
-                    row.Cells["colNotPaid"].Value = cr.Sum(it => it.Remain);
+                    var cr = _Receivables.ContainsKey(sheet.ID) ? _Receivables[sheet.ID] : null;
+                    row.Cells["colPaid"].Value = cr != null ? cr.Sum(it => it.Haspaid) : 0; ;
+                    row.Cells["colNotPaid"].Value = cr != null ? cr.Sum(it => it.Remain) : 0;
                 }
                 else if (sheet.State == SheetState.Add || sheet.State == SheetState.Approved)
                 {

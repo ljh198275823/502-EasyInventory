@@ -104,6 +104,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colAction")
                 {
                     dataGridView1.Rows.Remove(dataGridView1.Rows[e.RowIndex]);
+                    _FrmSteelRoll.ReFreshData();
                 }
             }
         }

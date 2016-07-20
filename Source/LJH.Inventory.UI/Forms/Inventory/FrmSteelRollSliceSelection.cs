@@ -43,7 +43,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             bool exists = false;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (object.ReferenceEquals(row.Tag, e.SelectedItem)) exists = true;
+                if ((row.Tag as ProductInventoryItem).ID == (e.SelectedItem as ProductInventoryItem).ID) exists = true;
                 break;
             }
             if (!exists)
@@ -65,6 +65,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         var r = dataGridView1.Rows.Add();
                         ShowItemInGridViewRow(dataGridView1.Rows[r], e.SelectedItem, frm.Count);
                         dataGridView1.Rows[r].Selected = false;
+                    }
+                    else
+                    {
+                        e.Canceled = true;
                     }
                 }
             }
@@ -136,6 +140,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             else if (dataGridView1.Columns[e.ColumnIndex].Name == "colAction")
             {
                 dataGridView1.Rows.Remove(dataGridView1.Rows[e.RowIndex]);
+                _FrmSteelRollSlice.ReFreshData();
             }
         }
 

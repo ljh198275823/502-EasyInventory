@@ -1422,25 +1422,27 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.FreshStatusBar">
-            <summary>
-            刷新状态栏
-            </summary>
-        </member>
         <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.ShowRowBackColor">
             <summary>
             显示数据行的颜色
             </summary>
         </member>
-        <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.ExportData">
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.PerformExportData">
             <summary>
             导出数据
             </summary>
         </member>
-        <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.SelectColumns">
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.PerformSelectColumns">
             <summary>
             选择数据网格中要显示的列
             </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.ShowItemsOnGrid(System.Collections.Generic.List{System.Object})">
+            <summary>
+            显示数据
+            </summary>
+            <param name="items">要显示的数据</param>
+            <param name="reload">是否重新加载数据，如果为真，则表示先会清空之前的数据，否则保留旧有数据</param>
         </member>
         <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.GetConfig(System.String,System.String)">
             <summary>
@@ -1467,6 +1469,19 @@
             <summary>
             显示操作的权限
             </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.ShowItemInGridViewRow(System.Windows.Forms.DataGridViewRow,System.Object)">
+            <summary>
+            在网格行中显示单个数据
+            </summary>
+            <param name="row"></param>
+            <param name="item"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.FrmReportBase.GetDataSource">
+            <summary>
+            获取数据
+            </summary>
+            <returns></returns>
         </member>
         <member name="F:LJH.GeneralLibrary.WinformControl.UCIPTextBox.components">
             <summary> 
@@ -3355,6 +3370,43 @@
             <summary>
             获取或设置发卡机的韦根类型
             </summary>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.NPOIExcelHelper.GetValue(NPOI.SS.UserModel.ICell)">
+            <summary>
+            获取单元格类型(xls)
+            </summary>
+            <param name="cell"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.NPOIExcelHelper.Import(System.String)">
+            <summary>读取excel
+            默认第一行为表头
+            </summary>
+            <param name="strFileName">excel文档路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.NPOIExcelHelper.Export(System.Data.DataTable,System.String)">
+            <summary>
+            将数据从datatable导出到文件中
+            </summary>
+            <param name="dt"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.NPOIExcelHelper.Export(System.Windows.Forms.DataGridView,System.String,System.Boolean)">
+            <summary>
+            DataGridView导出到Excel文件
+            </summary>
+            <param name="dtSource">源DataTGridview</param>
+            <param name="strHeaderText">表头文本</param>
+            <param name="fileName">保存位置</param>
+        </member>
+        <member name="M:LJH.GeneralLibrary.Core.UI.NPOIExcelHelper.Export(System.Windows.Forms.DataGridView,System.Boolean)">
+            <summary>
+            DataGridView导出到Excel文件, 带对话框
+            </summary>
+            <param name="dtSource">源DataTGridview</param>
+            <param name="strHeaderText">表头文本</param>
+            <param name="fileName">保存位置</param>
         </member>
         <member name="T:LJH.GeneralLibrary.Printer.KPM150BarCodePrinter">
             <summary>
