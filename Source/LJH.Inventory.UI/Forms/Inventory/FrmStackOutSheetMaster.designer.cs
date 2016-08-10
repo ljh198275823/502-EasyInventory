@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +67,7 @@
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -397,6 +399,7 @@
             this.colSheetNo,
             this.colCustomer,
             this.colWithTax,
+            this.colWeight,
             this.colAmount,
             this.colState,
             this.colShipDate,
@@ -446,11 +449,20 @@
             this.colWithTax.ReadOnly = true;
             this.colWithTax.Width = 60;
             // 
+            // colWeight
+            // 
+            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colWeight.HeaderText = "重量";
+            this.colWeight.Name = "colWeight";
+            this.colWeight.ReadOnly = true;
+            // 
             // colAmount
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -464,9 +476,9 @@
             // 
             // colShipDate
             // 
-            dataGridViewCellStyle2.Format = "G";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Format = "G";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle3;
             this.colShipDate.HeaderText = "发货日期";
             this.colShipDate.Name = "colShipDate";
             this.colShipDate.ReadOnly = true;
@@ -579,10 +591,14 @@
         private System.Windows.Forms.CheckBox chkWithTax;
         private System.Windows.Forms.CheckBox chkSheetDate;
         private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private System.Windows.Forms.Button btnLast3Month;
+        private System.Windows.Forms.TextBox txtCustomer;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colShipDate;
@@ -593,8 +609,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDriverCall;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarPlate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.Button btnLast3Month;
-        private System.Windows.Forms.TextBox txtCustomer;
-        private System.Windows.Forms.Label label2;
     }
 }

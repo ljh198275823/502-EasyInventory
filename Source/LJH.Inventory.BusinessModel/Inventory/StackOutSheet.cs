@@ -124,6 +124,16 @@ namespace LJH.Inventory.BusinessModel
                 return items.Sum(item => item.Amount);
             }
         }
+
+        public decimal TotalWeight
+        {
+            get
+            {
+                var items = GetSummaryItems();
+                if (items == null || items.Count == 0) return 0;
+                return items.Sum(item => item.TotalWeight.HasValue ? item.TotalWeight.Value : 0);
+            }
+        }
         #endregion
 
         #region ISheet接口

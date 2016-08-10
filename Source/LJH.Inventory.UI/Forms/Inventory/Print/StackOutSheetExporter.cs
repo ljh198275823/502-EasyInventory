@@ -157,6 +157,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                     if (cell != null) cell.SetCellValue((double)info.Amount);
                     cell = row.GetCell(2);
                     if (cell != null) cell.SetCellValue(RMBHelper.NumGetStr((double)info.Amount));
+                    cell = row.GetCell(8);
+                    if (cell != null) cell.SetCellValue((double)info.TotalWeight);
                 }
                 MemoryStream stream = new MemoryStream();
                 wb.Write(stream);

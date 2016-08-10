@@ -73,7 +73,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
                 }
                 int r = ItemsGrid.Rows.Add();
-                ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
+                ItemsGrid.Rows[r].Cells["colCategory"].Value = "合计";
+                ItemsGrid.Rows[r].Cells["colWeight"].Value = sheet.TotalWeight;
+                ItemsGrid.Rows[r].Cells["colCount"].Value = items.Count;
                 ItemsGrid.Rows[r].Cells["colTotal"].Value = sheet.Amount;
             }
         }
@@ -402,6 +404,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         row.Cells["colTotal"].Value = item.Amount;
                     }
                     ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
+                    ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colWeight"].Value = sheet.TotalWeight;
                 }
             }
         }

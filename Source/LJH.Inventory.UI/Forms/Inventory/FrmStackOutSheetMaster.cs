@@ -145,6 +145,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             CompanyInfo customer = customerTree1.GetCustomer(sheet.CustomerID);
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
             row.Cells["colWithTax"].Value = sheet.WithTax;
+            row.Cells["colWeight"].Value = sheet.TotalWeight;
             row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
             row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? (DateTime?)sheet.LastActiveDate: null;
