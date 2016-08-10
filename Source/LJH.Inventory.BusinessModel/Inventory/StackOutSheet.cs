@@ -206,14 +206,10 @@ namespace LJH.Inventory.BusinessModel
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
+                    TotalWeight = inventory.Weight * count,
                     AddDate = DateTime.Now,
                     Memo = inventory.Carplate
                 };
-                if (inventory.Weight.HasValue && inventory.Model != "开平")
-                {
-                    if (si.TotalWeight == null) si.TotalWeight = 0;
-                    si.TotalWeight += (inventory.Product != null ? inventory.Product.Weight : inventory.Weight) * count;
-                }
                 Items.Add(si);
             }
         }
@@ -224,30 +220,9 @@ namespace LJH.Inventory.BusinessModel
         public List<StackOutItem> GetSummaryItems()
         {
             if (Items == null) return null;
-            List<StackOutItem> ret = new List<StackOutItem>();
-
-            var groups = from it in Items
-                         orderby it.AddDate ascending
-                         group it by it.ProductID;
-            foreach (var g in groups)
-            {
-                var si = new StackOutItem()
-                {
-                    ID = Guid.Empty,
-                    ProductID = g.First().ProductID,
-                    Length = g.First().Length,
-                    TotalWeight = g.First().TotalWeight,
-                    Unit = g.First().Unit,
-                    Count = g.Sum(it => it.Count),
-                    SheetNo = this.ID,
-                    Price = g.First().Price,
-                    InventoryItem = g.First().InventoryItem,
-                    AddDate = g.First().AddDate,
-                    Memo = g.First().Memo
-                };
-                ret.Add(si);
-            }
-            return ret;
+            return (from it in Items
+                    orderby it.AddDate ascending
+                    select it).ToList();
         }
         #endregion
     }

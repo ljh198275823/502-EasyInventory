@@ -37,6 +37,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is ProductInventoryItemSearchCondition)
             {
                 ProductInventoryItemSearchCondition con = search as ProductInventoryItemSearchCondition;
+                if (con.IDS != null && con.IDS.Count > 0) ret = ret.Where(item => con.IDS.Contains(item.ID));
                 if (con.Products != null && con.Products.Count > 0) ret = ret.Where(item => con.Products.Contains(item.ProductID));
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
@@ -57,7 +58,18 @@ namespace LJH.Inventory.DAL.LinqProvider
             var items = ret.ToList();
             if (items != null && items.Count > 0)
             {
-                List<Product> ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                List<Product> ps = null;
+                var pids = items.Select(it => it.ProductID).Distinct().ToList();
+                if (pids.Count > 20)
+                {
+                    ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
+                }
+                else
+                {
+                    ProductSearchCondition pcon = new ProductSearchCondition();
+                    pcon.ProductIDS = pids;
+                    ps = new ProductProvider(SqlURI, _MappingResource).GetItems(pcon).QueryObjects;
+                }
                 List<WareHouse> ws = new WareHouseProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
                 foreach (var pi in items)
                 {

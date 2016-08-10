@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using LJH.GeneralLibrary;
 using LJH.Inventory.BusinessModel;
-using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
-using LJH.Inventory.UI.Forms;
-using LJH.Inventory.UI.Forms.General;
 using LJH.Inventory.UI.Forms.Sale;
+using LJH.Inventory.UI.Forms.Financial.View;
 
 namespace LJH.Inventory.UI.Forms.Financial.Report
 {
@@ -34,6 +28,10 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Cells["colSheetID"].Value = cp.ID;
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colAmount"].Value = cp.Amount;
+            if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
+            else row.Cells["colRemain"].Value = null;
+            if (cp.Assigned != 0) row.Cells["colAssigned"].Value = cp.Assigned;
+            else row.Cells["colAssigned"].Value = null;
             if (_AllCustomers != null)
             {
                 var c = _AllCustomers.SingleOrDefault(it => it.ID == cp.CustomerID);
@@ -91,7 +89,37 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
         }
-        #endregion
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
+                CustomerPayment cp = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
+                if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
+                {
+                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowAssigns(cp);
+                    frm.ShowDialog();
+                }
+                else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colStackSheetID")
+                {
+                    if (!string.IsNullOrEmpty(cp.StackSheetID))
+                    {
+                        var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cp.StackSheetID).QueryObject;
+                        if (sheet != null)
+                        {
+                            Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                            frm.IsAdding = false;
+                            frm.IsForView = true;
+                            frm.UpdatingItem = sheet;
+                            frm.ShowDialog();
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

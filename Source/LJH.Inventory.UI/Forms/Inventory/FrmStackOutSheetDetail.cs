@@ -35,7 +35,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
             this.txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             this.txtCustomer.Tag = Customer;
-            var WareHouse = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetByID(item.WareHouseID).QueryObject;
             dtSheetDate.Value = item.SheetDate;
             this.txtLinker.Text = item.Linker;
             this.txtLinkerPhone.Text = item.LinkerCall;
@@ -67,10 +66,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var items = sheet.GetSummaryItems();
             if (items != null)
             {
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
+                con.IDS = items.Select(it => it.InventoryItem.Value).ToList();
+                var pis = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
                 foreach (StackOutItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
-                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
+                    ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item, pis.SingleOrDefault(it => it.ID == item.InventoryItem));
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCategory"].Value = "合计";
@@ -80,17 +82,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void ShowDeliveryItemOnRow(DataGridViewRow row, StackOutItem item)
+        private void ShowDeliveryItemOnRow(DataGridViewRow row, StackOutItem item, ProductInventoryItem pi)
         {
             row.Tag = item;
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
-            row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
-            row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
-            row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
-            if (item.InventoryItem.HasValue)
+            if (pi != null)
             {
-                var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject;
+                Product p = pi.Product;
+                row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
+                row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
+                row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
                 row.Cells["colMaterial"].Value = pi != null ? pi.Material : null;
+            }
+            else
+            {
+                Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
+                row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
+                row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
             }
             row.Cells["colLength"].Value = item.Length;
             row.Cells["colWeight"].Value = item.TotalWeight;
@@ -386,10 +394,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     if (col.Name == "colPrice")
                     {
                         item.Price = value;
-                        foreach (var it in sheet.Items)
-                        {
-                            if (it.ProductID == item.ProductID) it.Price = value;
-                        }
                         row.Cells[e.ColumnIndex].Value = value;
                         row.Cells["colTotal"].Value = item.Amount;
                     }
@@ -397,36 +401,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     {
                         item.TotalWeight = value > 0 ? (decimal?)value : null;
                         row.Cells[e.ColumnIndex].Value = value;
-                        foreach (var it in sheet.Items)
-                        {
-                            if (it.ProductID == item.ProductID) it.TotalWeight = value;
-                        }
                         row.Cells["colTotal"].Value = item.Amount;
                     }
                     ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
                     ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colWeight"].Value = sheet.TotalWeight;
-                }
-            }
-        }
-
-        private void btn_AddSlice_Click(object sender, EventArgs e)
-        {
-            FrmSteelRollSliceSelection frm = new FrmSteelRollSliceSelection();
-            ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition();
-            con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.Reserved };
-            con.HasRemain = true;
-            frm.SearchCondition = con;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                StackOutSheet sheet = UpdatingItem as StackOutSheet;
-                var items = frm.SelectedItems;
-                if (items != null && items.Count > 0)
-                {
-                    foreach (var item in items)
-                    {
-                        sheet.AddItems(item.Key, item.Value);
-                    }
-                    ShowDeliveryItemsOnGrid(sheet);
                 }
             }
         }
@@ -437,25 +415,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.StartPosition = FormStartPosition.CenterParent;
             if (frm.ShowDialog() == DialogResult.OK)
             {
+                var sheet = UpdatingItem as StackOutSheet;
                 List<ProductInventoryItem> srs = frm.SelectedItems;
                 if (srs != null && srs.Count > 0)
                 {
                     foreach (var sr in srs)
                     {
-                        var ret = new SteelRollBLL(AppSettings.Current.ConnStr).UpdateProduct(sr);
-                        if (ret.Result == ResultCode.Successful)
-                        {
-                            var sheet = UpdatingItem as StackOutSheet;
-                            if (sheet.Items != null && sheet.Items.Exists(it => it.InventoryItem == sr.ID))//原材料只加一次
-                            {
-                            }
-                            else
-                            {
-                                sheet.AddItems(sr, 1);
-                                ShowDeliveryItemsOnGrid(sheet);
-                            }
-                        }
+                        if (sheet.Items != null && sheet.Items.Exists(it => it.InventoryItem == sr.ID)) continue; //原材料只加一次
+                        sheet.AddItems(sr, 1);
                     }
+                    ShowDeliveryItemsOnGrid(sheet);
                 }
             }
         }

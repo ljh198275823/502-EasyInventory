@@ -7,6 +7,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 {
     public class ProductInventoryItemSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
+        public List<Guid> IDS { get; set; }
+
         public List<string> Products { get; set; }
 
         public string Model { get; set; }
