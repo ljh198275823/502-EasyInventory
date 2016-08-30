@@ -102,7 +102,7 @@ namespace LJH.Inventory.BLL
                 List<Product> ps = GetItems(null).QueryObjects;
                 if (ps != null && ps.Count > 0)
                 {
-                    p = ps.SingleOrDefault(it => it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
+                    p = ps.FirstOrDefault(it => it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
                 }
                 if (p != null) return p;
             }
