@@ -138,7 +138,7 @@
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtLength.Location = new System.Drawing.Point(96, 140);
             this.txtLength.MaxValue = new decimal(new int[] {
-            1000,
+            2000,
             0,
             0,
             0});
