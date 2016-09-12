@@ -132,7 +132,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CustomerPayment cp = dataGridView1.SelectedRows[0].Tag as CustomerPayment;
-                if (cp.State != SheetState.Canceled && cp.Remain > 0)
+                if (cp != null && cp.State != SheetState.Canceled && cp.Remain > 0)
                 {
                     string paymentID = cp.ID;
                     FrmPaymentAssign frm = new FrmPaymentAssign();
