@@ -38,6 +38,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             cmbSpecification.Init();
             dtStorageDateTime.Value = DateTime.Now;
+            txtMaterial.Init();
             if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultWarehouse))
             {
                 List<WareHouse> ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
