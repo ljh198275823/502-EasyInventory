@@ -128,7 +128,7 @@ namespace InventoryApplication
                 if (p == null)
                 {
                     FrmContactUs frm = new FrmContactUs();
-                    frm.txtMessage.Text = "没有找到加密狗";
+                    frm.txtMessage.Text = "没有检测到主机加密狗";
                     frm.ShowDialog();
                     Environment.Exit(0);
                 }
@@ -142,7 +142,7 @@ namespace InventoryApplication
                         if (temp[0] != _SoftDog.ProjectNo.ToString())
                         {
                             FrmContactUs frm = new FrmContactUs();
-                            frm.txtMessage.Text = "加密狗权限不足";
+                            frm.txtMessage.Text = "错误的项目编号";
                             frm.ShowDialog();
                             Environment.Exit(0);
                         }
@@ -172,7 +172,7 @@ namespace InventoryApplication
                     else
                     {
                         FrmContactUs frm = new FrmContactUs();
-                        frm.txtMessage.Text = "没有找到加密狗";
+                        frm.txtMessage.Text = "没有检测到主机加密狗";
                         frm.ShowDialog();
                         Environment.Exit(0);
                     }
