@@ -35,6 +35,7 @@ namespace InventoryApplication
         private bool _EnableSoftDog = true; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2016, 1, 31);
         private DateTime _dtHostDogTime = new DateTime(2016, 1, 31);
+        private int _RetryTime =0;
         #endregion
 
         #region 私有方法
@@ -128,13 +129,18 @@ namespace InventoryApplication
                 var p = new SysparameterInfoBLL(AppSettings.Current.ConnStr).GetByID("__dog").QueryObject; ;
                 if (p == null)
                 {
-                    FrmContactUs frm = new FrmContactUs();
-                    frm.txtMessage.Text = "没有检测到主机加密狗";
-                    frm.ShowDialog();
-                    Environment.Exit(0);
+                    _RetryTime++;
+                    if (_RetryTime >= 6) //由于有时会获取失败，所以可以重试几次，
+                    {
+                        FrmContactUs frm = new FrmContactUs();
+                        frm.txtMessage.Text = "没有检测到主机加密狗";
+                        frm.ShowDialog();
+                        Environment.Exit(0);
+                    }
                 }
                 else
                 {
+                    _RetryTime = 0;
                     DateTime hostLastDate = DateTime.MinValue;
                     string memo = new DTEncrypt().DSEncrypt(p.Memo);
                     if (DateTime.TryParse(p.Value, out hostLastDate) && !string.IsNullOrEmpty(memo))
@@ -551,7 +557,6 @@ namespace InventoryApplication
                 else
                 {
                     CheckHostDog();
-                    tmrSoftDogChecker.Interval = 60000;
                 }
             }
         }
