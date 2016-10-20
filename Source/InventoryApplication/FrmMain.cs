@@ -34,6 +34,7 @@ namespace InventoryApplication
         private SoftDogInfo _SoftDog;
         private bool _EnableSoftDog = true; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2016, 1, 31);
+        private DateTime _dtHostDogTime = new DateTime(2016, 1, 31);
         #endregion
 
         #region 私有方法
@@ -535,18 +536,22 @@ namespace InventoryApplication
             {
                 if (_SoftDog.IsHost)
                 {
-                    var p = new SysparameterInfo()
+                    if (_dtHostDogTime.Date != DateTime.Today)  //一天只写一次主机狗
                     {
-                        ID = "__dog",
-                        Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                        Memo = new DTEncrypt().Encrypt(string.Format("{0};{1}", _SoftDog.ProjectNo, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))),
-                    };
-                    new SysparameterInfoBLL(AppSettings.Current.ConnStr).Save(p);
-                    tmrSoftDogChecker.Interval = 60000;
+                        var p = new SysparameterInfo()
+                        {
+                            ID = "__dog",
+                            Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                            Memo = new DTEncrypt().Encrypt(string.Format("{0};{1}", _SoftDog.ProjectNo, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))),
+                        };
+                        new SysparameterInfoBLL(AppSettings.Current.ConnStr).Save(p);
+                        _dtHostDogTime = DateTime.Today;
+                    }
                 }
                 else
                 {
                     CheckHostDog();
+                    tmrSoftDogChecker.Interval = 60000;
                 }
             }
         }

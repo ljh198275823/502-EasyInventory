@@ -1,0 +1,23 @@
+delete Attachment 
+delete AttachmentHeader
+delete AutoCreateNumber 
+delete CollectionType 
+delete Customer 
+delete CustomerPayment 
+delete CustomerPaymentAssign 
+delete CustomerReceivable 
+delete DocumentOperation 
+delete InventoryCheckRecord 
+delete Product 
+delete ProductCategory 
+delete ProductInventoryItem 
+delete RelatedCompanyType 
+delete StackInItem 
+delete StackInSheet 
+delete StackOutItem 
+delete StackOutSheet 
+delete Staff 
+delete SteelRollSliceRecord 
+delete WareHouse 
+delete Unit 
+
