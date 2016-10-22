@@ -517,9 +517,9 @@ namespace InventoryApplication
             }
 
             DoLogIn();
-            CheckHostDog();
+            //CheckHostDog();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
-            this.tmrSoftDogChecker.Enabled = _EnableSoftDog;
+            //this.tmrSoftDogChecker.Enabled = _EnableSoftDog;
 
             OpenLastForms();
 
