@@ -94,7 +94,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                     cell = row.GetCell(4);
                     if (cell != null) cell.SetCellValue(info.Address);
                     cell = row.GetCell(7);
-                    if (cell != null) cell.SetCellValue(info.WithTax ? "KP" : "BK");
+                    if (cell != null) cell.SetCellValue(info.WithTax ? "KP" : "票已开");
                 }
                 row = sheet.GetRow(5);
                 if (row != null)
