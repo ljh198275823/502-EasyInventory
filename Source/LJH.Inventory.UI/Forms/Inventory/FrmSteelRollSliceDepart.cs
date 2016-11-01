@@ -66,11 +66,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定拆包的数量");
                 return;
             }
-            if (txtDepart.DecimalValue == ProductInventory.Count)
-            {
-                MessageBox.Show("拆包数量与原包数量一致，没有必要拆包");
-                return;
-            }
             if (txtWareHouse.Tag == null)
             {
                 MessageBox.Show("没有选择仓库");
