@@ -98,6 +98,18 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             _AllContacts = new ContactBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             base.ShowItemsOnGrid(items);
+            if (items != null)
+            {
+                lblOriginalTotal.Visible = true;
+                lblTotalWeight.Visible = true;
+                lblOriginalTotal.Text = string.Format("应收账款总额：{0:F2}元", items.Sum(it => (it as CustomerFinancialState).Recievables));
+                lblTotalWeight.Text = string.Format("未核销收款总额：{0:F2}元", items.Sum(it => (it as CustomerFinancialState).Prepay));
+            }
+            else
+            {
+                lblOriginalTotal.Visible = false;
+                lblTotalWeight.Visible = false;
+            }
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)

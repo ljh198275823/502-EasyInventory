@@ -31,7 +31,7 @@ namespace InventoryDemo
         #region 私有变量
         private Dictionary<Form, string> _openedForms = new Dictionary<Form, string>();
         private SoftDogInfo _SoftDog;
-        private DateTime _ExpireDate = new DateTime(2016, 7, 31);
+        private DateTime _ExpireDate = new DateTime(2017, 7, 31);
         #endregion
 
         #region 私有方法
