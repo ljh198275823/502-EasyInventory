@@ -21,7 +21,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             InitializeComponent();
         }
         private FrmProductInventoryMaster _FrmSteelRollSlice = null;
-
+        private List<WareHouse> _AllWarehouse = new LJH.Inventory.BLL.WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
         public Dictionary<ProductInventoryItem, decimal> SelectedItems { get; set; }
 
         #region 事件处理程序
@@ -81,7 +81,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCategory"].Value = pi.Product.Category == null ? pi.Product.CategoryID : pi.Product.Category.Name;
             row.Cells["colSpecification"].Value = pi.Product.Specification;
             row.Cells["colModel"].Value = pi.Product.Model;
-            row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
+            WareHouse ws = null;
+            if (_AllWarehouse != null) ws = _AllWarehouse.SingleOrDefault(it => it.ID == pi.WareHouseID);
+            row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
             row.Cells["colWeight"].Value = pi.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colDeliveryCount"].Value = deliveryCount;

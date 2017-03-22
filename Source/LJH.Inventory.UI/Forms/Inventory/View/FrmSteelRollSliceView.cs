@@ -25,10 +25,12 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         public SteelRollSlice SteelRollSlice { get; set; }
 
         List<ProductInventoryItem> srs = null;
+        List<WareHouse> _AllWarehouse = null;
 
         #region 重写基类方法
         protected override List<object> GetDataSource()
         {
+            _AllWarehouse = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             var f = new ProductInventoryItemSearchCondition();
             f.Sliced = true;
             srs = new SteelRollBLL(AppSettings .Current .ConnStr ).GetItems(f).QueryObjects;
@@ -62,7 +64,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Tag = c;
             Product p = c.Product;
             row.Cells["colCategory"].Value = p != null ? p.Category.Name : string.Empty;
-            row.Cells["colWareHouse"].Value = c.WareHouse.Name;
+            if (_AllWarehouse != null)
+            {
+                var ws = _AllWarehouse.SingleOrDefault(it => it.ID == c.WareHouseID);
+                row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
+            }
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colWeight"].Value = c.Product.Weight;
             row.Cells["colLength"].Value = c.Product.Length;

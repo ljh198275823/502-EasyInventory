@@ -562,7 +562,7 @@
             // 
             // tmrSoftDogChecker
             // 
-            this.tmrSoftDogChecker.Interval = 10000;
+            this.tmrSoftDogChecker.Interval = 60000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
             // 
             // FrmMain

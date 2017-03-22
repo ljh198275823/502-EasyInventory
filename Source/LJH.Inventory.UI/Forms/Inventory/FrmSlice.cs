@@ -42,8 +42,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCurrentWeigth.DecimalValue = item.Weight.Value;
             if (item.Length.HasValue) txtBeforeLength.DecimalValue = item.Length.Value;
             txtRemainWeight.DecimalValue = item.Weight.Value;
-            txtWareHouse.Text = item.WareHouse.Name;
-            txtWareHouse.Tag = item.WareHouse;
+            var ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(item.WareHouseID).QueryObject;
+            if (ws != null)
+            {
+                txtWareHouse.Text = ws.Name;
+                txtWareHouse.Tag = ws;
+            }
         }
 
         private bool CheckInput()

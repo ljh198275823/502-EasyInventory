@@ -36,7 +36,6 @@ namespace LJH.Inventory.BLL
             if (ret.Result == ResultCode.Successful)
             {
                 pi.WareHouseID = clone.WareHouseID;
-                pi.WareHouse = ws;
             }
             return ret;
         }

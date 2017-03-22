@@ -133,8 +133,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
             dtStorageDateTime.Value = item.AddDate;
-            txtWareHouse.Text = item.WareHouse.Name;
-            txtWareHouse.Tag = item.WareHouse;
+            var ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(item.WareHouseID).QueryObject;
+            txtWareHouse.Text = ws != null ? ws.Name : null;
+            txtWareHouse.Tag = ws;
             txtCategory.Text = item.Product.Category.Name;
             txtCategory.Tag = item.Product.Category;
             cmbSpecification.Specification = item.Product.Specification;
@@ -187,8 +188,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.ProductID = p.ID;
             item.Model = p.Model;
             item.AddDate = dtStorageDateTime.Value;
-            item.WareHouse = txtWareHouse.Tag as WareHouse;
-            item.WareHouseID = item.WareHouse.ID;
+            item.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
             if (txtOriginalLength.DecimalValue > 0)
             {

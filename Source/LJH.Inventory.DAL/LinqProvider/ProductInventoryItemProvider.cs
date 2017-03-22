@@ -25,25 +25,25 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (ret != null)
             {
                 ret.Product = new ProductProvider(SqlURI, _MappingResource).GetByID(ret.ProductID).QueryObject;
-                ret.WareHouse = new WareHouseProvider(SqlURI, _MappingResource).GetByID(ret.WareHouseID).QueryObject;
-                if (ret.Product == null || ret.WareHouse == null) ret = null;
+                if (ret.Product == null) ret = null;
             }
             return ret;
         }
 
         protected override List<ProductInventoryItem> GetingItems(DataContext dc, SearchCondition search)
         {
+            dc.Log = System.Console.Out;
             IQueryable<ProductInventoryItem> ret = dc.GetTable<ProductInventoryItem>();
             if (search is ProductInventoryItemSearchCondition)
             {
                 ProductInventoryItemSearchCondition con = search as ProductInventoryItemSearchCondition;
+                if (!string.IsNullOrEmpty(con.Model)) ret = ret.Where(item => item.Model == con.Model);
+                if (!string.IsNullOrEmpty(con.ExcludeModel)) ret = ret.Where(item => item.Model != con.ExcludeModel);
                 if (con.AddDateRange != null) ret = ret.Where(item => item.AddDate >= con.AddDateRange.Begin && item.AddDate <= con.AddDateRange.End);
                 if (con.Products != null && con.Products.Count > 0) ret = ret.Where(item => con.Products.Contains(item.ProductID));
                 if (con.IDS != null && con.IDS.Count > 0) ret = ret.Where(item => con.IDS.Contains(item.ID));
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
-                if (!string.IsNullOrEmpty(con.Model)) ret = ret.Where(item => item.Model == con.Model);
-                if (!string.IsNullOrEmpty(con.ExcludeModel)) ret = ret.Where(item => item.Model != con.ExcludeModel);
                 if (con.OrderItem != null) ret = ret.Where(item => item.OrderItem == con.OrderItem);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
                 if (con.PurchaseItem != null) ret = ret.Where(item => item.PurchaseItem == con.PurchaseItem);
@@ -65,25 +65,11 @@ namespace LJH.Inventory.DAL.LinqProvider
             var items = ret.ToList();
             if (items != null && items.Count > 0)
             {
-                List<Product> ps = null;
-                var pids = items.Select(it => it.ProductID).Distinct().ToList();
-                if (pids.Count > 20)
-                {
-                    ps = new ProductProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
-                }
-                else
-                {
-                    ProductSearchCondition pcon = new ProductSearchCondition();
-                    pcon.ProductIDS = pids;
-                    ps = new ProductProvider(SqlURI, _MappingResource).GetItems(pcon).QueryObjects;
-                }
-                List<WareHouse> ws = new WareHouseProvider(SqlURI, _MappingResource).GetItems(null).QueryObjects;
                 foreach (var pi in items)
                 {
-                    pi.Product = ps.SingleOrDefault(it => it.ID == pi.ProductID);
-                    pi.WareHouse = ws.SingleOrDefault(it => it.ID == pi.WareHouseID);
+                    pi.Product = new ProductProvider(SqlURI, _MappingResource).GetByID(pi.ProductID).QueryObject;
                 }
-                items.RemoveAll(it => it.Product == null || it.WareHouse == null);
+                items.RemoveAll(it => it.Product == null);
             }
             return items;
         }

@@ -111,7 +111,7 @@ namespace LJH.Inventory.BLL
         {
             if (con == null)
             {
-                con = new ProductInventoryItemSearchCondition() { Model = MODEL,HasRemain =true  };
+                con = new ProductInventoryItemSearchCondition() { Model = MODEL, HasRemain = true };
             }
             else if (con is ProductInventoryItemSearchCondition)
             {

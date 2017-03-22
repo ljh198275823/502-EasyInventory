@@ -346,12 +346,12 @@
             this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_AddSheet});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(137, 26);
+            this.CategoryMenu.Size = new System.Drawing.Size(153, 48);
             // 
             // mnu_AddSheet
             // 
             this.mnu_AddSheet.Name = "mnu_AddSheet";
-            this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
+            this.mnu_AddSheet.Size = new System.Drawing.Size(152, 22);
             this.mnu_AddSheet.Text = "新建送货单";
             this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
             // 

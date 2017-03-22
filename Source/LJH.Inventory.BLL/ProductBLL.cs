@@ -46,48 +46,6 @@ namespace LJH.Inventory.BLL
                 return new CommandResult(ResultCode.Fail, "创建商品编号失败，请重试");
             }
         }
-        /// <summary>
-        /// 增加商品信息，同时指定初始库存
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="wareHouseID"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        public CommandResult AddProduct(Product info, string wareHouseID, decimal count)
-        {
-            WareHouse ws = ProviderFactory.Create<IProvider<WareHouse, string>>(RepoUri).GetByID(wareHouseID).QueryObject;
-            if (ws == null) return new CommandResult(ResultCode.Fail, "指定的仓库 \"" + wareHouseID + "\" 不存在");
-            if (info.Category != null && !string.IsNullOrEmpty(info.Category.Prefix))
-            {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(info.Category.Prefix, UserSettings.Current.ProductSerialCount, "product");
-            }
-            else
-            {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("P", UserSettings.Current.ProductSerialCount, "product");
-            }
-            if (!string.IsNullOrEmpty(info.ID))
-            {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-                ProviderFactory.Create<IProvider<Product, string>>(RepoUri).Insert(info, unitWork);
-                ProductInventoryItem pii = new ProductInventoryItem()
-                {
-                    ID = Guid.NewGuid(),
-                    ProductID = info.ID,
-                    WareHouseID = wareHouseID,
-                    Unit = info.Unit,
-                    Price = info.Price,
-                    Count = count,
-                    AddDate = DateTime.Now,
-                    InventorySheet = "初始库存"
-                };
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pii, unitWork);
-                return unitWork.Commit();
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "创建商品编号失败，请重试");
-            }
-        }
 
         public Product Create(string categoryID, string specification, string model, decimal? density,bool onlyCreate=false)
         {

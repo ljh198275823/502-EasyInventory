@@ -30,7 +30,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 txtOriginal.DecimalValue = ProductInventory.Count;
                 ucSpecification1.Specification = ProductInventory.Product.Specification;
-                WareHouse w = ProductInventory.WareHouse;
+                WareHouse w = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(ProductInventory.WareHouseID).QueryObject;
                 txtWareHouse.Text = w != null ? w.Name : string.Empty;
                 txtWareHouse.Tag = w;
                 txtCustomer.Text = ProductInventory.Customer;

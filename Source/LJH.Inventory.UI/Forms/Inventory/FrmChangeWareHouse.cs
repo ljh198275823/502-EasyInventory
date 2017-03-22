@@ -24,7 +24,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (ProductInventory != null)
             {
-                txtOriginalWare.Text = ProductInventory.WareHouse != null ? ProductInventory.WareHouse.Name : ProductInventory.WareHouseID;
+                var ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(ProductInventory.WareHouseID).QueryObject;
+                txtOriginalWare.Text = ws != null ? ws.Name : ProductInventory.WareHouseID;
             }
         }
 

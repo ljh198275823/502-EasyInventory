@@ -27,6 +27,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 私有变量
         private List<ProductInventoryItem> _ProductInventorys = null;
         private List<ProductInventoryItem> srs = null; //表示加工源
+        private List<WareHouse> _AllWarehouse = null;
         #endregion
 
         #region 私有方法
@@ -41,7 +42,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             List<ProductInventoryItem> items = _ProductInventorys;
             if (items != null && items.Count > 0)
             {
-                if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouse.Name == wareHouseComboBox1.Text).ToList();
+                if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => !string.IsNullOrEmpty(it.Customer) && it.Customer.Contains(customerCombobox1.Text)).ToList();
@@ -55,7 +56,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         orderby p.Product.CategoryID ascending,
                                 SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
                                 SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
-                                p.WareHouse.Name descending
+                                p.WareHouseID descending
                         select (object)p).ToList();
             }
             return null;
@@ -74,6 +75,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
+            _AllWarehouse = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+
             var f = new ProductInventoryItemSearchCondition();
             f.Sliced = true;
             srs = new SteelRollBLL(AppSettings.Current.ConnStr).GetItems(f).QueryObjects;
@@ -97,7 +100,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCategory"].Value = pi.Product.Category == null ? pi.Product.CategoryID : pi.Product.Category.Name;
             row.Cells["colSpecification"].Value = pi.Product.Specification;
             row.Cells["colModel"].Value = pi.Product.Model;
-            row.Cells["colWareHouse"].Value = pi.WareHouse.Name;
+            if (_AllWarehouse != null)
+            {
+                var ws = _AllWarehouse.SingleOrDefault(it => it.ID == pi.WareHouseID);
+                row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
+            }
             row.Cells["colWeight"].Value = pi.Product.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colCount"].Value = pi.Count;

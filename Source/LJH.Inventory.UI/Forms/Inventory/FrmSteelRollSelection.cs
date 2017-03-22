@@ -35,6 +35,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private FrmSteelRollMaster _FrmSteelRoll = null;
         private List<CompanyInfo> _AllSuppliers = null;
+        private List<WareHouse> _AllWarehouse = null;
 
         private void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
@@ -43,7 +44,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
             row.Cells["colSpecification"].Value = sr.Product.Specification;
-            row.Cells["colWareHouse"].Value = sr.WareHouse.Name;
+            if (_AllWarehouse != null)
+            {
+                var ws = _AllWarehouse.SingleOrDefault(it => it.ID == sr.WareHouseID);
+                row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
+            }
             row.Cells["colOriginalWeight"].Value = sr.OriginalWeight;
             row.Cells["colOriginalLength"].Value = sr.OriginalLength;
             row.Cells["colWeight"].Value = sr.Weight;
@@ -64,6 +69,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void FrmSteelRollSelection_Load(object sender, EventArgs e)
         {
+            _AllWarehouse = new LJH.Inventory.BLL.WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             _AllSuppliers = new LJH.Inventory.BLL.CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
             _FrmSteelRoll = new FrmSteelRollMaster();
             _FrmSteelRoll.ForSelect = true;

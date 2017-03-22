@@ -54,8 +54,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置仓库ID
         /// </summary>
         public string WareHouseID { get; set; }
-
-        public WareHouse WareHouse { get; set; }
         /// <summary>
         /// 获取或设置商品ID
         /// </summary>

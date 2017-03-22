@@ -515,16 +515,14 @@ namespace InventoryApplication
             {
                 CheckDog();
             }
+            
 
             DoLogIn();
-            //CheckHostDog();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
-            //this.tmrSoftDogChecker.Enabled = _EnableSoftDog;
-
             OpenLastForms();
-
             this.ucFormViewMain.FormActivated += new EventHandler(ucFormViewMain_FormActivated);
             this.ucFormViewSecondary.FormActivated += new EventHandler(ucFormViewMain_FormActivated);
+            tmrSoftDogChecker.Enabled = _EnableSoftDog;
         }
 
         private void ucFormViewMain_FormActivated(object sender, EventArgs e)
@@ -538,27 +536,6 @@ namespace InventoryApplication
         private void tmrSoftDogChecker_Tick(object sender, EventArgs e)
         {
             CheckDog();
-            if (_SoftDog != null)
-            {
-                if (_SoftDog.IsHost)
-                {
-                    if (_dtHostDogTime.Date != DateTime.Today)  //一天只写一次主机狗
-                    {
-                        var p = new SysparameterInfo()
-                        {
-                            ID = "__dog",
-                            Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                            Memo = new DTEncrypt().Encrypt(string.Format("{0};{1}", _SoftDog.ProjectNo, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))),
-                        };
-                        new SysparameterInfoBLL(AppSettings.Current.ConnStr).Save(p);
-                        _dtHostDogTime = DateTime.Today;
-                    }
-                }
-                else
-                {
-                    CheckHostDog();
-                }
-            }
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)

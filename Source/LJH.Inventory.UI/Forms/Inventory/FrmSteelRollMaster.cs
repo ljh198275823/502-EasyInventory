@@ -27,6 +27,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 私有变量
         private List<ProductInventoryItem> _SteelRolls = null;
         private List<CompanyInfo> _AllSuppliers = null;
+        private List<WareHouse> _AllWarehouse = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
         #endregion
 
         #region 私有方法
@@ -206,7 +207,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var bll = new SteelRollBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
-                var con= new ProductInventoryItemSearchCondition();
+                var con = new ProductInventoryItemSearchCondition();
                 con.HasRemain = true;
                 con.States = new List<ProductInventoryState>();
                 con.States.Add(ProductInventoryState.Inventory);
@@ -257,7 +258,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
             row.Cells["colSpecification"].Value = sr.Product.Specification;
-            row.Cells["colWareHouse"].Value = sr.WareHouse.Name;
+            WareHouse ws = null;
+            if (_AllWarehouse != null) ws = _AllWarehouse.SingleOrDefault(it => it.ID == sr.WareHouseID);
+            row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
             row.Cells["colOriginalWeight"].Value = sr.OriginalWeight;
             row.Cells["colOriginalLength"].Value = sr.OriginalLength;
             row.Cells["colWeight"].Value = sr.Weight;

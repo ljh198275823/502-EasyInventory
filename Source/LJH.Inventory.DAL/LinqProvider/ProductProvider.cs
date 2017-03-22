@@ -13,21 +13,38 @@ namespace LJH.Inventory.DAL.LinqProvider
 {
     public class ProductProvider : ProviderBase<Product, string>
     {
+        private static Dictionary<string, Product> _AllProducts = null;
         #region 构造函数
         public ProductProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
             : base(connStr,ms)
         {
-
+            
         }
         #endregion
 
         #region 重写基类方法
         protected override Product GetingItemByID(string id, System.Data.Linq.DataContext dc)
         {
+            if (_AllProducts == null)
+            {
+                DataLoadOptions opt1 = new DataLoadOptions();
+                opt1.LoadWith<Product>(p => p.Category);
+                dc.LoadOptions = opt1;
+                var items = dc.GetTable<Product>();
+                foreach (var p in items)
+                {
+                    if (_AllProducts == null) _AllProducts = new Dictionary<string, Product>();
+                    _AllProducts.Add(p.ID, p);
+                }
+            }
+            if (_AllProducts == null || _AllProducts.Count == 0) return null;
+            if (_AllProducts.ContainsKey(id)) return _AllProducts[id];
             DataLoadOptions opt = new DataLoadOptions();
             opt.LoadWith<Product>(p => p.Category);
             dc.LoadOptions = opt;
-            return dc.GetTable<Product>().SingleOrDefault(item => item.ID == id);
+            var ret = dc.GetTable<Product>().SingleOrDefault(item => item.ID == id);
+            if (ret != null) _AllProducts.Add(ret.ID, ret);
+            return ret;
         }
 
         protected override List<Product> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
@@ -55,7 +72,15 @@ namespace LJH.Inventory.DAL.LinqProvider
                     }
                 }
             }
-            return ret.ToList();
+            var items = ret.ToList();
+            if (items != null && items.Count > 0)
+            {
+                foreach (var item in items)
+                {
+                    if (_AllProducts != null && !_AllProducts.ContainsKey(item.ID)) _AllProducts.Add(item.ID, item);
+                }
+            }
+            return items;
         }
 
         protected override void InsertingItem(Product info, DataContext dc)
