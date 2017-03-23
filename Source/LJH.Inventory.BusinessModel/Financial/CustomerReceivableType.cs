@@ -11,7 +11,7 @@ namespace LJH.Inventory.BusinessModel
     public enum CustomerReceivableType
     {
         /// <summary>
-        /// 客户其它应收款
+        /// 客户应收款
         /// </summary>
         CustomerReceivable = 1,
         /// <summary>

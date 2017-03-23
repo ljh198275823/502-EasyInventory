@@ -132,7 +132,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             var ret = FilterData();
-            LJH.GeneralLibrary.LOG.FileLog.Log("数据加载", string.Format("送货单管理完成加载数据 共 {0} 条数据", ret != null ? ret.Count : 0));
             return ret;
         }
 
@@ -243,8 +242,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 事件处理程序
-
-
         private void FreshData_Clicked(object sender, TreeNodeMouseClickEventArgs e)
         {
             FreshData();

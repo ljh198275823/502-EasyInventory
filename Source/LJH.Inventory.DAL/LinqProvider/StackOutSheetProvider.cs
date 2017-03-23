@@ -32,9 +32,9 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override List<StackOutSheet> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
-            DataLoadOptions opt = new DataLoadOptions();
-            opt.LoadWith<StackOutSheet>(item => item.Items);
-            dc.LoadOptions = opt;
+            //DataLoadOptions opt = new DataLoadOptions();
+            //opt.LoadWith<StackOutSheet>(item => item.Items);
+            //dc.LoadOptions = opt;
             IQueryable<StackOutSheet> ret = dc.GetTable<StackOutSheet>();
             if (search is SheetSearchCondition)
             {

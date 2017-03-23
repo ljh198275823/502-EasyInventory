@@ -78,7 +78,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
-                ItemsGrid.Rows[r].Cells["colTotal"].Value = sheet.Amount;
+                ItemsGrid.Rows[r].Cells["colTotal"].Value = sheet.CalAmount();
             }
         }
 
@@ -170,6 +170,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ItemsGrid.ContextMenuStrip = null;
             }
             btnShip.Visible = !(UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint);
+            if (!IsAdding)
+            {
+                StackOutSheet sheet = UpdatingItem as StackOutSheet;
+                if (sheet != null) UpdatingItem = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheet.ID).QueryObject;
+            }
         }
 
         protected override void ItemShowing()
@@ -513,7 +518,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         }
                         row.Cells["colTotal"].Value = item.Amount;
                     }
-                    ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.Amount;
+                    ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.CalAmount();
                 }
             }
         }

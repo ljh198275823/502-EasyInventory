@@ -109,3 +109,21 @@ ALTER VIEW [dbo].[View_StackOutRecord] AS
  SELECT     a.ID, b.LastActiveDate, a.SheetNo, b.CustomerID, b.WareHouseID, a.ProductID, a.Unit, a.Price, a.Count, a.Length, a.TotalWeight as Weight, b.State, b.SalesPerson, b.WithTax, a.OrderID, a.OrderItem, a.Memo, b.ClassID
  FROM         dbo.StackOutItem AS a INNER JOIN  dbo.StackOutSheet AS b ON a.SheetNo = b.ID
 go
+
+--送货单增加两列，一列总金额，一列总重量
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Amount' AND id = OBJECT_ID(N'[dbo].[StackOutSheet]'))
+BEGIN
+	exec ('alter table StackOutSheet add Amount decimal(18,4) null')
+	exec ('update StackOutSheet set Amount =a.Amount from (select SheetID ,SUM(Amount)as amount from CustomerReceivable  where ClassID=1 group by SheetID ) as a where a.SheetID =ID ')
+    exec ('update StackOutSheet set Amount =0 where Amount is null')
+	exec ('alter table StackOutSheet alter column Amount decimal(18,4) not null')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='TotalWeight' AND id = OBJECT_ID(N'[dbo].[StackOutSheet]'))
+BEGIN
+	exec ('alter table StackOutSheet add TotalWeight decimal(18,4) null')
+    exec ('update StackOutSheet set TotalWeight =0 where TotalWeight is null')
+	exec ('alter table StackOutSheet alter column TotalWeight decimal(18,4) not null')
+end
+go

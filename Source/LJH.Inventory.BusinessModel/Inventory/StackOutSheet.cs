@@ -86,6 +86,14 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public bool WithTax { get; set; }
         /// <summary>
+        /// 获取或设置总金额
+        /// </summary>
+        public decimal Amount { get; set; }
+        /// <summary>
+        /// 获取或设置总重量
+        /// </summary>
+        public decimal TotalWeight { get; set; }
+        /// <summary>
         /// 获取或设置送货单的折扣额
         /// </summary>
         public decimal Discount { get; set; }
@@ -113,16 +121,15 @@ namespace LJH.Inventory.BusinessModel
 
         #region 只读属性
         /// <summary>
-        /// 获取送货单的总货款
+        /// 计算送货单的总金额
         /// </summary>
-        public decimal Amount
+        public decimal CalAmount()
         {
-            get
-            {
-                var items = GetSummaryItems();
-                if (items == null || items.Count == 0) return 0;
-                return items.Sum(item => item.Amount);
-            }
+            decimal ret = 0;
+            var items = GetSummaryItems();
+            if (items != null || items.Count > 0) ret = items.Sum(item => item.Amount);
+            if (this.Amount != ret) this.Amount = ret;
+            return ret;
         }
         #endregion
 

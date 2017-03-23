@@ -108,7 +108,9 @@
       <Column Name="DriverCall" Member="DriverCall"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CarPlate" Member="CarPlate"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="WithTax" Member="WithTax" DbType="bit not null" UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="Discount" Member="Discount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+      <Column Name="TotalWeight" Member="TotalWeight" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
       <Column Name="DeadlineDate" Member="DeadlineDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
