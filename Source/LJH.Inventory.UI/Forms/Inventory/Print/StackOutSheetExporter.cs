@@ -35,130 +35,158 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
         /// 导出信息到EXCEL中
         /// </summary>
         /// <param name="optLog"></param>
-        public List<string> Export(StackOutSheet info, string path)
+        public List<string> Export(StackOutSheet info, string path, int itemsPerPage = 10, int itemFirstRow = 7)
         {
             List<string> files = new List<string>();
             var items = info.GetSummaryItems();
-            for (int i = 0; i < items.Count; i += 10)
+            for (int i = 0; i < items.Count; i += itemsPerPage)
             {
-                StackOutItem[] temp = new StackOutItem[10];
+                StackOutItem[] temp = new StackOutItem[itemsPerPage];
                 items.CopyTo(i, temp, 0, items.Count - i >= temp.Length ? temp.Length : (items.Count - i));
                 string file = Path.Combine(path, Guid.NewGuid().ToString() + ".xls");
                 files.Add(file);
-                Export(info, temp, file);
+                using (FileStream fs = new FileStream(modal, FileMode.Open, FileAccess.Read))
+                {
+                    IWorkbook wb = WorkbookFactory.Create(fs);
+                    ISheet sheet = wb.GetSheetAt(0);
+                    FillSheetInfo(info, sheet);
+                    FillSheetItems(temp, sheet, itemFirstRow);
+                    MemoryStream stream = new MemoryStream();
+                    wb.Write(stream);
+                    var buf = stream.ToArray();
+                    //保存为Excel文件
+                    using (FileStream fs1 = new FileStream(file, FileMode.Create, FileAccess.Write))
+                    {
+                        fs1.Write(buf, 0, buf.Length);
+                        fs1.Flush();
+                    }
+                }
             }
             return files;
         }
 
-        private void Export(StackOutSheet info, StackOutItem[] items, string path)
+        private void FillSheetInfo(StackOutSheet info, ISheet sheet)
         {
-            using (FileStream fs = new FileStream(modal, FileMode.Open, FileAccess.Read))
+            for (int i = sheet.FirstRowNum; i < sheet.LastRowNum; i++)
             {
-                IWorkbook wb = WorkbookFactory.Create(fs);
-                ISheet sheet = wb.GetSheetAt(0);
-                IRow row = sheet.GetRow(1);
-                if (row != null)
+                IRow row = sheet.GetRow(i);
+                if (row == null) continue;
+                for (int j = row.FirstCellNum; j < row.LastCellNum; j++)
                 {
-                    ICell cell = row.GetCell(1);
-                    if (cell != null) cell.SetCellValue(info.ID);
-                    cell = row.GetCell(4);
-                    if (cell != null) cell.SetCellValue(info.SheetDate.ToString("yyyy-MM-dd"));
+                    ICell cell = row.GetCell(j);
+                    if (cell != null) FillSheetInfo(info, cell);
                 }
-                row = sheet.GetRow(2);
-                if (row != null)
-                {
-                    CompanyInfo customer = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(info.CustomerID).QueryObject;
-                    ICell cell = row.GetCell(1);
-                    if (cell != null) cell.SetCellValue(customer != null ? customer.Name : info.CustomerID);
-                    cell = row.GetCell(4);
-                    if (cell != null) cell.SetCellValue(info.Linker);
-                    cell = row.GetCell(7);
-                    if (cell != null) cell.SetCellValue(info.LinkerCall);
-                }
-                row = sheet.GetRow(3);
-                if (row != null)
-                {
-                    ICell cell = row.GetCell(1);
-                    if (cell != null) cell.SetCellValue(info.Driver);
-                    cell = row.GetCell(4);
-                    if (cell != null) cell.SetCellValue(info.DriverCall);
-                    cell = row.GetCell(7);
-                    if (cell != null) cell.SetCellValue(info.CarPlate);
-                }
-                var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
-                row = sheet.GetRow(4);
-                if (row != null)
-                {
-                    ICell cell = row.GetCell(1);
-                    if (cell != null) cell.SetCellValue(finance != null ? finance.FirstPaymentMode : null);
-                    cell = row.GetCell(4);
-                    if (cell != null) cell.SetCellValue(info.Address);
-                    cell = row.GetCell(7);
-                    if (cell != null) cell.SetCellValue(info.WithTax ? "KP" : "票已开");
-                }
-                row = sheet.GetRow(5);
-                if (row != null)
-                {
-                    var customerState = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(info.CustomerID).QueryObject;
-                    ICell cell = row.GetCell(1);
-                    if (cell != null) cell.SetCellValue((double)(finance != null ? finance.Paid : 0));
-                    cell = row.GetCell(4);
-                    if (cell != null) cell.SetCellValue((double)(finance != null ? finance.NotPaid : 0));
-                    cell = row.GetCell(7);
-                    decimal total = customerState != null ? (customerState.Recievables - customerState.Prepay) : 0;
-                    if (info.State != LJH.Inventory.BusinessModel.SheetState.Shipped) total += info.Amount; //如果送货单还未处于送货状态，说明此单的还没有加到应收里面，此时总欠款要加上这一笔
-                    if (cell != null) cell.SetCellValue((double)total);
-                }
+            }
+        }
 
-                int rowIndex = 7;
-                foreach (var item in items)
+        private void FillSheetInfo(StackOutSheet info, ICell cell)
+        {
+            var express = cell.StringCellValue;
+            if (string.IsNullOrEmpty(express)) return;
+            if (!express.StartsWith("[") || !express.EndsWith("]")) return;
+            if (express == "[送货单号]") cell.SetCellValue(info.ID);
+            else if (express == "[送货日期]") cell.SetCellValue(info.SheetDate.ToString("yyyy年MM月dd日"));
+            else if (express == "[客户]")
+            {
+                CompanyInfo customer = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(info.CustomerID).QueryObject;
+                if (customer != null) cell.SetCellValue(customer.Name);
+            }
+            else if (express == "[联系人]") cell.SetCellValue(info.Linker);
+            else if (express == "[联系人电话]") cell.SetCellValue(info.LinkerCall);
+            else if (express == "[送货司机]") cell.SetCellValue(info.Driver);
+            else if (express == "[司机电话]") cell.SetCellValue(info.DriverCall);
+            else if (express == "[送货车牌]") cell.SetCellValue(info.CarPlate);
+            else if (express == "[送货地址]") cell.SetCellValue(info.Address);
+            else if (express == "[开票]") cell.SetCellValue(info.WithTax ? "开票" : null);
+            else if (express == "[付款方式]")
+            {
+                var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
+                cell.SetCellValue(finance != null ? finance.FirstPaymentMode : null);
+            }
+            else if (express == "[付款金额]")
+            {
+                var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
+                cell.SetCellValue((double)(finance != null ? finance.Paid : 0));
+            }
+            else if (express == "[本次欠款]")
+            {
+                var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
+                cell.SetCellValue((double)(finance != null ? finance.NotPaid : 0));
+            }
+            else if (express == "[累计欠款]")
+            {
+                var customerState = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(info.CustomerID).QueryObject;
+                decimal total = customerState != null ? (customerState.Recievables - customerState.Prepay) : 0;
+                if (info.State != LJH.Inventory.BusinessModel.SheetState.Shipped) total += info.Amount; //如果送货单还未处于送货状态，说明此单的还没有加到应收里面，此时总欠款要加上这一笔
+                cell.SetCellValue((double)total);
+            }
+            else if (express == "[总金额]") cell.SetCellValue((double)info.Amount);
+            else if (express == "[大写总金额]") cell.SetCellValue(RMBHelper.NumGetStr((double)info.Amount));
+        }
+
+        private void FillSheetItems(StackOutItem[] items, ISheet sheet, int firstRow)
+        {
+            Dictionary<int, string> templates = new Dictionary<int, string>();
+            IRow row = sheet.GetRow(firstRow);
+            if (row == null) return;
+            for (int i = row.FirstCellNum; i < row.LastCellNum; i++)
+            {
+                ICell cell = row.GetCell(i);
+                templates.Add(i, cell.StringCellValue);
+            }
+            for (int i = 0; i < items.Length; i++)
+            {
+                row = sheet.GetRow(i + firstRow);
+                if (row == null) continue;
+                for (int j = row.FirstCellNum; j < row.LastCellNum; j++)
                 {
-                    if (item == null) continue;
-                    if (rowIndex < 17)
-                    {
-                        row = sheet.GetRow(rowIndex);
-                        if (row != null)
-                        {
-                            var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
-                            ICell cell = row.GetCell(0);
-                            if (cell != null) cell.SetCellValue(p.Category.Name);
-                            cell = row.GetCell(1);
-                            if (cell != null) cell.SetCellValue(p.Specification);
-                            cell = row.GetCell(2);
-                            if (cell != null) cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F3") : string.Empty);
-                            cell = row.GetCell(3);
-                            if (cell != null) cell.SetCellValue(item.Count.ToString("F0"));
-                            cell = row.GetCell(4);
-                            if (cell != null) cell.SetCellValue(item.TotalWeight.HasValue ? item.TotalWeight.Value.ToString("F3") : string.Empty);
-                            cell = row.GetCell(5);
-                            if (cell != null) cell.SetCellValue(p.Model == "原材料" ? "卷" : p.Model);
-                            cell = row.GetCell(6);
-                            if (cell != null) cell.SetCellValue((Double)item.Price);
-                            cell = row.GetCell(7);
-                            if (cell != null) cell.SetCellValue((Double)item.Amount);
-                            cell = row.GetCell(8);
-                            if (cell != null) cell.SetCellValue(item.Memo);
-                        }
-                    }
-                    rowIndex++;
+                    ICell cell = row.GetCell(j);
+                    if (cell == null) continue;
+                    if (templates.ContainsKey(j) && items[i] != null) FillSheetItemInfo(items[i], templates[j], cell);
                 }
-                row = sheet.GetRow(17);
-                if (row != null)
-                {
-                    ICell cell = row.GetCell(7);
-                    if (cell != null) cell.SetCellValue((double)info.Amount);
-                    cell = row.GetCell(2);
-                    if (cell != null) cell.SetCellValue(RMBHelper.NumGetStr((double)info.Amount));
-                }
-                MemoryStream stream = new MemoryStream();
-                wb.Write(stream);
-                var buf = stream.ToArray();
-                //保存为Excel文件
-                using (FileStream fs1 = new FileStream(path, FileMode.Create, FileAccess.Write))
-                {
-                    fs1.Write(buf, 0, buf.Length);
-                    fs1.Flush();
-                }
+            }
+        }
+
+        private void FillSheetItemInfo(StackOutItem item, string express, ICell cell)
+        {
+            if (express == "[产品类别]")
+            {
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                cell.SetCellValue(p.Category.Name);
+            }
+            else if (express == "[产品规格]")
+            {
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                cell.SetCellValue(p.Specification);
+            }
+            else if (express == "[产品长度]")
+            {
+                cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F3") : string.Empty);
+            }
+            else if (express == "[产品数量]")
+            {
+                cell.SetCellValue(item.Count.ToString("F0"));
+            }
+            else if (express == "[产品重量]")
+            {
+                cell.SetCellValue(item.TotalWeight.HasValue ? item.TotalWeight.Value.ToString("F3") : string.Empty);
+            }
+            else if (express == "[产品类型]")
+            {
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                cell.SetCellValue(p.Model == "原材料" ? "卷" : p.Model);
+            }
+            else if (express == "[产品单价]")
+            {
+                cell.SetCellValue((Double)item.Price);
+            }
+            else if (express == "[产品金额]")
+            {
+                cell.SetCellValue((Double)item.Amount);
+            }
+            else if (express == "[产品备注]")
+            {
+                cell.SetCellValue(item.Memo);
             }
         }
     }
