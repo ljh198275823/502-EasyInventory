@@ -175,6 +175,7 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
+            this.chk启用拆卷和合并功能 = new System.Windows.Forms.CheckBox();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1375,9 +1376,9 @@
             // 
             // tab1
             // 
-            this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tab1.Controls.Add(this.tabPage2);
             this.tab1.Controls.Add(this.tabDelivery);
             this.tab1.Controls.Add(this.tabAutoCreater);
@@ -1391,6 +1392,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.chk启用拆卷和合并功能);
             this.tabPage2.Controls.Add(this.chkRealCount);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.groupBox1);
@@ -1737,6 +1739,16 @@
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
             // 
+            // chk启用拆卷和合并功能
+            // 
+            this.chk启用拆卷和合并功能.AutoSize = true;
+            this.chk启用拆卷和合并功能.Location = new System.Drawing.Point(269, 91);
+            this.chk启用拆卷和合并功能.Name = "chk启用拆卷和合并功能";
+            this.chk启用拆卷和合并功能.Size = new System.Drawing.Size(132, 16);
+            this.chk启用拆卷和合并功能.TabIndex = 96;
+            this.chk启用拆卷和合并功能.Text = "启用拆卷和合并功能";
+            this.chk启用拆卷和合并功能.UseVisualStyleBackColor = true;
+            // 
             // FrmSystemOptions
             // 
             this.AcceptButton = this.btnOk;
@@ -1919,5 +1931,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkRealCount;
         private System.Windows.Forms.CheckBox chkNeedMaterial;
+        private System.Windows.Forms.CheckBox chk启用拆卷和合并功能;
     }
 }

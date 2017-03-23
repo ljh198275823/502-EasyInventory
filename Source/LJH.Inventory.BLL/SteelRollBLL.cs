@@ -408,10 +408,20 @@ namespace LJH.Inventory.BLL
             {
                 sr.State = newVal.State;
                 sr.Memo = newVal.Memo;
+                if (sr.Status == "整卷")
+                {
+                    CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+                    con.SheetID = sr.ID.ToString();
+                    var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+                    if (items != null && items.Count > 0)
+                    {
+                        var bll = new CustomerReceivableBLL(RepoUri);
+                        items.ForEach(it => bll.Delete(it));
+                    }
+                }
             }
             return ret;
         }
-        #endregion
 
         public List<string> GetAllMaterails()
         {
@@ -422,5 +432,85 @@ namespace LJH.Inventory.BLL
         {
             return ProviderFactory.Create<ICarplateProvider>(RepoUri).GetItems();
         }
+
+        public CommandResult 拆卷(ProductInventoryItem sr, decimal weight, string memo, out ProductInventoryItem newR)
+        {
+            newR = null;
+            if (sr.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "只有处于在库状态的卷才能拆卷");
+            if (sr.Weight <= weight) return new CommandResult(ResultCode.Fail, "拆卷的重量不能小于或等于原卷重量");
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            decimal? width = SpecificationHelper.GetWrittenWidth(sr.Product.Specification);
+            decimal? thick = SpecificationHelper.GetWrittenThick(sr.Product.Specification);
+            var clone = sr.Clone();
+            clone.Weight -= weight;
+            clone.Length = ProductInventoryItem.CalLength(thick.Value, width.Value, clone.Weight.Value, clone.Product.Density.Value);
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
+            newR = sr.Clone();
+            newR.ID = Guid.NewGuid();
+            newR.InventorySheet = "拆卷";
+            newR.OriginalWeight = weight;
+            newR.OriginalLength = ProductInventoryItem.CalLength(thick.Value, width.Value, weight, clone.Product.Density.Value);
+            newR.Weight = weight;
+            newR.Count = 1;
+            newR.OriginalCount = 1;
+            newR.Length = newR.OriginalLength;
+            newR.SourceRoll = clone.ID;
+            newR.Memo = memo;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newR, unitWork);
+            var ret = unitWork.Commit();
+            if (ret.Result == ResultCode.Successful)
+            {
+                sr.Weight = clone.Weight;
+                sr.Length = clone.Length;
+            }
+            return ret;
+        }
+
+        public CommandResult 合卷(List<ProductInventoryItem> srs, out ProductInventoryItem newR)
+        {
+            newR = null;
+            if (srs.Exists(it => it.ProductID != srs[0].ProductID)) return new CommandResult(ResultCode.Fail, "不是同一种规格的卷材不能合并");
+            if (srs.Exists(it => it.State != ProductInventoryState.Inventory)) return new CommandResult(ResultCode.Fail, "只有在库的卷才能合并");
+            if (srs.Exists(it => it.OriginalWeight != it.Weight)) return new CommandResult(ResultCode.Fail, "只有整卷卷材才能合并");
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            newR = srs[0].Clone();
+            newR.ID = Guid.NewGuid();
+            newR.ProductID = srs[0].ProductID;
+            newR.Product = srs[0].Product;
+            newR.WareHouseID = srs[0].WareHouseID;
+            newR.AddDate = DateTime.Today;
+            newR.InventorySheet = "合卷";
+            newR.OriginalCount = 1;
+            newR.OriginalWeight = 0;
+            newR.Count = 1;
+            newR.Weight = 0;
+            newR.Memo = "合并卷";
+            foreach (var sr in srs)
+            {
+                var clone = sr.Clone();
+                clone.Weight = 0;
+                clone.Length = 0;
+                clone.SourceID = newR.ID;
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
+                newR.OriginalWeight += sr.Weight;
+                newR.Weight += sr.Weight;
+            }
+            decimal? width = SpecificationHelper.GetWrittenWidth(newR.Product.Specification);
+            decimal? thick = SpecificationHelper.GetWrittenThick(newR.Product.Specification);
+            newR.OriginalLength = ProductInventoryItem.CalLength(thick.Value, width.Value, newR.OriginalWeight.Value, newR.Product.Density.Value);
+            newR.Length = newR.OriginalLength;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newR, unitWork);
+            var ret = unitWork.Commit();
+            if (ret.Result == ResultCode.Successful)
+            {
+                srs.ForEach(it =>
+                    {
+                        it.Weight = 0;
+                        it.Length = 0;
+                    });
+            }
+            return ret;
+        }
+        #endregion
     }
 }

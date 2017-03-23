@@ -160,6 +160,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     if (sheet != null)
                     {
                         FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
+                        frm.TaxType = this.PaymentType;
                         frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();

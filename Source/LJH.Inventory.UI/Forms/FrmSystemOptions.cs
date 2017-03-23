@@ -25,6 +25,7 @@ namespace LJH.Inventory.UI.Forms
             #region 基本
             txtBecomeTailAt.DecimalValue = UserSettings.Current.BecomeTailAt;
             txtBecomeRemainlessAt.DecimalValue = UserSettings.Current.BecomeRemainlessAt;
+            chk启用拆卷和合并功能.Checked = UserSettings.Current.启用原料拆卷和合并功能;
             txtDefaultWareHouse.Text = UserSettings.Current.DefaultWarehouse;
             txtDefaultCustomer.Text = UserSettings.Current.DefaultCustomer;
             txtDefaultProductCategory.Text = UserSettings.Current.DefaultProductCategory;
@@ -106,6 +107,7 @@ namespace LJH.Inventory.UI.Forms
             #region 基本
             us.BecomeTailAt = txtBecomeTailAt.DecimalValue;
             us.BecomeRemainlessAt = txtBecomeRemainlessAt.DecimalValue;
+            us.启用原料拆卷和合并功能 = chk启用拆卷和合并功能.Checked;
             us.DefaultCustomer = txtDefaultCustomer.Text;
             us.DefaultProductCategory = txtDefaultProductCategory.Text;
             us.DefaultWarehouse = txtDefaultWareHouse.Text;
