@@ -59,6 +59,7 @@ namespace LJH.Inventory.UI.Forms
             chkDoShipAfterPrint.Checked = us.DoShipAfterPrint;
             cmbStackoutSheetModel.Text = us.StackoutSheetModel;
             cmbStackoutSheetModel_WithTax.Text = us.StackoutSheetModel_WithTax;
+            if (us.StackoutSheetItemsPerSheet > 0) txtStackoutSheetItemsPerSheet.IntergerValue = us.StackoutSheetItemsPerSheet;
             if (us.LoadSheetsBefore == 0)
             {
                 rdOnlyThisMonth.Checked = true;
@@ -132,6 +133,7 @@ namespace LJH.Inventory.UI.Forms
             us.DoShipAfterPrint = chkDoShipAfterPrint.Checked;
             us.StackoutSheetModel = cmbStackoutSheetModel.Text.Trim();
             us.StackoutSheetModel_WithTax = cmbStackoutSheetModel_WithTax.Text.Trim();
+            us.StackoutSheetItemsPerSheet = txtStackoutSheetItemsPerSheet.IntergerValue;
             if (rdOnlyThisMonth.Checked) us.LoadSheetsBefore = 0;
             else us.LoadSheetsBefore = txtLoadSheetsBefore.IntergerValue;
             #endregion

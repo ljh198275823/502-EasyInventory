@@ -128,6 +128,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabDelivery = new System.Windows.Forms.TabPage();
+            this.cmbStackoutSheetModel_WithTax = new System.Windows.Forms.ComboBox();
+            this.label84 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.txtLoadSheetsBefore = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
@@ -176,8 +178,9 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
-            this.cmbStackoutSheetModel_WithTax = new System.Windows.Forms.ComboBox();
-            this.label84 = new System.Windows.Forms.Label();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label86 = new System.Windows.Forms.Label();
+            this.txtStackoutSheetItemsPerSheet = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1221,6 +1224,9 @@
             // tabDelivery
             // 
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDelivery.Controls.Add(this.label86);
+            this.tabDelivery.Controls.Add(this.txtStackoutSheetItemsPerSheet);
+            this.tabDelivery.Controls.Add(this.label85);
             this.tabDelivery.Controls.Add(this.cmbStackoutSheetModel_WithTax);
             this.tabDelivery.Controls.Add(this.label84);
             this.tabDelivery.Controls.Add(this.panel2);
@@ -1236,6 +1242,24 @@
             this.tabDelivery.Size = new System.Drawing.Size(563, 358);
             this.tabDelivery.TabIndex = 0;
             this.tabDelivery.Text = "送货单";
+            // 
+            // cmbStackoutSheetModel_WithTax
+            // 
+            this.cmbStackoutSheetModel_WithTax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStackoutSheetModel_WithTax.FormattingEnabled = true;
+            this.cmbStackoutSheetModel_WithTax.Location = new System.Drawing.Point(139, 118);
+            this.cmbStackoutSheetModel_WithTax.Name = "cmbStackoutSheetModel_WithTax";
+            this.cmbStackoutSheetModel_WithTax.Size = new System.Drawing.Size(199, 20);
+            this.cmbStackoutSheetModel_WithTax.TabIndex = 49;
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(14, 121);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(119, 12);
+            this.label84.TabIndex = 48;
+            this.label84.Text = "送货单打印模板_含税";
             // 
             // panel2
             // 
@@ -1320,7 +1344,7 @@
             // chkDoShipAfterPrint
             // 
             this.chkDoShipAfterPrint.AutoSize = true;
-            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 157);
+            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 196);
             this.chkDoShipAfterPrint.Name = "chkDoShipAfterPrint";
             this.chkDoShipAfterPrint.Size = new System.Drawing.Size(144, 16);
             this.chkDoShipAfterPrint.TabIndex = 43;
@@ -1753,23 +1777,34 @@
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
             // 
-            // cmbStackoutSheetModel_WithTax
+            // label85
             // 
-            this.cmbStackoutSheetModel_WithTax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStackoutSheetModel_WithTax.FormattingEnabled = true;
-            this.cmbStackoutSheetModel_WithTax.Location = new System.Drawing.Point(139, 118);
-            this.cmbStackoutSheetModel_WithTax.Name = "cmbStackoutSheetModel_WithTax";
-            this.cmbStackoutSheetModel_WithTax.Size = new System.Drawing.Size(199, 20);
-            this.cmbStackoutSheetModel_WithTax.TabIndex = 49;
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(14, 159);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(137, 12);
+            this.label85.TabIndex = 50;
+            this.label85.Text = "一张送货单打印最多打印";
             // 
-            // label84
+            // label86
             // 
-            this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(14, 121);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(119, 12);
-            this.label84.TabIndex = 48;
-            this.label84.Text = "送货单打印模板_含税";
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(186, 159);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(113, 12);
+            this.label86.TabIndex = 71;
+            this.label86.Text = "个送货单项（1-10）";
+            // 
+            // txtStackoutSheetItemsPerSheet
+            // 
+            this.txtStackoutSheetItemsPerSheet.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtStackoutSheetItemsPerSheet.Location = new System.Drawing.Point(152, 155);
+            this.txtStackoutSheetItemsPerSheet.MaxValue = 10;
+            this.txtStackoutSheetItemsPerSheet.MinValue = 1;
+            this.txtStackoutSheetItemsPerSheet.Name = "txtStackoutSheetItemsPerSheet";
+            this.txtStackoutSheetItemsPerSheet.Size = new System.Drawing.Size(31, 21);
+            this.txtStackoutSheetItemsPerSheet.TabIndex = 70;
+            this.txtStackoutSheetItemsPerSheet.Text = "10";
             // 
             // FrmSystemOptions
             // 
@@ -1956,5 +1991,8 @@
         private System.Windows.Forms.CheckBox chk启用拆卷和合并功能;
         private System.Windows.Forms.ComboBox cmbStackoutSheetModel_WithTax;
         private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label86;
+        private GeneralLibrary.WinformControl.IntergerTextBox txtStackoutSheetItemsPerSheet;
+        private System.Windows.Forms.Label label85;
     }
 }

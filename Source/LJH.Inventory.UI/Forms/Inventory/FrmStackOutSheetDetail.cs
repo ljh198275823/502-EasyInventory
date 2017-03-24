@@ -323,7 +323,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     if (System.IO.File.Exists(modal))
                     {
                         exporter = new Print.StackOutSheetExporter(modal);
-                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder());
+                        int itemPerpage = 10;
+                        if (UserSettings.Current != null && UserSettings.Current.StackoutSheetItemsPerSheet > 0) itemPerpage = UserSettings.Current.StackoutSheetItemsPerSheet;
+                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder(), itemPerpage);
                         foreach (var file in files)
                         {
                             if (System.IO.File.Exists(file))

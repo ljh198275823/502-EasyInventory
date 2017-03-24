@@ -194,6 +194,11 @@ namespace LJH.Inventory.BusinessModel
         [DataMember]
         public string StackoutSheetModel_WithTax { get; set; }
         /// <summary>
+        /// 获取或设置每个送货单最多打印的送货项数量
+        /// </summary>
+        [DataMember]
+        public int StackoutSheetItemsPerSheet { get; set; }
+        /// <summary>
         /// 获取或设置加载多少个月之前的送货单 0表示本月，1表示最近一月，依此类推
         /// </summary>
         [DataMember]

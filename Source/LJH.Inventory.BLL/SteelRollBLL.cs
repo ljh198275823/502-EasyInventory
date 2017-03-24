@@ -393,32 +393,38 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Nullify(ProductInventoryItem sr)
         {
+            CommandResult ret = new CommandResult(ResultCode.Fail, string.Empty);
             ProductInventoryItem newVal = sr.Clone();
             newVal.State = ProductInventoryState.Nullified;
-            if (string.IsNullOrEmpty(newVal.Memo))
+            if (string.IsNullOrEmpty(newVal.Memo)) newVal.Memo = "废品处理";
+            else newVal.Memo += ",废品处理";
+            if (sr.Status != "整卷")
             {
-                newVal.Memo = "废品处理";
+                ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
             }
-            else
+            else //整卷需要将对应的应付金额和应付税款删除
             {
-                newVal.Memo += ",废品处理";
+                bool allSuccess = true;
+                CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+                con.SheetID = sr.ID.ToString();
+                var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+                if (items != null && items.Count > 0)
+                {
+                    var bll = new CustomerReceivableBLL(RepoUri);
+                    foreach (var item in items)
+                    {
+                        var t = bll.Delete(item);
+                        allSuccess = t.Result == ResultCode.Successful;
+                        if (!allSuccess) break;
+                    }
+                }
+                if (allSuccess) ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
+                else ret = new CommandResult(ResultCode.Fail, "原材料卷对应的应付款或应付税款删除失败，请重试！");
             }
-            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
             if (ret.Result == ResultCode.Successful)
             {
                 sr.State = newVal.State;
                 sr.Memo = newVal.Memo;
-                if (sr.Status == "整卷")
-                {
-                    CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-                    con.SheetID = sr.ID.ToString();
-                    var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
-                    if (items != null && items.Count > 0)
-                    {
-                        var bll = new CustomerReceivableBLL(RepoUri);
-                        items.ForEach(it => bll.Delete(it));
-                    }
-                }
             }
             return ret;
         }
