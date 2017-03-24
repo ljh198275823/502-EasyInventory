@@ -97,7 +97,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             else if (express == "[司机电话]") cell.SetCellValue(info.DriverCall);
             else if (express == "[送货车牌]") cell.SetCellValue(info.CarPlate);
             else if (express == "[送货地址]") cell.SetCellValue(info.Address);
-            else if (express == "[开票]") cell.SetCellValue(info.WithTax ? "开票" : null);
+            else if (express == "[开票]") cell.SetCellValue(info.WithTax ? "KP" : "BK");
+            else if (express == "[备注]") cell.SetCellValue(info.Memo);
             else if (express == "[付款方式]")
             {
                 var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;

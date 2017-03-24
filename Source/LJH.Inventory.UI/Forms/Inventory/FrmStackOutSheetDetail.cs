@@ -356,10 +356,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private string GetModel()
         {
             string model = null;
-            if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.StackoutSheetModel))
+            var sheet = UpdatingItem as StackOutSheet;
+            if (UserSettings.Current != null)
             {
-                model = System.IO.Path.Combine(Application.StartupPath, "送货单模板", UserSettings.Current.StackoutSheetModel + ".xls");
-                if (File.Exists(model)) return model;
+                if (!string.IsNullOrEmpty(UserSettings.Current.StackoutSheetModel_WithTax) && sheet.WithTax)
+                {
+                    model = System.IO.Path.Combine(Application.StartupPath, "送货单模板", UserSettings.Current.StackoutSheetModel_WithTax + ".xls");
+                    if (File.Exists(model)) return model;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(UserSettings.Current.StackoutSheetModel))
+                    {
+                        model = System.IO.Path.Combine(Application.StartupPath, "送货单模板", UserSettings.Current.StackoutSheetModel + ".xls");
+                        if (File.Exists(model)) return model;
+                    }
+                }
             }
             return System.IO.Path.Combine(Application.StartupPath, "送货单模板", "送货单模板.xls");
         }

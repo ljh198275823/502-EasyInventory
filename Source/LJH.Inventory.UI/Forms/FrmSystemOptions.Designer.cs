@@ -144,6 +144,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chk启用拆卷和合并功能 = new System.Windows.Forms.CheckBox();
             this.chkRealCount = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -175,7 +176,8 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
-            this.chk启用拆卷和合并功能 = new System.Windows.Forms.CheckBox();
+            this.cmbStackoutSheetModel_WithTax = new System.Windows.Forms.ComboBox();
+            this.label84 = new System.Windows.Forms.Label();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1219,6 +1221,8 @@
             // tabDelivery
             // 
             this.tabDelivery.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDelivery.Controls.Add(this.cmbStackoutSheetModel_WithTax);
+            this.tabDelivery.Controls.Add(this.label84);
             this.tabDelivery.Controls.Add(this.panel2);
             this.tabDelivery.Controls.Add(this.label1);
             this.tabDelivery.Controls.Add(this.cmbStackoutSheetModel);
@@ -1316,7 +1320,7 @@
             // chkDoShipAfterPrint
             // 
             this.chkDoShipAfterPrint.AutoSize = true;
-            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 114);
+            this.chkDoShipAfterPrint.Location = new System.Drawing.Point(16, 157);
             this.chkDoShipAfterPrint.Name = "chkDoShipAfterPrint";
             this.chkDoShipAfterPrint.Size = new System.Drawing.Size(144, 16);
             this.chkDoShipAfterPrint.TabIndex = 43;
@@ -1408,6 +1412,16 @@
             this.tabPage2.Size = new System.Drawing.Size(563, 358);
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "基本";
+            // 
+            // chk启用拆卷和合并功能
+            // 
+            this.chk启用拆卷和合并功能.AutoSize = true;
+            this.chk启用拆卷和合并功能.Location = new System.Drawing.Point(269, 91);
+            this.chk启用拆卷和合并功能.Name = "chk启用拆卷和合并功能";
+            this.chk启用拆卷和合并功能.Size = new System.Drawing.Size(132, 16);
+            this.chk启用拆卷和合并功能.TabIndex = 96;
+            this.chk启用拆卷和合并功能.Text = "启用拆卷和合并功能";
+            this.chk启用拆卷和合并功能.UseVisualStyleBackColor = true;
             // 
             // chkRealCount
             // 
@@ -1739,15 +1753,23 @@
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
             // 
-            // chk启用拆卷和合并功能
+            // cmbStackoutSheetModel_WithTax
             // 
-            this.chk启用拆卷和合并功能.AutoSize = true;
-            this.chk启用拆卷和合并功能.Location = new System.Drawing.Point(269, 91);
-            this.chk启用拆卷和合并功能.Name = "chk启用拆卷和合并功能";
-            this.chk启用拆卷和合并功能.Size = new System.Drawing.Size(132, 16);
-            this.chk启用拆卷和合并功能.TabIndex = 96;
-            this.chk启用拆卷和合并功能.Text = "启用拆卷和合并功能";
-            this.chk启用拆卷和合并功能.UseVisualStyleBackColor = true;
+            this.cmbStackoutSheetModel_WithTax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStackoutSheetModel_WithTax.FormattingEnabled = true;
+            this.cmbStackoutSheetModel_WithTax.Location = new System.Drawing.Point(139, 118);
+            this.cmbStackoutSheetModel_WithTax.Name = "cmbStackoutSheetModel_WithTax";
+            this.cmbStackoutSheetModel_WithTax.Size = new System.Drawing.Size(199, 20);
+            this.cmbStackoutSheetModel_WithTax.TabIndex = 49;
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(14, 121);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(119, 12);
+            this.label84.TabIndex = 48;
+            this.label84.Text = "送货单打印模板_含税";
             // 
             // FrmSystemOptions
             // 
@@ -1932,5 +1954,7 @@
         private System.Windows.Forms.CheckBox chkRealCount;
         private System.Windows.Forms.CheckBox chkNeedMaterial;
         private System.Windows.Forms.CheckBox chk启用拆卷和合并功能;
+        private System.Windows.Forms.ComboBox cmbStackoutSheetModel_WithTax;
+        private System.Windows.Forms.Label label84;
     }
 }

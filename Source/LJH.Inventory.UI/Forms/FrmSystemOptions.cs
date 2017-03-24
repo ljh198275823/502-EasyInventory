@@ -58,6 +58,7 @@ namespace LJH.Inventory.UI.Forms
             }
             chkDoShipAfterPrint.Checked = us.DoShipAfterPrint;
             cmbStackoutSheetModel.Text = us.StackoutSheetModel;
+            cmbStackoutSheetModel_WithTax.Text = us.StackoutSheetModel_WithTax;
             if (us.LoadSheetsBefore == 0)
             {
                 rdOnlyThisMonth.Checked = true;
@@ -130,6 +131,7 @@ namespace LJH.Inventory.UI.Forms
             us.ForbidWhenOverCreditLimit = rdForbid.Checked;
             us.DoShipAfterPrint = chkDoShipAfterPrint.Checked;
             us.StackoutSheetModel = cmbStackoutSheetModel.Text.Trim();
+            us.StackoutSheetModel_WithTax = cmbStackoutSheetModel_WithTax.Text.Trim();
             if (rdOnlyThisMonth.Checked) us.LoadSheetsBefore = 0;
             else us.LoadSheetsBefore = txtLoadSheetsBefore.IntergerValue;
             #endregion
@@ -204,7 +206,8 @@ namespace LJH.Inventory.UI.Forms
 
         private void FrmSystemOptions_Load(object sender, EventArgs e)
         {
-            InitCmbStackoutSheetModel();
+            InitCmbStackoutSheetModel(this.cmbStackoutSheetModel );
+            InitCmbStackoutSheetModel(this.cmbStackoutSheetModel_WithTax);
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
             ShowSetting(UserSettings.Current);
             btnOk.Enabled = Operator.Current.Permit(Permission.SystemOptions, PermissionActions.Edit);
@@ -217,10 +220,10 @@ namespace LJH.Inventory.UI.Forms
             this.Close();
         }
 
-        private void InitCmbStackoutSheetModel()
+        private void InitCmbStackoutSheetModel(ComboBox cmb)
         {
-            this.cmbStackoutSheetModel.Items.Clear();
-            this.cmbStackoutSheetModel.Items.Add(string.Empty);
+            cmb.Items.Clear();
+            cmb.Items.Add(string.Empty);
             string dir = System.IO.Path.Combine(Application.StartupPath, "送货单模板");
             if (Directory.Exists(dir))
             {
@@ -232,7 +235,7 @@ namespace LJH.Inventory.UI.Forms
                         string model = Path.GetFileNameWithoutExtension(f);
                         if (model != "送货单模板")
                         {
-                            cmbStackoutSheetModel.Items.Add(Path.GetFileNameWithoutExtension(model));
+                            cmb.Items.Add(Path.GetFileNameWithoutExtension(model));
                         }
                     }
                 }

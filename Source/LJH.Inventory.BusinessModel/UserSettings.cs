@@ -189,6 +189,11 @@ namespace LJH.Inventory.BusinessModel
         [DataMember]
         public string StackoutSheetModel { get; set; }
         /// <summary>
+        /// 获取或设置送货单打印模板_含税
+        /// </summary>
+        [DataMember]
+        public string StackoutSheetModel_WithTax { get; set; }
+        /// <summary>
         /// 获取或设置加载多少个月之前的送货单 0表示本月，1表示最近一月，依此类推
         /// </summary>
         [DataMember]
