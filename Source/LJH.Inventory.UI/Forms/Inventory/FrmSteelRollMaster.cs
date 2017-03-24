@@ -25,9 +25,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         #region 私有变量
+        private bool _DataLoaded = false;
         private List<ProductInventoryItem> _SteelRolls = null;
         private List<CompanyInfo> _AllSuppliers = null;
-        private List<WareHouse> _AllWarehouse = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+        private List<WareHouse> _AllWarehouse = null;
         #endregion
 
         #region 私有方法
@@ -84,7 +85,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
                 if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.Supplier == cmbSupplier.Text).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
-                if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer == customerCombobox1.Text).ToList();
+                if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer.Contains(customerCombobox1.Text)).ToList();
                 items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
                                        (chkPartial.Checked && it.Status == "余卷") ||
                                        (chkOnlyTail.Checked && it.Status == "尾卷") ||
@@ -145,19 +146,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
-        public List<ProductInventoryItem> SelectedItems
-        {
-            get
-            {
-                List<ProductInventoryItem> ret = new List<ProductInventoryItem>();
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-                    ret.Add(row.Tag as ProductInventoryItem);
-                }
-                return ret;
-            }
-        }
-
         #region 重写基类方法
         protected override void Init()
         {
@@ -167,7 +155,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.categoryComboBox1.Init();
             this.customerCombobox1.Init();
             this.ucDateTimeInterval1.Init();
-            this.ucDateTimeInterval1.SelectToday();
+            this.ucDateTimeInterval1.SelectThisMonth();
             InitBrand(cmbBrand);
             InitSupplier(cmbSupplier);
             pnlStates.Enabled = !ForSelect;
@@ -198,13 +186,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             return frm;
         }
 
-        protected override bool DeletingItem(object item)
-        {
-            return false;
-        }
-
         protected override List<object> GetDataSource()
         {
+            _AllWarehouse = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             _AllSuppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
             var bll = new SteelRollBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
@@ -217,6 +201,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 con.States.Add(ProductInventoryState.Reserved);
                 if (chk发货.Checked) con.States.Add(ProductInventoryState.Shipped);
                 if (chk作废.Checked) con.States.Add(ProductInventoryState.Nullified);
+                if (!chkRemainless.Checked) con.HasWeight = true;
                 _SteelRolls = bll.GetItems(con).QueryObjects;
             }
             else
@@ -224,6 +209,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 _SteelRolls = bll.GetItems(SearchCondition).QueryObjects;
             }
             List<object> records = FilterData();
+            _DataLoaded = true;
             return records;
         }
 
@@ -307,12 +293,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 事件处理函数
         private void FreshData_Clicked(object sender, EventArgs e)
         {
-            FreshData();
+            if (_DataLoaded) FreshData();
         }
 
         private void chk发货_CheckedChanged(object sender, EventArgs e)
         {
-            cMnu_Fresh.PerformClick();
+            if (_DataLoaded) cMnu_Fresh.PerformClick();
         }
 
         private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)

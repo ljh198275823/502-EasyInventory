@@ -31,10 +31,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         protected override List<object> GetDataSource()
         {
             _AllWarehouse = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-            var f = new ProductInventoryItemSearchCondition();
-            f.Sliced = true;
-            srs = new SteelRollBLL(AppSettings .Current .ConnStr ).GetItems(f).QueryObjects;
-           
+
             List<ProductInventoryItem> records = null;
             if (SearchCondition == null)
             {
@@ -43,6 +40,16 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             else
             {
                 records = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+            }
+            if (records != null && records.Count > 0)
+            {
+                var sids = records.Where(it => it.SourceRoll.HasValue).Select(it => it.SourceRoll.Value).Distinct().ToList();
+                if (sids != null && sids.Count > 0)
+                {
+                    var f = new ProductInventoryItemSearchCondition();
+                    f.IDS = sids;
+                    srs = new SteelRollBLL(AppSettings.Current.ConnStr).GetItems(f).QueryObjects;
+                }
             }
             return (from item in records
                     orderby item.AddDate descending

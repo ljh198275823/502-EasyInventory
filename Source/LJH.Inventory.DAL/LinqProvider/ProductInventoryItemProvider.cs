@@ -32,7 +32,6 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override List<ProductInventoryItem> GetingItems(DataContext dc, SearchCondition search)
         {
-            dc.Log = System.Console.Out;
             IQueryable<ProductInventoryItem> ret = dc.GetTable<ProductInventoryItem>();
             if (search is ProductInventoryItemSearchCondition)
             {
@@ -60,6 +59,11 @@ namespace LJH.Inventory.DAL.LinqProvider
                 {
                     if (con.Sliced.Value) ret = ret.Where(it => it.OriginalWeight > it.Weight);
                     else ret = ret.Where(it => it.OriginalWeight == it.Weight);
+                }
+                if (con.HasWeight.HasValue)
+                {
+                    if (con.HasWeight.Value) ret = ret.Where(it => it.Weight > 0);
+                    else ret = ret.Where(it => it.Weight == 0);
                 }
             }
             var items = ret.ToList();

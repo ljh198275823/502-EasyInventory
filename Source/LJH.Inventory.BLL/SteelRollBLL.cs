@@ -349,7 +349,6 @@ namespace LJH.Inventory.BLL
                 return new CommandResult(ResultCode.Fail, ex.Message);
             }
         }
-
         /// <summary>
         /// 原材料盘点
         /// </summary>

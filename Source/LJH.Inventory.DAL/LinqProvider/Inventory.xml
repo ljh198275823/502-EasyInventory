@@ -391,6 +391,7 @@
     <Type Name="LJH.Inventory.BusinessModel.ProductInventoryItem">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) not null"  UpdateCheck="Never"/>
+      <Column Name="Model" Member="Model"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
@@ -402,7 +403,6 @@
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="OriginalThick" Member="OriginalThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="RealThick" Member="RealThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
-      <Column Name="Model" Member="Model"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Customer" Member="Customer"  DbType="nvarchar(50)" UpdateCheck="Never"/>

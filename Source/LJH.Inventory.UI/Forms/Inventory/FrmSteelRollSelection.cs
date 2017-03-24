@@ -72,13 +72,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
             _AllWarehouse = new LJH.Inventory.BLL.WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             _AllSuppliers = new LJH.Inventory.BLL.CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
             _FrmSteelRoll = new FrmSteelRollMaster();
+            _FrmSteelRoll.chk待发货.Enabled = false;
+            _FrmSteelRoll.chk待发货.Checked = false;
+            _FrmSteelRoll.chk发货.Checked = false;
+            _FrmSteelRoll.chk发货.Enabled = false;
+            _FrmSteelRoll.chk作废.Enabled = false;
+            _FrmSteelRoll.chk作废.Checked = false;
+            _FrmSteelRoll.chkRemainless.Checked = false;
+            _FrmSteelRoll.chkRemainless.Enabled = false;
+            _FrmSteelRoll.chkOnlyTail.Checked = false;
             _FrmSteelRoll.ForSelect = true;
             _FrmSteelRoll.MultiSelect = true;
             _FrmSteelRoll.ItemSelected += new EventHandler<GeneralLibrary.Core.UI.ItemSelectedEventArgs>(_FrmSteelRoll_ItemSelected);
-            var con = new ProductInventoryItemSearchCondition();
-            con.HasRemain = true;
-            con.States = new List<ProductInventoryState>() { ProductInventoryState.Inventory, ProductInventoryState.Reserved };
-            _FrmSteelRoll.SearchCondition = con;
             this.ucFormViewMain.AddAForm(_FrmSteelRoll, false);
         }
 

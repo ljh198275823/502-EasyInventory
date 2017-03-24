@@ -28,14 +28,14 @@ namespace LJH.Inventory.UI.Controls
         public void Init()
         {
             this.Items.Clear();
-            List<Product> ps = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            List<string> ps = new ProductBLL(AppSettings.Current.ConnStr).GetAllSpecifications();
             if (ps != null && ps.Count > 0)
             {
                 this.Items.Add(string.Empty);
                 var items = (from p in ps
-                             where !string.IsNullOrEmpty(p.Specification)
-                             orderby p.Specification ascending
-                             select p.Specification).Distinct();
+                             where !string.IsNullOrEmpty(p) && SpecificationHelper.GetWrittenThick(p).HasValue && SpecificationHelper.GetWrittenWidth(p).HasValue
+                             orderby p ascending
+                             select p).Distinct();
                 foreach (var item in items)
                 {
                     this.Items.Add(item);

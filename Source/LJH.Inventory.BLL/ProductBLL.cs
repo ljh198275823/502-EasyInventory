@@ -47,7 +47,7 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public Product Create(string categoryID, string specification, string model, decimal? density,bool onlyCreate=false)
+        public Product Create(string categoryID, string specification, string model, decimal? density, bool onlyCreate = false)
         {
             return Create(categoryID, specification, model, null, null, density, onlyCreate);
         }
@@ -57,7 +57,7 @@ namespace LJH.Inventory.BLL
             Product p = null;
             if (!onlyCreate)
             {
-                List<Product> ps = GetItems(null).QueryObjects;
+                List<Product> ps = GetItems(new ProductSearchCondition() { CategoryID = categoryID, Specification = specification }).QueryObjects;
                 if (ps != null && ps.Count > 0)
                 {
                     p = ps.FirstOrDefault(it => it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
@@ -77,6 +77,16 @@ namespace LJH.Inventory.BLL
             var ret = Add(p);
             if (ret.Result == ResultCode.Successful) return p;
             return null;
+        }
+
+        /// <summary>
+        /// 获取所有的规格
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetAllSpecifications()
+        {
+            var provider = ProviderFactory.Create<IProductProvider>(RepoUri);
+            return provider.GetAllSpecifications();
         }
         #endregion
     }

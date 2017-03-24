@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="IProvider\IAutoNumberCreater.cs" />
     <Compile Include="IProvider\ICustomerPaymentBankProvider.cs" />
+    <Compile Include="IProvider\IProductProvider.cs" />
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
     <Compile Include="IProvider\ProviderFactory.cs" />
     <Compile Include="LinqProvider\AttachmentHeaderProvider.cs" />

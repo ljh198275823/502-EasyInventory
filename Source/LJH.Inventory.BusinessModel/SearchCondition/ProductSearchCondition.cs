@@ -12,10 +12,6 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     {
         #region 公共属性
         /// <summary>
-        /// 获取或设置要查询物品的条码
-        /// </summary>
-        public string BarCode { get; set; }
-        /// <summary>
         /// 获取或设置要查询物品的商品名称
         /// </summary>
         public string Name { get; set; }

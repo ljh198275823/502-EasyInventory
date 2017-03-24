@@ -11,14 +11,14 @@ using LJH.GeneralLibrary.Core.DAL.Linq;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class ProductProvider : ProviderBase<Product, string>
+    public class ProductProvider : ProviderBase<Product, string>, IProductProvider
     {
         private static Dictionary<string, Product> _AllProducts = null;
         #region 构造函数
         public ProductProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
-            
+
         }
         #endregion
 
@@ -89,5 +89,16 @@ namespace LJH.Inventory.DAL.LinqProvider
             base.InsertingItem(info, dc);
         }
         #endregion
+
+        /// <summary>
+        /// 获取所有的规格
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetAllSpecifications()
+        {
+            var dc = this.CreateDataContext();
+            var pt = dc.GetTable<Product>();
+            return pt.Select(it => it.Specification).Distinct().ToList();
+        }
     }
 }

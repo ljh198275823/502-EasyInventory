@@ -24,11 +24,11 @@ namespace LJH.Inventory.UI.Controls
             this.txtWidth.Items.Clear();
             this.txtThick.Items.Add(string.Empty);
             this.txtWidth.Items.Add(string.Empty);
-            List<Product> ps = new ProductBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            List<string> ps = new ProductBLL(AppSettings.Current.ConnStr).GetAllSpecifications();
             if (ps != null && ps.Count > 0)
             {
                 var thicks = (from p in ps
-                              let thick = !string.IsNullOrEmpty(p.Specification) ? SpecificationHelper.GetWrittenThick(p.Specification) : null
+                              let thick = !string.IsNullOrEmpty(p) ? SpecificationHelper.GetWrittenThick(p) : null
                               where thick != null
                               orderby thick ascending
                               select thick.ToString()).Distinct();
@@ -38,7 +38,7 @@ namespace LJH.Inventory.UI.Controls
                 }
 
                 var widths = (from p in ps
-                              let width = !string.IsNullOrEmpty(p.Specification) ? SpecificationHelper.GetWrittenWidth(p.Specification) : null
+                              let width = !string.IsNullOrEmpty(p) ? SpecificationHelper.GetWrittenWidth(p) : null
                               where width != null
                               orderby width ascending
                               select width.ToString()).Distinct();
