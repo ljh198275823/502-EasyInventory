@@ -61,7 +61,12 @@ namespace LJH.Inventory.BusinessModel
 
         public Product Product { get; set; }
 
-        public string Model { get; set; }
+        private string _Model = null;
+        public string Model
+        {
+            get { return string.IsNullOrEmpty(_Model) ? _Model : _Model.Trim(); }
+            set { _Model = value; }
+        }
         /// <summary>
         /// 获取或设置根据入库重量和长度计算出来的厚度
         /// </summary>

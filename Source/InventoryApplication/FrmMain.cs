@@ -276,6 +276,7 @@ namespace InventoryApplication
         /// <param name="mainPanel">是否在主面板中打开,否则在从面板中打开</param>
         public T ShowSingleForm<T>(object menu, bool mainPanel = true) where T : Form
         {
+            DateTime dt = DateTime.Now;
             string cmd = null;
             if (menu is ToolStripMenuItem) cmd = (menu as ToolStripMenuItem).Name;
 
@@ -301,6 +302,8 @@ namespace InventoryApplication
                     _openedForms.Remove(instance);
                 };
             }
+            var span = new TimeSpan(DateTime.Now.Ticks - dt.Ticks);
+            Console.WriteLine("打开 {0} 窗体用时 {1} 秒", instance.Text, span.TotalSeconds);
             return instance;
         }
 
