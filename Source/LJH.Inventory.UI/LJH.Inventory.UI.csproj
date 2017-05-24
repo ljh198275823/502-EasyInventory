@@ -603,6 +603,10 @@
     </Compile>
     <Compile Include="Forms\NPOIExcelHelper.cs" />
     <Compile Include="Forms\JSEngine.cs" />
+    <Compile Include="FrmMemo.cs" />
+    <Compile Include="FrmMemo.designer.cs">
+      <DependentUpon>FrmMemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Financial\FrmCreditLine.resx">
       <DependentUpon>FrmCreditLine.cs</DependentUpon>
@@ -867,6 +871,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmRoleMaster.resx">
       <DependentUpon>FrmRoleMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMemo.resx">
+      <DependentUpon>FrmMemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

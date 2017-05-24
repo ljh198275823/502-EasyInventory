@@ -270,7 +270,7 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
-        protected virtual void PerformOperation<T>(SheetProcessorBase<T> processor, SheetOperation operation) where T : class,ISheet<string>
+        protected virtual void PerformOperation<T>(SheetProcessorBase<T> processor, SheetOperation operation, string memo = null) where T : class,ISheet<string>
         {
             if (operation == SheetOperation.Create || operation == SheetOperation.Modify)
             {
@@ -281,12 +281,21 @@ namespace LJH.Inventory.UI.Forms
                 if (UpdatingItem != null)
                 {
                     T sheet = sheet = UpdatingItem as T;
-                    if (MessageBox.Show(string.Format("是否要进行 {0}?", SheetOperationDescription.GetDescription(operation)),
-                               "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+                    if (operation == SheetOperation.Nullify || operation == SheetOperation.UndoApprove)
                     {
-                        return;
+                        FrmMemo frm = new FrmMemo();
+                        if (frm.ShowDialog() != DialogResult.OK) return;
+                        memo = frm.Memo;
                     }
-                    CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name, Operator.Current.ID);
+                    else
+                    {
+                        if (MessageBox.Show(string.Format("是否要进行 {0}?", SheetOperationDescription.GetDescription(operation)),
+                                   "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+                        {
+                            return;
+                        }
+                    }
+                    CommandResult ret = processor.ProcessSheet(sheet, operation, Operator.Current.Name, Operator.Current.ID, memo);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowButtonState();

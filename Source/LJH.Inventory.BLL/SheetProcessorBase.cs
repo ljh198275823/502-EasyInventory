@@ -158,7 +158,7 @@ namespace LJH.Inventory.BLL
         /// <param name="opt"></param>
         /// <param name="unitWork"></param>
         /// <param name="dt"></param>
-        protected virtual void AddOperationLog(string id, string docType, SheetOperation operation, IUnitWork unitWork, DateTime dt, string opt, string logID = null)
+        protected virtual void AddOperationLog(string id, string docType, SheetOperation operation, IUnitWork unitWork, DateTime dt, string opt, string logID = null, string memo = null)
         {
             DocumentOperation doc = new DocumentOperation()
             {
@@ -169,6 +169,7 @@ namespace LJH.Inventory.BLL
                 Operation = SheetOperationDescription.GetDescription(operation),
                 Operator = opt,
                 LogID = logID,
+                Memo = memo
             };
             ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(RepoUri).Insert(doc, unitWork);
         }
@@ -192,7 +193,7 @@ namespace LJH.Inventory.BLL
         /// <param name="operation"></param>
         /// <param name="opt"></param>
         /// <returns></returns>
-        public CommandResult ProcessSheet(TEntity sheet, SheetOperation operation, string opt, string logID)
+        public CommandResult ProcessSheet(TEntity sheet, SheetOperation operation, string opt, string logID,string memo=null)
         {
             try
             {
