@@ -130,39 +130,12 @@ namespace LJH.Inventory.BLL
             StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
             con.CustomerID = info.ID;
             List<StackOutSheet> sheets = (new StackOutSheetBLL(RepoUri)).GetItems(con).QueryObjects;
-            if (sheets != null && sheets.Count(it => it.State != SheetState.Shipped) > 0) // 如果存在未作废的送货单，则不能删除
+            if (sheets != null && sheets.Count  > 0) // 如果存在未作废的送货单，则不能删除
             {
                 return new CommandResult(ResultCode.Fail, string.Format("不能删除客户 {0} 的资料，系统中已经存在此客户的送货单", info.Name));
             }
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            if (sheets != null && sheets.Count > 0)
-            {
-                foreach (var sheet in sheets)
-                {
-                    ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri).Delete(sheet, unitWork);
-                }
-            }
-
-            CustomerPaymentSearchCondition con1 = new CustomerPaymentSearchCondition() { CustomerID = info.ID };
-            List<CustomerPayment> cps = ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).GetItems(con1).QueryObjects;
-            if (cps != null && cps.Count > 0)
-            {
-                foreach (CustomerPayment cp in cps)
-                {
-                    ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Delete(cp, unitWork);
-                }
-            }
-
-            CustomerReceivableSearchCondition con3 = new CustomerReceivableSearchCondition() { CustomerID = info.ID };
-            List<CustomerReceivable> crs = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con3).QueryObjects;
-            if (crs != null && crs.Count > 0)
-            {
-                foreach (CustomerReceivable cr in crs)
-                {
-                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Delete(cr, unitWork);
-                }
-            }
             ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Delete(info, unitWork);
             return unitWork.Commit();
         }
