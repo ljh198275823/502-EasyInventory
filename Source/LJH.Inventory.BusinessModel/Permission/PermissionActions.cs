@@ -59,6 +59,14 @@ namespace LJH.Inventory.BusinessModel
         /// 显示价格
         /// </summary>
         ShowPrice=0x400,
+        /// <summary>
+        /// 查看附件
+        /// </summary>
+        ShowAttachment = 0x800,
+        /// <summary>
+        /// 编辑附件
+        /// </summary>
+        EditAttachment = 0x1000,
     }
 }
         

@@ -94,6 +94,17 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         frm.IsForView = true;
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
+                        return;
+                    }
+                    var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(sheetID).QueryObject;
+                    if (osheet != null)
+                    {
+                        FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                        frm.ReceivableType = osheet.ClassID;
+                        frm.IsForView = true;
+                        frm.UpdatingItem = osheet;
+                        frm.ShowDialog();
+                        return;
                     }
                 }
             }

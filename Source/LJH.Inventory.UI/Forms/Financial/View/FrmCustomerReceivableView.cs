@@ -134,7 +134,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void mnu_Add_Click(object sender, EventArgs e)
         {
             CompanyInfo customer = Customer;
-            FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
+            FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+            frm.IsAdding = true;
             frm.Customer = customer;
             frm.ReceivableType = ReceivableType;
             if (frm.ShowDialog() == DialogResult.OK) FreshData();
@@ -164,6 +165,18 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             frm.UpdatingItem = sheet;
                             frm.ShowDialog();
                         }
+                        else
+                        {
+                            var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                            if (osheet != null)
+                            {
+                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                frm.ReceivableType = osheet.ClassID;
+                                frm.UpdatingItem = osheet;
+                                frm.ShowDialog();
+                                FreshData();
+                            }
+                        }
                     }
                     else if (ReceivableType == CustomerReceivableType.SupplierReceivable)
                     {
@@ -187,6 +200,18 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                                     frm.IsForView = true;
                                     frm.ShowDialog();
                                 }
+                            }
+                        }
+                        else
+                        {
+                            var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                            if (osheet != null)
+                            {
+                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                frm.ReceivableType = osheet.ClassID;
+                                frm.UpdatingItem = osheet;
+                                frm.ShowDialog();
+                                FreshData();
                             }
                         }
                     }

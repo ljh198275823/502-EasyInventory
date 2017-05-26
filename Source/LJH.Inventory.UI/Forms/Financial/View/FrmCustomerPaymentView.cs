@@ -22,6 +22,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             InitializeComponent();
         }
 
+        private List<Account> _AllAccounts = new AccountBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+
         #region 公共属性
         public CompanyInfo Customer { get; set; }
 
@@ -56,7 +58,10 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colSheetID"].Value = cp.ID;
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
-            row.Cells["colBank"].Value = cp.Bank;
+            Account ac = null;
+            if (!string.IsNullOrEmpty(cp.AccountID) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
+            row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
+            row.Cells["colPayer"].Value = cp.Payer;
             row.Cells["colAmount"].Value = cp.Amount;
             row.Cells["colRemain"].Value = cp.Remain != 0 ? (decimal?)cp.Remain : null;
             row.Cells["colAssigned"].Value =cp.Assigned !=0?(decimal ?) cp.Assigned:null;

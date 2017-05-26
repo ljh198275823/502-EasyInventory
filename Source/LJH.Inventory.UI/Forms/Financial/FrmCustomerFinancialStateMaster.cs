@@ -201,7 +201,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
+                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                frm.IsAdding = true;
                 frm.Customer = customer;
                 frm.ReceivableType = CustomerReceivableType.CustomerReceivable;
                 frm.ShowDialog();
@@ -251,6 +252,18 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
 
+        private void mnu_客户往来报表_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var cs = dataGridView1.SelectedRows[0].Tag as CustomerFinancialState;
+                Report.Frm客户往来报表 frm = new Report.Frm客户往来报表();
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.Customer = cs.Customer;
+                frm.ShowDialog();
+            }
+        }
+
         private void mnu_UpdateCreditLine_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 1)
@@ -268,7 +281,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmCustomerReceivableAdd frm = new FrmCustomerReceivableAdd();
+                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                frm.IsAdding = true;
                 frm.Customer = customer;
                 frm.ReceivableType = CustomerReceivableType.CustomerTax;
                 frm.ShowDialog();

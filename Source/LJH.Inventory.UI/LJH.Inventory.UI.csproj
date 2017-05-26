@@ -70,23 +70,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Financial\FrmAccountDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmAccountDetail.designer.cs">
+      <DependentUpon>FrmAccountDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmAccountMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmAccountMaster.designer.cs">
+      <DependentUpon>FrmAccountMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\FrmCreditLine.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Financial\FrmCreditLine.Designer.cs">
       <DependentUpon>FrmCreditLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerReceivableAdd.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerReceivableAdd.Designer.cs">
-      <DependentUpon>FrmCustomerReceivableAdd.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Financial\FrmCustomerTaxBillDetail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Financial\FrmCustomerTaxBillDetail.designer.cs">
       <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmOhterReceivableSheetDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmOhterReceivableSheetDetail.designer.cs">
+      <DependentUpon>FrmOhterReceivableSheetDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Financial\FrmSupplierFinancialStateMaster.cs">
       <SubType>Form</SubType>
@@ -105,6 +117,18 @@
     </Compile>
     <Compile Include="Forms\Financial\Report\FrmCustomerTaxBillReport.designer.cs">
       <DependentUpon>FrmCustomerTaxBillReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\Report\Frm客户往来报表.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Report\Frm客户往来报表.designer.cs">
+      <DependentUpon>Frm客户往来报表.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\Report\Frm账号往来报表.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Report\Frm账号往来报表.designer.cs">
+      <DependentUpon>Frm账号往来报表.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Financial\View\FrmCustomerReceivableView.cs">
       <SubType>Form</SubType>
@@ -610,14 +634,20 @@
       <DependentUpon>FrmMemo.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Financial\FrmAccountDetail.resx">
+      <DependentUpon>FrmAccountDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\FrmAccountMaster.resx">
+      <DependentUpon>FrmAccountMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmCreditLine.resx">
       <DependentUpon>FrmCreditLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmCustomerReceivableAdd.resx">
-      <DependentUpon>FrmCustomerReceivableAdd.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmCustomerTaxBillDetail.resx">
       <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\FrmOhterReceivableSheetDetail.resx">
+      <DependentUpon>FrmOhterReceivableSheetDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmSupplierFinancialStateMaster.resx">
       <DependentUpon>FrmSupplierFinancialStateMaster.cs</DependentUpon>
@@ -627,6 +657,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Report\FrmCustomerTaxBillReport.resx">
       <DependentUpon>FrmCustomerTaxBillReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Report\Frm客户往来报表.resx">
+      <DependentUpon>Frm客户往来报表.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Report\Frm账号往来报表.resx">
+      <DependentUpon>Frm账号往来报表.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\View\FrmCustomerReceivableView.resx">
       <DependentUpon>FrmCustomerReceivableView.cs</DependentUpon>

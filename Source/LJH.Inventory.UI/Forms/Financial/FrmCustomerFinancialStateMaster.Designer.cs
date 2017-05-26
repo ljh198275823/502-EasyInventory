@@ -53,6 +53,8 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lblOriginalTotal = new System.Windows.Forms.Label();
+            this.lblTotalWeight = new System.Windows.Forms.Label();
             this.chkOnlyHasRecievables = new System.Windows.Forms.CheckBox();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
@@ -70,8 +72,7 @@
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblOriginalTotal = new System.Windows.Forms.Label();
-            this.lblTotalWeight = new System.Windows.Forms.Label();
+            this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -116,6 +117,7 @@
             this.mnu_AddRecievable,
             this.mnu_AddPayment,
             this.toolStripSeparator2,
+            this.mnu_客户往来报表,
             this.mnu_UpdateCreditLine,
             this.mnu_SetFileID,
             this.toolStripSeparator1,
@@ -125,7 +127,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 220);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 264);
             // 
             // cMnu_Fresh
             // 
@@ -214,6 +216,30 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1038, 71);
             this.panel5.TabIndex = 113;
+            // 
+            // lblOriginalTotal
+            // 
+            this.lblOriginalTotal.AutoSize = true;
+            this.lblOriginalTotal.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblOriginalTotal.ForeColor = System.Drawing.Color.Blue;
+            this.lblOriginalTotal.Location = new System.Drawing.Point(697, 6);
+            this.lblOriginalTotal.Name = "lblOriginalTotal";
+            this.lblOriginalTotal.Size = new System.Drawing.Size(29, 29);
+            this.lblOriginalTotal.TabIndex = 96;
+            this.lblOriginalTotal.Text = "0";
+            this.lblOriginalTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTotalWeight
+            // 
+            this.lblTotalWeight.AutoSize = true;
+            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
+            this.lblTotalWeight.Location = new System.Drawing.Point(697, 39);
+            this.lblTotalWeight.Name = "lblTotalWeight";
+            this.lblTotalWeight.Size = new System.Drawing.Size(29, 29);
+            this.lblTotalWeight.TabIndex = 95;
+            this.lblTotalWeight.Text = "0";
+            this.lblTotalWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkOnlyHasRecievables
             // 
@@ -389,29 +415,12 @@
             this.colLinkerPhone.Name = "colLinkerPhone";
             this.colLinkerPhone.ReadOnly = true;
             // 
-            // lblOriginalTotal
+            // mnu_客户往来报表
             // 
-            this.lblOriginalTotal.AutoSize = true;
-            this.lblOriginalTotal.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblOriginalTotal.ForeColor = System.Drawing.Color.Blue;
-            this.lblOriginalTotal.Location = new System.Drawing.Point(697, 6);
-            this.lblOriginalTotal.Name = "lblOriginalTotal";
-            this.lblOriginalTotal.Size = new System.Drawing.Size(29, 29);
-            this.lblOriginalTotal.TabIndex = 96;
-            this.lblOriginalTotal.Text = "0";
-            this.lblOriginalTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblTotalWeight
-            // 
-            this.lblTotalWeight.AutoSize = true;
-            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalWeight.Location = new System.Drawing.Point(697, 39);
-            this.lblTotalWeight.Name = "lblTotalWeight";
-            this.lblTotalWeight.Size = new System.Drawing.Size(29, 29);
-            this.lblTotalWeight.TabIndex = 95;
-            this.lblTotalWeight.Text = "0";
-            this.lblTotalWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.mnu_客户往来报表.Name = "mnu_客户往来报表";
+            this.mnu_客户往来报表.Size = new System.Drawing.Size(160, 22);
+            this.mnu_客户往来报表.Text = "客户往来报表";
+            this.mnu_客户往来报表.Click += new System.EventHandler(this.mnu_客户往来报表_Click);
             // 
             // FrmCustomerFinancialStateMaster
             // 
@@ -477,5 +486,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;
         private System.Windows.Forms.Label lblOriginalTotal;
         private System.Windows.Forms.Label lblTotalWeight;
+        private System.Windows.Forms.ToolStripMenuItem mnu_客户往来报表;
     }
 }

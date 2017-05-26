@@ -138,6 +138,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "公司管理费用")]
         ExpenditureRecord = 250,
+        /// <summary>
+        /// 账号管理
+        /// </summary>
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "账号管理")]
+        Account = 251,
         #endregion
 
         #region 查询与报表
@@ -171,6 +176,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "增值税发票报表")]
         TaxBillReport,
+        /// <summary>
+        /// 公司往来报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "公司往来报表")]
+        公司往来报表,
         #endregion
     }
 }

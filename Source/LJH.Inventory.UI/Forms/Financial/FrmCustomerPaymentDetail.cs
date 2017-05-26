@@ -67,16 +67,16 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void InittxtxBank()
         {
-            this.txtBank.Items.Clear();
-            this.txtBank.Items.Add(string.Empty);
-            List<string> banks = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetAllBanks();
-            if (banks != null && banks.Count > 0)
-            {
-                foreach (var bank in banks)
-                {
-                    this.txtBank.Items.Add(bank);
-                }
-            }
+            //this.txtBank.Items.Clear();
+            //this.txtBank.Items.Add(string.Empty);
+            //List<string> banks = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetAllBanks();
+            //if (banks != null && banks.Count > 0)
+            //{
+            //    foreach (var bank in banks)
+            //    {
+            //        this.txtBank.Items.Add(bank);
+            //    }
+            //}
         }
         #endregion
 
@@ -85,10 +85,11 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.InitControls();
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            txtBank.Enabled = rdTransfer.Checked;
             InittxtxBank();
             this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户付款流水" : "供应商付款流水";
             this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
+            lnkAccout.Text = (PaymentType == CustomerPaymentType.Customer) ? "到款账号" : "付款账号";
+            label4.Text  = PaymentType == CustomerPaymentType.Customer?"客户方账号":"供应商账号";
             if (Amount != 0)
             {
                 txtAmount.DecimalValue = Amount;
@@ -112,9 +113,13 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtCustomer.Focus();
                 return false;
             }
+            if (txtAccount.Tag == null && !IsAdding )
+            {
+                MessageBox.Show("没有指定账号");
+            }
             if (txtAmount.DecimalValue <= 0)
             {
-                MessageBox.Show("金额不正确");
+                MessageBox.Show("金额不正确,不能小于零");
                 txtAmount.Focus();
                 return false;
             }
@@ -129,16 +134,16 @@ namespace LJH.Inventory.UI.Forms.Financial
                 this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
                 dtSheetDate.Value = item.SheetDate;
-                rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
-                rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
-                rd转公账.Checked = item.PaymentMode == PaymentMode.转公账;
-                rd付承兑.Checked = item.PaymentMode == PaymentMode.付承兑;
-                rd退货.Checked = item.PaymentMode == PaymentMode.退货;
+                rd公账.Checked = item.PaymentMode == PaymentMode.公账;
+                rd私账.Checked = item.PaymentMode == PaymentMode.私账;
                 txtAmount.DecimalValue = item.Amount;
-                txtCheckNum.Text = item.CheckNum;
-                txtBank.Text = item.Bank;
+                txtPayer.Text = item.Payer;
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+                Account ac = null;
+                if (!string.IsNullOrEmpty(item.AccountID)) ac = (new AccountBLL(AppSettings.Current.ConnStr)).GetByID(item.AccountID).QueryObject;
+                txtAccount.Text = ac != null ? ac.Name : string.Empty;
+                txtAccount.Tag = ac;
                 txtMemo.Text = item.Memo;
                 ShowAssigns();
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -161,14 +166,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                 info = UpdatingItem as CustomerPayment;
             }
             info.SheetDate = dtSheetDate.Value;
-            if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
-            if (rd转公账.Checked) info.PaymentMode = PaymentMode.转公账;
-            if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
-            if (rd付承兑.Checked) info.PaymentMode = PaymentMode.付承兑;
-            if (rd退货.Checked) info.PaymentMode = PaymentMode.退货;
+            if (rd公账.Checked) info.PaymentMode = PaymentMode.公账;
+            if (rd私账.Checked) info.PaymentMode = PaymentMode.私账;
             info.Amount = txtAmount.DecimalValue;
-            info.CheckNum = txtCheckNum.Text;
-            info.Bank = txtBank.Text;
+            var ac = txtAccount.Tag as Account;
+            info.AccountID = ac != null ? ac.ID : null;
+            info.Payer = txtPayer.Text;
             info.CustomerID = Customer != null ? Customer.ID : null;
             if (!string.IsNullOrEmpty(StackSheetID)) info.StackSheetID = StackSheetID;
             info.Memo = txtMemo.Text;
@@ -194,7 +197,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
             if (PaymentType == CustomerPaymentType.Customer)
             {
-                btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+                btnSave.Enabled =IsAdding &&  btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
@@ -202,7 +205,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             else if (PaymentType == CustomerPaymentType.Supplier)
             {
-                btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
+                btnSave.Enabled =IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.UndoApprove);
@@ -215,6 +218,25 @@ namespace LJH.Inventory.UI.Forms.Financial
                 btnApprove.Enabled = false;
                 btnUndoApprove.Enabled = false;
                 btnNullify.Enabled = false;
+            }
+        }
+
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            if (PaymentType == CustomerPaymentType.Customer)
+            {
+                mnu_AttachmentAdd.Enabled = mnu_AttachmentAdd.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.EditAttachment);
+                mnu_AttachmentDelete.Enabled = mnu_AttachmentDelete.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.EditAttachment);
+                mnu_AttachmentOpen.Enabled = mnu_AttachmentOpen.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.ShowAttachment);
+                mnu_AttachmentSaveAs.Enabled = mnu_AttachmentSaveAs.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.ShowAttachment);
+            }
+            else if (PaymentType == CustomerPaymentType.Supplier)
+            {
+                mnu_AttachmentAdd.Enabled = mnu_AttachmentAdd.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.EditAttachment);
+                mnu_AttachmentDelete.Enabled = mnu_AttachmentDelete.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.EditAttachment);
+                mnu_AttachmentOpen.Enabled = mnu_AttachmentOpen.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.ShowAttachment);
+                mnu_AttachmentSaveAs.Enabled = mnu_AttachmentSaveAs.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.ShowAttachment);
             }
         }
         #endregion
@@ -302,6 +324,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 string msg = "\"作废\"的操作会删除此单的所有核销项删除，是否继续?";
                 if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             }
+
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
             PerformOperation<CustomerPayment>(processor, SheetOperation.Nullify);
 
@@ -351,11 +374,20 @@ namespace LJH.Inventory.UI.Forms.Financial
             OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
             ShowButtonState();
         }
-        #endregion
 
-        private void rdTransfer_CheckedChanged(object sender, EventArgs e)
+        private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            txtBank.Enabled = rdTransfer.Checked;
+            FrmAccountMaster frm = new FrmAccountMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ForSelect = true;
+            frm.Ispublic = rd公账.Checked;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var ac = frm.SelectedItem as Account;
+                txtAccount.Text = ac.Name;
+                txtAccount.Tag = ac;
+            }
         }
+        #endregion
     }
 }

@@ -87,6 +87,7 @@
     <Compile Include="IProvider\IProductProvider.cs" />
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
     <Compile Include="IProvider\ProviderFactory.cs" />
+    <Compile Include="LinqProvider\AccountProvider.cs" />
     <Compile Include="LinqProvider\AttachmentHeaderProvider.cs" />
     <Compile Include="LinqProvider\AttachmentProvider.cs" />
     <Compile Include="LinqProvider\CarplateProvider.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="LinqProvider\ExpenditureRecordProvider.cs" />
     <Compile Include="IProvider\ICarplateProvider.cs" />
     <Compile Include="LinqProvider\InventoryCheckRecordProvider.cs" />
+    <Compile Include="LinqProvider\OtherReceivableSheetProvider.cs" />
     <Compile Include="LinqProvider\StackInRecordProvider.cs" />
     <Compile Include="LinqProvider\OrderItemRecordProvider.cs" />
     <Compile Include="LinqProvider\ProductInventoryItemProvider.cs" />

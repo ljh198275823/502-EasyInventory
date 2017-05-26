@@ -77,8 +77,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     ShowDeliveryItemOnRow(ItemsGrid.Rows[row], item);
                 }
                 int r = ItemsGrid.Rows.Add();
-                ItemsGrid.Rows[r].Cells["colCount"].Value = "合计";
+                ItemsGrid.Rows[r].Cells["colLength"].Value = "合计";
                 ItemsGrid.Rows[r].Cells["colTotal"].Value = sheet.CalAmount();
+                sheet.TotalWeight = CalTotalWeight(sheet);
+                ItemsGrid.Rows[r].Cells["colWeight"].Value = sheet.TotalWeight;
             }
         }
 
@@ -116,6 +118,31 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colPrice"].ReadOnly = true;
                 row.Cells["colMemo"].ReadOnly = true;
             }
+        }
+
+        public decimal CalTotalWeight(StackOutSheet sheet)
+        {
+            decimal ret = 0;
+            if (sheet.Items == null || sheet.Items.Count == 0) return 0;
+            var items = sheet.GetSummaryItems();
+            foreach (var item in items)
+            {
+                if (item.TotalWeight.HasValue && item.TotalWeight.Value > 0) ret += item.TotalWeight.Value;
+            }
+            //这一部分是计算所有没有指定总重量的项，要通过它的规格或其它参数计算出这部分货的重量
+            var f = new ProductInventoryItemSearchCondition();
+            f.DeliverySheetNo = sheet.ID;
+            var srs = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(f).QueryObjects;
+            foreach (var item in sheet.Items)
+            {
+                if (!item.TotalWeight.HasValue && item.InventoryItem.HasValue)
+                {
+                    var pi = item.ProductInventoryItem;
+                    if (pi == null) pi = srs.SingleOrDefault(it => it.DeliveryItem == item.ID);
+                    if (pi != null && pi.UnitWeight.HasValue) ret += pi.UnitWeight.Value * item.Count;
+                }
+            }
+            return ret;
         }
         #endregion
 
@@ -199,6 +226,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (rdWithTax.Checked) sheet.WithTax = true;
             if (rdWithoutTax.Checked) sheet.WithTax = false;
             sheet.Memo = txtMemo.Text;
+            sheet.TotalWeight = CalTotalWeight(sheet);
             return sheet;
         }
 
@@ -533,6 +561,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         row.Cells["colTotal"].Value = item.Amount;
                     }
                     ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.CalAmount();
+                    sheet.TotalWeight = CalTotalWeight(sheet);
                 }
             }
         }

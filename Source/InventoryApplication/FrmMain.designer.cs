@@ -87,6 +87,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tmrSoftDogChecker = new System.Windows.Forms.Timer(this.components);
+            this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_账号管理 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -200,7 +203,9 @@
             this.toolStripSeparator6,
             this.mnu_SupplierState,
             this.toolStripSeparator1,
-            this.mnu_Expanditure});
+            this.mnu_Expanditure,
+            this.toolStripSeparator5,
+            this.mnu_账号管理});
             this.财务ToolStripMenuItem.Image = global::InventoryApplication.Properties.Resources.finance;
             this.财务ToolStripMenuItem.Name = "财务ToolStripMenuItem";
             this.财务ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
@@ -257,7 +262,8 @@
             this.小件盘点报表ToolStripMenuItem,
             this.toolStripSeparator4,
             this.mnu_PaymentReport,
-            this.mnu_TaxBillReport});
+            this.mnu_TaxBillReport,
+            this.mnu_客户往来报表});
             this.mnu_Reports.Image = global::InventoryApplication.Properties.Resources.report;
             this.mnu_Reports.Name = "mnu_Reports";
             this.mnu_Reports.Size = new System.Drawing.Size(74, 34);
@@ -565,6 +571,27 @@
             this.tmrSoftDogChecker.Interval = 60000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
             // 
+            // mnu_客户往来报表
+            // 
+            this.mnu_客户往来报表.Enabled = false;
+            this.mnu_客户往来报表.Name = "mnu_客户往来报表";
+            this.mnu_客户往来报表.Size = new System.Drawing.Size(184, 22);
+            this.mnu_客户往来报表.Text = "客户往来报表";
+            this.mnu_客户往来报表.Click += new System.EventHandler(this.mnu_客户往来报表_Click);
+            // 
+            // mnu_账号管理
+            // 
+            this.mnu_账号管理.Enabled = false;
+            this.mnu_账号管理.Name = "mnu_账号管理";
+            this.mnu_账号管理.Size = new System.Drawing.Size(160, 22);
+            this.mnu_账号管理.Text = "账号管理";
+            this.mnu_账号管理.Click += new System.EventHandler(this.mnu_账号管理_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(157, 6);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -653,5 +680,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem 原材料盘点报表ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 小件盘点报表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnu_客户往来报表;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem mnu_账号管理;
     }
 }

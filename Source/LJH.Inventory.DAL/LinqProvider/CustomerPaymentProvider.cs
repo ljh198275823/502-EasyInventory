@@ -41,6 +41,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 CustomerPaymentSearchCondition con = search as CustomerPaymentSearchCondition;
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
+                if (!string.IsNullOrEmpty(con.AccountID)) ret = ret.Where(item => item.AccountID == con.AccountID);
                 if (!string.IsNullOrEmpty(con.StackSheetID)) ret = ret.Where(item => item.StackSheetID == con.StackSheetID);
                 if (con.PaymentTypes != null && con.PaymentTypes.Count > 0) ret = ret.Where(item => con.PaymentTypes.Contains(item.ClassID));
 

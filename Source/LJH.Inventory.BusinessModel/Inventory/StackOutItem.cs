@@ -70,6 +70,8 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
+
+        public ProductInventoryItem ProductInventoryItem { get; set; }
         #endregion
 
         /// <summary>

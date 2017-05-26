@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,11 +63,14 @@
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddSheet = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblTotalAmount = new System.Windows.Forms.Label();
+            this.lblTotalWeight = new System.Windows.Forms.Label();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -141,6 +145,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.lblTotalAmount);
+            this.panel5.Controls.Add(this.lblTotalWeight);
             this.panel5.Controls.Add(this.txtCustomer);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.btnLast3Month);
@@ -346,12 +352,12 @@
             this.CategoryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_AddSheet});
             this.CategoryMenu.Name = "contextMenuStrip1";
-            this.CategoryMenu.Size = new System.Drawing.Size(153, 48);
+            this.CategoryMenu.Size = new System.Drawing.Size(137, 26);
             // 
             // mnu_AddSheet
             // 
             this.mnu_AddSheet.Name = "mnu_AddSheet";
-            this.mnu_AddSheet.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddSheet.Size = new System.Drawing.Size(136, 22);
             this.mnu_AddSheet.Text = "新建送货单";
             this.mnu_AddSheet.Click += new System.EventHandler(this.mnu_AddSheet_Click);
             // 
@@ -368,6 +374,7 @@
             this.colCustomer,
             this.colFileID,
             this.colWithTax,
+            this.colTotalWeight,
             this.colAmount,
             this.colPaid,
             this.colNotPaid,
@@ -385,12 +392,34 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 87);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1244, 396);
             this.dataGridView1.TabIndex = 116;
+            // 
+            // lblTotalAmount
+            // 
+            this.lblTotalAmount.AutoSize = true;
+            this.lblTotalAmount.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalAmount.ForeColor = System.Drawing.Color.Blue;
+            this.lblTotalAmount.Location = new System.Drawing.Point(934, 13);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(29, 29);
+            this.lblTotalAmount.TabIndex = 139;
+            this.lblTotalAmount.Text = "0";
+            // 
+            // lblTotalWeight
+            // 
+            this.lblTotalWeight.AutoSize = true;
+            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
+            this.lblTotalWeight.Location = new System.Drawing.Point(934, 48);
+            this.lblTotalWeight.Name = "lblTotalWeight";
+            this.lblTotalWeight.Size = new System.Drawing.Size(29, 29);
+            this.lblTotalWeight.TabIndex = 138;
+            this.lblTotalWeight.Text = "0";
             // 
             // colSheetDate
             // 
@@ -430,27 +459,36 @@
             this.colWithTax.ReadOnly = true;
             this.colWithTax.Width = 60;
             // 
+            // colTotalWeight
+            // 
+            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colTotalWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colTotalWeight.HeaderText = "总重量";
+            this.colTotalWeight.Name = "colTotalWeight";
+            this.colTotalWeight.ReadOnly = true;
+            // 
             // colAmount
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             // 
             // colPaid
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colPaid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Format = "C2";
+            this.colPaid.DefaultCellStyle = dataGridViewCellStyle3;
             this.colPaid.HeaderText = "已付金额";
             this.colPaid.Name = "colPaid";
             this.colPaid.ReadOnly = true;
             // 
             // colNotPaid
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Format = "C2";
+            this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle4;
             this.colNotPaid.HeaderText = "未付金额";
             this.colNotPaid.Name = "colNotPaid";
             this.colNotPaid.ReadOnly = true;
@@ -464,9 +502,9 @@
             // 
             // colShipDate
             // 
-            dataGridViewCellStyle4.Format = "g";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Format = "g";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle5;
             this.colShipDate.HeaderText = "发货日期";
             this.colShipDate.Name = "colShipDate";
             this.colShipDate.ReadOnly = true;
@@ -574,11 +612,14 @@
         private System.Windows.Forms.Button btnLast3Month;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCustomer;
+        private System.Windows.Forms.Label lblTotalAmount;
+        private System.Windows.Forms.Label lblTotalWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileID;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;

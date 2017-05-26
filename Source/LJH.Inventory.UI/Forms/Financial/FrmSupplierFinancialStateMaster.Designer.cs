@@ -71,7 +71,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(194, 388);
+            this.pnlLeft.Size = new System.Drawing.Size(194, 366);
             this.pnlLeft.TabIndex = 111;
             // 
             // categoryTree
@@ -83,7 +83,7 @@
             this.categoryTree.LoadSupplier = false;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
-            this.categoryTree.Size = new System.Drawing.Size(194, 388);
+            this.categoryTree.Size = new System.Drawing.Size(194, 366);
             this.categoryTree.TabIndex = 2;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.categoryTree_NodeMouseClick);
             // 
@@ -92,7 +92,7 @@
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.splitter1.Location = new System.Drawing.Point(194, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 388);
+            this.splitter1.Size = new System.Drawing.Size(8, 366);
             this.splitter1.TabIndex = 112;
             this.splitter1.TabStop = false;
             // 
@@ -109,7 +109,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 170);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 192);
             // 
             // cMnu_Fresh
             // 
@@ -234,7 +234,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(862, 352);
+            this.dataGridView1.Size = new System.Drawing.Size(862, 330);
             this.dataGridView1.TabIndex = 115;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 

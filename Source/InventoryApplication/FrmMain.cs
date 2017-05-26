@@ -247,6 +247,7 @@ namespace InventoryApplication
             this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
             this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
+            this.mnu_账号管理.Enabled = cur.Permit(Permission.Account, PermissionActions.Read) || cur.Permit(Permission.Account, PermissionActions.Edit);
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
             this.mnu_DeliveryStatistic.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
@@ -254,6 +255,7 @@ namespace InventoryApplication
             this.mnu_SliceRecordReport.Enabled = cur.Permit(Permission.SliceRecordReport, PermissionActions.Read);
             this.mnu_PaymentReport.Enabled = cur.Permit(Permission.PaymentReport, PermissionActions.Read);
             this.mnu_TaxBillReport.Enabled = cur.Permit(Permission.TaxBillReport, PermissionActions.Read);
+            this.mnu_客户往来报表.Enabled = cur.Permit(Permission.公司往来报表, PermissionActions.Read);
         }
         #endregion
 
@@ -570,6 +572,16 @@ namespace InventoryApplication
         private void 原材料盘点报表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Inventory.Report.Frm原材料盘点记录报表>(null);
+        }
+
+        private void mnu_客户往来报表_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.Frm客户往来报表>(null);
+        }
+
+        private void mnu_账号管理_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmAccountMaster>(null);
         }
     }
 }

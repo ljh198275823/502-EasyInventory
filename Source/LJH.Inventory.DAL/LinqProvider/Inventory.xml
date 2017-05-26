@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="Inventory" xmlns="http://schemas.microsoft.com/linqtosql/mapping/2007">
+  <Table Name="Account" Member="LJH.Inventory.BusinessModel.Account">
+    <Type Name="LJH.Inventory.BusinessModel.Account">
+      <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
+      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="Ispublic" Member="Ispublic"  DbType="bit not null"  UpdateCheck="Never"/>
+      <Column Name="Operator" Member="Operator" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="AddDate" Member="AddDate"  DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
   <Table Name="Attachment" Member="LJH.Inventory.BusinessModel.Attachment">
     <Type Name="LJH.Inventory.BusinessModel.Attachment">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
@@ -497,6 +507,8 @@
       <Column Name="Assigned" Member="Assigned" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="CheckNum" Member="CheckNum" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Bank" Member="Bank" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="AccountID" Member="AccountID" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Payer" Member="Payer" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="StackOutSheetID" Member="StackSheetID" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
@@ -522,6 +534,20 @@
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Haspaid" Member="Haspaid" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
+  <Table Name="OtherReceivableSheet" Member="LJH.Inventory.BusinessModel.OtherReceivableSheet">
+    <Type Name="LJH.Inventory.BusinessModel.OtherReceivableSheet">
+      <Column Name="ID" Member="ID"  DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
+      <Column Name="ClassID" Member="ClassID"  DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="SheetDate" Member="SheetDate"  DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="LastActiveDate" Member="LastActiveDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="StackSheetID" Member="StackSheetID" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

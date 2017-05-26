@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountBLL.cs" />
     <Compile Include="AttachmentBLL.cs" />
     <Compile Include="BLLBase.cs" />
     <Compile Include="CollectionTypeBLL.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="CustomerTypeBLL.cs" />
     <Compile Include="DatetimeSyncService.cs" />
     <Compile Include="InventoryCheckRecordBLL.cs" />
+    <Compile Include="OtherReceivableSheetBLL.cs" />
     <Compile Include="StackOutSheetBLL.cs" />
     <Compile Include="DepartmentBLL.cs" />
     <Compile Include="DocumentOperationBLL.cs" />

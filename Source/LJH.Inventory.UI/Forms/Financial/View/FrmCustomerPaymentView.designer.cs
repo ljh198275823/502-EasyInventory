@@ -45,11 +45,12 @@
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBank = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStackSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colPayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -70,11 +71,12 @@
             this.colSheetID,
             this.colSheetDate,
             this.colPaymentMode,
-            this.colBank,
+            this.colAccount,
             this.colAmount,
             this.colAssigned,
             this.colRemain,
             this.colStackSheetID,
+            this.colPayer,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Location = new System.Drawing.Point(0, 33);
@@ -82,7 +84,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1000, 354);
+            this.dataGridView1.Size = new System.Drawing.Size(1046, 354);
             this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
             // 
@@ -134,14 +136,14 @@
             this.lblMSG});
             this.statusStrip1.Location = new System.Drawing.Point(0, 390);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1000, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1046, 22);
             this.statusStrip1.TabIndex = 26;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblMSG
             // 
             this.lblMSG.Name = "lblMSG";
-            this.lblMSG.Size = new System.Drawing.Size(985, 17);
+            this.lblMSG.Size = new System.Drawing.Size(1031, 17);
             this.lblMSG.Spring = true;
             this.lblMSG.Text = "共 0 项";
             // 
@@ -166,17 +168,20 @@
             // 
             // colPaymentMode
             // 
+            this.colPaymentMode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colPaymentMode.HeaderText = "付款方式";
             this.colPaymentMode.Name = "colPaymentMode";
             this.colPaymentMode.ReadOnly = true;
             this.colPaymentMode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colPaymentMode.Width = 59;
             // 
-            // colBank
+            // colAccount
             // 
-            this.colBank.HeaderText = "转账行";
-            this.colBank.Name = "colBank";
-            this.colBank.ReadOnly = true;
-            this.colBank.Width = 150;
+            this.colAccount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colAccount.HeaderText = "公司账号";
+            this.colAccount.Name = "colAccount";
+            this.colAccount.ReadOnly = true;
+            this.colAccount.Width = 78;
             // 
             // colAmount
             // 
@@ -207,10 +212,17 @@
             // 
             // colStackSheetID
             // 
+            this.colStackSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colStackSheetID.HeaderText = "送货单";
             this.colStackSheetID.Name = "colStackSheetID";
             this.colStackSheetID.ReadOnly = true;
-            this.colStackSheetID.Width = 150;
+            this.colStackSheetID.Width = 47;
+            // 
+            // colPayer
+            // 
+            this.colPayer.HeaderText = "对方账号";
+            this.colPayer.Name = "colPayer";
+            this.colPayer.ReadOnly = true;
             // 
             // colMemo
             // 
@@ -225,7 +237,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 412);
+            this.ClientSize = new System.Drawing.Size(1046, 412);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.chkShowAll);
             this.Controls.Add(this.dataGridView1);
@@ -256,11 +268,12 @@
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBank;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewLinkColumn colStackSheetID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPayer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

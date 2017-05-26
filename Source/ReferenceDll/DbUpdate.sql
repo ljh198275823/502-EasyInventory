@@ -123,7 +123,101 @@ go
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='TotalWeight' AND id = OBJECT_ID(N'[dbo].[StackOutSheet]'))
 BEGIN
 	exec ('alter table StackOutSheet add TotalWeight decimal(18,4) null')
+	exec ('update StackOutSheet set TotalWeight =w.totalweight from (select sheetno, SUM(totalweight) as totalweight from (select sheetno ,isnull(totalweight,0) as totalweight,ProductID  from StackOutItem group by SheetNo,ProductID,TotalWeight) a group by SheetNo )w where stackoutsheet.id=w.SheetNo ')
     exec ('update StackOutSheet set TotalWeight =0 where TotalWeight is null')
 	exec ('alter table StackOutSheet alter column TotalWeight decimal(18,4) not null')
 end
+go
+
+--2017-05-26 财务模块做了一些较大的改动
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Account]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[Account](
+	[ID] [nvarchar](50) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Ispublic] [bit] NOT NULL,
+	[AddDate] [datetime] not null,
+	[Operator] [nvarchar](50) NOT NULL,
+	[Memo] [nvarchar](200) NULL,
+	 CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)
+	) ON [PRIMARY]
+END
+go
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[OtherReceivableSheet]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[OtherReceivableSheet](
+	[ID] [nvarchar](50) NOT NULL,
+	[ClassID] [tinyint] NOT NULL,
+	[SheetDate] [datetime] NOT NULL,
+	[LastActiveDate] [datetime] NOT NULL,
+	[CustomerID] [nvarchar](50) NOT NULL,
+	[Amount] [decimal](18, 2) NOT NULL,
+	[State] [tinyint] NOT NULL,
+	[OrderID] [nvarchar](50) NULL,
+	[StackSheetID] [nvarchar](50) NULL,
+	[Memo] [nvarchar](200) NULL,
+	CONSTRAINT [PK_OtherReceivableSheet] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)
+	) ON [PRIMARY]
+END
+go
+
+--客户付款流水增加四个字段 账号，付款单位
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='AccountID' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
+BEGIN
+	exec ('alter table CustomerPayment add AccountID nvarchar(50) null')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Payer' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
+BEGIN
+	exec ('alter table CustomerPayment add Payer nvarchar(50) null')
+end
+go
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AccountList]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[AccountList](
+	[ID] [uniqueidentifier] NOT NULL,
+	[CreateDate] [datetime] NOT NULL,
+	[ClassID] [tinyint] NOT NULL,
+	[SheetID] [nvarchar](50) NOT NULL,
+	[CustomerID] [nvarchar](50) NOT NULL,
+	[AccountID] [nvarchar](50) NOT NULL,
+	[Amount] [decimal](18, 4) NOT NULL,
+	[Assigned] [decimal](18, 4) NOT NULL,
+	[State] [tinyint] NOT NULL,
+	[OrderID] [nvarchar](50) NULL,
+	[Memo] [nvarchar](200) NULL,
+	 CONSTRAINT [PK_AccountList] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)
+	)  ON [PRIMARY]
+	
+	exec ('insert into accountlist (id,createdate,customerid,classid,sheetid,accountid,orderid,amount,assigned,state,memo) select NEWID()as id ,sheetdate,customerid,classid,[ID]as sheetid,'''',orderid,amount,assigned,0,memo from CustomerPayment ')
+END
+go
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AccountListAssign]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[AccountListAssign](
+	[ID] [uniqueidentifier] NOT NULL,
+	[PaymentID] [uniqueidentifier] NOT NULL,
+	[ReceivableID] [uniqueidentifier] NOT NULL,
+	[Amount] [decimal](18, 4) NOT NULL,
+	 CONSTRAINT [PK_AccountListAssign] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)
+	) ON [PRIMARY]
+	
+	exec ('insert into accountlistassign (id,paymentid,receivableid,amount) select a.id,b.id as paymentid,a.receivableid,a.amount from CustomerPaymentAssign a inner join accountlist b on a.PaymentID =b.sheetid ')
+END
 go

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
@@ -41,20 +41,22 @@
             this.chk收 = new System.Windows.Forms.CheckBox();
             this.txtSupplier = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkSupplier = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBank = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStackSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkAccout = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,17 +64,17 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(621, 12);
+            this.btnSearch.Location = new System.Drawing.Point(827, 8);
             this.btnSearch.Size = new System.Drawing.Size(142, 23);
             // 
             // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(621, 41);
+            this.btnSaveAs.Location = new System.Drawing.Point(827, 37);
             this.btnSaveAs.Size = new System.Drawing.Size(142, 23);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(621, 70);
+            this.btnColumn.Location = new System.Drawing.Point(827, 66);
             this.btnColumn.Size = new System.Drawing.Size(142, 23);
             // 
             // groupBox1
@@ -108,16 +110,17 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtAccount);
+            this.groupBox3.Controls.Add(this.lnkAccout);
             this.groupBox3.Controls.Add(this.chk支);
             this.groupBox3.Controls.Add(this.chk收);
             this.groupBox3.Controls.Add(this.txtSupplier);
             this.groupBox3.Controls.Add(this.lnkSupplier);
-            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtCustomer);
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Location = new System.Drawing.Point(242, 8);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(363, 90);
+            this.groupBox3.Size = new System.Drawing.Size(564, 90);
             this.groupBox3.TabIndex = 38;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
@@ -127,11 +130,11 @@
             this.chk支.AutoSize = true;
             this.chk支.Checked = true;
             this.chk支.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk支.Location = new System.Drawing.Point(308, 23);
+            this.chk支.Location = new System.Drawing.Point(457, 57);
             this.chk支.Name = "chk支";
-            this.chk支.Size = new System.Drawing.Size(48, 16);
+            this.chk支.Size = new System.Drawing.Size(72, 16);
             this.chk支.TabIndex = 76;
-            this.chk支.Text = "付款";
+            this.chk支.Text = "付款流水";
             this.chk支.UseVisualStyleBackColor = true;
             // 
             // chk收
@@ -139,11 +142,11 @@
             this.chk收.AutoSize = true;
             this.chk收.Checked = true;
             this.chk收.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk收.Location = new System.Drawing.Point(257, 23);
+            this.chk收.Location = new System.Drawing.Point(456, 23);
             this.chk收.Name = "chk收";
-            this.chk收.Size = new System.Drawing.Size(48, 16);
+            this.chk收.Size = new System.Drawing.Size(72, 16);
             this.chk收.TabIndex = 75;
-            this.chk收.Text = "收款";
+            this.chk收.Text = "收款流水";
             this.chk收.UseVisualStyleBackColor = true;
             // 
             // txtSupplier
@@ -167,15 +170,6 @@
             this.lnkSupplier.Text = "供应商";
             this.lnkSupplier.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_LinkClicked);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(221, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 38;
-            this.label1.Text = "类别";
-            // 
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -191,9 +185,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -201,7 +195,8 @@
             this.colClass,
             this.colSheetID,
             this.colPaymentMode,
-            this.colBank,
+            this.colAccount,
+            this.colPayer,
             this.colAmount,
             this.colAssigned,
             this.colRemain,
@@ -219,9 +214,9 @@
             // 
             // colSheetDate
             // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Format = "D";
+            dataGridViewCellStyle13.NullValue = null;
+            this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle13;
             this.colSheetDate.HeaderText = "日期";
             this.colSheetDate.Name = "colSheetDate";
             this.colSheetDate.ReadOnly = true;
@@ -252,18 +247,24 @@
             this.colPaymentMode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colPaymentMode.Width = 80;
             // 
-            // colBank
+            // colAccount
             // 
-            this.colBank.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colBank.HeaderText = "转账行";
-            this.colBank.MinimumWidth = 100;
-            this.colBank.Name = "colBank";
-            this.colBank.ReadOnly = true;
+            this.colAccount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colAccount.HeaderText = "到款账号";
+            this.colAccount.MinimumWidth = 100;
+            this.colAccount.Name = "colAccount";
+            this.colAccount.ReadOnly = true;
+            // 
+            // colPayer
+            // 
+            this.colPayer.HeaderText = "付款单位";
+            this.colPayer.Name = "colPayer";
+            this.colPayer.ReadOnly = true;
             // 
             // colAmount
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Format = "C2";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle14;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -271,16 +272,16 @@
             // 
             // colAssigned
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colAssigned.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Format = "C2";
+            this.colAssigned.DefaultCellStyle = dataGridViewCellStyle15;
             this.colAssigned.HeaderText = "核销";
             this.colAssigned.Name = "colAssigned";
             this.colAssigned.ReadOnly = true;
             // 
             // colRemain
             // 
-            dataGridViewCellStyle4.Format = "C2";
-            this.colRemain.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Format = "C2";
+            this.colRemain.DefaultCellStyle = dataGridViewCellStyle16;
             this.colRemain.HeaderText = "未核销";
             this.colRemain.Name = "colRemain";
             this.colRemain.ReadOnly = true;
@@ -312,6 +313,27 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // txtAccount
+            // 
+            this.txtAccount.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtAccount.Location = new System.Drawing.Point(275, 21);
+            this.txtAccount.Name = "txtAccount";
+            this.txtAccount.ReadOnly = true;
+            this.txtAccount.Size = new System.Drawing.Size(163, 21);
+            this.txtAccount.TabIndex = 102;
+            this.txtAccount.DoubleClick += new System.EventHandler(this.txtAccount_DoubleClick);
+            // 
+            // lnkAccout
+            // 
+            this.lnkAccout.Location = new System.Drawing.Point(210, 23);
+            this.lnkAccout.Name = "lnkAccout";
+            this.lnkAccout.Size = new System.Drawing.Size(60, 17);
+            this.lnkAccout.TabIndex = 101;
+            this.lnkAccout.TabStop = true;
+            this.lnkAccout.Text = "到款账号";
+            this.lnkAccout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnkAccout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccout_LinkClicked);
             // 
             // FrmCustomerPaymentReport
             // 
@@ -346,7 +368,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
         private System.Windows.Forms.LinkLabel lnkSupplier;
         private System.Windows.Forms.CheckBox chk支;
@@ -355,12 +376,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBank;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPayer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private GeneralLibrary.WinformControl.DBCTextBox txtAccount;
+        private System.Windows.Forms.LinkLabel lnkAccout;
     }
 }

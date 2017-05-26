@@ -26,6 +26,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         }
 
         private List<CompanyInfo> _AllCustomers = null;
+        private List<Account> _AllAccounts = null;
 
         #region 重写基类方法
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -37,7 +38,10 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             else if (cp.ClassID == CustomerPaymentType.Supplier) row.Cells["colClass"].Value = "付款";
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
-            row.Cells["colBank"].Value = cp.Bank;
+            Account ac = null;
+            if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
+            row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
+            row.Cells["colPayer"].Value = cp.Payer;
             row.Cells["colAmount"].Value = cp.Amount;
             row.Cells["colRemain"].Value = cp.Remain != 0 ? (decimal?)cp.Remain : null;
             row.Cells["colAssigned"].Value = cp.Assigned != 0 ? (decimal?)cp.Assigned : null;
@@ -60,12 +64,14 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         protected override List<object> GetDataSource()
         {
             _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            _AllAccounts = new AccountBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             if (!chk支.Checked && !chk收.Checked) return null;
 
             var con = new CustomerPaymentSearchCondition();
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtSupplier.Tag != null) con.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
+            if (txtAccount.Tag != null) con.AccountID = (txtAccount.Tag as Account).ID;
             con.PaymentTypes = new List<CustomerPaymentType>();
             if (chk收.Checked) con.PaymentTypes.Add(CustomerPaymentType.Customer);
             if (chk支.Checked) con.PaymentTypes.Add(CustomerPaymentType.Supplier);
@@ -118,6 +124,25 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             txtSupplier.Text = string.Empty;
             txtSupplier.Tag = null;
+        }
+
+        private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmAccountMaster frm = new FrmAccountMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var ac = frm.SelectedItem as Account;
+                txtAccount.Text = ac.Name;
+                txtAccount.Tag = ac;
+            }
+        }
+
+        private void txtAccount_DoubleClick(object sender, EventArgs e)
+        {
+            txtAccount.Tag = null;
+            txtAccount.Text = null;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

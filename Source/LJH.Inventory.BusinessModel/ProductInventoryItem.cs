@@ -235,9 +235,11 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (Weight == null) return null;
-                if (Count <= 0) return null;
-                return Weight / Count;
+                if (Weight.HasValue && Weight.Value > 0 && Count > 0) return Weight.Value / Count;
+                if (OriginalWeight.HasValue && OriginalWeight.Value > 0 && OriginalCount.HasValue && OriginalCount.Value > 0) return OriginalWeight / OriginalCount;
+                return ProductInventoryItem.CalWeight(this.RealThick.HasValue ? this.RealThick.Value : this.OriginalThick.Value,
+                                                         SpecificationHelper.GetWrittenWidth(Product.Specification).Value,
+                                                         this.Length.Value, Product.Density.Value);
             }
         }
         #endregion

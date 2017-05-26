@@ -86,6 +86,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
             return objs;
         }
+
+        private void 显示总重量和总金额()
+        {
+            decimal totalAmount = 0;
+            decimal totalWeight = 0;
+            foreach (DataGridViewRow r in dataGridView1.Rows)
+            {
+                if (r.Visible == false) continue;
+                var s = r.Tag as StackOutSheet;
+                totalAmount += s.Amount;
+                totalWeight += s.TotalWeight;
+            }
+            lblTotalWeight.Text = string.Format("总重量 {0:F3}吨", totalWeight);
+            lblTotalAmount.Text = string.Format("总金额 {0:F2}元", totalAmount);
+        }
         #endregion
 
         #region 重写基类方法和处理事件
@@ -108,7 +123,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             FrmStackOutSheetDetail frm = new FrmStackOutSheetDetail();
             frm.IsAdding = true;
             frm.UpdatingItem = StackOutSheet.Create(null, null);
+            frm.ItemAdded += new EventHandler<ItemAddedEventArgs>(frm_ItemAdded);
+            frm.ItemUpdated += new EventHandler<ItemUpdatedEventArgs>(frm_ItemUpdated);
             return frm;
+        }
+
+        private void frm_ItemUpdated(object sender, ItemUpdatedEventArgs e)
+        {
+            显示总重量和总金额();
+        }
+
+        private void frm_ItemAdded(object sender, ItemAddedEventArgs e)
+        {
+            显示总重量和总金额();
         }
 
         protected override List<object> GetDataSource()
@@ -137,7 +164,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         protected override void ShowItemsOnGrid(List<object> items)
         {
             _Warehouses = (new WareHouseBLL(AppSettings.Current.ConnStr)).GetItems(null).QueryObjects;
-
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
             crsc.CreateDate = GetDateTimeRange();
             crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable };
@@ -159,6 +185,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
             _Fresh = true;
             base.ShowItemsOnGrid(items);
+            显示总重量和总金额();
             _Fresh = false;
         }
 
@@ -172,6 +199,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
             row.Cells["colFileID"].Value = customer != null ? customer.FileID : null;
             row.Cells["colWithTax"].Value = sheet.WithTax;
+            row.Cells["colTotalWeight"].Value = sheet.TotalWeight;
             row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
             row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? (DateTime?)sheet.LastActiveDate : null;

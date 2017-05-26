@@ -91,7 +91,7 @@ namespace LJH.Inventory.BLL
                 cloneItems.Add(des.Clone());
             }
 
-            decimal? uw = source.UnitWeight;
+            decimal? uw = source.Count > 0 ? source.UnitWeight : des.UnitWeight;
             //两行的顺序不能反!
             source.Count += des.Count - newCount; //相减的两者不管谁大谁小都用同一个表达式,不会出错的
             des.Count = newCount;

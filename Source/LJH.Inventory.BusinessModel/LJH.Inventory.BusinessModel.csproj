@@ -86,6 +86,7 @@
     <Compile Include="CurrencyType.cs" />
     <Compile Include="CompanyInfo.cs" />
     <Compile Include="CompanyClass.cs" />
+    <Compile Include="Financial\Account.cs" />
     <Compile Include="Financial\CustomerFinancialState.cs" />
     <Compile Include="Financial\CustomerPayment.cs" />
     <Compile Include="Financial\CustomerPaymentAssign.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Financial\CustomerReceivableType.cs" />
     <Compile Include="Financial\ExpenditureType.cs" />
     <Compile Include="Financial\ExpenditureRecord.cs" />
+    <Compile Include="Financial\OtherReceivableSheet.cs" />
     <Compile Include="Inventory\InventoryCheckRecord.cs" />
     <Compile Include="Inventory\StackInSheetType.cs" />
     <Compile Include="Inventory\StackOutSheetType.cs" />

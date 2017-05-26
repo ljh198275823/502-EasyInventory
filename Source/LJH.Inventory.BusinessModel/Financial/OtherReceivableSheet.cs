@@ -5,13 +5,10 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    /// <summary>
-    /// 表示客户收款记录
-    /// </summary>
-    public class CustomerPayment : ISheet<string>
+    public class OtherReceivableSheet : ISheet<string>
     {
         #region 构造函数
-        public CustomerPayment()
+        public OtherReceivableSheet()
         {
         }
         #endregion
@@ -24,7 +21,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置单据类型
         /// </summary>
-        public CustomerPaymentType ClassID { get; set; }
+        public CustomerReceivableType ClassID { get; set; }
         /// <summary>
         /// 获取或设置单据日期
         /// </summary>
@@ -38,41 +35,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string CustomerID { get; set; }
         /// <summary>
-        /// 获取或设置到款账号
-        /// </summary>
-        public string AccountID { get; set; }
-        /// <summary>
-        /// 获取或设置币别
-        /// </summary>
-        public string CurrencyType { get; set; }
-        /// <summary>
-        /// 获取或设置付款方式
-        /// </summary>
-        public PaymentMode PaymentMode { get; set; }
-        /// <summary>
         /// 获取或设置付款金额
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置已核销的金额
-        /// </summary>
-        public decimal Assigned { get; set; }
-        /// <summary>
-        /// 获取或设置支票号(如果是支票付款)
-        /// </summary>
-        public string CheckNum { get; set; }
-        /// <summary>
-        /// 获取或设置转账银行
-        /// </summary>
-        public string Bank { get; set; }
-        /// <summary>
-        /// 获取或设置付款单位
-        /// </summary>
-        public string Payer { get; set; }
-        /// <summary>
         /// 获取或设置付款流水的收发货单据号
         /// </summary>
-        public string StackSheetID { get; set; }
+        public string StackinSheetID { get; set; }
         /// <summary>
         /// 获取或设置当前状态
         /// </summary>
@@ -81,16 +50,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
-        #endregion
-
-        #region 只读属性
-        /// <summary>
-        /// 获取待抵消金额
-        /// </summary>
-        public decimal Remain
-        {
-            get { return Amount - Assigned; }
-        }
         #endregion
 
         #region ISheet接口
@@ -119,23 +78,23 @@ namespace LJH.Inventory.BusinessModel
             {
                 switch (ClassID)
                 {
-                    case CustomerPaymentType.Customer:
+                    case CustomerReceivableType.CustomerReceivable:
                         return "客户应收款";
-                    case CustomerPaymentType.Supplier:
+                    case CustomerReceivableType.SupplierReceivable:
                         return "供应商应付款";
-                    case CustomerPaymentType.CustomerTax:
-                        return "客户增值税发票";
-                    case CustomerPaymentType.SupplierTax:
-                        return "供应商增值税发票";
+                    case CustomerReceivableType.CustomerTax:
+                        return "客户应开增值税";
+                    case CustomerReceivableType.SupplierTax:
+                        return "供应商应开增值税";
                     default:
-                        throw new Exception("客户付款单没有指定类型");
+                        throw new Exception("客户应收款单没有指定类型");
                 }
             }
         }
 
         public ISheet<string> Clone()
         {
-            return MemberwiseClone() as CustomerPayment;
+            return MemberwiseClone() as OtherReceivableSheet;
         }
         #endregion
     }

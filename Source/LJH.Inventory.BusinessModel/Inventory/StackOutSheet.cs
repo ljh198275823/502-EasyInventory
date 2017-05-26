@@ -205,6 +205,7 @@ namespace LJH.Inventory.BusinessModel
                     Price = 0,
                     Count = count,
                     AddDate = dt.HasValue ? dt.Value.AddSeconds(1) : DateTime.Now,
+                    ProductInventoryItem = inventory,
                 };
                 if (inventory.Weight.HasValue && inventory.Model != "开平")
                 {
