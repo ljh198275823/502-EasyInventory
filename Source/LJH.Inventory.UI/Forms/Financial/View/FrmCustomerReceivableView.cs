@@ -125,7 +125,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             frm.IsAdding = true;
             frm.Customer = customer;
             frm.ReceivableType = ReceivableType;
-            if (frm.ShowDialog() == DialogResult.OK) FreshData();
+            FreshData();
         }
 
         private void cMnu_Export_Click(object sender, EventArgs e)

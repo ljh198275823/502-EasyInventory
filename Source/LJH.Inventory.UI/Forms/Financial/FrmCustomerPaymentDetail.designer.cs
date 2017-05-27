@@ -227,11 +227,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(262, 141);
+            this.label4.Location = new System.Drawing.Point(282, 141);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 102;
-            this.label4.Text = "客户方单位";
+            this.label4.Text = "对方账号";
             // 
             // txtAccount
             // 

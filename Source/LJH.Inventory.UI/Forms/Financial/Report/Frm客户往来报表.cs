@@ -74,7 +74,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             ret = (from it in ret
                    orderby it.DT ascending
                    select it).ToList();
-            if (ret.Count > 0) ret.Insert(0, first);
+            ret.Insert(0, first);
             return ret.Select(it => (object)it).ToList();
         }
 

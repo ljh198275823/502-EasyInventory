@@ -97,6 +97,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAmount.DecimalValue = item.Amount;
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+                txtAccount.Text = item.AccountID;
+                txtPayer.Text = item.Payer;
                 txtMemo.Text = item.Memo;
                 ShowAssigns();
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -119,6 +121,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                 info = UpdatingItem as CustomerPayment;
             }
             info.SheetDate = dtSheetDate.Value;
+            info.AccountID = txtAccount.Text;
+            info.Payer = txtPayer.Text;
             info.Amount = txtAmount.DecimalValue;
             info.CustomerID = Customer != null ? Customer.ID : null;
             info.Memo = txtMemo.Text;
@@ -144,7 +148,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (TaxType == CustomerPaymentType.CustomerTax)
             {
                 btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
-                var ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                AccountRecord  ac = null;
+                if(cp!=null)ac=new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.Customer, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.UndoApprove);
@@ -153,7 +158,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             else if (TaxType == CustomerPaymentType.SupplierTax)
             {
                 btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
-                var ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                AccountRecord ac = null;
+                if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.UndoApprove);

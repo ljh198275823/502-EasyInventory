@@ -114,7 +114,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             frm.PaymentType = PaymentType;
             frm.IsAdding = true;
             frm.StartPosition = FormStartPosition.CenterParent;
-            if (frm.ShowDialog() == DialogResult.OK) FreshData();
+            FreshData();
         }
 
         private void mnu_Assign_Click(object sender, EventArgs e)

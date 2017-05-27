@@ -55,6 +55,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             else row.Cells["colRemain"].Value = null;
             if (cp.Assigned != 0) row.Cells["colAssigned"].Value = cp.Assigned;
             else row.Cells["colAssigned"].Value = null;
+            row.Cells["colAccount"].Value = cp.AccountID;
+            row.Cells["colPayer"].Value = cp.OtherAccount;
             row.Cells["colMemo"].Value = cp.Memo;
         }
 

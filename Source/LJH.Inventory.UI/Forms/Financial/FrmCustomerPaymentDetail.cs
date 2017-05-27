@@ -64,20 +64,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                 ItemsGrid.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(item => item.Amount).Trim();
             }
         }
-
-        private void InittxtxBank()
-        {
-            //this.txtBank.Items.Clear();
-            //this.txtBank.Items.Add(string.Empty);
-            //List<string> banks = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetAllBanks();
-            //if (banks != null && banks.Count > 0)
-            //{
-            //    foreach (var bank in banks)
-            //    {
-            //        this.txtBank.Items.Add(bank);
-            //    }
-            //}
-        }
         #endregion
 
         #region 重写基类方法
@@ -85,11 +71,9 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.InitControls();
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            InittxtxBank();
             this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户付款流水" : "供应商付款流水";
             this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
             lnkAccout.Text = (PaymentType == CustomerPaymentType.Customer) ? "到款账号" : "付款账号";
-            label4.Text  = PaymentType == CustomerPaymentType.Customer?"客户方账号":"供应商账号";
             if (Amount != 0)
             {
                 txtAmount.DecimalValue = Amount;
@@ -131,6 +115,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                     MessageBox.Show("此账号余额不足");
                     return false;
                 }
+            }
+            if (string.IsNullOrEmpty(txtPayer.Text))
+            {
+                MessageBox.Show("对主账号不能为空");
+                return false;
             }
             return true;
         }
@@ -207,7 +196,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (PaymentType == CustomerPaymentType.Customer)
             {
                 btnSave.Enabled =IsAdding &&  btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
-                var ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                AccountRecord ac = null;
+                if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac!=null &&  ac.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
@@ -216,7 +206,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             else if (PaymentType == CustomerPaymentType.Supplier)
             {
                 btnSave.Enabled =IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
-                var ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                AccountRecord ac = null;
+                if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.UndoApprove);
