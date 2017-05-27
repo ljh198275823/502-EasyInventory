@@ -181,43 +181,54 @@ BEGIN
 end
 go
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AccountList]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AccountRecord]') AND type in (N'U'))
 BEGIN
-	CREATE TABLE [dbo].[AccountList](
+	CREATE TABLE [dbo].[AccountRecord](
 	[ID] [uniqueidentifier] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[ClassID] [tinyint] NOT NULL,
 	[SheetID] [nvarchar](50) NOT NULL,
-	[CustomerID] [nvarchar](50) NOT NULL,
 	[AccountID] [nvarchar](50) NOT NULL,
 	[Amount] [decimal](18, 4) NOT NULL,
 	[Assigned] [decimal](18, 4) NOT NULL,
-	[State] [tinyint] NOT NULL,
-	[OrderID] [nvarchar](50) NULL,
+	[CustomerID] [nvarchar](50) NULL,
+	[StackSheetID] [nvarchar](50) NULL,
 	[Memo] [nvarchar](200) NULL,
-	 CONSTRAINT [PK_AccountList] PRIMARY KEY CLUSTERED 
+	 CONSTRAINT [PK_AccountRecord] PRIMARY KEY CLUSTERED 
 	(
 		[ID] ASC
 	)
 	)  ON [PRIMARY]
 	
-	exec ('insert into accountlist (id,createdate,customerid,classid,sheetid,accountid,orderid,amount,assigned,state,memo) select NEWID()as id ,sheetdate,customerid,classid,[ID]as sheetid,'''',orderid,amount,assigned,0,memo from CustomerPayment ')
+	exec ('insert into AccountRecord (id,createdate,customerid,classid,sheetid,accountid,StackSheetID,amount,assigned,memo) select NEWID()as id ,sheetdate,customerid,classid,[ID]as sheetid,'''',StackOutSheetID,amount,assigned,memo from CustomerPayment where state<>4')
 END
 go
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AccountListAssign]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AccountRecordAssign]') AND type in (N'U'))
 BEGIN
-	CREATE TABLE [dbo].[AccountListAssign](
+	CREATE TABLE [dbo].[AccountRecordAssign](
 	[ID] [uniqueidentifier] NOT NULL,
 	[PaymentID] [uniqueidentifier] NOT NULL,
 	[ReceivableID] [uniqueidentifier] NOT NULL,
 	[Amount] [decimal](18, 4) NOT NULL,
-	 CONSTRAINT [PK_AccountListAssign] PRIMARY KEY CLUSTERED 
+	 CONSTRAINT [PK_AccountRecordAssign] PRIMARY KEY CLUSTERED 
 	(
 		[ID] ASC
 	)
 	) ON [PRIMARY]
 	
-	exec ('insert into accountlistassign (id,paymentid,receivableid,amount) select a.id,b.id as paymentid,a.receivableid,a.amount from CustomerPaymentAssign a inner join accountlist b on a.PaymentID =b.sheetid ')
+	exec ('insert into AccountRecordassign (id,paymentid,receivableid,amount) select a.id,b.id as paymentid,a.receivableid,a.amount from CustomerPaymentAssign a inner join accountrecord b on a.PaymentID =b.sheetid ')
 END
+go
+
+if exists (SELECT * FROM dbo.syscolumns WHERE name ='State' AND id = OBJECT_ID(N'[dbo].[CustomerReceivable]'))
+BEGIN
+	exec ('alter table CustomerReceivable drop column state')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='AccountID' AND id = OBJECT_ID(N'[dbo].[ExpenditureRecord]'))
+BEGIN
+	exec ('alter table ExpenditureRecord add AccountID nvarchar(50) null')
+end
 go

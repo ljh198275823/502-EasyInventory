@@ -279,9 +279,6 @@ namespace LJH.Inventory.BLL
             bool allSuccess = true;
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
             crsc.SheetID = info.ID;
-            crsc.States = new List<SheetState>();
-            crsc.States.Add(SheetState.Add);
-            crsc.States.Add(SheetState.Approved);
             List<CustomerReceivable> crs = new CustomerReceivableBLL(RepoUri).GetItems(crsc).QueryObjects;
             if (crs != null && crs.Count > 0)
             {
@@ -323,7 +320,7 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="paymentID"></param>
         /// <returns></returns>
-        public QueryResultList<CustomerPaymentAssign> GetAssigns(string sheetNo)
+        public QueryResultList<AccountRecordAssign> GetAssigns(string sheetNo)
         {
             CustomerReceivableSearchCondition con1 = new CustomerReceivableSearchCondition()
             {
@@ -332,11 +329,11 @@ namespace LJH.Inventory.BLL
             List<CustomerReceivable> items = (new CustomerReceivableBLL(RepoUri)).GetItems(con1).QueryObjects;
             if (items != null && items.Count > 0)
             {
-                CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
-                con.ReceivableIDs = items.Select(it => it.ID).ToList();
-                return ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(RepoUri).GetItems(con);
+                AccountRecordAssignSearchCondition con = new AccountRecordAssignSearchCondition();
+                con.ReceivableID = items.First().ID;
+                return ProviderFactory.Create<IProvider<AccountRecordAssign, Guid>>(RepoUri).GetItems(con);
             }
-            return new QueryResultList<CustomerPaymentAssign>(ResultCode.Fail, "没有找到记录", null);
+            return new QueryResultList<AccountRecordAssign>(ResultCode.Fail, "没有找到记录", null);
         }
         /// <summary>
         /// 通过查询条件获取相关商品销售记录
@@ -372,20 +369,17 @@ namespace LJH.Inventory.BLL
             var crs = new CustomerReceivableBLL(RepoUri).GetItems(con).QueryObjects;
             if (crs != null && crs.Count > 0)
             {
-                CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+                AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
                 cpsc.StackSheetID = info.ID;
                 cpsc.HasRemain = true;
-                cpsc.States = new List<SheetState>();
-                cpsc.States.Add(SheetState.Add);
-                cpsc.States.Add(SheetState.Approved);
-                var cps = new CustomerPaymentBLL(RepoUri).GetItems(cpsc).QueryObjects;
+                var cps = ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).GetItems(cpsc).QueryObjects;
                 if (cps != null && cps.Count > 0)
                 {
                     foreach (var cr in crs)
                     {
                         foreach (var cp in cps.Where(it => it.Remain > 0))
                         {
-                            var assign = new CustomerPaymentAssign()
+                            var assign = new AccountRecordAssign()
                             {
                                 ID = Guid.NewGuid(),
                                 PaymentID = cp.ID,
@@ -394,7 +388,7 @@ namespace LJH.Inventory.BLL
                             };
                             cr.Haspaid += assign.Amount;
                             cp.Assigned += assign.Amount;
-                            if (assign.Amount > 0) new CustomerPaymentAssignBLL(RepoUri).Assign(assign);
+                            if (assign.Amount > 0) new AccountRecordAssignBLL(RepoUri).Assign(assign);
                             if (cr.Remain == 0) break;
                         }
                     }

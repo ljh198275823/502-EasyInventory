@@ -37,7 +37,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
                 if (!string.IsNullOrEmpty(con.SheetID)) ret = ret.Where(item => item.SheetID == con.SheetID);
-                if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.State));
                 if (con.Settled != null)
                 {
                     if (con.Settled.Value)

@@ -56,6 +56,22 @@ namespace LJH.Inventory.BLL
             ProviderFactory.Create<IProvider<Account, string>>(RepoUri).Delete(info, unitWork);
             return unitWork.Commit();
         }
+
+        public decimal GetRemain(string accountID)
+        {
+            decimal ret = 0;
+            var con = new AccountRecordSearchCondition() { AccountID = accountID };
+            var cps = new AccountRecordBLL(RepoUri).GetItems(con).QueryObjects;
+            if (cps != null && cps.Count > 0)
+            {
+                foreach (var it in cps)
+                {
+                    if (it.ClassID == CustomerPaymentType.Customer) ret += it.Amount;
+                    else if (it.ClassID == CustomerPaymentType.Supplier || it.ClassID == CustomerPaymentType.公司管理费用) ret -= it.Amount;
+                }
+            }
+            return ret;
+        }
         #endregion
     }
 }

@@ -25,6 +25,39 @@ namespace LJH.Inventory.BLL
                     UserSettings.Current.ExpenditureRecordDateFormat, UserSettings.Current.ExpenditureRecordSerialCount, info.DocumentType); //支出单
             return info.ID;
         }
+
+        protected override void DoAdd(ExpenditureRecord info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            base.DoAdd(info, unitWork, dt, opt);
+            AccountRecord ar = new AccountRecord()
+            {
+                ID = Guid.NewGuid(),
+                ClassID = CustomerPaymentType.公司管理费用,
+                SheetID = info.ID,
+                CreateDate = info.SheetDate,
+                StackSheetID = info.OrderID,
+                AccountID = info.AccountID,
+                Amount = info.Amount,
+                Memo = info.Memo
+            };
+            ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+        }
+
+        protected override void DoNullify(ExpenditureRecord info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            bool allSuccess = true;
+            var items = new AccountRecordBLL(RepoUri).GetItems(new AccountRecordSearchCondition() { SheetID = info.ID }).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                foreach (var item in items)
+                {
+                    var ret = new AccountRecordBLL(RepoUri).Delete(item);
+                    if (ret.Result != ResultCode.Successful) allSuccess = false;
+                }
+            }
+            if (!allSuccess) throw new Exception("删除失败");
+            base.DoNullify(info, unitWork, dt, opt);
+        }
         #endregion
     }
 }

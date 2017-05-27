@@ -51,23 +51,21 @@
             this.categoryTree = new LJH.Inventory.UI.Controls.ExpenditureTypeTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCheckNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPayee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPayee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CategoryMenu.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -139,13 +137,12 @@
             // 
             // txtKeyword
             // 
-            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(69, 7);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(924, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(220, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
@@ -275,13 +272,11 @@
             this.colID,
             this.colSheetDate,
             this.colCategory,
+            this.colAccount,
             this.colAmount,
-            this.colPaymentMode,
             this.colState,
-            this.colCheckNum,
             this.colRequest,
             this.colPayee,
-            this.colOrderID,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -293,76 +288,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(997, 315);
             this.dataGridView1.TabIndex = 116;
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "支出单号";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            // 
-            // colSheetDate
-            // 
-            this.colSheetDate.HeaderText = "日期";
-            this.colSheetDate.Name = "colSheetDate";
-            this.colSheetDate.ReadOnly = true;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "费用类别";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle1.NullValue = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colAmount.HeaderText = "金额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.Width = 120;
-            // 
-            // colPaymentMode
-            // 
-            this.colPaymentMode.HeaderText = "付款方式";
-            this.colPaymentMode.Name = "colPaymentMode";
-            this.colPaymentMode.ReadOnly = true;
-            this.colPaymentMode.Width = 120;
-            // 
-            // colState
-            // 
-            this.colState.HeaderText = "状态";
-            this.colState.Name = "colState";
-            this.colState.ReadOnly = true;
-            // 
-            // colCheckNum
-            // 
-            this.colCheckNum.HeaderText = "票号";
-            this.colCheckNum.Name = "colCheckNum";
-            this.colCheckNum.ReadOnly = true;
-            // 
-            // colRequest
-            // 
-            this.colRequest.HeaderText = "申请人";
-            this.colRequest.Name = "colRequest";
-            this.colRequest.ReadOnly = true;
-            // 
-            // colPayee
-            // 
-            this.colPayee.HeaderText = "受款单位";
-            this.colPayee.Name = "colPayee";
-            this.colPayee.ReadOnly = true;
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "销售订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -403,6 +328,64 @@
             this.cMnu_Export.Name = "cMnu_Export";
             this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // colID
+            // 
+            this.colID.HeaderText = "支出单号";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            // 
+            // colSheetDate
+            // 
+            this.colSheetDate.HeaderText = "日期";
+            this.colSheetDate.Name = "colSheetDate";
+            this.colSheetDate.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "费用类别";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            // 
+            // colAccount
+            // 
+            this.colAccount.HeaderText = "付款账号";
+            this.colAccount.Name = "colAccount";
+            this.colAccount.ReadOnly = true;
+            // 
+            // colAmount
+            // 
+            dataGridViewCellStyle1.NullValue = "C2";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colAmount.HeaderText = "金额";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.Width = 120;
+            // 
+            // colState
+            // 
+            this.colState.HeaderText = "状态";
+            this.colState.Name = "colState";
+            this.colState.ReadOnly = true;
+            // 
+            // colRequest
+            // 
+            this.colRequest.HeaderText = "申请人";
+            this.colRequest.Name = "colRequest";
+            this.colRequest.ReadOnly = true;
+            // 
+            // colPayee
+            // 
+            this.colPayee.HeaderText = "受款单位";
+            this.colPayee.Name = "colPayee";
+            this.colPayee.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
             // 
             // FrmExpenditureRecordMaster
             // 
@@ -466,13 +449,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequest;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPayee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

@@ -28,17 +28,21 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             GridView.CellClick -= StackoutSheetID_Click;
             GridView.CellClick -= PaymentID_Click;
             GridView.CellClick += PaymentID_Click;
-            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
+            AccountRecordAssignSearchCondition con = new AccountRecordAssignSearchCondition();
             con.ReceivableID = item.ID;
-            var assigns = new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+            var assigns = new AccountRecordAssignBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                foreach (CustomerPaymentAssign assign in assigns)
+                foreach (AccountRecordAssign assign in assigns)
                 {
-                    int row = GridView.Rows.Add();
-                    GridView.Rows[row].Tag = assign;
-                    GridView.Rows[row].Cells["colSheetID"].Value = assign.PaymentID;
-                    GridView.Rows[row].Cells["colAssign"].Value = assign.Amount;
+                    var cr = new AccountRecordBLL(AppSettings.Current.ConnStr).GetByID(assign.PaymentID).QueryObject;
+                    if (cr != null)
+                    {
+                        int row = GridView.Rows.Add();
+                        GridView.Rows[row].Tag = assign;
+                        GridView.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
+                        GridView.Rows[row].Cells["colAssign"].Value = assign.Amount;
+                    }
                 }
                 int rowTotal = GridView.Rows.Add();
                 GridView.Rows[rowTotal].Cells["colSheetID"].Value = "合计";
@@ -47,18 +51,18 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             }
         }
 
-        public void ShowAssigns(CustomerPayment item)
+        public void ShowAssigns(AccountRecord item)
         {
             GridView.Rows.Clear();
             GridView.CellClick -= StackoutSheetID_Click;
             GridView.CellClick -= PaymentID_Click;
             GridView.CellClick += StackoutSheetID_Click;
-            CustomerPaymentAssignSearchCondition con = new CustomerPaymentAssignSearchCondition();
+            AccountRecordAssignSearchCondition con = new AccountRecordAssignSearchCondition();
             con.PaymentID = item.ID;
-            var assigns = new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+            var assigns = new AccountRecordAssignBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
-                foreach (CustomerPaymentAssign assign in assigns)
+                foreach (AccountRecordAssign assign in assigns)
                 {
                     var cr = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetByID(assign.ReceivableID).QueryObject;
                     if (cr != null)

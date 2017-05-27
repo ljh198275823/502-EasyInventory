@@ -80,57 +80,12 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        public CommandResult Add(CompanyInfo info, decimal prepayment, decimal receivables)
-        {
-            if (string.IsNullOrEmpty(info.ID))
-            {
-                info.ID = CreateCustomerID(info.ClassID);
-            }
-            if (!string.IsNullOrEmpty(info.ID))
-            {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-                ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Insert(info, unitWork);
-                if (receivables > 0) //增加一条客户应收项
-                {
-                    CustomerReceivable cr = new CustomerReceivable()
-                    {
-                        ID = Guid.NewGuid(),
-                        OrderID = info.ID + "初始应收",
-                        CreateDate = DateTime.Now,
-                        CustomerID = info.ID,
-                        Amount = receivables,
-                        Memo = "初始应收",
-                    };
-                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
-                }
-                if (prepayment > 0)
-                {
-                    CustomerPayment cp = new CustomerPayment()
-                    {
-                        ID = info.ID + "初始预付款",
-                        CustomerID = info.ID,
-                        PaymentMode = PaymentMode.Cash,
-                        LastActiveDate = DateTime.Now,
-                        Amount = prepayment,
-                        State = SheetState.Add,
-                        Memo = "初始预付款"
-                    };
-                    ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Insert(cp, unitWork);
-                }
-                return unitWork.Commit();
-            }
-            else
-            {
-                return new CommandResult(ResultCode.Fail, "创建客户编号失败，请重试");
-            }
-        }
-
         public override CommandResult Delete(CompanyInfo info)
         {
             StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
             con.CustomerID = info.ID;
             List<StackOutSheet> sheets = (new StackOutSheetBLL(RepoUri)).GetItems(con).QueryObjects;
-            if (sheets != null && sheets.Count  > 0) // 如果存在未作废的送货单，则不能删除
+            if (sheets != null && sheets.Count > 0) // 如果存在未作废的送货单，则不能删除
             {
                 return new CommandResult(ResultCode.Fail, string.Format("不能删除客户 {0} 的资料，系统中已经存在此客户的送货单", info.Name));
             }
@@ -167,23 +122,14 @@ namespace LJH.Inventory.BLL
 
         public QueryResultList<CustomerFinancialState> GetAllCustomerStates()
         {
-            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>();
-            cpsc.PaymentTypes.Add(CustomerPaymentType.Customer);
-            cpsc.PaymentTypes.Add(CustomerPaymentType.CustomerTax);
-            cpsc.States = new List<SheetState>();
-            cpsc.States.Add(SheetState.Add);
-            cpsc.States.Add(SheetState.Approved);
+            AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer, CustomerPaymentType.CustomerTax };
             cpsc.HasRemain = true;
-            var customerPayments = (new CustomerPaymentBLL(RepoUri)).GetItems(cpsc).QueryObjects;
+            var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable, CustomerReceivableType.CustomerTax };
             crsc.Settled = false;
-            crsc.ReceivableTypes = new List<CustomerReceivableType>();
-            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
-            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerTax);
-            crsc.States = new List<SheetState>();
-            crsc.States.Add(SheetState.Add);
             var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
 
             List<CompanyInfo> customers = GetAllCustomers().QueryObjects;
@@ -212,25 +158,16 @@ namespace LJH.Inventory.BLL
             var c = GetByID(customerID).QueryObject;
             if (c == null) return new QueryResult<CustomerFinancialState>(ResultCode.Fail, string.Empty, null);
 
-            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>();
-            cpsc.PaymentTypes.Add(CustomerPaymentType.Customer);
-            cpsc.PaymentTypes.Add(CustomerPaymentType.CustomerTax);
-            cpsc.States = new List<SheetState>();
-            cpsc.States.Add(SheetState.Add);
-            cpsc.States.Add(SheetState.Approved);
+            AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer, CustomerPaymentType.CustomerTax };
             cpsc.HasRemain = true;
-            cpsc.CustomerID = customerID;
-            var customerPayments = (new CustomerPaymentBLL(RepoUri)).GetItems(cpsc).QueryObjects;
+            cpsc.CustomerID = c.ID;
+            var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable, CustomerReceivableType.CustomerTax };
             crsc.Settled = false;
-            crsc.CustomerID = customerID;
-            crsc.ReceivableTypes = new List<CustomerReceivableType>();
-            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
-            crsc.ReceivableTypes.Add(CustomerReceivableType.CustomerTax);
-            crsc.States = new List<SheetState>();
-            crsc.States.Add(SheetState.Add);
+            crsc.CustomerID = c.ID;
             var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
 
             CustomerFinancialState cs = new CustomerFinancialState()
@@ -246,23 +183,14 @@ namespace LJH.Inventory.BLL
 
         public QueryResultList<CustomerFinancialState> GetAllSupplierStates()
         {
-            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>();
-            cpsc.PaymentTypes.Add(CustomerPaymentType.Supplier);
-            cpsc.PaymentTypes.Add(CustomerPaymentType.SupplierTax);
-            cpsc.States = new List<SheetState>();
-            cpsc.States.Add(SheetState.Add);
-            cpsc.States.Add(SheetState.Approved);
+            AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Supplier, CustomerPaymentType.SupplierTax };
             cpsc.HasRemain = true;
-            var customerPayments = (new CustomerPaymentBLL(RepoUri)).GetItems(cpsc).QueryObjects;
+            var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.SupplierReceivable, CustomerReceivableType.SupplierTax };
             crsc.Settled = false;
-            crsc.ReceivableTypes = new List<CustomerReceivableType>();
-            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
-            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
-            crsc.States = new List<SheetState>();
-            crsc.States.Add(SheetState.Add);
             var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
 
             List<CompanyInfo> customers = GetAllSuppliers().QueryObjects;
@@ -291,25 +219,16 @@ namespace LJH.Inventory.BLL
             var c = GetByID(customerID).QueryObject;
             if (c == null) return new QueryResult<CustomerFinancialState>(ResultCode.Fail, string.Empty, null);
 
-            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>();
-            cpsc.PaymentTypes.Add(CustomerPaymentType.Supplier);
-            cpsc.PaymentTypes.Add(CustomerPaymentType.SupplierTax);
-            cpsc.States = new List<SheetState>();
-            cpsc.States.Add(SheetState.Add);
-            cpsc.States.Add(SheetState.Approved);
+            AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Supplier, CustomerPaymentType.SupplierTax };
             cpsc.HasRemain = true;
-            cpsc.CustomerID = customerID;
-            var customerPayments = (new CustomerPaymentBLL(RepoUri)).GetItems(cpsc).QueryObjects;
+            cpsc.CustomerID = c.ID;
+            var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
+            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.SupplierReceivable, CustomerReceivableType.SupplierTax };
             crsc.Settled = false;
-            crsc.CustomerID = customerID;
-            crsc.ReceivableTypes = new List<CustomerReceivableType>();
-            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
-            crsc.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
-            crsc.States = new List<SheetState>();
-            crsc.States.Add(SheetState.Add);
+            crsc.CustomerID = c.ID;
             var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
 
             CustomerFinancialState cs = new CustomerFinancialState()
@@ -322,6 +241,7 @@ namespace LJH.Inventory.BLL
             };
             return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
         }
+
         /// <summary>
         /// 将指定的公司合并到另一个公司
         /// </summary>
@@ -335,9 +255,9 @@ namespace LJH.Inventory.BLL
             if (sc == null) return new CommandResult(ResultCode.Fail, "系统中不存在被合并的公司信息");
             if (dc == null) return new CommandResult(ResultCode.Fail, "系统中不存在合并公司的信息");
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            var scon = new StackOutSheetSearchCondition();
-            scon.CustomerID = source;
-            List<StackOutSheet> sheets = ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri).GetItems(scon).QueryObjects;
+            SearchCondition con = null;
+            con = new StackOutSheetSearchCondition() { CustomerID = source };
+            List<StackOutSheet> sheets = ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri).GetItems(con).QueryObjects;
             if (sheets != null && sheets.Count > 0)
             {
                 foreach (StackOutSheet sheet in sheets)
@@ -348,9 +268,20 @@ namespace LJH.Inventory.BLL
                 }
             }
 
-            var rcon = new CustomerReceivableSearchCondition();
-            rcon.CustomerID = source;
-            List<CustomerReceivable> crs = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(rcon).QueryObjects;
+            con = new CustomerReceivableSearchCondition() { CustomerID = source };
+            var ors = ProviderFactory.Create<IProvider<OtherReceivableSheet, string>>(RepoUri).GetItems(con).QueryObjects;
+            if (ors != null && ors.Count > 0)
+            {
+                foreach (var or in ors)
+                {
+                    var clone = or.Clone() as OtherReceivableSheet;
+                    clone.CustomerID = des;
+                    ProviderFactory.Create<IProvider<OtherReceivableSheet, string>>(RepoUri).Update(clone, or, unitWork);
+                }
+            }
+
+            con = new CustomerReceivableSearchCondition() { CustomerID = source };
+            List<CustomerReceivable> crs = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (crs != null && crs.Count > 0)
             {
                 foreach (var cr in crs)
@@ -361,9 +292,8 @@ namespace LJH.Inventory.BLL
                 }
             }
 
-            var pcon = new CustomerPaymentSearchCondition();
-            pcon.CustomerID = source;
-            List<CustomerPayment> cps = ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).GetItems(pcon).QueryObjects;
+            con = new CustomerPaymentSearchCondition() { CustomerID = source };
+            List<CustomerPayment> cps = ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).GetItems(con).QueryObjects;
             if (cps != null && cps.Count > 0)
             {
                 foreach (var cp in cps)
@@ -371,6 +301,18 @@ namespace LJH.Inventory.BLL
                     var clone = cp.Clone() as CustomerPayment;
                     clone.CustomerID = des;
                     ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Update(clone, cp, unitWork);
+                }
+            }
+
+            con = new AccountRecordSearchCondition() { CustomerID = source };
+            var ars = ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (ars != null && ars.Count > 0)
+            {
+                foreach (var ar in ars)
+                {
+                    var clone = ar.Clone();
+                    clone.CustomerID = des;
+                    ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Update(clone, ar, unitWork);
                 }
             }
 

@@ -24,6 +24,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         #region 私有变量
         private List<ExpenditureRecord> _Sheets = null;
+        private List<Account> _AllAccounts = null;
         #endregion
 
         #region 私有方法
@@ -86,6 +87,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
+            _AllAccounts = new AccountBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             if (SearchCondition == null)
             {
                 ExpenditureRecordSearchCondition con = new ExpenditureRecordSearchCondition();
@@ -105,14 +107,14 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Tag = info;
             row.Cells["colID"].Value = info.ID;
             row.Cells["colSheetDate"].Value = info.SheetDate.ToString("yyyy-MM-dd");
-            row.Cells["colPaymentMode"].Value = PaymentModeDescription.GetDescription(info.PaymentMode);
             row.Cells["colAmount"].Value = info.Amount;
             ExpenditureType et = categoryTree.GetExpenditureType(info.Category);
             row.Cells["colCategory"].Value = et != null ? et.Name : string.Empty;
-            row.Cells["colCheckNum"].Value = info.CheckNum;
+            Account ac = null;
+            if (!string.IsNullOrEmpty(info.AccountID) && _AllAccounts != null) ac = _AllAccounts.SingleOrDefault(it => it.ID == info.AccountID);
+            row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
             row.Cells["colRequest"].Value = info.Request;
             row.Cells["colPayee"].Value = info.Payee;
-            row.Cells["colOrderID"].Value = info.OrderID;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colMemo"].Value = info.Memo;
             if (info.State == SheetState.Canceled)

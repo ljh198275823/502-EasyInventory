@@ -10,6 +10,28 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
+  <Table Name="AccountRecord" Member="LJH.Inventory.BusinessModel.AccountRecord">
+    <Type Name="LJH.Inventory.BusinessModel.AccountRecord">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="ClassID" Member="ClassID"  DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="CreateDate" Member="CreateDate"  DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="AccountID" Member="AccountID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="SheetID" Member="SheetID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="Assigned" Member="Assigned" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="StackSheetID" Member="StackSheetID" DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
+  <Table Name="AccountRecordAssign" Member="LJH.Inventory.BusinessModel.AccountRecordAssign">
+    <Type Name="LJH.Inventory.BusinessModel.AccountRecordAssign">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="PaymentID" Member="PaymentID"  DbType="uniqueidentifier NOT NULL" UpdateCheck="Never"/>
+      <Column Name="ReceivableID" Member="ReceivableID"  DbType="uniqueidentifier NOT NULL" UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+    </Type>
+  </Table>
   <Table Name="Attachment" Member="LJH.Inventory.BusinessModel.Attachment">
     <Type Name="LJH.Inventory.BusinessModel.Attachment">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
@@ -476,12 +498,13 @@
       <Column Name="SheetDate" Member="SheetDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never" />
       <Column Name="Category" Member="Category"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
+      <Column Name="AccountID" Member="AccountID" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(10,2) not null" UpdateCheck="Never"/>
       <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Request" Member="Request"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="Payee" Member="Payee"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="CheckNum" Member="CheckNum"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
+      <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
       <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
@@ -512,15 +535,6 @@
       <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="StackOutSheetID" Member="StackSheetID" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-      <Association Name="FK_Payment_Assign" Member="Assigns"  ThisKey="ID" OtherKey="PaymentID"/>
-    </Type>
-  </Table>
-  <Table Name="CustomerPaymentAssign" Member="LJH.Inventory.BusinessModel.CustomerPaymentAssign">
-    <Type Name="LJH.Inventory.BusinessModel.CustomerPaymentAssign">
-      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
-      <Column Name="PaymentID" Member="PaymentID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
-      <Column Name="ReceivableID" Member="ReceivableID"  DbType="uniqueidentifier NOT NULL" UpdateCheck="Never"/>
-      <Column Name="Amount" Member="Amount"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="CustomerReceivable" Member="LJH.Inventory.BusinessModel.CustomerReceivable">
@@ -533,7 +547,6 @@
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Haspaid" Member="Haspaid" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
-      <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

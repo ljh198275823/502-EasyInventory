@@ -78,13 +78,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountBLL.cs" />
+    <Compile Include="AccountRecordBLL.cs" />
     <Compile Include="AttachmentBLL.cs" />
     <Compile Include="BLLBase.cs" />
     <Compile Include="CollectionTypeBLL.cs" />
     <Compile Include="ContactBLL.cs" />
     <Compile Include="CurrencyTypeBLL.cs" />
     <Compile Include="CompanyBLL.cs" />
-    <Compile Include="CustomerPaymentAssignBLL.cs" />
+    <Compile Include="AccountRecordAssignBLL.cs" />
     <Compile Include="CustomerPaymentBLL.cs" />
     <Compile Include="CustomerReceivableBLL.cs" />
     <Compile Include="CustomerTypeBLL.cs" />

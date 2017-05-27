@@ -132,7 +132,7 @@ namespace LJH.Inventory.UI.Forms.Purchase
         {
             CompanyBLL bll = new CompanyBLL(AppSettings.Current.ConnStr);
             CompanyInfo c = item as CompanyInfo;
-            CommandResult ret = bll.Add(item as CompanyInfo, 0, 0);
+            CommandResult ret = bll.Add(item as CompanyInfo);
             if (ret.Result == ResultCode.Successful)
             {
                 foreach (DataGridViewRow row in GridView.Rows)

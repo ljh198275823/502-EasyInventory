@@ -8,10 +8,10 @@ namespace LJH.Inventory.BusinessModel
     /// <summary>
     /// 表示客户收款与客户应收账款之间的分配
     /// </summary>
-    public class CustomerPaymentAssign : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
+    public class AccountRecordAssign : LJH.GeneralLibrary.Core.DAL.IEntity<Guid>
     {
         #region 构造函数
-        public CustomerPaymentAssign()
+        public AccountRecordAssign()
         {
         }
         #endregion
@@ -24,7 +24,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置客户收款ID
         /// </summary>
-        public string PaymentID { get; set; }
+        public Guid PaymentID { get; set; }
         /// <summary>
         /// 获取或设置客户应收账款ID
         /// </summary>

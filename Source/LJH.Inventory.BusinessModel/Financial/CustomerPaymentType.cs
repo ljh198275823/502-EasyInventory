@@ -13,18 +13,20 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 客户收款
         /// </summary>
-        Customer=1,
+        Customer = 1,
         /// <summary>
         /// 供应商付款
         /// </summary>
-        Supplier=2,
+        Supplier = 2,
         /// <summary>
         /// 开给客户的增值税发票
         /// </summary>
-        CustomerTax=3,
+        CustomerTax = 3,
         /// <summary>
         /// 供应商开给公司的增值税发票
         /// </summary>
-        SupplierTax=4,
+        SupplierTax = 4,
+
+        公司管理费用 = 5,
     }
 }

@@ -83,18 +83,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProvider\IAutoNumberCreater.cs" />
-    <Compile Include="IProvider\ICustomerPaymentBankProvider.cs" />
     <Compile Include="IProvider\IProductProvider.cs" />
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
     <Compile Include="IProvider\ProviderFactory.cs" />
     <Compile Include="LinqProvider\AccountProvider.cs" />
+    <Compile Include="LinqProvider\AccountRecordProvider.cs" />
     <Compile Include="LinqProvider\AttachmentHeaderProvider.cs" />
     <Compile Include="LinqProvider\AttachmentProvider.cs" />
     <Compile Include="LinqProvider\CarplateProvider.cs" />
     <Compile Include="LinqProvider\CollectionTypeProvider.cs" />
     <Compile Include="LinqProvider\ContactProvider.cs" />
     <Compile Include="LinqProvider\CurrencyTypeProvider.cs" />
-    <Compile Include="LinqProvider\CustomerPaymentAssignProvider.cs" />
+    <Compile Include="LinqProvider\AccountRecordAssignProvider.cs" />
     <Compile Include="LinqProvider\CustomerPaymentProvider.cs" />
     <Compile Include="LinqProvider\CompanyProvider.cs" />
     <Compile Include="LinqProvider\CustomerReceivableProvider.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel
 {
-    public  class Account:LJH.GeneralLibrary.Core.DAL.IEntity <string>
+    public class Account : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
         #region 构造函数
         public Account()
@@ -25,6 +25,8 @@ namespace LJH.Inventory.BusinessModel
         public string Operator { get; set; }
 
         public DateTime AddDate { get; set; }
+
+        public decimal Amount { get; set; }
 
         public string Memo { get; set; }
         #endregion

@@ -87,9 +87,10 @@
     <Compile Include="CompanyInfo.cs" />
     <Compile Include="CompanyClass.cs" />
     <Compile Include="Financial\Account.cs" />
+    <Compile Include="Financial\AccountRecord.cs" />
     <Compile Include="Financial\CustomerFinancialState.cs" />
     <Compile Include="Financial\CustomerPayment.cs" />
-    <Compile Include="Financial\CustomerPaymentAssign.cs" />
+    <Compile Include="Financial\AccountRecordAssign.cs" />
     <Compile Include="Financial\CustomerPaymentType.cs" />
     <Compile Include="Financial\CustomerReceivable.cs" />
     <Compile Include="CustomerType.cs" />
@@ -123,9 +124,10 @@
     <Compile Include="Resource\PaymentModeDescription.cs" />
     <Compile Include="Resource\SheetOperationDescription.cs" />
     <Compile Include="Resource\SheetStateDescription.cs" />
+    <Compile Include="SearchCondition\AccountRecordSearchCondition.cs" />
     <Compile Include="SearchCondition\AttachmentSearchCondition.cs" />
     <Compile Include="SearchCondition\ContactSearchCondition.cs" />
-    <Compile Include="SearchCondition\CustomerPaymentAssignSearchCondition.cs" />
+    <Compile Include="SearchCondition\AccountRecordAssignSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerPaymentSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerReceivableSearchCondition.cs" />
     <Compile Include="SearchCondition\CustomerSearchCondition.cs" />

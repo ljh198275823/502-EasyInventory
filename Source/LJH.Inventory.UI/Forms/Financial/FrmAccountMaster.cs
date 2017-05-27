@@ -23,19 +23,17 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         public bool? Ispublic { get; set; }
 
-        private List<CustomerPayment> _allpayments = null;
+        private List<AccountRecord> _AllAccountRecords = null;
 
         #region 私有方法
         private decimal GetAmount(Account ac)
         {
             decimal ret = 0;
-            var cps = from it in _allpayments
-                      where it.State != SheetState.Canceled && it.AccountID == ac.ID
-                      select it;
+            var cps = from it in _AllAccountRecords where it.AccountID == ac.ID select it;
             foreach (var it in cps)
             {
                 if (it.ClassID == CustomerPaymentType.Customer) ret += it.Amount;
-                else if (it.ClassID == CustomerPaymentType.Supplier) ret -= it.Amount;
+                else if (it.ClassID == CustomerPaymentType.Supplier || it.ClassID == CustomerPaymentType.公司管理费用) ret -= it.Amount;
             }
             return ret;
         }
@@ -59,7 +57,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
-            _allpayments = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            _AllAccountRecords = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             List<Account> items = null;
             if (SearchCondition == null)
             {

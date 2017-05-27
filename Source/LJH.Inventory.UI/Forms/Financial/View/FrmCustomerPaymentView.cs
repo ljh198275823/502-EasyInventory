@@ -137,11 +137,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CustomerPayment cp = dataGridView1.SelectedRows[0].Tag as CustomerPayment;
-                if (cp != null && cp.State != SheetState.Canceled && cp.Remain > 0)
+                var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                if (ar != null && cp.State != SheetState.Canceled && ar.Remain > 0)
                 {
                     string paymentID = cp.ID;
                     FrmPaymentAssign frm = new FrmPaymentAssign();
-                    frm.CustomerPaymentID = paymentID;
+                    frm.AccountRecord = ar;
                     frm.ShowDialog();
                     FreshData();
                 }
@@ -174,10 +175,14 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 }
                 else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
                 {
-                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
-                    frm.StartPosition = FormStartPosition.CenterParent;
-                    frm.ShowAssigns(cp);
-                    frm.ShowDialog();
+                    var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                    if (ar != null)
+                    {
+                        FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.ShowAssigns(ar);
+                        frm.ShowDialog();
+                    }
                 }
                 else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colStackSheetID")
                 {

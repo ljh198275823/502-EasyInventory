@@ -20,10 +20,5 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string SheetID { get; set; }
 
         public bool? Settled { get; set; }
-
-        /// <summary>
-        /// 获取或设置出货记录查询条件中的送货单状态
-        /// </summary>
-        public List<SheetState> States { get; set; }
     }
 }

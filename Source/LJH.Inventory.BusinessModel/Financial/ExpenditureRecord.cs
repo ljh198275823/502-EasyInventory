@@ -34,6 +34,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Category { get; set; }
         /// <summary>
+        /// 获取或设置到款账号
+        /// </summary>
+        public string AccountID { get; set; }
+        /// <summary>
         /// 获取或设置支出的销售订单号(用于统计订单的管理费用)
         /// </summary>
         public string OrderID { get; set; }

@@ -5,12 +5,11 @@ using System.Text;
 
 namespace LJH.Inventory.BusinessModel.SearchCondition
 {
-    public class CustomerPaymentAssignSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
+    public class AccountRecordAssignSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
-        public string PaymentID { get; set; }
+        public Guid? PaymentID { get; set; }
 
         public Guid? ReceivableID { get; set; }
 
-        public List<Guid> ReceivableIDs { get; set; }
     }
 }

@@ -34,41 +34,30 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         #region 重写基类方法
         private void FreshData()
         {
-            var con = new CustomerPaymentSearchCondition();
+            var con = new AccountRecordSearchCondition();
             con.CustomerID = Customer != null ? Customer.ID : null;
             con.PaymentTypes = new List<CustomerPaymentType>();
             con.PaymentTypes.Add(PaymentType);
-            if (!chkShowAll.Checked)
-            {
-                con.States = new List<SheetState>();
-                con.States.Add(SheetState.Add);
-                con.States.Add(SheetState.Approved);
-                con.HasRemain = true;
-            }
-            var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-            items = (from item in items orderby item.SheetDate ascending, item.ID ascending select item).ToList();
+            if (!chkShowAll.Checked) con.HasRemain = true;
+            var items = (new AccountRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            items = (from item in items orderby item.CreateDate ascending, item.ID ascending select item).ToList();
             ShowItemsOnGrid(items);
         }
 
-        private void ShowItemInGridViewRow(DataGridViewRow row, CustomerPayment cp)
+        private void ShowItemInGridViewRow(DataGridViewRow row, AccountRecord cp)
         {
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.ID;
-            row.Cells["colSheetDate"].Value = cp.SheetDate;
+            row.Cells["colSheetDate"].Value = cp.CreateDate;
             row.Cells["colAmount"].Value = cp.Amount;
             if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
             else row.Cells["colRemain"].Value = null;
             if (cp.Assigned != 0) row.Cells["colAssigned"].Value = cp.Assigned;
             else row.Cells["colAssigned"].Value = null;
             row.Cells["colMemo"].Value = cp.Memo;
-            if (cp.State == SheetState.Canceled)
-            {
-                row.DefaultCellStyle.ForeColor = Color.Red;
-                row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            }
         }
 
-        private void ShowItemsOnGrid(List<CustomerPayment> items)
+        private void ShowItemsOnGrid(List<AccountRecord> items)
         {
             dataGridView1.Rows.Clear();
             if (items != null && items.Count > 0)
@@ -80,9 +69,9 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 }
                 int rowTotal = dataGridView1.Rows.Add();
                 dataGridView1.Rows[rowTotal].Cells["colSheetDate"].Value = "合计";
-                dataGridView1.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerPayment).Amount).Trim();
-                dataGridView1.Rows[rowTotal].Cells["colAssigned"].Value = items.Sum(item => (item as CustomerPayment).Assigned).Trim();
-                dataGridView1.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as CustomerPayment).Remain).Trim();
+                dataGridView1.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as AccountRecord).Amount).Trim();
+                dataGridView1.Rows[rowTotal].Cells["colAssigned"].Value = items.Sum(item => (item as AccountRecord).Assigned).Trim();
+                dataGridView1.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as AccountRecord).Remain).Trim();
             }
             lblMSG.Text = string.Format("共 {0} 项", items != null ? items.Count : 0);
         }
@@ -131,12 +120,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                CustomerPayment cp = dataGridView1.SelectedRows[0].Tag as CustomerPayment;
-                if (cp.State != SheetState.Canceled && cp.Remain > 0)
+                AccountRecord cp = dataGridView1.SelectedRows[0].Tag as AccountRecord;
+                if (cp.Remain > 0)
                 {
-                    string paymentID = cp.ID;
                     FrmPaymentAssign frm = new FrmPaymentAssign();
-                    frm.CustomerPaymentID = paymentID;
+                    frm.AccountRecord = cp;
                     frm.ShowDialog();
                     FreshData();
                 }
@@ -153,10 +141,10 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
-                CustomerPayment cp = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
+                AccountRecord cp = dataGridView1.Rows[e.RowIndex].Tag as AccountRecord;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID).QueryObject;
+                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.SheetID).QueryObject;
                     if (sheet != null)
                     {
                         FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();

@@ -31,8 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtCheckNum = new System.Windows.Forms.TextBox();
+            this.txtPayee = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkAccout = new System.Windows.Forms.LinkLabel();
             this.txtRequest = new System.Windows.Forms.TextBox();
             this.lnkRequest = new System.Windows.Forms.LinkLabel();
             this.txtCategory = new System.Windows.Forms.TextBox();
@@ -41,14 +43,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtAmount = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.rdCheck = new System.Windows.Forms.RadioButton();
-            this.rdCash = new System.Windows.Forms.RadioButton();
-            this.rdTransfer = new System.Windows.Forms.RadioButton();
             this.dtSheetDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
             this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,11 +81,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(406, 274);
+            this.btnClose.Location = new System.Drawing.Point(406, 273);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(295, 274);
+            this.btnOk.Location = new System.Drawing.Point(295, 273);
             // 
             // tabControl1
             // 
@@ -100,13 +98,15 @@
             this.tabControl1.Location = new System.Drawing.Point(-1, 59);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(496, 193);
+            this.tabControl1.Size = new System.Drawing.Size(496, 192);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.txtCheckNum);
+            this.tabPage1.Controls.Add(this.txtPayee);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.txtAccount);
+            this.tabPage1.Controls.Add(this.lnkAccout);
             this.tabPage1.Controls.Add(this.txtRequest);
             this.tabPage1.Controls.Add(this.lnkRequest);
             this.tabPage1.Controls.Add(this.txtCategory);
@@ -115,41 +115,58 @@
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.txtMemo);
             this.tabPage1.Controls.Add(this.txtAmount);
-            this.tabPage1.Controls.Add(this.rdCheck);
-            this.tabPage1.Controls.Add(this.rdCash);
-            this.tabPage1.Controls.Add(this.rdTransfer);
             this.tabPage1.Controls.Add(this.dtSheetDate);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(488, 167);
+            this.tabPage1.Size = new System.Drawing.Size(488, 166);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // txtPayee
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(265, 74);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 101;
-            this.label1.Text = "支票号";
+            this.txtPayee.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPayee.Location = new System.Drawing.Point(313, 74);
+            this.txtPayee.Name = "txtPayee";
+            this.txtPayee.Size = new System.Drawing.Size(158, 21);
+            this.txtPayee.TabIndex = 104;
             // 
-            // txtCheckNum
+            // label4
             // 
-            this.txtCheckNum.Location = new System.Drawing.Point(313, 70);
-            this.txtCheckNum.Name = "txtCheckNum";
-            this.txtCheckNum.Size = new System.Drawing.Size(159, 21);
-            this.txtCheckNum.TabIndex = 7;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(253, 78);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 105;
+            this.label4.Text = "对方账号";
+            // 
+            // txtAccount
+            // 
+            this.txtAccount.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtAccount.Location = new System.Drawing.Point(72, 74);
+            this.txtAccount.Name = "txtAccount";
+            this.txtAccount.ReadOnly = true;
+            this.txtAccount.Size = new System.Drawing.Size(160, 21);
+            this.txtAccount.TabIndex = 103;
+            // 
+            // lnkAccout
+            // 
+            this.lnkAccout.Location = new System.Drawing.Point(7, 76);
+            this.lnkAccout.Name = "lnkAccout";
+            this.lnkAccout.Size = new System.Drawing.Size(60, 17);
+            this.lnkAccout.TabIndex = 102;
+            this.lnkAccout.TabStop = true;
+            this.lnkAccout.Text = "付款账号";
+            this.lnkAccout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnkAccout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccout_LinkClicked);
             // 
             // txtRequest
             // 
-            this.txtRequest.Location = new System.Drawing.Point(73, 103);
+            this.txtRequest.Location = new System.Drawing.Point(72, 105);
             this.txtRequest.Name = "txtRequest";
             this.txtRequest.ReadOnly = true;
             this.txtRequest.Size = new System.Drawing.Size(159, 21);
@@ -159,7 +176,7 @@
             // lnkRequest
             // 
             this.lnkRequest.AutoSize = true;
-            this.lnkRequest.Location = new System.Drawing.Point(26, 107);
+            this.lnkRequest.Location = new System.Drawing.Point(25, 109);
             this.lnkRequest.Name = "lnkRequest";
             this.lnkRequest.Size = new System.Drawing.Size(41, 12);
             this.lnkRequest.TabIndex = 8;
@@ -208,7 +225,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(73, 134);
+            this.txtMemo.Location = new System.Drawing.Point(72, 134);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(399, 21);
             this.txtMemo.TabIndex = 10;
@@ -233,38 +250,6 @@
             this.txtAmount.TabIndex = 3;
             this.txtAmount.Text = "0.00";
             // 
-            // rdCheck
-            // 
-            this.rdCheck.AutoSize = true;
-            this.rdCheck.Location = new System.Drawing.Point(185, 72);
-            this.rdCheck.Name = "rdCheck";
-            this.rdCheck.Size = new System.Drawing.Size(47, 16);
-            this.rdCheck.TabIndex = 6;
-            this.rdCheck.Text = "支票";
-            this.rdCheck.UseVisualStyleBackColor = true;
-            // 
-            // rdCash
-            // 
-            this.rdCash.AutoSize = true;
-            this.rdCash.Location = new System.Drawing.Point(126, 72);
-            this.rdCash.Name = "rdCash";
-            this.rdCash.Size = new System.Drawing.Size(47, 16);
-            this.rdCash.TabIndex = 5;
-            this.rdCash.Text = "现金";
-            this.rdCash.UseVisualStyleBackColor = true;
-            // 
-            // rdTransfer
-            // 
-            this.rdTransfer.AutoSize = true;
-            this.rdTransfer.Checked = true;
-            this.rdTransfer.Location = new System.Drawing.Point(73, 72);
-            this.rdTransfer.Name = "rdTransfer";
-            this.rdTransfer.Size = new System.Drawing.Size(47, 16);
-            this.rdTransfer.TabIndex = 4;
-            this.rdTransfer.TabStop = true;
-            this.rdTransfer.Text = "转账";
-            this.rdTransfer.UseVisualStyleBackColor = true;
-            // 
             // dtSheetDate
             // 
             this.dtSheetDate.Location = new System.Drawing.Point(313, 12);
@@ -275,7 +260,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 137);
+            this.label5.Location = new System.Drawing.Point(37, 137);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 58;
@@ -299,21 +284,12 @@
             this.label2.TabIndex = 56;
             this.label2.Text = "支出金额";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 74);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 55;
-            this.label3.Text = "支出方式";
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(488, 167);
+            this.tabPage5.Size = new System.Drawing.Size(488, 166);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -337,7 +313,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(488, 167);
+            this.gridAttachment.Size = new System.Drawing.Size(488, 166);
             this.gridAttachment.TabIndex = 103;
             // 
             // colUploadDateTime
@@ -410,7 +386,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(488, 167);
+            this.tabPage2.Size = new System.Drawing.Size(488, 166);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -433,7 +409,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(488, 167);
+            this.dataGridView1.Size = new System.Drawing.Size(488, 166);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -524,7 +500,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(501, 252);
+            this.ClientSize = new System.Drawing.Size(501, 251);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmExpenditureRecordDetail";
@@ -554,14 +530,10 @@
         private System.Windows.Forms.TabPage tabPage1;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private GeneralLibrary.WinformControl.DecimalTextBox txtAmount;
-        private System.Windows.Forms.RadioButton rdCheck;
-        private System.Windows.Forms.RadioButton rdCash;
-        private System.Windows.Forms.RadioButton rdTransfer;
         private System.Windows.Forms.DateTimePicker dtSheetDate;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -571,8 +543,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
         private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtCheckNum;
         private System.Windows.Forms.TextBox txtRequest;
         private System.Windows.Forms.LinkLabel lnkRequest;
         private System.Windows.Forms.TextBox txtCategory;
@@ -592,6 +562,10 @@
         private System.Windows.Forms.ToolStripButton btnApprove;
         private System.Windows.Forms.ToolStripButton btnUndoApprove;
         private System.Windows.Forms.ToolStripButton btnNullify;
+        private GeneralLibrary.WinformControl.DBCTextBox txtAccount;
+        private System.Windows.Forms.LinkLabel lnkAccout;
+        private GeneralLibrary.WinformControl.DBCTextBox txtPayee;
+        private System.Windows.Forms.Label label4;
 
     }
 }

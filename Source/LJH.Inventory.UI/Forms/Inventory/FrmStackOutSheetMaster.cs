@@ -123,19 +123,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             FrmStackOutSheetDetail frm = new FrmStackOutSheetDetail();
             frm.IsAdding = true;
             frm.UpdatingItem = StackOutSheet.Create(null, null);
-            frm.ItemAdded += new EventHandler<ItemAddedEventArgs>(frm_ItemAdded);
-            frm.ItemUpdated += new EventHandler<ItemUpdatedEventArgs>(frm_ItemUpdated);
             return frm;
-        }
-
-        private void frm_ItemUpdated(object sender, ItemUpdatedEventArgs e)
-        {
-            显示总重量和总金额();
-        }
-
-        private void frm_ItemAdded(object sender, ItemAddedEventArgs e)
-        {
-            显示总重量和总金额();
         }
 
         protected override List<object> GetDataSource()
@@ -236,6 +224,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     row.Cells["colPaid"].Value = sheetState.Paid;
                     row.Cells["colNotPaid"].Value = sheetState.NotPaid;
                 }
+                显示总重量和总金额();
             }
             if (!_Sheets.Exists(it => it.ID == sheet.ID)) _Sheets.Add(sheet);
             ShowRowColor(row);

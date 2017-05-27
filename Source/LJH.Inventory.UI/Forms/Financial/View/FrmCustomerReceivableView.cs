@@ -44,18 +44,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             con.CustomerID = Customer != null ? Customer.ID : null;
             con.ReceivableTypes = new List<CustomerReceivableType>();
             con.ReceivableTypes.Add(ReceivableType);
-            con.Settled = false;
-            if (!chkShowAll.Checked)
-            {
-                con.States = new List<SheetState>();
-                con.States.Add(SheetState.Add);
-                con.Settled = false;
-            }
-            else
-            {
-                con.States = null;
-                con.Settled = null;
-            }
+            if (!chkShowAll.Checked)con.Settled = false;
             var items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             items = (from item in items orderby item.CreateDate ascending, item.SheetID ascending select item).ToList();
             ShowItemsOnGrid(items);
@@ -76,11 +65,6 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
             }
             row.Cells["colMemo"].Value = cr.Memo;
-            if (cr.State == SheetState.Canceled)
-            {
-                row.DefaultCellStyle.ForeColor = Color.Red;
-                row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            }
         }
 
         private void ShowItemsOnGrid(List<CustomerReceivable> items)

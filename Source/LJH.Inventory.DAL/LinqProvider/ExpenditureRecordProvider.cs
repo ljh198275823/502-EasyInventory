@@ -40,6 +40,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 ExpenditureRecordSearchCondition con = search as ExpenditureRecordSearchCondition;
                 if (!string.IsNullOrEmpty(con.Category)) ret = ret.Where(item => item.Category.Contains(con.Category));
+                if (!string.IsNullOrEmpty(con.AccountID)) ret = ret.Where(item => item.AccountID == con.AccountID);
             }
             return ret.ToList();
         }

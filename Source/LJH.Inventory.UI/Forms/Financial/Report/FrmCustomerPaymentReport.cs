@@ -153,10 +153,14 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 CustomerPayment cp = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
                 {
-                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
-                    frm.StartPosition = FormStartPosition.CenterParent;
-                    frm.ShowAssigns(cp);
-                    frm.ShowDialog();
+                    var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                    if (ar != null)
+                    {
+                        FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.ShowAssigns(ar);
+                        frm.ShowDialog();
+                    }
                 }
             }
         }

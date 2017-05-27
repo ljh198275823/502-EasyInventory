@@ -11,7 +11,7 @@ using LJH.GeneralLibrary.Core.DAL.Linq;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class CustomerPaymentProvider : ProviderBase<CustomerPayment, string>, ICustomerPaymentBankProvider
+    public class CustomerPaymentProvider : ProviderBase<CustomerPayment, string>
     {
         #region 构造函数
         public CustomerPaymentProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)

@@ -41,6 +41,17 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAmount.Focus();
                 return false;
             }
+            if (txtAccount.Tag == null)
+            {
+                MessageBox.Show("没有指定付款账号");
+                return false;
+            }
+            decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
+            if (amount < txtAmount.DecimalValue)
+            {
+                MessageBox.Show("此账号余额不足");
+                return false;
+            }
             return true;
         }
 
@@ -57,9 +68,10 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (item != null)
             {
                 txtSheetNo.Text = item.ID;
-                rdTransfer.Checked = (item.PaymentMode == PaymentMode.Transfer);
-                rdCash.Checked = item.PaymentMode == PaymentMode.Cash;
-                rdCheck.Checked = item.PaymentMode == PaymentMode.Check;
+                Account ac = null;
+                if (!string.IsNullOrEmpty(item.AccountID)) ac = new AccountBLL(AppSettings.Current.ConnStr).GetByID(item.AccountID).QueryObject ;
+                txtAccount.Text = ac != null ? ac.Name : null;
+                txtAccount.Tag = ac;
                 txtAmount.DecimalValue = item.Amount;
                 dtSheetDate.Value = item.SheetDate;
                 if (!string.IsNullOrEmpty(item.Category))
@@ -67,8 +79,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                     Category = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetByID(item.Category).QueryObject;
                 }
                 txtCategory.Text = Category != null ? Category.Name : string.Empty;
-                txtCheckNum.Text = item.CheckNum;
                 txtRequest.Text = item.Request;
+                txtPayee.Text = item.Payee;
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -87,14 +99,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 info = UpdatingItem as ExpenditureRecord;
             }
-            if (rdTransfer.Checked) info.PaymentMode = PaymentMode.Transfer;
-            if (rdCheck.Checked) info.PaymentMode = PaymentMode.Check;
-            if (rdCash.Checked) info.PaymentMode = PaymentMode.Cash;
+            info.AccountID = (txtAccount.Tag as Account).ID;
             info.Amount = txtAmount.DecimalValue;
             info.SheetDate = dtSheetDate.Value;
             info.Category = Category != null ? Category.ID : null;
-            info.CheckNum = txtCheckNum.Text;
             info.Request = Requster != null ? Requster.Name : string.Empty;
+            info.Payee = txtPayee.Text;
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -164,62 +174,14 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as ExpenditureRecord).ID).QueryObjects;
-            if (assigns != null && assigns.Count > 0)
-            {
-                string msg = "\"取消审核\"的操作会删除相关的应收核销项，是否继续?";
-                if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            }
-            if (assigns != null && assigns.Count > 0)
-            {
-                bool allSuccess = true;
-                foreach (CustomerPaymentAssign assign in assigns)
-                {
-                    CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
-                    if (ret.Result != ResultCode.Successful) allSuccess = false;
-                }
-                if (!allSuccess)
-                {
-                    MessageBox.Show("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"取消审核\"的操作", "消息");
-                    UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
-                    OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
-                    return;
-                }
-            }
             ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
             PerformOperation<ExpenditureRecord>(processor, SheetOperation.UndoApprove);
-            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
-            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as ExpenditureRecord).ID).QueryObjects;
-            if (assigns != null && assigns.Count > 0)
-            {
-                string msg = "\"作废\"的操作会删除相关的应收核销项，是否继续?";
-                if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            }
-            if (assigns != null && assigns.Count > 0)
-            {
-                bool allSuccess = true;
-                foreach (CustomerPaymentAssign assign in assigns)
-                {
-                    CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
-                    if (ret.Result != ResultCode.Successful) allSuccess = false;
-                }
-                if (!allSuccess)
-                {
-                    MessageBox.Show("某些应收核销项删除失败，请手动删除这些应收核销项后再继续\"作废\"的操作", "消息");
-                    UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
-                    OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
-                    return;
-                }
-            }
             ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
             PerformOperation<ExpenditureRecord>(processor, SheetOperation.Nullify);
-            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
-            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
         }
         #endregion
 
@@ -256,6 +218,19 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             Requster = null;
             txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
+        }
+
+        private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmAccountMaster frm = new FrmAccountMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var ac = frm.SelectedItem as Account;
+                txtAccount.Text = ac.Name;
+                txtAccount.Tag = ac;
+            }
         }
         #endregion
     }

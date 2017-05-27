@@ -50,10 +50,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Haspaid { get; set; }
         /// <summary>
-        /// 获取或设置当前状态
-        /// </summary>
-        public SheetState State { get; set; }
-        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }

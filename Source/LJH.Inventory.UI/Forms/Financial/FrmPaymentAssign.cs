@@ -24,10 +24,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         }
 
         #region 公共属性
-        /// <summary>
-        /// 获取或设置要分配的客户收款单号
-        /// </summary>
-        public string CustomerPaymentID { get; set; }
+        public AccountRecord AccountRecord { get; set; }
         #endregion
 
         #region 私有方法
@@ -97,13 +94,12 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 事件处理程序
         private void FrmPaymentAssign_Load(object sender, EventArgs e)
         {
-            CustomerPayment item = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(CustomerPaymentID).QueryObject;
-            if (item != null)
+            if (AccountRecord != null)
             {
-                txtID.Text = item.ID;
-                txtAmount.DecimalValue = item.Remain.Trim();
-                txtRemain.DecimalValue = item.Remain.Trim();
-                ShowReceivables(item.CustomerID, item.ClassID);
+                txtID.Text = AccountRecord.SheetID;
+                txtAmount.DecimalValue = AccountRecord.Remain.Trim();
+                txtRemain.DecimalValue = AccountRecord.Remain.Trim();
+                ShowReceivables(AccountRecord.CustomerID, AccountRecord.ClassID);
             }
         }
 
@@ -167,14 +163,14 @@ namespace LJH.Inventory.UI.Forms.Financial
                 decimal temp = Convert.ToDecimal(row.Cells["colAssign"].Value);
                 if (temp > 0)
                 {
-                    CustomerPaymentAssign item = new CustomerPaymentAssign()
+                    AccountRecordAssign item = new AccountRecordAssign()
                     {
                         ID = Guid.NewGuid(),
-                        PaymentID = CustomerPaymentID,
+                        PaymentID = AccountRecord.ID,
                         ReceivableID = (row.Tag as CustomerReceivable).ID,
                         Amount = temp,
                     };
-                    CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).Assign(item);
+                    CommandResult ret = (new AccountRecordAssignBLL(AppSettings.Current.ConnStr)).Assign(item);
                     row.Cells["colMemo"].Value = ret.Result == ResultCode.Successful ? "成功" : "失败";
                     if (ret.Result != ResultCode.Successful) allSuccess = false;
                 }

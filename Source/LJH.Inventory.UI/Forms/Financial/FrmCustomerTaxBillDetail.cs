@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             ItemsGrid.Rows.Clear();
             if (UpdatingItem == null) return;
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
@@ -43,7 +43,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 List<CustomerReceivable> crs = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
                 if (crs != null && crs.Count > 0)
                 {
-                    foreach (CustomerPaymentAssign assign in assigns)
+                    foreach (AccountRecordAssign assign in assigns)
                     {
                         CustomerReceivable cr = crs.FirstOrDefault(it => it.ID == assign.ReceivableID);
                         int row = ItemsGrid.Rows.Add();
@@ -211,7 +211,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 string msg = "\"取消审核\" 操作会删除此单的所有核销项删除，是否继续?";
@@ -229,17 +229,21 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             if (UpdatingItem != null)
             {
-                string paymentID = (UpdatingItem as CustomerPayment).ID;
-                FrmPaymentAssign frm = new FrmPaymentAssign();
-                frm.CustomerPaymentID = paymentID;
-                this.Close();
-                frm.ShowDialog();
+                var cp = UpdatingItem as CustomerPayment;
+                var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                if (ar != null)
+                {
+                    FrmPaymentAssign frm = new FrmPaymentAssign();
+                    frm.AccountRecord = ar;
+                    this.Close();
+                    frm.ShowDialog();
+                }
             }
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 string msg = "\"作废\" 操作会删除此单的所有核销项删除，是否继续?";
@@ -275,8 +279,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                 {
                     foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
                     {
-                        CustomerPaymentAssign assign = row.Tag as CustomerPaymentAssign;
-                        CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
+                        AccountRecordAssign assign = row.Tag as AccountRecordAssign;
+                        CommandResult ret = (new AccountRecordAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
                         if (ret.Result == ResultCode.Successful) delRows.Add(row);
                     }
                 }

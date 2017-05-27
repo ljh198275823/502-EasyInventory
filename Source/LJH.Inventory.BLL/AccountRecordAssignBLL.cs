@@ -9,27 +9,27 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class CustomerPaymentAssignBLL : BLLBase<Guid, CustomerPaymentAssign>
+    public class AccountRecordAssignBLL : BLLBase<Guid, AccountRecordAssign>
     {
         #region 构造函数
-        public CustomerPaymentAssignBLL(string repoUri)
+        public AccountRecordAssignBLL(string repoUri)
             : base(repoUri)
         {
         }
         #endregion
 
         #region 重写基类方法
-        public override CommandResult Add(CustomerPaymentAssign info)
+        public override CommandResult Add(AccountRecordAssign info)
         {
             return new CommandResult(ResultCode.Fail, "不支持的操作，要增加分配项请调用Assign方法");
         }
 
-        public override CommandResult Update(CustomerPaymentAssign info)
+        public override CommandResult Update(AccountRecordAssign info)
         {
             return new CommandResult(ResultCode.Fail, "不支持的操作，要修改分配项请调用Assign方法");
         }
 
-        public override CommandResult Delete(CustomerPaymentAssign info)
+        public override CommandResult Delete(AccountRecordAssign info)
         {
             return new CommandResult(ResultCode.Fail, "不支持的操作，要删除分配项请调用UndoAssign方法");
         }
@@ -41,23 +41,23 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="assign"></param>
         /// <returns></returns>
-        public CommandResult Assign(CustomerPaymentAssign assign)
+        public CommandResult Assign(AccountRecordAssign assign)
         {
             if (assign == null) return new CommandResult(ResultCode.Fail, "没有分配项");
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            CustomerPayment cp = ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).GetByID(assign.PaymentID).QueryObject;
+            AccountRecord cp = ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).GetByID(assign.PaymentID).QueryObject;
             if (cp != null && cp.Remain >= assign.Amount)
             {
                 CustomerReceivable cr = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetByID(assign.ReceivableID).QueryObject;
                 if (cr != null && cr.Remain >= assign.Amount)
                 {
-                    CustomerPayment cp1 = cp.Clone() as CustomerPayment;
-                    CustomerReceivable cr1 = cr.Clone() as CustomerReceivable;
+                    AccountRecord cp1 = cp.Clone();
+                    CustomerReceivable cr1 = cr.Clone();
                     cp.Assigned += assign.Amount;
                     cr.Haspaid += assign.Amount;
-                    ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Update(cp, cp1, unitWork);
+                    ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Update(cp, cp1, unitWork);
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(cr, cr1, unitWork);
-                    ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(RepoUri).Insert(assign, unitWork);
+                    ProviderFactory.Create<IProvider<AccountRecordAssign, Guid>>(RepoUri).Insert(assign, unitWork);
                 }
             }
             return unitWork.Commit();
@@ -67,23 +67,23 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="assign"></param>
         /// <returns></returns>
-        public CommandResult UndoAssign(CustomerPaymentAssign assign)
+        public CommandResult UndoAssign(AccountRecordAssign assign)
         {
             if (assign == null) return new CommandResult(ResultCode.Fail, "没有分配项");
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            CustomerPayment cp = ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).GetByID(assign.PaymentID).QueryObject;
+            AccountRecord cp = ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).GetByID(assign.PaymentID).QueryObject;
             if (cp != null && cp.Assigned >= assign.Amount)
             {
                 CustomerReceivable cr = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetByID(assign.ReceivableID).QueryObject;
                 if (cr != null && cr.Haspaid >= assign.Amount)
                 {
-                    CustomerPayment cp1 = cp.Clone() as CustomerPayment;
-                    CustomerReceivable cr1 = cr.Clone() as CustomerReceivable;
+                    AccountRecord cp1 = cp.Clone();
+                    CustomerReceivable cr1 = cr.Clone();
                     cp.Assigned -= assign.Amount;
                     cr.Haspaid -= assign.Amount;
-                    ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Update(cp, cp1, unitWork);
+                    ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Update(cp, cp1, unitWork);
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(cr, cr1, unitWork);
-                    ProviderFactory.Create<IProvider<CustomerPaymentAssign, Guid>>(RepoUri).Delete(assign, unitWork);
+                    ProviderFactory.Create<IProvider<AccountRecordAssign, Guid>>(RepoUri).Delete(assign, unitWork);
                 }
             }
             return unitWork.Commit();

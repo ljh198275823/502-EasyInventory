@@ -41,7 +41,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             ItemsGrid.Rows.Clear();
             if (UpdatingItem == null) return;
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
@@ -49,7 +49,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 List<CustomerReceivable> crs = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
                 if (crs != null && crs.Count > 0)
                 {
-                    foreach (CustomerPaymentAssign assign in assigns)
+                    foreach (AccountRecordAssign assign in assigns)
                     {
                         CustomerReceivable cr = crs.FirstOrDefault(it => it.ID == assign.ReceivableID);
                         int row = ItemsGrid.Rows.Add();
@@ -113,7 +113,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtCustomer.Focus();
                 return false;
             }
-            if (txtAccount.Tag == null && !IsAdding )
+            if (txtAccount.Tag == null && !IsAdding)
             {
                 MessageBox.Show("没有指定账号");
             }
@@ -122,6 +122,15 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("金额不正确,不能小于零");
                 txtAmount.Focus();
                 return false;
+            }
+            if (PaymentType == CustomerPaymentType.Supplier)
+            {
+                decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
+                if (amount < txtAmount.DecimalValue)
+                {
+                    MessageBox.Show("此账号余额不足");
+                    return false;
+                }
             }
             return true;
         }
@@ -277,7 +286,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             PerformOperation<CustomerPayment>(processor, so);
             if (so == SheetOperation.Create && !string.IsNullOrEmpty(StackSheetID)) //如果已经是确定收款是用于哪个出入库单了, 新建时直接核销
             {
-                new CustomerPaymentBLL(AppSettings.Current.ConnStr).PaymentAssign(UpdatingItem as CustomerPayment);
+                new CustomerPaymentBLL(AppSettings.Current.ConnStr).核销(UpdatingItem as CustomerPayment);
                 this.Close();
             }
         }
@@ -290,7 +299,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 string msg = "\"取消审核\"的操作会删除此单的所有核销项删除，是否继续?";
@@ -308,17 +317,21 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             if (UpdatingItem != null)
             {
-                string paymentID = (UpdatingItem as CustomerPayment).ID;
-                FrmPaymentAssign frm = new FrmPaymentAssign();
-                frm.CustomerPaymentID = paymentID;
-                this.Close();
-                frm.ShowDialog();
+                var cp = UpdatingItem as CustomerPayment;
+                var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                if (ar != null)
+                {
+                    FrmPaymentAssign frm = new FrmPaymentAssign();
+                    frm.AccountRecord = ar;
+                    this.Close();
+                    frm.ShowDialog();
+                }
             }
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            List<CustomerPaymentAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 string msg = "\"作废\"的操作会删除此单的所有核销项删除，是否继续?";
@@ -363,8 +376,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                 {
                     foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
                     {
-                        CustomerPaymentAssign assign = row.Tag as CustomerPaymentAssign;
-                        CommandResult ret = (new CustomerPaymentAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
+                        AccountRecordAssign assign = row.Tag as AccountRecordAssign;
+                        CommandResult ret = (new AccountRecordAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
                         if (ret.Result == ResultCode.Successful) delRows.Add(row);
                     }
                 }
