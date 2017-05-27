@@ -44,9 +44,11 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkShowAll = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMSG = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnLast3Month = new System.Windows.Forms.Button();
+            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.chkSheetDate = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -57,9 +59,9 @@
             this.GridView.AllowUserToAddRows = false;
             this.GridView.AllowUserToDeleteRows = false;
             this.GridView.AllowUserToResizeRows = false;
-            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.GridView.BackgroundColor = System.Drawing.Color.White;
             this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -70,12 +72,12 @@
             this.colNotPaid,
             this.colMemo});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
-            this.GridView.Location = new System.Drawing.Point(0, 36);
+            this.GridView.Location = new System.Drawing.Point(0, 95);
             this.GridView.Name = "GridView";
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(684, 300);
+            this.GridView.Size = new System.Drawing.Size(684, 241);
             this.GridView.TabIndex = 22;
             this.GridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
             // 
@@ -139,7 +141,7 @@
             this.mnu_Add,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 48);
             // 
             // mnu_Add
             // 
@@ -154,17 +156,6 @@
             this.cMnu_Export.Size = new System.Drawing.Size(160, 22);
             this.cMnu_Export.Text = "导出...";
             this.cMnu_Export.Click += new System.EventHandler(this.cMnu_Export_Click);
-            // 
-            // chkShowAll
-            // 
-            this.chkShowAll.AutoSize = true;
-            this.chkShowAll.Location = new System.Drawing.Point(12, 12);
-            this.chkShowAll.Name = "chkShowAll";
-            this.chkShowAll.Size = new System.Drawing.Size(72, 16);
-            this.chkShowAll.TabIndex = 23;
-            this.chkShowAll.Text = "显示所有";
-            this.chkShowAll.UseVisualStyleBackColor = true;
-            this.chkShowAll.CheckedChanged += new System.EventHandler(this.chkShowAll_CheckedChanged);
             // 
             // statusStrip1
             // 
@@ -184,13 +175,48 @@
             this.lblMSG.Spring = true;
             this.lblMSG.Text = "共 0 项";
             // 
+            // btnLast3Month
+            // 
+            this.btnLast3Month.Location = new System.Drawing.Point(12, 39);
+            this.btnLast3Month.Name = "btnLast3Month";
+            this.btnLast3Month.Size = new System.Drawing.Size(75, 39);
+            this.btnLast3Month.TabIndex = 150;
+            this.btnLast3Month.Text = "最近三个月";
+            this.btnLast3Month.UseVisualStyleBackColor = true;
+            this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
+            // 
+            // ucDateTimeInterval1
+            // 
+            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(88, 10);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = true;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(223, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.TabIndex = 149;
+            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
+            // 
+            // chkSheetDate
+            // 
+            this.chkSheetDate.AutoSize = true;
+            this.chkSheetDate.Location = new System.Drawing.Point(15, 17);
+            this.chkSheetDate.Name = "chkSheetDate";
+            this.chkSheetDate.Size = new System.Drawing.Size(72, 16);
+            this.chkSheetDate.TabIndex = 148;
+            this.chkSheetDate.Text = "开单日期";
+            this.chkSheetDate.UseVisualStyleBackColor = true;
+            this.chkSheetDate.CheckedChanged += new System.EventHandler(this.chkSheetDate_CheckedChanged);
+            // 
             // FrmCustomerTaxView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 361);
+            this.Controls.Add(this.btnLast3Month);
+            this.Controls.Add(this.ucDateTimeInterval1);
+            this.Controls.Add(this.chkSheetDate);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.chkShowAll);
             this.Controls.Add(this.GridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerTaxView";
@@ -209,7 +235,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView GridView;
-        private System.Windows.Forms.CheckBox chkShowAll;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnu_Add;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
@@ -221,5 +246,8 @@
         private System.Windows.Forms.DataGridViewLinkColumn colHaspaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Button btnLast3Month;
+        private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private System.Windows.Forms.CheckBox chkSheetDate;
     }
 }

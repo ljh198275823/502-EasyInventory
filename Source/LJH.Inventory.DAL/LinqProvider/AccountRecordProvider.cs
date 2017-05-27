@@ -32,6 +32,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is AccountRecordSearchCondition)
             {
                 AccountRecordSearchCondition con = search as AccountRecordSearchCondition;
+                if (con.CreateDate != null) ret = ret.Where(item => item.CreateDate >= con.CreateDate.Begin && item.CreateDate <= con.CreateDate.End);
                 if (!string.IsNullOrEmpty(con.SheetID)) ret = ret.Where(it => it.SheetID == con.SheetID);
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.AccountID)) ret = ret.Where(item => item.AccountID == con.AccountID);

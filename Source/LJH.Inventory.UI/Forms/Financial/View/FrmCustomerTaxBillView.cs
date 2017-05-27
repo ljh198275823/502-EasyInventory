@@ -38,7 +38,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             con.CustomerID = Customer != null ? Customer.ID : null;
             con.PaymentTypes = new List<CustomerPaymentType>();
             con.PaymentTypes.Add(PaymentType);
-            if (!chkShowAll.Checked) con.HasRemain = true;
+            if (!chkSheetDate.Checked) con.HasRemain = true;
+            else con.CreateDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             var items = (new AccountRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             items = (from item in items orderby item.CreateDate ascending, item.ID ascending select item).ToList();
             ShowItemsOnGrid(items);
@@ -97,6 +98,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void FrmCustomerPaymentView_Load(object sender, EventArgs e)
         {
             ShowOperatorRights();
+            ucDateTimeInterval1.Init();
+            ucDateTimeInterval1.SelectThisMonth();
             FreshData();
         }
 
@@ -163,6 +166,23 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     frm.ShowDialog();
                 }
             }
+        }
+
+        private void chkSheetDate_CheckedChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void btnLast3Month_Click(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Today;
+            ucDateTimeInterval1.StartDateTime = today.AddMonths(-3);
+            ucDateTimeInterval1.EndDateTime = today.AddDays(1).AddSeconds(-1);
+        }
+
+        private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
+        {
+            if (chkSheetDate.Checked) FreshData();
         }
         #endregion
     }

@@ -117,6 +117,7 @@ BEGIN
 	exec ('update StackOutSheet set Amount =a.Amount from (select SheetID ,SUM(Amount)as amount from CustomerReceivable  where ClassID=1 group by SheetID ) as a where a.SheetID =ID ')
     exec ('update StackOutSheet set Amount =0 where Amount is null')
 	exec ('alter table StackOutSheet alter column Amount decimal(18,4) not null')
+	exec ('alter table ProductInventoryItem alter column Model nchar(5) not null')
 end
 go
 

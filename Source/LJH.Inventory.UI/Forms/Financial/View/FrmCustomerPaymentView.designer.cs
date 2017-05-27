@@ -35,13 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerPaymentView));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Assign = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkShowAll = new System.Windows.Forms.CheckBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblMSG = new System.Windows.Forms.ToolStripStatusLabel();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +44,15 @@
             this.colStackSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Assign = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblMSG = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnLast3Month = new System.Windows.Forms.Button();
+            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.chkSheetDate = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -77,73 +79,14 @@
             this.colPayer,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 33);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 90);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(994, 354);
+            this.dataGridView1.Size = new System.Drawing.Size(994, 297);
             this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_Add,
-            this.mnu_Assign,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 70);
-            // 
-            // mnu_Add
-            // 
-            this.mnu_Add.Name = "mnu_Add";
-            this.mnu_Add.Size = new System.Drawing.Size(109, 22);
-            this.mnu_Add.Text = "新建";
-            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
-            // 
-            // mnu_Assign
-            // 
-            this.mnu_Assign.Name = "mnu_Assign";
-            this.mnu_Assign.Size = new System.Drawing.Size(109, 22);
-            this.mnu_Assign.Text = "核销...";
-            this.mnu_Assign.Click += new System.EventHandler(this.mnu_Assign_Click);
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Export.Text = "导出...";
-            this.cMnu_Export.Click += new System.EventHandler(this.cMnu_Export_Click);
-            // 
-            // chkShowAll
-            // 
-            this.chkShowAll.AutoSize = true;
-            this.chkShowAll.Location = new System.Drawing.Point(5, 10);
-            this.chkShowAll.Name = "chkShowAll";
-            this.chkShowAll.Size = new System.Drawing.Size(72, 16);
-            this.chkShowAll.TabIndex = 22;
-            this.chkShowAll.Text = "显示所有";
-            this.chkShowAll.UseVisualStyleBackColor = true;
-            this.chkShowAll.CheckedChanged += new System.EventHandler(this.chkShowAll_CheckedChanged);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMSG});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 390);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(994, 22);
-            this.statusStrip1.TabIndex = 26;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblMSG
-            // 
-            this.lblMSG.Name = "lblMSG";
-            this.lblMSG.Size = new System.Drawing.Size(979, 17);
-            this.lblMSG.Spring = true;
-            this.lblMSG.Text = "共 0 项";
             // 
             // colSheetID
             // 
@@ -222,13 +165,96 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Add,
+            this.mnu_Assign,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 70);
+            // 
+            // mnu_Add
+            // 
+            this.mnu_Add.Name = "mnu_Add";
+            this.mnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.mnu_Add.Text = "新建";
+            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
+            // 
+            // mnu_Assign
+            // 
+            this.mnu_Assign.Name = "mnu_Assign";
+            this.mnu_Assign.Size = new System.Drawing.Size(109, 22);
+            this.mnu_Assign.Text = "核销...";
+            this.mnu_Assign.Click += new System.EventHandler(this.mnu_Assign_Click);
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
+            this.cMnu_Export.Click += new System.EventHandler(this.cMnu_Export_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblMSG});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 390);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(994, 22);
+            this.statusStrip1.TabIndex = 26;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblMSG
+            // 
+            this.lblMSG.Name = "lblMSG";
+            this.lblMSG.Size = new System.Drawing.Size(979, 17);
+            this.lblMSG.Spring = true;
+            this.lblMSG.Text = "共 0 项";
+            // 
+            // btnLast3Month
+            // 
+            this.btnLast3Month.Location = new System.Drawing.Point(9, 34);
+            this.btnLast3Month.Name = "btnLast3Month";
+            this.btnLast3Month.Size = new System.Drawing.Size(75, 39);
+            this.btnLast3Month.TabIndex = 141;
+            this.btnLast3Month.Text = "最近三个月";
+            this.btnLast3Month.UseVisualStyleBackColor = true;
+            this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
+            // 
+            // ucDateTimeInterval1
+            // 
+            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(85, 5);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = true;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(223, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.TabIndex = 140;
+            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
+            // 
+            // chkSheetDate
+            // 
+            this.chkSheetDate.AutoSize = true;
+            this.chkSheetDate.Location = new System.Drawing.Point(12, 12);
+            this.chkSheetDate.Name = "chkSheetDate";
+            this.chkSheetDate.Size = new System.Drawing.Size(72, 16);
+            this.chkSheetDate.TabIndex = 139;
+            this.chkSheetDate.Text = "开单日期";
+            this.chkSheetDate.UseVisualStyleBackColor = true;
+            this.chkSheetDate.Click += new System.EventHandler(this.chkSheetDate_CheckedChanged);
+            // 
             // FrmCustomerPaymentView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 412);
+            this.Controls.Add(this.btnLast3Month);
+            this.Controls.Add(this.ucDateTimeInterval1);
+            this.Controls.Add(this.chkSheetDate);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.chkShowAll);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCustomerPaymentView";
@@ -247,7 +273,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.CheckBox chkShowAll;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnu_Assign;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
@@ -263,5 +288,8 @@
         private System.Windows.Forms.DataGridViewLinkColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPayer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Button btnLast3Month;
+        private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private System.Windows.Forms.CheckBox chkSheetDate;
     }
 }

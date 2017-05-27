@@ -7,6 +7,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 {
     public class AccountRecordSearchCondition : LJH.GeneralLibrary.Core.DAL.SearchCondition
     {
+        public DateTimeRange CreateDate { get; set; }
+
         public string SheetID { get; set; }
 
         public string CustomerID { get; set; }
