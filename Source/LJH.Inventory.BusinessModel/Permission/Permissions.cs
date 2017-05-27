@@ -179,8 +179,15 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 公司往来报表
         /// </summary>
-        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "公司往来报表")]
-        公司往来报表,
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "客户往来报表")]
+        客户往来报表,
+
+        /// <summary>
+        /// 公司往来报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = " 公司管理费用报表")]
+        公司管理费用报表,
+
         #endregion
     }
 }

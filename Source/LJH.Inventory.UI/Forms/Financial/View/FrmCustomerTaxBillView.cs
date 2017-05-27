@@ -47,7 +47,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void ShowItemInGridViewRow(DataGridViewRow row, AccountRecord cp)
         {
             row.Tag = cp;
-            row.Cells["colSheetID"].Value = cp.ID;
+            row.Cells["colSheetID"].Value = cp.SheetID;
             row.Cells["colSheetDate"].Value = cp.CreateDate;
             row.Cells["colAmount"].Value = cp.Amount;
             if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;

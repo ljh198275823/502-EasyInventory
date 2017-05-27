@@ -51,6 +51,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string StackSheetID { get; set; }
         /// <summary>
+        /// 获取或设置对方账号
+        /// </summary>
+        public string OtherAccount { get; set; }
+        /// <summary>
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }

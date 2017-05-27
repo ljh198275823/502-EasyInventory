@@ -254,8 +254,9 @@ namespace InventoryApplication
             this.mnu_InventoryRecord.Enabled = cur.Permit(Permission.InventoryRecordReport, PermissionActions.Read);
             this.mnu_SliceRecordReport.Enabled = cur.Permit(Permission.SliceRecordReport, PermissionActions.Read);
             this.mnu_PaymentReport.Enabled = cur.Permit(Permission.PaymentReport, PermissionActions.Read);
+            this.mnu_公司管理费用报表.Enabled = cur.Permit(Permission.公司管理费用报表, PermissionActions.Read);
             this.mnu_TaxBillReport.Enabled = cur.Permit(Permission.TaxBillReport, PermissionActions.Read);
-            this.mnu_客户往来报表.Enabled = cur.Permit(Permission.公司往来报表, PermissionActions.Read);
+            this.mnu_客户往来报表.Enabled = cur.Permit(Permission.客户往来报表, PermissionActions.Read);
         }
         #endregion
 
@@ -582,6 +583,11 @@ namespace InventoryApplication
         private void mnu_账号管理_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmAccountMaster>(null);
+        }
+
+        private void mnu_公司管理费用报表_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmExpenditureReport>(null);
         }
     }
 }

@@ -1,22 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Text;
-using System.Windows.Forms;
-using LJH.GeneralLibrary;
 using LJH.Inventory.BusinessModel;
-using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
-using LJH.Inventory.UI.Forms;
-using LJH.Inventory.UI.Forms.General;
 using LJH.Inventory.UI.Forms.Sale;
-using LJH.Inventory.UI.Forms.Financial.View;
 
 namespace LJH.Inventory.UI.Forms.Financial.Report
 {
@@ -59,11 +48,10 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 MessageBox.Show("没有指定客户");
                 return null;
             }
-            var con = new CustomerPaymentSearchCondition();
+            var con = new AccountRecordSearchCondition();
             con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer };
-            con.States = new List<SheetState>() { SheetState.Add, SheetState.Approved };
-            var ps = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            var ps = (new AccountRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
 
             var rcon = new CustomerReceivableSearchCondition();
             rcon.CustomerID = con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
@@ -74,15 +62,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             var first = new 客户往来项();
             first.DT = "上期结余";
             first.出货 = rs.Sum(it => it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.收入 = ps.Sum(it => it.SheetDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.收入 = ps.Sum(it => it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             //ret.Add(first);
             ret.AddRange(from it in rs
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
                          select new 客户往来项() { DT = it.CreateDate.ToString("yyyy-MM-dd"), 单据编号 = it.SheetID, 出货 = it.Amount, Memo = it.Memo });
 
             ret.AddRange(from it in ps
-                         where it.SheetDate >= ucDateTimeInterval1.StartDateTime && it.SheetDate <= ucDateTimeInterval1.EndDateTime
-                         select new 客户往来项() { DT = it.SheetDate.ToString("yyyy-MM-dd"), 单据编号 = it.ID, 收入 = it.Amount, 到款账号 = it.AccountID, 付款单位 = it.Payer, Memo = it.Memo });
+                         where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
+                         select new 客户往来项() { DT = it.CreateDate.ToString("yyyy-MM-dd"), 单据编号 = it.SheetID, 收入 = it.Amount, 到款账号 = it.AccountID, 付款单位 = it.OtherAccount, Memo = it.Memo });
             ret = (from it in ret
                    orderby it.DT ascending
                    select it).ToList();

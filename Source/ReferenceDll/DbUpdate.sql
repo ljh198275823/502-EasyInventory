@@ -193,6 +193,7 @@ BEGIN
 	[Assigned] [decimal](18, 4) NOT NULL,
 	[CustomerID] [nvarchar](50) NULL,
 	[StackSheetID] [nvarchar](50) NULL,
+	[OtherAccount] [nvarchar](50) NULL,
 	[Memo] [nvarchar](200) NULL,
 	 CONSTRAINT [PK_AccountRecord] PRIMARY KEY CLUSTERED 
 	(

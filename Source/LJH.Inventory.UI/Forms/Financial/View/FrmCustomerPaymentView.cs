@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
-using LJH.Inventory.UI.Forms;
 using LJH.GeneralLibrary;
-using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
 {
@@ -36,45 +31,32 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         #region 重写基类方法
         private void FreshData()
         {
-            var con = new CustomerPaymentSearchCondition();
+            var con = new AccountRecordSearchCondition();
             con.CustomerID = Customer != null ? Customer.ID : null;
-            con.PaymentTypes = new List<CustomerPaymentType>();
-            con.PaymentTypes.Add(PaymentType);
-            if (!chkShowAll.Checked)
-            {
-                con.States = new List<SheetState>();
-                con.States.Add(SheetState.Add);
-                con.States.Add(SheetState.Approved);
-                con.HasRemain = true;
-            }
-            var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-            items = (from item in items orderby item.SheetDate ascending, item.ID ascending select item).ToList();
+            con.PaymentTypes = new List<CustomerPaymentType>() { PaymentType };
+            if (!chkShowAll.Checked) con.HasRemain = true;
+            var items = (new AccountRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            items = (from item in items orderby item.CreateDate ascending, item.ID ascending select item).ToList();
             ShowItemsOnGrid(items);
         }
 
-        private void ShowItemInGridViewRow(DataGridViewRow row, CustomerPayment cp)
+        private void ShowItemInGridViewRow(DataGridViewRow row, AccountRecord cp)
         {
             row.Tag = cp;
-            row.Cells["colSheetID"].Value = cp.ID;
-            row.Cells["colSheetDate"].Value = cp.SheetDate;
-            row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
+            row.Cells["colSheetID"].Value = cp.SheetID;
+            row.Cells["colSheetDate"].Value = cp.CreateDate;
             Account ac = null;
             if (!string.IsNullOrEmpty(cp.AccountID) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
             row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
-            row.Cells["colPayer"].Value = cp.Payer;
+            row.Cells["colPayer"].Value = cp.OtherAccount;
             row.Cells["colAmount"].Value = cp.Amount;
             row.Cells["colRemain"].Value = cp.Remain != 0 ? (decimal?)cp.Remain : null;
-            row.Cells["colAssigned"].Value =cp.Assigned !=0?(decimal ?) cp.Assigned:null;
+            row.Cells["colAssigned"].Value = cp.Assigned != 0 ? (decimal?)cp.Assigned : null;
             row.Cells["colStackSheetID"].Value = cp.StackSheetID;
             row.Cells["colMemo"].Value = cp.Memo;
-            if (cp.State == SheetState.Canceled)
-            {
-                row.DefaultCellStyle.ForeColor = Color.Red;
-                row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            }
         }
 
-        private void ShowItemsOnGrid(List<CustomerPayment> items)
+        private void ShowItemsOnGrid(List<AccountRecord> items)
         {
             dataGridView1.Rows.Clear();
             if (items != null && items.Count > 0)
@@ -86,9 +68,9 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 }
                 int rowTotal = dataGridView1.Rows.Add();
                 dataGridView1.Rows[rowTotal].Cells["colSheetDate"].Value = "合计";
-                dataGridView1.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerPayment).Amount).Trim();
-                dataGridView1.Rows[rowTotal].Cells["colAssigned"].Value = items.Sum(item => (item as CustomerPayment).Assigned).Trim();
-                dataGridView1.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as CustomerPayment).Remain).Trim();
+                dataGridView1.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as AccountRecord).Amount).Trim();
+                dataGridView1.Rows[rowTotal].Cells["colAssigned"].Value = items.Sum(item => (item as AccountRecord).Assigned).Trim();
+                dataGridView1.Rows[rowTotal].Cells["colRemain"].Value = items.Sum(item => (item as AccountRecord).Remain).Trim();
             }
             lblMSG.Text = string.Format("共 {0} 项", items != null ? items.Count : 0);
         }
@@ -136,16 +118,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             if (dataGridView1.SelectedRows.Count == 1)
             {
-                CustomerPayment cp = dataGridView1.SelectedRows[0].Tag as CustomerPayment;
-                var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                if (ar != null && cp.State != SheetState.Canceled && ar.Remain > 0)
-                {
-                    string paymentID = cp.ID;
-                    FrmPaymentAssign frm = new FrmPaymentAssign();
-                    frm.AccountRecord = ar;
-                    frm.ShowDialog();
-                    FreshData();
-                }
+                AccountRecord ar = dataGridView1.SelectedRows[0].Tag as AccountRecord;
+                FrmPaymentAssign frm = new FrmPaymentAssign();
+                frm.AccountRecord = ar;
+                frm.ShowDialog();
+                FreshData();
             }
         }
 
@@ -159,10 +136,10 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
-                CustomerPayment cp = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
+                AccountRecord ar = dataGridView1.Rows[e.RowIndex].Tag as AccountRecord;
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.ID).QueryObject;
+                    var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(ar.SheetID).QueryObject;
                     if (sheet != null)
                     {
                         FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
@@ -175,20 +152,16 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 }
                 else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
                 {
-                    var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                    if (ar != null)
-                    {
-                        FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
-                        frm.StartPosition = FormStartPosition.CenterParent;
-                        frm.ShowAssigns(ar);
-                        frm.ShowDialog();
-                    }
+                    FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowAssigns(ar);
+                    frm.ShowDialog();
                 }
                 else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colStackSheetID")
                 {
-                    if (!string.IsNullOrEmpty(cp.StackSheetID))
+                    if (!string.IsNullOrEmpty(ar.StackSheetID))
                     {
-                        var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cp.StackSheetID).QueryObject;
+                        var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(ar.StackSheetID).QueryObject;
                         if (sheet != null)
                         {
                             Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();

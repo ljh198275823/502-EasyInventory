@@ -44,6 +44,7 @@
             this.mnu_AddRecievable = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddPayment = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_UpdateCreditLine = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_SetFileID = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -72,7 +73,6 @@
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -127,7 +127,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 264);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 242);
             // 
             // cMnu_Fresh
             // 
@@ -153,6 +153,13 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
+            // 
+            // mnu_客户往来报表
+            // 
+            this.mnu_客户往来报表.Name = "mnu_客户往来报表";
+            this.mnu_客户往来报表.Size = new System.Drawing.Size(160, 22);
+            this.mnu_客户往来报表.Text = "客户往来报表";
+            this.mnu_客户往来报表.Click += new System.EventHandler(this.mnu_客户往来报表_Click);
             // 
             // mnu_UpdateCreditLine
             // 
@@ -414,13 +421,6 @@
             this.colLinkerPhone.HeaderText = "联系人电话";
             this.colLinkerPhone.Name = "colLinkerPhone";
             this.colLinkerPhone.ReadOnly = true;
-            // 
-            // mnu_客户往来报表
-            // 
-            this.mnu_客户往来报表.Name = "mnu_客户往来报表";
-            this.mnu_客户往来报表.Size = new System.Drawing.Size(160, 22);
-            this.mnu_客户往来报表.Text = "客户往来报表";
-            this.mnu_客户往来报表.Click += new System.EventHandler(this.mnu_客户往来报表_Click);
             // 
             // FrmCustomerFinancialStateMaster
             // 

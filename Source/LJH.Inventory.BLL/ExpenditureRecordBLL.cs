@@ -38,6 +38,7 @@ namespace LJH.Inventory.BLL
                 StackSheetID = info.OrderID,
                 AccountID = info.AccountID,
                 Amount = info.Amount,
+                OtherAccount = info.Payee,
                 Memo = info.Memo
             };
             ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
