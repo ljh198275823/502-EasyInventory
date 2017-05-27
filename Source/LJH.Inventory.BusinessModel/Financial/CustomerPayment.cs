@@ -54,10 +54,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置已核销的金额
-        /// </summary>
-        public decimal Assigned { get; set; }
-        /// <summary>
         /// 获取或设置支票号(如果是支票付款)
         /// </summary>
         public string CheckNum { get; set; }
@@ -81,16 +77,6 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
-        #endregion
-
-        #region 只读属性
-        /// <summary>
-        /// 获取待抵消金额
-        /// </summary>
-        public decimal Remain
-        {
-            get { return Amount - Assigned; }
-        }
         #endregion
 
         #region ISheet接口

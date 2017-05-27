@@ -289,6 +289,6 @@ namespace LJH.Inventory.BusinessModel
 
         public decimal NotPaid { get; set; }
 
-        public string FirstPaymentMode { get; set; }
+        public string FirstAccountID { get; set; }
     }
 }

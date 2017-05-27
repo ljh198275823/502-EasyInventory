@@ -44,12 +44,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.AccountID)) ret = ret.Where(item => item.AccountID == con.AccountID);
                 if (!string.IsNullOrEmpty(con.StackSheetID)) ret = ret.Where(item => item.StackSheetID == con.StackSheetID);
                 if (con.PaymentTypes != null && con.PaymentTypes.Count > 0) ret = ret.Where(item => con.PaymentTypes.Contains(item.ClassID));
-
-                if (con.HasRemain != null)
-                {
-                    if (con.HasRemain.Value) ret = ret.Where(item => item.Assigned < item.Amount);
-                    else ret = ret.Where(item => item.Assigned >= item.Amount);
-                }
             }
             List<CustomerPayment> sheets = ret.ToList();
             return sheets;

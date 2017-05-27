@@ -26,7 +26,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private List<WareHouse> _Warehouses = null;
         private Dictionary<string, CompanyInfo> _AllCustomers = new Dictionary<string, CompanyInfo>();
 
-        private List<CustomerPayment> _AllPayments = null;
+        private List<AccountRecord> _AllPayments = null;
         private Dictionary<string, List<CustomerReceivable>> _Receivables = new Dictionary<string, List<CustomerReceivable>>();
         private bool _Fresh = false;
         #endregion
@@ -166,10 +166,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
             }
 
-            CustomerPaymentSearchCondition cpsc = new CustomerPaymentSearchCondition();
+            AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
             cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer };
             cpsc.HasRemain = true;
-            _AllPayments = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(cpsc).QueryObjects;
+            _AllPayments = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(cpsc).QueryObjects;
 
             _Fresh = true;
             base.ShowItemsOnGrid(items);

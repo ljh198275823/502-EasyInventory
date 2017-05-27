@@ -144,7 +144,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (TaxType == CustomerPaymentType.CustomerTax)
             {
                 btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
-                btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
+                var ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.Customer, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.UndoApprove);
                 btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Nullify);
@@ -152,7 +153,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             else if (TaxType == CustomerPaymentType.SupplierTax)
             {
                 btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
-                btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && cp.Remain > 0;
+                var ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.UndoApprove);
                 btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Nullify);

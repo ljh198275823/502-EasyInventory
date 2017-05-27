@@ -156,9 +156,9 @@ namespace LJH.Inventory.BLL
                         ID = Guid.NewGuid(),
                         PaymentID = ar.ID,
                         ReceivableID = cr.ID,
-                        Amount = payment.Remain >= cr.Remain ? cr.Remain : payment.Remain
+                        Amount = ar.Remain >= cr.Remain ? cr.Remain : ar.Remain
                     };
-                    payment.Assigned += assign.Amount;
+                    ar.Assigned += assign.Amount;
                     cr.Haspaid += assign.Amount;
                     new AccountRecordAssignBLL(AppSettings.Current.ConnStr).Assign(assign);
                 }

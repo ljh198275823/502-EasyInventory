@@ -102,7 +102,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             else if (express == "[付款方式]")
             {
                 var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
-                cell.SetCellValue(finance != null ? finance.FirstPaymentMode : null);
+                if (finance != null && !string.IsNullOrEmpty(finance.FirstAccountID))
+                {
+                    var a = new AccountBLL(AppSettings.Current.ConnStr).GetByID(finance.FirstAccountID).QueryObject;
+                    cell.SetCellValue(a != null ? a.Name : null);
+                }
             }
             else if (express == "[付款金额]")
             {

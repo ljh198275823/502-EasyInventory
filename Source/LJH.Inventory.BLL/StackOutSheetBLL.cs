@@ -316,26 +316,6 @@ namespace LJH.Inventory.BLL
 
         #region 公共方法
         /// <summary>
-        /// 获取某个单据的所有付款明细
-        /// </summary>
-        /// <param name="paymentID"></param>
-        /// <returns></returns>
-        public QueryResultList<AccountRecordAssign> GetAssigns(string sheetNo)
-        {
-            CustomerReceivableSearchCondition con1 = new CustomerReceivableSearchCondition()
-            {
-                SheetID = sheetNo,
-            };
-            List<CustomerReceivable> items = (new CustomerReceivableBLL(RepoUri)).GetItems(con1).QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                AccountRecordAssignSearchCondition con = new AccountRecordAssignSearchCondition();
-                con.ReceivableID = items.First().ID;
-                return ProviderFactory.Create<IProvider<AccountRecordAssign, Guid>>(RepoUri).GetItems(con);
-            }
-            return new QueryResultList<AccountRecordAssign>(ResultCode.Fail, "没有找到记录", null);
-        }
-        /// <summary>
         /// 通过查询条件获取相关商品销售记录
         /// </summary>
         /// <param name="con"></param>
@@ -406,19 +386,14 @@ namespace LJH.Inventory.BLL
             if (item == null) return new QueryResult<StackOutSheetFinancialState>(ResultCode.Fail, "没有找到相关送货单信息", null);
             var ret = new StackOutSheetFinancialState() { ID = sheetID };
 
-            CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
-            con.PaymentTypes = new List<CustomerPaymentType>();
-            con.PaymentTypes.Add(CustomerPaymentType.Customer);
-            con.States = new List<SheetState>();
-            con.States.Add(SheetState.Add);
-            con.States.Add(SheetState.Approved);
+            AccountRecordSearchCondition con = new AccountRecordSearchCondition();
+            con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer };
             con.StackSheetID = item.ID;
-            var cps = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+            var cps = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             if (cps != null && cps.Count == 1)
             {
-                ret.FirstPaymentMode = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cps[0].PaymentMode);
+                ret.FirstAccountID = cps[0].AccountID;
             }
-
             if (item.State != SheetState.Shipped)
             {
                 if (cps != null) ret.Paid = cps.Sum(it => it.Remain);

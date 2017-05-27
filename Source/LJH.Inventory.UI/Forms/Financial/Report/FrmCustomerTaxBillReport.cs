@@ -26,6 +26,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         }
 
         private List<CompanyInfo> _AllCustomers = null;
+        private List<AccountRecord> _AccountRecords = null;
+
+        private decimal GetRemain(CustomerPayment cp)
+        {
+            decimal ret = 0;
+            if (_AccountRecords == null || _AccountRecords.Count == 0) return 0;
+            ret = _AccountRecords.Sum(it => (it.SheetID == cp.ID && it.ClassID == cp.ClassID) ? it.Remain : 0);
+            return ret;
+        }
 
         #region 重写基类方法
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -37,10 +46,9 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             else if (cp.ClassID == CustomerPaymentType.SupplierTax) row.Cells["colClass"].Value = "采购";
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colAmount"].Value = cp.Amount;
-            if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
-            else row.Cells["colRemain"].Value = null;
-            if (cp.Assigned != 0) row.Cells["colAssigned"].Value = cp.Assigned;
-            else row.Cells["colAssigned"].Value = null;
+            var remain = GetRemain(cp);
+            row.Cells["colRemain"].Value = remain != 0 ? (decimal?)remain : null;
+            row.Cells["colAssigned"].Value = cp.Amount - remain != 0 ? (decimal?)(cp.Amount - remain) : null;
             if (_AllCustomers != null)
             {
                 var c = _AllCustomers.SingleOrDefault(it => it.ID == cp.CustomerID);
@@ -60,6 +68,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             if (!chk支.Checked && !chk收.Checked) return null;
+
+            var acon = new AccountRecordSearchCondition();
+            acon.CreateDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            if (txtCustomer.Tag != null) acon.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
+            if (txtSupplier.Tag != null) acon.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
+            acon.PaymentTypes = new List<CustomerPaymentType>();
+            if (chk收.Checked) acon.PaymentTypes.Add(CustomerPaymentType.CustomerTax);
+            if (chk支.Checked) acon.PaymentTypes.Add(CustomerPaymentType.SupplierTax);
+            _AccountRecords = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(acon).QueryObjects;
 
             var con = new CustomerPaymentSearchCondition();
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
