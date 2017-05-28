@@ -43,10 +43,9 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             CustomerPayment cp = item as CustomerPayment;
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.ID;
-            if (cp.ClassID == CustomerPaymentType.Customer) row.Cells["colClass"].Value = "收款";
-            else if (cp.ClassID == CustomerPaymentType.Supplier) row.Cells["colClass"].Value = "付款";
+            if (cp.ClassID == CustomerPaymentType.客户收款) row.Cells["colClass"].Value = cp.ClassID.ToString();
             row.Cells["colSheetDate"].Value = cp.SheetDate;
-            row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
+            if (cp.PaymentMode != PaymentMode.None) row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
             Account ac = null;
             if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
             row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
@@ -62,8 +61,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
             }
             row.Cells["colMemo"].Value = cp.Memo;
-            if (cp.ClassID == CustomerPaymentType.Customer) row.DefaultCellStyle.ForeColor = Color.Blue;
-            else if (cp.ClassID == CustomerPaymentType.Supplier) row.DefaultCellStyle.ForeColor = Color.Red;
+            if (cp.ClassID == CustomerPaymentType.客户收款 || cp.ClassID == CustomerPaymentType.其它收款) row.DefaultCellStyle.ForeColor = Color.Blue;
+            else if (cp.ClassID == CustomerPaymentType.供应商付款 || cp.ClassID == CustomerPaymentType.公司管理费用) row.DefaultCellStyle.ForeColor = Color.Red;
             if (cp.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
@@ -75,7 +74,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             _AllAccounts = new AccountBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-            if (!chk支.Checked && !chk收.Checked) return null;
+            if (!chk供应商付款.Checked && !chk客户收款.Checked) return null;
 
             var acon = new AccountRecordSearchCondition();
             acon.CreateDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
@@ -83,8 +82,10 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (txtSupplier.Tag != null) acon.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
             if (txtAccount.Tag != null) acon.AccountID = (txtAccount.Tag as Account).ID;
             acon.PaymentTypes = new List<CustomerPaymentType>();
-            if (chk收.Checked) acon.PaymentTypes.Add(CustomerPaymentType.Customer);
-            if (chk支.Checked) acon.PaymentTypes.Add(CustomerPaymentType.Supplier);
+            if (chk客户收款.Checked) acon.PaymentTypes.Add(CustomerPaymentType.客户收款);
+            if (chk供应商付款.Checked) acon.PaymentTypes.Add(CustomerPaymentType.供应商付款);
+            if (chk其它收款.Checked) acon.PaymentTypes.Add(CustomerPaymentType.其它收款);
+            if (chk费用支出.Checked) acon.PaymentTypes.Add(CustomerPaymentType.公司管理费用);
             _AccountRecords = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(acon).QueryObjects;
 
             var con = new CustomerPaymentSearchCondition();
@@ -93,8 +94,10 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (txtSupplier.Tag != null) con.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
             if (txtAccount.Tag != null) con.AccountID = (txtAccount.Tag as Account).ID;
             con.PaymentTypes = new List<CustomerPaymentType>();
-            if (chk收.Checked) con.PaymentTypes.Add(CustomerPaymentType.Customer);
-            if (chk支.Checked) con.PaymentTypes.Add(CustomerPaymentType.Supplier);
+            if (chk客户收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.客户收款);
+            if (chk供应商付款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商付款);
+            if (chk其它收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.其它收款);
+            if (chk费用支出.Checked) con.PaymentTypes.Add(CustomerPaymentType.公司管理费用);
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }

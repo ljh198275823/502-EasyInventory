@@ -106,6 +106,12 @@
     <Compile Include="Forms\Financial\FrmSupplierFinancialStateMaster.Designer.cs">
       <DependentUpon>FrmSupplierFinancialStateMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\Frm其它收款.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Frm其它收款.designer.cs">
+      <DependentUpon>Frm其它收款.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\Report\FrmCustomerPaymentReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,12 @@
     </Compile>
     <Compile Include="Forms\Financial\FrmSetFileID.Designer.cs">
       <DependentUpon>FrmSetFileID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\Frm转公账.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Frm转公账.designer.cs">
+      <DependentUpon>Frm转公账.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\FrmCountInput.cs">
       <SubType>Form</SubType>
@@ -658,6 +670,9 @@
     <EmbeddedResource Include="Forms\Financial\FrmSupplierFinancialStateMaster.resx">
       <DependentUpon>FrmSupplierFinancialStateMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Frm其它收款.resx">
+      <DependentUpon>Frm其它收款.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Report\FrmCustomerPaymentReport.resx">
       <DependentUpon>FrmCustomerPaymentReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -696,6 +711,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmSetFileID.resx">
       <DependentUpon>FrmSetFileID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Frm转公账.resx">
+      <DependentUpon>Frm转公账.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmCountInput.resx">
       <DependentUpon>FrmCountInput.cs</DependentUpon>

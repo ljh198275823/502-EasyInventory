@@ -22,15 +22,19 @@ namespace LJH.Inventory.BLL
         #region 重写基类方法
         protected override string CreateSheetID(CustomerPayment info)
         {
-            if (info.ClassID == CustomerPaymentType.Customer)
+            if (info.ClassID == CustomerPaymentType.客户收款)
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.CustomerPaymentPrefix,
                         UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
             }
-            else if (info.ClassID == CustomerPaymentType.Supplier)
+            else if (info.ClassID == CustomerPaymentType.供应商付款)
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("HKD",
                         UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
+            }
+            else if (info.ClassID == CustomerPaymentType.其它收款)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("收", "yyMM", 3, info.DocumentType);
             }
             return info.ID;
         }
@@ -136,11 +140,11 @@ namespace LJH.Inventory.BLL
             con.SheetID = payment.StackSheetID;
             con.Settled = false;
             con.ReceivableTypes = new List<CustomerReceivableType>();
-            if (payment.ClassID == CustomerPaymentType.Customer)
+            if (payment.ClassID == CustomerPaymentType.客户收款)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
             }
-            else if (payment.ClassID == CustomerPaymentType.Supplier)
+            else if (payment.ClassID == CustomerPaymentType.供应商付款)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
             }

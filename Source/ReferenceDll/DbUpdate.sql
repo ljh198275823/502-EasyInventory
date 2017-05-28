@@ -229,6 +229,12 @@ BEGIN
 end
 go
 
+if exists (SELECT * FROM dbo.syscolumns WHERE name ='CustomerID' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
+BEGIN
+	exec ('alter table CustomerPayment alter column CustomerID nvarchar(50) null')
+end
+go
+
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='AccountID' AND id = OBJECT_ID(N'[dbo].[ExpenditureRecord]'))
 BEGIN
 	exec ('alter table ExpenditureRecord add AccountID nvarchar(50) null')

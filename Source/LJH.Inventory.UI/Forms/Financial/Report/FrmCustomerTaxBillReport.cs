@@ -42,8 +42,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             CustomerPayment cp = item as CustomerPayment;
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.ID;
-            if (cp.ClassID == CustomerPaymentType.CustomerTax) row.Cells["colClass"].Value = "销售";
-            else if (cp.ClassID == CustomerPaymentType.SupplierTax) row.Cells["colClass"].Value = "采购";
+            if (cp.ClassID == CustomerPaymentType.客户增值税发票) row.Cells["colClass"].Value = "销售";
+            else if (cp.ClassID == CustomerPaymentType.供应商增值税发票) row.Cells["colClass"].Value = "采购";
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colAmount"].Value = cp.Amount;
             var remain = GetRemain(cp);
@@ -55,8 +55,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
             }
             row.Cells["colMemo"].Value = cp.Memo;
-            if (cp.ClassID == CustomerPaymentType.CustomerTax) row.DefaultCellStyle.ForeColor = Color.Blue;
-            else if (cp.ClassID == CustomerPaymentType.SupplierTax) row.DefaultCellStyle.ForeColor = Color.Red;
+            if (cp.ClassID == CustomerPaymentType.客户增值税发票) row.DefaultCellStyle.ForeColor = Color.Blue;
+            else if (cp.ClassID == CustomerPaymentType.供应商增值税发票) row.DefaultCellStyle.ForeColor = Color.Red;
             if (cp.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
@@ -74,8 +74,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (txtCustomer.Tag != null) acon.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtSupplier.Tag != null) acon.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
             acon.PaymentTypes = new List<CustomerPaymentType>();
-            if (chk收.Checked) acon.PaymentTypes.Add(CustomerPaymentType.CustomerTax);
-            if (chk支.Checked) acon.PaymentTypes.Add(CustomerPaymentType.SupplierTax);
+            if (chk收.Checked) acon.PaymentTypes.Add(CustomerPaymentType.客户增值税发票);
+            if (chk支.Checked) acon.PaymentTypes.Add(CustomerPaymentType.供应商增值税发票);
             _AccountRecords = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(acon).QueryObjects;
 
             var con = new CustomerPaymentSearchCondition();
@@ -83,8 +83,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtSupplier.Tag != null) con.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
             con.PaymentTypes = new List<CustomerPaymentType>();
-            if (chk收.Checked) con.PaymentTypes.Add(CustomerPaymentType.CustomerTax);
-            if (chk支.Checked) con.PaymentTypes.Add(CustomerPaymentType.SupplierTax);
+            if (chk收.Checked) con.PaymentTypes.Add(CustomerPaymentType.客户增值税发票);
+            if (chk支.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商增值税发票);
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             if (!string.IsNullOrEmpty(txtBillID.Text.Trim()) && items != null && items.Count > 0)
             {

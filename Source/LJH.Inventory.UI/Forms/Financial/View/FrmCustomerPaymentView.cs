@@ -78,11 +78,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         private void ShowOperatorRights()
         {
-            if (PaymentType == CustomerPaymentType.Customer)
+            if (PaymentType == CustomerPaymentType.客户收款)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
             }
-            else if (PaymentType == CustomerPaymentType.Supplier)
+            else if (PaymentType == CustomerPaymentType.供应商付款)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
             }
@@ -148,7 +148,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                         frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        frm.PaymentType = CustomerPaymentType.Customer;
+                        frm.PaymentType = CustomerPaymentType.客户收款;
                         frm.ShowDialog();
                         FreshData();
                     }

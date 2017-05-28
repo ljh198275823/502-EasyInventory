@@ -54,15 +54,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 return null;
             }
             var con = new AccountRecordSearchCondition();
-            con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer, CustomerPaymentType.Supplier, CustomerPaymentType.公司管理费用 };
             con.AccountID = (txtAccount.Tag as Account).ID;
             var ps = (new AccountRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
 
             List<账户往来项> ret = new List<账户往来项>();
             var first = new 账户往来项();
             first.DT = "上期结余";
-            first.收入 = ps.Sum(it => it.ClassID == CustomerPaymentType.Customer && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 = ps.Sum(it => it.ClassID == CustomerPaymentType.Supplier && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.客户收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.其它收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.供应商付款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.公司管理费用 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             //ret.Add(first);
             ret.AddRange(from it in ps
@@ -72,8 +72,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                              DT = it.CreateDate.ToString("yyyy-MM-dd"),
                              单据编号 = it.SheetID,
                              PaymentType = it.ClassID,
-                             收入 = it.ClassID == CustomerPaymentType.Customer ? it.Amount : 0,
-                             支出 = it.ClassID == CustomerPaymentType.Supplier || it.ClassID == CustomerPaymentType.公司管理费用 ? it.Amount : 0,
+                             收入 = it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 ? it.Amount : 0,
+                             支出 = it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 ? it.Amount : 0,
                              付款单位 = it.OtherAccount,
                              Memo = it.Memo
                          });
@@ -112,7 +112,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 账户往来项 cp = dataGridView1.Rows[e.RowIndex].Tag as 账户往来项;
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    if (cp.PaymentType == CustomerPaymentType.Customer || cp.PaymentType == CustomerPaymentType.Supplier)
+                    if (cp.PaymentType == CustomerPaymentType.客户收款 || cp.PaymentType == CustomerPaymentType.供应商付款)
                     {
                         if (!Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Read)) return;
                         var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
@@ -122,7 +122,20 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                             frm.IsAdding = false;
                             frm.UpdatingItem = sheet;
                             frm.IsForView = true;
-                            frm.PaymentType = CustomerPaymentType.Customer;
+                            frm.PaymentType = cp.PaymentType;
+                            frm.ShowDialog();
+                        }
+                    }
+                    else if (cp.PaymentType == CustomerPaymentType.其它收款)
+                    {
+                        if (!Operator.Current.Permit(Permission.其它收款, PermissionActions.Read)) return;
+                        var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
+                        if (sheet != null)
+                        {
+                            Frm其它收款 frm = new Frm其它收款();
+                            frm.IsAdding = false;
+                            frm.UpdatingItem = sheet;
+                            frm.IsForView = true;
                             frm.ShowDialog();
                         }
                     }

@@ -105,14 +105,18 @@ namespace LJH.Inventory.BusinessModel
             {
                 switch (ClassID)
                 {
-                    case CustomerPaymentType.Customer:
+                    case CustomerPaymentType.客户收款:
                         return "客户应收款";
-                    case CustomerPaymentType.Supplier:
+                    case CustomerPaymentType.供应商付款:
                         return "供应商应付款";
-                    case CustomerPaymentType.CustomerTax:
+                    case CustomerPaymentType.客户增值税发票:
                         return "客户增值税发票";
-                    case CustomerPaymentType.SupplierTax:
+                    case CustomerPaymentType.供应商增值税发票:
                         return "供应商增值税发票";
+                    case CustomerPaymentType.其它收款:
+                        return "其它收款";
+                    case CustomerPaymentType.账户之间转账 :
+                        return "账户转账";
                     default:
                         throw new Exception("客户付款单没有指定类型");
                 }

@@ -34,19 +34,19 @@ namespace LJH.Inventory.UI.Forms.Financial
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
             con.CustomerID = customerID;
             con.ReceivableTypes = new List<CustomerReceivableType>();
-            if (PaymentType == CustomerPaymentType.Customer)
+            if (PaymentType == CustomerPaymentType.客户收款)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
             }
-            else if (PaymentType == CustomerPaymentType.Supplier)
+            else if (PaymentType == CustomerPaymentType.供应商付款)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
             }
-            else if (PaymentType == CustomerPaymentType.CustomerTax)
+            else if (PaymentType == CustomerPaymentType.客户增值税发票)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.CustomerTax);
             }
-            else if (PaymentType == CustomerPaymentType.SupplierTax)
+            else if (PaymentType == CustomerPaymentType.供应商增值税发票)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
             }

@@ -33,12 +33,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAccountMaster));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col对公账号 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.eMnu_Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_增加其它收款 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,12 +56,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col对公账号 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menu.SuspendLayout();
@@ -83,6 +85,53 @@
             this.dataGridView1.TabIndex = 55;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colName.HeaderText = "名称";
+            this.colName.MinimumWidth = 100;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // col对公账号
+            // 
+            this.col对公账号.HeaderText = "对公账号";
+            this.col对公账号.Name = "col对公账号";
+            this.col对公账号.ReadOnly = true;
+            // 
+            // colAmount
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colAmount.HeaderText = "结余";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colAmount.Width = 150;
+            // 
+            // colOperator
+            // 
+            this.colOperator.HeaderText = "操作员";
+            this.colOperator.Name = "colOperator";
+            this.colOperator.ReadOnly = true;
+            // 
+            // colAddDate
+            // 
+            dataGridViewCellStyle2.Format = "D";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colAddDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAddDate.HeaderText = "创建日期";
+            this.colAddDate.Name = "colAddDate";
+            this.colAddDate.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -90,40 +139,54 @@
             this.cMnu_Add,
             this.eMnu_Edit,
             this.cMnu_Delete,
-            this.cMnu_Export});
+            this.cMnu_Export,
+            this.toolStripSeparator3,
+            this.mnu_增加其它收款});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
             // 
             // cMnu_Fresh
             // 
             this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Fresh.Text = "刷新";
             // 
             // cMnu_Add
             // 
             this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Add.Text = "新建";
             // 
             // eMnu_Edit
             // 
             this.eMnu_Edit.Name = "eMnu_Edit";
-            this.eMnu_Edit.Size = new System.Drawing.Size(109, 22);
+            this.eMnu_Edit.Size = new System.Drawing.Size(152, 22);
             this.eMnu_Edit.Text = "修改";
             this.eMnu_Edit.Click += new System.EventHandler(this.eMnu_Edit_Click);
             // 
             // cMnu_Delete
             // 
             this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Delete.Text = "删除";
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // mnu_增加其它收款
+            // 
+            this.mnu_增加其它收款.Name = "mnu_增加其它收款";
+            this.mnu_增加其它收款.Size = new System.Drawing.Size(152, 22);
+            this.mnu_增加其它收款.Text = "增加其它收款";
+            this.mnu_增加其它收款.Click += new System.EventHandler(this.mnu_增加其它收款_Click);
             // 
             // menu
             // 
@@ -205,53 +268,6 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
             // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colName.HeaderText = "名称";
-            this.colName.MinimumWidth = 100;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // col对公账号
-            // 
-            this.col对公账号.HeaderText = "对公账号";
-            this.col对公账号.Name = "col对公账号";
-            this.col对公账号.ReadOnly = true;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colAmount.HeaderText = "结余";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.colAmount.Width = 150;
-            // 
-            // colOperator
-            // 
-            this.colOperator.HeaderText = "操作员";
-            this.colOperator.Name = "colOperator";
-            this.colOperator.ReadOnly = true;
-            // 
-            // colAddDate
-            // 
-            dataGridViewCellStyle2.Format = "D";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colAddDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAddDate.HeaderText = "创建日期";
-            this.colAddDate.Name = "colAddDate";
-            this.colAddDate.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
-            // 
             // FrmAccountMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -297,5 +313,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mnu_增加其它收款;
     }
 }

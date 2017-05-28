@@ -125,7 +125,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(paymentID).QueryObject;
                     if (cp != null)
                     {
-                        if (cp.ClassID == CustomerPaymentType.Customer || cp.ClassID == CustomerPaymentType.Supplier)
+                        if (cp.ClassID == CustomerPaymentType.客户收款 || cp.ClassID == CustomerPaymentType.供应商付款)
                         {
                             FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                             frm.IsAdding = false;
@@ -134,7 +134,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             frm.PaymentType = cp.ClassID;
                             frm.ShowDialog();
                         }
-                        else if (cp.ClassID == CustomerPaymentType.CustomerTax || cp.ClassID == CustomerPaymentType.SupplierTax)
+                        else if (cp.ClassID == CustomerPaymentType.客户增值税发票 || cp.ClassID == CustomerPaymentType.供应商增值税发票)
                         {
                             FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
                             frm.IsAdding = false;

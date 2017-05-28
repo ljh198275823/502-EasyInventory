@@ -123,7 +123,7 @@ namespace LJH.Inventory.BLL
         public QueryResultList<CustomerFinancialState> GetAllCustomerStates()
         {
             AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer, CustomerPaymentType.CustomerTax };
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款, CustomerPaymentType.客户增值税发票 };
             cpsc.HasRemain = true;
             var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
 
@@ -142,9 +142,9 @@ namespace LJH.Inventory.BLL
                     {
                         Customer = c,
                         Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.CustomerReceivable ? it.Remain : 0) : 0,
-                        Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.Customer ? it.Remain : 0) : 0,
+                        Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户收款 ? it.Remain : 0) : 0,
                         Tax = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.CustomerTax ? it.Remain : 0) : 0,
-                        TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.CustomerTax ? it.Remain : 0) : 0,
+                        TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户增值税发票 ? it.Remain : 0) : 0,
                     };
                     items.Add(cs);
                 }
@@ -159,7 +159,7 @@ namespace LJH.Inventory.BLL
             if (c == null) return new QueryResult<CustomerFinancialState>(ResultCode.Fail, string.Empty, null);
 
             AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer, CustomerPaymentType.CustomerTax };
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款, CustomerPaymentType.客户增值税发票 };
             cpsc.HasRemain = true;
             cpsc.CustomerID = c.ID;
             var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
@@ -174,9 +174,9 @@ namespace LJH.Inventory.BLL
             {
                 Customer = c,
                 Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.CustomerReceivable ? it.Remain : 0) : 0,
-                Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.Customer ? it.Remain : 0) : 0,
+                Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户收款 ? it.Remain : 0) : 0,
                 Tax = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.CustomerTax ? it.Remain : 0) : 0,
-                TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.CustomerTax ? it.Remain : 0) : 0,
+                TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户增值税发票 ? it.Remain : 0) : 0,
             };
             return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
         }
@@ -184,7 +184,7 @@ namespace LJH.Inventory.BLL
         public QueryResultList<CustomerFinancialState> GetAllSupplierStates()
         {
             AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Supplier, CustomerPaymentType.SupplierTax };
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.供应商付款, CustomerPaymentType.供应商增值税发票 };
             cpsc.HasRemain = true;
             var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
 
@@ -203,9 +203,9 @@ namespace LJH.Inventory.BLL
                     {
                         Customer = c,
                         Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.SupplierReceivable ? it.Remain : 0) : 0,
-                        Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.Supplier ? it.Remain : 0) : 0,
+                        Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.供应商付款 ? it.Remain : 0) : 0,
                         Tax = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.SupplierTax ? it.Remain : 0) : 0,
-                        TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.SupplierTax ? it.Remain : 0) : 0,
+                        TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.供应商增值税发票 ? it.Remain : 0) : 0,
                     };
                     items.Add(cs);
                 }
@@ -220,7 +220,7 @@ namespace LJH.Inventory.BLL
             if (c == null) return new QueryResult<CustomerFinancialState>(ResultCode.Fail, string.Empty, null);
 
             AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Supplier, CustomerPaymentType.SupplierTax };
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.供应商付款, CustomerPaymentType.供应商增值税发票 };
             cpsc.HasRemain = true;
             cpsc.CustomerID = c.ID;
             var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
@@ -235,9 +235,9 @@ namespace LJH.Inventory.BLL
             {
                 Customer = c,
                 Recievables = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.SupplierReceivable ? it.Remain : 0) : 0,
-                Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.Supplier ? it.Remain : 0) : 0,
+                Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.供应商付款 ? it.Remain : 0) : 0,
                 Tax = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.SupplierTax ? it.Remain : 0) : 0,
-                TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.SupplierTax ? it.Remain : 0) : 0,
+                TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.供应商增值税发票 ? it.Remain : 0) : 0,
             };
             return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
         }

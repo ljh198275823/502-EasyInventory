@@ -10,23 +10,15 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public enum CustomerPaymentType
     {
-        /// <summary>
-        /// 客户收款
-        /// </summary>
-        Customer = 1,
-        /// <summary>
-        /// 供应商付款
-        /// </summary>
-        Supplier = 2,
-        /// <summary>
-        /// 开给客户的增值税发票
-        /// </summary>
-        CustomerTax = 3,
-        /// <summary>
-        /// 供应商开给公司的增值税发票
-        /// </summary>
-        SupplierTax = 4,
-
+        未知类型 = 0,
+        客户收款 = 1,
+        供应商付款 = 2,
+        客户增值税发票 = 3,
+        供应商增值税发票 = 4,
         公司管理费用 = 5,
+        其它收款 = 6,
+        账户之间转账 = 7,
+        转账入 = 8,
+        转账出 = 9,
     }
 }

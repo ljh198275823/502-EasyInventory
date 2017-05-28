@@ -387,7 +387,7 @@ namespace LJH.Inventory.BLL
             var ret = new StackOutSheetFinancialState() { ID = sheetID };
 
             AccountRecordSearchCondition con = new AccountRecordSearchCondition();
-            con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer };
+            con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款 };
             con.StackSheetID = item.ID;
             var cps = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             if (cps != null && cps.Count == 1)

@@ -71,9 +71,9 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.InitControls();
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
-            this.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户付款流水" : "供应商付款流水";
-            this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.Customer) ? "客户" : "供应商";
-            lnkAccout.Text = (PaymentType == CustomerPaymentType.Customer) ? "到款账号" : "付款账号";
+            this.Text = (PaymentType == CustomerPaymentType.客户收款) ? "客户付款流水" : "供应商付款流水";
+            this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.客户收款) ? "客户" : "供应商";
+            lnkAccout.Text = (PaymentType == CustomerPaymentType.客户收款) ? "到款账号" : "付款账号";
             if (Amount != 0)
             {
                 txtAmount.DecimalValue = Amount;
@@ -93,7 +93,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             if (Customer == null)
             {
-                MessageBox.Show(PaymentType == CustomerPaymentType.Customer ? "客户不能为空" : "供应商不能为空");
+                MessageBox.Show(PaymentType == CustomerPaymentType.客户收款 ? "客户不能为空" : "供应商不能为空");
                 txtCustomer.Focus();
                 return false;
             }
@@ -107,7 +107,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAmount.Focus();
                 return false;
             }
-            if (PaymentType == CustomerPaymentType.Supplier)
+            if (PaymentType == CustomerPaymentType.供应商付款)
             {
                 decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
                 if (amount < txtAmount.DecimalValue)
@@ -118,7 +118,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             if (string.IsNullOrEmpty(txtPayer.Text))
             {
-                MessageBox.Show("对主账号不能为空");
+                MessageBox.Show("对方账号不能为空");
                 return false;
             }
             return true;
@@ -193,7 +193,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             base.ShowButtonState(this.toolStrip1);
             CustomerPayment cp = UpdatingItem != null ? UpdatingItem as CustomerPayment : null;
 
-            if (PaymentType == CustomerPaymentType.Customer)
+            if (PaymentType == CustomerPaymentType.客户收款)
             {
                 btnSave.Enabled =IsAdding &&  btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
                 AccountRecord ac = null;
@@ -203,7 +203,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
                 btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Nullify);
             }
-            else if (PaymentType == CustomerPaymentType.Supplier)
+            else if (PaymentType == CustomerPaymentType.供应商付款)
             {
                 btnSave.Enabled =IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
                 AccountRecord ac = null;
@@ -226,14 +226,14 @@ namespace LJH.Inventory.UI.Forms.Financial
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            if (PaymentType == CustomerPaymentType.Customer)
+            if (PaymentType == CustomerPaymentType.客户收款)
             {
                 mnu_AttachmentAdd.Enabled = mnu_AttachmentAdd.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.EditAttachment);
                 mnu_AttachmentDelete.Enabled = mnu_AttachmentDelete.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.EditAttachment);
                 mnu_AttachmentOpen.Enabled = mnu_AttachmentOpen.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.ShowAttachment);
                 mnu_AttachmentSaveAs.Enabled = mnu_AttachmentSaveAs.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.ShowAttachment);
             }
-            else if (PaymentType == CustomerPaymentType.Supplier)
+            else if (PaymentType == CustomerPaymentType.供应商付款)
             {
                 mnu_AttachmentAdd.Enabled = mnu_AttachmentAdd.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.EditAttachment);
                 mnu_AttachmentDelete.Enabled = mnu_AttachmentDelete.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.EditAttachment);
@@ -344,7 +344,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmMasterBase frm = null;
-            if (PaymentType == CustomerPaymentType.Customer)
+            if (PaymentType == CustomerPaymentType.客户收款)
             {
                 frm = new FrmCustomerMaster();
             }

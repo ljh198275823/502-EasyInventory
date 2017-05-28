@@ -81,11 +81,11 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         private void ShowOperatorRights()
         {
-            if (PaymentType == CustomerPaymentType.CustomerTax)
+            if (PaymentType == CustomerPaymentType.客户增值税发票)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
             }
-            else if (PaymentType == CustomerPaymentType.SupplierTax)
+            else if (PaymentType == CustomerPaymentType.供应商增值税发票)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
             }

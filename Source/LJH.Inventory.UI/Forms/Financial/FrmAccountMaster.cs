@@ -32,8 +32,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             var cps = from it in _AllAccountRecords where it.AccountID == ac.ID select it;
             foreach (var it in cps)
             {
-                if (it.ClassID == CustomerPaymentType.Customer) ret += it.Amount;
-                else if (it.ClassID == CustomerPaymentType.Supplier || it.ClassID == CustomerPaymentType.公司管理费用) ret -= it.Amount;
+                if (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款) ret += it.Amount;
+                else if (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用) ret -= it.Amount;
             }
             return ret;
         }
@@ -117,5 +117,18 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
+
+        private void mnu_增加其它收款_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var ac = dataGridView1.SelectedRows[0].Tag as Account;
+                Frm其它收款 frm = new Frm其它收款();
+                frm.Account = ac;
+                frm.IsAdding = true;
+                frm.ShowDialog();
+                dataGridView1.SelectedRows[0].Cells["colAmount"].Value = new AccountBLL(AppSettings.Current.ConnStr).GetRemain(ac.ID);
+            }
+        }
     }
 }

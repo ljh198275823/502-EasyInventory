@@ -50,7 +50,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             }
             var con = new AccountRecordSearchCondition();
             con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
-            con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer };
+            con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款 };
             var ps = (new AccountRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
 
             var rcon = new CustomerReceivableSearchCondition();
@@ -151,7 +151,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                             FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                             frm.IsAdding = false;
                             frm.UpdatingItem = sheet;
-                            frm.PaymentType = CustomerPaymentType.Customer;
+                            frm.PaymentType = CustomerPaymentType.客户收款;
                             frm.ShowDialog();
                         }
                     }

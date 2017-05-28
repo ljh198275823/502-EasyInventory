@@ -119,7 +119,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 {
                     View.FrmCustomerPaymentView frm = new View.FrmCustomerPaymentView();
                     frm.Customer = c;
-                    frm.PaymentType = CustomerPaymentType.Supplier;
+                    frm.PaymentType = CustomerPaymentType.供应商付款;
                     frm.Text = string.Format("{0} 付款流水明细", c.Name);
                     frm.ShowDialog();
                 }
@@ -135,7 +135,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 {
                     View.FrmCustomerTaxBillView frm = new View.FrmCustomerTaxBillView();
                     frm.Customer = c;
-                    frm.PaymentType = CustomerPaymentType.SupplierTax;
+                    frm.PaymentType = CustomerPaymentType.供应商增值税发票;
                     frm.Text = string.Format("{0} 已开增值税发票明细", c.Name);
                     frm.ShowDialog();
                 }
@@ -152,7 +152,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
                 FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                 frm.Customer = customer;
-                frm.PaymentType = CustomerPaymentType.Supplier;
+                frm.PaymentType = CustomerPaymentType.供应商付款;
                 frm.IsAdding = true;
                 frm.ShowDialog();
                 var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetSupplierState(customer.ID).QueryObject;
@@ -197,7 +197,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
                 FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
                 frm.Customer = customer;
-                frm.TaxType = CustomerPaymentType.SupplierTax;
+                frm.TaxType = CustomerPaymentType.供应商增值税发票;
                 frm.IsAdding = true;
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();

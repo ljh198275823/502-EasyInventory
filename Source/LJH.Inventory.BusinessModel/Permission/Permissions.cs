@@ -137,12 +137,22 @@ namespace LJH.Inventory.BusinessModel
         /// 公司管理费用
         /// </summary>
         [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "公司管理费用")]
-        ExpenditureRecord = 250,
+        ExpenditureRecord,
         /// <summary>
         /// 账号管理
         /// </summary>
         [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "账号管理")]
-        Account = 251,
+        Account,
+        /// <summary>
+        /// 其它收款
+        /// </summary>
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "其它收款")]
+        其它收款,
+        /// <summary>
+        /// 其它收款
+        /// </summary>
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "转账")]
+        转账,
         #endregion
 
         #region 查询与报表

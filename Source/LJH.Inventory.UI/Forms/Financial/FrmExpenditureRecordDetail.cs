@@ -60,6 +60,10 @@ namespace LJH.Inventory.UI.Forms.Financial
             dtSheetDate.Value = DateTime.Today;
             this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
             this.txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
+            if (IsForView)
+            {
+                toolStrip1.Enabled = false;
+            }
         }
 
         protected override void ItemShowing()

@@ -288,7 +288,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return;
             }
             Financial.FrmCustomerPaymentDetail frm = new Financial.FrmCustomerPaymentDetail();
-            frm.PaymentType = CustomerPaymentType.Customer;
+            frm.PaymentType = CustomerPaymentType.客户收款;
             frm.Customer = (txtCustomer.Tag as CompanyInfo);
             frm.StackSheetID = sheet.ID;
             frm.Amount = sheet.Amount;

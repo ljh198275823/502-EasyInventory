@@ -21,7 +21,7 @@ namespace LJH.Inventory.BLL
         #region 私有方法
         private string CreateCustomerID()
         {
-            string  id = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("BNK", 3, "Account");
+            string id = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("BNK", 3, "Account");
             return id;
         }
         #endregion
@@ -48,7 +48,7 @@ namespace LJH.Inventory.BLL
             CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
             con.AccountID = info.ID;
             var sheets = (new CustomerPaymentBLL(RepoUri)).GetItems(con).QueryObjects;
-            if (sheets != null && sheets.Count >0) 
+            if (sheets != null && sheets.Count > 0)
             {
                 return new CommandResult(ResultCode.Fail, string.Format("不能删除账户 {0} 的资料，系统中已经存在此账号的收付款流水", info.Name));
             }
@@ -66,8 +66,8 @@ namespace LJH.Inventory.BLL
             {
                 foreach (var it in cps)
                 {
-                    if (it.ClassID == CustomerPaymentType.Customer) ret += it.Amount;
-                    else if (it.ClassID == CustomerPaymentType.Supplier || it.ClassID == CustomerPaymentType.公司管理费用) ret -= it.Amount;
+                    if (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款) ret += it.Amount;
+                    else if (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用) ret -= it.Amount;
                 }
             }
             return ret;

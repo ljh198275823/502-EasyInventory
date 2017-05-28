@@ -167,7 +167,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
 
             AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.Customer };
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款 };
             cpsc.HasRemain = true;
             _AllPayments = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(cpsc).QueryObjects;
 
@@ -210,7 +210,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     if (_AllPayments != null)
                     {
-                        var cr = _AllPayments.Where(it => it.StackSheetID == sheet.ID && it.ClassID == CustomerPaymentType.Customer);
+                        var cr = _AllPayments.Where(it => it.StackSheetID == sheet.ID && it.ClassID == CustomerPaymentType.客户收款);
                         row.Cells["colPaid"].Value = cr.Sum(it => it.Remain);
                         row.Cells["colNotPaid"].Value = sheet.Amount - cr.Sum(it => it.Remain);
                     }
