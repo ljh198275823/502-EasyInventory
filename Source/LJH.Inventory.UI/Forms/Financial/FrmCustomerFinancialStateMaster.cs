@@ -126,6 +126,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colReceivable"].Value = cs.Recievables;
             row.Cells["colTax"].Value = cs.Tax;
             row.Cells["colTaxBill"].Value = cs.TaxBill;
+            row.Cells["col对公已付金额"].Value = cs.对公已付金额;
+            row.Cells["col发票已核销对公已付金额"].Value = cs.发票已核销对公已付金额;
             row.Cells["colPhone"].Value = cs.Customer.TelPhone;
             if (cs.Customer.DefaultLinker != null)
             {

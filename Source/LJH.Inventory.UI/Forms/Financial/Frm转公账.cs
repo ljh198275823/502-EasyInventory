@@ -128,7 +128,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (UpdatingItem == null)
             {
                 info = new CustomerPayment();
-                info.ClassID = CustomerPaymentType.账户之间转账;
+                info.ClassID = CustomerPaymentType.转公账;
                 info.ID = txtID.Text == _AutoCreate ? string.Empty : txtID.Text.Trim();
             }
             else

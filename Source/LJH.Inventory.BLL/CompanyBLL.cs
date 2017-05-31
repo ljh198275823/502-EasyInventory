@@ -123,12 +123,12 @@ namespace LJH.Inventory.BLL
         public QueryResultList<CustomerFinancialState> GetAllCustomerStates()
         {
             AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款, CustomerPaymentType.客户增值税发票 };
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款, CustomerPaymentType.客户增值税发票, CustomerPaymentType.公账 };
             cpsc.HasRemain = true;
             var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
-            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable, CustomerReceivableType.CustomerTax };
+            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable, CustomerReceivableType.CustomerTax, CustomerReceivableType.公账应收款 };
             crsc.Settled = false;
             var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
 
@@ -145,6 +145,8 @@ namespace LJH.Inventory.BLL
                         Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户收款 ? it.Remain : 0) : 0,
                         Tax = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.CustomerTax ? it.Remain : 0) : 0,
                         TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户增值税发票 ? it.Remain : 0) : 0,
+                        对公已付金额 = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.公账 ? it.Remain : 0) : 0,
+                        发票已核销对公已付金额 = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.公账应收款 ? it.Remain : 0) : 0,
                     };
                     items.Add(cs);
                 }
@@ -159,13 +161,13 @@ namespace LJH.Inventory.BLL
             if (c == null) return new QueryResult<CustomerFinancialState>(ResultCode.Fail, string.Empty, null);
 
             AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
-            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款, CustomerPaymentType.客户增值税发票 };
+            cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款, CustomerPaymentType.客户增值税发票, CustomerPaymentType.公账 };
             cpsc.HasRemain = true;
             cpsc.CustomerID = c.ID;
             var customerPayments = (new AccountRecordBLL(RepoUri)).GetItems(cpsc).QueryObjects;
 
             CustomerReceivableSearchCondition crsc = new CustomerReceivableSearchCondition();
-            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable, CustomerReceivableType.CustomerTax };
+            crsc.ReceivableTypes = new List<CustomerReceivableType>() { CustomerReceivableType.CustomerReceivable, CustomerReceivableType.CustomerTax, CustomerReceivableType.公账应收款 };
             crsc.Settled = false;
             crsc.CustomerID = c.ID;
             var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
@@ -177,6 +179,8 @@ namespace LJH.Inventory.BLL
                 Prepay = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户收款 ? it.Remain : 0) : 0,
                 Tax = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.CustomerTax ? it.Remain : 0) : 0,
                 TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户增值税发票 ? it.Remain : 0) : 0,
+                对公已付金额 = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.公账 ? it.Remain : 0) : 0,
+                发票已核销对公已付金额 = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.公账应收款 ? it.Remain : 0) : 0,
             };
             return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
         }

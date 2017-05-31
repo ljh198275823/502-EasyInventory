@@ -17,7 +17,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 客户应开增值税发票
         /// </summary>
-        CustomerTax =2,
+        CustomerTax = 2,
         /// <summary>
         /// 供应商应付款
         /// </summary>
@@ -25,6 +25,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 供应商应开增值税发票
         /// </summary>
-        SupplierTax=4,
+        SupplierTax = 4,
+        公账应收款 = 5,
     }
 }

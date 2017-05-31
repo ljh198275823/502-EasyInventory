@@ -36,26 +36,140 @@ namespace LJH.Inventory.BLL
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("收", "yyMM", 3, info.DocumentType);
             }
+            else if (info.ClassID == CustomerPaymentType.转公账)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("转", "yyMM", 3, info.DocumentType);
+            }
             return info.ID;
         }
 
         protected override void DoAdd(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoAdd(info, unitWork, dt, opt);
-            AccountRecord ar = new AccountRecord()
+            if (info.ClassID == CustomerPaymentType.转公账)
             {
-                ID = Guid.NewGuid(),
-                ClassID = info.ClassID,
-                SheetID = info.ID,
-                CustomerID = info.CustomerID,
-                CreateDate = info.SheetDate,
-                StackSheetID = info.StackSheetID,
-                AccountID = info.AccountID,
-                Amount = info.Amount,
-                OtherAccount = info.Payer,
-                Memo = info.Memo
-            };
-            ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+                AccountRecord ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = CustomerPaymentType.公账,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = info.SheetDate,
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+
+                ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = CustomerPaymentType.转账入,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = info.SheetDate,
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+
+                ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = CustomerPaymentType.转账出,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = info.SheetDate,
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.Payer,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+            }
+            else if (info.ClassID == CustomerPaymentType.客户收款 && info.PaymentMode == PaymentMode.公账)
+            {
+                AccountRecord ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = info.ClassID,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = info.SheetDate,
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+
+                ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = CustomerPaymentType.公账,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = info.SheetDate,
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+            }
+            else if (info.ClassID == CustomerPaymentType.客户增值税发票)
+            {
+                AccountRecord ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = info.ClassID,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = info.SheetDate,
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+                CustomerReceivable cr = new CustomerReceivable()
+                {
+                    ID =Guid.NewGuid (),
+                    ClassID =CustomerReceivableType .公账应收款 ,
+                    CustomerID=info.CustomerID ,
+                    CreateDate=info.SheetDate ,
+                    SheetID =info.ID ,
+                    Amount =info.Amount ,
+                    Memo=info.Memo ,
+                };
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+            }
+            else
+            {
+                AccountRecord ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = info.ClassID,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = info.SheetDate,
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+            }
         }
 
         protected override void DoUpdate(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)

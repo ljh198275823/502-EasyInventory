@@ -115,7 +115,7 @@ namespace LJH.Inventory.BusinessModel
                         return "供应商增值税发票";
                     case CustomerPaymentType.其它收款:
                         return "其它收款";
-                    case CustomerPaymentType.账户之间转账 :
+                    case CustomerPaymentType.转公账 :
                         return "账户转账";
                     default:
                         throw new Exception("客户付款单没有指定类型");
