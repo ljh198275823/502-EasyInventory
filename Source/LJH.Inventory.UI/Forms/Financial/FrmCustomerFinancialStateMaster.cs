@@ -192,6 +192,15 @@ namespace LJH.Inventory.UI.Forms.Financial
                     frm.Text = string.Format("{0} 已开增值税发票明细", c.Name);
                     frm.ShowDialog();
                 }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "col对公已付金额")
+                {
+                    View.Frm公账已付金额明细 frm = new View.Frm公账已付金额明细();
+                    frm.Customer = c;
+                    frm.ShowDialog();
+                }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "col发票已核销对公已付金额")
+                {
+                }
                 //刷新数据
                 var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(c.ID).QueryObject;
                 if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);

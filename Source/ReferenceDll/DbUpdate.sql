@@ -182,6 +182,12 @@ BEGIN
 end
 go
 
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Note' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
+BEGIN
+	exec ('alter table CustomerPayment add Note nvarchar(512) null')
+end
+go
+
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AccountRecord]') AND type in (N'U'))
 BEGIN
 	CREATE TABLE [dbo].[AccountRecord](
@@ -195,6 +201,7 @@ BEGIN
 	[CustomerID] [nvarchar](50) NULL,
 	[StackSheetID] [nvarchar](50) NULL,
 	[OtherAccount] [nvarchar](50) NULL,
+	[Note] [nvarchar](512) NULL,
 	[Memo] [nvarchar](200) NULL,
 	 CONSTRAINT [PK_AccountRecord] PRIMARY KEY CLUSTERED 
 	(
@@ -226,6 +233,12 @@ go
 if exists (SELECT * FROM dbo.syscolumns WHERE name ='State' AND id = OBJECT_ID(N'[dbo].[CustomerReceivable]'))
 BEGIN
 	exec ('alter table CustomerReceivable drop column state')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Note' AND id = OBJECT_ID(N'[dbo].[CustomerReceivable]'))
+BEGIN
+	exec ('alter table CustomerReceivable add Note nvarchar(512)')
 end
 go
 

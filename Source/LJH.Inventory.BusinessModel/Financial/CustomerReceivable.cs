@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace LJH.Inventory.BusinessModel
 {
@@ -53,6 +54,54 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置备注信息
         /// </summary>
         public string Memo { get; set; }
+        #endregion
+
+        #region 扩展属性
+        /// <summary>
+        /// 获取或设置扩展属性
+        /// </summary>
+        public string Note
+        {
+            get
+            {
+                try
+                {
+                    if (_Externals == null) return null;
+                    return JsonConvert.SerializeObject(_Externals);
+                }
+                catch
+                {
+                }
+                return null;
+            }
+            set
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(value)) _Externals = null;
+                    else _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(value);
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private Dictionary<string, string> _Externals = null;
+
+        public string GetProperty(string key)
+        {
+            if (_Externals == null) return null;
+            if (_Externals.ContainsKey(key)) return _Externals[key];
+            return null;
+
+        }
+
+        public void SetProperty(string key, string value)
+        {
+            if (_Externals == null) _Externals = new Dictionary<string, string>();
+            _Externals[key] = value;
+        }
         #endregion
 
         #region 只读属性

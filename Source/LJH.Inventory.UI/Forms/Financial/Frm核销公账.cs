@@ -16,9 +16,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmPaymentAssign : Form
+    public partial class Frm核销公账 : Form
     {
-        public FrmPaymentAssign()
+        public Frm核销公账()
         {
             InitializeComponent();
         }
@@ -74,12 +74,12 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             row.Tag = cr;
             row.Cells["colSheetID"].Value = cr.SheetID;
-            row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
-            row.Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
             row.Cells["colRemain"].Value = cr.Remain;
             row.Cells["colAssign"].Value = 0;
             row.Cells["colCheck"].Value = "全部核销";
+            row.Cells["col开票单位"].Value = cr.GetProperty("开票单位");
+            row.Cells["col出票公司"].Value = cr.GetProperty("出票公司");
             row.Cells["colMemo"].Value = cr.Memo;
         }
 

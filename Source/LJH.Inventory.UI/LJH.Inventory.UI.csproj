@@ -112,6 +112,12 @@
     <Compile Include="Forms\Financial\Frm其它收款.designer.cs">
       <DependentUpon>Frm其它收款.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\Frm核销公账.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Frm核销公账.designer.cs">
+      <DependentUpon>Frm核销公账.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\Report\FrmCustomerPaymentReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,12 @@
     </Compile>
     <Compile Include="Forms\Financial\View\FrmCustomerTaxView.designer.cs">
       <DependentUpon>FrmCustomerTaxView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Financial\View\Frm公账已付金额明细.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\View\Frm公账已付金额明细.designer.cs">
+      <DependentUpon>Frm公账已付金额明细.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmAboat.cs">
       <SubType>Form</SubType>
@@ -673,6 +685,9 @@
     <EmbeddedResource Include="Forms\Financial\Frm其它收款.resx">
       <DependentUpon>Frm其它收款.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Frm核销公账.resx">
+      <DependentUpon>Frm核销公账.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Report\FrmCustomerPaymentReport.resx">
       <DependentUpon>FrmCustomerPaymentReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -699,6 +714,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\View\FrmCustomerTaxView.resx">
       <DependentUpon>FrmCustomerTaxView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\View\Frm公账已付金额明细.resx">
+      <DependentUpon>Frm公账已付金额明细.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAboat.resx">
       <DependentUpon>FrmAboat.cs</DependentUpon>
