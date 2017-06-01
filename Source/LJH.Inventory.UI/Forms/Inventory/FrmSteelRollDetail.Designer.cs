@@ -74,6 +74,7 @@
             this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.label15 = new System.Windows.Forms.Label();
             this.txtOrderID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.btnOk1 = new System.Windows.Forms.Button();
             this.pnlTax.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,9 +86,10 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(254, 405);
+            this.btnOk.Location = new System.Drawing.Point(21, 405);
             this.btnOk.Size = new System.Drawing.Size(107, 35);
             this.btnOk.TabIndex = 20;
+            this.btnOk.Visible = false;
             // 
             // label14
             // 
@@ -583,11 +585,23 @@
             this.txtOrderID.Size = new System.Drawing.Size(145, 21);
             this.txtOrderID.TabIndex = 143;
             // 
+            // btnOk1
+            // 
+            this.btnOk1.Location = new System.Drawing.Point(232, 405);
+            this.btnOk1.Name = "btnOk1";
+            this.btnOk1.Size = new System.Drawing.Size(126, 35);
+            this.btnOk1.TabIndex = 145;
+            this.btnOk1.Text = "确定(&O)";
+            this.btnOk1.UseVisualStyleBackColor = true;
+            this.btnOk1.Click += new System.EventHandler(this.btnOk1_Click);
+            // 
             // FrmSteelRollDetail
             // 
+            this.AcceptButton = this.btnOk1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 461);
+            this.Controls.Add(this.btnOk1);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.txtOrderID);
             this.Controls.Add(this.txtCarPlate);
@@ -678,6 +692,7 @@
             this.Controls.SetChildIndex(this.txtCarPlate, 0);
             this.Controls.SetChildIndex(this.txtOrderID, 0);
             this.Controls.SetChildIndex(this.label15, 0);
+            this.Controls.SetChildIndex(this.btnOk1, 0);
             this.pnlTax.ResumeLayout(false);
             this.pnlTax.PerformLayout();
             this.ResumeLayout(false);
@@ -732,5 +747,6 @@
         private Controls.CarplateComboBox txtCarPlate;
         private System.Windows.Forms.Label label15;
         private GeneralLibrary.WinformControl.DBCTextBox txtOrderID;
+        private System.Windows.Forms.Button btnOk1;
     }
 }

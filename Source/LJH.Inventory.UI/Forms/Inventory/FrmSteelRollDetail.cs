@@ -99,7 +99,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultWarehouse))
                 {
                     List<WareHouse> ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-                    var w = ws.FirstOrDefault(it => it.Name == UserSettings .Current .DefaultWarehouse );
+                    var w = ws.FirstOrDefault(it => it.Name == UserSettings.Current.DefaultWarehouse);
                     if (w != null)
                     {
                         txtWareHouse.Text = w.Name;
@@ -109,7 +109,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultProductCategory))
                 {
                     List<ProductCategory> cs = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-                    var c = cs.FirstOrDefault(it => it.Name ==UserSettings .Current .DefaultProductCategory );
+                    var c = cs.FirstOrDefault(it => it.Name == UserSettings.Current.DefaultProductCategory);
                     if (c != null)
                     {
                         txtCategory.Text = c.Name;
@@ -256,7 +256,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                CompanyInfo s=frm.SelectedItem as CompanyInfo;
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
                 txtSupplier.Text = s.Name;
                 txtSupplier.Tag = s;
             }
@@ -309,5 +309,45 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtLength.DecimalValue = txtOriginalLength.DecimalValue;
         }
         #endregion
+
+        private void btnOk1_Click(object sender, EventArgs e)
+        {
+            if (!CheckInput()) return;
+            object item = GetItemFromInput();
+            CommandResult ret = null;
+            if (IsAdding)
+            {
+                ret = AddItem(item);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    OnItemAdded(new ItemAddedEventArgs(item));
+                    txtOriginalWeight.DecimalValue = 0;
+                    txtWeight.DecimalValue = 0;
+                    if (txtOriginalLength.DecimalValue > 0) txtOriginalLength.DecimalValue = 0;
+                    if (txtLength.DecimalValue > 0) txtLength.DecimalValue = 0;
+                    cmbSpecification.Specification = null;
+                    IsAdding = true;
+                    cmbSpecification.Focus();
+                    //this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                ret = UpdateItem(item);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    OnItemUpdated(new ItemUpdatedEventArgs(item));
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

@@ -46,6 +46,7 @@ namespace LJH.Inventory.BLL
         protected override void DoAdd(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoAdd(info, unitWork, dt, opt);
+            DateTime now = DateTime.Now;
             if (info.ClassID == CustomerPaymentType.转公账)
             {
                 AccountRecord ar = new AccountRecord()
@@ -54,7 +55,7 @@ namespace LJH.Inventory.BLL
                     ClassID = CustomerPaymentType.公账,
                     SheetID = info.ID,
                     CustomerID = info.CustomerID,
-                    CreateDate = info.SheetDate,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                     StackSheetID = info.StackSheetID,
                     AccountID = info.AccountID,
                     Amount = info.Amount,
@@ -69,7 +70,7 @@ namespace LJH.Inventory.BLL
                     ClassID = CustomerPaymentType.转账入,
                     SheetID = info.ID,
                     CustomerID = info.CustomerID,
-                    CreateDate = info.SheetDate,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                     StackSheetID = info.StackSheetID,
                     AccountID = info.AccountID,
                     Amount = info.Amount,
@@ -84,7 +85,7 @@ namespace LJH.Inventory.BLL
                     ClassID = CustomerPaymentType.转账出,
                     SheetID = info.ID,
                     CustomerID = info.CustomerID,
-                    CreateDate = info.SheetDate,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                     StackSheetID = info.StackSheetID,
                     AccountID = info.Payer,
                     Amount = info.Amount,
@@ -101,7 +102,7 @@ namespace LJH.Inventory.BLL
                     ClassID = info.ClassID,
                     SheetID = info.ID,
                     CustomerID = info.CustomerID,
-                    CreateDate = info.SheetDate,
+                     CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                     StackSheetID = info.StackSheetID,
                     AccountID = info.AccountID,
                     Amount = info.Amount,
@@ -116,7 +117,7 @@ namespace LJH.Inventory.BLL
                     ClassID = CustomerPaymentType.公账,
                     SheetID = info.ID,
                     CustomerID = info.CustomerID,
-                    CreateDate = info.SheetDate,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                     StackSheetID = info.StackSheetID,
                     AccountID = info.AccountID,
                     Amount = info.Amount,
@@ -133,7 +134,7 @@ namespace LJH.Inventory.BLL
                     ClassID = info.ClassID,
                     SheetID = info.ID,
                     CustomerID = info.CustomerID,
-                    CreateDate = info.SheetDate,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                     StackSheetID = info.StackSheetID,
                     AccountID = info.AccountID,
                     Amount = info.Amount,
@@ -148,7 +149,7 @@ namespace LJH.Inventory.BLL
                         ID = Guid.NewGuid(),
                         ClassID = CustomerReceivableType.公账应收款,
                         CustomerID = info.CustomerID,
-                        CreateDate = info.SheetDate,
+                        CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                         SheetID = info.ID,
                         Amount = info.Amount,
                         Memo = info.Memo,
@@ -166,7 +167,7 @@ namespace LJH.Inventory.BLL
                     ClassID = info.ClassID,
                     SheetID = info.ID,
                     CustomerID = info.CustomerID,
-                    CreateDate = info.SheetDate,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                     StackSheetID = info.StackSheetID,
                     AccountID = info.AccountID,
                     Amount = info.Amount,

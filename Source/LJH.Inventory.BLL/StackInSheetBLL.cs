@@ -59,7 +59,7 @@ namespace LJH.Inventory.BLL
                     cr = new CustomerReceivable()
                     {
                         ID = Guid.NewGuid(),
-                        CreateDate = dt,
+                        CreateDate = new DateTime(sheet.SheetDate.Year, sheet.SheetDate.Month, sheet.SheetDate.Day, dt.Hour, dt.Minute, dt.Second),
                         ClassID = CustomerReceivableType.SupplierReceivable,
                         CustomerID = sheet.SupplierID,
                         SheetID = sheet.ID,

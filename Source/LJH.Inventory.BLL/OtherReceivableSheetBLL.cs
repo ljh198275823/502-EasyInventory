@@ -48,7 +48,7 @@ namespace LJH.Inventory.BLL
                 ID = Guid.NewGuid(),
                 SheetID = info.ID,
                 ClassID = info.ClassID,
-                CreateDate = DateTime.Now,
+                CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, dt.Hour, dt.Minute, dt.Second),
                 Amount = info.Amount,
                 CustomerID = info.CustomerID,
                 Memo = info.Memo

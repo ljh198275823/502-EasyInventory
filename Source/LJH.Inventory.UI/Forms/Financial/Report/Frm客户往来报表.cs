@@ -17,7 +17,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         }
 
         private decimal _balance = 0;
-        private List<Account> _AllAccounts =null;
+        private List<Account> _AllAccounts = null;
 
         public CompanyInfo Customer { get; set; }
 
@@ -26,9 +26,9 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             客户往来项 cp = item as 客户往来项;
             row.Tag = cp;
-            row.Cells["colSheetDate"].Value = cp.DT;
+            row.Cells["colSheetDate"].Value = cp.Name;
             row.Cells["colSheetID"].Value = cp.单据编号;
-            if (cp.出货 != 0 && !string.IsNullOrEmpty (cp.单据编号)) row.Cells["col出货"].Value = cp.出货;
+            if (cp.出货 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col出货"].Value = cp.出货;
             if (cp.收入 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col收入"].Value = cp.收入;
             _balance += cp.出货 - cp.收入;
             row.Cells["col余额"].Value = _balance;
@@ -60,19 +60,19 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
 
             List<客户往来项> ret = new List<客户往来项>();
             var first = new 客户往来项();
-            first.DT = "上期结余";
+            first.Name = "上期结余";
             first.出货 = rs.Sum(it => it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.收入 = ps.Sum(it => it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             //ret.Add(first);
             ret.AddRange(from it in rs
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
-                         select new 客户往来项() { DT = it.CreateDate.ToString("yyyy-MM-dd"), 单据编号 = it.SheetID, 出货 = it.Amount, Memo = it.Memo });
+                         select new 客户往来项() { Name = it.CreateDate.ToString("yyyy-MM-dd"), CreateDate = it.CreateDate, 单据编号 = it.SheetID, 出货 = it.Amount, Memo = it.Memo });
 
             ret.AddRange(from it in ps
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
-                         select new 客户往来项() { DT = it.CreateDate.ToString("yyyy-MM-dd"), 单据编号 = it.SheetID, 收入 = it.Amount, 到款账号 = it.AccountID, 付款单位 = it.OtherAccount, Memo = it.Memo });
+                         select new 客户往来项() { Name = it.CreateDate.ToString("yyyy-MM-dd"), CreateDate = it.CreateDate, 单据编号 = it.SheetID, 收入 = it.Amount, 到款账号 = it.AccountID, 付款单位 = it.OtherAccount, Memo = it.Memo });
             ret = (from it in ret
-                   orderby it.DT ascending
+                   orderby it.CreateDate ascending
                    select it).ToList();
             ret.Insert(0, first);
             return ret.Select(it => (object)it).ToList();
@@ -163,7 +163,9 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
 
     internal class 客户往来项
     {
-        public string DT { get; set; }
+        public string Name { get; set; }
+
+        public DateTime CreateDate { get; set; }
 
         public string 单据编号 { get; set; }
 

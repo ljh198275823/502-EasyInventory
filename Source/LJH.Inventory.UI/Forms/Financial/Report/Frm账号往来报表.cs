@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             账户往来项 cp = item as 账户往来项;
             row.Tag = cp;
-            row.Cells["colSheetDate"].Value = cp.DT;
+            row.Cells["colSheetDate"].Value = cp.Name;
             row.Cells["colSheetID"].Value = cp.单据编号;
             if (cp.收入 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col收入"].Value = cp.收入;
             if (cp.支出 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col支出"].Value = cp.支出;
@@ -59,7 +59,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
 
             List<账户往来项> ret = new List<账户往来项>();
             var first = new 账户往来项();
-            first.DT = "上期结余";
+            first.Name = "上期结余";
             first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.客户收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.其它收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.转账入 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
@@ -71,7 +71,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
                          select new 账户往来项()
                          {
-                             DT = it.CreateDate.ToString("yyyy-MM-dd"),
+                             Name = it.CreateDate.ToString("yyyy-MM-dd"),
+                             CreateDate = it.CreateDate,
                              单据编号 = it.SheetID,
                              PaymentType = it.ClassID,
                              收入 = it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 ? it.Amount : 0,
@@ -80,7 +81,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                              Memo = it.Memo
                          });
             ret = (from it in ret
-                   orderby it.DT ascending
+                   orderby it.CreateDate ascending
                    where it.收入 != 0 || it.支出 != 0
                    select it).ToList();
             ret.Insert(0, first);
@@ -174,7 +175,9 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
 
     internal class 账户往来项
     {
-        public string DT { get; set; }
+        public string Name { get; set; }
+
+        public DateTime CreateDate { get; set; }
 
         public CustomerPaymentType PaymentType { get; set; }
 

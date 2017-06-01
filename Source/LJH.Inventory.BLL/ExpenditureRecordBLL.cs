@@ -29,12 +29,13 @@ namespace LJH.Inventory.BLL
         protected override void DoAdd(ExpenditureRecord info, IUnitWork unitWork, DateTime dt, string opt)
         {
             base.DoAdd(info, unitWork, dt, opt);
+            DateTime now = DateTime.Now;
             AccountRecord ar = new AccountRecord()
             {
                 ID = Guid.NewGuid(),
                 ClassID = CustomerPaymentType.公司管理费用,
                 SheetID = info.ID,
-                CreateDate = info.SheetDate,
+                CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                 StackSheetID = info.OrderID,
                 AccountID = info.AccountID,
                 Amount = info.Amount,

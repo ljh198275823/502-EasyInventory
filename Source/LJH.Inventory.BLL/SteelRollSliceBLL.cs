@@ -149,8 +149,9 @@ namespace LJH.Inventory.BLL
                     var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(info.Supplier).QueryObject;
                     if (s != null)
                     {
-                        AddReceivables(info, info.AddDate, unitWork);
-                        if (info.WithTax.HasValue && info.WithTax.Value) AddTax(info, info.AddDate, unitWork);
+                        DateTime dt = DateTime.Now;
+                        AddReceivables(info, new DateTime(info.AddDate.Year, info.AddDate.Month, info.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (info.WithTax.HasValue && info.WithTax.Value) AddTax(info, new DateTime(info.AddDate.Year, info.AddDate.Month, info.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
                     }
                 }
                 return unitWork.Commit();

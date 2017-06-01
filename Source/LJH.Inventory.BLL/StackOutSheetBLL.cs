@@ -265,11 +265,10 @@ namespace LJH.Inventory.BLL
                 piClone.State = ProductInventoryState.Shipped;
                 provider.Update(piClone, pi, unitWork);
             }
-
             if (info.ClassID == StackOutSheetType.DeliverySheet)
             {
-                AddReceivables(info, dt, unitWork);         //类型为送货单的出库单出货时增加应收
-                if (info.WithTax) AddTax(info, dt, unitWork); //含税时需要增加应开增值税发票
+                AddReceivables(info, new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);         //类型为送货单的出库单出货时增加应收
+                if (info.WithTax) AddTax(info, new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork); //含税时需要增加应开增值税发票
             }
         }
 
