@@ -67,6 +67,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             this.Text = (TaxType == CustomerPaymentType.客户增值税发票) ? "客户增值税" : "供应商增值税";
             this.lnkCustomer.Text = (TaxType == CustomerPaymentType.客户增值税发票) ? "客户" : "供应商";
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            if (IsForView) toolStrip1.Enabled = false;
         }
 
         protected override bool CheckInput()
@@ -95,6 +96,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 this.txtID.Enabled = false;
                 dtSheetDate.Value = item.SheetDate;
                 txtAmount.DecimalValue = item.Amount;
+                chk只用于核销私账.Checked = item.PaymentMode == PaymentMode.私账;
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
                 txtAccount.Text = item.AccountID;
@@ -124,6 +126,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.AccountID = txtAccount.Text;
             info.Payer = txtPayer.Text;
             info.Amount = txtAmount.DecimalValue;
+            info.PaymentMode = chk只用于核销私账.Checked ? PaymentMode.公账 : PaymentMode.私账;
             info.CustomerID = Customer != null ? Customer.ID : null;
             info.Memo = txtMemo.Text;
             return info;
@@ -147,9 +150,9 @@ namespace LJH.Inventory.UI.Forms.Financial
             CustomerPayment cp = UpdatingItem != null ? UpdatingItem as CustomerPayment : null;
             if (TaxType == CustomerPaymentType.客户增值税发票)
             {
-                btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
-                AccountRecord  ac = null;
-                if(cp!=null)ac=new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
+                AccountRecord ac = null;
+                if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.Customer, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.UndoApprove);
@@ -157,7 +160,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             else if (TaxType == CustomerPaymentType.供应商增值税发票)
             {
-                btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
+                btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
                 AccountRecord ac = null;
                 if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;

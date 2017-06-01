@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -77,6 +77,7 @@
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnAssign = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
+            this.chk只用于核销私账 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -179,6 +180,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chk只用于核销私账);
             this.tabPage1.Controls.Add(this.txtPayer);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txtAccount);
@@ -322,8 +324,8 @@
             // 
             // colAssign
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAssign.HeaderText = "抵消金额";
             this.colAssign.Name = "colAssign";
             // 
@@ -574,6 +576,17 @@
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
+            // chk只用于核销私账
+            // 
+            this.chk只用于核销私账.AutoSize = true;
+            this.chk只用于核销私账.ForeColor = System.Drawing.Color.Red;
+            this.chk只用于核销私账.Location = new System.Drawing.Point(376, 79);
+            this.chk只用于核销私账.Name = "chk只用于核销私账";
+            this.chk只用于核销私账.Size = new System.Drawing.Size(108, 16);
+            this.chk只用于核销私账.TabIndex = 107;
+            this.chk只用于核销私账.Text = "只用于核销私账";
+            this.chk只用于核销私账.UseVisualStyleBackColor = true;
+            // 
             // FrmCustomerTaxBillDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -654,5 +667,6 @@
         private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.DBCTextBox txtAccount;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chk只用于核销私账;
     }
 }

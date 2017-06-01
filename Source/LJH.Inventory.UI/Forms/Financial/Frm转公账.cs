@@ -29,33 +29,6 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 私有方法
-        private void ShowAssigns()
-        {
-            ItemsGrid.Rows.Clear();
-            if (UpdatingItem == null) return;
-            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
-            if (assigns != null && assigns.Count > 0)
-            {
-                CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-                con.ReceivableIDS = assigns.Select(it => it.ReceivableID).ToList();
-                List<CustomerReceivable> crs = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-                if (crs != null && crs.Count > 0)
-                {
-                    foreach (AccountRecordAssign assign in assigns)
-                    {
-                        CustomerReceivable cr = crs.FirstOrDefault(it => it.ID == assign.ReceivableID);
-                        int row = ItemsGrid.Rows.Add();
-                        ItemsGrid.Rows[row].Tag = assign;
-                        ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
-                        ItemsGrid.Rows[row].Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
-                        ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount.Trim();
-                    }
-                }
-                int rowTotal = ItemsGrid.Rows.Add();
-                ItemsGrid.Rows[rowTotal].Cells["colSheetID"].Value = "合计";
-                ItemsGrid.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(item => item.Amount).Trim();
-            }
-        }
         #endregion
 
         #region 重写基类方法
@@ -66,9 +39,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (IsForView)
             {
                 toolStrip1.Enabled = false;
-                ItemsGrid.ReadOnly = true;
-                ItemsGrid.ContextMenu = null;
-                ItemsGrid.ContextMenuStrip = null;
             }
         }
 
@@ -89,6 +59,15 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("金额不正确,不能小于零");
                 txtAmount.Focus();
                 return false;
+            }
+            if (txtPayer.Tag != null)
+            {
+                decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtPayer.Tag as Account).ID);
+                if (amount < txtAmount.DecimalValue)
+                {
+                    MessageBox.Show("此账号余额不足");
+                    return false;
+                }
             }
             if (txtPayer.Tag == null)
             {
@@ -115,7 +94,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAccount.Text = ac != null ? ac.Name : string.Empty;
                 txtAccount.Tag = ac;
                 txtMemo.Text = item.Memo;
-                ShowAssigns();
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
                 ShowButtonState();
@@ -164,7 +142,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.转账, PermissionActions.Edit);
             AccountRecord ac = null;
             if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, CustomerPaymentType.转账入).QueryObject;
-            btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
             btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.转账, PermissionActions.Approve);
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.转账, PermissionActions.UndoApprove);
             btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.转账, PermissionActions.Nullify);
@@ -283,27 +260,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                 Customer = frm.SelectedItem as CompanyInfo;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
             }
-        }
-
-        private void mnu_UndoAssign_Click(object sender, EventArgs e)
-        {
-            List<DataGridViewRow> delRows = new List<DataGridViewRow>();
-            if (ItemsGrid.SelectedRows != null && ItemsGrid.SelectedRows.Count > 0)
-            {
-                if (MessageBox.Show("是否要取消此核销项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
-                    {
-                        AccountRecordAssign assign = row.Tag as AccountRecordAssign;
-                        CommandResult ret = (new AccountRecordAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
-                        if (ret.Result == ResultCode.Successful) delRows.Add(row);
-                    }
-                }
-            }
-            delRows.ForEach(it => ItemsGrid.Rows.Remove(it));
-            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
-            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
-            ShowButtonState();
         }
 
         private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

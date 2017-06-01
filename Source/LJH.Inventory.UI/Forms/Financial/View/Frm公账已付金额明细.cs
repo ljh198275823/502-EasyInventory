@@ -126,22 +126,25 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
                     var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(ar.SheetID).QueryObject;
-                    if (sheet != null && sheet.ClassID == CustomerPaymentType.转公账)
+                    if (sheet != null)
                     {
-                        Frm转公账 frm = new Frm转公账();
-                        frm.IsAdding = false;
-                        frm.UpdatingItem = sheet;
-                        frm.IsForView = true;
-                        frm.ShowDialog();
-                    }
-                    else
-                    {
-                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                        frm.IsAdding = false;
-                        frm.UpdatingItem = sheet;
-                        frm.PaymentType = sheet.ClassID;
-                        frm.IsForView = true;
-                        frm.ShowDialog();
+                        if (sheet.ClassID == CustomerPaymentType.转公账)
+                        {
+                            Frm转公账 frm = new Frm转公账();
+                            frm.IsAdding = false;
+                            frm.UpdatingItem = sheet;
+                            frm.IsForView = true;
+                            frm.ShowDialog();
+                        }
+                        else
+                        {
+                            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                            frm.IsAdding = false;
+                            frm.UpdatingItem = sheet;
+                            frm.PaymentType = sheet.ClassID;
+                            frm.IsForView = true;
+                            frm.ShowDialog();
+                        }
                     }
                 }
                 else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")

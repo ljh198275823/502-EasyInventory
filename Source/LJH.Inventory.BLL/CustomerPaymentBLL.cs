@@ -141,19 +141,22 @@ namespace LJH.Inventory.BLL
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
-                CustomerReceivable cr = new CustomerReceivable()
+                if (info.PaymentMode == PaymentMode.公账)
                 {
-                    ID = Guid.NewGuid(),
-                    ClassID = CustomerReceivableType.公账应收款,
-                    CustomerID = info.CustomerID,
-                    CreateDate = info.SheetDate,
-                    SheetID = info.ID,
-                    Amount = info.Amount,
-                    Memo = info.Memo,
-                };
-                cr.SetProperty("开票单位", info.Payer);
-                cr.SetProperty("出票公司", info.AccountID);
-                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+                    CustomerReceivable cr = new CustomerReceivable()
+                    {
+                        ID = Guid.NewGuid(),
+                        ClassID = CustomerReceivableType.公账应收款,
+                        CustomerID = info.CustomerID,
+                        CreateDate = info.SheetDate,
+                        SheetID = info.ID,
+                        Amount = info.Amount,
+                        Memo = info.Memo,
+                    };
+                    cr.SetProperty("开票单位", info.Payer);
+                    cr.SetProperty("出票公司", info.AccountID);
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+                }
             }
             else
             {

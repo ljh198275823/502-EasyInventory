@@ -200,6 +200,9 @@ namespace LJH.Inventory.UI.Forms.Financial
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "col发票已核销对公已付金额")
                 {
+                    View.Frm发票已核销对公已付金额 frm = new View.Frm发票已核销对公已付金额();
+                    frm.Customer = c;
+                    frm.ShowDialog();
                 }
                 //刷新数据
                 var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(c.ID).QueryObject;

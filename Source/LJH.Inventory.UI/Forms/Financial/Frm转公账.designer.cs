@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -38,6 +37,9 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtReceipt = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.lnk转出账号 = new System.Windows.Forms.LinkLabel();
             this.txtPayer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkAccout = new System.Windows.Forms.LinkLabel();
@@ -45,14 +47,6 @@
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.txtID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.ItemsGrid = new System.Windows.Forms.DataGridView();
-            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_AssignGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_UndoAssign = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gridAttachment = new System.Windows.Forms.DataGridView();
             this.colUploadDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,16 +68,9 @@
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
-            this.btnAssign = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
-            this.lnk转出账号 = new System.Windows.Forms.LinkLabel();
-            this.txtReceipt = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
-            this.mnu_AssignGrid.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).BeginInit();
             this.mnu_Attachment.SuspendLayout();
@@ -170,7 +157,6 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(4, 60);
@@ -204,6 +190,34 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtReceipt
+            // 
+            this.txtReceipt.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtReceipt.Location = new System.Drawing.Point(70, 138);
+            this.txtReceipt.Name = "txtReceipt";
+            this.txtReceipt.Size = new System.Drawing.Size(414, 21);
+            this.txtReceipt.TabIndex = 103;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 141);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 104;
+            this.label1.Text = "银行回单";
+            // 
+            // lnk转出账号
+            // 
+            this.lnk转出账号.Location = new System.Drawing.Point(272, 107);
+            this.lnk转出账号.Name = "lnk转出账号";
+            this.lnk转出账号.Size = new System.Drawing.Size(60, 17);
+            this.lnk转出账号.TabIndex = 102;
+            this.lnk转出账号.TabStop = true;
+            this.lnk转出账号.Text = "转出账号";
+            this.lnk转出账号.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnk转出账号.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk转出账号_LinkClicked);
             // 
             // txtPayer
             // 
@@ -272,88 +286,12 @@
             this.label11.TabIndex = 92;
             this.label11.Text = "付款单号";
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.ItemsGrid);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(578, 202);
-            this.tabPage3.TabIndex = 7;
-            this.tabPage3.Text = "核销";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // ItemsGrid
-            // 
-            this.ItemsGrid.AllowUserToAddRows = false;
-            this.ItemsGrid.AllowUserToDeleteRows = false;
-            this.ItemsGrid.AllowUserToResizeRows = false;
-            this.ItemsGrid.BackgroundColor = System.Drawing.Color.White;
-            this.ItemsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ItemsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSheetID,
-            this.colClassID,
-            this.colAssign,
-            this.colOrderID});
-            this.ItemsGrid.ContextMenuStrip = this.mnu_AssignGrid;
-            this.ItemsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ItemsGrid.Location = new System.Drawing.Point(0, 0);
-            this.ItemsGrid.Name = "ItemsGrid";
-            this.ItemsGrid.RowHeadersVisible = false;
-            this.ItemsGrid.RowTemplate.Height = 23;
-            this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(578, 202);
-            this.ItemsGrid.TabIndex = 119;
-            // 
-            // colSheetID
-            // 
-            this.colSheetID.HeaderText = "单据编号";
-            this.colSheetID.MinimumWidth = 120;
-            this.colSheetID.Name = "colSheetID";
-            this.colSheetID.ReadOnly = true;
-            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSheetID.Width = 150;
-            // 
-            // colClassID
-            // 
-            this.colClassID.HeaderText = "类型";
-            this.colClassID.Name = "colClassID";
-            this.colClassID.ReadOnly = true;
-            // 
-            // colAssign
-            // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colAssign.HeaderText = "抵消金额";
-            this.colAssign.Name = "colAssign";
-            // 
-            // colOrderID
-            // 
-            this.colOrderID.HeaderText = "订单";
-            this.colOrderID.Name = "colOrderID";
-            this.colOrderID.ReadOnly = true;
-            this.colOrderID.Width = 120;
-            // 
-            // mnu_AssignGrid
-            // 
-            this.mnu_AssignGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_UndoAssign});
-            this.mnu_AssignGrid.Name = "contextMenuStrip1";
-            this.mnu_AssignGrid.Size = new System.Drawing.Size(137, 26);
-            // 
-            // mnu_UndoAssign
-            // 
-            this.mnu_UndoAssign.Name = "mnu_UndoAssign";
-            this.mnu_UndoAssign.Size = new System.Drawing.Size(136, 22);
-            this.mnu_UndoAssign.Text = "取消核销项";
-            this.mnu_UndoAssign.Click += new System.EventHandler(this.mnu_UndoAssign_Click);
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(578, 202);
+            this.tabPage5.Size = new System.Drawing.Size(578, 201);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -377,7 +315,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(578, 202);
+            this.gridAttachment.Size = new System.Drawing.Size(578, 201);
             this.gridAttachment.TabIndex = 102;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -451,7 +389,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(578, 202);
+            this.tabPage2.Size = new System.Drawing.Size(578, 201);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -474,7 +412,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(578, 202);
+            this.dataGridView1.Size = new System.Drawing.Size(578, 201);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -511,7 +449,6 @@
             this.btnSave,
             this.btnApprove,
             this.btnUndoApprove,
-            this.btnAssign,
             this.btnNullify});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -552,16 +489,6 @@
             this.btnUndoApprove.Visible = false;
             this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
             // 
-            // btnAssign
-            // 
-            this.btnAssign.Image = global::LJH.Inventory.UI.Properties.Resources.payment;
-            this.btnAssign.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAssign.Name = "btnAssign";
-            this.btnAssign.Size = new System.Drawing.Size(36, 53);
-            this.btnAssign.Text = "核销";
-            this.btnAssign.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAssign.Click += new System.EventHandler(this.btnPayment_Click);
-            // 
             // btnNullify
             // 
             this.btnNullify.Image = global::LJH.Inventory.UI.Properties.Resources.delete;
@@ -571,34 +498,6 @@
             this.btnNullify.Text = "作废(&N)";
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
-            // 
-            // lnk转出账号
-            // 
-            this.lnk转出账号.Location = new System.Drawing.Point(272, 107);
-            this.lnk转出账号.Name = "lnk转出账号";
-            this.lnk转出账号.Size = new System.Drawing.Size(60, 17);
-            this.lnk转出账号.TabIndex = 102;
-            this.lnk转出账号.TabStop = true;
-            this.lnk转出账号.Text = "转出账号";
-            this.lnk转出账号.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lnk转出账号.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk转出账号_LinkClicked);
-            // 
-            // txtReceipt
-            // 
-            this.txtReceipt.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtReceipt.Location = new System.Drawing.Point(70, 138);
-            this.txtReceipt.Name = "txtReceipt";
-            this.txtReceipt.Size = new System.Drawing.Size(414, 21);
-            this.txtReceipt.TabIndex = 103;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 141);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 104;
-            this.label1.Text = "银行回单";
             // 
             // Frm转公账
             // 
@@ -617,9 +516,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
-            this.mnu_AssignGrid.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridAttachment)).EndInit();
             this.mnu_Attachment.ResumeLayout(false);
@@ -664,15 +560,6 @@
         private System.Windows.Forms.ToolStripButton btnApprove;
         private System.Windows.Forms.ToolStripButton btnUndoApprove;
         private System.Windows.Forms.ToolStripButton btnNullify;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ToolStripButton btnAssign;
-        private System.Windows.Forms.DataGridView ItemsGrid;
-        private System.Windows.Forms.ContextMenuStrip mnu_AssignGrid;
-        private System.Windows.Forms.ToolStripMenuItem mnu_UndoAssign;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
