@@ -78,8 +78,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colRemain"].Value = cr.Remain;
             row.Cells["colAssign"].Value = 0;
             row.Cells["colCheck"].Value = "全部核销";
-            row.Cells["col开票单位"].Value = cr.GetProperty("开票单位");
-            row.Cells["col出票公司"].Value = cr.GetProperty("出票公司");
+            row.Cells["col购货单位"].Value = cr.GetProperty("购货单位");
+            row.Cells["col出票单位"].Value = cr.GetProperty("出票单位");
             row.Cells["colMemo"].Value = cr.Memo;
         }
 

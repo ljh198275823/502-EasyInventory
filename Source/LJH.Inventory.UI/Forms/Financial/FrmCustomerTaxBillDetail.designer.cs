@@ -38,9 +38,9 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chk只用于核销私账 = new System.Windows.Forms.CheckBox();
             this.txtPayer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
@@ -77,7 +77,7 @@
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnAssign = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
-            this.chk只用于核销私账 = new System.Windows.Forms.CheckBox();
+            this.txtAccount = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -180,10 +180,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtAccount);
             this.tabPage1.Controls.Add(this.chk只用于核销私账);
             this.tabPage1.Controls.Add(this.txtPayer);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.txtAccount);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.txtCustomer);
             this.tabPage1.Controls.Add(this.lnkCustomer);
@@ -203,6 +203,17 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // chk只用于核销私账
+            // 
+            this.chk只用于核销私账.AutoSize = true;
+            this.chk只用于核销私账.ForeColor = System.Drawing.Color.Red;
+            this.chk只用于核销私账.Location = new System.Drawing.Point(376, 79);
+            this.chk只用于核销私账.Name = "chk只用于核销私账";
+            this.chk只用于核销私账.Size = new System.Drawing.Size(108, 16);
+            this.chk只用于核销私账.TabIndex = 107;
+            this.chk只用于核销私账.Text = "只用于核销私账";
+            this.chk只用于核销私账.UseVisualStyleBackColor = true;
+            // 
             // txtPayer
             // 
             this.txtPayer.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -218,15 +229,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 106;
-            this.label1.Text = "出票公司";
-            // 
-            // txtAccount
-            // 
-            this.txtAccount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAccount.Location = new System.Drawing.Point(70, 139);
-            this.txtAccount.Name = "txtAccount";
-            this.txtAccount.Size = new System.Drawing.Size(414, 21);
-            this.txtAccount.TabIndex = 103;
+            this.label1.Text = "出票单位";
             // 
             // label4
             // 
@@ -235,7 +238,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 104;
-            this.label4.Text = "开票单位";
+            this.label4.Text = "购货单位";
             // 
             // txtCustomer
             // 
@@ -576,16 +579,13 @@
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
-            // chk只用于核销私账
+            // txtAccount
             // 
-            this.chk只用于核销私账.AutoSize = true;
-            this.chk只用于核销私账.ForeColor = System.Drawing.Color.Red;
-            this.chk只用于核销私账.Location = new System.Drawing.Point(376, 79);
-            this.chk只用于核销私账.Name = "chk只用于核销私账";
-            this.chk只用于核销私账.Size = new System.Drawing.Size(108, 16);
-            this.chk只用于核销私账.TabIndex = 107;
-            this.chk只用于核销私账.Text = "只用于核销私账";
-            this.chk只用于核销私账.UseVisualStyleBackColor = true;
+            this.txtAccount.FormattingEnabled = true;
+            this.txtAccount.Location = new System.Drawing.Point(70, 141);
+            this.txtAccount.Name = "txtAccount";
+            this.txtAccount.Size = new System.Drawing.Size(414, 20);
+            this.txtAccount.TabIndex = 108;
             // 
             // FrmCustomerTaxBillDetail
             // 
@@ -665,8 +665,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private GeneralLibrary.WinformControl.DBCTextBox txtPayer;
         private System.Windows.Forms.Label label1;
-        private GeneralLibrary.WinformControl.DBCTextBox txtAccount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chk只用于核销私账;
+        private System.Windows.Forms.ComboBox txtAccount;
     }
 }

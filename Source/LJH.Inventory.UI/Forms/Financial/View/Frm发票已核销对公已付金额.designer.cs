@@ -47,8 +47,8 @@
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col开票单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col出票公司 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col购货单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col出票单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,8 +71,8 @@
             this.colSheetID,
             this.colSheetDate,
             this.colAmount,
-            this.col开票单位,
-            this.col出票公司,
+            this.col购货单位,
+            this.col出票单位,
             this.colAssigned,
             this.colRemain,
             this.colMemo});
@@ -194,21 +194,21 @@
             this.colAmount.ReadOnly = true;
             this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // col开票单位
+            // col购货单位
             // 
-            this.col开票单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.col开票单位.HeaderText = "开票单位";
-            this.col开票单位.Name = "col开票单位";
-            this.col开票单位.ReadOnly = true;
-            this.col开票单位.Width = 78;
+            this.col购货单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col购货单位.HeaderText = "购货单位";
+            this.col购货单位.Name = "col购货单位";
+            this.col购货单位.ReadOnly = true;
+            this.col购货单位.Width = 78;
             // 
-            // col出票公司
+            // col出票单位
             // 
-            this.col出票公司.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.col出票公司.HeaderText = "出票公司";
-            this.col出票公司.Name = "col出票公司";
-            this.col出票公司.ReadOnly = true;
-            this.col出票公司.Width = 78;
+            this.col出票单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col出票单位.HeaderText = "出票单位";
+            this.col出票单位.Name = "col出票单位";
+            this.col出票单位.ReadOnly = true;
+            this.col出票单位.Width = 78;
             // 
             // colAssigned
             // 
@@ -276,8 +276,8 @@
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col开票单位;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col出票公司;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col购货单位;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col出票单位;
         private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;

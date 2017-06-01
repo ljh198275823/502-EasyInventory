@@ -79,6 +79,8 @@
             this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtOrderID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -624,6 +626,23 @@
             this.label13.TabIndex = 151;
             this.label13.Text = "车皮号";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(293, 349);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 12);
+            this.label15.TabIndex = 156;
+            this.label15.Text = "合同号";
+            // 
+            // txtOrderID
+            // 
+            this.txtOrderID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtOrderID.Location = new System.Drawing.Point(340, 345);
+            this.txtOrderID.Name = "txtOrderID";
+            this.txtOrderID.Size = new System.Drawing.Size(145, 21);
+            this.txtOrderID.TabIndex = 155;
+            // 
             // FrmSteelRollSliceStackIn
             // 
             this.AcceptButton = this.btnOk;
@@ -631,6 +650,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(503, 488);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.txtOrderID);
             this.Controls.Add(this.txtCarPlate);
             this.Controls.Add(this.txtMaterial);
             this.Controls.Add(this.label4);
@@ -740,6 +761,8 @@
         private Controls.MaterialComboBox txtMaterial;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label15;
+        private GeneralLibrary.WinformControl.DBCTextBox txtOrderID;
 
     }
 }

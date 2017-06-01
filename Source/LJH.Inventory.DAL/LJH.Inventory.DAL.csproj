@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProvider\IAutoNumberCreater.cs" />
+    <Compile Include="IProvider\ICustomerPaymentProvider.cs" />
     <Compile Include="IProvider\IProductProvider.cs" />
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
     <Compile Include="IProvider\ProviderFactory.cs" />

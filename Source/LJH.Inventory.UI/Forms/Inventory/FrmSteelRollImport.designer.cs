@@ -71,6 +71,7 @@
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,7 +113,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1499, 568);
+            this.panel3.Size = new System.Drawing.Size(1354, 568);
             this.panel3.TabIndex = 2;
             // 
             // toolStrip1
@@ -128,7 +129,7 @@
             this.btn客户管理});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1499, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1354, 25);
             this.toolStrip1.TabIndex = 24;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -194,7 +195,7 @@
             this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSource.ForeColor = System.Drawing.Color.Blue;
             this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblSource.Location = new System.Drawing.Point(1388, 87);
+            this.lblSource.Location = new System.Drawing.Point(1243, 87);
             this.lblSource.Name = "lblSource";
             this.lblSource.Size = new System.Drawing.Size(44, 12);
             this.lblSource.TabIndex = 17;
@@ -204,7 +205,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button1.Location = new System.Drawing.Point(1350, 34);
+            this.button1.Location = new System.Drawing.Point(1205, 34);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(146, 24);
             this.button1.TabIndex = 21;
@@ -216,7 +217,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1284, 87);
+            this.label3.Location = new System.Drawing.Point(1139, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 12);
             this.label3.TabIndex = 3;
@@ -277,13 +278,13 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Location = new System.Drawing.Point(6, 98);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1490, 467);
+            this.groupBox2.Size = new System.Drawing.Size(1345, 467);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数据预览";
@@ -293,9 +294,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -313,6 +314,7 @@
             this.colManufacture,
             this.colSerialNumber,
             this.colMaterial,
+            this.colOrderID,
             this.colPosition,
             this.colMemo,
             this.colReason});
@@ -324,7 +326,7 @@
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1487, 447);
+            this.dataGridView1.Size = new System.Drawing.Size(1342, 447);
             this.dataGridView1.TabIndex = 116;
             // 
             // colRowIndex
@@ -422,6 +424,11 @@
             this.colMaterial.HeaderText = "材质";
             this.colMaterial.Name = "colMaterial";
             // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "合同号";
+            this.colOrderID.Name = "colOrderID";
+            // 
             // colPosition
             // 
             this.colPosition.HeaderText = "摆放位置";
@@ -446,7 +453,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1499, 568);
+            this.ClientSize = new System.Drawing.Size(1354, 568);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSteelRollImport";
@@ -504,6 +511,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReason;

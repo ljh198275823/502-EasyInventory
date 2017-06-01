@@ -74,6 +74,8 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             row.Tag = cr;
             row.Cells["colSheetID"].Value = cr.SheetID;
+            var gg = cr.GetProperty("规格");
+            if (!string.IsNullOrEmpty(gg)) row.Cells["colSheetID"].Value = gg;
             row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);

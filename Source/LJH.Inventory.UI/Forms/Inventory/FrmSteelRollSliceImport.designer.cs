@@ -53,6 +53,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblSource = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.colRowIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,10 +68,9 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblSource = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -106,7 +107,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1362, 708);
+            this.panel3.Size = new System.Drawing.Size(1354, 708);
             this.panel3.TabIndex = 2;
             // 
             // toolStrip1
@@ -122,7 +123,7 @@
             this.btn客户管理});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1362, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1354, 25);
             this.toolStrip1.TabIndex = 23;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -255,7 +256,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(6, 119);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1353, 586);
+            this.groupBox2.Size = new System.Drawing.Size(1345, 586);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数据预览";
@@ -284,6 +285,7 @@
             this.colCustomer,
             this.colSupplier,
             this.colManufacture,
+            this.colOrderID,
             this.colMemo,
             this.colReason});
             this.dataGridView1.Location = new System.Drawing.Point(3, 42);
@@ -294,8 +296,31 @@
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1350, 544);
+            this.dataGridView1.Size = new System.Drawing.Size(1342, 544);
             this.dataGridView1.TabIndex = 116;
+            // 
+            // lblSource
+            // 
+            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSource.AutoSize = true;
+            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSource.ForeColor = System.Drawing.Color.Blue;
+            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblSource.Location = new System.Drawing.Point(1264, 24);
+            this.lblSource.Name = "lblSource";
+            this.lblSource.Size = new System.Drawing.Size(44, 12);
+            this.lblSource.TabIndex = 17;
+            this.lblSource.Text = "条数据";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1105, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "待导入数据预览";
             // 
             // colRowIndex
             // 
@@ -378,6 +403,11 @@
             this.colManufacture.Name = "colManufacture";
             this.colManufacture.Width = 80;
             // 
+            // colOrderID
+            // 
+            this.colOrderID.HeaderText = "合同号";
+            this.colOrderID.Name = "colOrderID";
+            // 
             // colMemo
             // 
             this.colMemo.HeaderText = "备注";
@@ -392,34 +422,11 @@
             this.colReason.ReadOnly = true;
             this.colReason.Width = 150;
             // 
-            // lblSource
-            // 
-            this.lblSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSource.AutoSize = true;
-            this.lblSource.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblSource.ForeColor = System.Drawing.Color.Blue;
-            this.lblSource.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblSource.Location = new System.Drawing.Point(1272, 24);
-            this.lblSource.Name = "lblSource";
-            this.lblSource.Size = new System.Drawing.Size(44, 12);
-            this.lblSource.TabIndex = 17;
-            this.lblSource.Text = "条数据";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1113, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "待导入数据预览";
-            // 
             // FrmSteelRollSliceImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1362, 708);
+            this.ClientSize = new System.Drawing.Size(1354, 708);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSteelRollSliceImport";
@@ -455,6 +462,15 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.IntergerTextBox txtFirstRow;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btn产品类别管理;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btn仓库管理;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton btn供应商管理;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton btn客户管理;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRowIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
@@ -468,16 +484,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReason;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btn产品类别管理;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btn仓库管理;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton btn供应商管理;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton btn客户管理;
     }
 }

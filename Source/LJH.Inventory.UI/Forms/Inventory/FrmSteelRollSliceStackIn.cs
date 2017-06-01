@@ -218,6 +218,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtPosition.Text = item.Position;
             txtCarPlate.Text = item.Carplate;
             txtMaterial.Text = item.Material;
+            txtOrderID.Text = item.OrderID;
             txtMemo.Text = item.Memo;
             btnOk.Enabled = !IsForView;
         }
@@ -331,6 +332,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.OtherCostPrepay = chkOtherCostPrepay.Checked;
             item.Position = txtPosition.Text;
             item.Material = txtMaterial.Text;
+            item.OrderID = txtOrderID.Text;
             item.Carplate = txtCarPlate.Text;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;

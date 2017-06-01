@@ -153,8 +153,8 @@ namespace LJH.Inventory.BLL
                         Amount = info.Amount,
                         Memo = info.Memo,
                     };
-                    cr.SetProperty("开票单位", info.Payer);
-                    cr.SetProperty("出票公司", info.AccountID);
+                    cr.SetProperty("购货单位", info.Payer);
+                    cr.SetProperty("出票单位", info.AccountID);
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
                 }
             }
@@ -286,6 +286,11 @@ namespace LJH.Inventory.BLL
                     new AccountRecordAssignBLL(AppSettings.Current.ConnStr).Assign(assign);
                 }
             }
+        }
+
+        public List<string> 获取所有出票单位()
+        {
+            return ProviderFactory.Create<ICustomerPaymentProvider>(RepoUri).获取所有出票单位();
         }
         #endregion
     }

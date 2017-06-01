@@ -46,6 +46,8 @@ namespace LJH.Inventory.BLL
                 cr = original.Clone();
             }
             cr.CustomerID = sheet.Supplier;
+            cr.OrderID = sheet.OrderID;
+            cr.SetProperty("规格", sheet.Product.Specification);
             decimal amount = 0;
             if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
             if (sheet.TransCost.HasValue && sheet.TransCostPrepay.HasValue && sheet.TransCostPrepay.Value) amount += sheet.TransCost.Value * sheet.OriginalWeight.Value;
@@ -87,6 +89,8 @@ namespace LJH.Inventory.BLL
                 tax = original.Clone();
             }
             tax.CustomerID = sheet.Supplier;
+            tax.OrderID = sheet.OrderID;
+            tax.SetProperty("规格", sheet.Product.Specification);
             decimal amount = 0;
             if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
             tax.Amount = amount;

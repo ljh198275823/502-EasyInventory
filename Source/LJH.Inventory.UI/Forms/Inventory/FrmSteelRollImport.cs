@@ -213,6 +213,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.SerialNumber = row.Cells["colSerialNumber"].Value != null ? row.Cells["colSerialNumber"].Value.ToString().Trim() : null;
             pi.Position = row.Cells["colPosition"].Value != null ? row.Cells["colPosition"].Value.ToString().Trim() : null;
             pi.Material = row.Cells["colMaterial"].Value != null ? row.Cells["colMaterial"].Value.ToString().Trim() : null;
+            pi.OrderID = row.Cells["colOrderID"].Value != null ? row.Cells["colOrderID"].Value.ToString().Trim() : null;
             pi.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString().Trim() : null;
             pi.InventorySheet = "导入";
             pi.State = ProductInventoryState.Inventory;

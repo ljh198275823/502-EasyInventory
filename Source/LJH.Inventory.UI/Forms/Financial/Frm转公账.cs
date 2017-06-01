@@ -74,6 +74,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("对方账号不能为空");
                 return false;
             }
+            if ((txtAccount.Tag as Account).ID == (txtPayer.Tag as Account).ID)
+            {
+                MessageBox.Show("输入账号和转出账号为同一个账号");
+                return false;
+            }
             return true;
         }
 

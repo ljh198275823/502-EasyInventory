@@ -198,7 +198,7 @@
             // colPayer
             // 
             this.colPayer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colPayer.HeaderText = "开票单位";
+            this.colPayer.HeaderText = "购货单位";
             this.colPayer.Name = "colPayer";
             this.colPayer.ReadOnly = true;
             this.colPayer.Width = 78;
@@ -206,7 +206,7 @@
             // colAccount
             // 
             this.colAccount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colAccount.HeaderText = "出票公司";
+            this.colAccount.HeaderText = "出票单位";
             this.colAccount.Name = "colAccount";
             this.colAccount.ReadOnly = true;
             this.colAccount.Width = 78;

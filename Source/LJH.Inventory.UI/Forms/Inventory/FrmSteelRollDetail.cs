@@ -170,6 +170,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtPosition.Text = item.Position;
             txtMaterial.Text = item.Material;
             txtCarPlate.Text = item.Carplate;
+            txtOrderID.Text = item.OrderID;
             txtMemo.Text = item.Memo;
             btnOk.Enabled = btnOk.Enabled && item.CanEdit;
         }
@@ -220,6 +221,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Carplate = txtCarPlate.Text;
             item.Material = txtMaterial.Text;
             item.Memo = txtMemo.Text;
+            item.OrderID = txtOrderID.Text;
             item.Operator = Operator.Current.Name;
             return item;
         }

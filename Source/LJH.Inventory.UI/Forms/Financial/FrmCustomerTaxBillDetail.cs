@@ -58,6 +58,18 @@ namespace LJH.Inventory.UI.Forms.Financial
                 ItemsGrid.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(item => item.Amount).Trim();
             }
         }
+
+        private void Init出票单位()
+        {
+            txtAccount.Items.Clear();
+            var acs = new CustomerPaymentBLL(AppSettings.Current.ConnStr).获取所有出票单位();
+            if (acs != null && acs.Count > 0)
+            {
+                txtAccount.Items.Add(string.Empty);
+                foreach (var a in acs) txtAccount.Items.Add(a);
+            }
+        }
+
         #endregion
 
         #region 重写基类方法
@@ -67,6 +79,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             this.Text = (TaxType == CustomerPaymentType.客户增值税发票) ? "客户增值税" : "供应商增值税";
             this.lnkCustomer.Text = (TaxType == CustomerPaymentType.客户增值税发票) ? "客户" : "供应商";
             txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+            Init出票单位();
             if (IsForView) toolStrip1.Enabled = false;
         }
 
@@ -126,7 +139,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.AccountID = txtAccount.Text;
             info.Payer = txtPayer.Text;
             info.Amount = txtAmount.DecimalValue;
-            info.PaymentMode = chk只用于核销私账.Checked ? PaymentMode.公账 : PaymentMode.私账;
+            info.PaymentMode = chk只用于核销私账.Checked ? PaymentMode.私账 : PaymentMode.公账;
             info.CustomerID = Customer != null ? Customer.ID : null;
             info.Memo = txtMemo.Text;
             return info;

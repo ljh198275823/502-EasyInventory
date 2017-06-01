@@ -11,7 +11,7 @@ using LJH.GeneralLibrary.Core.DAL.Linq;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class CustomerPaymentProvider : ProviderBase<CustomerPayment, string>
+    public class CustomerPaymentProvider : ProviderBase<CustomerPayment, string>, ICustomerPaymentProvider
     {
         #region 构造函数
         public CustomerPaymentProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
@@ -53,6 +53,11 @@ namespace LJH.Inventory.DAL.LinqProvider
         public List<string> GetBanks()
         {
             return CreateDataContext().GetTable<CustomerPayment>().Where(it => it.Bank != null && it.Bank != string.Empty).Select(it => it.Bank).Distinct().ToList();
+        }
+
+        public List<string> 获取所有出票单位()
+        {
+            return CreateDataContext().GetTable<CustomerPayment>().Where(it => it.ClassID == CustomerPaymentType.客户增值税发票 && it.AccountID != null && it.AccountID != string.Empty).Select(it => it.AccountID).Distinct().ToList();
         }
     }
 }

@@ -186,6 +186,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Supplier = supplier;
             pi.Manufacture = manufacture;
             pi.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString().Trim() : null;
+            pi.OrderID = row.Cells["colOrderID"].Value != null ? row.Cells["colOrderID"].Value.ToString().Trim() : null;
             pi.InventorySheet = "导入";
             pi.State = ProductInventoryState.Inventory;
             return pi;

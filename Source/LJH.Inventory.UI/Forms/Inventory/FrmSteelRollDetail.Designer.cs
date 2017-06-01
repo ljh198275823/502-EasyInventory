@@ -72,6 +72,8 @@
             this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtOrderID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.pnlTax.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -564,11 +566,30 @@
             this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
             this.txtCarPlate.TabIndex = 142;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(297, 321);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 12);
+            this.label15.TabIndex = 144;
+            this.label15.Text = "合同号";
+            // 
+            // txtOrderID
+            // 
+            this.txtOrderID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtOrderID.Location = new System.Drawing.Point(344, 317);
+            this.txtOrderID.Name = "txtOrderID";
+            this.txtOrderID.Size = new System.Drawing.Size(145, 21);
+            this.txtOrderID.TabIndex = 143;
+            // 
             // FrmSteelRollDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 461);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.txtOrderID);
             this.Controls.Add(this.txtCarPlate);
             this.Controls.Add(this.txtMaterial);
             this.Controls.Add(this.label8);
@@ -655,6 +676,8 @@
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.txtMaterial, 0);
             this.Controls.SetChildIndex(this.txtCarPlate, 0);
+            this.Controls.SetChildIndex(this.txtOrderID, 0);
+            this.Controls.SetChildIndex(this.label15, 0);
             this.pnlTax.ResumeLayout(false);
             this.pnlTax.PerformLayout();
             this.ResumeLayout(false);
@@ -707,5 +730,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label13;
         private Controls.CarplateComboBox txtCarPlate;
+        private System.Windows.Forms.Label label15;
+        private GeneralLibrary.WinformControl.DBCTextBox txtOrderID;
     }
 }
