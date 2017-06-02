@@ -29,8 +29,8 @@ namespace LJH.Inventory.BLL
             }
             else if (info.ClassID == CustomerPaymentType.供应商付款)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("HKD",
-                        UserSettings.Current.CustomerPaymentDateFormat, UserSettings.Current.CustomerPaymentSerialCount, info.DocumentType);
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.SupplierPaymentPrefix,
+                        UserSettings.Current.SupplierPaymentDateFormat, UserSettings.Current.SupplierPaymentSerialCount, info.DocumentType);
             }
             else if (info.ClassID == CustomerPaymentType.其它收款)
             {
@@ -43,6 +43,10 @@ namespace LJH.Inventory.BLL
             else if (info.ClassID == CustomerPaymentType.客户退款 || info.ClassID == CustomerPaymentType.供应商退款)
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退", "yyMM", 3, info.DocumentType);
+            }
+            else if (info.ClassID == CustomerPaymentType.公司管理费用)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("支", "yyMM", 3, info.DocumentType);
             }
             return info.ID;
         }

@@ -81,7 +81,6 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override FrmDetailBase GetDetailForm()
         {
             FrmExpenditureRecordDetail frm = new FrmExpenditureRecordDetail();
-            frm.Category = categoryTree.SelectedNode != null ? (categoryTree.SelectedNode.Tag as ExpenditureType) : null;
             return frm;
         }
 

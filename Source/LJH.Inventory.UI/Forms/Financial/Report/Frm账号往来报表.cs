@@ -173,6 +173,18 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                             frm.ShowDialog();
                         }
                     }
+                    else if (cp.PaymentType == CustomerPaymentType.客户退款)
+                    {
+                        if (!Operator.Current.Permit(Permission.退款, PermissionActions.Read)) return;
+                         var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
+                         if (sheet != null)
+                         {
+                             Frm退款 frm = new Frm退款();
+                             frm.IsAdding = false;
+                             frm.UpdatingItem = sheet;
+                             frm.ShowDialog();
+                         }
+                    }
                 }
             }
         }

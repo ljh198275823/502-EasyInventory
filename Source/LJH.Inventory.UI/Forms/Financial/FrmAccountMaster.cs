@@ -133,5 +133,23 @@ namespace LJH.Inventory.UI.Forms.Financial
                 dataGridView1.SelectedRows[0].Cells["colAmount"].Value = new AccountBLL(AppSettings.Current.ConnStr).GetRemain(ac.ID);
             }
         }
+
+        private void mnu_增加管理费用_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var ac = dataGridView1.SelectedRows[0].Tag as Account;
+                if (ac.Class != AccountType.银行账号 && ac.Class != AccountType.现金账号)
+                {
+                    MessageBox.Show("此账号不能增加管理费用");
+                    return;
+                }
+                FrmExpenditureRecordDetail frm = new FrmExpenditureRecordDetail();
+                frm.Account = ac;
+                frm.IsAdding = true;
+                frm.ShowDialog();
+                dataGridView1.SelectedRows[0].Cells["colAmount"].Value = new AccountBLL(AppSettings.Current.ConnStr).GetRemain(ac.ID);
+            }
+        }
     }
 }

@@ -23,14 +23,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         }
 
         #region 公共属性
-        /// <summary>
-        /// 获取或设置费用类别
-        /// </summary>
-        public ExpenditureType Category { get; set; }
-        /// <summary>
-        /// 获取或设置费用申请人
-        /// </summary>
-        public Staff Requster { get; set; }
+        public Account Account { get; set; }
         #endregion
 
         #region 重写基类方法
@@ -64,33 +57,26 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override void InitControls()
         {
             dtSheetDate.Value = DateTime.Today;
-            this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
-            this.txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
-            if (IsForView)
-            {
-                toolStrip1.Enabled = false;
-            }
+            txtAccount.Text = Account != null ? Account.Name : null;
+            txtAccount.Tag = Account;
+            if (IsForView) toolStrip1.Enabled = false;
         }
 
         protected override void ItemShowing()
         {
-            ExpenditureRecord item = UpdatingItem as ExpenditureRecord;
+            CustomerPayment item = UpdatingItem as CustomerPayment;
             if (item != null)
             {
                 txtSheetNo.Text = item.ID;
                 Account ac = null;
-                if (!string.IsNullOrEmpty(item.AccountID)) ac = new AccountBLL(AppSettings.Current.ConnStr).GetByID(item.AccountID).QueryObject ;
+                if (!string.IsNullOrEmpty(item.AccountID)) ac = new AccountBLL(AppSettings.Current.ConnStr).GetByID(item.AccountID).QueryObject;
                 txtAccount.Text = ac != null ? ac.Name : null;
                 txtAccount.Tag = ac;
                 txtAmount.DecimalValue = item.Amount;
                 dtSheetDate.Value = item.SheetDate;
-                if (!string.IsNullOrEmpty(item.Category))
-                {
-                    Category = (new ExpenditureTypeBLL(AppSettings.Current.ConnStr)).GetByID(item.Category).QueryObject;
-                }
-                txtCategory.Text = Category != null ? Category.Name : string.Empty;
-                txtRequest.Text = item.Request;
-                txtPayee.Text = item.Payee;
+                txtPayer.Text = item.Payer;
+                txtCategory.Text = item.GetProperty("费用类别");
+                txtRequest.Text = item.GetProperty("申请人");
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -99,42 +85,43 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override object GetItemFromInput()
         {
-            ExpenditureRecord info = null;
+            CustomerPayment info = null;
             if (UpdatingItem == null)
             {
-                info = new ExpenditureRecord();
+                info = new CustomerPayment();
                 if (txtSheetNo.Text == _AutoCreate) txtSheetNo.Text = string.Empty;
             }
             else
             {
-                info = UpdatingItem as ExpenditureRecord;
+                info = UpdatingItem as CustomerPayment;
             }
+            info.ClassID = CustomerPaymentType.公司管理费用;
             info.AccountID = (txtAccount.Tag as Account).ID;
             info.Amount = txtAmount.DecimalValue;
             info.SheetDate = dtSheetDate.Value;
-            info.Category = Category != null ? Category.ID : null;
-            info.Request = Requster != null ? Requster.Name : string.Empty;
-            info.Payee = txtPayee.Text;
+            info.SetProperty("费用类别", txtCategory.Text);
+            info.SetProperty("申请人", txtRequest.Text);
+            info.Payer = txtPayer.Text;
             info.Memo = txtMemo.Text;
             return info;
         }
 
         protected override CommandResult AddItem(object item)
         {
-            ExpenditureRecordBLL bll = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as ExpenditureRecord, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
+            CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            ExpenditureRecordBLL bll = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as ExpenditureRecord, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+            CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
         {
             ShowButtonState(this.toolStrip1);
-            btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
+            btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Approve);
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.UndoApprove);
             btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Nullify);
@@ -172,26 +159,26 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 工具栏事件处理
         private void btnSave_Click(object sender, EventArgs e)
         {
-            ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
-            PerformOperation<ExpenditureRecord>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
+            PerformOperation<CustomerPayment>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
-            ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
-            PerformOperation<ExpenditureRecord>(processor, SheetOperation.Approve);
+            CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.Approve);
         }
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
-            ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
-            PerformOperation<ExpenditureRecord>(processor, SheetOperation.UndoApprove);
+            CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.UndoApprove);
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            ExpenditureRecordBLL processor = new ExpenditureRecordBLL(AppSettings.Current.ConnStr);
-            PerformOperation<ExpenditureRecord>(processor, SheetOperation.Nullify);
+            CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.Nullify);
         }
         #endregion
 
@@ -202,15 +189,14 @@ namespace LJH.Inventory.UI.Forms.Financial
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Category = frm.SelectedItem as ExpenditureType;
+                var Category = frm.SelectedItem as ExpenditureType;
                 txtCategory.Text = Category != null ? Category.Name : string.Empty;
             }
         }
 
         private void txtCategory_DoubleClick(object sender, EventArgs e)
         {
-            Category = null;
-            txtCategory.Text = Category != null ? Category.Name : string.Empty;
+            txtCategory.Text = string.Empty;
         }
 
         private void lnkRequest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -219,15 +205,14 @@ namespace LJH.Inventory.UI.Forms.Financial
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Requster = frm.SelectedItem as Staff;
+                var Requster = frm.SelectedItem as Staff;
                 txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
             }
         }
 
         private void txtRequest_DoubleClick(object sender, EventArgs e)
         {
-            Requster = null;
-            txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
+            txtRequest.Text = string.Empty;
         }
 
         private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -45,6 +45,7 @@
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddRecievable = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddPayment = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_新增客户退款 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_UpdateCreditLine = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,6 +121,7 @@
             this.cMnu_Fresh,
             this.mnu_AddRecievable,
             this.mnu_AddPayment,
+            this.mnu_新增客户退款,
             this.toolStripSeparator2,
             this.mnu_客户往来报表,
             this.mnu_UpdateCreditLine,
@@ -131,7 +133,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 242);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 286);
             // 
             // cMnu_Fresh
             // 
@@ -152,6 +154,13 @@
             this.mnu_AddPayment.Size = new System.Drawing.Size(160, 22);
             this.mnu_AddPayment.Text = "新增付款流水";
             this.mnu_AddPayment.Click += new System.EventHandler(this.mnu_AddPayment_Click);
+            // 
+            // mnu_新增客户退款
+            // 
+            this.mnu_新增客户退款.Name = "mnu_新增客户退款";
+            this.mnu_新增客户退款.Size = new System.Drawing.Size(160, 22);
+            this.mnu_新增客户退款.Text = "新增客户退款";
+            this.mnu_新增客户退款.Click += new System.EventHandler(this.mnu_新增客户退款_Click);
             // 
             // toolStripSeparator2
             // 
@@ -511,5 +520,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;
+        private System.Windows.Forms.ToolStripMenuItem mnu_新增客户退款;
     }
 }

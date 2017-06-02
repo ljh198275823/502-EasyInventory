@@ -140,6 +140,17 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                                 frm.UpdatingItem = osheet;
                                 frm.ShowDialog();
                             }
+                            else
+                            {
+                                var tui = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
+                                if (tui != null)
+                                {
+                                    Frm退款 frm = new Frm退款();
+                                    frm.IsAdding = false;
+                                    frm.UpdatingItem = tui;
+                                    frm.ShowDialog();
+                                }
+                            }
                         }
                     }
                     else if (cp.收入 != 0)

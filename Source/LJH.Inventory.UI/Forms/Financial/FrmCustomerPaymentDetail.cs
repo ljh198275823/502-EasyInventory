@@ -297,18 +297,8 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
-            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
-            if (assigns != null && assigns.Count > 0)
-            {
-                string msg = "\"取消审核\"的操作会删除此单的所有核销项删除，是否继续?";
-                if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            }
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
             PerformOperation<CustomerPayment>(processor, SheetOperation.UndoApprove);
-
-            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
-            ItemShowing();
-            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
@@ -329,19 +319,8 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
-            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
-            if (assigns != null && assigns.Count > 0)
-            {
-                string msg = "\"作废\"的操作会删除此单的所有核销项删除，是否继续?";
-                if (MessageBox.Show(msg, "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            }
-
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
             PerformOperation<CustomerPayment>(processor, SheetOperation.Nullify);
-
-            UpdatingItem = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID((UpdatingItem as CustomerPayment).ID).QueryObject;
-            ItemShowing();
-            OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
         }
         #endregion
 

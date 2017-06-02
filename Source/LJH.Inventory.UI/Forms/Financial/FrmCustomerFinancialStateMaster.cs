@@ -240,6 +240,20 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
 
+        private void mnu_新增客户退款_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                Frm退款 frm = new Frm退款();
+                frm.Customer = customer;
+                frm.IsAdding = true;
+                frm.ShowDialog();
+                var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(customer.ID).QueryObject;
+                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
+            }
+        }
+
         private void mnu_SetFileID_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 1)

@@ -168,6 +168,18 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                                 frm.ShowDialog();
                                 FreshData();
                             }
+                            else
+                            {
+                                var tui = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                                if (tui != null)
+                                {
+                                    Frm退款 frm = new Frm退款();
+                                    frm.IsAdding = false;
+                                    frm.UpdatingItem = tui;
+                                    frm.ShowDialog();
+                                    FreshData();
+                                }
+                            }
                         }
                     }
                     else if (ReceivableType == CustomerReceivableType.SupplierReceivable)

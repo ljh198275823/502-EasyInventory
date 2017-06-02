@@ -58,9 +58,9 @@ namespace LJH.Inventory.BusinessModel
             this.DaiFuDateFormat = "yyyyMM";
             this.DaiFuSerialCount = 5;
 
-            this.ExpenditureRecordPrefix = "ZCD";
-            this.ExpenditureRecordDateFormat = "yyyyMM";
-            this.ExpenditureRecordSerialCount = 5;
+            this.SupplierPaymentPrefix = "ZCD";
+            this.SupplierPaymentDateFormat = "yyyyMM";
+            this.SupplierPaymentSerialCount = 5;
         }
         #endregion
 
@@ -290,17 +290,17 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置资金支出单前缀
         /// </summary>
         [DataMember]
-        public string ExpenditureRecordPrefix { get; set; }
+        public string SupplierPaymentPrefix { get; set; }
         /// <summary>
         /// 获取或设置资金支出单日期部分的格式
         /// </summary>
         [DataMember]
-        public string ExpenditureRecordDateFormat { get; set; }
+        public string SupplierPaymentDateFormat { get; set; }
         /// <summary>
         /// 获取或设置资金支出单序列号部分的长度
         /// </summary>
         [DataMember]
-        public int ExpenditureRecordSerialCount { get; set; }
+        public int SupplierPaymentSerialCount { get; set; }
 
         /// <summary>
         /// 获取或设置代付款单前缀

@@ -153,6 +153,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "转账")]
         转账,
+        /// <summary>
+        ///退款
+        /// </summary>
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "退款")]
+        退款,
         #endregion
 
         #region 查询与报表

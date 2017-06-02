@@ -21,8 +21,8 @@ namespace LJH.Inventory.BLL
         #region 公共方法
         protected override string CreateSheetID(ExpenditureRecord info)
         {
-            info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.ExpenditureRecordPrefix,
-                    UserSettings.Current.ExpenditureRecordDateFormat, UserSettings.Current.ExpenditureRecordSerialCount, info.DocumentType); //支出单
+            info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber(UserSettings.Current.SupplierPaymentPrefix,
+                    UserSettings.Current.SupplierPaymentDateFormat, UserSettings.Current.SupplierPaymentSerialCount, info.DocumentType); //支出单
             return info.ID;
         }
 

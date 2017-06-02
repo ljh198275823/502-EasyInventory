@@ -89,6 +89,11 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk供应商付款.Checked) acon.PaymentTypes.Add(CustomerPaymentType.供应商付款);
             if (chk其它收款.Checked) acon.PaymentTypes.Add(CustomerPaymentType.其它收款);
             if (chk费用支出.Checked) acon.PaymentTypes.Add(CustomerPaymentType.公司管理费用);
+            if (chk退款.Checked)
+            {
+                acon.PaymentTypes.Add(CustomerPaymentType.客户退款);
+                acon.PaymentTypes.Add(CustomerPaymentType.供应商退款);
+            }
             _AccountRecords = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(acon).QueryObjects;
 
             var con = new CustomerPaymentSearchCondition();
@@ -101,6 +106,11 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk供应商付款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商付款);
             if (chk其它收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.其它收款);
             if (chk费用支出.Checked) con.PaymentTypes.Add(CustomerPaymentType.公司管理费用);
+            if (chk退款.Checked)
+            {
+                con.PaymentTypes.Add(CustomerPaymentType.客户退款);
+                con.PaymentTypes.Add(CustomerPaymentType.供应商退款);
+            }
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }

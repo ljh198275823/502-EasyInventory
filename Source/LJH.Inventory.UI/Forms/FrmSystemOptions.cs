@@ -87,9 +87,9 @@ namespace LJH.Inventory.UI.Forms
             txtCustomerPaymentPrefix.Text = us.CustomerPaymentPrefix;
             txtCustomerPaymentDate.Text = us.CustomerPaymentDateFormat;
             txtCustomerPaymentNum.IntergerValue = us.CustomerPaymentSerialCount;
-            txtExpenditureRecordPrefix.Text = us.ExpenditureRecordPrefix;
-            txtExpenditureRecordDateFormat.Text = us.ExpenditureRecordDateFormat;
-            txtExpenditureRecordSerialCount.IntergerValue = us.ExpenditureRecordSerialCount;
+            txtExpenditureRecordPrefix.Text = us.SupplierPaymentPrefix;
+            txtExpenditureRecordDateFormat.Text = us.SupplierPaymentDateFormat;
+            txtExpenditureRecordSerialCount.IntergerValue = us.SupplierPaymentSerialCount;
             txtCustomerPrefix.Text = us.CustomerPrefix;
             txtCustomerSerialCount.IntergerValue = us.CustomerSerialCount;
             txtSupplierPrefix.Text = us.SupplierPrefix;
@@ -154,9 +154,9 @@ namespace LJH.Inventory.UI.Forms
             us.CustomerPaymentPrefix = txtCustomerPaymentPrefix.Text;
             us.CustomerPaymentDateFormat = txtCustomerPaymentDate.Text;
             us.CustomerPaymentSerialCount = txtCustomerPaymentNum.IntergerValue;
-            us.ExpenditureRecordPrefix = txtExpenditureRecordPrefix.Text;
-            us.ExpenditureRecordDateFormat = txtExpenditureRecordDateFormat.Text;
-            us.ExpenditureRecordSerialCount = txtExpenditureRecordSerialCount.IntergerValue;
+            us.SupplierPaymentPrefix = txtExpenditureRecordPrefix.Text;
+            us.SupplierPaymentDateFormat = txtExpenditureRecordDateFormat.Text;
+            us.SupplierPaymentSerialCount = txtExpenditureRecordSerialCount.IntergerValue;
             us.CustomerPrefix = txtCustomerPrefix.Text;
             us.CustomerSerialCount = txtCustomerSerialCount.IntergerValue;
             us.SupplierPrefix = txtSupplierPrefix.Text;

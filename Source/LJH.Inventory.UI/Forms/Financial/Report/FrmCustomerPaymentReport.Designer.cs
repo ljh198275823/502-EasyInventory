@@ -59,6 +59,7 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStackSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk退款 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -112,6 +113,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chk退款);
             this.groupBox3.Controls.Add(this.chk费用支出);
             this.groupBox3.Controls.Add(this.chk其它收款);
             this.groupBox3.Controls.Add(this.txtAccount);
@@ -362,6 +364,18 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // chk退款
+            // 
+            this.chk退款.AutoSize = true;
+            this.chk退款.Checked = true;
+            this.chk退款.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk退款.Location = new System.Drawing.Point(604, 55);
+            this.chk退款.Name = "chk退款";
+            this.chk退款.Size = new System.Drawing.Size(48, 16);
+            this.chk退款.TabIndex = 105;
+            this.chk退款.Text = "退款";
+            this.chk退款.UseVisualStyleBackColor = true;
+            // 
             // FrmCustomerPaymentReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -415,5 +429,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.CheckBox chk退款;
     }
 }

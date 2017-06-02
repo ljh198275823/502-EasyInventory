@@ -43,10 +43,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string AccountID { get; set; }
         /// <summary>
-        /// 获取或设置币别
-        /// </summary>
-        public string CurrencyType { get; set; }
-        /// <summary>
         /// 获取或设置付款方式
         /// </summary>
         public PaymentMode PaymentMode { get; set; }
@@ -110,6 +106,11 @@ namespace LJH.Inventory.BusinessModel
                         return "其它收款";
                     case CustomerPaymentType.转公账 :
                         return "账户转账";
+                    case CustomerPaymentType.客户退款 :
+                    case CustomerPaymentType.供应商退款 :
+                        return "退款";
+                    case CustomerPaymentType.公司管理费用 :
+                        return "公司管理费用";
                     default:
                         throw new Exception("客户付款单没有指定类型");
                 }

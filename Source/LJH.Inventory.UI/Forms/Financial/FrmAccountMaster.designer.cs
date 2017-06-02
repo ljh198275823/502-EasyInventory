@@ -57,6 +57,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_增加管理费用 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menu.SuspendLayout();
@@ -149,9 +150,10 @@
             this.cMnu_Delete,
             this.cMnu_Export,
             this.toolStripSeparator3,
-            this.mnu_增加其它收款});
+            this.mnu_增加其它收款,
+            this.mnu_增加管理费用});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 186);
             // 
             // cMnu_Fresh
             // 
@@ -276,6 +278,13 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
             // 
+            // mnu_增加管理费用
+            // 
+            this.mnu_增加管理费用.Name = "mnu_增加管理费用";
+            this.mnu_增加管理费用.Size = new System.Drawing.Size(152, 22);
+            this.mnu_增加管理费用.Text = "增加管理费用";
+            this.mnu_增加管理费用.Click += new System.EventHandler(this.mnu_增加管理费用_Click);
+            // 
             // FrmAccountMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -324,5 +333,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripMenuItem mnu_增加管理费用;
     }
 }
