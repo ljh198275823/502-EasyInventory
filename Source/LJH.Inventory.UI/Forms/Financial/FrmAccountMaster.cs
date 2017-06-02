@@ -21,8 +21,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             InitializeComponent();
         }
 
-        public bool? Ispublic { get; set; }
-
         private List<AccountRecord> _AllAccountRecords = null;
 
         #region 私有方法
@@ -32,8 +30,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             var cps = from it in _AllAccountRecords where it.AccountID == ac.ID select it;
             foreach (var it in cps)
             {
-                if (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入) ret += it.Amount;
-                else if (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出) ret -= it.Amount;
+                if (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款) ret += it.Amount;
+                else if (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款) ret -= it.Amount;
             }
             return ret;
         }
@@ -69,7 +67,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             if (items != null)
             {
-                if (Ispublic.HasValue) items = items.Where(it => it.Ispublic == Ispublic.Value).ToList();
                 return (from item in items select (object)item).ToList();
             }
             return null;
@@ -79,6 +76,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             Account ct = item as Account;
             row.Cells["colName"].Value = ct.Name;
+            row.Cells["colClass"].Value = ct.Class.ToString();
             row.Cells["col对公账号"].Value = ct.Ispublic;
             row.Cells["colAmount"].Value = GetAmount(ct);
             row.Cells["colOperator"].Value = ct.Operator;
@@ -123,6 +121,11 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 var ac = dataGridView1.SelectedRows[0].Tag as Account;
+                if (ac.Class != AccountType.银行账号 && ac.Class != AccountType.现金账号)
+                {
+                    MessageBox.Show("此账号不能增加收款");
+                    return;
+                }
                 Frm其它收款 frm = new Frm其它收款();
                 frm.Account = ac;
                 frm.IsAdding = true;

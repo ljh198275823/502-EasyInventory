@@ -21,5 +21,7 @@ namespace LJH.Inventory.BusinessModel
         转账入 = 8,
         转账出 = 9,
         公账 = 10,
+        客户退款 = 11,
+        供应商退款=12,
     }
 }

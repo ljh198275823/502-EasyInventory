@@ -43,7 +43,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             CustomerPayment cp = item as CustomerPayment;
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.ID;
-            if (cp.ClassID == CustomerPaymentType.客户收款) row.Cells["colClass"].Value = cp.ClassID.ToString();
+            row.Cells["colClass"].Value = cp.ClassID.ToString();
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             if (cp.PaymentMode != PaymentMode.None) row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
             Account ac = null;
@@ -51,9 +51,12 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
             row.Cells["colPayer"].Value = cp.Payer;
             row.Cells["colAmount"].Value = cp.Amount;
-            var remain = GetRemain(cp);
-            row.Cells["colRemain"].Value = remain != 0 ? (decimal?)remain : null;
-            row.Cells["colAssigned"].Value = cp.Amount - remain != 0 ? (decimal?)(cp.Amount - remain) : null;
+            if (cp.State != SheetState.Canceled)
+            {
+                var remain = GetRemain(cp);
+                row.Cells["colRemain"].Value = remain != 0 ? (decimal?)remain : null;
+                row.Cells["colAssigned"].Value = cp.Amount - remain != 0 ? (decimal?)(cp.Amount - remain) : null;
+            }
             row.Cells["colStackSheetID"].Value = cp.StackSheetID;
             if (_AllCustomers != null)
             {
@@ -74,7 +77,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             _AllAccounts = new AccountBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-            if (!chk供应商付款.Checked && !chk客户收款.Checked) return null;
+            if (!chk供应商付款.Checked && !chk客户收款.Checked && !chk其它收款.Checked && !chk费用支出.Checked) return null;
 
             var acon = new AccountRecordSearchCondition();
             acon.CreateDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);

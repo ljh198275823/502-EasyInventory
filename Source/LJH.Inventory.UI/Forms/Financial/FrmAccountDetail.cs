@@ -42,6 +42,16 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtName.Focus();
                 return false;
             }
+            if (!rd银行账号.Checked && !rd现金账号.Checked && !rd财务核算.Checked)
+            {
+                MessageBox.Show("没有指定账号类型");
+                return false;
+            }
+            if (chk对公账号.Checked && !rd银行账号.Checked)
+            {
+                MessageBox.Show("对公账号不能是非银行账号");
+                return false;
+            }
             return true;
         }
 
@@ -50,7 +60,17 @@ namespace LJH.Inventory.UI.Forms.Financial
             Account ct = UpdatingItem as Account;
             txtName.Text = ct.Name;
             chk对公账号.Checked = ct.Ispublic;
+            rd银行账号.Checked = ct.Class == AccountType.银行账号;
+            rd现金账号.Checked = ct.Class == AccountType.现金账号;
+            rd财务核算.Checked = ct.Class == AccountType.财务核算;
             txtMemo.Text = ct.Memo;
+            if (ct.Class != AccountType.无效)
+            {
+                rd财务核算.Enabled = false;
+                rd现金账号.Enabled = false;
+                rd银行账号.Enabled = false;
+            }
+            chk对公账号.Enabled = false;
         }
 
         protected override Object GetItemFromInput()
@@ -65,6 +85,9 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             ct.Name = txtName.Text;
             ct.Ispublic = chk对公账号.Checked;
+            if (rd银行账号.Checked) ct.Class = AccountType.银行账号;
+            else if (rd现金账号.Checked) ct.Class = AccountType.现金账号;
+            else if (rd财务核算.Checked) ct.Class = AccountType.财务核算;
             ct.Memo = txtMemo.Text;
             return ct;
         }

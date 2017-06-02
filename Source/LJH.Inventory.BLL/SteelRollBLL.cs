@@ -52,6 +52,7 @@ namespace LJH.Inventory.BLL
             if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
             if (sheet.TransCost.HasValue && sheet.TransCostPrepay.HasValue && sheet.TransCostPrepay.Value) amount += sheet.TransCost.Value * sheet.OriginalWeight.Value;
             if (sheet.OtherCost.HasValue && sheet.OtherCostPrepay.HasValue && sheet.OtherCostPrepay.Value) amount += sheet.OtherCost.Value * sheet.OriginalWeight.Value;
+            if (original != null && original.Haspaid > amount) throw new Exception("原材料应收已核销的金额超过当前总价，请先取消部分核销金额再保存");
             cr.Amount = amount;
             if (original == null)
             {
@@ -93,6 +94,7 @@ namespace LJH.Inventory.BLL
             tax.SetProperty("规格", sheet.Product.Specification);
             decimal amount = 0;
             if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
+            if (original != null && original.Haspaid > amount) throw new Exception("原材料应开发票已核销的金额超过当前总价，请先取消部分核销发票再保存");
             tax.Amount = amount;
             if (original == null)
             {
@@ -102,6 +104,27 @@ namespace LJH.Inventory.BLL
             {
                 ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(tax, original, unitWork);
             }
+        }
+
+        private bool DelTax(ProductInventoryItem sheet)
+        {
+            bool allSuccess = true;
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = sheet.ID.ToString();
+            con.ReceivableTypes = new List<CustomerReceivableType>();
+            con.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
+            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                var bll = new CustomerReceivableBLL(RepoUri);
+                foreach (var item in items)
+                {
+                    var t = bll.Delete(item);
+                    allSuccess = t.Result == ResultCode.Successful;
+                    if (!allSuccess) break;
+                }
+            }
+            return allSuccess;
         }
         #endregion
 
@@ -165,8 +188,9 @@ namespace LJH.Inventory.BLL
                     if (s != null)
                     {
                         AddReceivables(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (sr.WithTax.HasValue && sr.WithTax.Value) AddTax(sr, new DateTime (sr.AddDate .Year ,sr.AddDate.Month ,sr.AddDate.Day ,dt.Hour ,dt.Minute ,dt.Second ), unitWork);
+                        if (sr.WithTax.HasValue && sr.WithTax.Value) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
                     }
+                    if (o.WithTax == true && sr.WithTax == false && !DelTax(sr)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
                 }
                 return unitWork.Commit();
             }

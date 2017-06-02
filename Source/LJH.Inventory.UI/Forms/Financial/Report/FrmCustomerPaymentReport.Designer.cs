@@ -37,6 +37,8 @@
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chk费用支出 = new System.Windows.Forms.CheckBox();
+            this.chk其它收款 = new System.Windows.Forms.CheckBox();
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkAccout = new System.Windows.Forms.LinkLabel();
             this.chk供应商付款 = new System.Windows.Forms.CheckBox();
@@ -57,8 +59,6 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStackSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk其它收款 = new System.Windows.Forms.CheckBox();
-            this.chk费用支出 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -128,6 +128,30 @@
             this.groupBox3.TabIndex = 38;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
+            // 
+            // chk费用支出
+            // 
+            this.chk费用支出.AutoSize = true;
+            this.chk费用支出.Checked = true;
+            this.chk费用支出.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk费用支出.Location = new System.Drawing.Point(526, 55);
+            this.chk费用支出.Name = "chk费用支出";
+            this.chk费用支出.Size = new System.Drawing.Size(72, 16);
+            this.chk费用支出.TabIndex = 104;
+            this.chk费用支出.Text = "费用支出";
+            this.chk费用支出.UseVisualStyleBackColor = true;
+            // 
+            // chk其它收款
+            // 
+            this.chk其它收款.AutoSize = true;
+            this.chk其它收款.Checked = true;
+            this.chk其它收款.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk其它收款.Location = new System.Drawing.Point(446, 55);
+            this.chk其它收款.Name = "chk其它收款";
+            this.chk其它收款.Size = new System.Drawing.Size(72, 16);
+            this.chk其它收款.TabIndex = 103;
+            this.chk其它收款.Text = "其它收款";
+            this.chk其它收款.UseVisualStyleBackColor = true;
             // 
             // txtAccount
             // 
@@ -252,7 +276,6 @@
             this.colClass.HeaderText = "类别";
             this.colClass.Name = "colClass";
             this.colClass.ReadOnly = true;
-            this.colClass.Width = 60;
             // 
             // colSheetID
             // 
@@ -339,30 +362,6 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // chk其它收款
-            // 
-            this.chk其它收款.AutoSize = true;
-            this.chk其它收款.Checked = true;
-            this.chk其它收款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk其它收款.Location = new System.Drawing.Point(446, 55);
-            this.chk其它收款.Name = "chk其它收款";
-            this.chk其它收款.Size = new System.Drawing.Size(72, 16);
-            this.chk其它收款.TabIndex = 103;
-            this.chk其它收款.Text = "其它收款";
-            this.chk其它收款.UseVisualStyleBackColor = true;
-            // 
-            // chk费用支出
-            // 
-            this.chk费用支出.AutoSize = true;
-            this.chk费用支出.Checked = true;
-            this.chk费用支出.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk费用支出.Location = new System.Drawing.Point(526, 55);
-            this.chk费用支出.Name = "chk费用支出";
-            this.chk费用支出.Size = new System.Drawing.Size(72, 16);
-            this.chk费用支出.TabIndex = 104;
-            this.chk费用支出.Text = "费用支出";
-            this.chk费用支出.UseVisualStyleBackColor = true;
-            // 
             // FrmCustomerPaymentReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -400,6 +399,10 @@
         private System.Windows.Forms.LinkLabel lnkSupplier;
         private System.Windows.Forms.CheckBox chk供应商付款;
         private System.Windows.Forms.CheckBox chk客户收款;
+        private GeneralLibrary.WinformControl.DBCTextBox txtAccount;
+        private System.Windows.Forms.LinkLabel lnkAccout;
+        private System.Windows.Forms.CheckBox chk费用支出;
+        private System.Windows.Forms.CheckBox chk其它收款;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
@@ -412,9 +415,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private GeneralLibrary.WinformControl.DBCTextBox txtAccount;
-        private System.Windows.Forms.LinkLabel lnkAccout;
-        private System.Windows.Forms.CheckBox chk费用支出;
-        private System.Windows.Forms.CheckBox chk其它收款;
     }
 }

@@ -34,9 +34,9 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Cells["col余额"].Value = _balance;
             Account ac = null;
             if (!string.IsNullOrEmpty(cp.到款账号) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.到款账号);
-            row.Cells["col到款账号"].Value = ac != null ? ac.Name : null;
-            row.Cells["col付款单位"].Value = cp.付款单位;
-            row.Cells["colMemo"].Value = cp.Memo;
+            row.Cells["col到款账号"].Value = ac != null ? ac.Name : cp.到款账号;
+            if (!string.IsNullOrEmpty(cp.付款单位) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.付款单位);
+            row.Cells["col付款单位"].Value = ac != null ? ac.Name : cp.付款单位;
         }
 
         protected override List<object> GetDataSource()

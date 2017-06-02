@@ -40,6 +40,10 @@ namespace LJH.Inventory.BLL
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("转", "yyMM", 3, info.DocumentType);
             }
+            else if (info.ClassID == CustomerPaymentType.客户退款 || info.ClassID == CustomerPaymentType.供应商退款)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退", "yyMM", 3, info.DocumentType);
+            }
             return info.ID;
         }
 
@@ -102,7 +106,7 @@ namespace LJH.Inventory.BLL
                     ClassID = info.ClassID,
                     SheetID = info.ID,
                     CustomerID = info.CustomerID,
-                     CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                     StackSheetID = info.StackSheetID,
                     AccountID = info.AccountID,
                     Amount = info.Amount,
@@ -158,6 +162,34 @@ namespace LJH.Inventory.BLL
                     cr.SetProperty("出票单位", info.AccountID);
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
                 }
+            }
+            else if (info.ClassID == CustomerPaymentType.客户退款 || info.ClassID == CustomerPaymentType.供应商退款)
+            {
+                AccountRecord ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = info.ClassID,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+                CustomerReceivable cr = new CustomerReceivable()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = info.ClassID == CustomerPaymentType.客户退款 ? CustomerReceivableType.CustomerReceivable : CustomerReceivableType.SupplierReceivable,
+                    CustomerID = info.CustomerID,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                    SheetID = info.ID,
+                    Amount = info.Amount,
+                    Memo = info.Memo,
+                };
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
             }
             else
             {

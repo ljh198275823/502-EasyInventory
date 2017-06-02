@@ -34,6 +34,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAccountMaster));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col对公账号 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +70,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
+            this.colClass,
             this.col对公账号,
             this.colAmount,
             this.colOperator,
@@ -81,7 +83,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(687, 209);
+            this.dataGridView1.Size = new System.Drawing.Size(834, 209);
             this.dataGridView1.TabIndex = 55;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -92,6 +94,12 @@
             this.colName.MinimumWidth = 100;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
+            // 
+            // colClass
+            // 
+            this.colClass.HeaderText = "账号类别";
+            this.colClass.Name = "colClass";
+            this.colClass.ReadOnly = true;
             // 
             // col对公账号
             // 
@@ -203,7 +211,7 @@
             this.toolStripSeparator2});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(687, 50);
+            this.menu.Size = new System.Drawing.Size(834, 50);
             this.menu.TabIndex = 54;
             // 
             // btn_Add
@@ -272,7 +280,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 281);
+            this.ClientSize = new System.Drawing.Size(834, 281);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -307,13 +315,14 @@
         private System.Windows.Forms.ToolStripMenuItem cMnu_Delete;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
         private System.Windows.Forms.ToolStripMenuItem eMnu_Edit;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mnu_增加其它收款;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col对公账号;
         private System.Windows.Forms.DataGridViewLinkColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem mnu_增加其它收款;
     }
 }

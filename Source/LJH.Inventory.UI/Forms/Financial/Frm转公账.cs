@@ -79,6 +79,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("输入账号和转出账号为同一个账号");
                 return false;
             }
+            if (string.IsNullOrEmpty(txtReceipt.Text))
+            {
+                MessageBox.Show("银行回单不能为空");
+                return false;
+            }
             return true;
         }
 
@@ -91,13 +96,19 @@ namespace LJH.Inventory.UI.Forms.Financial
                 this.txtID.Enabled = false;
                 dtSheetDate.Value = item.SheetDate;
                 txtAmount.DecimalValue = item.Amount;
-                txtPayer.Text = item.Payer;
+                
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
                 Account ac = null;
                 if (!string.IsNullOrEmpty(item.AccountID)) ac = (new AccountBLL(AppSettings.Current.ConnStr)).GetByID(item.AccountID).QueryObject;
                 txtAccount.Text = ac != null ? ac.Name : string.Empty;
                 txtAccount.Tag = ac;
+
+                if (!string.IsNullOrEmpty(item.Payer)) ac = (new AccountBLL(AppSettings.Current.ConnStr)).GetByID(item.Payer ).QueryObject;
+                txtPayer.Text = ac != null ? ac.Name : string.Empty;
+                txtPayer.Tag = ac;
+
+                txtReceipt.Text = item.GetProperty("银行回单");
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -122,8 +133,10 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.Amount = txtAmount.DecimalValue;
             var ac = txtAccount.Tag as Account;
             info.AccountID = ac != null ? ac.ID : null;
-            info.Payer = txtPayer.Text;
+            ac = txtPayer.Tag as Account;
+            info.Payer = ac != null ? ac.ID : null;
             info.CustomerID = Customer != null ? Customer.ID : null;
+            info.SetProperty("银行回单", txtReceipt.Text);
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -145,8 +158,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             base.ShowButtonState(this.toolStrip1);
             CustomerPayment cp = UpdatingItem != null ? UpdatingItem as CustomerPayment : null;
             btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.转账, PermissionActions.Edit);
-            AccountRecord ac = null;
-            if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, CustomerPaymentType.转账入).QueryObject;
             btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.转账, PermissionActions.Approve);
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.转账, PermissionActions.UndoApprove);
             btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.转账, PermissionActions.Nullify);
@@ -270,9 +281,9 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmAccountMaster frm = new FrmAccountMaster();
+            frm.SearchCondition = new LJH.Inventory.BusinessModel.SearchCondition.AccountSearchCondition() { IsPublic = true, AccountTypes = new List<AccountType>() { AccountType.现金账号, AccountType.银行账号 } };
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ForSelect = true;
-            frm.Ispublic = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 var ac = frm.SelectedItem as Account;
@@ -285,6 +296,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             FrmAccountMaster frm = new FrmAccountMaster();
             frm.StartPosition = FormStartPosition.CenterParent;
+            frm.SearchCondition = new LJH.Inventory.BusinessModel.SearchCondition.AccountSearchCondition() { AccountTypes = new List<AccountType>() { AccountType.现金账号, AccountType.银行账号 } };
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {

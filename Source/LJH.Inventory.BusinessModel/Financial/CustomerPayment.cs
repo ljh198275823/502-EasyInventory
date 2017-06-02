@@ -55,14 +55,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         /// <summary>
-        /// 获取或设置支票号(如果是支票付款)
-        /// </summary>
-        public string CheckNum { get; set; }
-        /// <summary>
-        /// 获取或设置转账银行
-        /// </summary>
-        public string Bank { get; set; }
-        /// <summary>
         /// 获取或设置付款单位
         /// </summary>
         public string Payer { get; set; }

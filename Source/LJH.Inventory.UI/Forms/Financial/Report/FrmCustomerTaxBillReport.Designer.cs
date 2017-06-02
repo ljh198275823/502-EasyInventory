@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
@@ -53,6 +53,8 @@
             this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col购货单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col出票单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -209,9 +211,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -222,21 +224,23 @@
             this.colAssigned,
             this.colRemain,
             this.colCustomer,
+            this.col购货单位,
+            this.col出票单位,
             this.colMemo});
             this.dataGridView1.Location = new System.Drawing.Point(5, 102);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(903, 376);
+            this.dataGridView1.Size = new System.Drawing.Size(1117, 376);
             this.dataGridView1.TabIndex = 39;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // colSheetDate
             // 
-            dataGridViewCellStyle5.Format = "D";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.colSheetDate.HeaderText = "日期";
             this.colSheetDate.Name = "colSheetDate";
             this.colSheetDate.ReadOnly = true;
@@ -251,18 +255,18 @@
             // 
             // colSheetID
             // 
+            this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colSheetID.HeaderText = "发票号";
-            this.colSheetID.MinimumWidth = 200;
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSheetID.Width = 200;
+            this.colSheetID.Width = 47;
             // 
             // colAmount
             // 
-            dataGridViewCellStyle6.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Format = "C2";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
@@ -270,8 +274,8 @@
             // 
             // colAssigned
             // 
-            dataGridViewCellStyle7.Format = "C2";
-            this.colAssigned.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Format = "C2";
+            this.colAssigned.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAssigned.HeaderText = "核销";
             this.colAssigned.Name = "colAssigned";
             this.colAssigned.ReadOnly = true;
@@ -280,21 +284,37 @@
             // 
             // colRemain
             // 
-            dataGridViewCellStyle8.Format = "C2";
-            this.colRemain.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Format = "C2";
+            this.colRemain.DefaultCellStyle = dataGridViewCellStyle4;
             this.colRemain.HeaderText = "未核销";
             this.colRemain.Name = "colRemain";
             this.colRemain.ReadOnly = true;
             // 
             // colCustomer
             // 
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCustomer.HeaderText = "客户";
-            this.colCustomer.MinimumWidth = 150;
+            this.colCustomer.MinimumWidth = 100;
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
             this.colCustomer.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCustomer.Width = 150;
+            // 
+            // col购货单位
+            // 
+            this.col购货单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col购货单位.HeaderText = "购货单位";
+            this.col购货单位.Name = "col购货单位";
+            this.col购货单位.ReadOnly = true;
+            this.col购货单位.Width = 78;
+            // 
+            // col出票单位
+            // 
+            this.col出票单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col出票单位.HeaderText = "出票单位";
+            this.col出票单位.Name = "col出票单位";
+            this.col出票单位.ReadOnly = true;
+            this.col出票单位.Width = 78;
             // 
             // colMemo
             // 
@@ -309,7 +329,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 503);
+            this.ClientSize = new System.Drawing.Size(1122, 503);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
@@ -352,6 +372,8 @@
         private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col购货单位;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col出票单位;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

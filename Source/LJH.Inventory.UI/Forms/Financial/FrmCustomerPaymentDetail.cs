@@ -97,9 +97,14 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtCustomer.Focus();
                 return false;
             }
-            if (txtAccount.Tag == null && !IsAdding)
+            if (txtAccount.Tag == null)
             {
                 MessageBox.Show("没有指定账号");
+            }
+            if ((txtAccount.Tag as Account).Class == AccountType.无效)
+            {
+                MessageBox.Show("账号是无效账号,请先将账号设置成有效的账号!");
+                return false;
             }
             if (txtAmount.DecimalValue <= 0)
             {
@@ -107,7 +112,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAmount.Focus();
                 return false;
             }
-            if (PaymentType == CustomerPaymentType.供应商付款)
+            if (PaymentType == CustomerPaymentType.供应商付款 && (txtAccount.Tag as Account).Class != AccountType.财务核算)
             {
                 decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
                 if (amount < txtAmount.DecimalValue)
@@ -195,17 +200,17 @@ namespace LJH.Inventory.UI.Forms.Financial
 
             if (PaymentType == CustomerPaymentType.客户收款)
             {
-                btnSave.Enabled =IsAdding &&  btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+                btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
                 AccountRecord ac = null;
                 if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac!=null &&  ac.Remain > 0;
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
                 btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Nullify);
             }
             else if (PaymentType == CustomerPaymentType.供应商付款)
             {
-                btnSave.Enabled =IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
+                btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
                 AccountRecord ac = null;
                 if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.Add || cp.State == SheetState.Approved) && ac != null && ac.Remain > 0;
@@ -384,9 +389,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmAccountMaster frm = new FrmAccountMaster();
+            frm.SearchCondition = new LJH.Inventory.BusinessModel.SearchCondition.AccountSearchCondition()
+            {
+                IsPublic = rd公账.Checked,
+                AccountTypes = new List<AccountType>() { AccountType.现金账号, AccountType.银行账号, AccountType.财务核算 }
+            };
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ForSelect = true;
-            frm.Ispublic = rd公账.Checked;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 var ac = frm.SelectedItem as Account;

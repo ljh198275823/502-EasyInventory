@@ -46,14 +46,19 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             else if (cp.ClassID == CustomerPaymentType.供应商增值税发票) row.Cells["colClass"].Value = "采购";
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colAmount"].Value = cp.Amount;
-            var remain = GetRemain(cp);
-            row.Cells["colRemain"].Value = remain != 0 ? (decimal?)remain : null;
-            row.Cells["colAssigned"].Value = cp.Amount - remain != 0 ? (decimal?)(cp.Amount - remain) : null;
+            if (cp.State != SheetState.Canceled)
+            {
+                var remain = GetRemain(cp);
+                row.Cells["colRemain"].Value = remain != 0 ? (decimal?)remain : null;
+                row.Cells["colAssigned"].Value = cp.Amount - remain != 0 ? (decimal?)(cp.Amount - remain) : null;
+            }
             if (_AllCustomers != null)
             {
                 var c = _AllCustomers.SingleOrDefault(it => it.ID == cp.CustomerID);
                 row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
             }
+            row.Cells["col购货单位"].Value = cp.Payer;
+            row.Cells["col出票单位"].Value = cp.AccountID;
             row.Cells["colMemo"].Value = cp.Memo;
             if (cp.ClassID == CustomerPaymentType.客户增值税发票) row.DefaultCellStyle.ForeColor = Color.Blue;
             else if (cp.ClassID == CustomerPaymentType.供应商增值税发票) row.DefaultCellStyle.ForeColor = Color.Red;

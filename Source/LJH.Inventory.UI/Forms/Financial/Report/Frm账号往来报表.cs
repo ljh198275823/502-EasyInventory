@@ -16,6 +16,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         }
 
         private decimal _balance = 0;
+        private List<Account> _AllAccounts = null;
 
         public Account Account { get; set; }
 
@@ -41,13 +42,16 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (cp.支出 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col支出"].Value = cp.支出;
             _balance += cp.收入 - cp.支出;
             row.Cells["col余额"].Value = _balance;
-            row.Cells["col付款单位"].Value = cp.付款单位;
+            Account ac = null;
+            if (!string.IsNullOrEmpty(cp.付款单位) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.付款单位);
+            row.Cells["col付款单位"].Value = ac != null ? ac.Name : cp.付款单位;
             row.Cells["colMemo"].Value = cp.Memo;
         }
 
         protected override List<object> GetDataSource()
         {
             _balance = 0;
+            _AllAccounts = new AccountBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             if (txtAccount.Tag == null)
             {
                 MessageBox.Show("没有指定账号");
@@ -63,9 +67,11 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.客户收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.其它收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.转账入 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.供应商退款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.供应商付款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.转账出 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.公司管理费用 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.客户退款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             //ret.Add(first);
             ret.AddRange(from it in ps
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
@@ -75,8 +81,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                              CreateDate = it.CreateDate,
                              单据编号 = it.SheetID,
                              PaymentType = it.ClassID,
-                             收入 = it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 ? it.Amount : 0,
-                             支出 = it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 ? it.Amount : 0,
+                             收入 = it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款 ? it.Amount : 0,
+                             支出 = it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款 ? it.Amount : 0,
                              付款单位 = it.OtherAccount,
                              Memo = it.Memo
                          });

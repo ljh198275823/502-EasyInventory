@@ -16,6 +16,8 @@ namespace LJH.Inventory.BusinessModel
         #region 公共属性
         public string ID { get; set; }
 
+        public AccountType Class { get; set; }
+
         public string Name { get; set; }
         /// <summary>
         /// 获取或设置是否是对公账号

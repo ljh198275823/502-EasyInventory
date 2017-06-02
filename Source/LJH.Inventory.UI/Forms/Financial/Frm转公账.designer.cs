@@ -37,8 +37,6 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtReceipt = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.lnk转出账号 = new System.Windows.Forms.LinkLabel();
             this.txtPayer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -69,6 +67,8 @@
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
+            this.txtReceipt = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -110,7 +110,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 172);
+            this.label5.Location = new System.Drawing.Point(37, 170);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 36;
@@ -146,7 +146,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(71, 169);
+            this.txtMemo.Location = new System.Drawing.Point(70, 167);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(414, 21);
             this.txtMemo.TabIndex = 8;
@@ -190,23 +190,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // txtReceipt
-            // 
-            this.txtReceipt.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtReceipt.Location = new System.Drawing.Point(70, 138);
-            this.txtReceipt.Name = "txtReceipt";
-            this.txtReceipt.Size = new System.Drawing.Size(414, 21);
-            this.txtReceipt.TabIndex = 103;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 141);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 104;
-            this.label1.Text = "银行回单";
             // 
             // lnk转出账号
             // 
@@ -499,6 +482,23 @@
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
+            // txtReceipt
+            // 
+            this.txtReceipt.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtReceipt.Location = new System.Drawing.Point(70, 137);
+            this.txtReceipt.Name = "txtReceipt";
+            this.txtReceipt.Size = new System.Drawing.Size(414, 21);
+            this.txtReceipt.TabIndex = 103;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 104;
+            this.label1.Text = "银行回单";
+            // 
             // Frm转公账
             // 
             this.AcceptButton = null;
@@ -567,8 +567,8 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtAccount;
         private System.Windows.Forms.LinkLabel lnkAccout;
         private GeneralLibrary.WinformControl.DBCTextBox txtPayer;
+        private System.Windows.Forms.LinkLabel lnk转出账号;
         private GeneralLibrary.WinformControl.DBCTextBox txtReceipt;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel lnk转出账号;
     }
 }

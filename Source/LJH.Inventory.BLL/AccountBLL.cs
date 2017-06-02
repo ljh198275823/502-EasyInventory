@@ -66,8 +66,8 @@ namespace LJH.Inventory.BLL
             {
                 foreach (var it in cps)
                 {
-                    if (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款) ret += it.Amount;
-                    else if (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用) ret -= it.Amount;
+                    if (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款) ret += it.Amount;
+                    else if (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款) ret -= it.Amount;
                 }
             }
             return ret;

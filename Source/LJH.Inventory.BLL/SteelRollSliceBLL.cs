@@ -52,6 +52,7 @@ namespace LJH.Inventory.BLL
             if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
             if (sheet.TransCost.HasValue && sheet.TransCostPrepay.HasValue && sheet.TransCostPrepay.Value) amount += sheet.TransCost.Value * sheet.OriginalWeight.Value;
             if (sheet.OtherCost.HasValue && sheet.OtherCostPrepay.HasValue && sheet.OtherCostPrepay.Value) amount += sheet.OtherCost.Value * sheet.OriginalWeight.Value;
+            if (original != null && original.Haspaid > amount) throw new Exception("原材料应收已核销的金额超过当前总价，请先取消部分核销金额再保存");
             cr.Amount = amount;
             if (original == null)
             {
@@ -93,6 +94,7 @@ namespace LJH.Inventory.BLL
             tax.SetProperty("规格", sheet.Product.Specification);
             decimal amount = 0;
             if (sheet.PurchasePrice.HasValue) amount += sheet.OriginalWeight.Value * sheet.PurchasePrice.Value;
+            if (original != null && original.Haspaid > amount) throw new Exception("原材料应开发票已核销的金额超过当前总价，请先取消部分核销发票再保存");
             tax.Amount = amount;
             if (original == null)
             {

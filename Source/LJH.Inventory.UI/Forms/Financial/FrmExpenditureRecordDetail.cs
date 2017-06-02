@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
@@ -44,6 +45,11 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (txtAccount.Tag == null)
             {
                 MessageBox.Show("没有指定付款账号");
+                return false;
+            }
+            if ((txtAccount.Tag as Account).Class == AccountType.无效)
+            {
+                MessageBox.Show("账号是无效账号,请先将账号设置成有效的账号!");
                 return false;
             }
             decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
@@ -227,6 +233,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmAccountMaster frm = new FrmAccountMaster();
+            frm.SearchCondition = new LJH.Inventory.BusinessModel.SearchCondition.AccountSearchCondition() { AccountTypes = new List<AccountType>() { AccountType.现金账号, AccountType.银行账号 } };
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)

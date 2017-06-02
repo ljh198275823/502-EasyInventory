@@ -92,6 +92,7 @@
     <Compile Include="CompanyClass.cs" />
     <Compile Include="Financial\Account.cs" />
     <Compile Include="Financial\AccountRecord.cs" />
+    <Compile Include="Financial\AccountType.cs" />
     <Compile Include="Financial\CustomerFinancialState.cs" />
     <Compile Include="Financial\CustomerPayment.cs" />
     <Compile Include="Financial\AccountRecordAssign.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Resource\SheetOperationDescription.cs" />
     <Compile Include="Resource\SheetStateDescription.cs" />
     <Compile Include="SearchCondition\AccountRecordSearchCondition.cs" />
+    <Compile Include="SearchCondition\AccountSearchCondition.cs" />
     <Compile Include="SearchCondition\AttachmentSearchCondition.cs" />
     <Compile Include="SearchCondition\ContactSearchCondition.cs" />
     <Compile Include="SearchCondition\AccountRecordAssignSearchCondition.cs" />

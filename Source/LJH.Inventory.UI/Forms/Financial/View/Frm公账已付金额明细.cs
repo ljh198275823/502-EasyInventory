@@ -44,7 +44,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             Account ac = null;
             if (!string.IsNullOrEmpty(cp.AccountID) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
             row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
-            row.Cells["colPayer"].Value = cp.OtherAccount;
+            if (!string.IsNullOrEmpty(cp.OtherAccount) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.OtherAccount);
+            row.Cells["colPayer"].Value = ac != null ? ac.Name : cp.OtherAccount;
             row.Cells["colAmount"].Value = cp.Amount;
             row.Cells["colRemain"].Value = cp.Remain != 0 ? (decimal?)cp.Remain : null;
             row.Cells["colAssigned"].Value = cp.Assigned != 0 ? (decimal?)cp.Assigned : null;
@@ -133,8 +134,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             Frm转公账 frm = new Frm转公账();
                             frm.IsAdding = false;
                             frm.UpdatingItem = sheet;
-                            frm.IsForView = true;
                             frm.ShowDialog();
+                            FreshData();
                         }
                         else
                         {
@@ -142,8 +143,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             frm.IsAdding = false;
                             frm.UpdatingItem = sheet;
                             frm.PaymentType = sheet.ClassID;
-                            frm.IsForView = true;
                             frm.ShowDialog();
+                            FreshData();
                         }
                     }
                 }

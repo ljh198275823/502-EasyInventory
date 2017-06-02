@@ -135,6 +135,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Ac
 BEGIN
 	CREATE TABLE [dbo].[Account](
 	[ID] [nvarchar](50) NOT NULL,
+	[ClassID] [tinyint] NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
 	[Ispublic] [bit] NOT NULL,
 	[AddDate] [datetime] not null,
@@ -251,5 +252,31 @@ go
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='AccountID' AND id = OBJECT_ID(N'[dbo].[ExpenditureRecord]'))
 BEGIN
 	exec ('alter table ExpenditureRecord add AccountID nvarchar(50) null')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Class' AND id = OBJECT_ID(N'[dbo].[Account]'))
+BEGIN
+	exec ('alter table Account add Class tinyint null')
+	exec ('update Account set Class=0 ')
+	exec ('alter table Account alter column Class tinyint not null')
+end
+go
+
+if exists (SELECT * FROM dbo.syscolumns WHERE name ='CurrencyType' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
+BEGIN
+	exec ('alter table CustomerPayment drop column CurrencyType')
+end
+go
+
+if exists (SELECT * FROM dbo.syscolumns WHERE name ='CheckNum' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
+BEGIN
+	exec ('alter table CustomerPayment drop column CheckNum')
+end
+go
+
+if exists (SELECT * FROM dbo.syscolumns WHERE name ='Bank' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
+BEGIN
+	exec ('alter table CustomerPayment drop column Bank')
 end
 go

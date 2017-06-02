@@ -25,6 +25,22 @@ namespace LJH.Inventory.DAL.LinqProvider
             Account c = dc.GetTable<Account>().SingleOrDefault(item => item.ID == id);
             return c;
         }
+
+        protected override List<Account> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
+        {
+            IQueryable<Account> ret = dc.GetTable<Account>();
+            if (search is AccountSearchCondition)
+            {
+                var con = search as AccountSearchCondition;
+                if (con.IsPublic.HasValue)
+                {
+                    if (con.IsPublic.Value) ret = ret.Where(it => it.Ispublic == true);
+                    else ret = ret.Where(it => it.Ispublic == false);
+                }
+                if (con.AccountTypes != null && con.AccountTypes.Count > 0) ret = ret.Where(it => con.AccountTypes.Contains(it.Class));
+            }
+            return ret.ToList();
+        }
         #endregion
     }
 }
