@@ -103,7 +103,6 @@
     <Compile Include="LinqProvider\DepartmentProvider.cs" />
     <Compile Include="LinqProvider\DocumentOperationProvider.cs" />
     <Compile Include="LinqProvider\ExpenditureTypeProvider.cs" />
-    <Compile Include="LinqProvider\ExpenditureRecordProvider.cs" />
     <Compile Include="IProvider\ICarplateProvider.cs" />
     <Compile Include="LinqProvider\InventoryCheckRecordProvider.cs" />
     <Compile Include="LinqProvider\OtherReceivableSheetProvider.cs" />

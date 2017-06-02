@@ -117,7 +117,6 @@ namespace InventoryDemo
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             //财务
             this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
-            this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
@@ -280,11 +279,6 @@ namespace InventoryDemo
         private void mnu_InventorySheet_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmStackInSheetMaster>(null);
-        }
-
-        private void mnu_Expanditure_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmExpenditureRecordMaster>(null);
         }
 
         private void mnu_DogInfo_Click(object sender, EventArgs e)

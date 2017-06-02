@@ -131,7 +131,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 与附件操作相关的方法和事件处理程序
         private void mnu_AttachmentAdd_Click(object sender, EventArgs e)
         {
-            ExpenditureRecord item = UpdatingItem as ExpenditureRecord;
+            CustomerPayment item = UpdatingItem as CustomerPayment;
             if (item != null) PerformAddAttach(item.ID, item.DocumentType, gridAttachment);
         }
 

@@ -495,23 +495,6 @@
       <Column Name="NumberType" Member="NumberType" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="ExpenditureRecord" Member="LJH.Inventory.BusinessModel.ExpenditureRecord">
-    <Type Name="LJH.Inventory.BusinessModel.ExpenditureRecord">
-      <Column Name="ID" Member="ID"   DbType="nvarchar(50) not null" IsPrimaryKey="true"/>
-      <Column Name="SheetDate" Member="SheetDate"  DbType="datetime not null" UpdateCheck="Never"/>
-      <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never" />
-      <Column Name="Category" Member="Category"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="AccountID" Member="AccountID" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Amount" Member="Amount" DbType="decimal(10,2) not null" UpdateCheck="Never"/>
-      <Column Name="PaymentMode" Member="PaymentMode" DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="Request" Member="Request"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="Payee" Member="Payee"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="CheckNum" Member="CheckNum"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)"  UpdateCheck="Never"/>
-      <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-    </Type>
-  </Table>
   <Table Name="ExpenditureType" Member="LJH.Inventory.BusinessModel.ExpenditureType">
     <Type Name="LJH.Inventory.BusinessModel.ExpenditureType">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />

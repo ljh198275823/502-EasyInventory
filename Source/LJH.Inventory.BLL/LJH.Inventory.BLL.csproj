@@ -96,7 +96,6 @@
     <Compile Include="DepartmentBLL.cs" />
     <Compile Include="DocumentOperationBLL.cs" />
     <Compile Include="ExpenditureTypeBLL.cs" />
-    <Compile Include="ExpenditureRecordBLL.cs" />
     <Compile Include="SteelRollBLL.cs" />
     <Compile Include="SteelRollSliceBLL.cs" />
     <Compile Include="StackInSheetBLL.cs" />

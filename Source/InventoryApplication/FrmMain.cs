@@ -245,7 +245,6 @@ namespace InventoryApplication
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             //财务
             this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
-            this.mnu_Expanditure.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
             this.mnu_账号管理.Enabled = cur.Permit(Permission.Account, PermissionActions.Read) || cur.Permit(Permission.Account, PermissionActions.Edit);
             //报表
@@ -254,7 +253,6 @@ namespace InventoryApplication
             this.mnu_InventoryRecord.Enabled = cur.Permit(Permission.InventoryRecordReport, PermissionActions.Read);
             this.mnu_SliceRecordReport.Enabled = cur.Permit(Permission.SliceRecordReport, PermissionActions.Read);
             this.mnu_PaymentReport.Enabled = cur.Permit(Permission.PaymentReport, PermissionActions.Read);
-            this.mnu_公司管理费用报表.Enabled = cur.Permit(Permission.公司管理费用报表, PermissionActions.Read);
             this.mnu_TaxBillReport.Enabled = cur.Permit(Permission.TaxBillReport, PermissionActions.Read);
             this.mnu_客户往来报表.Enabled = cur.Permit(Permission.客户往来报表, PermissionActions.Read);
         }
@@ -414,11 +412,6 @@ namespace InventoryApplication
         private void mnu_InventorySheet_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmStackInSheetMaster>(sender);
-        }
-
-        private void mnu_Expanditure_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<FrmExpenditureRecordMaster>(sender);
         }
 
         private void mnu_DogInfo_Click(object sender, EventArgs e)
@@ -583,11 +576,6 @@ namespace InventoryApplication
         private void mnu_账号管理_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmAccountMaster>(null);
-        }
-
-        private void mnu_公司管理费用报表_Click(object sender, EventArgs e)
-        {
-            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.FrmExpenditureReport>(null);
         }
     }
 }

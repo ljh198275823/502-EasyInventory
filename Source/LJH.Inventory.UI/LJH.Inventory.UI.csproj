@@ -136,12 +136,6 @@
     <Compile Include="Forms\Financial\Report\FrmCustomerTaxBillReport.designer.cs">
       <DependentUpon>FrmCustomerTaxBillReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Financial\Report\FrmExpenditureReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Financial\Report\FrmExpenditureReport.designer.cs">
-      <DependentUpon>FrmExpenditureReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Financial\Report\Frm客户往来报表.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,12 +475,6 @@
     <Compile Include="Forms\Financial\FrmExpenditureRecordDetail.designer.cs">
       <DependentUpon>FrmExpenditureRecordDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Financial\FrmExpenditureRecordMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Financial\FrmExpenditureRecordMaster.designer.cs">
-      <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Financial\FrmExpenditureTypeDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -710,9 +698,6 @@
     <EmbeddedResource Include="Forms\Financial\Report\FrmCustomerTaxBillReport.resx">
       <DependentUpon>FrmCustomerTaxBillReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\Report\FrmExpenditureReport.resx">
-      <DependentUpon>FrmExpenditureReport.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Report\Frm客户往来报表.resx">
       <DependentUpon>Frm客户往来报表.cs</DependentUpon>
     </EmbeddedResource>
@@ -881,9 +866,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmExpenditureRecordDetail.resx">
       <DependentUpon>FrmExpenditureRecordDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmExpenditureRecordMaster.resx">
-      <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmExpenditureTypeDetail.resx">
       <DependentUpon>FrmExpenditureTypeDetail.cs</DependentUpon>

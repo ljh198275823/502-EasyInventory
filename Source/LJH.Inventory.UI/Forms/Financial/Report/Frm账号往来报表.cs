@@ -163,7 +163,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                     }
                     else if (cp.PaymentType == CustomerPaymentType.公司管理费用)
                     {
-                        var sheet = new ExpenditureRecordBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
+                        var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
                         if (sheet != null)
                         {
                             FrmExpenditureRecordDetail frm = new FrmExpenditureRecordDetail();
@@ -176,14 +176,14 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                     else if (cp.PaymentType == CustomerPaymentType.客户退款)
                     {
                         if (!Operator.Current.Permit(Permission.退款, PermissionActions.Read)) return;
-                         var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                         if (sheet != null)
-                         {
-                             Frm退款 frm = new Frm退款();
-                             frm.IsAdding = false;
-                             frm.UpdatingItem = sheet;
-                             frm.ShowDialog();
-                         }
+                        var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
+                        if (sheet != null)
+                        {
+                            Frm退款 frm = new Frm退款();
+                            frm.IsAdding = false;
+                            frm.UpdatingItem = sheet;
+                            frm.ShowDialog();
+                        }
                     }
                 }
             }
