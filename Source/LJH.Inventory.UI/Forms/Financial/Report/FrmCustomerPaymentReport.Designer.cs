@@ -37,6 +37,9 @@
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkl转账 = new System.Windows.Forms.CheckBox();
+            this.chk转公账 = new System.Windows.Forms.CheckBox();
+            this.chk退款 = new System.Windows.Forms.CheckBox();
             this.chk费用支出 = new System.Windows.Forms.CheckBox();
             this.chk其它收款 = new System.Windows.Forms.CheckBox();
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -49,17 +52,16 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPaymentMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colAssigned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStackSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chk退款 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -67,17 +69,17 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(966, 8);
+            this.btnSearch.Location = new System.Drawing.Point(1022, 8);
             this.btnSearch.Size = new System.Drawing.Size(142, 23);
             // 
             // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(966, 37);
+            this.btnSaveAs.Location = new System.Drawing.Point(1022, 37);
             this.btnSaveAs.Size = new System.Drawing.Size(142, 23);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(966, 66);
+            this.btnColumn.Location = new System.Drawing.Point(1022, 66);
             this.btnColumn.Size = new System.Drawing.Size(142, 23);
             // 
             // groupBox1
@@ -113,6 +115,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkl转账);
+            this.groupBox3.Controls.Add(this.chk转公账);
             this.groupBox3.Controls.Add(this.chk退款);
             this.groupBox3.Controls.Add(this.chk费用支出);
             this.groupBox3.Controls.Add(this.chk其它收款);
@@ -126,17 +130,53 @@
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Location = new System.Drawing.Point(242, 8);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(704, 90);
+            this.groupBox3.Size = new System.Drawing.Size(761, 90);
             this.groupBox3.TabIndex = 38;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
+            // 
+            // chkl转账
+            // 
+            this.chkl转账.AutoSize = true;
+            this.chkl转账.Checked = true;
+            this.chkl转账.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkl转账.Location = new System.Drawing.Point(520, 56);
+            this.chkl转账.Name = "chkl转账";
+            this.chkl转账.Size = new System.Drawing.Size(48, 16);
+            this.chkl转账.TabIndex = 107;
+            this.chkl转账.Text = "转账";
+            this.chkl转账.UseVisualStyleBackColor = true;
+            // 
+            // chk转公账
+            // 
+            this.chk转公账.AutoSize = true;
+            this.chk转公账.Checked = true;
+            this.chk转公账.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk转公账.Location = new System.Drawing.Point(454, 56);
+            this.chk转公账.Name = "chk转公账";
+            this.chk转公账.Size = new System.Drawing.Size(60, 16);
+            this.chk转公账.TabIndex = 106;
+            this.chk转公账.Text = "转公账";
+            this.chk转公账.UseVisualStyleBackColor = true;
+            // 
+            // chk退款
+            // 
+            this.chk退款.AutoSize = true;
+            this.chk退款.Checked = true;
+            this.chk退款.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk退款.Location = new System.Drawing.Point(649, 55);
+            this.chk退款.Name = "chk退款";
+            this.chk退款.Size = new System.Drawing.Size(48, 16);
+            this.chk退款.TabIndex = 105;
+            this.chk退款.Text = "退款";
+            this.chk退款.UseVisualStyleBackColor = true;
             // 
             // chk费用支出
             // 
             this.chk费用支出.AutoSize = true;
             this.chk费用支出.Checked = true;
             this.chk费用支出.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk费用支出.Location = new System.Drawing.Point(526, 55);
+            this.chk费用支出.Location = new System.Drawing.Point(571, 56);
             this.chk费用支出.Name = "chk费用支出";
             this.chk费用支出.Size = new System.Drawing.Size(72, 16);
             this.chk费用支出.TabIndex = 104;
@@ -148,7 +188,7 @@
             this.chk其它收款.AutoSize = true;
             this.chk其它收款.Checked = true;
             this.chk其它收款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk其它收款.Location = new System.Drawing.Point(446, 55);
+            this.chk其它收款.Location = new System.Drawing.Point(625, 25);
             this.chk其它收款.Name = "chk其它收款";
             this.chk其它收款.Size = new System.Drawing.Size(72, 16);
             this.chk其它收款.TabIndex = 103;
@@ -181,7 +221,7 @@
             this.chk供应商付款.AutoSize = true;
             this.chk供应商付款.Checked = true;
             this.chk供应商付款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk供应商付款.Location = new System.Drawing.Point(356, 55);
+            this.chk供应商付款.Location = new System.Drawing.Point(535, 25);
             this.chk供应商付款.Name = "chk供应商付款";
             this.chk供应商付款.Size = new System.Drawing.Size(84, 16);
             this.chk供应商付款.TabIndex = 76;
@@ -193,7 +233,7 @@
             this.chk客户收款.AutoSize = true;
             this.chk客户收款.Checked = true;
             this.chk客户收款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk客户收款.Location = new System.Drawing.Point(275, 55);
+            this.chk客户收款.Location = new System.Drawing.Point(454, 25);
             this.chk客户收款.Name = "chk客户收款";
             this.chk客户收款.Size = new System.Drawing.Size(72, 16);
             this.chk客户收款.TabIndex = 75;
@@ -287,7 +327,6 @@
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colPaymentMode
             // 
@@ -327,6 +366,8 @@
             this.colAssigned.HeaderText = "核销";
             this.colAssigned.Name = "colAssigned";
             this.colAssigned.ReadOnly = true;
+            this.colAssigned.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colAssigned.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colRemain
             // 
@@ -364,18 +405,6 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // chk退款
-            // 
-            this.chk退款.AutoSize = true;
-            this.chk退款.Checked = true;
-            this.chk退款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk退款.Location = new System.Drawing.Point(604, 55);
-            this.chk退款.Name = "chk退款";
-            this.chk退款.Size = new System.Drawing.Size(48, 16);
-            this.chk退款.TabIndex = 105;
-            this.chk退款.Text = "退款";
-            this.chk退款.UseVisualStyleBackColor = true;
-            // 
             // FrmCustomerPaymentReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -388,10 +417,10 @@
             this.Text = "收付款流水报表";
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.btnColumn, 0);
-            this.Controls.SetChildIndex(this.dataGridView1, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -417,18 +446,20 @@
         private System.Windows.Forms.LinkLabel lnkAccout;
         private System.Windows.Forms.CheckBox chk费用支出;
         private System.Windows.Forms.CheckBox chk其它收款;
+        private System.Windows.Forms.CheckBox chk退款;
+        private System.Windows.Forms.CheckBox chkl转账;
+        private System.Windows.Forms.CheckBox chk转公账;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
+        private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaymentMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPayer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.CheckBox chk退款;
     }
 }

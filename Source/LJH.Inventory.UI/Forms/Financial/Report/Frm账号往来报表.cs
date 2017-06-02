@@ -120,70 +120,57 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             {
                 if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
                 账户往来项 cp = dataGridView1.Rows[e.RowIndex].Tag as 账户往来项;
+                var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
+                if (sheet == null) return;
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    if (cp.PaymentType == CustomerPaymentType.客户收款 || cp.PaymentType == CustomerPaymentType.供应商付款)
+                    if (sheet.ClassID == CustomerPaymentType.客户收款 || sheet.ClassID == CustomerPaymentType.供应商付款)
                     {
-                        if (!Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Read)) return;
-                        var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                        if (sheet != null)
-                        {
-                            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                            frm.IsAdding = false;
-                            frm.UpdatingItem = sheet;
-                            frm.IsForView = true;
-                            frm.PaymentType = cp.PaymentType;
-                            frm.ShowDialog();
-                        }
+                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.PaymentType = cp.PaymentType;
+                        frm.ShowDialog();
                     }
-                    else if (cp.PaymentType == CustomerPaymentType.转账出 || cp.PaymentType == CustomerPaymentType.转账入)
+                    else if (sheet.ClassID == CustomerPaymentType.转公账)
                     {
-                        var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                        if (sheet != null)
-                        {
-                            Frm转公账 frm = new Frm转公账();
-                            frm.IsAdding = false;
-                            frm.UpdatingItem = sheet;
-                            frm.IsForView = true;
-                            frm.ShowDialog();
-                        }
+                        Frm转公账 frm = new Frm转公账();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
                     }
-                    else if (cp.PaymentType == CustomerPaymentType.其它收款)
+                    else if (sheet.ClassID == CustomerPaymentType.转账)
                     {
-                        if (!Operator.Current.Permit(Permission.其它收款, PermissionActions.Read)) return;
-                        var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                        if (sheet != null)
-                        {
-                            Frm其它收款 frm = new Frm其它收款();
-                            frm.IsAdding = false;
-                            frm.UpdatingItem = sheet;
-                            frm.IsForView = true;
-                            frm.ShowDialog();
-                        }
+                        Frm转账 frm = new Frm转账();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
                     }
-                    else if (cp.PaymentType == CustomerPaymentType.公司管理费用)
+                    else if (sheet.ClassID == CustomerPaymentType.其它收款)
                     {
-                        var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                        if (sheet != null)
-                        {
-                            FrmExpenditureRecordDetail frm = new FrmExpenditureRecordDetail();
-                            frm.IsAdding = false;
-                            frm.UpdatingItem = sheet;
-                            frm.IsForView = true;
-                            frm.ShowDialog();
-                        }
+                        Frm其它收款 frm = new Frm其它收款();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
                     }
-                    else if (cp.PaymentType == CustomerPaymentType.客户退款)
+                    else if (sheet.ClassID == CustomerPaymentType.公司管理费用)
                     {
-                        if (!Operator.Current.Permit(Permission.退款, PermissionActions.Read)) return;
-                        var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                        if (sheet != null)
-                        {
-                            Frm退款 frm = new Frm退款();
-                            frm.IsAdding = false;
-                            frm.UpdatingItem = sheet;
-                            frm.ShowDialog();
-                        }
+                        Frm管理费用 frm = new Frm管理费用();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.客户退款)
+                    {
+                        Frm退款 frm = new Frm退款();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
                     }
                 }
             }

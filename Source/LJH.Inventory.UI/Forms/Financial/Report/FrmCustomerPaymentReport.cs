@@ -49,7 +49,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             Account ac = null;
             if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
             row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
-            row.Cells["colPayer"].Value = cp.Payer;
+            if (!string.IsNullOrEmpty(cp.Payer ) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.Payer );
+            row.Cells["colPayer"].Value = ac != null ? ac.Name : cp.Payer;
             row.Cells["colAmount"].Value = cp.Amount;
             if (cp.State != SheetState.Canceled)
             {
@@ -64,8 +65,6 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
             }
             row.Cells["colMemo"].Value = cp.Memo;
-            if (cp.ClassID == CustomerPaymentType.客户收款 || cp.ClassID == CustomerPaymentType.其它收款) row.DefaultCellStyle.ForeColor = Color.Blue;
-            else if (cp.ClassID == CustomerPaymentType.供应商付款 || cp.ClassID == CustomerPaymentType.公司管理费用) row.DefaultCellStyle.ForeColor = Color.Red;
             if (cp.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
@@ -77,23 +76,12 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             _AllAccounts = new AccountBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-            if (!chk供应商付款.Checked && !chk客户收款.Checked && !chk其它收款.Checked && !chk费用支出.Checked) return null;
 
             var acon = new AccountRecordSearchCondition();
             acon.CreateDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             if (txtCustomer.Tag != null) acon.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtSupplier.Tag != null) acon.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
             if (txtAccount.Tag != null) acon.AccountID = (txtAccount.Tag as Account).ID;
-            acon.PaymentTypes = new List<CustomerPaymentType>();
-            if (chk客户收款.Checked) acon.PaymentTypes.Add(CustomerPaymentType.客户收款);
-            if (chk供应商付款.Checked) acon.PaymentTypes.Add(CustomerPaymentType.供应商付款);
-            if (chk其它收款.Checked) acon.PaymentTypes.Add(CustomerPaymentType.其它收款);
-            if (chk费用支出.Checked) acon.PaymentTypes.Add(CustomerPaymentType.公司管理费用);
-            if (chk退款.Checked)
-            {
-                acon.PaymentTypes.Add(CustomerPaymentType.客户退款);
-                acon.PaymentTypes.Add(CustomerPaymentType.供应商退款);
-            }
             _AccountRecords = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(acon).QueryObjects;
 
             var con = new CustomerPaymentSearchCondition();
@@ -106,6 +94,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk供应商付款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商付款);
             if (chk其它收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.其它收款);
             if (chk费用支出.Checked) con.PaymentTypes.Add(CustomerPaymentType.公司管理费用);
+            if (chk转公账.Checked) con.PaymentTypes.Add(CustomerPaymentType.转公账);
+            if (chkl转账.Checked) con.PaymentTypes.Add(CustomerPaymentType.转账);
             if (chk退款.Checked)
             {
                 con.PaymentTypes.Add(CustomerPaymentType.客户退款);
@@ -186,15 +176,55 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
-                CustomerPayment cp = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
-                if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
+                CustomerPayment sheet = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
+                if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                    if (ar != null)
+                    if (sheet.ClassID == CustomerPaymentType.客户收款 || sheet.ClassID == CustomerPaymentType.供应商付款)
                     {
-                        FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
-                        frm.StartPosition = FormStartPosition.CenterParent;
-                        frm.ShowAssigns(ar);
+                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.PaymentType = sheet.ClassID;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.转公账)
+                    {
+                        Frm转公账 frm = new Frm转公账();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.转账)
+                    {
+                        Frm转账 frm = new Frm转账();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.其它收款)
+                    {
+                        Frm其它收款 frm = new Frm其它收款();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.公司管理费用)
+                    {
+                        Frm管理费用 frm = new Frm管理费用();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.客户退款)
+                    {
+                        Frm退款 frm = new Frm退款();
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = sheet;
                         frm.ShowDialog();
                     }
                 }

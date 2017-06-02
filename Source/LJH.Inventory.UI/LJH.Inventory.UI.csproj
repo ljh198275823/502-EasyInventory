@@ -118,6 +118,12 @@
     <Compile Include="Forms\Financial\Frm核销公账.designer.cs">
       <DependentUpon>Frm核销公账.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\Frm转账.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Frm转账.designer.cs">
+      <DependentUpon>Frm转账.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\Frm退款.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -469,11 +475,11 @@
     <Compile Include="Forms\Inventory\FrmStackOutSheetMaster.designer.cs">
       <DependentUpon>FrmStackOutSheetMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Financial\FrmExpenditureRecordDetail.cs">
+    <Compile Include="Forms\Financial\Frm管理费用.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Financial\FrmExpenditureRecordDetail.designer.cs">
-      <DependentUpon>FrmExpenditureRecordDetail.cs</DependentUpon>
+    <Compile Include="Forms\Financial\Frm管理费用.designer.cs">
+      <DependentUpon>Frm管理费用.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Financial\FrmExpenditureTypeDetail.cs">
       <SubType>Form</SubType>
@@ -657,10 +663,10 @@
     </Compile>
     <Compile Include="Forms\NPOIExcelHelper.cs" />
     <Compile Include="Forms\JSEngine.cs" />
-    <Compile Include="FrmMemo.cs">
+    <Compile Include="Forms\FrmMemo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMemo.designer.cs">
+    <Compile Include="Forms\FrmMemo.designer.cs">
       <DependentUpon>FrmMemo.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -688,6 +694,9 @@
     <EmbeddedResource Include="Forms\Financial\Frm核销公账.resx">
       <DependentUpon>Frm核销公账.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Frm转账.resx">
+      <DependentUpon>Frm转账.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Frm退款.resx">
       <DependentUpon>Frm退款.cs</DependentUpon>
@@ -864,8 +873,8 @@
     <EmbeddedResource Include="Forms\Inventory\FrmStackOutSheetMaster.resx">
       <DependentUpon>FrmStackOutSheetMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmExpenditureRecordDetail.resx">
-      <DependentUpon>FrmExpenditureRecordDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Financial\Frm管理费用.resx">
+      <DependentUpon>Frm管理费用.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmExpenditureTypeDetail.resx">
       <DependentUpon>FrmExpenditureTypeDetail.cs</DependentUpon>
@@ -957,7 +966,7 @@
     <EmbeddedResource Include="Forms\FrmRoleMaster.resx">
       <DependentUpon>FrmRoleMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMemo.resx">
+    <EmbeddedResource Include="Forms\FrmMemo.resx">
       <DependentUpon>FrmMemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

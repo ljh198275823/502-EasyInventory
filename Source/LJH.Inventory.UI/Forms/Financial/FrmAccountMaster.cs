@@ -144,12 +144,20 @@ namespace LJH.Inventory.UI.Forms.Financial
                     MessageBox.Show("此账号不能增加管理费用");
                     return;
                 }
-                FrmExpenditureRecordDetail frm = new FrmExpenditureRecordDetail();
+                Frm管理费用 frm = new Frm管理费用();
                 frm.Account = ac;
                 frm.IsAdding = true;
                 frm.ShowDialog();
                 dataGridView1.SelectedRows[0].Cells["colAmount"].Value = new AccountBLL(AppSettings.Current.ConnStr).GetRemain(ac.ID);
             }
+        }
+
+        private void mnu_增加转账_Click(object sender, EventArgs e)
+        {
+            Frm转账 frm = new Frm转账();
+            frm.IsAdding = true;
+            frm.ShowDialog();
+            btn_Fresh.PerformClick();
         }
     }
 }

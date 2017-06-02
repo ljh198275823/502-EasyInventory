@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Financial
 {
-    partial class FrmExpenditureRecordDetail
+    partial class Frm管理费用
     {
         /// <summary>
         /// Required designer variable.

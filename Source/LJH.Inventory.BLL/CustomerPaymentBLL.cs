@@ -36,7 +36,7 @@ namespace LJH.Inventory.BLL
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("收", "yyMM", 3, info.DocumentType);
             }
-            else if (info.ClassID == CustomerPaymentType.转公账)
+            else if (info.ClassID == CustomerPaymentType.转公账 || info.ClassID == CustomerPaymentType.转账)
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("转", "yyMM", 3, info.DocumentType);
             }
@@ -97,7 +97,39 @@ namespace LJH.Inventory.BLL
                     StackSheetID = info.StackSheetID,
                     AccountID = info.Payer,
                     Amount = info.Amount,
+                    OtherAccount = info.AccountID,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+            }
+            else if (info.ClassID == CustomerPaymentType.转账)
+            {
+                AccountRecord ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = CustomerPaymentType.转账入,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+
+                ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = CustomerPaymentType.转账出,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.Payer,
+                    Amount = info.Amount,
+                    OtherAccount = info.AccountID,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);

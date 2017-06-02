@@ -196,7 +196,7 @@
             // 
             // col付款单位
             // 
-            this.col付款单位.HeaderText = "付款单位";
+            this.col付款单位.HeaderText = "对方账号";
             this.col付款单位.Name = "col付款单位";
             this.col付款单位.ReadOnly = true;
             this.col付款单位.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
