@@ -94,6 +94,7 @@
     <Compile Include="LinqProvider\CarplateProvider.cs" />
     <Compile Include="LinqProvider\CollectionTypeProvider.cs" />
     <Compile Include="LinqProvider\ContactProvider.cs" />
+    <Compile Include="LinqProvider\Cost.cs" />
     <Compile Include="LinqProvider\CurrencyTypeProvider.cs" />
     <Compile Include="LinqProvider\AccountRecordAssignProvider.cs" />
     <Compile Include="LinqProvider\CustomerPaymentProvider.cs" />

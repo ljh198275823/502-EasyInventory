@@ -87,6 +87,7 @@
     <Compile Include="AttachmentHeader.cs" />
     <Compile Include="CollectionType.cs" />
     <Compile Include="Contact.cs" />
+    <Compile Include="CostItem.cs" />
     <Compile Include="CurrencyType.cs" />
     <Compile Include="CompanyInfo.cs" />
     <Compile Include="CompanyClass.cs" />

@@ -425,20 +425,19 @@
   <Table Name="ProductInventoryItem" Member="LJH.Inventory.BusinessModel.ProductInventoryItem">
     <Type Name="LJH.Inventory.BusinessModel.ProductInventoryItem">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) not null"  UpdateCheck="Never"/>
       <Column Name="Model" Member="Model"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
-      <Column Name="Price" Member="Price"  DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="OriginalWeight" Member="OriginalWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="OriginalLength" Member="OriginalLength"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="OriginalCount" Member="OriginalCount"  DbType="decimal(18,4)" UpdateCheck="Never"/>
+      <Column Name="OriginalThick" Member="OriginalThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
-      <Column Name="OriginalThick" Member="OriginalThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
+      <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
       <Column Name="RealThick" Member="RealThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
-      <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Customer" Member="Customer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Supplier" Member="Supplier"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -446,12 +445,7 @@
       <Column Name="SerialNumber" Member="SerialNumber"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Material" Member="Material"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Carplate" Member="Carplate"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="PurchasePrice" Member="PurchasePrice"  DbType="decimal(18,4)" UpdateCheck="Never"/>
-      <Column Name="WithTax" Member="WithTax"  DbType="bit" UpdateCheck="Never"/>
-      <Column Name="TransCost" Member="TransCost"  DbType="decimal(18,4)" UpdateCheck="Never"/>
-      <Column Name="TransCostPrepay" Member="TransCostPrepay"  DbType="bit" UpdateCheck="Never"/>
-      <Column Name="OtherCost" Member="OtherCost"  DbType="decimal(18,4)" UpdateCheck="Never"/>
-      <Column Name="OtherCostPrepay" Member="OtherCostPrepay"  DbType="bit" UpdateCheck="Never"/>
+      <Column Name="CostID" Member="CostID"  DbType="uniqueidentifier null"/>
       <Column Name="Position" Member="Position"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -465,6 +459,12 @@
       <Column Name="SourceRoll" Member="SourceRoll"  DbType="uniqueidentifier"  UpdateCheck="Never"/>
       <Column Name="Operator" Member="Operator"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
+    </Type>
+  </Table>
+  <Table Name="Cost" Member="LJH.Inventory.DAL.LinqProvider.Cost">
+    <Type Name="LJH.Inventory.DAL.LinqProvider.Cost">
+      <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
+      <Column Name="Costs" Member="Costs"  DbType="nvarchar(512) not null"  UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="SteelRollSliceRecord" Member="LJH.Inventory.BusinessModel.SteelRollSliceRecord">

@@ -85,10 +85,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
             if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
             {
-                row.Cells["colPurchasePrice"].Value = info.PurchasePrice;
-                row.Cells["colPurchaseTax"].Value = info.WithTax;
-                row.Cells["colTransCost"].Value = info.TransCost;
-                row.Cells["colOtherCost"].Value = info.OtherCost;
+                CostItem ci = info.GetCost(CostItem.采购价);
+                if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
+                if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
+                ci = info.GetCost(CostItem.运费);
+                if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
+                ci = info.GetCost(CostItem.其它费用);
+                if (ci != null) row.Cells["colOtherCost"].Value = ci.Price;
             }
         }
         #endregion

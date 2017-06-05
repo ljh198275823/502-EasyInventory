@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace LJH.Inventory.BusinessModel
 {
@@ -133,31 +134,52 @@ namespace LJH.Inventory.BusinessModel
         public string Memo { get; set; }
         #endregion
 
-        #region 成本相关的属性
-        /// <summary>
-        /// 获取或设置采购价格
-        /// </summary>
-        public decimal? PurchasePrice { get; set; }
-        /// <summary>
-        /// 获取或设置采购价格中是否含税
-        /// </summary>
-        public bool? WithTax { get; set; }
-        /// <summary>
-        /// 获取或设置运输成本
-        /// </summary>
-        public decimal? TransCost { get; set; }
-        /// <summary>
-        /// 获取或设置运费是否由供应商代垫
-        /// </summary>
-        public bool? TransCostPrepay { get; set; }
-        /// <summary>
-        /// 获取或设置其它费用
-        /// </summary>
-        public decimal? OtherCost { get; set; }
-        /// <summary>
-        /// 获取或设置其它费用是否由供应商代垫
-        /// </summary>
-        public bool? OtherCostPrepay { get; set; }
+        #region 扩展属性
+        public Guid? CostID { get; set; }
+        public string Costs;
+
+        private List<CostItem> _CostItems = null;
+
+        public CostItem GetCost(string key)
+        {
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return null;
+            var ret = _CostItems.SingleOrDefault(it => it.Name == key);
+            return ret;
+        }
+
+        public void SetCost(CostItem ci)
+        {
+            if (_CostItems == null) _CostItems = new List<CostItem>();
+            _CostItems.RemoveAll(it => it.Name == ci.Name);
+            _CostItems.Add(ci);
+            Costs = JsonConvert.SerializeObject(_CostItems);
+        }
+
+        public decimal CalReceivable()
+        {
+            decimal ret = 0;
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return 0;
+            foreach (var ci in _CostItems)
+            {
+                if (ci.Name == CostItem.采购价) ret += OriginalWeight.Value * ci.Price; //采购价一定要加到
+                else if (ci.Prepay) ret += OriginalWeight.Value * ci.Price;
+            }
+            return ret;
+        }
+
+        public decimal CalTax()
+        {
+            decimal ret = 0;
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return 0;
+            foreach (var ci in _CostItems)
+            {
+                if (ci.Name == CostItem.采购价) ret += OriginalWeight.Value * ci.Price; //采购价一定要加到
+            }
+            return ret;
+        }
         #endregion
 
         #region 与库存状态相关的公共属性

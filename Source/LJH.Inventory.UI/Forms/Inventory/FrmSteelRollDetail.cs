@@ -159,18 +159,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
             chkOtherCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
             chkTransCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
             pnlTax.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            var ci = item.GetCost(CostItem.采购价);
+            txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
+            rdWithTax.Checked = ci != null && ci.WithTax;
+            rdWithoutTax.Checked = !rdWithTax.Checked;
+            ci = item.GetCost(CostItem.运费);
+            txtTransCost.DecimalValue = ci != null ? ci.Price : 0;
+            chkTransCostPrepay.Checked = ci != null && ci.Prepay;
+            ci = item.GetCost(CostItem.其它费用);
+            txtOtherCost.DecimalValue = ci != null ? ci.Price : 0;
+            chkOtherCostPrepay.Checked = ci != null && ci.Prepay;
 
-            if (item.PurchasePrice.HasValue) txtPurchasePrice.DecimalValue = item.PurchasePrice.Value;
-            rdWithTax.Checked = item.WithTax.HasValue && item.WithTax.Value;
-            rdWithoutTax.Checked = item.WithTax.HasValue && !item.WithTax.Value;
-            if (item.TransCost.HasValue) txtTransCost.DecimalValue = item.TransCost.Value;
-            chkTransCostPrepay.Checked = item.TransCostPrepay.HasValue && item.TransCostPrepay.Value;
-            if (item.OtherCost.HasValue) txtOtherCost.DecimalValue = item.OtherCost.Value;
-            chkOtherCostPrepay.Checked = item.OtherCostPrepay.HasValue && item.OtherCostPrepay.Value;
             txtPosition.Text = item.Position;
             txtMaterial.Text = item.Material;
             txtCarPlate.Text = item.Carplate;
-            txtOrderID.Text = item.OrderID;
+            txtOrderID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
             btnOk.Enabled = btnOk.Enabled && item.CanEdit;
         }
@@ -210,18 +213,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             item.Manufacture = cmbBrand.Text;
             item.SerialNumber = txtSerialNumber.Text;
-            item.PurchasePrice = txtPurchasePrice.DecimalValue > 0 ? (decimal?)txtPurchasePrice.DecimalValue : null;
-            if (rdWithTax.Checked) item.WithTax = true;
-            if (rdWithoutTax.Checked) item.WithTax = false;
-            item.TransCost = txtTransCost.DecimalValue > 0 ? (decimal?)txtTransCost.DecimalValue : null;
-            item.TransCostPrepay = chkTransCostPrepay.Checked;
-            item.OtherCost = txtOtherCost.DecimalValue > 0 ? (decimal?)txtOtherCost.DecimalValue : null;
-            item.OtherCostPrepay = chkOtherCostPrepay.Checked;
+            item.SetCost(new CostItem() { Name = CostItem.采购价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = false, Prepay = chkTransCostPrepay.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = false, Prepay = chkOtherCostPrepay.Checked });
             item.Position = txtPosition.Text;
             item.Carplate = txtCarPlate.Text;
             item.Material = txtMaterial.Text;
             item.Memo = txtMemo.Text;
-            item.OrderID = txtOrderID.Text;
+            item.PurchaseID = txtOrderID.Text;
             item.Operator = Operator.Current.Name;
             return item;
         }

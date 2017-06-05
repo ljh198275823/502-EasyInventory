@@ -267,15 +267,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
             if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
             {
-                row.Cells["colPurchasePrice"].Value = sr.PurchasePrice;
-                row.Cells["colPurchaseTax"].Value = sr.WithTax;
-                row.Cells["colTransCost"].Value = sr.TransCost;
-                row.Cells["colOtherCost"].Value = sr.OtherCost;
+                CostItem ci = sr.GetCost(CostItem.采购价);
+                if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
+                if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
+                ci = sr.GetCost(CostItem.运费);
+                if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.其它费用);
+                if (ci != null) row.Cells["colOtherCost"].Value = ci.Price;
             }
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colPosition"].Value = sr.Position;
             row.Cells["colMaterial"].Value = sr.Material;
             row.Cells["colCarplate"].Value = sr.Carplate;
+            row.Cells["colPurchaseID"].Value = sr.PurchaseID;
             row.Cells["colMemo"].Value = sr.Memo;
             ShowRowColor(row);
             if (!_SteelRolls.Exists(it => it.ID == sr.ID))

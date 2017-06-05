@@ -13,13 +13,6 @@ BEGIN
 end
 go
 
---2016-1-15
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Bank' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
-BEGIN
-	exec ('alter table CustomerPayment add Bank nvarchar(50)')
-end
-go
-
 --2016-2-19
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='DefaultLinker' AND id = OBJECT_ID(N'[dbo].[Customer]'))
 BEGIN
@@ -37,42 +30,6 @@ go
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Material' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
 BEGIN
 	exec ('alter table ProductInventoryItem add Material nvarchar(50)')
-end
-go
-
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='PurchasePrice' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
-BEGIN
-	exec ('alter table ProductInventoryItem add PurchasePrice decimal(18,4)')
-end
-go
-
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='WithTax' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
-BEGIN
-	exec ('alter table ProductInventoryItem add WithTax bit')
-end
-go
-
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='TransCost' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
-BEGIN
-	exec ('alter table ProductInventoryItem add TransCost decimal(18,4)')
-end
-go
-
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='TransCostPrepay' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
-BEGIN
-	exec ('alter table ProductInventoryItem add TransCostPrepay bit')
-end
-go
-
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OtherCost' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
-BEGIN
-	exec ('alter table ProductInventoryItem add OtherCost decimal(18,4)')
-end
-go
-
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='OtherCostPrepay' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
-BEGIN
-	exec ('alter table ProductInventoryItem add OtherCostPrepay bit')
 end
 go
 
@@ -169,8 +126,7 @@ BEGIN
 	) ON [PRIMARY]
 END
 go
-
---客户付款流水增加四个字段 账号，付款单位
+ 
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='AccountID' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
 BEGIN
 	exec ('alter table CustomerPayment add AccountID nvarchar(50) null')
@@ -278,5 +234,36 @@ go
 if exists (SELECT * FROM dbo.syscolumns WHERE name ='Bank' AND id = OBJECT_ID(N'[dbo].[CustomerPayment]'))
 BEGIN
 	exec ('alter table CustomerPayment drop column Bank')
+end
+go
+
+--20170605 成本核算
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Cost]') AND type in (N'U'))
+BEGIN
+	CREATE TABLE [dbo].[Cost](
+	[ID] [uniqueidentifier] NOT NULL,
+	[Costs] [NVARCHAR](256) NOT NULL,
+	 CONSTRAINT [PK_Cost] PRIMARY KEY CLUSTERED 
+	(
+		[ID] ASC
+	)
+	) ON [PRIMARY]
+	
+	exec ('insert into Cost (id,Costs) select a.id, ''[{"Name":"采购价","Price":'' + LTRIM(RTRIM(str(ISNULL(a.PurchasePrice,0)))) +'',"WithTax":'' + (case a.withtax when 1 then ''true'' else ''false'' end)+ ''},{"Name":"运费","Price":'' + LTRIM(RTRIM(str(ISNULL(a.TransCost ,0)))) + '',"WithTax":false,"Prepay":'' + (case a.TransCostPrepay when 1 then ''true'' else ''false'' end) + ''},{"Name":"其它费用","Price":'' + LTRIM(RTRIM(str(ISNULL(a.OtherCost,0)))) +'',"WithTax":false,"Prepay":'' + (case a.OtherCostPrepay when 1 then ''true'' else ''false'' end)   + ''}]'' from ProductInventoryItem a where sourceRoll is null  ')
+	exec ('alter table ProductInventoryItem drop column PurchasePrice ')
+	exec ('alter table ProductInventoryItem drop column withTax ')
+	exec ('alter table ProductInventoryItem drop column transcost ')
+	exec ('alter table ProductInventoryItem drop column transcostprepay ')
+	exec ('alter table ProductInventoryItem drop column othercost ')
+	exec ('alter table ProductInventoryItem drop column othercostprepay ')
+	exec ('alter table ProductInventoryItem drop column price ')
+END
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='CostID' AND id = OBJECT_ID(N'[dbo].[ProductInventoryItem]'))
+BEGIN
+	exec ('alter table ProductInventoryItem add CostID uniqueidentifier null')
+	exec ('update ProductInventoryItem set CostID=id where sourceroll is null')
+	exec ('update productinventoryitem set costid=sourceroll where sourceroll is not null')
 end
 go
