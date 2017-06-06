@@ -146,11 +146,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtCount.Focus();
                 return false;
             }
-            if (txtPurchasePrice.DecimalValue > 0 && !rdWithoutTax.Checked && !rdWithTax.Checked)
-            {
-                MessageBox.Show("没有指定价格是否含税");
-                return false;
-            }
             if (string.IsNullOrEmpty(txtCustomer.Text))
             {
                 MessageBox.Show("没有指定客户");
@@ -171,6 +166,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 MessageBox.Show("请输入产品材质");
                 txtMaterial.Focus();
+                return false;
+            }
+            if (txtPurchasePrice.DecimalValue > 0 && !rdWithoutTax__入库单价.Checked && !rdWithTax_入库单价.Checked)
+            {
+                MessageBox.Show("没有指定入库价格是否含税");
+                return false;
+            }
+            if (txtTransCost.DecimalValue > 0 && !rdWithTax_运费.Checked && !rdWithoutTax__运费.Checked)
+            {
+                MessageBox.Show("没有指定运费是否含税");
+                return false;
+            }
+            if (txtOtherCost.DecimalValue > 0 && !rdWithTax_其它费用.Checked && !rdWithoutTax__其它费用.Checked)
+            {
+                MessageBox.Show("没有指定其它费用是否含税");
                 return false;
             }
             return true;
@@ -209,21 +219,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             cmbBrand.Text = item.Manufacture;
 
-            txtPurchasePrice.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
-            txtTransCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
-            txtOtherCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
-            chkOtherCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
-            chkTransCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
-            panel2.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            if (!pnlCost.Visible) this.Height -= pnlCost.Height;
             var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
-            rdWithTax.Checked = ci != null && ci.WithTax;
-            rdWithoutTax.Checked = !rdWithTax.Checked;
+            rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
+            rdWithoutTax__入库单价.Checked = !rdWithTax_入库单价.Checked;
             ci = item.GetCost(CostItem.运费);
             txtTransCost.DecimalValue = ci != null ? ci.Price : 0;
+            rdWithTax_运费.Checked = ci != null && ci.WithTax;
+            rdWithoutTax__运费.Checked = !rdWithTax_运费.Checked;
             chkTransCostPrepay.Checked = ci != null && ci.Prepay;
             ci = item.GetCost(CostItem.其它费用);
             txtOtherCost.DecimalValue = ci != null ? ci.Price : 0;
+            rdWithTax_其它费用.Checked = ci != null && ci.WithTax;
+            rdWithoutTax__其它费用.Checked = !rdWithTax_其它费用.Checked;
             chkOtherCostPrepay.Checked = ci != null && ci.Prepay;
 
             txtPosition.Text = item.Position;
@@ -334,9 +344,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Customer = txtCustomer.Text;
             if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             item.Manufacture = cmbBrand.Text;
-            item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax.Checked });
-            item.SetCost(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = false, Prepay = chkTransCostPrepay.Checked });
-            item.SetCost(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = false, Prepay = chkOtherCostPrepay.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = rdWithTax_运费.Checked, Prepay = chkTransCostPrepay.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = rdWithTax_其它费用.Checked, Prepay = chkOtherCostPrepay.Checked });
             item.Position = txtPosition.Text;
             item.Material = txtMaterial.Text;
             item.PurchaseID = txtPurchaseID.Text;

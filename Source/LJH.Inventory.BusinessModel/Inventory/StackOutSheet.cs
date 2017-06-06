@@ -110,6 +110,12 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public SheetState State { get; set; }
         /// <summary>
+        /// 获取或设置成本
+        /// </summary>
+        public decimal Costs { get; set; }
+
+        public decimal? 结算成本 { get; set; }
+        /// <summary>
         /// 获取或设置备注描述
         /// </summary>
         public string Memo { get; set; }

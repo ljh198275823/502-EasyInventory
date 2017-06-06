@@ -406,6 +406,50 @@ namespace LJH.Inventory.BLL
             ret.NotPaid = item.Amount - item.Discount - ret.Paid;
             return new QueryResult<StackOutSheetFinancialState>(ResultCode.Successful, string.Empty, ret);
         }
+
+        public QueryResultList<StackOutSheet> GetItemsWithCosts(SearchCondition con)
+        {
+            var ret = GetItems(con);
+            if (ret.Result == ResultCode.Successful && ret.QueryObjects.Count > 0)
+            {
+                var pcon = new ProductInventoryItemSearchCondition();
+                pcon.States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping, ProductInventoryState.Shipped };
+                var pis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
+                if (pis != null && pis.Count > 0)
+                {
+                    Dictionary<string, List<ProductInventoryItem>> temp = new Dictionary<string, List<ProductInventoryItem>>();
+                    foreach (var pi in pis)
+                    {
+                        if (!temp.ContainsKey(pi.DeliverySheet)) temp[pi.DeliverySheet] = new List<ProductInventoryItem>();
+                        temp[pi.DeliverySheet].Add(pi);
+                    }
+                    foreach (var sheet in ret.QueryObjects)
+                    {
+                        if (temp.ContainsKey(sheet.ID))
+                        {
+                            var tempPis = temp[sheet.ID];
+                            if (tempPis.Exists(it => it.GetCost(CostItem.结算单价) == null))
+                            {
+                                sheet.结算成本 = null;
+                                sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
+                                if (sheet.WithTax) sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
+                            }
+                            else
+                            {
+                                sheet.结算成本 = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
+                                sheet.Costs = tempPis.Sum(it => it.CalCost_入库成本(sheet.WithTax, UserSettings.Current.税点系数));
+                                if (sheet.WithTax)
+                                {
+                                    sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
+                                    sheet.结算成本 += sheet.Amount * UserSettings.Current.国税系数;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
         #endregion
     }
 }

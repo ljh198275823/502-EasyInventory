@@ -149,19 +149,22 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.chk启用拆卷和合并功能 = new System.Windows.Forms.CheckBox();
-            this.chkRealCount = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txt国税系数 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txt税点系数 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.label90 = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
             this.chkNeedMaterial = new System.Windows.Forms.CheckBox();
+            this.chk启用拆卷和合并功能 = new System.Windows.Forms.CheckBox();
             this.txtDefaultCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.chkRealCount = new System.Windows.Forms.CheckBox();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtDefaultProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
-            this.txtDefaultWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.lnkWarehouse = new System.Windows.Forms.LinkLabel();
             this.txtBecomeRemainlessAt = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtDefaultWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtBecomeTailAt = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.lnkWarehouse = new System.Windows.Forms.LinkLabel();
             this.label79 = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
@@ -187,7 +190,6 @@
             this.panel1.SuspendLayout();
             this.tab1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1449,12 +1451,22 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.txt国税系数);
+            this.tabPage2.Controls.Add(this.txt税点系数);
+            this.tabPage2.Controls.Add(this.label90);
+            this.tabPage2.Controls.Add(this.label87);
+            this.tabPage2.Controls.Add(this.chkNeedMaterial);
             this.tabPage2.Controls.Add(this.chk启用拆卷和合并功能);
+            this.tabPage2.Controls.Add(this.txtDefaultCustomer);
             this.tabPage2.Controls.Add(this.chkRealCount);
+            this.tabPage2.Controls.Add(this.lnkCustomer);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.txtDefaultProductCategory);
+            this.tabPage2.Controls.Add(this.lnkCategory);
             this.tabPage2.Controls.Add(this.txtBecomeRemainlessAt);
+            this.tabPage2.Controls.Add(this.txtDefaultWareHouse);
             this.tabPage2.Controls.Add(this.txtBecomeTailAt);
+            this.tabPage2.Controls.Add(this.lnkWarehouse);
             this.tabPage2.Controls.Add(this.label79);
             this.tabPage2.Controls.Add(this.label80);
             this.tabPage2.Controls.Add(this.label81);
@@ -1466,15 +1478,92 @@
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "基本";
             // 
+            // txt国税系数
+            // 
+            this.txt国税系数.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt国税系数.Location = new System.Drawing.Point(386, 119);
+            this.txt国税系数.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            131072});
+            this.txt国税系数.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txt国税系数.Name = "txt国税系数";
+            this.txt国税系数.PointCount = 3;
+            this.txt国税系数.Size = new System.Drawing.Size(65, 21);
+            this.txt国税系数.TabIndex = 106;
+            this.txt国税系数.Text = "0.00";
+            // 
+            // txt税点系数
+            // 
+            this.txt税点系数.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt税点系数.Location = new System.Drawing.Point(386, 89);
+            this.txt税点系数.MaxValue = new decimal(new int[] {
+            20,
+            0,
+            0,
+            131072});
+            this.txt税点系数.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txt税点系数.Name = "txt税点系数";
+            this.txt税点系数.PointCount = 3;
+            this.txt税点系数.Size = new System.Drawing.Size(65, 21);
+            this.txt税点系数.TabIndex = 105;
+            this.txt税点系数.Text = "0.00";
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(330, 123);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(53, 12);
+            this.label90.TabIndex = 104;
+            this.label90.Text = "国税系数";
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(330, 93);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(53, 12);
+            this.label87.TabIndex = 101;
+            this.label87.Text = "税点系数";
+            // 
+            // chkNeedMaterial
+            // 
+            this.chkNeedMaterial.AutoSize = true;
+            this.chkNeedMaterial.Location = new System.Drawing.Point(23, 146);
+            this.chkNeedMaterial.Name = "chkNeedMaterial";
+            this.chkNeedMaterial.Size = new System.Drawing.Size(156, 16);
+            this.chkNeedMaterial.TabIndex = 99;
+            this.chkNeedMaterial.Text = "入库时需要输入产品材质";
+            this.chkNeedMaterial.UseVisualStyleBackColor = true;
+            // 
             // chk启用拆卷和合并功能
             // 
             this.chk启用拆卷和合并功能.AutoSize = true;
-            this.chk启用拆卷和合并功能.Location = new System.Drawing.Point(269, 91);
+            this.chk启用拆卷和合并功能.Location = new System.Drawing.Point(23, 117);
             this.chk启用拆卷和合并功能.Name = "chk启用拆卷和合并功能";
             this.chk启用拆卷和合并功能.Size = new System.Drawing.Size(132, 16);
             this.chk启用拆卷和合并功能.TabIndex = 96;
             this.chk启用拆卷和合并功能.Text = "启用拆卷和合并功能";
             this.chk启用拆卷和合并功能.UseVisualStyleBackColor = true;
+            // 
+            // txtDefaultCustomer
+            // 
+            this.txtDefaultCustomer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtDefaultCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtDefaultCustomer.Location = new System.Drawing.Point(101, 243);
+            this.txtDefaultCustomer.Name = "txtDefaultCustomer";
+            this.txtDefaultCustomer.Size = new System.Drawing.Size(188, 21);
+            this.txtDefaultCustomer.TabIndex = 98;
             // 
             // chkRealCount
             // 
@@ -1486,6 +1575,17 @@
             this.chkRealCount.Text = "计算开平厚度以小件盘点数量为准";
             this.chkRealCount.UseVisualStyleBackColor = true;
             // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.AutoSize = true;
+            this.lnkCustomer.Location = new System.Drawing.Point(46, 247);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(53, 12);
+            this.lnkCustomer.TabIndex = 97;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "默认客户";
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -1494,57 +1594,11 @@
             this.label6.Size = new System.Drawing.Size(0, 12);
             this.label6.TabIndex = 94;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.chkNeedMaterial);
-            this.groupBox1.Controls.Add(this.txtDefaultCustomer);
-            this.groupBox1.Controls.Add(this.lnkCustomer);
-            this.groupBox1.Controls.Add(this.txtDefaultProductCategory);
-            this.groupBox1.Controls.Add(this.lnkCategory);
-            this.groupBox1.Controls.Add(this.txtDefaultWareHouse);
-            this.groupBox1.Controls.Add(this.lnkWarehouse);
-            this.groupBox1.Location = new System.Drawing.Point(23, 125);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(292, 179);
-            this.groupBox1.TabIndex = 93;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "产品入库";
-            // 
-            // chkNeedMaterial
-            // 
-            this.chkNeedMaterial.AutoSize = true;
-            this.chkNeedMaterial.Location = new System.Drawing.Point(92, 140);
-            this.chkNeedMaterial.Name = "chkNeedMaterial";
-            this.chkNeedMaterial.Size = new System.Drawing.Size(156, 16);
-            this.chkNeedMaterial.TabIndex = 99;
-            this.chkNeedMaterial.Text = "入库时需要输入产品材质";
-            this.chkNeedMaterial.UseVisualStyleBackColor = true;
-            // 
-            // txtDefaultCustomer
-            // 
-            this.txtDefaultCustomer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtDefaultCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultCustomer.Location = new System.Drawing.Point(92, 101);
-            this.txtDefaultCustomer.Name = "txtDefaultCustomer";
-            this.txtDefaultCustomer.Size = new System.Drawing.Size(188, 21);
-            this.txtDefaultCustomer.TabIndex = 98;
-            // 
-            // lnkCustomer
-            // 
-            this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(31, 105);
-            this.lnkCustomer.Name = "lnkCustomer";
-            this.lnkCustomer.Size = new System.Drawing.Size(53, 12);
-            this.lnkCustomer.TabIndex = 97;
-            this.lnkCustomer.TabStop = true;
-            this.lnkCustomer.Text = "默认客户";
-            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
-            // 
             // txtDefaultProductCategory
             // 
             this.txtDefaultProductCategory.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtDefaultProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultProductCategory.Location = new System.Drawing.Point(92, 68);
+            this.txtDefaultProductCategory.Location = new System.Drawing.Point(101, 210);
             this.txtDefaultProductCategory.Name = "txtDefaultProductCategory";
             this.txtDefaultProductCategory.Size = new System.Drawing.Size(188, 21);
             this.txtDefaultProductCategory.TabIndex = 94;
@@ -1552,33 +1606,13 @@
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(7, 72);
+            this.lnkCategory.Location = new System.Drawing.Point(22, 214);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(77, 12);
             this.lnkCategory.TabIndex = 96;
             this.lnkCategory.TabStop = true;
             this.lnkCategory.Text = "默认产品类别";
             this.lnkCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
-            // 
-            // txtDefaultWareHouse
-            // 
-            this.txtDefaultWareHouse.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtDefaultWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultWareHouse.Location = new System.Drawing.Point(92, 35);
-            this.txtDefaultWareHouse.Name = "txtDefaultWareHouse";
-            this.txtDefaultWareHouse.Size = new System.Drawing.Size(188, 21);
-            this.txtDefaultWareHouse.TabIndex = 93;
-            // 
-            // lnkWarehouse
-            // 
-            this.lnkWarehouse.AutoSize = true;
-            this.lnkWarehouse.Location = new System.Drawing.Point(31, 39);
-            this.lnkWarehouse.Name = "lnkWarehouse";
-            this.lnkWarehouse.Size = new System.Drawing.Size(53, 12);
-            this.lnkWarehouse.TabIndex = 95;
-            this.lnkWarehouse.TabStop = true;
-            this.lnkWarehouse.Text = "默认仓库";
-            this.lnkWarehouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWarehouse_LinkClicked);
             // 
             // txtBecomeRemainlessAt
             // 
@@ -1600,6 +1634,15 @@
             this.txtBecomeRemainlessAt.TabIndex = 39;
             this.txtBecomeRemainlessAt.Text = "0.00";
             // 
+            // txtDefaultWareHouse
+            // 
+            this.txtDefaultWareHouse.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtDefaultWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtDefaultWareHouse.Location = new System.Drawing.Point(101, 177);
+            this.txtDefaultWareHouse.Name = "txtDefaultWareHouse";
+            this.txtDefaultWareHouse.Size = new System.Drawing.Size(188, 21);
+            this.txtDefaultWareHouse.TabIndex = 93;
+            // 
             // txtBecomeTailAt
             // 
             this.txtBecomeTailAt.ImeMode = System.Windows.Forms.ImeMode.On;
@@ -1619,6 +1662,17 @@
             this.txtBecomeTailAt.Size = new System.Drawing.Size(92, 21);
             this.txtBecomeTailAt.TabIndex = 38;
             this.txtBecomeTailAt.Text = "0.00";
+            // 
+            // lnkWarehouse
+            // 
+            this.lnkWarehouse.AutoSize = true;
+            this.lnkWarehouse.Location = new System.Drawing.Point(46, 181);
+            this.lnkWarehouse.Name = "lnkWarehouse";
+            this.lnkWarehouse.Size = new System.Drawing.Size(53, 12);
+            this.lnkWarehouse.TabIndex = 95;
+            this.lnkWarehouse.TabStop = true;
+            this.lnkWarehouse.Text = "默认仓库";
+            this.lnkWarehouse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWarehouse_LinkClicked);
             // 
             // label79
             // 
@@ -1833,8 +1887,6 @@
             this.tab1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
@@ -1969,7 +2021,6 @@
         private System.Windows.Forms.Label label82;
         private GeneralLibrary.WinformControl.DecimalTextBox txtBecomeRemainlessAt;
         private GeneralLibrary.WinformControl.DecimalTextBox txtBecomeTailAt;
-        private System.Windows.Forms.GroupBox groupBox1;
         private GeneralLibrary.WinformControl.DBCTextBox txtDefaultCustomer;
         private System.Windows.Forms.LinkLabel lnkCustomer;
         private GeneralLibrary.WinformControl.DBCTextBox txtDefaultProductCategory;
@@ -1994,5 +2045,9 @@
         private System.Windows.Forms.Label label86;
         private GeneralLibrary.WinformControl.IntergerTextBox txtStackoutSheetItemsPerSheet;
         private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.Label label87;
+        private GeneralLibrary.WinformControl.DecimalTextBox txt国税系数;
+        private GeneralLibrary.WinformControl.DecimalTextBox txt税点系数;
     }
 }

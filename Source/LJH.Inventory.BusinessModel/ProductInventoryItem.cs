@@ -198,30 +198,56 @@ namespace LJH.Inventory.BusinessModel
             var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
             if (ci != null)
             {
-                if (ci.WithTax && withTax) ret += UnitWeight.Value * Count * ci.Price;
-                else if (ci.WithTax && !withTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate);
-                else if (!ci.WithTax && withTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate);
-                else ret += UnitWeight.Value * Count * ci.Price;
+                if (withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;  //含税进，含税出
+                else if (withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate); //含税出，不含税进
+                else if (!withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate); //不含税出，含税进
+                else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price; //不含税出，不含税进
             }
             else
             {
                 ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
                 if (ci != null)
                 {
-                    if (ci.WithTax && withTax) ret += UnitWeight.Value * Count * ci.Price;
-                    else if (ci.WithTax && !withTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate);
-                    else if (!ci.WithTax && withTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate);
-                    else ret += UnitWeight.Value * Count * ci.Price;
+                    if (withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;
+                    else if (withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate);
+                    else if (!withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate);
+                    else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;
                 }
             }
             foreach (var fc in _CostItems)
             {
                 if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
                 {
-                    if (fc.WithTax && withTax) ret += UnitWeight.Value * Count * fc.Price;
-                    else if (fc.WithTax && !withTax) ret += UnitWeight.Value * Count * fc.Price / (1 + txtRate);
-                    else if (!fc.WithTax && withTax) ret += UnitWeight.Value * Count * fc.Price * (1 + txtRate);
-                    else ret += UnitWeight.Value * Count * fc.Price;
+                    if (withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
+                    else if (withTax && !fc.WithTax) ret += UnitWeight.Value * Count * fc.Price * (1 + txtRate);
+                    else if (!withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price / (1 + txtRate);
+                    else if (!withTax && !fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
+                }
+            }
+            return ret;
+        }
+
+        public decimal CalCost_入库成本(bool withTax, decimal txtRate)
+        {
+            decimal ret = 0;
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return 0;
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+            if (ci != null)
+            {
+                if (withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;  //含税进，含税出
+                else if (withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate); //含税出，不含税进
+                else if (!withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate); //不含税出，含税进
+                else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price; //不含税出，不含税进
+            }
+            foreach (var fc in _CostItems)
+            {
+                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
+                {
+                    if (withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
+                    else if (withTax && !fc.WithTax) ret += UnitWeight.Value * Count * fc.Price * (1 + txtRate);
+                    else if (!withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price / (1 + txtRate);
+                    else if (!withTax && !fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
                 }
             }
             return ret;

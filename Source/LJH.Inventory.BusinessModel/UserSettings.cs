@@ -97,6 +97,12 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [DataMember]
         public bool NeedMaterial { get; set; }
+
+        [DataMember]
+        public decimal 税点系数 { get; set; }
+
+        [DataMember]
+        public decimal 国税系数 { get; set; }
         #endregion
 
         #region 本公司信息
@@ -204,8 +210,8 @@ namespace LJH.Inventory.BusinessModel
         [DataMember]
         public int LoadSheetsBefore { get; set; }
         #endregion
-          
-        #region 自动生成单号  
+
+        #region 自动生成单号
         //自动生成的单号分成三部分 1前缀 2日期部分 3序列号 如FH13050001 其中前缀为FH 日期部分为1305表示2013年5月， 序号 
         /// <summary>
         /// 获取或设置送货单号前缀

@@ -36,7 +36,6 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override List<ProductInventoryItem> GetingItems(DataContext dc, SearchCondition search)
         {
-            dc.Log = System.Console.Out;
             var ret = from pi in dc.GetTable<ProductInventoryItem>() join c in dc.GetTable<Cost>() on pi.CostID equals c.ID select new { A = pi, B = c.Costs };
             if (search is ProductInventoryItemSearchCondition)
             {

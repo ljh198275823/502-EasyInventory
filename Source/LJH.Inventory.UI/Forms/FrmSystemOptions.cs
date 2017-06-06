@@ -31,6 +31,8 @@ namespace LJH.Inventory.UI.Forms
             txtDefaultProductCategory.Text = UserSettings.Current.DefaultProductCategory;
             chkRealCount.Checked = UserSettings.Current.RealCountWhenCalRealThick;
             chkNeedMaterial.Checked = UserSettings.Current.NeedMaterial;
+            txt国税系数.DecimalValue = UserSettings.Current.国税系数;
+            txt税点系数.DecimalValue = UserSettings.Current.税点系数;
             #endregion
 
             #region 公司信息
@@ -115,6 +117,8 @@ namespace LJH.Inventory.UI.Forms
             us.DefaultWarehouse = txtDefaultWareHouse.Text;
             us.RealCountWhenCalRealThick = chkRealCount.Checked;
             us.NeedMaterial = chkNeedMaterial.Checked;
+            us.税点系数 = txt税点系数.DecimalValue;
+            us.国税系数 = txt国税系数.DecimalValue;
             #endregion
 
             #region 公司信息

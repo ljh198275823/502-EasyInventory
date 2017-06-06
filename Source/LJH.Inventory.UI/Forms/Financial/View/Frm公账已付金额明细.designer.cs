@@ -172,26 +172,26 @@
             this.mnu_Assign,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
             // 
             // mnu_Add
             // 
             this.mnu_Add.Name = "mnu_Add";
-            this.mnu_Add.Size = new System.Drawing.Size(148, 22);
-            this.mnu_Add.Text = "新建公账存款";
+            this.mnu_Add.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Add.Text = "新建转公账";
             this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
             // 
             // mnu_Assign
             // 
             this.mnu_Assign.Name = "mnu_Assign";
-            this.mnu_Assign.Size = new System.Drawing.Size(148, 22);
+            this.mnu_Assign.Size = new System.Drawing.Size(152, 22);
             this.mnu_Assign.Text = "核销...";
             this.mnu_Assign.Click += new System.EventHandler(this.mnu_Assign_Click);
             // 
             // cMnu_Export
             // 
             this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(148, 22);
+            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
             this.cMnu_Export.Text = "导出...";
             this.cMnu_Export.Click += new System.EventHandler(this.cMnu_Export_Click);
             // 

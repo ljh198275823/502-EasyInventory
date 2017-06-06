@@ -139,11 +139,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
                 con.LastActiveDate = GetDateTimeRange();
-                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItemsWithCosts(con).QueryObjects;
             }
             else
             {
-                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
+                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItemsWithCosts(SearchCondition).QueryObjects;
             }
             var ret = FilterData();
             return ret;
@@ -197,6 +197,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colDriver"].Value = sheet.Driver;
             row.Cells["colDriverCall"].Value = sheet.DriverCall;
             row.Cells["colCarPlate"].Value = sheet.CarPlate;
+            if (sheet.Costs > 0) row.Cells["colCosts"].Value = sheet.Costs;
+            if (sheet.结算成本.HasValue) row.Cells["col结算成本"].Value = sheet.结算成本;
             row.Cells["colMemo"].Value = sheet.Memo;
             if (_Fresh) //全部刷新
             {
