@@ -50,15 +50,15 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 盘点
         /// </summary>
-        Check=0x100,
+        Check = 0x100,
         /// <summary>
         /// 原材料加工
         /// </summary>
-        Slice=0x200,
+        Slice = 0x200,
         /// <summary>
         /// 显示价格
         /// </summary>
-        ShowPrice=0x400,
+        ShowPrice = 0x400,
         /// <summary>
         /// 查看附件
         /// </summary>
@@ -67,6 +67,7 @@ namespace LJH.Inventory.BusinessModel
         /// 编辑附件
         /// </summary>
         EditAttachment = 0x1000,
+        设置结算单价 = 0x2000,
     }
 }
         

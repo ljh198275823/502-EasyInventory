@@ -73,7 +73,7 @@
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.label15 = new System.Windows.Forms.Label();
-            this.txtOrderID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.btnOk1 = new System.Windows.Forms.Button();
             this.pnlTax.SuspendLayout();
             this.SuspendLayout();
@@ -577,13 +577,13 @@
             this.label15.TabIndex = 144;
             this.label15.Text = "合同号";
             // 
-            // txtOrderID
+            // txtPurchaseID
             // 
-            this.txtOrderID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtOrderID.Location = new System.Drawing.Point(344, 317);
-            this.txtOrderID.Name = "txtOrderID";
-            this.txtOrderID.Size = new System.Drawing.Size(145, 21);
-            this.txtOrderID.TabIndex = 143;
+            this.txtPurchaseID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPurchaseID.Location = new System.Drawing.Point(344, 317);
+            this.txtPurchaseID.Name = "txtPurchaseID";
+            this.txtPurchaseID.Size = new System.Drawing.Size(145, 21);
+            this.txtPurchaseID.TabIndex = 143;
             // 
             // btnOk1
             // 
@@ -603,7 +603,7 @@
             this.ClientSize = new System.Drawing.Size(516, 461);
             this.Controls.Add(this.btnOk1);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.txtOrderID);
+            this.Controls.Add(this.txtPurchaseID);
             this.Controls.Add(this.txtCarPlate);
             this.Controls.Add(this.txtMaterial);
             this.Controls.Add(this.label8);
@@ -690,7 +690,7 @@
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.txtMaterial, 0);
             this.Controls.SetChildIndex(this.txtCarPlate, 0);
-            this.Controls.SetChildIndex(this.txtOrderID, 0);
+            this.Controls.SetChildIndex(this.txtPurchaseID, 0);
             this.Controls.SetChildIndex(this.label15, 0);
             this.Controls.SetChildIndex(this.btnOk1, 0);
             this.pnlTax.ResumeLayout(false);
@@ -746,7 +746,7 @@
         private System.Windows.Forms.Label label13;
         private Controls.CarplateComboBox txtCarPlate;
         private System.Windows.Forms.Label label15;
-        private GeneralLibrary.WinformControl.DBCTextBox txtOrderID;
+        private GeneralLibrary.WinformControl.DBCTextBox txtPurchaseID;
         private System.Windows.Forms.Button btnOk1;
     }
 }

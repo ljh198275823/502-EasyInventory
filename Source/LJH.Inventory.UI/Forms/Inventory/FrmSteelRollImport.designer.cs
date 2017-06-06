@@ -71,7 +71,7 @@
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPurchaseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -314,7 +314,7 @@
             this.colManufacture,
             this.colSerialNumber,
             this.colMaterial,
-            this.colOrderID,
+            this.colPurchaseID,
             this.colPosition,
             this.colMemo,
             this.colReason});
@@ -424,10 +424,10 @@
             this.colMaterial.HeaderText = "材质";
             this.colMaterial.Name = "colMaterial";
             // 
-            // colOrderID
+            // colPurchaseID
             // 
-            this.colOrderID.HeaderText = "合同号";
-            this.colOrderID.Name = "colOrderID";
+            this.colPurchaseID.HeaderText = "合同号";
+            this.colPurchaseID.Name = "colPurchaseID";
             // 
             // colPosition
             // 
@@ -511,7 +511,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReason;

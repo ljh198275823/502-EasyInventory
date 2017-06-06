@@ -54,7 +54,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmb.Items.Clear();
             CustomerSearchCondition con = new CustomerSearchCondition();
             con.ClassID = CompanyClass.厂家;
-            List<CompanyInfo> cs = new CompanyBLL(AppSettings.Current.ConnStr).GetItems (con).QueryObjects;
+            List<CompanyInfo> cs = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             if (cs != null && cs.Count > 0)
             {
                 cmb.Items.Add(string.Empty);
@@ -86,6 +86,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.Supplier == cmbSupplier.Text).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer.Contains(customerCombobox1.Text)).ToList();
+                if (!string.IsNullOrEmpty(txtPurchaseID.Text)) items = items.Where(it => !string.IsNullOrEmpty(it.PurchaseID) && it.PurchaseID.Contains(txtPurchaseID.Text)).ToList();
                 items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
                                        (chkPartial.Checked && it.Status == "余卷") ||
                                        (chkOnlyTail.Checked && it.Status == "尾卷") ||
@@ -174,6 +175,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             mnu_开吨.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
+            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置结算单价);
             更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             this.取消预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             this.预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
@@ -229,8 +231,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     }
                     if (pi.State != ProductInventoryState.Nullified) original += pi.OriginalWeight.Value;
                 }
-                lblTotalWeight.Text = string.Format("总剩余 {0:F3}吨", total);
-                lblOriginalTotal.Text = string.Format("总入库 {0:F3}吨", original);
+                lblTotalWeight.Text = string.Format("总剩余{0:F3}", total);
+                lblOriginalTotal.Text = string.Format("总入库{0:F3}", original);
             }
             else
             {
@@ -267,9 +269,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
             if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
             {
-                CostItem ci = sr.GetCost(CostItem.采购价);
+                CostItem ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
+                ci = sr.GetCost(CostItem.结算单价);
+                if (ci != null) row.Cells["col结算单价"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.运费);
                 if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.其它费用);
@@ -561,6 +565,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             mnu_拆卷.Visible = UserSettings.Current != null && UserSettings.Current.启用原料拆卷和合并功能;
             mnu_合并卷.Visible = UserSettings.Current != null && UserSettings.Current.启用原料拆卷和合并功能;
+        }
+
+        private void mnu_设置结算单价_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0) return;
+            Frm设置结算单价 frm = new Frm设置结算单价();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    var pi = row.Tag as ProductInventoryItem;
+                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置结算单价(pi, frm.结算单价);
+                    if (ret.Result == ResultCode.Successful)
+                    {
+                        ShowItemInGridViewRow(row, pi);
+                    }
+                    else
+                    {
+                        MessageBox.Show(ret.Message);
+                    }
+                }
+            }
         }
     }
 }

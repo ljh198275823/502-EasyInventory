@@ -215,7 +215,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             chkOtherCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
             chkTransCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
             panel2.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
-            var ci = item.GetCost(CostItem.采购价);
+            var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax.Checked = ci != null && ci.WithTax;
             rdWithoutTax.Checked = !rdWithTax.Checked;
@@ -229,7 +229,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtPosition.Text = item.Position;
             txtCarPlate.Text = item.Carplate;
             txtMaterial.Text = item.Material;
-            txtOrderID.Text = item.OrderID;
+            txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
             btnOk.Enabled = !IsForView;
         }
@@ -334,12 +334,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Customer = txtCustomer.Text;
             if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             item.Manufacture = cmbBrand.Text;
-            item.SetCost(new CostItem() { Name = CostItem.采购价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax.Checked });
             item.SetCost(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = false, Prepay = chkTransCostPrepay.Checked });
             item.SetCost(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = false, Prepay = chkOtherCostPrepay.Checked });
             item.Position = txtPosition.Text;
             item.Material = txtMaterial.Text;
-            item.OrderID = txtOrderID.Text;
+            item.PurchaseID = txtPurchaseID.Text;
             item.Carplate = txtCarPlate.Text;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;

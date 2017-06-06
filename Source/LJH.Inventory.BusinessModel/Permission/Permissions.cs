@@ -63,12 +63,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 原材料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.ShowPrice, Description = "原材料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.ShowPrice |PermissionActions .设置结算单价, Description = "原材料")]
         SteelRoll = 101,
         /// <summary>
         /// 小件
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.Check | PermissionActions.Nullify, Description = "小件")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.Check | PermissionActions.Nullify | PermissionActions.ShowPrice | PermissionActions.设置结算单价, Description = "小件")]
         SteelRollSlice,
         /// <summary>
         /// 仓库资料
@@ -78,7 +78,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 送货单资料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print, Description = "送货单资料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print , Description = "送货单资料")]
         DeliverySheet,
         #endregion
 

@@ -85,7 +85,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
             if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
             {
-                CostItem ci = info.GetCost(CostItem.采购价);
+                CostItem ci = info.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
                 ci = info.GetCost(CostItem.运费);

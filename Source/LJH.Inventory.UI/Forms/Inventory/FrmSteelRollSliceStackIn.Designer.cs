@@ -80,7 +80,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.txtOrderID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -635,13 +635,13 @@
             this.label15.TabIndex = 156;
             this.label15.Text = "合同号";
             // 
-            // txtOrderID
+            // txtPurchaseID
             // 
-            this.txtOrderID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtOrderID.Location = new System.Drawing.Point(340, 345);
-            this.txtOrderID.Name = "txtOrderID";
-            this.txtOrderID.Size = new System.Drawing.Size(145, 21);
-            this.txtOrderID.TabIndex = 155;
+            this.txtPurchaseID.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtPurchaseID.Location = new System.Drawing.Point(340, 345);
+            this.txtPurchaseID.Name = "txtPurchaseID";
+            this.txtPurchaseID.Size = new System.Drawing.Size(145, 21);
+            this.txtPurchaseID.TabIndex = 155;
             // 
             // FrmSteelRollSliceStackIn
             // 
@@ -651,7 +651,7 @@
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(503, 488);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.txtOrderID);
+            this.Controls.Add(this.txtPurchaseID);
             this.Controls.Add(this.txtCarPlate);
             this.Controls.Add(this.txtMaterial);
             this.Controls.Add(this.label4);
@@ -762,7 +762,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
-        private GeneralLibrary.WinformControl.DBCTextBox txtOrderID;
+        private GeneralLibrary.WinformControl.DBCTextBox txtPurchaseID;
 
     }
 }

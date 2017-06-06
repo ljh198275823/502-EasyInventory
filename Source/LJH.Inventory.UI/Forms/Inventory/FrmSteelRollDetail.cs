@@ -159,7 +159,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             chkOtherCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
             chkTransCostPrepay.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
             pnlTax.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
-            var ci = item.GetCost(CostItem.采购价);
+            var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax.Checked = ci != null && ci.WithTax;
             rdWithoutTax.Checked = !rdWithTax.Checked;
@@ -173,9 +173,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtPosition.Text = item.Position;
             txtMaterial.Text = item.Material;
             txtCarPlate.Text = item.Carplate;
-            txtOrderID.Text = item.PurchaseID;
+            txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
-            btnOk.Enabled = btnOk.Enabled && item.CanEdit;
+            btnOk1.Enabled = btnOk1.Enabled && item.CanEdit && item.GetCost(CostItem.结算单价) == null;
         }
 
         protected override object GetItemFromInput()
@@ -213,14 +213,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             item.Manufacture = cmbBrand.Text;
             item.SerialNumber = txtSerialNumber.Text;
-            item.SetCost(new CostItem() { Name = CostItem.采购价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax.Checked });
             item.SetCost(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = false, Prepay = chkTransCostPrepay.Checked });
             item.SetCost(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = false, Prepay = chkOtherCostPrepay.Checked });
             item.Position = txtPosition.Text;
             item.Carplate = txtCarPlate.Text;
             item.Material = txtMaterial.Text;
             item.Memo = txtMemo.Text;
-            item.PurchaseID = txtOrderID.Text;
+            item.PurchaseID = txtPurchaseID.Text;
             item.Operator = Operator.Current.Name;
             return item;
         }
@@ -307,7 +307,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             txtLength.DecimalValue = txtOriginalLength.DecimalValue;
         }
-        #endregion
 
         private void btnOk1_Click(object sender, EventArgs e)
         {
@@ -327,7 +326,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     cmbSpecification.Specification = null;
                     IsAdding = true;
                     cmbSpecification.Focus();
-                    //this.Close();
                 }
                 else
                 {
@@ -348,5 +346,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
             }
         }
+        #endregion
     }
 }

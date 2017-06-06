@@ -161,10 +161,16 @@ namespace LJH.Inventory.BusinessModel
             decimal ret = 0;
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems == null) return 0;
-            foreach (var ci in _CostItems)
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
+            if (ci != null) ret += OriginalWeight.Value * ci.Price;
+            else
             {
-                if (ci.Name == CostItem.采购价) ret += OriginalWeight.Value * ci.Price; //采购价一定要加到
-                else if (ci.Prepay) ret += OriginalWeight.Value * ci.Price;
+                ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+                if (ci != null) ret += OriginalWeight.Value * ci.Price;
+            }
+            foreach (var fc in _CostItems)
+            {
+                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay) ret += OriginalWeight.Value * fc.Price;
             }
             return ret;
         }
@@ -174,9 +180,49 @@ namespace LJH.Inventory.BusinessModel
             decimal ret = 0;
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems == null) return 0;
-            foreach (var ci in _CostItems)
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
+            if (ci != null) ret += OriginalWeight.Value * ci.Price;
+            else
             {
-                if (ci.Name == CostItem.采购价) ret += OriginalWeight.Value * ci.Price; //采购价一定要加到
+                ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+                if (ci != null) ret += OriginalWeight.Value * ci.Price;
+            }
+            return ret;
+        }
+
+        public decimal CalCost(bool withTax, decimal txtRate)
+        {
+            decimal ret = 0;
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return 0;
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
+            if (ci != null)
+            {
+                if (ci.WithTax && withTax) ret += UnitWeight.Value * Count * ci.Price;
+                else if (ci.WithTax && !withTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate);
+                else if (!ci.WithTax && withTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate);
+                else ret += UnitWeight.Value * Count * ci.Price;
+            }
+            else
+            {
+                ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+                if (ci != null)
+                {
+                    if (ci.WithTax && withTax) ret += UnitWeight.Value * Count * ci.Price;
+                    else if (ci.WithTax && !withTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate);
+                    else if (!ci.WithTax && withTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate);
+                    else ret += UnitWeight.Value * Count * ci.Price;
+                }
+            }
+            foreach (var fc in _CostItems)
+            {
+                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
+                {
+                    if (fc.WithTax && withTax) ret += UnitWeight.Value * Count * fc.Price;
+                    else if (fc.WithTax && !withTax) ret += UnitWeight.Value * Count * fc.Price / (1 + txtRate);
+                    else if (!fc.WithTax && withTax) ret += UnitWeight.Value * Count * fc.Price * (1 + txtRate);
+                    else ret += UnitWeight.Value * Count * fc.Price;
+                }
             }
             return ret;
         }

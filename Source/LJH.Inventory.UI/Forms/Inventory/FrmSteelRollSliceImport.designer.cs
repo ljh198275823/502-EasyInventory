@@ -68,7 +68,7 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPurchaseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3.SuspendLayout();
@@ -285,7 +285,7 @@
             this.colCustomer,
             this.colSupplier,
             this.colManufacture,
-            this.colOrderID,
+            this.colPurchaseID,
             this.colMemo,
             this.colReason});
             this.dataGridView1.Location = new System.Drawing.Point(3, 42);
@@ -403,10 +403,10 @@
             this.colManufacture.Name = "colManufacture";
             this.colManufacture.Width = 80;
             // 
-            // colOrderID
+            // colPurchaseID
             // 
-            this.colOrderID.HeaderText = "合同号";
-            this.colOrderID.Name = "colOrderID";
+            this.colPurchaseID.HeaderText = "合同号";
+            this.colPurchaseID.Name = "colPurchaseID";
             // 
             // colMemo
             // 
@@ -484,7 +484,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReason;
     }

@@ -42,7 +42,7 @@ namespace LJH.Inventory.BLL
 
         public CommandResult Reserve(ProductInventoryItem pi, string customer)
         {
-            if (pi.State != ProductInventoryState.Inventory ) return new CommandResult(ResultCode.Fail, "不能预订");
+            if (pi.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "不能预订");
             var clone = pi.Clone();
             clone.State = ProductInventoryState.Reserved;
             clone.Customer = customer;

@@ -249,7 +249,7 @@ BEGIN
 	)
 	) ON [PRIMARY]
 	
-	exec ('insert into Cost (id,Costs) select a.id, ''[{"Name":"采购价","Price":'' + LTRIM(RTRIM(str(ISNULL(a.PurchasePrice,0)))) +'',"WithTax":'' + (case a.withtax when 1 then ''true'' else ''false'' end)+ ''},{"Name":"运费","Price":'' + LTRIM(RTRIM(str(ISNULL(a.TransCost ,0)))) + '',"WithTax":false,"Prepay":'' + (case a.TransCostPrepay when 1 then ''true'' else ''false'' end) + ''},{"Name":"其它费用","Price":'' + LTRIM(RTRIM(str(ISNULL(a.OtherCost,0)))) +'',"WithTax":false,"Prepay":'' + (case a.OtherCostPrepay when 1 then ''true'' else ''false'' end)   + ''}]'' from ProductInventoryItem a where sourceRoll is null  ')
+	exec ('insert into Cost (id,Costs) select a.id, ''[{"Name":"入库单价","Price":'' + LTRIM(RTRIM(str(ISNULL(a.PurchasePrice,0)))) +'',"WithTax":'' + (case a.withtax when 1 then ''true'' else ''false'' end)+ ''},{"Name":"运费","Price":'' + LTRIM(RTRIM(str(ISNULL(a.TransCost ,0)))) + '',"WithTax":false,"Prepay":'' + (case a.TransCostPrepay when 1 then ''true'' else ''false'' end) + ''},{"Name":"其它费用","Price":'' + LTRIM(RTRIM(str(ISNULL(a.OtherCost,0)))) +'',"WithTax":false,"Prepay":'' + (case a.OtherCostPrepay when 1 then ''true'' else ''false'' end)   + ''}]'' from ProductInventoryItem a where sourceRoll is null  ')
 	exec ('alter table ProductInventoryItem drop column PurchasePrice ')
 	exec ('alter table ProductInventoryItem drop column withTax ')
 	exec ('alter table ProductInventoryItem drop column transcost ')
