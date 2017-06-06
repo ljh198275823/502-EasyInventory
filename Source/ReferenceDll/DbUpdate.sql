@@ -61,12 +61,6 @@ BEGIN
 end
 go
 
---2016-3-10 
-ALTER VIEW [dbo].[View_StackOutRecord] AS
- SELECT     a.ID, b.LastActiveDate, a.SheetNo, b.CustomerID, b.WareHouseID, a.ProductID, a.Unit, a.Price, a.Count, a.Length, a.TotalWeight as Weight, b.State, b.SalesPerson, b.WithTax, a.OrderID, a.OrderItem, a.Memo, b.ClassID
- FROM         dbo.StackOutItem AS a INNER JOIN  dbo.StackOutSheet AS b ON a.SheetNo = b.ID
-go
-
 --送货单增加两列，一列总金额，一列总重量
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Amount' AND id = OBJECT_ID(N'[dbo].[StackOutSheet]'))
 BEGIN
@@ -92,7 +86,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Ac
 BEGIN
 	CREATE TABLE [dbo].[Account](
 	[ID] [nvarchar](50) NOT NULL,
-	[ClassID] [tinyint] NOT NULL,
+	[Class] [tinyint] NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
 	[Ispublic] [bit] NOT NULL,
 	[AddDate] [datetime] not null,
@@ -266,4 +260,10 @@ BEGIN
 	exec ('update ProductInventoryItem set CostID=id where sourceroll is null')
 	exec ('update productinventoryitem set costid=sourceroll where sourceroll is not null')
 end
+go
+
+
+ALTER VIEW [dbo].[View_StackOutRecord] AS
+ SELECT     a.ID, b.LastActiveDate, a.SheetNo, b.CustomerID, b.WareHouseID, a.ProductID, a.Unit, a.Price, a.Count, a.Length, a.TotalWeight as Weight, b.State, b.SalesPerson, b.WithTax, a.OrderID, a.OrderItem, a.Memo, b.ClassID
+ FROM         dbo.StackOutItem AS a INNER JOIN  dbo.StackOutSheet AS b ON a.SheetNo = b.ID
 go
