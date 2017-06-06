@@ -576,7 +576,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置结算单价(pi, frm.结算单价);
+                    var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置结算单价(pi, frm.结算单价);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);

@@ -139,11 +139,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
                 con.LastActiveDate = GetDateTimeRange();
-                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItemsWithCosts(con).QueryObjects;
+                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
             {
-                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItemsWithCosts(SearchCondition).QueryObjects;
+                _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
             }
             var ret = FilterData();
             return ret;

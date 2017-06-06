@@ -195,6 +195,7 @@ namespace LJH.Inventory.BusinessModel
             decimal ret = 0;
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems == null) return 0;
+            if (UnitWeight == null) return 0;
             var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
             if (ci != null)
             {
@@ -329,11 +330,19 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (Weight.HasValue && Weight.Value > 0 && Count > 0) return Weight.Value / Count;
-                if (OriginalWeight.HasValue && OriginalWeight.Value > 0 && OriginalCount.HasValue && OriginalCount.Value > 0) return OriginalWeight / OriginalCount;
-                return ProductInventoryItem.CalWeight(this.RealThick.HasValue ? this.RealThick.Value : this.OriginalThick.Value,
-                                                         SpecificationHelper.GetWrittenWidth(Product.Specification).Value,
-                                                         this.Length.Value, Product.Density.Value);
+                try
+                {
+                    if (Weight.HasValue && Weight.Value > 0 && Count > 0) return Weight.Value / Count;
+                    decimal? thick = this.RealThick;
+                    if (!thick.HasValue) thick = this.OriginalThick;
+                    if (!thick.HasValue) thick = SpecificationHelper.GetWrittenThick(Product.Specification);
+                    if (!thick.HasValue && !this.Length.HasValue) return null;
+                    return ProductInventoryItem.CalWeight(thick.Value, SpecificationHelper.GetWrittenWidth(Product.Specification).Value, this.Length.Value, Product.Density.Value);
+                }
+                catch (Exception ex)
+                {
+                }
+                return null;
             }
         }
         #endregion

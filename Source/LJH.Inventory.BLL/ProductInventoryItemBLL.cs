@@ -67,6 +67,21 @@ namespace LJH.Inventory.BLL
             }
             return ret;
         }
+
+        public CommandResult 设置结算单价(ProductInventoryItem pi, decimal price)
+        {
+            var clone = pi.Clone();
+            var ci = pi.GetCost(CostItem.入库单价);
+            if (ci == null) return new CommandResult(ResultCode.Fail, "没有找到入库单价");
+            var f = new CostItem() { Name = CostItem.结算单价, Price = price, WithTax = ci.WithTax, Prepay = ci.Prepay };
+            clone.SetCost(f);
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful)
+            {
+                pi.Costs = clone.Costs;
+            }
+            return ret;
+        }
         #endregion
     }
 }

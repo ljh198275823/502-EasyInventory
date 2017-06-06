@@ -543,39 +543,7 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult 设置结算单价(ProductInventoryItem pi, decimal price)
-        {
-            try
-            {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-                var clone = pi.Clone();
-                var ci = pi.GetCost(CostItem.入库单价);
-                if (ci == null) return new CommandResult(ResultCode.Fail, "没有找到入库单价");
-                var f = new CostItem() { Name = CostItem.结算单价, Price = price, WithTax = ci.WithTax, Prepay = ci.Prepay };
-                clone.SetCost(f);
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
-                if (!string.IsNullOrEmpty(pi.Supplier))
-                {
-                    DateTime dt = DateTime.Now;
-                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(pi.Supplier).QueryObject;
-                    if (s != null)
-                    {
-                        AddReceivables(clone, new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (clone.CalTax() > 0) AddTax(clone, new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                    }
-                }
-                var ret = unitWork.Commit();
-                if (ret.Result == ResultCode.Successful)
-                {
-                    pi.Costs = clone.Costs;
-                }
-                return ret;
-            }
-            catch (Exception ex)
-            {
-                return new CommandResult(ResultCode.Fail, ex.Message);
-            }
-        }
+        
         #endregion
     }
 }
