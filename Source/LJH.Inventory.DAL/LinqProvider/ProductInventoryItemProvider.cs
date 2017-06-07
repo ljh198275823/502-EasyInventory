@@ -86,9 +86,12 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override void InsertingItem(LJH.Inventory.BusinessModel.ProductInventoryItem info, System.Data.Linq.DataContext dc)
         {
-            var cs = new Cost() { ID = info.ID, Costs = info.Costs };
-            dc.GetTable<Cost>().InsertOnSubmit(cs);
-            info.CostID = cs.ID;
+            if (!info.CostID.HasValue && !string.IsNullOrEmpty(info.Costs))
+            {
+                var cs = new Cost() { ID = info.ID, Costs = info.Costs };
+                dc.GetTable<Cost>().InsertOnSubmit(cs);
+                info.CostID = cs.ID;
+            }
             base.InsertingItem(info, dc);
         }
 

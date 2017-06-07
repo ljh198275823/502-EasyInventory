@@ -265,6 +265,7 @@ namespace LJH.Inventory.BLL
                 WareHouseID = wh.ID,
                 Customer = sliceSheet.Customer,
                 SourceRoll = sr.ID,  //设置加工来源
+                CostID = sr.CostID, //带上成本参数
                 Memo = sliceSheet.Memo,
             };
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(pi, unitWork);
@@ -342,13 +343,13 @@ namespace LJH.Inventory.BLL
                     ProductInventoryItemSearchCondition pcon = new ProductInventoryItemSearchCondition();
                     pcon.SourceRoll = pi.ID;
                     var items = provider.GetItems(pcon).QueryObjects;
-                    if (realCount)
+                    if (realCount) //以库存实际数量为准，包括盘点的数量
                     {
                         len = items.Sum(it => it.Product.Length.Value * it.Count); //长度，为所有库存中小件数量乘以其长度，这里不能以加工记录的数量为准，是因为小件会有盘点，所以数量以库存中的为准
                     }
-                    else
+                    else //以加工单数量为准
                     {
-                        len = records.Sum(it => it.Length.Value * it.Count);
+                        len = records.Sum(it => it.Length.Value * it.Count); 
                     }
 
                     thick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(pi.Product.Specification).Value, weight, len, pi.Product.Density.Value);
@@ -542,8 +543,6 @@ namespace LJH.Inventory.BLL
             }
             return ret;
         }
-
-        
         #endregion
     }
 }

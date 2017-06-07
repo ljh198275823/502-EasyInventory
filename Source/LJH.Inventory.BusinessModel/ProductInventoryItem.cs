@@ -89,11 +89,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal? RealThick { get; set; }
         /// <summary>
-        /// 获取或设置库存单个重量
+        /// 获取或设置库存当前重量
         /// </summary>
         public decimal? Weight { get; set; }
         /// <summary>
-        /// 获取或设置库存单个长度
+        /// 获取或设置库存当前长度
         /// </summary>
         public decimal? Length { get; set; }
         /// <summary>
@@ -190,29 +190,35 @@ namespace LJH.Inventory.BusinessModel
             return ret;
         }
 
-        public decimal CalCost(bool withTax, decimal txtRate)
+        public decimal CalCost(bool withTax, decimal txtRate, bool 入库成本 = false)
+        {
+            return CalUnitCost(withTax, txtRate, 入库成本) * Count;
+        }
+
+        public decimal CalUnitCost(bool withTax, decimal txtRate, bool 入库成本 = false)
         {
             decimal ret = 0;
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems == null) return 0;
             if (UnitWeight == null) return 0;
             var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
+            if (入库成本) ci = null; //如果只计算入库成本，则忽略结算成本
             if (ci != null)
             {
-                if (withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;  //含税进，含税出
-                else if (withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate); //含税出，不含税进
-                else if (!withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate); //不含税出，含税进
-                else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price; //不含税出，不含税进
+                if (withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price;  //含税进，含税出
+                else if (withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 + txtRate); //含税出，不含税进
+                else if (!withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price / (1 + txtRate); //不含税出，含税进
+                else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price; //不含税出，不含税进
             }
             else
             {
                 ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
                 if (ci != null)
                 {
-                    if (withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;
-                    else if (withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate);
-                    else if (!withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate);
-                    else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;
+                    if (withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price;
+                    else if (withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 + txtRate);
+                    else if (!withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price / (1 + txtRate);
+                    else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price;
                 }
             }
             foreach (var fc in _CostItems)
@@ -220,35 +226,9 @@ namespace LJH.Inventory.BusinessModel
                 if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
                 {
                     if (withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
-                    else if (withTax && !fc.WithTax) ret += UnitWeight.Value * Count * fc.Price * (1 + txtRate);
-                    else if (!withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price / (1 + txtRate);
-                    else if (!withTax && !fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
-                }
-            }
-            return ret;
-        }
-
-        public decimal CalCost_入库成本(bool withTax, decimal txtRate)
-        {
-            decimal ret = 0;
-            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
-            if (_CostItems == null) return 0;
-            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-            if (ci != null)
-            {
-                if (withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;  //含税进，含税出
-                else if (withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price * (1 + txtRate); //含税出，不含税进
-                else if (!withTax && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price / (1 + txtRate); //不含税出，含税进
-                else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * Count * ci.Price; //不含税出，不含税进
-            }
-            foreach (var fc in _CostItems)
-            {
-                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
-                {
-                    if (withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
-                    else if (withTax && !fc.WithTax) ret += UnitWeight.Value * Count * fc.Price * (1 + txtRate);
-                    else if (!withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price / (1 + txtRate);
-                    else if (!withTax && !fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
+                    else if (withTax && !fc.WithTax) ret += UnitWeight.Value * fc.Price * (1 + txtRate);
+                    else if (!withTax && fc.WithTax) ret += UnitWeight.Value * fc.Price / (1 + txtRate);
+                    else if (!withTax && !fc.WithTax) ret += UnitWeight.Value * fc.Price;
                 }
             }
             return ret;
@@ -333,11 +313,15 @@ namespace LJH.Inventory.BusinessModel
                 try
                 {
                     if (Weight.HasValue && Weight.Value > 0 && Count > 0) return Weight.Value / Count;
+                    if (OriginalWeight > 0 && OriginalCount > 0) return OriginalWeight.Value / OriginalCount.Value;
                     decimal? thick = this.RealThick;
                     if (!thick.HasValue) thick = this.OriginalThick;
                     if (!thick.HasValue) thick = SpecificationHelper.GetWrittenThick(Product.Specification);
                     if (!thick.HasValue && !this.Length.HasValue) return null;
-                    return ProductInventoryItem.CalWeight(thick.Value, SpecificationHelper.GetWrittenWidth(Product.Specification).Value, this.Length.Value, Product.Density.Value);
+                    decimal? length = this.Length;  //原材料的长度
+                    if (!length.HasValue) length = this.Product.Length; //小件的长度放在产品信息中
+                    if (length == null) return null;
+                    return ProductInventoryItem.CalWeight(thick.Value, SpecificationHelper.GetWrittenWidth(Product.Specification).Value, length.Value, Product.Density.Value);
                 }
                 catch (Exception ex)
                 {

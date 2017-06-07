@@ -48,7 +48,7 @@ namespace LJH.Inventory.BLL
         }
 
         //分配, 为某个送货单项分配指定数量的库存
-        private void F_Assign(ProductInventoryItem source, StackOutItem si, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems)
+        private void F_Assign(ProductInventoryItem source, StackOutItem si, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems,DateTime dt)
         {
             if (source.Count < si.Count) throw new Exception("出货数量超出库存数量");
             if (!updatingitems.Exists(it => it.ID == source.ID))
@@ -62,11 +62,11 @@ namespace LJH.Inventory.BLL
 
             ProductInventoryItem newItem = source.Clone();
             newItem.ID = Guid.NewGuid();
+            newItem.AddDate = dt;
             newItem.SourceID = source.ID;
             newItem.Count = si.Count;
             if (uw != null)
             {
-                newItem.OriginalWeight = newItem.Count * uw;
                 newItem.Weight = newItem.Count * uw;
             }
             newItem.State = ProductInventoryState.WaitShipping;
@@ -177,7 +177,7 @@ namespace LJH.Inventory.BLL
                 {
                     ProductInventoryItem pi = pis.SingleOrDefault(it => it.ID == item.InventoryItem);
                     if (pi == null) throw new ApplicationException("不存在相关的库存！");
-                    F_Assign(pi, item, addingItems, updatingitems, cloneItems, deletingItems);
+                    F_Assign(pi, item, addingItems, updatingitems, cloneItems, deletingItems, new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, dt.Hour, dt.Minute, dt.Second));
                 }
             }
             F_CommitChanges(addingItems, updatingitems, cloneItems, deletingItems, unitWork);
@@ -213,7 +213,7 @@ namespace LJH.Inventory.BLL
                     }
                     else
                     {
-                        F_Assign(source, item, addingItems, updatingitems, cloneItems, deletingItems);
+                        F_Assign(source, item, addingItems, updatingitems, cloneItems, deletingItems, new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, dt.Hour, dt.Minute, dt.Second));
                     }
                 }
             }
@@ -334,7 +334,7 @@ namespace LJH.Inventory.BLL
                     else
                     {
                         sheet.结算成本 = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
-                        sheet.Costs = tempPis.Sum(it => it.CalCost_入库成本(sheet.WithTax, UserSettings.Current.税点系数));
+                        sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数, true));
                         if (sheet.WithTax)
                         {
                             sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
@@ -352,6 +352,11 @@ namespace LJH.Inventory.BLL
             if (ret.Result == ResultCode.Successful && ret.QueryObjects.Count > 0)
             {
                 var pcon = new ProductInventoryItemSearchCondition();
+                if (condition is SheetSearchCondition)
+                {
+                    var con = condition as SheetSearchCondition;
+                    if (con.SheetDate != null) pcon.AddDateRange = new DateTimeRange(con.SheetDate.Begin, con.SheetDate.End);
+                }
                 pcon.States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping, ProductInventoryState.Shipped };
                 var pis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
                 if (pis != null && pis.Count > 0)
@@ -377,7 +382,7 @@ namespace LJH.Inventory.BLL
                             else
                             {
                                 sheet.结算成本 = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
-                                sheet.Costs = tempPis.Sum(it => it.CalCost_入库成本(sheet.WithTax, UserSettings.Current.税点系数));
+                                sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数, true));
                                 if (sheet.WithTax)
                                 {
                                     sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
@@ -484,6 +489,34 @@ namespace LJH.Inventory.BLL
             }
             ret.NotPaid = item.Amount - item.Discount - ret.Paid;
             return new QueryResult<StackOutSheetFinancialState>(ResultCode.Successful, string.Empty, ret);
+        }
+
+        public void GetCosts(StackOutSheet sheet)
+        {
+            if (sheet.SheetDate <= new DateTime(2017, 6, 6)) return;
+            var pcon = new ProductInventoryItemSearchCondition();
+            pcon.DeliverySheetNo = sheet.ID;
+            pcon.States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping, ProductInventoryState.Shipped };
+            var tempPis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
+            if (tempPis != null && tempPis.Count > 0)
+            {
+                if (tempPis.Exists(it => it.GetCost(CostItem.结算单价) == null))
+                {
+                    sheet.结算成本 = null;
+                    sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
+                    if (sheet.WithTax) sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
+                }
+                else
+                {
+                    sheet.结算成本 = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
+                    sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数, true));
+                    if (sheet.WithTax)
+                    {
+                        sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
+                        sheet.结算成本 += sheet.Amount * UserSettings.Current.国税系数;
+                    }
+                }
+            }
         }
         #endregion
     }

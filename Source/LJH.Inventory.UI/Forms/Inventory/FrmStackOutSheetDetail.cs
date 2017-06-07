@@ -24,7 +24,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 私有方法
-        private List<Product> _Products = null;
+        private List<ProductInventoryItem> _DeliveryItems = null;
         #endregion
 
         #region 私有方法
@@ -50,10 +50,27 @@ namespace LJH.Inventory.UI.Forms.Inventory
             rdWithoutTax.Checked = item.WithTax == false;
             rdWithTax.Checked = item.WithTax == true;
             this.txtMemo.Text = item.Memo;
+            var pcon = new ProductInventoryItemSearchCondition()
+            {
+                DeliverySheetNo = item.ID,
+                States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping, ProductInventoryState.Shipped }
+            };
+            _DeliveryItems = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(pcon).QueryObjects;
             ShowDeliveryItemsOnGrid(item);
             ShowOperations(item.ID, item.DocumentType, dataGridView1);
             ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
             ShowPaymentState(item);
+            显示毛利(item);
+        }
+
+        private void 显示毛利(StackOutSheet item)
+        {
+            decimal 产品成本 = _DeliveryItems.Sum(it => it.CalCost(item.WithTax, UserSettings.Current.税点系数));
+            decimal 国税计提 = item.WithTax ? item.Amount * UserSettings.Current.国税系数 : 0;
+            lbl销售金额.Text = string.Format("销售金额：{0:C2}", item.Amount);
+            lbl产品成本.Text = string.Format("产品成本：{0:C2}", 产品成本);
+            lbl国税计提.Text = string.Format("国税计提：{0:C2}", 国税计提);
+            if (产品成本 > 0) lbl毛利.Text = string.Format("毛    利：{0:C2}", item.Amount - 国税计提 - 产品成本);
         }
 
         private void ShowPaymentState(StackOutSheet item)
@@ -68,9 +85,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var items = sheet.GetSummaryItems();
             if (items != null)
             {
-                ProductSearchCondition con = new ProductSearchCondition();
-                con.ProductIDS = items.Select(it => it.ProductID).Distinct().ToList();
-                _Products = new ProductBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
                 foreach (StackOutItem item in items)
                 {
                     int row = ItemsGrid.Rows.Add();
@@ -79,8 +93,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 int r = ItemsGrid.Rows.Add();
                 ItemsGrid.Rows[r].Cells["colLength"].Value = "合计";
                 ItemsGrid.Rows[r].Cells["colTotal"].Value = sheet.CalAmount();
-                sheet.TotalWeight = CalTotalWeight(sheet);
                 ItemsGrid.Rows[r].Cells["colWeight"].Value = sheet.TotalWeight;
+                if (_DeliveryItems != null) ItemsGrid.Rows[r].Cells["colCosts"].Value = _DeliveryItems.Sum(it => it.CalCost(rdWithTax.Checked, UserSettings.Current.税点系数));
             }
         }
 
@@ -89,7 +103,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Tag = item;
             if (item.ID == Guid.Empty || item.InventoryItem == null)
             {
-                Product p = _Products.Single(it => it.ID == item.ProductID);
+                Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
                 row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
                 row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
                 row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
@@ -101,12 +115,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colTotal"].Value = item.Amount;
                 row.Cells["colMemo"].Value = item.Memo;
                 row.Cells["colCount"].ReadOnly = true;
+                if (_DeliveryItems != null) row.Cells["colCosts"].Value = _DeliveryItems.Where(it => it.ProductID == p.ID).Sum(it => it.CalCost(rdWithTax.Checked, UserSettings.Current.税点系数));
             }
             else
             {
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject; //获取出货项对应的库存项，即是从哪个库存项出货的
-                //row.Cells["colModel"].Value = pi != null ? pi.WareHouse.Name : null;
                 row.Cells["colWeight"].Value = pi != null ? (pi.RealThick.HasValue ? (decimal?)pi.RealThick : (decimal?)pi.OriginalThick) : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
@@ -117,6 +131,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colWeight"].ReadOnly = true;
                 row.Cells["colPrice"].ReadOnly = true;
                 row.Cells["colMemo"].ReadOnly = true;
+                row.Cells["colCosts"].Value = pi.CalCost(rdWithTax.Checked, UserSettings.Current.税点系数);
             }
         }
 
@@ -131,15 +146,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             //这一部分是计算所有没有指定总重量的项，要通过它的规格或其它参数计算出这部分货的重量
             var f = new ProductInventoryItemSearchCondition();
-            f.DeliverySheetNo = sheet.ID;
-            var srs = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(f).QueryObjects;
-            foreach (var item in sheet.Items)
+            f.IDS = new List<Guid>();
+            foreach (var it in sheet.Items)
             {
-                if (!item.TotalWeight.HasValue && item.InventoryItem.HasValue)
+                if (it.TotalWeight == null && it.InventoryItem.HasValue) f.IDS.Add(it.InventoryItem.Value);
+            }
+            if (f.IDS.Count > 0)
+            {
+                var srs = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(f).QueryObjects;
+                if (srs != null && srs.Count > 0)
                 {
-                    var pi = item.ProductInventoryItem;
-                    if (pi == null) pi = srs.SingleOrDefault(it => it.DeliveryItem == item.ID);
-                    if (pi != null && pi.UnitWeight.HasValue) ret += pi.UnitWeight.Value * item.Count;
+                    foreach (var item in sheet.Items)
+                    {
+                        if (item.TotalWeight == null && item.InventoryItem.HasValue)
+                        {
+                            var pi = srs.SingleOrDefault(it => it.ID == item.InventoryItem);
+                            if (pi != null && pi.UnitWeight.HasValue) ret += pi.UnitWeight.Value * item.Count;
+                        }
+                    }
                 }
             }
             return ret;
@@ -197,6 +221,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ItemsGrid.ContextMenuStrip = null;
             }
             btnShip.Visible = !(UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint);
+            ItemsGrid.Columns["colCosts"].Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.查看成本);
+            pnl毛利.Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.查看成本);
             if (!IsAdding)
             {
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;
@@ -561,7 +587,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         row.Cells["colTotal"].Value = item.Amount;
                     }
                     ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.CalAmount();
-                    sheet.TotalWeight = CalTotalWeight(sheet);
                 }
             }
         }

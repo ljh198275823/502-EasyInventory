@@ -130,15 +130,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Focus();
                 return false;
             }
-            if (txtWeight.DecimalValue <= 0)
+            if (rd开吨.Checked && txtWeight.DecimalValue <= 0)
             {
                 MessageBox.Show("没有设置重量");
-                return false;
             }
             if (txtWeight.DecimalValue > 0 && !rd总重.Checked && !rd单件重.Checked)
             {
                 MessageBox.Show("重量没有指定是总重还是单件重量");
                 return false;
+            }
+            if (rd开平.Checked || rd开卷.Checked)
+            {
+                if (txtLength.DecimalValue <= 0)
+                {
+                    MessageBox.Show("开平和开卷小件没有设置长度");
+                    return false;
+                }
             }
             if (txtCount.DecimalValue == 0)
             {

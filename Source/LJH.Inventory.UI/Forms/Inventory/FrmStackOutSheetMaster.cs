@@ -46,10 +46,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             if (UserSettings.Current != null)
             {
-                if (UserSettings.Current.LoadSheetsBefore == 0) return new DateTimeRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now);
-                return new DateTimeRange(DateTime.Today.AddMonths(-UserSettings.Current.LoadSheetsBefore), DateTime.Now);
+                if (UserSettings.Current.LoadSheetsBefore == 0) return new DateTimeRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.MaxValue);
+                return new DateTimeRange(DateTime.Today.AddMonths(-UserSettings.Current.LoadSheetsBefore), DateTime.MaxValue);
             }
-            return new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.Now); //最近一年的送货单
+            return new DateTimeRange(DateTime.Today.AddYears(-1), DateTime.MaxValue); //最近一年的送货单
         }
 
         private List<object> FilterData()
@@ -138,7 +138,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SearchCondition == null)
             {
                 StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
-                con.LastActiveDate = GetDateTimeRange();
+                con.SheetDate = GetDateTimeRange();
                 _Sheets = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
@@ -197,8 +197,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colDriver"].Value = sheet.Driver;
             row.Cells["colDriverCall"].Value = sheet.DriverCall;
             row.Cells["colCarPlate"].Value = sheet.CarPlate;
-            if (sheet.Costs > 0) row.Cells["colCosts"].Value = sheet.Costs;
-            if (sheet.结算成本.HasValue) row.Cells["col结算成本"].Value = sheet.结算成本;
             row.Cells["colMemo"].Value = sheet.Memo;
             if (_Fresh) //全部刷新
             {
@@ -227,6 +225,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     row.Cells["colNotPaid"].Value = sheetState.NotPaid;
                 }
                 显示总重量和总金额();
+                new StackOutSheetBLL(AppSettings.Current.ConnStr).GetCosts(sheet); //重新获取成本
+            }
+            if (Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.查看成本))
+            {
+                if (sheet.Costs > 0) row.Cells["colCosts"].Value = sheet.Costs;
+                if (sheet.结算成本.HasValue) row.Cells["col结算成本"].Value = sheet.结算成本;
             }
             if (!_Sheets.Exists(it => it.ID == sheet.ID)) _Sheets.Add(sheet);
             ShowRowColor(row);

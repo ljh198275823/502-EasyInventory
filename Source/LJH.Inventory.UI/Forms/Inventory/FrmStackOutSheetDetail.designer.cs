@@ -34,9 +34,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddSlice = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddSteelRoll = new System.Windows.Forms.ToolStripMenuItem();
+            this.其它费用ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -47,6 +49,11 @@
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pnl毛利 = new System.Windows.Forms.GroupBox();
+            this.lbl毛利 = new System.Windows.Forms.Label();
+            this.lbl国税计提 = new System.Windows.Forms.Label();
+            this.lbl产品成本 = new System.Windows.Forms.Label();
+            this.lbl销售金额 = new System.Windows.Forms.Label();
             this.lnkPayment = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.lnkDriver = new System.Windows.Forms.LinkLabel();
@@ -81,6 +88,7 @@
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCosts = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label15 = new System.Windows.Forms.Label();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -102,11 +110,11 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.其它费用ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.pnl毛利.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             this.tabPage6.SuspendLayout();
@@ -118,11 +126,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(1087, 440);
+            this.btnClose.Location = new System.Drawing.Point(1215, 440);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(978, 440);
+            this.btnOk.Location = new System.Drawing.Point(1106, 440);
             // 
             // contextMenuStrip1
             // 
@@ -132,26 +140,33 @@
             this.其它费用ToolStripMenuItem,
             this.mnu_RemoveItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 92);
             // 
             // btn_AddSlice
             // 
             this.btn_AddSlice.Name = "btn_AddSlice";
-            this.btn_AddSlice.Size = new System.Drawing.Size(152, 22);
+            this.btn_AddSlice.Size = new System.Drawing.Size(136, 22);
             this.btn_AddSlice.Text = "选择小件";
             this.btn_AddSlice.Click += new System.EventHandler(this.btn_AddSlice_Click);
             // 
             // mnu_AddSteelRoll
             // 
             this.mnu_AddSteelRoll.Name = "mnu_AddSteelRoll";
-            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(136, 22);
             this.mnu_AddSteelRoll.Text = "选择原材料";
             this.mnu_AddSteelRoll.Click += new System.EventHandler(this.mnu_AddSteelRoll_Click);
+            // 
+            // 其它费用ToolStripMenuItem
+            // 
+            this.其它费用ToolStripMenuItem.Name = "其它费用ToolStripMenuItem";
+            this.其它费用ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.其它费用ToolStripMenuItem.Text = "其它费用";
+            this.其它费用ToolStripMenuItem.Click += new System.EventHandler(this.其它费用ToolStripMenuItem_Click);
             // 
             // mnu_RemoveItem
             // 
             this.mnu_RemoveItem.Name = "mnu_RemoveItem";
-            this.mnu_RemoveItem.Size = new System.Drawing.Size(152, 22);
+            this.mnu_RemoveItem.Size = new System.Drawing.Size(136, 22);
             this.mnu_RemoveItem.Text = "删除";
             this.mnu_RemoveItem.Click += new System.EventHandler(this.mnu_Remove_Click);
             // 
@@ -175,7 +190,7 @@
             this.btnNullify});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(949, 56);
+            this.toolStrip1.Size = new System.Drawing.Size(1077, 56);
             this.toolStrip1.TabIndex = 88;
             this.toolStrip1.Text = "toolStrip2";
             // 
@@ -232,20 +247,21 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Location = new System.Drawing.Point(7, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(941, 456);
+            this.tabControl1.Size = new System.Drawing.Size(1069, 456);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.pnl毛利);
             this.tabPage1.Controls.Add(this.lnkPayment);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.lnkDriver);
@@ -275,10 +291,59 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(933, 430);
+            this.tabPage1.Size = new System.Drawing.Size(1061, 430);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pnl毛利
+            // 
+            this.pnl毛利.Controls.Add(this.lbl毛利);
+            this.pnl毛利.Controls.Add(this.lbl国税计提);
+            this.pnl毛利.Controls.Add(this.lbl产品成本);
+            this.pnl毛利.Controls.Add(this.lbl销售金额);
+            this.pnl毛利.Location = new System.Drawing.Point(861, 8);
+            this.pnl毛利.Name = "pnl毛利";
+            this.pnl毛利.Size = new System.Drawing.Size(193, 123);
+            this.pnl毛利.TabIndex = 143;
+            this.pnl毛利.TabStop = false;
+            this.pnl毛利.Text = "毛利";
+            // 
+            // lbl毛利
+            // 
+            this.lbl毛利.AutoSize = true;
+            this.lbl毛利.ForeColor = System.Drawing.Color.Blue;
+            this.lbl毛利.Location = new System.Drawing.Point(16, 93);
+            this.lbl毛利.Name = "lbl毛利";
+            this.lbl毛利.Size = new System.Drawing.Size(0, 12);
+            this.lbl毛利.TabIndex = 3;
+            // 
+            // lbl国税计提
+            // 
+            this.lbl国税计提.AutoSize = true;
+            this.lbl国税计提.ForeColor = System.Drawing.Color.Blue;
+            this.lbl国税计提.Location = new System.Drawing.Point(16, 70);
+            this.lbl国税计提.Name = "lbl国税计提";
+            this.lbl国税计提.Size = new System.Drawing.Size(0, 12);
+            this.lbl国税计提.TabIndex = 2;
+            // 
+            // lbl产品成本
+            // 
+            this.lbl产品成本.AutoSize = true;
+            this.lbl产品成本.ForeColor = System.Drawing.Color.Blue;
+            this.lbl产品成本.Location = new System.Drawing.Point(16, 47);
+            this.lbl产品成本.Name = "lbl产品成本";
+            this.lbl产品成本.Size = new System.Drawing.Size(0, 12);
+            this.lbl产品成本.TabIndex = 1;
+            // 
+            // lbl销售金额
+            // 
+            this.lbl销售金额.AutoSize = true;
+            this.lbl销售金额.ForeColor = System.Drawing.Color.Blue;
+            this.lbl销售金额.Location = new System.Drawing.Point(16, 24);
+            this.lbl销售金额.Name = "lbl销售金额";
+            this.lbl销售金额.Size = new System.Drawing.Size(0, 12);
+            this.lbl销售金额.TabIndex = 0;
             // 
             // lnkPayment
             // 
@@ -510,9 +575,9 @@
             this.ItemsGrid.AllowUserToAddRows = false;
             this.ItemsGrid.AllowUserToDeleteRows = false;
             this.ItemsGrid.AllowUserToResizeRows = false;
-            this.ItemsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ItemsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ItemsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ItemsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colHeader,
@@ -524,6 +589,7 @@
             this.colPrice,
             this.colCount,
             this.colTotal,
+            this.colCosts,
             this.colMemo});
             this.ItemsGrid.ContextMenuStrip = this.contextMenuStrip1;
             this.ItemsGrid.Location = new System.Drawing.Point(3, 141);
@@ -531,7 +597,7 @@
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(923, 284);
+            this.ItemsGrid.Size = new System.Drawing.Size(1051, 284);
             this.ItemsGrid.TabIndex = 8;
             this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
@@ -616,6 +682,14 @@
             this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colTotal.Width = 80;
             // 
+            // colCosts
+            // 
+            dataGridViewCellStyle6.Format = "C2";
+            this.colCosts.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colCosts.HeaderText = "成本";
+            this.colCosts.Name = "colCosts";
+            this.colCosts.ReadOnly = true;
+            // 
             // colMemo
             // 
             this.colMemo.HeaderText = "备注";
@@ -655,7 +729,7 @@
             this.tabPage6.Controls.Add(this.gridAttachment);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(933, 430);
+            this.tabPage6.Size = new System.Drawing.Size(1061, 430);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "附件";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -679,7 +753,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(933, 430);
+            this.gridAttachment.Size = new System.Drawing.Size(1061, 430);
             this.gridAttachment.TabIndex = 103;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -753,7 +827,7 @@
             this.tabPage7.Controls.Add(this.dataGridView1);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(933, 430);
+            this.tabPage7.Size = new System.Drawing.Size(1061, 430);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "操作记录";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -776,7 +850,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(933, 430);
+            this.dataGridView1.Size = new System.Drawing.Size(1061, 430);
             this.dataGridView1.TabIndex = 99;
             // 
             // colOperateDate
@@ -807,18 +881,11 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // 其它费用ToolStripMenuItem
-            // 
-            this.其它费用ToolStripMenuItem.Name = "其它费用ToolStripMenuItem";
-            this.其它费用ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.其它费用ToolStripMenuItem.Text = "其它费用";
-            this.其它费用ToolStripMenuItem.Click += new System.EventHandler(this.其它费用ToolStripMenuItem_Click);
-            // 
             // FrmStackOutSheetDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 520);
+            this.ClientSize = new System.Drawing.Size(1077, 520);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label5);
@@ -838,6 +905,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.pnl毛利.ResumeLayout(false);
+            this.pnl毛利.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
@@ -910,6 +979,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_AddSteelRoll;
         private System.Windows.Forms.ToolStripButton btnPayment;
         private System.Windows.Forms.LinkLabel lnkPayment;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem 其它费用ToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
@@ -919,8 +990,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCosts;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripMenuItem 其它费用ToolStripMenuItem;
+        private System.Windows.Forms.GroupBox pnl毛利;
+        private System.Windows.Forms.Label lbl毛利;
+        private System.Windows.Forms.Label lbl国税计提;
+        private System.Windows.Forms.Label lbl产品成本;
+        private System.Windows.Forms.Label lbl销售金额;
     }
 }

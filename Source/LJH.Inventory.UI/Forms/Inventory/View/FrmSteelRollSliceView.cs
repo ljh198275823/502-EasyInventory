@@ -91,6 +91,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 var source = srs.SingleOrDefault(it => it.ID == c.SourceRoll);
                 row.Cells["colSourceRollWeight"].Value = source != null ? source.OriginalWeight : null;
             }
+            if (Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.ShowPrice))
+            {
+                if (c.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = c.CalUnitCost(true, UserSettings.Current.税点系数);
+                if (c.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = c.CalUnitCost(false, UserSettings.Current.税点系数);
+            }
             row.Cells["colMemo"].Value = c.Memo;
         }
         #endregion

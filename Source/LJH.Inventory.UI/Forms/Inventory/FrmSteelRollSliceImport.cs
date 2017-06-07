@@ -121,11 +121,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return null;
             }
             string model = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colModel"].Value.ToString().Trim());
+            if (model != "开平" && model != "开卷" && model != "开吨" && model != "开条")
+            {
+                row.Cells["colReason"].Value = "系统不存在此小件加工类型";
+                return null;
+            }
             decimal weight = 0;
             if (row.Cells["colWeight"].Value != null && !string.IsNullOrEmpty(row.Cells["colWeight"].Value.ToString().Trim()) &&
                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colWeight"].Value.ToString().Trim()), out weight) || weight <= 0))
             {
                 row.Cells["colReason"].Value = "重量不正确";
+                return null;
+            }
+            if ((model == "开吨" || model == "开条") && weight <= 0)
+            {
+                row.Cells["colReason"].Value = "开吨和开条小件要填写重量";
                 return null;
             }
             decimal length = 0;
@@ -135,9 +145,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colReason"].Value = "长度不正确";
                 return null;
             }
-            if (weight == 0 && length == 0)
+            if ((model == "开平" || model == "开卷") && length <= 0)
             {
-                row.Cells["colReason"].Value = "重量和长度至少指定一个";
+                row.Cells["colReason"].Value = "开平和开卷小件要填写长度";
                 return null;
             }
             decimal reaThick = 0;
@@ -163,7 +173,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             string customer = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCustomer"].Value.ToString().Trim());
             string supplier = row.Cells["colSupplier"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSupplier"].Value.ToString().Trim());
             string manufacture = row.Cells["colManufacture"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
-            var product = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, weight == 0 || model == "开平" ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
+            var product = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, model == "开卷" || model == "开平" ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
             if (product == null)
             {
                 row.Cells["colReason"].Value = "创建产品失败";
@@ -176,12 +186,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Product = product;
             pi.Model = product.Model;
             pi.WareHouseID = ws;
-            pi.OriginalThick = reaThick == 0 ? null : (decimal?)reaThick;
-            pi.Weight = weight;
-            pi.Length = length;
+            pi.OriginalThick = reaThick == 0 ? SpecificationHelper.GetWrittenThick(specification) : (decimal?)reaThick;
+            pi.Weight = model == "开卷" || model == "开平" ? weight : weight * count; //开平开卷显示总重，其它的显示成单重
+            pi.Length = model == "开卷" || model == "开平" ? null : (decimal?)length;
             pi.OriginalCount = count;
             pi.Count = count;
-            pi.Unit = "卷";
+            pi.Unit = "件";
             pi.Customer = customer;
             pi.Supplier = supplier;
             pi.Manufacture = manufacture;

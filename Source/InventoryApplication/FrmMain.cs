@@ -35,7 +35,7 @@ namespace InventoryApplication
         private bool _EnableSoftDog = true; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2016, 1, 31);
         private DateTime _dtHostDogTime = new DateTime(2016, 1, 31);
-        private int _RetryTime =0;
+        private int _RetryTime = 0;
         #endregion
 
         #region 私有方法
@@ -94,7 +94,7 @@ namespace InventoryApplication
             }
             else if (_SoftDog.ExpiredDate.AddDays(15) < DateTime.Today)
             {
-                 FrmContactUs frm = new FrmContactUs();
+                FrmContactUs frm = new FrmContactUs();
                 frm.txtMessage.Text = "软件已经过期";
                 frm.ShowDialog();
                 System.Environment.Exit(0);
@@ -255,6 +255,7 @@ namespace InventoryApplication
             this.mnu_PaymentReport.Enabled = cur.Permit(Permission.PaymentReport, PermissionActions.Read);
             this.mnu_TaxBillReport.Enabled = cur.Permit(Permission.TaxBillReport, PermissionActions.Read);
             this.mnu_客户往来报表.Enabled = cur.Permit(Permission.客户往来报表, PermissionActions.Read);
+            this.mnu_供应商往来报表.Enabled = cur.Permit(Permission.供应商往来报表, PermissionActions.Read);
         }
         #endregion
 
@@ -514,7 +515,7 @@ namespace InventoryApplication
             {
                 CheckDog();
             }
-            
+
 
             DoLogIn();
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
@@ -576,6 +577,11 @@ namespace InventoryApplication
         private void mnu_账号管理_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmAccountMaster>(null);
+        }
+
+        private void mnu_供应商往来报表_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.Frm供应商往来报表>(null);
         }
     }
 }

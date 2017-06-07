@@ -762,19 +762,20 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr
 BEGIN
 CREATE TABLE [dbo].[ProductInventoryItem](
 	[ID] [uniqueidentifier] NOT NULL,
+	[AddDate] [datetime] NOT NULL,
 	[ProductID] [nvarchar](50) NOT NULL,
 	[WareHouseID] [nvarchar](50) NOT NULL,
-	[AddDate] [datetime] NOT NULL,
-	[Model] [nvarchar](50) NOT NULL,
+	[Model] [nchar](5) NOT NULL,
+	[Unit] [nvarchar](50) NOT NULL,
+	[State] [tinyint] NOT NULL,
 	[OriginalWeight] [decimal](18, 4) NULL,
 	[OriginalLength] [decimal](18, 4) NULL,
+	[OriginalThick] [decimal](18, 4) NULL,
+	[OriginalCount] [decimal](18, 4) NULL,
 	[Weight] [decimal](18, 4) NULL,
 	[Length] [decimal](18, 4) NULL,
 	[RealThick] [decimal](18, 4) NULL,
-	[Unit] [nvarchar](50) NOT NULL,
-	[Price] [decimal](18, 4) NOT NULL,
 	[Count] [decimal](18, 4) NOT NULL,
-	[State] [tinyint] NOT NULL,
 	[Customer] [nvarchar](50) NULL,
 	[Supplier] [nvarchar](50) NULL,
 	[Manufacture] [nvarchar](50) NULL,
@@ -789,15 +790,32 @@ CREATE TABLE [dbo].[ProductInventoryItem](
 	[DeliverySheet] [nvarchar](50) NULL,
 	[SourceID] [uniqueidentifier] NULL,
 	[SourceRoll] [uniqueidentifier] NULL,
+	[CostID] [uniqueidentifier] NULL,
+	[Carplate] [nvarchar](50) NULL,
+	[Material] [nvarchar](50) NULL,
+	[Position] [nvarchar](50) NULL,
 	[Operator] [nvarchar](50) NULL,
 	[Memo] [nvarchar](200) NULL,
  CONSTRAINT [PK_ProductInventoryItem_1] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
-)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[ProductInventoryItem]') AND name = N'index_ProductinventoryItemAddDate')
+CREATE NONCLUSTERED INDEX [index_ProductinventoryItemAddDate] ON [dbo].[ProductInventoryItem] 
+(
+	[AddDate] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[ProductInventoryItem]') AND name = N'index_stackoutsheetid')
+CREATE NONCLUSTERED INDEX [index_stackoutsheetid] ON [dbo].[ProductInventoryItem] 
+(
+	[DeliverySheet] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
