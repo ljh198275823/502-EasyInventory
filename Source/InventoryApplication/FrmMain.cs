@@ -247,9 +247,10 @@ namespace InventoryApplication
             this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
             this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
             this.mnu_账号管理.Enabled = cur.Permit(Permission.Account, PermissionActions.Read) || cur.Permit(Permission.Account, PermissionActions.Edit);
+            this.mnu_公司管理费用.Enabled = cur.Permit(Permission.ExpenditureRecord, PermissionActions.Read) || cur.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
-            this.mnu_DeliveryStatistic.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
+            this.mnu_DeliveryStatistic.Enabled = cur.Permit(Permission.DeliveryStatistics, PermissionActions.Read);
             this.mnu_InventoryRecord.Enabled = cur.Permit(Permission.InventoryRecordReport, PermissionActions.Read);
             this.mnu_SliceRecordReport.Enabled = cur.Permit(Permission.SliceRecordReport, PermissionActions.Read);
             this.mnu_PaymentReport.Enabled = cur.Permit(Permission.PaymentReport, PermissionActions.Read);
@@ -582,6 +583,11 @@ namespace InventoryApplication
         private void mnu_供应商往来报表_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.Frm供应商往来报表>(null);
+        }
+
+        private void mnu_公司管理费用_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmExpenditureRecordMaster>(null);
         }
     }
 }

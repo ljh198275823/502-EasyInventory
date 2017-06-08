@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,6 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,8 @@
             this.colPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCosts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col结算成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col国税计提 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col毛利 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -393,7 +395,8 @@
             this.colPaid,
             this.colNotPaid,
             this.colCosts,
-            this.col结算成本,
+            this.col国税计提,
+            this.col毛利,
             this.colState,
             this.colShipDate,
             this.colLinker,
@@ -408,8 +411,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 87);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1244, 396);
@@ -507,13 +510,21 @@
             this.colCosts.Name = "colCosts";
             this.colCosts.ReadOnly = true;
             // 
-            // col结算成本
+            // col国税计提
             // 
             dataGridViewCellStyle6.Format = "C2";
-            this.col结算成本.DefaultCellStyle = dataGridViewCellStyle6;
-            this.col结算成本.HeaderText = "结算成本";
-            this.col结算成本.Name = "col结算成本";
-            this.col结算成本.ReadOnly = true;
+            this.col国税计提.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col国税计提.HeaderText = "国税计提";
+            this.col国税计提.Name = "col国税计提";
+            this.col国税计提.ReadOnly = true;
+            // 
+            // col毛利
+            // 
+            dataGridViewCellStyle7.Format = "C2";
+            this.col毛利.DefaultCellStyle = dataGridViewCellStyle7;
+            this.col毛利.HeaderText = "毛利";
+            this.col毛利.Name = "col毛利";
+            this.col毛利.ReadOnly = true;
             // 
             // colState
             // 
@@ -524,9 +535,9 @@
             // 
             // colShipDate
             // 
-            dataGridViewCellStyle7.Format = "g";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Format = "g";
+            dataGridViewCellStyle8.NullValue = null;
+            this.colShipDate.DefaultCellStyle = dataGridViewCellStyle8;
             this.colShipDate.HeaderText = "发货日期";
             this.colShipDate.Name = "colShipDate";
             this.colShipDate.ReadOnly = true;
@@ -646,7 +657,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCosts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col结算成本;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col国税计提;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col毛利;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colShipDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;

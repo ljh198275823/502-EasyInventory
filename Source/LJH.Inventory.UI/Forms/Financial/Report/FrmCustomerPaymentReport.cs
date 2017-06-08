@@ -45,11 +45,14 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Cells["colSheetID"].Value = cp.ID;
             row.Cells["colClass"].Value = cp.ClassID.ToString();
             row.Cells["colSheetDate"].Value = cp.SheetDate;
-            if (cp.PaymentMode != PaymentMode.None) row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
+            if (cp.PaymentMode != PaymentMode.None)
+            {
+                row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
+            }
             Account ac = null;
             if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
             row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
-            if (!string.IsNullOrEmpty(cp.Payer ) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.Payer );
+            if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.Payer);
             row.Cells["colPayer"].Value = ac != null ? ac.Name : cp.Payer;
             row.Cells["colAmount"].Value = cp.Amount;
             if (cp.State != SheetState.Canceled)
@@ -65,6 +68,11 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
             }
             row.Cells["colMemo"].Value = cp.Memo;
+            if (cp.ClassID == CustomerPaymentType.公司管理费用)
+            {
+                row.Cells["colPaymentMode"].Value = cp.GetProperty("费用类别");
+                row.Cells["colCustomer"].Value = cp.GetProperty("申请人");
+            }
             if (cp.State == SheetState.Canceled)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
@@ -101,6 +109,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 con.PaymentTypes.Add(CustomerPaymentType.客户退款);
                 con.PaymentTypes.Add(CustomerPaymentType.供应商退款);
             }
+            if (con.PaymentTypes.Count == 0) return null;
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }
@@ -169,6 +178,17 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         {
             txtAccount.Tag = null;
             txtAccount.Text = null;
+        }
+
+        private void chkAll_CheckedChanged(object sender, EventArgs e)
+        {
+            chk客户收款.Checked = chkAll.Checked;
+            chk供应商付款.Checked = chkAll.Checked;
+            chk其它收款.Checked = chkAll.Checked;
+            chk费用支出.Checked = chkAll.Checked;
+            chk转公账.Checked = chkAll.Checked;
+            chkl转账.Checked = chkAll.Checked;
+            chk退款.Checked = chkAll.Checked;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

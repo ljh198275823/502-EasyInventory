@@ -68,19 +68,38 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult 设置结算单价(ProductInventoryItem pi, decimal price)
+        public CommandResult 设置结算单价(ProductInventoryItem pi, decimal price, string opt, string logID)
         {
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var clone = pi.Clone();
             var ci = pi.GetCost(CostItem.入库单价);
             if (ci == null) return new CommandResult(ResultCode.Fail, "没有找到入库单价");
             var f = new CostItem() { Name = CostItem.结算单价, Price = price, WithTax = ci.WithTax, Prepay = ci.Prepay };
             clone.SetCost(f);
-            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            AddOperationLog(pi.ID.ToString(), pi.DocumentType, "设置结算单价", unitWork, DateTime.Now, opt, logID, string.Format("将结算单价设置成{0},", price));
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
+            var ret = unitWork.Commit();
             if (ret.Result == ResultCode.Successful)
             {
                 pi.Costs = clone.Costs;
             }
             return ret;
+        }
+
+        private void AddOperationLog(string id, string docType, string operation, IUnitWork unitWork, DateTime dt, string opt, string logID = null, string memo = null)
+        {
+            DocumentOperation doc = new DocumentOperation()
+            {
+                ID = Guid.NewGuid(),
+                DocumentID = id,
+                DocumentType = docType,
+                OperatDate = dt,
+                Operation = operation,
+                Operator = opt,
+                LogID = logID,
+                Memo = memo
+            };
+            ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(RepoUri).Insert(doc, unitWork);
         }
         #endregion
     }

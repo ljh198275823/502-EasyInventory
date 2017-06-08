@@ -60,6 +60,7 @@
             this.mnu_PaymentReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_TaxBillReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_供应商往来报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_System = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Options = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,7 +89,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tmrSoftDogChecker = new System.Windows.Forms.Timer(this.components);
-            this.mnu_供应商往来报表 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_公司管理费用 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -202,7 +203,8 @@
             this.toolStripSeparator6,
             this.mnu_SupplierState,
             this.toolStripSeparator1,
-            this.mnu_账号管理});
+            this.mnu_账号管理,
+            this.mnu_公司管理费用});
             this.财务ToolStripMenuItem.Image = global::InventoryApplication.Properties.Resources.finance;
             this.财务ToolStripMenuItem.Name = "财务ToolStripMenuItem";
             this.财务ToolStripMenuItem.Size = new System.Drawing.Size(74, 34);
@@ -288,8 +290,7 @@
             this.mnu_DeliveryStatistic.Enabled = false;
             this.mnu_DeliveryStatistic.Name = "mnu_DeliveryStatistic";
             this.mnu_DeliveryStatistic.Size = new System.Drawing.Size(184, 22);
-            this.mnu_DeliveryStatistic.Text = "出货统计报表";
-            this.mnu_DeliveryStatistic.Visible = false;
+            this.mnu_DeliveryStatistic.Text = "出货利润统计报表";
             this.mnu_DeliveryStatistic.Click += new System.EventHandler(this.mnu_DeliveryStatistic_Click);
             // 
             // mnu_SliceRecordReport
@@ -348,6 +349,14 @@
             this.mnu_客户往来报表.Text = "客户往来报表";
             this.mnu_客户往来报表.Click += new System.EventHandler(this.mnu_客户往来报表_Click);
             // 
+            // mnu_供应商往来报表
+            // 
+            this.mnu_供应商往来报表.Enabled = false;
+            this.mnu_供应商往来报表.Name = "mnu_供应商往来报表";
+            this.mnu_供应商往来报表.Size = new System.Drawing.Size(184, 22);
+            this.mnu_供应商往来报表.Text = "供应商往来报表";
+            this.mnu_供应商往来报表.Click += new System.EventHandler(this.mnu_供应商往来报表_Click);
+            // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
@@ -373,7 +382,7 @@
             // 
             this.mnu_Options.Enabled = false;
             this.mnu_Options.Name = "mnu_Options";
-            this.mnu_Options.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Options.Size = new System.Drawing.Size(136, 22);
             this.mnu_Options.Text = "系统参数";
             this.mnu_Options.Click += new System.EventHandler(this.mnu_Options_Click);
             // 
@@ -381,7 +390,7 @@
             // 
             this.mnu_Staff.Enabled = false;
             this.mnu_Staff.Name = "mnu_Staff";
-            this.mnu_Staff.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Staff.Size = new System.Drawing.Size(136, 22);
             this.mnu_Staff.Text = "人员部门";
             this.mnu_Staff.Click += new System.EventHandler(this.mnu_Staff_Click);
             // 
@@ -389,7 +398,7 @@
             // 
             this.mnu_Operator.Enabled = false;
             this.mnu_Operator.Name = "mnu_Operator";
-            this.mnu_Operator.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Operator.Size = new System.Drawing.Size(136, 22);
             this.mnu_Operator.Text = "操作员管理";
             this.mnu_Operator.Click += new System.EventHandler(this.mnu_Operator_Click);
             // 
@@ -397,33 +406,33 @@
             // 
             this.mnu_Role.Enabled = false;
             this.mnu_Role.Name = "mnu_Role";
-            this.mnu_Role.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Role.Size = new System.Drawing.Size(136, 22);
             this.mnu_Role.Text = "角色";
             this.mnu_Role.Click += new System.EventHandler(this.mnu_Role_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(133, 6);
             // 
             // mnu_ChangePwd
             // 
             this.mnu_ChangePwd.Name = "mnu_ChangePwd";
-            this.mnu_ChangePwd.Size = new System.Drawing.Size(152, 22);
+            this.mnu_ChangePwd.Size = new System.Drawing.Size(136, 22);
             this.mnu_ChangePwd.Text = "更改密码";
             this.mnu_ChangePwd.Click += new System.EventHandler(this.mnu_ChangePwd_Click);
             // 
             // mnu_LogOut
             // 
             this.mnu_LogOut.Name = "mnu_LogOut";
-            this.mnu_LogOut.Size = new System.Drawing.Size(152, 22);
+            this.mnu_LogOut.Size = new System.Drawing.Size(136, 22);
             this.mnu_LogOut.Text = "更改用户";
             this.mnu_LogOut.Click += new System.EventHandler(this.mnu_LogOut_Click);
             // 
             // mnu_Exit
             // 
             this.mnu_Exit.Name = "mnu_Exit";
-            this.mnu_Exit.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Exit.Size = new System.Drawing.Size(136, 22);
             this.mnu_Exit.Text = "退出";
             this.mnu_Exit.Click += new System.EventHandler(this.mnu_Exit_Click);
             // 
@@ -577,13 +586,13 @@
             this.tmrSoftDogChecker.Interval = 60000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
             // 
-            // mnu_供应商往来报表
+            // mnu_公司管理费用
             // 
-            this.mnu_供应商往来报表.Enabled = false;
-            this.mnu_供应商往来报表.Name = "mnu_供应商往来报表";
-            this.mnu_供应商往来报表.Size = new System.Drawing.Size(184, 22);
-            this.mnu_供应商往来报表.Text = "供应商往来报表";
-            this.mnu_供应商往来报表.Click += new System.EventHandler(this.mnu_供应商往来报表_Click);
+            this.mnu_公司管理费用.Enabled = false;
+            this.mnu_公司管理费用.Name = "mnu_公司管理费用";
+            this.mnu_公司管理费用.Size = new System.Drawing.Size(160, 22);
+            this.mnu_公司管理费用.Text = "公司管理费用";
+            this.mnu_公司管理费用.Click += new System.EventHandler(this.mnu_公司管理费用_Click);
             // 
             // FrmMain
             // 
@@ -675,5 +684,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_客户往来报表;
         private System.Windows.Forms.ToolStripMenuItem mnu_账号管理;
         private System.Windows.Forms.ToolStripMenuItem mnu_供应商往来报表;
+        private System.Windows.Forms.ToolStripMenuItem mnu_公司管理费用;
     }
 }

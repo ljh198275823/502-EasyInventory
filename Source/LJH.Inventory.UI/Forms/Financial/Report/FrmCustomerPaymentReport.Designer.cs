@@ -37,6 +37,7 @@
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkAll = new System.Windows.Forms.CheckBox();
             this.chkl转账 = new System.Windows.Forms.CheckBox();
             this.chk转公账 = new System.Windows.Forms.CheckBox();
             this.chk退款 = new System.Windows.Forms.CheckBox();
@@ -115,6 +116,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chkAll);
             this.groupBox3.Controls.Add(this.chkl转账);
             this.groupBox3.Controls.Add(this.chk转公账);
             this.groupBox3.Controls.Add(this.chk退款);
@@ -135,12 +137,24 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
             // 
+            // chkAll
+            // 
+            this.chkAll.AutoSize = true;
+            this.chkAll.Checked = true;
+            this.chkAll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAll.Location = new System.Drawing.Point(456, 26);
+            this.chkAll.Name = "chkAll";
+            this.chkAll.Size = new System.Drawing.Size(15, 14);
+            this.chkAll.TabIndex = 108;
+            this.chkAll.UseVisualStyleBackColor = true;
+            this.chkAll.CheckedChanged += new System.EventHandler(this.chkAll_CheckedChanged);
+            // 
             // chkl转账
             // 
             this.chkl转账.AutoSize = true;
             this.chkl转账.Checked = true;
             this.chkl转账.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkl转账.Location = new System.Drawing.Point(520, 56);
+            this.chkl转账.Location = new System.Drawing.Point(543, 56);
             this.chkl转账.Name = "chkl转账";
             this.chkl转账.Size = new System.Drawing.Size(48, 16);
             this.chkl转账.TabIndex = 107;
@@ -152,7 +166,7 @@
             this.chk转公账.AutoSize = true;
             this.chk转公账.Checked = true;
             this.chk转公账.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk转公账.Location = new System.Drawing.Point(454, 56);
+            this.chk转公账.Location = new System.Drawing.Point(477, 56);
             this.chk转公账.Name = "chk转公账";
             this.chk转公账.Size = new System.Drawing.Size(60, 16);
             this.chk转公账.TabIndex = 106;
@@ -164,7 +178,7 @@
             this.chk退款.AutoSize = true;
             this.chk退款.Checked = true;
             this.chk退款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk退款.Location = new System.Drawing.Point(649, 55);
+            this.chk退款.Location = new System.Drawing.Point(672, 55);
             this.chk退款.Name = "chk退款";
             this.chk退款.Size = new System.Drawing.Size(48, 16);
             this.chk退款.TabIndex = 105;
@@ -176,7 +190,7 @@
             this.chk费用支出.AutoSize = true;
             this.chk费用支出.Checked = true;
             this.chk费用支出.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk费用支出.Location = new System.Drawing.Point(571, 56);
+            this.chk费用支出.Location = new System.Drawing.Point(594, 56);
             this.chk费用支出.Name = "chk费用支出";
             this.chk费用支出.Size = new System.Drawing.Size(72, 16);
             this.chk费用支出.TabIndex = 104;
@@ -188,7 +202,7 @@
             this.chk其它收款.AutoSize = true;
             this.chk其它收款.Checked = true;
             this.chk其它收款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk其它收款.Location = new System.Drawing.Point(625, 25);
+            this.chk其它收款.Location = new System.Drawing.Point(648, 25);
             this.chk其它收款.Name = "chk其它收款";
             this.chk其它收款.Size = new System.Drawing.Size(72, 16);
             this.chk其它收款.TabIndex = 103;
@@ -221,7 +235,7 @@
             this.chk供应商付款.AutoSize = true;
             this.chk供应商付款.Checked = true;
             this.chk供应商付款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk供应商付款.Location = new System.Drawing.Point(535, 25);
+            this.chk供应商付款.Location = new System.Drawing.Point(558, 25);
             this.chk供应商付款.Name = "chk供应商付款";
             this.chk供应商付款.Size = new System.Drawing.Size(84, 16);
             this.chk供应商付款.TabIndex = 76;
@@ -233,7 +247,7 @@
             this.chk客户收款.AutoSize = true;
             this.chk客户收款.Checked = true;
             this.chk客户收款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk客户收款.Location = new System.Drawing.Point(454, 25);
+            this.chk客户收款.Location = new System.Drawing.Point(477, 25);
             this.chk客户收款.Name = "chk客户收款";
             this.chk客户收款.Size = new System.Drawing.Size(72, 16);
             this.chk客户收款.TabIndex = 75;
@@ -339,14 +353,14 @@
             // colAccount
             // 
             this.colAccount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colAccount.HeaderText = "到款账号";
+            this.colAccount.HeaderText = "公司账号";
             this.colAccount.MinimumWidth = 100;
             this.colAccount.Name = "colAccount";
             this.colAccount.ReadOnly = true;
             // 
             // colPayer
             // 
-            this.colPayer.HeaderText = "付款单位";
+            this.colPayer.HeaderText = "对方账号";
             this.colPayer.Name = "colPayer";
             this.colPayer.ReadOnly = true;
             // 
@@ -449,6 +463,7 @@
         private System.Windows.Forms.CheckBox chk退款;
         private System.Windows.Forms.CheckBox chkl转账;
         private System.Windows.Forms.CheckBox chk转公账;
+        private System.Windows.Forms.CheckBox chkAll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;

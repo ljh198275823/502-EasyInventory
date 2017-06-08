@@ -173,8 +173,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             string customer = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCustomer"].Value.ToString().Trim());
             string supplier = row.Cells["colSupplier"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSupplier"].Value.ToString().Trim());
             string manufacture = row.Cells["colManufacture"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
-            var product = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, model == "开卷" || model == "开平" ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
-            if (product == null)
+            var p = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, model == "开卷" || model == "开平" ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
+            if (p == null)
             {
                 row.Cells["colReason"].Value = "创建产品失败";
                 return null;
@@ -182,15 +182,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ProductInventoryItem pi = new ProductInventoryItem();
             pi.ID = Guid.NewGuid();
             pi.AddDate = addDate;
-            pi.ProductID = product.ID;
-            pi.Product = product;
-            pi.Model = product.Model;
+            pi.ProductID = p.ID;
+            pi.Product = p;
+            pi.Model = p.Model;
             pi.WareHouseID = ws;
             pi.OriginalThick = reaThick == 0 ? SpecificationHelper.GetWrittenThick(specification) : (decimal?)reaThick;
             pi.Weight = model == "开卷" || model == "开平" ? weight : weight * count; //开平开卷显示总重，其它的显示成单重
             pi.Length = model == "开卷" || model == "开平" ? null : (decimal?)length;
             pi.OriginalCount = count;
             pi.Count = count;
+            if ((p.Model == "开卷" || p.Model == "开平") && pi.Weight > 0)
+            {
+                pi.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, pi.Weight.Value, p.Length.Value * pi.Count, p.Density.Value); //指定长度时计算入库厚度
+            }
+            else
+            {
+                pi.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
+            }
             pi.Unit = "件";
             pi.Customer = customer;
             pi.Supplier = supplier;

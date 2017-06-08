@@ -112,9 +112,17 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置成本
         /// </summary>
-        public decimal Costs { get; set; }
+        public decimal? Costs { get; set; }
 
-        public decimal? 结算成本 { get; set; }
+        public decimal? Profit
+        {
+            get
+            {
+                if (Amount <= 0) return null;
+                if (Costs > 0) return Amount - Costs.Value - (WithTax ? UserSettings.Current.国税系数 * Amount : 0);
+                return null;
+            }
+        }
         /// <summary>
         /// 获取或设置备注描述
         /// </summary>

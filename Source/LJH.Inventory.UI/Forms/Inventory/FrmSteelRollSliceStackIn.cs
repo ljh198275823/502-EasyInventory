@@ -343,10 +343,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
             item.OriginalWeight = rd总重.Checked ? txtWeight.DecimalValue : txtWeight.DecimalValue * txtCount.DecimalValue; //区分总重和单重
-            item.OriginalCount = txtCount.DecimalValue;
             item.Weight = item.OriginalWeight;
-            item.Unit = "件";
+            item.OriginalCount = txtCount.DecimalValue;
             item.Count = txtCount.DecimalValue;
+            if ((p.Model == "开卷" || p.Model == "开平") && item.Weight > 0)
+            {
+                item.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Weight.Value, p.Length.Value * item.Count, p.Density.Value); //指定长度时计算入库厚度
+            }
+            else
+            {
+                item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
+            }
+            item.Unit = "件";
             item.State = ProductInventoryState.Inventory;
             item.Customer = txtCustomer.Text;
             if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;

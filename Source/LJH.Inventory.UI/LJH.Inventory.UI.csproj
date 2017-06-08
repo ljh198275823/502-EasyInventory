@@ -94,6 +94,12 @@
     <Compile Include="Forms\Financial\FrmCustomerTaxBillDetail.designer.cs">
       <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\FrmExpenditureRecordMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmExpenditureRecordMaster.designer.cs">
+      <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\FrmOhterReceivableSheetDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,12 @@
     <Compile Include="Forms\Financial\Frm转公账.designer.cs">
       <DependentUpon>Frm转公账.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\FrmChangeCosts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\FrmChangeCosts.Designer.cs">
+      <DependentUpon>FrmChangeCosts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\FrmCountInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,6 +279,12 @@
     </Compile>
     <Compile Include="Forms\Inventory\Report\Frm小件盘点记录报表.designer.cs">
       <DependentUpon>Frm小件盘点记录报表.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\Frm修改记录日志明细.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\View\Frm修改记录日志明细.Designer.cs">
+      <DependentUpon>Frm修改记录日志明细.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sale\FrmCustomerMerge.cs">
       <SubType>Form</SubType>
@@ -694,6 +712,9 @@
     <EmbeddedResource Include="Forms\Financial\FrmCustomerTaxBillDetail.resx">
       <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\FrmExpenditureRecordMaster.resx">
+      <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmOhterReceivableSheetDetail.resx">
       <DependentUpon>FrmOhterReceivableSheetDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -762,6 +783,9 @@
     <EmbeddedResource Include="Forms\Financial\Frm转公账.resx">
       <DependentUpon>Frm转公账.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\FrmChangeCosts.resx">
+      <DependentUpon>FrmChangeCosts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmCountInput.resx">
       <DependentUpon>FrmCountInput.cs</DependentUpon>
     </EmbeddedResource>
@@ -782,6 +806,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Report\Frm小件盘点记录报表.resx">
       <DependentUpon>Frm小件盘点记录报表.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\View\Frm修改记录日志明细.resx">
+      <DependentUpon>Frm修改记录日志明细.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmCustomerMerge.resx">
       <DependentUpon>FrmCustomerMerge.cs</DependentUpon>

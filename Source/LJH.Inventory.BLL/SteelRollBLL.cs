@@ -543,6 +543,55 @@ namespace LJH.Inventory.BLL
             }
             return ret;
         }
+
+        public CommandResult ChangeCost(ProductInventoryItem sr, List<CostItem> costs, string opt, string logID)
+        {
+            try
+            {
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                var clone = sr.Clone();
+                string memo = string.Empty;
+                foreach (var ci in costs)
+                {
+                    var oci = sr.GetCost(ci.Name);
+                    memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
+                    clone.SetCost(ci);
+                }
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
+                AddOperationLog(sr.ID.ToString(), sr.DocumentType, "修改单价", unitWork, DateTime.Now, opt, logID, memo);
+                if (!string.IsNullOrEmpty(sr.Supplier))
+                {
+                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
+                    if (s != null)
+                    {
+                        var dt = DateTime.Now;
+                        AddReceivables(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (sr.CalTax() > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                    }
+                }
+                return unitWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
+        }
+
+        private void AddOperationLog(string id, string docType, string operation, IUnitWork unitWork, DateTime dt, string opt, string logID = null, string memo = null)
+        {
+            DocumentOperation doc = new DocumentOperation()
+            {
+                ID = Guid.NewGuid(),
+                DocumentID = id,
+                DocumentType = docType,
+                OperatDate = dt,
+                Operation = operation,
+                Operator = opt,
+                LogID = logID,
+                Memo = memo
+            };
+            ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(RepoUri).Insert(doc, unitWork);
+        }
         #endregion
     }
 }

@@ -49,6 +49,8 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
+        public string DocumentType { get { return "ProductInventory"; } }
+
         #region 公共属性
         public Guid ID { get; set; }
         /// <summary>
@@ -312,16 +314,21 @@ namespace LJH.Inventory.BusinessModel
             {
                 try
                 {
+                    if (Model == "开平" || Model == "开卷")
+                    {
+                        decimal? thick = this.RealThick;
+                        if (!thick.HasValue) thick = this.OriginalThick;
+                        if (!thick.HasValue) thick = SpecificationHelper.GetWrittenThick(Product.Specification);
+                        decimal? length = this.Product.Length; //小件的长度放在产品信息中
+                        decimal? width = SpecificationHelper.GetWrittenWidth(Product.Specification);
+                        if (thick != null && length != null && width != null)
+                        {
+                            return ProductInventoryItem.CalWeight(thick.Value, width.Value, length.Value, Product.Density.Value);
+                        }
+                    }
                     if (Weight.HasValue && Weight.Value > 0 && Count > 0) return Weight.Value / Count;
                     if (OriginalWeight > 0 && OriginalCount > 0) return OriginalWeight.Value / OriginalCount.Value;
-                    decimal? thick = this.RealThick;
-                    if (!thick.HasValue) thick = this.OriginalThick;
-                    if (!thick.HasValue) thick = SpecificationHelper.GetWrittenThick(Product.Specification);
-                    if (!thick.HasValue && !this.Length.HasValue) return null;
-                    decimal? length = this.Length;  //原材料的长度
-                    if (!length.HasValue) length = this.Product.Length; //小件的长度放在产品信息中
-                    if (length == null) return null;
-                    return ProductInventoryItem.CalWeight(thick.Value, SpecificationHelper.GetWrittenWidth(Product.Specification).Value, length.Value, Product.Density.Value);
+                    return null;
                 }
                 catch (Exception ex)
                 {
@@ -334,7 +341,8 @@ namespace LJH.Inventory.BusinessModel
         #region 公共方法
         public ProductInventoryItem Clone()
         {
-            return this.MemberwiseClone() as ProductInventoryItem;
+            var ret = this.MemberwiseClone() as ProductInventoryItem;
+            return ret;
         }
         #endregion
     }

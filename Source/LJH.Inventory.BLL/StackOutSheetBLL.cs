@@ -48,7 +48,7 @@ namespace LJH.Inventory.BLL
         }
 
         //分配, 为某个送货单项分配指定数量的库存
-        private void F_Assign(ProductInventoryItem source, StackOutItem si, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems,DateTime dt)
+        private void F_Assign(ProductInventoryItem source, StackOutItem si, List<ProductInventoryItem> addingItems, List<ProductInventoryItem> updatingitems, List<ProductInventoryItem> cloneItems, List<ProductInventoryItem> deletingItems, DateTime dt)
         {
             if (source.Count < si.Count) throw new Exception("出货数量超出库存数量");
             if (!updatingitems.Exists(it => it.ID == source.ID))
@@ -325,22 +325,8 @@ namespace LJH.Inventory.BLL
                 var tempPis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
                 if (tempPis != null && tempPis.Count > 0)
                 {
-                    if (tempPis.Exists(it => it.GetCost(CostItem.结算单价) == null))
-                    {
-                        sheet.结算成本 = null;
-                        sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
-                        if (sheet.WithTax) sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
-                    }
-                    else
-                    {
-                        sheet.结算成本 = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
-                        sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数, true));
-                        if (sheet.WithTax)
-                        {
-                            sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
-                            sheet.结算成本 += sheet.Amount * UserSettings.Current.国税系数;
-                        }
-                    }
+                    sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
+                    sheet.Costs = sheet.Costs > 0 ? sheet.Costs : null;
                 }
             }
             return ret;
@@ -373,22 +359,8 @@ namespace LJH.Inventory.BLL
                         if (temp.ContainsKey(sheet.ID))
                         {
                             var tempPis = temp[sheet.ID];
-                            if (tempPis.Exists(it => it.GetCost(CostItem.结算单价) == null))
-                            {
-                                sheet.结算成本 = null;
-                                sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
-                                if (sheet.WithTax) sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
-                            }
-                            else
-                            {
-                                sheet.结算成本 = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
-                                sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数, true));
-                                if (sheet.WithTax)
-                                {
-                                    sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
-                                    sheet.结算成本 += sheet.Amount * UserSettings.Current.国税系数;
-                                }
-                            }
+                            sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
+                            sheet.Costs = sheet.Costs > 0 ? sheet.Costs : null;
                         }
                     }
                 }
@@ -500,22 +472,8 @@ namespace LJH.Inventory.BLL
             var tempPis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
             if (tempPis != null && tempPis.Count > 0)
             {
-                if (tempPis.Exists(it => it.GetCost(CostItem.结算单价) == null))
-                {
-                    sheet.结算成本 = null;
-                    sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
-                    if (sheet.WithTax) sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
-                }
-                else
-                {
-                    sheet.结算成本 = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
-                    sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数, true));
-                    if (sheet.WithTax)
-                    {
-                        sheet.Costs += sheet.Amount * UserSettings.Current.国税系数;
-                        sheet.结算成本 += sheet.Amount * UserSettings.Current.国税系数;
-                    }
-                }
+                sheet.Costs = tempPis.Sum(it => it.CalCost(sheet.WithTax, UserSettings.Current.税点系数));
+                sheet.Costs = sheet.Costs > 0 ? sheet.Costs : null;
             }
         }
         #endregion

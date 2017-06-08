@@ -23,19 +23,29 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             InitializeComponent();
         }
 
+        private List<CompanyInfo> _AllCustomers = null;
+
+        decimal Amount = 0;
+        decimal 产品成本 =0;
+        decimal 国税计提 =0;
+        decimal 毛利 = 0;
+
         #region 私有方法
-        private List<StackOutRecord> GetItems()
+        private List<StackOutSheet> GetItems()
         {
-            StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
-            con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            con.SheetTypes = new List<StackOutSheetType>();
-            con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
-            con.States = new List<SheetState>();
-            con.States.Add(SheetState.Shipped);
+            StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
+            con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.States = new List<SheetState>() { SheetState.Shipped };
+            con.SheetTypes = new List<StackOutSheetType>() { StackOutSheetType.DeliverySheet };
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
-            if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
-            if (txtProduct.Tag != null) con.ProductID = (txtProduct.Tag as Product).ID;
-            return (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
+            List<StackOutSheet> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                return (from item in items
+                        orderby item.SheetDate ascending
+                        select item).ToList();
+            }
+            return null;
         }
         #endregion
 
@@ -50,72 +60,65 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
 
         protected override List<object> GetDataSource()
         {
-            List<object> items = null;
-            List<StackOutRecord> records = GetItems();
-            if (records != null && records.Count > 0)
+            List<StackOutSheet> sheets = GetItems();
+            if (sheets != null && sheets.Count > 0)
             {
-                IEnumerable<IGrouping<string, StackOutRecord>> dtGroup = null;
-                if (rdByDay.Checked)
+                IEnumerable<IGrouping<string, StackOutSheet>> gps = null;
+                if (rdBySheet.Checked)
                 {
-                    dtGroup = records.GroupBy(item => item.LastActiveDate.ToString("yyyy-MM-dd"));
+                    gridView.Columns["colName"].HeaderText = "送货单";
+                    gps = sheets.GroupBy(item => item.ID);
                 }
-                else if (rdByMonth.Checked)
+                else if (rdByCustomer.Checked)
                 {
-                    dtGroup = records.GroupBy(item => item.LastActiveDate.ToString("yyyy-MM"));
+                    gridView.Columns["colName"].HeaderText = "客户";
+                    gps = sheets.GroupBy(item => item.CustomerID);
                 }
-                else
+                else if (rdByNone.Checked)
                 {
-                    dtGroup = records.GroupBy(item => item.LastActiveDate.ToString("yyyy"));
+                    gridView.Columns["colName"].HeaderText = string.Empty;
+                    gps = sheets.GroupBy(it => string.Empty);
                 }
-                foreach (var g in dtGroup)
-                {
-                    IEnumerable<IGrouping<string, StackOutRecord>> group = null;
-                    if (rdByProdcut.Checked)
-                    {
-                        group = g.GroupBy(item => (item.ProductID + " " + item.Product.Name));
-                    }
-                    else if (rdByCustomer.Checked)
-                    {
-                        group = g.GroupBy(item => item.CustomerID + " " + item.Customer.Name);
-                    }
-                    else if (rdBySalesPerson.Checked)
-                    {
-                        group = g.GroupBy(item => item.SalesPerson);
-                    }
-                    else if (rdByCategory.Checked)
-                    {
-                        group = g.GroupBy(item => item.Product.CategoryID + " " + item.Product.Category.Name);
-                    }
-                    foreach (var gp in group)
-                    {
-                        if (!string.IsNullOrEmpty(gp.Key))
-                        {
-                            if (items == null) items = new List<object>();
-                            GroupData gd = new GroupData() { Key = g.Key, Group = gp };
-                            items.Add(gd);
-                        }
-                    }
-                }
+                return (from it in gps select (object)it).ToList();
             }
-            return items;
+            return null;
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            if (rdByCustomer.Checked) _AllCustomers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
+            Amount = 0;
+            产品成本 = 0;
+            国税计提 = 0;
+            毛利 = 0;
+            base.ShowItemsOnGrid(items);
+            lbl销售金额.Text = string.Format("销售金额：{0:C2}", Amount);
+            lbl产品成本.Text = string.Format("产品成本：{0:C2}", 产品成本);
+            lbl国税计提.Text = string.Format("国税计提：{0:C2}", 国税计提);
+            if (产品成本 > 0) lbl毛利.Text = string.Format("毛    利：{0:C2}", 毛利);
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            GroupData gd = item as GroupData;
-            IGrouping<string, StackOutRecord> gp = gd.Group;
-            row.Cells["colDeliveryDate"].Value = gd.Key;
-            row.Cells["colName"].Value = gp.Key;
-            decimal count = gp.Sum(it => it.Count).Trim();
-            row.Cells["colCount"].Value = count;
+            IGrouping<string, StackOutSheet> gp = item as IGrouping<string, StackOutSheet>;
+            CompanyInfo c = null;
+            if (rdByCustomer.Checked) c = _AllCustomers.SingleOrDefault(it => it.ID == gp.Key);
+            row.Cells["colName"].Value = c != null ? c.Name : gp.Key;
+            row.Cells["colWeight"].Value = gp.Sum(it => it.TotalWeight);
             decimal d1 = gp.Sum(it => it.Amount).Trim();
             row.Cells["colAmount"].Value = d1;
-            decimal d2 = gp.Sum(it => it.Product.Cost * it.Count).Trim();
+            Amount += d1;
+            decimal d2 = gp.Sum(it => it.Costs.HasValue ? it.Costs.Value : 0).Trim();
             row.Cells["colCost"].Value = d2;
+            产品成本 += d2;
+            decimal d3 = gp.Sum(it => it.WithTax ? it.Amount * UserSettings.Current.国税系数 : 0);
+            row.Cells["col国税计提"].Value = d3;
+            国税计提 += d3;
             if (d2 > 0)
             {
-                row.Cells["colProfit"].Value = (d1 - d2).Trim();
-                row.Cells["colProfitRate"].Value = ((d1 - d2) / d2).ToString("P3");
+                row.Cells["colProfit"].Value = (d1 - d2 - d3).Trim();
+                row.Cells["colProfitRate"].Value = ((d1 - d2 - d3) / d2).ToString("P3");
+                毛利 += (d1 - d2 - d3);
             }
             else
             {
@@ -143,48 +146,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             txtCustomer.Text = string.Empty;
             txtCustomer.Tag = null;
         }
-
-        private void lnkProduct_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmProductMaster frm = new FrmProductMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Product p = frm.SelectedItem as Product;
-                txtProduct.Text = p != null ? p.Name : string.Empty;
-                txtProduct.Tag = p;
-            }
-        }
-
-        private void txtProduct_DoubleClick(object sender, EventArgs e)
-        {
-            txtProduct.Text = string.Empty;
-            txtProduct.Tag = null;
-        }
-
-        private void lnkProductCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmProductCategoryMaster frm = new FrmProductCategoryMaster();
-            frm.ForSelect = true;
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                ProductCategory pc = frm.SelectedItem as ProductCategory;
-                txtProductCategory.Text = pc != null ? pc.Name : string.Empty;
-                txtProductCategory.Tag = pc;
-            }
-        }
-
-        private void txtProductCategory_DoubleClick(object sender, EventArgs e)
-        {
-            txtProductCategory.Text = string.Empty;
-            txtProductCategory.Tag = null;
-        }
         #endregion
-
-        private class GroupData
-        {
-            public string Key { get; set; }
-            public IGrouping<string, StackOutRecord> Group { get; set; }
-        }
     }
 }

@@ -169,7 +169,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 出货统计报表
         /// </summary>
-        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "出货统计报表")]
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "出货利润统计报表")]
         DeliveryStatistics,
         /// <summary>
         /// 入库记录报表

@@ -229,8 +229,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             if (Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.查看成本))
             {
-                if (sheet.Costs > 0) row.Cells["colCosts"].Value = sheet.Costs;
-                if (sheet.结算成本.HasValue) row.Cells["col结算成本"].Value = sheet.结算成本;
+                row.Cells["colCosts"].Value = sheet.Costs.Value;
+                if (sheet.WithTax) row.Cells["col国税计提"].Value = sheet.Amount * UserSettings.Current.国税系数;
+                row.Cells["col毛利"].Value = sheet.Profit;
             }
             if (!_Sheets.Exists(it => it.ID == sheet.ID)) _Sheets.Add(sheet);
             ShowRowColor(row);
