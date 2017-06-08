@@ -183,6 +183,20 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             }
         }
 
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+            if (pi.SourceID == null && pi.SourceRoll == null)
+            {
+                FrmSteelRollSliceStackIn frm = new FrmSteelRollSliceStackIn();
+                frm.SteelRollSlice = pi;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
+                ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], pi);
+            }
+        }
+
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
@@ -200,7 +214,5 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             }
         }
         #endregion
-
-       
     }
 }

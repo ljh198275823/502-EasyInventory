@@ -163,16 +163,12 @@ namespace LJH.Inventory.BusinessModel
             decimal ret = 0;
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems == null) return 0;
-            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
-            if (ci != null) ret += OriginalWeight.Value * ci.Price;
-            else
-            {
-                ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-                if (ci != null) ret += OriginalWeight.Value * ci.Price;
-            }
+            if (UnitWeight == null) return 0;
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+            if (ci != null) ret += UnitWeight.Value * Count * ci.Price;
             foreach (var fc in _CostItems)
             {
-                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay) ret += OriginalWeight.Value * fc.Price;
+                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay) ret += UnitWeight.Value * Count * fc.Price;
             }
             return ret;
         }
@@ -182,13 +178,9 @@ namespace LJH.Inventory.BusinessModel
             decimal ret = 0;
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems == null) return 0;
-            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
-            if (ci != null) ret += OriginalWeight.Value * ci.Price;
-            else
-            {
-                ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-                if (ci != null) ret += OriginalWeight.Value * ci.Price;
-            }
+            if (UnitWeight == null) return 0;
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+            if (ci != null && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;
             return ret;
         }
 
@@ -209,7 +201,7 @@ namespace LJH.Inventory.BusinessModel
             {
                 if (withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price;  //含税进，含税出
                 else if (withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 + txtRate); //含税出，不含税进
-                else if (!withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price / (1 + txtRate); //不含税出，含税进
+                else if (!withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 - txtRate); //不含税出，含税进
                 else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price; //不含税出，不含税进
             }
             else
@@ -219,7 +211,7 @@ namespace LJH.Inventory.BusinessModel
                 {
                     if (withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price;
                     else if (withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 + txtRate);
-                    else if (!withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price / (1 + txtRate);
+                    else if (!withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 - txtRate);
                     else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price;
                 }
             }
@@ -227,9 +219,9 @@ namespace LJH.Inventory.BusinessModel
             {
                 if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
                 {
-                    if (withTax && fc.WithTax) ret += UnitWeight.Value * Count * fc.Price;
+                    if (withTax && fc.WithTax) ret += UnitWeight.Value * fc.Price;
                     else if (withTax && !fc.WithTax) ret += UnitWeight.Value * fc.Price * (1 + txtRate);
-                    else if (!withTax && fc.WithTax) ret += UnitWeight.Value * fc.Price / (1 + txtRate);
+                    else if (!withTax && fc.WithTax) ret += UnitWeight.Value * fc.Price * (1 - txtRate);
                     else if (!withTax && !fc.WithTax) ret += UnitWeight.Value * fc.Price;
                 }
             }

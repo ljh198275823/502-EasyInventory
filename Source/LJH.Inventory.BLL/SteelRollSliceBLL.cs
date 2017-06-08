@@ -101,6 +101,27 @@ namespace LJH.Inventory.BLL
                 ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(tax, original, unitWork);
             }
         }
+
+        private bool DelTax(ProductInventoryItem sheet)
+        {
+            bool allSuccess = true;
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = sheet.ID.ToString();
+            con.ReceivableTypes = new List<CustomerReceivableType>();
+            con.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
+            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count > 0)
+            {
+                var bll = new CustomerReceivableBLL(RepoUri);
+                foreach (var item in items)
+                {
+                    var t = bll.Delete(item);
+                    allSuccess = t.Result == ResultCode.Successful;
+                    if (!allSuccess) break;
+                }
+            }
+            return allSuccess;
+        }
         #endregion
 
         #region 公共方法
@@ -151,6 +172,32 @@ namespace LJH.Inventory.BLL
                         AddReceivables(info, new DateTime(info.AddDate.Year, info.AddDate.Month, info.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
                         if (info.CalTax() > 0) AddTax(info, new DateTime(info.AddDate.Year, info.AddDate.Month, info.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
                     }
+                }
+                return unitWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
+        }
+
+        public CommandResult Update(ProductInventoryItem sr)
+        {
+            try
+            {
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                var o = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sr.ID).QueryObject;
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o, unitWork);
+                if (!string.IsNullOrEmpty(sr.Supplier))
+                {
+                    DateTime dt = DateTime.Now;
+                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
+                    if (s != null)
+                    {
+                        AddReceivables(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (sr.CalTax() > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                    }
+                    if (o.CalTax() > 0 && sr.CalTax() == 0 && !DelTax(sr)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
                 }
                 return unitWork.Commit();
             }
@@ -254,6 +301,56 @@ namespace LJH.Inventory.BLL
                 info.Weight = clone.Weight;
             }
             return ret;
+        }
+
+        public CommandResult ChangeCost(ProductInventoryItem sr, List<CostItem> costs, string opt, string logID)
+        {
+            try
+            {
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                var clone = sr.Clone();
+                string memo = string.Empty;
+                foreach (var ci in costs)
+                {
+                    var oci = sr.GetCost(ci.Name);
+                    memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
+                    clone.SetCost(ci);
+                }
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
+                AddOperationLog(sr.ID.ToString(), sr.DocumentType, "修改单价", unitWork, DateTime.Now, opt, logID, memo);
+                if (!string.IsNullOrEmpty(sr.Supplier))
+                {
+                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
+                    if (s != null)
+                    {
+                        var dt = DateTime.Now;
+                        AddReceivables(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (clone.CalTax() > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (sr.CalTax() > 0 && clone.CalTax() == 0 && !DelTax(clone)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
+                    }
+                }
+                return unitWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
+        }
+
+        private void AddOperationLog(string id, string docType, string operation, IUnitWork unitWork, DateTime dt, string opt, string logID = null, string memo = null)
+        {
+            DocumentOperation doc = new DocumentOperation()
+            {
+                ID = Guid.NewGuid(),
+                DocumentID = id,
+                DocumentType = docType,
+                OperatDate = dt,
+                Operation = operation,
+                Operator = opt,
+                LogID = logID,
+                Memo = memo
+            };
+            ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(RepoUri).Insert(doc, unitWork);
         }
         #endregion
     }

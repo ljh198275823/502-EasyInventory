@@ -566,7 +566,8 @@ namespace LJH.Inventory.BLL
                     {
                         var dt = DateTime.Now;
                         AddReceivables(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (sr.CalTax() > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (clone.CalTax() > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (sr.CalTax() > 0 && clone.CalTax() == 0 && !DelTax(clone)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
                     }
                 }
                 return unitWork.Commit();

@@ -133,6 +133,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (rd开吨.Checked && txtWeight.DecimalValue <= 0)
             {
                 MessageBox.Show("没有设置重量");
+                return false;
             }
             if (txtWeight.DecimalValue > 0 && !rd总重.Checked && !rd单件重.Checked)
             {
@@ -248,7 +249,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtMaterial.Text = item.Material;
             txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
-            btnOk.Enabled = !IsForView;
+            if (!IsForView)
+            {
+                btnOk.Enabled = item.Count == item.OriginalCount; //出过货或拆过包不能修改
+            }
+            else
+            {
+                btnOk.Enabled = false;
+            }
         }
         #endregion
 
@@ -335,8 +343,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("创建产品信息失败");
                 return;
             }
-            ProductInventoryItem item = new ProductInventoryItem();
-            item.ID = Guid.NewGuid();
+
+            ProductInventoryItem item = SteelRollSlice;
+            if (item == null)
+            {
+                item = new ProductInventoryItem();
+                item.ID = Guid.NewGuid();
+            }
             item.Product = p;
             item.ProductID = p.ID;
             item.Model = p.Model;
@@ -368,7 +381,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Carplate = txtCarPlate.Text;
             item.Memo = txtMemo.Text;
             item.Operator = Operator.Current.Name;
-            var ret = new SteelRollSliceBLL(AppSettings.Current.ConnStr).Add(item);
+            CommandResult ret = null;
+            if (SteelRollSlice == null) ret = new SteelRollSliceBLL(AppSettings.Current.ConnStr).Add(item);
+            else ret = new SteelRollSliceBLL(AppSettings.Current.ConnStr).Update(item);
             if (ret.Result == ResultCode.Successful)
             {
                 this.DialogResult = DialogResult.OK;

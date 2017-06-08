@@ -51,6 +51,7 @@
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnLast3Month = new System.Windows.Forms.Button();
+            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -67,7 +68,6 @@
             this.CategoryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddSheet = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -171,22 +171,22 @@
             // lblTotalAmount
             // 
             this.lblTotalAmount.AutoSize = true;
-            this.lblTotalAmount.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalAmount.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTotalAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalAmount.Location = new System.Drawing.Point(934, 13);
+            this.lblTotalAmount.Location = new System.Drawing.Point(934, 23);
             this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(29, 29);
+            this.lblTotalAmount.Size = new System.Drawing.Size(17, 16);
             this.lblTotalAmount.TabIndex = 139;
             this.lblTotalAmount.Text = "0";
             // 
             // lblTotalWeight
             // 
             this.lblTotalWeight.AutoSize = true;
-            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalWeight.Location = new System.Drawing.Point(934, 48);
+            this.lblTotalWeight.Location = new System.Drawing.Point(934, 54);
             this.lblTotalWeight.Name = "lblTotalWeight";
-            this.lblTotalWeight.Size = new System.Drawing.Size(29, 29);
+            this.lblTotalWeight.Size = new System.Drawing.Size(17, 16);
             this.lblTotalWeight.TabIndex = 138;
             this.lblTotalWeight.Text = "0";
             // 
@@ -217,6 +217,18 @@
             this.btnLast3Month.Text = "最近三个月";
             this.btnLast3Month.UseVisualStyleBackColor = true;
             this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
+            // 
+            // ucDateTimeInterval1
+            // 
+            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(405, 7);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = true;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(223, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.TabIndex = 134;
+            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
             // 
             // chkSheetDate
             // 
@@ -417,18 +429,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1244, 396);
             this.dataGridView1.TabIndex = 116;
-            // 
-            // ucDateTimeInterval1
-            // 
-            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.Location = new System.Drawing.Point(405, 7);
-            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
-            this.ucDateTimeInterval1.ShowTime = true;
-            this.ucDateTimeInterval1.Size = new System.Drawing.Size(223, 74);
-            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.TabIndex = 134;
-            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
             // 
             // colSheetDate
             // 
