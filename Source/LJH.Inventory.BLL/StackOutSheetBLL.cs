@@ -341,7 +341,7 @@ namespace LJH.Inventory.BLL
                 if (condition is SheetSearchCondition)
                 {
                     var con = condition as SheetSearchCondition;
-                    if (con.SheetDate != null) pcon.AddDateRange = new DateTimeRange(con.SheetDate.Begin, con.SheetDate.End);
+                    if (con.SheetDate != null) pcon.AddDateRange = new DateTimeRange(con.SheetDate.Begin, DateTime.MaxValue);
                 }
                 pcon.States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping, ProductInventoryState.Shipped };
                 var pis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
@@ -378,19 +378,6 @@ namespace LJH.Inventory.BLL
         public QueryResultList<StackOutRecord> GetDeliveryRecords(SearchCondition con)
         {
             var ret = ProviderFactory.Create<IProvider<StackOutRecord, Guid>>(RepoUri).GetItems(con);
-            if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
-            {
-                List<ProductInventoryItem> pis = new ProductInventoryItemBLL(RepoUri).GetItems(null).QueryObjects;
-                foreach (var item in ret.QueryObjects)
-                {
-                    var pi = pis.FirstOrDefault(it => it.DeliveryItem == item.ID);
-                    if (pi != null && pi.SourceRoll.HasValue)
-                    {
-                        pi = pis.SingleOrDefault(it => it.ID == pi.SourceRoll.Value);
-                        if (pi != null) item.SourceRollWeight = pi.OriginalWeight;
-                    }
-                }
-            }
             return ret;
         }
 

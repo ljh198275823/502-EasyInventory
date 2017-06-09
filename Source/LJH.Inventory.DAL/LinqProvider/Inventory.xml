@@ -170,7 +170,7 @@
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
-  <Table Name="View_StackOutRecord" Member="LJH.Inventory.BusinessModel.StackOutRecord">
+  <Table Name="View_StackOutRecord20170609" Member="LJH.Inventory.BusinessModel.StackOutRecord">
     <Type Name="LJH.Inventory.BusinessModel.StackOutRecord">
       <Column Name="ID" Member="ID"   DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
       <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
@@ -189,6 +189,7 @@
       <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="OrderItem" Member="OrderItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)"  UpdateCheck="Never"/>
+      <Column Name="SourceRollWeight" Member="SourceRollWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Sheet_Customer" Member="Customer"  ThisKey="CustomerID" OtherKey="ID" IsForeignKey="false" />
       <Association Name="FK_Sheet_WareHouse" Member="WareHouse"  ThisKey="WareHouseID" OtherKey="ID" IsForeignKey="false" />

@@ -121,6 +121,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject; //获取出货项对应的库存项，即是从哪个库存项出货的
+                row.Cells["colModel"].Value = pi.Manufacture;
                 row.Cells["colWeight"].Value = pi != null ? (pi.RealThick.HasValue ? (decimal?)pi.RealThick : (decimal?)pi.OriginalThick) : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;

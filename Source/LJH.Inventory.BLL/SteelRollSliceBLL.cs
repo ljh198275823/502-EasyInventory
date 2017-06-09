@@ -9,120 +9,16 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class SteelRollSliceBLL
+    public class SteelRollSliceBLL:ProductInventoryItemBLL 
     {
         #region 构造函数
         public SteelRollSliceBLL(string repoUri)
+            : base(repoUri)
         {
-            RepoUri = repoUri;
         }
         #endregion
 
-        private string RepoUri = null;
         private const string MODEL = "原材料";
-
-        #region 私有方法
-        private void AddReceivables(ProductInventoryItem sheet, DateTime dt, IUnitWork unitWork)
-        {
-            CustomerReceivable cr = null;
-            CustomerReceivable original = null;
-            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-            con.SheetID = sheet.ID.ToString();
-            con.ReceivableTypes = new List<CustomerReceivableType>();
-            con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
-            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            if (items != null && items.Count >= 1) original = items[0];
-
-            if (original == null)
-            {
-                cr = new CustomerReceivable();
-                cr.ID = Guid.NewGuid();
-                cr.CreateDate = dt;
-                cr.ClassID = CustomerReceivableType.SupplierReceivable;
-                cr.SheetID = sheet.ID.ToString();
-            }
-            else
-            {
-                cr = original.Clone();
-            }
-            cr.CustomerID = sheet.Supplier;
-            cr.OrderID = sheet.PurchaseID;
-            cr.SetProperty("规格", sheet.Product.Specification);
-            decimal amount = sheet.CalReceivable();
-            if (original != null && original.Haspaid > amount) throw new Exception("原材料应收已核销的金额超过当前总价，请先取消部分核销金额再保存");
-            cr.Amount = amount;
-            if (original == null)
-            {
-                if (cr.Amount > 0) ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
-            }
-            else
-            {
-                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(cr, original, unitWork);
-            }
-        }
-
-        private void AddTax(ProductInventoryItem sheet, DateTime dt, IUnitWork unitWork)
-        {
-            CustomerReceivable tax = null;
-            CustomerReceivable original = null;
-            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-            con.SheetID = sheet.ID.ToString();
-            con.ReceivableTypes = new List<CustomerReceivableType>();
-            con.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
-            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            if (items != null && items.Count >= 1) original = items[0];
-
-            if (original == null)
-            {
-                tax = new CustomerReceivable()
-                {
-                    ID = Guid.NewGuid(),
-                    CreateDate = dt,
-                    ClassID = CustomerReceivableType.SupplierTax,
-                    SheetID = sheet.ID.ToString(),
-                };
-            }
-            else
-            {
-                tax = original.Clone();
-            }
-            tax.CustomerID = sheet.Supplier;
-            tax.OrderID = sheet.PurchaseID;
-            tax.SetProperty("规格", sheet.Product.Specification);
-            decimal amount = sheet.CalTax();
-            if (original != null && original.Haspaid > amount) throw new Exception("原材料应开发票已核销的金额超过当前总价，请先取消部分核销发票再保存");
-            tax.Amount = amount;
-            if (original == null)
-            {
-                if (amount > 0) ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(tax, unitWork);
-            }
-            else
-            {
-                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(tax, original, unitWork);
-            }
-        }
-
-        private bool DelTax(ProductInventoryItem sheet)
-        {
-            bool allSuccess = true;
-            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-            con.SheetID = sheet.ID.ToString();
-            con.ReceivableTypes = new List<CustomerReceivableType>();
-            con.ReceivableTypes.Add(CustomerReceivableType.SupplierTax);
-            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            if (items != null && items.Count > 0)
-            {
-                var bll = new CustomerReceivableBLL(RepoUri);
-                foreach (var item in items)
-                {
-                    var t = bll.Delete(item);
-                    allSuccess = t.Result == ResultCode.Successful;
-                    if (!allSuccess) break;
-                }
-            }
-            return allSuccess;
-        }
-        #endregion
 
         #region 公共方法
         public QueryResultList<SteelRollSlice> GetSteelRollSlices(SearchCondition con)
@@ -149,7 +45,7 @@ namespace LJH.Inventory.BLL
             return new QueryResultList<SteelRollSlice>(ret.Result, ret.Message, items);
         }
 
-        public QueryResultList<ProductInventoryItem> GetItems(SearchCondition con)
+        public override  QueryResultList<ProductInventoryItem> GetItems(SearchCondition con)
         {
             if (con == null) con = new ProductInventoryItemSearchCondition();
             if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).ExcludeModel = MODEL;  //排除原材料库存项
@@ -157,55 +53,6 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult Add(ProductInventoryItem info)
-        {
-            try
-            {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(info, unitWork);
-                if (!string.IsNullOrEmpty(info.Supplier))
-                {
-                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(info.Supplier).QueryObject;
-                    if (s != null)
-                    {
-                        DateTime dt = DateTime.Now;
-                        AddReceivables(info, new DateTime(info.AddDate.Year, info.AddDate.Month, info.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (info.CalTax() > 0) AddTax(info, new DateTime(info.AddDate.Year, info.AddDate.Month, info.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                    }
-                }
-                return unitWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                return new CommandResult(ResultCode.Fail, ex.Message);
-            }
-        }
-
-        public CommandResult Update(ProductInventoryItem sr)
-        {
-            try
-            {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-                var o = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sr.ID).QueryObject;
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o, unitWork);
-                if (!string.IsNullOrEmpty(sr.Supplier))
-                {
-                    DateTime dt = DateTime.Now;
-                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
-                    if (s != null)
-                    {
-                        AddReceivables(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (sr.CalTax() > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                    }
-                    if (o.CalTax() > 0 && sr.CalTax() == 0 && !DelTax(sr)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
-                }
-                return unitWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                return new CommandResult(ResultCode.Fail, ex.Message);
-            }
-        }
         /// <summary>
         /// 盘点
         /// </summary>
@@ -301,56 +148,6 @@ namespace LJH.Inventory.BLL
                 info.Weight = clone.Weight;
             }
             return ret;
-        }
-
-        public CommandResult ChangeCost(ProductInventoryItem sr, List<CostItem> costs, string opt, string logID)
-        {
-            try
-            {
-                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-                var clone = sr.Clone();
-                string memo = string.Empty;
-                foreach (var ci in costs)
-                {
-                    var oci = sr.GetCost(ci.Name);
-                    memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
-                    clone.SetCost(ci);
-                }
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
-                AddOperationLog(sr.ID.ToString(), sr.DocumentType, "修改单价", unitWork, DateTime.Now, opt, logID, memo);
-                if (!string.IsNullOrEmpty(sr.Supplier))
-                {
-                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
-                    if (s != null)
-                    {
-                        var dt = DateTime.Now;
-                        AddReceivables(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (clone.CalTax() > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (sr.CalTax() > 0 && clone.CalTax() == 0 && !DelTax(clone)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
-                    }
-                }
-                return unitWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                return new CommandResult(ResultCode.Fail, ex.Message);
-            }
-        }
-
-        private void AddOperationLog(string id, string docType, string operation, IUnitWork unitWork, DateTime dt, string opt, string logID = null, string memo = null)
-        {
-            DocumentOperation doc = new DocumentOperation()
-            {
-                ID = Guid.NewGuid(),
-                DocumentID = id,
-                DocumentType = docType,
-                OperatDate = dt,
-                Operation = operation,
-                Operator = opt,
-                LogID = logID,
-                Memo = memo
-            };
-            ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(RepoUri).Insert(doc, unitWork);
         }
         #endregion
     }

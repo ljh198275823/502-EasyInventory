@@ -263,7 +263,14 @@ end
 go
 
 
-ALTER VIEW [dbo].[View_StackOutRecord] AS
- SELECT     a.ID, b.LastActiveDate, a.SheetNo, b.CustomerID, b.WareHouseID, a.ProductID, a.Unit, a.Price, a.Count, a.Length, a.TotalWeight as Weight, b.State, b.SalesPerson, b.WithTax, a.OrderID, a.OrderItem, a.Memo, b.ClassID
- FROM         dbo.StackOutItem AS a INNER JOIN  dbo.StackOutSheet AS b ON a.SheetNo = b.ID
-go
+IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[View_StackOutRecord20170609]'))
+EXEC dbo.sp_executesql @statement = N'
+ 
+ CREATE VIEW [dbo].[View_StackOutRecord20170609] AS
+  SELECT     a.ID, b.LastActiveDate, a.SheetNo, b.CustomerID, b.WareHouseID, a.ProductID, a.Unit, a.Price, a.Count, a.Length, a.TotalWeight AS Weight, b.State, b.SalesPerson, b.WithTax, a.OrderID, 
+                      a.OrderItem, a.Memo, b.ClassID,f.originalWeight as SourceRollWeight 
+   FROM         dbo.StackOutItem AS a INNER JOIN
+                      dbo.StackOutSheet AS b ON a.SheetNo = b.ID
+             left join (SELECT a.id, case a.model when ''Ô­²ÄÁÏ'' then a.OriginalWeight else b.originalWeight end as originalWeight  from ProductInventoryItem a left join ProductInventoryItem b on a.SourceRoll =b.ID ) as f on a.InventoryItem =f.ID 
+ '
+GO

@@ -26,12 +26,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
 
         List<ProductInventoryItem> srs = null;
         List<WareHouse> _AllWarehouse = null;
+        private List<CompanyInfo> _AllSuppliers = null;
 
         #region 重写基类方法
         protected override List<object> GetDataSource()
         {
             _AllWarehouse = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-
+            _AllSuppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
             List<ProductInventoryItem> records = null;
             if (SearchCondition == null)
             {
@@ -63,40 +64,58 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Inventory);
             折包ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
             更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
+            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置结算单价);
+            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.查看成本);
+            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.查看成本);
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
-            ProductInventoryItem c = item as ProductInventoryItem;
-            row.Tag = c;
-            Product p = c.Product;
+            ProductInventoryItem sr = item as ProductInventoryItem;
+            row.Tag = sr;
+            Product p = sr.Product;
             row.Cells["colCategory"].Value = p != null ? p.Category.Name : string.Empty;
             if (_AllWarehouse != null)
             {
-                var ws = _AllWarehouse.SingleOrDefault(it => it.ID == c.WareHouseID);
+                var ws = _AllWarehouse.SingleOrDefault(it => it.ID == sr.WareHouseID);
                 row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
             }
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
-            row.Cells["colWeight"].Value = c.Product.Weight;
-            row.Cells["colLength"].Value = c.Product.Length;
-            row.Cells["colOriginalThick"].Value = c.OriginalThick;
-            row.Cells["colRealThick"].Value = c.RealThick;
-            row.Cells["colInventoryDate"].Value = c.AddDate.ToString("yyyy-MM-dd");
-            row.Cells["colCount"].Value = c.Count;
-            row.Cells["colDeliverySheet"].Value = c.DeliverySheet;
-            row.Cells["colCustomer"].Value = c.Customer;
-            row.Cells["colSourceRoll"].Value = c.SourceRoll.HasValue ? "查看来源卷" : null;
+            row.Cells["colWeight"].Value = sr.Product.Weight;
+            row.Cells["colLength"].Value = sr.Product.Length;
+            row.Cells["colOriginalThick"].Value = sr.OriginalThick;
+            row.Cells["colRealThick"].Value = sr.RealThick;
+            row.Cells["colInventoryDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
+            row.Cells["colCount"].Value = sr.Count;
+            row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
+            row.Cells["colCustomer"].Value = sr.Customer;
+            if (_AllSuppliers != null)
+            {
+                var s = _AllSuppliers.SingleOrDefault(it => it.ID == sr.Supplier);
+                row.Cells["colSupplier"].Value = s != null ? s.Name : null;
+            }
+            row.Cells["colManufacture"].Value = sr.Manufacture;
+            row.Cells["colSourceRoll"].Value = sr.SourceRoll.HasValue ? "查看来源卷" : null;
             if (srs != null)
             {
-                var source = srs.SingleOrDefault(it => it.ID == c.SourceRoll);
+                var source = srs.SingleOrDefault(it => it.ID == sr.SourceRoll);
                 row.Cells["colSourceRollWeight"].Value = source != null ? source.OriginalWeight : null;
             }
             if (Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.ShowPrice))
             {
-                if (c.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = c.CalUnitCost(true, UserSettings.Current.税点系数);
-                if (c.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = c.CalUnitCost(false, UserSettings.Current.税点系数);
+                CostItem ci = sr.GetCost(CostItem.入库单价);
+                if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
+                if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
+                ci = sr.GetCost(CostItem.结算单价);
+                if (ci != null) row.Cells["col结算单价"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.运费);
+                if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.其它费用);
+                if (ci != null) row.Cells["colOtherCost"].Value = ci.Price;
+                if (sr.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = sr.CalUnitCost(true, UserSettings.Current.税点系数);
+                if (sr.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = sr.CalUnitCost(false, UserSettings.Current.税点系数);
             }
-            row.Cells["colMemo"].Value = c.Memo;
+            row.Cells["colMemo"].Value = sr.Memo;
         }
         #endregion
 
@@ -213,6 +232,72 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 }
             }
         }
+
+        private void mnu_设置结算单价_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0) return;
+            Frm设置结算单价 frm = new Frm设置结算单价();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    var pi = row.Tag as ProductInventoryItem;
+                    if (pi.SourceID == null && pi.SourceRoll == null) //只有新建入库的才能改单价，
+                    {
+                        var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置结算单价(pi, frm.结算单价, Operator.Current.Name, Operator.Current.ID);
+                        if (ret.Result == ResultCode.Successful)
+                        {
+                            ShowItemInGridViewRow(row, pi);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ret.Message);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void mnu_修改入库单价_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0) return;
+            FrmChangeCosts frm = new FrmChangeCosts();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var costs = frm.Costs;
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    var pi = row.Tag as ProductInventoryItem;
+                    if (pi.SourceID == null && pi.SourceRoll == null) //只有新建入库的才能改单价，
+                    {
+                        var ret = new SteelRollBLL(AppSettings.Current.ConnStr).ChangeCost(pi, costs, Operator.Current.Name, Operator.Current.ID);
+                        if (ret.Result == ResultCode.Successful)
+                        {
+                            ShowItemInGridViewRow(row, pi);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ret.Message);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void 查看价格改动记录ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                DocumentSearchCondition con = new DocumentSearchCondition() { DocumentID = sr.ID.ToString() };
+                Frm修改记录日志明细 frm = new Frm修改记录日志明细();
+                frm.SearchCondition = con;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
+            }
+        }
         #endregion
+
+        
     }
 }
