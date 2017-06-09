@@ -174,7 +174,8 @@
     <Type Name="LJH.Inventory.BusinessModel.StackOutRecord">
       <Column Name="ID" Member="ID"   DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true"/>
       <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="AddDate" Member="AddDate"  DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="SheetDate" Member="SheetDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="SheetNo" Member="SheetNo" DbType="nvarchar(50) NOT NULL"  UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) NOT NULL"  UpdateCheck="Never"/>
       <Column Name="WareHouseID" Member="WareHouseID" DbType="nvarchar(50) NOT NULL"  UpdateCheck="Never"/>

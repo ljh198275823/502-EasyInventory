@@ -201,7 +201,16 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "供应商往来报表")]
         供应商往来报表,
-
+        /// <summary>
+        /// 原材料盘点报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "原材料盘点报表")]
+        原材料盘点报表,
+        /// <summary>
+        /// 小件盘点报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "小件盘点报表")]
+        小件盘点报表,
         #endregion
     }
 }

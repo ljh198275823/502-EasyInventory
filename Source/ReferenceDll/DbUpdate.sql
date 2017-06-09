@@ -267,7 +267,7 @@ IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[View
 EXEC dbo.sp_executesql @statement = N'
  
  CREATE VIEW [dbo].[View_StackOutRecord20170609] AS
-  SELECT     a.ID, b.LastActiveDate, a.SheetNo, b.CustomerID, b.WareHouseID, a.ProductID, a.Unit, a.Price, a.Count, a.Length, a.TotalWeight AS Weight, b.State, b.SalesPerson, b.WithTax, a.OrderID, 
+  SELECT     a.ID, b.SheetDate, a.SheetNo, b.CustomerID, b.WareHouseID, a.ProductID, a.Unit, a.Price, a.Count, a.Length, a.TotalWeight AS Weight, b.State, b.SalesPerson, b.WithTax, a.OrderID, 
                       a.OrderItem, a.Memo, b.ClassID,f.originalWeight as SourceRollWeight 
    FROM         dbo.StackOutItem AS a INNER JOIN
                       dbo.StackOutSheet AS b ON a.SheetNo = b.ID

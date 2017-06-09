@@ -29,6 +29,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Tag = cp;
             row.Cells["colSheetDate"].Value = cp.Name;
             row.Cells["colSheetID"].Value = string.IsNullOrEmpty(cp.规格) ? cp.单据编号 : cp.规格;
+            row.Cells["col重量"].Value = cp.重量;
+            row.Cells["col吨价"].Value = !string.IsNullOrEmpty(cp.吨价) ? (decimal?)(decimal.Parse(cp.吨价)) : null;
             if (cp.出货 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col出货"].Value = cp.出货;
             if (cp.收入 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col收入"].Value = cp.收入;
             _balance += cp.出货 - cp.收入;
@@ -67,7 +69,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             //ret.Add(first);
             ret.AddRange(from it in rs
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
-                         select new 供应商往来项() { Name = it.CreateDate.ToString("yyyy-MM-dd"), CreateDate = it.CreateDate, 单据编号 = it.SheetID, 规格 = it.GetProperty("规格"), 出货 = it.Amount, Memo = it.Memo });
+                         select new 供应商往来项() { Name = it.CreateDate.ToString("yyyy-MM-dd"), CreateDate = it.CreateDate, 单据编号 = it.SheetID, 规格 = it.GetProperty("规格"), 重量 =it.GetProperty ("重量"),吨价 =it.GetProperty ("入库单价"), 出货 = it.Amount, Memo = it.Memo });
 
             ret.AddRange(from it in ps
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
@@ -183,6 +185,10 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         public string 单据编号 { get; set; }
 
         public string 规格 { get; set; }
+
+        public string 重量 { get; set; }
+
+        public string 吨价 { get; set; }
 
         public decimal 出货 { get; set; }
 

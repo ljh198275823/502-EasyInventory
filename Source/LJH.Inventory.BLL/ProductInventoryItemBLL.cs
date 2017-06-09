@@ -45,6 +45,8 @@ namespace LJH.Inventory.BLL
             cr.CustomerID = sheet.Supplier;
             cr.OrderID = sheet.PurchaseID;
             cr.SetProperty("规格", sheet.Product.Specification);
+            cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
+            cr.SetProperty("入库单价", sheet.GetCost(CostItem.入库单价) != null ? sheet.GetCost(CostItem.入库单价).Price.ToString("F2") : null);
             decimal amount = sheet.CalReceivable();
             if (original != null && original.Haspaid > amount) throw new Exception("原材料应收已核销的金额超过当前总价，请先取消部分核销金额再保存");
             cr.Amount = amount;
@@ -86,6 +88,8 @@ namespace LJH.Inventory.BLL
             tax.CustomerID = sheet.Supplier;
             tax.OrderID = sheet.PurchaseID;
             tax.SetProperty("规格", sheet.Product.Specification);
+            tax.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
+            tax.SetProperty("入库单价", sheet.GetCost(CostItem.入库单价) != null ? sheet.GetCost(CostItem.入库单价).Price.ToString("F2") : null);
             decimal amount = sheet.CalTax();
             if (original != null && original.Haspaid > amount) throw new Exception("原材料应开发票已核销的金额超过当前总价，请先取消部分核销发票再保存");
             tax.Amount = amount;

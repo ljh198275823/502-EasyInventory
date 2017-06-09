@@ -24,9 +24,13 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public StackOutSheetType ClassID { get; set; }
         /// <summary>
-        /// 获取或设置上次活动时间
+        /// 获取或设置添加时间
         /// </summary>
-        public DateTime LastActiveDate { get; set; }
+        public DateTime? AddDate { get; set; }
+        /// <summary>
+        /// 获取或设置单据时间
+        /// </summary>
+        public DateTime SheetDate { get; set; }
         /// <summary>
         /// 获取或设置销售单号
         /// </summary>

@@ -28,7 +28,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             StackOutRecord sor = item as StackOutRecord;
-            row.Cells["colDeliveryDate"].Value = sor.LastActiveDate.ToString("yyyy-MM-dd");
+            row.Cells["colDeliveryDate"].Value = sor.SheetDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = sor.SheetNo;
             row.Cells["colCustomerName"].Value = sor.Customer.Name;
             row.Cells["colOrderID"].Value = sor.OrderID;
@@ -47,7 +47,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         protected override List<object> GetDataSource()
         {
             StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
-            con.LastActiveDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
+            con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.States = new List<SheetState>();
             con.States.Add(SheetState.Shipped);
             con.SheetTypes = new List<StackOutSheetType>();
@@ -66,7 +66,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
                 decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
                 return (from item in items
-                        orderby item.LastActiveDate ascending, item.ProductID ascending
+                        orderby item.SheetDate ascending, item.ProductID ascending
                         where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Specification) == width) &&
                               (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Specification) == thick)
                         select (object)item).ToList();
