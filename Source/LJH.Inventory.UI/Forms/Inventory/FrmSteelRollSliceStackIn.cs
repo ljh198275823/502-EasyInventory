@@ -211,13 +211,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWeight.DecimalValue = item.Product.Weight.Value;
                 rd单件重.Checked = true;
             }
-            else
+            else if (item.OriginalWeight.HasValue)
             {
                 txtWeight.DecimalValue = item.OriginalWeight.Value;
                 rd总重.Checked = true;
             }
             if (item.Product.Length.HasValue) txtLength.DecimalValue = item.Product.Length.Value;
-            if (item.OriginalCount.HasValue) txtCount.DecimalValue = item.OriginalCount.Value;
+            txtCount.DecimalValue = item.Count;
             txtCustomer.Text = item.Customer;
             if (!string.IsNullOrEmpty(item.Supplier))
             {
@@ -349,24 +349,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 item = new ProductInventoryItem();
                 item.ID = Guid.NewGuid();
+                item.OriginalWeight = rd总重.Checked ? txtWeight.DecimalValue : txtWeight.DecimalValue * txtCount.DecimalValue; //区分总重和单重
+                item.OriginalCount = txtCount.DecimalValue;
+                if ((p.Model == "开卷" || p.Model == "开平") && item.Weight > 0)
+                {
+                    item.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Weight.Value, p.Length.Value * item.Count, p.Density.Value); //指定长度时计算入库厚度
+                }
+                else
+                {
+                    item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
+                }
             }
             item.Product = p;
             item.ProductID = p.ID;
             item.Model = p.Model;
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
-            item.OriginalWeight = rd总重.Checked ? txtWeight.DecimalValue : txtWeight.DecimalValue * txtCount.DecimalValue; //区分总重和单重
-            item.Weight = item.OriginalWeight;
-            item.OriginalCount = txtCount.DecimalValue;
+            item.Weight = rd总重.Checked ? txtWeight.DecimalValue : txtWeight.DecimalValue * txtCount.DecimalValue; //区分总重和单重
             item.Count = txtCount.DecimalValue;
-            if ((p.Model == "开卷" || p.Model == "开平") && item.Weight > 0)
-            {
-                item.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Weight.Value, p.Length.Value * item.Count, p.Density.Value); //指定长度时计算入库厚度
-            }
-            else
-            {
-                item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
-            }
             item.Unit = "件";
             item.State = ProductInventoryState.Inventory;
             item.Customer = txtCustomer.Text;

@@ -31,6 +31,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             this.categoryComboBox1.Init();
             this.comSpecification1.Init();
             this.wareHouseComboBox1.Init();
+            btnSaveAs.Enabled = Operator.Current.Permit(Permission.小件盘点报表, PermissionActions.导出);
         }
 
         protected override List<object> GetDataSource()

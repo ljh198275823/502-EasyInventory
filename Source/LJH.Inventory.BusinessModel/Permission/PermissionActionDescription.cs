@@ -56,6 +56,8 @@ namespace LJH.Inventory.BusinessModel
                     return "设置结算单价";
                 case PermissionActions.查看成本:
                     return "查看成本";
+                case PermissionActions.导出 :
+                    return "导出";
                 default:
                     return string.Empty;
             }

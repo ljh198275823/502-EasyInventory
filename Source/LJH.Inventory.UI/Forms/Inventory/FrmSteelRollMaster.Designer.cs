@@ -130,6 +130,7 @@
             this.mnu_拆卷 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_合并卷 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_原材料拆条 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlStates.SuspendLayout();
@@ -799,7 +800,7 @@
             this.mnu_Import,
             this.更多操作ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 358);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 336);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cMnu_Fresh
@@ -947,7 +948,8 @@
             this.取消预订ToolStripMenuItem,
             this.mnu_拆卷,
             this.mnu_合并卷,
-            this.mnu_Nullify});
+            this.mnu_Nullify,
+            this.mnu_原材料拆条});
             this.更多操作ToolStripMenuItem.Name = "更多操作ToolStripMenuItem";
             this.更多操作ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.更多操作ToolStripMenuItem.Text = "更多操作...";
@@ -955,37 +957,44 @@
             // 预订ToolStripMenuItem
             // 
             this.预订ToolStripMenuItem.Name = "预订ToolStripMenuItem";
-            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.预订ToolStripMenuItem.Text = "预订";
             this.预订ToolStripMenuItem.Click += new System.EventHandler(this.预订ToolStripMenuItem_Click);
             // 
             // 取消预订ToolStripMenuItem
             // 
             this.取消预订ToolStripMenuItem.Name = "取消预订ToolStripMenuItem";
-            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.取消预订ToolStripMenuItem.Text = "取消预订";
             this.取消预订ToolStripMenuItem.Click += new System.EventHandler(this.取消预订ToolStripMenuItem_Click);
             // 
             // mnu_拆卷
             // 
             this.mnu_拆卷.Name = "mnu_拆卷";
-            this.mnu_拆卷.Size = new System.Drawing.Size(124, 22);
+            this.mnu_拆卷.Size = new System.Drawing.Size(152, 22);
             this.mnu_拆卷.Text = "拆卷";
             this.mnu_拆卷.Click += new System.EventHandler(this.mnu_拆卷_Click);
             // 
             // mnu_合并卷
             // 
             this.mnu_合并卷.Name = "mnu_合并卷";
-            this.mnu_合并卷.Size = new System.Drawing.Size(124, 22);
+            this.mnu_合并卷.Size = new System.Drawing.Size(152, 22);
             this.mnu_合并卷.Text = "合并卷";
             this.mnu_合并卷.Click += new System.EventHandler(this.mnu_合并卷_Click);
             // 
             // mnu_Nullify
             // 
             this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Nullify.Size = new System.Drawing.Size(152, 22);
             this.mnu_Nullify.Text = "作废";
             this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
+            // 
+            // mnu_原材料拆条
+            // 
+            this.mnu_原材料拆条.Name = "mnu_原材料拆条";
+            this.mnu_原材料拆条.Size = new System.Drawing.Size(152, 22);
+            this.mnu_原材料拆条.Text = "原材料分条";
+            this.mnu_原材料拆条.Click += new System.EventHandler(this.mnu_原材料拆条_Click);
             // 
             // FrmSteelRollMaster
             // 
@@ -1105,5 +1114,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_Nullify;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnu_查看价格改动记录;
+        private System.Windows.Forms.ToolStripMenuItem mnu_原材料拆条;
     }
 }

@@ -78,6 +78,8 @@ namespace LJH.Inventory.UI.Forms.Sale
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_Import.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_Merge.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
+            this.cMnu_Export.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.导出);
+            this.btn_Export.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.导出);
         }
 
         protected override FrmDetailBase GetDetailForm()

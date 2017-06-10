@@ -87,6 +87,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             txtCustomer.Text = Customer != null ? Customer.Name : null;
             base.Init();
             if (Customer != null) btnSearch.PerformClick();
+            btnSaveAs.Enabled = Operator.Current.Permit(Permission.客户往来报表, PermissionActions.导出);
         }
 
         #endregion

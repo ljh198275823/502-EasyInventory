@@ -85,6 +85,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             mnu_SetFileID.Enabled = Operator.Current.Permit(Permission.Customer, PermissionActions.Edit);
             mnu_AddTax.Enabled = Operator.Current.Permit(Permission.CustomerTax, PermissionActions.Edit);
             mnu_AddTaxBill.Enabled = Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
+            cMnu_Export.Enabled = Operator.Current.Permit(Permission.CustomerState, PermissionActions.导出);
         }
 
         protected override List<object> GetDataSource()

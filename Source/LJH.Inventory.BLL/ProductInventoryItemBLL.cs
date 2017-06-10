@@ -139,7 +139,7 @@ namespace LJH.Inventory.BLL
                     {
                         var dt = DateTime.Now;
                         AddReceivables(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (sr.CalTax() > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (sr.CalTax () > 0) AddTax(sr, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
                     }
                 }
                 return unitWork.Commit();
@@ -157,7 +157,7 @@ namespace LJH.Inventory.BLL
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 var o = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sr.ID).QueryObject;
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o, unitWork);
-                if (!string.IsNullOrEmpty(sr.Supplier))
+                if (!string.IsNullOrEmpty(sr.Supplier) && sr.SourceID == null && sr.SourceRoll == null) //新建入库的才要计算应收
                 {
                     DateTime dt = DateTime.Now;
                     var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
@@ -313,7 +313,7 @@ namespace LJH.Inventory.BLL
                 }
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
                 AddOperationLog(sr.ID.ToString(), sr.DocumentType, "修改单价", unitWork, DateTime.Now, opt, logID, memo);
-                if (!string.IsNullOrEmpty(sr.Supplier))
+                if (!string.IsNullOrEmpty(sr.Supplier) && sr.SourceID == null && sr.SourceRoll == null)
                 {
                     var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
                     if (s != null)
@@ -324,15 +324,15 @@ namespace LJH.Inventory.BLL
                         if (sr.CalTax() > 0 && clone.CalTax() == 0 && !DelTax(clone)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
                     }
                 }
-               var ret= unitWork.Commit();
-               if (ret.Result == ResultCode.Successful)
-               {
-                   foreach (var ci in costs)
-                   {
-                       sr.SetCost(ci);
-                   }
-               }
-               return ret;
+                var ret = unitWork.Commit();
+                if (ret.Result == ResultCode.Successful)
+                {
+                    foreach (var ci in costs)
+                    {
+                        sr.SetCost(ci);
+                    }
+                }
+                return ret;
             }
             catch (Exception ex)
             {

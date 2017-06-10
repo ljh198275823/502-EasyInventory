@@ -183,6 +183,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置结算单价);
             mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.查看成本);
             mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.查看成本);
+            cMnu_Export.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.导出);
+            mnu_原材料拆条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
         }
 
         protected override FrmDetailBase GetDetailForm()
@@ -362,7 +364,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void mnu_拆卷_Click(object sender, EventArgs e)
         {
-
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                if (sr.State == ProductInventoryState.Inventory)
+                {
+                    Frm拆卷 frm = new Frm拆卷();
+                    frm.SteelRoll = sr;
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                        var newR = frm.NewRoll;
+                        _SteelRolls.Add(newR);
+                        var row = dataGridView1.SelectedRows[0].Index;
+                        dataGridView1.Rows.Insert(row, 1);
+                        ShowItemInGridViewRow(dataGridView1.Rows[row], newR);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行拆卷", ProductInventoryStateDescription.GetDescription(sr.State)));
+                }
+            }
         }
 
         private void mnu_合并卷_Click(object sender, EventArgs e)
@@ -580,7 +603,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).ChangeCost(pi, costs,Operator.Current.Name ,Operator.Current .ID );
+                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).ChangeCost(pi, costs, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);
@@ -603,6 +626,36 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 frm.SearchCondition = con;
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();
+            }
+        }
+
+        private void mnu_原材料拆条_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                if (sr.State == ProductInventoryState.Inventory)
+                {
+                    Frm原材料分条 frm = new Frm原材料分条();
+                    frm.SlicingItem = sr;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                        var newR = frm.NewRolls;
+                        _SteelRolls.AddRange(newR);
+                        var row = dataGridView1.SelectedRows[0].Index;
+                        foreach (var item in newR)
+                        {
+                            dataGridView1.Rows.Insert(row, 1);
+                            ShowItemInGridViewRow(dataGridView1.Rows[row], item);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
+                }
             }
         }
         #endregion

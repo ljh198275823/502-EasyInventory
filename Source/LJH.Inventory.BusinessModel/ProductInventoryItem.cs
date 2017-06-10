@@ -158,30 +158,35 @@ namespace LJH.Inventory.BusinessModel
             Costs = JsonConvert.SerializeObject(_CostItems);
         }
 
-        public decimal CalReceivable()
+        public decimal CalReceivable(bool withOtherCosts = true)
         {
             decimal ret = 0;
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems == null) return 0;
             if (UnitWeight == null) return 0;
             var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-            if (ci != null) ret += UnitWeight.Value * Count * ci.Price;
-            foreach (var fc in _CostItems)
+            if (ci != null)
             {
-                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay) ret += UnitWeight.Value * Count * fc.Price;
+                if (Model == ProductModel.原材料) ret += OriginalWeight.Value * ci.Price; //计算应收时应该以入库重量为准
+                else ret += UnitWeight.Value * Count * ci.Price; //小件或其它的产品用单重*数量*价格
+            }
+            if (withOtherCosts)
+            {
+                foreach (var fc in _CostItems)
+                {
+                    if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay)
+                    {
+                        if (Model == ProductModel.原材料) ret += OriginalWeight.Value * fc.Price;
+                        else ret += UnitWeight.Value * Count * fc.Price;
+                    }
+                }
             }
             return ret;
         }
 
         public decimal CalTax()
         {
-            decimal ret = 0;
-            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
-            if (_CostItems == null) return 0;
-            if (UnitWeight == null) return 0;
-            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-            if (ci != null && ci.WithTax) ret += UnitWeight.Value * Count * ci.Price;
-            return ret;
+            return CalReceivable(false);
         }
 
         public decimal CalCost(bool withTax, decimal txtRate, bool 入库成本 = false)
@@ -291,10 +296,15 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (OriginalWeight <= Weight) return "整卷";
-                if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "余料";
-                else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
-                return "余卷";
+                if (Model == ProductModel.原材料)
+                {
+                    if (OriginalWeight <= Weight) return "整卷";
+                    else if (Model == ProductModel.原材料 && Weight == 0) return "余料";
+                    if (UserSettings.Current != null && Length <= UserSettings.Current.BecomeRemainlessAt) return "余料";
+                    else if (UserSettings.Current != null && Length < UserSettings.Current.BecomeTailAt) return "尾卷";
+                    return "余卷";
+                }
+                return null;
             }
         }
         /// <summary>
@@ -306,7 +316,7 @@ namespace LJH.Inventory.BusinessModel
             {
                 try
                 {
-                    if (Model == "开平" || Model == "开卷")
+                    if (Model == ProductModel.开平 || Model == ProductModel.开卷)
                     {
                         decimal? thick = this.RealThick;
                         if (!thick.HasValue) thick = this.OriginalThick;

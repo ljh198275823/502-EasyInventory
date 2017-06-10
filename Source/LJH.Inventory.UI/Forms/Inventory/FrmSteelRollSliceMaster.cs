@@ -66,8 +66,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Inventory );
+            mnu_CreateInventory.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Inventory);
             mnu_Import.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Inventory);
+            cMnu_Export.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.导出);
         }
 
         protected override List<object> GetDataSource()

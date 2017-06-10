@@ -69,6 +69,7 @@ namespace LJH.Inventory.BusinessModel
         EditAttachment = 0x1000,
         设置结算单价 = 0x2000,
         查看成本 = 0x4000,
+        导出=0x8000,
     }
 }
         

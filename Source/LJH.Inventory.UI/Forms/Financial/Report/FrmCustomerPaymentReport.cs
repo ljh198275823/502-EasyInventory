@@ -119,6 +119,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             ucDateTimeInterval1.ShowTime = false;
             ucDateTimeInterval1.Init();
             ucDateTimeInterval1.SelectThisMonth();
+            btnSaveAs.Enabled = Operator.Current.Permit(Permission.PaymentReport, PermissionActions.导出);
             base.Init();
         }
 

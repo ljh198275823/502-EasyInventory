@@ -33,6 +33,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             ucDateTimeInterval1.Init();
             ucDateTimeInterval1.SelectThisMonth();
             cmbSpecification.Init();
+            btnSaveAs.Enabled = Operator.Current.Permit(Permission.InventoryRecordReport, PermissionActions.导出);
             base.Init();
         }
 

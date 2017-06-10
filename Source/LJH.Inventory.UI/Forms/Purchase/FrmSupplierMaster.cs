@@ -63,6 +63,8 @@ namespace LJH.Inventory.UI.Forms.Purchase
             this.mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
             this.mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
             this.mnu_Import.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.Edit);
+            this.cMnu_Export.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.导出);
+            this.btn_Export.Enabled = Operator.Current.Permit(Permission.Supplier, PermissionActions.导出);
         }
 
         protected override FrmDetailBase GetDetailForm()

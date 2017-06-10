@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class SteelRollBLL:ProductInventoryItemBLL 
+    public class SteelRollBLL : ProductInventoryItemBLL
     {
         #region 构造函数
         public SteelRollBLL(string repoUri)
@@ -191,7 +191,7 @@ namespace LJH.Inventory.BLL
                     }
                     else //以加工单数量为准
                     {
-                        len = records.Sum(it => it.Length.Value * it.Count); 
+                        len = records.Sum(it => it.Length.Value * it.Count);
                     }
 
                     thick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(pi.Product.Specification).Value, weight, len, pi.Product.Density.Value);
@@ -330,6 +330,46 @@ namespace LJH.Inventory.BLL
                         it.Weight = 0;
                         it.Length = 0;
                     });
+            }
+            return ret;
+        }
+
+        public CommandResult 原材料拆条(ProductInventoryItem sr, List<int> items, out List<ProductInventoryItem> newRolls)
+        {
+            newRolls = null;
+            if (items == null || items.Count == 0) return new CommandResult(ResultCode.Fail, "没有指定分条规格");
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            var sum = items.Sum();
+            var weight = sr.Weight;
+            foreach (var it in items)
+            {
+                var item = sr.Clone();
+                item.ID = Guid.NewGuid();
+                item.SourceRoll = sr.ID;
+                string sp = string.Format("{0}*{1}", SpecificationHelper.GetWrittenThick(sr.Product.Specification), it);
+                Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(sr.Product.CategoryID, sp, "原材料", 7.85m);
+                if (p == null) throw new Exception("创建相关产品信息失败");
+                item.Product = p;
+                item.ProductID = p.ID;
+                item.Model = p.Model;
+                item.OriginalWeight = weight * it / sum;
+                item.Weight = weight * it / sum;
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(item, unitWork);
+                if (newRolls == null) newRolls = new List<ProductInventoryItem>();
+                newRolls.Add(item);
+            }
+            var clone = sr.Clone();
+            clone.Weight = 0;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
+            var ret = unitWork.Commit();
+            if (ret.Result == ResultCode.Successful)
+            {
+                sr.Weight = 0;
+                sr.Length = 0;
+            }
+            else
+            {
+                newRolls = null;
             }
             return ret;
         }

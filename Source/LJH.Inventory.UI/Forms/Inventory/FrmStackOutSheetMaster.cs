@@ -116,6 +116,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             base.ShowOperatorRights();
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Edit);
             mnu_AddSheet.Enabled = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.Edit);
+            cMnu_Export.Enabled = Operator.Current.Permit(Permission.DeliverySheet , PermissionActions.导出);
         }
 
         protected override FrmDetailBase GetDetailForm()
