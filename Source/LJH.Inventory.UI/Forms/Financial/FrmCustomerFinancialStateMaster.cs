@@ -123,6 +123,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colCategory"].Value = cs.Customer.CategoryID;
             row.Cells["colCreditLine"].Value = cs.Customer.CreditLine;
             row.Cells["colFileID"].Value = cs.Recievables > 0 ? (cs.Customer.FileID.HasValue ? cs.Customer.FileID.ToString() : null) : null;
+            row.Cells["colTaxFileID"].Value = cs.Tax > 0 ? (cs.Customer.TaxFileID.HasValue ? cs.Customer.TaxFileID.ToString() : null) : null;
             row.Cells["colPrepay"].Value = cs.Prepay;
             row.Cells["colReceivable"].Value = cs.Recievables;
             row.Cells["colTax"].Value = cs.Tax;
@@ -275,6 +276,33 @@ namespace LJH.Inventory.UI.Forms.Financial
                     FrmSetFileID frm = new FrmSetFileID();
                     frm.StartPosition = FormStartPosition.CenterParent;
                     frm.ExcludeFileIDs = exludes;
+                    frm.Customer = customer;
+                    if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customerState);
+                }
+            }
+        }
+
+        private void mnu_设置税务归档码_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                CustomerFinancialState customerState = dataGridView1.SelectedRows[0].Tag as CustomerFinancialState;
+                if (customerState.Recievables > 0)
+                {
+                    CompanyInfo customer = customerState.Customer;
+                    List<int> exludes = new List<int>();
+                    foreach (var cs in _CustomerStates)
+                    {
+                        CompanyInfo c = cs.Customer;
+                        if (c.ID != customer.ID && c.City == customer.City && c.TaxFileID.HasValue && cs.Tax > 0)
+                        {
+                            exludes.Add(c.TaxFileID.Value);
+                        }
+                    }
+                    FrmSetFileID frm = new FrmSetFileID();
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ExcludeFileIDs = exludes;
+                    frm.ForTaxFileID = true;
                     frm.Customer = customer;
                     if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customerState);
                 }

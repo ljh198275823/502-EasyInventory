@@ -21,6 +21,8 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         public List<int> ExcludeFileIDs { get; set; }
 
+        public bool ForTaxFileID { get; set; }
+
         public CompanyInfo Customer { get; set; }
 
         private void FrmSetFileID_Load(object sender, EventArgs e)
@@ -45,7 +47,9 @@ namespace LJH.Inventory.UI.Forms.Financial
                     MessageBox.Show("归档号已经被其它客户占用，不能使用");
                     return;
                 }
-                var ret = new CompanyBLL(AppSettings.Current.ConnStr).SetFileID(Customer, fid);
+                CommandResult ret = null;
+                if (!ForTaxFileID) ret = new CompanyBLL(AppSettings.Current.ConnStr).SetFileID(Customer, fid);
+                else ret = new CompanyBLL(AppSettings.Current.ConnStr).SetTaxFileID(Customer, fid);
                 if (ret.Result == ResultCode.Successful)
                 {
                     this.DialogResult = DialogResult.OK;

@@ -274,3 +274,9 @@ EXEC dbo.sp_executesql @statement = N'
              left join (SELECT a.id, case a.model when ''Ô­²ÄÁÏ'' then a.OriginalWeight else b.originalWeight end as originalWeight  from ProductInventoryItem a left join ProductInventoryItem b on a.SourceRoll =b.ID ) as f on a.InventoryItem =f.ID 
  '
 GO
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='TaxFileID' AND id = OBJECT_ID(N'[dbo].[Customer]'))
+BEGIN
+	exec ('alter table Customer add TaxFileID int null')
+end
+go

@@ -88,6 +88,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public int? FileID { get; set; }
         /// <summary>
+        /// 获取或设置客户的税务归档码
+        /// </summary>
+        public int? TaxFileID { get; set; }
+        /// <summary>
         /// 获取或设置备注
         /// </summary>
         public string Memo { get; set; }

@@ -69,6 +69,7 @@
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaxFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTax = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -78,6 +79,7 @@
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_设置税务归档码 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -126,6 +128,7 @@
             this.mnu_客户往来报表,
             this.mnu_UpdateCreditLine,
             this.mnu_SetFileID,
+            this.mnu_设置税务归档码,
             this.toolStripSeparator1,
             this.mnu_AddTax,
             this.mnu_AddTaxBill,
@@ -133,7 +136,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 264);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 308);
             // 
             // cMnu_Fresh
             // 
@@ -307,6 +310,7 @@
             this.colCategory,
             this.colCreditLine,
             this.colFileID,
+            this.colTaxFileID,
             this.colReceivable,
             this.colPrepay,
             this.colTax,
@@ -375,6 +379,12 @@
             this.colFileID.HeaderText = "归档码";
             this.colFileID.Name = "colFileID";
             this.colFileID.ReadOnly = true;
+            // 
+            // colTaxFileID
+            // 
+            this.colTaxFileID.HeaderText = "税务归档码";
+            this.colTaxFileID.Name = "colTaxFileID";
+            this.colTaxFileID.ReadOnly = true;
             // 
             // colReceivable
             // 
@@ -453,6 +463,13 @@
             this.colLinkerPhone.Name = "colLinkerPhone";
             this.colLinkerPhone.ReadOnly = true;
             // 
+            // mnu_设置税务归档码
+            // 
+            this.mnu_设置税务归档码.Name = "mnu_设置税务归档码";
+            this.mnu_设置税务归档码.Size = new System.Drawing.Size(160, 22);
+            this.mnu_设置税务归档码.Text = "设置税务归档码";
+            this.mnu_设置税务归档码.Click += new System.EventHandler(this.mnu_设置税务归档码_Click);
+            // 
             // FrmCustomerFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -505,12 +522,14 @@
         private System.Windows.Forms.Label lblOriginalTotal;
         private System.Windows.Forms.Label lblTotalWeight;
         private System.Windows.Forms.ToolStripMenuItem mnu_客户往来报表;
+        private System.Windows.Forms.ToolStripMenuItem mnu_新增客户退款;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaxFileID;
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewLinkColumn colTax;
@@ -520,6 +539,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;
-        private System.Windows.Forms.ToolStripMenuItem mnu_新增客户退款;
+        private System.Windows.Forms.ToolStripMenuItem mnu_设置税务归档码;
     }
 }
