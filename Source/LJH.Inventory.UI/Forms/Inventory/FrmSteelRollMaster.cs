@@ -290,6 +290,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCarplate"].Value = sr.Carplate;
             row.Cells["colPurchaseID"].Value = sr.PurchaseID;
             row.Cells["colMemo"].Value = sr.Memo;
+            if (sr.SourceRoll.HasValue) row.Cells["colSourceRoll"].Value = "查看";
             ShowRowColor(row);
             if (!_SteelRolls.Exists(it => it.ID == sr.ID))
             {
@@ -350,6 +351,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         frm.IsAdding = false;
                         frm.IsForView = true;
                         frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                }
+                else if (GridView.Columns[e.ColumnIndex].Name == "colSourceRoll" && pi.SourceRoll .HasValue )
+                {
+                    var steelRoll = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(pi.SourceRoll.Value).QueryObject;
+                    if (steelRoll != null)
+                    {
+                        FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                        frm.IsForView = true;
+                        frm.UpdatingItem = steelRoll;
+                        frm.StartPosition = FormStartPosition.CenterParent;
                         frm.ShowDialog();
                     }
                 }
@@ -634,7 +647,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
                 ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (sr.State == ProductInventoryState.Inventory)
+                if (sr.State == ProductInventoryState.Inventory && (sr.Status == "整卷" || sr.Status == "余卷"))
                 {
                     Frm原材料分条 frm = new Frm原材料分条();
                     frm.SlicingItem = sr;

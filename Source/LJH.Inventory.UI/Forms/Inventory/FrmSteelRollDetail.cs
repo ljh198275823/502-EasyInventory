@@ -185,7 +185,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCarPlate.Text = item.Carplate;
             txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
+            if (item.SourceRoll.HasValue) btnOk1.Enabled = false;
             btnOk1.Enabled = btnOk1.Enabled && item.CanEdit && item.GetCost(CostItem.结算单价) == null;
+            //btn查看来源卷.Visible = item.SourceRoll.HasValue;
         }
 
         protected override object GetItemFromInput()
@@ -357,5 +359,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
+
+        private void btn查看来源卷_Click(object sender, EventArgs e)
+        {
+            var pi = UpdatingItem as ProductInventoryItem;
+            if (pi != null && pi.SourceRoll != null)
+            {
+                var steelRoll = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(pi.SourceRoll.Value).QueryObject;
+                if (steelRoll != null)
+                {
+                    FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                    frm.IsForView = true;
+                    frm.UpdatingItem = steelRoll;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowDialog();
+                }
+            }
+        }
     }
 }

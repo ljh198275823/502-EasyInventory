@@ -76,16 +76,17 @@
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.btnOk1 = new System.Windows.Forms.Button();
             this.pnlCost = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rdWithTax_其它费用 = new System.Windows.Forms.RadioButton();
-            this.rdWithoutTax__其它费用 = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdWithTax_运费 = new System.Windows.Forms.RadioButton();
             this.rdWithoutTax__运费 = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdWithTax_其它费用 = new System.Windows.Forms.RadioButton();
+            this.rdWithoutTax__其它费用 = new System.Windows.Forms.RadioButton();
+            this.btn查看来源卷 = new System.Windows.Forms.Button();
             this.pnlTax.SuspendLayout();
             this.pnlCost.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -96,7 +97,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(21, 446);
+            this.btnOk.Location = new System.Drawing.Point(21, 483);
             this.btnOk.Size = new System.Drawing.Size(107, 35);
             this.btnOk.TabIndex = 20;
             this.btnOk.Visible = false;
@@ -625,38 +626,6 @@
             this.pnlCost.TabIndex = 146;
             this.pnlCost.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.rdWithTax_其它费用);
-            this.panel1.Controls.Add(this.rdWithoutTax__其它费用);
-            this.panel1.Location = new System.Drawing.Point(238, 87);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(145, 25);
-            this.panel1.TabIndex = 137;
-            // 
-            // rdWithTax_其它费用
-            // 
-            this.rdWithTax_其它费用.AutoSize = true;
-            this.rdWithTax_其它费用.Location = new System.Drawing.Point(4, 3);
-            this.rdWithTax_其它费用.Name = "rdWithTax_其它费用";
-            this.rdWithTax_其它费用.Size = new System.Drawing.Size(47, 16);
-            this.rdWithTax_其它费用.TabIndex = 129;
-            this.rdWithTax_其它费用.TabStop = true;
-            this.rdWithTax_其它费用.Text = "含税";
-            this.rdWithTax_其它费用.UseVisualStyleBackColor = true;
-            // 
-            // rdWithoutTax__其它费用
-            // 
-            this.rdWithoutTax__其它费用.AutoSize = true;
-            this.rdWithoutTax__其它费用.Location = new System.Drawing.Point(57, 5);
-            this.rdWithoutTax__其它费用.Name = "rdWithoutTax__其它费用";
-            this.rdWithoutTax__其它费用.Size = new System.Drawing.Size(59, 16);
-            this.rdWithoutTax__其它费用.TabIndex = 130;
-            this.rdWithoutTax__其它费用.TabStop = true;
-            this.rdWithoutTax__其它费用.Text = "不含税";
-            this.rdWithoutTax__其它费用.UseVisualStyleBackColor = true;
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -689,12 +658,57 @@
             this.rdWithoutTax__运费.Text = "不含税";
             this.rdWithoutTax__运费.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rdWithTax_其它费用);
+            this.panel1.Controls.Add(this.rdWithoutTax__其它费用);
+            this.panel1.Location = new System.Drawing.Point(238, 87);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(145, 25);
+            this.panel1.TabIndex = 137;
+            // 
+            // rdWithTax_其它费用
+            // 
+            this.rdWithTax_其它费用.AutoSize = true;
+            this.rdWithTax_其它费用.Location = new System.Drawing.Point(4, 3);
+            this.rdWithTax_其它费用.Name = "rdWithTax_其它费用";
+            this.rdWithTax_其它费用.Size = new System.Drawing.Size(47, 16);
+            this.rdWithTax_其它费用.TabIndex = 129;
+            this.rdWithTax_其它费用.TabStop = true;
+            this.rdWithTax_其它费用.Text = "含税";
+            this.rdWithTax_其它费用.UseVisualStyleBackColor = true;
+            // 
+            // rdWithoutTax__其它费用
+            // 
+            this.rdWithoutTax__其它费用.AutoSize = true;
+            this.rdWithoutTax__其它费用.Location = new System.Drawing.Point(57, 5);
+            this.rdWithoutTax__其它费用.Name = "rdWithoutTax__其它费用";
+            this.rdWithoutTax__其它费用.Size = new System.Drawing.Size(59, 16);
+            this.rdWithoutTax__其它费用.TabIndex = 130;
+            this.rdWithoutTax__其它费用.TabStop = true;
+            this.rdWithoutTax__其它费用.Text = "不含税";
+            this.rdWithoutTax__其它费用.UseVisualStyleBackColor = true;
+            // 
+            // btn查看来源卷
+            // 
+            this.btn查看来源卷.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn查看来源卷.Location = new System.Drawing.Point(69, 446);
+            this.btn查看来源卷.Name = "btn查看来源卷";
+            this.btn查看来源卷.Size = new System.Drawing.Size(126, 35);
+            this.btn查看来源卷.TabIndex = 147;
+            this.btn查看来源卷.Text = "查看来源卷";
+            this.btn查看来源卷.UseVisualStyleBackColor = true;
+            this.btn查看来源卷.Visible = false;
+            this.btn查看来源卷.Click += new System.EventHandler(this.btn查看来源卷_Click);
+            // 
             // FrmSteelRollDetail
             // 
             this.AcceptButton = this.btnOk1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 502);
+            this.Controls.Add(this.btn查看来源卷);
             this.Controls.Add(this.pnlCost);
             this.Controls.Add(this.btnOk1);
             this.Controls.Add(this.label15);
@@ -771,14 +785,15 @@
             this.Controls.SetChildIndex(this.label15, 0);
             this.Controls.SetChildIndex(this.btnOk1, 0);
             this.Controls.SetChildIndex(this.pnlCost, 0);
+            this.Controls.SetChildIndex(this.btn查看来源卷, 0);
             this.pnlTax.ResumeLayout(false);
             this.pnlTax.PerformLayout();
             this.pnlCost.ResumeLayout(false);
             this.pnlCost.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -839,5 +854,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rdWithTax_其它费用;
         private System.Windows.Forms.RadioButton rdWithoutTax__其它费用;
+        private System.Windows.Forms.Button btn查看来源卷;
     }
 }

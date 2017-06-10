@@ -343,20 +343,24 @@ namespace LJH.Inventory.BLL
             var weight = sr.Weight;
             foreach (var it in items)
             {
-                var item = sr.Clone();
-                item.ID = Guid.NewGuid();
-                item.SourceRoll = sr.ID;
+                var newR = sr.Clone();
+                newR.ID = Guid.NewGuid();
+                newR.SourceRoll = sr.ID;
                 string sp = string.Format("{0}*{1}", SpecificationHelper.GetWrittenThick(sr.Product.Specification), it);
                 Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(sr.Product.CategoryID, sp, "原材料", 7.85m);
                 if (p == null) throw new Exception("创建相关产品信息失败");
-                item.Product = p;
-                item.ProductID = p.ID;
-                item.Model = p.Model;
-                item.OriginalWeight = weight * it / sum;
-                item.Weight = weight * it / sum;
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(item, unitWork);
+                newR.Product = p;
+                newR.ProductID = p.ID;
+                newR.Model = p.Model;
+                newR.OriginalLength = sr.Length;
+                newR.Length = sr.Length;
+                newR.OriginalWeight = weight * it / sum;
+                newR.Weight = weight * it / sum;
+                newR.InventorySheet = "分条";
+                newR.Memo = "分条";
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newR, unitWork);
                 if (newRolls == null) newRolls = new List<ProductInventoryItem>();
-                newRolls.Add(item);
+                newRolls.Add(newR);
             }
             var clone = sr.Clone();
             clone.Weight = 0;
