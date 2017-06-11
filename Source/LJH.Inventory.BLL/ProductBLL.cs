@@ -83,10 +83,10 @@ namespace LJH.Inventory.BLL
         /// 获取所有的规格
         /// </summary>
         /// <returns></returns>
-        public List<string> GetAllSpecifications()
+        public List<string> GetAllSpecifications(ProductSearchCondition con)
         {
             var provider = ProviderFactory.Create<IProductProvider>(RepoUri);
-            return provider.GetAllSpecifications();
+            return provider.GetAllSpecifications(con);
         }
         #endregion
     }

@@ -696,6 +696,26 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        private void mnu_选择其它产品_Click(object sender, EventArgs e)
+        {
+            Frm其它产品选择 frm = new Frm其它产品选择();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.WindowState = FormWindowState.Maximized;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                StackOutSheet sheet = UpdatingItem as StackOutSheet;
+                var items = frm.SelectedItems;
+                if (items != null && items.Count > 0)
+                {
+                    foreach (var item in items)
+                    {
+                        sheet.AddItems(item.Key, item.Value);
+                    }
+                    ShowDeliveryItemsOnGrid(sheet);
+                }
+            }
+        }
+
         private void mnu_Remove_Click(object sender, EventArgs e)
         {
             if (ItemsGrid.SelectedCells.Count > 0)
@@ -755,5 +775,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
+
+        
     }
 }

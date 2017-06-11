@@ -18,7 +18,7 @@ namespace LJH.Inventory.BLL
         }
         #endregion
 
-        private const string MODEL = "原材料";
+        private static string MODEL = ProductModel.原材料;
 
         #region 公共方法
         public override QueryResultList<ProductInventoryItem> GetItems(SearchCondition con)
@@ -178,7 +178,7 @@ namespace LJH.Inventory.BLL
                 SliceRecordSearchCondition con = new SliceRecordSearchCondition();
                 con.SourceRoll = pi.ID;
                 var records = new SteelRollSliceRecordBLL(RepoUri).GetItems(con).QueryObjects;
-                if (records != null && records.Count > 0 && records.TrueForAll(it => it.SliceType == "开平" || it.SliceType == "开卷"))
+                if (records != null && records.Count > 0 && records.TrueForAll(it => it.SliceType == ProductModel.开平 || it.SliceType == ProductModel.开卷))
                 {
                     decimal weight = records.Max(it => it.BeforeWeight); //获取第一次加工记录前的重量，这个重量即为这个卷加工前的重量
                     decimal len = 0;
@@ -374,6 +374,49 @@ namespace LJH.Inventory.BLL
             else
             {
                 newRolls = null;
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// 废品处理
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public override CommandResult Nullify(ProductInventoryItem sr)
+        {
+            CommandResult ret = new CommandResult(ResultCode.Fail, string.Empty);
+            ProductInventoryItem newVal = sr.Clone();
+            newVal.State = ProductInventoryState.Nullified;
+            if (string.IsNullOrEmpty(newVal.Memo)) newVal.Memo = "废品处理";
+            else newVal.Memo += ",废品处理";
+            if (sr.Model == ProductModel.原材料 && sr.Status != "整卷")
+            {
+                ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
+            }
+            else //整卷需要将对应的应付金额和应付税款删除
+            {
+                bool allSuccess = true;
+                CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+                con.SheetID = sr.ID.ToString();
+                var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+                if (items != null && items.Count > 0)
+                {
+                    var bll = new CustomerReceivableBLL(RepoUri);
+                    foreach (var item in items)
+                    {
+                        var t = bll.Delete(item);
+                        allSuccess = t.Result == ResultCode.Successful;
+                        if (!allSuccess) break;
+                    }
+                }
+                if (allSuccess) ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
+                else ret = new CommandResult(ResultCode.Fail, "原材料卷对应的应付款或应付税款删除失败，请重试！");
+            }
+            if (ret.Result == ResultCode.Successful)
+            {
+                sr.State = newVal.State;
+                sr.Memo = newVal.Memo;
             }
             return ret;
         }

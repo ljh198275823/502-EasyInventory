@@ -29,7 +29,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             this.ucDateTimeInterval1.Init();
             this.ucDateTimeInterval1.SelectThisMonth();
             this.categoryComboBox1.Init();
-            this.comSpecification1.Init();
+            this.comSpecification1.Init(new List<string> { ProductModel.原材料, ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 });
             this.wareHouseComboBox1.Init();
             btnSaveAs.Enabled = Operator.Current.Permit(Permission.SliceRecordReport, PermissionActions.导出);
         }

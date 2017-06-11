@@ -17,9 +17,9 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmSteelRollMaster : FrmMasterBase
+    public partial class Frm其它产品库存 : FrmMasterBase
     {
-        public FrmSteelRollMaster()
+        public Frm其它产品库存()
         {
             InitializeComponent();
         }
@@ -87,10 +87,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer.Contains(customerCombobox1.Text)).ToList();
                 if (!string.IsNullOrEmpty(txtPurchaseID.Text)) items = items.Where(it => !string.IsNullOrEmpty(it.PurchaseID) && it.PurchaseID.Contains(txtPurchaseID.Text)).ToList();
-                items = items.Where(it => (chkIntact.Checked && it.Status == "整卷") ||
-                                       (chkPartial.Checked && it.Status == "余卷") ||
-                                       (chkOnlyTail.Checked && it.Status == "尾卷") ||
-                                       (chkRemainless.Checked && it.Status == "余料")).ToList();
                 items = items.Where(it => (chk作废.Checked && it.State == ProductInventoryState.Nullified) ||
                                           (chk发货.Checked && it.State == ProductInventoryState.Shipped) ||
                                           (chk待发货.Checked && it.State == ProductInventoryState.WaitShipping) ||
@@ -128,22 +124,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 row.DefaultCellStyle.ForeColor = Color.Brown;
             }
-            else if (sr.Status == "整卷")
-            {
-                row.DefaultCellStyle.ForeColor = Color.Blue;
-            }
-            else if (sr.Status == "余卷")
-            {
-                row.DefaultCellStyle.ForeColor = Color.Red;
-            }
-            else if (sr.Status == "尾卷")
-            {
-                row.DefaultCellStyle.ForeColor = Color.Orange;
-            }
-            else
-            {
-                row.DefaultCellStyle.ForeColor = Color.Red;
-            }
         }
         #endregion
 
@@ -152,7 +132,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.Init();
             this.wareHouseComboBox1.Init();
-            this.cmbSpecification.Init(new List<string> { ProductModel.原材料, ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 });
+            this.cmbSpecification.Init(new List<string> { ProductModel.其它产品 });
             this.categoryComboBox1.Init();
             this.customerCombobox1.Init();
             this.ucDateTimeInterval1.Init();
@@ -166,38 +146,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            cMnu_Add.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
-            mnu_拆卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit) || Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
-            mnu_合并卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit) || Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
-            mnu_开平.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_开卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_开条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_开吨.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
-            mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
-            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置结算单价);
-            更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
-            this.取消预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
-            this.预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
-            mnu_Import.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
-            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置结算单价);
-            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.查看成本);
-            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.查看成本);
-            cMnu_Export.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.导出);
-            mnu_原材料拆条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
+            mnu_Add.Enabled = Operator.Current.Permit(Permission.其它产品 , PermissionActions.Inventory);
+            mnu_Check.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Check);
+            mnu_Nullify.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Nullify);
+            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置结算单价);
+            更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Edit);
+            mnu_Import.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Inventory);
+            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置结算单价);
+            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.查看成本);
+            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.查看成本);
+            cMnu_Export.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.导出);
         }
 
         protected override FrmDetailBase GetDetailForm()
         {
-            FrmSteelRollDetail frm = new FrmSteelRollDetail();
-            return frm;
+            return null;
         }
 
         protected override List<object> GetDataSource()
         {
             _AllWarehouse = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             _AllSuppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
-            var bll = new SteelRollBLL(AppSettings.Current.ConnStr);
+            var bll = new OtherProductInventoryBLL(AppSettings.Current.ConnStr);
             if (SearchCondition == null)
             {
                 var con = new ProductInventoryItemSearchCondition();
@@ -208,7 +178,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 con.States.Add(ProductInventoryState.Reserved);
                 if (chk发货.Checked) con.States.Add(ProductInventoryState.Shipped);
                 if (chk作废.Checked) con.States.Add(ProductInventoryState.Nullified);
-                if (!chkRemainless.Checked) con.HasWeight = true;
                 _SteelRolls = bll.GetItems(con).QueryObjects;
             }
             else
@@ -257,11 +226,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (_AllWarehouse != null) ws = _AllWarehouse.SingleOrDefault(it => it.ID == sr.WareHouseID);
             row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
             row.Cells["colOriginalWeight"].Value = sr.OriginalWeight;
-            row.Cells["colOriginalLength"].Value = sr.OriginalLength;
+            row.Cells["colOriginalCount"].Value = sr.OriginalCount;
+            row.Cells["colLength"].Value = sr.Product.Length;
             row.Cells["colWeight"].Value = sr.Weight;
-            row.Cells["colLength"].Value = sr.Length;
-            row.Cells["colOriginalThick"].Value = sr.OriginalThick;
-            row.Cells["colRealThick"].Value = sr.RealThick;
+            row.Cells["colCount"].Value = sr.Count;
             row.Cells["colCustomer"].Value = sr.Customer;
             if (_AllSuppliers != null)
             {
@@ -270,9 +238,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
-            row.Cells["colStatus"].Value = sr.Status;
-            row.Cells["colSerialNumber"].Value = sr.SerialNumber;
-            if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
+            if (Operator.Current.Permit(Permission.其它产品 , PermissionActions.ShowPrice))
             {
                 CostItem ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
@@ -290,7 +256,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCarplate"].Value = sr.Carplate;
             row.Cells["colPurchaseID"].Value = sr.PurchaseID;
             row.Cells["colMemo"].Value = sr.Memo;
-            if (sr.SourceRoll.HasValue) row.Cells["colSourceRoll"].Value = "查看";
             ShowRowColor(row);
             if (!_SteelRolls.Exists(it => it.ID == sr.ID))
             {
@@ -318,6 +283,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
         {
             if (chkStackIn.Checked) FreshData_Clicked(sender, e);
+        }
+
+        private void mnu_Add_Click(object sender, EventArgs e)
+        {
+            var frm = new Frm其它产品入库();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Add_And_Show_Row(frm.SteelRollSlice);
+            }
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -354,120 +328,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         frm.ShowDialog();
                     }
                 }
-                else if (GridView.Columns[e.ColumnIndex].Name == "colSourceRoll" && pi.SourceRoll .HasValue )
-                {
-                    var steelRoll = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(pi.SourceRoll.Value).QueryObject;
-                    if (steelRoll != null)
-                    {
-                        FrmSteelRollDetail frm = new FrmSteelRollDetail();
-                        frm.IsForView = true;
-                        frm.UpdatingItem = steelRoll;
-                        frm.StartPosition = FormStartPosition.CenterParent;
-                        frm.ShowDialog();
-                    }
-                }
             }
         }
 
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            mnu_拆卷.Visible = UserSettings.Current != null && UserSettings.Current.启用原料拆卷和合并功能;
-            mnu_合并卷.Visible = UserSettings.Current != null && UserSettings.Current.启用原料拆卷和合并功能;
-        }
-
-        private void mnu_拆卷_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            if (ForSelect) return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+            if (pi.SourceID == null && pi.SourceRoll == null)
             {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (sr.State == ProductInventoryState.Inventory)
-                {
-                    Frm拆卷 frm = new Frm拆卷();
-                    frm.SteelRoll = sr;
-                    if (frm.ShowDialog() == DialogResult.OK)
-                    {
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
-                        var newR = frm.NewRoll;
-                        _SteelRolls.Add(newR);
-                        var row = dataGridView1.SelectedRows[0].Index;
-                        dataGridView1.Rows.Insert(row, 1);
-                        ShowItemInGridViewRow(dataGridView1.Rows[row], newR);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行拆卷", ProductInventoryStateDescription.GetDescription(sr.State)));
-                }
-            }
-        }
-
-        private void mnu_合并卷_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 1)
-            {
-                if (MessageBox.Show("是否合并选定的多个原材料卷？", "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var items = new List<ProductInventoryItem>();
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-                    items.Add(row.Tag as ProductInventoryItem);
-                }
-                ProductInventoryItem newR;
-                var ret = new SteelRollBLL(AppSettings.Current.ConnStr).合卷(items, out newR);
-                if (ret.Result == ResultCode.Successful)
-                {
-                    int row = dataGridView1.SelectedRows[dataGridView1.SelectedRows.Count - 1].Index;
-                    dataGridView1.Rows.Insert(row, 1);
-                    _SteelRolls.Add(newR);
-                    ShowItemInGridViewRow(dataGridView1.Rows[row], newR);
-                    foreach (DataGridViewRow r in dataGridView1.SelectedRows)
-                    {
-                        ShowItemInGridViewRow(r, r.Tag);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message);
-                }
-            }
-        }
-
-        private void mnu_Slice_Click(object sender, EventArgs e)
-        {
-            string sliceTo = null;
-            if (object.ReferenceEquals(sender, mnu_开平)) sliceTo = ProductModel.开平;
-            if (object.ReferenceEquals(sender, mnu_开卷)) sliceTo = ProductModel.开卷;
-            if (object.ReferenceEquals(sender, mnu_开条)) sliceTo = ProductModel.开条;
-            if (object.ReferenceEquals(sender, mnu_开吨)) sliceTo = ProductModel.开吨;
-
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
-            {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (sr.State == ProductInventoryState.Inventory)
-                {
-                    FrmSlice frm = new FrmSlice();
-                    frm.SlicingItem = sr;
-                    frm.SliceTo = sliceTo;
-                    frm.ShowDialog();
-                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
-                }
-            }
-        }
-
-        private void mnu_SliceView_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
-            {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                SliceRecordSearchCondition con = new SliceRecordSearchCondition();
-                con.SourceRoll = sr.ID;
-                FrmSliceRecordView frm = new FrmSliceRecordView();
-                frm.SearchCondition = con;
+                Frm其它产品入库 frm = new Frm其它产品入库();
+                frm.SteelRollSlice = pi;
+                frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();
-                cMnu_Fresh.PerformClick(); //
+                ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], pi);
             }
         }
 
@@ -478,8 +353,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
                 if (sr.State == ProductInventoryState.Inventory)
                 {
-                    FrmSteelRollCheck frm = new FrmSteelRollCheck();
-                    frm.SteelRoll = sr;
+                    Frm其它产品盘点 frm = new Frm其它产品盘点();
+                    frm.ProductInventory = sr;
                     if (frm.ShowDialog() == DialogResult.OK)
                     {
                         ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
@@ -487,31 +362,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 else
                 {
-                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行盘点", ProductInventoryStateDescription.GetDescription(sr.State)));
+                    MessageBox.Show(string.Format("库存项处于 \"{0}\" 状态,不能进行盘点", ProductInventoryStateDescription.GetDescription(sr.State)));
                 }
-            }
-        }
-
-        private void mnu_CheckView_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                View.FrmSteelRollCheckRecordView frm = new FrmSteelRollCheckRecordView();
-                frm.SearchCondition = new InventoryCheckRecordSearchCondition() { SourceID = sr.ID };
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.ShowDialog();
             }
         }
 
         private void mnu_Nullify_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("是否要作废所选的原材料?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("是否要作废所选的库存项?", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     ProductInventoryItem item = row.Tag as ProductInventoryItem;
-                    if (item.State == ProductInventoryState.Inventory)
+                    if (item.State == ProductInventoryState.Inventory && item.SourceRoll == null && item.SourceID == null && item.OriginalCount == item.Count)
                     {
                         CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Nullify(item);
                         if (ret.Result == ResultCode.Successful)
@@ -529,7 +392,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void mnu_Import_Click(object sender, EventArgs e)
         {
-            FrmSteelRollImport frm = new FrmSteelRollImport();
+            Frm其它产品导入 frm = new Frm其它产品导入();
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.ShowDialog();
             cMnu_Fresh.PerformClick();
@@ -544,43 +407,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 frm.ProductInventory = pi;
                 DialogResult ret = frm.ShowDialog();
                 if (ret == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pi);
-            }
-        }
-
-        private void 预订ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (pi.State == ProductInventoryState.Inventory)
-                {
-                    FrmReserve frm = new FrmReserve();
-                    frm.ProductInventory = pi;
-                    frm.StartPosition = FormStartPosition.CenterParent;
-                    DialogResult ret = frm.ShowDialog();
-                    if (ret == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], pi);
-                }
-                else
-                {
-                    MessageBox.Show("此项不能预订");
-                }
-            }
-        }
-
-        private void 取消预订ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0 &&
-                MessageBox.Show("是否取消预订？", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-                    var pi = row.Tag as ProductInventoryItem;
-                    if (pi.State == ProductInventoryState.Reserved)
-                    {
-                        var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UnReserve(pi);
-                        if (ret.Result == ResultCode.Successful) ShowItemInGridViewRow(row, pi);
-                    }
-                }
             }
         }
 
@@ -616,7 +442,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).ChangeCost(pi, costs, Operator.Current.Name, Operator.Current.ID);
+                    var ret = new OtherProductInventoryBLL(AppSettings.Current.ConnStr).ChangeCost(pi, costs, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);
@@ -639,36 +465,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 frm.SearchCondition = con;
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();
-            }
-        }
-
-        private void mnu_原材料拆条_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
-            {
-                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (sr.State == ProductInventoryState.Inventory && (sr.Status == "整卷" || sr.Status == "余卷"))
-                {
-                    Frm原材料分条 frm = new Frm原材料分条();
-                    frm.SlicingItem = sr;
-                    frm.StartPosition = FormStartPosition.CenterParent;
-                    if (frm.ShowDialog() == DialogResult.OK)
-                    {
-                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
-                        var newR = frm.NewRolls;
-                        _SteelRolls.AddRange(newR);
-                        var row = dataGridView1.SelectedRows[0].Index;
-                        foreach (var item in newR)
-                        {
-                            dataGridView1.Rows.Insert(row, 1);
-                            ShowItemInGridViewRow(dataGridView1.Rows[row], item);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
-                }
             }
         }
         #endregion

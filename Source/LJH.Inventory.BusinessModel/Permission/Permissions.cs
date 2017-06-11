@@ -80,6 +80,12 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print | PermissionActions.查看成本, Description = "送货单资料")]
         DeliverySheet,
+
+        /// <summary>
+        /// 其它产品
+        /// </summary>
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.ShowPrice | PermissionActions.设置结算单价, Description = "其它产品")]
+        其它产品,
         #endregion
 
         #region 财务

@@ -54,6 +54,7 @@
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -243,9 +244,9 @@
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToResizeColumns = false;
             this.gridView.AllowUserToResizeRows = false;
-            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -254,6 +255,7 @@
             this.colModel,
             this.colThick,
             this.colWidth,
+            this.colSpecification,
             this.colOriginalWeight,
             this.colLength,
             this.colCount,
@@ -304,6 +306,12 @@
             this.colWidth.HeaderText = "规格宽度";
             this.colWidth.Name = "colWidth";
             this.colWidth.ReadOnly = true;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
             // 
             // colOriginalWeight
             // 
@@ -435,6 +443,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;

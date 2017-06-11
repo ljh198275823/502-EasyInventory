@@ -242,36 +242,32 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public CommandResult Nullify(ProductInventoryItem sr)
+        public virtual CommandResult Nullify(ProductInventoryItem sr)
         {
             CommandResult ret = new CommandResult(ResultCode.Fail, string.Empty);
+            if (sr.SourceID != null && sr.SourceRoll != null) return new CommandResult(ResultCode.Fail, "不是入库的库存项不能作废，可能通过盘点将库存取消");
+            var pcon = new ProductInventoryItemSearchCondition();
+            pcon.SourceID = sr.ID;
+            var pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(pcon).QueryObjects;
+            if (pis != null && pis.Count > 0) return new CommandResult(ResultCode.Fail, "库存项已经出货或进行过拆分，不能作废");
             ProductInventoryItem newVal = sr.Clone();
             newVal.State = ProductInventoryState.Nullified;
-            if (string.IsNullOrEmpty(newVal.Memo)) newVal.Memo = "废品处理";
-            else newVal.Memo += ",废品处理";
-            if (sr.Status != "整卷")
+            bool allSuccess = true;
+            CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
+            con.SheetID = sr.ID.ToString();
+            var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            if (items != null && items.Count > 0)
             {
-                ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
-            }
-            else //整卷需要将对应的应付金额和应付税款删除
-            {
-                bool allSuccess = true;
-                CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-                con.SheetID = sr.ID.ToString();
-                var items = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
-                if (items != null && items.Count > 0)
+                var bll = new CustomerReceivableBLL(RepoUri);
+                foreach (var item in items)
                 {
-                    var bll = new CustomerReceivableBLL(RepoUri);
-                    foreach (var item in items)
-                    {
-                        var t = bll.Delete(item);
-                        allSuccess = t.Result == ResultCode.Successful;
-                        if (!allSuccess) break;
-                    }
+                    var t = bll.Delete(item);
+                    allSuccess = t.Result == ResultCode.Successful;
+                    if (!allSuccess) break;
                 }
-                if (allSuccess) ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
-                else ret = new CommandResult(ResultCode.Fail, "原材料卷对应的应付款或应付税款删除失败，请重试！");
             }
+            if (allSuccess) ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr);
+            else ret = new CommandResult(ResultCode.Fail, "库存项对应的应付款或应付税款删除失败，请重试！");
             if (ret.Result == ResultCode.Successful)
             {
                 sr.State = newVal.State;

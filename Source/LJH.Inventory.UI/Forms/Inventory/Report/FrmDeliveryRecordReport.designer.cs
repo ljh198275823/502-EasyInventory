@@ -62,6 +62,7 @@
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -303,6 +304,7 @@
             this.colModel,
             this.colThick,
             this.colWidth,
+            this.colSpecification,
             this.colLength,
             this.colWeight,
             this.colPrice,
@@ -382,6 +384,12 @@
             this.colWidth.Name = "colWidth";
             this.colWidth.ReadOnly = true;
             this.colWidth.Width = 80;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
             // 
             // colLength
             // 
@@ -499,6 +507,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;

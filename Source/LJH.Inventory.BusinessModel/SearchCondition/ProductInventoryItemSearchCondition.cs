@@ -15,7 +15,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public string Model { get; set; }
 
-        public string ExcludeModel { get; set; }
+        public List<string> Models { get; set; }
 
         public string ProductID { get; set; }
 
@@ -46,6 +46,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string DeliverySheetNo { get; set; }
 
         public Guid? SourceRoll { get; set; }
+
+        public Guid? SourceID { get; set; }
 
         public decimal? OriginalWeight { get; set; }
     }

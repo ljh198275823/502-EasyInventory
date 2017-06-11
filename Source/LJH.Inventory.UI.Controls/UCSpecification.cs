@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.UI.Controls
 {
@@ -24,7 +25,9 @@ namespace LJH.Inventory.UI.Controls
             this.txtWidth.Items.Clear();
             this.txtThick.Items.Add(string.Empty);
             this.txtWidth.Items.Add(string.Empty);
-            List<string> ps = new ProductBLL(AppSettings.Current.ConnStr).GetAllSpecifications();
+            var con = new ProductSearchCondition();
+            con.Models = new List<string> { ProductModel.原材料, ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 };
+            List<string> ps = new ProductBLL(AppSettings.Current.ConnStr).GetAllSpecifications(con);
             if (ps != null && ps.Count > 0)
             {
                 var thicks = (from p in ps

@@ -76,6 +76,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(info.Product.Specification);
             row.Cells["colOriginalWeight"].Value = info.OriginalWeight;
             row.Cells["colLength"].Value = info.OriginalLength.HasValue ? info.OriginalLength : info.Product.Length;
+            row.Cells["colSpecification"].Value = info.Product.Specification;
             if (info.OriginalCount.HasValue) row.Cells["colCount"].Value = info.OriginalCount;
             row.Cells["colCustomer"].Value = info.Customer;
             row.Cells["colManufacturer"].Value = info.Manufacture;

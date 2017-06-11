@@ -37,10 +37,13 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置商品类型信息
         /// </summary>
         public ProductCategory Category { get; set; }
-        /// <summary>
-        /// 获取或设置商品型号
-        /// </summary>
-        public string Model { get; set; }
+
+        private string _Model = null;
+        public string Model
+        {
+            get { return string.IsNullOrEmpty(_Model) ? _Model : _Model.Trim(); }
+            set { _Model = value; }
+        }
         /// <summary>
         /// 获取或设置商品规格
         /// </summary>

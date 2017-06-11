@@ -130,10 +130,17 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                             var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(gid).QueryObject;
                             if (pi != null)
                             {
-                                if (pi.Product.Model == "原材料")
+                                if (pi.Product.Model == ProductModel.原材料 )
                                 {
                                     FrmSteelRollDetail frm = new FrmSteelRollDetail();
                                     frm.UpdatingItem = pi;
+                                    frm.IsForView = true;
+                                    frm.ShowDialog();
+                                }
+                                else if (pi.Product.Model == ProductModel.其它产品)
+                                {
+                                    Frm其它产品入库 frm = new Frm其它产品入库();
+                                    frm.SteelRollSlice = pi;
                                     frm.IsForView = true;
                                     frm.ShowDialog();
                                 }

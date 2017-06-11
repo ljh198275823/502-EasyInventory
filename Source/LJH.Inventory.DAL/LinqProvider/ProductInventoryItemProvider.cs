@@ -41,7 +41,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 ProductInventoryItemSearchCondition con = search as ProductInventoryItemSearchCondition;
                 if (!string.IsNullOrEmpty(con.Model)) ret = ret.Where(item => item.A.Model == con.Model);
-                if (!string.IsNullOrEmpty(con.ExcludeModel)) ret = ret.Where(item => item.A.Model != con.ExcludeModel);
+                if (con.Models != null && con.Models.Count > 0) ret = ret.Where(item => con.Models.Contains(item.A.Model));
                 if (con.AddDateRange != null) ret = ret.Where(item => item.A.AddDate >= con.AddDateRange.Begin && item.A.AddDate <= con.AddDateRange.End);
                 if (con.Products != null && con.Products.Count > 0) ret = ret.Where(item => con.Products.Contains(item.A.ProductID));
                 if (con.IDS != null && con.IDS.Count > 0) ret = ret.Where(item => con.IDS.Contains(item.A.ID));
@@ -56,6 +56,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (con.DeliveryItem != null) ret = ret.Where(item => item.A.DeliveryItem == con.DeliveryItem);
                 if (!string.IsNullOrEmpty(con.DeliverySheetNo)) ret = ret.Where(item => item.A.DeliverySheet == con.DeliverySheetNo);
                 if (con.SourceRoll.HasValue) ret = ret.Where(item => item.A.SourceRoll == con.SourceRoll);
+                if (con.SourceID.HasValue) ret = ret.Where(item => item.A.SourceID == con.SourceID.Value);
                 if (con.OriginalWeight.HasValue) ret = ret.Where(it => it.A.OriginalWeight == con.OriginalWeight);
                 if (con.HasRemain) ret = ret.Where(item => item.A.Count > 0);
                 if (con.States != null && con.States.Count > 0) ret = ret.Where(it => con.States.Contains(it.A.State));

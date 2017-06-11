@@ -110,6 +110,7 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_选择其它产品 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -137,36 +138,37 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_AddSlice,
             this.mnu_AddSteelRoll,
+            this.mnu_选择其它产品,
             this.其它费用ToolStripMenuItem,
             this.mnu_RemoveItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 136);
             // 
             // btn_AddSlice
             // 
             this.btn_AddSlice.Name = "btn_AddSlice";
-            this.btn_AddSlice.Size = new System.Drawing.Size(136, 22);
+            this.btn_AddSlice.Size = new System.Drawing.Size(152, 22);
             this.btn_AddSlice.Text = "选择小件";
             this.btn_AddSlice.Click += new System.EventHandler(this.btn_AddSlice_Click);
             // 
             // mnu_AddSteelRoll
             // 
             this.mnu_AddSteelRoll.Name = "mnu_AddSteelRoll";
-            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(136, 22);
+            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(152, 22);
             this.mnu_AddSteelRoll.Text = "选择原材料";
             this.mnu_AddSteelRoll.Click += new System.EventHandler(this.mnu_AddSteelRoll_Click);
             // 
             // 其它费用ToolStripMenuItem
             // 
             this.其它费用ToolStripMenuItem.Name = "其它费用ToolStripMenuItem";
-            this.其它费用ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.其它费用ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.其它费用ToolStripMenuItem.Text = "其它费用";
             this.其它费用ToolStripMenuItem.Click += new System.EventHandler(this.其它费用ToolStripMenuItem_Click);
             // 
             // mnu_RemoveItem
             // 
             this.mnu_RemoveItem.Name = "mnu_RemoveItem";
-            this.mnu_RemoveItem.Size = new System.Drawing.Size(136, 22);
+            this.mnu_RemoveItem.Size = new System.Drawing.Size(152, 22);
             this.mnu_RemoveItem.Text = "删除";
             this.mnu_RemoveItem.Click += new System.EventHandler(this.mnu_Remove_Click);
             // 
@@ -881,6 +883,13 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
+            // mnu_选择其它产品
+            // 
+            this.mnu_选择其它产品.Name = "mnu_选择其它产品";
+            this.mnu_选择其它产品.Size = new System.Drawing.Size(152, 22);
+            this.mnu_选择其它产品.Text = "选择其它产品";
+            this.mnu_选择其它产品.Click += new System.EventHandler(this.mnu_选择其它产品_Click);
+            // 
             // FrmStackOutSheetDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -997,5 +1006,6 @@
         private System.Windows.Forms.Label lbl国税计提;
         private System.Windows.Forms.Label lbl产品成本;
         private System.Windows.Forms.Label lbl销售金额;
+        private System.Windows.Forms.ToolStripMenuItem mnu_选择其它产品;
     }
 }

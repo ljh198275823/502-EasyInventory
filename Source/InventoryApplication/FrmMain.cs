@@ -243,6 +243,7 @@ namespace InventoryApplication
             this.mnu_Customer.Enabled = cur.Permit(Permission.Customer, PermissionActions.Read) || cur.Permit(Permission.Customer, PermissionActions.Edit);
             this.mnu_Supplier.Enabled = cur.Permit(Permission.Supplier, PermissionActions.Read) || cur.Permit(Permission.Supplier, PermissionActions.Edit);
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
+            this.mnu_其它产品库存.Enabled = cur.Permit(Permission.其它产品, PermissionActions.Read) || cur.Permit(Permission.其它产品, PermissionActions.Edit);
             //财务
             this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
             this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
@@ -596,6 +597,11 @@ namespace InventoryApplication
         private void mnu_客户往来报表_详细版_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.Frm客户往来报表详细>(null);
+        }
+
+        private void mnu_其它产品库存_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<LJH.Inventory.UI.Forms.Inventory.Frm其它产品库存>(sender);
         }
     }
 }

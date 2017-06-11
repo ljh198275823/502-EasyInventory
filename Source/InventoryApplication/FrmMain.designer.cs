@@ -34,6 +34,7 @@
             this.商务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_SteelRoll = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_SteelRollSlice = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_其它产品库存 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeliverySheet = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_Customer = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +62,7 @@
             this.mnu_PaymentReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_TaxBillReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_客户往来报表_详细版 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_供应商往来报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_System = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,7 +92,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tmrSoftDogChecker = new System.Windows.Forms.Timer(this.components);
-            this.mnu_客户往来报表_详细版 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -123,6 +124,7 @@
             this.商务ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_SteelRoll,
             this.mnu_SteelRollSlice,
+            this.mnu_其它产品库存,
             this.mnu_DeliverySheet,
             this.toolStripSeparator16,
             this.mnu_Customer,
@@ -138,7 +140,7 @@
             // 
             this.mnu_SteelRoll.Enabled = false;
             this.mnu_SteelRoll.Name = "mnu_SteelRoll";
-            this.mnu_SteelRoll.Size = new System.Drawing.Size(136, 22);
+            this.mnu_SteelRoll.Size = new System.Drawing.Size(152, 22);
             this.mnu_SteelRoll.Text = "原材料管理";
             this.mnu_SteelRoll.Click += new System.EventHandler(this.mnu_Material_Click);
             // 
@@ -146,28 +148,36 @@
             // 
             this.mnu_SteelRollSlice.Enabled = false;
             this.mnu_SteelRollSlice.Name = "mnu_SteelRollSlice";
-            this.mnu_SteelRollSlice.Size = new System.Drawing.Size(136, 22);
+            this.mnu_SteelRollSlice.Size = new System.Drawing.Size(152, 22);
             this.mnu_SteelRollSlice.Text = "小件管理";
             this.mnu_SteelRollSlice.Click += new System.EventHandler(this.mnu_Inventory_Click);
+            // 
+            // mnu_其它产品库存
+            // 
+            this.mnu_其它产品库存.Enabled = false;
+            this.mnu_其它产品库存.Name = "mnu_其它产品库存";
+            this.mnu_其它产品库存.Size = new System.Drawing.Size(152, 22);
+            this.mnu_其它产品库存.Text = "其它产品库存";
+            this.mnu_其它产品库存.Click += new System.EventHandler(this.mnu_其它产品库存_Click);
             // 
             // mnu_DeliverySheet
             // 
             this.mnu_DeliverySheet.Enabled = false;
             this.mnu_DeliverySheet.Name = "mnu_DeliverySheet";
-            this.mnu_DeliverySheet.Size = new System.Drawing.Size(136, 22);
+            this.mnu_DeliverySheet.Size = new System.Drawing.Size(152, 22);
             this.mnu_DeliverySheet.Text = "送货单管理";
             this.mnu_DeliverySheet.Click += new System.EventHandler(this.mnu_DeliverySheet_Click);
             // 
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(133, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(149, 6);
             // 
             // mnu_Customer
             // 
             this.mnu_Customer.Enabled = false;
             this.mnu_Customer.Name = "mnu_Customer";
-            this.mnu_Customer.Size = new System.Drawing.Size(136, 22);
+            this.mnu_Customer.Size = new System.Drawing.Size(152, 22);
             this.mnu_Customer.Text = "客户资料";
             this.mnu_Customer.Click += new System.EventHandler(this.mnu_Customer_Click);
             // 
@@ -175,7 +185,7 @@
             // 
             this.mnu_Supplier.Enabled = false;
             this.mnu_Supplier.Name = "mnu_Supplier";
-            this.mnu_Supplier.Size = new System.Drawing.Size(136, 22);
+            this.mnu_Supplier.Size = new System.Drawing.Size(152, 22);
             this.mnu_Supplier.Text = "供应商资料";
             this.mnu_Supplier.Click += new System.EventHandler(this.mnu_Supplier_Click);
             // 
@@ -183,14 +193,14 @@
             // 
             this.mnu_WareHouse.Enabled = false;
             this.mnu_WareHouse.Name = "mnu_WareHouse";
-            this.mnu_WareHouse.Size = new System.Drawing.Size(136, 22);
+            this.mnu_WareHouse.Size = new System.Drawing.Size(152, 22);
             this.mnu_WareHouse.Text = "仓库资料";
             this.mnu_WareHouse.Click += new System.EventHandler(this.mnu_WareHouse_Click_1);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(133, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // toolStripSeparator9
             // 
@@ -360,6 +370,14 @@
             this.mnu_客户往来报表.Size = new System.Drawing.Size(189, 22);
             this.mnu_客户往来报表.Text = "客户往来报表";
             this.mnu_客户往来报表.Click += new System.EventHandler(this.mnu_客户往来报表_Click);
+            // 
+            // mnu_客户往来报表_详细版
+            // 
+            this.mnu_客户往来报表_详细版.Enabled = false;
+            this.mnu_客户往来报表_详细版.Name = "mnu_客户往来报表_详细版";
+            this.mnu_客户往来报表_详细版.Size = new System.Drawing.Size(189, 22);
+            this.mnu_客户往来报表_详细版.Text = "客户往来报表_详细版";
+            this.mnu_客户往来报表_详细版.Click += new System.EventHandler(this.mnu_客户往来报表_详细版_Click);
             // 
             // mnu_供应商往来报表
             // 
@@ -598,14 +616,6 @@
             this.tmrSoftDogChecker.Interval = 60000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
             // 
-            // mnu_客户往来报表_详细版
-            // 
-            this.mnu_客户往来报表_详细版.Enabled = false;
-            this.mnu_客户往来报表_详细版.Name = "mnu_客户往来报表_详细版";
-            this.mnu_客户往来报表_详细版.Size = new System.Drawing.Size(189, 22);
-            this.mnu_客户往来报表_详细版.Text = "客户往来报表_详细版";
-            this.mnu_客户往来报表_详细版.Click += new System.EventHandler(this.mnu_客户往来报表_详细版_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -698,5 +708,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_供应商往来报表;
         private System.Windows.Forms.ToolStripMenuItem mnu_公司管理费用;
         private System.Windows.Forms.ToolStripMenuItem mnu_客户往来报表_详细版;
+        private System.Windows.Forms.ToolStripMenuItem mnu_其它产品库存;
     }
 }

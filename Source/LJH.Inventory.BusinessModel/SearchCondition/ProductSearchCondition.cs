@@ -29,6 +29,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public List<string> ProductIDS { get; set; }
 
         public bool? IsService { get; set; }
+
+        public List<string> Models { get; set; }
         #endregion
     }
 }

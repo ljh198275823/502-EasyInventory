@@ -91,6 +91,7 @@
     <Compile Include="CustomerTypeBLL.cs" />
     <Compile Include="DatetimeSyncService.cs" />
     <Compile Include="InventoryCheckRecordBLL.cs" />
+    <Compile Include="OtherProductInventoryBLL.cs" />
     <Compile Include="OtherReceivableSheetBLL.cs" />
     <Compile Include="StackOutSheetBLL.cs" />
     <Compile Include="DepartmentBLL.cs" />

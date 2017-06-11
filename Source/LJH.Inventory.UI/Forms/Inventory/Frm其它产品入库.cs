@@ -16,9 +16,9 @@ using LJH.Inventory.UI.Forms.General;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmSteelRollSliceStackIn : Form
+    public partial class Frm其它产品入库 : Form
     {
-        public FrmSteelRollSliceStackIn()
+        public Frm其它产品入库()
         {
             InitializeComponent();
         }
@@ -36,9 +36,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 私有方法
         private void InitControls()
         {
-            cmbSpecification.Init();
+            cmbSpecification.Init(new List<string> { ProductModel.其它产品 });
             dtStorageDateTime.Value = DateTime.Now;
-            txtMaterial.Init();
             if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultWarehouse))
             {
                 List<WareHouse> ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
@@ -47,16 +46,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     txtWareHouse.Text = w.Name;
                     txtWareHouse.Tag = w;
-                }
-            }
-            if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultProductCategory))
-            {
-                List<ProductCategory> cs = new ProductCategoryBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-                var c = cs.FirstOrDefault(it => it.Name == UserSettings.Current.DefaultProductCategory);
-                if (c != null)
-                {
-                    txtCategory.Text = c.Name;
-                    txtCategory.Tag = c;
                 }
             }
             if (UserSettings.Current != null) txtCustomer.Text = UserSettings.Current.DefaultCustomer;
@@ -73,30 +62,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void ShowProduct(Product product)
         {
-            cmbSpecification.Specification = product.Specification;
+            cmbSpecification.Text = product.Specification;
             txtCategory.Text = product.Category.Name;
             txtCategory.Tag = product.Category;
-            rd开平.Checked = product.Model == rd开平.Text;
-            rd开卷.Checked = product.Model == rd开卷.Text;
-            rd开吨.Checked = product.Model == rd开吨.Text;
             txtLength.DecimalValue = product.Length.HasValue ? product.Length.Value : 0;
-            txtWeight.DecimalValue = product.Weight.HasValue ? product.Weight.Value : 0;
-            decimal? thick = SpecificationHelper.GetWrittenThick(product.Specification);
         }
 
         private Product CreateProduct()
         {
-            string sliceTo = null;
-            if (rd开平.Checked) sliceTo = rd开平.Text;
-            else if (rd开卷.Checked) sliceTo = rd开卷.Text;
-            else if (rd开吨.Checked) sliceTo = rd开吨.Text;
-            decimal? weight = null;
-            if (rd单件重.Checked) weight = txtWeight.DecimalValue != 0 ? (decimal?)txtWeight.DecimalValue : null;
             return new ProductBLL(AppSettings.Current.ConnStr).Create(
                              (txtCategory.Tag as ProductCategory).ID,
-                             StringHelper.ToDBC(cmbSpecification.Specification).Trim(),
-                             sliceTo,
-                             weight,
+                             StringHelper.ToDBC(cmbSpecification.Text).Trim(),
+                             ProductModel.其它产品,
+                             null,
                              txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null,
                              7.85m);
 
@@ -109,19 +87,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有选择类别");
                 return false;
             }
-            if (string.IsNullOrEmpty(cmbSpecification.Specification))
+            if (string.IsNullOrEmpty(cmbSpecification.Text))
             {
                 MessageBox.Show("没有指定规格");
-                return false;
-            }
-            if (!rd开平.Checked && !rd开卷.Checked && !rd开吨.Checked)
-            {
-                MessageBox.Show("没有指定加工类型");
-                return false;
-            }
-            if (SpecificationHelper.GetWrittenThick(cmbSpecification.Specification) == null || SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification) == null)
-            {
-                MessageBox.Show("规格设置不正确,  规格格式为 \"厚度*宽度\" ");
                 return false;
             }
             if (txtWareHouse.Tag == null)
@@ -129,24 +97,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有选择仓库");
                 txtWareHouse.Focus();
                 return false;
-            }
-            if (rd开吨.Checked && txtWeight.DecimalValue <= 0)
-            {
-                MessageBox.Show("没有设置重量");
-                return false;
-            }
-            if (txtWeight.DecimalValue > 0 && !rd总重.Checked && !rd单件重.Checked)
-            {
-                MessageBox.Show("重量没有指定是总重还是单件重量");
-                return false;
-            }
-            if (rd开平.Checked || rd开卷.Checked)
-            {
-                if (txtLength.DecimalValue <= 0)
-                {
-                    MessageBox.Show("开平和开卷小件没有设置长度");
-                    return false;
-                }
             }
             if (txtCount.DecimalValue == 0)
             {
@@ -168,12 +118,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 MessageBox.Show("没有输入厂商");
                 cmbBrand.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtMaterial.Text) && UserSettings.Current.NeedMaterial)
-            {
-                MessageBox.Show("请输入产品材质");
-                txtMaterial.Focus();
                 return false;
             }
             if (txtPurchasePrice.DecimalValue > 0 && !rdWithoutTax__入库单价.Checked && !rdWithTax_入库单价.Checked)
@@ -202,20 +146,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtWareHouse.Tag = ws;
             txtCategory.Text = item.Product.Category.Name;
             txtCategory.Tag = item.Product.Category;
-            cmbSpecification.Specification = item.Product.Specification;
-            if (item.Product.Model == rd开平.Text) rd开平.Checked = true;
-            if (item.Product.Model == rd开卷.Text) rd开卷.Checked = true;
-            if (item.Product.Model == rd开吨.Text) rd开吨.Checked = true;
-            if (item.Product.Weight.HasValue)
-            {
-                txtWeight.DecimalValue = item.Product.Weight.Value;
-                rd单件重.Checked = true;
-            }
-            else if (item.OriginalWeight.HasValue)
-            {
-                txtWeight.DecimalValue = item.OriginalWeight.Value;
-                rd总重.Checked = true;
-            }
+            cmbSpecification.Text = item.Product.Specification;
+            if (item.Weight.HasValue) txtWeight.DecimalValue = item.Weight.Value;
             if (item.Product.Length.HasValue) txtLength.DecimalValue = item.Product.Length.Value;
             txtCount.DecimalValue = item.Count;
             txtCustomer.Text = item.Customer;
@@ -246,12 +178,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
             txtPosition.Text = item.Position;
             txtCarPlate.Text = item.Carplate;
-            txtMaterial.Text = item.Material;
             txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
             if (!IsForView)
             {
-                btnOk.Enabled = item.Count == item.OriginalCount; //出过货或拆过包不能修改
+                if (item.SourceID != null && item.SourceRoll != null) btnOk.Enabled = false;
+                else btnOk.Enabled = item.Count == item.OriginalCount; //出过货或拆过包不能修改
             }
             else
             {
@@ -265,11 +197,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             InitControls();
             if (SteelRollSlice != null) ShowItem(SteelRollSlice);
-        }
-
-        private void rdSliceType_CheckedChanged(object sender, EventArgs e)
-        {
-            rd总重.Checked = rd开平.Checked;
         }
 
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -344,46 +271,38 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return;
             }
 
-            ProductInventoryItem item = SteelRollSlice;
-            if (item == null)
+            bool isAdding = false;
+            if (SteelRollSlice == null)
             {
-                item = new ProductInventoryItem();
-                item.ID = Guid.NewGuid();
-                item.OriginalWeight = rd总重.Checked ? txtWeight.DecimalValue : txtWeight.DecimalValue * txtCount.DecimalValue; //区分总重和单重
-                item.OriginalCount = txtCount.DecimalValue;
-                if ((p.Model == ProductModel.开平 || p.Model == ProductModel.开卷) && item.Weight > 0)
-                {
-                    item.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Weight.Value, p.Length.Value * item.Count, p.Density.Value); //指定长度时计算入库厚度
-                }
-                else
-                {
-                    item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
-                }
+                SteelRollSlice = new ProductInventoryItem();
+                SteelRollSlice.ID = Guid.NewGuid();
+                SteelRollSlice.OriginalWeight = txtWeight.DecimalValue;
+                SteelRollSlice.OriginalCount = txtCount.DecimalValue;
+                isAdding = true;
             }
-            item.Product = p;
-            item.ProductID = p.ID;
-            item.Model = p.Model;
-            item.AddDate = dtStorageDateTime.Value;
-            item.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
-            item.Weight = rd总重.Checked ? txtWeight.DecimalValue : txtWeight.DecimalValue * txtCount.DecimalValue; //区分总重和单重
-            item.Count = txtCount.DecimalValue;
-            item.Unit = "件";
-            item.State = ProductInventoryState.Inventory;
-            item.Customer = txtCustomer.Text;
-            if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
-            item.Manufacture = cmbBrand.Text;
-            item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
-            item.SetCost(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = rdWithTax_运费.Checked, Prepay = chkTransCostPrepay.Checked });
-            item.SetCost(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = rdWithTax_其它费用.Checked, Prepay = chkOtherCostPrepay.Checked });
-            item.Position = txtPosition.Text;
-            item.Material = txtMaterial.Text;
-            item.PurchaseID = txtPurchaseID.Text;
-            item.Carplate = txtCarPlate.Text;
-            item.Memo = txtMemo.Text;
-            item.Operator = Operator.Current.Name;
+            SteelRollSlice.Product = p;
+            SteelRollSlice.ProductID = p.ID;
+            SteelRollSlice.Model = p.Model;
+            SteelRollSlice.AddDate = dtStorageDateTime.Value;
+            SteelRollSlice.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
+            SteelRollSlice.Weight = txtWeight.DecimalValue;
+            SteelRollSlice.Count = txtCount.DecimalValue;
+            SteelRollSlice.Unit = "件";
+            SteelRollSlice.State = ProductInventoryState.Inventory;
+            SteelRollSlice.Customer = txtCustomer.Text;
+            if (txtSupplier.Tag != null) SteelRollSlice.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
+            SteelRollSlice.Manufacture = cmbBrand.Text;
+            SteelRollSlice.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
+            SteelRollSlice.SetCost(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = rdWithTax_运费.Checked, Prepay = chkTransCostPrepay.Checked });
+            SteelRollSlice.SetCost(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = rdWithTax_其它费用.Checked, Prepay = chkOtherCostPrepay.Checked });
+            SteelRollSlice.Position = txtPosition.Text;
+            SteelRollSlice.PurchaseID = txtPurchaseID.Text;
+            SteelRollSlice.Carplate = txtCarPlate.Text;
+            SteelRollSlice.Memo = txtMemo.Text;
+            SteelRollSlice.Operator = Operator.Current.Name;
             CommandResult ret = null;
-            if (SteelRollSlice == null) ret = new SteelRollSliceBLL(AppSettings.Current.ConnStr).Add(item);
-            else ret = new SteelRollSliceBLL(AppSettings.Current.ConnStr).Update(item);
+            if (isAdding) ret = new OtherProductInventoryBLL(AppSettings.Current.ConnStr).Add(SteelRollSlice);
+            else ret = new OtherProductInventoryBLL(AppSettings.Current.ConnStr).Update(SteelRollSlice);
             if (ret.Result == ResultCode.Successful)
             {
                 this.DialogResult = DialogResult.OK;

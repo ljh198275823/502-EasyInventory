@@ -12,5 +12,6 @@ namespace LJH.Inventory.BusinessModel
         public static readonly string 开卷 = "开卷";
         public static readonly string 开条 = "开条";
         public static readonly string 开吨 = "开吨";
+        public static readonly string 其它产品 = "其它产品";
     }
 }

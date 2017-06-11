@@ -68,7 +68,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.Init();
             this.wareHouseComboBox1.Init();
-            this.cmbSpecification.Init();
+            this.cmbSpecification.Init(new List<string> { ProductModel.原材料, ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 });
             this.categoryComboBox1.Init();
             this.customerCombobox1.Init();
         }

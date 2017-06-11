@@ -9,50 +9,36 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class SteelRollSliceBLL:ProductInventoryItemBLL 
+    public class OtherProductInventoryBLL:ProductInventoryItemBLL 
     {
         #region 构造函数
-        public SteelRollSliceBLL(string repoUri)
+        public OtherProductInventoryBLL(string repoUri)
             : base(repoUri)
         {
         }
         #endregion
 
-        private static List<string> MODELS = new List<string>() { ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 };
+        private static string MODEL = ProductModel.其它产品;
 
-        #region 公共方法
-        public QueryResultList<SteelRollSlice> GetSteelRollSlices(SearchCondition con)
-        {
-            List<SteelRollSlice> items = null;
-            QueryResultList<ProductInventoryItem> ret = GetItems(con);
-            if (ret.QueryObjects != null && ret.QueryObjects.Count > 0)
-            {
-                var gs = from it in ret.QueryObjects
-                         group it by new { it.ProductID };
-                foreach (var g in gs)
-                {
-                    if (items == null) items = new List<SteelRollSlice>();
-                    SteelRollSlice srs = new SteelRollSlice();
-                    srs.ID = Guid.Empty;
-                    srs.Product = g.First().Product;
-                    srs.Unit = g.First().Unit;
-                    srs.WaitShipping = g.Sum(it => it.State == ProductInventoryState.WaitShipping ? it.Count : 0);
-                    srs.Reserved = g.Sum(it => it.State == ProductInventoryState.Reserved ? it.Count : 0);
-                    srs.Valid = g.Sum(it => it.State == ProductInventoryState.Inventory ? it.Count : 0);
-                    items.Add(srs);
-                }
-            }
-            return new QueryResultList<SteelRollSlice>(ret.Result, ret.Message, items);
-        }
-
+        #region 重写基类方法
         public override QueryResultList<ProductInventoryItem> GetItems(SearchCondition con)
         {
-            if (con == null) con = new ProductInventoryItemSearchCondition();
-            if (con is ProductInventoryItemSearchCondition) (con as ProductInventoryItemSearchCondition).Models = MODELS;  //排除原材料库存项
+            if (con == null)
+            {
+                con = new ProductInventoryItemSearchCondition() { Model = MODEL, HasRemain = true };
+            }
+            else if (con is ProductInventoryItemSearchCondition)
+            {
+                (con as ProductInventoryItemSearchCondition).Model = MODEL;
+                (con as ProductInventoryItemSearchCondition).HasRemain = true;
+            }
             var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con);
+            if (ret.QueryObjects != null) ret.QueryObjects = ret.QueryObjects.Where(it => it.Count != 0).ToList();
             return ret;
         }
+        #endregion
 
+        #region 公共方法
         /// <summary>
         /// 盘点
         /// </summary>
@@ -68,7 +54,7 @@ namespace LJH.Inventory.BLL
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 ProductInventoryItem clone = info.Clone();
                 decimal? uw = info.UnitWeight;
-                if (uw != null) clone.Weight = newCount * uw; 
+                if (uw != null) clone.Weight = newCount * uw;
                 clone.Count = newCount;
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, info, unitWork);
 
@@ -101,6 +87,7 @@ namespace LJH.Inventory.BLL
                 return new CommandResult(ResultCode.Fail, ex.Message);
             }
         }
+
         /// <summary>
         /// 拆包
         /// </summary>
