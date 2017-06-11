@@ -71,7 +71,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             var scon = new StackOutRecordSearchCondition();
             scon.States = new List<SheetState>() { SheetState.Shipped };
             scon.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
-            var fs = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetDeliveryRecords(con).QueryObjects;
+            var fs = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetDeliveryRecords(scon).QueryObjects;
             if (fs != null)
             {
                 _Records = new Dictionary<string, List<StackOutRecord>>();
@@ -90,26 +90,29 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             //ret.Add(first);
             foreach (var it in rs)
             {
-                if (!_Records.ContainsKey(it.SheetID)) ret.Add(new 客户往来项详细() { Name = it.CreateDate.ToString("yyyy-MM-dd"), CreateDate = it.CreateDate, 单据编号 = it.SheetID, 出货 = it.Amount, Memo = it.Memo });
-                else
+                if (it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime)
                 {
-                    var ftemp = from sr in _Records[it.SheetID] orderby sr.AddDate ascending group sr by sr.ProductID; //送货单每项分开
-                    foreach (var g in ftemp)
+                    if (!_Records.ContainsKey(it.SheetID)) ret.Add(new 客户往来项详细() { Name = it.CreateDate.ToString("yyyy-MM-dd"), CreateDate = it.CreateDate, 单据编号 = it.SheetID, 出货 = it.Amount, Memo = it.Memo });
+                    else
                     {
-                        var item = new 客户往来项详细()
+                        var ftemp = from sr in _Records[it.SheetID] orderby sr.AddDate ascending group sr by sr.ProductID; //送货单每项分开
+                        foreach (var g in ftemp)
                         {
-                            Name = it.CreateDate.ToString("yyyy-MM-dd"),
-                            CreateDate = it.CreateDate,
-                            单据编号 = it.SheetID,
-                            送货单项增加时间 = g.First().AddDate,
-                            规格 = g.First().Product.Specification,
-                            产品种类 = g.First().Product.Model == "原材料" ? "卷" : g.First().Product.Model,
-                            重量 = g.First().Weight,
-                            单价 = g.First().Price,
-                            出货 = g.Sum(i => i.Amount),
-                            Memo = it.Memo
-                        };
-                        ret.Add(item);
+                            var item = new 客户往来项详细()
+                            {
+                                Name = it.CreateDate.ToString("yyyy-MM-dd"),
+                                CreateDate = it.CreateDate,
+                                单据编号 = it.SheetID,
+                                送货单项增加时间 = g.First().AddDate,
+                                规格 = g.First().Product.Specification,
+                                产品种类 = g.First().Product.Model == "原材料" ? "卷" : g.First().Product.Model,
+                                重量 = g.First().Weight,
+                                单价 = g.First().Price,
+                                出货 = g.Sum(i => i.Amount),
+                                Memo = it.Memo
+                            };
+                            ret.Add(item);
+                        }
                     }
                 }
             }

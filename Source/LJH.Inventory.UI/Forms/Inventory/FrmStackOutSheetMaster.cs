@@ -230,7 +230,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             if (Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.查看成本))
             {
-                row.Cells["colCosts"].Value = sheet.Costs.Value;
+                if (sheet.Costs.HasValue) row.Cells["colCosts"].Value = sheet.Costs.Value;
                 if (sheet.WithTax) row.Cells["col国税计提"].Value = sheet.Amount * UserSettings.Current.国税系数;
                 row.Cells["col毛利"].Value = sheet.Profit;
             }
