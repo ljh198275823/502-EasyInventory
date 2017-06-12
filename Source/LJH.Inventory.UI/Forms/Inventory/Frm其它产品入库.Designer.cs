@@ -510,11 +510,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 23);
+            this.label9.Location = new System.Drawing.Point(39, 23);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 12);
+            this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 94;
-            this.label9.Text = "入库单价(/吨)";
+            this.label9.Text = "入库单价";
             // 
             // txtPurchasePrice
             // 
@@ -539,20 +539,20 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 93);
+            this.label11.Location = new System.Drawing.Point(39, 93);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(83, 12);
+            this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 96;
-            this.label11.Text = "其它费用(/吨)";
+            this.label11.Text = "其它费用";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(36, 58);
+            this.label12.Location = new System.Drawing.Point(63, 58);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(59, 12);
+            this.label12.Size = new System.Drawing.Size(29, 12);
             this.label12.TabIndex = 95;
-            this.label12.Text = "运费(/吨)";
+            this.label12.Text = "运费";
             // 
             // txtTransCost
             // 

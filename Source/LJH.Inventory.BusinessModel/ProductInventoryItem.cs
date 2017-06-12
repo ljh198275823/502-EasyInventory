@@ -286,19 +286,13 @@ namespace LJH.Inventory.BusinessModel
             else ret += uw.Value * Count * ci.Price;
             if (withOtherCosts)
             {
-                if (Model == ProductModel.其它产品 && UnitWeight == null) //如果没法计算单重，就没法把其它的运费，和其它费用统计出来
+                foreach (var fc in _CostItems)
                 {
-                }
-                else
-                {
-                    foreach (var fc in _CostItems)
+                    if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay)
                     {
-                        if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay)
-                        {
-                            if (OriginalWeight.HasValue) ret += OriginalWeight.Value * fc.Price; //计算应收时应该以入库重量为准
-                            else if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * fc.Price;
-                            else ret += uw.Value * Count * fc.Price;
-                        }
+                        if (OriginalWeight.HasValue) ret += OriginalWeight.Value * fc.Price; //计算应收时应该以入库重量为准
+                        else if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * fc.Price;
+                        else ret += uw.Value * Count * fc.Price;
                     }
                 }
             }
@@ -346,20 +340,14 @@ namespace LJH.Inventory.BusinessModel
                     else if (!withTax && !ci.WithTax) ret += uw.Value * ci.Price;
                 }
             }
-            if (Model == ProductModel.其它产品 && UnitWeight == null) //如果没法计算单重，就没法把其它的运费，和其它费用统计出来
+            foreach (var fc in _CostItems)
             {
-            }
-            else
-            {
-                foreach (var fc in _CostItems)
+                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
                 {
-                    if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
-                    {
-                        if (withTax && fc.WithTax) ret += uw.Value * fc.Price;
-                        else if (withTax && !fc.WithTax) ret += uw.Value * fc.Price * (1 + txtRate);
-                        else if (!withTax && fc.WithTax) ret += uw.Value * fc.Price * (1 - txtRate);
-                        else if (!withTax && !fc.WithTax) ret += uw.Value * fc.Price;
-                    }
+                    if (withTax && fc.WithTax) ret += uw.Value * fc.Price;
+                    else if (withTax && !fc.WithTax) ret += uw.Value * fc.Price * (1 + txtRate);
+                    else if (!withTax && fc.WithTax) ret += uw.Value * fc.Price * (1 - txtRate);
+                    else if (!withTax && !fc.WithTax) ret += uw.Value * fc.Price;
                 }
             }
             return ret;

@@ -215,15 +215,15 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(38, 23);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 12);
+            this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 94;
-            this.label9.Text = "入库单价(/吨)";
+            this.label9.Text = "入库单价";
             // 
             // txtPurchasePrice
             // 
             this.txtPurchasePrice.Enabled = false;
             this.txtPurchasePrice.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPurchasePrice.Location = new System.Drawing.Point(125, 19);
+            this.txtPurchasePrice.Location = new System.Drawing.Point(97, 19);
             this.txtPurchasePrice.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -236,7 +236,7 @@
             0});
             this.txtPurchasePrice.Name = "txtPurchasePrice";
             this.txtPurchasePrice.PointCount = 2;
-            this.txtPurchasePrice.Size = new System.Drawing.Size(122, 21);
+            this.txtPurchasePrice.Size = new System.Drawing.Size(150, 21);
             this.txtPurchasePrice.TabIndex = 98;
             this.txtPurchasePrice.Text = "0";
             // 
@@ -245,24 +245,24 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(38, 93);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(83, 12);
+            this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 96;
-            this.label11.Text = "其它费用(/吨)";
+            this.label11.Text = "其它费用";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(62, 58);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 12);
+            this.label10.Size = new System.Drawing.Size(29, 12);
             this.label10.TabIndex = 95;
-            this.label10.Text = "运费(/吨)";
+            this.label10.Text = "运费";
             // 
             // txtTransCost
             // 
             this.txtTransCost.Enabled = false;
             this.txtTransCost.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtTransCost.Location = new System.Drawing.Point(125, 54);
+            this.txtTransCost.Location = new System.Drawing.Point(97, 54);
             this.txtTransCost.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -275,7 +275,7 @@
             0});
             this.txtTransCost.Name = "txtTransCost";
             this.txtTransCost.PointCount = 2;
-            this.txtTransCost.Size = new System.Drawing.Size(122, 21);
+            this.txtTransCost.Size = new System.Drawing.Size(150, 21);
             this.txtTransCost.TabIndex = 97;
             this.txtTransCost.Text = "0";
             // 
@@ -283,7 +283,7 @@
             // 
             this.txtOtherCost.Enabled = false;
             this.txtOtherCost.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtOtherCost.Location = new System.Drawing.Point(125, 89);
+            this.txtOtherCost.Location = new System.Drawing.Point(97, 89);
             this.txtOtherCost.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -296,7 +296,7 @@
             0});
             this.txtOtherCost.Name = "txtOtherCost";
             this.txtOtherCost.PointCount = 2;
-            this.txtOtherCost.Size = new System.Drawing.Size(122, 21);
+            this.txtOtherCost.Size = new System.Drawing.Size(150, 21);
             this.txtOtherCost.TabIndex = 99;
             this.txtOtherCost.Text = "0";
             // 
@@ -325,7 +325,7 @@
             // btnOk1
             // 
             this.btnOk1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk1.Location = new System.Drawing.Point(239, 152);
+            this.btnOk1.Location = new System.Drawing.Point(239, 148);
             this.btnOk1.Name = "btnOk1";
             this.btnOk1.Size = new System.Drawing.Size(126, 35);
             this.btnOk1.TabIndex = 147;
@@ -337,7 +337,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(401, 152);
+            this.btnClose.Location = new System.Drawing.Point(401, 148);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(126, 35);
             this.btnClose.TabIndex = 149;
@@ -349,7 +349,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 210);
+            this.ClientSize = new System.Drawing.Size(539, 206);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.pnlCost);
             this.Controls.Add(this.btnOk1);
