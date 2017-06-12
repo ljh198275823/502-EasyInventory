@@ -136,103 +136,7 @@ namespace LJH.Inventory.BusinessModel
         public string Memo { get; set; }
         #endregion
 
-        #region 扩展属性
-        public Guid? CostID { get; set; }
-        public string Costs;
-
-        private List<CostItem> _CostItems = null;
-
-        public CostItem GetCost(string key)
-        {
-            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
-            if (_CostItems == null) return null;
-            var ret = _CostItems.SingleOrDefault(it => it.Name == key);
-            return ret;
-        }
-
-        public void SetCost(CostItem ci)
-        {
-            if (_CostItems == null) _CostItems = new List<CostItem>();
-            _CostItems.RemoveAll(it => it.Name == ci.Name);
-            _CostItems.Add(ci);
-            Costs = JsonConvert.SerializeObject(_CostItems);
-        }
-
-        public decimal CalReceivable(bool withOtherCosts = true)
-        {
-            decimal ret = 0;
-            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
-            if (_CostItems == null) return 0;
-            if (UnitWeight == null) return 0;
-            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-            if (ci != null)
-            {
-                if (Model == ProductModel.原材料) ret += OriginalWeight.Value * ci.Price; //计算应收时应该以入库重量为准
-                else ret += UnitWeight.Value * Count * ci.Price; //小件或其它的产品用单重*数量*价格
-            }
-            if (withOtherCosts)
-            {
-                foreach (var fc in _CostItems)
-                {
-                    if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay)
-                    {
-                        if (Model == ProductModel.原材料) ret += OriginalWeight.Value * fc.Price;
-                        else ret += UnitWeight.Value * Count * fc.Price;
-                    }
-                }
-            }
-            return ret;
-        }
-
-        public decimal CalTax()
-        {
-            return CalReceivable(false);
-        }
-
-        public decimal CalCost(bool withTax, decimal txtRate, bool 入库成本 = false)
-        {
-            return CalUnitCost(withTax, txtRate, 入库成本) * Count;
-        }
-
-        public decimal CalUnitCost(bool withTax, decimal txtRate, bool 入库成本 = false)
-        {
-            decimal ret = 0;
-            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
-            if (_CostItems == null) return 0;
-            if (UnitWeight == null) return 0;
-            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
-            if (入库成本) ci = null; //如果只计算入库成本，则忽略结算成本
-            if (ci != null)
-            {
-                if (withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price;  //含税进，含税出
-                else if (withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 + txtRate); //含税出，不含税进
-                else if (!withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 - txtRate); //不含税出，含税进
-                else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price; //不含税出，不含税进
-            }
-            else
-            {
-                ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-                if (ci != null)
-                {
-                    if (withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price;
-                    else if (withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 + txtRate);
-                    else if (!withTax && ci.WithTax) ret += UnitWeight.Value * ci.Price * (1 - txtRate);
-                    else if (!withTax && !ci.WithTax) ret += UnitWeight.Value * ci.Price;
-                }
-            }
-            foreach (var fc in _CostItems)
-            {
-                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
-                {
-                    if (withTax && fc.WithTax) ret += UnitWeight.Value * fc.Price;
-                    else if (withTax && !fc.WithTax) ret += UnitWeight.Value * fc.Price * (1 + txtRate);
-                    else if (!withTax && fc.WithTax) ret += UnitWeight.Value * fc.Price * (1 - txtRate);
-                    else if (!withTax && !fc.WithTax) ret += UnitWeight.Value * fc.Price;
-                }
-            }
-            return ret;
-        }
-        #endregion
+        
 
         #region 与库存状态相关的公共属性
         /// <summary>
@@ -337,6 +241,128 @@ namespace LJH.Inventory.BusinessModel
                 }
                 return null;
             }
+        }
+        #endregion
+
+        
+
+        #region 成本相关属性
+        public Guid? CostID { get; set; }
+        public string Costs;
+
+        private List<CostItem> _CostItems = null;
+
+        public CostItem GetCost(string key)
+        {
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return null;
+            var ret = _CostItems.SingleOrDefault(it => it.Name == key);
+            return ret;
+        }
+
+        public void SetCost(CostItem ci)
+        {
+            if (_CostItems == null) _CostItems = new List<CostItem>();
+            _CostItems.RemoveAll(it => it.Name == ci.Name);
+            _CostItems.Add(ci);
+            Costs = JsonConvert.SerializeObject(_CostItems);
+        }
+
+        public decimal CalReceivable(bool withOtherCosts = true)
+        {
+            decimal ret = 0;
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return 0;
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+            if (ci == null) return 0;
+            var uw = UnitWeight;
+            if (uw == null)
+            {
+                if (Model == ProductModel.其它产品) uw = 1;
+                else return 0;
+            }
+            if (OriginalWeight.HasValue) ret += OriginalWeight.Value * ci.Price; //计算应收时应该以入库重量为准
+            else if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * ci.Price;
+            else ret += uw.Value * Count * ci.Price;
+            if (withOtherCosts)
+            {
+                if (Model == ProductModel.其它产品 && UnitWeight == null) //如果没法计算单重，就没法把其它的运费，和其它费用统计出来
+                {
+                }
+                else
+                {
+                    foreach (var fc in _CostItems)
+                    {
+                        if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay)
+                        {
+                            if (OriginalWeight.HasValue) ret += OriginalWeight.Value * fc.Price; //计算应收时应该以入库重量为准
+                            else if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * fc.Price;
+                            else ret += uw.Value * Count * fc.Price;
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public decimal CalTax()
+        {
+            return CalReceivable(false);
+        }
+
+        public decimal CalCost(bool withTax, decimal txtRate, bool 入库成本 = false)
+        {
+            return CalUnitCost(withTax, txtRate, 入库成本) * Count;
+        }
+
+        public decimal CalUnitCost(bool withTax, decimal txtRate, bool 入库成本 = false)
+        {
+            decimal ret = 0;
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return 0;
+            var uw = UnitWeight;
+            if (uw == null)
+            {
+                if (Model == ProductModel.其它产品) uw = 1; //这里表明是按每一个产品的单价来算，而不是用吨价
+                else return 0;
+            }
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.结算单价); //结算单价最优先
+            if (入库成本) ci = null; //如果只计算入库成本，则忽略结算成本
+            if (ci != null)
+            {
+                if (withTax && ci.WithTax) ret += uw.Value * ci.Price;  //含税进，含税出
+                else if (withTax && !ci.WithTax) ret += uw.Value * ci.Price * (1 + txtRate); //含税出，不含税进
+                else if (!withTax && ci.WithTax) ret += uw.Value * ci.Price * (1 - txtRate); //不含税出，含税进
+                else if (!withTax && !ci.WithTax) ret += uw.Value * ci.Price; //不含税出，不含税进
+            }
+            else
+            {
+                ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+                if (ci != null)
+                {
+                    if (withTax && ci.WithTax) ret += uw.Value * ci.Price;
+                    else if (withTax && !ci.WithTax) ret += uw.Value * ci.Price * (1 + txtRate);
+                    else if (!withTax && ci.WithTax) ret += uw.Value * ci.Price * (1 - txtRate);
+                    else if (!withTax && !ci.WithTax) ret += uw.Value * ci.Price;
+                }
+            }
+            if (Model == ProductModel.其它产品 && UnitWeight == null) //如果没法计算单重，就没法把其它的运费，和其它费用统计出来
+            {
+            }
+            else
+            {
+                foreach (var fc in _CostItems)
+                {
+                    if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价)
+                    {
+                        if (withTax && fc.WithTax) ret += uw.Value * fc.Price;
+                        else if (withTax && !fc.WithTax) ret += uw.Value * fc.Price * (1 + txtRate);
+                        else if (!withTax && fc.WithTax) ret += uw.Value * fc.Price * (1 - txtRate);
+                        else if (!withTax && !fc.WithTax) ret += uw.Value * fc.Price;
+                    }
+                }
+            }
+            return ret;
         }
         #endregion
 

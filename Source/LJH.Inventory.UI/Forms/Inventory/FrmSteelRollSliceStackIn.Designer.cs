@@ -61,9 +61,6 @@
             this.lnkSupplier = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
             this.txtPosition = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.rd单件重 = new System.Windows.Forms.RadioButton();
-            this.rd总重 = new System.Windows.Forms.RadioButton();
             this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
@@ -89,7 +86,6 @@
             this.chkOtherCostPrepay = new System.Windows.Forms.CheckBox();
             this.chkTransCostPrepay = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.pnlCost.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -255,7 +251,6 @@
             this.rd开吨.Tag = "开吨";
             this.rd开吨.Text = "开吨";
             this.rd开吨.UseVisualStyleBackColor = true;
-            this.rd开吨.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
             // rd开卷
             // 
@@ -267,7 +262,6 @@
             this.rd开卷.Tag = "";
             this.rd开卷.Text = "开卷";
             this.rd开卷.UseVisualStyleBackColor = true;
-            this.rd开卷.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
             // rd开平
             // 
@@ -279,7 +273,6 @@
             this.rd开平.Tag = "板材";
             this.rd开平.Text = "开平";
             this.rd开平.UseVisualStyleBackColor = true;
-            this.rd开平.CheckedChanged += new System.EventHandler(this.rdSliceType_CheckedChanged);
             // 
             // label10
             // 
@@ -432,36 +425,6 @@
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.Size = new System.Drawing.Size(145, 21);
             this.txtPosition.TabIndex = 148;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.rd单件重);
-            this.panel3.Controls.Add(this.rd总重);
-            this.panel3.Location = new System.Drawing.Point(250, 112);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(118, 25);
-            this.panel3.TabIndex = 150;
-            // 
-            // rd单件重
-            // 
-            this.rd单件重.AutoSize = true;
-            this.rd单件重.Location = new System.Drawing.Point(54, 3);
-            this.rd单件重.Name = "rd单件重";
-            this.rd单件重.Size = new System.Drawing.Size(59, 16);
-            this.rd单件重.TabIndex = 129;
-            this.rd单件重.Text = "单件重";
-            this.rd单件重.UseVisualStyleBackColor = true;
-            // 
-            // rd总重
-            // 
-            this.rd总重.AutoSize = true;
-            this.rd总重.Location = new System.Drawing.Point(4, 3);
-            this.rd总重.Name = "rd总重";
-            this.rd总重.Size = new System.Drawing.Size(47, 16);
-            this.rd总重.TabIndex = 130;
-            this.rd总重.Text = "总重";
-            this.rd总重.UseVisualStyleBackColor = true;
             // 
             // txtCarPlate
             // 
@@ -750,7 +713,6 @@
             this.Controls.Add(this.txtMaterial);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtPosition);
             this.Controls.Add(this.cmbBrand);
@@ -786,8 +748,6 @@
             this.Load += new System.EventHandler(this.FrmSteelRollSliceDetail_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.pnlCost.ResumeLayout(false);
             this.pnlCost.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -834,9 +794,6 @@
         private System.Windows.Forms.LinkLabel lnkSupplier;
         private System.Windows.Forms.Label label8;
         private GeneralLibrary.WinformControl.DBCTextBox txtPosition;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.RadioButton rd单件重;
-        private System.Windows.Forms.RadioButton rd总重;
         private Controls.CarplateComboBox txtCarPlate;
         private Controls.MaterialComboBox txtMaterial;
         private System.Windows.Forms.Label label4;

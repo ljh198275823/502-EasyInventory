@@ -50,6 +50,7 @@
             this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_UpdateCreditLine = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_SetFileID = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_设置税务归档码 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_AddTax = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddTaxBill = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +80,6 @@
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_设置税务归档码 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -136,7 +136,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 286);
             // 
             // cMnu_Fresh
             // 
@@ -191,6 +191,13 @@
             this.mnu_SetFileID.Text = "设置归档号";
             this.mnu_SetFileID.Click += new System.EventHandler(this.mnu_SetFileID_Click);
             // 
+            // mnu_设置税务归档码
+            // 
+            this.mnu_设置税务归档码.Name = "mnu_设置税务归档码";
+            this.mnu_设置税务归档码.Size = new System.Drawing.Size(160, 22);
+            this.mnu_设置税务归档码.Text = "设置税务归档码";
+            this.mnu_设置税务归档码.Click += new System.EventHandler(this.mnu_设置税务归档码_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -243,11 +250,11 @@
             // lblOriginalTotal
             // 
             this.lblOriginalTotal.AutoSize = true;
-            this.lblOriginalTotal.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblOriginalTotal.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblOriginalTotal.ForeColor = System.Drawing.Color.Blue;
-            this.lblOriginalTotal.Location = new System.Drawing.Point(697, 6);
+            this.lblOriginalTotal.Location = new System.Drawing.Point(697, 13);
             this.lblOriginalTotal.Name = "lblOriginalTotal";
-            this.lblOriginalTotal.Size = new System.Drawing.Size(29, 29);
+            this.lblOriginalTotal.Size = new System.Drawing.Size(17, 16);
             this.lblOriginalTotal.TabIndex = 96;
             this.lblOriginalTotal.Text = "0";
             this.lblOriginalTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -255,11 +262,11 @@
             // lblTotalWeight
             // 
             this.lblTotalWeight.AutoSize = true;
-            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalWeight.Location = new System.Drawing.Point(697, 39);
+            this.lblTotalWeight.Location = new System.Drawing.Point(697, 41);
             this.lblTotalWeight.Name = "lblTotalWeight";
-            this.lblTotalWeight.Size = new System.Drawing.Size(29, 29);
+            this.lblTotalWeight.Size = new System.Drawing.Size(17, 16);
             this.lblTotalWeight.TabIndex = 95;
             this.lblTotalWeight.Text = "0";
             this.lblTotalWeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -462,13 +469,6 @@
             this.colLinkerPhone.HeaderText = "联系人电话";
             this.colLinkerPhone.Name = "colLinkerPhone";
             this.colLinkerPhone.ReadOnly = true;
-            // 
-            // mnu_设置税务归档码
-            // 
-            this.mnu_设置税务归档码.Name = "mnu_设置税务归档码";
-            this.mnu_设置税务归档码.Size = new System.Drawing.Size(160, 22);
-            this.mnu_设置税务归档码.Text = "设置税务归档码";
-            this.mnu_设置税务归档码.Click += new System.EventHandler(this.mnu_设置税务归档码_Click);
             // 
             // FrmCustomerFinancialStateMaster
             // 
