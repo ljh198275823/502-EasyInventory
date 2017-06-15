@@ -79,7 +79,7 @@ namespace InventoryApplication
                 frm.ShowDialog();
                 System.Environment.Exit(0);
             }
-            else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)  //没有开放进销存软件权限
+            else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_SteelRollInventory_COST) == 0)  //没有开放进销存软件权限
             {
                 FrmContactUs frm = new FrmContactUs();
                 frm.txtMessage.Text = "加密狗权限不足";
@@ -117,78 +117,6 @@ namespace InventoryApplication
                     MessageBox.Show("软件不允许在此电脑上使用!", "注意");
                     System.Environment.Exit(0);
                 }
-            }
-        }
-
-        private void CheckHostDog()
-        {
-            if (_SoftDog == null) return;
-            if (_SoftDog.IsHost) return;
-            try
-            {
-                var p = new SysparameterInfoBLL(AppSettings.Current.ConnStr).GetByID("__dog").QueryObject; ;
-                if (p == null)
-                {
-                    _RetryTime++;
-                    if (_RetryTime >= 6) //由于有时会获取失败，所以可以重试几次，
-                    {
-                        FrmContactUs frm = new FrmContactUs();
-                        frm.txtMessage.Text = "没有检测到主机加密狗";
-                        frm.ShowDialog();
-                        Environment.Exit(0);
-                    }
-                }
-                else
-                {
-                    _RetryTime = 0;
-                    DateTime hostLastDate = DateTime.MinValue;
-                    string memo = new DTEncrypt().DSEncrypt(p.Memo);
-                    if (DateTime.TryParse(p.Value, out hostLastDate) && !string.IsNullOrEmpty(memo))
-                    {
-                        string[] temp = memo.Split(';');
-                        if (temp[0] != _SoftDog.ProjectNo.ToString())
-                        {
-                            FrmContactUs frm = new FrmContactUs();
-                            frm.txtMessage.Text = "错误的项目编号";
-                            frm.ShowDialog();
-                            Environment.Exit(0);
-                        }
-                        DateTime dt2 = DateTime.MinValue;
-                        if (!DateTime.TryParse(temp[1], out dt2) || dt2 != hostLastDate)
-                        {
-                            FrmContactUs frm = new FrmContactUs();
-                            frm.txtMessage.Text = "没有检测到主机加密狗";
-                            frm.ShowDialog();
-                            Environment.Exit(0);
-                        }
-                        DateTime now = DateTime.Now;
-                        if (hostLastDate.AddDays(10) < now)//超过7天就退出软件
-                        {
-                            FrmContactUs frm = new FrmContactUs();
-                            frm.txtMessage.Text = "没有检测到主机加密狗";
-                            frm.ShowDialog();
-                            Environment.Exit(0);
-                        }
-                        else if (hostLastDate.AddDays(3) < now) //主机狗超过3天没有登录
-                        {
-                            tmrSoftDogChecker.Enabled = false;
-                            MessageBox.Show("主机加密狗处于长时间离线状态，为了避免软件被锁定，请及时让主机加密狗处于在线状态", "软件过期", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            tmrSoftDogChecker.Enabled = true;
-                        }
-                    }
-                    else
-                    {
-                        FrmContactUs frm = new FrmContactUs();
-                        frm.txtMessage.Text = "没有检测到主机加密狗";
-                        frm.ShowDialog();
-                        Environment.Exit(0);
-                    }
-                }
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message);
-                System.Environment.Exit(0);
             }
         }
 
@@ -540,7 +468,9 @@ namespace InventoryApplication
 
         private void tmrSoftDogChecker_Tick(object sender, EventArgs e)
         {
+            tmrSoftDogChecker.Enabled = false;
             CheckDog();
+            tmrSoftDogChecker.Enabled = true;
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
