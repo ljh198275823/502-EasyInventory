@@ -105,7 +105,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 var ws = _AllWarehouse.SingleOrDefault(it => it.ID == pi.WareHouseID);
                 row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
             }
-            row.Cells["colWeight"].Value = pi.Product.Weight;
+            row.Cells["colWeight"].Value = pi.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colCount"].Value = pi.Count;
             row.Cells["colOriginalThick"].Value = pi.OriginalThick;

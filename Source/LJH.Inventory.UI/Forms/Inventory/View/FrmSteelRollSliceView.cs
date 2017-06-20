@@ -82,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
                 row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
             }
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
-            row.Cells["colWeight"].Value = sr.Product.Weight;
+            row.Cells["colWeight"].Value = sr.Weight;
             row.Cells["colLength"].Value = sr.Product.Length;
             row.Cells["colOriginalThick"].Value = sr.OriginalThick;
             row.Cells["colRealThick"].Value = sr.RealThick;
