@@ -84,9 +84,9 @@
   <Table Name="Customer" Member="LJH.Inventory.BusinessModel.CompanyInfo">
     <Type Name="LJH.Inventory.BusinessModel.CompanyInfo">
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
+      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="ForeignName" Member="ShortName"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Nation" Member="Nation" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="City" Member="City" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CategoryID" Member="CategoryID" DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -136,6 +136,11 @@
       <Column Name="SheetDate" Member="SheetDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="LastActiveDate" Member="LastActiveDate"  DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="CustomerID" Member="CustomerID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="WithTax" Member="WithTax" DbType="bit not null" UpdateCheck="Never"/>
+      <Column Name="Amount" Member="Amount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+      <Column Name="Discount" Member="Discount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+      <Column Name="TotalWeight" Member="TotalWeight" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
+      <Column Name="DeadlineDate" Member="DeadlineDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="WareHouseID" Member="WareHouseID" DbType="nvarchar(50) NOT NULL"/>
       <Column Name="Linker" Member="Linker"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="LinkerCall" Member="LinkerCall"  DbType="nvarchar(50)" UpdateCheck="Never"/>
@@ -143,11 +148,6 @@
       <Column Name="Driver" Member="Driver"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="DriverCall" Member="DriverCall"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="CarPlate" Member="CarPlate"  DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="WithTax" Member="WithTax" DbType="bit not null" UpdateCheck="Never"/>
-      <Column Name="Amount" Member="Amount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="Discount" Member="Discount" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="TotalWeight" Member="TotalWeight" DbType="decimal(18, 4) not Null" UpdateCheck="Never"/>
-      <Column Name="DeadlineDate" Member="DeadlineDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
@@ -430,7 +430,7 @@
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
       <Column Name="AddDate" Member="AddDate"  DbType="datetime not Null" UpdateCheck="Never"/>
       <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) not null"  UpdateCheck="Never"/>
-      <Column Name="Model" Member="Model"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
+      <Column Name="Model" Member="Model"  DbType="nchar(5) not null" UpdateCheck="Never"/>
       <Column Name="WareHouseID" Member="WareHouseID"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Unit" Member="Unit"  DbType="nvarchar(10) not null" UpdateCheck="Never"/>
       <Column Name="OriginalWeight" Member="OriginalWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
@@ -527,9 +527,9 @@
   <Table Name="CustomerReceivable" Member="LJH.Inventory.BusinessModel.CustomerReceivable">
     <Type Name="LJH.Inventory.BusinessModel.CustomerReceivable">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
-      <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
       <Column Name="ClassID" Member="ClassID" DbType="tinyint not null" UpdateCheck="Never"/>
+      <Column Name="CreateDate" Member="CreateDate" DbType="datetime not null" UpdateCheck="Never"/>
+      <Column Name="CustomerID" Member="CustomerID" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="SheetID" Member="SheetID"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Amount" Member="Amount" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
@@ -549,22 +549,6 @@
       <Column Name="State" Member="State" DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="OrderID" Member="OrderID" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="StackSheetID" Member="StackSheetID" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-    </Type>
-  </Table>
-  <Table Name="CollectionType" Member="LJH.Inventory.BusinessModel.CollectionType">
-    <Type Name="LJH.Inventory.BusinessModel.CollectionType">
-      <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
-      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-    </Type>
-  </Table>
-  <Table Name="CurrencyType" Member="LJH.Inventory.BusinessModel.CurrencyType">
-    <Type Name="LJH.Inventory.BusinessModel.CurrencyType">
-      <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
-      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="Symbol" Member="Symbol" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="ExchangeRate" Member="ExchangeRate" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
@@ -589,21 +573,6 @@
       <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
       <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="Parent" Member="Parent" DbType="nvarchar(50)" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-    </Type>
-  </Table>
-  <Table Name="Unit" Member="LJH.Inventory.BusinessModel.Unit">
-    <Type Name="LJH.Inventory.BusinessModel.Unit">
-      <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
-      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="Plural" Member="Plural" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
-    </Type>
-  </Table>
-  <Table Name="Transport" Member="LJH.Inventory.BusinessModel.Transport">
-    <Type Name="LJH.Inventory.BusinessModel.Transport">
-      <Column Name="ID" Member="ID"  DbType="nvarchar(50)" IsPrimaryKey="true" />
-      <Column Name="Name" Member="Name" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

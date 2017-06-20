@@ -85,10 +85,8 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Attachment.cs" />
     <Compile Include="AttachmentHeader.cs" />
-    <Compile Include="CollectionType.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="CostItem.cs" />
-    <Compile Include="CurrencyType.cs" />
     <Compile Include="CompanyInfo.cs" />
     <Compile Include="CompanyClass.cs" />
     <Compile Include="Financial\Account.cs" />
@@ -180,8 +178,6 @@
     <Compile Include="Purchase\SupplierType.cs" />
     <Compile Include="SteelRollSliceRecord.cs" />
     <Compile Include="SysparameterInfo.cs" />
-    <Compile Include="Transport.cs" />
-    <Compile Include="Unit.cs" />
     <Compile Include="UserSettings.cs" />
     <Compile Include="WareHouse.cs" />
   </ItemGroup>
