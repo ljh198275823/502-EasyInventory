@@ -22,7 +22,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override ProductInventoryItem GetingItemByID(Guid id, DataContext dc)
         {
             var ret = (from pi in dc.GetTable<ProductInventoryItem>()
-                       join c in dc.GetTable<Cost>() on pi.CostID equals c.ID
+                       from c in dc.GetTable<Cost>().Where(it => pi.CostID == it.ID).DefaultIfEmpty()
                        where pi.ID == id
                        select new { A = pi, B = c.Costs }).SingleOrDefault();
             if (ret != null)
