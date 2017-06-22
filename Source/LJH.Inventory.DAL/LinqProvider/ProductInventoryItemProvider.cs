@@ -38,7 +38,7 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             dc.Log = Console.Out;
             var ret = from pi in dc.GetTable<ProductInventoryItem>()
-                      from c in dc.GetTable<Cost>().Where (it=> pi.CostID == it.ID ).DefaultIfEmpty ()
+                      from c in dc.GetTable<Cost>().Where(it => pi.CostID == it.ID).DefaultIfEmpty()
                       select new { A = pi, B = c.Costs };
             if (search is ProductInventoryItemSearchCondition)
             {
@@ -90,11 +90,14 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override void InsertingItem(LJH.Inventory.BusinessModel.ProductInventoryItem info, System.Data.Linq.DataContext dc)
         {
-            if (!info.CostID.HasValue && !string.IsNullOrEmpty(info.Costs))
+            if (!info.CostID.HasValue)
             {
-                var cs = new Cost() { ID = info.ID, Costs = info.Costs };
-                dc.GetTable<Cost>().InsertOnSubmit(cs);
-                info.CostID = cs.ID;
+                if (!string.IsNullOrEmpty(info.Costs)) //新建库存没有用其它产品项的成本，就创建一个
+                {
+                    var cs = new Cost() { ID = info.ID, Costs = info.Costs };
+                    dc.GetTable<Cost>().InsertOnSubmit(cs);
+                    info.CostID = cs.ID;
+                }
             }
             base.InsertingItem(info, dc);
         }
@@ -109,9 +112,12 @@ namespace LJH.Inventory.DAL.LinqProvider
             }
             else
             {
-                cs = new Cost() { ID = newVal.ID, Costs = newVal.Costs };
-                dc.GetTable<Cost>().InsertOnSubmit(cs);
-                newVal.CostID = cs.ID;
+                if (!string.IsNullOrEmpty(newVal.Costs))
+                {
+                    cs = new Cost() { ID = newVal.ID, Costs = newVal.Costs };
+                    dc.GetTable<Cost>().InsertOnSubmit(cs);
+                    newVal.CostID = cs.ID;
+                }
             }
             base.UpdatingItem(newVal, original, dc);
         }
