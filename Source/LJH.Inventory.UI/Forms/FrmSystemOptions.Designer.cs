@@ -149,6 +149,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txt默认厂家 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnk默认厂家 = new System.Windows.Forms.LinkLabel();
+            this.txtSupplier = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnk默认供应商 = new System.Windows.Forms.LinkLabel();
             this.txt国税系数 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txt税点系数 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label90 = new System.Windows.Forms.Label();
@@ -1451,6 +1455,10 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.txt默认厂家);
+            this.tabPage2.Controls.Add(this.lnk默认厂家);
+            this.tabPage2.Controls.Add(this.txtSupplier);
+            this.tabPage2.Controls.Add(this.lnk默认供应商);
             this.tabPage2.Controls.Add(this.txt国税系数);
             this.tabPage2.Controls.Add(this.txt税点系数);
             this.tabPage2.Controls.Add(this.label90);
@@ -1477,6 +1485,48 @@
             this.tabPage2.Size = new System.Drawing.Size(563, 358);
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "基本";
+            // 
+            // txt默认厂家
+            // 
+            this.txt默认厂家.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txt默认厂家.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt默认厂家.Location = new System.Drawing.Point(101, 312);
+            this.txt默认厂家.Name = "txt默认厂家";
+            this.txt默认厂家.Size = new System.Drawing.Size(188, 21);
+            this.txt默认厂家.TabIndex = 110;
+            // 
+            // lnk默认厂家
+            // 
+            this.lnk默认厂家.AutoSize = true;
+            this.lnk默认厂家.Location = new System.Drawing.Point(46, 316);
+            this.lnk默认厂家.Name = "lnk默认厂家";
+            this.lnk默认厂家.Size = new System.Drawing.Size(53, 12);
+            this.lnk默认厂家.TabIndex = 109;
+            this.lnk默认厂家.TabStop = true;
+            this.lnk默认厂家.Text = "默认厂家";
+            this.lnk默认厂家.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk默认厂家_LinkClicked);
+            // 
+            // txtSupplier
+            // 
+            this.txtSupplier.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSupplier.Location = new System.Drawing.Point(101, 279);
+            this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.ReadOnly = true;
+            this.txtSupplier.Size = new System.Drawing.Size(188, 21);
+            this.txtSupplier.TabIndex = 108;
+            this.txtSupplier.DoubleClick += new System.EventHandler(this.txt默认供应商_DoubleClick);
+            // 
+            // lnk默认供应商
+            // 
+            this.lnk默认供应商.AutoSize = true;
+            this.lnk默认供应商.Location = new System.Drawing.Point(34, 282);
+            this.lnk默认供应商.Name = "lnk默认供应商";
+            this.lnk默认供应商.Size = new System.Drawing.Size(65, 12);
+            this.lnk默认供应商.TabIndex = 107;
+            this.lnk默认供应商.TabStop = true;
+            this.lnk默认供应商.Text = "默认供应商";
+            this.lnk默认供应商.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk默认供应商_LinkClicked);
             // 
             // txt国税系数
             // 
@@ -2049,5 +2099,9 @@
         private System.Windows.Forms.Label label87;
         private GeneralLibrary.WinformControl.DecimalTextBox txt国税系数;
         private GeneralLibrary.WinformControl.DecimalTextBox txt税点系数;
+        private GeneralLibrary.WinformControl.DBCTextBox txt默认厂家;
+        private System.Windows.Forms.LinkLabel lnk默认厂家;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
+        private System.Windows.Forms.LinkLabel lnk默认供应商;
     }
 }

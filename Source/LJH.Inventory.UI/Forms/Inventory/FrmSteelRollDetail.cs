@@ -126,7 +126,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         txtCategory.Tag = c;
                     }
                 }
-                if (UserSettings.Current != null) txtCustomer.Text = UserSettings.Current.DefaultCustomer;
+                if (UserSettings.Current != null)
+                {
+                    txtCustomer.Text = UserSettings.Current.DefaultCustomer;
+                    cmbBrand.Text = UserSettings.Current.默认厂家;
+                    if (!string.IsNullOrEmpty(UserSettings.Current.默认供应商))
+                    {
+                        var sp = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(UserSettings.Current.默认供应商).QueryObject;
+                        txtSupplier.Text = sp != null ? sp.Name : null;
+                        txtSupplier.Tag = sp;
+                    }
+                }
             }
             cmbSpecification.Init();
             txtCarPlate.Init();

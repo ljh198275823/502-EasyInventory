@@ -29,6 +29,13 @@ namespace LJH.Inventory.UI.Forms
             txtDefaultWareHouse.Text = UserSettings.Current.DefaultWarehouse;
             txtDefaultCustomer.Text = UserSettings.Current.DefaultCustomer;
             txtDefaultProductCategory.Text = UserSettings.Current.DefaultProductCategory;
+            txt默认厂家.Text = UserSettings.Current.默认厂家;
+            if (!string.IsNullOrEmpty(UserSettings.Current.默认供应商))
+            {
+                var sp = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(UserSettings.Current.默认供应商).QueryObject;
+                txtSupplier.Text = sp != null ? sp.Name : null;
+                txtSupplier.Tag = sp;
+            }
             chkRealCount.Checked = UserSettings.Current.RealCountWhenCalRealThick;
             chkNeedMaterial.Checked = UserSettings.Current.NeedMaterial;
             txt国税系数.DecimalValue = UserSettings.Current.国税系数;
@@ -115,6 +122,8 @@ namespace LJH.Inventory.UI.Forms
             us.DefaultCustomer = txtDefaultCustomer.Text;
             us.DefaultProductCategory = txtDefaultProductCategory.Text;
             us.DefaultWarehouse = txtDefaultWareHouse.Text;
+            us.默认厂家 = txt默认厂家.Text;
+            us.默认供应商 = txtSupplier.Tag != null ? (txtSupplier.Tag as CompanyInfo).ID : null;
             us.RealCountWhenCalRealThick = chkRealCount.Checked;
             us.NeedMaterial = chkNeedMaterial.Checked;
             us.税点系数 = txt税点系数.DecimalValue;
@@ -210,9 +219,37 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
+        private void lnk默认供应商_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = s.Name;
+                txtSupplier.Tag = s;
+            }
+        }
+
+        private void txt默认供应商_DoubleClick(object sender, EventArgs e)
+        {
+            txtSupplier.Text = string.Empty;
+            txtSupplier.Tag = null;
+        }
+
+        private void lnk默认厂家_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            General.FrmRelatedCompanyMaster frm = new General.FrmRelatedCompanyMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txt默认厂家.Text = (frm.SelectedItem as CompanyInfo).Name;
+            }
+        }
+
         private void FrmSystemOptions_Load(object sender, EventArgs e)
         {
-            InitCmbStackoutSheetModel(this.cmbStackoutSheetModel );
+            InitCmbStackoutSheetModel(this.cmbStackoutSheetModel);
             InitCmbStackoutSheetModel(this.cmbStackoutSheetModel_WithTax);
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
             ShowSetting(UserSettings.Current);

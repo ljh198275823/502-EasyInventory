@@ -87,6 +87,13 @@ namespace LJH.Inventory.BusinessModel
 
         [DataMember]
         public string DefaultProductCategory { get; set; }
+
+        [DataMember]
+        public string 默认供应商 { get; set; }
+
+        [DataMember]
+        public string 默认厂家 { get; set; }
+
         /// <summary>
         /// 获取或设置计算开平厚度时是否以真实小件数量(包括盘点数量）为准（否则以开平数量为准)
         /// </summary>
