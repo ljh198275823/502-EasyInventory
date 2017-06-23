@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
 
 namespace LJH.Inventory.UI.Controls
 {
@@ -89,13 +90,15 @@ namespace LJH.Inventory.UI.Controls
         #endregion
 
         #region 公共方法
-        public void Init()
+        public void Init(CompanyClass classID)
         {
             this.Items.Clear();
             this.Items.Add(string.Empty);
             if (_SourceItems == null)
             {
-                _SourceItems = (new CompanyBLL(AppSettings.Current.ConnStr)).GetAllCustomers().QueryObjects;
+                CustomerSearchCondition con = new CustomerSearchCondition();
+                con.ClassID = classID;
+                _SourceItems = (new CompanyBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             if (_SourceItems != null && _SourceItems.Count > 0)
             {

@@ -59,9 +59,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
-            this.cmbSupplier = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cmbBrand = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
@@ -101,13 +99,14 @@
             this.mnu_查看价格改动记录 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
+            this.cmbSupplier = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlStates.SuspendLayout();
@@ -127,6 +126,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.cmbBrand);
+            this.panel5.Controls.Add(this.cmbSupplier);
             this.panel5.Controls.Add(this.label15);
             this.panel5.Controls.Add(this.txtPurchaseID);
             this.panel5.Controls.Add(this.lblOriginalTotal);
@@ -140,9 +141,7 @@
             this.panel5.Controls.Add(this.label1);
             this.panel5.Controls.Add(this.wareHouseComboBox1);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Controls.Add(this.cmbSupplier);
             this.panel5.Controls.Add(this.label3);
-            this.panel5.Controls.Add(this.cmbBrand);
             this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.cmbSpecification);
             this.panel5.Controls.Add(this.label5);
@@ -156,7 +155,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(470, 50);
+            this.label15.Location = new System.Drawing.Point(470, 53);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(41, 12);
             this.label15.TabIndex = 146;
@@ -165,7 +164,7 @@
             // txtPurchaseID
             // 
             this.txtPurchaseID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPurchaseID.Location = new System.Drawing.Point(517, 46);
+            this.txtPurchaseID.Location = new System.Drawing.Point(517, 49);
             this.txtPurchaseID.Name = "txtPurchaseID";
             this.txtPurchaseID.Size = new System.Drawing.Size(114, 21);
             this.txtPurchaseID.TabIndex = 145;
@@ -208,7 +207,7 @@
             // customerCombobox1
             // 
             this.customerCombobox1.FormattingEnabled = true;
-            this.customerCombobox1.Location = new System.Drawing.Point(354, 46);
+            this.customerCombobox1.Location = new System.Drawing.Point(354, 49);
             this.customerCombobox1.Name = "customerCombobox1";
             this.customerCombobox1.Size = new System.Drawing.Size(99, 20);
             this.customerCombobox1.TabIndex = 91;
@@ -217,7 +216,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(322, 50);
+            this.label8.Location = new System.Drawing.Point(322, 53);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 90;
@@ -344,39 +343,19 @@
             this.label4.TabIndex = 81;
             this.label4.Text = "仓库";
             // 
-            // cmbSupplier
-            // 
-            this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSupplier.FormattingEnabled = true;
-            this.cmbSupplier.Location = new System.Drawing.Point(54, 46);
-            this.cmbSupplier.Name = "cmbSupplier";
-            this.cmbSupplier.Size = new System.Drawing.Size(106, 20);
-            this.cmbSupplier.TabIndex = 80;
-            this.cmbSupplier.SelectedIndexChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 50);
+            this.label3.Location = new System.Drawing.Point(10, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 79;
             this.label3.Text = "供应商";
             // 
-            // cmbBrand
-            // 
-            this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBrand.FormattingEnabled = true;
-            this.cmbBrand.Location = new System.Drawing.Point(202, 46);
-            this.cmbBrand.Name = "cmbBrand";
-            this.cmbBrand.Size = new System.Drawing.Size(108, 20);
-            this.cmbBrand.TabIndex = 78;
-            this.cmbBrand.SelectedIndexChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(168, 50);
+            this.label9.Location = new System.Drawing.Point(168, 53);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 12);
             this.label9.TabIndex = 77;
@@ -666,15 +645,14 @@
             this.mnu_查看价格改动记录,
             this.toolStripSeparator1,
             this.更换仓库ToolStripMenuItem,
-            this.toolStripMenuItem1,
             this.mnu_Check,
+            this.mnu_Nullify,
             this.toolStripSeparator4,
             this.cMnu_SelectColumns,
             this.cMnu_Export,
-            this.mnu_Nullify,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 286);
             // 
             // cMnu_Fresh
             // 
@@ -727,12 +705,12 @@
             this.更换仓库ToolStripMenuItem.Text = "更换仓库";
             this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem1
+            // mnu_Nullify
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
-            this.toolStripMenuItem1.Text = "作废";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.mnu_Nullify_Click);
+            this.mnu_Nullify.Name = "mnu_Nullify";
+            this.mnu_Nullify.Size = new System.Drawing.Size(172, 22);
+            this.mnu_Nullify.Text = "作废";
+            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
             // 
             // mnu_Check
             // 
@@ -758,18 +736,32 @@
             this.cMnu_Export.Size = new System.Drawing.Size(172, 22);
             this.cMnu_Export.Text = "导出...";
             // 
-            // mnu_Nullify
-            // 
-            this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(172, 22);
-            this.mnu_Nullify.Text = "作废";
-            // 
             // mnu_Import
             // 
             this.mnu_Import.Name = "mnu_Import";
             this.mnu_Import.Size = new System.Drawing.Size(172, 22);
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
+            // 
+            // cmbBrand
+            // 
+            this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBrand.FormattingEnabled = true;
+            this.cmbBrand.Location = new System.Drawing.Point(202, 49);
+            this.cmbBrand.Name = "cmbBrand";
+            this.cmbBrand.Size = new System.Drawing.Size(108, 20);
+            this.cmbBrand.TabIndex = 148;
+            this.cmbBrand.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // cmbSupplier
+            // 
+            this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSupplier.FormattingEnabled = true;
+            this.cmbSupplier.Location = new System.Drawing.Point(54, 49);
+            this.cmbSupplier.Name = "cmbSupplier";
+            this.cmbSupplier.Size = new System.Drawing.Size(106, 20);
+            this.cmbSupplier.TabIndex = 147;
+            this.cmbSupplier.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // Frm其它产品库存
             // 
@@ -810,9 +802,7 @@
         private System.Windows.Forms.CheckBox chkStackIn;
         private Controls.SpecificationComboBox cmbSpecification;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbSupplier;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbBrand;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label4;
         private Controls.WareHouseComboBox wareHouseComboBox1;
@@ -841,7 +831,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnu_查看价格改动记录;
         private System.Windows.Forms.ToolStripMenuItem mnu_Nullify;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
@@ -866,5 +855,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarplate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private Controls.CustomerCombobox cmbBrand;
+        private Controls.CustomerCombobox cmbSupplier;
     }
 }

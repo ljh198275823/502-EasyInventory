@@ -186,8 +186,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
             if (item.SourceRoll.HasValue) btnOk1.Enabled = false;
-            btnOk1.Enabled = btnOk1.Enabled && item.CanEdit && item.GetCost(CostItem.结算单价) == null;
-            //btn查看来源卷.Visible = item.SourceRoll.HasValue;
+            btnOk1.Enabled = btnOk1.Enabled && item.State == ProductInventoryState.Inventory && item.Status == "整卷" && item.GetCost(CostItem.结算单价) == null;
         }
 
         protected override object GetItemFromInput()

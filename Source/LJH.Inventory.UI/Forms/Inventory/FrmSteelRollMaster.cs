@@ -32,42 +32,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #endregion
 
         #region 私有方法
-        private void InitSupplier(ComboBox cmb)
-        {
-            cmb.Items.Clear();
-            List<CompanyInfo> cs = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
-            if (cs != null && cs.Count > 0)
-            {
-                cmb.Items.Add(string.Empty);
-                var items = (from p in cs
-                             orderby p.Name ascending
-                             select p.Name);
-                foreach (var item in items)
-                {
-                    cmb.Items.Add(item);
-                }
-            }
-        }
-
-        private void InitBrand(ComboBox cmb)
-        {
-            cmb.Items.Clear();
-            CustomerSearchCondition con = new CustomerSearchCondition();
-            con.ClassID = CompanyClass.厂家;
-            List<CompanyInfo> cs = new CompanyBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
-            if (cs != null && cs.Count > 0)
-            {
-                cmb.Items.Add(string.Empty);
-                var items = (from p in cs
-                             orderby p.Name ascending
-                             select p.Name);
-                foreach (var item in items)
-                {
-                    cmb.Items.Add(item);
-                }
-            }
-        }
-
         private void FreshData()
         {
             List<object> items = FilterData();
@@ -83,7 +47,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
                 if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
-                if (!string.IsNullOrEmpty(cmbSupplier.Text)) items = items.Where(it => it.Supplier == cmbSupplier.Text).ToList();
+                if (cmbSupplier.SelectedCustomer != null) items = items.Where(it => it.Supplier == cmbSupplier.SelectedCustomer.ID).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer.Contains(customerCombobox1.Text)).ToList();
                 if (!string.IsNullOrEmpty(txtPurchaseID.Text)) items = items.Where(it => !string.IsNullOrEmpty(it.PurchaseID) && it.PurchaseID.Contains(txtPurchaseID.Text)).ToList();
@@ -154,11 +118,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.wareHouseComboBox1.Init();
             this.cmbSpecification.Init(new List<string> { ProductModel.原材料, ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 });
             this.categoryComboBox1.Init();
-            this.customerCombobox1.Init();
+            this.cmbBrand.Init(CompanyClass.厂家);
+            this.cmbSupplier.Init(CompanyClass.Supplier);
+            this.customerCombobox1.Init(CompanyClass.Customer);
             this.ucDateTimeInterval1.Init();
             this.ucDateTimeInterval1.SelectThisMonth();
-            InitBrand(cmbBrand);
-            InitSupplier(cmbSupplier);
             pnlStates.Enabled = !ForSelect;
             if (this.MultiSelect) GridView.ContextMenuStrip = null;
         }

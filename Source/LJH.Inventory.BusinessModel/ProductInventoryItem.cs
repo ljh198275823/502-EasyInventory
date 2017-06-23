@@ -136,8 +136,6 @@ namespace LJH.Inventory.BusinessModel
         public string Memo { get; set; }
         #endregion
 
-        
-
         #region 与库存状态相关的公共属性
         /// <summary>
         /// 获取或设置销售订单项
@@ -187,13 +185,6 @@ namespace LJH.Inventory.BusinessModel
 
         #region 与原材料有关
         /// <summary>
-        /// 获取原材料资料是否可以修改
-        /// </summary>
-        public bool CanEdit
-        {
-            get { return (State == ProductInventoryState.Inventory && Status == "整卷"); }
-        }
-        /// <summary>
         /// 获取原材料的状态
         /// </summary>
         public string Status
@@ -211,6 +202,8 @@ namespace LJH.Inventory.BusinessModel
                 return null;
             }
         }
+        #endregion
+
         /// <summary>
         /// 获取库存项的单重
         /// </summary>
@@ -242,9 +235,6 @@ namespace LJH.Inventory.BusinessModel
                 return null;
             }
         }
-        #endregion
-
-        
 
         #region 成本相关属性
         public Guid? CostID { get; set; }
@@ -301,7 +291,21 @@ namespace LJH.Inventory.BusinessModel
 
         public decimal CalTax()
         {
-            return CalReceivable(false);
+            decimal ret = 0;
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null) return 0;
+            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
+            if (ci == null || ci.WithTax == false) return 0; //没有入库单价或不含税
+            var uw = UnitWeight;
+            if (uw == null)
+            {
+                if (Model == ProductModel.其它产品) uw = 1;
+                else return 0;
+            }
+            if (OriginalWeight.HasValue) ret += OriginalWeight.Value * ci.Price; //计算应收时应该以入库重量为准
+            else if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * ci.Price;
+            else ret += uw.Value * Count * ci.Price;
+            return ret;
         }
 
         public decimal CalCost(bool withTax, decimal txtRate, bool 入库成本 = false)

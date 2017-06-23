@@ -340,7 +340,7 @@ namespace InventoryApplication
 
         private void mnu_Inventory_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmSteelRollSliceMaster>(sender);
+            ShowSingleForm<Frm小件库存管理>(sender);
         }
 
         private void mnu_InventorySheet_Click(object sender, EventArgs e)
