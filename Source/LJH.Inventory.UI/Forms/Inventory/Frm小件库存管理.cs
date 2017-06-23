@@ -227,6 +227,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
+            if (!_SteelRolls.Exists(it => it.ID == sr.ID))
+            {
+                _SteelRolls.Add(sr);
+            }
             ShowRowColor(row);
         }
         #endregion
