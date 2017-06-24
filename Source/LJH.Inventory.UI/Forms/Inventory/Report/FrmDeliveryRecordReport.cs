@@ -24,6 +24,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             InitializeComponent();
         }
 
+        private StackOutRecord _LastRecord = null;
+
         #region 重写基类方法
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
@@ -41,8 +43,15 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colWeight"].Value = sor.Weight;
             row.Cells["colPrice"].Value = sor.Price;
             row.Cells["colCount"].Value = sor.Count;
-            row.Cells["colAmount"].Value = sor.Amount.Trim();
+            if (_LastRecord != null && _LastRecord.SheetNo == sor.SheetNo && _LastRecord.ProductID == sor.ProductID && _LastRecord.Weight.HasValue) //如果是同一个送货单同一种产品的项,并且有合计重量，只在第一项显示金额
+            {
+            }
+            else
+            {
+                row.Cells["colAmount"].Value = sor.Amount.Trim();
+            }
             row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
+            _LastRecord = sor;
         }
 
         protected override List<object> GetDataSource()
@@ -67,7 +76,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
                 decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
                 return (from item in items
-                        orderby item.SheetDate ascending, item.ProductID ascending
+                        orderby item.SheetNo ascending, item.AddDate ascending
                         where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Specification) == width) &&
                               (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Specification) == thick)
                         select (object)item).ToList();

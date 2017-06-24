@@ -295,10 +295,11 @@ namespace LJH.Inventory.BLL
         /// </summary>
         /// <param name="paymentID"></param>
         /// <returns></returns>
-        public QueryResultList<AccountRecordAssign> GetAssigns(string paymentID)
+        public QueryResultList<AccountRecordAssign> GetAssigns(CustomerPayment sheet)
         {
             AccountRecordSearchCondition con = new AccountRecordSearchCondition();
-            con.SheetID = paymentID;
+            con.SheetID = sheet.ID;
+            con.PaymentTypes = new List<CustomerPaymentType>() { sheet.ClassID };
             var ars = ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).GetItems(con).QueryObjects;
             if (ars != null && ars.Count > 0)
             {
@@ -315,27 +316,28 @@ namespace LJH.Inventory.BLL
             return new QueryResultList<AccountRecordAssign>(ResultCode.Successful, string.Empty, new List<AccountRecordAssign>());
         }
 
-        public void 核销(CustomerPayment payment)
+        public void 核销(CustomerPayment sheet)
         {
-            if (string.IsNullOrEmpty(payment.StackSheetID)) return;
+            if (string.IsNullOrEmpty(sheet.StackSheetID)) return;
             AccountRecordSearchCondition arsc = new AccountRecordSearchCondition();
-            arsc.SheetID = payment.ID;
-            arsc.PaymentTypes = new List<CustomerPaymentType>() { payment.ClassID };
+            arsc.SheetID = sheet.ID;
+            arsc.PaymentTypes = new List<CustomerPaymentType>() { sheet.ClassID };
             var ars = ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).GetItems(arsc).QueryObjects;
             if (ars == null || ars.Count == 0) return;
 
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-            con.SheetID = payment.StackSheetID;
+            con.SheetID = sheet.StackSheetID;
             con.Settled = false;
             con.ReceivableTypes = new List<CustomerReceivableType>();
-            if (payment.ClassID == CustomerPaymentType.客户收款)
+            if (sheet.ClassID == CustomerPaymentType.客户收款)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
             }
-            else if (payment.ClassID == CustomerPaymentType.供应商付款)
+            else if (sheet.ClassID == CustomerPaymentType.供应商付款)
             {
                 con.ReceivableTypes.Add(CustomerReceivableType.SupplierReceivable);
             }
+            if (con.ReceivableTypes.Count == 0) return;
             var crs = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             if (crs == null || crs.Count == 0) return;
 

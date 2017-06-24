@@ -381,10 +381,10 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public void AssignPayment(StackOutSheet info)
+        public void AssignPayment(StackOutSheet sheet)
         {
             CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();
-            con.SheetID = info.ID;
+            con.SheetID = sheet.ID;
             con.Settled = false;
             con.ReceivableTypes = new List<CustomerReceivableType>();
             con.ReceivableTypes.Add(CustomerReceivableType.CustomerReceivable);
@@ -392,7 +392,8 @@ namespace LJH.Inventory.BLL
             if (crs != null && crs.Count > 0)
             {
                 AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
-                cpsc.StackSheetID = info.ID;
+                cpsc.StackSheetID = sheet.ID;
+                cpsc.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款 }; //一定要加上付款类型
                 cpsc.HasRemain = true;
                 var cps = ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).GetItems(cpsc).QueryObjects;
                 if (cps != null && cps.Count > 0)

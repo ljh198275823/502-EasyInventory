@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             ItemsGrid.Rows.Clear();
             if (UpdatingItem == null) return;
-            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns((UpdatingItem as CustomerPayment).ID).QueryObjects;
+            List<AccountRecordAssign> assigns = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetAssigns(UpdatingItem as CustomerPayment).QueryObjects;
             if (assigns != null && assigns.Count > 0)
             {
                 CustomerReceivableSearchCondition con = new CustomerReceivableSearchCondition();

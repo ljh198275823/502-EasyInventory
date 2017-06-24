@@ -108,7 +108,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                                 产品种类 = g.First().Product.Model == "原材料" ? "卷" : g.First().Product.Model,
                                 重量 = g.First().Weight,
                                 单价 = g.First().Price,
-                                出货 = g.Sum(i => i.Amount),
+                                出货 = g.First().Weight.HasValue ? g.First().Amount : g.Sum(sr => sr.Amount), //如果有重量，金额按重量计算，没有重量金额按数量计算
                                 Memo = it.Memo
                             };
                             ret.Add(item);
