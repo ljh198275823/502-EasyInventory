@@ -764,7 +764,6 @@
             // 
             this.colPosition.HeaderText = "摆放位置";
             this.colPosition.Name = "colPosition";
-            this.colPosition.ReadOnly = true;
             // 
             // colMaterial
             // 

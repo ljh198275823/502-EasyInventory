@@ -221,6 +221,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colMaterial"].Value = sr.Material;
             row.Cells["colCarplate"].Value = sr.Carplate;
             row.Cells["colPurchaseID"].Value = sr.PurchaseID;
+            row.Cells["colPosition"].Value = sr.Position;
             row.Cells["colMemo"].Value = sr.Memo;
             if (sr.State == ProductInventoryState.Nullified)
             {
@@ -358,6 +359,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     MessageBox.Show(ret.Message);
                     cell.Value = pi.Memo;
+                }
+            }
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "colPosition")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string position = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UpdatePosition(pi, position);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.Position;
                 }
             }
         }

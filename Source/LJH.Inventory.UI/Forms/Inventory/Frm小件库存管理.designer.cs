@@ -117,6 +117,7 @@
             this.colPurchaseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliverySheet = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -144,7 +145,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 286);
             // 
             // cMnu_Fresh
             // 
@@ -680,6 +681,7 @@
             this.colPurchaseID,
             this.colCarplate,
             this.colDeliverySheet,
+            this.colPosition,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -708,7 +710,7 @@
             this.colWareHouse.HeaderText = "仓库";
             this.colWareHouse.Name = "colWareHouse";
             this.colWareHouse.ReadOnly = true;
-            this.colWareHouse.Width = 51;
+            this.colWareHouse.Width = 54;
             // 
             // colCategory
             // 
@@ -786,7 +788,7 @@
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
-            this.colCustomer.Width = 51;
+            this.colCustomer.Width = 54;
             // 
             // colManufacture
             // 
@@ -794,7 +796,7 @@
             this.colManufacture.HeaderText = "厂家";
             this.colManufacture.Name = "colManufacture";
             this.colManufacture.ReadOnly = true;
-            this.colManufacture.Width = 51;
+            this.colManufacture.Width = 54;
             // 
             // colSupplier
             // 
@@ -802,7 +804,7 @@
             this.colSupplier.HeaderText = "供应商";
             this.colSupplier.Name = "colSupplier";
             this.colSupplier.ReadOnly = true;
-            this.colSupplier.Width = 61;
+            this.colSupplier.Width = 66;
             // 
             // colSourceRoll
             // 
@@ -895,6 +897,11 @@
             this.colDeliverySheet.ReadOnly = true;
             this.colDeliverySheet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colDeliverySheet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colPosition
+            // 
+            this.colPosition.HeaderText = "摆放位置";
+            this.colPosition.Name = "colPosition";
             // 
             // colMemo
             // 
@@ -1005,6 +1012,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarplate;
         private System.Windows.Forms.DataGridViewLinkColumn colDeliverySheet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
 
     }

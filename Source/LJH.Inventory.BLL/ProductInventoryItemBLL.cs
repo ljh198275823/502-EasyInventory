@@ -187,6 +187,15 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
+        public CommandResult UpdatePosition(ProductInventoryItem pi, string position)
+        {
+            var clone = pi.Clone();
+            clone.Position = position;
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful) pi.Position = position;
+            return ret;
+        }
+
         public CommandResult UpdateWareHouse(ProductInventoryItem pi, WareHouse ws)
         {
             var clone = pi.Clone();
