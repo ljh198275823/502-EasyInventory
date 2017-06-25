@@ -40,7 +40,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
             row.Cells["colLength"].Value = sor.Length;
-            row.Cells["colWeight"].Value = sor.Weight;
             row.Cells["colPrice"].Value = sor.Price;
             row.Cells["colCount"].Value = sor.Count;
             if (_LastRecord != null && _LastRecord.SheetNo == sor.SheetNo && _LastRecord.ProductID == sor.ProductID && _LastRecord.Weight.HasValue) //如果是同一个送货单同一种产品的项,并且有合计重量，只在第一项显示金额
@@ -48,7 +47,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
             else
             {
-                row.Cells["colAmount"].Value = sor.Amount.Trim();
+                row.Cells["colWeight"].Value = sor.Weight;
+                row.Cells["colAmount"].Value = sor.Amount;
             }
             row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
             _LastRecord = sor;

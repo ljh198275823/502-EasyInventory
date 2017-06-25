@@ -33,6 +33,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public bool IsForView { get; set; }
         #endregion
 
+        public event EventHandler<ItemAddedEventArgs> ItemAdded;
+        public event EventHandler<ItemUpdatedEventArgs> ItemUpdated;
+
         #region 私有方法
         private void InitControls()
         {
@@ -59,7 +62,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     txtSupplier.Tag = sp;
                 }
             }
-            
+
             if (Product != null) ShowProduct(Product);
             if (WareHouse != null)
             {
@@ -315,7 +318,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
             else ret = new OtherProductInventoryBLL(AppSettings.Current.ConnStr).Update(SteelRollSlice);
             if (ret.Result == ResultCode.Successful)
             {
-                this.DialogResult = DialogResult.OK;
+                if (isAdding) //新增
+                {
+                    cmbSpecification.Text = string.Empty;
+                    txtWeight.DecimalValue = 0;
+                    if (txtLength.DecimalValue > 0) txtLength.DecimalValue = 0;
+                    txtCount.DecimalValue = 0;
+                    cmbSpecification.Focus();
+                    if (this.ItemAdded != null) this.ItemAdded(this, new ItemAddedEventArgs(SteelRollSlice));
+                    SteelRollSlice = null; 
+                }
+                else
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
             }
             else
             {

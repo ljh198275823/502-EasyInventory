@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -39,8 +39,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
+            this.cmbSupplier = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label15 = new System.Windows.Forms.Label();
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lblOriginalTotal = new System.Windows.Forms.Label();
@@ -66,6 +70,21 @@
             this.chkStackIn = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_修改入库单价 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_设置结算单价 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_查看价格改动记录 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +94,8 @@
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col含税出单位成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col不含税出单位成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,23 +111,6 @@
             this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPurchaseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_修改入库单价 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_设置结算单价 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_查看价格改动记录 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Check = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
-            this.cmbSupplier = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlStates.SuspendLayout();
@@ -151,6 +155,26 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1361, 86);
             this.panel5.TabIndex = 7;
+            // 
+            // cmbBrand
+            // 
+            this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBrand.FormattingEnabled = true;
+            this.cmbBrand.Location = new System.Drawing.Point(202, 49);
+            this.cmbBrand.Name = "cmbBrand";
+            this.cmbBrand.Size = new System.Drawing.Size(108, 20);
+            this.cmbBrand.TabIndex = 148;
+            this.cmbBrand.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // cmbSupplier
+            // 
+            this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSupplier.FormattingEnabled = true;
+            this.cmbSupplier.Location = new System.Drawing.Point(54, 49);
+            this.cmbSupplier.Name = "cmbSupplier";
+            this.cmbSupplier.Size = new System.Drawing.Size(106, 20);
+            this.cmbSupplier.TabIndex = 147;
+            this.cmbSupplier.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label15
             // 
@@ -416,6 +440,8 @@
             this.colLength,
             this.colWeight,
             this.colCount,
+            this.col含税出单位成本,
+            this.col不含税出单位成本,
             this.colCustomer,
             this.colSupplier,
             this.colManufacture,
@@ -436,8 +462,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
@@ -445,194 +471,6 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            // 
-            // colAddDate
-            // 
-            this.colAddDate.HeaderText = "入库日期";
-            this.colAddDate.Name = "colAddDate";
-            this.colAddDate.ReadOnly = true;
-            this.colAddDate.Width = 120;
-            // 
-            // colWareHouse
-            // 
-            this.colWareHouse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colWareHouse.HeaderText = "仓库";
-            this.colWareHouse.Name = "colWareHouse";
-            this.colWareHouse.ReadOnly = true;
-            this.colWareHouse.Width = 54;
-            // 
-            // colCategory
-            // 
-            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colCategory.HeaderText = "类别";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.Width = 54;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            // 
-            // colOriginalWeight
-            // 
-            dataGridViewCellStyle1.Format = "N3";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colOriginalWeight.HeaderText = "入库重量";
-            this.colOriginalWeight.Name = "colOriginalWeight";
-            this.colOriginalWeight.ReadOnly = true;
-            this.colOriginalWeight.Width = 80;
-            // 
-            // colOriginalCount
-            // 
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colOriginalCount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colOriginalCount.HeaderText = "入库数量";
-            this.colOriginalCount.Name = "colOriginalCount";
-            this.colOriginalCount.ReadOnly = true;
-            this.colOriginalCount.Width = 80;
-            // 
-            // colLength
-            // 
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colLength.HeaderText = "长度";
-            this.colLength.Name = "colLength";
-            this.colLength.ReadOnly = true;
-            this.colLength.Width = 80;
-            // 
-            // colWeight
-            // 
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colWeight.HeaderText = "剩余重量";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.ReadOnly = true;
-            this.colWeight.Width = 80;
-            // 
-            // colCount
-            // 
-            dataGridViewCellStyle5.Format = "N0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colCount.HeaderText = "剩余数量";
-            this.colCount.Name = "colCount";
-            this.colCount.ReadOnly = true;
-            this.colCount.Width = 80;
-            // 
-            // colCustomer
-            // 
-            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colCustomer.HeaderText = "客户";
-            this.colCustomer.Name = "colCustomer";
-            this.colCustomer.ReadOnly = true;
-            this.colCustomer.Width = 54;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colSupplier.HeaderText = "供应商";
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.ReadOnly = true;
-            this.colSupplier.Width = 66;
-            // 
-            // colManufacture
-            // 
-            this.colManufacture.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colManufacture.HeaderText = "厂家";
-            this.colManufacture.Name = "colManufacture";
-            this.colManufacture.ReadOnly = true;
-            this.colManufacture.Width = 54;
-            // 
-            // colState
-            // 
-            this.colState.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colState.HeaderText = "库存状态";
-            this.colState.Name = "colState";
-            this.colState.ReadOnly = true;
-            this.colState.Width = 78;
-            // 
-            // colDeliverySheet
-            // 
-            this.colDeliverySheet.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colDeliverySheet.HeaderText = "送货单";
-            this.colDeliverySheet.Name = "colDeliverySheet";
-            this.colDeliverySheet.ReadOnly = true;
-            this.colDeliverySheet.Width = 47;
-            // 
-            // colPurchasePrice
-            // 
-            dataGridViewCellStyle6.Format = "C2";
-            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colPurchasePrice.HeaderText = "入库单价";
-            this.colPurchasePrice.Name = "colPurchasePrice";
-            this.colPurchasePrice.ReadOnly = true;
-            // 
-            // col结算单价
-            // 
-            dataGridViewCellStyle7.Format = "C2";
-            this.col结算单价.DefaultCellStyle = dataGridViewCellStyle7;
-            this.col结算单价.HeaderText = "结算单价";
-            this.col结算单价.Name = "col结算单价";
-            this.col结算单价.ReadOnly = true;
-            // 
-            // colPurchaseTax
-            // 
-            this.colPurchaseTax.HeaderText = "含税";
-            this.colPurchaseTax.Name = "colPurchaseTax";
-            this.colPurchaseTax.ReadOnly = true;
-            this.colPurchaseTax.Width = 40;
-            // 
-            // colTransCost
-            // 
-            dataGridViewCellStyle8.Format = "C2";
-            this.colTransCost.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colTransCost.HeaderText = "运输费用";
-            this.colTransCost.Name = "colTransCost";
-            this.colTransCost.ReadOnly = true;
-            this.colTransCost.Width = 80;
-            // 
-            // colOtherCost
-            // 
-            dataGridViewCellStyle9.Format = "C2";
-            this.colOtherCost.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colOtherCost.HeaderText = "其它费用";
-            this.colOtherCost.Name = "colOtherCost";
-            this.colOtherCost.ReadOnly = true;
-            this.colOtherCost.Width = 80;
-            // 
-            // colPosition
-            // 
-            this.colPosition.HeaderText = "摆放位置";
-            this.colPosition.Name = "colPosition";
-            this.colPosition.ReadOnly = true;
-            // 
-            // colMaterial
-            // 
-            this.colMaterial.HeaderText = "材质";
-            this.colMaterial.Name = "colMaterial";
-            this.colMaterial.ReadOnly = true;
-            // 
-            // colCarplate
-            // 
-            this.colCarplate.HeaderText = "车皮号";
-            this.colCarplate.Name = "colCarplate";
-            this.colCarplate.ReadOnly = true;
-            // 
-            // colPurchaseID
-            // 
-            this.colPurchaseID.HeaderText = "合同号";
-            this.colPurchaseID.Name = "colPurchaseID";
-            this.colPurchaseID.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
             // 
             // contextMenuStrip1
             // 
@@ -652,7 +490,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 286);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 264);
             // 
             // cMnu_Fresh
             // 
@@ -705,19 +543,19 @@
             this.更换仓库ToolStripMenuItem.Text = "更换仓库";
             this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
             // 
-            // mnu_Nullify
-            // 
-            this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(172, 22);
-            this.mnu_Nullify.Text = "作废";
-            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
-            // 
             // mnu_Check
             // 
             this.mnu_Check.Name = "mnu_Check";
             this.mnu_Check.Size = new System.Drawing.Size(172, 22);
             this.mnu_Check.Text = "盘点";
             this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
+            // 
+            // mnu_Nullify
+            // 
+            this.mnu_Nullify.Name = "mnu_Nullify";
+            this.mnu_Nullify.Size = new System.Drawing.Size(172, 22);
+            this.mnu_Nullify.Text = "作废";
+            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
             // 
             // toolStripSeparator4
             // 
@@ -743,25 +581,213 @@
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
-            // cmbBrand
+            // colAddDate
             // 
-            this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBrand.FormattingEnabled = true;
-            this.cmbBrand.Location = new System.Drawing.Point(202, 49);
-            this.cmbBrand.Name = "cmbBrand";
-            this.cmbBrand.Size = new System.Drawing.Size(108, 20);
-            this.cmbBrand.TabIndex = 148;
-            this.cmbBrand.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.colAddDate.HeaderText = "入库日期";
+            this.colAddDate.Name = "colAddDate";
+            this.colAddDate.ReadOnly = true;
+            this.colAddDate.Width = 120;
             // 
-            // cmbSupplier
+            // colWareHouse
             // 
-            this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSupplier.FormattingEnabled = true;
-            this.cmbSupplier.Location = new System.Drawing.Point(54, 49);
-            this.cmbSupplier.Name = "cmbSupplier";
-            this.cmbSupplier.Size = new System.Drawing.Size(106, 20);
-            this.cmbSupplier.TabIndex = 147;
-            this.cmbSupplier.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.colWareHouse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colWareHouse.HeaderText = "仓库";
+            this.colWareHouse.Name = "colWareHouse";
+            this.colWareHouse.ReadOnly = true;
+            this.colWareHouse.Width = 54;
+            // 
+            // colCategory
+            // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.Width = 54;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
+            // 
+            // colOriginalWeight
+            // 
+            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colOriginalWeight.HeaderText = "入库重量";
+            this.colOriginalWeight.Name = "colOriginalWeight";
+            this.colOriginalWeight.ReadOnly = true;
+            this.colOriginalWeight.Visible = false;
+            this.colOriginalWeight.Width = 80;
+            // 
+            // colOriginalCount
+            // 
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colOriginalCount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colOriginalCount.HeaderText = "入库数量";
+            this.colOriginalCount.Name = "colOriginalCount";
+            this.colOriginalCount.ReadOnly = true;
+            this.colOriginalCount.Visible = false;
+            this.colOriginalCount.Width = 80;
+            // 
+            // colLength
+            // 
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colLength.HeaderText = "长度";
+            this.colLength.Name = "colLength";
+            this.colLength.ReadOnly = true;
+            this.colLength.Width = 80;
+            // 
+            // colWeight
+            // 
+            dataGridViewCellStyle4.Format = "N3";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colWeight.HeaderText = "重量";
+            this.colWeight.Name = "colWeight";
+            this.colWeight.ReadOnly = true;
+            this.colWeight.Width = 80;
+            // 
+            // colCount
+            // 
+            dataGridViewCellStyle5.Format = "N0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
+            this.colCount.Width = 80;
+            // 
+            // col含税出单位成本
+            // 
+            dataGridViewCellStyle6.Format = "C2";
+            this.col含税出单位成本.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col含税出单位成本.HeaderText = "含税出单位成本";
+            this.col含税出单位成本.Name = "col含税出单位成本";
+            this.col含税出单位成本.ReadOnly = true;
+            this.col含税出单位成本.Width = 90;
+            // 
+            // col不含税出单位成本
+            // 
+            dataGridViewCellStyle7.Format = "C2";
+            this.col不含税出单位成本.DefaultCellStyle = dataGridViewCellStyle7;
+            this.col不含税出单位成本.HeaderText = "不含税出单位成本";
+            this.col不含税出单位成本.Name = "col不含税出单位成本";
+            this.col不含税出单位成本.ReadOnly = true;
+            this.col不含税出单位成本.Width = 90;
+            // 
+            // colCustomer
+            // 
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colCustomer.HeaderText = "客户";
+            this.colCustomer.Name = "colCustomer";
+            this.colCustomer.ReadOnly = true;
+            this.colCustomer.Width = 51;
+            // 
+            // colSupplier
+            // 
+            this.colSupplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colSupplier.HeaderText = "供应商";
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.ReadOnly = true;
+            this.colSupplier.Width = 61;
+            // 
+            // colManufacture
+            // 
+            this.colManufacture.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colManufacture.HeaderText = "厂家";
+            this.colManufacture.Name = "colManufacture";
+            this.colManufacture.ReadOnly = true;
+            this.colManufacture.Width = 51;
+            // 
+            // colState
+            // 
+            this.colState.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colState.HeaderText = "库存状态";
+            this.colState.Name = "colState";
+            this.colState.ReadOnly = true;
+            this.colState.Width = 61;
+            // 
+            // colDeliverySheet
+            // 
+            this.colDeliverySheet.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colDeliverySheet.HeaderText = "送货单";
+            this.colDeliverySheet.Name = "colDeliverySheet";
+            this.colDeliverySheet.ReadOnly = true;
+            this.colDeliverySheet.Width = 42;
+            // 
+            // colPurchasePrice
+            // 
+            dataGridViewCellStyle8.Format = "C2";
+            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colPurchasePrice.HeaderText = "入库单价";
+            this.colPurchasePrice.Name = "colPurchasePrice";
+            this.colPurchasePrice.ReadOnly = true;
+            // 
+            // col结算单价
+            // 
+            dataGridViewCellStyle9.Format = "C2";
+            this.col结算单价.DefaultCellStyle = dataGridViewCellStyle9;
+            this.col结算单价.HeaderText = "结算单价";
+            this.col结算单价.Name = "col结算单价";
+            this.col结算单价.ReadOnly = true;
+            // 
+            // colPurchaseTax
+            // 
+            this.colPurchaseTax.HeaderText = "含税";
+            this.colPurchaseTax.Name = "colPurchaseTax";
+            this.colPurchaseTax.ReadOnly = true;
+            this.colPurchaseTax.Width = 40;
+            // 
+            // colTransCost
+            // 
+            dataGridViewCellStyle10.Format = "C2";
+            this.colTransCost.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colTransCost.HeaderText = "运输费用";
+            this.colTransCost.Name = "colTransCost";
+            this.colTransCost.ReadOnly = true;
+            this.colTransCost.Width = 80;
+            // 
+            // colOtherCost
+            // 
+            dataGridViewCellStyle11.Format = "C2";
+            this.colOtherCost.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colOtherCost.HeaderText = "其它费用";
+            this.colOtherCost.Name = "colOtherCost";
+            this.colOtherCost.ReadOnly = true;
+            this.colOtherCost.Width = 80;
+            // 
+            // colPosition
+            // 
+            this.colPosition.HeaderText = "摆放位置";
+            this.colPosition.Name = "colPosition";
+            this.colPosition.ReadOnly = true;
+            // 
+            // colMaterial
+            // 
+            this.colMaterial.HeaderText = "材质";
+            this.colMaterial.Name = "colMaterial";
+            this.colMaterial.ReadOnly = true;
+            // 
+            // colCarplate
+            // 
+            this.colCarplate.HeaderText = "车皮号";
+            this.colCarplate.Name = "colCarplate";
+            this.colCarplate.ReadOnly = true;
+            // 
+            // colPurchaseID
+            // 
+            this.colPurchaseID.HeaderText = "合同号";
+            this.colPurchaseID.Name = "colPurchaseID";
+            this.colPurchaseID.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
             // 
             // Frm其它产品库存
             // 
@@ -831,6 +857,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnu_查看价格改动记录;
         private System.Windows.Forms.ToolStripMenuItem mnu_Nullify;
+        private Controls.CustomerCombobox cmbBrand;
+        private Controls.CustomerCombobox cmbSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
@@ -840,6 +868,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col含税出单位成本;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col不含税出单位成本;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
@@ -855,7 +885,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarplate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private Controls.CustomerCombobox cmbBrand;
-        private Controls.CustomerCombobox cmbSupplier;
     }
 }

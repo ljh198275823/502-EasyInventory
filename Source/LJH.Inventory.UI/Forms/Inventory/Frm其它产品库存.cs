@@ -213,6 +213,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.其它费用);
                 if (ci != null) row.Cells["colOtherCost"].Value = ci.Price;
+                if (sr.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = sr.CalUnitCost(true, UserSettings.Current.税点系数);
+                if (sr.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = sr.CalUnitCost(false, UserSettings.Current.税点系数);
             }
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colPosition"].Value = sr.Position;
@@ -252,10 +254,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void mnu_Add_Click(object sender, EventArgs e)
         {
             var frm = new Frm其它产品入库();
-            if (frm.ShowDialog() == DialogResult.OK)
+            frm.ItemAdded += delegate(object o, ItemAddedEventArgs args)
             {
-                Add_And_Show_Row(frm.SteelRollSlice);
-            }
+                ReFreshData();
+            };
+            frm.ShowDialog();
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)

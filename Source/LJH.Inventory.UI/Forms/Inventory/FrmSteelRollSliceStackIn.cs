@@ -33,6 +33,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public bool IsForView { get; set; }
         #endregion
 
+        public event EventHandler<ItemAddedEventArgs> ItemAdded;
+        public event EventHandler<ItemUpdatedEventArgs> ItemUpdated;
+
         #region 私有方法
         private void InitControls()
         {
@@ -376,7 +379,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
             else ret = new SteelRollSliceBLL(AppSettings.Current.ConnStr).Update(item);
             if (ret.Result == ResultCode.Successful)
             {
-                this.DialogResult = DialogResult.OK;
+                if (SteelRollSlice == null) //新增
+                {
+                    cmbSpecification.Specification = null;
+                    txtWeight.DecimalValue = 0;
+                    if (txtLength.DecimalValue > 0) txtLength.DecimalValue = 0;
+                    txtCount.DecimalValue = 0;
+                    SteelRollSlice = null;
+                    cmbSpecification.Focus();
+                    if (this.ItemAdded != null) this.ItemAdded(this, new ItemAddedEventArgs(item));
+                }
+                else
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
             }
             else
             {

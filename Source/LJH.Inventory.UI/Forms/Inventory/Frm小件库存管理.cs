@@ -254,10 +254,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void mnu_CreateInventory_Click(object sender, EventArgs e)
         {
             FrmSteelRollSliceStackIn frm = new FrmSteelRollSliceStackIn();
-            if (frm.ShowDialog() == DialogResult.OK)
+            frm.ItemAdded += delegate(object o, ItemAddedEventArgs args)
             {
                 ReFreshData();
-            }
+            };
+            frm.ShowDialog();
         }
 
         private void mnu_Check_Click(object sender, EventArgs e)
@@ -331,6 +332,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (ForSelect) return;
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
             if (pi.SourceID == null && pi.SourceRoll == null)
@@ -369,7 +371,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    if (pi.SourceID == null && pi.SourceRoll == null) //只有新建入库的才能改单价，
+                    if (pi.SourceRoll == null) //只有新建入库的才能改单价，
                     {
                         var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置结算单价(pi, frm.结算单价, Operator.Current.Name, Operator.Current.ID);
                         if (ret.Result == ResultCode.Successful)
@@ -395,7 +397,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    if (pi.SourceID == null && pi.SourceRoll == null) //只有新建入库的才能改单价，
+                    if (pi.SourceRoll == null) //只有新建入库的才能改单价，
                     {
                         var ret = new SteelRollBLL(AppSettings.Current.ConnStr).ChangeCost(pi, costs, Operator.Current.Name, Operator.Current.ID);
                         if (ret.Result == ResultCode.Successful)

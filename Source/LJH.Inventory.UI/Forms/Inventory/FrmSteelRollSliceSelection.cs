@@ -20,14 +20,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             InitializeComponent();
         }
-        private FrmProductInventoryMaster _FrmSteelRollSlice = null;
+        private Frm小件库存管理 _FrmSteelRollSlice = null;
         private List<WareHouse> _AllWarehouse = new LJH.Inventory.BLL.WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
         public Dictionary<ProductInventoryItem, decimal> SelectedItems { get; set; }
 
         #region 事件处理程序
         private void FrmSteelRollSliceSelection_Load(object sender, EventArgs e)
         {
-            _FrmSteelRollSlice = new FrmProductInventoryMaster();
+            _FrmSteelRollSlice = new Frm小件库存管理();
             _FrmSteelRollSlice.ForSelect = true;
             _FrmSteelRollSlice.MultiSelect = true;
             _FrmSteelRollSlice.ItemSelected += new EventHandler<GeneralLibrary.Core.UI.ItemSelectedEventArgs>(FrmSteelRollSlice_ItemSelected);

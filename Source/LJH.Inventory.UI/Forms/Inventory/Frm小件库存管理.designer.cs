@@ -144,7 +144,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 286);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
             // 
             // cMnu_Fresh
             // 
@@ -708,7 +708,7 @@
             this.colWareHouse.HeaderText = "仓库";
             this.colWareHouse.Name = "colWareHouse";
             this.colWareHouse.ReadOnly = true;
-            this.colWareHouse.Width = 54;
+            this.colWareHouse.Width = 51;
             // 
             // colCategory
             // 
@@ -786,7 +786,7 @@
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
-            this.colCustomer.Width = 54;
+            this.colCustomer.Width = 51;
             // 
             // colManufacture
             // 
@@ -794,7 +794,7 @@
             this.colManufacture.HeaderText = "厂家";
             this.colManufacture.Name = "colManufacture";
             this.colManufacture.ReadOnly = true;
-            this.colManufacture.Width = 54;
+            this.colManufacture.Width = 51;
             // 
             // colSupplier
             // 
@@ -802,7 +802,7 @@
             this.colSupplier.HeaderText = "供应商";
             this.colSupplier.Name = "colSupplier";
             this.colSupplier.ReadOnly = true;
-            this.colSupplier.Width = 66;
+            this.colSupplier.Width = 61;
             // 
             // colSourceRoll
             // 
