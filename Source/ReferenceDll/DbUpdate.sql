@@ -199,12 +199,6 @@ BEGIN
 end
 go
 
-if not exists (SELECT * FROM dbo.syscolumns WHERE name ='AccountID' AND id = OBJECT_ID(N'[dbo].[ExpenditureRecord]'))
-BEGIN
-	exec ('alter table ExpenditureRecord add AccountID nvarchar(50) null')
-end
-go
-
 if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Class' AND id = OBJECT_ID(N'[dbo].[Account]'))
 BEGIN
 	exec ('alter table Account add Class tinyint null')
