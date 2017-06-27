@@ -1,75 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BLL;
-using LJH.GeneralLibrary.SQLHelper;
+using LJH.GeneralLibrary;
 
 namespace InventoryApplication
 {
     public partial class FrmLogin : Form
     {
-        private bool _Adance = false;
-        private SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();
-
         public FrmLogin()
         {
             InitializeComponent();
         }
 
+        #region 私有变量
+        private string _DefaultDBPath = Path.Combine(Application.StartupPath, "Inventory.db");
+        private string _DBPath = null;
+        #endregion
+
         #region 私有方法
-        private bool CheckConnect()
+        private bool DoLogin(string logName, string pwd)
         {
-            sb.DataSource = this.txtServer.Text;
-            sb.InitialCatalog = this.txtDataBase.Text;
-            sb.IntegratedSecurity = rdSystem.Checked;
-            sb.UserID = this.txtUserID.Text;
-            sb.Password = this.txtPasswd.Text;
-            sb.PersistSecurityInfo = true;
-            sb.ConnectTimeout = 5;
-            try
+            SaveConnectString();
+            UpgradeLocalDB(); //升级本地数据库
+            OperatorBLL authen = new OperatorBLL(AppSettings.Current.ConnStr);
+            if (authen.Authentication(logName, pwd))
             {
-                using (SqlConnection con = new SqlConnection())
-                {
-                    con.ConnectionString = sb.ConnectionString;
-                    con.Open();
-                    con.Close();
-                    AppSettings.Current.ConnStr = sb.ConnectionString;
-                    return true;
-                }
+                this.DialogResult = DialogResult.OK;
+                if (AppSettings.Current.RememberLogID) SaveHistoryOperators();
+                this.Close();
+                return true;
             }
-            catch (Exception ex)
+            else
             {
                 return false;
             }
         }
 
-        private bool UpGradeDataBase()
+        private void SaveConnectString()
         {
-            bool ret = false;
-            string path = System.IO.Path.Combine(Application.StartupPath, "DbUpdate.sql");
-            if (System.IO.File.Exists(path))
+            _DBPath = txtConnstr.Text.Trim();
+            if (string.IsNullOrEmpty(_DBPath)) _DBPath = _DefaultDBPath;
+            AppSettings.Current.SaveConfig("DBPath", _DBPath);
+            AppSettings.Current.ConnStr = "SQLITE:Data Source=" + _DBPath;
+
+        }
+
+        private void UpgradeLocalDB()
+        {
+            string path = System.IO.Path.Combine(Application.StartupPath, "DbUpdate_Sqlite.sql");
+            if (File.Exists(path))
             {
-                try
+                List<string> commands = (new LJH.GeneralLibrary.SQLHelper.SQLStringExtractor()).ExtractFromFile(path);
+                if (commands != null && commands.Count > 0)
                 {
-                    SqlClient client = new SqlClient(AppSettings.Current.ConnStr);
-                    client.Connect();
-                    client.ExecuteSQLFile(path);
-                    ret = true;
-                }
-                catch (Exception ex)
-                {
-                    LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
+                    using (System.Data.SQLite.SQLiteConnection con = new System.Data.SQLite.SQLiteConnection("Data Source=" + _DBPath))
+                    {
+                        using (System.Data.SQLite.SQLiteCommand cmd = new System.Data.SQLite.SQLiteCommand(con))
+                        {
+                            con.Open();
+                            foreach (string command in commands)
+                            {
+                                try
+                                {
+                                    cmd.CommandText = command;
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch (Exception ex)
+                                {
+                                    //LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            return ret;
         }
 
         private List<string> GetHistoryOperators()
@@ -132,32 +140,18 @@ namespace InventoryApplication
         }
         #endregion
 
-        #region 事件处理程序
         private void Login_Load(object sender, EventArgs e)
         {
-            this.gpDB.Visible = false;
-            this.Height = 150;
-            if (!string.IsNullOrEmpty(AppSettings.Current.ConnStr))
+            txtWarning.Text = "注意： 本软件只用于演示和试用，我司对本软件造成的数据丢失不负责任，如果正式使用，请联系厂家使用正式版软件！";
+            txtConnstr.Text = AppSettings.Current.GetConfigContent("DBPath");
+            if (!string.IsNullOrEmpty(CommandLineArgs.UserName))
             {
-                try
-                {
-                    sb = new SqlConnectionStringBuilder(AppSettings.Current.ConnStr);
-                    txtServer.Text = sb.DataSource;
-                    txtDataBase.Text = sb.InitialCatalog;
-                    if (sb.IntegratedSecurity)
-                    {
-                        this.rdSystem.Checked = true;
-                    }
-                    else
-                    {
-                        this.rdUser.Checked = true;
-                        this.txtUserID.Text = sb.UserID;
-                        this.txtPasswd.Text = sb.Password;
-                    }
-                }
-                catch
-                {
-                }
+                this.txtLogName.Text = CommandLineArgs.UserName;
+                this.txtPassword.Text = CommandLineArgs.Password;
+                CommandLineArgs.UserName = string.Empty;
+                CommandLineArgs.Password = string.Empty;
+                this.btnLogin_Click(this.btnLogin, EventArgs.Empty);
+                return;
             }
 
             this.chkRememberLogid.Checked = AppSettings.Current.RememberLogID;
@@ -176,6 +170,11 @@ namespace InventoryApplication
             }
         }
 
+        private void chkRememberLogid_CheckedChanged(object sender, EventArgs e)
+        {
+            AppSettings.Current.RememberLogID = chkRememberLogid.Checked;
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string logName = this.txtLogName.Text.Trim();
@@ -186,47 +185,16 @@ namespace InventoryApplication
                 MessageBox.Show("用户名不能为空!");
                 return;
             }
+
             if (pwd.Length == 0)
             {
                 MessageBox.Show("密码不能为空!");
                 return;
             }
-            if (string.IsNullOrEmpty(txtServer.Text))
-            {
-                MessageBox.Show("数据库服务器不能为空");
-                return;
-            }
-            if (string.IsNullOrEmpty(txtDataBase.Text))
-            {
-                MessageBox.Show("数据库名称不能为空");
-                return;
-            }
-            if (!CheckConnect()) //检查连接
-            {
-                MessageBox.Show("数据库连接失败");
-                return;
-            }
 
-            UpGradeDataBase(); //升级数据库
-            if (DoLogin(logName, pwd)==false)
+            if (DoLogin(logName, pwd) == false)
             {
                 MessageBox.Show("用户名或者密码输入不正确!");
-            }
-        }
-
-        private bool DoLogin(string logName, string pwd)
-        {
-            OperatorBLL authen = new OperatorBLL(AppSettings.Current.ConnStr);
-            if (authen.Authentication(logName, pwd))
-            {
-                this.DialogResult = DialogResult.OK;
-                if (AppSettings.Current.RememberLogID) SaveHistoryOperators();
-                this.Close();
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -236,37 +204,15 @@ namespace InventoryApplication
             this.Close();
         }
 
-        private void rdSystem_CheckedChanged(object sender, EventArgs e)
+        private void btnBrowse_Click(object sender, EventArgs e)
         {
-            this.txtUserID.Enabled = !rdSystem.Checked;
-            this.txtPasswd.Enabled = !rdSystem.Checked;
-        }
-
-        private void rdUser_CheckedChanged(object sender, EventArgs e)
-        {
-            this.txtUserID.Enabled = rdUser.Checked;
-            this.txtPasswd.Enabled = rdUser.Checked;
-        }
-
-        private void btnAdvance_Click(object sender, EventArgs e)
-        {
-            _Adance = !_Adance;
-            if (_Adance)
+            OpenFileDialog dig = new OpenFileDialog();
+            dig.Filter = "DB 文件|*.db|所有文件(*.*)|*.*";
+            if (dig.ShowDialog() == DialogResult.OK)
             {
-                this.gpDB.Visible = _Adance;
-                this.Height = 250;
-            }
-            else
-            {
-                this.gpDB.Visible = false;
-                this.Height = 150;
+                AppSettings.Current.SaveConfig("DBPath", dig.FileName);
+                txtConnstr.Text = dig.FileName;
             }
         }
-
-        private void chkRememberLogid_CheckedChanged(object sender, EventArgs e)
-        {
-            AppSettings.Current.RememberLogID = chkRememberLogid.Checked;
-        }
-        #endregion
     }
 }

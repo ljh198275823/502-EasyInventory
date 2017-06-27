@@ -35,32 +35,28 @@ namespace LJH.Inventory.BusinessModel
             this.ProductSerialCount = 4;
 
             this.DeliverySheetPrefix = "SHD";
-            this.DeliverySheetDateFormat = "yyyyMM";
-            this.DeliverySheetSerialCount = 5;
+            this.DeliverySheetDateFormat = "yyMM";
+            this.DeliverySheetSerialCount = 3;
 
             this.InventorySheetPrefix = "RKD";
-            this.InventorySheetDateFormat = "yyyyMM";
-            this.InventorySheetSerialCount = 5;
+            this.InventorySheetDateFormat = "yyMM";
+            this.InventorySheetSerialCount = 3;
 
             this.OrderPrefix = "DHD";
-            this.OrderDateFormat = "yyyyMM";
-            this.OrderSerialCount = 5;
+            this.OrderDateFormat = "yyMM";
+            this.OrderSerialCount = 3;
 
             this.PurchaseSheetPrefix = "CGD";
-            this.PurchaseSheetDateFormat = "yyyyMM";
-            this.PurchaseSheetSerialCount = 5;
+            this.PurchaseSheetDateFormat = "yyMM";
+            this.PurchaseSheetSerialCount = 3;
 
-            this.CustomerPaymentPrefix = "FKD";
-            this.CustomerPaymentDateFormat = "yyyyMM";
-            this.CustomerPaymentSerialCount = 5;
+            this.CustomerPaymentPrefix = "收";
+            this.CustomerPaymentDateFormat = "yyMM";
+            this.CustomerPaymentSerialCount = 3;
 
-            this.DaiFuPrefix = "DFD";
-            this.DaiFuDateFormat = "yyyyMM";
-            this.DaiFuSerialCount = 5;
-
-            this.SupplierPaymentPrefix = "ZCD";
-            this.SupplierPaymentDateFormat = "yyyyMM";
-            this.SupplierPaymentSerialCount = 5;
+            this.SupplierPaymentPrefix = "付";
+            this.SupplierPaymentDateFormat = "yyMM";
+            this.SupplierPaymentSerialCount = 3;
         }
         #endregion
 
@@ -314,22 +310,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [DataMember]
         public int SupplierPaymentSerialCount { get; set; }
-
-        /// <summary>
-        /// 获取或设置代付款单前缀
-        /// </summary>
-        [DataMember]
-        public string DaiFuPrefix { get; set; }
-        /// <summary>
-        /// 获取或设置代付款单日期部分的格式
-        /// </summary>
-        [DataMember]
-        public string DaiFuDateFormat { get; set; }
-        /// <summary>
-        /// 获取或设置代付款单序列号部分的长度
-        /// </summary>
-        [DataMember]
-        public int DaiFuSerialCount { get; set; }
 
         [DataMember]
         public string CustomerPrefix { get; set; }

@@ -159,6 +159,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[StackOut
 BEGIN
 CREATE TABLE [StackOutItem](
 	[ID] [uniqueidentifier] NOT NULL,
+	[AddDate] [datetime] NULL,
 	[SheetNo] [nvarchar](50) NOT NULL,
 	[ProductID] [nvarchar](50) NOT NULL,
 	[OrderItem] [uniqueidentifier] NULL,
@@ -168,7 +169,6 @@ CREATE TABLE [StackOutItem](
 	[Count] [decimal](18, 4) NOT NULL,
 	[Length] [decimal](18, 4) NULL,
 	[TotalWeight] [decimal](18, 4) NULL,
-	[AddDate] [datetime] NULL,
 	[InventoryItem] [uniqueidentifier] NULL,
 	[Memo] [nvarchar](200) NULL,
  CONSTRAINT [PK_DeliverySheetItem] PRIMARY KEY CLUSTERED 
@@ -562,33 +562,7 @@ CREATE TABLE [ExpenditureType](
 ) ON [PRIMARY]
 END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ExpenditureRecord]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [ExpenditureRecord](
-	[ID] [nvarchar](50) NOT NULL,
-	[SheetDate] [datetime] NOT NULL,
-	[LastActiveDate] [datetime] NOT NULL,
-	[PaymentMode] [tinyint] NOT NULL,
-	[Category] [nvarchar](50) NULL,
-	[OrderID] [nvarchar](50) NULL,
-	[Amount] [decimal](10, 2) NOT NULL,
-	[Request] [nvarchar](50) NULL,
-	[Payee] [nvarchar](50) NULL,
-	[CheckNum] [nvarchar](50) NULL,
-	[State] [tinyint] NOT NULL,
-	[Memo] [nvarchar](200) NULL,
-	[AccountID] [nvarchar](50) NULL,
- CONSTRAINT [PK__ExpenditureRecor__29572725] PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-END
-GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

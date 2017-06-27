@@ -32,10 +32,8 @@ namespace InventoryApplication
         #region 私有变量
         private Dictionary<Form, string> _openedForms = new Dictionary<Form, string>();
         private SoftDogInfo _SoftDog;
-        private bool _EnableSoftDog = true; //启用加密狗
-        private DateTime _ExpireDate = new DateTime(2016, 1, 31);
-        private DateTime _dtHostDogTime = new DateTime(2016, 1, 31);
-        private int _RetryTime = 0;
+        private bool _EnableSoftDog = false; //启用加密狗
+        private DateTime _ExpireDate = new DateTime(2017, 12, 31);
         #endregion
 
         #region 私有方法
@@ -273,6 +271,54 @@ namespace InventoryApplication
         }
         #endregion
 
+        #region 事件处理程序
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            if (!_EnableSoftDog)
+            {
+                this.Text += string.Format(" 演示版 [{0}] 正式使用请向厂家购买正式版本", Application.ProductVersion);
+                if (DateTime.Today > _ExpireDate)
+                {
+                    MessageBox.Show("软件已经过期,请联系供应商");
+                    Environment.Exit(0);
+                }
+            }
+            else
+            {
+                this.Text += string.Format(" [{0}]", Application.ProductVersion);
+                CheckDog();
+            }
+
+            DoLogIn();
+            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
+            OpenLastForms();
+            this.ucFormViewMain.FormActivated += new EventHandler(ucFormViewMain_FormActivated);
+            this.ucFormViewSecondary.FormActivated += new EventHandler(ucFormViewMain_FormActivated);
+            tmrSoftDogChecker.Enabled = _EnableSoftDog;
+        }
+
+        private void ucFormViewMain_FormActivated(object sender, EventArgs e)
+        {
+            if (sender is LJH.GeneralLibrary.Core.UI.FrmMasterBase)
+            {
+                (sender as LJH.GeneralLibrary.Core.UI.FrmMasterBase).ReFreshData();
+            }
+        }
+
+        private void tmrSoftDogChecker_Tick(object sender, EventArgs e)
+        {
+            tmrSoftDogChecker.Enabled = false;
+            CheckDog();
+            tmrSoftDogChecker.Enabled = true;
+        }
+
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveOpenedForms();
+            Environment.Exit(0);
+        }
+        #endregion
+
         #region 菜单事件程序
         private void mnu_LogOut_Click(object sender, EventArgs e)
         {
@@ -430,55 +476,6 @@ namespace InventoryApplication
         {
             ShowSingleForm<FrmSliceRecordReport>(null);
         }
-        #endregion
-
-        #region 事件处理程序
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-            this.Text += string.Format(" [{0}]", Application.ProductVersion);
-            if (!_EnableSoftDog)
-            {
-                if (DateTime.Today > _ExpireDate)
-                {
-                    MessageBox.Show("软件已经过期,请联系供应商");
-                    Environment.Exit(0);
-                }
-            }
-            else
-            {
-                CheckDog();
-            }
-
-
-            DoLogIn();
-            UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
-            OpenLastForms();
-            this.ucFormViewMain.FormActivated += new EventHandler(ucFormViewMain_FormActivated);
-            this.ucFormViewSecondary.FormActivated += new EventHandler(ucFormViewMain_FormActivated);
-            tmrSoftDogChecker.Enabled = _EnableSoftDog;
-        }
-
-        private void ucFormViewMain_FormActivated(object sender, EventArgs e)
-        {
-            if (sender is LJH.GeneralLibrary.Core.UI.FrmMasterBase)
-            {
-                (sender as LJH.GeneralLibrary.Core.UI.FrmMasterBase).ReFreshData();
-            }
-        }
-
-        private void tmrSoftDogChecker_Tick(object sender, EventArgs e)
-        {
-            tmrSoftDogChecker.Enabled = false;
-            CheckDog();
-            tmrSoftDogChecker.Enabled = true;
-        }
-
-        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            SaveOpenedForms();
-            Environment.Exit(0);
-        }
-        #endregion
 
         private void 其它费用管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -533,5 +530,6 @@ namespace InventoryApplication
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Inventory.Frm其它产品库存>(sender);
         }
+        #endregion
     }
 }

@@ -107,6 +107,10 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                     var a = new AccountBLL(AppSettings.Current.ConnStr).GetByID(finance.FirstAccountID).QueryObject;
                     cell.SetCellValue(a != null ? a.Name : null);
                 }
+                else
+                {
+                    cell.SetCellValue(string.Empty);
+                }
             }
             else if (express == "[付款金额]")
             {

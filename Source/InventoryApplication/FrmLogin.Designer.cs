@@ -34,263 +34,120 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.txtPassword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.gpDB = new System.Windows.Forms.GroupBox();
-            this.txtPasswd = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtUserID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtDataBase = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtServer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.rdUser = new System.Windows.Forms.RadioButton();
-            this.rdSystem = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtLogName = new System.Windows.Forms.ComboBox();
+            this.txtPassword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkRememberLogid = new System.Windows.Forms.CheckBox();
-            this.btnAdvance = new System.Windows.Forms.Button();
-            this.gpDB.SuspendLayout();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtConnstr = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.txtWarning = new System.Windows.Forms.RichTextBox();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 23);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "用户名:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 53);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "密码:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(317, 41);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(131, 23);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "退出软件(&C)";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(317, 12);
+            resources.ApplyResources(this.btnLogin, "btnLogin");
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(131, 23);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "登录(&L)";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPassword.Location = new System.Drawing.Point(69, 50);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(209, 21);
-            this.txtPassword.TabIndex = 1;
-            // 
-            // gpDB
-            // 
-            this.gpDB.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.gpDB.Controls.Add(this.txtPasswd);
-            this.gpDB.Controls.Add(this.txtUserID);
-            this.gpDB.Controls.Add(this.txtDataBase);
-            this.gpDB.Controls.Add(this.txtServer);
-            this.gpDB.Controls.Add(this.label6);
-            this.gpDB.Controls.Add(this.label5);
-            this.gpDB.Controls.Add(this.label4);
-            this.gpDB.Controls.Add(this.label3);
-            this.gpDB.Controls.Add(this.rdUser);
-            this.gpDB.Controls.Add(this.rdSystem);
-            this.gpDB.Location = new System.Drawing.Point(12, 116);
-            this.gpDB.Name = "gpDB";
-            this.gpDB.Size = new System.Drawing.Size(436, 101);
-            this.gpDB.TabIndex = 5;
-            this.gpDB.TabStop = false;
-            this.gpDB.Text = "数据库设置";
-            // 
-            // txtPasswd
-            // 
-            this.txtPasswd.Enabled = false;
-            this.txtPasswd.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPasswd.Location = new System.Drawing.Point(281, 69);
-            this.txtPasswd.Name = "txtPasswd";
-            this.txtPasswd.PasswordChar = '*';
-            this.txtPasswd.Size = new System.Drawing.Size(131, 21);
-            this.txtPasswd.TabIndex = 5;
-            // 
-            // txtUserID
-            // 
-            this.txtUserID.Enabled = false;
-            this.txtUserID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtUserID.Location = new System.Drawing.Point(75, 69);
-            this.txtUserID.Name = "txtUserID";
-            this.txtUserID.Size = new System.Drawing.Size(131, 21);
-            this.txtUserID.TabIndex = 4;
-            // 
-            // txtDataBase
-            // 
-            this.txtDataBase.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDataBase.Location = new System.Drawing.Point(281, 42);
-            this.txtDataBase.Name = "txtDataBase";
-            this.txtDataBase.Size = new System.Drawing.Size(131, 21);
-            this.txtDataBase.TabIndex = 3;
-            // 
-            // txtServer
-            // 
-            this.txtServer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtServer.Location = new System.Drawing.Point(76, 42);
-            this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(131, 21);
-            this.txtServer.TabIndex = 2;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(234, 73);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 12);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "密码：";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(222, 46);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "数据库：";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 73);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "用户名：";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 46);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "服务器：";
-            // 
-            // rdUser
-            // 
-            this.rdUser.AutoSize = true;
-            this.rdUser.Location = new System.Drawing.Point(175, 20);
-            this.rdUser.Name = "rdUser";
-            this.rdUser.Size = new System.Drawing.Size(107, 16);
-            this.rdUser.TabIndex = 1;
-            this.rdUser.Text = "用户名密码验证";
-            this.rdUser.UseVisualStyleBackColor = true;
-            this.rdUser.CheckedChanged += new System.EventHandler(this.rdUser_CheckedChanged);
-            // 
-            // rdSystem
-            // 
-            this.rdSystem.AutoSize = true;
-            this.rdSystem.Checked = true;
-            this.rdSystem.Location = new System.Drawing.Point(41, 20);
-            this.rdSystem.Name = "rdSystem";
-            this.rdSystem.Size = new System.Drawing.Size(95, 16);
-            this.rdSystem.TabIndex = 0;
-            this.rdSystem.TabStop = true;
-            this.rdSystem.Text = "系统集成验证";
-            this.rdSystem.UseVisualStyleBackColor = true;
-            this.rdSystem.CheckedChanged += new System.EventHandler(this.rdSystem_CheckedChanged);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txtLogName);
-            this.groupBox3.Controls.Add(this.chkRememberLogid);
-            this.groupBox3.Controls.Add(this.txtPassword);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(16, 5);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(295, 105);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
             // 
             // txtLogName
             // 
             this.txtLogName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.txtLogName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtLogName.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLogName.Location = new System.Drawing.Point(69, 20);
-            this.txtLogName.MaxLength = 20;
+            resources.ApplyResources(this.txtLogName, "txtLogName");
             this.txtLogName.Name = "txtLogName";
-            this.txtLogName.Size = new System.Drawing.Size(209, 20);
-            this.txtLogName.TabIndex = 0;
+            // 
+            // txtPassword
+            // 
+            resources.ApplyResources(this.txtPassword, "txtPassword");
+            this.txtPassword.Name = "txtPassword";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chkRememberLogid);
+            this.groupBox3.Controls.Add(this.txtPassword);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.txtLogName);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
             // 
             // chkRememberLogid
             // 
-            this.chkRememberLogid.AutoSize = true;
-            this.chkRememberLogid.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkRememberLogid.Location = new System.Drawing.Point(194, 80);
+            resources.ApplyResources(this.chkRememberLogid, "chkRememberLogid");
             this.chkRememberLogid.Name = "chkRememberLogid";
-            this.chkRememberLogid.Size = new System.Drawing.Size(84, 16);
-            this.chkRememberLogid.TabIndex = 4;
-            this.chkRememberLogid.Text = "记住登录名";
             this.chkRememberLogid.UseVisualStyleBackColor = true;
             this.chkRememberLogid.CheckedChanged += new System.EventHandler(this.chkRememberLogid_CheckedChanged);
             // 
-            // btnAdvance
+            // label3
             // 
-            this.btnAdvance.Location = new System.Drawing.Point(317, 71);
-            this.btnAdvance.Name = "btnAdvance";
-            this.btnAdvance.Size = new System.Drawing.Size(131, 23);
-            this.btnAdvance.TabIndex = 4;
-            this.btnAdvance.Text = "高级>>";
-            this.btnAdvance.UseVisualStyleBackColor = true;
-            this.btnAdvance.Click += new System.EventHandler(this.btnAdvance_Click);
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // txtConnstr
+            // 
+            resources.ApplyResources(this.txtConnstr, "txtConnstr");
+            this.txtConnstr.Name = "txtConnstr";
+            // 
+            // btnBrowse
+            // 
+            resources.ApplyResources(this.btnBrowse, "btnBrowse");
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // txtWarning
+            // 
+            this.txtWarning.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.txtWarning, "txtWarning");
+            this.txtWarning.ForeColor = System.Drawing.Color.Red;
+            this.txtWarning.Name = "txtWarning";
+            this.txtWarning.ReadOnly = true;
             // 
             // FrmLogin
             // 
             this.AcceptButton = this.btnLogin;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(463, 226);
-            this.Controls.Add(this.btnAdvance);
+            this.Controls.Add(this.txtWarning);
+            this.Controls.Add(this.btnBrowse);
+            this.Controls.Add(this.txtConnstr);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.gpDB);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmLogin";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "易存企业管理系统 登录";
             this.Load += new System.EventHandler(this.Login_Load);
-            this.gpDB.ResumeLayout(false);
-            this.gpDB.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -300,21 +157,13 @@
         public System.Windows.Forms.Label label2;
         public System.Windows.Forms.Button btnCancel;
         public System.Windows.Forms.Button btnLogin;
-        public LJH.GeneralLibrary.WinformControl.DBCTextBox  txtPassword;
-        private System.Windows.Forms.GroupBox gpDB;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RadioButton rdUser;
-        private System.Windows.Forms.RadioButton rdSystem;
-        private LJH.GeneralLibrary.WinformControl.DBCTextBox  txtPasswd;
-        private LJH.GeneralLibrary.WinformControl.DBCTextBox  txtUserID;
-        private LJH.GeneralLibrary.WinformControl.DBCTextBox  txtDataBase;
-        private LJH.GeneralLibrary.WinformControl.DBCTextBox  txtServer;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnAdvance;
-        private System.Windows.Forms.CheckBox chkRememberLogid;
         public System.Windows.Forms.ComboBox txtLogName;
+        public LJH.GeneralLibrary.WinformControl.DBCTextBox txtPassword;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox chkRememberLogid;
+        public System.Windows.Forms.Label label3;
+        public LJH.GeneralLibrary.WinformControl.DBCTextBox txtConnstr;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.RichTextBox txtWarning;
     }
 }
