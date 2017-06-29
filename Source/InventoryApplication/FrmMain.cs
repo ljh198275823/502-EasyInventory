@@ -32,7 +32,7 @@ namespace InventoryApplication
         #region 私有变量
         private Dictionary<Form, string> _openedForms = new Dictionary<Form, string>();
         private SoftDogInfo _SoftDog;
-        private bool _EnableSoftDog = true; //启用加密狗
+        private bool _EnableSoftDog = false; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2017, 12, 31);
         #endregion
 
@@ -279,8 +279,10 @@ namespace InventoryApplication
                 this.Text += string.Format(" 演示版 [{0}] 正式使用请向厂家购买正式版本", Application.ProductVersion);
                 if (DateTime.Today > _ExpireDate)
                 {
-                    MessageBox.Show("软件已经过期,请联系供应商");
-                    Environment.Exit(0);
+                    FrmContactUs frm = new FrmContactUs();
+                    frm.txtMessage.Text = "软件已经过期";
+                    frm.ShowDialog();
+                    System.Environment.Exit(0);
                 }
             }
             else

@@ -169,6 +169,27 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             return ret;
         }
+
+        private bool SetPrinter(out int copies)
+        {
+            var dig = new PrintDialog();
+            dig.PrinterSettings.PrinterName = AppSettings.Current.送货单打印机;
+            dig.ShowNetwork = false;
+            dig.ShowHelp = false;
+            dig.PrintToFile = false;
+            dig.AllowCurrentPage = false;
+            dig.AllowPrintToFile = false;
+            dig.AllowSelection = false;
+            dig.AllowSomePages = false;
+            if (dig.ShowDialog() == DialogResult.OK)
+            {
+                AppSettings.Current.送货单打印机 = dig.PrinterSettings.PrinterName;
+                copies = dig.PrinterSettings.Copies;
+                return true;
+            }
+            copies = 0;
+            return false;
+        }
         #endregion
 
         #region 重写基类方法
@@ -372,28 +393,32 @@ namespace LJH.Inventory.UI.Forms.Inventory
                             this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
                         }
                     }
-
                     string modal = GetModel();
                     Print.StackOutSheetExporter exporter = null;
                     if (System.IO.File.Exists(modal))
                     {
+                        int copies = 1;
+                        if (!SetPrinter(out copies)) return;
                         exporter = new Print.StackOutSheetExporter(modal);
                         int itemPerpage = 10;
                         if (UserSettings.Current != null && UserSettings.Current.StackoutSheetItemsPerSheet > 0) itemPerpage = UserSettings.Current.StackoutSheetItemsPerSheet;
                         var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder(), itemPerpage);
-                        foreach (var file in files)
+                        for (int i = 0; i < copies; i++)
                         {
-                            if (System.IO.File.Exists(file))
+                            foreach (var file in files)
                             {
-                                ProcessStartInfo psi = new ProcessStartInfo(file);
-                                psi.Verb = "Print";
-                                psi.CreateNoWindow = true;
-                                psi.WindowStyle = ProcessWindowStyle.Hidden;
-                                psi.UseShellExecute = true;
-
-                                Process prs = new Process();
-                                prs.StartInfo = psi;
-                                prs.Start();
+                                if (System.IO.File.Exists(file))
+                                {
+                                    ProcessStartInfo psi = new ProcessStartInfo(file);
+                                    if (!string.IsNullOrEmpty(AppSettings.Current.送货单打印机)) psi.Arguments = "\"" + AppSettings.Current.送货单打印机 + "\"";
+                                    psi.Verb = "PrintTo";
+                                    psi.CreateNoWindow = true;
+                                    psi.WindowStyle = ProcessWindowStyle.Hidden;
+                                    psi.UseShellExecute = true;
+                                    Process prs = new Process();
+                                    prs.StartInfo = psi;
+                                    prs.Start();
+                                }
                             }
                         }
                         if (sheet.State == SheetState.Shipped && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint) this.Close(); //打印后自动出货，打印完成之后关闭窗体

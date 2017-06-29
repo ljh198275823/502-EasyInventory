@@ -110,6 +110,15 @@ namespace LJH.Inventory.BusinessModel
             }
         }
 
+        public string 送货单打印机
+        {
+            get { return GetConfigContent("送货单打印机"); }
+            set
+            {
+                SaveConfig("送货单打印机", value);
+            }
+        }
+
         /// <summary>
         /// 获取或设置登录时是否记录登录名
         /// </summary>
