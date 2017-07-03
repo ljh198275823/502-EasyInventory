@@ -11,7 +11,7 @@ using LJH.GeneralLibrary.Core.DAL.Linq;
 
 namespace LJH.Inventory.DAL.LinqProvider
 {
-    public class StackOutSheetProvider : ProviderBase<StackOutSheet, string>
+    public class StackOutSheetProvider : ProviderBase<StackOutSheet, string>, IStackOutSheetProvider
     {
         #region 构造函数
         public StackOutSheetProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
@@ -89,6 +89,53 @@ namespace LJH.Inventory.DAL.LinqProvider
                     dc.GetTable<StackOutItem>().DeleteOnSubmit(item);
                 }
             }
+        }
+        #endregion
+
+        #region 公共方法
+        public Dictionary<string, DateTime> 获取客户最近一次送货单时间()
+        {
+            try
+            {
+                var dc = CreateDataContext();
+                dc.Log = Console.Out;
+                var items = from s in dc.GetTable<StackOutSheet>()
+                            where s.ClassID == StackOutSheetType.DeliverySheet && s.State == SheetState.Shipped
+                            group s by s.CustomerID into g
+                            select new { CustomerID = g.Key, LastSheetDate = g.Max(it => it.LastActiveDate) };
+
+                Dictionary<string, DateTime> ret = new Dictionary<string, DateTime>();
+                foreach (var it in items)
+                {
+                    ret.Add(it.CustomerID, it.LastSheetDate);
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
+                return null;
+            }
+        }
+
+        public DateTime? 获取客户最近一次送货单时间(string customerID)
+        {
+            try
+            {
+                var dc = CreateDataContext();
+                var items = from s in dc.GetTable<StackOutSheet>()
+                            where s.ClassID == StackOutSheetType.DeliverySheet && s.State == SheetState.Shipped && s.CustomerID == customerID
+                            group s by s.CustomerID into g
+                            select new { CustomerID = g.Key, LastSheetDate = g.Max(it => it.LastActiveDate) };
+                var ret = items.SingleOrDefault();
+                if (ret != null) return ret.LastSheetDate;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
+            }
+            return null;
         }
         #endregion
     }

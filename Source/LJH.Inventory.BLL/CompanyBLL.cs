@@ -157,6 +157,8 @@ namespace LJH.Inventory.BLL
             crsc.Settled = false;
             var customerReceivables = (new CustomerReceivableBLL(RepoUri)).GetItems(crsc).QueryObjects;
 
+            var lastStackouts = ProviderFactory.Create<IStackOutSheetProvider>(RepoUri).获取客户最近一次送货单时间();
+
             List<CompanyInfo> customers = GetAllCustomers().QueryObjects;
             if (customers != null && customers.Count > 0)
             {
@@ -172,6 +174,7 @@ namespace LJH.Inventory.BLL
                         TaxBill = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.客户增值税发票 ? it.Remain : 0) : 0,
                         对公已付金额 = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.公账 ? it.Remain : 0) : 0,
                         发票已核销对公已付金额 = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.公账应收款 ? it.Remain : 0) : 0,
+                        最后一次出货 = lastStackouts != null && lastStackouts.ContainsKey(c.ID) ? (DateTime?)lastStackouts[c.ID] : null
                     };
                     items.Add(cs);
                 }
@@ -207,6 +210,7 @@ namespace LJH.Inventory.BLL
                 对公已付金额 = customerPayments != null ? customerPayments.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerPaymentType.公账 ? it.Remain : 0) : 0,
                 发票已核销对公已付金额 = customerReceivables != null ? customerReceivables.Sum(it => it.CustomerID == c.ID && it.ClassID == CustomerReceivableType.公账应收款 ? it.Remain : 0) : 0,
             };
+            cs.最后一次出货 = ProviderFactory.Create<IStackOutSheetProvider>(RepoUri).获取客户最近一次送货单时间(c.ID);
             return new QueryResult<CustomerFinancialState>(ResultCode.Successful, string.Empty, cs);
         }
 

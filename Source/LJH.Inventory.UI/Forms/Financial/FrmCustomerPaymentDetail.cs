@@ -100,6 +100,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (txtAccount.Tag == null)
             {
                 MessageBox.Show("没有指定账号");
+                return false;
             }
             if ((txtAccount.Tag as Account).Class == AccountType.无效)
             {

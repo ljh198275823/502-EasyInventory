@@ -39,7 +39,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerFinancialStateMaster));
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +63,7 @@
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +80,7 @@
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col距上次发货 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -94,19 +95,6 @@
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(194, 367);
             this.pnlLeft.TabIndex = 110;
-            // 
-            // categoryTree
-            // 
-            this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryTree.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.categoryTree.HideSelection = false;
-            this.categoryTree.ItemHeight = 20;
-            this.categoryTree.LoadCustomer = false;
-            this.categoryTree.Location = new System.Drawing.Point(0, 0);
-            this.categoryTree.Name = "categoryTree";
-            this.categoryTree.Size = new System.Drawing.Size(194, 367);
-            this.categoryTree.TabIndex = 2;
-            this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.FreshData_Clicked);
             // 
             // splitter1
             // 
@@ -326,7 +314,8 @@
             this.col发票已核销对公已付金额,
             this.colPhone,
             this.colLinker,
-            this.colLinkerPhone});
+            this.colLinkerPhone,
+            this.col距上次发货});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 71);
@@ -340,6 +329,19 @@
             this.dataGridView1.Size = new System.Drawing.Size(1038, 296);
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // categoryTree
+            // 
+            this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryTree.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.categoryTree.HideSelection = false;
+            this.categoryTree.ItemHeight = 20;
+            this.categoryTree.LoadCustomer = false;
+            this.categoryTree.Location = new System.Drawing.Point(0, 0);
+            this.categoryTree.Name = "categoryTree";
+            this.categoryTree.Size = new System.Drawing.Size(194, 367);
+            this.categoryTree.TabIndex = 2;
+            this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.FreshData_Clicked);
             // 
             // colImage
             // 
@@ -470,6 +472,12 @@
             this.colLinkerPhone.Name = "colLinkerPhone";
             this.colLinkerPhone.ReadOnly = true;
             // 
+            // col距上次发货
+            // 
+            this.col距上次发货.HeaderText = "距上次发货";
+            this.col距上次发货.Name = "col距上次发货";
+            this.col距上次发货.ReadOnly = true;
+            // 
             // FrmCustomerFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -523,6 +531,7 @@
         private System.Windows.Forms.Label lblTotalWeight;
         private System.Windows.Forms.ToolStripMenuItem mnu_客户往来报表;
         private System.Windows.Forms.ToolStripMenuItem mnu_新增客户退款;
+        private System.Windows.Forms.ToolStripMenuItem mnu_设置税务归档码;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
@@ -539,6 +548,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;
-        private System.Windows.Forms.ToolStripMenuItem mnu_设置税务归档码;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col距上次发货;
     }
 }

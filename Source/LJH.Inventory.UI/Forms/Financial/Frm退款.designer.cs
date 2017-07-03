@@ -37,6 +37,8 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.txtPayer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -65,8 +67,7 @@
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
-            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
+            this.chk公账 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -165,6 +166,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chk公账);
             this.tabPage1.Controls.Add(this.txtCustomer);
             this.tabPage1.Controls.Add(this.lnkCustomer);
             this.tabPage1.Controls.Add(this.txtPayer);
@@ -186,6 +188,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCustomer.Location = new System.Drawing.Point(71, 46);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(413, 21);
+            this.txtCustomer.TabIndex = 104;
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.Location = new System.Drawing.Point(3, 50);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(60, 17);
+            this.lnkCustomer.TabIndex = 103;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
             // 
             // txtPayer
             // 
@@ -455,25 +477,16 @@
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
-            // txtCustomer
+            // chk公账
             // 
-            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(71, 46);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.ReadOnly = true;
-            this.txtCustomer.Size = new System.Drawing.Size(413, 21);
-            this.txtCustomer.TabIndex = 104;
-            // 
-            // lnkCustomer
-            // 
-            this.lnkCustomer.Location = new System.Drawing.Point(3, 50);
-            this.lnkCustomer.Name = "lnkCustomer";
-            this.lnkCustomer.Size = new System.Drawing.Size(60, 17);
-            this.lnkCustomer.TabIndex = 103;
-            this.lnkCustomer.TabStop = true;
-            this.lnkCustomer.Text = "客户";
-            this.lnkCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            this.chk公账.AutoSize = true;
+            this.chk公账.ForeColor = System.Drawing.Color.Red;
+            this.chk公账.Location = new System.Drawing.Point(322, 111);
+            this.chk公账.Name = "chk公账";
+            this.chk公账.Size = new System.Drawing.Size(48, 16);
+            this.chk公账.TabIndex = 108;
+            this.chk公账.Text = "公账";
+            this.chk公账.UseVisualStyleBackColor = true;
             // 
             // Frm退款
             // 
@@ -544,5 +557,6 @@
         private System.Windows.Forms.Label label4;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.LinkLabel lnkCustomer;
+        private System.Windows.Forms.CheckBox chk公账;
     }
 }

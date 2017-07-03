@@ -86,6 +86,7 @@
     <Compile Include="IProvider\ICustomerPaymentProvider.cs" />
     <Compile Include="IProvider\IProductProvider.cs" />
     <Compile Include="IProvider\IServerDatetimeProvider.cs" />
+    <Compile Include="IProvider\IStackOutSheetProvider.cs" />
     <Compile Include="IProvider\ProviderFactory.cs" />
     <Compile Include="LinqProvider\AccountProvider.cs" />
     <Compile Include="LinqProvider\AccountRecordProvider.cs" />

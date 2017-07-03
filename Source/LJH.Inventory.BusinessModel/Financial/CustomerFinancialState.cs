@@ -31,6 +31,20 @@ namespace LJH.Inventory.BusinessModel
         public decimal 对公已付金额 { get; set; }
 
         public decimal 发票已核销对公已付金额 { get; set; }
+
+        #region 20170703添加
+        public DateTime? 最后一次出货 { get; set; }
+
+        public int? 距最后一次出货天数
+        {
+            get
+            {
+                if (!最后一次出货.HasValue) return null;
+                var sp = new TimeSpan(DateTime.Now.Ticks - 最后一次出货.Value.Ticks);
+                return  (int)(Math.Floor(sp.TotalDays));
+            }
+        }
+        #endregion
         /// <summary>
         /// 获取客户的欠款
         /// </summary>

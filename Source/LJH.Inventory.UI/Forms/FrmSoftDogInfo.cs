@@ -24,7 +24,8 @@ namespace LJH.Inventory.UI.Forms
             {
                 lblProjectNum.Text = SoftDog.ProjectNo.ToString();
                 lblStartDate.Text = SoftDog.StartDate.ToShortDateString();
-                lblExpireDate.Text = SoftDog.ExpiredDate.ToShortDateString();
+                if (SoftDog.ExpiredDate.AddYears(2) <= new DateTime(2020, 12, 31)) lblExpireDate.Text = "长期有效";
+                else lblExpireDate.Text = SoftDog.ExpiredDate.ToShortDateString();
             }
         }
 

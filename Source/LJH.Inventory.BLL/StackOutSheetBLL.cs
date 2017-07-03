@@ -62,7 +62,6 @@ namespace LJH.Inventory.BLL
 
             ProductInventoryItem newItem = source.Clone();
             newItem.ID = Guid.NewGuid();
-            newItem.AddDate = dt;
             newItem.SourceID = source.ID;
             newItem.Count = si.Count;
             if (uw != null)

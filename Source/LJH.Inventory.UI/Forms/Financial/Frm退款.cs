@@ -82,6 +82,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAmount.DecimalValue = item.Amount;
                 Customer = (new CompanyBLL(AppSettings.Current.ConnStr)).GetByID(item.CustomerID).QueryObject;
                 txtCustomer.Text = Customer != null ? Customer.Name : string.Empty;
+                chk公账.Checked = item.PaymentMode == PaymentMode.公账;
                 Account ac = null;
                 if (!string.IsNullOrEmpty(item.AccountID)) ac = (new AccountBLL(AppSettings.Current.ConnStr)).GetByID(item.AccountID).QueryObject;
                 txtAccount.Text = ac != null ? ac.Name : string.Empty;
@@ -107,6 +108,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 info = UpdatingItem as CustomerPayment;
             }
+            info.PaymentMode = chk公账.Checked ? PaymentMode.公账 : PaymentMode.私账;
             info.SheetDate = dtSheetDate.Value;
             info.Amount = txtAmount.DecimalValue;
             info.CustomerID = Customer.ID;

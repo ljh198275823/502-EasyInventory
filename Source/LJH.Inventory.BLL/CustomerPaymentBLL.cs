@@ -226,6 +226,20 @@ namespace LJH.Inventory.BLL
                     Memo = info.Memo,
                 };
                 ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+                if (info.ClassID == CustomerPaymentType.客户退款 && info.PaymentMode == PaymentMode.公账)
+                {
+                    var cr1 = new CustomerReceivable()
+                   {
+                       ID = Guid.NewGuid(),
+                       ClassID = CustomerReceivableType.公账应收款,
+                       CustomerID = info.CustomerID,
+                       CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                       SheetID = info.ID,
+                       Amount = info.Amount,
+                       Memo = info.Memo,
+                   };
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr1, unitWork);
+                }
             }
             else
             {

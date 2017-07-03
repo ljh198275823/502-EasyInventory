@@ -130,6 +130,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colTaxBill"].Value = cs.TaxBill;
             row.Cells["col对公已付金额"].Value = cs.对公已付金额;
             row.Cells["col发票已核销对公已付金额"].Value = cs.发票已核销对公已付金额;
+            row.Cells["col距上次发货"].Value = cs.距最后一次出货天数;
             row.Cells["colPhone"].Value = cs.Customer.TelPhone;
             if (cs.Customer.DefaultLinker != null)
             {
