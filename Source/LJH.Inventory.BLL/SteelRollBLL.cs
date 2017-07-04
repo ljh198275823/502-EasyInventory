@@ -280,6 +280,7 @@ namespace LJH.Inventory.BLL
             newR.OriginalCount = 1;
             newR.Length = newR.OriginalLength;
             newR.SourceRoll = clone.ID;
+            newR.CostID = clone.CostID.HasValue ? clone.CostID.Value : clone.ID;
             newR.Memo = memo;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newR, unitWork);
             var ret = unitWork.Commit();
@@ -287,52 +288,6 @@ namespace LJH.Inventory.BLL
             {
                 sr.Weight = clone.Weight;
                 sr.Length = clone.Length;
-            }
-            return ret;
-        }
-
-        public CommandResult 合卷(List<ProductInventoryItem> srs, out ProductInventoryItem newR)
-        {
-            newR = null;
-            if (srs.Exists(it => it.ProductID != srs[0].ProductID)) return new CommandResult(ResultCode.Fail, "不是同一种规格的卷材不能合并");
-            if (srs.Exists(it => it.State != ProductInventoryState.Inventory)) return new CommandResult(ResultCode.Fail, "只有在库的卷才能合并");
-            if (srs.Exists(it => it.OriginalWeight != it.Weight)) return new CommandResult(ResultCode.Fail, "只有整卷卷材才能合并");
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            newR = srs[0].Clone();
-            newR.ID = Guid.NewGuid();
-            newR.ProductID = srs[0].ProductID;
-            newR.Product = srs[0].Product;
-            newR.WareHouseID = srs[0].WareHouseID;
-            newR.AddDate = DateTime.Today;
-            newR.InventorySheet = "合卷";
-            newR.OriginalCount = 1;
-            newR.OriginalWeight = 0;
-            newR.Count = 1;
-            newR.Weight = 0;
-            newR.Memo = "合并卷";
-            foreach (var sr in srs)
-            {
-                var clone = sr.Clone();
-                clone.Weight = 0;
-                clone.Length = 0;
-                clone.SourceID = newR.ID;
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
-                newR.OriginalWeight += sr.Weight;
-                newR.Weight += sr.Weight;
-            }
-            decimal? width = SpecificationHelper.GetWrittenWidth(newR.Product.Specification);
-            decimal? thick = SpecificationHelper.GetWrittenThick(newR.Product.Specification);
-            newR.OriginalLength = ProductInventoryItem.CalLength(thick.Value, width.Value, newR.OriginalWeight.Value, newR.Product.Density.Value);
-            newR.Length = newR.OriginalLength;
-            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newR, unitWork);
-            var ret = unitWork.Commit();
-            if (ret.Result == ResultCode.Successful)
-            {
-                srs.ForEach(it =>
-                    {
-                        it.Weight = 0;
-                        it.Length = 0;
-                    });
             }
             return ret;
         }
@@ -359,6 +314,7 @@ namespace LJH.Inventory.BLL
                 newR.Length = sr.Length;
                 newR.OriginalWeight = weight * it / sum;
                 newR.Weight = weight * it / sum;
+                newR.CostID = sr.CostID.HasValue ? sr.CostID.Value : sr.ID;
                 newR.InventorySheet = "分条";
                 newR.Memo = "分条";
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newR, unitWork);

@@ -138,6 +138,7 @@ namespace LJH.Inventory.BLL
                 depart.Weight = null;
             }
             depart.SourceID = info.ID;
+            depart.CostID = info.CostID.HasValue ? info.CostID.Value : info.ID;
             depart.Memo = memo;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(depart, unitWork);
 

@@ -98,6 +98,10 @@ namespace LJH.Inventory.DAL.LinqProvider
                     dc.GetTable<Cost>().InsertOnSubmit(cs);
                     info.CostID = cs.ID;
                 }
+                else if (info.SourceID == null && info.SourceRoll == null) //如果是新增入库的项，则成本ID设置成其id值 
+                {
+                    info.CostID = info.ID;
+                }
             }
             base.InsertingItem(info, dc);
         }

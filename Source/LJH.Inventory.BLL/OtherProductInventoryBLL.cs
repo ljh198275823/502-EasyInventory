@@ -9,7 +9,7 @@ using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.BLL
 {
-    public class OtherProductInventoryBLL:ProductInventoryItemBLL 
+    public class OtherProductInventoryBLL : ProductInventoryItemBLL
     {
         #region 构造函数
         public OtherProductInventoryBLL(string repoUri)
@@ -125,6 +125,7 @@ namespace LJH.Inventory.BLL
                 depart.Weight = null;
             }
             depart.SourceID = info.ID;
+            depart.CostID = info.CostID.HasValue ? info.CostID.Value : info.ID;
             depart.Memo = memo;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(depart, unitWork);
 

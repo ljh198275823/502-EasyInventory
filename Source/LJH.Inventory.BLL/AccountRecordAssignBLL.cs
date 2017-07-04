@@ -51,13 +51,24 @@ namespace LJH.Inventory.BLL
                 CustomerReceivable cr = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetByID(assign.ReceivableID).QueryObject;
                 if (cr != null && cr.Remain >= assign.Amount)
                 {
-                    AccountRecord cp1 = cp.Clone();
-                    CustomerReceivable cr1 = cr.Clone();
-                    cp.Assigned += assign.Amount;
-                    cr.Haspaid += assign.Amount;
-                    ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Update(cp, cp1, unitWork);
-                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(cr, cr1, unitWork);
-                    ProviderFactory.Create<IProvider<AccountRecordAssign, Guid>>(RepoUri).Insert(assign, unitWork);
+                    if ((cp.ClassID == CustomerPaymentType.客户收款 && cr.ClassID == CustomerReceivableType.CustomerReceivable) ||
+                        (cp.ClassID == CustomerPaymentType.供应商付款 && cr.ClassID == CustomerReceivableType.SupplierReceivable) ||
+                        (cp.ClassID == CustomerPaymentType.客户增值税发票 && cr.ClassID == CustomerReceivableType.CustomerTax) ||
+                        (cp.ClassID == CustomerPaymentType.供应商增值税发票 && cr.ClassID == CustomerReceivableType.SupplierTax) ||
+                        (cp.ClassID == CustomerPaymentType.公账 && cr.ClassID == CustomerReceivableType.公账应收款))
+                    {
+                        AccountRecord cp1 = cp.Clone();
+                        CustomerReceivable cr1 = cr.Clone();
+                        cp.Assigned += assign.Amount;
+                        cr.Haspaid += assign.Amount;
+                        ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Update(cp, cp1, unitWork);
+                        ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(cr, cr1, unitWork);
+                        ProviderFactory.Create<IProvider<AccountRecordAssign, Guid>>(RepoUri).Insert(assign, unitWork);
+                    }
+                    else
+                    {
+                        return new CommandResult(ResultCode.Fail, "核销双方的类型不匹配，不能核销");
+                    }
                 }
             }
             return unitWork.Commit();

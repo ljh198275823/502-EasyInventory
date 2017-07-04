@@ -336,13 +336,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (ForSelect) return;
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
-            if (pi.SourceID == null && pi.SourceRoll == null)
+            if (pi.SourceRoll == null && pi.CostID.HasValue)
             {
+                var item = new SteelRollSliceBLL(AppSettings.Current.ConnStr).GetByID(pi.CostID.Value).QueryObject;
                 FrmSteelRollSliceStackIn frm = new FrmSteelRollSliceStackIn();
-                frm.SteelRollSlice = pi;
+                frm.SteelRollSlice = item;
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();
-                ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], pi);
+                if (item.ID == pi.ID)
+                {
+                    _SteelRolls.Remove(pi);
+                    _SteelRolls.Add(item);
+                    ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], item);
+                }
             }
         }
 

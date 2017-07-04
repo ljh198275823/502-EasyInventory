@@ -49,6 +49,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public Guid? SourceID { get; set; }
 
+        public Guid? CostID { get; set; }
+
         public decimal? OriginalWeight { get; set; }
     }
 }

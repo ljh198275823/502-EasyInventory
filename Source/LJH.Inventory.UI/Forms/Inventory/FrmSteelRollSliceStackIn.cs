@@ -157,7 +157,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             if (txtCount.DecimalValue == 0)
             {
-                MessageBox.Show("库存数量没有填写");
+                MessageBox.Show("入库数量没有填写");
                 txtCount.Focus();
                 return false;
             }
@@ -215,14 +215,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (item.Product.Model == rd开吨.Text) rd开吨.Checked = true;
             if (item.Weight.HasValue) txtWeight.DecimalValue = item.Weight.Value;
             if (item.Product.Length.HasValue) txtLength.DecimalValue = item.Product.Length.Value;
-            txtCount.DecimalValue = item.Count;
+            txtCount.DecimalValue = item.OriginalCount.HasValue ? item.OriginalCount.Value : item.Count;
             txtCustomer.Text = item.Customer;
-            if (!string.IsNullOrEmpty(item.Supplier))
-            {
-                CompanyInfo s = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.Supplier).QueryObject;
-                txtSupplier.Text = s != null ? s.Name : null;
-                txtSupplier.Tag = s;
-            }
+            CompanyInfo s = null;
+            if (!string.IsNullOrEmpty(item.Supplier)) s = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.Supplier).QueryObject;
+            txtSupplier.Text = s != null ? s.Name : null;
+            txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
 
             pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
@@ -249,7 +247,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtMemo.Text = item.Memo;
             if (!IsForView)
             {
-                btnOk.Enabled = item.Count == item.OriginalCount; //出过货或拆过包不能修改
+                if (item.SourceID != null && item.SourceRoll != null) btnOk.Enabled = false;
+                else btnOk.Enabled = item.Count == item.OriginalCount; //出过货或拆过包不能修改
             }
             else
             {

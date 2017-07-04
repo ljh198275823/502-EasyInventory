@@ -162,14 +162,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Text = item.Product.Specification;
             if (item.Weight.HasValue) txtWeight.DecimalValue = item.Weight.Value;
             if (item.Product.Length.HasValue) txtLength.DecimalValue = item.Product.Length.Value;
-            txtCount.DecimalValue = item.Count;
+            txtCount.DecimalValue = item.OriginalCount.HasValue ? item.OriginalCount.Value : item.Count;
             txtCustomer.Text = item.Customer;
-            if (!string.IsNullOrEmpty(item.Supplier))
-            {
-                CompanyInfo s = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.Supplier).QueryObject;
-                txtSupplier.Text = s != null ? s.Name : null;
-                txtSupplier.Tag = s;
-            }
+            CompanyInfo s = null;
+            if (!string.IsNullOrEmpty(item.Supplier)) s = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.Supplier).QueryObject;
+            txtSupplier.Text = s != null ? s.Name : null;
+            txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
 
             pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
@@ -289,8 +287,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 SteelRollSlice = new ProductInventoryItem();
                 SteelRollSlice.ID = Guid.NewGuid();
-                SteelRollSlice.OriginalWeight = txtWeight.DecimalValue;
-                SteelRollSlice.OriginalCount = txtCount.DecimalValue;
                 isAdding = true;
             }
             SteelRollSlice.Product = p;
@@ -298,6 +294,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             SteelRollSlice.Model = p.Model;
             SteelRollSlice.AddDate = dtStorageDateTime.Value;
             SteelRollSlice.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
+            SteelRollSlice.OriginalWeight = txtWeight.DecimalValue;
+            SteelRollSlice.OriginalCount = txtCount.DecimalValue;
             SteelRollSlice.Weight = txtWeight.DecimalValue;
             SteelRollSlice.Count = txtCount.DecimalValue;
             SteelRollSlice.Unit = "件";

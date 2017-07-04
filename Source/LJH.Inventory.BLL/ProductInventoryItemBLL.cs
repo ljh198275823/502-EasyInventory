@@ -285,48 +285,55 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult 设置结算单价(ProductInventoryItem pi, decimal price, string opt, string logID)
+        public CommandResult 设置结算单价(ProductInventoryItem info, decimal price, string opt, string logID)
         {
+            ProductInventoryItem pi = null;
+            if (info.CostID.HasValue) pi = GetByID(info.CostID.Value).QueryObject; //成本ID一般是对应的入库项的ID
+            if (pi == null) return new CommandResult(ResultCode.Fail, "没有找到入库项，设置结算单价失败");
+
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var clone = pi.Clone();
             var ci = pi.GetCost(CostItem.入库单价);
             if (ci == null) return new CommandResult(ResultCode.Fail, "没有找到入库单价");
-            var f = new CostItem() { Name = CostItem.结算单价, Price = price, WithTax = ci.WithTax, Prepay = ci.Prepay };
-            clone.SetCost(f);
+            clone.SetCost(new CostItem() { Name = CostItem.结算单价, Price = price, WithTax = ci.WithTax, Prepay = ci.Prepay });
             AddOperationLog(pi.ID.ToString(), pi.DocumentType, "设置结算单价", unitWork, DateTime.Now, opt, logID, string.Format("将结算单价设置成{0},", price));
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
             var ret = unitWork.Commit();
             if (ret.Result == ResultCode.Successful)
             {
-                pi.Costs = clone.Costs;
+                info.SetCost(clone.GetCost(CostItem.结算单价));
             }
             return ret;
         }
 
-        public CommandResult ChangeCost(ProductInventoryItem sr, List<CostItem> costs, string opt, string logID)
+        public CommandResult ChangeCost(ProductInventoryItem info, List<CostItem> costs, string opt, string logID)
         {
             try
             {
+                ProductInventoryItem pi = null;
+                if (info.CostID.HasValue) pi = GetByID(info.CostID.Value).QueryObject; //成本ID一般是对应的入库项的ID
+                if (pi == null) return new CommandResult(ResultCode.Fail, "没有找到入库项，设置结算单价失败");
+
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-                var clone = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sr.ID).QueryObject;
+                var clone = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(pi.ID).QueryObject;
                 string memo = string.Empty;
                 foreach (var ci in costs)
                 {
-                    var oci = sr.GetCost(ci.Name);
+                    var oci = pi.GetCost(ci.Name);
                     memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
                     clone.SetCost(ci);
                 }
-                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
-                AddOperationLog(sr.ID.ToString(), sr.DocumentType, "修改单价", unitWork, DateTime.Now, opt, logID, memo);
-                if (!string.IsNullOrEmpty(sr.Supplier) && sr.SourceID == null && sr.SourceRoll == null)
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
+                AddOperationLog(pi.ID.ToString(), pi.DocumentType, "修改单价", unitWork, DateTime.Now, opt, logID, memo);
+                if (!string.IsNullOrEmpty(pi.Supplier) && pi.SourceID == null && pi.SourceRoll == null)
                 {
-                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
+                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(pi.Supplier).QueryObject;
                     if (s != null)
                     {
                         var dt = DateTime.Now;
-                        AddReceivables(clone, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (clone.CalTax() > 0) AddTax(clone, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        if (sr.CalTax() > 0 && clone.CalTax() == 0 && !DelTax(clone)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
+                        AddReceivables(clone, new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (clone.CalTax() > 0) AddTax(clone, new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        if (pi.CalTax() > 0 && clone.CalTax() == 0 && !DelTax(clone)) return new CommandResult(ResultCode.Fail, "删除应开增值税时出错，请重试");
                     }
                 }
                 var ret = unitWork.Commit();
@@ -334,7 +341,7 @@ namespace LJH.Inventory.BLL
                 {
                     foreach (var ci in costs)
                     {
-                        sr.SetCost(ci);
+                        info.SetCost(ci);
                     }
                 }
                 return ret;

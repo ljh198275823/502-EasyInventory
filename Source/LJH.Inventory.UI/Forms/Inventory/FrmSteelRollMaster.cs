@@ -132,7 +132,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             base.ShowOperatorRights();
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
             mnu_拆卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit) || Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
-            mnu_合并卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit) || Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
             mnu_开平.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
             mnu_开卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
             mnu_开条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
@@ -345,12 +344,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-            mnu_拆卷.Visible = UserSettings.Current != null && UserSettings.Current.启用原料拆卷和合并功能;
-            mnu_合并卷.Visible = UserSettings.Current != null && UserSettings.Current.启用原料拆卷和合并功能;
-        }
-
         private void mnu_拆卷_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
@@ -373,36 +366,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 else
                 {
                     MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行拆卷", ProductInventoryStateDescription.GetDescription(sr.State)));
-                }
-            }
-        }
-
-        private void mnu_合并卷_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count > 1)
-            {
-                if (MessageBox.Show("是否合并选定的多个原材料卷？", "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
-                var items = new List<ProductInventoryItem>();
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-                    items.Add(row.Tag as ProductInventoryItem);
-                }
-                ProductInventoryItem newR;
-                var ret = new SteelRollBLL(AppSettings.Current.ConnStr).合卷(items, out newR);
-                if (ret.Result == ResultCode.Successful)
-                {
-                    int row = dataGridView1.SelectedRows[dataGridView1.SelectedRows.Count - 1].Index;
-                    dataGridView1.Rows.Insert(row, 1);
-                    _SteelRolls.Add(newR);
-                    ShowItemInGridViewRow(dataGridView1.Rows[row], newR);
-                    foreach (DataGridViewRow r in dataGridView1.SelectedRows)
-                    {
-                        ShowItemInGridViewRow(r, r.Tag);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(ret.Message);
                 }
             }
         }

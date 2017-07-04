@@ -26,6 +26,7 @@ namespace LJH.Inventory.BusinessModel
         /// 供应商应开增值税发票
         /// </summary>
         SupplierTax = 4,
+
         公账应收款 = 5,
     }
 }

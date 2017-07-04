@@ -252,13 +252,14 @@ namespace LJH.Inventory.BusinessModel
 
         public void SetCost(CostItem ci)
         {
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems == null) _CostItems = new List<CostItem>();
             _CostItems.RemoveAll(it => it.Name == ci.Name);
             _CostItems.Add(ci);
             Costs = JsonConvert.SerializeObject(_CostItems);
         }
 
-        public decimal CalReceivable(bool withOtherCosts = true)
+        public decimal CalReceivable()
         {
             decimal ret = 0;
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
@@ -271,19 +272,14 @@ namespace LJH.Inventory.BusinessModel
                 if (Model == ProductModel.其它产品) uw = 1;
                 else return 0;
             }
-            if (OriginalWeight.HasValue) ret += OriginalWeight.Value * ci.Price; //计算应收时应该以入库重量为准
-            else if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * ci.Price;
+            if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * ci.Price;
             else ret += uw.Value * Count * ci.Price;
-            if (withOtherCosts)
+            foreach (var fc in _CostItems)
             {
-                foreach (var fc in _CostItems)
+                if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay)
                 {
-                    if (fc.Name != CostItem.结算单价 && fc.Name != CostItem.入库单价 && fc.Prepay)
-                    {
-                        if (OriginalWeight.HasValue) ret += OriginalWeight.Value * fc.Price; //计算应收时应该以入库重量为准
-                        else if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * fc.Price;
-                        else ret += uw.Value * Count * fc.Price;
-                    }
+                    if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * fc.Price;
+                    else ret += uw.Value * Count * fc.Price;
                 }
             }
             return ret;
@@ -302,8 +298,7 @@ namespace LJH.Inventory.BusinessModel
                 if (Model == ProductModel.其它产品) uw = 1;
                 else return 0;
             }
-            if (OriginalWeight.HasValue) ret += OriginalWeight.Value * ci.Price; //计算应收时应该以入库重量为准
-            else if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * ci.Price;
+            if (OriginalCount.HasValue) ret += uw.Value * OriginalCount.Value * ci.Price;
             else ret += uw.Value * Count * ci.Price;
             return ret;
         }

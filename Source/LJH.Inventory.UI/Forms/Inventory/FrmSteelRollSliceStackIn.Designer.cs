@@ -95,7 +95,7 @@
             // txtCount
             // 
             this.txtCount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCount.Location = new System.Drawing.Point(340, 147);
+            this.txtCount.Location = new System.Drawing.Point(340, 148);
             this.txtCount.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -115,11 +115,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(307, 151);
+            this.label5.Location = new System.Drawing.Point(284, 151);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 10;
-            this.label5.Text = "数量";
+            this.label5.Text = "入库数量";
             // 
             // lnkWarehouse
             // 

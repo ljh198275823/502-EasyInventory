@@ -164,12 +164,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (item.Weight.HasValue) txtWeight.DecimalValue = item.Weight.Value;
             if (item.Length.HasValue) txtLength.DecimalValue = item.Length.Value;
             txtCustomer.Text = item.Customer;
-            if (!string.IsNullOrEmpty(item.Supplier))
-            {
-                CompanyInfo s = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.Supplier).QueryObject;
-                txtSupplier.Text = s != null ? s.Name : null;
-                txtSupplier.Tag = s;
-            }
+            CompanyInfo s = null;
+            if (!string.IsNullOrEmpty(item.Supplier)) s = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.Supplier).QueryObject;
+            txtSupplier.Text = s != null ? s.Name : null;
+            txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
 

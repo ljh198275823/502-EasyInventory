@@ -25,7 +25,6 @@ namespace LJH.Inventory.UI.Forms
             #region 基本
             txtBecomeTailAt.DecimalValue = UserSettings.Current.BecomeTailAt;
             txtBecomeRemainlessAt.DecimalValue = UserSettings.Current.BecomeRemainlessAt;
-            chk启用拆卷和合并功能.Checked = UserSettings.Current.启用原料拆卷和合并功能;
             txtDefaultWareHouse.Text = UserSettings.Current.DefaultWarehouse;
             txtDefaultCustomer.Text = UserSettings.Current.DefaultCustomer;
             txtDefaultProductCategory.Text = UserSettings.Current.DefaultProductCategory;
@@ -118,7 +117,6 @@ namespace LJH.Inventory.UI.Forms
             #region 基本
             us.BecomeTailAt = txtBecomeTailAt.DecimalValue;
             us.BecomeRemainlessAt = txtBecomeRemainlessAt.DecimalValue;
-            us.启用原料拆卷和合并功能 = chk启用拆卷和合并功能.Checked;
             us.DefaultCustomer = txtDefaultCustomer.Text;
             us.DefaultProductCategory = txtDefaultProductCategory.Text;
             us.DefaultWarehouse = txtDefaultWareHouse.Text;
@@ -197,6 +195,12 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
+        private void txtDefaultProductCategory_DoubleClick(object sender, EventArgs e)
+        {
+            txtDefaultProductCategory.Text = string.Empty;
+            txtDefaultProductCategory.Tag = null;
+        }
+
         private void lnkWarehouse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Inventory.FrmWareHouseMaster frm = new Inventory.FrmWareHouseMaster();
@@ -209,6 +213,12 @@ namespace LJH.Inventory.UI.Forms
             }
         }
 
+        private void txtDefaultWareHouse_DoubleClick(object sender, EventArgs e)
+        {
+            txtDefaultWareHouse.Text = null;
+            txtDefaultWareHouse.Tag = null;
+        }
+
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Sale.FrmCustomerMaster frm = new Sale.FrmCustomerMaster();
@@ -217,6 +227,12 @@ namespace LJH.Inventory.UI.Forms
             {
                 txtDefaultCustomer.Text = (frm.SelectedItem as CompanyInfo).Name;
             }
+        }
+
+        private void txtDefaultCustomer_DoubleClick(object sender, EventArgs e)
+        {
+            txtDefaultCustomer.Text = string.Empty;
+            txtDefaultCustomer.Tag = null;
         }
 
         private void lnk默认供应商_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -245,6 +261,12 @@ namespace LJH.Inventory.UI.Forms
             {
                 txt默认厂家.Text = (frm.SelectedItem as CompanyInfo).Name;
             }
+        }
+
+        private void txt默认厂家_DoubleClick(object sender, EventArgs e)
+        {
+            txt默认厂家.Text = string.Empty;
+            txt默认厂家.Tag = null;
         }
 
         private void FrmSystemOptions_Load(object sender, EventArgs e)

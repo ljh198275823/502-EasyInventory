@@ -73,9 +73,6 @@ namespace LJH.Inventory.BusinessModel
         public decimal BecomeTailAt { get; set; }
 
         [DataMember]
-        public bool 启用原料拆卷和合并功能 { get; set; }
-
-        [DataMember]
         public string DefaultCustomer { get; set; }
 
         [DataMember]

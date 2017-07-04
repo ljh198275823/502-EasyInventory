@@ -493,12 +493,6 @@
     <Compile Include="Forms\Inventory\Report\FrmInventoryRecordReport.Designer.cs">
       <DependentUpon>FrmInventoryRecordReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\View\FrmSteelRollSliceView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\View\FrmSteelRollSliceView.Designer.cs">
-      <DependentUpon>FrmSteelRollSliceView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Purchase\FrmSupplierDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -588,12 +582,6 @@
     </Compile>
     <Compile Include="Forms\General\FrmRelatedCompanyMaster.Designer.cs">
       <DependentUpon>FrmRelatedCompanyMaster.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Inventory\FrmSteelRollSliceMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Inventory\FrmSteelRollSliceMaster.Designer.cs">
-      <DependentUpon>FrmSteelRollSliceMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\FrmStackInSheetDetail.cs">
       <SubType>Form</SubType>
@@ -960,9 +948,6 @@
     <EmbeddedResource Include="Forms\Inventory\Report\FrmInventoryRecordReport.resx">
       <DependentUpon>FrmInventoryRecordReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\View\FrmSteelRollSliceView.resx">
-      <DependentUpon>FrmSteelRollSliceView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Purchase\FrmSupplierDetail.resx">
       <DependentUpon>FrmSupplierDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -1010,9 +995,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceStackIn.resx">
       <DependentUpon>FrmSteelRollSliceStackIn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceMaster.resx">
-      <DependentUpon>FrmSteelRollSliceMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmStackInSheetDetail.resx">
       <DependentUpon>FrmStackInSheetDetail.cs</DependentUpon>

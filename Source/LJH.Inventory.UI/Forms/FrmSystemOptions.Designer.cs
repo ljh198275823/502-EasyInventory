@@ -158,7 +158,6 @@
             this.label90 = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
             this.chkNeedMaterial = new System.Windows.Forms.CheckBox();
-            this.chk启用拆卷和合并功能 = new System.Windows.Forms.CheckBox();
             this.txtDefaultCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.chkRealCount = new System.Windows.Forms.CheckBox();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
@@ -1464,7 +1463,6 @@
             this.tabPage2.Controls.Add(this.label90);
             this.tabPage2.Controls.Add(this.label87);
             this.tabPage2.Controls.Add(this.chkNeedMaterial);
-            this.tabPage2.Controls.Add(this.chk启用拆卷和合并功能);
             this.tabPage2.Controls.Add(this.txtDefaultCustomer);
             this.tabPage2.Controls.Add(this.chkRealCount);
             this.tabPage2.Controls.Add(this.lnkCustomer);
@@ -1494,6 +1492,7 @@
             this.txt默认厂家.Name = "txt默认厂家";
             this.txt默认厂家.Size = new System.Drawing.Size(188, 21);
             this.txt默认厂家.TabIndex = 110;
+            this.txt默认厂家.DoubleClick += new System.EventHandler(this.txt默认厂家_DoubleClick);
             // 
             // lnk默认厂家
             // 
@@ -1589,22 +1588,12 @@
             // chkNeedMaterial
             // 
             this.chkNeedMaterial.AutoSize = true;
-            this.chkNeedMaterial.Location = new System.Drawing.Point(23, 146);
+            this.chkNeedMaterial.Location = new System.Drawing.Point(23, 117);
             this.chkNeedMaterial.Name = "chkNeedMaterial";
             this.chkNeedMaterial.Size = new System.Drawing.Size(156, 16);
             this.chkNeedMaterial.TabIndex = 99;
             this.chkNeedMaterial.Text = "入库时需要输入产品材质";
             this.chkNeedMaterial.UseVisualStyleBackColor = true;
-            // 
-            // chk启用拆卷和合并功能
-            // 
-            this.chk启用拆卷和合并功能.AutoSize = true;
-            this.chk启用拆卷和合并功能.Location = new System.Drawing.Point(23, 117);
-            this.chk启用拆卷和合并功能.Name = "chk启用拆卷和合并功能";
-            this.chk启用拆卷和合并功能.Size = new System.Drawing.Size(132, 16);
-            this.chk启用拆卷和合并功能.TabIndex = 96;
-            this.chk启用拆卷和合并功能.Text = "启用拆卷和合并功能";
-            this.chk启用拆卷和合并功能.UseVisualStyleBackColor = true;
             // 
             // txtDefaultCustomer
             // 
@@ -1614,6 +1603,7 @@
             this.txtDefaultCustomer.Name = "txtDefaultCustomer";
             this.txtDefaultCustomer.Size = new System.Drawing.Size(188, 21);
             this.txtDefaultCustomer.TabIndex = 98;
+            this.txtDefaultCustomer.DoubleClick += new System.EventHandler(this.txtDefaultCustomer_DoubleClick);
             // 
             // chkRealCount
             // 
@@ -1652,6 +1642,7 @@
             this.txtDefaultProductCategory.Name = "txtDefaultProductCategory";
             this.txtDefaultProductCategory.Size = new System.Drawing.Size(188, 21);
             this.txtDefaultProductCategory.TabIndex = 94;
+            this.txtDefaultProductCategory.DoubleClick += new System.EventHandler(this.txtDefaultProductCategory_DoubleClick);
             // 
             // lnkCategory
             // 
@@ -1692,6 +1683,7 @@
             this.txtDefaultWareHouse.Name = "txtDefaultWareHouse";
             this.txtDefaultWareHouse.Size = new System.Drawing.Size(188, 21);
             this.txtDefaultWareHouse.TabIndex = 93;
+            this.txtDefaultWareHouse.DoubleClick += new System.EventHandler(this.txtDefaultWareHouse_DoubleClick);
             // 
             // txtBecomeTailAt
             // 
@@ -2089,7 +2081,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkRealCount;
         private System.Windows.Forms.CheckBox chkNeedMaterial;
-        private System.Windows.Forms.CheckBox chk启用拆卷和合并功能;
         private System.Windows.Forms.ComboBox cmbStackoutSheetModel_WithTax;
         private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Label label86;
