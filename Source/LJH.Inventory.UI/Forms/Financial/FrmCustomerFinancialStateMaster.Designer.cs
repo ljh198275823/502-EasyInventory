@@ -39,6 +39,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerFinancialStateMaster));
             this.pnlLeft = new System.Windows.Forms.Panel();
+            this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +64,6 @@
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.categoryTree = new LJH.Inventory.UI.Controls.CustomerTree(this.components);
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +95,19 @@
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(194, 367);
             this.pnlLeft.TabIndex = 110;
+            // 
+            // categoryTree
+            // 
+            this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.categoryTree.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.categoryTree.HideSelection = false;
+            this.categoryTree.ItemHeight = 20;
+            this.categoryTree.LoadCustomer = false;
+            this.categoryTree.Location = new System.Drawing.Point(0, 0);
+            this.categoryTree.Name = "categoryTree";
+            this.categoryTree.Size = new System.Drawing.Size(194, 367);
+            this.categoryTree.TabIndex = 2;
+            this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.FreshData_Clicked);
             // 
             // splitter1
             // 
@@ -330,19 +343,6 @@
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // categoryTree
-            // 
-            this.categoryTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.categoryTree.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.categoryTree.HideSelection = false;
-            this.categoryTree.ItemHeight = 20;
-            this.categoryTree.LoadCustomer = false;
-            this.categoryTree.Location = new System.Drawing.Point(0, 0);
-            this.categoryTree.Name = "categoryTree";
-            this.categoryTree.Size = new System.Drawing.Size(194, 367);
-            this.categoryTree.TabIndex = 2;
-            this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.FreshData_Clicked);
-            // 
             // colImage
             // 
             this.colImage.HeaderText = "";
@@ -477,6 +477,7 @@
             this.col距上次发货.HeaderText = "距上次发货";
             this.col距上次发货.Name = "col距上次发货";
             this.col距上次发货.ReadOnly = true;
+            this.col距上次发货.Visible = false;
             // 
             // FrmCustomerFinancialStateMaster
             // 
