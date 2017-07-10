@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
@@ -131,6 +131,8 @@
             this.mnu_拆卷 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_原材料拆条 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Nullify = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlStates.SuspendLayout();
@@ -151,6 +153,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.label2);
+            this.panel5.Controls.Add(this.txtWeight);
             this.panel5.Controls.Add(this.cmbBrand);
             this.panel5.Controls.Add(this.cmbSupplier);
             this.panel5.Controls.Add(this.label15);
@@ -202,7 +206,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(470, 53);
+            this.label15.Location = new System.Drawing.Point(458, 53);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(41, 12);
             this.label15.TabIndex = 146;
@@ -211,7 +215,7 @@
             // txtPurchaseID
             // 
             this.txtPurchaseID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPurchaseID.Location = new System.Drawing.Point(517, 49);
+            this.txtPurchaseID.Location = new System.Drawing.Point(501, 49);
             this.txtPurchaseID.Name = "txtPurchaseID";
             this.txtPurchaseID.Size = new System.Drawing.Size(114, 21);
             this.txtPurchaseID.TabIndex = 145;
@@ -254,7 +258,7 @@
             // customerCombobox1
             // 
             this.customerCombobox1.FormattingEnabled = true;
-            this.customerCombobox1.Location = new System.Drawing.Point(354, 49);
+            this.customerCombobox1.Location = new System.Drawing.Point(349, 49);
             this.customerCombobox1.Name = "customerCombobox1";
             this.customerCombobox1.Size = new System.Drawing.Size(99, 20);
             this.customerCombobox1.TabIndex = 91;
@@ -263,7 +267,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(322, 53);
+            this.label8.Location = new System.Drawing.Point(317, 53);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 90;
@@ -482,7 +486,7 @@
             // cmbSpecification
             // 
             this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(354, 14);
+            this.cmbSpecification.Location = new System.Drawing.Point(349, 14);
             this.cmbSpecification.Name = "cmbSpecification";
             this.cmbSpecification.Size = new System.Drawing.Size(99, 20);
             this.cmbSpecification.TabIndex = 76;
@@ -491,7 +495,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(322, 18);
+            this.label5.Location = new System.Drawing.Point(317, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 75;
@@ -558,8 +562,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
@@ -598,18 +602,18 @@
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle12.Format = "N3";
+            dataGridViewCellStyle12.NullValue = null;
+            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle12;
             this.colOriginalWeight.HeaderText = "入库重量";
             this.colOriginalWeight.Name = "colOriginalWeight";
             this.colOriginalWeight.ReadOnly = true;
             // 
             // colOriginalLength
             // 
-            dataGridViewCellStyle2.Format = "N3";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle13.Format = "N3";
+            dataGridViewCellStyle13.NullValue = null;
+            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle13;
             this.colOriginalLength.HeaderText = "入库长度";
             this.colOriginalLength.Name = "colOriginalLength";
             this.colOriginalLength.ReadOnly = true;
@@ -617,18 +621,18 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle3.Format = "N3";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle14.Format = "N3";
+            dataGridViewCellStyle14.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle14;
             this.colWeight.HeaderText = "剩余重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             // 
             // colLength
             // 
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle15.Format = "N3";
+            dataGridViewCellStyle15.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle15;
             this.colLength.HeaderText = "剩余长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
@@ -636,9 +640,9 @@
             // 
             // colOriginalThick
             // 
-            dataGridViewCellStyle5.Format = "N3";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle16.Format = "N3";
+            dataGridViewCellStyle16.NullValue = null;
+            this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle16;
             this.colOriginalThick.HeaderText = "入库厚度";
             this.colOriginalThick.Name = "colOriginalThick";
             this.colOriginalThick.ReadOnly = true;
@@ -646,9 +650,9 @@
             // 
             // colRealThick
             // 
-            dataGridViewCellStyle6.Format = "N3";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle17.Format = "N3";
+            dataGridViewCellStyle17.NullValue = null;
+            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle17;
             this.colRealThick.HeaderText = "开平厚度";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
@@ -711,16 +715,16 @@
             // 
             // colPurchasePrice
             // 
-            dataGridViewCellStyle7.Format = "C2";
-            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle18.Format = "C2";
+            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle18;
             this.colPurchasePrice.HeaderText = "入库单价";
             this.colPurchasePrice.Name = "colPurchasePrice";
             this.colPurchasePrice.ReadOnly = true;
             // 
             // col结算单价
             // 
-            dataGridViewCellStyle8.Format = "C2";
-            this.col结算单价.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle19.Format = "C2";
+            this.col结算单价.DefaultCellStyle = dataGridViewCellStyle19;
             this.col结算单价.HeaderText = "结算单价";
             this.col结算单价.Name = "col结算单价";
             this.col结算单价.ReadOnly = true;
@@ -734,8 +738,8 @@
             // 
             // colTransCost
             // 
-            dataGridViewCellStyle9.Format = "C2";
-            this.colTransCost.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle20.Format = "C2";
+            this.colTransCost.DefaultCellStyle = dataGridViewCellStyle20;
             this.colTransCost.HeaderText = "运输费用";
             this.colTransCost.Name = "colTransCost";
             this.colTransCost.ReadOnly = true;
@@ -743,8 +747,8 @@
             // 
             // colOtherCost
             // 
-            dataGridViewCellStyle10.Format = "C2";
-            this.colOtherCost.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle21.Format = "C2";
+            this.colOtherCost.DefaultCellStyle = dataGridViewCellStyle21;
             this.colOtherCost.HeaderText = "其它费用";
             this.colOtherCost.Name = "colOtherCost";
             this.colOtherCost.ReadOnly = true;
@@ -964,37 +968,67 @@
             // 预订ToolStripMenuItem
             // 
             this.预订ToolStripMenuItem.Name = "预订ToolStripMenuItem";
-            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.预订ToolStripMenuItem.Text = "预订";
             this.预订ToolStripMenuItem.Click += new System.EventHandler(this.预订ToolStripMenuItem_Click);
             // 
             // 取消预订ToolStripMenuItem
             // 
             this.取消预订ToolStripMenuItem.Name = "取消预订ToolStripMenuItem";
-            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.取消预订ToolStripMenuItem.Text = "取消预订";
             this.取消预订ToolStripMenuItem.Click += new System.EventHandler(this.取消预订ToolStripMenuItem_Click);
             // 
             // mnu_拆卷
             // 
             this.mnu_拆卷.Name = "mnu_拆卷";
-            this.mnu_拆卷.Size = new System.Drawing.Size(152, 22);
+            this.mnu_拆卷.Size = new System.Drawing.Size(136, 22);
             this.mnu_拆卷.Text = "拆卷";
             this.mnu_拆卷.Click += new System.EventHandler(this.mnu_拆卷_Click);
             // 
             // mnu_原材料拆条
             // 
             this.mnu_原材料拆条.Name = "mnu_原材料拆条";
-            this.mnu_原材料拆条.Size = new System.Drawing.Size(152, 22);
+            this.mnu_原材料拆条.Size = new System.Drawing.Size(136, 22);
             this.mnu_原材料拆条.Text = "原材料分条";
             this.mnu_原材料拆条.Click += new System.EventHandler(this.mnu_原材料拆条_Click);
             // 
             // mnu_Nullify
             // 
             this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(152, 22);
+            this.mnu_Nullify.Size = new System.Drawing.Size(136, 22);
             this.mnu_Nullify.Text = "作废";
             this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(470, 17);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 150;
+            this.label2.Text = "重量";
+            // 
+            // txtWeight
+            // 
+            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtWeight.Location = new System.Drawing.Point(501, 13);
+            this.txtWeight.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtWeight.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtWeight.Name = "txtWeight";
+            this.txtWeight.PointCount = 3;
+            this.txtWeight.Size = new System.Drawing.Size(63, 21);
+            this.txtWeight.TabIndex = 149;
+            this.txtWeight.Text = "0";
+            this.txtWeight.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // FrmSteelRollMaster
             // 
@@ -1115,5 +1149,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseID;
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Label label2;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
     }
 }

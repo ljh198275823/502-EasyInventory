@@ -274,10 +274,3 @@ BEGIN
 	exec ('alter table Customer add TaxFileID int null')
 end
 go
-
-
---20170704 对之前没有设置成本项的进行一次自动设置
-update ProductInventoryItem set CostID =ID where CostID is null and SourceID is null and SourceRoll is null 
-go
-update ProductInventoryItem set CostID =SourceID where CostID is null and SourceID is not null  and SourceRoll is null
-go
