@@ -193,7 +193,7 @@ namespace LJH.Inventory.BLL
         /// <param name="operation"></param>
         /// <param name="opt"></param>
         /// <returns></returns>
-        public CommandResult ProcessSheet(TEntity sheet, SheetOperation operation, string opt, string logID,string memo=null)
+        public CommandResult ProcessSheet(TEntity sheet, SheetOperation operation, string opt, string logID, string memo = null)
         {
             try
             {
@@ -236,7 +236,7 @@ namespace LJH.Inventory.BLL
                             return new CommandResult(ResultCode.Fail, string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(operation)));
                     }
                 }
-                AddOperationLog(sheet.ID, sheet.DocumentType, operation, unitWork, dt.Value, opt, logID);
+                AddOperationLog(sheet.ID, sheet.DocumentType, operation, unitWork, dt.Value, opt, logID, memo);
                 return unitWork.Commit();
             }
             catch (Exception ex)

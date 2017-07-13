@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,6 +39,7 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.txtPayer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
@@ -81,7 +82,6 @@
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnAssign = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
-            this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -144,6 +144,7 @@
             // dtSheetDate
             // 
             this.dtSheetDate.CustomFormat = "yyyy年MM月dd日";
+            this.dtSheetDate.Enabled = false;
             this.dtSheetDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtSheetDate.Location = new System.Drawing.Point(320, 13);
             this.dtSheetDate.Name = "dtSheetDate";
@@ -221,6 +222,13 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dtPaidDate
+            // 
+            this.dtPaidDate.Location = new System.Drawing.Point(319, 75);
+            this.dtPaidDate.Name = "dtPaidDate";
+            this.dtPaidDate.Size = new System.Drawing.Size(188, 21);
+            this.dtPaidDate.TabIndex = 105;
             // 
             // label1
             // 
@@ -378,8 +386,8 @@
             // 
             // colAssign
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAssign.HeaderText = "抵消金额";
             this.colAssign.Name = "colAssign";
             // 
@@ -627,13 +635,6 @@
             this.btnNullify.Text = "作废(&N)";
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
-            // 
-            // dtPaidDate
-            // 
-            this.dtPaidDate.Location = new System.Drawing.Point(319, 75);
-            this.dtPaidDate.Name = "dtPaidDate";
-            this.dtPaidDate.Size = new System.Drawing.Size(188, 21);
-            this.dtPaidDate.TabIndex = 105;
             // 
             // FrmCustomerPaymentDetail
             // 

@@ -27,6 +27,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
 
         private List<CompanyInfo> _AllCustomers = null;
         private List<AccountRecord> _AccountRecords = null;
+        private List<DocumentOperation> _CancelOptions = null;// 
 
         private decimal GetRemain(CustomerPayment cp)
         {
@@ -66,6 +67,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+                var ducopt = (_CancelOptions != null && _CancelOptions.Count > 0) ? _CancelOptions.SingleOrDefault(it => it.DocumentID == cp.ID) : null;
+                row.Cells["col作废原因"].Value = ducopt != null ? ducopt.Memo : null;
             }
         }
 
@@ -82,6 +85,11 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk收.Checked) acon.PaymentTypes.Add(CustomerPaymentType.客户增值税发票);
             if (chk支.Checked) acon.PaymentTypes.Add(CustomerPaymentType.供应商增值税发票);
             _AccountRecords = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(acon).QueryObjects;
+
+            var dcon = new DocumentSearchCondition();
+            dcon.Operation = "作废";
+            dcon.CreateDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, DateTime.MaxValue);
+            _CancelOptions = new DocumentOperationBLL(AppSettings.Current.ConnStr).GetItems(dcon).QueryObjects;
 
             var con = new CustomerPaymentSearchCondition();
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);

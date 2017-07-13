@@ -31,8 +31,10 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (search is DocumentSearchCondition)
             {
                 DocumentSearchCondition con = search as DocumentSearchCondition;
+                if (con.CreateDate != null) ret = ret.Where(item => item.OperatDate >= con.CreateDate.Begin && item.OperatDate <= con.CreateDate.End);
                 if (!string.IsNullOrEmpty(con.DocumentID)) ret = ret.Where(item => item.DocumentID == con.DocumentID);
                 if (!string.IsNullOrEmpty(con.DocumentType)) ret = ret.Where(item => item.DocumentType == con.DocumentType);
+                if (!string.IsNullOrEmpty(con.Operation)) ret = ret.Where(item => item.Operation == con.Operation);
             }
             return ret.ToList();
         }

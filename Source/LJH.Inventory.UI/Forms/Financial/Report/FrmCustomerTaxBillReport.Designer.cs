@@ -55,6 +55,7 @@
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col购货单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col出票单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col作废原因 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -226,6 +227,7 @@
             this.colCustomer,
             this.col购货单位,
             this.col出票单位,
+            this.col作废原因,
             this.colMemo});
             this.dataGridView1.Location = new System.Drawing.Point(5, 102);
             this.dataGridView1.Name = "dataGridView1";
@@ -316,6 +318,12 @@
             this.col出票单位.ReadOnly = true;
             this.col出票单位.Width = 78;
             // 
+            // col作废原因
+            // 
+            this.col作废原因.HeaderText = "作废原因";
+            this.col作废原因.Name = "col作废原因";
+            this.col作废原因.ReadOnly = true;
+            // 
             // colMemo
             // 
             this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -374,6 +382,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn col购货单位;
         private System.Windows.Forms.DataGridViewTextBoxColumn col出票单位;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col作废原因;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

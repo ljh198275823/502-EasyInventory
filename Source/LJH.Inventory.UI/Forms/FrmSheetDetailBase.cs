@@ -84,9 +84,10 @@ namespace LJH.Inventory.UI.Forms
                 foreach (DocumentOperation item in items)
                 {
                     int row = dataGridView1.Rows.Add();
-                    dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
-                    dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
-                    dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
+                    if (dataGridView1.Columns.Contains("colOperateDate")) dataGridView1.Rows[row].Cells["colOperateDate"].Value = item.OperatDate;
+                    if (dataGridView1.Columns.Contains("colOperation")) dataGridView1.Rows[row].Cells["colOperation"].Value = item.Operation;
+                    if (dataGridView1.Columns.Contains("colOperator")) dataGridView1.Rows[row].Cells["colOperator"].Value = item.Operator;
+                    if (dataGridView1.Columns.Contains("colMemo")) dataGridView1.Rows[row].Cells["colMemo"].Value = item.Memo;
                 }
             }
         }

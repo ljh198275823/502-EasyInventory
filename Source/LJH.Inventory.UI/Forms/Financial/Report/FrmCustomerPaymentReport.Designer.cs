@@ -64,6 +64,7 @@
             this.colStackSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col到款日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col作废原因 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -309,7 +310,8 @@
             this.colCustomer,
             this.colStackSheetID,
             this.col到款日期,
-            this.colMemo});
+            this.colMemo,
+            this.col作废原因});
             this.dataGridView1.Location = new System.Drawing.Point(5, 102);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -427,6 +429,12 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // col作废原因
+            // 
+            this.col作废原因.HeaderText = "作废原因";
+            this.col作废原因.Name = "col作废原因";
+            this.col作废原因.ReadOnly = true;
+            // 
             // FrmCustomerPaymentReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -485,5 +493,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col到款日期;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col作废原因;
     }
 }
