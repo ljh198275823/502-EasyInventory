@@ -62,6 +62,7 @@
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStackSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col到款日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -91,7 +92,7 @@
             this.groupBox1.Size = new System.Drawing.Size(231, 90);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "付款日期";
+            this.groupBox1.Text = "录单日期";
             // 
             // ucDateTimeInterval1
             // 
@@ -307,6 +308,7 @@
             this.colRemain,
             this.colCustomer,
             this.colStackSheetID,
+            this.col到款日期,
             this.colMemo});
             this.dataGridView1.Location = new System.Drawing.Point(5, 102);
             this.dataGridView1.Name = "dataGridView1";
@@ -322,7 +324,7 @@
             dataGridViewCellStyle1.Format = "D";
             dataGridViewCellStyle1.NullValue = null;
             this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colSheetDate.HeaderText = "日期";
+            this.colSheetDate.HeaderText = "录单日期";
             this.colSheetDate.Name = "colSheetDate";
             this.colSheetDate.ReadOnly = true;
             this.colSheetDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -409,6 +411,12 @@
             this.colStackSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colStackSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // col到款日期
+            // 
+            this.col到款日期.HeaderText = "到款日期";
+            this.col到款日期.Name = "col到款日期";
+            this.col到款日期.ReadOnly = true;
+            // 
             // colMemo
             // 
             this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -475,6 +483,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStackSheetID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col到款日期;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

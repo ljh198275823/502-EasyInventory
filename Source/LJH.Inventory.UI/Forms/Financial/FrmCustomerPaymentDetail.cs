@@ -74,6 +74,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             this.Text = (PaymentType == CustomerPaymentType.客户收款) ? "客户付款流水" : "供应商付款流水";
             this.lnkCustomer.Text = (PaymentType == CustomerPaymentType.客户收款) ? "客户" : "供应商";
             lnkAccout.Text = (PaymentType == CustomerPaymentType.客户收款) ? "到款账号" : "付款账号";
+            this.dtPaidDate.IsNull = true;
             if (Amount != 0)
             {
                 txtAmount.DecimalValue = Amount;
@@ -113,6 +114,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAmount.Focus();
                 return false;
             }
+            if (dtPaidDate.IsNull)
+            {
+                MessageBox.Show("没有填写到款日期");
+                dtPaidDate.Focus();
+                return false;
+            }
             if (PaymentType == CustomerPaymentType.供应商付款 && (txtAccount.Tag as Account).Class != AccountType.财务核算)
             {
                 decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
@@ -138,6 +145,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 this.txtID.Text = item.ID;
                 this.txtID.Enabled = false;
                 dtSheetDate.Value = item.SheetDate;
+                dtSheetDate.Enabled = false;
                 rd公账.Checked = item.PaymentMode == PaymentMode.公账;
                 rd私账.Checked = item.PaymentMode == PaymentMode.私账;
                 txtAmount.DecimalValue = item.Amount;
@@ -149,6 +157,16 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAccount.Text = ac != null ? ac.Name : string.Empty;
                 txtAccount.Tag = ac;
                 txtMemo.Text = item.Memo;
+                var temp = item.GetProperty("到款日期");
+                DateTime pd = item.SheetDate;
+                if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd))
+                {
+                    dtPaidDate.Value = pd;
+                }
+                else
+                {
+                    dtPaidDate.IsNull = true;
+                }
                 ShowAssigns();
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -178,6 +196,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.Payer = txtPayer.Text;
             info.CustomerID = Customer != null ? Customer.ID : null;
             if (!string.IsNullOrEmpty(StackSheetID)) info.StackSheetID = StackSheetID;
+            info.SetProperty("到款日期", dtPaidDate.Value.ToString("yyyy-MM-dd"));
             info.Memo = txtMemo.Text;
             return info;
         }

@@ -35,15 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCustomerPaymentView));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStackSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colPayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Assign = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +44,15 @@
             this.btnLast3Month = new System.Windows.Forms.Button();
             this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
+            this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAssigned = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStackSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -71,11 +71,11 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetID,
             this.colSheetDate,
-            this.colAccount,
             this.colAmount,
             this.colAssigned,
             this.colRemain,
             this.colStackSheetID,
+            this.colAccount,
             this.colPayer,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
@@ -87,83 +87,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(994, 297);
             this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
-            // 
-            // colSheetID
-            // 
-            this.colSheetID.HeaderText = "单据编号";
-            this.colSheetID.MinimumWidth = 150;
-            this.colSheetID.Name = "colSheetID";
-            this.colSheetID.ReadOnly = true;
-            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSheetID.Width = 150;
-            // 
-            // colSheetDate
-            // 
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colSheetDate.HeaderText = "日期";
-            this.colSheetDate.Name = "colSheetDate";
-            this.colSheetDate.ReadOnly = true;
-            this.colSheetDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colAccount
-            // 
-            this.colAccount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colAccount.HeaderText = "公司账号";
-            this.colAccount.Name = "colAccount";
-            this.colAccount.ReadOnly = true;
-            this.colAccount.Width = 78;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colAmount.HeaderText = "金额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colAssigned
-            // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colAssigned.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colAssigned.HeaderText = "已核销";
-            this.colAssigned.Name = "colAssigned";
-            this.colAssigned.ReadOnly = true;
-            this.colAssigned.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colRemain
-            // 
-            dataGridViewCellStyle4.Format = "C2";
-            this.colRemain.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colRemain.HeaderText = "未核销";
-            this.colRemain.Name = "colRemain";
-            this.colRemain.ReadOnly = true;
-            this.colRemain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colStackSheetID
-            // 
-            this.colStackSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colStackSheetID.HeaderText = "送货单";
-            this.colStackSheetID.Name = "colStackSheetID";
-            this.colStackSheetID.ReadOnly = true;
-            this.colStackSheetID.Width = 47;
-            // 
-            // colPayer
-            // 
-            this.colPayer.HeaderText = "对方账号";
-            this.colPayer.Name = "colPayer";
-            this.colPayer.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.ReadOnly = true;
-            this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // contextMenuStrip1
             // 
@@ -246,6 +169,83 @@
             this.chkSheetDate.UseVisualStyleBackColor = true;
             this.chkSheetDate.Click += new System.EventHandler(this.chkSheetDate_CheckedChanged);
             // 
+            // colSheetID
+            // 
+            this.colSheetID.HeaderText = "单据编号";
+            this.colSheetID.MinimumWidth = 150;
+            this.colSheetID.Name = "colSheetID";
+            this.colSheetID.ReadOnly = true;
+            this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSheetID.Width = 150;
+            // 
+            // colSheetDate
+            // 
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colSheetDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colSheetDate.HeaderText = "录单日期";
+            this.colSheetDate.Name = "colSheetDate";
+            this.colSheetDate.ReadOnly = true;
+            this.colSheetDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colAmount
+            // 
+            dataGridViewCellStyle2.Format = "C2";
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colAmount.HeaderText = "金额";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colAssigned
+            // 
+            dataGridViewCellStyle3.Format = "C2";
+            this.colAssigned.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colAssigned.HeaderText = "已核销";
+            this.colAssigned.Name = "colAssigned";
+            this.colAssigned.ReadOnly = true;
+            this.colAssigned.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colRemain
+            // 
+            dataGridViewCellStyle4.Format = "C2";
+            this.colRemain.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colRemain.HeaderText = "未核销";
+            this.colRemain.Name = "colRemain";
+            this.colRemain.ReadOnly = true;
+            this.colRemain.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colStackSheetID
+            // 
+            this.colStackSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colStackSheetID.HeaderText = "送货单";
+            this.colStackSheetID.Name = "colStackSheetID";
+            this.colStackSheetID.ReadOnly = true;
+            this.colStackSheetID.Width = 47;
+            // 
+            // colAccount
+            // 
+            this.colAccount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colAccount.HeaderText = "公司账号";
+            this.colAccount.Name = "colAccount";
+            this.colAccount.ReadOnly = true;
+            this.colAccount.Width = 78;
+            // 
+            // colPayer
+            // 
+            this.colPayer.HeaderText = "对方账号";
+            this.colPayer.Name = "colPayer";
+            this.colPayer.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // FrmCustomerPaymentView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -279,17 +279,17 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblMSG;
         private System.Windows.Forms.ToolStripMenuItem mnu_Add;
+        private System.Windows.Forms.Button btnLast3Month;
+        private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private System.Windows.Forms.CheckBox chkSheetDate;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewLinkColumn colAssigned;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewLinkColumn colStackSheetID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPayer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.Button btnLast3Month;
-        private Controls.UCDateTimeInterval ucDateTimeInterval1;
-        private System.Windows.Forms.CheckBox chkSheetDate;
     }
 }

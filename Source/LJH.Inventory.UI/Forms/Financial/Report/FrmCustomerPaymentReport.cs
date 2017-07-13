@@ -67,6 +67,9 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 var c = _AllCustomers.SingleOrDefault(it => it.ID == cp.CustomerID);
                 row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
             }
+            var temp = cp.GetProperty("到款日期");
+            DateTime pd = cp.SheetDate;
+            if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd)) row.Cells["col到款日期"].Value = pd.ToString("yyyy年MM月dd日");
             row.Cells["colMemo"].Value = cp.Memo;
             if (cp.ClassID == CustomerPaymentType.公司管理费用)
             {

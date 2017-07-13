@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,6 +39,7 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtPayer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -80,6 +81,7 @@
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnAssign = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
+            this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -106,11 +108,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(286, 17);
+            this.label7.Location = new System.Drawing.Point(261, 17);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 32;
-            this.label7.Text = "日期";
+            this.label7.Text = "开单日期";
             // 
             // label2
             // 
@@ -141,9 +143,11 @@
             // 
             // dtSheetDate
             // 
+            this.dtSheetDate.CustomFormat = "yyyy年MM月dd日";
+            this.dtSheetDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtSheetDate.Location = new System.Drawing.Point(320, 13);
             this.dtSheetDate.Name = "dtSheetDate";
-            this.dtSheetDate.Size = new System.Drawing.Size(164, 21);
+            this.dtSheetDate.Size = new System.Drawing.Size(186, 21);
             this.dtSheetDate.TabIndex = 0;
             // 
             // txtAmount
@@ -171,7 +175,7 @@
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtMemo.Location = new System.Drawing.Point(71, 169);
             this.txtMemo.Name = "txtMemo";
-            this.txtMemo.Size = new System.Drawing.Size(414, 21);
+            this.txtMemo.Size = new System.Drawing.Size(436, 21);
             this.txtMemo.TabIndex = 8;
             // 
             // tabControl1
@@ -191,6 +195,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dtPaidDate);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txtPayer);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.txtAccount);
@@ -216,12 +222,21 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(261, 79);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 104;
+            this.label1.Text = "到款日期";
+            // 
             // txtPayer
             // 
             this.txtPayer.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtPayer.Location = new System.Drawing.Point(338, 137);
             this.txtPayer.Name = "txtPayer";
-            this.txtPayer.Size = new System.Drawing.Size(146, 21);
+            this.txtPayer.Size = new System.Drawing.Size(168, 21);
             this.txtPayer.TabIndex = 101;
             // 
             // label4
@@ -281,7 +296,7 @@
             this.txtCustomer.Location = new System.Drawing.Point(71, 44);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
-            this.txtCustomer.Size = new System.Drawing.Size(413, 21);
+            this.txtCustomer.Size = new System.Drawing.Size(435, 21);
             this.txtCustomer.TabIndex = 2;
             // 
             // lnkCustomer
@@ -363,8 +378,8 @@
             // 
             // colAssign
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle3;
             this.colAssign.HeaderText = "抵消金额";
             this.colAssign.Name = "colAssign";
             // 
@@ -613,6 +628,13 @@
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
+            // dtPaidDate
+            // 
+            this.dtPaidDate.Location = new System.Drawing.Point(319, 75);
+            this.dtPaidDate.Name = "dtPaidDate";
+            this.dtPaidDate.Size = new System.Drawing.Size(188, 21);
+            this.dtPaidDate.TabIndex = 105;
+            // 
             // FrmCustomerPaymentDetail
             // 
             this.AcceptButton = null;
@@ -697,5 +719,7 @@
         private System.Windows.Forms.RadioButton rd公账;
         private GeneralLibrary.WinformControl.DBCTextBox txtPayer;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private Controls.NullableDateTimePicker dtPaidDate;
     }
 }
