@@ -81,6 +81,7 @@ namespace LJH.Inventory.UI.Forms
             dataGridView1.Rows.Clear();
             if (items != null && items.Count > 0)
             {
+                items = (from it in items orderby it.OperatDate descending select it).ToList();
                 foreach (DocumentOperation item in items)
                 {
                     int row = dataGridView1.Rows.Add();
@@ -109,6 +110,7 @@ namespace LJH.Inventory.UI.Forms
             gridAttachment.Rows.Clear();
             if (items != null && items.Count > 0)
             {
+                items=(from it in items orderby it.UploadDateTime ascending select it).ToList ();
                 foreach (AttachmentHeader header in items)
                 {
                     int row = gridAttachment.Rows.Add();
