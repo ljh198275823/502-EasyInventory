@@ -63,12 +63,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 原材料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions .导出  | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.ShowPrice | PermissionActions.设置结算单价, Description = "原材料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.设置入库单价 | PermissionActions.设置结算单价, Description = "原材料")]
         SteelRoll = 101,
         /// <summary>
         /// 小件
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Nullify | PermissionActions.ShowPrice | PermissionActions.设置结算单价, Description = "小件")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Nullify | PermissionActions.设置入库单价 | PermissionActions.设置结算单价, Description = "小件")]
         SteelRollSlice,
         /// <summary>
         /// 仓库资料
@@ -78,13 +78,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 送货单资料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print | PermissionActions.查看成本, Description = "送货单资料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print | PermissionActions.显示成本, Description = "送货单资料")]
         DeliverySheet,
-
         /// <summary>
         /// 其它产品
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.ShowPrice | PermissionActions.设置结算单价, Description = "其它产品")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.设置入库单价 | PermissionActions.设置结算单价, Description = "其它产品")]
         其它产品,
         #endregion
 
@@ -92,7 +91,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 客户应收管理
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.导出 , Description = "客户财务管理")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.导出, Description = "客户财务管理")]
         CustomerState = 201,
         /// <summary>
         /// 客户收款流水

@@ -228,7 +228,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 显示总重量和总金额();
                 new StackOutSheetBLL(AppSettings.Current.ConnStr).GetCosts(sheet); //重新获取成本
             }
-            if (Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.查看成本))
+            if (Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.显示成本))
             {
                 if (sheet.Costs.HasValue) row.Cells["colCosts"].Value = sheet.Costs.Value;
                 if (sheet.WithTax) row.Cells["col国税计提"].Value = sheet.Amount * UserSettings.Current.国税系数;

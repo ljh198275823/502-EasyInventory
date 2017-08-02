@@ -110,15 +110,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            mnu_Add.Enabled = Operator.Current.Permit(Permission.其它产品 , PermissionActions.Inventory);
+            mnu_Add.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Inventory);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Nullify);
             mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置结算单价);
             更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Edit);
             mnu_Import.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Inventory);
             mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置结算单价);
-            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.查看成本);
-            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.查看成本);
+            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置入库单价);
+            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置入库单价) | Operator.Current.Permit(Permission.其它产品, PermissionActions.设置结算单价);
             cMnu_Export.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.导出);
         }
 
@@ -202,7 +202,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
-            if (Operator.Current.Permit(Permission.其它产品 , PermissionActions.ShowPrice))
+            if (Operator.Current.Permit(Permission.其它产品 , PermissionActions.设置入库单价))
             {
                 CostItem ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;

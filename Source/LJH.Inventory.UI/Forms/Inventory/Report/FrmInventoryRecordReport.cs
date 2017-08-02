@@ -85,7 +85,9 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 var s = _AllSuppliers.SingleOrDefault(it => it.ID == info.Supplier);
                 row.Cells["colSupplier"].Value = s != null ? s.Name : null;
             }
-            if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
+            if ((info.Model == ProductModel.原材料 && Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置入库单价)) ||
+                (info.Model == ProductModel.其它产品 && Operator.Current.Permit(Permission.其它产品, PermissionActions.设置入库单价)) ||
+                (info.Model != ProductModel.原材料 && info.Model != ProductModel.其它产品 && Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置入库单价)))
             {
                 CostItem ci = info.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;

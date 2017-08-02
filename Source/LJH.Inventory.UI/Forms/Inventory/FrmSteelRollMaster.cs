@@ -145,8 +145,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             mnu_Import.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
             mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置结算单价);
-            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.查看成本);
-            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.查看成本);
+            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置入库单价);
+            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置入库单价) | Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置结算单价);
             cMnu_Export.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.导出);
             mnu_原材料拆条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
         }
@@ -236,7 +236,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
             row.Cells["colStatus"].Value = sr.Status;
             row.Cells["colSerialNumber"].Value = sr.SerialNumber;
-            if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice))
+            if (Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置入库单价))
             {
                 CostItem ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;

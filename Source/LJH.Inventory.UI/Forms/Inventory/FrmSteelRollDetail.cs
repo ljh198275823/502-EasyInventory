@@ -171,7 +171,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
 
-            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.ShowPrice);
+            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置入库单价);
             if (!pnlCost.Visible) this.Height -= pnlCost.Height;
             var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;

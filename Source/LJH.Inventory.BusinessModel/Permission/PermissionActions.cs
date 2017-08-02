@@ -58,7 +58,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 显示价格
         /// </summary>
-        ShowPrice = 0x400,
+        显示成本 = 0x400,
         /// <summary>
         /// 查看附件
         /// </summary>
@@ -68,7 +68,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         EditAttachment = 0x1000,
         设置结算单价 = 0x2000,
-        查看成本 = 0x4000,
+        设置入库单价 = 0x4000,
         导出=0x8000,
     }
 }

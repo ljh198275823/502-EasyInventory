@@ -243,8 +243,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ItemsGrid.ContextMenuStrip = null;
             }
             btnShip.Visible = !(UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint);
-            ItemsGrid.Columns["colCosts"].Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.查看成本);
-            pnl毛利.Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.查看成本);
+            ItemsGrid.Columns["colCosts"].Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.显示成本 );
+            pnl毛利.Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.显示成本);
             if (!IsAdding)
             {
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;
