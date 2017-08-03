@@ -69,8 +69,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Text = WareHouse.Name;
                 txtWareHouse.Tag = WareHouse;
             }
-
-            btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
+            btnOk.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Edit);
+            pnlCost.Visible = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置入库单价);
+            if (!pnlCost.Visible) this.Height -= pnlCost.Height;
         }
 
         private void ShowProduct(Product product)
@@ -170,8 +171,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
 
-            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置入库单价);
-            if (!pnlCost.Visible) this.Height -= pnlCost.Height;
             var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax_入库单价.Checked = ci != null && ci.WithTax;

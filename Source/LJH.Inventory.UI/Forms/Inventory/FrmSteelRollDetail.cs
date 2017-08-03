@@ -141,6 +141,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Init();
             txtCarPlate.Init();
             txtMaterial.Init();
+            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置入库单价);
+            if (!pnlCost.Visible) this.Height -= pnlCost.Height;
         }
 
         public override void ShowOperatorRights()
@@ -170,9 +172,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
-
-            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置入库单价);
-            if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            
             var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
