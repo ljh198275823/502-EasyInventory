@@ -337,11 +337,11 @@ namespace LJH.Inventory.BLL
             if (ret.Result == ResultCode.Successful && ret.QueryObjects.Count > 0)
             {
                 var pcon = new ProductInventoryItemSearchCondition();
-                if (condition is SheetSearchCondition)
-                {
-                    var con = condition as SheetSearchCondition;
-                    if (con.SheetDate != null) pcon.AddDateRange = new DateTimeRange(con.SheetDate.Begin, DateTime.MaxValue);
-                }
+                //if (condition is SheetSearchCondition)
+                //{
+                //    var con = condition as SheetSearchCondition;
+                //    if (con.SheetDate != null) pcon.AddDateRange = new DateTimeRange(con.SheetDate.Begin, DateTime.MaxValue);
+                //}
                 pcon.States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping, ProductInventoryState.Shipped };
                 var pis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
                 if (pis != null && pis.Count > 0)
