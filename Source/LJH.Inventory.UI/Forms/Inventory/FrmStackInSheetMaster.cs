@@ -51,10 +51,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             if (items != null && items.Count > 0)
             {
-                items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
-                                        (item.State == SheetState.Approved && chkApproved.Checked) ||
-                                        (item.State == SheetState.Inventory && chkInventory.Checked) ||
-                                        (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+                items = items.Where(item => ((item.State == SheetState.新增 && chkAdded.Checked) ||
+                                        (item.State == SheetState.已审批 && chkApproved.Checked) ||
+                                        (item.State == SheetState.已入库 && chkInventory.Checked) ||
+                                        (item.State == SheetState.作废 && chkNullify.Checked))).ToList();
             }
             List<object> objs = null;
             if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
@@ -102,10 +102,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             WareHouse ws = (_Warehouses != null && _Warehouses.Count > 0) ? _Warehouses.SingleOrDefault(it => it.ID == sheet.WareHouseID) : null;
             row.Cells["colWareHouse"].Value = ws != null ? ws.Name : string.Empty;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
-            row.Cells["colInventoryDate"].Value = sheet.State == SheetState.Inventory ? sheet.LastActiveDate.ToString("yyyy-MM-dd") : null;
+            row.Cells["colInventoryDate"].Value = sheet.State == SheetState.已入库 ? sheet.LastActiveDate.ToString("yyyy-MM-dd") : null;
             //row.Cells["colAmount"].Value = sheet.Amount.Trim();
             row.Cells["colMemo"].Value = sheet.Memo;
-            if (sheet.State == SheetState.Canceled)
+            if (sheet.State == SheetState.作废)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

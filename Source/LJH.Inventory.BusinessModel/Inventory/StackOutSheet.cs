@@ -20,7 +20,7 @@ namespace LJH.Inventory.BusinessModel
                 LastActiveDate = DateTime.Now,
                 CustomerID = customer != null ? customer.ID : null,
                 WareHouseID = wareHouse != null ? wareHouse.ID : null,
-                State = SheetState.Add,
+                State = SheetState.新增,
                 Items = new List<StackOutItem>()
             };
         }
@@ -153,17 +153,17 @@ namespace LJH.Inventory.BusinessModel
             switch (operation)
             {
                 case SheetOperation.Modify:
-                    return State == SheetState.Add;
+                    return State == SheetState.新增;
                 case SheetOperation.Approve:
-                    return State == SheetState.Add;
+                    return State == SheetState.新增;
                 case SheetOperation.UndoApprove:
-                    return State == SheetState.Approved;
+                    return State == SheetState.已审批;
                 case SheetOperation.Nullify:
-                    return State != SheetState.Canceled;
+                    return State != SheetState.作废;
                 case SheetOperation.StackOut:
-                    return (State == SheetState.Add || State == SheetState.Approved);
+                    return (State == SheetState.新增 || State == SheetState.已审批);
                 case SheetOperation.StackIn:
-                    return (State == SheetState.Add || State == SheetState.Approved);
+                    return (State == SheetState.新增 || State == SheetState.已审批);
                 default:
                     return false;
             }

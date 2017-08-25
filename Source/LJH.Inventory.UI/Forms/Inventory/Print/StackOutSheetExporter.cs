@@ -126,7 +126,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             {
                 var customerState = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(info.CustomerID).QueryObject;
                 decimal total = customerState != null ? (customerState.Recievables - customerState.Prepay) : 0;
-                if (info.State != LJH.Inventory.BusinessModel.SheetState.Shipped) total += info.Amount; //如果送货单还未处于送货状态，说明此单的还没有加到应收里面，此时总欠款要加上这一笔
+                if (info.State != LJH.Inventory.BusinessModel.SheetState.已发货) total += info.Amount; //如果送货单还未处于送货状态，说明此单的还没有加到应收里面，此时总欠款要加上这一笔
                 cell.SetCellValue((double)total);
             }
             else if (express == "[总金额]") cell.SetCellValue((double)info.Amount);

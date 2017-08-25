@@ -33,7 +33,7 @@ namespace LJH.Inventory.BLL
             if (!string.IsNullOrEmpty(info.ID))
             {
                 info.LastActiveDate = dt; //修改最后活动时间
-                info.State = SheetState.Add; //单据状态
+                info.State = SheetState.新增; //单据状态
                 IProvider<TEntity, string> provider = ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri);
                 provider.Insert(info, unitWork);
             }
@@ -70,7 +70,7 @@ namespace LJH.Inventory.BLL
         protected virtual void DoApprove(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
             TEntity original = info.Clone() as TEntity;
-            info.State = SheetState.Approved;
+            info.State = SheetState.已审批;
             info.LastActiveDate = dt; //修改最后活动时间
             ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).Update(info, original, unitWork);
         }
@@ -83,7 +83,7 @@ namespace LJH.Inventory.BLL
         protected virtual void UndoApprove(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
             TEntity original = info.Clone() as TEntity;
-            info.State = SheetState.Add;
+            info.State = SheetState.新增;
             info.LastActiveDate = dt; //修改最后活动时间
             ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).Update(info, original, unitWork);
         }
@@ -96,7 +96,7 @@ namespace LJH.Inventory.BLL
         protected virtual void DoNullify(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
             TEntity original = info.Clone() as TEntity;
-            info.State = SheetState.Canceled;
+            info.State = SheetState.作废;
             info.LastActiveDate = dt; //修改最后活动时间
             ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).Update(info, original, unitWork);
         }

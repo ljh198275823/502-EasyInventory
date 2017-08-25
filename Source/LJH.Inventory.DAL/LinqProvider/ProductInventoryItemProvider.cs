@@ -36,6 +36,7 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override List<ProductInventoryItem> GetingItems(DataContext dc, SearchCondition search)
         {
+            if (search is StackOutSheetSearchCondition) return GetingItemsEX(dc, search as StackOutSheetSearchCondition);
             //dc.Log = Console.Out;
             var ret = from pi in dc.GetTable<ProductInventoryItem>()
                       from c in dc.GetTable<Cost>().Where(it => pi.CostID == it.ID).DefaultIfEmpty()
@@ -75,6 +76,44 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
             }
             var items = ret.ToList();
+            if (items != null && items.Count > 0)
+            {
+                foreach (var pi in items)
+                {
+                    pi.A.Product = new ProductProvider(SqlURI, _MappingResource).GetByID(pi.A.ProductID).QueryObject;
+                    pi.A.Costs = pi.B;
+                }
+                items.RemoveAll(it => it.A.Product == null);
+                if (items.Count > 0) return items.Select(it => it.A).ToList();
+            }
+            return new List<ProductInventoryItem>();
+        }
+
+        private List<ProductInventoryItem> GetingItemsEX(DataContext dc, StackOutSheetSearchCondition con)
+        {
+            var ret = from pi in dc.GetTable<ProductInventoryItem>()
+                      join sheet in dc.GetTable<StackOutSheet>() on pi.DeliverySheet equals sheet.ID
+                      from c in dc.GetTable<Cost>().Where(it => pi.CostID == it.ID).DefaultIfEmpty()
+                      select new { A = pi, B = c.Costs, C = sheet };
+            if (con.SheetDate != null) ret = ret.Where(item => item.C.SheetDate >= con.SheetDate.Begin && item.C.SheetDate <= con.SheetDate.End);
+            if (con.LastActiveDate != null) ret = ret.Where(item => item.C.LastActiveDate >= con.LastActiveDate.Begin && item.C.LastActiveDate <= con.LastActiveDate.End);
+            if (con.SheetIDs != null && con.SheetIDs.Count > 0) ret = ret.Where(item => con.SheetIDs.Contains(item.C.ID));
+            if (con.States != null && con.States.Count > 0) ret = ret.Where(item => con.States.Contains(item.C.State));
+            if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.C.CustomerID == con.CustomerID);
+            if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.C.WareHouseID == con.WareHouseID);
+            if (con.SheetTypes != null && con.SheetTypes.Count > 0) ret = ret.Where(item => con.SheetTypes.Contains(item.C.ClassID));
+            if (con.WithTax != null)
+            {
+                if (con.WithTax.Value)
+                {
+                    ret = ret.Where(item => item.C.WithTax == true);
+                }
+                else
+                {
+                    ret = ret.Where(item => item.C.WithTax == false);
+                }
+            }
+            var items = ret.Select(it => new { A = it.A, B = it.B }).ToList();
             if (items != null && items.Count > 0)
             {
                 foreach (var pi in items)

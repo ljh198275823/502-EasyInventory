@@ -11,15 +11,15 @@ namespace LJH.Inventory.BusinessModel.Resource
         {
             switch (state)
             {
-                case SheetState.Add:
+                case SheetState.新增:
                     return "新建";
-                case SheetState.Approved:
+                case SheetState.已审批:
                     return "已审核";
-                case SheetState.Canceled:
+                case SheetState.作废:
                     return "作废";
-                case SheetState.Inventory:
+                case SheetState.已入库:
                     return "已收货";
-                case SheetState.Shipped:
+                case SheetState.已发货:
                     return "已发货";
                 default:
                     return string.Empty;

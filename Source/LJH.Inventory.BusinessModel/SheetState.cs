@@ -10,26 +10,10 @@ namespace LJH.Inventory.BusinessModel
     /// </summary>
     public enum SheetState
     {
-        //后续增加新属性时最好不要改变这些值，因为数据库中很多视图以当前值表示单据的状态为取消
-        /// <summary>
-        /// 新增
-        /// </summary>
-        Add = 0,
-        /// <summary>
-        /// 已审批
-        /// </summary>
-        Approved = 1,
-        /// <summary>
-        /// 已发货
-        /// </summary>
-        Shipped = 2,
-        /// <summary>
-        /// 收货
-        /// </summary>
-        Inventory = 3,
-        /// <summary>
-        /// 取消
-        /// </summary>
-        Canceled = 4,
+        新增 = 0,
+        已审批 = 1,
+        已发货 = 2,
+        已入库 = 3,
+        作废 = 4,
     }
 }

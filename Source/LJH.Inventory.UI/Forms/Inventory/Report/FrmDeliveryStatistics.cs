@@ -35,7 +35,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         {
             StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            con.States = new List<SheetState>() { SheetState.Shipped };
+            con.States = new List<SheetState>() { SheetState.已发货 };
             con.SheetTypes = new List<StackOutSheetType>() { StackOutSheetType.DeliverySheet };
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             List<StackOutSheet> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;

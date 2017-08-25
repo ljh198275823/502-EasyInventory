@@ -37,6 +37,7 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chk公账 = new System.Windows.Forms.CheckBox();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.txtPayer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -67,7 +68,9 @@
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnUndoApprove = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
-            this.chk公账 = new System.Windows.Forms.CheckBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -152,9 +155,9 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
@@ -188,6 +191,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // chk公账
+            // 
+            this.chk公账.AutoSize = true;
+            this.chk公账.ForeColor = System.Drawing.Color.Red;
+            this.chk公账.Location = new System.Drawing.Point(322, 111);
+            this.chk公账.Name = "chk公账";
+            this.chk公账.Size = new System.Drawing.Size(48, 16);
+            this.chk公账.TabIndex = 108;
+            this.chk公账.Text = "公账";
+            this.chk公账.UseVisualStyleBackColor = true;
             // 
             // txtCustomer
             // 
@@ -427,7 +441,10 @@
             this.btnSave,
             this.btnApprove,
             this.btnUndoApprove,
-            this.btnNullify});
+            this.btnNullify,
+            this.toolStripSeparator1,
+            this.lblSheetState,
+            this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(593, 56);
@@ -477,16 +494,22 @@
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
             // 
-            // chk公账
+            // toolStripSeparator1
             // 
-            this.chk公账.AutoSize = true;
-            this.chk公账.ForeColor = System.Drawing.Color.Red;
-            this.chk公账.Location = new System.Drawing.Point(322, 111);
-            this.chk公账.Name = "chk公账";
-            this.chk公账.Size = new System.Drawing.Size(48, 16);
-            this.chk公账.TabIndex = 108;
-            this.chk公账.Text = "公账";
-            this.chk公账.UseVisualStyleBackColor = true;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 56);
+            // 
+            // lblSheetState
+            // 
+            this.lblSheetState.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F, System.Drawing.FontStyle.Bold);
+            this.lblSheetState.Name = "lblSheetState";
+            this.lblSheetState.Size = new System.Drawing.Size(112, 53);
+            this.lblSheetState.Text = "状态：新增";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
             // Frm退款
             // 
@@ -558,5 +581,8 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.LinkLabel lnkCustomer;
         private System.Windows.Forms.CheckBox chk公账;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripLabel lblSheetState;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

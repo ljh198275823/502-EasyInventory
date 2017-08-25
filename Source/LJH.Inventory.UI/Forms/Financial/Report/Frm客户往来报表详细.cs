@@ -69,7 +69,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             var rs = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetItems(rcon).QueryObjects;
 
             var scon = new StackOutRecordSearchCondition();
-            scon.States = new List<SheetState>() { SheetState.Shipped };
+            scon.States = new List<SheetState>() { SheetState.已发货 };
             scon.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             var fs = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetDeliveryRecords(scon).QueryObjects;
             if (fs != null)

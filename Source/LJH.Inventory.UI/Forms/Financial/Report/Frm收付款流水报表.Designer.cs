@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Financial.Report
 {
-    partial class FrmCustomerPaymentReport
+    partial class Frm收付款流水报表
     {
         /// <summary>
         /// Required designer variable.
@@ -37,10 +37,9 @@
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chk客户退款 = new System.Windows.Forms.CheckBox();
             this.chkAll = new System.Windows.Forms.CheckBox();
-            this.chkl转账 = new System.Windows.Forms.CheckBox();
-            this.chk转公账 = new System.Windows.Forms.CheckBox();
-            this.chk退款 = new System.Windows.Forms.CheckBox();
+            this.chk供应商退款 = new System.Windows.Forms.CheckBox();
             this.chk费用支出 = new System.Windows.Forms.CheckBox();
             this.chk其它收款 = new System.Windows.Forms.CheckBox();
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -65,6 +64,8 @@
             this.col到款日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col作废原因 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl收入合计 = new System.Windows.Forms.Label();
+            this.lbl支出合计 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -72,18 +73,18 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(1022, 8);
-            this.btnSearch.Size = new System.Drawing.Size(142, 23);
+            this.btnSearch.Location = new System.Drawing.Point(927, 14);
+            this.btnSearch.Size = new System.Drawing.Size(121, 23);
             // 
             // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(1022, 37);
-            this.btnSaveAs.Size = new System.Drawing.Size(142, 23);
+            this.btnSaveAs.Location = new System.Drawing.Point(927, 43);
+            this.btnSaveAs.Size = new System.Drawing.Size(121, 23);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(1022, 66);
-            this.btnColumn.Size = new System.Drawing.Size(142, 23);
+            this.btnColumn.Location = new System.Drawing.Point(927, 72);
+            this.btnColumn.Size = new System.Drawing.Size(121, 23);
             // 
             // groupBox1
             // 
@@ -118,10 +119,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chk客户退款);
             this.groupBox3.Controls.Add(this.chkAll);
-            this.groupBox3.Controls.Add(this.chkl转账);
-            this.groupBox3.Controls.Add(this.chk转公账);
-            this.groupBox3.Controls.Add(this.chk退款);
+            this.groupBox3.Controls.Add(this.chk供应商退款);
             this.groupBox3.Controls.Add(this.chk费用支出);
             this.groupBox3.Controls.Add(this.chk其它收款);
             this.groupBox3.Controls.Add(this.txtAccount);
@@ -132,67 +132,55 @@
             this.groupBox3.Controls.Add(this.lnkSupplier);
             this.groupBox3.Controls.Add(this.txtCustomer);
             this.groupBox3.Controls.Add(this.lnkCustomer);
-            this.groupBox3.Location = new System.Drawing.Point(242, 8);
+            this.groupBox3.Location = new System.Drawing.Point(243, 8);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(761, 90);
+            this.groupBox3.Size = new System.Drawing.Size(671, 90);
             this.groupBox3.TabIndex = 38;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
+            // 
+            // chk客户退款
+            // 
+            this.chk客户退款.AutoSize = true;
+            this.chk客户退款.Checked = true;
+            this.chk客户退款.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk客户退款.Location = new System.Drawing.Point(580, 51);
+            this.chk客户退款.Name = "chk客户退款";
+            this.chk客户退款.Size = new System.Drawing.Size(72, 16);
+            this.chk客户退款.TabIndex = 109;
+            this.chk客户退款.Text = "客户退款";
+            this.chk客户退款.UseVisualStyleBackColor = true;
             // 
             // chkAll
             // 
             this.chkAll.AutoSize = true;
             this.chkAll.Checked = true;
             this.chkAll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAll.Location = new System.Drawing.Point(456, 26);
+            this.chkAll.Location = new System.Drawing.Point(374, 26);
             this.chkAll.Name = "chkAll";
             this.chkAll.Size = new System.Drawing.Size(15, 14);
             this.chkAll.TabIndex = 108;
             this.chkAll.UseVisualStyleBackColor = true;
             this.chkAll.CheckedChanged += new System.EventHandler(this.chkAll_CheckedChanged);
             // 
-            // chkl转账
+            // chk供应商退款
             // 
-            this.chkl转账.AutoSize = true;
-            this.chkl转账.Checked = true;
-            this.chkl转账.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkl转账.Location = new System.Drawing.Point(543, 56);
-            this.chkl转账.Name = "chkl转账";
-            this.chkl转账.Size = new System.Drawing.Size(48, 16);
-            this.chkl转账.TabIndex = 107;
-            this.chkl转账.Text = "转账";
-            this.chkl转账.UseVisualStyleBackColor = true;
-            // 
-            // chk转公账
-            // 
-            this.chk转公账.AutoSize = true;
-            this.chk转公账.Checked = true;
-            this.chk转公账.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk转公账.Location = new System.Drawing.Point(477, 56);
-            this.chk转公账.Name = "chk转公账";
-            this.chk转公账.Size = new System.Drawing.Size(60, 16);
-            this.chk转公账.TabIndex = 106;
-            this.chk转公账.Text = "转公账";
-            this.chk转公账.UseVisualStyleBackColor = true;
-            // 
-            // chk退款
-            // 
-            this.chk退款.AutoSize = true;
-            this.chk退款.Checked = true;
-            this.chk退款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk退款.Location = new System.Drawing.Point(672, 55);
-            this.chk退款.Name = "chk退款";
-            this.chk退款.Size = new System.Drawing.Size(48, 16);
-            this.chk退款.TabIndex = 105;
-            this.chk退款.Text = "退款";
-            this.chk退款.UseVisualStyleBackColor = true;
+            this.chk供应商退款.AutoSize = true;
+            this.chk供应商退款.Checked = true;
+            this.chk供应商退款.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk供应商退款.Location = new System.Drawing.Point(580, 24);
+            this.chk供应商退款.Name = "chk供应商退款";
+            this.chk供应商退款.Size = new System.Drawing.Size(84, 16);
+            this.chk供应商退款.TabIndex = 105;
+            this.chk供应商退款.Text = "供应商退款";
+            this.chk供应商退款.UseVisualStyleBackColor = true;
             // 
             // chk费用支出
             // 
             this.chk费用支出.AutoSize = true;
             this.chk费用支出.Checked = true;
             this.chk费用支出.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk费用支出.Location = new System.Drawing.Point(594, 56);
+            this.chk费用支出.Location = new System.Drawing.Point(490, 51);
             this.chk费用支出.Name = "chk费用支出";
             this.chk费用支出.Size = new System.Drawing.Size(72, 16);
             this.chk费用支出.TabIndex = 104;
@@ -204,7 +192,7 @@
             this.chk其它收款.AutoSize = true;
             this.chk其它收款.Checked = true;
             this.chk其它收款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk其它收款.Location = new System.Drawing.Point(648, 25);
+            this.chk其它收款.Location = new System.Drawing.Point(490, 25);
             this.chk其它收款.Name = "chk其它收款";
             this.chk其它收款.Size = new System.Drawing.Size(72, 16);
             this.chk其它收款.TabIndex = 103;
@@ -214,21 +202,22 @@
             // txtAccount
             // 
             this.txtAccount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAccount.Location = new System.Drawing.Point(275, 21);
+            this.txtAccount.Location = new System.Drawing.Point(228, 22);
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.ReadOnly = true;
-            this.txtAccount.Size = new System.Drawing.Size(163, 21);
+            this.txtAccount.Size = new System.Drawing.Size(134, 21);
             this.txtAccount.TabIndex = 102;
             this.txtAccount.DoubleClick += new System.EventHandler(this.txtAccount_DoubleClick);
             // 
             // lnkAccout
             // 
-            this.lnkAccout.Location = new System.Drawing.Point(210, 23);
+            this.lnkAccout.AutoSize = true;
+            this.lnkAccout.Location = new System.Drawing.Point(193, 24);
             this.lnkAccout.Name = "lnkAccout";
-            this.lnkAccout.Size = new System.Drawing.Size(60, 17);
+            this.lnkAccout.Size = new System.Drawing.Size(29, 12);
             this.lnkAccout.TabIndex = 101;
             this.lnkAccout.TabStop = true;
-            this.lnkAccout.Text = "到款账号";
+            this.lnkAccout.Text = "账号";
             this.lnkAccout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lnkAccout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccout_LinkClicked);
             // 
@@ -237,7 +226,7 @@
             this.chk供应商付款.AutoSize = true;
             this.chk供应商付款.Checked = true;
             this.chk供应商付款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk供应商付款.Location = new System.Drawing.Point(558, 25);
+            this.chk供应商付款.Location = new System.Drawing.Point(395, 51);
             this.chk供应商付款.Name = "chk供应商付款";
             this.chk供应商付款.Size = new System.Drawing.Size(84, 16);
             this.chk供应商付款.TabIndex = 76;
@@ -249,7 +238,7 @@
             this.chk客户收款.AutoSize = true;
             this.chk客户收款.Checked = true;
             this.chk客户收款.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk客户收款.Location = new System.Drawing.Point(477, 25);
+            this.chk客户收款.Location = new System.Drawing.Point(395, 25);
             this.chk客户收款.Name = "chk客户收款";
             this.chk客户收款.Size = new System.Drawing.Size(72, 16);
             this.chk客户收款.TabIndex = 75;
@@ -262,7 +251,7 @@
             this.txtSupplier.Location = new System.Drawing.Point(48, 53);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.ReadOnly = true;
-            this.txtSupplier.Size = new System.Drawing.Size(153, 21);
+            this.txtSupplier.Size = new System.Drawing.Size(132, 21);
             this.txtSupplier.TabIndex = 74;
             this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
             // 
@@ -283,7 +272,7 @@
             this.txtCustomer.Location = new System.Drawing.Point(48, 21);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
-            this.txtCustomer.Size = new System.Drawing.Size(153, 21);
+            this.txtCustomer.Size = new System.Drawing.Size(132, 21);
             this.txtCustomer.TabIndex = 37;
             this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
             // 
@@ -292,9 +281,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -312,12 +301,12 @@
             this.col到款日期,
             this.colMemo,
             this.col作废原因});
-            this.dataGridView1.Location = new System.Drawing.Point(5, 102);
+            this.dataGridView1.Location = new System.Drawing.Point(5, 104);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1212, 439);
+            this.dataGridView1.Size = new System.Drawing.Size(1347, 437);
             this.dataGridView1.TabIndex = 39;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -435,15 +424,39 @@
             this.col作废原因.Name = "col作废原因";
             this.col作废原因.ReadOnly = true;
             // 
-            // FrmCustomerPaymentReport
+            // lbl收入合计
+            // 
+            this.lbl收入合计.AutoSize = true;
+            this.lbl收入合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl收入合计.ForeColor = System.Drawing.Color.Blue;
+            this.lbl收入合计.Location = new System.Drawing.Point(1066, 25);
+            this.lbl收入合计.Name = "lbl收入合计";
+            this.lbl收入合计.Size = new System.Drawing.Size(125, 20);
+            this.lbl收入合计.TabIndex = 40;
+            this.lbl收入合计.Text = "收入合计：0";
+            // 
+            // lbl支出合计
+            // 
+            this.lbl支出合计.AutoSize = true;
+            this.lbl支出合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl支出合计.ForeColor = System.Drawing.Color.Red;
+            this.lbl支出合计.Location = new System.Drawing.Point(1066, 62);
+            this.lbl支出合计.Name = "lbl支出合计";
+            this.lbl支出合计.Size = new System.Drawing.Size(125, 20);
+            this.lbl支出合计.TabIndex = 41;
+            this.lbl支出合计.Text = "支出合计：0";
+            // 
+            // Frm收付款流水报表
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1217, 566);
+            this.ClientSize = new System.Drawing.Size(1352, 566);
+            this.Controls.Add(this.lbl支出合计);
+            this.Controls.Add(this.lbl收入合计);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Name = "FrmCustomerPaymentReport";
+            this.Name = "Frm收付款流水报表";
             this.Text = "收付款流水报表";
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
@@ -451,6 +464,8 @@
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.btnColumn, 0);
+            this.Controls.SetChildIndex(this.lbl收入合计, 0);
+            this.Controls.SetChildIndex(this.lbl支出合计, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -476,9 +491,7 @@
         private System.Windows.Forms.LinkLabel lnkAccout;
         private System.Windows.Forms.CheckBox chk费用支出;
         private System.Windows.Forms.CheckBox chk其它收款;
-        private System.Windows.Forms.CheckBox chk退款;
-        private System.Windows.Forms.CheckBox chkl转账;
-        private System.Windows.Forms.CheckBox chk转公账;
+        private System.Windows.Forms.CheckBox chk供应商退款;
         private System.Windows.Forms.CheckBox chkAll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
@@ -494,5 +507,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col到款日期;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn col作废原因;
+        private System.Windows.Forms.CheckBox chk客户退款;
+        private System.Windows.Forms.Label lbl收入合计;
+        private System.Windows.Forms.Label lbl支出合计;
     }
 }

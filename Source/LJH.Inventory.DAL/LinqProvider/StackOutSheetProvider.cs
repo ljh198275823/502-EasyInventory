@@ -32,9 +32,6 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override List<StackOutSheet> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
-            //DataLoadOptions opt = new DataLoadOptions();
-            //opt.LoadWith<StackOutSheet>(item => item.Items);
-            //dc.LoadOptions = opt;
             IQueryable<StackOutSheet> ret = dc.GetTable<StackOutSheet>();
             if (search is SheetSearchCondition)
             {
@@ -100,7 +97,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 var dc = CreateDataContext();
                 dc.Log = Console.Out;
                 var items = from s in dc.GetTable<StackOutSheet>()
-                            where s.ClassID == StackOutSheetType.DeliverySheet && s.State == SheetState.Shipped
+                            where s.ClassID == StackOutSheetType.DeliverySheet && s.State == SheetState.已发货
                             group s by s.CustomerID into g
                             select new { CustomerID = g.Key, LastSheetDate = g.Max(it => it.LastActiveDate) };
 
@@ -124,7 +121,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 var dc = CreateDataContext();
                 var items = from s in dc.GetTable<StackOutSheet>()
-                            where s.ClassID == StackOutSheetType.DeliverySheet && s.State == SheetState.Shipped && s.CustomerID == customerID
+                            where s.ClassID == StackOutSheetType.DeliverySheet && s.State == SheetState.已发货 && s.CustomerID == customerID
                             group s by s.CustomerID into g
                             select new { CustomerID = g.Key, LastSheetDate = g.Max(it => it.LastActiveDate) };
                 var ret = items.SingleOrDefault();

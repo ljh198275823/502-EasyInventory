@@ -18,9 +18,9 @@ using LJH.Inventory.UI.Forms.Financial.View;
 
 namespace LJH.Inventory.UI.Forms.Financial.Report
 {
-    public partial class FrmCustomerTaxBillReport : FrmReportBase
+    public partial class Frm增值税发票报表 : FrmReportBase
     {
-        public FrmCustomerTaxBillReport()
+        public Frm增值税发票报表()
         {
             InitializeComponent();
         }
@@ -47,7 +47,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             else if (cp.ClassID == CustomerPaymentType.供应商增值税发票) row.Cells["colClass"].Value = "采购";
             row.Cells["colSheetDate"].Value = cp.SheetDate;
             row.Cells["colAmount"].Value = cp.Amount;
-            if (cp.State != SheetState.Canceled)
+            if (cp.State != SheetState.作废)
             {
                 var remain = GetRemain(cp);
                 row.Cells["colRemain"].Value = remain != 0 ? (decimal?)remain : null;
@@ -63,7 +63,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Cells["colMemo"].Value = cp.Memo;
             if (cp.ClassID == CustomerPaymentType.客户增值税发票) row.DefaultCellStyle.ForeColor = Color.Blue;
             else if (cp.ClassID == CustomerPaymentType.供应商增值税发票) row.DefaultCellStyle.ForeColor = Color.Red;
-            if (cp.State == SheetState.Canceled)
+            if (cp.State == SheetState.作废)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

@@ -21,20 +21,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             InitializeComponent();
         }
 
-        private List<AccountRecord> _AllAccountRecords = null;
-
         #region 私有方法
-        private decimal GetAmount(Account ac)
-        {
-            decimal ret = 0;
-            var cps = from it in _AllAccountRecords where it.AccountID == ac.ID select it;
-            foreach (var it in cps)
-            {
-                if (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款) ret += it.Amount;
-                else if (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款) ret -= it.Amount;
-            }
-            return ret;
-        }
         #endregion
 
         #region 重写基类方法
@@ -55,7 +42,6 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override List<object> GetDataSource()
         {
-            _AllAccountRecords = new AccountRecordBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             List<Account> items = null;
             if (SearchCondition == null)
             {
@@ -78,7 +64,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colName"].Value = ct.Name;
             row.Cells["colClass"].Value = ct.Class.ToString();
             row.Cells["col对公账号"].Value = ct.Ispublic;
-            row.Cells["colAmount"].Value = GetAmount(ct);
+            row.Cells["colAmount"].Value = ct.Amount;
             row.Cells["colOperator"].Value = ct.Operator;
             row.Cells["colAddDate"].Value = ct.AddDate;
             row.Cells["colMemo"].Value = ct.Memo;

@@ -74,10 +74,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 if (items != null)
                 {
-                    items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
-                                            (item.State == SheetState.Approved && chkApproved.Checked) ||
-                                            (item.State == SheetState.Shipped && chkShipped.Checked) ||
-                                            (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+                    items = items.Where(item => ((item.State == SheetState.新增 && chkAdded.Checked) ||
+                                            (item.State == SheetState.已审批 && chkApproved.Checked) ||
+                                            (item.State == SheetState.已发货 && chkShipped.Checked) ||
+                                            (item.State == SheetState.作废 && chkNullify.Checked))).ToList();
                 }
                 if (items != null) items = items.Where(item => (chkWithTax.Checked && item.WithTax) ||
                                               (chkWithoutTax.Checked && !item.WithTax)).ToList();
@@ -191,7 +191,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colTotalWeight"].Value = sheet.TotalWeight;
             row.Cells["colAmount"].Value = sheet.Amount;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(sheet.State);
-            row.Cells["colShipDate"].Value = sheet.State == SheetState.Shipped ? (DateTime?)sheet.LastActiveDate : null;
+            row.Cells["colShipDate"].Value = sheet.State == SheetState.已发货 ? (DateTime?)sheet.LastActiveDate : null;
             row.Cells["colLinker"].Value = sheet.Linker;
             row.Cells["colTelphone"].Value = sheet.LinkerCall;
             row.Cells["colAddress"].Value = sheet.Address;
@@ -201,13 +201,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colMemo"].Value = sheet.Memo;
             if (_Fresh) //全部刷新
             {
-                if (sheet.State == SheetState.Shipped)
+                if (sheet.State == SheetState.已发货)
                 {
                     var cr = _Receivables.ContainsKey(sheet.ID) ? _Receivables[sheet.ID] : null;
                     row.Cells["colPaid"].Value = cr != null ? cr.Sum(it => it.Haspaid) : 0; ;
                     row.Cells["colNotPaid"].Value = cr != null ? cr.Sum(it => it.Remain) : 0;
                 }
-                else if (sheet.State == SheetState.Add || sheet.State == SheetState.Approved)
+                else if (sheet.State == SheetState.新增 || sheet.State == SheetState.已审批)
                 {
                     if (_AllPayments != null)
                     {
@@ -241,15 +241,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void ShowRowColor(DataGridViewRow row)
         {
             StackOutSheet sheet = row.Tag as StackOutSheet;
-            if (sheet.State == SheetState.Add)
+            if (sheet.State == SheetState.新增)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
             }
-            else if (sheet.State == SheetState.Shipped)
+            else if (sheet.State == SheetState.已发货)
             {
                 row.DefaultCellStyle.ForeColor = Color.Blue;
             }
-            else if (sheet.State == SheetState.Canceled)
+            else if (sheet.State == SheetState.作废)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

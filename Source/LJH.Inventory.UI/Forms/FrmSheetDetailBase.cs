@@ -234,6 +234,7 @@ namespace LJH.Inventory.UI.Forms
                 if (toolBar.Items["btnInventory"] != null) toolBar.Items["btnInventory"].Enabled = false;
                 if (toolBar.Items["btnShip"] != null) toolBar.Items["btnShip"].Enabled = false;
                 if (toolBar.Items["btnNullify"] != null) toolBar.Items["btnNullify"].Enabled = false;
+                if (toolBar.Items["lblSheetState"] != null) toolBar.Items["lblSheetState"].Visible = false;
             }
             else
             {
@@ -246,6 +247,11 @@ namespace LJH.Inventory.UI.Forms
                     if (toolBar.Items["btnInventory"] != null) toolBar.Items["btnInventory"].Enabled = sheet.CanDo(SheetOperation.StackIn);
                     if (toolBar.Items["btnShip"] != null) toolBar.Items["btnShip"].Enabled = sheet.CanDo(SheetOperation.StackOut);
                     if (toolBar.Items["btnNullify"] != null) toolBar.Items["btnNullify"].Enabled = sheet.CanDo(SheetOperation.Nullify);
+                    if (toolBar.Items["lblSheetState"] != null)
+                    {
+                        toolBar.Items["lblSheetState"].Visible = true;
+                        toolBar.Items["lblSheetState"].Text = string.Format("状态：{0}", sheet.State);
+                    }
                 }
             }
         }

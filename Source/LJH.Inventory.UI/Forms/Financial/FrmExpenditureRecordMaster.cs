@@ -52,9 +52,9 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             if (items != null && items.Count > 0)
             {
-                items = items.Where(item => ((item.State == SheetState.Add && chkAdded.Checked) ||
-                                        (item.State == SheetState.Approved && chkApproved.Checked) ||
-                                        (item.State == SheetState.Canceled && chkNullify.Checked))).ToList();
+                items = items.Where(item => ((item.State == SheetState.新增 && chkAdded.Checked) ||
+                                        (item.State == SheetState.已审批 && chkApproved.Checked) ||
+                                        (item.State == SheetState.作废 && chkNullify.Checked))).ToList();
             }
             List<object> objs = null;
             if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
@@ -124,7 +124,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colPayer"].Value = info.Payer;
             row.Cells["colState"].Value = SheetStateDescription.GetDescription(info.State);
             row.Cells["colMemo"].Value = info.Memo;
-            if (info.State == SheetState.Canceled)
+            if (info.State == SheetState.作废)
             {
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -146,7 +146,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 if (row.Visible)
                 {
                     CustomerPayment r = row.Tag as CustomerPayment;
-                    _Amount += r.State != SheetState.Canceled ? r.Amount : 0;
+                    _Amount += r.State != SheetState.作废 ? r.Amount : 0;
                 }
             }
             lbl合计.Text = string.Format("合计：{0:C2} 元", _Amount);

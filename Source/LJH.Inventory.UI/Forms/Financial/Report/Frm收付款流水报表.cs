@@ -18,9 +18,9 @@ using LJH.Inventory.UI.Forms.Financial.View;
 
 namespace LJH.Inventory.UI.Forms.Financial.Report
 {
-    public partial class FrmCustomerPaymentReport : FrmReportBase
+    public partial class Frm收付款流水报表 : FrmReportBase
     {
-        public FrmCustomerPaymentReport()
+        public Frm收付款流水报表()
         {
             InitializeComponent();
         }
@@ -29,6 +29,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         private List<Account> _AllAccounts = null;
         private List<AccountRecord> _AccountRecords = null;
         private List<DocumentOperation> _CancelOptions = null;// 
+        private decimal _收入 = 0;
+        private decimal _支出 = 0;
 
         private decimal GetRemain(CustomerPayment cp)
         {
@@ -39,51 +41,13 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         }
 
         #region 重写基类方法
-        protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
+        protected override void Init()
         {
-            CustomerPayment cp = item as CustomerPayment;
-            row.Tag = cp;
-            row.Cells["colSheetID"].Value = cp.ID;
-            row.Cells["colClass"].Value = cp.ClassID.ToString();
-            row.Cells["colSheetDate"].Value = cp.SheetDate;
-            if (cp.PaymentMode != PaymentMode.None)
-            {
-                row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
-            }
-            Account ac = null;
-            if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
-            row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
-            if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.Payer);
-            row.Cells["colPayer"].Value = ac != null ? ac.Name : cp.Payer;
-            row.Cells["colAmount"].Value = cp.Amount;
-            if (cp.State != SheetState.Canceled)
-            {
-                var remain = GetRemain(cp);
-                row.Cells["colRemain"].Value = remain != 0 ? (decimal?)remain : null;
-                row.Cells["colAssigned"].Value = cp.Amount - remain != 0 ? (decimal?)(cp.Amount - remain) : null;
-            }
-            row.Cells["colStackSheetID"].Value = cp.StackSheetID;
-            if (_AllCustomers != null)
-            {
-                var c = _AllCustomers.SingleOrDefault(it => it.ID == cp.CustomerID);
-                row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
-            }
-            var temp = cp.GetProperty("到款日期");
-            DateTime pd = cp.SheetDate;
-            if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd)) row.Cells["col到款日期"].Value = pd.ToString("yyyy年MM月dd日");
-            row.Cells["colMemo"].Value = cp.Memo;
-            if (cp.ClassID == CustomerPaymentType.公司管理费用)
-            {
-                row.Cells["colPaymentMode"].Value = cp.GetProperty("费用类别");
-                row.Cells["colCustomer"].Value = cp.GetProperty("申请人");
-            }
-            if (cp.State == SheetState.Canceled)
-            {
-                row.DefaultCellStyle.ForeColor = Color.Red;
-                row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-                var ducopt = (_CancelOptions != null && _CancelOptions.Count > 0) ? _CancelOptions.SingleOrDefault(it => it.DocumentID == cp.ID) : null;
-                row.Cells["col作废原因"].Value = ducopt != null ? ducopt.Memo : null;
-            }
+            ucDateTimeInterval1.ShowTime = false;
+            ucDateTimeInterval1.Init();
+            ucDateTimeInterval1.SelectThisMonth();
+            btnSaveAs.Enabled = Operator.Current.Permit(Permission.收付款流水报表, PermissionActions.导出);
+            base.Init();
         }
 
         protected override List<object> GetDataSource()
@@ -113,27 +77,81 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk供应商付款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商付款);
             if (chk其它收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.其它收款);
             if (chk费用支出.Checked) con.PaymentTypes.Add(CustomerPaymentType.公司管理费用);
-            if (chk转公账.Checked) con.PaymentTypes.Add(CustomerPaymentType.转公账);
-            if (chkl转账.Checked) con.PaymentTypes.Add(CustomerPaymentType.转账);
-            if (chk退款.Checked)
-            {
-                con.PaymentTypes.Add(CustomerPaymentType.客户退款);
-                con.PaymentTypes.Add(CustomerPaymentType.供应商退款);
-            }
+            if (chk客户退款.Checked) con.PaymentTypes.Add(CustomerPaymentType.客户退款);
+            if (chk供应商退款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商退款);
             if (con.PaymentTypes.Count == 0) return null;
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }
 
-        protected override void Init()
+        protected override void ShowItemsOnGrid(List<object> items)
         {
-            ucDateTimeInterval1.ShowTime = false;
-            ucDateTimeInterval1.Init();
-            ucDateTimeInterval1.SelectThisMonth();
-            btnSaveAs.Enabled = Operator.Current.Permit(Permission.PaymentReport, PermissionActions.导出);
-            base.Init();
+            _收入 = 0;
+            _支出 = 0;
+            base.ShowItemsOnGrid(items);
+            lbl收入合计.Text = string.Format("收入合计：{0:C2}", _收入);
+            lbl支出合计.Text = string.Format("支出合计：{0:C2}", _支出);
         }
 
+        protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
+        {
+            CustomerPayment cp = item as CustomerPayment;
+            row.Tag = cp;
+            row.Cells["colSheetID"].Value = cp.ID;
+            row.Cells["colClass"].Value = cp.ClassID.ToString();
+            row.Cells["colSheetDate"].Value = cp.SheetDate;
+            if (cp.PaymentMode != PaymentMode.None)
+            {
+                row.Cells["colPaymentMode"].Value = LJH.Inventory.BusinessModel.Resource.PaymentModeDescription.GetDescription(cp.PaymentMode);
+            }
+            Account ac = null;
+            if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.AccountID);
+            row.Cells["colAccount"].Value = ac != null ? ac.Name : null;
+            if (_AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.Payer);
+            row.Cells["colPayer"].Value = ac != null ? ac.Name : cp.Payer;
+            row.Cells["colAmount"].Value = cp.Amount;
+            if (cp.State != SheetState.作废)
+            {
+                var remain = GetRemain(cp);
+                row.Cells["colRemain"].Value = remain != 0 ? (decimal?)remain : null;
+                row.Cells["colAssigned"].Value = cp.Amount - remain != 0 ? (decimal?)(cp.Amount - remain) : null;
+            }
+            row.Cells["colStackSheetID"].Value = cp.StackSheetID;
+            if (_AllCustomers != null)
+            {
+                var c = _AllCustomers.SingleOrDefault(it => it.ID == cp.CustomerID);
+                row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
+            }
+            var temp = cp.GetProperty("到款日期");
+            DateTime pd = cp.SheetDate;
+            if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd)) row.Cells["col到款日期"].Value = pd.ToString("yyyy年MM月dd日");
+            row.Cells["colMemo"].Value = cp.Memo;
+            if (cp.ClassID == CustomerPaymentType.公司管理费用)
+            {
+                row.Cells["colPaymentMode"].Value = cp.GetProperty("费用类别");
+                row.Cells["colCustomer"].Value = cp.GetProperty("申请人");
+            }
+            if (cp.State == SheetState.作废)
+            {
+                row.DefaultCellStyle.ForeColor = Color.Red;
+                row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+                var ducopt = (_CancelOptions != null && _CancelOptions.Count > 0) ? _CancelOptions.SingleOrDefault(it => it.DocumentID == cp.ID) : null;
+                row.Cells["col作废原因"].Value = ducopt != null ? ducopt.Memo : null;
+            }
+            if (cp.State != SheetState.作废)
+            {
+                if (cp.ClassID == CustomerPaymentType.客户收款 || cp.ClassID == CustomerPaymentType.其它收款 || cp.ClassID == CustomerPaymentType.供应商退款)
+                {
+                    _收入 += cp.Amount;
+                    row.DefaultCellStyle.ForeColor = Color.Blue;
+                }
+                else if (cp.ClassID == CustomerPaymentType.供应商付款 || cp.ClassID == CustomerPaymentType.公司管理费用 || cp.ClassID == CustomerPaymentType.客户退款)
+                {
+                    _支出 += cp.Amount;
+                    row.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
+        }
         #endregion
 
         #region 事件处理程序
@@ -198,9 +216,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             chk供应商付款.Checked = chkAll.Checked;
             chk其它收款.Checked = chkAll.Checked;
             chk费用支出.Checked = chkAll.Checked;
-            chk转公账.Checked = chkAll.Checked;
-            chkl转账.Checked = chkAll.Checked;
-            chk退款.Checked = chkAll.Checked;
+            chk客户退款.Checked = chkAll.Checked;
+            chk供应商退款.Checked = chkAll.Checked;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -257,6 +274,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                         Frm退款 frm = new Frm退款();
                         frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
+                        frm.IsForView = true;
                         frm.ShowDialog();
                     }
                 }

@@ -38,6 +38,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddSlice = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddSteelRoll = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_选择其它产品 = new System.Windows.Forms.ToolStripMenuItem();
             this.其它费用ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_RemoveItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
@@ -110,7 +111,9 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mnu_选择其它产品 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -142,33 +145,40 @@
             this.其它费用ToolStripMenuItem,
             this.mnu_RemoveItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 114);
             // 
             // btn_AddSlice
             // 
             this.btn_AddSlice.Name = "btn_AddSlice";
-            this.btn_AddSlice.Size = new System.Drawing.Size(152, 22);
+            this.btn_AddSlice.Size = new System.Drawing.Size(148, 22);
             this.btn_AddSlice.Text = "选择小件";
             this.btn_AddSlice.Click += new System.EventHandler(this.btn_AddSlice_Click);
             // 
             // mnu_AddSteelRoll
             // 
             this.mnu_AddSteelRoll.Name = "mnu_AddSteelRoll";
-            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(152, 22);
+            this.mnu_AddSteelRoll.Size = new System.Drawing.Size(148, 22);
             this.mnu_AddSteelRoll.Text = "选择原材料";
             this.mnu_AddSteelRoll.Click += new System.EventHandler(this.mnu_AddSteelRoll_Click);
+            // 
+            // mnu_选择其它产品
+            // 
+            this.mnu_选择其它产品.Name = "mnu_选择其它产品";
+            this.mnu_选择其它产品.Size = new System.Drawing.Size(148, 22);
+            this.mnu_选择其它产品.Text = "选择其它产品";
+            this.mnu_选择其它产品.Click += new System.EventHandler(this.mnu_选择其它产品_Click);
             // 
             // 其它费用ToolStripMenuItem
             // 
             this.其它费用ToolStripMenuItem.Name = "其它费用ToolStripMenuItem";
-            this.其它费用ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.其它费用ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.其它费用ToolStripMenuItem.Text = "其它费用";
             this.其它费用ToolStripMenuItem.Click += new System.EventHandler(this.其它费用ToolStripMenuItem_Click);
             // 
             // mnu_RemoveItem
             // 
             this.mnu_RemoveItem.Name = "mnu_RemoveItem";
-            this.mnu_RemoveItem.Size = new System.Drawing.Size(152, 22);
+            this.mnu_RemoveItem.Size = new System.Drawing.Size(148, 22);
             this.mnu_RemoveItem.Text = "删除";
             this.mnu_RemoveItem.Click += new System.EventHandler(this.mnu_Remove_Click);
             // 
@@ -189,7 +199,10 @@
             this.btnPayment,
             this.btnPrint,
             this.btnShip,
-            this.btnNullify});
+            this.btnNullify,
+            this.toolStripSeparator1,
+            this.lblSheetState,
+            this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1077, 56);
@@ -249,9 +262,9 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
@@ -577,9 +590,9 @@
             this.ItemsGrid.AllowUserToAddRows = false;
             this.ItemsGrid.AllowUserToDeleteRows = false;
             this.ItemsGrid.AllowUserToResizeRows = false;
-            this.ItemsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ItemsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ItemsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ItemsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colHeader,
@@ -883,12 +896,22 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // mnu_选择其它产品
+            // lblSheetState
             // 
-            this.mnu_选择其它产品.Name = "mnu_选择其它产品";
-            this.mnu_选择其它产品.Size = new System.Drawing.Size(152, 22);
-            this.mnu_选择其它产品.Text = "选择其它产品";
-            this.mnu_选择其它产品.Click += new System.EventHandler(this.mnu_选择其它产品_Click);
+            this.lblSheetState.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F, System.Drawing.FontStyle.Bold);
+            this.lblSheetState.Name = "lblSheetState";
+            this.lblSheetState.Size = new System.Drawing.Size(112, 53);
+            this.lblSheetState.Text = "状态：新增";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 56);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
             // FrmStackOutSheetDetail
             // 
@@ -1007,5 +1030,8 @@
         private System.Windows.Forms.Label lbl产品成本;
         private System.Windows.Forms.Label lbl销售金额;
         private System.Windows.Forms.ToolStripMenuItem mnu_选择其它产品;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripLabel lblSheetState;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

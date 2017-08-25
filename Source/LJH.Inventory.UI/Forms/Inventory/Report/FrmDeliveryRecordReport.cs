@@ -59,7 +59,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.States = new List<SheetState>();
-            con.States.Add(SheetState.Shipped);
+            con.States.Add(SheetState.已发货);
             con.SheetTypes = new List<StackOutSheetType>();
             con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;

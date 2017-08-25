@@ -97,7 +97,7 @@ namespace LJH.Inventory.BLL
             if (info.Items == null || info.Items.Count == 0) throw new Exception("单号为 " + info.ID + " 的收货单发货失败，没有收货单项");
 
             StackInSheet sheet1 = info.Clone() as StackInSheet;
-            info.State = SheetState.Inventory;
+            info.State = SheetState.已入库;
             info.LastActiveDate = dt;
             ProviderFactory.Create<IProvider<StackInSheet, string>>(RepoUri).Update(info, sheet1, unitWork);
 

@@ -137,7 +137,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (State == SheetState.Canceled) return false;
+                if (State == SheetState.作废) return false;
                 return NotShipped > 0 && DemandDate < DateTime.Today;
             }
         }
@@ -149,7 +149,7 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (State == SheetState.Canceled) return false;
+                if (State == SheetState.作废) return false;
                 return NotShipped > 0 && DemandDate.Date == DateTime.Today;
             }
         }

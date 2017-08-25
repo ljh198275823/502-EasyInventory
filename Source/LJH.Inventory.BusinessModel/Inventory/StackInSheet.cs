@@ -86,17 +86,17 @@ namespace LJH.Inventory.BusinessModel
             switch (operation)
             {
                 case SheetOperation.Modify:
-                    return State == SheetState.Add;
+                    return State == SheetState.新增;
                 case SheetOperation.Approve:
-                    return State == SheetState.Add;
+                    return State == SheetState.新增;
                 case SheetOperation.UndoApprove:
-                    return State == SheetState.Approved;
+                    return State == SheetState.已审批;
                 case SheetOperation.Nullify:
-                    return State != SheetState.Canceled && State != SheetState.Inventory;
+                    return State != SheetState.作废 && State != SheetState.已入库;
                 case SheetOperation.StackIn:
-                    return (State == SheetState.Add || State == SheetState.Approved);
+                    return (State == SheetState.新增 || State == SheetState.已审批);
                 case SheetOperation.StackOut :
-                    return (State == SheetState.Add || State == SheetState.Approved);
+                    return (State == SheetState.新增 || State == SheetState.已审批);
                 default:
                     return false;
             }

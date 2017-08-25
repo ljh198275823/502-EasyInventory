@@ -329,7 +329,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnPayment_Click(object sender, EventArgs e)
         {
             var sheet = UpdatingItem as StackOutSheet;
-            if (sheet == null || sheet.State == SheetState.Canceled) return;
+            if (sheet == null || sheet.State == SheetState.作废) return;
             if (string.IsNullOrEmpty(sheet.ID))
             {
                 MessageBox.Show("请先保存送货单后再支付");
@@ -364,7 +364,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 try
                 {
-                    if (sheet.State == SheetState.Add)
+                    if (sheet.State == SheetState.新增)
                     {
                         var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
                         if (ret.Result != ResultCode.Successful)
@@ -378,7 +378,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         }
                     }
 
-                    if (sheet.State != SheetState.Shipped && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint)
+                    if (sheet.State != SheetState.已发货 && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint)
                     {
                         var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.StackOut, Operator.Current.Name, Operator.Current.ID);
                         if (ret.Result != ResultCode.Successful)
@@ -421,7 +421,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                                 }
                             }
                         }
-                        if (sheet.State == SheetState.Shipped && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint) this.Close(); //打印后自动出货，打印完成之后关闭窗体
+                        if (sheet.State == SheetState.已发货 && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint) this.Close(); //打印后自动出货，打印完成之后关闭窗体
                     }
                     else
                     {
@@ -489,7 +489,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (CheckCredit())
             {
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;
-                if (sheet.State == SheetState.Add)
+                if (sheet.State == SheetState.新增)
                 {
                     var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result != ResultCode.Successful)
@@ -503,7 +503,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     }
                 }
                 PerformOperation<StackOutSheet>(bll, SheetOperation.StackOut);
-                if (sheet.State == SheetState.Shipped)
+                if (sheet.State == SheetState.已发货)
                 {
                     new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
                     ShowPaymentState(sheet);

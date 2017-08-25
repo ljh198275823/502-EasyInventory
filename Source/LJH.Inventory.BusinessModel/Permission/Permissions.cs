@@ -190,7 +190,7 @@ namespace LJH.Inventory.BusinessModel
         /// 收付款流水报表
         /// </summary>
         [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "收付款流水报表")]
-        PaymentReport,
+        收付款流水报表,
         /// <summary>
         /// 增值税发票报表
         /// </summary>
@@ -216,6 +216,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "小件盘点报表")]
         小件盘点报表,
+        /// <summary>
+        ///内部转账记录报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "内部转账记录报表")]
+        内部转账记录报表,
         #endregion
     }
 }

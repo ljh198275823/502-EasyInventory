@@ -245,7 +245,7 @@ namespace LJH.Inventory.BLL
             if (info.Items == null || info.Items.Count == 0) throw new Exception("单号为 " + info.ID + " 的送货单发货失败，没有送货单项");
             StackOutSheet sheet1 = info.Clone() as StackOutSheet;
             info.LastActiveDate = dt;
-            info.State = SheetState.Shipped;
+            info.State = SheetState.已发货;
             sp.Update(info, sheet1, unitWork);
 
             var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
@@ -336,14 +336,17 @@ namespace LJH.Inventory.BLL
             var ret = base.GetItems(condition);
             if (ret.Result == ResultCode.Successful && ret.QueryObjects.Count > 0)
             {
-                var pcon = new ProductInventoryItemSearchCondition();
-                //if (condition is SheetSearchCondition)
-                //{
-                //    var con = condition as SheetSearchCondition;
-                //    if (con.SheetDate != null) pcon.AddDateRange = new DateTimeRange(con.SheetDate.Begin, DateTime.MaxValue);
-                //}
-                pcon.States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping, ProductInventoryState.Shipped };
-                var pis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
+                List<ProductInventoryItem> pis = null;
+                if (condition is StackOutSheetSearchCondition)
+                {
+                    pis = new ProductInventoryItemBLL(RepoUri).GetItems(condition as StackOutSheetSearchCondition).QueryObjects;
+                }
+                else
+                {
+                    var pcon = new ProductInventoryItemSearchCondition();
+                    pcon.States = new List<ProductInventoryState>() { ProductInventoryState.WaitShipping, ProductInventoryState.Shipped };
+                    pis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
+                }
                 if (pis != null && pis.Count > 0)
                 {
                     Dictionary<string, List<ProductInventoryItem>> temp = new Dictionary<string, List<ProductInventoryItem>>();
@@ -436,7 +439,7 @@ namespace LJH.Inventory.BLL
             {
                 ret.FirstAccountID = cps[0].AccountID;
             }
-            if (item.State != SheetState.Shipped)
+            if (item.State != SheetState.已发货)
             {
                 if (cps != null) ret.Paid = cps.Sum(it => it.Remain);
             }
