@@ -231,50 +231,38 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                     if (sheet.ClassID == CustomerPaymentType.客户收款 || sheet.ClassID == CustomerPaymentType.供应商付款)
                     {
                         FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
-                        frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        frm.IsForView = true;
                         frm.PaymentType = sheet.ClassID;
                         frm.ShowDialog();
                     }
                     else if (sheet.ClassID == CustomerPaymentType.转公账)
                     {
                         Frm转公账 frm = new Frm转公账();
-                        frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        frm.IsForView = true;
                         frm.ShowDialog();
                     }
                     else if (sheet.ClassID == CustomerPaymentType.转账)
                     {
                         Frm转账 frm = new Frm转账();
-                        frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        frm.IsForView = true;
                         frm.ShowDialog();
                     }
                     else if (sheet.ClassID == CustomerPaymentType.其它收款)
                     {
                         Frm其它收款 frm = new Frm其它收款();
-                        frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        frm.IsForView = true;
                         frm.ShowDialog();
                     }
                     else if (sheet.ClassID == CustomerPaymentType.公司管理费用)
                     {
                         Frm管理费用 frm = new Frm管理费用();
-                        frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        frm.IsForView = true;
                         frm.ShowDialog();
                     }
                     else if (sheet.ClassID == CustomerPaymentType.客户退款)
                     {
                         Frm退款 frm = new Frm退款();
-                        frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        frm.IsForView = true;
                         frm.ShowDialog();
                     }
                 }

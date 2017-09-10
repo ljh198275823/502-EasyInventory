@@ -192,7 +192,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                             else
                             {
                                 var tui = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                                if (tui != null)
+                                if (tui != null && tui.ClassID == CustomerPaymentType.客户退款)
                                 {
                                     Frm退款 frm = new Frm退款();
                                     frm.IsAdding = false;
@@ -206,7 +206,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                     {
                         if (!Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Read)) return;
                         var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                        if (sheet != null)
+                        if (sheet != null && sheet.ClassID == CustomerPaymentType.客户收款)
                         {
                             FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                             frm.IsAdding = false;

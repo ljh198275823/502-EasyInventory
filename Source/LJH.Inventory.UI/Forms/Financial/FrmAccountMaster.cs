@@ -97,6 +97,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                     frm.Account = dataGridView1.Rows[e.RowIndex].Tag as Account;
                     frm.StartPosition = FormStartPosition.CenterParent;
                     frm.ShowDialog();
+                    btn_Fresh.PerformClick();
                 }
             }
         }

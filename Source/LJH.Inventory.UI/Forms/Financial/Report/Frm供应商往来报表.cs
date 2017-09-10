@@ -130,7 +130,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                             var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(gid).QueryObject;
                             if (pi != null)
                             {
-                                if (pi.Product.Model == ProductModel.原材料 )
+                                if (pi.Product.Model == ProductModel.原材料)
                                 {
                                     FrmSteelRollDetail frm = new FrmSteelRollDetail();
                                     frm.UpdatingItem = pi;
@@ -163,13 +163,24 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                                 frm.UpdatingItem = osheet;
                                 frm.ShowDialog();
                             }
+                            else
+                            {
+                                var tui = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
+                                if (tui != null && tui.ClassID == CustomerPaymentType.供应商退款)
+                                {
+                                    Frm退款 frm = new Frm退款();
+                                    frm.IsAdding = false;
+                                    frm.UpdatingItem = tui;
+                                    frm.ShowDialog();
+                                }
+                            }
                         }
                     }
                     else if (cp.收入 != 0)
                     {
                         if (!Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Read)) return;
                         var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
-                        if (sheet != null)
+                        if (sheet != null && sheet.ClassID == CustomerPaymentType.供应商付款)
                         {
                             FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                             frm.IsAdding = false;

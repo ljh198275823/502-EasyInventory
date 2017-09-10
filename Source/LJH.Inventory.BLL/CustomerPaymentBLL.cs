@@ -298,7 +298,7 @@ namespace LJH.Inventory.BLL
                 }
             }
 
-            if (!allSuccess) throw new Exception("删除失败");
+            if (!allSuccess) throw new Exception("作废失败");
             base.DoNullify(info, unitWork, dt, opt);
         }
         #endregion
