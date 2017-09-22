@@ -68,6 +68,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -100,7 +102,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 82);
+            this.label2.Location = new System.Drawing.Point(37, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 31;
@@ -109,7 +111,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 111);
+            this.label5.Location = new System.Drawing.Point(37, 142);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 36;
@@ -125,7 +127,7 @@
             // txtAmount
             // 
             this.txtAmount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAmount.Location = new System.Drawing.Point(71, 78);
+            this.txtAmount.Location = new System.Drawing.Point(71, 109);
             this.txtAmount.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -145,7 +147,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(71, 108);
+            this.txtMemo.Location = new System.Drawing.Point(71, 139);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(414, 21);
             this.txtMemo.TabIndex = 8;
@@ -166,6 +168,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtCustomer);
+            this.tabPage1.Controls.Add(this.lnkCustomer);
             this.tabPage1.Controls.Add(this.txtPayer);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.txtAccount);
@@ -189,7 +193,7 @@
             // txtPayer
             // 
             this.txtPayer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPayer.Location = new System.Drawing.Point(320, 47);
+            this.txtPayer.Location = new System.Drawing.Point(320, 78);
             this.txtPayer.Name = "txtPayer";
             this.txtPayer.Size = new System.Drawing.Size(161, 21);
             this.txtPayer.TabIndex = 101;
@@ -197,7 +201,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(262, 51);
+            this.label4.Location = new System.Drawing.Point(262, 82);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 102;
@@ -206,7 +210,7 @@
             // txtAccount
             // 
             this.txtAccount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAccount.Location = new System.Drawing.Point(71, 47);
+            this.txtAccount.Location = new System.Drawing.Point(71, 78);
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.ReadOnly = true;
             this.txtAccount.Size = new System.Drawing.Size(163, 21);
@@ -214,7 +218,7 @@
             // 
             // lnkAccout
             // 
-            this.lnkAccout.Location = new System.Drawing.Point(6, 49);
+            this.lnkAccout.Location = new System.Drawing.Point(6, 80);
             this.lnkAccout.Name = "lnkAccout";
             this.lnkAccout.Size = new System.Drawing.Size(60, 17);
             this.lnkAccout.TabIndex = 99;
@@ -474,6 +478,27 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
+            // txtCustomer
+            // 
+            this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtCustomer.Location = new System.Drawing.Point(68, 44);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.ReadOnly = true;
+            this.txtCustomer.Size = new System.Drawing.Size(413, 21);
+            this.txtCustomer.TabIndex = 104;
+            this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
+            // 
+            // lnkCustomer
+            // 
+            this.lnkCustomer.Location = new System.Drawing.Point(3, 46);
+            this.lnkCustomer.Name = "lnkCustomer";
+            this.lnkCustomer.Size = new System.Drawing.Size(60, 17);
+            this.lnkCustomer.TabIndex = 103;
+            this.lnkCustomer.TabStop = true;
+            this.lnkCustomer.Text = "客户";
+            this.lnkCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnkCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomer_LinkClicked);
+            // 
             // Frm其它收款
             // 
             this.AcceptButton = null;
@@ -544,5 +569,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel lblSheetState;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
+        private System.Windows.Forms.LinkLabel lnkCustomer;
     }
 }

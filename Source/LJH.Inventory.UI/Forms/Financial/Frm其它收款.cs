@@ -68,6 +68,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                 if (!string.IsNullOrEmpty(item.AccountID)) ac = (new AccountBLL(AppSettings.Current.ConnStr)).GetByID(item.AccountID).QueryObject;
                 txtAccount.Text = ac != null ? ac.Name : string.Empty;
                 txtAccount.Tag = ac;
+                if (!string.IsNullOrEmpty(item.CustomerID))
+                {
+                    var c = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.CustomerID).QueryObject;
+                    txtCustomer.Tag = c;
+                    txtCustomer.Text = c != null ? c.Name : string.Empty;
+                }
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -92,6 +98,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.Amount = txtAmount.DecimalValue;
             var ac = txtAccount.Tag as Account;
             info.AccountID = ac != null ? ac.ID : null;
+            var c = txtCustomer.Tag as CompanyInfo;
+            info.CustomerID = c != null ? c.ID : null;
             info.Payer = txtPayer.Text;
             info.Memo = txtMemo.Text;
             return info;
@@ -201,6 +209,25 @@ namespace LJH.Inventory.UI.Forms.Financial
         #endregion
 
         #region 事件处理程序
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmMasterBase frm = null;
+            frm = new FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var c = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Tag = c;
+                txtCustomer.Text = c != null ? c.Name : string.Empty;
+            }
+        }
+
+        private void txtCustomer_DoubleClick(object sender, EventArgs e)
+        {
+            txtCustomer.Tag = null;
+            txtCustomer.Text = string.Empty;
+        }
+
         private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FrmAccountMaster frm = new FrmAccountMaster();

@@ -517,7 +517,7 @@ namespace InventoryApplication
 
         private void mnu_账号管理_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmAccountMaster>(null);
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmAccountMaster>(sender);
         }
 
         private void mnu_供应商往来报表_Click(object sender, EventArgs e)
@@ -527,7 +527,7 @@ namespace InventoryApplication
 
         private void mnu_公司管理费用_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmExpenditureRecordMaster>(null);
+            ShowSingleForm<LJH.Inventory.UI.Forms.Financial.FrmExpenditureRecordMaster>(sender);
         }
 
         private void mnu_客户往来报表_详细版_Click(object sender, EventArgs e)
