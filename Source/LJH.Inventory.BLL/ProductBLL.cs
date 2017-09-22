@@ -47,6 +47,29 @@ namespace LJH.Inventory.BLL
             }
         }
 
+        public override CommandResult Delete(Product info)
+        {
+            var pcon = new ProductInventoryItemSearchCondition() { ProductID = info.ID };
+            var pis = new ProductInventoryItemBLL(RepoUri).GetItems(pcon).QueryObjects;
+            if (pis != null && pis.Count > 0) return new CommandResult(ResultCode.Fail, "产品已经在使用，不能删除");
+
+            var scon = new StackOutRecordSearchCondition() { ProductID = info.ID };
+            var ss = new StackOutSheetBLL(RepoUri).GetDeliveryRecords(scon).QueryObjects;
+            if (ss != null && ss.Count > 0) return new CommandResult(ResultCode.Fail, "产品已经在使用，不能删除");
+
+            var siCon = new StackInRecordSearchCondition() { ProductID = info.ID };
+            var sis = new StackInSheetBLL(RepoUri).GetInventoryRecords(siCon).QueryObjects;
+            if (sis != null && sis.Count > 0) return new CommandResult(ResultCode.Fail, "产品已经在使用，不能删除");
+
+            return base.Delete(info);
+        }
+
+        public override CommandResult Delete(string id)
+        {
+            var info = GetByID(id).QueryObject;
+            return Delete(info);
+        }
+
         public Product Create(string categoryID, string specification, string model, decimal? density, bool onlyCreate = false)
         {
             return Create(categoryID, specification, model, null, null, density, onlyCreate);
