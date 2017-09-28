@@ -11,6 +11,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Forms;
 using LJH.Inventory.UI.Forms.Financial;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
 {
@@ -24,10 +25,10 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         #region 私有方法
         public void ShowAssigns(CustomerReceivable item)
         {
-            GridView.Rows.Clear();
-            GridView.CellClick -= StackoutSheetID_Click;
-            GridView.CellClick -= PaymentID_Click;
-            GridView.CellClick += PaymentID_Click;
+            ItemsGrid.Rows.Clear();
+            ItemsGrid.CellClick -= StackoutSheetID_Click;
+            ItemsGrid.CellClick -= PaymentID_Click;
+            ItemsGrid.CellClick += PaymentID_Click;
             AccountRecordAssignSearchCondition con = new AccountRecordAssignSearchCondition();
             con.ReceivableID = item.ID;
             var assigns = new AccountRecordAssignBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
@@ -38,25 +39,25 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     var cr = new AccountRecordBLL(AppSettings.Current.ConnStr).GetByID(assign.PaymentID).QueryObject;
                     if (cr != null)
                     {
-                        int row = GridView.Rows.Add();
-                        GridView.Rows[row].Tag = assign;
-                        GridView.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
-                        GridView.Rows[row].Cells["colAssign"].Value = assign.Amount;
+                        int row = ItemsGrid.Rows.Add();
+                        ItemsGrid.Rows[row].Tag = assign;
+                        ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
+                        ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount;
                     }
                 }
-                int rowTotal = GridView.Rows.Add();
-                GridView.Rows[rowTotal].Cells["colSheetID"].Value = "合计";
-                GridView.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(it => it.Amount);
+                int rowTotal = ItemsGrid.Rows.Add();
+                ItemsGrid.Rows[rowTotal].Cells["colSheetID"].Value = "合计";
+                ItemsGrid.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(it => it.Amount);
                 this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", assigns.Count);
             }
         }
 
         public void ShowAssigns(AccountRecord item)
         {
-            GridView.Rows.Clear();
-            GridView.CellClick -= StackoutSheetID_Click;
-            GridView.CellClick -= PaymentID_Click;
-            GridView.CellClick += StackoutSheetID_Click;
+            ItemsGrid.Rows.Clear();
+            ItemsGrid.CellClick -= StackoutSheetID_Click;
+            ItemsGrid.CellClick -= PaymentID_Click;
+            ItemsGrid.CellClick += StackoutSheetID_Click;
             AccountRecordAssignSearchCondition con = new AccountRecordAssignSearchCondition();
             con.PaymentID = item.ID;
             var assigns = new AccountRecordAssignBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
@@ -67,15 +68,15 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     var cr = new CustomerReceivableBLL(AppSettings.Current.ConnStr).GetByID(assign.ReceivableID).QueryObject;
                     if (cr != null)
                     {
-                        int row = GridView.Rows.Add();
-                        GridView.Rows[row].Tag = assign;
-                        GridView.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
-                        GridView.Rows[row].Cells["colAssign"].Value = assign.Amount;
+                        int row = ItemsGrid.Rows.Add();
+                        ItemsGrid.Rows[row].Tag = assign;
+                        ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
+                        ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount;
                     }
                 }
-                int rowTotal = GridView.Rows.Add();
-                GridView.Rows[rowTotal].Cells["colSheetID"].Value = "合计";
-                GridView.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(it => it.Amount);
+                int rowTotal = ItemsGrid.Rows.Add();
+                ItemsGrid.Rows[rowTotal].Cells["colSheetID"].Value = "合计";
+                ItemsGrid.Rows[rowTotal].Cells["colAssign"].Value = assigns.Sum(it => it.Amount);
                 this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", assigns.Count);
             }
         }
@@ -84,12 +85,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         #region 事件处理程序
         private void StackoutSheetID_Click(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >=0)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (GridView.Rows[e.RowIndex].Tag == null) return;
-                if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
+                if (ItemsGrid.Rows[e.RowIndex].Tag == null) return;
+                if (ItemsGrid.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    string sheetID = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    string sheetID = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                     var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheetID).QueryObject;
                     if (sheet != null)
                     {
@@ -118,10 +119,10 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (GridView.Rows[e.RowIndex].Tag == null) return;
-                if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
+                if (ItemsGrid.Rows[e.RowIndex].Tag == null) return;
+                if (ItemsGrid.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    string paymentID = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    string paymentID = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                     CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(paymentID).QueryObject;
                     if (cp != null)
                     {
@@ -129,7 +130,6 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         {
                             FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                             frm.IsAdding = false;
-                            frm.IsForView = true;
                             frm.UpdatingItem = cp;
                             frm.PaymentType = cp.ClassID;
                             frm.ShowDialog();
@@ -138,7 +138,6 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         {
                             FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
                             frm.IsAdding = false;
-                            frm.IsForView = true;
                             frm.UpdatingItem = cp;
                             frm.TaxType = cp.ClassID;
                             frm.ShowDialog();
@@ -146,6 +145,24 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     }
                 }
             }
+        }
+
+        private void mnu_UndoAssign_Click(object sender, EventArgs e)
+        {
+            List<DataGridViewRow> delRows = new List<DataGridViewRow>();
+            if (ItemsGrid.SelectedRows != null && ItemsGrid.SelectedRows.Count > 0)
+            {
+                if (MessageBox.Show("是否要取消此核销项?", "询问", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in ItemsGrid.SelectedRows)
+                    {
+                        AccountRecordAssign assign = row.Tag as AccountRecordAssign;
+                        CommandResult ret = (new AccountRecordAssignBLL(AppSettings.Current.ConnStr)).UndoAssign(assign);
+                        if (ret.Result == ResultCode.Successful) delRows.Add(row);
+                    }
+                }
+            }
+            delRows.ForEach(it => ItemsGrid.Rows.Remove(it));
         }
         #endregion
     }

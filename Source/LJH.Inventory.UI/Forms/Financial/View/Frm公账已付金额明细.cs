@@ -154,6 +154,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     frm.StartPosition = FormStartPosition.CenterParent;
                     frm.ShowAssigns(ar);
                     frm.ShowDialog();
+                    FreshData();
                 }
                 else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colStackSheetID")
                 {

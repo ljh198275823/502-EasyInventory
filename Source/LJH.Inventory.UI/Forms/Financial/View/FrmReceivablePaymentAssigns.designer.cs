@@ -28,16 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReceivablePaymentAssigns));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.GridView = new System.Windows.Forms.DataGridView();
+            this.ItemsGrid = new System.Windows.Forms.DataGridView();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu_AssignGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_UndoAssign = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
+            this.mnu_AssignGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -57,27 +61,28 @@
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "总共 0 项";
             // 
-            // GridView
+            // ItemsGrid
             // 
-            this.GridView.AllowUserToAddRows = false;
-            this.GridView.AllowUserToDeleteRows = false;
-            this.GridView.AllowUserToResizeRows = false;
-            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ItemsGrid.AllowUserToAddRows = false;
+            this.ItemsGrid.AllowUserToDeleteRows = false;
+            this.ItemsGrid.AllowUserToResizeRows = false;
+            this.ItemsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GridView.BackgroundColor = System.Drawing.Color.White;
-            this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ItemsGrid.BackgroundColor = System.Drawing.Color.White;
+            this.ItemsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ItemsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetID,
             this.colAssign,
             this.colFill});
-            this.GridView.Location = new System.Drawing.Point(0, 1);
-            this.GridView.Name = "GridView";
-            this.GridView.RowHeadersVisible = false;
-            this.GridView.RowTemplate.Height = 23;
-            this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(555, 246);
-            this.GridView.TabIndex = 21;
+            this.ItemsGrid.ContextMenuStrip = this.mnu_AssignGrid;
+            this.ItemsGrid.Location = new System.Drawing.Point(0, 1);
+            this.ItemsGrid.Name = "ItemsGrid";
+            this.ItemsGrid.RowHeadersVisible = false;
+            this.ItemsGrid.RowTemplate.Height = 23;
+            this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ItemsGrid.Size = new System.Drawing.Size(555, 246);
+            this.ItemsGrid.TabIndex = 21;
             // 
             // colSheetID
             // 
@@ -104,12 +109,26 @@
             this.colFill.ReadOnly = true;
             this.colFill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // mnu_AssignGrid
+            // 
+            this.mnu_AssignGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_UndoAssign});
+            this.mnu_AssignGrid.Name = "contextMenuStrip1";
+            this.mnu_AssignGrid.Size = new System.Drawing.Size(137, 26);
+            // 
+            // mnu_UndoAssign
+            // 
+            this.mnu_UndoAssign.Name = "mnu_UndoAssign";
+            this.mnu_UndoAssign.Size = new System.Drawing.Size(136, 22);
+            this.mnu_UndoAssign.Text = "取消核销项";
+            this.mnu_UndoAssign.Click += new System.EventHandler(this.mnu_UndoAssign_Click);
+            // 
             // FrmReceivablePaymentAssigns
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 272);
-            this.Controls.Add(this.GridView);
+            this.Controls.Add(this.ItemsGrid);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmReceivablePaymentAssigns";
@@ -117,7 +136,8 @@
             this.Text = "核销明细";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
+            this.mnu_AssignGrid.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,9 +147,11 @@
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.DataGridView GridView;
+        private System.Windows.Forms.DataGridView ItemsGrid;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
+        private System.Windows.Forms.ContextMenuStrip mnu_AssignGrid;
+        private System.Windows.Forms.ToolStripMenuItem mnu_UndoAssign;
     }
 }

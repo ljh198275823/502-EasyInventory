@@ -55,6 +55,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                         int row = ItemsGrid.Rows.Add();
                         ItemsGrid.Rows[row].Tag = assign;
                         ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
+                        if (cr.ClassID == CustomerReceivableType.SupplierReceivable)
+                        {
+                            var gg = cr.GetProperty("规格");
+                            if (!string.IsNullOrEmpty(gg)) ItemsGrid.Rows[row].Cells["colSheetID"].Value = gg;
+                        }
                         ItemsGrid.Rows[row].Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
                         ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount.Trim();
                     }

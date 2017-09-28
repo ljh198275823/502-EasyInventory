@@ -138,6 +138,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     frm.StartPosition = FormStartPosition.CenterParent;
                     frm.ShowAssigns(cp);
                     frm.ShowDialog();
+                    FreshData();
                 }
             }
         }
