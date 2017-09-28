@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
-using LJH.Inventory.UI.Forms;
-using LJH.Inventory.UI.Forms.Financial;
+using LJH.Inventory.UI.Forms.Inventory;
 using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
@@ -71,6 +66,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         int row = ItemsGrid.Rows.Add();
                         ItemsGrid.Rows[row].Tag = assign;
                         ItemsGrid.Rows[row].Cells["colSheetID"].Value = cr.SheetID;
+                        ItemsGrid.Rows[row].Cells["colSheetID"].Tag = cr;
+                        if (cr.ClassID == CustomerReceivableType.SupplierReceivable)
+                        {
+                            var gg = cr.GetProperty("规格");
+                            if (!string.IsNullOrEmpty(gg)) ItemsGrid.Rows[row].Cells["colSheetID"].Value = gg;
+                        }
                         ItemsGrid.Rows[row].Cells["colAssign"].Value = assign.Amount;
                     }
                 }
@@ -90,26 +91,83 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 if (ItemsGrid.Rows[e.RowIndex].Tag == null) return;
                 if (ItemsGrid.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    string sheetID = ItemsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheetID).QueryObject;
-                    if (sheet != null)
+                    CustomerReceivable cr = ItemsGrid.Rows[e.RowIndex].Cells["colSheetID"].Tag as CustomerReceivable;
+                    if (cr.ClassID  == CustomerReceivableType.CustomerReceivable)
                     {
-                        Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
-                        frm.IsAdding = false;
-                        frm.IsForView = true;
-                        frm.UpdatingItem = sheet;
-                        frm.ShowDialog();
-                        return;
+                        var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                        if (sheet != null)
+                        {
+                            Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                            frm.IsAdding = false;
+                            frm.IsForView = true;
+                            frm.UpdatingItem = sheet;
+                            frm.ShowDialog();
+                        }
+                        else
+                        {
+                            var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                            if (osheet != null)
+                            {
+                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                frm.ReceivableType = osheet.ClassID;
+                                frm.UpdatingItem = osheet;
+                                frm.ShowDialog();
+                            }
+                            else
+                            {
+                                var tui = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                                if (tui != null)
+                                {
+                                    Frm退款 frm = new Frm退款();
+                                    frm.IsAdding = false;
+                                    frm.UpdatingItem = tui;
+                                    frm.ShowDialog();
+                                }
+                            }
+                        }
                     }
-                    var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(sheetID).QueryObject;
-                    if (osheet != null)
+                    else if (cr.ClassID  == CustomerReceivableType.SupplierReceivable)
                     {
-                        FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
-                        frm.ReceivableType = osheet.ClassID;
-                        frm.IsForView = true;
-                        frm.UpdatingItem = osheet;
-                        frm.ShowDialog();
-                        return;
+                        Guid gid;
+                        if (Guid.TryParse(cr.SheetID, out gid))
+                        {
+                            var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(gid).QueryObject;
+                            if (pi != null)
+                            {
+                                if (pi.Product.Model == ProductModel.原材料)
+                                {
+                                    FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                                    frm.UpdatingItem = pi;
+                                    frm.IsForView = true;
+                                    frm.ShowDialog();
+                                }
+                                else if (pi.Product.Model == ProductModel.其它产品)
+                                {
+                                    Frm其它产品入库 frm = new Frm其它产品入库();
+                                    frm.SteelRollSlice = pi;
+                                    frm.IsForView = true;
+                                    frm.ShowDialog();
+                                }
+                                else
+                                {
+                                    FrmSteelRollSliceStackIn frm = new FrmSteelRollSliceStackIn();
+                                    frm.SteelRollSlice = pi;
+                                    frm.IsForView = true;
+                                    frm.ShowDialog();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                            if (osheet != null)
+                            {
+                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                frm.ReceivableType = osheet.ClassID;
+                                frm.UpdatingItem = osheet;
+                                frm.ShowDialog();
+                            }
+                        }
                     }
                 }
             }
