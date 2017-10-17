@@ -521,12 +521,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 事件处理程序
         private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmCustomerFinancialStateMaster frm = new FrmCustomerFinancialStateMaster();
+            var frm = new FrmCustomerMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                var ct = frm.SelectedItem as CustomerFinancialState;
-                var c = ct.Customer;
+                var c = frm.SelectedItem as CompanyInfo;
                 txtCustomer.Tag = c;
                 txtCustomer.Text = c != null ? c.Name : string.Empty;
                 txtAddress.Text = c != null ? c.Address : string.Empty;
