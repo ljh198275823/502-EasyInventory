@@ -26,7 +26,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置加工的原材料卷初始重量
         /// </summary>
-        public decimal? OriginalWeight { get; set; }
+        public decimal? SourceRollWeight { get; set; }
         /// <summary>
         /// 获取或设置加工的原材料卷初始长度
         /// </summary>

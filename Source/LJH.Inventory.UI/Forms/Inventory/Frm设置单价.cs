@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class Frm设置结算单价 : Form
+    public partial class Frm设置单价 : Form
     {
-        public Frm设置结算单价()
+        public Frm设置单价()
         {
             InitializeComponent();
         }
@@ -22,8 +22,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
             set { txt结算单价.DecimalValue = value; }
         }
 
+        public bool WithTax
+        {
+            get { return rdWithTax.Checked; }
+            set
+            {
+                rdWithTax.Checked = value;
+                rdWithoutTax.Checked = !value;
+            }
+        }
+
         private void btnOk_Click(object sender, EventArgs e)
         {
+            if (txt结算单价.DecimalValue < 0)
+            {
+                MessageBox.Show("单价不能小于零");
+                return;
+            }
+            if (!rdWithoutTax.Checked && !rdWithTax.Checked)
+            {
+                MessageBox.Show("请选择是否含税");
+                return;
+            }
             this.DialogResult = DialogResult.OK;
         }
 

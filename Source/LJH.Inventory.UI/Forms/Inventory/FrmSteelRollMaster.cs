@@ -241,12 +241,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 CostItem ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
-                ci = sr.GetCost(CostItem.结算单价);
-                if (ci != null) row.Cells["col结算单价"].Value = ci.Price;
-                ci = sr.GetCost(CostItem.运费);
-                if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
-                ci = sr.GetCost(CostItem.其它费用);
-                if (ci != null) row.Cells["colOtherCost"].Value = ci.Price;
+                //ci = sr.GetCost(CostItem.运费);
+                //if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
+                //ci = sr.GetCost(CostItem.其它费用);
+                //if (ci != null) row.Cells["colOtherCost"].Value = ci.Price;
             }
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colPosition"].Value = sr.Position;
@@ -527,13 +525,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void mnu_设置结算单价_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
-            Frm设置结算单价 frm = new Frm设置结算单价();
+            Frm设置单价 frm = new Frm设置单价();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置结算单价(pi, frm.结算单价, Operator.Current.Name, Operator.Current.ID);
+                    var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置入库单价(pi, frm.结算单价, frm.WithTax, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);

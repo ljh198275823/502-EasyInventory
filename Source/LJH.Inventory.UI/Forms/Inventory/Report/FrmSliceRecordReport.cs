@@ -20,8 +20,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             InitializeComponent();
         }
 
-        private List<ProductInventoryItem> _AllSteelRolls = null;
-
         #region 重写基类方法
         protected override void Init()
         {
@@ -36,8 +34,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
 
         protected override List<object> GetDataSource()
         {
-            _AllSteelRolls = new SteelRollBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
-
             SliceRecordSearchCondition con = new SliceRecordSearchCondition();
             con.SliceDate = new DateTimeRange(this.ucDateTimeInterval1.StartDateTime, this.ucDateTimeInterval1.EndDateTime);
             con.Category = this.categoryComboBox1.SelectedCategoryID;
@@ -78,16 +74,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colTotalWeight"].Value = record.BeforeWeight - record.AfterWeight;
             row.Cells["colSlicer"].Value = record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;
-            row.Cells["colSourceRoll"].Value = "查看原料卷";
-            if (_AllSteelRolls != null && _AllSteelRolls.Count > 0)
-            {
-                ProductInventoryItem sr=_AllSteelRolls .SingleOrDefault (it=>it.ID ==record.SliceSource );
-                if (sr != null) row.Cells["colSourceOriginalWeight"].Value = sr.OriginalWeight;
-                if (txtSourceRollWeight.DecimalValue > 0) //如果指定了来源卷重
-                {
-                    row.Visible = txtSourceRollWeight.DecimalValue == sr.OriginalWeight;
-                }
-            }
+            row.Cells["colSourceRoll"].Value = record.SourceRollWeight;
+            if (txtSourceRollWeight.DecimalValue > 0) row.Visible = txtSourceRollWeight.DecimalValue == record.SourceRollWeight;  //如果指定了来源卷重
             row.Cells["colWarehouse"].Value = record.Warehouse;
             row.Cells["colMemo"].Value = record.Memo;
         }

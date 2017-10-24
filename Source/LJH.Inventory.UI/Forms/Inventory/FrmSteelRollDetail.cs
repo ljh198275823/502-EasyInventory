@@ -172,7 +172,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
             txtSerialNumber.Text = item.SerialNumber;
-            
+
             var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
@@ -194,7 +194,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
             if (item.SourceRoll.HasValue) btnOk1.Enabled = false;
-            btnOk1.Enabled = btnOk1.Enabled && item.State == ProductInventoryState.Inventory && item.Status == "整卷" && item.GetCost(CostItem.结算单价) == null;
+            btnOk1.Enabled = btnOk1.Enabled && item.State == ProductInventoryState.Inventory && item.Status == "整卷";
         }
 
         protected override object GetItemFromInput()

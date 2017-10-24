@@ -75,7 +75,6 @@
             this.colAfterLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSourceOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSourceRoll = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSlicer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -318,7 +317,6 @@
             this.colAfterLength,
             this.colCustomer,
             this.colWarehouse,
-            this.colSourceOriginalWeight,
             this.colSourceRoll,
             this.colSlicer,
             this.colMemo});
@@ -461,16 +459,10 @@
             this.colWarehouse.Name = "colWarehouse";
             this.colWarehouse.ReadOnly = true;
             // 
-            // colSourceOriginalWeight
-            // 
-            dataGridViewCellStyle12.Format = "N3";
-            this.colSourceOriginalWeight.DefaultCellStyle = dataGridViewCellStyle12;
-            this.colSourceOriginalWeight.HeaderText = "来源卷重";
-            this.colSourceOriginalWeight.Name = "colSourceOriginalWeight";
-            this.colSourceOriginalWeight.ReadOnly = true;
-            // 
             // colSourceRoll
             // 
+            dataGridViewCellStyle12.Format = "N3";
+            this.colSourceRoll.DefaultCellStyle = dataGridViewCellStyle12;
             this.colSourceRoll.HeaderText = "原材料卷";
             this.colSourceRoll.Name = "colSourceRoll";
             this.colSourceRoll.ReadOnly = true;
@@ -549,7 +541,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAfterLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWarehouse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceOriginalWeight;
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
