@@ -310,6 +310,12 @@
     <Compile Include="Forms\Inventory\Frm小件库存管理.designer.cs">
       <DependentUpon>Frm小件库存管理.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Frm成本明细.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory\Frm成本明细.Designer.cs">
+      <DependentUpon>Frm成本明细.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\Frm拆卷.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -863,6 +869,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Frm小件库存管理.resx">
       <DependentUpon>Frm小件库存管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Frm成本明细.resx">
+      <DependentUpon>Frm成本明细.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Frm拆卷.resx">
       <DependentUpon>Frm拆卷.cs</DependentUpon>

@@ -113,12 +113,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             mnu_Add.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Inventory);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Nullify);
-            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置结算单价);
             更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Edit);
             mnu_Import.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Inventory);
-            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置结算单价);
-            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置入库单价);
-            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置入库单价) | Operator.Current.Permit(Permission.其它产品, PermissionActions.设置结算单价);
+            mnu_设置入库单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本);
+            mnu_设置其它成本.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本);
+            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本) | Operator.Current.Permit(Permission.其它产品, PermissionActions.显示成本);
+            mnu_查看成本明细.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本) | Operator.Current.Permit(Permission.其它产品, PermissionActions.显示成本);
             cMnu_Export.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.导出);
         }
 
@@ -202,15 +202,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
-            if (Operator.Current.Permit(Permission.其它产品 , PermissionActions.设置入库单价))
+            if (Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本) || Operator.Current.Permit(Permission.其它产品, PermissionActions.显示成本))
             {
                 CostItem ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
-                ci = sr.GetCost(CostItem.运费);
-                if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
-                ci = sr.GetCost(CostItem.其它费用);
-                if (ci != null) row.Cells["colOtherCost"].Value = ci.Price;
                 if (sr.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = sr.CalUnitCost(true, UserSettings.Current.税点系数);
                 if (sr.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = sr.CalUnitCost(false, UserSettings.Current.税点系数);
             }
@@ -402,7 +398,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置入库单价(pi, frm.结算单价, frm.WithTax, Operator.Current.Name, Operator.Current.ID);
+                    var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.结算单价, WithTax = frm.WithTax, SupllierID = pi.Supplier };
+                    var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);
@@ -421,11 +418,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             FrmChangeCosts frm = new FrmChangeCosts();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                var costs = frm.Costs;
+                var ci = frm.Cost;
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ret = new OtherProductInventoryBLL(AppSettings.Current.ConnStr).ChangeCost(pi, costs, Operator.Current.Name, Operator.Current.ID);
+                    var ret = new OtherProductInventoryBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);
@@ -435,6 +432,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         MessageBox.Show(ret.Message);
                     }
                 }
+            }
+        }
+
+        private void mnu_查看成本明细_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                var frm = new Frm成本明细();
+                frm.ProductInventoryItem = sr;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
             }
         }
 

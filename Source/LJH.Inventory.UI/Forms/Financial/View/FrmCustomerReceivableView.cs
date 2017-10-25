@@ -70,7 +70,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 int days = DaysBetween(DateTime.Today, cr.CreateDate);
                 row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
             }
-            row.Cells["colMemo"].Value = cr.Memo;
+            row.Cells["colMemo"].Value = string.IsNullOrEmpty(cr.Memo) ? cr.GetProperty("成本类型") : cr.Memo;
         }
 
         private void ShowItemsOnGrid(List<CustomerReceivable> items)

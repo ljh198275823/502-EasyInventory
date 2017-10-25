@@ -23,94 +23,56 @@ namespace LJH.Inventory.UI.Forms.Inventory
             InitializeComponent();
         }
 
-        public List<CostItem> Costs { get; set; }
+        public CostItem Cost { get; set; }
 
         private void FrmChangeCosts_Load(object sender, EventArgs e)
         {
-            if (Costs != null && Costs.Count > 0)
+
+        }
+
+        private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
             {
-                foreach (var ci in Costs)
-                {
-                    if (ci.Name == CostItem.入库单价)
-                    {
-                        txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
-                        rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
-                        rdWithoutTax__入库单价.Checked = !rdWithTax_入库单价.Checked;
-                    }
-                    else if (ci.Name == CostItem.运费)
-                    {
-                        txtTransCost.DecimalValue = ci != null ? ci.Price : 0;
-                        rdWithTax_运费.Checked = ci != null && ci.WithTax;
-                        rdWithoutTax__运费.Checked = !rdWithTax_运费.Checked;
-                        chkTransCostPrepay.Checked = ci != null && ci.Prepay;
-                    }
-                    else if (ci.Name == CostItem.其它费用)
-                    {
-                        txtOtherCost.DecimalValue = ci != null ? ci.Price : 0;
-                        rdWithTax_其它费用.Checked = ci != null && ci.WithTax;
-                        rdWithoutTax__其它费用.Checked = !rdWithTax_其它费用.Checked;
-                        chkOtherCostPrepay.Checked = ci != null && ci.Prepay;
-                    }
-                }
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = s.Name;
+                txtSupplier.Tag = s;
             }
         }
 
-        private void chk入库单价_CheckedChanged(object sender, EventArgs e)
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
         {
-            txtPurchasePrice.Enabled = chk入库单价.Checked;
-            pnlTax.Enabled = chk入库单价.Checked;
+            txtSupplier.Text = string.Empty;
+            txtSupplier.Tag = null;
         }
 
-        private void chk运费_CheckedChanged(object sender, EventArgs e)
+        private bool CheckInput()
         {
-            txtTransCost.Enabled = chk运费.Checked;
-            pnlTrans.Enabled = chk运费.Checked;
-            chkTransCostPrepay.Enabled = chk运费.Checked;
-        }
-
-        private void chk其它费用_CheckedChanged(object sender, EventArgs e)
-        {
-            txtOtherCost.Enabled = chk其它费用.Checked;
-            pnlOther.Enabled = chk其它费用.Checked;
-            chkOtherCostPrepay.Enabled = chk其它费用.Checked;
+            if (string.IsNullOrEmpty(txt成本类别.Text))
+            {
+                MessageBox.Show("没有指定成本类别");
+                return false;
+            }
+            if (txtPrice.DecimalValue > 0 && !rdWithoutTax.Checked && !rdWithTax.Checked)
+            {
+                MessageBox.Show("没有指定入库价格是否含税");
+                return false;
+            }
+            if (txtSupplier.Tag == null)
+            {
+                MessageBox.Show("没有指定供应商");
+                return false;
+            }
+            return true;
         }
 
         private void btnOk1_Click(object sender, EventArgs e)
         {
             if (!CheckInput()) return;
-            Costs = new List<CostItem>();
-            if (chk入库单价.Checked) Costs.Add(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
-            if (chk运费.Checked) Costs.Add(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = rdWithTax_运费.Checked, Prepay = chkTransCostPrepay.Checked });
-            if (chk其它费用.Checked) Costs.Add(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = rdWithTax_其它费用.Checked, Prepay = chkOtherCostPrepay.Checked });
-            if (Costs.Count == 0)
-            {
-                MessageBox.Show("请至少选择修改其中一种成本");
-                return;
-            }
-            if (MessageBox.Show("修改入库价格会同时修改供应商的应收，是否继续?", "警告", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                this.DialogResult = DialogResult.OK;
-            }
-        }
-
-        private bool CheckInput()
-        {
-            if (chk入库单价.Checked && txtPurchasePrice.DecimalValue > 0 && !rdWithoutTax__入库单价.Checked && !rdWithTax_入库单价.Checked)
-            {
-                MessageBox.Show("没有指定入库价格是否含税");
-                return false;
-            }
-            if (chk运费.Checked && txtTransCost.DecimalValue > 0 && !rdWithTax_运费.Checked && !rdWithoutTax__运费.Checked)
-            {
-                MessageBox.Show("没有指定运费是否含税");
-                return false;
-            }
-            if (chk其它费用.Checked && txtOtherCost.DecimalValue > 0 && !rdWithTax_其它费用.Checked && !rdWithoutTax__其它费用.Checked)
-            {
-                MessageBox.Show("没有指定其它费用是否含税");
-                return false;
-            }
-            return true;
+            Cost = new CostItem() { Name = txt成本类别.Text, Price = txtPrice.DecimalValue, WithTax = rdWithTax.Checked, SupllierID = (txtSupplier.Tag as CompanyInfo).ID };
+            this.DialogResult = DialogResult.OK;
         }
 
         private void btnClose_Click(object sender, EventArgs e)

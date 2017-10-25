@@ -70,7 +70,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Tag = WareHouse;
             }
             btnOk.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Edit);
-            pnlCost.Visible = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置入库单价);
+            pnlCost.Visible = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本);
             if (!pnlCost.Visible) this.Height -= pnlCost.Height;
         }
 
@@ -139,16 +139,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定入库价格是否含税");
                 return false;
             }
-            if (txtTransCost.DecimalValue > 0 && !rdWithTax_运费.Checked && !rdWithoutTax__运费.Checked)
-            {
-                MessageBox.Show("没有指定运费是否含税");
-                return false;
-            }
-            if (txtOtherCost.DecimalValue > 0 && !rdWithTax_其它费用.Checked && !rdWithoutTax__其它费用.Checked)
-            {
-                MessageBox.Show("没有指定其它费用是否含税");
-                return false;
-            }
             return true;
         }
 
@@ -175,16 +165,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
             rdWithoutTax__入库单价.Checked = !rdWithTax_入库单价.Checked;
-            ci = item.GetCost(CostItem.运费);
-            txtTransCost.DecimalValue = ci != null ? ci.Price : 0;
-            rdWithTax_运费.Checked = ci != null && ci.WithTax;
-            rdWithoutTax__运费.Checked = !rdWithTax_运费.Checked;
-            chkTransCostPrepay.Checked = ci != null && ci.Prepay;
-            ci = item.GetCost(CostItem.其它费用);
-            txtOtherCost.DecimalValue = ci != null ? ci.Price : 0;
-            rdWithTax_其它费用.Checked = ci != null && ci.WithTax;
-            rdWithoutTax__其它费用.Checked = !rdWithTax_其它费用.Checked;
-            chkOtherCostPrepay.Checked = ci != null && ci.Prepay;
 
             txtPosition.Text = item.Position;
             txtCarPlate.Text = item.Carplate;
@@ -303,8 +283,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (txtSupplier.Tag != null) SteelRollSlice.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             SteelRollSlice.Manufacture = cmbBrand.Text;
             SteelRollSlice.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
-            SteelRollSlice.SetCost(new CostItem() { Name = CostItem.运费, Price = txtTransCost.DecimalValue, WithTax = rdWithTax_运费.Checked, Prepay = chkTransCostPrepay.Checked });
-            SteelRollSlice.SetCost(new CostItem() { Name = CostItem.其它费用, Price = txtOtherCost.DecimalValue, WithTax = rdWithTax_其它费用.Checked, Prepay = chkOtherCostPrepay.Checked });
             SteelRollSlice.Position = txtPosition.Text;
             SteelRollSlice.PurchaseID = txtPurchaseID.Text;
             SteelRollSlice.Carplate = txtCarPlate.Text;

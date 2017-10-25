@@ -33,8 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -60,8 +58,6 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPurchaseTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colTransCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOtherCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colManufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -244,9 +240,9 @@
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToResizeColumns = false;
             this.gridView.AllowUserToResizeRows = false;
-            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -261,8 +257,6 @@
             this.colCount,
             this.colPurchasePrice,
             this.colPurchaseTax,
-            this.colTransCost,
-            this.colOtherCost,
             this.colSupplier,
             this.colCustomer,
             this.colManufacturer});
@@ -359,24 +353,6 @@
             this.colPurchaseTax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colPurchaseTax.Width = 60;
             // 
-            // colTransCost
-            // 
-            dataGridViewCellStyle5.Format = "C2";
-            this.colTransCost.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colTransCost.HeaderText = "运费(/t)";
-            this.colTransCost.Name = "colTransCost";
-            this.colTransCost.ReadOnly = true;
-            this.colTransCost.Width = 80;
-            // 
-            // colOtherCost
-            // 
-            dataGridViewCellStyle6.Format = "C2";
-            this.colOtherCost.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colOtherCost.HeaderText = "其它(/t)";
-            this.colOtherCost.Name = "colOtherCost";
-            this.colOtherCost.ReadOnly = true;
-            this.colOtherCost.Width = 80;
-            // 
             // colSupplier
             // 
             this.colSupplier.HeaderText = "供应商";
@@ -449,8 +425,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchasePrice;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colPurchaseTax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTransCost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOtherCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacturer;

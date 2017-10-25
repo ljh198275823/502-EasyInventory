@@ -178,6 +178,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public Guid? SourceRoll { get; set; }
         /// <summary>
+        /// 获取或设置加工的原材料卷初始重量
+        /// </summary>
+        public decimal? SourceRollWeight { get; set; }
+        /// <summary>
         /// 获取或设置入库操作员
         /// </summary>
         public string Operator { get; set; }
@@ -250,6 +254,13 @@ namespace LJH.Inventory.BusinessModel
             return ret;
         }
 
+        public List<CostItem> GetAllCosts()
+        {
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) return  JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems != null) return _CostItems.ToList();
+            return null;
+        }
+
         public void SetCost(CostItem ci)
         {
             if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
@@ -259,23 +270,16 @@ namespace LJH.Inventory.BusinessModel
             Costs = JsonConvert.SerializeObject(_CostItems);
         }
 
-        public decimal CalReceivable()
+        public decimal CalReceivable(CostItem ci)
         {
-            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
-            if (_CostItems == null) return 0;
-            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-            if (ci == null) return 0;
             if (OriginalWeight > 0) return OriginalWeight.Value * ci.Price;
             else if (Model == ProductModel.其它产品) return OriginalCount.Value * ci.Price;
             return 0;
         }
 
-        public decimal CalTax()
+        public decimal CalTax(CostItem ci)
         {
-            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) _CostItems = JsonConvert.DeserializeObject<List<CostItem>>(Costs);
-            if (_CostItems == null) return 0;
-            var ci = _CostItems.SingleOrDefault(it => it.Name == CostItem.入库单价);
-            if (ci == null || ci.WithTax == false) return 0; //没有入库单价或不含税
+            if (ci == null || ci.WithTax == false) return 0; //不含税
             if (OriginalWeight > 0) return OriginalWeight.Value * ci.Price;
             else if (Model == ProductModel.其它产品) return OriginalCount.Value * ci.Price;
             return 0;
@@ -299,10 +303,13 @@ namespace LJH.Inventory.BusinessModel
             }
             foreach (var fc in _CostItems)
             {
-                if (withTax && fc.WithTax) ret += uw.Value * fc.Price;
-                else if (withTax && !fc.WithTax) ret += uw.Value * fc.Price * (1 + txtRate);
-                else if (!withTax && fc.WithTax) ret += uw.Value * fc.Price * (1 - txtRate);
-                else if (!withTax && !fc.WithTax) ret += uw.Value * fc.Price;
+                if (fc.Name != "结算单价")
+                {
+                    if (withTax && fc.WithTax) ret += uw.Value * fc.Price;
+                    else if (withTax && !fc.WithTax) ret += uw.Value * fc.Price * (1 + txtRate);
+                    else if (!withTax && fc.WithTax) ret += uw.Value * fc.Price * (1 - txtRate);
+                    else if (!withTax && !fc.WithTax) ret += uw.Value * fc.Price;
+                }
             }
             return ret;
         }

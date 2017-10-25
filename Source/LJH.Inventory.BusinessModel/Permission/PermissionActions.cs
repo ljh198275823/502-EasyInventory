@@ -67,9 +67,9 @@ namespace LJH.Inventory.BusinessModel
         /// 编辑附件
         /// </summary>
         EditAttachment = 0x1000,
-        设置结算单价 = 0x2000,
-        设置入库单价 = 0x4000,
-        导出=0x8000,
+        //设置结算单价 = 0x2000,
+        设置成本 = 0x4000,
+        导出 = 0x8000,
     }
 }
         

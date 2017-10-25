@@ -44,6 +44,7 @@
             this.mnu_AddTax = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddTaxBill = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_客户往来报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -106,6 +107,7 @@
             this.mnu_AddTax,
             this.mnu_AddTaxBill,
             this.toolStripSeparator1,
+            this.mnu_客户往来报表,
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -155,6 +157,13 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
             // 
+            // mnu_客户往来报表
+            // 
+            this.mnu_客户往来报表.Name = "mnu_客户往来报表";
+            this.mnu_客户往来报表.Size = new System.Drawing.Size(160, 22);
+            this.mnu_客户往来报表.Text = "往来报表";
+            this.mnu_客户往来报表.Click += new System.EventHandler(this.mnu_客户往来报表_Click);
+            // 
             // cMnu_SelectColumns
             // 
             this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
@@ -183,21 +192,20 @@
             this.chkOnlyHasRecievables.AutoSize = true;
             this.chkOnlyHasRecievables.Location = new System.Drawing.Point(20, 10);
             this.chkOnlyHasRecievables.Name = "chkOnlyHasRecievables";
-            this.chkOnlyHasRecievables.Size = new System.Drawing.Size(156, 16);
+            this.chkOnlyHasRecievables.Size = new System.Drawing.Size(168, 16);
             this.chkOnlyHasRecievables.TabIndex = 2;
-            this.chkOnlyHasRecievables.Text = "只显示有应收账款的客户";
+            this.chkOnlyHasRecievables.Text = "只显示有应收账款的供应商";
             this.chkOnlyHasRecievables.UseVisualStyleBackColor = true;
             this.chkOnlyHasRecievables.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // txtKeyword
             // 
-            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtKeyword.Location = new System.Drawing.Point(262, 8);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(535, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(287, 21);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
@@ -249,13 +257,13 @@
             // 
             // colID
             // 
-            this.colID.HeaderText = "客户编号";
+            this.colID.HeaderText = "编号";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
             // 
             // colName
             // 
-            this.colName.HeaderText = "公司名称";
+            this.colName.HeaderText = "名称";
             this.colName.MinimumWidth = 180;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
@@ -352,6 +360,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddTax;
         private System.Windows.Forms.ToolStripMenuItem mnu_AddTaxBill;
+        private System.Windows.Forms.ToolStripMenuItem mnu_客户往来报表;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;

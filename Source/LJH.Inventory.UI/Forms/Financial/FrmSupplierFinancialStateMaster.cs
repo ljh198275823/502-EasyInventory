@@ -63,7 +63,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            cMnu_Payment.Enabled = Operator.Current.Permit(Permission.SupplierPayment , PermissionActions.Edit);
+            cMnu_Payment.Enabled = Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
             mnu_AddRecievable.Enabled = Operator.Current.Permit(Permission.SupplierReceivable, PermissionActions.Edit);
             mnu_AddTax.Enabled = Operator.Current.Permit(Permission.SupplierTax, PermissionActions.Edit);
             mnu_AddTaxBill.Enabled = Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
@@ -206,5 +206,17 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
+
+        private void mnu_客户往来报表_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var cs = dataGridView1.SelectedRows[0].Tag as CustomerFinancialState;
+                Report.Frm供应商往来报表 frm = new Report.Frm供应商往来报表();
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.Customer = cs.Customer;
+                frm.ShowDialog();
+            }
+        }
     }
 }

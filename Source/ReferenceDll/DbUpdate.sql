@@ -230,7 +230,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Co
 BEGIN
 	CREATE TABLE [dbo].[Cost](
 	[ID] [uniqueidentifier] NOT NULL,
-	[Costs] [NVARCHAR](256) NOT NULL,
+	[Costs] [NVARCHAR](1024) NOT NULL,
 	 CONSTRAINT [PK_Cost] PRIMARY KEY CLUSTERED 
 	(
 		[ID] ASC
@@ -274,3 +274,11 @@ BEGIN
 	exec ('alter table Customer add TaxFileID int null')
 end
 go
+
+if exists (SELECT * FROM dbo.syscolumns WHERE name ='Costs' AND id = OBJECT_ID(N'[dbo].[Cost]'))
+BEGIN
+	exec ('alter table Cost alter column Costs nvarchar(1024) not null')
+end
+go
+
+

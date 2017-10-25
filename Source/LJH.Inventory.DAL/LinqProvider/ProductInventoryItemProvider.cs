@@ -22,13 +22,15 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override ProductInventoryItem GetingItemByID(Guid id, DataContext dc)
         {
             var ret = (from pi in dc.GetTable<ProductInventoryItem>()
+                       from sr in dc.GetTable<ProductInventoryItem>().Where(it => pi.SourceRoll == it.ID).DefaultIfEmpty()
                        from c in dc.GetTable<Cost>().Where(it => pi.CostID == it.ID).DefaultIfEmpty()
                        where pi.ID == id
-                       select new { A = pi, B = c.Costs }).SingleOrDefault();
+                       select new { A = pi, B = c.Costs, C = sr.OriginalWeight }).SingleOrDefault();
             if (ret != null)
             {
                 ret.A.Product = new ProductProvider(SqlURI, _MappingResource).GetByID(ret.A.ProductID).QueryObject;
                 ret.A.Costs = ret.B;
+                ret.A.SourceRollWeight = ret.C;
                 return ret.A;
             }
             return null;
@@ -36,11 +38,12 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override List<ProductInventoryItem> GetingItems(DataContext dc, SearchCondition search)
         {
-            if (search is StackOutSheetSearchCondition) return GetingItemsEX(dc, search as StackOutSheetSearchCondition);
             //dc.Log = Console.Out;
+            if (search is StackOutSheetSearchCondition) return GetingItemsEX(dc, search as StackOutSheetSearchCondition);
             var ret = from pi in dc.GetTable<ProductInventoryItem>()
+                      from sr in dc.GetTable<ProductInventoryItem>().Where(it => pi.SourceRoll == it.ID).DefaultIfEmpty()
                       from c in dc.GetTable<Cost>().Where(it => pi.CostID == it.ID).DefaultIfEmpty()
-                      select new { A = pi, B = c.Costs };
+                      select new { A = pi, B = c.Costs, C = sr.OriginalWeight };
             if (search is ProductInventoryItemSearchCondition)
             {
                 ProductInventoryItemSearchCondition con = search as ProductInventoryItemSearchCondition;
@@ -82,6 +85,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 {
                     pi.A.Product = new ProductProvider(SqlURI, _MappingResource).GetByID(pi.A.ProductID).QueryObject;
                     pi.A.Costs = pi.B;
+                    pi.A.SourceRollWeight = pi.C;
                 }
                 items.RemoveAll(it => it.A.Product == null);
                 if (items.Count > 0) return items.Select(it => it.A).ToList();
@@ -93,8 +97,9 @@ namespace LJH.Inventory.DAL.LinqProvider
         {
             var ret = from pi in dc.GetTable<ProductInventoryItem>()
                       join sheet in dc.GetTable<StackOutSheet>() on pi.DeliverySheet equals sheet.ID
+                      from sr in dc.GetTable<ProductInventoryItem>().Where(it => pi.SourceRoll == it.ID).DefaultIfEmpty()
                       from c in dc.GetTable<Cost>().Where(it => pi.CostID == it.ID).DefaultIfEmpty()
-                      select new { A = pi, B = c.Costs, C = sheet };
+                      select new { A = pi, B = c.Costs, C = sheet, D = sr.OriginalWeight };
             if (con.SheetDate != null) ret = ret.Where(item => item.C.SheetDate >= con.SheetDate.Begin && item.C.SheetDate <= con.SheetDate.End);
             if (con.LastActiveDate != null) ret = ret.Where(item => item.C.LastActiveDate >= con.LastActiveDate.Begin && item.C.LastActiveDate <= con.LastActiveDate.End);
             if (con.SheetIDs != null && con.SheetIDs.Count > 0) ret = ret.Where(item => con.SheetIDs.Contains(item.C.ID));
@@ -113,13 +118,14 @@ namespace LJH.Inventory.DAL.LinqProvider
                     ret = ret.Where(item => item.C.WithTax == false);
                 }
             }
-            var items = ret.Select(it => new { A = it.A, B = it.B }).ToList();
+            var items = ret.Select(it => new { A = it.A, B = it.B, D = it.D }).ToList();
             if (items != null && items.Count > 0)
             {
                 foreach (var pi in items)
                 {
                     pi.A.Product = new ProductProvider(SqlURI, _MappingResource).GetByID(pi.A.ProductID).QueryObject;
                     pi.A.Costs = pi.B;
+                    pi.A.SourceRollWeight = pi.D;
                 }
                 items.RemoveAll(it => it.A.Product == null);
                 if (items.Count > 0) return items.Select(it => it.A).ToList();

@@ -22,24 +22,36 @@ namespace LJH.Inventory.DAL.LinqProvider
         #region 重写基类方法
         protected override SteelRollSliceRecord GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
-            return dc.GetTable<SteelRollSliceRecord>().SingleOrDefault(item => item.ID == id);
+            var ret = (from r in dc.GetTable<SteelRollSliceRecord>()
+                       join p in dc.GetTable<ProductInventoryItem>() on r.SliceSource equals p.ID
+                       select new { A = r, B = p.OriginalWeight }).SingleOrDefault(it => it.A.ID == id);
+            if (ret != null) ret.A.SourceRollWeight = ret.B;
+            return ret.A;
         }
 
         protected override List<SteelRollSliceRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
-            IQueryable<SteelRollSliceRecord> ret = dc.GetTable<SteelRollSliceRecord>();
+            var ret = from r in dc.GetTable<SteelRollSliceRecord>()
+                      join p in dc.GetTable<ProductInventoryItem>() on r.SliceSource equals p.ID
+                      select new { A = r, B = p.OriginalWeight };
             if (search is SliceRecordSearchCondition)
             {
                 SliceRecordSearchCondition con = search as SliceRecordSearchCondition;
-                if (con.SliceDate != null) ret = ret.Where(item => item.SliceDate >= con.SliceDate.Begin && item.SliceDate <= con.SliceDate.End);
-                if (con.SourceRoll != null) ret = ret.Where(item => item.SliceSource == con.SourceRoll.Value);
-                if (!string.IsNullOrEmpty(con.Category)) ret = ret.Where(item => item.Category == con.Category);
-                if (!string.IsNullOrEmpty(con.Specification)) ret = ret.Where(item => item.Specification == con.Specification);
-                if (!string.IsNullOrEmpty(con.SliceType)) ret = ret.Where(item => item.SliceType == con.SliceType);
-                if (!string.IsNullOrEmpty(con.Customer)) ret = ret.Where(it => it.Customer == con.Customer);
-                if (!string.IsNullOrEmpty(con.Warehouse)) ret = ret.Where(it => it.Warehouse == con.Warehouse);
+                if (con.SliceDate != null) ret = ret.Where(item => item.A.SliceDate >= con.SliceDate.Begin && item.A.SliceDate <= con.SliceDate.End);
+                if (con.SourceRoll != null) ret = ret.Where(item => item.A.SliceSource == con.SourceRoll.Value);
+                if (!string.IsNullOrEmpty(con.Category)) ret = ret.Where(item => item.A.Category == con.Category);
+                if (!string.IsNullOrEmpty(con.Specification)) ret = ret.Where(item => item.A.Specification == con.Specification);
+                if (!string.IsNullOrEmpty(con.SliceType)) ret = ret.Where(item => item.A.SliceType == con.SliceType);
+                if (!string.IsNullOrEmpty(con.Customer)) ret = ret.Where(it => it.A.Customer == con.Customer);
+                if (!string.IsNullOrEmpty(con.Warehouse)) ret = ret.Where(it => it.A.Warehouse == con.Warehouse);
             }
-            return ret.ToList();
+            var items = ret.ToList();
+            if (items != null && items.Count > 0)
+            {
+                items.ForEach(it => it.A.SourceRollWeight = it.B);
+                return items.Select(it => it.A).ToList();
+            }
+            return new List<SteelRollSliceRecord>();
         }
         #endregion
     }

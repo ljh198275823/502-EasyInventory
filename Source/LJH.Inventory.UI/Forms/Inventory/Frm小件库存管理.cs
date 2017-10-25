@@ -48,7 +48,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (cmbSupplier.SelectedCustomer != null) items = items.Where(it => it.Supplier == cmbSupplier.SelectedCustomer.ID).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer.Contains(customerCombobox1.Text)).ToList();
-                if (txtWeight.DecimalValue > 0) items = items.Where(it => it.Product.Weight == txtWeight.DecimalValue).ToList();
+                if (txtWeight.DecimalValue > 0) items = items.Where(it => it.SourceRollWeight == txtWeight.DecimalValue).ToList();
                 if (txtLength.DecimalValue > 0) items = items.Where(it => it.Product.Length == txtLength.DecimalValue).ToList();
                 items = items.Where(it => (chk开平.Checked && it.Product.Model == chk开平.Text) ||
                                           (chk开卷.Checked && it.Product.Model == chk开卷.Text) ||
@@ -143,9 +143,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             折包ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
             mnu_更换仓库.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Nullify);
-            mnu_设置入库单价.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置结算单价);
-            mnu_修改入库单价.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置入库单价);
-            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置入库单价) | Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置入库单价);
+            mnu_设置入库单价.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
+            mnu_设置其它成本.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
+            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.显示成本) | Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
+            mnu_查看成本明细.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.显示成本) | Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
             cMnu_Export.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.导出);
             mnu_Import.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Inventory);
         }
@@ -203,16 +204,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colSupplier"].Value = s != null ? s.Name : null;
             }
             row.Cells["colManufacture"].Value = sr.Manufacture;
-            row.Cells["colSourceRoll"].Value = sr.SourceRoll.HasValue ? "查看" : null;
-            if (Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置入库单价))
+            row.Cells["colSourceRoll"].Value = sr.SourceRollWeight;
+            if (Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本) || Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.显示成本))
             {
                 CostItem ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
-                ci = sr.GetCost(CostItem.运费);
-                if (ci != null) row.Cells["colTransCost"].Value = ci.Price;
-                ci = sr.GetCost(CostItem.其它费用);
-                if (ci != null) row.Cells["colOtherCost"].Value = ci.Price;
                 if (sr.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = sr.CalUnitCost(true, UserSettings.Current.税点系数);
                 if (sr.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = sr.CalUnitCost(false, UserSettings.Current.税点系数);
             }
@@ -379,7 +376,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void mnu_设置结算单价_Click(object sender, EventArgs e)
+        private void mnu_设置入库单价_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
             Frm设置单价 frm = new Frm设置单价();
@@ -390,7 +387,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     var pi = row.Tag as ProductInventoryItem;
                     if (pi.SourceRoll == null) //只有新建入库的才能改单价，
                     {
-                        var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置入库单价(pi, frm.结算单价, frm.WithTax, Operator.Current.Name, Operator.Current.ID);
+                        var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.结算单价, WithTax = frm.WithTax, SupllierID = pi.Supplier };
+                        var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID);
                         if (ret.Result == ResultCode.Successful)
                         {
                             ShowItemInGridViewRow(row, pi);
@@ -410,13 +408,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             FrmChangeCosts frm = new FrmChangeCosts();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                var costs = frm.Costs;
+                var ci = frm.Cost;
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
                     if (pi.SourceRoll == null) //只有新建入库的才能改单价，
                     {
-                        var ret = new SteelRollBLL(AppSettings.Current.ConnStr).ChangeCost(pi, costs, Operator.Current.Name, Operator.Current.ID);
+                        var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID);
                         if (ret.Result == ResultCode.Successful)
                         {
                             ShowItemInGridViewRow(row, pi);
@@ -427,6 +425,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         }
                     }
                 }
+            }
+        }
+
+        private void mnu_查看成本明细_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                var frm = new Frm成本明细();
+                frm.ProductInventoryItem = sr;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
             }
         }
 

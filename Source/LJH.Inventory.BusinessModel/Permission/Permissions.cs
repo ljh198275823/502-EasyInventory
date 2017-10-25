@@ -63,12 +63,12 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 原材料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.设置入库单价 | PermissionActions.设置结算单价, Description = "原材料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.设置成本, Description = "原材料")]
         SteelRoll = 101,
         /// <summary>
         /// 小件
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Nullify | PermissionActions.设置入库单价 | PermissionActions.设置结算单价, Description = "小件")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Nullify | PermissionActions.设置成本, Description = "小件")]
         SteelRollSlice,
         /// <summary>
         /// 仓库资料
@@ -83,7 +83,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 其它产品
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.设置入库单价 | PermissionActions.设置结算单价, Description = "其它产品")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.设置成本, Description = "其它产品")]
         其它产品,
         #endregion
 
