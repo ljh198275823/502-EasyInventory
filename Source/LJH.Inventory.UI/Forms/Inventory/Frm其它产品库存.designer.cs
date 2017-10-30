@@ -107,7 +107,7 @@
             this.colPurchaseTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col吊装费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.加工费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col加工费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col其它费用 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -454,7 +454,7 @@
             this.colPurchaseTax,
             this.col运费,
             this.col吊装费,
-            this.加工费,
+            this.col加工费,
             this.col其它费用,
             this.colPosition,
             this.colMaterial,
@@ -764,14 +764,14 @@
             this.col吊装费.ReadOnly = true;
             this.col吊装费.Width = 80;
             // 
-            // 加工费
+            // col加工费
             // 
             dataGridViewCellStyle11.Format = "C2";
-            this.加工费.DefaultCellStyle = dataGridViewCellStyle11;
-            this.加工费.HeaderText = "加工费";
-            this.加工费.Name = "加工费";
-            this.加工费.ReadOnly = true;
-            this.加工费.Width = 80;
+            this.col加工费.DefaultCellStyle = dataGridViewCellStyle11;
+            this.col加工费.HeaderText = "加工费";
+            this.col加工费.Name = "col加工费";
+            this.col加工费.ReadOnly = true;
+            this.col加工费.Width = 80;
             // 
             // col其它费用
             // 
@@ -901,7 +901,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colPurchaseTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn col运费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col吊装费;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 加工费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col加工费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col其它费用;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;

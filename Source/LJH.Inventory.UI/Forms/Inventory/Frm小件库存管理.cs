@@ -215,12 +215,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ci = sr.GetCost(CostItem.加工费);
                 if (ci != null && ci.Price > 0)
                 {
-                    row.Cells["col开平费"].Value = ci.Price;
+                    row.Cells["col加工费"].Value = ci.Price;
                 }
                 else
                 {
                     ci = sr.GetCost("开平费");
-                    if (ci != null && ci.Price > 0) row.Cells["col开平费"].Value = ci.Price;
+                    if (ci != null && ci.Price > 0) row.Cells["col加工费"].Value = ci.Price;
                 }
                 ci = sr.GetCost(CostItem.吊装费);
                 if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
