@@ -210,6 +210,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 CostItem ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
+                ci = sr.GetCost(CostItem.运费);
+                if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.加工费);
+                if (ci != null && ci.Price > 0)
+                {
+                    row.Cells["col开平费"].Value = ci.Price;
+                }
+                else
+                {
+                    ci = sr.GetCost("开平费");
+                    if (ci != null && ci.Price > 0) row.Cells["col开平费"].Value = ci.Price;
+                }
+                ci = sr.GetCost(CostItem.吊装费);
+                if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.其它费用);
+                if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
                 if (sr.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = sr.CalUnitCost(true, UserSettings.Current.税点系数);
                 if (sr.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = sr.CalUnitCost(false, UserSettings.Current.税点系数);
             }

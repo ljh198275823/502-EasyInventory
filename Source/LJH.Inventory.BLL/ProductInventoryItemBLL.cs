@@ -33,7 +33,7 @@ namespace LJH.Inventory.BLL
             {
                 foreach (var it in items)
                 {
-                    var temp = it.GetProperty("_成本类型");
+                    var temp = it.GetProperty(_成本类型);
                     if (temp == ci.Name || (string.IsNullOrEmpty(temp) && ci.Name == CostItem.入库单价)) //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
                     {
                         original = it;
@@ -85,7 +85,7 @@ namespace LJH.Inventory.BLL
             {
                 foreach (var it in items)
                 {
-                    var temp = it.GetProperty("_成本类型");
+                    var temp = it.GetProperty(_成本类型);
                     if (temp == ci.Name || (string.IsNullOrEmpty(temp) && ci.Name == CostItem.入库单价)) //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
                     {
                         original = it;

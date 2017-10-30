@@ -88,6 +88,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定入库价格是否含税");
                 return false;
             }
+            if (txt运费.DecimalValue > 0 && !rdWithoutTax_运费.Checked && !rdWithTax_运费.Checked)
+            {
+                MessageBox.Show("没有指定运费是否含税");
+                return false;
+            }
+            if (txt运费.DecimalValue > 0 && txtSupplier运费.Tag == null)
+            {
+                MessageBox.Show("没有指定运费供应商");
+                return false;
+            }
             return true;
         }
 
@@ -167,6 +177,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
             rdWithoutTax__入库单价.Checked = !rdWithTax_入库单价.Checked;
+            ci = item.GetCost(CostItem.运费);
+            if (ci != null)
+            {
+                txt运费.DecimalValue = ci != null ? ci.Price : 0;
+                rdWithTax_运费.Checked = ci != null && ci.WithTax;
+                rdWithoutTax_运费.Checked = ci != null && !ci.WithTax;
+                if (!string.IsNullOrEmpty(ci.SupllierID))
+                {
+                    var sp = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(ci.SupllierID).QueryObject;
+                    txtSupplier运费.Text = sp != null ? sp.Name : null;
+                    txtSupplier运费.Tag = sp;
+                }
+            }
 
             txtPosition.Text = item.Position;
             txtMaterial.Text = item.Material;
@@ -224,12 +247,32 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override CommandResult AddItem(object item)
         {
-            return (new SteelRollBLL(AppSettings.Current.ConnStr)).Add(item as ProductInventoryItem);
+            var pi = item as ProductInventoryItem;
+            var ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Add(pi);
+            if (ret.Result == ResultCode.Successful)
+            {
+                if (txt运费.DecimalValue > 0)
+                {
+                    var ci = new CostItem() { Name = CostItem.运费, Price = txt运费.DecimalValue, WithTax = rdWithTax_运费.Checked, SupllierID = (txtSupplier运费.Tag as CompanyInfo).ID };
+                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID);
+                }
+            }
+            return ret;
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new SteelRollBLL(AppSettings.Current.ConnStr)).Update(item as ProductInventoryItem);
+            var pi = item as ProductInventoryItem;
+            var ret= (new SteelRollBLL(AppSettings.Current.ConnStr)).Update(pi);
+            if (ret.Result == ResultCode.Successful)
+            {
+                if (txt运费.DecimalValue > 0)
+                {
+                    var ci = new CostItem() { Name = CostItem.运费, Price = txt运费.DecimalValue, WithTax = rdWithTax_运费.Checked, SupllierID = (txtSupplier运费.Tag as CompanyInfo).ID };
+                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID);
+                }
+            }
+            return ret;
         }
         #endregion
 
@@ -359,6 +402,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     frm.StartPosition = FormStartPosition.CenterParent;
                     frm.ShowDialog();
                 }
+            }
+        }
+
+        private void lnkSupplier_运费_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
+                txtSupplier运费.Text = s.Name;
+                txtSupplier运费.Tag = s;
             }
         }
     }

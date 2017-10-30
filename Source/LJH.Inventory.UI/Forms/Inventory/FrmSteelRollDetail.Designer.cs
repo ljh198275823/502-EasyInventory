@@ -63,27 +63,35 @@
             this.txtPosition = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
-            this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.label15 = new System.Windows.Forms.Label();
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.btnOk1 = new System.Windows.Forms.Button();
             this.pnlCost = new System.Windows.Forms.GroupBox();
             this.btn查看来源卷 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdWithTax_运费 = new System.Windows.Forms.RadioButton();
+            this.rdWithoutTax_运费 = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt运费 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txtSupplier运费 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkSupplier_运费 = new System.Windows.Forms.LinkLabel();
+            this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
+            this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.pnlTax.SuspendLayout();
             this.pnlCost.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(387, 379);
+            this.btnClose.Location = new System.Drawing.Point(387, 458);
             this.btnClose.Size = new System.Drawing.Size(107, 35);
             this.btnClose.TabIndex = 21;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(26, 416);
+            this.btnOk.Location = new System.Drawing.Point(26, 495);
             this.btnOk.Size = new System.Drawing.Size(107, 35);
             this.btnOk.TabIndex = 20;
             this.btnOk.Visible = false;
@@ -463,30 +471,6 @@
             this.label13.TabIndex = 139;
             this.label13.Text = "车皮号";
             // 
-            // txtMaterial
-            // 
-            this.txtMaterial.FormattingEnabled = true;
-            this.txtMaterial.Location = new System.Drawing.Point(344, 217);
-            this.txtMaterial.Name = "txtMaterial";
-            this.txtMaterial.Size = new System.Drawing.Size(145, 20);
-            this.txtMaterial.TabIndex = 141;
-            // 
-            // cmbSpecification
-            // 
-            this.cmbSpecification.Location = new System.Drawing.Point(100, 52);
-            this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(164, 26);
-            this.cmbSpecification.Specification = "*";
-            this.cmbSpecification.TabIndex = 85;
-            // 
-            // txtCarPlate
-            // 
-            this.txtCarPlate.FormattingEnabled = true;
-            this.txtCarPlate.Location = new System.Drawing.Point(100, 217);
-            this.txtCarPlate.Name = "txtCarPlate";
-            this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
-            this.txtCarPlate.TabIndex = 142;
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -507,7 +491,7 @@
             // btnOk1
             // 
             this.btnOk1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk1.Location = new System.Drawing.Point(235, 379);
+            this.btnOk1.Location = new System.Drawing.Point(235, 458);
             this.btnOk1.Name = "btnOk1";
             this.btnOk1.Size = new System.Drawing.Size(126, 35);
             this.btnOk1.TabIndex = 145;
@@ -517,19 +501,24 @@
             // 
             // pnlCost
             // 
+            this.pnlCost.Controls.Add(this.txtSupplier运费);
+            this.pnlCost.Controls.Add(this.lnkSupplier_运费);
+            this.pnlCost.Controls.Add(this.panel1);
+            this.pnlCost.Controls.Add(this.label10);
+            this.pnlCost.Controls.Add(this.txt运费);
             this.pnlCost.Controls.Add(this.pnlTax);
             this.pnlCost.Controls.Add(this.label9);
             this.pnlCost.Controls.Add(this.txtPurchasePrice);
             this.pnlCost.Location = new System.Drawing.Point(5, 307);
             this.pnlCost.Name = "pnlCost";
-            this.pnlCost.Size = new System.Drawing.Size(488, 56);
+            this.pnlCost.Size = new System.Drawing.Size(488, 127);
             this.pnlCost.TabIndex = 146;
             this.pnlCost.TabStop = false;
             // 
             // btn查看来源卷
             // 
             this.btn查看来源卷.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn查看来源卷.Location = new System.Drawing.Point(74, 379);
+            this.btn查看来源卷.Location = new System.Drawing.Point(74, 458);
             this.btn查看来源卷.Name = "btn查看来源卷";
             this.btn查看来源卷.Size = new System.Drawing.Size(126, 35);
             this.btn查看来源卷.TabIndex = 147;
@@ -538,12 +527,117 @@
             this.btn查看来源卷.Visible = false;
             this.btn查看来源卷.Click += new System.EventHandler(this.btn查看来源卷_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rdWithTax_运费);
+            this.panel1.Controls.Add(this.rdWithoutTax_运费);
+            this.panel1.Location = new System.Drawing.Point(238, 56);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(145, 25);
+            this.panel1.TabIndex = 137;
+            // 
+            // rdWithTax_运费
+            // 
+            this.rdWithTax_运费.AutoSize = true;
+            this.rdWithTax_运费.Location = new System.Drawing.Point(4, 3);
+            this.rdWithTax_运费.Name = "rdWithTax_运费";
+            this.rdWithTax_运费.Size = new System.Drawing.Size(47, 16);
+            this.rdWithTax_运费.TabIndex = 129;
+            this.rdWithTax_运费.TabStop = true;
+            this.rdWithTax_运费.Text = "含税";
+            this.rdWithTax_运费.UseVisualStyleBackColor = true;
+            // 
+            // rdWithoutTax_运费
+            // 
+            this.rdWithoutTax_运费.AutoSize = true;
+            this.rdWithoutTax_运费.Location = new System.Drawing.Point(57, 3);
+            this.rdWithoutTax_运费.Name = "rdWithoutTax_运费";
+            this.rdWithoutTax_运费.Size = new System.Drawing.Size(59, 16);
+            this.rdWithoutTax_运费.TabIndex = 130;
+            this.rdWithoutTax_运费.TabStop = true;
+            this.rdWithoutTax_运费.Text = "不含税";
+            this.rdWithoutTax_运费.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(34, 62);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 12);
+            this.label10.TabIndex = 135;
+            this.label10.Text = "运费(/吨)";
+            // 
+            // txt运费
+            // 
+            this.txt运费.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt运费.Location = new System.Drawing.Point(102, 58);
+            this.txt运费.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txt运费.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txt运费.Name = "txt运费";
+            this.txt运费.PointCount = 2;
+            this.txt运费.Size = new System.Drawing.Size(122, 21);
+            this.txt运费.TabIndex = 136;
+            this.txt运费.Text = "0";
+            // 
+            // txtSupplier运费
+            // 
+            this.txtSupplier运费.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSupplier运费.Location = new System.Drawing.Point(102, 90);
+            this.txtSupplier运费.Name = "txtSupplier运费";
+            this.txtSupplier运费.ReadOnly = true;
+            this.txtSupplier运费.Size = new System.Drawing.Size(281, 21);
+            this.txtSupplier运费.TabIndex = 155;
+            // 
+            // lnkSupplier_运费
+            // 
+            this.lnkSupplier_运费.AutoSize = true;
+            this.lnkSupplier_运费.Location = new System.Drawing.Point(26, 93);
+            this.lnkSupplier_运费.Name = "lnkSupplier_运费";
+            this.lnkSupplier_运费.Size = new System.Drawing.Size(65, 12);
+            this.lnkSupplier_运费.TabIndex = 154;
+            this.lnkSupplier_运费.TabStop = true;
+            this.lnkSupplier_运费.Text = "运费供应商";
+            this.lnkSupplier_运费.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_运费_LinkClicked);
+            // 
+            // txtCarPlate
+            // 
+            this.txtCarPlate.FormattingEnabled = true;
+            this.txtCarPlate.Location = new System.Drawing.Point(100, 217);
+            this.txtCarPlate.Name = "txtCarPlate";
+            this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
+            this.txtCarPlate.TabIndex = 142;
+            // 
+            // txtMaterial
+            // 
+            this.txtMaterial.FormattingEnabled = true;
+            this.txtMaterial.Location = new System.Drawing.Point(344, 217);
+            this.txtMaterial.Name = "txtMaterial";
+            this.txtMaterial.Size = new System.Drawing.Size(145, 20);
+            this.txtMaterial.TabIndex = 141;
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.Location = new System.Drawing.Point(100, 52);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(164, 26);
+            this.cmbSpecification.Specification = "*";
+            this.cmbSpecification.TabIndex = 85;
+            // 
             // FrmSteelRollDetail
             // 
             this.AcceptButton = this.btnOk1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 435);
+            this.ClientSize = new System.Drawing.Size(521, 514);
             this.Controls.Add(this.btn查看来源卷);
             this.Controls.Add(this.pnlCost);
             this.Controls.Add(this.btnOk1);
@@ -626,6 +720,8 @@
             this.pnlTax.PerformLayout();
             this.pnlCost.ResumeLayout(false);
             this.pnlCost.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -675,5 +771,12 @@
         private System.Windows.Forms.Button btnOk1;
         private System.Windows.Forms.GroupBox pnlCost;
         private System.Windows.Forms.Button btn查看来源卷;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rdWithTax_运费;
+        private System.Windows.Forms.RadioButton rdWithoutTax_运费;
+        private System.Windows.Forms.Label label10;
+        private GeneralLibrary.WinformControl.DecimalTextBox txt运费;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSupplier运费;
+        private System.Windows.Forms.LinkLabel lnkSupplier_运费;
     }
 }

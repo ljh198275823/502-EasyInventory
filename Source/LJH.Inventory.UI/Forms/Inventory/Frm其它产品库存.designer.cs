@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,6 +38,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
@@ -101,6 +105,10 @@
             this.colDeliverySheet = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPurchaseTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col吊装费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.加工费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col其它费用 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -444,6 +452,10 @@
             this.colDeliverySheet,
             this.colPurchasePrice,
             this.colPurchaseTax,
+            this.col运费,
+            this.col吊装费,
+            this.加工费,
+            this.col其它费用,
             this.colPosition,
             this.colMaterial,
             this.colCarplate,
@@ -454,8 +466,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
@@ -734,6 +746,42 @@
             this.colPurchaseTax.ReadOnly = true;
             this.colPurchaseTax.Width = 40;
             // 
+            // col运费
+            // 
+            dataGridViewCellStyle9.Format = "C2";
+            this.col运费.DefaultCellStyle = dataGridViewCellStyle9;
+            this.col运费.HeaderText = "运费";
+            this.col运费.Name = "col运费";
+            this.col运费.ReadOnly = true;
+            this.col运费.Width = 80;
+            // 
+            // col吊装费
+            // 
+            dataGridViewCellStyle10.Format = "C2";
+            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle10;
+            this.col吊装费.HeaderText = "吊装费";
+            this.col吊装费.Name = "col吊装费";
+            this.col吊装费.ReadOnly = true;
+            this.col吊装费.Width = 80;
+            // 
+            // 加工费
+            // 
+            dataGridViewCellStyle11.Format = "C2";
+            this.加工费.DefaultCellStyle = dataGridViewCellStyle11;
+            this.加工费.HeaderText = "加工费";
+            this.加工费.Name = "加工费";
+            this.加工费.ReadOnly = true;
+            this.加工费.Width = 80;
+            // 
+            // col其它费用
+            // 
+            dataGridViewCellStyle12.Format = "C2";
+            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle12;
+            this.col其它费用.HeaderText = "其它费用";
+            this.col其它费用.Name = "col其它费用";
+            this.col其它费用.ReadOnly = true;
+            this.col其它费用.Width = 80;
+            // 
             // colPosition
             // 
             this.colPosition.HeaderText = "摆放位置";
@@ -851,6 +899,10 @@
         private System.Windows.Forms.DataGridViewLinkColumn colDeliverySheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchasePrice;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colPurchaseTax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col运费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col吊装费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 加工费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col其它费用;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarplate;

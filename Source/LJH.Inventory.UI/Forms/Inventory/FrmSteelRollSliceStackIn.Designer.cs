@@ -68,13 +68,21 @@
             this.label15 = new System.Windows.Forms.Label();
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.pnlCost = new System.Windows.Forms.GroupBox();
+            this.txtSupplier运费 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkSupplier_运费 = new System.Windows.Forms.LinkLabel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.rdWithTax_运费 = new System.Windows.Forms.RadioButton();
+            this.rdWithoutTax_运费 = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt运费 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.pnlTax = new System.Windows.Forms.Panel();
             this.rdWithTax_入库单价 = new System.Windows.Forms.RadioButton();
             this.rdWithoutTax__入库单价 = new System.Windows.Forms.RadioButton();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.txtPurchasePrice = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.panel1.SuspendLayout();
             this.pnlCost.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.pnlTax.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -312,7 +320,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(371, 410);
+            this.btnClose.Location = new System.Drawing.Point(371, 479);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 32);
             this.btnClose.TabIndex = 88;
@@ -322,7 +330,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(249, 410);
+            this.btnOk.Location = new System.Drawing.Point(249, 479);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 32);
             this.btnOk.TabIndex = 87;
@@ -465,14 +473,100 @@
             // 
             // pnlCost
             // 
-            this.pnlCost.Controls.Add(this.pnlTax);
+            this.pnlCost.Controls.Add(this.txtSupplier运费);
+            this.pnlCost.Controls.Add(this.lnkSupplier_运费);
+            this.pnlCost.Controls.Add(this.panel2);
             this.pnlCost.Controls.Add(this.label9);
+            this.pnlCost.Controls.Add(this.txt运费);
+            this.pnlCost.Controls.Add(this.pnlTax);
+            this.pnlCost.Controls.Add(this.label11);
             this.pnlCost.Controls.Add(this.txtPurchasePrice);
-            this.pnlCost.Location = new System.Drawing.Point(7, 330);
+            this.pnlCost.Location = new System.Drawing.Point(12, 332);
             this.pnlCost.Name = "pnlCost";
-            this.pnlCost.Size = new System.Drawing.Size(488, 56);
+            this.pnlCost.Size = new System.Drawing.Size(488, 127);
             this.pnlCost.TabIndex = 157;
             this.pnlCost.TabStop = false;
+            // 
+            // txtSupplier运费
+            // 
+            this.txtSupplier运费.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSupplier运费.Location = new System.Drawing.Point(102, 90);
+            this.txtSupplier运费.Name = "txtSupplier运费";
+            this.txtSupplier运费.ReadOnly = true;
+            this.txtSupplier运费.Size = new System.Drawing.Size(281, 21);
+            this.txtSupplier运费.TabIndex = 155;
+            // 
+            // lnkSupplier_运费
+            // 
+            this.lnkSupplier_运费.AutoSize = true;
+            this.lnkSupplier_运费.Location = new System.Drawing.Point(26, 93);
+            this.lnkSupplier_运费.Name = "lnkSupplier_运费";
+            this.lnkSupplier_运费.Size = new System.Drawing.Size(65, 12);
+            this.lnkSupplier_运费.TabIndex = 154;
+            this.lnkSupplier_运费.TabStop = true;
+            this.lnkSupplier_运费.Text = "运费供应商";
+            this.lnkSupplier_运费.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_运费_LinkClicked);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.rdWithTax_运费);
+            this.panel2.Controls.Add(this.rdWithoutTax_运费);
+            this.panel2.Location = new System.Drawing.Point(238, 56);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(145, 25);
+            this.panel2.TabIndex = 137;
+            // 
+            // rdWithTax_运费
+            // 
+            this.rdWithTax_运费.AutoSize = true;
+            this.rdWithTax_运费.Location = new System.Drawing.Point(4, 3);
+            this.rdWithTax_运费.Name = "rdWithTax_运费";
+            this.rdWithTax_运费.Size = new System.Drawing.Size(47, 16);
+            this.rdWithTax_运费.TabIndex = 129;
+            this.rdWithTax_运费.TabStop = true;
+            this.rdWithTax_运费.Text = "含税";
+            this.rdWithTax_运费.UseVisualStyleBackColor = true;
+            // 
+            // rdWithoutTax_运费
+            // 
+            this.rdWithoutTax_运费.AutoSize = true;
+            this.rdWithoutTax_运费.Location = new System.Drawing.Point(57, 3);
+            this.rdWithoutTax_运费.Name = "rdWithoutTax_运费";
+            this.rdWithoutTax_运费.Size = new System.Drawing.Size(59, 16);
+            this.rdWithoutTax_运费.TabIndex = 130;
+            this.rdWithoutTax_运费.TabStop = true;
+            this.rdWithoutTax_运费.Text = "不含税";
+            this.rdWithoutTax_运费.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(34, 62);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 12);
+            this.label9.TabIndex = 135;
+            this.label9.Text = "运费(/吨)";
+            // 
+            // txt运费
+            // 
+            this.txt运费.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt运费.Location = new System.Drawing.Point(102, 58);
+            this.txt运费.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txt运费.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txt运费.Name = "txt运费";
+            this.txt运费.PointCount = 2;
+            this.txt运费.Size = new System.Drawing.Size(122, 21);
+            this.txt运费.TabIndex = 136;
+            this.txt运费.Text = "0";
             // 
             // pnlTax
             // 
@@ -506,19 +600,19 @@
             this.rdWithoutTax__入库单价.Text = "不含税";
             this.rdWithoutTax__入库单价.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // label11
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 23);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 12);
-            this.label9.TabIndex = 94;
-            this.label9.Text = "入库单价(/吨)";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 23);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(83, 12);
+            this.label11.TabIndex = 94;
+            this.label11.Text = "入库单价(/吨)";
             // 
             // txtPurchasePrice
             // 
             this.txtPurchasePrice.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPurchasePrice.Location = new System.Drawing.Point(99, 19);
+            this.txtPurchasePrice.Location = new System.Drawing.Point(102, 19);
             this.txtPurchasePrice.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -541,7 +635,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(503, 466);
+            this.ClientSize = new System.Drawing.Size(503, 535);
             this.Controls.Add(this.pnlCost);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.txtPurchaseID);
@@ -586,6 +680,8 @@
             this.panel1.PerformLayout();
             this.pnlCost.ResumeLayout(false);
             this.pnlCost.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.pnlTax.ResumeLayout(false);
             this.pnlTax.PerformLayout();
             this.ResumeLayout(false);
@@ -633,10 +729,17 @@
         private System.Windows.Forms.Label label15;
         private GeneralLibrary.WinformControl.DBCTextBox txtPurchaseID;
         private System.Windows.Forms.GroupBox pnlCost;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSupplier运费;
+        private System.Windows.Forms.LinkLabel lnkSupplier_运费;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton rdWithTax_运费;
+        private System.Windows.Forms.RadioButton rdWithoutTax_运费;
+        private System.Windows.Forms.Label label9;
+        private GeneralLibrary.WinformControl.DecimalTextBox txt运费;
         private System.Windows.Forms.Panel pnlTax;
         private System.Windows.Forms.RadioButton rdWithTax_入库单价;
         private System.Windows.Forms.RadioButton rdWithoutTax__入库单价;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
         private GeneralLibrary.WinformControl.DecimalTextBox txtPurchasePrice;
 
     }
