@@ -11,13 +11,14 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.Purchase;
 using LJH.Inventory.UI.Forms.General;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class Frm管理费用 : FrmSheetDetailBase
+    public partial class Frm管理费用明细 : FrmSheetDetailBase
     {
-        public Frm管理费用()
+        public Frm管理费用明细()
         {
             InitializeComponent();
         }
@@ -35,20 +36,33 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAmount.Focus();
                 return false;
             }
-            if (txtAccount.Tag == null)
+            if (string.IsNullOrEmpty(txtCategory.Text))
             {
-                MessageBox.Show("没有指定付款账号");
+                MessageBox.Show("没有指定费用类别");
                 return false;
             }
-            if ((txtAccount.Tag as Account).Class == AccountType.无效)
+            if (txtAccount.Tag != null && (txtAccount.Tag as Account).Class == AccountType.无效)
             {
                 MessageBox.Show("账号是无效账号,请先将账号设置成有效的账号!");
                 return false;
             }
-            decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
-            if (amount < txtAmount.DecimalValue)
+            if (txtAccount.Tag != null)
             {
-                MessageBox.Show("此账号余额不足");
+                decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
+                if (amount < txtAmount.DecimalValue)
+                {
+                    MessageBox.Show("此账号余额不足");
+                    return false;
+                }
+            }
+            if (txtSupplier.Tag == null)
+            {
+                MessageBox.Show("没有指定付款客户");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txt申请人.Text))
+            {
+                MessageBox.Show("没有指定申请人");
                 return false;
             }
             return true;
@@ -60,6 +74,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             txtAccount.Text = Account != null ? Account.Name : null;
             txtAccount.Tag = Account;
             if (IsForView) toolStrip1.Enabled = false;
+            if (!string.IsNullOrEmpty(UserSettings.Current.默认公司费用客户))
+            {
+                var sp = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(UserSettings.Current.默认公司费用客户).QueryObject;
+                txtSupplier.Text = sp != null ? sp.Name : null;
+                txtSupplier.Tag = sp;
+            }
         }
 
         protected override void ItemShowing()
@@ -68,18 +88,32 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (item != null)
             {
                 txtSheetNo.Text = item.ID;
-                Account ac = null;
-                if (!string.IsNullOrEmpty(item.AccountID)) ac = new AccountBLL(AppSettings.Current.ConnStr).GetByID(item.AccountID).QueryObject;
-                txtAccount.Text = ac != null ? ac.Name : null;
-                txtAccount.Tag = ac;
-                txtAmount.DecimalValue = item.Amount;
                 dtSheetDate.Value = item.SheetDate;
-                txtPayer.Text = item.Payer;
+                txtAmount.DecimalValue = item.Amount;
                 txtCategory.Text = item.GetProperty("费用类别");
-                txtRequest.Text = item.GetProperty("申请人");
+                if (!string.IsNullOrEmpty(item.CustomerID))
+                {
+                    var c = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.CustomerID).QueryObject;
+                    txtSupplier.Text = c != null ? c.Name : null;
+                    txtSupplier.Tag = c;
+                }
+                else
+                {
+                    txtSupplier.Text = null;
+                    txtSupplier.Tag = null;
+                }
+                if (!string.IsNullOrEmpty(item.AccountID))
+                {
+                    Account ac = null;
+                    ac = new AccountBLL(AppSettings.Current.ConnStr).GetByID(item.AccountID).QueryObject;
+                    txtAccount.Text = ac != null ? ac.Name : null;
+                    txtAccount.Tag = ac;
+                }
+                txt申请人.Text = item.GetProperty("申请人");
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
+                ShowButtonState();
             }
         }
 
@@ -96,12 +130,13 @@ namespace LJH.Inventory.UI.Forms.Financial
                 info = UpdatingItem as CustomerPayment;
             }
             info.ClassID = CustomerPaymentType.公司管理费用;
-            info.AccountID = (txtAccount.Tag as Account).ID;
             info.Amount = txtAmount.DecimalValue;
             info.SheetDate = dtSheetDate.Value;
             info.SetProperty("费用类别", txtCategory.Text);
-            info.SetProperty("申请人", txtRequest.Text);
-            info.Payer = txtPayer.Text;
+            if (txtAccount.Tag != null) info.AccountID = (txtAccount.Tag as Account).ID;
+            else info.AccountID = string.Empty;// 账号不能为NULL，所以这里设置成空字符吧
+            if (txtSupplier.Tag != null) info.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
+            info.SetProperty("申请人", txt申请人.Text);
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -120,7 +155,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override void ShowButtonState()
         {
-            ShowButtonState(this.toolStrip1);
+            base.ShowButtonState(this.toolStrip1);
             btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Approve);
             btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.UndoApprove);
@@ -185,7 +220,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         #region 事件处理程序
         private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmExpenditureTypeMaster frm = new FrmExpenditureTypeMaster();
+            Frm管理费用类别 frm = new Frm管理费用类别();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -199,20 +234,22 @@ namespace LJH.Inventory.UI.Forms.Financial
             txtCategory.Text = string.Empty;
         }
 
-        private void lnkRequest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmStaffMaster frm = new FrmStaffMaster();
+            FrmSupplierMaster frm = new FrmSupplierMaster();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                var Requster = frm.SelectedItem as Staff;
-                txtRequest.Text = Requster != null ? Requster.Name : string.Empty;
+                var c = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = c != null ? c.Name : string.Empty;
+                txtSupplier.Tag = c;
             }
         }
 
-        private void txtRequest_DoubleClick(object sender, EventArgs e)
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
         {
-            txtRequest.Text = string.Empty;
+            txtSupplier.Text = string.Empty;
+            txtSupplier.Tag = null;
         }
 
         private void lnkAccout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -227,6 +264,12 @@ namespace LJH.Inventory.UI.Forms.Financial
                 txtAccount.Text = ac.Name;
                 txtAccount.Tag = ac;
             }
+        }
+
+        private void txtAccount_DoubleClick(object sender, EventArgs e)
+        {
+            txtAccount.Tag = null;
+            txtAccount.Text = null;
         }
         #endregion
     }

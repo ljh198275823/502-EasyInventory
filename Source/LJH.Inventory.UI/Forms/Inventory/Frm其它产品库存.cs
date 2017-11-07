@@ -231,6 +231,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colMaterial"].Value = sr.Material;
             row.Cells["colCarplate"].Value = sr.Carplate;
             row.Cells["colPurchaseID"].Value = sr.PurchaseID;
+            row.Cells["colOperator"].Value = sr.Operator;
             row.Cells["colMemo"].Value = sr.Memo;
             ShowRowColor(row);
             if (!_SteelRolls.Exists(it => it.ID == sr.ID))

@@ -113,6 +113,7 @@
             this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPurchaseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -460,6 +461,7 @@
             this.colMaterial,
             this.colCarplate,
             this.colPurchaseID,
+            this.colOperator,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -805,6 +807,13 @@
             this.colPurchaseID.Name = "colPurchaseID";
             this.colPurchaseID.ReadOnly = true;
             // 
+            // colOperator
+            // 
+            this.colOperator.HeaderText = "操作员";
+            this.colOperator.Name = "colOperator";
+            this.colOperator.ReadOnly = true;
+            this.colOperator.Width = 80;
+            // 
             // colMemo
             // 
             this.colMemo.HeaderText = "备注";
@@ -907,6 +916,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarplate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchaseID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

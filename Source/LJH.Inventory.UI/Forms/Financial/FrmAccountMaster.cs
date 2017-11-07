@@ -131,7 +131,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                     MessageBox.Show("此账号不能增加管理费用");
                     return;
                 }
-                Frm管理费用 frm = new Frm管理费用();
+                Frm管理费用明细 frm = new Frm管理费用明细();
                 frm.Account = ac;
                 frm.IsAdding = true;
                 frm.ShowDialog();

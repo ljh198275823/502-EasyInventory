@@ -241,6 +241,42 @@ namespace LJH.Inventory.BLL
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr1, unitWork);
                 }
             }
+            else if (info.ClassID == CustomerPaymentType.公司管理费用)
+            {
+                if (!string.IsNullOrEmpty(info.AccountID))
+                {
+                    AccountRecord ar = new AccountRecord()
+                    {
+                        ID = Guid.NewGuid(),
+                        ClassID = info.ClassID,
+                        SheetID = info.ID,
+                        CustomerID = info.CustomerID,
+                        CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                        StackSheetID = info.StackSheetID,
+                        AccountID = info.AccountID,
+                        Amount = info.Amount,
+                        OtherAccount = info.Payer,
+                        Memo = info.Memo
+                    };
+                    ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+                }
+                else if (!string.IsNullOrEmpty(info.CustomerID)) //没有设置支付账号，表示管理费用要计到应收款里面
+                {
+                    CustomerReceivable cr = new CustomerReceivable()
+                    {
+                        ID = Guid.NewGuid(),
+                        ClassID = CustomerReceivableType.SupplierReceivable,
+                        CustomerID = info.CustomerID,
+                        CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                        SheetID = info.ID,
+                        Amount = info.Amount,
+                        Memo = (string.IsNullOrEmpty(info.Memo) ? info.GetProperty("费用类别") : info.Memo),
+                    };
+                    cr.SetProperty("费用类别", info.GetProperty("费用类别"));
+                    cr.SetProperty("申请人", info.GetProperty("申请人"));
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+                }
+            }
             else
             {
                 AccountRecord ar = new AccountRecord()

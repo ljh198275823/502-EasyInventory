@@ -109,7 +109,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 CompanyInfo c = (dataGridView1.Rows[e.RowIndex].Tag as CustomerFinancialState).Customer;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colReceivable")
                 {
-                    View.FrmCustomerReceivableView frm = new View.FrmCustomerReceivableView();
+                    View.FrmSupplierReceivableView frm = new View.FrmSupplierReceivableView();
                     frm.Customer = c;
                     frm.ReceivableType = CustomerReceivableType.SupplierReceivable;
                     frm.Text = string.Format("{0} 应付款明细", c.Name);
@@ -165,7 +165,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                Frm其它应收明细 frm = new Frm其它应收明细();
                 frm.IsAdding = true;
                 frm.Customer = customer;
                 frm.ReceivableType = CustomerReceivableType.SupplierReceivable;
@@ -180,7 +180,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                Frm其它应收明细 frm = new Frm其它应收明细();
                 frm.IsAdding = true;
                 frm.Customer = customer;
                 frm.ReceivableType = CustomerReceivableType.SupplierTax;

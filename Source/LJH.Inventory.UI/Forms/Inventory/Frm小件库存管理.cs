@@ -233,6 +233,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colCarplate"].Value = sr.Carplate;
             row.Cells["colPurchaseID"].Value = sr.PurchaseID;
             row.Cells["colPosition"].Value = sr.Position;
+            row.Cells["colOperator"].Value = sr.Operator;
             row.Cells["colMemo"].Value = sr.Memo;
             if (sr.State == ProductInventoryState.Nullified)
             {

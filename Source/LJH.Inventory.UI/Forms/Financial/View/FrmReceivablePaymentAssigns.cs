@@ -108,7 +108,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
                             if (osheet != null)
                             {
-                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                Frm其它应收明细 frm = new Frm其它应收明细();
                                 frm.ReceivableType = osheet.ClassID;
                                 frm.UpdatingItem = osheet;
                                 frm.ShowDialog();
@@ -162,7 +162,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
                             if (osheet != null)
                             {
-                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                Frm其它应收明细 frm = new Frm其它应收明细();
                                 frm.ReceivableType = osheet.ClassID;
                                 frm.UpdatingItem = osheet;
                                 frm.ShowDialog();

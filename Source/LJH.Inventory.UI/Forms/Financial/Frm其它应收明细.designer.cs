@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Financial
 {
-    partial class FrmOhterReceivableSheetDetail
+    partial class Frm其它应收明细
     {
         /// <summary>
         /// Required designer variable.

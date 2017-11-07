@@ -428,7 +428,7 @@ namespace InventoryApplication
 
         private void mnu_ExpanditureType_Click(object sender, EventArgs e)
         {
-            ShowSingleForm<FrmExpenditureTypeMaster>(sender);
+            ShowSingleForm<Frm管理费用类别>(sender);
         }
 
         private void mnu_RelatedCompanyType_Click(object sender, EventArgs e)

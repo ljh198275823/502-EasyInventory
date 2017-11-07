@@ -122,6 +122,7 @@
             this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliverySheet = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -695,6 +696,7 @@
             this.colCarplate,
             this.colDeliverySheet,
             this.colPosition,
+            this.colOperator,
             this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -927,6 +929,13 @@
             this.colPosition.HeaderText = "摆放位置";
             this.colPosition.Name = "colPosition";
             // 
+            // colOperator
+            // 
+            this.colOperator.HeaderText = "操作员";
+            this.colOperator.Name = "colOperator";
+            this.colOperator.ReadOnly = true;
+            this.colOperator.Width = 80;
+            // 
             // colMemo
             // 
             this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -1039,6 +1048,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCarplate;
         private System.Windows.Forms.DataGridViewLinkColumn colDeliverySheet;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
 
     }

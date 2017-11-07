@@ -95,7 +95,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void lnkParentCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FrmExpenditureTypeMaster frm = new FrmExpenditureTypeMaster();
+            Frm管理费用类别 frm = new Frm管理费用类别();
             frm.ForSelect = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {

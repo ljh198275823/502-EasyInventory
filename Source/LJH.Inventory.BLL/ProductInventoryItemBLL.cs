@@ -59,8 +59,9 @@ namespace LJH.Inventory.BLL
             cr.SetProperty("规格", sheet.Product.Specification);
             cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
             if (ci.Name == CostItem.入库单价) cr.SetProperty("入库单价", sheet.GetCost(CostItem.入库单价) != null ? sheet.GetCost(CostItem.入库单价).Price.ToString("F2") : null);
+            if (!string.IsNullOrEmpty(sheet.Customer)) cr.SetProperty("购货单位", sheet.Customer);
             decimal amount = sheet.CalReceivable(ci);
-            if (original != null && original.Haspaid > amount) throw new Exception("原材料应收已核销的金额超过当前总价，请先取消部分核销金额再保存");
+            if (original != null && original.Haspaid > amount) new AccountRecordAssignBLL(RepoUri).UndoAssign(cr, cr.Haspaid - amount);  //这里用cr,如果用original后面更新的时候会更新不到
             cr.Amount = amount;
             if (original == null)
             {
@@ -111,8 +112,9 @@ namespace LJH.Inventory.BLL
             cr.SetProperty("规格", sheet.Product.Specification);
             cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
             if (ci.Name == CostItem.入库单价) cr.SetProperty("入库单价", sheet.GetCost(CostItem.入库单价) != null ? sheet.GetCost(CostItem.入库单价).Price.ToString("F2") : null);
+            if (!string.IsNullOrEmpty(sheet.Customer)) cr.SetProperty("购货单位", sheet.Customer);
             decimal amount = sheet.CalTax(ci);
-            if (original != null && original.Haspaid > amount) throw new Exception("原材料应收已核销的金额超过当前总价，请先取消部分核销金额再保存");
+            if (original != null && original.Haspaid > amount) new AccountRecordAssignBLL(RepoUri).UndoAssign(cr, cr.Haspaid - amount); //这里用cr,如果用original后面更新的时候会更新不到
             cr.Amount = amount;
             if (original == null)
             {

@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Financial
 {
-    partial class Frm管理费用
+    partial class Frm管理费用明细
     {
         /// <summary>
         /// Required designer variable.
@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtPayer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label4 = new System.Windows.Forms.Label();
+            this.txt申请人 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label3 = new System.Windows.Forms.Label();
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkAccout = new System.Windows.Forms.LinkLabel();
-            this.txtRequest = new System.Windows.Forms.TextBox();
-            this.lnkRequest = new System.Windows.Forms.LinkLabel();
+            this.txtSupplier = new System.Windows.Forms.TextBox();
+            this.lnkSupplier = new System.Windows.Forms.LinkLabel();
             this.txtCategory = new System.Windows.Forms.TextBox();
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -106,12 +106,12 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.txtPayer);
-            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.txt申请人);
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtAccount);
             this.tabPage1.Controls.Add(this.lnkAccout);
-            this.tabPage1.Controls.Add(this.txtRequest);
-            this.tabPage1.Controls.Add(this.lnkRequest);
+            this.tabPage1.Controls.Add(this.txtSupplier);
+            this.tabPage1.Controls.Add(this.lnkSupplier);
             this.tabPage1.Controls.Add(this.txtCategory);
             this.tabPage1.Controls.Add(this.lnkCategory);
             this.tabPage1.Controls.Add(this.txtSheetNo);
@@ -130,66 +130,69 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // txtPayer
+            // txt申请人
             // 
-            this.txtPayer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPayer.Location = new System.Drawing.Point(313, 74);
-            this.txtPayer.Name = "txtPayer";
-            this.txtPayer.Size = new System.Drawing.Size(158, 21);
-            this.txtPayer.TabIndex = 104;
+            this.txt申请人.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt申请人.Location = new System.Drawing.Point(71, 107);
+            this.txt申请人.Name = "txt申请人";
+            this.txt申请人.Size = new System.Drawing.Size(159, 21);
+            this.txt申请人.TabIndex = 106;
             // 
-            // label4
+            // label3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(253, 78);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 105;
-            this.label4.Text = "对方账号";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 110);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.TabIndex = 107;
+            this.label3.Text = "申请人";
             // 
             // txtAccount
             // 
             this.txtAccount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAccount.Location = new System.Drawing.Point(72, 74);
+            this.txtAccount.Location = new System.Drawing.Point(311, 77);
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.ReadOnly = true;
             this.txtAccount.Size = new System.Drawing.Size(160, 21);
             this.txtAccount.TabIndex = 103;
+            this.txtAccount.Visible = false;
+            this.txtAccount.DoubleClick += new System.EventHandler(this.txtAccount_DoubleClick);
             // 
             // lnkAccout
             // 
-            this.lnkAccout.Location = new System.Drawing.Point(7, 76);
+            this.lnkAccout.Location = new System.Drawing.Point(246, 79);
             this.lnkAccout.Name = "lnkAccout";
             this.lnkAccout.Size = new System.Drawing.Size(60, 17);
             this.lnkAccout.TabIndex = 102;
             this.lnkAccout.TabStop = true;
             this.lnkAccout.Text = "付款账号";
             this.lnkAccout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnkAccout.Visible = false;
             this.lnkAccout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccout_LinkClicked);
             // 
-            // txtRequest
+            // txtSupplier
             // 
-            this.txtRequest.Location = new System.Drawing.Point(72, 105);
-            this.txtRequest.Name = "txtRequest";
-            this.txtRequest.ReadOnly = true;
-            this.txtRequest.Size = new System.Drawing.Size(159, 21);
-            this.txtRequest.TabIndex = 9;
-            this.txtRequest.DoubleClick += new System.EventHandler(this.txtRequest_DoubleClick);
+            this.txtSupplier.Location = new System.Drawing.Point(72, 76);
+            this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.ReadOnly = true;
+            this.txtSupplier.Size = new System.Drawing.Size(159, 21);
+            this.txtSupplier.TabIndex = 9;
+            this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
             // 
-            // lnkRequest
+            // lnkSupplier
             // 
-            this.lnkRequest.AutoSize = true;
-            this.lnkRequest.Location = new System.Drawing.Point(25, 109);
-            this.lnkRequest.Name = "lnkRequest";
-            this.lnkRequest.Size = new System.Drawing.Size(41, 12);
-            this.lnkRequest.TabIndex = 8;
-            this.lnkRequest.TabStop = true;
-            this.lnkRequest.Text = "申请人";
-            this.lnkRequest.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkRequest_LinkClicked);
+            this.lnkSupplier.AutoSize = true;
+            this.lnkSupplier.Location = new System.Drawing.Point(14, 80);
+            this.lnkSupplier.Name = "lnkSupplier";
+            this.lnkSupplier.Size = new System.Drawing.Size(53, 12);
+            this.lnkSupplier.TabIndex = 8;
+            this.lnkSupplier.TabStop = true;
+            this.lnkSupplier.Text = "付款客户";
+            this.lnkSupplier.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_LinkClicked);
             // 
             // txtCategory
             // 
-            this.txtCategory.Location = new System.Drawing.Point(312, 105);
+            this.txtCategory.Location = new System.Drawing.Point(312, 43);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(159, 21);
@@ -199,7 +202,7 @@
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(253, 109);
+            this.lnkCategory.Location = new System.Drawing.Point(253, 47);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(53, 12);
             this.lnkCategory.TabIndex = 1;
@@ -228,7 +231,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(72, 134);
+            this.txtMemo.Location = new System.Drawing.Point(72, 137);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(399, 21);
             this.txtMemo.TabIndex = 10;
@@ -263,7 +266,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 137);
+            this.label5.Location = new System.Drawing.Point(38, 140);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 58;
@@ -281,7 +284,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 47);
+            this.label2.Location = new System.Drawing.Point(14, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 56;
@@ -480,7 +483,6 @@
             this.btnApprove.Size = new System.Drawing.Size(52, 53);
             this.btnApprove.Text = "审核(&A)";
             this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnApprove.Visible = false;
             this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
             // 
             // btnUndoApprove
@@ -491,7 +493,6 @@
             this.btnUndoApprove.Size = new System.Drawing.Size(60, 53);
             this.btnUndoApprove.Text = "取消审核";
             this.btnUndoApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnUndoApprove.Visible = false;
             this.btnUndoApprove.Click += new System.EventHandler(this.btnUndoApprove_Click);
             // 
             // btnNullify
@@ -521,15 +522,15 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
-            // Frm管理费用
+            // Frm管理费用明细
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(501, 251);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Frm管理费用";
-            this.Text = "公司管理费用明细";
+            this.Name = "Frm管理费用明细";
+            this.Text = "公司费用明细";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.tabControl1, 0);
@@ -568,8 +569,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFill;
         private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtRequest;
-        private System.Windows.Forms.LinkLabel lnkRequest;
+        private System.Windows.Forms.TextBox txtSupplier;
+        private System.Windows.Forms.LinkLabel lnkSupplier;
         private System.Windows.Forms.TextBox txtCategory;
         private System.Windows.Forms.LinkLabel lnkCategory;
         private System.Windows.Forms.ContextMenuStrip mnu_Attachment;
@@ -589,11 +590,11 @@
         private System.Windows.Forms.ToolStripButton btnNullify;
         private GeneralLibrary.WinformControl.DBCTextBox txtAccount;
         private System.Windows.Forms.LinkLabel lnkAccout;
-        private GeneralLibrary.WinformControl.DBCTextBox txtPayer;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel lblSheetState;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private GeneralLibrary.WinformControl.DBCTextBox txt申请人;
+        private System.Windows.Forms.Label label3;
 
     }
 }

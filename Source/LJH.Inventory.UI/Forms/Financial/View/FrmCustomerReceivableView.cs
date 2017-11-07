@@ -126,7 +126,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         private void mnu_Add_Click(object sender, EventArgs e)
         {
             CompanyInfo customer = Customer;
-            FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+            Frm其它应收明细 frm = new Frm其它应收明细();
             frm.IsAdding = true;
             frm.Customer = customer;
             frm.ReceivableType = ReceivableType;
@@ -162,7 +162,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
                             if (osheet != null)
                             {
-                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                Frm其它应收明细 frm = new Frm其它应收明细();
                                 frm.ReceivableType = osheet.ClassID;
                                 frm.UpdatingItem = osheet;
                                 frm.ShowDialog();
@@ -218,7 +218,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
                             if (osheet != null)
                             {
-                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                Frm其它应收明细 frm = new Frm其它应收明细();
                                 frm.ReceivableType = osheet.ClassID;
                                 frm.UpdatingItem = osheet;
                                 frm.ShowDialog();

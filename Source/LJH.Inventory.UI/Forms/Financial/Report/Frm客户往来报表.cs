@@ -136,7 +136,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                             var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
                             if (osheet != null)
                             {
-                                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                                Frm其它应收明细 frm = new Frm其它应收明细();
                                 frm.ReceivableType = osheet.ClassID;
                                 frm.UpdatingItem = osheet;
                                 frm.ShowDialog();

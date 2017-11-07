@@ -34,5 +34,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal Amount { get; set; }
         #endregion
+
+        public AccountRecordAssign Clone()
+        {
+            return this.MemberwiseClone() as AccountRecordAssign;
+        }
     }
 }

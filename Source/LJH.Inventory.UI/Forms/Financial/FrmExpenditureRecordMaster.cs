@@ -87,7 +87,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         protected override FrmDetailBase GetDetailForm()
         {
-            Frm管理费用 frm = new Frm管理费用();
+            Frm管理费用明细 frm = new Frm管理费用明细();
             return frm;
         }
 

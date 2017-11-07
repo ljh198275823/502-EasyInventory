@@ -35,6 +35,12 @@ namespace LJH.Inventory.UI.Forms
                 txtSupplier.Text = sp != null ? sp.Name : null;
                 txtSupplier.Tag = sp;
             }
+            if (!string.IsNullOrEmpty(UserSettings.Current.默认公司费用客户))
+            {
+                var sp = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(UserSettings.Current.默认公司费用客户).QueryObject;
+                txt默认公司费用客户.Text = sp != null ? sp.Name : null;
+                txt默认公司费用客户.Tag = sp;
+            }
             chkRealCount.Checked = UserSettings.Current.RealCountWhenCalRealThick;
             chkNeedMaterial.Checked = UserSettings.Current.NeedMaterial;
             txt国税系数.DecimalValue = UserSettings.Current.国税系数;
@@ -122,6 +128,7 @@ namespace LJH.Inventory.UI.Forms
             us.DefaultWarehouse = txtDefaultWareHouse.Text;
             us.默认厂家 = txt默认厂家.Text;
             us.默认供应商 = txtSupplier.Tag != null ? (txtSupplier.Tag as CompanyInfo).ID : null;
+            us.默认公司费用客户 = txt默认公司费用客户.Tag != null ? (txt默认公司费用客户.Tag as CompanyInfo).ID : null;
             us.RealCountWhenCalRealThick = chkRealCount.Checked;
             us.NeedMaterial = chkNeedMaterial.Checked;
             us.税点系数 = txt税点系数.DecimalValue;
@@ -307,5 +314,23 @@ namespace LJH.Inventory.UI.Forms
             }
         }
         #endregion
+
+        private void lnk默认公司费用客户_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
+                txt默认公司费用客户.Text = s.Name;
+                txt默认公司费用客户.Tag = s;
+            }
+        }
+
+        private void txt默认公司费用客户_DoubleClick(object sender, EventArgs e)
+        {
+            txt默认公司费用客户.Text = null;
+            txt默认公司费用客户.Tag = null;
+        }
     }
 }

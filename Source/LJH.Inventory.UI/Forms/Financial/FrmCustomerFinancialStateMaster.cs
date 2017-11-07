@@ -218,7 +218,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                Frm其它应收明细 frm = new Frm其它应收明细();
                 frm.IsAdding = true;
                 frm.Customer = customer;
                 frm.ReceivableType = CustomerReceivableType.CustomerReceivable;
@@ -339,7 +339,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmOhterReceivableSheetDetail frm = new FrmOhterReceivableSheetDetail();
+                Frm其它应收明细 frm = new Frm其它应收明细();
                 frm.IsAdding = true;
                 frm.Customer = customer;
                 frm.ReceivableType = CustomerReceivableType.CustomerTax;

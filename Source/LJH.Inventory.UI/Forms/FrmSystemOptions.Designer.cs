@@ -187,6 +187,8 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
+            this.txt默认公司费用客户 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnk默认公司费用客户 = new System.Windows.Forms.LinkLabel();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1438,9 +1440,9 @@
             // 
             // tab1
             // 
-            this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tab1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tab1.Controls.Add(this.tabPage2);
             this.tab1.Controls.Add(this.tabDelivery);
             this.tab1.Controls.Add(this.tabAutoCreater);
@@ -1454,6 +1456,8 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.txt默认公司费用客户);
+            this.tabPage2.Controls.Add(this.lnk默认公司费用客户);
             this.tabPage2.Controls.Add(this.txt默认厂家);
             this.tabPage2.Controls.Add(this.lnk默认厂家);
             this.tabPage2.Controls.Add(this.txtSupplier);
@@ -1488,16 +1492,16 @@
             // 
             this.txt默认厂家.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txt默认厂家.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txt默认厂家.Location = new System.Drawing.Point(101, 312);
+            this.txt默认厂家.Location = new System.Drawing.Point(129, 285);
             this.txt默认厂家.Name = "txt默认厂家";
-            this.txt默认厂家.Size = new System.Drawing.Size(188, 21);
+            this.txt默认厂家.Size = new System.Drawing.Size(204, 21);
             this.txt默认厂家.TabIndex = 110;
             this.txt默认厂家.DoubleClick += new System.EventHandler(this.txt默认厂家_DoubleClick);
             // 
             // lnk默认厂家
             // 
             this.lnk默认厂家.AutoSize = true;
-            this.lnk默认厂家.Location = new System.Drawing.Point(46, 316);
+            this.lnk默认厂家.Location = new System.Drawing.Point(74, 289);
             this.lnk默认厂家.Name = "lnk默认厂家";
             this.lnk默认厂家.Size = new System.Drawing.Size(53, 12);
             this.lnk默认厂家.TabIndex = 109;
@@ -1509,17 +1513,17 @@
             // 
             this.txtSupplier.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSupplier.Location = new System.Drawing.Point(101, 279);
+            this.txtSupplier.Location = new System.Drawing.Point(129, 250);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.ReadOnly = true;
-            this.txtSupplier.Size = new System.Drawing.Size(188, 21);
+            this.txtSupplier.Size = new System.Drawing.Size(204, 21);
             this.txtSupplier.TabIndex = 108;
             this.txtSupplier.DoubleClick += new System.EventHandler(this.txt默认供应商_DoubleClick);
             // 
             // lnk默认供应商
             // 
             this.lnk默认供应商.AutoSize = true;
-            this.lnk默认供应商.Location = new System.Drawing.Point(34, 282);
+            this.lnk默认供应商.Location = new System.Drawing.Point(62, 253);
             this.lnk默认供应商.Name = "lnk默认供应商";
             this.lnk默认供应商.Size = new System.Drawing.Size(65, 12);
             this.lnk默认供应商.TabIndex = 107;
@@ -1599,9 +1603,9 @@
             // 
             this.txtDefaultCustomer.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtDefaultCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultCustomer.Location = new System.Drawing.Point(101, 243);
+            this.txtDefaultCustomer.Location = new System.Drawing.Point(129, 216);
             this.txtDefaultCustomer.Name = "txtDefaultCustomer";
-            this.txtDefaultCustomer.Size = new System.Drawing.Size(188, 21);
+            this.txtDefaultCustomer.Size = new System.Drawing.Size(204, 21);
             this.txtDefaultCustomer.TabIndex = 98;
             this.txtDefaultCustomer.DoubleClick += new System.EventHandler(this.txtDefaultCustomer_DoubleClick);
             // 
@@ -1618,7 +1622,7 @@
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(46, 247);
+            this.lnkCustomer.Location = new System.Drawing.Point(74, 220);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(53, 12);
             this.lnkCustomer.TabIndex = 97;
@@ -1638,16 +1642,16 @@
             // 
             this.txtDefaultProductCategory.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtDefaultProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultProductCategory.Location = new System.Drawing.Point(101, 210);
+            this.txtDefaultProductCategory.Location = new System.Drawing.Point(129, 183);
             this.txtDefaultProductCategory.Name = "txtDefaultProductCategory";
-            this.txtDefaultProductCategory.Size = new System.Drawing.Size(188, 21);
+            this.txtDefaultProductCategory.Size = new System.Drawing.Size(204, 21);
             this.txtDefaultProductCategory.TabIndex = 94;
             this.txtDefaultProductCategory.DoubleClick += new System.EventHandler(this.txtDefaultProductCategory_DoubleClick);
             // 
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(22, 214);
+            this.lnkCategory.Location = new System.Drawing.Point(50, 187);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(77, 12);
             this.lnkCategory.TabIndex = 96;
@@ -1679,9 +1683,9 @@
             // 
             this.txtDefaultWareHouse.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtDefaultWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtDefaultWareHouse.Location = new System.Drawing.Point(101, 177);
+            this.txtDefaultWareHouse.Location = new System.Drawing.Point(129, 150);
             this.txtDefaultWareHouse.Name = "txtDefaultWareHouse";
-            this.txtDefaultWareHouse.Size = new System.Drawing.Size(188, 21);
+            this.txtDefaultWareHouse.Size = new System.Drawing.Size(204, 21);
             this.txtDefaultWareHouse.TabIndex = 93;
             this.txtDefaultWareHouse.DoubleClick += new System.EventHandler(this.txtDefaultWareHouse_DoubleClick);
             // 
@@ -1708,7 +1712,7 @@
             // lnkWarehouse
             // 
             this.lnkWarehouse.AutoSize = true;
-            this.lnkWarehouse.Location = new System.Drawing.Point(46, 181);
+            this.lnkWarehouse.Location = new System.Drawing.Point(74, 154);
             this.lnkWarehouse.Name = "lnkWarehouse";
             this.lnkWarehouse.Size = new System.Drawing.Size(53, 12);
             this.lnkWarehouse.TabIndex = 95;
@@ -1902,6 +1906,28 @@
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
             // 
+            // txt默认公司费用客户
+            // 
+            this.txt默认公司费用客户.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txt默认公司费用客户.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt默认公司费用客户.Location = new System.Drawing.Point(129, 318);
+            this.txt默认公司费用客户.Name = "txt默认公司费用客户";
+            this.txt默认公司费用客户.ReadOnly = true;
+            this.txt默认公司费用客户.Size = new System.Drawing.Size(204, 21);
+            this.txt默认公司费用客户.TabIndex = 112;
+            this.txt默认公司费用客户.DoubleClick += new System.EventHandler(this.txt默认公司费用客户_DoubleClick);
+            // 
+            // lnk默认公司费用客户
+            // 
+            this.lnk默认公司费用客户.AutoSize = true;
+            this.lnk默认公司费用客户.Location = new System.Drawing.Point(26, 321);
+            this.lnk默认公司费用客户.Name = "lnk默认公司费用客户";
+            this.lnk默认公司费用客户.Size = new System.Drawing.Size(101, 12);
+            this.lnk默认公司费用客户.TabIndex = 111;
+            this.lnk默认公司费用客户.TabStop = true;
+            this.lnk默认公司费用客户.Text = "默认公司费用客户";
+            this.lnk默认公司费用客户.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk默认公司费用客户_LinkClicked);
+            // 
             // FrmSystemOptions
             // 
             this.AcceptButton = this.btnOk;
@@ -2094,5 +2120,7 @@
         private System.Windows.Forms.LinkLabel lnk默认厂家;
         private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
         private System.Windows.Forms.LinkLabel lnk默认供应商;
+        private GeneralLibrary.WinformControl.DBCTextBox txt默认公司费用客户;
+        private System.Windows.Forms.LinkLabel lnk默认公司费用客户;
     }
 }
