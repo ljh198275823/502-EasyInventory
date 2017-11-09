@@ -32,6 +32,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        public string Memo
+        {
+            get{return txtMemo .Text ;}
+            set
+            {
+                txtMemo.Text = value;
+            }
+        }
+
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (txt结算单价.DecimalValue < 0)

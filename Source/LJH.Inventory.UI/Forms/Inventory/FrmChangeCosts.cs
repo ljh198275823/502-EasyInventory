@@ -25,6 +25,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         public CostItem Cost { get; set; }
 
+        public string Memo
+        {
+            get { return txtMemo.Text; }
+            set { txtMemo.Text = value; }
+        }
+
         private void FrmChangeCosts_Load(object sender, EventArgs e)
         {
 

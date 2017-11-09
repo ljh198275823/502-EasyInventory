@@ -61,6 +61,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 var gg = cr.GetProperty("规格");
                 if (!string.IsNullOrEmpty(gg)) row.Cells["colSheetID"].Value = gg;
             }
+            row.Cells["col单价"].Value = cr.GetProperty("入库单价");
+            row.Cells["col重量"].Value = cr.GetProperty("重量");
             row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colAmount"].Value = cr.Amount.Trim();
@@ -73,6 +75,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             }
             row.Cells["col申请人"].Value = cr.GetProperty("申请人");
             row.Cells["col购货单位"].Value = cr.GetProperty("购货单位");
+            row.Cells["col类别"].Value = cr.GetProperty("费用类别");
             row.Cells["colMemo"].Value = cr.Memo;
         }
 

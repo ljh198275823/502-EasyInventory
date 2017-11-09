@@ -319,7 +319,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (txt运费.DecimalValue > 0)
                 {
                     var ci = new CostItem() { Name = CostItem.运费, Price = txt运费.DecimalValue, WithTax = rdWithTax_运费.Checked, SupllierID = (txtSupplier运费.Tag as CompanyInfo).ID };
-                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(SteelRollSlice, ci, Operator.Current.Name, Operator.Current.ID);
+                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(SteelRollSlice, ci, Operator.Current.Name, Operator.Current.ID,null);
                 }
 
                 if (isAdding) //新增

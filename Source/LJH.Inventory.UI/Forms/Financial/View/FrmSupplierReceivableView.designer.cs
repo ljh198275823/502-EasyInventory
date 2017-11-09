@@ -47,6 +47,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col重量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHaspaid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +56,7 @@
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col购货单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col申请人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col类别 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -73,6 +76,8 @@
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetID,
             this.colCreateDate,
+            this.col单价,
+            this.col重量,
             this.colAmount,
             this.colHaspaid,
             this.colNotPaid,
@@ -80,6 +85,7 @@
             this.colOrderID,
             this.col购货单位,
             this.col申请人,
+            this.col类别,
             this.colMemo});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
             this.GridView.Location = new System.Drawing.Point(0, 94);
@@ -87,7 +93,7 @@
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(1082, 259);
+            this.GridView.Size = new System.Drawing.Size(1159, 259);
             this.GridView.TabIndex = 22;
             this.GridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
             // 
@@ -120,14 +126,14 @@
             this.lblMSG});
             this.statusStrip1.Location = new System.Drawing.Point(0, 356);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1082, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1159, 22);
             this.statusStrip1.TabIndex = 25;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblMSG
             // 
             this.lblMSG.Name = "lblMSG";
-            this.lblMSG.Size = new System.Drawing.Size(1067, 17);
+            this.lblMSG.Size = new System.Drawing.Size(1144, 17);
             this.lblMSG.Spring = true;
             this.lblMSG.Text = "共 0 项";
             // 
@@ -202,6 +208,20 @@
             this.colCreateDate.ReadOnly = true;
             this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // col单价
+            // 
+            this.col单价.HeaderText = "单价";
+            this.col单价.Name = "col单价";
+            this.col单价.ReadOnly = true;
+            this.col单价.Width = 60;
+            // 
+            // col重量
+            // 
+            this.col重量.HeaderText = "重量";
+            this.col重量.Name = "col重量";
+            this.col重量.ReadOnly = true;
+            this.col重量.Width = 60;
+            // 
             // colAmount
             // 
             dataGridViewCellStyle2.Format = "C2";
@@ -260,6 +280,13 @@
             this.col申请人.ReadOnly = true;
             this.col申请人.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // col类别
+            // 
+            this.col类别.HeaderText = "类别";
+            this.col类别.Name = "col类别";
+            this.col类别.ReadOnly = true;
+            this.col类别.Width = 80;
+            // 
             // colMemo
             // 
             this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -272,7 +299,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 378);
+            this.ClientSize = new System.Drawing.Size(1159, 378);
             this.Controls.Add(this.txtKeyword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnLast3Month);
@@ -309,6 +336,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col单价;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col重量;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewLinkColumn colHaspaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;
@@ -316,6 +345,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col购货单位;
         private System.Windows.Forms.DataGridViewTextBoxColumn col申请人;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col类别;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

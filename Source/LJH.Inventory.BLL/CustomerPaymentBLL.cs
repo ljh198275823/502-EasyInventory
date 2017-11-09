@@ -270,7 +270,7 @@ namespace LJH.Inventory.BLL
                         CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                         SheetID = info.ID,
                         Amount = info.Amount,
-                        Memo = (string.IsNullOrEmpty(info.Memo) ? info.GetProperty("费用类别") : info.Memo),
+                        Memo = info.Memo,
                     };
                     cr.SetProperty("费用类别", info.GetProperty("费用类别"));
                     cr.SetProperty("申请人", info.GetProperty("申请人"));

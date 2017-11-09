@@ -40,12 +40,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtSupplier = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkSupplier = new System.Windows.Forms.LinkLabel();
+            this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label12 = new System.Windows.Forms.Label();
+            this.chk总金额 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // rdWithTax
             // 
             this.rdWithTax.AutoSize = true;
-            this.rdWithTax.Location = new System.Drawing.Point(228, 62);
+            this.rdWithTax.Location = new System.Drawing.Point(212, 62);
             this.rdWithTax.Name = "rdWithTax";
             this.rdWithTax.Size = new System.Drawing.Size(47, 16);
             this.rdWithTax.TabIndex = 2;
@@ -56,7 +59,7 @@
             // rdWithoutTax
             // 
             this.rdWithoutTax.AutoSize = true;
-            this.rdWithoutTax.Location = new System.Drawing.Point(281, 62);
+            this.rdWithoutTax.Location = new System.Drawing.Point(265, 62);
             this.rdWithoutTax.Name = "rdWithoutTax";
             this.rdWithoutTax.Size = new System.Drawing.Size(59, 16);
             this.rdWithoutTax.TabIndex = 3;
@@ -96,7 +99,7 @@
             // btnOk1
             // 
             this.btnOk1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk1.Location = new System.Drawing.Point(103, 150);
+            this.btnOk1.Location = new System.Drawing.Point(116, 181);
             this.btnOk1.Name = "btnOk1";
             this.btnOk1.Size = new System.Drawing.Size(126, 35);
             this.btnOk1.TabIndex = 147;
@@ -108,7 +111,7 @@
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(252, 150);
+            this.btnClose.Location = new System.Drawing.Point(265, 181);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(126, 35);
             this.btnClose.TabIndex = 149;
@@ -161,11 +164,45 @@
             this.lnkSupplier.Text = "供应商";
             this.lnkSupplier.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_LinkClicked);
             // 
+            // txtMemo
+            // 
+            this.txtMemo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtMemo.Location = new System.Drawing.Point(83, 137);
+            this.txtMemo.Name = "txtMemo";
+            this.txtMemo.Size = new System.Drawing.Size(295, 21);
+            this.txtMemo.TabIndex = 169;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(46, 140);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 12);
+            this.label12.TabIndex = 170;
+            this.label12.Text = "备注";
+            // 
+            // chk总金额
+            // 
+            this.chk总金额.AutoSize = true;
+            this.chk总金额.ForeColor = System.Drawing.Color.Red;
+            this.chk总金额.Location = new System.Drawing.Point(333, 62);
+            this.chk总金额.Name = "chk总金额";
+            this.chk总金额.Size = new System.Drawing.Size(60, 16);
+            this.chk总金额.TabIndex = 171;
+            this.chk总金额.Text = "总金额";
+            this.chk总金额.UseVisualStyleBackColor = true;
+            // 
             // FrmChangeCosts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 208);
+            this.ClientSize = new System.Drawing.Size(416, 239);
+            this.Controls.Add(this.chk总金额);
+            this.Controls.Add(this.txtMemo);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.rdWithTax);
             this.Controls.Add(this.txtSupplier);
             this.Controls.Add(this.rdWithoutTax);
@@ -199,5 +236,8 @@
         private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
         private System.Windows.Forms.LinkLabel lnkSupplier;
+        private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
+        private System.Windows.Forms.Label label12;
+        public System.Windows.Forms.CheckBox chk总金额;
     }
 }

@@ -151,7 +151,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 330);
             // 
             // cMnu_Fresh
             // 
@@ -183,7 +183,7 @@
             this.mnu_设置其它成本.Name = "mnu_设置其它成本";
             this.mnu_设置其它成本.Size = new System.Drawing.Size(172, 22);
             this.mnu_设置其它成本.Text = "设置其它成本";
-            this.mnu_设置其它成本.Click += new System.EventHandler(this.mnu_修改入库单价_Click);
+            this.mnu_设置其它成本.Click += new System.EventHandler(this.mnu_设置其它成本_Click);
             // 
             // mnu_查看成本明细
             // 

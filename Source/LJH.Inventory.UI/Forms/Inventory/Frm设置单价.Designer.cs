@@ -37,6 +37,8 @@
             this.pnlTax = new System.Windows.Forms.Panel();
             this.rdWithTax = new System.Windows.Forms.RadioButton();
             this.rdWithoutTax = new System.Windows.Forms.RadioButton();
+            this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label12 = new System.Windows.Forms.Label();
             this.pnlTax.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +76,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(197, 82);
+            this.btnClose.Location = new System.Drawing.Point(197, 118);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 41);
             this.btnClose.TabIndex = 102;
@@ -85,7 +87,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(75, 82);
+            this.btnOk.Location = new System.Drawing.Point(75, 118);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 41);
             this.btnOk.TabIndex = 101;
@@ -125,11 +127,33 @@
             this.rdWithoutTax.Text = "不含税";
             this.rdWithoutTax.UseVisualStyleBackColor = true;
             // 
+            // txtMemo
+            // 
+            this.txtMemo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtMemo.Location = new System.Drawing.Point(61, 71);
+            this.txtMemo.Name = "txtMemo";
+            this.txtMemo.Size = new System.Drawing.Size(281, 21);
+            this.txtMemo.TabIndex = 167;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(24, 74);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 12);
+            this.label12.TabIndex = 168;
+            this.label12.Text = "备注";
+            // 
             // Frm设置单价
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 146);
+            this.ClientSize = new System.Drawing.Size(358, 182);
+            this.Controls.Add(this.txtMemo);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.pnlTax);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOk);
@@ -156,5 +180,7 @@
         private System.Windows.Forms.Panel pnlTax;
         private System.Windows.Forms.RadioButton rdWithTax;
         private System.Windows.Forms.RadioButton rdWithoutTax;
+        private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -21,7 +21,7 @@ namespace LJH.Inventory.BLL
         private readonly string _成本类型 = "成本类型";
 
         #region 保护方法
-        protected virtual void SaveReceivable(ProductInventoryItem sheet, CostItem ci, DateTime? dt, IUnitWork unitWork)
+        protected virtual void SaveReceivable(ProductInventoryItem sheet, CostItem ci, DateTime? dt, string memo, IUnitWork unitWork)
         {
             CustomerReceivable cr = null;
             CustomerReceivable original = null;
@@ -55,10 +55,12 @@ namespace LJH.Inventory.BLL
             }
             cr.CustomerID = ci.SupllierID;
             cr.OrderID = sheet.PurchaseID;
+            if (!string.IsNullOrEmpty(memo)) cr.Memo = memo;
             cr.SetProperty(_成本类型, ci.Name);
             cr.SetProperty("规格", sheet.Product.Specification);
+            cr.SetProperty("入库单价", ci.Price.ToString("F2"));
             cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
-            if (ci.Name == CostItem.入库单价) cr.SetProperty("入库单价", sheet.GetCost(CostItem.入库单价) != null ? sheet.GetCost(CostItem.入库单价).Price.ToString("F2") : null);
+            cr.SetProperty("费用类别", ci.Name);
             if (!string.IsNullOrEmpty(sheet.Customer)) cr.SetProperty("购货单位", sheet.Customer);
             decimal amount = sheet.CalReceivable(ci);
             if (original != null && original.Haspaid > amount) new AccountRecordAssignBLL(RepoUri).UndoAssign(cr, cr.Haspaid - amount);  //这里用cr,如果用original后面更新的时候会更新不到
@@ -74,7 +76,7 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        protected virtual void SaveTax(ProductInventoryItem sheet, CostItem ci, DateTime? dt, IUnitWork unitWork)
+        protected virtual void SaveTax(ProductInventoryItem sheet, CostItem ci, DateTime? dt, string memo, IUnitWork unitWork)
         {
             CustomerReceivable cr = null;
             CustomerReceivable original = null;
@@ -108,10 +110,11 @@ namespace LJH.Inventory.BLL
             }
             cr.CustomerID = ci.SupllierID;
             cr.OrderID = sheet.PurchaseID;
+            if (!string.IsNullOrEmpty(memo)) cr.Memo = memo;
             cr.SetProperty(_成本类型, ci.Name);
             cr.SetProperty("规格", sheet.Product.Specification);
+            cr.SetProperty("入库单价", ci.Price.ToString("F2"));
             cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
-            if (ci.Name == CostItem.入库单价) cr.SetProperty("入库单价", sheet.GetCost(CostItem.入库单价) != null ? sheet.GetCost(CostItem.入库单价).Price.ToString("F2") : null);
             if (!string.IsNullOrEmpty(sheet.Customer)) cr.SetProperty("购货单位", sheet.Customer);
             decimal amount = sheet.CalTax(ci);
             if (original != null && original.Haspaid > amount) new AccountRecordAssignBLL(RepoUri).UndoAssign(cr, cr.Haspaid - amount); //这里用cr,如果用original后面更新的时候会更新不到
@@ -144,8 +147,8 @@ namespace LJH.Inventory.BLL
                     if (s != null && ci != null)
                     {
                         var dt = DateTime.Now;
-                        SaveReceivable(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        SaveTax(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        SaveReceivable(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second),null, unitWork);
+                        SaveTax(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second),null, unitWork);
                     }
                 }
                 return unitWork.Commit();
@@ -172,8 +175,8 @@ namespace LJH.Inventory.BLL
                     if (s != null && ci != null)
                     {
                         DateTime dt = DateTime.Now;
-                        SaveReceivable(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
-                        SaveTax(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), unitWork);
+                        SaveReceivable(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
+                        SaveTax(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
                     }
                 }
                 return unitWork.Commit();
@@ -293,7 +296,7 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult 设置成本(ProductInventoryItem info, CostItem ci, string opt, string logID)
+        public CommandResult 设置成本(ProductInventoryItem info, CostItem ci, string opt, string logID, string 备注)
         {
             try
             {
@@ -316,8 +319,8 @@ namespace LJH.Inventory.BLL
                     if (s != null)
                     {
                         var dt = ci.Name == CostItem.入库单价 ? new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) : DateTime.Now;
-                        SaveReceivable(clone, ci, dt, unitWork);
-                        SaveTax(clone, ci, dt, unitWork);
+                        SaveReceivable(clone, ci, dt, 备注, unitWork);
+                        SaveTax(clone, ci, dt, 备注, unitWork);
                     }
                 }
                 var ret = unitWork.Commit();

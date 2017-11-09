@@ -535,7 +535,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void mnu_设置结算单价_Click(object sender, EventArgs e)
+        private void mnu_设置入库单价_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
             Frm设置单价 frm = new Frm设置单价();
@@ -545,7 +545,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     var pi = row.Tag as ProductInventoryItem;
                     var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.结算单价, WithTax = frm.WithTax, SupllierID = pi.Supplier };
-                    var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID);
+                    var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);
@@ -558,17 +558,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void mnu_修改入库单价_Click(object sender, EventArgs e)
+        private void mnu_设置其它成本_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
             FrmChangeCosts frm = new FrmChangeCosts();
+            frm.chk总金额.Enabled = dataGridView1.SelectedRows.Count == 1;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 var ci = frm.Cost;
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID);
+                    if (frm.chk总金额.Checked && pi.CostID.HasValue)
+                    {
+                        var f = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(pi.CostID.Value).QueryObject;
+                        if (pi.OriginalWeight > 0) ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
+                    }
+                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);
