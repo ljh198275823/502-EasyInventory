@@ -598,11 +598,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
                 ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                DocumentSearchCondition con = new DocumentSearchCondition() { DocumentID = sr.ID.ToString() };
-                Frm修改记录日志明细 frm = new Frm修改记录日志明细();
-                frm.SearchCondition = con;
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.ShowDialog();
+                if (sr.CostID.HasValue)
+                {
+                    DocumentSearchCondition con = new DocumentSearchCondition() { DocumentID = sr.CostID.Value.ToString() };
+                    Frm修改记录日志明细 frm = new Frm修改记录日志明细();
+                    frm.SearchCondition = con;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowDialog();
+                }
             }
         }
 

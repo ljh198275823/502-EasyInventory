@@ -308,7 +308,7 @@ namespace LJH.Inventory.BLL
                 memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
                 clone.SetCost(ci);
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
-                AddOperationLog(pi.ID.ToString(), pi.DocumentType, "修改单价", unitWork, DateTime.Now, opt, logID, memo);
+                AddOperationLog(pi.ID.ToString(), pi.DocumentType, "修改成本", unitWork, DateTime.Now, opt, logID, memo);
 
                 if (!string.IsNullOrEmpty(ci.SupllierID) && pi.SourceID == null && pi.SourceRoll == null)
                 {
