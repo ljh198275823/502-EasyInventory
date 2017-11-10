@@ -568,13 +568,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 var ci = frm.Cost;
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
+                    decimal? 总额 = null;
                     var pi = row.Tag as ProductInventoryItem;
                     if (frm.chk总金额.Checked && pi.CostID.HasValue)
                     {
+                        总额 = ci.Price;
                         var f = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(pi.CostID.Value).QueryObject;
                         if (pi.OriginalWeight > 0) ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
                     }
-                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
+                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo, 总额);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);

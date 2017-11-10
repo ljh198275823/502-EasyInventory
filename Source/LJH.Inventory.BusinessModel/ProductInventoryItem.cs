@@ -256,7 +256,7 @@ namespace LJH.Inventory.BusinessModel
 
         public List<CostItem> GetAllCosts()
         {
-            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) return  JsonConvert.DeserializeObject<List<CostItem>>(Costs);
+            if (_CostItems == null && !string.IsNullOrEmpty(Costs)) return JsonConvert.DeserializeObject<List<CostItem>>(Costs);
             if (_CostItems != null) return _CostItems.ToList();
             return null;
         }
@@ -272,22 +272,22 @@ namespace LJH.Inventory.BusinessModel
 
         public decimal CalReceivable(CostItem ci)
         {
-            if (OriginalWeight > 0) return OriginalWeight.Value * ci.Price;
-            else if (Model == ProductModel.其它产品) return OriginalCount.Value * ci.Price;
+            if (OriginalWeight > 0) return Math.Round(OriginalWeight.Value * ci.Price, 2);
+            else if (Model == ProductModel.其它产品) return Math.Round(OriginalCount.Value * ci.Price, 2);
             return 0;
         }
 
         public decimal CalTax(CostItem ci)
         {
             if (ci == null || ci.WithTax == false) return 0; //不含税
-            if (OriginalWeight > 0) return OriginalWeight.Value * ci.Price;
-            else if (Model == ProductModel.其它产品) return OriginalCount.Value * ci.Price;
+            if (OriginalWeight > 0) return Math.Round(OriginalWeight.Value * ci.Price, 2);
+            else if (Model == ProductModel.其它产品) return Math.Round(OriginalCount.Value * ci.Price, 2);
             return 0;
         }
 
         public decimal CalCost(bool withTax, decimal txtRate)
         {
-            return CalUnitCost(withTax, txtRate) * Count;
+            return Math.Round(CalUnitCost(withTax, txtRate) * Count, 2);
         }
 
         public decimal CalUnitCost(bool withTax, decimal txtRate)
@@ -311,7 +311,7 @@ namespace LJH.Inventory.BusinessModel
                     else if (!withTax && !fc.WithTax) ret += uw.Value * fc.Price;
                 }
             }
-            return ret;
+            return Math.Round(ret, 2);
         }
         #endregion
 

@@ -93,7 +93,7 @@
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(1159, 259);
+            this.GridView.Size = new System.Drawing.Size(991, 310);
             this.GridView.TabIndex = 22;
             this.GridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
             // 
@@ -124,16 +124,16 @@
             this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblMSG});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 356);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 407);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1159, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(991, 22);
             this.statusStrip1.TabIndex = 25;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblMSG
             // 
             this.lblMSG.Name = "lblMSG";
-            this.lblMSG.Size = new System.Drawing.Size(1144, 17);
+            this.lblMSG.Size = new System.Drawing.Size(976, 17);
             this.lblMSG.Spring = true;
             this.lblMSG.Text = "共 0 项";
             // 
@@ -200,6 +200,7 @@
             // 
             // colCreateDate
             // 
+            this.colCreateDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle1.Format = "D";
             dataGridViewCellStyle1.NullValue = null;
             this.colCreateDate.DefaultCellStyle = dataGridViewCellStyle1;
@@ -207,41 +208,49 @@
             this.colCreateDate.Name = "colCreateDate";
             this.colCreateDate.ReadOnly = true;
             this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCreateDate.Width = 35;
             // 
             // col单价
             // 
             this.col单价.HeaderText = "单价";
             this.col单价.Name = "col单价";
             this.col单价.ReadOnly = true;
-            this.col单价.Width = 60;
+            this.col单价.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.col单价.Width = 50;
             // 
             // col重量
             // 
             this.col重量.HeaderText = "重量";
             this.col重量.Name = "col重量";
             this.col重量.ReadOnly = true;
-            this.col重量.Width = 60;
+            this.col重量.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.col重量.Width = 50;
             // 
             // colAmount
             // 
+            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle2.Format = "C2";
             this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colAmount.Width = 35;
             // 
             // colHaspaid
             // 
+            this.colHaspaid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle3.Format = "C2";
             this.colHaspaid.DefaultCellStyle = dataGridViewCellStyle3;
             this.colHaspaid.HeaderText = "已支付";
             this.colHaspaid.Name = "colHaspaid";
             this.colHaspaid.ReadOnly = true;
             this.colHaspaid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colHaspaid.Width = 47;
             // 
             // colNotPaid
             // 
+            this.colNotPaid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle4.Format = "C2";
             dataGridViewCellStyle4.NullValue = null;
             this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle4;
@@ -249,42 +258,50 @@
             this.colNotPaid.Name = "colNotPaid";
             this.colNotPaid.ReadOnly = true;
             this.colNotPaid.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colNotPaid.Width = 47;
             // 
             // colHowold
             // 
+            this.colHowold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colHowold.HeaderText = "账龄";
             this.colHowold.Name = "colHowold";
             this.colHowold.ReadOnly = true;
             this.colHowold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHowold.Width = 35;
             // 
             // colOrderID
             // 
+            this.colOrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colOrderID.HeaderText = "合同号";
             this.colOrderID.Name = "colOrderID";
             this.colOrderID.ReadOnly = true;
             this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colOrderID.Width = 120;
+            this.colOrderID.Width = 47;
             // 
             // col购货单位
             // 
-            this.col购货单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col购货单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.col购货单位.HeaderText = "购货单位";
             this.col购货单位.Name = "col购货单位";
             this.col购货单位.ReadOnly = true;
-            this.col购货单位.Width = 78;
+            this.col购货单位.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.col购货单位.Width = 59;
             // 
             // col申请人
             // 
+            this.col申请人.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.col申请人.HeaderText = "申请人";
             this.col申请人.Name = "col申请人";
             this.col申请人.ReadOnly = true;
             this.col申请人.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.col申请人.Width = 47;
             // 
             // col类别
             // 
             this.col类别.HeaderText = "类别";
             this.col类别.Name = "col类别";
             this.col类别.ReadOnly = true;
+            this.col类别.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.col类别.Width = 80;
             // 
             // colMemo
@@ -299,7 +316,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1159, 378);
+            this.ClientSize = new System.Drawing.Size(991, 429);
             this.Controls.Add(this.txtKeyword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnLast3Month);
