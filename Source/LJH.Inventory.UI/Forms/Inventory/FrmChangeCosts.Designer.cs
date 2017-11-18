@@ -43,6 +43,8 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label12 = new System.Windows.Forms.Label();
             this.chk总金额 = new System.Windows.Forms.CheckBox();
+            this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
+            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // rdWithTax
@@ -195,11 +197,30 @@
             this.chk总金额.Text = "总金额";
             this.chk总金额.UseVisualStyleBackColor = true;
             // 
+            // txtCarPlate
+            // 
+            this.txtCarPlate.FormattingEnabled = true;
+            this.txtCarPlate.Location = new System.Drawing.Point(265, 22);
+            this.txtCarPlate.Name = "txtCarPlate";
+            this.txtCarPlate.Size = new System.Drawing.Size(126, 20);
+            this.txtCarPlate.TabIndex = 173;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(220, 26);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(41, 12);
+            this.label13.TabIndex = 172;
+            this.label13.Text = "车皮号";
+            // 
             // FrmChangeCosts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(416, 239);
+            this.Controls.Add(this.txtCarPlate);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.chk总金额);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label12);
@@ -239,5 +260,7 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.Label label12;
         public System.Windows.Forms.CheckBox chk总金额;
+        private Controls.CarplateComboBox txtCarPlate;
+        private System.Windows.Forms.Label label13;
     }
 }

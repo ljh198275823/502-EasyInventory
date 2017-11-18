@@ -288,7 +288,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CustomerFinancialState customerState = dataGridView1.SelectedRows[0].Tag as CustomerFinancialState;
-                if (customerState.Recievables > 0)
+                if (customerState.Tax > 0)
                 {
                     CompanyInfo customer = customerState.Customer;
                     List<int> exludes = new List<int>();

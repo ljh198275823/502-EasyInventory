@@ -334,10 +334,20 @@ namespace LJH.Inventory.UI.Forms.Financial
                 var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 if (ar != null)
                 {
-                    FrmPaymentAssign frm = new FrmPaymentAssign();
-                    frm.AccountRecord = ar;
-                    this.Close();
-                    frm.ShowDialog();
+                    if (ar.ClassID == CustomerPaymentType.供应商付款)
+                    {
+                        FrmSupplierPaymentAssign frm = new FrmSupplierPaymentAssign();
+                        frm.AccountRecord = ar;
+                        this.Close();
+                        frm.ShowDialog();
+                    }
+                    else
+                    {
+                        FrmPaymentAssign frm = new FrmPaymentAssign();
+                        frm.AccountRecord = ar;
+                        this.Close();
+                        frm.ShowDialog();
+                    }
                 }
             }
         }

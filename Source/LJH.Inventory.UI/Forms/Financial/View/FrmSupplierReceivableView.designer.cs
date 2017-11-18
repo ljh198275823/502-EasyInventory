@@ -47,6 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col类别 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col重量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,7 +57,7 @@
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col购货单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col申请人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col类别 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col车皮号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -76,6 +77,7 @@
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetID,
             this.colCreateDate,
+            this.col类别,
             this.col单价,
             this.col重量,
             this.colAmount,
@@ -85,7 +87,7 @@
             this.colOrderID,
             this.col购货单位,
             this.col申请人,
-            this.col类别,
+            this.col车皮号,
             this.colMemo});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
             this.GridView.Location = new System.Drawing.Point(0, 94);
@@ -210,6 +212,14 @@
             this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colCreateDate.Width = 35;
             // 
+            // col类别
+            // 
+            this.col类别.HeaderText = "类别";
+            this.col类别.Name = "col类别";
+            this.col类别.ReadOnly = true;
+            this.col类别.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.col类别.Width = 80;
+            // 
             // col单价
             // 
             this.col单价.HeaderText = "单价";
@@ -296,13 +306,13 @@
             this.col申请人.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.col申请人.Width = 47;
             // 
-            // col类别
+            // col车皮号
             // 
-            this.col类别.HeaderText = "类别";
-            this.col类别.Name = "col类别";
-            this.col类别.ReadOnly = true;
-            this.col类别.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.col类别.Width = 80;
+            this.col车皮号.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col车皮号.HeaderText = "车皮号";
+            this.col车皮号.Name = "col车皮号";
+            this.col车皮号.ReadOnly = true;
+            this.col车皮号.Width = 66;
             // 
             // colMemo
             // 
@@ -353,6 +363,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col类别;
         private System.Windows.Forms.DataGridViewTextBoxColumn col单价;
         private System.Windows.Forms.DataGridViewTextBoxColumn col重量;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
@@ -362,7 +373,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col购货单位;
         private System.Windows.Forms.DataGridViewTextBoxColumn col申请人;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col类别;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col车皮号;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

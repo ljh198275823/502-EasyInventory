@@ -576,7 +576,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         var f = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(pi.CostID.Value).QueryObject;
                         if (pi.OriginalWeight > 0) ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
                     }
-                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo, 总额);
+                    var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo, 总额, frm.CarPlate);
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowItemInGridViewRow(row, pi);

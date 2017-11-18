@@ -92,7 +92,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 if (ItemsGrid.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
                     CustomerReceivable cr = ItemsGrid.Rows[e.RowIndex].Cells["colSheetID"].Tag as CustomerReceivable;
-                    if (cr.ClassID  == CustomerReceivableType.CustomerReceivable)
+                    if (cr.ClassID == CustomerReceivableType.CustomerReceivable)
                     {
                         var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
                         if (sheet != null)
@@ -126,7 +126,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             }
                         }
                     }
-                    else if (cr.ClassID  == CustomerReceivableType.SupplierReceivable)
+                    else if (cr.ClassID == CustomerReceivableType.SupplierReceivable)
                     {
                         Guid gid;
                         if (Guid.TryParse(cr.SheetID, out gid))
@@ -167,6 +167,17 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                                 frm.UpdatingItem = osheet;
                                 frm.ShowDialog();
                             }
+                            else
+                            {
+                                CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(cr.SheetID ).QueryObject;
+                                if (cp != null && cp.ClassID == CustomerPaymentType.公司管理费用)
+                                {
+                                    Frm管理费用明细 frm = new Frm管理费用明细();
+                                    frm.IsAdding = false;
+                                    frm.UpdatingItem = cp;
+                                    frm.ShowDialog();
+                                }
+                            }
                         }
                     }
                 }
@@ -198,6 +209,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             frm.IsAdding = false;
                             frm.UpdatingItem = cp;
                             frm.TaxType = cp.ClassID;
+                            frm.ShowDialog();
+                        }
+                        else if (cp.ClassID ==CustomerPaymentType .公司管理费用)
+                        {
+                            Frm管理费用明细 frm = new Frm管理费用明细();
+                            frm.IsAdding = false;
+                            frm.UpdatingItem = cp;
                             frm.ShowDialog();
                         }
                     }

@@ -123,10 +123,20 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 AccountRecord ar = dataGridView1.SelectedRows[0].Tag as AccountRecord;
-                FrmPaymentAssign frm = new FrmPaymentAssign();
-                frm.AccountRecord = ar;
-                frm.ShowDialog();
-                FreshData();
+                if (ar.ClassID == CustomerPaymentType.供应商付款)
+                {
+                    FrmSupplierPaymentAssign frm = new FrmSupplierPaymentAssign();
+                    frm.AccountRecord = ar;
+                    this.Close();
+                    frm.ShowDialog();
+                }
+                else
+                {
+                    FrmPaymentAssign frm = new FrmPaymentAssign();
+                    frm.AccountRecord = ar;
+                    frm.ShowDialog();
+                    FreshData();
+                }
             }
         }
 
@@ -149,7 +159,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
                         frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
-                        frm.PaymentType = CustomerPaymentType.客户收款;
+                        frm.PaymentType = sheet.ClassID;
                         frm.ShowDialog();
                         FreshData();
                     }

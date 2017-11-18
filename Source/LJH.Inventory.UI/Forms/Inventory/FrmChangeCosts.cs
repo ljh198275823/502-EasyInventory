@@ -31,9 +31,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             set { txtMemo.Text = value; }
         }
 
+        public string CarPlate
+        {
+            get { return txtCarPlate.Text; }
+            set { txtCarPlate.Text = value; }
+        }
+
         private void FrmChangeCosts_Load(object sender, EventArgs e)
         {
-
+            txtCarPlate.Init();
         }
 
         private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

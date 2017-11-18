@@ -221,22 +221,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             PerformOperation<CustomerPayment>(processor, SheetOperation.UndoApprove);
         }
 
-        private void btnPayment_Click(object sender, EventArgs e)
-        {
-            if (UpdatingItem != null)
-            {
-                var cp = UpdatingItem as CustomerPayment;
-                var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                if (ar != null)
-                {
-                    FrmPaymentAssign frm = new FrmPaymentAssign();
-                    frm.AccountRecord = ar;
-                    this.Close();
-                    frm.ShowDialog();
-                }
-            }
-        }
-
         private void btnNullify_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);

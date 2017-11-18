@@ -76,6 +76,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["col申请人"].Value = cr.GetProperty("申请人");
             row.Cells["col购货单位"].Value = cr.GetProperty("购货单位");
             row.Cells["col类别"].Value = cr.GetProperty("费用类别");
+            row.Cells["col车皮号"].Value = cr.GetProperty("车皮号");
             row.Cells["colMemo"].Value = cr.Memo;
         }
 

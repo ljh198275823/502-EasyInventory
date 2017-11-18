@@ -100,6 +100,12 @@
     <Compile Include="Forms\Financial\FrmExpenditureRecordMaster.designer.cs">
       <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\FrmSupplierPaymentAssign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\FrmSupplierPaymentAssign.designer.cs">
+      <DependentUpon>FrmSupplierPaymentAssign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\Frm其它应收明细.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -768,6 +774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmExpenditureRecordMaster.resx">
       <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\FrmSupplierPaymentAssign.resx">
+      <DependentUpon>FrmSupplierPaymentAssign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Frm其它应收明细.resx">
       <DependentUpon>Frm其它应收明细.cs</DependentUpon>

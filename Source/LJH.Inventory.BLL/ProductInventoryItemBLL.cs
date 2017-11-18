@@ -21,7 +21,7 @@ namespace LJH.Inventory.BLL
         private readonly string _成本类型 = "成本类型";
 
         #region 保护方法
-        protected virtual void SaveReceivable(ProductInventoryItem sheet, CostItem ci, DateTime? dt, string memo, IUnitWork unitWork, decimal? 总额 = null)
+        protected virtual void SaveReceivable(ProductInventoryItem sheet, CostItem ci, DateTime? dt, string memo, IUnitWork unitWork, decimal? 总额 = null, string carPlate = null)
         {
             CustomerReceivable cr = null;
             CustomerReceivable original = null;
@@ -62,6 +62,7 @@ namespace LJH.Inventory.BLL
             cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
             cr.SetProperty("费用类别", ci.Name);
             if (!string.IsNullOrEmpty(sheet.Customer)) cr.SetProperty("购货单位", sheet.Customer);
+            if (!string.IsNullOrEmpty(carPlate)) cr.SetProperty("车皮号", carPlate);
             decimal amount = 总额.HasValue ? 总额.Value : sheet.CalReceivable(ci);
             if (original != null && original.Haspaid > amount) new AccountRecordAssignBLL(RepoUri).UndoAssign(cr, cr.Haspaid - amount);  //这里用cr,如果用original后面更新的时候会更新不到
             cr.Amount = amount;
@@ -76,7 +77,7 @@ namespace LJH.Inventory.BLL
             }
         }
 
-        protected virtual void SaveTax(ProductInventoryItem sheet, CostItem ci, DateTime? dt, string memo, IUnitWork unitWork, decimal? 总额 = null)
+        protected virtual void SaveTax(ProductInventoryItem sheet, CostItem ci, DateTime? dt, string memo, IUnitWork unitWork, decimal? 总额 = null, string carPlate = null)
         {
             CustomerReceivable cr = null;
             CustomerReceivable original = null;
@@ -116,6 +117,7 @@ namespace LJH.Inventory.BLL
             cr.SetProperty("入库单价", ci.Price.ToString("F2"));
             cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
             if (!string.IsNullOrEmpty(sheet.Customer)) cr.SetProperty("购货单位", sheet.Customer);
+            if (!string.IsNullOrEmpty(carPlate)) cr.SetProperty("车皮号", carPlate);
             decimal amount = 总额.HasValue ? 总额.Value : sheet.CalTax(ci);
             if (original != null && original.Haspaid > amount) new AccountRecordAssignBLL(RepoUri).UndoAssign(cr, cr.Haspaid - amount); //这里用cr,如果用original后面更新的时候会更新不到
             cr.Amount = amount;
@@ -296,7 +298,7 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult 设置成本(ProductInventoryItem info, CostItem ci, string opt, string logID, string 备注, decimal? 总额 = null)
+        public CommandResult 设置成本(ProductInventoryItem info, CostItem ci, string opt, string logID, string 备注, decimal? 总额 = null, string carPlate = null)
         {
             try
             {
@@ -319,8 +321,8 @@ namespace LJH.Inventory.BLL
                     if (s != null)
                     {
                         var dt = ci.Name == CostItem.入库单价 ? new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) : DateTime.Now;
-                        SaveReceivable(clone, ci, dt, 备注, unitWork, 总额);
-                        SaveTax(clone, ci, dt, 备注, unitWork, 总额);
+                        SaveReceivable(clone, ci, dt, 备注, unitWork, 总额, carPlate);
+                        SaveTax(clone, ci, dt, 备注, unitWork, 总额, carPlate);
                     }
                 }
                 var ret = unitWork.Commit();

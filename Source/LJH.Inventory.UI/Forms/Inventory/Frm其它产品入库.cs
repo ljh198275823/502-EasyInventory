@@ -41,6 +41,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             cmbSpecification.Init(new List<string> { ProductModel.其它产品 });
             dtStorageDateTime.Value = DateTime.Now;
+            txtCarPlate.Init();
             if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultWarehouse))
             {
                 List<WareHouse> ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
@@ -319,7 +320,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (txt运费.DecimalValue > 0)
                 {
                     var ci = new CostItem() { Name = CostItem.运费, Price = txt运费.DecimalValue, WithTax = rdWithTax_运费.Checked, SupllierID = (txtSupplier运费.Tag as CompanyInfo).ID };
-                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(SteelRollSlice, ci, Operator.Current.Name, Operator.Current.ID,null);
+                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(SteelRollSlice, ci, Operator.Current.Name, Operator.Current.ID, null, null, txtCarPlate.Text);
                 }
 
                 if (isAdding) //新增
