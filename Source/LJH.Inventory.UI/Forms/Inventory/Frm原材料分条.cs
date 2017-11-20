@@ -93,6 +93,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (!CheckInput()) return;
+            string formula = string.Empty;
             var items = new List<int>();
             if (txtWidth1.IntergerValue > 0 && txtCount1.IntergerValue > 0)
             {
@@ -100,6 +101,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     items.Add(txtWidth1.IntergerValue);
                 }
+                formula += string.Format("{0}*{1}+", txtWidth1.IntergerValue, txtCount1.IntergerValue);
             }
             if (txtWidth2.IntergerValue > 0 && txtCount2.IntergerValue > 0)
             {
@@ -107,6 +109,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     items.Add(txtWidth2.IntergerValue);
                 }
+                formula += string.Format("{0}*{1}+", txtWidth2.IntergerValue, txtCount2.IntergerValue);
             }
             if (txtWidth3.IntergerValue > 0 && txtCount3.IntergerValue > 0)
             {
@@ -114,6 +117,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     items.Add(txtWidth3.IntergerValue);
                 }
+                formula += string.Format("{0}*{1}+", txtWidth3.IntergerValue, txtCount3.IntergerValue);
             }
             if (txtWidth4.IntergerValue > 0 && txtCount4.IntergerValue > 0)
             {
@@ -121,6 +125,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     items.Add(txtWidth4.IntergerValue);
                 }
+                formula += string.Format("{0}*{1}+", txtWidth4.IntergerValue, txtCount4.IntergerValue);
             }
             if (txtWidth5.IntergerValue > 0 && txtCount5.IntergerValue > 0)
             {
@@ -128,10 +133,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     items.Add(txtWidth5.IntergerValue);
                 }
+                formula += string.Format("{0}*{1}+", txtWidth5.IntergerValue, txtCount5.IntergerValue);
             }
-            if (txtRemain.IntergerValue > 0) items.Add(txtRemain.IntergerValue);
+            if (txtRemain.IntergerValue > 0)
+            {
+                items.Add(txtRemain.IntergerValue);
+                formula += string.Format("{0}+", txtRemain.IntergerValue);
+            }
+            formula = formula.TrimEnd('+') + " = " + SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification);
             List<ProductInventoryItem> newrolls;
-            var ret = new SteelRollBLL(AppSettings.Current.ConnStr).原材料拆条(SlicingItem, items, out newrolls);
+            var ret = new SteelRollBLL(AppSettings.Current.ConnStr).原材料拆条(SlicingItem, items, formula, out newrolls);
             if (ret.Result == ResultCode.Successful)
             {
                 NewRolls = newrolls;

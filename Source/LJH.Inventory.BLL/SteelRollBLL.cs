@@ -129,6 +129,7 @@ namespace LJH.Inventory.BLL
             con1.InventoryItem = sliceSheet.ID;
             List<ProductInventoryItem> pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con1).QueryObjects;
             if (pis != null && pis.Exists(it => it.State != ProductInventoryState.Inventory && it.State != ProductInventoryState.Reserved)) return new CommandResult(ResultCode.Fail, "加工的某些小件已经出货或待出货，不能撤回此次加工");
+            if (pis != null && pis.Exists(it => it.Model == ProductModel.原材料 && it.Status != "整卷")) return new CommandResult(ResultCode.Fail, "部分开条后的卷已经加工，不能撤销此次加工");
 
             SliceRecordSearchCondition con = new SliceRecordSearchCondition();
             con.SourceRoll = sliceSheet.SliceSource;
@@ -292,13 +293,36 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult 原材料拆条(ProductInventoryItem sr, List<int> items, out List<ProductInventoryItem> newRolls)
+        public CommandResult 原材料拆条(ProductInventoryItem sr, List<int> items, string formula, out List<ProductInventoryItem> newRolls)
         {
             newRolls = null;
             if (items == null || items.Count == 0) return new CommandResult(ResultCode.Fail, "没有指定分条规格");
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var sum = items.Sum();
             var weight = sr.Weight;
+
+            SteelRollSliceRecord record = new SteelRollSliceRecord()
+            {
+                ID = Guid.NewGuid(),
+                SliceDate = DateTime.Now,
+                SliceSource = sr.ID,
+                SourceRollWeight = sr.OriginalWeight,
+                Category = sr.Product.Category.Name,
+                Specification = sr.Product.Specification,
+                SliceType = "开条",
+                BeforeWeight = sr.Weight.Value,
+                BeforeLength = ProductInventoryItem.CalLength(sr.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(sr.Product.Specification).Value, sr.Weight.Value, sr.Product.Density.Value),
+                Customer = sr.Customer,
+                Slicer = string.Empty,
+                Warehouse = string.Empty,
+                Operator = Operator.Current.Name,
+                AfterLength = 0,
+                AfterWeight = 0,
+                Count = items.Count,
+                Memo = "开条:" + string.Format("{0}", formula),
+            };
+            ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Insert(record, unitWork);
+
             foreach (var it in items)
             {
                 var newR = sr.Clone();
@@ -315,15 +339,17 @@ namespace LJH.Inventory.BLL
                 newR.OriginalWeight = weight * it / sum;
                 newR.Weight = weight * it / sum;
                 newR.CostID = sr.CostID.HasValue ? sr.CostID.Value : sr.ID;
-                newR.InventorySheet = "分条";
+                newR.InventoryItem = record.ID;
                 newR.Memo = "分条";
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newR, unitWork);
                 if (newRolls == null) newRolls = new List<ProductInventoryItem>();
                 newRolls.Add(newR);
             }
+
             var clone = sr.Clone();
             clone.Weight = 0;
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
+
             var ret = unitWork.Commit();
             if (ret.Result == ResultCode.Successful)
             {

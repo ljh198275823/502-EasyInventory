@@ -646,6 +646,36 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
             }
         }
+
+        private void mnu_撤销分条_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                if (sr.State == ProductInventoryState.Inventory && (sr.Status == "整卷" || sr.Status == "余卷"))
+                {
+                    Frm原材料分条 frm = new Frm原材料分条();
+                    frm.SlicingItem = sr;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                        var newR = frm.NewRolls;
+                        _SteelRolls.AddRange(newR);
+                        var row = dataGridView1.SelectedRows[0].Index;
+                        foreach (var item in newR)
+                        {
+                            dataGridView1.Rows.Insert(row, 1);
+                            ShowItemInGridViewRow(dataGridView1.Rows[row], item);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行加工", ProductInventoryStateDescription.GetDescription(sr.State)));
+                }
+            }
+        }
         #endregion
     }
 }
