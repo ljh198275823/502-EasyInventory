@@ -77,6 +77,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                     if (con.HasWeight.Value) ret = ret.Where(it => it.A.Weight > 0);
                     else ret = ret.Where(it => it.A.Weight == 0);
                 }
+                if (con.CostID.HasValue) ret = ret.Where(it => it.A.CostID == con.CostID.Value);
             }
             var items = ret.ToList();
             if (items != null && items.Count > 0)

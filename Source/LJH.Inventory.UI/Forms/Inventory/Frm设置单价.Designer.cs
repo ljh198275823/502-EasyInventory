@@ -39,6 +39,8 @@
             this.rdWithoutTax = new System.Windows.Forms.RadioButton();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label12 = new System.Windows.Forms.Label();
+            this.txtSupplier = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkSupplier = new System.Windows.Forms.LinkLabel();
             this.pnlTax.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +78,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(197, 118);
+            this.btnClose.Location = new System.Drawing.Point(197, 184);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 41);
             this.btnClose.TabIndex = 102;
@@ -87,7 +89,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(75, 118);
+            this.btnOk.Location = new System.Drawing.Point(75, 184);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 41);
             this.btnOk.TabIndex = 101;
@@ -147,11 +149,35 @@
             this.label12.TabIndex = 168;
             this.label12.Text = "备注";
             // 
+            // txtSupplier
+            // 
+            this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSupplier.Location = new System.Drawing.Point(87, 115);
+            this.txtSupplier.Name = "txtSupplier";
+            this.txtSupplier.ReadOnly = true;
+            this.txtSupplier.Size = new System.Drawing.Size(255, 21);
+            this.txtSupplier.TabIndex = 170;
+            this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
+            // 
+            // lnkSupplier
+            // 
+            this.lnkSupplier.AutoSize = true;
+            this.lnkSupplier.LinkColor = System.Drawing.Color.Red;
+            this.lnkSupplier.Location = new System.Drawing.Point(16, 119);
+            this.lnkSupplier.Name = "lnkSupplier";
+            this.lnkSupplier.Size = new System.Drawing.Size(65, 12);
+            this.lnkSupplier.TabIndex = 169;
+            this.lnkSupplier.TabStop = true;
+            this.lnkSupplier.Text = "修改供应商";
+            this.lnkSupplier.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_LinkClicked);
+            // 
             // Frm设置单价
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 182);
+            this.ClientSize = new System.Drawing.Size(358, 248);
+            this.Controls.Add(this.txtSupplier);
+            this.Controls.Add(this.lnkSupplier);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.pnlTax);
@@ -182,5 +208,7 @@
         private System.Windows.Forms.RadioButton rdWithoutTax;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.Label label12;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;
+        private System.Windows.Forms.LinkLabel lnkSupplier;
     }
 }

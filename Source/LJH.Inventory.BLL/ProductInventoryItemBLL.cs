@@ -312,7 +312,26 @@ namespace LJH.Inventory.BLL
                 var oci = pi.GetCost(ci.Name);
                 memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
                 clone.SetCost(ci);
+                if (ci.Name == CostItem.入库单价 && clone.Supplier != ci.SupllierID)  //2017-11-28 修改入库单价时，如果同时修改了
+                {
+                    clone.Supplier = ci.SupllierID; 
+                    var pcon = new ProductInventoryItemSearchCondition() { CostID = clone.CostID };
+                    var pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(pcon).QueryObjects;
+                    if (pis != null && pis.Count > 0)
+                    {
+                        foreach (var fpi in pis)
+                        {
+                            if (fpi.ID != pi.ID)
+                            {
+                                var fpiClone = fpi.Clone();
+                                fpiClone.Supplier = ci.SupllierID;
+                                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(fpiClone, fpi, unitWork);
+                            }
+                        }
+                    }
+                }
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
+
                 AddOperationLog(pi.ID.ToString(), pi.DocumentType, "修改成本", unitWork, DateTime.Now, opt, logID, memo);
 
                 if (!string.IsNullOrEmpty(ci.SupllierID) && pi.SourceID == null && pi.SourceRoll == null)
@@ -326,7 +345,11 @@ namespace LJH.Inventory.BLL
                     }
                 }
                 var ret = unitWork.Commit();
-                if (ret.Result == ResultCode.Successful) info.SetCost(ci);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    info.SetCost(ci);
+                    info.Supplier = clone.Supplier;
+                }
                 return ret;
             }
             catch (Exception ex)

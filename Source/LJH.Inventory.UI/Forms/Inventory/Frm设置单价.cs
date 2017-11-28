@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
@@ -32,9 +33,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        public string SupplierID
+        {
+            get { return txtSupplier.Tag != null ? (txtSupplier.Tag as CompanyInfo).ID : null; }
+        }
+
         public string Memo
         {
-            get{return txtMemo .Text ;}
+            get { return txtMemo.Text; }
             set
             {
                 txtMemo.Text = value;
@@ -59,6 +65,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Purchase.FrmSupplierMaster frm = new Purchase.FrmSupplierMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                CompanyInfo s = frm.SelectedItem as CompanyInfo;
+                txtSupplier.Text = s.Name;
+                txtSupplier.Tag = s;
+            }
+        }
+
+        private void txtSupplier_DoubleClick(object sender, EventArgs e)
+        {
+            txtSupplier.Tag = null;
+            txtSupplier.Text = string.Empty;
         }
     }
 }

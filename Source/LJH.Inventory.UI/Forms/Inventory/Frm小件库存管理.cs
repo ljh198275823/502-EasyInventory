@@ -404,7 +404,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     var pi = row.Tag as ProductInventoryItem;
                     if (pi.SourceRoll == null) //只有新建入库的才能改单价，
                     {
-                        var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.结算单价, WithTax = frm.WithTax, SupllierID = pi.Supplier };
+                        var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.结算单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
                         var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                         if (ret.Result == ResultCode.Successful)
                         {
