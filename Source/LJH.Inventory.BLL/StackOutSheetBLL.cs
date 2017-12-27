@@ -295,7 +295,9 @@ namespace LJH.Inventory.BLL
             List<ProductInventoryItem> cloneItems = new List<ProductInventoryItem>();
             List<ProductInventoryItem> deletingItems = new List<ProductInventoryItem>();
             var provider = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri);
-            foreach (var item in info.Items)  //将原材料的项的状态恢复到在库状态
+            var newVal = ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri).GetByID(info.ID).QueryObject;
+            if (newVal == null) throw new Exception("系统中不存在此送货单");
+            foreach (var item in newVal.Items)  //将原材料的项的状态恢复到在库状态
             {
                 if (item.InventoryItem.HasValue)
                 {
