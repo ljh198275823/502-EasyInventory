@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace LJH.Inventory.BusinessModel
 {
@@ -124,13 +125,57 @@ namespace LJH.Inventory.BusinessModel
             }
         }
         /// <summary>
-        /// 获取或设置备注描述
-        /// </summary>
-        public string Memo { get; set; }
-        /// <summary>
         /// 获取或设置出货商品项(如果要在列表中增删改项，请不要直接在此对象中操作，而是调用DeliverySheet类的方法)
         /// </summary>
         public List<StackOutItem> Items { get; set; }
+        #endregion
+
+        #region 扩展属性
+        /// <summary>
+        /// 获取或设置扩展属性
+        /// </summary>
+        public string _Memo { get; set; }
+
+        private Dictionary<string, string> _Externals = null;
+
+        public string GetProperty(string key)
+        {
+            if (_Externals == null && !string.IsNullOrEmpty(_Memo)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(_Memo);
+            if (_Externals == null) return null;
+            if (_Externals.ContainsKey(key)) return _Externals[key];
+            return null;
+        }
+
+        public void SetProperty(string key, string value)
+        {
+            if (_Externals == null && !string.IsNullOrEmpty(_Memo)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(_Memo);
+            if (_Externals == null) _Externals = new Dictionary<string, string>();
+            if (value == null && _Externals.ContainsKey(key)) _Externals.Remove(key);
+            else _Externals[key] = value;
+            _Memo = JsonConvert.SerializeObject(_Externals);
+        }
+
+        public void RemoveProperty(string key)
+        {
+            if (_Externals == null && !string.IsNullOrEmpty(_Memo)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(_Memo);
+            if (_Externals == null) return;
+            if (_Externals.ContainsKey(key)) _Externals.Remove(key);
+            _Memo = JsonConvert.SerializeObject(_Externals);
+        }
+        /// <summary>
+        /// 获取或设置备注信息
+        /// </summary>
+        public string Memo
+        {
+            get { return GetProperty("Memo"); }
+            set { SetProperty("Memo", value); }
+        }
+
+        public string 付款方式
+        {
+            get { return GetProperty("FKFS"); }
+            set { SetProperty("FKFS", value); }
+        }
         #endregion
 
         #region 只读属性

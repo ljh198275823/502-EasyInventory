@@ -31,12 +31,15 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
         /// </summary>
         public string modal;
 
+        private bool _ShowPrice = false;
+
         /// <summary>
         /// 导出信息到EXCEL中
         /// </summary>
         /// <param name="optLog"></param>
-        public List<string> Export(StackOutSheet info, string path, int itemsPerPage = 10, int itemFirstRow = 7)
+        public List<string> Export(StackOutSheet info, string path, bool showPrice, int itemsPerPage = 10, int itemFirstRow = 7)
         {
+            _ShowPrice = showPrice;
             List<string> files = new List<string>();
             var items = info.GetSummaryItems();
             for (int i = 0; i < items.Count; i += itemsPerPage)
@@ -99,28 +102,24 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             else if (express == "[送货地址]") cell.SetCellValue(info.Address);
             else if (express == "[开票]") cell.SetCellValue(info.WithTax ? "KP" : "BK");
             else if (express == "[备注]") cell.SetCellValue(info.Memo);
-            else if (express == "[付款方式]")
-            {
-                var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
-                if (finance != null && !string.IsNullOrEmpty(finance.FirstAccountID))
-                {
-                    var a = new AccountBLL(AppSettings.Current.ConnStr).GetByID(finance.FirstAccountID).QueryObject;
-                    cell.SetCellValue(a != null ? a.Name : null);
-                }
-                else
-                {
-                    cell.SetCellValue(string.Empty);
-                }
-            }
+            else if (express == "[付款方式]") cell.SetCellValue(info.付款方式);
             else if (express == "[付款金额]")
             {
-                var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
-                cell.SetCellValue((double)(finance != null ? finance.Paid : 0));
+                if (_ShowPrice)
+                {
+                    var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
+                    cell.SetCellValue((double)(finance != null ? finance.Paid : 0));
+                }
+                else cell.SetCellValue(string.Empty);
             }
             else if (express == "[本次欠款]")
             {
-                var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
-                cell.SetCellValue((double)(finance != null ? finance.NotPaid : 0));
+                if (_ShowPrice)
+                {
+                    var finance = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetFinancialStateOf(info.ID).QueryObject;
+                    cell.SetCellValue((double)(finance != null ? finance.NotPaid : 0));
+                }
+                else cell.SetCellValue(string.Empty);
             }
             else if (express == "[累计欠款]")
             {
@@ -129,8 +128,16 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 if (info.State != LJH.Inventory.BusinessModel.SheetState.已发货) total += info.Amount; //如果送货单还未处于送货状态，说明此单的还没有加到应收里面，此时总欠款要加上这一笔
                 cell.SetCellValue((double)total);
             }
-            else if (express == "[总金额]") cell.SetCellValue((double)info.Amount);
-            else if (express == "[大写总金额]") cell.SetCellValue(RMBHelper.NumGetStr((double)info.Amount));
+            else if (express == "[总金额]")
+            {
+                if (_ShowPrice) cell.SetCellValue((double)info.Amount);
+                else cell.SetCellValue(string.Empty);
+            }
+            else if (express == "[大写总金额]")
+            {
+                if (_ShowPrice) cell.SetCellValue(RMBHelper.NumGetStr((double)info.Amount));
+                else cell.SetCellValue(string.Empty);
+            }
         }
 
         private void FillSheetItems(StackOutItem[] items, ISheet sheet, int firstRow)
@@ -187,11 +194,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             }
             else if (express == "[产品单价]")
             {
-                cell.SetCellValue((Double)item.Price);
+                if (_ShowPrice) cell.SetCellValue((Double)item.Price);
+                else cell.SetCellValue(string.Empty);
             }
             else if (express == "[产品金额]")
             {
-                cell.SetCellValue((Double)item.Amount);
+                if (_ShowPrice) cell.SetCellValue((Double)item.Amount);
+                else cell.SetCellValue(string.Empty);
             }
             else if (express == "[产品备注]")
             {

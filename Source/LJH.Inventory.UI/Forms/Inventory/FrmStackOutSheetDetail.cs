@@ -45,8 +45,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtDriver.Text = item.Driver;
             txtDriverCall.Text = item.DriverCall;
             txtCarPlate.Text = item.CarPlate;
-            chkDeadline.Checked = item.DeadlineDate.HasValue;
-            dtDeadline.Value = item.DeadlineDate.HasValue ? item.DeadlineDate.Value : DateTime.Today;
+            txt付款方式.Text = item.付款方式;
             rdWithoutTax.Checked = item.WithTax == false;
             rdWithTax.Checked = item.WithTax == true;
             this.txtMemo.Text = item.Memo;
@@ -267,6 +266,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;
                 if (sheet != null) UpdatingItem = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheet.ID).QueryObject;
             }
+            chk打印金额.Checked = AppSettings.Current.打印送货单时打印金额;
         }
 
         protected override void ItemShowing()
@@ -287,7 +287,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             sheet.DriverCall = txtDriverCall.Text;
             sheet.Driver = txtDriver.Text;
             sheet.CarPlate = txtCarPlate.Text;
-            sheet.DeadlineDate = chkDeadline.Checked ? (DateTime?)dtDeadline.Value : null;
+            sheet.付款方式 = txt付款方式.Text;
             if (rdWithTax.Checked) sheet.WithTax = true;
             if (rdWithoutTax.Checked) sheet.WithTax = false;
             sheet.Memo = txtMemo.Text;
@@ -374,6 +374,38 @@ namespace LJH.Inventory.UI.Forms.Inventory
             PerformOperation<StackOutSheet>(bll, SheetOperation.UndoApprove);
         }
 
+        private void mnu_预览_Click(object sender, EventArgs e)
+        {
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
+            if (sheet != null)
+            {
+                try
+                {
+                    string modal = GetModel();
+                    Print.StackOutSheetExporter exporter = null;
+                    if (System.IO.File.Exists(modal))
+                    {
+                        exporter = new Print.StackOutSheetExporter(modal);
+                        int itemPerpage = 10;
+                        if (UserSettings.Current != null && UserSettings.Current.StackoutSheetItemsPerSheet > 0) itemPerpage = UserSettings.Current.StackoutSheetItemsPerSheet;
+                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder(), chk打印金额.Checked, itemPerpage);
+                        foreach (var file in files)
+                        {
+                            if (System.IO.File.Exists(file)) System.Diagnostics.Process.Start(file);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("未找到送货单导出模板", "打印失败");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
+                }
+            }
+        }
+
         private void btnPrint_Click(object sender, EventArgs e)
         {
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
@@ -419,7 +451,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         exporter = new Print.StackOutSheetExporter(modal);
                         int itemPerpage = 10;
                         if (UserSettings.Current != null && UserSettings.Current.StackoutSheetItemsPerSheet > 0) itemPerpage = UserSettings.Current.StackoutSheetItemsPerSheet;
-                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder(), itemPerpage);
+                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder(), chk打印金额.Checked, itemPerpage);
                         for (int i = 0; i < copies; i++)
                         {
                             foreach (var file in files)
@@ -821,6 +853,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
-        
+        private void chk打印金额_CheckedChanged(object sender, EventArgs e)
+        {
+            AppSettings.Current.打印送货单时打印金额 = chk打印金额.Checked;
+        }
     }
 }

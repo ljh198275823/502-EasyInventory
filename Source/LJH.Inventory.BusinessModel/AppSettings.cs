@@ -64,7 +64,7 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
-        #region 公共属性      
+        #region 公共属性
         /// <summary>
         /// 停车场连接字串
         /// </summary>
@@ -107,6 +107,21 @@ namespace LJH.Inventory.BusinessModel
                     _DatabaseNeedUpgrade = value;
                     SaveConfig("DatabaseNeedUpgrade", value.ToString());
                 }
+            }
+        }
+
+        public bool 打印送货单时打印金额
+        {
+            get
+            {
+                var temp = GetConfigContent("打印送货单时打印金额");
+                bool ret = false;
+                if (!string.IsNullOrEmpty(temp) && bool.TryParse(temp, out ret)) return ret;
+                return false;
+            }
+            set
+            {
+                SaveConfig("打印送货单时打印金额", value.ToString());
             }
         }
 

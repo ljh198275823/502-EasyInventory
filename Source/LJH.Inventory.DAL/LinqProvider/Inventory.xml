@@ -150,7 +150,7 @@
       <Column Name="CarPlate" Member="CarPlate"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="SalesPerson" Member="SalesPerson" DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
-      <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="_Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Sheet_Item" Member="Items" ThisKey="ID" OtherKey="SheetNo"/>
     </Type>
   </Table>
