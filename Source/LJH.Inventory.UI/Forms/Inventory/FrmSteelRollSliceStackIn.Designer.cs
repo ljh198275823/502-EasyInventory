@@ -34,18 +34,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lnkWarehouse = new System.Windows.Forms.LinkLabel();
             this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rd开吨 = new System.Windows.Forms.RadioButton();
-            this.rd开卷 = new System.Windows.Forms.RadioButton();
-            this.rd开平 = new System.Windows.Forms.RadioButton();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -80,7 +73,8 @@
             this.rdWithoutTax__入库单价 = new System.Windows.Forms.RadioButton();
             this.label11 = new System.Windows.Forms.Label();
             this.txtPurchasePrice = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.panel1.SuspendLayout();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtProductName = new LJH.Inventory.UI.Controls.ProductNameComboBox(this.components);
             this.pnlCost.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlTax.SuspendLayout();
@@ -89,7 +83,7 @@
             // txtCount
             // 
             this.txtCount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCount.Location = new System.Drawing.Point(340, 148);
+            this.txtCount.Location = new System.Drawing.Point(320, 119);
             this.txtCount.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -102,14 +96,14 @@
             0});
             this.txtCount.Name = "txtCount";
             this.txtCount.PointCount = 0;
-            this.txtCount.Size = new System.Drawing.Size(145, 21);
+            this.txtCount.Size = new System.Drawing.Size(158, 21);
             this.txtCount.TabIndex = 5;
             this.txtCount.Text = "0";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(284, 151);
+            this.label5.Location = new System.Drawing.Point(264, 122);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 10;
@@ -118,7 +112,7 @@
             // lnkWarehouse
             // 
             this.lnkWarehouse.AutoSize = true;
-            this.lnkWarehouse.Location = new System.Drawing.Point(308, 21);
+            this.lnkWarehouse.Location = new System.Drawing.Point(288, 85);
             this.lnkWarehouse.Name = "lnkWarehouse";
             this.lnkWarehouse.Size = new System.Drawing.Size(29, 12);
             this.lnkWarehouse.TabIndex = 7;
@@ -131,45 +125,16 @@
             this.txtWareHouse.BackColor = System.Drawing.SystemColors.Control;
             this.txtWareHouse.Enabled = false;
             this.txtWareHouse.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWareHouse.Location = new System.Drawing.Point(340, 17);
+            this.txtWareHouse.Location = new System.Drawing.Point(320, 81);
             this.txtWareHouse.Name = "txtWareHouse";
             this.txtWareHouse.ReadOnly = true;
-            this.txtWareHouse.Size = new System.Drawing.Size(145, 21);
+            this.txtWareHouse.Size = new System.Drawing.Size(158, 21);
             this.txtWareHouse.TabIndex = 1;
-            // 
-            // txtWeight
-            // 
-            this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(99, 114);
-            this.txtWeight.MaxValue = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.txtWeight.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtWeight.Name = "txtWeight";
-            this.txtWeight.PointCount = 3;
-            this.txtWeight.Size = new System.Drawing.Size(145, 21);
-            this.txtWeight.TabIndex = 4;
-            this.txtWeight.Text = "0.000";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(66, 118);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 61;
-            this.label2.Text = "重量";
             // 
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(99, 147);
+            this.txtLength.Location = new System.Drawing.Point(99, 118);
             this.txtLength.MaxValue = new decimal(new int[] {
             1000,
             0,
@@ -189,7 +154,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(42, 151);
+            this.label7.Location = new System.Drawing.Point(42, 122);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 56;
@@ -200,7 +165,7 @@
             this.txtCategory.BackColor = System.Drawing.SystemColors.Control;
             this.txtCategory.Enabled = false;
             this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCategory.Location = new System.Drawing.Point(340, 50);
+            this.txtCategory.Location = new System.Drawing.Point(98, 81);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(145, 21);
             this.txtCategory.TabIndex = 1;
@@ -208,7 +173,7 @@
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(308, 54);
+            this.lnkCategory.Location = new System.Drawing.Point(66, 85);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(29, 12);
             this.lnkCategory.TabIndex = 76;
@@ -219,68 +184,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 54);
+            this.label1.Location = new System.Drawing.Point(287, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 75;
             this.label1.Text = "规格";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.rd开吨);
-            this.panel1.Controls.Add(this.rd开卷);
-            this.panel1.Controls.Add(this.rd开平);
-            this.panel1.Location = new System.Drawing.Point(99, 81);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(183, 21);
-            this.panel1.TabIndex = 2;
-            // 
-            // rd开吨
-            // 
-            this.rd开吨.AutoSize = true;
-            this.rd开吨.Location = new System.Drawing.Point(128, 2);
-            this.rd开吨.Name = "rd开吨";
-            this.rd开吨.Size = new System.Drawing.Size(47, 16);
-            this.rd开吨.TabIndex = 2;
-            this.rd开吨.Tag = "开吨";
-            this.rd开吨.Text = "开吨";
-            this.rd开吨.UseVisualStyleBackColor = true;
-            // 
-            // rd开卷
-            // 
-            this.rd开卷.AutoSize = true;
-            this.rd开卷.Location = new System.Drawing.Point(65, 3);
-            this.rd开卷.Name = "rd开卷";
-            this.rd开卷.Size = new System.Drawing.Size(47, 16);
-            this.rd开卷.TabIndex = 1;
-            this.rd开卷.Tag = "";
-            this.rd开卷.Text = "开卷";
-            this.rd开卷.UseVisualStyleBackColor = true;
-            // 
-            // rd开平
-            // 
-            this.rd开平.AutoSize = true;
-            this.rd开平.Location = new System.Drawing.Point(4, 3);
-            this.rd开平.Name = "rd开平";
-            this.rd开平.Size = new System.Drawing.Size(47, 16);
-            this.rd开平.TabIndex = 0;
-            this.rd开平.Tag = "板材";
-            this.rd开平.Text = "开平";
-            this.rd开平.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(42, 85);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 12);
-            this.label10.TabIndex = 79;
-            this.label10.Text = "加工类别";
-            // 
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(99, 303);
+            this.txtMemo.Location = new System.Drawing.Point(99, 274);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(386, 21);
             this.txtMemo.TabIndex = 8;
@@ -288,7 +201,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(66, 306);
+            this.label3.Location = new System.Drawing.Point(66, 277);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 84;
@@ -299,7 +212,7 @@
             this.txtCustomer.BackColor = System.Drawing.SystemColors.Control;
             this.txtCustomer.Enabled = false;
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(99, 210);
+            this.txtCustomer.Location = new System.Drawing.Point(99, 181);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(145, 21);
@@ -308,7 +221,7 @@
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(66, 214);
+            this.lnkCustomer.Location = new System.Drawing.Point(66, 185);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
             this.lnkCustomer.TabIndex = 85;
@@ -320,7 +233,7 @@
             // 
             this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(371, 479);
+            this.btnClose.Location = new System.Drawing.Point(371, 456);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(112, 32);
             this.btnClose.TabIndex = 88;
@@ -330,7 +243,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOk.Location = new System.Drawing.Point(249, 479);
+            this.btnOk.Location = new System.Drawing.Point(249, 456);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 32);
             this.btnOk.TabIndex = 87;
@@ -340,7 +253,7 @@
             // 
             // cmbSpecification
             // 
-            this.cmbSpecification.Location = new System.Drawing.Point(99, 47);
+            this.cmbSpecification.Location = new System.Drawing.Point(320, 45);
             this.cmbSpecification.Name = "cmbSpecification";
             this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
             this.cmbSpecification.Specification = "*";
@@ -365,16 +278,16 @@
             // cmbBrand
             // 
             this.cmbBrand.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cmbBrand.Location = new System.Drawing.Point(340, 178);
+            this.cmbBrand.Location = new System.Drawing.Point(320, 149);
             this.cmbBrand.Name = "cmbBrand";
             this.cmbBrand.ReadOnly = true;
-            this.cmbBrand.Size = new System.Drawing.Size(145, 21);
+            this.cmbBrand.Size = new System.Drawing.Size(158, 21);
             this.cmbBrand.TabIndex = 97;
             // 
             // lnkBrand
             // 
             this.lnkBrand.AutoSize = true;
-            this.lnkBrand.Location = new System.Drawing.Point(308, 182);
+            this.lnkBrand.Location = new System.Drawing.Point(288, 153);
             this.lnkBrand.Name = "lnkBrand";
             this.lnkBrand.Size = new System.Drawing.Size(29, 12);
             this.lnkBrand.TabIndex = 95;
@@ -385,7 +298,7 @@
             // txtSupplier
             // 
             this.txtSupplier.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSupplier.Location = new System.Drawing.Point(99, 178);
+            this.txtSupplier.Location = new System.Drawing.Point(99, 149);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(145, 21);
@@ -395,7 +308,7 @@
             // lnkSupplier
             // 
             this.lnkSupplier.AutoSize = true;
-            this.lnkSupplier.Location = new System.Drawing.Point(54, 182);
+            this.lnkSupplier.Location = new System.Drawing.Point(54, 153);
             this.lnkSupplier.Name = "lnkSupplier";
             this.lnkSupplier.Size = new System.Drawing.Size(41, 12);
             this.lnkSupplier.TabIndex = 94;
@@ -406,7 +319,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(42, 275);
+            this.label8.Location = new System.Drawing.Point(42, 246);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 12);
             this.label8.TabIndex = 149;
@@ -415,7 +328,7 @@
             // txtPosition
             // 
             this.txtPosition.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPosition.Location = new System.Drawing.Point(99, 271);
+            this.txtPosition.Location = new System.Drawing.Point(99, 242);
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.Size = new System.Drawing.Size(145, 21);
             this.txtPosition.TabIndex = 148;
@@ -423,7 +336,7 @@
             // txtCarPlate
             // 
             this.txtCarPlate.FormattingEnabled = true;
-            this.txtCarPlate.Location = new System.Drawing.Point(99, 241);
+            this.txtCarPlate.Location = new System.Drawing.Point(99, 212);
             this.txtCarPlate.Name = "txtCarPlate";
             this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
             this.txtCarPlate.TabIndex = 154;
@@ -431,15 +344,15 @@
             // txtMaterial
             // 
             this.txtMaterial.FormattingEnabled = true;
-            this.txtMaterial.Location = new System.Drawing.Point(340, 241);
+            this.txtMaterial.Location = new System.Drawing.Point(320, 212);
             this.txtMaterial.Name = "txtMaterial";
-            this.txtMaterial.Size = new System.Drawing.Size(145, 20);
+            this.txtMaterial.Size = new System.Drawing.Size(158, 20);
             this.txtMaterial.TabIndex = 153;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(307, 245);
+            this.label4.Location = new System.Drawing.Point(287, 216);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 152;
@@ -448,7 +361,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(54, 245);
+            this.label13.Location = new System.Drawing.Point(54, 216);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 12);
             this.label13.TabIndex = 151;
@@ -457,7 +370,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(293, 275);
+            this.label15.Location = new System.Drawing.Point(273, 246);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(41, 12);
             this.label15.TabIndex = 156;
@@ -466,9 +379,9 @@
             // txtPurchaseID
             // 
             this.txtPurchaseID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPurchaseID.Location = new System.Drawing.Point(340, 271);
+            this.txtPurchaseID.Location = new System.Drawing.Point(320, 242);
             this.txtPurchaseID.Name = "txtPurchaseID";
-            this.txtPurchaseID.Size = new System.Drawing.Size(145, 21);
+            this.txtPurchaseID.Size = new System.Drawing.Size(158, 21);
             this.txtPurchaseID.TabIndex = 155;
             // 
             // pnlCost
@@ -481,7 +394,7 @@
             this.pnlCost.Controls.Add(this.pnlTax);
             this.pnlCost.Controls.Add(this.label11);
             this.pnlCost.Controls.Add(this.txtPurchasePrice);
-            this.pnlCost.Location = new System.Drawing.Point(12, 332);
+            this.pnlCost.Location = new System.Drawing.Point(12, 307);
             this.pnlCost.Name = "pnlCost";
             this.pnlCost.Size = new System.Drawing.Size(488, 127);
             this.pnlCost.TabIndex = 157;
@@ -629,13 +542,32 @@
             this.txtPurchasePrice.TabIndex = 98;
             this.txtPurchasePrice.Text = "0";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(38, 52);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(53, 12);
+            this.label12.TabIndex = 158;
+            this.label12.Text = "产品名称";
+            // 
+            // txtProductName
+            // 
+            this.txtProductName.FormattingEnabled = true;
+            this.txtProductName.Location = new System.Drawing.Point(98, 49);
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.Size = new System.Drawing.Size(146, 20);
+            this.txtProductName.TabIndex = 159;
+            // 
             // FrmSteelRollSliceStackIn
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(503, 535);
+            this.ClientSize = new System.Drawing.Size(503, 512);
+            this.Controls.Add(this.txtProductName);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.pnlCost);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.txtPurchaseID);
@@ -658,13 +590,9 @@
             this.Controls.Add(this.lnkCustomer);
             this.Controls.Add(this.txtMemo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.lnkCategory);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtWeight);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtLength);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtWareHouse);
@@ -676,8 +604,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "小件入库";
             this.Load += new System.EventHandler(this.FrmSteelRollSliceDetail_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.pnlCost.ResumeLayout(false);
             this.pnlCost.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -695,18 +621,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.LinkLabel lnkWarehouse;
         private GeneralLibrary.WinformControl.DBCTextBox txtWareHouse;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
-        private System.Windows.Forms.Label label2;
         private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
         private System.Windows.Forms.Label label7;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
         private System.Windows.Forms.LinkLabel lnkCategory;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton rd开吨;
-        private System.Windows.Forms.RadioButton rd开卷;
-        private System.Windows.Forms.RadioButton rd开平;
-        private System.Windows.Forms.Label label10;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
@@ -741,6 +660,8 @@
         private System.Windows.Forms.RadioButton rdWithoutTax__入库单价;
         private System.Windows.Forms.Label label11;
         private GeneralLibrary.WinformControl.DecimalTextBox txtPurchasePrice;
+        private System.Windows.Forms.Label label12;
+        private Controls.ProductNameComboBox txtProductName;
 
     }
 }

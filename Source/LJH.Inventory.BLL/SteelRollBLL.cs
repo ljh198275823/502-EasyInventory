@@ -46,7 +46,7 @@ namespace LJH.Inventory.BLL
         {
             if (sr.Product.Weight == null && sr.Product.Model == MODEL)
             {
-                var p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, sr.Product.Model, sr.Weight, sr.Length, sr.Product.Density, true);
+                var p = new ProductBLL(RepoUri).Create(sr.Product.Name, sr.Product.CategoryID, sr.Product.Specification, sr.Product.Model, sr.Weight, sr.Length, true);
                 if (p != null)
                 {
                     var clone = sr.Clone();
@@ -78,7 +78,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Slice(ProductInventoryItem sr, SteelRollSliceRecord sliceSheet, WareHouse wh)
         {
-            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sliceSheet.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length, sr.Product.Density);
+            Product p = new ProductBLL(RepoUri).Create(sr.Product.Name, sr.Product.CategoryID, sliceSheet.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length);
             if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
@@ -99,7 +99,7 @@ namespace LJH.Inventory.BLL
                 InventoryItem = sliceSheet.ID,
                 OriginalWeight = sliceSheet.BeforeWeight - sliceSheet.AfterWeight,
                 Weight = sliceSheet.BeforeWeight - sliceSheet.AfterWeight,
-                OriginalThick = sr.OriginalThick,
+                Original克重 = sr.Original克重,
                 Count = sliceSheet.Count,
                 Model = sliceSheet.SliceType,
                 State = ProductInventoryState.Inventory,
@@ -143,7 +143,7 @@ namespace LJH.Inventory.BLL
             var clone = sr.Clone();
             clone.Weight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
             if (clone.Weight == clone.OriginalWeight) clone.Length = clone.OriginalLength; //如果回到整件，则长度设置成入库长度
-            else clone.Length = ProductInventoryItem.CalLength(clone.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, clone.Weight.Value, clone.Product.Density.Value);
+            else clone.Length = ProductInventoryItem.CalLength(clone.Original克重.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, clone.Weight.Value);
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork); //
 
             foreach (var pi in pis) //删除所有加工产生的小件库存
@@ -158,9 +158,9 @@ namespace LJH.Inventory.BLL
             {
                 var cloneSheet = sheet.Clone();
                 cloneSheet.BeforeWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
-                cloneSheet.BeforeLength = ProductInventoryItem.CalLength(clone.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, cloneSheet.BeforeWeight, clone.Product.Density.Value);
+                cloneSheet.BeforeLength = ProductInventoryItem.CalLength(clone.Original克重.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, cloneSheet.BeforeWeight);
                 cloneSheet.AfterWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
-                cloneSheet.AfterLength = ProductInventoryItem.CalLength(clone.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, cloneSheet.AfterWeight, clone.Product.Density.Value);
+                cloneSheet.AfterLength = ProductInventoryItem.CalLength(clone.Original克重.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, cloneSheet.AfterWeight);
                 ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Update(cloneSheet, sheet, unitWork);
             }
             return unitWork.Commit();
@@ -198,23 +198,23 @@ namespace LJH.Inventory.BLL
                         len = records.Sum(it => it.Length.Value * it.Count);
                     }
 
-                    thick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(pi.Product.Specification).Value, weight, len, pi.Product.Density.Value);
+                    thick = ProductInventoryItem.Cal平方克重(SpecificationHelper.GetWrittenWidth(pi.Product.Specification).Value, weight, len);
                     if (thick.HasValue)
                     {
                         ProductInventoryItem clone = pi.Clone();
-                        clone.RealThick = thick;
+                        clone.Real克重 = thick;
                         provider.Update(clone, pi, unitWork);
 
                         foreach (var slice in items)
                         {
                             var sliceClone = slice.Clone();
-                            slice.RealThick = thick;
+                            slice.Real克重 = thick;
                             provider.Update(slice, sliceClone, unitWork);
                         }
                     }
                 }
                 var ret = unitWork.Commit();
-                if (ret.Result == ResultCode.Successful) pi.RealThick = thick;
+                if (ret.Result == ResultCode.Successful) pi.Real克重 = thick;
                 return ret;
             }
             catch (Exception ex)
@@ -266,16 +266,16 @@ namespace LJH.Inventory.BLL
             if (sr.Weight <= weight) return new CommandResult(ResultCode.Fail, "拆卷的重量不能小于或等于原卷重量");
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             decimal? width = SpecificationHelper.GetWrittenWidth(sr.Product.Specification);
-            decimal? thick = SpecificationHelper.GetWrittenThick(sr.Product.Specification);
+            decimal? thick = SpecificationHelper.GetWritten克重(sr.Product.Specification);
             var clone = sr.Clone();
             clone.Weight -= weight;
-            clone.Length = ProductInventoryItem.CalLength(thick.Value, width.Value, clone.Weight.Value, clone.Product.Density.Value);
+            clone.Length = ProductInventoryItem.CalLength(thick.Value, width.Value, clone.Weight.Value);
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
             newR = sr.Clone();
             newR.ID = Guid.NewGuid();
             newR.InventorySheet = "拆卷";
             newR.OriginalWeight = weight;
-            newR.OriginalLength = ProductInventoryItem.CalLength(thick.Value, width.Value, weight, clone.Product.Density.Value);
+            newR.OriginalLength = ProductInventoryItem.CalLength(thick.Value, width.Value, weight);
             newR.Weight = weight;
             newR.Count = 1;
             newR.OriginalCount = 1;
@@ -311,7 +311,7 @@ namespace LJH.Inventory.BLL
                 Specification = sr.Product.Specification,
                 SliceType = "开条",
                 BeforeWeight = sr.Weight.Value,
-                BeforeLength = ProductInventoryItem.CalLength(sr.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(sr.Product.Specification).Value, sr.Weight.Value, sr.Product.Density.Value),
+                BeforeLength = ProductInventoryItem.CalLength(sr.Original克重.Value, SpecificationHelper.GetWrittenWidth(sr.Product.Specification).Value, sr.Weight.Value),
                 Customer = sr.Customer,
                 Slicer = string.Empty,
                 Warehouse = string.Empty,
@@ -328,8 +328,8 @@ namespace LJH.Inventory.BLL
                 var newR = sr.Clone();
                 newR.ID = Guid.NewGuid();
                 newR.SourceRoll = sr.ID;
-                string sp = string.Format("{0}*{1}", SpecificationHelper.GetWrittenThick(sr.Product.Specification), it);
-                Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(sr.Product.CategoryID, sp, "原材料", 7.85m);
+                string sp = string.Format("{0}*{1}", SpecificationHelper.GetWritten克重(sr.Product.Specification), it);
+                Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(sr.Product.Name, sr.Product.CategoryID, sp, "原材料");
                 if (p == null) throw new Exception("创建相关产品信息失败");
                 newR.Product = p;
                 newR.ProductID = p.ID;

@@ -55,11 +55,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 decimal weight = txtWeight.DecimalValue;
                 if (weight != 0) items = items.Where(it => it.OriginalWeight.HasValue && it.OriginalWeight == weight).ToList();
                 decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
-                decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
+                decimal? thick = SpecificationHelper.GetWritten克重(cmbSpecification.Specification);
                 return (from item in items
                         orderby item.AddDate ascending, item.Product.Specification ascending
                         where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Product.Specification) == width) &&
-                              (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Product.Specification) == thick)
+                              (!thick.HasValue || SpecificationHelper.GetWritten克重(item.Product.Specification) == thick)
                         select (object)item).ToList();
             }
             return null;
@@ -72,7 +72,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colAddDate"].Value = info.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCategoryID"].Value = info.Product.Category == null ? info.Product.CategoryID : info.Product.Category.Name;
             row.Cells["colModel"].Value = info.Product.Model;
-            row.Cells["colThick"].Value = SpecificationHelper.GetWrittenThick(info.Product.Specification);
+            row.Cells["colThick"].Value = SpecificationHelper.GetWritten克重(info.Product.Specification);
             row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(info.Product.Specification);
             row.Cells["colOriginalWeight"].Value = info.OriginalWeight;
             row.Cells["colLength"].Value = info.OriginalLength.HasValue ? info.OriginalLength : info.Product.Length;

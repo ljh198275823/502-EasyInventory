@@ -31,7 +31,7 @@ namespace LJH.Inventory.UI.Controls
             if (ps != null && ps.Count > 0)
             {
                 var thicks = (from p in ps
-                              let thick = !string.IsNullOrEmpty(p) ? SpecificationHelper.GetWrittenThick(p) : null
+                              let thick = !string.IsNullOrEmpty(p) ? SpecificationHelper.GetWritten克重(p) : null
                               where thick != null
                               orderby thick ascending
                               select thick.ToString()).Distinct();
@@ -59,7 +59,7 @@ namespace LJH.Inventory.UI.Controls
                 decimal thick = 0;
                 if (decimal.TryParse(txtThick.Text, out thick))
                 {
-                    return string.Format("{0}*{1}", thick.ToString("F2"), txtWidth.Text);
+                    return string.Format("{0}*{1}", thick.ToString(), txtWidth.Text);
                 }
                 return string.Format("{0}*{1}", txtThick.Text, txtWidth.Text);
             }
@@ -72,7 +72,7 @@ namespace LJH.Inventory.UI.Controls
                 }
                 else
                 {
-                    decimal? thick = SpecificationHelper.GetWrittenThick(value);
+                    decimal? thick = SpecificationHelper.GetWritten克重(value);
                     txtThick.Text = thick.HasValue ? thick.Value.ToString("F2") : string.Empty;
                     decimal? width = SpecificationHelper.GetWrittenWidth(value);
                     txtWidth.Text = width.HasValue ? width.Value.ToString() : string.Empty;

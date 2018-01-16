@@ -66,7 +66,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 return (from p in items
                         orderby p.Product.CategoryID ascending,
-                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
+                                SpecificationHelper.GetWritten克重(p.Product.Specification) ascending,
                                 SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
                                 p.AddDate descending
                         select (object)p).ToList();
@@ -215,6 +215,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ProductInventoryItem sr = item as ProductInventoryItem;
             row.Tag = sr;
             row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
+            row.Cells["colName"].Value = sr.Product.Name;
             row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
             row.Cells["colSpecification"].Value = sr.Product.Specification;
             WareHouse ws = null;
@@ -224,8 +225,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colOriginalLength"].Value = sr.OriginalLength;
             row.Cells["colWeight"].Value = sr.Weight;
             row.Cells["colLength"].Value = sr.Length;
-            row.Cells["colOriginalThick"].Value = sr.OriginalThick;
-            row.Cells["colRealThick"].Value = sr.RealThick;
+            row.Cells["colOriginalThick"].Value = sr.Original克重;
+            row.Cells["colRealThick"].Value = sr.Real克重;
             row.Cells["colCustomer"].Value = sr.Customer;
             if (_AllSuppliers != null)
             {

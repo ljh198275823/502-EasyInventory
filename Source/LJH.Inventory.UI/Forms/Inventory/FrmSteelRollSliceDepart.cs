@@ -77,7 +77,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定客户");
                 return;
             }
-            if (SpecificationHelper.GetWrittenThick(ucSpecification1.Specification) == null ||
+            if (SpecificationHelper.GetWritten克重(ucSpecification1.Specification) == null ||
                 SpecificationHelper .GetWrittenWidth (ucSpecification1 .Specification )==null )
             {
                 MessageBox.Show("规格不正确，请同时指定厚度和长度");

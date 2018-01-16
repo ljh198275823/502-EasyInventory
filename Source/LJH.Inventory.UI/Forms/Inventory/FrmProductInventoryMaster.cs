@@ -55,7 +55,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return (from p in items
                         orderby p.Product.CategoryID ascending,
                                 SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
-                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
+                                SpecificationHelper.GetWritten克重(p.Product.Specification) ascending,
                                 p.WareHouseID descending
                         select (object)p).ToList();
             }
@@ -108,8 +108,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWeight"].Value = pi.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colCount"].Value = pi.Count;
-            row.Cells["colOriginalThick"].Value = pi.OriginalThick;
-            row.Cells["colRealThick"].Value = pi.RealThick;
+            row.Cells["colOriginalThick"].Value = pi.Original克重;
+            row.Cells["colRealThick"].Value = pi.Real克重;
             row.Cells["colSourceRoll"].Value = pi.SourceRoll.HasValue ? "查看来源卷" : null;
             if (srs != null && srs.Count > 0)
             {

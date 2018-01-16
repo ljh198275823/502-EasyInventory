@@ -58,157 +58,158 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private ProductInventoryItem GetStudentFromRow(DataGridViewRow row)
         {
-            DateTime addDate = DateTime.Now;
-            if (row.Cells["colAddDate"].Value != null && !string.IsNullOrEmpty(row.Cells["colAddDate"].Value.ToString().Trim()) &&
-                !DateTime.TryParse(row.Cells["colAddDate"].Value.ToString().Trim(), out addDate))
-            {
-                row.Cells["colReason"].Value = "入库日期列不能转化成日期";
-                return null;
-            }
-            string ws = null;
-            if (row.Cells["colWareHouse"].Value == null)
-            {
-                row.Cells["colReason"].Value = "没有指定仓库";
-                return null;
-            }
-            else
-            {
-                ws = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colWareHouse"].Value.ToString().Trim());
-                if (_AllWareHouses == null || _AllWareHouses.Count == 0 || !_AllWareHouses.Exists(it => it.Name == ws))
-                {
-                    row.Cells["colReason"].Value = "系统不存在此仓库";
-                    return null;
-                }
-                ws = _AllWareHouses.First(it => it.Name == ws).ID;
-            }
-            string category = null;
-            if (row.Cells["colCategory"].Value == null)
-            {
-                row.Cells["colReason"].Value = "没有指定类别";
-                return null;
-            }
-            else
-            {
-                category = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCategory"].Value.ToString().Trim());
-                if (_Categories == null || _Categories.Count == 0 || !_Categories.Exists(it => it.Name == category))
-                {
-                    row.Cells["colReason"].Value = "系统不存在此类别";
-                    return null;
-                }
-                category = _Categories.First(it => it.Name == category).ID;
-            }
-            string specification = null;
-            if (row.Cells["colSpecification"].Value == null)
-            {
-                row.Cells["colReason"].Value = "没有指定规格";
-                return null;
-            }
-            else
-            {
-                specification = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSpecification"].Value.ToString().Trim());
-                decimal? width = SpecificationHelper.GetWrittenWidth(specification);
-                decimal? thick = SpecificationHelper.GetWrittenThick(specification);
-                if (width == null || thick == null)
-                {
-                    row.Cells["colReason"].Value = "规格格式不正确";
-                    return null;
-                }
-                specification = string.Format("{0:F2}*{1:F0}", thick > width ? width : thick, width > thick ? width : thick); //一般来说厚度小于宽度，这里将表格中的“宽*厚”这种格式改成“厚*宽”
-            }
-            if (row.Cells["colModel"].Value == null || string.IsNullOrEmpty(row.Cells["colModel"].Value.ToString().Trim()))
-            {
-                row.Cells["colReason"].Value = "没有指定加工类型";
-                return null;
-            }
-            string model = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colModel"].Value.ToString().Trim());
-            if (model != ProductModel.开平 && model != ProductModel.开卷 && model != ProductModel.开吨 && model != ProductModel.开条)
-            {
-                row.Cells["colReason"].Value = "系统不存在此小件加工类型";
-                return null;
-            }
-            decimal weight = 0;
-            if (row.Cells["colWeight"].Value != null && !string.IsNullOrEmpty(row.Cells["colWeight"].Value.ToString().Trim()) &&
-               (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colWeight"].Value.ToString().Trim()), out weight) || weight <= 0))
-            {
-                row.Cells["colReason"].Value = "重量不正确";
-                return null;
-            }
-            if ((model == "开吨" || model == "开条") && weight <= 0)
-            {
-                row.Cells["colReason"].Value = "开吨和开条小件要填写重量";
-                return null;
-            }
-            decimal length = 0;
-            if (row.Cells["colLength"].Value != null && !string.IsNullOrEmpty(row.Cells["colLength"].Value.ToString().Trim()) &&
-                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colLength"].Value.ToString().Trim()), out length) || length <= 0))
-            {
-                row.Cells["colReason"].Value = "长度不正确";
-                return null;
-            }
-            if ((model == ProductModel.开平 || model == ProductModel.开卷) && length <= 0)
-            {
-                row.Cells["colReason"].Value = "开平和开卷小件要填写长度";
-                return null;
-            }
-            decimal reaThick = 0;
-            if (row.Cells["colThick"].Value != null && !string.IsNullOrEmpty(row.Cells["colThick"].Value.ToString().Trim()) &&
-                (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colThick"].Value.ToString().Trim()), out reaThick) || reaThick <= 0))
-            {
-                row.Cells["colReason"].Value = "厚度不正确";
-                return null;
-            }
-            decimal count = 0;
-            if (row.Cells["colCount"].Value == null ||
-                !decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCount"].Value.ToString().Trim()), out count) || count <= 0)
-            {
-                row.Cells["colReason"].Value = "数量不正确";
-                return null;
-            }
-            count = (int)count; //取整
-            if (row.Cells["colCustomer"].Value == null || string.IsNullOrEmpty(row.Cells["colCustomer"].Value.ToString().Trim()))
-            {
-                row.Cells["colReason"].Value = "没有指定客户";
-                return null;
-            }
-            string customer = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCustomer"].Value.ToString().Trim());
-            string supplier = row.Cells["colSupplier"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSupplier"].Value.ToString().Trim());
-            string manufacture = row.Cells["colManufacture"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
-            var p = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, model == ProductModel.开平 || model == ProductModel.开卷 ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
-            if (p == null)
-            {
-                row.Cells["colReason"].Value = "创建产品失败";
-                return null;
-            }
-            ProductInventoryItem pi = new ProductInventoryItem();
-            pi.ID = Guid.NewGuid();
-            pi.AddDate = addDate;
-            pi.ProductID = p.ID;
-            pi.Product = p;
-            pi.Model = p.Model;
-            pi.WareHouseID = ws;
-            pi.RealThick = reaThick == 0 ? SpecificationHelper.GetWrittenThick(specification) : (decimal?)reaThick;
-            pi.Weight = model == ProductModel.开平 || model == ProductModel.开卷 ? weight : weight * count; //开平开卷显示总重，其它的显示成单重
-            pi.OriginalWeight = model == ProductModel.开平 || model == ProductModel.开卷 ? weight : weight * count; //开平开卷显示总重，其它的显示成单重
-            pi.Length = model == ProductModel.开平 || model == ProductModel.开卷 ? null : (decimal?)length;
-            pi.OriginalCount = count;
-            pi.Count = count;
-            if ((p.Model == ProductModel.开平 || p.Model == ProductModel.开卷) && pi.Weight > 0)
-            {
-                pi.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, pi.Weight.Value, p.Length.Value * pi.Count, p.Density.Value); //指定长度时计算入库厚度
-            }
-            else
-            {
-                pi.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
-            }
-            pi.Unit = "件";
-            pi.Customer = customer;
-            pi.Supplier = supplier;
-            pi.Manufacture = manufacture;
-            pi.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString().Trim() : null;
-            pi.PurchaseID = row.Cells["colPurchaseID"].Value != null ? row.Cells["colPurchaseID"].Value.ToString().Trim() : null;
-            pi.InventorySheet = "导入";
-            pi.State = ProductInventoryState.Inventory;
-            return pi;
+            //DateTime addDate = DateTime.Now;
+            //if (row.Cells["colAddDate"].Value != null && !string.IsNullOrEmpty(row.Cells["colAddDate"].Value.ToString().Trim()) &&
+            //    !DateTime.TryParse(row.Cells["colAddDate"].Value.ToString().Trim(), out addDate))
+            //{
+            //    row.Cells["colReason"].Value = "入库日期列不能转化成日期";
+            //    return null;
+            //}
+            //string ws = null;
+            //if (row.Cells["colWareHouse"].Value == null)
+            //{
+            //    row.Cells["colReason"].Value = "没有指定仓库";
+            //    return null;
+            //}
+            //else
+            //{
+            //    ws = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colWareHouse"].Value.ToString().Trim());
+            //    if (_AllWareHouses == null || _AllWareHouses.Count == 0 || !_AllWareHouses.Exists(it => it.Name == ws))
+            //    {
+            //        row.Cells["colReason"].Value = "系统不存在此仓库";
+            //        return null;
+            //    }
+            //    ws = _AllWareHouses.First(it => it.Name == ws).ID;
+            //}
+            //string category = null;
+            //if (row.Cells["colCategory"].Value == null)
+            //{
+            //    row.Cells["colReason"].Value = "没有指定类别";
+            //    return null;
+            //}
+            //else
+            //{
+            //    category = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCategory"].Value.ToString().Trim());
+            //    if (_Categories == null || _Categories.Count == 0 || !_Categories.Exists(it => it.Name == category))
+            //    {
+            //        row.Cells["colReason"].Value = "系统不存在此类别";
+            //        return null;
+            //    }
+            //    category = _Categories.First(it => it.Name == category).ID;
+            //}
+            //string specification = null;
+            //if (row.Cells["colSpecification"].Value == null)
+            //{
+            //    row.Cells["colReason"].Value = "没有指定规格";
+            //    return null;
+            //}
+            //else
+            //{
+            //    specification = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSpecification"].Value.ToString().Trim());
+            //    decimal? width = SpecificationHelper.GetWrittenWidth(specification);
+            //    decimal? thick = SpecificationHelper.GetWritten克重(specification);
+            //    if (width == null || thick == null)
+            //    {
+            //        row.Cells["colReason"].Value = "规格格式不正确";
+            //        return null;
+            //    }
+            //    specification = string.Format("{0:F2}*{1:F0}", thick > width ? width : thick, width > thick ? width : thick); //一般来说厚度小于宽度，这里将表格中的“宽*厚”这种格式改成“厚*宽”
+            //}
+            //if (row.Cells["colModel"].Value == null || string.IsNullOrEmpty(row.Cells["colModel"].Value.ToString().Trim()))
+            //{
+            //    row.Cells["colReason"].Value = "没有指定加工类型";
+            //    return null;
+            //}
+            //string model = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colModel"].Value.ToString().Trim());
+            //if (model != ProductModel.开平 && model != ProductModel.开卷 && model != ProductModel.开吨 && model != ProductModel.开条)
+            //{
+            //    row.Cells["colReason"].Value = "系统不存在此小件加工类型";
+            //    return null;
+            //}
+            //decimal weight = 0;
+            //if (row.Cells["colWeight"].Value != null && !string.IsNullOrEmpty(row.Cells["colWeight"].Value.ToString().Trim()) &&
+            //   (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colWeight"].Value.ToString().Trim()), out weight) || weight <= 0))
+            //{
+            //    row.Cells["colReason"].Value = "重量不正确";
+            //    return null;
+            //}
+            //if ((model == "开吨" || model == "开条") && weight <= 0)
+            //{
+            //    row.Cells["colReason"].Value = "开吨和开条小件要填写重量";
+            //    return null;
+            //}
+            //decimal length = 0;
+            //if (row.Cells["colLength"].Value != null && !string.IsNullOrEmpty(row.Cells["colLength"].Value.ToString().Trim()) &&
+            //    (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colLength"].Value.ToString().Trim()), out length) || length <= 0))
+            //{
+            //    row.Cells["colReason"].Value = "长度不正确";
+            //    return null;
+            //}
+            //if ((model == ProductModel.开平 || model == ProductModel.开卷) && length <= 0)
+            //{
+            //    row.Cells["colReason"].Value = "开平和开卷小件要填写长度";
+            //    return null;
+            //}
+            //decimal reaThick = 0;
+            //if (row.Cells["colThick"].Value != null && !string.IsNullOrEmpty(row.Cells["colThick"].Value.ToString().Trim()) &&
+            //    (!decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colThick"].Value.ToString().Trim()), out reaThick) || reaThick <= 0))
+            //{
+            //    row.Cells["colReason"].Value = "厚度不正确";
+            //    return null;
+            //}
+            //decimal count = 0;
+            //if (row.Cells["colCount"].Value == null ||
+            //    !decimal.TryParse(LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCount"].Value.ToString().Trim()), out count) || count <= 0)
+            //{
+            //    row.Cells["colReason"].Value = "数量不正确";
+            //    return null;
+            //}
+            //count = (int)count; //取整
+            //if (row.Cells["colCustomer"].Value == null || string.IsNullOrEmpty(row.Cells["colCustomer"].Value.ToString().Trim()))
+            //{
+            //    row.Cells["colReason"].Value = "没有指定客户";
+            //    return null;
+            //}
+            //string customer = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCustomer"].Value.ToString().Trim());
+            //string supplier = row.Cells["colSupplier"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSupplier"].Value.ToString().Trim());
+            //string manufacture = row.Cells["colManufacture"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
+            //var p = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, model == ProductModel.开平 || model == ProductModel.开卷 ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
+            //if (p == null)
+            //{
+            //    row.Cells["colReason"].Value = "创建产品失败";
+            //    return null;
+            //}
+            //ProductInventoryItem pi = new ProductInventoryItem();
+            //pi.ID = Guid.NewGuid();
+            //pi.AddDate = addDate;
+            //pi.ProductID = p.ID;
+            //pi.Product = p;
+            //pi.Model = p.Model;
+            //pi.WareHouseID = ws;
+            //pi.Real克重 = reaThick == 0 ? SpecificationHelper.GetWritten克重(specification) : (decimal?)reaThick;
+            //pi.Weight = model == ProductModel.开平 || model == ProductModel.开卷 ? weight : weight * count; //开平开卷显示总重，其它的显示成单重
+            //pi.OriginalWeight = model == ProductModel.开平 || model == ProductModel.开卷 ? weight : weight * count; //开平开卷显示总重，其它的显示成单重
+            //pi.Length = model == ProductModel.开平 || model == ProductModel.开卷 ? null : (decimal?)length;
+            //pi.OriginalCount = count;
+            //pi.Count = count;
+            //if ((p.Model == ProductModel.开平 || p.Model == ProductModel.开卷) && pi.Weight > 0)
+            //{
+            //    pi.Original克重 = ProductInventoryItem.Cal平方克重(SpecificationHelper.GetWrittenWidth(p.Specification).Value, pi.Weight.Value, p.Length.Value * pi.Count); //指定长度时计算入库厚度
+            //}
+            //else
+            //{
+            //    pi.Original克重 = SpecificationHelper.GetWritten克重(p.Specification);
+            //}
+            //pi.Unit = "件";
+            //pi.Customer = customer;
+            //pi.Supplier = supplier;
+            //pi.Manufacture = manufacture;
+            //pi.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString().Trim() : null;
+            //pi.PurchaseID = row.Cells["colPurchaseID"].Value != null ? row.Cells["colPurchaseID"].Value.ToString().Trim() : null;
+            //pi.InventorySheet = "导入";
+            //pi.State = ProductInventoryState.Inventory;
+            //return pi;
+            return null;
         }
         #endregion
 

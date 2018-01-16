@@ -65,7 +65,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return (from p in items
                         orderby p.Product.CategoryID ascending,
                                 SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
-                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
+                                SpecificationHelper.GetWritten克重(p.Product.Specification) ascending,
                                 p.AddDate descending
                         select (object)p).ToList();
             }
@@ -192,8 +192,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colModel"].Value = p.Model;
             row.Cells["colWeight"].Value = sr.Weight;
             row.Cells["colLength"].Value = sr.Product.Length;
-            row.Cells["colOriginalThick"].Value = sr.OriginalThick;
-            row.Cells["colRealThick"].Value = sr.RealThick;
+            row.Cells["colOriginalThick"].Value = sr.Original克重;
+            row.Cells["colRealThick"].Value = sr.Real克重;
             row.Cells["colInventoryDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = sr.Count;
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;

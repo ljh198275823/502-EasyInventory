@@ -26,6 +26,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 重写基类方法
         protected override bool CheckInput()
         {
+            if (string.IsNullOrEmpty(txtProductName.Text))
+            {
+                MessageBox.Show("没有指定产品名称");
+                return false;
+            }
             if (txtCategory.Tag == null)
             {
                 MessageBox.Show("产品类别没有指定");
@@ -36,9 +41,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定规格");
                 return false;
             }
-            if (SpecificationHelper.GetWrittenThick(cmbSpecification.Specification) == null || SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification) == null)
+            if (SpecificationHelper.GetWritten克重(cmbSpecification.Specification) == null || SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification) == null)
             {
-                MessageBox.Show("规格设置不正确,  规格格式为 \"厚度*宽度\" ");
+                MessageBox.Show("规格设置不正确");
                 return false;
             }
             if (this.txtWeight.DecimalValue <= 0)
@@ -138,6 +143,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     }
                 }
             }
+            txtProductName.Init();
             cmbSpecification.Init();
             txtCarPlate.Init();
             txtMaterial.Init();
@@ -155,6 +161,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
             dtStorageDateTime.Value = item.AddDate;
+            txtProductName.Text = item.Product.Name;
             var ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(item.WareHouseID).QueryObject;
             txtWareHouse.Text = ws != null ? ws.Name : null;
             txtWareHouse.Tag = ws;
@@ -208,7 +215,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 item = new ProductInventoryItem();
                 item.ID = Guid.NewGuid();
             }
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Specification).Trim(), "原材料", 7.85m);
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(txtProductName.Text, (txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Specification).Trim(), ProductModel.原材料);
             if (p == null) throw new Exception("创建相关产品信息失败");
             item.Product = p;
             item.ProductID = p.ID;
@@ -219,11 +226,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (txtOriginalLength.DecimalValue > 0)
             {
                 item.OriginalLength = txtOriginalLength.DecimalValue;
-                item.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.OriginalWeight.Value, item.OriginalLength.Value, p.Density.Value); //指定长度时计算入库厚度
+                item.Original克重 = ProductInventoryItem.Cal平方克重(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.OriginalWeight.Value, item.OriginalLength.Value); //指定长度时计算入库厚度
             }
             else
             {
-                item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
+                item.Original克重 = SpecificationHelper.GetWritten克重(p.Specification);
             }
             item.OriginalCount = 1;
             item.Weight = txtWeight.DecimalValue;

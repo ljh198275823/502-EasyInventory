@@ -95,13 +95,12 @@ namespace LJH.Inventory.DAL.LinqProvider
         /// 获取所有的规格
         /// </summary>
         /// <returns></returns>
-        public List<string> GetAllSpecifications(ProductSearchCondition search)
+        public List<string> GetAllSpecifications(ProductSearchCondition con)
         {
             var dc = this.CreateDataContext();
-            IQueryable<Product> ret= dc.GetTable<Product>();
-            if (search is ProductSearchCondition)
+            IQueryable<Product> ret = dc.GetTable<Product>();
+            if (con != null)
             {
-                ProductSearchCondition con = search as ProductSearchCondition;
                 if (con.ProductIDS != null && con.ProductIDS.Count > 0) ret = ret.Where(item => con.ProductIDS.Contains(item.ID));
                 if (!string.IsNullOrEmpty(con.Name)) ret = ret.Where(item => item.Name.Contains(con.Name));
                 if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.CategoryID == con.CategoryID);
@@ -120,6 +119,33 @@ namespace LJH.Inventory.DAL.LinqProvider
                 }
             }
             return ret.Select(it => it.Specification).Distinct().ToList();
+        }
+
+
+        public List<string> GetAllNames(ProductSearchCondition con)
+        {
+            var dc = this.CreateDataContext();
+            IQueryable<Product> ret = dc.GetTable<Product>();
+            if (con != null)
+            {
+                if (con.ProductIDS != null && con.ProductIDS.Count > 0) ret = ret.Where(item => con.ProductIDS.Contains(item.ID));
+                if (!string.IsNullOrEmpty(con.Name)) ret = ret.Where(item => item.Name.Contains(con.Name));
+                if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.CategoryID == con.CategoryID);
+                if (!string.IsNullOrEmpty(con.Specification)) ret = ret.Where(item => item.Specification.Contains(con.Specification));
+                if (con.Models != null && con.Models.Count > 0) ret = ret.Where(item => con.Models.Contains(item.Model));
+                if (con.IsService.HasValue)
+                {
+                    if (con.IsService.Value)
+                    {
+                        ret = ret.Where(it => it.IsService == true);
+                    }
+                    else
+                    {
+                        ret = ret.Where(it => it.IsService == false);
+                    }
+                }
+            }
+            return ret.Select(it => it.Name).Distinct().ToList();
         }
     }
 }

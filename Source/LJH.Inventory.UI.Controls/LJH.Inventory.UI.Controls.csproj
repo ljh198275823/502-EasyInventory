@@ -150,11 +150,11 @@
     <Compile Include="PaymentModeComboBox.designer.cs">
       <DependentUpon>PaymentModeComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductComboBox.cs">
+    <Compile Include="ProductNameComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ProductComboBox.designer.cs">
-      <DependentUpon>ProductComboBox.cs</DependentUpon>
+    <Compile Include="ProductNameComboBox.designer.cs">
+      <DependentUpon>ProductNameComboBox.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductTree.cs">
       <SubType>Component</SubType>

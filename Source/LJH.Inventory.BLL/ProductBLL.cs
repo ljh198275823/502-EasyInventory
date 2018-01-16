@@ -70,12 +70,12 @@ namespace LJH.Inventory.BLL
             return Delete(info);
         }
 
-        public Product Create(string categoryID, string specification, string model, decimal? density, bool onlyCreate = false)
+        public Product Create(string name, string categoryID, string specification, string model, bool onlyCreate = false)
         {
-            return Create(categoryID, specification, model, null, null, density, onlyCreate);
+            return Create(name, categoryID, specification, model, null, null, onlyCreate);
         }
 
-        public Product Create(string categoryID, string specification, string model, decimal? weight, decimal? length, decimal? density, bool onlyCreate = false)
+        public Product Create(string name, string categoryID, string specification, string model, decimal? weight, decimal? length, bool onlyCreate = false)
         {
             Product p = null;
             if (!onlyCreate)
@@ -83,20 +83,20 @@ namespace LJH.Inventory.BLL
                 List<Product> ps = GetItems(new ProductSearchCondition() { CategoryID = categoryID, Specification = specification }).QueryObjects;
                 if (ps != null && ps.Count > 0)
                 {
-                    p = ps.FirstOrDefault(it => it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
+                    p = ps.FirstOrDefault(it => it.Name == name && it.CategoryID == categoryID && it.Specification == specification && it.Model == model && it.Weight == weight && it.Length == length);
                 }
                 if (p != null) return p;
             }
             p = new Product();
+            p.Name = name;
             p.Specification = specification;
             p.CategoryID = categoryID;
             p.Category = new ProductCategoryBLL(RepoUri).GetByID(categoryID).QueryObject;
-            p.Name = p.Category != null ? p.Category.Name : categoryID;
+            //p.Name = p.Category != null ? p.Category.Name : categoryID;
             p.Unit = string.Empty;
             p.Model = model;
             p.Length = length;
             p.Weight = weight;
-            p.Density = density;
             var ret = Add(p);
             if (ret.Result == ResultCode.Successful) return p;
             return null;
@@ -110,6 +110,12 @@ namespace LJH.Inventory.BLL
         {
             var provider = ProviderFactory.Create<IProductProvider>(RepoUri);
             return provider.GetAllSpecifications(con);
+        }
+
+        public List<string> GetAllNames(ProductSearchCondition con)
+        {
+            var provider = ProviderFactory.Create<IProductProvider>(RepoUri);
+            return provider.GetAllNames(con);
         }
         #endregion
     }

@@ -87,8 +87,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWeight"].Value = pi.Weight;
             row.Cells["colLength"].Value = pi.Product.Length;
             row.Cells["colDeliveryCount"].Value = deliveryCount;
-            row.Cells["colOriginalThick"].Value = pi.OriginalThick;
-            row.Cells["colRealThick"].Value = pi.RealThick;
+            row.Cells["colOriginalThick"].Value = pi.Original克重;
+            row.Cells["colRealThick"].Value = pi.Real克重;
             row.Cells["colSourceRoll"].Value = pi.SourceRoll.HasValue ? "查看来源卷" : null;
             //row.Cells["colSourceRollWeight"].Value = pi.SourceRollWeight;
             row.Cells["colCustomer"].Value = pi.Customer;

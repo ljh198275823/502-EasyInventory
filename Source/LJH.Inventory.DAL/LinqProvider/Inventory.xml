@@ -436,11 +436,11 @@
       <Column Name="OriginalWeight" Member="OriginalWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="OriginalLength" Member="OriginalLength"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="OriginalCount" Member="OriginalCount"  DbType="decimal(18,4)" UpdateCheck="Never"/>
-      <Column Name="OriginalThick" Member="OriginalThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
+      <Column Name="OriginalThick" Member="Original克重"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
-      <Column Name="RealThick" Member="RealThick"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
+      <Column Name="RealThick" Member="Real克重"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="State" Member="State"  DbType="tinyint not null" UpdateCheck="Never"/>
       <Column Name="Customer" Member="Customer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Supplier" Member="Supplier"  DbType="nvarchar(50)" UpdateCheck="Never"/>

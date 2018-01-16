@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Controls
 {
-    partial class ProductComboBox
+    partial class ProductNameComboBox
     {
         /// <summary>
         /// 必需的设计器变量。

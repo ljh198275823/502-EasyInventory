@@ -34,7 +34,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSheetNo"].Value = sor.SheetNo;
             row.Cells["colCustomerName"].Value = sor.Customer.Name;
             row.Cells["colOrderID"].Value = sor.OrderID;
-            row.Cells["colThick"].Value = SpecificationHelper.GetWrittenThick(sor.Specification);
+            row.Cells["colThick"].Value = SpecificationHelper.GetWritten克重(sor.Specification);
             row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(sor.Specification);
             row.Cells["colSpecification"].Value = sor.Specification;
             row.Cells["colModel"].Value = sor.Product.Model;
@@ -74,11 +74,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 decimal sourceRollWeight = txtSourceRollWeight.DecimalValue;
                 if (sourceRollWeight != 0) items = items.Where(it => it.SourceRollWeight.HasValue && it.SourceRollWeight == sourceRollWeight).ToList();
                 decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
-                decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
+                decimal? thick = SpecificationHelper.GetWritten克重(cmbSpecification.Specification);
                 return (from item in items
                         orderby item.SheetNo ascending, item.AddDate ascending
                         where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Specification) == width) &&
-                              (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Specification) == thick)
+                              (!thick.HasValue || SpecificationHelper.GetWritten克重(item.Specification) == thick)
                         select (object)item).ToList();
             }
             return base.GetDataSource();

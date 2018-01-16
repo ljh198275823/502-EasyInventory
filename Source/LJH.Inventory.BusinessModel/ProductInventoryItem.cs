@@ -13,33 +13,36 @@ namespace LJH.Inventory.BusinessModel
     {
         #region 静态方法
         /// <summary>
-        /// 计算某个规格指定长度的重量
+        /// 计算某个规格指定长度的重量(kg)
         /// </summary>
         /// <param name="specification"></param>
         /// <param name="length"></param>
         /// <param name="density"></param>
         /// <returns></returns>
-        public static decimal CalWeight(decimal thick, decimal width, decimal length, decimal density)
+        public static decimal CalWeight(decimal 平方克重, decimal width, decimal length)
         {
-            return (thick * width * length * density) / (1000 * 1000);
+            return (平方克重 * (width / 100) * length) / 1000;
         }
 
         /// <summary>
-        /// 计算厚度，返回毫米为单位的厚度
+        /// 计算平方米克重（g/m2)
         /// </summary>
+        /// <param name="width">表示宽度（mm）</param>
+        /// <param name="weight">表示总重量(kg)</param>
+       ///<param name="length">表示总长度(m）</param>
         /// <returns></returns>
-        public static decimal CalThick(decimal width, decimal weight, decimal length, decimal density)
+        public static decimal Cal平方克重(decimal width, decimal weight, decimal length)
         {
-            return weight * 1000 * 1000 / (width * length * density);
+            return weight * 1000 / (width * length / 100);
         }
 
         /// <summary>
-        /// 计算长度,返回米为单位的长度
+        /// 计算长度,返回米为单位的长度(米)
         /// </summary>
         /// <returns></returns>
-        public static decimal CalLength(decimal thick, decimal width, decimal weight, decimal density)
+        public static decimal CalLength(decimal 平方克重, decimal width, decimal weight)
         {
-            return weight * 1000 * 1000 / (width * thick * density);
+            return (weight * 1000 / 平方克重) / (width / 100);
         }
         #endregion
 
@@ -73,7 +76,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置根据入库重量和长度计算出来的厚度
         /// </summary>
-        public decimal? OriginalThick { get; set; }
+        public decimal? Original克重 { get; set; }
         /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
@@ -89,7 +92,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置真实厚度
         /// </summary>
-        public decimal? RealThick { get; set; }
+        public decimal? Real克重 { get; set; }
         /// <summary>
         /// 获取或设置库存当前重量
         /// </summary>
@@ -219,14 +222,14 @@ namespace LJH.Inventory.BusinessModel
                 {
                     if (Model == ProductModel.开平 || Model == ProductModel.开卷)
                     {
-                        decimal? thick = this.RealThick;
-                        if (!thick.HasValue) thick = this.OriginalThick;
-                        if (!thick.HasValue) thick = SpecificationHelper.GetWrittenThick(Product.Specification);
+                        decimal? thick = this.Real克重;
+                        if (!thick.HasValue) thick = this.Original克重;
+                        if (!thick.HasValue) thick = SpecificationHelper.GetWritten克重(Product.Specification);
                         decimal? length = this.Product.Length; //小件的长度放在产品信息中
                         decimal? width = SpecificationHelper.GetWrittenWidth(Product.Specification);
                         if (thick != null && length != null && width != null)
                         {
-                            return ProductInventoryItem.CalWeight(thick.Value, width.Value, length.Value, Product.Density.Value);
+                            return ProductInventoryItem.CalWeight(thick.Value, width.Value, length.Value);
                         }
                     }
                     if (Weight.HasValue && Weight.Value > 0 && Count > 0) return Weight.Value / Count;

@@ -11,5 +11,7 @@ namespace LJH.Inventory.DAL.IProvider
     public interface IProductProvider : IProvider<Product, string>
     {
         List<string> GetAllSpecifications(ProductSearchCondition con);
+
+        List<string> GetAllNames(ProductSearchCondition con);
     }
 }

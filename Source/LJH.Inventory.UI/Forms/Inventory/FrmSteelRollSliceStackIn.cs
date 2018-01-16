@@ -41,6 +41,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             cmbSpecification.Init();
             dtStorageDateTime.Value = DateTime.Now;
+            txtProductName.Init();
             txtMaterial.Init();
             txtCarPlate.Init();
             if (UserSettings.Current != null && !string.IsNullOrEmpty(UserSettings.Current.DefaultWarehouse))
@@ -91,33 +92,21 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Specification = product.Specification;
             txtCategory.Text = product.Category.Name;
             txtCategory.Tag = product.Category;
-            rd开平.Checked = product.Model == rd开平.Text;
-            rd开卷.Checked = product.Model == rd开卷.Text;
-            rd开吨.Checked = product.Model == rd开吨.Text;
             txtLength.DecimalValue = product.Length.HasValue ? product.Length.Value : 0;
-            txtWeight.DecimalValue = product.Weight.HasValue ? product.Weight.Value : 0;
-            decimal? thick = SpecificationHelper.GetWrittenThick(product.Specification);
         }
 
         private Product CreateProduct()
         {
-            string sliceTo = null;
-            if (rd开平.Checked) sliceTo = rd开平.Text;
-            else if (rd开卷.Checked) sliceTo = rd开卷.Text;
-            else if (rd开吨.Checked) sliceTo = rd开吨.Text;
-            decimal? weight = null;
-            return new ProductBLL(AppSettings.Current.ConnStr).Create(
-                             (txtCategory.Tag as ProductCategory).ID,
-                             StringHelper.ToDBC(cmbSpecification.Specification).Trim(),
-                             sliceTo,
-                             weight,
-                             txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null,
-                             7.85m);
-
+            return new ProductBLL(AppSettings.Current.ConnStr).Create(txtProductName.Text, (txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Specification).Trim(), ProductModel.开平, null, txtLength.DecimalValue);
         }
 
         private bool CheckInput()
         {
+            if (string.IsNullOrEmpty(txtProductName.Text))
+            {
+                MessageBox.Show("没有指定产品名称");
+                return false;
+            }
             if (txtCategory.Tag == null)
             {
                 MessageBox.Show("没有选择类别");
@@ -128,14 +117,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定规格");
                 return false;
             }
-            if (!rd开平.Checked && !rd开卷.Checked && !rd开吨.Checked)
+            if (SpecificationHelper.GetWritten克重(cmbSpecification.Specification) == null || SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification) == null)
             {
-                MessageBox.Show("没有指定加工类型");
-                return false;
-            }
-            if (SpecificationHelper.GetWrittenThick(cmbSpecification.Specification) == null || SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification) == null)
-            {
-                MessageBox.Show("规格设置不正确,  规格格式为 \"厚度*宽度\" ");
+                MessageBox.Show("规格设置不正确 ");
                 return false;
             }
             if (txtWareHouse.Tag == null)
@@ -144,18 +128,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Focus();
                 return false;
             }
-            if (txtWeight.DecimalValue <= 0)
+            if (txtLength.DecimalValue <= 0)
             {
-                MessageBox.Show("没有设置重量");
+                MessageBox.Show("没有设置长度");
                 return false;
-            }
-            if (rd开平.Checked || rd开卷.Checked)
-            {
-                if (txtLength.DecimalValue <= 0)
-                {
-                    MessageBox.Show("开平和开卷小件没有设置长度");
-                    return false;
-                }
             }
             if (txtCount.DecimalValue == 0)
             {
@@ -212,10 +188,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCategory.Text = item.Product.Category.Name;
             txtCategory.Tag = item.Product.Category;
             cmbSpecification.Specification = item.Product.Specification;
-            if (item.Product.Model == rd开平.Text) rd开平.Checked = true;
-            if (item.Product.Model == rd开卷.Text) rd开卷.Checked = true;
-            if (item.Product.Model == rd开吨.Text) rd开吨.Checked = true;
-            if (item.Weight.HasValue) txtWeight.DecimalValue = item.Weight.Value;
             if (item.Product.Length.HasValue) txtLength.DecimalValue = item.Product.Length.Value;
             txtCount.DecimalValue = item.OriginalCount.HasValue ? item.OriginalCount.Value : item.Count;
             txtCustomer.Text = item.Customer;
@@ -350,19 +322,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Model = p.Model;
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
-            item.OriginalWeight = txtWeight.DecimalValue > 0 ? (decimal?)txtWeight.DecimalValue : null;
+            item.Original克重 = SpecificationHelper.GetWritten克重(p.Specification);
             item.OriginalCount = txtCount.DecimalValue;
-            item.Weight = txtWeight.DecimalValue > 0 ? (decimal?)txtWeight.DecimalValue : null;
+            item.Length = txtLength.DecimalValue;
+            item.OriginalWeight = ProductInventoryItem.CalWeight(item.Original克重.Value, SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Length.Value * item.OriginalCount.Value);
+            item.Weight =item.OriginalWeight;
             item.Count = txtCount.DecimalValue;
-            if ((p.Model == ProductModel.开平 || p.Model == ProductModel.开卷) && item.Weight > 0)
-            {
-                item.OriginalThick = ProductInventoryItem.CalThick(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Weight.Value, p.Length.Value * item.Count, p.Density.Value); //指定长度时计算入库厚度
-            }
-            else
-            {
-                item.OriginalThick = SpecificationHelper.GetWrittenThick(p.Specification);
-            }
-            item.Unit = "件";
+            item.Unit = "张";
             item.State = ProductInventoryState.Inventory;
             item.Customer = txtCustomer.Text;
             if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
@@ -388,7 +354,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (SteelRollSlice == null) //新增
                 {
                     cmbSpecification.Specification = null;
-                    txtWeight.DecimalValue = 0;
                     if (txtLength.DecimalValue > 0) txtLength.DecimalValue = 0;
                     txtCount.DecimalValue = 0;
                     SteelRollSlice = null;

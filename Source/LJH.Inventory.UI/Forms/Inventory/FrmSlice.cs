@@ -138,13 +138,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (chkOver.Checked) return;
             decimal? width = SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification);
-            if (width.HasValue && width > 0 && SlicingItem.OriginalThick.HasValue && SlicingItem.OriginalThick > 0)
+            if (width.HasValue && width > 0 && SlicingItem.Original克重.HasValue && SlicingItem.Original克重 > 0)
             {
-                decimal weight = ProductInventoryItem.CalWeight(SlicingItem.OriginalThick.Value, width.Value, txtLength.DecimalValue * txtCount.IntergerValue, SlicingItem.Product.Density.Value);
+                decimal weight = ProductInventoryItem.CalWeight(SlicingItem.Original克重.Value, width.Value, txtLength.DecimalValue * txtCount.IntergerValue);
                 if (weight <= SlicingItem.Weight)
                 {
                     this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - weight;
-                    txtAfterLength.DecimalValue = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, txtRemainWeight.DecimalValue, SlicingItem.Product.Density.Value);
+                    txtAfterLength.DecimalValue = ProductInventoryItem.CalLength(SlicingItem.Original克重.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, txtRemainWeight.DecimalValue);
                 }
                 else
                 {
@@ -236,7 +236,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Specification = SlicingItem.Product.Specification,
                     SliceType = GetSliceType(),
                     BeforeWeight = SlicingItem.Weight.Value,
-                    BeforeLength = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, SlicingItem.Weight.Value, SlicingItem.Product.Density.Value),
+                    BeforeLength = ProductInventoryItem.CalLength(SlicingItem.Original克重.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, SlicingItem.Weight.Value),
                     Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,
                     Warehouse = (txtWareHouse.Tag as WareHouse).Name,
@@ -248,7 +248,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     record.Length = txtLength.DecimalValue;
                     record.Count = txtCount.IntergerValue;
                     record.AfterWeight = txtRemainWeight.DecimalValue;
-                    record.AfterLength = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, record.AfterWeight, SlicingItem.Product.Density.Value);
+                    record.AfterLength = ProductInventoryItem.CalLength(SlicingItem.Original克重.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, record.AfterWeight);
                 }
                 else if (rd开吨.Checked)
                 {
