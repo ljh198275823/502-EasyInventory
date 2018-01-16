@@ -470,7 +470,7 @@
             // 
             // colTotalWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.Format = "N4";
             dataGridViewCellStyle1.NullValue = null;
             this.colTotalWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colTotalWeight.HeaderText = "总重量";

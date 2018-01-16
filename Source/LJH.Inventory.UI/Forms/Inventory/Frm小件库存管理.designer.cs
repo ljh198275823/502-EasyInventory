@@ -97,6 +97,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -151,7 +152,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 330);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
             // 
             // cMnu_Fresh
             // 
@@ -671,6 +672,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colInventoryDate,
             this.colWareHouse,
+            this.colName,
             this.colCategory,
             this.colModel,
             this.colSpecification,
@@ -727,6 +729,14 @@
             this.colWareHouse.ReadOnly = true;
             this.colWareHouse.Width = 54;
             // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colName.HeaderText = "名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 54;
+            // 
             // colCategory
             // 
             this.colCategory.HeaderText = "类别";
@@ -750,17 +760,17 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.Format = "N4";
             dataGridViewCellStyle1.NullValue = null;
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
+            this.colWeight.Visible = false;
             this.colWeight.Width = 80;
             // 
             // colLength
             // 
-            dataGridViewCellStyle2.Format = "N3";
             dataGridViewCellStyle2.NullValue = null;
             this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLength.HeaderText = "长度(米)";
@@ -823,7 +833,7 @@
             // 
             // colSourceRoll
             // 
-            dataGridViewCellStyle6.Format = "N3";
+            dataGridViewCellStyle6.Format = "N4";
             this.colSourceRoll.DefaultCellStyle = dataGridViewCellStyle6;
             this.colSourceRoll.HeaderText = "来源卷";
             this.colSourceRoll.Name = "colSourceRoll";
@@ -1023,6 +1033,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_查看成本明细;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;

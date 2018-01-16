@@ -182,6 +182,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ProductInventoryItem sr = item as ProductInventoryItem;
             row.Tag = sr;
             Product p = sr.Product;
+            row.Cells["colName"].Value = p.Name;
             row.Cells["colCategory"].Value = p != null ? p.Category.Name : string.Empty;
             if (_AllWarehouse != null)
             {
@@ -191,7 +192,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
             row.Cells["colModel"].Value = p.Model;
             row.Cells["colWeight"].Value = sr.Weight;
-            row.Cells["colLength"].Value = sr.Product.Length;
+            if(sr.Product.Length .HasValue ) row.Cells["colLength"].Value = sr.Product.Length.Value.Trim();
             row.Cells["colOriginalThick"].Value = sr.Original克重;
             row.Cells["colRealThick"].Value = sr.Real克重;
             row.Cells["colInventoryDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");

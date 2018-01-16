@@ -13,36 +13,37 @@ namespace LJH.Inventory.BusinessModel
     {
         #region 静态方法
         /// <summary>
-        /// 计算某个规格指定长度的重量(kg)
+        /// 计算某个规格指定长度的重量(吨)
         /// </summary>
-        /// <param name="specification"></param>
-        /// <param name="length"></param>
-        /// <param name="density"></param>
+        /// <param name="width">表示宽度（mm）</param>
+        ///<param name="length">表示总长度(m）</param>
         /// <returns></returns>
-        public static decimal CalWeight(decimal 平方克重, decimal width, decimal length)
+        public static decimal CalWeight(decimal 平方克重, decimal width, decimal length, int pointCout = 4)
         {
-            return (平方克重 * (width / 100) * length) / 1000;
+            return Math.Round((平方克重 * (width / 1000) * length) / (1000 * 1000), pointCout);
         }
 
         /// <summary>
         /// 计算平方米克重（g/m2)
         /// </summary>
         /// <param name="width">表示宽度（mm）</param>
-        /// <param name="weight">表示总重量(kg)</param>
-       ///<param name="length">表示总长度(m）</param>
+        /// <param name="weight">表示总重量(吨)</param>
+        ///<param name="length">表示总长度(m）</param>
         /// <returns></returns>
         public static decimal Cal平方克重(decimal width, decimal weight, decimal length)
         {
-            return weight * 1000 / (width * length / 100);
+            return Math.Round(weight * 1000 * 1000 / (width * length / 1000), 2);
         }
 
         /// <summary>
         /// 计算长度,返回米为单位的长度(米)
         /// </summary>
+        /// <param name="width">表示宽度（mm）</param>
+        /// <param name="weight">表示总重量(吨)</param>
         /// <returns></returns>
         public static decimal CalLength(decimal 平方克重, decimal width, decimal weight)
         {
-            return (weight * 1000 / 平方克重) / (width / 100);
+            return Math.Round((weight * 1000 * 1000 / 平方克重) / (width / 1000), 1);
         }
         #endregion
 
@@ -222,18 +223,18 @@ namespace LJH.Inventory.BusinessModel
                 {
                     if (Model == ProductModel.开平 || Model == ProductModel.开卷)
                     {
-                        decimal? thick = this.Real克重;
-                        if (!thick.HasValue) thick = this.Original克重;
-                        if (!thick.HasValue) thick = SpecificationHelper.GetWritten克重(Product.Specification);
+                        decimal? 克重 = this.Real克重;
+                        if (!克重.HasValue) 克重 = this.Original克重;
+                        if (!克重.HasValue) 克重 = SpecificationHelper.GetWritten克重(Product.Specification);
                         decimal? length = this.Product.Length; //小件的长度放在产品信息中
                         decimal? width = SpecificationHelper.GetWrittenWidth(Product.Specification);
-                        if (thick != null && length != null && width != null)
-                        {
-                            return ProductInventoryItem.CalWeight(thick.Value, width.Value, length.Value);
-                        }
+                        if (克重 != null && length != null && width != null) return ProductInventoryItem.CalWeight(克重.Value, width.Value, length.Value, 6);
                     }
-                    if (Weight.HasValue && Weight.Value > 0 && Count > 0) return Weight.Value / Count;
-                    if (OriginalWeight > 0 && OriginalCount > 0) return OriginalWeight.Value / OriginalCount.Value;
+                    else
+                    {
+                        if (Weight.HasValue && Weight.Value > 0 && Count > 0) return Weight.Value / Count;
+                        if (OriginalWeight > 0 && OriginalCount > 0) return OriginalWeight.Value / OriginalCount.Value;
+                    }
                     return null;
                 }
                 catch (Exception ex)

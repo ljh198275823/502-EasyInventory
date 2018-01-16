@@ -196,7 +196,7 @@
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.Format = "N4";
             dataGridViewCellStyle1.NullValue = null;
             this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colOriginalWeight.HeaderText = "入库重量";
@@ -219,7 +219,7 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.Format = "N4";
             dataGridViewCellStyle3.NullValue = null;
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colWeight.HeaderText = "剩余重量";

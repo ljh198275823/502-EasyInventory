@@ -87,11 +87,7 @@
             this.mnu_查看成本明细 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_查看价格改动记录 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.加工ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_开平 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_开卷 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_开条 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu_开吨 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_SliceView = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.更换仓库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -620,7 +616,7 @@
             this.mnu_查看成本明细,
             this.mnu_查看价格改动记录,
             this.toolStripSeparator2,
-            this.加工ToolStripMenuItem,
+            this.mnu_开平,
             this.mnu_SliceView,
             this.toolStripSeparator1,
             this.更换仓库ToolStripMenuItem,
@@ -684,44 +680,12 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(169, 6);
             // 
-            // 加工ToolStripMenuItem
-            // 
-            this.加工ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_开平,
-            this.mnu_开卷,
-            this.mnu_开条,
-            this.mnu_开吨});
-            this.加工ToolStripMenuItem.Name = "加工ToolStripMenuItem";
-            this.加工ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.加工ToolStripMenuItem.Text = "加工...";
-            // 
             // mnu_开平
             // 
             this.mnu_开平.Name = "mnu_开平";
-            this.mnu_开平.Size = new System.Drawing.Size(100, 22);
+            this.mnu_开平.Size = new System.Drawing.Size(172, 22);
             this.mnu_开平.Text = "开平";
             this.mnu_开平.Click += new System.EventHandler(this.mnu_Slice_Click);
-            // 
-            // mnu_开卷
-            // 
-            this.mnu_开卷.Name = "mnu_开卷";
-            this.mnu_开卷.Size = new System.Drawing.Size(100, 22);
-            this.mnu_开卷.Text = "开卷";
-            this.mnu_开卷.Click += new System.EventHandler(this.mnu_Slice_Click);
-            // 
-            // mnu_开条
-            // 
-            this.mnu_开条.Name = "mnu_开条";
-            this.mnu_开条.Size = new System.Drawing.Size(100, 22);
-            this.mnu_开条.Text = "开条";
-            this.mnu_开条.Click += new System.EventHandler(this.mnu_Slice_Click);
-            // 
-            // mnu_开吨
-            // 
-            this.mnu_开吨.Name = "mnu_开吨";
-            this.mnu_开吨.Size = new System.Drawing.Size(100, 22);
-            this.mnu_开吨.Text = "开吨";
-            this.mnu_开吨.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_SliceView
             // 
@@ -794,35 +758,37 @@
             // 预订ToolStripMenuItem
             // 
             this.预订ToolStripMenuItem.Name = "预订ToolStripMenuItem";
-            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.预订ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.预订ToolStripMenuItem.Text = "预订";
             this.预订ToolStripMenuItem.Click += new System.EventHandler(this.预订ToolStripMenuItem_Click);
             // 
             // 取消预订ToolStripMenuItem
             // 
             this.取消预订ToolStripMenuItem.Name = "取消预订ToolStripMenuItem";
-            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.取消预订ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.取消预订ToolStripMenuItem.Text = "取消预订";
             this.取消预订ToolStripMenuItem.Click += new System.EventHandler(this.取消预订ToolStripMenuItem_Click);
             // 
             // mnu_拆卷
             // 
             this.mnu_拆卷.Name = "mnu_拆卷";
-            this.mnu_拆卷.Size = new System.Drawing.Size(136, 22);
+            this.mnu_拆卷.Size = new System.Drawing.Size(152, 22);
             this.mnu_拆卷.Text = "拆卷";
+            this.mnu_拆卷.Visible = false;
             this.mnu_拆卷.Click += new System.EventHandler(this.mnu_拆卷_Click);
             // 
             // mnu_原材料拆条
             // 
             this.mnu_原材料拆条.Name = "mnu_原材料拆条";
-            this.mnu_原材料拆条.Size = new System.Drawing.Size(136, 22);
+            this.mnu_原材料拆条.Size = new System.Drawing.Size(152, 22);
             this.mnu_原材料拆条.Text = "原材料分条";
+            this.mnu_原材料拆条.Visible = false;
             this.mnu_原材料拆条.Click += new System.EventHandler(this.mnu_原材料拆条_Click);
             // 
             // mnu_Nullify
             // 
             this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(136, 22);
+            this.mnu_Nullify.Size = new System.Drawing.Size(152, 22);
             this.mnu_Nullify.Text = "作废";
             this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
             // 
@@ -865,7 +831,7 @@
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.Format = "N4";
             dataGridViewCellStyle1.NullValue = null;
             this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colOriginalWeight.HeaderText = "入库重量";
@@ -884,7 +850,7 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.Format = "N4";
             dataGridViewCellStyle3.NullValue = null;
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colWeight.HeaderText = "剩余重量";
@@ -903,20 +869,18 @@
             // 
             // colOriginalThick
             // 
-            dataGridViewCellStyle5.Format = "N3";
             dataGridViewCellStyle5.NullValue = null;
             this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colOriginalThick.HeaderText = "入库厚度";
+            this.colOriginalThick.HeaderText = "入库克重";
             this.colOriginalThick.Name = "colOriginalThick";
             this.colOriginalThick.ReadOnly = true;
             this.colOriginalThick.Visible = false;
             // 
             // colRealThick
             // 
-            dataGridViewCellStyle6.Format = "N3";
             dataGridViewCellStyle6.NullValue = null;
             this.colRealThick.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colRealThick.HeaderText = "开平厚度";
+            this.colRealThick.HeaderText = "开平克重";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
             // 
@@ -1151,11 +1115,6 @@
         private System.Windows.Forms.ToolStripMenuItem 预订ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 取消预订ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnu_拆卷;
-        private System.Windows.Forms.ToolStripMenuItem 加工ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnu_开平;
-        private System.Windows.Forms.ToolStripMenuItem mnu_开卷;
-        private System.Windows.Forms.ToolStripMenuItem mnu_开条;
-        private System.Windows.Forms.ToolStripMenuItem mnu_开吨;
         private System.Windows.Forms.ToolStripMenuItem mnu_CheckView;
         private System.Windows.Forms.ToolStripMenuItem mnu_Nullify;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -1166,6 +1125,7 @@
         private System.Windows.Forms.Label label2;
         private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
         private System.Windows.Forms.ToolStripMenuItem mnu_查看成本明细;
+        private System.Windows.Forms.ToolStripMenuItem mnu_开平;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;

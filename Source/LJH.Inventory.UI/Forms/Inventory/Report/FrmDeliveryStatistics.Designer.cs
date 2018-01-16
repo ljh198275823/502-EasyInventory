@@ -154,7 +154,7 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.Format = "N4";
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colWeight.HeaderText = "重量";
             this.colWeight.Name = "colWeight";

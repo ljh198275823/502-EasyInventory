@@ -173,7 +173,7 @@
             this.chkCalThick.Name = "chkCalThick";
             this.chkCalThick.Size = new System.Drawing.Size(96, 16);
             this.chkCalThick.TabIndex = 13;
-            this.chkCalThick.Text = "重新计算厚度";
+            this.chkCalThick.Text = "重新计算克重";
             this.chkCalThick.UseVisualStyleBackColor = true;
             // 
             // FrmSteelRollSliceCheck

@@ -134,9 +134,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
             mnu_拆卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit) || Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
             mnu_开平.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_开卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_开条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
-            mnu_开吨.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
             更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
@@ -225,8 +222,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colOriginalLength"].Value = sr.OriginalLength;
             row.Cells["colWeight"].Value = sr.Weight;
             row.Cells["colLength"].Value = sr.Length;
-            row.Cells["colOriginalThick"].Value = sr.Original克重;
-            row.Cells["colRealThick"].Value = sr.Real克重;
+            if (sr.Original克重.HasValue) row.Cells["colOriginalThick"].Value = sr.Original克重.Value.Trim();
+            if (sr.Real克重.HasValue) row.Cells["colRealThick"].Value = sr.Real克重.Value.Trim();
             row.Cells["colCustomer"].Value = sr.Customer;
             if (_AllSuppliers != null)
             {
@@ -387,9 +384,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             string sliceTo = null;
             if (object.ReferenceEquals(sender, mnu_开平)) sliceTo = ProductModel.开平;
-            if (object.ReferenceEquals(sender, mnu_开卷)) sliceTo = ProductModel.开卷;
-            if (object.ReferenceEquals(sender, mnu_开条)) sliceTo = ProductModel.开条;
-            if (object.ReferenceEquals(sender, mnu_开吨)) sliceTo = ProductModel.开吨;
 
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {

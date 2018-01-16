@@ -368,7 +368,7 @@
             // 
             // colBeforeWeight
             // 
-            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.Format = "N4";
             this.colBeforeWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colBeforeWeight.HeaderText = "加工前重量";
             this.colBeforeWeight.Name = "colBeforeWeight";
@@ -394,7 +394,7 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle6.Format = "N3";
+            dataGridViewCellStyle6.Format = "N4";
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle6;
             this.colWeight.HeaderText = "小件重量";
             this.colWeight.Name = "colWeight";
@@ -412,7 +412,7 @@
             // 
             // colTotalWeight
             // 
-            dataGridViewCellStyle8.Format = "N3";
+            dataGridViewCellStyle8.Format = "N4";
             this.colTotalWeight.DefaultCellStyle = dataGridViewCellStyle8;
             this.colTotalWeight.HeaderText = "加工重量";
             this.colTotalWeight.Name = "colTotalWeight";
@@ -432,7 +432,7 @@
             // 
             // colAfterWeight
             // 
-            dataGridViewCellStyle10.Format = "N3";
+            dataGridViewCellStyle10.Format = "N4";
             this.colAfterWeight.DefaultCellStyle = dataGridViewCellStyle10;
             this.colAfterWeight.HeaderText = "加工后重量";
             this.colAfterWeight.Name = "colAfterWeight";
@@ -461,7 +461,7 @@
             // 
             // colSourceRoll
             // 
-            dataGridViewCellStyle12.Format = "N3";
+            dataGridViewCellStyle12.Format = "N4";
             this.colSourceRoll.DefaultCellStyle = dataGridViewCellStyle12;
             this.colSourceRoll.HeaderText = "原材料卷";
             this.colSourceRoll.Name = "colSourceRoll";

@@ -60,6 +60,7 @@
             this.colRowIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -278,9 +279,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Location = new System.Drawing.Point(6, 98);
             this.groupBox2.Name = "groupBox2";
@@ -294,15 +295,16 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colRowIndex,
             this.colAddDate,
             this.colWareHouse,
+            this.colName,
             this.colCategory,
             this.colSpecification,
             this.colOriginalWeight,
@@ -347,6 +349,11 @@
             this.colWareHouse.HeaderText = "仓库*";
             this.colWareHouse.Name = "colWareHouse";
             // 
+            // colName
+            // 
+            this.colName.HeaderText = "名称*";
+            this.colName.Name = "colName";
+            // 
             // colCategory
             // 
             this.colCategory.HeaderText = "类别*";
@@ -361,7 +368,7 @@
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.Format = "N4";
             dataGridViewCellStyle1.NullValue = null;
             this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colOriginalWeight.HeaderText = "入库重量*";
@@ -379,7 +386,7 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.Format = "N4";
             dataGridViewCellStyle3.NullValue = null;
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colWeight.HeaderText = "剩余重量*";
@@ -500,6 +507,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRowIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalWeight;

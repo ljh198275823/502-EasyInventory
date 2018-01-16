@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollSliceImport));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -58,12 +57,10 @@
             this.colRowIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -248,9 +245,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Controls.Add(this.lblSource);
             this.groupBox2.Controls.Add(this.label3);
@@ -266,21 +263,19 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colRowIndex,
             this.colAddDate,
             this.colWareHouse,
+            this.colName,
             this.colCategory,
             this.colSpecification,
-            this.colModel,
-            this.colWeight,
             this.colLength,
-            this.colThick,
             this.colCount,
             this.colCustomer,
             this.colSupplier,
@@ -292,8 +287,8 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1342, 544);
@@ -340,6 +335,11 @@
             this.colWareHouse.HeaderText = "仓库*";
             this.colWareHouse.Name = "colWareHouse";
             // 
+            // colName
+            // 
+            this.colName.HeaderText = "名称*";
+            this.colName.Name = "colName";
+            // 
             // colCategory
             // 
             this.colCategory.HeaderText = "类别*";
@@ -352,33 +352,14 @@
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.Width = 80;
             // 
-            // colModel
-            // 
-            this.colModel.HeaderText = "加工类别*";
-            this.colModel.Name = "colModel";
-            // 
-            // colWeight
+            // colLength
             // 
             dataGridViewCellStyle1.Format = "N3";
             dataGridViewCellStyle1.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colWeight.HeaderText = "重量";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.Width = 85;
-            // 
-            // colLength
-            // 
-            dataGridViewCellStyle2.Format = "N3";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colLength.HeaderText = "长度";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colLength.HeaderText = "长度*";
             this.colLength.Name = "colLength";
             this.colLength.Width = 80;
-            // 
-            // colThick
-            // 
-            this.colThick.HeaderText = "厚度";
-            this.colThick.Name = "colThick";
             // 
             // colCount
             // 
@@ -415,8 +396,8 @@
             // 
             // colReason
             // 
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
-            this.colReason.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
+            this.colReason.DefaultCellStyle = dataGridViewCellStyle2;
             this.colReason.HeaderText = "导入状态";
             this.colReason.Name = "colReason";
             this.colReason.ReadOnly = true;
@@ -474,12 +455,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colRowIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;

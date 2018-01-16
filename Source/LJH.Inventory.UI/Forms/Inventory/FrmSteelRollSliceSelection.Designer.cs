@@ -194,7 +194,7 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.Format = "N4";
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle2;
             this.colWeight.HeaderText = "重量(吨)";
             this.colWeight.Name = "colWeight";
@@ -227,7 +227,7 @@
             // 
             // colSourceRollWeight
             // 
-            dataGridViewCellStyle5.Format = "N3";
+            dataGridViewCellStyle5.Format = "N4";
             this.colSourceRollWeight.DefaultCellStyle = dataGridViewCellStyle5;
             this.colSourceRollWeight.HeaderText = "来源卷重";
             this.colSourceRollWeight.Name = "colSourceRollWeight";

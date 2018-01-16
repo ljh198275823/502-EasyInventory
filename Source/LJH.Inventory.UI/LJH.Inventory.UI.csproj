@@ -872,6 +872,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Frm其它产品导入.resx">
       <DependentUpon>Frm其它产品导入.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Frm其它产品库存.resx">
       <DependentUpon>Frm其它产品库存.cs</DependentUpon>
@@ -932,12 +933,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceImport.resx">
       <DependentUpon>FrmSteelRollSliceImport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollSliceSelection.resx">
       <DependentUpon>FrmSteelRollSliceSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\FrmSteelRollImport.resx">
       <DependentUpon>FrmSteelRollImport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Report\FrmSliceRecordReport.resx">
       <DependentUpon>FrmSliceRecordReport.cs</DependentUpon>

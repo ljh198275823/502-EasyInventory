@@ -174,7 +174,7 @@
             0,
             0});
             this.txtWeight.Name = "txtWeight";
-            this.txtWeight.PointCount = 3;
+            this.txtWeight.PointCount = 4;
             this.txtWeight.Size = new System.Drawing.Size(145, 21);
             this.txtWeight.TabIndex = 6;
             this.txtWeight.Text = "0";
@@ -353,7 +353,7 @@
             0,
             0});
             this.txtOriginalWeight.Name = "txtOriginalWeight";
-            this.txtOriginalWeight.PointCount = 3;
+            this.txtOriginalWeight.PointCount = 4;
             this.txtOriginalWeight.Size = new System.Drawing.Size(145, 21);
             this.txtOriginalWeight.TabIndex = 4;
             this.txtOriginalWeight.Text = "0";

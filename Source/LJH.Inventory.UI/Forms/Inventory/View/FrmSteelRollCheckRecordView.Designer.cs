@@ -82,7 +82,7 @@
             // 
             // colBeforeWeight
             // 
-            dataGridViewCellStyle1.Format = "N3";
+            dataGridViewCellStyle1.Format = "N4";
             this.colBeforeWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colBeforeWeight.HeaderText = "盘点前重量";
             this.colBeforeWeight.Name = "colBeforeWeight";
@@ -98,7 +98,7 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.Format = "N4";
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colWeight.HeaderText = "盘点后重量";
             this.colWeight.Name = "colWeight";
