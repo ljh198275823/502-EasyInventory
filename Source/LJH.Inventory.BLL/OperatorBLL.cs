@@ -43,6 +43,18 @@ namespace LJH.Inventory.BLL
                 return false;
             }
         }
+
+        public override CommandResult Delete(Operator info)
+        {
+            if (info.CanDelete)
+            {
+                return base.Delete(info);
+            }
+            else
+            {
+                return new CommandResult(ResultCode.Fail, "系统默认操作员,不能删除");
+            }
+        }
         #endregion
     }
 }
