@@ -59,6 +59,7 @@
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.cmbSupplier = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label2 = new System.Windows.Forms.Label();
@@ -120,7 +121,6 @@
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlStates.SuspendLayout();
@@ -283,6 +283,17 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1341, 93);
             this.panel5.TabIndex = 115;
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.Location = new System.Drawing.Point(324, 11);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.SelectedWidth = null;
+            this.cmbSpecification.Selected克重 = null;
+            this.cmbSpecification.Size = new System.Drawing.Size(226, 27);
+            this.cmbSpecification.Specification = "*";
+            this.cmbSpecification.TabIndex = 101;
+            this.cmbSpecification.SpecificationChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // cmbBrand
             // 
@@ -765,7 +776,6 @@
             // 
             // colCount
             // 
-            dataGridViewCellStyle3.Format = "N0";
             dataGridViewCellStyle3.NullValue = "?";
             this.colCount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colCount.HeaderText = "数量";
@@ -919,17 +929,6 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.Width = 54;
             // 
-            // cmbSpecification
-            // 
-            this.cmbSpecification.Location = new System.Drawing.Point(324, 11);
-            this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.SelectedWidth = null;
-            this.cmbSpecification.Selected克重 = null;
-            this.cmbSpecification.Size = new System.Drawing.Size(226, 27);
-            this.cmbSpecification.Specification = "*";
-            this.cmbSpecification.TabIndex = 101;
-            this.cmbSpecification.SpecificationChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
             // Frm小件库存管理
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1006,6 +1005,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_Nullify;
         internal System.Windows.Forms.CheckBox chk作废;
         private System.Windows.Forms.ToolStripMenuItem mnu_查看成本明细;
+        private Controls.UCSpecification cmbSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
@@ -1035,7 +1035,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private Controls.UCSpecification cmbSpecification;
 
     }
 }

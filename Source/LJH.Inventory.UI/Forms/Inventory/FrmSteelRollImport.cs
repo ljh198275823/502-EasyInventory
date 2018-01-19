@@ -200,15 +200,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Model = p.Model;
             pi.WareHouseID = ws;
             pi.OriginalWeight = originalWeight;
-            if (originalLength > 0)
-            {
-                pi.OriginalLength = originalLength;
-                pi.Original克重 = ProductInventoryItem.Cal平方克重(SpecificationHelper.GetWrittenWidth(p.Specification).Value, pi.OriginalWeight.Value, pi.OriginalLength.Value);
-            }
-            else
-            {
-                pi.Original克重 = SpecificationHelper.GetWritten克重(specification);
-            }
+            pi.OriginalLength = originalLength;
             pi.Weight = weight;
             if (length > 0) pi.Length = length;
             pi.OriginalCount = 1;

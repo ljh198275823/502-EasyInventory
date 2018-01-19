@@ -223,15 +223,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
             item.OriginalWeight = txtOriginalWeight.DecimalValue;
-            if (txtOriginalLength.DecimalValue > 0)
-            {
-                item.OriginalLength = txtOriginalLength.DecimalValue;
-                item.Original克重 = ProductInventoryItem.Cal平方克重(SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.OriginalWeight.Value, item.OriginalLength.Value); //指定长度时计算入库厚度
-            }
-            else
-            {
-                item.Original克重 = SpecificationHelper.GetWritten克重(p.Specification);
-            }
+            if (txtOriginalLength.DecimalValue > 0)item.OriginalLength = txtOriginalLength.DecimalValue; 
             item.OriginalCount = 1;
             item.Weight = txtWeight.DecimalValue;
             if (txtLength.DecimalValue > 0) item.Length = txtLength.DecimalValue;

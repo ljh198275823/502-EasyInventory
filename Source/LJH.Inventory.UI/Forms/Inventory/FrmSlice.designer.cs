@@ -354,6 +354,7 @@
             // 
             // ucSpecification1
             // 
+            this.ucSpecification1.Enabled = false;
             this.ucSpecification1.Location = new System.Drawing.Point(63, 44);
             this.ucSpecification1.Name = "ucSpecification1";
             this.ucSpecification1.SelectedWidth = null;

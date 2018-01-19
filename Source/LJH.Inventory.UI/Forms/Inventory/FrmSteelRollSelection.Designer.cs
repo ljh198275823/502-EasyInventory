@@ -46,13 +46,13 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col克重 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOriginalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRealThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,9 +89,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.ucFormViewMain);
             this.panel1.Controls.Add(this.splitter1);
@@ -140,13 +140,13 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colAddDate,
             this.colWareHouse,
-            this.colCategory,
-            this.colSpecification,
+            this.colName,
+            this.col克重,
+            this.colWidth,
             this.colOriginalWeight,
             this.colOriginalLength,
             this.colWeight,
             this.colLength,
-            this.colOriginalThick,
             this.colRealThick,
             this.colCustomer,
             this.colSupplier,
@@ -180,25 +180,35 @@
             this.colWareHouse.ReadOnly = true;
             this.colWareHouse.Width = 120;
             // 
-            // colCategory
+            // colName
             // 
-            this.colCategory.HeaderText = "类别";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCategory.Width = 80;
+            this.colName.HeaderText = "产品名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colName.Width = 80;
             // 
-            // colSpecification
+            // col克重
             // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
+            dataGridViewCellStyle1.NullValue = null;
+            this.col克重.DefaultCellStyle = dataGridViewCellStyle1;
+            this.col克重.HeaderText = "克重";
+            this.col克重.Name = "col克重";
+            this.col克重.ReadOnly = true;
+            this.col克重.Width = 60;
+            // 
+            // colWidth
+            // 
+            this.colWidth.HeaderText = "宽度";
+            this.colWidth.Name = "colWidth";
+            this.colWidth.ReadOnly = true;
+            this.colWidth.Width = 60;
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle1.Format = "N4";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "N4";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle2;
             this.colOriginalWeight.HeaderText = "入库重量";
             this.colOriginalWeight.Name = "colOriginalWeight";
             this.colOriginalWeight.ReadOnly = true;
@@ -207,9 +217,9 @@
             // 
             // colOriginalLength
             // 
-            dataGridViewCellStyle2.Format = "N3";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Format = "N3";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colOriginalLength.DefaultCellStyle = dataGridViewCellStyle3;
             this.colOriginalLength.HeaderText = "入库长度";
             this.colOriginalLength.Name = "colOriginalLength";
             this.colOriginalLength.ReadOnly = true;
@@ -219,9 +229,9 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle3.Format = "N4";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Format = "N4";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle4;
             this.colWeight.HeaderText = "剩余重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
@@ -229,25 +239,14 @@
             // 
             // colLength
             // 
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Format = "N3";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle5;
             this.colLength.HeaderText = "剩余长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             this.colLength.Visible = false;
             this.colLength.Width = 80;
-            // 
-            // colOriginalThick
-            // 
-            dataGridViewCellStyle5.Format = "N3";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colOriginalThick.HeaderText = "入库厚度";
-            this.colOriginalThick.Name = "colOriginalThick";
-            this.colOriginalThick.ReadOnly = true;
-            this.colOriginalThick.Visible = false;
-            this.colOriginalThick.Width = 80;
             // 
             // colRealThick
             // 
@@ -334,13 +333,13 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col克重;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRealThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;

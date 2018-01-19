@@ -99,7 +99,7 @@ namespace LJH.Inventory.BLL
                 InventoryItem = sliceSheet.ID,
                 OriginalWeight = sliceSheet.BeforeWeight - sliceSheet.AfterWeight,
                 Weight = sliceSheet.BeforeWeight - sliceSheet.AfterWeight,
-                Original克重 = sr.Original克重,
+                //Original克重 = sr.Original克重,
                 Count = sliceSheet.Count,
                 Model = sliceSheet.SliceType,
                 State = ProductInventoryState.Inventory,
@@ -139,11 +139,14 @@ namespace LJH.Inventory.BLL
             ProductInventoryItem sr = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sliceSheet.SliceSource).QueryObject;
             if (sr == null) return new CommandResult(ResultCode.Fail, "没有找到相关的原材料卷");
 
+            var width = SpecificationHelper.GetWrittenWidth(sr.Product.Specification);
+            var 克重 = SpecificationHelper.GetWritten克重(sr.Product.Specification);
+
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var clone = sr.Clone();
             clone.Weight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
             if (clone.Weight == clone.OriginalWeight) clone.Length = clone.OriginalLength; //如果回到整件，则长度设置成入库长度
-            else clone.Length = ProductInventoryItem.CalLength(clone.Original克重.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, clone.Weight.Value);
+            else clone.Length = ProductInventoryItem.CalLength(克重.Value, width.Value, clone.Weight.Value);
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork); //
 
             foreach (var pi in pis) //删除所有加工产生的小件库存
@@ -158,9 +161,9 @@ namespace LJH.Inventory.BLL
             {
                 var cloneSheet = sheet.Clone();
                 cloneSheet.BeforeWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
-                cloneSheet.BeforeLength = ProductInventoryItem.CalLength(clone.Original克重.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, cloneSheet.BeforeWeight);
+                cloneSheet.BeforeLength = ProductInventoryItem.CalLength(克重.Value, width.Value, cloneSheet.BeforeWeight);
                 cloneSheet.AfterWeight += sliceSheet.BeforeWeight - sliceSheet.AfterWeight;
-                cloneSheet.AfterLength = ProductInventoryItem.CalLength(clone.Original克重.Value, SpecificationHelper.GetWrittenWidth(clone.Product.Specification).Value, cloneSheet.AfterWeight);
+                cloneSheet.AfterLength = ProductInventoryItem.CalLength(克重.Value, width.Value, cloneSheet.AfterWeight);
                 ProviderFactory.Create<IProvider<SteelRollSliceRecord, Guid>>(RepoUri).Update(cloneSheet, sheet, unitWork);
             }
             return unitWork.Commit();
@@ -310,7 +313,7 @@ namespace LJH.Inventory.BLL
                 ProductID = sr.ProductID,
                 SliceType = "开条",
                 BeforeWeight = sr.Weight.Value,
-                BeforeLength = ProductInventoryItem.CalLength(sr.Original克重.Value, SpecificationHelper.GetWrittenWidth(sr.Product.Specification).Value, sr.Weight.Value),
+                BeforeLength = ProductInventoryItem.CalLength(SpecificationHelper.GetWritten克重(sr.Product.Specification).Value, SpecificationHelper.GetWrittenWidth(sr.Product.Specification).Value, sr.Weight.Value),
                 Customer = sr.Customer,
                 Slicer = string.Empty,
                 Warehouse = string.Empty,

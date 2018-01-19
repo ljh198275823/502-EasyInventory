@@ -78,16 +78,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             ProductInventoryItem pi = item as ProductInventoryItem;
             row.Tag = pi;
-            row.Cells["colCategory"].Value = pi.Product.Category == null ? pi.Product.CategoryID : pi.Product.Category.Name;
-            row.Cells["colSpecification"].Value = pi.Product.Specification;
+            row.Cells["colName"].Value = pi.Product.Name;
+            row.Cells["col克重"].Value = SpecificationHelper.GetWritten克重(pi.Product.Specification);
+            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(pi.Product.Specification);
             row.Cells["colModel"].Value = pi.Product.Model;
             WareHouse ws = null;
             if (_AllWarehouse != null) ws = _AllWarehouse.SingleOrDefault(it => it.ID == pi.WareHouseID);
             row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
             row.Cells["colWeight"].Value = pi.Weight;
-            row.Cells["colLength"].Value = pi.Product.Length;
+            if (pi.Product.Length.HasValue) row.Cells["colLength"].Value = (int)pi.Product.Length;
             row.Cells["colDeliveryCount"].Value = deliveryCount;
-            row.Cells["colOriginalThick"].Value = pi.Original克重;
             row.Cells["colRealThick"].Value = pi.Real克重;
             row.Cells["colSourceRoll"].Value = pi.SourceRoll.HasValue ? "查看来源卷" : null;
             //row.Cells["colSourceRollWeight"].Value = pi.SourceRollWeight;

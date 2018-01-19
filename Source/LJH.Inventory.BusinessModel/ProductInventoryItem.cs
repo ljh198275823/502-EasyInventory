@@ -75,10 +75,6 @@ namespace LJH.Inventory.BusinessModel
             set { _Model = value; }
         }
         /// <summary>
-        /// 获取或设置根据入库重量和长度计算出来的厚度
-        /// </summary>
-        public decimal? Original克重 { get; set; }
-        /// <summary>
         /// 获取或设置库存单个重量
         /// </summary>
         public decimal? OriginalWeight { get; set; }

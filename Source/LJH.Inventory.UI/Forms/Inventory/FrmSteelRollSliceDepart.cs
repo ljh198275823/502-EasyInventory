@@ -80,7 +80,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (SpecificationHelper.GetWritten克重(ucSpecification1.Specification) == null ||
                 SpecificationHelper .GetWrittenWidth (ucSpecification1 .Specification )==null )
             {
-                MessageBox.Show("规格不正确，请同时指定厚度和长度");
+                MessageBox.Show("规格不正确，请同时指定克重和宽度");
                 return;
             }
             CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Depart(ProductInventory, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtDepart.DecimalValue, ucSpecification1.Specification, txtMemo.Text);

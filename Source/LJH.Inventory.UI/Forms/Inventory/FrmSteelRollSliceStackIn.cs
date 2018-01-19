@@ -322,11 +322,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Model = p.Model;
             item.AddDate = dtStorageDateTime.Value;
             item.WareHouseID = (txtWareHouse.Tag as WareHouse).ID;
-            item.Original克重 = SpecificationHelper.GetWritten克重(p.Specification);
             item.OriginalCount = txtCount.DecimalValue;
             item.Length = txtLength.DecimalValue;
-            item.OriginalWeight = ProductInventoryItem.CalWeight(item.Original克重.Value, SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Length.Value / 1000 * item.OriginalCount.Value);
-            item.Weight =item.OriginalWeight;
+            item.OriginalWeight = ProductInventoryItem.CalWeight(cmbSpecification.Selected克重.Value, cmbSpecification.SelectedWidth.Value, item.Length.Value / 1000 * item.OriginalCount.Value);
+            item.Weight = item.OriginalWeight;
             item.Count = txtCount.DecimalValue;
             item.Unit = "张";
             item.State = ProductInventoryState.Inventory;

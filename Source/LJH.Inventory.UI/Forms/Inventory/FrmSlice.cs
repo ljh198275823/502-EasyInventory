@@ -89,11 +89,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void txtLength_TextChanged(object sender, EventArgs e)
         {
             if (chkOver.Checked) return;
-            decimal? width = SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification);
-            if (width.HasValue && width > 0 && SlicingItem.Original克重.HasValue && SlicingItem.Original克重 > 0)
+            decimal?  width = SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification);
+            decimal? 克重 = SpecificationHelper.GetWritten克重(SlicingItem.Product.Specification);
+            if (width > 0 && 克重 > 0)
             {
-                decimal weight = ProductInventoryItem.CalWeight(SlicingItem.Original克重.Value, width.Value, (decimal)txtLength.IntergerValue / 1000 * txtCount.IntergerValue);
-                decimal len = SlicingItem.Length.HasValue ? SlicingItem.Length.Value : ProductInventoryItem.CalLength(SlicingItem.Original克重.Value, width.Value, SlicingItem.Weight.Value);
+                decimal weight = ProductInventoryItem.CalWeight(克重.Value, width.Value, (decimal)txtLength.IntergerValue / 1000 * txtCount.IntergerValue);
+                decimal len = SlicingItem.Length.HasValue ? SlicingItem.Length.Value : ProductInventoryItem.CalLength(克重.Value, width.Value, SlicingItem.Weight.Value);
                 if (weight <= SlicingItem.Weight)
                 {
                     this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - weight;
@@ -158,6 +159,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             if (CheckInput())
             {
+                var width = SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value;
+                var 克重 = SpecificationHelper.GetWritten克重(SlicingItem.Product.Specification).Value;
                 SteelRollSliceRecord record = new SteelRollSliceRecord()
                 {
                     ID = Guid.NewGuid(),
@@ -167,7 +170,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     ProductID = SlicingItem.ProductID,
                     SliceType = ProductModel.开平,
                     BeforeWeight = SlicingItem.Weight.Value,
-                    BeforeLength = SlicingItem.Length.HasValue ? SlicingItem.Length.Value : ProductInventoryItem.CalLength(SlicingItem.Original克重.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, SlicingItem.Weight.Value),
+                    BeforeLength = SlicingItem.Length.HasValue ? SlicingItem.Length.Value : ProductInventoryItem.CalLength(克重, width, SlicingItem.Weight.Value),
                     Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,
                     Warehouse = (txtWareHouse.Tag as WareHouse).Name,

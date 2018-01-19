@@ -42,8 +42,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ProductInventoryItem sr = item as ProductInventoryItem;
             row.Tag = sr;
             row.Cells["colAddDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
-            row.Cells["colCategory"].Value = sr.Product.Category == null ? sr.Product.CategoryID : sr.Product.Category.Name;
-            row.Cells["colSpecification"].Value = sr.Product.Specification;
+            row.Cells["colName"].Value = sr.Product.Name;
+            row.Cells["col克重"].Value = SpecificationHelper.GetWritten克重(sr.Product.Specification);
+            row.Cells["colWidth"].Value =SpecificationHelper .GetWrittenWidth ( sr.Product.Specification);
             if (_AllWarehouse != null)
             {
                 var ws = _AllWarehouse.SingleOrDefault(it => it.ID == sr.WareHouseID);
@@ -53,7 +54,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colOriginalLength"].Value = sr.OriginalLength;
             row.Cells["colWeight"].Value = sr.Weight;
             row.Cells["colLength"].Value = sr.Length;
-            row.Cells["colOriginalThick"].Value = sr.Original克重;
             row.Cells["colRealThick"].Value = sr.Real克重;
             row.Cells["colCustomer"].Value = sr.Customer;
             if (_AllSuppliers != null)

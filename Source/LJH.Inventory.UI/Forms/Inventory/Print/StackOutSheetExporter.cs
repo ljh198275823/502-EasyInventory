@@ -11,6 +11,7 @@ using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.Resource;
+using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary;
 
@@ -137,6 +138,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             {
                 if (_ShowPrice) cell.SetCellValue(RMBHelper.NumGetStr((double)info.Amount));
                 else cell.SetCellValue(string.Empty);
+            }
+            else if (express == "[制单]")
+            {
+                var con = new DocumentSearchCondition() { DocumentType = info.DocumentType,DocumentID=info.ID  };
+                var items = new DocumentOperationBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+                var item = items.SingleOrDefault(it => it.Operation == SheetOperationDescription.GetDescription(SheetOperation.Create));
+                cell.SetCellValue(item != null ? item.Operator : string.Empty);
             }
         }
 

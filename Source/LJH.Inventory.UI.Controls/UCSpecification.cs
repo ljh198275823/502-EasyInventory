@@ -76,9 +76,9 @@ namespace LJH.Inventory.UI.Controls
                 else
                 {
                     decimal? thick = SpecificationHelper.GetWritten克重(value);
-                    txtThick.Text = thick.HasValue ? thick.Value.ToString("F2") : string.Empty;
+                    txtThick.Text = thick.HasValue ? thick.Value.ToString("F0") : string.Empty;
                     decimal? width = SpecificationHelper.GetWrittenWidth(value);
-                    txtWidth.Text = width.HasValue ? width.Value.ToString() : string.Empty;
+                    txtWidth.Text = width.HasValue ? width.Value.ToString("F0") : string.Empty;
                 }
             }
         }

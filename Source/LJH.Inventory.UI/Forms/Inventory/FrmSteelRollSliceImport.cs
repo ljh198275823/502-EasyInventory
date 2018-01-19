@@ -158,7 +158,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Product = p;
             pi.Model = p.Model;
             pi.WareHouseID = ws;
-            pi.Original克重 = SpecificationHelper.GetWritten克重(p.Specification);
             pi.OriginalCount = count;
             pi.Count = count;
             pi.OriginalWeight = ProductInventoryItem.CalWeight(SpecificationHelper.GetWritten克重(p.Specification).Value, SpecificationHelper.GetWrittenWidth(p.Specification).Value, p.Length.Value * pi.Count);

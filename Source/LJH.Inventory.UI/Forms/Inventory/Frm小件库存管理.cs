@@ -196,7 +196,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if(sr.Product.Length .HasValue ) row.Cells["colLength"].Value = sr.Product.Length.Value.Trim();
             row.Cells["colRealThick"].Value = sr.Real克重;
             row.Cells["colInventoryDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
-            row.Cells["colCount"].Value = sr.Count;
+            row.Cells["colCount"].Value = (int)sr.Count;
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colCustomer"].Value = sr.Customer;
             if (_AllSuppliers != null)
