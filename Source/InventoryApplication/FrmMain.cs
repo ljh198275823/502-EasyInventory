@@ -32,7 +32,7 @@ namespace InventoryApplication
         #region 私有变量
         private Dictionary<Form, string> _openedForms = new Dictionary<Form, string>();
         private SoftDogInfo _SoftDog;
-        private bool _EnableSoftDog = false; //启用加密狗
+        private bool _EnableSoftDog = true; //启用加密狗
         private DateTime _ExpireDate = new DateTime(2018, 7, 31);
         #endregion
 
@@ -291,6 +291,7 @@ namespace InventoryApplication
             {
                 this.Text += string.Format(" [{0}]", Application.ProductVersion);
                 CheckDog();
+                if (!string.IsNullOrEmpty(_SoftDog.ProjectName)) this.Text = string.Format("{0} [{1}]", _SoftDog.ProjectName, Application.ProductVersion);
             }
 
             DoLogIn();

@@ -170,6 +170,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
                 cell.SetCellValue(p.Category.Name);
             }
+            else if (express == "[产品名称]")
+            {
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                cell.SetCellValue(p.Name);
+            }
             else if (express == "[产品规格]")
             {
                 var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;

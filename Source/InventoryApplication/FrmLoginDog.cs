@@ -22,7 +22,6 @@ namespace InventoryApplication
         }
 
         #region 私有变量
-        private readonly  string DBNAME = "inventory";
         private SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();
         #endregion
 
@@ -34,7 +33,7 @@ namespace InventoryApplication
         private bool CheckConnect()
         {
             sb.DataSource = this.txtServer.Text;
-            sb.InitialCatalog = (SoftDog != null && !string.IsNullOrEmpty(SoftDog.DBName)) ? SoftDog.DBName : DBNAME;
+            sb.InitialCatalog = (SoftDog != null && !string.IsNullOrEmpty(SoftDog.DBName)) ? SoftDog.DBName : string.Empty;
             sb.IntegratedSecurity = false;
             sb.UserID = SoftDog != null ? SoftDog.DBUser : string.Empty;
             sb.Password = SoftDog != null ? SoftDog.DBPassword : string.Empty;
@@ -142,16 +141,26 @@ namespace InventoryApplication
         #region 事件处理程序
         private void Login_Load(object sender, EventArgs e)
         {
-            txtDBName.Text = (SoftDog != null && !string.IsNullOrEmpty(SoftDog.DBName)) ? SoftDog.DBName : DBNAME;
-            if (!string.IsNullOrEmpty(AppSettings.Current.ConnStr))
+            if (!string.IsNullOrEmpty(SoftDog.ProjectName)) this.Text = SoftDog.ProjectName;
+            txtDBName.Text = SoftDog.DBName;
+            txtServer.Text = SoftDog.DBServer;
+            if (!string.IsNullOrEmpty(SoftDog.DBServer) && !string.IsNullOrEmpty(SoftDog.DBName))
             {
-                try
+                gpDB.Visible = false;
+                this.Height -= gpDB.Height;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(AppSettings.Current.ConnStr))
                 {
-                    sb = new SqlConnectionStringBuilder(AppSettings.Current.ConnStr);
-                    txtServer.Text = sb.DataSource;
-                }
-                catch
-                {
+                    try
+                    {
+                        sb = new SqlConnectionStringBuilder(AppSettings.Current.ConnStr);
+                        txtServer.Text = sb.DataSource;
+                    }
+                    catch
+                    {
+                    }
                 }
             }
 
