@@ -11,6 +11,7 @@ using LJH.GeneralLibrary.Core.DAL;
 using LJH.Inventory.UI.Forms.Sale;
 using LJH.Inventory.UI.Forms.Financial;
 using LJH.Inventory.UI.Forms.General;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
@@ -104,10 +105,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 Product p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
                 row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
-                row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
-                row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
-                row.Cells["colModel"].Value = p.Model;
-                row.Cells["colLength"].Value = item.Length;
+                row.Cells["colName"].Value = p.Name;
+                row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(p.Specification);
+                row.Cells["col克重"].Value = SpecificationHelper.GetWritten克重(p.Specification);
+                if (item.Length.HasValue) row.Cells["colLength"].Value = item.Length.Value.Trim();
                 row.Cells["colWeight"].Value = item.TotalWeight;
                 row.Cells["colPrice"].Value = item.Price;
                 row.Cells["colCount"].Value = item.Count;
@@ -120,7 +121,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItem pi = null;
                 if (item.InventoryItem != null) pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.InventoryItem.Value).QueryObject; //获取出货项对应的库存项，即是从哪个库存项出货的
-                row.Cells["colModel"].Value = pi.Manufacture;
                 row.Cells["colWeight"].Value = pi != null ? (pi.Real克重.HasValue ? (decimal?)pi.Real克重 : (decimal?)pi.Original克重) : null;
                 row.Cells["colPrice"].Value = pi != null ? pi.Customer : null;
                 row.Cells["colCount"].Value = item.Count;
@@ -180,7 +180,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 foreach (var item in items)
                 {
-                    ret += ProductInventoryItem.CalWeight(SpecificationHelper.GetWritten克重(p.Specification).Value, SpecificationHelper.GetWrittenWidth(p.Specification).Value, p.Length.Value * item.Count);
+                    ret += ProductInventoryItem.CalWeight(SpecificationHelper.GetWritten克重(p.Specification).Value, SpecificationHelper.GetWrittenWidth(p.Specification).Value, p.Length.Value * item.Count / 1000);
                 }
                 items.ForEach(it => it.TotalWeight = ret);
             }

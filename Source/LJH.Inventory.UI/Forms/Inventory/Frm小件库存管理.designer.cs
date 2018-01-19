@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,8 +41,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CreateInventory = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,19 +89,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
-            this.label5 = new System.Windows.Forms.Label();
             this.chkStackIn = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colInventoryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col克重 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRealThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -125,6 +120,7 @@
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlStates.SuspendLayout();
@@ -259,6 +255,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.cmbSpecification);
             this.panel5.Controls.Add(this.cmbBrand);
             this.panel5.Controls.Add(this.cmbSupplier);
             this.panel5.Controls.Add(this.label2);
@@ -280,8 +277,6 @@
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.label9);
-            this.panel5.Controls.Add(this.cmbSpecification);
-            this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.chkStackIn);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
@@ -312,7 +307,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(484, 54);
+            this.label2.Location = new System.Drawing.Point(465, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 98;
@@ -321,7 +316,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(466, 18);
+            this.label10.Location = new System.Drawing.Point(561, 54);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(53, 12);
             this.label10.TabIndex = 97;
@@ -330,7 +325,7 @@
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(519, 49);
+            this.txtLength.Location = new System.Drawing.Point(500, 49);
             this.txtLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -343,7 +338,7 @@
             0});
             this.txtLength.Name = "txtLength";
             this.txtLength.PointCount = 3;
-            this.txtLength.Size = new System.Drawing.Size(75, 21);
+            this.txtLength.Size = new System.Drawing.Size(55, 21);
             this.txtLength.TabIndex = 96;
             this.txtLength.Text = "0";
             this.txtLength.TextChanged += new System.EventHandler(this.FreshData_Clicked);
@@ -351,7 +346,7 @@
             // txtWeight
             // 
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(519, 14);
+            this.txtWeight.Location = new System.Drawing.Point(614, 50);
             this.txtWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -364,7 +359,7 @@
             0});
             this.txtWeight.Name = "txtWeight";
             this.txtWeight.PointCount = 3;
-            this.txtWeight.Size = new System.Drawing.Size(75, 21);
+            this.txtWeight.Size = new System.Drawing.Size(67, 21);
             this.txtWeight.TabIndex = 95;
             this.txtWeight.Text = "0";
             this.txtWeight.TextChanged += new System.EventHandler(this.FreshData_Clicked);
@@ -374,7 +369,7 @@
             this.lblOriginalTotal.AutoSize = true;
             this.lblOriginalTotal.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblOriginalTotal.ForeColor = System.Drawing.Color.Blue;
-            this.lblOriginalTotal.Location = new System.Drawing.Point(1198, 52);
+            this.lblOriginalTotal.Location = new System.Drawing.Point(1211, 52);
             this.lblOriginalTotal.Name = "lblOriginalTotal";
             this.lblOriginalTotal.Size = new System.Drawing.Size(22, 21);
             this.lblOriginalTotal.TabIndex = 94;
@@ -385,7 +380,7 @@
             this.lblTotalWeight.AutoSize = true;
             this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalWeight.Location = new System.Drawing.Point(1198, 17);
+            this.lblTotalWeight.Location = new System.Drawing.Point(1211, 17);
             this.lblTotalWeight.Name = "lblTotalWeight";
             this.lblTotalWeight.Size = new System.Drawing.Size(22, 21);
             this.lblTotalWeight.TabIndex = 93;
@@ -395,7 +390,7 @@
             // 
             this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.Location = new System.Drawing.Point(675, 7);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(688, 7);
             this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
             this.ucDateTimeInterval1.ShowTime = true;
             this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
@@ -429,7 +424,7 @@
             this.pnlStates.Controls.Add(this.chk预订);
             this.pnlStates.Controls.Add(this.chk在库);
             this.pnlStates.Controls.Add(this.chk发货);
-            this.pnlStates.Location = new System.Drawing.Point(965, 35);
+            this.pnlStates.Location = new System.Drawing.Point(978, 35);
             this.pnlStates.Name = "pnlStates";
             this.pnlStates.Size = new System.Drawing.Size(218, 47);
             this.pnlStates.TabIndex = 89;
@@ -498,7 +493,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(906, 50);
+            this.label7.Location = new System.Drawing.Point(919, 50);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 88;
@@ -511,7 +506,7 @@
             this.panel1.Controls.Add(this.chk开条);
             this.panel1.Controls.Add(this.chk开吨);
             this.panel1.Controls.Add(this.chk开平);
-            this.panel1.Location = new System.Drawing.Point(965, 7);
+            this.panel1.Location = new System.Drawing.Point(978, 7);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(219, 24);
             this.panel1.TabIndex = 87;
@@ -571,7 +566,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(906, 13);
+            this.label6.Location = new System.Drawing.Point(919, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 86;
@@ -633,28 +628,10 @@
             this.label9.TabIndex = 77;
             this.label9.Text = "厂家";
             // 
-            // cmbSpecification
-            // 
-            this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(354, 14);
-            this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(99, 20);
-            this.cmbSpecification.TabIndex = 76;
-            this.cmbSpecification.TextChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(322, 18);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 75;
-            this.label5.Text = "规格";
-            // 
             // chkStackIn
             // 
             this.chkStackIn.AutoSize = true;
-            this.chkStackIn.Location = new System.Drawing.Point(600, 16);
+            this.chkStackIn.Location = new System.Drawing.Point(613, 16);
             this.chkStackIn.Name = "chkStackIn";
             this.chkStackIn.Size = new System.Drawing.Size(72, 16);
             this.chkStackIn.TabIndex = 44;
@@ -674,11 +651,10 @@
             this.colWareHouse,
             this.colName,
             this.colCategory,
-            this.colModel,
-            this.colSpecification,
-            this.colWeight,
+            this.col克重,
+            this.colWidth,
             this.colLength,
-            this.colOriginalThick,
+            this.colWeight,
             this.colRealThick,
             this.colCount,
             this.colCustomer,
@@ -705,8 +681,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 93);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1341, 483);
@@ -739,24 +715,32 @@
             // 
             // colCategory
             // 
+            this.colCategory.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCategory.HeaderText = "类别";
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
-            this.colCategory.Width = 60;
+            this.colCategory.Width = 54;
             // 
-            // colModel
+            // col克重
             // 
-            this.colModel.HeaderText = "加工";
-            this.colModel.Name = "colModel";
-            this.colModel.ReadOnly = true;
-            this.colModel.Width = 60;
+            this.col克重.HeaderText = "克重";
+            this.col克重.Name = "col克重";
+            this.col克重.ReadOnly = true;
+            this.col克重.Width = 60;
             // 
-            // colSpecification
+            // colWidth
             // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            this.colSpecification.Width = 110;
+            this.colWidth.HeaderText = "宽度";
+            this.colWidth.Name = "colWidth";
+            this.colWidth.ReadOnly = true;
+            this.colWidth.Width = 60;
+            // 
+            // colLength
+            // 
+            this.colLength.HeaderText = "长度";
+            this.colLength.Name = "colLength";
+            this.colLength.ReadOnly = true;
+            this.colLength.Width = 60;
             // 
             // colWeight
             // 
@@ -769,39 +753,21 @@
             this.colWeight.Visible = false;
             this.colWeight.Width = 80;
             // 
-            // colLength
-            // 
-            dataGridViewCellStyle2.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colLength.HeaderText = "长度(米)";
-            this.colLength.Name = "colLength";
-            this.colLength.ReadOnly = true;
-            this.colLength.Width = 80;
-            // 
-            // colOriginalThick
-            // 
-            dataGridViewCellStyle3.Format = "N3";
-            this.colOriginalThick.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colOriginalThick.HeaderText = "入库厚度";
-            this.colOriginalThick.Name = "colOriginalThick";
-            this.colOriginalThick.ReadOnly = true;
-            this.colOriginalThick.Width = 80;
-            // 
             // colRealThick
             // 
-            dataGridViewCellStyle4.Format = "N3";
-            dataGridViewCellStyle4.NullValue = null;
-            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colRealThick.HeaderText = "开平厚度";
+            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colRealThick.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colRealThick.HeaderText = "开平克重";
             this.colRealThick.Name = "colRealThick";
             this.colRealThick.ReadOnly = true;
             this.colRealThick.Width = 80;
             // 
             // colCount
             // 
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "?";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = "?";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle3;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
@@ -833,8 +799,8 @@
             // 
             // colSourceRoll
             // 
-            dataGridViewCellStyle6.Format = "N4";
-            this.colSourceRoll.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Format = "N4";
+            this.colSourceRoll.DefaultCellStyle = dataGridViewCellStyle4;
             this.colSourceRoll.HeaderText = "来源卷";
             this.colSourceRoll.Name = "colSourceRoll";
             this.colSourceRoll.ReadOnly = true;
@@ -842,8 +808,8 @@
             // 
             // col含税出单位成本
             // 
-            dataGridViewCellStyle7.Format = "C2";
-            this.col含税出单位成本.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.Format = "C2";
+            this.col含税出单位成本.DefaultCellStyle = dataGridViewCellStyle5;
             this.col含税出单位成本.HeaderText = "含税成本";
             this.col含税出单位成本.Name = "col含税出单位成本";
             this.col含税出单位成本.ReadOnly = true;
@@ -851,16 +817,16 @@
             // 
             // col不含税出单位成本
             // 
-            dataGridViewCellStyle8.Format = "C2";
-            this.col不含税出单位成本.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Format = "C2";
+            this.col不含税出单位成本.DefaultCellStyle = dataGridViewCellStyle6;
             this.col不含税出单位成本.HeaderText = "不含税成本";
             this.col不含税出单位成本.Name = "col不含税出单位成本";
             this.col不含税出单位成本.ReadOnly = true;
             // 
             // colPurchasePrice
             // 
-            dataGridViewCellStyle9.Format = "C2";
-            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle7.Format = "C2";
+            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPurchasePrice.HeaderText = "入库吨价";
             this.colPurchasePrice.Name = "colPurchasePrice";
             this.colPurchasePrice.ReadOnly = true;
@@ -874,8 +840,8 @@
             // 
             // col运费
             // 
-            dataGridViewCellStyle10.Format = "C2";
-            this.col运费.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle8.Format = "C2";
+            this.col运费.DefaultCellStyle = dataGridViewCellStyle8;
             this.col运费.HeaderText = "运费";
             this.col运费.Name = "col运费";
             this.col运费.ReadOnly = true;
@@ -883,8 +849,8 @@
             // 
             // col加工费
             // 
-            dataGridViewCellStyle11.Format = "C2";
-            this.col加工费.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle9.Format = "C2";
+            this.col加工费.DefaultCellStyle = dataGridViewCellStyle9;
             this.col加工费.HeaderText = "加工费";
             this.col加工费.Name = "col加工费";
             this.col加工费.ReadOnly = true;
@@ -892,8 +858,8 @@
             // 
             // col吊装费
             // 
-            dataGridViewCellStyle12.Format = "C2";
-            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle10.Format = "C2";
+            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle10;
             this.col吊装费.HeaderText = "吊装费";
             this.col吊装费.Name = "col吊装费";
             this.col吊装费.ReadOnly = true;
@@ -901,8 +867,8 @@
             // 
             // col其它费用
             // 
-            dataGridViewCellStyle13.Format = "C2";
-            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle11.Format = "C2";
+            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle11;
             this.col其它费用.HeaderText = "其它费用";
             this.col其它费用.Name = "col其它费用";
             this.col其它费用.ReadOnly = true;
@@ -952,6 +918,17 @@
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
             this.colMemo.Width = 54;
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.Location = new System.Drawing.Point(324, 11);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.SelectedWidth = null;
+            this.cmbSpecification.Selected克重 = null;
+            this.cmbSpecification.Size = new System.Drawing.Size(226, 27);
+            this.cmbSpecification.Specification = "*";
+            this.cmbSpecification.TabIndex = 101;
+            this.cmbSpecification.SpecificationChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // Frm小件库存管理
             // 
@@ -1009,8 +986,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label9;
-        private Controls.SpecificationComboBox cmbSpecification;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox chkStackIn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label6;
@@ -1035,11 +1010,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col克重;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginalThick;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRealThick;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
@@ -1061,6 +1035,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private Controls.UCSpecification cmbSpecification;
 
     }
 }

@@ -36,8 +36,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         {
             SliceRecordSearchCondition con = new SliceRecordSearchCondition();
             con.SliceDate = new DateTimeRange(this.ucDateTimeInterval1.StartDateTime, this.ucDateTimeInterval1.EndDateTime);
-            con.Category = this.categoryComboBox1.SelectedCategoryID;
-            con.Specification = this.comSpecification1.Text;
             con.Customer = txtCustomer.Text;
             con.Warehouse = wareHouseComboBox1.Text;
             List<SteelRollSliceRecord> records = (new SteelRollSliceRecordBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
@@ -45,10 +43,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             {
                 return (from it in records
                         orderby it.SliceDate ascending
-                        where ((chk开平.Checked && it.SliceType == chk开平.Text) ||
-                               (chk开卷.Checked && it.SliceType == chk开卷.Text) ||
-                               (chk开条.Checked && it.SliceType == chk开条.Text) ||
-                               (chk开吨.Checked && it.SliceType == chk开吨.Text))
                         select (object)it).ToList();
             }
             return null;
@@ -57,20 +51,20 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             SteelRollSliceRecord record = item as SteelRollSliceRecord;
+            var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(record.ProductID).QueryObject;
             row.Tag = record;
             row.Cells["colSlicedDateTime"].Value = record.SliceDate.ToString("yyyy年MM月dd日");
-            row.Cells["colCategoryID"].Value = record.Category;
-            row.Cells["colThick"].Value = SpecificationHelper.GetWritten克重(record.Specification);
-            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(record.Specification);
+            row.Cells["colCategoryID"].Value = p.Category != null ? p.Category.Name : null;
+            row.Cells["colName"].Value = p.Name;
+            row.Cells["col克重"].Value = SpecificationHelper.GetWritten克重(p.Specification);
+            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(p.Specification);
             row.Cells["colSlicedTo"].Value = record.SliceType;
             row.Cells["colLength"].Value = record.Length;
-            row.Cells["colWeight"].Value = record.Weight;
-            row.Cells["colAmount"].Value = record.Count;
+            row.Cells["colCount"].Value = record.Count;
             row.Cells["colBeforeWeight"].Value = record.BeforeWeight;
             row.Cells["colBeforeLength"].Value = record.BeforeLength;
             row.Cells["colAfterWeight"].Value = record.AfterWeight;
             row.Cells["colAfterLength"].Value = record.AfterLength;
-            row.Cells["colTotalLength"].Value = record.BeforeLength - record.AfterLength;
             row.Cells["colTotalWeight"].Value = record.BeforeWeight - record.AfterWeight;
             row.Cells["colSlicer"].Value = record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;

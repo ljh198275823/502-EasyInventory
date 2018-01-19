@@ -436,7 +436,6 @@
       <Column Name="OriginalWeight" Member="OriginalWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="OriginalLength" Member="OriginalLength"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="OriginalCount" Member="OriginalCount"  DbType="decimal(18,4)" UpdateCheck="Never"/>
-      <Column Name="OriginalThick" Member="Original克重"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="Count" Member="Count"  DbType="decimal(18,4) not Null" UpdateCheck="Never"/>
@@ -475,8 +474,7 @@
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier NOT NULL" IsPrimaryKey="true" />
       <Column Name="SliceDate" Member="SliceDate"  DbType="datetime NOT NULL" UpdateCheck="Never"/>
       <Column Name="SliceSource" Member="SliceSource" DbType="uniqueidentifier not null" UpdateCheck="Never"/>
-      <Column Name="Category" Member="Category"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
-      <Column Name="Specification" Member="Specification"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
+      <Column Name="ProductID" Member="ProductID"  DbType="nvarchar(50) not null" UpdateCheck="Never"/>
       <Column Name="SliceType" Member="SliceType"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Length" Member="Length"  DbType="decimal(18, 4)" UpdateCheck="Never"/>
       <Column Name="Weight" Member="Weight"  DbType="decimal(18, 4)" UpdateCheck="Never"/>

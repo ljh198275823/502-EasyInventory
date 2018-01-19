@@ -37,23 +37,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chk开卷 = new System.Windows.Forms.CheckBox();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtSourceRollWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.chk开吨 = new System.Windows.Forms.CheckBox();
-            this.chk开条 = new System.Windows.Forms.CheckBox();
-            this.chk开平 = new System.Windows.Forms.CheckBox();
             this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.comSpecification1 = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
@@ -61,16 +53,15 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSlicedDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col克重 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSlicedTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBeforeWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBeforeLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAfterWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAfterLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -117,16 +108,12 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.chk开卷);
             this.groupBox3.Controls.Add(this.txtCustomer);
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Controls.Add(this.wareHouseComboBox1);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.txtSourceRollWeight);
-            this.groupBox3.Controls.Add(this.chk开吨);
-            this.groupBox3.Controls.Add(this.chk开条);
-            this.groupBox3.Controls.Add(this.chk开平);
             this.groupBox3.Controls.Add(this.categoryComboBox1);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.comSpecification1);
@@ -137,18 +124,6 @@
             this.groupBox3.TabIndex = 37;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
-            // 
-            // chk开卷
-            // 
-            this.chk开卷.AutoSize = true;
-            this.chk开卷.Checked = true;
-            this.chk开卷.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开卷.Location = new System.Drawing.Point(96, 68);
-            this.chk开卷.Name = "chk开卷";
-            this.chk开卷.Size = new System.Drawing.Size(48, 16);
-            this.chk开卷.TabIndex = 102;
-            this.chk开卷.Text = "开卷";
-            this.chk开卷.UseVisualStyleBackColor = true;
             // 
             // txtCustomer
             // 
@@ -174,7 +149,7 @@
             // 
             this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.wareHouseComboBox1.FormattingEnabled = true;
-            this.wareHouseComboBox1.Location = new System.Drawing.Point(269, 40);
+            this.wareHouseComboBox1.Location = new System.Drawing.Point(269, 48);
             this.wareHouseComboBox1.Name = "wareHouseComboBox1";
             this.wareHouseComboBox1.Size = new System.Drawing.Size(153, 20);
             this.wareHouseComboBox1.TabIndex = 99;
@@ -182,7 +157,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(233, 44);
+            this.label4.Location = new System.Drawing.Point(233, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 98;
@@ -217,42 +192,6 @@
             this.txtSourceRollWeight.TabIndex = 96;
             this.txtSourceRollWeight.Text = "0";
             // 
-            // chk开吨
-            // 
-            this.chk开吨.AutoSize = true;
-            this.chk开吨.Checked = true;
-            this.chk开吨.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开吨.Location = new System.Drawing.Point(196, 68);
-            this.chk开吨.Name = "chk开吨";
-            this.chk开吨.Size = new System.Drawing.Size(48, 16);
-            this.chk开吨.TabIndex = 32;
-            this.chk开吨.Text = "开吨";
-            this.chk开吨.UseVisualStyleBackColor = true;
-            // 
-            // chk开条
-            // 
-            this.chk开条.AutoSize = true;
-            this.chk开条.Checked = true;
-            this.chk开条.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开条.Location = new System.Drawing.Point(146, 68);
-            this.chk开条.Name = "chk开条";
-            this.chk开条.Size = new System.Drawing.Size(48, 16);
-            this.chk开条.TabIndex = 31;
-            this.chk开条.Text = "开条";
-            this.chk开条.UseVisualStyleBackColor = true;
-            // 
-            // chk开平
-            // 
-            this.chk开平.AutoSize = true;
-            this.chk开平.Checked = true;
-            this.chk开平.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk开平.Location = new System.Drawing.Point(46, 68);
-            this.chk开平.Name = "chk开平";
-            this.chk开平.Size = new System.Drawing.Size(48, 16);
-            this.chk开平.TabIndex = 30;
-            this.chk开平.Text = "开平";
-            this.chk开平.UseVisualStyleBackColor = true;
-            // 
             // categoryComboBox1
             // 
             this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -276,7 +215,7 @@
             this.comSpecification1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.comSpecification1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comSpecification1.FormattingEnabled = true;
-            this.comSpecification1.Location = new System.Drawing.Point(46, 44);
+            this.comSpecification1.Location = new System.Drawing.Point(46, 48);
             this.comSpecification1.Name = "comSpecification1";
             this.comSpecification1.Size = new System.Drawing.Size(145, 20);
             this.comSpecification1.TabIndex = 27;
@@ -284,7 +223,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 48);
+            this.label1.Location = new System.Drawing.Point(10, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 26;
@@ -303,16 +242,15 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSlicedDateTime,
             this.colCategoryID,
-            this.colThick,
+            this.colName,
+            this.col克重,
             this.colWidth,
             this.colSlicedTo,
             this.colBeforeWeight,
             this.colBeforeLength,
             this.colLength,
-            this.colWeight,
-            this.colAmount,
+            this.colCount,
             this.colTotalWeight,
-            this.colTotalLength,
             this.colAfterWeight,
             this.colAfterLength,
             this.colCustomer,
@@ -338,26 +276,37 @@
             // 
             // colCategoryID
             // 
+            this.colCategoryID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCategoryID.HeaderText = "类别";
             this.colCategoryID.Name = "colCategoryID";
             this.colCategoryID.ReadOnly = true;
+            this.colCategoryID.Width = 54;
             // 
-            // colThick
+            // colName
             // 
-            dataGridViewCellStyle1.Format = "N2";
-            this.colThick.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colThick.HeaderText = "规格厚度";
-            this.colThick.Name = "colThick";
-            this.colThick.ReadOnly = true;
-            this.colThick.Width = 80;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colName.HeaderText = "名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 54;
+            // 
+            // col克重
+            // 
+            dataGridViewCellStyle1.Format = "N0";
+            this.col克重.DefaultCellStyle = dataGridViewCellStyle1;
+            this.col克重.HeaderText = "克重";
+            this.col克重.Name = "col克重";
+            this.col克重.ReadOnly = true;
+            this.col克重.Width = 60;
             // 
             // colWidth
             // 
             dataGridViewCellStyle2.Format = "N0";
             this.colWidth.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colWidth.HeaderText = "规格宽度";
+            this.colWidth.HeaderText = "宽度";
             this.colWidth.Name = "colWidth";
             this.colWidth.ReadOnly = true;
+            this.colWidth.Width = 60;
             // 
             // colSlicedTo
             // 
@@ -385,63 +334,40 @@
             // 
             // colLength
             // 
-            dataGridViewCellStyle5.Format = "N3";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle5;
             this.colLength.HeaderText = "小件长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
             this.colLength.Width = 80;
             // 
-            // colWeight
+            // colCount
             // 
-            dataGridViewCellStyle6.Format = "N4";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colWeight.HeaderText = "小件重量";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.ReadOnly = true;
-            this.colWeight.Width = 80;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle7.Format = "N0";
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colAmount.HeaderText = "加工数量";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.Width = 80;
+            this.colCount.HeaderText = "加工数量";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
+            this.colCount.Width = 80;
             // 
             // colTotalWeight
             // 
-            dataGridViewCellStyle8.Format = "N4";
-            this.colTotalWeight.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Format = "N4";
+            this.colTotalWeight.DefaultCellStyle = dataGridViewCellStyle5;
             this.colTotalWeight.HeaderText = "加工重量";
             this.colTotalWeight.Name = "colTotalWeight";
             this.colTotalWeight.ReadOnly = true;
             this.colTotalWeight.Visible = false;
             this.colTotalWeight.Width = 80;
             // 
-            // colTotalLength
-            // 
-            dataGridViewCellStyle9.Format = "N3";
-            this.colTotalLength.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colTotalLength.HeaderText = "加工长度";
-            this.colTotalLength.Name = "colTotalLength";
-            this.colTotalLength.ReadOnly = true;
-            this.colTotalLength.Visible = false;
-            this.colTotalLength.Width = 80;
-            // 
             // colAfterWeight
             // 
-            dataGridViewCellStyle10.Format = "N4";
-            this.colAfterWeight.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.Format = "N4";
+            this.colAfterWeight.DefaultCellStyle = dataGridViewCellStyle6;
             this.colAfterWeight.HeaderText = "加工后重量";
             this.colAfterWeight.Name = "colAfterWeight";
             this.colAfterWeight.ReadOnly = true;
             // 
             // colAfterLength
             // 
-            dataGridViewCellStyle11.Format = "N3";
-            this.colAfterLength.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle7.Format = "N3";
+            this.colAfterLength.DefaultCellStyle = dataGridViewCellStyle7;
             this.colAfterLength.HeaderText = "加工后长度";
             this.colAfterLength.Name = "colAfterLength";
             this.colAfterLength.ReadOnly = true;
@@ -449,9 +375,12 @@
             // 
             // colCustomer
             // 
+            this.colCustomer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
+            this.colCustomer.Visible = false;
+            this.colCustomer.Width = 54;
             // 
             // colWarehouse
             // 
@@ -461,8 +390,8 @@
             // 
             // colSourceRoll
             // 
-            dataGridViewCellStyle12.Format = "N4";
-            this.colSourceRoll.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle8.Format = "N4";
+            this.colSourceRoll.DefaultCellStyle = dataGridViewCellStyle8;
             this.colSourceRoll.HeaderText = "原材料卷";
             this.colSourceRoll.Name = "colSourceRoll";
             this.colSourceRoll.ReadOnly = true;
@@ -514,9 +443,6 @@
         private System.Windows.Forms.Label label2;
         private Controls.SpecificationComboBox comSpecification1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chk开吨;
-        private System.Windows.Forms.CheckBox chk开条;
-        private System.Windows.Forms.CheckBox chk开平;
         protected System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DecimalTextBox txtSourceRollWeight;
@@ -524,19 +450,17 @@
         private System.Windows.Forms.Label label4;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.LinkLabel lnkCustomer;
-        private System.Windows.Forms.CheckBox chk开卷;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicedDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col克重;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicedTo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBeforeWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBeforeLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotalLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAfterWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAfterLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;

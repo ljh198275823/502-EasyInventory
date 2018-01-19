@@ -224,11 +224,10 @@ namespace LJH.Inventory.BusinessModel
                     if (Model == ProductModel.开平 || Model == ProductModel.开卷)
                     {
                         decimal? 克重 = this.Real克重;
-                        if (!克重.HasValue) 克重 = this.Original克重;
                         if (!克重.HasValue) 克重 = SpecificationHelper.GetWritten克重(Product.Specification);
                         decimal? length = this.Product.Length; //小件的长度放在产品信息中
                         decimal? width = SpecificationHelper.GetWrittenWidth(Product.Specification);
-                        if (克重 != null && length != null && width != null) return ProductInventoryItem.CalWeight(克重.Value, width.Value, length.Value, 6);
+                        if (克重 != null && length != null && width != null) return ProductInventoryItem.CalWeight(克重.Value, width.Value, length.Value / 1000, 6);
                     }
                     else
                     {

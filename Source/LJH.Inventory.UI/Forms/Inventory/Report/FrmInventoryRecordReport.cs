@@ -71,12 +71,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Tag = info;
             row.Cells["colAddDate"].Value = info.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCategoryID"].Value = info.Product.Category == null ? info.Product.CategoryID : info.Product.Category.Name;
-            row.Cells["colModel"].Value = info.Product.Model;
             row.Cells["colThick"].Value = SpecificationHelper.GetWritten克重(info.Product.Specification);
             row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(info.Product.Specification);
             row.Cells["colOriginalWeight"].Value = info.OriginalWeight;
-            row.Cells["colLength"].Value = info.OriginalLength.HasValue ? info.OriginalLength : info.Product.Length;
-            row.Cells["colSpecification"].Value = info.Product.Specification;
+            row.Cells["colModel"].Value = info.Model;
+            if (info.Product.Length.HasValue) row.Cells["colLength"].Value = (int)info.Product.Length;
             if (info.OriginalCount.HasValue) row.Cells["colCount"].Value = info.OriginalCount;
             row.Cells["colCustomer"].Value = info.Customer;
             row.Cells["colManufacturer"].Value = info.Manufacture;

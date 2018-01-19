@@ -180,6 +180,16 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
                 cell.SetCellValue(p.Specification);
             }
+            else if (express == "[产品宽度]")
+            {
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                cell.SetCellValue(SpecificationHelper.GetWrittenWidth(p.Specification).ToString ());
+            }
+            else if (express == "[产品克重]")
+            {
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                cell.SetCellValue(SpecificationHelper.GetWritten克重(p.Specification).ToString());
+            }
             else if (express == "[产品长度]")
             {
                 cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F3") : string.Empty);

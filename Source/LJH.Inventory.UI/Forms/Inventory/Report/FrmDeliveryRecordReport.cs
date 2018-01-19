@@ -34,12 +34,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSheetNo"].Value = sor.SheetNo;
             row.Cells["colCustomerName"].Value = sor.Customer.Name;
             row.Cells["colOrderID"].Value = sor.OrderID;
-            row.Cells["colThick"].Value = SpecificationHelper.GetWritten克重(sor.Specification);
+            row.Cells["colName"].Value = sor.ProductName;
+            row.Cells["col克重"].Value = SpecificationHelper.GetWritten克重(sor.Specification);
             row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(sor.Specification);
-            row.Cells["colSpecification"].Value = sor.Specification;
-            row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
-            row.Cells["colLength"].Value = sor.Length;
+            if (sor.Length.HasValue) row.Cells["colLength"].Value = (int)sor.Length;
             row.Cells["colPrice"].Value = sor.Price;
             row.Cells["colCount"].Value = sor.Count;
             if (_LastRecord != null && _LastRecord.SheetNo == sor.SheetNo && _LastRecord.ProductID == sor.ProductID && _LastRecord.Weight.HasValue) //如果是同一个送货单同一种产品的项,并且有合计重量，只在第一项显示金额

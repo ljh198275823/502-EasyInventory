@@ -42,7 +42,6 @@
             this.lnkWarehouse = new System.Windows.Forms.LinkLabel();
             this.txtOriginal = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.ucSpecification1 = new LJH.Inventory.UI.Controls.UCSpecification();
             this.SuspendLayout();
             // 
@@ -190,19 +189,12 @@
             this.label1.TabIndex = 94;
             this.label1.Text = "原包数量";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 95;
-            this.label4.Text = "规格";
-            // 
             // ucSpecification1
             // 
-            this.ucSpecification1.Location = new System.Drawing.Point(74, 45);
+            this.ucSpecification1.Location = new System.Drawing.Point(40, 45);
             this.ucSpecification1.Name = "ucSpecification1";
+            this.ucSpecification1.SelectedWidth = null;
+            this.ucSpecification1.Selected克重 = null;
             this.ucSpecification1.Size = new System.Drawing.Size(200, 27);
             this.ucSpecification1.Specification = "*";
             this.ucSpecification1.TabIndex = 96;
@@ -213,7 +205,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(364, 275);
             this.Controls.Add(this.ucSpecification1);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtOriginal);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCustomer);
@@ -250,7 +241,6 @@
         private System.Windows.Forms.LinkLabel lnkWarehouse;
         private GeneralLibrary.WinformControl.DecimalTextBox txtOriginal;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label4;
         private Controls.UCSpecification ucSpecification1;
     }
 }

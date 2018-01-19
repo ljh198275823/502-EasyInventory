@@ -44,7 +44,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (chkStackIn.Checked) items = items.Where(it => it.AddDate >= ucDateTimeInterval1.StartDateTime && it.AddDate <= ucDateTimeInterval1.EndDateTime).ToList();
                 if (!string.IsNullOrEmpty(categoryComboBox1.Text)) items = items.Where(it => it.Product.CategoryID == categoryComboBox1.SelectedCategoryID).ToList();
                 if (!string.IsNullOrEmpty(wareHouseComboBox1.Text)) items = items.Where(it => it.WareHouseID == wareHouseComboBox1.SelectedWareHouseID).ToList();
-                if (!string.IsNullOrEmpty(cmbSpecification.Text)) items = items.Where(it => it.Product.Specification.Contains(cmbSpecification.Text)).ToList();
+                if (cmbSpecification.SelectedWidth.HasValue) items = items.Where(it => SpecificationHelper.GetWrittenWidth(it.Product.Specification) == cmbSpecification.SelectedWidth).ToList();
+                if (cmbSpecification.Selected克重.HasValue) items = items.Where(it => SpecificationHelper.GetWritten克重(it.Product.Specification) == cmbSpecification.Selected克重).ToList();
                 if (cmbSupplier.SelectedCustomer != null) items = items.Where(it => it.Supplier == cmbSupplier.SelectedCustomer.ID).ToList();
                 if (!string.IsNullOrEmpty(cmbBrand.Text)) items = items.Where(it => it.Manufacture == cmbBrand.Text).ToList();
                 if (!string.IsNullOrEmpty(customerCombobox1.Text)) items = items.Where(it => it.Customer.Contains(customerCombobox1.Text)).ToList();
@@ -99,8 +100,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             base.Init();
             this.wareHouseComboBox1.Init();
-            this.cmbSpecification.Init(new List<string> { ProductModel.原材料, ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 });
             this.categoryComboBox1.Init();
+            this.cmbSpecification.Init();
             this.cmbBrand.Init(CompanyClass.厂家);
             this.cmbSupplier.Init(CompanyClass.Supplier);
             this.customerCombobox1.Init(CompanyClass.Customer);
@@ -189,11 +190,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 var ws = _AllWarehouse.SingleOrDefault(it => it.ID == sr.WareHouseID);
                 row.Cells["colWareHouse"].Value = ws != null ? ws.Name : null;
             }
-            row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
-            row.Cells["colModel"].Value = p.Model;
+            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(p.Specification);
+            row.Cells["col克重"].Value = SpecificationHelper.GetWritten克重(p.Specification);
             row.Cells["colWeight"].Value = sr.Weight;
             if(sr.Product.Length .HasValue ) row.Cells["colLength"].Value = sr.Product.Length.Value.Trim();
-            row.Cells["colOriginalThick"].Value = sr.Original克重;
             row.Cells["colRealThick"].Value = sr.Real克重;
             row.Cells["colInventoryDate"].Value = sr.AddDate.ToString("yyyy-MM-dd");
             row.Cells["colCount"].Value = sr.Count;

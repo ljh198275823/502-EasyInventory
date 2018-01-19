@@ -39,8 +39,6 @@ namespace LJH.Inventory.DAL.LinqProvider
                 SliceRecordSearchCondition con = search as SliceRecordSearchCondition;
                 if (con.SliceDate != null) ret = ret.Where(item => item.A.SliceDate >= con.SliceDate.Begin && item.A.SliceDate <= con.SliceDate.End);
                 if (con.SourceRoll != null) ret = ret.Where(item => item.A.SliceSource == con.SourceRoll.Value);
-                if (!string.IsNullOrEmpty(con.Category)) ret = ret.Where(item => item.A.Category == con.Category);
-                if (!string.IsNullOrEmpty(con.Specification)) ret = ret.Where(item => item.A.Specification == con.Specification);
                 if (!string.IsNullOrEmpty(con.SliceType)) ret = ret.Where(item => item.A.SliceType == con.SliceType);
                 if (!string.IsNullOrEmpty(con.Customer)) ret = ret.Where(it => it.A.Customer == con.Customer);
                 if (!string.IsNullOrEmpty(con.Warehouse)) ret = ret.Where(it => it.A.Warehouse == con.Warehouse);

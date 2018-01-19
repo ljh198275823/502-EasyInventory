@@ -35,8 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,7 +44,6 @@
             this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
-            this.label5 = new System.Windows.Forms.Label();
             this.txtProductCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkProductCategory = new System.Windows.Forms.LinkLabel();
@@ -59,17 +56,16 @@
             this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col克重 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSourceRollWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSalesPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSourceRollWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,7 +102,6 @@
             this.groupBox3.Controls.Add(this.txtLength);
             this.groupBox3.Controls.Add(this.txtWeight);
             this.groupBox3.Controls.Add(this.cmbSpecification);
-            this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.txtProductCategory);
             this.groupBox3.Controls.Add(this.txtCustomer);
             this.groupBox3.Controls.Add(this.lnkProductCategory);
@@ -121,7 +116,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(430, 72);
+            this.label1.Location = new System.Drawing.Point(342, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 95;
@@ -130,7 +125,7 @@
             // txtSourceRollWeight
             // 
             this.txtSourceRollWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSourceRollWeight.Location = new System.Drawing.Point(487, 68);
+            this.txtSourceRollWeight.Location = new System.Drawing.Point(401, 52);
             this.txtSourceRollWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -143,14 +138,14 @@
             0});
             this.txtSourceRollWeight.Name = "txtSourceRollWeight";
             this.txtSourceRollWeight.PointCount = 3;
-            this.txtSourceRollWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtSourceRollWeight.Size = new System.Drawing.Size(83, 21);
             this.txtSourceRollWeight.TabIndex = 94;
             this.txtSourceRollWeight.Text = "0";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(452, 45);
+            this.label4.Location = new System.Drawing.Point(461, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 93;
@@ -159,7 +154,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(452, 16);
+            this.label3.Location = new System.Drawing.Point(221, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 92;
@@ -168,7 +163,7 @@
             // txtLength
             // 
             this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(487, 41);
+            this.txtLength.Location = new System.Drawing.Point(496, 17);
             this.txtLength.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -181,14 +176,14 @@
             0});
             this.txtLength.Name = "txtLength";
             this.txtLength.PointCount = 3;
-            this.txtLength.Size = new System.Drawing.Size(100, 21);
+            this.txtLength.Size = new System.Drawing.Size(83, 21);
             this.txtLength.TabIndex = 91;
             this.txtLength.Text = "0";
             // 
             // txtWeight
             // 
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtWeight.Location = new System.Drawing.Point(487, 12);
+            this.txtWeight.Location = new System.Drawing.Point(256, 52);
             this.txtWeight.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -201,26 +196,19 @@
             0});
             this.txtWeight.Name = "txtWeight";
             this.txtWeight.PointCount = 3;
-            this.txtWeight.Size = new System.Drawing.Size(100, 21);
+            this.txtWeight.Size = new System.Drawing.Size(67, 21);
             this.txtWeight.TabIndex = 90;
             this.txtWeight.Text = "0";
             // 
             // cmbSpecification
             // 
-            this.cmbSpecification.Location = new System.Drawing.Point(254, 15);
+            this.cmbSpecification.Location = new System.Drawing.Point(223, 14);
             this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
+            this.cmbSpecification.SelectedWidth = null;
+            this.cmbSpecification.Selected克重 = null;
+            this.cmbSpecification.Size = new System.Drawing.Size(229, 26);
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 87;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(221, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 86;
-            this.label5.Text = "规格";
             // 
             // txtProductCategory
             // 
@@ -290,9 +278,9 @@
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToResizeColumns = false;
             this.gridView.AllowUserToResizeRows = false;
-            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -301,17 +289,16 @@
             this.colSheetNo,
             this.colOrderID,
             this.colCategoryID,
-            this.colModel,
-            this.colThick,
+            this.colName,
+            this.col克重,
             this.colWidth,
-            this.colSpecification,
             this.colLength,
             this.colWeight,
-            this.colPrice,
-            this.colSourceRollWeight,
             this.colCount,
+            this.colPrice,
             this.colAmount,
-            this.colSalesPerson});
+            this.colSalesPerson,
+            this.colSourceRollWeight});
             this.gridView.Location = new System.Drawing.Point(0, 106);
             this.gridView.Name = "gridView";
             this.gridView.RowHeadersVisible = false;
@@ -331,17 +318,18 @@
             // 
             this.colCustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCustomerName.HeaderText = "客户";
-            this.colCustomerName.MinimumWidth = 150;
             this.colCustomerName.Name = "colCustomerName";
             this.colCustomerName.ReadOnly = true;
-            this.colCustomerName.Width = 150;
+            this.colCustomerName.Width = 54;
             // 
             // colSheetNo
             // 
+            this.colSheetNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colSheetNo.HeaderText = "送货单";
             this.colSheetNo.Name = "colSheetNo";
             this.colSheetNo.ReadOnly = true;
             this.colSheetNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSheetNo.Width = 66;
             // 
             // colOrderID
             // 
@@ -354,47 +342,38 @@
             // 
             // colCategoryID
             // 
+            this.colCategoryID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colCategoryID.HeaderText = "类别";
             this.colCategoryID.Name = "colCategoryID";
             this.colCategoryID.ReadOnly = true;
+            this.colCategoryID.Width = 54;
             // 
-            // colModel
+            // colName
             // 
-            this.colModel.HeaderText = "型号";
-            this.colModel.MinimumWidth = 80;
-            this.colModel.Name = "colModel";
-            this.colModel.ReadOnly = true;
-            this.colModel.Width = 80;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.colName.HeaderText = "名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 54;
             // 
-            // colThick
+            // col克重
             // 
-            dataGridViewCellStyle1.Format = "N2";
-            this.colThick.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colThick.HeaderText = "规格厚度";
-            this.colThick.Name = "colThick";
-            this.colThick.ReadOnly = true;
-            this.colThick.Width = 80;
+            this.col克重.HeaderText = "克重";
+            this.col克重.Name = "col克重";
+            this.col克重.ReadOnly = true;
+            this.col克重.Width = 60;
             // 
             // colWidth
             // 
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colWidth.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colWidth.HeaderText = "规格宽度";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colWidth.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colWidth.HeaderText = "宽度";
             this.colWidth.Name = "colWidth";
             this.colWidth.ReadOnly = true;
-            this.colWidth.Width = 80;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
+            this.colWidth.Width = 60;
             // 
             // colLength
             // 
-            dataGridViewCellStyle3.Format = "N3";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle3;
             this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
@@ -402,22 +381,48 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle4.Format = "N4";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "N4";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle2;
             this.colWeight.HeaderText = "重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             this.colWeight.Width = 80;
             // 
+            // colCount
+            // 
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
+            this.colCount.Width = 80;
+            // 
             // colPrice
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle4;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
             this.colPrice.Width = 80;
+            // 
+            // colAmount
+            // 
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colAmount.HeaderText = "金额";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.Width = 80;
+            // 
+            // colSalesPerson
+            // 
+            this.colSalesPerson.HeaderText = "业务";
+            this.colSalesPerson.Name = "colSalesPerson";
+            this.colSalesPerson.ReadOnly = true;
             // 
             // colSourceRollWeight
             // 
@@ -429,32 +434,6 @@
             this.colSourceRollWeight.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colSourceRollWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colSourceRollWeight.Width = 80;
-            // 
-            // colCount
-            // 
-            dataGridViewCellStyle7.Format = "N0";
-            dataGridViewCellStyle7.NullValue = null;
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colCount.HeaderText = "数量";
-            this.colCount.Name = "colCount";
-            this.colCount.ReadOnly = true;
-            this.colCount.Width = 80;
-            // 
-            // colAmount
-            // 
-            dataGridViewCellStyle8.Format = "C2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colAmount.HeaderText = "金额";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.Width = 80;
-            // 
-            // colSalesPerson
-            // 
-            this.colSalesPerson.HeaderText = "业务";
-            this.colSalesPerson.Name = "colSalesPerson";
-            this.colSalesPerson.ReadOnly = true;
             // 
             // FrmDeliveryRecordReport
             // 
@@ -492,7 +471,6 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtProductCategory;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private Controls.UCSpecification cmbSpecification;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
@@ -504,16 +482,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colThick;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col克重;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceRollWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSourceRollWeight;
     }
 }

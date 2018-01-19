@@ -34,7 +34,6 @@
             this.dtStorageDateTime = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
@@ -140,15 +139,6 @@
             this.label3.Size = new System.Drawing.Size(77, 12);
             this.label3.TabIndex = 50;
             this.label3.Text = "剩余重量(吨)";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(316, 61);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 48;
-            this.label5.Text = "规格";
             // 
             // label1
             // 
@@ -628,9 +618,11 @@
             // 
             // cmbSpecification
             // 
-            this.cmbSpecification.Location = new System.Drawing.Point(349, 54);
+            this.cmbSpecification.Location = new System.Drawing.Point(287, 54);
             this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(164, 26);
+            this.cmbSpecification.SelectedWidth = null;
+            this.cmbSpecification.Selected克重 = null;
+            this.cmbSpecification.Size = new System.Drawing.Size(228, 26);
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 85;
             // 
@@ -694,14 +686,12 @@
             this.Controls.Add(this.dtStorageDateTime);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Name = "FrmSteelRollDetail";
             this.Text = "原材料入库";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.dtStorageDateTime, 0);
@@ -757,7 +747,6 @@
         private System.Windows.Forms.DateTimePicker dtStorageDateTime;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
         private GeneralLibrary.WinformControl.DecimalTextBox txtLength;

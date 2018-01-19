@@ -325,7 +325,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Original克重 = SpecificationHelper.GetWritten克重(p.Specification);
             item.OriginalCount = txtCount.DecimalValue;
             item.Length = txtLength.DecimalValue;
-            item.OriginalWeight = ProductInventoryItem.CalWeight(item.Original克重.Value, SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Length.Value * item.OriginalCount.Value);
+            item.OriginalWeight = ProductInventoryItem.CalWeight(item.Original克重.Value, SpecificationHelper.GetWrittenWidth(p.Specification).Value, item.Length.Value / 1000 * item.OriginalCount.Value);
             item.Weight =item.OriginalWeight;
             item.Count = txtCount.DecimalValue;
             item.Unit = "张";

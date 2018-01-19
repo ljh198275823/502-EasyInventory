@@ -30,17 +30,14 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSteelRollSliceCheckRecordView));
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col克重 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheckCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,11 +57,10 @@
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCheckDate,
             this.colWareHouse,
-            this.colCategoryID,
-            this.colSpecification,
-            this.colModel,
+            this.colName,
+            this.col克重,
+            this.colWidth,
             this.colLength,
-            this.colWeight,
             this.colInventory,
             this.colCheckCount,
             this.colState,
@@ -93,56 +89,46 @@
             this.colWareHouse.Name = "colWareHouse";
             this.colWareHouse.ReadOnly = true;
             // 
-            // colCategoryID
+            // colName
             // 
-            this.colCategoryID.HeaderText = "类别";
-            this.colCategoryID.Name = "colCategoryID";
-            this.colCategoryID.ReadOnly = true;
-            this.colCategoryID.Width = 80;
+            this.colName.HeaderText = "产品名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 80;
             // 
-            // colSpecification
+            // col克重
             // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
+            this.col克重.HeaderText = "克重";
+            this.col克重.Name = "col克重";
+            this.col克重.ReadOnly = true;
+            this.col克重.Width = 60;
             // 
-            // colModel
+            // colWidth
             // 
-            this.colModel.HeaderText = "类型";
-            this.colModel.Name = "colModel";
-            this.colModel.ReadOnly = true;
-            this.colModel.Width = 80;
+            this.colWidth.HeaderText = "宽度";
+            this.colWidth.Name = "colWidth";
+            this.colWidth.ReadOnly = true;
+            this.colWidth.Width = 60;
             // 
             // colLength
             // 
-            dataGridViewCellStyle1.Format = "N3";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle1;
             this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
-            this.colLength.Width = 80;
-            // 
-            // colWeight
-            // 
-            dataGridViewCellStyle2.Format = "N4";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colWeight.HeaderText = "重量";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.ReadOnly = true;
-            this.colWeight.Width = 80;
+            this.colLength.Width = 60;
             // 
             // colInventory
             // 
-            dataGridViewCellStyle3.Format = "N0";
-            this.colInventory.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "N0";
+            this.colInventory.DefaultCellStyle = dataGridViewCellStyle1;
             this.colInventory.HeaderText = "盘点前数量";
             this.colInventory.Name = "colInventory";
             this.colInventory.ReadOnly = true;
             // 
             // colCheckCount
             // 
-            dataGridViewCellStyle4.Format = "N0";
-            this.colCheckCount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "N0";
+            this.colCheckCount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colCheckCount.HeaderText = "盘点数量";
             this.colCheckCount.Name = "colCheckCount";
             this.colCheckCount.ReadOnly = true;
@@ -195,11 +181,10 @@
         protected System.Windows.Forms.DataGridView GridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWareHouse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col克重;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWidth;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCheckCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;

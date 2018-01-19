@@ -33,10 +33,8 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.txtCount = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
-            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.dtSliceDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCurrentWeigth = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
@@ -45,9 +43,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSlicers = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtSpecification = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label5 = new System.Windows.Forms.Label();
             this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkWareHouse = new System.Windows.Forms.LinkLabel();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -59,6 +54,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtAfterLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
+            this.txtLength = new LJH.GeneralLibrary.WinformControl.IntergerTextBox(this.components);
+            this.ucSpecification1 = new LJH.Inventory.UI.Controls.UCSpecification();
             this.SuspendLayout();
             // 
             // btnClose
@@ -88,34 +85,13 @@
             // 
             this.txtCount.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtCount.Location = new System.Drawing.Point(250, 112);
-            this.txtCount.MaxValue = 10000;
+            this.txtCount.MaxValue = 999999999;
             this.txtCount.MinValue = 0;
             this.txtCount.Name = "txtCount";
             this.txtCount.Size = new System.Drawing.Size(70, 21);
             this.txtCount.TabIndex = 13;
             this.txtCount.Text = "0";
             this.txtCount.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
-            // 
-            // txtLength
-            // 
-            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(96, 112);
-            this.txtLength.MaxValue = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.txtLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtLength.Name = "txtLength";
-            this.txtLength.PointCount = 3;
-            this.txtLength.Size = new System.Drawing.Size(82, 21);
-            this.txtLength.TabIndex = 12;
-            this.txtLength.Text = "0.00";
-            this.txtLength.TextChanged += new System.EventHandler(this.txtLength_TextChanged);
             // 
             // label3
             // 
@@ -133,16 +109,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 10;
-            this.label4.Text = "小件长度(米)";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(50, 51);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 12);
-            this.label13.TabIndex = 42;
-            this.label13.Text = "类  别";
+            this.label4.Text = "小件长度(mm)";
             // 
             // dtSliceDate
             // 
@@ -176,7 +143,7 @@
             0,
             0});
             this.txtCurrentWeigth.Name = "txtCurrentWeigth";
-            this.txtCurrentWeigth.PointCount = 3;
+            this.txtCurrentWeigth.PointCount = 4;
             this.txtCurrentWeigth.Size = new System.Drawing.Size(114, 21);
             this.txtCurrentWeigth.TabIndex = 36;
             this.txtCurrentWeigth.Text = "0.00";
@@ -206,7 +173,7 @@
             0,
             0});
             this.txtRemainWeight.Name = "txtRemainWeight";
-            this.txtRemainWeight.PointCount = 3;
+            this.txtRemainWeight.PointCount = 4;
             this.txtRemainWeight.Size = new System.Drawing.Size(114, 21);
             this.txtRemainWeight.TabIndex = 46;
             this.txtRemainWeight.Text = "0.00";
@@ -236,33 +203,6 @@
             this.txtSlicers.Name = "txtSlicers";
             this.txtSlicers.Size = new System.Drawing.Size(328, 21);
             this.txtSlicers.TabIndex = 50;
-            // 
-            // txtCategory
-            // 
-            this.txtCategory.Enabled = false;
-            this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCategory.Location = new System.Drawing.Point(96, 47);
-            this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Size = new System.Drawing.Size(115, 21);
-            this.txtCategory.TabIndex = 53;
-            // 
-            // txtSpecification
-            // 
-            this.txtSpecification.Enabled = false;
-            this.txtSpecification.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSpecification.Location = new System.Drawing.Point(300, 47);
-            this.txtSpecification.Name = "txtSpecification";
-            this.txtSpecification.Size = new System.Drawing.Size(124, 21);
-            this.txtSpecification.TabIndex = 55;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(254, 51);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 54;
-            this.label5.Text = "规  格";
             // 
             // txtWareHouse
             // 
@@ -357,6 +297,7 @@
             this.txtBeforeLength.Size = new System.Drawing.Size(124, 21);
             this.txtBeforeLength.TabIndex = 89;
             this.txtBeforeLength.Text = "0.00";
+            this.txtBeforeLength.Visible = false;
             // 
             // label8
             // 
@@ -366,6 +307,7 @@
             this.label8.Size = new System.Drawing.Size(53, 12);
             this.label8.TabIndex = 88;
             this.label8.Text = "当前长度";
+            this.label8.Visible = false;
             // 
             // txtAfterLength
             // 
@@ -387,6 +329,7 @@
             this.txtAfterLength.Size = new System.Drawing.Size(124, 21);
             this.txtAfterLength.TabIndex = 91;
             this.txtAfterLength.Text = "0.00";
+            this.txtAfterLength.Visible = false;
             // 
             // label11
             // 
@@ -396,6 +339,28 @@
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 90;
             this.label11.Text = "剩余长度";
+            this.label11.Visible = false;
+            // 
+            // txtLength
+            // 
+            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLength.Location = new System.Drawing.Point(96, 112);
+            this.txtLength.MaxValue = 999999;
+            this.txtLength.MinValue = 0;
+            this.txtLength.Name = "txtLength";
+            this.txtLength.Size = new System.Drawing.Size(76, 21);
+            this.txtLength.TabIndex = 92;
+            this.txtLength.Text = "0";
+            // 
+            // ucSpecification1
+            // 
+            this.ucSpecification1.Location = new System.Drawing.Point(63, 44);
+            this.ucSpecification1.Name = "ucSpecification1";
+            this.ucSpecification1.SelectedWidth = null;
+            this.ucSpecification1.Selected克重 = null;
+            this.ucSpecification1.Size = new System.Drawing.Size(226, 27);
+            this.ucSpecification1.Specification = "*";
+            this.ucSpecification1.TabIndex = 93;
             // 
             // FrmSlice
             // 
@@ -404,6 +369,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(436, 385);
+            this.Controls.Add(this.ucSpecification1);
+            this.Controls.Add(this.txtLength);
             this.Controls.Add(this.txtAfterLength);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtBeforeLength);
@@ -415,20 +382,15 @@
             this.Controls.Add(this.lnkCustomer);
             this.Controls.Add(this.txtWareHouse);
             this.Controls.Add(this.lnkWareHouse);
-            this.Controls.Add(this.txtSpecification);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.txtSlicers);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtRemainWeight);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label13);
             this.Controls.Add(this.dtSliceDate);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtCurrentWeigth);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtCount);
-            this.Controls.Add(this.txtLength);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnClose);
@@ -450,10 +412,8 @@
         protected System.Windows.Forms.Button btnClose;
         protected System.Windows.Forms.Button btnOk;
         private LJH.GeneralLibrary.WinformControl.IntergerTextBox txtCount;
-        private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtLength;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker dtSliceDate;
         private System.Windows.Forms.Label label6;
         private LJH.GeneralLibrary.WinformControl.DecimalTextBox txtCurrentWeigth;
@@ -462,9 +422,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label1;
         private LJH.GeneralLibrary.WinformControl.DBCTextBox txtSlicers;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
-        private GeneralLibrary.WinformControl.DBCTextBox txtSpecification;
-        private System.Windows.Forms.Label label5;
         private GeneralLibrary.WinformControl.DBCTextBox txtWareHouse;
         private System.Windows.Forms.LinkLabel lnkWareHouse;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
@@ -476,6 +433,8 @@
         private System.Windows.Forms.Label label8;
         private GeneralLibrary.WinformControl.DecimalTextBox txtAfterLength;
         private System.Windows.Forms.Label label11;
+        private GeneralLibrary.WinformControl.IntergerTextBox txtLength;
+        private Controls.UCSpecification ucSpecification1;
 
     }
 }

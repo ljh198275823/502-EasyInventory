@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LJH.Inventory.BLL;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.UI.Controls
 {
@@ -18,6 +19,8 @@ namespace LJH.Inventory.UI.Controls
         {
             InitializeComponent();
         }
+
+        public event EventHandler SpecificationChanged;
 
         public void Init()
         {
@@ -78,6 +81,74 @@ namespace LJH.Inventory.UI.Controls
                     txtWidth.Text = width.HasValue ? width.Value.ToString() : string.Empty;
                 }
             }
+        }
+
+        public int? Selected克重
+        {
+            get
+            {
+                decimal 克重;
+                if (decimal.TryParse(txtThick.Text, out 克重))
+                {
+                    return (int)克重;
+                }
+                return null;
+            }
+            set
+            {
+                if (value == null) txtThick.Text = string.Empty;
+                else txtThick.Text = value.ToString();
+            }
+        }
+
+        public int? SelectedWidth
+        {
+            get
+            {
+                decimal width;
+                if (decimal.TryParse(txtWidth.Text, out width))
+                {
+                    return (int)width;
+                }
+                return null;
+            }
+            set
+            {
+                if (value == null) txtWidth.Text = string.Empty;
+                else txtWidth.Text = value.ToString();
+            }
+        }
+
+        private Dictionary<ComboBox, string> _PreText = new Dictionary<ComboBox, string>();
+
+        private void cmb_TextChanged(object sender, EventArgs e)
+        {
+            ComboBox cmb = sender as ComboBox;
+            string text = StringHelper.ToDBC(cmb.Text);
+            int position = cmb.SelectionStart;
+            if (!string.IsNullOrEmpty(text.Trim()))
+            {
+                if (text.Trim().IndexOf('-') == 0) //不显示非负数
+                {
+                    if (_PreText.ContainsKey(cmb)) this.Text = _PreText[cmb];
+                    cmb.SelectionStart = this.Text.Length;
+                    return;
+                }
+                if (text.Trim() != "-")
+                {
+                    decimal value;
+                    if (!decimal.TryParse(text, out value)) //不能转换成实数
+                    {
+                        if (_PreText.ContainsKey(cmb)) this.Text = _PreText[cmb];
+                        cmb.SelectionStart = this.Text.Length;
+                        return;
+                    }
+                }
+            }
+            cmb.Text = text;
+            _PreText[cmb] = text;
+            cmb.SelectionStart = position;
+            if (SpecificationChanged != null) this.SpecificationChanged(this, EventArgs.Empty);
         }
     }
 }

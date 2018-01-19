@@ -47,10 +47,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             Product p = _AllProducts.SingleOrDefault(it => it.ID == record.ProductID);
             if (p != null)
             {
-                row.Cells["colCategoryID"].Value = p.Category.Name;
-                row.Cells["colSpecification"].Value = p.Specification;
+                row.Cells["colName"].Value = p.Name;
+                row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(p.Specification);
+                row.Cells["col克重"].Value = SpecificationHelper.GetWritten克重(p.Specification);
                 row.Cells["colModel"].Value = p.Model;
-                row.Cells["colLength"].Value = p.Length;
+                if (p.Length.HasValue) row.Cells["colLength"].Value = (int)p.Length;
                 row.Cells["colWeight"].Value = p.Weight;
             }
             row.Cells["colInventory"].Value = record.Inventory;

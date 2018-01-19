@@ -35,18 +35,17 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
         {
             SteelRollSliceRecord record = item as SteelRollSliceRecord;
             row.Tag = record;
+            var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(record.ProductID).QueryObject;
             row.Cells["colSlicedDateTime"].Value = record.SliceDate.ToString("yyyy年MM月dd日");
-            row.Cells["colCategoryID"].Value = record.Category;
-            row.Cells["colSpecification"].Value = record.Specification;
+            row.Cells["col克重"].Value = SpecificationHelper.GetWritten克重(p.Specification);
+            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(p.Specification);
             row.Cells["colSlicedTo"].Value = record.SliceType;
-            row.Cells["colLength"].Value = record.Length;
-            row.Cells["colWeight"].Value = record.Weight;
+            row.Cells["colLength"].Value = (int)record.Length;
             row.Cells["colAmount"].Value = record.Count;
             row.Cells["colBeforeWeight"].Value = record.BeforeWeight;
             row.Cells["colBeforeLength"].Value = record.BeforeLength;
             row.Cells["colAfterWeight"].Value = record.AfterWeight;
             row.Cells["colAfterLength"].Value = record.AfterLength;
-            row.Cells["colTotalLength"].Value = record.BeforeLength - record.AfterLength;
             row.Cells["colTotalWeight"].Value = record.BeforeWeight - record.AfterWeight;
             row.Cells["colSlicer"].Value = record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;

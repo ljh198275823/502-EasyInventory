@@ -34,11 +34,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lnkWarehouse = new System.Windows.Forms.LinkLabel();
             this.txtWareHouse = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCategory = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -75,6 +73,7 @@
             this.txtPurchasePrice = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label12 = new System.Windows.Forms.Label();
             this.txtProductName = new LJH.Inventory.UI.Controls.ProductNameComboBox(this.components);
+            this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.pnlCost.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnlTax.SuspendLayout();
@@ -131,26 +130,6 @@
             this.txtWareHouse.Size = new System.Drawing.Size(158, 21);
             this.txtWareHouse.TabIndex = 1;
             // 
-            // txtLength
-            // 
-            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLength.Location = new System.Drawing.Point(99, 118);
-            this.txtLength.MaxValue = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.txtLength.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtLength.Name = "txtLength";
-            this.txtLength.PointCount = 3;
-            this.txtLength.Size = new System.Drawing.Size(145, 21);
-            this.txtLength.TabIndex = 3;
-            this.txtLength.Text = "0.000";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -165,7 +144,7 @@
             this.txtCategory.BackColor = System.Drawing.SystemColors.Control;
             this.txtCategory.Enabled = false;
             this.txtCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCategory.Location = new System.Drawing.Point(98, 81);
+            this.txtCategory.Location = new System.Drawing.Point(99, 81);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.Size = new System.Drawing.Size(145, 21);
             this.txtCategory.TabIndex = 1;
@@ -180,15 +159,6 @@
             this.lnkCategory.TabStop = true;
             this.lnkCategory.Text = "类别";
             this.lnkCategory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(287, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 75;
-            this.label1.Text = "规格";
             // 
             // txtMemo
             // 
@@ -253,9 +223,11 @@
             // 
             // cmbSpecification
             // 
-            this.cmbSpecification.Location = new System.Drawing.Point(320, 45);
+            this.cmbSpecification.Location = new System.Drawing.Point(270, 45);
             this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
+            this.cmbSpecification.SelectedWidth = null;
+            this.cmbSpecification.Selected克重 = null;
+            this.cmbSpecification.Size = new System.Drawing.Size(208, 26);
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 91;
             // 
@@ -554,10 +526,30 @@
             // txtProductName
             // 
             this.txtProductName.FormattingEnabled = true;
-            this.txtProductName.Location = new System.Drawing.Point(98, 49);
+            this.txtProductName.Location = new System.Drawing.Point(99, 48);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(146, 20);
             this.txtProductName.TabIndex = 159;
+            // 
+            // txtLength
+            // 
+            this.txtLength.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtLength.Location = new System.Drawing.Point(99, 119);
+            this.txtLength.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txtLength.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtLength.Name = "txtLength";
+            this.txtLength.PointCount = 0;
+            this.txtLength.Size = new System.Drawing.Size(145, 21);
+            this.txtLength.TabIndex = 160;
+            this.txtLength.Text = "0";
             // 
             // FrmSteelRollSliceStackIn
             // 
@@ -566,6 +558,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(503, 512);
+            this.Controls.Add(this.txtLength);
             this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.pnlCost);
@@ -592,8 +585,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtCategory);
             this.Controls.Add(this.lnkCategory);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtLength);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtWareHouse);
             this.Controls.Add(this.lnkWarehouse);
@@ -621,11 +612,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.LinkLabel lnkWarehouse;
         private GeneralLibrary.WinformControl.DBCTextBox txtWareHouse;
-        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
         private System.Windows.Forms.Label label7;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
         private System.Windows.Forms.LinkLabel lnkCategory;
-        private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.Label label3;
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
@@ -662,6 +651,7 @@
         private GeneralLibrary.WinformControl.DecimalTextBox txtPurchasePrice;
         private System.Windows.Forms.Label label12;
         private Controls.ProductNameComboBox txtProductName;
+        private GeneralLibrary.WinformControl.DecimalTextBox txtLength;
 
     }
 }

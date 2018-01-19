@@ -78,7 +78,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Slice(ProductInventoryItem sr, SteelRollSliceRecord sliceSheet, WareHouse wh)
         {
-            Product p = new ProductBLL(RepoUri).Create(sr.Product.Name, sr.Product.CategoryID, sliceSheet.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length);
+            Product p = new ProductBLL(RepoUri).Create(sr.Product.Name, sr.Product.CategoryID, sr.Product .Specification , sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length);
             if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
@@ -103,7 +103,7 @@ namespace LJH.Inventory.BLL
                 Count = sliceSheet.Count,
                 Model = sliceSheet.SliceType,
                 State = ProductInventoryState.Inventory,
-                Unit = "件",
+                Unit = "张",
                 WareHouseID = wh.ID,
                 Customer = sliceSheet.Customer,
                 Supplier = sr.Supplier,
@@ -307,8 +307,7 @@ namespace LJH.Inventory.BLL
                 SliceDate = DateTime.Now,
                 SliceSource = sr.ID,
                 SourceRollWeight = sr.OriginalWeight,
-                Category = sr.Product.Category.Name,
-                Specification = sr.Product.Specification,
+                ProductID = sr.ProductID,
                 SliceType = "开条",
                 BeforeWeight = sr.Weight.Value,
                 BeforeLength = ProductInventoryItem.CalLength(sr.Original克重.Value, SpecificationHelper.GetWrittenWidth(sr.Product.Specification).Value, sr.Weight.Value),

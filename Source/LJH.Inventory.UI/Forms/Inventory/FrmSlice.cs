@@ -37,8 +37,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 私有方法
         private void ShowSlicingItem(ProductInventoryItem item)
         {
-            txtCategory.Text = item.Product.Category.Name;
-            txtSpecification.Text = item.Product.Specification;
+            ucSpecification1.Specification = item.Product.Specification;
             txtCurrentWeigth.DecimalValue = item.Weight.Value;
             if (item.Length.HasValue) txtBeforeLength.DecimalValue = item.Length.Value;
             txtRemainWeight.DecimalValue = item.Weight.Value;
@@ -52,7 +51,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private bool CheckInput()
         {
-            if (this.txtLength.DecimalValue <= 0)
+            if (this.txtLength.IntergerValue <= 0)
             {
                 MessageBox.Show("开平长度不正确，请重新输入");
                 this.txtLength.Focus();
@@ -93,16 +92,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             decimal? width = SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification);
             if (width.HasValue && width > 0 && SlicingItem.Original克重.HasValue && SlicingItem.Original克重 > 0)
             {
-                decimal weight = ProductInventoryItem.CalWeight(SlicingItem.Original克重.Value, width.Value, txtLength.DecimalValue * txtCount.IntergerValue);
+                decimal weight = ProductInventoryItem.CalWeight(SlicingItem.Original克重.Value, width.Value, (decimal)txtLength.IntergerValue / 1000 * txtCount.IntergerValue);
                 decimal len = SlicingItem.Length.HasValue ? SlicingItem.Length.Value : ProductInventoryItem.CalLength(SlicingItem.Original克重.Value, width.Value, SlicingItem.Weight.Value);
                 if (weight <= SlicingItem.Weight)
                 {
                     this.txtRemainWeight.DecimalValue = SlicingItem.Weight.Value - weight;
-                    txtAfterLength.DecimalValue = len - txtLength.DecimalValue * txtCount.IntergerValue;
+                    txtAfterLength.DecimalValue = len - (decimal)txtLength.IntergerValue / 1000 * txtCount.IntergerValue;
                 }
                 else
                 {
-                    var ret = MessageBox.Show(string.Format("原料当前重量不足以加工成 长度为 {0} 米的小件 {1} 件, 是否继续?", txtLength.DecimalValue, txtCount.IntergerValue), "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var ret = MessageBox.Show(string.Format("原料当前重量不足以加工成 长度为 {0} 的小件 {1} 件, 是否继续?", txtLength.IntergerValue, txtCount.IntergerValue), "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (ret == DialogResult.Yes)
                     {
                         if (!chkOver.Checked) chkOver.Checked = true;
@@ -165,21 +164,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     SliceDate = dtSliceDate.Value,
                     SliceSource = SlicingItem.ID,
                     SourceRollWeight = SlicingItem.OriginalWeight,
-                    Category = SlicingItem.Product.Category.Name,
-                    Specification = SlicingItem.Product.Specification,
+                    ProductID = SlicingItem.ProductID,
                     SliceType = ProductModel.开平,
                     BeforeWeight = SlicingItem.Weight.Value,
-                    BeforeLength =SlicingItem .Length .HasValue ?SlicingItem .Length.Value  : ProductInventoryItem.CalLength(SlicingItem.Original克重.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, SlicingItem.Weight.Value),
+                    BeforeLength = SlicingItem.Length.HasValue ? SlicingItem.Length.Value : ProductInventoryItem.CalLength(SlicingItem.Original克重.Value, SpecificationHelper.GetWrittenWidth(SlicingItem.Product.Specification).Value, SlicingItem.Weight.Value),
                     Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,
                     Warehouse = (txtWareHouse.Tag as WareHouse).Name,
                     Operator = Operator.Current.Name,
                     Memo = txtMemo.Text,
                 };
-                record.Length = txtLength.DecimalValue;
+                record.Length = txtLength.IntergerValue;
                 record.Count = txtCount.IntergerValue;
                 record.AfterWeight = txtRemainWeight.DecimalValue;
-                record.AfterLength = record.BeforeLength - record.Length.Value * record.Count;
+                record.AfterLength = record.BeforeLength - record.Length.Value / 1000 * record.Count;
                 CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Slice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
                 if (ret.Result == ResultCode.Successful)
                 {
@@ -192,7 +190,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     }
                     else
                     {
-                        this.txtLength.DecimalValue = 0;
+                        this.txtLength.IntergerValue = 0;
                         this.txtCount.IntergerValue = 0;
                         ShowSlicingItem(SlicingItem);
                     }
