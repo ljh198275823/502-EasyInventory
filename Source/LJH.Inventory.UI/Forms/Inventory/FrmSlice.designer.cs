@@ -297,7 +297,6 @@
             this.txtBeforeLength.Size = new System.Drawing.Size(124, 21);
             this.txtBeforeLength.TabIndex = 89;
             this.txtBeforeLength.Text = "0.00";
-            this.txtBeforeLength.Visible = false;
             // 
             // label8
             // 
@@ -307,7 +306,6 @@
             this.label8.Size = new System.Drawing.Size(53, 12);
             this.label8.TabIndex = 88;
             this.label8.Text = "当前长度";
-            this.label8.Visible = false;
             // 
             // txtAfterLength
             // 
@@ -329,7 +327,6 @@
             this.txtAfterLength.Size = new System.Drawing.Size(124, 21);
             this.txtAfterLength.TabIndex = 91;
             this.txtAfterLength.Text = "0.00";
-            this.txtAfterLength.Visible = false;
             // 
             // label11
             // 
@@ -339,7 +336,6 @@
             this.label11.Size = new System.Drawing.Size(53, 12);
             this.label11.TabIndex = 90;
             this.label11.Text = "剩余长度";
-            this.label11.Visible = false;
             // 
             // txtLength
             // 
