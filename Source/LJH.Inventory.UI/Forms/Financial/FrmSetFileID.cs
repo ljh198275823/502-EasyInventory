@@ -48,8 +48,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                     return;
                 }
                 CommandResult ret = null;
-                if (!ForTaxFileID) ret = new CompanyBLL(AppSettings.Current.ConnStr).SetFileID(Customer, fid);
-                else ret = new CompanyBLL(AppSettings.Current.ConnStr).SetTaxFileID(Customer, fid);
+                if (!ForTaxFileID) ret = new CompanyBLL(AppSettings.Current.ConnStr).SetFileID(Customer, fid,UserSettings .Current .按客户类别设置归档码);
+                else ret = new CompanyBLL(AppSettings.Current.ConnStr).SetTaxFileID(Customer, fid, UserSettings.Current.按客户类别设置归档码);
                 if (ret.Result == ResultCode.Successful)
                 {
                     this.DialogResult = DialogResult.OK;

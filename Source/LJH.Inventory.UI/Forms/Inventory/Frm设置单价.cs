@@ -17,7 +17,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             InitializeComponent();
         }
 
-        public decimal 结算单价
+        public decimal 入库单价
         {
             get { return txt结算单价.DecimalValue; }
             set { txt结算单价.DecimalValue = value; }

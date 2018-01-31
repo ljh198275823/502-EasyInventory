@@ -45,6 +45,7 @@ namespace LJH.Inventory.UI.Forms
             chkNeedMaterial.Checked = UserSettings.Current.NeedMaterial;
             txt国税系数.DecimalValue = UserSettings.Current.国税系数;
             txt税点系数.DecimalValue = UserSettings.Current.税点系数;
+            chk按客户类别设置归档码.Checked = UserSettings.Current.按客户类别设置归档码;
             #endregion
 
             #region 公司信息
@@ -133,6 +134,7 @@ namespace LJH.Inventory.UI.Forms
             us.NeedMaterial = chkNeedMaterial.Checked;
             us.税点系数 = txt税点系数.DecimalValue;
             us.国税系数 = txt国税系数.DecimalValue;
+            us.按客户类别设置归档码 = chk按客户类别设置归档码.Checked;
             #endregion
 
             #region 公司信息

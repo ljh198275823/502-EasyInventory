@@ -148,6 +148,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
+            btn设置入库单价.Enabled = !IsAdding && Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置成本);
+            btn设置其它成本.Enabled = !IsAdding && Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置成本);
             this.btnOk.Enabled = !IsForView && Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
         }
 
@@ -414,6 +416,53 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 CompanyInfo s = frm.SelectedItem as CompanyInfo;
                 txtSupplier运费.Text = s.Name;
                 txtSupplier运费.Tag = s;
+            }
+        }
+
+        private void btn设置入库单价_Click(object sender, EventArgs e)
+        {
+            Frm设置单价 frm = new Frm设置单价();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var pi = UpdatingItem as ProductInventoryItem;
+                var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    this.OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
+            }
+        }
+
+        private void btn设置其它成本_Click(object sender, EventArgs e)
+        {
+            FrmChangeCosts frm = new FrmChangeCosts();
+            frm.chk总金额.Enabled = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var ci = frm.Cost;
+                decimal? 总额 = null;
+                var pi = UpdatingItem as ProductInventoryItem;
+
+                if (frm.chk总金额.Checked && pi.CostID.HasValue)
+                {
+                    总额 = ci.Price;
+                    var f = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(pi.CostID.Value).QueryObject;
+                    if (pi.OriginalWeight > 0) ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
+                }
+                var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo, 总额, frm.CarPlate);
+                if (ret.Result == ResultCode.Successful)
+                {
+                    this.OnItemUpdated(new ItemUpdatedEventArgs(UpdatingItem));
+                }
+                else
+                {
+                    MessageBox.Show(ret.Message);
+                }
             }
         }
     }

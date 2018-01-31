@@ -95,18 +95,21 @@ namespace LJH.Inventory.BLL
             return unitWork.Commit();
         }
 
-        public CommandResult SetFileID(CompanyInfo customer, int fid)
+        public CommandResult SetFileID(CompanyInfo customer, int fid, bool 按客户类别)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var provider = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri);
             List<CompanyInfo> cs = GetAllCustomers().QueryObjects;
             foreach (var c in cs)
             {
-                if (c.ID != customer.ID && c.City == customer.City && c.FileID == fid) //将同一个城市的其它有相同归档码的客户的归档码设置成空
+                if (c.ID != customer.ID && c.FileID == fid) //将同一个类别的其它有相同归档码的客户的归档码设置成空
                 {
-                    var newVal = c.Clone();
-                    newVal.FileID = null;
-                    provider.Update(newVal, c, unitWork);
+                    if (!按客户类别 || c.CategoryID == customer.CategoryID)
+                    {
+                        var newVal = c.Clone();
+                        newVal.FileID = null;
+                        provider.Update(newVal, c, unitWork);
+                    }
                 }
             }
             var clone = customer.Clone();
@@ -120,18 +123,21 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult SetTaxFileID(CompanyInfo customer, int fid)
+        public CommandResult SetTaxFileID(CompanyInfo customer, int fid, bool 按客户类别)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var provider = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri);
             List<CompanyInfo> cs = GetAllCustomers().QueryObjects;
             foreach (var c in cs)
             {
-                if (c.ID != customer.ID && c.City == customer.City && c.TaxFileID == fid) //将同一个城市的其它有相同归档码的客户的归档码设置成空
+                if (c.ID != customer.ID && c.FileID == fid) //将同一个类别的其它有相同归档码的客户的归档码设置成空
                 {
-                    var newVal = c.Clone();
-                    newVal.TaxFileID = null;
-                    provider.Update(newVal, c, unitWork);
+                    if (!按客户类别 || c.CategoryID == customer.CategoryID)
+                    {
+                        var newVal = c.Clone();
+                        newVal.TaxFileID = null;
+                        provider.Update(newVal, c, unitWork);
+                    }
                 }
             }
             var clone = customer.Clone();

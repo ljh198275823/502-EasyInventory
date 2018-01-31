@@ -67,17 +67,19 @@
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.btnOk1 = new System.Windows.Forms.Button();
             this.pnlCost = new System.Windows.Forms.GroupBox();
-            this.btn查看来源卷 = new System.Windows.Forms.Button();
+            this.txtSupplier运费 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnkSupplier_运费 = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdWithTax_运费 = new System.Windows.Forms.RadioButton();
             this.rdWithoutTax_运费 = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
             this.txt运费 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txtSupplier运费 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.lnkSupplier_运费 = new System.Windows.Forms.LinkLabel();
+            this.btn查看来源卷 = new System.Windows.Forms.Button();
             this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
+            this.btn设置入库单价 = new System.Windows.Forms.Button();
+            this.btn设置其它成本 = new System.Windows.Forms.Button();
             this.pnlTax.SuspendLayout();
             this.pnlCost.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -501,6 +503,8 @@
             // 
             // pnlCost
             // 
+            this.pnlCost.Controls.Add(this.btn设置其它成本);
+            this.pnlCost.Controls.Add(this.btn设置入库单价);
             this.pnlCost.Controls.Add(this.txtSupplier运费);
             this.pnlCost.Controls.Add(this.lnkSupplier_运费);
             this.pnlCost.Controls.Add(this.panel1);
@@ -515,17 +519,25 @@
             this.pnlCost.TabIndex = 146;
             this.pnlCost.TabStop = false;
             // 
-            // btn查看来源卷
+            // txtSupplier运费
             // 
-            this.btn查看来源卷.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn查看来源卷.Location = new System.Drawing.Point(74, 458);
-            this.btn查看来源卷.Name = "btn查看来源卷";
-            this.btn查看来源卷.Size = new System.Drawing.Size(126, 35);
-            this.btn查看来源卷.TabIndex = 147;
-            this.btn查看来源卷.Text = "查看来源卷";
-            this.btn查看来源卷.UseVisualStyleBackColor = true;
-            this.btn查看来源卷.Visible = false;
-            this.btn查看来源卷.Click += new System.EventHandler(this.btn查看来源卷_Click);
+            this.txtSupplier运费.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtSupplier运费.Location = new System.Drawing.Point(102, 90);
+            this.txtSupplier运费.Name = "txtSupplier运费";
+            this.txtSupplier运费.ReadOnly = true;
+            this.txtSupplier运费.Size = new System.Drawing.Size(281, 21);
+            this.txtSupplier运费.TabIndex = 155;
+            // 
+            // lnkSupplier_运费
+            // 
+            this.lnkSupplier_运费.AutoSize = true;
+            this.lnkSupplier_运费.Location = new System.Drawing.Point(26, 93);
+            this.lnkSupplier_运费.Name = "lnkSupplier_运费";
+            this.lnkSupplier_运费.Size = new System.Drawing.Size(65, 12);
+            this.lnkSupplier_运费.TabIndex = 154;
+            this.lnkSupplier_运费.TabStop = true;
+            this.lnkSupplier_运费.Text = "运费供应商";
+            this.lnkSupplier_运费.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_运费_LinkClicked);
             // 
             // panel1
             // 
@@ -588,25 +600,17 @@
             this.txt运费.TabIndex = 136;
             this.txt运费.Text = "0";
             // 
-            // txtSupplier运费
+            // btn查看来源卷
             // 
-            this.txtSupplier运费.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSupplier运费.Location = new System.Drawing.Point(102, 90);
-            this.txtSupplier运费.Name = "txtSupplier运费";
-            this.txtSupplier运费.ReadOnly = true;
-            this.txtSupplier运费.Size = new System.Drawing.Size(281, 21);
-            this.txtSupplier运费.TabIndex = 155;
-            // 
-            // lnkSupplier_运费
-            // 
-            this.lnkSupplier_运费.AutoSize = true;
-            this.lnkSupplier_运费.Location = new System.Drawing.Point(26, 93);
-            this.lnkSupplier_运费.Name = "lnkSupplier_运费";
-            this.lnkSupplier_运费.Size = new System.Drawing.Size(65, 12);
-            this.lnkSupplier_运费.TabIndex = 154;
-            this.lnkSupplier_运费.TabStop = true;
-            this.lnkSupplier_运费.Text = "运费供应商";
-            this.lnkSupplier_运费.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_运费_LinkClicked);
+            this.btn查看来源卷.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn查看来源卷.Location = new System.Drawing.Point(74, 458);
+            this.btn查看来源卷.Name = "btn查看来源卷";
+            this.btn查看来源卷.Size = new System.Drawing.Size(126, 35);
+            this.btn查看来源卷.TabIndex = 147;
+            this.btn查看来源卷.Text = "查看来源卷";
+            this.btn查看来源卷.UseVisualStyleBackColor = true;
+            this.btn查看来源卷.Visible = false;
+            this.btn查看来源卷.Click += new System.EventHandler(this.btn查看来源卷_Click);
             // 
             // txtCarPlate
             // 
@@ -631,6 +635,26 @@
             this.cmbSpecification.Size = new System.Drawing.Size(164, 26);
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 85;
+            // 
+            // btn设置入库单价
+            // 
+            this.btn设置入库单价.Location = new System.Drawing.Point(397, 18);
+            this.btn设置入库单价.Name = "btn设置入库单价";
+            this.btn设置入库单价.Size = new System.Drawing.Size(85, 23);
+            this.btn设置入库单价.TabIndex = 156;
+            this.btn设置入库单价.Text = "设置入库单价";
+            this.btn设置入库单价.UseVisualStyleBackColor = true;
+            this.btn设置入库单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
+            // 
+            // btn设置其它成本
+            // 
+            this.btn设置其它成本.Location = new System.Drawing.Point(397, 57);
+            this.btn设置其它成本.Name = "btn设置其它成本";
+            this.btn设置其它成本.Size = new System.Drawing.Size(85, 23);
+            this.btn设置其它成本.TabIndex = 157;
+            this.btn设置其它成本.Text = "设置其它成本";
+            this.btn设置其它成本.UseVisualStyleBackColor = true;
+            this.btn设置其它成本.Click += new System.EventHandler(this.btn设置其它成本_Click);
             // 
             // FrmSteelRollDetail
             // 
@@ -778,5 +802,7 @@
         private GeneralLibrary.WinformControl.DecimalTextBox txt运费;
         private GeneralLibrary.WinformControl.DBCTextBox txtSupplier运费;
         private System.Windows.Forms.LinkLabel lnkSupplier_运费;
+        private System.Windows.Forms.Button btn设置其它成本;
+        private System.Windows.Forms.Button btn设置入库单价;
     }
 }
