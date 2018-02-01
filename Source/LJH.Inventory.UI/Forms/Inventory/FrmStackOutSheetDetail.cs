@@ -357,6 +357,38 @@ namespace LJH.Inventory.UI.Forms.Inventory
             PerformOperation<StackOutSheet>(bll, SheetOperation.UndoApprove);
         }
 
+        private void mnu_预览_Click(object sender, EventArgs e)
+        {
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
+            if (sheet != null)
+            {
+                try
+                {
+                    string modal = GetModel();
+                    Print.StackOutSheetExporter exporter = null;
+                    if (System.IO.File.Exists(modal))
+                    {
+                        exporter = new Print.StackOutSheetExporter(modal);
+                        int itemPerpage = 10;
+                        if (UserSettings.Current != null && UserSettings.Current.StackoutSheetItemsPerSheet > 0) itemPerpage = UserSettings.Current.StackoutSheetItemsPerSheet;
+                        var files = exporter.Export(sheet, LJH.GeneralLibrary.TempFolderManager.GetCurrentFolder(), itemPerpage);
+                        foreach (var file in files)
+                        {
+                            if (System.IO.File.Exists(file)) System.Diagnostics.Process.Start(file);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("未找到送货单导出模板", "打印失败");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
+                }
+            }
+        }
+
         private void btnPrint_Click(object sender, EventArgs e)
         {
             StackOutSheet sheet = UpdatingItem as StackOutSheet;
@@ -800,6 +832,5 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
         #endregion
 
-        
     }
 }

@@ -35,6 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmStackOutSheetDetail));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddSlice = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddSteelRoll = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +49,9 @@
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnShip = new System.Windows.Forms.ToolStripButton();
             this.btnNullify = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pnl毛利 = new System.Windows.Forms.GroupBox();
@@ -111,9 +115,9 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnu_预览 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -197,7 +201,10 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
             this.btnPayment,
+            this.toolStripSeparator4,
+            this.mnu_预览,
             this.btnPrint,
+            this.toolStripSeparator3,
             this.btnShip,
             this.btnNullify,
             this.toolStripSeparator1,
@@ -259,6 +266,23 @@
             this.btnNullify.Text = "作废(&N)";
             this.btnNullify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNullify.Click += new System.EventHandler(this.btnNullify_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 56);
+            // 
+            // lblSheetState
+            // 
+            this.lblSheetState.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F, System.Drawing.FontStyle.Bold);
+            this.lblSheetState.Name = "lblSheetState";
+            this.lblSheetState.Size = new System.Drawing.Size(112, 53);
+            this.lblSheetState.Text = "状态：新增";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
             // tabControl1
             // 
@@ -896,22 +920,25 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // lblSheetState
+            // mnu_预览
             // 
-            this.lblSheetState.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F, System.Drawing.FontStyle.Bold);
-            this.lblSheetState.Name = "lblSheetState";
-            this.lblSheetState.Size = new System.Drawing.Size(112, 53);
-            this.lblSheetState.Text = "状态：新增";
+            this.mnu_预览.Image = ((System.Drawing.Image)(resources.GetObject("mnu_预览.Image")));
+            this.mnu_预览.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mnu_预览.Name = "mnu_预览";
+            this.mnu_预览.Size = new System.Drawing.Size(52, 53);
+            this.mnu_预览.Text = "预览(&V)";
+            this.mnu_预览.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.mnu_预览.Click += new System.EventHandler(this.mnu_预览_Click);
             // 
-            // toolStripSeparator1
+            // toolStripSeparator3
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 56);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 56);
             // 
-            // toolStripSeparator2
+            // toolStripSeparator4
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 56);
             // 
             // FrmStackOutSheetDetail
             // 
@@ -1033,5 +1060,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel lblSheetState;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton mnu_预览;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
