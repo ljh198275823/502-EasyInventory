@@ -15,6 +15,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             InitializeComponent();
         }
 
+        private readonly List<CustomerPaymentType> _收入 = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款, CustomerPaymentType.其它收款, CustomerPaymentType.转账入, CustomerPaymentType.供应商退款, CustomerPaymentType.管理费用退款 };
+        private readonly List<CustomerPaymentType> _支出 = new List<CustomerPaymentType>() { CustomerPaymentType.供应商付款, CustomerPaymentType.管理费用, CustomerPaymentType.转账出, CustomerPaymentType.客户退款 };
         private decimal _balance = 0;
         private List<Account> _AllAccounts = null;
 
@@ -64,14 +66,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             List<账户往来项> ret = new List<账户往来项>();
             var first = new 账户往来项();
             first.Name = "上期结余";
-            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.客户收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.其它收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.转账入 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.供应商退款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.供应商付款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.转账出 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.公司管理费用 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.客户退款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.收入 += ps.Sum(it => _收入.Contains(it.ClassID) && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.支出 += ps.Sum(it => _支出.Contains(it.ClassID) && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             //ret.Add(first);
             ret.AddRange(from it in ps
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
@@ -81,8 +77,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                              CreateDate = it.CreateDate,
                              单据编号 = it.SheetID,
                              PaymentType = it.ClassID,
-                             收入 = it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款 ? it.Amount : 0,
-                             支出 = it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款 ? it.Amount : 0,
+                             收入 = _收入.Contains(it.ClassID) ? it.Amount : 0,
+                             支出 = _支出.Contains(it.ClassID) ? it.Amount : 0,
                              付款单位 = it.OtherAccount,
                              Memo = it.Memo
                          });
@@ -149,9 +145,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
                     }
-                    else if (sheet.ClassID == CustomerPaymentType.公司管理费用)
+                    else if (sheet.ClassID == CustomerPaymentType.管理费用)
                     {
                         Frm管理费用明细 frm = new Frm管理费用明细();
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.管理费用退款)
+                    {
+                        var frm = new Frm管理费用退款();
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
                     }

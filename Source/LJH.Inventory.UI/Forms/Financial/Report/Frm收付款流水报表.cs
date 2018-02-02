@@ -76,7 +76,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk客户收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.客户收款);
             if (chk供应商付款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商付款);
             if (chk其它收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.其它收款);
-            if (chk费用支出.Checked) con.PaymentTypes.Add(CustomerPaymentType.公司管理费用);
+            if (chk费用支出.Checked) con.PaymentTypes.Add(CustomerPaymentType.管理费用);
             if (chk客户退款.Checked) con.PaymentTypes.Add(CustomerPaymentType.客户退款);
             if (chk供应商退款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商退款);
             if (con.PaymentTypes.Count == 0) return null;
@@ -126,7 +126,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             DateTime pd = cp.SheetDate;
             if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd)) row.Cells["col到款日期"].Value = pd.ToString("yyyy年MM月dd日");
             row.Cells["colMemo"].Value = cp.Memo;
-            if (cp.ClassID == CustomerPaymentType.公司管理费用)
+            if (cp.ClassID == CustomerPaymentType.管理费用)
             {
                 row.Cells["colPaymentMode"].Value = cp.GetProperty("费用类别");
                 row.Cells["colCustomer"].Value = cp.GetProperty("申请人");
@@ -145,7 +145,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                     _收入 += cp.Amount;
                     row.DefaultCellStyle.ForeColor = Color.Blue;
                 }
-                else if (cp.ClassID == CustomerPaymentType.供应商付款 || cp.ClassID == CustomerPaymentType.公司管理费用 || cp.ClassID == CustomerPaymentType.客户退款)
+                else if (cp.ClassID == CustomerPaymentType.供应商付款 || cp.ClassID == CustomerPaymentType.管理费用 || cp.ClassID == CustomerPaymentType.客户退款)
                 {
                     _支出 += cp.Amount;
                     row.DefaultCellStyle.ForeColor = Color.Red;
@@ -253,9 +253,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
                     }
-                    else if (sheet.ClassID == CustomerPaymentType.公司管理费用)
+                    else if (sheet.ClassID == CustomerPaymentType.管理费用)
                     {
                         Frm管理费用明细 frm = new Frm管理费用明细();
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.管理费用退款)
+                    {
+                        var frm = new Frm管理费用退款();
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
                     }

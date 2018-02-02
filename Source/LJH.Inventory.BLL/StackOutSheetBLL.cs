@@ -29,6 +29,7 @@ namespace LJH.Inventory.BLL
                 CustomerID = sheet.CustomerID,
                 SheetID = sheet.ID,
                 Amount = sheet.Amount,
+                Memo = sheet.Memo,
             };
             ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
         }
@@ -43,6 +44,7 @@ namespace LJH.Inventory.BLL
                 CustomerID = sheet.CustomerID,
                 SheetID = sheet.ID,
                 Amount = sheet.Amount,
+                Memo = sheet.Memo
             };
             ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(tax, unitWork);
         }

@@ -155,7 +155,6 @@
             this.txtAccount.ReadOnly = true;
             this.txtAccount.Size = new System.Drawing.Size(160, 21);
             this.txtAccount.TabIndex = 103;
-            this.txtAccount.Visible = false;
             this.txtAccount.DoubleClick += new System.EventHandler(this.txtAccount_DoubleClick);
             // 
             // lnkAccout
@@ -167,7 +166,6 @@
             this.lnkAccout.TabStop = true;
             this.lnkAccout.Text = "付款账号";
             this.lnkAccout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lnkAccout.Visible = false;
             this.lnkAccout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAccout_LinkClicked);
             // 
             // txtSupplier
@@ -524,6 +522,7 @@
             // 
             // Frm管理费用明细
             // 
+            this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(501, 251);

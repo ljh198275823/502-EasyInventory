@@ -40,6 +40,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Cells["col付款账号"].Value = ac != null ? ac.Name : cp.付款账号;
             if (!string.IsNullOrEmpty(cp.对方账号) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.对方账号);
             row.Cells["col对方账号"].Value = ac != null ? ac.Name : cp.对方账号;
+            row.Cells["colMemo"].Value = cp.Memo;
         }
 
         protected override List<object> GetDataSource()

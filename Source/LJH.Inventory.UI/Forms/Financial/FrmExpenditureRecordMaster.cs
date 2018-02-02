@@ -79,16 +79,58 @@ namespace LJH.Inventory.UI.Forms.Financial
         public override void ShowOperatorRights()
         {
             base.ShowOperatorRights();
-            cMnu_Add.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
+            mnu_新建管理费用.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
+            mnu_新建管理费用退款.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             mnu_AddExpenditure.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             mnu_AddCategory.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
             mnu_DeleteCategory.Enabled = Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
         }
 
-        protected override FrmDetailBase GetDetailForm()
+        private void PerformAddData(CustomerPaymentType ct)
         {
-            Frm管理费用明细 frm = new Frm管理费用明细();
-            return frm;
+            try
+            {
+                FrmDetailBase frm = null;
+                if (ct == CustomerPaymentType.管理费用) frm = new Frm管理费用明细();
+                else if (ct == CustomerPaymentType.管理费用退款) frm = new Frm管理费用退款();
+                if (frm != null)
+                {
+                    frm.IsAdding = true;
+                    frm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+                    {
+                        Add_And_Show_Row(args.AddedItem);
+                    };
+                    frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        protected override void PerformUpdateData()
+        {
+            if (this.GridView != null && this.GridView.SelectedRows != null && this.GridView.SelectedRows.Count > 0)
+            {
+                CustomerPayment pre = this.GridView.SelectedRows[0].Tag as CustomerPayment;
+                if (pre != null)
+                {
+                    FrmDetailBase frm = null;
+                    if (pre.ClassID == CustomerPaymentType.管理费用) frm = new Frm管理费用明细();
+                    else if (pre.ClassID == CustomerPaymentType.管理费用退款) frm = new Frm管理费用退款();
+                    if (frm != null)
+                    {
+                        frm.IsAdding = false;
+                        frm.UpdatingItem = pre;
+                        frm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+                        {
+                            ShowItemInGridViewRow(this.GridView.SelectedRows[0], args.UpdatedItem);
+                        };
+                        frm.ShowDialog();
+                    }
+                }
+            }
         }
 
         protected override List<object> GetDataSource()
@@ -98,13 +140,13 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 CustomerPaymentSearchCondition con = new CustomerPaymentSearchCondition();
                 con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-                con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.公司管理费用 };
+                con.PaymentTypes = new List<CustomerPaymentType>() { CustomerPaymentType.管理费用, CustomerPaymentType.管理费用退款 };
                 _Sheets = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             }
             else
             {
                 _Sheets = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(SearchCondition).QueryObjects;
-                if (_Sheets != null) _Sheets.RemoveAll(it => it.ClassID != CustomerPaymentType.公司管理费用);
+                if (_Sheets != null) _Sheets.RemoveAll(it => it.ClassID != CustomerPaymentType.管理费用 && it.ClassID != CustomerPaymentType.管理费用退款);
             }
             return FilterData();
         }
@@ -150,23 +192,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                 }
             }
             lbl合计.Text = string.Format("合计：{0:C2} 元", _Amount);
-        }
-        #endregion
-
-        #region 事件处理程序
-        private void category_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            FreshData();
-        }
-
-        private void txtKeyword_TextChanged(object sender, EventArgs e)
-        {
-            FreshData();
-        }
-
-        private void chkState_CheckedChanged(object sender, EventArgs e)
-        {
-            FreshData();
         }
         #endregion
 
@@ -224,10 +249,36 @@ namespace LJH.Inventory.UI.Forms.Financial
         }
         #endregion
 
+        #region 事件处理程序
+        private void category_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            FreshData();
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void chkState_CheckedChanged(object sender, EventArgs e)
+        {
+            FreshData();
+        }
+
+        private void mnu_新建管理费用_Click(object sender, EventArgs e)
+        {
+            PerformAddData(CustomerPaymentType.管理费用);
+        }
+
+        private void mnu_新建管理费用退款_Click(object sender, EventArgs e)
+        {
+            PerformAddData(CustomerPaymentType.管理费用退款);
+        }
+
         private void ucDateTimeInterval1_ValueChanged(object sender, EventArgs e)
         {
             cMnu_Fresh.PerformClick();
         }
-
+        #endregion
     }
 }

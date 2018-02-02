@@ -44,9 +44,13 @@ namespace LJH.Inventory.BLL
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退", "yyMM", 3, info.DocumentType);
             }
-            else if (info.ClassID == CustomerPaymentType.公司管理费用)
+            else if (info.ClassID == CustomerPaymentType.管理费用)
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("支", "yyMM", 3, info.DocumentType);
+            }
+            else if (info.ClassID == CustomerPaymentType.管理费用退款)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退", "yyMM", 3, info.DocumentType);
             }
             return info.ID;
         }
@@ -241,7 +245,7 @@ namespace LJH.Inventory.BLL
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr1, unitWork);
                 }
             }
-            else if (info.ClassID == CustomerPaymentType.公司管理费用)
+            else if (info.ClassID == CustomerPaymentType.管理费用)
             {
                 if (!string.IsNullOrEmpty(info.AccountID))
                 {

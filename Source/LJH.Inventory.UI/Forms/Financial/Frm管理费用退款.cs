@@ -16,9 +16,9 @@ using LJH.Inventory.UI.Forms.General;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class Frm管理费用明细 : FrmSheetDetailBase
+    public partial class Frm管理费用退款 : FrmSheetDetailBase
     {
-        public Frm管理费用明细()
+        public Frm管理费用退款()
         {
             InitializeComponent();
         }
@@ -129,7 +129,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 info = UpdatingItem as CustomerPayment;
             }
-            info.ClassID = CustomerPaymentType.管理费用;
+            info.ClassID = CustomerPaymentType.管理费用退款;
             info.Amount = txtAmount.DecimalValue;
             info.SheetDate = dtSheetDate.Value;
             info.SetProperty("费用类别", txtCategory.Text);

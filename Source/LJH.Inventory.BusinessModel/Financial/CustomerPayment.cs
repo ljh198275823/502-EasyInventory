@@ -110,7 +110,7 @@ namespace LJH.Inventory.BusinessModel
                     case CustomerPaymentType.客户退款:
                     case CustomerPaymentType.供应商退款:
                         return "退款";
-                    case CustomerPaymentType.公司管理费用:
+                    case CustomerPaymentType.管理费用:
                         return "公司管理费用";
                     default:
                         throw new Exception("客户付款单没有指定类型");

@@ -398,6 +398,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     if (sheet.State == SheetState.新增)
                     {
+                        GetItemFromInput();
                         var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
                         if (ret.Result != ResultCode.Successful)
                         {
@@ -523,6 +524,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;
                 if (sheet.State == SheetState.新增)
                 {
+                    GetItemFromInput();
                     var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result != ResultCode.Successful)
                     {

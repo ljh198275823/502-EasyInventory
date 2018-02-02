@@ -245,7 +245,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             frm.ShowDialog();
                             FreshData();
                         }
-                        else if (cp != null && cp.ClassID == CustomerPaymentType.公司管理费用)
+                        else if (cp != null && cp.ClassID == CustomerPaymentType.管理费用)
                         {
                             Frm管理费用明细 frm = new Frm管理费用明细();
                             frm.IsAdding = false;

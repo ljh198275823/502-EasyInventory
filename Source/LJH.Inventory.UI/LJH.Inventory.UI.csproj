@@ -130,6 +130,12 @@
     <Compile Include="Forms\Financial\Frm核销公账.designer.cs">
       <DependentUpon>Frm核销公账.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\Frm管理费用退款.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Frm管理费用退款.designer.cs">
+      <DependentUpon>Frm管理费用退款.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\Frm转账.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -790,6 +796,9 @@
     <EmbeddedResource Include="Forms\Financial\Frm核销公账.resx">
       <DependentUpon>Frm核销公账.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Frm管理费用退款.resx">
+      <DependentUpon>Frm管理费用退款.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Frm转账.resx">
       <DependentUpon>Frm转账.cs</DependentUpon>

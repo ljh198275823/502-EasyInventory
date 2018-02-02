@@ -15,7 +15,7 @@ namespace LJH.Inventory.BusinessModel
         供应商付款 = 2,
         客户增值税发票 = 3,
         供应商增值税发票 = 4,
-        公司管理费用 = 5,
+        管理费用 = 5,
         其它收款 = 6,
         转公账 = 7,
         转账 = 13,
@@ -24,5 +24,6 @@ namespace LJH.Inventory.BusinessModel
         公账 = 10,
         客户退款 = 11,
         供应商退款 = 12,
+        管理费用退款 = 13,
     }
 }
