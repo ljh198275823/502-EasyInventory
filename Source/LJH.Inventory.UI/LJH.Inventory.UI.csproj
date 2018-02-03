@@ -358,6 +358,10 @@
     <Compile Include="Forms\Inventory\Report\Frm小件盘点记录报表.designer.cs">
       <DependentUpon>Frm小件盘点记录报表.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Inventory\Report\Frm送货单出货利润明细报表.cs" />
+    <Compile Include="Forms\Inventory\Report\Frm送货单出货利润明细报表.designer.cs">
+      <DependentUpon>Frm送货单出货利润明细报表.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Inventory\View\Frm修改记录日志明细.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -911,6 +915,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Report\Frm小件盘点记录报表.resx">
       <DependentUpon>Frm小件盘点记录报表.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory\Report\Frm送货单出货利润明细报表.resx">
+      <DependentUpon>Frm送货单出货利润明细报表.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\View\Frm修改记录日志明细.resx">
       <DependentUpon>Frm修改记录日志明细.cs</DependentUpon>
