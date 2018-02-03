@@ -42,10 +42,12 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colClassID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col收入 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col支出 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col余额 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col付款单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col申请人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -121,25 +123,27 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetDate,
             this.colSheetID,
+            this.colClassID,
             this.col收入,
             this.col支出,
             this.col余额,
             this.col付款单位,
+            this.col申请人,
             this.colMemo});
             this.dataGridView1.Location = new System.Drawing.Point(2, 99);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(835, 287);
+            this.dataGridView1.Size = new System.Drawing.Size(1005, 287);
             this.dataGridView1.TabIndex = 41;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -161,6 +165,12 @@
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colClassID
+            // 
+            this.colClassID.HeaderText = "类型";
+            this.colClassID.Name = "colClassID";
+            this.colClassID.ReadOnly = true;
             // 
             // col收入
             // 
@@ -201,6 +211,12 @@
             this.col付款单位.ReadOnly = true;
             this.col付款单位.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // col申请人
+            // 
+            this.col申请人.HeaderText = "申请人";
+            this.col申请人.Name = "col申请人";
+            this.col申请人.ReadOnly = true;
+            // 
             // colMemo
             // 
             this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -215,7 +231,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(839, 411);
+            this.ClientSize = new System.Drawing.Size(1009, 411);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
@@ -247,10 +263,12 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClassID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col收入;
         private System.Windows.Forms.DataGridViewTextBoxColumn col支出;
         private System.Windows.Forms.DataGridViewTextBoxColumn col余额;
         private System.Windows.Forms.DataGridViewTextBoxColumn col付款单位;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col申请人;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

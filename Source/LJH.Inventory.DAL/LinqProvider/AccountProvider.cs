@@ -57,7 +57,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (items != null && items.Count > 0) //计算余额，所有记录的收入项减支出项
             {
                 var ru = (from it in dc.GetTable<AccountRecord>()
-                          where it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款
+                          where it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款 || it.ClassID ==CustomerPaymentType .管理费用退款
                           group it by it.AccountID into g
                           select new { AccountID = g.Key, Amount = g.Sum(it => it.Amount) }).ToList();
                 if (ru != null && ru.Count > 0)

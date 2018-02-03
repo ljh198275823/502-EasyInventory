@@ -72,6 +72,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -106,6 +108,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dtPaidDate);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txt申请人);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtAccount);
@@ -133,7 +137,7 @@
             // txt申请人
             // 
             this.txt申请人.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txt申请人.Location = new System.Drawing.Point(71, 107);
+            this.txt申请人.Location = new System.Drawing.Point(73, 107);
             this.txt申请人.Name = "txt申请人";
             this.txt申请人.Size = new System.Drawing.Size(159, 21);
             this.txt申请人.TabIndex = 106;
@@ -141,7 +145,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 110);
+            this.label3.Location = new System.Drawing.Point(26, 110);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 107;
@@ -150,7 +154,7 @@
             // txtAccount
             // 
             this.txtAccount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAccount.Location = new System.Drawing.Point(311, 77);
+            this.txtAccount.Location = new System.Drawing.Point(73, 75);
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.ReadOnly = true;
             this.txtAccount.Size = new System.Drawing.Size(160, 21);
@@ -159,7 +163,7 @@
             // 
             // lnkAccout
             // 
-            this.lnkAccout.Location = new System.Drawing.Point(246, 79);
+            this.lnkAccout.Location = new System.Drawing.Point(7, 77);
             this.lnkAccout.Name = "lnkAccout";
             this.lnkAccout.Size = new System.Drawing.Size(60, 17);
             this.lnkAccout.TabIndex = 102;
@@ -170,22 +174,24 @@
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(72, 76);
+            this.txtSupplier.Location = new System.Drawing.Point(311, 107);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(159, 21);
             this.txtSupplier.TabIndex = 9;
+            this.txtSupplier.Visible = false;
             this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
             // 
             // lnkSupplier
             // 
             this.lnkSupplier.AutoSize = true;
-            this.lnkSupplier.Location = new System.Drawing.Point(14, 80);
+            this.lnkSupplier.Location = new System.Drawing.Point(253, 111);
             this.lnkSupplier.Name = "lnkSupplier";
             this.lnkSupplier.Size = new System.Drawing.Size(53, 12);
             this.lnkSupplier.TabIndex = 8;
             this.lnkSupplier.TabStop = true;
             this.lnkSupplier.Text = "付款客户";
+            this.lnkSupplier.Visible = false;
             this.lnkSupplier.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_LinkClicked);
             // 
             // txtCategory
@@ -229,7 +235,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(72, 137);
+            this.txtMemo.Location = new System.Drawing.Point(73, 137);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(399, 21);
             this.txtMemo.TabIndex = 10;
@@ -237,7 +243,7 @@
             // txtAmount
             // 
             this.txtAmount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAmount.Location = new System.Drawing.Point(72, 43);
+            this.txtAmount.Location = new System.Drawing.Point(73, 43);
             this.txtAmount.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -520,6 +526,22 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
+            // dtPaidDate
+            // 
+            this.dtPaidDate.Location = new System.Drawing.Point(311, 75);
+            this.dtPaidDate.Name = "dtPaidDate";
+            this.dtPaidDate.Size = new System.Drawing.Size(160, 21);
+            this.dtPaidDate.TabIndex = 109;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(253, 79);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 108;
+            this.label1.Text = "到款日期";
+            // 
             // Frm管理费用退款
             // 
             this.AcceptButton = null;
@@ -594,6 +616,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private GeneralLibrary.WinformControl.DBCTextBox txt申请人;
         private System.Windows.Forms.Label label3;
+        private Controls.NullableDateTimePicker dtPaidDate;
+        private System.Windows.Forms.Label label1;
 
     }
 }

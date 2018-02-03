@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
@@ -40,13 +41,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Tag = cp;
             row.Cells["colSheetDate"].Value = cp.Name;
             row.Cells["colSheetID"].Value = cp.单据编号;
-            if (cp.收入 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col收入"].Value = cp.收入;
-            if (cp.支出 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col支出"].Value = cp.支出;
+            row.Cells["colClassID"].Value = cp.PaymentType.ToString();
+            if (cp.收入 != 0 && !string.IsNullOrEmpty(cp.单据编号)) { row.Cells["col收入"].Value = cp.收入; row.DefaultCellStyle.ForeColor = Color.Black; }
+            if (cp.支出 != 0 && !string.IsNullOrEmpty(cp.单据编号)) { row.Cells["col支出"].Value = cp.支出; row.DefaultCellStyle.ForeColor = Color.Red; }
             _balance += cp.收入 - cp.支出;
             row.Cells["col余额"].Value = _balance;
             Account ac = null;
             if (!string.IsNullOrEmpty(cp.付款单位) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.付款单位);
             row.Cells["col付款单位"].Value = ac != null ? ac.Name : cp.付款单位;
+            row.Cells["col申请人"].Value = cp.申请人;
             row.Cells["colMemo"].Value = cp.Memo;
         }
 
@@ -80,6 +83,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                              收入 = _收入.Contains(it.ClassID) ? it.Amount : 0,
                              支出 = _支出.Contains(it.ClassID) ? it.Amount : 0,
                              付款单位 = it.OtherAccount,
+                             申请人 = it.GetProperty("申请人"),
                              Memo = it.Memo
                          });
             ret = (from it in ret
@@ -184,6 +188,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         public decimal 支出 { get; set; }
 
         public string 付款单位 { get; set; }
+
+        public string 申请人 { get; set; }
 
         public string Memo { get; set; }
     }

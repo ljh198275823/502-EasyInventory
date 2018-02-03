@@ -54,8 +54,14 @@ namespace LJH.Inventory.UI.Forms.Financial
                     MessageBox.Show("此账号余额不足");
                     return false;
                 }
+                if (dtPaidDate.IsNull)
+                {
+                    MessageBox.Show("没有填写到款日期");
+                    dtPaidDate.Focus();
+                    return false;
+                }
             }
-            if (txtSupplier.Tag == null)
+            if (txtSupplier.Tag == null && txtAccount.Tag == null)
             {
                 MessageBox.Show("没有指定付款客户");
                 return false;
@@ -74,6 +80,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             txtAccount.Text = Account != null ? Account.Name : null;
             txtAccount.Tag = Account;
             if (IsForView) toolStrip1.Enabled = false;
+            this.dtPaidDate.IsNull = true;
             if (!string.IsNullOrEmpty(UserSettings.Current.默认公司费用客户))
             {
                 var sp = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(UserSettings.Current.默认公司费用客户).QueryObject;
@@ -109,6 +116,16 @@ namespace LJH.Inventory.UI.Forms.Financial
                     txtAccount.Text = ac != null ? ac.Name : null;
                     txtAccount.Tag = ac;
                 }
+                var temp = item.GetProperty("到款日期");
+                DateTime pd = item.SheetDate;
+                if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd))
+                {
+                    dtPaidDate.Value = pd;
+                }
+                else
+                {
+                    dtPaidDate.IsNull = true;
+                }
                 txt申请人.Text = item.GetProperty("申请人");
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -136,6 +153,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (txtAccount.Tag != null) info.AccountID = (txtAccount.Tag as Account).ID;
             else info.AccountID = string.Empty;// 账号不能为NULL，所以这里设置成空字符吧
             if (txtSupplier.Tag != null) info.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
+            info.SetProperty("到款日期", dtPaidDate.Value.ToString("yyyy-MM-dd"));
             info.SetProperty("申请人", txt申请人.Text);
             info.Memo = txtMemo.Text;
             return info;

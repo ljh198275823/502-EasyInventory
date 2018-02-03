@@ -171,11 +171,16 @@ namespace LJH.Inventory.UI.Forms.Financial
                 row.DefaultCellStyle.ForeColor = Color.Red;
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
+            else
+            {
+                row.DefaultCellStyle.ForeColor = info.ClassID == CustomerPaymentType.管理费用 ? Color.Black : Color.Red;
+            }
             if (_Sheets == null || !_Sheets.Exists(it => it.ID == info.ID))
             {
                 if (_Sheets == null) _Sheets = new List<CustomerPayment>();
                 _Sheets.Add(info);
             }
+            
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
@@ -188,7 +193,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                 if (row.Visible)
                 {
                     CustomerPayment r = row.Tag as CustomerPayment;
-                    _Amount += r.State != SheetState.作废 ? r.Amount : 0;
+                    if (r.ClassID == CustomerPaymentType.管理费用) _Amount += r.State != SheetState.作废 ? r.Amount : 0;
+                    else if (r.ClassID == CustomerPaymentType.管理费用退款) _Amount -= r.State != SheetState.作废 ? r.Amount : 0;
                 }
             }
             lbl合计.Text = string.Format("合计：{0:C2} 元", _Amount);

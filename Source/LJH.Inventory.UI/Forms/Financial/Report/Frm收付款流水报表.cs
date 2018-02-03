@@ -76,12 +76,12 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk客户收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.客户收款);
             if (chk供应商付款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商付款);
             if (chk其它收款.Checked) con.PaymentTypes.Add(CustomerPaymentType.其它收款);
-            if (chk费用支出.Checked) con.PaymentTypes.Add(CustomerPaymentType.管理费用);
+            if (chk费用支出.Checked) { con.PaymentTypes.Add(CustomerPaymentType.管理费用); con.PaymentTypes.Add(CustomerPaymentType.管理费用退款); }
             if (chk客户退款.Checked) con.PaymentTypes.Add(CustomerPaymentType.客户退款);
             if (chk供应商退款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商退款);
             if (con.PaymentTypes.Count == 0) return null;
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-            return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
+            return (from item in items where !string.IsNullOrEmpty(item.AccountID) orderby item.GetProperty("到款日期") ascending, item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
@@ -140,7 +140,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             }
             if (cp.State != SheetState.作废)
             {
-                if (cp.ClassID == CustomerPaymentType.客户收款 || cp.ClassID == CustomerPaymentType.其它收款 || cp.ClassID == CustomerPaymentType.供应商退款)
+                if (cp.ClassID == CustomerPaymentType.客户收款 || cp.ClassID == CustomerPaymentType.其它收款 || cp.ClassID == CustomerPaymentType.供应商退款 || cp.ClassID == CustomerPaymentType.管理费用退款)
                 {
                     _收入 += cp.Amount;
                     row.DefaultCellStyle.ForeColor = Color.Blue;
