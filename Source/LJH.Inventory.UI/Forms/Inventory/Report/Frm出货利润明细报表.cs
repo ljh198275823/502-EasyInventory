@@ -27,7 +27,23 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         private Dictionary<Guid, ProductInventoryItem> _Piis = new Dictionary<Guid, ProductInventoryItem>();
         private Dictionary<string, List<StackOutRecord>> _AllSS = new Dictionary<string, List<StackOutRecord>>();
 
+        private decimal _销售金额 = 0;
+        private decimal _国税计提 = 0;
+        private decimal _成本合计 = 0;
+
         #region 重写基类方法
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            _成本合计 = 0;
+            _国税计提 = 0;
+            _销售金额 = 0;
+            base.ShowItemsOnGrid(items);
+            lbl销售金额.Text = string.Format("销售金额：{0:C2}", _销售金额);
+            lbl产品成本.Text = string.Format("产品成本：{0:C2}", _成本合计);
+            lbl国税计提.Text = string.Format("国税计提：{0:C2}", _国税计提);
+            lbl毛利.Text = string.Format("毛    利：{0:C2}", _销售金额 - _国税计提 - _成本合计);
+        }
+
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             StackOutRecord sor = item as StackOutRecord;
@@ -46,6 +62,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colCount"].Value = sor.Count;
             var totalCout = _AllSS[sor.SheetNo].Where(it => it.ProductID == sor.ProductID).Sum(it => it.Count);
             var amount = totalCout == sor.Count ? sor.Amount : sor.Amount * sor.Count / totalCout;
+            _销售金额 += amount;
             if (totalCout == sor.Count)
             {
                 row.Cells["colWeight"].Value = sor.Weight;
@@ -56,6 +73,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 if (sor.Weight.HasValue) row.Cells["colWeight"].Value = sor.Weight.Value * sor.Count / totalCout;
                 row.Cells["colAmount"].Value = amount;
             }
+            decimal unitCost = 0;
             if (_Piis.ContainsKey(sor.ID))
             {
                 var sr = _Piis[sor.ID];
@@ -79,14 +97,16 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.其它费用);
                 if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
-                var unitCost = sr.CalUnitCost(sor.WithTax, UserSettings.Current.税点系数);
+                unitCost = sr.CalUnitCost(sor.WithTax, UserSettings.Current.税点系数);
                 if (sr.Model != ProductModel.原材料) row.Cells["col单件成本"].Value = unitCost;
-                else if (sor.Weight > 0) row.Cells["col单件成本"].Value = unitCost / sor.Weight.Value;
+                else if (sor.Weight > 0) row.Cells["col单件成本"].Value = unitCost / sor.Weight.Value; //卷材显示吨价
                 row.Cells["col成本合计"].Value = unitCost * sor.Count;
-                var 国税计提 = sor.WithTax ? amount * UserSettings.Current.国税系数 : 0;
-                row.Cells["col国税计提"].Value = 国税计提;
-                row.Cells["col利润合计"].Value = amount - unitCost * sor.Count - 国税计提;
             }
+            _成本合计 += unitCost * sor.Count;
+            var 国税计提 = sor.WithTax ? amount * UserSettings.Current.国税系数 : 0;
+            _国税计提 += 国税计提;
+            row.Cells["col国税计提"].Value = 国税计提;
+            row.Cells["col利润合计"].Value = amount - unitCost * sor.Count - 国税计提;
         }
 
         protected override List<object> GetDataSource()
@@ -110,6 +130,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
+                if (!string.IsNullOrEmpty(txtSheetNo.Text)) items = items.Where(it => it.SheetNo.Contains(txtSheetNo.Text)).ToList();
+                if (txtProductCategory.Tag != null) items = items.Where(it => it.Product.CategoryID == (txtProductCategory.Tag as ProductCategory).ID).ToList();
                 decimal length = txtLength.DecimalValue;
                 if (length != 0) items = items.Where(it => it.Length.HasValue && it.Length == length).ToList();
                 decimal weight = txtWeight.DecimalValue;
@@ -183,7 +205,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             txtProductCategory.Text = string.Empty;
             txtProductCategory.Tag = null;
         }
-        #endregion
 
         private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -264,5 +285,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 }
             }
         }
+        #endregion
     }
 }
