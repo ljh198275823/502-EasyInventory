@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.txt申请人 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.txtAccount = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -72,8 +74,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -133,6 +133,22 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dtPaidDate
+            // 
+            this.dtPaidDate.Location = new System.Drawing.Point(312, 107);
+            this.dtPaidDate.Name = "dtPaidDate";
+            this.dtPaidDate.Size = new System.Drawing.Size(160, 21);
+            this.dtPaidDate.TabIndex = 111;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(254, 111);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 110;
+            this.label1.Text = "付款日期";
             // 
             // txt申请人
             // 
@@ -523,22 +539,6 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
-            // 
-            // dtPaidDate
-            // 
-            this.dtPaidDate.Location = new System.Drawing.Point(312, 107);
-            this.dtPaidDate.Name = "dtPaidDate";
-            this.dtPaidDate.Size = new System.Drawing.Size(160, 21);
-            this.dtPaidDate.TabIndex = 111;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(254, 111);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 110;
-            this.label1.Text = "付款日期";
             // 
             // Frm管理费用明细
             // 

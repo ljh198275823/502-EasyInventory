@@ -123,6 +123,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 AccountRecord ar = dataGridView1.SelectedRows[0].Tag as AccountRecord;
+                if (string.IsNullOrEmpty(ar.AccountID)) return; //没有指定账号不能核销
                 if (ar.ClassID == CustomerPaymentType.供应商付款)
                 {
                     FrmSupplierPaymentAssign frm = new FrmSupplierPaymentAssign();

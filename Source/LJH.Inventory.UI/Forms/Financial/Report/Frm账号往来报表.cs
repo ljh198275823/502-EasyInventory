@@ -41,7 +41,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Tag = cp;
             row.Cells["colSheetDate"].Value = cp.Name;
             row.Cells["colSheetID"].Value = cp.单据编号;
-            row.Cells["colClassID"].Value = cp.PaymentType.ToString();
+            if (cp.PaymentType > 0) row.Cells["colClassID"].Value = cp.PaymentType.ToString();
             if (cp.收入 != 0 && !string.IsNullOrEmpty(cp.单据编号)) { row.Cells["col收入"].Value = cp.收入; row.DefaultCellStyle.ForeColor = Color.Black; }
             if (cp.支出 != 0 && !string.IsNullOrEmpty(cp.单据编号)) { row.Cells["col支出"].Value = cp.支出; row.DefaultCellStyle.ForeColor = Color.Red; }
             _balance += cp.收入 - cp.支出;
@@ -76,7 +76,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
                          select new 账户往来项()
                          {
-                             Name = it.CreateDate.ToString("yyyy-MM-dd"),
+                             Name = !string.IsNullOrEmpty(it.GetProperty("到款日期")) ? it.GetProperty("到款日期") : it.CreateDate.ToString("yyyy-MM-dd"),
                              CreateDate = it.CreateDate,
                              单据编号 = it.SheetID,
                              PaymentType = it.ClassID,
@@ -87,7 +87,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                              Memo = it.Memo
                          });
             ret = (from it in ret
-                   orderby it.CreateDate ascending
+                   orderby it.Name ascending
                    where it.收入 != 0 || it.支出 != 0
                    select it).ToList();
             ret.Insert(0, first);

@@ -320,6 +320,10 @@ namespace LJH.Inventory.BLL
                 if (info.Amount < ar.Assigned) throw new Exception("请先取消超出核销部分的金额再修改!");
                 var clone = ar.Clone();
                 clone.Amount = info.Amount;
+                clone.CustomerID = info.CustomerID;
+                clone.AccountID = info.AccountID;
+                clone.Note = info.Note;
+                clone.Memo = info.Memo;
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Update(clone, ar, unitWork);
             }
             base.DoUpdate(info, unitWork, dt, opt);

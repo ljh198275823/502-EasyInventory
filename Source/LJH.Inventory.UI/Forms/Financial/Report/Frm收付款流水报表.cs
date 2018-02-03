@@ -81,7 +81,10 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk供应商退款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商退款);
             if (con.PaymentTypes.Count == 0) return null;
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-            return (from item in items where !string.IsNullOrEmpty(item.AccountID) orderby item.GetProperty("到款日期") ascending, item.SheetDate ascending, item.ID ascending select (object)item).ToList();
+            return (from item in items
+                    where !string.IsNullOrEmpty(item.AccountID)
+                    orderby !string.IsNullOrEmpty(item.GetProperty("到款日期")) ? item.GetProperty("到款日期") : item.SheetDate.ToString("yyyy-MM-dd") ascending, item.ID ascending
+                    select (object)item).ToList();
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
@@ -120,7 +123,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (_AllCustomers != null)
             {
                 var c = _AllCustomers.SingleOrDefault(it => it.ID == cp.CustomerID);
-                row.Cells["colCustomer"].Value = c != null ? c.Name : cp.CustomerID;
+                row.Cells["colCustomer"].Value = c != null ? c.Name : null;
+                if (cp.CustomerID == CompanyInfo.财务上不存在的客户) row.Cells["colCustomer"].Value = "未确定客户付款";
             }
             var temp = cp.GetProperty("到款日期");
             DateTime pd = cp.SheetDate;

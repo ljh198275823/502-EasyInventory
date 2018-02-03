@@ -12,6 +12,8 @@ namespace LJH.Inventory.BusinessModel
     [Serializable]
     public class CompanyInfo : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
+        public static string 财务上不存在的客户 = "00000000";
+
         #region 构造函数
         public CompanyInfo()
         {
