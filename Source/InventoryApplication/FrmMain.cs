@@ -178,6 +178,7 @@ namespace InventoryApplication
             //报表
             this.mnu_DeliveryRecordReport.Enabled = cur.Permit(Permission.DeliveryRecordReport, PermissionActions.Read);
             this.mnu_DeliveryStatistic.Enabled = cur.Permit(Permission.DeliveryStatistics, PermissionActions.Read);
+            this.mnu_出货利润明细报表.Enabled = cur.Permit(Permission.DeliveryStatistics, PermissionActions.Read);
             this.mnu_InventoryRecord.Enabled = cur.Permit(Permission.InventoryRecordReport, PermissionActions.Read);
             this.mnu_SliceRecordReport.Enabled = cur.Permit(Permission.SliceRecordReport, PermissionActions.Read);
             this.mnu_PaymentReport.Enabled = cur.Permit(Permission.收付款流水报表, PermissionActions.Read);
@@ -188,7 +189,6 @@ namespace InventoryApplication
             this.mnu_供应商往来报表.Enabled = cur.Permit(Permission.供应商往来报表, PermissionActions.Read);
             this.mnu_原材料盘点报表.Enabled = cur.Permit(Permission.原材料盘点报表, PermissionActions.Read);
             this.mnu_小件盘点报表.Enabled = cur.Permit(Permission.小件盘点报表, PermissionActions.Read);
-
         }
         #endregion
 
@@ -415,6 +415,11 @@ namespace InventoryApplication
             ShowSingleForm<FrmDeliveryStatistics>(null);
         }
 
+        private void mnu_出货利润明细报表_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<Frm出货利润明细报表>(null);
+        }
+
         private void mnu_Supplier_Click(object sender, EventArgs e)
         {
             ShowSingleForm<FrmSupplierMaster>(null);
@@ -540,5 +545,7 @@ namespace InventoryApplication
             ShowSingleForm<LJH.Inventory.UI.Forms.Inventory.Frm其它产品库存>(sender);
         }
         #endregion
+
+       
     }
 }

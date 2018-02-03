@@ -17,14 +17,15 @@ using LJH.Inventory.UI.Forms.Sale;
 
 namespace LJH.Inventory.UI.Forms.Inventory.Report
 {
-    public partial class Frm送货单出货利润明细报表 : FrmReportBase
+    public partial class Frm出货利润明细报表 : FrmReportBase
     {
-        public Frm送货单出货利润明细报表()
+        public Frm出货利润明细报表()
         {
             InitializeComponent();
         }
 
-        private StackOutRecord _LastRecord = null;
+        private Dictionary<Guid, ProductInventoryItem> _Piis = new Dictionary<Guid, ProductInventoryItem>();
+        private Dictionary<string, List<StackOutRecord>> _AllSS = new Dictionary<string, List<StackOutRecord>>();
 
         #region 重写基类方法
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -33,37 +34,69 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colDeliveryDate"].Value = sor.SheetDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = sor.SheetNo;
             row.Cells["colCustomerName"].Value = sor.Customer.Name;
-            row.Cells["colOrderID"].Value = sor.OrderID;
-            row.Cells["colThick"].Value = SpecificationHelper.GetWrittenThick(sor.Specification);
-            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(sor.Specification);
             row.Cells["colSpecification"].Value = sor.Specification;
             row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
             row.Cells["colLength"].Value = sor.Length;
+            row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
             row.Cells["colPrice"].Value = sor.Price;
+            row.Cells["colWithTax"].Value = sor.WithTax;
             row.Cells["colCount"].Value = sor.Count;
-            if (_LastRecord != null && _LastRecord.SheetNo == sor.SheetNo && _LastRecord.ProductID == sor.ProductID && _LastRecord.Weight.HasValue) //如果是同一个送货单同一种产品的项,并且有合计重量，只在第一项显示金额
-            {
-            }
-            else
+            var totalCout = _AllSS[sor.SheetNo].Where(it => it.ProductID == sor.ProductID).Sum(it => it.Count);
+            if (totalCout == sor.Count)
             {
                 row.Cells["colWeight"].Value = sor.Weight;
                 row.Cells["colAmount"].Value = sor.Amount;
             }
-            row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
-            _LastRecord = sor;
+            else
+            {
+                if (sor.Weight.HasValue) row.Cells["colWeight"].Value = sor.Weight.Value * sor.Count / totalCout;
+                row.Cells["colAmount"].Value = sor.Amount * sor.Count / totalCout;
+            }
+            if (_Piis.ContainsKey(sor.ID))
+            {
+                var sr = _Piis[sor.ID];
+                row.Cells["col厂家"].Value = sr.Manufacture;
+                row.Cells["col合同号"].Value = sr.PurchaseID;
+                CostItem ci = sr.GetCost(CostItem.入库单价);
+                if (ci != null) row.Cells["col入库吨价"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.运费);
+                if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.加工费);
+                if (ci != null && ci.Price > 0)
+                {
+                    row.Cells["col开平费"].Value = ci.Price;
+                }
+                else
+                {
+                    ci = sr.GetCost("开平费");
+                    if (ci != null && ci.Price > 0) row.Cells["col开平费"].Value = ci.Price;
+                }
+                ci = sr.GetCost(CostItem.吊装费);
+                if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.其它费用);
+                if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
+            }
         }
 
         protected override List<object> GetDataSource()
         {
-            StackOutRecordSearchCondition con = new StackOutRecordSearchCondition();
+            var con = new StackOutSheetSearchCondition();
             con.SheetDate = new DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
             con.States = new List<SheetState>();
             con.States.Add(SheetState.已发货);
             con.SheetTypes = new List<StackOutSheetType>();
             con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
-            if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
+
+            _Piis.Clear();
+            var pis = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+            foreach (var pi in pis)
+            {
+                _Piis.Add(pi.DeliveryItem.Value, pi);
+            }
+
+            _AllSS.Clear();
             List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
@@ -75,13 +108,22 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 if (sourceRollWeight != 0) items = items.Where(it => it.SourceRollWeight.HasValue && it.SourceRollWeight == sourceRollWeight).ToList();
                 decimal? width = SpecificationHelper.GetWrittenWidth(cmbSpecification.Specification);
                 decimal? thick = SpecificationHelper.GetWrittenThick(cmbSpecification.Specification);
-                return (from item in items
-                        orderby item.SheetNo ascending, item.AddDate ascending
-                        where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Specification) == width) &&
-                              (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Specification) == thick)
-                        select (object)item).ToList();
+                items = (from item in items
+                         orderby item.SheetNo ascending, item.AddDate ascending
+                         where (!width.HasValue || SpecificationHelper.GetWrittenWidth(item.Specification) == width) &&
+                               (!thick.HasValue || SpecificationHelper.GetWrittenThick(item.Specification) == thick)
+                         select item).ToList();
+                if (items != null && items.Count > 0)
+                {
+                    foreach (var item in items)
+                    {
+                        if (!_AllSS.ContainsKey(item.SheetNo)) _AllSS.Add(item.SheetNo, new List<StackOutRecord>());
+                        _AllSS[item.SheetNo].Add(item);
+                    }
+                    return items.Select(it => (object)it).ToList();
+                }
             }
-            return base.GetDataSource();
+            return null;
         }
 
         protected override void Init()
