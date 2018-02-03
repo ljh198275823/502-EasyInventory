@@ -598,6 +598,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 frm.ProductInventoryItem = sr;
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();
+                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
             }
         }
 

@@ -63,7 +63,7 @@
             this.gridView = new System.Windows.Forms.DataGridView();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSheetNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSheetNo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +81,7 @@
             this.col开平费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col吊装费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col其它费用 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col单件成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col单件成本 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.col成本合计 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col国税计提 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col利润合计 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -340,8 +340,9 @@
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1450, 401);
+            this.gridView.Size = new System.Drawing.Size(1370, 401);
             this.gridView.TabIndex = 26;
+            this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
             // 
             // colDeliveryDate
             // 
@@ -367,6 +368,7 @@
             this.colSheetNo.Name = "colSheetNo";
             this.colSheetNo.ReadOnly = true;
             this.colSheetNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSheetNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colSheetNo.Width = 66;
             // 
             // colCategoryID
@@ -536,9 +538,11 @@
             this.col单件成本.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle12.Format = "C2";
             this.col单件成本.DefaultCellStyle = dataGridViewCellStyle12;
-            this.col单件成本.HeaderText = "单件成本";
+            this.col单件成本.HeaderText = "单位成本";
             this.col单件成本.Name = "col单件成本";
             this.col单件成本.ReadOnly = true;
+            this.col单件成本.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col单件成本.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.col单件成本.Width = 78;
             // 
             // col成本合计
@@ -575,7 +579,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1450, 529);
+            this.ClientSize = new System.Drawing.Size(1370, 529);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.panel1);
             this.Name = "Frm出货利润明细报表";
@@ -616,7 +620,7 @@
         private GeneralLibrary.WinformControl.DecimalTextBox txtSourceRollWeight;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSheetNo;
+        private System.Windows.Forms.DataGridViewLinkColumn colSheetNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
@@ -634,7 +638,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col开平费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col吊装费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col其它费用;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col单件成本;
+        private System.Windows.Forms.DataGridViewLinkColumn col单件成本;
         private System.Windows.Forms.DataGridViewTextBoxColumn col成本合计;
         private System.Windows.Forms.DataGridViewTextBoxColumn col国税计提;
         private System.Windows.Forms.DataGridViewTextBoxColumn col利润合计;

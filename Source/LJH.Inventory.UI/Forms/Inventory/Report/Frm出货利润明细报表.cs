@@ -31,6 +31,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             StackOutRecord sor = item as StackOutRecord;
+            row.Tag = sor;
             row.Cells["colDeliveryDate"].Value = sor.SheetDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = sor.SheetNo;
             row.Cells["colCustomerName"].Value = sor.Customer.Name;
@@ -38,20 +39,22 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
             row.Cells["colLength"].Value = sor.Length;
-            row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
+            if (sor.SourceRollWeight.HasValue) row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
+            else row.Cells["colSourceRollWeight"].Value = "查看";
             row.Cells["colPrice"].Value = sor.Price;
             row.Cells["colWithTax"].Value = sor.WithTax;
             row.Cells["colCount"].Value = sor.Count;
             var totalCout = _AllSS[sor.SheetNo].Where(it => it.ProductID == sor.ProductID).Sum(it => it.Count);
+            var amount = totalCout == sor.Count ? sor.Amount : sor.Amount * sor.Count / totalCout;
             if (totalCout == sor.Count)
             {
                 row.Cells["colWeight"].Value = sor.Weight;
-                row.Cells["colAmount"].Value = sor.Amount;
+                row.Cells["colAmount"].Value = amount;
             }
             else
             {
                 if (sor.Weight.HasValue) row.Cells["colWeight"].Value = sor.Weight.Value * sor.Count / totalCout;
-                row.Cells["colAmount"].Value = sor.Amount * sor.Count / totalCout;
+                row.Cells["colAmount"].Value = amount;
             }
             if (_Piis.ContainsKey(sor.ID))
             {
@@ -76,6 +79,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.其它费用);
                 if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
+                var unitCost = sr.CalUnitCost(sor.WithTax, UserSettings.Current.税点系数);
+                if (sr.Model != ProductModel.原材料) row.Cells["col单件成本"].Value = unitCost;
+                else if (sor.Weight > 0) row.Cells["col单件成本"].Value = unitCost / sor.Weight.Value;
+                row.Cells["col成本合计"].Value = unitCost * sor.Count;
+                var 国税计提 = sor.WithTax ? amount * UserSettings.Current.国税系数 : 0;
+                row.Cells["col国税计提"].Value = 国税计提;
+                row.Cells["col利润合计"].Value = amount - unitCost * sor.Count - 国税计提;
             }
         }
 
@@ -174,5 +184,85 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             txtProductCategory.Tag = null;
         }
         #endregion
+
+        private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex > 0)
+            {
+                var sor = gridView.Rows[e.RowIndex].Tag as StackOutRecord;
+                if (gridView.Columns[e.ColumnIndex].Name == "col单件成本")
+                {
+                    if (_Piis.ContainsKey(sor.ID))
+                    {
+                        var frm = new Frm成本明细();
+                        frm.ProductInventoryItem = _Piis[sor.ID];
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.ShowDialog();
+                        btnSearch.PerformClick();
+                    }
+                }
+                else if (gridView.Columns[e.ColumnIndex].Name == "colSheetNo")
+                {
+                    var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sor.SheetNo).QueryObject;
+                    if (sheet != null)
+                    {
+                        Inventory.FrmStackOutSheetDetail frm = new Inventory.FrmStackOutSheetDetail();
+                        frm.IsAdding = false;
+                        frm.IsForView = true;
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                }
+                else if (gridView.Columns[e.ColumnIndex].Name == "colSourceRollWeight")
+                {
+                    if (_Piis.ContainsKey(sor.ID))
+                    {
+                        var sr = _Piis[sor.ID];
+                        if (sr.SourceRoll != null)
+                        {
+                            var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(sr.SourceRoll.Value).QueryObject;
+                            if (pi != null)
+                            {
+                                FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                                frm.UpdatingItem = pi;
+                                frm.IsForView = true;
+                                frm.ShowDialog();
+                            }
+                        }
+                        else if (sr.Model == ProductModel.原材料)
+                        {
+                            FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                            frm.UpdatingItem = sr;
+                            frm.IsForView = true;
+                            frm.ShowDialog();
+                        }
+                        else
+                        {
+                            ProductInventoryItem pi = null;
+                            if (sr.SourceID == null) pi = sr;
+                            else pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(sr.SourceID.Value).QueryObject;
+                            while (pi != null && pi.SourceID != null) //直到取到最后的入库项
+                            {
+                                pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(pi.SourceID.Value).QueryObject;
+                            }
+                            if (pi != null && pi.Model != ProductModel.其它产品)
+                            {
+                                FrmSteelRollSliceStackIn frm = new FrmSteelRollSliceStackIn();
+                                frm.SteelRollSlice = pi;
+                                frm.IsForView = true;
+                                frm.ShowDialog();
+                            }
+                            else
+                            {
+                                Frm其它产品入库 frm = new Frm其它产品入库();
+                                frm.SteelRollSlice = pi;
+                                frm.IsForView = true;
+                                frm.ShowDialog();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
