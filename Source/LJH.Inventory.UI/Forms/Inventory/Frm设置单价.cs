@@ -19,8 +19,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         public decimal 入库单价
         {
-            get { return txt结算单价.DecimalValue; }
-            set { txt结算单价.DecimalValue = value; }
+            get { return txt入库单价.DecimalValue; }
+            set { txt入库单价.DecimalValue = value; }
         }
 
         public bool WithTax
@@ -49,7 +49,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (txt结算单价.DecimalValue < 0)
+            if (txt入库单价.DecimalValue < 0)
             {
                 MessageBox.Show("单价不能小于零");
                 return;

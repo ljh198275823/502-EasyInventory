@@ -310,7 +310,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     cell.Value = pi.Memo;
                 }
             }
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "colPosition")
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "colPosition")
             {
                 var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
                 var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -320,6 +320,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     MessageBox.Show(ret.Message);
                     cell.Value = pi.Position;
+                }
+            }
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "colPurchaseID")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string purchaseID = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UpdatePurchaseID(pi, purchaseID);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.PurchaseID;
                 }
             }
         }

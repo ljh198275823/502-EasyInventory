@@ -151,7 +151,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 330);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
             // 
             // cMnu_Fresh
             // 
@@ -908,7 +908,6 @@
             // 
             this.colPurchaseID.HeaderText = "合同号";
             this.colPurchaseID.Name = "colPurchaseID";
-            this.colPurchaseID.ReadOnly = true;
             // 
             // colCarplate
             // 
