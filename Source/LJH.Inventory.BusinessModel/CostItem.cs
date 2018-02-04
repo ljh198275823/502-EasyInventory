@@ -49,6 +49,8 @@ namespace LJH.Inventory.BusinessModel
         /// 获取或设置供应商ID
         /// </summary>
         public string SupllierID { get; set; }
+
+        public string Memo { get; set; }
         #endregion
     }
 }

@@ -52,6 +52,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWithTax"].Value = record.WithTax;
             if (record.Name == CostItem.结算单价 && !Operator.Current.Permit(Permission.结算单价, PermissionActions.Read)) row.Visible = false;
             else if (!Operator.Current.Permit(Permission.其它成本, PermissionActions.Read)) row.Visible = false;
+            row.Cells["colMemo"].Value = record.Memo;
         }
         #endregion
 
@@ -61,7 +62,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 var pi = ProductInventoryItem;
-                var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID, Memo = frm.Memo };
                 var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                 if (ret.Result == ResultCode.Successful)
                 {

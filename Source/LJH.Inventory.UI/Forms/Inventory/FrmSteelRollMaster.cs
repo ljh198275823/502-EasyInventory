@@ -559,7 +559,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                    var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID, Memo = frm.Memo };
                     var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                     if (ret.Result == ResultCode.Successful)
                     {

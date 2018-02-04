@@ -92,7 +92,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnOk1_Click(object sender, EventArgs e)
         {
             if (!CheckInput()) return;
-            Cost = new CostItem() { Name = txt成本类别.Text, Price = txtPrice.DecimalValue, WithTax = rdWithTax.Checked, SupllierID = (txtSupplier.Tag as CompanyInfo).ID };
+            Cost = new CostItem() { Name = txt成本类别.Text, Price = txtPrice.DecimalValue, WithTax = rdWithTax.Checked, SupllierID = (txtSupplier.Tag as CompanyInfo).ID, Memo = txtMemo.Text };
             this.DialogResult = DialogResult.OK;
         }
 
