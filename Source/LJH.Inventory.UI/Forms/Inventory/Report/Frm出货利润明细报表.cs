@@ -79,24 +79,30 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 var sr = _Piis[sor.ID];
                 row.Cells["col厂家"].Value = sr.Manufacture;
                 row.Cells["col合同号"].Value = sr.PurchaseID;
-                CostItem ci = sr.GetCost(CostItem.结算单价);
-                if (ci != null) row.Cells["col入库吨价"].Value = ci.Price;
-                ci = sr.GetCost(CostItem.运费);
-                if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
-                ci = sr.GetCost(CostItem.加工费);
-                if (ci != null && ci.Price > 0)
+                if (Operator.Current.Permit(Permission.结算单价, PermissionActions.Read))
                 {
-                    row.Cells["col开平费"].Value = ci.Price;
+                    CostItem ci = sr.GetCost(CostItem.结算单价);
+                    if (ci != null) row.Cells["col结算单价"].Value = ci.Price;
                 }
-                else
+                if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read))
                 {
-                    ci = sr.GetCost("开平费");
+                    CostItem ci = sr.GetCost(CostItem.运费);
+                    if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
+                    ci = sr.GetCost(CostItem.短途运费);
+                    if (ci != null && ci.Price > 0) row.Cells["col短途运费"].Value = ci.Price;
+                    ci = sr.GetCost(CostItem.加工费);
+                    if (ci != null && ci.Price > 0) row.Cells["col加工费"].Value = ci.Price;
+                    ci = sr.GetCost(CostItem.开平费);
                     if (ci != null && ci.Price > 0) row.Cells["col开平费"].Value = ci.Price;
+                    ci = sr.GetCost(CostItem.分条费);
+                    if (ci != null && ci.Price > 0) row.Cells["col分条费"].Value = ci.Price;
+                    ci = sr.GetCost(CostItem.吊装费);
+                    if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
+                    ci = sr.GetCost(CostItem.其它费用);
+                    if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
+                    ci = sr.GetCost(CostItem.入库单价);
+                    if (ci != null && ci.Price > 0) row.Cells["col入库单价"].Value = ci.Price;
                 }
-                ci = sr.GetCost(CostItem.吊装费);
-                if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
-                ci = sr.GetCost(CostItem.其它费用);
-                if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
                 unitCost = sr.CalUnitCost(sor.WithTax, UserSettings.Current.税点系数);
                 if (sr.Model != ProductModel.原材料) row.Cells["col单件成本"].Value = unitCost;
                 else if (sor.Weight > 0) row.Cells["col单件成本"].Value = unitCost / sor.Weight.Value; //卷材显示吨价

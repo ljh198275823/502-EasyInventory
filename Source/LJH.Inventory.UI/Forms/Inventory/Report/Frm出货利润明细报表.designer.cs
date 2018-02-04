@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,6 +63,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.lbl毛利 = new System.Windows.Forms.Label();
+            this.lbl国税计提 = new System.Windows.Forms.Label();
+            this.lbl产品成本 = new System.Windows.Forms.Label();
+            this.lbl销售金额 = new System.Windows.Forms.Label();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetNo = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -78,19 +82,19 @@
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col入库吨价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col入库单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col结算单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col短途运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col分条费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col开平费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col加工费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col吊装费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col其它费用 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col单件成本 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.col成本合计 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col国税计提 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col利润合计 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbl毛利 = new System.Windows.Forms.Label();
-            this.lbl国税计提 = new System.Windows.Forms.Label();
-            this.lbl产品成本 = new System.Windows.Forms.Label();
-            this.lbl销售金额 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -330,8 +334,8 @@
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToResizeColumns = false;
             this.gridView.AllowUserToResizeRows = false;
-            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -351,9 +355,13 @@
             this.colPrice,
             this.colCount,
             this.colAmount,
-            this.col入库吨价,
+            this.col入库单价,
+            this.col结算单价,
             this.col运费,
+            this.col短途运费,
+            this.col分条费,
             this.col开平费,
+            this.col加工费,
             this.col吊装费,
             this.col其它费用,
             this.col单件成本,
@@ -368,6 +376,46 @@
             this.gridView.Size = new System.Drawing.Size(1370, 395);
             this.gridView.TabIndex = 26;
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
+            // 
+            // lbl毛利
+            // 
+            this.lbl毛利.AutoSize = true;
+            this.lbl毛利.ForeColor = System.Drawing.Color.Blue;
+            this.lbl毛利.Location = new System.Drawing.Point(1008, 84);
+            this.lbl毛利.Name = "lbl毛利";
+            this.lbl毛利.Size = new System.Drawing.Size(11, 12);
+            this.lbl毛利.TabIndex = 3;
+            this.lbl毛利.Text = "0";
+            // 
+            // lbl国税计提
+            // 
+            this.lbl国税计提.AutoSize = true;
+            this.lbl国税计提.ForeColor = System.Drawing.Color.Blue;
+            this.lbl国税计提.Location = new System.Drawing.Point(1008, 61);
+            this.lbl国税计提.Name = "lbl国税计提";
+            this.lbl国税计提.Size = new System.Drawing.Size(11, 12);
+            this.lbl国税计提.TabIndex = 2;
+            this.lbl国税计提.Text = "0";
+            // 
+            // lbl产品成本
+            // 
+            this.lbl产品成本.AutoSize = true;
+            this.lbl产品成本.ForeColor = System.Drawing.Color.Blue;
+            this.lbl产品成本.Location = new System.Drawing.Point(1008, 38);
+            this.lbl产品成本.Name = "lbl产品成本";
+            this.lbl产品成本.Size = new System.Drawing.Size(11, 12);
+            this.lbl产品成本.TabIndex = 1;
+            this.lbl产品成本.Text = "0";
+            // 
+            // lbl销售金额
+            // 
+            this.lbl销售金额.AutoSize = true;
+            this.lbl销售金额.ForeColor = System.Drawing.Color.Blue;
+            this.lbl销售金额.Location = new System.Drawing.Point(1008, 15);
+            this.lbl销售金额.Name = "lbl销售金额";
+            this.lbl销售金额.Size = new System.Drawing.Size(11, 12);
+            this.lbl销售金额.TabIndex = 0;
+            this.lbl销售金额.Text = "0";
             // 
             // colDeliveryDate
             // 
@@ -424,8 +472,8 @@
             // colLength
             // 
             this.colLength.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle16.Format = "N3";
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Format = "N3";
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle1;
             this.colLength.HeaderText = "长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
@@ -450,8 +498,8 @@
             // colWeight
             // 
             this.colWeight.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle17.Format = "N3";
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Format = "N3";
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle2;
             this.colWeight.HeaderText = "重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
@@ -460,8 +508,8 @@
             // colSourceRollWeight
             // 
             this.colSourceRollWeight.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle18.Format = "N3";
-            this.colSourceRollWeight.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Format = "N3";
+            this.colSourceRollWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colSourceRollWeight.HeaderText = "来源卷重";
             this.colSourceRollWeight.Name = "colSourceRollWeight";
             this.colSourceRollWeight.ReadOnly = true;
@@ -478,20 +526,20 @@
             // colPrice
             // 
             this.colPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle19.Format = "C2";
-            dataGridViewCellStyle19.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle19;
-            this.colPrice.HeaderText = "单价";
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colPrice.HeaderText = "销售单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
-            this.colPrice.Width = 54;
+            this.colPrice.Width = 78;
             // 
             // colCount
             // 
             this.colCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle20.Format = "N0";
-            dataGridViewCellStyle20.NullValue = null;
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCount.HeaderText = "数量";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
@@ -500,49 +548,81 @@
             // colAmount
             // 
             this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle21.Format = "C2";
-            dataGridViewCellStyle21.NullValue = null;
-            this.colAmount.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.colAmount.DefaultCellStyle = dataGridViewCellStyle6;
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
             this.colAmount.Width = 54;
             // 
-            // col入库吨价
+            // col入库单价
             // 
-            this.col入库吨价.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle22.Format = "C2";
-            this.col入库吨价.DefaultCellStyle = dataGridViewCellStyle22;
-            this.col入库吨价.HeaderText = "入库吨价";
-            this.col入库吨价.Name = "col入库吨价";
-            this.col入库吨价.ReadOnly = true;
-            this.col入库吨价.Width = 78;
+            this.col入库单价.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle7.Format = "C2";
+            this.col入库单价.DefaultCellStyle = dataGridViewCellStyle7;
+            this.col入库单价.HeaderText = "入库单价";
+            this.col入库单价.Name = "col入库单价";
+            this.col入库单价.ReadOnly = true;
+            this.col入库单价.Width = 78;
+            // 
+            // col结算单价
+            // 
+            this.col结算单价.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col结算单价.HeaderText = "结算单价";
+            this.col结算单价.Name = "col结算单价";
+            this.col结算单价.ReadOnly = true;
+            this.col结算单价.Width = 78;
             // 
             // col运费
             // 
             this.col运费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle23.Format = "C2";
-            this.col运费.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle8.Format = "C2";
+            this.col运费.DefaultCellStyle = dataGridViewCellStyle8;
             this.col运费.HeaderText = "运费";
             this.col运费.Name = "col运费";
             this.col运费.ReadOnly = true;
             this.col运费.Width = 54;
             // 
+            // col短途运费
+            // 
+            this.col短途运费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col短途运费.HeaderText = "短途运费";
+            this.col短途运费.Name = "col短途运费";
+            this.col短途运费.ReadOnly = true;
+            this.col短途运费.Width = 78;
+            // 
+            // col分条费
+            // 
+            this.col分条费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col分条费.HeaderText = "分条费";
+            this.col分条费.Name = "col分条费";
+            this.col分条费.ReadOnly = true;
+            this.col分条费.Width = 66;
+            // 
             // col开平费
             // 
             this.col开平费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle24.Format = "C2";
-            this.col开平费.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle9.Format = "C2";
+            this.col开平费.DefaultCellStyle = dataGridViewCellStyle9;
             this.col开平费.HeaderText = "开平费";
             this.col开平费.Name = "col开平费";
             this.col开平费.ReadOnly = true;
             this.col开平费.Width = 66;
             // 
+            // col加工费
+            // 
+            this.col加工费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col加工费.HeaderText = "加工费";
+            this.col加工费.Name = "col加工费";
+            this.col加工费.ReadOnly = true;
+            this.col加工费.Width = 66;
+            // 
             // col吊装费
             // 
             this.col吊装费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle25.Format = "C2";
-            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle10.Format = "C2";
+            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle10;
             this.col吊装费.HeaderText = "吊装费";
             this.col吊装费.Name = "col吊装费";
             this.col吊装费.ReadOnly = true;
@@ -551,8 +631,8 @@
             // col其它费用
             // 
             this.col其它费用.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle26.Format = "C2";
-            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle11.Format = "C2";
+            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle11;
             this.col其它费用.HeaderText = "其它费用";
             this.col其它费用.Name = "col其它费用";
             this.col其它费用.ReadOnly = true;
@@ -561,8 +641,8 @@
             // col单件成本
             // 
             this.col单件成本.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle27.Format = "C2";
-            this.col单件成本.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle12.Format = "C2";
+            this.col单件成本.DefaultCellStyle = dataGridViewCellStyle12;
             this.col单件成本.HeaderText = "单位成本";
             this.col单件成本.Name = "col单件成本";
             this.col单件成本.ReadOnly = true;
@@ -573,8 +653,8 @@
             // col成本合计
             // 
             this.col成本合计.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle28.Format = "C2";
-            this.col成本合计.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle13.Format = "C2";
+            this.col成本合计.DefaultCellStyle = dataGridViewCellStyle13;
             this.col成本合计.HeaderText = "成本合计";
             this.col成本合计.Name = "col成本合计";
             this.col成本合计.ReadOnly = true;
@@ -583,8 +663,8 @@
             // col国税计提
             // 
             this.col国税计提.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle29.Format = "C2";
-            this.col国税计提.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle14.Format = "C2";
+            this.col国税计提.DefaultCellStyle = dataGridViewCellStyle14;
             this.col国税计提.HeaderText = "国税计提";
             this.col国税计提.Name = "col国税计提";
             this.col国税计提.ReadOnly = true;
@@ -593,52 +673,12 @@
             // col利润合计
             // 
             this.col利润合计.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle30.Format = "C2";
-            this.col利润合计.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle15.Format = "C2";
+            this.col利润合计.DefaultCellStyle = dataGridViewCellStyle15;
             this.col利润合计.HeaderText = "利润合计";
             this.col利润合计.Name = "col利润合计";
             this.col利润合计.ReadOnly = true;
             this.col利润合计.Width = 78;
-            // 
-            // lbl毛利
-            // 
-            this.lbl毛利.AutoSize = true;
-            this.lbl毛利.ForeColor = System.Drawing.Color.Blue;
-            this.lbl毛利.Location = new System.Drawing.Point(1008, 84);
-            this.lbl毛利.Name = "lbl毛利";
-            this.lbl毛利.Size = new System.Drawing.Size(11, 12);
-            this.lbl毛利.TabIndex = 3;
-            this.lbl毛利.Text = "0";
-            // 
-            // lbl国税计提
-            // 
-            this.lbl国税计提.AutoSize = true;
-            this.lbl国税计提.ForeColor = System.Drawing.Color.Blue;
-            this.lbl国税计提.Location = new System.Drawing.Point(1008, 61);
-            this.lbl国税计提.Name = "lbl国税计提";
-            this.lbl国税计提.Size = new System.Drawing.Size(11, 12);
-            this.lbl国税计提.TabIndex = 2;
-            this.lbl国税计提.Text = "0";
-            // 
-            // lbl产品成本
-            // 
-            this.lbl产品成本.AutoSize = true;
-            this.lbl产品成本.ForeColor = System.Drawing.Color.Blue;
-            this.lbl产品成本.Location = new System.Drawing.Point(1008, 38);
-            this.lbl产品成本.Name = "lbl产品成本";
-            this.lbl产品成本.Size = new System.Drawing.Size(11, 12);
-            this.lbl产品成本.TabIndex = 1;
-            this.lbl产品成本.Text = "0";
-            // 
-            // lbl销售金额
-            // 
-            this.lbl销售金额.AutoSize = true;
-            this.lbl销售金额.ForeColor = System.Drawing.Color.Blue;
-            this.lbl销售金额.Location = new System.Drawing.Point(1008, 15);
-            this.lbl销售金额.Name = "lbl销售金额";
-            this.lbl销售金额.Size = new System.Drawing.Size(11, 12);
-            this.lbl销售金额.TabIndex = 0;
-            this.lbl销售金额.Text = "0";
             // 
             // Frm出货利润明细报表
             // 
@@ -691,6 +731,12 @@
         private GeneralLibrary.WinformControl.DecimalTextBox txtWeight;
         private System.Windows.Forms.Label label1;
         private GeneralLibrary.WinformControl.DecimalTextBox txtSourceRollWeight;
+        private System.Windows.Forms.Label label2;
+        private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
+        private System.Windows.Forms.Label lbl毛利;
+        private System.Windows.Forms.Label lbl国税计提;
+        private System.Windows.Forms.Label lbl产品成本;
+        private System.Windows.Forms.Label lbl销售金额;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetNo;
@@ -706,20 +752,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col入库吨价;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col入库单价;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col结算单价;
         private System.Windows.Forms.DataGridViewTextBoxColumn col运费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col短途运费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col分条费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col开平费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col加工费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col吊装费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col其它费用;
         private System.Windows.Forms.DataGridViewLinkColumn col单件成本;
         private System.Windows.Forms.DataGridViewTextBoxColumn col成本合计;
         private System.Windows.Forms.DataGridViewTextBoxColumn col国税计提;
         private System.Windows.Forms.DataGridViewTextBoxColumn col利润合计;
-        private System.Windows.Forms.Label label2;
-        private GeneralLibrary.WinformControl.DBCTextBox txtSheetNo;
-        private System.Windows.Forms.Label lbl毛利;
-        private System.Windows.Forms.Label lbl国税计提;
-        private System.Windows.Forms.Label lbl产品成本;
-        private System.Windows.Forms.Label lbl销售金额;
     }
 }

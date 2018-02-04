@@ -435,7 +435,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                    var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
                     var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                     if (ret.Result == ResultCode.Successful)
                     {
@@ -452,7 +452,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void mnu_设置其它成本_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
-            FrmChangeCosts frm = new FrmChangeCosts();
+            Frm设置其它成本 frm = new Frm设置其它成本();
             frm.chk总金额.Enabled = dataGridView1.SelectedRows.Count == 1;
             if (frm.ShowDialog() == DialogResult.OK)
             {

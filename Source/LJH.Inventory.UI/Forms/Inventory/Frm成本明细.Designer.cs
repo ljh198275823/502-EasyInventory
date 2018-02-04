@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GridView = new System.Windows.Forms.DataGridView();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn设置其它成本 = new System.Windows.Forms.Button();
-            this.btn设置入库单价 = new System.Windows.Forms.Button();
+            this.btn设置结算单价 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,8 +73,8 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle1;
             this.colPrice.HeaderText = "单价";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
@@ -105,15 +105,15 @@
             this.btn设置其它成本.UseVisualStyleBackColor = true;
             this.btn设置其它成本.Click += new System.EventHandler(this.btn设置其它成本_Click);
             // 
-            // btn设置入库单价
+            // btn设置结算单价
             // 
-            this.btn设置入库单价.Location = new System.Drawing.Point(191, 14);
-            this.btn设置入库单价.Name = "btn设置入库单价";
-            this.btn设置入库单价.Size = new System.Drawing.Size(92, 37);
-            this.btn设置入库单价.TabIndex = 158;
-            this.btn设置入库单价.Text = "设置入库单价";
-            this.btn设置入库单价.UseVisualStyleBackColor = true;
-            this.btn设置入库单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
+            this.btn设置结算单价.Location = new System.Drawing.Point(191, 14);
+            this.btn设置结算单价.Name = "btn设置结算单价";
+            this.btn设置结算单价.Size = new System.Drawing.Size(92, 37);
+            this.btn设置结算单价.TabIndex = 158;
+            this.btn设置结算单价.Text = "设置结算单价";
+            this.btn设置结算单价.UseVisualStyleBackColor = true;
+            this.btn设置结算单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
             // 
             // Frm成本明细
             // 
@@ -121,12 +121,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 327);
             this.Controls.Add(this.btn设置其它成本);
-            this.Controls.Add(this.btn设置入库单价);
+            this.Controls.Add(this.btn设置结算单价);
             this.Controls.Add(this.GridView);
             this.Name = "Frm成本明细";
             this.Text = "成本明细";
             this.Controls.SetChildIndex(this.GridView, 0);
-            this.Controls.SetChildIndex(this.btn设置入库单价, 0);
+            this.Controls.SetChildIndex(this.btn设置结算单价, 0);
             this.Controls.SetChildIndex(this.btn设置其它成本, 0);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.ResumeLayout(false);
@@ -142,6 +142,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.Button btn设置其它成本;
-        private System.Windows.Forms.Button btn设置入库单价;
+        private System.Windows.Forms.Button btn设置结算单价;
     }
 }

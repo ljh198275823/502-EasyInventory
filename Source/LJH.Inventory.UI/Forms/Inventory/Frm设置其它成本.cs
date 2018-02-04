@@ -16,9 +16,9 @@ using LJH.Inventory.UI.Forms.General;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmChangeCosts : Form
+    public partial class Frm设置其它成本 : Form
     {
-        public FrmChangeCosts()
+        public Frm设置其它成本()
         {
             InitializeComponent();
         }
@@ -43,10 +43,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txt成本类别.Items.Clear();
             txt成本类别.Items.Add(string.Empty);
             txt成本类别.Items.Add(CostItem.运费);
+            txt成本类别.Items.Add(CostItem.短途运费);
+            txt成本类别.Items.Add(CostItem.开平费);
+            txt成本类别.Items.Add(CostItem.分条费);
             txt成本类别.Items.Add(CostItem.加工费);
             txt成本类别.Items.Add(CostItem.吊装费);
             txt成本类别.Items.Add(CostItem.其它费用);
-            txt成本类别.Items.Add(CostItem.入库单价);
         }
 
         private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

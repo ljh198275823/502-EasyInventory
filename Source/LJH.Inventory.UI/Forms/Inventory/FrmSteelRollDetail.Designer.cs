@@ -67,6 +67,8 @@
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.btnOk1 = new System.Windows.Forms.Button();
             this.pnlCost = new System.Windows.Forms.GroupBox();
+            this.btn设置其它成本 = new System.Windows.Forms.Button();
+            this.btn设置结算单价 = new System.Windows.Forms.Button();
             this.txtSupplier运费 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkSupplier_运费 = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -78,8 +80,6 @@
             this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
-            this.btn设置入库单价 = new System.Windows.Forms.Button();
-            this.btn设置其它成本 = new System.Windows.Forms.Button();
             this.pnlTax.SuspendLayout();
             this.pnlCost.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -504,7 +504,7 @@
             // pnlCost
             // 
             this.pnlCost.Controls.Add(this.btn设置其它成本);
-            this.pnlCost.Controls.Add(this.btn设置入库单价);
+            this.pnlCost.Controls.Add(this.btn设置结算单价);
             this.pnlCost.Controls.Add(this.txtSupplier运费);
             this.pnlCost.Controls.Add(this.lnkSupplier_运费);
             this.pnlCost.Controls.Add(this.panel1);
@@ -518,6 +518,26 @@
             this.pnlCost.Size = new System.Drawing.Size(488, 127);
             this.pnlCost.TabIndex = 146;
             this.pnlCost.TabStop = false;
+            // 
+            // btn设置其它成本
+            // 
+            this.btn设置其它成本.Location = new System.Drawing.Point(397, 57);
+            this.btn设置其它成本.Name = "btn设置其它成本";
+            this.btn设置其它成本.Size = new System.Drawing.Size(85, 23);
+            this.btn设置其它成本.TabIndex = 157;
+            this.btn设置其它成本.Text = "设置其它成本";
+            this.btn设置其它成本.UseVisualStyleBackColor = true;
+            this.btn设置其它成本.Click += new System.EventHandler(this.btn设置其它成本_Click);
+            // 
+            // btn设置结算单价
+            // 
+            this.btn设置结算单价.Location = new System.Drawing.Point(397, 18);
+            this.btn设置结算单价.Name = "btn设置结算单价";
+            this.btn设置结算单价.Size = new System.Drawing.Size(85, 23);
+            this.btn设置结算单价.TabIndex = 156;
+            this.btn设置结算单价.Text = "设置结算单价";
+            this.btn设置结算单价.UseVisualStyleBackColor = true;
+            this.btn设置结算单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
             // 
             // txtSupplier运费
             // 
@@ -635,26 +655,6 @@
             this.cmbSpecification.Size = new System.Drawing.Size(164, 26);
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 85;
-            // 
-            // btn设置入库单价
-            // 
-            this.btn设置入库单价.Location = new System.Drawing.Point(397, 18);
-            this.btn设置入库单价.Name = "btn设置入库单价";
-            this.btn设置入库单价.Size = new System.Drawing.Size(85, 23);
-            this.btn设置入库单价.TabIndex = 156;
-            this.btn设置入库单价.Text = "设置入库单价";
-            this.btn设置入库单价.UseVisualStyleBackColor = true;
-            this.btn设置入库单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
-            // 
-            // btn设置其它成本
-            // 
-            this.btn设置其它成本.Location = new System.Drawing.Point(397, 57);
-            this.btn设置其它成本.Name = "btn设置其它成本";
-            this.btn设置其它成本.Size = new System.Drawing.Size(85, 23);
-            this.btn设置其它成本.TabIndex = 157;
-            this.btn设置其它成本.Text = "设置其它成本";
-            this.btn设置其它成本.UseVisualStyleBackColor = true;
-            this.btn设置其它成本.Click += new System.EventHandler(this.btn设置其它成本_Click);
             // 
             // FrmSteelRollDetail
             // 
@@ -803,6 +803,6 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtSupplier运费;
         private System.Windows.Forms.LinkLabel lnkSupplier_运费;
         private System.Windows.Forms.Button btn设置其它成本;
-        private System.Windows.Forms.Button btn设置入库单价;
+        private System.Windows.Forms.Button btn设置结算单价;
     }
 }

@@ -69,7 +69,7 @@
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.pnlCost = new System.Windows.Forms.GroupBox();
             this.btn设置其它成本 = new System.Windows.Forms.Button();
-            this.btn设置入库单价 = new System.Windows.Forms.Button();
+            this.btn设置结算单价 = new System.Windows.Forms.Button();
             this.txtSupplier运费 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkSupplier_运费 = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -476,7 +476,7 @@
             // pnlCost
             // 
             this.pnlCost.Controls.Add(this.btn设置其它成本);
-            this.pnlCost.Controls.Add(this.btn设置入库单价);
+            this.pnlCost.Controls.Add(this.btn设置结算单价);
             this.pnlCost.Controls.Add(this.txtSupplier运费);
             this.pnlCost.Controls.Add(this.lnkSupplier_运费);
             this.pnlCost.Controls.Add(this.panel2);
@@ -502,16 +502,16 @@
             this.btn设置其它成本.UseVisualStyleBackColor = true;
             this.btn设置其它成本.Click += new System.EventHandler(this.btn设置其它成本_Click);
             // 
-            // btn设置入库单价
+            // btn设置结算单价
             // 
-            this.btn设置入库单价.Enabled = false;
-            this.btn设置入库单价.Location = new System.Drawing.Point(397, 18);
-            this.btn设置入库单价.Name = "btn设置入库单价";
-            this.btn设置入库单价.Size = new System.Drawing.Size(85, 23);
-            this.btn设置入库单价.TabIndex = 158;
-            this.btn设置入库单价.Text = "设置入库单价";
-            this.btn设置入库单价.UseVisualStyleBackColor = true;
-            this.btn设置入库单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
+            this.btn设置结算单价.Enabled = false;
+            this.btn设置结算单价.Location = new System.Drawing.Point(397, 18);
+            this.btn设置结算单价.Name = "btn设置结算单价";
+            this.btn设置结算单价.Size = new System.Drawing.Size(85, 23);
+            this.btn设置结算单价.TabIndex = 158;
+            this.btn设置结算单价.Text = "设置结算单价";
+            this.btn设置结算单价.UseVisualStyleBackColor = true;
+            this.btn设置结算单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
             // 
             // txtSupplier运费
             // 
@@ -768,7 +768,7 @@
         private System.Windows.Forms.Label label11;
         private GeneralLibrary.WinformControl.DecimalTextBox txtPurchasePrice;
         private System.Windows.Forms.Button btn设置其它成本;
-        private System.Windows.Forms.Button btn设置入库单价;
+        private System.Windows.Forms.Button btn设置结算单价;
 
     }
 }

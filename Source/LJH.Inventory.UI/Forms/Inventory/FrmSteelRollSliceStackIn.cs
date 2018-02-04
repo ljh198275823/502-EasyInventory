@@ -81,8 +81,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Text = WareHouse.Name;
                 txtWareHouse.Tag = WareHouse;
             }
-            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
+            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本 , PermissionActions.Read);
             if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            txtPurchasePrice.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
+            txt运费.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
             btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
         }
 
@@ -225,7 +227,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
 
-            var ci = item.GetCost(CostItem.结算单价);
+            var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
             rdWithoutTax__入库单价.Checked = !rdWithTax_入库单价.Checked;
@@ -257,8 +259,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 btnOk.Enabled = false;
             }
-            btn设置入库单价.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
-            btn设置其它成本.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
+            btn设置结算单价.Enabled = Operator.Current.Permit(Permission.结算单价 , PermissionActions.Edit );
+            btn设置其它成本.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
         }
         #endregion
 
@@ -369,7 +371,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Customer = txtCustomer.Text;
             if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             item.Manufacture = cmbBrand.Text;
-            item.SetCost(new CostItem() { Name = CostItem.结算单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
             item.Position = txtPosition.Text;
             item.Material = txtMaterial.Text;
             item.PurchaseID = txtPurchaseID.Text;
@@ -427,7 +429,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 var pi = SteelRollSlice;
-                var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
                 var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                 if (ret.Result == ResultCode.Successful)
                 {
@@ -442,7 +444,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btn设置其它成本_Click(object sender, EventArgs e)
         {
-            FrmChangeCosts frm = new FrmChangeCosts();
+            Frm设置其它成本 frm = new Frm设置其它成本();
             frm.chk总金额.Enabled = true;
             if (frm.ShowDialog() == DialogResult.OK)
             {

@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Inventory
 {
-    partial class FrmChangeCosts
+    partial class Frm设置其它成本
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmChangeCosts));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm设置其它成本));
             this.rdWithTax = new System.Windows.Forms.RadioButton();
             this.rdWithoutTax = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();

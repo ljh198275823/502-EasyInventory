@@ -71,8 +71,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Tag = WareHouse;
             }
             btnOk.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Edit);
-            pnlCost.Visible = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本);
+            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本, PermissionActions.Read );
             if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            txtPurchasePrice.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
+            txt运费.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
         }
 
         private void ShowProduct(Product product)
@@ -172,7 +174,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
 
-            var ci = item.GetCost(CostItem.结算单价);
+            var ci = item.GetCost(CostItem.入库单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
             rdWithoutTax__入库单价.Checked = !rdWithTax_入库单价.Checked;
@@ -306,7 +308,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             SteelRollSlice.Customer = txtCustomer.Text;
             if (txtSupplier.Tag != null) SteelRollSlice.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             SteelRollSlice.Manufacture = cmbBrand.Text;
-            SteelRollSlice.SetCost(new CostItem() { Name = CostItem.结算单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
+            SteelRollSlice.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
             SteelRollSlice.Position = txtPosition.Text;
             SteelRollSlice.PurchaseID = txtPurchaseID.Text;
             SteelRollSlice.Carplate = txtCarPlate.Text;
