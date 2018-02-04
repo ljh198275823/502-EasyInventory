@@ -12,9 +12,13 @@ namespace LJH.Inventory.BusinessModel
     {
         #region 静态属性
         public static readonly string 入库单价 = "入库单价";
+        public static readonly string 结算单价 = "结算单价";
         public static readonly string 运费 = "运费";
-        public static readonly string 吊装费 = "吊装费";
+        public static readonly string 短途运费 = "短途运费";
+        public static readonly string 开平费 = "开平费";
+        public static readonly string 分条费 = "分条费";
         public static readonly string 加工费 = "加工费";
+        public static readonly string 吊装费 = "吊装费";
         public static readonly string 其它费用 = "其它费用";
         #endregion
 

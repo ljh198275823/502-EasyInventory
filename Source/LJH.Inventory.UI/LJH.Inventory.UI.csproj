@@ -340,11 +340,11 @@
     <Compile Include="Forms\Inventory\Frm拆卷.Designer.cs">
       <DependentUpon>Frm拆卷.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory\Frm设置单价.cs">
+    <Compile Include="Forms\Inventory\Frm设置结算单价.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory\Frm设置单价.Designer.cs">
-      <DependentUpon>Frm设置单价.cs</DependentUpon>
+    <Compile Include="Forms\Inventory\Frm设置结算单价.Designer.cs">
+      <DependentUpon>Frm设置结算单价.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Inventory\Report\Frm原材料盘点记录报表.cs">
       <SubType>Form</SubType>
@@ -909,8 +909,8 @@
     <EmbeddedResource Include="Forms\Inventory\Frm拆卷.resx">
       <DependentUpon>Frm拆卷.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory\Frm设置单价.resx">
-      <DependentUpon>Frm设置单价.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inventory\Frm设置结算单价.resx">
+      <DependentUpon>Frm设置结算单价.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Inventory\Report\Frm原材料盘点记录报表.resx">
       <DependentUpon>Frm原材料盘点记录报表.cs</DependentUpon>

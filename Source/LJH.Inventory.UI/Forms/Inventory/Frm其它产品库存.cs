@@ -115,10 +115,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Nullify);
             更换仓库ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Edit);
             mnu_Import.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Inventory);
-            mnu_设置入库单价.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本);
-            mnu_设置其它成本.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本);
-            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本) | Operator.Current.Permit(Permission.其它产品, PermissionActions.显示成本);
-            mnu_查看成本明细.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本) | Operator.Current.Permit(Permission.其它产品, PermissionActions.显示成本);
+            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Edit);
+            mnu_设置其它成本.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
+            mnu_查看成本明细.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Read) | Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
+            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Read) | Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
             cMnu_Export.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.导出);
         }
 
@@ -202,27 +202,35 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colState"].Value = ProductInventoryStateDescription.GetDescription(sr.State);
-            if (Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本) || Operator.Current.Permit(Permission.其它产品, PermissionActions.显示成本))
+            if (Operator.Current.Permit(Permission.结算单价, PermissionActions.Read))
             {
-                CostItem ci = sr.GetCost(CostItem.入库单价);
+                CostItem ci = sr.GetCost(CostItem.结算单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
-                ci = sr.GetCost(CostItem.运费);
+            }
+            if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read))
+            {
+                CostItem ci = sr.GetCost(CostItem.运费);
                 if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.加工费);
                 if (ci != null && ci.Price > 0)
                 {
-                    row.Cells["col加工费"].Value = ci.Price;
+                    row.Cells["col开平费"].Value = ci.Price;
                 }
                 else
                 {
                     ci = sr.GetCost("开平费");
-                    if (ci != null && ci.Price > 0) row.Cells["col加工费"].Value = ci.Price;
+                    if (ci != null && ci.Price > 0) row.Cells["col开平费"].Value = ci.Price;
                 }
                 ci = sr.GetCost(CostItem.吊装费);
                 if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.其它费用);
                 if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.入库单价);
+                if (ci != null && ci.Price > 0) row.Cells["col合同单价"].Value = ci.Price;
+            }
+            if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read) || Operator.Current.Permit(Permission.结算单价, PermissionActions.Read))
+            {
                 if (sr.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = sr.CalUnitCost(true, UserSettings.Current.税点系数);
                 if (sr.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = sr.CalUnitCost(false, UserSettings.Current.税点系数);
             }
@@ -421,13 +429,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void mnu_设置入库单价_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
-            Frm设置单价 frm = new Frm设置单价();
+            Frm设置结算单价 frm = new Frm设置结算单价();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
                     var pi = row.Tag as ProductInventoryItem;
-                    var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                    var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
                     var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                     if (ret.Result == ResultCode.Successful)
                     {
@@ -451,14 +459,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 var ci = frm.Cost;
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                 {
-                    decimal? 总额 = null;
                     var pi = row.Tag as ProductInventoryItem;
-                    if (frm.chk总金额.Checked && pi.CostID.HasValue)
-                    {
-                        总额 = ci.Price;
-                        var f = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(pi.CostID.Value).QueryObject;
-                        if (pi.OriginalWeight > 0) ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
-                    }
+                    decimal? 总额 = null;
+                    if (frm.chk总金额.Checked) 总额 = ci.Price;
                     var ret = new OtherProductInventoryBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo, 总额, frm.CarPlate);
                     if (ret.Result == ResultCode.Successful)
                     {

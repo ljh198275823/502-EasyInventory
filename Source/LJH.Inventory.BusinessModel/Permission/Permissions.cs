@@ -85,6 +85,16 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Slice | PermissionActions.Nullify | PermissionActions.设置成本, Description = "其它产品")]
         其它产品,
+        /// <summary>
+        /// 其它产品
+        /// </summary>
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "结算价格")]
+        结算单价,
+        /// <summary>
+        /// 其它产品
+        /// </summary>
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit, Description = "其它成本")]
+        其它成本,
         #endregion
 
         #region 财务

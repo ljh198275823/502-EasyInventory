@@ -49,7 +49,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.SheetID;
-            row.Cells["colSheetDate"].Value = cp.CreateDate;
+            row.Cells["colSheetDate"].Value = cp.CreateDate.ToString ("yyyy年MM月dd日");
             row.Cells["colAmount"].Value = cp.Amount;
             if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
             else row.Cells["colRemain"].Value = null;

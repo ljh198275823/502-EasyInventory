@@ -7,6 +7,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
@@ -133,6 +134,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["col发票已核销对公已付金额"].Value = cs.发票已核销对公已付金额;
             row.Cells["col距上次发货"].Value = cs.距最后一次出货天数;
             row.Cells["colPhone"].Value = cs.Customer.TelPhone;
+            row.Cells["colMemo"].Value = cs.Customer.GetProperty("财务备注");
             if (cs.Customer.DefaultLinker != null)
             {
                 Contact linker = null;
@@ -368,5 +370,22 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "colMemo")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as CustomerFinancialState;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string memo = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new CompanyBLL(AppSettings.Current.ConnStr).设置财务备注(pi.Customer , memo);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.Customer.GetProperty("财务备注");
+                }
+            }
+        }
     }
 }

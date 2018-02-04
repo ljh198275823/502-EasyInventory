@@ -157,7 +157,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Tag = info;
             row.Cells["colID"].Value = info.ID;
             row.Cells["colSheetDate"].Value = info.SheetDate.ToString("yyyy-MM-dd");
-            row.Cells["colAmount"].Value = info.Amount;
+            if (info.ClassID == CustomerPaymentType.管理费用) row.Cells["colAmount"].Value = info.Amount;
+            else if (info.ClassID == CustomerPaymentType.管理费用退款) row.Cells["col退款"].Value = info.Amount;
             row.Cells["colCategory"].Value = info.GetProperty("费用类别");
             Account ac = null;
             if (!string.IsNullOrEmpty(info.AccountID) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == info.AccountID);
@@ -188,16 +189,19 @@ namespace LJH.Inventory.UI.Forms.Financial
             base.ShowItemsOnGrid(items);
             Filter(txtKeyword.Text.Trim());
             decimal _Amount = 0;
+            decimal _退款 = 0;
             foreach (DataGridViewRow row in GridView.Rows)
             {
                 if (row.Visible)
                 {
                     CustomerPayment r = row.Tag as CustomerPayment;
                     if (r.ClassID == CustomerPaymentType.管理费用) _Amount += r.State != SheetState.作废 ? r.Amount : 0;
-                    else if (r.ClassID == CustomerPaymentType.管理费用退款) _Amount -= r.State != SheetState.作废 ? r.Amount : 0;
+                    else if (r.ClassID == CustomerPaymentType.管理费用退款) _退款 += r.State != SheetState.作废 ? r.Amount : 0;
                 }
             }
-            lbl合计.Text = string.Format("合计：{0:C2} 元", _Amount);
+            lbl合计.Text = string.Format("支出合计：{0:C2} 元", _Amount);
+            lbl退款.Text = string.Format("退款合计：{0:C2} 元", _退款);
+            lbl结余.Text = string.Format("结余合计：{0:C2} 元",_Amount - _退款);
         }
         #endregion
 

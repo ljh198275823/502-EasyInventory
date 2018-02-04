@@ -125,12 +125,6 @@
             // 
             this.txt成本类别.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txt成本类别.FormattingEnabled = true;
-            this.txt成本类别.Items.AddRange(new object[] {
-            "",
-            "运费",
-            "加工费",
-            "吊装费",
-            "其它费用"});
             this.txt成本类别.Location = new System.Drawing.Point(83, 22);
             this.txt成本类别.Name = "txt成本类别";
             this.txt成本类别.Size = new System.Drawing.Size(121, 20);

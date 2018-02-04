@@ -424,6 +424,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 var ac = frm.SelectedItem as Account;
                 txtAccount.Text = ac.Name;
                 txtAccount.Tag = ac;
+                dtPaidDate.Enabled = true;
             }
         }
 
@@ -431,6 +432,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             txtAccount.Text = string.Empty;
             txtAccount.Tag = null;
+            dtPaidDate.Enabled = false;
         }
         #endregion
     }

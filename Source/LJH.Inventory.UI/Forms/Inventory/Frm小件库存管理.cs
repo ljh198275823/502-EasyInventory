@@ -143,10 +143,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             折包ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
             mnu_更换仓库.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Nullify);
-            mnu_设置入库单价.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
-            mnu_设置其它成本.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
-            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.显示成本) | Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
-            mnu_查看成本明细.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.显示成本) | Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
+            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Edit);
+            mnu_设置其它成本.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
+            mnu_查看成本明细.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Read) | Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
+            mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Read) | Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
             cMnu_Export.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.导出);
             mnu_Import.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Inventory);
         }
@@ -205,27 +205,35 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             row.Cells["colManufacture"].Value = sr.Manufacture;
             row.Cells["colSourceRoll"].Value = sr.SourceRollWeight;
-            if (Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本) || Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.显示成本))
+            if (Operator.Current.Permit(Permission.结算单价, PermissionActions.Read))
             {
-                CostItem ci = sr.GetCost(CostItem.入库单价);
+                CostItem ci = sr.GetCost(CostItem.结算单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
-                ci = sr.GetCost(CostItem.运费);
+            }
+            if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read))
+            {
+                CostItem ci = sr.GetCost(CostItem.运费);
                 if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.加工费);
                 if (ci != null && ci.Price > 0)
                 {
-                    row.Cells["col加工费"].Value = ci.Price;
+                    row.Cells["col开平费"].Value = ci.Price;
                 }
                 else
                 {
                     ci = sr.GetCost("开平费");
-                    if (ci != null && ci.Price > 0) row.Cells["col加工费"].Value = ci.Price;
+                    if (ci != null && ci.Price > 0) row.Cells["col开平费"].Value = ci.Price;
                 }
                 ci = sr.GetCost(CostItem.吊装费);
                 if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.其它费用);
                 if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.入库单价);
+                if (ci != null && ci.Price > 0) row.Cells["col合同单价"].Value = ci.Price;
+            }
+            if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read) || Operator.Current.Permit(Permission.结算单价, PermissionActions.Read))
+            {
                 if (sr.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = sr.CalUnitCost(true, UserSettings.Current.税点系数);
                 if (sr.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = sr.CalUnitCost(false, UserSettings.Current.税点系数);
             }
@@ -408,7 +416,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void mnu_设置入库单价_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
-            Frm设置单价 frm = new Frm设置单价();
+            Frm设置结算单价 frm = new Frm设置结算单价();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 foreach (DataGridViewRow row in dataGridView1.SelectedRows)
@@ -416,7 +424,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     var pi = row.Tag as ProductInventoryItem;
                     if (pi.SourceRoll == null) //只有新建入库的才能改单价，
                     {
-                        var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                        var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
                         var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                         if (ret.Result == ResultCode.Successful)
                         {
@@ -445,11 +453,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     var pi = row.Tag as ProductInventoryItem;
                     if (pi.SourceRoll == null) //只有新建入库的才能改单价，
                     {
-                        if (frm.chk总金额.Checked && pi.OriginalWeight > 0)
-                        {
-                            总额 = ci.Price;
-                            ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
-                        }
+                        if (frm.chk总金额.Checked) 总额 = ci.Price;
                         var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo, 总额, frm.CarPlate);
                         if (ret.Result == ResultCode.Successful)
                         {

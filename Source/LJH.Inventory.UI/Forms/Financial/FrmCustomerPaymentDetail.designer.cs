@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -228,6 +228,7 @@
             // 
             // dtPaidDate
             // 
+            this.dtPaidDate.Enabled = false;
             this.dtPaidDate.Location = new System.Drawing.Point(319, 137);
             this.dtPaidDate.Name = "dtPaidDate";
             this.dtPaidDate.Size = new System.Drawing.Size(188, 21);
@@ -391,8 +392,8 @@
             // 
             // colAssign
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAssign.HeaderText = "抵消金额";
             this.colAssign.Name = "colAssign";
             // 

@@ -12,6 +12,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Forms.Financial;
 using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
@@ -88,6 +89,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colReceivable"].Value = cs.Recievables;
             row.Cells["colTax"].Value = cs.Tax;
             row.Cells["colTaxBill"].Value = cs.TaxBill;
+            row.Cells["colMemo"].Value = cs.Customer.GetProperty("财务备注");
         }
         #endregion
 
@@ -216,6 +218,23 @@ namespace LJH.Inventory.UI.Forms.Financial
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.Customer = cs.Customer;
                 frm.ShowDialog();
+            }
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "colMemo")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as CustomerFinancialState;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string memo = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new CompanyBLL(AppSettings.Current.ConnStr).设置财务备注(pi.Customer, memo);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.Customer.GetProperty("财务备注");
+                }
             }
         }
     }

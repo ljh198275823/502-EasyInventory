@@ -79,7 +79,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 var sr = _Piis[sor.ID];
                 row.Cells["col厂家"].Value = sr.Manufacture;
                 row.Cells["col合同号"].Value = sr.PurchaseID;
-                CostItem ci = sr.GetCost(CostItem.入库单价);
+                CostItem ci = sr.GetCost(CostItem.结算单价);
                 if (ci != null) row.Cells["col入库吨价"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.运费);
                 if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;

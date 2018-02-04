@@ -69,11 +69,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btn设置入库单价_Click(object sender, EventArgs e)
         {
-            Frm设置单价 frm = new Frm设置单价();
+            Frm设置结算单价 frm = new Frm设置结算单价();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 var pi = ProductInventoryItem;
-                var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
                 var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                 if (ret.Result == ResultCode.Successful)
                 {

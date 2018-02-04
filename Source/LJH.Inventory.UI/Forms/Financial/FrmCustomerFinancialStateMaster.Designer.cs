@@ -81,6 +81,7 @@
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col距上次发货 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -137,7 +138,7 @@
             this.cMnu_SelectColumns,
             this.cMnu_Export});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 286);
             // 
             // cMnu_Fresh
             // 
@@ -327,7 +328,8 @@
             this.colPhone,
             this.colLinker,
             this.colLinkerPhone,
-            this.col距上次发货});
+            this.col距上次发货,
+            this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 71);
@@ -341,6 +343,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(1146, 296);
             this.dataGridView1.TabIndex = 114;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // colImage
             // 
@@ -356,6 +359,7 @@
             this.colID.HeaderText = "编号";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
+            this.colID.Visible = false;
             // 
             // colName
             // 
@@ -371,6 +375,7 @@
             this.colCategory.MinimumWidth = 120;
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
+            this.colCategory.Visible = false;
             this.colCategory.Width = 120;
             // 
             // colCreditLine
@@ -381,6 +386,7 @@
             this.colCreditLine.HeaderText = "信用额度";
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
+            this.colCreditLine.Visible = false;
             // 
             // colFileID
             // 
@@ -458,18 +464,21 @@
             this.colPhone.HeaderText = "电话";
             this.colPhone.Name = "colPhone";
             this.colPhone.ReadOnly = true;
+            this.colPhone.Visible = false;
             // 
             // colLinker
             // 
             this.colLinker.HeaderText = "联系人";
             this.colLinker.Name = "colLinker";
             this.colLinker.ReadOnly = true;
+            this.colLinker.Visible = false;
             // 
             // colLinkerPhone
             // 
             this.colLinkerPhone.HeaderText = "联系人电话";
             this.colLinkerPhone.Name = "colLinkerPhone";
             this.colLinkerPhone.ReadOnly = true;
+            this.colLinkerPhone.Visible = false;
             // 
             // col距上次发货
             // 
@@ -477,6 +486,11 @@
             this.col距上次发货.Name = "col距上次发货";
             this.col距上次发货.ReadOnly = true;
             this.col距上次发货.Visible = false;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
             // 
             // FrmCustomerFinancialStateMaster
             // 
@@ -549,5 +563,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn col距上次发货;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

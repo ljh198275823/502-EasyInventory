@@ -225,7 +225,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtSupplier.Tag = s;
             cmbBrand.Text = item.Manufacture;
 
-            var ci = item.GetCost(CostItem.入库单价);
+            var ci = item.GetCost(CostItem.结算单价);
             txtPurchasePrice.DecimalValue = ci != null ? ci.Price : 0;
             rdWithTax_入库单价.Checked = ci != null && ci.WithTax;
             rdWithoutTax__入库单价.Checked = !rdWithTax_入库单价.Checked;
@@ -369,7 +369,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Customer = txtCustomer.Text;
             if (txtSupplier.Tag != null) item.Supplier = (txtSupplier.Tag as CompanyInfo).ID;
             item.Manufacture = cmbBrand.Text;
-            item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
+            item.SetCost(new CostItem() { Name = CostItem.结算单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
             item.Position = txtPosition.Text;
             item.Material = txtMaterial.Text;
             item.PurchaseID = txtPurchaseID.Text;
@@ -423,11 +423,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btn设置入库单价_Click(object sender, EventArgs e)
         {
-            Frm设置单价 frm = new Frm设置单价();
+            Frm设置结算单价 frm = new Frm设置结算单价();
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 var pi = SteelRollSlice;
-                var ci = new CostItem() { Name = CostItem.入库单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
+                var ci = new CostItem() { Name = CostItem.结算单价, Price = frm.入库单价, WithTax = frm.WithTax, SupllierID = string.IsNullOrEmpty(frm.SupplierID) ? pi.Supplier : frm.SupplierID };
                 var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo);
                 if (ret.Result == ResultCode.Successful)
                 {
@@ -449,13 +449,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 var ci = frm.Cost;
                 decimal? 总额 = null;
                 var pi = SteelRollSlice;
-
-                if (frm.chk总金额.Checked && pi.CostID.HasValue)
-                {
-                    总额 = ci.Price;
-                    var f = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(pi.CostID.Value).QueryObject;
-                    if (pi.OriginalWeight > 0) ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
-                }
+                if (frm.chk总金额.Checked ) 总额 = ci.Price;
                 var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo, 总额, frm.CarPlate);
                 if (ret.Result == ResultCode.Successful)
                 {

@@ -303,13 +303,11 @@ namespace LJH.Inventory.BusinessModel
             }
             foreach (var fc in _CostItems)
             {
-                if (fc.Name != "结算单价")
-                {
-                    if (withTax && fc.WithTax) ret += uw.Value * fc.Price;
-                    else if (withTax && !fc.WithTax) ret += uw.Value * fc.Price * (1 + txtRate);
-                    else if (!withTax && fc.WithTax) ret += uw.Value * fc.Price * (1 - txtRate);
-                    else if (!withTax && !fc.WithTax) ret += uw.Value * fc.Price;
-                }
+                if (fc.Name == CostItem.入库单价 && GetCost(CostItem.结算单价) != null) continue; //如果有结算单价，不再计算入库单价
+                if (withTax && fc.WithTax) ret += uw.Value * fc.Price;
+                else if (withTax && !fc.WithTax) ret += uw.Value * fc.Price * (1 + txtRate);
+                else if (!withTax && fc.WithTax) ret += uw.Value * fc.Price * (1 - txtRate);
+                else if (!withTax && !fc.WithTax) ret += uw.Value * fc.Price;
             }
             return Math.Round(ret, 2);
         }

@@ -168,7 +168,7 @@ namespace LJH.Inventory.BLL
             List<CompanyInfo> customers = GetAllCustomers().QueryObjects;
             if (customers != null && customers.Count > 0)
             {
-                customers.Add(new CompanyInfo() { ID = CompanyInfo.财务上不存在的客户, Name = "未确定客户付款", ClassID = CompanyClass.Customer, });
+                customers.Add(new CompanyInfo() { ID = CompanyInfo.财务上不存在的客户, Name = "_未确定客户付款", ClassID = CompanyClass.Customer, });
                 var items = new List<CustomerFinancialState>();
                 foreach (var c in customers)
                 {
@@ -360,6 +360,15 @@ namespace LJH.Inventory.BLL
 
             ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Delete(sc, unitWork);
             return unitWork.Commit();
+        }
+
+        public CommandResult 设置财务备注(CompanyInfo pi, string memo)
+        {
+            var clone = pi.Clone();
+            clone.SetProperty("财务备注", memo);
+            var ret = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful) pi.SetProperty("财务备注", memo);
+            return ret;
         }
         #endregion
     }

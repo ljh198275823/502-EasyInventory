@@ -40,6 +40,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void FrmChangeCosts_Load(object sender, EventArgs e)
         {
             txtCarPlate.Init();
+            txt成本类别.Items.Clear();
+            txt成本类别.Items.Add(string.Empty);
+            txt成本类别.Items.Add(CostItem.运费);
+            txt成本类别.Items.Add(CostItem.加工费);
+            txt成本类别.Items.Add(CostItem.吊装费);
+            txt成本类别.Items.Add(CostItem.其它费用);
+            txt成本类别.Items.Add(CostItem.入库单价);
         }
 
         private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

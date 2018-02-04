@@ -34,7 +34,14 @@ namespace LJH.Inventory.BLL
                 foreach (var it in items)
                 {
                     var temp = it.GetProperty(_成本类型);
-                    if (temp == ci.Name || (string.IsNullOrEmpty(temp) && ci.Name == CostItem.入库单价)) //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
+                    if (temp == CostItem.结算单价 && ci.Name == CostItem.入库单价) return; //如果已经设置了结算成本了，再设置入库成本的时候不再改变应收
+                    if (temp == ci.Name)
+                    {
+                        original = it;
+                        break;
+                    }
+                    else if ((string.IsNullOrEmpty(temp) || temp == CostItem.入库单价 || temp == CostItem.结算单价) &&
+                             (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价))     //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
                     {
                         original = it;
                         break;
@@ -90,7 +97,14 @@ namespace LJH.Inventory.BLL
                 foreach (var it in items)
                 {
                     var temp = it.GetProperty(_成本类型);
-                    if (temp == ci.Name || (string.IsNullOrEmpty(temp) && ci.Name == CostItem.入库单价)) //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
+                    if (temp == CostItem.结算单价 && ci.Name == CostItem.入库单价) return; //如果已经设置了结算成本了，再设置入库成本的时候不再改变应收
+                    if (temp == ci.Name)
+                    {
+                        original = it;
+                        break;
+                    }
+                    else if ((string.IsNullOrEmpty(temp) || temp == CostItem.入库单价 || temp == CostItem.结算单价) &&
+                             (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价))     //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
                     {
                         original = it;
                         break;
@@ -171,14 +185,17 @@ namespace LJH.Inventory.BLL
                 if (!string.IsNullOrEmpty(sr.Supplier) && sr.SourceID == null && sr.SourceRoll == null) //新建入库的才要计算应收
                 {
                     var ci = sr.GetCost(CostItem.入库单价);
-                    ci.SupllierID = sr.Supplier;  //入库的时候可能没有保存，所以这里加一个保证保存
-                    sr.SetCost(ci);
-                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
-                    if (s != null && ci != null)
+                    if (ci != null)
                     {
-                        DateTime dt = DateTime.Now;
-                        SaveReceivable(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
-                        SaveTax(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
+                        ci.SupllierID = sr.Supplier;  //入库的时候可能没有保存，所以这里加一个保证保存
+                        sr.SetCost(ci);
+                        var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
+                        if (s != null)
+                        {
+                            DateTime dt = DateTime.Now;
+                            SaveReceivable(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
+                            SaveTax(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
+                        }
                     }
                 }
                 return unitWork.Commit();
@@ -317,13 +334,18 @@ namespace LJH.Inventory.BLL
 
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 var clone = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(pi.ID).QueryObject;
+                if (总额.HasValue)
+                {
+                    if (pi.OriginalWeight > 0) ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
+                    else if (pi.OriginalCount > 0) ci.Price = Math.Round(ci.Price / pi.OriginalCount.Value, 2); //如果是总额，则换算成单个数量的价格
+                }
                 string memo = string.Empty;
                 var oci = pi.GetCost(ci.Name);
                 memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
                 clone.SetCost(ci);
-                if (ci.Name == CostItem.入库单价 && clone.Supplier != ci.SupllierID)  //2017-11-28 修改入库单价时，如果同时修改了
+                if (ci.Name == CostItem.结算单价 && clone.Supplier != ci.SupllierID)  //2017-11-28 修改入库单价时，如果同时修改了
                 {
-                    clone.Supplier = ci.SupllierID; 
+                    clone.Supplier = ci.SupllierID;
                     var pcon = new ProductInventoryItemSearchCondition() { CostID = clone.CostID };
                     var pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(pcon).QueryObjects;
                     if (pis != null && pis.Count > 0)
@@ -342,13 +364,12 @@ namespace LJH.Inventory.BLL
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
 
                 AddOperationLog(pi.ID.ToString(), pi.DocumentType, "修改成本", unitWork, DateTime.Now, opt, logID, memo);
-
                 if (!string.IsNullOrEmpty(ci.SupllierID) && pi.SourceID == null && pi.SourceRoll == null)
                 {
                     var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(ci.SupllierID).QueryObject;
                     if (s != null)
                     {
-                        var dt = ci.Name == CostItem.入库单价 ? new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) : DateTime.Now;
+                        var dt = (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价) ? new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) : DateTime.Now;
                         SaveReceivable(clone, ci, dt, 备注, unitWork, 总额, carPlate);
                         SaveTax(clone, ci, dt, 备注, unitWork, 总额, carPlate);
                     }

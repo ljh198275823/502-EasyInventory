@@ -100,6 +100,7 @@
       <Column Name="CreditLine" Member="CreditLine" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="FileID" Member="FileID" DbType="int" UpdateCheck="Never"/>
       <Column Name="TaxFileID" Member="TaxFileID" DbType="int" UpdateCheck="Never"/>
+      <Column Name="Note" Member="Note" DbType="nvarchar(512)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
