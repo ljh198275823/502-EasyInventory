@@ -49,6 +49,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txt成本类别.Items.Add(CostItem.加工费);
             txt成本类别.Items.Add(CostItem.吊装费);
             txt成本类别.Items.Add(CostItem.其它费用);
+            btnOk1.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
         }
 
         private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

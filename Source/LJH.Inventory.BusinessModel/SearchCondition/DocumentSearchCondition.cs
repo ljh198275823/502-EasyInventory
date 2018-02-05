@@ -14,5 +14,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         public string DocumentType { get; set; }
 
         public string Operation { get; set; }
+
+        public List<string> Operations { get; set; }
     }
 }

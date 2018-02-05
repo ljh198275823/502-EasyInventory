@@ -84,5 +84,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtSupplier.Tag = null;
             txtSupplier.Text = string.Empty;
         }
+
+        private void Frm设置结算单价_Load(object sender, EventArgs e)
+        {
+            btnOk.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Edit);
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace LJH.Inventory.DAL.LinqProvider
     {
         #region 构造函数
         public DocumentOperationProvider(string connStr, System.Data.Linq.Mapping.MappingSource ms)
-            : base(connStr,ms)
+            : base(connStr, ms)
         {
         }
         #endregion
@@ -35,6 +35,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.DocumentID)) ret = ret.Where(item => item.DocumentID == con.DocumentID);
                 if (!string.IsNullOrEmpty(con.DocumentType)) ret = ret.Where(item => item.DocumentType == con.DocumentType);
                 if (!string.IsNullOrEmpty(con.Operation)) ret = ret.Where(item => item.Operation == con.Operation);
+                if (con.Operations != null && con.Operations.Count > 0) ret = ret.Where(item => con.Operations.Contains(item.Operation));
             }
             return ret.ToList();
         }

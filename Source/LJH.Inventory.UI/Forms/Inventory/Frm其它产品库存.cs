@@ -212,16 +212,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 CostItem ci = sr.GetCost(CostItem.运费);
                 if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
+                ci = sr.GetCost(CostItem.短途运费);
+                if (ci != null && ci.Price > 0) row.Cells["col短途运费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.加工费);
-                if (ci != null && ci.Price > 0)
-                {
-                    row.Cells["col开平费"].Value = ci.Price;
-                }
-                else
-                {
-                    ci = sr.GetCost("开平费");
-                    if (ci != null && ci.Price > 0) row.Cells["col开平费"].Value = ci.Price;
-                }
+                if (ci != null && ci.Price > 0) row.Cells["col加工费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.吊装费);
                 if (ci != null && ci.Price > 0) row.Cells["col吊装费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.其它费用);
@@ -496,6 +490,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (sr.CostID.HasValue)
                 {
                     DocumentSearchCondition con = new DocumentSearchCondition() { DocumentID = sr.CostID.Value.ToString() };
+                    con.Operations = new List<string>();
+                    if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read)) con.Operations.Add("修改成本");
+                    if (Operator.Current.Permit(Permission.结算单价, PermissionActions.Read)) con.Operations.Add("设置结算单价");
+                    if (con.Operations.Count == 0) return;
                     Frm修改记录日志明细 frm = new Frm修改记录日志明细();
                     frm.SearchCondition = con;
                     frm.StartPosition = FormStartPosition.CenterParent;

@@ -18,6 +18,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             InitializeComponent();
         }
 
+
         #region 重写基类方法
         protected override List<object> GetDataSource()
         {

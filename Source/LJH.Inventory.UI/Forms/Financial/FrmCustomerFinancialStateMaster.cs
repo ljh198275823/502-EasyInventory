@@ -120,12 +120,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             CustomerFinancialState cs = item as CustomerFinancialState;
             row.Tag = cs;
             row.Cells["colImage"].Value = Properties.Resources.customer;
-            if(cs.Customer .ID !=CompanyInfo .财务上不存在的客户) row.Cells["colID"].Value = cs.Customer.ID;
+            if (cs.Customer.ID != CompanyInfo.财务上不存在的客户) row.Cells["colID"].Value = cs.Customer.ID;
             row.Cells["colName"].Value = cs.Customer.Name;
             row.Cells["colCategory"].Value = cs.Customer.CategoryID;
             row.Cells["colCreditLine"].Value = cs.Customer.CreditLine;
-            row.Cells["colFileID"].Value = cs.Customer.FileID.HasValue ? cs.Customer.FileID.ToString() : null; // cs.Recievables > 0 ? (cs.Customer.FileID.HasValue ? cs.Customer.FileID.ToString() : null) : null;
-            row.Cells["colTaxFileID"].Value = cs.Customer.TaxFileID.HasValue ? cs.Customer.TaxFileID.ToString() : null; // cs.Tax > 0 ? (cs.Customer.TaxFileID.HasValue ? cs.Customer.TaxFileID.ToString() : null) : null;
+            row.Cells["colFileID"].Value = cs.Customer.FileID;
+            row.Cells["colTaxFileID"].Value = cs.Customer.TaxFileID;
             row.Cells["colPrepay"].Value = cs.Prepay;
             row.Cells["colReceivable"].Value = cs.Recievables;
             row.Cells["colTax"].Value = cs.Tax;

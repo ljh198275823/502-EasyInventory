@@ -103,6 +103,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void InitControls()
         {
+            base.InitControls();
             this.dtStorageDateTime.Value = DateTime.Now;
             if (IsAdding)
             {

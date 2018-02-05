@@ -363,7 +363,7 @@ namespace LJH.Inventory.BLL
                 }
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
 
-                AddOperationLog(pi.ID.ToString(), pi.DocumentType, "修改成本", unitWork, DateTime.Now, opt, logID, memo);
+                AddOperationLog(pi.ID.ToString(), pi.DocumentType, ci.Name == CostItem.结算单价 ? "设置结算单价" : "修改成本", unitWork, DateTime.Now, opt, logID, memo);
                 if (!string.IsNullOrEmpty(ci.SupllierID) && pi.SourceID == null && pi.SourceRoll == null)
                 {
                     var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(ci.SupllierID).QueryObject;

@@ -190,6 +190,7 @@
             this.Name = "Frm设置结算单价";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "设置结算单价";
+            this.Load += new System.EventHandler(this.Frm设置结算单价_Load);
             this.pnlTax.ResumeLayout(false);
             this.pnlTax.PerformLayout();
             this.ResumeLayout(false);
