@@ -132,8 +132,8 @@ namespace LJH.Inventory.BusinessModel
         {
             get
             {
-                if (Weight.HasValue && Weight.Value != 0) return Weight.Value * Price;
-                return Price * Count;
+                if (Weight.HasValue && Weight.Value != 0) return Math.Round(Weight.Value, 3) * Price;
+                return Math.Round(Price * Count, 2);
             }
         }
         #endregion

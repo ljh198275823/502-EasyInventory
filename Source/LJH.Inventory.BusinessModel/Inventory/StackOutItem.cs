@@ -85,11 +85,11 @@ namespace LJH.Inventory.BusinessModel
                 decimal ret = 0;
                 if (TotalWeight.HasValue && TotalWeight.Value != 0)
                 {
-                    ret = TotalWeight.Value * Price;
+                    ret = Math.Round(TotalWeight.Value, 3) * Price;
                 }
                 else
                 {
-                    ret= Price * Count;
+                    ret = Price * Count;
                 }
                 return Math.Round(ret, 2);
             }
