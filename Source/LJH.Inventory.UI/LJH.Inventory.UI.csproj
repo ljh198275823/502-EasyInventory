@@ -94,11 +94,11 @@
     <Compile Include="Forms\Financial\FrmCustomerTaxBillDetail.designer.cs">
       <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Financial\FrmExpenditureRecordMaster.cs">
+    <Compile Include="Forms\Financial\Frm管理费用.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Financial\FrmExpenditureRecordMaster.designer.cs">
-      <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
+    <Compile Include="Forms\Financial\Frm管理费用.designer.cs">
+      <DependentUpon>Frm管理费用.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Financial\FrmSupplierPaymentAssign.cs">
       <SubType>Form</SubType>
@@ -553,11 +553,11 @@
     <Compile Include="Forms\Sale\FrmCustomerMaster.designer.cs">
       <DependentUpon>FrmCustomerMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerPaymentDetail.cs">
+    <Compile Include="Forms\Financial\Frm收付款流水明细.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Financial\FrmCustomerPaymentDetail.designer.cs">
-      <DependentUpon>FrmCustomerPaymentDetail.cs</DependentUpon>
+    <Compile Include="Forms\Financial\Frm收付款流水明细.designer.cs">
+      <DependentUpon>Frm收付款流水明细.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sale\FrmCustomerTypeDetail.cs">
       <SubType>Form</SubType>
@@ -784,8 +784,8 @@
     <EmbeddedResource Include="Forms\Financial\FrmCustomerTaxBillDetail.resx">
       <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmExpenditureRecordMaster.resx">
-      <DependentUpon>FrmExpenditureRecordMaster.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Financial\Frm管理费用.resx">
+      <DependentUpon>Frm管理费用.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmSupplierPaymentAssign.resx">
       <DependentUpon>FrmSupplierPaymentAssign.cs</DependentUpon>
@@ -1014,8 +1014,8 @@
     <EmbeddedResource Include="Forms\Sale\FrmCustomerMaster.resx">
       <DependentUpon>FrmCustomerMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Financial\FrmCustomerPaymentDetail.resx">
-      <DependentUpon>FrmCustomerPaymentDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Financial\Frm收付款流水明细.resx">
+      <DependentUpon>Frm收付款流水明细.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sale\FrmCustomerTypeDetail.resx">
       <DependentUpon>FrmCustomerTypeDetail.cs</DependentUpon>

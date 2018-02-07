@@ -335,7 +335,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("请先保存送货单后再支付");
                 return;
             }
-            Financial.FrmCustomerPaymentDetail frm = new Financial.FrmCustomerPaymentDetail();
+            Financial.Frm收付款流水明细 frm = new Financial.Frm收付款流水明细();
             frm.PaymentType = CustomerPaymentType.客户收款;
             frm.Customer = (txtCustomer.Tag as CompanyInfo);
             frm.StackSheetID = sheet.ID;

@@ -136,7 +136,7 @@
             // 
             // dtPaidDate
             // 
-            this.dtPaidDate.Location = new System.Drawing.Point(312, 107);
+            this.dtPaidDate.Location = new System.Drawing.Point(312, 74);
             this.dtPaidDate.Name = "dtPaidDate";
             this.dtPaidDate.Size = new System.Drawing.Size(160, 21);
             this.dtPaidDate.TabIndex = 111;
@@ -144,7 +144,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(254, 111);
+            this.label1.Location = new System.Drawing.Point(254, 78);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 110;
@@ -179,7 +179,7 @@
             // 
             // lnkAccout
             // 
-            this.lnkAccout.Location = new System.Drawing.Point(7, 76);
+            this.lnkAccout.Location = new System.Drawing.Point(6, 76);
             this.lnkAccout.Name = "lnkAccout";
             this.lnkAccout.Size = new System.Drawing.Size(60, 17);
             this.lnkAccout.TabIndex = 102;
@@ -190,7 +190,7 @@
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(313, 74);
+            this.txtSupplier.Location = new System.Drawing.Point(313, 107);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(159, 21);
@@ -200,7 +200,7 @@
             // lnkSupplier
             // 
             this.lnkSupplier.AutoSize = true;
-            this.lnkSupplier.Location = new System.Drawing.Point(253, 78);
+            this.lnkSupplier.Location = new System.Drawing.Point(253, 111);
             this.lnkSupplier.Name = "lnkSupplier";
             this.lnkSupplier.Size = new System.Drawing.Size(53, 12);
             this.lnkSupplier.TabIndex = 8;

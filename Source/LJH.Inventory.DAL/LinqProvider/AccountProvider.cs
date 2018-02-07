@@ -27,7 +27,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 dc.Log = Console.Out;
                 var ru = (from it in dc.GetTable<AccountRecord>()
-                          where it.AccountID == ac.ID && (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款)
+                          where it.AccountID == ac.ID && (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款 || it.ClassID == CustomerPaymentType.管理费用退款)
                           group it by it.AccountID into g
                           select new { AccountID = g.Key, Amount = g.Sum(it => it.Amount) }).ToList();
                 if (ru != null && ru.Count > 0) ac.Amount += ru.Sum(it => it.AccountID == ac.ID ? it.Amount : 0);

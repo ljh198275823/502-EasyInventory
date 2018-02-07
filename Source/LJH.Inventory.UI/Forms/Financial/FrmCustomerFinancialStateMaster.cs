@@ -237,7 +237,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                Frm收付款流水明细 frm = new Frm收付款流水明细();
                 frm.Customer = customer;
                 frm.PaymentType = CustomerPaymentType.客户收款;
                 frm.IsAdding = true;

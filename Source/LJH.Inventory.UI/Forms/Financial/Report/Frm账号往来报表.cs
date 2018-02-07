@@ -126,7 +126,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 {
                     if (sheet.ClassID == CustomerPaymentType.客户收款 || sheet.ClassID == CustomerPaymentType.供应商付款)
                     {
-                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                        Frm收付款流水明细 frm = new Frm收付款流水明细();
                         frm.UpdatingItem = sheet;
                         frm.PaymentType = cp.PaymentType;
                         frm.ShowDialog();

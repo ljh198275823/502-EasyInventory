@@ -14,9 +14,9 @@ using LJH.Inventory.UI.Forms.Purchase;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmCustomerPaymentDetail : FrmSheetDetailBase
+    public partial class Frm收付款流水明细 : FrmSheetDetailBase
     {
-        public FrmCustomerPaymentDetail()
+        public Frm收付款流水明细()
         {
             InitializeComponent();
         }

@@ -109,7 +109,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         private void mnu_Add_Click(object sender, EventArgs e)
         {
-            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+            Frm收付款流水明细 frm = new Frm收付款流水明细();
             frm.Customer = Customer;
             frm.PaymentType = PaymentType;
             frm.IsAdding = true;
@@ -157,7 +157,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(ar.SheetID).QueryObject;
                     if (sheet != null)
                     {
-                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                        Frm收付款流水明细 frm = new Frm收付款流水明细();
                         frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
                         frm.PaymentType = sheet.ClassID;
