@@ -42,6 +42,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtCarPlate.Init();
             txt成本类别.Items.Clear();
             txt成本类别.Items.Add(string.Empty);
+            txt成本类别.Items.Add(CostItem.入库单价);
             txt成本类别.Items.Add(CostItem.运费);
             txt成本类别.Items.Add(CostItem.短途运费);
             txt成本类别.Items.Add(CostItem.开平费);
