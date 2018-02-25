@@ -44,7 +44,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txt成本类别.Items.Add(string.Empty);
             txt成本类别.Items.Add(CostItem.入库单价);
             txt成本类别.Items.Add(CostItem.运费);
-            txt成本类别.Items.Add(CostItem.短途运费);
+            txt成本类别.Items.Add(CostItem.短途运费1);
+            txt成本类别.Items.Add(CostItem.短途运费2);
             txt成本类别.Items.Add(CostItem.开平费);
             txt成本类别.Items.Add(CostItem.分条费);
             txt成本类别.Items.Add(CostItem.加工费);

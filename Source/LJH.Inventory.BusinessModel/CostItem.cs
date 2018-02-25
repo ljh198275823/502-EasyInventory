@@ -14,7 +14,8 @@ namespace LJH.Inventory.BusinessModel
         public static readonly string 入库单价 = "入库单价";
         public static readonly string 结算单价 = "结算单价";
         public static readonly string 运费 = "运费";
-        public static readonly string 短途运费 = "短途运费";
+        public static readonly string 短途运费1 = "短途运费1";
+        public static readonly string 短途运费2 = "短途运费2";
         public static readonly string 开平费 = "开平费";
         public static readonly string 分条费 = "分条费";
         public static readonly string 加工费 = "加工费";

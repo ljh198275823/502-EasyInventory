@@ -44,6 +44,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -86,6 +90,7 @@
             this.col结算单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col短途运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col短途运费2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col分条费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col开平费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col加工费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -359,6 +364,7 @@
             this.col结算单价,
             this.col运费,
             this.col短途运费,
+            this.col短途运费2,
             this.col分条费,
             this.col开平费,
             this.col加工费,
@@ -587,14 +593,28 @@
             // col短途运费
             // 
             this.col短途运费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.col短途运费.HeaderText = "短途运费";
+            dataGridViewCellStyle9.Format = "C2";
+            this.col短途运费.DefaultCellStyle = dataGridViewCellStyle9;
+            this.col短途运费.HeaderText = "短途运费1";
             this.col短途运费.Name = "col短途运费";
             this.col短途运费.ReadOnly = true;
-            this.col短途运费.Width = 78;
+            this.col短途运费.Width = 84;
+            // 
+            // col短途运费2
+            // 
+            this.col短途运费2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle10.Format = "C2";
+            this.col短途运费2.DefaultCellStyle = dataGridViewCellStyle10;
+            this.col短途运费2.HeaderText = "短途运费2";
+            this.col短途运费2.Name = "col短途运费2";
+            this.col短途运费2.ReadOnly = true;
+            this.col短途运费2.Width = 84;
             // 
             // col分条费
             // 
             this.col分条费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle11.Format = "C2";
+            this.col分条费.DefaultCellStyle = dataGridViewCellStyle11;
             this.col分条费.HeaderText = "分条费";
             this.col分条费.Name = "col分条费";
             this.col分条费.ReadOnly = true;
@@ -603,8 +623,8 @@
             // col开平费
             // 
             this.col开平费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle9.Format = "C2";
-            this.col开平费.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle12.Format = "C2";
+            this.col开平费.DefaultCellStyle = dataGridViewCellStyle12;
             this.col开平费.HeaderText = "开平费";
             this.col开平费.Name = "col开平费";
             this.col开平费.ReadOnly = true;
@@ -613,6 +633,8 @@
             // col加工费
             // 
             this.col加工费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle13.Format = "C2";
+            this.col加工费.DefaultCellStyle = dataGridViewCellStyle13;
             this.col加工费.HeaderText = "加工费";
             this.col加工费.Name = "col加工费";
             this.col加工费.ReadOnly = true;
@@ -621,8 +643,8 @@
             // col吊装费
             // 
             this.col吊装费.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle10.Format = "C2";
-            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle14.Format = "C2";
+            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle14;
             this.col吊装费.HeaderText = "吊装费";
             this.col吊装费.Name = "col吊装费";
             this.col吊装费.ReadOnly = true;
@@ -631,8 +653,8 @@
             // col其它费用
             // 
             this.col其它费用.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle11.Format = "C2";
-            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle15.Format = "C2";
+            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle15;
             this.col其它费用.HeaderText = "其它费用";
             this.col其它费用.Name = "col其它费用";
             this.col其它费用.ReadOnly = true;
@@ -641,8 +663,8 @@
             // col单件成本
             // 
             this.col单件成本.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle12.Format = "C2";
-            this.col单件成本.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle16.Format = "C2";
+            this.col单件成本.DefaultCellStyle = dataGridViewCellStyle16;
             this.col单件成本.HeaderText = "单位成本";
             this.col单件成本.Name = "col单件成本";
             this.col单件成本.ReadOnly = true;
@@ -653,8 +675,8 @@
             // col成本合计
             // 
             this.col成本合计.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle13.Format = "C2";
-            this.col成本合计.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle17.Format = "C2";
+            this.col成本合计.DefaultCellStyle = dataGridViewCellStyle17;
             this.col成本合计.HeaderText = "成本合计";
             this.col成本合计.Name = "col成本合计";
             this.col成本合计.ReadOnly = true;
@@ -663,8 +685,8 @@
             // col国税计提
             // 
             this.col国税计提.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle14.Format = "C2";
-            this.col国税计提.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle18.Format = "C2";
+            this.col国税计提.DefaultCellStyle = dataGridViewCellStyle18;
             this.col国税计提.HeaderText = "国税计提";
             this.col国税计提.Name = "col国税计提";
             this.col国税计提.ReadOnly = true;
@@ -673,8 +695,8 @@
             // col利润合计
             // 
             this.col利润合计.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle15.Format = "C2";
-            this.col利润合计.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle19.Format = "C2";
+            this.col利润合计.DefaultCellStyle = dataGridViewCellStyle19;
             this.col利润合计.HeaderText = "利润合计";
             this.col利润合计.Name = "col利润合计";
             this.col利润合计.ReadOnly = true;
@@ -756,6 +778,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col结算单价;
         private System.Windows.Forms.DataGridViewTextBoxColumn col运费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col短途运费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col短途运费2;
         private System.Windows.Forms.DataGridViewTextBoxColumn col分条费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col开平费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col加工费;

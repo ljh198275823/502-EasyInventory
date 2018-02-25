@@ -88,8 +88,10 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 {
                     CostItem ci = sr.GetCost(CostItem.运费);
                     if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
-                    ci = sr.GetCost(CostItem.短途运费);
+                    ci = sr.GetCost(CostItem.短途运费1);
                     if (ci != null && ci.Price > 0) row.Cells["col短途运费"].Value = ci.Price;
+                    ci = sr.GetCost(CostItem.短途运费2);
+                    if (ci != null && ci.Price > 0) row.Cells["col短途运费2"].Value = ci.Price;
                     ci = sr.GetCost(CostItem.加工费);
                     if (ci != null && ci.Price > 0) row.Cells["col加工费"].Value = ci.Price;
                     ci = sr.GetCost(CostItem.开平费);
