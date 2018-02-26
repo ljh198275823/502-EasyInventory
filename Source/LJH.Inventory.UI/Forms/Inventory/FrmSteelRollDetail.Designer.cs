@@ -67,6 +67,7 @@
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.btnOk1 = new System.Windows.Forms.Button();
             this.pnlCost = new System.Windows.Forms.GroupBox();
+            this.btn查看成本明细 = new System.Windows.Forms.Button();
             this.btn设置其它成本 = new System.Windows.Forms.Button();
             this.btn设置结算单价 = new System.Windows.Forms.Button();
             this.txtSupplier运费 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -503,6 +504,7 @@
             // 
             // pnlCost
             // 
+            this.pnlCost.Controls.Add(this.btn查看成本明细);
             this.pnlCost.Controls.Add(this.btn设置其它成本);
             this.pnlCost.Controls.Add(this.btn设置结算单价);
             this.pnlCost.Controls.Add(this.txtSupplier运费);
@@ -518,6 +520,16 @@
             this.pnlCost.Size = new System.Drawing.Size(488, 127);
             this.pnlCost.TabIndex = 146;
             this.pnlCost.TabStop = false;
+            // 
+            // btn查看成本明细
+            // 
+            this.btn查看成本明细.Location = new System.Drawing.Point(397, 90);
+            this.btn查看成本明细.Name = "btn查看成本明细";
+            this.btn查看成本明细.Size = new System.Drawing.Size(85, 23);
+            this.btn查看成本明细.TabIndex = 158;
+            this.btn查看成本明细.Text = "查看成本明细";
+            this.btn查看成本明细.UseVisualStyleBackColor = true;
+            this.btn查看成本明细.Click += new System.EventHandler(this.btn查看成本明细_Click);
             // 
             // btn设置其它成本
             // 
@@ -804,5 +816,6 @@
         private System.Windows.Forms.LinkLabel lnkSupplier_运费;
         private System.Windows.Forms.Button btn设置其它成本;
         private System.Windows.Forms.Button btn设置结算单价;
+        private System.Windows.Forms.Button btn查看成本明细;
     }
 }

@@ -142,7 +142,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Init();
             txtCarPlate.Init();
             txtMaterial.Init();
-            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本 , PermissionActions.Read);
+            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
             if (!pnlCost.Visible) this.Height -= pnlCost.Height;
         }
 
@@ -151,6 +151,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             base.ShowOperatorRights();
             btn设置结算单价.Enabled = !IsAdding && Operator.Current.Permit(Permission.结算单价, PermissionActions.Edit);
             btn设置其它成本.Enabled = !IsAdding && Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
+            btn查看成本明细.Enabled = !IsAdding;
             txtPurchasePrice.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
             txt运费.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
             this.btnOk.Enabled = !IsForView && Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
@@ -460,6 +461,14 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     MessageBox.Show(ret.Message);
                 }
             }
+        }
+
+        private void btn查看成本明细_Click(object sender, EventArgs e)
+        {
+            var frm = new Frm成本明细();
+            frm.ProductInventoryItem = UpdatingItem as ProductInventoryItem;
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
         }
     }
 }

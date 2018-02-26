@@ -55,6 +55,7 @@
             this.mnu_InventoryRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeliveryRecordReport = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DeliveryStatistic = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_出货利润明细报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_SliceRecordReport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_原材料盘点报表 = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +96,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tmrSoftDogChecker = new System.Windows.Forms.Timer(this.components);
-            this.mnu_出货利润明细报表 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_出货成本明细报表 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -286,6 +287,7 @@
             this.mnu_DeliveryStatistic,
             this.mnu_出货利润明细报表,
             this.mnu_SliceRecordReport,
+            this.mnu_出货成本明细报表,
             this.toolStripSeparator3,
             this.mnu_原材料盘点报表,
             this.mnu_小件盘点报表,
@@ -325,6 +327,14 @@
             this.mnu_DeliveryStatistic.Size = new System.Drawing.Size(189, 22);
             this.mnu_DeliveryStatistic.Text = "出货利润统计报表";
             this.mnu_DeliveryStatistic.Click += new System.EventHandler(this.mnu_DeliveryStatistic_Click);
+            // 
+            // mnu_出货利润明细报表
+            // 
+            this.mnu_出货利润明细报表.Enabled = false;
+            this.mnu_出货利润明细报表.Name = "mnu_出货利润明细报表";
+            this.mnu_出货利润明细报表.Size = new System.Drawing.Size(189, 22);
+            this.mnu_出货利润明细报表.Text = "出货利润明细报表";
+            this.mnu_出货利润明细报表.Click += new System.EventHandler(this.mnu_出货利润明细报表_Click);
             // 
             // mnu_SliceRecordReport
             // 
@@ -642,13 +652,13 @@
             this.tmrSoftDogChecker.Interval = 60000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
             // 
-            // mnu_出货利润明细报表
+            // mnu_出货成本明细报表
             // 
-            this.mnu_出货利润明细报表.Enabled = false;
-            this.mnu_出货利润明细报表.Name = "mnu_出货利润明细报表";
-            this.mnu_出货利润明细报表.Size = new System.Drawing.Size(189, 22);
-            this.mnu_出货利润明细报表.Text = "出货利润明细报表";
-            this.mnu_出货利润明细报表.Click += new System.EventHandler(this.mnu_出货利润明细报表_Click);
+            this.mnu_出货成本明细报表.Enabled = false;
+            this.mnu_出货成本明细报表.Name = "mnu_出货成本明细报表";
+            this.mnu_出货成本明细报表.Size = new System.Drawing.Size(189, 22);
+            this.mnu_出货成本明细报表.Text = "出货成本明细报表";
+            this.mnu_出货成本明细报表.Click += new System.EventHandler(this.mnu_出货成本明细报表_Click);
             // 
             // FrmMain
             // 
@@ -747,5 +757,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem mnu_出货利润明细报表;
+        private System.Windows.Forms.ToolStripMenuItem mnu_出货成本明细报表;
     }
 }

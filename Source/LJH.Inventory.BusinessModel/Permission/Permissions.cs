@@ -68,7 +68,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 小件
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Nullify , Description = "小件")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Inventory | PermissionActions.导出 | PermissionActions.Check | PermissionActions.Nullify, Description = "小件")]
         SteelRollSlice,
         /// <summary>
         /// 仓库资料
@@ -231,6 +231,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "内部转账记录报表")]
         内部转账记录报表,
+        /// <summary>
+        ///出货成本明细报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "出货成本明细报表")]
+        出货成本明细报表,
         #endregion
     }
 }

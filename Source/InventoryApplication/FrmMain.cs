@@ -189,6 +189,7 @@ namespace InventoryApplication
             this.mnu_供应商往来报表.Enabled = cur.Permit(Permission.供应商往来报表, PermissionActions.Read);
             this.mnu_原材料盘点报表.Enabled = cur.Permit(Permission.原材料盘点报表, PermissionActions.Read);
             this.mnu_小件盘点报表.Enabled = cur.Permit(Permission.小件盘点报表, PermissionActions.Read);
+            this.mnu_出货成本明细报表.Enabled = cur.Permit(Permission.出货成本明细报表, PermissionActions.Read);
         }
         #endregion
 
@@ -545,6 +546,11 @@ namespace InventoryApplication
             ShowSingleForm<LJH.Inventory.UI.Forms.Inventory.Frm其它产品库存>(sender);
         }
         #endregion
+
+        private void mnu_出货成本明细报表_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<Frm出货成本明细报表>(null);
+        }
 
        
     }
