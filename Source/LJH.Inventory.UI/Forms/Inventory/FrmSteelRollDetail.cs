@@ -450,6 +450,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 var ci = frm.Cost;
                 decimal? 总额 = null;
+                if (frm.chk总金额.Checked) 总额 = ci.Price;
                 var pi = UpdatingItem as ProductInventoryItem;
                 var ret = new SteelRollBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, frm.Memo, 总额, frm.CarPlate);
                 if (ret.Result == ResultCode.Successful)
