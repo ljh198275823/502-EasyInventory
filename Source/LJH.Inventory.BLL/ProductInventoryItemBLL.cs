@@ -132,7 +132,8 @@ namespace LJH.Inventory.BLL
             cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
             if (!string.IsNullOrEmpty(sheet.Customer)) cr.SetProperty("购货单位", sheet.Customer);
             if (!string.IsNullOrEmpty(carPlate)) cr.SetProperty("车皮号", carPlate);
-            decimal amount = 总额.HasValue ? 总额.Value : sheet.CalTax(ci);
+            decimal amount = 0;
+            if (ci.WithTax) amount = 总额.HasValue ? 总额.Value : sheet.CalTax(ci);
             if (original != null && original.Haspaid > amount) new AccountRecordAssignBLL(RepoUri).UndoAssign(cr, cr.Haspaid - amount); //这里用cr,如果用original后面更新的时候会更新不到
             cr.Amount = amount;
             if (original == null)
