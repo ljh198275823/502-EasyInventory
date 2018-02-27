@@ -87,7 +87,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                              Memo = it.Memo
                          });
             ret = (from it in ret
-                   orderby it.Name ascending
+                   orderby it.Name ascending, it.CreateDate ascending
                    where it.收入 != 0 || it.支出 != 0
                    select it).ToList();
             ret.Insert(0, first);
