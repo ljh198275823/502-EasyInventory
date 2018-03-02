@@ -657,6 +657,11 @@
             项目编号
             </summary>
         </member>
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.ProjectName">
+            <summary>
+            获取或设置项目名称
+            </summary>
+        </member>
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.SoftwareList">
             <summary>
             软件列表
@@ -680,6 +685,11 @@
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.IsHost">
             <summary>
             获取或设置是否是主机加密狗
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.DBServer">
+            <summary>
+            获取或设置数据库服务器
             </summary>
         </member>
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.DBName">

@@ -143,15 +143,24 @@ namespace InventoryApplication
         private void Login_Load(object sender, EventArgs e)
         {
             txtDBName.Text = (SoftDog != null && !string.IsNullOrEmpty(SoftDog.DBName)) ? SoftDog.DBName : DBNAME;
-            if (!string.IsNullOrEmpty(AppSettings.Current.ConnStr))
+            txtServer.Text = SoftDog.DBServer;
+            if (!string.IsNullOrEmpty(SoftDog.DBServer) && !string.IsNullOrEmpty(SoftDog.DBName))
             {
-                try
+                gpDB.Visible = false;
+                this.Height -= gpDB.Height;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(AppSettings.Current.ConnStr))
                 {
-                    sb = new SqlConnectionStringBuilder(AppSettings.Current.ConnStr);
-                    txtServer.Text = sb.DataSource;
-                }
-                catch
-                {
+                    try
+                    {
+                        sb = new SqlConnectionStringBuilder(AppSettings.Current.ConnStr);
+                        txtServer.Text = sb.DataSource;
+                    }
+                    catch
+                    {
+                    }
                 }
             }
 
