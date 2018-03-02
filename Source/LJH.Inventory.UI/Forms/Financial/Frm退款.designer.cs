@@ -37,6 +37,8 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.chk公账 = new System.Windows.Forms.CheckBox();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
@@ -71,8 +73,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl大写 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -146,6 +147,7 @@
             this.txtAmount.Size = new System.Drawing.Size(163, 21);
             this.txtAmount.TabIndex = 3;
             this.txtAmount.Text = "0.00";
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // txtMemo
             // 
@@ -171,6 +173,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lbl大写);
             this.tabPage1.Controls.Add(this.dtPaidDate);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.chk公账);
@@ -196,11 +199,27 @@
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dtPaidDate
+            // 
+            this.dtPaidDate.Location = new System.Drawing.Point(71, 142);
+            this.dtPaidDate.Name = "dtPaidDate";
+            this.dtPaidDate.Size = new System.Drawing.Size(163, 21);
+            this.dtPaidDate.TabIndex = 111;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 146);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 110;
+            this.label1.Text = "退款日期";
+            // 
             // chk公账
             // 
             this.chk公账.AutoSize = true;
             this.chk公账.ForeColor = System.Drawing.Color.Red;
-            this.chk公账.Location = new System.Drawing.Point(322, 111);
+            this.chk公账.Location = new System.Drawing.Point(320, 145);
             this.chk公账.Name = "chk公账";
             this.chk公账.Size = new System.Drawing.Size(48, 16);
             this.chk公账.TabIndex = 108;
@@ -287,7 +306,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(578, 202);
+            this.tabPage5.Size = new System.Drawing.Size(578, 214);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -311,7 +330,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(578, 202);
+            this.gridAttachment.Size = new System.Drawing.Size(578, 214);
             this.gridAttachment.TabIndex = 102;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -385,7 +404,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(578, 202);
+            this.tabPage2.Size = new System.Drawing.Size(578, 214);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -408,7 +427,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(578, 202);
+            this.dataGridView1.Size = new System.Drawing.Size(578, 214);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -515,21 +534,16 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
-            // dtPaidDate
+            // lbl大写
             // 
-            this.dtPaidDate.Location = new System.Drawing.Point(71, 142);
-            this.dtPaidDate.Name = "dtPaidDate";
-            this.dtPaidDate.Size = new System.Drawing.Size(163, 21);
-            this.dtPaidDate.TabIndex = 111;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 146);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 110;
-            this.label1.Text = "退款日期";
+            this.lbl大写.AutoSize = true;
+            this.lbl大写.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl大写.ForeColor = System.Drawing.Color.Blue;
+            this.lbl大写.Location = new System.Drawing.Point(262, 115);
+            this.lbl大写.Name = "lbl大写";
+            this.lbl大写.Size = new System.Drawing.Size(18, 12);
+            this.lbl大写.TabIndex = 115;
+            this.lbl大写.Text = "整";
             // 
             // Frm退款
             // 
@@ -606,5 +620,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private Controls.NullableDateTimePicker dtPaidDate;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl大写;
     }
 }

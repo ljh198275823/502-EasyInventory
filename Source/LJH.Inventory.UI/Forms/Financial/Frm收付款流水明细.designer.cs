@@ -85,6 +85,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbl大写 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -173,6 +174,7 @@
             this.txtAmount.Size = new System.Drawing.Size(164, 21);
             this.txtAmount.TabIndex = 3;
             this.txtAmount.Text = "0.00";
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // txtMemo
             // 
@@ -199,6 +201,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lbl大写);
             this.tabPage1.Controls.Add(this.dtPaidDate);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txtPayer);
@@ -662,7 +665,18 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
-            // FrmCustomerPaymentDetail
+            // lbl大写
+            // 
+            this.lbl大写.AutoSize = true;
+            this.lbl大写.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl大写.ForeColor = System.Drawing.Color.Blue;
+            this.lbl大写.Location = new System.Drawing.Point(261, 79);
+            this.lbl大写.Name = "lbl大写";
+            this.lbl大写.Size = new System.Drawing.Size(18, 12);
+            this.lbl大写.TabIndex = 116;
+            this.lbl大写.Text = "整";
+            // 
+            // Frm收付款流水明细
             // 
             this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -670,7 +684,7 @@
             this.ClientSize = new System.Drawing.Size(593, 334);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
-            this.Name = "FrmCustomerPaymentDetail";
+            this.Name = "Frm收付款流水明细";
             this.Text = "客户收款流水明细";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
@@ -751,5 +765,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel lblSheetState;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Label lbl大写;
     }
 }

@@ -244,5 +244,10 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            lbl大写.Text = RMBHelper.NumGetStr((double)txtAmount.DecimalValue);
+        }
     }
 }

@@ -74,6 +74,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbl大写 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -86,11 +87,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(406, 273);
+            this.btnClose.Location = new System.Drawing.Point(406, 322);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(295, 273);
+            this.btnOk.Location = new System.Drawing.Point(295, 322);
             // 
             // tabControl1
             // 
@@ -103,11 +104,12 @@
             this.tabControl1.Location = new System.Drawing.Point(-1, 59);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(496, 192);
+            this.tabControl1.Size = new System.Drawing.Size(496, 241);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lbl大写);
             this.tabPage1.Controls.Add(this.dtPaidDate);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txt申请人);
@@ -129,14 +131,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(488, 166);
+            this.tabPage1.Size = new System.Drawing.Size(488, 215);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // dtPaidDate
             // 
-            this.dtPaidDate.Location = new System.Drawing.Point(312, 74);
+            this.dtPaidDate.Location = new System.Drawing.Point(312, 113);
             this.dtPaidDate.Name = "dtPaidDate";
             this.dtPaidDate.Size = new System.Drawing.Size(160, 21);
             this.dtPaidDate.TabIndex = 111;
@@ -144,7 +146,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(254, 78);
+            this.label1.Location = new System.Drawing.Point(254, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 110;
@@ -153,7 +155,7 @@
             // txt申请人
             // 
             this.txt申请人.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txt申请人.Location = new System.Drawing.Point(73, 107);
+            this.txt申请人.Location = new System.Drawing.Point(73, 146);
             this.txt申请人.Name = "txt申请人";
             this.txt申请人.Size = new System.Drawing.Size(159, 21);
             this.txt申请人.TabIndex = 106;
@@ -161,7 +163,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 111);
+            this.label3.Location = new System.Drawing.Point(26, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 107;
@@ -170,7 +172,7 @@
             // txtAccount
             // 
             this.txtAccount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAccount.Location = new System.Drawing.Point(73, 74);
+            this.txtAccount.Location = new System.Drawing.Point(73, 113);
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.ReadOnly = true;
             this.txtAccount.Size = new System.Drawing.Size(160, 21);
@@ -179,7 +181,7 @@
             // 
             // lnkAccout
             // 
-            this.lnkAccout.Location = new System.Drawing.Point(6, 76);
+            this.lnkAccout.Location = new System.Drawing.Point(6, 115);
             this.lnkAccout.Name = "lnkAccout";
             this.lnkAccout.Size = new System.Drawing.Size(60, 17);
             this.lnkAccout.TabIndex = 102;
@@ -190,7 +192,7 @@
             // 
             // txtSupplier
             // 
-            this.txtSupplier.Location = new System.Drawing.Point(313, 107);
+            this.txtSupplier.Location = new System.Drawing.Point(313, 146);
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(159, 21);
@@ -200,7 +202,7 @@
             // lnkSupplier
             // 
             this.lnkSupplier.AutoSize = true;
-            this.lnkSupplier.Location = new System.Drawing.Point(253, 111);
+            this.lnkSupplier.Location = new System.Drawing.Point(253, 150);
             this.lnkSupplier.Name = "lnkSupplier";
             this.lnkSupplier.Size = new System.Drawing.Size(53, 12);
             this.lnkSupplier.TabIndex = 8;
@@ -210,7 +212,7 @@
             // 
             // txtCategory
             // 
-            this.txtCategory.Location = new System.Drawing.Point(313, 43);
+            this.txtCategory.Location = new System.Drawing.Point(72, 45);
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(159, 21);
@@ -220,7 +222,7 @@
             // lnkCategory
             // 
             this.lnkCategory.AutoSize = true;
-            this.lnkCategory.Location = new System.Drawing.Point(253, 47);
+            this.lnkCategory.Location = new System.Drawing.Point(12, 49);
             this.lnkCategory.Name = "lnkCategory";
             this.lnkCategory.Size = new System.Drawing.Size(53, 12);
             this.lnkCategory.TabIndex = 1;
@@ -249,7 +251,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(72, 137);
+            this.txtMemo.Location = new System.Drawing.Point(72, 176);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(399, 21);
             this.txtMemo.TabIndex = 10;
@@ -257,7 +259,7 @@
             // txtAmount
             // 
             this.txtAmount.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtAmount.Location = new System.Drawing.Point(73, 43);
+            this.txtAmount.Location = new System.Drawing.Point(73, 77);
             this.txtAmount.MaxValue = new decimal(new int[] {
             -1,
             -1,
@@ -273,6 +275,7 @@
             this.txtAmount.Size = new System.Drawing.Size(159, 21);
             this.txtAmount.TabIndex = 3;
             this.txtAmount.Text = "0.00";
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // dtSheetDate
             // 
@@ -284,7 +287,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 140);
+            this.label5.Location = new System.Drawing.Point(38, 179);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 58;
@@ -302,7 +305,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 47);
+            this.label2.Location = new System.Drawing.Point(14, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 56;
@@ -540,12 +543,23 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
+            // lbl大写
+            // 
+            this.lbl大写.AutoSize = true;
+            this.lbl大写.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl大写.ForeColor = System.Drawing.Color.Blue;
+            this.lbl大写.Location = new System.Drawing.Point(254, 81);
+            this.lbl大写.Name = "lbl大写";
+            this.lbl大写.Size = new System.Drawing.Size(18, 12);
+            this.lbl大写.TabIndex = 121;
+            this.lbl大写.Text = "整";
+            // 
             // Frm管理费用明细
             // 
             this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(501, 251);
+            this.ClientSize = new System.Drawing.Size(501, 300);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Name = "Frm管理费用明细";
@@ -616,6 +630,7 @@
         private System.Windows.Forms.Label label3;
         private Controls.NullableDateTimePicker dtPaidDate;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl大写;
 
     }
 }
