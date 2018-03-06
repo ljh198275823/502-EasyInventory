@@ -147,6 +147,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             {
                 if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
                 AccountRecord cp = dataGridView1.Rows[e.RowIndex].Tag as AccountRecord;
+                if (cp == null) return;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
                     var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.SheetID).QueryObject;

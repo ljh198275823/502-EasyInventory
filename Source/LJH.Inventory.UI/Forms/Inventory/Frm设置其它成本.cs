@@ -84,7 +84,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定入库价格是否含税");
                 return false;
             }
-            if (txtSupplier.Tag == null)
+            if (txt成本类别.Text != CostItem.入库单价 && txtSupplier.Tag == null)
             {
                 MessageBox.Show("没有指定供应商");
                 return false;
@@ -95,7 +95,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnOk1_Click(object sender, EventArgs e)
         {
             if (!CheckInput()) return;
-            Cost = new CostItem() { Name = txt成本类别.Text, Price = txtPrice.DecimalValue, WithTax = rdWithTax.Checked, SupllierID = (txtSupplier.Tag as CompanyInfo).ID, Memo = txtMemo.Text };
+            Cost = new CostItem() { Name = txt成本类别.Text, Price = txtPrice.DecimalValue, WithTax = rdWithTax.Checked, SupllierID = txtSupplier.Tag != null ? (txtSupplier.Tag as CompanyInfo).ID : null, Memo = txtMemo.Text };
             this.DialogResult = DialogResult.OK;
         }
 

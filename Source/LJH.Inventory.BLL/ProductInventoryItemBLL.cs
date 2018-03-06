@@ -332,6 +332,10 @@ namespace LJH.Inventory.BLL
                 ProductInventoryItem pi = null;
                 if (info.CostID.HasValue) pi = GetByID(info.CostID.Value).QueryObject; //成本ID一般是对应的入库项的ID
                 if (pi == null) return new CommandResult(ResultCode.Fail, "没有找到入库项，设置成本失败");
+                if (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价)
+                {
+                    if (string.IsNullOrEmpty(ci.SupllierID)) ci.SupllierID = pi.Supplier;
+                }
 
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 var clone = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(pi.ID).QueryObject;

@@ -16,9 +16,9 @@ using LJH.Inventory.UI.Forms.Inventory;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
 {
-    public partial class FrmCustomerTaxView : Form
+    public partial class FrmSupplierTaxView : Form
     {
-        public FrmCustomerTaxView()
+        public FrmSupplierTaxView()
         {
             InitializeComponent();
         }
@@ -41,6 +41,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             var items = (new CustomerReceivableBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
             items = (from item in items orderby item.CreateDate ascending, item.SheetID ascending select item).ToList();
             ShowItemsOnGrid(items);
+            FilterRow(txtKeyword.Text);
         }
 
         private void ShowItemInGridViewRow(DataGridViewRow row, CustomerReceivable cr)
@@ -49,6 +50,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             row.Cells["colSheetID"].Value = cr.SheetID;
             var gg = cr.GetProperty("规格");
             if (!string.IsNullOrEmpty(gg)) row.Cells["colSheetID"].Value = gg;
+            row.Cells["col单价"].Value = cr.GetProperty("入库单价");
+            row.Cells["col重量"].Value = cr.GetProperty("重量");
             row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colAmount"].Value = cr.Amount.Trim();
@@ -78,6 +81,33 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 GridView.Rows[rowTotal].Cells["colNotpaid"].Value = items.Sum(item => (item as CustomerReceivable).Remain).Trim();
             }
             lblMSG.Text = string.Format("共 {0} 项", items != null ? items.Count : 0);
+        }
+
+        private void FilterRow(string key)
+        {
+            var items = new List<CustomerReceivable>();
+            for (int i = 0; i < GridView.Rows.Count - 1; i++)
+            {
+                GridView.Rows[i].Visible = ContainText(GridView.Rows[i], key);
+                if (GridView.Rows[i].Visible) items.Add(GridView.Rows[i].Tag as CustomerReceivable);
+            }
+            lblMSG.Text = string.Format("共 {0} 项", items.Count);
+            if (GridView.Rows.Count > 0)
+            {
+                GridView.Rows[GridView.Rows.Count - 1].Cells["colAmount"].Value = items.Sum(item => (item as CustomerReceivable).Amount).Trim();
+                GridView.Rows[GridView.Rows.Count - 1].Cells["colHaspaid"].Value = items.Sum(item => (item as CustomerReceivable).Haspaid).Trim();
+                GridView.Rows[GridView.Rows.Count - 1].Cells["colNotpaid"].Value = items.Sum(item => (item as CustomerReceivable).Remain).Trim();
+            }
+        }
+
+        private bool ContainText(DataGridViewRow row, string key)
+        {
+            if (string.IsNullOrEmpty(key)) return true;
+            foreach (DataGridViewCell cell in row.Cells)
+            {
+                if (cell.Visible && cell.Value != null && cell.Value.ToString().Contains(key)) return true;
+            }
+            return false;
         }
 
         private void ShowOperatorRights()
@@ -233,5 +263,10 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (chkSheetDate.Checked) FreshData();
         }
         #endregion
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            FilterRow(txtKeyword.Text);
+        }
     }
 }

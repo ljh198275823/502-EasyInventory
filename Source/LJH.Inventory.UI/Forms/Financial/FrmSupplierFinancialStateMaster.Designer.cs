@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.categoryTree = new LJH.Inventory.UI.Controls.SupplierTree(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -282,41 +282,53 @@
             // 
             // colReceivable
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colReceivable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colReceivable.DefaultCellStyle = dataGridViewCellStyle1;
             this.colReceivable.HeaderText = "应付账款";
+            this.colReceivable.MinimumWidth = 150;
             this.colReceivable.Name = "colReceivable";
             this.colReceivable.ReadOnly = true;
             this.colReceivable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colReceivable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colReceivable.Width = 150;
             // 
             // colPrepay
             // 
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colPrepay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colPrepay.DefaultCellStyle = dataGridViewCellStyle2;
             this.colPrepay.HeaderText = "未核销应付款";
+            this.colPrepay.MinimumWidth = 150;
             this.colPrepay.Name = "colPrepay";
             this.colPrepay.ReadOnly = true;
             this.colPrepay.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colPrepay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colPrepay.Width = 150;
             // 
             // colTax
             // 
-            dataGridViewCellStyle7.Format = "C2";
-            this.colTax.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colTax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle3.Format = "C2";
+            this.colTax.DefaultCellStyle = dataGridViewCellStyle3;
             this.colTax.HeaderText = "应开增值税额";
+            this.colTax.MinimumWidth = 150;
             this.colTax.Name = "colTax";
             this.colTax.ReadOnly = true;
+            this.colTax.Width = 150;
             // 
             // colTaxBill
             // 
-            dataGridViewCellStyle8.Format = "C2";
-            this.colTaxBill.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colTaxBill.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle4.Format = "C2";
+            this.colTaxBill.DefaultCellStyle = dataGridViewCellStyle4;
             this.colTaxBill.HeaderText = "已开增值税发票";
+            this.colTaxBill.MinimumWidth = 150;
             this.colTaxBill.Name = "colTaxBill";
             this.colTaxBill.ReadOnly = true;
+            this.colTaxBill.Width = 150;
             // 
             // colMemo
             // 

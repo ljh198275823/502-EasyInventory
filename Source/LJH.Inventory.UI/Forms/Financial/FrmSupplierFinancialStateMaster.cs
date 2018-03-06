@@ -127,7 +127,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTax")
                 {
-                    View.FrmCustomerTaxView frm = new View.FrmCustomerTaxView();
+                    View.FrmSupplierTaxView frm = new View.FrmSupplierTaxView();
                     frm.Customer = c;
                     frm.ReceivableType = CustomerReceivableType.SupplierTax;
                     frm.Text = string.Format("{0} 应开增值税明细", c.Name);

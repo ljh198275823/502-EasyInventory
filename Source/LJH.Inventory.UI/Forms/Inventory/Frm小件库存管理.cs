@@ -210,6 +210,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 CostItem ci = sr.GetCost(CostItem.结算单价);
                 if (ci != null) row.Cells["colPurchasePrice"].Value = ci.Price;
                 if (ci != null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
+                row.Cells["colPurchaseTax"].Tag = ci;
             }
             if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read))
             {
@@ -230,7 +231,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ci = sr.GetCost(CostItem.其它费用);
                 if (ci != null && ci.Price > 0) row.Cells["col其它费用"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.入库单价);
-                if (ci != null && ci.Price > 0) row.Cells["col合同单价"].Value = ci.Price;
+                if (ci != null && ci.Price > 0)
+                {
+                    row.Cells["col合同单价"].Value = ci.Price;
+                    if (row.Cells["colPurchaseTax"].Tag == null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
+                }
             }
             if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read) || Operator.Current.Permit(Permission.结算单价, PermissionActions.Read))
             {
