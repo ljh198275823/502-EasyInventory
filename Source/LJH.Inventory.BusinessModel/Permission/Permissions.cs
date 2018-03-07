@@ -106,7 +106,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 客户收款流水
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户收款流水")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销, Description = "客户收款流水")]
         CustomerPayment,
         /// <summary>
         /// 客户应收款
@@ -116,7 +116,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 客户增值税发票
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户增值税发票")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销, Description = "客户增值税发票")]
         CustomerTaxBill,
         /// <summary>
         /// 客户应开发票
@@ -131,7 +131,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 供应商付款流水
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "供应商付款流水")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销, Description = "供应商付款流水")]
         SupplierPayment,
         /// <summary>
         /// 客户其它应收款
@@ -141,7 +141,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 供应商增值税发票
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "供应商增值税发票")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销, Description = "供应商增值税发票")]
         SupplierTaxBill,
         /// <summary>
         /// 供应商应开发票

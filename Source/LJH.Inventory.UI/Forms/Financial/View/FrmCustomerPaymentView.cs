@@ -81,10 +81,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (PaymentType == CustomerPaymentType.客户收款)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+                mnu_Assign.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.核销);
             }
             else if (PaymentType == CustomerPaymentType.供应商付款)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
+                mnu_Assign.Enabled = Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.核销);
             }
             else
             {

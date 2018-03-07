@@ -68,6 +68,7 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         EditAttachment = 0x1000,
         导出 = 0x8000,
+        核销 = 0x10000,
     }
 }
         

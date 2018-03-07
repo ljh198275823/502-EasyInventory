@@ -230,7 +230,8 @@ namespace LJH.Inventory.UI.Forms.Financial
                 btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit) && (cp == null || string.IsNullOrEmpty(cp.AccountID) || Customer ==null);
                 AccountRecord ac = null;
                 if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审批) && !string.IsNullOrEmpty(cp.AccountID) && ac != null && ac.Remain > 0;
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审批) &&
+                                    !string.IsNullOrEmpty(cp.AccountID) && ac != null && ac.Remain > 0 && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.核销);
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.UndoApprove);
                 btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Nullify);
@@ -240,7 +241,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
                 AccountRecord ac = null;
                 if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审批) && ac != null && ac.Remain > 0;
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审批) && ac != null && ac.Remain > 0 && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.核销);
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.UndoApprove);
                 btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Nullify);
@@ -264,6 +265,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 mnu_AttachmentDelete.Enabled = mnu_AttachmentDelete.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.EditAttachment);
                 mnu_AttachmentOpen.Enabled = mnu_AttachmentOpen.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.ShowAttachment);
                 mnu_AttachmentSaveAs.Enabled = mnu_AttachmentSaveAs.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.ShowAttachment);
+                mnu_UndoAssign.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.核销);
             }
             else if (PaymentType == CustomerPaymentType.供应商付款)
             {
@@ -271,6 +273,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 mnu_AttachmentDelete.Enabled = mnu_AttachmentDelete.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.EditAttachment);
                 mnu_AttachmentOpen.Enabled = mnu_AttachmentOpen.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.ShowAttachment);
                 mnu_AttachmentSaveAs.Enabled = mnu_AttachmentSaveAs.Enabled && Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.ShowAttachment);
+                mnu_UndoAssign.Enabled = Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.核销);
             }
         }
         #endregion
