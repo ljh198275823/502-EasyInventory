@@ -230,6 +230,8 @@ namespace LJH.Inventory.BusinessModel
                 {
                     si.Memo = inventory.Memo;
                 }
+                var f = Items.FirstOrDefault(it => it.ProductID == si.ProductID && it.Price > 0);
+                if (f != null) si.Price = f.Price; //如果之前已经指定了这种产品的价格，就直接使用一样的价格。
                 Items.Add(si);
             }
         }

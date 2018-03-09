@@ -47,6 +47,14 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             StackOutRecord sor = item as StackOutRecord;
+            if (sor.Price == 0) //这里是用于解决之前送货单的一个BUG，就是出货的时候同一种产品，后面加的可能单价是0
+            {
+                var p = _AllSS[sor.SheetNo].FirstOrDefault(it => it.ProductID == sor.ProductID && it.Price > 0);
+                if (p != null)
+                {
+                    sor.Price = p.Price;
+                }
+            }
             row.Tag = sor;
             row.Cells["colDeliveryDate"].Value = sor.SheetDate.ToString("yyyy-MM-dd");
             row.Cells["colSheetNo"].Value = sor.SheetNo;
@@ -61,7 +69,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colWithTax"].Value = sor.WithTax;
             row.Cells["colCount"].Value = sor.Count;
             var totalCout = _AllSS[sor.SheetNo].Where(it => it.ProductID == sor.ProductID).Sum(it => it.Count);
-            var amount = totalCout == sor.Count ? sor.Amount : sor.Amount * sor.Count / totalCout;
+            var amount = sor.Weight.HasValue ? sor.Amount * sor.Count / totalCout : sor.Amount;
             _销售金额 += amount;
             if (totalCout == sor.Count)
             {
