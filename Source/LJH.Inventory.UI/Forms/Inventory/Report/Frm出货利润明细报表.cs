@@ -47,12 +47,20 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
         {
             StackOutRecord sor = item as StackOutRecord;
-            if (sor.Price == 0) //这里是用于解决之前送货单的一个BUG，就是出货的时候同一种产品，后面加的可能单价是0
+            if (sor.Price == 0) //统一价格
             {
                 var p = _AllSS[sor.SheetNo].FirstOrDefault(it => it.ProductID == sor.ProductID && it.Price > 0);
                 if (p != null)
                 {
                     sor.Price = p.Price;
+                }
+            }
+            if (sor.Weight == null || sor.Weight == 0) //统一总重量，
+            {
+                var p = _AllSS[sor.SheetNo].FirstOrDefault(it => it.ProductID == sor.ProductID && it.Weight > 0);
+                if (p != null)
+                {
+                    sor.Weight = p.Weight;
                 }
             }
             row.Tag = sor;
