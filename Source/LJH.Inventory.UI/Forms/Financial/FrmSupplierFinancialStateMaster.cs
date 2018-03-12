@@ -141,6 +141,13 @@ namespace LJH.Inventory.UI.Forms.Financial
                     frm.Text = string.Format("{0} 已开增值税发票明细", c.Name);
                     frm.ShowDialog();
                 }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colName")
+                {
+                    var frm = new LJH.Inventory.UI.Forms.Purchase.FrmSupplierDetail();
+                    frm.UpdatingItem = c;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowDialog();
+                }
                 //刷新数据
                 var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetSupplierState(c.ID).QueryObject;
                 if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);

@@ -90,7 +90,7 @@
             // 
             this.btnClose.Location = new System.Drawing.Point(387, 458);
             this.btnClose.Size = new System.Drawing.Size(107, 35);
-            this.btnClose.TabIndex = 21;
+            this.btnClose.TabIndex = 150;
             // 
             // btnOk
             // 
@@ -206,7 +206,7 @@
             this.txtMemo.Location = new System.Drawing.Point(102, 281);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(391, 21);
-            this.txtMemo.TabIndex = 12;
+            this.txtMemo.TabIndex = 16;
             // 
             // txtSerialNumber
             // 
@@ -245,7 +245,7 @@
             this.txtCategory.Name = "txtCategory";
             this.txtCategory.ReadOnly = true;
             this.txtCategory.Size = new System.Drawing.Size(145, 21);
-            this.txtCategory.TabIndex = 71;
+            this.txtCategory.TabIndex = 101;
             // 
             // txtSupplier
             // 
@@ -254,7 +254,7 @@
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.ReadOnly = true;
             this.txtSupplier.Size = new System.Drawing.Size(145, 21);
-            this.txtSupplier.TabIndex = 72;
+            this.txtSupplier.TabIndex = 102;
             this.txtSupplier.DoubleClick += new System.EventHandler(this.txtSupplier_DoubleClick);
             // 
             // txtWareHouse
@@ -264,7 +264,7 @@
             this.txtWareHouse.Name = "txtWareHouse";
             this.txtWareHouse.ReadOnly = true;
             this.txtWareHouse.Size = new System.Drawing.Size(145, 21);
-            this.txtWareHouse.TabIndex = 76;
+            this.txtWareHouse.TabIndex = 100;
             // 
             // lnkWareHouse
             // 
@@ -284,7 +284,7 @@
             this.cmbBrand.Name = "cmbBrand";
             this.cmbBrand.ReadOnly = true;
             this.cmbBrand.Size = new System.Drawing.Size(145, 21);
-            this.cmbBrand.TabIndex = 78;
+            this.cmbBrand.TabIndex = 103;
             // 
             // lnkBrand
             // 
@@ -305,7 +305,7 @@
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(145, 21);
-            this.txtCustomer.TabIndex = 82;
+            this.txtCustomer.TabIndex = 104;
             // 
             // lnkCustomer
             // 
@@ -395,7 +395,7 @@
             this.txtPurchasePrice.Name = "txtPurchasePrice";
             this.txtPurchasePrice.PointCount = 2;
             this.txtPurchasePrice.Size = new System.Drawing.Size(122, 21);
-            this.txtPurchasePrice.TabIndex = 98;
+            this.txtPurchasePrice.TabIndex = 17;
             this.txtPurchasePrice.Text = "0";
             // 
             // label9
@@ -415,7 +415,7 @@
             this.pnlTax.Location = new System.Drawing.Point(238, 17);
             this.pnlTax.Name = "pnlTax";
             this.pnlTax.Size = new System.Drawing.Size(145, 25);
-            this.pnlTax.TabIndex = 134;
+            this.pnlTax.TabIndex = 18;
             // 
             // rdWithTax_入库单价
             // 
@@ -454,7 +454,7 @@
             this.txtPosition.Location = new System.Drawing.Point(102, 249);
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.Size = new System.Drawing.Size(145, 21);
-            this.txtPosition.TabIndex = 137;
+            this.txtPosition.TabIndex = 14;
             // 
             // label8
             // 
@@ -489,7 +489,7 @@
             this.txtPurchaseID.Location = new System.Drawing.Point(346, 249);
             this.txtPurchaseID.Name = "txtPurchaseID";
             this.txtPurchaseID.Size = new System.Drawing.Size(145, 21);
-            this.txtPurchaseID.TabIndex = 143;
+            this.txtPurchaseID.TabIndex = 15;
             // 
             // btnOk1
             // 
@@ -518,7 +518,7 @@
             this.pnlCost.Location = new System.Drawing.Point(5, 307);
             this.pnlCost.Name = "pnlCost";
             this.pnlCost.Size = new System.Drawing.Size(488, 127);
-            this.pnlCost.TabIndex = 146;
+            this.pnlCost.TabIndex = 18;
             this.pnlCost.TabStop = false;
             // 
             // btn查看成本明细
@@ -526,7 +526,7 @@
             this.btn查看成本明细.Location = new System.Drawing.Point(397, 90);
             this.btn查看成本明细.Name = "btn查看成本明细";
             this.btn查看成本明细.Size = new System.Drawing.Size(85, 23);
-            this.btn查看成本明细.TabIndex = 158;
+            this.btn查看成本明细.TabIndex = 32;
             this.btn查看成本明细.Text = "查看成本明细";
             this.btn查看成本明细.UseVisualStyleBackColor = true;
             this.btn查看成本明细.Click += new System.EventHandler(this.btn查看成本明细_Click);
@@ -536,7 +536,7 @@
             this.btn设置其它成本.Location = new System.Drawing.Point(397, 57);
             this.btn设置其它成本.Name = "btn设置其它成本";
             this.btn设置其它成本.Size = new System.Drawing.Size(85, 23);
-            this.btn设置其它成本.TabIndex = 157;
+            this.btn设置其它成本.TabIndex = 31;
             this.btn设置其它成本.Text = "设置其它成本";
             this.btn设置其它成本.UseVisualStyleBackColor = true;
             this.btn设置其它成本.Click += new System.EventHandler(this.btn设置其它成本_Click);
@@ -546,7 +546,7 @@
             this.btn设置结算单价.Location = new System.Drawing.Point(397, 18);
             this.btn设置结算单价.Name = "btn设置结算单价";
             this.btn设置结算单价.Size = new System.Drawing.Size(85, 23);
-            this.btn设置结算单价.TabIndex = 156;
+            this.btn设置结算单价.TabIndex = 30;
             this.btn设置结算单价.Text = "设置结算单价";
             this.btn设置结算单价.UseVisualStyleBackColor = true;
             this.btn设置结算单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
@@ -566,7 +566,7 @@
             this.lnkSupplier_运费.Location = new System.Drawing.Point(26, 93);
             this.lnkSupplier_运费.Name = "lnkSupplier_运费";
             this.lnkSupplier_运费.Size = new System.Drawing.Size(65, 12);
-            this.lnkSupplier_运费.TabIndex = 154;
+            this.lnkSupplier_运费.TabIndex = 21;
             this.lnkSupplier_运费.TabStop = true;
             this.lnkSupplier_运费.Text = "运费供应商";
             this.lnkSupplier_运费.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSupplier_运费_LinkClicked);
@@ -579,7 +579,7 @@
             this.panel1.Location = new System.Drawing.Point(238, 56);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(145, 25);
-            this.panel1.TabIndex = 137;
+            this.panel1.TabIndex = 20;
             // 
             // rdWithTax_运费
             // 
@@ -629,7 +629,7 @@
             this.txt运费.Name = "txt运费";
             this.txt运费.PointCount = 2;
             this.txt运费.Size = new System.Drawing.Size(122, 21);
-            this.txt运费.TabIndex = 136;
+            this.txt运费.TabIndex = 19;
             this.txt运费.Text = "0";
             // 
             // btn查看来源卷
@@ -650,7 +650,7 @@
             this.txtCarPlate.Location = new System.Drawing.Point(100, 217);
             this.txtCarPlate.Name = "txtCarPlate";
             this.txtCarPlate.Size = new System.Drawing.Size(145, 20);
-            this.txtCarPlate.TabIndex = 142;
+            this.txtCarPlate.TabIndex = 12;
             // 
             // txtMaterial
             // 
@@ -658,7 +658,7 @@
             this.txtMaterial.Location = new System.Drawing.Point(344, 217);
             this.txtMaterial.Name = "txtMaterial";
             this.txtMaterial.Size = new System.Drawing.Size(145, 20);
-            this.txtMaterial.TabIndex = 141;
+            this.txtMaterial.TabIndex = 13;
             // 
             // cmbSpecification
             // 
@@ -666,7 +666,7 @@
             this.cmbSpecification.Name = "cmbSpecification";
             this.cmbSpecification.Size = new System.Drawing.Size(164, 26);
             this.cmbSpecification.Specification = "*";
-            this.cmbSpecification.TabIndex = 85;
+            this.cmbSpecification.TabIndex = 2;
             // 
             // FrmSteelRollDetail
             // 

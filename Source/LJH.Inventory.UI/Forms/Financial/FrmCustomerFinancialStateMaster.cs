@@ -210,6 +210,13 @@ namespace LJH.Inventory.UI.Forms.Financial
                     frm.Customer = c;
                     frm.ShowDialog();
                 }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colName")
+                {
+                    var frm = new LJH.Inventory.UI.Forms.Sale.FrmCustomerDetail();
+                    frm.UpdatingItem = c;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowDialog();
+                }
                 //刷新数据
                 var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(c.ID).QueryObject;
                 if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);

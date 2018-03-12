@@ -502,8 +502,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 if (UserSettings.Current.ForbidWhenOverCreditLimit)
                 {
-                    MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，不能再发货。");
-                    return false;
+                    if (Operator.Current.Role != null && Operator.Current.Role.IsAdmin)
+                    {
+                        if (MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，是否继续发货?", "询问", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，不能再发货。");
+                        return false;
+                    }
                 }
                 else if (UserSettings.Current.ReminderWhenOverCreditLimit)
                 {

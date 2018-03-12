@@ -66,7 +66,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -367,6 +367,8 @@
             this.colName.MinimumWidth = 180;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
+            this.colName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colName.Width = 180;
             // 
             // colCategory
@@ -548,7 +550,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_设置税务归档码;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewLinkColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileID;
