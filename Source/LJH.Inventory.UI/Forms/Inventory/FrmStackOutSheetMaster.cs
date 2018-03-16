@@ -25,6 +25,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private List<StackOutSheet> _Sheets = null;
         private List<WareHouse> _Warehouses = null;
         private Dictionary<string, CompanyInfo> _AllCustomers = new Dictionary<string, CompanyInfo>();
+        private List<CustomerType> _AllCustomerTypes = null;
 
         private List<AccountRecord> _AllPayments = null;
         private Dictionary<string, List<CustomerReceivable>> _Receivables = new Dictionary<string, List<CustomerReceivable>>();
@@ -54,14 +55,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private List<object> FilterData()
         {
-            List<StackOutSheet> items = _Sheets;
+            List<StackOutSheet> items = _Sheets.ToList();
             if (items != null && items.Count > 0)
             {
-                if (!string.IsNullOrEmpty(txtCustomer.Text))
+                if (!string.IsNullOrEmpty(txtCustomer.Text) || txt客户类别.Tag != null)
                 {
-                    if (_AllCustomers != null)
+                    if (_AllCustomers != null && _AllCustomers.Count > 0)
                     {
-                        List<CompanyInfo> pcs = _AllCustomers.Where(it => it.Value.Name.Contains(txtCustomer.Text)).Select(it => it.Value).ToList();
+                        List<CompanyInfo> pcs = _AllCustomers.Values.ToList();
+                        if (!string.IsNullOrEmpty(txtCustomer.Text)) pcs = pcs.Where(it => it.Name.Contains(txtCustomer.Text)).ToList();
+                        if (txt客户类别.Tag != null)
+                        {
+                            var ct = txt客户类别.Tag as CustomerType;
+                            pcs = pcs.Where(it => it.CategoryID == ct.ID).ToList();
+                        }
                         if (pcs != null && pcs.Count > 0)
                         {
                             items = items.Where(it => pcs.Exists(c => c.ID == it.CustomerID)).ToList();
@@ -129,6 +136,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
+            _AllCustomerTypes = new CustomerTypeBLL(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
             _AllCustomers.Clear();
             var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetAllCustomers().QueryObjects;
             if (cs != null && cs.Count > 0)
@@ -185,7 +193,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colSheetDate"].Value = sheet.SheetDate.ToString("yyyy年MM月dd日");
             row.Cells["colSheetNo"].Value = sheet.ID;
             CompanyInfo customer = _AllCustomers.ContainsKey(sheet.CustomerID) ? _AllCustomers[sheet.CustomerID] : null;
-            row.Cells["colCustomer"].Value = customer != null ? customer.Name : string.Empty;
+            if (customer != null)
+            {
+                row.Cells["colCustomer"].Value = customer.Name;
+                var ct = _AllCustomerTypes.SingleOrDefault(it => it.ID == customer.CategoryID);
+                row.Cells["col客户类别"].Value = ct != null ? ct.Name : null;
+            }
             row.Cells["colFileID"].Value = customer != null ? customer.FileID : null;
             row.Cells["colWithTax"].Value = sheet.WithTax;
             row.Cells["colTotalWeight"].Value = sheet.TotalWeight;
@@ -198,6 +211,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colDriver"].Value = sheet.Driver;
             row.Cells["colDriverCall"].Value = sheet.DriverCall;
             row.Cells["colCarPlate"].Value = sheet.CarPlate;
+            row.Cells["col业务"].Value = sheet.SalesPerson;
             row.Cells["colMemo"].Value = sheet.Memo;
             if (_Fresh) //全部刷新
             {
@@ -296,5 +310,24 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (chkSheetDate.Checked) cMnu_Fresh.PerformClick();
         }
         #endregion
+
+        private void lnk客户类别_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frm = new Sale.FrmCustomerTypeMaster();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var ct = frm.SelectedItem as CustomerType;
+                txt客户类别.Text = ct.Name;
+                txt客户类别.Tag = ct;
+            }
+        }
+
+        private void txt客户类别_DoubleClick(object sender, EventArgs e)
+        {
+            txt客户类别.Tag = null;
+            txt客户类别.Text = string.Empty;
+        }
     }
 }
