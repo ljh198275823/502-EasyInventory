@@ -247,7 +247,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 CostItem ci = sr.GetCost(CostItem.运费);
                 if (ci != null && ci.Price > 0) row.Cells["col运费"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.短途运费1);
-                if (ci != null && ci.Price > 0) row.Cells["col短途运费"].Value = ci.Price;
+                if (ci != null && ci.Price > 0) row.Cells["col短途运费1"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.短途运费2);
                 if (ci != null && ci.Price > 0) row.Cells["col短途运费2"].Value = ci.Price;
                 ci = sr.GetCost(CostItem.加工费);
@@ -263,7 +263,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ci = sr.GetCost(CostItem.入库单价);
                 if (ci != null && ci.Price > 0)
                 {
-                    row.Cells["col合同单价"].Value = ci.Price;
+                    row.Cells["col入库单价"].Value = ci.Price;
                     if (row.Cells["colPurchaseTax"].Tag == null) row.Cells["colPurchaseTax"].Value = ci.WithTax;
                 }
             }

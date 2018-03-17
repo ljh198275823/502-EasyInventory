@@ -231,6 +231,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "内部转账记录报表")]
         内部转账记录报表,
+        /// <summary>
+        ///出货成本明细报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "出货成本明细报表")]
+        出货成本明细报表,
         #endregion
     }
 }

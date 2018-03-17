@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,6 +41,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CreateInventory = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,10 +113,15 @@
             this.colSourceRoll = new System.Windows.Forms.DataGridViewLinkColumn();
             this.col含税出单位成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col不含税出单位成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col入库单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col结算单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPurchaseTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col短途运费1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col短途运费2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col开平费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col加工费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col分条费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col吊装费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col其它费用 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -674,10 +684,15 @@
             this.colSourceRoll,
             this.col含税出单位成本,
             this.col不含税出单位成本,
-            this.colPurchasePrice,
+            this.col入库单价,
+            this.col结算单价,
             this.colPurchaseTax,
             this.col运费,
+            this.col短途运费1,
+            this.col短途运费2,
+            this.col开平费,
             this.col加工费,
+            this.col分条费,
             this.col吊装费,
             this.col其它费用,
             this.colMaterial,
@@ -692,8 +707,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 93);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1341, 483);
@@ -833,13 +848,21 @@
             this.col不含税出单位成本.Name = "col不含税出单位成本";
             this.col不含税出单位成本.ReadOnly = true;
             // 
-            // colPurchasePrice
+            // col入库单价
             // 
             dataGridViewCellStyle7.Format = "C2";
-            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colPurchasePrice.HeaderText = "入库吨价";
-            this.colPurchasePrice.Name = "colPurchasePrice";
-            this.colPurchasePrice.ReadOnly = true;
+            this.col入库单价.DefaultCellStyle = dataGridViewCellStyle7;
+            this.col入库单价.HeaderText = "入库吨价";
+            this.col入库单价.Name = "col入库单价";
+            this.col入库单价.ReadOnly = true;
+            // 
+            // col结算单价
+            // 
+            dataGridViewCellStyle8.Format = "C2";
+            this.col结算单价.DefaultCellStyle = dataGridViewCellStyle8;
+            this.col结算单价.HeaderText = "结算单价";
+            this.col结算单价.Name = "col结算单价";
+            this.col结算单价.ReadOnly = true;
             // 
             // colPurchaseTax
             // 
@@ -850,26 +873,58 @@
             // 
             // col运费
             // 
-            dataGridViewCellStyle8.Format = "C2";
-            this.col运费.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Format = "C2";
+            this.col运费.DefaultCellStyle = dataGridViewCellStyle9;
             this.col运费.HeaderText = "运费";
             this.col运费.Name = "col运费";
             this.col运费.ReadOnly = true;
             this.col运费.Width = 80;
             // 
+            // col短途运费1
+            // 
+            dataGridViewCellStyle10.Format = "C2";
+            this.col短途运费1.DefaultCellStyle = dataGridViewCellStyle10;
+            this.col短途运费1.HeaderText = "短途运费1";
+            this.col短途运费1.Name = "col短途运费1";
+            this.col短途运费1.ReadOnly = true;
+            // 
+            // col短途运费2
+            // 
+            dataGridViewCellStyle11.Format = "C2";
+            this.col短途运费2.DefaultCellStyle = dataGridViewCellStyle11;
+            this.col短途运费2.HeaderText = "短途运费2";
+            this.col短途运费2.Name = "col短途运费2";
+            this.col短途运费2.ReadOnly = true;
+            // 
+            // col开平费
+            // 
+            dataGridViewCellStyle12.Format = "C2";
+            this.col开平费.DefaultCellStyle = dataGridViewCellStyle12;
+            this.col开平费.HeaderText = "开平费";
+            this.col开平费.Name = "col开平费";
+            this.col开平费.ReadOnly = true;
+            // 
             // col加工费
             // 
-            dataGridViewCellStyle9.Format = "C2";
-            this.col加工费.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle13.Format = "C2";
+            this.col加工费.DefaultCellStyle = dataGridViewCellStyle13;
             this.col加工费.HeaderText = "加工费";
             this.col加工费.Name = "col加工费";
             this.col加工费.ReadOnly = true;
             this.col加工费.Width = 80;
             // 
+            // col分条费
+            // 
+            dataGridViewCellStyle14.Format = "C2";
+            this.col分条费.DefaultCellStyle = dataGridViewCellStyle14;
+            this.col分条费.HeaderText = "分条费";
+            this.col分条费.Name = "col分条费";
+            this.col分条费.ReadOnly = true;
+            // 
             // col吊装费
             // 
-            dataGridViewCellStyle10.Format = "C2";
-            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle15.Format = "C2";
+            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle15;
             this.col吊装费.HeaderText = "吊装费";
             this.col吊装费.Name = "col吊装费";
             this.col吊装费.ReadOnly = true;
@@ -877,8 +932,8 @@
             // 
             // col其它费用
             // 
-            dataGridViewCellStyle11.Format = "C2";
-            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle16.Format = "C2";
+            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle16;
             this.col其它费用.HeaderText = "其它费用";
             this.col其它费用.Name = "col其它费用";
             this.col其它费用.ReadOnly = true;
@@ -1022,10 +1077,15 @@
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
         private System.Windows.Forms.DataGridViewTextBoxColumn col含税出单位成本;
         private System.Windows.Forms.DataGridViewTextBoxColumn col不含税出单位成本;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPurchasePrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col入库单价;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col结算单价;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colPurchaseTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn col运费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col短途运费1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col短途运费2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col开平费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col加工费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col分条费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col吊装费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col其它费用;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaterial;

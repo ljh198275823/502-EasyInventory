@@ -62,7 +62,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return (from p in items
                         orderby p.Product.CategoryID ascending,
                                 SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
-                                SpecificationHelper.GetWritten克重(p.Product.Specification) ascending,
+                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
                                 p.AddDate descending
                         select (object)p).ToList();
             }
@@ -308,6 +308,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     cell.Value = pi.Position;
                 }
             }
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "colPurchaseID")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as ProductInventoryItem;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string purchaseID = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UpdatePurchaseID(pi, purchaseID);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.PurchaseID;
+                }
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -415,7 +427,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
-        private void mnu_设置结算单价_Click(object sender, EventArgs e)
+        private void mnu_设置入库单价_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
             Frm设置结算单价 frm = new Frm设置结算单价();
@@ -473,6 +485,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 frm.ProductInventoryItem = sr;
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();
+                ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
             }
         }
 
@@ -484,6 +497,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (sr.CostID.HasValue)
                 {
                     DocumentSearchCondition con = new DocumentSearchCondition() { DocumentID = sr.CostID.Value.ToString() };
+                    con.Operations = new List<string>();
+                    if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read)) con.Operations.Add("修改成本");
+                    if (Operator.Current.Permit(Permission.结算单价, PermissionActions.Read)) con.Operations.Add("设置结算单价");
+                    if (con.Operations.Count == 0) return;
                     Frm修改记录日志明细 frm = new Frm修改记录日志明细();
                     frm.SearchCondition = con;
                     frm.StartPosition = FormStartPosition.CenterParent;

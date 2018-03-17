@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,6 +42,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
@@ -71,34 +74,6 @@
             this.chkStackIn = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginalCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col含税出单位成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col不含税出单位成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeliverySheet = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.colPurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPurchaseTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.col运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col吊装费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col加工费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col其它费用 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPurchaseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,6 +90,37 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.colAddDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWareHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOriginalWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOriginalCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col含税出单位成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col不含税出单位成本 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeliverySheet = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.col合同单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPurchaseTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col短途运费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col短途运费2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col吊装费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col加工费 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col其它费用 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCarplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPurchaseID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlStates.SuspendLayout();
@@ -451,9 +457,12 @@
             this.colManufacture,
             this.colState,
             this.colDeliverySheet,
+            this.col合同单价,
             this.colPurchasePrice,
             this.colPurchaseTax,
             this.col运费,
+            this.col短途运费,
+            this.col短途运费2,
             this.col吊装费,
             this.col加工费,
             this.col其它费用,
@@ -468,8 +477,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 86);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 20;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1362, 446);
@@ -477,6 +486,123 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.mnu_Add,
+            this.toolStripSeparator3,
+            this.mnu_设置结算单价,
+            this.mnu_设置其它成本,
+            this.mnu_查看成本明细,
+            this.mnu_查看价格改动记录,
+            this.toolStripSeparator1,
+            this.更换仓库ToolStripMenuItem,
+            this.mnu_Check,
+            this.mnu_Nullify,
+            this.toolStripSeparator4,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export,
+            this.mnu_Import});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 286);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(172, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // mnu_Add
+            // 
+            this.mnu_Add.Name = "mnu_Add";
+            this.mnu_Add.Size = new System.Drawing.Size(172, 22);
+            this.mnu_Add.Text = "新建入库";
+            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
+            // 
+            // mnu_设置结算单价
+            // 
+            this.mnu_设置结算单价.Name = "mnu_设置结算单价";
+            this.mnu_设置结算单价.Size = new System.Drawing.Size(172, 22);
+            this.mnu_设置结算单价.Text = "设置结算价格";
+            this.mnu_设置结算单价.Click += new System.EventHandler(this.mnu_设置入库单价_Click);
+            // 
+            // mnu_设置其它成本
+            // 
+            this.mnu_设置其它成本.Name = "mnu_设置其它成本";
+            this.mnu_设置其它成本.Size = new System.Drawing.Size(172, 22);
+            this.mnu_设置其它成本.Text = "设置其它成本";
+            this.mnu_设置其它成本.Click += new System.EventHandler(this.mnu_设置其它成本_Click);
+            // 
+            // mnu_查看成本明细
+            // 
+            this.mnu_查看成本明细.Name = "mnu_查看成本明细";
+            this.mnu_查看成本明细.Size = new System.Drawing.Size(172, 22);
+            this.mnu_查看成本明细.Text = "查看成本明细";
+            this.mnu_查看成本明细.Click += new System.EventHandler(this.mnu_查看成本明细_Click);
+            // 
+            // mnu_查看价格改动记录
+            // 
+            this.mnu_查看价格改动记录.Name = "mnu_查看价格改动记录";
+            this.mnu_查看价格改动记录.Size = new System.Drawing.Size(172, 22);
+            this.mnu_查看价格改动记录.Text = "查看价格改动记录";
+            this.mnu_查看价格改动记录.Click += new System.EventHandler(this.查看价格改动记录ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(169, 6);
+            // 
+            // 更换仓库ToolStripMenuItem
+            // 
+            this.更换仓库ToolStripMenuItem.Name = "更换仓库ToolStripMenuItem";
+            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.更换仓库ToolStripMenuItem.Text = "更换仓库";
+            this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
+            // 
+            // mnu_Check
+            // 
+            this.mnu_Check.Name = "mnu_Check";
+            this.mnu_Check.Size = new System.Drawing.Size(172, 22);
+            this.mnu_Check.Text = "盘点";
+            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
+            // 
+            // mnu_Nullify
+            // 
+            this.mnu_Nullify.Name = "mnu_Nullify";
+            this.mnu_Nullify.Size = new System.Drawing.Size(172, 22);
+            this.mnu_Nullify.Text = "作废";
+            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(172, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(172, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
+            // mnu_Import
+            // 
+            this.mnu_Import.Name = "mnu_Import";
+            this.mnu_Import.Size = new System.Drawing.Size(172, 22);
+            this.mnu_Import.Text = "导入...";
+            this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
             // colAddDate
             // 
@@ -491,7 +617,7 @@
             this.colWareHouse.HeaderText = "仓库";
             this.colWareHouse.Name = "colWareHouse";
             this.colWareHouse.ReadOnly = true;
-            this.colWareHouse.Width = 51;
+            this.colWareHouse.Width = 54;
             // 
             // colCategory
             // 
@@ -499,7 +625,7 @@
             this.colCategory.HeaderText = "类别";
             this.colCategory.Name = "colCategory";
             this.colCategory.ReadOnly = true;
-            this.colCategory.Width = 51;
+            this.colCategory.Width = 54;
             // 
             // colSpecification
             // 
@@ -509,7 +635,7 @@
             // 
             // colOriginalWeight
             // 
-            dataGridViewCellStyle1.Format = "N4";
+            dataGridViewCellStyle1.Format = "N3";
             dataGridViewCellStyle1.NullValue = null;
             this.colOriginalWeight.DefaultCellStyle = dataGridViewCellStyle1;
             this.colOriginalWeight.HeaderText = "入库重量";
@@ -541,7 +667,7 @@
             // 
             // colWeight
             // 
-            dataGridViewCellStyle4.Format = "N4";
+            dataGridViewCellStyle4.Format = "N3";
             dataGridViewCellStyle4.NullValue = null;
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle4;
             this.colWeight.HeaderText = "重量";
@@ -616,11 +742,19 @@
             this.colDeliverySheet.ReadOnly = true;
             this.colDeliverySheet.Width = 42;
             // 
-            // colPurchasePrice
+            // col合同单价
             // 
             dataGridViewCellStyle8.Format = "C2";
-            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colPurchasePrice.HeaderText = "入库单价";
+            this.col合同单价.DefaultCellStyle = dataGridViewCellStyle8;
+            this.col合同单价.HeaderText = "合同单价";
+            this.col合同单价.Name = "col合同单价";
+            this.col合同单价.ReadOnly = true;
+            // 
+            // colPurchasePrice
+            // 
+            dataGridViewCellStyle9.Format = "C2";
+            this.colPurchasePrice.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colPurchasePrice.HeaderText = "结算单价";
             this.colPurchasePrice.Name = "colPurchasePrice";
             this.colPurchasePrice.ReadOnly = true;
             // 
@@ -633,17 +767,35 @@
             // 
             // col运费
             // 
-            dataGridViewCellStyle9.Format = "C2";
-            this.col运费.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Format = "C2";
+            this.col运费.DefaultCellStyle = dataGridViewCellStyle10;
             this.col运费.HeaderText = "运费";
             this.col运费.Name = "col运费";
             this.col运费.ReadOnly = true;
             this.col运费.Width = 80;
             // 
+            // col短途运费
+            // 
+            dataGridViewCellStyle11.Format = "C2";
+            this.col短途运费.DefaultCellStyle = dataGridViewCellStyle11;
+            this.col短途运费.HeaderText = "短途运费1";
+            this.col短途运费.Name = "col短途运费";
+            this.col短途运费.ReadOnly = true;
+            this.col短途运费.Width = 80;
+            // 
+            // col短途运费2
+            // 
+            dataGridViewCellStyle12.Format = "C2";
+            this.col短途运费2.DefaultCellStyle = dataGridViewCellStyle12;
+            this.col短途运费2.HeaderText = "短途运费2";
+            this.col短途运费2.Name = "col短途运费2";
+            this.col短途运费2.ReadOnly = true;
+            this.col短途运费2.Width = 80;
+            // 
             // col吊装费
             // 
-            dataGridViewCellStyle10.Format = "C2";
-            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle13.Format = "C2";
+            this.col吊装费.DefaultCellStyle = dataGridViewCellStyle13;
             this.col吊装费.HeaderText = "吊装费";
             this.col吊装费.Name = "col吊装费";
             this.col吊装费.ReadOnly = true;
@@ -651,8 +803,8 @@
             // 
             // col加工费
             // 
-            dataGridViewCellStyle11.Format = "C2";
-            this.col加工费.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle14.Format = "C2";
+            this.col加工费.DefaultCellStyle = dataGridViewCellStyle14;
             this.col加工费.HeaderText = "加工费";
             this.col加工费.Name = "col加工费";
             this.col加工费.ReadOnly = true;
@@ -660,8 +812,8 @@
             // 
             // col其它费用
             // 
-            dataGridViewCellStyle12.Format = "C2";
-            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle15.Format = "C2";
+            this.col其它费用.DefaultCellStyle = dataGridViewCellStyle15;
             this.col其它费用.HeaderText = "其它费用";
             this.col其它费用.Name = "col其它费用";
             this.col其它费用.ReadOnly = true;
@@ -688,7 +840,6 @@
             // 
             this.colPurchaseID.HeaderText = "合同号";
             this.colPurchaseID.Name = "colPurchaseID";
-            this.colPurchaseID.ReadOnly = true;
             // 
             // colOperator
             // 
@@ -701,123 +852,6 @@
             // 
             this.colMemo.HeaderText = "备注";
             this.colMemo.Name = "colMemo";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.mnu_Add,
-            this.toolStripSeparator3,
-            this.mnu_设置结算单价,
-            this.mnu_设置其它成本,
-            this.mnu_查看成本明细,
-            this.mnu_查看价格改动记录,
-            this.toolStripSeparator1,
-            this.更换仓库ToolStripMenuItem,
-            this.mnu_Check,
-            this.mnu_Nullify,
-            this.toolStripSeparator4,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export,
-            this.mnu_Import});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(172, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // mnu_Add
-            // 
-            this.mnu_Add.Name = "mnu_Add";
-            this.mnu_Add.Size = new System.Drawing.Size(172, 22);
-            this.mnu_Add.Text = "新建入库";
-            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
-            // 
-            // mnu_设置结算单价
-            // 
-            this.mnu_设置结算单价.Name = "mnu_设置结算单价";
-            this.mnu_设置结算单价.Size = new System.Drawing.Size(172, 22);
-            this.mnu_设置结算单价.Text = "设置结算单价";
-            this.mnu_设置结算单价.Click += new System.EventHandler(this.mnu_设置结算单价_Click);
-            // 
-            // mnu_设置其它成本
-            // 
-            this.mnu_设置其它成本.Name = "mnu_设置其它成本";
-            this.mnu_设置其它成本.Size = new System.Drawing.Size(172, 22);
-            this.mnu_设置其它成本.Text = "设置其它成本";
-            this.mnu_设置其它成本.Click += new System.EventHandler(this.mnu_设置其它成本_Click);
-            // 
-            // mnu_查看成本明细
-            // 
-            this.mnu_查看成本明细.Name = "mnu_查看成本明细";
-            this.mnu_查看成本明细.Size = new System.Drawing.Size(172, 22);
-            this.mnu_查看成本明细.Text = "查看成本明细";
-            this.mnu_查看成本明细.Click += new System.EventHandler(this.mnu_查看成本明细_Click);
-            // 
-            // mnu_查看价格改动记录
-            // 
-            this.mnu_查看价格改动记录.Name = "mnu_查看价格改动记录";
-            this.mnu_查看价格改动记录.Size = new System.Drawing.Size(172, 22);
-            this.mnu_查看价格改动记录.Text = "查看价格改动记录";
-            this.mnu_查看价格改动记录.Click += new System.EventHandler(this.查看价格改动记录ToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(169, 6);
-            // 
-            // 更换仓库ToolStripMenuItem
-            // 
-            this.更换仓库ToolStripMenuItem.Name = "更换仓库ToolStripMenuItem";
-            this.更换仓库ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.更换仓库ToolStripMenuItem.Text = "更换仓库";
-            this.更换仓库ToolStripMenuItem.Click += new System.EventHandler(this.更换仓库ToolStripMenuItem_Click);
-            // 
-            // mnu_Check
-            // 
-            this.mnu_Check.Name = "mnu_Check";
-            this.mnu_Check.Size = new System.Drawing.Size(172, 22);
-            this.mnu_Check.Text = "盘点";
-            this.mnu_Check.Click += new System.EventHandler(this.mnu_Check_Click);
-            // 
-            // mnu_Nullify
-            // 
-            this.mnu_Nullify.Name = "mnu_Nullify";
-            this.mnu_Nullify.Size = new System.Drawing.Size(172, 22);
-            this.mnu_Nullify.Text = "作废";
-            this.mnu_Nullify.Click += new System.EventHandler(this.mnu_Nullify_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(172, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(172, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
-            // mnu_Import
-            // 
-            this.mnu_Import.Name = "mnu_Import";
-            this.mnu_Import.Size = new System.Drawing.Size(172, 22);
-            this.mnu_Import.Text = "导入...";
-            this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
             // Frm其它产品库存
             // 
@@ -906,9 +940,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colManufacture;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewLinkColumn colDeliverySheet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col合同单价;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPurchasePrice;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colPurchaseTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn col运费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col短途运费;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col短途运费2;
         private System.Windows.Forms.DataGridViewTextBoxColumn col吊装费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col加工费;
         private System.Windows.Forms.DataGridViewTextBoxColumn col其它费用;
