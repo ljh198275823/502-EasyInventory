@@ -482,6 +482,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (sr.CostID.HasValue)
                 {
                     DocumentSearchCondition con = new DocumentSearchCondition() { DocumentID = sr.CostID.Value.ToString() };
+                    con.Operations = new List<string>();
+                    if (Operator.Current.Permit(Permission.其它成本, PermissionActions.Read)) con.Operations.Add("修改成本");
+                    if (Operator.Current.Permit(Permission.结算单价, PermissionActions.Read)) con.Operations.Add("设置结算单价");
+                    if (con.Operations.Count == 0) return;
                     View.Frm修改记录日志明细 frm = new View.Frm修改记录日志明细();
                     frm.SearchCondition = con;
                     frm.StartPosition = FormStartPosition.CenterParent;

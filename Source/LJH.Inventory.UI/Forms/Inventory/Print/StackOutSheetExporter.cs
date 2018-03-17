@@ -95,6 +95,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 CompanyInfo customer = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(info.CustomerID).QueryObject;
                 if (customer != null) cell.SetCellValue(customer.Name);
             }
+            else if (express == "[客户电话]")
+            {
+                CompanyInfo customer = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(info.CustomerID).QueryObject;
+                if (customer != null) cell.SetCellValue(customer.TelPhone);
+            }
             else if (express == "[联系人]") cell.SetCellValue(info.Linker);
             else if (express == "[联系人电话]") cell.SetCellValue(info.LinkerCall);
             else if (express == "[送货司机]") cell.SetCellValue(info.Driver);
@@ -141,7 +146,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             }
             else if (express == "[制单]")
             {
-                var con = new DocumentSearchCondition() { DocumentType = info.DocumentType,DocumentID=info.ID  };
+                var con = new DocumentSearchCondition() { DocumentType = info.DocumentType, DocumentID = info.ID };
                 var items = new DocumentOperationBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
                 var item = items.SingleOrDefault(it => it.Operation == SheetOperationDescription.GetDescription(SheetOperation.Create));
                 cell.SetCellValue(item != null ? item.Operator : string.Empty);
@@ -156,7 +161,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             for (int i = row.FirstCellNum; i < row.LastCellNum; i++)
             {
                 ICell cell = row.GetCell(i);
-                templates.Add(i, cell.StringCellValue);
+                if(cell!=null) templates.Add(i, cell.StringCellValue);
             }
             for (int i = 0; i < items.Length; i++)
             {
@@ -191,7 +196,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             else if (express == "[产品宽度]")
             {
                 var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
-                cell.SetCellValue(SpecificationHelper.GetWrittenWidth(p.Specification).ToString ());
+                cell.SetCellValue(SpecificationHelper.GetWrittenWidth(p.Specification).ToString());
             }
             else if (express == "[产品克重]")
             {
@@ -200,7 +205,9 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             }
             else if (express == "[产品长度]")
             {
-                cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F3") : string.Empty);
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                if (p.Model == ProductModel.开平) cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F0") : string.Empty);
+                else cell.SetCellValue(string.Empty);
             }
             else if (express == "[产品数量]")
             {
@@ -208,7 +215,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             }
             else if (express == "[产品重量]")
             {
-                cell.SetCellValue(item.TotalWeight.HasValue ? item.TotalWeight.Value.ToString("F3") : string.Empty);
+                cell.SetCellValue(item.TotalWeight.HasValue ? item.TotalWeight.Value.ToString("F4") : string.Empty);
             }
             else if (express == "[产品类型]")
             {
@@ -229,6 +236,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             {
                 cell.SetCellValue(item.Memo);
             }
+            else if (express == "[克]") cell.SetCellValue("G");
+            else if (express == "[*]") cell.SetCellValue("*");
         }
     }
 }

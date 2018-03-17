@@ -62,7 +62,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return (from p in items
                         orderby p.Product.CategoryID ascending,
                                 SpecificationHelper.GetWrittenWidth(p.Product.Specification) ascending,
-                                SpecificationHelper.GetWrittenThick(p.Product.Specification) ascending,
+                                SpecificationHelper.GetWritten克重(p.Product.Specification) ascending,
                                 p.AddDate descending
                         select (object)p).ToList();
             }

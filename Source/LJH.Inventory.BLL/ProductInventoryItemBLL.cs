@@ -236,6 +236,15 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
+        public CommandResult UpdatePurchaseID(ProductInventoryItem pi, string purchaseID)
+        {
+            var clone = pi.Clone();
+            clone.PurchaseID = purchaseID;
+            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful) pi.Position = purchaseID;
+            return ret;
+        }
+
         public List<string> GetAllMaterails()
         {
             return ProviderFactory.Create<IMaterialProvider>(RepoUri).GetItems();
