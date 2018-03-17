@@ -15,9 +15,9 @@ using LJH.GeneralLibrary.Core.UI;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class FrmExpenditureRecordMaster : FrmMasterBase
+    public partial class Frm管理费用 : FrmMasterBase
     {
-        public FrmExpenditureRecordMaster()
+        public Frm管理费用()
         {
             InitializeComponent();
         }

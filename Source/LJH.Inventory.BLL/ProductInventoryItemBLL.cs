@@ -34,7 +34,14 @@ namespace LJH.Inventory.BLL
                 foreach (var it in items)
                 {
                     var temp = it.GetProperty(_成本类型);
-                    if (temp == ci.Name || (string.IsNullOrEmpty(temp) && ci.Name == CostItem.入库单价)) //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
+                    if (temp == CostItem.结算单价 && ci.Name == CostItem.入库单价) return; //如果已经设置了结算成本了，再设置入库成本的时候不再改变应收
+                    if (temp == ci.Name)
+                    {
+                        original = it;
+                        break;
+                    }
+                    else if ((string.IsNullOrEmpty(temp) || temp == CostItem.入库单价 || temp == CostItem.结算单价) &&
+                             (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价))     //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
                     {
                         original = it;
                         break;
@@ -90,7 +97,14 @@ namespace LJH.Inventory.BLL
                 foreach (var it in items)
                 {
                     var temp = it.GetProperty(_成本类型);
-                    if (temp == ci.Name || (string.IsNullOrEmpty(temp) && ci.Name == CostItem.入库单价)) //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
+                    if (temp == CostItem.结算单价 && ci.Name == CostItem.入库单价) return; //如果已经设置了结算成本了，再设置入库成本的时候不再改变应收
+                    if (temp == ci.Name)
+                    {
+                        original = it;
+                        break;
+                    }
+                    else if ((string.IsNullOrEmpty(temp) || temp == CostItem.入库单价 || temp == CostItem.结算单价) &&
+                             (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价))     //由于之前的应付款没有指定成本类型，所以这个字段为空时，指的是入库单价产生的应收
                     {
                         original = it;
                         break;
@@ -118,7 +132,8 @@ namespace LJH.Inventory.BLL
             cr.SetProperty("重量", sheet.OriginalWeight.HasValue ? sheet.OriginalWeight.Value.ToString("F3") : null);
             if (!string.IsNullOrEmpty(sheet.Customer)) cr.SetProperty("购货单位", sheet.Customer);
             if (!string.IsNullOrEmpty(carPlate)) cr.SetProperty("车皮号", carPlate);
-            decimal amount = 总额.HasValue ? 总额.Value : sheet.CalTax(ci);
+            decimal amount = 0;
+            if (ci.WithTax) amount = 总额.HasValue ? 总额.Value : sheet.CalTax(ci);
             if (original != null && original.Haspaid > amount) new AccountRecordAssignBLL(RepoUri).UndoAssign(cr, cr.Haspaid - amount); //这里用cr,如果用original后面更新的时候会更新不到
             cr.Amount = amount;
             if (original == null)
@@ -305,16 +320,25 @@ namespace LJH.Inventory.BLL
                 ProductInventoryItem pi = null;
                 if (info.CostID.HasValue) pi = GetByID(info.CostID.Value).QueryObject; //成本ID一般是对应的入库项的ID
                 if (pi == null) return new CommandResult(ResultCode.Fail, "没有找到入库项，设置成本失败");
+                if (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价)
+                {
+                    if (string.IsNullOrEmpty(ci.SupllierID)) ci.SupllierID = pi.Supplier;
+                }
 
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 var clone = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(pi.ID).QueryObject;
+                if (总额.HasValue)
+                {
+                    if (pi.OriginalWeight > 0) ci.Price = Math.Round(ci.Price / pi.OriginalWeight.Value, 2); //如果是总额，则换算成吨价
+                    else if (pi.OriginalCount > 0) ci.Price = Math.Round(ci.Price / pi.OriginalCount.Value, 2); //如果是总额，则换算成单个数量的价格
+                }
                 string memo = string.Empty;
                 var oci = pi.GetCost(ci.Name);
                 memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
                 clone.SetCost(ci);
-                if (ci.Name == CostItem.入库单价 && clone.Supplier != ci.SupllierID)  //2017-11-28 修改入库单价时，如果同时修改了
+                if (ci.Name == CostItem.结算单价 && clone.Supplier != ci.SupllierID)  //2017-11-28 修改入库单价时，如果同时修改了
                 {
-                    clone.Supplier = ci.SupllierID; 
+                    clone.Supplier = ci.SupllierID;
                     var pcon = new ProductInventoryItemSearchCondition() { CostID = clone.CostID };
                     var pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(pcon).QueryObjects;
                     if (pis != null && pis.Count > 0)
@@ -332,14 +356,13 @@ namespace LJH.Inventory.BLL
                 }
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
 
-                AddOperationLog(pi.ID.ToString(), pi.DocumentType, "修改成本", unitWork, DateTime.Now, opt, logID, memo);
-
+                AddOperationLog(pi.ID.ToString(), pi.DocumentType, ci.Name == CostItem.结算单价 ? "设置结算单价" : "修改成本", unitWork, DateTime.Now, opt, logID, memo);
                 if (!string.IsNullOrEmpty(ci.SupllierID) && pi.SourceID == null && pi.SourceRoll == null)
                 {
                     var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(ci.SupllierID).QueryObject;
                     if (s != null)
                     {
-                        var dt = ci.Name == CostItem.入库单价 ? new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) : DateTime.Now;
+                        var dt = (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价) ? new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) : DateTime.Now;
                         SaveReceivable(clone, ci, dt, 备注, unitWork, 总额, carPlate);
                         SaveTax(clone, ci, dt, 备注, unitWork, 总额, carPlate);
                     }

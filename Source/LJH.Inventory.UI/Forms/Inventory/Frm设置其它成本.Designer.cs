@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Inventory
 {
-    partial class FrmChangeCosts
+    partial class Frm设置其它成本
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmChangeCosts));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm设置其它成本));
             this.rdWithTax = new System.Windows.Forms.RadioButton();
             this.rdWithoutTax = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
@@ -125,12 +125,6 @@
             // 
             this.txt成本类别.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txt成本类别.FormattingEnabled = true;
-            this.txt成本类别.Items.AddRange(new object[] {
-            "",
-            "运费",
-            "加工费",
-            "吊装费",
-            "其它费用"});
             this.txt成本类别.Location = new System.Drawing.Point(83, 22);
             this.txt成本类别.Name = "txt成本类别";
             this.txt成本类别.Size = new System.Drawing.Size(121, 20);
@@ -214,7 +208,7 @@
             this.label13.TabIndex = 172;
             this.label13.Text = "车皮号";
             // 
-            // FrmChangeCosts
+            // Frm设置其它成本
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -236,7 +230,7 @@
             this.Controls.Add(this.label9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmChangeCosts";
+            this.Name = "Frm设置其它成本";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "设置其它成本";
             this.Load += new System.EventHandler(this.FrmChangeCosts_Load);

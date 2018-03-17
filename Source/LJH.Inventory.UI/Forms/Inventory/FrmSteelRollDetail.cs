@@ -147,7 +147,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Init();
             txtCarPlate.Init();
             txtMaterial.Init();
-            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.设置成本);
+            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
             if (!pnlCost.Visible) this.Height -= pnlCost.Height;
         }
 

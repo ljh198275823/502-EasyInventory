@@ -125,6 +125,7 @@ namespace LJH.Inventory.BLL
             depart.WareHouseID = w.ID;
             depart.Customer = customer;
             depart.Count = count;
+            if (depart.Real克重 == null) depart.Real克重 = SpecificationHelper.GetWritten克重(info.Product.Specification); //以小件入库的，如果拆包，实际克重改成规格标注的克重
             depart.ProductID = p.ID;
             depart.Product = p;
             if (uw.HasValue)

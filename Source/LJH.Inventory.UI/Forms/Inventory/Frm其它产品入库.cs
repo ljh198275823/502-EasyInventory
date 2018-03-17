@@ -71,7 +71,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Tag = WareHouse;
             }
             btnOk.Enabled = Operator.Current.Permit(Permission.其它产品, PermissionActions.Edit);
-            pnlCost.Visible = Operator.Current.Permit(Permission.其它产品, PermissionActions.设置成本);
+            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
             if (!pnlCost.Visible) this.Height -= pnlCost.Height;
         }
 

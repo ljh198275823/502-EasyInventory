@@ -16,9 +16,9 @@ using LJH.Inventory.UI.Forms.General;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class FrmChangeCosts : Form
+    public partial class Frm设置其它成本 : Form
     {
-        public FrmChangeCosts()
+        public Frm设置其它成本()
         {
             InitializeComponent();
         }
@@ -40,6 +40,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void FrmChangeCosts_Load(object sender, EventArgs e)
         {
             txtCarPlate.Init();
+            txt成本类别.Items.Clear();
+            txt成本类别.Items.Add(string.Empty);
+            txt成本类别.Items.Add(CostItem.入库单价);
+            txt成本类别.Items.Add(CostItem.运费);
+            txt成本类别.Items.Add(CostItem.短途运费1);
+            txt成本类别.Items.Add(CostItem.短途运费2);
+            txt成本类别.Items.Add(CostItem.开平费);
+            txt成本类别.Items.Add(CostItem.分条费);
+            txt成本类别.Items.Add(CostItem.加工费);
+            txt成本类别.Items.Add(CostItem.吊装费);
+            txt成本类别.Items.Add(CostItem.其它费用);
+            btnOk1.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
         }
 
         private void lnkSupplier_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -72,7 +84,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("没有指定入库价格是否含税");
                 return false;
             }
-            if (txtSupplier.Tag == null)
+            if (txt成本类别.Text != CostItem.入库单价 && txtSupplier.Tag == null)
             {
                 MessageBox.Show("没有指定供应商");
                 return false;
@@ -83,7 +95,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnOk1_Click(object sender, EventArgs e)
         {
             if (!CheckInput()) return;
-            Cost = new CostItem() { Name = txt成本类别.Text, Price = txtPrice.DecimalValue, WithTax = rdWithTax.Checked, SupllierID = (txtSupplier.Tag as CompanyInfo).ID };
+            Cost = new CostItem() { Name = txt成本类别.Text, Price = txtPrice.DecimalValue, WithTax = rdWithTax.Checked, SupllierID = txtSupplier.Tag != null ? (txtSupplier.Tag as CompanyInfo).ID : null, Memo = txtMemo.Text };
             this.DialogResult = DialogResult.OK;
         }
 

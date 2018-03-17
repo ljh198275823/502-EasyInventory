@@ -103,7 +103,7 @@
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_设置入库单价 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_设置结算单价 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_设置其它成本 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_查看成本明细 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_查看价格改动记录 = new System.Windows.Forms.ToolStripMenuItem();
@@ -708,7 +708,7 @@
             this.cMnu_Fresh,
             this.mnu_Add,
             this.toolStripSeparator3,
-            this.mnu_设置入库单价,
+            this.mnu_设置结算单价,
             this.mnu_设置其它成本,
             this.mnu_查看成本明细,
             this.mnu_查看价格改动记录,
@@ -721,7 +721,7 @@
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 286);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
             // 
             // cMnu_Fresh
             // 
@@ -741,12 +741,12 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
             // 
-            // mnu_设置入库单价
+            // mnu_设置结算单价
             // 
-            this.mnu_设置入库单价.Name = "mnu_设置入库单价";
-            this.mnu_设置入库单价.Size = new System.Drawing.Size(172, 22);
-            this.mnu_设置入库单价.Text = "设置入库价格";
-            this.mnu_设置入库单价.Click += new System.EventHandler(this.mnu_设置入库单价_Click);
+            this.mnu_设置结算单价.Name = "mnu_设置结算单价";
+            this.mnu_设置结算单价.Size = new System.Drawing.Size(172, 22);
+            this.mnu_设置结算单价.Text = "设置结算单价";
+            this.mnu_设置结算单价.Click += new System.EventHandler(this.mnu_设置结算单价_Click);
             // 
             // mnu_设置其它成本
             // 
@@ -882,7 +882,7 @@
         internal System.Windows.Forms.CheckBox chk在库;
         private System.Windows.Forms.Label label15;
         private GeneralLibrary.WinformControl.DBCTextBox txtPurchaseID;
-        private System.Windows.Forms.ToolStripMenuItem mnu_设置入库单价;
+        private System.Windows.Forms.ToolStripMenuItem mnu_设置结算单价;
         private System.Windows.Forms.ToolStripMenuItem mnu_设置其它成本;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnu_查看价格改动记录;

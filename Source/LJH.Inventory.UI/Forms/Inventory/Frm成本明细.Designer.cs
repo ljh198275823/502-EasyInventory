@@ -30,10 +30,12 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GridView = new System.Windows.Forms.DataGridView();
+            this.btn设置其它成本 = new System.Windows.Forms.Button();
+            this.btn设置结算单价 = new System.Windows.Forms.Button();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,22 +44,46 @@
             this.GridView.AllowUserToAddRows = false;
             this.GridView.AllowUserToDeleteRows = false;
             this.GridView.AllowUserToResizeRows = false;
+            this.GridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GridView.BackgroundColor = System.Drawing.Color.White;
             this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
             this.colPrice,
             this.colWithTax,
-            this.Column1});
-            this.GridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridView.Location = new System.Drawing.Point(0, 0);
+            this.colMemo});
+            this.GridView.Location = new System.Drawing.Point(0, 66);
             this.GridView.Name = "GridView";
             this.GridView.ReadOnly = true;
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(422, 305);
+            this.GridView.Size = new System.Drawing.Size(573, 239);
             this.GridView.TabIndex = 23;
+            // 
+            // btn设置其它成本
+            // 
+            this.btn设置其它成本.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn设置其它成本.Location = new System.Drawing.Point(469, 14);
+            this.btn设置其它成本.Name = "btn设置其它成本";
+            this.btn设置其它成本.Size = new System.Drawing.Size(92, 37);
+            this.btn设置其它成本.TabIndex = 159;
+            this.btn设置其它成本.Text = "设置其它成本";
+            this.btn设置其它成本.UseVisualStyleBackColor = true;
+            this.btn设置其它成本.Click += new System.EventHandler(this.btn设置其它成本_Click);
+            // 
+            // btn设置结算单价
+            // 
+            this.btn设置结算单价.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn设置结算单价.Location = new System.Drawing.Point(353, 14);
+            this.btn设置结算单价.Name = "btn设置结算单价";
+            this.btn设置结算单价.Size = new System.Drawing.Size(92, 37);
+            this.btn设置结算单价.TabIndex = 158;
+            this.btn设置结算单价.Text = "设置结算单价";
+            this.btn设置结算单价.UseVisualStyleBackColor = true;
+            this.btn设置结算单价.Click += new System.EventHandler(this.btn设置入库单价_Click);
             // 
             // colName
             // 
@@ -82,24 +108,28 @@
             this.colWithTax.ReadOnly = true;
             this.colWithTax.Width = 60;
             // 
-            // Column1
+            // colMemo
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.ReadOnly = true;
+            this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Frm成本明细
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 327);
+            this.ClientSize = new System.Drawing.Size(573, 327);
+            this.Controls.Add(this.btn设置其它成本);
+            this.Controls.Add(this.btn设置结算单价);
             this.Controls.Add(this.GridView);
             this.Name = "Frm成本明细";
             this.Text = "成本明细";
             this.Controls.SetChildIndex(this.GridView, 0);
+            this.Controls.SetChildIndex(this.btn设置结算单价, 0);
+            this.Controls.SetChildIndex(this.btn设置其它成本, 0);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -109,9 +139,11 @@
         #endregion
 
         protected System.Windows.Forms.DataGridView GridView;
+        private System.Windows.Forms.Button btn设置其它成本;
+        private System.Windows.Forms.Button btn设置结算单价;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

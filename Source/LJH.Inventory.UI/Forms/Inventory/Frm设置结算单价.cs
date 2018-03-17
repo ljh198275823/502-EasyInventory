@@ -10,17 +10,17 @@ using LJH.Inventory.BusinessModel;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {
-    public partial class Frm设置单价 : Form
+    public partial class Frm设置结算单价 : Form
     {
-        public Frm设置单价()
+        public Frm设置结算单价()
         {
             InitializeComponent();
         }
 
-        public decimal 结算单价
+        public decimal 单价
         {
-            get { return txt结算单价.DecimalValue; }
-            set { txt结算单价.DecimalValue = value; }
+            get { return txt入库单价.DecimalValue; }
+            set { txt入库单价.DecimalValue = value; }
         }
 
         public bool WithTax
@@ -49,7 +49,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (txt结算单价.DecimalValue < 0)
+            if (txt入库单价.DecimalValue < 0)
             {
                 MessageBox.Show("单价不能小于零");
                 return;
@@ -83,6 +83,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             txtSupplier.Tag = null;
             txtSupplier.Text = string.Empty;
+        }
+
+        private void Frm设置结算单价_Load(object sender, EventArgs e)
+        {
+            btnOk.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Edit);
         }
     }
 }

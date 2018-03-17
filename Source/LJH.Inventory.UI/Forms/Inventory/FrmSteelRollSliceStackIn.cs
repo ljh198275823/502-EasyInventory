@@ -82,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Text = WareHouse.Name;
                 txtWareHouse.Tag = WareHouse;
             }
-            pnlCost.Visible = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.设置成本);
+            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
             if (!pnlCost.Visible) this.Height -= pnlCost.Height;
             btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);
         }
@@ -92,6 +92,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Specification = product.Specification;
             txtCategory.Text = product.Category.Name;
             txtCategory.Tag = product.Category;
+            txtProductName.Text = product.Name;
             txtLength.DecimalValue = product.Length.HasValue ? product.Length.Value : 0;
         }
 
@@ -187,6 +188,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             txtWareHouse.Tag = ws;
             txtCategory.Text = item.Product.Category.Name;
             txtCategory.Tag = item.Product.Category;
+            txtProductName.Text = item.Product.Name;
             cmbSpecification.Specification = item.Product.Specification;
             if (item.Product.Length.HasValue) txtLength.DecimalValue = item.Product.Length.Value;
             txtCount.DecimalValue = item.OriginalCount.HasValue ? item.OriginalCount.Value : item.Count;
