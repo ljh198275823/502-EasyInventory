@@ -139,7 +139,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                         }
                         else
                         {
-                            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                            Frm收付款流水明细 frm = new Frm收付款流水明细();
                             frm.IsAdding = false;
                             frm.UpdatingItem = sheet;
                             frm.PaymentType = sheet.ClassID;

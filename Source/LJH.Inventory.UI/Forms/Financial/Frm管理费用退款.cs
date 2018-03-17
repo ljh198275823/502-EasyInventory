@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
-using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
-using LJH.GeneralLibrary.Core.UI;
 using LJH.Inventory.UI.Forms.Purchase;
-using LJH.Inventory.UI.Forms.General;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class Frm管理费用明细 : FrmSheetDetailBase
+    public partial class Frm管理费用退款 : FrmSheetDetailBase
     {
-        public Frm管理费用明细()
+        public Frm管理费用退款()
         {
             InitializeComponent();
         }
@@ -41,29 +34,20 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("没有指定费用类别");
                 return false;
             }
+            if (dtPaidDate.IsNull)
+            {
+                MessageBox.Show("没有填写到款日期");
+                dtPaidDate.Focus();
+                return false;
+            }
+            if (txtAccount.Tag == null)
+            {
+                MessageBox.Show("没有指定退款账号");
+                return false;
+            }
             if (txtAccount.Tag != null && (txtAccount.Tag as Account).Class == AccountType.无效)
             {
                 MessageBox.Show("账号是无效账号,请先将账号设置成有效的账号!");
-                return false;
-            }
-            if (txtAccount.Tag != null)
-            {
-                decimal amount = new AccountBLL(AppSettings.Current.ConnStr).GetRemain((txtAccount.Tag as Account).ID);
-                if (amount < txtAmount.DecimalValue)
-                {
-                    MessageBox.Show("此账号余额不足");
-                    return false;
-                }
-                if (dtPaidDate.IsNull)
-                {
-                    MessageBox.Show("没有填写到款日期");
-                    dtPaidDate.Focus();
-                    return false;
-                }
-            }
-            if (txtSupplier.Tag == null && txtAccount.Tag == null)
-            {
-                MessageBox.Show("没有指定付款客户");
                 return false;
             }
             if (string.IsNullOrEmpty(txt申请人.Text))
@@ -81,12 +65,6 @@ namespace LJH.Inventory.UI.Forms.Financial
             txtAccount.Tag = Account;
             if (IsForView) toolStrip1.Enabled = false;
             this.dtPaidDate.IsNull = true;
-            if (!string.IsNullOrEmpty(UserSettings.Current.默认公司费用客户))
-            {
-                var sp = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(UserSettings.Current.默认公司费用客户).QueryObject;
-                txtSupplier.Text = sp != null ? sp.Name : null;
-                txtSupplier.Tag = sp;
-            }
         }
 
         protected override void ItemShowing()
@@ -146,15 +124,15 @@ namespace LJH.Inventory.UI.Forms.Financial
             {
                 info = UpdatingItem as CustomerPayment;
             }
-            info.ClassID = CustomerPaymentType.管理费用;
+            info.ClassID = CustomerPaymentType.管理费用退款;
             info.Amount = txtAmount.DecimalValue;
             info.SheetDate = dtSheetDate.Value;
             info.SetProperty("费用类别", txtCategory.Text);
             if (txtAccount.Tag != null) info.AccountID = (txtAccount.Tag as Account).ID;
             else info.AccountID = string.Empty;// 账号不能为NULL，所以这里设置成空字符吧
             if (txtSupplier.Tag != null) info.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
-            info.SetProperty("到款日期", dtPaidDate.Value.ToString("yyyy-MM-dd"));
             info.SetProperty("申请人", txt申请人.Text);
+            info.SetProperty("到款日期", dtPaidDate.Value.ToString("yyyy-MM-dd"));
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -293,7 +271,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
-            lbl大写.Text = LJH.GeneralLibrary.RMBHelper.NumGetStr((double)txtAmount.DecimalValue);
+            lbl大写.Text = RMBHelper.NumGetStr((double)txtAmount.DecimalValue);
         }
     }
 }

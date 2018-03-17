@@ -16,20 +16,12 @@ using LJH.Inventory.UI.Forms.Inventory;
 
 namespace LJH.Inventory.UI.Forms.Financial.View
 {
-    public partial class FrmSupplierReceivableView : Form
+    public partial class FrmSupplierTaxView : Form
     {
-        public FrmSupplierReceivableView()
+        public FrmSupplierTaxView()
         {
             InitializeComponent();
         }
-
-        #region 私有方法
-        private int DaysBetween(DateTime endDt, DateTime beginDt)
-        {
-            TimeSpan ts1 = new TimeSpan(endDt.Date.Ticks - beginDt.Date.Ticks);
-            return (int)ts1.TotalDays;
-        }
-        #endregion
 
         #region 公共属性
         public CompanyInfo Customer { get; set; }
@@ -37,7 +29,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         public CustomerReceivableType ReceivableType { get; set; }
         #endregion
 
-        #region 重写基类方法
+        #region 私有方法
         private void FreshData()
         {
             var con = new CustomerReceivableSearchCondition();
@@ -56,11 +48,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             row.Tag = cr;
             row.Cells["colSheetID"].Value = cr.SheetID;
-            if (cr.ClassID == CustomerReceivableType.SupplierReceivable)
-            {
-                var gg = cr.GetProperty("规格");
-                if (!string.IsNullOrEmpty(gg)) row.Cells["colSheetID"].Value = gg;
-            }
+            var gg = cr.GetProperty("规格");
+            if (!string.IsNullOrEmpty(gg)) row.Cells["colSheetID"].Value = gg;
             row.Cells["col单价"].Value = cr.GetProperty("入库单价");
             row.Cells["col重量"].Value = cr.GetProperty("重量");
             row.Cells["colOrderID"].Value = cr.OrderID;
@@ -70,13 +59,8 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (cr.Remain != 0)
             {
                 row.Cells["colNotpaid"].Value = cr.Remain.Trim();
-                int days = DaysBetween(DateTime.Today, cr.CreateDate);
-                row.Cells["colHowold"].Value = days >= 0 ? string.Format("{0}天", days) : string.Empty;
             }
-            row.Cells["col申请人"].Value = cr.GetProperty("申请人");
             row.Cells["col购货单位"].Value = cr.GetProperty("购货单位");
-            row.Cells["col类别"].Value = cr.GetProperty("费用类别");
-            row.Cells["col车皮号"].Value = cr.GetProperty("车皮号");
             row.Cells["colMemo"].Value = cr.Memo;
         }
 
@@ -128,13 +112,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         private void ShowOperatorRights()
         {
-            if (ReceivableType == CustomerReceivableType.CustomerReceivable)
+            if (ReceivableType == CustomerReceivableType.CustomerTax)
             {
-                mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerReceivable, PermissionActions.Edit);
+                mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerTax, PermissionActions.Edit);
             }
-            else if (ReceivableType == CustomerReceivableType.SupplierReceivable)
+            else if (ReceivableType == CustomerReceivableType.SupplierTax)
             {
-                mnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierReceivable, PermissionActions.Edit);
+                mnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierTax, PermissionActions.Edit);
             }
             else
             {
@@ -144,7 +128,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         #endregion
 
         #region 事件处理程序
-        private void FrmCustomerReceivableView_Load(object sender, EventArgs e)
+        private void FrmCustomerTaxView_Load(object sender, EventArgs e)
         {
             ShowOperatorRights();
             ucDateTimeInterval1.Init();
@@ -157,7 +141,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             FreshData();
         }
 
-        private void mnu_Add_Click(object sender, EventArgs e)
+        private void mnu_AddTax_Click(object sender, EventArgs e)
         {
             CompanyInfo customer = Customer;
             Frm其它应收明细 frm = new Frm其它应收明细();
@@ -176,11 +160,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (GridView.Rows[e.RowIndex].Tag == null) return;
+                var cell = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (cell.Value == null) return;
                 CustomerReceivable cr = GridView.Rows[e.RowIndex].Tag as CustomerReceivable;
+                if (cr == null) return;
                 if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
-                    if (cr.ClassID == CustomerReceivableType.CustomerReceivable)
+                    if (ReceivableType == CustomerReceivableType.CustomerTax)
                     {
                         var sheet = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
                         if (sheet != null)
@@ -190,10 +176,21 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             frm.IsForView = true;
                             frm.UpdatingItem = sheet;
                             frm.ShowDialog();
-                            return;
+                        }
+                        else
+                        {
+                            var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                            if (osheet != null)
+                            {
+                                Frm其它应收明细 frm = new Frm其它应收明细();
+                                frm.UpdatingItem = osheet;
+                                frm.ReceivableType = osheet.ClassID;
+                                frm.ShowDialog();
+                                FreshData();
+                            }
                         }
                     }
-                    else if (cr.ClassID == CustomerReceivableType.SupplierReceivable)
+                    else if (ReceivableType == CustomerReceivableType.SupplierTax)
                     {
                         Guid gid;
                         if (Guid.TryParse(cr.SheetID, out gid))
@@ -224,34 +221,17 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                                 }
                             }
                         }
-                    }
-                    var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
-                    if (osheet != null)
-                    {
-                        Frm其它应收明细 frm = new Frm其它应收明细();
-                        frm.ReceivableType = osheet.ClassID;
-                        frm.UpdatingItem = osheet;
-                        frm.ShowDialog();
-                        FreshData();
-                    }
-                    else
-                    {
-                        var cp = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
-                        if (cp != null && (cp.ClassID == CustomerPaymentType.供应商退款 || cp.ClassID == CustomerPaymentType.客户退款))
+                        else
                         {
-                            Frm退款 frm = new Frm退款();
-                            frm.IsAdding = false;
-                            frm.UpdatingItem = cp;
-                            frm.ShowDialog();
-                            FreshData();
-                        }
-                        else if (cp != null && cp.ClassID == CustomerPaymentType.管理费用)
-                        {
-                            Frm管理费用明细 frm = new Frm管理费用明细();
-                            frm.IsAdding = false;
-                            frm.UpdatingItem = cp;
-                            frm.ShowDialog();
-                            FreshData();
+                            var osheet = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr).GetByID(cr.SheetID).QueryObject;
+                            if (osheet != null)
+                            {
+                                Frm其它应收明细 frm = new Frm其它应收明细();
+                                frm.ReceivableType = osheet.ClassID;
+                                frm.UpdatingItem = osheet;
+                                frm.ShowDialog();
+                                FreshData();
+                            }
                         }
                     }
                 }

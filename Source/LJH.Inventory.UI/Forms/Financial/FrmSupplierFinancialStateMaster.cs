@@ -12,6 +12,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.UI.Forms.Financial;
 using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
@@ -88,6 +89,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["colReceivable"].Value = cs.Recievables;
             row.Cells["colTax"].Value = cs.Tax;
             row.Cells["colTaxBill"].Value = cs.TaxBill;
+            row.Cells["colMemo"].Value = cs.Customer.GetProperty("财务备注");
         }
         #endregion
 
@@ -125,7 +127,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "colTax")
                 {
-                    View.FrmCustomerTaxView frm = new View.FrmCustomerTaxView();
+                    View.FrmSupplierTaxView frm = new View.FrmSupplierTaxView();
                     frm.Customer = c;
                     frm.ReceivableType = CustomerReceivableType.SupplierTax;
                     frm.Text = string.Format("{0} 应开增值税明细", c.Name);
@@ -139,6 +141,13 @@ namespace LJH.Inventory.UI.Forms.Financial
                     frm.Text = string.Format("{0} 已开增值税发票明细", c.Name);
                     frm.ShowDialog();
                 }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colName")
+                {
+                    var frm = new LJH.Inventory.UI.Forms.Purchase.FrmSupplierDetail();
+                    frm.UpdatingItem = c;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowDialog();
+                }
                 //刷新数据
                 var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetSupplierState(c.ID).QueryObject;
                 if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);
@@ -150,7 +159,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                Frm收付款流水明细 frm = new Frm收付款流水明细();
                 frm.Customer = customer;
                 frm.PaymentType = CustomerPaymentType.供应商付款;
                 frm.IsAdding = true;
@@ -216,6 +225,23 @@ namespace LJH.Inventory.UI.Forms.Financial
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.Customer = cs.Customer;
                 frm.ShowDialog();
+            }
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "colMemo")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as CustomerFinancialState;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string memo = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new CompanyBLL(AppSettings.Current.ConnStr).设置财务备注(pi.Customer, memo);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.Customer.GetProperty("财务备注");
+                }
             }
         }
     }

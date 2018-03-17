@@ -198,7 +198,7 @@
             // colWeight
             // 
             this.colWeight.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle3.Format = "N4";
+            dataGridViewCellStyle3.Format = "N3";
             dataGridViewCellStyle3.NullValue = null;
             this.colWeight.DefaultCellStyle = dataGridViewCellStyle3;
             this.colWeight.HeaderText = "重量";

@@ -170,7 +170,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             else
                             {
                                 CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(cr.SheetID ).QueryObject;
-                                if (cp != null && cp.ClassID == CustomerPaymentType.公司管理费用)
+                                if (cp != null && cp.ClassID == CustomerPaymentType.管理费用)
                                 {
                                     Frm管理费用明细 frm = new Frm管理费用明细();
                                     frm.IsAdding = false;
@@ -197,7 +197,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     {
                         if (cp.ClassID == CustomerPaymentType.客户收款 || cp.ClassID == CustomerPaymentType.供应商付款)
                         {
-                            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                            Frm收付款流水明细 frm = new Frm收付款流水明细();
                             frm.IsAdding = false;
                             frm.UpdatingItem = cp;
                             frm.PaymentType = cp.ClassID;
@@ -211,7 +211,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                             frm.TaxType = cp.ClassID;
                             frm.ShowDialog();
                         }
-                        else if (cp.ClassID ==CustomerPaymentType .公司管理费用)
+                        else if (cp.ClassID ==CustomerPaymentType .管理费用)
                         {
                             Frm管理费用明细 frm = new Frm管理费用明细();
                             frm.IsAdding = false;

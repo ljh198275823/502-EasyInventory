@@ -47,6 +47,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Cells["col到款账号"].Value = ac != null ? ac.Name : cp.到款账号;
             if (!string.IsNullOrEmpty(cp.付款单位) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.付款单位);
             row.Cells["col付款单位"].Value = ac != null ? ac.Name : cp.付款单位;
+            row.Cells["colMemo"].Value = cp.Memo;
         }
 
         protected override List<object> GetDataSource()
@@ -208,7 +209,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                         var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
                         if (sheet != null && sheet.ClassID == CustomerPaymentType.客户收款)
                         {
-                            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                            Frm收付款流水明细 frm = new Frm收付款流水明细();
                             frm.IsAdding = false;
                             frm.UpdatingItem = sheet;
                             frm.PaymentType = CustomerPaymentType.客户收款;

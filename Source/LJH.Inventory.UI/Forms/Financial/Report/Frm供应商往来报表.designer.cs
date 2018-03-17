@@ -172,7 +172,7 @@
             // 
             // col重量
             // 
-            dataGridViewCellStyle2.Format = "N4";
+            dataGridViewCellStyle2.Format = "N3";
             this.col重量.DefaultCellStyle = dataGridViewCellStyle2;
             this.col重量.HeaderText = "重量";
             this.col重量.Name = "col重量";

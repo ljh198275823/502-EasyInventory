@@ -87,8 +87,8 @@ namespace LJH.Inventory.BusinessModel
         [DataMember]
         public string 默认厂家 { get; set; }
 
-        [DataMember ]
-        public string  默认公司费用客户{get;set;}
+        [DataMember]
+        public string 默认公司费用客户 { get; set; }
 
         /// <summary>
         /// 获取或设置计算开平厚度时是否以真实小件数量(包括盘点数量）为准（否则以开平数量为准)
@@ -106,6 +106,9 @@ namespace LJH.Inventory.BusinessModel
 
         [DataMember]
         public decimal 国税系数 { get; set; }
+
+        [DataMember]
+        public bool 按客户类别设置归档码 { get; set; }
         #endregion
 
         #region 本公司信息

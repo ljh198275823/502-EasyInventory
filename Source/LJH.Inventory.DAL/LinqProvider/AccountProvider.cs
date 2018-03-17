@@ -27,12 +27,12 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 dc.Log = Console.Out;
                 var ru = (from it in dc.GetTable<AccountRecord>()
-                          where it.AccountID == ac.ID && (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款)
+                          where it.AccountID == ac.ID && (it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款 || it.ClassID == CustomerPaymentType.管理费用退款)
                           group it by it.AccountID into g
                           select new { AccountID = g.Key, Amount = g.Sum(it => it.Amount) }).ToList();
                 if (ru != null && ru.Count > 0) ac.Amount += ru.Sum(it => it.AccountID == ac.ID ? it.Amount : 0);
                 var ch = (from it in dc.GetTable<AccountRecord>()
-                          where it.AccountID == ac.ID && (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款)
+                          where it.AccountID == ac.ID && (it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款)
                           group it by it.AccountID into g
                           select new { AccountID = g.Key, Amount = g.Sum(it => it.Amount) }).ToList();
                 if (ch != null && ch.Count > 0) ac.Amount -= ch.Sum(it => it.AccountID == ac.ID ? it.Amount : 0);
@@ -57,7 +57,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             if (items != null && items.Count > 0) //计算余额，所有记录的收入项减支出项
             {
                 var ru = (from it in dc.GetTable<AccountRecord>()
-                          where it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款
+                          where it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款 || it.ClassID ==CustomerPaymentType .管理费用退款
                           group it by it.AccountID into g
                           select new { AccountID = g.Key, Amount = g.Sum(it => it.Amount) }).ToList();
                 if (ru != null && ru.Count > 0)
@@ -68,7 +68,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                     }
                 }
                 var ch = (from it in dc.GetTable<AccountRecord>()
-                          where it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款
+                          where it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款
                           group it by it.AccountID into g
                           select new { AccountID = g.Key, Amount = g.Sum(it => it.Amount) }).ToList();
                 if (ch != null && ch.Count > 0)

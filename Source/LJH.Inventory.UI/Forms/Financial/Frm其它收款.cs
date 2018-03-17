@@ -32,6 +32,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (IsForView) toolStrip1.Enabled = false;
             txtAccount.Text = Account != null ? Account.Name : null;
             txtAccount.Tag = Account;
+            dtPaidDate.IsNull = true;
         }
 
         protected override bool CheckInput()
@@ -49,6 +50,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (string.IsNullOrEmpty(txtPayer.Text))
             {
                 MessageBox.Show("对方账号不能为空");
+                return false;
+            }
+            if (dtPaidDate.IsNull)
+            {
+                MessageBox.Show("没有填写到款日期");
+                dtPaidDate.Focus();
                 return false;
             }
             return true;
@@ -73,6 +80,16 @@ namespace LJH.Inventory.UI.Forms.Financial
                     var c = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.CustomerID).QueryObject;
                     txtCustomer.Tag = c;
                     txtCustomer.Text = c != null ? c.Name : string.Empty;
+                }
+                var temp = item.GetProperty("到款日期");
+                DateTime pd = item.SheetDate;
+                if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd))
+                {
+                    dtPaidDate.Value = pd;
+                }
+                else
+                {
+                    dtPaidDate.IsNull = true;
                 }
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
@@ -101,6 +118,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             var c = txtCustomer.Tag as CompanyInfo;
             info.CustomerID = c != null ? c.ID : null;
             info.Payer = txtPayer.Text;
+            info.SetProperty("到款日期", dtPaidDate.Value.ToString("yyyy-MM-dd"));
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -226,5 +244,10 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            lbl大写.Text = RMBHelper.NumGetStr((double)txtAmount.DecimalValue);
+        }
     }
 }

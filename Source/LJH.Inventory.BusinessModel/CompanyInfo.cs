@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LJH.GeneralLibrary.SoftDog;
+using Newtonsoft.Json;
 
 namespace LJH.Inventory.BusinessModel
 {
@@ -12,6 +13,8 @@ namespace LJH.Inventory.BusinessModel
     [Serializable]
     public class CompanyInfo : LJH.GeneralLibrary.Core.DAL.IEntity<string>
     {
+        public static string 财务上不存在的客户 = "00000000";
+
         #region 构造函数
         public CompanyInfo()
         {
@@ -97,10 +100,46 @@ namespace LJH.Inventory.BusinessModel
         public string Memo { get; set; }
         #endregion
 
+        #region 扩展属性
+        /// <summary>
+        /// 获取或设置扩展属性
+        /// </summary>
+        public string Note { get; set; }
+
+        private Dictionary<string, string> _Externals = null;
+
+        public string GetProperty(string key)
+        {
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
+            if (_Externals == null) return null;
+            if (_Externals.ContainsKey(key)) return _Externals[key];
+            return null;
+        }
+
+        public void SetProperty(string key, string value)
+        {
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
+            if (_Externals == null) _Externals = new Dictionary<string, string>();
+            if (value == null && _Externals.ContainsKey(key)) _Externals.Remove(key);
+            else _Externals[key] = value;
+            Note = JsonConvert.SerializeObject(_Externals);
+        }
+
+        public void RemoveProperty(string key)
+        {
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
+            if (_Externals == null) return;
+            if (_Externals.ContainsKey(key)) _Externals.Remove(key);
+            Note = JsonConvert.SerializeObject(_Externals);
+        }
+        #endregion
+
         #region 公共方法
         public CompanyInfo Clone()
         {
-            return MemberwiseClone() as CompanyInfo;
+            var ret = MemberwiseClone() as CompanyInfo;
+            ret._Externals = null;
+            return ret;
         }
         #endregion
     }

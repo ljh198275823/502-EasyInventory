@@ -277,7 +277,13 @@ go
 
 if exists (SELECT * FROM dbo.syscolumns WHERE name ='Costs' AND id = OBJECT_ID(N'[dbo].[Cost]'))
 BEGIN
-	exec ('alter table Cost alter column Costs nvarchar(1024) not null')
+	exec ('alter table Cost alter column Costs nvarchar(2048) not null')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Note' AND id = OBJECT_ID(N'[dbo].[Customer]'))
+BEGIN
+	exec ('alter table Customer add Note nvarchar(512) null')
 end
 go
 

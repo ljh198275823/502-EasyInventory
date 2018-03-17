@@ -133,6 +133,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 var cell = GridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (cell.Value == null) return;
                 CustomerReceivable cr = GridView.Rows[e.RowIndex].Tag as CustomerReceivable;
+                if (cr == null) return;
                 if (GridView.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
                     if (ReceivableType == CustomerReceivableType.CustomerTax)

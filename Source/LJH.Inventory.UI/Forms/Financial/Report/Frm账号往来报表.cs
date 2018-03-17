@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
@@ -15,6 +16,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             InitializeComponent();
         }
 
+        private readonly List<CustomerPaymentType> _收入 = new List<CustomerPaymentType>() { CustomerPaymentType.客户收款, CustomerPaymentType.其它收款, CustomerPaymentType.转账入, CustomerPaymentType.供应商退款, CustomerPaymentType.管理费用退款 };
+        private readonly List<CustomerPaymentType> _支出 = new List<CustomerPaymentType>() { CustomerPaymentType.供应商付款, CustomerPaymentType.管理费用, CustomerPaymentType.转账出, CustomerPaymentType.客户退款 };
         private decimal _balance = 0;
         private List<Account> _AllAccounts = null;
 
@@ -38,13 +41,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             row.Tag = cp;
             row.Cells["colSheetDate"].Value = cp.Name;
             row.Cells["colSheetID"].Value = cp.单据编号;
-            if (cp.收入 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col收入"].Value = cp.收入;
-            if (cp.支出 != 0 && !string.IsNullOrEmpty(cp.单据编号)) row.Cells["col支出"].Value = cp.支出;
+            if (cp.PaymentType > 0) row.Cells["colClassID"].Value = cp.PaymentType.ToString();
+            if (cp.收入 != 0 && !string.IsNullOrEmpty(cp.单据编号)) { row.Cells["col收入"].Value = cp.收入; row.DefaultCellStyle.ForeColor = Color.Black; }
+            if (cp.支出 != 0 && !string.IsNullOrEmpty(cp.单据编号)) { row.Cells["col支出"].Value = cp.支出; row.DefaultCellStyle.ForeColor = Color.Red; }
             _balance += cp.收入 - cp.支出;
             row.Cells["col余额"].Value = _balance;
             Account ac = null;
             if (!string.IsNullOrEmpty(cp.付款单位) && _AllAccounts != null && _AllAccounts.Count > 0) ac = _AllAccounts.SingleOrDefault(it => it.ID == cp.付款单位);
             row.Cells["col付款单位"].Value = ac != null ? ac.Name : cp.付款单位;
+            row.Cells["col申请人"].Value = cp.申请人;
             row.Cells["colMemo"].Value = cp.Memo;
         }
 
@@ -64,30 +69,25 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             List<账户往来项> ret = new List<账户往来项>();
             var first = new 账户往来项();
             first.Name = "上期结余";
-            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.客户收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.其它收款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.转账入 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.收入 += ps.Sum(it => it.ClassID == CustomerPaymentType.供应商退款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.供应商付款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.转账出 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.公司管理费用 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
-            first.支出 += ps.Sum(it => it.ClassID == CustomerPaymentType.客户退款 && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.收入 += ps.Sum(it => _收入.Contains(it.ClassID) && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
+            first.支出 += ps.Sum(it => _支出.Contains(it.ClassID) && it.CreateDate < ucDateTimeInterval1.StartDateTime.Date ? it.Amount : 0);
             //ret.Add(first);
             ret.AddRange(from it in ps
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
                          select new 账户往来项()
                          {
-                             Name = it.CreateDate.ToString("yyyy-MM-dd"),
+                             Name = !string.IsNullOrEmpty(it.GetProperty("到款日期")) ? it.GetProperty("到款日期") : it.CreateDate.ToString("yyyy-MM-dd"),
                              CreateDate = it.CreateDate,
                              单据编号 = it.SheetID,
                              PaymentType = it.ClassID,
-                             收入 = it.ClassID == CustomerPaymentType.客户收款 || it.ClassID == CustomerPaymentType.其它收款 || it.ClassID == CustomerPaymentType.转账入 || it.ClassID == CustomerPaymentType.供应商退款 ? it.Amount : 0,
-                             支出 = it.ClassID == CustomerPaymentType.供应商付款 || it.ClassID == CustomerPaymentType.公司管理费用 || it.ClassID == CustomerPaymentType.转账出 || it.ClassID == CustomerPaymentType.客户退款 ? it.Amount : 0,
+                             收入 = _收入.Contains(it.ClassID) ? it.Amount : 0,
+                             支出 = _支出.Contains(it.ClassID) ? it.Amount : 0,
                              付款单位 = it.OtherAccount,
+                             申请人 = it.GetProperty("申请人"),
                              Memo = it.Memo
                          });
             ret = (from it in ret
-                   orderby it.CreateDate ascending
+                   orderby it.Name ascending, it.CreateDate ascending
                    where it.收入 != 0 || it.支出 != 0
                    select it).ToList();
             ret.Insert(0, first);
@@ -126,7 +126,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                 {
                     if (sheet.ClassID == CustomerPaymentType.客户收款 || sheet.ClassID == CustomerPaymentType.供应商付款)
                     {
-                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                        Frm收付款流水明细 frm = new Frm收付款流水明细();
                         frm.UpdatingItem = sheet;
                         frm.PaymentType = cp.PaymentType;
                         frm.ShowDialog();
@@ -149,9 +149,15 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
                     }
-                    else if (sheet.ClassID == CustomerPaymentType.公司管理费用)
+                    else if (sheet.ClassID == CustomerPaymentType.管理费用)
                     {
                         Frm管理费用明细 frm = new Frm管理费用明细();
+                        frm.UpdatingItem = sheet;
+                        frm.ShowDialog();
+                    }
+                    else if (sheet.ClassID == CustomerPaymentType.管理费用退款)
+                    {
+                        var frm = new Frm管理费用退款();
                         frm.UpdatingItem = sheet;
                         frm.ShowDialog();
                     }
@@ -182,6 +188,8 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
         public decimal 支出 { get; set; }
 
         public string 付款单位 { get; set; }
+
+        public string 申请人 { get; set; }
 
         public string Memo { get; set; }
     }

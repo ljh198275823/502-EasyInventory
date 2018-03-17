@@ -95,18 +95,21 @@ namespace LJH.Inventory.BLL
             return unitWork.Commit();
         }
 
-        public CommandResult SetFileID(CompanyInfo customer, int fid)
+        public CommandResult SetFileID(CompanyInfo customer, int fid, bool 按客户类别)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var provider = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri);
             List<CompanyInfo> cs = GetAllCustomers().QueryObjects;
             foreach (var c in cs)
             {
-                if (c.ID != customer.ID && c.City == customer.City && c.FileID == fid) //将同一个城市的其它有相同归档码的客户的归档码设置成空
+                if (c.ID != customer.ID && c.FileID == fid) //将同一个类别的其它有相同归档码的客户的归档码设置成空
                 {
-                    var newVal = c.Clone();
-                    newVal.FileID = null;
-                    provider.Update(newVal, c, unitWork);
+                    if (!按客户类别 || c.CategoryID == customer.CategoryID)
+                    {
+                        var newVal = c.Clone();
+                        newVal.FileID = null;
+                        provider.Update(newVal, c, unitWork);
+                    }
                 }
             }
             var clone = customer.Clone();
@@ -120,18 +123,21 @@ namespace LJH.Inventory.BLL
             return ret;
         }
 
-        public CommandResult SetTaxFileID(CompanyInfo customer, int fid)
+        public CommandResult SetTaxFileID(CompanyInfo customer, int fid, bool 按客户类别)
         {
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var provider = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri);
             List<CompanyInfo> cs = GetAllCustomers().QueryObjects;
             foreach (var c in cs)
             {
-                if (c.ID != customer.ID && c.City == customer.City && c.TaxFileID == fid) //将同一个城市的其它有相同归档码的客户的归档码设置成空
+                if (c.ID != customer.ID && c.FileID == fid) //将同一个类别的其它有相同归档码的客户的归档码设置成空
                 {
-                    var newVal = c.Clone();
-                    newVal.TaxFileID = null;
-                    provider.Update(newVal, c, unitWork);
+                    if (!按客户类别 || c.CategoryID == customer.CategoryID)
+                    {
+                        var newVal = c.Clone();
+                        newVal.TaxFileID = null;
+                        provider.Update(newVal, c, unitWork);
+                    }
                 }
             }
             var clone = customer.Clone();
@@ -162,6 +168,7 @@ namespace LJH.Inventory.BLL
             List<CompanyInfo> customers = GetAllCustomers().QueryObjects;
             if (customers != null && customers.Count > 0)
             {
+                customers.Add(new CompanyInfo() { ID = CompanyInfo.财务上不存在的客户, Name = "_未确定客户付款", ClassID = CompanyClass.Customer, });
                 var items = new List<CustomerFinancialState>();
                 foreach (var c in customers)
                 {
@@ -185,7 +192,9 @@ namespace LJH.Inventory.BLL
 
         public QueryResult<CustomerFinancialState> GetCustomerState(string customerID)
         {
-            var c = GetByID(customerID).QueryObject;
+            CompanyInfo c = null;
+            if (customerID == CompanyInfo.财务上不存在的客户) c = new CompanyInfo() { ID = CompanyInfo.财务上不存在的客户, Name = "未确定客户付款", ClassID = CompanyClass.Customer, };
+            else c = GetByID(customerID).QueryObject;
             if (c == null) return new QueryResult<CustomerFinancialState>(ResultCode.Fail, string.Empty, null);
 
             AccountRecordSearchCondition cpsc = new AccountRecordSearchCondition();
@@ -351,6 +360,15 @@ namespace LJH.Inventory.BLL
 
             ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Delete(sc, unitWork);
             return unitWork.Commit();
+        }
+
+        public CommandResult 设置财务备注(CompanyInfo pi, string memo)
+        {
+            var clone = pi.Clone();
+            clone.SetProperty("财务备注", memo);
+            var ret = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Update(clone, pi);
+            if (ret.Result == ResultCode.Successful) pi.SetProperty("财务备注", memo);
+            return ret;
         }
         #endregion
     }

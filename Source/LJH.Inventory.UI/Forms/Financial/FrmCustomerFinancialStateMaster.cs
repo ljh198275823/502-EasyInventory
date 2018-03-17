@@ -7,6 +7,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.GeneralLibrary.Core.DAL;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
@@ -111,6 +112,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 lblOriginalTotal.Visible = false;
                 lblTotalWeight.Visible = false;
             }
+
         }
 
         protected override void ShowItemInGridViewRow(DataGridViewRow row, object item)
@@ -118,12 +120,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             CustomerFinancialState cs = item as CustomerFinancialState;
             row.Tag = cs;
             row.Cells["colImage"].Value = Properties.Resources.customer;
-            row.Cells["colID"].Value = cs.Customer.ID;
+            if (cs.Customer.ID != CompanyInfo.财务上不存在的客户) row.Cells["colID"].Value = cs.Customer.ID;
             row.Cells["colName"].Value = cs.Customer.Name;
             row.Cells["colCategory"].Value = cs.Customer.CategoryID;
             row.Cells["colCreditLine"].Value = cs.Customer.CreditLine;
-            row.Cells["colFileID"].Value = cs.Recievables > 0 ? (cs.Customer.FileID.HasValue ? cs.Customer.FileID.ToString() : null) : null;
-            row.Cells["colTaxFileID"].Value = cs.Tax > 0 ? (cs.Customer.TaxFileID.HasValue ? cs.Customer.TaxFileID.ToString() : null) : null;
+            row.Cells["colFileID"].Value = cs.Customer.FileID;
+            row.Cells["colTaxFileID"].Value = cs.Customer.TaxFileID;
             row.Cells["colPrepay"].Value = cs.Prepay;
             row.Cells["colReceivable"].Value = cs.Recievables;
             row.Cells["colTax"].Value = cs.Tax;
@@ -132,6 +134,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["col发票已核销对公已付金额"].Value = cs.发票已核销对公已付金额;
             row.Cells["col距上次发货"].Value = cs.距最后一次出货天数;
             row.Cells["colPhone"].Value = cs.Customer.TelPhone;
+            row.Cells["colMemo"].Value = cs.Customer.GetProperty("财务备注");
             if (cs.Customer.DefaultLinker != null)
             {
                 Contact linker = null;
@@ -207,6 +210,13 @@ namespace LJH.Inventory.UI.Forms.Financial
                     frm.Customer = c;
                     frm.ShowDialog();
                 }
+                else if (dataGridView1.Columns[e.ColumnIndex].Name == "colName")
+                {
+                    var frm = new LJH.Inventory.UI.Forms.Sale.FrmCustomerDetail();
+                    frm.UpdatingItem = c;
+                    frm.StartPosition = FormStartPosition.CenterParent;
+                    frm.ShowDialog();
+                }
                 //刷新数据
                 var cs = new CompanyBLL(AppSettings.Current.ConnStr).GetCustomerState(c.ID).QueryObject;
                 if (cs != null) ShowItemInGridViewRow(dataGridView1.Rows[e.RowIndex], cs);
@@ -218,6 +228,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                if (customer.ID == CompanyInfo.财务上不存在的客户) return;
                 Frm其它应收明细 frm = new Frm其它应收明细();
                 frm.IsAdding = true;
                 frm.Customer = customer;
@@ -233,7 +244,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
-                FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                Frm收付款流水明细 frm = new Frm收付款流水明细();
                 frm.Customer = customer;
                 frm.PaymentType = CustomerPaymentType.客户收款;
                 frm.IsAdding = true;
@@ -248,6 +259,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                if (customer.ID == CompanyInfo.财务上不存在的客户) return;
                 Frm退款 frm = new Frm退款();
                 frm.Customer = customer;
                 frm.IsAdding = true;
@@ -262,24 +274,22 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CustomerFinancialState customerState = dataGridView1.SelectedRows[0].Tag as CustomerFinancialState;
-                if (customerState.Recievables > 0)
+                CompanyInfo customer = customerState.Customer;
+                if (customer.ID == CompanyInfo.财务上不存在的客户) return;
+                List<int> exludes = new List<int>();
+                foreach (var cs in _CustomerStates)
                 {
-                    CompanyInfo customer = customerState.Customer;
-                    List<int> exludes = new List<int>();
-                    foreach (var cs in _CustomerStates)
+                    CompanyInfo c = cs.Customer;
+                    if (c.ID != customer.ID && c.City == customer.City && c.FileID.HasValue && cs.Recievables > 0)
                     {
-                        CompanyInfo c = cs.Customer;
-                        if (c.ID != customer.ID && c.City == customer.City && c.FileID.HasValue && cs.Recievables > 0)
-                        {
-                            exludes.Add(c.FileID.Value);
-                        }
+                        exludes.Add(c.FileID.Value);
                     }
-                    FrmSetFileID frm = new FrmSetFileID();
-                    frm.StartPosition = FormStartPosition.CenterParent;
-                    frm.ExcludeFileIDs = exludes;
-                    frm.Customer = customer;
-                    if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customerState);
                 }
+                FrmSetFileID frm = new FrmSetFileID();
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ExcludeFileIDs = exludes;
+                frm.Customer = customer;
+                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customerState);
             }
         }
 
@@ -288,25 +298,23 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CustomerFinancialState customerState = dataGridView1.SelectedRows[0].Tag as CustomerFinancialState;
-                if (customerState.Tax > 0)
+                CompanyInfo customer = customerState.Customer;
+                if (customer.ID == CompanyInfo.财务上不存在的客户) return;
+                List<int> exludes = new List<int>();
+                foreach (var cs in _CustomerStates)
                 {
-                    CompanyInfo customer = customerState.Customer;
-                    List<int> exludes = new List<int>();
-                    foreach (var cs in _CustomerStates)
+                    CompanyInfo c = cs.Customer;
+                    if (c.ID != customer.ID && c.City == customer.City && c.TaxFileID.HasValue && cs.Tax > 0)
                     {
-                        CompanyInfo c = cs.Customer;
-                        if (c.ID != customer.ID && c.City == customer.City && c.TaxFileID.HasValue && cs.Tax > 0)
-                        {
-                            exludes.Add(c.TaxFileID.Value);
-                        }
+                        exludes.Add(c.TaxFileID.Value);
                     }
-                    FrmSetFileID frm = new FrmSetFileID();
-                    frm.StartPosition = FormStartPosition.CenterParent;
-                    frm.ExcludeFileIDs = exludes;
-                    frm.ForTaxFileID = true;
-                    frm.Customer = customer;
-                    if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customerState);
                 }
+                FrmSetFileID frm = new FrmSetFileID();
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ExcludeFileIDs = exludes;
+                frm.ForTaxFileID = true;
+                frm.Customer = customer;
+                if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], customerState);
             }
         }
 
@@ -327,9 +335,11 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 var cs = dataGridView1.SelectedRows[0].Tag as CustomerFinancialState;
+                var customer = cs.Customer;
+                if (customer.ID == CompanyInfo.财务上不存在的客户) return;
                 FrmCreditLine frm = new FrmCreditLine();
                 frm.StartPosition = FormStartPosition.CenterParent;
-                frm.Customer = cs.Customer;
+                frm.Customer = customer;
                 if (frm.ShowDialog() == DialogResult.OK) ShowItemInGridViewRow(dataGridView1.SelectedRows[0], cs);
             }
         }
@@ -339,6 +349,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                if (customer.ID == CompanyInfo.财务上不存在的客户) return;
                 Frm其它应收明细 frm = new Frm其它应收明细();
                 frm.IsAdding = true;
                 frm.Customer = customer;
@@ -354,6 +365,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 CompanyInfo customer = (dataGridView1.SelectedRows[0].Tag as CustomerFinancialState).Customer;
+                if (customer.ID == CompanyInfo.财务上不存在的客户) return;
                 FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
                 frm.Customer = customer;
                 frm.TaxType = CustomerPaymentType.客户增值税发票;
@@ -365,5 +377,22 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
         }
         #endregion
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "colMemo")
+            {
+                var pi = dataGridView1.Rows[e.RowIndex].Tag as CustomerFinancialState;
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                string memo = cell.Value != null ? cell.Value.ToString() : null;
+                var ret = new CompanyBLL(AppSettings.Current.ConnStr).设置财务备注(pi.Customer , memo);
+                if (ret.Result != ResultCode.Successful)
+                {
+                    MessageBox.Show(ret.Message);
+                    cell.Value = pi.Customer.GetProperty("财务备注");
+                }
+            }
+        }
     }
 }

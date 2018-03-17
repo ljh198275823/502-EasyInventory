@@ -81,10 +81,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (PaymentType == CustomerPaymentType.客户收款)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit);
+                mnu_Assign.Enabled = Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.核销);
             }
             else if (PaymentType == CustomerPaymentType.供应商付款)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.Edit);
+                mnu_Assign.Enabled = Operator.Current.Permit(Permission.SupplierPayment, PermissionActions.核销);
             }
             else
             {
@@ -109,7 +111,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         private void mnu_Add_Click(object sender, EventArgs e)
         {
-            FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+            Frm收付款流水明细 frm = new Frm收付款流水明细();
             frm.Customer = Customer;
             frm.PaymentType = PaymentType;
             frm.IsAdding = true;
@@ -123,6 +125,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 AccountRecord ar = dataGridView1.SelectedRows[0].Tag as AccountRecord;
+                if (string.IsNullOrEmpty(ar.AccountID)) return; //没有指定账号不能核销
                 if (ar.ClassID == CustomerPaymentType.供应商付款)
                 {
                     FrmSupplierPaymentAssign frm = new FrmSupplierPaymentAssign();
@@ -151,12 +154,13 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             {
                 if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
                 AccountRecord ar = dataGridView1.Rows[e.RowIndex].Tag as AccountRecord;
+                if (ar == null) return;
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
                     var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(ar.SheetID).QueryObject;
                     if (sheet != null)
                     {
-                        FrmCustomerPaymentDetail frm = new FrmCustomerPaymentDetail();
+                        Frm收付款流水明细 frm = new Frm收付款流水明细();
                         frm.IsAdding = false;
                         frm.UpdatingItem = sheet;
                         frm.PaymentType = sheet.ClassID;

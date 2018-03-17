@@ -73,17 +73,17 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(927, 14);
+            this.btnSearch.Location = new System.Drawing.Point(930, 13);
             this.btnSearch.Size = new System.Drawing.Size(121, 23);
             // 
             // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(927, 43);
+            this.btnSaveAs.Location = new System.Drawing.Point(930, 42);
             this.btnSaveAs.Size = new System.Drawing.Size(121, 23);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(927, 72);
+            this.btnColumn.Location = new System.Drawing.Point(930, 71);
             this.btnColumn.Size = new System.Drawing.Size(121, 23);
             // 
             // groupBox1
@@ -306,7 +306,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1347, 437);
+            this.dataGridView1.Size = new System.Drawing.Size(1484, 437);
             this.dataGridView1.TabIndex = 39;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -429,7 +429,7 @@
             this.lbl收入合计.AutoSize = true;
             this.lbl收入合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl收入合计.ForeColor = System.Drawing.Color.Blue;
-            this.lbl收入合计.Location = new System.Drawing.Point(1066, 25);
+            this.lbl收入合计.Location = new System.Drawing.Point(1069, 24);
             this.lbl收入合计.Name = "lbl收入合计";
             this.lbl收入合计.Size = new System.Drawing.Size(125, 20);
             this.lbl收入合计.TabIndex = 40;
@@ -440,7 +440,7 @@
             this.lbl支出合计.AutoSize = true;
             this.lbl支出合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl支出合计.ForeColor = System.Drawing.Color.Red;
-            this.lbl支出合计.Location = new System.Drawing.Point(1066, 62);
+            this.lbl支出合计.Location = new System.Drawing.Point(1069, 61);
             this.lbl支出合计.Name = "lbl支出合计";
             this.lbl支出合计.Size = new System.Drawing.Size(125, 20);
             this.lbl支出合计.TabIndex = 41;
@@ -450,7 +450,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1352, 566);
+            this.ClientSize = new System.Drawing.Size(1489, 566);
             this.Controls.Add(this.lbl支出合计);
             this.Controls.Add(this.lbl收入合计);
             this.Controls.Add(this.dataGridView1);
@@ -461,11 +461,11 @@
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
+            this.Controls.SetChildIndex(this.lbl收入合计, 0);
+            this.Controls.SetChildIndex(this.lbl支出合计, 0);
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.btnColumn, 0);
-            this.Controls.SetChildIndex(this.lbl收入合计, 0);
-            this.Controls.SetChildIndex(this.lbl支出合计, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

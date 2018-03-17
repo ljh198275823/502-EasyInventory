@@ -54,12 +54,13 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colPrepay = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTax = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colTaxBill = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlLeft.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -184,7 +185,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(202, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(862, 36);
+            this.panel5.Size = new System.Drawing.Size(933, 36);
             this.panel5.TabIndex = 114;
             // 
             // chkOnlyHasRecievables
@@ -233,7 +234,8 @@
             this.colReceivable,
             this.colPrepay,
             this.colTax,
-            this.colTaxBill});
+            this.colTaxBill,
+            this.colMemo});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(202, 36);
@@ -242,9 +244,10 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(862, 330);
+            this.dataGridView1.Size = new System.Drawing.Size(933, 330);
             this.dataGridView1.TabIndex = 115;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // colImage
             // 
@@ -267,6 +270,8 @@
             this.colName.MinimumWidth = 180;
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
+            this.colName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colName.Width = 180;
             // 
             // colCategory
@@ -279,47 +284,64 @@
             // 
             // colReceivable
             // 
+            this.colReceivable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle1.Format = "C2";
             dataGridViewCellStyle1.NullValue = null;
             this.colReceivable.DefaultCellStyle = dataGridViewCellStyle1;
             this.colReceivable.HeaderText = "应付账款";
+            this.colReceivable.MinimumWidth = 150;
             this.colReceivable.Name = "colReceivable";
             this.colReceivable.ReadOnly = true;
             this.colReceivable.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colReceivable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colReceivable.Width = 150;
             // 
             // colPrepay
             // 
+            this.colPrepay.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle2.Format = "C2";
             dataGridViewCellStyle2.NullValue = null;
             this.colPrepay.DefaultCellStyle = dataGridViewCellStyle2;
             this.colPrepay.HeaderText = "未核销应付款";
+            this.colPrepay.MinimumWidth = 150;
             this.colPrepay.Name = "colPrepay";
             this.colPrepay.ReadOnly = true;
             this.colPrepay.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colPrepay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colPrepay.Width = 150;
             // 
             // colTax
             // 
+            this.colTax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle3.Format = "C2";
             this.colTax.DefaultCellStyle = dataGridViewCellStyle3;
             this.colTax.HeaderText = "应开增值税额";
+            this.colTax.MinimumWidth = 150;
             this.colTax.Name = "colTax";
             this.colTax.ReadOnly = true;
+            this.colTax.Width = 150;
             // 
             // colTaxBill
             // 
+            this.colTaxBill.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle4.Format = "C2";
             this.colTaxBill.DefaultCellStyle = dataGridViewCellStyle4;
             this.colTaxBill.HeaderText = "已开增值税发票";
+            this.colTaxBill.MinimumWidth = 150;
             this.colTaxBill.Name = "colTaxBill";
             this.colTaxBill.ReadOnly = true;
+            this.colTaxBill.Width = 150;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
             // 
             // FrmSupplierFinancialStateMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 388);
+            this.ClientSize = new System.Drawing.Size(1135, 388);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.splitter1);
@@ -363,11 +385,12 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_客户往来报表;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewLinkColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;
         private System.Windows.Forms.DataGridViewLinkColumn colPrepay;
         private System.Windows.Forms.DataGridViewLinkColumn colTax;
         private System.Windows.Forms.DataGridViewLinkColumn colTaxBill;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

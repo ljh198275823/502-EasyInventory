@@ -1,6 +1,6 @@
 ﻿namespace LJH.Inventory.UI.Forms.Financial
 {
-    partial class FrmCustomerPaymentDetail
+    partial class Frm收付款流水明细
     {
         /// <summary>
         /// Required designer variable.
@@ -85,6 +85,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.lbl大写 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -100,12 +101,12 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(506, 312);
+            this.btnClose.Location = new System.Drawing.Point(506, 353);
             this.btnClose.TabIndex = 10;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(401, 312);
+            this.btnOk.Location = new System.Drawing.Point(401, 353);
             this.btnOk.TabIndex = 9;
             // 
             // label7
@@ -138,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 172);
+            this.label5.Location = new System.Drawing.Point(37, 206);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 36;
@@ -173,11 +174,12 @@
             this.txtAmount.Size = new System.Drawing.Size(164, 21);
             this.txtAmount.TabIndex = 3;
             this.txtAmount.Text = "0.00";
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(71, 169);
+            this.txtMemo.Location = new System.Drawing.Point(71, 203);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(436, 21);
             this.txtMemo.TabIndex = 8;
@@ -194,11 +196,12 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 60);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(586, 228);
+            this.tabControl1.Size = new System.Drawing.Size(586, 269);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lbl大写);
             this.tabPage1.Controls.Add(this.dtPaidDate);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.txtPayer);
@@ -221,14 +224,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(578, 202);
+            this.tabPage1.Size = new System.Drawing.Size(578, 243);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // dtPaidDate
             // 
-            this.dtPaidDate.Location = new System.Drawing.Point(319, 75);
+            this.dtPaidDate.Enabled = false;
+            this.dtPaidDate.Location = new System.Drawing.Point(319, 137);
             this.dtPaidDate.Name = "dtPaidDate";
             this.dtPaidDate.Size = new System.Drawing.Size(188, 21);
             this.dtPaidDate.TabIndex = 105;
@@ -236,7 +240,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(261, 79);
+            this.label1.Location = new System.Drawing.Point(261, 141);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 104;
@@ -245,7 +249,7 @@
             // txtPayer
             // 
             this.txtPayer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtPayer.Location = new System.Drawing.Point(338, 137);
+            this.txtPayer.Location = new System.Drawing.Point(70, 169);
             this.txtPayer.Name = "txtPayer";
             this.txtPayer.Size = new System.Drawing.Size(168, 21);
             this.txtPayer.TabIndex = 101;
@@ -253,7 +257,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(282, 141);
+            this.label4.Location = new System.Drawing.Point(14, 173);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 102;
@@ -267,6 +271,7 @@
             this.txtAccount.ReadOnly = true;
             this.txtAccount.Size = new System.Drawing.Size(163, 21);
             this.txtAccount.TabIndex = 100;
+            this.txtAccount.DoubleClick += new System.EventHandler(this.txtAccount_DoubleClick);
             // 
             // lnkAccout
             // 
@@ -309,6 +314,7 @@
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(435, 21);
             this.txtCustomer.TabIndex = 2;
+            this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
             // 
             // lnkCustomer
             // 
@@ -344,7 +350,7 @@
             this.tabPage3.Controls.Add(this.ItemsGrid);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(578, 202);
+            this.tabPage3.Size = new System.Drawing.Size(578, 243);
             this.tabPage3.TabIndex = 7;
             this.tabPage3.Text = "核销";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -368,7 +374,7 @@
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(578, 202);
+            this.ItemsGrid.Size = new System.Drawing.Size(578, 243);
             this.ItemsGrid.TabIndex = 119;
             // 
             // colSheetID
@@ -420,7 +426,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(578, 202);
+            this.tabPage5.Size = new System.Drawing.Size(578, 243);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -444,7 +450,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(578, 202);
+            this.gridAttachment.Size = new System.Drawing.Size(578, 243);
             this.gridAttachment.TabIndex = 102;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -518,7 +524,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(578, 202);
+            this.tabPage2.Size = new System.Drawing.Size(578, 243);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -541,7 +547,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(578, 202);
+            this.dataGridView1.Size = new System.Drawing.Size(578, 243);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -659,15 +665,26 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
-            // FrmCustomerPaymentDetail
+            // lbl大写
+            // 
+            this.lbl大写.AutoSize = true;
+            this.lbl大写.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl大写.ForeColor = System.Drawing.Color.Blue;
+            this.lbl大写.Location = new System.Drawing.Point(261, 79);
+            this.lbl大写.Name = "lbl大写";
+            this.lbl大写.Size = new System.Drawing.Size(18, 12);
+            this.lbl大写.TabIndex = 116;
+            this.lbl大写.Text = "整";
+            // 
+            // Frm收付款流水明细
             // 
             this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 293);
+            this.ClientSize = new System.Drawing.Size(593, 334);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
-            this.Name = "FrmCustomerPaymentDetail";
+            this.Name = "Frm收付款流水明细";
             this.Text = "客户收款流水明细";
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
@@ -748,5 +765,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel lblSheetState;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Label lbl大写;
     }
 }

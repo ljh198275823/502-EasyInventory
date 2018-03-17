@@ -44,9 +44,13 @@ namespace LJH.Inventory.BLL
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退", "yyMM", 3, info.DocumentType);
             }
-            else if (info.ClassID == CustomerPaymentType.公司管理费用)
+            else if (info.ClassID == CustomerPaymentType.管理费用)
             {
                 info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("支", "yyMM", 3, info.DocumentType);
+            }
+            else if (info.ClassID == CustomerPaymentType.管理费用退款)
+            {
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退", "yyMM", 3, info.DocumentType);
             }
             return info.ID;
         }
@@ -68,6 +72,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.AccountID,
                     Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -83,6 +88,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.AccountID,
                     Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -98,6 +104,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.Payer,
                     Amount = info.Amount,
                     OtherAccount = info.AccountID,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -115,6 +122,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.AccountID,
                     Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -130,6 +138,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.Payer,
                     Amount = info.Amount,
                     OtherAccount = info.AccountID,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -147,6 +156,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.AccountID,
                     Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -162,6 +172,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.AccountID,
                     Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -179,6 +190,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.AccountID,
                     Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -212,6 +224,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.AccountID,
                     Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -241,7 +254,7 @@ namespace LJH.Inventory.BLL
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr1, unitWork);
                 }
             }
-            else if (info.ClassID == CustomerPaymentType.公司管理费用)
+            else if (info.ClassID == CustomerPaymentType.管理费用)
             {
                 if (!string.IsNullOrEmpty(info.AccountID))
                 {
@@ -256,6 +269,7 @@ namespace LJH.Inventory.BLL
                         AccountID = info.AccountID,
                         Amount = info.Amount,
                         OtherAccount = info.Payer,
+                        Note = info.Note,
                         Memo = info.Memo
                     };
                     ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -269,11 +283,10 @@ namespace LJH.Inventory.BLL
                         CustomerID = info.CustomerID,
                         CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
                         SheetID = info.ID,
+                        Note = info.Note,
                         Amount = info.Amount,
                         Memo = info.Memo,
                     };
-                    cr.SetProperty("费用类别", info.GetProperty("费用类别"));
-                    cr.SetProperty("申请人", info.GetProperty("申请人"));
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
                 }
             }
@@ -290,6 +303,7 @@ namespace LJH.Inventory.BLL
                     AccountID = info.AccountID,
                     Amount = info.Amount,
                     OtherAccount = info.Payer,
+                    Note = info.Note,
                     Memo = info.Memo
                 };
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
@@ -306,6 +320,10 @@ namespace LJH.Inventory.BLL
                 if (info.Amount < ar.Assigned) throw new Exception("请先取消超出核销部分的金额再修改!");
                 var clone = ar.Clone();
                 clone.Amount = info.Amount;
+                clone.CustomerID = info.CustomerID;
+                clone.AccountID = info.AccountID;
+                clone.Note = info.Note;
+                clone.Memo = info.Memo;
                 ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Update(clone, ar, unitWork);
             }
             base.DoUpdate(info, unitWork, dt, opt);

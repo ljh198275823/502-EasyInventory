@@ -49,6 +49,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_增加其它收款 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_增加管理费用 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_增加转账 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtKeyword = new LJH.Inventory.UI.Controls.TooStripDBCTextBox(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu_增加转账 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menu.SuspendLayout();
@@ -207,6 +207,13 @@
             this.mnu_增加管理费用.Text = "增加管理费用";
             this.mnu_增加管理费用.Click += new System.EventHandler(this.mnu_增加管理费用_Click);
             // 
+            // mnu_增加转账
+            // 
+            this.mnu_增加转账.Name = "mnu_增加转账";
+            this.mnu_增加转账.Size = new System.Drawing.Size(152, 22);
+            this.mnu_增加转账.Text = "增加转账";
+            this.mnu_增加转账.Click += new System.EventHandler(this.mnu_增加转账_Click);
+            // 
             // menu
             // 
             this.menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -286,13 +293,6 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 46);
-            // 
-            // mnu_增加转账
-            // 
-            this.mnu_增加转账.Name = "mnu_增加转账";
-            this.mnu_增加转账.Size = new System.Drawing.Size(152, 22);
-            this.mnu_增加转账.Text = "增加转账";
-            this.mnu_增加转账.Click += new System.EventHandler(this.mnu_增加转账_Click);
             // 
             // FrmAccountMaster
             // 

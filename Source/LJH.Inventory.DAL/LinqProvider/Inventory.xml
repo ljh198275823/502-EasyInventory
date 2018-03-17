@@ -100,6 +100,7 @@
       <Column Name="CreditLine" Member="CreditLine" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="FileID" Member="FileID" DbType="int" UpdateCheck="Never"/>
       <Column Name="TaxFileID" Member="TaxFileID" DbType="int" UpdateCheck="Never"/>
+      <Column Name="Note" Member="Note" DbType="nvarchar(512)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
@@ -466,7 +467,7 @@
   <Table Name="Cost" Member="LJH.Inventory.DAL.LinqProvider.Cost">
     <Type Name="LJH.Inventory.DAL.LinqProvider.Cost">
       <Column Name="ID" Member="ID"  DbType="uniqueidentifier not null" IsPrimaryKey="true"/>
-      <Column Name="Costs" Member="Costs"  DbType="nvarchar(512) not null"  UpdateCheck="Never"/>
+      <Column Name="Costs" Member="Costs"  DbType="nvarchar(2048) not null"  UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="SteelRollSliceRecord" Member="LJH.Inventory.BusinessModel.SteelRollSliceRecord">

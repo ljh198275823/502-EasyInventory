@@ -96,12 +96,12 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(506, 319);
+            this.btnClose.Location = new System.Drawing.Point(514, 321);
             this.btnClose.TabIndex = 10;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(401, 319);
+            this.btnOk.Location = new System.Drawing.Point(409, 321);
             this.btnOk.TabIndex = 9;
             // 
             // label7
@@ -178,7 +178,7 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 60);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(586, 235);
+            this.tabControl1.Size = new System.Drawing.Size(594, 237);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -201,7 +201,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(578, 209);
+            this.tabPage1.Size = new System.Drawing.Size(586, 211);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -293,7 +293,7 @@
             this.tabPage3.Controls.Add(this.ItemsGrid);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(578, 209);
+            this.tabPage3.Size = new System.Drawing.Size(586, 211);
             this.tabPage3.TabIndex = 7;
             this.tabPage3.Text = "核销";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -317,7 +317,7 @@
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(578, 209);
+            this.ItemsGrid.Size = new System.Drawing.Size(586, 211);
             this.ItemsGrid.TabIndex = 119;
             // 
             // colSheetID
@@ -369,7 +369,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(578, 209);
+            this.tabPage5.Size = new System.Drawing.Size(586, 211);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -393,7 +393,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(578, 209);
+            this.gridAttachment.Size = new System.Drawing.Size(586, 211);
             this.gridAttachment.TabIndex = 102;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -467,7 +467,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(578, 209);
+            this.tabPage2.Size = new System.Drawing.Size(586, 211);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -490,7 +490,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(578, 209);
+            this.dataGridView1.Size = new System.Drawing.Size(586, 211);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -536,7 +536,7 @@
             this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(593, 56);
+            this.toolStrip1.Size = new System.Drawing.Size(601, 56);
             this.toolStrip1.TabIndex = 93;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -612,9 +612,10 @@
             // 
             // FrmCustomerTaxBillDetail
             // 
+            this.AcceptButton = null;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 300);
+            this.ClientSize = new System.Drawing.Size(601, 302);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmCustomerTaxBillDetail";

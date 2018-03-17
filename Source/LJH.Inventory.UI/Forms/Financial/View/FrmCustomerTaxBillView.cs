@@ -49,7 +49,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
         {
             row.Tag = cp;
             row.Cells["colSheetID"].Value = cp.SheetID;
-            row.Cells["colSheetDate"].Value = cp.CreateDate;
+            row.Cells["colSheetDate"].Value = cp.CreateDate.ToString ("yyyy年MM月dd日");
             row.Cells["colAmount"].Value = cp.Amount;
             if (cp.Remain != 0) row.Cells["colRemain"].Value = cp.Remain;
             else row.Cells["colRemain"].Value = null;
@@ -84,10 +84,12 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (PaymentType == CustomerPaymentType.客户增值税发票)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
+                mnu_Assign.Enabled = Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.核销);
             }
             else if (PaymentType == CustomerPaymentType.供应商增值税发票)
             {
                 mnu_Add.Enabled = Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
+                mnu_Assign.Enabled = Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.核销);
             }
             else
             {
@@ -147,6 +149,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             {
                 if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
                 AccountRecord cp = dataGridView1.Rows[e.RowIndex].Tag as AccountRecord;
+                if (cp == null) return;
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
                 {
                     var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.SheetID).QueryObject;

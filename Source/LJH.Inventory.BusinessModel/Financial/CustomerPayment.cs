@@ -109,8 +109,9 @@ namespace LJH.Inventory.BusinessModel
                         return "账户转账";
                     case CustomerPaymentType.客户退款:
                     case CustomerPaymentType.供应商退款:
+                    case CustomerPaymentType.管理费用退款:
                         return "退款";
-                    case CustomerPaymentType.公司管理费用:
+                    case CustomerPaymentType.管理费用:
                         return "公司管理费用";
                     default:
                         throw new Exception("客户付款单没有指定类型");
@@ -128,47 +129,33 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 获取或设置扩展属性
         /// </summary>
-        public string Note
-        {
-            get
-            {
-                try
-                {
-                    if (_Externals == null) return null;
-                    return JsonConvert.SerializeObject(_Externals);
-                }
-                catch
-                {
-                }
-                return null;
-            }
-            set
-            {
-                try
-                {
-                    if (string.IsNullOrEmpty(value)) _Externals = null;
-                    else _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(value);
-                }
-                catch
-                {
-                }
-            }
-        }
+        public string Note { get; set; }
 
         private Dictionary<string, string> _Externals = null;
 
         public string GetProperty(string key)
         {
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
             if (_Externals == null) return null;
             if (_Externals.ContainsKey(key)) return _Externals[key];
             return null;
-
         }
 
         public void SetProperty(string key, string value)
         {
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
             if (_Externals == null) _Externals = new Dictionary<string, string>();
-            _Externals[key] = value;
+            if (value == null && _Externals.ContainsKey(key)) _Externals.Remove(key);
+            else _Externals[key] = value;
+            Note = JsonConvert.SerializeObject(_Externals);
+        }
+
+        public void RemoveProperty(string key)
+        {
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
+            if (_Externals == null) return;
+            if (_Externals.ContainsKey(key)) _Externals.Remove(key);
+            Note = JsonConvert.SerializeObject(_Externals);
         }
         #endregion
     }
