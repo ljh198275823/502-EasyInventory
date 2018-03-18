@@ -180,7 +180,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 record.Length = txtLength.IntergerValue;
                 record.Count = txtCount.IntergerValue;
                 record.AfterWeight = txtRemainWeight.DecimalValue;
-                record.AfterLength = record.BeforeLength - record.Length.Value / 1000 * record.Count;
+                record.AfterLength = txtAfterLength.DecimalValue;
                 CommandResult ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Slice(SlicingItem, record, txtWareHouse.Tag as WareHouse);
                 if (ret.Result == ResultCode.Successful)
                 {

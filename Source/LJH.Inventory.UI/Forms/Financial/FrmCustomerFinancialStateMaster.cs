@@ -135,6 +135,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["col距上次发货"].Value = cs.距最后一次出货天数;
             row.Cells["colPhone"].Value = cs.Customer.TelPhone;
             row.Cells["colMemo"].Value = cs.Customer.GetProperty("财务备注");
+            row.Cells["col付款方式"].Value = cs.Customer.付款方式;
             if (cs.Customer.DefaultLinker != null)
             {
                 Contact linker = null;

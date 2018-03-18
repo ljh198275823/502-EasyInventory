@@ -151,6 +151,10 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 var item = items.SingleOrDefault(it => it.Operation == SheetOperationDescription.GetDescription(SheetOperation.Create));
                 cell.SetCellValue(item != null ? item.Operator : string.Empty);
             }
+            else if (express == "[订单号]")
+            {
+                cell.SetCellValue(info.GetProperty("订单号"));
+            }
         }
 
         private void FillSheetItems(StackOutItem[] items, ISheet sheet, int firstRow)

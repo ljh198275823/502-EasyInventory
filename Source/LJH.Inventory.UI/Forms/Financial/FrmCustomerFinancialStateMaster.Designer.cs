@@ -69,6 +69,7 @@
             this.colName = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreditLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col付款方式 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTaxFileID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceivable = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -317,6 +318,7 @@
             this.colName,
             this.colCategory,
             this.colCreditLine,
+            this.col付款方式,
             this.colFileID,
             this.colTaxFileID,
             this.colReceivable,
@@ -389,6 +391,14 @@
             this.colCreditLine.Name = "colCreditLine";
             this.colCreditLine.ReadOnly = true;
             this.colCreditLine.Visible = false;
+            // 
+            // col付款方式
+            // 
+            this.col付款方式.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.col付款方式.HeaderText = "付款方式";
+            this.col付款方式.MinimumWidth = 100;
+            this.col付款方式.Name = "col付款方式";
+            this.col付款方式.ReadOnly = true;
             // 
             // colFileID
             // 
@@ -553,6 +563,7 @@
         private System.Windows.Forms.DataGridViewLinkColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreditLine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col付款方式;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFileID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTaxFileID;
         private System.Windows.Forms.DataGridViewLinkColumn colReceivable;

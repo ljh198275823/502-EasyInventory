@@ -75,10 +75,8 @@ namespace LJH.Inventory.UI.Forms.Sale
                     Category = (new CustomerTypeBLL(AppSettings.Current.ConnStr)).GetByID(c.CategoryID).QueryObject;
                 }
                 this.txtCategory.Text = Category != null ? Category.Name : string.Empty;
-                txtNation.Text = c.Nation;
+                txt付款方式.Text = c.付款方式;
                 txtName.Text = c.Name;
-                txtNation.Text = c.Nation;
-                txtCity.Text = c.City;
                 txtTelphone.Text = c.TelPhone;
                 txtFax.Text = c.Fax;
                 txtPost.Text = c.PostalCode;
@@ -117,10 +115,8 @@ namespace LJH.Inventory.UI.Forms.Sale
             }
             info.ID = txtID.Text != "自动创建" ? txtID.Text : string.Empty;
             info.CategoryID = Category != null ? Category.ID : null;
-            info.Nation = txtNation.Text;
+            info.付款方式 = txt付款方式.Text;
             info.Name = txtName.Text;
-            info.Nation = txtNation.Text;
-            info.City = txtCity.Text;
             info.TelPhone = txtTelphone.Text;
             info.Fax = txtFax.Text;
             info.PostalCode = txtPost.Text;

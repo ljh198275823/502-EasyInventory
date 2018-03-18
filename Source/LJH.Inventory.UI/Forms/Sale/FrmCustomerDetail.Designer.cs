@@ -36,8 +36,6 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtCity = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label9 = new System.Windows.Forms.Label();
             this.txtAddress = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label8 = new System.Windows.Forms.Label();
@@ -50,7 +48,6 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lblCategory = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtNation = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCategory = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
@@ -80,6 +77,7 @@
             this.mnu_AttachmentOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AttachmentDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.txt付款方式 = new System.Windows.Forms.ComboBox();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -138,10 +136,9 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.txt付款方式);
             this.tabPage6.Controls.Add(this.label5);
             this.tabPage6.Controls.Add(this.txtMemo);
-            this.tabPage6.Controls.Add(this.label10);
-            this.tabPage6.Controls.Add(this.txtCity);
             this.tabPage6.Controls.Add(this.label9);
             this.tabPage6.Controls.Add(this.txtAddress);
             this.tabPage6.Controls.Add(this.label8);
@@ -154,7 +151,6 @@
             this.tabPage6.Controls.Add(this.txtTelphone);
             this.tabPage6.Controls.Add(this.lblCategory);
             this.tabPage6.Controls.Add(this.label4);
-            this.tabPage6.Controls.Add(this.txtNation);
             this.tabPage6.Controls.Add(this.txtCategory);
             this.tabPage6.Controls.Add(this.txtName);
             this.tabPage6.Controls.Add(this.label3);
@@ -184,24 +180,6 @@
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(377, 21);
             this.txtMemo.TabIndex = 10;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(276, 80);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
-            this.label10.TabIndex = 78;
-            this.label10.Text = "地区";
-            // 
-            // txtCity
-            // 
-            this.txtCity.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCity.Location = new System.Drawing.Point(311, 76);
-            this.txtCity.MaxLength = 100;
-            this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(143, 21);
-            this.txtCity.TabIndex = 4;
             // 
             // label9
             // 
@@ -307,20 +285,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 80);
+            this.label4.Location = new System.Drawing.Point(19, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 61;
-            this.label4.Text = "国家";
-            // 
-            // txtNation
-            // 
-            this.txtNation.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtNation.Location = new System.Drawing.Point(77, 76);
-            this.txtNation.MaxLength = 100;
-            this.txtNation.Name = "txtNation";
-            this.txtNation.Size = new System.Drawing.Size(143, 21);
-            this.txtNation.TabIndex = 3;
+            this.label4.Text = "付款方式";
             // 
             // txtCategory
             // 
@@ -592,6 +561,17 @@
             this.mnu_AttachmentDelete.Text = "删除";
             this.mnu_AttachmentDelete.Click += new System.EventHandler(this.mnu_AttachmentDelete_Click);
             // 
+            // txt付款方式
+            // 
+            this.txt付款方式.FormattingEnabled = true;
+            this.txt付款方式.Items.AddRange(new object[] {
+            "",
+            "月结25天"});
+            this.txt付款方式.Location = new System.Drawing.Point(78, 77);
+            this.txt付款方式.Name = "txt付款方式";
+            this.txt付款方式.Size = new System.Drawing.Size(376, 20);
+            this.txt付款方式.TabIndex = 232;
+            // 
             // FrmCustomerDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -625,7 +605,6 @@
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.LinkLabel lblCategory;
         private System.Windows.Forms.Label label4;
-        private GeneralLibrary.WinformControl.DBCTextBox txtNation;
         private GeneralLibrary.WinformControl.DBCTextBox txtCategory;
         private GeneralLibrary.WinformControl.DBCTextBox txtName;
         private System.Windows.Forms.Label label3;
@@ -643,8 +622,6 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtWeb;
         private System.Windows.Forms.Label label7;
         private GeneralLibrary.WinformControl.DBCTextBox txtPost;
-        private System.Windows.Forms.Label label10;
-        private GeneralLibrary.WinformControl.DBCTextBox txtCity;
         private System.Windows.Forms.Label label5;
         private GeneralLibrary.WinformControl.DBCTextBox txtMemo;
         private System.Windows.Forms.TabPage tabPage2;
@@ -669,5 +646,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colBirthday;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHobby;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ComboBox txt付款方式;
     }
 }

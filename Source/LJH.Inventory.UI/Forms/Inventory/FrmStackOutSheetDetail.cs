@@ -578,6 +578,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtCustomer.Tag = c;
                 txtCustomer.Text = c != null ? c.Name : string.Empty;
                 txtAddress.Text = c != null ? c.Address : string.Empty;
+                txt付款方式.Text = c != null ? c.付款方式 : string.Empty;
                 if (c.DefaultLinker != null)
                 {
                     var contact = new ContactBLL(AppSettings.Current.ConnStr).GetByID(c.DefaultLinker.Value).QueryObject;

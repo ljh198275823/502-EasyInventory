@@ -147,6 +147,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_65652FDF7EA47334CC5CF40C7D1FFD0E"
+        "OwnerKey" = "8:_5AC47D9DF09A2ED3133101F044925225"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_666B03EF87C96A9DB1F7751D4F3C0BA4"
         "OwnerKey" = "8:_3BCAAD00AF614BEC94715555EF4D65EF"
         "MsmSig" = "8:_UNDEFINED"
@@ -793,6 +799,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_65652FDF7EA47334CC5CF40C7D1FFD0E"
+            {
+            "SourcePath" = "8:Ralid.GeneralLibrary.tlb"
+            "TargetName" = "8:Ralid.GeneralLibrary.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_3E91B3A3DE8F431BB1919EDAF6D254EF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_666B03EF87C96A9DB1F7751D4F3C0BA4"
             {
             "AssemblyRegister" = "3:1"
@@ -1342,7 +1368,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:易存企业管理系统"
         "ProductCode" = "8:{AB25A452-A0CE-4CF7-ADC7-EE4D64E15BD4}"
-        "PackageCode" = "8:{5A10963D-0326-4D06-A8FE-115FA62166A0}"
+        "PackageCode" = "8:{B384655C-D6F7-4F40-A166-EBA2D296CFCF}"
         "UpgradeCode" = "8:{B31A396D-FB16-4F37-BE89-5D203768FE1A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1465,7 +1491,7 @@
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0D84818825E24EE78E3F5A8CA192E75D"
             {
             "Name" = "8:卸载易存企业管理系统"
-            "Arguments" = "8:/x {E5247BA0-745A-4F18-AE75-EC091FEEF386}"
+            "Arguments" = "8:/x {AB25A452-A0CE-4CF7-ADC7-EE4D64E15BD4}"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"

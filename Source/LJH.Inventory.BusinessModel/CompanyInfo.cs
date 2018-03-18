@@ -132,6 +132,12 @@ namespace LJH.Inventory.BusinessModel
             if (_Externals.ContainsKey(key)) _Externals.Remove(key);
             Note = JsonConvert.SerializeObject(_Externals);
         }
+
+        public string 付款方式
+        {
+            get { return GetProperty("FKFS"); }
+            set { SetProperty("FKFS", value); }
+        }
         #endregion
 
         #region 公共方法

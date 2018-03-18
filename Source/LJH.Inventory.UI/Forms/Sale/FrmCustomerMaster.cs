@@ -138,6 +138,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             row.Cells["colFax"].Value = c.Fax;
             row.Cells["colPost"].Value = c.PostalCode;
             row.Cells["colAddress"].Value = c.Address;
+            row.Cells["col付款方式"].Value = c.付款方式;
             row.Cells["colMemo"].Value = c.Memo;
             if (c.DefaultLinker != null)
             {

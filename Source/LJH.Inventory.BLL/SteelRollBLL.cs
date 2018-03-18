@@ -201,7 +201,7 @@ namespace LJH.Inventory.BLL
                         len = records.Sum(it => it.Length.Value * it.Count);
                     }
 
-                    thick = ProductInventoryItem.Cal平方克重(SpecificationHelper.GetWrittenWidth(pi.Product.Specification).Value, weight, len);
+                    thick = ProductInventoryItem.Cal平方克重(SpecificationHelper.GetWrittenWidth(pi.Product.Specification).Value, weight, len / 1000);
                     if (thick.HasValue)
                     {
                         ProductInventoryItem clone = pi.Clone();
