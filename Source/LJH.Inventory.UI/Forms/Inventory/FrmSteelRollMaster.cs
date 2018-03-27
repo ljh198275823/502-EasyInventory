@@ -699,5 +699,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
+
     }
 }

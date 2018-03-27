@@ -128,6 +128,7 @@ namespace LJH.Inventory.BLL
             ProductInventoryItemSearchCondition con1 = new ProductInventoryItemSearchCondition();
             con1.InventoryItem = sliceSheet.ID;
             List<ProductInventoryItem> pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con1).QueryObjects;
+            if (pis == null) return new CommandResult(ResultCode.Fail, "没有找到加工的小件库存项");
             if (pis != null && pis.Exists(it => it.State != ProductInventoryState.Inventory && it.State != ProductInventoryState.Reserved)) return new CommandResult(ResultCode.Fail, "加工的某些小件已经出货或待出货，不能撤回此次加工");
             if (pis != null && pis.Exists(it => it.Model == ProductModel.原材料 && it.Status != "整卷")) return new CommandResult(ResultCode.Fail, "部分开条后的卷已经加工，不能撤销此次加工");
 
@@ -231,6 +232,12 @@ namespace LJH.Inventory.BLL
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             ProductInventoryItem newVal = sr.Clone();
             newVal.Weight = newWeight;
+            if (sr.Length.HasValue) newVal.Length = ProductInventoryItem.CalLength(
+               SpecificationHelper.GetWrittenThick(sr.Product.Specification).Value,
+               SpecificationHelper.GetWrittenWidth(sr.Product.Specification).Value,
+               newWeight,
+               sr.Product.Density.Value);
+
             ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(newVal, sr, unitWork);
             InventoryCheckRecord citem = new InventoryCheckRecord()
             {
@@ -255,6 +262,7 @@ namespace LJH.Inventory.BLL
             if (ret.Result == ResultCode.Successful)
             {
                 sr.Weight = newWeight;
+                sr.Length = newVal.Length;
             }
             return ret;
         }

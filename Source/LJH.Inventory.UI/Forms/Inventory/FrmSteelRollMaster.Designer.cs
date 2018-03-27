@@ -1046,6 +1046,7 @@
             this.mnu_CheckView.Name = "mnu_CheckView";
             this.mnu_CheckView.Size = new System.Drawing.Size(172, 22);
             this.mnu_CheckView.Text = "查看盘点记录";
+            this.mnu_CheckView.Click += new System.EventHandler(this.mnu_CheckView_Click);
             // 
             // toolStripSeparator4
             // 
