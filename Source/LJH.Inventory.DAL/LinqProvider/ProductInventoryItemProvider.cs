@@ -38,7 +38,7 @@ namespace LJH.Inventory.DAL.LinqProvider
 
         protected override List<ProductInventoryItem> GetingItems(DataContext dc, SearchCondition search)
         {
-            //dc.Log = Console.Out;
+            dc.Log = Console.Out;
             if (search is StackOutSheetSearchCondition) return GetingItemsEX(dc, search as StackOutSheetSearchCondition);
             var ret = from pi in dc.GetTable<ProductInventoryItem>()
                       from sr in dc.GetTable<ProductInventoryItem>().Where(it => pi.SourceRoll == it.ID).DefaultIfEmpty()
@@ -72,10 +72,9 @@ namespace LJH.Inventory.DAL.LinqProvider
                     if (con.Sliced.Value) ret = ret.Where(it => it.A.OriginalWeight > it.A.Weight);
                     else ret = ret.Where(it => it.A.OriginalWeight == it.A.Weight);
                 }
-                if (con.HasWeight.HasValue)
+                if (con.不显示尾卷和余料 == true && UserSettings.Current != null)
                 {
-                    if (con.HasWeight.Value) ret = ret.Where(it => it.A.Weight > 0);
-                    else ret = ret.Where(it => it.A.Weight == 0);
+                    ret = ret.Where(it => it.A.Length == null || it.A.Length > UserSettings.Current.BecomeTailAt);
                 }
                 if (con.CostID.HasValue) ret = ret.Where(it => it.A.CostID == con.CostID.Value);
             }

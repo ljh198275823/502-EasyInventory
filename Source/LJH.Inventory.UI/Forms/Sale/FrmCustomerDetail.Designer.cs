@@ -377,7 +377,7 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(709, 236);
             this.tabPage1.TabIndex = 6;
-            this.tabPage1.Text = "联系人";
+            this.tabPage1.Text = "联系人(0)";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // GridView

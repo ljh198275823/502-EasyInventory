@@ -50,6 +50,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colTotalWeight"].Value = record.BeforeWeight - record.AfterWeight;
             row.Cells["colSlicer"].Value = record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;
+            row.Cells["col操作员"].Value = record.Operator;
         }
 
         public override void ShowOperatorRights()

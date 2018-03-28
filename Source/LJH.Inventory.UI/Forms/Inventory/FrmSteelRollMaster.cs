@@ -172,7 +172,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 con.States.Add(ProductInventoryState.Reserved);
                 if (chk发货.Checked) con.States.Add(ProductInventoryState.Shipped);
                 if (chk作废.Checked) con.States.Add(ProductInventoryState.Nullified);
-                if (!chkRemainless.Checked) con.HasWeight = true;
+                if (!chkRemainless.Checked && !chkOnlyTail.Checked) con.不显示尾卷和余料 = true;
                 _SteelRolls = bll.GetItems(con).QueryObjects;
             }
             else

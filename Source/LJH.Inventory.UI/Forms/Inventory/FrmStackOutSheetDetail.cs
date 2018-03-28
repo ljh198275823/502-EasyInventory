@@ -413,17 +413,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
                     if (sheet.State != SheetState.已发货 && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint)
                     {
-                        var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.StackOut, Operator.Current.Name, Operator.Current.ID);
-                        if (ret.Result != ResultCode.Successful)
+                        if (CheckCredit())
                         {
-                            MessageBox.Show(ret.Message);
-                            return;
-                        }
-                        else
-                        {
-                            new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
-                            ShowButtonState();
-                            this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
+                            var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.StackOut, Operator.Current.Name, Operator.Current.ID);
+                            if (ret.Result != ResultCode.Successful)
+                            {
+                                MessageBox.Show(ret.Message);
+                                return;
+                            }
+                            else
+                            {
+                                new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
+                                ShowButtonState();
+                                this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
+                            }
                         }
                     }
                     string modal = GetModel();

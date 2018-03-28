@@ -77,6 +77,7 @@
             this.colWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSourceRoll = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSlicer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col操作员 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -319,6 +320,7 @@
             this.colWarehouse,
             this.colSourceRoll,
             this.colSlicer,
+            this.col操作员,
             this.colMemo});
             this.dataGridView1.Location = new System.Drawing.Point(5, 107);
             this.dataGridView1.Name = "dataGridView1";
@@ -474,6 +476,12 @@
             this.colSlicer.Name = "colSlicer";
             this.colSlicer.ReadOnly = true;
             // 
+            // col操作员
+            // 
+            this.col操作员.HeaderText = "操作员";
+            this.col操作员.Name = "col操作员";
+            this.col操作员.ReadOnly = true;
+            // 
             // colMemo
             // 
             this.colMemo.HeaderText = "备注";
@@ -543,6 +551,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colWarehouse;
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRoll;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col操作员;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

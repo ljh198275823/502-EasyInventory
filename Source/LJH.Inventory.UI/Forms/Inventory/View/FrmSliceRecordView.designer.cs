@@ -39,6 +39,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSliceRecordView));
             this.GridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_Undo = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.colSlicedDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoryID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +58,7 @@
             this.colAfterLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSlicer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_Undo = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.col操作员 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +85,8 @@
             this.colAfterWeight,
             this.colAfterLength,
             this.colCustomer,
-            this.colSlicer});
+            this.colSlicer,
+            this.col操作员});
             this.GridView.ContextMenuStrip = this.contextMenuStrip1;
             this.GridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridView.Location = new System.Drawing.Point(0, 0);
@@ -95,6 +97,34 @@
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridView.Size = new System.Drawing.Size(1106, 383);
             this.GridView.TabIndex = 22;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Undo,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 70);
+            // 
+            // mnu_Undo
+            // 
+            this.mnu_Undo.Name = "mnu_Undo";
+            this.mnu_Undo.Size = new System.Drawing.Size(124, 22);
+            this.mnu_Undo.Text = "撤销加工";
+            this.mnu_Undo.Click += new System.EventHandler(this.撤回加工ToolStripMenuItem_Click);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(124, 22);
+            this.cMnu_Export.Text = "导出...";
             // 
             // colSlicedDateTime
             // 
@@ -206,33 +236,11 @@
             this.colSlicer.Name = "colSlicer";
             this.colSlicer.ReadOnly = true;
             // 
-            // contextMenuStrip1
+            // col操作员
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_Undo,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
-            // 
-            // mnu_Undo
-            // 
-            this.mnu_Undo.Name = "mnu_Undo";
-            this.mnu_Undo.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Undo.Text = "撤销加工";
-            this.mnu_Undo.Click += new System.EventHandler(this.撤回加工ToolStripMenuItem_Click);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Export.Text = "导出...";
+            this.col操作员.HeaderText = "操作员";
+            this.col操作员.Name = "col操作员";
+            this.col操作员.ReadOnly = true;
             // 
             // FrmSliceRecordView
             // 
@@ -257,6 +265,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem cMnu_Export;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Undo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicedDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecification;
@@ -272,6 +281,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAfterLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlicer;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Undo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col操作员;
     }
 }

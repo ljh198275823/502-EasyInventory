@@ -77,6 +77,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSourceRoll"].Value = record.SourceRollWeight;
             if (txtSourceRollWeight.DecimalValue > 0) row.Visible = txtSourceRollWeight.DecimalValue == record.SourceRollWeight;  //如果指定了来源卷重
             row.Cells["colWarehouse"].Value = record.Warehouse;
+            row.Cells["col操作员"].Value = record.Operator;
             row.Cells["colMemo"].Value = record.Memo;
         }
         #endregion

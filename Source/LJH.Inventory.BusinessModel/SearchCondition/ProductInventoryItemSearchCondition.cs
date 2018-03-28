@@ -25,7 +25,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
 
         public bool HasRemain { get; set; }
 
-        public bool? HasWeight { get; set; }
+        public bool? 不显示尾卷和余料 { get; set; }
 
         public bool? Sliced { get; set; }
 

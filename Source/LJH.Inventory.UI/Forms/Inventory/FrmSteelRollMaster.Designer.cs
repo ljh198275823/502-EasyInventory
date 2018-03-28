@@ -447,7 +447,7 @@
             this.chkOnlyTail.TabIndex = 48;
             this.chkOnlyTail.Text = "尾卷";
             this.chkOnlyTail.UseVisualStyleBackColor = true;
-            this.chkOnlyTail.CheckedChanged += new System.EventHandler(this.FreshData_Clicked);
+            this.chkOnlyTail.CheckedChanged += new System.EventHandler(this.chk发货_CheckedChanged);
             // 
             // chkRemainless
             // 
