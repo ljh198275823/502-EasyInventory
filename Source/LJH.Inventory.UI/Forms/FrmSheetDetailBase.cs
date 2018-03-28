@@ -117,6 +117,8 @@ namespace LJH.Inventory.UI.Forms
                     ShowAttachmentHeaderOnRow(header, gridAttachment.Rows[row]);
                 }
             }
+            var tab = gridAttachment.Parent as TabPage;
+            if (tab != null) tab.Text = string.Format("附件({0})", gridAttachment.Rows.Count);
         }
 
         protected virtual void PerformAddAttach(string docID, string docType, DataGridView gridAttachment)

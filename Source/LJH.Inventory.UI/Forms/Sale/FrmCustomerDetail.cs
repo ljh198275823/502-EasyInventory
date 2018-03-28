@@ -236,6 +236,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             row.Cells["colQQ"].Value = item.QQ;
             row.Cells["colMemo"].Value = item.Memo;
             row.Cells["colDefault"].Value = _DefaultLinker == item.ID;
+            tabPage1.Text = string.Format("联系人({0})", GridView.Rows.Count);
         }
 
         private void mnu_DeleteContact_Click(object sender, EventArgs e)

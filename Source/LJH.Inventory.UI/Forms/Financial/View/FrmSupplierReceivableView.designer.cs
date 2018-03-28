@@ -202,7 +202,6 @@
             // 
             // colCreateDate
             // 
-            this.colCreateDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle1.Format = "D";
             dataGridViewCellStyle1.NullValue = null;
             this.colCreateDate.DefaultCellStyle = dataGridViewCellStyle1;
@@ -210,7 +209,6 @@
             this.colCreateDate.Name = "colCreateDate";
             this.colCreateDate.ReadOnly = true;
             this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCreateDate.Width = 35;
             // 
             // col类别
             // 
@@ -238,7 +236,7 @@
             // 
             // colAmount
             // 
-            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle2.Format = "C2";
             this.colAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.colAmount.HeaderText = "金额";
@@ -249,7 +247,7 @@
             // 
             // colHaspaid
             // 
-            this.colHaspaid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colHaspaid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle3.Format = "C2";
             this.colHaspaid.DefaultCellStyle = dataGridViewCellStyle3;
             this.colHaspaid.HeaderText = "已支付";
@@ -260,7 +258,7 @@
             // 
             // colNotPaid
             // 
-            this.colNotPaid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colNotPaid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridViewCellStyle4.Format = "C2";
             dataGridViewCellStyle4.NullValue = null;
             this.colNotPaid.DefaultCellStyle = dataGridViewCellStyle4;
@@ -272,16 +270,15 @@
             // 
             // colHowold
             // 
-            this.colHowold.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colHowold.HeaderText = "账龄";
             this.colHowold.Name = "colHowold";
             this.colHowold.ReadOnly = true;
             this.colHowold.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colHowold.Width = 35;
+            this.colHowold.Width = 60;
             // 
             // colOrderID
             // 
-            this.colOrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colOrderID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colOrderID.HeaderText = "合同号";
             this.colOrderID.Name = "colOrderID";
             this.colOrderID.ReadOnly = true;
@@ -290,7 +287,7 @@
             // 
             // col购货单位
             // 
-            this.col购货单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col购货单位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.col购货单位.HeaderText = "购货单位";
             this.col购货单位.Name = "col购货单位";
             this.col购货单位.ReadOnly = true;
