@@ -78,7 +78,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 送货单资料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print | PermissionActions.显示成本, Description = "送货单资料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print | PermissionActions.显示成本 | PermissionActions.超出信用额度可出货, Description = "送货单资料")]
         DeliverySheet,
         /// <summary>
         /// 其它产品
@@ -236,6 +236,11 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "出货成本明细报表")]
         出货成本明细报表,
+        /// <summary>
+        ///出货成本明细报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read | PermissionActions.导出, Description = "单据作废记录报表")]
+        单据作废记录报表,
         #endregion
     }
 }

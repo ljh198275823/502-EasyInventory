@@ -148,6 +148,12 @@
     <Compile Include="Forms\Financial\Frm退款.designer.cs">
       <DependentUpon>Frm退款.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Financial\Report\Frm作废单据报表.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Financial\Report\Frm作废单据报表.Designer.cs">
+      <DependentUpon>Frm作废单据报表.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\Report\Frm内部转账记录报表.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -823,6 +829,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Frm退款.resx">
       <DependentUpon>Frm退款.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Financial\Report\Frm作废单据报表.resx">
+      <DependentUpon>Frm作废单据报表.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Report\Frm内部转账记录报表.resx">
       <DependentUpon>Frm内部转账记录报表.cs</DependentUpon>

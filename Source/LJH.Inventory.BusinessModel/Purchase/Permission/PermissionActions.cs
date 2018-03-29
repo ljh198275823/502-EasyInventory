@@ -69,6 +69,7 @@ namespace LJH.Inventory.BusinessModel
         EditAttachment = 0x1000,
         导出 = 0x8000,
         核销 = 0x10000,
+        超出信用额度可出货 = 0x20000,
     }
 }
         

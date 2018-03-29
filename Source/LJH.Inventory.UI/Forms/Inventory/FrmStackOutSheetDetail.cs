@@ -505,7 +505,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 if (UserSettings.Current.ForbidWhenOverCreditLimit)
                 {
-                    if (Operator.Current.Role != null && Operator.Current.Role.IsAdmin)
+                    if (Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.超出信用额度可出货))
                     {
                         if (MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，是否继续发货?", "询问", MessageBoxButtons.YesNo) == DialogResult.No)
                         {
@@ -522,7 +522,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     if (MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，是否继续发货?", "询问", MessageBoxButtons.YesNo) == DialogResult.No)
                     {
-                        return false ;
+                        return false;
                     }
                 }
             }

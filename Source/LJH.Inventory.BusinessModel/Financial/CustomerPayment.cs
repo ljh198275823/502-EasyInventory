@@ -95,9 +95,9 @@ namespace LJH.Inventory.BusinessModel
                 switch (ClassID)
                 {
                     case CustomerPaymentType.客户收款:
-                        return "客户应收款";
+                        return "客户收款";
                     case CustomerPaymentType.供应商付款:
-                        return "供应商应付款";
+                        return "供应商付款";
                     case CustomerPaymentType.客户增值税发票:
                         return "客户增值税发票";
                     case CustomerPaymentType.供应商增值税发票:
