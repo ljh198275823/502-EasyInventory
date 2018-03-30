@@ -70,7 +70,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             //ret.Add(first);
             ret.AddRange(from it in rs
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
-                         select new 供应商往来项() { Name = it.CreateDate.ToString("yyyy-MM-dd"), CreateDate = it.CreateDate, 单据编号 = it.SheetID, 规格 = it.GetProperty("规格"), 重量 =it.GetProperty ("重量"),吨价 =it.GetProperty ("入库单价"), 出货 = it.Amount, Memo = it.Memo });
+                         select new 供应商往来项() { Name = it.CreateDate.ToString("yyyy-MM-dd"), CreateDate = it.CreateDate, 单据编号 = it.SheetID, 规格 = it.GetProperty("规格"), 重量 = it.GetProperty("重量"), 吨价 = it.GetProperty("入库单价"), 出货 = it.Amount, Memo = it.Memo });
 
             ret.AddRange(from it in ps
                          where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
