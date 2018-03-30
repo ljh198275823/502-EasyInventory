@@ -436,7 +436,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
                 SliceRecordSearchCondition con = new SliceRecordSearchCondition();
-                con.SourceRoll = sr.ID;
+                con.SourceRoll = sr.SourceID.HasValue ? sr.SourceID : sr.ID; //sourceID有值 ，表示已经出货了，所以要查询源卷的加工记录
                 FrmSliceRecordView frm = new FrmSliceRecordView();
                 frm.SearchCondition = con;
                 frm.ShowDialog();
@@ -471,7 +471,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
                 View.FrmSteelRollCheckRecordView frm = new FrmSteelRollCheckRecordView();
-                frm.SearchCondition = new InventoryCheckRecordSearchCondition() { SourceID = sr.ID };
+                frm.SearchCondition = new InventoryCheckRecordSearchCondition() { SourceID = sr.SourceID.HasValue ? sr.SourceID : sr.ID };
                 frm.StartPosition = FormStartPosition.CenterParent;
                 frm.ShowDialog();
             }
