@@ -146,7 +146,7 @@
             this.txtWeight.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtWeight.Location = new System.Drawing.Point(100, 121);
             this.txtWeight.MaxValue = new decimal(new int[] {
-            15,
+            30,
             0,
             0,
             0});
@@ -317,7 +317,7 @@
             this.txtOriginalWeight.ImeMode = System.Windows.Forms.ImeMode.On;
             this.txtOriginalWeight.Location = new System.Drawing.Point(100, 87);
             this.txtOriginalWeight.MaxValue = new decimal(new int[] {
-            15,
+            30,
             0,
             0,
             0});
