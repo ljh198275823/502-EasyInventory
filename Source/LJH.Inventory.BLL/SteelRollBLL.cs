@@ -46,6 +46,7 @@ namespace LJH.Inventory.BLL
         {
             if (sr.Product.Weight == null && sr.Product.Model == MODEL)
             {
+                sr = GetByID(sr.ID).QueryObject; //重新从数据库获取最新状态
                 var p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, sr.Product.Model, sr.Weight, sr.Length, sr.Product.Density, true);
                 if (p != null)
                 {
