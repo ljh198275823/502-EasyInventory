@@ -159,7 +159,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ItemShowing()
         {
-            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
+            ProductInventoryItem item = UpdatingItem as ProductInventoryItem; 
             dtStorageDateTime.Value = item.AddDate;
             var ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(item.WareHouseID).QueryObject;
             txtWareHouse.Text = ws != null ? ws.Name : null;

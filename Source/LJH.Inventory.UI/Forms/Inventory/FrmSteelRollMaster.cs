@@ -287,6 +287,31 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             }
         }
+
+        protected override void PerformUpdateData()
+        {
+            if (this.GridView != null && this.GridView.SelectedRows != null && this.GridView.SelectedRows.Count > 0)
+            {
+                var item = this.GridView.SelectedRows[0].Tag as ProductInventoryItem;
+                var pre = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(item.ID).QueryObject;
+                if (pre != null)
+                {
+                    FrmDetailBase detailForm = GetDetailForm();
+                    if (detailForm != null)
+                    {
+                        detailForm.IsAdding = false;
+                        detailForm.UpdatingItem = pre;
+
+                        detailForm.ItemUpdated += delegate(object obj, ItemUpdatedEventArgs args)
+                        {
+                            _SteelRolls.Remove(item);
+                            ShowItemInGridViewRow(this.GridView.SelectedRows[0], args.UpdatedItem);
+                        };
+                        detailForm.ShowDialog();
+                    }
+                }
+            }
+        }
         #endregion
 
         #region 事件处理函数
@@ -415,13 +440,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
             {
                 ProductInventoryItem sr = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                if (sr.State == ProductInventoryState.Inventory)
+                var newVal = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(sr.ID).QueryObject; //操作之前 先刷新一次，防止多台电脑同时操作引起数据不一致
+                if (newVal.State == ProductInventoryState.Inventory)
                 {
                     FrmSlice frm = new FrmSlice();
-                    frm.SlicingItem = sr;
+                    frm.SlicingItem = newVal ;
                     frm.SliceTo = sliceTo;
                     frm.ShowDialog();
-                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                    _SteelRolls.Remove(sr);
+                    ShowItemInGridViewRow(dataGridView1.SelectedRows[0], newVal );
                 }
                 else
                 {
