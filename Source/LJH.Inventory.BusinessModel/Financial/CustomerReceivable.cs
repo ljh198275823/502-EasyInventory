@@ -72,6 +72,14 @@ namespace LJH.Inventory.BusinessModel
             return null;
         }
 
+        public decimal GetPropertyByDecimalOrDefault(string key)
+        {
+            string temp = this.GetProperty(key);
+            decimal sq;
+            if (!string.IsNullOrEmpty(temp) && decimal.TryParse(temp, out sq)) return sq;
+            return 0;
+        }
+
         public void SetProperty(string key, string value)
         {
             if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);

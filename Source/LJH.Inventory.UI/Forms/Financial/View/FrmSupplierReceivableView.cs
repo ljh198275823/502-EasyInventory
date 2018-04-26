@@ -92,6 +92,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 }
                 int rowTotal = GridView.Rows.Add();
                 GridView.Rows[rowTotal].Cells["colCreateDate"].Value = "合计";
+                GridView.Rows[rowTotal].Cells["col重量"].Value = items.Sum(item => item.GetPropertyByDecimalOrDefault("重量")).Trim();
                 GridView.Rows[rowTotal].Cells["colAmount"].Value = items.Sum(item => (item as CustomerReceivable).Amount).Trim();
                 GridView.Rows[rowTotal].Cells["colHaspaid"].Value = items.Sum(item => (item as CustomerReceivable).Haspaid).Trim();
                 GridView.Rows[rowTotal].Cells["colNotpaid"].Value = items.Sum(item => (item as CustomerReceivable).Remain).Trim();
@@ -110,6 +111,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             lblMSG.Text = string.Format("共 {0} 项", items.Count);
             if (GridView.Rows.Count > 0)
             {
+                GridView.Rows[GridView.Rows.Count - 1].Cells["col重量"].Value = items.Sum(item => item.GetPropertyByDecimalOrDefault("重量")).Trim();
                 GridView.Rows[GridView.Rows.Count - 1].Cells["colAmount"].Value = items.Sum(item => (item as CustomerReceivable).Amount).Trim();
                 GridView.Rows[GridView.Rows.Count - 1].Cells["colHaspaid"].Value = items.Sum(item => (item as CustomerReceivable).Haspaid).Trim();
                 GridView.Rows[GridView.Rows.Count - 1].Cells["colNotpaid"].Value = items.Sum(item => (item as CustomerReceivable).Remain).Trim();
