@@ -45,6 +45,7 @@
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col重量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHaspaid = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colNotPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +70,7 @@
             this.GridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetID,
             this.colCreateDate,
+            this.col重量,
             this.colAmount,
             this.colHaspaid,
             this.colNotPaid,
@@ -81,7 +83,7 @@
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(818, 259);
+            this.GridView.Size = new System.Drawing.Size(955, 259);
             this.GridView.TabIndex = 22;
             this.GridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
             // 
@@ -114,14 +116,14 @@
             this.lblMSG});
             this.statusStrip1.Location = new System.Drawing.Point(0, 356);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(818, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(955, 22);
             this.statusStrip1.TabIndex = 25;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblMSG
             // 
             this.lblMSG.Name = "lblMSG";
-            this.lblMSG.Size = new System.Drawing.Size(803, 17);
+            this.lblMSG.Size = new System.Drawing.Size(940, 17);
             this.lblMSG.Spring = true;
             this.lblMSG.Text = "共 0 项";
             // 
@@ -176,6 +178,13 @@
             this.colCreateDate.ReadOnly = true;
             this.colCreateDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // col重量
+            // 
+            this.col重量.HeaderText = "重量";
+            this.col重量.Name = "col重量";
+            this.col重量.ReadOnly = true;
+            this.col重量.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // colAmount
             // 
             dataGridViewCellStyle2.Format = "C2";
@@ -229,7 +238,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(818, 378);
+            this.ClientSize = new System.Drawing.Size(955, 378);
             this.Controls.Add(this.btnLast3Month);
             this.Controls.Add(this.ucDateTimeInterval1);
             this.Controls.Add(this.chkSheetDate);
@@ -262,6 +271,7 @@
         private System.Windows.Forms.CheckBox chkSheetDate;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col重量;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewLinkColumn colHaspaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNotPaid;

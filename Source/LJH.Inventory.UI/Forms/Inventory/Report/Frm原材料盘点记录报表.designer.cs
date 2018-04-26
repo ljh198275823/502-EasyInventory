@@ -51,6 +51,7 @@
             this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colChecker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col查看卷 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -180,6 +181,7 @@
             this.colState,
             this.colCustomer,
             this.colChecker,
+            this.col查看卷,
             this.colMemo});
             this.dataGridView1.Location = new System.Drawing.Point(0, 107);
             this.dataGridView1.Name = "dataGridView1";
@@ -189,6 +191,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1094, 361);
             this.dataGridView1.TabIndex = 38;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellContentClick);
             // 
             // colCheckDate
             // 
@@ -260,6 +263,13 @@
             this.colChecker.Name = "colChecker";
             this.colChecker.ReadOnly = true;
             // 
+            // col查看卷
+            // 
+            this.col查看卷.HeaderText = "查看";
+            this.col查看卷.Name = "col查看卷";
+            this.col查看卷.ReadOnly = true;
+            this.col查看卷.Width = 50;
+            // 
             // colMemo
             // 
             this.colMemo.HeaderText = "备注";
@@ -314,6 +324,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colChecker;
+        private System.Windows.Forms.DataGridViewLinkColumn col查看卷;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

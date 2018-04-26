@@ -924,7 +924,7 @@
             this.mnu_Import,
             this.更多操作ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 380);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 358);
             // 
             // cMnu_Fresh
             // 
@@ -990,28 +990,28 @@
             // mnu_开平
             // 
             this.mnu_开平.Name = "mnu_开平";
-            this.mnu_开平.Size = new System.Drawing.Size(152, 22);
+            this.mnu_开平.Size = new System.Drawing.Size(100, 22);
             this.mnu_开平.Text = "开平";
             this.mnu_开平.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_开卷
             // 
             this.mnu_开卷.Name = "mnu_开卷";
-            this.mnu_开卷.Size = new System.Drawing.Size(152, 22);
+            this.mnu_开卷.Size = new System.Drawing.Size(100, 22);
             this.mnu_开卷.Text = "开卷";
             this.mnu_开卷.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_开条
             // 
             this.mnu_开条.Name = "mnu_开条";
-            this.mnu_开条.Size = new System.Drawing.Size(152, 22);
+            this.mnu_开条.Size = new System.Drawing.Size(100, 22);
             this.mnu_开条.Text = "开条";
             this.mnu_开条.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 
             // mnu_开吨
             // 
             this.mnu_开吨.Name = "mnu_开吨";
-            this.mnu_开吨.Size = new System.Drawing.Size(152, 22);
+            this.mnu_开吨.Size = new System.Drawing.Size(100, 22);
             this.mnu_开吨.Text = "开吨";
             this.mnu_开吨.Click += new System.EventHandler(this.mnu_Slice_Click);
             // 

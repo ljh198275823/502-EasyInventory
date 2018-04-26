@@ -35,6 +35,8 @@
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col供应商 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col操作员 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
@@ -53,6 +55,8 @@
             this.colName,
             this.colPrice,
             this.colWithTax,
+            this.col供应商,
+            this.col操作员,
             this.colMemo});
             this.GridView.Location = new System.Drawing.Point(0, 66);
             this.GridView.Name = "GridView";
@@ -60,13 +64,13 @@
             this.GridView.RowHeadersVisible = false;
             this.GridView.RowTemplate.Height = 23;
             this.GridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridView.Size = new System.Drawing.Size(573, 239);
+            this.GridView.Size = new System.Drawing.Size(696, 239);
             this.GridView.TabIndex = 23;
             // 
             // btn设置其它成本
             // 
             this.btn设置其它成本.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn设置其它成本.Location = new System.Drawing.Point(469, 14);
+            this.btn设置其它成本.Location = new System.Drawing.Point(592, 14);
             this.btn设置其它成本.Name = "btn设置其它成本";
             this.btn设置其它成本.Size = new System.Drawing.Size(92, 37);
             this.btn设置其它成本.TabIndex = 159;
@@ -77,7 +81,7 @@
             // btn设置结算单价
             // 
             this.btn设置结算单价.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn设置结算单价.Location = new System.Drawing.Point(353, 14);
+            this.btn设置结算单价.Location = new System.Drawing.Point(476, 14);
             this.btn设置结算单价.Name = "btn设置结算单价";
             this.btn设置结算单价.Size = new System.Drawing.Size(92, 37);
             this.btn设置结算单价.TabIndex = 158;
@@ -108,6 +112,21 @@
             this.colWithTax.ReadOnly = true;
             this.colWithTax.Width = 60;
             // 
+            // col供应商
+            // 
+            this.col供应商.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col供应商.HeaderText = "供应商";
+            this.col供应商.Name = "col供应商";
+            this.col供应商.ReadOnly = true;
+            this.col供应商.Width = 66;
+            // 
+            // col操作员
+            // 
+            this.col操作员.HeaderText = "操作员";
+            this.col操作员.Name = "col操作员";
+            this.col操作员.ReadOnly = true;
+            this.col操作员.Width = 80;
+            // 
             // colMemo
             // 
             this.colMemo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -121,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 327);
+            this.ClientSize = new System.Drawing.Size(696, 327);
             this.Controls.Add(this.btn设置其它成本);
             this.Controls.Add(this.btn设置结算单价);
             this.Controls.Add(this.GridView);
@@ -144,6 +163,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col供应商;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col操作员;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

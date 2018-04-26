@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.UI;
 using LJH.GeneralLibrary.Core.DAL;
@@ -21,6 +22,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         }
 
         public ProductInventoryItem ProductInventoryItem { get; set; }
+        private List<CompanyInfo> _Suppliers = null;
 
         #region 重写基类方法
         public override void ShowOperatorRights()
@@ -32,6 +34,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override List<object> GetDataSource()
         {
+            _Suppliers = new CompanyBLL(AppSettings.Current.ConnStr).GetAllSuppliers().QueryObjects;
             var records = ProductInventoryItem.GetAllCosts();
             if (records != null && records.Count > 0)
             {
@@ -52,6 +55,9 @@ namespace LJH.Inventory.UI.Forms.Inventory
             row.Cells["colWithTax"].Value = record.WithTax;
             if (record.Name == CostItem.结算单价 && !Operator.Current.Permit(Permission.结算单价, PermissionActions.Read)) row.Visible = false;
             else if (!Operator.Current.Permit(Permission.其它成本, PermissionActions.Read)) row.Visible = false;
+            CompanyInfo s = _Suppliers != null ? _Suppliers.SingleOrDefault(it => it.ID == record.SupllierID) : null;
+            row.Cells["col供应商"].Value = s != null ? s.Name : null;
+            row.Cells["col操作员"].Value = record.Operator;
             row.Cells["colMemo"].Value = record.Memo;
         }
         #endregion

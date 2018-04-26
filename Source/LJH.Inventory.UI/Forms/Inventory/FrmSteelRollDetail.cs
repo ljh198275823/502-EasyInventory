@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LJH.Inventory.BusinessModel;
+using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Controls;
 using LJH.GeneralLibrary.Core.DAL;
@@ -159,7 +160,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override void ItemShowing()
         {
-            ProductInventoryItem item = UpdatingItem as ProductInventoryItem; 
+            ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
             dtStorageDateTime.Value = item.AddDate;
             var ws = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(item.WareHouseID).QueryObject;
             txtWareHouse.Text = ws != null ? ws.Name : null;
@@ -257,6 +258,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Add(pi);
             if (ret.Result == ResultCode.Successful)
             {
+                if (txtPurchasePrice.DecimalValue > 0)
+                {
+                    var ci = new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked, SupllierID = txtSupplier.Tag != null ? (txtSupplier.Tag as CompanyInfo).ID : null, Operator = Operator.Current.ID };
+                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, null);
+                }
                 if (txt运费.DecimalValue > 0)
                 {
                     var ci = new CostItem() { Name = CostItem.运费, Price = txt运费.DecimalValue, WithTax = rdWithTax_运费.Checked, SupllierID = (txtSupplier运费.Tag as CompanyInfo).ID };
@@ -272,6 +278,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var ret = (new SteelRollBLL(AppSettings.Current.ConnStr)).Update(pi);
             if (ret.Result == ResultCode.Successful)
             {
+                if (txtPurchasePrice.DecimalValue > 0)
+                {
+                    var ci = new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked, SupllierID = txtSupplier.Tag != null ? (txtSupplier.Tag as CompanyInfo).ID : null, Operator = Operator.Current.ID };
+                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(pi, ci, Operator.Current.Name, Operator.Current.ID, null);
+                }
                 if (txt运费.DecimalValue > 0)
                 {
                     var ci = new CostItem() { Name = CostItem.运费, Price = txt运费.DecimalValue, WithTax = rdWithTax_运费.Checked, SupllierID = (txtSupplier运费.Tag as CompanyInfo).ID };
@@ -469,6 +480,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             var frm = new Frm成本明细();
             frm.ProductInventoryItem = UpdatingItem as ProductInventoryItem;
             frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
+
+        private void btn查看加工明细_Click(object sender, EventArgs e)
+        {
+            ProductInventoryItem sr = UpdatingItem as ProductInventoryItem;
+            SliceRecordSearchCondition con = new SliceRecordSearchCondition();
+            con.SourceRoll = sr.SourceID.HasValue ? sr.SourceID : sr.ID; //sourceID有值 ，表示已经出货了，所以要查询源卷的加工记录
+            View.FrmSliceRecordView frm = new View.FrmSliceRecordView();
+            frm.SearchCondition = con;
             frm.ShowDialog();
         }
     }

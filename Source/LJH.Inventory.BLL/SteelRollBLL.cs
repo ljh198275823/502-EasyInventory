@@ -109,6 +109,7 @@ namespace LJH.Inventory.BLL
                 Supplier = sr.Supplier,
                 Manufacture = sr.Manufacture,
                 Material = sr.Material,
+                PurchaseID = sr.PurchaseID,
                 SourceRoll = sr.ID,  //设置加工来源
                 CostID = sr.CostID.HasValue ? sr.CostID.Value : sr.ID, //带上成本参数,如果原材料还没有设置成本，默认原材料的成本ID是其ID
                 Memo = sliceSheet.Memo,

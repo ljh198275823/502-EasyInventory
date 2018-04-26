@@ -57,6 +57,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             else row.Cells["colAssigned"].Value = null;
             row.Cells["colAccount"].Value = cp.AccountID;
             row.Cells["colPayer"].Value = cp.OtherAccount;
+            row.Cells["col重量"].Value = cp.GetProperty("重量");
             row.Cells["colMemo"].Value = cp.Memo;
         }
 

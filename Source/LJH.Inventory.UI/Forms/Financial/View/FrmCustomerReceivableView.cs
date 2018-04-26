@@ -61,6 +61,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                 if (!string.IsNullOrEmpty(gg)) row.Cells["colSheetID"].Value = gg;
             }
             row.Cells["colOrderID"].Value = cr.OrderID;
+            row.Cells["col重量"].Value = cr.GetProperty("重量");
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
             row.Cells["colAmount"].Value = cr.Amount.Trim();
             if (cr.Haspaid != 0) row.Cells["colHaspaid"].Value = cr.Haspaid.Trim();

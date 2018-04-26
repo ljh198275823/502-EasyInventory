@@ -155,19 +155,6 @@ namespace LJH.Inventory.BLL
             {
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(sr, unitWork);
-                if (!string.IsNullOrEmpty(sr.Supplier))
-                {
-                    var ci = sr.GetCost(CostItem.入库单价);
-                    ci.SupllierID = sr.Supplier;  //入库的时候可能没有保存，所以这里加一个保证保存
-                    sr.SetCost(ci);
-                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
-                    if (s != null && ci != null)
-                    {
-                        var dt = DateTime.Now;
-                        SaveReceivable(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
-                        SaveTax(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
-                    }
-                }
                 return unitWork.Commit();
             }
             catch (Exception ex)
@@ -183,22 +170,6 @@ namespace LJH.Inventory.BLL
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 var o = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(sr.ID).QueryObject;
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(sr, o, unitWork);
-                if (!string.IsNullOrEmpty(sr.Supplier) && sr.SourceID == null && sr.SourceRoll == null) //新建入库的才要计算应收
-                {
-                    var ci = sr.GetCost(CostItem.入库单价);
-                    if (ci != null)
-                    {
-                        ci.SupllierID = sr.Supplier;  //入库的时候可能没有保存，所以这里加一个保证保存
-                        sr.SetCost(ci);
-                        var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(sr.Supplier).QueryObject;
-                        if (s != null)
-                        {
-                            DateTime dt = DateTime.Now;
-                            SaveReceivable(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
-                            SaveTax(sr, ci, new DateTime(sr.AddDate.Year, sr.AddDate.Month, sr.AddDate.Day, dt.Hour, dt.Minute, dt.Second), null, unitWork);
-                        }
-                    }
-                }
                 return unitWork.Commit();
             }
             catch (Exception ex)
@@ -229,9 +200,19 @@ namespace LJH.Inventory.BLL
 
         public CommandResult UpdatePurchaseID(ProductInventoryItem pi, string purchaseID)
         {
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
             var clone = pi.Clone();
             clone.PurchaseID = purchaseID;
-            var ret = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi);
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
+            var con = new ProductInventoryItemSearchCondition() { SourceRoll = pi.CostID.HasValue ? pi.CostID : pi.ID };
+            var pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            foreach (var item in pis)
+            {
+                var itemClone = item.Clone();
+                itemClone.PurchaseID = purchaseID;
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(itemClone, item, unitWork);
+            }
+            var ret = unitWork.Commit();
             if (ret.Result == ResultCode.Successful) pi.Position = purchaseID;
             return ret;
         }
@@ -336,6 +317,7 @@ namespace LJH.Inventory.BLL
                 {
                     if (string.IsNullOrEmpty(ci.SupllierID)) ci.SupllierID = pi.Supplier;
                 }
+                ci.Operator = opt;
 
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 var clone = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetByID(pi.ID).QueryObject;
@@ -346,7 +328,8 @@ namespace LJH.Inventory.BLL
                 }
                 string memo = string.Empty;
                 var oci = pi.GetCost(ci.Name);
-                memo += string.Format("{0}从{1}改成{2},", ci.Name, oci != null ? oci.Price : 0, ci.Price);
+                var s = (!string.IsNullOrEmpty(ci.SupllierID)) ? new CompanyBLL(RepoUri).GetByID(ci.SupllierID).QueryObject : null;
+                memo += string.Format("{0}从{1}改成{2}, 供应商:{3}", ci.Name, oci != null ? oci.Price : 0, ci.Price, s != null ? s.Name : string.Empty);
                 clone.SetCost(ci);
                 if (ci.Name == CostItem.结算单价 && clone.Supplier != ci.SupllierID)  //2017-11-28 修改入库单价时，如果同时修改了
                 {
@@ -371,7 +354,6 @@ namespace LJH.Inventory.BLL
                 AddOperationLog(pi.ID.ToString(), pi.DocumentType, ci.Name == CostItem.结算单价 ? "设置结算单价" : "修改成本", unitWork, DateTime.Now, opt, logID, memo);
                 if (!string.IsNullOrEmpty(ci.SupllierID) && pi.SourceID == null && pi.SourceRoll == null)
                 {
-                    var s = ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).GetByID(ci.SupllierID).QueryObject;
                     if (s != null)
                     {
                         var dt = (ci.Name == CostItem.入库单价 || ci.Name == CostItem.结算单价) ? new DateTime(pi.AddDate.Year, pi.AddDate.Month, pi.AddDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) : DateTime.Now;

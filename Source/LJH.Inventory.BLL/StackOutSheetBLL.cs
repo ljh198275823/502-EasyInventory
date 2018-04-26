@@ -31,6 +31,7 @@ namespace LJH.Inventory.BLL
                 Amount = sheet.Amount,
                 Memo = sheet.Memo,
             };
+            cr.SetProperty("重量", sheet.TotalWeight.ToString("F3"));
             ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
         }
 
@@ -46,6 +47,7 @@ namespace LJH.Inventory.BLL
                 Amount = sheet.Amount,
                 Memo = sheet.Memo
             };
+            tax.SetProperty("重量", sheet.TotalWeight.ToString("F3"));
             ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(tax, unitWork);
         }
 

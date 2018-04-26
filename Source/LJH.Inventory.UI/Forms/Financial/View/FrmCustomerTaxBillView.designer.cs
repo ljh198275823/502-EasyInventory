@@ -46,6 +46,7 @@
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col重量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPayer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,14 +63,15 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSheetID,
             this.colSheetDate,
+            this.col重量,
             this.colAmount,
             this.colPayer,
             this.colAccount,
@@ -186,6 +188,12 @@
             this.colSheetDate.ReadOnly = true;
             this.colSheetDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // col重量
+            // 
+            this.col重量.HeaderText = "重量";
+            this.col重量.Name = "col重量";
+            this.col重量.ReadOnly = true;
+            // 
             // colAmount
             // 
             dataGridViewCellStyle2.Format = "C2";
@@ -276,6 +284,7 @@
         private System.Windows.Forms.CheckBox chkSheetDate;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col重量;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPayer;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAccount;

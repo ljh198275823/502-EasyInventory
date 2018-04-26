@@ -319,6 +319,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             else ret = new OtherProductInventoryBLL(AppSettings.Current.ConnStr).Update(SteelRollSlice);
             if (ret.Result == ResultCode.Successful)
             {
+                if (txtPurchasePrice.DecimalValue > 0)
+                {
+                    var ci = new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked, SupllierID = txtSupplier.Tag != null ? (txtSupplier.Tag as CompanyInfo).ID : null, Operator = Operator.Current.ID };
+                    new ProductInventoryItemBLL(AppSettings.Current.ConnStr).设置成本(SteelRollSlice, ci, Operator.Current.Name, Operator.Current.ID, null);
+                }
+
                 if (txt运费.DecimalValue > 0)
                 {
                     var ci = new CostItem() { Name = CostItem.运费, Price = txt运费.DecimalValue, WithTax = rdWithTax_运费.Checked, SupllierID = (txtSupplier运费.Tag as CompanyInfo).ID };

@@ -73,6 +73,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.DefaultCellStyle.ForeColor = record.CheckCount > record.Inventory ? Color.Black : Color.Red;
             row.Cells["colChecker"].Value = record.Checker;
             row.Cells["colCustomer"].Value = record.Customer;
+            row.Cells["col查看卷"].Value = "查看卷";
             row.Cells["colMemo"].Value = record.Memo;
         }
         #endregion
@@ -81,6 +82,18 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         private void GridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "col查看卷")
+            {
+                InventoryCheckRecord record = dataGridView1.Rows[e.RowIndex].Tag as InventoryCheckRecord;
+                var pi = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetByID(record.SourceID.Value).QueryObject;
+                if (pi.Model == ProductModel.原材料)
+                {
+                    FrmSteelRollDetail frm = new FrmSteelRollDetail();
+                    frm.UpdatingItem = pi;
+                    frm.IsForView = true;
+                    frm.ShowDialog();
+                }
+            }
         }
         #endregion
     }

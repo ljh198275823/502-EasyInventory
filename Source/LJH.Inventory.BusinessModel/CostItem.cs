@@ -51,6 +51,8 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string SupllierID { get; set; }
 
+        public string Operator { get; set; }
+
         public string Memo { get; set; }
         #endregion
     }

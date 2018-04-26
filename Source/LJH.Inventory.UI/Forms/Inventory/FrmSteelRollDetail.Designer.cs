@@ -81,6 +81,7 @@
             this.txtCarPlate = new LJH.Inventory.UI.Controls.CarplateComboBox(this.components);
             this.txtMaterial = new LJH.Inventory.UI.Controls.MaterialComboBox(this.components);
             this.cmbSpecification = new LJH.Inventory.UI.Controls.UCSpecification();
+            this.btn查看加工明细 = new System.Windows.Forms.Button();
             this.pnlTax.SuspendLayout();
             this.pnlCost.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -635,7 +636,7 @@
             // btn查看来源卷
             // 
             this.btn查看来源卷.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn查看来源卷.Location = new System.Drawing.Point(74, 458);
+            this.btn查看来源卷.Location = new System.Drawing.Point(152, 495);
             this.btn查看来源卷.Name = "btn查看来源卷";
             this.btn查看来源卷.Size = new System.Drawing.Size(126, 35);
             this.btn查看来源卷.TabIndex = 147;
@@ -668,12 +669,24 @@
             this.cmbSpecification.Specification = "*";
             this.cmbSpecification.TabIndex = 2;
             // 
+            // btn查看加工明细
+            // 
+            this.btn查看加工明细.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn查看加工明细.Location = new System.Drawing.Point(47, 454);
+            this.btn查看加工明细.Name = "btn查看加工明细";
+            this.btn查看加工明细.Size = new System.Drawing.Size(126, 35);
+            this.btn查看加工明细.TabIndex = 151;
+            this.btn查看加工明细.Text = "查看加工明细";
+            this.btn查看加工明细.UseVisualStyleBackColor = true;
+            this.btn查看加工明细.Click += new System.EventHandler(this.btn查看加工明细_Click);
+            // 
             // FrmSteelRollDetail
             // 
             this.AcceptButton = this.btnOk1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 514);
+            this.Controls.Add(this.btn查看加工明细);
             this.Controls.Add(this.btn查看来源卷);
             this.Controls.Add(this.pnlCost);
             this.Controls.Add(this.btnOk1);
@@ -752,6 +765,7 @@
             this.Controls.SetChildIndex(this.btnOk1, 0);
             this.Controls.SetChildIndex(this.pnlCost, 0);
             this.Controls.SetChildIndex(this.btn查看来源卷, 0);
+            this.Controls.SetChildIndex(this.btn查看加工明细, 0);
             this.pnlTax.ResumeLayout(false);
             this.pnlTax.PerformLayout();
             this.pnlCost.ResumeLayout(false);
@@ -817,5 +831,6 @@
         private System.Windows.Forms.Button btn设置其它成本;
         private System.Windows.Forms.Button btn设置结算单价;
         private System.Windows.Forms.Button btn查看成本明细;
+        private System.Windows.Forms.Button btn查看加工明细;
     }
 }
