@@ -248,9 +248,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     record.Length = txtLength.DecimalValue;
                     record.Count = txtCount.IntergerValue;
-                    decimal weight =Math.Round ( ProductInventoryItem.CalWeight(SlicingItem.OriginalThick.Value, width, txtLength.DecimalValue * txtCount.IntergerValue, SlicingItem.Product.Density.Value),3);
-                    record.AfterWeight = SlicingItem.Weight.Value - weight;
-                    record.AfterLength = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, width, record.AfterWeight, SlicingItem.Product.Density.Value);
+                    decimal weight = Math.Round(ProductInventoryItem.CalWeight(SlicingItem.OriginalThick.Value, width, txtLength.DecimalValue * txtCount.IntergerValue, SlicingItem.Product.Density.Value), 3);
+                    if (chkOver.Checked || SlicingItem.Weight <= weight)
+                    {
+                        record.AfterLength = 0;
+                        record.AfterWeight = 0;
+                    }
+                    else
+                    {
+                        record.AfterWeight = SlicingItem.Weight.Value - weight;
+                        record.AfterLength = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, width, record.AfterWeight, SlicingItem.Product.Density.Value);
+                    }
                 }
                 else if (rd开吨.Checked)
                 {
