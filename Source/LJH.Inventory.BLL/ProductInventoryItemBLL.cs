@@ -212,6 +212,24 @@ namespace LJH.Inventory.BLL
                 itemClone.PurchaseID = purchaseID;
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(itemClone, item, unitWork);
             }
+
+            con = new ProductInventoryItemSearchCondition() { SourceID = pi.CostID.HasValue ? pi.CostID : pi.ID };
+            pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
+            foreach (var item in pis)
+            {
+                var itemClone = item.Clone();
+                itemClone.PurchaseID = purchaseID;
+                ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(itemClone, item, unitWork);
+            }
+
+            var rcon = new CustomerReceivableSearchCondition() { SheetID = (pi.CostID.HasValue ? pi.CostID.Value : pi.ID).ToString() };
+            var crs = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(rcon).QueryObjects;
+            foreach (var item in crs)
+            {
+                var crClone = item.Clone();
+                crClone.OrderID = purchaseID;
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(crClone, item, unitWork);
+            }
             var ret = unitWork.Commit();
             if (ret.Result == ResultCode.Successful) pi.Position = purchaseID;
             return ret;

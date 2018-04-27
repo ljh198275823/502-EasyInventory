@@ -237,7 +237,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     Specification = SlicingItem.Product.Specification,
                     SliceType = GetSliceType(),
                     BeforeWeight = SlicingItem.Weight.Value,
-                    BeforeLength = ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, width, SlicingItem.Weight.Value, SlicingItem.Product.Density.Value),
+                    BeforeLength =  ProductInventoryItem.CalLength(SlicingItem.OriginalThick.Value, width, SlicingItem.Weight.Value, SlicingItem.Product.Density.Value),
                     Customer = txtCustomer.Text,
                     Slicer = txtSlicers.Text,
                     Warehouse = (txtWareHouse.Tag as WareHouse).Name,

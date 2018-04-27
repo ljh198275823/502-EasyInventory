@@ -131,24 +131,31 @@
             this.colSlicedDateTime.HeaderText = "加工日期";
             this.colSlicedDateTime.Name = "colSlicedDateTime";
             this.colSlicedDateTime.ReadOnly = true;
+            this.colSlicedDateTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colCategoryID
             // 
             this.colCategoryID.HeaderText = "类别";
             this.colCategoryID.Name = "colCategoryID";
             this.colCategoryID.ReadOnly = true;
+            this.colCategoryID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCategoryID.Width = 60;
             // 
             // colSpecification
             // 
             this.colSpecification.HeaderText = "规格";
             this.colSpecification.Name = "colSpecification";
             this.colSpecification.ReadOnly = true;
+            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSpecification.Width = 80;
             // 
             // colSlicedTo
             // 
             this.colSlicedTo.HeaderText = "小件类型";
             this.colSlicedTo.Name = "colSlicedTo";
             this.colSlicedTo.ReadOnly = true;
+            this.colSlicedTo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSlicedTo.Width = 80;
             // 
             // colBeforeWeight
             // 
@@ -157,6 +164,8 @@
             this.colBeforeWeight.HeaderText = "加工前重量";
             this.colBeforeWeight.Name = "colBeforeWeight";
             this.colBeforeWeight.ReadOnly = true;
+            this.colBeforeWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colBeforeWeight.Width = 80;
             // 
             // colBeforeLength
             // 
@@ -165,7 +174,9 @@
             this.colBeforeLength.HeaderText = "加工前长度";
             this.colBeforeLength.Name = "colBeforeLength";
             this.colBeforeLength.ReadOnly = true;
+            this.colBeforeLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colBeforeLength.Visible = false;
+            this.colBeforeLength.Width = 80;
             // 
             // colLength
             // 
@@ -174,6 +185,8 @@
             this.colLength.HeaderText = "小件长度";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
+            this.colLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colLength.Width = 80;
             // 
             // colWeight
             // 
@@ -182,12 +195,16 @@
             this.colWeight.HeaderText = "小件重量";
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
+            this.colWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colWeight.Width = 80;
             // 
             // colAmount
             // 
             this.colAmount.HeaderText = "加工数量";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
+            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colAmount.Width = 80;
             // 
             // colTotalWeight
             // 
@@ -196,7 +213,9 @@
             this.colTotalWeight.HeaderText = "加工重量";
             this.colTotalWeight.Name = "colTotalWeight";
             this.colTotalWeight.ReadOnly = true;
+            this.colTotalWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colTotalWeight.Visible = false;
+            this.colTotalWeight.Width = 80;
             // 
             // colTotalLength
             // 
@@ -205,7 +224,9 @@
             this.colTotalLength.HeaderText = "加工长度";
             this.colTotalLength.Name = "colTotalLength";
             this.colTotalLength.ReadOnly = true;
+            this.colTotalLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colTotalLength.Visible = false;
+            this.colTotalLength.Width = 80;
             // 
             // colAfterWeight
             // 
@@ -214,6 +235,8 @@
             this.colAfterWeight.HeaderText = "加工后重量";
             this.colAfterWeight.Name = "colAfterWeight";
             this.colAfterWeight.ReadOnly = true;
+            this.colAfterWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colAfterWeight.Width = 80;
             // 
             // colAfterLength
             // 
@@ -222,25 +245,32 @@
             this.colAfterLength.HeaderText = "加工后长度";
             this.colAfterLength.Name = "colAfterLength";
             this.colAfterLength.ReadOnly = true;
+            this.colAfterLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colAfterLength.Visible = false;
+            this.colAfterLength.Width = 80;
             // 
             // colCustomer
             // 
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
+            this.colCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colSlicer
             // 
             this.colSlicer.HeaderText = "加工人员";
             this.colSlicer.Name = "colSlicer";
             this.colSlicer.ReadOnly = true;
+            this.colSlicer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSlicer.Width = 80;
             // 
             // col操作员
             // 
             this.col操作员.HeaderText = "操作员";
             this.col操作员.Name = "col操作员";
             this.col操作员.ReadOnly = true;
+            this.col操作员.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.col操作员.Width = 80;
             // 
             // FrmSliceRecordView
             // 

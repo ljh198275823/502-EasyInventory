@@ -46,11 +46,26 @@ namespace LJH.Inventory.UI.Forms.Inventory.View
             row.Cells["colBeforeLength"].Value = record.BeforeLength;
             row.Cells["colAfterWeight"].Value = record.AfterWeight;
             row.Cells["colAfterLength"].Value = record.AfterLength;
-            row.Cells["colTotalLength"].Value = record.BeforeLength - record.AfterLength;
+            row.Cells["colTotalLength"].Value = record.Length.HasValue ? record.Length.Value * record.Count : (record.BeforeLength - record.AfterLength);
             row.Cells["colTotalWeight"].Value = record.BeforeWeight - record.AfterWeight;
             row.Cells["colSlicer"].Value = record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;
             row.Cells["col操作员"].Value = record.Operator;
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            if (items != null && items.Count > 0)
+            {
+                int row = GridView.Rows.Add();
+                GridView.Rows[row].Cells["colTotalLength"].Value = items.Sum(it =>
+                {
+                    var record = it as SteelRollSliceRecord;
+                    return record.Length.HasValue ? record.Length.Value * record.Count : (record.BeforeLength - record.AfterLength);
+                }).ToString("F2");
+                GridView.Rows[row].Cells["colTotalWeight"].Value = items.Sum(it => (it as SteelRollSliceRecord).BeforeWeight - (it as SteelRollSliceRecord).AfterWeight).ToString("F3");
+            }
         }
 
         public override void ShowOperatorRights()
