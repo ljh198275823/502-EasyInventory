@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -25,6 +26,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         #region 私有方法
         private List<ProductInventoryItem> _DeliveryItems = null;
+        private ComboBox cmb_备注 = null;
         #endregion
 
         #region 私有方法
@@ -243,12 +245,23 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ItemsGrid.ContextMenuStrip = null;
             }
             btnShip.Visible = !(UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint);
-            ItemsGrid.Columns["colCosts"].Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.显示成本 );
+            ItemsGrid.Columns["colCosts"].Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.显示成本);
             pnl毛利.Visible = Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.显示成本);
             if (!IsAdding)
             {
                 StackOutSheet sheet = UpdatingItem as StackOutSheet;
                 if (sheet != null) UpdatingItem = new StackOutSheetBLL(AppSettings.Current.ConnStr).GetByID(sheet.ID).QueryObject;
+            }
+            if (cmb_备注 == null)
+            {
+                cmb_备注 = new ComboBox();
+                cmb_备注.Items.Add(string.Empty);
+                cmb_备注.Items.Add("包吊装");
+                cmb_备注.Items.Add("包开平");
+                cmb_备注.Items.Add("包分条");
+                cmb_备注.DropDownStyle = ComboBoxStyle.DropDown;
+                cmb_备注.Visible = false;
+                ItemsGrid.Controls.Add(cmb_备注);
             }
         }
 
@@ -845,7 +858,45 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtDriverCall.Text = s.Phone;
             }
         }
-        #endregion
 
+        private void ItemsGrid_CurrentCellChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.ItemsGrid.CurrentCell.OwningColumn.Name == "colMemo")
+                {
+                    var rect = ItemsGrid.GetCellDisplayRectangle(ItemsGrid.CurrentCell.ColumnIndex, ItemsGrid.CurrentCell.RowIndex, false);
+                    cmb_备注.TextChanged -= new EventHandler(cmb_备注_TextChanged);
+                    if (ItemsGrid.CurrentCell.Value != null) cmb_备注.Text = ItemsGrid.CurrentCell.Value.ToString();
+                    else cmb_备注.Text = string.Empty;
+                    cmb_备注.TextChanged += new EventHandler(cmb_备注_TextChanged);
+                    cmb_备注.Left = rect.Left;
+                    cmb_备注.Top = rect.Top;
+                    cmb_备注.Width = rect.Width;
+                    cmb_备注.Height = rect.Height;
+                    cmb_备注.Visible = true;
+
+                }
+                else
+                {
+                    cmb_备注.Visible = false;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private void cmb_备注_TextChanged(object sender, EventArgs e)
+        {
+            var oi = ItemsGrid.Rows[ItemsGrid.CurrentCell.RowIndex].Tag as StackOutItem;
+            if (oi != null)
+            {
+                var sheet = UpdatingItem as StackOutSheet;
+                foreach (var it in sheet.Items) if (it.ProductID == oi.ProductID) it.Memo = cmb_备注.Text;
+            }
+            ItemsGrid.Rows[ItemsGrid.CurrentCell.RowIndex].Cells["colMemo"].Value = cmb_备注.Text;
+        }
+        #endregion
     }
 }
