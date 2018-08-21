@@ -52,7 +52,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                 return;
             }
 
-            var ret = new CompanyBLL(AppSettings.Current.ConnStr).Merge(Source.ID, (txtCustomer.Tag as CompanyInfo).ID);
+            var ret = new CompanyBLL(AppSettings.Current.ConnStr).Merge(Source.ID, (txtCustomer.Tag as CompanyInfo).ID, Operator.Current.ID);
             if (ret.Result == LJH.GeneralLibrary.Core.DAL.ResultCode.Successful) this.DialogResult = DialogResult.OK;
             else
             {

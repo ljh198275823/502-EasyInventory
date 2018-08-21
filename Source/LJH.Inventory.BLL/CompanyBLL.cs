@@ -82,17 +82,7 @@ namespace LJH.Inventory.BLL
 
         public override CommandResult Delete(CompanyInfo info)
         {
-            StackOutSheetSearchCondition con = new StackOutSheetSearchCondition();
-            con.CustomerID = info.ID;
-            List<StackOutSheet> sheets = (new StackOutSheetBLL(RepoUri)).GetItems(con).QueryObjects;
-            if (sheets != null && sheets.Count > 0) // 如果存在未作废的送货单，则不能删除
-            {
-                return new CommandResult(ResultCode.Fail, string.Format("不能删除客户 {0} 的资料，系统中已经存在此客户的送货单", info.Name));
-            }
-
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Delete(info, unitWork);
-            return unitWork.Commit();
+            return ProviderFactory.Create<ICompanyProvider>(RepoUri).DeleteEx(info.ID);
         }
 
         public CommandResult SetFileID(CompanyInfo customer, int fid, bool 按客户类别)
@@ -290,76 +280,30 @@ namespace LJH.Inventory.BLL
         /// <param name="source"></param>
         /// <param name="des"></param>
         /// <returns></returns>
-        public CommandResult Merge(string source, string des)
+        public CommandResult Merge(string source, string des, string opt)
         {
+            if (source == des) return new CommandResult(ResultCode.Fail, "同一个公司不能进行合并操作");
             var sc = GetByID(source).QueryObject;
             var dc = GetByID(des).QueryObject;
             if (sc == null) return new CommandResult(ResultCode.Fail, "系统中不存在被合并的公司信息");
             if (dc == null) return new CommandResult(ResultCode.Fail, "系统中不存在合并公司的信息");
-            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
-            SearchCondition con = null;
-            con = new StackOutSheetSearchCondition() { CustomerID = source };
-            List<StackOutSheet> sheets = ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri).GetItems(con).QueryObjects;
-            if (sheets != null && sheets.Count > 0)
+            var ret = ProviderFactory.Create<ICompanyProvider>(RepoUri).Merge(source, des);
+            if (ret.Result == ResultCode.Successful)
             {
-                foreach (StackOutSheet sheet in sheets)
+                DocumentOperation doc = new DocumentOperation()
                 {
-                    StackOutSheet clone = sheet.Clone() as StackOutSheet;
-                    clone.CustomerID = des;
-                    ProviderFactory.Create<IProvider<StackOutSheet, string>>(RepoUri).Update(clone, sheet, unitWork);
-                }
+                    ID = Guid.NewGuid(),
+                    DocumentID = des,
+                    DocumentType = "Product",
+                    OperatDate = DateTime.Now,
+                    Operation = "公司合并",
+                    Operator = opt,
+                    LogID = opt,
+                    Memo = string.Format("将 id={0} 名称={1} 合并到 id={2} 名称={3} ", sc.ID, sc.Name, dc.ID, dc.Name),
+                };
+                ProviderFactory.Create<IProvider<DocumentOperation, Guid>>(RepoUri).Insert(doc);
             }
-
-            con = new CustomerReceivableSearchCondition() { CustomerID = source };
-            var ors = ProviderFactory.Create<IProvider<OtherReceivableSheet, string>>(RepoUri).GetItems(con).QueryObjects;
-            if (ors != null && ors.Count > 0)
-            {
-                foreach (var or in ors)
-                {
-                    var clone = or.Clone() as OtherReceivableSheet;
-                    clone.CustomerID = des;
-                    ProviderFactory.Create<IProvider<OtherReceivableSheet, string>>(RepoUri).Update(clone, or, unitWork);
-                }
-            }
-
-            con = new CustomerReceivableSearchCondition() { CustomerID = source };
-            List<CustomerReceivable> crs = ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            if (crs != null && crs.Count > 0)
-            {
-                foreach (var cr in crs)
-                {
-                    var clone = cr.Clone();
-                    clone.CustomerID = des;
-                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Update(clone, cr, unitWork);
-                }
-            }
-
-            con = new CustomerPaymentSearchCondition() { CustomerID = source };
-            List<CustomerPayment> cps = ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).GetItems(con).QueryObjects;
-            if (cps != null && cps.Count > 0)
-            {
-                foreach (var cp in cps)
-                {
-                    var clone = cp.Clone() as CustomerPayment;
-                    clone.CustomerID = des;
-                    ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Update(clone, cp, unitWork);
-                }
-            }
-
-            con = new AccountRecordSearchCondition() { CustomerID = source };
-            var ars = ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).GetItems(con).QueryObjects;
-            if (ars != null && ars.Count > 0)
-            {
-                foreach (var ar in ars)
-                {
-                    var clone = ar.Clone();
-                    clone.CustomerID = des;
-                    ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Update(clone, ar, unitWork);
-                }
-            }
-
-            ProviderFactory.Create<IProvider<CompanyInfo, string>>(RepoUri).Delete(sc, unitWork);
-            return unitWork.Commit();
+            return ret;
         }
 
         public CommandResult 设置财务备注(CompanyInfo pi, string memo)
