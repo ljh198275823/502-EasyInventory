@@ -208,6 +208,7 @@ namespace LJH.Inventory.BLL
             var pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             foreach (var item in pis)
             {
+                if (item.ID == pi.ID) continue;
                 var itemClone = item.Clone();
                 itemClone.PurchaseID = purchaseID;
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(itemClone, item, unitWork);
@@ -217,6 +218,7 @@ namespace LJH.Inventory.BLL
             pis = ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).GetItems(con).QueryObjects;
             foreach (var item in pis)
             {
+                if (item.ID == pi.ID) continue;
                 var itemClone = item.Clone();
                 itemClone.PurchaseID = purchaseID;
                 ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(itemClone, item, unitWork);
