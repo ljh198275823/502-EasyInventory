@@ -78,7 +78,8 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (!string.IsNullOrEmpty(gg)) row.Cells["colSheetID"].Value = gg;
             row.Cells["colOrderID"].Value = cr.OrderID;
             row.Cells["colCreateDate"].Value = cr.CreateDate.ToString("yyyy-MM-dd");
-            //row.Cells["colClassID"].Value = CustomerReceivableTypeDescription.GetDescription(cr.ClassID);
+            row.Cells["col单价"].Value = cr.GetProperty("入库单价");
+            row.Cells["col重量"].Value = cr.GetProperty("重量");
             row.Cells["colRemain"].Value = cr.Remain;
             row.Cells["colAssign"].Value = 0;
             row.Cells["colCheck"].Value = "全部核销";

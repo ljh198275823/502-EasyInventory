@@ -43,10 +43,14 @@
             this.GridView = new System.Windows.Forms.DataGridView();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
+            this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label4 = new System.Windows.Forms.Label();
             this.colSheetID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col类别 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col单价 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col重量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCheck = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -54,8 +58,6 @@
             this.col申请人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col车皮号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -166,6 +168,8 @@
             this.colOrderID,
             this.colCreateDate,
             this.col类别,
+            this.col单价,
+            this.col重量,
             this.colRemain,
             this.colAssign,
             this.colCheck,
@@ -208,6 +212,26 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
+            // txtKeyword
+            // 
+            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtKeyword.Location = new System.Drawing.Point(528, 46);
+            this.txtKeyword.Name = "txtKeyword";
+            this.txtKeyword.Size = new System.Drawing.Size(252, 21);
+            this.txtKeyword.TabIndex = 151;
+            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(469, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 150;
+            this.label4.Text = "模糊匹配";
+            // 
             // colSheetID
             // 
             this.colSheetID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -241,6 +265,20 @@
             this.col类别.HeaderText = "类别";
             this.col类别.Name = "col类别";
             this.col类别.ReadOnly = true;
+            // 
+            // col单价
+            // 
+            this.col单价.HeaderText = "单价";
+            this.col单价.Name = "col单价";
+            this.col单价.ReadOnly = true;
+            this.col单价.Width = 80;
+            // 
+            // col重量
+            // 
+            this.col重量.HeaderText = "重量";
+            this.col重量.Name = "col重量";
+            this.col重量.ReadOnly = true;
+            this.col重量.Width = 80;
             // 
             // colRemain
             // 
@@ -299,26 +337,6 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // txtKeyword
-            // 
-            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtKeyword.Location = new System.Drawing.Point(528, 46);
-            this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(252, 21);
-            this.txtKeyword.TabIndex = 151;
-            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(469, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 150;
-            this.label4.Text = "模糊匹配";
-            // 
             // FrmSupplierPaymentAssign
             // 
             this.AcceptButton = this.btnOk;
@@ -362,10 +380,14 @@
         private System.Windows.Forms.DataGridView GridView;
         protected System.Windows.Forms.Button btnClose;
         protected System.Windows.Forms.Button btnOk;
+        private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn col类别;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col单价;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col重量;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRemain;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
         private System.Windows.Forms.DataGridViewButtonColumn colCheck;
@@ -373,7 +395,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col申请人;
         private System.Windows.Forms.DataGridViewTextBoxColumn col车皮号;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
-        private System.Windows.Forms.Label label4;
     }
 }
