@@ -395,6 +395,46 @@ namespace LJH.Inventory.BLL
             }
         }
 
+        public CommandResult 设置其它成本(List<ProductInventoryItem> items, CostItem ci, string opt, string logID, string 备注, decimal? 总额 = null, string carPlate = null)
+        {
+            try
+            {
+                ProductInventoryItemSearchCondition con = new ProductInventoryItemSearchCondition() { IDS = items.Select(it => it.CostID.Value).Distinct().ToList() }; //获取原始入库项
+                var pis = GetItems(con).QueryObjects;
+                var s = new CompanyBLL(RepoUri).GetByID(ci.SupllierID).QueryObject;
+                ci.Operator = opt;
+                var amount = pis.Sum(it => it.OriginalWeight.HasValue ? it.OriginalWeight.Value : it.OriginalCount.Value);
+                if (总额.HasValue && amount > 0) ci.Price = Math.Round(总额.Value / amount, 2);    //如果是总额，则换算成单个数量的价格
+                IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+                foreach (var pi in pis)
+                {
+                    var clone = pi.Clone();
+                    string memo = string.Empty;
+                    var oci = pi.GetCost(ci.Name);
+                    memo += string.Format("{0}从{1}改成{2}, 供应商：{3}", ci.Name, oci != null ? oci.Price : 0, ci.Price, s != null ? s.Name : string.Empty);
+                    clone.SetCost(ci);
+                    ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, pi, unitWork);
+                    AddOperationLog(pi.ID.ToString(), pi.DocumentType, "修改成本", unitWork, DateTime.Now, opt, logID, memo);
+                    if (总额 == null && s != null && pi.SourceID == null && pi.SourceRoll == null)
+                    {
+                        var dt = DateTime.Now;
+                        SaveReceivable(clone, ci, dt, 备注, unitWork, 总额, carPlate);
+                        SaveTax(clone, ci, dt, 备注, unitWork, 总额, carPlate);
+                    }
+                }
+                var ret = unitWork.Commit();
+                if (ret.Result == ResultCode.Successful)
+                {
+                    items.ForEach(it => it.SetCost(ci));
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                return new CommandResult(ResultCode.Fail, ex.Message);
+            }
+        }
+
         private void AddOperationLog(string id, string docType, string operation, IUnitWork unitWork, DateTime dt, string opt, string logID = null, string memo = null)
         {
             DocumentOperation doc = new DocumentOperation()

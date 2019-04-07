@@ -317,6 +317,11 @@ namespace LJH.Inventory.BusinessModel
         public ProductInventoryItem Clone()
         {
             var ret = this.MemberwiseClone() as ProductInventoryItem;
+            if (this._CostItems != null)
+            {
+                ret._CostItems = new List<CostItem>();
+                if (this._CostItems.Count > 0) ret._CostItems.AddRange(this._CostItems.Select(it => it.Clone()));
+            }
             return ret;
         }
         #endregion

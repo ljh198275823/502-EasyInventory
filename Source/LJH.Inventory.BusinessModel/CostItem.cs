@@ -55,5 +55,10 @@ namespace LJH.Inventory.BusinessModel
 
         public string Memo { get; set; }
         #endregion
+
+        public CostItem Clone()
+        {
+            return this.MemberwiseClone() as CostItem;
+        }
     }
 }
