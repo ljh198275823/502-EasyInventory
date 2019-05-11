@@ -82,7 +82,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (items != null)
                 {
                     items = items.Where(item => ((item.State == SheetState.新增 && chkAdded.Checked) ||
-                                            (item.State == SheetState.已审批 && chkApproved.Checked) ||
+                                            (item.State == SheetState.已审核 && chkApproved.Checked) ||
                                             (item.State == SheetState.已发货 && chkShipped.Checked) ||
                                             (item.State == SheetState.作废 && chkNullify.Checked))).ToList();
                 }
@@ -221,7 +221,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     row.Cells["colPaid"].Value = cr != null ? cr.Sum(it => it.Haspaid) : 0; ;
                     row.Cells["colNotPaid"].Value = cr != null ? cr.Sum(it => it.Remain) : 0;
                 }
-                else if (sheet.State == SheetState.新增 || sheet.State == SheetState.已审批)
+                else if (sheet.State == SheetState.新增 || sheet.State == SheetState.已审核)
                 {
                     if (_AllPayments != null)
                     {

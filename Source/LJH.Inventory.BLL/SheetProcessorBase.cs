@@ -70,7 +70,7 @@ namespace LJH.Inventory.BLL
         protected virtual void DoApprove(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
             TEntity original = info.Clone() as TEntity;
-            info.State = SheetState.已审批;
+            info.State = SheetState.已审核;
             info.LastActiveDate = dt; //修改最后活动时间
             ProviderFactory.Create<IProvider<TEntity, string>>(RepoUri).Update(info, original, unitWork);
         }
@@ -109,7 +109,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         protected virtual void DoInventory(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.StackIn)));
+            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.入库)));
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         protected virtual void DoShip(TEntity info, IUnitWork unitWork, DateTime dt, string opt)
         {
-            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.StackOut)));
+            throw new Exception(string.Format("没有实现 {0} 处理", SheetOperationDescription.GetDescription(SheetOperation.出库)));
         }
         #endregion
 
@@ -200,7 +200,7 @@ namespace LJH.Inventory.BLL
                 IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
                 DateTime? dt = GetServerDateTime(); //从数据库获取时间
                 if (dt == null) return new CommandResult(ResultCode.Fail, "从数据库服务器获取时间失败");
-                if (operation == SheetOperation.Create)
+                if (operation == SheetOperation.新建)
                 {
                     sheet.LastActiveDate = dt.Value;
                     DoAdd(sheet, unitWork, dt.Value, opt);
@@ -214,22 +214,22 @@ namespace LJH.Inventory.BLL
                     if (sheet.LastActiveDate != lastActiveDate.Value) return new CommandResult(ResultCode.Fail, "其它操作员已经修改了数据，请先获取到最新数据后再做修改");
                     switch (operation)
                     {
-                        case SheetOperation.Modify:
+                        case SheetOperation.修改:
                             DoUpdate(sheet, unitWork, dt.Value, opt);
                             break;
-                        case SheetOperation.Approve:
+                        case SheetOperation.审核:
                             DoApprove(sheet, unitWork, dt.Value, opt);
                             break;
-                        case SheetOperation.UndoApprove:
+                        case SheetOperation.取消审核:
                             UndoApprove(sheet, unitWork, dt.Value, opt);
                             break;
-                        case SheetOperation.Nullify:
+                        case SheetOperation.作废:
                             DoNullify(sheet, unitWork, dt.Value, opt);
                             break;
-                        case SheetOperation.StackIn:
+                        case SheetOperation.入库:
                             DoInventory(sheet, unitWork, dt.Value, opt);
                             break;
-                        case SheetOperation.StackOut:
+                        case SheetOperation.出库:
                             DoShip(sheet, unitWork, dt.Value, opt);
                             break;
                         default:
@@ -251,7 +251,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public override CommandResult Add(TEntity info)
         {
-            return ProcessSheet(info, SheetOperation.Create, string.Empty, string.Empty);
+            return ProcessSheet(info, SheetOperation.新建, string.Empty, string.Empty);
         }
         /// <summary>
         /// 修改
@@ -260,7 +260,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public override CommandResult Update(TEntity info)
         {
-            return ProcessSheet(info, SheetOperation.Modify, string.Empty, string.Empty);
+            return ProcessSheet(info, SheetOperation.修改, string.Empty, string.Empty);
         }
         #endregion
     }

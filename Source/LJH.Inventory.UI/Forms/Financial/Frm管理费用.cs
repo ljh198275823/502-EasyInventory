@@ -53,7 +53,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (items != null && items.Count > 0)
             {
                 items = items.Where(item => ((item.State == SheetState.新增 && chkAdded.Checked) ||
-                                        (item.State == SheetState.已审批 && chkApproved.Checked) ||
+                                        (item.State == SheetState.已审核 && chkApproved.Checked) ||
                                         (item.State == SheetState.作废 && chkNullify.Checked))).ToList();
             }
             List<object> objs = null;

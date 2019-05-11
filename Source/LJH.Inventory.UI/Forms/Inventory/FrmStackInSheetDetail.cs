@@ -180,12 +180,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         protected override CommandResult AddItem(object item)
         {
-            return (new StackInSheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as StackInSheet, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
+            return (new StackInSheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as StackInSheet, SheetOperation.新建, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
-            return (new StackInSheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as StackInSheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+            return (new StackInSheetBLL(AppSettings.Current.ConnStr)).ProcessSheet(item as StackInSheet, SheetOperation.修改, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
@@ -234,19 +234,19 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnSave_Click(object sender, EventArgs e)
         {
             StackInSheetBLL bll = new StackInSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackInSheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            PerformOperation<StackInSheet>(bll, IsAdding ? SheetOperation.新建 : SheetOperation.修改);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
             StackInSheetBLL bll = new StackInSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackInSheet>(bll, SheetOperation.Approve);
+            PerformOperation<StackInSheet>(bll, SheetOperation.审核);
         }
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
             StackInSheetBLL bll = new StackInSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackInSheet>(bll, SheetOperation.UndoApprove);
+            PerformOperation<StackInSheet>(bll, SheetOperation.取消审核);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -257,13 +257,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnInventory_Click(object sender, EventArgs e)
         {
             StackInSheetBLL bll = new StackInSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackInSheet>(bll, SheetOperation.StackIn);
+            PerformOperation<StackInSheet>(bll, SheetOperation.入库);
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
             StackInSheetBLL bll = new StackInSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackInSheet>(bll, SheetOperation.Nullify);
+            PerformOperation<StackInSheet>(bll, SheetOperation.作废);
         }
         #endregion
 

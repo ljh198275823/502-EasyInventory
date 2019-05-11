@@ -166,13 +166,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             OtherReceivableSheetBLL bll = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as OtherReceivableSheet, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
+            return bll.ProcessSheet(item as OtherReceivableSheet, SheetOperation.新建, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
             OtherReceivableSheetBLL bll = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as OtherReceivableSheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+            return bll.ProcessSheet(item as OtherReceivableSheet, SheetOperation.修改, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
@@ -250,26 +250,26 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void btnSave_Click(object sender, EventArgs e)
         {
             OtherReceivableSheetBLL processor = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr);
-            SheetOperation so = IsAdding ? SheetOperation.Create : SheetOperation.Modify;
+            SheetOperation so = IsAdding ? SheetOperation.新建 : SheetOperation.修改;
             PerformOperation<OtherReceivableSheet>(processor, so);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
             OtherReceivableSheetBLL processor = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<OtherReceivableSheet>(processor, SheetOperation.Approve);
+            PerformOperation<OtherReceivableSheet>(processor, SheetOperation.审核);
         }
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
             OtherReceivableSheetBLL processor = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<OtherReceivableSheet>(processor, SheetOperation.UndoApprove);
+            PerformOperation<OtherReceivableSheet>(processor, SheetOperation.取消审核);
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
             OtherReceivableSheetBLL processor = new OtherReceivableSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<OtherReceivableSheet>(processor, SheetOperation.Nullify);
+            PerformOperation<OtherReceivableSheet>(processor, SheetOperation.作废);
         }
         #endregion
 

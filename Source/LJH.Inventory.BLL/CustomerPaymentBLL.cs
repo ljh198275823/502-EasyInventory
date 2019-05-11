@@ -19,6 +19,231 @@ namespace LJH.Inventory.BLL
         }
         #endregion
 
+        #region 私有方法
+        private void 增加供应商付款(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            DateTime now = DateTime.Now;
+            AccountRecord ar = new AccountRecord()
+            {
+                ID = Guid.NewGuid(),
+                ClassID = info.ClassID,
+                SheetID = info.ID,
+                CustomerID = info.CustomerID,
+                CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                StackSheetID = info.StackSheetID,
+                AccountID = info.AccountID,
+                Amount = info.Amount,
+                OtherAccount = info.Payer,
+                Note = info.Note,
+                Memo = info.Memo
+            };
+            ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+            var fylb = info.GetProperty(SheetNote.手续费类别.ToString());
+            if (!string.IsNullOrEmpty(fylb)) //有费用类别说明增加到管理费用，否则增加到应收里面
+            {
+                var fy = new CustomerPayment() { ClassID = CustomerPaymentType.管理费用 };
+                fy.ID = CreateSheetID(fy);
+                fy.Amount = decimal.Parse(info.GetProperty(SheetNote.手续费金额.ToString()));
+                fy.SheetDate = info.SheetDate;
+                fy.AccountID = info.AccountID;
+                fy.CustomerID = info.CustomerID;
+                fy.LastActiveDate = info.SheetDate;
+                fy.Payer = info.Payer;
+                fy.PaymentMode = info.PaymentMode;
+                fy.StackSheetID = info.ID;
+                fy.Note = info.Note;
+                fy.SetProperty(SheetNote.费用类别.ToString(), fylb);
+                fy.SetProperty(SheetNote.关联收付款单号.ToString(), info.ID);
+                if (string.IsNullOrEmpty(info.GetProperty(SheetNote.管理费用单号.ToString()))) info.SetProperty(SheetNote.管理费用单号.ToString(), fy.ID);
+                else info.SetProperty(SheetNote.管理费用单号.ToString(), info.GetProperty(SheetNote.管理费用单号.ToString()) + "," + fy.ID);
+                ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Insert(fy, unitWork);
+
+                AccountRecord ar1 = new AccountRecord() //手续费
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = fy.ClassID,
+                    SheetID = fy.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = fy.Amount,
+                    OtherAccount = info.Payer,
+                    Note = info.Note,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar1, unitWork);
+            }
+        }
+
+        private void 增加客户退款(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            DateTime now = DateTime.Now;
+            AccountRecord ar = new AccountRecord()
+            {
+                ID = Guid.NewGuid(),
+                ClassID = info.ClassID,
+                SheetID = info.ID,
+                CustomerID = info.CustomerID,
+                CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                StackSheetID = info.StackSheetID,
+                AccountID = info.AccountID,
+                Amount = info.Amount,
+                OtherAccount = info.Payer,
+                Note = info.Note,
+                Memo = info.Memo
+            };
+            ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+            var fylb = info.GetProperty(SheetNote.费用类别.ToString());
+            if (!string.IsNullOrEmpty(fylb)) //有费用类别说明增加到管理费用，否则增加到应收里面
+            {
+                var fy = new CustomerPayment() { ClassID = CustomerPaymentType.管理费用 };
+                fy.ID = CreateSheetID(fy);
+                fy.Amount = info.Amount;
+                fy.SheetDate = info.SheetDate;
+                fy.AccountID = info.AccountID;
+                fy.CustomerID = info.CustomerID;
+                fy.LastActiveDate = info.SheetDate;
+                fy.Note = info.Note;
+                fy.Payer = info.Payer;
+                fy.PaymentMode = info.PaymentMode;
+                fy.StackSheetID = info.ID;
+                fy.SetProperty(SheetNote.关联收付款单号.ToString(), info.ID);
+                if (string.IsNullOrEmpty(info.GetProperty(SheetNote.管理费用单号.ToString()))) info.SetProperty(SheetNote.管理费用单号.ToString(), fy.ID);
+                else info.SetProperty(SheetNote.管理费用单号.ToString(), info.GetProperty(SheetNote.管理费用单号.ToString()) + "," + fy.ID);
+                ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Insert(fy, unitWork);
+            }
+            else
+            {
+                CustomerReceivable cr = new CustomerReceivable()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = info.ClassID == CustomerPaymentType.客户退款 ? CustomerReceivableType.CustomerReceivable : CustomerReceivableType.SupplierReceivable,
+                    CustomerID = info.CustomerID,
+                    CreateDate = DateTime.Parse(info.GetProperty(SheetNote.到款日期.ToString())),
+                    SheetID = info.ID,
+                    Amount = info.Amount,
+                    Memo = info.Memo,
+                };
+                cr.SetProperty(SheetNote.退款账号.ToString(), info.AccountID);
+                ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+                if (info.ClassID == CustomerPaymentType.客户退款 && info.PaymentMode == PaymentMode.公账)
+                {
+                    var cr1 = new CustomerReceivable()
+                    {
+                        ID = Guid.NewGuid(),
+                        ClassID = CustomerReceivableType.公账应收款,
+                        CustomerID = info.CustomerID,
+                        CreateDate = DateTime.Parse(info.GetProperty(SheetNote.到款日期.ToString())),
+                        SheetID = info.ID,
+                        Amount = info.Amount,
+                        Note = info.Note,
+                        Memo = info.Memo,
+                    };
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr1, unitWork);
+                }
+            }
+
+            fylb = info.GetProperty(SheetNote.手续费类别.ToString());
+            if (!string.IsNullOrEmpty(fylb)) //有费用类别说明增加到管理费用，否则增加到应收里面
+            {
+                var fy = new CustomerPayment() { ClassID = CustomerPaymentType.管理费用 };
+                fy.ID = CreateSheetID(fy);
+                fy.Amount = decimal.Parse(info.GetProperty(SheetNote.手续费金额.ToString()));
+                fy.SheetDate = info.SheetDate;
+                fy.AccountID = info.AccountID;
+                fy.CustomerID = info.CustomerID;
+                fy.LastActiveDate = info.SheetDate;
+                fy.Payer = info.Payer;
+                fy.PaymentMode = info.PaymentMode;
+                fy.StackSheetID = info.ID;
+                fy.Note = info.Note;
+                fy.SetProperty(SheetNote.费用类别.ToString(), fylb);
+                fy.SetProperty(SheetNote.关联收付款单号.ToString(), info.ID);
+                if (string.IsNullOrEmpty(info.GetProperty(SheetNote.管理费用单号.ToString()))) info.SetProperty(SheetNote.管理费用单号.ToString(), fy.ID);
+                else info.SetProperty(SheetNote.管理费用单号.ToString(), info.GetProperty(SheetNote.管理费用单号.ToString()) + "," + fy.ID);
+                ProviderFactory.Create<IProvider<CustomerPayment, string>>(RepoUri).Insert(fy, unitWork);
+
+                AccountRecord ar1 = new AccountRecord() //手续费
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = fy.ClassID,
+                    SheetID = fy.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = fy.Amount,
+                    OtherAccount = info.Payer,
+                    Note = info.Note,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar1, unitWork);
+            }
+        }
+
+        private void 增加管理费用(CustomerPayment info, IUnitWork unitWork, DateTime dt, string opt)
+        {
+            DateTime now = DateTime.Now;
+            if (!string.IsNullOrEmpty(info.AccountID))
+            {
+                AccountRecord ar = new AccountRecord()
+                {
+                    ID = Guid.NewGuid(),
+                    ClassID = info.ClassID,
+                    SheetID = info.ID,
+                    CustomerID = info.CustomerID,
+                    CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                    StackSheetID = info.StackSheetID,
+                    AccountID = info.AccountID,
+                    Amount = info.Amount,
+                    OtherAccount = info.Payer,
+                    Note = info.Note,
+                    Memo = info.Memo
+                };
+                ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+            }
+            else if (!string.IsNullOrEmpty(info.CustomerID)) //没有设置支付账号，表示管理费用要计到应收款里面
+            {
+                var c = new CompanyBLL(RepoUri).GetByID(info.CustomerID).QueryObject;
+                if (c.ClassID == CompanyClass.Supplier)
+                {
+                    CustomerReceivable cr = new CustomerReceivable()
+                    {
+                        ID = Guid.NewGuid(),
+                        ClassID = CustomerReceivableType.SupplierReceivable,
+                        CustomerID = info.CustomerID,
+                        CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                        SheetID = info.ID,
+                        Amount = info.Amount,
+                        Note = info.Note,
+                        Memo = info.Memo,
+                    };
+                    ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
+                }
+                else if (c.ClassID == CompanyClass.Customer)
+                {
+                    AccountRecord ar = new AccountRecord()
+                    {
+                        ID = Guid.NewGuid(),
+                        ClassID = CustomerPaymentType.客户收款,
+                        SheetID = info.ID,
+                        CustomerID = info.CustomerID,
+                        CreateDate = new DateTime(info.SheetDate.Year, info.SheetDate.Month, info.SheetDate.Day, now.Hour, now.Minute, now.Second),
+                        StackSheetID = info.StackSheetID,
+                        AccountID = "管理费用冲抵应收",
+                        Amount = info.Amount,
+                        OtherAccount = info.Payer,
+                        Note = info.Note,
+                        Memo = info.Memo
+                    };
+                    ar.SetProperty(SheetNote.到款日期.ToString(), now.ToString("yyyy-MM-dd"));
+                    ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
+                }
+            }
+        }
+        #endregion
+
         #region 重写基类方法
         protected override string CreateSheetID(CustomerPayment info)
         {
@@ -211,6 +436,10 @@ namespace LJH.Inventory.BLL
                     ProviderFactory.Create<IProvider<CustomerReceivable, Guid>>(RepoUri).Insert(cr, unitWork);
                 }
             }
+            else if (info.ClassID == CustomerPaymentType.供应商付款)
+            {
+                增加供应商付款(info, unitWork, dt, opt);
+            }
             else if (info.ClassID == CustomerPaymentType.客户退款 || info.ClassID == CustomerPaymentType.供应商退款)
             {
                 AccountRecord ar = new AccountRecord()
@@ -353,6 +582,21 @@ namespace LJH.Inventory.BLL
             }
 
             if (!allSuccess) throw new Exception("作废失败");
+
+            var sheets = info.GetProperty(SheetNote.管理费用单号.ToString());
+            if (!string.IsNullOrEmpty(sheets))
+            {
+                foreach (string sheetID in sheets.Split(','))
+                {
+                    if (string.IsNullOrEmpty(sheetID)) continue;
+                    var sheet = GetByID(sheetID).QueryObject;
+                    if (sheet != null)
+                    {
+                        DoNullify(sheet, unitWork, dt, opt);
+                        AddOperationLog(sheet.ID, sheet.ClassID.ToString(), SheetOperation.作废, unitWork, dt, opt, opt, "关联作废");
+                    }
+                }
+            }
             base.DoNullify(info, unitWork, dt, opt);
         }
         #endregion

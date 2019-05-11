@@ -13,7 +13,7 @@ namespace LJH.Inventory.BusinessModel.Resource
             {
                 case SheetState.新增:
                     return "新建";
-                case SheetState.已审批:
+                case SheetState.已审核:
                     return "已审核";
                 case SheetState.作废:
                     return "作废";

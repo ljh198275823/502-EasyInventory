@@ -11,19 +11,19 @@ namespace LJH.Inventory.BusinessModel.Resource
         {
             switch (state)
             {
-                case SheetOperation.Create:
+                case SheetOperation.新建:
                     return "新建";
-                case SheetOperation.Modify:
+                case SheetOperation.修改:
                     return "修改";
-                case SheetOperation.Approve:
+                case SheetOperation.审核:
                     return "审核";
-                case SheetOperation.UndoApprove:
+                case SheetOperation.取消审核:
                     return "取消审核";
-                case SheetOperation.Nullify:
+                case SheetOperation.作废:
                     return "作废";
-                case SheetOperation.StackIn:
+                case SheetOperation.入库:
                     return "收货";
-                case SheetOperation.StackOut:
+                case SheetOperation.出库:
                     return "发货";
                 default:
                     return string.Empty;

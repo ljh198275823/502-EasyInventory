@@ -14,9 +14,9 @@ using LJH.Inventory.UI.Forms.Purchase;
 
 namespace LJH.Inventory.UI.Forms.Financial
 {
-    public partial class Frm收付款流水明细 : FrmSheetDetailBase
+    public partial class Frm供应商付款流水明细 : FrmSheetDetailBase
     {
-        public Frm收付款流水明细()
+        public Frm供应商付款流水明细()
         {
             InitializeComponent();
         }
@@ -139,6 +139,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("对方账号不能为空");
                 return false;
             }
+            if (txt手续费类别.Tag != null && txt手续费.DecimalValue <= 0)
+            {
+                MessageBox.Show("请输入手续费");
+                return false;
+            }
             return true;
         }
 
@@ -174,6 +179,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 var temp = item.GetProperty("到款日期");
                 DateTime pd = item.SheetDate;
                 if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd)) dtPaidDate.Value = pd;
+                if (!string.IsNullOrEmpty(item.GetProperty(SheetNote.手续费类别.ToString())))
+                {
+                    txt手续费类别.Text = item.GetProperty(SheetNote.手续费类别.ToString());
+                    txt手续费.DecimalValue = decimal.Parse(item.GetProperty(SheetNote.手续费金额.ToString()));
+                }
                 ShowAssigns();
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -204,6 +214,11 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.CustomerID = Customer != null ? Customer.ID : CompanyInfo.财务上不存在的客户;
             if (!string.IsNullOrEmpty(StackSheetID)) info.StackSheetID = StackSheetID;
             if (!dtPaidDate.IsNull) info.SetProperty("到款日期", dtPaidDate.Value.ToString("yyyy-MM-dd"));
+            if (txt手续费类别.Tag != null)
+            {
+                info.SetProperty(SheetNote.手续费类别.ToString(), (txt手续费类别.Tag as ExpenditureType).ID);
+                info.SetProperty(SheetNote.手续费金额.ToString(), txt手续费.Text);
+            }
             info.Memo = txtMemo.Text;
             return info;
         }
@@ -227,7 +242,7 @@ namespace LJH.Inventory.UI.Forms.Financial
 
             if (PaymentType == CustomerPaymentType.客户收款)
             {
-                btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit) && (cp == null || string.IsNullOrEmpty(cp.AccountID) || Customer ==null);
+                btnSave.Enabled = btnSave.Enabled && Operator.Current.Permit(Permission.CustomerPayment, PermissionActions.Edit) && (cp == null || string.IsNullOrEmpty(cp.AccountID) || Customer == null);
                 AccountRecord ac = null;
                 if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
                 btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审核) &&
@@ -442,6 +457,24 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
             lbl大写.Text = RMBHelper.NumGetStr((double)txtAmount.DecimalValue);
+        }
+
+        private void lnkCategory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Frm管理费用类别 frm = new Frm管理费用类别();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var Category = frm.SelectedItem as ExpenditureType;
+                txt手续费类别.Text = Category != null ? Category.Name : string.Empty;
+                txt手续费类别.Tag = Category;
+            }
+        }
+
+        private void txtCategory_DoubleClick(object sender, EventArgs e)
+        {
+            txt手续费类别.Text = null;
+            txt手续费类别.Tag = null;
         }
     }
 }

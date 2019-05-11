@@ -243,12 +243,12 @@ namespace LJH.Inventory.UI.Forms
                 ISheet<string> sheet = UpdatingItem as ISheet<string>;
                 if (sheet != null)
                 {
-                    if (toolBar.Items["btnSave"] != null) toolBar.Items["btnSave"].Enabled = sheet.CanDo(SheetOperation.Modify);
-                    if (toolBar.Items["btnApprove"] != null) toolBar.Items["btnApprove"].Enabled = sheet.CanDo(SheetOperation.Approve);
-                    if (toolBar.Items["btnUndoApprove"] != null) toolBar.Items["btnUndoApprove"].Enabled = sheet.CanDo(SheetOperation.UndoApprove);
-                    if (toolBar.Items["btnInventory"] != null) toolBar.Items["btnInventory"].Enabled = sheet.CanDo(SheetOperation.StackIn);
-                    if (toolBar.Items["btnShip"] != null) toolBar.Items["btnShip"].Enabled = sheet.CanDo(SheetOperation.StackOut);
-                    if (toolBar.Items["btnNullify"] != null) toolBar.Items["btnNullify"].Enabled = sheet.CanDo(SheetOperation.Nullify);
+                    if (toolBar.Items["btnSave"] != null) toolBar.Items["btnSave"].Enabled = sheet.CanDo(SheetOperation.修改);
+                    if (toolBar.Items["btnApprove"] != null) toolBar.Items["btnApprove"].Enabled = sheet.CanDo(SheetOperation.审核);
+                    if (toolBar.Items["btnUndoApprove"] != null) toolBar.Items["btnUndoApprove"].Enabled = sheet.CanDo(SheetOperation.取消审核);
+                    if (toolBar.Items["btnInventory"] != null) toolBar.Items["btnInventory"].Enabled = sheet.CanDo(SheetOperation.入库);
+                    if (toolBar.Items["btnShip"] != null) toolBar.Items["btnShip"].Enabled = sheet.CanDo(SheetOperation.出库);
+                    if (toolBar.Items["btnNullify"] != null) toolBar.Items["btnNullify"].Enabled = sheet.CanDo(SheetOperation.作废);
                     if (toolBar.Items["lblSheetState"] != null)
                     {
                         toolBar.Items["lblSheetState"].Visible = true;
@@ -269,8 +269,8 @@ namespace LJH.Inventory.UI.Forms
                     UpdatingItem = sheet;
                     IsAdding = false;
                     ShowButtonState();
-                    if (operation == SheetOperation.Create) this.OnItemAdded(new ItemAddedEventArgs(sheet));
-                    if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
+                    if (operation == SheetOperation.新建) this.OnItemAdded(new ItemAddedEventArgs(sheet));
+                    if (operation != SheetOperation.新建) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
                     MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
                     ItemShowing();
                 }
@@ -283,7 +283,7 @@ namespace LJH.Inventory.UI.Forms
 
         protected virtual void PerformOperation<T>(SheetProcessorBase<T> processor, SheetOperation operation, string memo = null) where T : class,ISheet<string>
         {
-            if (operation == SheetOperation.Create || operation == SheetOperation.Modify)
+            if (operation == SheetOperation.新建 || operation == SheetOperation.修改)
             {
                 PerformSave<T>(processor, operation);
             }
@@ -292,7 +292,7 @@ namespace LJH.Inventory.UI.Forms
                 if (UpdatingItem != null)
                 {
                     T sheet = sheet = UpdatingItem as T;
-                    if (operation == SheetOperation.Nullify || operation == SheetOperation.UndoApprove)
+                    if (operation == SheetOperation.作废 || operation == SheetOperation.取消审核)
                     {
                         FrmMemo frm = new FrmMemo();
                         if (frm.ShowDialog() != DialogResult.OK) return;
@@ -310,7 +310,7 @@ namespace LJH.Inventory.UI.Forms
                     if (ret.Result == ResultCode.Successful)
                     {
                         ShowButtonState();
-                        if (operation != SheetOperation.Create) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
+                        if (operation != SheetOperation.新建) this.OnItemUpdated(new ItemUpdatedEventArgs(sheet));
                         MessageBox.Show(string.Format("{0} 成功", SheetOperationDescription.GetDescription(operation)), "确定");
                         ItemShowing();
                     }

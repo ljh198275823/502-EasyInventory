@@ -148,13 +148,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.新建, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.修改, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
@@ -166,7 +166,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.Edit);
                 AccountRecord ac = null;
                 if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审批) && ac != null && ac.Remain > 0 && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.核销);
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审核) && ac != null && ac.Remain > 0 && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.核销);
                 mnu_UndoAssign.Enabled = Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.核销);
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.Customer, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.CustomerTaxBill, PermissionActions.UndoApprove);
@@ -177,7 +177,7 @@ namespace LJH.Inventory.UI.Forms.Financial
                 btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Edit);
                 AccountRecord ac = null;
                 if (cp != null) ac = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
-                btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审批) && ac != null && ac.Remain > 0 && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.核销);
+                btnAssign.Enabled = cp != null && (cp.State == SheetState.新增 || cp.State == SheetState.已审核) && ac != null && ac.Remain > 0 && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.核销);
                 mnu_UndoAssign.Enabled = Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.核销);
                 btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.Approve);
                 btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.SupplierTaxBill, PermissionActions.UndoApprove);
@@ -226,19 +226,19 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void btnSave_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            PerformOperation<CustomerPayment>(processor, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            PerformOperation<CustomerPayment>(processor, IsAdding ? SheetOperation.新建 : SheetOperation.修改);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            PerformOperation<CustomerPayment>(processor, SheetOperation.Approve);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.审核);
         }
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            PerformOperation<CustomerPayment>(processor, SheetOperation.UndoApprove);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.取消审核);
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
@@ -260,7 +260,7 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void btnNullify_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            PerformOperation<CustomerPayment>(processor, SheetOperation.Nullify);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.作废);
         }
         #endregion
 

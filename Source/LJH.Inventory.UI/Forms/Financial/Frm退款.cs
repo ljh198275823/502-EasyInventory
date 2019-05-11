@@ -140,13 +140,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         protected override CommandResult AddItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Create, Operator.Current.Name, Operator.Current.ID);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.新建, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override CommandResult UpdateItem(object item)
         {
             CustomerPaymentBLL bll = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+            return bll.ProcessSheet(item as CustomerPayment, SheetOperation.修改, Operator.Current.Name, Operator.Current.ID);
         }
 
         protected override void ShowButtonState()
@@ -201,26 +201,26 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void btnSave_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            SheetOperation so = IsAdding ? SheetOperation.Create : SheetOperation.Modify;
+            SheetOperation so = IsAdding ? SheetOperation.新建 : SheetOperation.修改;
             PerformOperation<CustomerPayment>(processor, so);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            PerformOperation<CustomerPayment>(processor, SheetOperation.Approve);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.审核);
         }
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            PerformOperation<CustomerPayment>(processor, SheetOperation.UndoApprove);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.取消审核);
         }
 
         private void btnNullify_Click(object sender, EventArgs e)
         {
             CustomerPaymentBLL processor = new CustomerPaymentBLL(AppSettings.Current.ConnStr);
-            PerformOperation<CustomerPayment>(processor, SheetOperation.Nullify);
+            PerformOperation<CustomerPayment>(processor, SheetOperation.作废);
         }
         #endregion
 

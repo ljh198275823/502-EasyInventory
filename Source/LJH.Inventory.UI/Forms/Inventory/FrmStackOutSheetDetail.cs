@@ -44,6 +44,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.txtLinker.Text = item.Linker;
             this.txtLinkerPhone.Text = item.LinkerCall;
             this.txtAddress.Text = item.Address;
+            this.txt业务员.Text = item.SalesPerson;
             txtDriver.Text = item.Driver;
             txtDriverCall.Text = item.DriverCall;
             txtCarPlate.Text = item.CarPlate;
@@ -284,6 +285,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             sheet.Driver = txtDriver.Text;
             sheet.CarPlate = txtCarPlate.Text;
             sheet.DeadlineDate = chkDeadline.Checked ? (DateTime?)dtDeadline.Value : null;
+            sheet.SalesPerson = txt业务员.Text;
             if (rdWithTax.Checked) sheet.WithTax = true;
             if (rdWithoutTax.Checked) sheet.WithTax = false;
             sheet.Memo = txtMemo.Text;
@@ -336,7 +338,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnSave_Click(object sender, EventArgs e)
         {
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackOutSheet>(bll, IsAdding ? SheetOperation.Create : SheetOperation.Modify);
+            PerformOperation<StackOutSheet>(bll, IsAdding ? SheetOperation.新建 : SheetOperation.修改);
         }
 
         private void btnPayment_Click(object sender, EventArgs e)
@@ -361,13 +363,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnApprove_Click(object sender, EventArgs e)
         {
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackOutSheet>(bll, SheetOperation.Approve);
+            PerformOperation<StackOutSheet>(bll, SheetOperation.审核);
         }
 
         private void btnUndoApprove_Click(object sender, EventArgs e)
         {
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackOutSheet>(bll, SheetOperation.UndoApprove);
+            PerformOperation<StackOutSheet>(bll, SheetOperation.取消审核);
         }
 
         private void mnu_预览_Click(object sender, EventArgs e)
@@ -412,7 +414,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     if (sheet.State == SheetState.新增)
                     {
                         GetItemFromInput();
-                        var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+                        var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.修改, Operator.Current.Name, Operator.Current.ID);
                         if (ret.Result != ResultCode.Successful)
                         {
                             MessageBox.Show(ret.Message);
@@ -428,7 +430,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     {
                         if (CheckCredit())
                         {
-                            var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.StackOut, Operator.Current.Name, Operator.Current.ID);
+                            var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.出库, Operator.Current.Name, Operator.Current.ID);
                             if (ret.Result != ResultCode.Successful)
                             {
                                 MessageBox.Show(ret.Message);
@@ -551,7 +553,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (sheet.State == SheetState.新增)
                 {
                     GetItemFromInput();
-                    var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.Modify, Operator.Current.Name, Operator.Current.ID);
+                    var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.修改, Operator.Current.Name, Operator.Current.ID);
                     if (ret.Result != ResultCode.Successful)
                     {
                         MessageBox.Show(ret.Message);
@@ -562,7 +564,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
                     }
                 }
-                PerformOperation<StackOutSheet>(bll, SheetOperation.StackOut);
+                PerformOperation<StackOutSheet>(bll, SheetOperation.出库);
                 if (sheet.State == SheetState.已发货)
                 {
                     new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
@@ -574,7 +576,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
         private void btnNullify_Click(object sender, EventArgs e)
         {
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
-            PerformOperation<StackOutSheet>(bll, SheetOperation.Nullify);
+            PerformOperation<StackOutSheet>(bll, SheetOperation.作废);
         }
         #endregion
 
@@ -898,5 +900,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             ItemsGrid.Rows[ItemsGrid.CurrentCell.RowIndex].Cells["colMemo"].Value = cmb_备注.Text;
         }
         #endregion
+
+        private void lnk业务员_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forms.General.FrmStaffMaster frm = new Forms.General.FrmStaffMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Staff item = frm.SelectedItem as Staff;
+                txt业务员.Text = item != null ? item.Name : string.Empty;
+            }
+        }
     }
 }

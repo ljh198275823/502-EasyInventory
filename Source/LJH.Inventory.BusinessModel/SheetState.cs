@@ -11,7 +11,7 @@ namespace LJH.Inventory.BusinessModel
     public enum SheetState
     {
         新增 = 0,
-        已审批 = 1,
+        已审核 = 1,
         已发货 = 2,
         已入库 = 3,
         作废 = 4,

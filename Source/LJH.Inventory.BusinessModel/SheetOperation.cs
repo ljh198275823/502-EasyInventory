@@ -13,30 +13,30 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 新建
         /// </summary>
-        Create=0,
+        新建=0,
         /// <summary>
         /// 修改
         /// </summary>
-        Modify=1,
+        修改=1,
         /// <summary>
         /// 审批
         /// </summary>
-        Approve=2,
+        审核=2,
         /// <summary>
         /// 发货
         /// </summary>
-        StackOut=3,
+        出库=3,
         /// <summary>
         /// 入库
         /// </summary>
-        StackIn=4,
+        入库=4,
         /// <summary>
         /// 作废
         /// </summary>
-        Nullify=5,
+        作废=5,
         /// <summary>
         /// 取消审核
         /// </summary>
-        UndoApprove=6,
+        取消审核=6,
     }
 }

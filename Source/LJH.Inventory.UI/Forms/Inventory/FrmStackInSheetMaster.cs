@@ -52,7 +52,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (items != null && items.Count > 0)
             {
                 items = items.Where(item => ((item.State == SheetState.新增 && chkAdded.Checked) ||
-                                        (item.State == SheetState.已审批 && chkApproved.Checked) ||
+                                        (item.State == SheetState.已审核 && chkApproved.Checked) ||
                                         (item.State == SheetState.已入库 && chkInventory.Checked) ||
                                         (item.State == SheetState.作废 && chkNullify.Checked))).ToList();
             }

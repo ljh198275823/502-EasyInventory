@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmStackOutSheetDetail));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btn_AddSlice = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_AddSteelRoll = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +57,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txt业务员 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.pnl毛利 = new System.Windows.Forms.GroupBox();
             this.lbl毛利 = new System.Windows.Forms.Label();
             this.lbl国税计提 = new System.Windows.Forms.Label();
@@ -87,6 +88,17 @@
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnkCustomer = new System.Windows.Forms.LinkLabel();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCosts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label15 = new System.Windows.Forms.Label();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
@@ -107,17 +119,7 @@
             this.colOperation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCosts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lnk业务员 = new System.Windows.Forms.LinkLabel();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -320,6 +322,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lnk业务员);
+            this.tabPage1.Controls.Add(this.txt业务员);
             this.tabPage1.Controls.Add(this.pnl毛利);
             this.tabPage1.Controls.Add(this.lnkPayment);
             this.tabPage1.Controls.Add(this.label1);
@@ -354,6 +358,14 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txt业务员
+            // 
+            this.txt业务员.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt业务员.Location = new System.Drawing.Point(725, 43);
+            this.txt业务员.Name = "txt业务员";
+            this.txt业务员.Size = new System.Drawing.Size(120, 21);
+            this.txt业务员.TabIndex = 144;
             // 
             // pnl毛利
             // 
@@ -532,7 +544,7 @@
             // lnkLinker
             // 
             this.lnkLinker.AutoSize = true;
-            this.lnkLinker.Location = new System.Drawing.Point(459, 47);
+            this.lnkLinker.Location = new System.Drawing.Point(309, 47);
             this.lnkLinker.Name = "lnkLinker";
             this.lnkLinker.Size = new System.Drawing.Size(47, 12);
             this.lnkLinker.TabIndex = 126;
@@ -576,7 +588,7 @@
             // txtLinkerPhone
             // 
             this.txtLinkerPhone.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLinkerPhone.Location = new System.Drawing.Point(725, 43);
+            this.txtLinkerPhone.Location = new System.Drawing.Point(526, 43);
             this.txtLinkerPhone.Name = "txtLinkerPhone";
             this.txtLinkerPhone.Size = new System.Drawing.Size(120, 21);
             this.txtLinkerPhone.TabIndex = 5;
@@ -584,7 +596,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(664, 47);
+            this.label2.Location = new System.Drawing.Point(468, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 121;
@@ -593,9 +605,9 @@
             // txtLinker
             // 
             this.txtLinker.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtLinker.Location = new System.Drawing.Point(512, 43);
+            this.txtLinker.Location = new System.Drawing.Point(357, 43);
             this.txtLinker.Name = "txtLinker";
-            this.txtLinker.Size = new System.Drawing.Size(135, 21);
+            this.txtLinker.Size = new System.Drawing.Size(90, 21);
             this.txtLinker.TabIndex = 4;
             // 
             // txtMemo
@@ -613,7 +625,7 @@
             this.txtCustomer.Location = new System.Drawing.Point(73, 43);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
-            this.txtCustomer.Size = new System.Drawing.Size(346, 21);
+            this.txtCustomer.Size = new System.Drawing.Size(208, 21);
             this.txtCustomer.TabIndex = 3;
             this.txtCustomer.DoubleClick += new System.EventHandler(this.txtCustomer_DoubleClick);
             // 
@@ -661,6 +673,102 @@
             this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
             this.ItemsGrid.CurrentCellChanged += new System.EventHandler(this.ItemsGrid_CurrentCellChanged);
+            // 
+            // colHeader
+            // 
+            this.colHeader.HeaderText = "";
+            this.colHeader.Name = "colHeader";
+            this.colHeader.ReadOnly = true;
+            this.colHeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colHeader.Width = 20;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "类别";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colSpecification
+            // 
+            this.colSpecification.HeaderText = "规格";
+            this.colSpecification.Name = "colSpecification";
+            this.colSpecification.ReadOnly = true;
+            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSpecification.Width = 80;
+            // 
+            // colLength
+            // 
+            dataGridViewCellStyle7.Format = "N3";
+            dataGridViewCellStyle7.NullValue = null;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle7;
+            this.colLength.HeaderText = "长度(米)";
+            this.colLength.Name = "colLength";
+            this.colLength.ReadOnly = true;
+            this.colLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colModel
+            // 
+            this.colModel.HeaderText = "产品种类";
+            this.colModel.Name = "colModel";
+            this.colModel.ReadOnly = true;
+            this.colModel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colWeight
+            // 
+            dataGridViewCellStyle8.Format = "N3";
+            dataGridViewCellStyle8.NullValue = null;
+            this.colWeight.DefaultCellStyle = dataGridViewCellStyle8;
+            this.colWeight.HeaderText = "重量(吨)";
+            this.colWeight.Name = "colWeight";
+            this.colWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colPrice
+            // 
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.colPrice.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colPrice.HeaderText = "单价";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colCount
+            // 
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = "0";
+            this.colCount.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colCount.HeaderText = "数量";
+            this.colCount.Name = "colCount";
+            this.colCount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCount.Width = 80;
+            // 
+            // colTotal
+            // 
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle11;
+            this.colTotal.HeaderText = "金额";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.ReadOnly = true;
+            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colTotal.Width = 80;
+            // 
+            // colCosts
+            // 
+            dataGridViewCellStyle12.Format = "C2";
+            this.colCosts.DefaultCellStyle = dataGridViewCellStyle12;
+            this.colCosts.HeaderText = "成本";
+            this.colCosts.Name = "colCosts";
+            this.colCosts.ReadOnly = true;
+            // 
+            // colMemo
+            // 
+            this.colMemo.HeaderText = "备注";
+            this.colMemo.Name = "colMemo";
+            this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colMemo.Width = 150;
             // 
             // label15
             // 
@@ -846,101 +954,16 @@
             this.colFill.Name = "colFill";
             this.colFill.ReadOnly = true;
             // 
-            // colHeader
+            // lnk业务员
             // 
-            this.colHeader.HeaderText = "";
-            this.colHeader.Name = "colHeader";
-            this.colHeader.ReadOnly = true;
-            this.colHeader.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colHeader.Width = 20;
-            // 
-            // colCategory
-            // 
-            this.colCategory.HeaderText = "类别";
-            this.colCategory.Name = "colCategory";
-            this.colCategory.ReadOnly = true;
-            this.colCategory.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colSpecification
-            // 
-            this.colSpecification.HeaderText = "规格";
-            this.colSpecification.Name = "colSpecification";
-            this.colSpecification.ReadOnly = true;
-            this.colSpecification.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colSpecification.Width = 80;
-            // 
-            // colLength
-            // 
-            dataGridViewCellStyle13.Format = "N3";
-            dataGridViewCellStyle13.NullValue = null;
-            this.colLength.DefaultCellStyle = dataGridViewCellStyle13;
-            this.colLength.HeaderText = "长度(米)";
-            this.colLength.Name = "colLength";
-            this.colLength.ReadOnly = true;
-            this.colLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colModel
-            // 
-            this.colModel.HeaderText = "产品种类";
-            this.colModel.Name = "colModel";
-            this.colModel.ReadOnly = true;
-            this.colModel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colWeight
-            // 
-            dataGridViewCellStyle14.Format = "N3";
-            dataGridViewCellStyle14.NullValue = null;
-            this.colWeight.DefaultCellStyle = dataGridViewCellStyle14;
-            this.colWeight.HeaderText = "重量(吨)";
-            this.colWeight.Name = "colWeight";
-            this.colWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colPrice
-            // 
-            dataGridViewCellStyle15.Format = "C2";
-            dataGridViewCellStyle15.NullValue = null;
-            this.colPrice.DefaultCellStyle = dataGridViewCellStyle15;
-            this.colPrice.HeaderText = "单价";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colCount
-            // 
-            dataGridViewCellStyle16.Format = "N0";
-            dataGridViewCellStyle16.NullValue = "0";
-            this.colCount.DefaultCellStyle = dataGridViewCellStyle16;
-            this.colCount.HeaderText = "数量";
-            this.colCount.Name = "colCount";
-            this.colCount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCount.Width = 80;
-            // 
-            // colTotal
-            // 
-            dataGridViewCellStyle17.Format = "C2";
-            dataGridViewCellStyle17.NullValue = null;
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle17;
-            this.colTotal.HeaderText = "金额";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.ReadOnly = true;
-            this.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTotal.Width = 80;
-            // 
-            // colCosts
-            // 
-            dataGridViewCellStyle18.Format = "C2";
-            this.colCosts.DefaultCellStyle = dataGridViewCellStyle18;
-            this.colCosts.HeaderText = "成本";
-            this.colCosts.Name = "colCosts";
-            this.colCosts.ReadOnly = true;
-            // 
-            // colMemo
-            // 
-            this.colMemo.HeaderText = "备注";
-            this.colMemo.Name = "colMemo";
-            this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colMemo.Width = 150;
+            this.lnk业务员.AutoSize = true;
+            this.lnk业务员.Location = new System.Drawing.Point(677, 47);
+            this.lnk业务员.Name = "lnk业务员";
+            this.lnk业务员.Size = new System.Drawing.Size(47, 12);
+            this.lnk业务员.TabIndex = 145;
+            this.lnk业务员.TabStop = true;
+            this.lnk业务员.Text = "业务员:";
+            this.lnk业务员.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk业务员_LinkClicked);
             // 
             // FrmStackOutSheetDetail
             // 
@@ -1065,5 +1088,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCosts;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private GeneralLibrary.WinformControl.DBCTextBox txt业务员;
+        private System.Windows.Forms.LinkLabel lnk业务员;
     }
 }
