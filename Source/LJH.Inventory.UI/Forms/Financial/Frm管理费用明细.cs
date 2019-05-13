@@ -11,6 +11,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.GeneralLibrary.Core.DAL;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.Inventory.UI.Forms.Sale;
 using LJH.Inventory.UI.Forms.Purchase;
 using LJH.Inventory.UI.Forms.General;
 
@@ -71,6 +72,55 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("没有指定申请人");
                 return false;
             }
+            if (rd直接付款.Checked)
+            {
+                if (txtAccount.Tag == null)
+                {
+                    MessageBox.Show("没有指定付款客户");
+                    return false;
+                }
+                if (dtPaidDate.IsNull)
+                {
+                    MessageBox.Show("没有指定付款日期");
+                    return false;
+                }
+                if ((txtAccount.Tag as Account).Class == AccountType.无效)
+                {
+                    MessageBox.Show("账号是无效账号,请先将账号设置成有效的账号!");
+                    return false;
+                }
+                if (txtAccount.Tag != null)
+                {
+                    var ac = txtAccount.Tag as Account;
+                    if (ac.Amount < txtAmount.DecimalValue)
+                    {
+                        MessageBox.Show("此账号余额不足");
+                        return false;
+                    }
+                    if (dtPaidDate.IsNull)
+                    {
+                        MessageBox.Show("没有填写到款日期");
+                        dtPaidDate.Focus();
+                        return false;
+                    }
+                }
+            }
+            if (rd增加供应商应付款.Checked)
+            {
+                if (txtSupplier.Tag == null)
+                {
+                    MessageBox.Show("没有指定供应商");
+                    return false;
+                }
+            }
+            if (rd用于冲抵客户应收款.Checked)
+            {
+                if (txtCustomer.Tag == null)
+                {
+                    MessageBox.Show("没有指定客户");
+                    return false;
+                }
+            }
             return true;
         }
 
@@ -98,33 +148,39 @@ namespace LJH.Inventory.UI.Forms.Financial
                 dtSheetDate.Value = item.SheetDate;
                 txtAmount.DecimalValue = item.Amount;
                 txtCategory.Text = item.GetProperty("费用类别");
-                if (!string.IsNullOrEmpty(item.CustomerID))
-                {
-                    var c = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.CustomerID).QueryObject;
-                    txtSupplier.Text = c != null ? c.Name : null;
-                    txtSupplier.Tag = c;
-                }
-                else
-                {
-                    txtSupplier.Text = null;
-                    txtSupplier.Tag = null;
-                }
                 if (!string.IsNullOrEmpty(item.AccountID))
                 {
+                    rd直接付款.Checked = true;
                     Account ac = null;
                     ac = new AccountBLL(AppSettings.Current.ConnStr).GetByID(item.AccountID).QueryObject;
                     txtAccount.Text = ac != null ? ac.Name : null;
                     txtAccount.Tag = ac;
+                    var temp = item.GetProperty(SheetNote.到款日期.ToString());
+                    DateTime pd = item.SheetDate;
+                    if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd))
+                    {
+                        dtPaidDate.Value = pd;
+                    }
+                    else
+                    {
+                        dtPaidDate.IsNull = true;
+                    }
                 }
-                var temp = item.GetProperty("到款日期");
-                DateTime pd = item.SheetDate;
-                if (!string.IsNullOrEmpty(temp) && DateTime.TryParse(temp, out pd))
+                else if (!string.IsNullOrEmpty(item.CustomerID))
                 {
-                    dtPaidDate.Value = pd;
-                }
-                else
-                {
-                    dtPaidDate.IsNull = true;
+                    var c = new CompanyBLL(AppSettings.Current.ConnStr).GetByID(item.CustomerID).QueryObject;
+                    if (c.ClassID == CompanyClass.Customer)
+                    {
+                        rd用于冲抵客户应收款.Checked = true;
+                        txtCustomer.Tag = c;
+                        txtCustomer.Text = c.Name;
+                    }
+                    else if (c.ClassID == CompanyClass.Supplier)
+                    {
+                        rd增加供应商应付款.Checked = true;
+                        txtSupplier.Text = c != null ? c.Name : null;
+                        txtSupplier.Tag = c;
+                    }
                 }
                 txt申请人.Text = item.GetProperty("申请人");
                 txtMemo.Text = item.Memo;
@@ -150,10 +206,22 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.Amount = txtAmount.DecimalValue;
             info.SheetDate = dtSheetDate.Value;
             info.SetProperty("费用类别", txtCategory.Text);
-            if (txtAccount.Tag != null) info.AccountID = (txtAccount.Tag as Account).ID;
-            else info.AccountID = string.Empty;// 账号不能为NULL，所以这里设置成空字符吧
-            if (txtSupplier.Tag != null) info.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
-            info.SetProperty("到款日期", dtPaidDate.Value.ToString("yyyy-MM-dd"));
+            if (rd直接付款.Checked)
+            {
+                info.AccountID = (txtAccount.Tag as Account).ID;
+                if (!dtPaidDate.IsNull) info.SetProperty(SheetNote.到款日期.ToString(), dtPaidDate.Value.ToString("yyyy-MM-dd"));
+                info.CustomerID = string.Empty;
+            }
+            else if (rd增加供应商应付款.Checked)
+            {
+                info.AccountID = string.Empty;
+                info.CustomerID = (txtSupplier.Tag as CompanyInfo).ID;
+            }
+            else
+            {
+                info.AccountID = string.Empty;
+                info.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
+            }
             info.SetProperty("申请人", txt申请人.Text);
             info.Memo = txtMemo.Text;
             return info;
@@ -175,9 +243,11 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             base.ShowButtonState(this.toolStrip1);
             btnSave.Enabled = IsAdding && btnSave.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Edit);
-            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Approve);
-            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.UndoApprove);
-            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Nullify);
+            string sheetID = null; //关联的收付款单号，如果有关联单号，只能从关联单上操作
+            if (UpdatingItem != null) sheetID = (UpdatingItem as CustomerPayment).GetProperty(SheetNote.关联收付款单号.ToString ());
+            btnApprove.Enabled = btnApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Approve) && string.IsNullOrEmpty(sheetID);
+            btnUndoApprove.Enabled = btnUndoApprove.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.UndoApprove) && string.IsNullOrEmpty(sheetID);
+            btnNullify.Enabled = btnNullify.Enabled && Operator.Current.Permit(Permission.ExpenditureRecord, PermissionActions.Nullify) && string.IsNullOrEmpty(sheetID);
         }
         #endregion
 
@@ -294,6 +364,37 @@ namespace LJH.Inventory.UI.Forms.Financial
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
             lbl大写.Text = LJH.GeneralLibrary.RMBHelper.NumGetStr((double)txtAmount.DecimalValue);
+        }
+
+        private void lnkCustomer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frm = new FrmCustomerMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var c = frm.SelectedItem as CompanyInfo;
+                txtCustomer.Tag = c;
+                txtCustomer.Text = c.Name;
+            }
+        }
+
+        private void rd增加供应商应付款_CheckedChanged(object sender, EventArgs e)
+        {
+            lnkSupplier.Enabled = rd增加供应商应付款.Checked;
+            txtSupplier.Enabled = rd增加供应商应付款.Checked;
+        }
+
+        private void rd直接付款_CheckedChanged(object sender, EventArgs e)
+        {
+            lnkAccout.Enabled = rd直接付款.Checked;
+            txtAccount.Enabled = rd直接付款.Checked;
+            dtPaidDate.Enabled = rd直接付款.Checked;
+        }
+
+        private void rd用于冲抵客户应收款_CheckedChanged(object sender, EventArgs e)
+        {
+            lnkCustomer.Enabled = rd用于冲抵客户应收款.Checked;
+            txtCustomer.Enabled = rd用于冲抵客户应收款.Checked;
         }
     }
 }

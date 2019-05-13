@@ -287,4 +287,23 @@ BEGIN
 end
 go
 
+--20190513 
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Note' AND id = OBJECT_ID(N'[dbo].[StackOutItem]'))
+BEGIN
+	exec ('alter table StackOutItem add Note nvarchar(512) null')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Note' AND id = OBJECT_ID(N'[dbo].[StackInItem]'))
+BEGIN
+	exec ('alter table StackInItem add Note nvarchar(512) null')
+end
+go
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Note' AND id = OBJECT_ID(N'[dbo].[Account]'))
+BEGIN
+	exec ('alter table Account add Note nvarchar(512) null')
+end
+go
+
 

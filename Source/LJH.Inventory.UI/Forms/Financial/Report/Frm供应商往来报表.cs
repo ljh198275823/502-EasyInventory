@@ -183,7 +183,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                         var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(cp.单据编号).QueryObject;
                         if (sheet != null && sheet.ClassID == CustomerPaymentType.供应商付款)
                         {
-                            Frm收付款流水明细 frm = new Frm收付款流水明细();
+                            var frm = new Frm供应商付款流水明细();
                             frm.IsAdding = false;
                             frm.UpdatingItem = sheet;
                             frm.PaymentType = sheet.ClassID;

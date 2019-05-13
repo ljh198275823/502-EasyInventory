@@ -195,10 +195,17 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     CustomerPayment cp = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetByID(paymentID).QueryObject;
                     if (cp != null)
                     {
-                        if (cp.ClassID == CustomerPaymentType.客户收款 || cp.ClassID == CustomerPaymentType.供应商付款)
+                        if (cp.ClassID == CustomerPaymentType.客户收款)
                         {
                             Frm收付款流水明细 frm = new Frm收付款流水明细();
                             frm.IsAdding = false;
+                            frm.UpdatingItem = cp;
+                            frm.PaymentType = cp.ClassID;
+                            frm.ShowDialog();
+                        }
+                        else if (cp.ClassID == CustomerPaymentType.供应商付款)
+                        {
+                            var frm = new Frm供应商付款流水明细();
                             frm.UpdatingItem = cp;
                             frm.PaymentType = cp.ClassID;
                             frm.ShowDialog();

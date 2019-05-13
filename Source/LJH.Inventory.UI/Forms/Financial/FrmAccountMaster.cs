@@ -22,6 +22,13 @@ namespace LJH.Inventory.UI.Forms.Financial
         }
 
         #region 私有方法
+        private bool HasOperator(Account account, string optID)
+        {
+            if (optID == Operator.DefaultLogID) return true;
+            var temp = account.GetProperty(SheetNote.关联操作员);
+            if (string.IsNullOrEmpty(temp)) return true;
+            return (temp.Split(',').Contains(optID));
+        }
         #endregion
 
         #region 重写基类方法
@@ -53,7 +60,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             }
             if (items != null)
             {
-                return (from item in items select (object)item).ToList();
+                return (from item in items where HasOperator(item, Operator.Current.ID) select (object)item).ToList();
             }
             return null;
         }

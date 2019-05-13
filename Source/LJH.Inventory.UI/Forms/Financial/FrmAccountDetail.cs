@@ -63,6 +63,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             rd银行账号.Checked = ct.Class == AccountType.银行账号;
             rd现金账号.Checked = ct.Class == AccountType.现金账号;
             rd财务核算.Checked = ct.Class == AccountType.财务核算;
+            txtOperators.Text = ct.GetProperty(SheetNote.关联操作员);
             txtMemo.Text = ct.Memo;
             if (ct.Class != AccountType.无效)
             {
@@ -88,6 +89,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (rd银行账号.Checked) ct.Class = AccountType.银行账号;
             else if (rd现金账号.Checked) ct.Class = AccountType.现金账号;
             else if (rd财务核算.Checked) ct.Class = AccountType.财务核算;
+            ct.SetProperty(SheetNote.关联操作员, txtOperators.Text);
             ct.Memo = txtMemo.Text;
             return ct;
         }
@@ -102,5 +104,16 @@ namespace LJH.Inventory.UI.Forms.Financial
             return (new AccountBLL(AppSettings.Current.ConnStr)).Update(updatingItem as Account);
         }
         #endregion
+
+        private void lnkOperators_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var frm = new FrmOperatorSelection();
+            if (UpdatingItem != null) frm.SelectedOperators = (UpdatingItem as Account).GetProperty(SheetNote.关联操作员);
+            frm.StartPosition = FormStartPosition.CenterParent;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                txtOperators.Text = frm.SelectedOperators;
+            }
+        }
     }
 }

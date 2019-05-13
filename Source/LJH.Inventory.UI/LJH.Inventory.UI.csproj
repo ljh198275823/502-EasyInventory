@@ -94,6 +94,12 @@
     <Compile Include="Forms\Financial\FrmCustomerTaxBillDetail.designer.cs">
       <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmOperatorSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOperatorSelection.designer.cs">
+      <DependentUpon>FrmOperatorSelection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Financial\Frm管理费用.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -807,6 +813,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\FrmCustomerTaxBillDetail.resx">
       <DependentUpon>FrmCustomerTaxBillDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOperatorSelection.resx">
+      <DependentUpon>FrmOperatorSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Financial\Frm管理费用.resx">
       <DependentUpon>Frm管理费用.cs</DependentUpon>

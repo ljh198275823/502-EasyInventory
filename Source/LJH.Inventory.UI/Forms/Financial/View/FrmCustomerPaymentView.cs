@@ -111,12 +111,33 @@ namespace LJH.Inventory.UI.Forms.Financial.View
 
         private void mnu_Add_Click(object sender, EventArgs e)
         {
-            Frm收付款流水明细 frm = new Frm收付款流水明细();
-            frm.Customer = Customer;
-            frm.PaymentType = PaymentType;
-            frm.IsAdding = true;
-            frm.StartPosition = FormStartPosition.CenterParent;
-            frm.ShowDialog();
+            if (PaymentType == CustomerPaymentType.客户收款)
+            {
+                Frm收付款流水明细 frm = new Frm收付款流水明细();
+                frm.Customer = Customer;
+                frm.PaymentType = PaymentType;
+                frm.IsAdding = true;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
+            }
+            else if (PaymentType  == CustomerPaymentType.供应商付款)
+            {
+                var frm = new Frm供应商付款流水明细();
+                frm.Customer = Customer;
+                frm.PaymentType = PaymentType;
+                frm.IsAdding = true;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
+            }
+            else
+            {
+                var frm = new Frm供应商付款流水明细();
+                frm.Customer = Customer;
+                frm.PaymentType = PaymentType;
+                frm.IsAdding = true;
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
+            }
             FreshData();
         }
 
@@ -160,11 +181,20 @@ namespace LJH.Inventory.UI.Forms.Financial.View
                     var sheet = new CustomerPaymentBLL(AppSettings.Current.ConnStr).GetByID(ar.SheetID).QueryObject;
                     if (sheet != null)
                     {
-                        Frm收付款流水明细 frm = new Frm收付款流水明细();
-                        frm.IsAdding = false;
-                        frm.UpdatingItem = sheet;
-                        frm.PaymentType = sheet.ClassID;
-                        frm.ShowDialog();
+                        if (sheet.ClassID == CustomerPaymentType.客户收款)
+                        {
+                            Frm收付款流水明细 frm = new Frm收付款流水明细();
+                            frm.UpdatingItem = sheet;
+                            frm.PaymentType = sheet.ClassID;
+                            frm.ShowDialog();
+                        }
+                        else if (sheet.ClassID == CustomerPaymentType.供应商付款)
+                        {
+                            var frm = new Frm供应商付款流水明细();
+                            frm.UpdatingItem = sheet;
+                            frm.PaymentType = sheet.ClassID;
+                            frm.ShowDialog();
+                        }
                         FreshData();
                     }
                 }

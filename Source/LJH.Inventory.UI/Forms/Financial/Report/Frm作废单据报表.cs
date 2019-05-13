@@ -88,9 +88,16 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
 
         private void Show收付款流水表(CustomerPayment sheet)
         {
-            if (sheet.ClassID == CustomerPaymentType.客户收款 || sheet.ClassID == CustomerPaymentType.供应商付款)
+            if (sheet.ClassID == CustomerPaymentType.客户收款)
             {
                 Frm收付款流水明细 frm = new Frm收付款流水明细();
+                frm.UpdatingItem = sheet;
+                frm.PaymentType = sheet.ClassID;
+                frm.ShowDialog();
+            }
+            else if (sheet.ClassID == CustomerPaymentType.供应商付款)
+            {
+                var frm = new Frm供应商付款流水明细();
                 frm.UpdatingItem = sheet;
                 frm.PaymentType = sheet.ClassID;
                 frm.ShowDialog();
