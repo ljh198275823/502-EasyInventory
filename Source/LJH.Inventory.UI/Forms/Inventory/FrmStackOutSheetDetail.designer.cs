@@ -888,7 +888,7 @@
             this.col计量方式.HeaderText = "计量方式";
             this.col计量方式.Items.AddRange(new object[] {
             "过磅",
-            "理计重量",
+            "理计",
             "点张"});
             this.col计量方式.Name = "col计量方式";
             this.col计量方式.Resizable = System.Windows.Forms.DataGridViewTriState.True;
