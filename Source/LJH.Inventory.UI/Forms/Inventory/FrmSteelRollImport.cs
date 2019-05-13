@@ -179,7 +179,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
             }
             string manufacture = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
-            var p = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, "原材料", 7.85m);
+            string material = row.Cells["colMaterial"].Value != null ? row.Cells["colMaterial"].Value.ToString().Trim() : null;
+            var p = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, "原材料", material, 7.85m);
             if (p == null)
             {
                 row.Cells["colReason"].Value = "创建产品失败";
@@ -212,7 +213,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             pi.Manufacture = manufacture;
             pi.SerialNumber = row.Cells["colSerialNumber"].Value != null ? row.Cells["colSerialNumber"].Value.ToString().Trim() : null;
             pi.Position = row.Cells["colPosition"].Value != null ? row.Cells["colPosition"].Value.ToString().Trim() : null;
-            pi.Material = row.Cells["colMaterial"].Value != null ? row.Cells["colMaterial"].Value.ToString().Trim() : null;
             pi.PurchaseID = row.Cells["colPurchaseID"].Value != null ? row.Cells["colPurchaseID"].Value.ToString().Trim() : null;
             pi.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString().Trim() : null;
             pi.InventorySheet = "导入";

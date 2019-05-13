@@ -34,6 +34,8 @@
             this.mnu_DeleteContact = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.lnk业务员 = new System.Windows.Forms.LinkLabel();
+            this.txt业务员 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label10 = new System.Windows.Forms.Label();
@@ -138,6 +140,8 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.lnk业务员);
+            this.tabPage6.Controls.Add(this.txt业务员);
             this.tabPage6.Controls.Add(this.label5);
             this.tabPage6.Controls.Add(this.txtMemo);
             this.tabPage6.Controls.Add(this.label10);
@@ -166,6 +170,25 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "基本资料";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // lnk业务员
+            // 
+            this.lnk业务员.AutoSize = true;
+            this.lnk业务员.Location = new System.Drawing.Point(489, 51);
+            this.lnk业务员.Name = "lnk业务员";
+            this.lnk业务员.Size = new System.Drawing.Size(47, 12);
+            this.lnk业务员.TabIndex = 147;
+            this.lnk业务员.TabStop = true;
+            this.lnk业务员.Text = "业务员:";
+            this.lnk业务员.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk业务员_LinkClicked);
+            // 
+            // txt业务员
+            // 
+            this.txt业务员.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt业务员.Location = new System.Drawing.Point(537, 47);
+            this.txt业务员.Name = "txt业务员";
+            this.txt业务员.Size = new System.Drawing.Size(120, 21);
+            this.txt业务员.TabIndex = 146;
             // 
             // label5
             // 
@@ -345,7 +368,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 50);
+            this.label3.Location = new System.Drawing.Point(19, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 58;
@@ -669,5 +692,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colBirthday;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHobby;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.LinkLabel lnk业务员;
+        private GeneralLibrary.WinformControl.DBCTextBox txt业务员;
     }
 }

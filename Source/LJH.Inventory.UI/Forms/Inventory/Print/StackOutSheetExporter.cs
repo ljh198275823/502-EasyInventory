@@ -49,7 +49,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 {
                     IWorkbook wb = WorkbookFactory.Create(fs);
                     ISheet sheet = wb.GetSheetAt(0);
-                    FillSheetInfo(info, sheet);
+                    FillSheetInfo(info, temp.ToList(), sheet);
                     FillSheetItems(temp, sheet, itemFirstRow);
                     MemoryStream stream = new MemoryStream();
                     wb.Write(stream);
@@ -65,7 +65,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             return files;
         }
 
-        private void FillSheetInfo(StackOutSheet info, ISheet sheet)
+        private void FillSheetInfo(StackOutSheet info, List<StackOutItem> items, ISheet sheet)
         {
             for (int i = sheet.FirstRowNum; i < sheet.LastRowNum; i++)
             {
@@ -74,12 +74,12 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 for (int j = row.FirstCellNum; j < row.LastCellNum; j++)
                 {
                     ICell cell = row.GetCell(j);
-                    if (cell != null) FillSheetInfo(info, cell);
+                    if (cell != null) FillSheetInfo(info, items, cell);
                 }
             }
         }
 
-        private void FillSheetInfo(StackOutSheet info, ICell cell)
+        private void FillSheetInfo(StackOutSheet info, List<StackOutItem> items, ICell cell)
         {
             var express = cell.StringCellValue;
             if (string.IsNullOrEmpty(express)) return;
@@ -131,6 +131,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             }
             else if (express == "[总金额]") cell.SetCellValue((double)info.Amount);
             else if (express == "[大写总金额]") cell.SetCellValue(RMBHelper.NumGetStr((double)info.Amount));
+            else if (express == "[合计重量]") cell.SetCellValue(items.Sum(it => it.TotalWeight.HasValue ? it.TotalWeight.Value : 0).ToString("F3"));
         }
 
         private void FillSheetItems(StackOutItem[] items, ISheet sheet, int firstRow)
@@ -168,6 +169,12 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
                 cell.SetCellValue(p.Specification);
             }
+            else if (express == "[产品规格带长度]")
+            {
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                if (item.Length.HasValue) cell.SetCellValue(string.Format("{0}*{1}", p.Specification, (item.Length.Value * 1000).ToString("F0"))); //这里长度单位是米，转换成毫米
+                else cell.SetCellValue(p.Specification);
+            }
             else if (express == "[产品长度]")
             {
                 cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F3") : string.Empty);
@@ -185,6 +192,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
                 var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
                 cell.SetCellValue(p.Model == "原材料" ? "卷" : p.Model);
             }
+            else if (express == "[产品材质]")
+            {
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                cell.SetCellValue(p.材质);
+            }
             else if (express == "[产品单价]")
             {
                 cell.SetCellValue((Double)item.Price);
@@ -192,6 +204,10 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             else if (express == "[产品金额]")
             {
                 cell.SetCellValue((Double)item.Amount);
+            }
+            else if (express == "[计量方式]")
+            {
+                cell.SetCellValue(item.GetProperty(SheetNote.计量方式));
             }
             else if (express == "[产品备注]")
             {

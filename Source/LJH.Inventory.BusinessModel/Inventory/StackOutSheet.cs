@@ -288,6 +288,7 @@ namespace LJH.Inventory.BusinessModel
                     AddDate = g.First().AddDate,
                     Memo = g.First().Memo,
                 };
+                si.SetProperty(SheetNote.计量方式, g.First().GetProperty(SheetNote.计量方式));
                 ret.Add(si);
             }
             return ret;

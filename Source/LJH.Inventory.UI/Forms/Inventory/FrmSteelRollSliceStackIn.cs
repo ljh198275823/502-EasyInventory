@@ -112,6 +112,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                              (txtCategory.Tag as ProductCategory).ID,
                              StringHelper.ToDBC(cmbSpecification.Specification).Trim(),
                              sliceTo,
+                             txtMaterial.Text,
                              weight,
                              txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null,
                              7.85m);
@@ -247,7 +248,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
             txtPosition.Text = item.Position;
             txtCarPlate.Text = item.Carplate;
-            txtMaterial.Text = item.Material;
+            txtMaterial.Text = item.Product.材质;
             txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
             if (!IsForView)
@@ -373,7 +374,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.Manufacture = cmbBrand.Text;
             item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
             item.Position = txtPosition.Text;
-            item.Material = txtMaterial.Text;
             item.PurchaseID = txtPurchaseID.Text;
             item.Carplate = txtCarPlate.Text;
             item.Memo = txtMemo.Text;

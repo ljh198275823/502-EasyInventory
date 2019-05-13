@@ -237,7 +237,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
             row.Cells["colDeliverySheet"].Value = sr.DeliverySheet;
             row.Cells["colPosition"].Value = sr.Position;
-            row.Cells["colMaterial"].Value = sr.Material;
+            row.Cells["colMaterial"].Value = sr.Product.材质;
             row.Cells["colCarplate"].Value = sr.Carplate;
             row.Cells["colPurchaseID"].Value = sr.PurchaseID;
             row.Cells["colOperator"].Value = sr.Operator;

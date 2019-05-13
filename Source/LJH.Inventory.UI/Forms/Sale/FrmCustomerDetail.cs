@@ -45,6 +45,11 @@ namespace LJH.Inventory.UI.Forms.Sale
                 txtName.Focus();
                 return false;
             }
+            if (string.IsNullOrEmpty(txt业务员.Text))
+            {
+                MessageBox.Show("业务员不能为空");
+                return false;
+            }
             return true;
         }
 
@@ -85,6 +90,7 @@ namespace LJH.Inventory.UI.Forms.Sale
                 txtWeb.Text = c.Website;
                 txtAddress.Text = c.Address;
                 txtMemo.Text = c.Memo;
+                txt业务员.Text = c.GetProperty(SheetNote.业务员.ToString());
                 _DefaultLinker = c.DefaultLinker;
             }
 
@@ -128,6 +134,7 @@ namespace LJH.Inventory.UI.Forms.Sale
             info.Address = txtAddress.Text;
             info.Memo = txtMemo.Text;
             info.DefaultLinker = _DefaultLinker;
+            info.SetProperty(SheetNote.业务员.ToString(), txt业务员.Text);
             return info;
         }
 
@@ -328,8 +335,15 @@ namespace LJH.Inventory.UI.Forms.Sale
         }
         #endregion
 
-        
-
-        
+        private void lnk业务员_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forms.General.FrmStaffMaster frm = new Forms.General.FrmStaffMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Staff item = frm.SelectedItem as Staff;
+                txt业务员.Text = item != null ? item.Name : string.Empty;
+            }
+        }
     }
 }

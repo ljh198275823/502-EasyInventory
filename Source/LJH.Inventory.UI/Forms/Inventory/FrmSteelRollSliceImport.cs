@@ -173,7 +173,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             string customer = LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colCustomer"].Value.ToString().Trim());
             string supplier = row.Cells["colSupplier"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colSupplier"].Value.ToString().Trim());
             string manufacture = row.Cells["colManufacture"].Value == null ? null : LJH.GeneralLibrary.StringHelper.ToDBC(row.Cells["colManufacture"].Value.ToString().Trim());
-            var p = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, model == ProductModel.开平 || model == ProductModel.开卷 ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
+            var p = new ProductBLL(AppSettings.Current.ConnStr).Create(category, specification, model, string.Empty, model == ProductModel.开平 || model == ProductModel.开卷 ? null : (decimal?)weight, length == 0 ? null : (decimal?)length, 7.85m);
             if (p == null)
             {
                 row.Cells["colReason"].Value = "创建产品失败";

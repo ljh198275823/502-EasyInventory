@@ -113,6 +113,7 @@
     <Compile Include="MyCompanyInfo.cs" />
     <Compile Include="ProductInventoryState.cs" />
     <Compile Include="ProductModel.cs" />
+    <Compile Include="ProductNote.cs" />
     <Compile Include="Resource\CustomerReceivableTypeDescription.cs" />
     <Compile Include="Resource\ProductInventoryStateDescription.cs" />
     <Compile Include="Sale\OrderItemRecord.cs" />

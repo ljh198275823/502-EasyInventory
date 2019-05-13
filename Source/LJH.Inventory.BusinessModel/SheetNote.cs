@@ -52,6 +52,8 @@ namespace LJH.Inventory.BusinessModel
         管理费用单号 = 42,
         手续费金额 = 43,
         手续费类别 = 44,
-        含税=45,
+        含税 = 45,
+        业务员 = 46,
+        计量方式=47
     }
 }

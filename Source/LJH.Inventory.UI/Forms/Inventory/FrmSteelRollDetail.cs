@@ -199,7 +199,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
 
             txtPosition.Text = item.Position;
-            txtMaterial.Text = item.Material;
+            txtMaterial.Text = item.Product.材质;
             txtCarPlate.Text = item.Carplate;
             txtPurchaseID.Text = item.PurchaseID;
             txtMemo.Text = item.Memo;
@@ -215,7 +215,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 item = new ProductInventoryItem();
                 item.ID = Guid.NewGuid();
             }
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Specification).Trim(), "原材料", 7.85m);
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create((txtCategory.Tag as ProductCategory).ID, StringHelper.ToDBC(cmbSpecification.Specification).Trim(), "原材料", txtMaterial.Text, 7.85m);
             if (p == null) throw new Exception("创建相关产品信息失败");
             item.Product = p;
             item.ProductID = p.ID;
@@ -245,7 +245,6 @@ namespace LJH.Inventory.UI.Forms.Inventory
             item.SetCost(new CostItem() { Name = CostItem.入库单价, Price = txtPurchasePrice.DecimalValue, WithTax = rdWithTax_入库单价.Checked });
             item.Position = txtPosition.Text;
             item.Carplate = txtCarPlate.Text;
-            item.Material = txtMaterial.Text;
             item.Memo = txtMemo.Text;
             item.PurchaseID = txtPurchaseID.Text;
             item.Operator = Operator.Current.Name;

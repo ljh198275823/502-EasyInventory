@@ -91,6 +91,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                              (txtCategory.Tag as ProductCategory).ID,
                              StringHelper.ToDBC(cmbSpecification.Text).Trim(),
                              ProductModel.其它产品,
+                             string.Empty,
                              null,
                              txtLength.DecimalValue != 0 ? (decimal?)txtLength.DecimalValue : null,
                              7.85m);

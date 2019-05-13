@@ -78,6 +78,7 @@
       <Column Name="Length" Member="Length"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="Density" Member="Density"  DbType="decimal(18,4)"  UpdateCheck="Never"/>
       <Column Name="IsService" Member="IsService"  DbType="bit null"  UpdateCheck="Never"/>
+      <Column Name="Note" Member="Note" DbType="nvarchar(512)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
       <Association Name="FK_Product_Category" Member="Category"  ThisKey="CategoryID" OtherKey="ID"/>
     </Type>
@@ -170,6 +171,7 @@
       <Column Name="TotalWeight" Member="TotalWeight"  DbType="decimal(18,4)" UpdateCheck="Never"/>
       <Column Name="AddDate" Member="AddDate"  DbType="datetime" UpdateCheck="Never"/>
       <Column Name="InventoryItem" Member="InventoryItem"  DbType="uniqueidentifier" UpdateCheck="Never"/>
+      <Column Name="Note" Member="Note" DbType="nvarchar(512)" UpdateCheck="Never"/>
       <Column Name="Memo" Member="Memo" DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>

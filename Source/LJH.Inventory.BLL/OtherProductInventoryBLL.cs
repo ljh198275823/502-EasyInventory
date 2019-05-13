@@ -97,7 +97,7 @@ namespace LJH.Inventory.BLL
             if (info.State == ProductInventoryState.Nullified) return new CommandResult(ResultCode.Fail, "作废的库存项不能进行拆包操作");
             if (info.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "库存项数量处于锁定状态,不能拆包");
 
-            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(info.Product.CategoryID, specification, info.Product.Model, info.Product.Weight, info.Product.Length, info.Product.Density);
+            Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(info.Product.CategoryID, specification, info.Product.Model, info.Product.材质, info.Product.Weight, info.Product.Length, info.Product.Density);
             if (p == null) return new CommandResult(ResultCode.Fail, "创建产品信息失败");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);

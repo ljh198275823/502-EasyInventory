@@ -47,20 +47,6 @@
             this.mnu_DeleteCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CategoryProperty = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeb = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMnu_Fresh = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Add = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,6 +57,21 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col业务员 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTelphone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeb = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFax = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menu.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.CategoryMenu.SuspendLayout();
@@ -93,7 +94,7 @@
             this.toolStripSeparator2});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(1178, 50);
+            this.menu.Size = new System.Drawing.Size(1222, 50);
             this.menu.TabIndex = 31;
             // 
             // btn_Add
@@ -163,7 +164,7 @@
             this.splitter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.splitter1.Location = new System.Drawing.Point(194, 50);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(8, 294);
+            this.splitter1.Size = new System.Drawing.Size(8, 275);
             this.splitter1.TabIndex = 110;
             this.splitter1.TabStop = false;
             // 
@@ -173,7 +174,7 @@
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.Location = new System.Drawing.Point(0, 50);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(194, 294);
+            this.pnlLeft.Size = new System.Drawing.Size(194, 275);
             this.pnlLeft.TabIndex = 109;
             // 
             // categoryTree
@@ -186,7 +187,7 @@
             this.categoryTree.LoadCustomer = false;
             this.categoryTree.Location = new System.Drawing.Point(0, 0);
             this.categoryTree.Name = "categoryTree";
-            this.categoryTree.Size = new System.Drawing.Size(194, 294);
+            this.categoryTree.Size = new System.Drawing.Size(194, 275);
             this.categoryTree.TabIndex = 2;
             this.categoryTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.categoryTree_NodeMouseClick);
             // 
@@ -241,6 +242,7 @@
             this.colName,
             this.colCategory,
             this.colNation,
+            this.col业务员,
             this.colTelphone,
             this.colLinker,
             this.colLinkerPhone,
@@ -258,8 +260,78 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(976, 294);
+            this.dataGridView1.Size = new System.Drawing.Size(1020, 275);
             this.dataGridView1.TabIndex = 111;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cMnu_Fresh,
+            this.cMnu_Add,
+            this.cMnu_Edit,
+            this.cMnu_Delete,
+            this.mnu_Merge,
+            this.toolStripSeparator3,
+            this.cMnu_SelectColumns,
+            this.cMnu_Export,
+            this.mnu_Import});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 186);
+            // 
+            // cMnu_Fresh
+            // 
+            this.cMnu_Fresh.Name = "cMnu_Fresh";
+            this.cMnu_Fresh.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Fresh.Text = "刷新";
+            // 
+            // cMnu_Add
+            // 
+            this.cMnu_Add.Name = "cMnu_Add";
+            this.cMnu_Add.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Add.Text = "新建";
+            // 
+            // cMnu_Edit
+            // 
+            this.cMnu_Edit.Name = "cMnu_Edit";
+            this.cMnu_Edit.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Edit.Text = "编辑";
+            // 
+            // cMnu_Delete
+            // 
+            this.cMnu_Delete.Name = "cMnu_Delete";
+            this.cMnu_Delete.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Delete.Text = "删除";
+            // 
+            // mnu_Merge
+            // 
+            this.mnu_Merge.Name = "mnu_Merge";
+            this.mnu_Merge.Size = new System.Drawing.Size(121, 22);
+            this.mnu_Merge.Text = "合并到...";
+            this.mnu_Merge.Click += new System.EventHandler(this.mnu_Merge_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(118, 6);
+            // 
+            // cMnu_SelectColumns
+            // 
+            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
+            this.cMnu_SelectColumns.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_SelectColumns.Text = "选择列...";
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(121, 22);
+            this.cMnu_Export.Text = "导出...";
+            // 
+            // mnu_Import
+            // 
+            this.mnu_Import.Name = "mnu_Import";
+            this.mnu_Import.Size = new System.Drawing.Size(121, 22);
+            this.mnu_Import.Text = "导入...";
+            this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
             // 
             // colImage
             // 
@@ -300,6 +372,12 @@
             this.colNation.ReadOnly = true;
             this.colNation.Visible = false;
             this.colNation.Width = 80;
+            // 
+            // col业务员
+            // 
+            this.col业务员.HeaderText = "业务员";
+            this.col业务员.Name = "col业务员";
+            this.col业务员.ReadOnly = true;
             // 
             // colTelphone
             // 
@@ -353,10 +431,10 @@
             // colAddress
             // 
             this.colAddress.HeaderText = "地址";
-            this.colAddress.MinimumWidth = 200;
+            this.colAddress.MinimumWidth = 150;
             this.colAddress.Name = "colAddress";
             this.colAddress.ReadOnly = true;
-            this.colAddress.Width = 200;
+            this.colAddress.Width = 150;
             // 
             // colMemo
             // 
@@ -366,82 +444,12 @@
             this.colMemo.ReadOnly = true;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cMnu_Fresh,
-            this.cMnu_Add,
-            this.cMnu_Edit,
-            this.cMnu_Delete,
-            this.mnu_Merge,
-            this.toolStripSeparator3,
-            this.cMnu_SelectColumns,
-            this.cMnu_Export,
-            this.mnu_Import});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 208);
-            // 
-            // cMnu_Fresh
-            // 
-            this.cMnu_Fresh.Name = "cMnu_Fresh";
-            this.cMnu_Fresh.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Fresh.Text = "刷新";
-            // 
-            // cMnu_Add
-            // 
-            this.cMnu_Add.Name = "cMnu_Add";
-            this.cMnu_Add.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Add.Text = "新建";
-            // 
-            // cMnu_Edit
-            // 
-            this.cMnu_Edit.Name = "cMnu_Edit";
-            this.cMnu_Edit.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Edit.Text = "编辑";
-            // 
-            // cMnu_Delete
-            // 
-            this.cMnu_Delete.Name = "cMnu_Delete";
-            this.cMnu_Delete.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Delete.Text = "删除";
-            // 
-            // mnu_Merge
-            // 
-            this.mnu_Merge.Name = "mnu_Merge";
-            this.mnu_Merge.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Merge.Text = "合并到...";
-            this.mnu_Merge.Click += new System.EventHandler(this.mnu_Merge_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
-            // 
-            // cMnu_SelectColumns
-            // 
-            this.cMnu_SelectColumns.Name = "cMnu_SelectColumns";
-            this.cMnu_SelectColumns.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_SelectColumns.Text = "选择列...";
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(152, 22);
-            this.cMnu_Export.Text = "导出...";
-            // 
-            // mnu_Import
-            // 
-            this.mnu_Import.Name = "mnu_Import";
-            this.mnu_Import.Size = new System.Drawing.Size(152, 22);
-            this.mnu_Import.Text = "导入...";
-            this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
-            // 
             // FrmCustomerMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1178, 366);
+            this.ClientSize = new System.Drawing.Size(1222, 347);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlLeft);
@@ -491,11 +499,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cMnu_SelectColumns;
         private System.Windows.Forms.ToolStripMenuItem mnu_Import;
+        private System.Windows.Forms.ToolStripMenuItem mnu_Merge;
+        private System.Windows.Forms.ToolStripMenuItem cMnu_Edit;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col业务员;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTelphone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;
@@ -505,7 +516,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPost;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
-        private System.Windows.Forms.ToolStripMenuItem mnu_Merge;
-        private System.Windows.Forms.ToolStripMenuItem cMnu_Edit;
     }
 }

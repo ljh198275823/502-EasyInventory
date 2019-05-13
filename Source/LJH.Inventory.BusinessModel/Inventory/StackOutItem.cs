@@ -75,6 +75,43 @@ namespace LJH.Inventory.BusinessModel
         public ProductInventoryItem ProductInventoryItem { get; set; }
         #endregion
 
+        #region 扩展属性
+        /// <summary>
+        /// 获取或设置扩展属性
+        /// </summary>
+        public string Note { get; set; }
+
+        private Dictionary<string, string> _Externals = null;
+
+        public string GetProperty(SheetNote pn)
+        {
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
+            if (_Externals == null) return null;
+            if (_Externals.ContainsKey(((int)pn).ToString())) return _Externals[((int)pn).ToString()];
+            if (_Externals.ContainsKey(pn.ToString())) return _Externals[pn.ToString()];
+            return null;
+        }
+
+        public void SetProperty(SheetNote pn, string value)
+        {
+            var key = ((int)pn).ToString();
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
+            if (_Externals == null) _Externals = new Dictionary<string, string>();
+            if (value == null && _Externals.ContainsKey(key)) _Externals.Remove(key);
+            else _Externals[key] = value;
+            Note = JsonConvert.SerializeObject(_Externals);
+        }
+
+        public void RemoveProperty(SheetNote pn)
+        {
+            var key = ((int)pn).ToString();
+            if (_Externals == null && !string.IsNullOrEmpty(Note)) _Externals = JsonConvert.DeserializeObject<Dictionary<string, string>>(Note);
+            if (_Externals == null) return;
+            if (_Externals.ContainsKey(key)) _Externals.Remove(key);
+            Note = JsonConvert.SerializeObject(_Externals);
+        }
+        #endregion
+
         /// <summary>
         /// 获取当前计算的总额
         /// </summary>

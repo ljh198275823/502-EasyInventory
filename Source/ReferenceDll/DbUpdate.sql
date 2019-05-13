@@ -306,4 +306,10 @@ BEGIN
 end
 go
 
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Note' AND id = OBJECT_ID(N'[dbo].[Product]'))
+BEGIN
+	exec ('alter table Product add Note nvarchar(512) null')
+end
+go
+
 

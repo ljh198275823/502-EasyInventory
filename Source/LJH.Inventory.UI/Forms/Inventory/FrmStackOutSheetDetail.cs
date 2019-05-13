@@ -110,6 +110,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colHeader"].Value = this.ItemsGrid.Rows.Count;
                 row.Cells["colSpecification"].Value = p != null ? p.Specification : string.Empty;
                 row.Cells["colCategory"].Value = p != null && p.Category != null ? p.Category.Name : string.Empty;
+                row.Cells["col计量方式"].Value = item.GetProperty(SheetNote.计量方式);
+                row.Cells["col材质"].Value = p.材质;
                 row.Cells["colModel"].Value = p.Model;
                 row.Cells["colLength"].Value = item.Length;
                 row.Cells["colWeight"].Value = item.TotalWeight;
@@ -135,6 +137,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["colWeight"].ReadOnly = true;
                 row.Cells["colPrice"].ReadOnly = true;
                 row.Cells["colMemo"].ReadOnly = true;
+                row.Cells["col计量方式"].ReadOnly = true;
                 row.Cells["colCosts"].Value = pi.CalCost(rdWithTax.Checked, UserSettings.Current.税点系数);
             }
         }
@@ -600,6 +603,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         txtLinkerPhone.Text = contact.Mobile;
                     }
                 }
+                txt业务员.Text = c.GetProperty(SheetNote.业务员.ToString());
             }
         }
 
@@ -623,6 +627,13 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 foreach (var it in sheet.Items)
                 {
                     if (it.ProductID == item.ProductID) it.Memo = row.Cells["colMemo"].Value != null ? row.Cells["colMemo"].Value.ToString() : null;
+                }
+            }
+            else if (col.Name == "col计量方式")
+            {
+                foreach (var it in sheet.Items)
+                {
+                    if (it.ProductID == item.ProductID) it.SetProperty(SheetNote.计量方式, row.Cells["col计量方式"].Value.ToString());
                 }
             }
             else

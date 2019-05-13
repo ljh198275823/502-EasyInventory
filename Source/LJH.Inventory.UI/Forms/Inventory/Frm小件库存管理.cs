@@ -242,7 +242,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 if (sr.CalUnitCost(true, UserSettings.Current.税点系数) > 0) row.Cells["col含税出单位成本"].Value = sr.CalUnitCost(true, UserSettings.Current.税点系数);
                 if (sr.CalUnitCost(false, UserSettings.Current.税点系数) > 0) row.Cells["col不含税出单位成本"].Value = sr.CalUnitCost(false, UserSettings.Current.税点系数);
             }
-            row.Cells["colMaterial"].Value = sr.Material;
+            row.Cells["colMaterial"].Value = sr.Product.材质;
             row.Cells["colCarplate"].Value = sr.Carplate;
             row.Cells["colPurchaseID"].Value = sr.PurchaseID;
             row.Cells["colPosition"].Value = sr.Position;

@@ -57,10 +57,10 @@ namespace LJH.Inventory.DAL.LinqProvider
         public List<string> GetItems()
         {
             DataContext dc = DataContextFactory.CreateDataContext(ConnectStr, _MappingSource);
-            IQueryable<ProductInventoryItem> pis = dc.GetTable<ProductInventoryItem>();
+            var pis = dc.GetTable<Product>().ToList();
             var ret = (from it in pis
-                       orderby it.Material ascending
-                       select it.Material).Distinct().ToList();
+                       orderby it.材质 ascending
+                       select it.材质).Distinct().ToList();
             return ret;
         }
         #endregion

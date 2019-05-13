@@ -46,7 +46,7 @@ namespace LJH.Inventory.BLL
         {
             if (sr.Product.Weight == null && sr.Product.Model == MODEL)
             {
-                var p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, sr.Product.Model, sr.Weight, sr.Length, sr.Product.Density, true);
+                var p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sr.Product.Specification, sr.Product.Model, sr.Product.材质, sr.Weight, sr.Length, sr.Product.Density, true);
                 if (p != null)
                 {
                     var clone = sr.Clone();
@@ -78,7 +78,7 @@ namespace LJH.Inventory.BLL
         /// <returns></returns>
         public CommandResult Slice(ProductInventoryItem sr, SteelRollSliceRecord sliceSheet, WareHouse wh)
         {
-            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sliceSheet.Specification, sliceSheet.SliceType, sliceSheet.Weight, sliceSheet.Length, sr.Product.Density);
+            Product p = new ProductBLL(RepoUri).Create(sr.Product.CategoryID, sliceSheet.Specification, sliceSheet.SliceType,sr.Product.材质, sliceSheet.Weight, sliceSheet.Length, sr.Product.Density);
             if (p == null) return new CommandResult(ResultCode.Fail, "创建相关产品信息失败");
 
             IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
@@ -108,7 +108,6 @@ namespace LJH.Inventory.BLL
                 Customer = sliceSheet.Customer,
                 Supplier = sr.Supplier,
                 Manufacture = sr.Manufacture,
-                Material = sr.Material,
                 PurchaseID = sr.PurchaseID,
                 SourceRoll = sr.ID,  //设置加工来源
                 CostID = sr.CostID.HasValue ? sr.CostID.Value : sr.ID, //带上成本参数,如果原材料还没有设置成本，默认原材料的成本ID是其ID
@@ -338,7 +337,7 @@ namespace LJH.Inventory.BLL
                 newR.ID = Guid.NewGuid();
                 newR.SourceRoll = sr.ID;
                 string sp = string.Format("{0}*{1}", SpecificationHelper.GetWrittenThick(sr.Product.Specification), it);
-                Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(sr.Product.CategoryID, sp, "原材料", 7.85m);
+                Product p = new ProductBLL(AppSettings.Current.ConnStr).Create(sr.Product.CategoryID, sp, "原材料", sr.Product.材质, 7.85m);
                 if (p == null) throw new Exception("创建相关产品信息失败");
                 newR.Product = p;
                 newR.ProductID = p.ID;
