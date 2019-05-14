@@ -172,12 +172,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Print
             else if (express == "[产品规格带长度]")
             {
                 var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
-                if (item.Length.HasValue) cell.SetCellValue(string.Format("{0}*{1}", p.Specification, (item.Length.Value * 1000).ToString("F0"))); //这里长度单位是米，转换成毫米
+                if (p.Length.HasValue) cell.SetCellValue(string.Format("{0}*{1}", p.Specification, (p.Length.Value * 1000).ToString("F0"))); //这里长度单位是米，转换成毫米
                 else cell.SetCellValue(p.Specification);
             }
             else if (express == "[产品长度]")
             {
-                cell.SetCellValue(item.Length.HasValue ? item.Length.Value.ToString("F3") : string.Empty);
+                var p = new ProductBLL(AppSettings.Current.ConnStr).GetByID(item.ProductID).QueryObject;
+                cell.SetCellValue(p.Length.HasValue ? p.Length.Value.ToString("F3") : string.Empty);
             }
             else if (express == "[产品数量]")
             {

@@ -199,6 +199,11 @@ namespace LJH.Inventory.BusinessModel
         public void AddItems(ProductInventoryItem inventory, decimal count)
         {
             if (count <= 0) return;
+            //先获取增加之前同一产品的总重量
+            decimal totalWeight = 0;
+            var psi = Items.FirstOrDefault(it => it.ProductID == inventory.ProductID);
+            if (psi != null && psi.TotalWeight.HasValue) totalWeight = psi.TotalWeight.Value;
+
             if (Items == null) Items = new List<StackOutItem>();
             var si = Items.SingleOrDefault(it => it.InventoryItem == inventory.ID);
             if (si != null)
@@ -214,18 +219,12 @@ namespace LJH.Inventory.BusinessModel
                     ProductID = inventory.ProductID,
                     Unit = inventory.Unit,
                     InventoryItem = inventory.ID,
-                    Length = inventory.Product.Length,
                     SheetNo = this.ID,
                     Price = 0,
                     Count = count,
                     AddDate = dt.HasValue ? dt.Value.AddSeconds(1) : DateTime.Now,
                     ProductInventoryItem = inventory,
                 };
-                if (inventory.Weight.HasValue && inventory.Model != "开平")
-                {
-                    if (si.TotalWeight == null) si.TotalWeight = 0;
-                    si.TotalWeight += inventory.Product.Weight * count;
-                }
                 if (inventory.Model != "原材料")
                 {
                     si.Memo = inventory.Memo;
@@ -234,6 +233,8 @@ namespace LJH.Inventory.BusinessModel
                 if (f != null) si.Price = f.Price; //如果之前已经指定了这种产品的价格，就直接使用一样的价格。
                 Items.Add(si);
             }
+            if (inventory.UnitWeight.HasValue) totalWeight += inventory.UnitWeight.Value * count;
+            Items.Where(it => it.ProductID == inventory.ProductID).ToList().ForEach(it => it.TotalWeight = totalWeight); //所有同一产品的总重都要更新
         }
 
         public void AddItems(Product p, decimal count)
@@ -279,7 +280,6 @@ namespace LJH.Inventory.BusinessModel
                 {
                     ID = Guid.Empty,
                     ProductID = g.First().ProductID,
-                    Length = g.First().Length,
                     TotalWeight = g.First().TotalWeight,
                     Unit = g.First().Unit,
                     Count = g.Sum(it => it.Count),

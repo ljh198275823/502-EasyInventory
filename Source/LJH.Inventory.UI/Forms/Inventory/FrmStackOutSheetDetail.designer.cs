@@ -138,11 +138,11 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(1376, 440);
+            this.btnClose.Location = new System.Drawing.Point(1345, 440);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(1267, 440);
+            this.btnOk.Location = new System.Drawing.Point(1236, 440);
             // 
             // contextMenuStrip1
             // 
@@ -216,7 +216,7 @@
             this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1238, 56);
+            this.toolStrip1.Size = new System.Drawing.Size(1207, 56);
             this.toolStrip1.TabIndex = 88;
             this.toolStrip1.Text = "toolStrip2";
             // 
@@ -319,7 +319,7 @@
             this.tabControl1.Location = new System.Drawing.Point(7, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1230, 456);
+            this.tabControl1.Size = new System.Drawing.Size(1199, 456);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -356,7 +356,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1222, 430);
+            this.tabPage1.Size = new System.Drawing.Size(1191, 430);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -685,7 +685,7 @@
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(1212, 284);
+            this.ItemsGrid.Size = new System.Drawing.Size(1181, 284);
             this.ItemsGrid.TabIndex = 8;
             this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
             this.ItemsGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellEndEdit);
@@ -995,7 +995,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1238, 520);
+            this.ClientSize = new System.Drawing.Size(1207, 520);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label5);

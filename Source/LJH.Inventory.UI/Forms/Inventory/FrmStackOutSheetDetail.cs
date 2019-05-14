@@ -113,7 +113,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 row.Cells["col计量方式"].Value = item.GetProperty(SheetNote.计量方式);
                 row.Cells["col材质"].Value = p.材质;
                 row.Cells["colModel"].Value = p.Model;
-                row.Cells["colLength"].Value = item.Length;
+                row.Cells["colLength"].Value = p.Length;
                 row.Cells["colWeight"].Value = item.TotalWeight;
                 row.Cells["colPrice"].Value = item.Price;
                 row.Cells["colCount"].Value = item.Count;
@@ -166,6 +166,37 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     foreach (var item in sheet.Items)
                     {
                         if (item.TotalWeight == null && item.InventoryItem.HasValue)
+                        {
+                            var pi = srs.SingleOrDefault(it => it.ID == item.InventoryItem);
+                            if (pi != null && pi.UnitWeight.HasValue) ret += pi.UnitWeight.Value * item.Count;
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public decimal CalTotalWeight(StackOutSheet sheet, string pid)
+        {
+            decimal ret = 0;
+            var items = sheet.Items.Where(it => it.ProductID == pid).ToList();
+            if (items == null || items.Count == 0) return 0;
+
+            //这一部分是计算所有没有指定总重量的项，要通过它的规格或其它参数计算出这部分货的重量
+            var f = new ProductInventoryItemSearchCondition();
+            f.IDS = new List<Guid>();
+            foreach (var it in items)
+            {
+                if (it.InventoryItem.HasValue) f.IDS.Add(it.InventoryItem.Value);
+            }
+            if (f.IDS.Count > 0)
+            {
+                var srs = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(f).QueryObjects;
+                if (srs != null && srs.Count > 0)
+                {
+                    foreach (var item in items)
+                    {
+                        if (item.InventoryItem.HasValue)
                         {
                             var pi = srs.SingleOrDefault(it => it.ID == item.InventoryItem);
                             if (pi != null && pi.UnitWeight.HasValue) ret += pi.UnitWeight.Value * item.Count;
@@ -293,6 +324,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (rdWithoutTax.Checked) sheet.WithTax = false;
             sheet.Memo = txtMemo.Text;
             sheet.TotalWeight = CalTotalWeight(sheet);
+            sheet.CalAmount();
             return sheet;
         }
 
@@ -635,6 +667,8 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 {
                     if (it.ProductID == item.ProductID) it.SetProperty(SheetNote.计量方式, row.Cells["col计量方式"].Value.ToString());
                 }
+                item.SetProperty(SheetNote.计量方式, row.Cells["col计量方式"].Value.ToString());
+                row.Cells["colTotal"].Value = item.Amount;
             }
             else
             {
@@ -654,6 +688,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                     }
                     else if (col.Name == "colCount")
                     {
+                        if (item.Count == value) return;
                         if (value <= Convert.ToInt32(row.Cells["colTotal"].Tag)) //数量不能超出库存项的数量
                         {
                             item.Count = value;
@@ -662,13 +697,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         {
                             row.Cells[e.ColumnIndex].Value = item.Count;
                         }
+                        var totalWeight = CalTotalWeight(sheet, item.ProductID);
+                        foreach (var it in sheet.Items)
+                        {
+                            if (it.ProductID == item.ProductID) it.TotalWeight = totalWeight;
+                        }
                         for (int i = e.RowIndex; i >= 0; i--) //找合并送货单项的行
                         {
                             var si = ItemsGrid.Rows[i].Tag as StackOutItem;
                             if (si.ID == Guid.Empty && si.ProductID == item.ProductID)
                             {
                                 si.Count = sheet.Items.Sum(it => it.ProductID == item.ProductID ? it.Count : 0);
+                                si.TotalWeight = totalWeight;
                                 ItemsGrid.Rows[i].Cells["colCount"].Value = si.Count;
+                                ItemsGrid.Rows[i].Cells["colWeight"].Value = si.TotalWeight;
                                 ItemsGrid.Rows[i].Cells["colTotal"].Value = si.Amount;
                                 break;
                             }
@@ -684,6 +726,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         }
                         row.Cells["colTotal"].Value = item.Amount;
                     }
+                    ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colWeight"].Value = CalTotalWeight(sheet);
                     ItemsGrid.Rows[ItemsGrid.Rows.Count - 1].Cells["colTotal"].Value = sheet.CalAmount();
                 }
             }

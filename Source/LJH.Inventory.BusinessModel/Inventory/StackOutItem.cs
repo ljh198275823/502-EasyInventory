@@ -36,10 +36,6 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public string Unit { get; set; }
         /// <summary>
-        /// 获取或设置出货商品的长度
-        /// </summary>
-        public decimal? Length { get; set; }
-        /// <summary>
         /// 获取或设置同一商品多个出货项的总重
         /// </summary>
         public decimal? TotalWeight { get; set; }
@@ -110,6 +106,8 @@ namespace LJH.Inventory.BusinessModel
             if (_Externals.ContainsKey(key)) _Externals.Remove(key);
             Note = JsonConvert.SerializeObject(_Externals);
         }
+
+
         #endregion
 
         /// <summary>
@@ -120,13 +118,21 @@ namespace LJH.Inventory.BusinessModel
             get
             {
                 decimal ret = 0;
-                if (TotalWeight.HasValue && TotalWeight.Value != 0)
+                var temp = GetProperty(SheetNote.计量方式);
+                if (temp == "点张")
                 {
-                    ret = Math.Round(TotalWeight.Value, 3) * Price;
+                    ret = Price * Count;
                 }
                 else
                 {
-                    ret = Price * Count;
+                    if (TotalWeight.HasValue && TotalWeight.Value != 0)
+                    {
+                        ret = Math.Round(TotalWeight.Value, 3) * Price;
+                    }
+                    else
+                    {
+                        ret = Price * Count;
+                    }
                 }
                 return Math.Round(ret, 2);
             }
