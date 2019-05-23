@@ -50,6 +50,8 @@
             this.lnkSupplier = new System.Windows.Forms.LinkLabel();
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lbl收入合计 = new System.Windows.Forms.Label();
+            this.lbl支出合计 = new System.Windows.Forms.Label();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -64,8 +66,6 @@
             this.col到款日期 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col作废原因 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbl收入合计 = new System.Windows.Forms.Label();
-            this.lbl支出合计 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -310,6 +310,28 @@
             this.dataGridView1.TabIndex = 39;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // lbl收入合计
+            // 
+            this.lbl收入合计.AutoSize = true;
+            this.lbl收入合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl收入合计.ForeColor = System.Drawing.Color.Blue;
+            this.lbl收入合计.Location = new System.Drawing.Point(1069, 24);
+            this.lbl收入合计.Name = "lbl收入合计";
+            this.lbl收入合计.Size = new System.Drawing.Size(125, 20);
+            this.lbl收入合计.TabIndex = 40;
+            this.lbl收入合计.Text = "收入合计：0";
+            // 
+            // lbl支出合计
+            // 
+            this.lbl支出合计.AutoSize = true;
+            this.lbl支出合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl支出合计.ForeColor = System.Drawing.Color.Red;
+            this.lbl支出合计.Location = new System.Drawing.Point(1069, 61);
+            this.lbl支出合计.Name = "lbl支出合计";
+            this.lbl支出合计.Size = new System.Drawing.Size(125, 20);
+            this.lbl支出合计.TabIndex = 41;
+            this.lbl支出合计.Text = "支出合计：0";
+            // 
             // colSheetDate
             // 
             dataGridViewCellStyle1.Format = "D";
@@ -318,7 +340,6 @@
             this.colSheetDate.HeaderText = "录单日期";
             this.colSheetDate.Name = "colSheetDate";
             this.colSheetDate.ReadOnly = true;
-            this.colSheetDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colClass
             // 
@@ -334,13 +355,13 @@
             this.colSheetID.Name = "colSheetID";
             this.colSheetID.ReadOnly = true;
             this.colSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colPaymentMode
             // 
             this.colPaymentMode.HeaderText = "付款方式";
             this.colPaymentMode.Name = "colPaymentMode";
             this.colPaymentMode.ReadOnly = true;
-            this.colPaymentMode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colPaymentMode.Width = 80;
             // 
             // colAccount
@@ -364,7 +385,6 @@
             this.colAmount.HeaderText = "金额";
             this.colAmount.Name = "colAmount";
             this.colAmount.ReadOnly = true;
-            this.colAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAssigned
             // 
@@ -374,7 +394,6 @@
             this.colAssigned.Name = "colAssigned";
             this.colAssigned.ReadOnly = true;
             this.colAssigned.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colAssigned.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colRemain
             // 
@@ -400,7 +419,6 @@
             this.colStackSheetID.Name = "colStackSheetID";
             this.colStackSheetID.ReadOnly = true;
             this.colStackSheetID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colStackSheetID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // col到款日期
             // 
@@ -416,35 +434,12 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // col作废原因
             // 
             this.col作废原因.HeaderText = "作废原因";
             this.col作废原因.Name = "col作废原因";
             this.col作废原因.ReadOnly = true;
-            // 
-            // lbl收入合计
-            // 
-            this.lbl收入合计.AutoSize = true;
-            this.lbl收入合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl收入合计.ForeColor = System.Drawing.Color.Blue;
-            this.lbl收入合计.Location = new System.Drawing.Point(1069, 24);
-            this.lbl收入合计.Name = "lbl收入合计";
-            this.lbl收入合计.Size = new System.Drawing.Size(125, 20);
-            this.lbl收入合计.TabIndex = 40;
-            this.lbl收入合计.Text = "收入合计：0";
-            // 
-            // lbl支出合计
-            // 
-            this.lbl支出合计.AutoSize = true;
-            this.lbl支出合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl支出合计.ForeColor = System.Drawing.Color.Red;
-            this.lbl支出合计.Location = new System.Drawing.Point(1069, 61);
-            this.lbl支出合计.Name = "lbl支出合计";
-            this.lbl支出合计.Size = new System.Drawing.Size(125, 20);
-            this.lbl支出合计.TabIndex = 41;
-            this.lbl支出合计.Text = "支出合计：0";
             // 
             // Frm收付款流水报表
             // 
@@ -493,6 +488,9 @@
         private System.Windows.Forms.CheckBox chk其它收款;
         private System.Windows.Forms.CheckBox chk供应商退款;
         private System.Windows.Forms.CheckBox chkAll;
+        private System.Windows.Forms.CheckBox chk客户退款;
+        private System.Windows.Forms.Label lbl收入合计;
+        private System.Windows.Forms.Label lbl支出合计;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSheetDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClass;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
@@ -507,8 +505,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col到款日期;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn col作废原因;
-        private System.Windows.Forms.CheckBox chk客户退款;
-        private System.Windows.Forms.Label lbl收入合计;
-        private System.Windows.Forms.Label lbl支出合计;
     }
 }
