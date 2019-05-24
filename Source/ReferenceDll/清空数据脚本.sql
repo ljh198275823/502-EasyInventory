@@ -1,23 +1,29 @@
-delete Attachment 
-delete AttachmentHeader
-delete AutoCreateNumber 
-delete CollectionType 
-delete Customer 
-delete CustomerPayment 
-delete CustomerPaymentAssign 
-delete CustomerReceivable 
-delete DocumentOperation 
-delete InventoryCheckRecord 
-delete Product 
-delete ProductCategory 
-delete ProductInventoryItem 
-delete RelatedCompanyType 
-delete StackInItem 
-delete StackInSheet 
-delete StackOutItem 
-delete StackOutSheet 
-delete Staff 
-delete SteelRollSliceRecord 
-delete WareHouse 
-delete Unit 
+truncate table account
+truncate table accountrecord
+truncate table accountrecordassign
+truncate table attachment
+truncate table contact
+truncate table cost
+truncate table customer
+truncate table customerpayment
+truncate table customerreceivable
+truncate table customertype
+truncate table department
+truncate table documentoperation
+truncate table expendituretype
+truncate table inventorycheckrecord
+truncate table [order]
+truncate table orderitem
+truncate table otherreceivablesheet
+truncate table purchaseitem
+truncate table purchaseorder
+truncate table stackinitem
+truncate table stackinsheet
+truncate table stackoutitem
+truncate table stackoutsheet
+truncate table staff
+truncate table staffphoto
+truncate table warehouse
+truncate table productinventoryItem
+delete SteelRollSliceRecord
 
