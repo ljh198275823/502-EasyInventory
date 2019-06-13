@@ -70,7 +70,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSpecification"].Value = sor.Specification;
             row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
-            row.Cells["colLength"].Value = sor.Length;
+            row.Cells["colLength"].Value = sor.Product.Length;
+            row.Cells["colSalesPerson"].Value = sor.SalesPerson;
             if (sor.SourceRollWeight.HasValue) row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
             else row.Cells["colSourceRollWeight"].Value = "查看";
             row.Cells["colPrice"].Value = sor.Price;
@@ -142,7 +143,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             con.SheetTypes = new List<StackOutSheetType>();
             con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
-
+            con.SalesPerson = txt业务员.Text;
             _Piis.Clear();
             var pis = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
             foreach (var pi in pis)
@@ -157,7 +158,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 if (!string.IsNullOrEmpty(txtSheetNo.Text)) items = items.Where(it => it.SheetNo.Contains(txtSheetNo.Text)).ToList();
                 if (txtProductCategory.Tag != null) items = items.Where(it => it.Product.CategoryID == (txtProductCategory.Tag as ProductCategory).ID).ToList();
                 decimal length = txtLength.DecimalValue;
-                if (length != 0) items = items.Where(it => it.Length.HasValue && it.Length == length).ToList();
+                if (length != 0) items = items.Where(it => it.Product.Length.HasValue && it.Product.Length == length).ToList();
                 decimal weight = txtWeight.DecimalValue;
                 if (weight != 0) items = items.Where(it => it.Weight.HasValue && it.Weight == weight).ToList();
                 decimal sourceRollWeight = txtSourceRollWeight.DecimalValue;
@@ -310,5 +311,21 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
         }
         #endregion
+
+        private void lnk业务员_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forms.General.FrmStaffMaster frm = new Forms.General.FrmStaffMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Staff item = frm.SelectedItem as Staff;
+                txt业务员.Text = item != null ? item.Name : string.Empty;
+            }
+        }
+
+        private void txt业务员_DoubleClick(object sender, EventArgs e)
+        {
+            txt业务员.Text = null;
+        }
     }
 }

@@ -63,6 +63,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.CustomerID)) ret = ret.Where(item => item.CustomerID == con.CustomerID);
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(item => item.WareHouseID == con.WareHouseID);
                 if (con.SheetTypes != null && con.SheetTypes.Count > 0) ret = ret.Where(item => con.SheetTypes.Contains(item.ClassID));
+                if (!string.IsNullOrEmpty(con.SalesPerson)) ret = ret.Where(item => item.SalesPerson == con.SalesPerson);
             }
             if (search is StackOutRecordSearchCondition)
             {

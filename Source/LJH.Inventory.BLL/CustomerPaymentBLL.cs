@@ -267,7 +267,7 @@ namespace LJH.Inventory.BLL
             }
             else if (info.ClassID == CustomerPaymentType.客户退款 || info.ClassID == CustomerPaymentType.供应商退款)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退", "yyMM", 3, info.DocumentType);
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退款", "yyMM", 3, info.DocumentType);
             }
             else if (info.ClassID == CustomerPaymentType.管理费用)
             {
@@ -275,7 +275,7 @@ namespace LJH.Inventory.BLL
             }
             else if (info.ClassID == CustomerPaymentType.管理费用退款)
             {
-                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退", "yyMM", 3, info.DocumentType);
+                info.ID = ProviderFactory.Create<IAutoNumberCreater>(RepoUri).CreateNumber("退款", "yyMM", 3, info.DocumentType);
             }
             return info.ID;
         }

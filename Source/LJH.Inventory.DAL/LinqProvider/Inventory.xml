@@ -497,8 +497,8 @@
   <Table Name="AutoCreateNumber" Member="LJH.Inventory.DAL.LinqProvider.AutoCreateNumber">
     <Type Name="LJH.Inventory.DAL.LinqProvider.AutoCreateNumber">
       <Column Name="Prefix" Member="Prefix"  DbType="nvarchar(50)" IsPrimaryKey="true" />
+      <Column Name="NumberType" Member="NumberType" DbType="nvarchar(50)" IsPrimaryKey="true"/>
       <Column Name="Number" Member="Number" DbType="int not null" UpdateCheck="Never"/>
-      <Column Name="NumberType" Member="NumberType" DbType="nvarchar(50) not null" UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="ExpenditureType" Member="LJH.Inventory.BusinessModel.ExpenditureType">

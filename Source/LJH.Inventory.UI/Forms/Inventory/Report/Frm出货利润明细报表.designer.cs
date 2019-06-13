@@ -50,6 +50,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lnk业务员 = new System.Windows.Forms.LinkLabel();
+            this.txt业务员 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.txtSheetNo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -67,10 +69,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.gridView = new System.Windows.Forms.DataGridView();
-            this.lbl毛利 = new System.Windows.Forms.Label();
-            this.lbl国税计提 = new System.Windows.Forms.Label();
-            this.lbl产品成本 = new System.Windows.Forms.Label();
-            this.lbl销售金额 = new System.Windows.Forms.Label();
             this.colDeliveryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSheetNo = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -81,6 +79,7 @@
             this.col合同号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col厂家 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSalesPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSourceRollWeight = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colWithTax = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,6 +99,10 @@
             this.col成本合计 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col国税计提 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col利润合计 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl毛利 = new System.Windows.Forms.Label();
+            this.lbl国税计提 = new System.Windows.Forms.Label();
+            this.lbl产品成本 = new System.Windows.Forms.Label();
+            this.lbl销售金额 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -108,15 +111,15 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(865, 12);
+            this.btnSearch.Location = new System.Drawing.Point(871, 12);
             // 
             // btnSaveAs
             // 
-            this.btnSaveAs.Location = new System.Drawing.Point(865, 40);
+            this.btnSaveAs.Location = new System.Drawing.Point(871, 46);
             // 
             // btnColumn
             // 
-            this.btnColumn.Location = new System.Drawing.Point(865, 70);
+            this.btnColumn.Location = new System.Drawing.Point(871, 84);
             // 
             // panel1
             // 
@@ -124,11 +127,13 @@
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Location = new System.Drawing.Point(0, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(859, 102);
+            this.panel1.Size = new System.Drawing.Size(859, 113);
             this.panel1.TabIndex = 25;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lnk业务员);
+            this.groupBox3.Controls.Add(this.txt业务员);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.txtSheetNo);
             this.groupBox3.Controls.Add(this.label1);
@@ -145,15 +150,35 @@
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Location = new System.Drawing.Point(240, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(616, 90);
+            this.groupBox3.Size = new System.Drawing.Size(616, 107);
             this.groupBox3.TabIndex = 36;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
             // 
+            // lnk业务员
+            // 
+            this.lnk业务员.AutoSize = true;
+            this.lnk业务员.Location = new System.Drawing.Point(206, 78);
+            this.lnk业务员.Name = "lnk业务员";
+            this.lnk业务员.Size = new System.Drawing.Size(47, 12);
+            this.lnk业务员.TabIndex = 152;
+            this.lnk业务员.TabStop = true;
+            this.lnk业务员.Text = "业务员:";
+            this.lnk业务员.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk业务员_LinkClicked);
+            // 
+            // txt业务员
+            // 
+            this.txt业务员.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt业务员.Location = new System.Drawing.Point(254, 74);
+            this.txt业务员.Name = "txt业务员";
+            this.txt业务员.Size = new System.Drawing.Size(158, 21);
+            this.txt业务员.TabIndex = 151;
+            this.txt业务员.DoubleClick += new System.EventHandler(this.txt业务员_DoubleClick);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(211, 55);
+            this.label2.Location = new System.Drawing.Point(211, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 150;
@@ -162,7 +187,7 @@
             // txtSheetNo
             // 
             this.txtSheetNo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtSheetNo.Location = new System.Drawing.Point(254, 51);
+            this.txtSheetNo.Location = new System.Drawing.Point(254, 44);
             this.txtSheetNo.Name = "txtSheetNo";
             this.txtSheetNo.Size = new System.Drawing.Size(158, 21);
             this.txtSheetNo.TabIndex = 149;
@@ -256,7 +281,7 @@
             // 
             // cmbSpecification
             // 
-            this.cmbSpecification.Location = new System.Drawing.Point(254, 15);
+            this.cmbSpecification.Location = new System.Drawing.Point(254, 11);
             this.cmbSpecification.Name = "cmbSpecification";
             this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
             this.cmbSpecification.Specification = "*";
@@ -265,7 +290,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(221, 22);
+            this.label5.Location = new System.Drawing.Point(221, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 86;
@@ -274,7 +299,7 @@
             // txtProductCategory
             // 
             this.txtProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtProductCategory.Location = new System.Drawing.Point(48, 47);
+            this.txtProductCategory.Location = new System.Drawing.Point(48, 44);
             this.txtProductCategory.Name = "txtProductCategory";
             this.txtProductCategory.ReadOnly = true;
             this.txtProductCategory.Size = new System.Drawing.Size(153, 21);
@@ -284,7 +309,7 @@
             // txtCustomer
             // 
             this.txtCustomer.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtCustomer.Location = new System.Drawing.Point(48, 18);
+            this.txtCustomer.Location = new System.Drawing.Point(48, 14);
             this.txtCustomer.Name = "txtCustomer";
             this.txtCustomer.ReadOnly = true;
             this.txtCustomer.Size = new System.Drawing.Size(153, 21);
@@ -294,7 +319,7 @@
             // lnkProductCategory
             // 
             this.lnkProductCategory.AutoSize = true;
-            this.lnkProductCategory.Location = new System.Drawing.Point(12, 51);
+            this.lnkProductCategory.Location = new System.Drawing.Point(12, 48);
             this.lnkProductCategory.Name = "lnkProductCategory";
             this.lnkProductCategory.Size = new System.Drawing.Size(29, 12);
             this.lnkProductCategory.TabIndex = 36;
@@ -305,7 +330,7 @@
             // lnkCustomer
             // 
             this.lnkCustomer.AutoSize = true;
-            this.lnkCustomer.Location = new System.Drawing.Point(12, 22);
+            this.lnkCustomer.Location = new System.Drawing.Point(12, 18);
             this.lnkCustomer.Name = "lnkCustomer";
             this.lnkCustomer.Size = new System.Drawing.Size(29, 12);
             this.lnkCustomer.TabIndex = 33;
@@ -316,7 +341,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.ucDateTimeInterval1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(3, 10);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(231, 90);
             this.groupBox1.TabIndex = 1;
@@ -355,6 +380,7 @@
             this.col合同号,
             this.col厂家,
             this.colWeight,
+            this.colSalesPerson,
             this.colSourceRollWeight,
             this.colWithTax,
             this.colPrice,
@@ -374,54 +400,14 @@
             this.col成本合计,
             this.col国税计提,
             this.col利润合计});
-            this.gridView.Location = new System.Drawing.Point(0, 112);
+            this.gridView.Location = new System.Drawing.Point(0, 123);
             this.gridView.Name = "gridView";
             this.gridView.RowHeadersVisible = false;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(1370, 395);
+            this.gridView.Size = new System.Drawing.Size(1370, 384);
             this.gridView.TabIndex = 26;
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
-            // 
-            // lbl毛利
-            // 
-            this.lbl毛利.AutoSize = true;
-            this.lbl毛利.ForeColor = System.Drawing.Color.Blue;
-            this.lbl毛利.Location = new System.Drawing.Point(1008, 84);
-            this.lbl毛利.Name = "lbl毛利";
-            this.lbl毛利.Size = new System.Drawing.Size(11, 12);
-            this.lbl毛利.TabIndex = 3;
-            this.lbl毛利.Text = "0";
-            // 
-            // lbl国税计提
-            // 
-            this.lbl国税计提.AutoSize = true;
-            this.lbl国税计提.ForeColor = System.Drawing.Color.Blue;
-            this.lbl国税计提.Location = new System.Drawing.Point(1008, 61);
-            this.lbl国税计提.Name = "lbl国税计提";
-            this.lbl国税计提.Size = new System.Drawing.Size(11, 12);
-            this.lbl国税计提.TabIndex = 2;
-            this.lbl国税计提.Text = "0";
-            // 
-            // lbl产品成本
-            // 
-            this.lbl产品成本.AutoSize = true;
-            this.lbl产品成本.ForeColor = System.Drawing.Color.Blue;
-            this.lbl产品成本.Location = new System.Drawing.Point(1008, 38);
-            this.lbl产品成本.Name = "lbl产品成本";
-            this.lbl产品成本.Size = new System.Drawing.Size(11, 12);
-            this.lbl产品成本.TabIndex = 1;
-            this.lbl产品成本.Text = "0";
-            // 
-            // lbl销售金额
-            // 
-            this.lbl销售金额.AutoSize = true;
-            this.lbl销售金额.ForeColor = System.Drawing.Color.Blue;
-            this.lbl销售金额.Location = new System.Drawing.Point(1008, 15);
-            this.lbl销售金额.Name = "lbl销售金额";
-            this.lbl销售金额.Size = new System.Drawing.Size(11, 12);
-            this.lbl销售金额.TabIndex = 0;
-            this.lbl销售金额.Text = "0";
             // 
             // colDeliveryDate
             // 
@@ -510,6 +496,13 @@
             this.colWeight.Name = "colWeight";
             this.colWeight.ReadOnly = true;
             this.colWeight.Width = 54;
+            // 
+            // colSalesPerson
+            // 
+            this.colSalesPerson.HeaderText = "业务";
+            this.colSalesPerson.Name = "colSalesPerson";
+            this.colSalesPerson.ReadOnly = true;
+            this.colSalesPerson.Width = 80;
             // 
             // colSourceRollWeight
             // 
@@ -702,6 +695,46 @@
             this.col利润合计.ReadOnly = true;
             this.col利润合计.Width = 78;
             // 
+            // lbl毛利
+            // 
+            this.lbl毛利.AutoSize = true;
+            this.lbl毛利.ForeColor = System.Drawing.Color.Blue;
+            this.lbl毛利.Location = new System.Drawing.Point(1014, 89);
+            this.lbl毛利.Name = "lbl毛利";
+            this.lbl毛利.Size = new System.Drawing.Size(11, 12);
+            this.lbl毛利.TabIndex = 3;
+            this.lbl毛利.Text = "0";
+            // 
+            // lbl国税计提
+            // 
+            this.lbl国税计提.AutoSize = true;
+            this.lbl国税计提.ForeColor = System.Drawing.Color.Blue;
+            this.lbl国税计提.Location = new System.Drawing.Point(1014, 66);
+            this.lbl国税计提.Name = "lbl国税计提";
+            this.lbl国税计提.Size = new System.Drawing.Size(11, 12);
+            this.lbl国税计提.TabIndex = 2;
+            this.lbl国税计提.Text = "0";
+            // 
+            // lbl产品成本
+            // 
+            this.lbl产品成本.AutoSize = true;
+            this.lbl产品成本.ForeColor = System.Drawing.Color.Blue;
+            this.lbl产品成本.Location = new System.Drawing.Point(1014, 43);
+            this.lbl产品成本.Name = "lbl产品成本";
+            this.lbl产品成本.Size = new System.Drawing.Size(11, 12);
+            this.lbl产品成本.TabIndex = 1;
+            this.lbl产品成本.Text = "0";
+            // 
+            // lbl销售金额
+            // 
+            this.lbl销售金额.AutoSize = true;
+            this.lbl销售金额.ForeColor = System.Drawing.Color.Blue;
+            this.lbl销售金额.Location = new System.Drawing.Point(1014, 20);
+            this.lbl销售金额.Name = "lbl销售金额";
+            this.lbl销售金额.Size = new System.Drawing.Size(11, 12);
+            this.lbl销售金额.TabIndex = 0;
+            this.lbl销售金额.Text = "0";
+            // 
             // Frm出货利润明细报表
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -759,6 +792,8 @@
         private System.Windows.Forms.Label lbl国税计提;
         private System.Windows.Forms.Label lbl产品成本;
         private System.Windows.Forms.Label lbl销售金额;
+        private System.Windows.Forms.LinkLabel lnk业务员;
+        private GeneralLibrary.WinformControl.DBCTextBox txt业务员;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCustomerName;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetNo;
@@ -769,6 +804,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col合同号;
         private System.Windows.Forms.DataGridViewTextBoxColumn col厂家;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
         private System.Windows.Forms.DataGridViewLinkColumn colSourceRollWeight;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colWithTax;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;

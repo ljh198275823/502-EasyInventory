@@ -39,6 +39,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lnk业务员 = new System.Windows.Forms.LinkLabel();
+            this.txt业务员 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.txtSourceRollWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
@@ -99,6 +101,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lnk业务员);
+            this.groupBox3.Controls.Add(this.txt业务员);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtSourceRollWeight);
             this.groupBox3.Controls.Add(this.label4);
@@ -117,6 +121,25 @@
             this.groupBox3.TabIndex = 36;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "其它";
+            // 
+            // lnk业务员
+            // 
+            this.lnk业务员.AutoSize = true;
+            this.lnk业务员.Location = new System.Drawing.Point(212, 53);
+            this.lnk业务员.Name = "lnk业务员";
+            this.lnk业务员.Size = new System.Drawing.Size(47, 12);
+            this.lnk业务员.TabIndex = 156;
+            this.lnk业务员.TabStop = true;
+            this.lnk业务员.Text = "业务员:";
+            this.lnk业务员.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk业务员_LinkClicked);
+            // 
+            // txt业务员
+            // 
+            this.txt业务员.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt业务员.Location = new System.Drawing.Point(260, 49);
+            this.txt业务员.Name = "txt业务员";
+            this.txt业务员.Size = new System.Drawing.Size(158, 21);
+            this.txt业务员.TabIndex = 155;
             // 
             // label1
             // 
@@ -207,7 +230,7 @@
             // 
             // cmbSpecification
             // 
-            this.cmbSpecification.Location = new System.Drawing.Point(254, 15);
+            this.cmbSpecification.Location = new System.Drawing.Point(259, 15);
             this.cmbSpecification.Name = "cmbSpecification";
             this.cmbSpecification.Size = new System.Drawing.Size(158, 26);
             this.cmbSpecification.Specification = "*";
@@ -216,7 +239,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(221, 22);
+            this.label5.Location = new System.Drawing.Point(226, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 86;
@@ -225,7 +248,7 @@
             // txtProductCategory
             // 
             this.txtProductCategory.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtProductCategory.Location = new System.Drawing.Point(48, 47);
+            this.txtProductCategory.Location = new System.Drawing.Point(49, 49);
             this.txtProductCategory.Name = "txtProductCategory";
             this.txtProductCategory.ReadOnly = true;
             this.txtProductCategory.Size = new System.Drawing.Size(153, 21);
@@ -245,7 +268,7 @@
             // lnkProductCategory
             // 
             this.lnkProductCategory.AutoSize = true;
-            this.lnkProductCategory.Location = new System.Drawing.Point(12, 51);
+            this.lnkProductCategory.Location = new System.Drawing.Point(13, 53);
             this.lnkProductCategory.Name = "lnkProductCategory";
             this.lnkProductCategory.Size = new System.Drawing.Size(29, 12);
             this.lnkProductCategory.TabIndex = 36;
@@ -290,9 +313,9 @@
             this.gridView.AllowUserToDeleteRows = false;
             this.gridView.AllowUserToResizeColumns = false;
             this.gridView.AllowUserToResizeRows = false;
-            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridView.BackgroundColor = System.Drawing.Color.White;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -515,5 +538,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
+        private System.Windows.Forms.LinkLabel lnk业务员;
+        private GeneralLibrary.WinformControl.DBCTextBox txt业务员;
     }
 }

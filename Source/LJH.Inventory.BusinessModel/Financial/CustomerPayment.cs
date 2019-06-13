@@ -95,6 +95,7 @@ namespace LJH.Inventory.BusinessModel
                 switch (ClassID)
                 {
                     case CustomerPaymentType.客户收款:
+                    case CustomerPaymentType.其它收款:
                         return "客户收款";
                     case CustomerPaymentType.供应商付款:
                         return "供应商付款";
@@ -102,8 +103,6 @@ namespace LJH.Inventory.BusinessModel
                         return "客户增值税发票";
                     case CustomerPaymentType.供应商增值税发票:
                         return "供应商增值税发票";
-                    case CustomerPaymentType.其它收款:
-                        return "其它收款";
                     case CustomerPaymentType.转账:
                     case CustomerPaymentType.转公账:
                         return "账户转账";

@@ -149,6 +149,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chk按客户类别设置归档码 = new System.Windows.Forms.CheckBox();
             this.txt默认公司费用客户 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lnk默认公司费用客户 = new System.Windows.Forms.LinkLabel();
             this.txt默认厂家 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
@@ -189,7 +190,6 @@
             this.txtTelphone = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtName = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label78 = new System.Windows.Forms.Label();
-            this.chk按客户类别设置归档码 = new System.Windows.Forms.CheckBox();
             this.tabAutoCreater.SuspendLayout();
             this.tabDelivery.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1490,6 +1490,16 @@
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "基本";
             // 
+            // chk按客户类别设置归档码
+            // 
+            this.chk按客户类别设置归档码.AutoSize = true;
+            this.chk按客户类别设置归档码.Location = new System.Drawing.Point(369, 91);
+            this.chk按客户类别设置归档码.Name = "chk按客户类别设置归档码";
+            this.chk按客户类别设置归档码.Size = new System.Drawing.Size(144, 16);
+            this.chk按客户类别设置归档码.TabIndex = 113;
+            this.chk按客户类别设置归档码.Text = "按客户类别设置归档码";
+            this.chk按客户类别设置归档码.UseVisualStyleBackColor = true;
+            // 
             // txt默认公司费用客户
             // 
             this.txt默认公司费用客户.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -1570,7 +1580,7 @@
             0,
             0});
             this.txt国税系数.Name = "txt国税系数";
-            this.txt国税系数.PointCount = 3;
+            this.txt国税系数.PointCount = 4;
             this.txt国税系数.Size = new System.Drawing.Size(65, 21);
             this.txt国税系数.TabIndex = 106;
             this.txt国税系数.Text = "0.00";
@@ -1590,7 +1600,7 @@
             0,
             0});
             this.txt税点系数.Name = "txt税点系数";
-            this.txt税点系数.PointCount = 3;
+            this.txt税点系数.PointCount = 4;
             this.txt税点系数.Size = new System.Drawing.Size(65, 21);
             this.txt税点系数.TabIndex = 105;
             this.txt税点系数.Text = "0.00";
@@ -1929,16 +1939,6 @@
             this.label78.Size = new System.Drawing.Size(53, 12);
             this.label78.TabIndex = 78;
             this.label78.Text = "公司名称";
-            // 
-            // chk按客户类别设置归档码
-            // 
-            this.chk按客户类别设置归档码.AutoSize = true;
-            this.chk按客户类别设置归档码.Location = new System.Drawing.Point(369, 91);
-            this.chk按客户类别设置归档码.Name = "chk按客户类别设置归档码";
-            this.chk按客户类别设置归档码.Size = new System.Drawing.Size(144, 16);
-            this.chk按客户类别设置归档码.TabIndex = 113;
-            this.chk按客户类别设置归档码.Text = "按客户类别设置归档码";
-            this.chk按客户类别设置归档码.UseVisualStyleBackColor = true;
             // 
             // FrmSystemOptions
             // 

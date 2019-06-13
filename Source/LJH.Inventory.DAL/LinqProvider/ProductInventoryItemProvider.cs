@@ -118,6 +118,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                     ret = ret.Where(item => item.C.WithTax == false);
                 }
             }
+            if (!string.IsNullOrEmpty(con.SalesPerson)) ret = ret.Where(item => item.C.SalesPerson == con.SalesPerson);
             var items = ret.Select(it => new { A = it.A, B = it.B, D = it.D }).ToList();
             if (items != null && items.Count > 0)
             {

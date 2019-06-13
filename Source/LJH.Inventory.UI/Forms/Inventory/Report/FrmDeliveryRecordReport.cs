@@ -39,7 +39,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Cells["colSpecification"].Value = sor.Specification;
             row.Cells["colModel"].Value = sor.Product.Model;
             row.Cells["colCategoryID"].Value = sor.Product.Category.Name;
-            row.Cells["colLength"].Value = sor.Length;
+            row.Cells["colLength"].Value = sor.Product.Length;
             row.Cells["colPrice"].Value = sor.Price;
             row.Cells["colCount"].Value = sor.Count;
             if (_LastRecord != null && _LastRecord.SheetNo == sor.SheetNo && _LastRecord.ProductID == sor.ProductID && _LastRecord.Weight.HasValue) //如果是同一个送货单同一种产品的项,并且有合计重量，只在第一项显示金额
@@ -51,6 +51,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                 row.Cells["colAmount"].Value = sor.Amount;
             }
             row.Cells["colSourceRollWeight"].Value = sor.SourceRollWeight;
+            row.Cells["colSalesPerson"].Value = sor.SalesPerson;
             _LastRecord = sor;
         }
 
@@ -62,13 +63,14 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             con.States.Add(SheetState.已发货);
             con.SheetTypes = new List<StackOutSheetType>();
             con.SheetTypes.Add(StackOutSheetType.DeliverySheet);
+            con.SalesPerson = txt业务员.Text;
             if (txtCustomer.Tag != null) con.CustomerID = (txtCustomer.Tag as CompanyInfo).ID;
             if (txtProductCategory.Tag != null) con.CategoryID = (txtProductCategory.Tag as ProductCategory).ID;
             List<StackOutRecord> items = (new StackOutSheetBLL(AppSettings.Current.ConnStr)).GetDeliveryRecords(con).QueryObjects;
             if (items != null && items.Count > 0)
             {
                 decimal length = txtLength.DecimalValue;
-                if (length != 0) items = items.Where(it => it.Length.HasValue && it.Length == length).ToList();
+                if (length != 0) items = items.Where(it => it.Product.Length.HasValue && it.Product.Length == length).ToList();
                 decimal weight = txtWeight.DecimalValue;
                 if (weight != 0) items = items.Where(it => it.Weight.HasValue && it.Weight == weight).ToList();
                 decimal sourceRollWeight = txtSourceRollWeight.DecimalValue;
@@ -132,5 +134,16 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             txtProductCategory.Tag = null;
         }
         #endregion
+
+        private void lnk业务员_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forms.General.FrmStaffMaster frm = new Forms.General.FrmStaffMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Staff item = frm.SelectedItem as Staff;
+                txt业务员.Text = item != null ? item.Name : string.Empty;
+            }
+        }
     }
 }
