@@ -75,6 +75,21 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("对方账号不能为空");
                 return false;
             }
+            if (txt手续费类别.Tag != null && txt手续费.DecimalValue <= 0)
+            {
+                MessageBox.Show("请输入手续费");
+                return false;
+            }
+            if (!rd计为管理费用.Checked && !rd增加客户应收.Checked)
+            {
+                MessageBox.Show("请指定退款是退回到应收款还是计为管理费用");
+                return false;
+            }
+            if (rd计为管理费用.Checked && txt管理费用类别.Tag == null)
+            {
+                MessageBox.Show("计为管理费用时要指定管理费用类别");
+                return false;
+            }
             return true;
         }
 
@@ -105,6 +120,24 @@ namespace LJH.Inventory.UI.Forms.Financial
                 {
                     dtPaidDate.IsNull = true;
                 }
+                if (!string.IsNullOrEmpty(item.GetProperty(SheetNote.手续费类别.ToString())))
+                {
+                    txt手续费类别.Text = item.GetProperty(SheetNote.手续费类别.ToString());
+                    txt手续费.DecimalValue = decimal.Parse(item.GetProperty(SheetNote.手续费金额.ToString ()));
+                }
+                var 费用类别 = item.GetProperty(SheetNote.费用类别.ToString ());
+                if (string.IsNullOrEmpty(费用类别))
+                {
+                    rd增加客户应收.Checked = true;
+                    chk公账.Checked = item.PaymentMode == PaymentMode.公账;
+                }
+                else
+                {
+                    rd计为管理费用.Checked = true;
+                    var category = new ExpenditureTypeBLL(AppSettings.Current.ConnStr).GetByID(费用类别).QueryObject;
+                    txt管理费用类别.Tag = category;
+                    txt管理费用类别.Text = category != null ? category.Name : null;
+                }
                 txtMemo.Text = item.Memo;
                 ShowOperations(item.ID, item.DocumentType, dataGridView1);
                 ShowAttachmentHeaders(item.ID, item.DocumentType, this.gridAttachment);
@@ -133,6 +166,12 @@ namespace LJH.Inventory.UI.Forms.Financial
             info.AccountID = ac != null ? ac.ID : null;
             info.Payer = txtPayer.Text;
             info.SetProperty("到款日期", dtPaidDate.Value.ToString("yyyy-MM-dd"));
+            if (txt手续费类别.Tag != null)
+            {
+                info.SetProperty(SheetNote.手续费类别.ToString(), (txt手续费类别.Tag as ExpenditureType).ID);
+                info.SetProperty(SheetNote.手续费金额.ToString(), txt手续费.Text);
+            }
+            if (rd计为管理费用.Checked) info.SetProperty(SheetNote.费用类别.ToString(), (txt管理费用类别.Tag as ExpenditureType).ID);
             info.Memo = txtMemo.Text;
             return info;
         }

@@ -27,6 +27,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
         #region 重写基类方法
         protected override bool CheckInput()
         {
+            if (UpdatingItem != null)
+            {
+                ProductInventoryItem item = UpdatingItem as ProductInventoryItem;
+                var sr = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(item.ID).QueryObject;
+                if (sr.Count == 0 || !(sr.State == ProductInventoryState.Inventory && sr.Status == "整卷"))
+                {
+                    MessageBox.Show("其它操作员已经修改了此卷的状态，请刷新后再修改");
+                    return false;
+                }
+            }
             if (txtCategory.Tag == null)
             {
                 MessageBox.Show("产品类别没有指定");

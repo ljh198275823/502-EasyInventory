@@ -39,7 +39,7 @@ namespace LJH.Inventory.BLL
             };
             ProviderFactory.Create<IProvider<AccountRecord, Guid>>(RepoUri).Insert(ar, unitWork);
             var fylb = info.GetProperty(SheetNote.手续费类别.ToString());
-            if (!string.IsNullOrEmpty(fylb)) //有费用类别说明增加到管理费用，否则增加到应收里面
+            if (!string.IsNullOrEmpty(fylb)) //有费用类别说明增加到管理费用
             {
                 var fy = new CustomerPayment() { ClassID = CustomerPaymentType.管理费用 };
                 fy.ID = CreateSheetID(fy);
@@ -145,7 +145,7 @@ namespace LJH.Inventory.BLL
             }
 
             fylb = info.GetProperty(SheetNote.手续费类别.ToString());
-            if (!string.IsNullOrEmpty(fylb)) //有费用类别说明增加到管理费用，否则增加到应收里面
+            if (!string.IsNullOrEmpty(fylb)) //有费用类别说明增加到管理费用
             {
                 var fy = new CustomerPayment() { ClassID = CustomerPaymentType.管理费用 };
                 fy.ID = CreateSheetID(fy);
