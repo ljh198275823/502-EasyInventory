@@ -99,6 +99,8 @@
             this.cMnu_SelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu拆卷 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -600,12 +602,14 @@
             this.mnu_Check,
             this.mnu_CheckView,
             this.mnu_Nullify,
+            this.toolStripSeparator4,
+            this.mnu拆卷,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 264);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 292);
             // 
             // cMnu_Fresh
             // 
@@ -687,6 +691,18 @@
             this.mnu_Import.Size = new System.Drawing.Size(152, 22);
             this.mnu_Import.Text = "导入...";
             this.mnu_Import.Click += new System.EventHandler(this.mnu_Import_Click);
+            // 
+            // mnu拆卷
+            // 
+            this.mnu拆卷.Name = "mnu拆卷";
+            this.mnu拆卷.Size = new System.Drawing.Size(152, 22);
+            this.mnu拆卷.Text = "拆卷";
+            this.mnu拆卷.Click += new System.EventHandler(this.mnu拆卷_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // FrmSteelRollMaster
             // 
@@ -776,5 +792,7 @@
         private System.Windows.Forms.ToolStripMenuItem 取消预订ToolStripMenuItem;
         private System.Windows.Forms.CheckBox chk预订;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem mnu拆卷;
     }
 }

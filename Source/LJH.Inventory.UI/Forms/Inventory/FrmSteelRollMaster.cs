@@ -124,6 +124,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
+            mnu拆卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             this.预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             this.取消预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
         }
@@ -348,6 +349,36 @@ namespace LJH.Inventory.UI.Forms.Inventory
                         var ret = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).UnReserve(pi);
                         if (ret.Result == ResultCode.Successful) ShowItemInGridViewRow(row, pi);
                     }
+                }
+            }
+        }
+
+        private void mnu拆卷_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows != null && dataGridView1.SelectedRows.Count == 1)
+            {
+                var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                ProductInventoryItem sr = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(pi.ID).QueryObject;
+                if (sr.State == ProductInventoryState.Inventory && sr.Count == 1)
+                {
+                    Frm拆卷 frm = new Frm拆卷();
+                    frm.SteelRoll = sr;
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        var index = _SteelRolls.IndexOf(pi);
+                        if (index >= 0) _SteelRolls.Insert(index, sr);
+                        _SteelRolls.Remove(pi);
+                        ShowItemInGridViewRow(dataGridView1.SelectedRows[0], sr);
+                        var newR = frm.NewRoll;
+                        _SteelRolls.Add(newR);
+                        var row = dataGridView1.SelectedRows[0].Index;
+                        dataGridView1.Rows.Insert(row, 1);
+                        ShowItemInGridViewRow(dataGridView1.Rows[row], newR);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("原材料处于 \"{0}\" 状态,不能进行拆卷", ProductInventoryStateDescription.GetDescription(sr.State)));
                 }
             }
         }

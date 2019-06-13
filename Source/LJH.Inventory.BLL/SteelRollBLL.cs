@@ -234,6 +234,36 @@ namespace LJH.Inventory.BLL
             }
             return ret;
         }
+
+        public CommandResult 拆卷(ProductInventoryItem sr, decimal weight, string memo, out ProductInventoryItem newR)
+        {
+            newR = null;
+            if (sr.State != ProductInventoryState.Inventory) return new CommandResult(ResultCode.Fail, "只有处于在库状态的卷才能拆卷");
+            if (sr.Count == 0) return new CommandResult(ResultCode.Fail, "卷已经出货，不能再拆卷");
+            if (sr.Weight <= weight) return new CommandResult(ResultCode.Fail, "拆卷的重量不能小于或等于原卷重量");
+            IUnitWork unitWork = ProviderFactory.Create<IUnitWork>(RepoUri);
+            decimal? width = SpecificationHelper.GetWrittenWidth(sr.Product.Specification);
+            decimal? thick = SpecificationHelper.GetWrittenThick(sr.Product.Specification);
+            var clone = sr.Clone();
+            clone.Weight -= weight;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Update(clone, sr, unitWork);
+            newR = sr.Clone();
+            newR.ID = Guid.NewGuid();
+            newR.InventorySheet = "拆卷";
+            newR.OriginalWeight = weight;
+            newR.Weight = weight;
+            newR.Count = 1;
+            newR.SourceRoll = clone.ID;
+            newR.Memo = memo;
+            ProviderFactory.Create<IProvider<ProductInventoryItem, Guid>>(RepoUri).Insert(newR, unitWork);
+            var ret = unitWork.Commit();
+            if (ret.Result == ResultCode.Successful)
+            {
+                sr.Weight = clone.Weight;
+                sr.Length = clone.Length;
+            }
+            return ret;
+        }
         #endregion
 
         public List<string> GetAllCarplates()
