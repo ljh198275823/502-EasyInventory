@@ -441,9 +441,12 @@
       <Column Name="BeforeLength" Member="BeforeLength" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="AfterWeight" Member="AfterWeight" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
       <Column Name="AfterLength" Member="AfterLength" DbType="decimal(18,4) not null" UpdateCheck="Never"/>
+      <Column Name="WareHouse" Member="WareHouse"  DbType="nvarchar(50)" UpdateCheck="Never"/>
       <Column Name="Operator" Member="Operator"  DbType="nvarchar(50) NOT NULL" UpdateCheck="Never"/>
       <Column Name="Customer" Member="Customer"  DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
-      <Column Name="Slicer" Member="Slicer"  DbType="nvarchar(50) NULL" UpdateCheck="Never"/>
+      <Column Name="Operator" Member="Operator"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Slicer" Member="Slicer"  DbType="nvarchar(50)" UpdateCheck="Never"/>
+      <Column Name="Memo" Member="Memo"  DbType="nvarchar(200)" UpdateCheck="Never"/>
     </Type>
   </Table>
   <Table Name="AutoCreateNumber" Member="LJH.Inventory.DAL.LinqProvider.AutoCreateNumber">

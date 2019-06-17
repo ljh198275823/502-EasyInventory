@@ -55,6 +55,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_InventoryRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_CustomerPaymentReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.客户增值税发票报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.mnu_System = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Options = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,7 +97,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tmrSoftDogChecker = new System.Windows.Forms.Timer(this.components);
-            this.客户增值税发票报表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pSecondary.SuspendLayout();
@@ -283,10 +283,10 @@
             // 
             // mnu_SliceRecordReport
             // 
+            this.mnu_SliceRecordReport.Enabled = false;
             this.mnu_SliceRecordReport.Name = "mnu_SliceRecordReport";
             this.mnu_SliceRecordReport.Size = new System.Drawing.Size(184, 22);
-            this.mnu_SliceRecordReport.Text = "原料卷加工记录";
-            this.mnu_SliceRecordReport.Visible = false;
+            this.mnu_SliceRecordReport.Text = "原料卷拆卷记录";
             this.mnu_SliceRecordReport.Click += new System.EventHandler(this.mnu_SliceRecordReport_Click);
             // 
             // mnu_DeliveryStatistic
@@ -310,7 +310,6 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(181, 6);
-            this.toolStripSeparator4.Visible = false;
             // 
             // mnu_InventoryRecord
             // 
@@ -328,6 +327,15 @@
             this.mnu_CustomerPaymentReport.Size = new System.Drawing.Size(184, 22);
             this.mnu_CustomerPaymentReport.Text = "客户付款流水报表";
             this.mnu_CustomerPaymentReport.Click += new System.EventHandler(this.mnu_CustomerPaymentReport_Click);
+            // 
+            // 客户增值税发票报表ToolStripMenuItem
+            // 
+            this.客户增值税发票报表ToolStripMenuItem.Enabled = false;
+            this.客户增值税发票报表ToolStripMenuItem.Name = "客户增值税发票报表ToolStripMenuItem";
+            this.客户增值税发票报表ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.客户增值税发票报表ToolStripMenuItem.Text = "客户增值税发票报表";
+            this.客户增值税发票报表ToolStripMenuItem.Visible = false;
+            this.客户增值税发票报表ToolStripMenuItem.Click += new System.EventHandler(this.客户增值税发票报表ToolStripMenuItem_Click);
             // 
             // toolStripSeparator14
             // 
@@ -668,13 +676,6 @@
             // 
             this.tmrSoftDogChecker.Interval = 10000;
             this.tmrSoftDogChecker.Tick += new System.EventHandler(this.tmrSoftDogChecker_Tick);
-            // 
-            // 客户增值税发票报表ToolStripMenuItem
-            // 
-            this.客户增值税发票报表ToolStripMenuItem.Name = "客户增值税发票报表ToolStripMenuItem";
-            this.客户增值税发票报表ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.客户增值税发票报表ToolStripMenuItem.Text = "客户增值税发票报表";
-            this.客户增值税发票报表ToolStripMenuItem.Click += new System.EventHandler(this.客户增值税发票报表ToolStripMenuItem_Click);
             // 
             // FrmMain
             // 

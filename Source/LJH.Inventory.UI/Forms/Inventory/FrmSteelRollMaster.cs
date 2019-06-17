@@ -124,7 +124,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cMnu_Add.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             mnu_Check.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Check);
             mnu_Nullify.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Nullify);
-            mnu拆卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
+            mnu拆卷.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
             this.预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             this.取消预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
         }
@@ -361,6 +361,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 ProductInventoryItem sr = new SteelRollBLL(AppSettings.Current.ConnStr).GetByID(pi.ID).QueryObject;
                 if (sr.State == ProductInventoryState.Inventory && sr.Count == 1)
                 {
+                    if (sr.SourceID.HasValue || sr.SourceRoll.HasValue)
+                    {
+                        MessageBox.Show("原材料是由其它卷拆卷面来,不能进行拆卷");
+                        return;
+                    }
                     Frm拆卷 frm = new Frm拆卷();
                     frm.SteelRoll = sr;
                     if (frm.ShowDialog() == DialogResult.OK)

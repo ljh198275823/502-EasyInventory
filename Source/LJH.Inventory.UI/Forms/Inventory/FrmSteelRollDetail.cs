@@ -96,6 +96,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Init();
             txtCarPlate.Init();
             txtMaterial.Init();
+            this.btnOk.Enabled = !IsForView && Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
         }
 
         public override void ShowOperatorRights()

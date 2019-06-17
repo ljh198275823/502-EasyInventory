@@ -27,6 +27,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             this.ucDateTimeInterval1.SelectThisMonth();
             this.categoryComboBox1.Init();
             this.comSpecification1.Init();
+            mnu_Undo.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
         }
 
         protected override List<object> GetDataSource()
@@ -40,9 +41,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             {
                 return (from it in records
                         orderby it.SliceDate ascending
-                        where ((chk开平.Checked && it.SliceType == chk开平.Text) ||
-                               (chk开条.Checked && it.SliceType == chk开条.Text) ||
-                               (chk开吨.Checked && it.SliceType == chk开吨.Text))
                         select (object)it).ToList();
             }
             return null;
@@ -54,19 +52,11 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Tag = record;
             row.Cells["colSlicedDateTime"].Value = record.SliceDate.ToString("yyyy年MM月dd日");
             row.Cells["colCategoryID"].Value = record.Category;
-            row.Cells["colThick"].Value = SpecificationHelper.GetWrittenThick(record.Specification);
-            row.Cells["colWidth"].Value = SpecificationHelper.GetWrittenWidth(record.Specification);
-            row.Cells["colSlicedTo"].Value = record.SliceType;
-            row.Cells["colLength"].Value = record.Length;
-            row.Cells["colWeight"].Value = record.Weight;
-            row.Cells["colAmount"].Value = record.Count;
+            row.Cells["colSpecification"].Value = record.Specification;
             row.Cells["colBeforeWeight"].Value = record.BeforeWeight;
-            row.Cells["colBeforeLength"].Value = record.BeforeLength;
+            row.Cells["colWeight"].Value = record.Weight;
             row.Cells["colAfterWeight"].Value = record.AfterWeight;
-            row.Cells["colAfterLength"].Value = record.AfterLength;
-            row.Cells["colTotalLength"].Value = record.BeforeLength - record.AfterLength;
-            row.Cells["colTotalWeight"].Value = record.BeforeWeight - record.AfterWeight;
-            row.Cells["colSlicer"].Value = record.Slicer;
+            row.Cells["colSlicer"].Value = string.IsNullOrEmpty(record.Slicer) ? record.Operator : record.Slicer;
             row.Cells["colCustomer"].Value = record.Customer;
             row.Cells["colSourceRoll"].Value = "查看原料卷";
             row.Cells["colMemo"].Value = record.Memo;
@@ -90,6 +80,29 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                         frm.UpdatingItem = steelRoll;
                         frm.StartPosition = FormStartPosition.CenterParent;
                         frm.ShowDialog();
+                    }
+                }
+            }
+        }
+
+        private void mnu_Undo_Click(object sender, EventArgs e)
+        {
+            if (this.GridView.SelectedRows.Count > 0 &&
+                MessageBox.Show("是否撤销这些加工记录？", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                List<SteelRollSliceRecord> records = new List<SteelRollSliceRecord>();
+                List<DataGridViewRow> delingRows = new List<DataGridViewRow>();
+                foreach (DataGridViewRow row in this.GridView.SelectedRows)
+                {
+                    var record = row.Tag as SteelRollSliceRecord;
+                    var ret= new SteelRollBLL(AppSettings.Current.ConnStr).UndoSlice(record);
+                    if (ret.Result == GeneralLibrary.Core.DAL.ResultCode.Successful) delingRows.Add(row);
+                }
+                if (delingRows.Count > 0)
+                {
+                    foreach (DataGridViewRow row in delingRows)
+                    {
+                        GridView.Rows.Remove(row);
                     }
                 }
             }

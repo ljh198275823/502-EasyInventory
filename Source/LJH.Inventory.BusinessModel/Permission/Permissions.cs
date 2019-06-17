@@ -194,18 +194,23 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 出货记录查询
         /// </summary>
-        [OperatorRight(Catalog = "查询与报表", Actions = PermissionActions.Read, Description = "出货记录查询")]
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "出货记录查询")]
         DeliveryRecordReport = 501,
         /// <summary>
         /// 产品出货统计
         /// </summary>
-        [OperatorRight(Catalog = "查询与报表", Actions = PermissionActions.Read, Description = "产品出货统计")]
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "产品出货统计")]
         DeliveryStatistics,
         /// <summary>
         /// 业务员业绩统计
         /// </summary>
-        [OperatorRight(Catalog = "查询与报表", Actions = PermissionActions.Read, Description = "业务员业绩统计")]
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "业务员业绩统计")]
         PerformanceStatistics,
+        /// <summary>
+        /// 原材料加工记录报表
+        /// </summary>
+        [OperatorRight(Catalog = "报表", Actions = PermissionActions.Read, Description = "原材料拆卷记录报表")]
+        SliceRecordReport,
         #endregion
     }
 }

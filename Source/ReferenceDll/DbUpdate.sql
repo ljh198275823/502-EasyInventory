@@ -41,3 +41,10 @@ BEGIN
 	exec ('alter table ProductInventoryItem add OtherCost decimal(18,4)')
 end
 go
+
+
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Memo' AND id = OBJECT_ID(N'[dbo].[SteelRollSliceRecord]'))
+BEGIN
+	exec ('alter table SteelRollSliceRecord add Memo nvarchar(200)')
+end
+go
