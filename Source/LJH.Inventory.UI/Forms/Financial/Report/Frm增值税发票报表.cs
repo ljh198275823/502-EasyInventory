@@ -158,18 +158,25 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 if (dataGridView1.Rows[e.RowIndex].Tag == null) return;
-                CustomerPayment cp = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
+                CustomerPayment sheet = dataGridView1.Rows[e.RowIndex].Tag as CustomerPayment;
                 if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colAssigned")
                 {
-                    var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(cp.ID, cp.ClassID).QueryObject;
+                    var ar = new AccountRecordBLL(AppSettings.Current.ConnStr).GetRecord(sheet.ID, sheet.ClassID).QueryObject;
                     if (ar != null)
                     {
                         FrmReceivablePaymentAssigns frm = new FrmReceivablePaymentAssigns();
                         frm.StartPosition = FormStartPosition.CenterParent;
                         frm.ShowAssigns(ar);
                         frm.ShowDialog();
-                        
                     }
+                }
+                else if (this.dataGridView1.Columns[e.ColumnIndex].Name == "colSheetID")
+                {
+                    FrmCustomerTaxBillDetail frm = new FrmCustomerTaxBillDetail();
+                    frm.TaxType = sheet.ClassID;
+                    frm.IsAdding = false;
+                    frm.UpdatingItem = sheet;
+                    frm.ShowDialog();
                 }
             }
         }
