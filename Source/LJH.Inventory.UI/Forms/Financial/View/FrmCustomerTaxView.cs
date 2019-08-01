@@ -233,5 +233,37 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (chkSheetDate.Checked) FreshData();
         }
         #endregion
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            FilterRow(txtKeyword.Text);
+        }
+
+        private void FilterRow(string key)
+        {
+            var items = new List<CustomerReceivable>();
+            for (int i = 0; i < GridView.Rows.Count - 1; i++)
+            {
+                GridView.Rows[i].Visible = ContainText(GridView.Rows[i], key);
+                if (GridView.Rows[i].Visible) items.Add(GridView.Rows[i].Tag as CustomerReceivable);
+            }
+            lblMSG.Text = string.Format("共 {0} 项", items.Count);
+            if (GridView.Rows.Count > 0)
+            {
+                GridView.Rows[GridView.Rows.Count - 1].Cells["colAmount"].Value = items.Sum(item => (item as CustomerReceivable).Amount).Trim();
+                GridView.Rows[GridView.Rows.Count - 1].Cells["colHaspaid"].Value = items.Sum(item => (item as CustomerReceivable).Haspaid).Trim();
+                GridView.Rows[GridView.Rows.Count - 1].Cells["colNotpaid"].Value = items.Sum(item => (item as CustomerReceivable).Remain).Trim();
+            }
+        }
+
+        private bool ContainText(DataGridViewRow row, string key)
+        {
+            if (string.IsNullOrEmpty(key)) return true;
+            foreach (DataGridViewCell cell in row.Cells)
+            {
+                if (cell.Value != null && cell.Value.ToString().Contains(key)) return true;
+            }
+            return false;
+        }
     }
 }

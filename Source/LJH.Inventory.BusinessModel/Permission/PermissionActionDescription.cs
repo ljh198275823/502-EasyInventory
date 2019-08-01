@@ -50,6 +50,10 @@ namespace LJH.Inventory.BusinessModel
                     return "盘点";
                 case PermissionActions.Slice:
                     return "加工";
+                case PermissionActions.EditAttachment:
+                    return "编辑附件";
+                case PermissionActions.ShowAttachment:
+                    return "显示附件";
                 default:
                     return action.ToString ();
             }

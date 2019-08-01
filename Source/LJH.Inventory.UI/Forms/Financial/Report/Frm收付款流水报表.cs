@@ -81,10 +81,19 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk供应商退款.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商退款);
             if (con.PaymentTypes.Count == 0) return null;
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
+            if (!chk显示作废单据.Checked && items != null) items.RemoveAll(it => it.State == SheetState.作废);
+            if (!chk财务核算.Checked) items.RemoveAll(item => Is财务核算(item));
             return (from item in items
                     where !string.IsNullOrEmpty(item.AccountID)
                     orderby !string.IsNullOrEmpty(item.GetProperty("到款日期")) ? item.GetProperty("到款日期") : item.SheetDate.ToString("yyyy-MM-dd") ascending, item.ID ascending
                     select (object)item).ToList();
+        }
+
+        private bool Is财务核算(CustomerPayment item)
+        {
+            if (string.IsNullOrEmpty(item.AccountID)) return false;
+            var a = _AllAccounts.SingleOrDefault(it => it.ID == item.AccountID);
+            return a != null && a.Class == AccountType.财务核算;
         }
 
         protected override void ShowItemsOnGrid(List<object> items)
@@ -222,6 +231,7 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             chk费用支出.Checked = chkAll.Checked;
             chk客户退款.Checked = chkAll.Checked;
             chk供应商退款.Checked = chkAll.Checked;
+            chk财务核算.Checked = chkAll.Checked;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

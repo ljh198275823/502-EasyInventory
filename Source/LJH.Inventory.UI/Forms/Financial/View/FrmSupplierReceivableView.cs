@@ -123,7 +123,7 @@ namespace LJH.Inventory.UI.Forms.Financial.View
             if (string.IsNullOrEmpty(key)) return true;
             foreach (DataGridViewCell cell in row.Cells)
             {
-                if (cell.Visible && cell.Value != null && cell.Value.ToString().Contains(key)) return true;
+                if (cell.Value != null && cell.Value.ToString().Contains(key)) return true;
             }
             return false;
         }

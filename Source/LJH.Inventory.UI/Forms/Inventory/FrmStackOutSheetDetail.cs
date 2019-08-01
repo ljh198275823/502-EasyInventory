@@ -300,6 +300,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
 
+        public override void ShowOperatorRights()
+        {
+            base.ShowOperatorRights();
+            mnu_AttachmentAdd.Enabled = mnu_AttachmentAdd.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.EditAttachment);
+            mnu_AttachmentDelete.Enabled = mnu_AttachmentDelete.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.EditAttachment);
+            mnu_AttachmentOpen.Enabled = mnu_AttachmentOpen.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.ShowAttachment);
+            mnu_AttachmentSaveAs.Enabled = mnu_AttachmentSaveAs.Enabled && Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.ShowAttachment);
+        }
+
         protected override void ItemShowing()
         {
             StackOutSheet sheet = UpdatingItem as StackOutSheet;

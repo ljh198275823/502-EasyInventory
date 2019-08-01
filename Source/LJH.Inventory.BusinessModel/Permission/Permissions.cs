@@ -78,7 +78,7 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 送货单资料
         /// </summary>
-        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print | PermissionActions.显示成本 | PermissionActions.超出信用额度可出货, Description = "送货单资料")]
+        [OperatorRight(Catalog = "仓库", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.Ship | PermissionActions.Print | PermissionActions.显示成本 | PermissionActions.超出信用额度可出货 | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "送货单资料")]
         DeliverySheet,
         /// <summary>
         /// 其它产品
@@ -106,22 +106,22 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 客户收款流水
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销, Description = "客户收款流水")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销 | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "客户收款流水")]
         CustomerPayment,
         /// <summary>
         /// 客户应收款
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户应收款")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "客户应收款")]
         CustomerReceivable,
         /// <summary>
         /// 客户增值税发票
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销, Description = "客户增值税发票")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销 | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "客户增值税发票")]
         CustomerTaxBill,
         /// <summary>
         /// 客户应开发票
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "客户应开发票")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.导出 | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "客户应开发票")]
         CustomerTax,
         /// <summary>
         /// 供应商应付管理
@@ -131,27 +131,27 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 供应商付款流水
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销, Description = "供应商付款流水")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销 | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "供应商付款流水")]
         SupplierPayment,
         /// <summary>
         /// 客户其它应收款
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "供应商应付款")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "供应商应付款")]
         SupplierReceivable,
         /// <summary>
         /// 供应商增值税发票
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销, Description = "供应商增值税发票")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.核销 | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "供应商增值税发票")]
         SupplierTaxBill,
         /// <summary>
         /// 供应商应开发票
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "供应商应开发票")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "供应商应开发票")]
         SupplierTax,
         /// <summary>
         /// 公司管理费用
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "公司管理费用")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "公司管理费用")]
         ExpenditureRecord,
         /// <summary>
         /// 账号管理
@@ -161,17 +161,17 @@ namespace LJH.Inventory.BusinessModel
         /// <summary>
         /// 其它收款
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "其它收款")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "其它收款")]
         其它收款,
         /// <summary>
         /// 其它收款
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "转账")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "转账")]
         转账,
         /// <summary>
         ///退款
         /// </summary>
-        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify, Description = "退款")]
+        [OperatorRight(Catalog = "财务", Actions = PermissionActions.Read | PermissionActions.Edit | PermissionActions.Approve | PermissionActions.UndoApprove | PermissionActions.Nullify | PermissionActions.ShowAttachment | PermissionActions.EditAttachment, Description = "退款")]
         退款,
         #endregion
 

@@ -117,10 +117,10 @@
     <Compile Include="Resource\CustomerReceivableTypeDescription.cs" />
     <Compile Include="Resource\ProductInventoryStateDescription.cs" />
     <Compile Include="Sale\OrderItemRecord.cs" />
-    <Compile Include="Purchase\Permission\OperatorRightAttribute.cs" />
-    <Compile Include="Purchase\Permission\PermissionActionDescription.cs" />
-    <Compile Include="Purchase\Permission\PermissionActions.cs" />
-    <Compile Include="Purchase\Permission\PermissionResolver.cs" />
+    <Compile Include="Permission\OperatorRightAttribute.cs" />
+    <Compile Include="Permission\PermissionActionDescription.cs" />
+    <Compile Include="Permission\PermissionActions.cs" />
+    <Compile Include="Permission\PermissionResolver.cs" />
     <Compile Include="ProductInventoryItem.cs" />
     <Compile Include="Purchase\PurchaseOrder.cs" />
     <Compile Include="Purchase\PurchaseItem.cs" />
@@ -164,7 +164,7 @@
     <Compile Include="SearchCondition\StackOutSheetSearchCondition.cs" />
     <Compile Include="SearchCondition\ProductSearchCondition.cs" />
     <Compile Include="Operator.cs" />
-    <Compile Include="Purchase\Permission\Permissions.cs" />
+    <Compile Include="Permission\Permissions.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Inventory\StackOutRecord.cs" />
     <Compile Include="SearchCondition\SheetSearchCondition.cs" />

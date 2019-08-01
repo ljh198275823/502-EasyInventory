@@ -35,16 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSupplierReceivableView));
             this.GridView = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
-            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblMSG = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnLast3Month = new System.Windows.Forms.Button();
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
-            this.chkSheetDate = new System.Windows.Forms.CheckBox();
-            this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.colSheetID = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col类别 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +49,16 @@
             this.col申请人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col车皮号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnu_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblMSG = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnLast3Month = new System.Windows.Forms.Button();
+            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.chkSheetDate = new System.Windows.Forms.CheckBox();
+            this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -98,99 +98,6 @@
             this.GridView.Size = new System.Drawing.Size(991, 310);
             this.GridView.TabIndex = 22;
             this.GridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView_CellClick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu_Add,
-            this.cMnu_Export});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 48);
-            // 
-            // mnu_Add
-            // 
-            this.mnu_Add.Name = "mnu_Add";
-            this.mnu_Add.Size = new System.Drawing.Size(109, 22);
-            this.mnu_Add.Text = "新建";
-            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
-            // 
-            // cMnu_Export
-            // 
-            this.cMnu_Export.Name = "cMnu_Export";
-            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
-            this.cMnu_Export.Text = "导出...";
-            this.cMnu_Export.Click += new System.EventHandler(this.cMnu_Export_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMSG});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 407);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(991, 22);
-            this.statusStrip1.TabIndex = 25;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblMSG
-            // 
-            this.lblMSG.Name = "lblMSG";
-            this.lblMSG.Size = new System.Drawing.Size(976, 17);
-            this.lblMSG.Spring = true;
-            this.lblMSG.Text = "共 0 项";
-            // 
-            // btnLast3Month
-            // 
-            this.btnLast3Month.Location = new System.Drawing.Point(9, 37);
-            this.btnLast3Month.Name = "btnLast3Month";
-            this.btnLast3Month.Size = new System.Drawing.Size(75, 39);
-            this.btnLast3Month.TabIndex = 147;
-            this.btnLast3Month.Text = "最近三个月";
-            this.btnLast3Month.UseVisualStyleBackColor = true;
-            this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
-            // 
-            // ucDateTimeInterval1
-            // 
-            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.Location = new System.Drawing.Point(85, 8);
-            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
-            this.ucDateTimeInterval1.ShowTime = true;
-            this.ucDateTimeInterval1.Size = new System.Drawing.Size(223, 74);
-            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.TabIndex = 146;
-            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
-            // 
-            // chkSheetDate
-            // 
-            this.chkSheetDate.AutoSize = true;
-            this.chkSheetDate.Location = new System.Drawing.Point(12, 15);
-            this.chkSheetDate.Name = "chkSheetDate";
-            this.chkSheetDate.Size = new System.Drawing.Size(72, 16);
-            this.chkSheetDate.TabIndex = 145;
-            this.chkSheetDate.Text = "开单日期";
-            this.chkSheetDate.UseVisualStyleBackColor = true;
-            this.chkSheetDate.CheckedChanged += new System.EventHandler(this.chkSheetDate_CheckedChanged);
-            // 
-            // txtKeyword
-            // 
-            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtKeyword.Location = new System.Drawing.Point(383, 37);
-            this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(252, 21);
-            this.txtKeyword.TabIndex = 149;
-            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(324, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 148;
-            this.label2.Text = "模糊匹配";
             // 
             // colSheetID
             // 
@@ -283,7 +190,7 @@
             this.colOrderID.Name = "colOrderID";
             this.colOrderID.ReadOnly = true;
             this.colOrderID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colOrderID.Width = 47;
+            this.colOrderID.Width = 42;
             // 
             // col购货单位
             // 
@@ -292,7 +199,7 @@
             this.col购货单位.Name = "col购货单位";
             this.col购货单位.ReadOnly = true;
             this.col购货单位.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.col购货单位.Width = 59;
+            this.col购货单位.Width = 42;
             // 
             // col申请人
             // 
@@ -301,7 +208,7 @@
             this.col申请人.Name = "col申请人";
             this.col申请人.ReadOnly = true;
             this.col申请人.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.col申请人.Width = 47;
+            this.col申请人.Width = 42;
             // 
             // col车皮号
             // 
@@ -309,7 +216,7 @@
             this.col车皮号.HeaderText = "车皮号";
             this.col车皮号.Name = "col车皮号";
             this.col车皮号.ReadOnly = true;
-            this.col车皮号.Width = 66;
+            this.col车皮号.Width = 61;
             // 
             // colMemo
             // 
@@ -318,6 +225,100 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Add,
+            this.cMnu_Export});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(110, 48);
+            // 
+            // mnu_Add
+            // 
+            this.mnu_Add.Name = "mnu_Add";
+            this.mnu_Add.Size = new System.Drawing.Size(109, 22);
+            this.mnu_Add.Text = "新建";
+            this.mnu_Add.Click += new System.EventHandler(this.mnu_Add_Click);
+            // 
+            // cMnu_Export
+            // 
+            this.cMnu_Export.Name = "cMnu_Export";
+            this.cMnu_Export.Size = new System.Drawing.Size(109, 22);
+            this.cMnu_Export.Text = "导出...";
+            this.cMnu_Export.Click += new System.EventHandler(this.cMnu_Export_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblMSG});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 407);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(991, 22);
+            this.statusStrip1.TabIndex = 25;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblMSG
+            // 
+            this.lblMSG.Name = "lblMSG";
+            this.lblMSG.Size = new System.Drawing.Size(976, 17);
+            this.lblMSG.Spring = true;
+            this.lblMSG.Text = "共 0 项";
+            // 
+            // btnLast3Month
+            // 
+            this.btnLast3Month.Location = new System.Drawing.Point(9, 37);
+            this.btnLast3Month.Name = "btnLast3Month";
+            this.btnLast3Month.Size = new System.Drawing.Size(75, 39);
+            this.btnLast3Month.TabIndex = 147;
+            this.btnLast3Month.Text = "最近三个月";
+            this.btnLast3Month.UseVisualStyleBackColor = true;
+            this.btnLast3Month.Click += new System.EventHandler(this.btnLast3Month_Click);
+            // 
+            // ucDateTimeInterval1
+            // 
+            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(85, 8);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = true;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(223, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.TabIndex = 146;
+            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
+            // 
+            // chkSheetDate
+            // 
+            this.chkSheetDate.AutoSize = true;
+            this.chkSheetDate.Location = new System.Drawing.Point(12, 15);
+            this.chkSheetDate.Name = "chkSheetDate";
+            this.chkSheetDate.Size = new System.Drawing.Size(72, 16);
+            this.chkSheetDate.TabIndex = 145;
+            this.chkSheetDate.Text = "开单日期";
+            this.chkSheetDate.UseVisualStyleBackColor = true;
+            this.chkSheetDate.CheckedChanged += new System.EventHandler(this.chkSheetDate_CheckedChanged);
+            // 
+            // txtKeyword
+            // 
+            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtKeyword.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtKeyword.Location = new System.Drawing.Point(383, 32);
+            this.txtKeyword.Name = "txtKeyword";
+            this.txtKeyword.Size = new System.Drawing.Size(252, 30);
+            this.txtKeyword.TabIndex = 149;
+            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(324, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 148;
+            this.label2.Text = "模糊匹配";
             // 
             // FrmSupplierReceivableView
             // 
