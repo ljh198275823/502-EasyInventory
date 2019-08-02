@@ -46,6 +46,8 @@
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lnk客户类别 = new System.Windows.Forms.LinkLabel();
+            this.txt客户类别 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lblTotalAmount = new System.Windows.Forms.Label();
             this.lblTotalWeight = new System.Windows.Forms.Label();
             this.txtCustomer = new System.Windows.Forms.TextBox();
@@ -91,8 +93,8 @@
             this.colDriverCall = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCarPlate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lnk客户类别 = new System.Windows.Forms.LinkLabel();
-            this.txt客户类别 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.lnk业务员 = new System.Windows.Forms.LinkLabel();
+            this.txt业务员 = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -155,6 +157,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.lnk业务员);
+            this.panel5.Controls.Add(this.txt业务员);
             this.panel5.Controls.Add(this.lnk客户类别);
             this.panel5.Controls.Add(this.txt客户类别);
             this.panel5.Controls.Add(this.lblTotalAmount);
@@ -174,12 +178,33 @@
             this.panel5.Size = new System.Drawing.Size(1242, 87);
             this.panel5.TabIndex = 6;
             // 
+            // lnk客户类别
+            // 
+            this.lnk客户类别.AutoSize = true;
+            this.lnk客户类别.Location = new System.Drawing.Point(639, 18);
+            this.lnk客户类别.Name = "lnk客户类别";
+            this.lnk客户类别.Size = new System.Drawing.Size(53, 12);
+            this.lnk客户类别.TabIndex = 141;
+            this.lnk客户类别.TabStop = true;
+            this.lnk客户类别.Text = "客户类别";
+            this.lnk客户类别.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk客户类别_LinkClicked);
+            // 
+            // txt客户类别
+            // 
+            this.txt客户类别.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt客户类别.Location = new System.Drawing.Point(692, 14);
+            this.txt客户类别.Name = "txt客户类别";
+            this.txt客户类别.ReadOnly = true;
+            this.txt客户类别.Size = new System.Drawing.Size(113, 21);
+            this.txt客户类别.TabIndex = 140;
+            this.txt客户类别.DoubleClick += new System.EventHandler(this.txt客户类别_DoubleClick);
+            // 
             // lblTotalAmount
             // 
             this.lblTotalAmount.AutoSize = true;
             this.lblTotalAmount.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTotalAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalAmount.Location = new System.Drawing.Point(946, 23);
+            this.lblTotalAmount.Location = new System.Drawing.Point(974, 23);
             this.lblTotalAmount.Name = "lblTotalAmount";
             this.lblTotalAmount.Size = new System.Drawing.Size(17, 16);
             this.lblTotalAmount.TabIndex = 139;
@@ -190,7 +215,7 @@
             this.lblTotalWeight.AutoSize = true;
             this.lblTotalWeight.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTotalWeight.ForeColor = System.Drawing.Color.Blue;
-            this.lblTotalWeight.Location = new System.Drawing.Point(946, 54);
+            this.lblTotalWeight.Location = new System.Drawing.Point(974, 54);
             this.lblTotalWeight.Name = "lblTotalWeight";
             this.lblTotalWeight.Size = new System.Drawing.Size(17, 16);
             this.lblTotalWeight.TabIndex = 138;
@@ -201,7 +226,7 @@
             this.txtCustomer.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCustomer.Location = new System.Drawing.Point(692, 48);
             this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(238, 30);
+            this.txtCustomer.Size = new System.Drawing.Size(276, 30);
             this.txtCustomer.TabIndex = 137;
             this.txtCustomer.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
@@ -610,26 +635,25 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.ReadOnly = true;
             // 
-            // lnk客户类别
+            // lnk业务员
             // 
-            this.lnk客户类别.AutoSize = true;
-            this.lnk客户类别.Location = new System.Drawing.Point(639, 18);
-            this.lnk客户类别.Name = "lnk客户类别";
-            this.lnk客户类别.Size = new System.Drawing.Size(53, 12);
-            this.lnk客户类别.TabIndex = 141;
-            this.lnk客户类别.TabStop = true;
-            this.lnk客户类别.Text = "客户类别";
-            this.lnk客户类别.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk客户类别_LinkClicked);
+            this.lnk业务员.AutoSize = true;
+            this.lnk业务员.Location = new System.Drawing.Point(811, 18);
+            this.lnk业务员.Name = "lnk业务员";
+            this.lnk业务员.Size = new System.Drawing.Size(47, 12);
+            this.lnk业务员.TabIndex = 158;
+            this.lnk业务员.TabStop = true;
+            this.lnk业务员.Text = "业务员:";
+            this.lnk业务员.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk业务员_LinkClicked);
             // 
-            // txt客户类别
+            // txt业务员
             // 
-            this.txt客户类别.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txt客户类别.Location = new System.Drawing.Point(692, 14);
-            this.txt客户类别.Name = "txt客户类别";
-            this.txt客户类别.ReadOnly = true;
-            this.txt客户类别.Size = new System.Drawing.Size(238, 21);
-            this.txt客户类别.TabIndex = 140;
-            this.txt客户类别.DoubleClick += new System.EventHandler(this.txt客户类别_DoubleClick);
+            this.txt业务员.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt业务员.Location = new System.Drawing.Point(859, 14);
+            this.txt业务员.Name = "txt业务员";
+            this.txt业务员.Size = new System.Drawing.Size(109, 21);
+            this.txt业务员.TabIndex = 157;
+            this.txt业务员.TextChanged += new System.EventHandler(this.txt业务员_TextChanged);
             // 
             // FrmStackOutSheetMaster
             // 
@@ -715,5 +739,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
         private System.Windows.Forms.LinkLabel lnk客户类别;
         private GeneralLibrary.WinformControl.DBCTextBox txt客户类别;
+        private System.Windows.Forms.LinkLabel lnk业务员;
+        private GeneralLibrary.WinformControl.DBCTextBox txt业务员;
     }
 }

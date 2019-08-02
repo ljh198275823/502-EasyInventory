@@ -48,7 +48,10 @@ namespace LJH.Inventory.UI.Forms.Financial
                         if (categories != null) items = items.Where(it => string.IsNullOrEmpty(it.Customer.CategoryID) || !categories.Exists(c => c.ID == it.Customer.CategoryID)).ToList();
                     }
                 }
-                if (!string.IsNullOrEmpty(txtKeyword.Text.Trim())) items = items.Where(it => it.Customer.Name.Contains(txtKeyword.Text.Trim())).ToList();
+                if (!string.IsNullOrEmpty(txtKeyword.Text.Trim())) items = items.Where(it =>
+                    it.Customer.Name.Contains(txtKeyword.Text.Trim()) ||
+                    (!string.IsNullOrEmpty(it.Customer.GetProperty(SheetNote.业务员.ToString())) && it.Customer.GetProperty(SheetNote.业务员.ToString()).Contains(txtKeyword.Text.Trim())))
+                    .ToList();
                 if (chkOnlyHasRecievables.Checked) items = items.Where(it => it.Recievables > 0).ToList();
                 return (from p in items
                         orderby p.Customer.Name ascending
@@ -134,6 +137,7 @@ namespace LJH.Inventory.UI.Forms.Financial
             row.Cells["col发票已核销对公已付金额"].Value = cs.发票已核销对公已付金额;
             row.Cells["col距上次发货"].Value = cs.距最后一次出货天数;
             row.Cells["colPhone"].Value = cs.Customer.TelPhone;
+            row.Cells["colSalesPerson"].Value = cs.Customer.GetProperty(SheetNote.业务员.ToString());
             row.Cells["colMemo"].Value = cs.Customer.GetProperty("财务备注");
             if (cs.Customer.DefaultLinker != null)
             {

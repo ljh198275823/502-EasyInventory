@@ -723,7 +723,7 @@
             this.tabPage6.Controls.Add(this.gridAttachment);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1222, 430);
+            this.tabPage6.Size = new System.Drawing.Size(1191, 430);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "附件";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -747,7 +747,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(1222, 430);
+            this.gridAttachment.Size = new System.Drawing.Size(1191, 430);
             this.gridAttachment.TabIndex = 103;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -821,7 +821,7 @@
             this.tabPage7.Controls.Add(this.dataGridView1);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1222, 430);
+            this.tabPage7.Size = new System.Drawing.Size(1191, 430);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "操作记录";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -844,7 +844,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1222, 430);
+            this.dataGridView1.Size = new System.Drawing.Size(1191, 430);
             this.dataGridView1.TabIndex = 99;
             // 
             // colOperateDate
@@ -892,6 +892,7 @@
             "点张"});
             this.col计量方式.Name = "col计量方式";
             this.col计量方式.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col计量方式.Visible = false;
             this.col计量方式.Width = 80;
             // 
             // colCategory
@@ -908,7 +909,6 @@
             this.col材质.Name = "col材质";
             this.col材质.ReadOnly = true;
             this.col材质.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.col材质.Width = 80;
             // 
             // colSpecification
             // 

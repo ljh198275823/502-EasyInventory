@@ -77,6 +77,7 @@
             this.colTaxBill = new System.Windows.Forms.DataGridViewLinkColumn();
             this.col对公已付金额 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.col发票已核销对公已付金额 = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colSalesPerson = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLinkerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -288,10 +289,11 @@
             // 
             this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtKeyword.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtKeyword.Location = new System.Drawing.Point(262, 24);
+            this.txtKeyword.Location = new System.Drawing.Point(262, 19);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(252, 21);
+            this.txtKeyword.Size = new System.Drawing.Size(252, 30);
             this.txtKeyword.TabIndex = 1;
             this.txtKeyword.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
@@ -325,6 +327,7 @@
             this.colTaxBill,
             this.col对公已付金额,
             this.col发票已核销对公已付金额,
+            this.colSalesPerson,
             this.colPhone,
             this.colLinker,
             this.colLinkerPhone,
@@ -461,6 +464,12 @@
             this.col发票已核销对公已付金额.Name = "col发票已核销对公已付金额";
             this.col发票已核销对公已付金额.ReadOnly = true;
             // 
+            // colSalesPerson
+            // 
+            this.colSalesPerson.HeaderText = "业务员";
+            this.colSalesPerson.Name = "colSalesPerson";
+            this.colSalesPerson.ReadOnly = true;
+            // 
             // colPhone
             // 
             this.colPhone.HeaderText = "电话";
@@ -561,6 +570,7 @@
         private System.Windows.Forms.DataGridViewLinkColumn colTaxBill;
         private System.Windows.Forms.DataGridViewLinkColumn col对公已付金额;
         private System.Windows.Forms.DataGridViewLinkColumn col发票已核销对公已付金额;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSalesPerson;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinker;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinkerPhone;

@@ -88,6 +88,10 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 }
                 if (items != null) items = items.Where(item => (chkWithTax.Checked && item.WithTax) ||
                                               (chkWithoutTax.Checked && !item.WithTax)).ToList();
+                if (!string.IsNullOrEmpty(txt业务员.Text))
+                {
+                    if (items != null) items = items.Where(item => !string.IsNullOrEmpty(item.SalesPerson) && item.SalesPerson.Contains(txt业务员.Text)).ToList();
+                }
             }
             List<object> objs = null;
             if (items != null && items.Count > 0) objs = (from item in items orderby item.ID descending select (object)item).ToList();
@@ -328,6 +332,22 @@ namespace LJH.Inventory.UI.Forms.Inventory
         {
             txt客户类别.Tag = null;
             txt客户类别.Text = string.Empty;
+        }
+
+        private void lnk业务员_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Forms.General.FrmStaffMaster frm = new Forms.General.FrmStaffMaster();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                Staff item = frm.SelectedItem as Staff;
+                txt业务员.Text = item != null ? item.Name : string.Empty;
+            }
+        }
+
+        private void txt业务员_TextChanged(object sender, EventArgs e)
+        {
+            FreshData();
         }
     }
 }

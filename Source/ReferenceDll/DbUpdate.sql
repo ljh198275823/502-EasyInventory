@@ -312,4 +312,11 @@ BEGIN
 end
 go
 
+--20190801
+if not exists (SELECT * FROM dbo.syscolumns WHERE name ='Memo' AND id = OBJECT_ID(N'[dbo].[SteelRollSliceRecord]'))
+BEGIN
+	exec ('alter table SteelRollSliceRecord add Memo nvarchar(200) null')
+end
+go
+
 
