@@ -33,13 +33,34 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             ucDateTimeInterval1.ShowTime = false;
             ucDateTimeInterval1.Init();
             ucDateTimeInterval1.SelectThisMonth();
+            txtCategory.Init();
+            this.cmbSpecification.Init(new List<string> { ProductModel.原材料, ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 });
             base.Init();
             if (Product != null) btnSearch.PerformClick();
+            btnSaveAs.Enabled = Operator.Current.Permit(Permission.小件进销报表, PermissionActions.导出);
         }
 
         protected override List<object> GetDataSource()
         {
             _balance = 0;
+            if (string.IsNullOrEmpty(cmbSpecification.Text))
+            {
+                MessageBox.Show("没有指定小件规格");
+                return null;
+            }
+            if (string.IsNullOrEmpty(txtCategory.Text))
+            {
+                MessageBox.Show("没有指定小件类别");
+                return null;
+            }
+            if (txtLength.DecimalValue == 0)
+            {
+                MessageBox.Show("没有指定小件长度");
+                return null;
+            }
+            var pcon = new ProductSearchCondition() { CategoryID = txtCategory.SelectedCategoryID, Specification = cmbSpecification.Text };
+            List<Product> ps =new ProductBLL(AppSettings .Current .ConnStr ). GetItems(pcon).QueryObjects;
+            if (ps != null && ps.Count > 0) Product = ps.FirstOrDefault(it => it.Length == txtLength.DecimalValue);
             if (Product == null)
             {
                 MessageBox.Show("没有指定小件");
@@ -80,6 +101,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                                  单据编号 = it.SheetNo,
                                  出货 = it.Count,
                                  来源卷重 = it.SourceRollWeight.HasValue ? it.SourceRollWeight.Value.ToString("F3") : null,
+                                 客户 = it.Customer != null ? it.Customer.Name : null,
                                  Memo = it.Memo
                              });
             }
@@ -124,7 +146,6 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             con4.HasRemain = true;
             var item4 = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con4).QueryObjects;
             _balance = item4.Where(it => it.State == ProductInventoryState.Inventory || it.State == ProductInventoryState.Reserved || it.State == ProductInventoryState.WaitShipping).Sum(it => it.Count);
-            if (txtWeight.DecimalValue > 0) ret = ret.Where(it => !string.IsNullOrEmpty(it.来源卷重) && it.来源卷重.Contains(txtWeight.Text)).ToList();
             ret = (from it in ret
                    where it.CreateDate >= ucDateTimeInterval1.StartDateTime && it.CreateDate <= ucDateTimeInterval1.EndDateTime
                    orderby it.CreateDate descending
@@ -140,11 +161,13 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             row.Tag = cp;
             row.Cells["colSheetDate"].Value = cp.Name;
             row.Cells["colSheetID"].Value = cp.单据编号;
-            row.Cells["col数量"].Value = cp.入库 > 0 ? cp.入库.Trim() : cp.出货.Trim();
+            if (cp.入库 > 0) row.Cells["col进货"].Value = cp.入库.Trim();
+            if (cp.出货 > 0) row.Cells["col出货"].Value = cp.出货.Trim();
             row.Cells["col余数"].Value = _balance.Trim();
-            row.Cells["col操作员"].Value = cp.操作员;
+            row.Cells["col客户"].Value = cp.客户;
             row.Cells["col来源卷"].Value = cp.来源卷重;
             row.Cells["colMemo"].Value = cp.Memo;
+            row.Cells["col操作员"].Value = cp.操作员;
             row.DefaultCellStyle.ForeColor = cp.入库 > 0 ? Color.Blue : Color.Red;
             _balance = _balance + cp.出货 - cp.入库;
         }
@@ -186,6 +209,8 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         public string 来源卷重 { get; set; }
 
         public Guid? 来源卷 { get; set; }
+
+        public string 客户 { get; set; }
 
         public string Memo { get; set; }
     }

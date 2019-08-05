@@ -81,5 +81,31 @@ namespace LJH.Inventory.UI.Forms
             cMnu_Delete.Enabled = Operator.Current.Permit(Permission.Role, PermissionActions.Edit);
         }
         #endregion
+
+        private void mnu复制_Click(object sender, EventArgs e)
+        {
+            if (this.GridView.SelectedRows.Count == 1)
+            {
+                var r = this.GridView.SelectedRows[0].Tag as Role;
+                try
+                {
+                    var detailForm = new FrmRoleDetail();
+                    detailForm.Permits = r.Permission;
+                    if (detailForm != null)
+                    {
+                        detailForm.IsAdding = true;
+                        detailForm.ItemAdded += delegate(object obj, ItemAddedEventArgs args)
+                        {
+                            Add_And_Show_Row(args.AddedItem);
+                        };
+                        detailForm.ShowDialog();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
+            }
+        }
     }
 }

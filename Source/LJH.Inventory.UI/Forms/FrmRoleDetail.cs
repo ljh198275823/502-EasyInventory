@@ -22,6 +22,8 @@ namespace LJH.Inventory.UI.Forms
             InitializeComponent();
         }
 
+        public string Permits { get; set; }
+
         #region 重写基类方法
         protected override  bool CheckInput()
         {
@@ -36,6 +38,7 @@ namespace LJH.Inventory.UI.Forms
         protected override void InitControls()
         {
             functionTree1.Init();
+            if (!string.IsNullOrEmpty(Permits)) this.functionTree1.SelectedRights = Permits;
             if (IsAdding)
             {
                 this.Text = "增加角色";

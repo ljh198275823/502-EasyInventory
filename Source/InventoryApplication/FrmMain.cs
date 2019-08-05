@@ -191,6 +191,7 @@ namespace InventoryApplication
             this.mnu_小件盘点报表.Enabled = cur.Permit(Permission.小件盘点报表, PermissionActions.Read);
             this.mnu_出货成本明细报表.Enabled = cur.Permit(Permission.出货成本明细报表, PermissionActions.Read);
             this.mnu_单据作废记录报表.Enabled = cur.Permit(Permission.单据作废记录报表, PermissionActions.Read);
+            this.mnu小件进销报表.Enabled = cur.Permit(Permission.小件进销报表, PermissionActions.Read);
         }
         #endregion
 
@@ -556,6 +557,11 @@ namespace InventoryApplication
         private void mnu_单据作废记录报表_Click(object sender, EventArgs e)
         {
             ShowSingleForm<LJH.Inventory.UI.Forms.Financial.Report.Frm作废单据报表>(null);
+        }
+
+        private void mnu小件进销报表_Click(object sender, EventArgs e)
+        {
+            ShowSingleForm<Frm小件进销报表>(null);
         }
     }
 }
