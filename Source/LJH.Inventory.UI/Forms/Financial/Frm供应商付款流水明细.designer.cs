@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,6 +39,10 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txt手续费 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txt手续费类别 = new System.Windows.Forms.TextBox();
+            this.lnk手续费类别 = new System.Windows.Forms.LinkLabel();
             this.lbl大写 = new System.Windows.Forms.Label();
             this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -86,10 +90,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txt手续费 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txt手续费类别 = new System.Windows.Forms.TextBox();
-            this.lnk手续费类别 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -143,7 +143,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(55, 241);
+            this.label5.Location = new System.Drawing.Point(55, 210);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 36;
@@ -183,7 +183,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(90, 238);
+            this.txtMemo.Location = new System.Drawing.Point(90, 207);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(436, 21);
             this.txtMemo.TabIndex = 8;
@@ -236,6 +236,55 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(301, 243);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 130;
+            this.label6.Text = "手续费金额";
+            // 
+            // txt手续费
+            // 
+            this.txt手续费.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt手续费.Location = new System.Drawing.Point(372, 239);
+            this.txt手续费.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txt手续费.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txt手续费.Name = "txt手续费";
+            this.txt手续费.PointCount = 2;
+            this.txt手续费.Size = new System.Drawing.Size(154, 21);
+            this.txt手续费.TabIndex = 129;
+            this.txt手续费.Text = "0.00";
+            // 
+            // txt手续费类别
+            // 
+            this.txt手续费类别.Location = new System.Drawing.Point(90, 239);
+            this.txt手续费类别.Name = "txt手续费类别";
+            this.txt手续费类别.ReadOnly = true;
+            this.txt手续费类别.Size = new System.Drawing.Size(164, 21);
+            this.txt手续费类别.TabIndex = 128;
+            this.txt手续费类别.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
+            // 
+            // lnk手续费类别
+            // 
+            this.lnk手续费类别.AutoSize = true;
+            this.lnk手续费类别.Location = new System.Drawing.Point(19, 243);
+            this.lnk手续费类别.Name = "lnk手续费类别";
+            this.lnk手续费类别.Size = new System.Drawing.Size(65, 12);
+            this.lnk手续费类别.TabIndex = 127;
+            this.lnk手续费类别.TabStop = true;
+            this.lnk手续费类别.Text = "手续费类别";
+            this.lnk手续费类别.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
             // 
             // lbl大写
             // 
@@ -369,7 +418,7 @@
             this.tabPage3.Controls.Add(this.ItemsGrid);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(578, 243);
+            this.tabPage3.Size = new System.Drawing.Size(578, 282);
             this.tabPage3.TabIndex = 7;
             this.tabPage3.Text = "核销";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -393,7 +442,7 @@
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.RowTemplate.Height = 23;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ItemsGrid.Size = new System.Drawing.Size(578, 243);
+            this.ItemsGrid.Size = new System.Drawing.Size(578, 282);
             this.ItemsGrid.TabIndex = 119;
             // 
             // colSheetID
@@ -414,8 +463,8 @@
             // 
             // colAssign
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            this.colAssign.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "C2";
+            this.colAssign.DefaultCellStyle = dataGridViewCellStyle1;
             this.colAssign.HeaderText = "抵消金额";
             this.colAssign.Name = "colAssign";
             // 
@@ -445,7 +494,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(578, 243);
+            this.tabPage5.Size = new System.Drawing.Size(578, 282);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -469,7 +518,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(578, 243);
+            this.gridAttachment.Size = new System.Drawing.Size(578, 282);
             this.gridAttachment.TabIndex = 102;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -543,7 +592,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(578, 243);
+            this.tabPage2.Size = new System.Drawing.Size(578, 282);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -566,7 +615,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(578, 243);
+            this.dataGridView1.Size = new System.Drawing.Size(578, 282);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -683,55 +732,6 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(301, 210);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
-            this.label6.TabIndex = 130;
-            this.label6.Text = "手续费金额";
-            // 
-            // txt手续费
-            // 
-            this.txt手续费.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txt手续费.Location = new System.Drawing.Point(372, 206);
-            this.txt手续费.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txt手续费.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txt手续费.Name = "txt手续费";
-            this.txt手续费.PointCount = 2;
-            this.txt手续费.Size = new System.Drawing.Size(154, 21);
-            this.txt手续费.TabIndex = 129;
-            this.txt手续费.Text = "0.00";
-            // 
-            // txt手续费类别
-            // 
-            this.txt手续费类别.Location = new System.Drawing.Point(90, 206);
-            this.txt手续费类别.Name = "txt手续费类别";
-            this.txt手续费类别.ReadOnly = true;
-            this.txt手续费类别.Size = new System.Drawing.Size(164, 21);
-            this.txt手续费类别.TabIndex = 128;
-            this.txt手续费类别.DoubleClick += new System.EventHandler(this.txtCategory_DoubleClick);
-            // 
-            // lnk手续费类别
-            // 
-            this.lnk手续费类别.AutoSize = true;
-            this.lnk手续费类别.Location = new System.Drawing.Point(19, 210);
-            this.lnk手续费类别.Name = "lnk手续费类别";
-            this.lnk手续费类别.Size = new System.Drawing.Size(65, 12);
-            this.lnk手续费类别.TabIndex = 127;
-            this.lnk手续费类别.TabStop = true;
-            this.lnk手续费类别.Text = "手续费类别";
-            this.lnk手续费类别.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCategory_LinkClicked);
             // 
             // Frm供应商付款流水明细
             // 

@@ -537,5 +537,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             }
         }
         #endregion
+
+        private void mnu小件进销报表_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
+                var frm = new Report.Frm小件进销报表();
+                frm.Product = pi.Product;
+                DialogResult ret = frm.ShowDialog();
+            }
+        }
     }
 }

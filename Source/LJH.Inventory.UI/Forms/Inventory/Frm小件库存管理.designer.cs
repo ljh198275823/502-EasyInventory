@@ -66,16 +66,12 @@
             this.cMnu_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Import = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
-            this.cmbSupplier = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtLength = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.lblOriginalTotal = new System.Windows.Forms.Label();
             this.lblTotalWeight = new System.Windows.Forms.Label();
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
-            this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.pnlStates = new System.Windows.Forms.Panel();
             this.chk作废 = new System.Windows.Forms.CheckBox();
@@ -90,13 +86,10 @@
             this.chk开吨 = new System.Windows.Forms.CheckBox();
             this.chk开平 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.chkStackIn = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -134,6 +127,14 @@
             this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnu小件进销报表 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbBrand = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
+            this.cmbSupplier = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
+            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
+            this.categoryComboBox1 = new LJH.Inventory.UI.Controls.CategoryComboBox(this.components);
+            this.wareHouseComboBox1 = new LJH.Inventory.UI.Controls.WareHouseComboBox(this.components);
+            this.cmbSpecification = new LJH.Inventory.UI.Controls.SpecificationComboBox(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.pnlStates.SuspendLayout();
@@ -156,12 +157,13 @@
             this.折包ToolStripMenuItem,
             this.mnu_更换仓库,
             this.mnu_Nullify,
+            this.mnu小件进销报表,
             this.toolStripSeparator3,
             this.cMnu_SelectColumns,
             this.cMnu_Export,
             this.mnu_Import});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 330);
             // 
             // cMnu_Fresh
             // 
@@ -298,26 +300,6 @@
             this.panel5.Size = new System.Drawing.Size(1341, 93);
             this.panel5.TabIndex = 115;
             // 
-            // cmbBrand
-            // 
-            this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBrand.FormattingEnabled = true;
-            this.cmbBrand.Location = new System.Drawing.Point(202, 50);
-            this.cmbBrand.Name = "cmbBrand";
-            this.cmbBrand.Size = new System.Drawing.Size(108, 20);
-            this.cmbBrand.TabIndex = 100;
-            this.cmbBrand.TextChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
-            // cmbSupplier
-            // 
-            this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSupplier.FormattingEnabled = true;
-            this.cmbSupplier.Location = new System.Drawing.Point(54, 50);
-            this.cmbSupplier.Name = "cmbSupplier";
-            this.cmbSupplier.Size = new System.Drawing.Size(106, 20);
-            this.cmbSupplier.TabIndex = 99;
-            this.cmbSupplier.TextChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -399,27 +381,6 @@
             this.lblTotalWeight.Size = new System.Drawing.Size(22, 21);
             this.lblTotalWeight.TabIndex = 93;
             this.lblTotalWeight.Text = "0";
-            // 
-            // ucDateTimeInterval1
-            // 
-            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.Location = new System.Drawing.Point(675, 7);
-            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
-            this.ucDateTimeInterval1.ShowTime = true;
-            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
-            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
-            this.ucDateTimeInterval1.TabIndex = 92;
-            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
-            // 
-            // customerCombobox1
-            // 
-            this.customerCombobox1.FormattingEnabled = true;
-            this.customerCombobox1.Location = new System.Drawing.Point(354, 50);
-            this.customerCombobox1.Name = "customerCombobox1";
-            this.customerCombobox1.Size = new System.Drawing.Size(99, 20);
-            this.customerCombobox1.TabIndex = 91;
-            this.customerCombobox1.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label8
             // 
@@ -586,16 +547,6 @@
             this.label6.TabIndex = 86;
             this.label6.Text = "物料状态";
             // 
-            // categoryComboBox1
-            // 
-            this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.categoryComboBox1.FormattingEnabled = true;
-            this.categoryComboBox1.Location = new System.Drawing.Point(202, 14);
-            this.categoryComboBox1.Name = "categoryComboBox1";
-            this.categoryComboBox1.Size = new System.Drawing.Size(108, 20);
-            this.categoryComboBox1.TabIndex = 85;
-            this.categoryComboBox1.TextChanged += new System.EventHandler(this.FreshData_Clicked);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -604,16 +555,6 @@
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 84;
             this.label1.Text = "类别";
-            // 
-            // wareHouseComboBox1
-            // 
-            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.wareHouseComboBox1.FormattingEnabled = true;
-            this.wareHouseComboBox1.Location = new System.Drawing.Point(54, 14);
-            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
-            this.wareHouseComboBox1.Size = new System.Drawing.Size(106, 20);
-            this.wareHouseComboBox1.TabIndex = 83;
-            this.wareHouseComboBox1.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label4
             // 
@@ -641,15 +582,6 @@
             this.label9.Size = new System.Drawing.Size(29, 12);
             this.label9.TabIndex = 77;
             this.label9.Text = "厂家";
-            // 
-            // cmbSpecification
-            // 
-            this.cmbSpecification.FormattingEnabled = true;
-            this.cmbSpecification.Location = new System.Drawing.Point(354, 14);
-            this.cmbSpecification.Name = "cmbSpecification";
-            this.cmbSpecification.Size = new System.Drawing.Size(99, 20);
-            this.cmbSpecification.TabIndex = 76;
-            this.cmbSpecification.TextChanged += new System.EventHandler(this.FreshData_Clicked);
             // 
             // label5
             // 
@@ -740,7 +672,7 @@
             this.colWareHouse.HeaderText = "仓库";
             this.colWareHouse.Name = "colWareHouse";
             this.colWareHouse.ReadOnly = true;
-            this.colWareHouse.Width = 54;
+            this.colWareHouse.Width = 51;
             // 
             // colCategory
             // 
@@ -818,7 +750,7 @@
             this.colCustomer.HeaderText = "客户";
             this.colCustomer.Name = "colCustomer";
             this.colCustomer.ReadOnly = true;
-            this.colCustomer.Width = 54;
+            this.colCustomer.Width = 51;
             // 
             // colManufacture
             // 
@@ -826,7 +758,7 @@
             this.colManufacture.HeaderText = "厂家";
             this.colManufacture.Name = "colManufacture";
             this.colManufacture.ReadOnly = true;
-            this.colManufacture.Width = 54;
+            this.colManufacture.Width = 51;
             // 
             // colSupplier
             // 
@@ -834,7 +766,7 @@
             this.colSupplier.HeaderText = "供应商";
             this.colSupplier.Name = "colSupplier";
             this.colSupplier.ReadOnly = true;
-            this.colSupplier.Width = 66;
+            this.colSupplier.Width = 61;
             // 
             // colSourceRoll
             // 
@@ -1001,6 +933,83 @@
             this.colMemo.Name = "colMemo";
             this.colMemo.Width = 51;
             // 
+            // mnu小件进销报表
+            // 
+            this.mnu小件进销报表.Name = "mnu小件进销报表";
+            this.mnu小件进销报表.Size = new System.Drawing.Size(172, 22);
+            this.mnu小件进销报表.Text = "小件进销报表...";
+            this.mnu小件进销报表.Click += new System.EventHandler(this.mnu小件进销报表_Click);
+            // 
+            // cmbBrand
+            // 
+            this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBrand.FormattingEnabled = true;
+            this.cmbBrand.Location = new System.Drawing.Point(202, 50);
+            this.cmbBrand.Name = "cmbBrand";
+            this.cmbBrand.Size = new System.Drawing.Size(108, 20);
+            this.cmbBrand.TabIndex = 100;
+            this.cmbBrand.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // cmbSupplier
+            // 
+            this.cmbSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSupplier.FormattingEnabled = true;
+            this.cmbSupplier.Location = new System.Drawing.Point(54, 50);
+            this.cmbSupplier.Name = "cmbSupplier";
+            this.cmbSupplier.Size = new System.Drawing.Size(106, 20);
+            this.cmbSupplier.TabIndex = 99;
+            this.cmbSupplier.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // ucDateTimeInterval1
+            // 
+            this.ucDateTimeInterval1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDateTimeInterval1.EndDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.Location = new System.Drawing.Point(675, 7);
+            this.ucDateTimeInterval1.Name = "ucDateTimeInterval1";
+            this.ucDateTimeInterval1.ShowTime = true;
+            this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
+            this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2015, 11, 19, 10, 3, 12, 722);
+            this.ucDateTimeInterval1.TabIndex = 92;
+            this.ucDateTimeInterval1.ValueChanged += new System.EventHandler(this.ucDateTimeInterval1_ValueChanged);
+            // 
+            // customerCombobox1
+            // 
+            this.customerCombobox1.FormattingEnabled = true;
+            this.customerCombobox1.Location = new System.Drawing.Point(354, 50);
+            this.customerCombobox1.Name = "customerCombobox1";
+            this.customerCombobox1.Size = new System.Drawing.Size(99, 20);
+            this.customerCombobox1.TabIndex = 91;
+            this.customerCombobox1.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // categoryComboBox1
+            // 
+            this.categoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryComboBox1.FormattingEnabled = true;
+            this.categoryComboBox1.Location = new System.Drawing.Point(202, 14);
+            this.categoryComboBox1.Name = "categoryComboBox1";
+            this.categoryComboBox1.Size = new System.Drawing.Size(108, 20);
+            this.categoryComboBox1.TabIndex = 85;
+            this.categoryComboBox1.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // wareHouseComboBox1
+            // 
+            this.wareHouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.wareHouseComboBox1.FormattingEnabled = true;
+            this.wareHouseComboBox1.Location = new System.Drawing.Point(54, 14);
+            this.wareHouseComboBox1.Name = "wareHouseComboBox1";
+            this.wareHouseComboBox1.Size = new System.Drawing.Size(106, 20);
+            this.wareHouseComboBox1.TabIndex = 83;
+            this.wareHouseComboBox1.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
+            // cmbSpecification
+            // 
+            this.cmbSpecification.FormattingEnabled = true;
+            this.cmbSpecification.Location = new System.Drawing.Point(354, 14);
+            this.cmbSpecification.Name = "cmbSpecification";
+            this.cmbSpecification.Size = new System.Drawing.Size(99, 20);
+            this.cmbSpecification.TabIndex = 76;
+            this.cmbSpecification.TextChanged += new System.EventHandler(this.FreshData_Clicked);
+            // 
             // Frm小件库存管理
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1113,6 +1122,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.ToolStripMenuItem mnu小件进销报表;
 
     }
 }

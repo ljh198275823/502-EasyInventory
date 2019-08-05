@@ -28,6 +28,10 @@ namespace LJH.Inventory.BusinessModel
         /// </summary>
         public decimal? SourceRollWeight { get; set; }
         /// <summary>
+        /// 获取或设置加工产品ID
+        /// </summary>
+        public string ProductID { get; set; }
+        /// <summary>
         /// 获取或设置加工的原材料卷初始长度
         /// </summary>
         public decimal? OriginalLength { get; set; }

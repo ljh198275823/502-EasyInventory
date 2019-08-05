@@ -75,11 +75,6 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("对方账号不能为空");
                 return false;
             }
-            if (txt手续费类别.Tag != null && txt手续费.DecimalValue <= 0)
-            {
-                MessageBox.Show("请输入手续费");
-                return false;
-            }
             if (!rd计为管理费用.Checked && !rd增加客户应收.Checked)
             {
                 MessageBox.Show("请指定退款是退回到应收款还是计为管理费用");
@@ -88,6 +83,16 @@ namespace LJH.Inventory.UI.Forms.Financial
             if (rd计为管理费用.Checked && txt管理费用类别.Tag == null)
             {
                 MessageBox.Show("计为管理费用时要指定管理费用类别");
+                return false;
+            }
+            if (txt手续费类别.Tag != null && txt手续费.DecimalValue <= 0)
+            {
+                MessageBox.Show("请输入手续费");
+                return false;
+            }
+            if (txt手续费类别.Tag == null && txt手续费.DecimalValue > 0)
+            {
+                MessageBox.Show("请输入手续费类别");
                 return false;
             }
             return true;

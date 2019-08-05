@@ -23,17 +23,24 @@ namespace LJH.Inventory.DAL.LinqProvider
         protected override SteelRollSliceRecord GetingItemByID(Guid id, System.Data.Linq.DataContext dc)
         {
             var ret = (from r in dc.GetTable<SteelRollSliceRecord>()
+                       join p0 in dc.GetTable<ProductInventoryItem>() on r.ID equals p0.InventoryItem
                        join p in dc.GetTable<ProductInventoryItem>() on r.SliceSource equals p.ID
-                       select new { A = r, B = p.OriginalWeight }).SingleOrDefault(it => it.A.ID == id);
-            if (ret != null) ret.A.SourceRollWeight = ret.B;
+                       select new { A = r, B = p.OriginalWeight, C = p0.ProductID }).SingleOrDefault(it => it.A.ID == id);
+            if (ret != null)
+            {
+                ret.A.SourceRollWeight = ret.B;
+                ret.A.ProductID = ret.C;
+            }
             return ret.A;
         }
 
         protected override List<SteelRollSliceRecord> GetingItems(System.Data.Linq.DataContext dc, SearchCondition search)
         {
             var ret = from r in dc.GetTable<SteelRollSliceRecord>()
+                      join p0 in dc.GetTable<ProductInventoryItem>() on r.ID equals p0.InventoryItem
                       join p in dc.GetTable<ProductInventoryItem>() on r.SliceSource equals p.ID
-                      select new { A = r, B = p.OriginalWeight };
+                      where p0.SourceID==null
+                      select new { A = r, B = p.OriginalWeight, C = p0.ProductID };
             if (search is SliceRecordSearchCondition)
             {
                 SliceRecordSearchCondition con = search as SliceRecordSearchCondition;
@@ -44,11 +51,12 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.SliceType)) ret = ret.Where(item => item.A.SliceType == con.SliceType);
                 if (!string.IsNullOrEmpty(con.Customer)) ret = ret.Where(it => it.A.Customer == con.Customer);
                 if (!string.IsNullOrEmpty(con.Warehouse)) ret = ret.Where(it => it.A.Warehouse == con.Warehouse);
+                if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(it => it.C == con.ProductID);
             }
             var items = ret.ToList();
             if (items != null && items.Count > 0)
             {
-                items.ForEach(it => it.A.SourceRollWeight = it.B);
+                items.ForEach(it => { it.A.SourceRollWeight = it.B; it.A.ProductID = it.C; });
                 return items.Select(it => it.A).ToList();
             }
             return new List<SteelRollSliceRecord>();

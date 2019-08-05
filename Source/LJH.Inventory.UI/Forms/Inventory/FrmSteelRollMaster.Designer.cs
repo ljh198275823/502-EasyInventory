@@ -924,7 +924,7 @@
             this.mnu_Import,
             this.更多操作ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 358);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 380);
             // 
             // cMnu_Fresh
             // 

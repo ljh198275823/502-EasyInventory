@@ -16,6 +16,8 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
         /// </summary>
         public DateTimeRange SliceDate { get; set; }
 
+        public string ProductID { get; set; }
+
         public string Category { get; set; }
 
         public string Specification { get; set; }

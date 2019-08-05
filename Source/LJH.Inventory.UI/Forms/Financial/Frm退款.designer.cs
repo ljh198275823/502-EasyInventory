@@ -37,6 +37,15 @@
             this.txtMemo = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt手续费 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
+            this.txt手续费类别 = new System.Windows.Forms.TextBox();
+            this.lnk手续费类别 = new System.Windows.Forms.LinkLabel();
+            this.txt管理费用类别 = new System.Windows.Forms.TextBox();
+            this.lnk管理费用类别 = new System.Windows.Forms.LinkLabel();
+            this.rd计为管理费用 = new System.Windows.Forms.RadioButton();
+            this.rd增加客户应收 = new System.Windows.Forms.RadioButton();
+            this.chk公账 = new System.Windows.Forms.CheckBox();
             this.lbl大写 = new System.Windows.Forms.Label();
             this.dtPaidDate = new LJH.Inventory.UI.Controls.NullableDateTimePicker(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -73,15 +82,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblSheetState = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txt手续费 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.txt手续费类别 = new System.Windows.Forms.TextBox();
-            this.lnk手续费类别 = new System.Windows.Forms.LinkLabel();
-            this.txt管理费用类别 = new System.Windows.Forms.TextBox();
-            this.lnk管理费用类别 = new System.Windows.Forms.LinkLabel();
-            this.rd计为管理费用 = new System.Windows.Forms.RadioButton();
-            this.rd增加客户应收 = new System.Windows.Forms.RadioButton();
-            this.chk公账 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -123,7 +123,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(60, 271);
+            this.label5.Location = new System.Drawing.Point(60, 235);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 36;
@@ -160,7 +160,7 @@
             // txtMemo
             // 
             this.txtMemo.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtMemo.Location = new System.Drawing.Point(97, 268);
+            this.txtMemo.Location = new System.Drawing.Point(97, 232);
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(414, 21);
             this.txtMemo.TabIndex = 8;
@@ -214,6 +214,107 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本资料";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(310, 269);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 139;
+            this.label3.Text = "手续费金额";
+            // 
+            // txt手续费
+            // 
+            this.txt手续费.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txt手续费.Location = new System.Drawing.Point(381, 265);
+            this.txt手续费.MaxValue = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            0});
+            this.txt手续费.MinValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txt手续费.Name = "txt手续费";
+            this.txt手续费.PointCount = 2;
+            this.txt手续费.Size = new System.Drawing.Size(130, 21);
+            this.txt手续费.TabIndex = 138;
+            this.txt手续费.Text = "0.00";
+            // 
+            // txt手续费类别
+            // 
+            this.txt手续费类别.Location = new System.Drawing.Point(97, 265);
+            this.txt手续费类别.Name = "txt手续费类别";
+            this.txt手续费类别.ReadOnly = true;
+            this.txt手续费类别.Size = new System.Drawing.Size(164, 21);
+            this.txt手续费类别.TabIndex = 137;
+            // 
+            // lnk手续费类别
+            // 
+            this.lnk手续费类别.AutoSize = true;
+            this.lnk手续费类别.Location = new System.Drawing.Point(25, 269);
+            this.lnk手续费类别.Name = "lnk手续费类别";
+            this.lnk手续费类别.Size = new System.Drawing.Size(65, 12);
+            this.lnk手续费类别.TabIndex = 136;
+            this.lnk手续费类别.TabStop = true;
+            this.lnk手续费类别.Text = "手续费类别";
+            // 
+            // txt管理费用类别
+            // 
+            this.txt管理费用类别.Enabled = false;
+            this.txt管理费用类别.Location = new System.Drawing.Point(276, 201);
+            this.txt管理费用类别.Name = "txt管理费用类别";
+            this.txt管理费用类别.ReadOnly = true;
+            this.txt管理费用类别.Size = new System.Drawing.Size(159, 21);
+            this.txt管理费用类别.TabIndex = 135;
+            // 
+            // lnk管理费用类别
+            // 
+            this.lnk管理费用类别.AutoSize = true;
+            this.lnk管理费用类别.Enabled = false;
+            this.lnk管理费用类别.Location = new System.Drawing.Point(217, 205);
+            this.lnk管理费用类别.Name = "lnk管理费用类别";
+            this.lnk管理费用类别.Size = new System.Drawing.Size(53, 12);
+            this.lnk管理费用类别.TabIndex = 134;
+            this.lnk管理费用类别.TabStop = true;
+            this.lnk管理费用类别.Text = "费用类别";
+            // 
+            // rd计为管理费用
+            // 
+            this.rd计为管理费用.AutoSize = true;
+            this.rd计为管理费用.Location = new System.Drawing.Point(102, 203);
+            this.rd计为管理费用.Name = "rd计为管理费用";
+            this.rd计为管理费用.Size = new System.Drawing.Size(95, 16);
+            this.rd计为管理费用.TabIndex = 133;
+            this.rd计为管理费用.TabStop = true;
+            this.rd计为管理费用.Text = "计为管理费用";
+            this.rd计为管理费用.UseVisualStyleBackColor = true;
+            // 
+            // rd增加客户应收
+            // 
+            this.rd增加客户应收.AutoSize = true;
+            this.rd增加客户应收.Location = new System.Drawing.Point(102, 172);
+            this.rd增加客户应收.Name = "rd增加客户应收";
+            this.rd增加客户应收.Size = new System.Drawing.Size(107, 16);
+            this.rd增加客户应收.TabIndex = 132;
+            this.rd增加客户应收.TabStop = true;
+            this.rd增加客户应收.Text = "退回到应收账款";
+            this.rd增加客户应收.UseVisualStyleBackColor = true;
+            // 
+            // chk公账
+            // 
+            this.chk公账.AutoSize = true;
+            this.chk公账.Enabled = false;
+            this.chk公账.ForeColor = System.Drawing.Color.Red;
+            this.chk公账.Location = new System.Drawing.Point(218, 172);
+            this.chk公账.Name = "chk公账";
+            this.chk公账.Size = new System.Drawing.Size(48, 16);
+            this.chk公账.TabIndex = 131;
+            this.chk公账.Text = "公账";
+            this.chk公账.UseVisualStyleBackColor = true;
             // 
             // lbl大写
             // 
@@ -322,7 +423,7 @@
             this.tabPage5.Controls.Add(this.gridAttachment);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(578, 214);
+            this.tabPage5.Size = new System.Drawing.Size(578, 298);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "相关文档";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -346,7 +447,7 @@
             this.gridAttachment.RowHeadersVisible = false;
             this.gridAttachment.RowTemplate.Height = 23;
             this.gridAttachment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridAttachment.Size = new System.Drawing.Size(578, 214);
+            this.gridAttachment.Size = new System.Drawing.Size(578, 298);
             this.gridAttachment.TabIndex = 102;
             this.gridAttachment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridAttachment_CellDoubleClick);
             // 
@@ -420,7 +521,7 @@
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(578, 214);
+            this.tabPage2.Size = new System.Drawing.Size(578, 298);
             this.tabPage2.TabIndex = 6;
             this.tabPage2.Text = "操作记录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -443,7 +544,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(578, 214);
+            this.dataGridView1.Size = new System.Drawing.Size(578, 298);
             this.dataGridView1.TabIndex = 98;
             // 
             // colOperateDate
@@ -549,107 +650,6 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(310, 178);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
-            this.label3.TabIndex = 139;
-            this.label3.Text = "手续费金额";
-            // 
-            // txt手续费
-            // 
-            this.txt手续费.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txt手续费.Location = new System.Drawing.Point(381, 174);
-            this.txt手续费.MaxValue = new decimal(new int[] {
-            -1,
-            -1,
-            -1,
-            0});
-            this.txt手续费.MinValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txt手续费.Name = "txt手续费";
-            this.txt手续费.PointCount = 2;
-            this.txt手续费.Size = new System.Drawing.Size(130, 21);
-            this.txt手续费.TabIndex = 138;
-            this.txt手续费.Text = "0.00";
-            // 
-            // txt手续费类别
-            // 
-            this.txt手续费类别.Location = new System.Drawing.Point(97, 174);
-            this.txt手续费类别.Name = "txt手续费类别";
-            this.txt手续费类别.ReadOnly = true;
-            this.txt手续费类别.Size = new System.Drawing.Size(164, 21);
-            this.txt手续费类别.TabIndex = 137;
-            // 
-            // lnk手续费类别
-            // 
-            this.lnk手续费类别.AutoSize = true;
-            this.lnk手续费类别.Location = new System.Drawing.Point(25, 178);
-            this.lnk手续费类别.Name = "lnk手续费类别";
-            this.lnk手续费类别.Size = new System.Drawing.Size(65, 12);
-            this.lnk手续费类别.TabIndex = 136;
-            this.lnk手续费类别.TabStop = true;
-            this.lnk手续费类别.Text = "手续费类别";
-            // 
-            // txt管理费用类别
-            // 
-            this.txt管理费用类别.Enabled = false;
-            this.txt管理费用类别.Location = new System.Drawing.Point(276, 237);
-            this.txt管理费用类别.Name = "txt管理费用类别";
-            this.txt管理费用类别.ReadOnly = true;
-            this.txt管理费用类别.Size = new System.Drawing.Size(159, 21);
-            this.txt管理费用类别.TabIndex = 135;
-            // 
-            // lnk管理费用类别
-            // 
-            this.lnk管理费用类别.AutoSize = true;
-            this.lnk管理费用类别.Enabled = false;
-            this.lnk管理费用类别.Location = new System.Drawing.Point(217, 241);
-            this.lnk管理费用类别.Name = "lnk管理费用类别";
-            this.lnk管理费用类别.Size = new System.Drawing.Size(53, 12);
-            this.lnk管理费用类别.TabIndex = 134;
-            this.lnk管理费用类别.TabStop = true;
-            this.lnk管理费用类别.Text = "费用类别";
-            // 
-            // rd计为管理费用
-            // 
-            this.rd计为管理费用.AutoSize = true;
-            this.rd计为管理费用.Location = new System.Drawing.Point(102, 239);
-            this.rd计为管理费用.Name = "rd计为管理费用";
-            this.rd计为管理费用.Size = new System.Drawing.Size(95, 16);
-            this.rd计为管理费用.TabIndex = 133;
-            this.rd计为管理费用.TabStop = true;
-            this.rd计为管理费用.Text = "计为管理费用";
-            this.rd计为管理费用.UseVisualStyleBackColor = true;
-            // 
-            // rd增加客户应收
-            // 
-            this.rd增加客户应收.AutoSize = true;
-            this.rd增加客户应收.Location = new System.Drawing.Point(102, 208);
-            this.rd增加客户应收.Name = "rd增加客户应收";
-            this.rd增加客户应收.Size = new System.Drawing.Size(107, 16);
-            this.rd增加客户应收.TabIndex = 132;
-            this.rd增加客户应收.TabStop = true;
-            this.rd增加客户应收.Text = "退回到应收账款";
-            this.rd增加客户应收.UseVisualStyleBackColor = true;
-            // 
-            // chk公账
-            // 
-            this.chk公账.AutoSize = true;
-            this.chk公账.Enabled = false;
-            this.chk公账.ForeColor = System.Drawing.Color.Red;
-            this.chk公账.Location = new System.Drawing.Point(218, 208);
-            this.chk公账.Name = "chk公账";
-            this.chk公账.Size = new System.Drawing.Size(48, 16);
-            this.chk公账.TabIndex = 131;
-            this.chk公账.Text = "公账";
-            this.chk公账.UseVisualStyleBackColor = true;
             // 
             // Frm退款
             // 

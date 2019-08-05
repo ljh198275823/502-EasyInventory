@@ -144,6 +144,11 @@ namespace LJH.Inventory.UI.Forms.Financial
                 MessageBox.Show("请输入手续费");
                 return false;
             }
+            if (txt手续费类别.Tag == null && txt手续费.DecimalValue > 0)
+            {
+                MessageBox.Show("请输入手续费类别");
+                return false;
+            }
             return true;
         }
 
