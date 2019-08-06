@@ -99,10 +99,6 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             if (chk收.Checked) con.PaymentTypes.Add(CustomerPaymentType.客户增值税发票);
             if (chk支.Checked) con.PaymentTypes.Add(CustomerPaymentType.供应商增值税发票);
             var items = (new CustomerPaymentBLL(AppSettings.Current.ConnStr)).GetItems(con).QueryObjects;
-            if (!string.IsNullOrEmpty(txtBillID.Text.Trim()) && items != null && items.Count > 0)
-            {
-                items = items.Where(it => it.ID.Contains(txtBillID.Text.Trim())).ToList();
-            }
             return (from item in items orderby item.SheetDate ascending, item.ID ascending select (object)item).ToList();
         }
 
@@ -113,6 +109,12 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             ucDateTimeInterval1.SelectThisMonth();
             btnSaveAs.Enabled = Operator.Current.Permit(Permission.TaxBillReport, PermissionActions.导出);
             base.Init();
+        }
+
+        protected override void ShowItemsOnGrid(List<object> items)
+        {
+            base.ShowItemsOnGrid(items);
+            if (!string.IsNullOrEmpty(txtKeyword.Text)) Filter(txtKeyword.Text);
         }
         #endregion
 
@@ -179,6 +181,47 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
                     frm.ShowDialog();
                 }
             }
+        }
+
+        private void Filter(string keyword)
+        {
+            int count = 0;
+            DataGridView grid = this.GridView;
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                bool visible = false;
+                string[] temp = !string.IsNullOrEmpty(keyword) ? keyword.Split(';') : null;
+                if (temp != null) temp = temp.Where(str => !string.IsNullOrEmpty(str.Trim())).ToArray(); //将数组中的空字符剔除
+                if (temp == null || temp.Length == 0)
+                {
+                    visible = true;
+                    count++;
+                }
+                else
+                {
+                    foreach (string kw in temp)
+                    {
+                        foreach (DataGridViewColumn col in grid.Columns)
+                        {
+                            if (col.Visible && row.Cells[col.Index].Value != null && row.Cells[col.Index].Value.ToString().Contains(kw))
+                            {
+                                visible = true;
+                                count++;
+                                break;
+                            }
+                        }
+                        if (visible) break; //如果为真，则跳出循环，不用再判断其它关键字,直接进入下一行
+                    }
+                }
+                row.Visible = visible;
+            }
+            ShowRowBackColor();
+            FreshStatusBar();
+        }
+
+        private void txtKeyword_TextChanged(object sender, EventArgs e)
+        {
+            Filter(txtKeyword.Text);
         }
         #endregion
     }

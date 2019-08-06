@@ -43,7 +43,7 @@
             this.lnkSupplier = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtBillID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
+            this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.txtCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colSheetDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -116,7 +116,7 @@
             this.groupBox3.Controls.Add(this.lnkSupplier);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.txtBillID);
+            this.groupBox3.Controls.Add(this.txtKeyword);
             this.groupBox3.Controls.Add(this.txtCustomer);
             this.groupBox3.Controls.Add(this.lnkCustomer);
             this.groupBox3.Location = new System.Drawing.Point(242, 8);
@@ -131,7 +131,7 @@
             this.chk支.AutoSize = true;
             this.chk支.Checked = true;
             this.chk支.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk支.Location = new System.Drawing.Point(333, 60);
+            this.chk支.Location = new System.Drawing.Point(333, 27);
             this.chk支.Name = "chk支";
             this.chk支.Size = new System.Drawing.Size(48, 16);
             this.chk支.TabIndex = 81;
@@ -143,7 +143,7 @@
             this.chk收.AutoSize = true;
             this.chk收.Checked = true;
             this.chk收.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk收.Location = new System.Drawing.Point(282, 60);
+            this.chk收.Location = new System.Drawing.Point(282, 27);
             this.chk收.Name = "chk收";
             this.chk收.Size = new System.Drawing.Size(48, 16);
             this.chk收.TabIndex = 80;
@@ -174,7 +174,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(246, 62);
+            this.label2.Location = new System.Drawing.Point(246, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 77;
@@ -183,19 +183,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(234, 29);
+            this.label1.Location = new System.Drawing.Point(234, 62);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 39;
-            this.label1.Text = "发票号";
+            this.label1.Text = "关键字";
             // 
-            // txtBillID
+            // txtKeyword
             // 
-            this.txtBillID.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.txtBillID.Location = new System.Drawing.Point(282, 25);
-            this.txtBillID.Name = "txtBillID";
-            this.txtBillID.Size = new System.Drawing.Size(153, 21);
-            this.txtBillID.TabIndex = 38;
+            this.txtKeyword.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.txtKeyword.Location = new System.Drawing.Point(282, 58);
+            this.txtKeyword.Name = "txtKeyword";
+            this.txtKeyword.Size = new System.Drawing.Size(153, 21);
+            this.txtKeyword.TabIndex = 38;
+            this.txtKeyword.TextChanged += new System.EventHandler(this.txtKeyword_TextChanged);
             // 
             // txtCustomer
             // 
@@ -367,7 +368,7 @@
         private GeneralLibrary.WinformControl.DBCTextBox txtCustomer;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
-        private GeneralLibrary.WinformControl.DBCTextBox txtBillID;
+        private GeneralLibrary.WinformControl.DBCTextBox txtKeyword;
         private System.Windows.Forms.CheckBox chk支;
         private System.Windows.Forms.CheckBox chk收;
         private GeneralLibrary.WinformControl.DBCTextBox txtSupplier;

@@ -254,6 +254,11 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 MessageBox.Show("送货单没有填写送货项");
                 return false;
             }
+            if (string.IsNullOrEmpty(txt业务员.Text))
+            {
+                MessageBox.Show("业务员不能为空");
+                return false;
+            }
             foreach (DataGridViewRow row in ItemsGrid.Rows)
             {
                 StackOutItem item = row.Tag as StackOutItem;
