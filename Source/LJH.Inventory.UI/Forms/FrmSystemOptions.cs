@@ -59,18 +59,6 @@ namespace LJH.Inventory.UI.Forms
             #endregion
 
             #region 送货单
-            if (us.ForbidWhenOverCreditLimit)
-            {
-                rdForbid.Checked = true;
-            }
-            else if (us.ReminderWhenOverCreditLimit)
-            {
-                rdReminder.Checked = true;
-            }
-            else
-            {
-                rdNone.Checked = true;
-            }
             chkDoShipAfterPrint.Checked = us.DoShipAfterPrint;
             cmbStackoutSheetModel.Text = us.StackoutSheetModel;
             cmbStackoutSheetModel_WithTax.Text = us.StackoutSheetModel_WithTax;
@@ -148,8 +136,6 @@ namespace LJH.Inventory.UI.Forms
             #endregion
 
             #region 送货单选项
-            us.ReminderWhenOverCreditLimit = rdReminder.Checked;
-            us.ForbidWhenOverCreditLimit = rdForbid.Checked;
             us.DoShipAfterPrint = chkDoShipAfterPrint.Checked;
             us.StackoutSheetModel = cmbStackoutSheetModel.Text.Trim();
             us.StackoutSheetModel_WithTax = cmbStackoutSheetModel_WithTax.Text.Trim();

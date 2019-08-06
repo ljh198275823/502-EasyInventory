@@ -477,20 +477,18 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
                     if (sheet.State != SheetState.已发货 && UserSettings.Current != null && UserSettings.Current.DoShipAfterPrint)
                     {
-                        if (CheckCredit())
+                        if (!CheckCredit()) return; //如果信用额度检查不通过，不能打印
+                        var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.出库, Operator.Current.Name, Operator.Current.ID);
+                        if (ret.Result != ResultCode.Successful)
                         {
-                            var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.出库, Operator.Current.Name, Operator.Current.ID);
-                            if (ret.Result != ResultCode.Successful)
-                            {
-                                MessageBox.Show(ret.Message);
-                                return;
-                            }
-                            else
-                            {
-                                new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
-                                ShowButtonState();
-                                this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
-                            }
+                            MessageBox.Show(ret.Message);
+                            return;
+                        }
+                        else
+                        {
+                            new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
+                            ShowButtonState();
+                            this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
                         }
                     }
                     string modal = GetModel();
@@ -567,27 +565,17 @@ namespace LJH.Inventory.UI.Forms.Inventory
             decimal credit = cstate.Credit + (fstate != null ? fstate.NotPaid : 0);
             if (credit > cstate.Customer.CreditLine)
             {
-                if (UserSettings.Current.ForbidWhenOverCreditLimit)
-                {
-                    if (Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.超出信用额度可出货))
-                    {
-                        if (MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，是否继续发货?", "询问", MessageBoxButtons.YesNo) == DialogResult.No)
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，不能再发货。");
-                        return false;
-                    }
-                }
-                else if (UserSettings.Current.ReminderWhenOverCreditLimit)
+                if (Operator.Current.Permit(Permission.DeliverySheet, PermissionActions.超出信用额度可出货))
                 {
                     if (MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，是否继续发货?", "询问", MessageBoxButtons.YesNo) == DialogResult.No)
                     {
                         return false;
                     }
+                }
+                else
+                {
+                    MessageBox.Show("已经超出客户 " + cstate.Customer.Name + " 的信用额度，不能再发货。");
+                    return false;
                 }
             }
             return true;
@@ -595,30 +583,28 @@ namespace LJH.Inventory.UI.Forms.Inventory
 
         private void btnShip_Click(object sender, EventArgs e)
         {
+            if (!CheckCredit()) return; //如果信用额度检查不通过，不能发货
             StackOutSheetBLL bll = new StackOutSheetBLL(AppSettings.Current.ConnStr);
-            if (CheckCredit())
+            StackOutSheet sheet = UpdatingItem as StackOutSheet;
+            if (sheet.State == SheetState.新增)
             {
-                StackOutSheet sheet = UpdatingItem as StackOutSheet;
-                if (sheet.State == SheetState.新增)
+                GetItemFromInput();
+                var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.修改, Operator.Current.Name, Operator.Current.ID);
+                if (ret.Result != ResultCode.Successful)
                 {
-                    GetItemFromInput();
-                    var ret = new StackOutSheetBLL(AppSettings.Current.ConnStr).ProcessSheet(sheet, SheetOperation.修改, Operator.Current.Name, Operator.Current.ID);
-                    if (ret.Result != ResultCode.Successful)
-                    {
-                        MessageBox.Show(ret.Message);
-                        return;
-                    }
-                    else
-                    {
-                        this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
-                    }
+                    MessageBox.Show(ret.Message);
+                    return;
                 }
-                PerformOperation<StackOutSheet>(bll, SheetOperation.出库);
-                if (sheet.State == SheetState.已发货)
+                else
                 {
-                    new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
-                    ShowPaymentState(sheet);
+                    this.OnItemUpdated(new LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs(sheet));
                 }
+            }
+            PerformOperation<StackOutSheet>(bll, SheetOperation.出库);
+            if (sheet.State == SheetState.已发货)
+            {
+                new StackOutSheetBLL(AppSettings.Current.ConnStr).AssignPayment(sheet);
+                ShowPaymentState(sheet);
             }
         }
 
