@@ -251,6 +251,7 @@
             this.txt手续费类别.ReadOnly = true;
             this.txt手续费类别.Size = new System.Drawing.Size(164, 21);
             this.txt手续费类别.TabIndex = 137;
+            this.txt手续费类别.DoubleClick += new System.EventHandler(this.txt手续费类别_DoubleClick);
             // 
             // lnk手续费类别
             // 
@@ -261,6 +262,7 @@
             this.lnk手续费类别.TabIndex = 136;
             this.lnk手续费类别.TabStop = true;
             this.lnk手续费类别.Text = "手续费类别";
+            this.lnk手续费类别.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk手续费类别_LinkClicked);
             // 
             // txt管理费用类别
             // 
@@ -270,6 +272,7 @@
             this.txt管理费用类别.ReadOnly = true;
             this.txt管理费用类别.Size = new System.Drawing.Size(159, 21);
             this.txt管理费用类别.TabIndex = 135;
+            this.txt管理费用类别.DoubleClick += new System.EventHandler(this.txt管理费用类别_DoubleClick);
             // 
             // lnk管理费用类别
             // 
@@ -281,6 +284,7 @@
             this.lnk管理费用类别.TabIndex = 134;
             this.lnk管理费用类别.TabStop = true;
             this.lnk管理费用类别.Text = "费用类别";
+            this.lnk管理费用类别.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk管理费用类别_LinkClicked);
             // 
             // rd计为管理费用
             // 

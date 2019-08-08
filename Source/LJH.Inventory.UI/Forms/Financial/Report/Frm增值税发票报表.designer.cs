@@ -57,6 +57,7 @@
             this.col出票单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col作废原因 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl收入合计 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -334,11 +335,23 @@
             this.colMemo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colMemo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // lbl收入合计
+            // 
+            this.lbl收入合计.AutoSize = true;
+            this.lbl收入合计.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl收入合计.ForeColor = System.Drawing.Color.Blue;
+            this.lbl收入合计.Location = new System.Drawing.Point(879, 42);
+            this.lbl收入合计.Name = "lbl收入合计";
+            this.lbl收入合计.Size = new System.Drawing.Size(83, 20);
+            this.lbl收入合计.TabIndex = 41;
+            this.lbl收入合计.Text = "合计：0";
+            // 
             // Frm增值税发票报表
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 503);
+            this.Controls.Add(this.lbl收入合计);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
@@ -350,6 +363,7 @@
             this.Controls.SetChildIndex(this.btnSaveAs, 0);
             this.Controls.SetChildIndex(this.btnColumn, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
+            this.Controls.SetChildIndex(this.lbl收入合计, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -385,5 +399,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col出票单位;
         private System.Windows.Forms.DataGridViewTextBoxColumn col作废原因;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
+        private System.Windows.Forms.Label lbl收入合计;
     }
 }

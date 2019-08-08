@@ -113,6 +113,6 @@
         protected System.Windows.Forms.Button btnSaveAs;
         protected System.Windows.Forms.Button btnColumn;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        protected System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

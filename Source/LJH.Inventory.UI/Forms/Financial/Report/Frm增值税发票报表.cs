@@ -116,6 +116,23 @@ namespace LJH.Inventory.UI.Forms.Financial.Report
             base.ShowItemsOnGrid(items);
             if (!string.IsNullOrEmpty(txtKeyword.Text)) Filter(txtKeyword.Text);
         }
+
+        protected override void FreshStatusBar()
+        {
+            int count = 0;
+            decimal total = 0;
+            foreach (DataGridViewRow row in this.GridView.Rows)
+            {
+                if (row.Visible)
+                {
+                    count++;
+                    CustomerPayment cp = row.Tag as CustomerPayment;
+                    total += cp.Amount;
+                }
+            }
+            this.toolStripStatusLabel1.Text = string.Format("总共 {0} 项", count);
+            this.lbl收入合计.Text = string.Format("合计 {0:C2} 元", total);
+        }
         #endregion
 
         #region 事件处理程序

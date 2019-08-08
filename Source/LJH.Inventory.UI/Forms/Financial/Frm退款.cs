@@ -300,5 +300,43 @@ namespace LJH.Inventory.UI.Forms.Financial
         {
             lbl大写.Text = RMBHelper.NumGetStr((double)txtAmount.DecimalValue);
         }
+
+        private void lnk管理费用类别_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Frm管理费用类别 frm = new Frm管理费用类别();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var Category = frm.SelectedItem as ExpenditureType;
+                txt管理费用类别.Text = Category != null ? Category.Name : string.Empty;
+                txt管理费用类别.Tag = Category;
+            }
+        }
+
+        private void txt管理费用类别_DoubleClick(object sender, EventArgs e)
+        {
+            txt管理费用类别.Text = string.Empty;
+            txt管理费用类别.Tag = null;
+        }
+
+        private void lnk手续费类别_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Frm管理费用类别 frm = new Frm管理费用类别();
+            frm.ForSelect = true;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var Category = frm.SelectedItem as ExpenditureType;
+                txt手续费类别.Text = Category != null ? Category.Name : string.Empty;
+                txt手续费类别.Tag = Category;
+            }
+        }
+
+        private void txt手续费类别_DoubleClick(object sender, EventArgs e)
+        {
+            txt手续费类别.Text = string.Empty;
+            txt手续费类别.Tag = null;
+        }
+
+       
     }
 }
