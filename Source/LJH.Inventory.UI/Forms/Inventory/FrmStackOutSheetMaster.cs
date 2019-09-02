@@ -120,6 +120,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
             base.Init();
             this.ucDateTimeInterval1.Init();
             this.ucDateTimeInterval1.SelectThisMonth();
+            if (AppSettings.Current.DisableCost)
+            {
+                this.dataGridView1.Columns["colCosts"].Visible = false;
+                this.dataGridView1.Columns["col国税计提"].Visible = false;
+                this.dataGridView1.Columns["col毛利"].Visible = false;
+            }
         }
 
         public override void ShowOperatorRights()

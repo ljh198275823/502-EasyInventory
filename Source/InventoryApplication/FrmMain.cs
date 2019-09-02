@@ -77,27 +77,34 @@ namespace InventoryApplication
                 frm.ShowDialog();
                 System.Environment.Exit(0);
             }
-            else if ((_SoftDog.SoftwareList & SoftwareType.TYPE_SteelRollInventory_COST) == 0)  //没有开放进销存软件权限
+            if ((_SoftDog.SoftwareList & SoftwareType.TYPE_SteelRollInventory_COST) == 0)  //没有开放进销存软件权限
             {
-                FrmContactUs frm = new FrmContactUs();
-                frm.txtMessage.Text = "加密狗权限不足";
-                frm.ShowDialog();
-                System.Environment.Exit(0);
+                if ((_SoftDog.SoftwareList & SoftwareType.TYPE_Inventory) == 0)
+                {
+                    FrmContactUs frm = new FrmContactUs();
+                    frm.txtMessage.Text = "加密狗权限不足";
+                    frm.ShowDialog();
+                    System.Environment.Exit(0);
+                }
+                else
+                {
+                    AppSettings.Current.DisableCost = true;
+                }
             }
-            else if (_SoftDog.ExpiredDate < DateTime.Today && _SoftDog.ExpiredDate.AddDays(15) >= DateTime.Today) //已经过期
+            if (_SoftDog.ExpiredDate < DateTime.Today && _SoftDog.ExpiredDate.AddDays(15) >= DateTime.Today) //已经过期
             {
                 DateTime expire = _SoftDog.ExpiredDate.AddDays(15);
                 TimeSpan ts = new TimeSpan(expire.Ticks - DateTime.Today.Ticks);
                 MessageBox.Show(string.Format("软件已经过期，还可以再试用 {0} 天，请尽快与供应商联系延长您的软件使用期!", (int)(ts.TotalDays + 1)), "注意");
             }
-            else if (_SoftDog.ExpiredDate.AddDays(15) < DateTime.Today)
+            if (_SoftDog.ExpiredDate.AddDays(15) < DateTime.Today)
             {
                 FrmContactUs frm = new FrmContactUs();
                 frm.txtMessage.Text = "软件已经过期";
                 frm.ShowDialog();
                 System.Environment.Exit(0);
             }
-            else if (!string.IsNullOrEmpty(_SoftDog.MAC))
+            if (!string.IsNullOrEmpty(_SoftDog.MAC))
             {
                 string[] auMac = _SoftDog.MAC.Split(',', '，');
                 string local = LJH.GeneralLibrary.Net.NetTool.GetLocalMAC();
@@ -120,7 +127,6 @@ namespace InventoryApplication
 
         private void DoLogIn()
         {
-
             DialogResult ret = DialogResult.Cancel;
             if (!_EnableSoftDog)
             {
@@ -170,6 +176,7 @@ namespace InventoryApplication
             this.mnu_Supplier.Enabled = cur.Permit(Permission.Supplier, PermissionActions.Read) || cur.Permit(Permission.Supplier, PermissionActions.Edit);
             this.mnu_WareHouse.Enabled = cur.Permit(Permission.WareHouse, PermissionActions.Read) || cur.Permit(Permission.WareHouse, PermissionActions.Edit);
             this.mnu_其它产品库存.Enabled = cur.Permit(Permission.其它产品, PermissionActions.Read) || cur.Permit(Permission.其它产品, PermissionActions.Edit);
+            this.mnu_其它产品库存.Visible = !AppSettings.Current.DisableCost;
             //财务
             this.mnu_CustomerState.Enabled = cur.Permit(Permission.CustomerState, PermissionActions.Read);
             this.mnu_SupplierState.Enabled = cur.Permit(Permission.SupplierState, PermissionActions.Read);
@@ -192,6 +199,12 @@ namespace InventoryApplication
             this.mnu_出货成本明细报表.Enabled = cur.Permit(Permission.出货成本明细报表, PermissionActions.Read);
             this.mnu_单据作废记录报表.Enabled = cur.Permit(Permission.单据作废记录报表, PermissionActions.Read);
             this.mnu小件进销报表.Enabled = cur.Permit(Permission.小件进销报表, PermissionActions.Read);
+            if (AppSettings.Current.DisableCost)
+            {
+                this.mnu_出货利润明细报表.Visible = false;
+                mnu_DeliveryStatistic.Visible = false;
+                mnu_出货成本明细报表.Visible = false;
+            }
         }
         #endregion
 

@@ -153,8 +153,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
             cmbSpecification.Init();
             txtCarPlate.Init();
             txtMaterial.Init();
-            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
-            if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            if (AppSettings.Current.DisableCost)
+            {
+                pnlCost.Visible = false;
+                if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            }
+            else
+            {
+                pnlCost.Visible = Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
+                if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            }
         }
 
         public override void ShowOperatorRights()

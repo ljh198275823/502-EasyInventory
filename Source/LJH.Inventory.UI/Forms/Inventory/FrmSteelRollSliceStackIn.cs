@@ -81,8 +81,16 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 txtWareHouse.Text = WareHouse.Name;
                 txtWareHouse.Tag = WareHouse;
             }
-            pnlCost.Visible = Operator.Current.Permit(Permission.其它成本 , PermissionActions.Read);
-            if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            if (AppSettings.Current.DisableCost)
+            {
+                pnlCost.Visible = false;
+                if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            }
+            else
+            {
+                pnlCost.Visible = Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
+                if (!pnlCost.Visible) this.Height -= pnlCost.Height;
+            }
             txtPurchasePrice.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
             txt运费.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
             btnOk.Enabled = Operator.Current.Permit(Permission.SteelRollSlice, PermissionActions.Edit);

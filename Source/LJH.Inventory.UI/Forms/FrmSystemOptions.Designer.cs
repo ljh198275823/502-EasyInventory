@@ -153,8 +153,8 @@
             this.lnk默认供应商 = new System.Windows.Forms.LinkLabel();
             this.txt国税系数 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.txt税点系数 = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
-            this.label90 = new System.Windows.Forms.Label();
-            this.label87 = new System.Windows.Forms.Label();
+            this.lbl国税系数 = new System.Windows.Forms.Label();
+            this.lbl税点系数 = new System.Windows.Forms.Label();
             this.chkNeedMaterial = new System.Windows.Forms.CheckBox();
             this.txtDefaultCustomer = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.chkRealCount = new System.Windows.Forms.CheckBox();
@@ -1407,8 +1407,8 @@
             this.tabPage2.Controls.Add(this.lnk默认供应商);
             this.tabPage2.Controls.Add(this.txt国税系数);
             this.tabPage2.Controls.Add(this.txt税点系数);
-            this.tabPage2.Controls.Add(this.label90);
-            this.tabPage2.Controls.Add(this.label87);
+            this.tabPage2.Controls.Add(this.lbl国税系数);
+            this.tabPage2.Controls.Add(this.lbl税点系数);
             this.tabPage2.Controls.Add(this.chkNeedMaterial);
             this.tabPage2.Controls.Add(this.txtDefaultCustomer);
             this.tabPage2.Controls.Add(this.chkRealCount);
@@ -1546,23 +1546,23 @@
             this.txt税点系数.TabIndex = 105;
             this.txt税点系数.Text = "0.00";
             // 
-            // label90
+            // lbl国税系数
             // 
-            this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(367, 57);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(53, 12);
-            this.label90.TabIndex = 104;
-            this.label90.Text = "国税系数";
+            this.lbl国税系数.AutoSize = true;
+            this.lbl国税系数.Location = new System.Drawing.Point(367, 57);
+            this.lbl国税系数.Name = "lbl国税系数";
+            this.lbl国税系数.Size = new System.Drawing.Size(53, 12);
+            this.lbl国税系数.TabIndex = 104;
+            this.lbl国税系数.Text = "国税系数";
             // 
-            // label87
+            // lbl税点系数
             // 
-            this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(367, 27);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(53, 12);
-            this.label87.TabIndex = 101;
-            this.label87.Text = "税点系数";
+            this.lbl税点系数.AutoSize = true;
+            this.lbl税点系数.Location = new System.Drawing.Point(367, 27);
+            this.lbl税点系数.Name = "lbl税点系数";
+            this.lbl税点系数.Size = new System.Drawing.Size(53, 12);
+            this.lbl税点系数.TabIndex = 101;
+            this.lbl税点系数.Text = "税点系数";
             // 
             // chkNeedMaterial
             // 
@@ -2058,8 +2058,8 @@
         private System.Windows.Forms.Label label86;
         private GeneralLibrary.WinformControl.IntergerTextBox txtStackoutSheetItemsPerSheet;
         private System.Windows.Forms.Label label85;
-        private System.Windows.Forms.Label label90;
-        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.Label lbl国税系数;
+        private System.Windows.Forms.Label lbl税点系数;
         private GeneralLibrary.WinformControl.DecimalTextBox txt国税系数;
         private GeneralLibrary.WinformControl.DecimalTextBox txt税点系数;
         private GeneralLibrary.WinformControl.DBCTextBox txt默认厂家;

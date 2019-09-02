@@ -64,7 +64,7 @@ namespace LJH.Inventory.BusinessModel
         }
         #endregion
 
-        #region 公共属性      
+        #region 公共属性
         /// <summary>
         /// 停车场连接字串
         /// </summary>
@@ -189,7 +189,7 @@ namespace LJH.Inventory.BusinessModel
                 {
                     XmlNodeList nodeList = _parent.ChildNodes;
                     foreach (XmlNode xn in nodeList)
-                    {                        
+                    {
                         if (xn is XmlElement)
                         {
                             XmlElement xe = (XmlElement)xn;
@@ -207,6 +207,10 @@ namespace LJH.Inventory.BusinessModel
             }
             return "";
         }
+        /// <summary>
+        /// 获取或设置是否禁用成本核算功能
+        /// </summary>
+        public bool DisableCost { get; set; }
         #endregion
     }
 }

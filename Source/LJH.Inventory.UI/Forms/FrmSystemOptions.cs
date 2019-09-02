@@ -271,6 +271,13 @@ namespace LJH.Inventory.UI.Forms
             UserSettings.Current = SysParaSettingsBll.GetOrCreateSetting<UserSettings>(AppSettings.Current.ConnStr);
             ShowSetting(UserSettings.Current);
             btnOk.Enabled = Operator.Current.Permit(Permission.SystemOptions, PermissionActions.Edit);
+            if (AppSettings.Current.DisableCost)
+            {
+                lbl税点系数.Visible = false;
+                txt税点系数.Visible = false;
+                lbl国税系数.Visible = false;
+                txt国税系数.Visible = false;
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)

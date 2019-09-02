@@ -126,6 +126,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.ucDateTimeInterval1.SelectThisMonth();
             pnlStates.Enabled = !ForSelect;
             if (this.MultiSelect) GridView.ContextMenuStrip = null;
+            if (AppSettings.Current.DisableCost)
+            {
+                this.dataGridView1.Columns["colPurchasePrice"].Visible = false;
+                this.dataGridView1.Columns["colPurchaseTax"].Visible = false;
+                this.dataGridView1.Columns["col运费"].Visible = false;
+                this.dataGridView1.Columns["col短途运费"].Visible = false;
+                this.dataGridView1.Columns["col短途运费2"].Visible = false;
+                this.dataGridView1.Columns["col加工费"].Visible = false;
+                this.dataGridView1.Columns["col开平费"].Visible = false;
+                this.dataGridView1.Columns["col分条费"].Visible = false;
+                this.dataGridView1.Columns["col吊装费"].Visible = false;
+                this.dataGridView1.Columns["col其它费用"].Visible = false;
+                this.dataGridView1.Columns["col合同单价"].Visible = false;
+            }
         }
 
         public override void ShowOperatorRights()
@@ -143,12 +157,20 @@ namespace LJH.Inventory.UI.Forms.Inventory
             this.取消预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             this.预订ToolStripMenuItem.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Edit);
             mnu_Import.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Inventory);
-            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Edit );
+            mnu_设置结算单价.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Edit);
             mnu_设置其它成本.Enabled = Operator.Current.Permit(Permission.其它成本, PermissionActions.Edit);
             mnu_查看成本明细.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Read) | Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
             mnu_查看价格改动记录.Enabled = Operator.Current.Permit(Permission.结算单价, PermissionActions.Read) | Operator.Current.Permit(Permission.其它成本, PermissionActions.Read);
             cMnu_Export.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.导出);
             mnu_原材料拆条.Enabled = Operator.Current.Permit(Permission.SteelRoll, PermissionActions.Slice);
+            if (AppSettings.Current.DisableCost)
+            {
+                mnu_设置结算单价.Visible = false;
+                mnu_设置其它成本.Visible = false;
+                mnu_查看成本明细.Visible = false;
+                mnu_查看价格改动记录.Visible = false;
+                toolStripSeparator2.Visible = false;
+            }
         }
 
         protected override FrmDetailBase GetDetailForm()
