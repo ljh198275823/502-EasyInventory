@@ -74,7 +74,7 @@
             this.txtWeight = new LJH.GeneralLibrary.WinformControl.DecimalTextBox(this.components);
             this.lblOriginalTotal = new System.Windows.Forms.Label();
             this.lblTotalWeight = new System.Windows.Forms.Label();
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.pnlStates = new System.Windows.Forms.Panel();
@@ -1042,7 +1042,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblOriginalTotal;
         private System.Windows.Forms.Label lblTotalWeight;
-        private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private Controls.CustomerCombobox customerCombobox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel pnlStates;

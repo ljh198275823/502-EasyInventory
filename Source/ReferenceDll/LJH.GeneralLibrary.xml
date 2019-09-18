@@ -191,6 +191,21 @@
             获取或设置返回的查询对象
             </summary>
         </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.QueryResultList`1.PageSize">
+            <summary>
+            获取或设置每页数据条数,为0时表示返回所有数据
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.QueryResultList`1.PageIndex">
+            <summary>
+            获取或设置当前页
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.QueryResultList`1.TotalCount">
+            <summary>
+            获取或设置查询到的总记录数
+            </summary>
+        </member>
         <member name="F:LJH.GeneralLibrary.WinformControl.IntergerTextBox.components">
             <summary>
             必需的设计器变量。
@@ -485,6 +500,16 @@
             表示数据库查询条件
             </summary>
         </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.SearchCondition.PageSize">
+            <summary>
+            获取或设置每页数据条数
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.DAL.SearchCondition.PageIndex">
+            <summary>
+            获取或设置当前页,从1开始递增
+            </summary>
+        </member>
         <member name="M:LJH.GeneralLibrary.WinformControl.UCFormView.HighLightForm(LJH.GeneralLibrary.WinformControl.FormHeader)">
             <summary>
             高亮显示窗体
@@ -647,6 +672,27 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.GZipHelper.CompressString(System.String)">
+            <summary>  
+            对字符串进行压缩  
+            </summary>  
+            <param name="str">待压缩的字符串</param>  
+            <returns>压缩后的字符串</returns>  
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.GZipHelper.DecompressString(System.String)">
+            <summary>  
+            对字符串进行解压缩  
+            </summary>  
+            <param name="str">待解压缩的字符串</param>  
+            <returns>解压缩后的字符串</returns>  
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.GZipHelper.Compress(System.Byte[])">
+            <summary>  
+            对byte数组进行压缩  
+            </summary>  
+            <param name="data">待压缩的byte数组</param>  
+            <returns>压缩后的byte数组</returns>  
+        </member>
         <member name="T:LJH.GeneralLibrary.SoftDog.SoftDogInfo">
             <summary>
             表示加密狗中保存的信息
@@ -712,6 +758,11 @@
             获取或设置授权可用的电脑的MAC,如果有多个，用逗号隔开
             </summary>
         </member>
+        <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.WebAPIUrl">
+            <summary>
+            获取或设置API URL
+            </summary>
+        </member>
         <member name="P:LJH.GeneralLibrary.SoftDog.SoftDogInfo.DogDevice">
             <summary>
             获取或设置DOGINFO是否是从硬件加密狗中获取而来
@@ -742,24 +793,24 @@
             门禁软件
             </summary>
         </member>
-        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_HHTIYU">
-            <summary>
-            汇海体育软件
-            </summary>
-        </member>
-        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_HHTIYU_WIFI">
-            <summary>
-            汇海体育软件（WIFI版）
-            </summary>
-        </member>
-        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_HHTIYU_ThirdDevice">
+        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_汇海运动会软件">
             <summary>
             汇海体育软件第三方设备如（清化同方，恒康等)
             </summary>
         </member>
-        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_HHTIYU_JIHAO">
+        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_汇海中考软件">
             <summary>
-            汇海体育软件第三方设备厂家技豪
+            汇海中考软件
+            </summary>
+        </member>
+        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_汇海学生体测软件">
+            <summary>
+            汇海学生体测软件
+            </summary>
+        </member>
+        <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_汇海国民体测软件">
+            <summary>
+            汇海国民体测软件
             </summary>
         </member>
         <member name="F:LJH.GeneralLibrary.SoftDog.SoftwareType.TYPE_PARK">
@@ -3475,6 +3526,21 @@
             操作员
             </summary>
         </member>
+        <member name="T:LJH.GeneralLibrary.DateTimeRange">
+            <summary>
+            表示一个时间段
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DateTimeRange.Begin">
+            <summary>
+            开始时间(如果不指定为日期的最小值)
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.DateTimeRange.End">
+            <summary>
+            结束时间(如果不指定为日期的最大值)
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.Core.DAL.CommandResult">
             <summary>
             表示数据操作返回值
@@ -3488,6 +3554,11 @@
         <member name="P:LJH.GeneralLibrary.Core.DAL.CommandResult.Message">
             <summary>
             获取或设置执行结果的文字描述
+            </summary>
+        </member>
+        <member name="T:LJH.GeneralLibrary.Core.DAL.CommandResult`1">
+            <summary>
+            表示数据操作返回值
             </summary>
         </member>
         <member name="T:LJH.GeneralLibrary.CardReader.ReadCardResult">
@@ -3950,6 +4021,94 @@
             <param name="file"></param>
             <returns></returns>
         </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.GetToken">
+            <summary>
+            获取TOKEN
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.GetByID(`0,System.Boolean)">
+            <summary>
+            通过ID获取实体
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.GetItems(LJH.GeneralLibrary.Core.DAL.SearchCondition,System.Boolean)">
+            <summary>
+            通过查询条件获取指定的实体信息
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.GetListBySubPath``1(System.String,LJH.GeneralLibrary.Core.DAL.SearchCondition,System.Boolean)">
+            <summary>
+            根据指定的路径获取数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.GetListByUrl``1(System.String,System.Boolean)">
+            <summary>
+            根据指定的URL获取数据,这里的URL是完整的URL
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.Add(`1,System.Boolean)">
+            <summary>
+            增加实体
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.Update(`1,System.Boolean)">
+            <summary>
+            更新更新实体
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.Patch(`0,System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            Patch数据
+            </summary>
+            <param name="id"></param>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.Delete(`1,System.Boolean)">
+            <summary>
+            删除实体
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.GetMultipartFormData(System.Collections.Generic.Dictionary{System.String,System.Object},System.String)">
+            <summary>
+            获取表单多字段提交的内容
+            </summary>
+            <param name="postParameters"></param>
+            <param name="boundary"></param>
+            <returns></returns>
+        </member>
+        <member name="P:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.RepoUri">
+            <summary>
+            获取或设置服务器URL
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.UserID">
+            <summary>
+            获取或设置服务器用户名
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.WebAPIClient.APIClientBase`2.Password">
+            <summary>
+            获取或设置用户名密码
+            </summary>
+        </member>
         <member name="T:LJH.GeneralLibrary.TempFolderManager">
             <summary>
             一个管理停车场临时文件目录的管理器
@@ -3998,6 +4157,16 @@
         <member name="P:LJH.GeneralLibrary.CardReader.YangChengTongCardInfo.Balance">
             <summary>
             获取或设置卡片余额
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs.UpdatedItem">
+            <summary>
+            获取或设置更新后的对象
+            </summary>
+        </member>
+        <member name="P:LJH.GeneralLibrary.Core.UI.ItemUpdatedEventArgs.PreUpdatingItem">
+            <summary>
+            获取或设置更新之前的对象
             </summary>
         </member>
         <member name="T:LJH.GeneralLibrary.Printer.KPM150BarCodePrinter">

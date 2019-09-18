@@ -11,6 +11,7 @@ using LJH.Inventory.BusinessModel;
 using LJH.Inventory.BusinessModel.Resource;
 using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.GeneralLibrary.Core.UI;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.UI.Forms.Inventory
 {

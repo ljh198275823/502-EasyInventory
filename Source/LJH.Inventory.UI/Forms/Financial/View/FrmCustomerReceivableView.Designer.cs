@@ -50,7 +50,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMSG = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnLast3Month = new System.Windows.Forms.Button();
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.txtKeyword = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
@@ -292,7 +292,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblMSG;
         private System.Windows.Forms.Button btnLast3Month;
-        private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.CheckBox chkSheetDate;
         private System.Windows.Forms.DataGridViewLinkColumn colSheetID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;

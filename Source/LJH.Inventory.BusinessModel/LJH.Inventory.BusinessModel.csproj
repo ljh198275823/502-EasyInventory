@@ -150,7 +150,6 @@
     <Compile Include="SearchCondition\PurchaseOrderSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierReceivableSearchCondition.cs" />
     <Compile Include="SearchCondition\SupplierSearchCondition.cs" />
-    <Compile Include="DateTimeRange.cs" />
     <Compile Include="SheetNote.cs" />
     <Compile Include="SpecificationHelper.cs" />
     <Compile Include="SteelRollSlice.cs" />

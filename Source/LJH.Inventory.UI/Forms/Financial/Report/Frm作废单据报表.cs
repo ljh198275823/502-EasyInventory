@@ -7,6 +7,7 @@ using LJH.Inventory.BusinessModel.SearchCondition;
 using LJH.Inventory.BLL;
 using LJH.Inventory.UI.Forms.Sale;
 using LJH.Inventory.UI.Forms.Inventory;
+using LJH.GeneralLibrary;
 
 namespace LJH.Inventory.UI.Forms.Financial.Report
 {

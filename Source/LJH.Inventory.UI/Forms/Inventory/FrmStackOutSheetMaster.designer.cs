@@ -55,7 +55,7 @@
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnLast3Month = new System.Windows.Forms.Button();
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.chkSheetDate = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -708,7 +708,7 @@
         private System.Windows.Forms.CheckBox chkWithoutTax;
         private System.Windows.Forms.CheckBox chkWithTax;
         private System.Windows.Forms.CheckBox chkSheetDate;
-        private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.Button btnLast3Month;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCustomer;

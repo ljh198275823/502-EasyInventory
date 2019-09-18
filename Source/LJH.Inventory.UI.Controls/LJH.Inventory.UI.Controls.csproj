@@ -188,12 +188,6 @@
     <Compile Include="TooStripDBCTextBox.designer.cs">
       <DependentUpon>TooStripDBCTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCDateTimeInterval.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCDateTimeInterval.designer.cs">
-      <DependentUpon>UCDateTimeInterval.cs</DependentUpon>
-    </Compile>
     <Compile Include="UCProductSelection.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -232,9 +226,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SupplierTree.resx">
       <DependentUpon>SupplierTree.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCDateTimeInterval.resx">
-      <DependentUpon>UCDateTimeInterval.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCProductSelection.resx">
       <DependentUpon>UCProductSelection.cs</DependentUpon>

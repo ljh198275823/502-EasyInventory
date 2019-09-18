@@ -53,7 +53,7 @@
             this.txtPurchaseID = new LJH.GeneralLibrary.WinformControl.DBCTextBox(this.components);
             this.lblOriginalTotal = new System.Windows.Forms.Label();
             this.lblTotalWeight = new System.Windows.Forms.Label();
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.customerCombobox1 = new LJH.Inventory.UI.Controls.CustomerCombobox(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.pnlStates = new System.Windows.Forms.Panel();
@@ -903,7 +903,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private Controls.CustomerCombobox customerCombobox1;
-        private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.ToolStripMenuItem mnu_Import;
         private System.Windows.Forms.ToolStripMenuItem 更换仓库ToolStripMenuItem;
         private System.Windows.Forms.Label lblTotalWeight;

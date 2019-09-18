@@ -70,7 +70,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.categoryTree = new LJH.Inventory.UI.Controls.ExpenditureTypeTree(this.components);
-            this.ucDateTimeInterval1 = new LJH.Inventory.UI.Controls.UCDateTimeInterval();
+            this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.lbl退款 = new System.Windows.Forms.Label();
             this.lbl结余 = new System.Windows.Forms.Label();
             this.CategoryMenu.SuspendLayout();
@@ -521,7 +521,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnu_新建管理费用退款;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.GroupBox groupBox1;
-        private Controls.UCDateTimeInterval ucDateTimeInterval1;
+        private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.CheckBox chkNullify;
         private System.Windows.Forms.Label lbl合计;
         private System.Windows.Forms.CheckBox chkApproved;
