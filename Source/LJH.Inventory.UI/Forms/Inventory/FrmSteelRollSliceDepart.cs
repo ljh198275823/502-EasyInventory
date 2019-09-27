@@ -30,6 +30,7 @@ namespace LJH.Inventory.UI.Forms.Inventory
             {
                 txtOriginal.DecimalValue = ProductInventory.Count;
                 ucSpecification1.Specification = ProductInventory.Product.Specification;
+                txtLength.DecimalValue = ProductInventory.Product.Length.Value;
                 WareHouse w = new WareHouseBLL(AppSettings.Current.ConnStr).GetByID(ProductInventory.WareHouseID).QueryObject;
                 txtWareHouse.Text = w != null ? w.Name : string.Empty;
                 txtWareHouse.Tag = w;
@@ -78,12 +79,12 @@ namespace LJH.Inventory.UI.Forms.Inventory
                 return;
             }
             if (SpecificationHelper.GetWrittenThick(ucSpecification1.Specification) == null ||
-                SpecificationHelper .GetWrittenWidth (ucSpecification1 .Specification )==null )
+                SpecificationHelper.GetWrittenWidth(ucSpecification1.Specification) == null)
             {
                 MessageBox.Show("规格不正确，请同时指定厚度和长度");
                 return;
             }
-            CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Depart(ProductInventory, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtDepart.DecimalValue, ucSpecification1.Specification, txtMemo.Text);
+            CommandResult ret = (new SteelRollSliceBLL(AppSettings.Current.ConnStr)).Depart(ProductInventory, txtWareHouse.Tag as WareHouse, txtCustomer.Text, txtDepart.DecimalValue, ucSpecification1.Specification, txtLength.DecimalValue, txtMemo.Text);
             if (ret.Result != ResultCode.Successful)
             {
                 MessageBox.Show(ret.Message, "失败");
