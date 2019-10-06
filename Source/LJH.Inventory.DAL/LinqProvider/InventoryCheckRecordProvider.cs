@@ -34,6 +34,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 var con = search as InventoryCheckRecordSearchCondition;
                 if (con.CheckDate != null) ret = ret.Where(it => it.CheckDateTime >= con.CheckDate.Begin && it.CheckDateTime <= con.CheckDate.End);
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(it => it.ProductID == con.ProductID);
+                if (con.ProductIDs != null && con.ProductIDs.Count > 0) ret = ret.Where(item => con.ProductIDs.Contains(item.ProductID));
                 if (!string.IsNullOrEmpty(con.WareHouseID)) ret = ret.Where(it => it.WarehouseID == con.WareHouseID);
                 if (con.SourceID.HasValue) ret =  ret.Where(it => it.SourceID == con.SourceID.Value);
             }

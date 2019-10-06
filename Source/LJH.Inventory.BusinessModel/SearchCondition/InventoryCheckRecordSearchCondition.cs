@@ -10,6 +10,7 @@ namespace LJH.Inventory.BusinessModel.SearchCondition
     {
         public DateTimeRange CheckDate { get; set; }
         public string ProductID { get; set; }
+        public List<string> ProductIDs { get; set; }
         public string WareHouseID { get; set; }
         public Guid? SourceID { get; set; }
     }

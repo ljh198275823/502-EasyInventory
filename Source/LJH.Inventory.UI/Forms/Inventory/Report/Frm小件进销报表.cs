@@ -25,7 +25,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
         }
 
         private decimal _balance = 0;
-        public Product Product { get; set; }
+        public List<Product> Products { get; set; }
 
         #region 重写基类方法
         protected override void Init()
@@ -36,7 +36,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             txtCategory.Init();
             this.cmbSpecification.Init(new List<string> { ProductModel.原材料, ProductModel.开平, ProductModel.开卷, ProductModel.开吨, ProductModel.开条 });
             base.Init();
-            if (Product != null) btnSearch.PerformClick();
+            if (Products != null) btnSearch.PerformClick();
             btnSaveAs.Enabled = Operator.Current.Permit(Permission.小件进销报表, PermissionActions.导出);
         }
 
@@ -60,15 +60,15 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
             var pcon = new ProductSearchCondition() { CategoryID = txtCategory.SelectedCategoryID, Specification = cmbSpecification.Text };
             List<Product> ps =new ProductBLL(AppSettings .Current .ConnStr ). GetItems(pcon).QueryObjects;
-            if (ps != null && ps.Count > 0) Product = ps.FirstOrDefault(it => it.Length == txtLength.DecimalValue);
-            if (Product == null)
+            if (ps != null && ps.Count > 0) Products = ps.Where(it => it.Length == txtLength.DecimalValue).ToList();
+            if (Products == null || Products.Count == 0)
             {
                 MessageBox.Show("没有指定小件");
                 return null;
             }
             List<小件往来项> ret = new List<小件往来项>();
             StackInRecordSearchCondition con = new StackInRecordSearchCondition();
-            con.ProductID = Product.ID;
+            con.ProductIDs = Products.Select(it => it.ID).ToList();
             con.States = new List<SheetState>();
             con.States.Add(SheetState.已入库);
             List<StackInRecord> inItems = (new StackInSheetBLL(AppSettings.Current.ConnStr)).GetInventoryRecords(con).QueryObjects;
@@ -85,7 +85,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
 
             StackOutRecordSearchCondition con1 = new StackOutRecordSearchCondition();
-            con1.ProductID = Product.ID;
+            con1.ProductIDs = Products.Select(it => it.ID).ToList();
             con1.States = new List<SheetState>();
             con1.States.Add(SheetState.已发货);
             con1.SheetTypes = new List<StackOutSheetType>();
@@ -107,7 +107,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
 
             InventoryCheckRecordSearchCondition con2 = new InventoryCheckRecordSearchCondition();
-            con2.ProductID = Product.ID;
+            con2.ProductIDs = Products.Select(it => it.ID).ToList();
             List<InventoryCheckRecord> records = (new InventoryCheckRecordBLL(AppSettings.Current.ConnStr)).GetItems(con2).QueryObjects;
             if (records != null && records.Count > 0)
             {
@@ -123,7 +123,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
                              });
             }
 
-            var con3 = new SliceRecordSearchCondition() { ProductID = Product.ID };
+            var con3 = new SliceRecordSearchCondition() { ProductIDs = Products.Select(it => it.ID).ToList() };
             var items3 = new SteelRollSliceRecordBLL(AppSettings.Current.ConnStr).GetItems(con3).QueryObjects;
             if (items3 != null && items3.Count > 0)
             {
@@ -142,7 +142,7 @@ namespace LJH.Inventory.UI.Forms.Inventory.Report
             }
 
             var con4 = new ProductInventoryItemSearchCondition();
-            con4.ProductID = Product.ID;
+            con4.Products = Products.Select(it => it.ID).ToList();
             con4.HasRemain = true;
             var item4 = new ProductInventoryItemBLL(AppSettings.Current.ConnStr).GetItems(con4).QueryObjects;
             _balance = item4.Where(it => it.State == ProductInventoryState.Inventory || it.State == ProductInventoryState.Reserved || it.State == ProductInventoryState.WaitShipping).Sum(it => it.Count);

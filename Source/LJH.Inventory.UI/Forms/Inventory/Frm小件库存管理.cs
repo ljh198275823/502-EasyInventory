@@ -567,9 +567,15 @@ namespace LJH.Inventory.UI.Forms.Inventory
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 var pi = dataGridView1.SelectedRows[0].Tag as ProductInventoryItem;
-                var frm = new Report.Frm小件进销报表();
-                frm.Product = pi.Product;
-                DialogResult ret = frm.ShowDialog();
+                var pcon = new ProductSearchCondition() { CategoryID = pi.Product.CategoryID, Specification = pi.Product.Specification  };
+                List<Product> ps = new ProductBLL(AppSettings.Current.ConnStr).GetItems(pcon).QueryObjects;
+                if (ps != null && ps.Count > 0)
+                {
+                    var Products = ps.Where(it => it.Length == txtLength.DecimalValue).ToList();
+                    var frm = new Report.Frm小件进销报表();
+                    frm.Products = Products;
+                    DialogResult ret = frm.ShowDialog();
+                }
             }
         }
     }

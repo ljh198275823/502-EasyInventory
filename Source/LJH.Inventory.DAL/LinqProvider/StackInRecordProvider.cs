@@ -67,6 +67,7 @@ namespace LJH.Inventory.DAL.LinqProvider
             {
                 StackInRecordSearchCondition con = search as StackInRecordSearchCondition;
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(item => item.ProductID == con.ProductID);
+                if (con.ProductIDs != null && con.ProductIDs.Count > 0) ret = ret.Where(item => con.ProductIDs.Contains(item.ProductID));
                 if (!string.IsNullOrEmpty(con.CategoryID)) ret = ret.Where(item => item.Product.CategoryID == con.CategoryID);
                 if (!string.IsNullOrEmpty(con.OrderID)) ret = ret.Where(item => item.OrderID == con.OrderID);
                 if (!string.IsNullOrEmpty(con.PurchaseID)) ret = ret.Where(item => item.PurchaseOrder == con.PurchaseID);

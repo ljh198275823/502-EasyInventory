@@ -52,6 +52,7 @@ namespace LJH.Inventory.DAL.LinqProvider
                 if (!string.IsNullOrEmpty(con.Customer)) ret = ret.Where(it => it.A.Customer == con.Customer);
                 if (!string.IsNullOrEmpty(con.Warehouse)) ret = ret.Where(it => it.A.Warehouse == con.Warehouse);
                 if (!string.IsNullOrEmpty(con.ProductID)) ret = ret.Where(it => it.C == con.ProductID);
+                if (con.ProductIDs != null && con.ProductIDs.Count > 0) ret = ret.Where(item => con.ProductIDs.Contains(item.C));
             }
             var items = ret.ToList();
             if (items != null && items.Count > 0)
