@@ -311,7 +311,6 @@
             // chk公账
             // 
             this.chk公账.AutoSize = true;
-            this.chk公账.Enabled = false;
             this.chk公账.ForeColor = System.Drawing.Color.Red;
             this.chk公账.Location = new System.Drawing.Point(218, 172);
             this.chk公账.Name = "chk公账";
